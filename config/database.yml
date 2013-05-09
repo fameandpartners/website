@@ -1,0 +1,24 @@
+# mysql
+
+defaults: &defaults
+  adapter: mysql2
+  encoding: utf8
+  database: fame_and_partners
+  host: localhost
+  username: root
+  password: junker
+
+development:
+  <<: *defaults
+
+staging:
+  database: fame_and_partners_staging
+  <<: *defaults
+
+production:
+  database: fame_and_partners_production
+  <<: *defaults
+
+test:
+  database: fame_and_partners_test
+  <<: *defaults
