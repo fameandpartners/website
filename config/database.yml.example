@@ -1,12 +1,8 @@
-# mysql
-
 defaults: &defaults
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: fame_and_partners
-  host: localhost
-  username: root
-  password: junker
+  host: 127.0.0.1
 
 development:
   <<: *defaults

@@ -1,27 +1,24 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
+gem 'pg'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3'
-
-
-# Gems used only for assets and not required
-# in production environments by default.
+# assets
+gem 'jquery-rails'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
+  gem 'execjs', '1.4.0'
+  gem 'therubyracer'
 end
 
-gem 'jquery-rails'
-gem 'mysql2', '0.3.11'
+group :development do
+  gem 'launchy', '2.2.0'
+  gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
+  gem 'quiet_assets', '1.0.2'
+  gem 'thin', '1.5.1'
+  gem 'pry-rails'
+end
 
 # spree extensions
 gem 'spree', '1.3.2'
