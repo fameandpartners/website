@@ -1,7 +1,5 @@
 ## Welcome to Fame and Partners
 
-## Getting Started
-
 ### Setup project
 ```
 $ git clone git@github.com:droidlabs/fame_and_partners.git
@@ -16,7 +14,11 @@ $ rake db:setup
 $ rake spree_sample:load
 ```
 
-## Thanks for using Fame and Partners!
+### Development information
+* We are using Spree Ecommerce as base engine.
+[Guides](http://guides.spreecommerce.com)
+
+### Thanks for using Fame and Partners!
 
 Cheers, [Droid Labs](http://droidlabs.pro).
 
