@@ -1,0 +1,36 @@
+footer
+  .wrap
+    .columns
+      .newsletter
+        .title Newsletter and updates
+        .text Sign up for the latest on our prom desses, latest interviews and events.
+        form.form
+          input type="email" name="email" value=""
+          input.btn.pink type="submit" value="Join now"
+      .links
+        .title About us
+        ul
+          li = link_to 'Our Vision', '#'
+          li = link_to 'Meet our Team', '#'
+          li = link_to 'Terms & Conditions', '#'
+          li = link_to 'Privacy', '#'
+      .customer-service
+        .title Customer service
+        .link = link_to 'FAQs', '#'
+        .phone Call us on 1800 456 560
+        .email = link_to 'support@fameandpartners.com', 'mailto:support@fameandpartners.com'
+      .social
+        .title Let’s be friends
+        ul
+          li = link_to 'twitter', '#', class: 'twitter'
+          li = link_to 'facebook', '#', class: 'facebook'
+          li = link_to 'pinterest', '#', class: 'pinterest'
+          li = link_to 'rss', '#', class: 'rss'
+    .logo-copyright
+      .logo
+        = link_to '#' do
+          ' Fame
+          span &
+          ' Partners
+      .copyright
+        ' 2013 Fame & Partners &copy; | {link_to 'Legal Note', '#'} |  {link_to 'Privacy Policy', '#' }

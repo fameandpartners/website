@@ -27,4 +27,5 @@ module ApplicationHelper
   def controller_action_class
     "#{controller.controller_name}-#{restfull_action_name}"
   end
+
 end
