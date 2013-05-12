@@ -1,0 +1,15 @@
+= render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user }
+
+#forgot-password
+  h6= t(:forgot_password)
+
+  p= t(:instructions_to_reset_password)
+
+  = form_for Spree::User.new, :as => :spree_user, :url => spree.spree_user_password_path do |f|
+    p
+      = f.label :email, t(:email)
+      br
+      = f.email_field :email
+    p
+      = f.submit t(:reset_password), :class => 'button primary'
+
