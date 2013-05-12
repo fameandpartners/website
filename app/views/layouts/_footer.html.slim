@@ -1,25 +1,25 @@
 footer
   .columns
     .wrap
-      div class="column newsletter"
+      .column.newsletter
         .title Newsletter and updates
         .text Sign up for the latest on our prom desses, latest interviews and events.
         form.clearfix
           input.input type="email" name="email" value=""
           input.btn type="submit" value="Join now"
-      div class="column links"
+      .column.links
         .title About us
         ul
           li = link_to 'Our Vision', '#'
           li = link_to 'Meet our Team', '#'
           li = link_to 'Terms & Conditions', '#'
           li = link_to 'Privacy', '#'
-      div class="column customer-service"
+      .column.customer-service
         .title Customer service
         .link = link_to 'FAQs', '#'
         .phone Call us on 1800 456 560
         .email = link_to 'support@fameandpartners.com', 'mailto:support@fameandpartners.com', class: 'inverse'
-      div class="column social"
+      .column.social
         .title Let’s be friends
         ul
           li = link_to 'twitter', '#', class: 'twitter'

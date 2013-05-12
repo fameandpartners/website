@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
-gem 'slim-rails'
+gem 'slim', "~> 1.3.8"
 gem 'configatron'
 
 # assets
