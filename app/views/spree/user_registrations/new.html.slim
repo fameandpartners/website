@@ -1,15 +1,14 @@
 = render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user }
 
-#new-customer
-  h6= t(:new_customer)
+.wrap
+  h1.block-title = t(:new_customer)
+  #new-customer
+    .form.centered data-hook="signup"
+      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user) do |f|
+        div data-hook="signup_inside_form"
+          = render :partial => 'spree/shared/user_form', :locals => { :f => f }
+          .submit-form.input = f.submit t(:create), class: 'btn button primary'
+      .separate
+      .aligncenter = link_to t(:login_as_existing), spree.login_path
 
-  div data-hook="signup"
-
-    = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user) do |f|
-      div data-hook="signup_inside_form"
-        = render :partial => 'spree/shared/user_form', :locals => { :f => f }
-        p= f.submit t(:create), :class => 'button primary'
-    =' t(:or)
-    = link_to t(:login_as_existing), spree.login_path
-
-div data-hook="login_extras"
+  div data-hook="login_extras"

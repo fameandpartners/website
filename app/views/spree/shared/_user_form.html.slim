@@ -1,17 +1,9 @@
-p
-  = f.label :email, t(:email)
-  br
-  = f.email_field :email, :class => 'title'
+.input.string
+  = f.email_field :email, class: 'title', placeholder: t(:email)
 
 #password-credentials
-  p
-    = f.label :password, t(:password)
-    br
-    = f.password_field :password, :class => 'title'
-
-  p
-    = f.label :password_confirmation, t(:confirm_password)
-    br
-    = f.password_field :password_confirmation, :class => 'title'
-
+  .input.string
+    = f.password_field :password, class: 'title', placeholder: t(:password)
+  .input.string
+    = f.password_field :password_confirmation, class: 'title', placeholder: t(:confirm_password)
 div data-hook="signup_below_password_fields"
