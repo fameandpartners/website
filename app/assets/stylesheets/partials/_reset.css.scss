@@ -22,6 +22,7 @@ strong, b { font-weight: 700; }
 em, i { font-style: italic; }
 input, textarea { cursor: text; }
 a, label, select, button, input[type=button], input[type=submit], input[type=checkbox], input[type=radio], input[type=file] { cursor: pointer; }
+a:hover { text-decoration: none; }
 
 /* GENERAL */
 .fleft { float: left; }
@@ -33,6 +34,7 @@ a, label, select, button, input[type=button], input[type=submit], input[type=che
 .clear { clear: both; }
 .wrap { width: 1096px; overflow: hidden; margin: 0 auto; }
 .wrap.no-overlow { overflow: visible; }
+.position-relative { position: relative; }
 
 /* CLEARFIX */
 .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }

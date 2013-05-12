@@ -1,73 +1,82 @@
 .promo
   .wrap
     .promo-text
-      .title Custom Made PROM Dresses
+      .block-title Custom Made PROM Dresses
       .separate
       .desc Get your next prom dress made by one of the fashion industries top designers.
-      = link_to 'Sign up with Facebook', '#', class: 'signup'
+      .signup = link_to 'Sign up with Facebook', '#', class: 'signup'
       .or or
       .signup-link = link_to 'Sign up using your email address', '#'
 
-.top-bar
-  .wrap
-    nav.main
-      ul
-        li = link_to 'About us', '#'
-        li = link_to 'Competition', '#'
-        li = link_to 'Blog', '#'
-        li = link_to 'Style quiz', '#'
-    nav.follow
-      ul
-        li follow us
-        li = link_to 'twitter', '#', class: 'twitter'
-        li = link_to 'facebook', '#', class: 'facebook'
-        li = link_to 'pinterest', '#', class: 'pinterest'
-        li = link_to 'rss', '#', class: 'rss'
+.position-relative
+  .top-bar
+    .wrap
+      nav.main
+        ul
+          li = link_to 'About us', '#'
+          li = link_to 'Competition', '#'
+          li = link_to 'Blog', '#'
+          li = link_to 'Style quiz', '#'
+      nav.follow
+        ul
+          li follow us
+          li = link_to 'facebook', '#', class: 'facebook'
+          li = link_to 'twitter', '#', class: 'twitter'
+          li = link_to 'pinterest', '#', class: 'pinterest'
+          li = link_to 'rss', '#', class: 'rss'
 
 .dream-dress
-  .wrap
-    .title Get your dream PROM dress
-    .separate
-    .desc Fame & Partners brings you the very best in high fashion for your special event.
-    .circles
-      .circle
-        .image
-        .text Unique, One-off design
-      .circle
-        .image
-        .text Your own personal fashion designer
-      .circle
-        .image
-        .text Quality fabric
+  div class="wrap no-overlow"
+    .girl-in-dress
+      = image_tag 'image-girl-in-dress.jpg', width: 345, height: 525, alt: ''
+    .promo-block
+      .block-title Get your dream PROM dress
+      .separate
+      .desc Fame & Partners brings you the very best in high fashion for your special event.
+      .circles
+        .circle
+          .image
+          .text Unique, One-off design
+        .circle
+          .image
+          .text Your own personal fashion designer
+        .circle
+          .image
+          .text Quality fabric
 
 .promo-slider
   .arrow-left Prev
   .arrow-right Next
-  .wrap
-    ul.slides
-      li
-        .title Steps to your perfect PROM dress
+  .slides-overlay
+  ul.slides
+    li.slide-1
+      .inner
+        .block-title Steps to your perfect PROM dress
         .separate
         .desc Fame & Partners brings you the very best in high fashion for your special event.
-      li
-        .title
+    li
+      .inner
+        .block-title
         .separate
         .desc
-      li
-        .title
+    li
+      .inner
+        .block-title
         .separate
         .desc
-      li
-        .title
+    li
+      .inner
+        .block-title
         .separate
         .desc
-      li
-        .title
+    li
+      .inner
+        .block-title
         .separate
         .desc
   .pagination
-    div.active
-    div
-    div
-    div
-    div
+    div.active 1
+    div 2
+    div 3
+    div 4
+    div 5
