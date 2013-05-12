@@ -2,12 +2,13 @@
   .flash.errors
     = flash[:alert]
 
-.existing-customer
-  h6= t(:login_as_existing)
-  div data-hook="login"
-    = render :partial => 'spree/shared/login'
-    =' t(:or)
-    = link_to t(:create_a_new_account), spree.signup_path
-    ' |
-    = link_to t(:forgot_password), spree.new_spree_user_password_path
-div data-hook="login_extras"
+.wrap
+  h1.block-title = t(:login_as_existing)
+
+  .existing-customer
+    .form.centered data-hook="login"
+      = render :partial => 'spree/shared/login'
+      .separate
+      .aligncenter #{link_to t(:create_a_new_account), spree.signup_path} | #{link_to t(:forgot_password), spree.new_spree_user_password_path}
+
+  div data-hook="login_extras"

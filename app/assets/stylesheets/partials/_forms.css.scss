@@ -25,6 +25,18 @@
       height: 188px;
       padding: 10px;
     }
+    &.boolean {
+      input {
+        margin-top: 0;
+        width: auto;
+        height: auto;
+        border: 0;
+        box-shadow: 0;
+      }
+      label {
+        margin: 2px 0 0 4px;
+      }
+    }
   }
   .fields-group {
     @include clearfix();
