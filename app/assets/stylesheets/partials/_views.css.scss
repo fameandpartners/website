@@ -62,10 +62,15 @@
   width: 100%;
   height: 46px;
   background: image-url('bg-menu.png') 0 0 repeat;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
   ul {
     li {
       float: left;
     }
+  }
+  .wrap {
+    height: 46px;
+    overflow: visible;
   }
   .main {
     float: left;
@@ -191,6 +196,8 @@
 .promo-slider {
   height: 718px;
   position: relative;
+  border-bottom: 2px solid #e7e7e7;
+  box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.3);
   .arrow-left, .arrow-right {
     position: absolute;
     margin: -50px 13px 0;
