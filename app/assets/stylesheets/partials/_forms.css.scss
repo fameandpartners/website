@@ -1,0 +1,163 @@
+.form {
+  .fields-name {
+    margin: 24px 0 8px;
+    text-align: center;
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+  .input {
+    margin: 20px 0 0;
+    input, textarea {
+      width: 100%;
+      height: 40px;
+      outline: 0;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 0 10px;
+      font: 400 14px/40px $fontOne;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, .3) inset;
+      border-radius: 4px;
+      @include box-sizing(border-box);
+    }
+    textarea {
+      line-height: 1.2;
+      height: 188px;
+      padding: 10px;
+    }
+  }
+  .fields-group {
+    @include clearfix();
+    .input {
+      width: 340px;
+      float: left;
+      margin-left: 20px;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+  .fields-group-four {
+    .input {
+      margin-top: 11px;
+      margin-bottom: 4px;
+      width: 160px;
+    }
+  }
+  ul.colors {
+    padding: 5px 0 22px;
+    text-align: center;
+    li {
+      width: 90px;
+      height: 90px;
+      display: inline-block;
+      overflow: hidden;
+      margin: 5px 5px 5px 21px;
+      a {
+        display: block;
+        width: 90px;
+        height: 90px;
+        overflow: hidden;
+        margin: 5px;
+        text-indent: -999px;
+        text-align: left;
+      }
+      &.active {
+        margin: 0 0 0 17px;
+        padding: 3px;
+        width: 90px;
+        width: 90px;
+        border: 2px solid #c0bebe;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, .4) inset;
+      }
+      &:first-child {
+        margin-left: 16px;
+      }
+      &.pink {
+        @include linear-gradient(left, #fb6e99, #fb9fbb);
+      }
+      &.green {
+        @include linear-gradient(left, #509e52, #93e295);
+      }
+      &.gold {
+        @include linear-gradient(left, #b4ad5f, #faf5c3);
+      }
+      &.purple {
+        @include linear-gradient(left, #8b5eb4, #cea1f6);
+      }
+      &.blue {
+        @include linear-gradient(left, #1272bc, #55b5ff);
+      }
+      &.orange {
+        @include linear-gradient(left, #bb8911, #fecc55);
+      }
+    }
+  }
+  .photos-upload {
+    overflow: hidden;
+    width: 652px;
+    padding: 9px 0 0;
+    margin: 0 auto;
+    ul.uploaded-photos {
+      float: left;
+      li {
+        float: left;
+        width: 90px;
+        height: 110px;
+        margin: 0 0 0 4px;
+        background: image-url('icon-photo-placeholder.jpg') 0 0 no-repeat;
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
+    .upload-button {
+      float: right;
+      margin: 19px 0 0 18px;
+      text-align: center;
+      .btn {
+        display: block;
+        width: 168px;
+        height: 32px;
+        font: 400 14px/32px $fontOne;
+        color: #666;
+        text-transform: uppercase;
+        border: 0;
+        border-radius: 4px;
+        background: #bffbef;
+        box-shadow: 0 1px 2px rgba(201, 146, 136, .66);
+      }
+      .upload-limit {
+        margin: 10px 0 0;
+        font: 400 14px/1.2 $fontOne;
+        color: #c5c2c3;
+      }
+    }
+  }
+  .separate {
+    width: 232px;
+    height: 1px;
+    background: #f9b4a8;
+    margin: 43px auto 31px;
+  }
+  .submit-form {
+    input {
+      display: block;
+      font: 700 14px/44px $fontOne;
+      color: #fff;
+      text-transform: uppercase;
+      text-align: center;
+      background: #f9b4a8;
+      margin: 0 auto 10px;
+      width: 334px;
+      height: 44px;
+      border: 0;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(201, 146, 136, .66);
+    }
+  }
+  &.centered {
+    width: 700px;
+    margin: 0 auto;
+  }
+}

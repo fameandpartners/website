@@ -1,1 +1,76 @@
-h1 form
+.position-relative
+  .top-bar
+    .wrap
+      nav.main
+        ul
+          li = link_to 'About us', '#'
+          li.active = link_to 'Competition', '#'
+          li = link_to 'Blog', '#'
+          li = link_to 'Style quiz', '#'
+      nav.follow
+        ul
+          li follow us
+          li = link_to 'facebook', '#', class: 'facebook'
+          li = link_to 'twitter', '#', class: 'twitter'
+          li = link_to 'pinterest', '#', class: 'pinterest'
+          li = link_to 'rss', '#', class: 'rss'
+
+.wrap
+  h1.block-title Tell us about your perfect dress
+  form class="form centered"
+
+    .fields-name
+      ' Tell us as much about your dress as possible. 
+      strong Pictures are better.
+    .fields-group
+      .input.string
+        input type="text" name="firstname" placeholder="First name"
+      .input.string
+        input type="text" name="lastname" placeholder="Last name"
+    .input.string
+      input type="email" name="email" placeholder="Email address"
+    .input.string
+      textarea name="description" placeholder="Describe your dress"
+
+    .fields-name Measurements
+    div class="fields-group fields-group-four"
+      .input.string
+        input type="text" name="bust" placeholder="Bust"
+      .input.string
+        input type="text" name="waist" placeholder="Waist"
+      .input.string
+        input type="text" name="hips" placeholder="Hips"
+      .input.string
+        input type="text" name="hollow" placeholder="Hollow to hem"
+
+    .fields-name Select your favourite colour
+    ul.colors
+      li class="active pink"
+        a href="#" Pink
+      li.green
+        a href="#" Green
+      li.gold
+        a href="#" Gold
+      li.purple
+        a href="#" Purple
+      li.orange
+        a href="#" Orange
+      li.blue
+        a href="#" Blue
+
+    .fields-name Upload up to 5 photos to show us what you would like.
+    .photos-upload
+      ul.uploaded-photos
+        li
+        li
+        li
+        li
+        li
+      .upload-button
+        input.btn type="button" value="Upload photos"
+        .upload-limit maximum 600kb per photo
+
+    .separate
+
+    .submit-form
+      input.btn type="submit" value="Submit your dress requirements"
