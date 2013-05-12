@@ -9,6 +9,8 @@ FameAndPartners::Application.routes.draw do
   match "/home" => "pages#home"
   match "/form" => "pages#form"
 
+  root :to => "pages#home"
+
   mount Spree::Core::Engine, at: '/'
           # The priority is based upon order of creation:
   # first created -> highest priority.

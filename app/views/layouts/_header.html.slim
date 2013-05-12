@@ -1,11 +1,14 @@
 header
   .wrap
     .logo
-      = link_to '#' do
+      = link_to root_path do
         ' Fame
         span &
         ' Partners
     nav
       ul
-        li = link_to 'Sign in', '#', class: 'btn transparent'
-        li = link_to 'Sign up', '#', class: 'btn pink'
+        - unless spree_user_signed_in?
+          li = link_to 'Sign in', spree_login_path, class: 'btn transparent'
+          li = link_to 'Sign up', spree_signup_path, class: 'btn pink'
+        - else
+          li = link_to 'Sign out', spree_logout_path, class: 'btn transparent'

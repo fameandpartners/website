@@ -1,0 +1,13 @@
+- if flash[:alert]
+  .flash.errors
+    = flash[:alert]
+
+.existing-customer
+  h6= t(:login_as_existing)
+  div data-hook="login"
+    = render :partial => 'spree/shared/login'
+    =' t(:or)
+    = link_to t(:create_a_new_account), spree.signup_path
+    ' |
+    = link_to t(:forgot_password), spree.new_spree_user_password_path
+div data-hook="login_extras"

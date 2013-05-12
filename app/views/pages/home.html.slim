@@ -4,9 +4,10 @@
       .block-title Custom Made PROM Dresses
       .separate
       .desc Get your next prom dress made by one of the fashion industries top designers.
-      .signup = link_to 'Sign up with Facebook', '#', class: 'signup'
-      .or or
-      .signup-link = link_to 'Sign up using your email address', '#'
+      - unless spree_user_signed_in?
+        .signup = link_to 'Sign up with Facebook', '#', class: 'signup'
+        .or or
+        .signup-link = link_to 'Sign up using your email address', spree_signup_path
 
 .position-relative
   .top-bar
@@ -20,10 +21,10 @@
       nav.follow
         ul
           li follow us
-          li = link_to 'facebook', '#', class: 'facebook'
-          li = link_to 'twitter', '#', class: 'twitter'
-          li = link_to 'pinterest', '#', class: 'pinterest'
-          li = link_to 'rss', '#', class: 'rss'
+          li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
+          li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
+          li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
+          li = link_to 'rss', configatron.links.rss, target: :blank, class: 'rss'
 
 .dream-dress
   wrap.no-overlow

@@ -9,6 +9,14 @@ configatron.aws.bucket = ""
 configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
 
+configatron.links.twitter = ''
+configatron.links.facebook = ''
+configatron.links.google = ''
+configatron.links.pinterest = ''
+configatron.links.rss = ''
+
+
+
 case Rails.env.to_sym
 when :development
   configatron.host = 'localhost:3000'

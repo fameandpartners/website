@@ -18,18 +18,18 @@ footer
         .title Customer service
         .link = link_to 'FAQs', '#'
         .phone Call us on 1800 456 560
-        .email = link_to 'support@fameandpartners.com', 'mailto:support@fameandpartners.com', class: 'inverse'
+        .email = mail_to 'support@fameandpartners.com', class: 'inverse'
       .column.social
         .title Let’s be friends
         ul
-          li = link_to 'twitter', '#', class: 'twitter'
-          li = link_to 'facebook', '#', class: 'facebook'
-          li = link_to 'google', '#', class: 'google'
-          li = link_to 'pinterest', '#', class: 'pinterest'
+          li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
+          li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
+          li = link_to 'google', configatron.links.google, target: :blank, class: 'google'
+          li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
   .wrap
     .logo-copyright
       .logo
-        = link_to '#' do
+        = link_to root_path do
           ' Fame
           span &
           ' Partners

@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
-gem 'slim', "~> 1.3.8"
+gem 'slim', '~> 1.3.8'
+gem 'slim-rails', '~> 1.1.1'
 gem 'configatron'
 
 # assets
@@ -21,6 +22,10 @@ group :development do
   gem 'quiet_assets', '1.0.2'
   gem 'thin', '1.5.1'
   gem 'pry-rails'
+end
+
+group :development, :test do
+  gem 'debugger'
 end
 
 # spree extensions

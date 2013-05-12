@@ -1,15 +1,12 @@
 doctype html
 = conditional_html do
-  head data-hook="inside_head"
-    = render 'spree/shared/head'
-  body class=(body_class) id=(@body_id || 'default') data-hook="body"
-    .container
-      = render 'spree/shared/header'
-      #wrapper.row data-hook=""
-        = breadcrumbs(@taxon)
-        = render 'spree/shared/sidebar' if content_for? :sidebar
-        #content class=(content_for?(:sidebar) ? "columns twelve" : "columns sixteen") data-hook=""
-          = flash_messages
-          = yield
-    = render 'spree/shared/footer'
-    = render 'spree/shared/google_analytics'
+  head
+    = render 'layouts/head'
+    = csrf_meta_tags
+  body class=(controller_action_class)
+    #wrap
+      = render 'layouts/header'
+      #content
+        = yield
+        #push
+    = render 'layouts/footer'
