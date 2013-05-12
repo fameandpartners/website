@@ -1,16 +1,14 @@
 = render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user }
-h2= t(:change_my_password)
 
-= form_for @spree_user, :as => :spree_user, :url => spree.spree_user_password_path, :method => :put do |f|
-  p
-    = f.label :password, t(:password)
-    br
-    = f.password_field :password
-    br
-  p
-    = f.label :password_confirmation, t(:password_confirmation)
-    br
-    = f.password_field :password_confirmation
-    br
-  = f.hidden_field :reset_password_token
-  = f.submit t(:update_password), :class => 'button primary'
+.wrap
+  h1.block-title= t(:change_my_password)
+
+  .form.centered
+    = form_for @spree_user, :as => :spree_user, :url => spree.spree_user_password_path, :method => :put do |f|
+      = f.hidden_field :reset_password_token
+      .input.string
+        = f.password_field :password, placeholder: t(:password)
+      .input.string
+        = f.password_field :password_confirmation, placeholder: t(:password_confirmation)
+      .submit-form.input
+        = f.submit t(:update_password), class: 'btn button primary'
