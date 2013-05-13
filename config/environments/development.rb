@@ -38,7 +38,5 @@ FameAndPartners::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.deface.enabled = false
-
   Slim::Engine.set_default_options :pretty => true, :sort_attrs => false
 end
