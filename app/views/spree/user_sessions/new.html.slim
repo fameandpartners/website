@@ -7,7 +7,7 @@
 
   .existing-customer
     .form.centered data-hook="login"
-      = render :partial => 'spree/shared/login'
+      = render 'spree/shared/login'
       .separate
       .aligncenter #{link_to t(:create_a_new_account), spree.signup_path} | #{link_to t(:forgot_password), spree.new_spree_user_password_path}
 
