@@ -10,10 +10,10 @@ footer
       .column.links
         .title About us
         ul
-          li = link_to 'Our Vision', '#'
-          li = link_to 'Meet our Team', '#'
-          li = link_to 'Terms & Conditions', '#'
-          li = link_to 'Privacy', '#'
+          li = link_to 'Our Vision', vision_path
+          li = link_to 'Meet our Team', team_path
+          li = link_to 'Terms & Conditions', terms_path
+          li = link_to 'Privacy', privacy_path
       .column.customer-service
         .title Customer service
         .link = link_to 'FAQs', '#'
@@ -34,4 +34,7 @@ footer
           span &
           ' Partners
       .copyright
-        ' 2013 Fame & Partners &copy; | #{link_to 'Legal Note', '#'} |  #{link_to 'Privacy Policy', '#' }
+        ' 2013 Fame & Partners &copy; |
+        =' link_to 'Legal Note', legal_path
+        ' |
+        = link_to 'Privacy Policy', privacy_path
