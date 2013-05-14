@@ -1,6 +1,11 @@
 FameAndPartners::Application.routes.draw do
 
+  # Static pages for HTML markup
   match '/form' => 'pages#form'
+  match '/posts' => 'pages#posts'
+  match '/post' => 'pages#post'
+  match '/celebrities' => 'pages#celebrities'
+  match '/celebrity' => 'pages#celebrity'
 
   # Static pages
   get '/about'   => 'pages#about'
