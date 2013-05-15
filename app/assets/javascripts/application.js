@@ -47,4 +47,26 @@ $(function(){
   });
 
   $('form li.color:has(:checkbox:checked)').addClass('active');
+
+  function toggleFixedBar(){
+    var $bar = $('.fixed-bar');
+
+    if ($(window).scrollTop() > 620 && !$bar.data('visible')) {
+      $(window).unbind('scroll', toggleFixedBar);
+      $bar.animate({top: 0}, 500, function(){
+        $(window).bind('scroll', toggleFixedBar);
+        $bar.data('visible', true);
+      });
+    } else if ($(window).scrollTop() < 620 && $bar.data('visible')) {
+      $(window).unbind('scroll', toggleFixedBar);
+      $bar.animate({top: '-120px'}, 500, function(){
+        $(window).bind('scroll', toggleFixedBar);
+        $bar.data('visible', false);
+      });
+    }
+  }
+
+  if ($('body.pages-home').length > 0) {
+    $(window).bind('scroll', toggleFixedBar);
+  }
 });
