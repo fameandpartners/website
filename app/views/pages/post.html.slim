@@ -1,0 +1,76 @@
+= render 'shared/blog_top_bar'
+
+.wrap
+
+  .breadcrumbs-likes
+    .breadcrumbs
+      ' You are here: #{link_to 'Home', '#'} » #{link_to 'Beyonce Noles', '#'}  »  #{link_to 'Red Carpet Event Title', '#'}
+
+    ul.social-likes
+      li Facebook like
+      li Tweet it
+      li Facebook share
+
+  h1.block-title.dark Event post title
+  .subtitle
+    ' 29th July 2013
+    div = link_to 'by Kelly Madding', '#'
+
+  .post
+    .main-image
+      = image_tag 'http://placehold.it/405x522', width: 405, height: 522, alt: ''
+    .post-content
+      h2 Qui freegan nostrud carles, organic nulla portland banh
+      p Wafer muffin cake liquorice sesame snaps cupcake. Marshmallow cake chocolate biscuit. Chocolate cake sweet roll wafer brownie candy jelly pastry biscuit sweet roll. Candy sugar plum dragée. Donut halvah sweet roll gummi bears danish chocolate bar sweet dessert. Gummies gummi bears toffee oat cake.
+      ul.post-images
+        li
+          = link_to '#' do
+            = image_tag 'http://placehold.it/75x108', width: 75, height: 108, alt: ''
+        li
+          = link_to '#' do
+            = image_tag 'http://placehold.it/75x108', width: 75, height: 108, alt: ''
+        li
+          = link_to '#' do
+            = image_tag 'http://placehold.it/75x108', width: 75, height: 108, alt: ''
+
+      .block
+        .block-title F&P Featured Dresses
+        .block-content
+          ul.photos
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+
+      ul.tags
+        li = link_to 'Loren (2)', '#', class: 'tag'
+        li = link_to 'Loren IPSUM  (2)', '#', class: 'tag'
+        li = link_to 'AMET SIT  (3)', '#', class: 'tag'
+        li = link_to 'IPSUM AS (7)', '#', class: 'tag'
+        li = link_to 'IPSUM (2)', '#', class: 'tag'
+
+  .content-sidebar
+    .content-area
+      ' Disqus
+    .sidebar
+      ' Sidebar

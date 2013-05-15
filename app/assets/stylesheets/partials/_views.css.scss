@@ -483,3 +483,61 @@
     }
   }
 }
+
+.post {
+  overflow: hidden;
+  margin: 37px 0 54px;
+  .main-image {
+    float: left;
+    width: 405px;
+  }
+  .post-content {
+    float: right;
+    width: 660px;
+    h2 {
+      margin: 0 0 22px;
+    }
+    .post-images {
+      margin: 25px 0 31px;
+      li {
+        display: inline-block;
+        margin: 0 0 0 10px;
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
+    .block {
+      .block-title {
+        color: #7a656a;
+        font-size: 24px;
+        border-bottom: 1px solid #fee7b5;
+        letter-spacing: 0;
+        padding: 0 0 12px;
+        margin: 0 0 17px;
+      }
+      .photos {
+        width: 660px;
+        margin: 0 0 23px;
+        li {
+          display: inline-block;
+          margin: 0 4px 4px 0;
+        }
+      }
+    }
+    .tags {
+      li {
+        display: inline-block;
+        margin: 0 0 14px 14px;
+        .tag {
+          font-size: 12px;
+          min-width: 0;
+          text-decoration: none;
+        }
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

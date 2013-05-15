@@ -113,6 +113,35 @@ header {
     font: 400 italic 20px/1.2 $fontTwo;
     width: 370px;
     margin: 16px auto;
+    div {
+      margin: 6px 0 0;
+      a {
+        color: #f9baaf;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.breadcrumbs-likes {
+  overflow: hidden;
+  border-bottom: 1px solid #ededed;
+  font-size: 14px;
+  line-height: 56px;
+  height: 54px;
+  font-family: $fontOne;
+  .breadcrumbs {
+    float: left;
+    a {
+      color: #ad7d76;
+    }
+  }
+  .social-likes {
+    float: right;
+    li {
+      float: left;
+      margin: 0 0 0 26px;
+    }
   }
 }
 
@@ -169,7 +198,7 @@ header {
       border-bottom: 1px solid #fee7b5;
       letter-spacing: 0;
       padding: 0 0 12px;
-      margin: 0 0 17px;
+      margin: 0 0 15px;
     }
     .photos {
       width: 355px;
@@ -201,38 +230,6 @@ header {
         display: inline-block;
         margin: 0 14px 10px 0;
       }
-    }
-  }
-}
-
-.tag {
-  font: 400 14px/1 $fontOne;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 9px 11px;
-  min-width: 111px;
-  background: #c4fbf0;
-  color: #878787;
-  display: inline-block;
-  border-radius: 5px;
-  position: relative;
-  &.with-arrow {
-    &:before {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      margin: 0 0 0 -4px;
-      border-top: 8px solid #c4fbf0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-    }
-  }
-  &.pink {
-    background: #f9baaf;
-    color: #fff;
-    &:before {
-      border-top-color: #f9baaf;
     }
   }
 }
