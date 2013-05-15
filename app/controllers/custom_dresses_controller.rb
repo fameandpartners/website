@@ -1,4 +1,6 @@
 class CustomDressesController < ApplicationController
+  before_filter :authenticate_spree_user!
+
   layout 'spree/layouts/spree_application'
 
   def new
@@ -15,6 +17,7 @@ class CustomDressesController < ApplicationController
     @custom_dress_images = CustomDressImage.where(:id => custom_dress_image_ids)
     @custom_dress = CustomDress.new(params[:custom_dress])
     @custom_dress.custom_dress_images = @custom_dress_images
+    @custom_dress.spree_user = current_spree_user
     if @custom_dress.save
       render :success
     else

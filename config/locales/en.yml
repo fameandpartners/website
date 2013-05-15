@@ -3,3 +3,12 @@
 
 en:
   hello: "Hello world"
+  emails:
+    subjects:
+      users:
+        welcome: "Welcome to the %{app_name}"
+        custom_dresses:
+          created: "Thank you for adding your Custom Dress"
+      admins:
+        custom_dresses:
+          created: "Custom Dress was added"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515080346) do
+ActiveRecord::Schema.define(:version => 20130516043841) do
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(:version => 20130515080346) do
     t.string   "hips"
     t.string   "hollow"
     t.string   "color"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "spree_user_id"
   end
 
   create_table "spree_activators", :force => true do |t|
@@ -655,10 +656,10 @@ ActiveRecord::Schema.define(:version => 20130515080346) do
     t.integer  "product_id"
     t.integer  "count_on_hand",                               :default => 0
     t.decimal  "cost_price",    :precision => 8, :scale => 2
-    t.string   "cost_currency"
     t.integer  "position"
     t.integer  "lock_version",                                :default => 0
     t.boolean  "on_demand",                                   :default => false
+    t.string   "cost_currency"
   end
 
   add_index "spree_variants", ["product_id"], :name => "index_spree_variants_on_product_id"

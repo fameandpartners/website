@@ -1,4 +1,5 @@
 class CustomDressImagesController < ApplicationController
+  before_filter :authenticate_spree_user!
   respond_to :json
 
   def create
