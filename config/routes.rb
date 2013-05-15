@@ -15,6 +15,9 @@ FameAndPartners::Application.routes.draw do
   get '/privacy' => 'pages#privacy'
   get '/legal' => 'pages#legal'
 
+  resources :custom_dresses, :only => [:new, :create]
+  resources :custom_dress_images, :only => [:create]
+
   root :to => 'pages#home'
 
   mount Spree::Core::Engine, at: '/'

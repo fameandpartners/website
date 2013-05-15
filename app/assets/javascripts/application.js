@@ -12,4 +12,39 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require jquery-fileupload/basic
+
+$(function(){
+  $('#custom-dress-image-upload').fileupload({
+    url: '/custom_dress_images.json',
+    dataType: 'json',
+    formData: {},
+    multipart: true,
+    paramName: 'custom_dress_image[files][]',
+    singleFileUploads: false,
+    limitMultiFileUploads: 5,
+    done: function(e, data) {
+      $.each(data.result, function(index, item){
+        var $thumbnail = $('<img/>').attr('src', item.thumbnail_url)
+        var $field = $('<input/>').attr('type', 'hidden')
+          .attr('name', 'custom_dress[custom_dress_image_ids][]')
+          .attr('value', item.id);
+        if ($('.uploaded-photos li:has(img)').length == 5) {
+          $('.uploaded-photos li:has(img):first').remove();
+          $('.uploaded-photos').append('<li/>');
+        }
+        $('.uploaded-photos li:not(:has(img)):first').append($thumbnail).append($field);
+      })
+    }
+  });
+
+  $('form li.color a').click(function(event){
+    event.preventDefault();
+    var $target = $(event.target);
+    $target.parent('.color').siblings().find(':checkbox').attr('checked', false);
+    $target.find(':checkbox').attr('checked', true);
+    $target.parent().addClass('active').siblings().removeClass('active');
+  });
+
+  $('form li.color:has(:checkbox:checked)').addClass('active');
+});

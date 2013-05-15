@@ -1,0 +1,59 @@
+= render 'shared/top_bar'
+
+.wrap
+  h1.block-title Tell us about your perfect dress
+  - if @custom_dress.errors.present?
+    ul.errors
+      - @custom_dress.errors.full_messages.each do |message|
+        li= message
+  = form_for @custom_dress, :html => {:class => 'form centered'} do |f|
+    .fields-name
+      ' Tell us as much about your dress as possible.
+      strong Pictures are better.
+    .fields-group
+      .input.string
+        = f.text_field :first_name, :placeholder => 'First name'
+      .input.string
+        = f.text_field :last_name, :placeholder => 'Last name'
+    .input.string
+      = f.email_field :email, :placeholder => 'Email address'
+    .input.string
+      = f.text_area :description, :placeholder => 'Describe your dress'
+
+    .fields-name Measurements
+    .fields-group.fields-group-four
+      .input.string
+        = f.text_field :bust, :placeholder => 'Bust'
+      .input.string
+        = f.text_field :waist, :placeholder => 'Waist'
+      .input.string
+        = f.text_field :hips, :placeholder => 'Hips'
+      .input.string
+        = f.text_field :hollow, :placeholder => 'Hollow to hem'
+
+    .fields-name Select your favourite colour
+    ul.colors
+      - CustomDress::COLORS.each do |color|
+        li.color class=(color.downcase)
+          a href="#"
+            = color
+            = check_box_tag 'custom_dress[color]', color, @custom_dress.color.eql?(color), :style => 'display: none;'
+
+    .fields-name Upload up to 5 photos to show us what you would like.
+    .photos-upload
+      ul.uploaded-photos
+        - 5.times do |i|
+          li
+            - if custom_dress_image = @custom_dress.custom_dress_images[i]
+              = hidden_field_tag 'custom_dress[custom_dress_image_ids][]', custom_dress_image.id
+              = image_tag custom_dress_image.thumbnail_url
+      .upload-button
+        .btn.fileinput-button
+          | Upload photos
+          input#custom-dress-image-upload type="file" multiple="true"
+        .upload-limit maximum 600kb per photo
+
+    .separate
+
+    .submit-form
+      input.btn type="submit" value="Submit your dress requirements"

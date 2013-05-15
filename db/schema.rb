@@ -11,7 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130512205027) do
+ActiveRecord::Schema.define(:version => 20130515080346) do
+
+  create_table "custom_dress_images", :force => true do |t|
+    t.integer  "custom_dress_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "custom_dresses", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.text     "description"
+    t.string   "bust"
+    t.string   "waist"
+    t.string   "hips"
+    t.string   "hollow"
+    t.string   "color"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"

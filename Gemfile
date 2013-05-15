@@ -5,6 +5,7 @@ gem 'pg'
 gem 'slim', '~> 1.3.8'
 gem 'slim-rails', '~> 1.1.1'
 gem 'configatron'
+gem 'paperclip'
 
 # assets
 gem 'jquery-rails'
@@ -14,6 +15,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'execjs', '1.4.0'
   gem 'therubyracer'
+  gem 'jquery-fileupload-rails', '0.3.4'
 end
 
 group :development do

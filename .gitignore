@@ -22,3 +22,6 @@ config/database.yml
 
 # Ignore RVM config file
 .rvmrc
+
+# Ignore uploaded files
+/public/system/
