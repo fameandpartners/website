@@ -541,3 +541,16 @@
     }
   }
 }
+
+.celebrities {
+  width: 1107px;
+  li {
+    margin: 37px 5px 20px 0;
+    display: inline-block;
+    .name {
+      font-size: 18px;
+      letter-spacing: 1px;
+      font-family: $fontOne;
+    }
+  }
+}

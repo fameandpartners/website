@@ -2,14 +2,7 @@
 
 .wrap
 
-  .breadcrumbs-likes
-    .breadcrumbs
-      ' You are here: #{link_to 'Home', '#'} » #{link_to 'Beyonce Noles', '#'}  »  #{link_to 'Red Carpet Event Title', '#'}
-
-    ul.social-likes
-      li Facebook like
-      li Tweet it
-      li Facebook share
+  = render 'shared/breadcrumbs'
 
   h1.block-title.dark Event post title
   .subtitle
