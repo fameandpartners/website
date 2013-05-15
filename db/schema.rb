@@ -655,10 +655,10 @@ ActiveRecord::Schema.define(:version => 20130515080346) do
     t.integer  "product_id"
     t.integer  "count_on_hand",                               :default => 0
     t.decimal  "cost_price",    :precision => 8, :scale => 2
+    t.string   "cost_currency"
     t.integer  "position"
     t.integer  "lock_version",                                :default => 0
     t.boolean  "on_demand",                                   :default => false
-    t.string   "cost_currency"
   end
 
   add_index "spree_variants", ["product_id"], :name => "index_spree_variants_on_product_id"

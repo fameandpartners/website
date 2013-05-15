@@ -16,9 +16,10 @@ configatron.links.pinterest = ''
 configatron.links.rss = ''
 
 
-
 case Rails.env.to_sym
 when :development
   configatron.host = 'localhost:3000'
+when :staging
+  configatron.host = 'fame.23stages.com'
 when :test
 end
