@@ -13,12 +13,15 @@ group :assets do
   gem 'bourbon'
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '1.3.0'
   gem 'execjs', '1.4.0'
   gem 'therubyracer'
   gem 'jquery-fileupload-rails', '0.3.4'
 end
 
 group :development do
+  gem 'capistrano', '2.15.4', require: false
+  gem 'capistrano-rbenv', '0.0.10', require: false
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
   gem 'quiet_assets', '1.0.2'
