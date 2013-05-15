@@ -157,18 +157,49 @@ header {
   .sidebar {
     width: 328px;
     float: right;
+    .block {
+      margin: 16px 0 0;
+      &:first-child {
+        margin: 0;
+      }
+    }
     .block-title {
       color: #7a656a;
-      font-size: 26px;
+      font-size: 24px;
       border-bottom: 1px solid #fee7b5;
-      letter-spacing: 1px;
-      padding: 0 0 4px;
+      letter-spacing: 0;
+      padding: 0 0 12px;
+      margin: 0 0 17px;
     }
     .photos {
       width: 355px;
       li {
         display: inline-block;
         margin: 0 11px 11px 0;
+      }
+    }
+    .posts {
+      margin: 0 0 32px;
+      li {
+        margin: 14px 0 0;
+        a {
+          font: 300 16px/1.1 $fontOne;
+          text-decoration: none;
+          &:hover {
+            color: #f9baaf;
+            text-decoration: underline;
+          }
+        }
+        &:first-child {
+          margin: -5px 0 0;
+        }
+      }
+    }
+    .tags {
+      width: 342px;
+      li {
+        display: inline-block;
+        margin: 0 14px 10px 0;
       }
     }
   }
