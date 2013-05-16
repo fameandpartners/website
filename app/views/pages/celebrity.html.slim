@@ -1,0 +1,91 @@
+= render 'shared/blog_top_bar'
+
+.wrap
+
+  = render 'shared/breadcrumbs'
+
+  .position-relative
+    h1.block-title.dark Beyonce Noles
+    .subtitle Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+    .track-celebrity = link_to 'Track this celebrity', '#', class: 'btn active'
+
+  .content-sidebar
+    section.content-area
+      ul.tabs.clearfix
+        li.active = link_to 'Latest photos', '#'
+        li = link_to 'Latest news', '#'
+
+      .content-tab.active
+        ul.celebrities
+          li
+            = image_tag 'http://placehold.it/243x340', width: 243, height: 340, alt: ''
+            .name Celebrity name
+            .event 21st July 2013
+          li
+            = image_tag 'http://placehold.it/243x340', width: 243, height: 340, alt: ''
+            .name Celebrity name
+            .event 21st July 2013
+          li
+            = image_tag 'http://placehold.it/243x340', width: 243, height: 340, alt: ''
+            .name Celebrity name
+            .event 21st July 2013
+          li
+            = image_tag 'http://placehold.it/243x340', width: 243, height: 340, alt: ''
+            .name Celebrity name
+            .event 21st July 2013
+
+      .content-tab
+        article.post
+          .tag.with-arrow Style tip
+          .image
+            = image_tag 'sample/blog-post.jpg', width: 742, height: 355, alt: ''
+          h2
+            = link_to 'Pommy ipsum round our gaff old chap lass on', '#'
+          p Pommy ipsum round our gaff old chap lass on a stag do doolally fried toast baffled the chippy, well fit ridiculous Kate and Will mush working class that's ace Queen Elizabeth a comely wench. Pie-eyed throw a spanner in the works a cuppa down South fried toast, hard cheese old boy make a brew a cuppa. It's the dogs bollocks punter doofer cheesed off brown sauce pigeons in Trafalgar Square macca, scrumpy rubbish working class scrumpy rambunctious devonshire cream tea, yorkshire mixture farewell Prince Charles middle class scally. What a mug naff off chaps off with her head, lost the plot smeg head.
+          p Pommy ipsum round our gaff old chap lass on a stag do doolally fried toast baffled the chippy, well fit ridiculous Kate and Will mush working class that's ace Queen Elizabeth a comely wench. Pie-eyed throw a spanner in the works a cuppa down South fried toast, hard cheese old boy make a brew a cuppa. It's the dogs bollocks punter doofer cheesed off brown sauce pigeons in Trafalgar Square macca, scrumpy rubbish working class scrumpy rambunctious devonshire cream tea, yorkshire mixture farewell Prince Charles middle class scally. What a mug naff off chaps off with her head, lost the plot smeg head.
+          .author
+            = link_to '#' do
+              .avatar
+                = image_tag 'sample/avatar.jpg', width: 30, height: 30, alt: ''
+              .name by Martha Bogan
+        article.post
+          .tag.with-arrow.pink Prom tips
+          h2
+            = link_to 'Pommy ipsum round our gaff old chap lass on', '#'
+          p Pommy ipsum round our gaff old chap lass on a stag do doolally fried toast baffled the chippy, well fit ridiculous Kate and Will mush working class that's ace Queen Elizabeth a comely wench. Pie-eyed throw a spanner in the works a cuppa down South fried toast, hard cheese old boy make a brew a cuppa. It's the dogs bollocks punter doofer cheesed off brown sauce pigeons in Trafalgar Square macca, scrumpy rubbish working class scrumpy rambunctious devonshire cream tea, yorkshire mixture farewell Prince Charles middle class scally. What a mug naff off chaps off with her head, lost the plot smeg head.
+          p Pommy ipsum round our gaff old chap lass on a stag do doolally fried toast baffled the chippy, well fit ridiculous Kate and Will mush working class that's ace Queen Elizabeth a comely wench. Pie-eyed throw a spanner in the works a cuppa down South fried toast, hard cheese old boy make a brew a cuppa. It's the dogs bollocks punter doofer cheesed off brown sauce pigeons in Trafalgar Square macca, scrumpy rubbish working class scrumpy rambunctious devonshire cream tea, yorkshire mixture farewell Prince Charles middle class scally. What a mug naff off chaps off with her head, lost the plot smeg head.
+          .author
+            = link_to '#' do
+              .avatar
+                = image_tag 'sample/avatar.jpg', width: 34, height: 34, alt: ''
+              .name by Martha Bogan
+
+    section.sidebar
+      .block
+        .block-title F&P Featured Dresses
+        .block-content
+          ul.photos
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''

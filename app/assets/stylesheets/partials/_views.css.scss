@@ -552,5 +552,23 @@
       letter-spacing: 1px;
       font-family: $fontOne;
     }
+    .event {
+      margin: 4px 0 0;
+      font-style: italic;
+    }
+  }
+}
+
+.content-tab {
+  display: none;
+  .celebrities {
+    width: 749px;
+    li {
+      width: 243px;
+      margin: 0 4px 35px 0;
+    }
+  }
+  &.active {
+    display: block;
   }
 }
