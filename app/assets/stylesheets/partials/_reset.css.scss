@@ -16,6 +16,7 @@ input,select{vertical-align:middle}
 input,textarea{font-family:inherit;font-size:inherit;font-weight:inherit}
 
 /* DEFAULTS */
+html, body { height: 100%; }
 html { background: #fff; }
 body { cursor: default; font: 400 16px/1.1 $fontTwo; color: #5f5f5f; }
 strong, b { font-weight: 700; }
@@ -36,6 +37,9 @@ a:hover { text-decoration: none; }
 .wrap { width: 1096px; overflow: hidden; margin: 0 auto; }
 .wrap.no-overlow { overflow: visible; }
 .position-relative { position: relative; }
+#wrap { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -298px; }
+#push { height: 298px; }
+footer { height: 280px; }
 
 /* CLEARFIX */
 .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
