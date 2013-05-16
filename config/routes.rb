@@ -6,6 +6,7 @@ FameAndPartners::Application.routes.draw do
   match '/post' => 'pages#post'
   match '/celebrities' => 'pages#celebrities'
   match '/celebrity' => 'pages#celebrity'
+  match '/competition'   => 'pages#competition'
 
   # Static pages
   get '/about'   => 'pages#about'
