@@ -23,17 +23,30 @@ $(function(){
     paramName: 'custom_dress_image[files][]',
     singleFileUploads: false,
     limitMultiFileUploads: 5,
+    start: function(e, data) {
+      $('.photos-upload .errors').html('');
+      var $loader = $('<div/>').addClass('ajax-loader');
+      $('.uploaded-photos li:not(:has(img)):first').append($loader);
+
+      return $('.uploaded-photos li:not(:has(img))').length == 0;
+    },
     done: function(e, data) {
       $.each(data.result, function(index, item){
-        var $thumbnail = $('<img/>').attr('src', item.thumbnail_url)
-        var $field = $('<input/>').attr('type', 'hidden')
-          .attr('name', 'custom_dress[custom_dress_image_ids][]')
-          .attr('value', item.id);
-        if ($('.uploaded-photos li:has(img)').length == 5) {
-          $('.uploaded-photos li:has(img):first').remove();
-          $('.uploaded-photos').append('<li/>');
+        if (!item.serialized_errors) {
+          var $thumbnail = $('<img/>').attr('src', item.thumbnail_url)
+          var $field = $('<input/>').attr('type', 'hidden')
+            .attr('name', 'custom_dress[custom_dress_image_ids][]')
+            .attr('value', item.id);
+          if ($('.uploaded-photos li:has(img)').length == 5) {
+            $('.uploaded-photos li:has(img):first').remove();
+            $('.uploaded-photos').append('<li/>');
+          }
+          $('.uploaded-photos li:not(:has(img)):first').html('').append($thumbnail).append($field);
+        } else {
+          $('.uploaded-photos li:has(.ajax-loader):last').find('.ajax-loader').remove();
+          $error = $('<li/>').html('File ' + item.file_file_name + ' was not uploaded because ' + item.serialized_errors.join(', '));
+          $('.photos-upload .errors').append($error)
         }
-        $('.uploaded-photos li:not(:has(img)):first').append($thumbnail).append($field);
       })
     }
   });

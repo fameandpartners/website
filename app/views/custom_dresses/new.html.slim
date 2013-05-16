@@ -44,7 +44,6 @@
       ul.uploaded-photos
         - 5.times do |i|
           li
-            .ajax-loader
             - if custom_dress_image = @custom_dress.custom_dress_images[i]
               = hidden_field_tag 'custom_dress[custom_dress_image_ids][]', custom_dress_image.id
               = image_tag custom_dress_image.thumbnail_url
@@ -53,6 +52,7 @@
           | Upload photos
           input#custom-dress-image-upload type="file" multiple="true"
         .upload-limit maximum 600kb per photo
+      ul.errors
 
     .separate
 

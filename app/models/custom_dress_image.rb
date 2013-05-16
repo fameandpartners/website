@@ -20,11 +20,19 @@ class CustomDressImage < ActiveRecord::Base
     file.url(:thumbnail)
   end
 
+  def serialized_errors
+    if errors.present?
+      errors.full_messages
+    else
+      nil
+    end
+  end
+
   def as_json(options={})
     super(
       :root => false,
-      :only => [:id],
-      :methods => [:thumbnail_url]
+      :only => [:id, :file_file_name],
+      :methods => [:thumbnail_url, :serialized_errors]
     )
   end
 end

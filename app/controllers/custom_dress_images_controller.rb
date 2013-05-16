@@ -11,9 +11,9 @@ class CustomDressImagesController < ApplicationController
         if custom_dress_image.save
           session[:custom_dress_image_ids] ||= []
           session[:custom_dress_image_ids] << custom_dress_image.id
-
-          @custom_dress_images << custom_dress_image
         end
+
+        @custom_dress_images << custom_dress_image
       end
     end
 
