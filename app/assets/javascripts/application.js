@@ -23,12 +23,15 @@ $(function(){
     paramName: 'custom_dress_image[files][]',
     singleFileUploads: false,
     limitMultiFileUploads: 5,
-    start: function(e, data) {
+    send: function(e, data) {
       $('.photos-upload .errors').html('');
-      var $loader = $('<div/>').addClass('ajax-loader');
-      $('.uploaded-photos li:not(:has(img)):first').append($loader);
 
-      return $('.uploaded-photos li:not(:has(img))').length == 0;
+      for (var i = 0; i < data.files.length; i++) {
+        var $loader = $('<div/>').addClass('ajax-loader');
+        $('.uploaded-photos li:not(:has(img, .ajax-loader)):first').append($loader);
+      }
+
+      return true;
     },
     done: function(e, data) {
       $.each(data.result, function(index, item){
