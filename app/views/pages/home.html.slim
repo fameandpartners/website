@@ -6,9 +6,9 @@
       .desc Get your next prom dress made by one of the fashion industries top designers.
       - unless spree_user_signed_in?
         - if facebook_authentication_available?
-          .signup = link_to 'Sign up with Facebook', spree.user_omniauth_authorize_url(:provider => :facebook), class: 'signup'
+          .signup = link_to 'Sign up with Facebook', fb_auth_path(:prom => true), class: 'signup'
           .or or
-        .signup-link = link_to 'Sign up using your email address', spree_signup_path
+        .signup-link = link_to 'Sign up using your email address', spree.signup_path(:prom => true)
 
 = render 'shared/top_bar'
 .dream-dress

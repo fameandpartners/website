@@ -13,7 +13,10 @@ FameAndPartners::Application.routes.draw do
   get '/team'    => 'pages#team'
   get '/terms'   => 'pages#terms'
   get '/privacy' => 'pages#privacy'
-  get '/legal' => 'pages#legal'
+  get '/legal'   => 'pages#legal'
+
+  # MonkeyPatch for redirecting to Custom Dress page
+  get '/fb_auth' => 'pages#fb_auth'
 
   resources :custom_dresses, :only => [:new, :create]
   resources :custom_dress_images, :only => [:create]

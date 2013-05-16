@@ -1,1 +1,2 @@
 require 'overrides/spree_auth_devise/user'
+require 'overrides/spree_auth_devise/user_registrations_controller'
