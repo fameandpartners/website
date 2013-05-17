@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516043841) do
+ActiveRecord::Schema.define(:version => 20130517210339) do
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
@@ -641,6 +641,8 @@ ActiveRecord::Schema.define(:version => 20130516043841) do
     t.datetime "updated_at",                                           :null => false
     t.string   "spree_api_key",          :limit => 48
     t.datetime "remember_created_at"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
