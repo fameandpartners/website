@@ -6,7 +6,7 @@
     ul.errors
       - @custom_dress.errors.full_messages.each do |message|
         li= message
-  = form_for @custom_dress, :html => {:class => 'form centered'} do |f|
+  = form_for @custom_dress, :html => {:class => 'form centered margin-bottom'} do |f|
     .fields-name
       ' Tell us as much about your dress as possible.
       strong Pictures are better.

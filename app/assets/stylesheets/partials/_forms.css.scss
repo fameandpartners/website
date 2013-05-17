@@ -181,10 +181,16 @@
     width: 700px;
     margin: 0 auto;
   }
+  &.margin-bottom {
+    margin-bottom: 400px;
+  }
 }
 
-.errors {
+.errors, .errorExplanation {
   width: 700px;
   margin: 20px auto;
   color: #cc0000;
+  h2, p {
+    margin: 0 0 10px;
+  }
 }
