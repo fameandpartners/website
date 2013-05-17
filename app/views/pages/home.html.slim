@@ -32,11 +32,11 @@
           .text Quality fabric
 
 .promo-slider.slider-block
-  .arrow-left Prev
-  .arrow-right Next
+  #carousel-prev.arrow-left Prev
+  #carousel-next.arrow-right Next
   .slides-overlay
-  ul.slides
-    li.slide-1
+  ul#carousel.slides
+    li style="background-image: url('#{image_path 'slider/slide-1.jpg'}');"
       .inner
         .block-title Steps to your perfect PROM dress
         .separate
@@ -61,9 +61,9 @@
         .block-title
         .separate
         .desc
-  .pagination
-    div.active 1
-    div 2
-    div 3
-    div 4
-    div 5
+  #carousel-pagination.pagination
+    a.active 1
+    a 2
+    a 3
+    a 4
+    a 5
