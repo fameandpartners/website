@@ -1,9 +1,10 @@
+.fields-group
+  .input.string
+    = f.text_field :first_name, class: 'title', placeholder: t(:first_name)
+  .input.string
+    = f.text_field :last_name, class: 'title', placeholder: t(:last_name)
 .input.string
   = f.email_field :email, class: 'title', placeholder: t(:email)
-.input.string
-  = f.text_field :first_name, class: 'title', placeholder: t(:first_name)
-.input.string
-  = f.text_field :last_name, class: 'title', placeholder: t(:last_name)
 
 #password-credentials
   .input.string
