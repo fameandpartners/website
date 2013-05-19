@@ -1,4 +1,12 @@
 FameAndPartners::Application.routes.draw do
+  devise_for :spree_user,
+             :class_name => 'Spree::User',
+             :controllers => { :sessions => 'spree/user_sessions',
+                               :registrations => 'spree/user_registrations',
+                               :passwords => 'spree/user_passwords',
+                               :confirmations => 'spree/user_confirmations'},
+             :skip => [:unlocks, :omniauth_callbacks],
+             :path_names => { :sign_out => 'logout' }
 
   # Static pages for HTML markup
   match '/form' => 'pages#form'

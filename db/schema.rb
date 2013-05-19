@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517210339) do
+ActiveRecord::Schema.define(:version => 20130518124159) do
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
@@ -643,6 +643,10 @@ ActiveRecord::Schema.define(:version => 20130517210339) do
     t.datetime "remember_created_at"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
