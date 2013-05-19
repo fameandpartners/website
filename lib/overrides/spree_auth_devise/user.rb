@@ -9,6 +9,8 @@ Spree::User.class_eval do
 
   after_create :send_welcome_email, :unless => :confirmation_required?
 
+  has_attached_file :avatar
+
   private
 
   def send_welcome_email
