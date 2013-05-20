@@ -11,6 +11,10 @@ Spree::User.class_eval do
 
   has_attached_file :avatar
 
+  def full_name
+    [first_name, last_name].reject(&:blank?).join(' ')
+  end
+
   private
 
   def send_welcome_email
