@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519113451) do
+ActiveRecord::Schema.define(:version => 20130520032930) do
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
@@ -24,9 +24,6 @@ ActiveRecord::Schema.define(:version => 20130519113451) do
   end
 
   create_table "custom_dresses", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
     t.text     "description"
     t.string   "bust"
     t.string   "waist"
