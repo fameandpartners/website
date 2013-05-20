@@ -237,6 +237,26 @@ header {
   }
 }
 
+.page-static {
+  h2 {
+    margin: 20px 0 30px;
+    text-align: center;
+  }
+  h3 {
+    margin: 30px 0 0;
+  }
+  p {
+    margin: 20px 0 0;
+  }
+  ul {
+    margin: 20px 0 0 20px;
+    list-style: outside disc;
+    li {
+      margin: 8px 0 0;
+    }
+  }
+}
+
 .paginate {
   position: relative;
   text-align: center;
