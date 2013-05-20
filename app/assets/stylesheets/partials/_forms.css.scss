@@ -32,11 +32,13 @@
     }
     &.boolean {
       input {
-        margin-top: 0;
+        margin: 0;
+        padding: 0;
         width: auto;
         height: auto;
         border: 0;
-        box-shadow: 0;
+        box-shadow: none;
+        background: transparent;
       }
       label {
         margin: 2px 0 0 4px;
@@ -137,9 +139,12 @@
       margin: 19px 0 0 18px;
       text-align: center;
       .btn {
+        position: relative;
+        overflow: hidden;
         display: block;
         width: 168px;
         height: 32px;
+        margin: 0 auto 6px;
         font: 400 14px/32px $fontOne;
         color: #666;
         text-transform: uppercase;
@@ -147,8 +152,14 @@
         border-radius: 4px;
         background: #bffbef;
         box-shadow: 0 1px 2px rgba(201, 146, 136, .66);
+        .fileinput-button {
+          z-index: 2;
+          top: -10px;
+          right: -10px;
+        }
       }
       .upload-limit {
+        clear: both;
         margin: 10px 0 0;
         font: 400 14px/1.2 $fontOne;
         color: #c5c2c3;
