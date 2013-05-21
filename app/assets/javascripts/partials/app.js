@@ -76,7 +76,7 @@ $(function(){
     responsive: true,
     auto  : false,
     scroll: {
-      fx: 'fade'
+      fx: 'slide'
     },
     prev  : { 
       button  : "#carousel-prev",
