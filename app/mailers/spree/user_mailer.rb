@@ -1,10 +1,12 @@
 class Spree::UserMailer < ActionMailer::Base
+  layout 'mailer'
+
   default :from => configatron.noreply
 
   def welcome(user)
     @user = user
     mail(:to => user.email,
-         :subject => t('emails.subjects.users.welcome', :app_name => Spree::Config[:site_name]))
+         :subject => Spree::Config[:site_name] + ' ' + t('emails.subjects.users.welcome'))
   end
 
   def reset_password_instructions(user)
@@ -18,13 +20,13 @@ class Spree::UserMailer < ActionMailer::Base
     @user = user
 
     mail(:to => user.email,
-         :subject => Spree::Config[:site_name] + ' ' + I18n.t(:confirmation_instructions))
+         :subject => Spree::Config[:site_name] + ' ' + I18n.t('emails.subjects.users.confirmation'))
   end
 
   def custom_dress_created(custom_dress)
     @custom_dress = custom_dress
     @user = custom_dress.spree_user
     mail(:to => @user.email,
-         :subject => t('emails.subjects.users.custom_dresses.created'))
+         :subject => Spree::Config[:site_name] + ' ' + t('emails.subjects.users.custom_dress'))
   end
 end

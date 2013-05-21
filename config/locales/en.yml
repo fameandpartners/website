@@ -6,9 +6,8 @@ en:
   emails:
     subjects:
       users:
-        welcome: "Welcome to the %{app_name}"
-        custom_dresses:
-          created: "Thank you for adding your Custom Dress"
+        welcome: 'Welcome'
+        confirmation: 'Email Confirmation'
+        custom_dress: 'Custom Dress'
       admins:
-        custom_dresses:
-          created: "Custom Dress was added"
+        custom_dress: 'Custom Dress | %{full_name} %{id}'

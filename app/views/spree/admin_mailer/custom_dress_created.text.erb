@@ -1,0 +1,18 @@
+<%= @user.full_name %> ordered a custom dress
+
+Name: <%= @user.full_name %>
+
+UserID: <%= @user.id %>
+
+Dress Description: <%= @dress.description %>
+
+Measurements:
+  Bust: <%= @dress.bust %>
+  Waist: <%= @dress.waist %>
+  Hips: <%= @dress.hips %>
+  Hollow to Hem #hollowtohem
+
+Photos:
+<%- @dress.custom_dress_images.each do |image| -%>
+  <%= image_path image.file.url(:original) %>
+<%- end -%>

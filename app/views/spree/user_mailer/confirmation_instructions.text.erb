@@ -1,0 +1,8 @@
+Welcome <%= @user.full_name %>
+
+Thanks for signing up with Fame & Partners.
+Our mission is to deliver you the best prom and formal dresses.
+
+
+Please confirm your email address using the url below:
+<%= confirmation_url(@user, :confirmation_token => @user.confirmation_token) %>
