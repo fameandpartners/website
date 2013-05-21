@@ -2,6 +2,7 @@ class CustomDress < ActiveRecord::Base
   COLORS = %w(Pink Green Gold Purple Orange Blue)
 
   attr_accessible :description,
+                  :phone_number,
                   :bust,
                   :waist,
                   :hips,
@@ -11,7 +12,8 @@ class CustomDress < ActiveRecord::Base
   belongs_to :spree_user, :class_name => 'Spree::User'
   has_many :custom_dress_images
 
-  validates :bust,
+  validates :phone_number,
+            :bust,
             :waist,
             :hips,
             :hollow,
