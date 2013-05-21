@@ -9,6 +9,8 @@
           .signup = link_to 'Sign up with Facebook', fb_auth_path(:prom => true), class: 'signup'
           .or or
         .signup-link = link_to 'Sign up using your email address', spree.signup_path(:prom => true)
+      - else
+        = link_to 'Create your Custom Dress', new_custom_dress_path, :class => 'btn'
 
 = render 'shared/top_bar'
 
