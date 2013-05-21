@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521142607) do
+ActiveRecord::Schema.define(:version => 20130521150852) do
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20130521142607) do
     t.string   "bust"
     t.string   "waist"
     t.string   "hips"
-    t.string   "hollow"
+    t.string   "hollow_to_hem"
     t.string   "color"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false

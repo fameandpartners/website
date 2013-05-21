@@ -6,7 +6,7 @@ class CustomDress < ActiveRecord::Base
                   :bust,
                   :waist,
                   :hips,
-                  :hollow,
+                  :hollow_to_hem,
                   :color
 
   belongs_to :spree_user, :class_name => 'Spree::User'
@@ -16,7 +16,7 @@ class CustomDress < ActiveRecord::Base
             :bust,
             :waist,
             :hips,
-            :hollow,
+            :hollow_to_hem,
             :color,
             :presence => true
 

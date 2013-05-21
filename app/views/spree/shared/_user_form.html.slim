@@ -4,11 +4,11 @@
   .input.string
     = f.text_field :last_name, class: 'title', placeholder: t(:last_name)
 .input.string
-  = f.email_field :email, class: 'title', placeholder: t(:email)
+  = f.email_field :email, class: 'title', placeholder: t(:email), autocomplete: :off
 
 #password-credentials
   .input.string
-    = f.password_field :password, class: 'title', placeholder: t(:password)
+    = f.password_field :password, class: 'title', placeholder: t(:password), autocomplete: :off
   .input.string
-    = f.password_field :password_confirmation, class: 'title', placeholder: t(:confirm_password)
+    = f.password_field :password_confirmation, class: 'title', placeholder: t(:confirm_password), autocomplete: :off
 div data-hook="signup_below_password_fields"

@@ -12,7 +12,9 @@ Measurements:
   Bust: <%= @dress.bust %>
   Waist: <%= @dress.waist %>
   Hips: <%= @dress.hips %>
-  Hollow to Hem #hollowtohem
+  Hollow to Hem: <%= @dress.hollow_to_hem %>
+
+Color: <%= @dress.color %>
 
 Photos:
 <%- @dress.custom_dress_images.each do |image| -%>
