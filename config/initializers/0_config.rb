@@ -1,7 +1,7 @@
 # application base
 configatron.host = 'example.com'
 configatron.noreply = 'noreply@fameandpartners.com'
-configatron.admin = 'kate@droidlabs.pro'
+configatron.admin = 'team@fameandpartners.com'
 configatron.app_name = 'Fame And Partners'
 
 # assets
