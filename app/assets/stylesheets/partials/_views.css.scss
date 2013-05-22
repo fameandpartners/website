@@ -278,14 +278,21 @@
         width: 162px;
         .image {
           background: #fff;
-          background: rgba(255, 255, 255, .45);
+          background: image-url('icons-homepage-dream-prom.png') 0 center no-repeat rgba(255, 255, 255, .45);
           width: 162px;
           height: 162px;
           margin: 0 0 30px;
           overflow: hidden;
           border-radius: 50%;
-        }
-        .text {
+          &.unique {
+            background-position: 49px center;
+          }
+          &.designer {
+            background-position: -162px center;
+          }
+          &.fabric {
+            background-position: -372px center;
+          }
         }
         &:first-child {
           margin: 0;
