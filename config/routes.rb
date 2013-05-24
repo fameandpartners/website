@@ -19,12 +19,12 @@ FameAndPartners::Application.routes.draw do
   match '/competition'   => 'pages#competition'
 
   # Static pages
-  get '/about'   => 'pages#about'
-  get '/vision'  => 'pages#vision'
-  get '/team'    => 'pages#team'
-  get '/terms'   => 'pages#terms'
-  get '/privacy' => 'pages#privacy'
-  get '/legal'   => 'pages#legal'
+  get '/about'   => 'statics#about'
+  get '/vision'  => 'statics#vision'
+  get '/team'    => 'statics#team'
+  get '/terms'   => 'statics#terms'
+  get '/privacy' => 'statics#privacy'
+  get '/legal'   => 'statics#legal'
 
   # MonkeyPatch for redirecting to Custom Dress page
   get '/fb_auth' => 'pages#fb_auth'
