@@ -17,6 +17,7 @@ FameAndPartners::Application.routes.draw do
   match '/celebrities' => 'pages#celebrities'
   match '/celebrity' => 'pages#celebrity'
   match '/competition'   => 'pages#competition'
+  match '/custom-made-dresses' => 'pages#custom_made_dresses'
 
   # Static pages
   get '/about'   => 'statics#about'
