@@ -20,7 +20,6 @@ FameAndPartners::Application.routes.draw do
 
   # Static pages
   get '/about'   => 'statics#about'
-  get '/vision'  => 'statics#vision'
   get '/team'    => 'statics#team'
   get '/terms'   => 'statics#terms'
   get '/privacy' => 'statics#privacy'
