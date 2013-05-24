@@ -11,7 +11,6 @@ FameAndPartners::Application.routes.draw do
              :path_names => { :sign_out => 'logout' }
 
   # Static pages for HTML markup
-  match '/form' => 'pages#form'
   match '/posts' => 'pages#posts'
   match '/post' => 'pages#post'
   match '/celebrities' => 'pages#celebrities'
