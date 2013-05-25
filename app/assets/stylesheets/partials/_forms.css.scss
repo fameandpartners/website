@@ -30,6 +30,17 @@
         border-color: #cc0000;
       }
     }
+    .hint {
+      margin-top: 12px;
+      text-align: center;
+      color: #C5C2C3;
+      font-size: 13px;
+      font-family: $fontOne;
+      .hint-title {
+        color: #b0adae;
+        font-weight: 700;
+      }
+    }
     &.boolean {
       input {
         margin: 0;
@@ -63,65 +74,13 @@
       width: 160px;
     }
   }
-  ul.colors {
-    padding: 5px 0 22px;
-    text-align: center;
-    li {
-      width: 90px;
-      height: 90px;
-      display: inline-block;
-      overflow: hidden;
-      margin: 5px 5px 5px 17px;
-      a {
-        display: block;
-        width: 90px;
-        height: 90px;
-        overflow: hidden;
-        margin: 5px;
-        text-indent: -999px;
-        text-align: left;
-      }
-      &.active {
-        margin: 0 0 0 12px;
-        padding: 3px;
-        width: 90px;
-        width: 90px;
-        border: 2px solid #c0bebe;
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, .4) inset;
-      }
-      &:first-child {
-        margin-left: 0;
-        &.active {
-          margin-left: -5px;
-        }
-      }
-      &.pink {
-        @include linear-gradient(left, #fb6e99, #fb9fbb);
-      }
-      &.green {
-        @include linear-gradient(left, #509e52, #93e295);
-      }
-      &.gold {
-        @include linear-gradient(left, #b4ad5f, #faf5c3);
-      }
-      &.purple {
-        @include linear-gradient(left, #8b5eb4, #cea1f6);
-      }
-      &.blue {
-        @include linear-gradient(left, #1272bc, #55b5ff);
-      }
-      &.orange {
-        @include linear-gradient(left, #bb8911, #fecc55);
-      }
-    }
-  }
   .photos-upload {
     overflow: hidden;
-    width: 658px;
+    width: 466px;
     padding: 9px 0 0;
-    margin: 0 auto;
+    margin: 0 auto 36px;
     ul.uploaded-photos {
-      float: left;
+      overflow: hidden;
       li {
         position: relative;
         float: left;
@@ -135,10 +94,10 @@
       }
     }
     .upload-button {
-      float: right;
-      margin: 19px 0 0 18px;
+      margin: -18px 0 0 0;
       text-align: center;
       .btn {
+        float: none;
         position: relative;
         overflow: hidden;
         display: block;
@@ -160,8 +119,8 @@
       }
       .upload-limit {
         clear: both;
-        margin: 10px 0 0;
-        font: 400 14px/1.2 $fontOne;
+        margin: 5px 0 0;
+        font: 400 13px/1.2 $fontOne;
         color: #c5c2c3;
       }
     }
@@ -188,12 +147,67 @@
       box-shadow: 0 1px 2px rgba(201, 146, 136, .66);
     }
   }
+  .size-choser {
+    margin: 0 0 36px;
+    ul {
+      text-align: center;
+      li {
+        display: inline-block;
+        margin: 14px 6px 0;
+        a {
+          text-decoration: none;
+          display: block;
+          padding: 10px;
+          font: 400 13px/1 $fontOne;
+          background: #fcfcfc;
+          border: 1px solid #ddd;
+          width: 60px;
+          color: #8b8b8b;
+        }
+        &.active {
+          a {
+            color: #3a3a3a;
+            border-color: #6a6a6a;
+          }
+        }
+      }
+    }
+  }
+  .color-choser {
+    width: 244px;
+    margin: 0 auto;
+    height: 152px;
+    .colorbox {
+      float: right;
+      width: 54px;
+      height: 54px;
+      border: 1px solid #ddd;
+      margin: 0 0 0 66px;
+    }
+  }
   &.centered {
     width: 700px;
     margin: 0 auto;
   }
   &.margin-bottom {
     margin-bottom: 400px;
+  }
+  &.custom-dress {
+    label {
+      font-size: 20px;
+      font-style: italic;
+      display: block;
+      text-align: center;
+      margin: 10px 0 8px;
+    }
+    .input {
+      margin: 0 auto 36px;
+      width: 400px;
+    }
+    .hint {
+      width: 260px;
+      margin: 12px auto 0;
+    }
   }
 }
 
