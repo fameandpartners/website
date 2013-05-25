@@ -29,10 +29,7 @@ footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .wrap
     .logo-copyright
       .logo
-        = link_to root_path do
-          ' Fame
-          span &
-          ' Partners
+        = link_to 'Fame&Partners', root_path
       .copyright
         ' 2013 Fame & Partners &copy; |
         =' link_to 'Legal Note', legal_path

@@ -6,10 +6,7 @@ header.inverse {
   }
   .logo {
     a {
-      color: #fff;
-      span {
-        background-image: image-url('icon-header-amp.png');
-      }
+      background-image: image-url('logo-white.png');
     }
   }
 }
@@ -52,10 +49,7 @@ footer.inverse {
     }
     .logo {
       a {
-        color: #000;
-        span {
-          background-image: image-url('icon-header-amp-black.png');
-        }
+        background-image: image-url('logo.png');
       }
     }
   }

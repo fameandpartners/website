@@ -16,8 +16,14 @@ header {
     text-transform: uppercase;
     letter-spacing: 10px;
     a {
-      text-decoration: none;
-      color: #000;
+      display: block;
+      width: 310px;
+      height: 25px;
+      text-align: center;
+      margin: 0 auto;
+      background: image-url('logo.png') center center no-repeat;
+      overflow: hidden;
+      text-indent: -999px;
     }
     span {
       background: image-url('icon-header-amp-black.png') 0 0 no-repeat;
@@ -415,21 +421,15 @@ footer {
       color: #b4b4b4;
     }
     .logo {
-      font-size: 14px;
-      font-weight: 300;
-      letter-spacing: 6px;
-      span {
-        background: image-url('icon-footer-amp.png') 0 0 no-repeat;
-        width: 20px;
-        height: 15px;
-        display: inline-block;
+      a {
+        width: 206px;
+        height: 17px;
+        margin: 0 auto;
+        display: block;
         overflow: hidden;
         text-indent: -999px;
-        vertical-align: top;
-        margin: 2px 6px 0 -6px;
-      }
-      a {
-        text-decoration: none;
+        text-align: left;
+        background: image-url('logo-footer.png') center center no-repeat;
       }
     }
     .copyright {
