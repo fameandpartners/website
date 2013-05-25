@@ -1,7 +1,7 @@
 footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .columns
     .wrap
-      .column.newsletter
+      /.column.newsletter
         .title Newsletter and updates
         .text Sign up for the latest on our prom desses, latest interviews and events.
         form.clearfix
@@ -16,10 +16,10 @@ footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
           li = link_to 'Privacy', privacy_path
       .column.customer-service
         .title Customer service
-        .link = link_to 'FAQs', '#'
-        .phone Call us on 1800 456 560
-        .email = mail_to 'support@fameandpartners.com', 'support@fameandpartners.com', class: 'inverse'
-      .column.social
+        .link.hide = link_to 'FAQs', '#'
+        .phone.hide Call us on 1800 456 560
+        .email = mail_to 'team@fameandpartners.com', 'team@fameandpartners.com', class: 'inverse'
+      .column.social.hide
         .title Let’s be friends
         ul
           li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
@@ -31,7 +31,4 @@ footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
       .logo
         = link_to 'Fame&Partners', root_path
       .copyright
-        ' 2013 Fame & Partners &copy; |
-        =' link_to 'Legal Note', legal_path
-        ' |
-        = link_to 'Privacy Policy', privacy_path
+        ' 2013 Fame & Partners &copy;

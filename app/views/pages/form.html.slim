@@ -1,19 +1,6 @@
 .position-relative
   .top-bar
-    .wrap
-      nav.main
-        ul
-          li = link_to 'About us', '#'
-          li.active = link_to 'Competition', '#'
-          li = link_to 'Blog', '#'
-          li = link_to 'Style quiz', '#'
-      nav.follow
-        ul
-          li follow us
-          li = link_to 'facebook', '#', class: 'facebook'
-          li = link_to 'twitter', '#', class: 'twitter'
-          li = link_to 'pinterest', '#', class: 'pinterest'
-          li = link_to 'rss', '#', class: 'rss'
+    = render 'shared/top_bar_inner'
 
 .wrap
   h1.block-title Tell us about your perfect dress

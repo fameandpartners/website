@@ -12,18 +12,5 @@ doctype html
       .fixed-bar style="position: fixed; top: -120px; width: 100%; height: 106px; background-color: rgba(255, 255, 255, 1); z-index: 2001;"
         = render 'layouts/header'
         .top-bar style="top: 62px;"
-          .wrap
-            nav.main
-              ul
-                li = link_to 'About us', about_path
-                li = link_to 'Competition', '#'
-                li = link_to 'Blog', '#'
-                li = link_to 'Style quiz', '#'
-            nav.follow
-              ul
-                li follow us
-                li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
-                li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
-                li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
-                li = link_to 'rss', configatron.links.rss, target: :blank, class: 'rss'
+          = render 'shared/top_bar_inner'
     = render 'layouts/footer'
