@@ -6,7 +6,7 @@
       .desc Get your next prom dress made by one of the fashion industries top designers.
       - unless spree_user_signed_in?
         - if facebook_authentication_available?
-          .signup = link_to 'Sign up with Facebook', fb_auth_path(:prom => true), class: 'signup'
+          .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'signup'
           .or or
         .signup-link = link_to 'Sign up using your email address', spree.signup_path(:prom => true)
       - else
@@ -32,6 +32,8 @@
         .circle
           .image.fabric
           .text Lux fabrics at a price point you can afford
+      .create-now
+        = link_to 'Create your custom dress now', '#', class: 'btn'
 
 .promo-slider.slider-block style="background-image: url('#{image_path 'slider/slide-1.jpg'}');"
   #carousel-prev.arrow-left Prev
@@ -64,3 +66,5 @@
     a 2
     a 3
     a 4
+  .call-to-action
+    = link_to 'Create your custom dress', '#', class: 'btn'
