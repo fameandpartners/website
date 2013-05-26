@@ -1,0 +1,36 @@
+= render 'shared/top_bar'
+
+.wrap
+  h1.block-title Tell us about your dress
+  h2.subtitle.big Help us visualise your dress
+
+  = form_for @custom_dress, :html => {:class => 'form centered margin-bottom custom-dress'} do |f|
+    - if @custom_dress.errors.present?
+      ul.errors
+        - @custom_dress.errors.full_messages.each do |message|
+          li= message
+    .photos-upload
+      label Upload some photos that will help us visualise your dress
+      ul.uploaded-photos
+        - 5.times do |i|
+          li
+            - if custom_dress_image = @custom_dress.custom_dress_images[i]
+              = image_tag custom_dress_image.thumbnail_url
+      .upload-button
+        .btn.fileinput-button
+          | Upload photos
+          input#custom-dress-image-upload type="file" multiple="true"
+        .upload-limit maximum 600kb per photo
+      ul.errors
+
+    .input.string
+      = f.label :description, 'Describe your perfect dress'
+      = f.text_area :description, :placeholder => 'Start describing your dress'
+      .hint
+        .hint-title Example description
+        div Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu tortor ut dolor tempor lacinia in eu tortor. Donec consectetur quam eget urna faucibus ut placerat velit sollicitudin. Nulla nibh libero, interdum dictum scelerisque et, congue quis libero.
+
+    .separate
+
+    .submit-form
+      = f.submit 'Submit your dress requirements', :class => 'btn'

@@ -1,6 +1,21 @@
 $(function(){
+  $('#custom_dress_color').spectrum({
+    flat: true,
+    showButtons: false,
+    move: function(color){
+      $('#custom_dress_color').val(color.toHexString());
+      $('#custom-dress-color-pattern').css('background-color', color.toHexString());
+    },
+    show: function(color){
+      if ($('#custom_dress_color').val().length > 0) {
+        $('#custom-dress-color-pattern').css('background-color', color.toHexString());
+      }
+    },
+    className: 'picker'
+  });
+
   $('#custom-dress-image-upload').fileupload({
-    url: '/custom_dress_images.json',
+    url: $('form.custom-dress').attr('action') + '/custom_dress_images.json',
     dataType: 'json',
     formData: {},
     multipart: true,
@@ -21,14 +36,11 @@ $(function(){
       $.each(data.result, function(index, item){
         if (!item.serialized_errors) {
           var $thumbnail = $('<img/>').attr('src', item.thumbnail_url)
-          var $field = $('<input/>').attr('type', 'hidden')
-            .attr('name', 'custom_dress[custom_dress_image_ids][]')
-            .attr('value', item.id);
           if ($('.uploaded-photos li:has(img)').length == 5) {
             $('.uploaded-photos li:has(img):first').remove();
             $('.uploaded-photos').append('<li/>');
           }
-          $('.uploaded-photos li:not(:has(img)):first').html('').append($thumbnail).append($field);
+          $('.uploaded-photos li:not(:has(img)):first').html('').append($thumbnail);
         } else {
           $('.uploaded-photos li:has(.ajax-loader):last').find('.ajax-loader').remove();
           $error = $('<li/>').html('File ' + item.file_file_name + ' was not uploaded because ' + item.serialized_errors.join(', '));
@@ -38,15 +50,12 @@ $(function(){
     }
   });
 
-  $('form li.color a').click(function(event){
-    event.preventDefault();
-    var $target = $(event.target);
-    $target.parent('.color').siblings().find(':checkbox').attr('checked', false);
-    $target.find(':checkbox').attr('checked', true);
-    $target.parent().addClass('active').siblings().removeClass('active');
+  $('form .size-choser :radio').change(function(event){
+    $('form .size-choser li').removeClass('active');
+    $(event.target).parents('li:first').addClass('active');
   });
 
-  $('form li.color:has(:checkbox:checked)').addClass('active');
+  $('form .size-choser li:has(:radio:checked)').addClass('active');
 
   function toggleFixedBar(){
     var $bar = $('.fixed-bar');

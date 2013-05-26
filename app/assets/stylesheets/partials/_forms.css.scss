@@ -154,7 +154,8 @@
       li {
         display: inline-block;
         margin: 14px 6px 0;
-        a {
+        a,
+        label {
           text-decoration: none;
           display: block;
           padding: 10px;
@@ -163,9 +164,20 @@
           border: 1px solid #ddd;
           width: 60px;
           color: #8b8b8b;
+
+          input[type=radio] {
+            display: none;
+          }
         }
+
+        label {
+          margin-top: 0px;
+          margin-bottom: 0px;
+        }
+
         &.active {
-          a {
+          a,
+          label {
             color: #3a3a3a;
             border-color: #6a6a6a;
           }
@@ -174,15 +186,18 @@
     }
   }
   .color-choser {
-    width: 244px;
+    width: 264px;
     margin: 0 auto;
     height: 152px;
+    .picker {
+      float: left;
+    }
     .colorbox {
       float: right;
       width: 54px;
       height: 54px;
       border: 1px solid #ddd;
-      margin: 0 0 0 66px;
+      margin: 0 0 0 12px;
     }
   }
   &.centered {

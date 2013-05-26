@@ -20,23 +20,13 @@ p
   = @dress.description
 p
   b
-    ' Measurements:
-    br
-  ' Bust:
-  = @dress.bust
-  br
-  ', Waist:
-  = @dress.waist
-  br
-  ' ,  Hips:
-  = @dress.hips
-  br
-  ' , Hollow to Hem:
-  = @dress.hollow_to_hem
-p
-  b
     ' Color:
   = @dress.color
+p
+  b
+    ' Size:
+  br
+  = CustomDress::SIZES.invert[@dress.size]
 p
   b
     ' Photos:

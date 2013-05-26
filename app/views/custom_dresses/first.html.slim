@@ -1,0 +1,43 @@
+= render 'shared/top_bar'
+
+.wrap
+  h1.block-title Tell us about you
+  h2.subtitle.big Let's get started #{current_spree_user.first_name}!
+
+  = form_for @custom_dress, :html => {:class => 'form centered margin-bottom custom-dress'} do |f|
+    - if @custom_dress.errors.present?
+      ul.errors
+        - @custom_dress.errors.full_messages.each do |message|
+          li= message
+    .input.string
+      = f.label :phone_number, 'Enter your phone number, we’ll contact you to help you design your prefect dress.'
+      = f.text_field :phone_number, :placeholder => 'Enter your contact phone number'
+    .input.string
+      label Choose your Typical Dress Size
+      .hint When we chat on the phone you can give us more information about your size if you like.
+      .size-choser
+        .row
+          ul
+            - CustomDress::GIRL_SIZES.each do |name, key|
+              li
+                label
+                  = radio_button_tag 'custom_dress[size]', key, @custom_dress.size.eql?(key)
+                  = name
+        .row
+          ul
+            - CustomDress::LADY_SIZES.each do |name, key|
+              li
+                label
+                  = radio_button_tag 'custom_dress[size]', key, @custom_dress.size.eql?(key)
+                  = name
+    .input.string
+      label Select your favourite color
+      .color-choser
+        = f.hidden_field :color
+        .colorbox#custom-dress-color-pattern
+
+
+    .separate
+
+    .submit-form
+      = f.submit 'Continue to the final step', :class => 'btn'

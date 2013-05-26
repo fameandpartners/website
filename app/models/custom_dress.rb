@@ -1,37 +1,51 @@
 class CustomDress < ActiveRecord::Base
-  COLORS = %w(Pink Green Gold Purple Orange Blue)
+  GIRL_SIZES = {
+    'Girls 6'  => 'G6',
+    'Girls 8'  => 'G8',
+    'Girls 10' => 'G10',
+    'Girls 12' => 'G12',
+  }
 
-  attr_accessible :description,
-                  :phone_number,
-                  :bust,
-                  :waist,
-                  :hips,
-                  :hollow_to_hem,
-                  :color
+  LADY_SIZES = {
+    'Ladies 6'  => 'L6',
+    'Ladies 8'  => 'L8',
+    'Ladies 10' => 'L10',
+    'Ladies 12' => 'L12',
+  }
+
+  SIZES = GIRL_SIZES.merge(LADY_SIZES)
+
+  attr_accessible :phone_number,
+                  :size,
+                  :color,
+                  :description
 
   belongs_to :spree_user, :class_name => 'Spree::User'
   has_many :custom_dress_images
 
   validates :phone_number,
-            :bust,
-            :waist,
-            :hips,
-            :hollow_to_hem,
+            :size,
             :color,
             :presence => true
 
-  validates :color,
+  validates :description,
+            :presence => true,
+            :unless => :new_record?,
+            :if => :ghost?
+
+  validates :size,
             :inclusion => {
               :allow_blank => true,
-              :in => COLORS
+              :in => SIZES.values
             }
 
-  after_create :send_emails
+  validates :color,
+            :format => {
+              :allow_blank => true,
+              :with => /^#(?:[0-9a-fA-F]{3}){1,2}$/
+            }
 
-  private
-
-  def send_emails
-    Spree::UserMailer.custom_dress_created(self).deliver
-    Spree::AdminMailer.custom_dress_created(self).deliver
+  def self.find_ghost_for_user_by_id!(user_id, id)
+    CustomDress.find_by_ghost_and_spree_user_id_and_id!(true, user_id, id)
   end
 end

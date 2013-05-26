@@ -8,11 +8,7 @@ Phone Number: <%= @dress.phone_number %>
 
 Dress Description: <%= @dress.description %>
 
-Measurements:
-  Bust: <%= @dress.bust %>
-  Waist: <%= @dress.waist %>
-  Hips: <%= @dress.hips %>
-  Hollow to Hem: <%= @dress.hollow_to_hem %>
+Size: <%= CustomDress::SIZES.invert[@dress.size] %>
 
 Color: <%= @dress.color %>
 

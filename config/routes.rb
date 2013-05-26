@@ -28,8 +28,9 @@ FameAndPartners::Application.routes.draw do
   # MonkeyPatch for redirecting to Custom Dress page
   get '/fb_auth' => 'pages#fb_auth'
 
-  resources :custom_dresses, :only => [:new, :create]
-  resources :custom_dress_images, :only => [:create]
+  resources :custom_dresses, :only => [:new, :create, :update] do
+    resources :custom_dress_images, :only => [:create]
+  end
 
   root :to => 'pages#home'
 

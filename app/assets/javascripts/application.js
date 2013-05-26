@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require jquery-fileupload/basic
 //= require libs/jquery.caroufredsel-6.2.1-packed
+//= require libs/spectrum
 //= require partials/app
