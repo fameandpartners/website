@@ -6,6 +6,7 @@ class Spree::AdminMailer  < ActionMailer::Base
     @dress = custom_dress
     @user = custom_dress.spree_user
     mail(
+      :from => @user.email,
       :subject => t('emails.subjects.admins.custom_dress', :full_name => @user.full_name, :id => @user.id)
     )
   end
