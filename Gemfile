@@ -40,3 +40,7 @@ gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-3-s
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 gem 'spree_essential_blog', :git => 'git://github.com/bbtfr/spree_essential_blog.git', :branch => '1.3.x'
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
+
+group :production do
+  gem 'unicorn'
+end
