@@ -1,14 +1,14 @@
 .promo
   .wrap
     .promo-text
-      .block-title Custom Made PROM Dresses
+      .block-title Custom made formal dresses
       .separate
-      .desc Get your next prom dress made by one of the fashion industries top designers.
+      .desc Co-design your very own formal dress with a fashion designer from our team. It's free to start the process, simply click below.
       - unless spree_user_signed_in?
         - if facebook_authentication_available?
-          .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'signup'
+          .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
           .or or
-        .signup-link = link_to 'Sign up using your email address', spree.signup_path(:prom => true)
+        .signup-link = link_to 'Get started with your email address instead', spree.signup_path(:prom => true)
       - else
         = link_to 'Create your Custom Dress', new_custom_dress_path, :class => 'btn'
 
@@ -19,9 +19,9 @@
     .girl-in-dress
       = image_tag 'image-girl-in-dress.jpg', width: 345, height: 525, alt: ''
     .promo-block
-      .block-title Get your dream PROM dress
+      .block-title Get your dream dress
       .separate
-      .desc Fame & Partners brings you the very best in high fashion for your special event.
+      .desc Our unique process ensures we find out what will suit you best, be inspired by dresses you already love to ultimately create the hottest look just for you.
       .circles
         .circle
           .image.unique
@@ -31,9 +31,13 @@
           .text Your own personal fashion designer
         .circle
           .image.fabric
-          .text Lux fabrics at a price point you can afford
+          .text Luxe fabrics at a price point you can afford
       .create-now
-        = link_to 'Create your custom dress now', '#', class: 'btn'
+        = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
+      - unless spree_user_signed_in?
+        .create-now
+          - if facebook_authentication_available?
+            .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
 
 .promo-slider.slider-block style="background-image: url('#{image_path 'slider/slide-1.jpg'}');"
   #carousel-prev.arrow-left Prev
@@ -67,4 +71,8 @@
     a 3
     a 4
   .call-to-action
-    = link_to 'Create your custom dress', '#', class: 'btn'
+    = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
+  - unless spree_user_signed_in?
+    .call-to-action
+      - if facebook_authentication_available?
+        = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
