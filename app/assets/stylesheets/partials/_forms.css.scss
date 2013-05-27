@@ -39,6 +39,7 @@
       .hint-title {
         color: #b0adae;
         font-weight: 700;
+        margin: 0 0 4px;
       }
     }
     &.boolean {
@@ -217,11 +218,10 @@
     }
     .input {
       margin: 0 auto 36px;
-      width: 400px;
+      width: 490px;
     }
     .hint {
-      width: 260px;
-      margin: 12px auto 0;
+      margin: 12px auto;
     }
   }
 }
