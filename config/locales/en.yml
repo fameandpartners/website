@@ -5,7 +5,7 @@ en:
   password_confirmation: 'Password Confirmation'
   registration:
     title: 'Simply complete your details below to get started'
-    desc: 'It's free to start the process of designing your dress. Simply add your details below.'
+    desc: "It's free to start the process of designing your dress. Simply add your details below.""
     start: 'Get started now'
   emails:
     subjects:
