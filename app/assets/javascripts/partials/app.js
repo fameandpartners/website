@@ -95,7 +95,12 @@ $(function(){
       button  : "#carousel-next",
       key   : "right"
     },
-    pagination  : "#carousel-pagination"
+    pagination  : {
+      anchorBuilder: function( nr ) {
+        return '<a href="#'+ (nr-1) +'" class="item-'+ (nr-1) +'">'+ (nr-1) +'</a>';
+      },
+      container: "#carousel-pagination"
+    }
   });
 
 });

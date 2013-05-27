@@ -44,6 +44,12 @@
   ul#carousel.slides
     li
       .inner
+        .block-title
+          ' 4 easy steps to your
+          br
+          ' perfect dress
+    li
+      .inner
         .block-title Tell us about you
         .separate
         .desc To design you something fabulous, we have to understand what will look best on you.
@@ -68,6 +74,7 @@
     a 2
     a 3
     a 4
+    a 5
   .call-to-action
     = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
   - unless spree_user_signed_in?
