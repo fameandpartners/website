@@ -112,6 +112,9 @@ header {
       color: #7a656a;
       text-decoration: none;
     }
+    &.smaller {
+      margin: 20px 0 0;
+    }
   }
   .subtitle {
     text-align: center;
@@ -143,6 +146,7 @@ header {
   display: block;
   text-indent: -999px;
   text-align: left;
+  overflow: hidden;
   margin: 0 auto;
   border-radius: 4px;
   box-shadow: 0 0 20px rgba(0, 0, 0, .2);
@@ -357,7 +361,7 @@ footer {
       }
     }
     .title {
-      color: #f3ddae;
+      color: #F9B4A8;
       font: 300 16px/1.1 $fontOne;
       margin: 0 0 8px;
     }
@@ -393,7 +397,7 @@ footer {
       }
     }
   }
-  .email {
+  .email-label {
     margin: 17px 0 0;
   }
   .social {

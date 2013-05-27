@@ -3,6 +3,9 @@
   font: 100 40px/1 $fontOne;
   text-transform: uppercase;
   letter-spacing: 3px;
+  &.smaller {
+    font-size: 34px;
+  }
 }
 
 .promo {
