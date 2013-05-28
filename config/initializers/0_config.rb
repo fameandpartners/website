@@ -30,8 +30,8 @@ when :staging
 when :production
   configatron.host = 'fameandpartners.com'
 
-  configatron.mailgun.mailbox.domain = '23stages.com'
-  configatron.mailgun.mailbox.username = 'mailer@23stages.com'
-  configatron.mailgun.mailbox.password = '80kmdvXlufsZOW'
+  configatron.mailgun.mailbox.domain = 'fameandpartners.com.mailgun.org'
+  configatron.mailgun.mailbox.username = 'postmaster@fameandpartners.com.mailgun.org'
+  configatron.mailgun.mailbox.password = '0mqgbkbz34n1'
 when :test
 end
