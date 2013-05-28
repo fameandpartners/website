@@ -10,6 +10,10 @@ FameAndPartners::Application.routes.draw do
              :skip => [:unlocks, :omniauth_callbacks],
              :path_names => { :sign_out => 'logout' }
 
+  devise_scope :spree_user do
+    get '/spree_user/thanks' => 'spree/user_registrations#thanks'
+  end
+
   # Static pages for HTML markup
   match '/posts' => 'pages#posts'
   match '/post' => 'pages#post'
