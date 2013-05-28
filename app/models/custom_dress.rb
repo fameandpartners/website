@@ -4,6 +4,7 @@ class CustomDress < ActiveRecord::Base
     'Girls 8'  => 'G8',
     'Girls 10' => 'G10',
     'Girls 12' => 'G12',
+    'Girls 14' => 'G14'
   }
 
   LADY_SIZES = {
@@ -11,6 +12,7 @@ class CustomDress < ActiveRecord::Base
     'Ladies 8'  => 'L8',
     'Ladies 10' => 'L10',
     'Ladies 12' => 'L12',
+    'Ladies 14' => 'L14'
   }
 
   SIZES = GIRL_SIZES.merge(LADY_SIZES)
