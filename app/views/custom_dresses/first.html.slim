@@ -34,7 +34,7 @@
       label Pick the colour you would love your dress to be
       .color-choser
         = f.hidden_field :color
-        .colorbox#custom-dress-color-pattern
+        .colorbox#custom-dress-color-pattern *{:style => @custom_dress.color.present? && "background-color: #{@custom_dress.color}"}
 
 
     .separate

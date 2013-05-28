@@ -1,17 +1,11 @@
 $(function(){
-  $('#custom_dress_color').spectrum({
-    flat: true,
-    showButtons: false,
-    move: function(color){
-      $('#custom_dress_color').val(color.toHexString());
-      $('#custom-dress-color-pattern').css('background-color', color.toHexString());
-    },
-    show: function(color){
-      if ($('#custom_dress_color').val().length > 0) {
-        $('#custom-dress-color-pattern').css('background-color', color.toHexString());
-      }
-    },
-    className: 'picker'
+  $('#custom_dress_color').minicolors({
+    inline: true,
+    control: 'wheel',
+    change: function(hex, opacity) {
+      $('#custom_dress_color').val(hex);
+      $('#custom-dress-color-pattern').css('background-color', hex);
+    }
   });
 
   $('#custom-dress-image-upload').fileupload({
