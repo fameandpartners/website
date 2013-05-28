@@ -1,4 +1,4 @@
-if Rails.env.staging?
+if Rails.env.staging? || Rails.env.production?
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address              => "smtp.mailgun.org",
