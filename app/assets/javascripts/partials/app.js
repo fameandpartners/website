@@ -8,6 +8,10 @@ $(function(){
     }
   });
 
+  $('#custom_dress_required_at').datepicker({
+    dateFormat: 'd MM yy'
+  });
+
   $('#custom-dress-image-upload').fileupload({
     url: $('form.custom-dress').attr('action') + '/custom_dress_images.json',
     dataType: 'json',

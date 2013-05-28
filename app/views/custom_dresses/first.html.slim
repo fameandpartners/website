@@ -13,6 +13,9 @@
       = f.label :phone_number, 'We need your phone number first because you will be receiving a call from one of our designers to collaborate on your unique design.'
       = f.text_field :phone_number, :placeholder => 'Enter your contact phone number'
     .input.string
+      = f.label :required_at, 'Formal/Event Date'
+      = f.text_field :required_at
+    .input.string
       label Choose your Typical Dress Size
       .hint For now, though, which of the below typically describes your size.
       .size-choser

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524095805) do
+ActiveRecord::Schema.define(:version => 20130528093803) do
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20130524095805) do
     t.string   "phone_number"
     t.string   "size"
     t.boolean  "ghost",         :default => true
+    t.date     "required_at"
   end
 
   create_table "spree_activators", :force => true do |t|

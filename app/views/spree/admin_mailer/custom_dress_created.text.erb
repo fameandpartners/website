@@ -6,6 +6,8 @@ UserID: <%= @user.id %>
 
 Phone Number: <%= @dress.phone_number %>
 
+Formal/Event Date: <%= @dress.required_at %>
+
 Dress Description: <%= @dress.description %>
 
 Size: <%= CustomDress::SIZES.invert[@dress.size] %>

@@ -18,6 +18,7 @@ class CustomDress < ActiveRecord::Base
   SIZES = GIRL_SIZES.merge(LADY_SIZES)
 
   attr_accessible :phone_number,
+                  :required_at,
                   :size,
                   :color,
                   :description
@@ -26,6 +27,7 @@ class CustomDress < ActiveRecord::Base
   has_many :custom_dress_images
 
   validates :phone_number,
+            :required_at,
             :size,
             :color,
             :presence => true

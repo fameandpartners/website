@@ -16,6 +16,7 @@ group :assets do
   gem 'uglifier', '1.3.0'
   gem 'execjs', '1.4.0'
   gem 'therubyracer'
+  gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.3.4'
 end
 

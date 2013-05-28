@@ -15,3 +15,7 @@ en:
         custom_dress: 'Custom Dress'
       admins:
         custom_dress: 'Custom Dress | %{full_name} %{id}'
+  activerecord:
+    attributes:
+      custom_dress:
+        required_at: 'Formal/Event Date'
