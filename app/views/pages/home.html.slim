@@ -75,8 +75,6 @@
     a 3
     a 4
     a 5
-  .call-to-action
-    = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
   - unless spree_user_signed_in?
     .call-to-action
       - if facebook_authentication_available?
