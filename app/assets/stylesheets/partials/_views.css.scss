@@ -401,6 +401,10 @@
     width: 1096px;
     height: 364px;
     margin: -172px 0 0 -548px;
+  }    
+  .first-title{
+    padding-top: 20px;
+    font-size: 48px;
   }
   .inner {
     width: 1096px;
@@ -440,6 +444,11 @@
       display: none;
     }
   }
+}
+
+.slider-bottom {
+  background: image-url('bg-slide.jpg') center center no-repeat;
+  background-size: cover;
 }
 
 .mini-slider {
@@ -641,5 +650,23 @@
   }
   .promo-text {
     margin: 160px 0 0;
+  }
+}
+
+#content .success-page {
+  h2 {
+    font: 300 22px/1.3 $fontOne;
+    color: #7a656a;
+    margin: 30px auto;
+    width: 600px;
+  }
+  p {
+    display: block;
+    width: 600px;
+    margin: 0 auto;
+    font-size: 20px;
+    line-height: 1.3;
+    text-align: center;
+    font-style: italic;
   }
 }

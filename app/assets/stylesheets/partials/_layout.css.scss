@@ -109,14 +109,15 @@ header {
     }
   }
   h2 {
-    font: 300 26px/1.1 $fontOne;
+    font: 300 26px/1.3 $fontOne;
     color: #7a656a;
     a {
       color: #7a656a;
       text-decoration: none;
     }
     &.smaller {
-      margin: 20px 0 0;
+      width: 600px;
+      margin: 30px auto;
     }
   }
   .subtitle {
@@ -279,7 +280,7 @@ header {
   }
   h2 {
     width: auto;
-    margin: 36px 0 56px;
+    margin: 36px 0;
     text-align: left;
   }
   h3 {
@@ -350,7 +351,7 @@ footer {
     width: 400px;
   }
   .columns {
-    margin: 18px 0 0;
+    margin: 200px 0 0;
     padding: 24px 0 8px;
     font: 300 14px/1.3 $fontOne;
     color: #fff;
