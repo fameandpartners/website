@@ -3,7 +3,10 @@
     .promo-text
       .block-title Custom made formal dresses
       .separate
-      .desc Co-design your very own formal dress with a fashion designer from our team. It's free to start the process, simply click below.
+      .desc
+        | Co-design your very own formal dress with a fashion designer from our team.
+        br
+        | It's free to start the process.
       - unless spree_user_signed_in?
         - if facebook_authentication_available?
           .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
