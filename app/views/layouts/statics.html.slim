@@ -3,6 +3,7 @@ doctype html
   head
     = render 'layouts/head'
     = csrf_meta_tags
+    = render 'shared/ga'
   body class=(controller_action_class)
     #wrap
       = render 'layouts/header'
