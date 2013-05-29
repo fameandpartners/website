@@ -40,7 +40,7 @@
           - if facebook_authentication_available?
             .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
 
-.promo-slider.slider-block style="background-image: url('#{image_path 'slider/slide-1.jpg'}');"
+.promo-slider.slider-block.slider-bottom
   #carousel-prev.arrow-left Prev
   #carousel-next.arrow-right Next
   .slides-overlay

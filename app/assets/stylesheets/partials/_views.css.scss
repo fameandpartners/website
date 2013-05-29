@@ -442,6 +442,11 @@
   }
 }
 
+.slider-bottom {
+  background: image-url('bg-slide.jpg') center center no-repeat;
+  background-size: cover;
+}
+
 .mini-slider {
   margin: 26px 0 0;
   .slides {
