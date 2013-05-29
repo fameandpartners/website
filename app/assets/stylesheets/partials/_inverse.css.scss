@@ -29,6 +29,7 @@ header.inverse {
 
 footer.inverse {
   .columns {
+    margin-top: 18px;
     color: #b4b4b4;
     background: transparent;
     a {
@@ -52,4 +53,9 @@ footer.inverse {
       }
     }
   }
+}
+
+.pages-home {
+  #wrap { margin-bottom: -298px; }
+  #push { height: 298px; }
 }
