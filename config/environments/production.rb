@@ -50,8 +50,8 @@ FameAndPartners::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'preprod.fameandpartners.com' }
-  config.action_mailer.asset_host = 'http://preprod.fameandpartners.com'
+  config.action_mailer.default_url_options = { :host => 'www.fameandpartners.com' }
+  config.action_mailer.asset_host = 'http://www.fameandpartners.com'
 
   # Enable threaded mode
   # config.threadsafe!
