@@ -13,7 +13,8 @@
       label We need some pictures to help us understand what you are looking for. Think carefully about the images you select. If you like a very specific dress, try to find as many pictures of it as possible. If you like different parts of one dress, upload images of each dress and then below you can describe which parts of each photo you like.
       ul.uploaded-photos
         - 5.times do |i|
-          li
+          li.fileinput-button.custom-dress-image-upload
+            input type="file" multiple="true"
             - if custom_dress_image = @custom_dress.custom_dress_images[i]
               = image_tag custom_dress_image.thumbnail_url
       .upload-button

@@ -12,6 +12,36 @@ $(function(){
     dateFormat: 'd MM yy'
   });
 
+  $('.custom-dress-image-upload').fileupload({
+    url: $('form.custom-dress').attr('action') + '/custom_dress_images.json',
+    dataType: 'json',
+    formData: {},
+    multipart: true,
+    paramName: 'custom_dress_image[files][]',
+    singleFileUploads: true,
+    send: function(e, data) {
+      var $loader = $('<div/>').addClass('ajax-loader');
+      $(e.target).append($loader);
+      $('.photos-upload .errors').html('');
+
+      return true;
+    },
+    done: function(e, data) {
+      var $target = $(e.target);
+
+      $.each(data.result, function(index, item){
+        if (!item.serialized_errors) {
+          var $thumbnail = $('<img/>').attr('src', item.thumbnail_url);
+          $target.html('').append($thumbnail);
+        } else {
+          $target.find('.ajax-loader').remove();
+          $error = $('<li/>').html('File ' + item.file_file_name + ' was not uploaded because ' + item.serialized_errors.join(', '));
+          $('.photos-upload .errors').append($error)
+        }
+      })
+    }
+  });
+
   $('#custom-dress-image-upload').fileupload({
     url: $('form.custom-dress').attr('action') + '/custom_dress_images.json',
     dataType: 'json',
