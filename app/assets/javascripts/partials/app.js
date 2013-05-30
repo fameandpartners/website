@@ -90,13 +90,13 @@ $(function(){
 
     if ($(window).scrollTop() > 666 && !$bar.data('visible')) {
       $(window).unbind('scroll', toggleFixedBar);
-      $bar.animate({top: 0}, 500, function(){
+      $bar.animate({top: 0}, 300, function(){
         $(window).bind('scroll', toggleFixedBar);
         $bar.data('visible', true);
       });
     } else if ($(window).scrollTop() < 666 && $bar.data('visible')) {
       $(window).unbind('scroll', toggleFixedBar);
-      $bar.animate({top: '-120px'}, 500, function(){
+      $bar.animate({top: '-120px'}, 300, function(){
         $(window).bind('scroll', toggleFixedBar);
         $bar.data('visible', false);
       });
