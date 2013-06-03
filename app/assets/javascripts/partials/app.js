@@ -131,4 +131,16 @@ $(function(){
     }
   });
 
+  $(".promo-badge .close").on('click', function() {
+    $(".promo-badge").fadeOut('fast');
+  });
+
+  $(".promo-badge .promo-badge-inner").on('click', function() {
+    $(".promo-popup").fadeIn('fast');
+  });
+
+  $(".promo-popup .close, .promo-popup .overlay").on('click', function() {
+    $(".promo-popup").fadeOut('fast');
+  });
+
 });
