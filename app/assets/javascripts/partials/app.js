@@ -130,6 +130,8 @@ $(function(){
       container: "#carousel-pagination"
     }
   });
+  
+  $(".promo-badge").delay(500).fadeIn('slow');
 
   $(".promo-badge .close").on('click', function() {
     $(".promo-badge").fadeOut('fast');
