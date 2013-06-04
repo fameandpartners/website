@@ -1,0 +1,165 @@
+.promo-badge {
+  position: fixed;
+  display: none;
+  bottom: 230px;
+  right: 90px;
+  z-index: 101;
+  text-align: center;
+  .promo-badge-inner {
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    overflow: hidden;
+    background: #000;
+    background: rgba(0, 0, 0, .7);
+    border-radius: 50%;
+    box-shadow: 0 0 14px rgba(0, 0, 0, .5);
+    .price, .title {
+      color: #f0b8ab;
+      text-transform: uppercase;
+      font: 300 28px/1 $fontOne;
+    }
+    .price { 
+      .dollar{
+        display: inline-block;
+        font-size: 18px;
+        vertical-align: top;
+        margin: 2px -5px 0 0;
+      }
+      margin: 27px 0 0;
+    }
+    .title {
+      margin: 0 0 17px;
+    }
+    .off {
+      font-size: 11px;
+      display: inline-block;
+      vertical-align: top;
+      margin: 3px 0 0 -4px;
+    }
+    .desc {
+      color: #fff;
+      font-style: italic;
+      margin: 0 0 8px;
+      line-height: 1.2;
+    }
+    .more {
+      a {
+        color: #fff;
+      }
+    }
+  }
+  .close {
+    position: absolute;
+    bottom: -23px;
+    left: 50%;
+    width: 54px;
+    margin: 0 0 0 -27px;
+    background: image-url('promo-close.png') center top no-repeat;
+    padding: 20px 0 0;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    display: none; 
+    font-size: 12px;
+  }
+  &:hover {
+    .close {
+      display: block;
+    }
+  }
+}
+
+.promo-popup {
+  display: none;
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #70625b;
+    opacity: .4;
+    z-index: 1001;
+  }
+  .promo-popup-block {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -266px 0 0 -308px;
+    width: 616px;
+    height: 406px;
+    overflow: hidden;
+    z-index: 1002;
+    background: #000;
+    box-shadow: 0 0 14px rgba(0, 0, 0, .5);
+    .side-left {
+      float: left;
+      width: 160px;
+      margin: 0 0 0 32px;
+      .dollar, .price, .title {
+        color: #f0b8ab;
+        text-transform: uppercase;
+        font: 300 36px/1 $fontOne;
+      }
+      .dollar {
+        display: inline-block;
+        font-size: 32px;
+        vertical-align: top;
+        margin: 7px -14px 0 0;
+      }
+      .price {
+        margin: 34px 0 0;
+        font-size: 66px;
+      }
+      .title {
+        margin: 7px 0 0;
+      }
+      .off {
+        font-size: 18px;
+        display: inline-block;
+        vertical-align: top;
+        margin: 7px 0 0 -10px;
+      }
+    }
+    .side-right {
+      float: right;
+      width: 326px;
+      margin: 0 56px 0 0;
+      color: #fff;
+      .title {
+        margin: 32px 0 20px;
+        font-weight: 700;
+        color: #fff;
+        padding: 0 0 9px;
+        text-transform: uppercase;
+        font-size: 18px;
+        border-bottom: 1px dashed #fff;
+      }
+      p {
+        margin: 0 0 20px;
+        line-height: 1.2;
+      }
+      .facebook-signup {
+        margin: 0 0 10px;
+      }
+      .signup-link {
+        a {
+          font-style: italic;
+          color: #beafad;
+        }
+      }
+    }
+    .close {
+      position: absolute;
+      cursor: pointer;
+      top: 11px;
+      right: 11px;
+      width: 16px;
+      height: 16px;
+      background: image-url('promo-close-mini.png') center center no-repeat;
+      text-indent: -999px;
+      overflow: hidden;
+    }
+  }
+}

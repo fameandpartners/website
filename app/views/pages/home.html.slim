@@ -1,3 +1,41 @@
+- unless spree_user_signed_in?
+  .promo-badge
+    .promo-badge-inner
+      .price
+        .dollar $
+        ' 50
+        .off off
+      .title June special
+      .desc
+        ' Design your dress in June
+        br
+        ' for a $50 voucher
+        br
+        ' toward the production of
+        br
+        ' your dress!
+      .more = link_to 'Find out more here', '#'
+    .close Close                
+
+  .promo-popup
+    .overlay
+    .promo-popup-block
+      .side-left
+        .price
+          .dollar $
+          ' 50
+          .off off
+        .title June Special
+      .side-right
+        .title $50 towards your custom designer dress
+        p Simply design your dress in June to receive a $50 voucher towards your dress production!
+        p To celebrate our launch, we are offering every girl that designs her dress in June, a $50 voucher towards her dress production.
+        p That's because we want to see as many as possible of you with fabulous, individual look for your special event.
+        .call-to-action
+          .signup-facebook = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
+          .signup-link or #{link_to 'Get started with your email address', spree.signup_path(:prom => true)}
+      .close Close  
+
 .promo
   .wrap
     .promo-text
