@@ -137,10 +137,12 @@ $(function(){
 
   $(".promo-badge .promo-badge-inner").on('click', function() {
     $(".promo-popup").fadeIn('fast');
+    $(".promo-badge").fadeOut('fast');
   });
 
   $(".promo-popup .close, .promo-popup .overlay").on('click', function() {
     $(".promo-popup").fadeOut('fast');
+    $(".promo-badge").fadeIn('fast');
   });
 
 });
