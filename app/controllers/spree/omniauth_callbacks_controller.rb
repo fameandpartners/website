@@ -7,7 +7,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     providers.each do |provider|
       class_eval %Q{
         def #{provider}
-          Rails.logger.warn('FACEBOOK callback run from libs!')
           if request.env["omniauth.error"].present?
             flash[:error] = t("devise.omniauth_callbacks.failure", :kind => auth_hash['provider'], :reason => t(:user_was_not_valid))
             redirect_back_or_default(root_url)
@@ -27,9 +26,18 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           else
             user = Spree::User.find_by_email(auth_hash['info']['email']) || Spree::User.new
             user.apply_omniauth_with_additional_attributes(auth_hash)
+
+            if user.new_record?
+              custom_fields = {
+                :Signupreason => session[:sign_up_reason],
+                :Signupdate => Date.today.to_s
+              }
+            end
+
             user.confirm!
 
             if user.save
+              CampaignMonitor.delay.synchronize(user.email, user, custom_fields)
               flash[:notice] = "Signed in successfully."
               sign_in_and_redirect :spree_user, user
             else
