@@ -15,8 +15,10 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Blog routes
-  resource :blog do
-    resources :celebrity_photos, controller: "blog/celebrity_photos"
+  namespace :blog do
+    [:celebrity_photos, :posts].each do |crud|
+      resources crud, only: [:index, :show]
+    end
   end
 
   # Static pages for HTML markup

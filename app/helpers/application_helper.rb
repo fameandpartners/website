@@ -31,4 +31,9 @@ module ApplicationHelper
   def facebook_authentication_available?
     Spree::AuthenticationMethod.exists?(:environment => ::Rails.env, :provider => :facebook, :active => true)
   end
+
+  def make_url prefix, text
+    prefix = prefix.to_s.gsub /_/, "/"
+    "/#{prefix}/#{text.downcase.gsub(/\s/, "_")}"
+  end
 end

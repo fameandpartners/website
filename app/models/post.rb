@@ -5,6 +5,9 @@ class Post < ActiveRecord::Base
   acts_as_taggable
   mount_uploader :photo, PhotoUploader
   has_many :photo_posts, as: :photo_uploaddable
+  belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
+
+  validates :title, :content, presence: true
 
   def photo_will_change!
     true

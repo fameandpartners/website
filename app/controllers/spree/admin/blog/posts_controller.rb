@@ -8,11 +8,12 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
   end
 
   def create
-    @post = Post.create! params[:post]
-    if @post.errors.any?
-      render :new
+    @post = Post.new params[:post]
+    @post.user = spree_current_user
+    if @post.save
+      redirect_to action: :index
     else
-      redirect_to :index
+      render :new
     end
   end
 
@@ -23,7 +24,7 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
   def update
     post = Post.find params[:id]
     if post.update_attributes!(params[:post])
-      redirect_to :index
+      redirect_to action: :index
     else
       render action: :edit
     end
