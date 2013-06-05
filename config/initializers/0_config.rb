@@ -33,5 +33,8 @@ when :production
   configatron.mailgun.mailbox.domain = '23stages.com'
   configatron.mailgun.mailbox.username = 'mailer@23stages.com'
   configatron.mailgun.mailbox.password = '80kmdvXlufsZOW'
+
+  configatron.campaign_monitor.api_key = '3f7e4ac86b143e32a5c7b46b83641143'
+  configatron.campaign_monitor.list_id = 'cc9be877f40c64cf389f6e3ea95daa0a'
 when :test
 end

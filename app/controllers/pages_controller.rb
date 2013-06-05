@@ -4,6 +4,7 @@ class PagesController < ApplicationController
 
   def fb_auth
     if params[:prom]
+      session[:sign_up_reason] = 'Custom dress'
       session[:spree_user_return_to] = main_app.new_custom_dress_path
     end
 
