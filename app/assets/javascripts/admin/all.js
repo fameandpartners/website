@@ -11,5 +11,4 @@
 //= require admin/spree_promo
 
 //= require_tree .
-//= require admin/spree_essentials
 //= require admin/spree_social

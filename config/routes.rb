@@ -14,6 +14,11 @@ FameAndPartners::Application.routes.draw do
     get '/spree_user/thanks' => 'spree/user_registrations#thanks'
   end
 
+  # Blog routes
+  resource :blog do
+    resources :celebrity_photos, controller: "blog/celebrity_photos"
+  end
+
   # Static pages for HTML markup
   match '/posts' => 'pages#posts'
   match '/post' => 'pages#post'
@@ -40,4 +45,18 @@ FameAndPartners::Application.routes.draw do
   root :to => 'pages#home'
 
   mount Spree::Core::Engine, at: '/'
+
+  Spree::Core::Engine.routes.append do
+    namespace :admin do
+      namespace :blog do
+        [:celebrity_photos, :posts, :fashion_news, :prom_tips, :style_tips].each do |crud|
+          resources crud, except: [:show]
+        end
+        get '/' => 'blog#index', action: :index
+      end
+    end
+  end
+
+  match '/admin/blog/fashion_news' => 'fashion_news#index', :via => :get, as: 'admin_blog_index_news'
+
 end

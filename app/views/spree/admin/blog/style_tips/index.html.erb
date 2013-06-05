@@ -1,0 +1,13 @@
+<%= render partial: "spree/admin/shared/blog_sub_menu" %>
+
+<%= link_to 'Add style tip', new_admin_blog_style_tip_path, class: 'button icon_link add-new-item' %>
+<div class="blog_posts">
+  <% @style_tips.each do |tip| %>
+    <div class="post">
+      <h5 class="post-title"><%= tip.title %></h5>
+      <%= link_to edit, edit_admin_blog_style_tip_path(tip) %>
+    </div>
+  <% end %>
+</div>
+
+<%= render partial: "spree/admin/shared/no_items_found" unless @style_tips.any? %>

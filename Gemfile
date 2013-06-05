@@ -9,6 +9,9 @@ gem 'paperclip'
 gem 'createsend', '~> 2.5.0'
 gem 'sidekiq'
 
+gem 'acts-as-taggable-on'
+gem 'carrierwave'
+
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
@@ -30,6 +33,8 @@ group :development do
   gem 'quiet_assets', '1.0.2'
   gem 'thin', '1.5.1'
   gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do
@@ -40,8 +45,6 @@ end
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-3-stable'
-gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
-gem 'spree_essential_blog', :git => 'git://github.com/bbtfr/spree_essential_blog.git', :branch => '1.3.x'
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 
 group :production do

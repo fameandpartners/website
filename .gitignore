@@ -26,6 +26,8 @@ config/database.yml
 # Ignore uploaded files
 /public/system/
 
+/public/uploads
+
 # Ignore EngineYard config file
 /config/ey.yml
 

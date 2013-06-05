@@ -7,8 +7,8 @@
  *= require admin/spree_core
  *= require admin/spree_promo
 
+*= require_tree ../spree
  *= require_self
  *= require_tree .
- *= require admin/spree_essentials
  *= require admin/spree_social
 */

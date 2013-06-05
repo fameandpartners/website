@@ -1,0 +1,13 @@
+<%= render partial: "spree/admin/shared/blog_sub_menu" %>
+
+<%= link_to 'Add fashion news', new_admin_blog_fashion_news_path, class: 'button icon_link add-new-item' %>
+<div class="blog_posts">
+  <% @fashion_news.each do |post| %>
+    <div class="post">
+      <h5 class="post-title"><%= post.title %></h5>
+      <%= link_to edit, edit_admin_blog_fashion_news_path(post) %>
+    </div>
+  <% end %>
+</div>
+
+<%= render partial: "spree/admin/shared/no_items_found" unless @fashion_news.any? %>
