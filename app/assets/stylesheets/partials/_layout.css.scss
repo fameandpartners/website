@@ -221,14 +221,14 @@ header {
   overflow: hidden;
   .content-area {
     float: left;
-    width: 742px;
+    width: 682px;
     margin: 0 0 40px;
     .image {
       margin: 0 0 6px;
     }
   }
   .sidebar {
-    width: 328px;
+    width: 388px;
     float: right;
     .block {
       margin: 16px 0 0;
@@ -236,43 +236,17 @@ header {
         margin: 0;
       }
     }
-    .block-title {
-      color: #7a656a;
-      font-size: 24px;
-      border-bottom: 1px solid #F9B4A8;
-      letter-spacing: 0;
-      padding: 0 0 12px;
-      margin: 0 0 15px;
-    }
     .photos {
-      width: 355px;
+      width: 402px;
       li {
+        background: #fff;
         display: inline-block;
-        margin: 0 11px 11px 0;
-      }
-    }
-    .posts {
-      margin: 0 0 32px;
-      li {
-        margin: 14px 0 0;
-        a {
-          font: 300 16px/1.1 $fontOne;
-          text-decoration: none;
-          &:hover {
-            color: #f9baaf;
-            text-decoration: underline;
-          }
+        margin: 0 16px 14px 0;
+        padding: 6px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+        img {
+          display: block;
         }
-        &:first-child {
-          margin: -5px 0 0;
-        }
-      }
-    }
-    .tags {
-      width: 342px;
-      li {
-        display: inline-block;
-        margin: 0 14px 10px 0;
       }
     }
   }

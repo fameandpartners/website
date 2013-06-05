@@ -56,7 +56,7 @@
 
 .blog-block-title {
   position: relative;
-  margin: 36px 0 16px;
+  margin: 36px 0 20px;
   color: #333;
   letter-spacing: 0;
   .latest {
@@ -67,6 +67,16 @@
   .block-subtitle {
     text-transform: uppercase;
     font: 400 23px/1 $fontThree;
+  }
+  &.inline {
+    margin-bottom: 6px;
+    .latest {
+      display: inline;
+      margin: 0;
+    }
+    .block-subtitle {
+      display: inline;
+    }
   }
 }
 
@@ -200,16 +210,15 @@
     overflow: hidden;
     font: 400 10px/15px $fontOne;
     color: #999898;
+    margin: 0 0 12px;
     .date, .comments, .author {
       float: left;
       margin: 0 24px 0 0;
     }
     .date, .comments {
+      margin-top: 2px;
       background: image-url('icons-blog-post.png') 0 0 no-repeat;
       padding: 0 0 0 20px;
-    }
-    .date {
-
     }
     .comments {
       background-position: 0 -15px;
@@ -220,61 +229,32 @@
     }
     .author {
       a {
+        color: #999898;
         .avatar {
-
+          float: left;
+          margin: 0 8px 0 0;
+          img {
+            width: auto;
+            height: 18px;
+          }
         }
         .name {
-
+          margin-top: 2px;
+          float: left;
         }
       }
     }
   }
-  .main-image {
-    float: left;
-    width: 405px;
+  .featured-image {
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
   }
   .post-content {
-    .post-images {
-      margin: 25px 0 31px;
-      li {
-        display: inline-block;
-        margin: 0 0 0 10px;
-        &:first-child {
-          margin: 0;
-        }
-      }
-    }
-    .block {
-      .block-title {
-        color: #7a656a;
-        font-size: 24px;
-        border-bottom: 1px solid #F9B4A8;
-        letter-spacing: 0;
-        padding: 0 0 12px;
-        margin: 0 0 17px;
-      }
-      .photos {
-        width: 660px;
-        margin: 0 0 23px;
-        li {
-          display: inline-block;
-          margin: 0 4px 4px 0;
-        }
-      }
-    }
-    .tags {
-      li {
-        display: inline-block;
-        margin: 0 0 14px 14px;
-        .tag {
-          font-size: 12px;
-          min-width: 0;
-          text-decoration: none;
-        }
-        &:first-child {
-          margin: 0;
-        }
-      }
+    p {
+      margin: 16px 0 0;
     }
   }
 }
