@@ -6,6 +6,8 @@ gem 'slim', '~> 1.3.8'
 gem 'slim-rails', '~> 1.1.1'
 gem 'configatron'
 gem 'paperclip'
+gem 'createsend'
+gem 'sidekiq'
 
 # assets
 gem 'jquery-rails'
