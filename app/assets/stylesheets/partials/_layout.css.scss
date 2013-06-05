@@ -197,11 +197,10 @@ header {
 
 .breadcrumbs-likes {
   overflow: hidden;
-  border-bottom: 1px solid #ededed;
-  font-size: 14px;
-  line-height: 56px;
-  height: 54px;
-  font-family: $fontOne;
+  border-bottom: 1px dashed #231f20;
+  font: 400 italic 16px/36px $fontTwo;
+  height: 34px;
+  margin: 0 0 36px;
   .breadcrumbs {
     float: left;
     a {

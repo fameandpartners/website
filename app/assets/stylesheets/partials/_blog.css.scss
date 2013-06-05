@@ -1,4 +1,4 @@
-.pages-posts {
+.pages-posts, .pages-post {
   background: image-url('bg-blog.jpg') 0 0 repeat;
   height: auto;
 }
@@ -257,4 +257,10 @@
       margin: 16px 0 0;
     }
   }
+}
+
+.block-comments {
+  padding: 19px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }

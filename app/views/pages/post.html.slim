@@ -4,66 +4,26 @@
 
   = render 'shared/breadcrumbs'
 
-  h1.block-title.dark Event post title
-  .subtitle
-    ' 29th July 2013
-    div = link_to 'by Kelly Madding', '#'
-
-  .post
-    .main-image
-      = image_tag 'http://placehold.it/405x522', width: 405, height: 522, alt: ''
-    .post-content
-      h2 Qui freegan nostrud carles, organic nulla portland banh
-      p Wafer muffin cake liquorice sesame snaps cupcake. Marshmallow cake chocolate biscuit. Chocolate cake sweet roll wafer brownie candy jelly pastry biscuit sweet roll. Candy sugar plum dragée. Donut halvah sweet roll gummi bears danish chocolate bar sweet dessert. Gummies gummi bears toffee oat cake.
-      ul.post-images
-        li
-          = link_to '#' do
-            = image_tag 'http://placehold.it/75x108', width: 75, height: 108, alt: ''
-        li
-          = link_to '#' do
-            = image_tag 'http://placehold.it/75x108', width: 75, height: 108, alt: ''
-        li
-          = link_to '#' do
-            = image_tag 'http://placehold.it/75x108', width: 75, height: 108, alt: ''
-
-      .block
-        .block-title F&P Featured Dresses
-        .block-content
-          ul.photos
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-
-      ul.tags
-        li = link_to 'Loren (2)', '#', class: 'tag'
-        li = link_to 'Loren IPSUM  (2)', '#', class: 'tag'
-        li = link_to 'AMET SIT  (3)', '#', class: 'tag'
-        li = link_to 'IPSUM AS (7)', '#', class: 'tag'
-        li = link_to 'IPSUM (2)', '#', class: 'tag'
-
   .content-sidebar
-    .content-area
-      ' Disqus
-    .sidebar
-      ' Sidebar
+    section.content-area
+      article.post
+        h2
+          = link_to 'Listen Up: New Trend Alert!', '#'
+        .post-meta
+          .date Wednesday, May 15th, 2013
+          .comments
+            = link_to '1490 Comments', '#'
+          .author
+            = link_to '#' do
+              .avatar
+                = image_tag 'sample/avatar.jpg', width: 30, height: 30, alt: ''
+              .name by Martha Bogan
+        .featured-image
+          = image_tag 'sample/blog-post.jpg', width: 742, height: 355, alt: ''
+        .post-content
+          p Pommy ipsum round our gaff old chap lass on a stag do doolally fried toast baffled the chippy, well fit ridiculous Kate and Will mush working class that's ace Queen Elizabeth a comely wench. Pie-eyed throw a spanner in the works a cuppa down South fried toast, hard cheese old boy make a brew a cuppa. It's the dogs bollocks punter doofer cheesed off brown sauce pigeons in Trafalgar Square macca, scrumpy rubbish working class scrumpy rambunctious devonshire cream tea, yorkshire mixture farewell Prince Charles middle class scally. What a mug naff off chaps off with her head, lost the plot smeg head.
+          p Pommy ipsum round our gaff old chap lass on a stag do doolally fried toast baffled the chippy, well fit ridiculous Kate and Will mush working class that's ace Queen Elizabeth a comely wench. Pie-eyed throw a spanner in the works a cuppa down South fried toast, hard cheese old boy make a brew a cuppa. It's the dogs bollocks punter doofer cheesed off brown sauce pigeons in Trafalgar Square macca, scrumpy rubbish working class scrumpy rambunctious devonshire cream tea, yorkshire mixture farewell Prince Charles middle class scally. What a mug naff off chaps off with her head, lost the plot smeg head.
+
+      .block-comments Comments
+
+    = render 'shared/blog_sidebar'
