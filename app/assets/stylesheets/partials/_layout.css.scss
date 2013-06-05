@@ -226,34 +226,6 @@ header {
     .image {
       margin: 0 0 6px;
     }
-    .post {
-      margin: 40px 0 0;
-      border-top: 1px solid #F9B4A8;
-      padding: 48px 0 0;
-      p {
-        line-height: 1.3;
-        margin: 18px 0 0;
-      }
-      .tag {
-        margin: 0 0 22px;
-      }
-      .author {
-        margin: 10px 0 0;
-        a {
-          color: #f9baaf;
-          text-decoration: none;
-        }
-        .name {
-          margin: 7px 0 0;
-          font-style: italic;
-        }
-      }
-      &:first-child {
-        margin: 0;
-        border-top: 0;
-        padding: 0;
-      }
-    }
   }
   .sidebar {
     width: 328px;

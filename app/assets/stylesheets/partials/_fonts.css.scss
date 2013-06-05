@@ -31,5 +31,17 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Bembo';
+    src: url('/fonts/bembo.eot');
+    src: url('/fonts/bembo.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/bembo.woff') format('woff'),
+         url('/fonts/bembo.ttf') format('truetype'),
+         url('/fonts/bembo.svg#Bembo') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
 $fontOne: 'Lato', sans-serif;
 $fontTwo: 'GranjonLTStd', sans-serif;
+$fontThree: 'Bembo', sans-serif;
