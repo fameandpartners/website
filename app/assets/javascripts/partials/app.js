@@ -157,4 +157,7 @@ $(function(){
     },
     pagination  : '.blog-slider .pagination'
   });
+
+  $('.selectbox').chosen();
+
 });

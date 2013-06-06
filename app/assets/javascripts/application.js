@@ -16,4 +16,5 @@
 //= require jquery.ui.datepicker
 //= require libs/jquery.caroufredsel-6.2.1-packed
 //= require libs/jquery.minicolors
+//= require libs/jquery.chosen.min
 //= require partials/app
