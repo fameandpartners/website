@@ -9,6 +9,6 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
           li = link_to 'Sign up', spree_signup_path, class: 'btn pink'
         - else
           li.user
-            /span.inverse =' current_spree_user.full_name
+            span.inverse =' current_spree_user.full_name
             | is logged in
           li = link_to 'Sign out', spree_logout_path, class: 'btn transparent'
