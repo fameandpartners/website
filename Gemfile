@@ -11,6 +11,7 @@ gem 'sidekiq'
 
 gem 'acts-as-taggable-on'
 gem 'carrierwave'
+gem 'rmagick'
 
 # assets
 gem 'jquery-rails'

@@ -5,7 +5,7 @@
   <% @fashion_news.each do |post| %>
     <div class="post">
       <h5 class="post-title"><%= post.title %></h5>
-      <%= link_to edit, edit_admin_blog_fashion_news_path(post) %>
+      <%= link_to 'Edit', edit_admin_blog_fashion_news_path(post) %>
     </div>
   <% end %>
 </div>

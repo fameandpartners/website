@@ -8,8 +8,11 @@ class Spree::Admin::Blog::FashionNewsController < Spree::Admin::BaseController
   end
 
   def create
-    @fashion_news = FashionNews.create! params[:fashion_news]
-    if @fashion_news.errors.any?
+    @fashion_news = FashionNews.new params[:fashion_news]
+    @fashion_news.user = spree_current_user
+    if @fashion_news.save
+      redirect_to action: :index
+    else
       render :new
     else
       redirect_to :index

@@ -8,7 +8,13 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::BaseControll
   end
 
   def create
-    CelebrityPhoto.create! params[:celebrity_photo]
+    @photo = CelebrityPhoto.new params[:celebrity_photo]
+    @photo.user = spree_current_user
+    if @photo.save
+      redirect_to admin_blog_celebrity_photos_path
+    else
+      render action: :new
+    end
   end
 
   def edit

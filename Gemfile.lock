@@ -161,6 +161,7 @@ GEM
     capistrano-rbenv (0.0.10)
       capistrano
 <<<<<<< HEAD
+<<<<<<< HEAD
     celluloid (0.14.1)
       timers (>= 1.0.0)
 =======
@@ -168,6 +169,10 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
 >>>>>>> Basic blog functionality
+=======
+    celluloid (0.14.1)
+      timers (>= 1.0.0)
+>>>>>>> Move uploads to paperclip, fix bugs
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -431,7 +436,6 @@ DEPENDENCIES
   bourbon
   capistrano (= 2.15.4)
   capistrano-rbenv (= 0.0.10)
-  carrierwave
   coffee-rails (~> 3.2.1)
   configatron
   createsend (~> 2.5.0)

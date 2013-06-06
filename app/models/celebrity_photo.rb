@@ -3,10 +3,11 @@ class CelebrityPhoto < ActiveRecord::Base
   attr_accessor :celebrity_name
 
   acts_as_taggable
-  mount_uploader :photo, PhotoUploader
+  has_attached_file :photo, :styles => { :list => "375x269>", :thumb => "75x108>" }
 
   belongs_to :celebrity
 
+  validates_attachment_presence :photo
   before_save :create_or_append_celebrity
 
   def celebrity_name

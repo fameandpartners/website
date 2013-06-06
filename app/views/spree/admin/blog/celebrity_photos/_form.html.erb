@@ -1,5 +1,6 @@
 <%= form_for([:admin_blog, @celebrity_photo], :html => { :multipart => true }) do |f| %>
   <fieldset class="no-border-top">
+    <%= image_tag @celebrity_photo.photo.url, class: 'edit-celebrity-photo' if @celebrity_photo.photo.present? %>
     <%= f.field_container :celebrity_name do %>
       <%= f.label :celebrity_name, t("activerecord.attributes.celebrity_photos.celebrity_name") %><br />
       <%= f.text_field :celebrity_name, :class => 'text', size: 50  %><br />
@@ -8,7 +9,7 @@
     <%= f.field_container :photo do %>
       <span class="required">*</span>
       <%= f.label :photo, t("activerecord.attributes.celebrity_photos.photo") %><br />
-      <%= f.file_field :photo, :class => 'file-field  ' %><br />
+      <%= f.file_field :photo, :class => 'file-field' %><br />
     <% end %>
     <%= f.field_container :event_date do %>
       <%= f.label :event_date, t("activerecord.attributes.celebrity_photos.event_date") %><br />

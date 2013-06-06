@@ -5,7 +5,7 @@
   <% @style_tips.each do |tip| %>
     <div class="post">
       <h5 class="post-title"><%= tip.title %></h5>
-      <%= link_to edit, edit_admin_blog_style_tip_path(tip) %>
+      <%= link_to 'Edit', edit_admin_blog_style_tip_path(tip) %>
     </div>
   <% end %>
 </div>

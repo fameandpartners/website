@@ -39,11 +39,16 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.integer  "celebrity_id"
     t.datetime "event_date"
     t.string   "event_name"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
     t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "photo"
   end
+
+  add_index "celebrity_photos", ["user_id"], :name => "index_celebrity_photos_on_user_id"
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
