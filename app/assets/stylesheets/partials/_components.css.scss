@@ -15,53 +15,15 @@
   top: 0;
   right: 2px;
   display: block;
-  height: 32px;
   font: 400 14px/30px $fontOne;
   color: #666;
   text-transform: uppercase;
-  border: 0;
-  border-radius: 4px;
-  background: #bffbef;
-  box-shadow: 0 1px 2px rgba(201, 146, 136, .66);
   a {
-    text-decoration: none;
     display: block;
     padding: 0 11px 0 33px;
     background: image-url('button-stars.png') 11px 0 no-repeat;
     &.active {
       background-position: 11px -32px;
-    }
-  }
-}
-
-.tabs {
-  width: 100%;
-  height: 54px;
-  border-bottom: 1px solid #f9b4a8;
-  li {
-    float: left;
-    height: 54px;
-    a {
-      margin: 4px 0 0;
-      height: 48px;
-      text-decoration: none;
-      display: block;
-      padding: 0 46px;
-      border: 2px solid #f9b4a8;
-      border-bottom: 0;
-      color: #fff;
-      background: #f9b4a8;
-      text-transform: uppercase;
-      font: 600 16px/52px $fontOne;
-      border-radius: 4px 4px 0 0;
-    }
-    &.active {
-      a {
-        margin: 0;
-        height: 53px;
-        background: #fff;
-        color: #f9b4a8;
-      }
     }
   }
 }

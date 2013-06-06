@@ -183,6 +183,18 @@
       }
     }
   }
+  &.columns-3 {
+    ul {
+      margin: 0 0 0 -22px;
+      li {
+        margin: 2px 0 20px 22px;
+        img {
+          max-width: 194px;
+          height: auto;
+        }
+      }
+    }
+  }
 }
 
 .post {

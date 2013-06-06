@@ -181,6 +181,8 @@ header {
     text-align: center;
   }
   .page-title {
+    margin: 0 0 16px;
+    position: relative;
     h1 {
       text-align: left;
       color: #414141;
@@ -194,7 +196,7 @@ header {
     .subtitle {
       text-align: left;
       width: auto;
-      margin-top: 0;
+      margin: 0;
     }
   }
 }
@@ -234,7 +236,8 @@ header {
 }
 
 .content-sidebar {
-  overflow: hidden;
+  width: 100%;
+  @include clearfix();
   .content-area {
     float: left;
     width: 682px;
