@@ -1,6 +1,7 @@
 Spree::UserRegistrationsController.class_eval do
   def new
     if params[:prom]
+      session[:sign_up_reason] = 'Custom dress'
       session[:spree_user_return_to] = main_app.new_custom_dress_path
     end
 
@@ -9,7 +10,15 @@ Spree::UserRegistrationsController.class_eval do
 
   def create
     @user = build_resource(params[:spree_user])
+
+    custom_fields = {
+      :Signupreason => session[:sign_up_reason],
+      :Signupdate => Date.today.to_s
+    }
+
     if resource.save
+      CampaignMonitor.delay.synchronize(resource.email, resource, custom_fields)
+
       set_flash_message(:notice, :signed_up)
       session[:spree_user_signup] = true
       associate_user
