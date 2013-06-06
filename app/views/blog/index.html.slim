@@ -1,0 +1,122 @@
+- unless spree_user_signed_in?
+  .promo-badge
+    .promo-badge-inner
+      .price
+        .dollar $
+        ' 50
+        .off off
+      .title June special
+      .desc
+        ' Design your dress in June
+        br
+        ' for a $50 voucher
+        br
+        ' toward the production of
+        br
+        ' your dress!
+      .more = link_to 'Find out more here', '#'
+    .close Close                
+
+  .promo-popup
+    .overlay
+    .promo-popup-block
+      .side-left
+        .price
+          .dollar $
+          ' 50
+          .off off
+        .title June Special
+      .side-right
+        .title $50 towards your custom designer dress
+        p Simply design your dress in June to receive a $50 voucher towards your dress production!
+        p To celebrate our launch, we are offering every girl that designs her dress in June, a $50 voucher towards her dress production.
+        p That's because we want to see as many as possible of you with fabulous, individual look for your special event.
+        .call-to-action
+          .signup-facebook = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
+          .signup-link or #{link_to 'Get started with your email address', spree.signup_path(:prom => true)}
+      .close Close  
+
+.promo
+  .wrap
+    .promo-text
+      .block-title Custom made formal dresses
+      .separate
+      .desc
+        | Co-design your very own formal dress with a fashion designer.
+        br
+        | It's free to start the process.
+      - unless spree_user_signed_in?
+        - if facebook_authentication_available?
+          .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
+          .or or
+        .signup-link = link_to 'Get started with your email address instead', spree.signup_path(:prom => true)
+      - else
+        = link_to 'Create your Custom Dress', new_custom_dress_path, :class => 'btn'
+
+= render 'shared/top_bar'
+
+.dream-dress
+  .wrap.no-overlow
+    .girl-in-dress
+      = image_tag 'image-girl-in-dress.jpg', width: 345, height: 525, alt: ''
+    .promo-block
+      .block-title Get your dream dress
+      .separate
+      .desc Our tailored process ensures we find out what will suit you best whilst being inspired by dresses you already love.
+      .circles
+        .circle
+          .image.unique
+          .text Unique, One-off design
+        .circle
+          .image.designer
+          .text Your own personal fashion designer
+        .circle
+          .image.fabric
+          .text Luxe fabrics at a price point you can afford
+      - unless spree_user_signed_in?
+        .create-now
+          - if facebook_authentication_available?
+            .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
+
+.promo-slider.slider-block.slider-bottom
+  #carousel-prev.arrow-left Prev
+  #carousel-next.arrow-right Next
+  .slides-overlay
+  ul#carousel.slides
+    li
+      .inner
+        .first-title.block-title
+          ' 4 easy steps to your
+          br
+          ' perfect dress
+    li
+      .inner
+        .block-title Tell us about you
+        .separate
+        .desc To design you something fabulous, we have to understand what will look best on you.
+    li
+      .inner
+        .block-title Tell us your design ideas
+        .separate
+        .desc Upload a collection of inspirational dresses and tell us which bits of each dress you want incorporated in your dress.
+    li
+      .inner
+        .block-title We'll create a look just for you
+        .separate
+        .desc style="width: 720px;"
+          | After a personal style consultation with you, our designers will create a look that is just for you! This is delivered as a fashion illustration and fabric swatches that you get to keep forever as a memory of how fun it was to design your own dress.
+    li
+      .inner
+        .block-title Your perfect dress is made
+        .separate
+        .desc Once you have approved the design, we go into production and custom make your dress, just for you.
+  #carousel-pagination.pagination
+    a.active 1
+    a 2
+    a 3
+    a 4
+    a 5
+  - unless spree_user_signed_in?
+    .call-to-action
+      - if facebook_authentication_available?
+        = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'

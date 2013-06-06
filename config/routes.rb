@@ -16,7 +16,8 @@ FameAndPartners::Application.routes.draw do
 
   # Blog routes
   namespace :blog do
-    [:celebrity_photos, :posts].each do |crud|
+    get '/' => 'blog#index', action: :index
+    [:celebrity_photos, :posts, :fashion_news, :prom_tips, :style_tips, :celebrities].each do |crud|
       resources crud, only: [:index, :show]
     end
   end
