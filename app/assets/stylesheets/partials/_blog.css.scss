@@ -97,7 +97,7 @@
     li {
       float: left;
       position: relative;
-      margin: 0 0 0 6px;
+      margin: 2px 3px 15px;
       border: 9px solid #fff;
       background: #fff;
       box-shadow: 0 0 2px rgba(0, 0, 0, .3);
@@ -180,12 +180,6 @@
            clear: both;
           }
         }
-      }
-      &:first-child {
-        margin: 0;
-      }
-      &:last-child {
-        float: right;
       }
     }
   }

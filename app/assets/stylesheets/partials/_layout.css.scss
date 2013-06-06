@@ -180,6 +180,23 @@ header {
   .flash {
     text-align: center;
   }
+  .page-title {
+    h1 {
+      text-align: left;
+      color: #414141;
+      font: 300 33px/1 $fontOne;
+      padding: 0;
+      margin-bottom: 0;
+      &:before {
+        display: none;
+      }
+    }
+    .subtitle {
+      text-align: left;
+      width: auto;
+      margin-top: 0;
+    }
+  }
 }
 
 .facebook-signup {
