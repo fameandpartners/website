@@ -147,7 +147,6 @@ $(function(){
     $(".promo-badge").fadeIn('fast');
   });
 
-});
   $(".blog-slider .slides").carouFredSel({
     circular: false,
     infinite: false,
@@ -158,5 +157,4 @@ $(function(){
     },
     pagination  : '.blog-slider .pagination'
   });
-
 });
