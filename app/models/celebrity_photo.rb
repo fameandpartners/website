@@ -6,6 +6,7 @@ class CelebrityPhoto < ActiveRecord::Base
   has_attached_file :photo, :styles => { :list => "375x269>", :thumb => "75x108>" }
 
   belongs_to :celebrity
+  belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
 
   validates_attachment_presence :photo
   before_save :create_or_append_celebrity
