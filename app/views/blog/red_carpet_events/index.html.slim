@@ -51,13 +51,12 @@
 
   .content-sidebar
     section.content-area
-      - @posts.each do |post|
+      - @red_carpet_events.each do |post|
         article.post
-          .tag.with-arrow = post.class.to_s.titlecase
           .image
             = image_tag post.photo_posts.first.photo_url, width: 742, height: 355, alt: ''
           h2
-            = link_to post.title, make_url([:blog, :posts], post.title)
+            = link_to post.name, make_url([:blog, :red_carpet_events], post.name)
           p = post.content
           .author
             = link_to '#' do

@@ -1,0 +1,26 @@
+= render 'shared/blog_top_bar'
+
+.wrap
+
+  = render 'shared/breadcrumbs'
+
+  h1.block-title.dark Track your fav Celeb
+  .subtitle Keep track of your favourite celebrities and their style.
+
+  ul.celebrities
+    - @celebreties.each do |celebrity|
+      li
+        = link_to make_url([:blog, :celebrities], celebrity.name) do
+          = image_tag celebrity.photo, width: 269, height: 375, alt: ''
+          .name = celebrity.name
+  .paginate
+    .prev = link_to 'Prev', '#', class: 'btn'
+    ul.pagination
+      li.active = link_to '1', '#'
+      li = link_to '2', '#'
+      li = link_to '2', '#'
+      li = link_to '2', '#'
+      li = link_to '2', '#'
+      li = link_to '2', '#'
+      li = link_to '2', '#'
+    .next = link_to 'Next', '#', class: 'btn'

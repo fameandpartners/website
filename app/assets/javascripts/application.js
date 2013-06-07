@@ -18,3 +18,4 @@
 //= require libs/jquery.minicolors
 //= require libs/jquery.chosen.min
 //= require partials/app
+//= require partials/google_map

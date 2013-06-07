@@ -1,0 +1,64 @@
+= render 'shared/blog_top_bar'
+
+.wrap
+
+  = render 'shared/breadcrumbs'
+
+  h1.block-title.dark = @red_carpet_event.name
+  .subtitle
+    ' 29th July 2013
+    div = link_to "by #{@red_carpet_event.user.first_name} #{@red_carpet_event.user.last_name}", '#'
+
+  .post
+    .main-image
+      #event_postion data-lat=@red_carpet_event.latitude data-lng=@red_carpet_event.longitude
+      #gmap-user
+    .post-content
+      p = @red_carpet_event.content
+      ul.post-images
+        - @red_carpet_event.photo_posts.each do |photo|
+          li
+            = link_to '#' do
+              = image_tag photo.photo_url, width: 75, height: 108, alt: ''
+
+      .block
+        .block-title F&P Featured Dresses
+        .block-content
+          ul.photos
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+
+      ul.tags
+        li = link_to 'Loren (2)', '#', class: 'tag'
+        li = link_to 'Loren IPSUM  (2)', '#', class: 'tag'
+        li = link_to 'AMET SIT  (3)', '#', class: 'tag'
+        li = link_to 'IPSUM AS (7)', '#', class: 'tag'
+        li = link_to 'IPSUM (2)', '#', class: 'tag'
+
+  .content-sidebar
+    .content-area
+      ' Disqus
+    .sidebar
+      ' Sidebar
