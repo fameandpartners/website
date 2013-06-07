@@ -1,0 +1,5 @@
+div
+  - @question.answers.each do |answer|
+    label
+      = form.radio_button :code, answer.code
+      = answer.sexiness

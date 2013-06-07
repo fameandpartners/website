@@ -11,6 +11,8 @@ Spree::User.class_eval do
   after_update :synchronize_with_campaign_monitor
 
   has_attached_file :avatar
+  has_one :style_report,
+          :foreign_key => :spree_user_id
 
   def full_name
     [first_name, last_name].reject(&:blank?).join(' ')

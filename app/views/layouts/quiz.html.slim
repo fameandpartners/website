@@ -1,0 +1,11 @@
+doctype html
+= conditional_html do
+  head
+    = render 'layouts/head'
+    = csrf_meta_tags
+    = render 'shared/ga'
+  body
+    #wrap
+      #content
+        = yield
+      #push

@@ -36,6 +36,17 @@ FameAndPartners::Application.routes.draw do
     resources :custom_dress_images, :only => [:create]
   end
 
+  resource :quiz, :only => [:show] do
+    resource :question, :only => [:show] do
+      resource :answer, :only => [:create]
+    end
+
+    member do
+      post :start
+      get  :report
+    end
+  end
+
   root :to => 'pages#home'
 
   mount Spree::Core::Engine, at: '/'

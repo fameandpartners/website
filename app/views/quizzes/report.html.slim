@@ -1,0 +1,13 @@
+.wrap
+  .promo-text style="margin: 200px auto; float: none;"
+    h1.block-title Your style profile
+    h2.desc
+      | Based on your answers, we obtained
+      br
+      | the following data:
+    ul style="color: black;"
+      - current_spree_user.style_report.attributes.slice(*StyleReport::STYLE_ATTRIBUTES).each do |name, value|
+        li
+          = name.titleize
+          ' :
+          = value
