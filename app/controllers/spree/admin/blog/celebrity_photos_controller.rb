@@ -29,4 +29,9 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::BaseControll
       render action: :edit
     end
   end
+
+  def destroy
+    celebrity_photo = CelebrityPhoto.find(params[:id])
+    celebrity_photo.destroy if celebrity_photo.user == spree_current_user && spree_current_user.admin?
+  end
 end

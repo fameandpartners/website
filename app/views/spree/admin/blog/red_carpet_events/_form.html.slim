@@ -1,0 +1,53 @@
+= form_for([:admin_blog, @red_carpet_events], :html => { :multipart => true }) do |f|
+  fieldset.no-border-top
+    #gmap
+    = f.field_container :name do
+      = f.label :name, t("activerecord.attributes.blog.name")
+      br
+      = f.text_field :name, :class => 'text', size: 50
+      br
+
+    = f.field_container :short_name do
+      = f.label :short_name, t("activerecord.attributes.blog.short_name")
+      br
+      = f.text_field :short_name, :class => 'text', size: 50
+      br
+
+    = f.field_container :content do
+      = f.label :content, t("activerecord.attributes.blog.content")
+      br
+      = f.text_area :content, cols: 50, rows: 12
+      br
+
+    = f.hidden_field :longitude
+    = f.hidden_field :latitude
+
+    = f.field_container :location do
+      = f.label :location, t("activerecord.attributes.blog.location")
+      br
+      = f.text_field :location, :class => 'text', size: 50
+      br
+
+    = f.field_container :event_date do
+      = f.label :event_date, t("activerecord.attributes.celebrity_photos.event_date")
+      br
+      = f.text_field :event_date, :class => 'datepicker hasDatepicker', size: 50
+      br
+
+    = f.field_container :photos do
+      = f.label :photos, t("activerecord.attributes.celebrity_photos.photo")
+      br
+      .photo-fields
+        = f.file_field :photos, multiple: true, :class => 'file-field  '
+        br
+      = link_to "Add photo field", "#", class: 'add-photo-field'
+
+    = f.field_container :tag_list do
+      = f.label :tag_list, t("activerecord.attributes.celebrity_photos.tags")
+      br
+      = f.text_field :tag_list, :class => 'text', size: 50
+      br
+    div class="form-buttons filter-actions actions" data-hook="buttons"
+      = f.button "Create", type:'submit', class: 'icon-ok button'
+      span.or or
+      = link_to "Cancel", admin_blog_celebrity_photos_path, class: "button icon_link with-tip icon-remove"

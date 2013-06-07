@@ -52,7 +52,7 @@ FameAndPartners::Application.routes.draw do
   Spree::Core::Engine.routes.append do
     namespace :admin do
       namespace :blog do
-        [:celebrity_photos, :posts, :fashion_news, :prom_tips, :style_tips].each do |crud|
+        [:celebrity_photos, :posts, :fashion_news, :prom_tips, :style_tips, :red_carpet_events].each do |crud|
           resources crud, except: [:show]
         end
         get '/' => 'blog#index', action: :index

@@ -28,4 +28,9 @@ class Spree::Admin::Blog::PromTipsController < Spree::Admin::BaseController
       render action: :edit
     end
   end
+
+  def destroy
+    post = FashionNews.find(params[:id])
+    post.destroy if post.user == spree_current_user && spree_current_user.admin?
+  end
 end

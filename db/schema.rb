@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
-
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
   create_table "celebrities", :force => true do |t|
@@ -106,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
     t.string   "text"
@@ -124,6 +124,20 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "red_carpet_events", :force => true do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "name"
+    t.string   "short_name"
+    t.text     "content"
+    t.date     "event_date"
+    t.integer  "user_id"
+    t.string   "location"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+  add_index "red_carpet_events", ["user_id"], :name => "index_red_carpet_events_on_user_id"
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
