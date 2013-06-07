@@ -7,6 +7,9 @@ class CelebrityPhoto < ActiveRecord::Base
 
   belongs_to :celebrity
   belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
+  belongs_to :post_state
+
+  alias :title :celebrity_name
 
   validates_attachment_presence :photo
   before_save :create_or_append_celebrity

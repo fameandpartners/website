@@ -1,1 +1,21 @@
 <%= render partial: 'spree/admin/shared/blog_sub_menu' %>
+<ul class="blog-menu">
+  <li id="celebrity_photos" class="selected">Celebrity Photos</li>
+  <li id="menu_posts">Posts</li>
+  <li id="fashion_news">Fasion news</li>
+  <li id="prom_tips">Prom tips</li>
+  <li id="style_tips">Style tips</li>
+  <li id="red_carpet_events">Red carpet events</li>
+</ul>
+
+<%- @posts.each do |posts_list| %>
+  <div id="blog_list_<%= posts_list[:type] %>" class="blog-posts-list">
+    <ul>
+      <%- posts_list[:content].each do |post| %>
+        <li><%= post.title %> <%= link_to "Edit", "/admin/blog/#{posts_list[:type]}/#{post.id}/edit" %></li>
+      <%- end %>
+    </ul>
+  </div>
+<%- end %>
+
+

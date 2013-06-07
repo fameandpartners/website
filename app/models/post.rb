@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   mount_uploader :photo, PhotoUploader
   has_many :photo_posts, as: :photo_uploaddable
   belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
+  belongs_to :post_state
 
   validates :title, :content, presence: true
 

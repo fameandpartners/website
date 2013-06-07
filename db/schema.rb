@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130605122344) do
 
   create_table "answers", :force => true do |t|
@@ -27,24 +28,29 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.datetime "updated_at",     :null => false
   end
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+=======
+ActiveRecord::Schema.define(:version => 20130607134418) do
+>>>>>>> Admin blog page, posts statuses
 
   create_table "celebrities", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
   end
 
   create_table "celebrity_photos", :force => true do |t|
     t.integer  "celebrity_id"
     t.datetime "event_date"
     t.string   "event_name"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "user_id"
+    t.integer  "post_state_id",      :default => 1
   end
 
   add_index "celebrity_photos", ["user_id"], :name => "index_celebrity_photos_on_user_id"
@@ -71,12 +77,19 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.date     "required_at"
   end
 
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
   create_table "fashion_news", :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
   end
 
   create_table "photo_posts", :force => true do |t|
@@ -89,20 +102,26 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
 
   add_index "photo_posts", ["photo_uploaddable_id", "photo_uploaddable_type", "photo_id"], :name => "index_photo_uploaddable", :unique => true
 
+  create_table "post_states", :force => true do |t|
+    t.string "title"
+  end
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
   end
 
   create_table "prom_tips", :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
   end
 
 <<<<<<< HEAD
@@ -134,8 +153,9 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.date     "event_date"
     t.integer  "user_id"
     t.string   "location"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
   end
   add_index "red_carpet_events", ["user_id"], :name => "index_red_carpet_events_on_user_id"
 
@@ -773,8 +793,9 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
   end
 
   create_table "taggings", :force => true do |t|

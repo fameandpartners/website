@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/droidlabs/data-migrate.git
+  revision: f3de5505d38fd6bb18cef26c97ca096ea3c45071
+  specs:
+    data_migrate (1.1.0)
+      rails (>= 3.0.0)
+
+GIT
   remote: git://github.com/droidlabs/letter_opener.git
   revision: 7e5793ccff0771861e46704821b86d6628fc3f35
   specs:
@@ -138,16 +145,12 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
-<<<<<<< HEAD
-    bourbon (3.1.8)
-=======
     better_errors (0.7.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
-    bourbon (3.1.6)
->>>>>>> Basic blog functionality
+    bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
     builder (3.0.4)
@@ -160,19 +163,11 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-rbenv (0.0.10)
       capistrano
-<<<<<<< HEAD
-<<<<<<< HEAD
     celluloid (0.14.1)
       timers (>= 1.0.0)
-=======
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
->>>>>>> Basic blog functionality
-=======
-    celluloid (0.14.1)
-      timers (>= 1.0.0)
->>>>>>> Move uploads to paperclip, fix bugs
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -439,6 +434,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   configatron
   createsend (~> 2.5.0)
+  data_migrate!
   debugger
   execjs (= 1.4.0)
   jquery-fileupload-rails (= 0.3.4)

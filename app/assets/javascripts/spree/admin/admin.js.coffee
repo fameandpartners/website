@@ -21,4 +21,13 @@ $ ->
       marker.setMap(null) if marker
       marker = new google.maps.Marker position: event.latLng, map: map
 
+
+  $('.blog-menu li').on 'click', ->
+    $('.selected').removeClass 'selected'
+    $(@).addClass 'selected'
+    $('.blog-posts-list').hide()
+    $("#blog_list_#{@.id}").show()
+
   google.maps.event.addDomListener(window, 'load', bindGoogleMapEvents);
+  $('#blog_list_celebrity_photos').show()
+
