@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  before_filter :authenticate_spree_user!
+
   layout nil
 
   def create

@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_filter :authenticate_spree_user!
+
   layout 'quiz'
 
   def show
