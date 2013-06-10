@@ -31,5 +31,17 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Didot';
+    src: url('/fonts/didot-italic.eot');
+    src: url('/fonts/didot-italic.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/didot-italic.woff') format('woff'),
+         url('/fonts/didot-italic.ttf') format('truetype'),
+         url('/fonts/didot-italic.svg#Didot') format('svg');
+    font-weight: 400;
+    font-style: italic;
+}
+
 $fontOne: 'Lato', sans-serif;
 $fontTwo: 'GranjonLTStd', sans-serif;
+$fontThree: 'Didot', sans-serif;

@@ -1,0 +1,23 @@
+.quiz-box
+  .quiz-box-inner
+    / .signup-box
+      h1 Find out your style profile
+      .subtitle Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper.
+      .signup-buttons
+        = link_to 'Signup with facebook', fb_auth_path(:prom => true), class: 'facebook-signup'
+        .or or
+        = link_to 'Sign up using your email address', spree.signup_path(:prom => true), class: 'regular-signup'
+      .signin-link
+        ' Already a member? #{link_to 'Sign in here', spree_login_path}
+    .steps-box
+      .questions-count
+        .inline.label Question
+        .inline.current 2
+        .inline.label of
+        .inline.total 12
+      h1 Which celebrity’s outﬁt below would you most want to wear?
+      .progress-next.clearfix
+        .progress-bar
+          .filler style="width: 20%;"
+            .tooltip 20%
+        .next = link_to 'Next question', '#'

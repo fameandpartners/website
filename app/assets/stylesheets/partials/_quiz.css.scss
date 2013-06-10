@@ -1,0 +1,145 @@
+#content .quiz-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1100px;
+  height: 644px;
+  margin: -332px 0 0 -550px;
+  background: #fff;
+  box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+  .quiz-box-inner {
+    height: 616px;
+    margin: 4px;
+    border: 10px solid #e8e8e8;
+    position: relative;
+  }
+  .signup-box {
+    h1 {
+      margin-top: 180px;
+      text-transform: uppercase;
+      color: #454545;
+      text-align: center;
+      letter-spacing: 5px;
+      font: 300 38px/1 $fontOne;
+      &:before {
+        background: #454545;
+      }
+    }
+    .subtitle {
+      margin: 35px auto;
+      font-size: 28px;
+      width: 500px;
+    }
+    .signup-buttons {
+      text-align: center;
+      font: 300 14px/33px $fontOne;
+      .facebook-signup {
+        vertical-align: top;
+        display: inline-block;
+      }
+      .or {
+        margin: 0 16px;
+        vertical-align: top;
+        display: inline-block;
+        text-transform: uppercase;
+        font-size: 18px;
+      }
+      .regular-signup {
+        padding: 0 13px;
+        height: 33px;
+        vertical-align: top;
+        display: inline-block;
+        background: #454545;
+        color: #fff;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 400;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(255, 255, 255, .7) inset;
+      }
+    }
+    .signin-link {
+      position: absolute;
+      bottom: 56px;
+      right: 56px;
+      font-size: 18px;
+      font-style: italic;
+      a {
+        font-weight: 700;
+      }
+    }
+  }
+  .steps-box {
+    padding: 16px;
+    .questions-count {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font: 400 18px/1 $fontTwo;
+      color: #999;
+      .inline {
+        display: inline-block;
+      }
+      .current {
+        background: #999;
+        color: #fff;
+        padding: 5px 5px 0;
+      }
+    }
+    h1 {
+      color: #454545;
+      font: 400 italic 28px/1 $fontThree;
+      &:before {
+        background: #bcbcbc;
+      }
+    }
+    .progress-next {
+      width: 100%;
+      padding: 38px 0 0;
+      .progress-bar {
+        float: left;
+        background: #e8e8e8;
+        width: 860px;
+        height: 30px;
+        .filler {
+          position: relative;
+          height: 30px;
+          background: image-url('bg-filler.png') 0 0 repeat-x;
+        }
+        .tooltip {
+          position: absolute;
+          top: -38px;
+          right: -18px;
+          width: 36px;
+          height: 27px;
+          font: 400 italic 12px/27px $fontThree;
+          color: #e8e8e8;
+          background: #454545;
+          text-align: center;
+          &:before {
+            border-top: 8px solid #454545;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 10px;
+          }
+        }
+      }
+      .next {
+        float: right;
+        a {
+          font: 400 14px/30px $fontOne;
+          display: block;
+          padding: 0 20px;
+          height: 30px;
+          text-decoration: none;
+          color: #fff;
+          background: #333;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
