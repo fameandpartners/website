@@ -25,10 +25,10 @@ class Spree::Admin::Blog::FashionNewsController < Spree::Admin::BaseController
 
   def update
     fashion_news = FashionNews.find params[:id]
-    if fashion_news.update_attributes!(params[:fashion_news])
-      redirect_to :index
+    if fashion_news.update_attributes(params[:fashion_news])
+      redirect_to action: :index
     else
-      render action: :edit
+      render :edit
     end
   end
 

@@ -22,10 +22,10 @@ class Spree::Admin::Blog::StyleTipsController < Spree::Admin::BaseController
 
   def update
     style_tip = StyleTip.find params[:id]
-    if style_tip.update_attributes!(params[:style_tip])
-      redirect_to :index
+    if style_tip.update_attributes(params[:style_tip])
+      redirect_to action: :index
     else
-      render action: :edit
+      render :edit
     end
   end
 

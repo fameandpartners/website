@@ -22,10 +22,10 @@ class Spree::Admin::Blog::PromTipsController < Spree::Admin::BaseController
 
   def update
     prom_tip = PromTip.find params[:id]
-    if prom_tip.update_attributes!(params[:prom_tip])
-      redirect_to :index
+    if prom_tip.update_attributes(params[:prom_tip])
+      redirect_to action: :index
     else
-      render action: :edit
+      render :edit
     end
   end
 

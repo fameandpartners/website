@@ -23,10 +23,10 @@ class Spree::Admin::Blog::RedCarpetEventsController < Spree::Admin::BaseControll
 
   def update
     red_carpet_events = RedCarpetEvent.find params[:id]
-    if red_carpet_events.update_attributes!(params[:red_carpet_event])
+    if red_carpet_events.update_attributes(params[:red_carpet_event])
       redirect_to action: :index
     else
-      render action: :edit
+      render :edit
     end
   end
 

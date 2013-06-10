@@ -1,2 +1,0 @@
-module Blog::RedCarpetEventsHelper
-end

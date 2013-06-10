@@ -23,10 +23,10 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
 
   def update
     post = Post.find params[:id]
-    if post.update_attributes!(params[:post])
+    if post.update_attributes(params[:post])
       redirect_to action: :index
     else
-      render action: :edit
+      render :edit
     end
   end
 

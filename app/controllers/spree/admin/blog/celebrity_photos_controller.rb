@@ -23,10 +23,10 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::BaseControll
 
   def update
     celebrity_photo = CelebrityPhoto.find params[:id]
-    if celebrity_photo.update_attributes!(params[:celebrity_photo])
-      redirect_to :index
+    if celebrity_photo.update_attributes(params[:celebrity_photo])
+      redirect_to action: :index
     else
-      render action: :edit
+      render :edit
     end
   end
 

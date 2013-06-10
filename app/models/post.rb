@@ -1,6 +1,8 @@
 class Post < ActiveRecord::Base
-  attr_accessible :title, :content, :tag_list, :photo
-  attr_accessor :photo
+  attr_accessible :title, :content, :tag_list, :photos
+
+  has_and_belongs_to_many :photos
+  accepts_nested_attributes_for :photos
 
   acts_as_taggable
   mount_uploader :photo, PhotoUploader
@@ -17,7 +19,8 @@ class Post < ActiveRecord::Base
   after_save :upload_photo
 
   private
-    def upload_photo
-      photo_post = self.photo_posts.create!(photo_id: CelebrityPhoto.create!(photo: photo).id)
-    end
+
+  def upload_photo
+    photo_post = self.photo_posts.create!(photo_id: CelebrityPhoto.create!(photo: photo).id)
+  end
 end
