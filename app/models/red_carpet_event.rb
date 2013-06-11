@@ -1,5 +1,7 @@
 class RedCarpetEvent < ActiveRecord::Base
-  attr_accessible :name, :short_name, :latitude, :longitude, :content, :tag_list, :photos, :event_date, :location, :celebrity_photos
+  attr_accessible :name, :short_name, :latitude, :longitude, :content, :tag_list,
+                  :event_date, :location, :celebrity_photos, :celebrity_photos_attributes,
+                  :celebrity_photos_name
 
   acts_as_taggable
 
@@ -23,13 +25,4 @@ class RedCarpetEvent < ActiveRecord::Base
   def unpublish!
     self.post_state = PostState.find_by_title "Pending"
   end
-
-  after_save :upload_photos
-
-  private
-    def upload_photos
-      self.photos.each do |photo|
-        self.celebrity_photos << CelebrityPhoto.create!(photo: photo)
-      end
-    end
 end

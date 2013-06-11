@@ -16,7 +16,7 @@
     = f.field_container :content do
       = f.label :content, t("activerecord.attributes.blog.content")
       br
-      = f.cktext_area :content, cols: 50, rows: 12, ckeditor: { toolbar: "mini" }
+      = f.text_area :content, cols: 50, rows: 12
       br
 
     = f.hidden_field :longitude
