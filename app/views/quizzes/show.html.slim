@@ -1,8 +1,9 @@
-.wrap
-  .promo-text style="margin: 200px auto; float: none;"
-    h1.block-title Find out your style profile
-    h2.desc
-      | Lorem ipsum dolor sit amet, consecteur
-      br
-      | adipiscing elit. Sed allamcorper.
-    = link_to 'Start', start_quiz_path, :method => :post, :class => 'btn'
+.signup-box
+  h1 Find out your style profile
+  .subtitle Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper.
+  .signup-buttons
+    = link_to 'Signup with facebook', fb_auth_path(:prom => true), class: 'facebook-signup'
+    .or or
+    = link_to 'Sign up using your email address', spree.signup_path(:prom => true), class: 'regular-signup'
+  .signin-link
+    ' Already a member? #{link_to 'Sign in here', spree_login_path}

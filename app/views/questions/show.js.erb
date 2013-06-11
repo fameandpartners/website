@@ -1,0 +1,20 @@
+$quiz_box = $('.quiz-box');
+$progress_bar = $quiz_box.find('.progress-bar');
+$question = $quiz_box.find('#question-<%= @question.id %>');
+
+$quiz_box.find('.film').animate({ left: '-' + $question.position().left });
+$quiz_box.find('.next a').unbind('click');
+$quiz_box.find('.next a').text('Next question').click(function(event){
+  var $link = $(event.target);
+  $link.unbind('click');
+  $link.text('Processing...');
+  event.preventDefault();
+  $question.find('form').submit();
+});
+
+$progress_bar.find('.filler').animate({ width: '<%= @progress %>%' });
+$progress_bar.find('.tooltip').text('<%= @progress %>%');
+
+$('.questions-count .inline.current').text('<%= @position %>');
+
+

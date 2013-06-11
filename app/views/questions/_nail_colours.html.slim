@@ -1,0 +1,33 @@
+.subtitle Choose as many as you like:
+ul.nails
+  - question.answers.each do |answer|
+    li
+      label
+        .image style="background: url('#{image_path 'sample/nails-yellow.jpg'}') center center no-repeat;"
+        .name Neon yellow
+        = check_box_tag 'answer[codes][]', answer.code
+
+  li
+    .image style="background: url('#{image_path 'sample/nails-yellow.jpg'}') center center no-repeat;"
+    .name Neon yellow
+  li.active
+    .image style="background: url('#{image_path 'sample/nails-yellow.jpg'}') center center no-repeat;"
+    .name Neon yellow
+  li
+    .image style="background: url('#{image_path 'sample/nails-yellow.jpg'}') center center no-repeat;"
+    .name Neon yellow
+  li
+    .image style="background: url('#{image_path 'sample/nails-yellow.jpg'}') center center no-repeat;"
+    .name Neon yellow
+  li
+    .image style="background: url('#{image_path 'sample/nails-yellow.jpg'}') center center no-repeat;"
+    .name Neon yellow
+  li
+    .image style="background: url('#{image_path 'sample/nails-yellow.jpg'}') center center no-repeat;"
+    .name Neon yellow
+  li
+    .image style="background: url('#{image_path 'sample/nails-yellow.jpg'}') center center no-repeat;"
+    .name Neon yellow
+  li
+    .image style="background: url('#{image_path 'sample/nails-yellow.jpg'}') center center no-repeat;"
+    .name Neon yellow

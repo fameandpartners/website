@@ -1,5 +1,0 @@
-div
-  - @question.answers.each do |answer|
-    label
-      = check_box_tag 'answer[codes][]', answer.code
-      = answer.code.humanize.upcase

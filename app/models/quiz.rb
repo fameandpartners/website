@@ -4,4 +4,7 @@ class Quiz < ActiveRecord::Base
   has_many :questions,
            :dependent => :destroy,
            :order => 'position ASC'
+
+  validates :name,
+            :presence => true
 end

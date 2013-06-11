@@ -147,4 +147,45 @@ $(function(){
     $(".promo-badge").fadeIn('fast');
   });
 
+  $('a.show-style-quiz').bind('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+
+    $('.quiz-box').bind('click', function(event){
+      event.stopPropagation();
+    });
+
+    showStyleQuiz();
+    $(document).keyup(function(event){
+      if (event.which == 27) {
+        $(document).unbind('keyup');
+        $('#wrap').unbind('click');
+        hideStyleQuiz();
+      }
+    });
+    $('#wrap').bind('click', function(event){
+      $('#wrap').unbind('click');
+      $(document).unbind('keyup');
+      hideStyleQuiz();
+    })
+  });
+
+  window.showStyleQuiz = function(){
+    $('.quiz-box').show();
+    $('body').css('overflow', 'hidden');
+    $.getScript('/quiz')
+  }
+
+  window.hideStyleQuiz = function(){
+    $('.quiz-box').hide();
+    $('body').css('overflow', 'auto');
+  }
+
+  $('.quiz-box .film-frame').find(':checkbox, :radio').bind('change', function(event){
+    console.log('CHANGE');
+    var $form = $(event.target).parents('form');
+
+    $form.find('li:not(:has(:input:checked))').removeClass('active');
+    $form.find('li:has(:input:checked)').addClass('active');
+  });
 });

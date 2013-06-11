@@ -5,7 +5,7 @@
       li = link_to 'About us', about_path
       li = link_to 'Our team', team_path
       li.hide = link_to 'Blog', '#'
-      li.hide = link_to 'Style quiz', '#'
+      li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
   nav.follow.hide
     ul
       li follow us

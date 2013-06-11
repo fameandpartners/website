@@ -10,11 +10,11 @@ class AnswersController < ApplicationController
     answer_codes = nil
 
     if question.multiple?
-      if params[:answer][:codes].is_a?(Array)
+      if params[:answer].try('[]', :codes).is_a?(Array)
         answer_codes = params[:answer][:codes]
       end
     else
-      if params[:answer][:code].is_a?(String)
+      if params[:answer].try('[]', :code).is_a?(String)
         answer_codes = Array.wrap(params[:answer][:code])
       end
     end
@@ -43,15 +43,17 @@ class AnswersController < ApplicationController
 
   def finish_quiz(quiz)
     if session['quiz']['answers'].size.eql?(quiz.questions.size)
+      style_report = current_spree_user.build_style_report
+
       if session['quiz']['answers'].values.all?(&:present?)
-        answer_ids = session['quiz']['answers'].values.flatten
-        answers = Answer.where(:id => answer_ids)
+        session['quiz']['answers'].each do |question_id, answer_ids|
+          answers = Answer.where(:id => answer_ids)
 
-        style_report = current_spree_user.build_style_report
+          StyleReport::STYLE_ATTRIBUTES.each do |attribute|
+            points = answers.map{|answer| answer.send(attribute) }.reduce(:+) / answers.count
 
-        StyleReport::STYLE_ATTRIBUTES.each do |attribute|
-          summary = answers.sum(attribute)
-          style_report.assign_attributes(attribute => summary)
+            style_report.send("#{attribute}=", style_report.send(attribute) + points)
+          end
         end
 
         style_report.save
