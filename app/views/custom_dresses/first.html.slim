@@ -10,9 +10,6 @@
         - @custom_dress.errors.full_messages.each do |message|
           li= message
     .input.string
-      = f.label :phone_number, 'We need your phone number first because you will be receiving a call from one of our designers to collaborate on your unique design.'
-      = f.text_field :phone_number, :placeholder => 'Enter your contact phone number'
-    .input.string
       = f.label :required_at, 'Formal/Event Date'
       = f.text_field :required_at
     .input.string
@@ -38,7 +35,10 @@
       .color-choser
         = f.hidden_field :color
         .colorbox#custom-dress-color-pattern *{:style => @custom_dress.color.present? && "background-color: #{@custom_dress.color}"}
-
+    .input.string
+      = f.label :phone_number, 'We will need to call you to verify the details of your unique dress and to discuss your FREE QUOTE.'
+      .hint Please leave your phone number below.
+      = f.text_field :phone_number, :placeholder => 'Enter your contact phone number'
 
     .separate
 
