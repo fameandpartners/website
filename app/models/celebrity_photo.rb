@@ -9,6 +9,8 @@ class CelebrityPhoto < ActiveRecord::Base
   belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
   belongs_to :post_state
 
+  has_many :photo_posts
+
   alias :title :celebrity_name
 
   validates_attachment_presence :photo

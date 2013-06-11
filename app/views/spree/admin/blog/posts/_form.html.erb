@@ -1,4 +1,4 @@
-<%= form_for([:admin_blog, @post], :html => { :multipart => true }) do |f| %>
+<%= form_for([:admin_blog, @post], url: admin_post_path(params[:category]), html: { multipart: true }) do |f| %>
   <fieldset class="no-border-top">
     <%= f.field_container :title do %>
       <%= f.label :title, t("activerecord.attributes.blog.title") %><br />
@@ -21,6 +21,8 @@
       <%= f.button "Create", type:'submit', class: 'icon-ok button' %>
       <span class="or">or</span>
       <%= link_to "Cancel", admin_blog_celebrity_photos_path, class: "button icon_link with-tip icon-remove" %>
+      <%= link_to "Publish", "/admin/blog/posts/publish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title != "Published" %>
+      <%= link_to "Unpublish", "/admin/blog/posts/publish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title == "Published" %>
     </div>
   </fieldset>
 <% end %>

@@ -3,7 +3,8 @@ class RedCarpetEvent < ActiveRecord::Base
   attr_accessor :photos
 
   acts_as_taggable
-  has_many :photo_posts, as: :photo_uploaddable
+  has_many :celebrity_photos, as: :photo_uploaddable
+
   belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
   belongs_to :post_state
 
@@ -13,13 +14,20 @@ class RedCarpetEvent < ActiveRecord::Base
     name
   end
 
-  after_save :upload_photo
+  def publish!
+    self.post_state = PostState.find_by_title "Approved"
+  end
+
+  def unpublish!
+    self.post_state = PostState.find_by_title "Pending"
+  end
+
+  after_save :upload_photos
 
   private
-    def upload_photo
-      photo = [photo].flatten
-      photos.each do |photo|
-        self.photo_posts.create!(photo_id: CelebrityPhoto.create!(photo: photo).id)
+    def upload_photos
+      self.photos.each do |photo|
+        self.celebrity_photos << CelebrityPhoto.create!(photo: photo)
       end
     end
 end

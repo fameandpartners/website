@@ -13,6 +13,7 @@ gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
 gem 'acts-as-taggable-on'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'ckeditor'
 
 # assets
 gem 'jquery-rails'
@@ -37,6 +38,8 @@ group :development do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'rack-mini-profiler'
 end
 
 group :development, :test do

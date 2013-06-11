@@ -17,8 +17,11 @@ FameAndPartners::Application.routes.draw do
   # Blog routes
   namespace :blog do
     get '/' => 'blog#index'
-    [:celebrity_photos, :posts, :fashion_news, :prom_tips, :style_tips, :celebrities, :red_carpet_events].each do |crud|
+    [:celebrity_photos, :celebrities, :red_carpet_events].each do |crud|
       resources crud, only: [:index, :show]
+    end
+    [:posts, :fashion_news, :prom_tips, :style_tips].each do |crud|
+      resources crud, controller: 'posts', category: crud
     end
   end
 
@@ -53,13 +56,18 @@ FameAndPartners::Application.routes.draw do
     namespace :admin do
       get '/blog' => 'blog#index'
       namespace :blog do
-        [:celebrity_photos, :posts, :fashion_news, :prom_tips, :style_tips, :red_carpet_events].each do |crud|
+        match '/posts/publish/:id' => 'posts#publish', :via => :get, as: 'publish_admin_blog_post'
+        [:celebrity_photos, :red_carpet_events].each do |crud|
           resources crud, except: [:show]
+        end
+        [:posts, :fashion_news, :prom_tips, :style_tips].each do |crud|
+          resources crud, controller: 'posts', category: crud, except: [:show]
         end
       end
     end
   end
 
-  match '/admin/blog/fashion_news' => 'fashion_news#index', :via => :get, as: 'admin_blog_index_news'
+  match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
+  match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
 end

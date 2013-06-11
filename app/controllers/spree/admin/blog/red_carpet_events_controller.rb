@@ -34,4 +34,10 @@ class Spree::Admin::Blog::RedCarpetEventsController < Spree::Admin::BaseControll
     red_carpet_events = RedCarpetEvent.find(params[:id])
     red_carpet_events.destroy if red_carpet_events.user == spree_current_user && spree_current_user.admin?
   end
+
+  def publish
+    post = Post.find params[:id]
+    post.publish! if spree_current_user.admin?
+    redirect_to admin_blog_red_carpet_events_path
+  end
 end

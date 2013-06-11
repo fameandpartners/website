@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130605122344) do
 
   create_table "answers", :force => true do |t|
@@ -28,9 +27,14 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.datetime "updated_at",     :null => false
   end
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
-=======
-ActiveRecord::Schema.define(:version => 20130607134418) do
->>>>>>> Admin blog page, posts statuses
+
+  create_table "categories", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "categories", ["title"], :name => "index_categories_on_title"
 
   create_table "celebrities", :force => true do |t|
     t.string   "name"
@@ -83,21 +87,13 @@ ActiveRecord::Schema.define(:version => 20130607134418) do
 
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
 
-  create_table "fashion_news", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.integer  "post_state_id", :default => 1
-  end
-
   create_table "photo_posts", :force => true do |t|
     t.integer  "photo_uploaddable_id"
     t.integer  "photo_id"
     t.string   "photo_uploaddable_type"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.integer  "category_id"
   end
 
   add_index "photo_posts", ["photo_uploaddable_id", "photo_uploaddable_type", "photo_id"], :name => "index_photo_uploaddable", :unique => true
@@ -113,18 +109,9 @@ ActiveRecord::Schema.define(:version => 20130607134418) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.integer  "post_state_id", :default => 1
+    t.integer  "category_id"
   end
 
-  create_table "prom_tips", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.integer  "post_state_id", :default => 1
-  end
-
-<<<<<<< HEAD
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
     t.string   "text"

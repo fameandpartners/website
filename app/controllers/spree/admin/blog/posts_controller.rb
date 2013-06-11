@@ -1,6 +1,9 @@
 class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
+  include PostHelper
+
   def index
-    @posts = Post.all
+    category = Category.find_by_title(params[:category].to_s.titleize)
+    @posts = category ? category.posts : []
   end
 
   def new
@@ -9,9 +12,10 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
 
   def create
     @post = Post.new params[:post]
+    @post.category = Category.find_by_title(params[:category].to_s.titleize)
     @post.user = spree_current_user
     if @post.save
-      redirect_to action: :index
+      redirect_to admin_post_path(params[:category])
     else
       render :new
     end
@@ -24,7 +28,7 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
   def update
     post = Post.find params[:id]
     if post.update_attributes(params[:post])
-      redirect_to action: :index
+      redirect_to admin_post_path(params[:category])
     else
       render :edit
     end
@@ -33,5 +37,11 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
   def destroy
     post = Post.find(params[:id])
     post.destroy if post.user == spree_current_user && spree_current_user.admin?
+  end
+
+  def publish
+    post = Post.find params[:id]
+    post.publish! if spree_current_user.admin?
+    redirect_to admin_blog_posts_path
   end
 end

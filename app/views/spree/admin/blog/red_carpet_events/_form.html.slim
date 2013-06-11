@@ -51,3 +51,6 @@
       = f.button "Create", type:'submit', class: 'icon-ok button'
       span.or or
       = link_to "Cancel", admin_blog_celebrity_photos_path, class: "button icon_link with-tip icon-remove"
+      = link_to "Publish", "/admin/blog/posts/publish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title != "Published"
+      = link_to "Unpublish", "/admin/blog/posts/publish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title == "Published"
+
