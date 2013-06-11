@@ -32,7 +32,7 @@
         p To celebrate our launch, we are offering every girl that designs her dress in June, a $50 voucher towards her dress production.
         p That's because we want to see as many as possible of you with fabulous, individual look for your special event.
         .call-to-action
-          .signup-facebook = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
+          .signup-facebook = link_to 'Free Quote with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
           .signup-link or #{link_to 'Get started with your email address', spree.signup_path(:prom => true)}
       .close Close  
 
@@ -43,10 +43,9 @@
       .separate
       .desc
         | Co-design your very own formal dress with a fashion designer.
-        br
-        | It's free to start the process.
+        .calltoaction Get a free quote now!
       - unless spree_user_signed_in?
-        - if facebook_authentication_available?
+        - unless facebook_authentication_available?
           .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
           .or or
         .signup-link = link_to 'Get started with your email address instead', spree.signup_path(:prom => true)

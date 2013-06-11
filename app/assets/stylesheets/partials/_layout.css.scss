@@ -145,7 +145,7 @@ header {
 
 .facebook-signup {
   background: image-url('button-facebook-connect.png') 0 0 no-repeat;
-  width: 230px;
+  width: 231px;
   height: 33px;
   display: block;
   text-indent: -999px;
@@ -378,11 +378,16 @@ footer {
       border-left: 1px solid #eee;
       margin: 0 0 0 49px;
       padding: 0 0 0 49px;
+      
       &:first-child {
         border: 0;
         margin: 0;
         padding: 0;
       }
+    }
+    
+    .links{
+      margin: 0 0 0 20px !important;
     }
     .title {
       color: #F9B4A8;
