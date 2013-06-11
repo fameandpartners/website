@@ -33,13 +33,10 @@
       br
       = f.text_field :event_date, :class => 'datepicker hasDatepicker', size: 50
       br
-
-    = f.field_container :photos do
-      = f.label :photos, t("activerecord.attributes.celebrity_photos.photo")
-      br
+    = f.field_container :celebrity_photos do
+      = f.label :celebrity_photos, t("activerecord.attributes.celebrity_photos.photo")
       .photo-fields
-        = f.file_field :celebrity_photo, name: "post[celebrity_photos_attributes][][photo]", :class => 'file-field  '
-        br
+        = f.file_field :celebrity_photo, name: "red_carpet_event[celebrity_photos_attributes][][photo]", :class => 'file-field  '
       = link_to "Add photo field", "#", class: 'add-photo-field'
 
     = f.field_container :tag_list do
