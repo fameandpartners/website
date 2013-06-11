@@ -10,14 +10,14 @@ header {
   }
   .logo {
     float: left;
-    margin: 19px 0 0 362px;
+    margin: 19px 0 0 0;
     font: 300 20px/1.1 $fontOne;
     text-transform: uppercase;
     letter-spacing: 10px;
     a {
       display: block;
-      width: 310px;
-      height: 25px;
+      width: 290px;
+      height: 23px;
       text-align: center;
       margin: 0 auto;
       background: image-url('logo.png') center center no-repeat;
@@ -32,6 +32,40 @@ header {
       text-indent: -999px;
       vertical-align: top;
       margin: 1px 9px 0 -12px;
+    }
+  }
+  .icons {
+    float: left;
+    margin: 18px 0 0 32px;
+    li {
+      float: left;
+      margin: 0 0 0 20px;
+      font: 300 10px/1.2 $fontOne;
+      text-transform: uppercase;
+      color: #fff;
+      .icon {
+        float: left;
+        width: 25px;
+        height: 20px;
+        margin: 3px 0 0;
+        background: image-url('icons-shipping.png') 0 0 no-repeat;
+        &.shipping {
+          background-position: 0 -20px;
+          margin-right: 5px;
+        }
+        &.returns {
+          background-position: 0 -40px;
+        }
+        &.guarantee {
+          background-position: 0 -60px;
+        }
+        &.turnaround {
+          background-position: 0 -80px;
+        }
+      }
+      span {
+        float: right;
+      }
     }
   }
   nav {
@@ -66,7 +100,7 @@ header {
     }
     .btn {
       display: block;
-      width: 132px;
+      width: 124px;
       height: 32px;
       line-height: 32px;
       border-radius: 4px;
@@ -430,7 +464,9 @@ footer {
   .email-label {
     display: inline-block;
   }
-  .phone{ display: inline-block;}
+  .phone {
+    display: inline-block;
+  }
   .social {
     ul {
       overflow: hidden;

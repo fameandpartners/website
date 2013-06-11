@@ -2,6 +2,37 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .wrap
     .logo
       = link_to 'Fame&Partners', root_path
+    ul.icons
+      li
+        .icon.quote
+        span
+          ' Free
+          br
+          ' Quote
+      li
+        .icon.shipping
+        span
+          ' Free
+          br
+          ' Shipping
+      li
+        .icon.returns
+        span
+          ' Free
+          br
+          ' Returns
+      li
+        .icon.guarantee
+        span
+          ' Fit
+          br
+          ' Guarantee
+      li
+        .icon.turnaround
+        span
+          ' 3 week
+          br
+          ' turnaround
     nav
       ul
         - unless spree_user_signed_in?
