@@ -49,6 +49,9 @@ header {
         height: 20px;
         margin: 3px 0 0;
         background: image-url('icons-shipping.png') 0 0 no-repeat;
+        &.quote {
+          width: 18px;
+        }
         &.shipping {
           background-position: 0 -20px;
           margin-right: 5px;
@@ -57,6 +60,7 @@ header {
           background-position: 0 -40px;
         }
         &.guarantee {
+          width: 19px;
           background-position: 0 -60px;
         }
         &.turnaround {
@@ -83,8 +87,9 @@ header {
         margin: 13px 2px 0 5px;
         &.user {
           text-transform: none;
-          line-height: 32px;
+          line-height: 16px;
           margin-right: 20px;
+          width: 140px;
           span {
             color: #f9b4a8;
           }
