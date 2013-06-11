@@ -16,10 +16,10 @@
     .post-content
       p = @red_carpet_event.content
       ul.post-images
-        - @red_carpet_event.photo_posts.each do |photo|
+        - @red_carpet_event.celebrity_photos.each do |photo|
           li
             = link_to '#' do
-              = image_tag photo.photo_url, width: 75, height: 108, alt: ''
+              = image_tag photo.photo.url, width: 75, height: 108, alt: '' if photo.photo
 
       .block
         .block-title F&P Featured Dresses

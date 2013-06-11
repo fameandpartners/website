@@ -2,6 +2,7 @@ class RedCarpetEvent < ActiveRecord::Base
   attr_accessible :name, :short_name, :latitude, :longitude, :content, :tag_list,
                   :event_date, :location, :celebrity_photos, :celebrity_photos_attributes,
                   :celebrity_photos_name
+  attr_accessor :celebrity_name
 
   acts_as_taggable
 
@@ -20,9 +21,11 @@ class RedCarpetEvent < ActiveRecord::Base
 
   def publish!
     self.post_state = PostState.find_by_title "Approved"
+    save!
   end
 
   def unpublish!
     self.post_state = PostState.find_by_title "Pending"
+    save!
   end
 end

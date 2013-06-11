@@ -37,7 +37,6 @@
       a href="#" 3
       a href="#" 4
       a href="#" 5
-
   h1.block-title.dark New celebrity photos
   .subtitle The latest collection of stunning dresses worn by our favourite celebrites.
 
@@ -47,7 +46,7 @@
       - @celebrity_photos.each do |celebrity_photo|
         li
           = link_to '#' do
-            = image_tag celebrity_photo.photo, width: 269, height: 375, alt: ''
+            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: '' if celebrity_photo
 
   .content-sidebar
     section.content-area
@@ -55,7 +54,7 @@
         article.post
           .tag.with-arrow = post.class.to_s.titlecase
           .image
-            = image_tag post.photo_posts.first.photo_url, width: 742, height: 355, alt: ''
+            = image_tag post.celebrity_photos.first.photo.url, width: 742, height: 355, alt: '' if post.celebrity_photos.any?
           h2
             = link_to post.title, make_url([:blog, :posts], post.title)
           p = post.content

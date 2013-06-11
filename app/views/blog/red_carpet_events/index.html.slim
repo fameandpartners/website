@@ -40,24 +40,23 @@
 
   h1.block-title.dark New celebrity photos
   .subtitle The latest collection of stunning dresses worn by our favourite celebrites.
-
   .celebrity-photos
     .view-all = link_to 'View more celebrity photos', '#'
     ul
       - @celebrity_photos.each do |celebrity_photo|
         li
           = link_to '#' do
-            = image_tag celebrity_photo.photo, width: 269, height: 375, alt: ''
+            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: '' if celebrity_photo.photo
 
   .content-sidebar
     section.content-area
       - @red_carpet_events.each do |post|
         article.post
           .image
-            = image_tag post.photo_posts.first.photo_url, width: 742, height: 355, alt: ''
+            = image_tag post.celebrity_photos.first.photo.url, width: 742, height: 355, alt: '' if post.celebrity_photos.any?
           h2
             = link_to post.name, make_url([:blog, :red_carpet_events], post.name)
-          p = post.content
+          p = post.content.html_safe
           .author
             = link_to '#' do
               .avatar

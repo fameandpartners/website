@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :content, :tag_list, :photos, :category_id,
                   :celebrity_photos, :celebrity_photos_attributes,
                   :celebrity_photos_name
+  attr_accessor :celebrity_name
 
   acts_as_taggable
   has_and_belongs_to_many :celebrity_photos
@@ -16,10 +17,12 @@ class Post < ActiveRecord::Base
 
   def publish!
     self.post_state = PostState.find_by_title "Approved"
+    save!
   end
 
   def unpublish!
     self.post_state = PostState.find_by_title "Pending"
+    save!
   end
 
   private

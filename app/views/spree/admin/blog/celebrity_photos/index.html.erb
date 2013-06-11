@@ -4,7 +4,7 @@
 <div class="celebrity_photos">
   <% @celebrity_photos.each do |celebrity_photo| %>
     <div class="photo">
-      <h5 class="photo-title"><%= celebrity_photo.celebrity_name %></h5>
+      <h5 class="photo-title"><%= celebrity_photo.celebrity.name %></h5>
       <%= link_to image_tag(celebrity_photo.photo, class: 'celebrity-photo'), edit_admin_blog_celebrity_photo_path(celebrity_photo) %>
     </div>
   <% end %>

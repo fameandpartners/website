@@ -31,13 +31,14 @@
     = f.field_container :event_date do
       = f.label :event_date, t("activerecord.attributes.celebrity_photos.event_date")
       br
-      = f.text_field :event_date, :class => 'datepicker hasDatepicker', size: 50
+      = date_select("red_carpet_event", "event_date", :default => Date.today)
       br
     = f.field_container :celebrity_photos do
       = f.label :celebrity_photos, t("activerecord.attributes.celebrity_photos.photo")
       .photo-fields
+        = f.text_field :celebrity_name, name: "red_carpet_event[celebrity_photos_attributes][][celebrity_name]", :class => 'text', size: 50
         = f.file_field :celebrity_photo, name: "red_carpet_event[celebrity_photos_attributes][][photo]", :class => 'file-field  '
-      = link_to "Add photo field", "#", class: 'add-photo-field'
+      = link_to "Add photo field", "#", class: 'add-photo-field-red-carpet'
 
     = f.field_container :tag_list do
       = f.label :tag_list, t("activerecord.attributes.celebrity_photos.tags")

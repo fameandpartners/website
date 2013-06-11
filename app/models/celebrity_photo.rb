@@ -1,5 +1,5 @@
 class CelebrityPhoto < ActiveRecord::Base
-  attr_accessible :event_date, :event_name, :photo, :celebrity_name, :tag_list
+  attr_accessible :event_date, :event_name, :photo, :name, :tag_list, :celebrity_name
   attr_accessor :celebrity_name
 
   acts_as_taggable
@@ -7,18 +7,16 @@ class CelebrityPhoto < ActiveRecord::Base
 
   belongs_to :celebrity
   belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
+  belongs_to :post_state
   has_and_belongs_to_many :posts
   has_and_belongs_to_many :red_carpet_events
-  belongs_to :post_state
-
   has_many :photo_posts
 
-  alias :title :celebrity_name
-
   validates_attachment_presence :photo
-  before_save :create_or_append_celebrity
+  validates :celebrity_name, presence: true
+  before_validation :create_or_append_celebrity
 
-  def celebrity_name
+  def title
     celebrity ? celebrity.name : nil
   end
 

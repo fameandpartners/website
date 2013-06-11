@@ -1,10 +1,21 @@
 = render partial: "spree/admin/shared/blog_sub_menu"
 
 = link_to 'Add red carped event', new_admin_blog_red_carpet_event_path, class: 'button icon_link add-new-item'
-.blog_posts
-  - @red_carpet_events.each do |event|
-    .post
-      h5.post-title = event.name
-      = link_to 'Edit', edit_admin_blog_red_carpet_event_path(event)
+table class="index blog_posts"
+  thead
+    tr
+      th Title
+      th User
+      th State
+      th.actions
+  tbody
+    - @red_carpet_events.each do |event|
+      tr
+        td = event.name
+        td = "#{event.user.first_name} #{event.user.last_name}"
+        td = event.post_state.title
+        td
+          = link_to "", edit_admin_blog_red_carpet_event_path(event), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
+          = link_to "", admin_blog_red_carpet_event_path(event), class: "delete-resource icon_link with-tip icon-trash no-text", "data-action" => "remove"
 
 = render partial: "spree/admin/shared/no_items_found" unless @red_carpet_events.any?

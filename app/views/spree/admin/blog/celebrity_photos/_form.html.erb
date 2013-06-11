@@ -3,7 +3,7 @@
     <%= image_tag @celebrity_photo.photo.url, class: 'edit-celebrity-photo' if @celebrity_photo.photo.present? %>
     <%= f.field_container :celebrity_name do %>
       <%= f.label :celebrity_name, t("activerecord.attributes.celebrity_photos.celebrity_name") %><br />
-      <%= f.text_field :celebrity_name, :class => 'text', size: 50  %><br />
+      <%= f.text_field :celebrity_name, value: @celebrity_photo.title, :class => 'text', size: 50  %><br />
     <% end %>
 
     <%= f.field_container :photo do %>
@@ -13,7 +13,7 @@
     <% end %>
     <%= f.field_container :event_date do %>
       <%= f.label :event_date, t("activerecord.attributes.celebrity_photos.event_date") %><br />
-      <%= f.text_field :event_date, :class => 'datepicker hasDatepicker', size: 50 %><br />
+      <%= date_select("celebrity_photo", "event_date", :default => Date.today) %>
     <% end %>
 
     <%= f.field_container :tag_list do %>

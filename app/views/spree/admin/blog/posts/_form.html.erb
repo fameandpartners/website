@@ -12,6 +12,8 @@
     <%= f.field_container :celebrity_photos do %>
       <%= f.label :celebrity_photos, t("activerecord.attributes.celebrity_photos.photo") %><br />
       <div class='photo-fields'>
+        <%= f.label :celebrity_name, t("activerecord.attributes.blog.celebrity_name") %><br />
+        <%= f.text_field :celebrity_name, name: "post[celebrity_photos_attributes][][celebrity_name]", :class => 'text', size: 50 %><br />
         <%= f.file_field :celebrity_photo, name: "post[celebrity_photos_attributes][][photo]", :class => 'file-field  ' %><br />
       </div>
       <%= link_to "Add photo field", "#", class: 'add-photo-field' %>
