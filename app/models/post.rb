@@ -15,6 +15,9 @@ class Post < ActiveRecord::Base
   validates :title, :content, :category_id, presence: true
   validates :title, uniqueness: true
 
+  before_save :set_user_to_nested_resource
+  before_validation :remove_empty_celebrity_photos
+
   def publish!
     self.post_state = PostState.find_by_title "Approved"
     save!
@@ -44,5 +47,17 @@ class Post < ActiveRecord::Base
 
   def upload_photo
     photo_post = self.photo_posts.create!(photo_id: CelebrityPhoto.create!(photo: photo).id)
+  end
+
+  def set_user_to_nested_resource
+    self.celebrity_photos.each do |photo|
+      photo.user = self.user
+    end
+  end
+
+  def remove_empty_celebrity_photos
+    self.celebrity_photos.delete_if do |photo|
+      photo.celebrity_name && photo.celebrity_name.empty? && !photo.photo.exists?
+    end
   end
 end

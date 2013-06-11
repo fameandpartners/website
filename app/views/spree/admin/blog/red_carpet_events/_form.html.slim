@@ -50,6 +50,6 @@
       span.or or
       = link_to "Cancel", admin_blog_celebrity_photos_path, class: "button icon_link with-tip icon-remove"
       - if @red_carpet_events.post_state
-        = link_to "Publish", "/admin/blog/posts/publish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title != "Published"
-        = link_to "Unpublish", "/admin/blog/posts/publish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title == "Published"
+        = link_to "Publish", "/admin/blog/red_carpet_events/publish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title != "Approved" && @red_carpet_events.id
+        = link_to "Unpublish", "/admin/blog/red_carpet_events/unpublish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title == "Approved" && @red_carpet_events.id
 

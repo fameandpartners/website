@@ -27,8 +27,8 @@
       <span class="or">or</span>
       <%= link_to "Cancel", admin_blog_celebrity_photos_path, class: "button icon_link with-tip icon-remove" %>
       <%- if @post.post_state %>
-        <%= link_to "Publish", "/admin/blog/posts/publish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title != "Published" %>
-        <%= link_to "Unpublish", "/admin/blog/posts/publish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title == "Published" %>
+        <%= link_to "Publish", "/admin/blog/posts/publish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title != "Approved" && @post.id %>
+        <%= link_to "Unpublish", "/admin/blog/posts/unpublish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title == "Approved" && @post.id %>
       <% end %>
     </div>
   </fieldset>

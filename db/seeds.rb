@@ -9,12 +9,11 @@
 
 Spree::Core::Engine.load_seed if defined?(Spree::Core)
 #Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
-Spree::Role.create! name: "editor"
 
 # Config
 password    = "qwerty12"
 admin_role  = Spree::Role.find_by_name "admin"
-editor_role = Spree::Role.find_by_name "editor"
+editor_role = Spree::Role.find_by_name "user"
 
 # Create Users
 ["James Kirk", "Leonard McCoy"].each do |admin|

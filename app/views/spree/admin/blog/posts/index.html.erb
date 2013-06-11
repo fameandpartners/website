@@ -1,6 +1,10 @@
 <%= render partial: "spree/admin/shared/blog_sub_menu" %>
 
 <%= link_to "Add #{params[:category].to_s.titleize}", send("new_admin_blog_#{params[:category].to_s.singularize}_path"), class: 'button icon_link add-new-item' %>
+<div class="choose-state">
+  <input type="radio" name="state" value="pending" checked='true'>Pending</input>
+  <input type="radio" name="state" value="approved">Approved</input>
+</div>
 <table class="index blog_posts">
   <thead>
     <tr>
@@ -12,7 +16,7 @@
   </thead>
   <tbody>
   <% @posts.each do |post| %>
-    <tr>
+    <tr class="post <%= post.post_state.title.underscore %>">
       <td><%= post.title %></td>
       <td><%= "#{post.user.first_name} #{post.user.last_name}" %></td>
       <td><%= post.post_state.title %></td>

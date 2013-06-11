@@ -1,13 +1,29 @@
 <%= render partial: "spree/admin/shared/blog_sub_menu" %>
 
 <%= link_to 'Upload photo', new_admin_blog_celebrity_photo_path, class: 'button icon_link add-new-item' %>
-<div class="celebrity_photos">
+
+<table class="index blog_posts">
+  <thead>
+    <tr>
+      <th>Mini</th>
+      <th>Title</th>
+      <th>User</th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
   <% @celebrity_photos.each do |celebrity_photo| %>
-    <div class="photo">
-      <h5 class="photo-title"><%= celebrity_photo.celebrity.name %></h5>
-      <%= link_to image_tag(celebrity_photo.photo, class: 'celebrity-photo'), edit_admin_blog_celebrity_photo_path(celebrity_photo) %>
-    </div>
+    <tr>
+      <td><%= image_tag celebrity_photo.photo.url, width: 40, height: 40 %></td>
+      <td><%= celebrity_photo.title %></td>
+      <td><%= "#{celebrity_photo.user.first_name} #{celebrity_photo.user.last_name}" %></td>
+      <td>
+        <%= link_to "", edit_admin_blog_celebrity_photo_path(celebrity_photo), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit" %>
+        <%= link_to "", admin_blog_celebrity_photo_path(celebrity_photo), class: "delete-resource icon_link with-tip icon-trash no-text", "data-action" => "remove" %>
+      </td>
+    </tr>
   <% end %>
-</div>
+  </tbody>
+</table>
 
 <%= render partial: "spree/admin/shared/no_items_found" unless @celebrity_photos.any? %>

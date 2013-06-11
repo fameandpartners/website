@@ -1,6 +1,9 @@
 = render partial: "spree/admin/shared/blog_sub_menu"
 
 = link_to 'Add red carped event', new_admin_blog_red_carpet_event_path, class: 'button icon_link add-new-item'
+.choose-state
+  input type="radio" name="state" value="pending" checked='true' Pending
+  input type="radio" name="state" value="approved" Approved
 table class="index blog_posts"
   thead
     tr
@@ -10,7 +13,7 @@ table class="index blog_posts"
       th.actions
   tbody
     - @red_carpet_events.each do |event|
-      tr
+      tr class="post #{event.post_state.title.underscore}"
         td = event.name
         td = "#{event.user.first_name} #{event.user.last_name}"
         td = event.post_state.title

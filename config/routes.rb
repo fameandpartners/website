@@ -54,9 +54,12 @@ FameAndPartners::Application.routes.draw do
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
-      get '/blog' => 'blog#index'
+      match '/blog' => redirect('/admin/blog/celebrity_photos')
       namespace :blog do
         match '/posts/publish/:id' => 'posts#publish', :via => :get, as: 'publish_admin_blog_post'
+        match '/posts/unpublish/:id' => 'posts#unpublish', :via => :get, as: 'unpublish_admin_blog_post'
+        match '/red_carpet_events/publish/:id' => 'red_carpet_events#publish', :via => :get, as: 'publish_admin_blog_post'
+        match '/red_carpet_events/unpublish/:id' => 'red_carpet_events#unpublish', :via => :get, as: 'unpublish_admin_blog_post'
         [:celebrity_photos, :red_carpet_events].each do |crud|
           resources crud, except: [:show]
         end

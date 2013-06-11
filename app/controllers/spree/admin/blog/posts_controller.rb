@@ -41,7 +41,14 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
 
   def publish
     post = Post.find params[:id]
-    post.publish! if spree_current_user.admin?
+    post.publish!
     redirect_to admin_blog_posts_path
   end
+
+  def unpublish
+    post = Post.find params[:id]
+    post.unpublish!
+    redirect_to admin_blog_posts_path
+  end
+
 end
