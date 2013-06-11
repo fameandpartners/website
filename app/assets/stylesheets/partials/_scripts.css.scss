@@ -1,0 +1,15 @@
+#ui-datepicker-div {
+  font-size: 12px;
+  font-family: $fontOne;
+  .ui-datepicker-header {
+    background: transparent;
+    font-size: 14px;
+    .ui-datepicker-prev, .ui-datepicker-next {
+      background: transparent;
+      border-color: transparent;
+    }
+  }
+  .ui-state-default {
+    background: transparent;
+  }
+}
