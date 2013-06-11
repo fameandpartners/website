@@ -13,3 +13,4 @@
 //= require_tree .
 //= require ../spree/admin/blog
 //= require ../spree/admin/admin
+//= require ckeditor/init

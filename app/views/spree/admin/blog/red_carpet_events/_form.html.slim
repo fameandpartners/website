@@ -16,7 +16,7 @@
     = f.field_container :content do
       = f.label :content, t("activerecord.attributes.blog.content")
       br
-      = f.text_area :content, cols: 50, rows: 12
+      = f.cktext_area :content, cols: 50, rows: 12, ckeditor: { toolbar: "mini" }
       br
 
     = f.hidden_field :longitude
@@ -38,7 +38,7 @@
       = f.label :photos, t("activerecord.attributes.celebrity_photos.photo")
       br
       .photo-fields
-        = f.file_field :photos, multiple: true, :class => 'file-field  '
+        = f.file_field :celebrity_photo, name: "post[celebrity_photos_attributes][][photo]", :class => 'file-field  '
         br
       = link_to "Add photo field", "#", class: 'add-photo-field'
 
@@ -51,6 +51,7 @@
       = f.button "Create", type:'submit', class: 'icon-ok button'
       span.or or
       = link_to "Cancel", admin_blog_celebrity_photos_path, class: "button icon_link with-tip icon-remove"
-      = link_to "Publish", "/admin/blog/posts/publish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title != "Published"
-      = link_to "Unpublish", "/admin/blog/posts/publish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title == "Published"
+      - if @red_carpet_events.post_state
+        = link_to "Publish", "/admin/blog/posts/publish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title != "Published"
+        = link_to "Unpublish", "/admin/blog/posts/publish/#{@red_carpet_events.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @red_carpet_events.post_state.title == "Published"
 

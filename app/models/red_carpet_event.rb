@@ -1,14 +1,16 @@
 class RedCarpetEvent < ActiveRecord::Base
-  attr_accessible :name, :short_name, :latitude, :longitude, :content, :tag_list, :photos, :event_date, :location
-  attr_accessor :photos
+  attr_accessible :name, :short_name, :latitude, :longitude, :content, :tag_list, :photos, :event_date, :location, :celebrity_photos
 
   acts_as_taggable
-  has_many :celebrity_photos, as: :photo_uploaddable
+
+  has_and_belongs_to_many :celebrity_photos
+  accepts_nested_attributes_for :celebrity_photos
 
   belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
   belongs_to :post_state
 
   validates :name, :latitude, :longitude, :event_date, presence: true
+  validates :name, uniqueness: true
 
   def title
     name

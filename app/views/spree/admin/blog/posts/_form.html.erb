@@ -7,11 +7,14 @@
 
     <%= f.field_container :content do %>
       <%= f.label :content, t("activerecord.attributes.blog.content") %><br />
-      <%= f.text_area :content, cols: 50, rows: 12 %><br />
+      <%= f.cktext_area :content, cols: 50, rows: 12, ckeditor: { toolbar: "simple" } %><br />
     <% end %>
-    <%= f.field_container :photo do %>
-      <%= f.label :photo, t("activerecord.attributes.celebrity_photos.photo") %><br />
-      <%= f.file_field :photo, :class => 'file-field  ' %><br />
+    <%= f.field_container :celebrity_photos do %>
+      <%= f.label :celebrity_photos, t("activerecord.attributes.celebrity_photos.photo") %><br />
+      <div class='photo-fields'>
+        <%= f.file_field :celebrity_photo, name: "post[celebrity_photos_attributes][][photo]", :class => 'file-field  ' %><br />
+      </div>
+      <%= link_to "Add photo field", "#", class: 'add-photo-field' %>
     <% end %>
     <%= f.field_container :tag_list do %>
       <%= f.label :tag_list, t("activerecord.attributes.celebrity_photos.tags") %><br />
@@ -21,8 +24,10 @@
       <%= f.button "Create", type:'submit', class: 'icon-ok button' %>
       <span class="or">or</span>
       <%= link_to "Cancel", admin_blog_celebrity_photos_path, class: "button icon_link with-tip icon-remove" %>
-      <%= link_to "Publish", "/admin/blog/posts/publish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title != "Published" %>
-      <%= link_to "Unpublish", "/admin/blog/posts/publish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title == "Published" %>
+      <%- if @post.post_state %>
+        <%= link_to "Publish", "/admin/blog/posts/publish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title != "Published" %>
+        <%= link_to "Unpublish", "/admin/blog/posts/publish/#{@post.id}", class: "button icon_link with-tip" if spree_current_user.admin? && @post.post_state.title == "Published" %>
+      <% end %>
     </div>
   </fieldset>
 <% end %>

@@ -7,6 +7,8 @@ class CelebrityPhoto < ActiveRecord::Base
 
   belongs_to :celebrity
   belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
+  has_and_belongs_to_many :posts
+  has_and_belongs_to_many :red_carpet_events
   belongs_to :post_state
 
   has_many :photo_posts

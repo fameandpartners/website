@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130605122344) do
 
   create_table "answers", :force => true do |t|
@@ -27,6 +28,9 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.datetime "updated_at",     :null => false
   end
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+=======
+ActiveRecord::Schema.define(:version => 20130611131704) do
+>>>>>>> refactoring
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -58,6 +62,20 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
   end
 
   add_index "celebrity_photos", ["user_id"], :name => "index_celebrity_photos_on_user_id"
+
+  create_table "celebrity_photos_posts", :id => false, :force => true do |t|
+    t.integer "post_id",            :null => false
+    t.integer "celebrity_photo_id", :null => false
+  end
+
+  add_index "celebrity_photos_posts", ["post_id", "celebrity_photo_id"], :name => "index_celebrity_photos_posts_on_post_id_and_celebrity_photo_id", :unique => true
+
+  create_table "celebrity_photos_red_carpet_events", :id => false, :force => true do |t|
+    t.integer "red_carpet_event_id", :null => false
+    t.integer "celebrity_photo_id",  :null => false
+  end
+
+  add_index "celebrity_photos_red_carpet_events", ["red_carpet_event_id", "celebrity_photo_id"], :name => "index_photos_red_carpet_events", :unique => true
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
@@ -112,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.integer  "category_id"
   end
 
+<<<<<<< HEAD
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
     t.string   "text"
@@ -130,6 +149,9 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+=======
+  add_index "posts", ["title"], :name => "index_posts_on_title", :unique => true
+>>>>>>> refactoring
 
   create_table "red_carpet_events", :force => true do |t|
     t.float    "latitude"
@@ -144,6 +166,11 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.datetime "updated_at",                   :null => false
     t.integer  "post_state_id", :default => 1
   end
+<<<<<<< HEAD
+=======
+
+  add_index "red_carpet_events", ["name"], :name => "index_red_carpet_events_on_name", :unique => true
+>>>>>>> refactoring
   add_index "red_carpet_events", ["user_id"], :name => "index_red_carpet_events_on_user_id"
 
   create_table "spree_activators", :force => true do |t|

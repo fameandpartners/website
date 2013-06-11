@@ -1,18 +1,18 @@
 class Post < ActiveRecord::Base
-  attr_accessible :title, :content, :tag_list, :photos, :category_id
-  attr_accessor :photos
+  attr_accessible :title, :content, :tag_list, :photos, :category_id,
+                  :celebrity_photos, :celebrity_photos_attributes,
+                  :celebrity_photos_name
 
   acts_as_taggable
-  mount_uploader :photo, PhotoUploader
-  has_many :photo_posts, as: :photo_uploaddable
-  has_many :celebrity_photos, as: :photo_uploaddable
+  has_and_belongs_to_many :celebrity_photos
+  accepts_nested_attributes_for :celebrity_photos
 
   belongs_to :user, foreign_key: 'user_id', class_name: Spree::User
   belongs_to :post_state
   belongs_to :category
 
   validates :title, :content, :category_id, presence: true
-  after_save :upload_photos
+  validates :title, uniqueness: true
 
   def publish!
     self.post_state = PostState.find_by_title "Approved"
