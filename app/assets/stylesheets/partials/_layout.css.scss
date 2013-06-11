@@ -349,7 +349,7 @@ header {
 
 footer {
   .wrap {
-    width: 400px;
+    width: 1096px;
   }
   .columns {
     margin: 200px 0 0;
@@ -358,8 +358,9 @@ footer {
     color: #fff;
     overflow: hidden;
     background: #9c9c9c;
+    color: #ddd;
     a {
-      color: #fff;
+      color: #ddd;
       text-decoration: none;
       &:hover {
         text-decoration: underline;
@@ -373,8 +374,8 @@ footer {
     }
     .column {
       float: left;
-      height: 124px;
-      border-left: 1px solid #fff;
+      height: 36px;
+      border-left: 1px solid #eee;
       margin: 0 0 0 49px;
       padding: 0 0 0 49px;
       &:first-child {
@@ -419,10 +420,12 @@ footer {
         box-shadow: 0 1px 2px rgba(201, 146, 136, .66);
       }
     }
-  }
+  } 
+  .customer-service{ margin: 16px 0 0 0;}
   .email-label {
-    margin: 17px 0 0;
+    display: inline-block;
   }
+  .phone{ display: inline-block;}
   .social {
     ul {
       overflow: hidden;
@@ -453,7 +456,7 @@ footer {
     }
   }
   .logo-copyright {
-    margin: 58px 0 28px;
+    margin: 58px 0 40px;
     text-align: center;
     color: #b4b4b4;
     text-transform: uppercase;

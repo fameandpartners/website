@@ -39,7 +39,8 @@ a:hover { text-decoration: none; }
 .position-relative { position: relative; }
 #wrap { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -480px; }
 #push { height: 480px; }
-footer { height: 280px; }
+footer { height: 80px; }           
+ul.collapse li{ display: inline-block; margin: 0 40px 0 0;}
 
 /* CLEARFIX */
 .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
