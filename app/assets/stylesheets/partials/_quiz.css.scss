@@ -146,6 +146,7 @@
             width: 200px;
             height: 200px;
             opacity: 0;
+            filter: alpha(opacity=0);
           }
         }
         &.active {
@@ -166,6 +167,10 @@
         position: relative;
         text-align: center;
         display: inline-block;
+        input {
+          opacity: 0;
+          filter: alpha(opacity=0);
+        }
         .image {
           position: absolute;
           top: 0;
