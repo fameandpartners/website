@@ -3,4 +3,4 @@ ul.choices
     li
       label
         = check_box_tag 'answer[codes][]', answer.code
-        = answer.code.humanize.upcase
+        = image_tag "brands/#{answer.code}.jpg", width: 154, height: 40, alt: ''
