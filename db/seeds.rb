@@ -27,10 +27,12 @@ quiz.questions.create([
                                    }, {
                                      :text => 'When you’re getting dressed up, which of these best describes your fashion style?',
                                      :position => 3,
+                                     :multiple => true,
                                      :partial => 'style_words'
                                    }, {
                                      :text => 'Which brands speak to your style?',
                                      :position => 4,
+                                     :multiple => true,
                                      :partial => 'brands'
                                    }, {
                                      :text => 'Which shoes would you wear to your prom?',
@@ -51,6 +53,7 @@ quiz.questions.create([
                                    }, {
                                      :text => 'Which of these nail colours do you wear regularly?',
                                      :position => 9,
+                                     :multiple => true,
                                      :partial => 'nail_colours'
                                    }
                                  ])
