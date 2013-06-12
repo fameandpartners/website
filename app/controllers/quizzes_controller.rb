@@ -14,8 +14,4 @@ class QuizzesController < ApplicationController
       render
     end
   end
-
-  def report
-
-  end
 end

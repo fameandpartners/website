@@ -58,7 +58,7 @@ class AnswersController < ApplicationController
 
         style_report.save
 
-        redirect_to report_quiz_path
+        redirect_to thanks_quiz_path
       end
     else
       redirect_to quiz_path
