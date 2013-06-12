@@ -3,11 +3,15 @@ class Blog::PostsController < ApplicationController
   respond_to :html
 
   def index
-    @posts = Post.all
     @celebrity_photos = CelebrityPhoto.last(4)
+    @posts = PostState.find_by_title("Approved").posts.
+                       where(category_id: Post::CATEGORIES[params[:category].to_s.titleize]).
+                       order('id desc').
+                       limit(1)
+
   end
 
   def show
-    @post = Post.find_by_title! params[:id].gsub('_', ' ')
+    @post = Post.find(:first, :conditions => [ "lower(title) = ?", params[:id].gsub('_', ' ').downcase ])
   end
 end

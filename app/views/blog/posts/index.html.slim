@@ -1,114 +1,55 @@
 = render 'shared/blog_top_bar'
 
 .wrap
-
-  .mini-slider.slider-block
-    .slides-overlay
-    ul.slides
-      li.slide-1
-        .inner
-          .block-title Steps to your perfect PROM dress
-          .separate
-          .desc Fame & Partners brings you the very best in high fashion for your special event.
-          = link_to 'Read more', '#', class: 'btn'
-      li
-        .inner
-          .block-title
-          .separate
-          .desc
-      li
-        .inner
-          .block-title
-          .separate
-          .desc
-      li
-        .inner
-          .block-title
-          .separate
-          .desc
-      li
-        .inner
-          .block-title
-          .separate
-          .desc
-    .pagination
-      a.selected href="#" 1
-      a href="#" 2
-      a href="#" 3
-      a href="#" 4
-      a href="#" 5
-  h1.block-title.dark New celebrity photos
-  .subtitle The latest collection of stunning dresses worn by our favourite celebrites.
+  = render 'shared/top_slider'
 
   .celebrity-photos
-    .view-all = link_to 'View more celebrity photos', '#'
+    .blog-block-title
+      .latest Latest
+      .block-subtitle Celebrity photos
+      .view-all = link_to 'View more celebrity photos', '#'
     ul
       - @celebrity_photos.each do |celebrity_photo|
         li
-          = link_to '#' do
-            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: '' if celebrity_photo
-
+          .zoom
+          = link_to '#', class: 'celebrity-photo' do
+            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: ''
+            .overlay
+              .name celebrity_photo.celebrity.name
+              .event Ipsum Awards 2013
+          .love-share
+            .love-hate
+              .icons
+                .love
+                .hate
+              .label Love it or loathe it
+            .share
+              .icons
+                .share-block
+              .label Share
   .content-sidebar
     section.content-area
-      - @posts.each do |post|
+      .blog-block-title
+        .latest Latest
+        .block-subtitle = params[:category].to_s.titleize
+
+    - @posts.each do |post|
+      section.content-area
         article.post
-          .tag.with-arrow = post.class.to_s.titlecase
-          .image
-            = image_tag post.celebrity_photos.first.photo.url, width: 742, height: 355, alt: '' if post.celebrity_photos.any?
           h2
-            = link_to post.title, make_url([:blog, :posts], post.title)
-          p = post.content
-          .author
-            = link_to '#' do
-              .avatar
-                = image_tag '/avatars/original/missing.png', width: 30, height: 30, alt: ''
-              .name by #{post.user.first_name} #{post.user.last_name}
+            = link_to post.title, make_url(["blog", params[:category]], post.title)
+          .post-meta
+            .date = post.created_at.to_s :long_ordinal
+            .comments
+              = link_to '1490 Comments', '#'
+            .author
+              = link_to '#' do
+                .avatar
+                  = image_tag 'sample/avatar.jpg', width: 30, height: 30, alt: ''
+                .name by #{post.user.first_name} #{post.user.last_name}
+          .featured-image
+            = image_tag post.celebrity_photos.first.photo.url, width: 742, height: 355, alt: '' if post.celebrity_photos.any?
+          .post-content
+            p = raw post.content
 
-    section.sidebar
-      .block
-        .block-title F&P Featured Dresses
-        .block-content
-          ul.photos
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-
-      .block
-        .block-title Recent Posts
-        .block-content
-          ul.posts
-            li = link_to 'Pommy ipsum round our gaff old chap lass on - 21.05.2013.', '#'
-            li = link_to 'Pommy ipsum round our gaff old chap lass on - 21.05.2013.', '#'
-            li = link_to 'Pommy ipsum round our gaff old chap lass on - 21.05.2013.', '#'
-            li = link_to 'Pommy ipsum round our gaff old chap lass on - 21.05.2013.', '#'
-
-      .block
-        .block-title Tags
-        .block-content
-          ul.tags
-            li = link_to 'Loren (2)', '#', class: 'tag'
-            li = link_to 'Loren IPSUM  (2)', '#', class: 'tag'
-            li = link_to 'AMET SIT  (3)', '#', class: 'tag'
-            li = link_to 'IPSUM AS (7)', '#', class: 'tag'
-            li = link_to 'IPSUM (2)', '#', class: 'tag'
+    = render 'shared/blog_sidebar'

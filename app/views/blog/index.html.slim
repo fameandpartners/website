@@ -1,122 +1,54 @@
-- unless spree_user_signed_in?
-  .promo-badge
-    .promo-badge-inner
-      .price
-        .dollar $
-        ' 50
-        .off off
-      .title June special
-      .desc
-        ' Design your dress in June
-        br
-        ' for a $50 voucher
-        br
-        ' toward the production of
-        br
-        ' your dress!
-      .more = link_to 'Find out more here', '#'
-    .close Close                
+= render 'shared/blog_top_bar'
 
-  .promo-popup
-    .overlay
-    .promo-popup-block
-      .side-left
-        .price
-          .dollar $
-          ' 50
-          .off off
-        .title June Special
-      .side-right
-        .title $50 towards your custom designer dress
-        p Simply design your dress in June to receive a $50 voucher towards your dress production!
-        p To celebrate our launch, we are offering every girl that designs her dress in June, a $50 voucher towards her dress production.
-        p That's because we want to see as many as possible of you with fabulous, individual look for your special event.
-        .call-to-action
-          .signup-facebook = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
-          .signup-link or #{link_to 'Get started with your email address', spree.signup_path(:prom => true)}
-      .close Close  
+.wrap
+  = render 'shared/top_slider'
 
-.promo
-  .wrap
-    .promo-text
-      .block-title Custom made formal dresses
-      .separate
-      .desc
-        | Co-design your very own formal dress with a fashion designer.
-        br
-        | It's free to start the process.
-      - unless spree_user_signed_in?
-        - if facebook_authentication_available?
-          .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
-          .or or
-        .signup-link = link_to 'Get started with your email address instead', spree.signup_path(:prom => true)
-      - else
-        = link_to 'Create your Custom Dress', new_custom_dress_path, :class => 'btn'
+  .celebrity-photos
+    .blog-block-title
+      .latest Latest
+      .block-subtitle Celebrity photos
+      .view-all = link_to 'View more celebrity photos', '#'
+    ul
+      - @celebrity_photos.each do |celebrity_photo|
+        li
+          .zoom
+          = link_to '#', class: 'celebrity-photo' do
+            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: ''
+            .overlay
+              .name celebrity_photo.celebrity.name
+              .event Ipsum Awards 2013
+          .love-share
+            .love-hate
+              .icons
+                .love
+                .hate
+              .label Love it or loathe it
+            .share
+              .icons
+                .share-block
+              .label Share
+  .content-sidebar
+    - @posts.each do |type, post|
+      - next unless post
+      section.content-area
+        .blog-block-title
+          .latest Latest
+          .block-subtitle = type.to_s.titleize
+        article.post
+          h2
+            = link_to post.title, make_url(["blog", type.to_s], post.title)
+          .post-meta
+            .date = post.created_at.to_s :long_ordinal
+            .comments
+              = link_to '1490 Comments', '#'
+            .author
+              = link_to '#' do
+                .avatar
+                  = image_tag 'sample/avatar.jpg', width: 30, height: 30, alt: ''
+                .name by #{post.user.first_name} #{post.user.last_name}
+          .featured-image
+            = image_tag post.celebrity_photos.first.photo.url, width: 742, height: 355, alt: '' if post.celebrity_photos.any?
+          .post-content
+            p = raw post.content
 
-= render 'shared/top_bar'
-
-.dream-dress
-  .wrap.no-overlow
-    .girl-in-dress
-      = image_tag 'image-girl-in-dress.jpg', width: 345, height: 525, alt: ''
-    .promo-block
-      .block-title Get your dream dress
-      .separate
-      .desc Our tailored process ensures we find out what will suit you best whilst being inspired by dresses you already love.
-      .circles
-        .circle
-          .image.unique
-          .text Unique, One-off design
-        .circle
-          .image.designer
-          .text Your own personal fashion designer
-        .circle
-          .image.fabric
-          .text Luxe fabrics at a price point you can afford
-      - unless spree_user_signed_in?
-        .create-now
-          - if facebook_authentication_available?
-            .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
-
-.promo-slider.slider-block.slider-bottom
-  #carousel-prev.arrow-left Prev
-  #carousel-next.arrow-right Next
-  .slides-overlay
-  ul#carousel.slides
-    li
-      .inner
-        .first-title.block-title
-          ' 4 easy steps to your
-          br
-          ' perfect dress
-    li
-      .inner
-        .block-title Tell us about you
-        .separate
-        .desc To design you something fabulous, we have to understand what will look best on you.
-    li
-      .inner
-        .block-title Tell us your design ideas
-        .separate
-        .desc Upload a collection of inspirational dresses and tell us which bits of each dress you want incorporated in your dress.
-    li
-      .inner
-        .block-title We'll create a look just for you
-        .separate
-        .desc style="width: 720px;"
-          | After a personal style consultation with you, our designers will create a look that is just for you! This is delivered as a fashion illustration and fabric swatches that you get to keep forever as a memory of how fun it was to design your own dress.
-    li
-      .inner
-        .block-title Your perfect dress is made
-        .separate
-        .desc Once you have approved the design, we go into production and custom make your dress, just for you.
-  #carousel-pagination.pagination
-    a.active 1
-    a 2
-    a 3
-    a 4
-    a 5
-  - unless spree_user_signed_in?
-    .call-to-action
-      - if facebook_authentication_available?
-        = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
+    = render 'shared/blog_sidebar'

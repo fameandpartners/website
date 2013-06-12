@@ -4,6 +4,13 @@ class Post < ActiveRecord::Base
                   :celebrity_photos_name
   attr_accessor :celebrity_name
 
+  CATEGORIES = {
+    "Posts"        => 1,
+    "Fashion News" => 2,
+    "Prom Tips"    => 3,
+    "Style Tips"   => 4
+  }
+
   acts_as_taggable
   has_and_belongs_to_many :celebrity_photos
   accepts_nested_attributes_for :celebrity_photos

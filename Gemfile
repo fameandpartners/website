@@ -40,6 +40,8 @@ group :development do
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'rack-mini-profiler'
+  gem 'guard'
+  gem 'guard-rails-assets'
 end
 
 group :development, :test do
