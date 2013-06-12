@@ -11,7 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528093803) do
+ActiveRecord::Schema.define(:version => 20130605122344) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "question_id"
+    t.string   "code"
+    t.float    "glam"
+    t.float    "girly"
+    t.float    "classic"
+    t.float    "edgy"
+    t.float    "bohemian"
+    t.float    "sexiness"
+    t.float    "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+
+  create_table "celebrities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "celebrity_photos", :force => true do |t|
+    t.integer  "celebrity_id"
+    t.datetime "event_date"
+    t.string   "event_name"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "photo"
+  end
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
@@ -33,6 +65,59 @@ ActiveRecord::Schema.define(:version => 20130528093803) do
     t.string   "size"
     t.boolean  "ghost",         :default => true
     t.date     "required_at"
+  end
+
+  create_table "fashion_news", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "photo_posts", :force => true do |t|
+    t.integer  "photo_uploaddable_id"
+    t.integer  "photo_id"
+    t.string   "photo_uploaddable_type"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  add_index "photo_posts", ["photo_uploaddable_id", "photo_uploaddable_type", "photo_id"], :name => "index_photo_uploaddable", :unique => true
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "prom_tips", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "questions", :force => true do |t|
+    t.integer  "quiz_id"
+    t.string   "text"
+    t.string   "position"
+    t.string   "partial"
+    t.boolean  "multiple",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "questions", ["position"], :name => "index_questions_on_position"
+  add_index "questions", ["quiz_id"], :name => "index_questions_on_quiz_id"
+
+  create_table "quizzes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "spree_activators", :force => true do |t|
@@ -114,13 +199,6 @@ ActiveRecord::Schema.define(:version => 20130528093803) do
     t.boolean  "active"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "spree_blogs", :force => true do |t|
-    t.string   "name"
-    t.string   "permalink"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "spree_calculators", :force => true do |t|
@@ -299,37 +377,6 @@ ActiveRecord::Schema.define(:version => 20130528093803) do
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
     t.string   "identifier"
-  end
-
-  create_table "spree_post_categories", :force => true do |t|
-    t.string   "name"
-    t.string   "permalink"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "spree_post_categories_posts", :id => false, :force => true do |t|
-    t.integer "post_id"
-    t.integer "post_category_id"
-  end
-
-  create_table "spree_post_products", :force => true do |t|
-    t.integer "post_id"
-    t.integer "product_id"
-    t.integer "position"
-  end
-
-  create_table "spree_posts", :force => true do |t|
-    t.string   "title"
-    t.string   "path"
-    t.string   "teaser"
-    t.datetime "posted_at"
-    t.text     "body"
-    t.string   "author"
-    t.boolean  "live",       :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.integer  "blog_id"
   end
 
   create_table "spree_preferences", :force => true do |t|
@@ -686,6 +733,29 @@ ActiveRecord::Schema.define(:version => 20130528093803) do
     t.integer  "zone_members_count", :default => 0
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+  end
+
+  create_table "style_reports", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.float    "glam"
+    t.float    "girly"
+    t.float    "classic"
+    t.float    "edgy"
+    t.float    "bohemian"
+    t.float    "sexiness"
+    t.float    "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "style_reports", ["spree_user_id"], :name => "index_style_reports_on_spree_user_id"
+
+  create_table "style_tips", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "taggings", :force => true do |t|

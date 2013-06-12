@@ -10,14 +10,14 @@ header {
   }
   .logo {
     float: left;
-    margin: 19px 0 0 362px;
+    margin: 19px 0 0 0;
     font: 300 20px/1.1 $fontOne;
     text-transform: uppercase;
     letter-spacing: 10px;
     a {
       display: block;
-      width: 310px;
-      height: 25px;
+      width: 290px;
+      height: 23px;
       text-align: center;
       margin: 0 auto;
       background: image-url('logo.png') center center no-repeat;
@@ -32,6 +32,44 @@ header {
       text-indent: -999px;
       vertical-align: top;
       margin: 1px 9px 0 -12px;
+    }
+  }
+  .icons {
+    float: left;
+    margin: 18px 0 0 32px;
+    li {
+      float: left;
+      margin: 0 0 0 20px;
+      font: 300 10px/1.2 $fontOne;
+      text-transform: uppercase;
+      color: #000;
+      .icon {
+        float: left;
+        width: 25px;
+        height: 20px;
+        margin: 3px 0 0;
+        background: image-url('icons-shipping.png') 0 -100px no-repeat;
+        &.quote {
+          width: 18px;
+        }
+        &.shipping {
+          background-position: 0 -120px;
+          margin-right: 5px;
+        }
+        &.returns {
+          background-position: 0 -140px;
+        }
+        &.guarantee {
+          width: 19px;
+          background-position: 0 -160px;
+        }
+        &.turnaround {
+          background-position: 0 -180px;
+        }
+      }
+      span {
+        float: right;
+      }
     }
   }
   nav {
@@ -49,8 +87,9 @@ header {
         margin: 13px 2px 0 5px;
         &.user {
           text-transform: none;
-          line-height: 32px;
+          line-height: 16px;
           margin-right: 20px;
+          width: 140px;
           span {
             color: #f9b4a8;
           }
@@ -66,7 +105,7 @@ header {
     }
     .btn {
       display: block;
-      width: 132px;
+      width: 100px;
       height: 32px;
       line-height: 32px;
       border-radius: 4px;
@@ -145,7 +184,7 @@ header {
 
 .facebook-signup {
   background: image-url('button-facebook-connect.png') 0 0 no-repeat;
-  width: 230px;
+  width: 231px;
   height: 33px;
   display: block;
   text-indent: -999px;
@@ -349,7 +388,7 @@ header {
 
 footer {
   .wrap {
-    width: 400px;
+    width: 1096px;
   }
   .columns {
     margin: 200px 0 0;
@@ -358,8 +397,9 @@ footer {
     color: #fff;
     overflow: hidden;
     background: #9c9c9c;
+    color: #ddd;
     a {
-      color: #fff;
+      color: #ddd;
       text-decoration: none;
       &:hover {
         text-decoration: underline;
@@ -373,15 +413,20 @@ footer {
     }
     .column {
       float: left;
-      height: 124px;
-      border-left: 1px solid #fff;
+      height: 36px;
+      border-left: 1px solid #eee;
       margin: 0 0 0 49px;
       padding: 0 0 0 49px;
+      
       &:first-child {
         border: 0;
         margin: 0;
         padding: 0;
       }
+    }
+    
+    .links{
+      margin: 0 0 0 20px !important;
     }
     .title {
       color: #F9B4A8;
@@ -419,9 +464,13 @@ footer {
         box-shadow: 0 1px 2px rgba(201, 146, 136, .66);
       }
     }
-  }
+  } 
+  .customer-service{ margin: 16px 0 0 0;}
   .email-label {
-    margin: 17px 0 0;
+    display: inline-block;
+  }
+  .phone {
+    display: inline-block;
   }
   .social {
     ul {
@@ -453,7 +502,7 @@ footer {
     }
   }
   .logo-copyright {
-    margin: 58px 0 28px;
+    margin: 58px 0 40px;
     text-align: center;
     color: #b4b4b4;
     text-transform: uppercase;

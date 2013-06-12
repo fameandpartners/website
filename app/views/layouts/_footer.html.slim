@@ -8,18 +8,13 @@ footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
           input.input type="email" name="email" value=""
           input.btn type="submit" value="Join now"
       .column.links
-        .title About us
-        ul
+        ul.collapse
           li = link_to 'About us', about_path
           li = link_to 'Meet our Team', team_path
           li = link_to 'Terms & Conditions', terms_path
           li = link_to 'Privacy', privacy_path
-      .column.customer-service
-        .title Customer service
-        .link.hide = link_to 'FAQs', '#'
-        .phone Call us on 02 8324 1456
-        .email-label Need help? Simply email us at:
-        .email = mail_to 'team@fameandpartners.com', 'team@fameandpartners.com', class: 'inverse'
+          li Call us on 02 8324 1456
+          li Need help? Simply email us at: #{mail_to 'team@fameandpartners.com', 'team@fameandpartners.com', class: 'inverse'}
       .column.social.hide
         .title Let’s be friends
         ul
@@ -33,5 +28,5 @@ footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
         = link_to 'Fame&Partners', root_path
       .copyright
         ' 2013 Fame & Partners &copy; 
-      .address Bondi Sydney Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
+      .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
       .abn 
