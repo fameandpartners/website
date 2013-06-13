@@ -249,7 +249,7 @@
   }
   .promo-block {
     float: right;
-    margin: 0 54px 0 0;
+    margin: 0 34px 0 0;
     text-align: center;
     font-style: italic;
     font-size: 19px;
@@ -268,12 +268,12 @@
       margin: 0 auto 36px;
     }
     .circles {
-      width: 582px;
+      width: 768px;
       margin: 0 auto;
       overflow: hidden;
       .circle {
         float: left;
-        margin: 0 0 0 48px;
+        margin: 0 0 0 40px;
         width: 162px;
         .image {
           background: #fff;
@@ -291,6 +291,9 @@
           }
           &.fabric {
             background-position: -372px center;
+          }
+          &.sketch {
+            background-position: -570px center;
           }
         }
         &:first-child {
