@@ -14,4 +14,8 @@ class QuizzesController < ApplicationController
       render
     end
   end
+
+  def report
+    render :layout => 'statics'
+  end
 end
