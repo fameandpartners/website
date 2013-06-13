@@ -2,7 +2,9 @@ class Question < ActiveRecord::Base
   attr_accessible :text,
                   :position,
                   :partial,
-                  :multiple
+                  :multiple,
+                  :brands,
+                  :colors
 
   belongs_to :quiz
 

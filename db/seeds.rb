@@ -33,7 +33,8 @@ quiz.questions.create([
                           :text => 'Which brands speak to your style?',
                           :position => 1004,
                           :multiple => true,
-                          :partial => 'brands'
+                          :partial => 'brands',
+                          :populate => 'brands'
                         }, {
                           :text => 'Which shoes would you wear to your prom?',
                           :position => 1005,
@@ -54,7 +55,8 @@ quiz.questions.create([
                           :text => 'Which of these nail colours do you wear regularly?',
                           :position => 1009,
                           :multiple => true,
-                          :partial => 'nail_colours'
+                          :partial => 'nail_colours',
+                          :populate => 'colors'
                         }, {
                           :text => 'How do you rate your fashionability?',
                           :position => 1010,

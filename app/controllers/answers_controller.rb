@@ -47,7 +47,14 @@ class AnswersController < ApplicationController
 
       if session['quiz']['answers'].values.all?(&:present?)
         session['quiz']['answers'].each do |question_id, answer_ids|
+          question = Question.find(question_id)
           answers = Answer.where(:id => answer_ids)
+
+          if question.populate.present?
+            if style_report.respond_to?("#{populate}=")
+              style_report.send("#{populate}=", answers.map(&:code))
+            end
+          end
 
           StyleReport::STYLE_ATTRIBUTES.each do |attribute|
             points = answers.map{|answer| answer.send(attribute) }.reduce(:+) / answers.count
