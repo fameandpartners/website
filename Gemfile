@@ -6,7 +6,7 @@ gem 'slim', '~> 1.3.8'
 gem 'slim-rails', '~> 1.1.1'
 gem 'configatron'
 gem 'paperclip'
-gem 'createsend'
+gem 'createsend', '~> 2.5.0'
 gem 'sidekiq'
 gem 'default_value_for'
 
@@ -39,7 +39,7 @@ group :development, :test do
 end
 
 # spree extensions
-gem 'spree', '1.3.2'
+gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-3-stable'
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'

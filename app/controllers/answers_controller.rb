@@ -51,8 +51,8 @@ class AnswersController < ApplicationController
           answers = Answer.where(:id => answer_ids)
 
           if question.populate.present?
-            if style_report.respond_to?("#{populate}=")
-              style_report.send("#{populate}=", answers.map(&:code))
+            if style_report.respond_to?("#{question.populate}=")
+              style_report.send("#{question.populate}=", answers.map(&:code))
             end
           end
 

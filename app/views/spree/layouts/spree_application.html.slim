@@ -4,6 +4,12 @@ doctype html
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'shared/ga'
+    - if spree_user_signed_in? and session['show_quiz'] and session.delete('show_quiz')
+      javascript:
+        $(function(){
+          showStyleQuiz();
+          bindStyleQuizEvents();
+        });
   body class=(controller_action_class)
     #wrap
       = render 'layouts/header'

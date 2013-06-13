@@ -3,8 +3,7 @@ class Question < ActiveRecord::Base
                   :position,
                   :partial,
                   :multiple,
-                  :brands,
-                  :colors
+                  :populate
 
   belongs_to :quiz
 
