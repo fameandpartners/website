@@ -1,2 +1,2 @@
 $('.quiz-box-inner').html('<%=j render(:template => 'quizzes/thanks.html.slim') %>');
-setTimeout(3000, 'window.location = "<%= report_quiz_path %>"')
+setTimeout(function(){ window.location = "<%= report_quiz_path %>"; }, 3000);

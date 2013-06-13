@@ -182,7 +182,6 @@ $(function(){
   }
 
   $('.quiz-box .film-frame').find(':checkbox, :radio').bind('change', function(event){
-    console.log('CHANGE');
     var $form = $(event.target).parents('form');
 
     $form.find('li:not(:has(:input:checked))').removeClass('active');
