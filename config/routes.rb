@@ -28,6 +28,7 @@ FameAndPartners::Application.routes.draw do
   get '/terms'   => 'statics#terms'
   get '/privacy' => 'statics#privacy'
   get '/legal'   => 'statics#legal'
+  get '/how-it-works'   => 'statics#how_it_works'
 
   # MonkeyPatch for redirecting to Custom Dress page
   get '/fb_auth' => 'pages#fb_auth'

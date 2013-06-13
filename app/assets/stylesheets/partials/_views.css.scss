@@ -677,3 +677,67 @@
     font-style: italic;
   }
 }
+
+#content .how-it-works {
+  .steps {
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 170px;
+      bottom: 340px;
+      left: 20px;
+      border-left: 2px dotted #ddd;
+    }
+    .step {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      margin: 60px 0 0;
+    }
+    .counter {
+      float: left;
+      background: #fff;
+      margin: 54px 0 0;
+      padding: 12px 0;
+      .inner {
+        width: 43px;
+        height: 43px;
+        background: #51515b;
+        font: 400 24px/50px $fontTwo;
+        color: #fff;
+        text-align: center;
+        border-radius: 50%;
+      }
+    }
+    .icon {
+      float: left;
+      width: 244px;
+      height: 188px;
+      margin: 0 0 0 68px;
+      background: image-url('icons-how-it-works.png') 0 0 no-repeat;
+      &.phone {
+        background-position: 0 -188px;
+      }
+      &.design {
+        background-position: 0 -376px;
+      }
+      &.ready {
+        background-position: 0 -564px;
+      }
+    }
+    .description {
+      float: right;
+      width: 660px;
+    }
+    h2 {
+      margin: 10px 0 0;
+      color: #f9b4a8;
+      font-size: 32px;
+      text-transform: uppercase;
+    }
+    ol {
+      margin: 20px 0 0 24px;
+    }
+  }
+}
