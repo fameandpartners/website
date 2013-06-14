@@ -1,30 +1,39 @@
-Spree::User.class_eval do
-  devise :confirmable
+module Overrides
+  module SpreeAuthDevise
+    module User
+      extend ActiveSupport::Concern
 
-  attr_accessible :first_name, :last_name
+      included do
+        devise :confirmable
 
-  validates :first_name,
-            :last_name,
-            :presence => true
+        attr_accessible :first_name, :last_name
 
-  after_create :send_welcome_email, :unless => :confirmation_required?
-  after_update :synchronize_with_campaign_monitor
+        validates :first_name,
+                  :last_name,
+                  :presence => true
 
-  has_attached_file :avatar
+        after_create :send_welcome_email, :unless => :confirmation_required?
+        after_update :synchronize_with_campaign_monitor
 
-  def full_name
-    [first_name, last_name].reject(&:blank?).join(' ')
-  end
+        has_attached_file :avatar
+      end
 
-  private
+      def full_name
+        [first_name, last_name].reject(&:blank?).join(' ')
+      end
 
-  def synchronize_with_campaign_monitor
-    if email_changed? || first_name_changed? || last_name_changed?
-      CampaignMonitor.delay.synchronize(email_was, self)
+      private
+
+      def synchronize_with_campaign_monitor
+        if email_changed? || first_name_changed? || last_name_changed?
+          CampaignMonitor.delay.synchronize(email_was, self)
+        end
+      end
+
+      def send_welcome_email
+        Spree::UserMailer.welcome(self).deliver
+      end
     end
   end
-
-  def send_welcome_email
-    Spree::UserMailer.welcome(self).deliver
-  end
 end
+Spree::User.send(:include, Overrides::SpreeAuthDevise::User)
