@@ -29,6 +29,49 @@ ActiveRecord::Schema.define(:version => 20130613091438) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
+  create_table "categories", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "categories", ["title"], :name => "index_categories_on_title"
+
+  create_table "celebrities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
+  end
+
+  create_table "celebrity_photos", :force => true do |t|
+    t.integer  "celebrity_id"
+    t.datetime "event_date"
+    t.string   "event_name"
+    t.integer  "user_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "post_state_id",      :default => 1
+  end
+
+  create_table "celebrity_photos_posts", :id => false, :force => true do |t|
+    t.integer "post_id",            :null => false
+    t.integer "celebrity_photo_id", :null => false
+  end
+
+  add_index "celebrity_photos_posts", ["post_id", "celebrity_photo_id"], :name => "index_celebrity_photos_posts_on_post_id_and_celebrity_photo_id", :unique => true
+
+  create_table "celebrity_photos_red_carpet_events", :id => false, :force => true do |t|
+    t.integer "red_carpet_event_id", :null => false
+    t.integer "celebrity_photo_id",  :null => false
+  end
+
+  add_index "celebrity_photos_red_carpet_events", ["red_carpet_event_id", "celebrity_photo_id"], :name => "index_photos_red_carpet_events", :unique => true
+
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
     t.string   "file_file_name"
@@ -51,6 +94,33 @@ ActiveRecord::Schema.define(:version => 20130613091438) do
     t.date     "required_at"
   end
 
+  create_table "photo_posts", :force => true do |t|
+    t.integer  "photo_uploaddable_id"
+    t.integer  "photo_id"
+    t.string   "photo_uploaddable_type"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "category_id"
+  end
+
+  add_index "photo_posts", ["photo_uploaddable_id", "photo_uploaddable_type", "photo_id"], :name => "index_photo_uploaddable", :unique => true
+
+  create_table "post_states", :force => true do |t|
+    t.string "title"
+  end
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
+    t.integer  "category_id"
+  end
+
+  add_index "posts", ["title"], :name => "index_posts_on_title", :unique => true
+
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
     t.string   "text"
@@ -70,6 +140,23 @@ ActiveRecord::Schema.define(:version => 20130613091438) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "red_carpet_events", :force => true do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "name"
+    t.string   "short_name"
+    t.text     "content"
+    t.date     "event_date"
+    t.integer  "user_id"
+    t.string   "location"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
+  end
+
+  add_index "red_carpet_events", ["name"], :name => "index_red_carpet_events_on_name", :unique => true
+  add_index "red_carpet_events", ["user_id"], :name => "index_red_carpet_events_on_user_id"
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -150,13 +237,6 @@ ActiveRecord::Schema.define(:version => 20130613091438) do
     t.boolean  "active"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "spree_blogs", :force => true do |t|
-    t.string   "name"
-    t.string   "permalink"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "spree_calculators", :force => true do |t|
@@ -311,6 +391,27 @@ ActiveRecord::Schema.define(:version => 20130613091438) do
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
 
+  create_table "spree_pages", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "slug"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "show_in_header",           :default => false, :null => false
+    t.boolean  "show_in_footer",           :default => false, :null => false
+    t.string   "foreign_link"
+    t.integer  "position",                 :default => 1,     :null => false
+    t.boolean  "visible",                  :default => true
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.string   "layout"
+    t.boolean  "show_in_sidebar",          :default => false, :null => false
+    t.string   "meta_title"
+    t.boolean  "render_layout_as_partial", :default => false
+  end
+
+  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
+
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
     t.string   "name"
@@ -335,37 +436,6 @@ ActiveRecord::Schema.define(:version => 20130613091438) do
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
     t.string   "identifier"
-  end
-
-  create_table "spree_post_categories", :force => true do |t|
-    t.string   "name"
-    t.string   "permalink"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "spree_post_categories_posts", :id => false, :force => true do |t|
-    t.integer "post_id"
-    t.integer "post_category_id"
-  end
-
-  create_table "spree_post_products", :force => true do |t|
-    t.integer "post_id"
-    t.integer "product_id"
-    t.integer "position"
-  end
-
-  create_table "spree_posts", :force => true do |t|
-    t.string   "title"
-    t.string   "path"
-    t.string   "teaser"
-    t.datetime "posted_at"
-    t.text     "body"
-    t.string   "author"
-    t.boolean  "live",       :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.integer  "blog_id"
   end
 
   create_table "spree_preferences", :force => true do |t|

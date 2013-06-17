@@ -118,7 +118,7 @@
         }
         &.active {
           label {
-            border-color: #f9b4a8;
+            border-color: #bffbef;
           }
         }
       }
@@ -155,8 +155,14 @@
         }
         &.active {
           label {
-            border-color: #f9b4a8;
+            border-color: #bffbef;
           }
+        }
+      }
+      &.brands{
+        margin-left: 100px;
+        li{
+          width: 280px;
         }
       }
     }
@@ -194,7 +200,7 @@
           padding: 4px 0 0;
         }
         &.active {
-          border-color: #d6d6d6;
+          border-color: #bffbef;
         }
       }
     }

@@ -17,15 +17,15 @@ quiz = Quiz.create(:name => 'Style Quiz')
 
 quiz.questions.create([
                         {
-                          :text => 'Which outfit below would you most want to wear?',
+                          :text => 'Choose the look that\'s closest to your everyday style?',
                           :position => 1001,
                           :partial => 'outfits'
                         }, {
-                          :text => 'Which dress would you choose to walk the red carpet at the Oscars?',
+                          :text => 'You\'re walking the red carpet. Which dress would you wear?',
                           :position => 1002,
                           :partial => 'oscar_dresses'
                         }, {
-                          :text => 'When you’re getting dressed up, which of these best describes your fashion style?',
+                          :text => 'It\'s time to dress up. Which best describes your style.',
                           :position => 1003,
                           :multiple => true,
                           :partial => 'style_words'
@@ -36,33 +36,33 @@ quiz.questions.create([
                           :partial => 'brands',
                           :populate => 'brands'
                         }, {
-                          :text => 'Which shoes would you wear to your prom?',
+                          :text => 'You\'ve won a shoe shopping spree. Which ones do you nab?',
                           :position => 1005,
                           :partial => 'prom_shoes'
                         }, {
-                          :text => 'What type of makeup would you love to wear to prom?',
+                          :text => 'Tell us which eye makeup look you love.',
                           :position => 1006,
                           :partial => 'prom_makeup'
                         }, {
-                          :text => 'If you could have any celebrity’s hair, which of these would you so love to wear to prom?',
+                          :text => 'Whether it works for you or not, which hair style do you love?',
                           :position => 1007,
                           :partial => 'prom_hair'
                         }, {
-                          :text => 'Which of these runway dresses would you want to borrow inspiration from, for your prom look?',
+                          :text => 'Which of these runway looks would inspire your dream formal dress?',
                           :position => 1008,
                           :partial => 'prom_dresses'
                         }, {
-                          :text => 'Which of these nail colours do you wear regularly?',
+                          :text => 'Which of these nail colours do you regularly wear?',
                           :position => 1009,
                           :multiple => true,
                           :partial => 'nail_colours',
                           :populate => 'colors'
                         }, {
-                          :text => 'How do you rate your fashionability?',
+                          :text => 'How important is fashion to you?',
                           :position => 1010,
                           :partial => 'fashionability'
                         }, {
-                          :text => 'How sexy do you want your Prom Dress?',
+                          :text => 'Do you prefer to show some skin or to cover up? Rank how sexy you like to look.',
                           :position => 1011,
                           :partial => 'sexiness'
                         }
@@ -162,8 +162,25 @@ question.answers.create([
                             :code => 'sweet',
                             :girly => 1
                           }, {
+                            :code => 'structured',
+                            :glam => 1,
+                            :edgy => 1,
+                            :classic => 1
+                          }, {
+                            :code => 'relaxed',
+                            :glam => 1,
+                            :bohemian => 1,
+                            :classic => 1
+                          }, {
+                            :code => 'understated',
+                            :glam => 1,
+                            :girly => 1,
+                            :bohemian => 1,
+                            :classic => 1
+                          }, {
                             :code => 'cool',
-                            :bohemian => 1
+                            :bohemian => 1,
+                            :edgy => 1
                           }
                         ])
 

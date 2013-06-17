@@ -3,7 +3,7 @@ $('.quiz-box-inner').find('.film').css('width', $('.quiz-box-inner').find('.film
 $('.quiz-box-inner').find('.next a').click(function(event){
   var $link = $(event.target);
   $link.unbind('click');
-  $link.text('Processing...');
+  #$link.text('Processing...');
   event.preventDefault();
   $('#question-<%= session['quiz']['current_question_id'] %> form').submit();
 });
