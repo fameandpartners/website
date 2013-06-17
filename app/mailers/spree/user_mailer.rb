@@ -6,7 +6,7 @@ class Spree::UserMailer < ActionMailer::Base
   def welcome(user)
     @user = user
     mail(:to => user.email,
-         :subject => Spree::Config[:site_name] + ' ' + t('emails.subjects.users.welcome'))
+         :subject => t('emails.subjects.users.welcome') + ' to ' + Spree::Config[:site_name])
   end
 
   def reset_password_instructions(user)
