@@ -9,10 +9,115 @@
 }
 
 .promo {
-  padding: 62px 0 0;
-  height: 558px;
-  background: image-url('image-top-promo.jpg') center center no-repeat;
-  background-size: cover;
+  margin: 10px 0;
+  .wrap {
+    padding: 10px;
+  }
+  .promo-image {
+    border: 9px solid #fff;
+    background: image-url('bg-latest.jpg') 0 0 no-repeat;
+    height: 523px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+  }
+  .promo-image-inner {
+    width: 362px;
+    height: 362px;
+    margin: 60px 0 0 60px;
+    text-align: center;
+    background: #fff;
+    background: rgba(255, 255, 255, .78);
+    border-radius: 50%;
+    img {
+      margin: 75px 0 0;
+    }
+  }
+}
+
+.home-images {
+  .wrap {
+    padding: 20px 10px;
+    position: relative;
+  }
+  .image {
+    float: left;
+    width: 216px;
+    height: 314px;
+    background: #ccc;
+    border: 9px solid #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+    &.rotate-1 {
+      position: absolute;
+      left: 160px;
+      top: 20px;
+      @include transform(rotate(8deg));
+    }
+    &.rotate-2 {
+      position: absolute;
+      left: 344px;
+      top: 20px;
+      @include transform(rotate(-6deg));
+    }
+    &.large {
+      float: right;
+      width: 460px;
+    }
+  }
+}
+
+.blog-posts-preview {
+  .wrap {
+    padding: 20px 10px;
+    position: relative;
+  }
+  .blog-post {
+    position: relative;
+    .label {
+      position: absolute;
+      z-index: 2;
+      top: -25px;
+      left: -25px;
+      width: 62px;
+      height: 62px;
+      background: #333;
+      font: 400 14px/62px $fontThree;
+      text-align: center;
+      color: #fff;
+      border-radius: 50%;
+    }
+    .image-preview {
+      width: 486px;
+      height: 285px;
+      background: #ccc;
+      border: 9px solid #fff;
+      box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+    }
+    &.rotate-1 {
+      position: absolute;
+      left: 548px;
+      top: 20px;
+      .label {
+        left: -40px;
+        top: -10px;
+      }
+      .image-preview {
+        width: 252px;
+        @include transform(rotate(-6deg));
+      }
+    }
+    &.rotate-2 {
+      position: absolute;
+      right: 26px;
+      top: 20px;
+      .label {
+        left: 0;
+        top: -36px;
+      }
+      .image-preview {
+        width: 252px;
+        @include transform(rotate(8deg));
+      }
+    }
+  }
 }
 
 .promo-text {
@@ -226,87 +331,6 @@
   }
 }
 
-.dream-dress {
-  padding: 46px 0 0;
-  height: 604px;
-  overflow: hidden;
-  background: image-url('bg-promo-custom-dress.png') 0 0 repeat #ddddd7;
-  .wrap {
-    height: 604px;
-  }
-  .girl-in-dress {
-    float: left;
-    width: 345px;
-    height: 604px;
-    overflow: hidden;
-    margin-left: -86px;
-    position: relative;
-    img {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-    }
-  }
-  .promo-block {
-    float: right;
-    margin: 0 34px 0 0;
-    text-align: center;
-    font-style: italic;
-    font-size: 19px;
-    line-height: 1.3;
-    .block-title {
-      margin: 47px 0 0;
-    }
-    .separate {
-      width: 352px;
-      height: 1px;
-      margin: 31px auto 41px;
-      background: #fff;
-    }
-    .desc {
-      width: 520px;
-      margin: 0 auto 36px;
-    }
-    .circles {
-      width: 768px;
-      margin: 0 auto;
-      overflow: hidden;
-      .circle {
-        float: left;
-        margin: 0 0 0 40px;
-        width: 162px;
-        .image {
-          background: #fff;
-          background: image-url('icons-homepage-dream-prom.png') 0 center no-repeat rgba(255, 255, 255, .45);
-          width: 162px;
-          height: 162px;
-          margin: 0 0 30px;
-          overflow: hidden;
-          border-radius: 50%;
-          &.unique {
-            background-position: 49px center;
-          }
-          &.designer {
-            background-position: -162px center;
-          }
-          &.fabric {
-            background-position: -372px center;
-          }
-          &.sketch {
-            background-position: -570px center;
-          }
-        }
-        &:first-child {
-          margin: 0;
-        }
-      }
-    }
-    .facebook-signup {
-      margin: 30px auto 70px;
-    }
-  }
-}
-
 /* GLOBAL BLOCKS */
 
 .slider-block {
@@ -399,64 +423,6 @@
 }
 
 /* END: GLOBAL BLOCKS */
-
-.promo-slider {
-  height: 718px;
-  border-bottom: 2px solid #e7e7e7;
-  box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.3);
-  .slides-overlay {
-    width: 1096px;
-    height: 364px;
-    margin: -172px 0 0 -548px;
-  }    
-  .first-title{
-    padding-top: 20px;
-    font-size: 48px;
-  }
-  .inner {
-    width: 1096px;
-    margin: 233px auto 0;
-  }
-  .slides {
-    width: 100%;
-    height: 718px;
-    overflow: hidden;
-    li {
-      width: 100%;
-      height: 718px;
-      overflow: hidden;
-      float: left;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      .separate {
-        width: 232px;
-        height: 1px;
-        background: #F9B4A8;
-        margin: 20px auto 20px;
-      }
-      .desc {
-        width: 380px;
-        margin: 0 auto;
-        color: #fff;
-        font-style: italic;
-        font-size: 19px;
-        line-height: 1.3;
-      }
-    }
-  }
-  .pagination {
-    bottom: 279px;
-    .item-0 {
-      display: none;
-    }
-  }
-}
-
-.slider-bottom {
-  background: image-url('bg-slide.jpg') center center no-repeat;
-  background-size: cover;
-}
 
 .mini-slider {
   margin: 26px 0 0;
