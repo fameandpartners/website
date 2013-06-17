@@ -69,11 +69,25 @@ header
               input type="text" name="search" placeholder="Search the blog"
 
   .level-three.main-nav
-    nav.main
-      ul
-        li = link_to 'Custom made dresses', root_path, title: "Custom made dresses from Fame & Partners"
-        li = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
-        li = link_to 'About us', about_path, title: "About Fame & Partners"
-        li = link_to 'Our team', team_path, title: "Fame & Partners Team"
-        li.hide = link_to 'Blog', '#'
-        li.hide = link_to 'Style quiz', '#'
+    .wrap.no-overflow
+      nav.main
+        ul.clearfix
+          li.active.with-dropdown
+            = link_to 'Custom made dresses', root_path, title: "Custom made dresses from Fame & Partners"
+            .dropdown-menu-wrapper
+              ul.dropdown-menu
+                li.title Popular celebrities
+                li = link_to 'Popular celebrity', '#'
+                li = link_to 'Popular celebrity', '#'
+                li = link_to 'Popular celebrity', '#'
+                li = link_to 'Popular celebrity', '#'
+                li = link_to 'Popular celebrity', '#'
+                li = link_to 'Popular celebrity', '#'
+                li = link_to 'Popular celebrity', '#'
+                li = link_to 'Popular celebrity', '#'
+                li = link_to 'Popular celebrity', '#'
+          li = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
+          li = link_to 'About us', about_path, title: "About Fame & Partners"
+          li = link_to 'Our team', team_path, title: "Fame & Partners Team"
+          li.hide = link_to 'Blog', '#'
+          li.hide = link_to 'Style quiz', '#'
