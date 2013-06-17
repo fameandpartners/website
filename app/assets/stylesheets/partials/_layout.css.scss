@@ -48,12 +48,13 @@
 header {
   width: 100%;
   position: relative;
-  height: 137px;
+  height: 169px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
   .first-level {
     .inner {
       height: 29px;
-      margin: 32px 34px 20px;
-      @include box-sizing(border-box);
+      padding: 32px 0 0;
+      margin: 0 34px 20px;
     }
     .wishlist, .shopping-bag {
       float: left;
