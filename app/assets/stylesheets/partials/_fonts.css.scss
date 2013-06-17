@@ -1,35 +1,47 @@
 @font-face {
-    font-family: 'GranjonLTStd';
-    src: url('/fonts/granjonltstd.eot');
-    src: url('/fonts/granjonltstd.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/granjonltstd.woff') format('woff'),
-         url('/fonts/granjonltstd.ttf') format('truetype'),
-         url('/fonts/granjonltstd.svg#GranjonLTStd') format('svg');
-    font-weight: 300;
-    font-style: normal;
+  font-family: 'GranjonLTStd';
+  src: url('/fonts/granjonltstd.eot');
+  src: url('/fonts/granjonltstd.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/granjonltstd.woff') format('woff'),
+       url('/fonts/granjonltstd.ttf') format('truetype'),
+       url('/fonts/granjonltstd.svg#GranjonLTStd') format('svg');
+  font-weight: 300;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'GranjonLTStd';
-    src: url('/fonts/granjonltstd-italic.eot');
-    src: url('/fonts/granjonltstd-italic.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/granjonltstd-italic.woff') format('woff'),
-         url('/fonts/granjonltstd-italic.ttf') format('truetype'),
-         url('/fonts/granjonltstd-italic.svg#GranjonLTStd') format('svg');
-    font-weight: 300;
-    font-style: italic;
+  font-family: 'GranjonLTStd';
+  src: url('/fonts/granjonltstd-italic.eot');
+  src: url('/fonts/granjonltstd-italic.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/granjonltstd-italic.woff') format('woff'),
+       url('/fonts/granjonltstd-italic.ttf') format('truetype'),
+       url('/fonts/granjonltstd-italic.svg#GranjonLTStd') format('svg');
+  font-weight: 300;
+  font-style: italic;
 }
 
 @font-face {
-    font-family: 'GranjonLTStd';
-    src: url('/fonts/granjonltstd-bold.eot');
-    src: url('/fonts/granjonltstd-bold.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/granjonltstd-bold.woff') format('woff'),
-         url('/fonts/granjonltstd-bold.ttf') format('truetype'),
-         url('/fonts/granjonltstd-bold.svg#GranjonLTStd') format('svg');
-    font-weight: 700;
-    font-style: normal;
+  font-family: 'GranjonLTStd';
+  src: url('/fonts/granjonltstd-bold.eot');
+  src: url('/fonts/granjonltstd-bold.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/granjonltstd-bold.woff') format('woff'),
+       url('/fonts/granjonltstd-bold.ttf') format('truetype'),
+       url('/fonts/granjonltstd-bold.svg#GranjonLTStd') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Annifont';
+  src: url('/fonts/annifont.eot');
+  src: url('/fonts/annifont.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/annifont.woff') format('woff'),
+       url('/fonts/annifont.ttf') format('truetype'),
+       url('/fonts/annifont.svg#Annifont') format('svg');
+  font-weight: 400;
+  font-style: normal;
 }
 
 $fontOne: 'Lato', sans-serif;
 $fontTwo: 'GranjonLTStd', sans-serif;
+$fontThree: 'Annifont', sans-serif;
