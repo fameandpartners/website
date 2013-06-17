@@ -1,16 +1,55 @@
-header {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 62px;
-  .wrap {
-    height: 62px;
-    border-bottom: 1px solid #ddd;
+.top-links {
+  background: #333;
+  height: 33px;
+  font: 700 11px/26px $fontOne;
+  color: #d1d1d1;
+  text-transform: uppercase;
+  a {
+    text-decoration: none;
+    color: #d1d1d1;
+    display: block;
   }
+  ul {
+    margin: 0 34px;
+    li {
+      margin: 4px 0 0 12px;
+      padding: 0 0 0 12px;
+      border-left: 1px solid #696969;
+      float: left;
+      &:first-child {
+        border-left: 0;
+        margin-left: 0;
+        padding-left: 0;
+      }
+    }
+  }
+  .top-icon {
+    background: image-url('icons-top-links.png') 0 0 no-repeat;
+    padding: 0 0 0 20px;
+    &.phone {
+      background-position: 12px -24px;
+      padding: 0 0 0 32px;
+    }
+    &.link-livechat {
+      background-position: 0 -48px;
+      padding-left: 24px;
+    }
+    &.link-signup {
+      background-position: 0 -72px;
+      color: #fe9f91;
+    }
+  }
+}
+
+.fixed-bar {
+  display: none;
+}
+
+header {
+  width: 100%;
+  height: 168px;
   .logo {
     float: left;
-    margin: 19px 0 0 0;
     font: 300 20px/1.1 $fontOne;
     text-transform: uppercase;
     letter-spacing: 10px;
@@ -69,6 +108,44 @@ header {
       }
       span {
         float: right;
+      }
+    }
+  }
+  .first-level {
+    .inner {
+      height: 29px;
+      margin: 32px 34px;
+      @include box-sizing(border-box);
+    }
+    .wishlist, .shopping-bag {
+      float: left;
+    }
+    .shopping-bag {
+      margin: 0 0 0 20px;
+    }
+    .wishlist-link, .shopping-bag-toggler {
+      font: 400 14px/29px $fontThree;
+      text-decoration: none;
+      color: #333;
+      display: block;
+      padding: 0 0 0 32px;
+      background: image-url('icons-header-cart.png') 0 0 no-repeat;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .shopping-bag-toggler {
+      position: relative;
+      background-position: 0 -29px;
+      .counter {
+        position: absolute;
+        top: 0;
+        left: 1px;
+        width: 22px;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        font: 700 10px/36px $fontOne;
       }
     }
   }

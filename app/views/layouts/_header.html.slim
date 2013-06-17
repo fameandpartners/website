@@ -1,46 +1,79 @@
-header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
+.top-links
   .wrap
-    .logo
-      = link_to 'Fame&Partners', root_path
-    ul.icons
-      li
-        .icon.quote
-        span
-          ' Free
-          br
-          ' Quote
-      li
-        .icon.shipping
-        span
-          ' Free
-          br
-          ' Shipping
-      li
-        .icon.returns
-        span
-          ' Free
-          br
-          ' Returns
-      li
-        .icon.guarantee
-        span
-          ' Fit
-          br
-          ' Guarantee
-      li
-        .icon.turnaround
-        span
-          ' 3 week
-          br
-          ' turnaround
-    nav
+    nav.fleft
+      ul
+        li = link_to 'Home', root_path, class: 'top-icon link-root'
+        li.top-icon.phone AU. 1800 455 345
+        li = link_to 'Live chat', root_path, class: 'top-icon link-livechat'
+    nav.fright
       ul
         - unless spree_user_signed_in?
-          li = link_to 'Sign in', spree_login_path, class: 'btn transparent'
-          li = link_to 'Sign up', spree_signup_path, class: 'btn pink'
+          li = link_to 'Sign up', spree_signup_path, class: 'top-icon link-signup'
+          li = link_to 'Log-in', spree_login_path, class: 'link-login'
         - else
-          li.user
-            span.inverse =' current_spree_user.full_name
-            br
+          li.loggedin
+            =' current_spree_user.full_name
             ' is logged in
-          li = link_to 'Sign out', spree_logout_path, class: 'btn transparent'
+          li = link_to 'Sign out', spree_logout_path
+
+header
+  .first-level
+    .wrap.no-overflow
+      .inner
+        .fleft
+          .logo = link_to 'Fame&Partners', root_path
+        .fright
+          .wishlist = link_to 'Wish list', '#', class: 'wishlist-link'
+          .shopping-bag
+            = link_to '#', class: 'shopping-bag-toggler' do
+              .counter 12
+              ' Shopping bag
+  .second-level
+    .wrap
+      .inner
+        .fleft
+          ul.icons
+            li
+              .icon.quote
+              span
+                ' Free
+                br
+                ' Quote
+            li
+              .icon.shipping
+              span
+                ' Free
+                br
+                ' Shipping
+            li
+              .icon.returns
+              span
+                ' Free
+                br
+                ' Returns
+            li
+              .icon.guarantee
+              span
+                ' Fit
+                br
+                ' Guarantee
+            li
+              .icon.turnaround
+              span
+                ' 3 week
+                br
+                ' turnaround
+        .fright
+          .search
+            form
+              input type="text" name="search" placeholder="Search the blog"
+
+  .level-three.main-nav
+    nav.main
+      ul
+        li = link_to 'Custom made dresses', root_path, title: "Custom made dresses from Fame & Partners"
+        li = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
+        li = link_to 'About us', about_path, title: "About Fame & Partners"
+        li = link_to 'Our team', team_path, title: "Fame & Partners Team"
+        li.hide = link_to 'Blog', '#'
+        li.hide = link_to 'Style quiz', '#'
