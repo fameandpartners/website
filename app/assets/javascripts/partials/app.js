@@ -130,21 +130,28 @@ $(function(){
       container: "#carousel-pagination"
     }
   });
-  
-  $(".promo-badge").delay(500).fadeIn('slow');
 
-  $(".promo-badge .close").on('click', function() {
-    $(".promo-badge").fadeOut('fast');
+  $('#shopping-bag-popup').carouFredSel({
+    direction: 'up',
+    items: 2,
+    circular: false,
+    infinite: false,
+    auto  : false,
+    prev  : { 
+      button  : "#shopping-arrow-up",
+      key   : "up",
+      items: 2
+    },
+    next  : { 
+      button  : "#shopping-arrow-down",
+      key   : "down",
+      items: 2
+    }
   });
-
-  $(".promo-badge .promo-badge-inner").on('click', function() {
-    $(".promo-popup").fadeIn('fast');
-    $(".promo-badge").fadeOut('fast');
-  });
-
-  $(".promo-popup .close, .promo-popup .overlay").on('click', function() {
-    $(".promo-popup").fadeOut('fast');
-    $(".promo-badge").fadeIn('fast');
+  $('.shopping-bag-popup').hide();
+  $('.shopping-bag-toggler').on('click', function() {
+    $('.shopping-bag-popup').slideToggle('slow');
+    return false;
   });
 
 });
