@@ -131,4 +131,27 @@ $(function(){
     }
   });
 
+  $('#shopping-bag-popup').carouFredSel({
+    direction: 'up',
+    items: 2,
+    circular: false,
+    infinite: false,
+    auto  : false,
+    prev  : { 
+      button  : "#shopping-arrow-up",
+      key   : "up",
+      items: 2
+    },
+    next  : { 
+      button  : "#shopping-arrow-down",
+      key   : "down",
+      items: 2
+    }
+  });
+  $('.shopping-bag-popup').hide();
+  $('.shopping-bag-toggler').on('click', function() {
+    $('.shopping-bag-popup').slideToggle('slow');
+    return false;
+  });
+
 });

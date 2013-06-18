@@ -28,6 +28,102 @@ header
             = link_to '#', class: 'shopping-bag-toggler' do
               .counter 12
               ' Shopping bag
+            .shopping-bag-popup
+              #shopping-arrow-up.arrow-up
+              ul#shopping-bag-popup.items-carousel
+                li.item-block
+                  .thumbnail
+                  .item-info
+                    .price $265
+                    .name = link_to 'Product name', '#'
+                    .desc Short description. Dolor sit amet, consectetur adipisicing elit, sed do.
+                    ul.specs
+                      li
+                        .label Color
+                        .value
+                          .color.pink
+                      li
+                        .label Size
+                        .value 8
+                      li
+                        .label Quantity
+                        .value 1
+                      li
+                        .label Estimated delivery
+                        .value 3-4 weeks
+                li.item-block
+                  .thumbnail
+                  .item-info
+                    .price.sale
+                      ' $267
+                      span $205
+                    .name = link_to 'Product name', '#'
+                    .desc Short description. Dolor sit amet, consectetur adipisicing elit, sed do.
+                    ul.specs
+                      li
+                        .label Color
+                        .value
+                          .color.pink
+                      li
+                        .label Size
+                        .value 8
+                      li
+                        .label Quantity
+                        .value 1
+                      li
+                        .label Estimated delivery
+                        .value 3-4 weeks
+                li.item-block
+                  .thumbnail
+                  .item-info
+                    .price $265
+                    .name = link_to 'Product name', '#'
+                    .desc Short description. Dolor sit amet, consectetur adipisicing elit, sed do.
+                    ul.specs
+                      li
+                        .label Color
+                        .value
+                          .color.pink
+                      li
+                        .label Size
+                        .value 8
+                      li
+                        .label Quantity
+                        .value 1
+                      li
+                        .label Estimated delivery
+                        .value 3-4 weeks
+                li.item-block
+                  .thumbnail
+                  .item-info
+                    .price.sale
+                      ' $267
+                      span $205
+                    .name = link_to 'Product name', '#'
+                    .desc Short description. Dolor sit amet, consectetur adipisicing elit, sed do.
+                    ul.specs
+                      li
+                        .label Color
+                        .value
+                          .color.pink
+                      li
+                        .label Size
+                        .value 8
+                      li
+                        .label Quantity
+                        .value 1
+                      li
+                        .label Estimated delivery
+                        .value 3-4 weeks
+              #shopping-arrow-down.arrow-down
+              .totals
+                .label.fleft Total
+                .value.fright
+                  ' AUD
+                  span $330
+              .buttons
+                = link_to 'Continue shopping', '#', class: 'continue'
+                = link_to 'Buy now', '#', class: 'buy-now'
   .second-level
     .wrap
       .inner
