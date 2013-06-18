@@ -1,6 +1,9 @@
 @import 'bourbon';
 
 @import 'partials/fonts';
+
+@import 'partials/unsemantic/unsemantic-grid-responsive';
+
 @import 'partials/reset';
 @import 'partials/components';
 @import 'partials/forms';
