@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
   def controller_action_class
-    "#{controller.controller_name}-#{restfull_action_name}"
+    "#{controller.controller_name} #{restfull_action_name}"
   end
 
   def facebook_authentication_available?
