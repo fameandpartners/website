@@ -1,0 +1,46 @@
+#content .page-name {
+  text-align: left;
+  margin: 24px 0 0;
+  .inner {
+    overflow: hidden;
+  }
+  .title {
+    float: left;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font: 300 25px/25px $fontOne;
+    &:before {
+      display: none;
+    }
+    em {
+      font-family: $fontFour;
+      font-style: italic;
+      font-weight: 400;
+      color: #000;
+    }
+    span {
+      font-size: 27px;
+      margin: 0 0 0 4px;
+      vertical-align: top;
+    }
+  }
+  .filters {
+    float: right;
+    li {
+      float: left;
+      margin: 9px 0 0 30px;
+      a {
+        font: 400 14px/1 $fontOne;
+        color: #999898;
+      }
+    }
+  }
+  .subtitle {
+    text-align: left;
+    width: auto;
+    margin: 5px 0 0;
+    font: 300 13px/1 $fontOne;
+    color: #999898;
+  }
+}
