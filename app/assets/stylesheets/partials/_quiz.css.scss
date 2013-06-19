@@ -2,17 +2,22 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 1100px;
-  height: 644px;
+  width: 1048px;
+  height: 551px;
   z-index: 2000;
-  margin: -332px 0 0 -550px;
+  margin: -275px 0 0 -524px;
   background: #fff;
   box-shadow: 0 0 30px rgba(0, 0, 0, .2);
   .quiz-box-inner {
-    height: 616px;
-    margin: 4px;
-    border: 10px solid #e8e8e8;
+    height: 525px;
+    border: 13px solid #fff;
     position: relative;
+  }
+  .signup-box-wrapper {
+    width: 1022px;
+    height: 525px;
+    overflow: hidden;
+    background: image-url('bg-quiz-start.jpg') center center no-repeat;
   }
   .signup-box,
   .thanks-box {
@@ -34,6 +39,40 @@
     }
   }
   .signup-box {
+    background: #fff;
+    width: 610px;
+    height: 310px;
+    margin: 107px auto 0;
+    .title, .subtitle {
+      text-align: center;
+      text-transform: uppercase;
+      color: #333;
+    }
+    .title {
+      font: 100 32px/1 $fontOne;
+      position: relative;
+      padding: 30px 0 11px;
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin: 0 0 0 -110px;
+        background: #333;
+        width: 220px;
+        height: 1px;
+      }
+    }
+    .subtitle {
+      margin: 9px 0 25px;
+      width: auto;
+      font: 400 58px/1 $fontThree;
+    }
+    .desc {
+      font: 300 17px/1.2 $fontOne;
+      text-align: center;
+      margin: 0 0 36px;
+    }
     .signup-buttons {
       text-align: center;
       font: 300 14px/33px $fontOne;
@@ -58,16 +97,17 @@
         text-transform: uppercase;
         text-decoration: none;
         font-weight: 400;
-        border-radius: 6px;
         box-shadow: 0 1px 3px rgba(255, 255, 255, .7) inset;
       }
     }
     .signin-link {
       position: absolute;
-      bottom: 56px;
-      right: 56px;
+      padding: 12px 26px;
+      bottom: 0;
+      right: 0;
       font-size: 18px;
       font-style: italic;
+      background: #bffbef;
       a {
         font-weight: 700;
       }
