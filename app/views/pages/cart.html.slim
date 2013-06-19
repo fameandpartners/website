@@ -1,0 +1,122 @@
+.wrap
+  .page-name.with-border
+    .inner
+      h1.title
+        em shopping
+        span Bag
+
+  .cart-page
+    .cart-labels.grid-container
+      .grid-50.name Item description
+      .grid-30.details Details
+      .grid-20.price Price
+    ul.items
+      li.item.grid-container
+        .grid-50.description
+          .image
+            .remove = link_to 'Remove from bag', '#'
+          .desc
+            .name = link_to 'Product name', '#'
+            .text Short description. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+            .wishlist = link_to 'Move to wish list', '#'
+        .grid-30.details
+          .line
+            .label Color
+            .value
+              .color.ping
+          .line
+            .label Size
+            .value 8
+          .line
+            .label Quantity
+            .value
+              select name="quantity"
+                option 1
+                option 2
+          .line
+            .label Estimated Delivery
+            .value 3-4 weeks
+          .edit = link_to 'Edit item', '#'
+        .grid-20.price
+          .pricing AUD $200
+          .style-notes
+            input type="checkbox" name="note"
+            label
+              ' Add Style Notes
+              span $4.55
+      li.item.grid-container
+        .grid-50.description
+          .image
+            .remove = link_to 'Remove from bag', '#'
+          .desc
+            .name = link_to 'Product name', '#'
+            .text Short description. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+            .wishlist = link_to 'Move to wish list', '#'
+        .grid-30.details
+          .line
+            .label Color
+            .value
+              .color.ping
+          .line
+            .label Size
+            .value 8
+          .line
+            .label Quantity
+            .value
+              select name="quantity"
+                option 1
+                option 2
+          .line
+            .label Estimated Delivery
+            .value 3-4 weeks
+          .edit = link_to 'Edit item', '#'
+        .grid-20.price
+          .pricing AUD $200
+          .style-notes
+            input type="checkbox" name="note"
+            label
+              ' Add Style Notes
+              span $4.55
+    .promo-summary.grid-container
+      .promo-block.grid-70
+        .columns.grid-container
+          .column.grid-25
+            .title Full security
+            .desc = image_tag 'icon-norton.png', width: 112, height: 55, alt: ''
+          .column.grid-45
+            .title Payment methods
+            .desc = image_tag 'icon-payments-methods.png', width: 299, height: 30, alt: ''
+          .column.grid-30
+            .title Promo code
+            .desc
+              input type="text" name="promocode"
+      .summary.grid-25.prefix-5
+        .title Order summary
+        ul
+          li
+            .label Subtotal
+            .desc
+              span AUD
+              ' $350
+          li
+            .label Shipping
+            .desc
+              span AUD
+              ' $0
+          li
+            .label Promotion
+            .desc
+              span AUD
+              ' - $20
+          li.totals
+            .label Total
+            .desc
+              span AUD
+              ' $320
+              .taxes Including GST
+    .continue-buy.grid-container
+      .grid-70 = link_to 'Continue shopping', '#', class: 'continue-shopping'
+      .grid-25.prefix-5
+        = link_to 'Buy now', '#', class: 'buy-now'
+        .or or
+        .paypal paypal

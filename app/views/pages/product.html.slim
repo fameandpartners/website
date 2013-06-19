@@ -10,8 +10,8 @@
         #photos.tab-content
           .tab-content-inner
             .photos-carousel
-              .arrow-up
-              ul.carousel-pictures
+              #product-images-up.arrow-up
+              ul#product-images.carousel-pictures
                 li
                   = link_to '#' do
                     = image_tag 'http://placehold.it/83x115', alt: ''
@@ -24,7 +24,10 @@
                 li
                   = link_to '#' do
                     = image_tag 'http://placehold.it/83x115', alt: ''
-              .arrow-down
+                li
+                  = link_to '#' do
+                    = image_tag 'http://placehold.it/83x115', alt: ''
+              #product-images-down.arrow-down
             .big-photo
               .zoom = link_to 'Zoom', '#'
               = image_tag 'http://placehold.it/460x590', alt: ''
@@ -45,10 +48,11 @@
             .color.yellow
             .color.black
         .size-select
-          select.select2 name="size"
-            option Choose your size
-            option Small
-          = link_to 'What size am i?', '#'
+          .select-box
+            select#toggle-selectbox.select2 name="size"
+              option Choose your size
+              option Small
+          = link_to 'What size am i?', '#', class: 'info'
         .body-shapes
           .desc The body shapes that this dress suits:
           ul
@@ -65,7 +69,7 @@
               = link_to '#' do
                 = image_tag 'http://placehold.it/60x84', alt: ''
         .buy-wishlist
-          = link_to 'Buy now', '#', class: 'buy-now'
+          = link_to 'Add to bag', '#', class: 'buy-now'
           = link_to 'Add to wish list', '#', class: 'add-wishlist'
         .tabs
           ul.tabs-links
@@ -73,4 +77,36 @@
             li = link_to 'Size and fit', '#sizes'
             li = link_to 'Details', '#detials'
             li = link_to 'Styling Notes', '#notes'
-          #description.tab-content
+          #description.tab-content Tab content
+
+  .page-name
+    .inner
+      h1.title
+        em Similar
+        span Dresses
+
+  ul.products-list.grid-container
+    li.product-item.grid-25
+      .thumbnail
+        .like = link_to 'Like item', '#'
+        .quick-view = link_to 'Quick view', '#'
+        = image_tag 'http://placehold.it/243x352', width: 243, height: 352, alt: ''
+      .name = link_to 'Dress name', '#'
+    li.product-item.grid-25
+      .thumbnail
+        .like = link_to 'Like item', '#'
+        .quick-view = link_to 'Quick view', '#'
+        = image_tag 'http://placehold.it/243x352', width: 243, height: 352, alt: ''
+      .name = link_to 'Dress name', '#'
+    li.product-item.grid-25
+      .thumbnail
+        .like = link_to 'Like item', '#'
+        .quick-view = link_to 'Quick view', '#'
+        = image_tag 'http://placehold.it/243x352', width: 243, height: 352, alt: ''
+      .name = link_to 'Dress name', '#'
+    li.product-item.grid-25
+      .thumbnail
+        .like = link_to 'Like item', '#'
+        .quick-view = link_to 'Quick view', '#'
+        = image_tag 'http://placehold.it/243x352', width: 243, height: 352, alt: ''
+      .name = link_to 'Dress name', '#'
