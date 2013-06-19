@@ -134,3 +134,20 @@
     }
   }
 }
+
+.product-page {
+  margin: 34px 0 0;
+  .photos-carousel {
+    float: left;
+    margin: 0 0 0 16px;
+  }
+  .big-photo {
+    float: right;
+  }
+  .share-buttons {
+    border: 1px solid #d8d8da;
+    border-top: 0;
+    padding: 18px;
+    text-align: center;
+  }
+}

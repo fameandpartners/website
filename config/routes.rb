@@ -24,6 +24,7 @@ FameAndPartners::Application.routes.draw do
 
   # Static for ecommerce
   match '/products' => 'pages#products'
+  match '/product' => 'pages#product'
 
   # Static pages
   get '/about'   => 'statics#about'
