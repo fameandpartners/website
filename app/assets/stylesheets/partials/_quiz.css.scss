@@ -317,8 +317,9 @@
       .progress-bar {
         float: left;
         background: #e8e8e8;
-        width: 860px;
+        width: 936px;
         height: 30px;
+        margin: 0 7px;
         .filler {
           position: relative;
           height: 30px;
@@ -345,19 +346,29 @@
           }
         }
       }
+      .prev, .next {
+        a {
+          width: 42px;
+          height: 30px;
+          display: block;
+          overflow: hidden;
+          text-indent: -999px;
+          background: image-url('icons-progressbar-arrows.png') center 0 no-repeat #333;
+        }
+      }
+      .prev {
+        float: left;
+        a {
+          background-position: center -30px;
+        }
+      }
       .next {
         float: right;
-        a {
-          font: 400 14px/30px $fontOne;
-          display: block;
-          padding: 0 20px;
-          height: 30px;
-          width: 110px;
-          text-align: center;
-          text-decoration: none;
-          color: #fff;
-          background: #333;
-          text-transform: uppercase;
+        &.loading {
+          a {
+            background-image: image-url('ajax-loader-quiz.gif');
+            background-position: center center;
+          }
         }
       }
     }
