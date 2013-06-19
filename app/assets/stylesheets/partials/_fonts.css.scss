@@ -33,6 +33,17 @@
 
 @font-face {
     font-family: 'Didot';
+    src: url('/fonts/didot.eot');
+    src: url('/fonts/didot.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/didot.woff') format('woff'),
+         url('/fonts/didot.ttf') format('truetype'),
+         url('/fonts/didot.svg#Didot') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Didot';
     src: url('/fonts/didot-italic.eot');
     src: url('/fonts/didot-italic.eot?#iefix') format('embedded-opentype'),
          url('/fonts/didot-italic.woff') format('woff'),
