@@ -137,17 +137,190 @@
 
 .product-page {
   margin: 34px 0 0;
+  .grid-55 {
+    padding: 0;
+  }
   .photos-carousel {
     float: left;
-    margin: 0 0 0 16px;
+    margin: 15px 0 0 16px;
+    .arrow-up, .arrow-down {
+      background: image-url('icons-arrows-product.png') center 0 no-repeat;
+      cursor: pointer;
+      height: 22px;
+      display: block !important;
+      &.disabled {
+        opacity: .4;
+      }
+    }
+    .arrow-up {
+      margin: 0 0 17px;
+    }
+    .arrow-down {
+      background-position: center -32px;
+    }
+    .carousel-pictures {
+      li {
+        margin: 0 0 17px;
+      }
+      img {
+        display: block;
+      }
+    }
   }
   .big-photo {
     float: right;
+    min-height: 590px;
+    margin: 15px 15px 15px 0;
+    position: relative;
+    img {
+      display: block;
+    }
+    .zoom {
+      position: absolute;
+      top: 0;
+      right: 0;
+      a {
+        width: 36px;
+        height: 36px;
+        display: block;
+        overflow: hidden;
+        text-indent: -999px;
+        background: image-url('icon-zoom.png') center center no-repeat #fff;
+        border-radius: 0 0 0 4px;
+      }
+    }
   }
   .share-buttons {
     border: 1px solid #d8d8da;
     border-top: 0;
     padding: 18px;
     text-align: center;
+  }
+  .product-info {
+    margin: 33px 0 0;
+    font: 300 14px/1 $fontOne;
+    .name {
+      text-transform: uppercase;
+      font-size: 24px;
+      font-weight: 300;
+      color: #000;
+      margin: 0 0 4px;
+    }
+    .desc {
+      font-size: 16px;
+      color: #999898;
+      margin: 0 0 14px;
+    }
+    .price-delivery {
+      font-weight: 400;
+      overflow: hidden;
+      line-height: 20px;
+      margin: 0 0 14px;
+      .price {
+        color: #333;
+        float: left;
+        min-width: 110px;
+        em {
+          text-decoration: line-through;
+          font-style: normal;
+          margin: 0 4px 0 0;
+        }
+        span {
+          color: #fe9f91;
+        }
+      }
+      .delivery {
+        float: left;
+        background: image-url('icon-delivery.png') 0 0 no-repeat;
+        padding: 0 0 0 26px;
+        font-family: $fontThree;
+        color: #000;
+      }
+    }
+    .colors-choser {
+      border: 1px solid #efefef;
+      display: inline-block;
+      padding: 8px;
+      margin: 0 0 18px;
+      .label {
+        float: left;
+        line-height: 23px;
+      }
+      .colors {
+        float: left;
+        .color {
+          float: left;
+          width: 23px;
+          height: 23px;
+          cursor: pointer;
+          margin: 0 0 0 10px;
+          box-shadow: none;
+          &.active {
+            cursor: default;
+            background-image: image-url('icon-color-tick.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+          }
+        }
+      }
+    }
+    .size-select {
+      padding: 0 0 15px;
+      margin: 0 0 15px;
+      border-bottom: 1px solid #efefef;
+      .chzn-container {
+        min-width: 200px;
+        margin: 0 0 14px;
+      }
+      .info {
+        color: #999898;
+      }
+    }
+    .body-shapes {
+      padding: 0 0 12px;
+      margin: 0 0 12px;
+      border-bottom: 1px solid #efefef;
+      .desc {
+        color: #000;
+      }
+      ul {
+        overflow: hidden;
+        li {
+          float: left;
+          margin: 0 10px 0 0;
+        }
+      }
+    }
+    .buy-wishlist {
+      margin: 0 0 28px;
+      .buy-now, .add-wishlist {
+        display: inline-block;
+        text-decoration: none;
+        vertical-align: top;
+      }
+      .buy-now {
+        padding: 0 42px;
+        text-transform: uppercase;
+        color: #fff;
+        font: 300 20px/38px $fontOne;
+        height: 38px;
+        margin: 0 14px 0 0;
+        @include linear-gradient(#414141, #252525);
+      }
+      .add-wishlist {
+        border: 1px solid #dadadc;
+        height: 36px;
+        font: 300 14px/36px $fontThree;
+        padding: 0 16px 0 46px;
+        background: image-url('icon-product-like.png') 12px center no-repeat;
+      }
+    }
+    .tabs {
+      .tabs-links {
+        a {
+          font-size: 14px;
+        }
+      }
+    }
   }
 }

@@ -17,4 +17,5 @@
 //= require libs/jquery.caroufredsel-6.2.1-packed
 //= require libs/jquery.minicolors
 //= require libs/jquery.readyselector
+//= require libs/jquery.chosen.min
 //= require_tree ./partials
