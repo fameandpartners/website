@@ -1,0 +1,27 @@
+.wrap
+  .page-name
+    .inner
+      h1.title
+        em My Personalised
+        span Store
+    .subtitle Great dresses just for you
+
+  - featured_products = @products[0..3]
+  - if featured_products.size > 0
+    ul.products-list.grid-container
+      - featured_products.each do |product|
+        = render('product', product: product)
+
+  .page-name
+    .inner
+      h1.title
+        em View more
+        span Dresses
+      ul.filters
+        - Spree::Taxonomy.where(name: 'Range').first.root.children.each do |taxon|
+          li = link_to taxon.name, '#', data: { hook: 'taxon-filter', taxonomy: 'range', id: taxon.permalink }
+
+  - if @products.size > 0
+    ul.products-list.grid-container
+      - @products.each do |product|
+        = render('product', product: product)

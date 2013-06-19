@@ -23,7 +23,7 @@ FameAndPartners::Application.routes.draw do
   match '/custom-made-dresses' => 'pages#custom_made_dresses'
 
   # Static for ecommerce
-  match '/products' => 'pages#products'
+  #match '/products' => 'pages#products'
   match '/product' => 'pages#product'
 
   # Static pages
