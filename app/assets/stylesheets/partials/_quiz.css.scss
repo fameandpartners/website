@@ -2,22 +2,23 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 1048px;
+  width: 1100px;
   height: 551px;
   z-index: 2000;
   margin: -275px 0 0 -524px;
   background: #fff;
   box-shadow: 0 0 30px rgba(0, 0, 0, .2);
   .quiz-box-inner {
-    height: 525px;
+    height: 530px;
     border: 13px solid #fff;
     position: relative;
   }
   .signup-box-wrapper {
-    width: 1022px;
+    width: 1074px;
     height: 525px;
     overflow: hidden;
     background: image-url('bg-quiz-start.jpg') center center no-repeat;
+    background-size: cover;
   }
   .signup-box,
   .thanks-box {
@@ -102,7 +103,7 @@
     }
     .signin-link {
       position: absolute;
-      padding: 12px 26px;
+      padding: 12px 26px 6px;
       bottom: 0;
       right: 0;
       font-size: 18px;
@@ -114,10 +115,11 @@
     }
   }
   .steps-box {
-    padding: 16px 0;
+    height: 511px;
+    border: 10px solid #e8e8e8;
     .questions-count {
       position: absolute;
-      top: 12px;
+      top: 16px;
       right: 16px;
       font: 400 18px/1 $fontTwo;
       color: #999;
@@ -141,23 +143,40 @@
       margin: 40px 16px 20px;
       li {
         float: left;
-        margin: 0 0 0 10px;
+        margin: 0 0 0 37px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-        &:first-child {
-          margin: 0;
+        width: 176px;
+        position: relative;
+        img {
+          max-width: 100%;
+          height: auto;
+          display: block;
         }
         label {
           display: block;
-          width: 190px;
-          height: 294px;
+          width: 166px;
           cursor: pointer;
           border: 5px solid #e8e8e8;
           input[type=radio] {
             display: none;
           }
         }
+        .face {
+          width: 92px;
+          height: 92px;
+          overflow: hidden;
+          position: absolute;
+          bottom: -20px;
+          right: -13px;
+          border: 5px solid #e8e8e8;
+          border-radius: 50%;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+        }
+        &:first-child {
+          margin: 0;
+        }
         &.active {
-          label {
+          label, .face {
             border-color: #bffbef;
           }
         }
@@ -291,9 +310,8 @@
       }
     }
     .progress-next {
-      padding: 38px 0 0;
       position: absolute;
-      bottom: 40px;
+      bottom: 15px;
       left: 20px;
       right: 20px;
       .progress-bar {
