@@ -380,7 +380,7 @@
   background: #fafafa;
   width: 932px;
   position: relative;
-  margin: 40px auto;
+  margin: 40px auto 24px;
   box-shadow: 0 0 10px rgba(0, 0, 0, .3);
   .page-name {
     position: absolute;
@@ -467,7 +467,7 @@
         bottom: 0;
         top: 50%;
         .sublabel {
-          margin: 38px 0 0;
+          margin: 46px 0 0;
           font: 300 26px/1 $fontOne;
         }
         .rate, .label {
@@ -483,9 +483,111 @@
           margin-top: 6px;
         }
         .label {
-          font-size: 42px;
+          font-size: 27px;
         }
       }
     }
+  }
+  .sexiness-colors-fashionability {
+    overflow: hidden;
+    text-align: center;
+    .column {
+      float: left;
+    }
+    .column-1, .column-3 {
+      width: 274px;
+      margin: 115px 0 0;
+      font: 400 26px/1 $fontThree;
+      .label {
+        text-transform: uppercase;
+        margin: 0 0 5px;
+      }
+      .value {
+        .current {
+          display: inline-block;
+          vertical-align: bottom;
+          font-size: 68px;
+        }
+        .total {
+          display: inline-block;
+          vertical-align: bottom;
+          font-size: 47px;
+          margin: 0 0 3px;
+        }
+      }
+    }
+    .column-2 {
+      width: 384px;
+      padding: 21px 0 0;
+      position: relative;
+      .colors {
+        margin: 0 0 32px;
+        text-align: center;
+        .color {
+          width: 52px;
+          height: 52px;
+          display: inline-block;
+          margin: 0 6px;
+          border-radius: 50%;
+          box-shadow: none;
+          &.yellow {
+            background: #fff000;
+          }
+          &.black {
+            background: #000;
+          }
+        }
+      }
+      .label {
+        text-transform: uppercase;
+        .title {
+          font: 300 32px/1 $fontOne;
+          margin: 0;
+          padding: 0 0 15px;
+          position: relative;
+          &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 112px;
+            height: 2px;
+            margin: 0 0 0 -56px;
+            background: #b8b8b8;
+          }
+        }
+        .subtitle {
+          margin: 15px 0 0;
+          width: auto;
+          font-size: 28px;
+          font-style: normal;
+        }
+      }
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 1px;
+        height: 176px;
+        background: #d7d7d7;
+      }
+      &:before {
+        left: 0;
+      }
+      &:after {
+        right: 0;
+      }
+    }
+  }
+}
+
+.style-report-social {
+  text-align: right;
+  width: 952px;
+  margin: 0 auto;
+  .social {
+    display: inline-block;
+    text-align: left;
+    margin: 0 0 0 10px;
   }
 }
