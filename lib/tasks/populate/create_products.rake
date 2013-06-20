@@ -19,6 +19,7 @@ end
 
 def create_dress(random_number)
   args = {
+    available_on: Time.now,
     name: generate_name,
     price: generate_price,
     description: generate_description,
