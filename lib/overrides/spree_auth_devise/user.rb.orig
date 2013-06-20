@@ -12,14 +12,18 @@ module Overrides
                   :last_name,
                   :presence => true
 
+<<<<<<< HEAD
+  has_attached_file :avatar
+  has_one :style_report,
+          :foreign_key => :spree_user_id
+=======
         after_create :send_welcome_email, :unless => :confirmation_required?
         after_update :synchronize_with_campaign_monitor
+>>>>>>> master
 
         has_attached_file :avatar
-        has_one :style_report,
-          :foreign_key => :spree_user_id
       end
-      
+
       def full_name
         [first_name, last_name].reject(&:blank?).join(' ')
       end

@@ -1,9 +1,10 @@
 .wrap
   nav.main
     ul
-      li = link_to 'Custom made dresses', 'http://www.fameandpartners.com'
-      li = link_to 'About us', about_path
-      li = link_to 'Our team', team_path
+      li = link_to 'Custom made dresses', 'http://www.fameandpartners.com', :title => "Custom made dresses from Fame & Partners"
+      li = link_to 'How it Works', how_it_works_path, :title => "How to order a custom dress"
+      li = link_to 'About us', about_path, :title => "About Fame & Partners"
+      li = link_to 'Our team', team_path, :title => "Fame & Partners Team"
       li.hide = link_to 'Blog', '#'
       li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
   nav.follow.hide

@@ -22,13 +22,13 @@
   }
   .signup-box,
   .thanks-box {
-    h1 {
-      margin-top: 180px;
-      text-transform: uppercase;
+    h2 {
+      margin-top: 230px;
+      text-transform: normal;
       color: #454545;
       text-align: center;
       letter-spacing: 5px;
-      font: 300 38px/1 $fontOne;
+      font: 300 38px/1 $fontThree;
       &:before {
         background: #454545;
       }

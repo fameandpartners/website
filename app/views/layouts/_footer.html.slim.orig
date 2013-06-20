@@ -28,5 +28,10 @@ footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
         = link_to 'Fame&Partners', root_path
       .copyright
         ' 2013 Fame & Partners &copy; 
+<<<<<<< HEAD
+      .address Bondi Sydney Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
+      .abn
+=======
       .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
       .abn 
+>>>>>>> master

@@ -9,6 +9,26 @@ header.inverse {
       background-image: image-url('logo-white.png');
     }
   }
+  .icons {
+    li {
+      color: #fff;
+      .icon {
+        background-position: 0 0;
+        &.shipping {
+          background-position: 0 -20px;
+        }
+        &.returns {
+          background-position: 0 -40px;
+        }
+        &.guarantee {
+          background-position: 0 -60px;
+        }
+        &.turnaround {
+          background-position: 0 -80px;
+        }
+      }
+    }
+  }
 }
 
 .top-bar.inverse {
@@ -50,6 +70,26 @@ footer.inverse {
     .logo {
       a {
         background-image: image-url('logo.png');
+      }
+    }
+    .icons {
+      li {
+        color: #000;
+        .icon {
+          background-position: 0 -100px;
+          &.shipping {
+            background-position: 0 -120px;
+          }
+          &.returns {
+            background-position: 0 -140px;
+          }
+          &.guarantee {
+            background-position: 0 -160px;
+          }
+          &.turnaround {
+            background-position: 0 -180px;
+          }
+        }
       }
     }
   }

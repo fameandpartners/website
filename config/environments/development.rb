@@ -43,4 +43,9 @@ FameAndPartners::Application.configure do
   config.assets.debug = true
 
   Slim::Engine.set_default_options :pretty => true, :sort_attrs => false
+
+  # reloading
+  config.to_prepare do
+    Spree::User.send(:include, Overrides::SpreeAuthDevise::User)
+  end
 end
