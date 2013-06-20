@@ -17,23 +17,23 @@ module Overrides
 
         has_attached_file :avatar
         has_one :style_report,
-          :foreign_key => :spree_user_id
-      end
-      
-      def full_name
-        [first_name, last_name].reject(&:blank?).join(' ')
-      end
+                :foreign_key => :spree_user_id
 
-      private
-
-      def synchronize_with_campaign_monitor
-        if email_changed? || first_name_changed? || last_name_changed?
-          CampaignMonitor.delay.synchronize(email_was, self)
+        def full_name
+          [first_name, last_name].reject(&:blank?).join(' ')
         end
-      end
 
-      def send_welcome_email
-        Spree::UserMailer.welcome(self).deliver
+        private
+
+        def synchronize_with_campaign_monitor
+          if email_changed? || first_name_changed? || last_name_changed?
+            CampaignMonitor.delay.synchronize(email_was, self)
+          end
+        end
+
+        def send_welcome_email
+          Spree::UserMailer.welcome(self).deliver
+        end
       end
     end
   end

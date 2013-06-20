@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613091438) do
+ActiveRecord::Schema.define(:version => 20130619145546) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -120,6 +120,34 @@ ActiveRecord::Schema.define(:version => 20130613091438) do
   end
 
   add_index "posts", ["title"], :name => "index_posts_on_title", :unique => true
+
+  create_table "product_style_profiles", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "glam"
+    t.integer  "girly"
+    t.integer  "classic"
+    t.integer  "edgy"
+    t.integer  "bohemian"
+    t.integer  "apple"
+    t.integer  "pear"
+    t.integer  "strawberry"
+    t.integer  "hour_glass"
+    t.integer  "column"
+    t.integer  "bra_aaa"
+    t.integer  "bra_aa"
+    t.integer  "bra_a"
+    t.integer  "bra_b"
+    t.integer  "bra_c"
+    t.integer  "bra_d"
+    t.integer  "bra_e"
+    t.integer  "bra_fpp"
+    t.integer  "sexiness"
+    t.integer  "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "product_style_profiles", ["product_id"], :name => "index_product_style_profiles_on_product_id"
 
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"

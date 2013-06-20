@@ -5,17 +5,17 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create!(name: 'Emanuel', city: cities.first)
 
 
 #Spree::Core::Engine.load_seed if defined?(Spree::Core)
 #Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 
 
-quiz = Quiz.create(:name => 'Style Quiz')
+quiz = Quiz.create!(:name => 'Style Quiz')
 
-quiz.questions.create([
+quiz.questions.create!([
                         {
                           :text => 'Choose the look that\'s closest to your everyday style?',
                           :position => 1001,
@@ -69,8 +69,8 @@ quiz.questions.create([
                       ])
 
 
-question = quiz.questions.find_by_partial('outfits')
-question.answers.create([
+question = quiz.questions.find_by_partial!('outfits')
+question.answers.create!([
                           {
                             :code => 'img1',
                             :glam => 1
@@ -90,8 +90,8 @@ question.answers.create([
                         ])
 
 
-question = quiz.questions.find_by_partial('oscar_dresses')
-question.answers.create([
+question = quiz.questions.find_by_partial!('oscar_dresses')
+question.answers.create!([
                           {
                             :code => 'img1',
                             :glam => 1
@@ -111,8 +111,8 @@ question.answers.create([
                         ])
 
 
-question = quiz.questions.find_by_partial('style_words')
-question.answers.create([
+question = quiz.questions.find_by_partial!('style_words')
+question.answers.create!([
                           {
                             :code => 'edgy',
                             :edgy => 1
@@ -185,8 +185,8 @@ question.answers.create([
                         ])
 
 
-question = quiz.questions.find_by_partial('brands')
-question.answers.create([
+question = quiz.questions.find_by_partial!('brands')
+question.answers.create!([
                           {
                             :code => 'chanel',
                             :glam => 0.5,
@@ -241,8 +241,8 @@ question.answers.create([
                         ])
 
 
-question = quiz.questions.find_by_partial('prom_shoes')
-question.answers.create([
+question = quiz.questions.find_by_partial!('prom_shoes')
+question.answers.create!([
                           {
                             :code => 'img1',
                             :glam => 1
@@ -262,8 +262,8 @@ question.answers.create([
                         ])
 
 
-question = quiz.questions.find_by_partial('prom_makeup')
-question.answers.create([
+question = quiz.questions.find_by_partial!('prom_makeup')
+question.answers.create!([
                           {
                             :code => 'img1',
                             :glam => 1
@@ -283,8 +283,8 @@ question.answers.create([
                         ])
 
 
-question = quiz.questions.find_by_partial('prom_hair')
-question.answers.create([
+question = quiz.questions.find_by_partial!('prom_hair')
+question.answers.create!([
                           {
                             :code => 'img1',
                             :glam => 1
@@ -304,8 +304,8 @@ question.answers.create([
                         ])
 
 
-question = quiz.questions.find_by_partial('prom_dresses')
-question.answers.create([
+question = quiz.questions.find_by_partial!('prom_dresses')
+question.answers.create!([
                           {
                             :code => 'img1',
                             :glam => 1
@@ -325,8 +325,8 @@ question.answers.create([
                         ])
 
 
-question = quiz.questions.find_by_partial('nail_colours')
-question.answers.create([
+question = quiz.questions.find_by_partial!('nail_colours')
+question.answers.create!([
                           {
                             :code => 'neon_yellow',
                             :glam => 0.4,
@@ -386,8 +386,8 @@ question.answers.create([
                         ])
 
 
-question = quiz.questions.find_by_partial('fashionability')
-question.answers.create([
+question = quiz.questions.find_by_partial!('fashionability')
+question.answers.create!([
                           {
                             :code => 'fsh1',
                             :fashionability => 1
@@ -423,8 +423,8 @@ question.answers.create([
 
 
 
-question = quiz.questions.find_by_partial('sexiness')
-question.answers.create([
+question = quiz.questions.find_by_partial!('sexiness')
+question.answers.create!([
                           {
                             :code => 'sxs1',
                             :sexiness => 1

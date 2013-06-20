@@ -52,4 +52,12 @@ FameAndPartners::Application.routes.draw do
   root :to => 'pages#home'
 
   mount Spree::Core::Engine, at: '/'
+
+  Spree::Core::Engine.routes.append do
+    namespace :admin do
+      scope 'products/:product_id', :as => 'product' do
+        resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
+      end
+    end
+  end
 end
