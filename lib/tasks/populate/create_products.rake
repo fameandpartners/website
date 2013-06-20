@@ -122,7 +122,7 @@ end
 def generate_fabric
   materials = %w{cotton silk wool leather poliamide}
   material = materials[rand(materials.size)]
-  "#{materials} 100%"
+  "#{material} 100%"
 end
 
 def generate_price
