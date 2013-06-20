@@ -20,23 +20,44 @@
             .text Short description. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
             .wishlist = link_to 'Move to wish list', '#'
         .grid-30.details
-          .line
-            .label Color
-            .value
-              .color.ping
-          .line
-            .label Size
-            .value 8
-          .line
-            .label Quantity
-            .value
-              select name="quantity"
-                option 1
-                option 2
-          .line
-            .label Estimated Delivery
-            .value 3-4 weeks
-          .edit = link_to 'Edit item', '#'
+          .static-dynamic-block
+            .static
+              .line
+                .label Color
+                .value
+                  .color.pink
+              .line
+                .label Size
+                .value 8
+              .line
+                .label Quantity
+                .value 2
+              .line
+                .label Estimated Delivery
+                .value 3-4 weeks
+            .dynamic
+              .line
+                .label Color
+                .value
+                  .color.pink.active
+                  .color.black
+                  .color.yellow
+              .line
+                .label Size
+                .value
+                  select name="size"
+                    option 1
+                    option 2
+              .line
+                .label Quantity
+                .value
+                  select name="size"
+                    option 1
+                    option 2
+              .line
+                .label Estimated Delivery
+                .value 3-4 weeks
+          .edit = link_to 'Edit item', '#', class: 'edit-link'
         .grid-20.price
           .pricing AUD $200
           .style-notes
@@ -56,20 +77,17 @@
           .line
             .label Color
             .value
-              .color.ping
+              .color.pink
           .line
             .label Size
             .value 8
           .line
             .label Quantity
-            .value
-              select name="quantity"
-                option 1
-                option 2
+            .value 1
           .line
             .label Estimated Delivery
             .value 3-4 weeks
-          .edit = link_to 'Edit item', '#'
+          .edit = link_to 'Edit item', '#', class: 'edit-link'
         .grid-20.price
           .pricing AUD $200
           .style-notes
