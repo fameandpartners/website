@@ -18,7 +18,13 @@ $ rake spree_sample:load
 * We are using Spree Ecommerce as base engine.
 [Guides](http://guides.spreecommerce.com)
 
+### populating db with test data
+bundle exec rake db:populate:dresses
+bundle exec rake db:populate:taxonomy
+bundle exec rake db:populate:product_options
+
 ### Thanks for using Fame and Partners!
 
 Cheers, [Droid Labs](http://droidlabs.pro).
+
 
