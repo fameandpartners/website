@@ -12,17 +12,18 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20130619145546) do
+ActiveRecord::Schema.define(:version => 20130620132002) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
     t.string   "code"
-    t.float    "glam"
-    t.float    "girly"
-    t.float    "classic"
-    t.float    "edgy"
-    t.float    "bohemian"
-    t.float    "sexiness"
-    t.float    "fashionability"
+    t.integer  "glam"
+    t.integer  "girly"
+    t.integer  "classic"
+    t.integer  "edgy"
+    t.integer  "bohemian"
+    t.integer  "sexiness"
+    t.integer  "fashionability"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

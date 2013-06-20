@@ -17,26 +17,26 @@ quiz = Quiz.create!(:name => 'Style Quiz')
 
 quiz.questions.create!([
                         {
-                          :text => 'Choose the look that\'s closest to your everyday style?',
+                          :text => "Choose the look that's closest to your everyday style?",
                           :position => 1001,
                           :partial => 'outfits'
                         }, {
-                          :text => 'You\'re walking the red carpet. Which dress would you wear?',
+                          :text => "You're walking the red carpet. Which dress would you wear?",
                           :position => 1002,
                           :partial => 'oscar_dresses'
                         }, {
-                          :text => 'It\'s time to dress up. Which best describes your style.',
+                          :text => "It's time to dress up. Which best describes your style.",
                           :position => 1003,
                           :multiple => true,
                           :partial => 'style_words'
                         }, {
-                          :text => 'Which brands speak to your style?',
+                          :text => "Which brands speak to your style?",
                           :position => 1004,
                           :multiple => true,
                           :partial => 'brands',
                           :populate => 'brands'
                         }, {
-                          :text => 'You\'ve won a shoe shopping spree. Which ones do you nab?',
+                          :text => "You've won a shoe shopping spree. Which ones do you nab?",
                           :position => 1005,
                           :partial => 'prom_shoes'
                         }, {
@@ -189,18 +189,18 @@ question = quiz.questions.find_by_partial!('brands')
 question.answers.create!([
                           {
                             :code => 'chanel',
-                            :glam => 0.5,
-                            :classic => 0.5
+                            :glam => 5,
+                            :classic => 5
                           }, {
                             :code => 'burberry',
-                            :edgy => 0.25,
-                            :bohemian => 0.25,
-                            :classic => 0.5
+                            :edgy => 3,
+                            :bohemian => 2,
+                            :classic => 5
                           }, {
                             :code => 'lavin',
-                            :glam => 0.5,
-                            :edgy => 0.25,
-                            :bohemian => 0.25
+                            :glam => 5,
+                            :edgy => 2,
+                            :bohemian => 3
                           }, {
                             :code => 'christian_dior',
                             :glam => 1
@@ -209,34 +209,34 @@ question.answers.create!([
                             :edgy => 1
                           }, {
                             :code => 'zuhair_murad',
-                            :glam => 0.5,
-                            :bohemian => 0.5
+                            :glam => 5,
+                            :bohemian => 5
                           }, {
                             :code => 'gucci',
-                            :glam => 0.5,
-                            :edgy => 0.5
+                            :glam => 5,
+                            :edgy => 5
                           }, {
                             :code => 'sass_bide',
-                            :edgy => 0.5,
-                            :bohemian => 0.5
+                            :edgy => 5,
+                            :bohemian => 5
                           }, {
                             :code => 'miu_miu',
-                            :glam => 0.25,
-                            :girly => 0.5,
-                            :classic => 0.25
+                            :glam => 2,
+                            :girly => 6,
+                            :classic => 2
                           }, {
                             :code => 'chloe',
-                            :girly => 0.25,
-                            :edgy => 0.5,
-                            :classic => 0.25
+                            :girly => 2,
+                            :edgy => 6,
+                            :classic => 2
                           }, {
                             :code => 'kate_spade',
-                            :girly => 0.5,
-                            :classic => 0.5
+                            :girly => 5,
+                            :classic => 5
                           }, {
                             :code => 'ralph_lauren',
-                            :girly => 0.25,
-                            :classic => 0.75
+                            :girly => 3,
+                            :classic => 7
                           }
                         ])
 
@@ -329,59 +329,59 @@ question = quiz.questions.find_by_partial!('nail_colours')
 question.answers.create!([
                           {
                             :code => 'neon_yellow',
-                            :glam => 0.4,
-                            :edgy => 0.6,
-                            :bohemian => 0.3
+                            :glam => 4,
+                            :edgy => 6,
+                            :bohemian => 3
                           }, {
                             :code => 'neutral',
-                            :girly => 0.6,
-                            :classic => 0.8
+                            :girly => 6,
+                            :classic => 8
                           }, {
                             :code => 'mint',
-                            :girly => 0.25,
-                            :edgy => 0.25,
-                            :bohemian => 0.25
+                            :girly => 3,
+                            :edgy => 3,
+                            :bohemian => 3
                           }, {
                             :code => 'navy',
-                            :glam => 0.5,
-                            :edgy => 0.25,
-                            :bohemian => 0.25,
-                            :classic => 0.25
+                            :glam => 5,
+                            :edgy => 3,
+                            :bohemian => 3,
+                            :classic => 3
                           }, {
                             :code => 'black',
-                            :glam => 0.25,
-                            :edgy => 0.5,
-                            :bohemian => 0.75
+                            :glam => 5,
+                            :edgy => 5,
+                            :bohemian => 7
                           }, {
                             :code => 'glittery',
-                            :glam => 0.2,
-                            :girly => 0.5,
-                            :edgy => 0.5
+                            :glam => 2,
+                            :girly => 5,
+                            :edgy => 5
                           }, {
                             :code => 'lilac',
-                            :girly => 0.8,
-                            :classic => 0.2
+                            :girly => 8,
+                            :classic => 2
                           }, {
                             :code => 'light_pink',
-                            :girly => 0.8,
-                            :classic => 0.6
+                            :girly => 8,
+                            :classic => 6
                           }, {
                             :code => 'french_tip',
-                            :girly => 0.6,
-                            :classic => 0.8
+                            :girly => 6,
+                            :classic => 8
                           }, {
                             :code => 'gold',
-                            :glam => 0.5,
-                            :edgy => 0.5,
-                            :classic => 0.25
+                            :glam => 5,
+                            :edgy => 5,
+                            :classic => 3
                           }, {
                             :code => 'purple',
-                            :edgy => 0.2,
-                            :bohemian => 0.5
+                            :edgy => 2,
+                            :bohemian => 5
                           }, {
                             :code => 'bright_red',
-                            :glam => 0.7,
-                            :edgy => 0.3
+                            :glam => 7,
+                            :edgy => 3
                           }
                         ])
 
