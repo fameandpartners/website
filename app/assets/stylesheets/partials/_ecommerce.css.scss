@@ -25,6 +25,10 @@
       margin: 0 0 0 4px;
       vertical-align: top;
     }
+    &.aligncenter {
+      text-align: center;
+      float: none;
+    }
   }
   .filters {
     float: right;
@@ -591,5 +595,41 @@
         }
       }
     }
+  }
+}
+
+.featured-dresses {
+  background: image-url('icon-border-featured.png') 0 0 repeat-x #fff;
+  padding: 40px 0 0;
+  margin: 20px 0 0;
+  .wrap {
+    position: relative;
+  }
+  .caroufredsel_wrapper {
+    left: 0 !important;
+  }
+  #product-items {
+    max-width: none;
+    .grid-25 {
+      width: 283px;
+    }
+  }
+  #product-items-prev, #product-items-next {
+    background: image-url('icons-product-items-arrows.png') 0 0 no-repeat;
+    width: 38px;
+    height: 74px;
+    cursor: pointer;
+    position: absolute;
+    top: 210px;
+    &.disabled {
+      opacity: .4;
+    }
+  }
+  #product-items-prev {
+    left: -66px;
+  }
+  #product-items-next {
+    right: -66px;
+    background-position: -38px 0;
   }
 }
