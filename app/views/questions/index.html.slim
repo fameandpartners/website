@@ -10,7 +10,7 @@
   .film style="position: relative;"
     - @quiz.questions.each do |question|
       .film-frame style="float: left; width: 1054px;" id="question-#{question.id}"
-        = form_for :answer, :url => quiz_question_answer_path, :remote => true do |f|
+        = form_for :answer, :url => quiz_question_answer_path(question),:remote => true do |f|
           h1 = question.text
           = render question.partial, :form => f, :question => question
   .progress-next.clearfix

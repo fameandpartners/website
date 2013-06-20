@@ -38,8 +38,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   resource :quiz, :only => [:show] do
-    resources :questions, :only => [:index]
-    resource :question, :only => [:show] do
+    resources :questions, :only => [:index, :show] do
       resource :answer, :only => [:create]
     end
   end

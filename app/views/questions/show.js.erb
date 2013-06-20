@@ -12,6 +12,13 @@ $quiz_box.find('.next a').text('Next question').click(function(event){
   $question.find('form').submit();
 });
 
+$quiz_box.find('.prev a').unbind('click');
+<%- unless (index = @quiz.questions.index(@question)).eql?(0) -%>
+  $quiz_box.find('.prev a').click(function(){
+    $.getScript('/quiz/questions/<%= @quiz.questions[index - 1].id %>');
+  });
+<%- end -%>
+
 $progress_bar.find('.filler').animate({ width: '<%= @progress %>%' });
 $progress_bar.find('.tooltip').text('<%= @progress %>%');
 

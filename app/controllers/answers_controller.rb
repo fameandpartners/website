@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
 
   def create
     quiz = Quiz.first
-    question = quiz.questions.find(session['quiz']['current_question_id'])
+    question = quiz.questions.find(params[:question_id])
 
     answer_codes = nil
 
@@ -28,8 +28,7 @@ class AnswersController < ApplicationController
         next_question = quiz.questions.where('position > ?', question.position).first
 
         if next_question.present?
-          session['quiz']['current_question_id'] = next_question.id
-          redirect_to quiz_question_path
+          redirect_to quiz_question_path(next_question)
         else
           finish_quiz(quiz)
         end
