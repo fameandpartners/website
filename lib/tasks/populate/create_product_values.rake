@@ -47,8 +47,11 @@ def randomize_product_variants(size_option, color_option)
 
   Spree::Product.all.each do |product|
     product.variants.destroy_all
-    get_random(sizes).each do |size_value|
-      get_random(colors).each do |color_value|
+    random_sizes = get_random(sizes)
+    random_colors = get_random(colors)
+
+    random_sizes.each do |size_value|
+      random_colors.each do |color_value|
         variant = Spree::Variant.create(product_id: product.id)
         variant.option_values = [size_value, color_value]
       end
