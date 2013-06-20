@@ -7,38 +7,38 @@
       .column.column-1
         .block
           .stat
-            .rate 5%
-            .label Edgy
+            .rate #{@style_profile.percentage[1].second}%
+            .label = @style_profile.percentage[1].first.titleize
           = image_tag 'http://placehold.it/238x341', alt: ''
         .block
           .stat
-            .rate 5%
-            .label Glam
+            .rate #{@style_profile.percentage[3].second}%
+            .label = @style_profile.percentage[3].first.titleize
           = image_tag 'http://placehold.it/238x341', alt: ''
       .column.column-2
         .block
           .stat.large
             .sublabel You are
-            .rate 5%
-            .label Girly
+            .rate #{@style_profile.percentage[0].second}%
+            .label = @style_profile.percentage[0].first.titleize
           = image_tag 'http://placehold.it/456x682', alt: ''
       .column.column-3
         .block
           .stat
-            .rate 5%
-            .label Bohemiam
+            .rate #{@style_profile.percentage[2].second}%
+            .label = @style_profile.percentage[2].first.titleize
           = image_tag 'http://placehold.it/238x341', alt: ''
         .block
           .stat
-            .rate 5%
-            .label Classic
+            .rate #{@style_profile.percentage[4].second}%
+            .label = @style_profile.percentage[4].first.titleize
           = image_tag 'http://placehold.it/238x341', alt: ''
 
     .sexiness-colors-fashionability
       .column.column-1
         .label Sexiness
         .value
-          .current 7
+          .current = @style_profile.sexiness.round
           .total
             ' /10
       .column.column-2
@@ -51,7 +51,7 @@
       .column.column-3
         .label Fashionability
         .value
-          .current 8
+          .current = @style_profile.fashionability.round
           .total
             ' /10
 
