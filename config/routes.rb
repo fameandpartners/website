@@ -26,6 +26,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Static pages for HTML markup
+  match '/stylists' => 'pages#stylists'
   match '/posts' => 'pages#posts'
   match '/post' => 'pages#post'
   match '/celebrities' => 'pages#celebrities'

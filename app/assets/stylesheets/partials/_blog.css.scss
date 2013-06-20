@@ -59,6 +59,9 @@
   margin: 36px 0 20px;
   color: #333;
   letter-spacing: 0;
+  p {
+    margin: 5px 0 0;
+  }
   .latest {
     margin: 0 0 0 20px;
     text-transform: none;
@@ -261,6 +264,34 @@
   .post-content {
     p {
       margin: 16px 0 0;
+    }
+  }
+}
+
+.page-stylists {
+  width: 1192px;
+  margin: 10px 0 0;
+  border-top: 1px solid #ddd;
+  .stylist {
+    display: inline-block;
+    width: 500px;
+    margin: 50px 94px 0 0;
+    .thumbnail {
+      float: left;
+    }
+    .stylist-info {
+      margin: 0 0 0 180px;
+      p {
+        margin: 14px 0 0;
+      }
+    }
+    .name, .favorite {
+      font: 300 24px/1 $fontOne;
+      color: #000;
+    }
+    .favorite {
+      font-size: 18px;
+      margin: 14px 0 0
     }
   }
 }
