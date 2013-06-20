@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619145546) do
 ActiveRecord::Schema.define(:version => 20130620132002) do
 
   create_table "answers", :force => true do |t|
@@ -169,6 +168,23 @@ ActiveRecord::Schema.define(:version => 20130620132002) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "red_carpet_events", :force => true do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "name"
+    t.string   "short_name"
+    t.text     "content"
+    t.date     "event_date"
+    t.integer  "user_id"
+    t.string   "location"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "post_state_id", :default => 1
+  end
+
+  add_index "red_carpet_events", ["name"], :name => "index_red_carpet_events_on_name", :unique => true
+  add_index "red_carpet_events", ["user_id"], :name => "index_red_carpet_events_on_user_id"
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -402,6 +418,27 @@ ActiveRecord::Schema.define(:version => 20130620132002) do
   end
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
+
+  create_table "spree_pages", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "slug"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "show_in_header",           :default => false, :null => false
+    t.boolean  "show_in_footer",           :default => false, :null => false
+    t.string   "foreign_link"
+    t.integer  "position",                 :default => 1,     :null => false
+    t.boolean  "visible",                  :default => true
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.string   "layout"
+    t.boolean  "show_in_sidebar",          :default => false, :null => false
+    t.string   "meta_title"
+    t.boolean  "render_layout_as_partial", :default => false
+  end
+
+  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
@@ -801,14 +838,6 @@ ActiveRecord::Schema.define(:version => 20130620132002) do
   end
 
   add_index "style_reports", ["spree_user_id"], :name => "index_style_reports_on_spree_user_id"
-
-  create_table "style_tips", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
