@@ -39,3 +39,4 @@ $ ->
   $(".cart-page .details .edit-link").on "click", ->
     $(this).parent().parent().parent().find('.static').fadeToggle()
     $(this).parent().parent().parent().find('.dynamic').fadeToggle()
+    false
