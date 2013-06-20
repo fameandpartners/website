@@ -42,11 +42,10 @@ FameAndPartners::Application.routes.draw do
     resource :question, :only => [:show] do
       resource :answer, :only => [:create]
     end
+  end
 
-    member do
-      get  :report
-      get  :thanks
-    end
+  scope '/users/:user_id', :as => :user do
+    get '/style-report' => 'user_style_profiles#show', :as => :style_profile
   end
 
   root :to => 'pages#home'

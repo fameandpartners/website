@@ -14,10 +14,4 @@ class QuizzesController < ApplicationController
       render
     end
   end
-
-  def report
-    @style_profile = current_spree_user.style_report
-
-    render :layout => 'statics'
-  end
 end
