@@ -16,4 +16,10 @@
   &.green { background: green; }
   &.gray { background: gray; }
   &.blue { background: blue; }
+  &.active {
+    cursor: default;
+    background-image: image-url('icon-color-tick.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
 }

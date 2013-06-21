@@ -27,6 +27,7 @@ FameAndPartners::Application.routes.draw do
   match '/product' => 'pages#product'
   match '/cart' => 'pages#cart'
   match '/quick-view' => 'pages#quick-view'
+  match '/browse' => 'pages#browse'
 
   # Static pages
   get '/about'   => 'statics#about'
