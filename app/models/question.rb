@@ -25,5 +25,7 @@ class Question < ActiveRecord::Base
 
   validates :partial,
             :presence => true,
-            :uniqueness => true
+            :uniqueness => {
+              :scope => :quiz_id
+            }
 end
