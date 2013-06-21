@@ -11,6 +11,8 @@ Spree.config do |config|
   # config.site_name = "Spree Demo Site"
   config.allow_ssl_in_production = false
   config.allow_ssl_in_staging = false
+
+  config.products_per_page = 8
 end
 
 Spree.user_class = "Spree::User"
