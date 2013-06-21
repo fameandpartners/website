@@ -1,0 +1,170 @@
+.wrap
+  .checkout-page
+    h1.page-title Welcome to the checkout
+
+    .grid-container
+      .grid-65
+        .accordion-container
+          .accordion-title
+            .name 1. Personal details
+            .check-edit.active
+              .check
+              .edit = link_to 'Edit', '#'
+          .accordion-content
+          .accordion-title
+            .name 2. Billing and shipping details
+            .check-edit.active
+              .check
+              .edit = link_to 'Edit', '#'
+          .accordion-content
+          .accordion-title.active
+            .name 3. Payment details
+            .check-edit.hide
+              .check
+              .edit = link_to 'Edit', '#'
+          .accordion-content
+            .payment-method-details
+              .selector
+                input type="radio" name="cards"
+                label Secure credit card payment
+              .image = image_tag 'icons-cards.png', width: 176, height: 33, alt: 'Visa, MasterCard, Amex'
+            .grid-container
+              .grid-50
+                .input
+                  label Credit Card Number
+                  input type="number" name="number"
+              .grid-50
+                .input
+                  label Name on Card
+                  input type="text" name="name"
+            .grid-container.border
+              .grid-50
+                .input
+                  label Expiry Date
+                  select name="month"
+                    option Month
+                  select name="year"
+                    option Year
+              .grid-50
+                .input
+                  label Card Verification Number
+                  input.cvv type="number" name="name"
+                  .card-hints = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
+                  .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.
+            .payment-method-details.border
+              .selector
+                input type="radio" name="cards"
+                label PayPal
+              .image = image_tag 'icon-paypal.png', width: 51, height: 33, alt: 'PayPal'
+            .coupon-block.border
+              .grid-container
+                .grid-50
+                  .input
+                    label Enter your coupon code
+                    input type="text" name="coupon"
+                .grid-50
+                  .submit
+                    input type="button" value="Redeem"
+            .style-tips.border
+              .grid-container
+                .grid-50
+                  .style-tip-block
+                    .image = image_tag 'http://placehold.it/56x70', width: 56, height: 70, alt: ''
+                    .input
+                      input type="checkbox" name="style"
+                      label
+                        ' Add Style Notes 
+                        span $4.95
+                .grid-50
+                  .style-tip-block
+                    .image = image_tag 'http://placehold.it/56x70', width: 56, height: 70, alt: ''
+                    .input
+                      input type="checkbox" name="style"
+                      label
+                        ' Add Style Notes 
+                        span $4.95
+            .newsletters.border
+              .grid-container
+                .grid-50
+                  .newsletter-block
+                    .input
+                      input type="checkbox" name="style"
+                      label Subscribe to our newsletter
+                .grid-50
+                  .newsletter-block
+                    .input
+                      input type="checkbox" name="style"
+                      label
+                        ' Accept the 
+                        = link_to 'Terms and Conditions', '#'
+      .grid-35
+        .checkout-summary
+          .block-name Item description
+          .shopping-bag-popup
+            ul.items-carousel
+              li.item-block
+                .thumbnail
+                .item-info
+                  .price $265
+                  .name = link_to 'Product name', '#'
+                  .desc Short description. Dolor sit amet, consectetur adipisicing elit, sed do.
+                  ul.specs
+                    li
+                      .label Color
+                      .value
+                        .color.pink
+                    li
+                      .label Size
+                      .value 8
+                    li
+                      .label Quantity
+                      .value 1
+                    li
+                      .label Estimated delivery
+                      .value 3-4 weeks
+              li.item-block
+                .thumbnail
+                .item-info
+                  .price.sale
+                    ' $267
+                    span $205
+                  .name = link_to 'Product name', '#'
+                  .desc Short description. Dolor sit amet, consectetur adipisicing elit, sed do.
+                  ul.specs
+                    li
+                      .label Color
+                      .value
+                        .color.pink
+                    li
+                      .label Size
+                      .value 8
+                    li
+                      .label Quantity
+                      .value 1
+                    li
+                      .label Estimated delivery
+                      .value 3-4 weeks
+          ul.pricing
+            li
+              .label Subtotal
+              .desc
+                span AUD
+                ' $350
+            li
+              .label Shipping
+              .desc
+                span AUD
+                ' $0
+            li
+              .label Promotion
+              .desc
+                span AUD
+                ' - $20
+            li.totals
+              .label Total
+              .desc
+                span AUD
+                ' $320
+                .taxes Including GST
+    .place-order
+      input type="submit" value="Place order"
