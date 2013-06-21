@@ -1,10 +1,10 @@
-class StyleReport < ActiveRecord::Base
+class UserStyleProfile < ActiveRecord::Base
   BASIC_STYLES = %w(glam girly classic edgy bohemian)
+
   STYLE_ATTRIBUTES = %w(glam girly classic edgy bohemian sexiness fashionability)
 
   BRANDS = %w( chanel burberry lavin christian_dior jil_sander zuhair_murad gucci sass_bide miu_miu chloe kate_spade ralph_lauren )
-
-  COLORS = %W( neon_yellow neutral mint navy black glittery lilac light_pink french_tip gold purple bright_red )
+  NAIL_COLORS = %W( neon_yellow neutral mint navy black glittery lilac light_pink french_tip gold purple bright_red )
 
   default_values :glam  => 0.0,
                  :girly => 0.0,
@@ -14,7 +14,7 @@ class StyleReport < ActiveRecord::Base
                  :sexiness => 0.0,
                  :fashionability => 0.0,
                  :brands => [],
-                 :colors => []
+                 :nail_colors => []
 
   serialize :brands, Array
   serialize :colors, Array
@@ -29,7 +29,7 @@ class StyleReport < ActiveRecord::Base
   end
 
   validate do
-    unless colors.all?{ |color| COLORS.include?(color) }
+    unless nail_colors.all?{ |color| COLORS.include?(color) }
       errors.add(:colors, :inclusion)
     end
   end

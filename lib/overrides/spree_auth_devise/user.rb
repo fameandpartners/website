@@ -16,7 +16,8 @@ module Overrides
         after_update :synchronize_with_campaign_monitor
 
         has_attached_file :avatar
-        has_one :style_report,
+        has_one :style_profile,
+                :class_name => 'UserStyleProfile',
                 :foreign_key => :spree_user_id
 
         def full_name

@@ -42,7 +42,7 @@ class AnswersController < ApplicationController
 
   def finish_quiz(quiz)
     if session['quiz']['answers'].size.eql?(quiz.questions.size)
-      style_report = current_spree_user.build_style_report
+      style_profile = current_spree_user.build_style_profile
 
       if session['quiz']['answers'].values.all?(&:present?)
         session['quiz']['answers'].each do |question_id, answer_ids|
@@ -50,19 +50,19 @@ class AnswersController < ApplicationController
           answers = Answer.where(:id => answer_ids)
 
           if question.populate.present?
-            if style_report.respond_to?("#{question.populate}=")
-              style_report.send("#{question.populate}=", answers.map(&:code))
+            if style_profile.respond_to?("#{question.populate}=")
+              style_profile.send("#{question.populate}=", answers.map(&:code))
             end
           end
 
-          StyleReport::STYLE_ATTRIBUTES.each do |attribute|
+          UserStyleProfile::STYLE_ATTRIBUTES.each do |attribute|
             points = answers.map{|answer| answer.send(attribute) }.reduce(:+) / answers.count
 
-            style_report.send("#{attribute}=", style_report.send(attribute) + points)
+            style_profile.send("#{attribute}=", style_profile.send(attribute) + points)
           end
         end
 
-        style_report.save
+        style_profile.save
 
         render 'quizzes/thanks'
       end
