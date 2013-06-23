@@ -17,9 +17,9 @@ $ ->
       items: 2
 
   # Toggle shopping bag in header
-  $(".shopping-bag-popup").hide()
+  $("#shopping-bag-popup-wrapper").hide()
   $(".shopping-bag-toggler").on "click", ->
-    $(".shopping-bag-popup").slideToggle "slow"
+    $("#shopping-bag-popup-wrapper").slideToggle "slow"
     false
 
   # Single product page images carousel
