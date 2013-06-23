@@ -1,0 +1,12 @@
+li.product-item.grid-25
+  .thumbnail
+    .like = link_to 'Like item', '#', data: { action: 'add-to-wishlist', id: product.id }
+    .quick-view = link_to 'Quick view', '#', data: { action: 'quick-view', id: product.id }
+    = product_image product, :itemprop => "image", width: 243, height: 352, alt: product.name
+
+  .name = link_to product.name, product
+  .description = truncate(product.description, length: 50, separator: ' ')
+  .price = product.price_in(current_currency).display_price
+  .colors
+    - colors.map(&:name).sort.each do |color|
+      .color{class=color}

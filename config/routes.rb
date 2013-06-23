@@ -45,7 +45,7 @@ FameAndPartners::Application.routes.draw do
     resources :custom_dress_images, :only => [:create]
   end
 
-  root :to => 'pages#home'
+  root :to => 'index#show'
 
   mount Spree::Core::Engine, at: '/'
 end

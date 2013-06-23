@@ -1,0 +1,51 @@
+.promo
+  .wrap
+    .promo-image
+      .promo-image-inner = image_tag 'latest-image.png', width: 322, height: 212, alt: ''
+
+.home-images
+  .wrap
+    .image
+    .image.rotate-1
+    .image.rotate-2
+    .image.large
+
+.blog-posts-preview
+  .wrap.no-overflow
+    .blog-post
+      .label Blog
+      .image-preview
+    .blog-post.rotate-1
+      .label Blog
+      .image-preview
+    .blog-post.rotate-2
+      .label Blog
+      .image-preview
+
+.featured-dresses
+  .wrap.no-overflow
+    .page-name
+      .inner
+        h1.title.aligncenter
+          em featured
+          span Dresses
+    #product-items-prev
+
+    ul#product-items.products-list.grid-container.featured
+      - @featured_products.each do |product|
+        = render 'shared/product', product: product, colors: @colors[product.id]
+
+    #product-items-next
+
+    .page-name
+      .inner
+        h1.title
+          em View more
+          span Dresses
+        ul.filters
+          - available_product_ranges.each do |taxon|
+            li = link_to taxon.name, '#'
+
+    ul#product-items.products-list.grid-container
+      - @products.each do |product|
+        = render 'shared/product', product: product, colors: @colors[product.id]
