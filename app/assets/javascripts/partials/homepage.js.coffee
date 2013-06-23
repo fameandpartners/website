@@ -16,5 +16,3 @@ $(".index.show").ready ->
       button: "#product-items-next"
       key: "right"
       items: 4
-
-  # scrolling featured images

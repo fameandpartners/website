@@ -18,13 +18,23 @@
                       = image_tag(image.attachment, width: 83, heigth: 115, alt: '')
               #product-images-down.arrow-down
             .big-photo
-              .zoom = link_to 'Zoom', '#'
-              = image_tag 'http://placehold.it/460x590', alt: ''
+              .zoom
+                = link_to 'Zoom', '#'
+                = image_tag 'http://placehold.it/460x590', alt: '', height: 590, width: 460
+        #videos.tab-content
+          = image_tag @product.property('inspiration_video')
+        #inspiration.tab-content
+          .tab-content-inner
+            .big-photo
+              = image_tag "file://" + @product.property('inspiration_photo')
+            .inspiration
+              = @product.property('inspiration')
+
         .share-buttons Share buttons
     .grid-45
       .product-info
-        .name Product name
-        .desc Loren ipsum veritas amet sit omat nar.
+        .name = @product.name
+        .desc = @product.property('short_description')
         .price-delivery
           .price.sale
             em $320
@@ -45,28 +55,31 @@
         .body-shapes
           .desc The body shapes that this dress suits:
           ul
-            li
-              = link_to '#' do
-                = image_tag 'http://placehold.it/60x84', alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'http://placehold.it/60x84', alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'http://placehold.it/60x84', alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'http://placehold.it/60x84', alt: ''
+            - 4.times do
+              li
+                = link_to '#' do
+                  = image_tag 'http://placehold.it/60x84', alt: ''
         .buy-wishlist
           = link_to 'Add to bag', '#', class: 'buy-now'
-          = link_to 'Add to wish list', '#', class: 'add-wishlist'
+          = link_to 'Add to wish list', '#', class: 'add-wishlist',
+            data: { action: 'add-to-wishlist', id: @product.id }
         .tabs
           ul.tabs-links
             li = link_to 'Description', '#description'
             li = link_to 'Size and fit', '#sizes'
             li = link_to 'Details', '#detials'
             li = link_to 'Styling Notes', '#notes'
-          #description.tab-content Tab content
+          #description.tab-content
+            = @product.description
+          #sizes.tab-content
+            = @product.property('fit')
+          #details.tab-content
+            | Material:
+            = @product.property('fabric')
+            | Weight:
+            = @product.property('weight')
+          #notes.tab-content
+            | Tab content notes
 
   .page-name
     .inner
@@ -75,27 +88,10 @@
         span Dresses
 
   ul.products-list.grid-container
-    li.product-item.grid-25
-      .thumbnail
-        .like = link_to 'Like item', '#'
-        .quick-view = link_to 'Quick view', '#'
-        = image_tag 'http://placehold.it/243x352', width: 243, height: 352, alt: ''
-      .name = link_to 'Dress name', '#'
-    li.product-item.grid-25
-      .thumbnail
-        .like = link_to 'Like item', '#'
-        .quick-view = link_to 'Quick view', '#'
-        = image_tag 'http://placehold.it/243x352', width: 243, height: 352, alt: ''
-      .name = link_to 'Dress name', '#'
-    li.product-item.grid-25
-      .thumbnail
-        .like = link_to 'Like item', '#'
-        .quick-view = link_to 'Quick view', '#'
-        = image_tag 'http://placehold.it/243x352', width: 243, height: 352, alt: ''
-      .name = link_to 'Dress name', '#'
-    li.product-item.grid-25
-      .thumbnail
-        .like = link_to 'Like item', '#'
-        .quick-view = link_to 'Quick view', '#'
-        = image_tag 'http://placehold.it/243x352', width: 243, height: 352, alt: ''
-      .name = link_to 'Dress name', '#'
+    - @similar_products.each do |product|
+      li.product-item.grid-25
+        .thumbnail
+          .like = link_to 'Like item', '#', data: { action: 'add-to-wishlist', id: product.id }
+          .quick-view = link_to 'Quick view', '#', data: { action: 'quick-view', id: product.id }
+          = product_image product, itemprop: "image", width: 243, height: 352, alt: product.name
+        .name = link_to product.name, product

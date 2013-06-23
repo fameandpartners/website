@@ -9,4 +9,4 @@ $(".products, .index.show").ready ->
       console.log('invoked quick view for', productId)
   }
 
-  $(".like a[data-action='add-to-wishlist']").on('click', productWishlist.onClickHandler)
+  $("a[data-action='add-to-wishlist']").on('click', productWishlist.onClickHandler)

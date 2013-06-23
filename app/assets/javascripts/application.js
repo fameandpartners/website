@@ -19,4 +19,5 @@
 //= require libs/jquery.readyselector
 //= require libs/jquery.chosen.min
 //= require libs/jquery.mousewheel
+//= require libs/jquery-ui.custom.min
 //= require_tree ./partials
