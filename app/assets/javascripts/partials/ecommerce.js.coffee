@@ -46,6 +46,7 @@ $ ->
     false
 
   # Products carousel on frontpage
+  ###
   $("#product-items").carouFredSel
     items: 4
     width: 1094
@@ -61,3 +62,4 @@ $ ->
       button: "#product-items-next"
       key: "right"
       items: 4
+  ###
