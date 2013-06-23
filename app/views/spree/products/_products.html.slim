@@ -12,5 +12,5 @@
         .description = truncate(product_description(product), length: 50, separator: ' ')
         .price = product.price_in(current_currency).display_price
         .colors
-          - available_product_colors(product).map(&:name).sort.each do |color|
+          - colors[product.id].map(&:name).sort.each do |color|
             .color{class=color}

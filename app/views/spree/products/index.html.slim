@@ -6,7 +6,7 @@
         span Store
     .subtitle Great dresses just for you
 
-  = render 'products', products: Spree::Product.limit(4), selector: 'featured'
+  = render 'products', products: @featured_products, selector: 'featured', colors: @colors
 
   .page-name
     .inner
@@ -17,4 +17,4 @@
         - Spree::Taxonomy.where(name: 'Range').first.root.children.each do |taxon|
           li = link_to taxon.name, '#', data: { filter: 'range', id: taxon.id }
 
-  = render 'products', products: @products
+  = render 'products', products: @products, colors: @colors
