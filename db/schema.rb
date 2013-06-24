@@ -695,6 +695,7 @@ ActiveRecord::Schema.define(:version => 20130605122344) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "sign_up_via"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
