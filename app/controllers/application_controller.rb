@@ -20,13 +20,16 @@ class ApplicationController < ActionController::Base
                 :success_custom_dress_path
 
   def user_addition_params
+    addition_params = {}
+
     if spree_user_signed_in?
-      {
-        :sign_up_via => Spree::User::SIGN_UP_VIA[current_spree_user.sign_up_via],
-        :user_id => current_spree_user.id
-      }
-    else
-      {}
+      addition_params[:user_id] = current_spree_user.id
+
+      if current_spree_user.sign_up_via.present?
+        addition_params[:sign_up_via] = Spree::User::SIGN_UP_VIA[current_spree_user.sign_up_via]
+      end
     end
+
+    addition_params
   end
 end
