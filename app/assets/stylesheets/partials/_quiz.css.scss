@@ -602,3 +602,98 @@
     margin: 0 0 0 10px;
   }
 }
+
+.quiz-colors {
+  text-align: center;
+  margin: 34px 0 0;
+  .color {
+    display: block;
+    width: 83px;
+    height: 83px;
+    border: 6px solid #fff;
+    border-radius: 50%;
+    position: relative;
+    .color-name {
+      position: absolute;
+      top: 92px;
+      text-align: center;
+      left: 0;
+      right: 0;
+      color: #707070;
+      font: 400 13px/1 $fontOne;
+      text-transform: uppercase;
+    }
+    &.active {
+      border-color: #bffbef;
+    }
+    &.black {
+      background: #3d3d3d;
+    }
+    &.navy {
+      background: #4b5994;
+    }
+    &.cobalt {
+      background: #336dc4;
+    }
+    &.blue {
+      background: #94e9fe;
+    }
+    &.brown {
+      background: #5f4545;
+    }
+    &.purple {
+      background: #8f478f;
+    }
+    &.fuscia {
+      background: #f269a9;
+    }
+    &.fluro {
+      background: #fb6cd2;
+    }
+    &.maroon {
+      background: #bb2727;
+    }
+    &.red {
+      background: #d83f3d;
+    }
+    &.pink {
+      background: #ffd6d8;
+    }
+    &.mauve {
+      background: #ae8991;
+    }
+    &.ivory {
+      background: #f1e5cf;
+    }
+    &.camel {
+      background: #f2d094;
+    }
+    &.beige {
+      background: #ccb581;
+    }
+    &.orange {
+      background: #ffa94c;
+    }
+    &.burnt-orange {
+      background: #d8712e;
+    }
+    &.canary {
+      background: #f9ef5d;
+    }
+    &.green {
+      background: #31a367;
+    }
+    &.white {
+      background: #fff;
+      box-shadow: 0 0 1px rgba(0, 0, 0, .3);
+    }
+  }
+  li {
+    display: inline-block;
+    margin: 0 3px 49px;
+    input {
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+  }
+}
