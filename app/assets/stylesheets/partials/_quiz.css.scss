@@ -541,11 +541,66 @@
           margin: 0 6px;
           border-radius: 50%;
           box-shadow: none;
-          &.yellow {
-            background: #fff000;
-          }
           &.black {
-            background: #000;
+            background: #3d3d3d;
+          }
+          &.navy {
+            background: #4b5994;
+          }
+          &.cobalt {
+            background: #336dc4;
+          }
+          &.blue {
+            background: #94e9fe;
+          }
+          &.brown {
+            background: #5f4545;
+          }
+          &.purple {
+            background: #8f478f;
+          }
+          &.fuchsia {
+            background: #f269a9;
+          }
+          &.fluro {
+            background: #fb6cd2;
+          }
+          &.maroon {
+            background: #bb2727;
+          }
+          &.red {
+            background: #d83f3d;
+          }
+          &.pink {
+            background: #ffd6d8;
+          }
+          &.mauve {
+            background: #ae8991;
+          }
+          &.ivory {
+            background: #f1e5cf;
+          }
+          &.camel {
+            background: #f2d094;
+          }
+          &.beige {
+            background: #ccb581;
+          }
+          &.orange {
+            background: #ffa94c;
+          }
+          &.burnt-orange {
+            background: #d8712e;
+          }
+          &.canary {
+            background: #f9ef5d;
+          }
+          &.green {
+            background: #31a367;
+          }
+          &.white {
+            background: #fff;
+            box-shadow: 0 0 1px rgba(0, 0, 0, .3);
           }
         }
       }
@@ -606,6 +661,11 @@
 .quiz-colors {
   text-align: center;
   margin: 34px 0 0;
+  .active {
+    .color {
+      border-color: #bffbef;
+    }
+  }
   .color {
     display: block;
     width: 83px;
@@ -622,9 +682,6 @@
       color: #707070;
       font: 400 13px/1 $fontOne;
       text-transform: uppercase;
-    }
-    &.active {
-      border-color: #bffbef;
     }
     &.black {
       background: #3d3d3d;
@@ -644,7 +701,7 @@
     &.purple {
       background: #8f478f;
     }
-    &.fuscia {
+    &.fuchsia {
       background: #f269a9;
     }
     &.fluro {

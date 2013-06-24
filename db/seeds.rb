@@ -56,40 +56,53 @@ quiz.questions.create!([
                            :position => 1009,
                            :multiple => true,
                            :partial => 'nail_colours',
-                           :populate => 'colors'
+                           :populate => 'nail_colours'
+                         }, {
+                           :text => 'What are your favorite colors?',
+                           :position => 1010,
+                           :multiple => true,
+                           :partial => 'colours',
+                           :populate => 'colours'
                          }, {
                            :text => 'How important is fashion to you?',
-                           :position => 1010,
+                           :position => 1011,
                            :partial => 'fashionability'
                          }, {
                            :text => 'Do you prefer to show some skin or to cover up? Rank how sexy you like to look.',
-                           :position => 1011,
-                           :partial => 'sexiness'
-                         }, {
-                           :text => 'Do you loathe or love any of these current fashion trends?',
                            :position => 1012,
-                           :partial => 'trends'
-                         }, {
-                           :test => 'What is your hair colour?',
-                           :position => 1013,
-                           :partial => 'hair_colours'
-                         }, {
-                           :test => 'What is your skin colour?',
-                           :position => 1014,
-                           :partial => 'skin_colours'
-                         }, {
-                           :test => 'What is your body shape?',
-                           :position => 1015,
-                           :partial => 'body_shapes'
-                         }, {
-                           :test => 'What is your typical size?',
-                           :position => 1016,
-                           :partial => 'typical_sizes'
-                         }, {
-                           :test => 'What is your bra size?',
-                           :position => 1017,
-                           :partial => 'bra_sizes'
-                         }
+                           :partial => 'sexiness'
+                         }#, {
+                         #  :text => 'Do you loathe or love any of these current fashion trends?',
+                         #  :position => 1013,
+                         #  :multiple => true,
+                         #  :partial => 'trends',
+                         #  :populate => 'trends'
+                         #}, {
+                         #  :text => 'What is your hair colour?',
+                         #  :position => 1014,
+                         #  :partial => 'hair_colours',
+                         #  :populate => 'hair_colour'
+                         #}, {
+                         #  :text => 'What is your skin colour?',
+                         #  :position => 1015,
+                         #  :partial => 'skin_colours',
+                         #  :populate => 'skin_colour'
+                         #}, {
+                         #  :text => 'What is your body shape?',
+                         #  :position => 1016,
+                         #  :partial => 'body_shapes',
+                         #  :populate => 'body_shape'
+                         #}, {
+                         #  :text => 'What is your typical size?',
+                         #  :position => 1017,
+                         #  :partial => 'typical_sizes',
+                         #  :populate => 'typical_size'
+                         #}, {
+                         #  :text => 'What is your bra size?',
+                         #  :position => 1018,
+                         #  :partial => 'bra_sizes',
+                         #  :populate => 'bra_size'
+                         #}
                        ])
 
 
@@ -97,19 +110,19 @@ question = quiz.questions.find_by_partial!('outfits')
 question.answers.create!([
                            {
                              :code => 'img1',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'img2',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'img3',
-                             :girly => 1
+                             :girly => 10
                            }, {
                              :code => 'img4',
-                             :bohemian => 1
+                             :bohemian => 10
                            }, {
                              :code => 'img5',
-                             :edgy => 1
+                             :edgy => 10
                            }
                          ])
 
@@ -118,19 +131,19 @@ question = quiz.questions.find_by_partial!('oscar_dresses')
 question.answers.create!([
                            {
                              :code => 'img1',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'img2',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'img3',
-                             :girly => 1
+                             :girly => 10
                            }, {
                              :code => 'img4',
-                             :bohemian => 1
+                             :bohemian => 10
                            }, {
                              :code => 'img5',
-                             :edgy => 1
+                             :edgy => 10
                            }
                          ])
 
@@ -139,72 +152,72 @@ question = quiz.questions.find_by_partial!('style_words')
 question.answers.create!([
                            {
                              :code => 'edgy',
-                             :edgy => 1
+                             :edgy => 10
                            }, {
                              :code => 'conservative',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'bohemian',
-                             :bohemian => 1
+                             :bohemian => 10
                            }, {
                              :code => 'emo',
-                             :edgy => 1
+                             :edgy => 10
                            }, {
                              :code => 'earthy',
-                             :bohemian => 1
+                             :bohemian => 10
                            }, {
                              :code => 'glamorous',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'high_fashion',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'classic',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'clashy',
-                             :edgy => 1
+                             :edgy => 10
                            }, {
                              :code => 'sophisticated',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'grown_up',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'girly',
-                             :girly => 1
+                             :girly => 10
                            }, {
                              :code => 'feminine',
-                             :girly => 1
+                             :girly => 10
                            }, {
                              :code => 'elegant',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'hot',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'sweet',
-                             :girly => 1
+                             :girly => 10
                            }, {
                              :code => 'structured',
-                             :glam => 1,
-                             :edgy => 1,
-                             :classic => 1
+                             :glam => 10,
+                             :edgy => 10,
+                             :classic => 10
                            }, {
                              :code => 'relaxed',
-                             :glam => 1,
-                             :bohemian => 1,
-                             :classic => 1
+                             :glam => 10,
+                             :bohemian => 10,
+                             :classic => 10
                            }, {
                              :code => 'understated',
-                             :glam => 1,
-                             :girly => 1,
-                             :bohemian => 1,
-                             :classic => 1
+                             :glam => 10,
+                             :girly => 10,
+                             :bohemian => 10,
+                             :classic => 10
                            }, {
                              :code => 'cool',
-                             :bohemian => 1,
-                             :edgy => 1
+                             :bohemian => 10,
+                             :edgy => 10
                            }
                          ])
 
@@ -227,10 +240,10 @@ question.answers.create!([
                              :bohemian => 3
                            }, {
                              :code => 'christian_dior',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'jil_sander',
-                             :edgy => 1
+                             :edgy => 10
                            }, {
                              :code => 'zuhair_murad',
                              :glam => 5,
@@ -269,19 +282,19 @@ question = quiz.questions.find_by_partial!('prom_shoes')
 question.answers.create!([
                            {
                              :code => 'img1',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'img2',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'img3',
-                             :girly => 1
+                             :girly => 10
                            }, {
                              :code => 'img4',
-                             :bohemian => 1
+                             :bohemian => 10
                            }, {
                              :code => 'img5',
-                             :edgy => 1
+                             :edgy => 10
                            }
                          ])
 
@@ -290,19 +303,19 @@ question = quiz.questions.find_by_partial!('prom_makeup')
 question.answers.create!([
                            {
                              :code => 'img1',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'img2',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'img3',
-                             :girly => 1
+                             :girly => 10
                            }, {
                              :code => 'img4',
-                             :bohemian => 1
+                             :bohemian => 10
                            }, {
                              :code => 'img5',
-                             :edgy => 1
+                             :edgy => 10
                            }
                          ])
 
@@ -311,19 +324,19 @@ question = quiz.questions.find_by_partial!('prom_hair')
 question.answers.create!([
                            {
                              :code => 'img1',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'img2',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'img3',
-                             :girly => 1
+                             :girly => 10
                            }, {
                              :code => 'img4',
-                             :bohemian => 1
+                             :bohemian => 10
                            }, {
                              :code => 'img5',
-                             :edgy => 1
+                             :edgy => 10
                            }
                          ])
 
@@ -332,19 +345,19 @@ question = quiz.questions.find_by_partial!('prom_dresses')
 question.answers.create!([
                            {
                              :code => 'img1',
-                             :glam => 1
+                             :glam => 10
                            }, {
                              :code => 'img2',
-                             :classic => 1
+                             :classic => 10
                            }, {
                              :code => 'img3',
-                             :girly => 1
+                             :girly => 10
                            }, {
                              :code => 'img4',
-                             :bohemian => 1
+                             :bohemian => 10
                            }, {
                              :code => 'img5',
-                             :edgy => 1
+                             :edgy => 10
                            }
                          ])
 
@@ -406,6 +419,51 @@ question.answers.create!([
                              :code => 'bright_red',
                              :glam => 7,
                              :edgy => 3
+                           }
+                         ])
+
+question = quiz.questions.find_by_partial!('colours')
+question.answers.create!([
+                           {
+                             :code => 'black'
+                           }, {
+                             :code => 'navy'
+                           }, {
+                             :code => 'cobalt'
+                           }, {
+                             :code => 'blue'
+                           }, {
+                             :code => 'brown'
+                           }, {
+                             :code => 'purple'
+                           }, {
+                             :code => 'fuchsia'
+                           }, {
+                             :code => 'fluro'
+                           }, {
+                             :code => 'maroon'
+                           }, {
+                             :code => 'red'
+                           }, {
+                             :code => 'pink'
+                           }, {
+                             :code => 'mauve'
+                           }, {
+                             :code => 'ivory'
+                           }, {
+                             :code => 'camel'
+                           }, {
+                             :code => 'beige'
+                           }, {
+                             :code => 'orange'
+                           }, {
+                             :code => 'burnt_orange'
+                           }, {
+                             :code => 'canary'
+                           }, {
+                             :code => 'green'
+                           }, {
+                             :code => 'white'
                            }
                          ])
 
@@ -481,130 +539,130 @@ question.answers.create!([
                            }
                          ])
 
-question = quiz.questions.find_by_partial!('trends')
-question.answers.create!([
-                           {
-                             :code => 'jewel_tones'
-                           }, {
-                             :code => 'volumnious_skirts'
-                           }, {
-                             :code => 'sequins'
-                           }, {
-                             :code => 'neon'
-                           }, {
-                             :code => 'lace_and_mesh'
-                           }, {
-                             :code => 'applique'
-                           }, {
-                             :code => 'digital_prints'
-                           }
-                         ])
-
-question = quiz.questions.find_by_partial!('hair_colours')
-question.answers.create!([
-                           {
-                             :code => 'black'
-                           }, {
-                             :code => 'brunette'
-                           }, {
-                             :code => 'auburn'
-                           }, {
-                             :code => 'blonde'
-                           }, {
-                             :code => 'platinum_blonde'
-                           }, {
-                             :code => 'strawberry_blonde'
-                           }, {
-                             :code => 'red'
-                           }, {
-                             :code => 'coloured'
-                           }
-                         ])
-
-question = quiz.questions.find_by_partial!('skin_colours')
-question.answers.create!([
-                           {
-                             :code => 'fair'
-                           }, {
-                             :code => 'medium_fair'
-                           }, {
-                             :code => 'medium'
-                           }, {
-                             :code => 'medium_dark'
-                           }, {
-                             :code => 'dark'
-                           }
-                         ])
-
-question = quiz.questions.find_by_partial!('body_shapes')
-question.answers.create!([
-                           {
-                             :code => 'apple'
-                           }, {
-                             :code => 'pear'
-                           }, {
-                             :code => 'athletic'
-                           }, {
-                             :code => 'strawberry'
-                           }, {
-                             :code => 'hour_glass'
-                           }, {
-                             :code => 'column'
-                           }, {
-                             :code => 'petite'
-                           }
-                         ])
-
-question = quiz.questions.find_by_partial!('typical_sizes')
-question.answers.create!([
-                           {
-                             :code => 'G0'
-                           }, {
-                             :code => 'G2'
-                           }, {
-                             :code => 'G4'
-                           }, {
-                             :code => 'G6'
-                           }, {
-                             :code => 'G8'
-                           }, {
-                             :code => 'G12'
-                           }, {
-                             :code => 'G14'
-                           }, {
-                             :code => 'L4'
-                           }, {
-                             :code => 'L6'
-                           }, {
-                             :code => 'L8'
-                           }, {
-                             :code => 'L10'
-                           }, {
-                             :code => 'L12'
-                           }, {
-                             :code => 'L14'
-                           }, {
-                             :code => 'L16'
-                           }
-                         ])
-
-question = quiz.questions.find_by_partial!('bra_sizes')
-question.answers.create!([
-                           {
-                             :code => 'AAA'
-                           }, {
-                             :code => 'AA'
-                           }, {
-                             :code => 'A'
-                           }, {
-                             :code => 'B'
-                           }, {
-                             :code => 'c'
-                           }, {
-                             :code => 'D'
-                           }, {
-                             :code => 'E'
-                           }, {
-                             :code => 'FPP'
-                           }
-                         ])
+#question = quiz.questions.find_by_partial!('trends')
+#question.answers.create!([
+#                           {
+#                             :code => 'jewel_tones'
+#                           }, {
+#                             :code => 'volumnious_skirts'
+#                           }, {
+#                             :code => 'sequins'
+#                           }, {
+#                             :code => 'neon'
+#                           }, {
+#                             :code => 'lace_and_mesh'
+#                           }, {
+#                             :code => 'applique'
+#                           }, {
+#                             :code => 'digital_prints'
+#                           }
+#                         ])
+#
+#question = quiz.questions.find_by_partial!('hair_colours')
+#question.answers.create!([
+#                           {
+#                             :code => 'black'
+#                           }, {
+#                             :code => 'brunette'
+#                           }, {
+#                             :code => 'auburn'
+#                           }, {
+#                             :code => 'blonde'
+#                           }, {
+#                             :code => 'platinum_blonde'
+#                           }, {
+#                             :code => 'strawberry_blonde'
+#                           }, {
+#                             :code => 'red'
+#                           }, {
+#                             :code => 'coloured'
+#                           }
+#                         ])
+#
+#question = quiz.questions.find_by_partial!('skin_colours')
+#question.answers.create!([
+#                           {
+#                             :code => 'fair'
+#                           }, {
+#                             :code => 'medium_fair'
+#                           }, {
+#                             :code => 'medium'
+#                           }, {
+#                             :code => 'medium_dark'
+#                           }, {
+#                             :code => 'dark'
+#                           }
+#                         ])
+#
+#question = quiz.questions.find_by_partial!('body_shapes')
+#question.answers.create!([
+#                           {
+#                             :code => 'apple'
+#                           }, {
+#                             :code => 'pear'
+#                           }, {
+#                             :code => 'athletic'
+#                           }, {
+#                             :code => 'strawberry'
+#                           }, {
+#                             :code => 'hour_glass'
+#                           }, {
+#                             :code => 'column'
+#                           }, {
+#                             :code => 'petite'
+#                           }
+#                         ])
+#
+#question = quiz.questions.find_by_partial!('typical_sizes')
+#question.answers.create!([
+#                           {
+#                             :code => 'G0'
+#                           }, {
+#                             :code => 'G2'
+#                           }, {
+#                             :code => 'G4'
+#                           }, {
+#                             :code => 'G6'
+#                           }, {
+#                             :code => 'G8'
+#                           }, {
+#                             :code => 'G12'
+#                           }, {
+#                             :code => 'G14'
+#                           }, {
+#                             :code => 'L4'
+#                           }, {
+#                             :code => 'L6'
+#                           }, {
+#                             :code => 'L8'
+#                           }, {
+#                             :code => 'L10'
+#                           }, {
+#                             :code => 'L12'
+#                           }, {
+#                             :code => 'L14'
+#                           }, {
+#                             :code => 'L16'
+#                           }
+#                         ])
+#
+#question = quiz.questions.find_by_partial!('bra_sizes')
+#question.answers.create!([
+#                           {
+#                             :code => 'AAA'
+#                           }, {
+#                             :code => 'AA'
+#                           }, {
+#                             :code => 'A'
+#                           }, {
+#                             :code => 'B'
+#                           }, {
+#                             :code => 'C'
+#                           }, {
+#                             :code => 'D'
+#                           }, {
+#                             :code => 'E'
+#                           }, {
+#                             :code => 'FPP'
+#                           }
+#                         ])

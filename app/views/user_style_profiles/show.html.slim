@@ -43,8 +43,8 @@
             ' /10
       .column.column-2
         .colors
-          .color.black
-          .color.yellow
+          - @style_profile.colours.each do |colour|
+            .color *{ :class => colour }
         .label
           .title Your
           .subtitle Colors
@@ -65,42 +65,3 @@
       script type="text/javascript"
         | var addthis_config = {"data_track_addressbar":true};
       script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
-
-      
-      
-/
-  h1.block-title Your style profile
-  h2
-    | Based on your answers, we obtained the following data:
-  ul style="color: black;"
-    - current_spree_user.style_report.attributes.slice(*StyleReport::STYLE_ATTRIBUTES).each do |name, value|
-      li
-        = name.titleize
-        ' :
-        = value
-    li
-      ' Brands:
-      = current_spree_user.style_report.brands.map(&:titleize).join(', ')
-    li
-      ' Colors:
-      = current_spree_user.style_report.colors.map(&:titleize).join(', ')
-
-  h2 Answers
-  ul style="color: black;"
-    - session['quiz']['answers'].each do |question_id, answer_ids|
-      - question = Question.find(question_id)
-      li
-        = question.text
-        ul
-          - answers = Answer.find(answer_ids)
-          - answers.each do |answer|
-            li
-              = answer.code
-              ul
-                - StyleReport::STYLE_ATTRIBUTES.each do |attribute|
-                  - value = answer.send(attribute)
-                  - unless value.zero?
-                    li
-                      = attribute
-                      ' :
-                      = value / answers.count

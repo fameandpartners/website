@@ -4,13 +4,13 @@ class QuestionsController < ApplicationController
   layout nil
 
   def index
-    @quiz = Quiz.first
+    @quiz = Quiz.last
   end
 
   def show
-    @quiz = Quiz.first
+    @quiz = Quiz.last
     @question = @quiz.questions.find(params[:id])
     @position = @quiz.questions.index(@question) + 1
-    @progress = 100 / @quiz.questions.count * @quiz.questions.index(@question)
+    @progress = (100.0 / @quiz.questions.count * @quiz.questions.index(@question)).round
   end
 end

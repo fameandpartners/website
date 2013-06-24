@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130621120752) do
+ActiveRecord::Schema.define(:version => 20130626045146) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -716,6 +716,7 @@ ActiveRecord::Schema.define(:version => 20130621120752) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "sign_up_via"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
@@ -774,7 +775,7 @@ ActiveRecord::Schema.define(:version => 20130621120752) do
   end
 
   create_table "user_style_profiles", :force => true do |t|
-    t.integer  "spree_user_id"
+    t.integer  "user_id"
     t.float    "glam"
     t.float    "girly"
     t.float    "classic"
@@ -782,8 +783,8 @@ ActiveRecord::Schema.define(:version => 20130621120752) do
     t.float    "bohemian"
     t.float    "sexiness"
     t.float    "fashionability"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "nail_colours"
     t.string   "brands"
     t.string   "trends"
@@ -792,8 +793,10 @@ ActiveRecord::Schema.define(:version => 20130621120752) do
     t.string   "body_shape"
     t.string   "typical_size"
     t.string   "bra_size"
+    t.string   "colours"
+    t.text     "serialized_answers"
   end
 
-  add_index "user_style_profiles", ["spree_user_id"], :name => "index_style_reports_on_spree_user_id"
+  add_index "user_style_profiles", ["user_id"], :name => "index_style_reports_on_spree_user_id"
 
 end

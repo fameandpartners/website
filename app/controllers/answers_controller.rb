@@ -4,7 +4,7 @@ class AnswersController < ApplicationController
   layout nil
 
   def create
-    quiz = Quiz.first
+    quiz = Quiz.last
     question = quiz.questions.find(params[:question_id])
 
     answer_codes = nil
@@ -34,7 +34,7 @@ class AnswersController < ApplicationController
         end
       end
     else
-      redirect_to quiz_question_path
+      redirect_to quiz_question_path(question)
     end
   end
 
@@ -42,7 +42,9 @@ class AnswersController < ApplicationController
 
   def finish_quiz(quiz)
     if session['quiz']['answers'].size.eql?(quiz.questions.size)
-      style_profile = current_spree_user.build_style_profile
+      # because Rails are stupid & try to use invalid foreign key at Spree::User#build_style_profile
+      style_profile = UserStyleProfile.new
+      style_profile.user = current_spree_user
 
       if session['quiz']['answers'].values.all?(&:present?)
         session['quiz']['answers'].each do |question_id, answer_ids|
@@ -51,16 +53,22 @@ class AnswersController < ApplicationController
 
           if question.populate.present?
             if style_profile.respond_to?("#{question.populate}=")
-              style_profile.send("#{question.populate}=", answers.map(&:code))
+              if question.multiple?
+                style_profile.send("#{question.populate}=", answers.map(&:code))
+              else
+                style_profile.send("#{question.populate}=", answers.map(&:code).first)
+              end
             end
           end
 
           UserStyleProfile::STYLE_ATTRIBUTES.each do |attribute|
-            points = answers.map{|answer| answer.send(attribute) }.reduce(:+) / answers.count
+            points = answers.map{|answer| answer.send(attribute) }.reduce(:+).to_f / answers.count
 
             style_profile.send("#{attribute}=", style_profile.send(attribute) + points)
           end
         end
+
+        style_profile.serialized_answers = session['quiz']['answers']
 
         style_profile.save
 
