@@ -20,4 +20,5 @@
 //= require libs/jquery.chosen.min
 //= require libs/jquery.mousewheel
 //= require libs/jquery-ui.custom.min
+//= require libs/underscore-min
 //= require_tree ./partials

@@ -1,3 +1,9 @@
+javascript: 
+  window.product_variants = #{{ @product_variants.to_json }}
+
+- sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+- colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+
 .wrap
   .product-page.grid-container
     .grid-55
@@ -38,19 +44,19 @@
         .price-delivery
           .price.sale
             em $320
-            span $125
+            span = @product.price_in(current_currency).display_price
           .delivery 3-4 week delivery
         .colors-choser
           .label Choose a color:
           .colors
-            .color.pink.active
-            .color.yellow
-            .color.black
+            - colors.each do |color|
+              .color class='#{color}' data-color='#{color}'
         .size-select
           .select-box
             select#toggle-selectbox.select2 name="size"
-              option Choose your size
-              option Small
+              option value='' Choose your size
+              - sizes.each do |size|
+                option{value=size} = size
           = link_to 'What size am i?', '#', class: 'info'
         .body-shapes
           .desc The body shapes that this dress suits:
