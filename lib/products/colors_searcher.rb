@@ -6,6 +6,7 @@ module Products
 
     def retrieve_colors
       colors = Hash.new() {|this, key| this[key] = Array.new() }
+      return colors if color_option_type.blank?
 
       products_with_options = Spree::Product.where(id: @products.map(&:id)).includes(variants: :option_values)
 
@@ -25,20 +26,3 @@ module Products
     end
   end
 end
-
-=begin
-  # return 
-  # { product_id: list_of_colors }
-  def available_colors_for(dresses)
-    products = [products] unless products.is_a?(Array)
-    color_option_type = Spree::OptionType.where(name: 'product-color').first
-
-    {}.tap do |colors|
-      products.each do |product|
-        colors[product.id] = product.variants.includes(:option_values).collect do |variant|
-          variant.option_values.select{|option| option.option_type_id == color_option_type.id }
-        end.flatten.uniq
-      end
-    end
-  end
-=end
