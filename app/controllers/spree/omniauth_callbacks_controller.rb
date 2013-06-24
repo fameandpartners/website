@@ -32,6 +32,8 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
                 :Signupreason => session[:sign_up_reason],
                 :Signupdate => Date.today.to_s
               }
+
+              user.sign_up_via = Spree::User::SIGN_UP_VIA.index('Facebook')
             end
 
             user.confirm!

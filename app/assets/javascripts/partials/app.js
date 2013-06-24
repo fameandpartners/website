@@ -13,7 +13,7 @@ $(function(){
   });
 
   $('.custom-dress-image-upload').fileupload({
-    url: $('form.custom-dress').attr('action') + '/custom_dress_images.json',
+    url: $('#custom-dress-image-upload').data('url'),
     dataType: 'json',
     formData: {},
     multipart: true,
@@ -43,7 +43,7 @@ $(function(){
   });
 
   $('#custom-dress-image-upload').fileupload({
-    url: $('form.custom-dress').attr('action') + '/custom_dress_images.json',
+    url: $('#custom-dress-image-upload').data('url'),
     dataType: 'json',
     formData: {},
     multipart: true,

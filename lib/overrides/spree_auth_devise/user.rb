@@ -18,6 +18,8 @@ module Overrides
         has_attached_file :avatar
       end
 
+      SIGN_UP_VIA = %w( Email Facebook )
+
       def full_name
         [first_name, last_name].reject(&:blank?).join(' ')
       end
@@ -36,4 +38,5 @@ module Overrides
     end
   end
 end
+
 Spree::User.send(:include, Overrides::SpreeAuthDevise::User)
