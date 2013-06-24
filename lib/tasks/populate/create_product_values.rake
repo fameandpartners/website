@@ -52,6 +52,8 @@ def randomize_product_variants(size_option, color_option)
 
     random_sizes.each do |size_value|
       random_colors.each do |color_value|
+        # black dresses of 8 size in stock only
+        count_on_hand = size_value.name.to_s == '8' && color_value.to_s == 'black'
         variant = Spree::Variant.create(product_id: product.id)
         variant.option_values = [size_value, color_value]
       end

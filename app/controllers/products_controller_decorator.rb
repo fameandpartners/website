@@ -57,8 +57,9 @@ Spree::ProductsController.class_eval do
           available_option[:size] = option_value.name
         end
       end
-      # really, we have only 8 Black dress in stock.
-      available_option[:fast_delivery] = (available_option[:color].to_s == 'black' && available_option[:size].to_s == '8')
+
+      # if item in stock
+      available_option[:fast_delivery] = variant.count_on_hand > 0
 
       available_options.push(available_option)
     end
