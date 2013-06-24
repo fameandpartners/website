@@ -7,7 +7,8 @@ gem 'slim-rails', '~> 1.1.1'
 gem 'configatron'
 gem 'paperclip'
 gem 'createsend', '~> 2.5.0'
-gem 'sidekiq'
+gem 'sidekiq'   
+gem 'newrelic_rpm'
 
 # assets
 gem 'jquery-rails'
