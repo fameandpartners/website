@@ -161,6 +161,17 @@
             display: none;
           }
         }
+        .label {
+          bottom: 30px;
+          left: 30px;
+          right: 30px;
+          position: absolute;
+          background: #e8e8e8;
+          text-transform: uppercase;
+          font-size: 12px;
+          padding: 4px 0 0;
+          text-align: center;
+        }
         .face {
           width: 92px;
           height: 92px;
