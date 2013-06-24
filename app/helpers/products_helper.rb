@@ -14,5 +14,8 @@ module ProductsHelper
 
   def available_product_ranges
     Spree::Taxonomy.where(name: 'Range').first.root.children
+
+    range_taxonomy = Spree::Taxonomy.where(name: 'Range').first
+    range_taxonomy.present? ? range_taxonomy.root.children : []
   end
 end
