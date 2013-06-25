@@ -12,5 +12,7 @@
 
 //= require_tree .
 //= require ../spree/admin/blog
+//= require ../spree/admin/blog/posts
 //= require ../spree/admin/admin
+//= require ../libs/jquery.tagsinput.min
 //= require ckeditor/init

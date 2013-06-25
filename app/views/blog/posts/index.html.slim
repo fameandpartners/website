@@ -1,55 +1,44 @@
 = render 'shared/blog_top_bar'
-
 .wrap
-  = render 'shared/top_slider'
-
-  .celebrity-photos
-    .blog-block-title
-      .latest Latest
-      .block-subtitle Celebrity photos
-      .view-all = link_to 'View more celebrity photos', '#'
-    ul
-      - @celebrity_photos.each do |celebrity_photo|
-        li
-          .zoom
-          = link_to '#', class: 'celebrity-photo' do
-            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: ''
-            .overlay
-              .name celebrity_photo.celebrity.name
-              .event Ipsum Awards 2013
-          .love-share
-            .love-hate
-              .icons
-                .love
-                .hate
-              .label Love it or loathe it
-            .share
-              .icons
-                .share-block
-              .label Share
   .content-sidebar
     section.content-area
-      .blog-block-title
-        .latest Latest
-        .block-subtitle = params[:category].to_s.titleize
-
-    - @posts.each do |post|
-      section.content-area
-        article.post
-          h2
-            = link_to post.title, make_url(["blog", params[:category]], post.title)
-          .post-meta
-            .date = post.created_at.to_s :long_ordinal
-            .comments
-              = link_to '1490 Comments', '#'
-            .author
-              = link_to '#' do
-                .avatar
-                  = image_tag 'sample/avatar.jpg', width: 30, height: 30, alt: ''
-                .name by #{post.user.first_name} #{post.user.last_name}
-          .featured-image
-            = image_tag post.celebrity_photos.first.photo.url, width: 742, height: 355, alt: '' if post.celebrity_photos.any?
-          .post-content
-            p = raw post.content
+      - if @posts.present?
+        - @posts.each do |post|
+          .blog-block-title
+            article.post
+              h2
+                - if post.red_carpet?
+                  = link_to post.title, blog_red_carpet_post_path(post.slug)
+                - else
+                  = link_to post.title, blog_post_by_category_path(post.category.slug, post.slug)
+              .post-meta
+                .date= post.occured_at_formatted
+                .comments
+                  - if post.red_carpet?
+                    = link_to '0 Comments', blog_red_carpet_post_path(post.slug) + '#disqus_thread'
+                  - else
+                    = link_to '0 Comments', blog_post_by_category_path(post.category.slug, post.slug) + '#disqus_thread'
+                .author
+                  = link_to blog_post_by_category_path(post.category.slug, post.author.slug) do
+                    .avatar
+                      = image_tag post.author.photo.url, width: 30, height: 30, alt: ''
+                    .name= post.author.fullname
+              - if post.primary_photo.present?
+                .featured-image
+                  = image_tag post.primary_photo.photo.url, width: 742, height: 355, alt: ''
+              - if post.body.present?
+                .post-content= raw(post.body)
+      - else
+        .blog-block-title
+          .empty No posts found
 
     = render 'shared/blog_sidebar'
+
+  javascript:
+    var disqus_shortname = 'fameandpartners';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());

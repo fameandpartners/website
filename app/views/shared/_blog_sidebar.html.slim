@@ -1,5 +1,5 @@
 section.sidebar
-  .block
+  /.block
     .blog-block-title
       .latest Latest
       .block-subtitle Prom dresses
@@ -29,21 +29,16 @@ section.sidebar
       .latest Popular
       .block-subtitle Tags
     .block-content
-      select.selectbox name="tags"
-        option Choose option
-        option Option one
-  .block
-    .blog-block-title.inline
-      .latest Archives
-    .block-content
-      select.selectbox name="tags"
-        option Choose option
-        option Option one
+      select.selectbox name="tags" id="tags_search_filter"
+        option value="" Choose...
+        - Blog::Post.tag_counts_on(:tags).each do |tag|
+          option value="#{tag.name}" #{tag.name}
 
   .block
     .blog-block-title.inline
       .latest Events
     .block-content
-      select.selectbox name="tags"
-        option Choose option
-        option Option one
+      select.selectbox name="tags" id="events_search_filter"
+        option value="" Choose...
+        - Blog::Event.order('created_at desc').limit(20).each do |event|
+          option value="#{event.slug}" #{event.name}

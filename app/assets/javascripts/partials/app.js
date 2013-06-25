@@ -147,17 +147,6 @@ $(function(){
     $(".promo-badge").fadeIn('fast');
   });
 
-  $(".blog-slider .slides").carouFredSel({
-    circular: false,
-    infinite: false,
-    responsive: true,
-    auto  : false,
-    scroll: {
-      fx: 'slide'
-    },
-    pagination  : '.blog-slider .pagination'
-  });
-
   $('.selectbox').chosen();
 
 });

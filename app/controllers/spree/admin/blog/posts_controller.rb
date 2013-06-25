@@ -1,54 +1,77 @@
 class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
-  include PostHelper
 
   def index
-    category = Category.find_by_title(params[:category].to_s.titleize)
-    @posts = category ? category.posts : []
+    @posts = Blog::Post.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])
   end
 
   def new
-    @post = Post.new
-  end
-
-  def create
-    @post = Post.new params[:post]
-    @post.category = Category.find_by_title(params[:category].to_s.titleize)
-    @post.user = spree_current_user
-    if @post.save
-      redirect_to admin_post_path(params[:category])
-    else
-      render :new
-    end
+    prepare_form_relations
+    @blog_post = Blog::Post.new
   end
 
   def edit
-    @post = Post.find params[:id]
+    prepare_form_relations
+    @blog_post = Blog::Post.find(params[:id])
+  end
+
+  def create
+    attrs = params['blog_post']
+    @blog_post = Blog::Post.new(attrs)
+    @blog_post.user = current_spree_user
+    @blog_post.slug = slug_from_name(@blog_post.title.to_s) if @blog_post.slug.blank?
+    update_published_at(@blog_post, attrs['publish'])
+
+    if @blog_post.valid?
+      @blog_post.save
+      redirect_to action: :index
+    else
+      prepare_form_relations
+      render action: :new
+    end
   end
 
   def update
-    post = Post.find params[:id]
-    if post.update_attributes(params[:post])
-      redirect_to admin_post_path(params[:category])
+    attrs = params['blog_post']
+    @blog_post = Blog::Post.find(params[:id])
+    @blog_post.assign_attributes(attrs)
+    update_published_at(@blog_post, attrs['publish'])
+
+    if @blog_post.valid?
+      @blog_post.save
+      redirect_to action: :index
     else
-      render :edit
+      prepare_form_relations
+      render action: :edit
     end
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy if post.user == spree_current_user && spree_current_user.admin?
+    @blog_post = Blog::Post.find(params[:id])
+    @blog_post.destroy
+    redirect_to action: :index
   end
 
-  def publish
-    post = Post.find params[:id]
-    post.publish!
-    redirect_to admin_blog_posts_path
+  private
+
+  def model_class
+    Blog::Post
   end
 
-  def unpublish
-    post = Post.find params[:id]
-    post.unpublish!
-    redirect_to admin_blog_posts_path
+  def slug_from_name(name)
+    name.to_s.downcase.gsub(/[^0-9a-z]/, ' ').to_s.gsub(/\s+/, ' ').strip.gsub(' ', '-')
+  end
+
+  def prepare_form_relations
+    @authors = Blog::Author.all
+    @categories = Blog::Category.all
+  end
+
+  def update_published_at(post, publish)
+    if publish == '1' && post.published_at.blank?
+      post.published_at = Time.now.utc
+    elsif publish == '0'
+      post.published_at = nil
+    end
   end
 
 end

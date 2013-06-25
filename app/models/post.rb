@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   attr_accessible :title, :content, :tag_list, :photos, :category_id,
                   :celebrity_photos, :celebrity_photos_attributes,
-                  :celebrity_photos_name
+                  :celebrity_photos_name, :post_type_id
   attr_accessor :celebrity_name
 
   CATEGORIES = {

@@ -1,0 +1,32 @@
+= render partial: "spree/admin/shared/blog_sub_menu"
+- content_for :page_title do
+  | Listing Celebrities
+
+- content_for :page_actions do
+  li
+    = button_link_to "New Celebrity", new_admin_blog_celebrity_path, :icon => 'icon-plus', :id => 'admin_new_celebrity'
+
+- if @celebrities.present?
+  table.index.blog_posts
+    thead
+      tr
+        th First Name
+        th Last Name
+        th Featured
+        th Photos
+        th.actions
+    tbody
+      - @celebrities.each do |celebrity|
+        tr.celebrity
+          td= celebrity.first_name
+          td= celebrity.last_name
+          td= celebrity.featured_state
+          td= link_to "View", admin_blog_celebrity_celebrity_photos_path(celebrity)
+          td
+            = link_to "", edit_admin_blog_celebrity_path(celebrity), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
+            | |
+            = link_to "", admin_blog_celebrity_path(celebrity), method: :delete,  confirm: "Are you sure?", class: "icon_link with-tip icon-remove no-text", "data-action" => "delete"
+- else
+  = render partial: "spree/admin/shared/no_items_found"
+
+= paginate @celebrities

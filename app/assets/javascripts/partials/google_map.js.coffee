@@ -1,5 +1,6 @@
 $ ->
   bindGoogleMapEvents = ->
+    return if document.getElementById('gmap-user') is null
     el = $('#event_postion')
     currentLat = parseFloat(el.data('lat'))
     currentLng = parseFloat(el.data('lng'))
@@ -11,5 +12,4 @@ $ ->
     map = new google.maps.Map(document.getElementById('gmap-user'), mapOptions);
 
   google.maps.event.addDomListener(window, 'load', bindGoogleMapEvents);
-  console.log "sdf"
 

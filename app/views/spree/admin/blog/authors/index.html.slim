@@ -1,0 +1,27 @@
+= render partial: "spree/admin/shared/blog_sub_menu"
+- content_for :page_title do
+  | Listing Authors
+
+- content_for :page_actions do
+  li
+    = button_link_to "New Author", new_admin_blog_author_path, :icon => 'icon-plus', :id => 'admin_new_author'
+
+- if @authors.present?
+  table.index.blog_posts
+    thead
+      tr
+        th First Name
+        th Last Name
+        th.actions
+    tbody
+      - @authors.each do |author|
+        tr.author
+          td= author.first_name
+          td= author.last_name
+          td
+            = link_to "", edit_admin_blog_author_path(author), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
+            | |
+            = link_to "", admin_blog_author_path(author), method: :delete,  confirm: "Are you sure?", class: "icon_link with-tip icon-remove no-text", "data-action" => "delete"
+- else
+  = render partial: "spree/admin/shared/no_items_found"
+= paginate @authors

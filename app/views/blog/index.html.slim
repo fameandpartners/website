@@ -1,54 +1,44 @@
 = render 'shared/blog_top_bar'
 
-.wrap
-  = render 'shared/top_slider'
+/.celebrity-modal
+  .overlay
+  .close-modal
+    = link_to '#' do
+      ' Close
+      span x
+  .celebrity-blocks
+    section.celebrity-main
+      .name Celebrity name
+      = image_tag 'http://placehold.it/576x770', alt: ''
+      .love-share
+        .love-hate
+          .label Love it or loathe it
+          .icons
+            .love
+            .hate
+        .share
+          .label Share
+          .icons
+            .share-block
+      .post-meta
+        .date Wednesday, May 15th, 2013
+    section.celebrity-sidebar
+      .blog-block-title
+        .latest Similar
+        .block-subtitle Prom Dresses
+      = image_tag 'http://placehold.it/196x250', alt: ''
+      = image_tag 'http://placehold.it/196x250', alt: ''
+      .browse-more = link_to 'Browse more dresses', '#'
+    section.block-comments Comments
 
-  .celebrity-photos
-    .blog-block-title
-      .latest Latest
-      .block-subtitle Celebrity photos
-      .view-all = link_to 'View more celebrity photos', '#'
-    ul
-      - @celebrity_photos.each do |celebrity_photo|
-        li
-          .zoom
-          = link_to '#', class: 'celebrity-photo' do
-            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: ''
-            .overlay
-              .name celebrity_photo.celebrity.name
-              .event Ipsum Awards 2013
-          .love-share
-            .love-hate
-              .icons
-                .love
-                .hate
-              .label Love it or loathe it
-            .share
-              .icons
-                .share-block
-              .label Share
+.wrap
+  = render 'blog/shared/promo_banner'
+  = render 'latest_celebrity_photos'
   .content-sidebar
-    - @posts.each do |type, post|
-      - next unless post
-      section.content-area
+    section.content-area
+      - @categories.each do |category|
         .blog-block-title
           .latest Latest
-          .block-subtitle = type.to_s.titleize
-        article.post
-          h2
-            = link_to post.title, make_url(["blog", type.to_s], post.title)
-          .post-meta
-            .date = post.created_at.to_s :long_ordinal
-            .comments
-              = link_to '1490 Comments', '#'
-            .author
-              = link_to '#' do
-                .avatar
-                  = image_tag 'sample/avatar.jpg', width: 30, height: 30, alt: ''
-                .name by #{post.user.first_name} #{post.user.last_name}
-          .featured-image
-            = image_tag post.celebrity_photos.first.photo.url, width: 742, height: 355, alt: '' if post.celebrity_photos.any?
-          .post-content
-            p = raw post.content
-
+          .block-subtitle= category.name
+          = render partial: 'latest_post_by_category', locals: {post: category.latest_post, category: category}
     = render 'shared/blog_sidebar'

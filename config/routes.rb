@@ -15,18 +15,32 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Blog routes
-  namespace :blog do
-    get '/' => 'blog#index'
-    [:celebrity_photos, :celebrities, :red_carpet_events].each do |crud|
-      resources crud, only: [:index, :show]
+  blog_constraint = lambda { |request|
+    if Rails.env.development?
+      request.host =~ /blog\.localdomain/
+    else
+      request.host =~ /blog\.#{configatron.application.hostname}/
     end
-    [:posts, :fashion_news, :prom_tips, :style_tips].each do |crud|
-      resources crud, controller: 'posts', category: crud
-    end
+  }
+
+  constraints blog_constraint do
+     get '/' => 'blog#index', as: :blog
+     get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
+     get '/celebrities_photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
+     get '/celebrity/:slug' => 'blog/celebrities#show', as: :blog_celebrity
+     get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
+     get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
+     get '/stylists' => 'blog/authors#index', as: :blog_authors
+     get '/stylists/:stylist' => 'blog/authors#index', as: :blog_authors_post
+     get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
+     get '/search/authors/:author_slug' => 'blog/searches#by_tag', as: :blog_search_by_author
+     get '/search/events/:event' => 'blog/searches#by_event', as: :blog_search_by_event
+     get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+     get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
+     get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
   end
 
   # Static pages for HTML markup
-  match '/stylists' => 'pages#stylists'
   match '/posts' => 'pages#posts'
   match '/post' => 'pages#post'
   match '/celebrities' => 'pages#celebrities'
@@ -55,17 +69,18 @@ FameAndPartners::Application.routes.draw do
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
-      match '/blog' => redirect('/admin/blog/celebrity_photos')
+      match '/blog' => redirect('/admin/blog/promo_banners')
       namespace :blog do
-        match '/posts/publish/:id' => 'posts#publish', :via => :get, as: 'publish_admin_blog_post'
-        match '/posts/unpublish/:id' => 'posts#unpublish', :via => :get, as: 'unpublish_admin_blog_post'
-        match '/red_carpet_events/publish/:id' => 'red_carpet_events#publish', :via => :get, as: 'publish_admin_blog_post'
-        match '/red_carpet_events/unpublish/:id' => 'red_carpet_events#unpublish', :via => :get, as: 'unpublish_admin_blog_post'
-        [:celebrity_photos, :red_carpet_events].each do |crud|
-          resources crud, except: [:show]
+        resources :promo_banners
+        resources :categories
+        resources :events
+        resources :authors
+        resources :posts do
+          resources :post_photos
+          resources :celebrity_photos
         end
-        [:posts, :fashion_news, :prom_tips, :style_tips].each do |crud|
-          resources crud, controller: 'posts', category: crud, except: [:show]
+        resources :celebrities do
+          resources :celebrity_photos
         end
       end
     end
@@ -73,5 +88,6 @@ FameAndPartners::Application.routes.draw do
 
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
+
 
 end

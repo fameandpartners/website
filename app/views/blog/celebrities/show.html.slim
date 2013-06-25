@@ -1,0 +1,41 @@
+= render 'shared/blog_top_bar'
+
+.wrap
+
+  = render 'shared/breadcrumbs'
+
+  .page-title
+    h1.block-title.dark= @celebrity.fullname
+    .track-celebrity = link_to 'Track this celebrity', '#', class: 'active'
+    .block-select
+      select.selectbox name="tags"
+        option Show celebrity photos
+        option Show blog posts
+
+  .content-sidebar.clearfix
+    section.content-area
+      .celebrity-photos.columns-3
+        - if @celebrity.celebrity_photos.present?
+          ul
+            - @celebrity.celebrity_photos.each do |photo|
+              li
+                .zoom
+                = link_to '#', class: 'celebrity-photo' do
+                  = image_tag photo.photo.url, width: 269, height: 375, alt: ''
+                  .overlay
+                    .name= @celebrity.fullname
+                    .event Ipsum Awards 2013
+                .love-share
+                  .love-hate
+                    .icons
+                      .love
+                      .hate
+                    .label Love it or loathe it
+                  .share
+                    .icons
+                      .share-block
+                    .label Share
+        - else
+          .empty No photos found
+
+    = render 'shared/blog_sidebar'

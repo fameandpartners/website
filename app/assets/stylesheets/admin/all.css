@@ -8,7 +8,8 @@
  *= require admin/spree_promo
 
 *= require_tree ../spree
- *= require_self
- *= require_tree .
- *= require admin/spree_social
+*= require_self
+*= require_tree .
+*= require admin/spree_social
+*= require libs/jquery.tagsinput
 */

@@ -4,60 +4,72 @@
 
   = render 'shared/breadcrumbs'
 
-  h1.block-title.dark = @post.title
-  .subtitle
-    ' 29th July 2013
-    div = link_to "by #{@post.user.first_name} #{@post.user.last_name}", '#'
-
-  .post
-    .main-image
-      = image_tag @post.celebrity_photos.shift.photo.url, width: 405, height: 522, alt: '' if @post.celebrity_photos.any?
-    .post-content
-      p = @post.content
-      ul.post-images
-        - @post.celebrity_photos.each do |photo|
-          li
-            = link_to '#' do
-              = image_tag photo.photo.url, width: 75, height: 108, alt: ''
-
-      .block
-        .block-title F&P Featured Dresses
-        .block-content
-          ul.photos
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-            li
-              = link_to '#' do
-                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
-
-      ul.tags
-        li = link_to 'Loren (2)', '#', class: 'tag'
-        li = link_to 'Loren IPSUM  (2)', '#', class: 'tag'
-        li = link_to 'AMET SIT  (3)', '#', class: 'tag'
-        li = link_to 'IPSUM AS (7)', '#', class: 'tag'
-        li = link_to 'IPSUM (2)', '#', class: 'tag'
-
   .content-sidebar
-    .content-area
-      ' Disqus
-    .sidebar
-      ' Sidebar
+    section.content-area
+      article.post
+        h2
+          = link_to @post.title, '#'
+        .post-meta
+          .date= @post.occured_at_formatted
+          .comments
+            - if @post.red_carpet?
+              = link_to '', blog_red_carpet_post_path(@post.slug) + '#disqus_thread'
+            - else
+              = link_to '', blog_post_by_category_path(@post.category.slug, @post.slug) + '#disqus_thread'
+          .author
+            = link_to '#' do
+              .avatar
+                = image_tag @post.author.photo.url, width: 30, height: 30, alt: ''
+              .name= @post.author.fullname
+        - if @post.post_photos.present?
+          .featured-image
+            #post-carousel
+              ul
+                - @post.post_photos.each do |photo|
+                  li
+                    = image_tag photo.photo.url, width: 742, height: 355, alt: ''
+        .post-content= raw(@post.body)
+
+      - if @post.red_carpet?
+        .blog-block-title
+          .latest Photos
+          .block-subtitle From the event
+
+        .celebrity-photos.columns-3
+          - if @post.celebrity_photos.present?
+            ul
+              - @post.celebrity_photos.each do |celebrity_photo|
+                - celebrity = celebrity_photo.celebrity
+                li
+                  .zoom
+                  = link_to blog_celebrity_path(celebrity.slug), class: 'celebrity-photo' do
+                    = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: ''
+                    .overlay
+                      .name= celebrity.fullname
+                      .event= @post.event.try(:name)
+                  .love-share
+                    .love-hate
+                      .icons
+                        .love
+                        .hate
+                      .label Love it or loathe it
+                    .share
+                      .icons
+                        .share-block
+                      .label Share
+          - else
+            .empty-results No photos found
+
+      = render 'blog/shared/comments'
+
+    = render 'shared/blog_sidebar'
+
+javascript:
+  var disqus_shortname = 'fameandpartners';
+  (function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  }());
+

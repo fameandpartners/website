@@ -9,9 +9,9 @@ gem 'paperclip'
 gem 'createsend', '~> 2.5.0'
 gem 'sidekiq'
 gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
+gem 'psych'
 
 gem 'acts-as-taggable-on'
-gem 'carrierwave'
 gem 'rmagick'
 gem 'ckeditor'
 
@@ -23,7 +23,6 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '1.3.0'
   gem 'execjs', '1.4.0'
-  gem 'therubyracer'
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.3.4'
 end
@@ -31,17 +30,9 @@ end
 group :development do
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
-  gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
   gem 'quiet_assets', '1.0.2'
   gem 'thin', '1.5.1'
-  gem 'pry-rails'
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'meta_request'
-  gem 'rack-mini-profiler'
-  gem 'guard'
-  gem 'guard-rails-assets'
 end
 
 group :development, :test do

@@ -1,8 +1,9 @@
-.breadcrumbs-likes
-  .breadcrumbs
-    ' You are here: #{link_to 'Home', '#'} » #{link_to 'Beyonce Noles', '#'}  »  #{link_to 'Red Carpet Event Title', '#'}
+- if @breadcrumbs.present?
+  .breadcrumbs-likes
+    .breadcrumbs
+      ' You are here: #{raw show_breadcrumbs}
 
-  ul.social-likes
-    li Facebook like
-    li Tweet it
-    li Facebook share
+    ul.social-likes
+      li Facebook like
+      li Tweet it
+      li Facebook share

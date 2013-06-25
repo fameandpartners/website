@@ -1,0 +1,31 @@
+= render partial: "spree/admin/shared/blog_sub_menu"
+- content_for :page_title do
+  | Listing Posts
+
+- content_for :page_actions do
+  li
+    = button_link_to "New Post", new_admin_blog_post_path, :icon => 'icon-plus', :id => 'admin_new_post'
+
+- if @posts.present?
+  table.index.blog_posts
+    thead
+      tr
+        th Title
+        th Occured at
+        th Type
+        th State
+        th.actions
+    tbody
+      - @posts.each do |post|
+        tr
+          td= post.title
+          td= post.occured_at_formatted
+          td= post.post_type_text
+          td= post.state
+          td
+            = link_to "", edit_admin_blog_post_path(post), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
+            | |
+            = link_to "", admin_blog_post_path(post), method: :delete,  confirm: "Are you sure?", class: "icon_link with-tip icon-remove no-text", "data-action" => "delete"
+- else
+  = render partial: "spree/admin/shared/no_items_found"
+= paginate @posts

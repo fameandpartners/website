@@ -1,5 +1,6 @@
 $ ->
   bindGoogleMapEvents = ->
+    return if document.getElementById('gmap') is null
     currentLat = parseFloat($("#red_carpet_event_latitude").prop('value')) || 34.07711866840051
     currentLng = parseFloat($("#red_carpet_event_longitude").prop('value')) || -118.33030700683594
     mapOptions =

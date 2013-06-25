@@ -3,20 +3,17 @@
     .wrap
       nav.main
         ul
-          li.with-dropdown
+          li.with-dropdown[class="#{celebrities_page? ? 'active' : ''}"]
             = link_to 'Celebrity Style', '#'
             .dropdown-menu
               ul
-                li = link_to 'Feature Celebrity', '#'
-                li = link_to 'Feature Celebrity', '#'
-                li = link_to 'Feature Celebrity', '#'
-                li = link_to 'Feature Celebrity', '#'
-                li = link_to 'All Celebrities', '#', class: 'btn'
-          li = link_to 'Red Carpet Events', '#'
-          li = link_to 'Fashion News', '#'
-          li = link_to 'Prom Tips', '#'
-          li = link_to 'Style Tips', '#'
-          li = link_to 'Stylists', '#'
+                - @featured_celebrities.each do |celebrity|
+                  li = link_to celebrity.fullname, blog_celebrity_path(celebrity.slug)
+                li = link_to 'All Celebrities', blog_celebrities_path, class: 'btn'
+          li[class="#{red_carpet_posts_page? ? 'active' : ''}"] = link_to 'Red Carpet Events', blog_red_carpet_posts_path
+          - @categories.each do |category|
+            li[class="#{simple_posts_page? && params[:category_slug] == category.slug ? 'active' : ''}"] = link_to category.name, blog_posts_by_category_path(category.slug)
+          li[class="#{authors_page? ? 'active' : ''}"] = link_to 'Stylists', blog_authors_path
       .search
-        form
-          input type="text" name="search" placeholder="Search the blog"
+        = form_tag blog_search_by_query_path, method: :get do
+          = text_field_tag :q, nil, placeholder: "Search the blog"

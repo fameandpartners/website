@@ -4,23 +4,31 @@
 
   = render 'shared/breadcrumbs'
 
-  h1.block-title.dark Track your fav Celeb
-  .subtitle Keep track of your favourite celebrities and their style.
+  .page-title
+    h1.block-title.dark Track your favourite celebrities
+    .subtitle Keep track of your favourite celebrities and their style.
 
-  ul.celebrities
-    - @celebreties.each do |celebrity|
-      li
-        = link_to make_url([:blog, :celebrities], celebrity.name) do
-          = image_tag celebrity.photo, width: 269, height: 375, alt: ''
-          .name = celebrity.name
-  .paginate
-    .prev = link_to 'Prev', '#', class: 'btn'
-    ul.pagination
-      li.active = link_to '1', '#'
-      li = link_to '2', '#'
-      li = link_to '2', '#'
-      li = link_to '2', '#'
-      li = link_to '2', '#'
-      li = link_to '2', '#'
-      li = link_to '2', '#'
-    .next = link_to 'Next', '#', class: 'btn'
+  .celebrity-photos
+    - if @celebrities.present?
+      ul
+        - @celebrities.each do |celebrity|
+          li
+            .zoom
+            = link_to blog_celebrity_path(celebrity.slug), class: 'celebrity-photo' do
+              - if celebrity.main_photo.present?
+                = image_tag celebrity.main_photo.photo.url, width: 269, height: 375, alt: ''
+              .overlay
+                .name= celebrity.fullname
+                .event Ipsum Awards 2013
+            .love-share
+              .love-hate
+                .icons
+                  .love
+                  .hate
+                .label Love it or loathe it
+              .share
+                .icons
+                  .share-block
+                .label Share
+    - else
+      .empty No celebrities found
