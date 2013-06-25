@@ -1,15 +1,16 @@
 Spree::Variant.class_eval do
   def dress_color
-    self.class.color_option_type.present? ? get_option_value(self.class.color_option_type.id) : nil
+    get_option_value(self.class.color_option_type)
   end
 
   def dress_size
-    self.class.size_option_type.present? ? get_option_value(self.class.size_option_type.id) : nil
+    get_option_value(self.class.size_option_type)
   end
 
-  def get_option_value(option_type_id)
+  def get_option_value(option_type)
+    return nil unless option_type
     self.option_values.detect do |option|
-      option.option_type_id == option_type_id
+      option.option_type_id == option_type.id
     end
   end
 
