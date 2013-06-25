@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(:version => 20130625063347) do
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
     t.string   "code"
-    t.float    "glam"
-    t.float    "girly"
-    t.float    "classic"
-    t.float    "edgy"
-    t.float    "bohemian"
-    t.float    "sexiness"
-    t.float    "fashionability"
+    t.integer  "glam"
+    t.integer  "girly"
+    t.integer  "classic"
+    t.integer  "edgy"
+    t.integer  "bohemian"
+    t.integer  "sexiness"
+    t.integer  "fashionability"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -259,6 +259,7 @@ ActiveRecord::Schema.define(:version => 20130625063347) do
     t.string   "photo_uploaddable_type"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.integer  "category_id"
   end
 
   add_index "photo_posts", ["photo_uploaddable_id", "photo_uploaddable_type", "photo_id"], :name => "index_photo_uploaddable", :unique => true
@@ -276,6 +277,36 @@ ActiveRecord::Schema.define(:version => 20130625063347) do
     t.integer  "post_state_id", :default => 1
     t.integer  "category_id"
   end
+
+  add_index "posts", ["title"], :name => "index_posts_on_title", :unique => true
+
+  create_table "product_style_profiles", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "glam"
+    t.integer  "girly"
+    t.integer  "classic"
+    t.integer  "edgy"
+    t.integer  "bohemian"
+    t.integer  "apple"
+    t.integer  "pear"
+    t.integer  "strawberry"
+    t.integer  "hour_glass"
+    t.integer  "column"
+    t.integer  "bra_aaa"
+    t.integer  "bra_aa"
+    t.integer  "bra_a"
+    t.integer  "bra_b"
+    t.integer  "bra_c"
+    t.integer  "bra_d"
+    t.integer  "bra_e"
+    t.integer  "bra_fpp"
+    t.integer  "sexiness"
+    t.integer  "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "product_style_profiles", ["product_id"], :name => "index_product_style_profiles_on_product_id"
 
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
@@ -311,6 +342,7 @@ ActiveRecord::Schema.define(:version => 20130625063347) do
     t.integer  "post_state_id", :default => 1
   end
 
+  add_index "red_carpet_events", ["name"], :name => "index_red_carpet_events_on_name", :unique => true
   add_index "red_carpet_events", ["user_id"], :name => "index_red_carpet_events_on_user_id"
 
   create_table "spree_activators", :force => true do |t|
@@ -545,6 +577,27 @@ ActiveRecord::Schema.define(:version => 20130625063347) do
   end
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
+
+  create_table "spree_pages", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "slug"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "show_in_header",           :default => false, :null => false
+    t.boolean  "show_in_footer",           :default => false, :null => false
+    t.string   "foreign_link"
+    t.integer  "position",                 :default => 1,     :null => false
+    t.boolean  "visible",                  :default => true
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.string   "layout"
+    t.boolean  "show_in_sidebar",          :default => false, :null => false
+    t.string   "meta_title"
+    t.boolean  "render_layout_as_partial", :default => false
+  end
+
+  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
@@ -888,6 +941,7 @@ ActiveRecord::Schema.define(:version => 20130625063347) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "sign_up_via"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true

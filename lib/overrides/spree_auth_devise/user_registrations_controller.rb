@@ -2,7 +2,7 @@ Spree::UserRegistrationsController.class_eval do
   def new
     if params[:prom]
       session[:sign_up_reason] = 'Custom dress'
-      session[:spree_user_return_to] = main_app.new_custom_dress_path
+      session[:spree_user_return_to] = main_app.step1_custom_dress_path
     end
 
     super
@@ -15,6 +15,10 @@ Spree::UserRegistrationsController.class_eval do
       :Signupreason => session[:sign_up_reason],
       :Signupdate => Date.today.to_s
     }
+
+    if resource.new_record?
+      resource.sign_up_via = Spree::User::SIGN_UP_VIA.index('Email')
+    end
 
     if resource.save
       CampaignMonitor.delay.synchronize(resource.email, resource, custom_fields)

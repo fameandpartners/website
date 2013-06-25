@@ -14,6 +14,7 @@ gem 'psych'
 gem 'acts-as-taggable-on'
 gem 'rmagick'
 gem 'ckeditor'
+gem 'newrelic_rpm'
 
 # assets
 gem 'jquery-rails'
@@ -43,6 +44,7 @@ end
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-3-stable'
+gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 
 group :production do
