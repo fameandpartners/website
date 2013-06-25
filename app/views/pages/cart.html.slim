@@ -142,8 +142,31 @@
 .modal
   .overlay
   .modal-container
-    .edit-details.items
+    .close-lightbox
+    .edit-details
+      .modal-title Edit product details
       .item
         .image
         .item-details
-          .name
+          .name Hello
+          .description Lipsy Monochrome Off Shoulder Midi Dress
+          .colors-choser
+            .label Choose a color:
+            .colors
+              .color.pink.active
+              .color.yellow
+              .color.black
+          .size-select
+            .select-box
+              select#toggle-selectbox.select2 name="size"
+                option Choose your size
+                option Small
+          .quantity
+            .label Quantity
+            .value
+              select name="size"
+                option 1
+                option 2
+          .delivery 3-4 week delivery
+      .save
+        input.btn.black type="submit" value="Save changes"
