@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < Spree::StoreController
   layout 'spree/layouts/spree_application'
   respond_to :html 
 

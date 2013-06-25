@@ -1,13 +1,5 @@
 # it seems, we should disable this logic for admin part only.
-$(".products, .index").ready ->
-  # load items
-  # disable/enable button if item loaded
-  # create order with 'cart' state
-  # add item to cart
-  # show 
-  # show items in bag
-  # manage items in bag
-
+$ ->
   shoppingCart = {
     updateProductListActions: () ->
       # enable carousel
