@@ -17,7 +17,13 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
           if authentication.present?
             flash[:notice] = "Signed in successfully"
-            sign_in_and_redirect :spree_user, authentication.user
+            sign_in :spree_user, authentication.user
+
+            if session.delete(:sign_up_reason).eql?('custom_dress')
+              session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
+            end
+
+            redirect_to after_sign_in_path_for(authentication.user)
           elsif spree_current_user
             spree_current_user.apply_omniauth(auth_hash)
             spree_current_user.save!
@@ -29,7 +35,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
             if user.new_record?
               custom_fields = {
-                :Signupreason => session[:sign_up_reason],
+                :Signupreason => sign_up_reason_for_campaign_monitor,
                 :Signupdate => Date.today.to_s
               }
 
@@ -41,7 +47,14 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             if user.save
               CampaignMonitor.delay.synchronize(user.email, user, custom_fields)
               flash[:notice] = "Signed in successfully."
-              sign_in_and_redirect :spree_user, user
+
+              sign_in :spree_user, user
+
+              if session.delete(:sign_up_reason).eql?('custom_dress')
+                session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
+              end
+
+              redirect_to after_sign_in_path_for(user)
             else
               session[:omniauth] = auth_hash.except('extra')
               flash[:notice] = t(:one_more_step, :kind => auth_hash['provider'].capitalize)

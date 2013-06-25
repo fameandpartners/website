@@ -1,8 +1,7 @@
 Spree::UserRegistrationsController.class_eval do
   def new
     if params[:prom]
-      session[:sign_up_reason] = 'Custom dress'
-      session[:spree_user_return_to] = main_app.step1_custom_dresses_path
+      session[:sign_up_reason] = 'custom_dress'
     end
 
     super
@@ -12,7 +11,7 @@ Spree::UserRegistrationsController.class_eval do
     @user = build_resource(params[:spree_user])
 
     custom_fields = {
-      :Signupreason => session[:sign_up_reason],
+      :Signupreason => sign_up_reason_for_campaign_monitor,
       :Signupdate => Date.today.to_s
     }
 

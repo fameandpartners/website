@@ -32,4 +32,13 @@ class ApplicationController < ActionController::Base
 
     addition_params
   end
+
+  def sign_up_reason_for_campaign_monitor
+    if session[:sign_up_reason]
+      case session[:sign_up_reason]
+        when 'custom_dress' then
+          'Custom dress'
+      end
+    end
+  end
 end
