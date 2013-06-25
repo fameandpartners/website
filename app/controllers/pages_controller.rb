@@ -8,6 +8,6 @@ class PagesController < ApplicationController
       session[:spree_user_return_to] = main_app.step1_custom_dresses_path
     end
 
-    redirect_to spree.user_omniauth_authorize_url(:provider => :facebook)
+    redirect_to spree.spree_user_omniauth_authorize_url(:provider => :facebook)
   end
 end
