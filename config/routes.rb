@@ -26,6 +26,7 @@ FameAndPartners::Application.routes.draw do
   #match '/products' => 'pages#products'
   match '/account' => 'pages#account'
   match '/orders' => 'pages#orders'
+  match '/wishlist' => 'pages#wishlist'
   match '/product' => 'pages#product'
   match '/cart' => 'pages#cart'
   match '/quick-view' => 'pages#quick-view'
