@@ -2,7 +2,7 @@ Spree::UserRegistrationsController.class_eval do
   def new
     if params[:prom]
       session[:sign_up_reason] = 'Custom dress'
-      session[:spree_user_return_to] = main_app.step1_custom_dress_path
+      session[:spree_user_return_to] = main_app.step1_custom_dresses_path
     end
 
     super
