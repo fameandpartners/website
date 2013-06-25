@@ -14,6 +14,8 @@ FameAndPartners::Application.routes.draw do
     get '/spree_user/thanks' => 'spree/user_registrations#thanks'
   end
 
+  resources :line_items, only: [:create, :update, :destroy]
+
   # Static pages for HTML markup
   match '/posts' => 'pages#posts'
   match '/post' => 'pages#post'

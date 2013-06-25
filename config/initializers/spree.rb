@@ -13,6 +13,7 @@ Spree.config do |config|
   config.allow_ssl_in_staging = false
 
   config.products_per_page = 8
+  config.allow_backorders = true # allow order items out of stock - we have 90% items by order
 end
 
 Spree.user_class = "Spree::User"

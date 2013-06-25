@@ -1,0 +1,41 @@
+#shopping-bag-popup-wrapper.shopping-bag-popup
+  - if current_order.item_count == 0
+    ' Sorry, your shopping bag still empty
+  - else
+    #shopping-arrow-up.arrow-up
+    ul#shopping-bag-popup.items-carousel
+      - current_order.line_items.each do |line_item|
+        - variant = line_item.variant
+        - product = variant.product
+        li.item-block
+          .thumbnail
+            = product_image product, itemprop: "image", width: 83, height: 115, alt: product.name
+            = link_to 'Remove', '#', class: 'remove-item-from-cart', data: { id: variant.id }
+          .item-info
+            .price = line_item.money
+            .name = link_to product.name, product_path(product), target: 'blank'
+            .desc = product_short_description(product)
+            ul.specs
+              li
+                .label Color
+                .value
+                  - color = variant.dress_color
+                  .color{class=color.try(:name)}
+              li
+                .label Size
+                .value = variant.dress_size.try(:presentation)
+              li
+                .label Quantity
+                .value = line_item.quantity
+              li
+                .label Estimated delivery
+                .value = variant.count_on_hand > 0 ? '1-2 weeks' : '3-4 weeks'
+    #shopping-arrow-down.arrow-down
+    .totals
+      .label.fleft Total
+      .value.fright
+        ' AUD
+        span = current_order.display_total
+    .buttons
+      = link_to 'Continue shopping', '#', class: 'continue'
+      = link_to 'Buy now', '#', class: 'buy-now'

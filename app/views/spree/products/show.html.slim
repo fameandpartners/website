@@ -66,7 +66,7 @@ javascript:
                 = link_to '#' do
                   = image_tag 'http://placehold.it/60x84', alt: ''
         .buy-wishlist
-          = link_to 'Add to bag', '#', class: 'buy-now'
+          = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
           = link_to 'Add to wish list', '#', class: 'add-wishlist',
             data: { action: 'add-to-wishlist', id: @product.id }
         .tabs

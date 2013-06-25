@@ -4,7 +4,7 @@ li.product-item.grid-25
     .quick-view = link_to 'Quick view', '#', data: { action: 'quick-view', id: product.id }
     = product_image product, itemprop: "image", width: 243, height: 352, alt: product.name
   .name = link_to product.name, product
-  .description = product.property('short_description') || truncate(product.description, length: 50, separator: ' ')
+  .description = product_short_description(product)
   .price = product.price_in(current_currency).display_price
   .colors
     - colors.map(&:name).sort.each do |color|

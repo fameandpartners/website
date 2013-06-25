@@ -18,11 +18,11 @@ $(".products.show").ready ->
       @selected.color = color
       selected_variants = _.where(window.product_variants, { color: color })
       @updateSelectbox($('#toggle-selectbox'), selected_variants, 'size')
-      @updateDeliveryTime()
+      @updatePurchaseConditions()
 
     selectSize: (size) ->
       @selected.size = size
-      @updateDeliveryTime()
+      @updatePurchaseConditions()
 
     updateSelectbox: (container, available_options, method_name) ->
       return false # options update for 'chosen' plugin not working
@@ -33,6 +33,21 @@ $(".products.show").ready ->
       )
       container.val(@selected.size)
       container.trigger("liszt:updated")
+
+    updatePurchaseConditions: () ->
+      @updateDeliveryTime()
+      # update buttons
+      variant = @getSelectedVariant()
+      $button = $('.buy-wishlist .buy-now')
+      if variant
+        $button.data(variant_id: variant.id)
+        if variant.purchased
+          $button.addClass('purchased')
+        else
+          $button.removeClass('purchased')
+      else
+        $button.removeClass('purchased')
+        $button.data(variant_id: null)
 
     updateDeliveryTime: () ->
       variant = @getSelectedVariant()
@@ -46,13 +61,18 @@ $(".products.show").ready ->
 
     getSelectedVariant: () ->
       variant = _.findWhere(window.product_variants, @selected)
+      if variant
+        line_item = _.find(window.items_in_cart, (item_in_cart) -> item_in_cart == variant.id)
+        variant.in_cart = !!line_item
+        variant
+      else
+        {}
 
     selectFirstAvailableOptions: () ->
       $(".colors-choser .colors .color:first").click()
       size = $('#toggle-selectbox option[value!=""]:first').attr('value')
       $('#toggle-selectbox').val(size)
       variantsSelector.selectSize(size)
-
   }
 
   if window.product_variants

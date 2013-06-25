@@ -49,7 +49,7 @@ Spree::ProductsController.class_eval do
 
     available_options = []
     product.variants.each do |variant|
-      available_option = { variant_id: variant.id }
+      available_option = { id: variant.id }
       variant.option_values.each do |option_value|
         if option_value.option_type_id == color_option.id
           available_option[:color] = option_value.name
