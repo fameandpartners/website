@@ -1160,3 +1160,60 @@
     }
   }
 }
+
+#content .account-pages {
+  margin: 40px 0;
+  .tab-content {
+    padding: 34px;
+    .page-title {
+      font: 100 30px/1 $fontOne;
+      color: #000;
+      text-transform: uppercase;
+      text-align: left;
+      margin: 0 0 20px;
+      padding: 0;
+      &:before {
+        display: none;
+      }
+    }
+  }
+  .grid-container .grid-container {
+    position: relative;
+    left: -38px;
+  }
+  .hr {
+    margin: 20px 0 0;
+  }
+  .avatar-field {
+    overflow: hidden;
+    .avatar {
+      float: left;
+      width: 96px;
+      height: 96px;
+      margin: 0 20px 0 0;
+      overflow: hidden;
+      float: left;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+      &.empty {
+        background: image-url('avatar-empty.png') 0 0 no-repeat;
+      }
+    }
+    .btn-upload {
+      border: 0;
+      text-transform: uppercase;
+      display: inline-block;
+      position: relative;
+      margin: 32px 0 0;
+      padding: 0 24px;
+      height: 30px;
+      color: #787878;
+      font: 300 14px/30px $fontOne;
+      text-decoration: none;
+      @include linear-gradient(#e9e9e9, #d9d9d9);
+    }
+  }
+
+}

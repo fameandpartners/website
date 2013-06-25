@@ -148,6 +148,20 @@
       box-shadow: 0 1px 2px rgba(201, 146, 136, .66);
     }
   }
+  .submit {
+    margin: 40px 0 0;
+    input {
+      display: block;
+      text-decoration: none;
+      border: 0;
+      padding: 0 42px;
+      text-transform: uppercase;
+      color: #fff;
+      font: 300 20px/38px $fontOne;
+      height: 38px;
+      @include linear-gradient(#414141, #252525);
+    }
+  }
   .size-choser {
     margin: 0 0 36px;
     ul {
