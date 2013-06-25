@@ -6,6 +6,26 @@
   }
 }
 
+.table {
+  width: 100%;
+  font: 300 14px/1.1 $fontOne;
+  color: #333;
+  thead {
+    th {
+      padding: 15px 44px;
+      font-weight: 400;
+      text-align: left;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e1e1e1;
+    }
+  }
+  tbody {
+    td {
+      padding: 15px 44px;
+    }
+  }
+}
+
 .top-links {
   background: #333;
   height: 33px;

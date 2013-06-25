@@ -25,6 +25,7 @@ FameAndPartners::Application.routes.draw do
   # Static for ecommerce
   #match '/products' => 'pages#products'
   match '/account' => 'pages#account'
+  match '/orders' => 'pages#orders'
   match '/product' => 'pages#product'
   match '/cart' => 'pages#cart'
   match '/quick-view' => 'pages#quick-view'
