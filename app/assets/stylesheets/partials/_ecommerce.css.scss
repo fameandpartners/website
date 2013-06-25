@@ -1288,4 +1288,67 @@
       }
     }
   }
+  .reviews-tab {
+    .title {
+      font-weight: 100;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+    .date {
+      margin: 10px 0;
+      color: #a6a6a6;
+      font-size: 13px;
+    }
+    .rates {
+      margin: 28px 0;
+      .rate {
+        margin: 14px 0 0;
+        overflow: hidden;
+        .label {
+          float: left;
+          width: 122px;
+        }
+        .progress-bar {
+          float: left;
+          width: 140px;
+          border: 1px solid #e0e0e0;
+          height: 11px;
+          padding: 1px;
+          border-radius: 7px;
+          span {
+            display: block;
+            background: #f59a8c;
+            border-radius: 5px;
+            height: 11px;
+          }
+        }
+        .stars {
+          .star {
+            display: inline-block;
+            width: 16px;
+            height: 15px;
+            margin: 0 4px 0 0;
+            background: image-url('icons-stars.png') 0 0 no-repeat;
+            &.active {
+              background-position: 0 -15px;
+            }
+          }
+        }
+      }
+    }
+    .review-text {
+      margin: 0 0 28px;
+    }
+    .edit-review {
+      .btn {
+        font: 300 14px/30px $fontOne;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: inline-block;
+        padding: 0 20px;
+        color: #828282;
+        @include linear-gradient(#e9e9e9, #d9d9d9);
+      }
+    }
+  }
 }
