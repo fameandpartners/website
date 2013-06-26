@@ -29,24 +29,154 @@ ActiveRecord::Schema.define(:version => 20130626045146) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
-  create_table "celebrities", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "celebrity_photos", :force => true do |t|
-    t.integer  "celebrity_id"
-    t.datetime "event_date"
-    t.string   "event_name"
-    t.integer  "user_id"
+  create_table "blog_authors", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.text     "description"
+    t.integer  "user_id"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "slug"
   end
+
+  add_index "blog_authors", ["slug"], :name => "index_blog_authors_on_slug"
+  add_index "blog_authors", ["user_id"], :name => "index_blog_authors_on_user_id"
+
+  create_table "blog_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+    t.integer  "posts_count"
+    t.string   "slug"
+  end
+
+  add_index "blog_categories", ["slug"], :name => "index_blog_categories_on_slug"
+  add_index "blog_categories", ["user_id"], :name => "index_blog_categories_on_user_id"
+
+  create_table "blog_celebrities", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.datetime "featured_at"
+    t.string   "slug"
+  end
+
+  add_index "blog_celebrities", ["featured_at"], :name => "index_blog_celebrities_on_featured_at"
+  add_index "blog_celebrities", ["slug"], :name => "index_blog_celebrities_on_slug"
+  add_index "blog_celebrities", ["user_id"], :name => "index_blog_celebrities_on_user_id"
+
+  create_table "blog_celebrity_photos", :force => true do |t|
+    t.integer  "celebrity_id"
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "likes_count"
+    t.integer  "dislikes_count"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.datetime "published_at"
+  end
+
+  add_index "blog_celebrity_photos", ["celebrity_id"], :name => "index_blog_celebrity_photos_on_celebrity_id"
+  add_index "blog_celebrity_photos", ["post_id"], :name => "index_blog_celebrity_photos_on_post_id"
+  add_index "blog_celebrity_photos", ["published_at"], :name => "index_blog_celebrity_photos_on_published_at"
+  add_index "blog_celebrity_photos", ["user_id"], :name => "index_blog_celebrity_photos_on_user_id"
+
+  create_table "blog_events", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "blog_events", ["slug"], :name => "index_blog_events_on_slug"
+  add_index "blog_events", ["user_id"], :name => "index_blog_events_on_user_id"
+
+  create_table "blog_post_photos", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "blog_post_photos", ["post_id"], :name => "index_blog_post_photos_on_post_id"
+  add_index "blog_post_photos", ["user_id"], :name => "index_blog_post_photos_on_user_id"
+
+  create_table "blog_posts", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "author_id"
+    t.integer  "user_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.datetime "published_at"
+    t.datetime "occured_at"
+    t.integer  "category_id"
+    t.string   "slug"
+    t.integer  "post_type_id"
+    t.integer  "post_photos_count"
+    t.integer  "primary_photo_id"
+    t.integer  "event_id"
+  end
+
+  add_index "blog_posts", ["author_id"], :name => "index_blog_posts_on_author_id"
+  add_index "blog_posts", ["category_id", "published_at"], :name => "index_blog_posts_on_category_id_and_published_at"
+  add_index "blog_posts", ["event_id"], :name => "index_blog_posts_on_event_id"
+  add_index "blog_posts", ["post_type_id"], :name => "index_blog_posts_on_post_type_id"
+  add_index "blog_posts", ["slug"], :name => "index_blog_posts_on_slug"
+  add_index "blog_posts", ["user_id"], :name => "index_blog_posts_on_user_id"
+
+  create_table "blog_promo_banners", :force => true do |t|
+    t.string   "url"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "user_id"
+    t.string   "title"
+    t.integer  "position"
+    t.boolean  "published"
+    t.text     "description"
+  end
+
+  add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
+  add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
+
+  create_table "blog_red_carpet_posts", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "author_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.datetime "published_at"
+    t.datetime "occured_at"
+    t.integer  "category_id"
+    t.string   "slug"
+  end
+
+  add_index "blog_red_carpet_posts", ["author_id"], :name => "index_blog_red_carpet_posts_on_author_id"
+  add_index "blog_red_carpet_posts", ["category_id"], :name => "index_blog_red_carpet_posts_on_category_id"
+  add_index "blog_red_carpet_posts", ["published_at"], :name => "index_blog_red_carpet_posts_on_published_at"
+  add_index "blog_red_carpet_posts", ["slug"], :name => "index_blog_red_carpet_posts_on_slug"
+  add_index "blog_red_carpet_posts", ["user_id"], :name => "index_blog_red_carpet_posts_on_user_id"
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
@@ -68,14 +198,6 @@ ActiveRecord::Schema.define(:version => 20130626045146) do
     t.string   "size"
     t.boolean  "ghost",         :default => true
     t.date     "required_at"
-  end
-
-  create_table "posts", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "product_style_profiles", :force => true do |t|
@@ -125,21 +247,6 @@ ActiveRecord::Schema.define(:version => 20130626045146) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "red_carpet_events", :force => true do |t|
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "name"
-    t.string   "short_name"
-    t.text     "content"
-    t.date     "event_date"
-    t.integer  "user_id"
-    t.string   "location"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "red_carpet_events", ["user_id"], :name => "index_red_carpet_events_on_user_id"
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -373,6 +480,27 @@ ActiveRecord::Schema.define(:version => 20130626045146) do
   end
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
+
+  create_table "spree_pages", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "slug"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "show_in_header",           :default => false, :null => false
+    t.boolean  "show_in_footer",           :default => false, :null => false
+    t.string   "foreign_link"
+    t.integer  "position",                 :default => 1,     :null => false
+    t.boolean  "visible",                  :default => true
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.string   "layout"
+    t.boolean  "show_in_sidebar",          :default => false, :null => false
+    t.string   "meta_title"
+    t.boolean  "render_layout_as_partial", :default => false
+  end
+
+  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"

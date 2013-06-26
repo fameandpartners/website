@@ -668,19 +668,19 @@
   }
   .color {
     display: block;
-    width: 83px;
-    height: 83px;
+    width: 73px;
+    height: 73px;
     border: 6px solid #fff;
     border-radius: 50%;
     position: relative;
     .color-name {
       position: absolute;
-      top: 92px;
+      top: 85px;
       text-align: center;
       left: 0;
       right: 0;
       color: #707070;
-      font: 400 13px/1 $fontOne;
+      font: 400 11px/1 $fontOne;
       text-transform: uppercase;
     }
     &.black {
@@ -742,12 +742,12 @@
     }
     &.white {
       background: #fff;
-      box-shadow: 0 0 1px rgba(0, 0, 0, .3);
+      box-shadow: 0 0 1px rgba(0, 0, 0, .4);
     }
   }
   li {
     display: inline-block;
-    margin: 0 3px 49px;
+    margin: 0 6px 52px;
     input {
       opacity: 0;
       filter: alpha(opacity=0);
