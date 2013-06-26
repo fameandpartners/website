@@ -31,9 +31,11 @@ end
 group :development do
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
+  gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
   gem 'quiet_assets', '1.0.2'
   gem 'thin', '1.5.1'
+  gem 'pry-rails'
 end
 
 group :development, :test do
