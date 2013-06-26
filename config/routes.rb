@@ -46,6 +46,7 @@ FameAndPartners::Application.routes.draw do
   scope '/users/:user_id', :as => :user do
     get '/style-report' => 'user_style_profiles#show', :as => :style_profile
     get '/style-report-debug' => 'user_style_profiles#debug'
+    get '/recomendations' => 'user_style_profiles#recomendations'
   end
 
   root :to => 'pages#home'

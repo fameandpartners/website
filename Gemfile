@@ -9,6 +9,7 @@ gem 'paperclip'
 gem 'createsend', '~> 2.5.0'
 gem 'sidekiq'
 gem 'default_value_for'
+gem 'tire'
 
 # assets
 gem 'jquery-rails'

@@ -1,4 +1,11 @@
 .wrap.page-static
+  h1.block-title Style Profile Points
+  ul style="color: black;"
+    - @style_profile.attributes.slice('glam', 'girly', 'classic', 'edgy', 'bohemian').each do |attr, value|
+      li
+        = attr
+        ' :
+        = value
   h1.block-title Style Quiz Answers
   ul style="color: black;"
     - @style_profile.serialized_answers.each do |question_id, answer_ids|

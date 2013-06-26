@@ -68,5 +68,10 @@ class ProductStyleProfile < ActiveRecord::Base
               :less_than_or_equal_to => 10
             }
 
-  belongs_to :product
+  belongs_to :product,
+             :class_name => 'Spree::Product'
+
+  after_save do
+    product.update_index
+  end
 end

@@ -92,4 +92,16 @@ class UserStyleProfile < ActiveRecord::Base
 
     @percents
   end
+
+  [:apple, :pear, :strawberry, :hour_glass, :column].each do |body_shape|
+    define_method body_shape do
+      self.body_shape.eql?(body_shape.to_s) ? 10 : 0
+    end
+  end
+
+  [:bra_aaa, :bra_aa, :bra_a, :bra_b, :bra_c, :bra_d, :bra_e, :bra_fpp].each do |bra_size|
+    define_method bra_size do
+      self.body_shape.eql?(bra_size.to_s) ? 10 : 0
+    end
+  end
 end

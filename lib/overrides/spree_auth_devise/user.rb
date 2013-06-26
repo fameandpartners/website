@@ -17,7 +17,8 @@ module Overrides
 
         has_attached_file :avatar
         has_one :style_profile,
-                :class_name => '::UserStyleProfile'
+                :class_name => '::UserStyleProfile',
+                :foreign_key => :user_id
 
         def full_name
           [first_name, last_name].reject(&:blank?).join(' ')
