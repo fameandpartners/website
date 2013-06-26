@@ -1,20 +1,76 @@
 .wrap
-  .page-name
-    .inner
-      h1.title
-        em My Personalised
-        span Store
-    .subtitle Great dresses just for you
-
-  = render 'products', products: @featured_products, selector: 'featured', colors: @colors
-
-  .page-name
-    .inner
-      h1.title
-        em View more
-        span Dresses
-      ul.filters
-        - Spree::Taxonomy.where(name: 'Range').first.root.children.each do |taxon|
-          li = link_to taxon.name, '#', data: { filter: 'range', id: taxon.id }
-
-  = render 'products', products: @products, colors: @colors
+  .browse-page.grid-container
+    .grid-25.filters
+      .main-title Refine by
+      .filters-block
+        .title Our range
+        ul.filters-boxes.range
+          li
+            label All
+            = check_box_tag 'range', 'all'
+          - selected_items = (params[:taxons].present? ? params[:taxons][:range] : {}) || []
+          - available_product_ranges.each do |taxon|
+            - if selected_items.include?(taxon.id.to_s)
+              li.active
+                label = taxon.name
+                = check_box_tag 'range', taxon.id, true
+            - else
+              li
+                label = taxon.name
+                = check_box_tag 'range', taxon.id, false
+      .filters-block
+        .title Style
+        ul.filters-boxes.style
+          li
+            label All
+            = check_box_tag 'style', 'all'
+          - selected_items = (params[:taxons].present? ? params[:taxons][:style] : {}) || []
+          - available_product_styles.each do |taxon|
+            - if selected_items.include?(taxon.id.to_s)
+              li.active
+                label = taxon.name
+                = check_box_tag 'style', taxon.id, true
+            - else
+              li
+                label = taxon.name
+                = check_box_tag 'style', taxon.id, false
+      .filters-block
+        .title Body shape
+        ul.filters-boxes.squares
+          li.all
+            label All
+            input type="checkbox"
+          li
+            label Strawberry
+            input type="checkbox"
+          li
+            label Apple
+            input type="checkbox"
+          li
+            label Hour glass
+            input type="checkbox"
+          li
+            label Pear
+            input type="checkbox"
+          li
+            label Column
+            input type="checkbox"
+          li
+            label Athletic
+            input type="checkbox"
+          li
+            label Petite
+            input type="checkbox"
+      .filters-block
+        .title Color
+        .colors
+          .color.white.all data-color='all' All
+          - selected_colors = params[:colors] || []
+          - available_product_colors.each do |color|
+            - if selected_colors.include?(color.id.to_s)
+              .color.active class='#{color.name}' data-color='#{color.id}'
+            - else
+              .color class='#{color.name}' data-color='#{color.id}'
+          
+    .grid-75.fright
+      = render 'products', products: @products, colors: @colors

@@ -1,32 +1,66 @@
 $(".products").ready ->
   productsFilter = {
-    currentFilter: {}
-
-    onClickHandler: (e) ->
-      console.log('onClickHandler')
+    toggleFilterOptionClicked: (e) ->
       e.preventDefault()
-      data = $(e.currentTarget).data()
-      productsFilter.updateFilters.call(productsFilter, data)
+      $container = $(e.currentTarget).closest('li')
+      $container.toggleClass('active')
 
-    updateFilters: (data) ->
-      if data.filter == 'range'
-        @currentFilter.taxons ||= {}
-        @currentFilter.taxons.range = data.id
-      @applyFilter()
+      $input = $container.find('input')
+      $input.prop('checked', $container.is('.active'))
 
-    applyFilter: () ->
-      $.ajax(
-        '/products',
-        data: @currentFilter
-        complete: (response) ->
-          $('.products-list.grid-container.content').replaceWith(response.responseText)
+      if $input.val() == 'all'
+        if $container.is('.active')
+          $container.siblings().addClass('active')
+          $container.find('input').prop('checked', true)
+        else
+          $container.siblings().removeClass('active')
+          $container.find('input').prop('checked', false)
+
+      productsFilter.searchProducts.call(productsFilter)
+
+    toggleColorClicked: (e) ->
+      e.preventDefault()
+      $target = $(e.currentTarget)
+      $target.toggleClass('active')
+
+      if $target.data('color') == 'all'
+        if $target.is('.active')
+          $target.siblings().addClass('active')
+        else
+          $target.siblings().removeClass('active')
+      productsFilter.searchProducts.call(productsFilter)
+
+    currentFilter: () ->
+      filter = {
+        taxons: { range: [], style: [] }
+        colors: []
+        order: $('#product_order').val()
+      }
+
+      get_value_func = (obj) -> $(obj).val()
+      filter.taxons.range = _.collect($('ul.filters-boxes.range li input:checked'), get_value_func)
+      filter.taxons.style = _.collect($('ul.filters-boxes.style li input:checked'), get_value_func)
+      filter.colors = _.collect($('.filters-block .colors .color.active'), (obj) ->
+        $(obj).data('color')
       )
-      @updatePageLocation()
+      return filter
 
-    updatePageLocation: () ->
-      console.log(@currentFilter)
-      url = "#{ window.location.pathname }?#{ $.param(@currentFilter) }"
+    updatePageLocation: (filter) ->
+      url = "#{ window.location.pathname }?#{ $.param(filter) }"
       window.history.pushState({path:url},'',url)
+
+    searchProducts: () ->
+      searchData = @currentFilter()
+      @updatePageLocation(searchData)
+
+      $.ajax('/products',
+        type: "GET",
+        dataType: 'html',
+        data: $.param(searchData)
+        success: (html) ->
+          $('.grid-75.fright').html(html)
+      )
   }
 
-  $(".filters li a").on('click', productsFilter.onClickHandler)
+  $('.filters-block .filters-boxes li label').on('click', productsFilter.toggleFilterOptionClicked)
+  $('.filters-block .color').on('click', productsFilter.toggleColorClicked)

@@ -33,13 +33,15 @@ module Products
     def get_base_scope
       base_scope = Spree::Product.active
       unless taxons.blank?
-        taxons.each do |taxon_name, taxon|
-          base_scope = base_scope.in_taxon(taxon)
+        taxons.each do |taxon_name, taxon_or_taxons|
+          base_scope = base_scope.in_taxons(taxon_or_taxons)
         end
       end
       base_scope = get_products_conditions_for(base_scope, keywords)
       base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
       base_scope = add_search_scopes(base_scope)
+      base_scope = add_color_scope(base_scope)
+
       base_scope
     end
 
@@ -63,10 +65,16 @@ module Products
       base_scope
     end
 
+    def add_color_scope(base_scope)
+      return base_scope if colors.blank?
+      base_scope.has_options(Spree::Variant.color_option_type, colors)
+    end
+
     def prepare(params)
       @properties[:taxons] = prepare_taxons(params[:taxons]) 
       @properties[:keywords] = params[:keywords]
       @properties[:search] = params[:search]
+      @properties[:colors] = params[:colors]
 
       per_page = params[:per_page].to_i
       @properties[:per_page] = per_page > 0 ? per_page : Spree::Config[:products_per_page]
@@ -76,8 +84,8 @@ module Products
     def prepare_taxons(args)
       return {} if args.blank?
       {}.tap do |taxons|
-        args.each do |taxon_key, taxon_id|
-          taxons[taxon_key] = Spree::Taxon.find(taxon_id)
+        args.each do |taxon_key, taxon_id_or_ids|
+          taxons[taxon_key] = Spree::Taxon.where(id: taxon_id_or_ids)
         end
       end
     end

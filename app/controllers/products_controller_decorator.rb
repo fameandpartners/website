@@ -15,16 +15,13 @@ Spree::ProductsController.class_eval do
     @searcher.current_currency = current_currency
     @products = @searcher.retrieve_products
 
-    if request.xhr?
-      @featured_products = Spree::Product.limit(6)
-      all_products = [@products, @featured_products].to_a.flatten
-      @colors = Products::ColorsSearcher.new(all_products).retrieve_colors
+    @colors = Products::ColorsSearcher.new(@products.to_a).retrieve_colors
 
+    if !request.xhr?
+      render action: 'index', layout: true
+    else
       text = render_to_string(partial: 'products', locals: { products: @products, colors: @colors })
       render text: text, layout: false
-    else
-      @colors = Products::ColorsSearcher.new(@products).retrieve_colors
-      render action: 'index', layout: true
     end
   end
 

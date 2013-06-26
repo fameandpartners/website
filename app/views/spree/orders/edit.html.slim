@@ -1,0 +1,158 @@
+.wrap
+  .page-name.with-border
+    .inner
+      h1.title
+        em shopping
+        span Bag
+  
+  - if @order.line_items.empty?
+    div(data-hook="empty_cart")
+      p = t(:your_cart_is_empty)
+      p = link_to t(:continue_shopping), products_path, class: 'button continue'
+  - else
+    .cart-page
+      .cart-labels.grid-container
+        .grid-50.name Item description
+        .grid-30.details Details
+        .grid-20.price Price
+      ul.items
+        - @order.line_items.each do |line_item|
+          - variant = line_item.variant
+          - product = variant.product
+          li.item.grid-container
+            .grid-50.description
+              .image
+                = product_image product, itemprop: "image", width: 136, height: 200, alt: product.name
+                .remove = link_to 'Remove from bag', '#'
+              .desc
+                .name = link_to product.name, product_path(product), target: 'blank'
+                .text = line_item_description(variant)
+                .wishlist = link_to 'Move to wish list', '#'
+            .grid-30.details
+              .static-dynamic-block
+                .static
+                  .line
+                    .label Color
+                    .value
+                      .color{class=variant.dress_color.try(:name)}
+                  .line
+                    .label Size
+                    .value = variant.dress_size.try(:name)
+                  .line
+                    .label Quantity
+                    .value = line_item.quantity
+                  .line
+                    .label Estimated Delivery
+                    .value = variant.count_on_hand.to_i != 0 ? '1-2 weeks' : '3-4 weeks'
+                .dynamic
+                  .line
+                    .label Color
+                    .value
+                      .color.pink.active
+                      .color.black
+                      .color.yellow
+                  .line
+                    .label Size
+                    .value
+                      select name="size"
+                        option 1
+                        option 2
+                  .line
+                    .label Quantity
+                    .value
+                      select name="size"
+                        option 1
+                        option 2
+                  .line
+                    .label Estimated Delivery
+                    .value 3-4 weeks
+              .edit = link_to 'Edit item', '#', class: 'edit-link'
+            .grid-20.price
+              .pricing
+                ' AUD
+                = line_item.money
+              .style-notes
+                input type="checkbox" name="note"
+                label
+                  ' Add Style Notes
+                  span $4.55
+
+      .promo-summary.grid-container
+        .promo-block.grid-70
+          .columns.grid-container
+            .column.grid-25
+              .title Full security
+              .desc = image_tag 'icon-norton.png', width: 112, height: 55, alt: ''
+            .column.grid-45
+              .title Payment methods
+              .desc = image_tag 'icon-payments-methods.png', width: 299, height: 30, alt: ''
+            .column.grid-30
+              .title Promo code
+              .desc
+                input type="text" name="promocode"
+        .summary.grid-25.prefix-5
+          .title Order summary
+          ul
+            li
+              .label Subtotal
+              .desc
+                span AUD
+                = @order.display_item_total
+            li
+              .label Shipping
+              .desc
+                span AUD
+                - if @order.shipment
+                  = @order.shipment.display_amount
+                - else
+                  ' $0.00
+            li
+              .label Promotion
+              .desc
+                span AUD
+                = @order.display_adjustment_total
+            li.totals
+              .label Total
+              .desc
+                span AUD
+                = @order.display_total
+                .taxes Including GST
+      .continue-buy.grid-container
+        .grid-70 = link_to 'Continue shopping', products_path, class: 'continue-shopping'
+        .grid-25.prefix-5
+          = link_to 'Buy now', '#', class: 'buy-now'
+          .or or
+          .paypal paypal
+
+.modal(style='display: none;')
+  .overlay
+  .modal-container
+    .close-lightbox
+    .edit-details
+      .modal-title Edit product details
+      .item
+        .image
+        .item-details
+          .name Hello
+          .description Lipsy Monochrome Off Shoulder Midi Dress
+          .colors-choser
+            .label Choose a color:
+            .colors
+              .color.pink.active
+              .color.yellow
+              .color.black
+          .size-select
+            .select-box
+              select#toggle-selectbox.select2 name="size"
+                option Choose your size
+                option Small
+          .quantity
+            .label Quantity
+            .value
+              select name="size"
+                option 1
+                option 2
+          .delivery 3-4 week delivery
+      .save
+        = link_to 'Cancel', '#'
+        input.btn.black type="submit" value="Save changes"
