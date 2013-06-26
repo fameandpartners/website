@@ -1,5 +1,6 @@
 class UserStyleProfile < ActiveRecord::Base
   BASIC_STYLES = %w(glam girly classic edgy bohemian)
+  STYLE_ATTRIBUTES = BASIC_STYLES + %w(sexiness fashionability)
   BRANDS = %w( chanel burberry lavin christian_dior jil_sander zuhair_murad gucci sass_bide miu_miu chloe kate_spade ralph_lauren )
   NAIL_COLOURS = %W( neon_yellow neutral mint navy black glittery lilac light_pink french_tip gold purple bright_red )
   TRENDS = %w( jewel_tones volumnious_skirts sequins neon lace_and_mesh applique digital_prints )
@@ -8,8 +9,6 @@ class UserStyleProfile < ActiveRecord::Base
   BODY_SHAPES = %w( apple pear athletic strawberry hour_glass column petite )
   TYPICAL_SIZES = %w( G0 G2 G4 G6 G8 G12 G14 L4 L6 L8 L10 L12 L14 L16 )
   BRA_SIZES = %w( AAA AA A B C D E FPP )
-
-  STYLE_ATTRIBUTES = %w(glam girly classic edgy bohemian sexiness fashionability)
 
   default_values :glam  => 0.0,
                  :girly => 0.0,

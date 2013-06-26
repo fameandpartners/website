@@ -18,7 +18,7 @@
             li
               = answer.code
               ul
-                - UserStyleProfile::STYLE_ATTRIBUTES.each do |attribute|
+                - UserStyleProfile::BASIC_STYLES.each do |attribute|
                   - value = answer.send(attribute)
                   - unless value.zero?
                     li

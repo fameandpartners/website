@@ -28,4 +28,8 @@ class Question < ActiveRecord::Base
             :uniqueness => {
               :scope => :quiz_id
             }
+
+  def pointable?
+    answers.any?(&:pointable?)
+  end
 end

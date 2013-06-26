@@ -27,4 +27,12 @@ class Answer < ActiveRecord::Base
 
   validates :question,
             :presence => true
+
+  def pointable?
+    !glam.zero? ||
+    !girly.zero? ||
+    !classic.zero? ||
+    !edgy.zero? ||
+    !bohemian.zero?
+  end
 end

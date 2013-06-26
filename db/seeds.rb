@@ -200,24 +200,24 @@ question.answers.create!([
                              :girly => 10
                            }, {
                              :code => 'structured',
-                             :glam => 10,
-                             :edgy => 10,
-                             :classic => 10
+                             :glam => 3,
+                             :edgy => 3,
+                             :classic => 3
                            }, {
                              :code => 'relaxed',
-                             :glam => 10,
-                             :bohemian => 10,
-                             :classic => 10
+                             :glam => 3,
+                             :bohemian => 3,
+                             :classic => 3
                            }, {
                              :code => 'understated',
-                             :glam => 10,
-                             :girly => 10,
-                             :bohemian => 10,
-                             :classic => 10
+                             :glam => 2,
+                             :girly => 2,
+                             :bohemian => 2,
+                             :classic => 2
                            }, {
                              :code => 'cool',
-                             :bohemian => 10,
-                             :edgy => 10
+                             :bohemian => 5,
+                             :edgy => 5
                            }
                          ])
 
@@ -366,13 +366,13 @@ question = quiz.questions.find_by_partial!('nail_colours')
 question.answers.create!([
                            {
                              :code => 'neon_yellow',
-                             :glam => 4,
-                             :edgy => 6,
-                             :bohemian => 3
+                             :glam => 3,
+                             :edgy => 5,
+                             :bohemian => 2
                            }, {
                              :code => 'neutral',
-                             :girly => 6,
-                             :classic => 8
+                             :girly => 4,
+                             :classic => 6
                            }, {
                              :code => 'mint',
                              :girly => 3,
@@ -380,37 +380,37 @@ question.answers.create!([
                              :bohemian => 3
                            }, {
                              :code => 'navy',
-                             :glam => 5,
-                             :edgy => 3,
-                             :bohemian => 3,
-                             :classic => 3
+                             :glam => 4,
+                             :edgy => 2,
+                             :bohemian => 2,
+                             :classic => 2
                            }, {
                              :code => 'black',
-                             :glam => 5,
-                             :edgy => 5,
-                             :bohemian => 7
+                             :glam => 3,
+                             :edgy => 3,
+                             :bohemian => 4
                            }, {
                              :code => 'glittery',
                              :glam => 2,
-                             :girly => 5,
-                             :edgy => 5
+                             :girly => 4,
+                             :edgy => 4
                            }, {
                              :code => 'lilac',
                              :girly => 8,
                              :classic => 2
                            }, {
                              :code => 'light_pink',
-                             :girly => 8,
-                             :classic => 6
+                             :girly => 6,
+                             :classic => 4
                            }, {
                              :code => 'french_tip',
-                             :girly => 6,
-                             :classic => 8
+                             :girly => 4,
+                             :classic => 6
                            }, {
                              :code => 'gold',
-                             :glam => 5,
-                             :edgy => 5,
-                             :classic => 3
+                             :glam => 4,
+                             :edgy => 4,
+                             :classic => 2
                            }, {
                              :code => 'purple',
                              :edgy => 2,

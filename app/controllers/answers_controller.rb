@@ -64,6 +64,10 @@ class AnswersController < ApplicationController
           UserStyleProfile::STYLE_ATTRIBUTES.each do |attribute|
             points = answers.map{|answer| answer.send(attribute) }.reduce(:+).to_f / answers.count
 
+            if UserStyleProfile::BASIC_STYLES.include?(attribute)
+              points = points / quiz.questions.select(&:pointable?).count
+            end
+
             style_profile.send("#{attribute}=", style_profile.send(attribute) + points)
           end
         end
