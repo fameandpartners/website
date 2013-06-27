@@ -71,5 +71,9 @@ module FameAndPartners
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
+
+    config.after_initialize do
+      Rails.configuration.spree.payment_methods << Spree::Gateway::Pin
+    end
   end
 end
