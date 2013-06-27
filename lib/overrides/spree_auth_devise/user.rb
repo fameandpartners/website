@@ -24,6 +24,10 @@ module Overrides
         [first_name, last_name].reject(&:blank?).join(' ')
       end
 
+      def sign_up_via_facebook?
+        sign_up_via.eql?(1)
+      end
+
       private
 
       def synchronize_with_campaign_monitor
