@@ -12,5 +12,6 @@ $ ->
   $("#post-carousel").carouFredSel
     circular: true
     infinite: true
+    auto: true
     width: 644
     height: 355
