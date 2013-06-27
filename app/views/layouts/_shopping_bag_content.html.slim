@@ -37,5 +37,5 @@
         ' AUD
         span = current_order.display_total
     .buttons
-      = link_to 'Continue shopping', '#', class: 'continue'
-      = link_to 'Buy now', '#', class: 'buy-now'
+      = link_to 'Continue shopping', cart_path, class: 'continue'
+      = link_to 'Buy now', checkout_path, class: 'buy-now'

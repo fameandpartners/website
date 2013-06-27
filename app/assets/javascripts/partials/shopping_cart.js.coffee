@@ -1,6 +1,6 @@
 # it seems, we should disable this logic for admin part only.
 $ ->
-  shoppingCart = {
+  window.shoppingCart = {
     updateProductListActions: () ->
       # enable carousel
       if $("#shopping-bag-popup").length > 0
@@ -12,7 +12,9 @@ $ ->
           next: { button: "#shopping-arrow-down", key: "down", items: 2 }
         })
       # update remove action
-      $('.remove-item-from-cart').off('click').on('click', shoppingCart.removeProductFromCartClicked)
+      $('#shopping-bag-popup .remove-item-from-cart')
+        .off('click')
+        .on('click', shoppingCart.removeProductFromCartClicked)
 
     addProductButtonClicked: (e) ->
       e.preventDefault()
@@ -25,22 +27,25 @@ $ ->
       $(e.currentTarget).closest('li.item-block').fadeOut()
       shoppingCart.removeProduct.call(shoppingCart, variantId)
 
-    addProduct: (variantId) ->
+    addProduct: (variantId, callback) ->
       return unless variantId?
 
       $.ajax(
         url: "/line_items"
         type: 'POST'
-        dataType: 'html'
+        dataType: 'json'
         data: $.param({ variant_id: variantId, quantity: 1 })
-        complete: (data) ->
-          $('#shopping-bag-popup-wrapper').replaceWith(data.responseText)
+        complete: (response) ->
+          data = JSON.parse(response.responseText)
+          $('#shopping-bag-popup-wrapper').replaceWith(data.cart_html)
           $('#shopping-bag-popup-wrapper').show()
           shoppingCart.updateProductListActions()
           window.items_in_cart.push(variantId)
+
+          callback(data.order) if callback
       )
 
-    removeProduct: (variantId) ->
+    removeProduct: (variantId, callback) ->
       return unless variantId?
 
       $.ajax(
@@ -48,16 +53,18 @@ $ ->
         type: 'DELETE'
         dataType: 'html'
         data: $.param({ variant_id: variantId })
-        complete: (data) ->
-          $('#shopping-bag-popup-wrapper').replaceWith(data.responseText)
+        complete: (response) ->
+          data = JSON.parse(response.responseText)
+          $('#shopping-bag-popup-wrapper').replaceWith(data.cart_html)
           shoppingCart.updateProductListActions()
           window.items_in_cart = _.filter(window.items_in_cart, (variant_id) ->
             variant_id != variantId
           )
           if window.items_in_cart.length == 0
             $('#shopping-bag-popup-wrapper').hide()
+
+          callback(data.order) if callback
       )
-  
   }
 
   shoppingCart.updateProductListActions()

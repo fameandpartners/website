@@ -1,5 +1,5 @@
 class LineItemsController < Spree::StoreController
-  respond_to :html
+  respond_to :json
 
   def create
     populator = Spree::OrderPopulator.new(current_order(true), current_currency)
@@ -16,7 +16,10 @@ class LineItemsController < Spree::StoreController
       locals: { current_order: current_order }
     )
 
-    render text: cart_html
+    render json: {
+      cart_html: cart_html,
+      order: current_order.to_json
+    }
   end
 
   # order_id
@@ -38,6 +41,9 @@ class LineItemsController < Spree::StoreController
       partial: 'layouts/shopping_bag_content',
       locals: { current_order: current_order }
     )
-    render text: cart_html
+    render json: {
+      cart_html: cart_html,
+      order: current_order.to_json
+    }
   end
 end

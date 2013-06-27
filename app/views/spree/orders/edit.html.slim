@@ -19,11 +19,11 @@
         - @order.line_items.each do |line_item|
           - variant = line_item.variant
           - product = variant.product
-          li.item.grid-container
+          li.item.grid-container data-id='#{variant.id}'
             .grid-50.description
               .image
                 = product_image product, itemprop: "image", width: 136, height: 200, alt: product.name
-                .remove = link_to 'Remove from bag', '#'
+                .remove = link_to 'Remove from bag', '#', data: { id: variant.id }, class: 'remove-item-from-cart'
               .desc
                 .name = link_to product.name, product_path(product), target: 'blank'
                 .text = line_item_description(variant)
@@ -120,7 +120,7 @@
       .continue-buy.grid-container
         .grid-70 = link_to 'Continue shopping', products_path, class: 'continue-shopping'
         .grid-25.prefix-5
-          = link_to 'Buy now', '#', class: 'buy-now'
+          = link_to 'Buy now', checkout_path, class: 'buy-now'
           .or or
           .paypal paypal
 
@@ -154,5 +154,4 @@
                 option 2
           .delivery 3-4 week delivery
       .save
-        = link_to 'Cancel', '#'
         input.btn.black type="submit" value="Save changes"
