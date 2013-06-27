@@ -45,5 +45,5 @@
     .submit-form
       = f.submit 'Continue', :class => 'btn'
 
-- current_spree_user.sign_up_via_facebook?
+- if current_spree_user.sign_up_via_facebook?
   = render 'shared/gad'
