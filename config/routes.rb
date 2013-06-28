@@ -40,14 +40,6 @@ FameAndPartners::Application.routes.draw do
      get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
   end
 
-  # Static pages for HTML markup
-  match '/posts' => 'pages#posts'
-  match '/post' => 'pages#post'
-  match '/celebrities' => 'pages#celebrities'
-  match '/celebrity' => 'pages#celebrity'
-  match '/competition'   => 'pages#competition'
-  match '/custom-made-dresses' => 'pages#custom_made_dresses'
-
   # Static pages
   get '/about'   => 'statics#about'
   get '/team'    => 'statics#team'
