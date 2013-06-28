@@ -6,7 +6,7 @@ $ ->
 
   $('#events_search_filter').on 'change', (e)->
     event = $(e.target).val()
-    window.location = "/search/events/#{event}"
+    window.location = "/red-carpet-events/#{event}"
     false
 
   $('#search_by_query').on 'keyup', (e) ->

@@ -28,6 +28,7 @@ class Blog::Post < ActiveRecord::Base
   validates :event, presence: true, if: :red_carpet?
 
   scope :published, where('published_at IS NOT NULL').order('published_at desc')
+  scope :sidebar, published.limit(20)
 
   class << self
     def find_by_query(term)
