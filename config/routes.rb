@@ -26,7 +26,7 @@ FameAndPartners::Application.routes.draw do
   constraints blog_constraint do
      get '/' => 'blog#index', as: :blog
      get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
-     get '/celebrities_photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
+     get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
      get '/celebrity/:slug' => 'blog/celebrities#show', as: :blog_celebrity
      get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
      get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post

@@ -37,6 +37,8 @@ $ ->
 
     name      = $parent.attr('data-name')
     photo_url = $parent.attr('data-photo-url')
+    if photo_url == ""
+      photo_url = 'http://placehold.it/576x770'
     date      = $parent.attr('data-date')
 
     $celebrity_modal.find('.name').html(name)
