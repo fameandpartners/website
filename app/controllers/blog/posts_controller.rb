@@ -34,7 +34,7 @@ class Blog::PostsController < BlogBaseController
     if params[:type] == 'red_carpet'
       @breadcrumbs = [[root_path, 'Home'], [blog_red_carpet_posts_path, 'Red Carpet Events'], [blog_red_carpet_post_path(@post.slug), @post.title]]
     else
-      @breadcrumbs = [[root_path, 'Home'], [blog_posts_by_category_path(@post.category.slug), @post.category.name], [blog_red_carpet_post_path(@post.slug), @post.title]]
+      @breadcrumbs = [[root_path, 'Home'], [blog_posts_by_category_path(@post.category.slug), @post.category.name], [blog_post_by_category_path(@post.category.slug, @post.slug), @post.title]]
     end
   end
   helper_method :bread_crumbs
