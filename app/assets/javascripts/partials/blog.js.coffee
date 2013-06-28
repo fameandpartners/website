@@ -12,6 +12,12 @@ $ ->
   $("#post-carousel").carouFredSel
     circular: true
     infinite: true
-    auto: true
-    width: 644
-    height: 355
+    items: 1
+    auto: false
+    prev:
+      button  : "#post-carousel-prev"
+      key   : "left"
+
+    next:
+      button  : "#post-carousel-next"
+      key   : "right"

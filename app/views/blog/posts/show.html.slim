@@ -23,11 +23,12 @@
               .name= @post.author.fullname
         - if @post.post_photos.present?
           .featured-image
-            #post-carousel
-              ul
-                - @post.post_photos.each do |photo|
-                  li
-                    = image_tag photo.photo.url, width: 742, height: 355, alt: ''
+            #post-carousel-prev
+            #post-carousel-next
+            ul#post-carousel
+              - @post.post_photos.each do |photo|
+                li
+                  = image_tag photo.photo.url, width: 742, height: 355, alt: ''
         .post-content= raw(@post.body)
 
       - if @post.red_carpet?
