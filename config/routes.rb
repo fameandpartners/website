@@ -27,7 +27,8 @@ FameAndPartners::Application.routes.draw do
      get '/' => 'blog#index', as: :blog
      get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
      get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
-     get '/celebrity/:slug' => 'blog/celebrities#show', as: :blog_celebrity
+     get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
+     get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
      get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
      get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
      get '/stylists' => 'blog/authors#index', as: :blog_authors

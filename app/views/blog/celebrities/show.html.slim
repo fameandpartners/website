@@ -7,9 +7,13 @@
     h1.block-title.dark= @celebrity.fullname
     .track-celebrity = link_to 'Track this celebrity', '#', class: 'active'
     .block-select
-      select.selectbox name="tags"
-        option Show celebrity photos
-        option Show blog posts
+      select.selectbox name="tags" id="celebrity_show_page"
+        - if params[:type] == 'posts'
+          option value="#{blog_celebrity_path(@celebrity.slug)}" Show celebrity photos
+          option selected="selected" value="#{blog_celebrity_posts_path(@celebrity.slug)}" Show blog posts
+        - else
+          option selected="selected" value="#{blog_celebrity_path(@celebrity.slug)}" Show celebrity photos
+          option value="#{blog_celebrity_posts_path(@celebrity.slug)}" Show blog posts
 
   .content-sidebar.clearfix
     section.content-area
