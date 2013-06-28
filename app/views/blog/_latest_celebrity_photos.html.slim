@@ -7,7 +7,7 @@
   ul
     - if @latest_photos.present?
       - @latest_photos.each do |celbrity_photo|
-        li
+        li[data-name="#{celbrity_photo.celebrity.fullname}" data-date="#{celbrity_photo.created_at_formatted}" data-photo-url="#{celbrity_photo.photo.url}"]
           .zoom
           = link_to blog_celebrity_path(celbrity_photo.celebrity.slug), class: 'celebrity-photo' do
             = image_tag celbrity_photo.photo.url, width: 269, height: 375, alt: ''

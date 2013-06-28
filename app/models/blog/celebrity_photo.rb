@@ -17,6 +17,11 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
     published_at.present?
   end
 
+  def created_at_formatted
+    #"Wednesday, May 15th, 2013"
+    created_at.strftime("%A, %b #{created_at.day.ordinalize}, %Y")
+  end
+
   def post_slug
     if post.present?
       post.slug
