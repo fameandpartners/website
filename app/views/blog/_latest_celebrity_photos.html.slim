@@ -6,16 +6,16 @@
       .view-all = link_to 'View more celebrity photos', blog_celebrity_photos_path
   ul
     - if @latest_photos.present?
-      - @latest_photos.each do |celbrity_photo|
-        li[data-name="#{celbrity_photo.celebrity.fullname}" data-date="#{celbrity_photo.created_at_formatted}" data-photo-url="#{celbrity_photo.photo.url}"]
+      - @latest_photos.each do |celebrity_photo|
+        li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url}"]
           .zoom
-          = link_to blog_celebrity_path(celbrity_photo.celebrity.slug), class: 'celebrity-photo' do
-            = image_tag celbrity_photo.photo.url, width: 269, height: 375, alt: ''
+          = link_to blog_celebrity_path(celebrity_photo.celebrity.slug), class: 'celebrity-photo' do
+            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: ''
             .overlay
-              .name= celbrity_photo.celebrity.fullname
-              - if celbrity_photo.post.present?
-                - if celbrity_photo.post.published?
-                  .event= celbrity_photo.post.title
+              .name= celebrity_photo.celebrity.fullname
+              - if celebrity_photo.post.present?
+                - if celebrity_photo.post.published?
+                  .event= celebrity_photo.post.title
                 - else
                   .event Cooming Soon
           .love-share
