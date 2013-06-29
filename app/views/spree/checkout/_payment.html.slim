@@ -1,0 +1,78 @@
+.payment-method-details
+  .selector
+    /input type="radio" name="cards"
+    label Secure credit card payment
+  .image = image_tag 'icons-cards.png', width: 176, height: 33, alt: 'Visa, MasterCard, Amex'
+= form_for @order, :url => update_checkout_path(@order.state) do |form|
+  - payment_method = @order.available_payment_methods.first
+  = hidden_tag "order[payments_attributes][][payment_method_id]", method.id, true
+  = render :partial => "spree/checkout/payment/#{payment_method.method_type}", :locals => { :payment_method => payment_method }
+  .grid-container
+    .grid-50
+      .input
+        label Credit Card Number
+        input type="number" name="number"
+    .grid-50
+      .input
+        label Name on Card
+        input type="text" name="name"
+  .grid-container.border
+    .grid-50
+      .input
+        label Expiry Date
+        select name="month"
+          option Month
+        select name="year"
+          option Year
+    .grid-50
+      .input
+        label Card Verification Number
+        input.cvv type="number" name="name"
+        .card-hints = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
+        .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.
+/.payment-method-details.border
+/  .selector
+/    input type="radio" name="cards"
+/    label PayPal
+/  .image = image_tag 'icon-paypal.png', width: 51, height: 33, alt: 'PayPal'
+/.coupon-block.border
+/  .grid-container
+/    .grid-50
+/      .input
+/        label Enter your coupon code
+/        input type="text" name="coupon"
+/    .grid-50
+/      .submit
+/        input type="button" value="Redeem"
+/.style-tips.border
+/  .grid-container
+/    .grid-50
+/      .style-tip-block
+/        .image = image_tag 'http://placehold.it/56x70', width: 56, height: 70, alt: ''
+/        .input
+/          input type="checkbox" name="style"
+/          label
+/            ' Add Style Notes
+/            span $4.95
+/    .grid-50
+/      .style-tip-block
+/        .image = image_tag 'http://placehold.it/56x70', width: 56, height: 70, alt: ''
+/        .input
+/          input type="checkbox" name="style"
+/          label
+/            ' Add Style Notes
+/            span $4.95
+/.newsletters.border
+/  .grid-container
+/    .grid-50
+/      .newsletter-block
+/        .input
+/          input type="checkbox" name="style"
+/          label Subscribe to our newsletter
+/    .grid-50
+/      .newsletter-block
+/        .input
+/          input type="checkbox" name="style"
+/          label
+/            ' Accept the
+/            = link_to 'Terms and Conditions', '#'

@@ -30,7 +30,7 @@ header
           .wishlist = link_to 'Wish list', '#', class: 'wishlist-link'
           .shopping-bag
             = link_to '#', class: 'shopping-bag-toggler' do
-              .counter = current_order.amount
+              .counter = current_order(true).amount
               ' Shopping bag
             = render 'layouts/shopping_bag_content'
   .second-level

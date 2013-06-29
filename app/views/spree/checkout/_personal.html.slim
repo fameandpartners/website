@@ -1,0 +1,32 @@
+= form_for @user, :url => spree.update_checkout_registration_path, :remote => true, :method => :put do |form|
+  .grid-container
+    .grid-100
+      = render :partial => 'spree/shared/error_messages', :locals => { :target => @user }
+  .grid-container
+    .grid-50
+      .input
+        = form.label :first_name
+        = form.text_field :first_name
+    .grid-50
+      .input
+        = form.label :last_name
+        = form.text_field :last_name
+  .grid-container
+    .grid-100
+      .input
+        = form.label :email
+        = form.text_field :email, :style => 'width: 601px;'
+  .grid-container
+    .grid-100
+      .input
+        = form.label :password
+        = form.password_field :password, :style => 'width: 601px;'
+  .grid-container
+    .grid-100
+      .input
+        = form.label :password_confirmation
+        = form.password_field :password_confirmation, :style => 'width: 601px;'
+  .grid-container
+    .grid-100.center
+      .input style="text-align: center;"
+        = form.submit 'Sign Up'
