@@ -1,0 +1,27 @@
+- variant = line_item.variant
+- product = variant.product
+- hide_remove ||= false
+li.item-block
+  .thumbnail
+    = product_image product, itemprop: "image", width: 83, height: 115, alt: product.name
+    - unless hide_remove
+      = link_to 'Remove', '#', class: 'remove-item-from-cart', data: { id: variant.id }
+  .item-info
+    .price = line_item.money
+    .name = link_to product.name, product_path(product), target: 'blank'
+    .desc = product_short_description(product)
+    ul.specs
+      li
+        .label Color
+        .value
+          - color = variant.dress_color
+          .color{class=color.try(:name)}
+      li
+        .label Size
+        .value = variant.dress_size.try(:presentation)
+      li
+        .label Quantity
+        .value = line_item.quantity
+      li
+        .label Estimated delivery
+        .value = variant.count_on_hand > 0 ? '1-2 weeks' : '3-4 weeks'

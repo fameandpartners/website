@@ -25,6 +25,7 @@ FameAndPartners::Application.routes.draw do
   match '/custom-made-dresses' => 'pages#custom_made_dresses'
 
   # Static for ecommerce
+  #match '/home' => 'pages#home'
   #match '/products' => 'pages#products'
   match '/account' => 'pages#account'
   match '/orders' => 'pages#orders'
@@ -33,10 +34,10 @@ FameAndPartners::Application.routes.draw do
   match '/reviews' => 'pages#reviews'
   match '/wishlist' => 'pages#wishlist'
   match '/product' => 'pages#product'
-  match '/cart' => 'pages#cart'
+  #match '/cart' => 'pages#cart'
   match '/quick-view' => 'pages#quick-view'
-  match '/browse' => 'pages#browse'
-  match '/checkout' => 'pages#checkout'
+  #match '/browse' => 'pages#browse'
+  #match '/checkout' => 'pages#checkout'
 
   # Static pages
   get '/about'   => 'statics#about'
