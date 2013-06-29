@@ -1,5 +1,6 @@
 Spree::ProductsController.class_eval do
-  #before_filter :load_data,  only: :some_action
+  respond_to :html, :json
+  before_filter :load_product, :only => [:show, :quick_view]
 
 #  def index
 #    @searcher = Config.searcher_class.new(params)
@@ -30,7 +31,6 @@ Spree::ProductsController.class_eval do
   def show
     return unless @product
 
-    @variants = @product.variants_including_master.active(current_currency).includes([:option_values, :images])
     @product_properties = @product.product_properties.includes(:property)
 
     @similar_products   = Spree::Product.limit(4)
@@ -38,6 +38,23 @@ Spree::ProductsController.class_eval do
 
     respond_with(@product)
   end
+
+  def quick_view
+    #return unless request.xhr? && @product
+    @product_variants  = get_product_variants(@product)
+
+    respond_to do |format|
+      format.html # default
+      format.json do
+        render json: { 
+          popup_html: render_to_string(template: 'spree/products/quick_view.html.slim'),
+          variants: @products_variants.to_json
+        }
+      end
+    end
+  end
+
+  private
 
   # returns [{ variant_id: 123, color: 'black', size: 12, fast_delivery: true} ]
   def get_product_variants(product)

@@ -1,0 +1,59 @@
+- sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+- colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+
+.product-page.grid-container
+  .grid-60
+    .tabs
+      ul.tabs-links
+        li.active = link_to 'Photos', '#photos'
+        li = link_to 'Videos', '#videos'
+        li = link_to 'Celebrity Inspiration', '#inspiration'
+      #photos.tab-content
+        .tab-content-inner
+          .photos-carousel
+            #product-images-up.arrow-up
+            ul#product-images.carousel-pictures
+              - @product.images.each do |image|
+                li
+                  - images_data =  { large: image.attachment(:large), original: image.attachment(:original) }
+                  = link_to('#', data: images_data) do
+                    = image_tag(image.attachment, width: 83, heigth: 115, alt: '')
+            #product-images-down.arrow-down
+          .big-photo
+            .zoom = link_to 'Zoom', '#'
+            = image_tag 'http://placehold.it/460x590', alt: ''
+      #videos.tab-content
+        = image_tag @product.property('inspiration_video')
+      #inspiration.tab-content
+        .tab-content-inner
+          .big-photo
+            = image_tag "file://" + @product.property('inspiration_photo')
+          .inspiration
+            = @product.property('inspiration')
+  .grid-40
+    .product-info
+      .name = @product.name
+      .desc = @product.property('short_description')
+      .price-delivery
+        .price.sale
+          em $320
+          span = @product.price_in(current_currency).display_price
+        .delivery 3-4 week delivery
+      .desc.small
+        p = @product.description
+      .colors-choser
+        .label Choose a color:
+        .colors
+          - colors.each do |color|
+            .color class='#{color}' data-color='#{color}'
+      .size-select
+        .select-box
+          select#toggle-selectbox.select2 name="size"
+            option value='' Choose your size
+            - sizes.each do |size|
+              option{value=size} = size
+        = link_to 'What size am i?', '#', class: 'info'
+      .buy-wishlist
+        = link_to 'Add to bag', '#', class: 'buy-now'
+        = link_to 'Add to wish list', '#', class: 'add-wishlist'
+      .share-buttons Share buttons

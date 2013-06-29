@@ -15,6 +15,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   resources :line_items, only: [:create, :update, :destroy]
+  get 'products/:id/quick_view' => 'spree/products#quick_view'
 
   # Static pages for HTML markup
   match '/posts' => 'pages#posts'
