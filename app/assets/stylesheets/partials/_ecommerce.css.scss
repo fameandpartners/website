@@ -685,6 +685,8 @@
       font: 300 20px/38px $fontOne;
       height: 38px;
       @include linear-gradient(#414141, #252525);
+      border: none;
+      margin: 0;
     }
     .or {
       margin: 4px 0;

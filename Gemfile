@@ -44,12 +44,18 @@ group :development, :test do
   gem 'debugger'
 end
 
-# spree extensions
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
-gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
+
+# spree extensions for authentication
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-3-stable'
-gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
+
+# spree extensions for payments
+gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
+gem 'spree_paypal_express', :github => 'spree/spree_paypal_express', :branch => '1-3-stable'
+
+gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
+
 
 group :production do
   gem 'unicorn'

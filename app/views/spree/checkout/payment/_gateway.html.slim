@@ -1,0 +1,26 @@
+ruby:
+  param_prefix = "payment_source[#{payment_method.id}]"
+  options_hash = Rails.env.production? ? {:autocomplete => 'off'} : {}
+.grid-container
+  .grid-50
+    .input
+      label Credit Card Number
+      = number_field_tag "#{param_prefix}[number]", '', :autocomplete => :off
+  .grid-50
+    .input
+      label Name on Card
+      = text_field_tag "#{param_prefix}[full_name]"
+.grid-container.border
+  .grid-50
+    .input
+      label Expiry Date
+      = select_month(Date.today, :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month')
+      = select_year(Date.today, :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year')
+  .grid-50
+    .input
+      label Card Verification Number
+      = text_field_tag "#{param_prefix}[verification_value]", '', options_hash.merge(:id => 'card_code', :class => 'cvv', :size => 5)
+      .card-hints = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
+      .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.
+.place-order
+  input type="submit" value="Place order"

@@ -1,0 +1,3 @@
+$('.accordion-content[data-step="<%= @order.state %>"]').
+  html('<%=j render("/spree/checkout/#{@order.state}") %>');
+toggleBillingAddress();

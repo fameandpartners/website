@@ -13,4 +13,5 @@
         span = current_order.display_total
     .buttons
       = link_to 'Continue shopping', cart_path, class: 'continue'
-      = link_to 'Buy now', checkout_path, class: 'buy-now'
+      = form_for current_order, url: update_cart_path do |form|
+        = form.button :checkout, name: 'checkout', class: 'buy-now'
