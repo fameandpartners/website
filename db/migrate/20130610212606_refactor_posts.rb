@@ -1,9 +1,9 @@
 class RefactorPosts < ActiveRecord::Migration
   def up
-    add_column :posts, :category_id, :integer
-    drop_table :fashion_news
-    drop_table :prom_tips
-    drop_table :style_tips
+    add_column :posts, :category_id, :integer if table_exists? :posts
+    drop_table :fashion_news if table_exists? :fashion_news
+    drop_table :prom_tips if table_exists? :prom_tips
+    drop_table :style_tips if table_exists? :style_tips
   end
 
   def down
