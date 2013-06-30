@@ -18,7 +18,9 @@
 
 header
   javascript:
-    window.items_in_cart = #{{ current_order.line_items.map(&:variant_id).to_json }}
+    window.bootstrap = {}
+    window.bootstrap.order = #{{ ::CartSerializer.new(Spree::Order.first).to_json }}
+
   .first-level
     .wrap.no-overflow
       .inner
