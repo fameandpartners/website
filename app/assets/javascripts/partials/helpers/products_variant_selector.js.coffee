@@ -1,14 +1,17 @@
 window.helpers or= {}
 
-window.helpers.createProductImagesSelector = (options = {}) ->
+window.helpers.createProductImagesSelector = (root) ->
+  rootElement = root
+
   variantsSelector = {
     selected: { color: null, size: null },
     variants: null,
 
     init: (variants) ->
+      rootElement.find('#toggle-selectbox').chosen()
       variantsSelector.variants = variants
-      $(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
-      $('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
+      rootElement.find(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
+      rootElement.find('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
       variantsSelector.selectFirstAvailableOptions()
       return variantsSelector
 
@@ -26,7 +29,7 @@ window.helpers.createProductImagesSelector = (options = {}) ->
     selectColor: (color) ->
       @selected.color = color
       selected_variants = _.where(@variants, { color: color })
-      @updateSelectbox($('#toggle-selectbox'), selected_variants, 'size')
+      @updateSelectbox(rootElement.find('#toggle-selectbox'), selected_variants, 'size')
       @updatePurchaseConditions()
 
     selectSize: (size) ->
@@ -47,7 +50,7 @@ window.helpers.createProductImagesSelector = (options = {}) ->
       @updateDeliveryTime()
       # update buttons
       variant = @getSelectedVariant()
-      $button = $('.buy-wishlist .buy-now')
+      $button = rootElement.find('.buy-wishlist .buy-now')
       if variant
         $button.data(variant_id: variant.id)
         if variant.purchased
@@ -66,7 +69,7 @@ window.helpers.createProductImagesSelector = (options = {}) ->
         deliveryText = '1-2 weeks delivery'
       else
         deliveryText = '3-4 weeks delivery'
-      $('.price-delivery .delivery').text(deliveryText)
+      rootElement.find('.price-delivery .delivery').text(deliveryText)
 
     getSelectedVariant: () ->
       variant = _.findWhere(@variants, @selected)
@@ -78,8 +81,8 @@ window.helpers.createProductImagesSelector = (options = {}) ->
         {}
 
     selectFirstAvailableOptions: () ->
-      $(".colors-choser .colors .color:first").click()
-      size = $('#toggle-selectbox option[value!=""]:first').attr('value')
-      $('#toggle-selectbox').val(size)
+      rootElement.find(".colors-choser .colors .color:first").click()
+      size = rootElement.find('#toggle-selectbox option[value!=""]:first').attr('value')
+      rootElement.find('#toggle-selectbox').val(size)
       variantsSelector.selectSize(size)
   }

@@ -51,11 +51,13 @@ window.helpers.quickViewer = {
     @updatePopupHandlers(product_variants)
     @overlayContainer.show()
     @popupContainer.show()
+    @container.show()
     @movePopupToCenter()
 
   closePopup: () ->
     @popupContainer.hide()
     @overlayContainer.hide()
+    @container.hide()
 
   updatePopupHandlers: (product_variants) ->
     @popupContainer.find("#product-images").carouFredSel(
@@ -63,14 +65,11 @@ window.helpers.quickViewer = {
     )
     window.helpers.enableTabs($('.tabs'))
 
-    viewer = window.helpers.buildImagesViewer()
-    # init viewing big images
-    $('#photos .big-photo .zoom a').on('click', viewer.showFullImageEventHandler)
-    # init showing images from element
-    $('ul#product-images li a').on("click", viewer.onClickHandler)
-    viewer.showImageFromItem($('ul#product-images li a').first())
+    # show big images from carouseled small images
+    viewer = window.helpers.buildImagesViewer(@container).init()
+
     # init product variants selector
-    selector = window.helpers.createProductImagesSelector().init(product_variants)
+    selector = window.helpers.createProductImagesSelector(@container).init(product_variants)
 
   movePopupToCenter: () ->
     window.helpers.quickViewer.container.center()

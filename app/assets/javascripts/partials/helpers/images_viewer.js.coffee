@@ -1,8 +1,16 @@
 window.helpers or= {}
 
-window.helpers.buildImagesViewer = () ->
+window.helpers.buildImagesViewer = (rootElement) ->
+  rootElement = rootElement
+
   viewer =  {
     currentImages: null
+    init: () ->
+      rootElement.find('ul#product-images li a').on("click", viewer.onClickHandler)
+      rootElement.find('#photos .big-photo .zoom a').on('click', viewer.showFullImageEventHandler)
+      viewer.showImageFromItem(rootElement.find('ul#product-images li a').first())
+      return viewer
+
     onClickHandler: (e) ->
       e.preventDefault()
       viewer.showImageFromItem.call(viewer, $(e.currentTarget))
@@ -22,7 +30,7 @@ window.helpers.buildImagesViewer = () ->
     showImage: (images) ->
       viewer.currentImages = images
       largeImage = images.large || 'http://placehold.it/460x590'
-      $('#photos .big-photo img').attr(src: largeImage)
+      rootElement.find('#photos .big-photo img').attr(src: largeImage)
 
     showBigImage: () ->
       bigImageUrl = viewer.currentImages.original
