@@ -1,16 +1,57 @@
+$ ->
+  window.shopping_cart.init(window.bootstrap)
+
+  shoppingBag = {
+    init: () ->
+      $("#shopping-bag-popup-wrapper").hide()
+      #$('.buy-wishlist .buy-now').on('click', shoppingCart.addProductButtonClicked)
+      shoppingBag.updateElementsHandlers()
+      shoppingBag.updateCarousel()
+
+      window.shopping_cart.on('item_added',   shoppingBag.renderCart)
+      window.shopping_cart.on('item_changed', shoppingBag.renderCart)
+      window.shopping_cart.on('item_removed', shoppingBag.renderCart)
+
+    removeProductClickHandler: (e) ->
+      e.preventDefault()
+
+    toggleVisibilityClickHandler: (e) ->
+      e.preventDefault()
+      $("#shopping-bag-popup-wrapper").slideToggle("slow")
+
+    renderCart: () ->
+      console.log('window.shoppingBag - updateItems')
+      # render current cart items
+      # update actions
+      shoppingBag.updateElementsHandlers()
+
+    updateElementsHandlers: () ->
+      $('.remove-item-from-cart')
+        .off('click', shoppingBag.removeProductClickHandler)
+        .on('click', shoppingBag.removeProductClickHandler)
+
+    updateCarousel: () ->
+      $("#shopping-bag-popup").carouFredSel(
+        window.helpers.get_vertical_carousel_options(items: 2,
+          prev: { button: "#shopping-arrow-up", items: 2 },
+          next: { button: "#shopping-arrow-down", items: 2 }
+        )
+  }
+
+  shoppingBag.init()
+
 # it seems, we should disable this logic for admin part only.
+###
 $ ->
   window.shoppingCart = {
     updateProductListActions: () ->
       # enable carousel
       if $("#shopping-bag-popup").length > 0
-        # items in cart carousel
-        $("#shopping-bag-popup").carouFredSel({
-          direction: "up", items: 2,
-          circular: false, infinite: false, auto: false,
-          prev: { button: "#shopping-arrow-up", key: "up", items: 2 }
-          next: { button: "#shopping-arrow-down", key: "down", items: 2 }
-        })
+        $("#shopping-bag-popup").carouFredSel(
+          window.helpers.get_vertical_carousel_options(items: 2,
+            prev: { button: "#shopping-arrow-up", items: 2 },
+            next: { button: "#shopping-arrow-down", items: 2 }
+          )
       # update remove action
       $('#shopping-bag-popup .remove-item-from-cart')
         .off('click')
@@ -76,3 +117,4 @@ $ ->
     $("#shopping-bag-popup-wrapper").slideToggle("slow")
 
   $('.buy-wishlist .buy-now').on('click', shoppingCart.addProductButtonClicked)
+###

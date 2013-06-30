@@ -4,13 +4,16 @@ window.shopping_cart = _.extend(window.shopping_cart, {
   event_bus: $({})
   line_items: []
   order: {}
+  initialized: false
 
   init: (bootstrap_data) ->
-    window.shopping_cart.order = bootstrap_data.order.cart
-    window.shopping_cart.line_items = _.collect(
-      JSON.parse(bootstrap_data.order.cart.line_items), (object) -> object.line_item
-    )
-    window.shopping_cart.order.line_items = window.shopping_cart.line_items
+    if !window.shopping_cart.initialized
+      window.shopping_cart.order = bootstrap_data.order.cart
+      window.shopping_cart.line_items = _.collect(
+        JSON.parse(bootstrap_data.order.cart.line_items), (object) -> object.line_item
+      )
+      window.shopping_cart.order.line_items = window.shopping_cart.line_items
+    window.shopping_cart.initialized = true
 
   addProduct: (variantId, options = {}) ->
     return unless variantId?
@@ -72,9 +75,9 @@ window.delegateTo = (object, method_name) ->
   return func
 
 # pub/sub actions delegate
-window.shopping_cart.on       = delegateTo(window.shopping_cart.event_bus, 'on')
-window.shopping_cart.off      = delegateTo(window.shopping_cart.event_bus, 'off')
-window.shopping_cart.trigger  = delegateTo(window.shopping_cart.event_bus, 'trigger')
+#window.shopping_cart.on       = delegateTo(window.shopping_cart.event_bus, 'on')
+#window.shopping_cart.off      = delegateTo(window.shopping_cart.event_bus, 'off')
+#window.shopping_cart.trigger  = delegateTo(window.shopping_cart.event_bus, 'trigger')
 
 ###
 # usage
@@ -85,8 +88,3 @@ window.shopping_cart.event_bus.trigger('item_changed')
 window.shopping_cart.event_bus.on("item_added", (cart, *[other_args]) ->
   # run callbacks
 ###
-
-window.shopping_cart.line_items = []
-
-$ ->
-  window.shopping_cart.init(window.bootstrap)

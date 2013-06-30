@@ -17,3 +17,9 @@ $(".products.show").ready ->
   window.helpers.quickViewer.init()
   $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
 
+
+  # add product to cart
+  $('.buy-wishlist .buy-now').on('click', (e) ->
+    e.preventDefault()
+    variantId = $(e.currentTarget).data('variant_id')
+    shoppingCart.addProduct.call(shoppingCart, variantId)
