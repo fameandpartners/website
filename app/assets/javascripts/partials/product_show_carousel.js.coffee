@@ -1,3 +1,4 @@
+###
 $(".products.show").ready ->
 
   # enable carousel
@@ -16,7 +17,6 @@ $(".products.show").ready ->
       button: "#product-items-next"
       key: "right"
       items: 4
-
 
   # add feature to scroll carousel with mouse scroll
   scrollBack = () ->
@@ -40,3 +40,4 @@ $(".products.show").ready ->
     else if deltaY < 0
       executeAndWait(scrollForward)
   )
+###

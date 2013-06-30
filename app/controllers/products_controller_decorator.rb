@@ -48,7 +48,7 @@ Spree::ProductsController.class_eval do
       format.json do
         render json: { 
           popup_html: render_to_string(template: 'spree/products/quick_view.html.slim'),
-          variants: @products_variants.to_json
+          variants: get_product_variants(@product)
         }
       end
     end

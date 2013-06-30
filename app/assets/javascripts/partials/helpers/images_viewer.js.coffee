@@ -1,13 +1,15 @@
-$(".products.show").ready ->
-  viewer = {
+window.helpers or= {}
+
+window.helpers.buildImagesViewer = () ->
+  viewer =  {
     currentImages: null
     onClickHandler: (e) ->
       e.preventDefault()
-      viewer.showImageFromItem($(e.currentTarget))
+      viewer.showImageFromItem.call(viewer, $(e.currentTarget))
 
     showFullImageEventHandler: (e) ->
       e.preventDefault()
-      viewer.showBigImage()
+      viewer.showBigImage.call(viewer)
 
     showImageFromItem: (carouselItem) ->
       if !carouselItem? || carouselItem.length != 1
@@ -15,7 +17,7 @@ $(".products.show").ready ->
       images = carouselItem.data()
 
       carouselItem.closest('li').addClass('selected').siblings().removeClass('selected')
-      viewer.showImage(images)
+      @showImage(images)
 
     showImage: (images) ->
       viewer.currentImages = images
@@ -25,10 +27,6 @@ $(".products.show").ready ->
     showBigImage: () ->
       bigImageUrl = viewer.currentImages.original
       return if !bigImageUrl?
-      alert("show tab/popup with image '#{bigImageUrl}'")
   }
 
-  $('ul#product-images li a').on("click", viewer.onClickHandler)
-  $('#photos .big-photo .zoom a').on('click', viewer.showFullImageEventHandler)
-
-  viewer.showImageFromItem($('ul#product-images li a').first())
+  return viewer

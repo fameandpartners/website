@@ -27,9 +27,9 @@ javascript:
               .zoom
                 = link_to 'Zoom', '#'
                 = image_tag 'http://placehold.it/460x590', alt: '', height: 590, width: 460
-        #videos.tab-content
+        #videos.tab-content style="display: none;"
           = image_tag @product.property('inspiration_video')
-        #inspiration.tab-content
+        #inspiration.tab-content style="display: none;"
           .tab-content-inner
             .big-photo
               = image_tag "file://" + @product.property('inspiration_photo')

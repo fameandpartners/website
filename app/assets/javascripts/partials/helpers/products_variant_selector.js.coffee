@@ -1,7 +1,16 @@
-$(".products.show").ready ->
+window.helpers or= {}
 
+window.helpers.createProductImagesSelector = (options = {}) ->
   variantsSelector = {
-    selected: { color: null, size: null }
+    selected: { color: null, size: null },
+    variants: null,
+
+    init: (variants) ->
+      variantsSelector.variants = variants
+      $(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
+      $('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
+      variantsSelector.selectFirstAvailableOptions()
+      return variantsSelector
 
     onColorClickHandler: (e) ->
       e.preventDefault()
@@ -16,7 +25,7 @@ $(".products.show").ready ->
 
     selectColor: (color) ->
       @selected.color = color
-      selected_variants = _.where(window.product_variants, { color: color })
+      selected_variants = _.where(@variants, { color: color })
       @updateSelectbox($('#toggle-selectbox'), selected_variants, 'size')
       @updatePurchaseConditions()
 
@@ -60,7 +69,7 @@ $(".products.show").ready ->
       $('.price-delivery .delivery').text(deliveryText)
 
     getSelectedVariant: () ->
-      variant = _.findWhere(window.product_variants, @selected)
+      variant = _.findWhere(@variants, @selected)
       if variant
         line_item = _.find(window.items_in_cart, (item_in_cart) -> item_in_cart == variant.id)
         variant.in_cart = !!line_item
@@ -74,9 +83,3 @@ $(".products.show").ready ->
       $('#toggle-selectbox').val(size)
       variantsSelector.selectSize(size)
   }
-
-  if window.product_variants
-    $(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
-    $('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
-
-    variantsSelector.selectFirstAvailableOptions()
