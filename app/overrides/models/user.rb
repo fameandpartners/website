@@ -8,6 +8,8 @@ Spree::User.class_eval do
 
   before_validation :generate_slug
 
+  has_many :posts, class_name: Blog::Post
+
   def fullname
     [first_name, last_name].reject(&:blank?).join(' ')
   end

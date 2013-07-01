@@ -47,7 +47,7 @@ FameAndPartners::Application.routes.draw do
      get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
      get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
      get '/stylists' => 'blog/authors#index', as: :blog_authors
-     get '/stylists/:stylist' => 'blog/authors#index', as: :blog_authors_post
+     get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
      get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
      get '/search/authors/:author_slug' => 'blog/searches#by_tag', as: :blog_search_by_author
      get '/search/events/:event' => 'blog/searches#by_event', as: :blog_search_by_event
