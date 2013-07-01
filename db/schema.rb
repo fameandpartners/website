@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130701113447) do
 
-<<<<<<< HEAD
   create_table "blog_authors", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -30,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20130701113447) do
 
   add_index "blog_authors", ["slug"], :name => "index_blog_authors_on_slug"
   add_index "blog_authors", ["user_id"], :name => "index_blog_authors_on_user_id"
-=======
+
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
     t.string   "code"
@@ -46,7 +45,6 @@ ActiveRecord::Schema.define(:version => 20130701113447) do
   end
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
->>>>>>> Revove authors and red carpet posts table
 
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
