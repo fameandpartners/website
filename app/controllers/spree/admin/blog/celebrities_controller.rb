@@ -1,4 +1,4 @@
-class Spree::Admin::Blog::CelebritiesController < Spree::Admin::BaseController
+class Spree::Admin::Blog::CelebritiesController < Spree::Admin::Blog::BaseController
 
   def index
     @celebrities = Blog::Celebrity.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])

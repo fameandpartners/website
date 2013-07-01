@@ -54,18 +54,6 @@
       = f.error_message_on :occured_at
       = f.text_field :occured_at, :value => datepicker_field_value(@blog_post.occured_at), :class => 'datepicker'
 
-    = f.field_container :author_id do
-      = f.label :author_id, "Author"
-      br
-      = f.select :author_id, options_from_collection_for_select(@authors, :id, :fullname, f.object.author_id), {}, class: 'select2'
-      br
-      = f.error_message_on :author_id
-
-    = f.field_container :publish do
-      = f.label :publish, "Publish"
-      br
-      = f.check_box :publish, class: 'text'
-
     = f.field_container :body do
       = f.label :body, "Body"
       br

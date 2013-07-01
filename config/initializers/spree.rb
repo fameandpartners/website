@@ -14,3 +14,5 @@ Spree.config do |config|
 end
 
 Spree.user_class = "Spree::User"
+
+Spree::Ability.register_ability(Blog::Ability)

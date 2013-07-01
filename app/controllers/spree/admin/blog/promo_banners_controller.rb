@@ -1,4 +1,4 @@
-class Spree::Admin::Blog::PromoBannersController < Spree::Admin::BaseController
+class Spree::Admin::Blog::PromoBannersController < Spree::Admin::Blog::BaseController
 
   def index
     scope = Blog::PromoBanner.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])

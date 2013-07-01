@@ -1,4 +1,4 @@
-class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::BaseController
+class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseController
 
   def index
     @celebrity_photos = scope.celebrity_photos.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])

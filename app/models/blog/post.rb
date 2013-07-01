@@ -4,9 +4,8 @@ class Blog::Post < ActiveRecord::Base
     RED_CARPET = 1
   end
 
-  attr_accessor :publish
-  attr_accessible :author_id, :body, :title, :category_id, :occured_at,
-                  :published_at, :user_id, :publish, :slug, :post_type_id,
+  attr_accessible :body, :title, :category_id, :occured_at,
+                  :published_at, :user_id, :slug, :post_type_id,
                   :tag_list, :event_id
 
   acts_as_taggable
@@ -20,7 +19,7 @@ class Blog::Post < ActiveRecord::Base
   has_many   :celebrity_photos
   has_many   :celebrities, through: :celebrity_photos
 
-  validates :author_id, :title, :body, :occured_at,
+  validates :title, :body, :occured_at,
             :slug, :post_type_id, presence: true
   validates :category_id, presence: true, if: :simple?
   validates :post_type_id, inclusion: [PostTypes::SIMPLE, PostTypes::RED_CARPET]
@@ -84,10 +83,6 @@ class Blog::Post < ActiveRecord::Base
   def occured_at_formatted
     #"Wednesday, May 15th, 2013"
     occured_at.strftime("%A, %b #{occured_at.day.ordinalize}, %Y")
-  end
-
-  def publish
-    published_at.present?
   end
 
   def published?

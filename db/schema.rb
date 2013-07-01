@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701043431) do
+ActiveRecord::Schema.define(:version => 20130701043900) do
 
 <<<<<<< HEAD
   create_table "blog_authors", :force => true do |t|

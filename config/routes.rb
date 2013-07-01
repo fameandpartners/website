@@ -89,8 +89,10 @@ FameAndPartners::Application.routes.draw do
         resources :promo_banners
         resources :categories
         resources :events
-        resources :authors
         resources :posts do
+          member do
+            put :toggle_publish
+          end
           resources :post_photos
           resources :celebrity_photos
         end

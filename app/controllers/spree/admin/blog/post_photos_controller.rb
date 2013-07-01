@@ -1,4 +1,4 @@
-class Spree::Admin::Blog::PostPhotosController < Spree::Admin::BaseController
+class Spree::Admin::Blog::PostPhotosController < Spree::Admin::Blog::BaseController
 
   def index
     @post        = Blog::Post.find(params[:post_id])

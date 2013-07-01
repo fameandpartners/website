@@ -1,4 +1,4 @@
-class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
+class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
 
   def index
     @posts = Blog::Post.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])
@@ -19,7 +19,6 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
     @blog_post = Blog::Post.new(attrs)
     @blog_post.user = current_spree_user
     @blog_post.slug = slug_from_name(@blog_post.title.to_s) if @blog_post.slug.blank?
-    update_published_at(@blog_post, attrs['publish'])
 
     if @blog_post.valid?
       @blog_post.save
@@ -34,7 +33,6 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
     attrs = params['blog_post']
     @blog_post = Blog::Post.find(params[:id])
     @blog_post.assign_attributes(attrs)
-    update_published_at(@blog_post, attrs['publish'])
 
     if @blog_post.valid?
       @blog_post.save
@@ -43,6 +41,18 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
       prepare_form_relations
       render action: :edit
     end
+  end
+
+  def toggle_publish
+    authorize! :publish, Blog::Post
+    post = Blog::Post.find(params[:id])
+    if post.published?
+      post.published_at = nil
+    else
+      post.published_at = Time.now.utc
+    end
+    post.save
+    redirect_to :back
   end
 
   def destroy
@@ -62,7 +72,6 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
   end
 
   def prepare_form_relations
-    @authors = Blog::Author.all
     @categories = Blog::Category.all
   end
 
