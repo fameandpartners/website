@@ -10,7 +10,7 @@ $(".products.show").ready ->
 
   # enable color-size combination selection
   if window.product_variants
-    variantsSelector = window.helpers.createProductImagesSelector($('#content .wrap'))
+    variantsSelector = window.helpers.createProductVariantsSelector($('#content .wrap'))
     variantsSelector.init(window.product_variants)
 
   # add quick view feature

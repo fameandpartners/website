@@ -1,6 +1,6 @@
 window.helpers or= {}
 
-window.helpers.createProductImagesSelector = (root) ->
+window.helpers.createProductVariantsSelector = (root) ->
   rootElement = root
 
   variantsSelector = {

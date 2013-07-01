@@ -74,10 +74,12 @@ window.helpers.quickViewer = {
     viewer = window.helpers.buildImagesViewer(@container).init()
 
     # init product variants selector
-    selector = window.helpers.createProductImagesSelector(@container).init(product_variants)
+    selector = window.helpers.createProductVariantsSelector(@container).init(product_variants)
 
     # add product to cart
     @popupContainer.find('.buy-wishlist .buy-now').on('click', window.helpers.quickViewer.onBuyButtonClickHandler)
+
+    window.shopping_cart.on('item_added', window.helpers.quickViewer.cartItemsChangedHandler)
 
   movePopupToCenter: () ->
     window.helpers.quickViewer.container.center()

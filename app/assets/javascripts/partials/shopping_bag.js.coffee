@@ -1,7 +1,7 @@
 $ ->
   window.shopping_cart.init(window.bootstrap)
 
-  shoppingBag = {
+  window.shoppingBag = {
     cartTemplate: JST['templates/shopping_cart']
     init: () ->
       shoppingBag.updateElementsHandlers()
@@ -22,12 +22,23 @@ $ ->
       e.preventDefault()
       $("#shopping-bag-popup-wrapper").slideToggle("slow")
 
+    show: () ->
+      if !$("#shopping-bag-popup-wrapper").is(":visible")
+        $("#shopping-bag-popup-wrapper").slideToggle("slow")
+      window.shoppingBag
+
+    hide: () ->
+      if $("#shopping-bag-popup-wrapper").is(":visible")
+        $("#shopping-bag-popup-wrapper").slideToggle("slow")
+      window.shoppingBag
+
     renderCart: (e, cart) ->
       cartHtml = shoppingBag.cartTemplate(order: cart)
       $('#shopping-bag-popup-wrapper').replaceWith(cartHtml)
       # update actions
       shoppingBag.updateElementsHandlers()
       shoppingBag.updateCarousel()
+      shoppingBag.show()
 
     updateElementsHandlers: () ->
       $('.remove-item-from-cart')
