@@ -1,5 +1,4 @@
 class Blog::Celebrity < ActiveRecord::Base
-  attr_writer :featured
   attr_accessible :first_name, :last_name, :user_id, :featured, :slug
 
   validates  :first_name, :last_name, :user_id, :slug, presence: :true
@@ -21,15 +20,15 @@ class Blog::Celebrity < ActiveRecord::Base
     [first_name, last_name].join(' ')
   end
 
+  def featured?
+    featured_at.present?
+  end
+
   def featured_state
     if featured_at.present?
       'yes'
     else
       'no'
     end
-  end
-
-  def featured
-    featured_at.present?
   end
 end

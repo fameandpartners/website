@@ -97,6 +97,9 @@ FameAndPartners::Application.routes.draw do
           resources :celebrity_photos
         end
         resources :celebrities do
+          member do
+            put :toggle_featured
+          end
           resources :celebrity_photos
         end
       end
