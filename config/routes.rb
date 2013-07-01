@@ -84,7 +84,7 @@ FameAndPartners::Application.routes.draw do
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
-      match '/blog' => redirect('/admin/blog/promo_banners')
+      match '/blog' => redirect('/admin/blog/posts')
       namespace :blog do
         resources :promo_banners
         resources :categories
