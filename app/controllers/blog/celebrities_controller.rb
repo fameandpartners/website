@@ -6,7 +6,7 @@ class Blog::CelebritiesController < BlogBaseController
 
   def show
     @celebrity = Blog::Celebrity.find_by_slug!(params[:slug])
-    if params[:type] != 'posts'
+    if params[:type] == 'posts'
       @posts = @celebrity.posts
     end
     generate_breadcrumbs_for_show
