@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701072015) do
+ActiveRecord::Schema.define(:version => 20130701113447) do
 
 <<<<<<< HEAD
   create_table "blog_authors", :force => true do |t|
@@ -64,15 +64,38 @@ ActiveRecord::Schema.define(:version => 20130701072015) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.datetime "featured_at"
     t.string   "slug"
+    t.integer  "celebrity_photo_votes_count"
   end
 
   add_index "blog_celebrities", ["featured_at"], :name => "index_blog_celebrities_on_featured_at"
   add_index "blog_celebrities", ["slug"], :name => "index_blog_celebrities_on_slug"
   add_index "blog_celebrities", ["user_id"], :name => "index_blog_celebrities_on_user_id"
+
+  create_table "blog_celebrity_photo_likes", :force => true do |t|
+    t.integer  "vote_type"
+    t.integer  "user_id"
+    t.integer  "celebrity_photo_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "blog_celebrity_photo_likes", ["celebrity_photo_id"], :name => "index_blog_celebrity_photo_likes_on_celebrity_photo_id"
+  add_index "blog_celebrity_photo_likes", ["user_id"], :name => "index_blog_celebrity_photo_likes_on_user_id"
+
+  create_table "blog_celebrity_photo_votes", :force => true do |t|
+    t.integer  "vote_type"
+    t.integer  "user_id"
+    t.integer  "celebrity_photo_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "blog_celebrity_photo_votes", ["celebrity_photo_id"], :name => "index_blog_celebrity_photo_votes_on_celebrity_photo_id"
+  add_index "blog_celebrity_photo_votes", ["user_id"], :name => "index_blog_celebrity_photo_votes_on_user_id"
 
   create_table "blog_celebrity_photos", :force => true do |t|
     t.integer  "celebrity_id"

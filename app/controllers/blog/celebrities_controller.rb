@@ -12,6 +12,12 @@ class Blog::CelebritiesController < BlogBaseController
     generate_breadcrumbs_for_show
   end
 
+  def like
+  end
+
+  def dislike
+  end
+
   private
 
   def generate_breadcrumbs_for_show

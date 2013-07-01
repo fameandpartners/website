@@ -19,7 +19,7 @@
                 - if post.red_carpet?
                   = link_to '', blog_red_carpet_post_path(post.slug) + '#disqus_thread'
                 - else
-                  = link_to '', blog_post_by_category_path(post.category.slug, post.author.slug) + '#disqus_thread'
+                  = link_to '', blog_post_by_category_path(post.category.slug, post.user.slug) + '#disqus_thread'
               .author
                 = link_to blog_authors_post_path(post.user.slug) do
                   .avatar

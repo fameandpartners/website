@@ -10,3 +10,26 @@
     = button_link_to "Back to Celebrities", admin_blog_celebrities_path
 
 = render partial: "form"
+
+- if @blog_celebrity.celebrity_photos.present?
+  table.index.blog_posts
+    thead
+      tr
+        th Photo
+        th.actions
+    tbody
+      - @blog_celebrity.celebrity_photos.each do |photo|
+        tr.author
+          td
+            = image_tag photo.photo.url, height: '100'
+          td
+            - if @post
+              = link_to "", edit_admin_blog_post_celebrity_photo_path(@post, photo), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
+              | |
+              = link_to "", admin_blog_post_celebrity_photo_path(@post, photo), method: :delete,  confirm: "Are you sure?", class: "icon_link with-tip icon-remove no-text", "data-action" => "delete"
+            - elsif @celebrity
+              = link_to "", edit_admin_blog_celebrity_celebrity_photo_path(@celebrity, photo), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
+              | |
+              = link_to "", admin_blog_celebrity_celebrity_photo_path(@celebrity, photo), method: :delete,  confirm: "Are you sure?", class: "icon_link with-tip icon-remove no-text", "data-action" => "delete"
+- else
+  = render partial: "spree/admin/shared/no_items_found"

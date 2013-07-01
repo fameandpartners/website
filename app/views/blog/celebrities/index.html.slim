@@ -19,7 +19,11 @@
                 = image_tag celebrity.main_photo.photo.url, width: 269, height: 375, alt: ''
               .overlay
                 .name= celebrity.fullname
-                .event Ipsum Awards 2013
+                - if celebrity.main_photo.post.present?
+                  - if celebrity.main_photo.post.published?
+                    .event= celebrity.main_photo.post.title
+                  - else
+                    .event Coming soon
             .love-share
               .love-hate
                 .icons

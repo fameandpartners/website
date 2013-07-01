@@ -6,6 +6,7 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
   belongs_to :post, class_name: Blog::Post
   belongs_to :user, class_name: Spree::User
   has_attached_file :photo
+  has_many :celebrity_photo_votes
 
   acts_as_taggable
 
@@ -15,6 +16,24 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
 
   scope :latest, where("published_at IS NOT NULL").order("published_at desc").limit(4)
   scope :with_posts, includes(:post)
+
+  def like!(user)
+    vote = find_or_build_vote(user)
+    vote.user_id = user.id
+    vote.vote_type = CelebrityPhotoVote::UP_VOTE
+    vote.save
+  end
+
+  def dislike!(user)
+    vote = find_or_build_vote(user)
+    vote.user_id = user.id
+    vote.vote_type = CelebrityPhotoVote::DOWN_VOTE
+    vote.save
+  end
+
+  def find_or_build_vote(user)
+    celebrity_photo_votes.where(user_id: user.id).first || celebrity_photo_votes.build
+  end
 
   def publish
     published_at.present?

@@ -40,18 +40,27 @@ FameAndPartners::Application.routes.draw do
      end
 
      get '/' => 'blog#index', as: :blog
+
      get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
      get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
+
      get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
      get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
-     get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
-     get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
+
+     post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
+     post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
+
      get '/stylists' => 'blog/authors#index', as: :blog_authors
      get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
+
+
+     get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
+     get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
+
+
      get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
-     get '/search/authors/:author_slug' => 'blog/searches#by_tag', as: :blog_search_by_author
-     get '/search/events/:event' => 'blog/searches#by_event', as: :blog_search_by_event
      get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+
      get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
      get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
   end
