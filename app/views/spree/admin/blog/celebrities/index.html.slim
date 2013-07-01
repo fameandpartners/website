@@ -13,7 +13,6 @@
         th First Name
         th Last Name
         th Featured
-        th Photos
         th.actions
     tbody
       - @celebrities.each do |celebrity|
@@ -21,7 +20,6 @@
           td= celebrity.first_name
           td= celebrity.last_name
           td= celebrity.featured_state
-          td= link_to "View", admin_blog_celebrity_celebrity_photos_path(celebrity)
           td
             = link_to "", edit_admin_blog_celebrity_path(celebrity), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
             | |

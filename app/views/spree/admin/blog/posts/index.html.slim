@@ -27,11 +27,8 @@
             - else
               = post.category.name
           - if can? :toggle_publish, post
-            td
-              - if post.published?
-                = button_link_to "Unpublish", toggle_publish_admin_blog_post_path(post), method: :put
-              - else
-                = button_link_to "Publish", toggle_publish_admin_blog_post_path(post), method: :put
+            td[data-url="#{toggle_publish_admin_blog_post_path(post)}"]
+              = check_box_tag :published, '', post.published?
           - else
             td= post.state
           td= post.created_at_formatted
@@ -42,3 +39,12 @@
 - else
   = render partial: "spree/admin/shared/no_items_found"
 = paginate @posts
+
+javascript:
+  $(function() {
+    $('table.index.blog_posts input[type=checkbox]').on('click', function(e) {
+      url = $(e.target).parent().attr('data-url');
+      $.ajax({method: 'PUT', url: url});
+    });
+  });
+

@@ -1,4 +1,5 @@
 class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
+  respond_to :js, only: :toggle_publish
 
   def index
     @posts = Blog::Post.page(params[:page]).
@@ -53,7 +54,9 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
       post.published_at = Time.now.utc
     end
     post.save
-    redirect_to :back
+    respond_to do |format|
+      format.js {render text: 'ok' }
+    end
   end
 
   def destroy
