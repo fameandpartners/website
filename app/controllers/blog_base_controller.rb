@@ -7,7 +7,7 @@ class BlogBaseController < ApplicationController
   private
 
   def load_categories
-    @categories           = Blog::Category.all
+    @categories = Blog::Category.all
   end
 
   def load_featured_celebrities

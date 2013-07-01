@@ -38,6 +38,7 @@ FameAndPartners::Application.routes.draw do
         get '/signup' => 'spree/user_registrations#new'
         get '/logout' => 'spree/user_sessions#destroy'
      end
+
      get '/' => 'blog#index', as: :blog
      get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
      get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos

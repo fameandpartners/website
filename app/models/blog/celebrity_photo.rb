@@ -7,6 +7,8 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
   belongs_to :user, class_name: Spree::User
   has_attached_file :photo
 
+  acts_as_taggable
+
   validates                     :celebrity_id, presence: true
   validates                     :celebrity_slug, presence: true
   validates_attachment_presence :photo

@@ -11,8 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130625103545) do
+ActiveRecord::Schema.define(:version => 20130701043431) do
 
+<<<<<<< HEAD
   create_table "blog_authors", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -29,6 +30,23 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
 
   add_index "blog_authors", ["slug"], :name => "index_blog_authors_on_slug"
   add_index "blog_authors", ["user_id"], :name => "index_blog_authors_on_user_id"
+=======
+  create_table "answers", :force => true do |t|
+    t.integer  "question_id"
+    t.string   "code"
+    t.float    "glam"
+    t.float    "girly"
+    t.float    "classic"
+    t.float    "edgy"
+    t.float    "bohemian"
+    t.float    "sexiness"
+    t.float    "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+>>>>>>> Revove authors and red carpet posts table
 
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
@@ -66,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
     t.datetime "photo_updated_at"
     t.integer  "likes_count"
     t.integer  "dislikes_count"
+    t.datetime "publsihed_at"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.datetime "published_at"
@@ -74,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
   add_index "blog_celebrity_photos", ["celebrity_id"], :name => "index_blog_celebrity_photos_on_celebrity_id"
   add_index "blog_celebrity_photos", ["post_id"], :name => "index_blog_celebrity_photos_on_post_id"
   add_index "blog_celebrity_photos", ["published_at"], :name => "index_blog_celebrity_photos_on_published_at"
+  add_index "blog_celebrity_photos", ["publsihed_at"], :name => "index_blog_celebrity_photos_on_publsihed_at"
   add_index "blog_celebrity_photos", ["user_id"], :name => "index_blog_celebrity_photos_on_user_id"
 
   create_table "blog_events", :force => true do |t|
@@ -104,7 +124,6 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
   create_table "blog_posts", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.integer  "author_id"
     t.integer  "user_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
@@ -118,7 +137,6 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
     t.integer  "event_id"
   end
 
-  add_index "blog_posts", ["author_id"], :name => "index_blog_posts_on_author_id"
   add_index "blog_posts", ["category_id", "published_at"], :name => "index_blog_posts_on_category_id_and_published_at"
   add_index "blog_posts", ["event_id"], :name => "index_blog_posts_on_event_id"
   add_index "blog_posts", ["post_type_id"], :name => "index_blog_posts_on_post_type_id"
@@ -143,25 +161,6 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
 
-  create_table "blog_red_carpet_posts", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "author_id"
-    t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.datetime "published_at"
-    t.datetime "occured_at"
-    t.integer  "category_id"
-    t.string   "slug"
-  end
-
-  add_index "blog_red_carpet_posts", ["author_id"], :name => "index_blog_red_carpet_posts_on_author_id"
-  add_index "blog_red_carpet_posts", ["category_id"], :name => "index_blog_red_carpet_posts_on_category_id"
-  add_index "blog_red_carpet_posts", ["published_at"], :name => "index_blog_red_carpet_posts_on_published_at"
-  add_index "blog_red_carpet_posts", ["slug"], :name => "index_blog_red_carpet_posts_on_slug"
-  add_index "blog_red_carpet_posts", ["user_id"], :name => "index_blog_red_carpet_posts_on_user_id"
-
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
     t.string   "file_file_name"
@@ -184,6 +183,35 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
     t.date     "required_at"
   end
 
+<<<<<<< HEAD
+=======
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "questions", :force => true do |t|
+    t.integer  "quiz_id"
+    t.string   "text"
+    t.string   "position"
+    t.string   "partial"
+    t.boolean  "multiple",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "populate"
+  end
+
+  add_index "questions", ["position"], :name => "index_questions_on_position"
+  add_index "questions", ["quiz_id"], :name => "index_questions_on_quiz_id"
+
+  create_table "quizzes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+>>>>>>> Revove authors and red carpet posts table
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
     t.datetime "expires_at"
