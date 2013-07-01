@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701043900) do
+ActiveRecord::Schema.define(:version => 20130701072015) do
 
 <<<<<<< HEAD
   create_table "blog_authors", :force => true do |t|
@@ -788,9 +788,12 @@ ActiveRecord::Schema.define(:version => 20130701043900) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "sign_up_via"
+    t.text     "description"
+    t.string   "slug"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
+  add_index "spree_users", ["slug"], :name => "index_spree_users_on_slug"
 
   create_table "spree_variants", :force => true do |t|
     t.string   "sku",                                         :default => "",    :null => false

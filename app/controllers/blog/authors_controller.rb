@@ -1,6 +1,9 @@
 class Blog::AuthorsController < BlogBaseController
   def index
-    @authors = Blog::Author.all
+    role = Spree::Role.moderator_role
+    if role.present?
+      @authors = role.users
+    end
     generate_breadcrumbs_for_index
   end
 

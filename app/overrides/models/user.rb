@@ -1,11 +1,35 @@
 Spree::User.class_eval do
-  attr_accessible :avatar
+  attr_accessible :avatar, :slug, :description
   has_attached_file :photo
 
-  validates :first_name, :last_name, presence: true, if: :blog_moderator?
+  validates :first_name, :last_name, :slug, :description, presence: true, if: :blog_moderator?
+  validates :slug, uniqueness: true, if: :blog_moderator?
   validates_attachment_presence :avatar, if: :blog_moderator?
 
+  before_validation :generate_slug
+
+  def fullname
+    [first_name, last_name].reject(&:blank?).join(' ')
+  end
+
   private
+
+  def generate_slug
+    if self.slug.blank?
+      initial_slug = slug_from_name(fullname)
+      new_slug = initial_slug
+      index = 1
+      while Spree::User.exists?(slug: new_slug)
+        new_slug = "#{initial_slug}-#{index}"
+        index += 1
+      end
+      self.slug = new_slug
+    end
+  end
+
+  def slug_from_name(name)
+    name.to_s.downcase.gsub(/[^0-9a-z]/, ' ').to_s.gsub(/\s+/, ' ').strip.gsub(' ', '-')
+  end
 
   def blog_moderator?
     spree_roles.any? do |role|
