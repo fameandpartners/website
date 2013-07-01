@@ -90,18 +90,18 @@
               .title Promo code
               .desc
                 input type="text" name="promocode"
-        .summary.grid-25.prefix-5
+        .summary.grid-25.prefix-5.order-summary
           .title Order summary
           ul
             li
               .label Subtotal
               .desc
-                span AUD
+                span = @order.currency
                 = @order.display_item_total
             li
               .label Shipping
               .desc
-                span AUD
+                span = @order.currency
                 - if @order.shipment
                   = @order.shipment.display_amount
                 - else
@@ -109,12 +109,12 @@
             li
               .label Promotion
               .desc
-                span AUD
+                span = @order.currency
                 = @order.display_adjustment_total
             li.totals
               .label Total
               .desc
-                span AUD
+                span = @order.currency
                 = @order.display_total
                 .taxes Including GST
       .continue-buy.grid-container

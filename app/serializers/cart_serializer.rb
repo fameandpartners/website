@@ -1,13 +1,19 @@
 class CartSerializer < ActiveModel::Serializer
-  attributes :item_total, :total, :adjustment_total, :display_total
+  attributes :item_total, :total, :adjustment_total
   attributes :state, :email, :currency
   attributes :line_items
 
+  attributes :display_shipment_total,
+    :display_item_total,
+    :display_adjustment_total,
+    :display_promotion_total,
+    :display_total
+
   def display_shipment_total
-    if object.shipment? 
+    if object.shipment.present? 
       object.shipment.display_amount.to_s
     else
-      "$0.00"
+      Spree::Money.new(0).to_s
     end
   end
 
@@ -17,6 +23,10 @@ class CartSerializer < ActiveModel::Serializer
 
   def display_adjustment_total
     object.display_adjustment_total.to_s
+  end
+
+  def display_promotion_total
+    Spree::Money.new(0).to_s
   end
 
   def display_total

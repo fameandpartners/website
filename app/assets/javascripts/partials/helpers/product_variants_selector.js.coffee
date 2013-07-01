@@ -31,7 +31,7 @@ window.helpers.createProductVariantsSelector = (root) ->
       size = $(e.currentTarget).val()
       variantsSelector.selectSize.call(variantsSelector, size)
 
-    cartItemsChangedHandler: (e, cart) ->
+    cartItemsChangedHandler: (e, data) ->
       variantsSelector.updatePurchaseConditions.call(variantsSelector)
 
     selectColor: (color) ->

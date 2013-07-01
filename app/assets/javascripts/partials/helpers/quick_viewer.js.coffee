@@ -79,8 +79,6 @@ window.helpers.quickViewer = {
     # add product to cart
     @popupContainer.find('.buy-wishlist .buy-now').on('click', window.helpers.quickViewer.onBuyButtonClickHandler)
 
-    window.shopping_cart.on('item_added', window.helpers.quickViewer.cartItemsChangedHandler)
-
   movePopupToCenter: () ->
     window.helpers.quickViewer.container.center()
 }

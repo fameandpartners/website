@@ -2,12 +2,17 @@ $ ->
   window.shopping_cart.init(window.bootstrap)
 
   window.shoppingBag = {
+    container: null
     cartTemplate: JST['templates/shopping_cart']
     init: () ->
+      window.shoppingBag.container = $('.first-level .shopping-bag')
+
       shoppingBag.updateElementsHandlers()
       shoppingBag.updateCarousel()
-      $("#shopping-bag-popup-wrapper").hide()
-      $(".shopping-bag-toggler").on('click', shoppingBag.toggleVisibilityClickHandler)
+      shoppingBag.container.find("#shopping-bag-popup-wrapper").hide()
+      shoppingBag.container.find(".shopping-bag-toggler").on(
+        'click', shoppingBag.toggleVisibilityClickHandler
+      )
 
       window.shopping_cart.on('item_added',   shoppingBag.renderCart)
       window.shopping_cart.on('item_changed', shoppingBag.renderCart)
@@ -20,28 +25,28 @@ $ ->
 
     toggleVisibilityClickHandler: (e) ->
       e.preventDefault()
-      $("#shopping-bag-popup-wrapper").slideToggle("slow")
+      shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow")
 
     show: () ->
-      if !$("#shopping-bag-popup-wrapper").is(":visible")
-        $("#shopping-bag-popup-wrapper").slideToggle("slow")
+      if !shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
+        shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow")
       window.shoppingBag
 
     hide: () ->
-      if $("#shopping-bag-popup-wrapper").is(":visible")
-        $("#shopping-bag-popup-wrapper").slideToggle("slow")
+      if shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
+        shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow")
       window.shoppingBag
 
-    renderCart: (e, cart) ->
-      cartHtml = shoppingBag.cartTemplate(order: cart)
-      $('#shopping-bag-popup-wrapper').replaceWith(cartHtml)
+    renderCart: (e, data) ->
+      cartHtml = shoppingBag.cartTemplate(order: data.cart)
+      shoppingBag.container.find('#shopping-bag-popup-wrapper').replaceWith(cartHtml)
       # update actions
       shoppingBag.updateElementsHandlers()
       shoppingBag.updateCarousel()
       shoppingBag.show()
 
     updateElementsHandlers: () ->
-      $('.remove-item-from-cart')
+      shoppingBag.container.find('.remove-item-from-cart')
         .off('click', shoppingBag.removeProductClickHandler)
         .on('click', shoppingBag.removeProductClickHandler)
 
@@ -51,7 +56,7 @@ $ ->
         prev: { button: "#shopping-arrow-up", items: 2 },
         next: { button: "#shopping-arrow-down", items: 2 }
       })
-      $("#shopping-bag-popup").carouFredSel(options)
+      shoppingBag.container.find("#shopping-bag-popup").carouFredSel(options)
   }
 
   shoppingBag.init()

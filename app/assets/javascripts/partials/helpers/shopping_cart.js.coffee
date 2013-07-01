@@ -24,7 +24,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       type: 'POST'
       dataType: 'json'
       data: $.param(options)
-      complete: window.shopping_cart.buildOnSuccessCallback('item_added')
+      success: window.shopping_cart.buildOnSuccessCallback('item_added', variantId)
       failure: window.shopping_cart.onFailCallback
     )
 
@@ -36,7 +36,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       type: 'PUT'
       dataType: 'json'
       data: $.param(options)
-      complete: window.shopping_cart.buildOnSuccessCallback('item_updated')
+      success: window.shopping_cart.buildOnSuccessCallback('item_updated', variantId)
       failure: window.shopping_cart.onFailCallback
     )
 
@@ -48,17 +48,17 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       type: 'DELETE'
       dataType: 'html'
       data: $.param({ variant_id: variantId })
-      complete: window.shopping_cart.buildOnSuccessCallback('item_removed')
+      success: window.shopping_cart.buildOnSuccessCallback('item_removed', variantId)
       failure: window.shopping_cart.onFailCallback
     )
 
-  buildOnSuccessCallback: (event_name) ->
+  buildOnSuccessCallback: (event_name, objectId) ->
     func = (response) ->
       data = window.shopping_cart.parseResponse(response)
       window.shopping_cart.order = data.order
       window.shopping_cart.line_items = data.order.line_items
 
-      window.shopping_cart.trigger(event_name, data.order)
+      window.shopping_cart.trigger(event_name, { cart: data.order, id: objectId })
     return func
 
   onFailCallback: () ->
@@ -66,13 +66,21 @@ window.shopping_cart = _.extend(window.shopping_cart, {
 
   parseResponse: (response) ->
     result = {}
-    if response?
-      data = JSON.parse(response.responseText)
+    responseText = response.responseText || response
+    data = parseIfString(responseText)
+    if data?
       result.order = JSON.parse(data.order).cart
       result.order.line_items = _.collect(JSON.parse(result.order.line_items), (item) -> item.line_item)
 
     return result
 })
+
+window.parseIfString = (obj_or_string) ->
+  if typeof obj_or_string == 'string'
+    JSON.parse(obj_or_string)
+  else
+    obj_or_string
+
 
 window.delegateTo = (object, method_name) ->
   func = () ->
