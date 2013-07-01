@@ -24,6 +24,20 @@ FameAndPartners::Application.routes.draw do
   }
 
   constraints blog_constraint do
+    devise_for :spree_user,
+               :class_name => 'Spree::User',
+               :controllers => { :sessions => 'spree/user_sessions',
+                                 :registrations => 'spree/user_registrations',
+                                 :passwords => 'spree/user_passwords',
+                                 :confirmations => 'spree/user_confirmations',
+                                 :omniauth_callbacks => 'spree/omniauth_callbacks'
+               },
+               :skip => [:unlocks, :omniauth_callbacks],
+               :path_names => { :sign_out => 'logout' } do
+        get '/login' => 'spree/user_sessions#new'
+        get '/signup' => 'spree/user_registrations#new'
+        get '/logout' => 'spree/user_sessions#destroy'
+     end
      get '/' => 'blog#index', as: :blog
      get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
      get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos

@@ -42,6 +42,7 @@ class Blog::PostsController < BlogBaseController
   def generate_breadcrumbs_for_index
     if params[:type] == 'red_carpet'
       @breadcrumbs = [[root_path, 'Home'], [blog_red_carpet_posts_path, 'Red Carpet Events']]
+    else
       @breadcrumbs = [[root_path, 'Home'], [blog_posts_by_category_path(@category.try(:slug)), @category.try(:name)]]
     end
   end
