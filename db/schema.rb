@@ -204,8 +204,6 @@ ActiveRecord::Schema.define(:version => 20130701113447) do
     t.date     "required_at"
   end
 
-<<<<<<< HEAD
-=======
   create_table "data_migrations", :id => false, :force => true do |t|
     t.string "version", :null => false
   end
@@ -232,7 +230,6 @@ ActiveRecord::Schema.define(:version => 20130701113447) do
     t.datetime "updated_at", :null => false
   end
 
->>>>>>> Revove authors and red carpet posts table
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
     t.datetime "expires_at"
