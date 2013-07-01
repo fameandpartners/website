@@ -6,7 +6,7 @@ class Blog::Ability
 
       if user.has_spree_role?("Blog Moderator") || user.has_spree_role?("Blog Admin") ||
         user.has_spree_role?("admin")
-        #can :moderate_blog
+        can :admin, Blog
         can [:edit, :index, :destroy, :create, :update, :new], Blog::Post
         can [:edit, :index, :destroy, :create, :update, :new], Blog::Celebrity
         can [:edit, :index, :destroy, :create, :update, :new], Blog::CelebrityPhoto
