@@ -23,3 +23,4 @@ $(".products.show").ready ->
     e.preventDefault()
     variantId = $(e.currentTarget).data('variant_id')
     shoppingCart.addProduct.call(shoppingCart, variantId)
+  )

@@ -54,37 +54,34 @@ window.shopping_cart = _.extend(window.shopping_cart, {
 
   buildOnSuccessCallback: (event_name) ->
     func = (response) ->
-      window.shopping_cart.onSuccessCallback(window.shopping_cart, event_name, response)
-    return func
+      data = window.shopping_cart.parseResponse(response)
+      window.shopping_cart.order = data.order
+      window.shopping_cart.line_items = data.order.line_items
 
-  onSuccessCallback: (event_name, response) ->
-    data = JSON.parse(response.responseText)
-    @line_items = data.line_items
-    @order      = data.order
-    @event_bus.trigger(event_name, data.order, data.line_items)
+      window.shopping_cart.trigger(event_name, data.order)
+    return func
 
   onFailCallback: () ->
     console.log('failed request', arguments)
-})
 
-window.shopping_cart.event_bus or= $({})
+  parseResponse: (response) ->
+    result = {}
+    if response?
+      data = JSON.parse(response.responseText)
+      result.order = JSON.parse(data.order).cart
+      result.order.line_items = _.collect(JSON.parse(result.order.line_items), (item) -> item.line_item)
+
+    return result
+})
 
 window.delegateTo = (object, method_name) ->
   func = () ->
     object[method_name].apply(object, arguments)
   return func
 
+window.shopping_cart.event_bus or= $({})
+
 # pub/sub actions delegate
-#window.shopping_cart.on       = delegateTo(window.shopping_cart.event_bus, 'on')
-#window.shopping_cart.off      = delegateTo(window.shopping_cart.event_bus, 'off')
-#window.shopping_cart.trigger  = delegateTo(window.shopping_cart.event_bus, 'trigger')
-
-###
-# usage
-window.shopping_cart.event_bus.trigger('item_added')
-window.shopping_cart.event_bus.trigger('item_removed')
-window.shopping_cart.event_bus.trigger('item_changed')
-
-window.shopping_cart.event_bus.on("item_added", (cart, *[other_args]) ->
-  # run callbacks
-###
+window.shopping_cart.on       = delegateTo(window.shopping_cart.event_bus, 'on')
+window.shopping_cart.off      = delegateTo(window.shopping_cart.event_bus, 'off')
+window.shopping_cart.trigger  = delegateTo(window.shopping_cart.event_bus, 'trigger')

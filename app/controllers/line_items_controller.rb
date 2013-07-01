@@ -11,21 +11,14 @@ class LineItemsController < Spree::StoreController
       current_order.reload
     end
 
-    cart_html = render_to_string(
-      partial: 'layouts/shopping_bag_content',
-      locals: { current_order: current_order }
-    )
-
-    render json: {
-      cart_html: cart_html,
-      order: current_order.to_json
-    }
+    render json: { order: CartSerializer.new(current_order).to_json }
   end
 
   # order_id
   # variant_id
   # quantity
   def update
+    raise 'update'
   end
 
   # order_id
@@ -36,14 +29,6 @@ class LineItemsController < Spree::StoreController
 
     current_order.reload
 
-    response = {}
-    cart_html = render_to_string(
-      partial: 'layouts/shopping_bag_content',
-      locals: { current_order: current_order }
-    )
-    render json: {
-      cart_html: cart_html,
-      order: current_order.to_json
-    }
+    render json: { order: CartSerializer.new(current_order).to_json }
   end
 end

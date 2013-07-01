@@ -21,6 +21,7 @@ group :assets do
   gem 'execjs', '1.4.0'
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.3.4'
+  gem 'eco'
 end
 
 group :development do

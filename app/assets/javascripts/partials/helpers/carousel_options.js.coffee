@@ -6,6 +6,7 @@ window.helpers.get_vertical_carousel_options = (options = {}) ->
 
   result = _.extend(
     { direction: "up", items: 4, circular: false, infinite: false, auto: false },
+    options,
     { prev: prev },
     { next: next }
   )
@@ -19,6 +20,7 @@ window.helpers.get_horizontal_carousel_options = (options = {}) ->
 
   result = _.extend(
     { items: 4, width: 1094, circular: false, infinite: false, auto: false},
+    options,
     { prev: prev },
     { next: next }
   )

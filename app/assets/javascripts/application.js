@@ -21,3 +21,4 @@
 //= require libs/jquery.mousewheel
 //= require libs/underscore-min
 //= require_tree ./partials
+//= require_tree ./templates

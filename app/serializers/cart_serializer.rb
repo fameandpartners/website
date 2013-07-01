@@ -1,5 +1,5 @@
 class CartSerializer < ActiveModel::Serializer
-  attributes :item_total, :total, :adjustment_total
+  attributes :item_total, :total, :adjustment_total, :display_total
   attributes :state, :email, :currency
   attributes :line_items
 

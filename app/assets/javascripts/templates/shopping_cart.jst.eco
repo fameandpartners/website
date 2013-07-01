@@ -1,0 +1,69 @@
+<div id="shopping-bag-popup-wrapper" class="shopping-bag-popup">
+  <% if @order.item_count == 0: %>
+    Sorry, your shopping bag still empty
+  <% else: %>
+    <div id="shopping-arrow-up" class="arrow-up"></div>
+    <ul id="shopping-bag-popup" class="items-carousel">
+      <% for line_item in @order.line_items: %>
+          <li class="item-block">
+            <div class='thumbnail'>
+              <img src="<%= line_item.image_small %>" 
+                itemprop="image" width="83" height="115" alt="<%= line_item.product_name %>"/>
+              <a href="#" class="remove-item-from-cart" data-id="<%= line_item.variant_id %>">Remove</a>
+            </div>
+            <div class="item-info">
+              <div class="price"><%= line_item.money %></div>
+              <div class="name">
+                <a href="/products/<%= line_item.product_permalink %>" target="blank"><%= line_item.product_name %></a>
+              </div>
+              <div class="desc">
+                <%= line_item.product_description %>
+              </div>
+              <ul class="specs">
+                <li>
+                  <div class="label">Color</div>
+                  <div class="value">
+                    <div class="color <%= line_item.product_color %>">&nbsp;</div>
+                  </div>
+                </li>
+                <li>
+                  <div class="label">Size</div>
+                  <div class="value">
+                    <%= line_item.product_size %>
+                  </div>
+                </li>
+                <li>
+                  <div class="label">Quantity</div>
+                  <div class="value">
+                    <%= line_item.quantity %>
+                  </div>
+                </li>
+                <li>
+                  <div class="label">Estimated delivery</div>
+                  <div class="value">
+                    <% if (parseInt(line_item.count_on_hand) > 0): %>
+                      1-2 weeks
+                    <% else: %>
+                      3-4 weeks
+                    <% end %>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <div id="shopping-arrow-down" class="arrow-down"></div>
+    <div class="totals">
+      <div class="label fleft">Total</div>
+      <div class="value fright">
+        <%= @order.currency %>
+        <span><%= @order.display_total %></span>
+      </div>
+    </div>
+    <div class="buttons">
+      <a href="/cart" class='continue'>Continue shopping</a>
+      <a href="/checkout" class='buy-now'>Buy now</a>
+    </div>
+  <% end %>
+</div>

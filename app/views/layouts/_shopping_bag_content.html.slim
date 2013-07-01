@@ -9,7 +9,7 @@
     .totals
       .label.fleft Total
       .value.fright
-        ' AUD
+        = current_order.currency
         span = current_order.display_total
     .buttons
       = link_to 'Continue shopping', cart_path, class: 'continue'

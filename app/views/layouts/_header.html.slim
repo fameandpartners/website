@@ -19,7 +19,7 @@
 header
   javascript:
     window.bootstrap = {}
-    window.bootstrap.order = #{{ ::CartSerializer.new(Spree::Order.first).to_json }}
+    window.bootstrap.order = #{{ ::CartSerializer.new(current_order).to_json }}
 
   .first-level
     .wrap.no-overflow

@@ -33,6 +33,11 @@ window.helpers.quickViewer = {
     productId = $(e.currentTarget).data("id")
     helpers.quickViewer.showProduct.call(helpers.quickViewer, productId)
 
+  onBuyButtonClickHandler: (e) ->
+    e.preventDefault()
+    variantId = $(e.currentTarget).data("variant_id")
+    window.shopping_cart.addProduct(variantId)
+
   showProduct: (productId) ->
     $.ajax(
       url: "/products/#{productId}/quick_view"
@@ -70,6 +75,9 @@ window.helpers.quickViewer = {
 
     # init product variants selector
     selector = window.helpers.createProductImagesSelector(@container).init(product_variants)
+
+    # add product to cart
+    @popupContainer.find('.buy-wishlist .buy-now').on('click', window.helpers.quickViewer.onBuyButtonClickHandler)
 
   movePopupToCenter: () ->
     window.helpers.quickViewer.container.center()
