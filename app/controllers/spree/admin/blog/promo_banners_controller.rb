@@ -2,11 +2,7 @@ class Spree::Admin::Blog::PromoBannersController < Spree::Admin::Blog::BaseContr
 
   def index
     scope = Blog::PromoBanner.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])
-
-    if params[:state] == "published"
-      scope = scope.where(published: true)
-    end
-    @blog_promo_banners = scope
+    @blog_promo_banners = scope.order('position asc')
   end
 
   def new

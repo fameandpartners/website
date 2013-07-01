@@ -85,6 +85,11 @@ class Blog::Post < ActiveRecord::Base
     occured_at.strftime("%A, %b #{occured_at.day.ordinalize}, %Y")
   end
 
+  def created_at_formatted
+    #"Wednesday, May 15th, 2013"
+    created_at.strftime("%A, %b #{created_at.day.ordinalize}, %Y")
+  end
+
   def published?
     published_at.present?
   end

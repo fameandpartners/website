@@ -12,12 +12,14 @@
       tr
         th Title
         th State
+        th Position
         th.actions
     tbody
       - @blog_promo_banners.each do |banner|
         tr.banner
-          td= banner.title
+          td= link_to banner.title, edit_admin_blog_promo_banner_path(banner)
           td= banner.state
+          td= banner.position
           td
             = link_to "", edit_admin_blog_promo_banner_path(banner), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
             '  |

@@ -13,10 +13,10 @@ class Blog::Ability
         can [:edit, :index, :destroy, :create, :update, :new], Blog::PostPhoto
       end
 
-      if user.has_spree_role?("Blog Admin")
+      if user.has_spree_role?("Blog Admin") || user.has_spree_role?("admin")
+        can :toggle_publish, Blog::Post
         can :manage,  Blog::Category
         can :manage,  Blog::PromoBanner
-        can :publish, Blog::Post
       end
     end
 end

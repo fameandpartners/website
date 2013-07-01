@@ -1,7 +1,9 @@
 class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
 
   def index
-    @posts = Blog::Post.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])
+    @posts = Blog::Post.page(params[:page]).
+             per(params[:per_page] || Spree::Config[:orders_per_page]).
+             order('created_at desc')
   end
 
   def new
@@ -44,7 +46,6 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
   end
 
   def toggle_publish
-    authorize! :publish, Blog::Post
     post = Blog::Post.find(params[:id])
     if post.published?
       post.published_at = nil
