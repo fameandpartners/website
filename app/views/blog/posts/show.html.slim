@@ -20,8 +20,8 @@
           .author
             = link_to '#' do
               .avatar
-                = image_tag @post.author.photo.url, width: 30, height: 30, alt: ''
-              .name= @post.author.fullname
+                = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
+              .name= @post.user.fullname
         - if @post.post_photos.present?
           .featured-image
             #post-carousel-prev
