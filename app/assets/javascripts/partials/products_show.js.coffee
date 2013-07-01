@@ -1,4 +1,6 @@
 $(".products.show").ready ->
+  window.shopping_cart.init(window.bootstrap)
+
   # enable product main tabs
   window.helpers.enableTabs($('.tabs'))
 
@@ -17,10 +19,9 @@ $(".products.show").ready ->
   window.helpers.quickViewer.init()
   $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
 
-
   # add product to cart
   $('.buy-wishlist .buy-now').on('click', (e) ->
     e.preventDefault()
     variantId = $(e.currentTarget).data('variant_id')
-    shoppingCart.addProduct.call(shoppingCart, variantId)
+    window.shopping_cart.addProduct.call(window.shopping_cart, variantId)
   )

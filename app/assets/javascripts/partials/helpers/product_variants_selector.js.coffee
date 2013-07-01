@@ -8,11 +8,16 @@ window.helpers.createProductVariantsSelector = (root) ->
     variants: null,
 
     init: (variants) ->
-      rootElement.find('#toggle-selectbox').chosen()
       variantsSelector.variants = variants
       rootElement.find(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
       rootElement.find('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
       variantsSelector.selectFirstAvailableOptions()
+      rootElement.find('#toggle-selectbox').chosen()
+
+      if window.shopping_cart
+        window.shopping_cart.on('item_added',   variantsSelector.cartItemsChangedHandler)
+        window.shopping_cart.on('item_removed', variantsSelector.cartItemsChangedHandler)
+
       return variantsSelector
 
     onColorClickHandler: (e) ->
@@ -25,6 +30,9 @@ window.helpers.createProductVariantsSelector = (root) ->
       e.preventDefault()
       size = $(e.currentTarget).val()
       variantsSelector.selectSize.call(variantsSelector, size)
+
+    cartItemsChangedHandler: (e, cart) ->
+      variantsSelector.updatePurchaseConditions.call(variantsSelector)
 
     selectColor: (color) ->
       @selected.color = color
@@ -73,9 +81,9 @@ window.helpers.createProductVariantsSelector = (root) ->
 
     getSelectedVariant: () ->
       variant = _.findWhere(@variants, @selected)
-      if variant
-        line_item = _.find(window.items_in_cart, (item_in_cart) -> item_in_cart == variant.id)
-        variant.in_cart = !!line_item
+      if variant and window.shopping_cart
+        line_item = _.find(window.shopping_cart.line_items, (line_item) -> line_item.variant_id == variant.id)
+        variant.purchased = !!line_item
         variant
       else
         {}
@@ -84,5 +92,5 @@ window.helpers.createProductVariantsSelector = (root) ->
       rootElement.find(".colors-choser .colors .color:first").click()
       size = rootElement.find('#toggle-selectbox option[value!=""]:first').attr('value')
       rootElement.find('#toggle-selectbox').val(size)
-      variantsSelector.selectSize(size)
+      variantsSelector.selectSize.call(variantsSelector, size)
   }
