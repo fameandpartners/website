@@ -19,3 +19,9 @@ en:
     attributes:
       custom_dress:
         required_at: 'Formal/Event Date'
+      celebrity_photos:
+        celebrity_name: 'Celebrity name'
+        photo: 'Photo'
+        tags: 'Tags'
+        event_date: 'Event date'
+

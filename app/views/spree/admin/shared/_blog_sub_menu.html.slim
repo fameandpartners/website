@@ -1,0 +1,8 @@
+= content_for :sub_menu do
+  ul#sub_nav.inline-menu[data-hook="admin_blog_sub_tabs"]
+    = tab :posts, url: admin_blog_posts_path
+    = tab :celebrities, url: admin_blog_celebrities_path
+    = tab :authors, url: admin_blog_authors_path
+    = tab :red_carpet_events, url: admin_blog_events_path
+    = tab :promo_banners, url: admin_blog_promo_banners_path
+    = tab :categories, url: admin_blog_categories_path

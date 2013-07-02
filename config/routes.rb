@@ -17,6 +17,32 @@ FameAndPartners::Application.routes.draw do
   resources :line_items, only: [:create, :edit, :update, :destroy]
   get 'products/:id/quick_view' => 'spree/products#quick_view'
 
+  # Blog routes
+  blog_constraint = lambda { |request|
+    if Rails.env.development?
+      request.host =~ /blog\.localdomain/
+    else
+      request.host =~ /blog\.#{configatron.application.hostname}/
+    end
+  }
+
+  constraints blog_constraint do
+     get '/' => 'blog#index', as: :blog
+     get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
+     get '/celebrities_photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
+     get '/celebrity/:slug' => 'blog/celebrities#show', as: :blog_celebrity
+     get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
+     get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
+     get '/stylists' => 'blog/authors#index', as: :blog_authors
+     get '/stylists/:stylist' => 'blog/authors#index', as: :blog_authors_post
+     get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
+     get '/search/authors/:author_slug' => 'blog/searches#by_tag', as: :blog_search_by_author
+     get '/search/events/:event' => 'blog/searches#by_event', as: :blog_search_by_event
+     get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+     get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
+     get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
+  end
+
   # Static pages for HTML markup
   match '/posts' => 'pages#posts'
   match '/post' => 'pages#post'
@@ -51,11 +77,42 @@ FameAndPartners::Application.routes.draw do
   # MonkeyPatch for redirecting to Custom Dress page
   get '/fb_auth' => 'pages#fb_auth'
 
-  resources :custom_dresses, :only => [:new, :create, :update] do
+  resources :custom_dresses, :only => [:create, :update] do
+    collection do
+      get :step1
+    end
+    member do
+      get :step2
+      put :success
+    end
     resources :custom_dress_images, :only => [:create]
   end
 
   root :to => 'index#show'
 
   mount Spree::Core::Engine, at: '/'
+
+  Spree::Core::Engine.routes.append do
+    namespace :admin do
+      match '/blog' => redirect('/admin/blog/promo_banners')
+      namespace :blog do
+        resources :promo_banners
+        resources :categories
+        resources :events
+        resources :authors
+        resources :posts do
+          resources :post_photos
+          resources :celebrity_photos
+        end
+        resources :celebrities do
+          resources :celebrity_photos
+        end
+      end
+    end
+  end
+
+  match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
+  match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
+
+
 end

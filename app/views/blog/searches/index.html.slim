@@ -1,0 +1,25 @@
+= render 'shared/blog_top_bar'
+
+.wrap
+  .content-sidebar
+    section.content-area
+      .search-box
+        input type="text" name="search" placeholder="Search for..." id='search_by_query' value="#{params[:q].present? ? params[:q] : ''}"
+      .blog-block-title.inline
+        .latest search
+        .block-subtitle Results
+      - if @posts.blank?
+        .empty-results Nothing found
+      - else
+        = render @posts
+
+    = render 'shared/blog_sidebar'
+
+javascript:
+  var disqus_shortname = 'fameandpartners';
+  (function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  }());

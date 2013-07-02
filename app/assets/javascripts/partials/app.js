@@ -13,7 +13,7 @@ $(function(){
   });
 
   $('.custom-dress-image-upload').fileupload({
-    url: $('form.custom-dress').attr('action') + '/custom_dress_images.json',
+    url: $('#custom-dress-image-upload').data('url'),
     dataType: 'json',
     formData: {},
     multipart: true,
@@ -43,7 +43,7 @@ $(function(){
   });
 
   $('#custom-dress-image-upload').fileupload({
-    url: $('form.custom-dress').attr('action') + '/custom_dress_images.json',
+    url: $('#custom-dress-image-upload').data('url'),
     dataType: 'json',
     formData: {},
     multipart: true,
@@ -105,7 +105,7 @@ $(function(){
 
   if ($('body.pages-home').length > 0) {
     $(window).bind('scroll', toggleFixedBar);
-  }
+  };
 
   $("#carousel").carouFredSel({
     circular: false,
@@ -115,11 +115,11 @@ $(function(){
     scroll: {
       fx: 'slide'
     },
-    prev  : { 
+    prev  : {
       button  : "#carousel-prev",
       key   : "left"
     },
-    next  : { 
+    next  : {
       button  : "#carousel-next",
       key   : "right"
     },
@@ -131,6 +131,9 @@ $(function(){
     }
   });
 
+  $(".promo-badge").delay(500).fadeIn('slow');
+
   $('#toggle-selectbox').chosen();
 
+  $('.selectbox').chosen();
 });

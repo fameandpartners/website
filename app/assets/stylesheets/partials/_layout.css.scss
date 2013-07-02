@@ -372,6 +372,28 @@ header {
   .flash {
     text-align: center;
   }
+  .page-title {
+    margin: 0 0 16px;
+    position: relative;
+    h1 {
+      text-align: left;
+      color: #414141;
+      font: 300 33px/1 $fontOne;
+      padding: 0;
+      margin-bottom: 0;
+      &:before {
+        display: none;
+      }
+    }
+    .subtitle {
+      text-align: left;
+      width: auto;
+      margin: 0;
+    }
+    .block-select {
+      margin: 16px 0 0;
+    }
+  }
 }
 
 .facebook-signup {
@@ -389,11 +411,10 @@ header {
 
 .breadcrumbs-likes {
   overflow: hidden;
-  border-bottom: 1px solid #ededed;
-  font-size: 14px;
-  line-height: 56px;
-  height: 54px;
-  font-family: $fontOne;
+  border-bottom: 1px dashed #231f20;
+  font: 400 italic 16px/36px $fontTwo;
+  height: 34px;
+  margin: 0 0 36px;
   .breadcrumbs {
     float: left;
     a {
@@ -410,45 +431,18 @@ header {
 }
 
 .content-sidebar {
-  overflow: hidden;
+  width: 100%;
+  @include clearfix();
   .content-area {
     float: left;
-    width: 742px;
+    width: 682px;
     margin: 0 0 40px;
     .image {
       margin: 0 0 6px;
     }
-    .post {
-      margin: 40px 0 0;
-      border-top: 1px solid #F9B4A8;
-      padding: 48px 0 0;
-      p {
-        line-height: 1.3;
-        margin: 18px 0 0;
-      }
-      .tag {
-        margin: 0 0 22px;
-      }
-      .author {
-        margin: 10px 0 0;
-        a {
-          color: #f9baaf;
-          text-decoration: none;
-        }
-        .name {
-          margin: 7px 0 0;
-          font-style: italic;
-        }
-      }
-      &:first-child {
-        margin: 0;
-        border-top: 0;
-        padding: 0;
-      }
-    }
   }
   .sidebar {
-    width: 328px;
+    width: 388px;
     float: right;
     .block {
       margin: 16px 0 0;
@@ -456,43 +450,17 @@ header {
         margin: 0;
       }
     }
-    .block-title {
-      color: #7a656a;
-      font-size: 24px;
-      border-bottom: 1px solid #F9B4A8;
-      letter-spacing: 0;
-      padding: 0 0 12px;
-      margin: 0 0 15px;
-    }
     .photos {
-      width: 355px;
+      width: 402px;
       li {
+        background: #fff;
         display: inline-block;
-        margin: 0 11px 11px 0;
-      }
-    }
-    .posts {
-      margin: 0 0 32px;
-      li {
-        margin: 14px 0 0;
-        a {
-          font: 300 16px/1.1 $fontOne;
-          text-decoration: none;
-          &:hover {
-            color: #f9baaf;
-            text-decoration: underline;
-          }
+        margin: 0 16px 14px 0;
+        padding: 6px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+        img {
+          display: block;
         }
-        &:first-child {
-          margin: -5px 0 0;
-        }
-      }
-    }
-    .tags {
-      width: 342px;
-      li {
-        display: inline-block;
-        margin: 0 14px 10px 0;
       }
     }
   }

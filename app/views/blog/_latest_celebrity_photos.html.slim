@@ -1,0 +1,34 @@
+.celebrity-photos
+  .blog-block-title
+    .latest Latest
+    .block-subtitle Celebrity photos
+    - if @latest_photos.present?
+      .view-all = link_to 'View more celebrity photos', blog_celebrity_photos_path
+  ul
+    - if @latest_photos.present?
+      - @latest_photos.each do |celbrity_photo|
+        li
+          .zoom
+          = link_to blog_celebrity_path(celbrity_photo.celebrity.slug), class: 'celebrity-photo' do
+            = image_tag celbrity_photo.photo.url, width: 269, height: 375, alt: ''
+            .overlay
+              .name= celbrity_photo.celebrity.fullname
+              - if celbrity_photo.post.present?
+                - if celbrity_photo.post.published?
+                  .event= celbrity_photo.post.title
+                - else
+                  .event Cooming Soon
+          .love-share
+            .love-hate
+              .icons
+                .love
+                .hate
+              .label Love it or loathe it
+            .share
+              .icons
+                .share-block
+              .label Share
+    - else
+      .empty No celebrity photos found
+
+

@@ -1,0 +1,467 @@
+.pages-posts, .pages-post {
+  background: image-url('bg-blog.jpg') 0 0 repeat;
+  height: auto;
+}
+
+#content .blog-slider {
+  border: 9px solid #fff;
+  margin: 30px 0 0;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+  .slides {
+    height: 434px;
+    overflow: hidden;
+    li {
+      float: left;
+      width: 1078px;
+      height: 434px;
+      background: image-url('slider/blog-slide.jpg') 0 0 no-repeat;
+      background-size: cover;
+      color: #fff;
+      font-style: italic;
+      font-size: 20px;
+      .inner {
+        float: right;
+        margin: 158px 0 0;
+        width: 780px;
+        text-align: center;
+      }
+      .separate {
+        width: 232px;
+        height: 1px;
+        background: #F9B4A8;
+        margin: 20px auto 20px;
+      }
+    }
+  }
+  .pagination {
+    left: auto;
+    right: 14px;
+    bottom: 14px;
+    margin: 0;
+    a {
+      margin: 0 0 0 4px;
+      width: 12px;
+      height: 12px;
+      overflow: hidden;
+      text-indent: -999px;
+      text-align: left;
+      background: #fff;
+      opacity: .24;
+      &.selected {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.blog-block-title {
+  position: relative;
+  margin: 36px 0 20px;
+  color: #333;
+  letter-spacing: 0;
+  p {
+    margin: 5px 0 0;
+  }
+  .latest {
+    margin: 0 0 0 20px;
+    text-transform: none;
+    font: 300 italic 23px/1 $fontTwo;
+  }
+  .block-subtitle {
+    text-transform: uppercase;
+    font: 400 23px/1 $fontThree;
+  }
+  &.inline {
+    margin-bottom: 6px;
+    .latest {
+      display: inline;
+      margin: 0;
+    }
+    .block-subtitle {
+      display: inline;
+    }
+  }
+}
+
+.celebrity-photos {
+  position: relative;
+  .view-all {
+    position: absolute;
+    bottom: 6px;
+    right: 0;
+    font-weight: 400;
+    font-family: $fontOne;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  ul {
+    overflow: hidden;
+    padding: 0 0 4px;
+    li {
+      float: left;
+      position: relative;
+      margin: 2px 3px 15px;
+      border: 9px solid #fff;
+      background: #fff;
+      box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+      img {
+        max-width: 250px;
+      }
+      .zoom {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        width: 27px;
+        height: 27px;
+        cursor: pointer;
+        background: image-url('icon-zoom.png') 6px 5px no-repeat #fff;
+        border-radius: 3px 0 3px 3px;
+      }
+      .celebrity-photo {
+        position: relative;
+        .overlay {
+          width: 100%;
+          padding: 17px 0;
+          text-transform: uppercase;
+          text-align: center;
+          position: absolute;
+          bottom: 37px;
+          left: 0;
+          background: rgba(255, 255, 255, .8);
+          .name {
+            font: 400 18px/1 $fontOne;
+            margin: 0 0 7px;
+          }
+          .event {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  &.columns-3 {
+    margin: 0 0 40px;
+    ul {
+      margin: 0 0 0 -22px;
+      li {
+        margin: 2px 0 20px 22px;
+        img {
+          max-width: 194px;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+.post {
+  overflow: hidden;
+  margin: 20px 0 24px;
+  padding: 19px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  h2 {
+    margin: 0 0 10px;
+    a {
+      color: #414141;
+      font: 300 26px/1.1 $fontOne;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  }
+  .post-meta {
+    overflow: hidden;
+    font: 400 10px/15px $fontOne;
+    color: #999898;
+    margin: 0 0 12px;
+    .date, .comments, .author {
+      float: left;
+      margin: 0 24px 0 0;
+    }
+    .date, .comments {
+      margin-top: 2px;
+      background: image-url('icons-blog-post.png') 0 0 no-repeat;
+      padding: 0 0 0 20px;
+    }
+    .comments {
+      background-position: 0 -15px;
+      a {
+        color: #999898;
+        text-decoration: none;
+      }
+    }
+    .author {
+      a {
+        color: #999898;
+        .avatar {
+          float: left;
+          margin: 0 8px 0 0;
+          img {
+            width: auto;
+            height: 18px;
+          }
+        }
+        .name {
+          margin-top: 2px;
+          float: left;
+        }
+      }
+    }
+  }
+  .featured-image {
+    margin: 0 0 20px;
+    position: relative;
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    #post-carousel-prev, #post-carousel-next {
+      opacity: .2;
+      @include transition((opacity) (.2s) (linear));
+    }
+    &:hover {
+      #post-carousel-prev, #post-carousel-next {
+        opacity: 1;
+      }
+    }
+  }
+  .post-content {
+    p {
+      margin: 16px 0 0;
+    }
+  }
+}
+
+#post-carousel {
+  height: 355px;
+  overflow: hidden;
+  li {
+    float: left;
+    width: 644px;
+    height: 355px;
+    overflow: hidden;
+  }
+}
+
+#post-carousel-prev, #post-carousel-next {
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 100px;
+  margin: -50px 0 0;
+  cursor: pointer;
+  background: image-url('icons-slider.png') 0 0 no-repeat;
+  z-index: 2;
+}
+
+#post-carousel-prev {
+  left: 20px;
+}
+
+#post-carousel-next {
+  right: 20px;
+  background-position: 0 -100px;
+}
+
+.page-stylists {
+  width: 1192px;
+  margin: 10px 0 0;
+  border-top: 1px solid #ddd;
+  .stylist {
+    display: inline-block;
+    width: 500px;
+    margin: 50px 94px 0 0;
+    .thumbnail {
+      float: left;
+    }
+    .stylist-info {
+      margin: 0 0 0 180px;
+      p {
+        margin: 14px 0 0;
+      }
+    }
+    .name, .favorite {
+      font: 300 24px/1 $fontOne;
+      color: #000;
+    }
+    .favorite {
+      font-size: 18px;
+      margin: 14px 0 0
+    }
+  }
+}
+
+.block-comments {
+  padding: 19px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+}
+
+.love-share {
+  overflow: hidden;
+  .label {
+    font: 400 11px/1 $fontOne;
+    text-transform: uppercase;
+  }
+  .love, .hate, .share-block {
+    width: 31px;
+    height: 30px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 0 5px 5px 0;
+  }
+  .love, .hate {
+    float: left;
+    background: image-url('icons-love-hate.png') 0 0 no-repeat;
+  }
+  .love {
+    &.active {
+      background-position: 0 -30px;
+    }
+  }
+  .hate {
+    background-position: 0 -60px;
+    &.active {
+      background-position: 0 -90px;
+    }
+  }
+  .share-block {
+    background: image-url('icon-share.png') center center no-repeat;
+  }
+  .love-hate {
+    float: left;
+    .icons {
+      overflow: hidden;
+    }
+  }
+  .share {
+    float: right;
+    .icons {
+     overflow: hidden;
+     clear: both;
+    }
+  }
+}
+
+.celebrity-modal {
+  .overlay {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    background: rgba(242, 242, 242, .9);
+  }
+  .close-modal {
+    position: absolute;
+    z-index: 103;
+    top: 15px;
+    right: 15px;
+    font: 400 17px/1 $fontOne;
+    text-transform: uppercase;
+    color: #000;
+    a {
+      text-decoration: none;
+    }
+    span {
+      font-weight: 700;
+    }
+  }
+  .celebrity-blocks {
+    width: 864px;
+    position: absolute;
+    z-index: 101;
+    left: 50%;
+    top: 100px;
+    margin: 0 0 0 -432px;
+  }
+  .celebrity-main {
+    float: left;
+    width: 576px;
+    padding: 17px;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+    .name {
+      font: 100 33px/1.1 $fontOne;
+      text-transform: uppercase;
+      margin: 0 0 20px;
+    }
+    .love-share {
+      .icons {
+        float: left;
+        clear: none;
+      }
+      .label {
+        float: left;
+        line-height: 30px;
+        margin: 0 6px 0 0;
+      }
+    }
+    .post-meta {
+      overflow: hidden;
+      font: 400 12px/15px $fontOne;
+      color: #999898;
+      margin: 0 0 12px;
+      .date {
+        float: right;
+        margin-top: 2px;
+        background: image-url('icons-blog-post.png') 0 0 no-repeat;
+        padding: 0 0 0 20px;
+      }
+    }
+  }
+  .celebrity-sidebar {
+    float: right;
+    width: 196px;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+    padding: 17px;
+    img {
+      display: block;
+      margin: 0 0 17px;
+    }
+    .blog-block-title {
+      margin: 0 0 17px;
+    }
+    .browse-more {
+      text-transform: uppercase;
+      text-align: right;
+      font: 300 11px/1 $fontOne;
+      margin: 4px 0 0;
+      a {
+        text-decoration: none;
+        color: #666;
+      }
+    }
+  }
+  .block-comments {
+    float: left;
+    width: 576px;
+    margin: 15px 0 0;
+    padding: 17px;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+  }
+}
+
+.search-box {
+  margin: 36px 0 0;
+  input {
+    width: 100%;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 8px 10px 4px;
+    font: 400 italic 22px/1.1 $fontTwo;
+    @include box-sizing(border-box);
+  }
+}
+
+.empty-results {
+  margin: 30px 0 0;
+  font: 400 italic 22px/1.1 $fontTwo;
+}

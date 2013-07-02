@@ -1,3 +1,4 @@
+# encoding: utf-8
 module ApplicationHelper
   def conditional_html(options = {}, &block)
     lang = I18n.locale
@@ -24,11 +25,39 @@ module ApplicationHelper
     end
   end
 
+  def show_breadcrumbs
+    @breadcrumbs.map do |breadcrumb|
+      link_to breadcrumb.last, breadcrumb.first
+    end.join(' » ')
+  end
+
+  def red_carpet_posts_page?
+    params[:controller] == 'blog/posts' && params[:type] == 'red_carpet' &&
+    (params[:action] == 'show' || params[:action] == 'index')
+  end
+
+  def simple_posts_page?
+    params[:controller] == 'blog/posts' && params[:type].blank? &&
+    (params[:action] == 'show' || params[:action] == 'index')
+  end
+
+  def celebrities_page?
+    params[:type].blank? && (params[:action] == 'show' || params[:action] == 'index')
+  end
+
+  def authors_page?
+    params[:controller] == 'blog/authors'
+  end
+
   def controller_action_class
     "#{controller.controller_name} #{restfull_action_name}"
   end
 
   def facebook_authentication_available?
     Spree::AuthenticationMethod.exists?(:environment => ::Rails.env, :provider => :facebook, :active => true)
+  end
+
+  def make_url prefix, text
+    "/#{prefix.join('/')}/#{text.downcase.gsub(/\s/, "_")}"
   end
 end

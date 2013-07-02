@@ -1,0 +1,113 @@
+= render 'shared/blog_top_bar'
+
+.wrap
+
+  .mini-slider.slider-block
+    .slides-overlay
+    ul.slides
+      li.slide-1
+        .inner
+          .block-title Steps to your perfect PROM dress
+          .separate
+          .desc Fame & Partners brings you the very best in high fashion for your special event.
+          = link_to 'Read more', '#', class: 'btn'
+      li
+        .inner
+          .block-title
+          .separate
+          .desc
+      li
+        .inner
+          .block-title
+          .separate
+          .desc
+      li
+        .inner
+          .block-title
+          .separate
+          .desc
+      li
+        .inner
+          .block-title
+          .separate
+          .desc
+    .pagination
+      a.selected href="#" 1
+      a href="#" 2
+      a href="#" 3
+      a href="#" 4
+      a href="#" 5
+
+  h1.block-title.dark New celebrity photos
+  .subtitle The latest collection of stunning dresses worn by our favourite celebrites.
+  .celebrity-photos
+    .view-all = link_to 'View more celebrity photos', '#'
+    ul
+      - @celebrity_photos.each do |celebrity_photo|
+        li
+          = link_to '#' do
+            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: '' if celebrity_photo.photo
+
+  .content-sidebar
+    section.content-area
+      - @red_carpet_events.each do |post|
+        article.post
+          .image
+            = image_tag post.celebrity_photos.first.photo.url, width: 742, height: 355, alt: '' if post.celebrity_photos.any?
+          h2
+            = link_to post.name, make_url([:blog, :red_carpet_events], post.name)
+          p = post.content.html_safe
+          .author
+            = link_to '#' do
+              .avatar
+                = image_tag '/avatars/original/missing.png', width: 30, height: 30, alt: ''
+              .name by #{post.user.first_name} #{post.user.last_name}
+
+    section.sidebar
+      .block
+        .block-title F&P Featured Dresses
+        .block-content
+          ul.photos
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+            li
+              = link_to '#' do
+                = image_tag 'sample/dress.jpg', width: 75, height: 108, alt: ''
+
+      .block
+        .block-title Recent Posts
+        .block-content
+          ul.posts
+            li = link_to 'Pommy ipsum round our gaff old chap lass on - 21.05.2013.', '#'
+            li = link_to 'Pommy ipsum round our gaff old chap lass on - 21.05.2013.', '#'
+            li = link_to 'Pommy ipsum round our gaff old chap lass on - 21.05.2013.', '#'
+            li = link_to 'Pommy ipsum round our gaff old chap lass on - 21.05.2013.', '#'
+
+      .block
+        .block-title Tags
+        .block-content
+          ul.tags
+            li = link_to 'Loren (2)', '#', class: 'tag'
+            li = link_to 'Loren IPSUM  (2)', '#', class: 'tag'
+            li = link_to 'AMET SIT  (3)', '#', class: 'tag'
+            li = link_to 'IPSUM AS (7)', '#', class: 'tag'
+            li = link_to 'IPSUM (2)', '#', class: 'tag'

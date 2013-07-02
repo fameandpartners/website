@@ -11,5 +11,8 @@
 //= require admin/spree_promo
 
 //= require_tree .
-//= require admin/spree_essentials
-//= require admin/spree_social
+//= require ../spree/admin/blog
+//= require ../spree/admin/blog/posts
+//= require ../spree/admin/admin
+//= require ../libs/jquery.tagsinput.min
+//= require ckeditor/init

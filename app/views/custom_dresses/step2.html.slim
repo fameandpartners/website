@@ -4,7 +4,7 @@
   h1.block-title Tell us about your dress
   h2.subtitle.big Help us visualise your dress
 
-  = form_for @custom_dress, :html => {:class => 'form centered margin-bottom custom-dress'} do |f|
+  = form_for @custom_dress, :url => success_custom_dress_path(@custom_dress), :html => {:class => 'form centered margin-bottom custom-dress'} do |f|
     - if @custom_dress.errors.present?
       ul.errors
         - @custom_dress.errors.full_messages.each do |message|
@@ -20,7 +20,7 @@
       .upload-button
         .btn.fileinput-button
           | Upload photos
-          input#custom-dress-image-upload type="file" multiple="true"
+          input#custom-dress-image-upload type="file" multiple="true" data-url=custom_dress_custom_dress_images_path(@custom_dress, :format => :json)
         .upload-limit maximum 600kb per photo
       ul.errors
 

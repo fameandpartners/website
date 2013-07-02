@@ -1,0 +1,44 @@
+= render 'shared/blog_top_bar'
+
+/.celebrity-modal
+  .overlay
+  .close-modal
+    = link_to '#' do
+      ' Close
+      span x
+  .celebrity-blocks
+    section.celebrity-main
+      .name Celebrity name
+      = image_tag 'http://placehold.it/576x770', alt: ''
+      .love-share
+        .love-hate
+          .label Love it or loathe it
+          .icons
+            .love
+            .hate
+        .share
+          .label Share
+          .icons
+            .share-block
+      .post-meta
+        .date Wednesday, May 15th, 2013
+    section.celebrity-sidebar
+      .blog-block-title
+        .latest Similar
+        .block-subtitle Prom Dresses
+      = image_tag 'http://placehold.it/196x250', alt: ''
+      = image_tag 'http://placehold.it/196x250', alt: ''
+      .browse-more = link_to 'Browse more dresses', '#'
+    section.block-comments Comments
+
+.wrap
+  = render 'blog/shared/promo_banner'
+  = render 'latest_celebrity_photos'
+  .content-sidebar
+    section.content-area
+      - @categories.each do |category|
+        .blog-block-title
+          .latest Latest
+          .block-subtitle= category.name
+          = render partial: 'latest_post_by_category', locals: {post: category.latest_post, category: category}
+    = render 'shared/blog_sidebar'

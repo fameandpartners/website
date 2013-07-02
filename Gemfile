@@ -10,6 +10,12 @@ gem 'createsend', '~> 2.5.0'
 gem 'sidekiq'
 gem 'psych'
 gem 'active_model_serializers'
+gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
+
+gem 'acts-as-taggable-on'
+gem 'rmagick'
+gem 'ckeditor'
+gem 'newrelic_rpm'
 
 # assets
 gem 'jquery-rails'

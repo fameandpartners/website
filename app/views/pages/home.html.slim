@@ -1,7 +1,18 @@
 .promo
   .wrap
-    .promo-image
-      .promo-image-inner = image_tag 'latest-image.png', width: 322, height: 212, alt: ''
+    .promo-text
+      .block-title Custom made formal dresses
+      .separate
+      .desc
+        | Co-design your very own formal dress with a fashion designer.
+        .calltoaction Get a free quote now!
+      - unless spree_user_signed_in?
+        - if facebook_authentication_available?
+          .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
+          .or or
+        .signup-link = link_to 'Get started with your email address instead', spree.signup_path(:prom => true)
+      - else
+        = link_to 'Create your Custom Dress', step1_custom_dresses_path, :class => 'btn'
 
 .home-images
   .wrap
