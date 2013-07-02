@@ -5,7 +5,7 @@ window.helpers.get_vertical_carousel_options = (options = {}) ->
   next = _.extend({ button: "#product-images-down", key: "down", items: 4 }, options.next || {})
 
   result = _.extend(
-    { direction: "up", items: 4, circular: false, infinite: false, auto: false },
+    { direction: "up", items: 4, circular: false, infinite: false, auto: false, mousewheel: 2 },
     options,
     { prev: prev },
     { next: next }
@@ -19,7 +19,7 @@ window.helpers.get_horizontal_carousel_options = (options = {}) ->
   next = _.extend({ button: "#product-items-next", key: "right", items: 4 }, options.next || {})
 
   result = _.extend(
-    { items: 4, width: 1094, circular: false, infinite: false, auto: false},
+    { items: 4, width: 1094, circular: false, infinite: false, auto: false, mousewheel: 2},
     options,
     { prev: prev },
     { next: next }

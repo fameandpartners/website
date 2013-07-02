@@ -18,7 +18,7 @@ window.helpers.quickViewer = {
           </div>
         </div>"
       $('#content').append(popupPlaceholderHtml)
-      @container = $('#content .quick-view-mode ')
+      @container = $('#content .quick-view-mode ').first().hide()
       @popupContainer = @container.find('.product-page').first().hide()
       @overlayContainer = @container.find('.overlay').first().hide()
     # init

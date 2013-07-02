@@ -25,7 +25,10 @@ $ ->
 
     toggleVisibilityClickHandler: (e) ->
       e.preventDefault()
-      shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow")
+      if shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
+        shoppingBag.hide()
+      else
+        shoppingBag.show()
 
     show: () ->
       if !shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
@@ -40,23 +43,28 @@ $ ->
     renderCart: (e, data) ->
       cartHtml = shoppingBag.cartTemplate(order: data.cart)
       shoppingBag.container.find('#shopping-bag-popup-wrapper').replaceWith(cartHtml)
+      shoppingBag.show()
       # update actions
       shoppingBag.updateElementsHandlers()
-      shoppingBag.updateCarousel()
-      shoppingBag.show()
+      shoppingBag.updateCarousel(data.id)
 
     updateElementsHandlers: () ->
       shoppingBag.container.find('.remove-item-from-cart')
         .off('click', shoppingBag.removeProductClickHandler)
         .on('click', shoppingBag.removeProductClickHandler)
 
-    updateCarousel: () ->
+    updateCarousel: (variantId) ->
+      start = $('#shopping-bag-popup').first().find(' > li')
+        .index($("li:has(a.remove-item-from-cart[data-id='#{variantId}'])"))
+      start = 0 if start < 0 # -1 : not found
+
       options = window.helpers.get_vertical_carousel_options({
-        items: 2,
+        items: 2, start: start,
         prev: { button: "#shopping-arrow-up", items: 2 },
         next: { button: "#shopping-arrow-down", items: 2 }
       })
-      shoppingBag.container.find("#shopping-bag-popup").carouFredSel(options)
+      $("#shopping-bag-popup").carouFredSel(options)
+      $("#shopping-bag-popup").trigger('slideTo', start)
   }
 
   shoppingBag.init()

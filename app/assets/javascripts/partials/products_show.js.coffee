@@ -5,7 +5,9 @@ $(".products.show").ready ->
   window.helpers.enableTabs($('.tabs'))
 
   # carousel for similar or related products
-  carousel = $("#product-items").carouFredSel(window.helpers.get_horizontal_carousel_options())
+  carousel = $("#product-items").carouFredSel(
+    window.helpers.get_horizontal_carousel_options(height: 560)
+  )
 
   # show big images from carouseled small images
   viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()
