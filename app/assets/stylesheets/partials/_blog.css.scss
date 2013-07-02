@@ -211,10 +211,20 @@
   }
   .featured-image {
     margin: 0 0 20px;
+    position: relative;
     img {
       display: block;
       max-width: 100%;
       height: auto;
+    }
+    #post-carousel-prev, #post-carousel-next {
+      opacity: .2;
+      @include transition((opacity) (.2s) (linear));
+    }
+    &:hover {
+      #post-carousel-prev, #post-carousel-next {
+        opacity: 1;
+      }
     }
   }
   .post-content {
@@ -225,9 +235,34 @@
 }
 
 #post-carousel {
+  height: 355px;
+  overflow: hidden;
   li {
     float: left;
+    width: 644px;
+    height: 355px;
+    overflow: hidden;
   }
+}
+
+#post-carousel-prev, #post-carousel-next {
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 100px;
+  margin: -50px 0 0;
+  cursor: pointer;
+  background: image-url('icons-slider.png') 0 0 no-repeat;
+  z-index: 2;
+}
+
+#post-carousel-prev {
+  left: 20px;
+}
+
+#post-carousel-next {
+  right: 20px;
+  background-position: 0 -100px;
 }
 
 .page-stylists {
