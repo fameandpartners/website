@@ -2,137 +2,32 @@
   .checkout-page
     h1.page-title Welcome to the checkout
     - steps_to_finish = @order.checkout_steps
-    = form_for @order, :url => update_checkout_path(@order.state) do |form|
-      .grid-container
-        .grid-65
-          .accordion-container
-            .accordion-title data-step='address'
-              .name 1. Personal details
-              .check-edit class='#{ steps_to_finish.include?('address') ? "" : "active" }'
-                .check
-                .edit = link_to 'Edit', '#'
-            .accordion-content data-step='address'
-            .accordion-title data-step='delivery'
-              .name 2. Billing and shipping details
-              .check-edit class='#{ steps_to_finish.include?('delivery') ? "" : "active" }'
-                .check
-                .edit = link_to 'Edit', '#'
-            .accordion-content data-step="delivery"
-              = fields_for :bill_address do |bill_form|
-                = render :partial => 'spree/address/form',
-                  :locals => {:form => bill_form, :address_type => 'billing', :address => @order.bill_address} 
-
-              = fields_for :ship_address do |bill_form|
-                = render :partial => 'spree/address/form',
-                  :locals => {:form => bill_form, :address_type => 'billing', :address => @order.bill_address} 
-
-            .accordion-title data-step="payment"
-              .name 3. Payment details
-              .check-edit.hide
-                .check
-                .edit = link_to 'Edit', '#'
-            .accordion-content data-step="payment"
-              .payment-method-details
-                .selector
-                  input type="radio" name="cards"
-                  label Secure credit card payment
-                .image = image_tag 'icons-cards.png', width: 176, height: 33, alt: 'Visa, MasterCard, Amex'
-              .grid-container
-                .grid-50
-                  .input
-                    label Credit Card Number
-                    input type="number" name="number"
-                .grid-50
-                  .input
-                    label Name on Card
-                    input type="text" name="name"
-              .grid-container.border
-                .grid-50
-                  .input
-                    label Expiry Date
-                    select name="month"
-                      option Month
-                    select name="year"
-                      option Year
-                .grid-50
-                  .input
-                    label Card Verification Number
-                    input.cvv type="number" name="name"
-                    .card-hints = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
-                    .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.
-              .payment-method-details.border
-                .selector
-                  input type="radio" name="cards"
-                  label PayPal
-                .image = image_tag 'icon-paypal.png', width: 51, height: 33, alt: 'PayPal'
-              .coupon-block.border
-                .grid-container
-                  .grid-50
-                    .input
-                      label Enter your coupon code
-                      input type="text" name="coupon"
-                  .grid-50
-                    .submit
-                      input type="button" value="Redeem"
-              .style-tips.border
-                .grid-container
-                  - @order.line_items.each do |line_item|
-                    - product = line_item.variant.product
-                    .grid-50
-                      .style-tip-block
-                        .image = product_image product, itemprop: "image", width: 56, height: 70, alt: product.name
-                        .input
-                          input type="checkbox" name="style"
-                          label
-                            ' Add Style Notes 
-                            span $4.95
-              .newsletters.border
-                .grid-container
-                  .grid-50
-                    .newsletter-block
-                      .input
-                        input type="checkbox" name="style"
-                        label Subscribe to our newsletter
-                  .grid-50
-                    .newsletter-block
-                      .input
-                        input type="checkbox" name="style"
-                        label
-                          ' Accept the 
-                          = link_to 'Terms and Conditions', terms_path
-        .grid-35
-          .checkout-summary
-            .block-name Item description
-            .shopping-bag-popup
-              ul.items-carousel
-                = render partial: "shared/line_item",
-                  collection: @order.line_items,
-                  as: :line_item,
-                  locals: {hide_remove: true}
-            ul.pricing
-              li
-                .label Subtotal
-                .desc
-                  span AUD
-                  = @order.display_item_total
-              li
-                .label Shipping
-                .desc
-                  span AUD
-                  - if @order.shipment
-                    = @order.shipment.display_amount
-                  - else
-                    ' $0.00
-              li
-                .label Promotion
-                .desc
-                  span AUD
-                  = @order.display_adjustment_total
-              li.totals
-                .label Total
-                .desc
-                  span AUD
-                  = @order.display_total
-                  .taxes Including GST
-      .place-order
-        input type="submit" value="Place order"
+    - index = 0
+    .grid-container
+      .grid-65
+        .accordion-container
+          .accordion-title data-step="registration" *{ :class => (signed_in? || current_order.user.present?) || 'active' }
+            .name
+              = index += 1
+              | . Personal details
+          - unless signed_in? || current_order.user.present?
+            .accordion-content data-step="registration"
+              = render 'spree/checkout/personal'
+          .accordion-title data-step="delivery" *{ :class => (signed_in? || current_order.user.present?) && @order.state.eql?('address') && 'active' }
+            .name
+              = index += 1
+              | . Billing and shipping details
+          .accordion-content data-step="delivery"
+            - if signed_in? || current_order.user.present?
+              = render 'spree/checkout/address' if @order.state.eql?('address')
+          .accordion-title data-step="payment" *{ :class => (signed_in? || current_order.user.present?) && @order.state.eql?('payment') && 'active' }
+            .name
+              = index += 1
+              | . Payment details
+          .accordion-content data-step="payment"
+            - if signed_in? || current_order.user.present?
+              = render 'spree/checkout/payment' if @order.state.eql?('payment')
+      .grid-35
+        = render 'spree/checkout/summary'
+    .place-order
+      input type="submit" value="Place order"
