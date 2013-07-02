@@ -4,7 +4,9 @@ class RemoveSpreeEsentialsFootprints < ActiveRecord::Migration
       spree_posts spree_post_products spree_post_categories_posts
       spree_post_categories spree_blogs
     ].each do |name|
-      drop_table name
+      if ActiveRecord::Base.connection.table_exists?(name)
+        drop_table name
+      end
     end
   end
 
