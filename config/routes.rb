@@ -14,7 +14,7 @@ FameAndPartners::Application.routes.draw do
     get '/spree_user/thanks' => 'spree/user_registrations#thanks'
   end
 
-  resources :line_items, only: [:create, :update, :destroy]
+  resources :line_items, only: [:create, :edit, :update, :destroy]
   get 'products/:id/quick_view' => 'spree/products#quick_view'
 
   # Static pages for HTML markup
@@ -36,7 +36,7 @@ FameAndPartners::Application.routes.draw do
   match '/wishlist' => 'pages#wishlist'
   match '/product' => 'pages#product'
   #match '/cart' => 'pages#cart'
-  match '/quick-view' => 'pages#quick-view'
+  #match '/quick-view' => 'pages#quick-view'
   #match '/browse' => 'pages#browse'
   #match '/checkout' => 'pages#checkout'
 

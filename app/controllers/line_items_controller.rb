@@ -14,11 +14,30 @@ class LineItemsController < Spree::StoreController
     render json: { order: CartSerializer.new(current_order).to_json }
   end
 
-  # order_id
-  # variant_id
-  # quantity
+  # edit item in cart
+  def edit
+    raise "can't find without an id" if params[:id].blank?
+
+    line_item = current_order.line_items.find(params[:id])
+    @product_variants = Products::VariantsReceiver.new(line_item.variant.product_id).available_options
+
+    render json: {
+      variants: @product_variants,
+      line_item: LineItemSerializer.new(line_item)
+    }
+  end
+
+  # id: line-item-imd
+  # params[:variant_id]
+  # params[:quantity]
   def update
-    raise 'update'
+    line_item = current_order.line_items.find(params[:id])
+
+    if line_item.update_attributes(variant_id: params[:variant_id], quantity: params[:quantity])
+      current_order.reload
+    end
+
+    render json: { order: CartSerializer.new(current_order).to_json }
   end
 
   # order_id

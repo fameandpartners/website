@@ -1,0 +1,75 @@
+<li data-id="<%= @line_item.variant_id %>" data-line-item-id="<%= @line_item.id %>" class="item grid-container">
+<div class="grid-50 description">
+  <div class="image">
+    <img width="136" height="200" src="<%= @line_item.image_small %>" itemprop="image" alt="<%= @line_item.product_name %>">
+    <div class="remove">
+      <a data-id="<%= @line_item.variant_id %>" class="remove-item-from-cart" href="#">Remove from bag</a>
+    </div>
+  </div>
+  <div class="desc">
+    <div class="name">
+      <a target="blank" href="/products/<%= @line_item.product_permalink %>"><%= @line_item.product_name %></a>
+    </div>
+    <div class="text">
+      <%= @line_item.product_description %>
+    </div>
+    <div class="wishlist">
+      <a href="#">Move to wish list</a>
+    </div>
+  </div>
+</div>
+<div class="grid-30 details">
+  <div class="static-dynamic-block">
+    <div class="static">
+      <div class="line">
+        <div class="label">
+          Color
+        </div>
+        <div class="value">
+          <div class="color <%= @line_item.product_color %>"></div>
+        </div>
+      </div>
+      <div class="line">
+        <div class="label">
+          Size
+        </div>
+        <div class="value">
+          <%= @line_item.product_size %>
+        </div>
+      </div>
+      <div class="line">
+        <div class="label">
+          Quantity
+        </div>
+        <div class="value">
+          <%= @line_item.quantity %>
+        </div>
+      </div>
+      <div class="line">
+        <div class="label">
+          Estimated Delivery
+        </div>
+        <div class="value">
+          <% if (parseInt(@line_item.count_on_hand) > 0): %>
+            1-2 weeks
+          <% else: %>
+            3-4 weeks
+          <% end %>
+        </div>
+        <div class="edit">
+          <a data-id="<%= @line_item.id %>" class="edit-link" href="#">Edit item</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="grid-20 price">
+  <div class="pricing">
+    <%= @line_item.currency %>
+    <%= @line_item.price %>
+  </div>
+  <div class="style-notes">
+    <input type="checkbox" name="note"><label>Add Style Notes <span>$4.55</span></label>
+  </div>
+</div>
+</li>

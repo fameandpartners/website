@@ -34,14 +34,14 @@ Spree::ProductsController.class_eval do
     @product_properties = @product.product_properties.includes(:property)
 
     @similar_products   = Spree::Product.limit(4)
-    @product_variants  = get_product_variants(@product)
+    @product_variants = Products::VariantsReceiver.new(@product).available_options
 
     respond_with(@product)
   end
 
   def quick_view
     #return unless request.xhr? && @product
-    @product_variants  = get_product_variants(@product)
+    @product_variants = Products::VariantsReceiver.new(@product).available_options
 
     respond_to do |format|
       format.html # default
@@ -52,32 +52,5 @@ Spree::ProductsController.class_eval do
         }
       end
     end
-  end
-
-  private
-
-  # returns [{ variant_id: 123, color: 'black', size: 12, fast_delivery: true} ]
-  def get_product_variants(product)
-    color_option  = Spree::OptionType.where(name: 'dress-color').first
-    size_option   = Spree::OptionType.where(name: 'dress-size').first
-
-    available_options = []
-    product.variants.each do |variant|
-      available_option = { id: variant.id }
-      variant.option_values.each do |option_value|
-        if option_value.option_type_id == color_option.id
-          available_option[:color] = option_value.name
-        elsif option_value.option_type_id == size_option.id
-          available_option[:size] = option_value.name
-        end
-      end
-
-      # if item in stock
-      available_option[:fast_delivery] = variant.count_on_hand > 0
-
-      available_options.push(available_option)
-    end
-
-    return available_options
   end
 end

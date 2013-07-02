@@ -7,11 +7,11 @@ window.helpers.createProductVariantsSelector = (root) ->
     selected: { color: null, size: null },
     variants: null,
 
-    init: (variants) ->
+    init: (variants, selected) ->
       variantsSelector.variants = variants
       rootElement.find(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
       rootElement.find('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
-      variantsSelector.selectFirstAvailableOptions()
+      variantsSelector.selectOptions.call(variantsSelector, selected)
       rootElement.find('#toggle-selectbox').chosen()
 
       if window.shopping_cart
@@ -77,7 +77,7 @@ window.helpers.createProductVariantsSelector = (root) ->
         deliveryText = '1-2 weeks delivery'
       else
         deliveryText = '3-4 weeks delivery'
-      rootElement.find('.price-delivery .delivery').text(deliveryText)
+      rootElement.find('.delivery').text(deliveryText)
 
     getSelectedVariant: () ->
       variant = _.findWhere(@variants, @selected)
@@ -88,9 +88,22 @@ window.helpers.createProductVariantsSelector = (root) ->
       else
         {}
 
+    selectOptions: (selected) ->
+      if selected
+        variant = _.findWhere(@variants, { id: selected.id })
+        variant or= _.findWhere(@variants, selected)
+
+      if variant
+        variantsSelector.selectSizeAndColor(variant.size, variant.color)
+      else
+        variantsSelector.selectFirstAvailableOptions()
+
     selectFirstAvailableOptions: () ->
-      rootElement.find(".colors-choser .colors .color:first").click()
-      size = rootElement.find('#toggle-selectbox option[value!=""]:first').attr('value')
+      variant = variantsSelector.variants[0]
+      variantsSelector.selectSizeAndColor(variant.size, variant.color)
+
+    selectSizeAndColor: (size, color) ->
+      rootElement.find(".colors-choser .colors .color.#{color}").click()
       rootElement.find('#toggle-selectbox').val(size)
       variantsSelector.selectSize.call(variantsSelector, size)
   }

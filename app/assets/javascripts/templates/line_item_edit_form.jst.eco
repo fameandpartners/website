@@ -1,0 +1,44 @@
+<div class="item">
+  <div class="image"></div>
+  <div class="item-details">
+    <div class="name">
+      Hello
+    </div>
+    <div class="description">
+      <%= @line_item.product_name %>
+    </div>
+    <div class="colors-choser">
+      <div class="label">
+        Choose a color:
+      </div>
+      <div class="colors">
+        <% for color in @colors: %>
+          <div data-color="<%= color %>" class="color <%= color %>"></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="size-select">
+      <div class="select-box">
+        <select id="toggle-selectbox" class="select2" name="size">
+          <option value=''>Choose your size</option>
+          <% for size in @sizes: %>
+            <option value='<%= size %>'><%= size %></option>
+          <% end %>
+        </select>
+    <div class="quantity">
+      <div class="label">
+        Quantity
+      </div>
+      <div class="value">
+        <select name="quantity" class="quantity-select">
+          <% for quantity in [0..@max_quantity]: %>
+            <option value='<%= quantity %>'><%= quantity %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+    <div class="delivery">
+      3-4 week delivery
+    </div>
+  </div>
+</div>

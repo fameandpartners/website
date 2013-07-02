@@ -19,7 +19,7 @@
         - @order.line_items.each do |line_item|
           - variant = line_item.variant
           - product = variant.product
-          li.item.grid-container data-id='#{variant.id}'
+          li.item.grid-container data-id='#{variant.id}' data-line-item-id='#{line_item.id}'
             .grid-50.description
               .image
                 = product_image product, itemprop: "image", width: 136, height: 200, alt: product.name
@@ -44,32 +44,10 @@
                   .line
                     .label Estimated Delivery
                     .value = variant.count_on_hand.to_i != 0 ? '1-2 weeks' : '3-4 weeks'
-                .dynamic
-                  .line
-                    .label Color
-                    .value
-                      .color.pink.active
-                      .color.black
-                      .color.yellow
-                  .line
-                    .label Size
-                    .value
-                      select name="size"
-                        option 1
-                        option 2
-                  .line
-                    .label Quantity
-                    .value
-                      select name="size"
-                        option 1
-                        option 2
-                  .line
-                    .label Estimated Delivery
-                    .value 3-4 weeks
-              .edit = link_to 'Edit item', '#', class: 'edit-link'
+                    .edit = link_to 'Edit item', '#', class: 'edit-link', data: { id: line_item.id }
             .grid-20.price
               .pricing
-                ' AUD
+                = current_order.currency
                 = line_item.money
               .style-notes
                 input type="checkbox" name="note"
@@ -124,7 +102,7 @@
           .or or
           .paypal paypal
 
-.modal(style='display: none;')
+.modal.edit-line-item(style='display: none;')
   .overlay
   .modal-container
     .close-lightbox

@@ -83,10 +83,3 @@ window.helpers.quickViewer = {
     window.helpers.quickViewer.container.center()
 }
 
-# helper methods
-jQuery.fn.center = () ->
-  @css("position","absolute")
-  @css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) +
-                           $(window).scrollTop()) + "px")
-  @css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
-                            $(window).scrollLeft()) + "px")
