@@ -1,5 +1,5 @@
 .top-links
-  .wrap
+  .wrap.no-overflow
     nav.fleft
       ul
         li = link_to 'Home', root_path, class: 'top-icon link-root'
@@ -12,8 +12,15 @@
           li = link_to 'Log-in', spree_login_path, class: 'link-login'
         - else
           li.loggedin
-            =' current_spree_user.full_name
-            ' is logged in
+            .dropdown-trigger
+              =' current_spree_user.full_name
+              ' is logged in
+            .dropdown-menu
+              ul
+                li = link_to 'Account settings', '#'
+                li = link_to 'Your orders', '#'
+                li = link_to 'Style profile', '#'
+                li = link_to 'My reviews', '#'
           li = link_to 'Sign out', spree_logout_path
 
 header
