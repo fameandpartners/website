@@ -44,6 +44,7 @@
       padding: 0 0 0 12px;
       border-left: 1px solid #696969;
       float: left;
+      position: relative;
       &:first-child {
         border-left: 0;
         margin-left: 0;
@@ -65,6 +66,42 @@
     &.link-signup {
       background-position: 0 -72px;
       color: #fe9f91;
+    }
+  }
+  .dropdown-trigger {
+    background: image-url('icon-top-links-dropdown.png') right center no-repeat;
+    padding: 0 16px 0 0;
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 3;
+    top: 29px;
+    left: -12px;
+    background: #333;
+    width: 100%;
+    padding: 0 12px;
+    ul {
+      margin: 0;
+      li {
+        border: 0;
+        padding: 0;
+        margin: 0 0 4px;
+        float: none;
+        a {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  .loggedin {
+    min-height: 29px;
+    &:hover {
+      .dropdown-menu {
+        display: block;
+      }
     }
   }
 }
