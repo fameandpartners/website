@@ -1,7 +1,7 @@
 li.product-item.grid-25
   .thumbnail
     .like = link_to 'Like item', '#', data: { action: 'add-to-wishlist', id: product.permalink }
-    .quick-view = link_to 'Quick view', '#', data: { action: 'quick-view', id: product.permalink }
+    .quick-view = link_to 'Quick view', product, data: { action: 'quick-view', id: product.permalink }
     = product_image product, itemprop: "image", width: 243, height: 352, alt: product.name
   .name = link_to product.name, product
   .description = product_short_description(product)

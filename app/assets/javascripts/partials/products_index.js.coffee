@@ -1,5 +1,8 @@
-$(".products").ready ->
+$(".products.index").ready ->
   productsFilter = {
+    init: () ->
+      productsFilter.updateContentHandlers()
+
     toggleFilterOptionClicked: (e) ->
       e.preventDefault()
       $container = $(e.currentTarget).closest('li')
@@ -59,8 +62,17 @@ $(".products").ready ->
         data: $.param(searchData)
         success: (html) ->
           $('.grid-75.fright').html(html)
+          productsFilter.updateContentHandlers()
       )
+
+    updateContentHandlers: () ->
+      # bind quick view
+      $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
+
   }
+
+  window.helpers.quickViewer.init()
+  productsFilter.init()
 
   $('.filters-block .filters-boxes li label').on('click', productsFilter.toggleFilterOptionClicked)
   $('.filters-block .color').on('click', productsFilter.toggleColorClicked)

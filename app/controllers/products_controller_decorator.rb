@@ -2,14 +2,6 @@ Spree::ProductsController.class_eval do
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :quick_view]
 
-#  def index
-#    @searcher = Config.searcher_class.new(params)
-#    @searcher.current_user = try_spree_current_user
-#    @searcher.current_currency = current_currency
-#    @products = @searcher.retrieve_products
-#    respond_with(@products)
-#  end
-
   def index
     @searcher = Products::ProductsFilter.new(params)
     @searcher.current_user = try_spree_current_user
@@ -48,7 +40,7 @@ Spree::ProductsController.class_eval do
       format.json do
         render json: { 
           popup_html: render_to_string(template: 'spree/products/quick_view.html.slim'),
-          variants: get_product_variants(@product)
+          variants: @product_variants
         }
       end
     end

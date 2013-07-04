@@ -7,18 +7,17 @@ module Products
     def initialize(params)
       self.current_currency = Spree::Config[:currency]
       @properties = {}
-      prepare(params)
+      prepare(HashWithIndifferentAccess.new(params))
     end
 
     def retrieve_products
       @products_scope = get_base_scope
-      curr_page = page || 1
 
       @products = @products_scope.includes([:master => :prices])
       unless Spree::Config.show_products_without_price
         @products = @products.where("spree_prices.amount IS NOT NULL").where("spree_prices.currency" => current_currency)
       end
-      @products = @products.page(curr_page).per(per_page)
+      @products.offset((page - 1) * per_page).limit(per_page)
     end
 
     def method_missing(name)
@@ -32,6 +31,9 @@ module Products
     protected
     def get_base_scope
       base_scope = Spree::Product.active
+      # has options modify already applied scopes.
+      base_scope = add_color_scope(base_scope)
+
       unless taxons.blank?
         taxons.each do |taxon_name, taxon_or_taxons|
           base_scope = base_scope.in_taxons(taxon_or_taxons)
@@ -40,7 +42,6 @@ module Products
       base_scope = get_products_conditions_for(base_scope, keywords)
       base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
       base_scope = add_search_scopes(base_scope)
-      base_scope = add_color_scope(base_scope)
 
       base_scope
     end
@@ -67,7 +68,7 @@ module Products
 
     def add_color_scope(base_scope)
       return base_scope if colors.blank?
-      base_scope.has_options(Spree::Variant.color_option_type, colors)
+      base_scope = base_scope.has_options(Spree::Variant.color_option_type, colors)
     end
 
     def prepare(params)

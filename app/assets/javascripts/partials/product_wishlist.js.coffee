@@ -6,7 +6,7 @@ $(".products, .index.show").ready ->
       productWishlist.addProduct.call(productWishlist, productId)
 
     addProduct: (productId) ->
-      console.log('invoked quick view for', productId)
+      console.log('invoked add to wishlist for', productId)
   }
 
   $("a[data-action='add-to-wishlist']").on('click', productWishlist.onClickHandler)

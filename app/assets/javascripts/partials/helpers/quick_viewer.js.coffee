@@ -58,6 +58,7 @@ window.helpers.quickViewer = {
     @popupContainer.show()
     @container.show()
     @movePopupToCenter()
+    @overlayContainer.one('click', @onCloseButtonHandler)
 
   closePopup: () ->
     @popupContainer.hide()
@@ -65,9 +66,6 @@ window.helpers.quickViewer = {
     @container.hide()
 
   updatePopupHandlers: (product_variants) ->
-    @popupContainer.find("#product-images").carouFredSel(
-      window.helpers.get_vertical_carousel_options()
-    )
     window.helpers.enableTabs($('.tabs'))
 
     # show big images from carouseled small images

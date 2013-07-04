@@ -19,7 +19,7 @@ window.helpers.get_horizontal_carousel_options = (options = {}) ->
   next = _.extend({ button: "#product-items-next", key: "right", items: 4 }, options.next || {})
 
   result = _.extend(
-    { items: 4, width: 1094, circular: false, infinite: false, auto: false, mousewheel: 2},
+    { items: 4, width: 1094, circular: false, infinite: false, auto: false},
     options,
     { prev: prev },
     { next: next }

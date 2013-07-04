@@ -15,9 +15,9 @@
             ul#product-images.carousel-pictures
               - @product.images.each do |image|
                 li
-                  - images_data =  { large: image.attachment(:large), original: image.attachment(:original) }
+                  - images_data =  { large: image.attachment.url(:large), original: image.attachment.url(:original) }
                   = link_to('#', data: images_data) do
-                    = image_tag(image.attachment, width: 83, heigth: 115, alt: '')
+                    = image_tag(image.attachment.url(:small), width: 83, heigth: 115, alt: '')
             #product-images-down.arrow-down
           .big-photo
             .zoom = link_to 'Zoom', '#'
