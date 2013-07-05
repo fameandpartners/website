@@ -19,4 +19,14 @@ module ProductsHelper
   rescue
     'no description available'
   end
+
+  def product_video(product, options = {})
+    video_id = product.property('youtube_video_id') 
+    return '' if video_id.blank?
+    video_url = "//www.youtube.com/embed/#{video_id}"
+    height  = options[:height] || 590
+    width   = options[:width] || 600
+
+    return %Q{<iframe width="#{width}" height="#{height}" src="#{video_url}" frameborder="0" allowfullscreen></iframe>}
+  end
 end

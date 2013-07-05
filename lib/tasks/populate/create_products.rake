@@ -73,7 +73,7 @@ def add_celebrity_properties(product, index)
 
   product.set_property('inspiration', index == 1 ? 'Alexa Chung' : 'Camilla Bell')
   product.set_property('inspiration_photo', image_path)
-  product.set_property('inspiration_video', 'http://www.youtube.com/watch?v=foaOYiXq7jY&feature=youtu.be')
+  product.set_property('youtube_video_id', 'foaOYiXq7jY')
 end
 
 # helper
