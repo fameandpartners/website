@@ -1,61 +1,31 @@
 class Spree::Admin::Blog::PostPhotosController < Spree::Admin::Blog::BaseController
+  respond_to :json
 
   def index
-    @post        = Blog::Post.find(params[:post_id])
-    @post_photos = @post.post_photos.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])
-  end
-
-  def new
-    @post            = Blog::Post.find(params[:post_id])
-    @blog_post_photo = @post.post_photos.build
-  end
-
-  def edit
-    @post            = Blog::Post.find(params[:post_id])
-    @blog_post_photo = @post.post_photos.find(params[:id])
+    if params[:post_id] == 'new_post'
+      post_photos = Blog::PostPhoto.where(user_id: current_spree_user.id, post_id: nil)
+    else
+      post        = Blog::Post.find(params[:post_id])
+      post_photos = post.post_photos
+    end
+    render json: post_photos.map{|upload| upload.to_jq_upload }
   end
 
   def create
-    attrs = params['blog_post_photo']
-    @post = Blog::Post.find(params[:post_id])
-    @blog_post_photo = @post.post_photos.build(attrs)
-    @blog_post_photo.user = current_spree_user
-
-    if @blog_post_photo.valid?
-      @blog_post_photo.save
-      if attrs['primary'] == '1'
-        @post.primary_photo_id = @blog_post_photo.id
-        @post.save
-      end
-      redirect_to action: :index
+    if params[:post_id] != 'new_post'
+      post = Blog::Post.find(params[:post_id])
+      post_photo = post.post_photos.build(photo: (params['blog_post_photo'] || {})['photo'])
     else
-      render action: :new
+      post_photo = Blog::PostPhoto.new.build(photo: (params['blog_post_photo'] || {})['photo'])
     end
-  end
-
-  def update
-    attrs = params['blog_post_photo']
-    @post = Blog::Post.find(params[:post_id])
-    @blog_post_photo = @post.post_photos.find(params[:id])
-    @blog_post_photo.assign_attributes(attrs)
-
-    if @blog_post_photo.valid?
-      @blog_post_photo.save
-      if attrs['primary'] == '1'
-        @post.primary_photo_id = @blog_post_photo.id
-        @post.save
-      end
-      redirect_to action: :index
-    else
-      render action: :edit
-    end
+    post_photo.user = current_spree_user
+    post_photo.save
+    render json: {files: [post_photo.to_jq_upload]}, status: :created
   end
 
   def destroy
-    @post = Blog::Post.find(params[:post_id])
-    @blog_post_photo = @post.post_photos.find(params[:id])
-    @blog_post_photo.destroy
-    redirect_to action: :index
+    Blog::PostPhoto.find(params[:id]).destroy
+    render json: true
   end
 
   private

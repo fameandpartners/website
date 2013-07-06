@@ -4,7 +4,7 @@
 
 - content_for :page_actions do
   li
-    = button_link_to "New Post", new_admin_blog_post_path, :icon => 'icon-plus', :id => 'admin_new_post'
+    = button_link_to "New Post", new_simple_post_admin_blog_posts_path, :icon => 'icon-plus', :id => 'admin_new_post'
 
 - if @posts.present?
   table.index.blog_posts

@@ -3,8 +3,7 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
 
   def index
     @posts = Blog::Post.page(params[:page]).
-             per(params[:per_page] || Spree::Config[:orders_per_page]).
-             order('created_at desc')
+             per(params[:per_page] || Spree::Config[:orders_per_page]).simple_posts
   end
 
   def new
@@ -19,12 +18,15 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
 
   def create
     attrs = params['blog_post']
-    @blog_post = Blog::Post.new(attrs)
-    @blog_post.user = current_spree_user
-    @blog_post.slug = slug_from_name(@blog_post.title.to_s) if @blog_post.slug.blank?
+    @blog_post              = Blog::Post.new(attrs)
+    @blog_post.post_type_id = Blog::Post::PostTypes::SIMPLE
+    @blog_post.user         = current_spree_user
+    @blog_post.slug         = slug_from_name(@blog_post.title.to_s) if @blog_post.slug.blank?
 
     if @blog_post.valid?
       @blog_post.save
+      Blog::PostPhoto.where(user_id: current_spree_user.id, post_id: nil).update_all({post_id: @blog_post.id})
+      @blog.primary_photo_id = @blog.post_photos.first.id
       redirect_to action: :index
     else
       prepare_form_relations
@@ -38,7 +40,11 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
     @blog_post.assign_attributes(attrs)
 
     if @blog_post.valid?
+      if @blog_post.post_photos.present? && @blog_post.primary_photo.blank?
+        @blog_post.primary_photo_id = @blog_post.post_photos.first.id
+      end
       @blog_post.save
+
       redirect_to action: :index
     else
       prepare_form_relations

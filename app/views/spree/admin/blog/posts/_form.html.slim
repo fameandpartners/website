@@ -14,12 +14,6 @@
       br
       = f.error_message_on :title
 
-    = f.field_container :tag_list do
-      = f.label :tag_list, "Tags"
-      br
-      = f.text_field :tag_list, class: 'text', size: 50
-      br
-      = f.error_message_on :title
 
     = f.field_container :slug do
       = f.label :slug, "Slug"
@@ -28,19 +22,19 @@
       br
       = f.error_message_on :slug
 
+    = f.field_container :tag_list do
+      = f.label :tag_list, "Tags"
+      br
+      = f.text_field :tag_list, class: 'text', size: 50
+      br
+      = f.error_message_on :title
+
     = f.field_container :post_type_id do
       = f.label :post_type_id, "Type"
       br
       = f.select :post_type_id, options_from_collection_for_select(Blog::PostType.all, :id, :name, f.object.post_type_id), {}, class: 'select2'
       br
       = f.error_message_on :post_type_id
-
-    = f.field_container :event_id do
-      = f.label :event_id, "Event"
-      br
-      = f.select :event_id, options_from_collection_for_select(Blog::Event.all, :id, :name, f.object.post_type_id), {}, class: 'select2'
-      br
-      = f.error_message_on :event_id
 
     = f.field_container :category_id do
       = f.label :category_id, "Category"
@@ -64,6 +58,9 @@
     = f.field_container :submit do
       = f.submit
       br
+
+= render 'file_upload'
+
 
 javascript:
   window.initBlogPostForm();
