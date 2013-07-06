@@ -14,7 +14,8 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
   validates                     :celebrity_slug, presence: true
   validates_attachment_presence :photo
 
-  scope :latest, where("published_at IS NOT NULL").order("published_at desc").limit(4)
+  scope :latest, includes(:celebrity, :post).where("published_at IS NOT NULL").limit(4)
+
   scope :with_posts, includes(:post)
 
   def like!(user)

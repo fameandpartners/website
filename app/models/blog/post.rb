@@ -26,8 +26,9 @@ class Blog::Post < ActiveRecord::Base
   validates :slug, uniqueness: true
   validates :event, presence: true, if: :red_carpet?
 
+  scope :red_carpet, where(post_type_id: PostTypes::RED_CARPET)
   scope :published, where('published_at IS NOT NULL').order('published_at desc')
-  scope :sidebar, published.limit(20)
+  scope :sidebar, red_carpet.published.limit(20)
 
   class << self
     def find_by_query(term)
