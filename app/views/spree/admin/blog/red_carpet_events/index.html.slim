@@ -4,41 +4,39 @@
 
 - content_for :page_actions do
   li
-    = button_link_to "New Post", new_admin_blog_post_path, :icon => 'icon-plus', :id => 'admin_new_post'
+    = button_link_to "New Post", new_admin_blog_red_carpet_event_path, :icon => 'icon-plus', :id => 'admin_new_post'
 
 - if @posts.present?
-  table.index.blog_posts
+  table.index.blog_red_carpet_posts
     thead
       tr
         th Title
         th Occurred at / Publish Date
-        th Category
         th State
         th Created At
         th.actions
     tbody
       - @posts.each do |post|
         tr
-          td= link_to post.title, edit_admin_blog_post_path(post)
+          td= link_to post.title, edit_admin_blog_red_carpet_event_path(post)
           td= post.occured_at_formatted
-          td= post.category.name
           - if can? :toggle_publish, post
-            td[data-url="#{toggle_publish_admin_blog_post_path(post)}"]
+            td[data-url="#{toggle_publish_admin_blog_red_carpet_event_path(post)}"]
               = check_box_tag :published, '', post.published?
           - else
             td= post.state
           td= post.created_at_formatted
           td
-            = link_to "", edit_admin_blog_post_path(post), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
+            = link_to "", edit_admin_blog_red_carpet_event_path(post), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
             | |
-            = link_to "", admin_blog_post_path(post), method: :delete,  confirm: "Are you sure?", class: "icon_link with-tip icon-remove no-text", "data-action" => "delete"
+            = link_to "", admin_blog_red_carpet_event_path(post), method: :delete,  confirm: "Are you sure?", class: "icon_link with-tip icon-remove no-text", "data-action" => "delete"
 - else
   = render partial: "spree/admin/shared/no_items_found"
 = paginate @posts
 
 javascript:
   $(function() {
-    $('table.index.blog_posts input[type=checkbox]').on('click', function(e) {
+    $('table.index.blog_red_carpet_posts input[type=checkbox]').on('click', function(e) {
       url = $(e.target).parent().attr('data-url');
       $.ajax({method: 'PUT', url: url});
     });

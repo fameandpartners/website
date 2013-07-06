@@ -1,4 +1,5 @@
-= form_for([:admin, @blog_post], html: { multipart: true }) do |f|
+- url = @blog_post.persisted? ? admin_blog_red_carpet_event_path(@blog_post.id) : admin_blog_red_carpet_events_path
+= form_for(@blog_post, url: url, html: { multipart: true }) do |f|
   fieldset.no-border-top
 
     - if @blog_post.primary_photo.present?
@@ -22,24 +23,17 @@
       br
       = f.error_message_on :slug
 
-    = f.field_container :category_id do
-      = f.label :category_id, "Category"
-      br
-      = f.select :category_id, options_from_collection_for_select(@categories, :id, :name, f.object.category_id), {}, class: 'select2'
-      br
-      = f.error_message_on :category_id
-
-    = f.field_container :occured_at do
-      = f.label :occured_at, "Occured at/Publish Date "
-      = f.error_message_on :occured_at
-      = f.text_field :occured_at, :value => datepicker_field_value(@blog_post.occured_at), :class => 'datepicker'
-
     = f.field_container :tag_list do
       = f.label :tag_list, "Tags"
       br
       = f.text_field :tag_list, class: 'text', size: 50
       br
       = f.error_message_on :title
+
+    = f.field_container :occured_at do
+      = f.label :occured_at, "Occured at/Publish Date "
+      = f.error_message_on :occured_at
+      = f.text_field :occured_at, :value => datepicker_field_value(@blog_post.occured_at), :class => 'datepicker'
 
     = f.field_container :body do
       = f.label :body, "Body"

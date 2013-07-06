@@ -2,7 +2,7 @@ class Spree::Admin::Blog::PostPhotosController < Spree::Admin::Blog::BaseControl
   respond_to :json
 
   def index
-    if params[:post_id] == 'new_post'
+    if params[:post_id].blank?
       post_photos = Blog::PostPhoto.where(user_id: current_spree_user.id, post_id: nil)
     else
       post        = Blog::Post.find(params[:post_id])
@@ -12,11 +12,11 @@ class Spree::Admin::Blog::PostPhotosController < Spree::Admin::Blog::BaseControl
   end
 
   def create
-    if params[:post_id] != 'new_post'
+    if params[:post_id].present?
       post = Blog::Post.find(params[:post_id])
       post_photo = post.post_photos.build(photo: (params['blog_post_photo'] || {})['photo'])
     else
-      post_photo = Blog::PostPhoto.new.build(photo: (params['blog_post_photo'] || {})['photo'])
+      post_photo = Blog::PostPhoto.new(photo: (params['blog_post_photo'] || {})['photo'])
     end
     post_photo.user = current_spree_user
     post_photo.save

@@ -1,7 +1,7 @@
 = content_for :sub_menu do
   ul#sub_nav.inline-menu[data-hook="admin_blog_sub_tabs"]
     = tab :posts, url: admin_blog_posts_path
-    = tab :red_carpet_events, url: admin_blog_events_path
+    = tab :red_carpet_events, url: admin_blog_red_carpet_events_path
     = tab :celebrities, url: admin_blog_celebrities_path
     - if can? :manage, Blog::PromoBanner
       = tab :promo_banners, url: admin_blog_promo_banners_path

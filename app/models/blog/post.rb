@@ -28,6 +28,7 @@ class Blog::Post < ActiveRecord::Base
   scope :published, where('published_at IS NOT NULL').order('published_at desc')
   scope :sidebar, red_carpet.published.limit(20)
   scope :simple_posts, order('created_at desc').where(post_type_id: PostTypes::SIMPLE)
+  scope :red_carpet_posts, order('created_at desc').where(post_type_id: PostTypes::RED_CARPET)
 
   class << self
     def find_by_query(term)

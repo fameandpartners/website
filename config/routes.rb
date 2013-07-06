@@ -105,15 +105,17 @@ FameAndPartners::Application.routes.draw do
         resources :assets, only: [:create, :destroy, :index]
 
         resources :post_photos
-        resources :posts, only: [:create, :edit, :update, :index, :destroy] do
+
+        resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
           member do
             put :toggle_publish
           end
-          collection do
-            get 'new/simple', action: 'new', defaults: {type: 'simple'}, as: :new_simple_post
-            get 'new/red_carpet', action: 'new', defaults: {type: 'red_carpet'}, as: :new_red_carpet_post
+        end
+
+        resources :red_carpet_events, only: [:new, :create, :edit, :update, :index, :destroy] do
+          member do
+            put :toggle_publish
           end
-          resources :celebrity_photos
         end
 
         resources :celebrities do
