@@ -9,7 +9,7 @@ class Blog::PostsController < BlogBaseController
 
   def show
     @post = post_scope.includes(
-      :user, :event, :post_photos, :celebrity_photos, :category, :celebrities
+      :user, :post_photos, :celebrity_photos, :category, :celebrities
     ).find_by_slug!(params[:post_slug])
     generate_breadcrumbs_for_show
   end
