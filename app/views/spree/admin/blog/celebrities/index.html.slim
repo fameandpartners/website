@@ -17,7 +17,7 @@
     tbody
       - @celebrities.each do |celebrity|
         tr.celebrity
-          td= celebrity.first_name
+          td= link_to celebrity.first_name, edit_admin_blog_celebrity_path(celebrity)
           td= celebrity.last_name
           - if can? :toggle_featured, celebrity
             td[data-url="#{toggle_featured_admin_blog_celebrity_path(celebrity)}"]
