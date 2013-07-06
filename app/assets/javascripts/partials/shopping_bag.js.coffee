@@ -47,6 +47,7 @@ $ ->
       # update actions
       shoppingBag.updateElementsHandlers()
       shoppingBag.updateCarousel(data.id)
+      $('a.shopping-bag-toggler .counter').html(data.cart.line_items.length)
 
     updateElementsHandlers: () ->
       shoppingBag.container.find('.remove-item-from-cart')

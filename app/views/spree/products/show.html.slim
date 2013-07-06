@@ -33,14 +33,13 @@ javascript:
         #inspiration.tab-content style="display: none;"
           .tab-content-inner
             .big-photo
-              = image_tag "file://" + @product.property('inspiration_photo')
+              = inspiration_image(@product)
             .inspiration
               = @product.property('inspiration')
 
         .share-buttons Share buttons
     .grid-45
       .product-info
-        .name = @product.name
         .desc = @product.property('short_description')
         .price-delivery
           .price.sale
