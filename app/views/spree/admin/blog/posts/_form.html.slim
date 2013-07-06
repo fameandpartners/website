@@ -1,10 +1,10 @@
 = form_for([:admin, @blog_post], html: { multipart: true }) do |f|
   fieldset.no-border-top
 
-    = f.field_container :photo do
-      = f.label :photo, "Primary Photo"
-      br
-        - if @blog_post.primary_photo.present?
+    - if @blog_post.primary_photo.present?
+      = f.field_container :photo do
+        = f.label :photo, "Primary Photo"
+        br
           = image_tag @blog_post.primary_photo.photo.url, height: '300'
 
     = f.field_container :title do
@@ -50,14 +50,14 @@
       = f.error_message_on :category_id
 
     = f.field_container :occured_at do
-      = f.label :occured_at, "Occured at"
+      = f.label :occured_at, "Occured at/Publish Date"
       = f.error_message_on :occured_at
       = f.text_field :occured_at, :value => datepicker_field_value(@blog_post.occured_at), :class => 'datepicker'
 
     = f.field_container :body do
       = f.label :body, "Body"
       br
-      = f.text_area :body, class: 'text'
+      = f.cktext_area :body, :ckeditor => {:uiColor => "#5498da", :toolbar => "mini"}
       br
       = f.error_message_on :body
 

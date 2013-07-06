@@ -48,6 +48,7 @@ gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-3-stable'
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
+gem 'spree-ckeditor'
 
 group :production do
   gem 'unicorn'
