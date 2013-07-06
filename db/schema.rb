@@ -862,6 +862,23 @@ ActiveRecord::Schema.define(:version => 20130701113447) do
     t.datetime "updated_at",                            :null => false
   end
 
+  create_table "style_reports", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.float    "glam"
+    t.float    "girly"
+    t.float    "classic"
+    t.float    "edgy"
+    t.float    "bohemian"
+    t.float    "sexiness"
+    t.float    "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "colors"
+    t.string   "brands"
+  end
+
+  add_index "style_reports", ["spree_user_id"], :name => "index_style_reports_on_spree_user_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
