@@ -21,7 +21,7 @@
       (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 
-  javascript:
-    $(function() {
-      window.initInfiniteScroll("#{request.path}", #{@posts_count}, '.content-area');
-    });
+javascript:
+  $(function() {
+    window.initInfiniteScroll("#{request.path}", #{@posts_count});
+  });

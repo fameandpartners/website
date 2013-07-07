@@ -1,7 +1,16 @@
 class Blog::CelebritiesController < BlogBaseController
+  CELEBRITIES_PER_PAGE = 10
+
   def index
-    @celebrities = Blog::Celebrity.all
-    generate_breadcrumbs_for_index
+    @celebrities_count = Blog::Celebrity.count
+    @celebrities = Blog::Celebrity.page(params[:page]).per(CELEBRITIES_PER_PAGE)
+    respond_to do |format|
+      format.js do
+      end
+      format.html do
+        generate_breadcrumbs_for_index
+      end
+    end
   end
 
   def show

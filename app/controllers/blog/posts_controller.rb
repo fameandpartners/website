@@ -6,7 +6,7 @@ class Blog::PostsController < BlogBaseController
 
   def index
     @posts_count = post_scope.count
-    @posts = post_scope.page(params[:page]).per(POSTS_PER_PAGE || Spree::Config[:orders_per_page])
+    @posts = post_scope.page(params[:page]).per(POSTS_PER_PAGE)
     respond_to do |format|
       format.js do
       end
