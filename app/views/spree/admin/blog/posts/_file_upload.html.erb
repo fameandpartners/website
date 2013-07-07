@@ -8,7 +8,7 @@
         <span class="btn btn-success fileinput-button">
           <i class="icon-plus icon-white"></i>
           <span>Add files...</span>
-          <%= f.file_field :photo %>
+          <%= f.file_field :photo, multiple: 'multiple' %>
         </span>
         <button type="submit" class="btn btn-primary start">
           <i class="icon-upload icon-white"></i>
@@ -122,6 +122,7 @@
           acceptFileTypes: /(\.|\/)(jpe?g|png)$/i
         }
         );
+
       //
       // Load existing files:
       $.getJSON($('#fileupload').prop('action'), function (files) {

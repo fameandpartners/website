@@ -12,15 +12,18 @@ class Spree::Admin::Blog::PostPhotosController < Spree::Admin::Blog::BaseControl
   end
 
   def create
-    if params[:post_id].present?
-      post = Blog::Post.find(params[:post_id])
-      post_photo = post.post_photos.build(photo: (params['blog_post_photo'] || {})['photo'])
-    else
-      post_photo = Blog::PostPhoto.new(photo: (params['blog_post_photo'] || {})['photo'])
+    photos = Array.wrap((params['blog_post_photo'] || {})['photo']).map do |photo_attrs|
+      if params[:post_id].present?
+        post = Blog::Post.find(params[:post_id])
+        post_photo = post.post_photos.build(photo: photo_attrs)
+      else
+        post_photo = Blog::PostPhoto.new(photo: photo_attrs)
+      end
+      post_photo.user = current_spree_user
+      post_photo.save
+      post_photo
     end
-    post_photo.user = current_spree_user
-    post_photo.save
-    render json: {files: [post_photo.to_jq_upload]}, status: :created
+    render json: {files: photos.map {|post_photo| post_photo.to_jq_upload}}, status: :created
   end
 
   def destroy

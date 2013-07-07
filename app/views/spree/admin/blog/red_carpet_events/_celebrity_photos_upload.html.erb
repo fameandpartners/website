@@ -8,7 +8,7 @@
         <span class="btn btn-success fileinput-button">
           <i class="icon-plus icon-white"></i>
           <span>Add files...</span>
-          <%= f.file_field :photo %>
+          <%= f.file_field :photo, multiple: 'multiple' %>
         </span>
         <button type="submit" class="btn btn-primary start">
           <i class="icon-upload icon-white"></i>
@@ -134,13 +134,19 @@
       $('.celebrity-select').live('change', function(e) {
         $this = $(this);
         id = $this.parent().attr('data-id');
+        url = "/admin/blog/celebrity_photos/" + id + "/assign_celebrity.json"
+        celebrity_id = $this.val();
         $.ajax(
           {
             method: 'PUT',
-            url: "/admin/blog/celebrity_photos/" + id + "/assign_celebrity.json",
-            data: {celebrity_id: $this.val()}
+            url: url,
+            data: {celebrity_id: celebrity_id},
+            success: function(data) {
+              return false;
+            }
           }
         );
+        return false;
       });
 
   });
