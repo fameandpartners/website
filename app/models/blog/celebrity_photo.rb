@@ -14,7 +14,7 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
   scope :assigned, where('celebrity_id IS NOT NULL')
   scope :with_posts, includes(:post)
 
-  before_create :randomize_file_name
+  before_post_process :randomize_file_name
 
   class << self
     def latest

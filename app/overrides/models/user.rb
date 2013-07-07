@@ -1,6 +1,6 @@
 Spree::User.class_eval do
   attr_accessible :avatar, :slug, :description
-  has_attached_file :photo
+  has_attached_file :avatar, styles: { small: "160x160#"}
 
   validates :first_name, :last_name, :slug, :description, presence: true, if: :blog_moderator?
   validates :slug, uniqueness: true, if: :blog_moderator?
@@ -9,6 +9,7 @@ Spree::User.class_eval do
   before_validation :generate_slug
 
   has_many :posts, class_name: Blog::Post
+  before_post_process :randomize_file_name
 
   def fullname
     [first_name, last_name].reject(&:blank?).join(' ')
@@ -38,4 +39,13 @@ Spree::User.class_eval do
       ['Blog Moderator', 'Blog Admin'].include?(role.name)
     end
   end
+
+
+  private
+
+  def randomize_file_name
+    extension = File.extname(avatar_file_name).downcase
+    self.avatar.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
+  end
+
 end
