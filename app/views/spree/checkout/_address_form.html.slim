@@ -2,10 +2,10 @@
 div.inner data-hook="#{address_type}_inner"
   .input id="#{address_id}firstname"
     = form.label :firstname, t(:first_name)
-    = form.text_field :firstname, :class => 'required'
+    = form.text_field :firstname, :class => 'required', :value => form.object.firstname.present? ? form.object.firstname : @order.user.first_name
   .input id="#{address_id}lastname"
     = form.label :lastname, t(:last_name)
-    = form.text_field :lastname, :class => 'required'
+    = form.text_field :lastname, :class => 'required', :value => form.object.lastname.present? ? form.object.lastname : @order.user.last_name
   - if Spree::Config[:company]
     .input id="#{address_id}company"
       = form.label :company, t(:company)

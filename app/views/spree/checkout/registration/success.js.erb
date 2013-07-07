@@ -1,4 +1,6 @@
-$('.accordion-title[data-step="registration"]').removeClass('active');
-$('.accordion-content[data-step="registration"]').slideUp();
-$('.accordion-title[data-step="delivery"]').addClass('active');
-$('.accordion-content[data-step="delivery"]').slideDown();
+$('.accordion-title[data-step="personal"]').removeClass('active');
+$('.accordion-content[data-step="personal"]').slideUp();
+$('.accordion-title[data-step="address"]').addClass('active');
+$('.accordion-content[data-step="address"]').html('<%=j render('spree/checkout/address') %>');
+$('.accordion-content[data-step="address"]').slideDown();
+toggleBillingAddress();

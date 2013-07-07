@@ -98,7 +98,8 @@
       .continue-buy.grid-container
         .grid-70 = link_to 'Continue shopping', products_path, class: 'continue-shopping'
         .grid-25.prefix-5
-          = link_to 'Buy now', checkout_path, class: 'buy-now'
+          = form_for @order, url: update_cart_path do |form|
+            = form.button :checkout, name: 'checkout', class: 'buy-now'
           .or or
           .paypal paypal
 

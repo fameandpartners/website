@@ -1,4 +1,4 @@
-= form_for @order, :url => update_checkout_path(@order.state) do |form|
+= form_for @order, :url => update_checkout_path(@order.state), :remote => true do |form|
   = render :partial => 'spree/shared/error_messages', :locals => { :target => @order }
   .grid-container
     .grid-50

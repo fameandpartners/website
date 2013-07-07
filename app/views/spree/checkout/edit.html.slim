@@ -1,33 +1,42 @@
 .wrap
   .checkout-page
     h1.page-title Welcome to the checkout
-    - steps_to_finish = @order.checkout_steps
-    - index = 0
+    ruby:
+      index = 0
+      if !signed_in?
+        if current_order.user.present?
+          active = @order.state
+        else
+          active = 'personal'
+        end
+       else
+        if @order.state.eql?('cart')
+          active = 'address'
+        else
+          active = @order.state
+        end
+      end
     .grid-container
       .grid-65
         .accordion-container
-          .accordion-title data-step="registration" *{ :class => (signed_in? || current_order.user.present?) || 'active' }
-            .name
-              = index += 1
-              | . Personal details
-          - unless signed_in? || current_order.user.present?
-            .accordion-content data-step="registration"
-              = render 'spree/checkout/personal'
-          .accordion-title data-step="delivery" *{ :class => (signed_in? || current_order.user.present?) && @order.state.eql?('address') && 'active' }
+          - unless signed_in?
+            .accordion-title data-step="personal" *{ :class => active.eql?('personal') && 'active' }
+              .name
+                = index += 1
+                | . Personal details
+            .accordion-content data-step="personal" *{ :class => !active.eql?('personal') && 'hide' }
+              = render 'spree/checkout/personal' if active.eql?('personal')
+          .accordion-title data-step="address" *{ :class => active.eql?('address') && 'active' }
             .name
               = index += 1
               | . Billing and shipping details
-          .accordion-content data-step="delivery"
-            - if signed_in? || current_order.user.present?
-              = render 'spree/checkout/address' if @order.state.eql?('address')
-          .accordion-title data-step="payment" *{ :class => (signed_in? || current_order.user.present?) && @order.state.eql?('payment') && 'active' }
+          .accordion-content data-step="address" *{ :class => active.eql?('address') && 'hide' }
+            = render 'spree/checkout/address' if active.eql?('address')
+          .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }
             .name
               = index += 1
               | . Payment details
           .accordion-content data-step="payment"
-            - if signed_in? || current_order.user.present?
-              = render 'spree/checkout/payment' if @order.state.eql?('payment')
+            = render 'spree/checkout/payment' if active.eql?('payment')
       .grid-35
         = render 'spree/checkout/summary'
-    .place-order
-      input type="submit" value="Place order"
