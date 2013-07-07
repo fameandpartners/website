@@ -1,25 +1,42 @@
 class Blog::SearchesController < BlogBaseController
+  POSTS_PER_PAGE = 10
   layout 'spree/layouts/spree_application'
   respond_to :html
 
   def by_query
     term = params[:q].to_s.downcase.strip
     @posts = Blog::Post.find_by_query(term)
-    render :index
-  end
-
-  def by_event
-    @event = Blog::Event.find_by_slug!(params[:event])
-    @posts = @event.posts.includes(:category, :author, :event, :post_photos)
+    @posts_count = @posts.count
+    @posts = @posts.page(params[:page]).per(POSTS_PER_PAGE)
+    respond_to do |format|
+      format.js do
+      end
+      format.html do
+        generate_breadcrumbs_for_index
+      end
+    end
     render :index
   end
 
   def by_tag
     @posts = Blog::Post.tagged_with(Array.wrap(params[:tag].to_s), match_all: true)
+    @posts_count = @posts.count
+    @posts = Blog::Post.tagged_with(Array.wrap(params[:tag].to_s), match_all: true).page(params[:page]).per(POSTS_PER_PAGE)
+
+    generate_breadcrumbs_for_index
+    respond_to do |format|
+      format.js do
+      end
+      format.html do
+        generate_breadcrumbs_for_index
+      end
+    end
   	render :index
   end
 
-  def by_events
-    redirect_to blog_path
+  private
+
+  def generate_breadcrumbs_for_index
+    @breadcrumbs = [[root_path, 'Home'], [request.path, 'Search']]
   end
 end
