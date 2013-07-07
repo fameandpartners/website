@@ -1,6 +1,5 @@
 class Blog::CelebrityPhoto < ActiveRecord::Base
-  attr_accessor :publish, :post_slug, :celebrity_slug
-  attr_accessible :photo, :post_slug, :celebrity_slug, :publish
+  attr_accessible :photo
 
   belongs_to :celebrity, class_name: Blog::Celebrity
   belongs_to :post, class_name: Blog::Post
@@ -10,8 +9,6 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
 
   acts_as_taggable
 
-  validates                     :celebrity_id, presence: true
-  validates                     :celebrity_slug, presence: true
   validates_attachment_presence :photo
 
   scope :latest, includes(:celebrity, :post).where("published_at IS NOT NULL").limit(4)
@@ -63,5 +60,18 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
     else
       'not published'
     end
+  end
+
+  def to_jq_upload
+    {
+      "name" => read_attribute(:photo_file_name),
+      "size" => read_attribute(:photo_file_size),
+      "thumbnail_url" => photo.url,
+      "url" => photo.url,
+      "delete_url" => "/admin/blog/celebrity_photos/#{self.id}",
+      "delete_type" => "DELETE",
+      "id" => self.id,
+      "celebrity_id" => celebrity.try(:id)
+    }
   end
 end

@@ -105,6 +105,11 @@ FameAndPartners::Application.routes.draw do
         resources :assets, only: [:create, :destroy, :index]
 
         resources :post_photos
+        resources :celebrity_photos do
+          member do
+            put :assign_celebrity
+          end
+        end
 
         resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
           member do
@@ -122,7 +127,6 @@ FameAndPartners::Application.routes.draw do
           member do
             put :toggle_featured
           end
-          resources :celebrity_photos
         end
       end
     end

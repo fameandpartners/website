@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Upload file</h2>
+  <h2>Red Carpet Event Photos</h2>
   <%= form_for Blog::PostPhoto.new, url: admin_blog_post_photos_path(post_id: @blog_post.id), :html => { :multipart => true, :id => "fileupload"  } do |f| %>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
@@ -119,7 +119,7 @@
         {
           autoUpload: true,
           maxFileSize: 5000000,
-          acceptFileTypes: /(\.|\/)(jpe?g|png)$/i
+          acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
         }
         );
       //
@@ -127,7 +127,6 @@
       $.getJSON($('#fileupload').prop('action'), function (files) {
         var fu = $('#fileupload').data('blueimpFileupload'), template;
         fu._adjustMaxNumberOfFiles(-files.length);
-        console.log(files);
         template = fu._renderDownload(files)
           .appendTo($('#fileupload .files'));
         // Force reflow:

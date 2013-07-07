@@ -8,10 +8,12 @@ class Spree::Admin::Blog::RedCarpetEventsController < Spree::Admin::Blog::BaseCo
 
   def new
     @blog_post = Blog::Post.new
+    @celebrities = Blog::Celebrity.all
     Blog::PostPhoto.where(user_id: current_spree_user.id, post_id: nil).delete_all
   end
 
   def edit
+    @celebrities = Blog::Celebrity.all
     @blog_post = Blog::Post.red_carpet_posts.find(params[:id])
   end
 
@@ -28,6 +30,7 @@ class Spree::Admin::Blog::RedCarpetEventsController < Spree::Admin::Blog::BaseCo
       @blog.primary_photo_id = @blog.post_photos.first.id
       redirect_to action: :index
     else
+      @celebrities = Blog::Celebrity.all
       render action: :new
     end
   end
@@ -45,6 +48,7 @@ class Spree::Admin::Blog::RedCarpetEventsController < Spree::Admin::Blog::BaseCo
 
       redirect_to action: :index
     else
+      @celebrities = Blog::Celebrity.all
       render action: :edit
     end
   end

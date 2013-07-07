@@ -48,7 +48,7 @@
                     = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: ''
                     .overlay
                       .name= celebrity.fullname
-                      .event= @post.event.try(:name)
+                      .event= @post.title
                   .love-share
                     .love-hate
                       .icons
