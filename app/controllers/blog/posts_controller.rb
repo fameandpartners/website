@@ -1,10 +1,19 @@
 class Blog::PostsController < BlogBaseController
+  POSTS_PER_PAGE = 10
+
   before_filter :load_categories
   before_filter :load_featured_celebrities
 
   def index
-    @posts = post_scope.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])
-    generate_breadcrumbs_for_index
+    @posts_count = post_scope.count
+    @posts = post_scope.page(params[:page]).per(POSTS_PER_PAGE || Spree::Config[:orders_per_page])
+    respond_to do |format|
+      format.js do
+      end
+      format.html do
+        generate_breadcrumbs_for_index
+      end
+    end
   end
 
   def show
