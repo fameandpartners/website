@@ -37,6 +37,7 @@ $ ->
 
     name      = $parent.attr('data-name')
     photo_url = $parent.attr('data-photo-url')
+    comments_url = $parent.attr('data-comments-url')
     if photo_url == ""
       photo_url = 'http://placehold.it/576x770'
     date      = $parent.attr('data-date')
@@ -44,5 +45,10 @@ $ ->
     $celebrity_modal.find('.name').html(name)
     $celebrity_modal.find('.celebrity-main img').attr('src', photo_url)
     $celebrity_modal.find('.post-meta .date').attr('src', date)
+    $comments = $celebrity_modal.find('.comments')
+    $comments.empty()
+    $comments.append $("<a href='#{comments_url}#disqus_thread'></a>")
+  $('.icons .love').on 'click', (e) ->
+
 
     false

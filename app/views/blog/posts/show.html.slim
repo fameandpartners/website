@@ -43,7 +43,7 @@
             ul
               - photos.each do |celebrity_photo|
                 - celebrity = celebrity_photo.celebrity
-                li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url(:preview)}"]
+                li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url(:preview)}" data-comments-url="/celebrity/#{celebrity.slug}/celebrity_photos/#{celebrity_photo.id}"]
                   .zoom
                   = link_to blog_celebrity_path(celebrity.slug), class: 'celebrity-photo' do
                     = image_tag celebrity_photo.photo.url(:small), width: 269, height: 375, alt: ''
