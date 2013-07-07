@@ -38,9 +38,10 @@
           .block-subtitle From the event
 
         .celebrity-photos.columns-3
-          - if @post.celebrity_photos.present?
+          - photos = @post.celebrity_photos.assigned.to_a
+          - if photos.present?
             ul
-              - @post.celebrity_photos.each do |celebrity_photo|
+              - photos.each do |celebrity_photo|
                 - celebrity = celebrity_photo.celebrity
                 li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url}"]
                   .zoom

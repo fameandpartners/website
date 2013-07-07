@@ -12,7 +12,7 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
   validates_attachment_presence :photo
 
   scope :latest, includes(:celebrity, :post).where("published_at IS NOT NULL").limit(4)
-
+  scope :assigned, where('celebrity_id IS NOT NULL')
   scope :with_posts, includes(:post)
 
   def like!(user)
