@@ -7,10 +7,10 @@
   ul
     - if @latest_photos.present?
       - @latest_photos.each do |celebrity_photo|
-        li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url}"]
+        li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url(:preview)}"]
           .zoom
           = link_to blog_celebrity_path(celebrity_photo.celebrity.slug), class: 'celebrity-photo' do
-            = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: ''
+            = image_tag celebrity_photo.photo.url(:small), width: 269, height: 375, alt: ''
             .overlay
               .name= celebrity_photo.celebrity.fullname
               - if celebrity_photo.post.present?

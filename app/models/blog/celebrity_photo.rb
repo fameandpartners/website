@@ -4,16 +4,23 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
   belongs_to :celebrity, class_name: Blog::Celebrity
   belongs_to :post, class_name: Blog::Post
   belongs_to :user, class_name: Spree::User
-  has_attached_file :photo
+  has_attached_file :photo, styles: { preview: "576x770#", small: "250x375#"}
   has_many :celebrity_photo_votes
 
   acts_as_taggable
 
   validates_attachment_presence :photo
 
-  scope :latest, includes(:celebrity, :post).where("published_at IS NOT NULL").limit(4)
   scope :assigned, where('celebrity_id IS NOT NULL')
   scope :with_posts, includes(:post)
+
+  before_create :randomize_file_name
+
+  class << self
+    def latest
+      includes(:celebrity, :post).where("celebrity_id IS NOT NULL").limit(4)
+    end
+  end
 
   def like!(user)
     vote = find_or_build_vote(user)
@@ -66,12 +73,19 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
     {
       "name" => read_attribute(:photo_file_name),
       "size" => read_attribute(:photo_file_size),
-      "thumbnail_url" => photo.url,
+      "thumbnail_url" => photo.url(:small),
       "url" => photo.url,
       "delete_url" => "/admin/blog/celebrity_photos/#{self.id}",
       "delete_type" => "DELETE",
       "id" => self.id,
       "celebrity_id" => celebrity.try(:id)
     }
+  end
+
+  private
+
+  def randomize_file_name
+    extension = File.extname(photo_file_name).downcase
+    self.photo.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
   end
 end

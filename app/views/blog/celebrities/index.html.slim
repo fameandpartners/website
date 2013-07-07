@@ -12,11 +12,13 @@
     - if @celebrities.present?
       ul
         - @celebrities.each do |celebrity|
-          li[data-name="#{celebrity.fullname}" data-date="#{celebrity.main_photo.try(:created_at_formatted)}" data-photo-url="#{celebrity.main_photo.try(:photo).try(:url)}"]
+          - if celebrity.main_photo.try(:photo).present?
+            - url = celebrity.main_photo.photo.url(:preview)
+          li[data-name="#{celebrity.fullname}" data-date="#{celebrity.main_photo.try(:created_at_formatted)}" data-photo-url="#{url}"]
             .zoom
             = link_to blog_celebrity_path(celebrity.slug), class: 'celebrity-photo' do
               - if celebrity.main_photo.present?
-                = image_tag celebrity.main_photo.photo.url, width: 269, height: 375, alt: ''
+                = image_tag celebrity.main_photo.photo.url(:small), width: 269, height: 375, alt: ''
                 .overlay
                   .name= celebrity.fullname
                   - if celebrity.main_photo.post.present?
