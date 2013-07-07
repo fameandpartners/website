@@ -33,7 +33,7 @@ class Blog::Post < ActiveRecord::Base
   class << self
     def find_by_query(term)
       Blog::Post.joins(
-        "LEFT OUTER JOIN blog_authors ON blog_authors.id = blog_posts.author_id"
+        "LEFT OUTER JOIN spree_users ON spree_users.id = blog_posts.user_id"
       ).
         where(
           %Q(
@@ -46,9 +46,9 @@ class Blog::Post < ActiveRecord::Base
             )
             OR
             (
-              LOWER(blog_authors.first_name) LIKE ?
-              or LOWER(blog_authors.last_name) LIKE ?
-              or LOWER(concat(blog_authors.last_name, ', ', blog_authors.first_name)) LIKE ?
+              LOWER(spree_users.first_name) LIKE ?
+              or LOWER(spree_users.last_name) LIKE ?
+              or LOWER(concat(spree_users.last_name, ', ', spree_users.first_name)) LIKE ?
             )
           ), "%#{term}%", "%#{term}%" , "%#{term}%", "%#{term}%", "%#{term}%"
         )
