@@ -30,7 +30,7 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
             GROUP BY blog_celebrity_photos.celebrity_id, date(blog_celebrity_photos.created_at)
           ) AS M
              ON M.max_created_at = P.created_at
-          ORDER BY P.created_at DESC
+          ORDER BY P.created_at DESC LIMIT 4
         )
       )
     end
