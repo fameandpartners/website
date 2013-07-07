@@ -5,7 +5,7 @@ class Blog::PromoBanner < ActiveRecord::Base
   has_attached_file :photo
 
   validates :title, :url, :user_id, presence: true
-  validates_attachment_presence :photo
+  validates_attachment_presence :photo, styles: { original: "1078x434#", small: "250x375#"}
 
   scope :published, where(published: true)
 
