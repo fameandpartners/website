@@ -6,6 +6,7 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
   belongs_to :user, class_name: Spree::User
   has_attached_file :photo, styles: { preview: "576x770#", small: "250x375#"}
   has_many :celebrity_photo_votes
+  has_one  :primary_celebrity, class_name: Blog::Celebrity, foreign_key: :primary_photo_id
 
   acts_as_taggable
 
@@ -91,7 +92,8 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
       "delete_url" => "/admin/blog/celebrity_photos/#{self.id}",
       "delete_type" => "DELETE",
       "id" => self.id,
-      "celebrity_id" => celebrity.try(:id)
+      "celebrity_id" => celebrity.try(:id),
+      "primary" => celebrity.primary_photo == self
     }
   end
 

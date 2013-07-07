@@ -27,6 +27,12 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
       end
       photo.user = current_spree_user
       photo.save
+
+      if celebrity.present? && celebrity.primary_photo.blank?
+        celebrity.primary_photo = photo
+        celebrity.save
+      end
+
       photo
     end
     render json: {files: photos.map {|p| p.to_jq_upload}}, status: :created
@@ -35,6 +41,14 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
   def destroy
     Blog::CelebrityPhoto.find(params[:id]).destroy
     render json: true
+  end
+
+  def make_primary
+    celebrity = Blog::Celebrity.find(params[:celebrity_id])
+    photo = Blog::CelebrityPhoto.find(params[:id])
+    celebrity.primary_photo = photo
+    celebrity.save
+    head :ok
   end
 
   def assign_celebrity

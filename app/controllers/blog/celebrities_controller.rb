@@ -3,7 +3,7 @@ class Blog::CelebritiesController < BlogBaseController
 
   def index
     @celebrities_count = Blog::Celebrity.count
-    @celebrities = Blog::Celebrity.page(params[:page]).per(CELEBRITIES_PER_PAGE)
+    @celebrities = Blog::Celebrity.includes(:primary_photo).page(params[:page]).per(CELEBRITIES_PER_PAGE)
 
     respond_to do |format|
       format.js do
@@ -11,7 +11,7 @@ class Blog::CelebritiesController < BlogBaseController
       format.html do
         if current_spree_user.present?
           @photo_votes = Blog::CelebrityPhotoVote.where(
-            user_id: current_spree_user.id, celebrity_photo_id: @celebrities.map(&:main_photo).reject(&:blank?).map(&:id)
+            user_id: current_spree_user.id, celebrity_photo_id: @celebrities.map(&:primary_photo).reject(&:blank?).map(&:id)
           )
         end
         generate_breadcrumbs_for_index

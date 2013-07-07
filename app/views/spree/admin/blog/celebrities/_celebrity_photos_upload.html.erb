@@ -54,8 +54,12 @@
         <td class="preview">{% if (file.thumbnail_url) { %}
           <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}" height="200"></a>
           {% } %}</td>
-        <td class="name">
-          <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+        <td class="primary name" data-id="{%= file.id%}" data-celebrity-id="{%= file.celebrity_id%}">
+          {% if (file.primary) { %}
+            <input type="radio" name="primary_photo" checked="checked"/>
+          {% } else { %}
+            <input type="radio" name="primary_photo"/>
+          {% } %}
         </td>
         <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
         <td colspan="2"></td>
@@ -112,6 +116,25 @@
           downloadTemplateId: 'celebrity-template-download'
         }
         );
+
+      $('.primary input').live('click', function() {
+        var $this = $(this);
+        var $parent = $this.parent();
+        celebrity_id = $parent.attr('data-celebrity-id')
+        id           = $parent.attr('data-id')
+        url = "/admin/blog/celebrity_photos/" + id + "/make_primary.json"
+        $.ajax(
+          {
+            method: 'PUT',
+            url: url,
+            data: {celebrity_id: celebrity_id},
+            success: function(data) {
+              return false;
+            }
+          }
+        );
+        return true;
+      });
       //
       // Load existing files:
       $.getJSON($('#celebrity-photos-fileupload').prop('action'), function (files) {

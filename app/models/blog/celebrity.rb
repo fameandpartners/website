@@ -5,12 +5,11 @@ class Blog::Celebrity < ActiveRecord::Base
   validates  :slug, uniqueness: true
   belongs_to :user, class_name: Spree::User
   has_many   :celebrity_photos, dependent: :destroy, class_name: Blog::CelebrityPhoto
+  belongs_to :primary_photo, class_name: Blog::CelebrityPhoto, foreign_key: :primary_photo_id
 
   scope :featured, where("featured_at IS NOT NULL").limit(4).order("featured_at desc")
 
-  def main_photo
-    celebrity_photos.first
-  end
+  before_save :assign_primary_photo
 
   def posts
     Blog::Post.joins(:celebrity_photos).where('blog_celebrity_photos.celebrity_id = ?', self.id)
@@ -29,6 +28,12 @@ class Blog::Celebrity < ActiveRecord::Base
       'yes'
     else
       'no'
+    end
+  end
+
+  def assign_primary_photo
+    if primary_photo.blank? && celebrity_photos.present?
+      self.primary_photo_id = celebrity_photos.first.id
     end
   end
 end

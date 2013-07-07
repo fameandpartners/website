@@ -1,25 +1,25 @@
-- if celebrity.main_photo.try(:photo).present?
-  - url = celebrity.main_photo.photo.url(:preview)
-li[data-name="#{celebrity.fullname}" data-date="#{celebrity.main_photo.try(:created_at_formatted)}" data-photo-url="#{url}"]
+- if celebrity.primary_photo.try(:photo).present?
+  - url = celebrity.primary_photo.photo.url(:preview)
+li[data-name="#{celebrity.fullname}" data-date="#{celebrity.primary_photo.try(:created_at_formatted)}" data-photo-url="#{url}"]
   .zoom
   = link_to blog_celebrity_path(celebrity.slug), class: 'celebrity-photo' do
-    - if celebrity.main_photo.present?
-      = image_tag celebrity.main_photo.photo.url(:small), width: 269, height: 375, alt: ''
+    - if celebrity.primary_photo.present?
+      = image_tag celebrity.primary_photo.photo.url(:small), width: 269, height: 375, alt: ''
       .overlay
         .name= celebrity.fullname
-        - if celebrity.main_photo.post.present?
-          - if celebrity.main_photo.post.published?
-            .event= celebrity.main_photo.post.title
+        - if celebrity.primary_photo.post.present?
+          - if celebrity.primary_photo.post.published?
+            .event= celebrity.primary_photo.post.title
           - else
             .event Coming soon
     - else
       .empty-list No photo found
-  - if celebrity.main_photo.present?
+  - if celebrity.primary_photo.present?
     .love-share
       .love-hate
-        .icons[data-id="#{celebrity.main_photo.id}"]
+        .icons[data-id="#{celebrity.primary_photo.id}"]
           - if @photo_votes.present?
-            - vote = @photo_votes.detect {|v| v.celebrity_photo_id == celebrity.main_photo  .id}
+            - vote = @photo_votes.detect {|v| v.celebrity_photo_id == celebrity.primary_photo  .id}
           - if vote.present?
             .love[class="#{vote.like? ? 'active' : ''}"]
             .hate[class="#{vote.dislike? ? 'active' : ''}"]

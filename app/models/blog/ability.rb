@@ -9,7 +9,7 @@ class Blog::Ability
         can :admin, Blog
         can [:edit, :index, :destroy, :create, :update, :new], Blog::Post
         can [:edit, :index, :destroy, :create, :update, :new], Blog::Celebrity
-        can [:edit, :index, :destroy, :create, :update, :new, :assign_celebrity], Blog::CelebrityPhoto
+        can [:edit, :index, :destroy, :create, :update, :new, :assign_celebrity, :make_primary], Blog::CelebrityPhoto
         can [:edit, :index, :destroy, :create, :update, :new], Blog::PostPhoto
       end
 
