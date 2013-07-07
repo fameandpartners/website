@@ -1,10 +1,19 @@
 class Blog::AuthorsController < BlogBaseController
+  AUTHORS_PER_PAGE=10
+
   def index
     role = Spree::Role.moderator_role
+    @authors_count = role.users.count
     if role.present?
-      @authors = role.users
+      @authors = role.users.page(params[:page]).per(AUTHORS_PER_PAGE)
     end
-    generate_breadcrumbs_for_index
+    respond_to do |format|
+      format.js do
+      end
+      format.html do
+        generate_breadcrumbs_for_index
+      end
+    end
   end
 
   def show

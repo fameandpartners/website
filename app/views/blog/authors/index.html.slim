@@ -11,12 +11,11 @@
 
   - if @authors.present?
     ul.page-stylists
-      - @authors.each do |author|
-        li.stylist
-          .thumbnail= image_tag author.avatar.try(:url), alt: '', height: 160, width: 160
-          .stylist-info
-            .name
-              = link_to author.fullname, blog_authors_post_path(author.slug)
-            .desc= raw(author.description)
+      = render collection: @authors, partial: 'author'
   - else
     .empty No authors found
+
+javascript:
+  $(function() {
+    window.initInfiniteScroll("#{request.path}", #{@authors_count});
+  });
