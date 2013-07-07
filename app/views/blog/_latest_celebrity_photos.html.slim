@@ -21,8 +21,14 @@
           .love-share
             .love-hate
               .icons[data-id="#{celebrity_photo.id}"]
-                .love
-                .hate
+                - if @photo_votes.present?
+                  - vote = @photo_votes.detect {|v| v.celebrity_photo_id == celebrity_photo.id}
+                - if vote.present?
+                  .love[class="#{vote.like? ? 'active' : ''}"]
+                  .hate[class="#{vote.dislike? ? 'active' : ''}"]
+                - else
+                  .love
+                  .hate
               .label Love it or loathe it
             /.share
               .icons
