@@ -2,11 +2,14 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
   respond_to :json
 
   def index
-    if params[:post_id].blank?
-      post_photos = Blog::CelebrityPhoto.includes(:celebrity).where(user_id: current_spree_user.id, post_id: nil)
-    else
+    if params[:post_id] && params[:celebrity_id].blank?
+      post_photos = Blog::CelebrityPhoto.includes(:celebrity).where(user_id: current_spree_user.id, post_id: nil, celebrity_id: nil)
+    elsif params[:post_id].present?
       post        = Blog::Post.find(params[:post_id])
       photos      = post.celebrity_photos.includes(:celebrity)
+    elsif params[:celebrity_id].present?
+      celebrity   = Blog::Celebrity.find(params[:celebrity_id])
+      photos      = celebrity.celebrity_photos
     end
     render json: photos.map{|upload| upload.to_jq_upload }
   end
@@ -14,13 +17,16 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
   def create
     if params[:post_id].present?
       post = Blog::Post.find(params[:post_id])
-      post_photo = post.celebrity_photos.build(photo: (params['blog_celebrity_photo'] || {})['photo'])
+      photo = post.celebrity_photos.build(photo: (params['blog_celebrity_photo'] || {})['photo'])
+    elsif params[:celebrity_id].present?
+      celebrity = Blog::Celebrity.find(params[:celebrity_id])
+      photo = celebrity.celebrity_photos.build(photo: (params['blog_celebrity_photo'] || {})['photo'])
     else
-      post_photo = Blog::CelebrityPhoto.new(photo: (params['blog_celebrity_photo'] || {})['photo'])
+      photo = Blog::CelebrityPhoto.new(photo: (params['blog_celebrity_photo'] || {})['photo'])
     end
-    post_photo.user = current_spree_user
-    post_photo.save
-    render json: {files: [post_photo.to_jq_upload]}, status: :created
+    photo.user = current_spree_user
+    photo.save
+    render json: {files: [photo.to_jq_upload]}, status: :created
   end
 
   def destroy
