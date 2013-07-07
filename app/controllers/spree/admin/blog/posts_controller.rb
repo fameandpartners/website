@@ -27,7 +27,11 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
     if @blog_post.valid?
       @blog_post.save
       Blog::PostPhoto.where(user_id: current_spree_user.id, post_id: nil).update_all({post_id: @blog_post.id})
-      @blog.primary_photo_id = @blog.post_photos.first.id
+      if @blog_post.post_photos.present?
+        @blog.primary_photo_id = @blog.post_photos.first.id
+      else
+        @blog.primary_photo_id = nil
+      end
       redirect_to action: :index
     else
       prepare_form_relations

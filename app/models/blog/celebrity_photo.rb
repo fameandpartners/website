@@ -18,7 +18,20 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
 
   class << self
     def latest
-      includes(:celebrity, :post).where("celebrity_id IS NOT NULL").limit(4)
+      includes(:celebrity, :post).find_by_sql(
+        %Q(
+          SELECT *
+          FROM blog_celebrity_photos P
+          INNER JOIN (
+            SELECT blog_celebrity_photos.celebrity_id, MAX(blog_celebrity_photos.created_at) AS max_created_at
+            FROM blog_celebrity_photos
+            WHERE blog_celebrity_photos.celebrity_id IS NOT NULL
+            GROUP BY blog_celebrity_photos.celebrity_id, date(blog_celebrity_photos.created_at)
+          ) AS M
+             ON M.max_created_at = P.created_at
+          ORDER BY P.created_at DESC
+        )
+      )
     end
   end
 

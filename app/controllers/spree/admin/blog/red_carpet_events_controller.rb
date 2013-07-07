@@ -29,6 +29,8 @@ class Spree::Admin::Blog::RedCarpetEventsController < Spree::Admin::Blog::BaseCo
       Blog::PostPhoto.where(user_id: current_spree_user.id, post_id: nil).update_all({post_id: @blog_post.id})
       if @blog_post.post_photos.present?
         @blog_post.primary_photo_id = @blog_post.post_photos.first.id
+      else
+        @blog_post.primary_photo_id = nil
       end
       redirect_to action: :index
     else
