@@ -303,6 +303,12 @@ header {
         margin: 0 14px 10px 0;
       }
     }
+    .chzn-container {
+      min-width: 100%;
+    }
+  }
+  &.no-overflow {
+    overflow: visible;
   }
 }
 

@@ -1,9 +1,9 @@
 = render 'shared/blog_top_bar'
 = render partial: 'blog/shared/celebrity_popup'
 
-.wrap
+.wrap.no-overflow
   = render 'shared/breadcrumbs'
-  .content-sidebar
+  .content-sidebar.no-overflow
     section.content-area
       - if @posts.present?
         - @posts.each do |post|

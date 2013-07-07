@@ -1,7 +1,7 @@
 = render 'shared/blog_top_bar'
 = render partial: 'blog/shared/celebrity_popup'
 
-.wrap
+.wrap.no-overflow
   = render 'shared/breadcrumbs'
 
   .page-title
@@ -48,6 +48,8 @@
         - else
           .blog-block-title
             .empty No posts found
+      = render 'shared/blog_sidebar'
+
   - else
     .content-sidebar.clearfix
       section.content-area
@@ -76,4 +78,5 @@
           - else
             .empty No photos found
 
-  = render 'shared/blog_sidebar'
+
+      = render 'shared/blog_sidebar'
