@@ -67,9 +67,15 @@
                         .event=photo.post.title
                   .love-share
                     .love-hate
-                      .icons
-                        .love
-                        .hate
+                      .icons[data-id="#{photo.id}"]
+                        - if @photo_votes.present?
+                          - vote = @photo_votes.detect {|v| v.celebrity_photo_id == photo.id}
+                        - if vote.present?
+                          .love[class="#{vote.like? ? 'active' : ''}"]
+                          .hate[class="#{vote.dislike? ? 'active' : ''}"]
+                        - else
+                          .love
+                          .hate
                       .label Love it or loathe it
                     /.share
                       .icons

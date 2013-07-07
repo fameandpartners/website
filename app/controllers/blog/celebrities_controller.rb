@@ -4,10 +4,16 @@ class Blog::CelebritiesController < BlogBaseController
   def index
     @celebrities_count = Blog::Celebrity.count
     @celebrities = Blog::Celebrity.page(params[:page]).per(CELEBRITIES_PER_PAGE)
+
     respond_to do |format|
       format.js do
       end
       format.html do
+        if current_spree_user.present?
+          @photo_votes = Blog::CelebrityPhotoVote.where(
+            user_id: current_spree_user.id, celebrity_photo_id: @celebrities.map(&:main_photo).reject(&:blank?).map(&:id)
+          )
+        end
         generate_breadcrumbs_for_index
       end
     end
@@ -17,6 +23,11 @@ class Blog::CelebritiesController < BlogBaseController
     @celebrity = Blog::Celebrity.find_by_slug!(params[:slug])
     if params[:type] == 'posts'
       @posts = @celebrity.posts.simple_posts
+    end
+    if current_spree_user.present?
+      @photo_votes = Blog::CelebrityPhotoVote.where(
+        user_id: current_spree_user.id, celebrity_photo_id: @celebrity.celebrity_photos.map(&:id)
+      )
     end
     generate_breadcrumbs_for_show
   end

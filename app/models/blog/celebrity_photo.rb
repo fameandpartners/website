@@ -38,14 +38,14 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
   def like!(user)
     vote = find_or_build_vote(user)
     vote.user_id = user.id
-    vote.vote_type = CelebrityPhotoVote::UP_VOTE
+    vote.vote_type = Blog::CelebrityPhotoVote::UP_VOTE
     vote.save
   end
 
   def dislike!(user)
     vote = find_or_build_vote(user)
     vote.user_id = user.id
-    vote.vote_type = CelebrityPhotoVote::DOWN_VOTE
+    vote.vote_type = Blog::CelebrityPhotoVote::DOWN_VOTE
     vote.save
   end
 

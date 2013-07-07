@@ -18,7 +18,7 @@
             - else
               = link_to '', blog_post_by_category_path(@post.category.slug, @post.slug) + '#disqus_thread'
           .author
-            = link_to '#' do
+            = link_to blog_authors_post_path(@post.user.slug) do
               .avatar
                 = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
               .name= @post.user.fullname
@@ -52,9 +52,15 @@
                       .event= @post.title
                   .love-share
                     .love-hate
-                      .icons
-                        .love
-                        .hate
+                      .icons[data-id="#{celebrity_photo.id}"]
+                        - if @photo_votes.present?
+                          - vote = @photo_votes.detect {|v| v.celebrity_photo_id == celebrity_photo.id}
+                        - if vote.present?
+                          .love[class="#{vote.like? ? 'active' : ''}"]
+                          .hate[class="#{vote.dislike? ? 'active' : ''}"]
+                        - else
+                          .love
+                          .hate
                       .label Love it or loathe it
                     /.share
                       .icons

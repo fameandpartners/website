@@ -1,15 +1,15 @@
 class Blog::CelebrityPhotosController < BlogBaseController
+  before_filter :authenticate_spree_user!
+
   def like
-    authorize! :like, Blog::CelebrityPhoto
     photo = Blog::CelebrityPhoto.find(params[:id])
     photo.like!(current_spree_user)
-    render text: 'ok'
+    head :ok
   end
 
   def dislike
-    authorize! :like, Blog::CelebrityPhoto
     photo = Blog::CelebrityPhoto.find(params[:id])
     photo.dislike!(current_spree_user)
-    render text: 'ok'
+    head :ok
   end
 end

@@ -20,6 +20,11 @@ class Blog::PostsController < BlogBaseController
     @post = post_scope.includes(
       :user, :post_photos, :celebrity_photos, :category, :celebrities
     ).find_by_slug!(params[:post_slug])
+    if current_spree_user.present?
+      @photo_votes = Blog::CelebrityPhotoVote.where(
+        user_id: current_spree_user.id, celebrity_photo_id: @post.celebrity_photos.map(&:id)
+      )
+    end
     generate_breadcrumbs_for_show
   end
 
