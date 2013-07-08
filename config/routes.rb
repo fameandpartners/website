@@ -12,10 +12,27 @@ FameAndPartners::Application.routes.draw do
 
   devise_scope :spree_user do
     get '/spree_user/thanks' => 'spree/user_registrations#thanks'
+    get '/account_settings' => 'spree/user_registrations#edit'
   end
 
   resources :line_items, only: [:create, :edit, :update, :destroy]
   get 'products/:id/quick_view' => 'spree/products#quick_view'
+
+  # account settings
+  resource :profile, only: [:show, :update], controller: 'users/profiles' do
+    put 'update_image', on: :member
+  end
+  get 'orders' => 'users/orders#index', as: 'user_orders'
+  get 'orders/:id' => 'users/orders#show', as: 'user_order'
+
+  get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
+
+  resources :wishlists_items, only: [:index, :create, :destroy], controller: 'users/wishlists_items' do
+    get 'move_to_cart', on: :member
+  end
+  get 'wishlist' => 'users/wishlists_items#index', as: 'wishlist'
+  get 'reviews' => 'users/reviews#index', as: 'reviews'
+  # eo account settings
 
   # Blog routes
   blog_constraint = lambda { |request|
@@ -54,8 +71,8 @@ FameAndPartners::Application.routes.draw do
   # Static for ecommerce
   #match '/home' => 'pages#home'
   #match '/products' => 'pages#products'
-  match '/account' => 'pages#account'
-  match '/orders' => 'pages#orders'
+  match '/profile' => 'pages#account'
+  #match '/orders' => 'pages#orders'
   match '/order' => 'pages#order'
   match '/styleprofile' => 'pages#styleprofile'
   match '/reviews' => 'pages#reviews'

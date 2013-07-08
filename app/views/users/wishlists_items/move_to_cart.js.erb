@@ -1,0 +1,10 @@
+$item = $("ul.products-list.grid-container li.product-item.grid-25[data-id=<%= @item.id %>]")
+$item.remove()
+
+order = <%=raw CartSerializer.new(current_order).to_json %>
+
+cart = order.cart
+cart.line_items = _.collect(JSON.parse(order.cart.line_items), function(item) { return item.line_item})
+
+event_data = { cart: cart, id: <%= @item.variant.id %>}
+window.shopping_cart.trigger('item_added', event_data)

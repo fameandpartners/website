@@ -68,6 +68,7 @@ $(".products.index").ready ->
     updateContentHandlers: () ->
       # bind quick view
       $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
+      $(".quick-view a[data-action='add-to-wishlist']").on('click', window.productWishlist.onClickHandler)
 
   }
 

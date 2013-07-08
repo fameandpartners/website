@@ -25,3 +25,7 @@ window.getUniqueValues = (array, property) ->
       result.unshift(value)
   )
   return result
+
+window.setCurrentPath = (path) ->
+  url = "#{ window.location.origin }#{ path }"
+  window.history.pushState({path:url},'',url)

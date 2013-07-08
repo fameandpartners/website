@@ -60,4 +60,12 @@ module ApplicationHelper
   def make_url prefix, text
     "/#{prefix.join('/')}/#{text.downcase.gsub(/\s/, "_")}"
   end
+
+  def total_cart_items
+    if current_order
+      current_order.line_items.inject(0){|total, line_item| total += line_item.quantity}
+    else
+      0
+    end
+  end
 end

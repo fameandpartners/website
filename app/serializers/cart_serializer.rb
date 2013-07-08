@@ -3,6 +3,8 @@ class CartSerializer < ActiveModel::Serializer
   attributes :state, :email, :currency
   attributes :line_items
 
+  attributes :items_count
+
   attributes :display_shipment_total,
     :display_item_total,
     :display_adjustment_total,
@@ -37,5 +39,9 @@ class CartSerializer < ActiveModel::Serializer
     object.line_items.includes(variant: :product).collect do |line_item|
       LineItemSerializer.new(line_item)
     end.to_json
+  end
+
+  def items_count
+    object.line_items.inject(0){|total, line_item| total += line_item.quantity}
   end
 end

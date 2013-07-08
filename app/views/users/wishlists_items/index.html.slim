@@ -1,0 +1,24 @@
+.wrap
+  .account-pages
+    .tabs
+      = render 'users/shared/tabs', active_tab: 'wishlist'
+      #wishlist.tab-content
+        h1.page-title My wishlist
+        - if @items.size == 0
+          p Sorry, there are no items in your wishlist
+        - else
+          ul.products-list.grid-container
+            - @items.each do |item|
+              - variant = item.variant
+              - product = variant.product
+              li.product-item.grid-25 data-id=item.id
+                .thumbnail
+                  .like = add_to_wishlist_link(variant)
+                  .quick-view = quick_view_link(product)
+                  = product_image product, itemprop: "image", width: 243, height: 352, alt: product.name
+                .name = link_to product.name, product
+                .description = product_short_description(product)
+                .price = product.price_in(current_currency).display_price
+                .add-remove
+                  = link_to 'Add to cart', move_to_cart_wishlists_item_path(item), class: 'add-to-cart', remote: true
+                  = link_to 'Remove', wishlists_item_path(item), class: 'remove', method: :delete, remote: true

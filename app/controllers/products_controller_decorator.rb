@@ -35,14 +35,10 @@ Spree::ProductsController.class_eval do
     #return unless request.xhr? && @product
     @product_variants = Products::VariantsReceiver.new(@product).available_options
 
-    respond_to do |format|
-      format.html # default
-      format.json do
-        render json: { 
-          popup_html: render_to_string(template: 'spree/products/quick_view.html.slim'),
-          variants: @product_variants
-        }
-      end
-    end
+    popup_html = render_to_string(template: 'spree/products/quick_view.html.slim', product: @product, layout: false)
+    render json: { 
+      popup_html: popup_html,
+      variants: @product_variants
+    }
   end
 end

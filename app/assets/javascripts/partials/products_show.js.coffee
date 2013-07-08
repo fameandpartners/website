@@ -20,6 +20,7 @@ $(".products.show").ready ->
   # add quick view feature
   window.helpers.quickViewer.init()
   $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
+  $("a[data-action='add-to-wishlist']").on('click', window.productWishlist.onClickHandler)
 
   # add product to cart
   $('.buy-wishlist .buy-now').on('click', (e) ->

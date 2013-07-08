@@ -1,0 +1,29 @@
+.wrap
+  .account-pages
+    .tabs
+      = render 'users/shared/tabs', active_tab: 'styleprofile'
+      #report.tab-content
+        h1.page-title My style profile
+        p.margin.uppercase
+          strong Your current style profile:
+        p.margin Last updated 26th July 2013
+        .style-report-block
+          .block.first
+            .name Classic
+            .percent 15%
+          .block
+            .name Edgy
+            .percent 15%
+          .block
+            .name Girly
+            .percent 15%
+          .block
+            .name Bohemian
+            .percent 15%
+          .block
+            .name Glam
+            .percent 15%
+        p To update your style proﬁle just run the style quiz again.
+        .redo-view
+          = link_to 'Redo the style quiz', '#', class: 'btn black'
+          = link_to 'View your public style report', '#', class: 'btn grey'

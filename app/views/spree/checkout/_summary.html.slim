@@ -10,7 +10,7 @@
     li
       .label Subtotal
       .desc
-        span AUD
+        span = @order.currency
         = @order.display_item_total
     li
       .label Shipping

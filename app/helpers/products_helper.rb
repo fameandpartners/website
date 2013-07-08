@@ -49,4 +49,13 @@ module ProductsHelper
       image_tag image.attachment.url(:product), options
     end 
   end
+
+  def add_to_wishlist_link(product_or_variant)
+    variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
+    link_to 'Like item', '#', data: { action: 'add-to-wishlist', id: variant.id }
+  end
+
+  def quick_view_link(product)
+    link_to 'Quick view', product, data: { action: 'quick-view', id: product.permalink }
+  end
 end

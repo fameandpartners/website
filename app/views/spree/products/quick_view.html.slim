@@ -23,11 +23,11 @@
             .zoom = link_to 'Zoom', '#'
             = image_tag 'http://placehold.it/460x590', alt: ''
       #videos.tab-content
-        = image_tag @product.property('inspiration_video')
+        == product_video(@product)
       #inspiration.tab-content
         .tab-content-inner
           .big-photo
-            = image_tag "file://" + @product.property('inspiration_photo')
+            = inspiration_image(@product)
           .inspiration
             = @product.property('inspiration')
   .grid-40
@@ -36,7 +36,6 @@
       .desc = @product.property('short_description')
       .price-delivery
         .price.sale
-          em $320
           span = @product.price_in(current_currency).display_price
         .delivery 3-4 week delivery
       .desc.small
@@ -55,5 +54,5 @@
         = link_to 'What size am i?', '#', class: 'info'
       .buy-wishlist
         = link_to 'Add to bag', '#', class: 'buy-now'
-        = link_to 'Add to wish list', '#', class: 'add-wishlist'
+        = link_to 'Add to wish list', '#', class: 'add-wishlist', data: { id: @product.master.id }
       .share-buttons Share buttons

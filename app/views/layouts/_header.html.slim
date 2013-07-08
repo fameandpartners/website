@@ -17,8 +17,8 @@
               ' is logged in
             .dropdown-menu
               ul
-                li = link_to 'Account settings', '#'
-                li = link_to 'Your orders', '#'
+                li = link_to 'Account settings', profile_path
+                li = link_to 'Your orders', user_orders_path
                 li = link_to 'Style profile', '#'
                 li = link_to 'My reviews', '#'
           li = link_to 'Sign out', spree_logout_path
@@ -34,10 +34,10 @@ header
         .fleft
           .logo = link_to 'Fame&Partners', root_path
         .fright
-          .wishlist = link_to 'Wish list', '#', class: 'wishlist-link'
+          .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
           .shopping-bag
             = link_to '#', class: 'shopping-bag-toggler' do
-              .counter = current_order(true).line_items.length
+              .counter = total_cart_items
               ' Shopping bag
             = render 'layouts/shopping_bag_content'
   .second-level

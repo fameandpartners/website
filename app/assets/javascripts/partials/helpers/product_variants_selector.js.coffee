@@ -59,8 +59,10 @@ window.helpers.createProductVariantsSelector = (root) ->
       # update buttons
       variant = @getSelectedVariant()
       $button = rootElement.find('.buy-wishlist .buy-now')
+      $wishlist_button = rootElement.find('.buy-wishlist .add-wishlist')
       if variant
         $button.data(variant_id: variant.id)
+        $wishlist_button.data(id: variant.id)
         if variant.purchased
           $button.addClass('purchased')
         else
