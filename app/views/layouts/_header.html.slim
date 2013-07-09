@@ -23,21 +23,17 @@
                 li = link_to 'My reviews', '#'
           li = link_to 'Sign out', spree_logout_path
 
-header
-  javascript:
-    window.bootstrap = {}
-    window.bootstrap.order = #{{ ::CartSerializer.new(current_order).to_json }}
-
+header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .first-level
     .wrap.no-overflow
       .inner
         .fleft
           .logo = link_to 'Fame&Partners', root_path
         .fright
-          .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
+          .wishlist = link_to 'Wish list', '#', class: 'wishlist-link'
           .shopping-bag
             = link_to '#', class: 'shopping-bag-toggler' do
-              .counter = total_cart_items
+              .counter = current_order(true).amount
               ' Shopping bag
             = render 'layouts/shopping_bag_content'
   .second-level
@@ -103,3 +99,7 @@ header
           li = link_to 'Our team', team_path, title: "Fame & Partners Team"
           li.hide = link_to 'Blog', '#'
           li.hide = link_to 'Style quiz', '#'
+
+  javascript:
+    window.bootstrap = {}
+    window.bootstrap.order = #{{ ::CartSerializer.new(current_order).to_json }}
