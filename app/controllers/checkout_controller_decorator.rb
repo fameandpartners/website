@@ -72,6 +72,11 @@ Spree::CheckoutController.class_eval do
 
   def edit
     @user = Spree::User.new unless signed_in?
+
+    respond_with(@order) do |format|
+      format.js { render 'spree/checkout/update/success' }
+      format.html{ render }
+    end
   end
 
   private
