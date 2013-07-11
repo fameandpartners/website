@@ -41,7 +41,11 @@ $ ->
       window.shoppingBag
 
     renderCart: (e, data) ->
-      cartHtml = shoppingBag.cartTemplate(order: data.cart)
+      cartHtml = shoppingBag.cartTemplate
+        order: data.cart
+        csrf_param: $('[name="csrf-param"]').attr('content')
+        csrf_token: $('[name="csrf-token"]').attr('content')
+
       shoppingBag.container.find('#shopping-bag-popup-wrapper').replaceWith(cartHtml)
       shoppingBag.show()
       # update actions
