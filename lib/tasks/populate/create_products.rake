@@ -69,10 +69,14 @@ def create_properties(product)
 end
 
 def add_celebrity_properties(product, index)
-  image_path = File.join(Rails.root, 'lib', 'tasks', 'populate', "product#{index}", "inspiration.jpeg")
+  if index == 1
+    product.set_property('inspiration', 'Alexa Chung')
+    product.set_property('inspiration_photo', 'http://img12.imageshack.us/img12/3876/86zh.jpg')
+  else
+    product.set_property('inspiration', 'Camilla Bell')
+    product.set_property('inspiration_photo', 'http://img12.imageshack.us/img12/3876/86zh.jpg')
+  end
 
-  product.set_property('inspiration', index == 1 ? 'Alexa Chung' : 'Camilla Bell')
-  product.set_property('inspiration_photo', image_path)
   product.set_property('youtube_video_id', 'foaOYiXq7jY')
 end
 

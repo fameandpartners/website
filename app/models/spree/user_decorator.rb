@@ -22,7 +22,7 @@ Spree::User.class_eval do
   def image(style = :small)
     img = self.profile_image
     if img.blank?
-      return ''
+      return nil
     else
       img.attachment.url(style)
     end
