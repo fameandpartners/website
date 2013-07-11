@@ -12,6 +12,5 @@
 *= require_tree .
 *= require admin/spree_social
 *= require libs/jquery.tagsinput
+*= require jquery.fileupload-ui
 */
-
-@import 'jquery.fileupload-ui';
