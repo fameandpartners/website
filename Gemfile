@@ -20,6 +20,7 @@ gem 'newrelic_rpm'
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
+
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'

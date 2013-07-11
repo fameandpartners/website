@@ -40,5 +40,5 @@ section.sidebar
     .block-content
       select.selectbox name="tags" id="events_search_filter"
         option value="" Choose...
-        - Blog::Event.order('created_at desc').limit(20).each do |event|
-          option value="#{event.slug}" #{event.name}
+        - Blog::Post.sidebar.each do |post|
+          option value="#{post.slug}" #{post.title}

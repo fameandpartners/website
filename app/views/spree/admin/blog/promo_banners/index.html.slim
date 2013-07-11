@@ -6,31 +6,20 @@
   li
     = button_link_to "New Promo Banner", new_admin_blog_promo_banner_path, :icon => 'icon-plus', :id => 'admin_new_promo_banner'
 
-fieldset
-  legend align="center" Filter
-  div data-hook="admin_promo_banners_index_search"
-    = form_tag admin_blog_promo_banners_path, method: :get do
-      .field-block.alpha.nine.columns
-        .field
-          = label_tag nil, "State"
-          = select_tag :state, options_for_select([["All", "all"], ["Published", "published"]], selected: params[:published] || "published"), :class => 'select2'
-      .clearfix
-      .actions.filter-actions
-        div data-hook="admin_orders_index_search_buttons"
-          = button t(:filter_results), 'icon-search'
-
 - if @blog_promo_banners.present?
   table.index.blog_posts
     thead
       tr
         th Title
         th State
+        th Position
         th.actions
     tbody
       - @blog_promo_banners.each do |banner|
         tr.banner
-          td= banner.title
+          td= link_to banner.title, edit_admin_blog_promo_banner_path(banner)
           td= banner.state
+          td= banner.position
           td
             = link_to "", edit_admin_blog_promo_banner_path(banner), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
             '  |

@@ -22,7 +22,7 @@ case Rails.env.to_sym
 when :development
   configatron.host = 'localhost:3000'
 when :staging
-  configatron.host = 'fame.23stages.com'
+  configatron.host = 'stage.fameandpartners.com'
 
   configatron.mailgun.mailbox.domain = '23stages.com'
   configatron.mailgun.mailbox.username = 'mailer@23stages.com'

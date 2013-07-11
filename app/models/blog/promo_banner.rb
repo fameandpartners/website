@@ -5,9 +5,10 @@ class Blog::PromoBanner < ActiveRecord::Base
   has_attached_file :photo
 
   validates :title, :url, :user_id, presence: true
-  validates_attachment_presence :photo
+  validates_attachment_presence :photo, styles: { preview: "1078x434#"}
 
   scope :published, where(published: true)
+  before_post_process :randomize_file_name
 
   def state
     if published?
@@ -15,5 +16,10 @@ class Blog::PromoBanner < ActiveRecord::Base
     else
       'not published'
     end
+  end
+
+  def randomize_file_name
+    extension = File.extname(photo_file_name).downcase
+    self.photo.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
   end
 end

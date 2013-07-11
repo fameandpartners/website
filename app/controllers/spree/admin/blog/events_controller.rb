@@ -1,4 +1,4 @@
-class Spree::Admin::Blog::EventsController < Spree::Admin::BaseController
+class Spree::Admin::Blog::EventsController < Spree::Admin::Blog::BaseController
 
   def index
     @events = Blog::Event.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])

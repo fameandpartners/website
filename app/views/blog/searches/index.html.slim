@@ -1,6 +1,8 @@
 = render 'shared/blog_top_bar'
 
 .wrap
+  = render 'shared/breadcrumbs'
+
   .content-sidebar
     section.content-area
       .search-box
@@ -23,3 +25,8 @@ javascript:
     s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
   }());
+
+javascript:
+  $(function() {
+    window.initInfiniteScroll("#{request.path}", #{@posts_count});
+  });

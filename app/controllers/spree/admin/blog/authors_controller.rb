@@ -1,4 +1,4 @@
-class Spree::Admin::Blog::AuthorsController < Spree::Admin::BaseController
+class Spree::Admin::Blog::AuthorsController < Spree::Admin::Blog::BaseController
 
   def index
     @authors = Blog::Author.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])

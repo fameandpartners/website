@@ -4,8 +4,6 @@
 
 - content_for :page_actions do
   li
-    = button_link_to "New Post Photo", new_admin_blog_post_post_photo_path(@post), :icon => 'icon-plus', :id => 'admin_new_author'
-  li
     = button_link_to "Back to Post", edit_admin_blog_post_path(@post)
 
 - if @post_photos.present?

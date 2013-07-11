@@ -1,4 +1,5 @@
 = render 'shared/blog_top_bar'
+= render partial: 'blog/shared/celebrity_popup'
 
 .wrap
 
@@ -17,10 +18,10 @@
             - else
               = link_to '', blog_post_by_category_path(@post.category.slug, @post.slug) + '#disqus_thread'
           .author
-            = link_to '#' do
+            = link_to blog_authors_post_path(@post.user.slug) do
               .avatar
-                = image_tag @post.author.photo.url, width: 30, height: 30, alt: ''
-              .name= @post.author.fullname
+                = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
+              .name= @post.user.fullname
         - if @post.post_photos.present?
           .featured-image
             #post-carousel-prev
@@ -37,24 +38,31 @@
           .block-subtitle From the event
 
         .celebrity-photos.columns-3
-          - if @post.celebrity_photos.present?
+          - photos = @post.celebrity_photos.assigned.to_a
+          - if photos.present?
             ul
-              - @post.celebrity_photos.each do |celebrity_photo|
+              - photos.each do |celebrity_photo|
                 - celebrity = celebrity_photo.celebrity
-                li
+                li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url(:preview)}" data-comments-url="/celebrity/#{celebrity.slug}/celebrity_photos/#{celebrity_photo.id}"]
                   .zoom
                   = link_to blog_celebrity_path(celebrity.slug), class: 'celebrity-photo' do
-                    = image_tag celebrity_photo.photo.url, width: 269, height: 375, alt: ''
+                    = image_tag celebrity_photo.photo.url(:small), width: 269, height: 375, alt: ''
                     .overlay
                       .name= celebrity.fullname
-                      .event= @post.event.try(:name)
+                      .event= @post.title
                   .love-share
                     .love-hate
-                      .icons
-                        .love
-                        .hate
+                      .icons[data-id="#{celebrity_photo.id}"]
+                        - if @photo_votes.present?
+                          - vote = @photo_votes.detect {|v| v.celebrity_photo_id == celebrity_photo.id}
+                        - if vote.present?
+                          .love[class="#{vote.like? ? 'active' : ''}"]
+                          .hate[class="#{vote.dislike? ? 'active' : ''}"]
+                        - else
+                          .love
+                          .hate
                       .label Love it or loathe it
-                    .share
+                    /.share
                       .icons
                         .share-block
                       .label Share

@@ -44,44 +44,46 @@ FameAndPartners::Application.routes.draw do
   }
 
   constraints blog_constraint do
+    devise_for :spree_user,
+               :class_name => 'Spree::User',
+               :controllers => { :sessions => 'spree/user_sessions',
+                                 :registrations => 'spree/user_registrations',
+                                 :passwords => 'spree/user_passwords',
+                                 :confirmations => 'spree/user_confirmations',
+                                 :omniauth_callbacks => 'spree/omniauth_callbacks'
+               },
+               :skip => [:unlocks, :omniauth_callbacks],
+               :path_names => { :sign_out => 'logout' } do
+        get '/login' => 'spree/user_sessions#new'
+        get '/signup' => 'spree/user_registrations#new'
+        get '/logout' => 'spree/user_sessions#destroy'
+     end
+
      get '/' => 'blog#index', as: :blog
+
      get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
-     get '/celebrities_photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
-     get '/celebrity/:slug' => 'blog/celebrities#show', as: :blog_celebrity
+     get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
+
+     get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
+     get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
+
+     post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
+     post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
+
+     get '/stylists' => 'blog/authors#index', as: :blog_authors
+     get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
+
+
      get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
      get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
-     get '/stylists' => 'blog/authors#index', as: :blog_authors
-     get '/stylists/:stylist' => 'blog/authors#index', as: :blog_authors_post
+
+
      get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
-     get '/search/authors/:author_slug' => 'blog/searches#by_tag', as: :blog_search_by_author
-     get '/search/events/:event' => 'blog/searches#by_event', as: :blog_search_by_event
      get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+
      get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
      get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
   end
-
-  # Static pages for HTML markup
-  match '/posts' => 'pages#posts'
-  match '/post' => 'pages#post'
-  match '/celebrities' => 'pages#celebrities'
-  match '/celebrity' => 'pages#celebrity'
-  match '/competition'   => 'pages#competition'
-  match '/custom-made-dresses' => 'pages#custom_made_dresses'
-
-  # Static for ecommerce
-  #match '/home' => 'pages#home'
-  #match '/products' => 'pages#products'
-  match '/profile' => 'pages#account'
-  #match '/orders' => 'pages#orders'
-  match '/order' => 'pages#order'
-  match '/styleprofile' => 'pages#styleprofile'
-  match '/reviews' => 'pages#reviews'
-  match '/wishlist' => 'pages#wishlist'
-  match '/product' => 'pages#product'
-  #match '/cart' => 'pages#cart'
-  #match '/quick-view' => 'pages#quick-view'
-  #match '/browse' => 'pages#browse'
-  #match '/checkout' => 'pages#checkout'
 
   # Static pages
   get '/about'   => 'statics#about'
@@ -111,18 +113,41 @@ FameAndPartners::Application.routes.draw do
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
-      match '/blog' => redirect('/admin/blog/promo_banners')
+      match '/blog' => redirect('/admin/blog/posts')
       namespace :blog do
         resources :promo_banners
         resources :categories
         resources :events
-        resources :authors
-        resources :posts do
-          resources :post_photos
-          resources :celebrity_photos
+
+        resources :red_carpet_events, only: [:index] do
         end
+
+        resources :assets, only: [:create, :destroy, :index]
+
+        resources :post_photos
+        resources :celebrity_photos do
+          member do
+            put :assign_celebrity
+            put :make_primary
+          end
+        end
+
+        resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
+          member do
+            put :toggle_publish
+          end
+        end
+
+        resources :red_carpet_events, only: [:new, :create, :edit, :update, :index, :destroy] do
+          member do
+            put :toggle_publish
+          end
+        end
+
         resources :celebrities do
-          resources :celebrity_photos
+          member do
+            put :toggle_featured
+          end
         end
       end
     end

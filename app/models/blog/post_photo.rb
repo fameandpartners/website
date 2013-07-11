@@ -1,4 +1,5 @@
 class Blog::PostPhoto < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
 
   attr_writer     :primary
   attr_accessible :photo, :primary
@@ -9,7 +10,7 @@ class Blog::PostPhoto < ActiveRecord::Base
   has_attached_file :photo
 
   validates_attachment_presence :photo
-  validates :user_id, :post, presence: true
+  validates :user_id, presence: true
 
   def primary
     self.persisted? && post.primary_photo_id == self.id
@@ -18,4 +19,16 @@ class Blog::PostPhoto < ActiveRecord::Base
   def primary_text
     primary ? 'yes' : 'no'
   end
+
+  def to_jq_upload
+    {
+      "name" => read_attribute(:photo_file_name),
+      "size" => read_attribute(:photo_file_size),
+      "thumbnail_url" => photo.url,
+      "url" => photo.url,
+      "delete_url" => "/admin/blog/post_photos/#{self.id}",
+      "delete_type" => "DELETE"
+    }
+  end
+
 end
