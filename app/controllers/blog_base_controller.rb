@@ -6,8 +6,12 @@ class BlogBaseController < ApplicationController
 
   private
 
+  #def current_ability
+  #  @current_ability ||= Blog::Ability.new(try_spree_current_user)
+  #end
+
   def load_categories
-    @categories           = Blog::Category.all
+    @categories = Blog::Category.all
   end
 
   def load_featured_celebrities

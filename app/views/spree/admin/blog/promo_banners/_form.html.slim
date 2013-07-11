@@ -41,7 +41,7 @@
       = f.error_message_on :photo
       br
         - if @blog_promo_banner.persisted? && @blog_promo_banner.photo.present?
-          = image_tag @blog_promo_banner.photo.url, height: '200'
+          = image_tag @blog_promo_banner.photo.url(:preview), height: '200'
 
 
     = f.field_container :submit do

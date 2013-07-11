@@ -1,41 +1,88 @@
 = render 'shared/blog_top_bar'
+= render partial: 'blog/shared/celebrity_popup'
 
-.wrap
-
+.wrap.no-overflow
   = render 'shared/breadcrumbs'
 
   .page-title
     h1.block-title.dark= @celebrity.fullname
-    .track-celebrity = link_to 'Track this celebrity', '#', class: 'active'
+    /.track-celebrity = link_to 'Track this celebrity', '#', class: 'active'
     .block-select
-      select.selectbox name="tags"
-        option Show celebrity photos
-        option Show blog posts
-
-  .content-sidebar.clearfix
-    section.content-area
-      .celebrity-photos.columns-3
-        - if @celebrity.celebrity_photos.present?
-          ul
-            - @celebrity.celebrity_photos.each do |photo|
-              li
-                .zoom
-                = link_to '#', class: 'celebrity-photo' do
-                  = image_tag photo.photo.url, width: 269, height: 375, alt: ''
-                  .overlay
-                    .name= @celebrity.fullname
-                    .event Ipsum Awards 2013
-                .love-share
-                  .love-hate
-                    .icons
-                      .love
-                      .hate
-                    .label Love it or loathe it
-                  .share
-                    .icons
-                      .share-block
-                    .label Share
+      select.selectbox name="tags" id="celebrity_show_page"
+        - if params[:type] == 'posts'
+          option value="#{blog_celebrity_path(@celebrity.slug)}" Show celebrity photos
+          option selected="selected" value="#{blog_celebrity_posts_path(@celebrity.slug)}" Show blog posts
         - else
-          .empty No photos found
+          option selected="selected" value="#{blog_celebrity_path(@celebrity.slug)}" Show celebrity photos
+          option value="#{blog_celebrity_posts_path(@celebrity.slug)}" Show blog posts
 
-    = render 'shared/blog_sidebar'
+  - if params[:type] == 'posts'
+    .content-sidebar
+      section.content-area
+        - if @posts.present?
+          - @posts.each do |post|
+            .blog-block-title
+              article.post
+                h2
+                  - if post.red_carpet?
+                    = link_to post.title, blog_red_carpet_post_path(post.slug)
+                  - else
+                    = link_to post.title, blog_post_by_category_path(post.category.slug, post.slug)
+                .post-meta
+                  .date= post.occured_at_formatted
+                  .comments
+                    - if post.red_carpet?
+                      = link_to '0 Comments', blog_red_carpet_post_path(post.slug) + '#disqus_thread'
+                    - else
+                      = link_to '0 Comments', blog_post_by_category_path(post.category.slug, post.slug) + '#disqus_thread'
+                  .author
+                    = link_to blog_post_by_category_path(post.category.slug, post.user.slug) do
+                      .avatar
+                        = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
+                      .name= post.user.fullname
+                - if post.primary_photo.present?
+                  .featured-image
+                    = image_tag post.primary_photo.photo.url, width: 742, height: 355, alt: ''
+                - if post.body.present?
+                  .post-content= raw(post.body)
+        - else
+          .blog-block-title
+            .empty No posts found
+      = render 'shared/blog_sidebar'
+
+  - else
+    .content-sidebar.clearfix
+      section.content-area
+        .celebrity-photos.columns-3
+          - if @celebrity.celebrity_photos.present?
+            ul
+              - @celebrity.celebrity_photos.with_posts.each do |photo|
+                li[data-name="#{@celebrity.fullname}" data-date="#{photo.created_at_formatted}" data-photo-url="#{photo.photo.url(:preview)}"]
+                  .zoom
+                  = link_to '#', class: 'celebrity-photo' do
+                    = image_tag photo.photo.url(:small), width: 269, height: 375, alt: ''
+                    .overlay
+                      .name= @celebrity.fullname
+                      - if photo.post.present?
+                        .event=photo.post.title
+                  .love-share
+                    .love-hate
+                      .icons[data-id="#{photo.id}"]
+                        - if @photo_votes.present?
+                          - vote = @photo_votes.detect {|v| v.celebrity_photo_id == photo.id}
+                        - if vote.present?
+                          .love[class="#{vote.like? ? 'active' : ''}"]
+                          .hate[class="#{vote.dislike? ? 'active' : ''}"]
+                        - else
+                          .love
+                          .hate
+                      .label Love it or loathe it
+                    /.share
+                      .icons
+                        .share-block
+                      .label Share
+          - else
+            .empty No photos found
+
+
+      = render 'shared/blog_sidebar'

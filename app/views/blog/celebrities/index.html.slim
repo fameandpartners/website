@@ -1,7 +1,7 @@
 = render 'shared/blog_top_bar'
+= render partial: 'blog/shared/celebrity_popup'
 
 .wrap
-
   = render 'shared/breadcrumbs'
 
   .page-title
@@ -11,24 +11,11 @@
   .celebrity-photos
     - if @celebrities.present?
       ul
-        - @celebrities.each do |celebrity|
-          li
-            .zoom
-            = link_to blog_celebrity_path(celebrity.slug), class: 'celebrity-photo' do
-              - if celebrity.main_photo.present?
-                = image_tag celebrity.main_photo.photo.url, width: 269, height: 375, alt: ''
-              .overlay
-                .name= celebrity.fullname
-                .event Ipsum Awards 2013
-            .love-share
-              .love-hate
-                .icons
-                  .love
-                  .hate
-                .label Love it or loathe it
-              .share
-                .icons
-                  .share-block
-                .label Share
+        = render @celebrities
     - else
       .empty No celebrities found
+
+javascript:
+  $(function() {
+    window.initInfiniteScroll("#{request.path}", #{@celebrities_count});
+  });

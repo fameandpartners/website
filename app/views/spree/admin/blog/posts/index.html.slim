@@ -11,17 +11,23 @@
     thead
       tr
         th Title
-        th Occured at
-        th Type
+        th Occurred at / Publish Date
+        th Category
         th State
+        th Created At
         th.actions
     tbody
       - @posts.each do |post|
         tr
-          td= post.title
+          td= link_to post.title, edit_admin_blog_post_path(post)
           td= post.occured_at_formatted
-          td= post.post_type_text
-          td= post.state
+          td= post.category.name
+          - if can? :toggle_publish, post
+            td[data-url="#{toggle_publish_admin_blog_post_path(post)}"]
+              = check_box_tag :published, '', post.published?
+          - else
+            td= post.state
+          td= post.created_at_formatted
           td
             = link_to "", edit_admin_blog_post_path(post), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
             | |
@@ -29,3 +35,12 @@
 - else
   = render partial: "spree/admin/shared/no_items_found"
 = paginate @posts
+
+javascript:
+  $(function() {
+    $('table.index.blog_posts input[type=checkbox]').on('click', function(e) {
+      url = $(e.target).parent().attr('data-url');
+      $.ajax({method: 'PUT', url: url});
+    });
+  });
+

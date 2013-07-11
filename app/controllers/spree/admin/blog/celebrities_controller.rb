@@ -1,7 +1,9 @@
-class Spree::Admin::Blog::CelebritiesController < Spree::Admin::BaseController
+class Spree::Admin::Blog::CelebritiesController < Spree::Admin::Blog::BaseController
 
   def index
-    @celebrities = Blog::Celebrity.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])
+    @celebrities = Blog::Celebrity.page(params[:page]).
+                   per(params[:per_page] || Spree::Config[:orders_per_page]).
+                   order('created_at desc')
   end
 
   def new
@@ -47,6 +49,19 @@ class Spree::Admin::Blog::CelebritiesController < Spree::Admin::BaseController
     @blog_celebrity = Blog::Celebrity.find(params[:id])
     @blog_celebrity.destroy
     redirect_to action: :index
+  end
+
+  def toggle_featured
+    celebrity = Blog::Celebrity.find(params[:id])
+    if celebrity.featured?
+      celebrity.featured_at = nil
+    else
+      celebrity.featured_at = Time.now.utc
+    end
+    celebrity.save
+    respond_to do |format|
+      format.js {render text: 'ok' }
+    end
   end
 
   private

@@ -22,11 +22,7 @@
       br
       = f.error_message_on :slug
 
-    = f.field_container :featured do
-      = f.label :featured, "Featured"
-      br
-      = f.check_box :featured, class: 'text', size: 50
-
     = f.field_container :submit do
       = f.submit
       br
+= render 'celebrity_photos_upload'

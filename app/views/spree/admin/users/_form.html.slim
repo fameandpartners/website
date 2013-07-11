@@ -1,0 +1,45 @@
+.row data-hook="admin_user_form_fields"
+  .alpha.five.columns
+    = f.field_container :email do
+      = f.label :email, t(:email)
+      = f.email_field :email, :class => 'fullwidth'
+      = error_message_on :user, :email
+    = f.field_container :first_name do
+      = f.label :first_name, 'First Name'
+      = f.text_field :first_name, :class => 'fullwidth'
+      = error_message_on :user, :first_name
+    = f.field_container :last_name do
+      = f.label :last_name, 'Last Name'
+      = f.text_field :last_name, :class => 'fullwidth'
+      = error_message_on :user, :last_name
+    = f.field_container :slug do
+      = f.label :slug, 'Slug'
+      = f.text_field :slug, :class => 'fullwidth'
+      = error_message_on :user, :slug
+    = f.field_container :description do
+      = f.label :description, 'Description'
+      = f.text_area :description, :class => 'fullwidth'
+      = error_message_on :user, :description
+    = f.field_container :avatar do
+      = f.label :avatar, 'Avatar'
+      - if f.object.avatar.present?
+        = image_tag f.object.avatar.url, height: 200
+      = f.file_field :avatar, :class => 'fullwidth'
+      = error_message_on :user, :avatar
+  .omega.five.columns
+    = f.field_container :password do
+      = f.label :password, t(:password)
+      = f.password_field :password, :class => 'fullwidth'
+      = f.error_message_on :password
+    = f.field_container :password do
+      = f.label :password_confirmation, t(:confirm_password)
+      = f.password_field :password_confirmation, :class => 'fullwidth'
+      = f.error_message_on :password_confirmation
+    .field data-hook="admin_user_form_roles"
+      = label_tag nil, t(:roles)
+      ul
+        - @roles.each do |role|
+          li
+            = check_box_tag 'user[spree_role_ids][]', role.id, @user.spree_roles.include?(role), :id => "user_spree_role_#{role.name}"
+            = label_tag role.name
+      = hidden_field_tag 'user[spree_role_ids][]', ''

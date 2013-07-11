@@ -42,7 +42,7 @@ module ApplicationHelper
   end
 
   def celebrities_page?
-    params[:type].blank? && (params[:action] == 'show' || params[:action] == 'index')
+    params[:controller] == 'blog/celebrities' && (params[:action] == 'show' || params[:action] == 'index')
   end
 
   def authors_page?

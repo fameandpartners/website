@@ -1,4 +1,4 @@
-class Spree::Admin::Blog::CategoriesController < Spree::Admin::BaseController
+class Spree::Admin::Blog::CategoriesController < Spree::Admin::Blog::BaseController
 
   def index
     @categories = Blog::Category.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])

@@ -19,13 +19,14 @@ gem 'newrelic_rpm'
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
+
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '1.3.0'
   gem 'execjs', '1.4.0'
   gem 'jquery-ui-rails'
-  gem 'jquery-fileupload-rails', '0.3.4'
+  gem 'jquery-fileupload-rails'
 end
 
 group :development do

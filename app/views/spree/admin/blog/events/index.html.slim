@@ -25,3 +25,8 @@
 - else
   = render partial: "spree/admin/shared/no_items_found"
 = paginate @events
+
+javascript:
+  $(function() {
+    window.initInfiniteScroll("#{request.path}", #{@authors_count});
+  });

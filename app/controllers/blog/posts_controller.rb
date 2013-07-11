@@ -1,16 +1,31 @@
 class Blog::PostsController < BlogBaseController
+  POSTS_PER_PAGE = 10
+
   before_filter :load_categories
   before_filter :load_featured_celebrities
 
   def index
-    @posts = post_scope.page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])
+    @posts_count = post_scope.count
+    @posts = post_scope.page(params[:page]).per(POSTS_PER_PAGE)
+    respond_to do |format|
+      format.js do
+      end
+      format.html do
+        generate_breadcrumbs_for_index
+      end
+    end
   end
 
   def show
     @post = post_scope.includes(
-      :author, :event, :post_photos, :celebrity_photos, :category, :celebrities
+      :user, :post_photos, :celebrity_photos, :category, :celebrities
     ).find_by_slug!(params[:post_slug])
-    generate_breadcrumbs
+    if current_spree_user.present?
+      @photo_votes = Blog::CelebrityPhotoVote.where(
+        user_id: current_spree_user.id, celebrity_photo_id: @post.celebrity_photos.map(&:id)
+      )
+    end
+    generate_breadcrumbs_for_show
   end
 
   private
@@ -23,19 +38,26 @@ class Blog::PostsController < BlogBaseController
     else
       scope = scope.where(post_type_id: Blog::Post::PostTypes::SIMPLE)
       if params[:category_slug].present?
-        category = Blog::Category.find_by_slug(params[:category_slug])
-        scope = scope.where(category_id: category.try(:id))
+        @category = Blog::Category.find_by_slug(params[:category_slug])
+        scope = scope.where(category_id: @category.try(:id))
       end
     end
     @post_scope = scope
   end
 
-  def generate_breadcrumbs
+  def generate_breadcrumbs_for_show
     if params[:type] == 'red_carpet'
       @breadcrumbs = [[root_path, 'Home'], [blog_red_carpet_posts_path, 'Red Carpet Events'], [blog_red_carpet_post_path(@post.slug), @post.title]]
     else
-      @breadcrumbs = [[root_path, 'Home'], [blog_posts_by_category_path(@post.category.slug), @post.category.name], [blog_red_carpet_post_path(@post.slug), @post.title]]
+      @breadcrumbs = [[root_path, 'Home'], [blog_posts_by_category_path(@post.category.slug), @post.category.name], [blog_post_by_category_path(@post.category.slug, @post.slug), @post.title]]
     end
   end
-  helper_method :bread_crumbs
+
+  def generate_breadcrumbs_for_index
+    if params[:type] == 'red_carpet'
+      @breadcrumbs = [[root_path, 'Home'], [blog_red_carpet_posts_path, 'Red Carpet Events']]
+    else
+      @breadcrumbs = [[root_path, 'Home'], [blog_posts_by_category_path(@category.try(:slug)), @category.try(:name)]]
+    end
+  end
 end

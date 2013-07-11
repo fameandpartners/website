@@ -1,0 +1,33 @@
+.celebrity-modal.hidden
+  .overlay
+  .close-modal
+    = link_to '#' do
+      ' Close
+      span x
+  .celebrity-blocks
+    section.celebrity-main
+      .name
+      = image_tag '', alt: '', height: 770, width: 576
+      .love-share
+        .love-hate
+          .label Love it or loathe it
+          .icons
+            .love
+            .hate
+        /.share
+          .label Share
+          .icons
+            .share-block
+      .post-meta
+        .date
+    section.block-comments
+      #disqus_thread
+    /section.celebrity-sidebar
+      .blog-block-title
+        .latest Similar
+        .block-subtitle Prom Dresses
+      = image_tag 'http://placehold.it/196x250', alt: ''
+      = image_tag 'http://placehold.it/196x250', alt: ''
+      .browse-more = link_to 'Browse more dresses', '#'
+
+

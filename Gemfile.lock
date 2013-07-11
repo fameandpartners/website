@@ -229,7 +229,7 @@ GEM
       rack
     i18n (0.6.1)
     journey (1.0.4)
-    jquery-fileupload-rails (0.3.4)
+    jquery-fileupload-rails (0.4.1)
       actionpack (>= 3.1)
       railties (>= 3.1)
     jquery-rails (2.2.2)
@@ -438,7 +438,7 @@ DEPENDENCIES
   data_migrate!
   debugger
   execjs (= 1.4.0)
-  jquery-fileupload-rails (= 0.3.4)
+  jquery-fileupload-rails
   jquery-rails
   jquery-ui-rails
   launchy (= 2.2.0)
