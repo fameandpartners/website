@@ -83,11 +83,14 @@
           left: -2px;
         }
       }
+      .remove-item-from-cart {
+        display: none;
+      }
     }
   }
   .totals {
     overflow: hidden;
-    margin: 0 6px 10px;
+    margin: 10px 6px;
     font: 400 12px/1.2 $fontOne;
     color: #333;
     .value {
@@ -124,6 +127,7 @@
       width: 147px;
       height: 28px;
       color: #fff;
+      border: 0;
       @include linear-gradient(#414141, #252525);
     }
   }
@@ -1121,7 +1125,7 @@
   }
   .place-order {
     text-align: center;
-    margin: 28px 0 0;
+    margin: 28px 0;
     input {
       text-transform: uppercase;
       padding: 0 64px;

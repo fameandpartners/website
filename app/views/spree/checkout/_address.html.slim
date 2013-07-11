@@ -16,5 +16,5 @@
         = render :partial => 'spree/checkout/address_form', :locals => {:form => ship_form, :address_type => 'shipping', :address => @order.ship_address}
   .grid-container
     .grid-100.center
-      .input style="text-align: center;"
+      .place-order
         = form.submit 'Update'
