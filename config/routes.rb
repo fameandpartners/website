@@ -19,7 +19,7 @@ FameAndPartners::Application.routes.draw do
     if Rails.env.development?
       request.host =~ /blog\.localdomain/
     else
-      request.host =~ /blog\.#{configatron.application.hostname}/
+      request.host =~ /blog\.#{Regexp.escape(configatron.host)}/
     end
   }
 
