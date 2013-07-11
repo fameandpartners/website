@@ -25,7 +25,7 @@
                 = product_image product, itemprop: "image", width: 136, height: 200, alt: product.name
                 .remove = link_to 'Remove from bag', '#', data: { id: variant.id }, class: 'remove-item-from-cart'
               .desc
-                .name = link_to product.name, product_path(product), target: 'blank'
+                .name = link_to product.name, spree.product_path(product), target: 'blank'
                 .text = line_item_description(variant)
                 .wishlist = link_to 'Move to wish list', '#'
             .grid-30.details

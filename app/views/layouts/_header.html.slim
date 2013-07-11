@@ -30,7 +30,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
         .fleft
           .logo = link_to 'Fame&Partners', root_path
         .fright
-          .wishlist = link_to 'Wish list', '#', class: 'wishlist-link'
+          .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
           .shopping-bag
             = link_to '#', class: 'shopping-bag-toggler' do
               .counter = current_order(true).item_count

@@ -8,7 +8,7 @@ li.item-block
       = link_to 'Remove', '#', class: 'remove-item-from-cart', data: { id: variant.id }
   .item-info
     .price = line_item.money
-    .name = link_to product.name, product_path(product), target: 'blank'
+    .name = link_to product.name, spree.product_path(product), target: 'blank'
     .desc = product_short_description(product)
     ul.specs
       li

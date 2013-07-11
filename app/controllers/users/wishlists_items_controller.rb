@@ -1,5 +1,8 @@
 class Users::WishlistsItemsController < Users::BaseController
+  include Spree::Core::ControllerHelpers::Auth
+  include Spree::Core::ControllerHelpers::RespondWith
   include Spree::Core::ControllerHelpers::Common
+
   before_filter :load_user
 
   def index

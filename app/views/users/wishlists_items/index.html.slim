@@ -16,7 +16,7 @@
                   .like = add_to_wishlist_link(variant)
                   .quick-view = quick_view_link(product)
                   = product_image product, itemprop: "image", width: 243, height: 352, alt: product.name
-                .name = link_to product.name, product
+                .name = link_to product.name, spree.product_path(product)
                 .description = product_short_description(product)
                 .price = product.price_in(current_currency).display_price
                 .add-remove

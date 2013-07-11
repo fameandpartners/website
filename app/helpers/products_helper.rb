@@ -56,6 +56,6 @@ module ProductsHelper
   end
 
   def quick_view_link(product)
-    link_to 'Quick view', product, data: { action: 'quick-view', id: product.permalink }
+    link_to 'Quick view', spree.product_path(product), data: { action: 'quick-view', id: product.permalink }
   end
 end

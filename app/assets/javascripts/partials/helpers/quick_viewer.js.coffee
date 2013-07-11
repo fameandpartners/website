@@ -66,7 +66,7 @@ window.helpers.quickViewer = {
     @container.hide()
 
   updatePopupHandlers: (product_variants) ->
-    window.helpers.enableTabs($('.tabs'))
+    window.helpers.enableTabs(@container.find('.tabs'))
 
     # show big images from carouseled small images
     viewer = window.helpers.buildImagesViewer(@container).init()

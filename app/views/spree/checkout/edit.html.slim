@@ -30,7 +30,7 @@
             .name
               = index += 1
               | . Billing and shipping details
-          .accordion-content data-step="address" *{ :class => active.eql?('address') && 'hide' }
+          .accordion-content data-step="address" *{ :class => !active.eql?('address') && 'hide' }
             = render 'spree/checkout/address' if active.eql?('address')
           .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }
             .name

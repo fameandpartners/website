@@ -21,7 +21,7 @@ window.helpers.enableTabs = (elements, options = {}) ->
   )
 
 window.helpers.enableTab = (element, options) ->
-  element.find(".#{options.tabs} li a").bind('click', (e) ->
+  element.find(".#{options.tabs} li a").on('click', (e) ->
     e.preventDefault()
 
     # highligh tabs
@@ -32,8 +32,14 @@ window.helpers.enableTab = (element, options) ->
 
     # show tab content
     tabId = $(e.currentTarget).attr('href')
-    element.find(".#{options.content}#{tabId}").show()
-      .siblings(".#{options.content}").hide()
+
+    check_anchor_regexp = /(\#|\.)\w+$/
+    if check_anchor_regexp.test(tabId)
+      element.find(".#{options.content}#{tabId}").show()
+        .siblings(".#{options.content}").hide()
+    else
+      # invalid href
+      return false
   )
   # imitate first tab selecting
   element.find(".#{options.tabs} a").first().click()
