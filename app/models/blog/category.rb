@@ -7,6 +7,6 @@ class Blog::Category < ActiveRecord::Base
   validates :name, :slug, :user_id, presence: true
 
   def latest_post
-    posts.where(post_type_id: Blog::Post::PostTypes::SIMPLE).where('published_at IS NOT NULL').order('published_at desc').first
+    posts.published.where(post_type_id: Blog::Post::PostTypes::SIMPLE).where('published_at IS NOT NULL').order('published_at desc').first
   end
 end
