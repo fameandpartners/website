@@ -14,13 +14,15 @@ FameAndPartners::Application.routes.draw do
     get '/spree_user/thanks' => 'spree/user_registrations#thanks'
   end
 
+
+
+
   # Blog routes
   blog_constraint = lambda { |request|
     if Rails.env.development?
       request.host =~ /blog\.localdomain/
-      true
     elsif Rails.env.staging?
-      true
+      request.host =~ /blog.fame.23stages.com/
     else
       request.host =~ /blog\.#{Regexp.escape(configatron.host)}/
     end
