@@ -53,6 +53,10 @@ module ApplicationHelper
     "#{controller.controller_name}-#{restfull_action_name}"
   end
 
+  def controller_action_id
+    "#{controller.controller_name}"
+  end
+
   def facebook_authentication_available?
     Spree::AuthenticationMethod.exists?(:environment => ::Rails.env, :provider => :facebook, :active => true)
   end

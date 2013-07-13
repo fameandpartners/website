@@ -12,5 +12,5 @@
         .blog-block-title
           .latest Latest
           .block-subtitle= category.name
-          = render partial: 'latest_post_by_category', locals: {post: category.latest_post, category: category}
+        = render partial: 'latest_post_by_category', locals: {post: category.latest_post, category: category}
     = render 'shared/blog_sidebar'

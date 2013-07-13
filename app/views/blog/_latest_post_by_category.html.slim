@@ -1,5 +1,5 @@
 - if post.present? && post.slug.present?
-  article.post
+  article.post.single
     h2
       - if post.red_carpet?
         = link_to post.title, blog_red_carpet_post_path(post.slug)
