@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Auth
 
-  before_filter :check_cart
+  append_before_filter :check_cart
 
   def check_cart
     # if can't find order, create it ( true )

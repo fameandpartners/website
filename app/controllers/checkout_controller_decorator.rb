@@ -46,6 +46,8 @@ Spree::CheckoutController.class_eval do
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special'
 
+        session[:successfully_ordered] = true
+
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }
