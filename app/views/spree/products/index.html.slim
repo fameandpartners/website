@@ -5,35 +5,25 @@
       .filters-block
         .title Our range
         ul.filters-boxes.range
-          li
-            label All
-            = check_box_tag 'range', 'all'
           - selected_items = (params[:taxons].present? ? params[:taxons][:range] : {}) || []
+          li class=(selected_items.blank? ? 'active' : '')
+            label All
+            = check_box_tag 'range', 'all', selected_items.blank?
           - available_product_ranges.each do |taxon|
-            - if selected_items.include?(taxon.id.to_s)
-              li.active
-                label = taxon.name
-                = check_box_tag 'range', taxon.id, true
-            - else
-              li
-                label = taxon.name
-                = check_box_tag 'range', taxon.id, false
+            li class=(selected_items.include?(taxon.id.to_s) ? 'active' : '')
+              label = taxon.name
+              = check_box_tag 'range', taxon.id, true
       .filters-block
         .title Style
         ul.filters-boxes.style
-          li
-            label All
-            = check_box_tag 'style', 'all'
           - selected_items = (params[:taxons].present? ? params[:taxons][:style] : {}) || []
+          li class=(selected_items.blank? ? 'active' : '')
+            label All
+            = check_box_tag 'style', 'all', selected_items.blank?
           - available_product_styles.each do |taxon|
-            - if selected_items.include?(taxon.id.to_s)
-              li.active
-                label = taxon.name
-                = check_box_tag 'style', taxon.id, true
-            - else
-              li
-                label = taxon.name
-                = check_box_tag 'style', taxon.id, false
+            li class=(selected_items.include?(taxon.id.to_s) ? 'active' : '')
+              label = taxon.name
+              = check_box_tag 'style', taxon.id, true
       .filters-block
         .title Body shape
         ul.filters-boxes.squares
@@ -64,8 +54,8 @@
       .filters-block
         .title Color
         .colors
-          .color.white.all data-color='all' All
           - selected_colors = params[:colors] || []
+          .color.white.all class="#{ selected_colors.blank? ? 'active' : '' }" data-color='all' All
           - available_product_colors.each do |color|
             - if selected_colors.include?(color.id.to_s)
               .color.active class='#{color.name}' data-color='#{color.id}'

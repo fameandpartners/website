@@ -4,12 +4,8 @@
     .results.fleft = pluralize(products.length, 'result')
     .sort.fright
       ' Sort by
-      select#product_order name="sort" 
-        option value='' choose
-        option value='price_high'  Price High
-        option value='price_low' Price Low
-        option value='newest' What's new
-        option value='popular' Popular
+      - options = options_from_collection_for_select(Products::ProductsFilter.available_orders, :first, :second, params[:order])
+      = select_tag "product_order", options, prompt: 'Choose'
 ul.products-list.grid-container
   - products.each do |product|
     li.product-item.grid-33
