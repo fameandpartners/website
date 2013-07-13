@@ -3,7 +3,7 @@
   height: auto;
 }
 
-#blog, #authors, #posts, #celebrities {
+#blog, #authors, #posts, #celebrities, #searches {
   background: image-url('bg-blog.jpg') 0 0 repeat;
   min-height: 100%;
   height: auto;
@@ -81,7 +81,7 @@
     margin-bottom: 6px;
     .latest {
       display: inline;
-      margin: 0;
+      margin: 0 0 0 2px;
     }
     .block-subtitle {
       display: inline;
