@@ -67,8 +67,7 @@ javascript:
                   = image_tag 'http://placehold.it/60x84', alt: ''
         .buy-wishlist
           = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
-          = link_to 'Add to wish list', '#', class: 'add-wishlist',
-            data: { action: 'add-to-wishlist', id: @product.id }
+          = add_to_wishlist_link(@product)
         .tabs
           ul.tabs-links
             li = link_to 'Description', '#description'

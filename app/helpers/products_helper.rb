@@ -33,9 +33,9 @@ module ProductsHelper
   def inspiration_image(product, options = {})
     image_src = product.property('inspiration_photo') || 'http://placehold.it/590x600'
     height  = options[:height] || 590
-    width   = options[:width] || 600
+    #width   = options[:width] || 600
 
-    image_tag image_src, height: height, width: width
+    image_tag image_src, height: height
   end
 
   def hoverable_product_image(product, options = {})
