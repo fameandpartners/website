@@ -112,6 +112,7 @@ $(".products.index").ready ->
       $(".quick-view a[data-action='add-to-wishlist']").on('click', window.productWishlist.onClickHandler)
       $('#product_order').on('change', productsFilter.changeOrderHandler)
 
+      window.addSwitcherToAltImage() if window.addSwitcherToAltImage
   }
 
   window.helpers.quickViewer.init()

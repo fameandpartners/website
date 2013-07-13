@@ -38,14 +38,16 @@ module ProductsHelper
     image_tag image_src, height: height
   end
 
-  def hoverable_product_image(product, options = {})
+  def hoverable_product_image_tag(product, options = {})
+    no_image = "noimage/product.png"
     if product.images.empty?
-      image_tag "noimage/product.png", options
+      image_tag no_image, options
     else
       images = product.images
       image = images.first
       options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
       options[:mouseover] = images.second.attachment.url(:product) if images.size > 1
+      options[:alt_image] = no_image
       image_tag image.attachment.url(:product), options
     end 
   end
