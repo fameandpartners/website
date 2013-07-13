@@ -15,15 +15,16 @@ ruby:
 /    input type="radio" name="cards"
 /    label PayPal
 /  .image = image_tag 'icon-paypal.png', width: 51, height: 33, alt: 'PayPal'
-/.coupon-block.border
-/  .grid-container
-/    .grid-50
-/      .input
-/        label Enter your coupon code
-/        input type="text" name="coupon"
-/    .grid-50
-/      .submit
-/        input type="button" value="Redeem"
+.coupon-block.border
+  .grid-container
+    = form_for @order, url: update_checkout_path('payment'),remote: true do |f|
+      .grid-50
+        .input
+          label Enter your coupon code
+          = f.text_field :coupon_code
+      .grid-50
+        .submit
+          = f.submit 'Redeem'
 /.style-tips.border
 /  .grid-container
 /    .grid-50

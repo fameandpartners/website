@@ -26,8 +26,19 @@ Spree::CheckoutController.class_eval do
     if @order.update_attributes(object_params)
 
       fire_event('spree.checkout.update')
-      unless apply_coupon_code
-        respond_with(@order) { |format| format.html { render :edit } }
+      if object_params.key?(:coupon_code)
+        if object_params[:coupon_code].present? && apply_coupon_code
+          @order.reload
+
+          respond_with(@order) do |format|
+            format.js{ render 'spree/checkout/coupon_code/success' }
+          end
+        else
+          respond_with(@order) do |format|
+            format.js{ render 'spree/checkout/coupon_code/failure' }
+          end
+        end
+
         return
       end
 

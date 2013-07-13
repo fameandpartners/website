@@ -7,6 +7,22 @@ Spree::OrdersController.class_eval do
     end
 
     if @order.update_attributes(params[:order])
+      if params[:order] && params[:order].has_key?(:coupon_code)
+        if params[:order][:coupon_code].present? && apply_coupon_code
+          @order.reload
+
+          respond_with(@order) do |format|
+            format.js{ render 'spree/orders/coupon_code/success' }
+          end
+        else
+          respond_with(@order) do |format|
+            format.js{ render 'spree/orders/coupon_code/failure' }
+          end
+        end
+
+        return
+      end
+
       @order.line_items = @order.line_items.select {|li| li.quantity > 0 }
       fire_event('spree.order.contents_changed')
       respond_with(@order) do |format|

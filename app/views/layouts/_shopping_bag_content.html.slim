@@ -14,4 +14,4 @@
     .buttons
       = link_to 'Go to cart', spree.cart_path, class: 'continue'
       = form_for current_order, url:  spree.cart_path do |form|
-        = form.submit 'Buy now', class: 'buy-now'
+        = form.submit 'Buy now', name: :checkout, class: 'buy-now'
