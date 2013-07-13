@@ -24,4 +24,18 @@ Spree::OrdersController.class_eval do
       respond_with(@order)
     end
   end
+
+  private
+
+  def check_authorization
+    access_token = params[:token] || session[:access_token]
+
+    order = Spree::Order.find_by_number(params[:id]) || current_order
+
+    if order
+      authorize! :edit, order, access_token
+    else
+      authorize! :create, Spree::Order
+    end
+  end
 end

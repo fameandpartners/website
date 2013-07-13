@@ -62,14 +62,14 @@
       </div>
     </div>
     <div class="buttons">
-      <a href="/cart" class='continue'>Continue shopping</a>
+      <a href="/cart" class="continue">Go to cart</a>
       <form accept-charset="UTF-8" action="/cart" method="post">
         <div style="margin:0;padding:0;display:inline">
           <input name="utf8" type="hidden" value="✓">
           <input name="_method" type="hidden" value="put">
           <input name="<%= @csrf_param %>" type="hidden" value="<%= @csrf_token %>">
         </div>
-        <button class="buy-now" name="checkout" type="submit">Buy now</button>
+        <input type="submit" class="buy-now" value="Buy now">
       </form>
     </div>
   <% end %>
