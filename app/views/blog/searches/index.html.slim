@@ -1,9 +1,9 @@
 = render 'shared/blog_top_bar'
 
-.wrap
+.wrap.no-overflow
   = render 'shared/breadcrumbs'
 
-  .content-sidebar
+  .content-sidebar.clearfix
     section.content-area
       .search-box
         input type="text" name="search" placeholder="Search for..." id='search_by_query' value="#{params[:q].present? ? params[:q] : ''}"
