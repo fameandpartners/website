@@ -36,23 +36,33 @@ window.helpers.createProductVariantsSelector = (root) ->
 
     selectColor: (color) ->
       @selected.color = color
-      selected_variants = _.where(@variants, { color: color })
-      @updateSelectbox(rootElement.find('#toggle-selectbox'), selected_variants, 'size')
+      avaialable_variants = _.where(@variants, { color: color })
+      @updateSelectbox(rootElement.find('#toggle-selectbox'), avaialable_variants, 'size')
       @updatePurchaseConditions()
 
     selectSize: (size) ->
       @selected.size = size
       @updatePurchaseConditions()
 
-    updateSelectbox: (container, available_options, method_name) ->
-      return false # options update for 'chosen' plugin not working
-      container.find('option').remove()
-      container.append($('<option/>', { value: '', text: 'Select an Option' }))
-      _.each(available_options, (option) ->
-        container.append($('<option>', { value: option[method_name] }))
+      avaialable_variants = _.where(@variants, { size: size })
+      @updateColorsSelector(avaialable_variants)
+
+    updateSelectbox: (selectBox, available_options, method_name) ->
+      selectBox.find('option').attr('disabled', 'disabled')
+
+      _.each(available_options, (variant) ->
+        selectBox.find("option[value=#{variant.size}]").removeAttr('disabled')
       )
-      container.val(@selected.size)
-      container.trigger("liszt:updated")
+      selectBox.find("option[value='']").removeAttr('disabled')
+
+      selectBox.trigger("liszt:updated")
+
+    updateColorsSelector: (avaialable_variants) ->
+      $('.colors-choser .colors .color').hide()
+      _.each(avaialable_variants, (variant) ->
+        $(".colors-choser .colors .color[data-color='#{variant.color}']").show()
+      )
+      return
 
     updatePurchaseConditions: () ->
       @updateDeliveryTime()
@@ -94,18 +104,16 @@ window.helpers.createProductVariantsSelector = (root) ->
       if selected
         variant = _.findWhere(@variants, { id: selected.id })
         variant or= _.findWhere(@variants, selected)
+        variant or= _.findWhere(@variant, { color: selected.color })
+        variant or= _.findWhere(@variant, { size: selected.size })
 
+      variant or= @variants[0]
       if variant
         variantsSelector.selectSizeAndColor(variant.size, variant.color)
-      else
-        variantsSelector.selectFirstAvailableOptions()
-
-    selectFirstAvailableOptions: () ->
-      variant = variantsSelector.variants[0]
-      variantsSelector.selectSizeAndColor(variant.size, variant.color)
 
     selectSizeAndColor: (size, color) ->
+      rootElement.find('#toggle-selectbox').val(size).trigger("liszt:updated")
       rootElement.find(".colors-choser .colors .color.#{color}").click()
-      rootElement.find('#toggle-selectbox').val(size)
+
       variantsSelector.selectSize.call(variantsSelector, size)
   }
