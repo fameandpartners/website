@@ -29,3 +29,11 @@ window.getUniqueValues = (array, property) ->
 window.setCurrentPath = (path) ->
   url = "#{ window.location.origin }#{ path }"
   window.history.pushState({path:url},'',url)
+
+window.switchToAltImage = (image) ->
+  $image = $(image)
+  $image.removeAttr('onerror')
+  if $image.attr('alt_image')
+    no_image_src = "/assets/" + $image.attr('alt_image')
+    $image.attr('src', no_image_src).removeAttr('onmouseover').removeAttr('onmouseout')
+  return true
