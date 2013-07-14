@@ -59,7 +59,7 @@ end
 
 def create_properties(product)
   {
-    short_descrption: generate_description(10),
+    short_description: generate_description(10),
     fit: generate_special_notes,
     fabric: generate_fabric,
     weight: '0.75kg'

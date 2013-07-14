@@ -24,6 +24,8 @@ $ bundle exec rake db:populate:dresses
 $ bundle exec rake db:populate:taxonomy
 $ bundle exec rake db:populate:product_options
 ```
+to create dress prototypes
+$ bundle exec rake db:populate:prototypes
 
 ### Thanks for using Fame and Partners!
 
