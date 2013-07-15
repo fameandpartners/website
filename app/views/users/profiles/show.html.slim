@@ -13,7 +13,7 @@
                   .avatar-field
                     - if @user.image.present?
                       .avatar
-                        = image_tag @user.image
+                        = image_tag @user.image, width: 100
                     - else
                       .avatar.empty
                     input.btn-upload type="button" value="Upload profile photo"

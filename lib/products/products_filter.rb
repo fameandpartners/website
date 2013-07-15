@@ -9,8 +9,8 @@ module Products
         [
           ['price_high', 'Price High'],
           ['price_low', 'Price Low'],
-          ['newest', "What's new"],
-          ['popular', 'popular']
+          #['popular', 'popular'],
+          ['newest', "What's new"]
         ]
       end
     end

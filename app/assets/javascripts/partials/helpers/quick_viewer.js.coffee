@@ -3,6 +3,7 @@ window.helpers.quickViewer = {
   popupContainer: null,
   overlayContainer: null,
   container: null,
+  indicator: null,
 
   init: () ->
     window.helpers.quickViewer.__init.apply(window.helpers.quickViewer, arguments)
@@ -36,7 +37,11 @@ window.helpers.quickViewer = {
   onBuyButtonClickHandler: (e) ->
     e.preventDefault()
     variantId = $(e.currentTarget).data("variant_id")
-    window.shopping_cart.addProduct(variantId)
+    window.helpers.quickViewer.indicator.showLoading()
+    window.shopping_cart.addProduct(variantId, {
+      success: window.helpers.quickViewer.indicator.hideLoading,
+      failure: window.helpers.quickViewer.indicator.hideLoading
+    })
 
   showProduct: (productId) ->
     $.ajax(
@@ -59,6 +64,7 @@ window.helpers.quickViewer = {
     @container.show()
     @movePopupToCenter()
     @overlayContainer.one('click', @onCloseButtonHandler)
+    @indicator = helpers.buildLoadingIndicator(@container.find('.buy-wishlist .buy-now'))
 
   closePopup: () ->
     @popupContainer.hide()

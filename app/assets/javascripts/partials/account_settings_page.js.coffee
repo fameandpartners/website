@@ -3,14 +3,25 @@ $('.profiles.show').ready ->
     if $('.avatar-field .avatar img').length > 0
       $('.avatar-field .avatar img').attr(src: img_src)
     else
-      $image = $("<img />", {src: img_src})
+      $image = $("<img />", {src: img_src, width: '100px'})
       $('.avatar-field .avatar').append($image)
     $('.avatar-field .avatar').removeClass('empty')
 
+  submitButtonText = null
+  previousAvatarImage = null
+  spinnerImage = '/assets/spinner-big.gif'
   showSpinner = () ->
+    submitButtonText = $('.btn-upload').val()
+    previousAvatarImage = $('.avatar-field .avatar img').attr('src')
+
+    $('.btn-upload').attr('disabled', true).val('Loading ...')
+    updateUserAvatarImage(spinnerImage)
     return true
 
   hideSpinner = () ->
+    $('.btn-upload').removeAttr('disabled').val(submitButtonText)
+    if $('.avatar-field .avatar img').attr('src') == spinnerImage
+      updateUserAvatarImage(previousAvatarImage)
     return true
 
   window.initFileuploader = ->
@@ -22,10 +33,9 @@ $('.profiles.show').ready ->
       multipart: true
       paramName: 'image'
       singleFileUploads: true
-      send: (e, data) ->
-        showSpinner()
+      send: showSpinner
+      always: hideSpinner
       done: (e, data) ->
-        hideSpinner()
         updateUserAvatarImage(data.result.image)
     })
 

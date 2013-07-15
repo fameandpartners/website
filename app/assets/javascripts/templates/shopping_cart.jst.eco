@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="buttons">
-      <a href="/cart" class="continue">Go to cart</a>
+      <a href="/cart" class="continue">View cart</a>
       <form accept-charset="UTF-8" action="/cart" method="post">
         <div style="margin:0;padding:0;display:inline">
           <input name="utf8" type="hidden" value="✓">

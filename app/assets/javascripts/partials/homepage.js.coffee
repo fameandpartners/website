@@ -6,4 +6,5 @@ $(".index.show").ready ->
   window.helpers.quickViewer.init()
 
   $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
-  $("a[data-action='add-to-wishlist']").on('click', window.productWishlist.onClickHandler)
+
+  productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))

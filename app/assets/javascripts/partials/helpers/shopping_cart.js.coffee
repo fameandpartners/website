@@ -23,9 +23,9 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       url: "/line_items"
       type: 'POST'
       dataType: 'json'
-      data: $.param(options)
-      success: window.shopping_cart.buildOnSuccessCallback('item_added', variantId)
-      failure: window.shopping_cart.onFailCallback
+      data: window.shopping_cart.prepareParams(options)
+      success: window.shopping_cart.buildOnSuccessCallback('item_added', variantId, options.success)
+      error: window.shopping_cart.buildOnErrorCallback('item_add_failed', options.failure)
     )
 
   updateProduct: (itemId, options = {}) ->
@@ -37,9 +37,9 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       url: "/line_items/#{itemId}"
       type: 'PUT'
       dataType: 'json'
-      data: $.param(options)
-      success: window.shopping_cart.buildOnSuccessCallback('item_changed', itemId)
-      failure: window.shopping_cart.onFailCallback
+      data: window.shopping_cart.prepareParams(options)
+      success: window.shopping_cart.buildOnSuccessCallback('item_changed', itemId, options.success)
+      error: window.shopping_cart.buildOnErrorCallback('item_change_failed', variantId, options.failure)
     )
 
   removeProduct: (variantId) ->
@@ -49,22 +49,34 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       url: "/line_items/#{variantId}"
       type: 'DELETE'
       dataType: 'html'
-      data: $.param({ variant_id: variantId })
+      data: window.shopping_cart.prepareParams(options)
       success: window.shopping_cart.buildOnSuccessCallback('item_removed', variantId)
-      failure: window.shopping_cart.onFailCallback
+      error: window.shopping_cart.buildOnErrorCallback('item_remove_failed', variantId, options.failure)
     )
 
-  buildOnSuccessCallback: (event_name, objectId) ->
+  prepareParams: (options = {}) ->
+    data = {}
+    for key of options
+      if !_.isFunction(options[key])
+        data[key] = options[key]
+    return $.param(data)
+
+  buildOnSuccessCallback: (event_name, objectId, successCallback) ->
     func = (response) ->
       data = window.shopping_cart.parseResponse(response)
       window.shopping_cart.order = data.order
       window.shopping_cart.line_items = data.order.line_items
 
+      successCallback.apply(window, arguments) if successCallback?
+
       window.shopping_cart.trigger(event_name, { cart: data.order, id: objectId })
     return func
 
-  onFailCallback: () ->
-    console.log('failed request', arguments)
+  buildOnErrorCallback: (event_name, objectId, failureCallback) ->
+    func = (response) ->
+      failureCallback.apply(window, arguments) if failureCallback?
+      window.shopping_cart.trigger(event_name, { response: response, id: objectId })
+    return func
 
   parseResponse: (response) ->
     result = {}
