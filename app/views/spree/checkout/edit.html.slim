@@ -42,4 +42,5 @@
           .accordion-content data-step="payment"
             = render 'spree/checkout/payment' if active.eql?('payment')
       .grid-35
-        = render 'spree/checkout/summary'
+        .checkout-summary
+          = render 'spree/checkout/summary'

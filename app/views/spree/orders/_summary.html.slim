@@ -1,11 +1,5 @@
-.block-name Item description
-.shopping-bag-popup
-  ul.items-carousel
-    = render partial: "shared/line_item",
-      collection: @order.line_items,
-      as: :line_item,
-      locals: {hide_remove: true}
-ul.pricing
+.title Order summary
+ul
   li
     .label Subtotal
     .desc
@@ -14,7 +8,7 @@ ul.pricing
   li
     .label Shipping
     .desc
-      span AUD
+      span = @order.currency
       - if @order.shipment
         = @order.shipment.display_amount
       - else
@@ -22,11 +16,11 @@ ul.pricing
   li
     .label Promotion
     .desc
-      span AUD
+      span = @order.currency
       = @order.display_adjustment_total
   li.totals
     .label Total
     .desc
-      span AUD
+      span = @order.currency
       = @order.display_total
       .taxes Including GST

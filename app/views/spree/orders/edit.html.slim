@@ -67,43 +67,19 @@
             .column.grid-30
               .title Promo code
               .desc
-                input type="text" name="promocode"
+                = form_for @order, remote: true do |f|
+                  = f.text_field :coupon_code, style: "width: 152px;"
         .summary.grid-25.prefix-5.order-summary
-          .title Order summary
-          ul
-            li
-              .label Subtotal
-              .desc
-                span = @order.currency
-                = @order.display_item_total
-            li
-              .label Shipping
-              .desc
-                span = @order.currency
-                - if @order.shipment
-                  = @order.shipment.display_amount
-                - else
-                  ' $0.00
-            li
-              .label Promotion
-              .desc
-                span = @order.currency
-                = @order.display_adjustment_total
-            li.totals
-              .label Total
-              .desc
-                span = @order.currency
-                = @order.display_total
-                .taxes Including GST
+          = render 'summary'
       .continue-buy.grid-container
         .grid-70 = link_to 'Continue shopping', products_path, class: 'continue-shopping'
         .grid-25.prefix-5
-          = form_for @order, url: update_cart_path do |form|
-            = form.button :checkout, name: 'checkout', class: 'buy-now'
+          = form_for @order, url: update_cart_path do |f|
+            = f.button :checkout, name: 'checkout', class: 'buy-now'
           .or or
           .paypal paypal
 
-.modal.edit-line-item(style='display: none;')
+.modal.edit-line-item(style="display: none;")
   .overlay
   .modal-container
     .close-lightbox

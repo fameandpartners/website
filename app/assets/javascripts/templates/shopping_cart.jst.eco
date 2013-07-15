@@ -69,7 +69,7 @@
           <input name="_method" type="hidden" value="put">
           <input name="<%= @csrf_param %>" type="hidden" value="<%= @csrf_token %>">
         </div>
-        <input type="submit" class="buy-now" value="Buy now">
+        <input type="submit" name="checkout" class="buy-now" value="Buy now">
       </form>
     </div>
   <% end %>
