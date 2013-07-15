@@ -1,0 +1,29 @@
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Celebrity Inspiration' } %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @celebrity_inspiration } %>
+
+<%= form_for @celebrity_inspiration, :url => admin_product_inspiration_url(@product), :method => :put do |f| %>
+  <fieldset>
+    <div>
+      <%= f.label :celebrity_name %>
+      <%= f.text_field :celebrity_name %>
+    </div>
+    <br />
+    <% if f.object.photo.present? %>
+      <div>
+        <%= image_tag f.object.photo.url(:thumbnail) %>
+      </div>
+    <% end %>
+    <div>
+      <%= f.label :photo %>
+      <%= f.file_field :photo %>
+    </div>
+  </fieldset>
+
+  <div class="form-buttons filter-actions actions">
+    <%= button t(:update), 'icon-refresh' %>
+  </div>
+<% end %>
+

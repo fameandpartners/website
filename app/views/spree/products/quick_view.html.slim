@@ -1,13 +1,19 @@
-- sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
-- colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+ruby:
+ sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+ colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+ enabled_tabs = ['photos']
+ enabled_tabs.push('inspiration') if @product.celebrity_inspiration
+ enabled_tabs.push('video') if @product.video_url
 
 .product-page.grid-container
   .grid-60
     .tabs
       ul.tabs-links
         li.active = link_to 'Photos', '#photos'
-        li = link_to 'Videos', '#videos'
-        li = link_to 'Celebrity Inspiration', '#inspiration'
+        - if enabled_tabs.include?('video')
+          li = link_to 'Videos', '#videos'
+        - if enabled_tabs.include?('inspiration')
+          li = link_to 'Celebrity Inspiration', '#inspiration'
       #photos.tab-content
         .tab-content-inner
           .photos-carousel
@@ -22,14 +28,17 @@
           .big-photo
             .zoom = link_to 'Zoom', '#'
             = image_tag 'http://placehold.it/460x590', alt: ''
-      #videos.tab-content
-        == product_video(@product)
-      #inspiration.tab-content
-        .tab-content-inner
-          .big-photo
-            = inspiration_image(@product)
-          .inspiration
-            = @product.property('inspiration')
+      - if enabled_tabs.include?('video')
+        #videos.tab-content
+          == product_video(@product)
+      - if enabled_tabs.include?('inspiration')
+        - celebrity = @product.celebrity_inspiration
+        #inspiration.tab-content
+          .tab-content-inner
+            .big-photo
+              = image_tag celebrity.photo.url(:preview)
+            .inspiration
+              = celebrity.celebrity_name
   .grid-40
     .product-info
       .name = @product.name

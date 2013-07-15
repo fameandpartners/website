@@ -1,8 +1,12 @@
 javascript: 
   window.product_variants = #{{ @product_variants.to_json }}
 
-- sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
-- colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+ruby:
+ sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+ colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+ enabled_tabs = ['photos']
+ enabled_tabs.push('inspiration') if @product.celebrity_inspiration
+ enabled_tabs.push('video') if @product.video_url
 
 .wrap
   .product-page.grid-container
@@ -10,8 +14,10 @@ javascript:
       .tabs
         ul.tabs-links
           li.active = link_to 'Photos', '#photos'
-          li = link_to 'Videos', '#videos'
-          li = link_to 'Celebrity Inspiration', '#inspiration'
+          - if enabled_tabs.include?('video')
+            li = link_to 'Videos', '#videos'
+          - if enabled_tabs.include?('inspiration')
+            li = link_to 'Celebrity Inspiration', '#inspiration'
         #photos.tab-content
           .tab-content-inner
             .photos-carousel
@@ -27,15 +33,18 @@ javascript:
               .zoom
                 = link_to 'Zoom', '#'
               = image_tag 'http://placehold.it/460x590', alt: '', height: 590, width: 460
-        #videos.tab-content style="display: none;"
-          == product_video(@product)
+        - if enabled_tabs.include?('video')
+          #videos.tab-content style="display: none;"
+            == product_video(@product)
 
-        #inspiration.tab-content style="display: none;"
-          .tab-content-inner
-            .big-photo
-              = inspiration_image(@product)
-            .inspiration
-              = @product.property('inspiration')
+        - if enabled_tabs.include?('inspiration')
+          - celebrity = @product.celebrity_inspiration
+          #inspiration.tab-content style="display: none;"
+            .tab-content-inner
+              .big-photo
+                = image_tag celebrity.photo.url(:preview)
+              .inspiration
+                = celebrity.celebrity_name
 
         .share-buttons Share buttons
     .grid-45
@@ -43,7 +52,6 @@ javascript:
         .desc = @product.property('short_description')
         .price-delivery
           .price.sale
-            em $320
             span = @product.price_in(current_currency).display_price
           .delivery 3-4 week delivery
         .colors-choser

@@ -42,7 +42,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       error: window.shopping_cart.buildOnErrorCallback('item_change_failed', variantId, options.failure)
     )
 
-  removeProduct: (variantId) ->
+  removeProduct: (variantId, options = {}) ->
     return unless variantId?
 
     $.ajax(

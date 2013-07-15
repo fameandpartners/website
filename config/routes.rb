@@ -156,5 +156,12 @@ FameAndPartners::Application.routes.draw do
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
+  Spree::Core::Engine.routes.append do
+    namespace :admin do
+      scope 'products/:product_id', :as => 'product' do
+        resource :inspiration, :only => [:edit, :update]
+      end
+    end
+  end
 
 end

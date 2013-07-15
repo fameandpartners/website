@@ -1,4 +1,9 @@
 Spree::Product.class_eval do
+  has_one :celebrity_inspiration,
+    dependent: :destroy,
+    class_name: 'Spree::CelebrityInspiration',
+    foreign_key: :spree_product_id
+
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
       "spree_option_values.id" => value_ids,
@@ -16,6 +21,13 @@ Spree::Product.class_eval do
         property.destroy
       end
       true
+    end
+  end
+
+  def video_url
+    @video_url ||= begin
+      video_id = self.property('youtube_video_id') 
+      video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}"
     end
   end
 end

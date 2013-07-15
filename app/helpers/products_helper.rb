@@ -21,21 +21,13 @@ module ProductsHelper
   end
 
   def product_video(product, options = {})
-    video_id = product.property('youtube_video_id') 
-    return '' if video_id.blank?
-    video_url = "//www.youtube.com/embed/#{video_id}"
+    #return '' if Rails.env.development?
+    return '' if product.video_url.blank?
+
     height  = options[:height] || 590
     width   = options[:width] || 600
 
-    return %Q{<iframe width="#{width}" height="#{height}" src="#{video_url}" frameborder="0" allowfullscreen></iframe>}
-  end
-
-  def inspiration_image(product, options = {})
-    image_src = product.property('inspiration_photo') || 'http://placehold.it/590x600'
-    height  = options[:height] || 590
-    #width   = options[:width] || 600
-
-    image_tag image_src, height: height
+    "<iframe width='#{width}' height='#{height}' src='#{product.video_url}' frameborder='0' allowfullscreen></iframe>"
   end
 
   def hoverable_product_image_tag(product, options = {})

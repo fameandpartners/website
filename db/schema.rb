@@ -11,18 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130707181457) do
+ActiveRecord::Schema.define(:version => 20130714204511) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
     t.string   "code"
-    t.integer  "glam"
-    t.integer  "girly"
-    t.integer  "classic"
-    t.integer  "edgy"
-    t.integer  "bohemian"
-    t.integer  "sexiness"
-    t.integer  "fashionability"
+    t.float    "glam"
+    t.float    "girly"
+    t.float    "classic"
+    t.float    "edgy"
+    t.float    "bohemian"
+    t.float    "sexiness"
+    t.float    "fashionability"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -154,6 +154,17 @@ ActiveRecord::Schema.define(:version => 20130707181457) do
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
 
+  create_table "celebrity_inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "celebrity_name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
     t.string   "file_file_name"
@@ -176,33 +187,22 @@ ActiveRecord::Schema.define(:version => 20130707181457) do
     t.date     "required_at"
   end
 
-  create_table "product_style_profiles", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "glam"
-    t.integer  "girly"
-    t.integer  "classic"
-    t.integer  "edgy"
-    t.integer  "bohemian"
-    t.integer  "apple"
-    t.integer  "pear"
-    t.integer  "strawberry"
-    t.integer  "hour_glass"
-    t.integer  "column"
-    t.integer  "bra_aaa"
-    t.integer  "bra_aa"
-    t.integer  "bra_a"
-    t.integer  "bra_b"
-    t.integer  "bra_c"
-    t.integer  "bra_d"
-    t.integer  "bra_e"
-    t.integer  "bra_fpp"
-    t.integer  "sexiness"
-    t.integer  "fashionability"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
   end
 
-  add_index "product_style_profiles", ["product_id"], :name => "index_product_style_profiles_on_product_id"
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
@@ -212,7 +212,6 @@ ActiveRecord::Schema.define(:version => 20130707181457) do
     t.boolean  "multiple",   :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.string   "populate"
   end
 
   add_index "questions", ["position"], :name => "index_questions_on_position"
@@ -456,27 +455,6 @@ ActiveRecord::Schema.define(:version => 20130707181457) do
   end
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
-
-  create_table "spree_pages", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.string   "slug"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.boolean  "show_in_header",           :default => false, :null => false
-    t.boolean  "show_in_footer",           :default => false, :null => false
-    t.string   "foreign_link"
-    t.integer  "position",                 :default => 1,     :null => false
-    t.boolean  "visible",                  :default => true
-    t.string   "meta_keywords"
-    t.string   "meta_description"
-    t.string   "layout"
-    t.boolean  "show_in_sidebar",          :default => false, :null => false
-    t.string   "meta_title"
-    t.boolean  "render_layout_as_partial", :default => false
-  end
-
-  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
@@ -864,6 +842,21 @@ ActiveRecord::Schema.define(:version => 20130707181457) do
     t.datetime "updated_at",                            :null => false
   end
 
+  create_table "style_reports", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.float    "glam"
+    t.float    "girly"
+    t.float    "classic"
+    t.float    "edgy"
+    t.float    "bohemian"
+    t.float    "sexiness"
+    t.float    "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "style_reports", ["spree_user_id"], :name => "index_style_reports_on_spree_user_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -880,31 +873,6 @@ ActiveRecord::Schema.define(:version => 20130707181457) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
-
-  create_table "user_style_profiles", :force => true do |t|
-    t.integer  "user_id"
-    t.float    "glam"
-    t.float    "girly"
-    t.float    "classic"
-    t.float    "edgy"
-    t.float    "bohemian"
-    t.float    "sexiness"
-    t.float    "fashionability"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "nail_colours"
-    t.string   "brands"
-    t.string   "trends"
-    t.string   "hair_colour"
-    t.string   "skin_colour"
-    t.string   "body_shape"
-    t.string   "typical_size"
-    t.string   "bra_size"
-    t.string   "colours"
-    t.text     "serialized_answers"
-  end
-
-  add_index "user_style_profiles", ["user_id"], :name => "index_style_reports_on_spree_user_id"
 
   create_table "wishlist_items", :force => true do |t|
     t.integer  "spree_user_id"
