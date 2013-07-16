@@ -30,6 +30,11 @@ $ ->
     $celebrity_modal.addClass('hidden')
     false
 
+  $('.celebrity-modal .overlay').on 'click', ->
+    console.log 'sdfsdfsd'
+    $celebrity_modal.addClass('hidden')
+    false
+
   $('.zoom').on 'click', (e) ->
     $parent = $(e.target).parent()
     $('.celebrity-modal').removeClass('hidden')
