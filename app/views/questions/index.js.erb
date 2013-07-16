@@ -1,0 +1,31 @@
+$('.quiz-box-inner').html("<%=j render(:template => 'questions/index.html.slim') %>");
+$('.quiz-box-inner').find('.film').css('width', $('.quiz-box-inner').find('.film-frame').width() * $('.quiz-box-inner').find('.film-frame').size());
+$('.quiz-box-inner').find('.next a').click(function(event){
+  var $link = $(event.target);
+  $link.unbind('click');
+  event.preventDefault();
+  $('#question-<%= @quiz.questions.first.id %> form').submit();
+});
+
+$('.quiz-box-inner').find('.prev a').click(function(event){
+
+});
+
+$('.quiz-box .film-frame').find(':checkbox, :radio').bind('change', function(event){
+  var $form = $(event.target).parents('form');
+
+  var $list = $form.find('ul');
+
+  window.llist = $list;
+
+  if ($list.hasClass('lips') || $list.hasClass('stars')) {
+    var $item = $(event.target).parents('li');
+
+    $item.prevAll().addClass('active');
+    $item.nextAll().removeClass('active');
+  } else {
+    $form.find('li:not(:has(:input:checked))').removeClass('active');
+  }
+
+  $form.find('li:has(:input:checked)').addClass('active');
+});

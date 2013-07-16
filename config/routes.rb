@@ -107,12 +107,28 @@ FameAndPartners::Application.routes.draw do
     resources :custom_dress_images, :only => [:create]
   end
 
+  resource :quiz, :only => [:show] do
+    resources :questions, :only => [:index, :show] do
+      resource :answer, :only => [:create]
+    end
+  end
+
+  scope '/users/:user_id', :as => :user do
+    get '/style-report' => 'user_style_profiles#show', :as => :style_profile
+    get '/style-report-debug' => 'user_style_profiles#debug'
+    get '/recomendations' => 'user_style_profiles#recomendations'
+  end
+
   root :to => 'index#show'
 
   mount Spree::Core::Engine, at: '/'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
+      scope 'products/:product_id', :as => 'product' do
+        resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
+      end
+
       match '/blog' => redirect('/admin/blog/posts')
       namespace :blog do
         resources :promo_banners
@@ -155,6 +171,4 @@ FameAndPartners::Application.routes.draw do
 
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
-
-
 end

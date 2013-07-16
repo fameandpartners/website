@@ -48,6 +48,8 @@ class ApplicationController < ActionController::Base
       case session[:sign_up_reason]
         when 'custom_dress' then
           'Custom dress'
+        when 'style_quiz' then
+          'Style quiz'
       end
     end
   end

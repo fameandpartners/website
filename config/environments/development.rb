@@ -47,5 +47,6 @@ FameAndPartners::Application.configure do
   # reloading
   config.to_prepare do
     Spree::User.send(:include, Overrides::SpreeAuthDevise::User)
+    Spree::User.send(:include, Overrides::Spree::Product)
   end
 end
