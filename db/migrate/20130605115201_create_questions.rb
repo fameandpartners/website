@@ -1,6 +1,6 @@
 class CreateQuestions < ActiveRecord::Migration
   def change
-    create_table :questions do |t|
+    create_table :questions, force: true do |t|
       t.references :quiz
       t.string :text
       t.string :position

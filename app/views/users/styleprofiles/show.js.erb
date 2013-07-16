@@ -2,3 +2,5 @@ html = '<%=j  render(template: 'users/styleprofiles/show.html') %>';
 $('#wrap > #content > .wrap').replaceWith(html)
 
 window.setCurrentPath('<%= styleprofile_path %>')
+
+$("a.show-style-quiz").off('click').on("click", startStyleQuizClickHandler)

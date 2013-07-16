@@ -1,6 +1,6 @@
 class CreateAnswers < ActiveRecord::Migration
   def change
-    create_table :answers do |t|
+    create_table :answers, force: true do |t|
       t.references :question
       t.string :code
       t.float :glam

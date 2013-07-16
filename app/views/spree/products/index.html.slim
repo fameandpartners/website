@@ -26,31 +26,15 @@
               = check_box_tag 'style', taxon.id, true
       .filters-block
         .title Body shape
-        ul.filters-boxes.squares
-          li.all
+        ul.filters-boxes.squares.body_shapes
+          - selected_items = (params[:body_shapes].present? ? params[:body_shapes] : [])
+          li class=(selected_items.blank? ? 'active' : '')
             label All
-            input type="checkbox"
-          li
-            label Strawberry
-            input type="checkbox"
-          li
-            label Apple
-            input type="checkbox"
-          li
-            label Hour glass
-            input type="checkbox"
-          li
-            label Pear
-            input type="checkbox"
-          li
-            label Column
-            input type="checkbox"
-          li
-            label Athletic
-            input type="checkbox"
-          li
-            label Petite
-            input type="checkbox"
+            = check_box_tag 'style', 'all', selected_items.blank?
+          - ProductStyleProfile::BODY_SHAPES.each do |body_shape|
+            li class=(selected_items.include?(body_shape.to_s) ? 'active' : '')
+              label = body_shape.humanize
+              = check_box_tag 'body_shapes', body_shape, true
       .filters-block
         .title Color
         .colors

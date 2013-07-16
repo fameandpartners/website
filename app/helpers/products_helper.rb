@@ -21,7 +21,7 @@ module ProductsHelper
   end
 
   def product_video(product, options = {})
-    #return '' if Rails.env.development?
+    return '' if Rails.env.development?
     return '' if product.video_url.blank?
 
     height  = options[:height] || 590

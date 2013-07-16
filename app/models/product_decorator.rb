@@ -4,6 +4,11 @@ Spree::Product.class_eval do
     class_name: 'Spree::CelebrityInspiration',
     foreign_key: :spree_product_id
 
+  has_one :style_profile,
+    dependent: :destroy,
+    class_name: 'ProductStyleProfile',
+    foreign_key: :product_id
+
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
       "spree_option_values.id" => value_ids,
