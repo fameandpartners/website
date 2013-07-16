@@ -1,23 +1,33 @@
+- if post.red_carpet?
+  - url = blog_red_carpet_post_path(post.slug)
+- else
+  - url = blog_post_by_category_path(post.category.slug, post.slug)
 article.post
   h2
-    - if post.red_carpet?
-      = link_to post.title, blog_red_carpet_post_path(post.slug)
-    - else
-      = link_to post.title, blog_post_by_category_path(post.category.slug, post.slug)
+    = link_to post.title, url
   .post-meta
     .date= post.occured_at_formatted
     .comments
-      - if post.red_carpet?
-        = link_to '', blog_red_carpet_post_path(post.slug) + '#disqus_thread'
-      - else
-        = link_to '', blog_post_by_category_path(post.category.slug, post.slug) + '#disqus_thread'
+      = link_to '', url + '#disqus_thread'
     .author
       = link_to blog_authors_post_path(post.user.slug) do
-        .avatar
-          = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
+        - if post.user.avatar.present?
+          .avatar
+            = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
         .name= post.user.fullname
   - if post.primary_photo.present?
+    - if params[:action] == 'show'
     .featured-image
       = image_tag post.primary_photo.photo.url, width: 742, height: 355, alt: ''
+    - else
+      .featured-image
+        = link_to url do
+          = image_tag post.primary_photo.photo.url, width: 742, height: 355, alt: ''
   - if post.body.present?
-    .post-content= raw(post.body)
+    - if params[:action] == 'show'
+      .post-content= raw(post.body)
+    - else
+      .post-content
+        = raw("#{simple_format(post.body)[0..120]}...")
+      .read-more
+        = link_to "Read More", url
