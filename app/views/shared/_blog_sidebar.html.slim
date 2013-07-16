@@ -41,4 +41,8 @@ section.sidebar
       select.selectbox name="tags" id="events_search_filter"
         option value="" Choose...
         - Blog::Post.sidebar.each do |post|
-          option value="#{post.slug}" #{post.title}
+          option value="#{post.slug}" #{post.title}  
+          
+  .block  
+    .block-content 
+      iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FFameandPartners&amp;width=328&amp;height=258&amp;show_faces=true&amp;colorscheme=light&amp;stream=false&amp;show_border=true&amp;header=false&amp;appId=591959187490267" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:328px; height:258px;" allowTransparency="true"
