@@ -72,6 +72,6 @@ class ProductStyleProfile < ActiveRecord::Base
              :class_name => 'Spree::Product'
 
   after_save do
-    product.update_index
+    product.try(:update_index)
   end
 end

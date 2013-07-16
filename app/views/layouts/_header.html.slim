@@ -98,7 +98,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
           li = link_to 'About us', about_path, title: "About Fame & Partners"
           li = link_to 'Our team', team_path, title: "Fame & Partners Team"
           li.hide = link_to 'Blog', '#'
-          li.hide = link_to 'Style quiz', '#'
+          li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
 
   javascript:
     window.bootstrap = {}
