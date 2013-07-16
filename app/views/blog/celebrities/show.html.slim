@@ -17,7 +17,7 @@
           option value="#{blog_celebrity_posts_path(@celebrity.slug)}" Show blog posts
 
   - if params[:type] == 'posts'
-    .content-sidebar
+    .content-sidebar.clearfix
       section.content-area
         - if @posts.present?
           - @posts.each do |post|

@@ -38,8 +38,10 @@ FameAndPartners::Application.routes.draw do
   blog_constraint = lambda { |request|
     if Rails.env.development?
       request.host =~ /blog\.localdomain/
+    elsif Rails.env.staging?
+      request.host =~ /blog.fame.23stages.com/
     else
-      request.host =~ /blog\.#{configatron.application.hostname}/
+      request.host =~ /blog\.#{Regexp.escape(configatron.host)}/
     end
   }
 

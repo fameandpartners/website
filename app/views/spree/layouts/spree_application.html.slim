@@ -4,7 +4,7 @@ doctype html
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'shared/ga'
-  body class=(controller_action_class)
+  body class=(controller_action_class) id=(controller_action_id)
     #wrap
       - cached_header = render('layouts/header')
       = cached_header

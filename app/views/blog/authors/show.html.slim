@@ -3,7 +3,7 @@
 
 .wrap.no-overflow
   = render 'shared/breadcrumbs'
-  .content-sidebar.no-overflow
+  .content-sidebar.clearfix.no-overflow
     section.content-area
       - if @posts.present?
         - @posts.each do |post|

@@ -3,4 +3,5 @@ li.stylist
   .stylist-info
     .name
       = link_to author.fullname, blog_authors_post_path(author.slug)
-    .desc= raw(author.description)
+    .desc
+      p = raw(author.description)

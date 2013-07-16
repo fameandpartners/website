@@ -21,7 +21,7 @@ $ ->
       button  : "#post-carousel-next"
       key   : "right"
     auto: true
-    width: 644
+    width: '100%'
     height: 355
 
   $celebrity_modal = $('.celebrity-modal')
