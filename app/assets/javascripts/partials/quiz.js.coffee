@@ -1,10 +1,4 @@
 $ ->
-  $("a.show-style-quiz").on "click", (event) ->
-    event.preventDefault()
-    event.stopPropagation()
-    showStyleQuiz()
-    bindStyleQuizEvents()
-
   window.showStyleQuiz = ->
     $(".quiz-box").show()
     $("body").css "overflow", "hidden"
@@ -28,6 +22,14 @@ $ ->
       $("#wrap").off "click"
       $(document).off "keyup"
       hideStyleQuiz()
+
+  window.startStyleQuizClickHandler = (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    showStyleQuiz()
+    bindStyleQuizEvents()
+
+  $("a.show-style-quiz").on "click", startStyleQuizClickHandler
 
   $(".quiz-box .film-frame").find(":checkbox, :radio").on "change", (event) ->
     $form = $(event.target).parents("form")

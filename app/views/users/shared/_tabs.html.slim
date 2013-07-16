@@ -6,7 +6,7 @@ ul.tabs-links
     = link_to 'My Wishlist', wishlist_path, remote: true
   li class=( %w{orders order}.include?(active_tab.to_s) ? 'active' : '')
     = link_to 'My Orders', user_orders_path, remote: true
-  li class=( %w{reviews}.include?(active_tab.to_s) ? 'active' : '')
-    = link_to 'My Reviews', reviews_path, remote: true
+  /li class=( %w{reviews}.include?(active_tab.to_s) ? 'active' : '')
+  /  = link_to 'My Reviews', reviews_path, remote: true
   li class=( %w{styleprofile styleprofiles}.include?(active_tab.to_s) ? 'active' : '')
     = link_to 'My Style Report', styleprofile_path, remote: true
