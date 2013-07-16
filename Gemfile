@@ -16,6 +16,8 @@ gem 'acts-as-taggable-on'
 gem 'rmagick'
 gem 'ckeditor'
 gem 'newrelic_rpm'
+gem 'default_value_for'
+gem 'tire'
 
 # assets
 gem 'jquery-rails'

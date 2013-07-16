@@ -1,0 +1,5 @@
+ul.lips
+  - question.answers.order('sexiness ASC').each do |answer|
+    li
+      label
+        = form.radio_button :code, answer.code

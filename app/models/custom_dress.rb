@@ -23,7 +23,8 @@ class CustomDress < ActiveRecord::Base
                   :color,
                   :description
 
-  belongs_to :spree_user, :class_name => 'Spree::User'
+  belongs_to :spree_user,
+             :class_name => 'Spree::User'
   has_many :custom_dress_images
 
   validates :phone_number,
