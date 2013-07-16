@@ -1,0 +1,14 @@
+.signup-box-wrapper
+  .signup-box
+    .title Discover your true
+    .subtitle Style profile
+    .desc
+      ' Take our quiz to get your personalised Style Report and uncover
+      br
+      ' what your style really is.
+    .signup-buttons
+      = link_to 'Signup with facebook', fb_auth_path(:quiz => true), class: 'facebook-signup'
+      .or or
+      = link_to 'Sign up using your email address', spree.signup_path(:quiz => true), class: 'regular-signup'
+    .signin-link
+      ' Already a member? #{link_to 'Sign in here', spree.login_path(:quiz => true)}

@@ -4,7 +4,13 @@ doctype html
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'shared/ga'
-  body class=(controller_action_class) id=(controller_action_id)
+    - if spree_user_signed_in? and session['show_quiz'] and session.delete('show_quiz')
+      javascript:
+        $(function(){
+          showStyleQuiz();
+          bindStyleQuizEvents();
+        });
+  body class=(controller_action_class)
     #wrap
       - cached_header = render('layouts/header')
       = cached_header
@@ -13,6 +19,7 @@ doctype html
         #push
       .fixed-bar style="position: fixed; top: -300px; width: 100%; height: 106px; background-color: rgba(255, 255, 255, 1); z-index: 2001;"
         = cached_header
+        = render 'shared/quiz_popup'
         .top-bar style="top: 62px;"
           = render 'shared/top_bar_inner'
     = render 'layouts/footer'

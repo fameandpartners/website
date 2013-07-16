@@ -1,0 +1,6 @@
+ul.choices
+  - question.answers.each do |answer|
+    li
+      label
+        = check_box_tag 'answer[codes][]', answer.code
+        = answer.code.humanize.upcase

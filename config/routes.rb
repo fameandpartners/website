@@ -110,6 +110,17 @@ FameAndPartners::Application.routes.draw do
   end
 
   root :to => 'index#show'
+  resource :quiz, :only => [:show] do
+    resources :questions, :only => [:index, :show] do
+      resource :answer, :only => [:create]
+    end
+  end
+
+  scope '/users/:user_id', :as => :user do
+    get '/style-report' => 'user_style_profiles#show', :as => :style_profile
+    get '/style-report-debug' => 'user_style_profiles#debug'
+    get '/recomendations' => 'user_style_profiles#recomendations'
+  end
 
   mount Spree::Core::Engine, at: '/'
 
@@ -163,7 +174,10 @@ FameAndPartners::Application.routes.draw do
       scope 'products/:product_id', :as => 'product' do
         resource :inspiration, :only => [:edit, :update]
       end
+
+      scope 'products/:product_id', :as => 'product' do
+        resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
+      end
     end
   end
-
 end

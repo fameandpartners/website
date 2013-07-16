@@ -16,28 +16,31 @@ module Overrides
         after_update :synchronize_with_campaign_monitor
 
         has_attached_file :avatar
-      end
+        has_one :style_profile,
+                :class_name => '::UserStyleProfile',
+                :foreign_key => :user_id
 
-      SIGN_UP_VIA = %w( Email Facebook )
+        SIGN_UP_VIA = %w( Email Facebook )
 
-      def full_name
-        [first_name, last_name].reject(&:blank?).join(' ')
-      end
-
-      def sign_up_via_facebook?
-        sign_up_via.eql?(1)
-      end
-
-      private
-
-      def synchronize_with_campaign_monitor
-        if email_changed? || first_name_changed? || last_name_changed?
-          CampaignMonitor.delay.synchronize(email_was, self)
+        def full_name
+          [first_name, last_name].reject(&:blank?).join(' ')
         end
-      end
 
-      def send_welcome_email
-        Spree::UserMailer.welcome(self).deliver
+        def sign_up_via_facebook?
+          sign_up_via.eql?(1)
+        end
+
+        private
+
+        def synchronize_with_campaign_monitor
+          if email_changed? || first_name_changed? || last_name_changed?
+            CampaignMonitor.delay.synchronize(email_was, self)
+          end
+        end
+
+        def send_welcome_email
+          Spree::UserMailer.welcome(self).deliver
+        end
       end
     end
   end

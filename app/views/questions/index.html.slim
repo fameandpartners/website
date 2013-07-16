@@ -1,0 +1,23 @@
+.steps-box style="overflow: hidden;"
+  .questions-count
+    .inline.label Question
+    '
+    .inline.current 1
+    '
+    .inline.label of
+    '
+    .inline.total = @quiz.questions.count
+  .film style="position: relative;"
+    - @quiz.questions.each do |question|
+      .film-frame style="float: left; width: 1054px;" id="question-#{question.id}"
+        = form_for :answer, :url => quiz_question_answer_path(question),:remote => true do |f|
+          h1 = question.text
+          = render question.partial, :form => f, :question => question
+  .progress-next.clearfix
+    .prev
+      a href="#" Previous question
+    .progress-bar
+      .filler style="width: 0%;"
+        .tooltip 0%
+    .next
+      a href="#" Next question
