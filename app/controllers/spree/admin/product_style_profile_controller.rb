@@ -15,7 +15,7 @@ module Spree
 
       def load_data
         @product = Product.find_by_permalink!(params[:product_id])
-        @style_profile = ::ProductStyleProfile.find_by_product_id(@product.id)
+        @style_profile = @product.style_profile || @product.create_style_profile
       end
 
       def model_class

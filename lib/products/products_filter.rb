@@ -13,6 +13,10 @@ module Products
           ['newest', "What's new"]
         ]
       end
+
+      def available_body_shapes
+        ProductStyleProfile::BODY_SHAPES
+      end
     end
 
     def initialize(params)
@@ -49,6 +53,8 @@ module Products
       base_scope = get_products_conditions_for(base_scope, keywords)
       base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
       base_scope = add_search_scopes(base_scope)
+
+      base_scope = add_body_shapes_scope(base_scope)
 
       base_scope = add_order_scope(base_scope)
 
@@ -111,6 +117,18 @@ module Products
       base_scope.where(id: product_ids)
     end
 
+    def add_body_shapes_scope(base_scope)
+      return base_scope if body_shapes.blank?
+      conditions = [].tap do |condition|
+        body_shapes.each do |shape|
+          condition.push("product_style_profiles.#{shape} > 0")
+        end
+      end.join(' or ')
+
+      #joins_string = "LEFT OUTER JOIN product_style_profiles ON spree_products.id = product_style_profiles.product_id"
+      base_scope.joins(:style_profile).where("(#{conditions})")
+    end
+
     def add_order_scope(base_scope)
       return base_scope if order.blank?
       case order
@@ -132,6 +150,7 @@ module Products
       @properties[:keywords] = params[:keywords]
       @properties[:search] = params[:search]
       @properties[:colors] = params[:colors]
+      @properties[:body_shapes] = params[:body_shapes]
 
       per_page = params[:per_page].to_i
       @properties[:per_page] = per_page > 0 ? per_page : Spree::Config[:products_per_page]

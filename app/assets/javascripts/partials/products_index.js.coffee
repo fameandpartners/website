@@ -83,6 +83,10 @@ $(".products.index").ready ->
         choosenColors = _.collect(container.find('.color.active'), (obj) -> $(obj).data('color'))
         filter.colors = choosenColors unless _.isEmpty(choosenColors)
 
+      # body shapes
+      selectedShapes = productsFilter.getSelectedTaxons('body_shapes', $('ul.filters-boxes.body_shapes'))
+      _.extend(filter, selectedShapes) unless _.isEmpty(selectedShapes)
+
       # order
       selectedOrder = $('#product_order').val()
       filter.order = selectedOrder unless _.isEmpty(selectedOrder)

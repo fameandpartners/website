@@ -1,4 +1,6 @@
 class ProductStyleProfile < ActiveRecord::Base
+  BODY_SHAPES = %w{apple pear strawberry hour_glass column}
+
   default_values :glam => 0,
                  :girly => 0,
                  :classic => 0,
@@ -73,5 +75,11 @@ class ProductStyleProfile < ActiveRecord::Base
 
   after_save do
     product.try(:update_index)
+  end
+
+  def suitable_shapes
+    ProductStyleProfile::BODY_SHAPES.select do |shape|
+      attributes[shape].to_i > 0
+    end
   end
 end

@@ -14,6 +14,7 @@ Spree.config do |config|
 
   config.products_per_page = 100 # disable pagination at all
   config.allow_backorders = true # allow order items out of stock - we have 90% items by order
+  config.show_zero_stock_products = true
 end
 
 Spree.user_class = "Spree::User"
