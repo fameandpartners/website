@@ -31,9 +31,15 @@ $ ->
     false
 
   $('.celebrity-modal .overlay').on 'click', ->
-    console.log 'sdfsdfsd'
     $celebrity_modal.addClass('hidden')
     false
+
+  $(document).on 'keyup', (e) ->
+    if e.keyCode == 27
+      modal = $('.celebrity-modal')
+      if !modal.hasClass('hidden')
+        modal.addClass('hidden')
+    true
 
   $('.zoom').on 'click', (e) ->
     $parent = $(e.target).parent()
