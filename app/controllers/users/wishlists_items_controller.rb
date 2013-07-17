@@ -17,7 +17,11 @@ class Users::WishlistsItemsController < Users::BaseController
   def create
     @item = @user.wishlist_items.where(spree_variant_id: params[:variant_id]).first_or_create
 
-    render json: @item
+    if @item.persisted?
+      render json: @item
+    else
+      render json: {}
+    end
   end
 
   def destroy
