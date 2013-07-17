@@ -494,6 +494,9 @@
         font: 300 14px/36px $fontThree;
         padding: 0 16px 0 46px;
         background: image-url('icon-product-like.png') 12px center no-repeat;
+        &.active, &.disabled {
+          opacity: .5;
+        }
       }
     }
     .tabs {
