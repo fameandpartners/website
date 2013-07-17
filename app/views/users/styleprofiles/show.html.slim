@@ -17,7 +17,7 @@
             - @style_profile.percentage.each_with_index do |style, index|
               div class=(index == 0 ? 'block first' : 'block')
                 .name = style.first
-                .percent = style.last
+                .percent #{style.last}%
           p To update your style proﬁle just run the style quiz again.
           .redo-view
             = link_to 'Redo the style quiz', '#', class: 'btn black show-style-quiz'
