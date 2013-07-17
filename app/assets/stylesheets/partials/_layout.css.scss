@@ -180,6 +180,23 @@ header {
   .flash {
     text-align: center;
   }
+  .celebrity-title {
+    h1 {
+      font-size: 32px;
+      text-align: left;
+      margin: 36px 0;
+      padding: 0;
+      &:before {
+        display: none;
+      }
+    }
+    .subtitle {
+      text-align: left;
+      width: 100%;
+      margin-top: -20px;
+      margin-bottom: 36px;
+    }
+  }
 }
 
 .facebook-signup {
@@ -210,9 +227,17 @@ header {
   }
   .social-likes {
     float: right;
-    li {
-      float: left;
-      margin: 0 0 0 26px;
+    .addthis_button_facebook_like {
+      margin: 10px 20px 0 0;
+    }
+    .addthis_button_tweet {
+      margin: 5px 0 0;
+    }
+    .addthis_button_pinterest_pinit {
+      margin: 18px 20px 0 0;
+    }
+    .addthis_counter {
+      margin: 18px 0 0;
     }
   }
 }
@@ -232,9 +257,6 @@ header {
       p {
         line-height: 1.3;
         margin: 18px 0 0;
-      }
-      .tag {
-        margin: 0 0 22px;
       }
       .author {
         margin: 10px 0 0;

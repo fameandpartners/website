@@ -35,6 +35,7 @@
         .post-content= raw(@post.body)
         - if @post.tag_list.present?
           .tag-list
+            .tag Tags:
             - @post.tag_list.each do |tag|
               .tag= link_to tag, blog_search_by_tag_path(tag.downcase)
 
@@ -68,7 +69,7 @@
                           .love
                           .hate
                       .label Love it or loathe it
-                    /.share
+                    .share
                       .icons
                         .share-block
                       .label Share
