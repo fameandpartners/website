@@ -2,10 +2,18 @@ namespace "db" do
   namespace "populate" do
     desc "create default taxonomy"
     task :taxonomy => :environment do
+      clear_taxonomy
       build_taxonomy
       randomly_assign_taxons_to_products
     end
   end
+end
+
+def clear_taxonomy
+  Spree::Taxonomy.destroy_all
+  Spree::Taxon.destroy_all
+  Spree::Taxonomy.delete_all
+  Spree::Taxon.delete_all
 end
 
 def build_taxonomy
@@ -25,8 +33,8 @@ def build_taxonomy
     permalink: 'style',
     childs: [
       'Strapless',
-      'Strapless',
-      'Sweet heart'
+      'Sweet heart',
+      'One shoulder'
     ]
   }
   childs = range_taxons_tree.delete(:childs)
