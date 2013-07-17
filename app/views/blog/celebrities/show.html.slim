@@ -65,7 +65,11 @@
                     .overlay
                       .name= @celebrity.fullname
                       - if photo.post.present?
-                        .event=photo.post.title
+                        .event
+                          - if photo.post.red_carpet?
+                            = link_to photo.post.title, blog_red_carpet_post_path(photo.post.slug)
+                          - else
+                            = link_to photo.post.title, blog_post_by_category_path(photo.post.category.slug, photo.post.slug)
                   .love-share
                     .love-hate
                       .icons[data-id="#{photo.id}"]
