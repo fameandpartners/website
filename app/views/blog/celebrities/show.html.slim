@@ -59,7 +59,7 @@
               - @celebrity.celebrity_photos.with_posts.each do |photo|
                 li[data-name="#{@celebrity.fullname}" data-date="#{photo.created_at_formatted}" data-photo-url="#{photo.photo.url(:preview)}"]
                   .zoom
-                  = link_to '#', class: 'celebrity-photo' do
+                  .celebrity-photo
                     = image_tag photo.photo.url(:small), width: 269, height: 375, alt: ''
                     .overlay
                       .name= @celebrity.fullname
