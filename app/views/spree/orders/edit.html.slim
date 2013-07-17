@@ -27,7 +27,7 @@
               .desc
                 .name = link_to product.name, spree.product_path(product), target: 'blank'
                 .text = line_item_description(variant)
-                .wishlist = link_to 'Move to wish list', '#'
+                .wishlist = link_to 'Move to wish list', '#', data: { id: variant.id }
             .grid-30.details
               .static-dynamic-block
                 .static

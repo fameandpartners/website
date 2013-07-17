@@ -20,16 +20,17 @@ $(".products.show").ready ->
   # add quick view feature
   window.helpers.quickViewer.init()
   $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
+
   productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
 
   # add product to cart
   $('.buy-wishlist .buy-now').on('click', (e) ->
     e.preventDefault()
-    variantId = $(e.currentTarget).data('variant_id')
-    buyIndicator = helpers.buildLoadingIndicator($(e.currentTarget))
-    buyIndicator.showLoading()
+    button = $(e.currentTarget)
+    variantId = button.data('variant_id')
+    button.addClass('adding')
     window.shopping_cart.addProduct.call(window.shopping_cart, variantId, {
-      failure: buyIndicator.hideLoading
-      success: buyIndicator.hideLoading
+      failure: () -> button.removeClass('adding')
+      success: () -> button.removeClass('adding').addClass('added')
     })
   )

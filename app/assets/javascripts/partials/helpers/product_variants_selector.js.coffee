@@ -74,11 +74,11 @@ window.helpers.createProductVariantsSelector = (root) ->
         $button.data(variant_id: variant.id)
         $wishlist_button.data(id: variant.id)
         if variant.purchased
-          $button.addClass('purchased')
+          $button.addClass('added')
         else
-          $button.removeClass('purchased')
+          $button.removeClass('added')
       else
-        $button.removeClass('purchased')
+        $button.removeClass('added')
         $button.data(variant_id: null)
 
     updateDeliveryTime: () ->

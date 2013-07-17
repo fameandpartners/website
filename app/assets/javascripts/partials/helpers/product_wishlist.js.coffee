@@ -4,11 +4,12 @@
         e.preventDefault()
         variantId = $(e.currentTarget).data("id")
 
-        likeIndicator = helpers.buildLoadingIndicator($(e.currentTarget), { indicator_type: 'spinner' })
-        likeIndicator.showLoading()
+        button = $(e.currentTarget)
+        previousButtonText = button.html()
+        button.addClass('adding')
         window.productWishlist.addProduct.call(productWishlist, variantId, {
-          success: likeIndicator.hideLoading
-          failure: likeIndicator.hideLoading
+          success: () -> button.removeClass('adding').html('Unlike Item').addClass('active')
+          failure: () -> button.removeClass('adding').html(previousButtonText).addClass('active')
         })
       )
 

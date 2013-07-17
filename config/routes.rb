@@ -15,7 +15,10 @@ FameAndPartners::Application.routes.draw do
     get '/account_settings' => 'spree/user_registrations#edit'
   end
 
-  resources :line_items, only: [:create, :edit, :update, :destroy]
+  resources :line_items, only: [:create, :edit, :update, :destroy] do
+    post 'move_to_wishlist', on: :member
+  end
+
   get 'products/:id/quick_view' => 'spree/products#quick_view'
 
   # account settings

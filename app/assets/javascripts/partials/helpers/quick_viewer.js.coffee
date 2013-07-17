@@ -3,7 +3,6 @@ window.helpers.quickViewer = {
   popupContainer: null,
   overlayContainer: null,
   container: null,
-  indicator: null,
 
   init: () ->
     window.helpers.quickViewer.__init.apply(window.helpers.quickViewer, arguments)
@@ -36,11 +35,11 @@ window.helpers.quickViewer = {
 
   onBuyButtonClickHandler: (e) ->
     e.preventDefault()
-    variantId = $(e.currentTarget).data("variant_id")
-    window.helpers.quickViewer.indicator.showLoading()
-    window.shopping_cart.addProduct(variantId, {
-      success: window.helpers.quickViewer.indicator.hideLoading,
-      failure: window.helpers.quickViewer.indicator.hideLoading
+    button = $(e.currentTarget)
+    button.addClass('adding')
+    window.shopping_cart.addProduct(button.data('variant_id'), {
+      failure: () -> button.removeClass('adding')
+      success: () -> button.removeClass('adding').addClass('added')
     })
 
   showProduct: (productId) ->
@@ -64,7 +63,6 @@ window.helpers.quickViewer = {
     @container.show()
     @movePopupToCenter()
     @overlayContainer.one('click', @onCloseButtonHandler)
-    @indicator = helpers.buildLoadingIndicator(@container.find('.buy-wishlist .buy-now'))
 
   closePopup: () ->
     @popupContainer.hide()
@@ -82,7 +80,7 @@ window.helpers.quickViewer = {
 
     # add product to cart
     @popupContainer.find('.buy-wishlist .buy-now').on('click', window.helpers.quickViewer.onBuyButtonClickHandler)
-    @popupContainer.find(".buy-wishlist .add-wishlist").on('click', window.productWishlist.onClickHandler)
+    productWishlist.addWishlistButtonActions(@popupContainer.find(".buy-wishlist .add-wishlist"))
 
   movePopupToCenter: () ->
     window.helpers.quickViewer.container.center()

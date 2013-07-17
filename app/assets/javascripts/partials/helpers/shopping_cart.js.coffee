@@ -42,13 +42,30 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       error: window.shopping_cart.buildOnErrorCallback('item_change_failed', variantId, options.failure)
     )
 
+  moveProductToWishlist: (variantId, options = {}) ->
+    return unless variantId?
+    #/line_items/:id/move_to_wishlist
+
+    options = _.extend({ variant_id: variantId }, options)
+
+    $.ajax(
+      url: "/line_items/#{variantId}/move_to_wishlist"
+      type: 'POST'
+      dataType: 'json'
+      data: window.shopping_cart.prepareParams(options)
+      success: window.shopping_cart.buildOnSuccessCallback('item_removed', variantId)
+      error: window.shopping_cart.buildOnErrorCallback('item_remove_failed', variantId, options.failure)
+    )
+
   removeProduct: (variantId, options = {}) ->
     return unless variantId?
+
+    options = _.extend({ variant_id: variantId }, options)
 
     $.ajax(
       url: "/line_items/#{variantId}"
       type: 'DELETE'
-      dataType: 'html'
+      dataType: 'json'
       data: window.shopping_cart.prepareParams(options)
       success: window.shopping_cart.buildOnSuccessCallback('item_removed', variantId)
       error: window.shopping_cart.buildOnErrorCallback('item_remove_failed', variantId, options.failure)

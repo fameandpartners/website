@@ -17,16 +17,29 @@ $(".orders.edit").ready ->
     updateHandlersFor: (root_element) ->
       root_element.find('.remove-item-from-cart').on('click', page.removeItemClickHandler)
       root_element.find('.edit-link').on('click', page.editItemClickHandler)
+      root_element.find('.wishlist a').on('click', page.moveItemToWishlistClickHandler)
 
     removeItemClickHandler: (e) ->
       e.preventDefault()
-      variantId = $(e.currentTarget).data('id')
-      window.shopping_cart.removeProduct(variantId)
+      button = $(e.currentTarget)
+      button.addClass('removing')
+      window.shopping_cart.removeProduct(button.data('id'), {
+        failure: () -> button.removeClass('removing')
+      })
 
     editItemClickHandler: (e) ->
       e.preventDefault()
       itemId    = $(e.currentTarget).data('id')
       page.editPopup.show(itemId)
+
+    moveItemToWishlistClickHandler: (e) ->
+      e.preventDefault()
+      button = $(e.currentTarget)
+      previousText = button.html()
+      button.off('click').addClass('moving').html('moving...')
+      window.shopping_cart.moveProductToWishlist(button.data('id'), {
+        failure: () -> button.removeClass('moving').html(previousText)
+      })
 
     removeItemFromList: (e, data) ->
       page.container.find("li.item.grid-container[data-id='#{data.id}']").slideToggle('slow')
