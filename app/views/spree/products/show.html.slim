@@ -71,7 +71,7 @@ ruby:
           ul
             - @product.style_profile.suitable_shapes.each do |shape|
               = link_to '#' do
-                = image_tag "body_shape/#{shape}", size: '60x84', alt: shape
+                = image_tag('http://placehold.it/60x84', alt: shape, title: shape)
         .buy-wishlist
           = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
           = add_to_wishlist_link(@product)
