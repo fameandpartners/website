@@ -50,6 +50,7 @@ ruby:
           = render 'shared/share_buttons'
     .grid-45
       .product-info
+        .name = @product.name
         .desc = @product.property('short_description')
         .price-delivery
           .price.sale
@@ -104,7 +105,9 @@ ruby:
     - @similar_products.each do |product|
       li.product-item.grid-25
         .thumbnail
-          .like = add_to_wishlist_link(@product)
+          .like = add_to_wishlist_link(product)
           .quick-view = quick_view_link(product)
-          = product_image product, itemprop: "image", width: 243, height: 352, alt: product.name
+          = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
         .name = link_to product.name, product
+        .description = product_short_description(product)
+        .price = product.price_in(current_currency).display_price

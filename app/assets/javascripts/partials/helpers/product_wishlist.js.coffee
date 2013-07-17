@@ -20,7 +20,7 @@
 
     addProduct: (variantId, options = {}) ->
       return unless variantId?
-      options = _.extend({ variant_id: variantId }, options)
+      options = _.extend({ variant_id: variantId, quantity: 1}, options)
       $.ajax(
         url: "/wishlists_items"
         type: 'POST'

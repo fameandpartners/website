@@ -15,7 +15,8 @@ module ProductsHelper
   end
 
   def product_short_description(product)
-    product.property('short_description') || truncate(product.description, length: 50, separator: ' ')
+    description_text = product.property('short_description') || product.description
+    truncate(description_text, length: 80, separator: ' ')
   rescue
     'no description available'
   end
@@ -45,12 +46,25 @@ module ProductsHelper
     end 
   end
 
-  def add_to_wishlist_link(product_or_variant)
-    variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
-    link_to 'Like item', '#', class: 'add-wishlist', data: { action: 'add-to-wishlist', id: variant.id }
-  end
-
   def quick_view_link(product)
     link_to 'Quick view', spree.product_path(product), data: { action: 'quick-view', id: product.permalink }
+  end
+
+  def add_to_wishlist_link(product_or_variant)
+    variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
+
+    link_options = {}
+    link_options[:data] = { action: 'add-to-wishlist', id: variant.id }
+    link_options[:class] = (variant) ? 'active add-wishlist' : 'add-wishlist'
+    link_options[:class] = in_wishlist?(variant) ? 'active add-wishlist' : 'add-wishlist'
+
+    link_to 'Like item', '#', link_options
+  end
+
+  def in_wishlist?(variant)
+    user = try_spree_current_user
+    return false if user.blank?
+
+    return user.wishlist_items.where(spree_product_id: variant.product_id).exists?
   end
 end

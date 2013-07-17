@@ -15,7 +15,14 @@ class Users::WishlistsItemsController < Users::BaseController
 
   # {"variant_id"=>"1240", "quantity"=>"1"}
   def create
-    @item = @user.wishlist_items.where(spree_variant_id: params[:variant_id]).first_or_create
+    variant = Spree::Variant.find(params[:variant_id])
+
+    @item = @user.wishlist_items.where(spree_product_id: variant.product_id).first
+    @item ||= @user.wishlist_items.create(
+      spree_variant_id: variant.id,
+      spree_product_id: variant.product_id,
+      quantity: params[:quantity]
+    )
 
     if @item.persisted?
       render json: @item
@@ -38,7 +45,7 @@ class Users::WishlistsItemsController < Users::BaseController
     @item = @user.wishlist_items.find(params[:id])
 
     populator = Spree::OrderPopulator.new(current_order(true), current_currency)
-    if populator.populate(variants: { @item.variant.id => 1 })
+    if populator.populate(variants: { @item.variant.id => @item.quantity })
       fire_event('spree.cart.add')
       fire_event('spree.order.contents_changed')
 

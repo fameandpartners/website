@@ -38,7 +38,7 @@ $(".orders.edit").ready ->
       previousText = button.html()
       button.off('click').addClass('moving').html('moving...')
       window.shopping_cart.moveProductToWishlist(button.data('id'), {
-        failure: () -> button.removeClass('moving').html(previousText)
+        failure: () -> button.removeClass('moving').html(previousText).on('click', page.moveItemToWishlistClickHandler)
       })
 
     removeItemFromList: (e, data) ->

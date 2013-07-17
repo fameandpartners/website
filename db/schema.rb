@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717115634) do
+ActiveRecord::Schema.define(:version => 20130717211445) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -917,8 +917,10 @@ ActiveRecord::Schema.define(:version => 20130717115634) do
   create_table "wishlist_items", :force => true do |t|
     t.integer  "spree_user_id"
     t.integer  "spree_variant_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "quantity",         :default => 1
+    t.integer  "spree_product_id"
   end
 
 end
