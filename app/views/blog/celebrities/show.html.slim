@@ -4,17 +4,18 @@
 .wrap.no-overflow
   = render 'shared/breadcrumbs'
 
-  .page-title
+  .page-title.celebrity-title
     h1.block-title.dark= @celebrity.fullname
     /.track-celebrity = link_to 'Track this celebrity', '#', class: 'active'
-    .block-select
-      select.selectbox name="tags" id="celebrity_show_page"
-        - if params[:type] == 'posts'
-          option value="#{blog_celebrity_path(@celebrity.slug)}" Show celebrity photos
-          option selected="selected" value="#{blog_celebrity_posts_path(@celebrity.slug)}" Show blog posts
-        - else
-          option selected="selected" value="#{blog_celebrity_path(@celebrity.slug)}" Show celebrity photos
-          option value="#{blog_celebrity_posts_path(@celebrity.slug)}" Show blog posts
+
+  .select-celebrity.block-select
+    select.selectbox name="tags" id="celebrity_show_page"
+      - if params[:type] == 'posts'
+        option value="#{blog_celebrity_path(@celebrity.slug)}" Show celebrity photos
+        option selected="selected" value="#{blog_celebrity_posts_path(@celebrity.slug)}" Show blog posts
+      - else
+        option selected="selected" value="#{blog_celebrity_path(@celebrity.slug)}" Show celebrity photos
+        option value="#{blog_celebrity_posts_path(@celebrity.slug)}" Show blog posts
 
   - if params[:type] == 'posts'
     .content-sidebar.clearfix
@@ -59,12 +60,16 @@
               - @celebrity.celebrity_photos.with_posts.each do |photo|
                 li[data-name="#{@celebrity.fullname}" data-date="#{photo.created_at_formatted}" data-photo-url="#{photo.photo.url(:preview)}"]
                   .zoom
-                  = link_to '#', class: 'celebrity-photo' do
+                  .celebrity-photo
                     = image_tag photo.photo.url(:small), width: 269, height: 375, alt: ''
                     .overlay
                       .name= @celebrity.fullname
                       - if photo.post.present?
-                        .event=photo.post.title
+                        .event
+                          - if photo.post.red_carpet?
+                            = link_to photo.post.title, blog_red_carpet_post_path(photo.post.slug)
+                          - else
+                            = link_to photo.post.title, blog_post_by_category_path(photo.post.category.slug, photo.post.slug)
                   .love-share
                     .love-hate
                       .icons[data-id="#{photo.id}"]

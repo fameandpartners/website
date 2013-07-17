@@ -1,0 +1,13 @@
+doctype html
+= conditional_html do
+  head
+    = render 'layouts/head'
+    = csrf_meta_tags
+    = render 'shared/ga'
+  body class=(controller_action_class) id=(controller_action_id)
+    #wrap
+      = render 'layouts/header_blog'
+      #content
+        = yield
+        #push
+    = render 'layouts/footer'

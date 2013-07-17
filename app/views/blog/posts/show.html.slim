@@ -8,8 +8,7 @@
   .content-sidebar.clearfix
     section.content-area
       article.post
-        h2
-          = link_to @post.title, '#'
+        h2= @post.title
         .post-meta
           .date= @post.occured_at_formatted
           .comments
@@ -19,18 +18,26 @@
               = link_to '', blog_post_by_category_path(@post.category.slug, @post.slug) + '#disqus_thread'
           .author
             = link_to blog_authors_post_path(@post.user.slug) do
-              .avatar
-                = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
+              - if @post.user.avatar.present?
+                .avatar
+                  = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
               .name= @post.user.fullname
-        - if @post.post_photos.present?
-          .featured-image
-            #post-carousel-prev
-            #post-carousel-next
-            ul#post-carousel
-              - @post.post_photos.each do |photo|
-                li
-                  = image_tag photo.photo.url, width: 742, height: 355, alt: ''
+        - if @post.primary_photo.present?
+          .featured-image= image_tag @post.primary_photo.photo.url, width: 742, height: 355, alt: ''
+        /- if @post.post_photos.present?
+        /  .featured-image
+        /    #post-carousel-prev
+        /    #post-carousel-next
+        /    ul#post-carousel
+        /      - @post.post_photos.each do |photo|
+        /        li
+        /          = image_tag photo.photo.url, width: 742, height: 355, alt: ''
         .post-content= raw(@post.body)
+        - if @post.tag_list.present?
+          .tag-list
+            .tag Tags:
+            - @post.tag_list.each do |tag|
+              .tag= link_to tag, blog_search_by_tag_path(tag.downcase)
 
       - if @post.red_carpet?
         .blog-block-title
@@ -62,7 +69,7 @@
                           .love
                           .hate
                       .label Love it or loathe it
-                    /.share
+                    .share
                       .icons
                         .share-block
                       .label Share

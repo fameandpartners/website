@@ -1,5 +1,5 @@
 class BlogBaseController < ApplicationController
-  layout 'spree/layouts/spree_application'
+  layout 'blog'
   respond_to :html
   before_filter :load_categories
   before_filter :load_featured_celebrities

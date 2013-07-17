@@ -5,7 +5,7 @@
   .content-sidebar.clearfix
     section.content-area
       - if @posts.present?
-        = render @posts
+        = render @posts, locals: {index_page: true}
       - else
         .blog-block-title
           .empty No posts found
