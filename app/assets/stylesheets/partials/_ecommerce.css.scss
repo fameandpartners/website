@@ -910,6 +910,21 @@
                 line-height: 108px;
               }
             }
+            &.hour_glass {
+              background: image-url('body-shape-hour_glass.png') center 5px no-repeat;
+            }
+            &.pear {
+              background: image-url('body-shape-pear.png') center 5px no-repeat;
+            }
+            &.strawberry {
+              background: image-url('body-shape-strawberry.png') center 5px no-repeat;
+            }
+            &.apple {
+              background: image-url('body-shape-apple.png') center 5px no-repeat;
+            }
+            &.column {
+              background: image-url('body-shape-column.png') center 5px no-repeat;
+            }
           }
         }
       }

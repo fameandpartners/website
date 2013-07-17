@@ -35,7 +35,7 @@
             = check_box_tag 'body_shapes', 'all', selected_items.blank?
           - ProductStyleProfile::BODY_SHAPES.each do |body_shape|
             - enabled = selected_items.include?(body_shape.to_s) 
-            li class=(enabled ? 'active' : '')
+            li class="#{body_shape} #{enabled ? 'active' : ''}"
               label = body_shape.humanize
               = check_box_tag 'body_shapes', body_shape, enabled
       .filters-block
