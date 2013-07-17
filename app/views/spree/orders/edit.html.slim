@@ -6,7 +6,7 @@
         span Bag
   
   - if @order.line_items.empty?
-    div(data-hook="empty_cart")
+    .empty-cart(data-hook="empty_cart")
       p = t(:your_cart_is_empty)
       p = link_to t(:continue_shopping), products_path, class: 'button continue'
   - else
