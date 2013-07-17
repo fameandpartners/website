@@ -120,6 +120,16 @@ header {
       }
     }
   }
+  &.blog {
+    .logo {
+      margin: 19px auto 0;
+      width: 290px;
+      float: none;
+    }
+    .wrap {
+      border-bottom: 1px dashed #000;
+    }
+  }
 }
 
 #content {
@@ -214,13 +224,13 @@ header {
 
 .breadcrumbs-likes {
   overflow: hidden;
-  border-bottom: 1px solid #ededed;
   font-size: 14px;
-  line-height: 56px;
-  height: 54px;
+  line-height: 46px;
+  height: 46px;
   font-family: $fontOne;
   .breadcrumbs {
     float: left;
+    font: 400 italic 16px/50px $fontTwo;
     a {
       color: #ad7d76;
     }
@@ -234,11 +244,15 @@ header {
       margin: 5px 0 0;
     }
     .addthis_button_pinterest_pinit {
-      margin: 18px 20px 0 0;
+      margin: 14px 20px 0 0;
     }
     .addthis_counter {
-      margin: 18px 0 0;
+      margin: 14px 0 0;
     }
+  }
+  .wrap {
+    height: 45px;
+    border-bottom: 1px dashed #000;
   }
 }
 
