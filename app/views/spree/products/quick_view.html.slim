@@ -64,4 +64,5 @@ ruby:
       .buy-wishlist
         = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
         = add_to_wishlist_link(@product)
-      .share-buttons Share buttons
+      .share-buttons
+        = render 'shared/share_buttons'
