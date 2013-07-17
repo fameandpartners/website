@@ -23,6 +23,7 @@ def create_dress(random_number)
     name: generate_name,
     price: generate_price,
     description: generate_description,
+    featured: ( rand(3) == 2 ),
     sku: "#{random_word}-#{random_number}"
   }
   args[:permalink] = args[:name].downcase.gsub(/\s/, '_')

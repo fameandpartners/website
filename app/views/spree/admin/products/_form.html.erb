@@ -106,6 +106,12 @@
       <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { :include_blank => 'None' }, { :class => 'select2' }) %>
       <%= f.error_message_on :tax_category %>
     <% end %>
+
+    <%= f.field_container :featured do %>
+      <%= f.check_box :featured, style: 'width: 10%' %>
+      <%= f.label :featured, :featured %>
+      <%= f.error_message_on :featured %>
+    <% end %>
   </div>
 
   <div class="twelve columns alpha omega">

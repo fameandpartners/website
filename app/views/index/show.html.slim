@@ -24,17 +24,18 @@
 
 .featured-dresses
   .wrap.no-overflow
-    .page-name
-      .inner
-        h1.title.aligncenter
-          em featured
-          span Dresses
+    - if @featured_products.length > 0
+      .page-name
+        .inner
+          h1.title.aligncenter
+            em featured
+            span Dresses
 
-    #product-items-prev
-    ul#product-items.products-list.grid-container.featured
-      - @featured_products.each do |product|
-        = render 'shared/product', product: product, colors: @colors[product.id]
-    #product-items-next
+      #product-items-prev
+      ul#product-items.products-list.grid-container.featured
+        - @featured_products.each do |product|
+          = render 'shared/product', product: product, colors: @colors[product.id]
+      #product-items-next
 
     .page-name
       .inner

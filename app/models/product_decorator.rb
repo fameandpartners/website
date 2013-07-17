@@ -16,6 +16,9 @@ Spree::Product.class_eval do
     )
   }
 
+  attr_accessible :featured
+  scope :featured, lambda { where(featured: true) }
+
   def remove_property(name)
     ActiveRecord::Base.transaction do
       property = Spree::Property.where(name: name).first
