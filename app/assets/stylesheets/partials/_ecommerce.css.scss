@@ -326,6 +326,7 @@
       margin: 0 0 17px;
     }
     .arrow-down {
+      margin: 0 0 20px;
       background-position: center -32px;
     }
     .carousel-pictures {
@@ -364,7 +365,13 @@
     border: 1px solid #d8d8da;
     border-top: 0;
     padding: 18px;
+    height: 20px;
     text-align: center;
+    .addthis_toolbox > a {
+      display: inline-block !important;
+      float: none;
+      vertical-align: top;
+    }
   }
   .product-info {
     margin: 33px 0 0;

@@ -46,7 +46,8 @@ ruby:
               .inspiration
                 = celebrity.celebrity_name
 
-        .share-buttons Share buttons
+        .share-buttons
+          = render 'shared/share_buttons'
     .grid-45
       .product-info
         .desc = @product.property('short_description')
