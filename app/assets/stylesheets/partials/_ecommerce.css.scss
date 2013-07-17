@@ -918,6 +918,20 @@
           cursor: pointer;
           &.all {
             font: 700 11px/34px $fontOne;
+            &.active {
+              background: transparent;
+              position: relative;
+              &:after {
+                content: '';
+                position: absolute;
+                top: -4px;
+                right: -4px;
+                background: image-url('icon-color-tick.png') center center no-repeat #fff;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+              }
+            }
           }
         }
       }
