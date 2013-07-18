@@ -1,4 +1,8 @@
 class LineItemSerializer < ActiveModel::Serializer
+  include ActionView::Helpers::SanitizeHelper
+  include ActionView::Helpers::TextHelper
+  include Spree::ProductsHelper
+
   attributes :quantity, :currency, :id, :variant_id
 
   attributes :count_on_hand,
@@ -40,7 +44,7 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def product_description
-    object.variant.product.property('short_description')
+    line_item_description(object.variant)
   end
 
   def product_color
