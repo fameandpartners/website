@@ -578,14 +578,41 @@
       float: right;
       width: 660px;
     }
-    h2 {
+    ol {
+      margin: 20px 0 0 24px;
+    }
+  }  
+  .create-now{
+    text-align: left;
+    margin: 20px 0 0;
+    
+    .facebook-signup{
+      float: left;
+    }             
+    
+    .signup-link{
+      clear: both;
+      display: block;
+      padding: 10px 0 0;
+    }
+  }
+  
+  
+  h2 {
       margin: 10px 0 0;
       color: #f9b4a8;
       font-size: 32px;
       text-transform: uppercase;
     }
-    ol {
-      margin: 20px 0 0 24px;
+  .moreinfo {
+    margin: 20px 0 0;
+    h3 {
+        margin: 30px 0 0 0;
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+    p{
+      margin: 5px 0 0;
     }
-  }
+  }        
 }
