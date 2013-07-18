@@ -1,4 +1,4 @@
-<div id="shopping-bag-popup-wrapper" class="shopping-bag-popup">
+<div id="shopping-bag-popup-wrapper" class="shopping-bag-popup" style="display: none;">
   <% if @order.item_count == 0: %>
     Sorry, your shopping bag still empty
   <% else: %>

@@ -4,11 +4,12 @@ $ ->
   window.shoppingBag = {
     container: null
     cartTemplate: JST['templates/shopping_cart']
+    carouselEnabled: false
     init: () ->
       window.shoppingBag.container = $('.first-level .shopping-bag')
 
       shoppingBag.updateElementsHandlers()
-      shoppingBag.updateCarousel()
+      #shoppingBag.updateCarousel()
       shoppingBag.container.find("#shopping-bag-popup-wrapper").hide()
       shoppingBag.container.find(".shopping-bag-toggler").on(
         'click', shoppingBag.toggleVisibilityClickHandler
@@ -32,7 +33,9 @@ $ ->
 
     show: () ->
       if !shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
-        shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow")
+        shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow", () ->
+          shoppingBag.updateCarousel() if !shoppingBag.carouselEnabled
+        )
       window.shoppingBag
 
     hide: () ->
@@ -47,9 +50,10 @@ $ ->
         csrf_token: $('[name="csrf-token"]').attr('content')
 
       shoppingBag.container.find('#shopping-bag-popup-wrapper').replaceWith(cartHtml)
-      shoppingBag.show()
+      #shoppingBag.show()
       # update actions
       shoppingBag.updateElementsHandlers()
+      shoppingBag.carouselEnabled = false
       shoppingBag.updateCarousel(data.id)
       item_count = _.reduce(data.cart.line_items, ((memo, item) -> memo += item.quantity), 0)
       $('a.shopping-bag-toggler .counter').html(item_count)
@@ -60,6 +64,8 @@ $ ->
         .on('click', shoppingBag.removeProductClickHandler)
 
     updateCarousel: (variantId) ->
+      return unless $("#shopping-bag-popup").is(":visible")
+
       start = $('#shopping-bag-popup').first().find(' > li')
         .index($("li:has(a.remove-item-from-cart[data-id='#{variantId}'])"))
       start = 0 if start < 0 # -1 : not found
@@ -71,6 +77,7 @@ $ ->
       })
       $("#shopping-bag-popup").carouFredSel(options)
       $("#shopping-bag-popup").trigger('slideTo', start)
+      shoppingBag.carouselEnabled = true
   }
 
   shoppingBag.init()

@@ -32,7 +32,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
         .fright
           .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
           .shopping-bag
-            = link_to '#', class: 'shopping-bag-toggler' do
+            = link_to spree.cart_path, class: 'shopping-bag-toggler' do
               .counter = current_order(true).item_count
               ' Shopping bag
             = render 'layouts/shopping_bag_content'
