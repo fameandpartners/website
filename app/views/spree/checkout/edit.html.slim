@@ -1,6 +1,13 @@
 .wrap
   .checkout-page
-    h1.page-title Welcome to the checkout
+    .grid-container
+      .grid-100
+        .page-name
+          .inner
+            h1.title
+              em Welcome to the
+              span Checkout
+
     ruby:
       index = 0
       if !signed_in?
