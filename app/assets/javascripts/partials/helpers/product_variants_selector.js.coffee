@@ -44,7 +44,10 @@ window.helpers.createProductVariantsSelector = (root) ->
       @selected.size = size
       @updatePurchaseConditions()
 
-      avaialable_variants = _.where(@variants, { size: size })
+      if !!size
+        avaialable_variants = _.where(@variants, { size: size })
+      else
+        avaialable_variants = @variants
       @updateColorsSelector(avaialable_variants)
 
     updateSelectbox: (selectBox, available_options, method_name) ->
