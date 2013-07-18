@@ -4,7 +4,9 @@ class LineItemsController < Spree::StoreController
   def create
     populator = Spree::OrderPopulator.new(current_order(true), current_currency)
 
-    if populator.populate(variants: { params[:variant_id] => params[:quantity] })
+    quantity = params[:quantity].to_i > 0 ? params[:quantity].to_i : 1
+
+    if populator.populate(variants: { params[:variant_id] => quantity })
       fire_event('spree.cart.add')
       fire_event('spree.order.contents_changed')
 
@@ -33,7 +35,8 @@ class LineItemsController < Spree::StoreController
   def update
     line_item = current_order.line_items.find(params[:id])
 
-    if line_item.update_attributes(variant_id: params[:variant_id], quantity: params[:quantity])
+    quantity = params[:quantity].to_i > 0 ? params[:quantity].to_i : 1
+    if line_item.update_attributes(variant_id: params[:variant_id], quantity: quantity)
       current_order.reload
     end
 

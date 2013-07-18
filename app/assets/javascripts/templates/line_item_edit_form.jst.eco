@@ -31,7 +31,7 @@
       </div>
       <div class="value">
         <select name="quantity" class="quantity-select">
-          <% for quantity in [0..@max_quantity]: %>
+          <% for quantity in [1..@max_quantity]: %>
             <option value='<%= quantity %>'><%= quantity %></option>
           <% end %>
         </select>

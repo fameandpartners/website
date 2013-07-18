@@ -66,7 +66,7 @@
 <div class="grid-20 price">
   <div class="pricing">
     <%= @line_item.currency %>
-    <%= @line_item.price %>
+    <%= @line_item.money %>
   </div>
   <div class="style-notes">
     <input type="checkbox" name="note"><label>Add Style Notes <span>$4.55</span></label>
