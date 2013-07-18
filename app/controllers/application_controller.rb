@@ -14,15 +14,15 @@ class ApplicationController < ActionController::Base
   private
 
   def step1_custom_dresses_path(options = {})
-    super options.merge(user_addition_params)
+    main_app.step1_custom_dresses_path(options.merge(user_addition_params))
   end
 
   def step2_custom_dress_path(object, options = {})
-    super object, options.merge(user_addition_params)
+    main_app.step2_custom_dress_path(object, options.merge(user_addition_params))
   end
 
   def success_custom_dress_path(object, options = {})
-    super object, options.merge(user_addition_params)
+    main_app.success_custom_dress_path(object, options.merge(user_addition_params))
   end
 
   helper_method :step1_custom_dresses_path,
