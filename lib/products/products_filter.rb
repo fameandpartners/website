@@ -137,7 +137,7 @@ module Products
       when 'price_low'
         base_scope.order("spree_prices.amount asc")
       when 'newest'
-        base_scope.order('created_at desc')
+        base_scope.order('spree_products.created_at desc')
       when 'popular'
         base_scope
       else
