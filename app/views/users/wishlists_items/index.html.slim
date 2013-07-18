@@ -17,7 +17,7 @@
                   .quick-view = quick_view_link(product)
                   = product_image product, itemprop: "image", width: 243, height: 352, alt: product.name
                 .name = link_to product.name, spree.product_path(product)
-                .description = product_short_description(product)
+                /.description = product_short_description(product)
                 .price = product.price_in(current_currency).display_price
                 .add-remove
                   = link_to 'Add to cart', move_to_cart_wishlists_item_path(item), class: 'add-to-cart', remote: true

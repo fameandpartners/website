@@ -4,7 +4,7 @@ li.product-item.grid-25
     .quick-view = quick_view_link(product)
     = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
   .name = link_to product.name, product
-  .description = product_short_description(product)
+  /.description = product_short_description(product)
   .price = product.price_in(current_currency).display_price
   .colors
     - colors.map(&:name).sort.each do |color|
