@@ -5,10 +5,6 @@ namespace "db" do
       num_of_dresses = 15
       create_dresses(num_of_dresses)
     end
-
-#    task update_images: environment do
-#      rake paperclip:refresh:thumbnails CLASS=Spree::Image
-#    end
   end
 end
 
@@ -34,9 +30,9 @@ def create_dress(random_number)
 
   product = Spree::Product.create(args)
 
-  variant = Spree::Variant.new(product_id: product.id)
-  variant.is_master = true
-  variant.save
+  #variant = Spree::Variant.new(product_id: product.id)
+  #variant.is_master = true
+  #variant.save
 
   product
 end
