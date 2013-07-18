@@ -9,18 +9,21 @@ $('.profiles.show').ready ->
 
   submitButtonText = null
   previousAvatarImage = null
+  transparentImage = '/assets/transparent.gif'
   spinnerImage = '/assets/spinner-big.gif'
   showSpinner = () ->
     submitButtonText = $('.btn-upload').val()
     previousAvatarImage = $('.avatar-field .avatar img').attr('src')
 
     $('.btn-upload').attr('disabled', true).val('Loading ...')
-    updateUserAvatarImage(spinnerImage)
+    updateUserAvatarImage(transparentImage)
+    $('.avatar-field .avatar img').css('background-image', 'url('+spinnerImage+')')
     return true
 
   hideSpinner = () ->
     $('.btn-upload').removeAttr('disabled').val(submitButtonText)
-    if $('.avatar-field .avatar img').attr('src') == spinnerImage
+    $('.avatar-field .avatar img').css('background-image', 'none')
+    if $('.avatar-field .avatar img').attr('src') == transparentImage
       updateUserAvatarImage(previousAvatarImage)
     return true
 

@@ -1286,6 +1286,8 @@
       overflow: hidden;
       float: left;
       img {
+        background-position: center center;
+        background-repeat: no-repeat;
         max-width: 100%;
         max-height: 100%;
       }
