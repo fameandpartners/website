@@ -12,6 +12,9 @@ $ ->
     $(".quiz-box").on "click", (event) ->
       event.stopPropagation()
 
+    $(".quiz-box .close-quiz").on "click", () ->
+      hideStyleQuiz()
+
     $(document).keyup (event) ->
       if event.which is 27
         $(document).off "keyup"
