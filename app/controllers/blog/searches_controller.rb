@@ -19,9 +19,9 @@ class Blog::SearchesController < BlogBaseController
   end
 
   def by_tag
-    @posts = Blog::Post.tagged_with(Array.wrap(params[:tag].to_s), match_all: true)
+    @posts = Blog::Post.tagged_with(Array.wrap(params[:tag].to_s))
     @posts_count = @posts.count
-    @posts = Blog::Post.tagged_with(Array.wrap(params[:tag].to_s), match_all: true).page(params[:page]).per(POSTS_PER_PAGE)
+    @posts = Blog::Post.tagged_with(Array.wrap(params[:tag].to_s)).page(params[:page]).per(POSTS_PER_PAGE)
 
     generate_breadcrumbs_for_index
     respond_to do |format|
