@@ -99,8 +99,8 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
           - else
             li = link_to 'Personalised Boutique', root_path
           li = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
-          li = link_to 'Custom Dresses', about_path, title: "Fame & Partners Custom Dresses§"
-          li = link_to 'Blog', blog_path, title: "Fame & Partners Blog"
+          li = link_to 'Custom Dresses', step1_custom_dresses_path, title: "Fame & Partners Custom Dresses"
+          li = link_to 'Blog', root_url(:subdomain => :blog), title: "Fame & Partners Blog"
           li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
 
   javascript:

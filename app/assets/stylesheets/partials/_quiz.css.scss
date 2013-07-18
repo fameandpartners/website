@@ -8,6 +8,14 @@
   margin: -275px 0 0 -524px;
   background: #fff;
   box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+  .close-quiz {
+    font: 700 18px/1 $fontOne;
+    position: absolute;
+    top: 0;
+    right: -20px;
+    z-index: 2;
+    cursor: pointer;
+  }
   .quiz-box-inner {
     height: 530px;
     border: 13px solid #fff;
