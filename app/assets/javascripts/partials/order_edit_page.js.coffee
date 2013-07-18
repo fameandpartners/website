@@ -2,6 +2,7 @@ $(".orders.edit").ready ->
   window.shopping_cart.init(window.bootstrap)
 
   page = {
+    isEmptyTemplate: JST['templates/cart_is_empty']
     container: null,
     editPopup: null,
     init: () ->
@@ -42,7 +43,14 @@ $(".orders.edit").ready ->
       })
 
     removeItemFromList: (e, data) ->
-      page.container.find("li.item.grid-container[data-id='#{data.id}']").slideToggle('slow')
+      if data.cart.line_items.length == 0
+        page.container.find("li.item.grid-container[data-id='#{data.id}']").fadeOut('slow')
+        page.container.find(".cart-labels").fadeOut 'slow', () ->
+          page.container.find('ul.items, .cart-labels').remove()
+          page.container.prepend(page.isEmptyTemplate()).hide().fadeIn('slow')
+      else
+        page.container.find("li.item.grid-container[data-id='#{data.id}']").slideToggle('slow')
+
       page.updateOrderSummary.call(page, data.cart)
 
     # data.id = line_item_id
