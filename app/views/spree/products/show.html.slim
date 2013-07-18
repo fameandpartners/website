@@ -27,7 +27,7 @@ ruby:
                   li
                     - images_data =  { large: image.attachment(:large), original: image.attachment(:original) }
                     = link_to('#', data: images_data) do
-                      = image_tag(image.attachment, width: 83, heigth: 115, alt: '')
+                      = image_tag(image.attachment.url(:small), width: 83, heigth: 115, alt: '')
               #product-images-down.arrow-down
             .big-photo
               .zoom

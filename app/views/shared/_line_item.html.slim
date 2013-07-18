@@ -3,7 +3,7 @@
 - hide_remove ||= false
 li.item-block
   .thumbnail
-    = product_image product, itemprop: "image", width: 83, height: 115, alt: product.name
+    = small_image product, itemprop: "image", width: 83, height: 115, alt: product.name
     - unless hide_remove
       = link_to 'Remove', '#', class: 'remove-item-from-cart', data: { id: variant.id }
   .item-info

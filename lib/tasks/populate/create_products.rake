@@ -5,6 +5,10 @@ namespace "db" do
       num_of_dresses = 15
       create_dresses(num_of_dresses)
     end
+
+#    task update_images: environment do
+#      rake paperclip:refresh:thumbnails CLASS=Spree::Image
+#    end
   end
 end
 
