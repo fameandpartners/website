@@ -67,4 +67,9 @@ module ProductsHelper
 
     return user.wishlist_items.where(spree_product_id: variant.product_id).exists?
   end
+
+  def share_buttons
+    return '' if Rails.env.development?
+    render 'shared/share_buttons'
+  end
 end

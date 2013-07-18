@@ -47,7 +47,7 @@ ruby:
                 = celebrity.celebrity_name
 
         .share-buttons
-          = render 'shared/share_buttons'
+          = share_buttons
     .grid-45
       .product-info
         .name = @product.name
@@ -73,7 +73,7 @@ ruby:
           ul
             - @product.style_profile.suitable_shapes.each do |shape|
               = link_to '#' do
-                = image_tag('http://placehold.it/60x84', alt: shape, title: shape)
+                = image_tag('http://placehold.it/60x84', alt: shape.humanize, title: shape.humanize)
         .buy-wishlist
           = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
           = add_to_wishlist_link(@product)
