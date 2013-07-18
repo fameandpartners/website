@@ -9,9 +9,11 @@
   = render 'latest_celebrity_photos'
   .content-sidebar
     section.content-area
-      - @categories.each do |category|
-        .blog-block-title
-          .latest Latest
-          .block-subtitle= category.name
-        = render partial: 'latest_post_by_category', locals: {post: category.latest_post, category: category}
+      .blog-block-title
+        .latest Featured
+        - if @featured_posts.present?
+          - @featured_posts.each do |post|
+            = render partial: 'latest_post_by_category', locals: {post: post}
+        - else
+          .empty No posts found
     = render 'shared/blog_sidebar'

@@ -70,6 +70,19 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
     end
   end
 
+  def toggle_featured
+    post = Blog::Post.find(params[:id])
+    if post.featured?
+      post.featured_at = nil
+    else
+      post.featured_at = Time.now.utc
+    end
+    post.save
+    respond_to do |format|
+      format.js {render text: 'ok' }
+    end
+  end
+
   def destroy
     @blog_post = Blog::Post.find(params[:id])
     @blog_post.destroy

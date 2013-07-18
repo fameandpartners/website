@@ -15,6 +15,7 @@ class Blog::Ability
 
       if user.has_spree_role?("Blog Admin") || user.has_spree_role?("admin")
         can :toggle_publish, Blog::Post
+        can :toggle_featured, Blog::Post
         can :toggle_featured, Blog::Celebrity
         can :manage,  Blog::Category
         can :manage,  Blog::PromoBanner

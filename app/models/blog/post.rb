@@ -29,6 +29,7 @@ class Blog::Post < ActiveRecord::Base
   scope :sidebar, red_carpet.published.limit(20)
   scope :simple_posts, order('created_at desc').where(post_type_id: PostTypes::SIMPLE)
   scope :red_carpet_posts, order('created_at desc').where(post_type_id: PostTypes::RED_CARPET)
+  scope :featured, where(post_type_id: PostTypes::SIMPLE).where('featured_at is not null').order('featured_at desc').limit(5)
 
   class << self
     def find_by_query(term)
@@ -89,6 +90,18 @@ class Blog::Post < ActiveRecord::Base
 
   def published?
     published_at.present?
+  end
+
+  def featured?
+    featured_at.present?
+  end
+
+  def featured
+    if featured_at?
+      'featured'
+    else
+      'not featured'
+    end
   end
 
   def state
