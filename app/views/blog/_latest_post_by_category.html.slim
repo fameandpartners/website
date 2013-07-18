@@ -1,17 +1,13 @@
 - if post.present? && post.slug.present?
+  - if post.red_carpet?
+    - url = blog_red_carpet_post_path(post.slug)
+  - else
+    - url = blog_post_by_category_path(post.category.slug, post.slug)
   article.post.single
-    h2
-      - if post.red_carpet?
-        = link_to post.title, blog_red_carpet_post_path(post.slug)
-      - else
-        = link_to post.title, blog_post_by_category_path(post.category.slug, post.slug)
+    h2= link_to post.title, url
     .post-meta
       .date= post.occured_at_formatted
-      .comments
-        - if post.red_carpet?
-          = link_to '', blog_red_carpet_post_path(post.slug) + '#disqus_thread'
-        - else
-          = link_to '', blog_post_by_category_path(post.category.slug, post.user.slug) + '#disqus_thread'
+      .comments= link_to '', url + '#disqus_thread'
       .author
         = link_to blog_authors_post_path(post.user.slug) do
           .avatar
@@ -19,7 +15,8 @@
           .name= post.user.fullname
     - if post.primary_photo.present?
       .featured-image
-        = image_tag post.primary_photo.photo.url, width: 742, height: 355, alt: ''
+        = link_to url do
+          = image_tag post.primary_photo.photo.url, width: 742, height: 355, alt: ''
     - if post.body.present?
       .post-content= raw(post.body)
 
