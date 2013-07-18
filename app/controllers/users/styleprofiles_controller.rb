@@ -4,7 +4,7 @@ class Users::StyleprofilesController < Users::BaseController
   respond_to :html, :js
 
   def show
-    @style_profile = UserStyleProfile.find_by_user_id!(@user.id)
+    @style_profile = UserStyleProfile.find_by_user_id(@user.id)
 
     respond_with(@user) do |format|
       format.html {}
