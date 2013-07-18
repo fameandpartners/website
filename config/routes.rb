@@ -120,6 +120,7 @@ FameAndPartners::Application.routes.draw do
         resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
           member do
             put :toggle_publish
+            put :toggle_featured
           end
         end
 
