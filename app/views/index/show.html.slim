@@ -31,7 +31,6 @@
             em featured
             span Dresses
 
-      #product-items-prev
       ul#product-items.products-list.grid-container.featured
         - @featured_products.each do |product|
           = render 'shared/product', product: product, colors: @colors[product.id]
@@ -46,6 +45,8 @@
           - available_product_ranges.each do |taxon|
             li = link_to taxon.name, products_path(taxons: { range: taxon.id}), target: '_blank'
 
+    #product-items-prev
     ul#product-items.products-list.grid-container
       - @products.each do |product|
         = render 'shared/product', product: product, colors: @colors[product.id]
+    #product-items-next
