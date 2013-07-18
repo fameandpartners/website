@@ -121,6 +121,11 @@ header {
     }
   }
   &.blog {
+    nav {
+      top: 2px;
+      right: 0;
+      position: absolute;
+    }
     .logo {
       margin: 19px auto 0;
       width: 290px;
@@ -128,6 +133,7 @@ header {
     }
     .wrap {
       border-bottom: 1px dashed #000;
+      position: relative;
     }
   }
 }
