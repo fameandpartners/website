@@ -35,24 +35,43 @@ class Blog::Post < ActiveRecord::Base
     def find_by_query(term)
       Blog::Post.joins(
         "LEFT OUTER JOIN spree_users ON spree_users.id = blog_posts.user_id"
-      ).
-        where(
-          %Q(
-            (
-              LOWER(blog_posts.title) LIKE ?
-            )
-            OR
-            (
-              LOWER(blog_posts.body) LIKE ?
-            )
-            OR
-            (
-              LOWER(spree_users.first_name) LIKE ?
-              or LOWER(spree_users.last_name) LIKE ?
-              or LOWER(concat(spree_users.last_name, ', ', spree_users.first_name)) LIKE ?
-            )
-          ), "%#{term}%", "%#{term}%" , "%#{term}%", "%#{term}%", "%#{term}%"
-        )
+      ).joins("LEFT OUTER JOIN blog_celebrity_photos ON blog_celebrity_photos.post_id = blog_posts.id").joins(
+        'LEFT OUTER JOIN blog_celebrities ON blog_celebrities.id = blog_celebrity_photos.celebrity_id'
+      ).joins(
+        "LEFT OUTER JOIN taggings ON (taggings.taggable_id = blog_posts.id AND taggings.taggable_type = 'Blog::Post')"
+      ).joins(
+        'LEFT OUTER JOIN tags ON taggings.tag_id = tags.id'
+      ).where(
+        %Q(
+          (
+            LOWER(blog_posts.title) LIKE ?
+          )
+          OR
+          (
+            LOWER(blog_posts.body) LIKE ?
+          )
+          OR
+          (
+            LOWER(spree_users.first_name) LIKE ?
+            or LOWER(spree_users.last_name) LIKE ?
+            or LOWER(concat(spree_users.last_name, ', ', spree_users.first_name)) LIKE ?
+            or LOWER(concat(spree_users.first_name, ', ', spree_users.last_name)) LIKE ?
+          )
+          OR
+          (
+            LOWER(blog_celebrities.first_name) LIKE ?
+            or LOWER(blog_celebrities.last_name) LIKE ?
+            or LOWER(concat(blog_celebrities.last_name, ', ', blog_celebrities.first_name)) LIKE ?
+            or LOWER(concat(blog_celebrities.first_name, ', ', blog_celebrities.last_name)) LIKE ?
+          )
+          OR
+          (
+            LOWER(tags.name) LIKE ?
+          )
+        ), "%#{term}%", "%#{term}%" , "%#{term}%", "%#{term}%", "%#{term}%",
+            "%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%",
+            "%#{term}%"
+      ).group('blog_posts.id')
     end
   end
 
