@@ -350,15 +350,24 @@ header {
     right: 45px;
   }
   &.blog {
+    height: auto;
+    background: transparent;
+    &:before {
+      display: none;
+    }
     nav {
-      top: 2px;
+      top: 4px;
       right: 0;
       position: absolute;
     }
     .logo {
-      margin: 19px auto 0;
+      margin: 10px auto;
       width: 290px;
       float: none;
+      a {
+        width: 100%;
+        background-image: image-url('logo-small.png');
+      }
     }
     .wrap {
       border-bottom: 1px dashed #000;

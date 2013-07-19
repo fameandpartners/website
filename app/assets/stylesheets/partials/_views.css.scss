@@ -333,6 +333,11 @@
     .wrap {
       border-bottom: 1px dashed #000;
     }
+    .search {
+      input {
+        background-image: image-url('icon-search-blog.png');
+      }
+    }
   }
 }
 
@@ -587,7 +592,7 @@
   }
 }
 
-.celebrities {
+.celebrities-block {
   width: 1107px;
   li {
     margin: 37px 5px 20px 0;
