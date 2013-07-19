@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def short_post_body(post)
-    simple_body = simple_format(post.body)
+    simple_body = simple_format(post.try(:body))
     if simple_body.present?
       lines = simple_body.lines.to_a[0..1]
       if lines[0].size < 100
