@@ -1,7 +1,13 @@
 module Products
   class ColorsSearcher
     def initialize(products)
-      @products = products.is_a?(Array) ? products : [products]
+      if products.is_a?(ActiveRecord::Relation)
+        @products = products.to_a
+      elsif !products.is_a?(Array)
+        @products = [products]
+      else
+        @products = products
+      end
     end
 
     def retrieve_colors
