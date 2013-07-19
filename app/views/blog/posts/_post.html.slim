@@ -31,7 +31,7 @@ article.post
       .post-content= raw(post.body)
     - else
       .post-content
-        = raw("#{simple_format(post.body)[0..120]}...")
+        = raw(short_post_body(body))
       .read-more
         = link_to "Read More", url
   - if post.tag_list.present?

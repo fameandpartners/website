@@ -25,6 +25,21 @@ module ApplicationHelper
     end
   end
 
+  def short_post_body(post)
+    simple_body = simple_format(post.body)
+    lines = simple_body.lines[0..1]
+    if lines[0].size < 100
+      joined_lines = lines.join('')
+      if joined_lines.size < 100
+        "#{joined_lines[0..100]}..."
+      else
+        joined_lines
+      end
+    else
+      "#{lines[0][0..100]}..."
+    end
+  end
+
   def show_breadcrumbs
     @breadcrumbs.map do |breadcrumb|
       link_to breadcrumb.last, breadcrumb.first
