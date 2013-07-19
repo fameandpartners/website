@@ -35,7 +35,8 @@ article.post
       .read-more
         = link_to "Read More", url
   - if post.tag_list.present?
-    .tag-list
-      .tag Tags:
-      - post.tag_list.each do |tag|
-        .tag= link_to tag, blog_search_by_tag_path(tag.downcase)
+    .share-tags
+      .tag-list
+        .tag Tags:
+        - post.tag_list.each do |tag|
+          .tag= link_to tag, blog_search_by_tag_path(tag.downcase)
