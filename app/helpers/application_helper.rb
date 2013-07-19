@@ -27,16 +27,18 @@ module ApplicationHelper
 
   def short_post_body(post)
     simple_body = simple_format(post.body)
-    lines = simple_body.lines[0..1]
-    if lines[0].size < 100
-      joined_lines = lines.join('')
-      if joined_lines.size < 100
-        "#{joined_lines[0..100]}..."
+    if simple_body.present?
+      lines = simple_body.lines.to_a[0..1]
+      if lines[0].size < 100
+        joined_lines = lines.join('')
+        if joined_lines.size < 100
+          "#{joined_lines[0..100]}..."
+        else
+          joined_lines
+        end
       else
-        joined_lines
+        "#{lines[0][0..100]}..."
       end
-    else
-      "#{lines[0][0..100]}..."
     end
   end
 

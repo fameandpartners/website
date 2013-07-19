@@ -18,7 +18,9 @@
         = link_to url do
           = image_tag post.primary_photo.photo.url, width: 742, height: 355, alt: ''
     - if post.body.present?
-      .post-content= raw(post.body)
+      .post-content= raw(short_post_body(post))
+      .read-more
+        = link_to "Read More", url
 
   javascript:
     var disqus_shortname = 'fameandpartners';
