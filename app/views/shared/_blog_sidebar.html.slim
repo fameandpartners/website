@@ -31,7 +31,7 @@ section.sidebar
     .block-content
       select.selectbox name="tags" id="tags_search_filter"
         option value="" Choose...
-        - Blog::Post.tag_counts_on(:tags).each do |tag|
+        - Blog::Post.tag_counts_on(:tags).sort_by(&:count).reverse[0..19].each do |tag|
           option value="#{tag.name}" #{tag.name}
 
   .block
