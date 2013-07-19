@@ -473,10 +473,12 @@ header {
   .social-likes {
     float: right;
     .addthis_button_facebook_like {
-      margin: 10px 20px 0 0;
+      margin: 6px 20px 0 0;
+      width: 70px;
     }
     .addthis_button_tweet {
       margin: 5px 0 0;
+      width: 90px;
     }
     .addthis_button_pinterest_pinit {
       margin: 14px 20px 0 0;
