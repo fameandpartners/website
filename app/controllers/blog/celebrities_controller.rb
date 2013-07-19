@@ -22,7 +22,7 @@ class Blog::CelebritiesController < BlogBaseController
   def show
     @celebrity = Blog::Celebrity.find_by_slug!(params[:slug])
     if params[:type] == 'posts'
-      @posts = @celebrity.posts.simple_posts
+      @posts = @celebrity.posts.red_carpet_posts
     end
     if current_spree_user.present?
       @photo_votes = Blog::CelebrityPhotoVote.where(
