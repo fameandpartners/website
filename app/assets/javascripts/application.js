@@ -8,6 +8,7 @@
 //= require libs/jquery.chosen.min
 //= require libs/jquery.mousewheel
 //= require libs/underscore-min
+//= require fancybox
 //= require helpers
 //= require_tree ./partials
 //= require_tree ./templates

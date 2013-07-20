@@ -25,7 +25,7 @@ ruby:
               ul#product-images.carousel-pictures
                 - @product.images.each do |image|
                   li
-                    - images_data =  { large: image.attachment(:large), original: image.attachment(:original) }
+                    - images_data =  { large: image.attachment(:large), xlarge: image.attachment(:xlarge) }
                     = link_to('#', data: images_data) do
                       = image_tag(image.attachment.url(:small), width: 83, heigth: 115, alt: '')
               #product-images-down.arrow-down

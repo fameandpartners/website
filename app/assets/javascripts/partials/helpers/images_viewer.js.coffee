@@ -33,8 +33,13 @@ window.helpers.buildImagesViewer = (rootElement) ->
       rootElement.find('#photos .big-photo img').attr(src: largeImage)
 
     showBigImage: () ->
-      bigImageUrl = viewer.currentImages.original
-      return if !bigImageUrl?
+      bigImageUrl = viewer.currentImages.xlarge
+      if bigImageUrl?
+        console.log(location.origin + bigImageUrl)
+        $.fancybox
+          href: location.origin + bigImageUrl
+      else
+        return false
   }
 
   return viewer

@@ -20,7 +20,8 @@ Spree.config do |config|
     'mini' => '48x48#',
     'small' => '83x115#',
     'product' => '243x352#',
-    'large' => '460x590#'
+    'large' => '460x590#',
+    'xlarge' => '1280x800>'
   }.to_json
 end
 

@@ -17,14 +17,14 @@ ruby:
       #photos.tab-content
         .tab-content-inner
           .photos-carousel
-            #product-images-up.arrow-up
+            #quick-view-product-images-up.arrow-up
             ul#product-images.carousel-pictures
               - @product.images.each do |image|
                 li
-                  - images_data =  { large: image.attachment.url(:large), original: image.attachment.url(:original) }
+                  - images_data =  { large: image.attachment.url(:large), xlarge: image.attachment.url(:xlarge) }
                   = link_to('#', data: images_data) do
                     = image_tag(image.attachment.url(:small), width: 83, heigth: 115, alt: '')
-            #product-images-down.arrow-down
+            #quick-view-product-images-down.arrow-down
           .big-photo
             .zoom = link_to 'Zoom', '#'
             = image_tag 'http://placehold.it/460x590', alt: ''

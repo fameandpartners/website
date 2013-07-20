@@ -60,9 +60,9 @@ window.helpers.quickViewer = {
     @overlayContainer.show()
     @popupContainer.show()
     @container.show()
-    @updatePopupHandlers(product_variants)
     @movePopupToCenter()
     @overlayContainer.one('click', @onCloseButtonHandler)
+    @updatePopupHandlers(product_variants)
 
   closePopup: () ->
     @popupContainer.hide()
@@ -73,10 +73,18 @@ window.helpers.quickViewer = {
     window.helpers.enableTabs(@container.find('.tabs'))
 
     # show big images from carouseled small images
-    @container.find("#product-images").carouFredSel(
-      window.helpers.get_vertical_carousel_options()
-    )
-    viewer = window.helpers.buildImagesViewer(@container).init()
+    container = @container
+    options =
+      prev:
+        button: '#quick-view-product-images-up'
+      next:
+        button: '#quick-view-product-images-down'
+    setTimeout () ->
+        container.find("#product-images").carouFredSel(
+          window.helpers.get_vertical_carousel_options(options)
+        )
+        viewer = window.helpers.buildImagesViewer(container).init()
+      , 100
 
     # init product variants selector
     selector = window.helpers.createProductVariantsSelector(@container).init(product_variants)

@@ -21,6 +21,7 @@ gem 'tire'
 
 # assets
 gem 'jquery-rails'
+gem 'fancybox-rails'
 gem 'sass-rails',   '~> 3.2.3'
 
 group :assets do

@@ -10,7 +10,6 @@ window.helpers.get_vertical_carousel_options = (options = {}) ->
     { prev: prev },
     { next: next }
   )
-
   return result
 
 
