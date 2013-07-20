@@ -13,6 +13,19 @@
 
 ActiveRecord::Schema.define(:version => 20130718102539) do
 
+  create_table "blog_authors", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.text     "description"
+    t.integer  "user_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "slug"
+
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
     t.string   "code"
@@ -155,16 +168,24 @@ ActiveRecord::Schema.define(:version => 20130718102539) do
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
 
-  create_table "celebrity_inspirations", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.string   "celebrity_name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+  create_table "blog_red_carpet_posts", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "author_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.datetime "published_at"
+    t.datetime "occured_at"
+    t.integer  "category_id"
+    t.string   "slug"
   end
+
+  add_index "blog_red_carpet_posts", ["author_id"], :name => "index_blog_red_carpet_posts_on_author_id"
+  add_index "blog_red_carpet_posts", ["category_id"], :name => "index_blog_red_carpet_posts_on_category_id"
+  add_index "blog_red_carpet_posts", ["published_at"], :name => "index_blog_red_carpet_posts_on_published_at"
+  add_index "blog_red_carpet_posts", ["slug"], :name => "index_blog_red_carpet_posts_on_slug"
+  add_index "blog_red_carpet_posts", ["user_id"], :name => "index_blog_red_carpet_posts_on_user_id"
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
