@@ -27,7 +27,7 @@ ruby:
             #quick-view-product-images-down.arrow-down
           .big-photo
             .zoom = link_to 'Zoom', '#'
-            = image_tag 'http://placehold.it/460x590', alt: ''
+            = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
       - if enabled_tabs.include?('video')
         #videos.tab-content
           == product_video(@product)
