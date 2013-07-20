@@ -16,6 +16,14 @@
                         = image_tag @user.image, width: 100
                     - else
                       .avatar.empty
+                    p.notification
+                      ' Available file formats is:
+                      = Spree::User::ALLOWED_AVATAR_FILE_TYPES.map{|type| %Q(".#{type.partition('/').last}") }.join(', ')
+                      ' .
+                      br
+                      ' Maximum size is:
+                      = number_to_human_size(Spree::User::ALLOWED_AVATAR_FILE_SIZE.max)
+                      | .
                     input.btn-upload type="button" value="Upload profile photo"
                 .clear
                 .hr
