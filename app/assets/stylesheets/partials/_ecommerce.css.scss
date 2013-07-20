@@ -321,6 +321,10 @@
       &.disabled {
         opacity: .4;
       }
+      &.hidden {
+        opacity: 0;
+        cursor: default;
+      }
     }
     .arrow-up {
       margin: 0 0 17px;
