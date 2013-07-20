@@ -21,6 +21,8 @@ FameAndPartners::Application.routes.draw do
 
   get 'products/:id/quick_view' => 'spree/products#quick_view'
 
+  resources :recommended_dresses, :only => [:index]
+
   # account settings
   resource :profile, only: [:show, :update], controller: 'users/profiles' do
     put 'update_image', on: :member
