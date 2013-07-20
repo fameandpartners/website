@@ -3,7 +3,7 @@ ruby:
  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
  enabled_tabs = ['photos']
  enabled_tabs.push('inspiration') if @product.celebrity_inspiration
- enabled_tabs.push('video') if @product.video_url
+ enabled_tabs.push('video') if @product.video_url.present?
 
 .product-page.grid-container
   .grid-60
