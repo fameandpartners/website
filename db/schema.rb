@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20130625103545) do
 
+<<<<<<< HEAD
   create_table "blog_authors", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -25,6 +26,20 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.string   "slug"
+=======
+  create_table "answers", :force => true do |t|
+    t.integer  "question_id"
+    t.string   "code"
+    t.integer  "glam"
+    t.integer  "girly"
+    t.integer  "classic"
+    t.integer  "edgy"
+    t.integer  "bohemian"
+    t.integer  "sexiness"
+    t.integer  "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+>>>>>>> 981773e... add trendsetters page
   end
 
   add_index "blog_authors", ["slug"], :name => "index_blog_authors_on_slug"
@@ -56,6 +71,20 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
   add_index "blog_celebrities", ["slug"], :name => "index_blog_celebrities_on_slug"
   add_index "blog_celebrities", ["user_id"], :name => "index_blog_celebrities_on_user_id"
 
+<<<<<<< HEAD
+=======
+  create_table "blog_celebrity_photo_votes", :force => true do |t|
+    t.integer  "vote_type"
+    t.integer  "user_id"
+    t.integer  "celebrity_photo_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "blog_celebrity_photo_votes", ["celebrity_photo_id"], :name => "index_blog_celebrity_photo_votes_on_celebrity_photo_id"
+  add_index "blog_celebrity_photo_votes", ["user_id"], :name => "index_blog_celebrity_photo_votes_on_user_id"
+
+>>>>>>> 981773e... add trendsetters page
   create_table "blog_celebrity_photos", :force => true do |t|
     t.integer  "celebrity_id"
     t.integer  "post_id"
@@ -143,6 +172,7 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
 
+<<<<<<< HEAD
   create_table "blog_red_carpet_posts", :force => true do |t|
     t.string   "title"
     t.text     "body"
@@ -162,6 +192,19 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
   add_index "blog_red_carpet_posts", ["slug"], :name => "index_blog_red_carpet_posts_on_slug"
   add_index "blog_red_carpet_posts", ["user_id"], :name => "index_blog_red_carpet_posts_on_user_id"
 
+=======
+  create_table "celebrity_inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "celebrity_name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+>>>>>>> 981773e... add trendsetters page
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
     t.string   "file_file_name"
@@ -184,6 +227,57 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
     t.date     "required_at"
   end
 
+<<<<<<< HEAD
+=======
+  create_table "product_style_profiles", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "glam"
+    t.integer  "girly"
+    t.integer  "classic"
+    t.integer  "edgy"
+    t.integer  "bohemian"
+    t.integer  "apple"
+    t.integer  "pear"
+    t.integer  "strawberry"
+    t.integer  "hour_glass"
+    t.integer  "column"
+    t.integer  "bra_aaa"
+    t.integer  "bra_aa"
+    t.integer  "bra_a"
+    t.integer  "bra_b"
+    t.integer  "bra_c"
+    t.integer  "bra_d"
+    t.integer  "bra_e"
+    t.integer  "bra_fpp"
+    t.integer  "sexiness"
+    t.integer  "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "product_style_profiles", ["product_id"], :name => "index_product_style_profiles_on_product_id"
+
+  create_table "questions", :force => true do |t|
+    t.integer  "quiz_id"
+    t.string   "text"
+    t.string   "position"
+    t.string   "partial"
+    t.boolean  "multiple",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "populate"
+  end
+
+  add_index "questions", ["position"], :name => "index_questions_on_position"
+  add_index "questions", ["quiz_id"], :name => "index_questions_on_quiz_id"
+
+  create_table "quizzes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+>>>>>>> 981773e... add trendsetters page
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
     t.datetime "expires_at"
@@ -417,6 +511,27 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
 
+  create_table "spree_pages", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "slug"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "show_in_header",           :default => false, :null => false
+    t.boolean  "show_in_footer",           :default => false, :null => false
+    t.string   "foreign_link"
+    t.integer  "position",                 :default => 1,     :null => false
+    t.boolean  "visible",                  :default => true
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.string   "layout"
+    t.boolean  "show_in_sidebar",          :default => false, :null => false
+    t.string   "meta_title"
+    t.boolean  "render_layout_as_partial", :default => false
+  end
+
+  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
+
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
     t.string   "name"
@@ -492,6 +607,7 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.boolean  "on_demand",            :default => false
+    t.boolean  "featured",             :default => false
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
@@ -815,6 +931,40 @@ ActiveRecord::Schema.define(:version => 20130625103545) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "user_style_profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.float    "glam"
+    t.float    "girly"
+    t.float    "classic"
+    t.float    "edgy"
+    t.float    "bohemian"
+    t.float    "sexiness"
+    t.float    "fashionability"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "nail_colours"
+    t.string   "brands"
+    t.string   "trends"
+    t.string   "hair_colour"
+    t.string   "skin_colour"
+    t.string   "body_shape"
+    t.string   "typical_size"
+    t.string   "bra_size"
+    t.string   "colours"
+    t.text     "serialized_answers"
+  end
+
+  add_index "user_style_profiles", ["user_id"], :name => "index_style_reports_on_spree_user_id"
+
+  create_table "wishlist_items", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.integer  "spree_variant_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "quantity",         :default => 1
+    t.integer  "spree_product_id"
   end
 
 end

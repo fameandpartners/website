@@ -54,7 +54,8 @@ FameAndPartners::Application.routes.draw do
   get '/terms'   => 'statics#terms'
   get '/privacy' => 'statics#privacy'
   get '/legal'   => 'statics#legal'
-  get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
+  get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works 
+  get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program 
 
   # MonkeyPatch for redirecting to Custom Dress page
   get '/fb_auth' => 'pages#fb_auth'
