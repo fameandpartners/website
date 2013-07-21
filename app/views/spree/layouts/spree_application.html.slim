@@ -15,7 +15,8 @@ doctype html
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk')); 
 
-      - if spree_user_signed_in? and session['show_quiz'] and session.delete('show_quiz')
+    - if spree_user_signed_in? and session['show_quiz'] and session.delete('show_quiz')
+      javascript:
         $(function(){
           showStyleQuiz();
           bindStyleQuizEvents();
