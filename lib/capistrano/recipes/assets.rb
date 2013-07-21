@@ -21,6 +21,8 @@ namespace :deploy do
             mkdir -p #{latest_release}/public/stylesheets &&
             mkdir -p #{latest_release}/public/javascripts &&
             mkdir -p #{latest_release}/public/images &&
+            mkdir -p #{shared_path}/spree &&
+            ln -s #{shared_path}/spree #{latest_release}/public/spree &&
             mkdir -p #{shared_path}/assets &&
             ln -s #{shared_path}/assets #{latest_release}/public/assets")
     end

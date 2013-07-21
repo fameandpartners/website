@@ -4,7 +4,7 @@ doctype html
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'shared/ga'
-  body class=(controller_action_class)
+  body class=(controller_action_class) id=(controller_action_id)
     #fb-root
     javascript:
       (function(d, s, id) {
@@ -15,13 +15,20 @@ doctype html
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk')); 
 
+      - if spree_user_signed_in? and session['show_quiz'] and session.delete('show_quiz')
+        $(function(){
+          showStyleQuiz();
+          bindStyleQuizEvents();
+        });
     #wrap
-      = render 'layouts/header'
+      - cached_header = render('layouts/header')
+      = cached_header
       #content
         = yield
         #push
-      .fixed-bar style="position: fixed; top: -120px; width: 100%; height: 106px; background-color: rgba(255, 255, 255, 1); z-index: 2001;"
-        = render 'layouts/header'
+          = render 'shared/quiz_popup'
+      .fixed-bar style="position: fixed; top: -300px; width: 100%; height: 106px; background-color: rgba(255, 255, 255, 1); z-index: 2001;"
+        = cached_header
         .top-bar style="top: 62px;"
           = render 'shared/top_bar_inner'
     = render 'layouts/footer'

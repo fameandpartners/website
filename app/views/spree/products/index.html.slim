@@ -1,0 +1,53 @@
+.wrap
+  .browse-page.grid-container
+    .grid-25.filters
+      .main-title Refine by
+      .filters-block
+        .title Our range
+        ul.filters-boxes.range
+          - selected_items = (params[:taxons].present? ? params[:taxons][:range] : {}) || []
+          li class=(selected_items.blank? ? 'active' : '')
+            label All
+            = check_box_tag 'range', 'all', selected_items.blank?
+          - available_product_ranges.each do |taxon|
+            - enabled = selected_items.include?(taxon.id.to_s)
+            li class=(enabled ? 'active' : '')
+              label = taxon.name
+              = check_box_tag 'range', taxon.id, enabled
+      .filters-block
+        .title Style
+        ul.filters-boxes.style
+          - selected_items = (params[:taxons].present? ? params[:taxons][:style] : {}) || []
+          li class=(selected_items.blank? ? 'active' : '')
+            label All
+            = check_box_tag 'style', 'all', selected_items.blank?
+          - available_product_styles.each do |taxon|
+            - enabled = selected_items.include?(taxon.id.to_s)
+            li class=(enabled ? 'active' : '')
+              label = taxon.name
+              = check_box_tag 'style', taxon.id, enabled
+      .filters-block
+        .title Body shape
+        ul.filters-boxes.squares.body_shapes
+          - selected_items = (params[:body_shapes].present? ? params[:body_shapes] : [])
+          li class=(selected_items.blank? ? 'active' : '')
+            label All
+            = check_box_tag 'body_shapes', 'all', selected_items.blank?
+          - ProductStyleProfile::BODY_SHAPES.each do |body_shape|
+            - enabled = selected_items.include?(body_shape.to_s) 
+            li class="#{body_shape} #{enabled ? 'active' : ''}"
+              label = body_shape.humanize
+              = check_box_tag 'body_shapes', body_shape, enabled
+      .filters-block
+        .title Color
+        .colors
+          - selected_colors = params[:colors] || []
+          .color.white.all class="#{ selected_colors.blank? ? 'active' : '' }" data-color='all' All
+          - available_product_colors.each do |color|
+            - if selected_colors.include?(color.id.to_s)
+              .color.active class='#{color.name}' data-color='#{color.id}'
+            - else
+              .color class='#{color.name}' data-color='#{color.id}'
+          
+    .grid-75.fright
+      = render 'products', products: @products, colors: @colors

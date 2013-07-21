@@ -1,0 +1,68 @@
+ruby:
+ sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+ colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+ enabled_tabs = ['photos']
+ enabled_tabs.push('inspiration') if @product.celebrity_inspiration
+ enabled_tabs.push('video') if @product.video_url.present?
+
+.product-page.grid-container
+  .grid-60
+    .tabs
+      ul.tabs-links
+        li.active = link_to 'Photos', '#photos'
+        - if enabled_tabs.include?('video')
+          li = link_to 'Videos', '#videos'
+        - if enabled_tabs.include?('inspiration')
+          li = link_to 'Celebrity Inspiration', '#inspiration'
+      #photos.tab-content
+        .tab-content-inner
+          .photos-carousel
+            #quick-view-product-images-up.arrow-up
+            ul#product-images.carousel-pictures
+              - @product.images.each do |image|
+                li
+                  - images_data =  { large: image.attachment.url(:large), xlarge: image.attachment.url(:xlarge) }
+                  = link_to('#', data: images_data) do
+                    = image_tag(image.attachment.url(:small), width: 83, heigth: 115, alt: '')
+            #quick-view-product-images-down.arrow-down
+          .big-photo
+            .zoom = link_to 'Zoom', '#'
+            = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
+      - if enabled_tabs.include?('video')
+        #videos.tab-content
+          == product_video(@product)
+      - if enabled_tabs.include?('inspiration')
+        - celebrity = @product.celebrity_inspiration
+        #inspiration.tab-content
+          .tab-content-inner
+            .big-photo
+              = image_tag celebrity.photo.url(:preview)
+            .inspiration
+              = celebrity.celebrity_name
+  .grid-40
+    .product-info
+      .name = @product.name
+      .desc = @product.property('short_description')
+      .price-delivery
+        .price.sale
+          span = @product.price_in(current_currency).display_price
+        .delivery 3-4 week delivery
+      .desc.small
+        p = @product.description
+      .colors-choser
+        .label Choose a color:
+        .colors
+          - colors.each do |color|
+            .color class='#{color}' data-color='#{color}'
+      .size-select
+        .select-box
+          select#toggle-selectbox.select2 name="size"
+            option value='' Choose your size
+            - sizes.each do |size|
+              option{value=size} = size
+        = link_to 'What size am i?', '#', class: 'info'
+      .buy-wishlist
+        = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
+        = add_to_wishlist_link(@product)
+      .share-buttons
+        = share_buttons

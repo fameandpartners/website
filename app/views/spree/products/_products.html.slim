@@ -1,0 +1,21 @@
+.ad
+.results-sort.clearfix
+  .results-sort-inner
+    .results.fleft = pluralize(products.length, 'result')
+    .sort.fright
+      ' Sort by
+      - options = options_from_collection_for_select(Products::ProductsFilter.available_orders, :first, :second, params[:order])
+      = select_tag "product_order", options, prompt: 'Choose'
+ul.products-list.grid-container
+  - products.each do |product|
+    li.product-item.grid-33
+      .thumbnail
+        .like = add_to_wishlist_link(product)
+        .quick-view = quick_view_link(product)
+        = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
+      .name = link_to product.name, product
+      /.description = product_short_description(product)
+      .price = product.price_in(current_currency).display_price
+      .colors
+        - colors[product.id].map(&:name).sort.each do |color|
+          .color{class=color}

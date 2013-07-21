@@ -1,0 +1,113 @@
+javascript: 
+  window.product_variants = #{{ @product_variants.to_json }}
+
+ruby:
+ sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+ colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+ enabled_tabs = ['photos']
+ enabled_tabs.push('inspiration') if @product.celebrity_inspiration
+ enabled_tabs.push('video') if @product.video_url.present?
+
+.wrap
+  .product-page.grid-container
+    .grid-55
+      .tabs
+        ul.tabs-links
+          li.active = link_to 'Photos', '#photos'
+          - if enabled_tabs.include?('video')
+            li = link_to 'Videos', '#videos'
+          - if enabled_tabs.include?('inspiration')
+            li = link_to 'Celebrity Inspiration', '#inspiration'
+        #photos.tab-content
+          .tab-content-inner
+            .photos-carousel
+              #product-images-up.arrow-up
+              ul#product-images.carousel-pictures
+                - @product.images.each do |image|
+                  li
+                    - images_data =  { large: image.attachment(:large), xlarge: image.attachment(:xlarge) }
+                    = link_to('#', data: images_data) do
+                      = image_tag(image.attachment.url(:small), width: 83, heigth: 115, alt: '')
+              #product-images-down.arrow-down
+            .big-photo
+              .zoom
+                = link_to 'Zoom', '#'
+              = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
+        - if enabled_tabs.include?('video')
+          #videos.tab-content style="display: none;"
+            == product_video(@product)
+
+        - if enabled_tabs.include?('inspiration')
+          - celebrity = @product.celebrity_inspiration
+          #inspiration.tab-content style="display: none;"
+            .tab-content-inner
+              .big-photo
+                = image_tag celebrity.photo.url(:preview)
+              .inspiration
+                = celebrity.celebrity_name
+
+        .share-buttons
+          = share_buttons
+    .grid-45
+      .product-info
+        .name = @product.name
+        .desc = @product.property('short_description')
+        .price-delivery
+          .price.sale
+            span = @product.price_in(current_currency).display_price
+          .delivery 3-4 week delivery
+        .colors-choser
+          .label Choose a color:
+          .colors
+            - colors.each do |color|
+              .color class='#{color}' data-color='#{color}'
+        .size-select
+          .select-box
+            select#toggle-selectbox.select2 name="size"
+              option value='' Choose your size
+              - sizes.each do |size|
+                option{value=size} = size
+          = link_to 'What size am i?', '#', class: 'info'
+        .body-shapes
+          .desc The body shapes that this dress suits:
+          ul
+            - @product.style_profile.suitable_shapes.each do |shape|
+              = link_to '#' do
+                = image_tag('http://placehold.it/60x84', alt: shape.humanize, title: shape.humanize)
+        .buy-wishlist
+          = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
+          = add_to_wishlist_link(@product)
+        .tabs
+          ul.tabs-links
+            li = link_to 'Description', '#description'
+            li = link_to 'Size and fit', '#sizes'
+            li = link_to 'Details', '#detials'
+            li = link_to 'Styling Notes', '#notes'
+          #description.tab-content
+            = @product.description
+          #sizes.tab-content
+            = @product.property('fit')
+          #details.tab-content
+            | Material:
+            = @product.property('fabric')
+            | Weight:
+            = @product.property('weight')
+          #notes.tab-content
+            | Tab content notes
+
+  .page-name
+    .inner
+      h1.title
+        em Similar
+        span Dresses
+
+  ul.products-list.grid-container
+    - @similar_products.each do |product|
+      li.product-item.grid-25
+        .thumbnail
+          .like = add_to_wishlist_link(product)
+          .quick-view = quick_view_link(product)
+          = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
+        .name = link_to product.name, product
+        /.description = product_short_description(product)
+        .price = product.price_in(current_currency).display_price

@@ -1,0 +1,31 @@
+.wrap
+  .checkout-page
+    h1.page-title Welcome to the checkout
+    - steps_to_finish = @order.checkout_steps
+    = form_for @order, :url => update_checkout_path(@order.state) do |form|
+      .grid-container
+        .grid-65
+          .accordion-container
+            .accordion-title data-step='address'
+              .name 1. Personal details
+              .check-edit class='#{ steps_to_finish.include?('address') ? "" : "active" }'
+                .check
+                .edit = link_to 'Edit', '#'
+            .accordion-content data-step='address'
+              = render 'spree/checkout/personal', :form => form
+            .accordion-title data-step='delivery'
+              .name 2. Billing and shipping details
+              .check-edit class='#{ steps_to_finish.include?('delivery') ? "" : "active" }'
+                .check
+                .edit = link_to 'Edit', '#'
+            .accordion-content data-step="delivery"
+            .accordion-title data-step="payment"
+              .name 3. Payment details
+              .check-edit.hide
+                .check
+                .edit = link_to 'Edit', '#'
+            .accordion-content data-step="payment"
+        .grid-35
+          = render 'spree/checkout/summary'
+      .place-order
+        input type="submit" value="Place order"

@@ -1,0 +1,42 @@
+.wrap
+  .account-pages
+    .tabs
+      ul.tabs-links
+        li = link_to 'Account Settings', '#settings'
+        li = link_to 'My Wishlist', '#wishlist'
+        li.active = link_to 'My Orders', '#orders'
+        li = link_to 'My Reviews', '#reviews'
+        li = link_to 'My Style Report', '#report'
+      #orders.tab-content
+        h1.page-title My Orders
+        table.table cellspacing="0" cellpadding="0"
+          thead
+            tr
+              th Order
+              th Order date
+              th Status
+              th Payment state
+              th Shipping state
+              th Total
+          tbody
+            tr
+              td = link_to '#R32423', '#'
+              td 29/08/2013
+              td Canceled
+              td Paid
+              td Ready
+              td $165.90
+            tr
+              td = link_to '#R32423', '#'
+              td 29/08/2013
+              td Canceled
+              td Paid
+              td Ready
+              td $165.90
+            tr
+              td = link_to '#R32423', '#'
+              td 29/08/2013
+              td Canceled
+              td Paid
+              td Ready
+              td $165.90

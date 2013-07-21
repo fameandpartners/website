@@ -1,0 +1,27 @@
+.wrap
+  .account-pages
+    .tabs
+      = render 'users/shared/tabs', active_tab: 'orders'
+      #orders.tab-content
+        h1.page-title My Orders
+        - if @orders.size == 0
+          p You have no orders
+        - else
+          table.table cellspacing="0" cellpadding="0"
+            thead
+              tr
+                th Order
+                th Order date
+                th Status
+                th Payment state
+                th Shipping state
+                th Total
+            tbody
+              - @orders.each do |order|
+                tr
+                  td = link_to order.number, user_order_path(order), remote: true
+                  td = order.updated_at.strftime('%D')
+                  td = order.state
+                  td = order.payment_state
+                  td = order.shipment_state
+                  td = order.display_total

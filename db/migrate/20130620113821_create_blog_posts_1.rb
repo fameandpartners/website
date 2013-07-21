@@ -1,6 +1,6 @@
 class CreateBlogPosts1 < ActiveRecord::Migration
   def change
-    create_table :blog_posts do |t|
+    create_table :blog_posts, force: true do |t|
       t.string    :title
       t.text      :body
       t.integer   :author_id

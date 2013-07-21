@@ -1,0 +1,8 @@
+.subtitle Choose as many as you like:
+ul.nails
+  - question.answers.each do |answer|
+    li
+      label
+        .image style="background: url('#{image_path "quiz/nails/#{answer.code.dasherize}.png"}') center center no-repeat;"
+        .name = answer.code.titleize
+        = check_box_tag 'answer[codes][]', answer.code

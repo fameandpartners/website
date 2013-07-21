@@ -1,6 +1,6 @@
 class CreateCelebrityPhotos < ActiveRecord::Migration
   def change
-    create_table :celebrity_photos do |t|
+    create_table :celebrity_photos, force: true do |t|
       t.integer :celebrity_id
       t.datetime :event_date
       t.string :event_name

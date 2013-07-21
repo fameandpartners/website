@@ -1,0 +1,32 @@
+.block-name Item description
+.shopping-bag-popup
+  ul.items-carousel
+    = render partial: "shared/line_item",
+      collection: @order.line_items,
+      as: :line_item,
+      locals: {hide_remove: true}
+ul.pricing
+  li
+    .label Subtotal
+    .desc
+      span = @order.currency
+      = @order.display_item_total
+  li
+    .label Shipping
+    .desc
+      span AUD
+      - if @order.shipment
+        = @order.shipment.display_amount
+      - else
+        ' $0.00
+  li
+    .label Promotion
+    .desc
+      span AUD
+      = @order.display_adjustment_total
+  li.totals
+    .label Total
+    .desc
+      span AUD
+      = @order.display_total
+      .taxes Including GST

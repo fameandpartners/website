@@ -1,0 +1,17 @@
+#shopping-bag-popup-wrapper.shopping-bag-popup style="display:none;"
+  - if current_order.item_count == 0
+    ' Sorry, your shopping bag still empty
+  - else
+    #shopping-arrow-up.arrow-up
+    ul#shopping-bag-popup.items-carousel
+      = render partial: "shared/line_item", collection: current_order.line_items, as: :line_item
+    #shopping-arrow-down.arrow-down
+    .totals
+      .label.fleft Total
+      .value.fright
+        = current_order.currency
+        span = current_order.display_total
+    .buttons
+      = link_to 'View cart', spree.cart_path, class: 'continue'
+      = form_for current_order, url:  spree.cart_path do |form|
+        = form.submit 'Buy now', name: :checkout, class: 'buy-now'

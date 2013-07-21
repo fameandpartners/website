@@ -1,0 +1,25 @@
+.color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+  &.pink {
+    background: #fd3362;
+  }
+  &.black {
+    background: #000;
+  }
+  &.yellow {
+    background: #ffff00;
+  }
+  &.red { background: red; }
+  &.green { background: green; }
+  &.gray { background: gray; }
+  &.blue { background: blue; }
+  &.active {
+    cursor: default;
+    background-image: image-url('icon-color-tick.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}

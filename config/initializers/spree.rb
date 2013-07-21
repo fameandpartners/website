@@ -11,6 +11,18 @@ Spree.config do |config|
   # config.site_name = "Spree Demo Site"
   config.allow_ssl_in_production = false
   config.allow_ssl_in_staging = false
+
+  config.products_per_page = 100 # disable pagination at all
+  config.allow_backorders = true # allow order items out of stock - we have 90% items by order
+  config.show_zero_stock_products = true
+
+  config.attachment_styles = {
+    'mini' => '48x48#',
+    'small' => '83x115#',
+    'product' => '243x352#',
+    'large' => '460x590#',
+    'xlarge' => '1280x800>'
+  }.to_json
 end
 
 Spree.user_class = "Spree::User"

@@ -9,10 +9,115 @@
 }
 
 .promo {
-  padding: 62px 0 0;
-  height: 558px;
-  background: image-url('image-top-promo.jpg') center center no-repeat;
-  background-size: cover;
+  margin: 10px 0;
+  .wrap {
+    padding: 10px;
+  }
+  .promo-image {
+    border: 9px solid #fff;
+    background: image-url('bg-latest.jpg') 0 0 no-repeat;
+    height: 523px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+  }
+  .promo-image-inner {
+    width: 362px;
+    height: 362px;
+    margin: 60px 0 0 60px;
+    text-align: center;
+    background: #fff;
+    background: rgba(255, 255, 255, .78);
+    border-radius: 50%;
+    img {
+      margin: 75px 0 0;
+    }
+  }
+}
+
+.home-images {
+  .wrap {
+    padding: 20px 10px;
+    position: relative;
+  }
+  .image {
+    float: left;
+    width: 216px;
+    height: 314px;
+    background: #ccc;
+    border: 9px solid #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+    &.rotate-1 {
+      position: absolute;
+      left: 160px;
+      top: 20px;
+      @include transform(rotate(8deg));
+    }
+    &.rotate-2 {
+      position: absolute;
+      left: 344px;
+      top: 20px;
+      @include transform(rotate(-6deg));
+    }
+    &.large {
+      float: right;
+      width: 460px;
+    }
+  }
+}
+
+.blog-posts-preview {
+  .wrap {
+    padding: 20px 10px;
+    position: relative;
+  }
+  .blog-post {
+    position: relative;
+    .label {
+      position: absolute;
+      z-index: 2;
+      top: -25px;
+      left: -25px;
+      width: 62px;
+      height: 62px;
+      background: #333;
+      font: 400 14px/62px $fontThree;
+      text-align: center;
+      color: #fff;
+      border-radius: 50%;
+    }
+    .image-preview {
+      width: 486px;
+      height: 285px;
+      background: #ccc;
+      border: 9px solid #fff;
+      box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+    }
+    &.rotate-1 {
+      position: absolute;
+      left: 548px;
+      top: 20px;
+      .label {
+        left: -40px;
+        top: -10px;
+      }
+      .image-preview {
+        width: 252px;
+        @include transform(rotate(-6deg));
+      }
+    }
+    &.rotate-2 {
+      position: absolute;
+      right: 26px;
+      top: 20px;
+      .label {
+        left: 0;
+        top: -36px;
+      }
+      .image-preview {
+        width: 252px;
+        @include transform(rotate(8deg));
+      }
+    }
+  }
 }
 
 .promo-text {
@@ -51,7 +156,6 @@
   &.fright {
     float: right;
   }
-
   .btn {
     font: 300 14px/1.3 $fontOne;
     display: block;
@@ -229,86 +333,10 @@
     .wrap {
       border-bottom: 1px dashed #000;
     }
-  }
-}
-
-.dream-dress {
-  padding: 46px 0 0;
-  height: 604px;
-  overflow: hidden;
-  background: image-url('bg-promo-custom-dress.png') 0 0 repeat #ddddd7;
-  .wrap {
-    height: 604px;
-  }
-  .girl-in-dress {
-    float: left;
-    width: 345px;
-    height: 604px;
-    overflow: hidden;
-    margin-left: -86px;
-    position: relative;
-    img {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-    }
-  }
-  .promo-block {
-    float: right;
-    margin: 0 34px 0 0;
-    text-align: center;
-    font-style: italic;
-    font-size: 19px;
-    line-height: 1.3;
-    .block-title {
-      margin: 47px 0 0;
-    }
-    .separate {
-      width: 352px;
-      height: 1px;
-      margin: 31px auto 41px;
-      background: #fff;
-    }
-    .desc {
-      width: 520px;
-      margin: 0 auto 36px;
-    }
-    .circles {
-      width: 768px;
-      margin: 0 auto;
-      overflow: hidden;
-      .circle {
-        float: left;
-        margin: 0 0 0 40px;
-        width: 162px;
-        .image {
-          background: #fff;
-          background: image-url('icons-homepage-dream-prom.png') 0 center no-repeat rgba(255, 255, 255, .45);
-          width: 162px;
-          height: 162px;
-          margin: 0 0 30px;
-          overflow: hidden;
-          border-radius: 50%;
-          &.unique {
-            background-position: 49px center;
-          }
-          &.designer {
-            background-position: -162px center;
-          }
-          &.fabric {
-            background-position: -372px center;
-          }
-          &.sketch {
-            background-position: -570px center;
-          }
-        }
-        &:first-child {
-          margin: 0;
-        }
+    .search {
+      input {
+        background-image: image-url('icon-search-blog.png');
       }
-    }
-    .facebook-signup {
-      margin: 30px auto 70px;
     }
   }
 }
@@ -406,65 +434,165 @@
 
 /* END: GLOBAL BLOCKS */
 
-.promo-slider {
-  height: 718px;
-  border-bottom: 2px solid #e7e7e7;
-  box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.3);
-  .slides-overlay {
-    width: 1096px;
-    height: 364px;
-    margin: -172px 0 0 -548px;
-  }    
-  .first-title{
-    padding-top: 20px;
-    font-size: 48px;
-  }
-  .inner {
-    width: 1096px;
-    margin: 233px auto 0;
-  }
+.mini-slider {
+  margin: 26px 0 0;
   .slides {
-    width: 100%;
-    height: 718px;
+    height: 362px;
     overflow: hidden;
     li {
-      width: 100%;
-      height: 718px;
+      height: 362px;
       overflow: hidden;
-      float: left;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      .separate {
-        width: 232px;
-        height: 1px;
-        background: #F9B4A8;
-        margin: 20px auto 20px;
+      .inner {
+        width: 907px;
+        margin: 67px auto 0;
+      }
+      .block-title {
+        padding: 37px 0 18px;
+        margin: 0 0 4px;
+        position: relative;
+        font-size: 36px;
+        &:before {
+          content: '';
+          display: block;
+          width: 232px;
+          height: 1px;
+          background: #fee7b5;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          margin: 0 0 0 -116px;
+        }
       }
       .desc {
         width: 380px;
-        margin: 0 auto;
+        margin: 14px auto;
         color: #fff;
         font-style: italic;
-        font-size: 19px;
-        line-height: 1.3;
+        font-size: 20px;
+      }
+      .btn {
+        text-transform: uppercase;
+        text-decoration: none;
+        font: 400 14px/1.1 $fontOne;
+        display: inline-block;
+        padding: 8px 9px;
+        color: #67686d;
+        background: #fee7b5;
+        border-radius: 4px;
+        box-shadow: 0 0 2px #d8b18c;
+      }
+      &.slide-1 {
+        background: image-url('slider/slider-mini-1.jpg') center center no-repeat;
       }
     }
   }
+  .slides-overlay {
+    width: 907px;
+    height: 227px;
+    margin: -113px 0 0 -453px;
+  }
   .pagination {
-    bottom: 279px;
-    .item-0 {
-      display: none;
+    bottom: 10px;
+    margin-left: -95px;
+    div {
+      width: 30px;
+      height: 30px;
+      line-height: 28px;
+      font-size: 14px;
+      background: #333;
+      background: rgba(51, 51, 51, .24);
+      &.active {
+        color: #000;
+        background: #fff;
+      }
     }
   }
 }
 
-.slider-bottom {
-  background: image-url('bg-slide.jpg') center center no-repeat;
-  background-size: cover;
+.celebrity-photos {
+  position: relative;
+  margin: 0 0 60px;
+  .view-all {
+    position: absolute;
+    right: 0;
+    top: -33px;
+    font-family: $fontOne;
+    font-size: 14px;
+  }
+  ul {
+    overflow: hidden;
+    li {
+      float: left;
+      margin: 0 0 0 6px;
+      &:first-child {
+        margin: 0;
+      }
+      &:last-child {
+        float: right;
+      }
+    }
+  }
 }
 
-.celebrities {
+.post {
+  overflow: hidden;
+  margin: 37px 0 54px;
+  .main-image {
+    float: left;
+    width: 405px;
+  }
+  .post-content {
+    float: right;
+    width: 660px;
+    h2 {
+      margin: 0 0 22px;
+    }
+    .post-images {
+      margin: 25px 0 31px;
+      li {
+        display: inline-block;
+        margin: 0 0 0 10px;
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
+    .block {
+      .block-title {
+        color: #7a656a;
+        font-size: 24px;
+        border-bottom: 1px solid #F9B4A8;
+        letter-spacing: 0;
+        padding: 0 0 12px;
+        margin: 0 0 17px;
+      }
+      .photos {
+        width: 660px;
+        margin: 0 0 23px;
+        li {
+          display: inline-block;
+          margin: 0 4px 4px 0;
+        }
+      }
+    }
+    .tags {
+      li {
+        display: inline-block;
+        margin: 0 0 14px 14px;
+        .tag {
+          font-size: 12px;
+          min-width: 0;
+          text-decoration: none;
+        }
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.celebrities-block {
   width: 1107px;
   li {
     margin: 37px 5px 20px 0;

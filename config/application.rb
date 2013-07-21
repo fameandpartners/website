@@ -30,6 +30,7 @@ module FameAndPartners
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir[ Rails.root.join('app', 'models') ]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
@@ -71,5 +72,9 @@ module FameAndPartners
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
+
+    config.after_initialize do
+      Rails.configuration.spree.payment_methods << Spree::Gateway::Pin
+    end
   end
 end

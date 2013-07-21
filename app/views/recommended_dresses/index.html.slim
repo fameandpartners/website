@@ -1,0 +1,24 @@
+.wrap
+  .page-name
+    .inner
+      h1.title
+        em My Personalised
+        span Store
+    .subtitle Great dresses just for you
+
+  ul.products-list.grid-container
+    - @recommended_dresses.each do |product|
+      = render 'shared/product', product: product, colors: @colors[product.id]
+
+  .page-name
+    .inner
+      h1.title
+        em View more
+        span Dresses
+      ul.filters
+        - available_product_ranges.each do |taxon|
+          li = link_to taxon.name, spree.products_path(taxons: { range: taxon.id})
+
+  ul.products-list.grid-container
+    - @other_dresses.each do |product|
+      = render 'shared/product', product: product, colors: @colors[product.id]

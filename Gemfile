@@ -8,16 +8,20 @@ gem 'configatron'
 gem 'paperclip'
 gem 'createsend', '~> 2.5.0'
 gem 'sidekiq'
+gem 'psych', '~> 1.3.4'
+gem 'active_model_serializers'
 gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
-gem 'psych'
 
 gem 'acts-as-taggable-on'
 gem 'rmagick'
 gem 'ckeditor'
 gem 'newrelic_rpm'
+gem 'default_value_for'
+gem 'tire'
 
 # assets
 gem 'jquery-rails'
+gem 'fancybox-rails'
 gem 'sass-rails',   '~> 3.2.3'
 
 group :assets do
@@ -26,7 +30,8 @@ group :assets do
   gem 'uglifier', '1.3.0'
   gem 'execjs', '1.4.0'
   gem 'jquery-ui-rails'
-  gem 'jquery-fileupload-rails'
+  gem 'jquery-fileupload-rails', '0.3.4'
+  gem 'eco'
 end
 
 group :development do
@@ -43,12 +48,18 @@ group :development, :test do
   gem 'debugger'
 end
 
-# spree extensions
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
-gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
+
+# spree extensions for authentication
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-3-stable'
-gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
+
+# spree extensions for payments
+gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
+gem 'spree_paypal_express', :github => 'spree/spree_paypal_express', :branch => '1-3-stable'
+
+gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
+
 
 group :production do
   gem 'unicorn'

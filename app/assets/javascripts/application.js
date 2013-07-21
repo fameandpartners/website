@@ -4,8 +4,12 @@
 //= require jquery.ui.datepicker
 //= require libs/jquery.caroufredsel-6.2.1-packed
 //= require libs/jquery.minicolors
+//= require libs/jquery.readyselector
 //= require libs/jquery.chosen.min
-//= require partials/app
-//= require partials/blog
-//= require partials/google_map
+//= require libs/jquery.mousewheel
+//= require libs/underscore-min
+//= require fancybox
+//= require helpers
+//= require_tree ./partials
+//= require_tree ./templates
 //= require_tree ./blog

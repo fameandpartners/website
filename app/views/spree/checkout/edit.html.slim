@@ -1,0 +1,53 @@
+.wrap
+  .checkout-page
+    .grid-container
+      .grid-100
+        .page-name
+          .inner
+            h1.title
+              em Welcome to the
+              span Checkout
+
+    ruby:
+      index = 0
+      if !signed_in?
+        if current_order.user.present?
+          active = @order.state
+        else
+          active = 'personal'
+        end
+       else
+        if @order.state.eql?('cart')
+          active = 'address'
+        else
+          active = @order.state
+        end
+      end
+    .grid-container
+      .grid-65
+        .accordion-container
+          - unless signed_in?
+            .accordion-title data-step="personal" *{ :class => active.eql?('personal') && 'active' }
+              .name
+                = index += 1
+                | . Personal details
+            .accordion-content data-step="personal" *{ :class => !active.eql?('personal') && 'hide' }
+              = render 'spree/checkout/personal' if active.eql?('personal')
+          .accordion-title data-step="address" *{ :class => active.eql?('address') && 'active' }
+            .name
+              = index += 1
+              | . Billing and shipping details
+            .check-edit class="#{ @order.state.eql?('payment') ? "" : "hide" }"
+              .check
+              .edit = link_to 'Edit', checkout_state_path('address'), :remote => true
+          .accordion-content data-step="address" *{ :class => !active.eql?('address') && 'hide' }
+            = render 'spree/checkout/address' if active.eql?('address')
+          .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }
+            .name
+              = index += 1
+              | . Payment details
+          .accordion-content data-step="payment"
+            = render 'spree/checkout/payment' if active.eql?('payment')
+      .grid-35
+        .checkout-summary
+          = render 'spree/checkout/summary'

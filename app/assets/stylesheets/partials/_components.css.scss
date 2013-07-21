@@ -27,3 +27,41 @@
     }
   }
 }
+
+.tabs {
+  .tabs-links {
+    height: 34px;
+    clear: both;
+    li {
+      float: left;
+      margin: 0 3px 0 0;
+      &.active {
+        a {
+          background: #fff;
+          border-color: #d8d8da;
+          color: #333;
+          height: 34px;
+        }
+      }
+    }
+    a {
+      border: 1px solid transparent;
+      border-bottom: 0;
+      display: block;
+      height: 33px;
+      padding: 0 22px;
+      background: #d8d8da;
+      font: 300 15px/33px $fontOne;
+      color: #828282;
+      text-decoration: none;
+      border-radius: 3px 3px 0 0;
+    }
+  }
+  .tab-content {
+    border: 1px solid #d8d8da;
+    .tab-content-inner {
+      overflow: hidden;
+      clear: both;
+    }
+  }
+}

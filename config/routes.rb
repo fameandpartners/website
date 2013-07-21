@@ -12,10 +12,32 @@ FameAndPartners::Application.routes.draw do
 
   devise_scope :spree_user do
     get '/spree_user/thanks' => 'spree/user_registrations#thanks'
+    get '/account_settings' => 'spree/user_registrations#edit'
   end
 
+  resources :line_items, only: [:create, :edit, :update, :destroy] do
+    post 'move_to_wishlist', on: :member
+  end
 
+  get 'products/:id/quick_view' => 'spree/products#quick_view'
 
+  resources :recommended_dresses, :only => [:index]
+
+  # account settings
+  resource :profile, only: [:show, :update], controller: 'users/profiles' do
+    put 'update_image', on: :member
+  end
+  get 'orders' => 'users/orders#index', as: 'user_orders'
+  get 'orders/:id' => 'users/orders#show', as: 'user_order'
+
+  get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
+
+  resources :wishlists_items, only: [:index, :create, :destroy], controller: 'users/wishlists_items' do
+    get 'move_to_cart', on: :member
+  end
+  get 'wishlist' => 'users/wishlists_items#index', as: 'wishlist'
+  get 'reviews' => 'users/reviews#index', as: 'reviews'
+  # eo account settings
 
   # Blog routes
   blog_constraint = lambda { |request|
@@ -93,12 +115,32 @@ FameAndPartners::Application.routes.draw do
     resources :custom_dress_images, :only => [:create]
   end
 
-  root :to => 'pages#home'
+  root :to => 'index#show'
+
+  resource :quiz, :only => [:show] do
+    resources :questions, :only => [:index, :show] do
+      resource :answer, :only => [:create]
+    end
+  end
+
+  scope '/users/:user_id', :as => :user do
+    get '/style-report' => 'user_style_profiles#show', :as => :style_profile
+    get '/style-report-debug' => 'user_style_profiles#debug'
+    get '/recomendations' => 'user_style_profiles#recomendations'
+  end
 
   mount Spree::Core::Engine, at: '/'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
+      scope 'products/:product_id', :as => 'product' do
+        resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
+      end
+
+      scope 'products/:product_id', :as => 'product' do
+        resource :inspiration, :only => [:edit, :update]
+      end
+
       match '/blog' => redirect('/admin/blog/posts')
       namespace :blog do
         resources :promo_banners
@@ -142,6 +184,4 @@ FameAndPartners::Application.routes.draw do
 
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
-
-
 end

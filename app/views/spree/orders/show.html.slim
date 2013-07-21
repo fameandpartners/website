@@ -1,0 +1,34 @@
+.wrap
+  .account-pages
+    .tabs
+      #order.tab-content
+        - if session.delete(:successfully_ordered)
+          h1.page-title Thanks for your order #{@order.user.full_name}!
+
+        .grid-container
+          .grid-35
+            = render 'spree/checkout/summary'
+          .grid-65
+            h2 Order Number: #{ @order.number }
+            p Order Date: #{ @order.updated_at.strftime('%D') }
+            h3.uppercase Shipping Address
+            - if address = @order.shipping_address
+              p = address.full_name
+              p = address.address1
+              p = "#{ address.city } #{ address.state_text }"
+              p = address.country.to_s
+            - else
+              p no shipping address
+
+            h3.uppercase Order Status
+            p.labeled = @order.state
+            h3.uppercase Payment Status
+            p.labeled = @order.payment_state
+            h3.uppercase Delivery Status
+            p.labeled = @order.shipment_state || 'pending'
+            h3.uppercase Customer Support
+            p Check out our Support Site or read our FAQs.
+            p = link_to 'support.fameandpartners.com', 'http://support.fameandpartners.com', target: '_blank'
+            p = link_to 'fameandpartners.com/faqs', 'http://fameandpartners.com/faqs', target: '_blank'
+            p Or otherwise contact our friendly team if you need any help.
+            p = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'

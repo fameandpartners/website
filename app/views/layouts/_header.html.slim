@@ -1,46 +1,105 @@
-header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
-  .wrap
-    .logo
-      = link_to 'Fame&Partners', root_path
-    ul.icons
-      li
-        .icon.quote
-        span
-          ' Free
-          br
-          ' Quote
-      li
-        .icon.shipping
-        span
-          ' Free
-          br
-          ' Shipping
-      li
-        .icon.returns
-        span
-          ' 30 day
-          br
-          ' Returns
-      li
-        .icon.guarantee
-        span
-          ' Best fit
-          br
-          ' Process
-      li
-        .icon.turnaround
-        span
-          ' 3 week
-          br
-          ' turnaround
-    nav
+.top-links
+  .wrap.no-overflow
+    nav.fleft
+      ul
+        li = link_to 'Home', root_path, class: 'top-icon link-root'
+        li.top-icon.phone AU. 1800 455 345
+        li = link_to 'Live chat', root_path, class: 'top-icon link-livechat'
+    nav.fright
       ul
         - unless spree_user_signed_in?
-          li = link_to 'Sign in', spree_login_path, class: 'btn transparent'
-          li = link_to 'Sign up', spree_signup_path, class: 'btn pink'
+          li = link_to 'Sign up', spree_signup_path, class: 'top-icon link-signup'
+          li = link_to 'Log-in', spree_login_path, class: 'link-login'
         - else
-          li.user
-            span.inverse =' current_spree_user.full_name
-            br
-            ' is logged in
-          li = link_to 'Sign out', spree_logout_path, class: 'btn transparent'
+          li.loggedin
+            .dropdown-trigger
+              =' current_spree_user.full_name
+              ' is logged in
+            .dropdown-menu
+              ul
+                li = link_to 'Account settings', profile_path
+                li = link_to 'Your orders', user_orders_path
+                li = link_to 'Style profile', styleprofile_path
+                li = link_to 'My reviews', reviews_path
+          li = link_to 'Sign out', spree_logout_path
+
+header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
+  .first-level
+    .wrap.no-overflow
+      .inner
+        .fleft
+          .logo = link_to 'Fame&Partners', root_path
+        .fright
+          .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
+          .shopping-bag
+            = link_to spree.cart_path, class: 'shopping-bag-toggler' do
+              .counter = current_order(true).item_count
+              ' Shopping bag
+            = render 'layouts/shopping_bag_content'
+  .second-level
+    .wrap
+      .inner
+        .fleft
+          ul.icons
+            li
+              .icon.quote
+              span
+                ' Free
+                br
+                ' Quote
+            li
+              .icon.shipping
+              span
+                ' Free
+                br
+                ' Shipping
+            li
+              .icon.returns
+              span
+                ' Free
+                br
+                ' Returns
+            li
+              .icon.guarantee
+              span
+                ' Fit
+                br
+                ' Guarantee
+            li
+              .icon.turnaround
+              span
+                ' 3 week
+                br
+                ' turnaround
+        .fright
+          .search
+            form
+              input type="text" name="search" placeholder="Search the blog"
+
+  ruby:
+    active_tab = nil
+
+  .level-three.main-nav
+    .wrap.no-overflow
+      nav.main
+        ul.clearfix
+          li.active.with-dropdown
+            = link_to 'Full Range', root_path, title: "Custom made dresses from Fame & Partners"
+            .dropdown-menu-wrapper
+              ul.dropdown-menu
+                - available_product_ranges.each do |taxon|
+                  li = link_to taxon.name, spree.products_path(taxons: { range: taxon.id})
+                - available_product_styles.each do |taxon|
+                  li = link_to taxon.name, spree.products_path(taxons: { style: taxon.id})
+          - if spree_user_signed_in?
+            li = link_to 'Personalised Boutique', recommended_dresses_path
+          - else
+            li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
+          li = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
+          li = link_to 'Custom Dresses', step1_custom_dresses_path, title: "Fame & Partners Custom Dresses"
+          li = link_to 'Blog', root_url(:subdomain => :blog), title: "Fame & Partners Blog"
+          li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
+
+  javascript:
+    window.bootstrap = {}
+    window.bootstrap.order = #{{ ::CartSerializer.new(current_order).to_json }}

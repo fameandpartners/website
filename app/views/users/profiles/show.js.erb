@@ -1,0 +1,5 @@
+html = '<%=j  render(template: 'users/profiles/show.html') %>';
+$('#wrap > #content > .wrap').replaceWith(html)
+
+window.setCurrentPath('<%= profile_path %>')
+window.initFileuploader()

@@ -1,0 +1,24 @@
+.wrap
+  .account-pages
+    .tabs
+      = render 'users/shared/tabs', active_tab: 'styleprofile'
+      #report.tab-content
+        - if @style_profile.blank?
+          p To create your style proﬁle just run the style quiz.
+          .redo-view
+            = link_to 'Start the style quiz', '#', class: 'btn black show-style-quiz'
+        - else
+          h1.page-title My style profile
+          p.margin.uppercase
+            strong Your current style profile:
+          - time = @style_profile.updated_at
+          p.margin = time.strftime("Last updated #{time.day.ordinalize} %B %Y")
+          .style-report-block
+            - @style_profile.percentage.each_with_index do |style, index|
+              div class=(index == 0 ? 'block first' : 'block')
+                .name = style.first
+                .percent #{style.last}%
+          p To update your style proﬁle just run the style quiz again.
+          .redo-view
+            = link_to 'Redo the style quiz', '#', class: 'btn black show-style-quiz'
+            = link_to 'View your public style report', user_style_profile_path(@user), class: 'btn grey'

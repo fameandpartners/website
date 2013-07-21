@@ -1,0 +1,26 @@
+.title Order summary
+ul
+  li
+    .label Subtotal
+    .desc
+      span = @order.currency
+      = @order.display_item_total
+  li
+    .label Shipping
+    .desc
+      span = @order.currency
+      - if @order.shipment
+        = @order.shipment.display_amount
+      - else
+        ' $0.00
+  li
+    .label Promotion
+    .desc
+      span = @order.currency
+      = @order.display_adjustment_total
+  li.totals
+    .label Total
+    .desc
+      span = @order.currency
+      = @order.display_total
+      .taxes Including GST

@@ -38,3 +38,6 @@ config/database.yml
 # ignore spree stuff
 /public/spree
 /dump.rdb
+
+# ignore cache
+/.sass-cache

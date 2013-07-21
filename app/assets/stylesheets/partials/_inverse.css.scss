@@ -1,36 +1,3 @@
-header.inverse {
-  position: absolute;
-  background: image-url('bg-top.png') 0 0 repeat;
-  .wrap {
-    border-bottom: 0;
-  }
-  .logo {
-    a {
-      background-image: image-url('logo-white.png');
-    }
-  }
-  .icons {
-    li {
-      color: #fff;
-      .icon {
-        background-position: 0 0;
-        &.shipping {
-          background-position: 0 -20px;
-        }
-        &.returns {
-          background-position: 0 -40px;
-        }
-        &.guarantee {
-          background-position: 0 -60px;
-        }
-        &.turnaround {
-          background-position: 0 -80px;
-        }
-      }
-    }
-  }
-}
-
 .top-bar.inverse {
   position: absolute;
   .main {

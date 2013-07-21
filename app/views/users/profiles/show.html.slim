@@ -1,0 +1,56 @@
+.wrap
+  .account-pages
+    .tabs
+      = render 'users/shared/tabs', active_tab: 'account_settings'
+      #settings.tab-content
+        h1.page-title Account Settings
+        = form_for @user, as: :profile, :url => profile_path, remote: true, :method => :put do |f|
+          input id="fileupload" type="file" style='display: none;'
+          .grid-container
+            .grid-50
+              .grid-container
+                .grid-100
+                  .avatar-field
+                    - if @user.image.present?
+                      .avatar
+                        = image_tag @user.image, width: 100
+                    - else
+                      .avatar.empty
+                    p.notification
+                      ' Available file formats is:
+                      = Spree::User::ALLOWED_AVATAR_FILE_TYPES.map{|type| %Q(".#{type.partition('/').last}") }.join(', ')
+                      ' .
+                      br
+                      ' Maximum size is:
+                      = number_to_human_size(Spree::User::ALLOWED_AVATAR_FILE_SIZE.max)
+                      | .
+                    input.btn-upload type="button" value="Upload profile photo"
+                .clear
+                .hr
+                .grid-50
+                  .input
+                    = f.label :first_name
+                    = f.text_field :first_name
+                .grid-50
+                  .input
+                    = f.label :last_name
+                    = f.text_field :last_name
+                .clear
+                .hr
+                .grid-50
+                  .input
+                    = f.label :email
+                    = f.email_field :email
+                .clear
+                .hr
+                .grid-50
+                  .input
+                    = f.label :password
+                    = f.password_field :password, autocomplete: 'off', value: ''
+                .grid-50
+                  .input
+                    = f.label :password_confirmation
+                    = f.password_field :password_confirmation, autocomplete: 'off', value: ''
+                .grid-100
+                  .submit
+                    = f.submit "Save changes"

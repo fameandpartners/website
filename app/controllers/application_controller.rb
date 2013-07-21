@@ -1,18 +1,28 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  include Spree::Core::ControllerHelpers::Order
+  include Spree::Core::ControllerHelpers::Auth
+
+  append_before_filter :check_cart
+
+  def check_cart
+    # if can't find order, create it ( true )
+    current_order(true) if current_order.blank?
+  end
+
   private
 
   def step1_custom_dresses_path(options = {})
-    super options.merge(user_addition_params)
+    main_app.step1_custom_dresses_path(options.merge(user_addition_params))
   end
 
   def step2_custom_dress_path(object, options = {})
-    super object, options.merge(user_addition_params)
+    main_app.step2_custom_dress_path(object, options.merge(user_addition_params))
   end
 
   def success_custom_dress_path(object, options = {})
-    super object, options.merge(user_addition_params)
+    main_app.success_custom_dress_path(object, options.merge(user_addition_params))
   end
 
   helper_method :step1_custom_dresses_path,
@@ -38,6 +48,8 @@ class ApplicationController < ActionController::Base
       case session[:sign_up_reason]
         when 'custom_dress' then
           'Custom dress'
+        when 'style_quiz' then
+          'Style quiz'
       end
     end
   end
