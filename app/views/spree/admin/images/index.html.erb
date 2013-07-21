@@ -33,7 +33,7 @@
     </thead>
 
     <tbody>
-      <% (@product.images + @product.variant_images).each do |image| %>
+      <% (@product.variant_images).each do |image| %>
         <tr id="<%= spree_dom_id image %>" data-hook="images_row" class="<%= cycle('odd', 'even')%>">
           <td class="no-border">
             <span class="handle"></span>
