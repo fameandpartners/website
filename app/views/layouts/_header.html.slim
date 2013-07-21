@@ -73,11 +73,8 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                 ' turnaround
         .fright
           .search
-            form
+            = form_tag blog_search_by_query_url(subdomain: :blog), method: :get do
               input type="text" name="search" placeholder="Search the blog"
-
-  ruby:
-    active_tab = nil
 
   .level-three.main-nav
     .wrap.no-overflow
