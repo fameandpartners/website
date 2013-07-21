@@ -1,4 +1,6 @@
 $ ->
+  return unless window.bootstrap?
+
   window.shopping_cart.init(window.bootstrap)
 
   window.shoppingBag = {

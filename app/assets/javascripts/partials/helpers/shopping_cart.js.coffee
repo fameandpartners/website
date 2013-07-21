@@ -7,6 +7,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
   initialized: false
 
   init: (bootstrap_data) ->
+    return unless bootstrap_data?
     if !window.shopping_cart.initialized
       window.shopping_cart.order = bootstrap_data.order.cart
       window.shopping_cart.line_items = _.collect(
