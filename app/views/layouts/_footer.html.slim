@@ -9,10 +9,10 @@ footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
           input.btn type="submit" value="Join now"
       .column.links
         ul.collapse
-          li = link_to 'About us', about_path
-          li = link_to 'Meet our Team', team_path
-          li = link_to 'Terms & Conditions', terms_path
-          li = link_to 'Privacy', privacy_path
+          li = link_to 'About us', about_url(:host => configatron.host)
+          li = link_to 'Meet our Team', team_url(:host => configatron.host)
+          li = link_to 'Terms & Conditions', terms_url(:host => configatron.host)
+          li = link_to 'Privacy', privacy_url(:host => configatron.host)
           li Call us on 1300 924 860
           li Need help? Simply email us at: #{mail_to 'team@fameandpartners.com', 'team@fameandpartners.com', class: 'inverse'}
       .column.social.hide
@@ -25,7 +25,7 @@ footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .wrap
     .logo-copyright
       .logo
-        = link_to 'Fame&Partners', root_path
+        = link_to 'Fame&Partners', root_url(:host => configatron.host)
       .copyright
         ' 2013 Fame & Partners &copy; 
       .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064

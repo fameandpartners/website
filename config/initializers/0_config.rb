@@ -20,7 +20,7 @@ configatron.links.rss = ''
 
 case Rails.env.to_sym
 when :development
-  configatron.host = 'localhost:3000'
+  configatron.host = 'localhost'
 when :staging
   configatron.host = 'stage.fameandpartners.com'
 
