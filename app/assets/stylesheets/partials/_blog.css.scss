@@ -95,8 +95,9 @@
 
 .celebrity-photos {
   position: relative;
-  .view-all {
+  .blog-block-title .view-all {
     position: absolute;
+    top: auto;
     bottom: 6px;
     right: 0;
     font-weight: 400;
@@ -411,12 +412,12 @@
     }
   }
   .celebrity-blocks {
-    width: 864px;
+    width: 576px;
     position: absolute;
     z-index: 101;
     left: 50%;
     top: 100px;
-    margin: 0 0 0 -432px;
+    margin: 0 0 0 -288px;
   }
   .celebrity-main {
     float: left;
