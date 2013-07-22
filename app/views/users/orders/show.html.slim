@@ -24,11 +24,11 @@
               p no shipping address
 
             h3.uppercase Order Status
-            p.labeled = @order.state
+            p.labeled = order_state(@order)
             h3.uppercase Payment Status
-            p.labeled = @order.payment_state
+            p.labeled = order_payment_state(@order)
             h3.uppercase Delivery Status
-            p.labeled = @order.shipment_state || 'pending'
+            p.labeled = order_shipment_state(@order)
 
             - if successfully_ordered
               h3.uppercase Customer Support

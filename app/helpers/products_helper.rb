@@ -18,7 +18,7 @@ module ProductsHelper
     description_text = product.property('short_description') || product.description
     truncate(description_text, length: 80, separator: ' ')
   rescue
-    'no description available'
+    t('product_has_no_description')
   end
 
   def product_video(product, options = {})

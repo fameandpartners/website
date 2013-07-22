@@ -80,11 +80,16 @@ ruby:
         .tabs
           ul.tabs-links
             li = link_to 'Description', '#description'
-            li = link_to 'Size and fit', '#sizes'
-            li = link_to 'Details', '#detials'
-            li = link_to 'Styling Notes', '#notes'
+            - if @product.property('fit').present?
+              li = link_to 'Size and fit', '#sizes'
+            - if @product.property('fabric') || @product.property("weight")
+              li = link_to 'Details', '#details'
+            /li = link_to 'Styling Notes', '#notes'
           #description.tab-content
-            = @product.description
+            - if (description = product_description(@product)).present?
+              = description
+            - else
+              = t('product_has_no_description')
           #sizes.tab-content
             = @product.property('fit')
           #details.tab-content
@@ -92,7 +97,7 @@ ruby:
             = @product.property('fabric')
             | Weight:
             = @product.property('weight')
-          #notes.tab-content
+          /#notes.tab-content
             | Tab content notes
 
   .page-name

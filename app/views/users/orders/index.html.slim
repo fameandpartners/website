@@ -21,7 +21,7 @@
                 tr
                   td = link_to order.number, user_order_path(order), remote: true
                   td = order.updated_at.strftime('%D')
-                  td = order.state
-                  td = order.payment_state
-                  td = order.shipment_state
+                  td = order_state(order)
+                  td = order_payment_state(order)
+                  td = order_shipment_state(order)
                   td = order.display_total
