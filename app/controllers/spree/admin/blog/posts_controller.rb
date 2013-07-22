@@ -25,13 +25,13 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::Blog::BaseController
     @blog_post.slug         = slug_from_name(@blog_post.title.to_s) if @blog_post.slug.blank?
 
     if @blog_post.valid?
-      @blog_post.save
       Blog::PostPhoto.where(user_id: current_spree_user.id, post_id: nil).update_all({post_id: @blog_post.id})
       if @blog_post.post_photos.present?
         @blog_post.primary_photo_id = @blog_post.post_photos.first.id
       else
         @blog_post.primary_photo_id = nil
       end
+      @blog_post.save
       redirect_to action: :index
     else
       prepare_form_relations
