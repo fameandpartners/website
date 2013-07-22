@@ -8,7 +8,7 @@ class Spree::Admin::Blog::PostPhotosController < Spree::Admin::Blog::BaseControl
       post        = Blog::Post.find(params[:post_id])
       post_photos = post.post_photos
     end
-    render json: post_photos.map{|upload| upload.to_jq_upload }
+    render json: post_photos.map{|upload| upload.to_jq_upload }.to_json
   end
 
   def create
@@ -38,14 +38,7 @@ class Spree::Admin::Blog::PostPhotosController < Spree::Admin::Blog::BaseControl
 
   def destroy
     post_photo = Blog::PostPhoto.find(params[:id])
-    post = post_photo.post
-    if post.present?
-      post_photo.destroy
-      if post.primary_photo.blank? && post.post_photos.present?
-        post.primary_photo = post.post_photos.first
-        post.save
-      end
-    end
+    post_photo.destroy
     render json: true
   end
 

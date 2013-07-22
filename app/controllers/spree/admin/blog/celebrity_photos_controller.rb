@@ -11,7 +11,7 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
       celebrity   = Blog::Celebrity.find(params[:celebrity_id])
       photos      = celebrity.celebrity_photos
     end
-    render json: photos.map{|upload| upload.to_jq_upload }
+    render json: photos.map{|upload| upload.to_jq_upload }.to_json
   end
 
   def create
@@ -45,7 +45,18 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
   end
 
   def destroy
-    Blog::CelebrityPhoto.find(params[:id]).destroy
+    celebrity_photo = Blog::CelebrityPhoto.find(params[:id])
+
+    celebrity = celebrity_photo.celebrity
+    if celebrity.present?
+      celebrity_photo.destroy
+      if celebrity.primary_photo.blank? && celebrity.celebrity_photos.count > 0
+        celebrity.primary_photo = celebrity.celebrity_photos.first
+        celebrity.save
+      end
+    else
+      celebrity_photo.destroy
+    end
     render json: true
   end
 
