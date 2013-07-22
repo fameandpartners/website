@@ -13,30 +13,16 @@
 
 ActiveRecord::Schema.define(:version => 20130718102539) do
 
-  create_table "blog_authors", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.text     "description"
-    t.integer  "user_id"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.string   "slug"
-  end
-
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
     t.string   "code"
-    t.float    "glam"
-    t.float    "girly"
-    t.float    "classic"
-    t.float    "edgy"
-    t.float    "bohemian"
-    t.float    "sexiness"
-    t.float    "fashionability"
+    t.integer  "glam"
+    t.integer  "girly"
+    t.integer  "classic"
+    t.integer  "edgy"
+    t.integer  "bohemian"
+    t.integer  "sexiness"
+    t.integer  "fashionability"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -182,25 +168,6 @@ ActiveRecord::Schema.define(:version => 20130718102539) do
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
 
-  create_table "blog_red_carpet_posts", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "author_id"
-    t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.datetime "published_at"
-    t.datetime "occured_at"
-    t.integer  "category_id"
-    t.string   "slug"
-  end
-
-  add_index "blog_red_carpet_posts", ["author_id"], :name => "index_blog_red_carpet_posts_on_author_id"
-  add_index "blog_red_carpet_posts", ["category_id"], :name => "index_blog_red_carpet_posts_on_category_id"
-  add_index "blog_red_carpet_posts", ["published_at"], :name => "index_blog_red_carpet_posts_on_published_at"
-  add_index "blog_red_carpet_posts", ["slug"], :name => "index_blog_red_carpet_posts_on_slug"
-  add_index "blog_red_carpet_posts", ["user_id"], :name => "index_blog_red_carpet_posts_on_user_id"
-
   create_table "celebrity_inspirations", :force => true do |t|
     t.integer  "spree_product_id"
     t.string   "celebrity_name"
@@ -239,6 +206,34 @@ ActiveRecord::Schema.define(:version => 20130718102539) do
   end
 
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "product_style_profiles", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "glam"
+    t.integer  "girly"
+    t.integer  "classic"
+    t.integer  "edgy"
+    t.integer  "bohemian"
+    t.integer  "apple"
+    t.integer  "pear"
+    t.integer  "strawberry"
+    t.integer  "hour_glass"
+    t.integer  "column"
+    t.integer  "bra_aaa"
+    t.integer  "bra_aa"
+    t.integer  "bra_a"
+    t.integer  "bra_b"
+    t.integer  "bra_c"
+    t.integer  "bra_d"
+    t.integer  "bra_e"
+    t.integer  "bra_fpp"
+    t.integer  "sexiness"
+    t.integer  "fashionability"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "product_style_profiles", ["product_id"], :name => "index_product_style_profiles_on_product_id"
 
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
@@ -880,23 +875,6 @@ ActiveRecord::Schema.define(:version => 20130718102539) do
     t.datetime "updated_at",                            :null => false
   end
 
-  create_table "style_reports", :force => true do |t|
-    t.integer  "spree_user_id"
-    t.float    "glam"
-    t.float    "girly"
-    t.float    "classic"
-    t.float    "edgy"
-    t.float    "bohemian"
-    t.float    "sexiness"
-    t.float    "fashionability"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.string   "colors"
-    t.string   "brands"
-  end
-
-  add_index "style_reports", ["spree_user_id"], :name => "index_style_reports_on_spree_user_id"
-
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -947,4 +925,5 @@ ActiveRecord::Schema.define(:version => 20130718102539) do
     t.integer  "quantity",         :default => 1
     t.integer  "spree_product_id"
   end
+
 end
