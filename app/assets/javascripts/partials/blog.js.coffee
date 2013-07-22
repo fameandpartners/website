@@ -26,19 +26,42 @@ $ ->
 
   $celebrity_modal = $('.celebrity-modal')
 
-  $('.celebrity-modal .close-modal a').on 'click', ->
+  window.hideCelebrityModal = ->
     $celebrity_modal.addClass('hidden')
+    if window.main_disqus_url
+      $('#disqus_thread').remove()
+      $(window.main_dicuss_container).append("<div id='disqus_thread'></div>")
+
+      window.disqus_identifier = window.main_disqus_identifier
+      window.disqus_url = window.main_disqus_url
+
+      if window.DISQUS
+        DISQUS.reset
+          reload: true
+          config: ->
+            this.page.identifier = window.disqus_identifier
+            this.page.url = window.disqus_url
+      else
+        dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        disqus_shortname = 'fameandpartners'
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        window.disqus_identifier = disqus_identifier
+        window.disqus_url = disqus_url
+        $('head').append(dsq)
+
+  $('.celebrity-modal .close-modal a').on 'click', ->
+    window.hideCelebrityModal()
     false
 
   $('.celebrity-modal .overlay').on 'click', ->
-    $celebrity_modal.addClass('hidden')
+    window.hideCelebrityModal()
     false
 
   $(document).on 'keyup', (e) ->
     if e.keyCode == 27
       modal = $('.celebrity-modal')
-      if !modal.hasClass('hidden')
-        modal.addClass('hidden')
+      if !$celebrity_modal.hasClass('hidden')
+        window.hideCelebrityModal()
     true
 
   $('.zoom').on 'click', (e) ->
@@ -55,6 +78,26 @@ $ ->
     if photo_url == ""
       photo_url = 'http://placehold.it/576x770'
     date      = $parent.attr('data-date')
+
+    $('#disqus_thread').remove()
+    $('.block-comments').append("<div id='disqus_thread'></div>")
+
+    window.disqus_identifier = "photo-#{photo_id}"
+    window.disqus_url = "http://www.fameandpartners.com/photos/#{photo_id}"
+
+    if window.DISQUS
+      DISQUS.reset
+        reload: true
+        config: () ->
+          this.page.identifier = window.disqus_identifier
+          this.page.url = window.disqus_url
+    else
+      dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      disqus_shortname = 'fameandpartners'
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      window.disqus_identifier = disqus_identifier
+      window.disqus_url = disqus_url
+      $('head').append(dsq)
 
     $celebrity_modal.find('.name').html(name)
     $celebrity_modal.find('.icons').attr('data-id', photo_id)

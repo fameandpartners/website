@@ -21,12 +21,3 @@
       .post-content= raw(short_post_body(post))
       .read-more
         = link_to "Read More", url
-
-  javascript:
-    var disqus_shortname = 'fameandpartners';
-    (function () {
-      var s = document.createElement('script'); s.async = true;
-      s.type = 'text/javascript';
-      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
