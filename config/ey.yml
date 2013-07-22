@@ -30,4 +30,4 @@ environments:
   production_blog:
     migrate: true
     migration_command: rake db:migrate
-    branch: blog
+    branch: master
