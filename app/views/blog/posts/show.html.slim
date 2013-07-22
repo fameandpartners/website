@@ -17,9 +17,8 @@
               = link_to '', blog_post_by_category_path(@post.category.slug, @post.slug) + '#disqus_thread'
           .author
             = link_to blog_authors_post_path(@post.user.slug) do
-              - if @post.user.avatar.present?
-                .avatar
-                  = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
+              .avatar
+                = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
               .name= @post.user.fullname
         - if @post.primary_photo.present?
           .featured-image= image_tag @post.primary_photo.photo.url(:preview), width: 742, height: 355, alt: ''

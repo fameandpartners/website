@@ -14,9 +14,8 @@ article.post
       = link_to '', url + '#disqus_thread'
     .author
       = link_to blog_authors_post_path(post.user.slug) do
-        - if post.user.avatar.present?
-          .avatar
-            = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
+        .avatar
+          = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
         .name= post.user.fullname
   - if post.primary_photo.present?
     - if params[:action] == 'show'
