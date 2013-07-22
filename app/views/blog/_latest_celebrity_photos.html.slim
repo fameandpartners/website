@@ -9,13 +9,18 @@
       - @latest_photos.each do |celebrity_photo|
         li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url(:preview)}"]
           .zoom
-          = link_to blog_celebrity_path(celebrity_photo.celebrity.slug), class: 'celebrity-photo' do
+          .celebrity-photo
             = image_tag celebrity_photo.photo.url(:small), width: 269, height: 375, alt: ''
             .overlay
               .name= celebrity_photo.celebrity.fullname
-              - if celebrity_photo.post.present?
-                - if celebrity_photo.post.published?
-                  .event= celebrity_photo.post.title
+              - post = celebrity_photo.post
+              - if post.present?
+                - if post.published?
+                  .event
+                    - if post.red_carpet?
+                      = link_to post.title, blog_red_carpet_post_path(post.slug)
+                    - else
+                      = link_to post.title, blog_post_by_category_path(post.category.slug, post.slug)
                 - else
                   .event Cooming Soon
           .love-share
