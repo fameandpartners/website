@@ -15,6 +15,7 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
   end
 
   def create
+    celebrity = nil
     photos = Array.wrap((params['blog_celebrity_photo'] || {})['photo']).map do |photo_attrs|
       if params[:post_id].present?
         post = Blog::Post.find(params[:post_id])
@@ -32,9 +33,14 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
         celebrity.primary_photo = photo
         celebrity.save
       end
-
       photo
     end
+
+    if celebrity.present? && celebrity.primary_photo.blank? && celebrity.celebrity_photos.count > 0
+      celelebrity.primary_photo = celebrity.celebrity_photos.first
+      celebrity.save
+    end
+
     render json: {files: photos.map {|p| p.to_jq_upload}}, status: :created
   end
 
