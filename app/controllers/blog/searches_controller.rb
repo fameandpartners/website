@@ -1,6 +1,5 @@
 class Blog::SearchesController < BlogBaseController
   POSTS_PER_PAGE = 10
-  layout 'spree/layouts/spree_application'
   respond_to :html
 
   def by_query
