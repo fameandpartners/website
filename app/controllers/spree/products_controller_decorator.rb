@@ -25,7 +25,7 @@ Spree::ProductsController.class_eval do
 
     @product_properties = @product.product_properties.includes(:property)
 
-    @similar_products   = Spree::Product.active.limit(4)
+    @similar_products   = Products::SimilarProducts.new(@product).fetch(4)
     @product_variants = Products::VariantsReceiver.new(@product).available_options
 
     respond_with(@product)
