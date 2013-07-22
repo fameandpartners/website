@@ -4,7 +4,7 @@
       nav.main
         ul
           li.with-dropdown[class="#{celebrities_page? ? 'active' : ''}"]
-            = link_to 'Celebrity Style', '#'
+            = link_to 'Celebrity Style', blog_celebrities_path
             .dropdown-menu
               ul
                 - @featured_celebrities.each do |celebrity|
