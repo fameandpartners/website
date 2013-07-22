@@ -95,7 +95,7 @@
 
 .celebrity-photos {
   position: relative;
-  .blog-block-title .view-all {
+  .view-all {
     position: absolute;
     top: auto;
     bottom: 6px;
@@ -149,12 +149,8 @@
           }
         }
       }
-    }
-    &.featured {
-      li {
-        &:first-child {
-          margin: 2px 3px 15px;
-        }
+      &:last-child {
+        float: right;
       }
     }
   }
@@ -167,6 +163,9 @@
         img {
           max-width: 194px;
           height: auto;
+        }
+        &:last-child {
+          float: left;
         }
       }
     }

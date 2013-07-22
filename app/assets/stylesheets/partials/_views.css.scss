@@ -509,31 +509,6 @@
   }
 }
 
-.celebrity-photos {
-  position: relative;
-  margin: 0 0 60px;
-  .view-all {
-    position: absolute;
-    right: 0;
-    top: -33px;
-    font-family: $fontOne;
-    font-size: 14px;
-  }
-  ul {
-    overflow: hidden;
-    li {
-      float: left;
-      margin: 0 0 0 6px;
-      &:first-child {
-        margin: 0;
-      }
-      &:last-child {
-        float: right;
-      }
-    }
-  }
-}
-
 .post {
   overflow: hidden;
   margin: 37px 0 54px;
@@ -542,8 +517,6 @@
     width: 405px;
   }
   .post-content {
-    float: right;
-    width: 660px;
     h2 {
       margin: 0 0 22px;
     }
