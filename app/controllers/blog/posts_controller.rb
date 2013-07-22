@@ -7,6 +7,15 @@ class Blog::PostsController < BlogBaseController
   def index
     @posts_count = post_scope.count
     @posts = post_scope.page(params[:page]).per(POSTS_PER_PAGE)
+
+    if params[:type] == 'red_carpet'
+      title 'Red carpet events'
+      description 'Red carpet events'
+    elsif params[:category_slug].present?
+      title "Posts in #{@category.name}"
+      description "Posts in #{@category.name}"
+    end
+
     respond_to do |format|
       format.js do
       end
@@ -20,6 +29,15 @@ class Blog::PostsController < BlogBaseController
     @post = post_scope.includes(
       :user, :post_photos, :celebrity_photos, :category, :celebrities
     ).find_by_slug!(params[:post_slug])
+
+    if params[:type] == 'red_carpet'
+      title "#{@post.title} in Events"
+      description "#{@post.title}. #{view_context.truncate(@post.body, :length => 200)}"
+    elsif params[:category_slug].present?
+      title "#{@post.title} in #{@category.name}"
+      description "#{@post.title}. #{view_context.truncate(@post.body, :length => 200)}"
+    end
+
     if current_spree_user.present?
       @photo_votes = Blog::CelebrityPhotoVote.where(
         user_id: current_spree_user.id, celebrity_photo_id: @post.celebrity_photos.map(&:id)

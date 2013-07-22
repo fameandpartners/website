@@ -6,6 +6,15 @@ class BlogBaseController < ApplicationController
 
   private
 
+  def title(*args)
+    super(t('page.blog.default.title'), args)
+  end
+
+  def description(*args)
+    super(args, t('page.blog.default.description'))
+    @description = Array.wrap(args).join(' | ')
+  end
+
   #def current_ability
   #  @current_ability ||= Blog::Ability.new(try_spree_current_user)
   #end

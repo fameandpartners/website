@@ -24,4 +24,8 @@ en:
         photo: 'Photo'
         tags: 'Tags'
         event_date: 'Event date'
-
+  page:
+    blog:
+      default:
+        title: 'Fame & Partners Formal Dresses Blog'
+        description: 'Formal Dresses, Celebrity Fashion and Style Inspiration. Follow the Fame & Partners blog to stay in touch with the latest trends for your next formal event.'

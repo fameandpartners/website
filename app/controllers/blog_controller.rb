@@ -1,5 +1,8 @@
 class BlogController < BlogBaseController
   def index
+    title
+    description
+
     @promo_banners        = Blog::PromoBanner.published.all
     @latest_photos        = Blog::CelebrityPhoto.latest
     @featured_posts       = Blog::Post.featured

@@ -2,6 +2,9 @@ class Blog::CelebritiesController < BlogBaseController
   CELEBRITIES_PER_PAGE = 10
 
   def index
+    title 'Celebrities'
+    description 'Follow celebrities fashion styles.'
+
     @celebrities_count = Blog::Celebrity.count
     @celebrities = Blog::Celebrity.includes(:primary_photo).page(params[:page]).per(CELEBRITIES_PER_PAGE)
 
@@ -21,6 +24,10 @@ class Blog::CelebritiesController < BlogBaseController
 
   def show
     @celebrity = Blog::Celebrity.find_by_slug!(params[:slug])
+
+    title @celebrity.full_name
+    description "Follow #{@celebrity.full_name}'s fashion style."
+
     if params[:type] == 'posts'
       @posts = @celebrity.posts.red_carpet_posts
     end

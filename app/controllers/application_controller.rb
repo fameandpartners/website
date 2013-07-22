@@ -13,6 +13,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def title(*args)
+    @title = args.flatten.join(' | ')
+  end
+
+  def description(*args)
+    @description = args.flatten.join(' | ')
+  end
+
   def step1_custom_dresses_path(options = {})
     main_app.step1_custom_dresses_path(options.merge(user_addition_params))
   end

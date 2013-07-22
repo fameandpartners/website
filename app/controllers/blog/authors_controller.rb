@@ -2,6 +2,9 @@ class Blog::AuthorsController < BlogBaseController
   AUTHORS_PER_PAGE=10
 
   def index
+    title 'Our stylists'
+    description 'Our stylists'
+
     role = Spree::Role.moderator_role
     @authors_count = role.users.count
     if role.present?
@@ -20,6 +23,9 @@ class Blog::AuthorsController < BlogBaseController
     @author = Spree::User.find_by_slug!(params[:stylist])
     @posts  = @author.posts.published.includes(:category, :user, :post_photos)
     generate_breadcrumbs_for_show
+
+    title "Our stylist #{@author.full_name}"
+    description "Our stylist #{@author.full_name}"
   end
 
   private
