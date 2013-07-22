@@ -125,7 +125,7 @@
         width: 27px;
         height: 27px;
         cursor: pointer;
-        background: image-url('icon-zoom.png') 6px 5px no-repeat #fff;
+        background: image-url('icon-zoom.png') center center no-repeat #fff;
         border-radius: 3px 0 3px 3px;
       }
       .celebrity-photo {
@@ -146,6 +146,13 @@
           .event {
             font-size: 14px;
           }
+        }
+      }
+    }
+    &.featured {
+      li {
+        &:first-child {
+          margin: 2px 3px 15px;
         }
       }
     }

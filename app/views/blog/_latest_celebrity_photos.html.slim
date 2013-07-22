@@ -4,7 +4,7 @@
     .block-subtitle Celebrity photos
     - if @latest_photos.present?
       .view-all = link_to 'View more celebrity photos', blog_celebrity_photos_path
-  ul
+  ul.featured
     - if @latest_photos.present?
       - @latest_photos.each do |celebrity_photo|
         li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url(:preview)}"]
