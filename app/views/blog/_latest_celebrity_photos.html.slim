@@ -12,8 +12,11 @@
           .celebrity-photo
             = image_tag celebrity_photo.photo.url(:small), width: 269, height: 375, alt: ''
             .overlay
-              .name= celebrity_photo.celebrity.fullname
               - post = celebrity_photo.post
+              - if post.present? && post.published?
+                .name= celebrity_photo.celebrity.fullname
+              - else
+                .name= link_to celebrity_photo.celebrity.fullname, blog_celebrity_path(celebrity_photo.celebrity.slug)
               - if post.present?
                 - if post.published?
                   .event
