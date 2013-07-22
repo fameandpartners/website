@@ -16,6 +16,9 @@
   .slides {
     height: 434px;
     overflow: hidden;
+    a {
+      text-decoration: none;
+    }
     li {
       float: left;
       width: 1078px;
@@ -26,8 +29,8 @@
       font-style: italic;
       font-size: 20px;
       .inner {
-        float: right;
-        margin: 158px 0 0;
+        display: block;
+        margin: 158px auto 0;
         width: 780px;
         text-align: center;
       }
