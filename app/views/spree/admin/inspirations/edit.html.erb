@@ -6,20 +6,28 @@
 
 <%= form_for @celebrity_inspiration, :url => admin_product_inspiration_url(@product), :method => :put do |f| %>
   <fieldset>
-    <div>
-      <%= f.label :celebrity_name %>
-      <%= f.text_field :celebrity_name %>
-    </div>
-    <br />
-    <% if f.object.photo.present? %>
-      <div>
-        <%= image_tag f.object.photo.url(:thumbnail) %>
-      </div>
-    <% end %>
-    <div>
-      <%= f.label :photo %>
-      <%= f.file_field :photo %>
-    </div>
+    <table>
+      <tr>
+        <td style="width: 20%"><%= f.label :celebrity_name %></td>
+        <td><%= f.text_field :celebrity_name %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :photo %></td>
+        <td>
+          <% if f.object.photo.present? %>
+            <div>
+              <%= image_tag f.object.photo.url(:thumbnail) %>
+            </div>
+          <% end %>
+          <br />
+          <%= f.file_field :photo %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= f.label :celebrity_description, "INFO" %></td>
+        <td><%= f.text_area :celebrity_description, rows: 10, cols: 80 %></td>
+      </tr>
+    </table>
   </fieldset>
 
   <div class="form-buttons filter-actions actions">
