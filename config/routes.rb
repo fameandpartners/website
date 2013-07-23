@@ -46,7 +46,7 @@ FameAndPartners::Application.routes.draw do
     elsif Rails.env.staging?
       request.host =~ /blog.fame.23stages.com/
     else
-      request.host =~ /blog\.#{Regexp.escape(configatron.host)}/
+      request.host =~ /blog\.fameandpartners\.com/
     end
   }
 

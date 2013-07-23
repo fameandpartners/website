@@ -27,3 +27,7 @@ environments:
     migrate: true
     migration_command: rake db:migrate
     branch: production
+  production_blog:
+    migrate: true
+    migration_command: rake db:migrate
+    branch: master
