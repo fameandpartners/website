@@ -80,7 +80,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
     .wrap.no-overflow
       nav.main
         ul.clearfix
-          li.active.with-dropdown
+          li.with-dropdown *{:class => request_path?('/products') && 'active' }
             = link_to 'Collection', spree.products_path, title: "Custom made dresses from Fame & Partners"
             .dropdown-menu-wrapper
               ul.dropdown-menu
@@ -90,11 +90,14 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                 - available_product_styles.each do |taxon|
                   li = link_to taxon.name, spree.products_path(taxons: { style: taxon.id})
           - if spree_user_signed_in?
-            li = link_to 'Personalised Boutique', recommended_dresses_path
+            li *{:class => request_path?("#{recommended_dresses_path}") && 'active' }
+              = link_to 'Personalised Boutique', recommended_dresses_path
           - else
             li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
-          li = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
-          li = link_to 'Custom Dresses', step1_custom_dresses_path, title: "Fame & Partners Custom Dresses"
+          li *{:class => request_path?("#{how_it_works_path}") && 'active' }
+            = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
+          li *{:class => request_path?("/custom_dresses") && 'active' }
+            = link_to 'Custom Dresses', step1_custom_dresses_path, title: "Fame & Partners Custom Dresses"
           li = link_to 'Blog', root_url(:subdomain => :blog), title: "Fame & Partners Blog"
           li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
 
