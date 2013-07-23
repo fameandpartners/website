@@ -58,7 +58,7 @@ module ProductsHelper
     link_options[:class] = (variant) ? 'active add-wishlist' : 'add-wishlist'
     link_options[:class] = in_wishlist?(variant) ? 'active add-wishlist' : 'add-wishlist'
 
-    link_to 'Like item', '#', link_options
+    link_to 'Wish list', '#', link_options
   end
 
   def in_wishlist?(variant)
