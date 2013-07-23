@@ -89,7 +89,7 @@ module Overrides
         def recommended_for(user)
           style_profile = UserStyleProfile.find_by_user_id(user.id)
 
-          query = Tire.search(:spree_products, :load => true) do
+          query = Tire.search(:spree_products, :page => 1, :load => true) do
             sort do
               by ({
                 :_script => {
@@ -122,7 +122,7 @@ module Overrides
             end
 
             from 0
-            size 100
+            size 12
           end
 
           query.results.results
