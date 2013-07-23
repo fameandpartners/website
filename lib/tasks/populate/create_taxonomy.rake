@@ -21,7 +21,6 @@ def build_taxonomy
     name: 'Range',
     permalink: 'range',
     childs: [
-      'Full Range',
       'Long Dresses',
       'Short Dresses',
       'Skirts',
