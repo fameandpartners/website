@@ -8,16 +8,11 @@ ul
   li
     .label Shipping
     .desc
-      span = @order.currency
-      - if @order.shipment
-        = @order.shipment.display_amount
-      - else
-        ' $0.00
+      = show_order_shipment_total(@order)
   li
     .label Promotion
     .desc
-      span = @order.currency
-      = @order.display_adjustment_total
+      = show_order_adjustment_total(@order)
   li.totals
     .label Total
     .desc

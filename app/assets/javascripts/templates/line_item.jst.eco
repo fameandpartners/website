@@ -68,8 +68,10 @@
     <%= @line_item.currency %>
     <%= @line_item.money %>
   </div>
+  <!--
   <div class="style-notes">
     <input type="checkbox" name="note"><label>Add Style Notes <span>$4.55</span></label>
   </div>
+  -->
 </div>
 </li>
