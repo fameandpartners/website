@@ -7,8 +7,10 @@
       <% for line_item in @order.line_items: %>
           <li class="item-block">
             <div class='thumbnail'>
-              <img src="<%= line_item.image_small %>" 
-                itemprop="image" width="83" height="115" alt="<%= line_item.product_name %>"/>
+              <a href='/product/<%= line_item.product_permalink %>'>
+                <img src="<%= line_item.image_small %>" 
+                  itemprop="image" width="83" height="115" alt="<%= line_item.product_name %>"/>
+              </a>
               <a href="#" class="remove-item-from-cart" data-id="<%= line_item.variant_id %>">Remove</a>
             </div>
             <div class="item-info">

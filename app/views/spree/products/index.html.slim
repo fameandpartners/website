@@ -7,7 +7,7 @@
         ul.filters-boxes.range
           - selected_items = (params[:taxons].present? ? params[:taxons][:range] : {}) || []
           li class=(selected_items.blank? ? 'active' : '')
-            label All
+            label Full Range
             = check_box_tag 'range', 'all', selected_items.blank?
           - available_product_ranges.each do |taxon|
             - enabled = selected_items.include?(taxon.id.to_s)

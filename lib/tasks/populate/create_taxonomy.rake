@@ -21,19 +21,19 @@ def build_taxonomy
     name: 'Range',
     permalink: 'range',
     childs: [
-      'Long Dresses',
-      'Short Dresses',
-      'Skirts',
-      'Tops'
+      ['Long Dresses', 'View our complete range of long dresses perfect for your next formal event.'],
+      ['Short Dresses', 'View our complete range of short dresses, perfect for your next formal event.'],
+      ['Skirts', 'View our complete range of skirts, mix and match with a top for something truly unique.'],
+      ['Tops', 'View our complete range of tops, mix and match with a skirt for something truly unique.']
     ]
   }
   style_taxons_tree = {
     name: 'Style',
     permalink: 'style',
     childs: [
-      'Strapless',
-      'Sweet heart',
-      'One shoulder'
+      ['Strapless', ''],
+      ['Sweet heart',''],
+      ['One shoulder', '']
     ]
   }
   childs = range_taxons_tree.delete(:childs)
@@ -43,16 +43,17 @@ def build_taxonomy
   create_taxonomy_node(style_taxons_tree, childs)
 end
 
-def create_taxonomy_node(root_element_attributes, child_names)
+def create_taxonomy_node(root_element_attributes, childs_info)
   taxonomy = Spree::Taxonomy.where(name: root_element_attributes[:name]).first_or_create
   root_taxon = Spree::Taxon.where(root_element_attributes.merge(taxonomy_id: taxonomy.id)).first_or_create
 
-  child_names.each do |name|
+  childs_info.each do |name, description|
     child = Spree::Taxon.where(
       name: name,
       permalink: "#{root_taxon.permalink}/#{name.parameterize('_')}",
       taxonomy_id: taxonomy.id
     ).first_or_create
+    child.update_attribute(:description, description)
     child.move_to_child_of(root_taxon)
   end
 end

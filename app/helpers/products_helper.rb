@@ -34,15 +34,15 @@ module ProductsHelper
   def hoverable_product_image_tag(product, options = {})
     no_image = "noimage/product.png"
     if product.images.empty?
-      image_tag no_image, options
+      link_to image_tag(no_image, options), spree.product_path(product)
     else
       images = product.images
       image = images.first
       options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
-      options[:mouseenter] = images.second.attachment.url(:product) if images.size > 1
+      options[:mouseover] = images.second.attachment.url(:product) if images.size > 1
       options[:alt_image] = no_image
       options[:onerror] = 'window.switchToAltImage(this)'
-      image_tag image.attachment.url(:product), options
+      link_to image_tag(image.attachment.url(:product), options), spree.product_path(product)
     end 
   end
 
@@ -71,5 +71,19 @@ module ProductsHelper
   def share_buttons
     return '' if Rails.env.development?
     render 'shared/share_buttons'
+  end
+
+  # show description from range taxon or from all
+  def browse_page_description(selected_taxons = {})
+    default_description = "Fame & Partners formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom."
+    selected_range_taxons = (selected_taxons || {})[:range]
+    return default_description if selected_range_taxons.blank?
+
+    selected_taxon = available_product_ranges.find{|t| t.id == selected_range_taxons.first.to_i }
+    if selected_taxon.present?
+      selected_taxon.description || default_description
+    else
+      default_description
+    end
   end
 end
