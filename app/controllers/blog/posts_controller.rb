@@ -50,7 +50,12 @@ class Blog::PostsController < BlogBaseController
 
   def post_scope
     return  @post_scope if @post_scope.present?
-    scope = Blog::Post.includes(:author, :category).published
+    scope = Blog::Post.includes(:author, :category)
+
+    unless try_spree_current_user.try(:blog_moderator?) && params[:action].eql?('show')
+      scope = scope.published
+    end
+
     if params[:type] == 'red_carpet'
       scope = scope.where(post_type_id: Blog::Post::PostTypes::RED_CARPET)
     else

@@ -20,15 +20,18 @@ configatron.links.rss = ''
 
 case Rails.env.to_sym
 when :development
-  configatron.host = 'localhost'
+  configatron.host = 'localhost.localdomain'
+  configatron.blog_host = 'blog.localdomain'
 when :staging
-  configatron.host = 'stage.fameandpartners.com'
+  configatron.host = 'fame.23stages.com'
+  configatron.blog_host = 'blog.fame.23stages.com'
 
   configatron.mailgun.mailbox.domain = '23stages.com'
   configatron.mailgun.mailbox.username = 'mailer@23stages.com'
   configatron.mailgun.mailbox.password = '80kmdvXlufsZOW'
 when :production
   configatron.host = 'www.fameandpartners.com'
+  configatron.blog_host = 'blog.fameandpartners.com'
 
   configatron.mailgun.mailbox.domain = 'fameandpartners.com.mailgun.org'
   configatron.mailgun.mailbox.username = 'postmaster@fameandpartners.com.mailgun.org'

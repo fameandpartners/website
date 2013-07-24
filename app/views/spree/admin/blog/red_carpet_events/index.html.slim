@@ -22,7 +22,8 @@
           td= post.occured_at_formatted
           - if can? :toggle_publish, post
             td[data-url="#{toggle_publish_admin_blog_red_carpet_event_path(post)}"]
-              = check_box_tag :published, '', post.published?
+              =' check_box_tag :published, '', post.published?
+              = link_to '[Preview]', blog_red_carpet_post_url(post.slug, :host => configatron.blog_host), :target => :blank
           - else
             td= post.state
           td= post.created_at_formatted

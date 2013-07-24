@@ -30,7 +30,8 @@
             td= post.featured
           - if can? :toggle_publish, post
             td[data-url="#{toggle_publish_admin_blog_post_path(post)}"]
-              = check_box_tag :published, '', post.published?
+              =' check_box_tag :published, '', post.published?
+              = link_to '[Preview]', blog_post_by_category_url(post.category.slug, post.slug, :host => configatron.blog_host), :target => :blank
           - else
             td= post.state
           td= post.created_at_formatted
