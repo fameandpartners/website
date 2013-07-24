@@ -189,23 +189,6 @@ ActiveRecord::Schema.define(:version => 20130723181942) do
     t.date     "required_at"
   end
 
-  create_table "data_migrations", :id => false, :force => true do |t|
-    t.string "version", :null => false
-  end
-
-  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
-
-  create_table "inspirations", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.string   "name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
   create_table "product_style_profiles", :force => true do |t|
     t.integer  "product_id"
     t.integer  "glam"
@@ -486,6 +469,27 @@ ActiveRecord::Schema.define(:version => 20130723181942) do
   end
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
+
+  create_table "spree_pages", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "slug"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "show_in_header",           :default => false, :null => false
+    t.boolean  "show_in_footer",           :default => false, :null => false
+    t.string   "foreign_link"
+    t.integer  "position",                 :default => 1,     :null => false
+    t.boolean  "visible",                  :default => true
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.string   "layout"
+    t.boolean  "show_in_sidebar",          :default => false, :null => false
+    t.string   "meta_title"
+    t.boolean  "render_layout_as_partial", :default => false
+  end
+
+  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
