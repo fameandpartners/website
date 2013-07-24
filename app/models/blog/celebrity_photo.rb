@@ -93,6 +93,7 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
       "delete_type" => "DELETE",
       "id" => self.id,
       "celebrity_id" => celebrity.try(:id),
+      "post_id" => post.try(:id),
       "primary" => celebrity.try(:primary_photo) == self
     }
   end

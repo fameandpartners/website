@@ -76,6 +76,14 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
     head :ok
   end
 
+  def assign_post
+    post = Blog::Post.red_carpet.find_by_id(params[:post_id])
+    photo = Blog::CelebrityPhoto.find(params[:id])
+    photo.post = post
+    photo.save
+    head :ok
+  end
+
   private
 
   def model_class

@@ -5,11 +5,11 @@
         ul
           li.with-dropdown[class="#{celebrities_page? ? 'active' : ''}"]
             = link_to 'Celebrity Style', blog_celebrities_path
-            .dropdown-menu
-              ul
+            .dropdown-menu-wrapper
+              ul.dropdown-menu
+                li.title = link_to 'All Celebrities', blog_celebrities_path, class: ''
                 - @featured_celebrities.each do |celebrity|
                   li = link_to celebrity.fullname, blog_celebrity_path(celebrity.slug)
-                li = link_to 'All Celebrities', blog_celebrities_path, class: 'btn'
           li[class="#{red_carpet_posts_page? ? 'active' : ''}"] = link_to 'Red Carpet Events', blog_red_carpet_posts_path
           - @categories.each do |category|
             li[class="#{simple_posts_page? && params[:category_slug] == category.slug ? 'active' : ''}"] = link_to category.name, blog_posts_by_category_path(category.slug)

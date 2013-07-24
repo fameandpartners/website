@@ -156,6 +156,7 @@ FameAndPartners::Application.routes.draw do
         resources :celebrity_photos do
           member do
             put :assign_celebrity
+            put :assign_post
             put :make_primary
           end
         end
