@@ -25,8 +25,8 @@ class Blog::CelebritiesController < BlogBaseController
   def show
     @celebrity = Blog::Celebrity.find_by_slug!(params[:slug])
 
-    title @celebrity.full_name
-    description "Follow #{@celebrity.full_name}'s fashion style."
+    title @celebrity.fullname
+    description "Follow #{@celebrity.fullname}'s fashion style."
 
     if params[:type] == 'posts'
       @posts = @celebrity.posts.red_carpet_posts
