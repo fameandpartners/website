@@ -4,7 +4,7 @@
       = render 'users/shared/tabs', active_tab: 'account_settings'
       #settings.tab-content
         h1.page-title Account Settings
-        = form_for @user, as: :profile, :url => profile_path, remote: true, :method => :put do |f|
+        = form_for @user, :as => :profile, :url => profile_path, :remote => true, :method => :put, :html => { :class => 'form' } do |f|
           input id="fileupload" type="file" style='display: none;'
           .grid-container
             .grid-50

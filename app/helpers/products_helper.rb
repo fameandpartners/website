@@ -18,7 +18,7 @@ module ProductsHelper
     description_text = product.property('short_description') || product.description
     truncate(description_text, length: 80, separator: ' ')
   rescue
-    'no description available'
+    t('product_has_no_description')
   end
 
   def product_video(product, options = {})
@@ -58,7 +58,7 @@ module ProductsHelper
     link_options[:class] = (variant) ? 'active add-wishlist' : 'add-wishlist'
     link_options[:class] = in_wishlist?(variant) ? 'active add-wishlist' : 'add-wishlist'
 
-    link_to 'Like item', '#', link_options
+    link_to 'Wish list', '#', link_options
   end
 
   def in_wishlist?(variant)

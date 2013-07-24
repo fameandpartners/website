@@ -15,7 +15,7 @@ class CartSerializer < ActiveModel::Serializer
     if object.shipment.present? 
       object.shipment.display_amount.to_s
     else
-      Spree::Money.new(0).to_s
+      nil
     end
   end
 
@@ -24,7 +24,11 @@ class CartSerializer < ActiveModel::Serializer
   end
 
   def display_adjustment_total
-    object.display_adjustment_total.to_s
+    if object.display_adjustment_total.money.cents > 0
+      object.display_adjustment_total.to_s
+    else
+      nil
+    end
   end
 
   def display_promotion_total

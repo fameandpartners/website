@@ -34,5 +34,10 @@
       #product-items-prev
       ul#product-items.products-list.grid-container.featured
         - @featured_products.each do |product|
-          = render 'shared/product', product: product, colors: @colors[product.id]
+          li.product-item.grid-25
+            .thumbnail
+              .like = add_to_wishlist_link(product)
+              = link_to product_image(product, itemprop: "image", width: 243, height: 352, alt: product.name), spree.product_path(product)
+            .name = link_to product.name, spree.product_path(product)
+            .price = product.price_in(current_currency).display_price
       #product-items-next

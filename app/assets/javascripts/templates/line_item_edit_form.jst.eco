@@ -1,5 +1,7 @@
 <div class="item">
-  <div class="image"></div>
+  <div class="image">
+    <img src="<%= @line_item.product_image %>" width="136" height="200" />
+  </div>
   <div class="item-details">
     <div class="name">
       Hello

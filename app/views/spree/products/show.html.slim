@@ -45,6 +45,7 @@ ruby:
                 = image_tag celebrity.photo.url(:preview)
               .inspiration
                 = celebrity.celebrity_name
+                = celebrity.celebrity_description
 
         .share-buttons
           = share_buttons
@@ -68,32 +69,40 @@ ruby:
               - sizes.each do |size|
                 option{value=size} = size
           = link_to 'What size am i?', '#', class: 'info'
-        .body-shapes
-          .desc The body shapes that this dress suits:
-          ul
-            - @product.style_profile.suitable_shapes.each do |shape|
-              = link_to '#' do
-                = image_tag('http://placehold.it/60x84', alt: shape.humanize, title: shape.humanize)
+        - if @product.style_profile
+          .body-shapes
+            .desc The body shapes that this dress suits:
+            ul
+              - @product.style_profile.suitable_shapes.each do |shape|
+                = link_to spree.products_path(body_shapes: [shape]) do
+                  = image_tag('http://placehold.it/60x84', alt: shape.humanize, title: shape.humanize)
         .buy-wishlist
           = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
           = add_to_wishlist_link(@product)
         .tabs
           ul.tabs-links
-            li = link_to 'Description', '#description'
-            li = link_to 'Size and fit', '#sizes'
-            li = link_to 'Details', '#detials'
-            li = link_to 'Styling Notes', '#notes'
+            li.active = link_to 'Description', '#description'
+            - if @product.property('fit').present?
+              li = link_to 'Size and fit', '#sizes'
+            li = link_to 'Details', '#details'
           #description.tab-content
-            = @product.description
+            - if (description = product_description(@product)).present?
+              = description
+            - else
+              = t('product_has_no_description')
           #sizes.tab-content
             = @product.property('fit')
           #details.tab-content
             | Material:
             = @product.property('fabric')
+            br
             | Weight:
             = @product.property('weight')
-          #notes.tab-content
-            | Tab content notes
+            - if style_profile = @product.style_profile
+              br
+              | Suits to body shape:
+              - style_profile.suitable_shapes.each do |shape|
+                = "#{shape.humanize}: #{style_profile[shape]}/10"
 
   .page-name
     .inner

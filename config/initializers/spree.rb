@@ -23,6 +23,8 @@ Spree.config do |config|
     'large' => '460x590#',
     'xlarge' => '1280x800>'
   }.to_json
+
+  config.currency = 'AUD'
 end
 
 Spree.user_class = "Spree::User"

@@ -17,8 +17,11 @@
       Shipping
     </div>
     <div class="desc">
-      <span><%= @order.currency %></span>
-      <%= @order.display_promotion_total %>
+      <% if @order.display_promotion_total?: %>
+        <span><%= @order.currency %></span>
+        <%= @order.display_promotion_total %>
+      <% else %>
+        Free
     </div>
     </li>
     <li>
@@ -26,8 +29,11 @@
       Promotion
     </div>
     <div class="desc">
-      <span><%= @order.currency %></span>
-      <%= @order.display_adjustment_total %>
+      <% if @order.display_adjustment_total?: %>
+        <span><%= @order.currency %></span>
+        <%= @order.display_adjustment_total %>
+      <% else %>
+        Free
     </div>
     </li>
     <li class="totals">
@@ -35,8 +41,7 @@
       Total
     </div>
     <div class="desc">
-      <span><%= @order.currency %></span>
-      <%= @order.display_total %>
+      <span><%= @order.currency %></span><%= @order.display_total %>
       <div class="taxes">
         Including GST
       </div>

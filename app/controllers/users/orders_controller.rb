@@ -1,7 +1,7 @@
 class Users::OrdersController < Users::BaseController
   def index
     user = try_spree_current_user
-    @orders = user.orders
+    @orders = user.orders.complete
 
     respond_with(@orders) do |format|
       format.html {}

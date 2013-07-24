@@ -6,6 +6,5 @@ class IndexController < Spree::StoreController
 
   def show
     @featured_products = Spree::Product.active.featured.uniq
-    @colors = Products::ColorsSearcher.new(@featured_products).retrieve_colors
   end
 end

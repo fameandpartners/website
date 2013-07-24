@@ -7,6 +7,7 @@ class LineItemSerializer < ActiveModel::Serializer
 
   attributes :count_on_hand,
     :image_small,
+    :product_image,
     :money, 
     :price,
     :product_name,
@@ -24,11 +25,15 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def image_small
-    if image = object.variant.product.images.first
-      image.attachment(:small)
-    else
-      '/assets/noimage/product.png'
-    end
+    image.present? ? image.attachment(:small) : '/assets/noimage/product.png'
+  end
+
+  def product_image
+    image.present? ? image.attachment(:product) : '/assets/noimage/product.png'
+  end
+
+  def image
+    @image ||= object.variant.product.images.first
   end
 
   def money
