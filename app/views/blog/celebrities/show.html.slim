@@ -47,7 +47,7 @@
                           - else
                             = link_to photo.post.title, blog_post_by_category_path(photo.post.category.slug, photo.post.slug)
                   .love-share
-                    .love-hate
+                    /.love-hate
                       .icons[data-id="#{photo.id}"]
                         - if @photo_votes.present?
                           - vote = @photo_votes.detect {|v| v.celebrity_photo_id == photo.id}

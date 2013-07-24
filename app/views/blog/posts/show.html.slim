@@ -58,7 +58,7 @@
                       .name= celebrity.fullname
                       .event= @post.title
                   .love-share
-                    .love-hate
+                    /.love-hate
                       .icons[data-id="#{celebrity_photo.id}"]
                         - if @photo_votes.present?
                           - vote = @photo_votes.detect {|v| v.celebrity_photo_id == celebrity_photo.id}
