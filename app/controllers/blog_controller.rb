@@ -11,7 +11,6 @@ class BlogController < BlogBaseController
         user_id: current_spree_user.id, celebrity_photo_id: @latest_photos.map(&:id)
       )
     end
-    generate_breadcrumbs
   end
 
   private
