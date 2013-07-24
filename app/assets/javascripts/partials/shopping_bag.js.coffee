@@ -11,7 +11,6 @@ $ ->
       window.shoppingBag.container = $('.first-level .shopping-bag')
 
       shoppingBag.updateElementsHandlers()
-      #shoppingBag.updateCarousel()
       shoppingBag.container.find("#shopping-bag-popup-wrapper").hide()
       shoppingBag.container.find(".shopping-bag-toggler").on(
         'click', shoppingBag.toggleVisibilityClickHandler
@@ -33,11 +32,17 @@ $ ->
       else
         shoppingBag.show()
 
+    offBagClickHandler: (e) ->
+      if shoppingBag.container.has($(e.target)).length == 0
+        $(document).off('click', shoppingBag.offBagClickHandler)
+        window.shoppingBag.hide()
+
     show: () ->
       if !shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
         shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow", () ->
           shoppingBag.updateCarousel() if !shoppingBag.carouselEnabled
         )
+      $(document).on('click', shoppingBag.offBagClickHandler)
       window.shoppingBag
 
     hide: () ->
