@@ -15,11 +15,7 @@ module OrdersHelper
   end
 
   def show_order_adjustment_total(order)
-    if order.display_adjustment_total && order.display_adjustment_total.money.cents > 0
-      content_tag('span', order.currency) + order.display_adjustment_total
-    else
-      'Free'
-    end
+    content_tag('span', order.currency) + order.display_adjustment_total
   end
 
   def show_order_shipment_total(order)

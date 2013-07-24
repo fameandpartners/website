@@ -87,8 +87,6 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                 li = link_to 'View All', spree.products_path
                 - available_product_ranges.each do |taxon|
                   li = link_to taxon.name, spree.products_path(taxons: { range: taxon.id})
-                - available_product_styles.each do |taxon|
-                  li = link_to taxon.name, spree.products_path(taxons: { style: taxon.id})
           - if spree_user_signed_in?
             li *{:class => request_path?("#{recommended_dresses_path}") && 'active' }
               = link_to 'Personalised Boutique', recommended_dresses_path
