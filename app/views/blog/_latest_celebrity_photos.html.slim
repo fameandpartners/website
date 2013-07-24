@@ -10,14 +10,11 @@
         li[data-name="#{celebrity_photo.celebrity.fullname}" data-date="#{celebrity_photo.created_at_formatted}" data-photo-url="#{celebrity_photo.photo.url(:preview)}"]
           .zoom
           .celebrity-photo
-            = image_tag celebrity_photo.photo.url(:small), width: 269, height: 375, alt: ''
+            = link_to blog_celebrity_path(celebrity_photo.celebrity.slug) do
+              = image_tag celebrity_photo.photo.url(:small), width: 269, height: 375, alt: ''
             .overlay
-              - post = celebrity_photo.post
-              - if post.present? && post.published?
-                .name= celebrity_photo.celebrity.fullname
-              - else
-                .name= link_to celebrity_photo.celebrity.fullname, blog_celebrity_path(celebrity_photo.celebrity.slug)
-              - if post.present?
+              .name= link_to celebrity_photo.celebrity.fullname, blog_celebrity_path(celebrity_photo.celebrity.slug)
+              - if post = celebrity_photo.post
                 - if post.published?
                   .event
                     - if post.red_carpet?
