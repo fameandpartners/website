@@ -76,33 +76,33 @@
           - else
             .empty-results No photos found
 
-      .post-comments
-        .block-comments
-          #disqus_thread
+      /.post-comments
+      /  .block-comments
+      /    #disqus_thread
     = render 'shared/blog_sidebar'
 
-javascript:
-  window.main_dicuss_container = '.post-comments .block-comments'
-  window.main_disqus_url = window.disqus_url =  "http://fameandpartners.com/red-carpet-events/#{@post.slug}"
-  window.main_disqus_identifier = window.disqus_identifier = "posts-#{@post.slug}"
-
-javascript:
-  var disqus_shortname = 'fameandpartners';
-  (function () {
-    var s = document.createElement('script'); s.async = true;
-    s.type = 'text/javascript';
-    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-  }());
-
-
-javascript:
-  var disqus_shortname = 'fameandpartners';
-  (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+/javascript:
+/  window.main_dicuss_container = '.post-comments .block-comments'
+/  window.main_disqus_url = window.disqus_url =  "http://fameandpartners.com/red-carpet-events/#{@post.slug}"
+/  window.main_disqus_identifier = window.disqus_identifier = "posts-#{@post.slug}"
+/
+/javascript:
+/  var disqus_shortname = 'fameandpartners';
+/  (function () {
+/    var s = document.createElement('script'); s.async = true;
+/    s.type = 'text/javascript';
+/    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+/    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+/  }());
+/
+/
+/javascript:
+/  var disqus_shortname = 'fameandpartners';
+/  (function() {
+/    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+/    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+/    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+/  })();
 
 noscript
   ' Please enable JavaScript to view the
