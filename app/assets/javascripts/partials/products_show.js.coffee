@@ -8,6 +8,10 @@ $(".products.show").ready ->
   carousel = $("#product-items").carouFredSel(
     window.helpers.get_horizontal_carousel_options(height: 560)
   )
+  # enable images carousel
+  $("#product-images").carouFredSel(
+    window.helpers.get_vertical_carousel_options(height: 528)
+  )
 
   # show big images from carouseled small images
   viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()

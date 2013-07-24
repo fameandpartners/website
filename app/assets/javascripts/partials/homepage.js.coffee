@@ -1,6 +1,8 @@
 $(".index.show").ready ->
   # enable products scroll
-  $("#product-items").carouFredSel(window.helpers.get_horizontal_carousel_options())
+  $(".featured#product-items").carouFredSel(
+    window.helpers.get_horizontal_carousel_options()
+  )
 
   # add quick view feature
   window.helpers.quickViewer.init()
