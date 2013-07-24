@@ -3,7 +3,7 @@ header.blog
     .logo
       = link_to 'Fame&Partners', root_path
     nav
-      ul
+      /ul
         - unless spree_user_signed_in?
           li = link_to 'Sign in', spree_login_path, class: 'btn transparent'
           li = link_to 'Sign up', spree_signup_path, class: 'btn pink'
