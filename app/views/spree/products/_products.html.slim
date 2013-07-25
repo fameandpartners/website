@@ -1,5 +1,7 @@
+- info = selected_products_info
 .ad
-p = browse_page_description(params[:taxons])
+  h2 style="padding: 10px;" = info[:title]
+  p style="padding: 10px;" = info[:description]
 .results-sort.clearfix
   .results-sort-inner
     .results.fleft = pluralize(products.length, 'result')

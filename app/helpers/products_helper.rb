@@ -72,17 +72,27 @@ module ProductsHelper
     render 'shared/share_buttons'
   end
 
-  # show description from range taxon or from all
-  def browse_page_description(selected_taxons = {})
-    default_description = "Fame & Partners formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom."
-    selected_range_taxons = (selected_taxons || {})[:range]
-    return default_description if selected_range_taxons.blank?
+  def selected_products_info
+    full_range_info = { 
+      title: 'Full Range',
+      description: 'Fame & Partners formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.' }
+    multiple_collections_info = {
+      title: "Fame & Partners Formal Dresses",
+      description: "High fashion dresses."
+    }
+    selected_collections = (params[:taxons] || {})[:range]
 
-    selected_taxon = available_product_ranges.find{|t| t.id == selected_range_taxons.first.to_i }
-    if selected_taxon.present?
-      selected_taxon.description || default_description
+    if selected_collections.blank?
+      full_range_info
+    elsif selected_collections.size > 1
+      multiple_collections_info
     else
-      default_description
+      taxon = available_product_ranges.find{|t| t.id == selected_collections.first.to_i }
+      return full_range_info if taxon.blank?
+      {
+        title: taxon.name,
+        description: taxon.description || multiple_collections_info[:description]
+      }
     end
   end
 end
