@@ -180,22 +180,11 @@
           padding: 4px 0 0;
           text-align: center;
         }
-        .face {
-          width: 92px;
-          height: 92px;
-          overflow: hidden;
-          position: absolute;
-          bottom: -20px;
-          right: -13px;
-          border: 5px solid #e8e8e8;
-          border-radius: 50%;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-        }
         &:first-child {
           margin: 0;
         }
         &.active {
-          label, .face {
+          label {
             border-color: #bffbef;
           }
         }
@@ -763,5 +752,169 @@
       opacity: 0;
       filter: alpha(opacity=0);
     }
+  }
+}
+
+.quiz-hair {
+  text-align: center;
+  width: 684px;
+  margin: 0 auto;
+  li {
+    display: inline-block;
+    width: 168px;
+    height: 118px;
+    margin: 26px 0 0;
+    position: relative;
+    &.active {
+      .hair-image {
+        border-color: #BFFBEF;
+      }
+    }
+  }
+  .hair-image {
+    position: absolute;
+    width: 118px;
+    height: 118px;
+    top: 0;
+    left: 20px;
+    border: 5px solid transparent;
+    border-radius: 50%;
+    img {
+      border-radius: 50%;
+    }
+  }
+  .hair-label {
+    margin: 58px 0 0;
+    position: relative;
+    z-index: 2;
+    span {
+      min-width: 102px;
+      padding: 3px 10px 0;
+      display: inline-block;
+      background: #e8e8e8;
+      text-transform: uppercase;
+      font-size: 12px;
+      text-align: center;
+    }
+    input {
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+  }
+}
+
+.body-shapes {
+  text-align: center;
+  margin: 60px 0 0;
+  li {
+    width: 116px;
+    margin: 0 12px;
+    cursor: pointer;
+    display: inline-block;
+    &.active {
+      .label {
+        span {
+          background: #bffbef;
+        }
+      }
+    }
+  }
+  .label {
+    margin: 8px 0 0;
+    span {
+      padding: 4px 0 0;
+      display: block;
+      background: #e8e8e8;
+      text-transform: uppercase;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+}
+
+.quiz-sizes {
+  overflow: hidden;
+  width: 878px;
+  margin: 0 auto;
+  .question {
+    margin: 80px 0 34px;
+    text-align: center;
+    font: italic 400 24px/1 $fontFour;
+  }
+  .sizes {
+    text-align: center;
+    li {
+      cursor: pointer;
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 5px 18px;
+      padding: 0 10px;
+      height: 45px;
+      min-width: 40px;
+      font: 400 30px/45px $fontOne;
+      text-transform: uppercase;
+      background: #ebebeb;
+      border-radius: 3px;
+      &.smaller {
+        font-size: 18px;
+        line-height: 22.5px;
+        width: 164px;
+      }
+      &.active {
+        background: #bffbef;
+      }
+    }
+  }
+  .typical {
+    float: left;
+    width: 308px;
+  }
+  .bra {
+    width: 494px;
+    float: right;
+    li {
+      min-width: 65px;
+    }
+  }
+}
+
+.fashion-things {
+  text-align: center;
+  li {
+    display: inline-block;
+    width: 144px;
+    margin: 32px 0 0 3px;
+    &:first-child {
+      margin: 0;
+    }
+    &.active {
+      .image {
+        img {
+          border-color: #bffbef;
+        }
+      }
+    }
+  }
+  .image {
+    position: relative;
+    img {
+      border: 3px solid #eaeaea;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    }
+    .label {
+      position: absolute;
+      left: 0;
+      bottom: 14px;
+      width: 100%;
+      text-align: center;
+      padding: 3px 0 0;
+      background: #e8e8e8;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+  }
+  .text {
+    margin: 14px 10px 0;
+    font: 400 13px/1.2 $fontOne;
   }
 }
