@@ -75,7 +75,6 @@ window.helpers.quickViewer = {
     # show big images from carouseled small images
     container = @container
     options =
-      height: 528
       prev:
         button: '#quick-view-product-images-up'
       next:

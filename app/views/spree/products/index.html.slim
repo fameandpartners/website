@@ -3,7 +3,7 @@
     .grid-25.filters
       .main-title Refine by
       .filters-block
-        .title Our range
+        .title Collection
         ul.filters-boxes.range
           - selected_items = (params[:taxons].present? ? params[:taxons][:range] : {}) || []
           li class=(selected_items.blank? ? 'active' : '')

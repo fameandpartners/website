@@ -114,4 +114,6 @@ $(function(){
   $('#toggle-selectbox').chosen();
 
   $('.selectbox').chosen();
+
+  window.initHoverableProductImages()
 });

@@ -6,11 +6,11 @@ $(".products.show").ready ->
 
   # carousel for similar or related products
   carousel = $("#product-items").carouFredSel(
-    window.helpers.get_horizontal_carousel_options(height: 560)
+    window.helpers.get_horizontal_carousel_options()
   )
   # enable images carousel
   $("#product-images").carouFredSel(
-    window.helpers.get_vertical_carousel_options(height: 528)
+    window.helpers.get_vertical_carousel_options()
   )
 
   # show big images from carouseled small images
@@ -26,6 +26,8 @@ $(".products.show").ready ->
   $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
 
   productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
+
+  window.initHoverableProductImages()
 
   # add product to cart
   $('.buy-wishlist .buy-now').on('click', (e) ->

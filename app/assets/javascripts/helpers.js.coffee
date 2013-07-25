@@ -30,10 +30,20 @@ window.setCurrentPath = (path) ->
   url = "#{ window.location.origin }#{ path }"
   window.history.pushState({path:url},'',url)
 
-window.switchToAltImage = (image) ->
-  $image = $(image)
-  $image.removeAttr('onerror')
-  if $image.attr('alt_image')
-    no_image_src = "/assets/" + $image.attr('alt_image')
-    $image.attr('src', no_image_src).removeAttr('onmouseover').removeAttr('onmouseout')
+window.switchToAltImage = (element, no_image_src) ->
+  $(element).attr('src', no_image_src).removeAttr('onerror')
   return true
+
+window.initHoverableProductImages = () ->
+  $('img[second_image]').each (index, element) ->
+    $image = $(element)
+    original_image  = $image.attr('src')
+    second_image    = $image.attr('second_image')
+
+    # provide safe multiple calls on page
+    $image.removeAttr('second_image')
+
+    $image.parents('.thumbnail').hover(
+      () -> $image.attr('src', second_image),
+      () -> $image.attr('src', original_image)
+    )

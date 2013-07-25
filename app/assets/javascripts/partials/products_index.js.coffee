@@ -117,6 +117,7 @@ $(".products.index").ready ->
 
       window.addSwitcherToAltImage() if window.addSwitcherToAltImage
       productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
+      window.initHoverableProductImages()
   }
 
   window.helpers.quickViewer.init()
