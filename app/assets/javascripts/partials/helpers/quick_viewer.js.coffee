@@ -70,21 +70,7 @@ window.helpers.quickViewer = {
     @container.hide()
 
   updatePopupHandlers: (product_variants) ->
-    window.helpers.enableTabs(@container.find('.tabs'))
-
-    # show big images from carouseled small images
-    container = @container
-    options =
-      prev:
-        button: '#quick-view-product-images-up'
-      next:
-        button: '#quick-view-product-images-down'
-    setTimeout () ->
-        container.find("#product-images").carouFredSel(
-          window.helpers.get_vertical_carousel_options(options)
-        )
-        viewer = window.helpers.buildImagesViewer(container).init()
-      , 100
+    window.helpers.enableTabs(helpers.quickViewer.container.find('.tabs'))
 
     # init product variants selector
     selector = window.helpers.createProductVariantsSelector(@container).init(product_variants)
@@ -92,6 +78,20 @@ window.helpers.quickViewer = {
     # add product to cart
     @popupContainer.find('.buy-wishlist .buy-now').on('click', window.helpers.quickViewer.onBuyButtonClickHandler)
     productWishlist.addWishlistButtonActions(@popupContainer.find(".buy-wishlist .add-wishlist"))
+
+    # code should be executed after images loaded in order to correctly set carousel height
+    @popupContainer.waitForImages(() ->
+      # show big images from carouseled small images
+      options =
+        prev:
+          button: '#quick-view-product-images-up'
+        next:
+          button: '#quick-view-product-images-down'
+      helpers.quickViewer.container.find("#product-images").carouFredSel(
+        helpers.get_vertical_carousel_options(options)
+      )
+    )
+    helpers.buildImagesViewer(helpers.quickViewer.container).init()
 
   movePopupToCenter: () ->
     window.helpers.quickViewer.container.center()

@@ -7,6 +7,7 @@
 //= require libs/jquery.readyselector
 //= require libs/jquery.chosen.min
 //= require libs/jquery.mousewheel
+//= require libs/jquery.waitforimages.min
 //= require libs/underscore-min
 //= require fancybox
 //= require helpers
