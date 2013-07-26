@@ -48,8 +48,6 @@ ruby:
         .price.sale
           span = @product.price_in(current_currency).display_price
         .delivery 3-4 week delivery
-      .desc.small
-        p = @product.description
       .colors-choser
         .label Choose a color:
         .colors
@@ -65,5 +63,34 @@ ruby:
       .buy-wishlist
         = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
         = add_to_wishlist_link(@product)
+
+      .tabs
+        ul.tabs-links
+          li.active = link_to 'Description', '#description', style: 'padding: 0 15px'
+          - if @product.property('fit').present?
+            li = link_to 'Size and fit', '#sizes', style: 'padding: 0 15px'
+          li = link_to 'Details', '#details', style: 'padding: 0 15px'
+          li = link_to 'Notes', '#notes', style: 'padding: 0 15px'
+        #description.tab-content
+          - if (description = product_description(@product)).present?
+            = description
+          - else
+            = t('product_has_no_description')
+        #sizes.tab-content
+          = @product.property('fit')
+        #details.tab-content
+          | Material:
+          = @product.property('fabric')
+          br
+          | Weight:
+          = @product.property('weight')
+          - if style_profile = @product.style_profile
+            br
+            | Suits to body shape:
+            - style_profile.suitable_shapes.each do |shape|
+              = "#{shape.humanize}: #{style_profile[shape]}/10"
+        #notes.tab-content
+          = product_description(@product)
+
       .share-buttons
         = share_buttons
