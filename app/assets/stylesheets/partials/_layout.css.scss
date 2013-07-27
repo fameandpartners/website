@@ -361,12 +361,12 @@ header {
       position: absolute;
     }
     .logo {
-      margin: 10px auto;
-      width: 290px;
+      margin: 20px auto;
       float: none;
+      text-align: left;
+      width: 389px;
       a {
         width: 100%;
-        background-image: image-url('logo-small.png');
       }
     }
     .wrap {
@@ -435,6 +435,7 @@ header {
     text-align: center;
   }
   .celebrity-title {
+    position: relative;
     h1 {
       font-size: 32px;
       text-align: left;
