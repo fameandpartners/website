@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723181942) do
+ActiveRecord::Schema.define(:version => 20130726142043) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -187,6 +187,23 @@ ActiveRecord::Schema.define(:version => 20130723181942) do
     t.string   "size"
     t.boolean  "ghost",         :default => true
     t.date     "required_at"
+  end
+
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "product_style_profiles", :force => true do |t|
@@ -470,27 +487,6 @@ ActiveRecord::Schema.define(:version => 20130723181942) do
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
 
-  create_table "spree_pages", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.string   "slug"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.boolean  "show_in_header",           :default => false, :null => false
-    t.boolean  "show_in_footer",           :default => false, :null => false
-    t.string   "foreign_link"
-    t.integer  "position",                 :default => 1,     :null => false
-    t.boolean  "visible",                  :default => true
-    t.string   "meta_keywords"
-    t.string   "meta_description"
-    t.string   "layout"
-    t.boolean  "show_in_sidebar",          :default => false, :null => false
-    t.string   "meta_title"
-    t.boolean  "render_layout_as_partial", :default => false
-  end
-
-  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
-
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
     t.string   "name"
@@ -757,6 +753,16 @@ ActiveRecord::Schema.define(:version => 20130723181942) do
     t.datetime "updated_at",                                                          :null => false
     t.string   "name"
     t.boolean  "show_rate_in_label",                               :default => true
+  end
+
+  create_table "spree_taxon_banners", :force => true do |t|
+    t.integer  "spree_taxon_id"
+    t.string   "title"
+    t.text     "description"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "spree_taxonomies", :force => true do |t|

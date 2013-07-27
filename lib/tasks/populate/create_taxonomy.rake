@@ -53,7 +53,12 @@ def create_taxonomy_node(root_element_attributes, childs_info)
       permalink: "#{root_taxon.permalink}/#{name.parameterize('_')}",
       taxonomy_id: taxonomy.id
     ).first_or_create
-    child.update_attribute(:description, description)
+
+    if description.present?
+      banner = child.build_banner(description: description, title: name)
+      banner.save
+    end
+
     child.move_to_child_of(root_taxon)
   end
 end

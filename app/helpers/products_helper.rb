@@ -73,26 +73,7 @@ module ProductsHelper
   end
 
   def selected_products_info
-    full_range_info = { 
-      title: 'Full Range',
-      description: 'Fame & Partners formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.' }
-    multiple_collections_info = {
-      title: "Fame & Partners Formal Dresses",
-      description: "High fashion dresses."
-    }
-    selected_collections = (params[:taxons] || {})[:range]
-
-    if selected_collections.blank?
-      full_range_info
-    elsif selected_collections.size > 1
-      multiple_collections_info
-    else
-      taxon = available_product_ranges.find{|t| t.id == selected_collections.first.to_i }
-      return full_range_info if taxon.blank?
-      {
-        title: taxon.name,
-        description: taxon.description || multiple_collections_info[:description]
-      }
-    end
+    taxons = params[:taxons] || {}
+    Products::BannerInfo.new(taxons[:range]).get
   end
 end
