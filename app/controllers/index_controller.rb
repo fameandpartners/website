@@ -5,6 +5,10 @@ class IndexController < Spree::StoreController
   respond_to :html 
 
   def show
+    if params[:workshop]
+      session[:sign_up_reason] = 'workshop'
+    end
+
     @featured_products = Spree::Product.active.featured.uniq
   end
 end

@@ -58,6 +58,8 @@ class ApplicationController < ActionController::Base
           'Custom dress'
         when 'style_quiz' then
           'Style quiz'
+        when 'workshop' then
+          'Workshop'
       end
     end
   end

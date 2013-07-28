@@ -1,11 +1,21 @@
 Spree::UserRegistrationsController.class_eval do
   def new
     if params[:prom]
-      session[:sign_up_reason] = 'custom_dress'
       session[:spree_user_return_to] = main_app.new_custom_dress_path
     elsif params[:quiz]
       session[:show_quiz] = true
-      session[:sign_up_reason] = 'style_quiz'
+    end
+
+    if session[:sign_up_reason].blank?
+      if params[:prom]
+        session[:sign_up_reason] = 'custom_dress'
+      elsif params[:quiz]
+        session[:sign_up_reason] = 'style_quiz'
+      elsif params[:workshop]
+        session[:sign_up_reason] = 'workshop'
+      end
+    elsif params[:workshop]
+      session[:sign_up_reason] = 'workshop'
     end
 
     super
@@ -21,10 +31,13 @@ Spree::UserRegistrationsController.class_eval do
 
     if resource.new_record?
       resource.sign_up_via = Spree::User::SIGN_UP_VIA.index('Email')
+      resource.sign_up_reason = session[:sign_up_reason]
     end
 
     if resource.save
       CampaignMonitor.delay.synchronize(resource.email, resource, custom_fields)
+
+      session.delete(:sign_up_reason)
 
       set_flash_message(:notice, :signed_up)
       session[:spree_user_signup] = true

@@ -20,8 +20,6 @@ module Overrides
                 :class_name => '::UserStyleProfile',
                 :foreign_key => :user_id
 
-      SIGN_UP_VIA = %w( Email Facebook )
-
       def full_name
         [first_name, last_name].reject(&:blank?).join(' ')
       end
