@@ -8,6 +8,10 @@ Phone Number: <%= @dress.phone_number %>
 
 Formal/Event Date: <%= @dress.required_at %>
 
+<% if @dress.school_name.present? %>
+Enter your school name: <%= @dress.school_name %>
+<% end %>
+
 Dress Description: <%= @dress.description %>
 
 Size: <%= CustomDress::SIZES.invert[@dress.size] %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728141856) do
+ActiveRecord::Schema.define(:version => 20130728152030) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -187,6 +187,7 @@ ActiveRecord::Schema.define(:version => 20130728141856) do
     t.string   "size"
     t.boolean  "ghost",         :default => true
     t.date     "required_at"
+    t.string   "school_name"
   end
 
   create_table "data_migrations", :id => false, :force => true do |t|

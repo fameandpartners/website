@@ -10,6 +10,10 @@
     .input.string
       = f.label :required_at, 'Formal/Event Date'
       = f.text_field :required_at
+    - if current_spree_user.sign_up_reason.eql?('workshop')
+      .input.string
+        = f.label :school_name, 'Enter your school name'
+        = f.text_field :school_name
     .input.string
       label Choose your Typical Dress Size
       .hint Select the dress size you would typically wear.

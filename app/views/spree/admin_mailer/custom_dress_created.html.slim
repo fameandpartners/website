@@ -17,6 +17,11 @@ p
   b
     ' Formal/Event Date:
   = @dress.required_at
+- if @dress.school_name.present?
+  p
+    b
+      ' Enter your school name:
+    = @dress.school_name
 p
   b
     ' Dress Description:
@@ -29,7 +34,6 @@ p
 p
   b
     ' Size:
-  br
   = CustomDress::SIZES.invert[@dress.size]
 p
   b

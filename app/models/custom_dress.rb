@@ -19,6 +19,7 @@ class CustomDress < ActiveRecord::Base
 
   attr_accessible :phone_number,
                   :required_at,
+                  :school_name,
                   :size,
                   :color,
                   :description
@@ -48,6 +49,11 @@ class CustomDress < ActiveRecord::Base
             :format => {
               :allow_blank => true,
               :with => /^#(?:[0-9a-fA-F]{3}){1,2}$/
+            }
+
+  validates :school_name,
+            :presence => {
+              :if => proc{ spree_user.sign_up_reason.eql?('workshop') }
             }
 
   def self.find_ghost_for_user_by_id!(user_id, id)
