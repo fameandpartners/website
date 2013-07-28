@@ -53,43 +53,45 @@ FameAndPartners::Application.routes.draw do
   constraints blog_constraint do
     devise_for :spree_user,
                :class_name => 'Spree::User',
-               :controllers => { :sessions => 'spree/user_sessions',
-                                 :registrations => 'spree/user_registrations',
-                                 :passwords => 'spree/user_passwords',
-                                 :confirmations => 'spree/user_confirmations',
-                                 :omniauth_callbacks => 'spree/omniauth_callbacks'
+               :controllers => {:sessions => 'spree/user_sessions',
+                                :registrations => 'spree/user_registrations',
+                                :passwords => 'spree/user_passwords',
+                                :confirmations => 'spree/user_confirmations',
+                                :omniauth_callbacks => 'spree/omniauth_callbacks'
                },
                :skip => [:unlocks, :omniauth_callbacks],
-               :path_names => { :sign_out => 'logout' } do
-        get '/login' => 'spree/user_sessions#new'
-        get '/signup' => 'spree/user_registrations#new'
-        get '/logout' => 'spree/user_sessions#destroy'
-     end
+               :path_names => {:sign_out => 'logout'} do
+      get '/login' => 'spree/user_sessions#new'
+      get '/signup' => 'spree/user_registrations#new'
+      get '/logout' => 'spree/user_sessions#destroy'
+    end
 
-     get '/' => 'blog#index', as: :blog
+    get '/' => 'blog#index', as: :blog
 
-     get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
-     get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
+    mount Spree::Core::Engine, at: '/'
 
-     get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
-     get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
+    get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
+    get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
 
-     post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
-     post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
+    get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
+    get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
 
-     get '/stylists' => 'blog/authors#index', as: :blog_authors
-     get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
+    post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
+    post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
 
-
-     get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
-     get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
+    get '/stylists' => 'blog/authors#index', as: :blog_authors
+    get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
 
 
-     get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
-     get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+    get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
+    get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
 
-     get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
-     get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
+
+    get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
+    get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+
+    get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
+    get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
   end
 
   # Static pages
