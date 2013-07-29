@@ -8,7 +8,7 @@
         previousButtonText = button.html()
         button.addClass('adding')
         window.productWishlist.addProduct.call(productWishlist, variantId, {
-          success: () -> button.removeClass('adding').html('Unlike Item').addClass('active')
+          success: () -> button.removeClass('adding').html('Remove').addClass('active')
           failure: () -> button.removeClass('adding').html(previousButtonText).addClass('active')
         })
       )
