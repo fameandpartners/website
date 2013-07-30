@@ -38,7 +38,6 @@
     display: block;
   }
   ul {
-    margin: 0 34px;
     li {
       margin: 4px 0 0 12px;
       padding: 0 0 0 12px;
@@ -121,7 +120,7 @@ header {
     .inner {
       height: 29px;
       padding: 32px 0 0;
-      margin: 0 34px 20px;
+      margin: 0 0 20px;
     }
     .wishlist, .shopping-bag {
       float: left;
@@ -187,7 +186,6 @@ header {
   }
   .icons {
     float: left;
-    margin: 0 0 0 34px;
     li {
       float: left;
       margin: 0 0 0 20px;
@@ -227,10 +225,9 @@ header {
     }
   }
   .search {
-    margin: 0 34px 0 0;
     input {
       font: 400 14px/30px $fontOne;
-      color: #6c6c6c;
+      color: #acacac;
       width: 256px;
       height: 30px;
       padding: 0 34px 0 8px;
@@ -241,7 +238,6 @@ header {
   nav {
     font: 400 14px/1 $fontOne;
     text-transform: uppercase;
-    margin: 0 15px;
     a {
       color: #333;
       text-decoration: none;
@@ -309,6 +305,9 @@ header {
         }
         &:first-child {
           border-left: 0;
+          a {
+            padding-left: 0;
+          }
         }
         &.active {
           > a {
@@ -338,7 +337,7 @@ header {
     right: 0;
     border: 6px solid #f3f3f3;
     background: #fff;
-    padding: 4px;
+    padding: 2px 6px 6px;
     box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
   }
   &:before {

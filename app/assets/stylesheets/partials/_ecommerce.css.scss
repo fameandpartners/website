@@ -242,8 +242,7 @@
           text-decoration: none;
           font: 300 18px/40px $fontOne;
           &:hover {
-            background: #fff;
-            color: #737373;
+            background: #333;
           }
         }
       }
@@ -254,7 +253,8 @@
       }
     }
     .name {
-      margin: 12px 0 0;
+      margin: 12px 0 3px;
+      font-weight: 300;
       a {
         color: #333;
         text-transform: uppercase;
@@ -268,7 +268,7 @@
     }
     .price {
       color: #000;
-      font-weight: 700;
+      font-weight: 400;
       margin: 0 0 10px;
     }
     .colors {
@@ -305,6 +305,7 @@
   }
   &#product-items {
     margin-bottom: 0;
+    margin-top: 10px;
     min-height: 442px;
   }
   &.browse-products {
@@ -384,6 +385,7 @@
     height: 20px;
     text-align: center;
     background: #fff;
+    overflow: hidden;
     .addthis_toolbox > a {
       display: inline-block !important;
       float: none;
@@ -622,6 +624,8 @@
       }
       .desc {
         margin: 0 0 0 172px;
+        position: relative;
+        height: 189px;
         .name {
           margin: 30px 0 5px;
           text-transform: uppercase;
@@ -635,6 +639,9 @@
           height: 130px;
         }
         .wishlist {
+          position: absolute;
+          bottom: 0;
+          left: 0;
           a {
             display: inline-block;
             padding: 0 0 0 30px;
@@ -849,7 +856,7 @@
 
 .featured-dresses {
   background: image-url('icon-border-featured.png') 0 0 repeat-x #fff;
-  padding: 40px 0 0;
+  padding: 20px 0 0;
   margin: 20px 0 0;
   .wrap {
     position: relative;
@@ -1048,7 +1055,7 @@
     .results-sort-inner {
       margin: 0 19px;
       background: #f3f3f3;
-      padding: 5px 6px;
+      padding: 5px 10px;
       height: 25px;
       font: 300 14px/25px $fontOne;
       color: #999898;
@@ -1058,14 +1065,39 @@
       height: 25px;
     }
     .results {
-      padding: 0 6px 0 0;
+      padding: 0 10px 0 0;
       border-right: 1px solid #999898;
     }
     .sort {
-      padding: 0 0 0 6px;
+      padding: 0 0 0 10px;
       border-left: 1px solid #999898;
       select {
         margin: 0 0 0 4px;
+      }
+    }
+    .chzn-container {
+      margin: 1px 0 0 4px;
+      vertical-align: top;
+      min-width: 0;
+      text-transform: none;
+      .chzn-single {
+        height: 21px;
+        line-height: 21px;
+        background: #fff;
+        div {
+          b {
+            background-position: 0 2px;
+          }
+        }
+      }
+      &.chzn-with-drop {
+        .chzn-single {
+          div {
+            b {
+              background-position: -18px 2px;
+            }
+          }
+        }
       }
     }
   }
