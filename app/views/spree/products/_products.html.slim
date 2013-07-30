@@ -9,7 +9,7 @@
       ' Sort by
       - options = options_from_collection_for_select(Products::ProductsFilter.available_orders, :first, :second, params[:order])
       = select_tag "product_order", options, prompt: 'Choose'
-ul.products-list.grid-container
+ul.products-list.browse-products.grid-container
   - products.each do |product|
     li.product-item.grid-33
       .thumbnail

@@ -116,6 +116,7 @@ header {
   height: 169px;
   background: #fff;
   border-bottom: 1px solid #efefef;
+  box-shadow: 0 0 6px rgba(0, 0, 0, .2);
   .first-level {
     .inner {
       height: 29px;
@@ -352,6 +353,7 @@ header {
   &.blog {
     height: auto;
     background: transparent;
+    box-shadow: none;
     &:before {
       display: none;
     }
@@ -456,7 +458,7 @@ header {
 
 .facebook-signup {
   background: image-url('button-facebook-connect.png') 0 0 no-repeat;
-  width: 231px;
+  width: 192px;
   height: 33px;
   display: block;
   text-indent: -999px;
@@ -535,6 +537,7 @@ header {
   .sidebar {
     width: 328px;
     float: right;
+    margin: 0 0 80px;
     .block {
       margin: 16px 0 0;
       &:first-child {
