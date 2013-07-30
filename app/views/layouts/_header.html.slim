@@ -24,80 +24,81 @@
           li = link_to 'Sign out', spree_logout_path
 
 header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
-  .first-level
-    .wrap.no-overflow
-      .inner
-        .fleft
-          .logo = link_to 'Fame&Partners', root_path
-        .fright
-          .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
-          .shopping-bag
-            = link_to spree.cart_path, class: 'shopping-bag-toggler' do
-              .counter = current_order(true).item_count
-              ' Shopping bag
-            = render 'layouts/shopping_bag_content'
-  .second-level
-    .wrap
-      .inner
-        .fleft
-          ul.icons
-            li
-              .icon.quote
-              span
-                ' Free
-                br
-                ' Quote
-            li
-              .icon.shipping
-              span
-                ' Free
-                br
-                ' Shipping
-            li
-              .icon.returns
-              span
-                ' Free
-                br
-                ' Returns
-            li
-              .icon.guarantee
-              span
-                ' Fit
-                br
-                ' Guarantee
-            li
-              .icon.turnaround
-              span
-                ' 3 week
-                br
-                ' turnaround
-        .fright
-          .search
-            = form_tag blog_search_by_query_url(subdomain: :blog), method: :get do
-              input type="text" name="search" placeholder="Search the blog"
+  .header-wrapper
+    .first-level
+      .wrap.no-overflow
+        .inner
+          .fleft
+            .logo = link_to 'Fame&Partners', root_path
+          .fright
+            .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
+            .shopping-bag
+              = link_to spree.cart_path, class: 'shopping-bag-toggler' do
+                .counter = current_order(true).item_count
+                ' Shopping bag
+              = render 'layouts/shopping_bag_content'
+    .second-level
+      .wrap
+        .inner
+          .fleft
+            ul.icons
+              li
+                .icon.quote
+                span
+                  ' Free
+                  br
+                  ' Quote
+              li
+                .icon.shipping
+                span
+                  ' Free
+                  br
+                  ' Shipping
+              li
+                .icon.returns
+                span
+                  ' Free
+                  br
+                  ' Returns
+              li
+                .icon.guarantee
+                span
+                  ' Fit
+                  br
+                  ' Guarantee
+              li
+                .icon.turnaround
+                span
+                  ' 3 week
+                  br
+                  ' turnaround
+          .fright
+            .search
+              = form_tag blog_search_by_query_url(subdomain: :blog), method: :get do
+                input type="text" name="search" placeholder="Search the blog"
 
-  .level-three.main-nav
-    .wrap.no-overflow
-      nav.main
-        ul.clearfix
-          li.with-dropdown *{:class => request_path?('/products') && 'active' }
-            = link_to 'Collection', spree.products_path, title: "Custom made dresses from Fame & Partners"
-            .dropdown-menu-wrapper
-              ul.dropdown-menu
-                li = link_to 'View All', spree.products_path
-                - available_product_ranges.each do |taxon|
-                  li = link_to taxon.name, spree.products_path(taxons: { range: taxon.id})
-          - if spree_user_signed_in?
-            li *{:class => request_path?("#{recommended_dresses_path}") && 'active' }
-              = link_to 'Personalised Boutique', recommended_dresses_path
-          - else
-            li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
-          li *{:class => request_path?("#{how_it_works_path}") && 'active' }
-            = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
-          li *{:class => request_path?("/custom_dresses") && 'active' }
-            = link_to 'Custom Dresses', step1_custom_dresses_path, title: "Fame & Partners Custom Dresses"
-          li = link_to 'Blog', root_url(:subdomain => :blog), title: "Fame & Partners Blog"
-          li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
+    .level-three.main-nav
+      .wrap.no-overflow
+        nav.main
+          ul.clearfix
+            li.with-dropdown *{:class => request_path?('/products') && 'active' }
+              = link_to 'Collection', spree.products_path, title: "Custom made dresses from Fame & Partners"
+              .dropdown-menu-wrapper
+                ul.dropdown-menu
+                  li = link_to 'View All', spree.products_path
+                  - available_product_ranges.each do |taxon|
+                    li = link_to taxon.name, spree.products_path(taxons: { range: taxon.id})
+            - if spree_user_signed_in?
+              li *{:class => request_path?("#{recommended_dresses_path}") && 'active' }
+                = link_to 'Personalised Boutique', recommended_dresses_path
+            - else
+              li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
+            li *{:class => request_path?("#{how_it_works_path}") && 'active' }
+              = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
+            li *{:class => request_path?("/custom_dresses") && 'active' }
+              = link_to 'Custom Dresses', step1_custom_dresses_path, title: "Fame & Partners Custom Dresses"
+            li = link_to 'Blog', root_url(:subdomain => :blog), title: "Fame & Partners Blog"
+            li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
 
   javascript:
     window.bootstrap = {}
