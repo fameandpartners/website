@@ -1,4 +1,15 @@
-#content .quiz-box {
+.quiz-box .quiz-overlay {
+  background: #000;
+  background: rgba(0, 0, 0, .7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+}
+
+.quiz-wrapper-box {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -8,6 +19,7 @@
   margin: -275px 0 0 -550px;
   background: #fff;
   box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+  z-index: 6;
   .close-quiz {
     font: 700 18px/1 $fontOne;
     position: absolute;
@@ -16,6 +28,9 @@
     z-index: 2;
     cursor: pointer;
   }
+}
+
+.quiz-box {
   .quiz-box-inner {
     height: 530px;
     border: 13px solid #fff;
