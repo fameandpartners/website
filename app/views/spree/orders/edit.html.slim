@@ -4,6 +4,11 @@
       h1.title
         em shopping
         span Bag
+        .shipping-icon
+          .icon
+          ' Free shipping
+          br
+          ' on all items
   
   - if @order.line_items.empty?
     .empty-cart(data-hook="empty_cart")

@@ -555,6 +555,22 @@
   }
 }
 
+#orders .shipping-icon {
+  font: 300 10px/1.2 $fontOne;
+  text-transform: uppercase;
+  color: #000;
+  display: inline-block;
+  margin: 3px 0 0 10px;
+  vertical-align: top;
+  .icon {
+    float: left;
+    width: 25px;
+    height: 20px;
+    margin: 2px 5px 0 0;
+    background: image-url('icons-shipping.png') 0 -120px no-repeat;
+  }
+}
+
 .cart-page {
   margin: 38px 0 0;
   font: 300 14px/1.2 $fontOne;
@@ -578,6 +594,7 @@
     .item {
       border-bottom: 1px solid #e0e0e0;
       .grid-50, .grid-30, .grid-20 {
+        background: #fff;
         height: 236px;
         border-right: 1px solid #e0e0e0;
       }
