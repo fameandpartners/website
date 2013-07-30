@@ -116,6 +116,7 @@ header {
   height: 169px;
   background: #fff;
   border-bottom: 1px solid #efefef;
+  box-shadow: 0 0 6px rgba(0, 0, 0, .2);
   .first-level {
     .inner {
       height: 29px;
@@ -352,6 +353,7 @@ header {
   &.blog {
     height: auto;
     background: transparent;
+    box-shadow: none;
     &:before {
       display: none;
     }
