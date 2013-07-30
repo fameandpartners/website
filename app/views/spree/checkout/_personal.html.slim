@@ -17,15 +17,14 @@
         = form.label :email
         = form.text_field :email, :style => 'width: 601px;'
   .grid-container
-    .grid-100
+    .grid-50
       .input
         = form.label :password
-        = form.password_field :password, :style => 'width: 601px;'
-  .grid-container
-    .grid-100
+        = form.password_field :password
+    .grid-50
       .input
         = form.label :password_confirmation
-        = form.password_field :password_confirmation, :style => 'width: 601px;'
+        = form.password_field :password_confirmation
   .grid-container
     .grid-100.center
       .place-order
