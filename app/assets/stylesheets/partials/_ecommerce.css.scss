@@ -197,7 +197,11 @@
   margin: 36px 0 40px;
   font: 400 14px/1.1 $fontOne;
   .product-item {
+    vertical-align: top;
     margin-bottom: 40px;
+    display: inline-block;
+    float: none;
+    width: 33.1%;
     .thumbnail {
       position: relative;
       border: 6px solid #f3f3f3;
@@ -891,6 +895,7 @@
 .browse-page {
   .filters {
     border: 1px solid #e0e0e0;
+    background: #fff;
     border-bottom: 0;
     margin: 36px 0 0 0;
     padding: 0;
@@ -1002,6 +1007,9 @@
         }
       }
     }
+  }
+  .content-margin {
+    margin-top: 36px;
   }
   .ad {
     background: #f3f3f3;
