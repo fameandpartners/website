@@ -13,6 +13,7 @@ window.helpers.createProductVariantsSelector = (root) ->
       rootElement.find('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
       variantsSelector.selectOptions.call(variantsSelector, selected)
       rootElement.find('#toggle-selectbox').chosen()
+      rootElement.find('.selectbox').chosen()
 
       if window.shopping_cart
         window.shopping_cart.on('item_added',   variantsSelector.cartItemsChangedHandler)

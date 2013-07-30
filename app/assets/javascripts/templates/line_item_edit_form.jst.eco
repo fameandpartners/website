@@ -19,20 +19,25 @@
         <% end %>
       </div>
     </div>
-    <div class="size-select">
-      <div class="select-box">
+    <div class="size-select clearfix">
+      <div class="label">
+        Your size
+      </div>
+      <div class="select-box value">
         <select id="toggle-selectbox" class="select2" name="size">
-          <option value=''>Choose your size</option>
+          <option value=''>Size</option>
           <% for size in @sizes: %>
             <option value='<%= size %>'><%= size %></option>
           <% end %>
         </select>
-    <div class="quantity">
+      </div>
+    </div>
+    <div class="quantity clearfix">
       <div class="label">
         Quantity
       </div>
       <div class="value">
-        <select name="quantity" class="quantity-select">
+        <select name="quantity" class="quantity-select selectbox">
           <% for quantity in [1..@max_quantity]: %>
             <option value='<%= quantity %>'><%= quantity %></option>
           <% end %>

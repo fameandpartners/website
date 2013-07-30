@@ -1501,8 +1501,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 472px;
-    margin: -353px 0 0 -261px;
+    width: 572px;
+    margin: -353px 0 0 -311px;
     z-index: 101;
     background: #fff;
     padding: 13px;
@@ -1568,21 +1568,19 @@
             }
           }
         }
-        .size-select {
-          margin: 0 0 14px;
-          .chzn-container {
-            min-width: 200px;
-          }
-        }
-        .quantity {
-          overflow: hidden;
+        .size-select, .quantity {
+          width: 100%;
           margin: 0 0 14px;
           .label {
             float: left;
             width: 80px;
+            line-height: 32px;
           }
           .value {
             float: left;
+          }
+          .chzn-container {
+            min-width: 200px;
           }
         }
         .delivery {
