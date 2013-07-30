@@ -1,7 +1,4 @@
-- info = selected_products_info
-.ad style=(info[:image].blank? ? '' : "background: url('#{info[:image]}') 0 0 no-repeat;")
-  h2 style="padding: 10px;" = info[:title]
-  p style="padding: 10px;" = info[:description]
+
 .results-sort.clearfix
   .results-sort-inner
     .results.fleft = pluralize(products.length, 'result')
@@ -9,7 +6,7 @@
       ' Sort by
       - options = options_from_collection_for_select(Products::ProductsFilter.available_orders, :first, :second, params[:order])
       = select_tag "product_order", options, prompt: 'Choose'
-ul.products-list.grid-container
+ul.products-list.browse-products.grid-container
   - products.each do |product|
     li.product-item.grid-33
       .thumbnail

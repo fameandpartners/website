@@ -197,11 +197,7 @@
   margin: 36px 0 40px;
   font: 400 14px/1.1 $fontOne;
   .product-item {
-    vertical-align: top;
     margin-bottom: 40px;
-    display: inline-block;
-    float: none;
-    width: 33.1%;
     .thumbnail {
       position: relative;
       border: 6px solid #f3f3f3;
@@ -307,6 +303,18 @@
       }
     }
   }
+  &#product-items {
+    margin-bottom: 0;
+    min-height: 442px;
+  }
+  &.browse-products {
+    .product-item {
+      vertical-align: top;
+      display: inline-block;
+      float: none;
+      width: 33.1%;
+    }
+  }
 }
 
 .product-page {
@@ -375,6 +383,7 @@
     padding: 18px;
     height: 20px;
     text-align: center;
+    background: #fff;
     .addthis_toolbox > a {
       display: inline-block !important;
       float: none;
@@ -431,6 +440,7 @@
       display: inline-block;
       padding: 8px;
       margin: 0 0 18px;
+      background: #fff;
       .label {
         float: left;
         line-height: 23px;
