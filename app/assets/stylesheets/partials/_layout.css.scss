@@ -255,6 +255,9 @@ header {
     a {
       color: #333;
       text-decoration: none;
+      &:hover {
+        color: #e79e90;
+      }
     }
     > ul {
       > li {
@@ -275,18 +278,49 @@ header {
           position: absolute;
           z-index: 2;
           ul {
-            margin: 32px 0 0;
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+            width: 816px;
+            overflow: hidden;
             li {
-              margin: 5px 0 0;
+              float: left;
+              margin: 0 27px;
+              text-align: center;
+              a {
+                display: block;
+                font: 300 14px/1.1 $fontOne;
+                color: #363636;
+                text-transform: uppercase;
+                span {
+                  font-family: $fontFour;
+                  display: block;
+                }
+              }
             }
           }
           a {
             color: #666;
             font: 400 14px/1 $fontTwo;
             text-transform: none;
+          }
+          .dropdown-menu {
+            margin: 46px 0 0;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+          }
+          .dropdown-title {
+            text-align: center;
+            margin: 0 0 14px;
+            a {
+              font: 300 15px/1.1 $fontOne;
+              color: #7b7b7b;
+              text-transform: uppercase;
+            }
+          }
+          .range-image {
+            width: 150px;
+            height: 150px;
+            background: #ccc;
+            margin: 0 0 10px;
           }
           .title {
             color: #f39e90;
@@ -296,24 +330,22 @@ header {
             text-transform: uppercase;
             border-bottom: 1px dotted #999;
           }
-          &:before {
-            border-bottom: 16px solid #e3e3e3;
+          &:before, &:after {
             border-left: 16px solid transparent;
             border-right: 16px solid transparent;
             content: '';
             position: absolute;
-            top: 21px;
-            left: 26px;
+          }
+          &:before {
+            border-bottom: 16px solid #e3e3e3;
+            top: 34px;
+            left: 10px;
             z-index: -1;
           }
           &:after {
             border-bottom: 16px solid #fff;
-            border-left: 16px solid transparent;
-            border-right: 16px solid transparent;
-            content: '';
-            position: absolute;
-            top: 22px;
-            left: 26px;
+            top: 36px;
+            left: 10px;
             z-index: 1;
           }
         }
