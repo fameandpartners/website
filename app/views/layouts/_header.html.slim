@@ -13,15 +13,17 @@
         - else
           li.loggedin
             .dropdown-trigger
+              - if @user.image.present?
+                .avatar
+                  = image_tag @user.image, width: 20
               =' current_spree_user.full_name
-              ' is logged in
             .dropdown-menu
               ul
                 li = link_to 'Account settings', profile_path
                 li = link_to 'Your orders', user_orders_path
                 li = link_to 'Style profile', styleprofile_path
                 li = link_to 'My reviews', reviews_path
-          li = link_to 'Sign out', spree_logout_path
+                li = link_to 'Sign out', spree_logout_path
 
 header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .header-wrapper
