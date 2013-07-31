@@ -13,9 +13,9 @@
         - else
           li.loggedin
             .dropdown-trigger
-              - if @user.image.present?
+              - if current_spree_user.image.present?
                 .avatar
-                  = image_tag @user.image, width: 20
+                  = image_tag current_spree_user.image, width: 20
               =' current_spree_user.full_name
             .dropdown-menu
               ul
