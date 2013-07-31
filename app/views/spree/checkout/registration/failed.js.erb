@@ -1,1 +1,5 @@
 $('.accordion-content[data-step="personal"]').html('<%=j render('spree/checkout/personal') %>')
+
+if (window.checkout_page && window.checkout_page.onAjaxFailureHandler) {
+  window.checkout_page.onAjaxFailureHandler()
+}

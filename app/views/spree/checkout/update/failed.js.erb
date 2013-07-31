@@ -1,3 +1,6 @@
 $('.accordion-content[data-step="<%= @order.state %>"]').
   html('<%=j render("/spree/checkout/#{@order.state}") %>');
-toggleBillingAddress();
+
+if (window.checkout_page && window.checkout_page.onAjaxFailureHandler) {
+  window.checkout_page.onAjaxFailureHandler()
+}

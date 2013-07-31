@@ -17,4 +17,4 @@
   .grid-container
     .grid-100.center
       .place-order
-        = form.submit 'Update'
+        = form.submit 'Submit Details', data: { loading: 'Submitting...' }

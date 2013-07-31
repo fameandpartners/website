@@ -27,8 +27,8 @@ FameAndPartners::Application.routes.draw do
   resource :profile, only: [:show, :update], controller: 'users/profiles' do
     put 'update_image', on: :member
   end
-  get 'orders' => 'users/orders#index', as: 'user_orders'
-  get 'orders/:id' => 'users/orders#show', as: 'user_order'
+  get 'user_orders' => 'users/orders#index', as: 'user_orders'
+  get 'user_orders/:id' => 'users/orders#show', as: 'user_order'
 
   get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
 

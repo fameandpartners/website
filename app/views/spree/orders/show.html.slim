@@ -3,7 +3,7 @@
     .tabs
       #order.tab-content
         - if session.delete(:successfully_ordered)
-          h1.page-title Thanks for your order #{@order.user.full_name}!
+          h1.page-title Thanks for your order #{@order.full_name}!
 
         .grid-container
           .grid-35

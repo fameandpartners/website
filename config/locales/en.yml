@@ -24,8 +24,16 @@ en:
         photo: 'Photo'
         tags: 'Tags'
         event_date: 'Event date'
+      # rename zip to postcode
+      spree/address:
+        zipcode: "Postcode"
+      spree/order/bill_address:
+        zipcode: "Billing address postcode"
+      spree/order/ship_address:
+        zipcode: "Shipping address postcode"
   page:
     blog:
       default:
         title: 'Fame & Partners Formal Dresses Blog'
         description: 'Formal Dresses, Celebrity Fashion and Style Inspiration. Follow the Fame & Partners blog to stay in touch with the latest trends for your next formal event.'
+  zip: 'Postcode'

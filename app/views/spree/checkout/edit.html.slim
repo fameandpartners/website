@@ -11,7 +11,7 @@
     ruby:
       index = 0
       if !signed_in?
-        if current_order.user.present?
+        if current_order.user.present? || current_order.email.present?
           active = @order.state
         else
           active = 'personal'

@@ -5,4 +5,7 @@ $('.accordion-title[data-step="address"] .check-edit').<%= @order.state.eql?('pa
 $('.accordion-content[data-step="<%= @order.state %>"]').
   html('<%=j render("/spree/checkout/#{@order.state}") %>').
   slideDown();
-toggleBillingAddress();
+
+if (window.checkout_page && window.checkout_page.onAjaxSuccessHandler) {
+  window.checkout_page.onAjaxSuccessHandler()
+}
