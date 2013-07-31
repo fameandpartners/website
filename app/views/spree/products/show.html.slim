@@ -44,11 +44,12 @@ ruby:
               .big-photo
                 = image_tag celebrity.photo.url(:preview)
               .inspiration
-                = celebrity.celebrity_name
-                = celebrity.celebrity_description
+                .name = celebrity.celebrity_name
+                .desc = celebrity.celebrity_description
 
         .share-buttons
-          = share_buttons
+          .fleft
+          .fright = share_buttons
     .grid-45
       .product-info
         .name = @product.name

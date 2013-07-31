@@ -14,7 +14,8 @@ $quiz_box.find('.next a').text('Next question').click(function(event){
 
 $quiz_box.find('.prev a').unbind('click');
 <%- unless (index = @quiz.questions.index(@question)).eql?(0) -%>
-  $quiz_box.find('.prev a').click(function(){
+  $quiz_box.find('.prev a').click(function(event){
+    event.preventDefault();
     $.getScript('/quiz/questions/<%= @quiz.questions[index - 1].id %>');
   });
 <%- end -%>

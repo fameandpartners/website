@@ -242,8 +242,7 @@
           text-decoration: none;
           font: 300 18px/40px $fontOne;
           &:hover {
-            background: #fff;
-            color: #737373;
+            background: #333;
           }
         }
       }
@@ -254,7 +253,8 @@
       }
     }
     .name {
-      margin: 12px 0 0;
+      margin: 12px 0 3px;
+      font-weight: 300;
       a {
         color: #333;
         text-transform: uppercase;
@@ -268,7 +268,7 @@
     }
     .price {
       color: #000;
-      font-weight: 700;
+      font-weight: 400;
       margin: 0 0 10px;
     }
     .colors {
@@ -305,6 +305,7 @@
   }
   &#product-items {
     margin-bottom: 0;
+    margin-top: 10px;
     min-height: 442px;
   }
   &.browse-products {
@@ -377,6 +378,25 @@
       }
     }
   }
+  #inspiration {
+    .big-photo {
+      float: left;
+      margin: 15px;
+      width: 280px;
+      img {
+        max-width: 280px;
+        height: auto;
+      }
+    }
+    .inspiration {
+      margin: 15px 15px 15px 310px;
+      font: 300 12px/1.2 $fontOne;
+      .name {
+        font-size: 16px;
+        margin: 0 0 6px;
+      }
+    }
+  }
   .share-buttons {
     border: 1px solid #d8d8da;
     border-top: 0;
@@ -384,6 +404,7 @@
     height: 20px;
     text-align: center;
     background: #fff;
+    overflow: hidden;
     .addthis_toolbox > a {
       display: inline-block !important;
       float: none;
@@ -555,6 +576,22 @@
   }
 }
 
+#orders .shipping-icon {
+  font: 300 10px/1.2 $fontOne;
+  text-transform: uppercase;
+  color: #000;
+  display: inline-block;
+  margin: 3px 0 0 10px;
+  vertical-align: top;
+  .icon {
+    float: left;
+    width: 25px;
+    height: 20px;
+    margin: 2px 5px 0 0;
+    background: image-url('icons-shipping.png') 0 -120px no-repeat;
+  }
+}
+
 .cart-page {
   margin: 38px 0 0;
   font: 300 14px/1.2 $fontOne;
@@ -578,6 +615,7 @@
     .item {
       border-bottom: 1px solid #e0e0e0;
       .grid-50, .grid-30, .grid-20 {
+        background: #fff;
         height: 236px;
         border-right: 1px solid #e0e0e0;
       }
@@ -605,6 +643,8 @@
       }
       .desc {
         margin: 0 0 0 172px;
+        position: relative;
+        height: 189px;
         .name {
           margin: 30px 0 5px;
           text-transform: uppercase;
@@ -618,6 +658,9 @@
           height: 130px;
         }
         .wishlist {
+          position: absolute;
+          bottom: 0;
+          left: 0;
           a {
             display: inline-block;
             padding: 0 0 0 30px;
@@ -832,7 +875,7 @@
 
 .featured-dresses {
   background: image-url('icon-border-featured.png') 0 0 repeat-x #fff;
-  padding: 40px 0 0;
+  padding: 20px 0 0;
   margin: 20px 0 0;
   .wrap {
     position: relative;
@@ -1031,7 +1074,7 @@
     .results-sort-inner {
       margin: 0 19px;
       background: #f3f3f3;
-      padding: 5px 6px;
+      padding: 5px 10px;
       height: 25px;
       font: 300 14px/25px $fontOne;
       color: #999898;
@@ -1041,14 +1084,39 @@
       height: 25px;
     }
     .results {
-      padding: 0 6px 0 0;
+      padding: 0 10px 0 0;
       border-right: 1px solid #999898;
     }
     .sort {
-      padding: 0 0 0 6px;
+      padding: 0 0 0 10px;
       border-left: 1px solid #999898;
       select {
         margin: 0 0 0 4px;
+      }
+    }
+    .chzn-container {
+      margin: 1px 0 0 4px;
+      vertical-align: top;
+      min-width: 0;
+      text-transform: none;
+      .chzn-single {
+        height: 21px;
+        line-height: 21px;
+        background: #fff;
+        div {
+          b {
+            background-position: 0 2px;
+          }
+        }
+      }
+      &.chzn-with-drop {
+        .chzn-single {
+          div {
+            b {
+              background-position: -18px 2px;
+            }
+          }
+        }
       }
     }
   }
@@ -1338,7 +1406,7 @@
         background-position: center center;
         background-repeat: no-repeat;
         max-width: 100%;
-        max-height: 100%;
+        height: auto;
       }
       &.empty {
         background: image-url('avatar-empty.png') 0 0 no-repeat;
@@ -1484,8 +1552,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 472px;
-    margin: -353px 0 0 -261px;
+    width: 572px;
+    margin: -353px 0 0 -311px;
     z-index: 101;
     background: #fff;
     padding: 13px;
@@ -1551,21 +1619,19 @@
             }
           }
         }
-        .size-select {
-          margin: 0 0 14px;
-          .chzn-container {
-            min-width: 200px;
-          }
-        }
-        .quantity {
-          overflow: hidden;
+        .size-select, .quantity {
+          width: 100%;
           margin: 0 0 14px;
           .label {
             float: left;
             width: 80px;
+            line-height: 32px;
           }
           .value {
             float: left;
+          }
+          .chzn-container {
+            min-width: 200px;
           }
         }
         .delivery {
