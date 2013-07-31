@@ -17,7 +17,9 @@ window.shopping_cart = _.extend(window.shopping_cart, {
     window.shopping_cart.initialized = true
 
   addProduct: (variantId, options = {}) ->
-    return unless variantId?
+    if !variantId?
+      options.failure.apply(window, arguments) if options.failure?
+      return
 
     options = _.extend({ variant_id: variantId, quantity: 1 }, options)
     $.ajax(
@@ -32,6 +34,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
   updateProduct: (itemId, options = {}) ->
     variantId = options.variant_id
     if !variantId? || !itemId || !options.quantity?
+      options.failure.apply(window, arguments) if options.failure?
       return false
 
     $.ajax(
@@ -44,8 +47,9 @@ window.shopping_cart = _.extend(window.shopping_cart, {
     )
 
   moveProductToWishlist: (variantId, options = {}) ->
-    return unless variantId?
-    #/line_items/:id/move_to_wishlist
+    if !variantId?
+      options.failure.apply(window, arguments) if options.failure?
+      return false
 
     options = _.extend({ variant_id: variantId }, options)
 
@@ -59,7 +63,9 @@ window.shopping_cart = _.extend(window.shopping_cart, {
     )
 
   removeProduct: (variantId, options = {}) ->
-    return unless variantId?
+    if !variantId?
+      options.failure.apply(window, arguments) if options.failure?
+      return false
 
     options = _.extend({ variant_id: variantId }, options)
 

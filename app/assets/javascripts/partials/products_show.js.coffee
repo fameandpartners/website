@@ -33,7 +33,7 @@ $(".products.show").ready ->
   $('.buy-wishlist .buy-now').on('click', (e) ->
     e.preventDefault()
     button = $(e.currentTarget)
-    variantId = button.data('variant_id')
+    variantId = button.data('id')
     button.addClass('adding')
     window.shopping_cart.addProduct.call(window.shopping_cart, variantId, {
       failure: () -> button.removeClass('adding')

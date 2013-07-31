@@ -48,8 +48,15 @@ class LineItemSerializer < ActiveModel::Serializer
     object.variant.product.permalink
   end
 
+  # copy pasted code from spree line_item_description
+  # due to problems with t method
   def product_description
-    line_item_description(object.variant)
+    description = object.variant.product.description
+    if description.present?
+      truncate(strip_tags(description.gsub('&nbsp;', ' ')), :length => 100)
+    else
+      I18n.t(:product_has_no_description)
+    end
   end
 
   def product_color

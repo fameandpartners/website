@@ -37,7 +37,7 @@ window.helpers.quickViewer = {
     e.preventDefault()
     button = $(e.currentTarget)
     button.addClass('adding')
-    window.shopping_cart.addProduct(button.data('variant_id'), {
+    window.shopping_cart.addProduct(button.data('id'), {
       failure: () -> button.removeClass('adding')
       success: () -> button.removeClass('adding').addClass('added')
     })
