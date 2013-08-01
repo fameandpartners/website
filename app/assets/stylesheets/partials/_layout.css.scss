@@ -750,6 +750,20 @@ footer {
     .grid-container {
       padding-top: 27px;
       font: 300 14px/1.4 $fontOne;
+      .grid-20, .grid-15 {
+        border-left: 1px solid #c6c6c6;
+        min-height: 137px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+      }
+      .grid-20 {
+        &:first-child {
+          border-left: 0;
+        }
+      }
+      .prefix-3 {
+        margin-left: 3%;
+      }
     }
     .title {
       font: 400 18px/1.1 $fontTwo;

@@ -1,6 +1,6 @@
 footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .grid-container
-    .grid-20.links
+    .grid-20.prefix-3.links
       .title Shop Prom Dresses
       ul
         li = link_to 'Top Sellers', '#'
@@ -33,7 +33,7 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
         li = link_to 'Meet our Team', team_path
         li = link_to 'Terms & Conditions', terms_path
         li = link_to 'Privacy', privacy_path
-    .grid-20.social
+    .grid-15.social
       .title Let’s be friends
       ul
         li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
