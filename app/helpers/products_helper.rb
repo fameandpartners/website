@@ -55,13 +55,17 @@ module ProductsHelper
   end
 
   def add_to_wishlist_link(product_or_variant)
-    variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
+    if spree_user_signed_in?
+      variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
 
-    link_options = { data: { action: 'add-to-wishlist', id: variant.id }}
-    if in_wishlist?(variant)
-      link_to 'Remove', '#', link_options.merge(class: 'active add-wishlist')
-    else
-      link_to 'Wish list', '#', link_options.merge(class: 'add-wishlist')
+      link_options = { data: { action: 'add-to-wishlist', id: variant.id }}
+      if in_wishlist?(variant)
+        link_to 'Remove', '#', link_options.merge(class: 'active add-wishlist')
+      else
+        link_to 'Wish list', '#', link_options.merge(class: 'add-wishlist')
+      end
+    else # user not logged in, wishlist unavailable
+      link_to 'Wish list', spree_login_path, class: 'add-wishlist', data: { action: 'auth-required' }
     end
   end
 

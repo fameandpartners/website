@@ -77,7 +77,9 @@ window.helpers.quickViewer = {
 
     # add product to cart
     @popupContainer.find('.buy-wishlist .buy-now').on('click', window.helpers.quickViewer.onBuyButtonClickHandler)
-    productWishlist.addWishlistButtonActions(@popupContainer.find(".buy-wishlist .add-wishlist"))
+    productWishlist.addWishlistButtonActions(
+      @popupContainer.find(".buy-wishlist a[data-action='add-to-wishlist']")
+    )
 
     # code should be executed after images loaded in order to correctly set carousel height
     @popupContainer.waitForImages(() ->
