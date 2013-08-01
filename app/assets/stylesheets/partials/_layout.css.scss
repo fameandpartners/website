@@ -1,8 +1,11 @@
-.pages.home {
+.index.show {
   background: image-url('bg-main.jpg') 0 0 repeat;
   header {
     box-shadow: 0 3px 6px rgba(0, 0, 0, .2);
     border-bottom: 0;
+  }
+  #wrap {
+    margin-bottom: 0;
   }
 }
 
@@ -130,7 +133,6 @@ header {
   height: 169px;
   background: #fff;
   border-bottom: 1px solid #efefef;
-  box-shadow: 0 0 6px rgba(0, 0, 0, .2);
   .first-level {
     .inner {
       height: 29px;
@@ -763,6 +765,7 @@ footer {
     .social {
       ul {
         overflow: hidden;
+        width: 80px;
       }
       li {
         width: 50%;
@@ -788,6 +791,31 @@ footer {
           }
         }
       }
+    }
+  }
+  .logo-copyright {
+    margin: 40px 0 40px;
+    text-align: center;
+    color: #b4b4b4;
+    text-transform: uppercase;
+    font: 400 11px/1 $fontOne;
+    a {
+      color: #b4b4b4;
+    }
+    .logo {
+      a {
+        width: 206px;
+        height: 17px;
+        margin: 0 auto;
+        display: block;
+        overflow: hidden;
+        text-indent: -999px;
+        text-align: left;
+        background: image-url('logo-footer.png') center center no-repeat;
+      }
+    }
+    .copyright, .address, .abn {
+      margin: 10px 0 0;
     }
   }
   &.blog {
@@ -818,28 +846,6 @@ footer {
     }
     .logo-copyright {
       margin: 58px 0 40px;
-      text-align: center;
-      color: #b4b4b4;
-      text-transform: uppercase;
-      font: 400 11px/1 $fontOne;
-      a {
-        color: #b4b4b4;
-      }
-      .logo {
-        a {
-          width: 206px;
-          height: 17px;
-          margin: 0 auto;
-          display: block;
-          overflow: hidden;
-          text-indent: -999px;
-          text-align: left;
-          background: image-url('logo-footer.png') center center no-repeat;
-        }
-      }
-      .copyright, .address, .abn {
-        margin: 10px 0 0;
-      }
     }
   }
 }

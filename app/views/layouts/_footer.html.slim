@@ -40,10 +40,10 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
         li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
         li = link_to 'google', configatron.links.google, target: :blank, class: 'google'
         li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
-    .wrap
-      .logo-copyright
-        .logo
-          = link_to 'Fame&Partners', root_url(:host => configatron.host)
-        .copyright
-          ' 2013 Fame & Partners &copy; 
-        .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
+  .wrap
+    .logo-copyright
+      .logo
+        = link_to 'Fame&Partners', root_url(:host => configatron.host)
+      .copyright
+        ' 2013 Fame & Partners &copy; 
+      .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
