@@ -61,7 +61,7 @@ ruby:
               option{value=size} = size
         = link_to 'What size am i?', '#', class: 'info'
       .buy-wishlist
-        = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
+        = add_to_bag_link(@product)
         = add_to_wishlist_link(@product)
 
       .tabs

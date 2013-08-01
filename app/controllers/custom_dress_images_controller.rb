@@ -18,6 +18,6 @@ class CustomDressImagesController < ApplicationController
       end
     end
 
-    render :json => @custom_dress_images
+    render :json => @custom_dress_images, :root => false
   end
 end

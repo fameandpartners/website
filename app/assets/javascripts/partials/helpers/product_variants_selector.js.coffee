@@ -74,16 +74,17 @@ window.helpers.createProductVariantsSelector = (root) ->
       variant = @getSelectedVariant()
       $button = rootElement.find('.buy-wishlist .buy-now')
       $wishlist_button = rootElement.find('.buy-wishlist .add-wishlist')
-      if variant
-        $button.data(variant_id: variant.id)
+      if ! _.isEmpty(variant)
+        $button.data(id: variant.id)
         $wishlist_button.data(id: variant.id)
         if variant.purchased
           $button.addClass('added')
         else
           $button.removeClass('added')
-      else
+          # don't change master variant data, if product don't have variants
+      else if @variants? && @variants.length > 0
         $button.removeClass('added')
-        $button.data(variant_id: null)
+        $button.data(id: null)
 
     updateDeliveryTime: () ->
       variant = @getSelectedVariant()

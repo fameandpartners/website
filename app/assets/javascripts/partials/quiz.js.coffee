@@ -3,6 +3,7 @@ $ ->
     $(".quiz-box").show()
     $("body").css "overflow", "hidden"
     $.getScript "/quiz"
+    $('.quiz-overlay').one('click', hideStyleQuiz)
 
   window.hideStyleQuiz = ->
     $(".quiz-box").hide()

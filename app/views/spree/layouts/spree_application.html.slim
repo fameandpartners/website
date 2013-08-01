@@ -3,10 +3,11 @@ doctype html
   head
     = render 'layouts/head'
     = csrf_meta_tags
-    = render 'shared/ga'
+    /= render 'shared/ga'
+    = render 'spree/shared/google_analytics'
   body class=(controller_action_class) id=(controller_action_id)
     #fb-root
-    javascript:
+    /javascript:
       (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;

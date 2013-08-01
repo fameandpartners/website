@@ -77,8 +77,10 @@ $ ->
         .index($("li:has(a.remove-item-from-cart[data-id='#{variantId}'])"))
       start = 0 if start < 0 # -1 : not found
 
+      items_count = 2
+      items_count = 1 if window.shopping_cart.line_items.length == 1
       options = window.helpers.get_vertical_carousel_options({
-        items: 2, start: start,
+        items: items_count, start: start,
         prev: { button: "#shopping-arrow-up", items: 2 },
         next: { button: "#shopping-arrow-down", items: 2 }
       })

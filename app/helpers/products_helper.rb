@@ -49,6 +49,11 @@ module ProductsHelper
     link_to 'Quick view', spree.product_path(product), data: { action: 'quick-view', id: product.permalink }
   end
 
+  def add_to_bag_link(product_or_variant)
+    variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
+    link_to 'Add to bag', '#', class: 'buy-now', data: { id: variant.id }
+  end
+
   def add_to_wishlist_link(product_or_variant)
     variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
 

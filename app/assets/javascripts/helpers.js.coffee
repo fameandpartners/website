@@ -47,3 +47,8 @@ window.initHoverableProductImages = () ->
       () -> $image.attr('src', second_image),
       () -> $image.attr('src', original_image)
     )
+
+window.scrollScreenTo = (element) ->
+  $element = $(element).first()
+  return if $element.length == 0
+  $('html').animate({ scrollTop: $element.offset().top })

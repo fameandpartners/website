@@ -44,8 +44,8 @@ ruby:
               .big-photo
                 = image_tag celebrity.photo.url(:preview)
               .inspiration
-                = celebrity.celebrity_name
-                = celebrity.celebrity_description
+                .name = celebrity.celebrity_name
+                .desc = celebrity.celebrity_description
 
         .share-buttons
           .fleft
@@ -78,7 +78,7 @@ ruby:
                 = link_to spree.products_path(body_shapes: [shape]) do
                   = image_tag('http://placehold.it/60x84', alt: shape.humanize, title: shape.humanize)
         .buy-wishlist
-          = link_to 'Add to bag', '#', class: 'buy-now', data: { variant_id: @product.master.id }
+          = add_to_bag_link(@product)
           = add_to_wishlist_link(@product)
         .tabs
           ul.tabs-links
