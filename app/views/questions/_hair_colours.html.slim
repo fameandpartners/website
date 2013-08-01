@@ -1,33 +1,57 @@
-ul.clearfix
+ul.quiz-hair
   li
     label
+      .hair-image
+        = image_tag 'quiz/hair/black.jpg', width: 118, height: 118, alt: ''
+      .hair-label
+        span Black
       = form.radio_button :code, 'black'
-      | BLACK
   li
     label
+      .hair-image
+        = image_tag 'quiz/hair/brunette.jpg', width: 118, height: 118, alt: ''
+      .hair-label
+        span Brunette
       = form.radio_button :code, 'brunette'
-      | BRUNETTE
   li
     label
+      .hair-image
+        = image_tag 'quiz/hair/auburn.jpg', width: 118, height: 118, alt: ''
+      .hair-label
+        span Auburn
       = form.radio_button :code, 'auburn'
-      | AUBURN
   li
     label
-      = form.radio_button :code, 'blonde'
-      | BLONDE
-  li
-    label
-      = form.radio_button :code, 'platinum_blonde'
-      | PLATINUM BLONDE
-  li
-    label
-      = form.radio_button :code, 'strawberry_blonde'
-      | STRAWBERRY BLONDE
-  li
-    label
+      .hair-image
+        = image_tag 'quiz/hair/red.jpg', width: 118, height: 118, alt: ''
+      .hair-label
+        span Red
       = form.radio_button :code, 'red'
-      | RED
   li
     label
+      .hair-image
+        = image_tag 'quiz/hair/blonde.jpg', width: 118, height: 118, alt: ''
+      .hair-label
+        span Blonde
+      = form.radio_button :code, 'blonde'
+  li
+    label
+      .hair-image
+        = image_tag 'quiz/hair/platinum-blonde.jpg', width: 118, height: 118, alt: ''
+      .hair-label
+        span Platinum Blonde
+      = form.radio_button :code, 'platinum_blonde'
+  li
+    label
+      .hair-image
+        = image_tag 'quiz/hair/strawberry-blonde.jpg', width: 118, height: 118, alt: ''
+      .hair-label
+        span Strawberry Blonde
+      = form.radio_button :code, 'strawberry_blonde'
+  li
+    label
+      .hair-image
+        = image_tag 'quiz/hair/coloured.jpg', width: 118, height: 118, alt: ''
+      .hair-label
+        span Coloured
       = form.radio_button :code, 'coloured'
-      | Coloured (other colours)

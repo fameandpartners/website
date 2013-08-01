@@ -1,33 +1,40 @@
-ul.clearfix
-  li
-    label
-      = form.radio_button :code, 'AAA'
-      | AAA
-  li
-    label
-      = form.radio_button :code, 'AA'
-      | AA
-  li
-    label
-      = form.radio_button :code, 'A'
-      | A
-  li
-    label
-      = form.radio_button :code, 'B'
-      | B
-  li
-    label
-      = form.radio_button :code, 'C'
-      | C
-  li
-    label
-      = form.radio_button :code, 'D'
-      | D
-  li
-    label
-      = form.radio_button :code, 'E'
-      | E
-  li
-    label
-      = form.radio_button :code, 'FPP'
-      | F++
+.quiz-sizes
+  .bra
+    .question &nbsp;
+    ul.sizes
+      li
+        label
+          = form.radio_button :code, 'AAA'
+          | AAA
+      li
+        label
+          = form.radio_button :code, 'AA'
+          | AA
+      li
+        label
+          = form.radio_button :code, 'A'
+          | A
+      li
+        label
+          = form.radio_button :code, 'B'
+          | B
+      li
+        label
+          = form.radio_button :code, 'C'
+          | C
+      li
+        label
+          = form.radio_button :code, 'D'
+          | D
+      li
+        label
+          = form.radio_button :code, 'E'
+          | E
+      li
+        label
+          = form.radio_button :code, 'FPP'
+          | F++
+      li.smaller
+        label
+          = form.radio_button :code, 'IT_IS_SECRET'
+          | Don’t want to say

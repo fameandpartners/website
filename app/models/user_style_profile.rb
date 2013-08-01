@@ -7,8 +7,8 @@ class UserStyleProfile < ActiveRecord::Base
   HAIR_COLOURS = %w( black brunette auburn blonde platinum_blonde strawberry_blonde red coloured )
   SKIN_COLOURS = %w( fair medium_fair medium medium_dark dark )
   BODY_SHAPES = %w( apple pear athletic strawberry hour_glass column petite )
-  TYPICAL_SIZES = %w( G0 G2 G4 G6 G8 G12 G14 L4 L6 L8 L10 L12 L14 L16 )
-  BRA_SIZES = %w( AAA AA A B C D E FPP )
+  TYPICAL_SIZES = %w( G4 G6 G8 G10 G12 G14 G16 )
+  BRA_SIZES = %w( AAA AA A B C D E FPP IT_IS_SECRET)
 
   default_values :glam  => 0.0,
                  :girly => 0.0,
@@ -19,12 +19,10 @@ class UserStyleProfile < ActiveRecord::Base
                  :fashionability => 0.0,
                  :brands => [],
                  :nail_colours => [],
-                 :colours => [],
-                 :trends => []
+                 :colours => []
 
   serialize :brands, Array
   serialize :nail_colours, Array
-  serialize :trends, Array
   serialize :colours, Array
   serialize :serialized_answers, Hash
 
@@ -43,37 +41,37 @@ class UserStyleProfile < ActiveRecord::Base
     end
   end
 
-  validate do
-    unless trends.all?{ |trend| TRENDS.include?(trend) }
-      errors.add(:trends, :inclusion)
-    end
-  end
+  #validate do
+  #  unless trends.all?{ |trend| TRENDS.include?(trend) }
+  #    errors.add(:trends, :inclusion)
+  #  end
+  #end
 
-  #validates :hair_colour,
-  #          :inclusion => {
-  #            :in => HAIR_COLOURS
-  #          }
-  #
-  #validates :skin_colour,
-  #          :inclusion => {
-  #            :in => SKIN_COLOURS
-  #          }
-  #
-  #validates :body_shape,
-  #          :inclusion => {
-  #            :in => BODY_SHAPES
-  #          }
-  #
-  #validates :typical_size,
-  #          :inclusion => {
-  #            :in => TYPICAL_SIZES
-  #          }
-  #
-  #validates :bra_size,
-  #          :inclusion => {
-  #            :allow_blank => true,
-  #            :in => BRA_SIZES
-  #          }
+  validates :hair_colour,
+            :inclusion => {
+              :in => HAIR_COLOURS
+            }
+
+  validates :skin_colour,
+            :inclusion => {
+              :in => SKIN_COLOURS
+            }
+
+  validates :body_shape,
+            :inclusion => {
+              :in => BODY_SHAPES
+            }
+
+  validates :typical_size,
+            :inclusion => {
+              :in => TYPICAL_SIZES
+            }
+
+  validates :bra_size,
+            :inclusion => {
+              :allow_blank => true,
+              :in => BRA_SIZES
+            }
 
   def percentage
     unless @percents.present?
