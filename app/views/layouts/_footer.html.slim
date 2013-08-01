@@ -1,27 +1,45 @@
-footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
-  .columns
-    .wrap
-      /.column.newsletter
-        .title Newsletter and updates
-        .text Sign up for the latest on our prom desses, latest interviews and events.
-        form.clearfix
-          input.input type="email" name="email" value=""
-          input.btn type="submit" value="Join now"
-      .column.links
-        ul.collapse
-          li = link_to 'About us', about_path
-          li = link_to 'Meet our Team', team_path
-          li = link_to 'Terms & Conditions', terms_path
-          li = link_to 'Privacy', privacy_path
-          li Call us on 1300 924 860
-          li Need help? Simply email us at: #{mail_to 'team@fameandpartners.com', 'team@fameandpartners.com', class: 'inverse'}
-      .column.social.hide
-        .title Let’s be friends
-        ul
-          li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
-          li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
-          li = link_to 'google', configatron.links.google, target: :blank, class: 'google'
-          li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
+footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
+  .grid-container
+    .grid-20.prefix-3.links
+      .title Shop Prom Dresses
+      ul
+        li = link_to 'Top Sellers', '#'
+        li = link_to 'Recent Additions', '#'
+        li = link_to 'Stylist Picks', '#'
+        li = link_to 'Sale', '#'
+        li = link_to 'Style Quiz', '#'
+    .grid-20.links
+      .title Style Inspiration
+      ul
+        li = link_to 'Celebrity name', '#'
+        li = link_to 'Celebrity name', '#'
+        li = link_to 'Mood board link', '#'
+        li = link_to 'Stylist Picks', '#'
+        li = link_to 'Blog Post', '#'
+        li = link_to 'Designer blog post', '#'
+    .grid-20.links
+      .title Customer Service
+      ul
+        li = link_to 'FAQs', '#'
+        li = link_to 'Customer Service', '#'
+        li = link_to 'Book a Personal Stylist', '#'
+        li = link_to 'Shipping & Returns', '#'
+        li.empty
+        li 1800 456 600
+    .grid-20.links
+      .title About us
+      ul
+        li = link_to 'About us', about_path
+        li = link_to 'Meet our Team', team_path
+        li = link_to 'Terms & Conditions', terms_path
+        li = link_to 'Privacy', privacy_path
+    .grid-15.social
+      .title Let’s be friends
+      ul
+        li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
+        li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
+        li = link_to 'google', configatron.links.google, target: :blank, class: 'google'
+        li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
   .wrap
     .logo-copyright
       .logo
@@ -29,4 +47,3 @@ footer class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
       .copyright
         ' 2013 Fame & Partners &copy; 
       .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
-      .abn 

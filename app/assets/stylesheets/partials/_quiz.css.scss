@@ -863,6 +863,13 @@
       text-align: center;
     }
   }
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
 }
 
 .quiz-sizes {
@@ -898,16 +905,23 @@
       }
     }
   }
-  .typical {
-    float: left;
-    width: 308px;
-  }
+  //.typical {
+  //  float: left;
+  //  width: 308px;
+  //}
   .bra {
-    width: 494px;
-    float: right;
+    //width: 494px;
+    //float: right;
     li {
       min-width: 65px;
     }
+  }
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
   }
 }
 
@@ -949,5 +963,12 @@
   .text {
     margin: 14px 10px 0;
     font: 400 13px/1.2 $fontOne;
+  }
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
   }
 }

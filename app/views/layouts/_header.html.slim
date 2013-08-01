@@ -94,6 +94,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                       li
                         = link_to spree.products_path(taxons: { range: taxon.id}) do
                           .range-image
+                            = image_tag "dropdown/#{taxon.name.downcase.gsub(/\s+/, "")}.jpg", width: 150, height: 150, alt: taxon.name
                           = taxon.name
             - if spree_user_signed_in?
               li *{:class => request_path?("#{recommended_dresses_path}") && 'active' }

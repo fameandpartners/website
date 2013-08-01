@@ -1,21 +1,21 @@
-ul.clearfix
+ul.photos.clearfix
   li
     label
       = form.radio_button :code, 'fair'
-      | FAIR
+      = image_tag 'quiz/skin-colors/fair.png', width: 190, height: 294, alt: ''
   li
     label
       = form.radio_button :code, 'medium_fair'
-      | MEDIUM FAIR
+      = image_tag 'quiz/skin-colors/medium-fair.png', width: 190, height: 294, alt: ''
   li
     label
       = form.radio_button :code, 'medium'
-      | MEDIUM
+      = image_tag 'quiz/skin-colors/medium.png', width: 190, height: 294, alt: ''
   li
     label
       = form.radio_button :code, 'medium_dark'
-      | MEDIUM DARK
+      = image_tag 'quiz/skin-colors/medium-dark.png', width: 190, height: 294, alt: ''
   li
     label
       = form.radio_button :code, 'dark'
-      | DARK
+      = image_tag 'quiz/skin-colors/dark.png', width: 190, height: 294, alt: ''
