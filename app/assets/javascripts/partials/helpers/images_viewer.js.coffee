@@ -35,7 +35,6 @@ window.helpers.buildImagesViewer = (rootElement) ->
     showBigImage: () ->
       bigImageUrl = viewer.currentImages.xlarge
       if bigImageUrl?
-        console.log(location.origin + bigImageUrl)
         $.fancybox
           href: location.origin + bigImageUrl
       else

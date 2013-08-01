@@ -4,7 +4,8 @@
       ul
         li = link_to 'Home', root_path, class: 'top-icon link-root'
         li.top-icon.phone AU. 1800 455 345
-        li = link_to 'Live chat', root_path, class: 'top-icon link-livechat'
+        /li = link_to 'Live chat', root_path, class: 'top-icon link-livechat'
+        li = render 'shared/live_chat_js'
     nav.fright
       ul
         - unless spree_user_signed_in?

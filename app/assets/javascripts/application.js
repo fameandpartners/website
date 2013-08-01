@@ -9,7 +9,7 @@
 //= require libs/jquery.mousewheel
 //= require libs/jquery.waitforimages.min
 //= require libs/underscore-min
-//= require fancybox
+//= require libs/live_chat_with_fancybox.min
 //= require helpers
 //= require_tree ./partials
 //= require_tree ./templates

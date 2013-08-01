@@ -3,8 +3,8 @@ doctype html
   head
     = render 'layouts/head'
     = csrf_meta_tags
-    /= render 'shared/ga'
     = render 'spree/shared/google_analytics'
+
   body class=(controller_action_class) id=(controller_action_id)
     #fb-root
     /javascript:
