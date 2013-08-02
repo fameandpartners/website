@@ -93,4 +93,8 @@ module ApplicationHelper
       0
     end
   end
+
+  def with_required_mark(text)
+    raw (text + content_tag(:span, ' * ', class: 'required'))
+  end
 end

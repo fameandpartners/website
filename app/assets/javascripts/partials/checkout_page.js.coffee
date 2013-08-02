@@ -41,9 +41,13 @@ $('.checkout.edit').ready ->
       if $('#create_account').is(':checked')
         $('form#new_user .passwords input').prop('disabled', false)
         $('form#new_user .passwords').show()
+        $('label[for=user_first_name] span.required').show()
+        $('label[for=user_last_name] span.required').show()
       else
         $('form#new_user .passwords input').prop('disabled', true)
         $('form#new_user .passwords').hide()
+        $('label[for=user_first_name] span.required').hide()
+        $('label[for=user_last_name] span.required').hide()
 
   }
 

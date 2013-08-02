@@ -5,16 +5,16 @@
   .grid-container
     .grid-50
       .input
-        = form.label :first_name
+        = form.label :first_name, with_required_mark(t(:first_name))
         = form.text_field :first_name, class: 'required'
     .grid-50
       .input
-        = form.label :last_name
+        = form.label :last_name, with_required_mark(t(:last_name))
         = form.text_field :last_name, class: 'required'
   .grid-container
     .grid-100
       .input
-        = form.label :email
+        = form.label :email, with_required_mark(t(:email))
         = form.text_field :email, :style => 'width: 601px;', class: 'required'
   .grid-container
     .grid-100
@@ -26,11 +26,11 @@
   .grid-container.passwords
     .grid-50
       .input
-        = form.label :password
+        = form.label :password, with_required_mark(t(:password))
         = form.password_field :password, class: 'required'
     .grid-50
       .input
-        = form.label :password_confirmation
+        = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
         = form.password_field :password_confirmation, class: 'required'
   .grid-container
     .grid-100.center

@@ -73,7 +73,8 @@
               .title Promo code
               .desc
                 = form_for @order, remote: true do |f|
-                  = f.text_field :coupon_code, style: "width: 152px;"
+                  = f.submit 'Send', style: 'float: right;'
+                  = f.text_field :coupon_code, style: "width: 120px;"
         .summary.grid-25.prefix-5.order-summary
           = render 'summary'
       .continue-buy.grid-container
