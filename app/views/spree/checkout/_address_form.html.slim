@@ -2,33 +2,48 @@ ruby:
   address_id = address_type.chars.first
   first_name = form.object.firstname.present? ? form.object.firstname : (@order.try(:first_name) || @user.try(:first_name))
   last_name = form.object.lastname.present? ? form.object.lastname : (@order.try(:last_name) || @user.try(:last_name))
-div.inner data-hook="#{address_type}_inner"
-  .input id="#{address_id}firstname"
+
+.grid-container.inner data-hook="#{address_type}_inner"
+
+  - if address_type == 'billing'
+    .grid-100.padding
+      legend = t(:billing_address)
+  - elsif address_type == 'shipping'
+    .grid-100.padding
+      legend = t(:shipping_address)
+
+  .grid-45.input id="#{address_id}firstname"
     = form.label :firstname, with_required_mark(t(:first_name))
     = form.text_field :firstname, :class => 'required', :value => first_name
-  .input id="#{address_id}lastname"
+  .grid-45.input id="#{address_id}lastname"
     = form.label :lastname, with_required_mark(t(:last_name))
     = form.text_field :lastname, :class => 'required', :value => last_name
   - if Spree::Config[:company]
-    .input id="#{address_id}company"
+    .grid-100.input id="#{address_id}company"
       = form.label :company, t(:company)
       = form.text_field :company
-  .input id="#{address_id}address1"
+  .grid-45.input id="#{address_id}address1"
     = form.label :address1, with_required_mark(t(:street_address))
     = form.text_field :address1, :class => 'required'
-  .input id="#{address_id}address2"
+  .grid-45.input id="#{address_id}address2"
     = form.label :address2, t(:street_address_2)
     = form.text_field :address2
-  .input id="#{address_id}city"
+  .grid-45.input id="#{address_id}city"
     = form.label :city, with_required_mark(t(:city))
     = form.text_field :city, :class => 'required'
-  .input id="#{address_id}country"
+  .grid-45.input id="#{address_id}country"
     = form.label :country_id, with_required_mark(t(:country))
     span id="#{address_id}country-selection"
-      = form.collection_select :country_id, available_countries, :id, :name, {}, {:class => 'required'}
+      = form.collection_select :country_id, available_countries, :id, :name, {}, {:class => 'required selectbox'}
+
+  .clear
+
+  .grid-45.input id="#{address_id}zipcode"
+    = form.label :zipcode, with_required_mark(t(:zip))
+    = form.text_field :zipcode, :class => 'required'
 
   - if Spree::Config[:address_requires_state]
-    .input id="#{address_id}state"
+    .grid-45.input id="#{address_id}state"
       - have_states = !address.country.states.empty?
       = form.label :state, with_required_mark(t(:state))
       ruby:
@@ -36,7 +51,7 @@ div.inner data-hook="#{address_type}_inner"
          form.collection_select(:state_id, address.country.states,
                             :id, :name,
                             {:include_blank => true},
-                            {:class => have_states ? 'required' : 'hidden',
+                            {:class => have_states ? 'required selectbox' : 'hidden selectbox',
                             :disabled => !have_states}) +
          form.text_field(:state_name,
                             :class => !have_states ? 'required' : 'hidden',
@@ -47,13 +62,16 @@ div.inner data-hook="#{address_type}_inner"
       noscript
         = form.text_field :state_name, :class => 'required'
 
-  .input id="#{address_id}zipcode"
-    = form.label :zipcode, with_required_mark(t(:zip))
-    = form.text_field :zipcode, :class => 'required'
-  .input id="#{address_id}phone"
+  .grid-100.borders.padding.input id="#{address_id}phone"
     = form.label :phone, with_required_mark(t(:phone))
     = form.phone_field :phone, :class => 'required'
   - if Spree::Config[:alternative_shipping_phone]
-    .input id="#{address_id}altphone"
+    .grid-100.borders.input id="#{address_id}altphone"
       = form.label :alternative_phone, t(:alternative_phone)
       = form.phone_field :alternative_phone
+
+  - if address_type == 'billing'
+    .grid-100.padding.use-same-address-block
+      .input
+        = check_box_tag 'order[use_billing]', '1', ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
+        = label_tag :order_use_billing, t(:use_billing_address), :id => 'use_billing'

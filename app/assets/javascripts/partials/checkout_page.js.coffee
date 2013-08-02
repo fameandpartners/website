@@ -12,7 +12,13 @@ $('.checkout.edit').ready ->
       $button = $(e.currentTarget)
       previous_message = $button.val()
       loading_message = $button.data('loading') || 'Updating...'
-      $button.attr('disabled', true).val(loading_message).addClass('updating')
+      $button.val(loading_message).addClass('updating')
+      # disable button only after form submitting! Otherwise, the form will not be sent!
+      setTimeout(
+        () ->
+          $button.attr('disabled', true)
+        , 100
+      )
       # unlock button after 5 second - we can have 500 error on server
       setTimeout(
         () ->
