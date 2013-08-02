@@ -6,7 +6,7 @@
         span Store
     .subtitle Great dresses just for you
 
-  ul.products-list.grid-container
+  ul.products-list.grid-container.recommended-dresses
     - @recommended_dresses.each do |product|
       = render 'shared/product', product: product, colors: @colors[product.id]
 
