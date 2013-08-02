@@ -31,7 +31,7 @@ module Products
     end
 
     def taxon_image(taxon)
-      image = taxon.banner.image.present? ? taxon.banner.image.url(:banner) : nil
+      taxon.try(:banner).try(:image).present? ? taxon.banner.image.url(:banner) : nil
     end
 
     def multiple_collections_info
@@ -45,8 +45,8 @@ module Products
     def from_taxon(taxon)
       {
         image: taxon_image(taxon) || taxon_image(root_range_taxon),
-        title: taxon.banner.title || taxon.title,
-        description: taxon.banner.description || multiple_collections_info[:description]
+        title: taxon.try(:banner).try(:title) || taxon.name,
+        description: taxon.try(:banner).try(:description) || multiple_collections_info[:description]
       }
     end
   end
