@@ -1161,6 +1161,12 @@
       display: none;
     }
   }
+  #content {
+    .wrap {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, .1);
+      background: #fff;
+    }
+  }
   .checkout-page {
     margin: 0 0 80px;
     .page-title {
@@ -1215,6 +1221,30 @@
         }
       }
       .accordion-content {
+        padding: 0 10px;
+        legend {
+          font-weight: 700;
+        }
+        .grid-50, .grid-100 {
+          padding: 0 5px;
+        }
+        .grid-50 {
+          width: 45%;
+        }
+        .grid-100 {
+          legend {
+            margin-bottom: 16px;
+          }
+          &.padding {
+            padding: 0 19px;
+          }
+          &.borders {
+            border-top: 1px solid #e1e1e1;
+            border-bottom: 1px solid #e1e1e1;
+            padding-top: 20px;
+            padding-bottom: 20px;
+          }
+        }
         .border {
           border-bottom: 1px solid #e1e1e1;
         }
@@ -1236,22 +1266,22 @@
           }
         }
         .input {
-          margin: 0 0 40px;
+          margin: 0 0 20px;
           label {
             display: block;
             color: #333;
-            font-size: 16px;
+            font-size: 13px;
             margin: 0 0 10px;
           }
           input {
             vertical-align: top;
-            height: 40px;
-            line-height: 40px;
-            width: 264px;
+            height: 26px;
+            line-height: 26px;
+            width: 240px;
             padding: 0 10px;
             background: #fff;
             border: 1px solid #ccc;
-            box-shadow: 0 0 3px rgba(0, 0, 0, .3) inset;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .3) inset;
             border-radius: 4px;
             &.cvv {
               width: 90px;
@@ -1276,6 +1306,18 @@
             }
           }
         }
+        .chzn-container {
+          min-width: 260px;
+        }
+        .chzn-single {
+          height: 26px;
+          line-height: 26px;
+          font-size: 14px;
+          width: 250px;
+          border-color: ccc;
+          background: #fff;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, .3) inset;
+        }
         .coupon-block {
           margin: 20px 0 0;
           .submit {
@@ -1293,7 +1335,7 @@
         }
         .style-tip-block, .newsletter-block, .use-same-address-block {
           .input {
-            margin: 20px 0;
+            margin: 10px 0;
             input {
               width: auto;
               height: auto;
@@ -1326,7 +1368,6 @@
       }
     }
     .place-order {
-      text-align: center;
       margin: 28px 0;
       input {
         text-transform: uppercase;
