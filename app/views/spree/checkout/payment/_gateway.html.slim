@@ -22,5 +22,3 @@ ruby:
       = text_field_tag "#{param_prefix}[verification_value]", '', options_hash.merge(:id => 'card_code', :class => 'cvv', :size => 5)
       .card-hints = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
       .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.
-.place-order
-  input type="submit" value="Place order" data-loading="Placing..."
