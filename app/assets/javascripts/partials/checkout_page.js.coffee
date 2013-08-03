@@ -97,8 +97,13 @@ $('.checkout.edit').ready ->
           .attr('type', 'hidden')
           .attr('name', $form.find('[name*="[number]"]').attr('name').replace('number', 'gateway_payment_profile_id'))
           .val(data.token)
+        $type_field = $('<input/>')
+          .attr('type', 'hidden')
+          .attr('name', $form.find('[name*="[number]"]').attr('name').replace('number', 'cc_type'))
+          .val(data.scheme)
         $form.find(':input:visible').attr('disabled', true)
         $form.append($token_field)
+        $form.append($type_field)
         $form.submit()
       else
         $errors = $('<div/>').addClass('errors')
