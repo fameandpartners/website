@@ -1366,7 +1366,8 @@
     }
     .place-order {
       margin: 28px 0;
-      input {
+      input,
+      button {
         text-transform: uppercase;
         padding: 0 64px;
         height: 38px;

@@ -6,8 +6,18 @@ Spree::CreditCard.class_eval do
     self.first_name, self.last_name = value.split(' ')
   end
 
+  # remove expiration data validations
+  _validators.reject!{ |key, value| [:month, :year].include?(key) }
+  _validate_callbacks.each do |callback|
+    callback.raw_filter.attributes.reject! { |key| [:month, :year].include?(key) } if callback.raw_filter.respond_to?(:attributes)
+  end
+
   # don't store expiration data to db
   attr_accessor :month, :year
+
+  def has_payment_profile?
+    gateway_payment_profile_id.present?
+  end
 
   # override method to avoid storing
   def set_last_digits
