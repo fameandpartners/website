@@ -43,13 +43,15 @@ window.helpers.quickViewer = {
     })
 
   showProduct: (productId) ->
+    quickViewUrl = "/products/#{productId}/quick_view"
     $.ajax(
-      url: "/products/#{productId}/quick_view"
+      url: quickViewUrl
       type: 'GET'
       dataType: 'json'
       data: $.param({ product_id: productId })
       success: (response) ->
         helpers.quickViewer.showPopup.call(helpers.quickViewer, response.popup_html, response.variants)
+        tracker.quickView(quickViewUrl)
       failure: ->
         helpers.quickViewer.closePopup.call(helpers.quickViewer)
     )

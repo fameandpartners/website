@@ -96,10 +96,11 @@ $(".products.index").ready ->
     updatePageLocation: (filter) ->
       url = "#{ window.location.pathname }?#{ $.param(filter) }"
       window.history.pushState({path:url},'',url)
+      url
 
     searchProducts: () ->
       searchData = @currentFilter()
-      @updatePageLocation(searchData)
+      pageUrl = @updatePageLocation(searchData)
 
       $.ajax('/products',
         type: "GET",
@@ -108,6 +109,7 @@ $(".products.index").ready ->
         success: (html) ->
           $('.grid-75.fright').html(html)
           productsFilter.updateContentHandlers()
+          track.pageView(pageUrl, searchData)
       )
 
     updateContentHandlers: () ->
