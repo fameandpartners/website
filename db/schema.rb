@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728152030) do
+ActiveRecord::Schema.define(:version => 20130730203853) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -467,30 +467,11 @@ ActiveRecord::Schema.define(:version => 20130728152030) do
     t.datetime "updated_at",                                                                         :null => false
     t.string   "currency"
     t.string   "last_ip_address"
+    t.string   "user_first_name"
+    t.string   "user_last_name"
   end
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
-
-  create_table "spree_pages", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.string   "slug"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.boolean  "show_in_header",           :default => false, :null => false
-    t.boolean  "show_in_footer",           :default => false, :null => false
-    t.string   "foreign_link"
-    t.integer  "position",                 :default => 1,     :null => false
-    t.boolean  "visible",                  :default => true
-    t.string   "meta_keywords"
-    t.string   "meta_description"
-    t.string   "layout"
-    t.boolean  "show_in_sidebar",          :default => false, :null => false
-    t.string   "meta_title"
-    t.boolean  "render_layout_as_partial", :default => false
-  end
-
-  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"

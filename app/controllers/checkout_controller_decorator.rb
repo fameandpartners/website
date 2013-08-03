@@ -1,5 +1,6 @@
 Spree::CheckoutController.class_eval do
   before_filter :prepare_order, only: :edit
+  before_filter :find_payment_methods, only: [:edit, :update]
   skip_before_filter :check_registration
 
   def update_registration
@@ -132,6 +133,11 @@ Spree::CheckoutController.class_eval do
   # run callback - preparations to order states
   def prepare_order
     before_address
+  end
+
+  def find_payment_methods
+    @credit_card_gateway = @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
+    @pay_pal_method = @order.available_payment_methods.detect{ |method| method.method_type.eql?('paypalexpress') }
   end
 
   helper_method :completion_route

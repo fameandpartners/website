@@ -1,3 +1,13 @@
+- if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
+  - content_for :payment_gateway do
+    - if Rails.env.production?
+      = javascript_include_tag 'https://api.pin.net.au/pin.js'
+    - else
+      = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
+    javascript:
+      $(function(){
+        Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
+      })
 .wrap
   .checkout-page
     .grid-container
@@ -41,7 +51,7 @@
               .check
               .edit = link_to 'Edit', checkout_state_path('address'), :remote => true
           .accordion-content data-step="address" *{ :class => !active.eql?('address') && 'hide' }
-            = render 'spree/checkout/address' if active.eql?('address')
+            = render 'spree/checkout/address' if active.eql?('address') || active.eql?('payment')
           .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }
             .name
               = index += 1
