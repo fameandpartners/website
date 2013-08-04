@@ -29,7 +29,7 @@ FameAndPartners::Application.routes.draw do
 
   get 'search' => 'pages#search'
 
-  resources :recommended_dresses, :only => [:index]
+  get 'my-boutique' => 'pages#my_boutique', :as => :my_boutique
 
   # account settings
   resource :profile, only: [:show, :update], controller: 'users/profiles' do

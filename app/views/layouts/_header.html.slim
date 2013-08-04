@@ -92,8 +92,8 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
             li = link_to 'Top Sellers', '#'
             li = link_to 'Sale', '#'
             - if spree_user_signed_in? && current_spree_user.style_profile.present?
-              li *{:class => request_path?("#{recommended_dresses_path}") && 'active' }
-                = link_to 'Personalised Boutique', recommended_dresses_path
+              li *{:class => request_path?("#{my_boutique_path}") && 'active' }
+                = link_to 'Personalised Boutique', my_boutique_path
             - else
               li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
             li *{:class => request_path?("#{how_it_works_path}") && 'active' }
