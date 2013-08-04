@@ -19,6 +19,12 @@ FameAndPartners::Application.routes.draw do
     post 'move_to_wishlist', on: :member
   end
 
+  scope '/collection' do
+    root to: 'spree/products#index', as: 'collection'
+    get '/:collection' => 'spree/products#index'
+    get '/:collection/:id' => 'spree/products#show'
+  end
+
   get 'products/:id/quick_view' => 'spree/products#quick_view'
 
   resources :recommended_dresses, :only => [:index]

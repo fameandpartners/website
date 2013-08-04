@@ -97,4 +97,25 @@ module ApplicationHelper
   def with_required_mark(text)
     raw (text + content_tag(:span, ' * ', class: 'required'))
   end
+
+  def collection_taxon_path(taxon)
+    if range_taxonomy && range_taxonomy.taxons.where(id: taxon.id).exists?
+      permalink = taxon.permalink.split('/').last
+      "/collection/#{permalink}"
+    else
+      collection_path
+    end
+  end
+
+  def collection_product_path(product)
+    return spree.product_path(product) if range_taxonomy.blank?
+
+    taxon = product.taxons.where(taxonomy_id: range_taxonomy.id).first
+    if taxon
+      permalink = taxon.permalink.split('/').last
+      "/collection/#{permalink}/#{product.to_param}"
+    else
+      spree.product_path(product)
+    end
+  end
 end

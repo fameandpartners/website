@@ -9,7 +9,6 @@ module Products
         [
           ['price_high', 'Price High'],
           ['price_low', 'Price Low'],
-          #['popular', 'popular'],
           ['newest', "What's new"]
         ]
       end
@@ -22,7 +21,7 @@ module Products
     def initialize(params)
       self.current_currency = Spree::Config[:currency]
       @properties = {}
-      prepare(HashWithIndifferentAccess.new(params))
+      prepare(params)
     end
 
     def retrieve_products
@@ -43,7 +42,12 @@ module Products
       end
     end
 
+    def selected_products_info
+      Products::BannerInfo.new(collection).get
+    end
+
     protected
+
     def get_base_scope
       base_scope = Spree::Product.active
       # has options modify already applied scopes.
@@ -54,7 +58,7 @@ module Products
       base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
       base_scope = add_search_scopes(base_scope)
 
-      base_scope = add_body_shapes_scope(base_scope)
+      base_scope = add_bodyshape_scope(base_scope)
 
       base_scope = add_order_scope(base_scope)
 
@@ -82,8 +86,8 @@ module Products
     end
 
     def add_color_scope(base_scope)
-      return base_scope if colors.blank?
-      base_scope = base_scope.has_options(Spree::Variant.color_option_type, colors)
+      return base_scope if colour.blank?
+      base_scope = base_scope.has_options(Spree::Variant.color_option_type, colour)
     end
 
     def add_taxonomy_scope(base_scope)
@@ -94,21 +98,15 @@ module Products
       end
       # here we should search products which have taxons from both or more sets of taxons
       query = nil
-      taxons.each do |name, taxon_or_taxons|
-        if taxon_or_taxons.is_a?(ActiveRecord::Relation) or taxon_or_taxons.is_a?(Array)
-          ids = taxon_or_taxons.map(&:id).join(',')
-        else
-          ids = taxon_or_taxons.id
-        end
-
+      taxons.each do |name, ids|
         if query.blank? # first level, without subquery
           query = "select distinct(product_id) 
                    from spree_products_taxons 
-                   where taxon_id in (#{ids})"
+                   where taxon_id in (#{ids.join(',')})"
         else
           query = "select distinct(product_id) 
                    from spree_products_taxons 
-                   where taxon_id in (#{ids})
+                   where taxon_id in (#{ids.join(',')})
                     and product_id in (#{query})"
         end
       end
@@ -117,10 +115,10 @@ module Products
       base_scope.where(id: product_ids)
     end
 
-    def add_body_shapes_scope(base_scope)
-      return base_scope if body_shapes.blank?
+    def add_bodyshape_scope(base_scope)
+      return base_scope if bodyshape.blank?
       conditions = [].tap do |condition|
-        body_shapes.each do |shape|
+        bodyshape.each do |shape|
           condition.push("product_style_profiles.#{shape} > 0")
         end
       end.join(' or ')
@@ -145,12 +143,26 @@ module Products
       end
     end
 
+    def taxons
+      result = {}
+      result[:collection] = collection if collection.present?
+      result[:style] = style if style.present?
+      return result
+    end
+
     def prepare(params)
-      @properties[:taxons] = prepare_taxons(params[:taxons]) 
+      params = HashWithIndifferentAccess.new(params) unless params.is_a?(HashWithIndifferentAccess)
       @properties[:keywords] = params[:keywords]
+
+      # this block works as proxy, between human readable url params like 'red', 'skirt'
+      # and required for search ids
+      @properties[:collection]  = prepare_collection(params[:collection])
+      @properties[:style]       = prepare_style(params[:style])
+      @properties[:colour]      = prepare_colours(params[:colour])
+      @properties[:bodyshape]   = prepare_bodyshape(params[:bodyshape])
+      # eo proxy
+
       @properties[:search] = params[:search]
-      @properties[:colors] = params[:colors]
-      @properties[:body_shapes] = params[:body_shapes]
 
       per_page = params[:per_page].to_i
       @properties[:per_page] = per_page > 0 ? per_page : Spree::Config[:products_per_page]
@@ -158,13 +170,32 @@ module Products
       @properties[:order] = params[:order]
     end
 
-    def prepare_taxons(args)
-      return {} if args.blank?
-      {}.tap do |taxons|
-        args.each do |taxon_key, taxon_id_or_ids|
-          taxons[taxon_key] = Spree::Taxon.where(id: taxon_id_or_ids)
-        end
-      end
+    # get by permalinks. array or single param
+    def prepare_collection(permalinks)
+      return nil if permalinks.blank?
+      permalinks = [permalinks] unless permalinks.is_a?(Array)
+
+      db_permalinks = permalinks.map{|permalink| "collection/#{permalink}"}
+      Spree::Taxon.select(:id).where(permalink: db_permalinks).map(&:id)
+    end
+
+    def prepare_style(permalinks)
+      return nil if permalinks.blank?
+      permalinks = [permalinks] unless permalinks.is_a?(Array)
+
+      db_permalinks = permalinks.map{|permalink| "style/#{permalink}"}
+      Spree::Taxon.select(:id).where(permalink: db_permalinks).map(&:id)
+    end
+
+    def prepare_colours(colour_names)
+      return nil if colour_names.blank?
+      Spree::OptionValue.where(name: colour_names).to_a
+    end
+
+    def prepare_bodyshape(bodyshapes)
+      return nil if bodyshapes.blank?
+      bodyshapes = [bodyshapes] unless bodyshapes.is_a?(Array)
+      bodyshapes.map(&:downcase)
     end
   end
 end

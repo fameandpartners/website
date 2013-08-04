@@ -4,7 +4,6 @@
       ul
         li = link_to 'Home', root_path, class: 'top-icon link-root'
         li.top-icon.phone AU. 1800 455 345
-        /li = link_to 'Live chat', root_path, class: 'top-icon link-livechat'
         li = render 'shared/live_chat_js'
     nav.fright
       ul
@@ -85,14 +84,14 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
         nav.main
           ul.clearfix
             li.with-dropdown *{:class => request_path?('/products') && 'active' }
-              = link_to 'Full range', spree.products_path, title: "Custom made dresses from Fame & Partners"
+              = link_to 'Collection', collection_path, title: "Custom made dresses from Fame & Partners"
               .dropdown-menu-wrapper
                 .dropdown-menu
-                  .dropdown-title = link_to 'Browse range', spree.products_path
+                  .dropdown-title = link_to 'Browse range', collection_path
                   ul
                     - available_product_ranges.each do |taxon|
                       li
-                        = link_to spree.products_path(taxons: { range: taxon.id}) do
+                        = link_to collection_taxon_path(taxon) do
                           .range-image
                             = image_tag "dropdown/#{taxon.name.downcase.gsub(/\s+/, "")}.jpg", width: 150, height: 150, alt: taxon.name
                           = taxon.name

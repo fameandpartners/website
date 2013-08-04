@@ -65,27 +65,42 @@ $(".products.index").ready ->
     getSelectedTaxons: (name, container) ->
       result = {}
       if !container.find('li input[value=all]').is(':checked')
-        result[name] = _.collect(container.find('li input:checked'), get_value_func)
-      return result
+        selected = _.collect(container.find('li input:checked'), get_value_func)
+
+      # process result
+      # don't spam params with empty
+      # send without nasty [] if only one argument
+      if _.isEmpty(selected)
+        return result
+      else
+        selected = selected[0] if selected.length == 1
+        result[name] = selected
+        return result
 
     currentFilter: () ->
       filter = {}
 
-      # taxons
-      taxons = {}
-      _.extend(taxons, productsFilter.getSelectedTaxons('range', $('ul.filters-boxes.range')))
-      _.extend(taxons, productsFilter.getSelectedTaxons('style', $('ul.filters-boxes.style')))
-      filter.taxons = taxons unless _.isEmpty(taxons)
+      # collection
+      selectedCollection = productsFilter.getSelectedTaxons('collection', $('ul.filters-boxes.collection'))
+      _.extend(filter, selectedCollection)
 
-      # variants
+      # style
+      selectedStyles = productsFilter.getSelectedTaxons('style', $('ul.filters-boxes.style'))
+      _.extend(filter, selectedStyles)
+
+      # colours
       container = $('.filters-block .colors')
       if !container.find('.color.all').is('.active')
         choosenColors = _.collect(container.find('.color.active'), (obj) -> $(obj).data('color'))
-        filter.colors = choosenColors unless _.isEmpty(choosenColors)
+        unless _.isEmpty(choosenColors)
+          if choosenColors.length == 1
+            filter.colour = choosenColors[0]
+          else
+            filter.colour = choosenColors
 
       # body shapes
-      selectedShapes = productsFilter.getSelectedTaxons('body_shapes', $('ul.filters-boxes.body_shapes'))
-      _.extend(filter, selectedShapes) unless _.isEmpty(selectedShapes)
+      selectedShapes = productsFilter.getSelectedTaxons('bodyshape', $('ul.filters-boxes.body_shapes'))
+      _.extend(filter, selectedShapes)
 
       # order
       selectedOrder = $('#product_order').val()
@@ -94,8 +109,19 @@ $(".products.index").ready ->
       return filter
 
     updatePageLocation: (filter) ->
-      url = "#{ window.location.pathname }?#{ $.param(filter) }"
-      window.history.pushState({path:url},'',url)
+      url = '/collection'
+      if _.isEmpty(filter)
+        url = '/collection'
+      else if _.isEmpty(filter.collection) || (typeof filter.collection != 'string')
+        url = "/collection?#{ $.param(filter) }"
+      else # single selected collection
+        cleared_filter = _.omit(filter, 'collection')
+        if _.isEmpty(cleared_filter)
+          url = "/collection/#{filter.collection}"
+        else
+          url = "/collection/#{filter.collection}?#{$.param(cleared_filter)}"
+
+      window.history.pushState({ path: url }, '', url)
       url
 
     searchProducts: () ->

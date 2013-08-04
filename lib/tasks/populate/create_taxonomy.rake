@@ -10,16 +10,17 @@ namespace "db" do
 end
 
 def clear_taxonomy
-  Spree::Taxonomy.destroy_all
-  Spree::Taxon.destroy_all
   Spree::Taxonomy.delete_all
   Spree::Taxon.delete_all
+  Spree::Taxonomy.destroy_all
+  Spree::Taxon.destroy_all
+  Spree::Product.all.each {|p| p.taxons = []; p.save }
 end
 
 def build_taxonomy
   range_taxons_tree = {
     name: 'Range',
-    permalink: 'range',
+    permalink: 'collection',
     childs: [
       ['Long Dresses', 'View our complete range of long dresses perfect for your next formal event.'],
       ['Short Dresses', 'View our complete range of short dresses, perfect for your next formal event.'],
@@ -50,7 +51,7 @@ def create_taxonomy_node(root_element_attributes, childs_info)
   childs_info.each do |name, description|
     child = Spree::Taxon.where(
       name: name,
-      permalink: "#{root_taxon.permalink}/#{name.parameterize('_')}",
+      permalink: "#{root_taxon.permalink}/#{name.parameterize}",
       taxonomy_id: taxonomy.id
     ).first_or_create
 
@@ -64,12 +65,12 @@ def create_taxonomy_node(root_element_attributes, childs_info)
 end
 
 def randomly_assign_taxons_to_products
-  ranges = Spree::Taxon.roots.where(permalink: 'range').first.leaves
+  collections = Spree::Taxon.roots.where(permalink: 'collection').first.leaves
   styles = Spree::Taxon.roots.where(permalink: 'style').first.leaves
 
   Spree::Product.all.each do |product|
     product.taxons = [
-      ranges[rand(ranges.size)],
+      collections[rand(collections.size)],
       styles[rand(styles.size)]
     ]
   end

@@ -1,6 +1,9 @@
 module ProductsHelper
+  def range_taxonomy
+    @range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
+  end
+
   def available_product_ranges
-    range_taxonomy = Spree::Taxonomy.where(name: 'Range').first
     range_taxonomy.present? ? range_taxonomy.root.children : []
   end
 
@@ -79,10 +82,5 @@ module ProductsHelper
   def share_buttons
     return '' if Rails.env.development?
     render 'shared/share_buttons'
-  end
-
-  def selected_products_info
-    taxons = params[:taxons] || {}
-    Products::BannerInfo.new(taxons[:range]).get
   end
 end
