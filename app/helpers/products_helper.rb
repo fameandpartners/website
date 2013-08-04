@@ -25,8 +25,8 @@ module ProductsHelper
     return '' if Rails.env.development?
     return '' if product.video_url.blank?
 
-    height  = options[:height] || 590
-    width   = options[:width] || 600
+    width   = options[:width] || 560
+    height  = options[:height] || 315
 
     "<iframe width='#{width}' height='#{height}' src='#{product.video_url}' frameborder='0' allowfullscreen></iframe>"
   end
