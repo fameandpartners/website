@@ -27,6 +27,8 @@ FameAndPartners::Application.routes.draw do
 
   get 'products/:id/quick_view' => 'spree/products#quick_view'
 
+  get 'search' => 'pages#search'
+
   resources :recommended_dresses, :only => [:index]
 
   # account settings

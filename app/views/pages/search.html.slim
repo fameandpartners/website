@@ -1,0 +1,10 @@
+.wrap
+  .page-name
+    .inner
+      h1.title
+        em Search
+        span Results
+
+  ul.products-list.grid-container
+    - @products.each do |product|
+      = render 'shared/product', product: product, colors: @colors[product.id]

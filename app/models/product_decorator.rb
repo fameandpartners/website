@@ -1,4 +1,6 @@
 Spree::Product.class_eval do
+  include Tire::Model::Callbacks
+
   has_one :celebrity_inspiration,
     dependent: :destroy,
     class_name: 'Spree::CelebrityInspiration',
@@ -37,5 +39,12 @@ Spree::Product.class_eval do
       video_id = self.property('youtube_video_id') 
       video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}?rel=0&showinfo=0"
     end
+  end
+
+  def colors
+    option_type = option_types.find_by_name('dress-color')
+    variants.map do |variant|
+      variant.option_values.where(:option_type_id => option_type.id).map(&:name)
+    end.flatten.uniq
   end
 end

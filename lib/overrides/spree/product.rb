@@ -13,6 +13,10 @@ module Overrides
 
         mapping do
           indexes :id, :index => :not_analyzed
+          indexes :name, :analyzer => :snowball
+          indexes :description, :analyzer => :snowball
+          indexes :taxons, :as => 'taxons.map(&:name)'
+          indexes :colors, :as => 'colors'
           indexes :glam, :type => :float, :as => 'style_profile.glam'
           indexes :girly, :type => :float, :as => 'style_profile.girly'
           indexes :classic, :type => :float, :as => 'style_profile.classic'

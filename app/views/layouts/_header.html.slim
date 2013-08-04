@@ -63,8 +63,8 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
               br
               ' turnaround
         .search.fleft
-          = form_tag blog_search_by_query_url(subdomain: :blog), method: :get do
-            input type="text" name="search" placeholder="Search the site"
+          = form_tag search_path, method: :get do
+            input type="text" name="q" placeholder="Search the site"
         .fright
           .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
           .shopping-bag
@@ -91,7 +91,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                           = taxon.name
             li = link_to 'Top Sellers', '#'
             li = link_to 'Sale', '#'
-            - if spree_user_signed_in?
+            - if spree_user_signed_in? && current_spree_user.style_profile.present?
               li *{:class => request_path?("#{recommended_dresses_path}") && 'active' }
                 = link_to 'Personalised Boutique', recommended_dresses_path
             - else
