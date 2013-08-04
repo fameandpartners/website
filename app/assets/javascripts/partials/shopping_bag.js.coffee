@@ -8,7 +8,7 @@ $ ->
     cartTemplate: JST['templates/shopping_cart']
     carouselEnabled: false
     init: () ->
-      window.shoppingBag.container = $('.first-level .shopping-bag')
+      window.shoppingBag.container = $('header .shopping-bag')
 
       shoppingBag.updateElementsHandlers()
       shoppingBag.container.find("#shopping-bag-popup-wrapper").hide()

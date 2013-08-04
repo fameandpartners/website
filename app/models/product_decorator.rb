@@ -35,7 +35,7 @@ Spree::Product.class_eval do
   def video_url
     @video_url ||= begin
       video_id = self.property('youtube_video_id') 
-      video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}"
+      video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}?rel=0&showinfo=0"
     end
   end
 end

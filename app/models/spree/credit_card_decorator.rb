@@ -1,6 +1,7 @@
 Spree::CreditCard.class_eval do
   attr_accessor :full_name
   attr_accessible :full_name
+  attr_accessible :cc_type
 
   def full_name=(value)
     self.first_name, self.last_name = value.split(' ')
@@ -11,6 +12,11 @@ Spree::CreditCard.class_eval do
   _validate_callbacks.each do |callback|
     callback.raw_filter.attributes.reject! { |key| [:month, :year].include?(key) } if callback.raw_filter.respond_to?(:attributes)
   end
+
+  validates :cc_type,
+            :inclusion => {
+              :in => ActiveMerchant::Billing::CreditCardMethods::CARD_COMPANIES.keys
+            }
 
   # don't store expiration data to db
   attr_accessor :month, :year

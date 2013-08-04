@@ -28,60 +28,54 @@
 header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .header-wrapper
     .first-level
-      .wrap.no-overflow
-        .inner
-          .fleft
-            .logo = link_to 'Fame&Partners', root_path
-          .fright
-            .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
-            .shopping-bag
-              = link_to spree.cart_path, class: 'shopping-bag-toggler' do
-                .counter = current_order(true).item_count
-                ' Shopping bag
-              = render 'layouts/shopping_bag_content'
+      .logo = link_to 'Fame&Partners', root_path
     .second-level
-      .wrap
-        .inner
-          .fleft
-            ul.icons
-              li
-                .icon.quote
-                span
-                  ' Free
-                  br
-                  ' Quote
-              li
-                .icon.shipping
-                span
-                  ' Free
-                  br
-                  ' Shipping
-              li
-                .icon.returns
-                span
-                  ' Free
-                  br
-                  ' Returns
-              li
-                .icon.guarantee
-                span
-                  ' Fit
-                  br
-                  ' Guarantee
-              li
-                .icon.turnaround
-                span
-                  ' 3 week
-                  br
-                  ' turnaround
-          .fright
-            .search
-              = form_tag blog_search_by_query_url(subdomain: :blog), method: :get do
-                input type="text" name="search" placeholder="Search the site"
-
-    .level-three.main-nav
       .wrap.no-overflow
-        nav.main
+        ul.icons
+          li
+            .icon.quote
+            span
+              ' Free
+              br
+              ' Quote
+          li
+            .icon.shipping
+            span
+              ' Free
+              br
+              ' Shipping
+          li
+            .icon.returns
+            span
+              ' Free
+              br
+              ' Returns
+          li
+            .icon.guarantee
+            span
+              ' Fit
+              br
+              ' Guarantee
+          li
+            .icon.turnaround
+            span
+              ' 3 week
+              br
+              ' turnaround
+        .search.fleft
+          = form_tag blog_search_by_query_url(subdomain: :blog), method: :get do
+            input type="text" name="search" placeholder="Search the site"
+        .fright
+          .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
+          .shopping-bag
+            = link_to spree.cart_path, class: 'shopping-bag-toggler' do
+              .counter = current_order(true).item_count
+              ' Shopping bag
+            = render 'layouts/shopping_bag_content'
+
+    .third-level
+      .wrap.no-overflow
+        nav
           ul.clearfix
             li.with-dropdown *{:class => request_path?('/products') && 'active' }
               = link_to 'Collection', collection_path, title: "Custom made dresses from Fame & Partners"
@@ -95,6 +89,8 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                           .range-image
                             = image_tag "dropdown/#{taxon.name.downcase.gsub(/\s+/, "")}.jpg", width: 150, height: 150, alt: taxon.name
                           = taxon.name
+            li = link_to 'Top Sellers', '#'
+            li = link_to 'Sale', '#'
             - if spree_user_signed_in?
               li *{:class => request_path?("#{recommended_dresses_path}") && 'active' }
                 = link_to 'Personalised Boutique', recommended_dresses_path
@@ -102,8 +98,9 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
               li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
             li *{:class => request_path?("#{how_it_works_path}") && 'active' }
               = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
+            li = link_to 'Custom dresses', '#'
             li = link_to 'Blog', root_url(:subdomain => :blog), title: "Fame & Partners Blog", target: "_blank"
-            li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
+            li.fright = link_to 'Style quiz', '#', :class => 'show-style-quiz'
 
   javascript:
     window.bootstrap = {}

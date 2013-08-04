@@ -17,6 +17,8 @@
   }
   .items-carousel {
     list-style: none;
+    height: 294px;
+    overflow: hidden;
     .item-block {
       margin: 4px 0 0;
       padding: 8px;
@@ -384,6 +386,11 @@
         background: image-url('icon-zoom.png') center center no-repeat #fff;
         border-radius: 0 0 0 4px;
       }
+    }
+  }
+  #videos {
+    iframe {
+      margin: 20px 20px 14px;
     }
   }
   #inspiration {
@@ -1137,27 +1144,11 @@
 
 #checkout {
   header {
-    height: 92px;
-    .first-level .fright, .second-level .fright, .level-three {
+    height: 96px;
+    .second-level, .third-level {
       display: none;
     }
-    .header-wrapper {
-      width: 1096px;
-      margin: 0 auto;
-      .wrap {
-        width: auto;
-      }
-      .first-level {
-        float: left;
-      }
-      .second-level {
-        float: right;
-        .inner {
-          margin-top: 34px;
-        }
-      }
-    }
-    &:before {
+    &:before, &:after {
       display: none;
     }
   }
