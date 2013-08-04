@@ -1144,27 +1144,11 @@
 
 #checkout {
   header {
-    height: 92px;
-    .first-level .fright, .second-level .fright, .level-three {
+    height: 96px;
+    .second-level, .third-level {
       display: none;
     }
-    .header-wrapper {
-      width: 1096px;
-      margin: 0 auto;
-      .wrap {
-        width: auto;
-      }
-      .first-level {
-        float: left;
-      }
-      .second-level {
-        float: right;
-        .inner {
-          margin-top: 34px;
-        }
-      }
-    }
-    &:before {
+    &:before, &:after {
       display: none;
     }
   }
