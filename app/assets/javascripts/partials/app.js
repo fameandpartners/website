@@ -115,5 +115,10 @@ $(function(){
 
   $('.selectbox').chosen();
 
+  $('.toggle-sizes').fancybox({
+    width: '1000',
+    height: '183'
+  });
+
   window.initHoverableProductImages()
 });

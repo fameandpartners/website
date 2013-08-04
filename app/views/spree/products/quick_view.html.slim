@@ -59,7 +59,7 @@ ruby:
             option value='' Choose your size
             - sizes.each do |size|
               option{value=size} = size
-        = link_to 'What size am i?', '#', class: 'info'
+        = link_to 'What size am i?', '#what-size', class: 'info toggle-sizes'
       .buy-wishlist
         = add_to_bag_link(@product)
         = add_to_wishlist_link(@product)
