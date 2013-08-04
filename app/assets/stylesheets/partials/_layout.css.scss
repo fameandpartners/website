@@ -135,76 +135,24 @@
 header {
   width: 100%;
   position: relative;
-  height: 169px;
+  height: 199px;
   background: #fff;
   border-bottom: 1px solid #efefef;
-  .first-level {
-    .inner {
-      height: 29px;
-      padding: 32px 0 0;
-      margin: 0 0 20px;
-    }
-    .wishlist, .shopping-bag {
-      float: left;
-    }
-    .shopping-bag {
-      margin: 0 0 0 20px;
-      position: relative;
-    }
-    .wishlist-link, .shopping-bag-toggler {
-      font: 400 14px/29px $fontThree;
-      text-decoration: none;
-      color: #333;
-      display: block;
-      padding: 0 0 0 32px;
-      background: image-url('icons-header-cart.png') 0 0 no-repeat;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-    .shopping-bag-toggler {
-      position: relative;
-      background-position: 0 -29px;
-      .counter {
-        position: absolute;
-        top: 0;
-        left: 1px;
-        width: 22px;
-        text-align: center;
-        text-decoration: none;
-        color: #fff;
-        font: 700 10px/36px $fontOne;
-      }
-    }
-  }
   .logo {
-    float: left;
-    font: 300 20px/1.1 $fontOne;
-    text-transform: uppercase;
-    letter-spacing: 10px;
+    padding: 32px 0 29px;
     a {
+      width: 488px;
+      height: 34px;
       display: block;
-      width: 389px;
-      height: 28px;
-      text-align: center;
       margin: 0 auto;
       background: image-url('logo.png') center center no-repeat;
       overflow: hidden;
       text-indent: -999px;
     }
-    span {
-      background: image-url('icon-header-amp-black.png') 0 0 no-repeat;
-      display: inline-block;
-      width: 29px;
-      height: 21px;
-      text-indent: -999px;
-      vertical-align: top;
-      margin: 1px 9px 0 -12px;
-    }
   }
   .second-level {
-    height: 32px;
-    margin: 0 0 13px;
+    height: 28px;
+    margin: 17px 0 17px;
   }
   .icons {
     float: left;
@@ -246,11 +194,44 @@ header {
       }
     }
   }
+  .wishlist, .shopping-bag {
+    float: left;
+  }
+  .shopping-bag {
+    margin: 0 0 0 20px;
+    position: relative;
+  }
+  .wishlist-link, .shopping-bag-toggler {
+    font: 400 12px/29px $fontThree;
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 0 0 0 32px;
+    background: image-url('icons-header-cart.png') 0 0 no-repeat;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .shopping-bag-toggler {
+    position: relative;
+    background-position: 0 -29px;
+    .counter {
+      position: absolute;
+      top: 0;
+      left: 1px;
+      width: 22px;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      font: 700 10px/36px $fontOne;
+    }
+  }
   .search {
+    margin: 0 0 0 60px;
     input {
-      font: 400 14px/30px $fontOne;
+      font: 400 italic 14px/30px $fontOne;
       color: #acacac;
-      width: 256px;
+      width: 202px;
       height: 30px;
       padding: 0 34px 0 8px;
       border: 1px solid #e0e0e0;
@@ -258,7 +239,7 @@ header {
     }
   }
   nav {
-    font: 400 14px/1 $fontOne;
+    font: 300 14px/1 $fontOne;
     text-transform: uppercase;
     a {
       color: #333;
@@ -268,6 +249,7 @@ header {
       }
     }
     > ul {
+      width: 100%;
       > li {
         border-left: 1px solid #e5e5e5;
         height: 23px;
@@ -277,7 +259,7 @@ header {
         position: relative;
         > a {
           display: block;
-          padding: 0 19px;
+          padding: 0 24px;
         }
         .dropdown-menu-wrapper {
           display: none;
@@ -403,26 +385,26 @@ header {
     left: 45px;
     right: 45px;
   }
+  &:after {
+    content: '';
+    height: 1px;
+    background: #efefef;
+    position: absolute;
+    top: 94px;
+    left: 45px;
+    right: 45px;
+  }
   &.blog {
     height: auto;
     background: transparent;
     box-shadow: none;
-    &:before {
+    &:before, &:after {
       display: none;
     }
     nav {
       top: 4px;
       right: 0;
       position: absolute;
-    }
-    .logo {
-      margin: 20px auto;
-      float: none;
-      text-align: left;
-      width: 389px;
-      a {
-        width: 100%;
-      }
     }
     .wrap {
       border-bottom: 1px dashed #000;
