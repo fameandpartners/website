@@ -37,7 +37,7 @@
           li.product-item.grid-25
             .thumbnail
               .like = add_to_wishlist_link(product)
-              = link_to product_image(product, itemprop: "image", width: 243, height: 352, alt: product.name), spree.product_path(product)
-            .name = link_to product.name, spree.product_path(product)
+              = link_to product_image(product, itemprop: "image", width: 243, height: 352, alt: product.name), collection_product_path(product)
+            .name = link_to product.name, collection_product_path(product)
             .price = product.price_in(current_currency).display_price
       #product-items-next

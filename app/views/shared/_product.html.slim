@@ -3,7 +3,7 @@ li.product-item.grid-25
     .like = add_to_wishlist_link(product)
     .quick-view = quick_view_link(product)
     = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
-  .name = link_to product.name, spree.product_path(product)
+  .name = link_to product.name, collection_product_path(product)
   /.description = product_short_description(product)
   .price = product.price_in(current_currency).display_price
   .colors

@@ -27,10 +27,10 @@
           li.item.grid-container data-id='#{variant.id}' data-line-item-id='#{line_item.id}'
             .grid-50.description
               .image
-                = link_to product_image(product, itemprop: "image", width: 136, height: 200, alt: product.name), spree.product_path(product)
+                = link_to product_image(product, itemprop: "image", width: 136, height: 200, alt: product.name), collection_product_path(product)
                 .remove = link_to 'Remove from bag', '#', data: { id: variant.id }, class: 'remove-item-from-cart'
               .desc
-                .name = link_to product.name, spree.product_path(product), target: 'blank'
+                .name = link_to product.name, collection_product_path(product), target: 'blank'
                 .text = line_item_description(variant)
                 .wishlist = link_to 'Move to wish list', '#', data: { id: variant.id }
             .grid-30.details

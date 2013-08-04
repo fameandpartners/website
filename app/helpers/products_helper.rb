@@ -37,19 +37,19 @@ module ProductsHelper
   def hoverable_product_image_tag(product, options = {})
     no_image = "noimage/product.png"
     if product.images.empty?
-      link_to image_tag(no_image, options), spree.product_path(product)
+      link_to image_tag(no_image, options), collection_product_path(product)
     else
       images = product.images
       image = images.first
       options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
       options[:second_image] = images.second.attachment.url(:product) if images.size > 1
       options[:onerror] = "window.switchToAltImage(this, '/assets/#{no_image}')"
-      link_to image_tag(image.attachment.url(:product), options), spree.product_path(product)
+      link_to image_tag(image.attachment.url(:product), options), collection_product_path(product)
     end 
   end
 
   def quick_view_link(product)
-    link_to 'Quick view', spree.product_path(product), data: { action: 'quick-view', id: product.permalink }
+    link_to 'Quick view', collection_product_path(product), data: { action: 'quick-view', id: product.permalink }
   end
 
   def add_to_bag_link(product_or_variant)
