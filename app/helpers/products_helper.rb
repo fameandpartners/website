@@ -68,7 +68,7 @@ module ProductsHelper
         link_to 'Wish list', '#', link_options.merge(class: 'add-wishlist')
       end
     else # user not logged in, wishlist unavailable
-      link_to 'Wish list', spree_login_path, class: 'add-wishlist', data: { action: 'auth-required' }
+      link_to 'Wish list', spree_signup_path, class: 'add-wishlist', data: { action: 'auth-required' }
     end
   end
 

@@ -21,6 +21,8 @@ def build_taxonomy
   range_taxons_tree = {
     name: 'Range',
     permalink: 'collection',
+    title: 'Full Range',
+    description: 'Fame & Partners formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.',
     childs: [
       ['Long Dresses', 'View our complete range of long dresses perfect for your next formal event.'],
       ['Short Dresses', 'View our complete range of short dresses, perfect for your next formal event.'],
@@ -47,6 +49,14 @@ end
 def create_taxonomy_node(root_element_attributes, childs_info)
   taxonomy = Spree::Taxonomy.where(name: root_element_attributes[:name]).first_or_create
   root_taxon = Spree::Taxon.where(root_element_attributes.merge(taxonomy_id: taxonomy.id)).first_or_create
+
+  if childs_info[:description].present? || childs_info[:title].present?
+    banner = root_taxon.build_banner(
+      description: childs_info[:description],
+      title: child_info[:name]
+    )
+    banner.save
+  end
 
   childs_info.each do |name, description|
     child = Spree::Taxon.where(
