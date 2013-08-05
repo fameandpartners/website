@@ -10,7 +10,11 @@ $(".products.show").ready ->
   )
   # enable images carousel
   $("#product-images").carouFredSel(
-    window.helpers.get_vertical_carousel_options()
+    window.helpers.get_vertical_carousel_options(
+      items:
+        visible: 4
+        height: 132
+    )
   )
 
   # show big images from carouseled small images
