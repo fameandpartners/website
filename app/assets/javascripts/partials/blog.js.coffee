@@ -49,25 +49,13 @@ $ ->
 #        window.disqus_url = disqus_url
 #        $('head').append(dsq)
 
-  $('.celebrity-modal .close-modal a').on 'click', ->
-    window.hideCelebrityModal()
-    false
-
-  $('.celebrity-modal .overlay').on 'click', ->
-    window.hideCelebrityModal()
-    false
-
-  $(document).on 'keyup', (e) ->
-    if e.keyCode == 27
-      modal = $('.celebrity-modal')
-      if !$celebrity_modal.hasClass('hidden')
-        window.hideCelebrityModal()
-    true
-
-  $('.zoom').on 'click', (e) ->
-    $parent = $(e.target).parent()
+  window.showCelebrityModal = (e) ->
     $('.celebrity-modal').removeClass('hidden')
     $("body").animate({"scrollTop":0},10)
+    window.updateCelebrityModal($(e.target).parent())
+
+  window.updateCelebrityModal = (item) ->
+    $parent = $(item)
     photo_id = $parent.find('.love-share .icons').attr('data-id')
     is_like = $parent.find('.love-share .icons .love').hasClass('active')
     is_dislike = $parent.find('.love-share .icons .hate').hasClass('active')
@@ -79,25 +67,25 @@ $ ->
       photo_url = 'http://placehold.it/576x770'
     date      = $parent.attr('data-date')
 
-#    $('#disqus_thread').remove()
-#    $('.block-comments').append("<div id='disqus_thread'></div>")
-#
-#    window.disqus_identifier = "photo-#{photo_id}"
-#    window.disqus_url = "http://www.fameandpartners.com/photos/#{photo_id}"
-#
-#    if window.DISQUS
-#      DISQUS.reset
-#        reload: true
-#        config: () ->
-#          this.page.identifier = window.disqus_identifier
-#          this.page.url = window.disqus_url
-#    else
-#      dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-#      disqus_shortname = 'fameandpartners'
-#      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-#      window.disqus_identifier = disqus_identifier
-#      window.disqus_url = disqus_url
-#      $('head').append(dsq)
+    #    $('#disqus_thread').remove()
+    #    $('.block-comments').append("<div id='disqus_thread'></div>")
+    #
+    #    window.disqus_identifier = "photo-#{photo_id}"
+    #    window.disqus_url = "http://www.fameandpartners.com/photos/#{photo_id}"
+    #
+    #    if window.DISQUS
+    #      DISQUS.reset
+    #        reload: true
+    #        config: () ->
+    #          this.page.identifier = window.disqus_identifier
+    #          this.page.url = window.disqus_url
+    #    else
+    #      dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    #      disqus_shortname = 'fameandpartners'
+    #      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    #      window.disqus_identifier = disqus_identifier
+    #      window.disqus_url = disqus_url
+    #      $('head').append(dsq)
 
     $celebrity_modal.find('.name').html(name)
     $celebrity_modal.find('.icons').attr('data-id', photo_id)
@@ -115,6 +103,43 @@ $ ->
     $comments = $celebrity_modal.find('.comments')
     $comments.empty()
     $comments.append $("<a href='#{comments_url}#disqus_thread'></a>")
+
+    $celebrity_modal.find('.celebrity-next, .celebrity-prev').unbind('click')
+
+    if $parent.siblings().size() > 0
+      $celebrity_modal.find('.celebrity-next, .celebrity-prev').show()
+
+      $children = $parent.parent().children()
+      $next = if $parent.next().size() isnt 0 then $parent.next() else $children.filter(':first')
+      $prev = if $parent.prev().size() isnt 0 then $parent.prev() else $children.filter(':last')
+
+      $celebrity_modal.find('.celebrity-next').bind 'click', () ->
+        window.updateCelebrityModal($next)
+      $celebrity_modal.find('.celebrity-prev').bind 'click', () ->
+        window.updateCelebrityModal($prev)
+
+    else
+      $celebrity_modal.find('.celebrity-next, .celebrity-prev').hide()
+
+
+
+  $('.celebrity-modal .close-modal a').on 'click', ->
+    window.hideCelebrityModal()
+    false
+
+  $('.celebrity-modal .overlay').on 'click', ->
+    window.hideCelebrityModal()
+    false
+
+  $(document).on 'keyup', (e) ->
+    if e.keyCode == 27
+      modal = $('.celebrity-modal')
+      if !$celebrity_modal.hasClass('hidden')
+        window.hideCelebrityModal()
+    true
+
+  $('.zoom').on 'click', window.showCelebrityModal
+
 
   $('.icons .love').on 'click', (e) ->
     $this = $(this)
