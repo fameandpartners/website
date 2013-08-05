@@ -21,11 +21,11 @@
 
   deskTimerCheck = function () {
     if ($('#assistly-widget-1 .a-desk-widget-chat').length) {
-      console.log($("#assistly-widget-1 .a-desk-widget-chat"))
-      $("#assistly-widget-1 .a-desk-widget-chat").html("Live Chat");
-      $("#assistly-widget-1 .a-desk-widget-chat").css("background-image", "none");
+      $("#assistly-widget-1 .a-desk-widget-chat")
+        .html("Live Chat")
+        .css("background-image", "none");
     } else {
-      setInterval(deskTimerCheck, 1000);
+      setTimeout(deskTimerCheck, 1000);
     }
   };
   $(document).ready(function() {
