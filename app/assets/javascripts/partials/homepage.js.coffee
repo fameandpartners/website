@@ -3,7 +3,8 @@ $(".index.show").ready ->
   $(".featured#product-items").carouFredSel(
     window.helpers.get_horizontal_carousel_options(
       infinite: true,
-      circular: true
+      circular: true,
+      height: 458
     )
   )
 
