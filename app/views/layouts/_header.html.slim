@@ -22,7 +22,6 @@
                 li = link_to 'Account settings', profile_path
                 li = link_to 'Your orders', user_orders_path
                 li = link_to 'Style profile', styleprofile_path
-                li = link_to 'My reviews', reviews_path
                 li = link_to 'Sign out', spree_logout_path
 
 header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
@@ -89,8 +88,6 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                           .range-image
                             = image_tag "dropdown/#{taxon.name.downcase.gsub(/\s+/, "")}.jpg", width: 150, height: 150, alt: taxon.name
                           = taxon.name
-            li = link_to 'Top Sellers', '#'
-            li = link_to 'Sale', '#'
             - if spree_user_signed_in? && current_spree_user.style_profile.present?
               li *{:class => request_path?("#{my_boutique_path}") && 'active' }
                 = link_to 'Personalised Boutique', my_boutique_path
@@ -98,9 +95,8 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
               li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
             li *{:class => request_path?("#{how_it_works_path}") && 'active' }
               = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
-            li = link_to 'Custom dresses', '#'
             li = link_to 'Blog', root_url(:subdomain => :blog), title: "Fame & Partners Blog", target: "_blank"
-            li.fright = link_to 'Style quiz', '#', :class => 'show-style-quiz'
+            li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
 
   javascript:
     window.bootstrap = {}
