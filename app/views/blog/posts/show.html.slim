@@ -39,7 +39,7 @@
               var addthis_config = {"data_track_addressbar":true};
             script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
 
-      - if @post.red_carpet?
+      - if @post.red_carpet? && @post.celebrity_photos.assigned.count >= 3
         .blog-block-title
           .latest Photos
           .block-subtitle From the event
