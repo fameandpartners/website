@@ -39,6 +39,8 @@ Spree::UserRegistrationsController.class_eval do
 
       session.delete(:sign_up_reason)
 
+      sign_in :spree_user, resource
+
       set_flash_message(:notice, :signed_up)
       session[:spree_user_signup] = true
       associate_user

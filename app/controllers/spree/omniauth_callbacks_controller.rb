@@ -43,8 +43,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               user.sign_up_reason = session[:sign_up_reason]
             end
 
-            user.confirm!
-
             if user.save
               CampaignMonitor.delay.synchronize(user.email, user, custom_fields)
               flash[:notice] = "Signed in successfully."
