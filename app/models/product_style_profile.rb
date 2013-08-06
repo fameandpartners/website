@@ -1,77 +1,32 @@
 class ProductStyleProfile < ActiveRecord::Base
-  BODY_SHAPES = %w{apple pear strawberry hour_glass column}
+  BODY_SHAPES = %W{apple pear athletic strawberry hour_glass column petite}
+  BASIC_STYLES = %w(glam girly classic edgy bohemian)
+  BRA_SIZES = %w(bra_aaa bra_aa bra_a bra_b bra_c bra_d bra_e bra_fpp)
+  
+  default_values Hash[ *BASIC_STYLES.collect{|t| [t, 0]}.flatten]
+  default_values Hash[ *BODY_SHAPES.collect{|t| [t, 0]}.flatten]
+  default_values Hash[ *BRA_SIZES.collect{|t| [t, 0]}.flatten]
 
-  default_values :glam => 0,
-                 :girly => 0,
-                 :classic => 0,
-                 :edgy => 0,
-                 :bohemian => 0,
-                 :apple => 0,
-                 :pear => 0,
-                 :strawberry => 0,
-                 :hour_glass => 0,
-                 :column => 0,
-                 :bra_aaa => 0,
-                 :bra_aa => 0,
-                 :bra_a => 0,
-                 :bra_b => 0,
-                 :bra_c => 0,
-                 :bra_d => 0,
-                 :bra_e => 0,
-                 :bra_fpp => 0,
-                 :sexiness => 0,
-                 :fashionability => 0
+  default_values :sexiness => 0, :fashionability => 0
 
-  attr_accessible :glam,
-                  :girly,
-                  :classic,
-                  :edgy,
-                  :bohemian,
-                  :apple,
-                  :pear,
-                  :strawberry,
-                  :hour_glass,
-                  :column,
-                  :bra_aaa,
-                  :bra_aa,
-                  :bra_a,
-                  :bra_b,
-                  :bra_c,
-                  :bra_d,
-                  :bra_e,
-                  :bra_fpp,
-                  :sexiness,
-                  :fashionability
+  attr_accessible *BASIC_STYLES
+  attr_accessible *BODY_SHAPES
+  attr_accessible *BRA_SIZES
+  attr_accessible :sexiness, :fashionability
 
-  validates :glam,
-            :girly,
-            :classic,
-            :edgy,
-            :bohemian,
-            :apple,
-            :pear,
-            :strawberry,
-            :hour_glass,
-            :column,
-            :bra_aaa,
-            :bra_aa,
-            :bra_a,
-            :bra_b,
-            :bra_c,
-            :bra_d,
-            :bra_e,
-            :bra_fpp,
-            :sexiness,
-            :fashionability,
-            :numericality => {
-              :allow_blank => true,
-              :only_integer => true,
-              :greater_than_or_equal_to => 0,
-              :less_than_or_equal_to => 10
-            }
+  numericality = { 
+    :allow_blank => true,
+    :only_integer => true,
+    :greater_than_or_equal_to => 0,
+    :less_than_or_equal_to => 10
+  }
+  validates *BASIC_STYLES, numericality: numericality
+  validates *BODY_SHAPES, numericality: numericality
+  validates *BRA_SIZES, numericality: numericality
+  validates :sexiness, :fashionability, numericality: numericality
 
   belongs_to :product,
-             :class_name => 'Spree::Product'
+    :class_name => 'Spree::Product'
 
   after_save do
     product.try(:update_index)
