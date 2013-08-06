@@ -1,14 +1,18 @@
 = render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user }
 
-.wrap
-  h1.block-title= t(:change_my_password)
-
-  .form.centered
-    = form_for @spree_user, :as => :spree_user, :url => spree.spree_user_password_path, :method => :put do |f|
-      = f.hidden_field :reset_password_token
-      .input.string
-        = f.password_field :password, placeholder: t(:password)
-      .input.string
-        = f.password_field :password_confirmation, placeholder: t(:password_confirmation)
-      .submit-form.input
-        = f.submit t(:update_password), class: 'btn button primary'
+.wrap.devise-forms
+  .fleft
+    h1 = t(:change_my_password)
+    .default-form
+      .form
+        = form_for @spree_user, :as => :spree_user, :url => spree.spree_user_password_path, :method => :put do |f|
+          = f.hidden_field :reset_password_token
+          .input.string
+            = f.password_field :password, placeholder: t(:password)
+          .input.string
+            = f.password_field :password_confirmation, placeholder: t(:password_confirmation)
+          .submit-form.input.clearfix
+            .fleft
+              = f.submit t(:update_password), class: 'btn button primary'
+  .fright
+    = image_tag 'image-login.jpg', width: 533, height: 562, alt: ''

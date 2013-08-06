@@ -1,14 +1,13 @@
-- if flash[:alert]
-  .flash.errors
-    = flash[:alert]
+= render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user }
 
-.wrap
-  h1.block-title = t(:login_as_existing)
-
-  .existing-customer
-    .form.centered data-hook="login"
+.wrap.devise-forms
+  .fleft
+    h1 Log-in
+    .description Log-in to check your order, save your dress to a Wishlist, to discover your Style Profile, share with friends and to manage your profile.
+    = link_to 'Sigin with facebook', fb_auth_path, class: 'facebook-signup'
+    .or
+      span or
+    .default-form
       = render :partial => 'spree/shared/login'
-      .separate
-      .aligncenter #{link_to t(:create_a_new_account), spree.signup_path} | #{link_to t(:forgot_password), spree.new_spree_user_password_path}
-
-  div data-hook="login_extras"
+  .fright
+    = image_tag 'image-login.jpg', width: 533, height: 562, alt: ''

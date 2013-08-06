@@ -1,3 +1,103 @@
+#content .devise-forms {
+  h1, .or {
+    font: 400 italic 38px/1.1 $fontFour;
+  }
+  h1 {
+    color: #000;
+    text-align: left;
+    padding: 0;
+    margin: 36px 0 20px;
+    &:before {
+      display: none;
+    }
+  }
+  > .fleft {
+    width: 418px;
+  }
+  > .fright {
+    margin: 36px 0 0;
+  }
+  .description {
+    font: 300 15px/1.3 $fontOne;
+    color: #000;
+    width: 360px;
+  }
+  .facebook-signup, .facebook-signin {
+    margin: 20px 0;
+    box-shadow: none;
+  }
+  .or {
+    position: relative;
+    z-index: -1;
+    span {
+      color: #999;
+      background: #fff;
+      padding: 0 16px 0 0;
+      position: relative;
+      z-index: 2;
+    }
+    &:before {
+      content: '';
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      top: 60%;
+      left: 0;
+      background: #efefef;
+    }
+  }
+  .form {
+    .string {
+      input {
+        height: 32px;
+        line-height: 32px;
+        margin: 4px 0 0;
+      }
+    }
+    .boolean {
+      input {
+        margin-top: 0;
+      }
+    }
+    .two-fields {
+      .input {
+        float: left;
+        width: 200px;
+        &:first-child {
+          margin-right: 18px;
+        }
+      }
+    }
+    .submit-form {
+      width: 100%;
+      input {
+        width: 240px;
+        margin: 0;
+        text-transform: uppercase;
+        padding: 0;
+        height: 38px;
+        font: 300 20px/38px $fontOne;
+        color: #fff;
+        display: inline-block;
+        box-shadow: 0;
+        border-radius: 0;
+        @include linear-gradient(#414141, #262626);
+      }
+      .fright {
+        font-size: 14px;
+        font-family: $fontOne;
+        line-height: 1.4;
+        min-width: 158px;
+      }
+    }
+  }
+  .terms {
+    font-family: $fontOne;
+    font-size: 13px;
+    margin: 30px 0 0;
+  }
+}
+
 .block-title {
   color: #fff;
   font: 100 40px/1 $fontOne;

@@ -488,8 +488,8 @@ header {
   }
 }
 
-.facebook-signup {
-  background: image-url('button-facebook-connect.png') 0 0 no-repeat;
+.facebook-signup, .facebook-signin {
+  background: image-url('button-facebook-signup.png') 0 0 no-repeat;
   width: 192px;
   height: 33px;
   display: block;
@@ -499,6 +499,10 @@ header {
   margin: 0 auto;
   border-radius: 4px;
   box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+}
+
+.facebook-signin {
+  background-image: image-url('button-facebook-signin.png');
 }
 
 .breadcrumbs-likes {
