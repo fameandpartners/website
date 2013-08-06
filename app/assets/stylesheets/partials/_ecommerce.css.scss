@@ -976,8 +976,6 @@
     border-bottom: 0;
     margin: 36px 0 0 0;
     padding: 0;
-    position: relative;
-    left: 30px;
     width: 24%;
     .main-title {
       background: #f3f3f3;
@@ -1087,12 +1085,14 @@
   }
   .content-margin {
     margin-top: 36px;
+    padding-left: 0;
+    padding-right: 0;
   }
   .ad {
     background: #fff;
     height: 160px;
     margin: 0 19px 18px;
-    colour: #000;
+    color: #000;
     text-align: center;
     
     h1{
