@@ -521,17 +521,48 @@
       }
     }
     .body-shapes {
-      padding: 0 0 12px;
-      margin: 0 0 12px;
-      border-bottom: 1px solid #efefef;
+      margin: 0;
       .desc {
         color: #000;
+        margin: 24px 0 14px;
+      }
+      .image {
+        width: 60px;
+        height: 76px;
+        margin: 0 auto 10px;
+        vertical-align: top;
+        &.hour-glass {
+          background: image-url('body-shape-hour_glass.png') center 5px no-repeat;
+        }
+        &.pear {
+          background: image-url('body-shape-pear.png') center 5px no-repeat;
+        }
+        &.strawberry {
+          background: image-url('body-shape-strawberry.png') center 5px no-repeat;
+        }
+        &.apple {
+          background: image-url('body-shape-apple.png') center 5px no-repeat;
+        }
+        &.column {
+          background: image-url('body-shape-column.png') center 5px no-repeat;
+        }
+        &.athletic {
+          background: image-url('body-shape-athletic.png') center 5px no-repeat;
+        }
+        &.petite {
+          background: image-url('body-shape-petite.png') center 5px no-repeat;
+        }
+      }
+      .name {
+        font-size: 11px;
       }
       ul {
         overflow: hidden;
+        text-align: center;
         li {
-          float: left;
-          margin: 0 10px 0 0;
+          display: inline-block;
+          vertical-align: top;
+          margin: 0 5px 10px 0;
         }
       }
     }
