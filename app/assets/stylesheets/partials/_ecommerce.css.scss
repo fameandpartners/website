@@ -1105,7 +1105,7 @@
       background: #f3f3f3;
       padding: 5px 10px;
       height: 25px;
-      font: 300 14px/25px $fontOne;
+      font: 300 14px/23px $fontOne;
       color: #999898;
       text-transform: uppercase;
     }
@@ -1114,13 +1114,17 @@
     }
     .results {
       padding: 0 10px 0 0;
-      border-right: 1px solid #999898;
+      border-right: 1px solid #c3c3c3;
     }
     .sort {
       padding: 0 0 0 10px;
-      border-left: 1px solid #999898;
-      select {
-        margin: 0 0 0 4px;
+      border-left: 1px solid #c3c3c3;
+      .chzn-container {
+        margin: 0 0 0 6px;
+        min-width: 126px;
+        .chzn-single {
+          border-radius: 0;
+        }
       }
     }
     .chzn-container {

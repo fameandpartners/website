@@ -82,8 +82,9 @@
         .grid-25.prefix-5
           = form_for @order, url: update_cart_path do |f|
             = f.button :checkout, name: 'checkout', class: 'buy-now'
-          .or or
-          .paypal paypal
+          .hide
+            .or or
+            .paypal paypal
 
 .modal.edit-line-item(style="display: none;")
   .overlay
