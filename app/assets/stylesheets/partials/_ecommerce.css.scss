@@ -1094,9 +1094,27 @@
     margin-top: 36px;
   }
   .ad {
-    background: #f3f3f3;
-    height: 180px;
+    background: #fff;
+    height: 160px;
     margin: 0 19px 18px;
+    colour: #000;
+    text-align: center;
+    
+    h1{
+      font-family: $fontTwo;
+      font-size: 38px;     
+      font-weight: normal;
+      font-style: italic;
+      color: #000 !important;
+    }
+    
+    h2{
+      font-family: $fontOne !important;
+      font-size: 14px !important;     
+      font-weight: 300 !important;
+      color: #333 !important;
+      margin: 20px 0 0 0;
+    }
   }
   .results-sort {
     width: 100%;

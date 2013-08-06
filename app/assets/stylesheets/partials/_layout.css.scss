@@ -414,19 +414,19 @@ header {
   h1 {
     color: #f9b4a8;
     text-align: center;
-    margin: 36px 0 4px;
-    padding: 0 0 35px;
+    margin: 16px 0 4px;
+    padding: 0 0 15px;
     position: relative;
     &:before {
       content: '';
       display: block;
-      width: 232px;
+      width: 332px;
       height: 1px;
-      background: #f9b4a8;
+      background: #e0e0e0;
       position: absolute;
       bottom: 0;
       left: 50%;
-      margin: 0 0 0 -116px;
+      margin: 0 0 0 -166px;
     }
     &.dark {
       color: #7a656a;
