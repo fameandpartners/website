@@ -95,10 +95,11 @@ ruby:
 
                 ul
                   - @product.style_profile.suitable_shapes.each do |shape|
-                    li class=(shape)
-                      = link_to spree.products_path(body_shapes: [shape]) do
+                    li
+                      = link_to spree.products_path(bodyshape: shape) do
                         - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
-                        = image_tag "body-shape-#{shape}.png", alt: title, title: title
+                        .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
+                        .name #{title}
           #details.tab-content
             | Material:
             = @product.property('fabric')

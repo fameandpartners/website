@@ -198,6 +198,17 @@
   width: 1134px;
   margin: 36px 0 40px;
   font: 400 14px/1.1 $fontOne;
+  .grid-25, .grid-33 {
+    vertical-align: top;
+    display: inline-block;
+    float: none;
+  }
+  .grid-25 {
+    width: 24.82%;
+  }
+  .grid-33 {
+    width: 33.07%;
+  }
   .product-item {
     margin-bottom: 40px;
     .thumbnail {
@@ -309,22 +320,6 @@
     margin-bottom: 0;
     margin-top: 10px;
     min-height: 442px;
-  }
-  &.browse-products {
-    .product-item {
-      vertical-align: top;
-      display: inline-block;
-      float: none;
-      width: 33.1%;
-    }
-  }
-  &.recommended-dresses {
-    .grid-25 {
-      float: none;
-      display: inline-block;
-      width: 24.82%;
-      vertical-align: top;
-    }
   }
 }
 
@@ -526,17 +521,48 @@
       }
     }
     .body-shapes {
-      padding: 0 0 12px;
-      margin: 0 0 12px;
-      border-bottom: 1px solid #efefef;
+      margin: 0;
       .desc {
         color: #000;
+        margin: 24px 0 14px;
+      }
+      .image {
+        width: 60px;
+        height: 76px;
+        margin: 0 auto 10px;
+        vertical-align: top;
+        &.hour-glass {
+          background: image-url('body-shape-hour_glass.png') center 5px no-repeat;
+        }
+        &.pear {
+          background: image-url('body-shape-pear.png') center 5px no-repeat;
+        }
+        &.strawberry {
+          background: image-url('body-shape-strawberry.png') center 5px no-repeat;
+        }
+        &.apple {
+          background: image-url('body-shape-apple.png') center 5px no-repeat;
+        }
+        &.column {
+          background: image-url('body-shape-column.png') center 5px no-repeat;
+        }
+        &.athletic {
+          background: image-url('body-shape-athletic.png') center 5px no-repeat;
+        }
+        &.petite {
+          background: image-url('body-shape-petite.png') center 5px no-repeat;
+        }
+      }
+      .name {
+        font-size: 11px;
       }
       ul {
         overflow: hidden;
+        text-align: center;
         li {
-          float: left;
-          margin: 0 10px 0 0;
+          display: inline-block;
+          vertical-align: top;
+          margin: 0 5px 10px 0;
         }
       }
     }
@@ -981,8 +1007,6 @@
     border-bottom: 0;
     margin: 36px 0 0 0;
     padding: 0;
-    position: relative;
-    left: 30px;
     width: 24%;
     .main-title {
       background: #f3f3f3;
@@ -1055,6 +1079,12 @@
             &.column {
               background: image-url('body-shape-column.png') center 5px no-repeat;
             }
+            &.athletic {
+              background: image-url('body-shape-athletic.png') center 5px no-repeat;
+            }
+            &.petite {
+              background: image-url('body-shape-petite.png') center 5px no-repeat;
+            }
           }
         }
       }
@@ -1092,12 +1122,14 @@
   }
   .content-margin {
     margin-top: 36px;
+    padding-left: 0;
+    padding-right: 0;
   }
   .ad {
     background: #fff;
     height: 160px;
     margin: 0 19px 18px;
-    colour: #000;
+    color: #000;
     text-align: center;
     
     h1{
