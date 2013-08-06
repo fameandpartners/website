@@ -3,6 +3,11 @@ module ProductsHelper
     @range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
   end
 
+  def range_taxon_for(product)
+    return nil if range_taxonomy.blank?
+    taxon = product.taxons.where(taxonomy_id: range_taxonomy.id).first
+  end
+
   def available_product_ranges
     range_taxonomy.present? ? range_taxonomy.root.children : []
   end

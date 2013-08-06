@@ -1,9 +1,5 @@
-title
-  - if @title.present?
-    = @title
-  - else
-    | Fame & Partners | Custom made dresses - your dream formal dress
-meta name="description" content="#{ @desription.present? ? @desription : "It's our dream that every girl feels like a celebrity at her formal or prom. We are committed to bringing the world of celebrity fashion to you. We offer our customers the opportunity to create a look that they love, that is unique to them and will ensure they feel like a celebrity on their special night."}"
+title = get_title
+meta name="description" content=(get_meta_description)
 = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:400,400italic,300,100,700'
 = stylesheet_link_tag    'pages'
 = javascript_include_tag 'application'
