@@ -108,9 +108,7 @@ module ApplicationHelper
   end
 
   def collection_product_path(product)
-    return spree.product_path(product) if range_taxonomy.blank?
-
-    taxon = product.taxons.where(taxonomy_id: range_taxonomy.id).first
+    taxon = range_taxon_for(product)
     if taxon
       permalink = taxon.permalink.split('/').last
       "/collection/#{permalink}/#{product.to_param}"

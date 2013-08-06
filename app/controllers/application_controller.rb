@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
     current_order(true) if current_order.blank?
   end
 
+  helper_method :default_seo_title, :default_meta_description
+
   private
 
   def title(*args)
@@ -19,6 +21,22 @@ class ApplicationController < ActionController::Base
 
   def description(*args)
     @description = args.flatten.join(' | ')
+  end
+
+  def default_seo_title
+    if Spree::Config[:default_seo_title].present? 
+      Spree::Config[:default_seo_title]
+    else
+      "Fame & Partners - Dream Formal Dresses"
+    end
+  end
+
+  def default_meta_description
+    if Spree::Config[:default_meta_description].present?
+      Spree::Config[:default_meta_description]
+    else
+      "Fame & Partners is committed to bringing the world of celebrity fashion to you. We offer our customers the opportunity to create a look that they love, that is unique to them and will ensure they feel like a celebrity on their special night."
+    end
   end
 
   def step1_custom_dresses_path(options = {})

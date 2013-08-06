@@ -10,6 +10,8 @@ Spree::ProductsController.class_eval do
 
     @colors = Products::ColorsSearcher.new(@products.to_a).retrieve_colors
 
+    set_collection_title(@searcher.collection)
+
     if !request.xhr?
       render action: 'index', layout: true
     else
@@ -23,6 +25,7 @@ Spree::ProductsController.class_eval do
   def show
     return unless @product
 
+    set_product_show_page_title(@product)
     @product_properties = @product.product_properties.includes(:property)
 
     @similar_products   = Products::SimilarProducts.new(@product).fetch(4)
@@ -40,5 +43,29 @@ Spree::ProductsController.class_eval do
       popup_html: popup_html,
       variants: @product_variants
     }
+  end
+
+  private
+
+  def set_collection_title(taxon_ids = [])
+    taxons = Spree::Taxon.where(id: taxon_ids)
+    if taxon_ids.blank? || taxons.blank? || taxons.count > 1
+      prefix = "Our Dress Collection"
+    else
+      prefix = taxons.first.name
+    end
+
+    self.title = [prefix, default_seo_title].join(' - ')
+    description([prefix, default_meta_description].join(' - '))
+  end
+
+  def set_product_show_page_title(product)
+    range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
+
+    if range_taxonomy.present? && range_taxon = @product.taxons.where(taxonomy_id: range_taxonomy.id).first
+      prefix = "#{@product.name} in #{range_taxon.name}"
+      self.title = [prefix, default_seo_title].join(' - ')
+      description([prefix, default_meta_description].join(' - '))
+    end
   end
 end
