@@ -139,6 +139,7 @@
     position: relative;
   }
   .image {
+    text-decoration: none;
     float: left;
     width: 216px;
     height: 314px;
@@ -185,6 +186,8 @@
       border-radius: 50%;
     }
     .image-preview {
+      display: block;
+      text-decoration: none;
       width: 486px;
       height: 285px;
       background: #ccc;

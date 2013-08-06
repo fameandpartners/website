@@ -20,10 +20,14 @@ def populate_profile_with_randoms(profile)
 end
 
 def add_figure_type(profile)
-  figure_types = [:apple, :pear, :strawberry, :hour_glass, :column]
-  mask = [0, 0, 0, 5, 10].shuffle
-
-  figure_types.each_with_index do |figure, index|
-    profile[figure] = mask[index]
+  body_shapes = ProductStyleProfile::BODY_SHAPES
+  masks = [
+    [10, 5, 0, 0, 0, 0, 0],
+    [10, 6, 3, 0, 0, 0, 0],
+    [10, 7, 5, 3, 0, 0, 0]
+  ]
+  mask = masks[rand(masks.size)].shuffle
+  body_shapes.each_with_index do |shape, index|
+    profile[shape] = mask[index]
   end
 end

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Auth
+  include Spree::Core::ControllerHelpers::Common
 
   append_before_filter :check_cart
 

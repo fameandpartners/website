@@ -92,11 +92,14 @@ ruby:
             - if @product.style_profile
               .body-shapes
                 .desc The body shapes that this dress suits:
+
                 ul
                   - @product.style_profile.suitable_shapes.each do |shape|
-                    = link_to spree.products_path(body_shapes: [shape]) do
-                      - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
-                      = image_tag('http://placehold.it/60x84', alt: title, title: title)
+                    li
+                      = link_to spree.products_path(bodyshape: shape) do
+                        - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
+                        .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
+                        .name #{title}
           #details.tab-content
             | Material:
             = @product.property('fabric')
