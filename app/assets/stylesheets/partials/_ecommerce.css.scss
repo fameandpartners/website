@@ -1048,6 +1048,12 @@
             &.column {
               background: image-url('body-shape-column.png') center 5px no-repeat;
             }
+            &.athletic {
+              background: image-url('body-shape-athletic.png') center 5px no-repeat;
+            }
+            &.petite {
+              background: image-url('body-shape-petite.png') center 5px no-repeat;
+            }
           }
         }
       }
