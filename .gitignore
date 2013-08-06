@@ -33,7 +33,7 @@ config/database.yml
 /config/ey.yml
 
 # Ignore Engine Yard recipes
-/cookbooks    
+/cookbooks
 
 # ignore spree stuff
 /public/spree
