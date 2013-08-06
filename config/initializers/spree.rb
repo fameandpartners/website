@@ -25,6 +25,8 @@ Spree.config do |config|
   }.to_json
 
   config.currency = 'AUD'
+
+  config.allow_checkout_on_gateway_error = false
 end
 
 Spree.user_class = "Spree::User"

@@ -17,6 +17,22 @@ Spree::Order.class_eval do
     false
   end
 
+  def process_payments!
+    begin
+      pending_payments.each do |payment|
+        break if payment_total >= total
+        payment.process!
+
+        if payment.completed?
+          self.payment_total += payment.amount
+        end
+      end
+    rescue Spree::Core::GatewayError => e
+      result = !!Spree::Config[:allow_checkout_on_gateway_error]
+      errors.add(:base, e.message) and return result
+    end
+  end
+
   def first_name
     self.user_first_name.present? ? self.user_first_name : self.user.try(:first_name)
   end
