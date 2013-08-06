@@ -198,6 +198,17 @@
   width: 1134px;
   margin: 36px 0 40px;
   font: 400 14px/1.1 $fontOne;
+  .grid-25, .grid-33 {
+    vertical-align: top;
+    display: inline-block;
+    float: none;
+  }
+  .grid-25 {
+    width: 24.82%;
+  }
+  .grid-33 {
+    width: 33.07%;
+  }
   .product-item {
     margin-bottom: 40px;
     .thumbnail {
@@ -309,22 +320,6 @@
     margin-bottom: 0;
     margin-top: 10px;
     min-height: 442px;
-  }
-  &.browse-products {
-    .product-item {
-      vertical-align: top;
-      display: inline-block;
-      float: none;
-      width: 33.1%;
-    }
-  }
-  &.recommended-dresses {
-    .grid-25 {
-      float: none;
-      display: inline-block;
-      width: 24.82%;
-      vertical-align: top;
-    }
   }
 }
 
