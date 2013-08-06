@@ -5,22 +5,29 @@
 
 .home-images
   .wrap
-    .image
-    .image.rotate-1
-    .image.rotate-2
-    .image.large
+    = link_to '#', class: 'image' do
+      ' Some image here
+    = link_to '#', class: 'image rotate-1' do
+      ' Some image here
+    = link_to '#', class: 'image rotate-2' do
+      ' Some image here
+    = link_to '#', class: 'image large' do
+      ' Some large image here
 
 .blog-posts-preview
   .wrap.no-overflow
     .blog-post
       .label Blog
-      .image-preview
+      = link_to '#', class: 'image-preview' do
+        ' Some blog image here
     .blog-post.rotate-1
       .label Blog
-      .image-preview
+      = link_to '#', class: 'image-preview' do
+        ' Some blog image here
     .blog-post.rotate-2
       .label Blog
-      .image-preview
+      = link_to '#', class: 'image-preview' do
+        ' Some blog image here
 
 - if @featured_products.length > 0
   .featured-dresses
