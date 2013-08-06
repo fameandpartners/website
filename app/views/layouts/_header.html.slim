@@ -32,12 +32,6 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
       .wrap.no-overflow
         ul.icons
           li
-            .icon.quote
-            span
-              ' Free
-              br
-              ' Quote
-          li
             .icon.shipping
             span
               ' Free
@@ -46,21 +40,21 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
           li
             .icon.returns
             span
-              ' Free
+              ' 30 Day
               br
               ' Returns
           li
             .icon.guarantee
             span
-              ' Fit
+              ' Best Fit
               br
-              ' Guarantee
+              ' Process
           li
             .icon.turnaround
             span
-              ' 3 week
+              ' Fast
               br
-              ' turnaround
+              ' delivery
         .search.fleft
           = form_tag search_path, method: :get do
             input type="text" name="q" placeholder="Search the site"
@@ -77,10 +71,10 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
         nav
           ul.clearfix
             li.with-dropdown *{:class => request_path?('/products') && 'active' }
-              = link_to 'Collection', collection_path, title: "Custom made dresses from Fame & Partners"
+              = link_to 'Collection', collection_path, title: "Formal Dresses Fame & Partners"
               .dropdown-menu-wrapper
                 .dropdown-menu
-                  .dropdown-title = link_to 'Browse range', collection_path
+                  .dropdown-title = link_to 'Browse range', collection_path, title: "Browse our collection of Formal Dresses"
                   ul
                     - available_product_ranges.each do |taxon|
                       li
@@ -94,7 +88,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
             - else
               li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
             li *{:class => request_path?("#{how_it_works_path}") && 'active' }
-              = link_to 'How it Works', how_it_works_path, title: "How to order a custom dress"
+              = link_to 'How it Works', how_it_works_path, title: "How to order a formal dress"
             li = link_to 'Blog', root_url(:subdomain => :blog), title: "Fame & Partners Blog", target: "_blank"
             li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
 

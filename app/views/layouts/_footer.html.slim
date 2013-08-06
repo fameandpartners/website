@@ -3,11 +3,8 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
     .grid-20.prefix-3.links
       .title Shop Prom Dresses
       ul
-        li = link_to 'Top Sellers', '#'
-        li = link_to 'Recent Additions', '#'
-        li = link_to 'Stylist Picks', '#'
-        li = link_to 'Sale', '#'
-        li = link_to 'Style Quiz', '#'
+        - available_product_ranges.each do |taxon|
+          li = link_to taxon.name, collection_taxon_path(taxon), title: "Buy " + taxon.name
     .grid-20.links
       .title Style Inspiration
       ul
