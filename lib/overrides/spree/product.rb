@@ -39,8 +39,8 @@ module Overrides
           indexes :fashionability, :type => :float, :as => 'style_profile.fashionability'
         end
 
-        after_create do
-          create_style_profile
+        before_create do
+          build_style_profile
         end
       end
 

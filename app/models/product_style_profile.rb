@@ -28,7 +28,7 @@ class ProductStyleProfile < ActiveRecord::Base
   belongs_to :product,
     :class_name => 'Spree::Product'
 
-  after_save do
+  after_update do
     product.try(:update_index)
   end
 
