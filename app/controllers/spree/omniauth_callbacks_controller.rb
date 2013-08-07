@@ -41,6 +41,8 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
               user.sign_up_via = Spree::User::SIGN_UP_VIA.index('Facebook')
               user.sign_up_reason = session[:sign_up_reason]
+
+              session[:spree_user_return_to] = main_app.root_path(:cf => :signup)
             end
 
             if user.save
