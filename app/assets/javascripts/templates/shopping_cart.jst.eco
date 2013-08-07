@@ -1,4 +1,8 @@
-<div id="shopping-bag-popup-wrapper" class="shopping-bag-popup" style="display: none;">
+<% if @opened: %>
+  <div id="shopping-bag-popup-wrapper" class="shopping-bag-popup">
+<% else: %>
+  <div id="shopping-bag-popup-wrapper" class="shopping-bag-popup" style="display: none;">
+<% end %>
   <% if @order.item_count == 0: %>
     Sorry, your shopping bag still empty
   <% else: %>
@@ -17,9 +21,6 @@
               <div class="price"><%= line_item.money %></div>
               <div class="name">
                 <a href="/products/<%= line_item.product_permalink %>" target="blank"><%= line_item.product_name %></a>
-              </div>
-              <div class="desc">
-                <%= line_item.product_description %>
               </div>
               <ul class="specs">
                 <li>

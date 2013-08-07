@@ -37,6 +37,7 @@ $(".products.show").ready ->
   # add product to cart
   $('.buy-wishlist .buy-now').on('click', (e) ->
     e.preventDefault()
+    e.stopImmediatePropagation()
     button = $(e.currentTarget)
     variantId = button.data('id')
     button.addClass('adding')
@@ -44,4 +45,6 @@ $(".products.show").ready ->
       failure: () -> button.removeClass('adding')
       success: () -> button.removeClass('adding').addClass('added')
     })
+
+    window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
   )

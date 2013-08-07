@@ -7,6 +7,8 @@ $ ->
     container: null
     cartTemplate: JST['templates/shopping_cart']
     carouselEnabled: false
+    listeners: []
+
     init: () ->
       window.shoppingBag.container = $('header .shopping-bag')
 
@@ -34,7 +36,6 @@ $ ->
 
     offBagClickHandler: (e) ->
       if shoppingBag.container.has($(e.target)).length == 0
-        $(document).off('click', shoppingBag.offBagClickHandler)
         window.shoppingBag.hide()
 
     show: () ->
@@ -42,21 +43,32 @@ $ ->
         shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow", () ->
           shoppingBag.updateCarousel() if !shoppingBag.carouselEnabled
         )
-      $(document).on('click', shoppingBag.offBagClickHandler)
+        $(document).on('click', shoppingBag.offBagClickHandler)
       window.shoppingBag
 
     hide: () ->
+      $(document).off('click', shoppingBag.offBagClickHandler)
       if shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
-        shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow")
+        shoppingBag.container.find("#shopping-bag-popup-wrapper").slideToggle("slow", () ->
+          clearTimeout(shoppingBag.closeTimerId) if shoppingBag.closeTimerId?
+        )
       window.shoppingBag
+
+    # show and hide popup
+    showTemporarily: (period = 5000) ->
+      return if shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
+      shoppingBag.show()
+      clearTimeout(shoppingBag.closeTimerId) if shoppingBag.closeTimerId?
+      shoppingBag.closeTimerId = setTimeout(shoppingBag.hide, period)
 
     renderCart: (e, data) ->
       cartHtml = shoppingBag.cartTemplate
+        opened: shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
         order: data.cart
         csrf_param: $('[name="csrf-param"]').attr('content')
         csrf_token: $('[name="csrf-token"]').attr('content')
-
       shoppingBag.container.find('#shopping-bag-popup-wrapper').replaceWith(cartHtml)
+
       #shoppingBag.show()
       # update actions
       shoppingBag.updateElementsHandlers()
@@ -64,6 +76,12 @@ $ ->
       shoppingBag.updateCarousel(data.id)
       item_count = _.reduce(data.cart.line_items, ((memo, item) -> memo += item.quantity), 0)
       $('a.shopping-bag-toggler .counter').html(item_count)
+
+      _.each(shoppingBag.listeners, (listener) -> listener.call())
+
+    afterUpdateCallback: (callback) ->
+      unless _.contains(shoppingBag.listeners, callback)
+        shoppingBag.listeners.push(callback)
 
     updateElementsHandlers: () ->
       shoppingBag.container.find('.remove-item-from-cart')
