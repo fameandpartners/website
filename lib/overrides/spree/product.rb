@@ -5,7 +5,7 @@ module Overrides
 
       included do
         include Tire::Model::Search
-        include Tire::Model::Callbacks
+        #include Tire::Model::Callbacks
 
         has_one :style_profile,
                 :class_name => '::ProductStyleProfile',
