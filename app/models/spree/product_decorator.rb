@@ -47,4 +47,8 @@ Spree::Product.class_eval do
       variant.option_values.where(:option_type_id => option_type.id).map(&:name)
     end.flatten.uniq
   end
+
+  def description
+    read_attribute(:description) || ''
+  end
 end
