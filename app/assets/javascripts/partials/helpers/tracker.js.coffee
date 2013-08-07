@@ -4,7 +4,7 @@ window.track = {
     if _gaq && _gaq.push
       _gaq.push(['_trackPageview', page_url])
 
-  quickView: (pageUrl) ->
+  quickView: (page_url) ->
     if _gaq && _gaq.push
       _gaq.push(['_trackPageview', page_url])
 }

@@ -31,7 +31,7 @@ $ ->
     $(@).parent().remove()
 
   $('.delete-resource').on 'click', ->
-    dialog = confirm('jAre you sure?')
+    dialog = confirm('Are you sure?')
     $(@).parents('tr').hide() if dialog
 
   $('.pending').show()

@@ -51,7 +51,7 @@ window.helpers.quickViewer = {
       data: $.param({ product_id: productId })
       success: (response) ->
         helpers.quickViewer.showPopup.call(helpers.quickViewer, response.popup_html, response.variants)
-        tracker.quickView(quickViewUrl)
+        track.quickView(quickViewUrl)
       failure: ->
         helpers.quickViewer.closePopup.call(helpers.quickViewer)
     )
