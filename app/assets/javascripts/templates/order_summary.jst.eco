@@ -17,10 +17,10 @@
       Shipping
     </div>
     <div class="desc">
-      <% if @order.display_promotion_total?: %>
+      <% if @order.display_shipment_total?: %>
         <span><%= @order.currency %></span>
-        <%= @order.display_promotion_total %>
-      <% else %>
+        <%= @order.display_shipment_total %>
+      <% else: %>
         Free
     </div>
     </li>
@@ -29,11 +29,11 @@
       Promotion
     </div>
     <div class="desc">
-      <% if @order.display_adjustment_total?: %>
-        <span><%= @order.currency %></span>
-        <%= @order.display_adjustment_total %>
-      <% else %>
-        Free
+      <span><%= @order.currency %></span>
+      <%= if @order.display_shipment_total?: %>
+        <%= @order.display_shipment_total %>
+      <% else: %>
+        $0.00
     </div>
     </li>
     <li class="totals">
