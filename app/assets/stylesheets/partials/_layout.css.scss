@@ -379,8 +379,8 @@ header {
     background: #efefef;
     position: absolute;
     bottom: 42px;
-    left: 45px;
-    right: 45px;
+    left: 0;
+    right: 0;
   }
   &:after {
     content: '';
@@ -388,8 +388,8 @@ header {
     background: #efefef;
     position: absolute;
     top: 94px;
-    left: 45px;
-    right: 45px;
+    left: 0;
+    right: 0;
   }
   &.blog {
     height: auto;
