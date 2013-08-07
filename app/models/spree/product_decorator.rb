@@ -1,5 +1,5 @@
 Spree::Product.class_eval do
-  #include Tire::Model::Callbacks
+  include Tire::Model::Callbacks
 
   has_one :celebrity_inspiration,
     dependent: :destroy,
