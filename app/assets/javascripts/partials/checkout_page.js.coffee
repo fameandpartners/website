@@ -75,6 +75,8 @@ $('.checkout.edit').ready ->
     orderProccessHandler: (event) ->
       $form = $('form.payment_details')
 
+      $form.find('.errorExplanation').remove()
+
       if $form.is('.credit_card.pin')
         credit_card_data =
           number: $form.find('[name*="[number]"]').val()
@@ -89,7 +91,6 @@ $('.checkout.edit').ready ->
 
     pinResponseHandler: (response) ->
       $form = $('form.payment_details.credit_card.pin')
-      $form.find('.errors').remove()
 
       if response.response
         data = response.response
@@ -106,7 +107,7 @@ $('.checkout.edit').ready ->
         $form.append($type_field)
         $form.submit()
       else
-        $errors = $('<div/>').addClass('errors')
+        $errors = $('<div/>').addClass('errorExplanation')
         $header = $('<h3/>').text(response.error_description)
         $list = null;
         if (response.messages)
