@@ -26,6 +26,9 @@ class Spree::Admin::Blog::CelebritiesController < Spree::Admin::Blog::BaseContro
 
     if @blog_celebrity.valid?
       @blog_celebrity.save
+
+      Blog::CelebrityPhoto.where(user_id: current_spree_user.id, celebrity_id: nil).update_all({celebrity_id: @blog_celebrity.id})
+      @blog_celebrity.reload.save
       redirect_to action: :index
     else
       render action: :new
