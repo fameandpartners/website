@@ -12,7 +12,7 @@
     .sort.fright
       ' Sort by
       - options = options_from_collection_for_select(Products::ProductsFilter.available_orders, :first, :second, params[:order])
-      = select_tag "product_order", options, prompt: 'Choose', class: 'selectbox'
+      = select_tag "product_order", options, class: 'selectbox', :include_blank => true, :'data-placeholder' => 'Choose'
 ul.products-list.grid-container
   - products.each do |product|
     li.product-item.grid-33
