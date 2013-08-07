@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(:version => 20130807012751) do
   add_index "blog_celebrities", ["slug"], :name => "index_blog_celebrities_on_slug"
   add_index "blog_celebrities", ["user_id"], :name => "index_blog_celebrities_on_user_id"
 
+  create_table "blog_celebrity_photo_likes", :force => true do |t|
+    t.integer  "vote_type"
+    t.integer  "user_id"
+    t.integer  "celebrity_photo_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "blog_celebrity_photo_likes", ["celebrity_photo_id"], :name => "index_blog_celebrity_photo_likes_on_celebrity_photo_id"
+  add_index "blog_celebrity_photo_likes", ["user_id"], :name => "index_blog_celebrity_photo_likes_on_user_id"
+
   create_table "blog_celebrity_photo_votes", :force => true do |t|
     t.integer  "vote_type"
     t.integer  "user_id"
@@ -79,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20130807012751) do
     t.datetime "photo_updated_at"
     t.integer  "likes_count"
     t.integer  "dislikes_count"
+    t.datetime "publsihed_at"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.datetime "published_at"
@@ -87,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20130807012751) do
   add_index "blog_celebrity_photos", ["celebrity_id"], :name => "index_blog_celebrity_photos_on_celebrity_id"
   add_index "blog_celebrity_photos", ["post_id"], :name => "index_blog_celebrity_photos_on_post_id"
   add_index "blog_celebrity_photos", ["published_at"], :name => "index_blog_celebrity_photos_on_published_at"
+  add_index "blog_celebrity_photos", ["publsihed_at"], :name => "index_blog_celebrity_photos_on_publsihed_at"
   add_index "blog_celebrity_photos", ["user_id"], :name => "index_blog_celebrity_photos_on_user_id"
 
   create_table "blog_events", :force => true do |t|
@@ -189,6 +202,12 @@ ActiveRecord::Schema.define(:version => 20130807012751) do
     t.date     "required_at"
     t.string   "school_name"
   end
+
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
 
   create_table "product_style_profiles", :force => true do |t|
     t.integer  "product_id"
