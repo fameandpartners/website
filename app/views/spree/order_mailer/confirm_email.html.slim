@@ -1,0 +1,25 @@
+p = t('order_mailer.confirm_email.dear_customer')
+
+p = t('order_mailer.confirm_email.instructions')
+
+p = t('order_mailer.confirm_email.order_summary')
+
+ul
+  - @order.line_items.each do |item|
+    li
+      =' item.variant.sku
+      =' raw(item.variant.product.name)
+      =' raw(item.variant.options_text)
+      | (#{item.quantity}) @ #{item.variant.display_amount} = #{item.display_amount}
+
+p = t('order_mailer.confirm_email.subtotal', :subtotal => @order.display_item_total)
+
+ul
+  - @order.adjustments.eligible.each do |adjustment|
+    li
+      =' raw(adjustment.label)
+      = adjustment.display_amount
+
+p = t('order_mailer.confirm_email.total', :total => @order.display_total)
+
+p = t('order_mailer.confirm_email.thanks')
