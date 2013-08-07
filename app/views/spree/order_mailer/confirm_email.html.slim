@@ -1,25 +1,71 @@
-p = t('order_mailer.confirm_email.dear_customer')
+table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+  tbody
+    tr
+      td width="38"
+      td
+        table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+          tbody
+            tr
+              td height="27"
+            tr
+              td.date style="color: #999; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                ' 25th February 2013
+            tr
+              td height="30"
+            tr
+              td style="color: #000; font: 400 italic 38px/1.2 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif;"
+                ' Order Confirmation
+            tr
+              td height="30"
+            tr
+              td style="color: #999; font: 400 18px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                ' Your order is being processed...
+            tr
+              td height="30"
+            tr
+              td
+                p style="margin: 0; color: #000; text-transform: uppercase; font: 700 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" You ordered:
+            tr
+              td
+                table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+                  thead
+                    th style="color: #999; font-size: 13px; text-align: left; font-weight: 400; padding: 4px 6px; border-top: 1px solid #d6d6d6; border-bottom: 1px solid #d6d6d6;" Item
+                    th style="color: #999; font-size: 13px; text-align: left; font-weight: 400; padding: 4px 6px; border-top: 1px solid #d6d6d6; border-bottom: 1px solid #d6d6d6;" SKU
+                    th style="color: #999; font-size: 13px; text-align: left; font-weight: 400; padding: 4px 6px; border-top: 1px solid #d6d6d6; border-bottom: 1px solid #d6d6d6;" Qty
+                    th style="color: #999; font-size: 13px; text-align: left; font-weight: 400; padding: 4px 6px; border-top: 1px solid #d6d6d6; border-bottom: 1px solid #d6d6d6;" Price
+                  tbody
+                    - @order.line_items.each do |item|
+                      tr
+                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 400; padding: 7px 6px; vertical-align: top;"
+                          div style="font-weight: 700" =' raw(item.variant.product.name)
+                          div =' raw(item.variant.options_text)
+                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 400; padding: 7px 6px; vertical-align: top;" =' item.variant.sku
+                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 400; padding: 7px 6px; vertical-align: top;" =' item.quantity
+                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 700; padding: 7px 6px; vertical-align: top;" =' item.display_amount
+                  tr
+                    td style="border-top: 1px solid #d6d6d6; padding: 4px 6px;"
+                    td style="border-top: 1px solid #d6d6d6; padding: 4px 6px;"
+                    td style="border-top: 1px solid #d6d6d6; text-align: right; font-size: 13px; font-weight: 400; padding: 4px 6px;" Subtotal
+                    td style="border-top: 1px solid #d6d6d6; font-size: 13px; font-weight: 700; padding: 4px 6px;" = @order.display_item_total
+                  - @order.adjustments.eligible.each do |adjustment|
+                    tr
+                      td style="padding: 4px 6px;"
+                      td style="padding: 4px 6px;"
+                      td style="text-align: right; font-size: 13px; font-weight: 400; padding: 4px 6px;" =' raw(adjustment.label)
+                      td style="font-size: 13px; font-weight: 700; padding: 4px 6px;" = adjustment.display_amount
+                  tr
+                    td style="padding: 4px 6px;"
+                    td style="padding: 4px 6px;"
+                    td style="text-align: right; font-size: 13px; font-weight: 400; padding: 4px 6px;" Total
+                    td style="font-size: 13px; font-weight: 700; padding: 4px 6px;" = @order.display_total
 
-p = t('order_mailer.confirm_email.instructions')
-
-p = t('order_mailer.confirm_email.order_summary')
-
-ul
-  - @order.line_items.each do |item|
-    li
-      =' item.variant.sku
-      =' raw(item.variant.product.name)
-      =' raw(item.variant.options_text)
-      | (#{item.quantity}) @ #{item.variant.display_amount} = #{item.display_amount}
-
-p = t('order_mailer.confirm_email.subtotal', :subtotal => @order.display_item_total)
-
-ul
-  - @order.adjustments.eligible.each do |adjustment|
-    li
-      =' raw(adjustment.label)
-      = adjustment.display_amount
-
-p = t('order_mailer.confirm_email.total', :total => @order.display_total)
-
-p = t('order_mailer.confirm_email.thanks')
+            tr
+              td height="40"
+            tr
+              td style="color: #666; text-transform: uppercase; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                a href="http://fameandpartners.com/help" style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Help
+                '  |  
+                span style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" 1300 924 860
+            tr
+              td height="27"
+      td width="38"
