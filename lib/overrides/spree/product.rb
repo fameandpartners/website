@@ -5,7 +5,7 @@ module Overrides
 
       included do
         include Tire::Model::Search
-        include Tire::Model::Callbacks
+        #include Tire::Model::Callbacks
 
         has_one :style_profile,
                 :class_name => '::ProductStyleProfile',
@@ -39,8 +39,8 @@ module Overrides
           indexes :fashionability, :type => :float, :as => 'style_profile.fashionability'
         end
 
-        after_create do
-          create_style_profile
+        before_create do
+          build_style_profile
         end
       end
 

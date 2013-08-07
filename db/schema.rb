@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130806102939) do
+ActiveRecord::Schema.define(:version => 20130807012751) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -188,23 +188,6 @@ ActiveRecord::Schema.define(:version => 20130806102939) do
     t.boolean  "ghost",         :default => true
     t.date     "required_at"
     t.string   "school_name"
-  end
-
-  create_table "data_migrations", :id => false, :force => true do |t|
-    t.string "version", :null => false
-  end
-
-  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
-
-  create_table "inspirations", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.string   "name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
   end
 
   create_table "product_style_profiles", :force => true do |t|
@@ -795,6 +778,7 @@ ActiveRecord::Schema.define(:version => 20130806102939) do
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "meta_keywords"
+    t.string   "title"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
