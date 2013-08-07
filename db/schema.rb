@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130806102939) do
+ActiveRecord::Schema.define(:version => 20130807012751) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -778,6 +778,7 @@ ActiveRecord::Schema.define(:version => 20130806102939) do
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "meta_keywords"
+    t.string   "title"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
