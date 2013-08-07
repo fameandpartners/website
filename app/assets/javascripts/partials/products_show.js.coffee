@@ -11,6 +11,7 @@ $(".products.show").ready ->
   # enable images carousel
   $("#product-images").carouFredSel(
     window.helpers.get_vertical_carousel_options(
+      width: 83
       items:
         visible: 4
         height: 132
