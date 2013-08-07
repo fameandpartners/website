@@ -43,7 +43,9 @@
           <td>
             <%= link_to image_tag(image.attachment.url(:mini)), image.attachment.url(:product) %>
           </td>
-          <td><%= options_text_for(image) %></td>
+          <% if @product.has_variants? %>
+            <td><%= options_text_for(image) %></td>
+          <% end %>
           <td><%= image.alt %></td>
           <td class="actions">
             <%= link_to_with_icon 'icon-edit', t(:edit), edit_admin_product_image_url(@product, image), :no_text => true, :data => {:action => 'edit'} %>
