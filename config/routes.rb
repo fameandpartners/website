@@ -155,6 +155,8 @@ FameAndPartners::Application.routes.draw do
         resource :inspiration, :only => [:edit, :update]
       end
 
+      match '/product_images/upload' => 'product_images#upload', as: 'upload_product_images'
+
       match '/blog' => redirect('/admin/blog/posts')
       namespace :blog do
         resources :promo_banners
@@ -196,7 +198,6 @@ FameAndPartners::Application.routes.draw do
       end
     end
   end
-
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 end
