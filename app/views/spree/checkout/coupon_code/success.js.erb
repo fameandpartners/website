@@ -1,2 +1,6 @@
 $('.checkout-summary').html('<%=j render('summary') %>');
 $('.coupon-block form .error').remove();
+
+if (window.checkout_page && window.checkout_page.onAjaxSuccessHandler) {
+  window.checkout_page.onAjaxSuccessHandler()
+}

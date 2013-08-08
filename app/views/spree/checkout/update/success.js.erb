@@ -9,3 +9,7 @@ $('.accordion-content[data-step="<%= @order.state %>"]').
 if (window.checkout_page && window.checkout_page.onAjaxSuccessHandler) {
   window.checkout_page.onAjaxSuccessHandler()
 }
+
+if (window.setCurrentPath) {
+  window.setCurrentPath('/checkout/payment');
+}

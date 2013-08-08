@@ -36,7 +36,6 @@ Spree::CheckoutController.class_eval do
 
       if @user.errors.blank?
         @order.email = @user.email
-        @order.email = @user.email
         @order.user_first_name = @user.first_name
         @order.user_last_name = @user.last_name
         @order.state = current_order.checkout_steps.first
@@ -49,7 +48,6 @@ Spree::CheckoutController.class_eval do
 
         render 'spree/checkout/registration/success'
       else
-        @user.errors.messages.keys.each{|field| @user.errors.delete(field) if field.to_sym != :email}
         render 'spree/checkout/registration/failed'
       end
     end

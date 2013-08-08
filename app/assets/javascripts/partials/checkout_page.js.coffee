@@ -1,5 +1,6 @@
 $('.checkout.edit').ready ->
   page = {
+    ajax_callbacks: {}
     init: () ->
       $(document).on('change', '#order_use_billing', page.updateShippingFormVisibility)
       $(document).on('change', '#create_account', page.updatePasswordFieldsVisibility)
@@ -31,26 +32,43 @@ $('.checkout.edit').ready ->
           $button.attr('disabled', true)
         , 100
       )
-      # unlock button after 5 second - we can have 500 error on server
-      setTimeout(
-        () ->
-          $button.removeAttr('disabled').removeClass('updating')
+      page.addAjaxCallback('all', () ->
+        $button.removeAttr('disabled').removeClass('updating')
 
-          if $button.is('input')
-            $button.val(previous_message)
-          else if $button.is('button')
-            $button.text(previous_message)
-        , 5000
+        if $button.is('input')
+          $button.val(previous_message)
+        else if $button.is('button')
+          $button.text(previous_message)
       )
 
+    addAjaxCallback: (state, callback) ->
+      page.ajax_callbacks[state] or= []
+      if !_.contains(page.ajax_callbacks[state], callback)
+        page.ajax_callbacks[state].push(callback)
+      return true
+
+    callAjaxCallbacks: () ->
+      _.each(arguments, (state) ->
+        callbacks = page.ajax_callbacks[state] || []
+        _.each(callbacks, (callback) ->
+          callback.call()
+        )
+      )
+      return true
+
     onAjaxSuccessHandler: (e) ->
-      page.updateShippingFormVisibility()
-      page.updatePasswordFieldsVisibility()
+      page.refreshFormView()
+      page.callAjaxCallbacks('success', 'all')
 
     onAjaxFailureHandler: (e) ->
+      page.refreshFormView()
+      scrollScreenTo($("#errorExplanation"))
+      page.callAjaxCallbacks('failure', 'all')
+
+    refreshFormView: () ->
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
-      scrollScreenTo($("#errorExplanation"))
+      $('.selectbox').chosen()
 
     updateShippingFormVisibility: () ->
       if $('#order_use_billing').is(':checked')
@@ -64,13 +82,9 @@ $('.checkout.edit').ready ->
       if $('#create_account').is(':checked')
         $('form#new_user .passwords input').prop('disabled', false)
         $('form#new_user .passwords').show()
-        $('label[for=user_first_name] span.required').show()
-        $('label[for=user_last_name] span.required').show()
       else
         $('form#new_user .passwords input').prop('disabled', true)
         $('form#new_user .passwords').hide()
-        $('label[for=user_first_name] span.required').hide()
-        $('label[for=user_last_name] span.required').hide()
 
     orderProccessHandler: (event) ->
       $form = $('form.payment_details')
@@ -118,6 +132,7 @@ $('.checkout.edit').ready ->
         $errors.append($header).append($list)
 
         $form.prepend($errors)
+        page.onAjaxFailureHandler()
   }
 
   page.init()
