@@ -1,7 +1,7 @@
 class Spree::CelebrityInspiration < ActiveRecord::Base
   set_table_name "celebrity_inspirations"
 
-  attr_accessible :photo, :celebrity_name
+  attr_accessible :photo, :celebrity_name, :celebrity_description
 
   has_attached_file :photo, styles: { preview: "460x590#", small: "230x295#", thumbnail: "100x100#"}
 
