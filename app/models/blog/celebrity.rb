@@ -8,6 +8,7 @@ class Blog::Celebrity < ActiveRecord::Base
   belongs_to :primary_photo, class_name: Blog::CelebrityPhoto, foreign_key: :primary_photo_id
 
   scope :featured, where("featured_at IS NOT NULL").limit(4).order("featured_at desc")
+  scope :with_primary_photo, where('primary_photo_id IS NOT NULL')
 
   before_save :assign_primary_photo
 

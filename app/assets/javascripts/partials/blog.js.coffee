@@ -138,8 +138,7 @@ $ ->
         window.hideCelebrityModal()
     true
 
-  $('.zoom').on 'click', window.showCelebrityModal
-
+  $(document).on 'click', '.zoom', window.showCelebrityModal
 
   $('.icons .love').on 'click', (e) ->
     $this = $(this)
