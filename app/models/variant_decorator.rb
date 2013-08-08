@@ -1,4 +1,6 @@
 Spree::Variant.class_eval do
+  before_validation :set_default_sku
+
   def dress_color
     get_option_value(self.class.color_option_type)
   end
@@ -12,6 +14,23 @@ Spree::Variant.class_eval do
     self.option_values.detect do |option|
       option.option_type_id == option_type.id
     end
+  end
+
+  # Master SKU + VarientValue1 + VarientValue2
+  def set_default_sku
+    return if self.sku.present?
+    sku_chunks = []
+    sku_chunks.push(product.sku.present? ? product.sku : product.permalink)
+    self.option_values.order('id asc').each do |value|
+      name = value.option_type.name.sub(/^dress-/, '').try(:capitalize)
+      chunk = "#{name}:#{value.presentation}"
+      sku_chunks.push(chunk)
+    end
+    sku_chunks.push(self.id.to_s)
+    self.sku = sku_chunks.join('-')
+  rescue Exception => e
+    # do nothing, sku required for analytics mostly
+    return true
   end
 
   class << self
