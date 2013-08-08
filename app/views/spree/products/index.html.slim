@@ -38,16 +38,16 @@
             li class="#{body_shape} #{enabled ? 'active' : ''}"
               label = body_shape.humanize
               = check_box_tag 'bodyshape', body_shape, enabled
-      .filters-block
+      .hide.filters-block
         .title Color
         .colors
           - selected_colors = (@searcher.colour || []).map(&:id)
           .color.white.all class="#{ selected_colors.blank? ? 'active' : '' }" data-color='all' All
           - available_product_colors.each do |color|
             - if selected_colors.include?(color.id)
-              .color.active class='#{color.name}' data-color='#{color.name}'
+              .color.active class='#{color.name}' data-color='#{color.name}' title='#{color.display} dresses'
             - else
-              .color class='#{color.name}' data-color='#{color.name}'
+              .color class='#{color.name}' data-color='#{color.name}' title='#{color.name} dresses'
           
     .grid-75.fright.content-margin
       = render 'products', products: @products, colors: @colors
