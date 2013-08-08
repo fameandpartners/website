@@ -27,6 +27,10 @@ Spree.config do |config|
   config.currency = 'AUD'
 
   config.allow_checkout_on_gateway_error = false
+
+  config.default_country_id = Spree::Country.find_by_iso('AU').id
+
+  config.checkout_zone = 'Australia'
 end
 
 Spree.user_class = "Spree::User"
