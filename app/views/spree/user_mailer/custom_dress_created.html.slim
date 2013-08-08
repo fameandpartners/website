@@ -1,5 +1,36 @@
-h1 What an exciting moment! Your very own designer dress.
-p One of our designers will be in touch in the next 48 hours to chat to you about your new look. Look out for our call!
-p
-  ' If you miss our call, or have any questions, simply send us an email at
-  = mail_to 'team@fameandpartners.com'
+table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+  tbody
+    tr
+      td width="38"
+      td
+        table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+          tbody
+            tr
+              td height="27"
+            tr
+              td.date style="color: #999; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                = Date.today.to_formatted_s(:long)
+            tr
+              td height="30"
+            tr
+              td style="color: #333; font: 700 18px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                ' Your very own designer dress.
+            tr
+              td height="40"
+            tr
+              td style="color: #666; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                p style="margin: 0 0 20px;" What an exciting moment! Your very own designer dress.
+                p style="margin: 0 0 20px;" One of our designers will be in touch in the next 48 hours to chat to you about your new look. Look out for our call!
+                p style="margin: 0;"
+                  ' If you miss our call, or have any questions, simply send us an email at
+                  = mail_to 'team@fameandpartners.com', style: 'color: #666; font-weight: 700;'
+            tr
+              td height="130"
+            tr
+              td style="color: #666; text-transform: uppercase; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                = link_to "Our Collection", collection_url, style: "color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                '  |  
+                = link_to "About", about_url, style: "color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                '  |  
+                a href="http://blog.fameandpartners.com" style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Blog
+      td width="38"
