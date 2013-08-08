@@ -5,8 +5,11 @@ class Blog::CelebritiesController < BlogBaseController
     title 'Celebrities'
     description 'Follow celebrities fashion styles.'
 
-    @celebrities_count = Blog::Celebrity.count
-    @celebrities = Blog::Celebrity.includes(:primary_photo).page(params[:page]).per(CELEBRITIES_PER_PAGE)
+    @celebrities_count = Blog::Celebrity.with_primary_photo.count
+    @celebrities = Blog::Celebrity.
+      with_primary_photo.
+      includes(:primary_photo).
+      page(params[:page]).per(CELEBRITIES_PER_PAGE)
 
     respond_to do |format|
       format.js do
