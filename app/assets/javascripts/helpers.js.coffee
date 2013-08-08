@@ -37,7 +37,7 @@ window.switchToAltImage = (element, no_image_src) ->
 window.initHoverableProductImages = () ->
   $('img[second_image]').each (index, element) ->
     $image = $(element)
-    original_image  = $image.attr('src')
+    original_image  = $image.attr('original_image')
     second_image    = $image.attr('second_image')
 
     # provide safe multiple calls on page
