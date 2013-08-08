@@ -3,19 +3,27 @@
   height: 10px;
   border-radius: 50%;
   box-shadow: 0 0 3px rgba(0, 0, 0, .2);
-  &.pink {
-    background: #fd3362;
-  }
-  &.black {
-    background: #000;
-  }
-  &.yellow {
-    background: #ffff00;
-  }
+  &.pink { background: #fd3362; }
+  &.black { background: #000; }
+  &.yellow { background: #ffff00; }
   &.red { background: red; }
   &.green { background: green; }
   &.gray { background: gray; }
   &.blue { background: blue; }
+  &.orange { background: orange; }
+  &.silver { background: silver; }
+  &.fuchsia { background: fuchsia; }
+  &.aqua { background: aqua; }
+  &.lime { background: lime; }
+  &.maroon { background: maroon; }
+  &.navy { background: navy; }
+  &.olive { background: olive; }
+  &.purple { background: purple; }
+  &.teal { background: teal; }
+  &.white { background: white; border: 1px solid #ccc; width: 9px; height: 9px;} 
+  &.ivory { background: ivory; border: 1px solid #ccc; width: 9px; height: 9px;} 
+  &.linen { background: linen; border: 1px solid #ccc; width: 9px; height: 9px;} 
+  
   &.active {
     cursor: default;
     background-image: image-url('icon-color-tick.png');

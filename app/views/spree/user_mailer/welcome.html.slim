@@ -9,11 +9,11 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
               td height="27"
             tr
               td.date style="color: #999; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
-                ' 25th February 2013
+                = Date.today.to_formatted_s(:long)
             tr
               td height="30"
             tr
-              td style="color: #333; font: 400 18px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+              td style="color: #333; font: 400 18px/1.5 H'elvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
                 ' Hi #{@user.full_name}
             tr
               td height="40"
@@ -29,16 +29,17 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
               td height="30"
             tr
               td
-                a href="http://fameandpartners.com/" style="display: block; width: 230px; height: 38px; background: #000; color: #fff; text-decoration: none; text-transform: uppercase; text-align: center; font: 400 18px/38px 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Start shopping
+                a href="http://www.fameandpartners.com/" style="display: block; width: 230px; height: 38px; background: #000; color: #fff; text-decoration: none; text-transform: uppercase; text-align: center; font: 400 18px/38px 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Start shopping
             tr
               td height="40"
             tr
               td style="color: #666; text-transform: uppercase; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
-                a href="http://fameandpartners.com/collection" style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Our collection
+                = link_to "Our Collection", collection_url, style: "color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
                 '  |  
-                a href="http://fameandpartners.com/about" style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" About us
+                = link_to "About", about_url, style: "color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
                 '  |  
                 a href="http://blog.fameandpartners.com" style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Blog
       td width="38"
       td width="270"
+        = image_url
         img src="http://fameandpartners.com/images/email/girl.jpg" width="270" height="420" alt=""
