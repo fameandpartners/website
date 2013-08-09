@@ -1,6 +1,9 @@
 #shopping-bag-popup-wrapper.shopping-bag-popup style="display:none;"
   - if current_order.item_count == 0
-    ' Sorry, your shopping bag still empty
+    .empty
+      ' Your shopping bag is empty. Browse for formal dresses now.
+      p
+        = link_to "Our Dress Collection", collection_path
   - else
     #shopping-arrow-up.arrow-up
     ul#shopping-bag-popup.items-carousel
