@@ -41,15 +41,25 @@ class Users::WishlistsItemsController < Users::BaseController
     end
   end
 
+  # id - wishlist item id
+  # variant_id - custom dress variant ( can differs from wishlist item.variant_id )
   def move_to_cart
     @item = @user.wishlist_items.find(params[:id])
 
     populator = Spree::OrderPopulator.new(current_order(true), current_currency)
-    if populator.populate(variants: { @item.variant.id => @item.quantity })
+    if params[:variant_id] && params[:quantity]
+      populate_options = { params[:variant_id].to_i =>  params[:quantity].to_i }
+    else
+      populate_options = { @item.variant.id => @item.quantity }
+    end
+
+    if populator.populate(variants: populate_options)
       fire_event('spree.cart.add')
       fire_event('spree.order.contents_changed')
 
       current_order.reload
+
+      @item.destroy
     end
 
     respond_with(@item) do |format|

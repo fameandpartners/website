@@ -49,7 +49,8 @@
                   .line
                     .label Estimated Delivery
                     .value = variant.count_on_hand.to_i != 0 ? '1-2 weeks' : '3-4 weeks'
-                    .edit = link_to 'Edit item', '#', class: 'edit-link', data: { id: line_item.id }
+                    - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
+                    .edit = link_to 'Edit item', '#', class: 'edit-link', data: link_data
             .grid-20.price
               .pricing
                 = current_order.currency

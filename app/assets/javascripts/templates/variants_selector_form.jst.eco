@@ -1,13 +1,13 @@
 <div class="item">
   <div class="image">
-    <img src="<%= @line_item.product_image %>" width="136" height="200" />
+    <img src="<%= @product.image %>" width="136" height="200" />
   </div>
   <div class="item-details">
     <div class="name">
       Hello
     </div>
     <div class="description">
-      <%= @line_item.product_name %>
+      <%= @product.name %>
     </div>
     <div class="colors-choser">
       <div class="label">
@@ -25,7 +25,6 @@
       </div>
       <div class="select-box value">
         <select id="toggle-selectbox" class="select2" name="size">
-          <option value=''>Size</option>
           <% for size in @sizes: %>
             <option value='<%= size %>'><%= size %></option>
           <% end %>
@@ -39,7 +38,11 @@
       <div class="value">
         <select name="quantity" class="quantity-select selectbox">
           <% for quantity in [1..@max_quantity]: %>
-            <option value='<%= quantity %>'><%= quantity %></option>
+            <% if quantity == @quantity: %>
+              <option selected='selected' value='<%= quantity %>'><%= quantity %></option>
+            <% else: %>
+              <option value='<%= quantity %>'><%= quantity %></option>
+          <% end %>
           <% end %>
         </select>
       </div>

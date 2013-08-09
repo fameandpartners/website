@@ -17,8 +17,17 @@
                   .quick-view = quick_view_link(product)
                   = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
                 .name = link_to product.name, collection_product_path(product)
-                /.description = product_short_description(product)
                 .price = product.price_in(current_currency).display_price
                 .add-remove
-                  = link_to 'Add to cart', move_to_cart_wishlists_item_path(item), class: 'add-to-cart', remote: true
+                  = wishlist_move_to_cart_link(item)
                   = link_to 'Remove', wishlists_item_path(item), class: 'remove', method: :delete, remote: true
+
+.modal.edit-line-item(style="display: none;")
+  .overlay
+  .modal-container
+    .close-lightbox
+    .edit-details
+      .modal-title Specify product options
+      .item
+      .save
+        input.btn.black type="submit" value="Move to cart & close"

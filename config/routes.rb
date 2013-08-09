@@ -19,6 +19,8 @@ FameAndPartners::Application.routes.draw do
     post 'move_to_wishlist', on: :member
   end
 
+  resource :product_variants, only: [:show]
+
   scope '/collection' do
     root to: 'spree/products#index', as: 'collection'
     get '/:collection' => 'spree/products#index'

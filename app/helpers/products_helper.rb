@@ -92,4 +92,18 @@ module ProductsHelper
     return '' if Rails.env.development?
     render 'shared/share_buttons'
   end
+
+  def wishlist_move_to_cart_link(wishlist_item)
+    variant = wishlist_item.variant
+    if variant.is_master?
+      data = {
+        variant: variant.id,
+        item: wishlist_item.id,
+        quantity: wishlist_item.quantity
+      }
+      link_to 'Add to cart', '#', class: 'add-to-cart master', data: data
+    else
+      link_to 'Add to cart', move_to_cart_wishlists_item_path(wishlist_item), class: 'add-to-cart', remote: true
+    end
+  end
 end

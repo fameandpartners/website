@@ -1,8 +1,10 @@
 window.helpers or= {}
 
-window.helpers.createEditLineItemPopup = () ->
+window.helpers.createVariantsSelectorPopup = () ->
   popup = {
-    currentItem: null
+    eventBus: $({})
+    eventParams: {}
+    params: {}
     container: null
     variantsSelector: null
     initialized: false
@@ -12,40 +14,59 @@ window.helpers.createEditLineItemPopup = () ->
       popup.container = $('.edit-line-item.modal').hide()
       popup.container.find('.close-lightbox').on('click', popup.cancelButtonClickHandler)
       popup.container.find('.save input.btn').on('click', popup.saveButtonClickHandler)
+      popup.container.find('.overlay').on('click', popup.cancelButtonClickHandler)
 
       return popup.container
   
-    show: (itemId) ->
-      popup.currentItem = itemId
-
-      $.ajax("/line_items/#{itemId}/edit",
+    # options should contains one of id, product_id, variant_id
+    show: (params = {}, eventParams = {}) ->
+      popup.params = params
+      popup.eventParams = eventParams
+      $.ajax("/product_variants"
         type: 'GET',
         dataType: 'json',
+        data: params
         success: popup.showModalWindow
       )
 
     showModalWindow: (data) ->
       templateArgs = popup.prepareTemplateArgs(data)
       popup.container.show()
-      item_html = JST['templates/line_item_edit_form'](templateArgs)
+      item_html = JST['templates/variants_selector_form'](templateArgs)
       popup.container.find('.item').replaceWith(item_html)
-      popup.updateFormHandlers(data.variants, templateArgs.line_item.variant_id)
-      popup.container.find('.value select.quantity-select').val(templateArgs.line_item.quantity)
+
+      preselectedVariant = popup.params.variant_id
+      preselectedVariant = data.variants[0].id unless preselectedVariant?
+      popup.updateFormHandlers(data.variants, preselectedVariant)
+
+      quantity = popup.params.quantity
+      quantity = 1 unless quantity?
+      popup.container.find('.value select.quantity-select').val(quantity)
+
       popup.container.center()
 
     prepareTemplateArgs: (response) ->
-      return {
-        line_item: response.line_item.line_item,
+      result = {
+        product: response.product.product,
         sizes: window.getUniqueValues(response.variants, 'size')
         colors: window.getUniqueValues(response.variants, 'color')
-        max_quantity: _.max([response.line_item.quantity + 5, 10])
+        max_quantity: 10
       }
+      if popup.params.quantity
+        result.quantity = popup.params.quantity
+      else
+        result.quantity = 1
+      result
 
     updateFormHandlers: (variants, variantId) ->
       popup.variantsSelector = window.helpers.createProductVariantsSelector(popup.container)
       popup.variantsSelector.init(variants, { id: variantId })
 
     close: () ->
+      # clear current state
+      popup.params = {}
+      popup.eventParams = {}
+      # close popup
       popup.container.hide()
 
     cancelButtonClickHandler: (e) ->
@@ -57,11 +78,16 @@ window.helpers.createEditLineItemPopup = () ->
       formData = {
         variant_id: popup.variantsSelector.getSelectedVariant().id,
         quantity: $('.quantity-select').val()
+        params: popup.eventParams
       }
-      window.shopping_cart.updateProduct(popup.currentItem, formData)
-      popup.close()
+      popup.trigger('selected', formData)
 
-    getFormDetails: () ->
+      popup.close()
   }
+
+  popup.on      = delegateTo(popup.eventBus, 'on')
+  popup.one     = delegateTo(popup.eventBus, 'one')
+  popup.off     = delegateTo(popup.eventBus, 'off')
+  popup.trigger = delegateTo(popup.eventBus, 'trigger')
 
   return popup

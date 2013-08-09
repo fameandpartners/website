@@ -14,7 +14,7 @@
       <%= @line_item.product_description %>
     </div>
     <div class="wishlist">
-      <a href="#">Move to wish list</a>
+      <a href="#" data-id="<%= @line_item.variant_id %>">Move to wish list</a>
     </div>
   </div>
 </div>
@@ -57,7 +57,7 @@
           <% end %>
         </div>
         <div class="edit">
-          <a data-id="<%= @line_item.id %>" class="edit-link" href="#">Edit item</a>
+          <a data-id="<%= @line_item.id %>" data-quantity="<%= @line_item.quantity %>" data-variant="<%= @line_item.variant_id %>" class="edit-link" href="#">Edit item</a>
         </div>
       </div>
     </div>
