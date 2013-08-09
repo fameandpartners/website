@@ -64,7 +64,7 @@ ruby:
           .label Choose a color:
           .colors
             - colors.each do |color|
-              .color class='#{color}' data-color='#{color}'
+              .color class='#{color}' data-color='#{color}' title='#{color}'
         .size-select
           .select-box
             select#toggle-selectbox.select2 name="size"
@@ -89,25 +89,24 @@ ruby:
               = t('product_has_no_description')
           #sizes.tab-content
             = @product.property('fit')
-            - if @product.style_profile
-              .body-shapes
-                .desc The body shapes that this dress suits:
+            .hide
+              - if @product.style_profile and !@product.style_profile.suitable_shapes.empty?
+                .body-shapes
+                  .desc The body shapes that this dress suits:
 
-                ul
-                  - @product.style_profile.suitable_shapes.each do |shape|
-                    li
-                      = link_to spree.products_path(bodyshape: shape) do
-                        - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
-                        .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
-                        .name #{title}
+                  ul
+                    - @product.style_profile.suitable_shapes.each do |shape|
+                      li
+                        = link_to spree.products_path(bodyshape: shape) do
+                          - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
+                          .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
+                          .name #{title}
           #details.tab-content
             | Material:
-            = @product.property('fabric')
-            br
-            | Weight:
-            = @product.property('weight')
-          #notes.tab-content
-            = product_description(@product)
+            == @product.property('fabric')
+          - if @product.property('style_notes').present?
+            #notes.tab-content
+              = @product.property('style_notes')          
 
   .page-name
     .inner
