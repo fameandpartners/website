@@ -1,7 +1,7 @@
 footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .grid-container
     .grid-20.prefix-3.links
-      .title Shop Prom Dresses
+      .title Shop Formal Dresses
       ul
         - available_product_ranges.each do |taxon|
           li = link_to taxon.name, collection_taxon_path(taxon), title: "Buy " + taxon.name
@@ -17,10 +17,8 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
     .grid-20.links
       .title Customer Service
       ul
-        li = link_to 'FAQs', '#'
-        li = link_to 'Customer Service', '#'
-        li = link_to 'Book a Personal Stylist', '#'
-        li = link_to 'Shipping & Returns', '#'
+        li = link_to 'FAQs', 'http://help.fameandpartners.com'
+        li = mail_to "team@fameandpartners.com", "Book a Personal Stylist", subject: "Book a Personal Stylist"
         li.empty
         li 1800 456 600
     .grid-20.links
