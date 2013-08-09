@@ -17,7 +17,8 @@ $(".products.show").ready ->
         start: 0
         visible: 4
         height: 132
-      scroll: 1
+      scroll:
+        items: 1
     )
   )
 
