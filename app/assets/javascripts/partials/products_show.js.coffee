@@ -14,8 +14,10 @@ $(".products.show").ready ->
       width: 83
       height: 528
       items:
+        start: 0
         visible: 4
         height: 132
+      scroll: 1
     )
   )
 
