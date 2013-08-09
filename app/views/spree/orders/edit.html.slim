@@ -32,7 +32,7 @@
               .desc
                 .name = link_to product.name, collection_product_path(product), target: 'blank'
                 .text = line_item_description(variant)
-                .wishlist = link_to 'Move to wish list', '#', data: { id: variant.id }
+                .wishlist = product_move_to_wishlist_link(variant)
             .grid-30.details
               .static-dynamic-block
                 .static

@@ -18,7 +18,7 @@ $(".orders.edit").ready ->
     updateHandlersFor: (root_element) ->
       root_element.find('.remove-item-from-cart').on('click', page.removeItemClickHandler)
       root_element.find('.edit-link').on('click', page.editItemClickHandler)
-      root_element.find('.wishlist a').on('click', page.moveItemToWishlistClickHandler)
+      root_element.find('.wishlist a.move-to-wishlist').on('click', page.moveItemToWishlistClickHandler)
 
     removeItemClickHandler: (e) ->
       e.preventDefault()

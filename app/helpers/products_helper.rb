@@ -106,4 +106,12 @@ module ProductsHelper
       link_to 'Add to cart', move_to_cart_wishlists_item_path(wishlist_item), class: 'add-to-cart', remote: true
     end
   end
+
+  def product_move_to_wishlist_link(variant)
+    if spree_user_signed_in?
+      link_to 'Move to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist'
+    else
+      link_to 'Move to wish list', spree_signup_path
+    end
+  end
 end
