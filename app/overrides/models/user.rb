@@ -7,14 +7,14 @@ Spree::User.class_eval do
   attr_accessible :avatar, :slug, :description
   has_attached_file :avatar, styles: { small: "160x160#"}
 
-  validates :first_name, :last_name, :slug, :description, presence: true, if: :blog_moderator?
+  #validates :first_name, :last_name, :slug, :description, presence: true, if: :blog_moderator?
   validates :slug, uniqueness: true, if: :blog_moderator?
   validates :sign_up_reason,
             :inclusion => {
               :allow_blank => true,
               :in => SIGN_UP_REASON
             }
-  validates_attachment_presence :avatar, if: :blog_moderator?
+  #validates_attachment_presence :avatar, if: :blog_moderator?
   validates_attachment_content_type :avatar, content_type: ALLOWED_AVATAR_FILE_TYPES
   validates_attachment_size :avatar, in: ALLOWED_AVATAR_FILE_SIZE
 

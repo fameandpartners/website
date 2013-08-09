@@ -7,7 +7,7 @@
       .input.string
         = f.label :password
         = f.password_field :password, class: 'title', tabindex: 2, placeholder: t(:password)
-      .input.boolean
+      .hide.input.boolean
         label for="spree_user_remember_me"
           = f.check_box :remember_me
           = f.label :remember_me, t(:remember_me)

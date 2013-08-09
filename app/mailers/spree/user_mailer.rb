@@ -11,6 +11,7 @@ class Spree::UserMailer < ActionMailer::Base
 
   def reset_password_instructions(user)
     @resource = user
+    @user = user
 
     mail(:to => user.email,
          :subject => Spree::Config[:site_name] + ' ' + I18n.t(:password_reset_instructions))

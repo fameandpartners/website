@@ -48,6 +48,11 @@
   }
   .form {
     .string {
+      label{
+        font-family: $fontOne;
+        font-size: 13px;
+        font-weight: 300;
+      }
       input {
         height: 32px;
         line-height: 32px;
@@ -70,6 +75,7 @@
     }
     .submit-form {
       width: 100%;
+      padding-top: 10px;
       input {
         width: 240px;
         margin: 0;

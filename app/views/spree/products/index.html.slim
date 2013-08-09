@@ -26,7 +26,7 @@
             li class=(enabled ? 'active' : '')
               label = taxon.name
               = check_box_tag 'style', taxon.permalink.split('/').last, enabled
-      .filters-block
+      .hide.filters-block
         .title Body shape
         ul.filters-boxes.squares.body_shapes
           - selected_items = @searcher.bodyshape || []

@@ -4,7 +4,7 @@
   <div id="shopping-bag-popup-wrapper" class="shopping-bag-popup" style="display: none;">
 <% end %>
   <% if @order.item_count == 0: %>
-    Sorry, your shopping bag still empty
+    <div class="empty">Your shopping bag is empty. Browse for formal dresses now.</div>
   <% else: %>
     <div id="shopping-arrow-up" class="arrow-up"></div>
     <ul id="shopping-bag-popup" class="items-carousel">
