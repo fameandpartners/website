@@ -1,6 +1,4 @@
 Spree::Product.class_eval do
-  include Tire::Model::Callbacks
-
   has_one :celebrity_inspiration,
     dependent: :destroy,
     class_name: 'Spree::CelebrityInspiration',
@@ -50,5 +48,11 @@ Spree::Product.class_eval do
 
   def description
     read_attribute(:description) || ''
+  end
+
+  def delete
+    self.update_column(:deleted_at, Time.now)
+    variants_including_master.update_all(:deleted_at => Time.now)
+    update_index
   end
 end

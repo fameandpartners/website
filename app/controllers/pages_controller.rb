@@ -22,6 +22,11 @@ class PagesController < Spree::StoreController
       query do
         string Tire::Utils.escape(query_string), :default_operator => 'AND' , :use_dis_max => true
       end
+      filter :bool, :must => {
+        :term => {
+          :deleted => false
+        }
+      }
     end.results.results
 
     @colors = Products::ColorsSearcher.new(Spree::Product.active).retrieve_colors
