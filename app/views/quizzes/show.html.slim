@@ -7,8 +7,8 @@
       br
       ' what your style really is.
     .signup-buttons
-      = link_to 'Signup with facebook', fb_auth_path(:quiz => true), class: 'facebook-signup'
+      = link_to 'Signup with facebook', fb_auth_path(quiz: 'true'), class: 'facebook-signup'
       .or or
-      = link_to 'Sign up using your email address', spree.signup_path(:quiz => true), class: 'regular-signup'
+      = link_to 'Sign up using your email address', spree.signup_path(quiz: 'true', cl: 'stylequiz'), class: 'regular-signup'
     .signin-link
       ' Already a member? #{link_to 'Sign in here', spree.login_path(:quiz => true)}

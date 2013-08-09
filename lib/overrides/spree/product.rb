@@ -13,6 +13,7 @@ module Overrides
 
         mapping do
           indexes :id, :index => :not_analyzed
+          indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
           indexes :name, :analyzer => :snowball
           indexes :description, :analyzer => :snowball
           indexes :taxons, :as => 'taxons.map(&:name)'
@@ -94,6 +95,12 @@ module Overrides
           style_profile = UserStyleProfile.find_by_user_id(user.id)
 
           query = Tire.search(:spree_products, :page => 1, :load => true) do
+            filter :bool, :must => {
+              :term => {
+                :deleted => false
+              }
+            }
+
             sort do
               by ({
                 :_script => {

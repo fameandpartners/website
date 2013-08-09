@@ -1,6 +1,10 @@
 Spree::Variant.class_eval do
   before_validation :set_default_sku
 
+  after_save do
+    product.update_index
+  end
+
   def dress_color
     get_option_value(self.class.color_option_type)
   end

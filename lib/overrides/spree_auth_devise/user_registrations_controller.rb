@@ -45,7 +45,7 @@ Spree::UserRegistrationsController.class_eval do
       session[:spree_user_signup] = true
       associate_user
 
-      redirect_to main_app.root_path(:cf => :signup)
+      redirect_to main_app.root_path({ci: 'signup'}.merge(params.slice(:cl)))
     else
       clean_up_passwords(resource)
       render :new
