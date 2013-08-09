@@ -8,7 +8,7 @@
     .or
       span or
     .default-form
-      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user) do |f|
+      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, params.slice(:cl)) do |f|
         = render :partial => 'spree/shared/user_form', :locals => { :f => f }
     .terms
       ' By clicking above you acknowledge and accept our Terms of Service, and consent to receive emails. You can update your email preferences anytime by contacting us.
