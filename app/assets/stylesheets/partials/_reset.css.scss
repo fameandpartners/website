@@ -19,6 +19,7 @@ input,textarea{font-family:inherit;font-size:inherit;font-weight:inherit}
 html, body { min-height: 100%; }
 html { background: #fff; }
 body { cursor: default; font: 400 16px/1.1 $fontTwo; color: #5f5f5f; }
+body > iframe { height: 0; }
 strong, b { font-weight: 700; }
 em, i { font-style: italic; }
 input, textarea { cursor: text; }
