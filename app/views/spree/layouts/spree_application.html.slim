@@ -7,7 +7,7 @@ doctype html
 
     - if content_for?(:payment_gateway)
       = yield :payment_gateway
-  body class=(controller_action_class) id=(controller_action_id)
+  body class="ecommerce #{controller_action_class}" id=(controller_action_id)
     #fb-root
     javascript:
       (function(d, s, id) {

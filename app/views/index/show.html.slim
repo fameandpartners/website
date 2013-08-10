@@ -1,3 +1,8 @@
+- if spree_user_signed_in? and (params[:ci] == 'signup' or params[:cf] == 'signup')
+  javascript:
+    $(function(){
+      track.conversion('sign_up')
+    })
 .promo
   .wrap
     .promo-image

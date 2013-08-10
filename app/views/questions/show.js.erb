@@ -25,4 +25,8 @@ $progress_bar.find('.tooltip').text('<%= @progress %>%');
 
 $('.questions-count .inline.current').text('<%= @position %>');
 
-
+<% if @position.to_i == 2 %>
+  track.conversion('quiz_step1');
+<% elsif @position.to_i == 3 %>
+  track.conversion('quiz_step2');
+<% end %>

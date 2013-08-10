@@ -4,7 +4,7 @@ doctype html
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'spree/shared/google_analytics'
-  body class=(controller_action_class) id=(controller_action_id)
+  body class="blog #{controller_action_class}" id=(controller_action_id)
     #wrap
       = render 'layouts/header_blog'
       #content

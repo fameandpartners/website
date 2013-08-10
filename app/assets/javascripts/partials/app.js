@@ -133,4 +133,10 @@ $(function(){
   deskTimerCheck();
 
   window.initHoverableProductImages()
+
+  //track.remarketing_tag()
+});
+
+$('body.blog').ready(function(){
+  track.conversion('blog_view')
 });
