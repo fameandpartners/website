@@ -1,39 +1,37 @@
 footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .grid-container
     .grid-20.prefix-3.links
-      .title Shop Formal Dresses
+      .title Collection
       ul
         - available_product_ranges.each do |taxon|
           li = link_to taxon.name, collection_taxon_path(taxon), title: "Buy " + taxon.name
     .grid-20.links
       .title Style Inspiration
       ul
-        li = link_to 'Celebrity name', '#'
-        li = link_to 'Celebrity name', '#'
-        li = link_to 'Mood board link', '#'
-        li = link_to 'Stylist Picks', '#'
-        li = link_to 'Blog Post', '#'
-        li = link_to 'Designer blog post', '#'
+        li = link_to 'Celebrity edit', 'http://blog.fameandpartners.com/celebrities/photos', target: "_blank"
+        li = link_to 'Red carpet gallery', 'http://blog.fameandpartners.com/red-carpet-events', target: "_blank"
+        li = link_to 'Colour boards', 'http://pinterest.com/fameandpartners/', target: "_blank"
+        li = link_to 'Trends', 'http://blog.fameandpartners.com/trends', target: "_blank"
     .grid-20.links
       .title Customer Service
       ul
         li = link_to 'FAQs', 'http://help.fameandpartners.com'
-        li = mail_to "team@fameandpartners.com", "Book a Personal Stylist", subject: "Book a Personal Stylist"
-        li.empty
+        li = mail_to "team@fameandpartners.com", "Book a Personal Stylist", subject: "Book a Personal Stylist"                                                                                             
+        li = mail_to "team@fameandpartners.com", "team@fameandpartners.com", subject: "Customer Service from Website"
         li 1300 924 860
     .grid-20.links
       .title About us
       ul
         li = link_to 'About us', about_path
-        li = link_to 'Meet our Team', team_path
+        li.hide = link_to 'Meet our Team', team_path
         li = link_to 'Terms & Conditions', terms_path
         li = link_to 'Privacy', privacy_path
     .grid-15.social
       .title Let’s be friends
       ul
-        li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
+        li.hide = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
         li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
-        li = link_to 'google', configatron.links.google, target: :blank, class: 'google'
+        li.hide = link_to 'google', configatron.links.google, target: :blank, class: 'google'
         li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
   .wrap
     .logo-copyright
