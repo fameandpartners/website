@@ -25,14 +25,14 @@
       </div>      
     <% end %>
 
-    <div class="four columns">
+    <div class="three columns">
       <%= f.field_container :prototype do %>
         <%= f.label :prototype_id, t(:prototype) %><br />
         <%= f.collection_select :prototype_id, Spree::Prototype.all, :id, :name, {:include_blank => true}, {:class => 'select2 fullwidth'} %>
       <% end %>
     </div>
       
-    <div class="four columns">
+    <div class="three columns">
       <%= f.field_container :price do %>
         <%= f.label :price, t(:master_price) %> <span class="required">*</span><br />
         <%= f.text_field :price, :class => 'fullwidth' %>
@@ -40,12 +40,22 @@
       <% end %>
     </div>
 
-    <div class="omega four columns">
+    <div class="three columns">
       <%= f.field_container :available_on do %>
         <%= f.label :available_on, t(:available_on) %>
         <%= f.error_message_on :available_on %>
         <%= f.text_field :available_on, :class => 'datepicker fullwidth' %>
       <% end %>
+    </div>
+
+    <div class="omega three columns">
+      <div class="field checkbox">
+        <br />
+        <label>
+          <%= f.check_box :on_demand %>
+          <%= t(:on_demand) %>
+        </label>
+      </div>
     </div>
     
   </div>
