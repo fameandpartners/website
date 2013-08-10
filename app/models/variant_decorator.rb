@@ -38,13 +38,15 @@ Spree::Variant.class_eval do
       sku_chunks.push(product.permalink)
     end
 
-    self.option_values.order('id asc').each do |value|
+    self.option_values.sort_by(&:id).each do |value|
       name = value.option_type.name.sub(/^dress-/, '').try(:capitalize)
       chunk = "#{name}:#{value.presentation}"
       sku_chunks.push(chunk)
     end
+
     sku_chunks.push(self.id.to_s)
-    self.sku = sku_chunks.join('-')
+
+    self.sku = sku_chunks.reject!(&:blank?).join('-')
   rescue Exception => e
     # do nothing, sku required for analytics mostly
     return true
