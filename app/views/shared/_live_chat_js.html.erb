@@ -18,18 +18,4 @@
       customer: { }
     }
   }).render();
-
-  deskTimerCheck = function () {
-    if ($('#assistly-widget-1 .a-desk-widget-chat').length) {
-      $("#assistly-widget-1 .a-desk-widget-chat")
-        .html("Live Chat")
-        .css("background-image", "none");
-    } else {
-      setTimeout(deskTimerCheck, 1000);
-    }
-  };
-  $(document).ready(function() {
-    deskTimerCheck();
-  });
-
 </script>
