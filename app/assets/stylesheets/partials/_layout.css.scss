@@ -675,6 +675,14 @@ header {
     }
   } 
   
+  table{
+    padding: 10px;
+    td, th{
+      padding: 10px;
+      text-align: left !important;
+    }
+  }
+  
   .btn {
     display: inline-block;
     height: 32px;
