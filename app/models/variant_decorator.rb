@@ -24,7 +24,20 @@ Spree::Variant.class_eval do
   def set_default_sku
     return if self.sku.present?
     sku_chunks = []
-    sku_chunks.push(product.sku.present? ? product.sku : product.permalink)
+    master = nil
+
+    if product.master.present?
+      master = product.master
+    elsif product.variants.present?
+      master = product.variants.first
+    end
+
+    if master && master.sku.present?
+      sku_chunks.push(master.sku)
+    else
+      sku_chunks.push(product.permalink)
+    end
+
     self.option_values.order('id asc').each do |value|
       name = value.option_type.name.sub(/^dress-/, '').try(:capitalize)
       chunk = "#{name}:#{value.presentation}"
