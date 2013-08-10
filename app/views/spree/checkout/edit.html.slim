@@ -1,6 +1,6 @@
 - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
   - content_for :payment_gateway do
-    - if Rails.env.production?
+    - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
       = javascript_include_tag 'https://api.pin.net.au/pin.js'
     - else
       = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
