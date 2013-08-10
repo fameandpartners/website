@@ -40,10 +40,13 @@ Spree::Product.class_eval do
   end
 
   def colors
-    option_type = option_types.find_by_name('dress-color')
-    variants.map do |variant|
-      variant.option_values.where(:option_type_id => option_type.id).map(&:name)
-    end.flatten.uniq
+    if option_type = option_types.find_by_name('dress-color')
+      variants.map do |variant|
+        variant.option_values.where(:option_type_id => option_type.id).map(&:name)
+      end.flatten.uniq
+    else
+      []
+    end
   end
 
   def description
