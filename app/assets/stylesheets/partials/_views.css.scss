@@ -149,7 +149,8 @@
     float: left;
     width: 234px;
     height: 332px;
-    background: #ccc;
+    background: #ccc;    
+    border: 9px solid #fff;
     box-shadow: 0 0 6px rgba(0, 0, 0, .3);
     &.rotate-1 {
       position: absolute;
@@ -166,6 +167,10 @@
     &.large {
       float: right;
       width: 460px;
+      height: 324px;
+      img{
+        width: 460px;
+      }
     }
   }
 }
@@ -193,11 +198,14 @@
     .image-preview {
       display: block;
       text-decoration: none;
-      width: 486px;
+      width: 474px;
       height: 285px;
       background: #ccc;
       border: 9px solid #fff;
       box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+      img{
+        height: 285px;
+      }
     }
     &.rotate-1 {
       position: absolute;

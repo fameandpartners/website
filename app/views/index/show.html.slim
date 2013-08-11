@@ -15,23 +15,23 @@
       = image_tag 'homepage/neon2.jpg'
     = link_to '#', class: 'image rotate-2' do
       = image_tag 'homepage/neon3.jpg'
-    = link_to '#', class: 'image large' do
+    = link_to '#', class: 'show-style-quiz image large' do
       = image_tag 'homepage/right.jpg'
 
-.hide.blog-posts-preview
+.blog-posts-preview
   .wrap.no-overflow
     .blog-post
       .label Blog
-      = link_to '#', class: 'image-preview' do
-        ' Some blog image here
+      = link_to 'http://blog.fameandpartners.com/trends/go-punk-to-prom', class: 'image-preview' do
+        = image_tag 'homepage/blog1.jpg'
     .blog-post.rotate-1
       .label Blog
-      = link_to '#', class: 'image-preview' do
-        ' Some blog image here
+      = link_to 'http://blog.fameandpartners.com/celebrity/taylor-swift/photos', class: 'image-preview' do
+        = image_tag 'homepage/blog2.jpg'
     .blog-post.rotate-2
       .label Blog
-      = link_to '#', class: 'image-preview' do
-        ' Some blog image here
+      = link_to 'http://blog.fameandpartners.com/red-carpet-events/young-hollywood-awards-2013', class: 'image-preview' do
+        = image_tag 'homepage/blog3.jpg'
 
 - if @featured_products.length > 0
   .featured-dresses
