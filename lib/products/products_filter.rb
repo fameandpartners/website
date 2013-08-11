@@ -20,7 +20,7 @@ module Products
 
     def initialize(params)
       self.current_currency = Spree::Config[:currency]
-      @properties = {}
+      @properties = ActiveSupport::HashWithIndifferentAccess.new
       prepare(params)
     end
 
@@ -144,10 +144,9 @@ module Products
     end
 
     def taxons
-      result = {}
-      result[:collection] = collection if collection.present?
-      result[:style] = style if style.present?
-      return result
+      permalinks = Spree::Taxon.roots.map(&:permalink)
+
+      @properties.slice(*permalinks).reject{ |k, v| v.blank? }
     end
 
     def prepare(params)
@@ -156,8 +155,11 @@ module Products
 
       # this block works as proxy, between human readable url params like 'red', 'skirt'
       # and required for search ids
-      @properties[:collection]  = prepare_collection(params[:collection])
-      @properties[:style]       = prepare_style(params[:style])
+      Spree::Taxon.roots.each do |taxon|
+        permalink = taxon.permalink
+        @properties[permalink] = prepare_taxon(permalink, params[permalink])
+      end
+
       @properties[:colour]      = prepare_colours(params[:colour])
       @properties[:bodyshape]   = prepare_bodyshape(params[:bodyshape])
       # eo proxy
@@ -171,19 +173,11 @@ module Products
     end
 
     # get by permalinks. array or single param
-    def prepare_collection(permalinks)
+    def prepare_taxon(root, permalinks)
       return nil if permalinks.blank?
-      permalinks = [permalinks] unless permalinks.is_a?(Array)
+      permalinks = Array.wrap(permalinks)
 
-      db_permalinks = permalinks.map{|permalink| "collection/#{permalink}"}
-      Spree::Taxon.select(:id).where(permalink: db_permalinks).map(&:id)
-    end
-
-    def prepare_style(permalinks)
-      return nil if permalinks.blank?
-      permalinks = [permalinks] unless permalinks.is_a?(Array)
-
-      db_permalinks = permalinks.map{|permalink| "style/#{permalink}"}
+      db_permalinks = permalinks.map{|permalink| "#{root}/#{permalink}"}
       Spree::Taxon.select(:id).where(permalink: db_permalinks).map(&:id)
     end
 

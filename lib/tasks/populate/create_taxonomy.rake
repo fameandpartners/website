@@ -50,10 +50,10 @@ def create_taxonomy_node(root_element_attributes, childs_info)
   taxonomy = Spree::Taxonomy.where(name: root_element_attributes[:name]).first_or_create
   root_taxon = Spree::Taxon.where(root_element_attributes.merge(taxonomy_id: taxonomy.id)).first_or_create
 
-  if childs_info[1].present? || childs_info[0].present?
+  if root_element_attributes[:description].present? || root_element_attributes[:title].present?
     banner = root_taxon.build_banner(
-      description: childs_info[1],
-      title: childs_info[0]
+      description: root_element_attributes[:description],
+      title: root_element_attributes[:title]
     )
     banner.save
   end

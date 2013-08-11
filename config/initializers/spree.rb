@@ -28,7 +28,11 @@ Spree.config do |config|
 
   config.allow_checkout_on_gateway_error = false
 
-  config.default_country_id = Spree::Country.find_by_iso('AU').try(:id)
+  begin
+    config.default_country_id = Spree::Country.find_by_iso('AU').try(:id)
+  rescue Exception => e
+    Rails.logger.warn e.message
+  end
 
   config.checkout_zone = 'Australia'
 
