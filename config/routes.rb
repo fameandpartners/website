@@ -108,7 +108,7 @@ FameAndPartners::Application.routes.draw do
   get '/about'   => 'statics#about'
   get '/team'    => 'statics#team'
   get '/terms'   => 'statics#ecom_terms'
-  get '/privacy' => 'statics#privacy'
+  get '/privacy' => 'statics#ecom_privacy'
   get '/legal'   => 'statics#legal'
   get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works 
   get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program
