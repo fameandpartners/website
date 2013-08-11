@@ -6,20 +6,19 @@
 .promo
   .wrap
     .promo-image
-      .promo-image-inner = image_tag 'latest-image.png', width: 322, height: 212, alt: ''
 
 .home-images
   .wrap
     = link_to '#', class: 'image' do
-      ' Some image here
+      = image_tag 'homepage/neon1.jpg'
     = link_to '#', class: 'image rotate-1' do
-      ' Some image here
+      = image_tag 'homepage/neon2.jpg'
     = link_to '#', class: 'image rotate-2' do
-      ' Some image here
+      = image_tag 'homepage/neon3.jpg'
     = link_to '#', class: 'image large' do
-      ' Some large image here
+      = image_tag 'homepage/right.jpg'
 
-.blog-posts-preview
+.hide.blog-posts-preview
   .wrap.no-overflow
     .blog-post
       .label Blog

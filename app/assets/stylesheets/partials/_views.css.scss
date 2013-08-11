@@ -121,7 +121,7 @@
   }
   .promo-image {
     border: 9px solid #fff;
-    background: image-url('bg-latest.jpg') 0 0 no-repeat #fff;
+    background: image-url('homepage/large.jpg') 0 0 no-repeat #fff;
     height: 523px;
     box-shadow: 0 0 6px rgba(0, 0, 0, .2);
   }
@@ -147,11 +147,10 @@
   .image {
     text-decoration: none;
     float: left;
-    width: 216px;
-    height: 314px;
+    width: 234px;
+    height: 332px;
     background: #ccc;
-    border: 9px solid #fff;
-    box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 6px rgba(0, 0, 0, .3);
     &.rotate-1 {
       position: absolute;
       left: 160px;

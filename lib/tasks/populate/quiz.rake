@@ -290,20 +290,26 @@ namespace :db do
       question = quiz.questions.find_by_partial!('prom_makeup')
       question.answers.create!([
                                  {
-                                   :code => 'img1',
-                                   :glam => 10
+                                   :code => 'natural',
+                                   :glam => 8,
+                                   :classic => 2
                                  }, {
-                                   :code => 'img2',
-                                   :classic => 10
+                                   :code => 'dramatic',
+                                   :edgy => 6,
+                                   :bohemian => 2
                                  }, {
-                                   :code => 'img3',
-                                   :girly => 10
+                                   :code => 'romantic',
+                                   :girly => 5,
+                                   :glam => 7,
+                                   :classic => 5
                                  }, {
-                                   :code => 'img4',
+                                   :code => 'statement',
                                    :bohemian => 10
                                  }, {
-                                   :code => 'img5',
-                                   :edgy => 10
+                                   :code => 'edgy',
+                                   :edgy => 5,
+                                   :glam => 3,
+                                   :bohemian => 3
                                  }
                                ])
 
