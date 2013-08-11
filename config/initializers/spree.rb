@@ -28,9 +28,11 @@ Spree.config do |config|
 
   config.allow_checkout_on_gateway_error = false
 
-  config.default_country_id = Spree::Country.find_by_iso('AU').id
+  config.default_country_id = Spree::Country.find_by_iso('AU').try(:id)
 
   config.checkout_zone = 'Australia'
+
+  config.emails_sent_from = 'noreply@fameandpartners.com'
 end
 
 Spree.user_class = "Spree::User"

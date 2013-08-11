@@ -46,7 +46,7 @@ Spree::Variant.class_eval do
 
     sku_chunks.push(self.id.to_s)
 
-    self.sku = sku_chunks.reject!(&:blank?).join('-')
+    self.sku = sku_chunks.reject(&:blank?).join('-')
   rescue Exception => e
     # do nothing, sku required for analytics mostly
     return true
