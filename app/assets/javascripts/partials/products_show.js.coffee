@@ -41,17 +41,4 @@ $(".products.show").ready ->
   # what size i'm
   $('.toggle-sizes').fancybox({width: '1000', height: '183'})
 
-  # add product to cart
-  $('.buy-wishlist .buy-now').on('click', (e) ->
-    e.preventDefault()
-    e.stopImmediatePropagation()
-    button = $(e.currentTarget)
-    variantId = button.data('id')
-    button.addClass('adding')
-    window.shopping_cart.addProduct.call(window.shopping_cart, variantId, {
-      failure: () -> button.removeClass('adding')
-      success: () -> button.removeClass('adding').addClass('added')
-    })
-
-    window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
-  )
+  window.helpers.addBuyButtonHandlers($('.buy-wishlist .buy-now'), { expandShoppingBag: true})

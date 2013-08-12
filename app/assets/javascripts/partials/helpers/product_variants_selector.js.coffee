@@ -9,6 +9,8 @@ window.helpers.createProductVariantsSelector = (root) ->
 
     init: (variants, selected) ->
       variantsSelector.variants = variants
+      rootElement.find('#toggle-selectbox').val('')
+
       rootElement.find(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
       rootElement.find('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
       variantsSelector.selectOptions.call(variantsSelector, selected)
@@ -33,23 +35,33 @@ window.helpers.createProductVariantsSelector = (root) ->
       variantsSelector.selectSize.call(variantsSelector, size)
 
     cartItemsChangedHandler: (e, data) ->
-      variantsSelector.updatePurchaseConditions.call(variantsSelector)
+      variantsSelector.onVariantsChanged.call(variantsSelector)
 
     selectColor: (color) ->
       @selected.color = color
       avaialable_variants = _.where(@variants, { color: color })
       @updateSelectbox(rootElement.find('#toggle-selectbox'), avaialable_variants, 'size')
-      @updatePurchaseConditions()
+      @onVariantsChanged()
 
     selectSize: (size) ->
       @selected.size = size
-      @updatePurchaseConditions()
+      @onVariantsChanged()
 
       if !!size
         avaialable_variants = _.where(@variants, { size: size })
       else
         avaialable_variants = @variants
       @updateColorsSelector(avaialable_variants)
+
+    onVariantsChanged: () ->
+      variant = @getSelectedVariant()
+
+      @updatePurchaseConditions(variant)
+      @updateDeliveryTime(variant)
+
+      if ! _.isEmpty(variant)
+        $button = rootElement.find('.buy-wishlist .buy-now')
+        $button.trigger('variant_selected', variant)
 
     updateSelectbox: (selectBox, available_options, method_name) ->
       selectBox.find('option').attr('disabled', 'disabled')
@@ -68,10 +80,8 @@ window.helpers.createProductVariantsSelector = (root) ->
       )
       return
 
-    updatePurchaseConditions: () ->
-      @updateDeliveryTime()
+    updatePurchaseConditions: (variant) ->
       # update buttons
-      variant = @getSelectedVariant()
       $button = rootElement.find('.buy-wishlist .buy-now')
       $wishlist_button = rootElement.find('.buy-wishlist .add-wishlist')
       if ! _.isEmpty(variant)
@@ -86,8 +96,7 @@ window.helpers.createProductVariantsSelector = (root) ->
         $button.removeClass('added')
         $button.data(id: null)
 
-    updateDeliveryTime: () ->
-      variant = @getSelectedVariant()
+    updateDeliveryTime: (variant) ->
       return unless variant?
 
 #      if variant.fast_delivery
@@ -113,7 +122,6 @@ window.helpers.createProductVariantsSelector = (root) ->
         variant or= _.findWhere(@variant, { color: selected.color })
         variant or= _.findWhere(@variant, { size: selected.size })
 
-      variant or= @variants[0]
       if variant
         variantsSelector.selectSizeAndColor(variant.size, variant.color)
 

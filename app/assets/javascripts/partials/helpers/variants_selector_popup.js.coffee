@@ -80,9 +80,19 @@ window.helpers.createVariantsSelectorPopup = () ->
         quantity: $('.quantity-select').val()
         params: popup.eventParams
       }
-      popup.trigger('selected', formData)
+      if formData.variant_id?
+        popup.trigger('selected', formData)
+        popup.close()
+      else
+        popup.showErrorMessage()
 
-      popup.close()
+    showErrorMessage: (messageText = 'Please, select size and color') ->
+      return true # error message markup required
+      popup.container.find('.error.message').text(messageText).fadeIn()
+      setTimeout(popup.hideErrorMessage, 3000)
+
+    hideErrorMessage: () ->
+      popup.container.find('.error.message').fadeOut()
   }
 
   popup.on      = delegateTo(popup.eventBus, 'on')

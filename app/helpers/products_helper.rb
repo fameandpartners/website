@@ -62,8 +62,12 @@ module ProductsHelper
   end
 
   def add_to_bag_link(product_or_variant)
-    variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
-    link_to 'Add to bag', '#', class: 'buy-now', data: { id: variant.id }
+    if product_or_variant.is_a?(Spree::Product)
+      # don't use master variant as default
+      link_to 'Add to bag', '#', class: 'buy-now'
+    else
+      link_to 'Add to bag', '#', class: 'buy-now', data: { id: product_or_variant.id }
+    end
   end
 
   def add_to_wishlist_link(product_or_variant)

@@ -33,15 +33,6 @@ window.helpers.quickViewer = {
     productId = $(e.currentTarget).data("id")
     helpers.quickViewer.showProduct.call(helpers.quickViewer, productId)
 
-  onBuyButtonClickHandler: (e) ->
-    e.preventDefault()
-    button = $(e.currentTarget)
-    button.addClass('adding')
-    window.shopping_cart.addProduct(button.data('id'), {
-      failure: () -> button.removeClass('adding')
-      success: () -> button.removeClass('adding').addClass('added')
-    })
-
   showProduct: (productId) ->
     quickViewUrl = "/products/#{productId}/quick_view"
     $.ajax(
@@ -78,7 +69,8 @@ window.helpers.quickViewer = {
     selector = window.helpers.createProductVariantsSelector(@container).init(product_variants)
 
     # add product to cart
-    @popupContainer.find('.buy-wishlist .buy-now').on('click', window.helpers.quickViewer.onBuyButtonClickHandler)
+    window.helpers.addBuyButtonHandlers(@popupContainer.find('.buy-wishlist .buy-now'))
+
     productWishlist.addWishlistButtonActions(
       @popupContainer.find(".buy-wishlist a[data-action='add-to-wishlist']")
     )
