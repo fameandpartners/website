@@ -115,11 +115,6 @@ $(function(){
 
   $('.selectbox').chosen();
 
-  $('.toggle-sizes').fancybox({
-    width: '1000',
-    height: '183'
-  });
-
   deskTimerCheck = function () {
     if ($('#assistly-widget-1 .a-desk-widget-chat').length) {
       $("#assistly-widget-1 .a-desk-widget-chat")

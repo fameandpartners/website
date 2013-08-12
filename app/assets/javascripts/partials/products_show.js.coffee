@@ -38,6 +38,9 @@ $(".products.show").ready ->
 
   window.initHoverableProductImages()
 
+  # what size i'm
+  $('.toggle-sizes').fancybox({width: '1000', height: '183'})
+
   # add product to cart
   $('.buy-wishlist .buy-now').on('click', (e) ->
     e.preventDefault()

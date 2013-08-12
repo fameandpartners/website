@@ -83,6 +83,8 @@ window.helpers.quickViewer = {
       @popupContainer.find(".buy-wishlist a[data-action='add-to-wishlist']")
     )
 
+    @popupContainer.find('.toggle-sizes').fancybox({width: '1000', height: '183'})
+
     # code should be executed after images loaded in order to correctly set carousel height
     @popupContainer.waitForImages(() ->
       # show big images from carouseled small images
