@@ -9,14 +9,6 @@ $(".index.show").ready ->
     )
   )
 
-  # add quick view feature
-  window.helpers.quickViewer.init()
-
-  $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
-
-  productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
-
-$ ->
   $("#main-promo .slides").carouFredSel(
     window.helpers.get_horizontal_carousel_options(
       infinite: true,
@@ -30,3 +22,10 @@ $ ->
         height: 532
     )
   )
+
+  # add quick view feature
+  window.helpers.quickViewer.init()
+
+  $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
+
+  productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
