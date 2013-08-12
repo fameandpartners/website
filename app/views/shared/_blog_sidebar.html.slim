@@ -43,6 +43,11 @@ section.sidebar
         - Blog::Post.sidebar.each do |post|
           option value="#{post.slug}" #{post.title}  
           
-  .block  
+  .block.facebook
     .block-content 
       iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FFameandPartners&amp;width=328&amp;height=258&amp;show_faces=true&amp;colorscheme=light&amp;stream=false&amp;show_border=true&amp;header=false&amp;appId=591959187490267" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:328px; height:258px;" allowTransparency="true"
+
+  .block
+    .block-content      
+      = link_to 'http://fameandpartners.com/collection', class: 'view-collection' do
+        = image_tag 'shop-collection.jpg', width: 328, height: 338, alt: 'Shop the collection'

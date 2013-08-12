@@ -584,6 +584,9 @@ header {
       &:first-child {
         margin: 0;
       }
+      &.facebook {
+        margin: 24px 0 0;
+      }
     }
     .block-title {
       color: #7a656a;
@@ -626,6 +629,13 @@ header {
     }
     .chzn-container {
       min-width: 100%;
+    }
+    .view-collection {
+      display: block;
+      box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+      img {
+        display: block;
+      }
     }
   }
   &.no-overflow {
