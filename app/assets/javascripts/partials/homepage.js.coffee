@@ -1,4 +1,19 @@
 $(".index.show").ready ->
+
+  $("#main-promo .slides").carouFredSel(
+    window.helpers.get_horizontal_carousel_options(
+      infinite: true,
+      circular: true,
+      auto: 5000,
+      width: 1078,
+      padding: 0,
+      pagination: '#main-promo .pagination',
+      items:
+        width: 1078
+        height: 532
+    )
+  )
+
   # enable products scroll
   $(".featured#product-items").carouFredSel(
     window.helpers.get_horizontal_carousel_options(
