@@ -1,0 +1,80 @@
+.loader-wrapper {
+  position: relative;
+  margin: 76px auto;
+  background: transparent;
+}
+
+@mixin timer($item, $duration, $size, $color, $border, $hover: running) {
+  #{$item}, #{$item} * { @include box-sizing(border-box); }
+
+  #{$item} { 
+    width: $size;
+    height: $size;
+  }
+
+  #{$item} .pie {
+    width: 50%;
+    height: 100%;
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    position: absolute;
+    background: $color;
+    border: #{$border};
+  }
+
+  #{$item} .spinner {
+    border-radius: 100% 0 0 100% / 50% 0 0 50%;
+    z-index: 200;
+    border-right: none;
+    -webkit-animation: rota $duration + s linear;
+    animation: rota $duration + s linear;
+  }
+
+  #{$item}:hover .spinner,
+  #{$item}:hover .filler, 
+  #{$item}:hover .mask {
+    -webkit-animation-play-state: $hover;
+    animation-play-state: $hover;
+  }
+
+  #{$item} .filler {
+    border-radius: 0 100% 100% 0 / 0 50% 50% 0; 
+    left: 50%;
+    opacity: 0;
+    z-index: 100;
+    -webkit-animation: opa $duration + s steps(1,end) reverse;
+    animation: opa $duration + s steps(1,end) reverse;
+    border-left: none;
+  }
+
+  #{$item} .mask {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    background: inherit;
+    opacity: 1;
+    z-index: 300;
+    -webkit-animation: opa $duration + s steps(1,end);
+    animation: opa $duration + s steps(1,end);
+  }
+
+  @keyframes rota {
+    0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+  @-webkit-keyframes rota {
+    0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+
+  @keyframes opa {
+    0% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  @-webkit-keyframes opa {
+    0% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+}
+
+@include timer('.loader-wrapper', 3, 100px, transparent, '10px solid rgba(0, 0, 0, .9)');
