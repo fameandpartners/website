@@ -4,10 +4,12 @@ $ ->
     $("body").css "overflow", "hidden"
     $.getScript "/quiz"
     $('.quiz-overlay').one('click', hideStyleQuiz)
+    $("#main-promo .slides").trigger("pause")
 
   window.hideStyleQuiz = ->
     $(".quiz-box").hide()
     $("body").css "overflow", "auto"
+    $("#main-promo .slides").trigger("resume")
 
   window.bindStyleQuizEvents = ->
     $(".quiz-box").on "click", (event) ->
