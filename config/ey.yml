@@ -31,4 +31,3 @@ environments:
     migrate: true
     migration_command: rake db:migrate
     branch: master
-    precompile_assets: true  # precompile assets
