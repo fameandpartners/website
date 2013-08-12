@@ -121,9 +121,12 @@
   }
   .promo-image {
     border: 9px solid #fff;
-    background: image-url('homepage/large.jpg') 0 0 no-repeat #fff;
-    height: 523px;
     box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
   }
   .promo-image-inner {
     width: 362px;
