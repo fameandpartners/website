@@ -44,11 +44,12 @@
                 <li>
                   <div class="label">Estimated delivery</div>
                   <div class="value">
-                    <% if (parseInt(line_item.count_on_hand) > 0): %>
-                      1-2 weeks
-                    <% else: %>
-                      3-4 weeks
-                    <% end %>
+                    <!--<% if (parseInt(line_item.count_on_hand) > 0): %>-->
+                      <!--1-2 weeks-->
+                    <!--<% else: %>-->
+                      <!--3-4 weeks-->
+                    <!--<% end %>-->
+                    7-10 days
                   </div>
                 </li>
               </ul>
