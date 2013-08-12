@@ -401,18 +401,11 @@
     }
   }
   #videos {
-    .title {
-      margin: 20px 20px 0;
-      color: #999;
-      font: 300 14px/1.1 $fontOne;
-      padding: 0 0 10px;
-      border-bottom: 1px solid #c7c7c7;
-    }
+    text-align: center;
     iframe {
       margin: 20px 20px 14px;
     }
     .initials {
-      text-align: center;
       margin: 0 0 20px;
     }
   }
