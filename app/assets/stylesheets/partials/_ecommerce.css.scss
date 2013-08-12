@@ -449,10 +449,22 @@
     text-align: center;
     background: #fff;
     overflow: hidden;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
     .addthis_toolbox > a {
       display: inline-block !important;
       float: none;
       vertical-align: top;
+    }
+    .addthis_button_tweet {
+      width: 80px;
+    }
+    .addthis_button_facebook_like {
+      margin-right: 8px;
+    }
+    &:hover {
+      -webkit-filter: grayscale(0%);
+      filter: grayscale(0%);
     }
   }
   .product-info {
