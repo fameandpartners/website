@@ -50,11 +50,12 @@
           Estimated Delivery
         </div>
         <div class="value">
-          <% if (parseInt(@line_item.count_on_hand) > 0): %>
-            1-2 weeks
-          <% else: %>
-            3-4 weeks
-          <% end %>
+          <!--<% if (parseInt(@line_item.count_on_hand) > 0): %>-->
+            <!--1-2 weeks-->
+          <!--<% else: %>-->
+            <!--3-4 weeks-->
+          <!--<% end %>-->
+          7-10 days
         </div>
         <div class="edit">
           <a data-id="<%= @line_item.id %>" data-quantity="<%= @line_item.quantity %>" data-variant="<%= @line_item.variant_id %>" class="edit-link" href="#">Edit item</a>

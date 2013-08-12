@@ -1,6 +1,9 @@
 class AnswersController < ApplicationController
   before_filter :authenticate_spree_user!
 
+  include SslRequirement
+  ssl_allowed
+
   layout nil
 
   def create
@@ -32,6 +35,8 @@ class AnswersController < ApplicationController
         else
           finish_quiz(quiz)
         end
+      else
+        redirect_to quiz_question_path(question)
       end
     else
       redirect_to quiz_question_path(question)
@@ -77,6 +82,8 @@ class AnswersController < ApplicationController
         style_profile.save
 
         render 'quizzes/thanks'
+      else
+        redirect_to quiz_path
       end
     else
       redirect_to quiz_path

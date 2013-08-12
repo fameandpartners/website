@@ -1,5 +1,14 @@
 $(".index.show").ready ->
 
+  # enable products scroll
+  $(".featured#product-items").carouFredSel(
+    window.helpers.get_horizontal_carousel_options(
+      infinite: true,
+      circular: true,
+      height: 458
+    )
+  )
+
   $("#main-promo .slides").carouFredSel(
     window.helpers.get_horizontal_carousel_options(
       infinite: true,
@@ -11,15 +20,6 @@ $(".index.show").ready ->
         visible: 1,
         width: 1078,
         height: 532
-    )
-  )
-
-  # enable products scroll
-  $(".featured#product-items").carouFredSel(
-    window.helpers.get_horizontal_carousel_options(
-      infinite: true,
-      circular: true,
-      height: 458
     )
   )
 

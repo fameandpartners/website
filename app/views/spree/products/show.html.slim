@@ -35,7 +35,6 @@ ruby:
               = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
         - if enabled_tabs.include?('video')
           #videos.tab-content style="display: none;"
-            .title = @product.name
             == product_video(@product)
             .initials = image_tag 'video-initials.png', width: 420, height: 54, alt: ''
 
@@ -44,10 +43,10 @@ ruby:
           #inspiration.tab-content style="display: none;"
             .tab-content-inner
               .big-photo
-                = image_tag celebrity.photo.url(:preview)
+                = image_tag celebrity.photo.url(:preview), width: 418, height: 600, alt: ''
               .inspiration
-                .name = celebrity.celebrity_name
                 .desc = celebrity.celebrity_description
+                .name = celebrity.celebrity_name
 
         .share-buttons
           .fleft
