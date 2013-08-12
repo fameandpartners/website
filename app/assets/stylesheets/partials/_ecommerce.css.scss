@@ -134,20 +134,17 @@
       @include linear-gradient(#414141, #252525);
     }
   }
-  .empty{
+  .empty {
     padding: 30px;
-    font-family: $fontOne;
-    font-size: 14px;
-    font-weight: 300;
+    font: 300 14px/1.2 $fontOne;
     width: 200px;
     text-align: center;
-    a{   
+    a {   
       display: inline-block;
       margin-top: 5px;
       text-transform: uppercase;
     }
   }
-  
 }
 
 #content .page-name {

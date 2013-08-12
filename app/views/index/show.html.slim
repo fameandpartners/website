@@ -5,8 +5,21 @@
     })
 .promo
   .wrap
-    = link_to '/collection/?edits=volume' do
-      .promo-image
+    #main-promo.promo-image
+      ul.slides
+        li
+          = link_to '/collection/?edits=volume' do
+            = image_tag 'homepage/large.jpg', width: 1096, height: 541, alt: ''
+        li
+          = link_to collection_path do
+            = image_tag 'homepage/dark-romance.jpg', width: 1096, height: 541, alt: ''
+        li
+          = link_to '#', class: 'show-style-quiz' do
+            = image_tag 'homepage/style-quiz.jpg', width: 1096, height: 541, alt: ''
+      .pagination
+        a.selected href="#" 1
+        a href="#" 2
+        a href="#" 3
     
 
 .home-images
