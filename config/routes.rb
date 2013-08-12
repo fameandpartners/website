@@ -141,6 +141,8 @@ FameAndPartners::Application.routes.draw do
     get '/recomendations' => 'user_style_profiles#recomendations'
   end
 
+  get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
+
   mount Spree::Core::Engine, at: '/'
 
   Spree::Core::Engine.routes.append do
