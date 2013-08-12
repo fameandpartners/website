@@ -44,4 +44,14 @@ Spree::Order.class_eval do
   def full_name
     "#{first_name} #{last_name}".strip
   end
+
+  def deliver_order_confirmation_email
+    begin
+      Spree::OrderMailer.confirm_email(self.id).deliver
+      Spree::OrderMailer.team_confirm_email(self.id).deliver
+    rescue Exception => e
+      logger.error("#{e.class.name}: #{e.message}")
+      logger.error(e.backtrace * "\n")
+    end
+  end
 end
