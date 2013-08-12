@@ -66,11 +66,11 @@
           .columns.grid-container
             .column.grid-25
               .title Full security
-              .desc = image_tag 'icon-norton.png', width: 112, height: 55, alt: ''
+              .desc = image_tag 'comodo_secure_100x85_transp.png', alt: "Comodo SSl Security", width: "90", height:"60", style:"border: 0px;"
             .column.grid-45
               .title Payment methods
-              .desc = image_tag 'icon-payments-methods.png', width: 299, height: 30, alt: ''
-            .column.grid-30
+              .desc = image_tag 'icons-cards.png', width: 176, height: 33, alt: 'Payment Methods'
+            .hide.column.grid-30
               .title Promo code
               .desc
                 = form_for @order, remote: true do |f|
