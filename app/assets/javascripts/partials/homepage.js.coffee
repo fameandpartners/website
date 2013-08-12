@@ -6,10 +6,10 @@ $(".index.show").ready ->
       circular: true,
       auto: 5000,
       width: 1078,
-      padding: 0,
       pagination: '#main-promo .pagination',
       items:
-        width: 1078
+        visible: 1,
+        width: 1078,
         height: 532
     )
   )
