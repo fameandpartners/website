@@ -412,21 +412,32 @@
     }
   }
   #inspiration {
+    .tab-content-inner {
+      position: relative;
+    }
     .big-photo {
       float: left;
       margin: 15px;
-      width: 280px;
+      height: 600px;
       img {
-        max-width: 280px;
+        max-width: 418px;
         height: auto;
       }
     }
     .inspiration {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 138px;
       margin: 15px 15px 15px 310px;
       font: 300 12px/1.2 $fontOne;
       .name {
-        font-size: 16px;
+        font-size: 18px;
+      }
+      .desc {
+        font-size: 14px;
         margin: 0 0 6px;
+        font-family: $fontTwo;
       }
     }
   }

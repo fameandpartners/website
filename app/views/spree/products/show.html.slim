@@ -43,10 +43,10 @@ ruby:
           #inspiration.tab-content style="display: none;"
             .tab-content-inner
               .big-photo
-                = image_tag celebrity.photo.url(:preview)
+                = image_tag celebrity.photo.url(:preview), width: 418, height: 600, alt: ''
               .inspiration
-                .name = celebrity.celebrity_name
                 .desc = celebrity.celebrity_description
+                .name = celebrity.celebrity_name
 
         .share-buttons
           .fleft
