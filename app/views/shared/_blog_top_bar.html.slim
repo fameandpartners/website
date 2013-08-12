@@ -13,7 +13,7 @@
           li[class="#{red_carpet_posts_page? ? 'active' : ''}"] = link_to 'Red Carpet Events', blog_red_carpet_posts_path
           - @categories.each do |category|
             li[class="#{simple_posts_page? && params[:category_slug] == category.slug ? 'active' : ''}"] = link_to category.name, blog_posts_by_category_path(category.slug)
-          li[class="#{authors_page? ? 'active' : ''}"] = link_to 'Stylists', blog_authors_path
+          li[class="hide #{authors_page? ? 'active' : ''}"] = link_to 'Stylists', blog_authors_path
       .search
         = form_tag blog_search_by_query_path, method: :get do
           = text_field_tag :q, nil, placeholder: "Search the blog"
