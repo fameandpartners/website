@@ -8,19 +8,6 @@ $(".products.show").ready ->
   carousel = $("#product-items").carouFredSel(
     window.helpers.get_horizontal_carousel_options()
   )
-  # enable images carousel
-  $("#product-images").carouFredSel(
-    window.helpers.get_vertical_carousel_options(
-      width: 83
-      height: 528
-      items:
-        start: 0
-        visible: 4
-        height: 132
-      scroll:
-        items: 1
-    )
-  )
 
   # show big images from carouseled small images
   viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()
@@ -51,4 +38,19 @@ $(".products.show").ready ->
     })
 
     window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
+  )
+
+$ ->
+  # enable images carousel
+  $("#product-images").carouFredSel(
+    window.helpers.get_vertical_carousel_options(
+      width: 83
+      height: 528
+      items:
+        start: 0
+        visible: 4
+        height: 132
+      scroll:
+        items: 1
+    )
   )
