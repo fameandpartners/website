@@ -11,7 +11,7 @@ xml.rss "version" => "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
     @items.each do |item|
       xml.item do
         xml.title item[:title]
-        xml.link collection_product_path(item[:product])
+        xml.link "http://#{production_domain}#{collection_product_path(item[:product])}"
         xml.description CGI.escapeHTML(item[:description])
 
         xml.tag! "g:id", item[:id]

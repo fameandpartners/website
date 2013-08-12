@@ -5,7 +5,6 @@ class FeedsController < ApplicationController
       description: "Fame & Partners formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.",
       domain: ActionMailer::Base.default_url_options[:host] || 'www.fameandpartners.com'
     }
-    @config[:domain] = 'localhost:3600'
     @items = get_items
   end
 
