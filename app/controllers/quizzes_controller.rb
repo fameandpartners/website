@@ -1,5 +1,7 @@
 class QuizzesController < ApplicationController
   layout nil
+  include SslRequirement
+  ssl_allowed
 
   def show
     if spree_user_signed_in?

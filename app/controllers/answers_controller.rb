@@ -1,6 +1,9 @@
 class AnswersController < ApplicationController
   before_filter :authenticate_spree_user!
 
+  include SslRequirement
+  ssl_allowed
+
   layout nil
 
   def create
