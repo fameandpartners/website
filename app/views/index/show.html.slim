@@ -5,15 +5,17 @@
     })
 .promo
   .wrap
-    .promo-image
+    = link_to '/collection/?edits=volume' do
+      .promo-image
+    
 
 .home-images
   .wrap
-    = link_to '#', class: 'image' do
+    = link_to '/collection/?edits=neon', class: 'image' do
       = image_tag 'homepage/neon1.jpg'
-    = link_to '#', class: 'image rotate-1' do
+    = link_to '/collection/?edits=neon', class: 'image rotate-1' do
       = image_tag 'homepage/neon2.jpg'
-    = link_to '#', class: 'image rotate-2' do
+    = link_to '/collection/?edits=neon', class: 'image rotate-2' do
       = image_tag 'homepage/neon3.jpg'
     = link_to '#', class: 'show-style-quiz image large' do
       = image_tag 'homepage/right.jpg'
