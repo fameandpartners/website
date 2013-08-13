@@ -11,7 +11,7 @@
       <% for line_item in @order.line_items: %>
           <li class="item-block">
             <div class='thumbnail'>
-              <a href='/product/<%= line_item.product_permalink %>'>
+              <a href='/products/<%= line_item.product_permalink %>'>
                 <img src="<%= line_item.image_small %>" 
                   itemprop="image" width="83" height="115" alt="<%= line_item.product_name %>"/>
               </a>

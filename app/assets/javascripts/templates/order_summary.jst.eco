@@ -4,48 +4,48 @@
   </div>
   <ul>
     <li>
-    <div class="label">
-      Subtotal
-    </div>
-    <div class="desc">
-      <span><%= @order.currency %></span>
-      <%= @order.display_item_total %>
-    </div>
-    </li>
-    <li>
-    <div class="label">
-      Shipping
-    </div>
-    <div class="desc">
-      <% if @order.display_shipment_total?: %>
+      <div class="label">
+        Subtotal
+      </div>
+      <div class="desc">
         <span><%= @order.currency %></span>
-        <%= @order.display_shipment_total %>
-      <% else: %>
-        Free
-    </div>
+        <%= @order.display_item_total %>
+      </div>
     </li>
     <li>
-    <div class="label">
-      Promotion
-    </div>
-    <div class="desc">
-      <span><%= @order.currency %></span>
-      <%= if @order.display_shipment_total?: %>
-        <%= @order.display_shipment_total %>
-      <% else: %>
-        $0.00
-    </div>
+      <div class="label">
+        Shipping
+      </div>
+      <div class="desc">
+        <% if @order.display_shipment_total?: %>
+          <span><%= @order.currency %></span>
+          <%= @order.display_shipment_total %>
+        <% else: %>
+          Free
+      </div>
+    </li>
+    <li>
+      <div class="label">
+        Promotion
+      </div>
+      <div class="desc">
+        <span><%= @order.currency %></span>
+        <% if @order.display_shipment_total?: %>
+          <%= @order.display_shipment_total %>
+        <% else: %>
+          $0.00
+      </div>
     </li>
     <li class="totals">
-    <div class="label">
-      Total
-    </div>
-    <div class="desc">
-      <span><%= @order.currency %></span><%= @order.display_total %>
-      <div class="taxes">
-        Including GST
+      <div class="label">
+        Total
       </div>
-    </div>
+      <div class="desc">
+        <span><%= @order.currency %></span><%= @order.display_total %>
+        <div class="taxes">
+          Including GST
+        </div>
+      </div>
     </li>
   </ul>
 </div>
