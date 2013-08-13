@@ -23,7 +23,10 @@ $(".products.show").ready ->
   )
 
   # show big images from carouseled small images
-  viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()
+  viewer = null
+  setTimeout ()->
+      viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()
+    , 200
 
   # enable color-size combination selection
   if window.product_variants
