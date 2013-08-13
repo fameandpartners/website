@@ -418,7 +418,7 @@
     .big-photo {
       float: left;
       margin: 15px;
-      height: 600px;
+      min-height: 0;
       img {
         max-width: 418px;
         height: auto;
