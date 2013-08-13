@@ -55,6 +55,8 @@ ruby:
         .colors
           - colors.each do |color|
             .color class='#{color}' data-color='#{color}'
+      .notice
+        .colour-images Images of other colours are on their way
       .size-select
         .select-box
           select#toggle-selectbox.select2 name="size"
@@ -91,13 +93,17 @@ ruby:
                       .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
                       .name #{title}
         #details.tab-content
+          .info SKU:  #{@product.sku}
           | Material:
           = @product.property('fabric')
-          br
-          | Weight:
-          = @product.property('weight')
         #notes.tab-content
           = product_description(@product)
-
+      .notice                                                                                                       
+        .colour
+          ' Want a different colour? 
+          = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour." 
+        .faster                                                                                                         
+          ' Need this faster? 
+          = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
       .share-buttons
         = share_buttons

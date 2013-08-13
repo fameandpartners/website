@@ -513,14 +513,15 @@
       }
     }
     .colors-choser {
-      border: 1px solid #efefef;
+      border: #efefef solid 1px;
       display: inline-block;
       padding: 8px;
-      margin: 0 0 18px;
+      margin: 14px 0 3px;
       background: #fff;
       .label {
         float: left;
-        line-height: 23px;
+        line-height: 23px; 
+        color: #333;
       }
       .colors {
         float: left;
@@ -536,20 +537,47 @@
             background-image: image-url('icon-color-tick.png');
             background-position: center center;
             background-repeat: no-repeat;
-          }
+          } 
         }
       }
     }
+    
+    .notice{
+      font-family: $fontOne; 
+      
+      .colour-images{
+        color: #999;
+        font-size: 11px;
+        font-style: italic;
+        margin: 0px 0 25px 0px;
+      }
+      
+      .colour, .faster{
+        padding-top: 10px;
+        color: #333;
+      }
+    }
+    
     .size-select {
-      padding: 0 0 15px;
+      padding: 0 0 35px;
       margin: 0 0 15px;
       border-bottom: 1px solid #efefef;
+      .select-box{
+        float: left;
+      }
       .chzn-container {
-        min-width: 200px;
+        min-width: 214px;
         margin: 0 0 14px;
+      }
+      a.chzn-single{
+        span{
+          color: #333;
+        }
       }
       .info {
         color: #999898;
+        margin: 8px 0 0 16px;
+        display: inline-block;
       }
     }
     .body-shapes {
@@ -658,6 +686,10 @@
       }
       .tab-content {
         padding: 14px 18px;
+        
+        .info{
+          padding: 5px 0 10px 0;
+        }
       }
     }
   }

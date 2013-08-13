@@ -61,10 +61,12 @@ ruby:
           /.delivery 3-4 week delivery
           .delivery 7-10 days delivery
         .colors-choser
-          .label Choose a color:
+          .label Choose a colour:
           .colors
             - colors.each do |color|
               .color class='#{color}' data-color='#{color}' title='#{color}'
+        .notice
+          .colour-images Images of other colours are on their way
         .size-select
           .select-box
             select#toggle-selectbox.select2 name="size"
@@ -72,7 +74,7 @@ ruby:
               - sizes.each do |size|
                 option{value=size} = size
           = link_to 'What size am I?', '#what-size', class: 'info toggle-sizes'
-        .buy-wishlist
+        .buy-wishlist.clearfix
           = add_to_bag_link(@product)
           = add_to_wishlist_link(@product)
         .tabs
@@ -102,11 +104,20 @@ ruby:
                           .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
                           .name #{title}
           #details.tab-content
+            .info SKU:  #{@product.sku}
             | Material:
-            == @product.property('fabric')
+            = @product.property('fabric')
           - if @product.property('style_notes').present?
             #notes.tab-content
-              = @product.property('style_notes')          
+              = @product.property('style_notes')
+        .notice
+          .colour
+            ' Want a different colour? 
+            = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour." 
+          .faster                                                                                                         
+            ' Need this faster? 
+            = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
+
 
   .page-name
     .inner
