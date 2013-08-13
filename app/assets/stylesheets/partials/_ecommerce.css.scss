@@ -215,7 +215,7 @@
     float: none;
   }
   .grid-25 {
-    width: 24.82%;
+    width: 24.80%;
   }
   .grid-33 {
     width: 33.07%;
@@ -448,7 +448,8 @@
     height: 20px;
     text-align: center;
     background: #fff;
-    overflow: hidden;
+    position: relative;
+    z-index: 2;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     .addthis_toolbox > a {
