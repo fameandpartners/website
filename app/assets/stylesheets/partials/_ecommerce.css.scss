@@ -418,7 +418,7 @@
     .big-photo {
       float: left;
       margin: 15px;
-      height: 600px;
+      min-height: 0;
       img {
         max-width: 418px;
         height: auto;
@@ -628,6 +628,7 @@
     }
     .buy-wishlist {
       margin: 0 0 28px;
+      position: relative;
       .buy-now, .add-wishlist {
         display: inline-block;
         text-decoration: none;
@@ -676,6 +677,13 @@
         &.active, &.disabled {
           opacity: .5;
         }
+      }
+      .error {
+        position: absolute;
+        left: 0;
+        bottom: -20px;
+        display: block;
+        color: #cc0000;
       }
     }
     .tabs {
