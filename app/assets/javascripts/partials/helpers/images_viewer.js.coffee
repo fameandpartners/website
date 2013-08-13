@@ -30,7 +30,7 @@ window.helpers.buildImagesViewer = (rootElement) ->
     showImage: (images) ->
       viewer.currentImages = images
       largeImage = images.large || 'http://placehold.it/460x590'
-      rootElement.find('#photos .big-photo img').attr(src: largeImage)
+      rootElement.find('#photos .big-photo img').attr(src: largeImage).css('display', 'block').css('visibility', 'visible')
 
     showBigImage: () ->
       bigImageUrl = viewer.currentImages.xlarge
