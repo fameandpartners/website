@@ -26,7 +26,7 @@ $(".products.show").ready ->
   viewer = null
   setTimeout ()->
       viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()
-    , 200
+    , 1000
 
   # enable color-size combination selection
   if window.product_variants
