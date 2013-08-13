@@ -10,17 +10,15 @@ $(".index.show").ready ->
   )
 
   $("#main-promo .slides").carouFredSel(
-    window.helpers.get_horizontal_carousel_options(
-      infinite: true,
-      circular: true,
-      auto: 5000,
+    infinite: true,
+    circular: true,
+    auto: 5000,
+    width: 1078,
+    pagination: '#main-promo .pagination',
+    items:
+      visible: 1,
       width: 1078,
-      pagination: '#main-promo .pagination',
-      items:
-        visible: 1,
-        width: 1078,
-        height: 532
-    )
+      height: 532
   )
 
   # add quick view feature
