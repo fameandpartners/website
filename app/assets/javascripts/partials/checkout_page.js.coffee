@@ -87,6 +87,10 @@ $('.checkout.edit').ready ->
         $('form#new_user .passwords').hide()
 
     orderProccessHandler: (event) ->
+      return if page.pin_request_in_process
+
+      page.pin_request_in_process = true
+
       $form = $('form.payment_details')
 
       $form.find('.errorExplanation').remove()
@@ -101,13 +105,19 @@ $('.checkout.edit').ready ->
           address_country: $('#order_bill_address_attributes_country_id').find('option:selected').text()
           address_city: $('#order_bill_address_attributes_city').val()
           address_line1: $('#order_bill_address_attributes_address1').val()
+
         Pin.createToken(credit_card_data, page.pinResponseHandler)
 
     pinResponseHandler: (response) ->
       $form = $('form.payment_details.credit_card.pin')
 
       if response.response
+        return if page.payment_request_in_process
+
+        page.payment_request_in_process = true
+
         data = response.response
+
         $token_field = $('<input/>')
           .attr('type', 'hidden')
           .attr('name', $form.find('[name*="[number]"]').attr('name').replace('number', 'gateway_payment_profile_id'))
@@ -119,6 +129,7 @@ $('.checkout.edit').ready ->
         $form.find(':input:visible').attr('disabled', true)
         $form.append($token_field)
         $form.append($type_field)
+
         $form.submit()
       else
         $errors = $('<div/>').addClass('errorExplanation')
@@ -133,6 +144,8 @@ $('.checkout.edit').ready ->
 
         $form.prepend($errors)
         page.onAjaxFailureHandler()
+
+        page.pin_request_in_process = false
   }
 
   page.init()
