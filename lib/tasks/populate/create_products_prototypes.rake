@@ -27,7 +27,7 @@ def add_dress_options(dress)
 end
 
 def add_dress_properties(dress)
-  properties = %w{short_description fit fabric weight inspiration inspiration_photo youtube_video_id}
+  properties = %w{short_description fit fabric weight inspiration inspiration_photo video_id}
   
   properties.each do |property_name|
     unless dress.properties.where(name: property_name).exists?

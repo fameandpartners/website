@@ -78,7 +78,7 @@ def add_celebrity_properties(product, index)
     product.set_property('inspiration_photo', 'http://img12.imageshack.us/img12/3876/86zh.jpg')
   end
 
-  product.set_property('youtube_video_id', 'foaOYiXq7jY')
+  product.set_property('video_id', '19989483')
 end
 
 # helper
