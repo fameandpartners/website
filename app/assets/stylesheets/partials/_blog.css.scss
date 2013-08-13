@@ -1,12 +1,10 @@
-.pages-posts, .pages-post {
-  background: image-url('bg-blog.jpg') 0 0 repeat;
+.pages-posts, .pages-post, #blog, #authors, #posts, #celebrities, #searches {
+  background: image-url('bg-main.jpg') 0 0 repeat;
   height: auto;
 }
 
 #blog, #authors, #posts, #celebrities, #searches {
-  background: image-url('bg-blog.jpg') 0 0 repeat;
   min-height: 100%;
-  height: auto;
 }
 
 #content .blog-slider {
