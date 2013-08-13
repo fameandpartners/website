@@ -9,10 +9,10 @@ window.helpers.createProductVariantsSelector = (root) ->
 
     init: (variants, selected) ->
       variantsSelector.variants = variants
-      rootElement.find('#toggle-selectbox').val('')
-
       rootElement.find(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
+
       rootElement.find('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
+      variantsSelector.preselectSize()
       variantsSelector.selectOptions.call(variantsSelector, selected)
       rootElement.find('#toggle-selectbox').chosen()
       rootElement.find('.selectbox').chosen()
@@ -22,6 +22,16 @@ window.helpers.createProductVariantsSelector = (root) ->
         window.shopping_cart.on('item_removed', variantsSelector.cartItemsChangedHandler)
 
       return variantsSelector
+
+    preselectSize: () ->
+      if rootElement.find('#toggle-selectbox option[value=""]').length > 0
+        variantsSelector.selected.size = null
+        newSize = ''
+      else
+        newSize = rootElement.find('#toggle-selectbox option:first').val()
+        variantsSelector.selected.size = newSize
+
+      rootElement.find('#toggle-selectbox').val(newSize)
 
     onColorClickHandler: (e) ->
       e.preventDefault()
@@ -56,7 +66,7 @@ window.helpers.createProductVariantsSelector = (root) ->
     onVariantsChanged: () ->
       variant = @getSelectedVariant()
 
-      @updatePurchaseConditions(variant)
+      @exportSelectedVariant(variant)
       @updateDeliveryTime(variant)
 
       if ! _.isEmpty(variant)
@@ -80,7 +90,7 @@ window.helpers.createProductVariantsSelector = (root) ->
       )
       return
 
-    updatePurchaseConditions: (variant) ->
+    exportSelectedVariant: (variant) ->
       # update buttons
       $button = rootElement.find('.buy-wishlist .buy-now')
       $wishlist_button = rootElement.find('.buy-wishlist .add-wishlist')

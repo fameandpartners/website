@@ -10,7 +10,6 @@ window.helpers.addBuyButtonHandlers = (addButton, args = {}) ->
 
   # helper methods
   addErrorMessage = (container, messageText) ->
-    return true # error message markup required
     block = container.find('.error.message')
     if block.length == 0
       container.append($("<span class='error message' style='display: none;'></span>"))

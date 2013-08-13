@@ -1837,6 +1837,13 @@
         color: #fff;
         @include linear-gradient(#414141, #252525);
       }
+      .error {
+        position: absolute;
+        left: 13px;
+        bottom: 55px;
+        display: block;
+        color: #cc0000;
+      }
     }
   }
 }

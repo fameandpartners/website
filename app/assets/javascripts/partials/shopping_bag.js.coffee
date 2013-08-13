@@ -78,6 +78,7 @@ $ ->
       $('a.shopping-bag-toggler .counter').html(item_count)
 
       _.each(shoppingBag.listeners, (listener) -> listener.call())
+      shoppingBag.listeners = []
 
     afterUpdateCallback: (callback) ->
       unless _.contains(shoppingBag.listeners, callback)

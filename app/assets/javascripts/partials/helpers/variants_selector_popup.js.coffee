@@ -87,7 +87,6 @@ window.helpers.createVariantsSelectorPopup = () ->
         popup.showErrorMessage()
 
     showErrorMessage: (messageText = 'Please, select size and color') ->
-      return true # error message markup required
       popup.container.find('.error.message').text(messageText).fadeIn()
       setTimeout(popup.hideErrorMessage, 3000)
 
