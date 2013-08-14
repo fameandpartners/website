@@ -92,8 +92,6 @@ $('.checkout.edit').ready ->
       false
 
     orderProccessHandler: (event) ->
-      console.log('"Process Order" button is clicked')
-      console.log('page.pin_request_in_process is ' + page.pin_request_in_process)
       return if page.pin_request_in_process
 
       page.pin_request_in_process = true
@@ -115,23 +113,18 @@ $('.checkout.edit').ready ->
           address_city: $('#order_bill_address_attributes_city').val()
           address_line1: $('#order_bill_address_attributes_address1').val()
 
-        console.log('Create Pin token')
         Pin.createToken(credit_card_data, page.pinResponseHandler)
 
     pinResponseHandler: (response) ->
       $form = $('form.payment_details.credit_card.pin')
 
-      console.log('pinResponseHandler is called')
-      console.log(response)
-
       if response.response
-        console.log('Valid response from Pin')
-        console.log('page.payment_request_in_process is ' + page.payment_request_in_process)
         return if page.payment_request_in_process
 
         page.payment_request_in_process = true
 
         data = response.response
+
 
         payment_method_id = $form.find('[name$="[payment_method_id]"]:first').val()
         authenticity_token = $form.find('[name="authenticity_token"]').val()
@@ -150,9 +143,6 @@ $('.checkout.edit').ready ->
 
         params += ('&' + encodeURIComponent('order[payments_attributes][][payment_method_id]') + '=' + payment_method_id)
 
-        console.log('Send request to server')
-        console.log(params)
-
         $.ajax
           type: 'POST'
           url: $form.attr('action')
@@ -160,7 +150,6 @@ $('.checkout.edit').ready ->
           dataType: 'script'
 
       else
-        console.log('Invalid response from Pin')
         $form.find(':input').attr('disabled', false)
 
         $errors = $('<div/>').addClass('errorExplanation')
