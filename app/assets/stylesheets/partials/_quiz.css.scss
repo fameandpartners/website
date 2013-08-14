@@ -314,7 +314,7 @@
       }
     }
     .stars {
-      margin: 150px 0 0;
+      margin: 100px 0 0;
       text-align: center;
       li {
         cursor: pointer;
@@ -322,7 +322,7 @@
         width: 76px;
         height: 76px;
         margin: 0 2px;
-        background: image-url('icons-stars.jpg') 0 -76px no-repeat;
+        background: image-url('quiz/icons-stars.png') 0 -76px no-repeat;
         &.active {
           background-position: 0 0;
         }
