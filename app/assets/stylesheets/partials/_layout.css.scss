@@ -398,6 +398,7 @@ header {
   }
   &.blog {
     height: auto;
+    border-bottom: 0;
     background: transparent;
     box-shadow: none;
     &:before, &:after {

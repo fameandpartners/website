@@ -78,6 +78,8 @@ FameAndPartners::Application.routes.draw do
 
     get '/' => 'blog#index', as: :blog
 
+    get '/about'   => 'blog#about', as: :about
+
     mount Spree::Core::Engine, at: '/'
 
     get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
@@ -102,6 +104,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
     get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
+
   end
 
   # Static pages
