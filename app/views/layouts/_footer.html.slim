@@ -15,7 +15,7 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
     .grid-20.links
       .title Customer Service
       ul
-        li = link_to 'FAQs', 'http://help.fameandpartners.com'
+        li = link_to 'FAQs', faqs_path
         li = mail_to "team@fameandpartners.com", "Book a Personal Stylist", subject: "Book a Personal Stylist"                                                                                             
         li = mail_to "team@fameandpartners.com", "team@fameandpartners.com", subject: "Customer Service from Website"
         li 1300 924 860

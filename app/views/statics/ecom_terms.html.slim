@@ -31,44 +31,7 @@
   h2 SHIPPING
   p Shipping and handling charges are based on your subtotal order amount, calculated after applicable discounts and before sales tax. Standard shipping rates are calculated as follows:
   
-  p
-    table
-      tr
-        th Subtotal Amount
-        th Sydney
-        th Rest of Australia
-        th Rest of World
-      tr
-        td $49.00 and over
-        td FREE 4 – 10 Business Days
-        td FREE 7 – 10 Business Days
-        td POA
-      tr
-        td Under $49.00
-        td $9.95 4 – 10 Business Days
-        td $9.95 7 – 10 Business Days
-        td POA
-   
-  p          
-    h3 Express Shipping
-    p
-      table
-        tr
-          th Subtotal Amount
-          th Sydney
-          th Rest of Australia
-          th Rest of World
-        tr
-          td $49.00 and over $14.95
-          td 2-3 Business Days	$14.95
-          td 2-3 Business Days	$14.95
-          td POA
-        tr
-          td Under $49.00
-          td 2-3 Business Days	$14.95
-          td 2-3 Business Days	$14.95
-          td POA
-               
+  = render 'shipping_tables'             
   p As soon as your order ships, you will be provided with a tracking number via email. You can also find your order details and tracking information on the My Orders tab within the Account Settings section.
 
   h2 RETURNS & EXCHANGES
