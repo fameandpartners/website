@@ -74,7 +74,9 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
               = link_to 'Collection', collection_path, title: "Formal Dresses Fame & Partners"
               .dropdown-menu-wrapper
                 .dropdown-menu
-                  .dropdown-title = link_to 'Browse range', collection_path, title: "Browse our collection of Formal Dresses"
+                  .dropdown-title
+                    ' Browse our Collection
+                    .link.fright = link_to 'View entire collection', collection_path, title: "Browse our collection of Formal Dresses"
                   ul
                     - available_product_ranges.each do |taxon|
                       li
