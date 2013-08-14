@@ -7,6 +7,7 @@ $('.checkout.edit').ready ->
       $(document).on('click', 'form input[type=submit]', page.onAjaxLoadingHandler)
       $(document).on('click', '.place-order button', page.onAjaxLoadingHandler)
       $(document).on('click', '.place-order button', page.orderProccessHandler)
+      $(document).on('submit', 'form.payment_details.credit_card', page.doNothing)
 
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
@@ -86,12 +87,18 @@ $('.checkout.edit').ready ->
         $('form#new_user .passwords input').prop('disabled', true)
         $('form#new_user .passwords').hide()
 
+    doNothing: (event) ->
+      event.preventDefault()
+      false
+
     orderProccessHandler: (event) ->
       return if page.pin_request_in_process
 
       page.pin_request_in_process = true
 
       $form = $('form.payment_details')
+
+      $form.find(':input').attr('disabled', true)
 
       $form.find('.errorExplanation').remove()
 
@@ -118,20 +125,33 @@ $('.checkout.edit').ready ->
 
         data = response.response
 
-        $token_field = $('<input/>')
-          .attr('type', 'hidden')
-          .attr('name', $form.find('[name*="[number]"]').attr('name').replace('number', 'gateway_payment_profile_id'))
-          .val(data.token)
-        $type_field = $('<input/>')
-          .attr('type', 'hidden')
-          .attr('name', $form.find('[name*="[number]"]').attr('name').replace('number', 'cc_type'))
-          .val(data.scheme)
-        $form.find(':input:visible').attr('disabled', true)
-        $form.append($token_field)
-        $form.append($type_field)
 
-        $form.submit()
+        payment_method_id = $form.find('[name$="[payment_method_id]"]:first').val()
+        authenticity_token = $form.find('[name="authenticity_token"]').val()
+        _method = $form.find('[name="_method"]').val()
+
+        params = {}
+        params['authenticity_token'] = authenticity_token
+        params['_method'] = _method
+        params['order'] = {}
+        params['payment_source'] = {}
+        params['payment_source'][payment_method_id] = {}
+        params['payment_source'][payment_method_id]['cc_type'] = data.scheme
+        params['payment_source'][payment_method_id]['gateway_payment_profile_id'] = data.token
+
+        params = $.param(params)
+
+        params += ('&' + encodeURIComponent('order[payments_attributes][][payment_method_id]') + '=' + payment_method_id)
+
+        $.ajax
+          type: 'POST'
+          url: $form.attr('action')
+          data: params
+          dataType: 'script'
+
       else
+        $form.find(':input').attr('disabled', false)
+
         $errors = $('<div/>').addClass('errorExplanation')
         $header = $('<h3/>').text(response.error_description)
         $list = null;
