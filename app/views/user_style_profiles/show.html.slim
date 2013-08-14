@@ -9,30 +9,30 @@
           .stat
             .rate #{@style_profile.percentage[1].second}%
             .label = @style_profile.percentage[1].first.titleize
-          = image_tag 'http://placehold.it/238x341', alt: ''
+          = image_tag 'quiz/report/'+@style_profile.percentage[1].first+'.jpg', alt: @style_profile.percentage[1].first, size:"238x341"
         .block
           .stat
             .rate #{@style_profile.percentage[3].second}%
             .label = @style_profile.percentage[3].first.titleize
-          = image_tag 'http://placehold.it/238x341', alt: ''
+          = image_tag 'quiz/report/'+@style_profile.percentage[3].first+'.jpg', alt: @style_profile.percentage[3].first, size:"238x341"
       .column.column-2
         .block
           .stat.large
             .sublabel You are
             .rate #{@style_profile.percentage[0].second}%
             .label = @style_profile.percentage[0].first.titleize
-          = image_tag 'http://placehold.it/456x682', alt: ''
+          = image_tag 'quiz/report/'+@style_profile.percentage[0].first+'.jpg', alt: @style_profile.percentage[0].first, size:"456x682"
       .column.column-3
         .block
           .stat
             .rate #{@style_profile.percentage[2].second}%
             .label = @style_profile.percentage[2].first.titleize
-          = image_tag 'http://placehold.it/238x341', alt: ''
+          = image_tag 'quiz/report/'+@style_profile.percentage[2].first+'.jpg', alt: @style_profile.percentage[2].first, size:"238x341"
         .block
           .stat
             .rate #{@style_profile.percentage[4].second}%
             .label = @style_profile.percentage[4].first.titleize
-          = image_tag 'http://placehold.it/238x341', alt: ''
+          = image_tag 'quiz/report/'+@style_profile.percentage[4].first+'.jpg', alt: @style_profile.percentage[4].first, size:"238x341"
 
     .sexiness-colors-fashionability
       .column.column-1

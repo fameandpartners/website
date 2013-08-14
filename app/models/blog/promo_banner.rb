@@ -4,7 +4,7 @@ class Blog::PromoBanner < ActiveRecord::Base
   belongs_to :user, class_name: Spree::User
   has_attached_file :photo, styles: { preview: "1078x434#"}
 
-  validates :title, :url, :user_id, presence: true
+  validates :url, :user_id, presence: true
   validates_attachment_presence :photo
 
   scope :published, where(published: true)
