@@ -133,6 +133,8 @@ FameAndPartners::Application.routes.draw do
 
   root :to => 'index#show'
 
+  get '/landing' => 'index#landing'
+
   resource :quiz, :only => [:show] do
     resources :questions, :only => [:index, :show] do
       resource :answer, :only => [:create]

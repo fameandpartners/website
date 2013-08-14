@@ -1,0 +1,21 @@
+.top-logo
+  = link_to root_path do
+    = image_tag 'logo-white.png', width: 215, height: 15, alt: ''
+
+.image-container = image_tag 'image-landing.png', width: 1162, height: 1091, alt: 'Win a celebrity inspired formal outfit'
+
+.signup-form.aligncenter
+  .signup-title
+    = image_tag 'title-landing.png', width: 646, height: 61, alt: 'Enter using facebook or your email'
+  .signup-fields
+    form.form
+      = link_to 'Sign up with facebook', fb_auth_path, class: 'facebook-signup fleft'
+      .or.fleft
+        span or
+      .form-fields.fleft
+        .input
+          input type="text" name="name" placeholder="Name"
+        .input
+          input type="email" name="email" placeholder="Email"
+      .submit.fleft
+        input type="submit" value="Enter now"
