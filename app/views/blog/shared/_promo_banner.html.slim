@@ -1,12 +1,19 @@
 .slider-block.blog-slider
   ul.slides
     - @promo_banners.each_with_index do |promo_banner, index|
-      li[class="slide-#{index + 1}" style="background-image: url('#{promo_banner.photo.url}');"]
-        = link_to promo_banner.url, target: '_blank' do
-          .inner
-            .block-title= promo_banner.title
-            .separate
-            .desc= promo_banner.description
+      - if promo_banner.title.empty?
+        li class="slide-#{index + 1}"
+          = link_to promo_banner.url, target: '_blank' do
+            .inner
+              img src="#{promo_banner.photo.url}"
+      - else
+        li[class="slide-#{index + 1}" style="background-image: url('#{promo_banner.photo.url}');"]
+          = link_to promo_banner.url, target: '_blank' do
+            .inner
+              .block-title= promo_banner.title
+              .separate
+              .desc= promo_banner.description 
+          
   .pagination
     - @promo_banners.each_with_index do |promo_banner, i|
       - if i == 0
