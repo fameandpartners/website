@@ -11,7 +11,7 @@ ruby:
       ul.tabs-links
         li.active = link_to 'Photos', '#photos'
         - if enabled_tabs.include?('video')
-          li = link_to 'Videos', '#videos'
+          li = link_to 'Video', '#videos'
         - if enabled_tabs.include?('inspiration')
           li = link_to 'Celebrity Inspiration', '#inspiration'
       #photos.tab-content
@@ -51,7 +51,7 @@ ruby:
         /.delivery 3-4 week delivery
         .delivery 7-10 days delivery
       .colors-choser
-        .label Choose a color:
+        .label Choose a colour:
         .colors
           - colors.each do |color|
             .color class='#{color}' data-color='#{color}'
