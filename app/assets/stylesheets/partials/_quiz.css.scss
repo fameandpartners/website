@@ -313,49 +313,43 @@
         }
       }
     }
-    .stars {
-      margin: 150px 0 0;
+    .stars, .lips {
+      margin: 100px 0 0;
       text-align: center;
       li {
         cursor: pointer;
         display: inline-block;
-        width: 76px;
-        height: 76px;
         margin: 0 2px;
-        background: image-url('icons-stars.jpg') 0 -76px no-repeat;
-        &.active {
-          background-position: 0 0;
-        }
         label {
           display: block;
-          width: 76px;
-          height: 76px;
           input[type=radio] {
             display: none;
           }
+        }
+        &.active {
+          background-position: 0 0;
+        }
+      }
+    }
+    .stars {
+      li {
+        width: 76px;
+        height: 76px;
+        background: image-url('quiz/icons-stars.png') 0 -76px no-repeat;
+        label {
+          width: 76px;
+          height: 76px;
         }
       }
     }
     .lips {
-      margin: 150px 0 0;
-      text-align: center;
       li {
-        cursor: pointer;
-        display: inline-block;
         width: 80px;
         height: 55px;
-        margin: 0 2px;
         background: image-url('icons-lips.jpg') 0 -55px no-repeat;
-        &.active {
-          background-position: 0 0;
-        }
         label {
-          display: block;
           width: 80px;
           height: 55px;
-          input[type=radio] {
-            display: none;
-          }
         }
       }
     }
