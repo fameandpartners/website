@@ -4,8 +4,7 @@
       - if promo_banner.title.empty?
         li class="slide-#{index + 1}"
           = link_to promo_banner.url, target: '_blank' do
-            .inner
-              img src="#{promo_banner.photo.url}"
+            img src="#{promo_banner.photo.url}"
       - else
         li[class="slide-#{index + 1}" style="background-image: url('#{promo_banner.photo.url}');"]
           = link_to promo_banner.url, target: '_blank' do
