@@ -24,12 +24,15 @@
 
 .home-images
   .wrap
-    = link_to '/collection/?edits=neon', class: 'image' do
-      = image_tag 'homepage/neon1.jpg'
-    = link_to '/collection/?edits=neon', class: 'image rotate-1' do
-      = image_tag 'homepage/neon2.jpg'
-    = link_to '/collection/?edits=neon', class: 'image rotate-2' do
-      = image_tag 'homepage/neon3.jpg'
+    = link_to 'http://www.fameandpartners.com/trendsetters', class: 'image trendsetter', target: '_blank' do
+      = image_tag 'homepage/trendsetter.jpg'  
+    /*
+      = link_to '/collection/?edits=neon', class: 'image' do
+        = image_tag 'homepage/neon1.jpg'
+      = link_to '/collection/?edits=neon', class: 'image rotate-1' do
+        = image_tag 'homepage/neon2.jpg'
+      = link_to '/collection/?edits=neon', class: 'image rotate-2' do
+        = image_tag 'homepage/neon3.jpg'
     = link_to '#', class: 'show-style-quiz image large' do
       = image_tag 'homepage/right.jpg'
 
@@ -37,15 +40,15 @@
   .wrap.no-overflow
     .blog-post
       .label Blog
-      = link_to 'http://blog.fameandpartners.com/trends/go-punk-to-prom', class: 'image-preview' do
+      = link_to 'http://blog.fameandpartners.com/trends/go-punk-to-prom', class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/blog1.jpg'
     .blog-post.rotate-1
       .label Blog
-      = link_to 'http://blog.fameandpartners.com/trends/trending-baroque-2', class: 'image-preview' do
+      = link_to 'http://blog.fameandpartners.com/trends/trending-baroque-2', class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/blog2.jpg'
     .blog-post.rotate-2
       .label Blog
-      = link_to 'http://blog.fameandpartners.com/red-carpet-events/young-hollywood-awards-2013', class: 'image-preview' do
+      = link_to 'http://blog.fameandpartners.com/red-carpet-events/young-hollywood-awards-2013', class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/blog3.jpg'
 
 - if @featured_products.length > 0
