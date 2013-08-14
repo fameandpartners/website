@@ -417,6 +417,24 @@
       }
     }
   }
+  .sexiness {
+    width: 855px;
+    margin: 60px auto 0;
+    overflow: hidden;
+    .sexiness-profile {
+      width: 200px;
+      height: 200px;
+      float: left;
+      background: image-url('quiz/sexiness.jpg') center 7px no-repeat #fff;
+      padding: 7px;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      &.second {
+        float: right;
+        background-position: center -207px;
+      }
+    }
+  }
 }
 
 #content .style-report {
