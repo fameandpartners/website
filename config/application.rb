@@ -69,6 +69,7 @@ module FameAndPartners
     config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
+    disable_warnings = true
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
