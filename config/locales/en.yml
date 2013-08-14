@@ -8,7 +8,8 @@ en:
       users:
         welcome: 'Welcome'
         confirmation: 'Email Confirmation'
-        custom_dress: 'Custom Dress'
+        custom_dress: 'Custom Dress' 
+        style_profile: 'Your Style Profile'
       admins:
         custom_dress: 'Custom Dress | %{full_name} %{id}'
   activerecord:

@@ -44,14 +44,23 @@
     background-size: cover;
   }
   .signup-box,
-  .thanks-box {
-    h2 {
-      margin-top: 230px;
-      text-transform: normal;
-      color: #454545;
+  .thanks-box { 
+    height: 530px;
+    background: image-url('quiz/bg-thanks.jpg') center center no-repeat;
+    background-size: cover; 
+    text-align: center;
+    h1{
+      padding-top: 80px;
+      font: 300 48px/1 $fontTwo;
+      font-style: italic;
+      width: 100%;
       text-align: center;
-      letter-spacing: 5px;
-      font: 300 38px/1 $fontTwo;
+    }
+    h2 {
+      font: 300 24px/1 $fontOne;
+      text-transform: uppercase;
+      margin: 40px auto 0 auto;
+      width: 600px;
       &:before {
         background: #454545;
       }
@@ -60,17 +69,6 @@
       margin: 35px auto;
       font-size: 28px;
       width: 500px;
-    }
-  }
-  .thanks-box {
-    height: 530px;
-    background: image-url('quiz/bg-thanks.jpg') center center no-repeat;
-    background-size: cover;
-    h2 {
-      font: 400 24px/1 $fontOne;
-      text-transform: uppercase;
-      margin: 0;
-      padding: 112px 0 0;
     }
   }
   .signup-box {

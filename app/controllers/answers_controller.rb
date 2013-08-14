@@ -82,6 +82,7 @@ class AnswersController < ApplicationController
         style_profile.save
 
         render 'quizzes/thanks'
+        Spree::UserMailer.style_profile_created(style_profile.user).deliver
       else
         redirect_to quiz_path
       end

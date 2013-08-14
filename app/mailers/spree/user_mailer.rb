@@ -29,5 +29,13 @@ class Spree::UserMailer < ActionMailer::Base
     @user = custom_dress.spree_user
     mail(:to => @user.email,
          :subject => Spree::Config[:site_name] + ' ' + t('emails.subjects.users.custom_dress'))
-  end
+  end  
+  
+  def style_profile_created(user)
+    @user = user
+    mail(:to => @user.email,
+         :subject => Spree::Config[:site_name] + ' ' + t('emails.subjects.users.style_profile'))
+  end  
+  
+  
 end

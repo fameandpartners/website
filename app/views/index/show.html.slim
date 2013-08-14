@@ -8,6 +8,9 @@
     #main-promo.promo-image
       ul.slides
         li
+          = link_to collection_path do
+            = image_tag 'homepage/welcome.png', width: 1096, height: 541, alt: ''
+        li
           = link_to '/collection/?edits=volume' do
             = image_tag 'homepage/large.jpg', width: 1096, height: 541, alt: ''
         li
@@ -20,6 +23,7 @@
         a.selected href="#" 1
         a href="#" 2
         a href="#" 3
+        a href="#" 4
     
 
 .home-images
