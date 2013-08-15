@@ -145,6 +145,16 @@
         font-weight: 700;
       }
     }
+    .get20{
+      width: 170px;
+      height: 170px;
+      position: absolute;
+      top: 30px;
+      right: 160px;
+      z-index: 100;
+      background: image-url('quiz/get20.png') center center no-repeat;
+    }
+    
   }
   .steps-box {
     height: 511px;
