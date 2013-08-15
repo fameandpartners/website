@@ -58,11 +58,13 @@ class ApplicationController < ActionController::Base
     when :search_query
       query = args.first
       "#{query} - #{get_user_type}"
+    when :user
+      get_user_type
     else
-      ''
+      args.join(' - ') || ''
     end
-#  rescue Exception => e
-#    return nil
+  rescue Exception => e
+    return ''
   end
 
   def step1_custom_dresses_path(options = {})
