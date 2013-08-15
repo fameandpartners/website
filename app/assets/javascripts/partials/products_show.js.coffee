@@ -47,11 +47,15 @@ $(".products.show").ready ->
   window.helpers.addBuyButtonHandlers($('.buy-wishlist .buy-now'), { expandShoppingBag: true})
   
   #tracks
-  if window.product_analytics_label?
-    $('.tabs .tabs-links a#videos').on('click', (e) ->
+  $('.tabs .tabs-links a#videos').on('click', (e) ->
+    console.log('video tab clicked')
+  )
+
+  if !_.isEmpty(window.product_analytics_label)
+    $(".tabs .tabs-links a[href='#videos']").on('click', (e) ->
       track.viewVideo(window.product_analytics_label)
     )
 
-    $('.tabs .tabs-links a#inspiration').on('click', (e) ->
+    $(".tabs .tabs-links a[href='#inspiration']").on('click', (e) ->
       track.viewCelebrityInspiration(window.product_analytics_label)
     )

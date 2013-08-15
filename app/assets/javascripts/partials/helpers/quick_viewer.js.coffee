@@ -95,12 +95,12 @@ window.helpers.quickViewer = {
     helpers.buildImagesViewer(helpers.quickViewer.container).init()
 
     # track product details viewing
-    $('.tabs .tabs-links a#videos').on('click', (e) ->
+    $(".tabs .tabs-links a[href='#videos']").on('click', (e) ->
       if helpers.quickViewer.product_analytics_label?
         track.viewVideo(helpers.quickViewer.product_analytics_label)
     )
 
-    $('.tabs .tabs-links a#inspiration').on('click', (e) ->
+    $(".tabs .tabs-links a[href='#inspiration']").on('click', (e) ->
       if helpers.quickViewer.product_analytics_label?
         track.viewCelebrityInspiration(helpers.quickViewer.product_analytics_label)
     )
