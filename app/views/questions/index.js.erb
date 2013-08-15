@@ -29,3 +29,5 @@ $('.quiz-box .film-frame').find(':checkbox, :radio').bind('change', function(eve
 
   $form.find('li:has(:input:checked)').addClass('active');
 });
+
+track.quizOpened('<%= get_user_type %>')

@@ -45,3 +45,13 @@ $(".products.show").ready ->
   $('.toggle-sizes').fancybox({width: '1000', height: '183'})
 
   window.helpers.addBuyButtonHandlers($('.buy-wishlist .buy-now'), { expandShoppingBag: true})
+  
+  #tracks
+  if window.product_analytics_label?
+    $('.tabs .tabs-links a#videos').on('click', (e) ->
+      track.viewVideo(window.product_analytics_label)
+    )
+
+    $('.tabs .tabs-links a#inspiration').on('click', (e) ->
+      track.viewCelebrityInspiration(window.product_analytics_label)
+    )

@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :default_seo_title, :default_meta_description
 
+  helper_method :analytics_label, :get_user_type
+
   private
 
   def title(*args)
@@ -38,6 +40,29 @@ class ApplicationController < ActionController::Base
     else
       "Fame & Partners is committed to bringing the world of celebrity fashion to you. We offer our customers the opportunity to create a look that they love, that is unique to them and will ensure they feel like a celebrity on their special night."
     end
+  end
+
+  def get_user_type
+    spree_user_signed_in? ? 'standard' : 'guest'
+  end
+
+  def analytics_label(label_type, *args)
+    case label_type.to_sym
+    when :product
+      product = args.first
+      "#{product.name} - #{product.sku} - #{product.price.to_s} - #{get_user_type}"
+    when :question
+      question = args.first
+      number = args.second
+      "#{number} - #{question.text} - #{get_user_type}"
+    when :search_query
+      query = args.first
+      "#{query} - #{get_user_type}"
+    else
+      ''
+    end
+#  rescue Exception => e
+#    return nil
   end
 
   def step1_custom_dresses_path(options = {})

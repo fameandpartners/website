@@ -32,7 +32,9 @@ window.helpers.addBuyButtonHandlers = (addButton, args = {}) ->
       button.addClass('adding')
       window.shopping_cart.addProduct.call(window.shopping_cart, variantId, {
         failure: () -> button.removeClass('adding')
-        success: () -> button.removeClass('adding').addClass('added')
+        success: (data) ->
+          button.removeClass('adding').addClass('added')
+          track.addedToCart(data.analytics_label) if data.analytics_label?
       })
 
       if options.expandShoppingBag

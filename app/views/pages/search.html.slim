@@ -8,3 +8,6 @@
   ul.products-list.grid-container
     - @products.each do |product|
       = render 'shared/product', product: product, colors: @colors[product.id]
+
+javascript: 
+  track.search('#{{ analytics_label(:search_query, params[:q]) }}');

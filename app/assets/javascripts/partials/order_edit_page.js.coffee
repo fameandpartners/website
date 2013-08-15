@@ -44,7 +44,10 @@ $(".orders.edit").ready ->
       previousText = button.html()
       button.off('click').addClass('moving').html('moving...')
       window.shopping_cart.moveProductToWishlist(button.data('id'), {
-        failure: () -> button.removeClass('moving').html(previousText).on('click', page.moveItemToWishlistClickHandler)
+        success: (data) ->
+          track.addedToWishlist(data.analytics_label) if data.analytics_label?
+        failure: () ->
+          button.removeClass('moving').html(previousText).on('click', page.moveItemToWishlistClickHandler)
       })
 
     removeItemFromList: (e, data) ->

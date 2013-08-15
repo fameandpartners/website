@@ -10,6 +10,7 @@ window.track = {
     if _gaq && _gaq.push
       _gaq.push(['_trackPageview', page_url])
 
+
   remarketing_tag: () ->
     conversion_type = 'remarketing_tag'
     return false if _.contains(window.track.tracked, conversion_type)
@@ -41,4 +42,40 @@ window.track = {
       purchase:   { id: 979620714, label: '95WYCKan1gYQ6qaP0wM' }
     }
     return all[code]
+
+  # events
+  event: (category, action, label, value) ->
+    if _gaq && _gaq.push
+      eventParams = ['_trackEvent', category, action, null, null]
+      eventParams[3] = label if label?
+      eventParams[4] = value if value?
+      #console.log('tracked', eventParams)
+      _gaq.push(eventParams)
+
+  addedToWishlist: (label) ->
+    track.event('Wishlist', 'AddedToWishlist', label)
+
+  addedToCart: (label) ->
+    track.event('Products', 'AddedToCart', label)
+
+  viewVideo: (label) ->
+    track.event('Products', 'ViewVideo', label)
+
+  viewCelebrityInspiration: (label) ->
+    track.event('Products', 'ViewCelebrityInspiration', label)
+
+  openedQuickView: (label) ->
+    track.event('Products', 'OpenedQuickView', label)
+
+  quizOpened: (label) ->
+    track.event('Style Quiz', 'Opened', label)
+
+  quizClickedNext: (label) ->
+    track.event('Style Quiz', 'ClickedNext', label)
+
+  quizFinished: (label) ->
+    track.event('Style Quiz', 'Finished', label)
+
+  search: (label) ->
+    track.event('Searches', 'Searched', label)
 }

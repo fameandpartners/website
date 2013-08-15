@@ -13,7 +13,11 @@ class LineItemsController < Spree::StoreController
       current_order.reload
     end
 
-    render json: { order: CartSerializer.new(current_order).to_json }
+    product = Spree::Variant.where(id: params[:variant_id]).first.try(:product)
+    render json: {
+      order: CartSerializer.new(current_order).to_json,
+      analytics_label: analytics_label(:product, product)
+    }
   end
 
   # edit item in cart
@@ -65,7 +69,12 @@ class LineItemsController < Spree::StoreController
     end
     current_order.reload
 
-    render json: { order: CartSerializer.new(current_order).to_json }, status: status
+    json_result = {
+      order: CartSerializer.new(current_order).to_json,
+      analytics_label: analytics_label(:product, variant.product)
+    }
+
+    render json: json_result, status: status
   end
 
   # order_id

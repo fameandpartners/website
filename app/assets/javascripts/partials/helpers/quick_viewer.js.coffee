@@ -3,6 +3,7 @@ window.helpers.quickViewer = {
   popupContainer: null,
   overlayContainer: null,
   container: null,
+  product_analytics_label: null
 
   init: () ->
     window.helpers.quickViewer.__init.apply(window.helpers.quickViewer, arguments)
@@ -42,7 +43,9 @@ window.helpers.quickViewer = {
       data: $.param({ product_id: productId })
       success: (response) ->
         helpers.quickViewer.showPopup.call(helpers.quickViewer, response.popup_html, response.variants)
-        track.quickView(quickViewUrl)
+        if response.analytics_label
+          helpers.quickViewer.product_analytics_label = response.analytics_label
+          track.openedQuickView(response.analytics_label)
       failure: ->
         helpers.quickViewer.closePopup.call(helpers.quickViewer)
     )
@@ -90,6 +93,17 @@ window.helpers.quickViewer = {
       )
     )
     helpers.buildImagesViewer(helpers.quickViewer.container).init()
+
+    # track product details viewing
+    $('.tabs .tabs-links a#videos').on('click', (e) ->
+      if helpers.quickViewer.product_analytics_label?
+        track.viewVideo(helpers.quickViewer.product_analytics_label)
+    )
+
+    $('.tabs .tabs-links a#inspiration').on('click', (e) ->
+      if helpers.quickViewer.product_analytics_label?
+        track.viewCelebrityInspiration(helpers.quickViewer.product_analytics_label)
+    )
 
   movePopupToCenter: () ->
     window.helpers.quickViewer.container.center()

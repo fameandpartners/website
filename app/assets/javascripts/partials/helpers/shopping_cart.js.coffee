@@ -27,8 +27,8 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       type: 'POST'
       dataType: 'json'
       data: window.shopping_cart.prepareParams(options)
-      success: window.shopping_cart.buildOnSuccessCallback('item_added', variantId, options.success)
-      error: window.shopping_cart.buildOnErrorCallback('item_add_failed', options.failure)
+      success: window.shopping_cart.buildOnSuccessCallback(['item_added'], variantId, options.success)
+      error: window.shopping_cart.buildOnErrorCallback(['item_add_failed'], options.failure)
     )
 
   updateProduct: (itemId, options = {}) ->
@@ -42,8 +42,8 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       type: 'PUT'
       dataType: 'json'
       data: window.shopping_cart.prepareParams(options)
-      success: window.shopping_cart.buildOnSuccessCallback('item_changed', itemId, options.success)
-      error: window.shopping_cart.buildOnErrorCallback('item_change_failed', variantId, options.failure)
+      success: window.shopping_cart.buildOnSuccessCallback(['item_changed'], itemId, options.success)
+      error: window.shopping_cart.buildOnErrorCallback(['item_change_failed'], variantId, options.failure)
     )
 
   moveProductToWishlist: (variantId, options = {}) ->
@@ -58,8 +58,12 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       type: 'POST'
       dataType: 'json'
       data: window.shopping_cart.prepareParams(options)
-      success: window.shopping_cart.buildOnSuccessCallback('item_removed', variantId)
-      error: window.shopping_cart.buildOnErrorCallback('item_remove_failed', variantId, options.failure)
+      success: window.shopping_cart.buildOnSuccessCallback(
+        ['item_removed', 'moved_to_wishlist'], variantId, options.success
+      )
+      error: window.shopping_cart.buildOnErrorCallback(
+        ['item_remove_failed', 'moving_to_wishlist_failed'], variantId, options.failure
+      )
     )
 
   removeProduct: (variantId, options = {}) ->
@@ -74,8 +78,8 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       type: 'DELETE'
       dataType: 'json'
       data: window.shopping_cart.prepareParams(options)
-      success: window.shopping_cart.buildOnSuccessCallback('item_removed', variantId)
-      error: window.shopping_cart.buildOnErrorCallback('item_remove_failed', variantId, options.failure)
+      success: window.shopping_cart.buildOnSuccessCallback(['item_removed'], variantId)
+      error: window.shopping_cart.buildOnErrorCallback(['item_remove_failed'], variantId, options.failure)
     )
 
   prepareParams: (options = {}) ->
@@ -85,7 +89,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
         data[key] = options[key]
     return $.param(data)
 
-  buildOnSuccessCallback: (event_name, objectId, successCallback) ->
+  buildOnSuccessCallback: (event_names, objectId, successCallback) ->
     func = (response) ->
       data = window.shopping_cart.parseResponse(response)
       window.shopping_cart.order = data.order
@@ -93,7 +97,9 @@ window.shopping_cart = _.extend(window.shopping_cart, {
 
       successCallback.apply(window, arguments) if successCallback?
 
-      window.shopping_cart.trigger(event_name, { cart: data.order, id: objectId })
+      _.each(event_names, (event_name) ->
+        window.shopping_cart.trigger(event_name, { cart: data.order, id: objectId })
+      )
     return func
 
   buildOnErrorCallback: (event_name, objectId, failureCallback) ->

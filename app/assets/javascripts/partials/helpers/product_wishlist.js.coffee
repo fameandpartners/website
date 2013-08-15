@@ -38,8 +38,9 @@
       return $.param(data)
 
     buildSuccessCallback: (options) ->
-      callback = () ->
+      callback = (data) ->
         options.success.apply(window, arguments) if options.success
+        track.addedToWishlist(data.analytics_label) if data.analytics_label?
       return callback
 
     buildErrorCallback: (options) ->

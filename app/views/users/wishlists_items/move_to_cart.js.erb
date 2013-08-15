@@ -8,3 +8,5 @@ cart.line_items = _.collect(JSON.parse(order.cart.line_items), function(item) { 
 
 event_data = { cart: cart, id: <%= @item.variant.id %>}
 window.shopping_cart.trigger('item_added', event_data)
+
+track.addedToCart('<%= analytics_label(:product, @item.product) %>')

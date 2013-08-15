@@ -25,7 +25,7 @@ class Users::WishlistsItemsController < Users::BaseController
     )
 
     if @item.persisted?
-      render json: @item
+      render json: { item: @item, analytics_label: analytics_label(:product, @item.product) }
     else
       render json: {}
     end

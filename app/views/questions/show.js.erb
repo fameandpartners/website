@@ -10,6 +10,8 @@ $quiz_box.find('.next a').text('Next question').click(function(event){
   $link.text('Processing...');
   event.preventDefault();
   $question.find('form').submit();
+
+  track.quizClickedNext('<%=j analytics_label(:question, @question, @position) %>');
 });
 
 $quiz_box.find('.prev a').unbind('click');
