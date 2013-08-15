@@ -1847,6 +1847,11 @@
       }
     }
   }
+  &.edit-line-item {
+    .modal-container {
+      margin-top: -196px;
+    }
+  }
 }
 
 #content #order {

@@ -5,7 +5,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
 nav ul,ul{list-style:none}
 blockquote,q{quotes:none}
 blockquote:before,blockquote:after,q:before,q:after{content:none}
-a{background:transparent;font-size:100%;margin:0;padding:0;vertical-align:baseline}
+a{background:transparent;font-size:100%;margin:0;padding:0;vertical-align:baseline;outline:0}
 ins{background-color:#ff9;color:#000;text-decoration:none}
 mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
 del{text-decoration:line-through}
