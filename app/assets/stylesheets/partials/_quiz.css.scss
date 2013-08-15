@@ -31,6 +31,16 @@
 }
 
 .quiz-box {
+  .opacity-zero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
   .quiz-box-inner {
     height: 530px;
     border: 13px solid #fff;
@@ -44,12 +54,10 @@
     background-size: cover;
   }
   .signup-box,
-  .thanks-box { 
+  .thanks-box {
     height: 530px;
-    background: image-url('quiz/bg-thanks.jpg') center center no-repeat;
-    background-size: cover; 
     text-align: center;
-    h1{
+    h1 {
       padding-top: 80px;
       font: 300 48px/1 $fontTwo;
       font-style: italic;
@@ -154,7 +162,21 @@
       z-index: 100;
       background: image-url('quiz/get20.png') center center no-repeat;
     }
-    
+  }
+  .thanks-box {
+    position: relative;
+    h1, h2 {
+      position: relative;
+      z-index: 2;
+    }
+    .image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
   }
   .steps-box {
     height: 511px;
@@ -975,13 +997,16 @@
       display: inline-block;
       vertical-align: top;
       margin: 0 5px 18px;
-      padding: 0 10px;
-      height: 45px;
-      min-width: 40px;
       font: 400 30px/45px $fontOne;
       text-transform: uppercase;
       background: #ebebeb;
       border-radius: 3px;
+      label {
+        min-width: 40px;
+        padding: 0 10px;
+        height: 45px;
+        display: block;
+      }
       &.smaller {
         font-size: 18px;
         line-height: 22.5px;
