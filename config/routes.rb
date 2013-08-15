@@ -115,7 +115,13 @@ FameAndPartners::Application.routes.draw do
   get '/legal'   => 'statics#legal'
   get '/faqs'   => 'statics#faqs'
   get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works 
-  get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program
+  get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program 
+  
+  # External URLs
+  get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
+  get '/workshops', to: redirect('http://www.fameandpartners.com/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
+  
+  
 
   # MonkeyPatch for redirecting to Custom Dress page
   get '/fb_auth' => 'pages#fb_auth'
@@ -132,6 +138,8 @@ FameAndPartners::Application.routes.draw do
   end
 
   root :to => 'index#show'
+
+  get '/landing' => 'index#landing'
 
   resource :quiz, :only => [:show] do
     resources :questions, :only => [:index, :show] do

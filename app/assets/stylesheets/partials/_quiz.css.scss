@@ -31,6 +31,16 @@
 }
 
 .quiz-box {
+  .opacity-zero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
   .quiz-box-inner {
     height: 530px;
     border: 13px solid #fff;
@@ -44,12 +54,10 @@
     background-size: cover;
   }
   .signup-box,
-  .thanks-box { 
+  .thanks-box {
     height: 530px;
-    background: image-url('quiz/bg-thanks.jpg') center center no-repeat;
-    background-size: cover; 
     text-align: center;
-    h1{
+    h1 {
       padding-top: 80px;
       font: 300 48px/1 $fontTwo;
       font-style: italic;
@@ -144,6 +152,30 @@
       a {
         font-weight: 700;
       }
+    }
+    .get20{
+      width: 170px;
+      height: 170px;
+      position: absolute;
+      top: 30px;
+      right: 160px;
+      z-index: 100;
+      background: image-url('quiz/get20.png') center center no-repeat;
+    }
+  }
+  .thanks-box {
+    position: relative;
+    h1, h2 {
+      position: relative;
+      z-index: 2;
+    }
+    .image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
     }
   }
   .steps-box {
@@ -415,6 +447,80 @@
           }
         }
       }
+    }
+  }
+  .sexiness {
+    width: 855px;
+    margin: 60px auto 0;
+    overflow: hidden;
+    position: relative;
+    .sexiness-profile {
+      width: 200px;
+      height: 200px;
+      float: left;
+      background: image-url('quiz/sexiness.jpg') center 7px no-repeat #fff;
+      padding: 7px;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      &.second {
+        float: right;
+        background-position: center -207px;
+      }
+    }
+    .values {
+      margin: 78px 0 0 36px;
+      float: left;
+      li {
+        float: left;
+        margin: 0 0 0 10px;
+      }
+      label {
+        display: block;
+        padding: 7px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        .inner {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+        }
+      }
+      .value-1 {
+        .inner {
+          background: #b4e1f4;
+        }
+      }
+      .value-2 {
+        .inner {
+          background: #bcc9da;
+        }
+      }
+      .value-3 {
+        .inner {
+          background: #cdaab7;
+        }
+      }
+      .value-4 {
+        .inner {
+          background: #ea8e94;
+        }
+      }
+      .value-5 {
+        .inner {
+          background: #f48082;
+        }
+      }
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #ddd;
+      z-index: -1;
     }
   }
 }
@@ -891,13 +997,16 @@
       display: inline-block;
       vertical-align: top;
       margin: 0 5px 18px;
-      padding: 0 10px;
-      height: 45px;
-      min-width: 40px;
       font: 400 30px/45px $fontOne;
       text-transform: uppercase;
       background: #ebebeb;
       border-radius: 3px;
+      label {
+        min-width: 40px;
+        padding: 0 10px;
+        height: 45px;
+        display: block;
+      }
       &.smaller {
         font-size: 18px;
         line-height: 22.5px;

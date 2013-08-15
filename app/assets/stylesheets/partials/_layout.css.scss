@@ -259,6 +259,7 @@ header {
         float: left;
         margin: 10px 0 0;
         position: relative;
+        z-index: 6;
         > a {
           display: block;
           padding: 0 24px;
@@ -296,16 +297,20 @@ header {
           .dropdown-menu {
             margin: 46px 0 0;
             background: #fff;
-            padding: 20px;
+            padding: 20px 30px;
             box-shadow: 0 0 4px rgba(0, 0, 0, .3);
           }
           .dropdown-title {
-            text-align: center;
             margin: 0 0 14px;
+            text-transform: none;
+            font: 400 italic 22px/1.1 $fontFour;
             a {
-              font: 300 15px/1.1 $fontOne;
+              font: 300 13px/1.1 $fontOne;
               color: #7b7b7b;
               text-transform: uppercase;
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
           .range-image {
