@@ -409,6 +409,11 @@ header {
     &:before, &:after {
       display: none;
     }
+    .logo {
+      a {
+        background-image: image-url('logo-blog.png');
+      }
+    }
     nav {
       top: 4px;
       right: 0;
