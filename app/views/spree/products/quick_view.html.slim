@@ -97,7 +97,7 @@ ruby:
           | Material:
           = @product.property('fabric')
         #notes.tab-content
-          = product_description(@product)
+          = product_description
       .notice                                                                                                       
         .colour
           ' Want a different colour? 
@@ -105,5 +105,5 @@ ruby:
         .faster                                                                                                         
           ' Need this faster? 
           = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
-      .share-buttons
-        = share_buttons
+      /.share-buttons
+        = share_buttons(@product)

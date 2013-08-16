@@ -92,9 +92,9 @@ module ProductsHelper
     return user.wishlist_items.where(spree_product_id: variant.product_id).exists?
   end
 
-  def share_buttons
+  def share_buttons(product = nil)
     return '' if Rails.env.development?
-    render 'shared/share_buttons'
+    render 'shared/share_buttons', product: product
   end
 
   def send_to_a_friend_link(product)

@@ -1,0 +1,29 @@
+<div class="addthis_toolbox addthis_default_style">
+  <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+  <a class="addthis_button_tweet"></a>
+  <a class="addthis_button_pinterest_pinit"></a>
+  <a class="addthis_counter addthis_pill_style"></a>
+</div>
+
+<% if @product %>
+  <% content_for :head do %>
+    <% img_src = (root_url + @product.images.first.attachment.url(:product)) rescue '' %>
+    <meta property="og:image" content="<%= img_src %>" />
+    <meta property="og:site_name" content="<%= 'Fame&Partners' %>" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="<%= get_title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= collection_product_url(@product) %>" />
+    <meta property="og:description" content="<%= get_meta_description %>" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="<%= get_title %>" />
+    <meta name="twitter:description" content="<%= get_meta_description %>" />
+    <meta name="twitter:image" content="" />
+  <% end %>
+<% end %>
+
+<script type="text/javascript">
+  var addthis_config = {"data_track_addressbar":true};
+</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"></script>

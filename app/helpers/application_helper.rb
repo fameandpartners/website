@@ -116,4 +116,8 @@ module ApplicationHelper
       spree.product_path(product)
     end
   end
+
+  def collection_product_url(product)
+    root_url + collection_product_path(product)
+  end
 end
