@@ -51,7 +51,8 @@ $ ->
 
   window.showCelebrityModal = (e) ->
     $('.celebrity-modal').removeClass('hidden')
-    $("body").animate({"scrollTop":0},10)
+    $('.celebrity-modal .celebrity-blocks').css({top: $(document).scrollTop() + 100 + 'px'})
+    $('.celebrity-modal .close-modal').css({top: $(document).scrollTop() + 15 + 'px'})
     window.updateCelebrityModal($(e.target).parent())
 
   window.updateCelebrityModal = (item) ->
