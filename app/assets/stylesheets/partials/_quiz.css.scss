@@ -1017,13 +1017,7 @@
       }
     }
   }
-  //.typical {
-  //  float: left;
-  //  width: 308px;
-  //}
   .bra {
-    //width: 494px;
-    //float: right;
     li {
       min-width: 65px;
     }
@@ -1082,5 +1076,31 @@
     left: 0;
     opacity: 0;
     filter: alpha(opacity=0);
+  }
+}
+
+
+.style-report-block {
+  text-align: center;
+  font-family: $fontOne;
+  .block {
+    text-transform: uppercase;
+    display: inline-block;
+    width: 200px;
+    border-left: 1px solid #ebebeb;
+    margin: 70px 0;
+    .name {
+      font-size: 22px;
+      color: #333;
+      font-weight: 300;
+    }
+    .percent {
+      font-weight: 100;
+      font-size: 44px;
+      color: #f59a8c;
+    }
+    &.first {
+      border-left: 0;
+    }
   }
 }

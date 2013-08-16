@@ -1,35 +1,32 @@
-.wrap
-  .page-name
-    .inner
-      h1.title
-        em My Personalised
-        span Store
-    .subtitle Great dresses just for you
+.personal-boutique
+  .wrap
+    .page-title
+      h1 #{current_spree_user.first_name}'s Personalised Boutique
+      h2 Based on your Style Profile, here is a collection of dresses that our stylists have mached to you!
 
-  - if @style_profile.present? && Rails.env.development?
-    .page-name
-      table style="width: 80%;"
-        tr
-          - @style_profile.percentage.each_with_index do |style, index|
-            - name, percentage = *style
-            td style="padding: 10px; width: 20%;"
-              h3 = name
-              h3 = "#{percentage}%"
+    - if @style_profile.present?
+      .style-report-block
+        - @style_profile.percentage.each_with_index do |style, index|
+          div class=(index == 0 ? 'block first' : 'block')
+            .name = style.first
+            .percent #{style.last}%
 
+    ul.products-list.grid-container
+      - @recommended_dresses.each do |product|
+        = render 'shared/product', product: product, colors: @colors[product.id]
 
-  ul.products-list.grid-container
-    - @recommended_dresses.each do |product|
-      = render 'shared/product', product: product, colors: @colors[product.id]
+    .view-more-separate
 
-  .page-name
-    .inner
-      h1.title
-        em View more
-        span Dresses
+    .page-title
+      h1.no-border View more dresses
+      h2.border Nothing you love above? Check out more of our range below
       ul.filters
+        li.active = link_to 'All', collection_path
         - available_product_ranges.each do |taxon|
           li = link_to taxon.name, collection_taxon_path(taxon)
 
-  ul.products-list.grid-container
-    - @other_dresses.each do |product|
-      = render 'shared/product', product: product, colors: @colors[product.id]
+    ul.products-list.grid-container
+      - @other_dresses.each do |product|
+        = render 'shared/product', product: product, colors: @colors[product.id]
+
+    .view-more-separate
