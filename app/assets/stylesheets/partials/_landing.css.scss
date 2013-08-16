@@ -1,4 +1,5 @@
-.landing, .landing2 {
+.landing, .landing2, .landing3 {
+  background: image-url('bg-main.jpg') 0 0 repeat;
   #wrap {
     margin: 0;
   }
@@ -16,7 +17,6 @@
 }
 
 .landing {
-  background: image-url('bg-main.jpg') 0 0 repeat;
   #content {
     .image-container {
       padding: 0 20px;
@@ -73,11 +73,16 @@
   }
 }
 
-.landing2 {
+.landing2, .landing3 {
   .content-wrapper {
     overflow: hidden;
     width: 1200px;
     margin: 0 auto;
+  }
+}
+
+.landing2 {
+  .content-wrapper {
     background: image-url('image-landing-2.png') center 28px no-repeat #fff;
   }
   .signup-form {
@@ -99,5 +104,24 @@
     width: 240px;
     float: left;
     margin: 0 0 8px 14px;
+  }
+}
+
+.landing3 {
+  .content-wrapper {
+    background: #fff;
+    padding: 46px 0;
+    text-align: center;
+    position: relative;
+    .show-style-quiz {
+      position: absolute;
+      right: 361px;
+      top: 662px;
+      width: 134px;
+      height: 28px;
+      overflow: hidden;
+      text-align: left;
+      text-indent: -999px;
+    }
   }
 }
