@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_user_type
-    spree_user_signed_in? ? 'standard' : 'guest'
+    spree_user_signed_in? ? 'Member' : 'Guest'
   end
 
   def analytics_label(label_type, *args)
