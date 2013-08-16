@@ -6,6 +6,17 @@
         span Store
     .subtitle Great dresses just for you
 
+  - if @style_profile.present? && Rails.env.development?
+    .page-name
+      table style="width: 80%;"
+        tr
+          - @style_profile.percentage.each_with_index do |style, index|
+            - name, percentage = *style
+            td style="padding: 10px; width: 20%;"
+              h3 = name
+              h3 = "#{percentage}%"
+
+
   ul.products-list.grid-container
     - @recommended_dresses.each do |product|
       = render 'shared/product', product: product, colors: @colors[product.id]
@@ -17,7 +28,7 @@
         span Dresses
       ul.filters
         - available_product_ranges.each do |taxon|
-          li = link_to taxon.name, spree.products_path(taxons: { range: taxon.id})
+          li = link_to taxon.name, collection_taxon_path(taxon)
 
   ul.products-list.grid-container
     - @other_dresses.each do |product|

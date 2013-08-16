@@ -12,6 +12,8 @@ class PagesController < Spree::StoreController
     @other_dresses = @other_dresses.where(['spree_products.id NOT IN (?)', ids]) if ids.present?
     @other_dresses = @other_dresses.uniq.sample(4)
 
+    @style_profile = UserStyleProfile.find_by_user_id(current_spree_user.id)
+
     @colors = Products::ColorsSearcher.new(Spree::Product.active).retrieve_colors
   end
 
