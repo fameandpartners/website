@@ -1,6 +1,6 @@
 Spree::ProductsController.class_eval do
   respond_to :html, :json
-  before_filter :load_product, :only => [:show, :quick_view]
+  before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
 
   def index
     @searcher = Products::ProductsFilter.new(params)
@@ -44,6 +44,13 @@ Spree::ProductsController.class_eval do
       variants: @product_variants,
       analytics_label: analytics_label(:product, @product)
     }
+  end
+
+  def send_to_friend
+    user_info = params.extract!(:name, :email, :message)
+    Spree::ProductMailer.send_to_friend(try_spree_current_user, @product, user_info).deliver
+
+    render json: { success_message: 'successfully sended' }
   end
 
   private

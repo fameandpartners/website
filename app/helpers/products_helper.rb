@@ -97,6 +97,12 @@ module ProductsHelper
     render 'shared/share_buttons'
   end
 
+  def send_to_a_friend_link(product)
+    if Rails.env.development?
+      link_to 'Send to a Friend', '#', class: 'send-to-friend', data: { product: product.permalink }
+    end
+  end
+
   def wishlist_move_to_cart_link(wishlist_item)
     variant = wishlist_item.variant
     if variant.is_master?

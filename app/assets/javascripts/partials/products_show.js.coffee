@@ -45,17 +45,20 @@ $(".products.show").ready ->
   $('.toggle-sizes').fancybox({width: '1000', height: '183'})
 
   window.helpers.addBuyButtonHandlers($('.buy-wishlist .buy-now'), { expandShoppingBag: true})
-  
-  #tracks
-  $('.tabs .tabs-links a#videos').on('click', (e) ->
-    console.log('video tab clicked')
+
+  $(".tabs .tabs-links a[href='#videos']").on('click', (e) ->
+    if !_.isEmpty(window.product_analytics_label)
+      track.viewVideo(window.product_analytics_label)
   )
 
-  if !_.isEmpty(window.product_analytics_label)
-    $(".tabs .tabs-links a[href='#videos']").on('click', (e) ->
-      track.viewVideo(window.product_analytics_label)
-    )
-
-    $(".tabs .tabs-links a[href='#inspiration']").on('click', (e) ->
+  $(".tabs .tabs-links a[href='#inspiration']").on('click', (e) ->
+    if !_.isEmpty(window.product_analytics_label)
       track.viewCelebrityInspiration(window.product_analytics_label)
-    )
+  )
+
+  # send to friend
+  $('a.send-to-friend').on('click', (e) ->
+    e.preventDefault()
+    product = $(e.currentTarget).data('product')
+    popups.showSendToFriendPopup(product)
+  )

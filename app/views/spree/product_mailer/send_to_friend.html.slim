@@ -1,0 +1,30 @@
+table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+  tbody
+    tr
+      td width="38"
+        - product_show_url = "#{ActionMailer::Base.default_url_options[:host]}#{collection_product_path(@product)}"
+        = link_to image_tag(@product.images.first.attachment(:product)), product_show_url
+      td
+        table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+          tr
+            td 
+              h2 = @friend_info[:name]
+              h2 what do you think of this dress?
+          tr
+            td 
+              = @friend_info[:message]
+          tr
+            td
+              h3 I would love your opinion
+          tr
+            td
+              = @product.name
+          tr
+            td
+              = @product.description
+
+          tr
+            td
+              = @product.price_in(Spree::Config[:currency]).display_price
+    tr
+      Your, #{{ @user_name }}

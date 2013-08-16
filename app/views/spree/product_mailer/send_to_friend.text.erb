@@ -1,0 +1,11 @@
+Hi, <%= @friend_info[:name] %>!
+what do you think of this dress?
+I would love your opinion
+
+<%= @product.name %>
+<%= @product.description %>
+<%= @product.price_in(Spree::Config[:currency]).display_price %>
+
+'<%= "#{ActionMailer::Base.default_url_options[:host]}#{collection_product_path(@product)}" %>'
+
+Your, <%= @user_name %>

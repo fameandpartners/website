@@ -28,6 +28,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   get 'products/:id/quick_view' => 'spree/products#quick_view'
+  post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
 
   get 'search' => 'pages#search'
 
