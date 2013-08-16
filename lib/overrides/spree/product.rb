@@ -101,6 +101,19 @@ module Overrides
               }
             }
 
+            filter :or,
+                   {
+                     :bool => {:must_not => {:term => {:classic => 0}}}
+                   }, {
+                     :bool => {:must_not => {:term => {:glam => 0}}}
+                   }, {
+                     :bool => {:must_not => {:term => {:girly => 0}}}
+                   }, {
+                     :bool => {:must_not => {:term => {:edgy => 0}}}
+                   }, {
+                     :bool => {:must_not => {:term => {:bohemian => 0}}}
+                   }
+
             sort do
               by ({
                 :_script => {
