@@ -194,6 +194,9 @@ header {
       &:first-child {
         margin: 0;
       }
+      &.empty {
+        width: 71px;
+      }
     }
   }
   .wishlist, .shopping-bag {
