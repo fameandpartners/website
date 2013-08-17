@@ -14,6 +14,10 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
 
   scope :assigned, where('celebrity_id IS NOT NULL')
   scope :with_posts, includes(:post)
+  def self.published
+    joins('LEFT JOIN blog_posts ON blog_celebrity_photos.post_id = blog_posts.id').
+      where('blog_posts.published_at IS NOT NULL OR blog_posts.id IS NULL')
+  end
 
   before_post_process :randomize_file_name
 
