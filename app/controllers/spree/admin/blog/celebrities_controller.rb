@@ -3,7 +3,7 @@ class Spree::Admin::Blog::CelebritiesController < Spree::Admin::Blog::BaseContro
   def index
     @celebrities = Blog::Celebrity.page(params[:page]).
                    per(params[:per_page] || Spree::Config[:orders_per_page]).
-                   order('created_at desc')
+                   order('blog_celebrities.last_name ASC')
   end
 
   def new
