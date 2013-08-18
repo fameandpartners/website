@@ -18,6 +18,7 @@ class Blog::CelebrityPhoto < ActiveRecord::Base
   scope :assigned, where('celebrity_id IS NOT NULL')
   scope :with_posts, includes(:post)
   scope :published, joins(:post).where('blog_posts.published_at IS NOT NULL')
+  scope :newest_first, order('blog_celebrity_photos.created_at DESC')
 
   before_post_process :randomize_file_name
 
