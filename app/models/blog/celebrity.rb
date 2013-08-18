@@ -33,8 +33,8 @@ class Blog::Celebrity < ActiveRecord::Base
   end
 
   def assign_primary_photo
-    if primary_photo.blank? && celebrity_photos.present?
-      self.primary_photo_id = celebrity_photos.first.id
+    if primary_photo.blank? || primary_photo.post.blank? || !primary_photo.post.published?
+      self.primary_photo_id = celebrity_photos.with_posts.published.order('blog_celebrity_photos.created_at DESC').first.try(:id)
     end
   end
 end
