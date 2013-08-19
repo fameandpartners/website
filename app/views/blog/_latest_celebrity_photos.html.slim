@@ -21,8 +21,6 @@
                       = link_to post.title, blog_red_carpet_post_path(post.slug)
                     - else
                       = link_to post.title, blog_post_by_category_path(post.category.slug, post.slug)
-                - else
-                  .event Cooming Soon
           .love-share
             /.love-hate
               .icons[data-id="#{celebrity_photo.id}"]
