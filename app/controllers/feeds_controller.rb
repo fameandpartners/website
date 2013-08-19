@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
   def products
     @config = {
       title: "Fame & Partners",
-      description: "Fame & Partners formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.",
+      description: "Fame & Partners our formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.",
       domain: ActionMailer::Base.default_url_options[:host] || 'www.fameandpartners.com'
     }
     @items = get_items
@@ -33,7 +33,7 @@ class FeedsController < ApplicationController
       variant: variant,
       product: product,
       availability: variant.in_stock? ? 'in stock' : 'out of stock',
-      title: "#{product.name} - Size #{size} Standart - #{color}",
+      title: "#{product.name} - Size #{size} - Colour #{color}",
       description: product.description,
       price: "#{current_currency} #{variant.price_in(current_currency).display_price}",
       google_product_category: "Apparel & Accessories > Clothing > Dresses",
