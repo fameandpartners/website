@@ -24,10 +24,10 @@
 ---
 environments:
   production:
-    migrate: true
+    migrate: false
     migration_command: rake db:migrate
-    branch: production
+    branch: master
   production_blog:
-    migrate: true
+    migrate: false
     migration_command: rake db:migrate
     branch: master
