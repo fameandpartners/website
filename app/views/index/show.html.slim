@@ -55,7 +55,7 @@
       = link_to 'http://blog.fameandpartners.com/red-carpet-events/young-hollywood-awards-2013', class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/blog3.jpg'
 
-- if @featured_products.length > 0
+- if featured_products.length > 0
   .featured-dresses
     .wrap.no-overflow
       .page-name
@@ -66,11 +66,13 @@
 
       #product-items-prev
       ul#product-items.products-list.grid-container.featured style="height: 458px;"
-        - @featured_products.each do |product|
+        - featured_products.each do |product|
           li.product-item.grid-25
             .thumbnail
               .like = add_to_wishlist_link(product)
-              = link_to product_image(product, itemprop: "image", width: 243, height: 352, alt: product.name), collection_product_path(product)
-            .name = link_to product.name, collection_product_path(product)
-            .price = product.price_in(current_currency).display_price
+              - cache ['home_page', 'featured_dresses', product.id, 'thumbnail_and_quick_view'], :expires_in => configatron.cache.expire.normally do
+                = link_to product_image(product, itemprop: "image", width: 243, height: 352, alt: product.name), collection_product_path(product)
+            - cache ['home_page', 'featured_dresses', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
+              .name = link_to product.name, collection_product_path(product)
+              .price = product.price_in(current_currency).display_price
       #product-items-next

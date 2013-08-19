@@ -13,7 +13,7 @@
 
     ul.products-list.grid-container
       - @recommended_dresses.each do |product|
-        = render 'shared/product', product: product, colors: @colors[product.id]
+        = render 'shared/product', product: product
 
     .view-more-separate
 
@@ -22,11 +22,12 @@
       h2.border Nothing you love above? Check out more of our range below
       ul.filters
         li.active = link_to 'All', collection_path
-        - available_product_ranges.each do |taxon|
-          li = link_to taxon.name, collection_taxon_path(taxon)
+        - cache ['personal_boutique_page', 'ranges'], :expires_in => configatron.cache.expire.long do
+          - available_product_ranges.each do |taxon|
+            li = link_to taxon.name, collection_taxon_path(taxon)
 
     ul.products-list.grid-container
       - @other_dresses.each do |product|
-        = render 'shared/product', product: product, colors: @colors[product.id]
+        = render 'shared/product', product: product
 
     .view-more-separate

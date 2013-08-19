@@ -18,6 +18,7 @@ gem 'ckeditor'
 gem 'newrelic_rpm'
 gem 'default_value_for'
 gem 'tire'
+gem 'redis-rails'
 
 # assets
 gem 'jquery-rails'

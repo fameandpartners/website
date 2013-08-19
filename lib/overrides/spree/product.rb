@@ -94,7 +94,7 @@ module Overrides
         def recommended_for(user)
           style_profile = UserStyleProfile.find_by_user_id(user.id)
 
-          query = Tire.search(:spree_products, :page => 1, :load => true) do
+          query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => {
               :term => {
                 :deleted => false
