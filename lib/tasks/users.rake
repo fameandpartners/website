@@ -4,9 +4,10 @@ namespace :users_migration do
     filename = Rails.root.join('db/users.csv')
     CSV.open(filename, 'w') do |csv|
       Spree::User.find_each do |user|
+        facebook_id = user.user_authentications.first.try(:uid)
         csv << [
           user.email, user.login, user.encrypted_password, user.password_salt,
-          user.first_name, user.last_name, user.slug
+          user.first_name, user.last_name, user.slug, facebook_id
         ]
       end
     end
@@ -23,6 +24,10 @@ namespace :users_migration do
       user.first_name = row[4]
       user.last_name = row[5]
       user.slug = row[6]
+      if row[7].present?
+        user.user_authentications.build(provider: 'facebook', uid: row[7])
+      end
+
       user.valid?
       errors = user.errors.messages
       errors.delete(:password)
