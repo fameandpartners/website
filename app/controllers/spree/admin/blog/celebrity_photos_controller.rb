@@ -37,7 +37,7 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
     end
 
     if celebrity.present? && celebrity.primary_photo.blank? && celebrity.celebrity_photos.count > 0
-      celelebrity.primary_photo = celebrity.celebrity_photos.first
+      celebrity.primary_photo = celebrity.celebrity_photos.first
       celebrity.save
     end
 

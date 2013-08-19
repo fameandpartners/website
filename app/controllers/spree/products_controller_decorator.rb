@@ -8,14 +8,12 @@ Spree::ProductsController.class_eval do
     @searcher.current_currency = current_currency
     @products = @searcher.retrieve_products
 
-    @colors = Products::ColorsSearcher.new(@products.to_a).retrieve_colors
-
     set_collection_title(@searcher.collection)
 
     if !request.xhr?
       render action: 'index', layout: true
     else
-      text = render_to_string(partial: 'products', locals: { products: @products, colors: @colors })
+      text = render_to_string(partial: 'products', locals: { products: @products })
       render text: text, layout: false
     end
   end
@@ -76,4 +74,10 @@ Spree::ProductsController.class_eval do
       description([prefix, default_meta_description].join(' - '))
     end
   end
+
+  def colors
+    @colors ||= Products::ColorsSearcher.new(@products.to_a).retrieve_colors
+  end
+
+  helper_method :colors
 end

@@ -17,7 +17,7 @@ module Products
       products_with_options = Spree::Product.where(id: @products.map(&:id)).includes(variants: :option_values)
 
       products_with_options.each do |product|
-        colors[product.id] = product.variants.includes(:option_values).collect do |variant|
+        colors[product.id] = product.variants.collect do |variant|
           variant.option_values.select{|option| option.option_type_id == color_option_type.id }
         end.flatten.uniq
       end

@@ -40,9 +40,9 @@
     .content-sidebar.clearfix
       section.content-area
         .celebrity-photos.columns-3
-          - if @celebrity.celebrity_photos.present?
+          - if @celebrity.celebrity_photos.published.present?
             ul
-              - @celebrity.celebrity_photos.with_posts.each do |photo|
+              - @celebrity.celebrity_photos.with_posts.published.newest_first.each do |photo|
                 li[data-name="#{@celebrity.fullname}" data-date="#{photo.created_at_formatted}" data-photo-url="#{photo.photo.url(:preview)}"]
                   .zoom
                   .celebrity-photo

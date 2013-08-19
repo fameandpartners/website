@@ -31,6 +31,10 @@ class Blog::Post < ActiveRecord::Base
   scope :red_carpet_posts, order('created_at desc').where(post_type_id: PostTypes::RED_CARPET)
   scope :featured, where(post_type_id: PostTypes::SIMPLE).where('featured_at is not null').order('featured_at desc').limit(5)
 
+  after_save do
+    celebrities.each(&:save) if published_at_changed?
+  end
+
   class << self
     def find_by_query(term)
       Blog::Post.joins(

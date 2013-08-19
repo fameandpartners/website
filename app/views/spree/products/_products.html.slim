@@ -18,11 +18,13 @@ ul.products-list.grid-container
     li.product-item.grid-33
       .thumbnail
         .like = add_to_wishlist_link(product)
-        .quick-view = quick_view_link(product)
-        = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
-      .name = link_to product.name, product
-      /.description = product_short_description(product)
-      .price = product.price_in(current_currency).display_price
-      .colors
-        - colors[product.id].map(&:name).sort.each do |color|
-          .color{class=color}
+        - cache ['products_page', 'product', product.id, 'thumbnail_and_quick_view'], :expires_in => configatron.cache.expire.normally do
+          .quick-view = quick_view_link(product)
+          = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
+      - cache ['products_page', 'product', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
+        .name = link_to product.name, product
+        /.description = product_short_description(product)
+        .price = product.price_in(current_currency).display_price
+        .colors
+          - colors[product.id].map(&:name).sort.each do |color|
+            .color{class=color}

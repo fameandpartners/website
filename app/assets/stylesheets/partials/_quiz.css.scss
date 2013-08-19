@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 5;
+  z-index: 10;
 }
 
 .quiz-wrapper-box {
@@ -19,7 +19,7 @@
   margin: -275px 0 0 -550px;
   background: #fff;
   box-shadow: 0 0 30px rgba(0, 0, 0, .2);
-  z-index: 6;
+  z-index: 11;
   .close-quiz {
     font: 700 18px/1 $fontOne;
     position: absolute;
@@ -1017,13 +1017,7 @@
       }
     }
   }
-  //.typical {
-  //  float: left;
-  //  width: 308px;
-  //}
   .bra {
-    //width: 494px;
-    //float: right;
     li {
       min-width: 65px;
     }
@@ -1082,5 +1076,31 @@
     left: 0;
     opacity: 0;
     filter: alpha(opacity=0);
+  }
+}
+
+
+.style-report-block {
+  text-align: center;
+  font-family: $fontOne;
+  .block {
+    text-transform: uppercase;
+    display: inline-block;
+    width: 200px;
+    border-left: 1px solid #ebebeb;
+    margin: 70px 0;
+    .name {
+      font-size: 22px;
+      color: #333;
+      font-weight: 300;
+    }
+    .percent {
+      font-weight: 100;
+      font-size: 44px;
+      color: #f59a8c;
+    }
+    &.first {
+      border-left: 0;
+    }
   }
 }

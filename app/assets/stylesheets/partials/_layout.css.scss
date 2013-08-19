@@ -194,6 +194,9 @@ header {
       &:first-child {
         margin: 0;
       }
+      &.empty {
+        width: 71px;
+      }
     }
   }
   .wishlist, .shopping-bag {
@@ -408,6 +411,11 @@ header {
     box-shadow: none;
     &:before, &:after {
       display: none;
+    }
+    .logo {
+      a {
+        background-image: image-url('logo-blog.png');
+      }
     }
     nav {
       top: 4px;

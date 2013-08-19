@@ -8,6 +8,7 @@ class Blog::CelebritiesController < BlogBaseController
     @celebrities_count = Blog::Celebrity.with_primary_photo.count
     @celebrities = Blog::Celebrity.
       with_primary_photo.
+      order('blog_celebrities.last_name ASC').
       includes(:primary_photo).
       page(params[:page]).per(CELEBRITIES_PER_PAGE)
 

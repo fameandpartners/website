@@ -117,6 +117,7 @@ FameAndPartners::Application.routes.draw do
   get '/faqs'   => 'statics#faqs'
   get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works 
   get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program 
+  get '/custom-dresses'   => 'statics#custom_dresses', :as => :custom_dresses
   
   # External URLs
   get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
@@ -141,6 +142,8 @@ FameAndPartners::Application.routes.draw do
   root :to => 'index#show'
 
   get '/landing' => 'index#landing'
+  get '/landing2' => 'index#landing2'
+  get '/landing3' => 'index#landing3'
 
   resource :quiz, :only => [:show] do
     resources :questions, :only => [:index, :show] do
