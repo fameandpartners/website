@@ -29,6 +29,9 @@
             p.labeled = order_payment_state(@order)
             h3.uppercase Delivery Status
             p.labeled = order_shipment_state(@order)
+            - if @order.shipment
+              h3.uppercase Tracking Number
+              p.labeled = @order.shipment.number
 
             - if successfully_ordered
               h3.uppercase Customer Support
