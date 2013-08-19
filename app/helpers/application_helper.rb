@@ -120,4 +120,11 @@ module ApplicationHelper
   def collection_product_url(product)
     root_url + collection_product_path(product)
   end
+
+  def absolute_image_url(image_url, protocol = nil)
+    if protocol.blank?
+      protocol = request.protocol
+    end
+    "#{protocol}://#{request.host_with_port}#{image_url}"
+  end
 end
