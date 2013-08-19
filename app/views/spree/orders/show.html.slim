@@ -26,6 +26,9 @@
             p.labeled = @order.payment_state
             h3.uppercase Delivery Status
             p.labeled = @order.shipment_state || 'pending'
+            - if @order.shipment
+              h3.uppercase Tracking Number
+              p.labeled = @order.shipment.number
             h3.uppercase Customer Support
             p Check out our Support Site or read our FAQs.
             p = link_to 'support.fameandpartners.com', 'http://support.fameandpartners.com', target: '_blank'
