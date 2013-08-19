@@ -1828,6 +1828,37 @@
       margin-top: -196px;
     }
   }
+  &.send-to-friend {
+    .modal-title {
+      font-size: 24px;
+      text-transform: uppercase;
+      color: #000;
+    }
+    .modal-container {
+      padding: 24px 66px;
+      width: 364px;
+      margin-left: -182px;
+    }
+    .input {
+      label {
+        margin: 0 0 10px;
+        display: block;
+      }
+      input {
+        height: 34px;
+        line-height: 34px;
+      }
+      textarea {
+        height: 72px;
+      }
+    }
+    .submit {
+      input {
+        width: 100%;
+        margin: 34px 0 0;
+      }
+    }
+  }
 }
 
 #content #order {

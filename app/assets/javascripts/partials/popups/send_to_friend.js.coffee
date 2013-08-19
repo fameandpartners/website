@@ -30,11 +30,18 @@ window.popups.showSendToFriendPopup = (productId) ->
       popup.container.find('#friend_name').on('change', _.debounce(popup.onInputChanged))
       popup.container.find('#friend_email').on('change', _.debounce(popup.onInputChanged))
 
+      popup.container.addClass('send-to-friend')
+      popup.container.find('.modal-container').addClass('form')
+      popup.container.find('.save').addClass('submit')
+
     show: () ->
       popup.container.show().center()
 
     hide: () ->
       popup.container.hide()
+      popup.container.removeClass('send-to-friend')
+      popup.container.find('.modal-container').removeClass('form')
+      popup.container.find('.save').removeClass('submit')
 
     getFormData: () ->
       return {
