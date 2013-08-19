@@ -3,7 +3,8 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
     tr
       td width="38"
         - product_show_url = "#{ActionMailer::Base.default_url_options[:host]}#{collection_product_path(@product)}"
-        = link_to image_tag(@product.images.first.attachment(:product)), product_show_url
+        - if (product_image = @product.images.first).present?
+          = link_to image_tag(product_image.attachment(:product)), product_show_url
       td
         table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
           tr
