@@ -97,7 +97,10 @@ ruby:
           | Material:
           = @product.property('fabric')
         #notes.tab-content
-          = product_description
+          - if (description = product_description(@product)).present?
+            = description
+          - else
+            = t('product_has_no_description')
       .notice                                                                                                       
         .colour
           ' Want a different colour? 
