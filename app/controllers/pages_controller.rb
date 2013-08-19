@@ -8,19 +8,17 @@ class PagesController < Spree::StoreController
   def my_boutique
     @recommended_dresses = Spree::Product.recommended_for(current_spree_user)
     ids = @recommended_dresses.map(&:id)
-    @other_dresses = Spree::Product.active
+    @other_dresses = Spree::Product.active.includes(:master, :variants)
     @other_dresses = @other_dresses.where(['spree_products.id NOT IN (?)', ids]) if ids.present?
     @other_dresses = @other_dresses.uniq.sample(4)
 
     @style_profile = UserStyleProfile.find_by_user_id(current_spree_user.id)
-
-    @colors = Products::ColorsSearcher.new(Spree::Product.active).retrieve_colors
   end
 
   def search
     query_string = params[:q]
 
-    @products = Tire.search('spree_products', :load => true) do
+    @products = Tire.search('spree_products', :load => { :include => :master }) do
       query do
         string Tire::Utils.escape(query_string), :default_operator => 'AND' , :use_dis_max => true
       end
@@ -30,8 +28,6 @@ class PagesController < Spree::StoreController
         }
       }
     end.results.results
-
-    @colors = Products::ColorsSearcher.new(Spree::Product.active).retrieve_colors
   end
 
   def fb_auth
@@ -59,4 +55,10 @@ class PagesController < Spree::StoreController
       raise CanCan::AccessDenied
     end
   end
+
+  def colors
+    @colors ||= Products::ColorsSearcher.new(Spree::Product.active).retrieve_colors
+  end
+
+  helper_method :colors
 end

@@ -86,10 +86,7 @@ module ProductsHelper
   end
 
   def in_wishlist?(variant)
-    user = try_spree_current_user
-    return false if user.blank?
-
-    return user.wishlist_items.where(spree_product_id: variant.product_id).exists?
+    return current_wished_product_ids.include?(variant.product_id)
   end
 
   def share_buttons

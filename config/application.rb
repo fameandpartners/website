@@ -74,6 +74,8 @@ module FameAndPartners
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
 
+    config.cache_store = :redis_store
+
     config.after_initialize do
       Rails.configuration.spree.payment_methods << Spree::Gateway::Pin
     end

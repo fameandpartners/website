@@ -17,6 +17,10 @@ configatron.links.google = 'https://plus.google.com/b/117433562249244184743/1174
 configatron.links.pinterest = 'http://pinterest.com/fameandpartners/'
 configatron.links.rss = ''
 
+configatron.cache.expire.quickly = 15.minutes
+configatron.cache.expire.normally = 1.hour
+configatron.cache.expire.long = 1.day
+
 
 case Rails.env.to_sym
 when :development

@@ -109,4 +109,19 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def current_spree_user
+    @current_spree_user ||= super && Spree::User.includes(:wishlist_items).find(@current_spree_user.id)
+  end
+
+  def current_wished_product_ids
+    if @current_wished_product_ids
+      @current_wished_product_ids
+    else
+      user = try_spree_current_user
+      @current_wished_product_ids = user.present? ? user.wishlist_items.map(&:spree_product_id) : []
+    end
+  end
+
+  helper_method :current_wished_product_ids
 end
