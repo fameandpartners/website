@@ -39,9 +39,12 @@ namespace :users_migration do
         puts "** Can't create user with email: #{user.email}"
         puts "** Reason: #{errors}"
       end
-      if i != 0 && i % 20 == 0
-        puts "* Migrated 20 users"
+      if i != 0 && i % 50 == 0
+        puts
+        puts "* Migrated 50 users"
       end
     end
+    puts
+    puts "FINISH"
   end
 end
