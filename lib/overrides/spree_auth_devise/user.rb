@@ -4,6 +4,7 @@ module Overrides
       extend ActiveSupport::Concern
 
       included do
+        attr_accessor :skip_welcome_email
         attr_accessible :first_name, :last_name
 
         validates :first_name,
@@ -35,7 +36,9 @@ module Overrides
         end
 
         def send_welcome_email
-          ::Spree::UserMailer.welcome(self).deliver
+          unless skip_welcome_email
+            ::Spree::UserMailer.welcome(self).deliver
+          end
         end
       end
     end

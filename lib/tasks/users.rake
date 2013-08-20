@@ -15,7 +15,6 @@ namespace :users_migration do
   task :migrate => :environment do
     filename = Rails.root.join('db/users.csv')
     CSV.open(filename, 'r').each_with_index do |row, i|
-      puts row.inspect
       user = Spree::User.new
       user.email = row[0]
       user.login = row[1]
@@ -24,6 +23,7 @@ namespace :users_migration do
       user.first_name = row[4]
       user.last_name = row[5]
       user.slug = row[6]
+      user.skip_welcome_email = true
       if row[7].present?
         user.user_authentications.build(provider: 'facebook', uid: row[7])
       end
@@ -39,9 +39,12 @@ namespace :users_migration do
         puts "** Can't create user with email: #{user.email}"
         puts "** Reason: #{errors}"
       end
-      if i != 0 && i % 20 == 0
-        puts "* Migrated 20 users"
+      if i != 0 && i % 50 == 0
+        puts
+        puts "* Migrated 50 users"
       end
     end
+    puts
+    puts "FINISH"
   end
 end
