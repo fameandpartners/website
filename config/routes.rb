@@ -118,6 +118,7 @@ FameAndPartners::Application.routes.draw do
   get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works 
   get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program 
   get '/custom-dresses'   => 'statics#custom_dresses', :as => :custom_dresses
+  get '/compterms' => 'statics#comp_terms'
   
   # External URLs
   get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
