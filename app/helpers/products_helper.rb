@@ -95,7 +95,7 @@ module ProductsHelper
   end
 
   def send_to_a_friend_link(product)
-    return '' unless Rails.env.development?
+    #return '' unless Rails.env.development?
 
     data = { product: product.permalink }
     data.update({ guest: true }) unless spree_user_signed_in?
