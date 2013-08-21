@@ -36,3 +36,6 @@
             = email_field_tag :email, '', required: true, placeholder: 'mail@example.com'
       .submit.fleft
         input type="submit" value="Enter now"
+    .terms-line
+      ' Clicking ENTER NOW means you agree to the competition 
+      = link_to 'Terms & Conditions', terms_path
