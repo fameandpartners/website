@@ -51,6 +51,8 @@ Spree::User.class_eval do
       ::Spree::UserMailer.welcome_to_competition(user).deliver
 
       user
+    rescue
+      user ||= Spree::User.new
     end
 
     def generate_password(length = 8)
