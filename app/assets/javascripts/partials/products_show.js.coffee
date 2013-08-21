@@ -59,6 +59,6 @@ $(".products.show").ready ->
   # send to friend
   $('a.send-to-friend').on('click', (e) ->
     e.preventDefault()
-    product = $(e.currentTarget).data('product')
-    popups.showSendToFriendPopup(product)
+    productId = $(e.currentTarget).data('product')
+    popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
   )

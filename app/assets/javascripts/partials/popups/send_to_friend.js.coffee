@@ -2,8 +2,7 @@ window.popups or= {}
 
 #$('link').on('click', popups.showSendToFriendPopup)
 
-window.popups.showSendToFriendPopup = (productId, userEmail, userName) ->
-
+window.popups.showSendToFriendPopup = (productId, options = {}) ->
   # init
   if $('.modal.popup-placeholder').length == 0
     $('body.ecommerce #wrap #content').append(JST['templates/modal_popup']())
@@ -16,12 +15,12 @@ window.popups.showSendToFriendPopup = (productId, userEmail, userName) ->
     content:    $('.modal.popup-placeholder .modal-container')
     overlay:    $('.modal.popup-placeholder .overlay')
     productId:  productId
-    userName:   userName
-    userEmail:  userEmail
-    
+    analyticsLabel: options.analyticsLabel
+    guest: _.isEmpty(window.current_user)
 
     init: () ->
-      popup.container.find('.item').html(JST['templates/send_to_friend_form']())
+      templateData = { guest: popup.guest }
+      popup.container.find('.item').html(JST['templates/send_to_friend_form'](templateData))
       popup.container.find('.close-lightbox').on('click', popup.hide)
       popup.container.find('.save input.btn').on('click', popup.onButtonClick)
 
@@ -29,12 +28,9 @@ window.popups.showSendToFriendPopup = (productId, userEmail, userName) ->
 
       popup.container.find(".modal-title").text("Send to a friend")
       popup.container.find(".save input[type=submit]").val('Send')
-        
-      popup.container.find('#sender_name').val(popup.userName)
-      popup.container.find('#sender_email').val(popup.userEmail)
-      
+
       popup.container.find('#sender_name').on('change', _.debounce(popup.onInputChanged))
-      popup.container.find('#sender_email').on('change', _.debounce(popup.onInputChanged)) 
+      popup.container.find('#sender_email').on('change', _.debounce(popup.onInputChanged))
                                                                                            
       popup.container.find('#friend_name').on('change', _.debounce(popup.onInputChanged))
       popup.container.find('#friend_email').on('change', _.debounce(popup.onInputChanged))
@@ -45,6 +41,13 @@ window.popups.showSendToFriendPopup = (productId, userEmail, userName) ->
 
     show: () ->
       popup.container.show().center()
+      unless _.isEmpty(popup.analyticsLabel)
+        track.openedSendToFriend(popup.analyticsLabel)
+
+    successCallback: (data) ->
+      #data.success_message
+      unless _.isEmpty(popup.analyticsLabel)
+        track.sentSendToFriend(popup.analyticsLabel)
 
     hide: () ->
       popup.container.hide()
@@ -62,13 +65,16 @@ window.popups.showSendToFriendPopup = (productId, userEmail, userName) ->
       }
 
     errorMessage: () ->
-      $('<span>', {class: 'error', text: "Can't be empty"})
+      $('<span>', {
+        class: 'error',
+        text: "Can't be empty",
+        style: 'font-size: small; color: red;'
+      })
 
     formDataValid: () ->
       valid = true
-      _.each(['name', 'email'], (name) ->
-        input = popup.container.find("#sender_#{name}") 
-        input == popup.container.find("#friend_#{name}")
+      _.each(popup.container.find('input[required]'), (input) ->
+        input = $(input)
         valid = false unless popup.validateValue(input)
       )
       return valid
@@ -96,8 +102,7 @@ window.popups.showSendToFriendPopup = (productId, userEmail, userName) ->
           type: 'POST'
           dataType: 'json'
           data: formData
-          success: (data) ->
-            data.success_message
+          success: popup.successCallback
         )
         popup.hide()
   }

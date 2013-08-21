@@ -38,14 +38,12 @@ Spree::User.class_eval do
   end
 
   class << self
-    def create_user(name, email)
-      first_name = name.to_s.split.first
-      last_name   = name.to_s.split[1..-1].join
+    def create_user(args)
       new_password = generate_password(12)
       user = Spree::User.new(
-        first_name: first_name,
-        last_name: last_name || first_name,
-        email: email,
+        first_name: args[:first_name],
+        last_name: args[:last_name],
+        email: args[:email],
         password: new_password,
         password_confirmation: new_password
       )

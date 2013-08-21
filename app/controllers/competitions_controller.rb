@@ -14,7 +14,7 @@ class CompetitionsController < ApplicationController
     elsif params[:password].present? # try login existing user
       @user = warden.authenticate!(params.extract!(:email, :password))
     else
-      @user = Spree::User.create_user(params[:name], params[:email])
+      @user = Spree::User.create_user(params.extract!(:email, :first_name, :last_name))
     end
 
     if !@user.persisted?

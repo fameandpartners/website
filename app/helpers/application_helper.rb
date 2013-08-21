@@ -127,4 +127,13 @@ module ApplicationHelper
     end
     "#{protocol}://#{request.host_with_port}#{image_url}"
   end
+
+  def serialized_current_user
+    if spree_user_signed_in?
+      user = spree_current_user
+      { fullname: user.fullname, email: user.email }
+    else
+      {}
+    end
+  end
 end
