@@ -18,6 +18,10 @@ doctype html
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk')); 
 
+    - if spree_user_signed_in?
+      javascript:
+        window.current_user = #{raw serialized_current_user.to_json}
+
     - if spree_user_signed_in? and session['show_quiz'] and session.delete('show_quiz')
       javascript:
         $(function(){

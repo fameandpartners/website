@@ -94,14 +94,13 @@ module ProductsHelper
     render 'shared/share_buttons', product: product
   end
 
-  def send_to_a_friend_link(product, user = "")
-    if Rails.env.development?
-      if user != ""
-        link_to 'Send to a Friend', '#', class: 'send-to-friend', data: { product: product.permalink, userName: user.full_name, userEmail: user.email }
-      else
-        link_to 'Send to a Friend', '#', class: 'send-to-friend', data: { product: product.permalink }
-      end
-    end
+  def send_to_a_friend_link(product)
+    return '' unless Rails.env.development?
+
+    data = { product: product.permalink }
+    data.update({ guest: true }) unless spree_user_signed_in?
+
+    link_to 'Send to a Friend', '#', class: 'send-to-friend', data: data
   end
 
   def wishlist_move_to_cart_link(wishlist_item)

@@ -8,7 +8,7 @@ class Spree::ProductMailer < ActionMailer::Base
 
   default :from => configatron.noreply
 
-  def send_to_friend(user, product, friend_info)
+  def send_to_friend(product, friend_info)
     @product = product
     @friend_info = friend_info
     @user_name = friend_info[:sender_name]
