@@ -35,20 +35,18 @@ Spree::User.class_eval do
 
   class << self
     def create_user(name, email)
-      first_name = name.to_s.split.first
-      last_name   = name.to_s.split[1..-1].join
       new_password = generate_password(12)
       user = Spree::User.new(
-        first_name: first_name,
-        last_name: last_name || first_name,
+        first_name: name,
+        last_name: '',
         email: email,
         password: new_password,
         password_confirmation: new_password
       )
       user.skip_welcome_email = true
-      user.save!
-
-      ::Spree::UserMailer.welcome_to_competition(user).deliver
+      if user.save(validate: false)
+        ::Spree::UserMailer.welcome_to_competition(user).deliver
+      end
 
       user
     rescue
