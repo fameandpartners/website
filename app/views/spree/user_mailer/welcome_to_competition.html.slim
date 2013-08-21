@@ -25,10 +25,14 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
             tr
               td style="color: #666; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
                 p style="margin: 0 0 20px;" Thanks for signing up to Fame & Partners. As a member of our site, you now have access to our style quiz, your very own personalised boutique, and wishlist shopping feature. You'll also be the first to hear about our competitions, flash sales and special VIP promotions.
-                p style="margin: 0;" We're super excited to present our Spring/ Summer 13/14 collection, inspired by the best of red carpet fashion and designed to help you feel like a celebrity at your school formal.
+                p style="margin: 0 0 20px;" We're super excited to present our Spring/ Summer 13/14 collection, inspired by the best of red carpet fashion and designed to help you feel like a celebrity at your school formal.
                 p style="margin: 0;" Your credentials:
-                p style="margin: 0;" email: #{ @user.email }
-                p style="margin: 0;" password: #{ @user.password }
+                p style="margin: 0;"
+                  strong email: 
+                  ' #{ @user.email }
+                p style="margin: 0;"
+                  strong password: 
+                  ' #{ @user.password }
             tr
               td height="30"
             tr
@@ -44,7 +48,8 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                 '  |  
                 a href="http://blog.fameandpartners.com" style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Blog 
             tr          
-              td height="20" 
+              td height="20"
       td width="38"
       td width="270"
         img src="http://www.fameandpartners.com/images/email/girlpurple.jpg" width="270" height="560" alt=""
+      td width="38"
