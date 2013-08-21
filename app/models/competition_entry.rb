@@ -16,8 +16,11 @@ class CompetitionEntry < ActiveRecord::Base
 
   class << self
     def create_for(user, invitation = nil)
+      return user.competition_entry if user.competition_entry.present?
+
       entry = CompetitionEntry.new
       entry.user = user
+      entry.master = true
 
       if invitation.present?
         entry.inviter = invitation.user

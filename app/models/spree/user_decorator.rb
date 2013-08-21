@@ -33,6 +33,10 @@ Spree::User.class_eval do
     end
   end
 
+  def competition_entry
+    self.entries.where(master: true).first
+  end
+
   class << self
     def create_user(name, email)
       new_password = generate_password(12)
