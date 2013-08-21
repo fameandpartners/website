@@ -49,7 +49,7 @@ Spree::ProductsController.class_eval do
     if spree_user_signed_in?
       user_info.update(
         sender_name: spree_current_user.fullname,
-        send_email: spree_current_user.email
+        sender_email: spree_current_user.email
       )
     end
 
