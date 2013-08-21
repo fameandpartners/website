@@ -7,7 +7,9 @@ module Overrides
         attr_accessor :skip_welcome_email
         attr_accessible :first_name, :last_name
 
-        validates :first_name, presence: true
+        validates :first_name,
+                  :last_name,
+                  :presence => true
 
         after_create :send_welcome_email, unless: Proc.new { |a| a.skip_welcome_email }
         after_update :synchronize_with_campaign_monitor
