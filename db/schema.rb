@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807012751) do
+ActiveRecord::Schema.define(:version => 20130819173717) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -167,6 +167,23 @@ ActiveRecord::Schema.define(:version => 20130807012751) do
     t.text     "celebrity_description"
   end
 
+  create_table "competition_entries", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "inviter_id"
+    t.integer  "invitation_id"
+    t.boolean  "master",        :default => false
+    t.datetime "created_at"
+  end
+
+  create_table "competition_invitations", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "token",           :limit => 50
+    t.string   "email"
+    t.string   "name"
+    t.string   "invitation_type", :limit => 50
+    t.datetime "created_at"
+  end
+
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
     t.string   "file_file_name"
@@ -188,6 +205,23 @@ ActiveRecord::Schema.define(:version => 20130807012751) do
     t.boolean  "ghost",         :default => true
     t.date     "required_at"
     t.string   "school_name"
+  end
+
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "product_style_profiles", :force => true do |t|

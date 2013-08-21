@@ -1,0 +1,18 @@
+.top-logo
+  = link_to root_path do
+    = image_tag 'logo-white.png', width: 215, height: 15, alt: ''
+
+.content-wrapper
+  .signup-form.aligncenter
+    = form_tag invite_competition_path, class: 'form' do
+      - 8.times do |index|
+        .form-fields
+          .input
+            = text_field_tag "name[#{index}]", '', placeholder: 'Name'
+          .input
+            = text_field_tag "email[#{index}]", '', placeholder: 'Email'
+      .submit
+        .fleft
+          input.light type="submit" value="Skip this step"
+        .fleft
+          input type="submit" value="Get more entries"

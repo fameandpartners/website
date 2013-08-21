@@ -141,9 +141,12 @@ FameAndPartners::Application.routes.draw do
 
   root :to => 'index#show'
 
-  get '/landing' => 'index#landing'
-  get '/landing2' => 'index#landing2'
-  get '/landing3' => 'index#landing3'
+  resource :competition, only: [:show] do
+    post 'enter', on: :member
+    get 'share(/:user_id)', on: :member, action: 'share', as: 'share'
+    post 'invite', on: :member
+    get 'stylequiz', on: :member
+  end
 
   resource :quiz, :only => [:show] do
     resources :questions, :only => [:index, :show] do

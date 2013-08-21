@@ -10,7 +10,7 @@ module Overrides
                   :last_name,
                   :presence => true
 
-        after_create :send_welcome_email
+        after_create :send_welcome_email, unless: Proc.new { |a| a.skip_welcome_email }
         after_update :synchronize_with_campaign_monitor
 
         has_attached_file :avatar

@@ -1,0 +1,36 @@
+.top-logo
+  = link_to root_path do
+    = image_tag 'logo-white.png', width: 215, height: 15, alt: ''
+
+.image-container = image_tag 'image-landing.png', width: 1162, height: 1091, alt: 'Win a celebrity inspired formal outfit'
+
+.signup-form.aligncenter
+  .signup-title
+    = image_tag 'title-landing.png', width: 646, height: 61, alt: 'Enter using facebook or your email'
+  .signup-fields
+    = form_tag enter_competition_path, class: 'form' do
+      /= render 'shared/error_messages', target: @user
+      = hidden_field_tag :invite, params[:invite]
+
+      = link_to 'Sign up with facebook',
+        fb_auth_path(competition: true, invite: params[:invite]), class: 'facebook-signup fleft'
+      .or.fleft
+        span or
+      .form-fields.fleft
+        - if (user = try_spree_current_user).present?
+          .input
+            = text_field_tag :first_name, user.first_name, placeholder: 'First Name'
+          .input
+            = text_field_tag :last_name, user.last_name, placeholder: 'Last Name'
+        - elsif (email = params[:member]).present?
+          .input
+            = email_field_tag :email, email, required: true, placeholder: 'mail@example.com'
+          .input
+            = password_field_tag :password, '', required: true, placeholder: 'password'
+        - else
+          .input
+            = text_field_tag :name, '', required: true, placeholder: 'John Smith'
+          .input
+            = email_field_tag :email, '', required: true, placeholder: 'mail@example.com'
+      .submit.fleft
+        input type="submit" value="Enter now"

@@ -1,4 +1,4 @@
-.landing, .landing2, .landing3 {
+.competitions, .landing2, .landing3 {
   background: image-url('bg-main.jpg') 0 0 repeat;
   #wrap {
     margin: 0;
@@ -15,8 +15,7 @@
     }
   }
 }
-
-.landing {
+.competitions.show, .competitions.enter {
   #content {
     .image-container {
       padding: 0 20px;
@@ -73,15 +72,14 @@
   }
 }
 
-.landing2, .landing3 {
+.competitions.share, .competitions.stylequiz, .landing2, .landing3 {
   .content-wrapper {
     overflow: hidden;
     width: 1200px;
     margin: 0 auto;
   }
 }
-
-.landing2 {
+.competitions.share {
   .content-wrapper {
     background: image-url('image-landing-2.png') center 28px no-repeat #fff;
   }
@@ -106,8 +104,7 @@
     margin: 0 0 8px 14px;
   }
 }
-
-.landing3 {
+.competitions.stylequiz, .landing3 {
   .content-wrapper {
     background: #fff;
     padding: 46px 0;

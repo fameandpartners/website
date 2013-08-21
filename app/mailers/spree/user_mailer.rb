@@ -9,6 +9,12 @@ class Spree::UserMailer < ActionMailer::Base
          :subject => t('emails.subjects.users.welcome') + ' to ' + Spree::Config[:site_name])
   end
 
+  def welcome_to_competition(user)
+    @user = user
+    mail(:to => user.email,
+         :subject => t('emails.subjects.users.welcome') + ' to ' + Spree::Config[:site_name])
+  end
+
   def reset_password_instructions(user)
     @resource = user
     @user = user
@@ -36,6 +42,4 @@ class Spree::UserMailer < ActionMailer::Base
     mail(:to => @user.email,
          :subject => Spree::Config[:site_name] + ' ' + t('emails.subjects.users.style_profile'))
   end  
-  
-  
 end

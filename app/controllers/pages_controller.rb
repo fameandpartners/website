@@ -35,6 +35,10 @@ class PagesController < Spree::StoreController
       session[:spree_user_return_to] = main_app.new_custom_dress_path
     elsif params[:quiz]
       session[:show_quiz] = true
+    elsif params[:competition]
+      session[:spree_user_return_to] = share_competition_path
+      session[:invite] = params[:invite]
+      session[:competition] = params[:competition]
     end
 
     if session[:sign_up_reason].blank?
