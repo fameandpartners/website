@@ -29,7 +29,9 @@
             = password_field_tag :password, '', required: true, placeholder: 'password'
         - else
           .input
-            = text_field_tag :name, '', required: true, placeholder: 'John Smith'
+            = text_field_tag :first_name, '', placeholder: 'First Name'
+          .input
+            = text_field_tag :last_name, '', placeholder: 'Last Name'
           .input
             = email_field_tag :email, '', required: true, placeholder: 'mail@example.com'
       .submit.fleft
