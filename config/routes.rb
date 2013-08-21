@@ -115,16 +115,16 @@ FameAndPartners::Application.routes.draw do
   get '/privacy' => 'statics#ecom_privacy'
   get '/legal'   => 'statics#legal'
   get '/faqs'   => 'statics#faqs'
-  get 'statics/custom_dresses'   => 'statics#custom_dresses'
   get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works 
   get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program 
-  get '/custom-dresses'   => 'statics#custom_dresses', :as => :custom_dresses
   get '/compterms' => 'statics#comp_terms'
+
+  get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
+  post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
   
   # External URLs
   get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
   get '/workshops', to: redirect('http://www.fameandpartners.com/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
-  
   
 
   # MonkeyPatch for redirecting to Custom Dress page
