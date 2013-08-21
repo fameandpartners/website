@@ -18,7 +18,7 @@
 .competitions.show, .competitions.enter {
   #content {
     .image-container {
-      padding: 0 20px;
+      padding: 20px 20px 0;
       width: 1162px;
       background: #fff;
       margin: 0 auto;
@@ -68,6 +68,16 @@
     }
     .submit {
       margin: 1px 0 0;
+    }
+    .terms-line {
+      clear: both;
+      padding: 26px 0 0;
+      font-size: 18px;
+      color: #363636;
+      font: 400 italic 18px/1.2 $fontFour;
+      a {
+        color: #363636;
+      }
     }
   }
 }

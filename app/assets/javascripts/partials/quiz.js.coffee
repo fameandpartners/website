@@ -1,4 +1,5 @@
 $ ->
+
   window.showStyleQuiz = ->
     $(".quiz-box").show()
     $("body").css "overflow", "hidden"
@@ -41,3 +42,7 @@ $ ->
     $form = $(event.target).parents("form")
     $form.find("li:not(:has(:input:checked))").removeClass "active"
     $form.find("li:has(:input:checked)").addClass "active"
+
+  if location.href.match(/[\?\&]osq\=1/)
+    showStyleQuiz()
+    bindStyleQuizEvents()
