@@ -78,4 +78,10 @@ window.track = {
 
   search: (label) ->
     track.event('Searches', 'Searched', label)
+  
+  openedSendToFriend: (label) ->
+    track.event('SendToFriend', 'Opened', label)
+
+  sentSendToFriend: (label) ->
+    track.event('SendToFriend', 'Sent', label)
 }

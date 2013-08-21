@@ -45,7 +45,7 @@ Spree::ProductsController.class_eval do
   end
 
   def send_to_friend
-    user_info = params.extract!(:name, :email, :message)
+    user_info = params.extract!(:sender_name, :sender_email, :name, :email, :message)
     Spree::ProductMailer.send_to_friend(try_spree_current_user, @product, user_info).deliver
 
     render json: { success_message: 'successfully sended' }

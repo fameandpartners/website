@@ -51,7 +51,10 @@ ruby:
 
         .share-buttons
           .fleft = share_buttons(@product)
-          .fright = send_to_a_friend_link(@product)
+          - if current_spree_user.present?
+            .fright = send_to_a_friend_link(@product, current_spree_user)
+          - else
+            .fright = send_to_a_friend_link(@product)
     .grid-45
       .product-info
         .name = @product.name

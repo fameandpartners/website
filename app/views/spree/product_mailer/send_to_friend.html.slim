@@ -1,83 +1,28 @@
-doctype html
-html style="background: #fff none repeat scroll 0% 0%;"
-  head
-    meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
-    title Fame & Partners | www.fameandpartners.com
-    css:
-      body { width:100% !important; color: #000; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; margin: 0; padding: 0; background: rgb(255, 255, 255) none repeat scroll 0% 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; font-family: 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; font-size: 12px; }
-      table, table td { border-collapse: collapse; }
-      .logo { text-align: center; }
-      .logo img { border: 0; }
-      .main-content { font: 400 12px/1.5 Arial, sans-serif; color: #979797; }
-      .main-content h1 { color: #e19889; font: 400 italic 28px/1.2 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif; margin: 0 0 12px; }
-      .main-content h2 { color: #000; font: 400 italic 18px/1.2 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif; margin: 0 0 50px; }
-
-  body yahoo="fix" style="margin: 0pt; padding: 0pt; background: #fff none repeat scroll 0% 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; color: #000;"
-
-    table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
-      tbody
-        tr
-          td width="10"
-          td style="background: #fff  none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;" valign="top"
-            table align="center" border="0" cellpadding="0" cellspacing="0" width="700"
-              tbody
-                tr
-                  td height="28"
-                tr
-                  td.logo style="text-align: left;"
-                    a href="http://fameandpartners.com"
-                      img src="http://fameandpartners.com/images/email/logo.png" width="385" height="28" alt="Fame&Partners" style="border: 0;"
-                tr
-                  td height="14"
-                tr
-                  td height="2" style="background: #464646; height: 2px;"
-                tr
-                  td height="36"
-                tr
-                  td
-                    table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
-                      tbody
-                        tr
-                          td width="254"
-                            - product_show_url = "#{ActionMailer::Base.default_url_options[:host]}#{collection_product_path(@product)}"
-                            - if (product_image = @product.images.first).present?
-                              = link_to image_tag(product_image.attachment(:product), width: 254, style: "border: 0;", alt: "#{@product.name}"), product_show_url
-                          td width="28"
-                          td.main-content style="font: 400 12px/1.5 Arial, sans-serif; color: #979797;"
-                            h1 style="color: #e19889; font: 400 italic 28px/1.2 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif; margin: 0 0 12px;"
-                              ' #{@friend_info[:name]},
-                              br
-                              ' what do you think of this dress?
-                            h2 style="color: #000; font: 400 italic 18px/1.2 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif; margin: 0 0 50px;" #{@friend_info[:message]}
-                            .product-name style="margin: 0 0 16px;"
-                              a href="#" style="text-decoration: none; color: #000; text-transform: uppercase; font-size: 14px;" #{@product.name}
-                            .product-description style="margin: 0 0 16px;" #{@product.description}
-                            .price style="color: #363636; font-size: 14px; font-weight: 700;" #{@product.price_in(Spree::Config[:currency]).display_price}
-                        tr
-                          td colspan="3" height="10"
-                        tr
-                          td colspan="3" style="color: #000; font: 400 italic 13px/1.2 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif;"
-                            ' Your,
-                            br
-                            ' #{{ @user_name }}
-                tr
-                  td height="36"
-                tr
-                  td height="1" style="background: #464646; height: 1px;"
-                tr
-                  td height="16"
-                tr
-                  td.logo style="text-align: center;"
-                    a href="http://fameandpartners.com"
-                      img src="http://fameandpartners.com/images/email/logo-small.png" width="218" height="16" alt="Fame&Partners" style="border: 0;"
-                tr
-                  td height="10"
-                tr
-                  td style="text-align: center; color: #808080; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
-                    ' 2013 FAME & PARTNERS &copy; | 
-                    a href="#{main_app.terms_url}" style="color: #808080;" Legal Note
-                    |  | 
-                    a href="#{main_app.privacy_url}" style="color: #808080;" Privacy Policy
-                tr
-                  td height="28"
-          td width="10"
+table align="center" border="0" cellpadding="10" cellspacing="0" width="100%"
+  tbody
+    tr                      
+      td colspan="3" height="30"
+    tr
+      td width="254"
+        - googleurl = "?utm_source=transactionalemail&utm_medium=email&utm_term=sendtofriend&utm_content=product&utm_campaign=sendtofriend"
+        - product_show_url = "#{ActionMailer::Base.default_url_options[:host]}#{collection_product_path(@product)+googleurl}"
+        - if (product_image = @product.images.first).present?
+          = link_to image_tag(product_image.attachment(:product), width: 254, style: "border: 0;", alt: "#{@product.name}"), product_show_url
+      td width="10"
+      td.main-content style="font: 400 12px/1.5 Arial, sans-serif; color: #979797;"
+        h1 style="color: #e19889; font: 400 italic 32px/1.1 'Times New Roman', Georgia, 'Trebuchet MS', sans-serif; margin: 0 0 5px;"
+          ' What do you think of this dress?
+        h2 style="color: #000; font: 400 italic 18px/1.2 'Times New Roman', Georgia, 'Trebuchet MS', sans-serif; margin: 0 0 20px;" #{@friend_info[:message]}
+        .product-name style="margin: 0 0 16px;"
+          a href="#{product_show_url}" style="text-decoration: none; color: #000; text-transform: uppercase; font-size: 18px; text-decoration: underline;" #{@product.name}
+        .product-description style="margin: 0 0 16px;" #{@product.description}
+        .price style="color: #363636; font-size: 14px; font-weight: 700;" #{@product.price_in(Spree::Config[:currency]).display_price}
+        .salutation style="margin-top: 40px;"
+          ' Yours Sincerely,
+          br
+          ' #{{ @user_name.titleize }}
+          
+          p P.S. Just reply to this email to tell me what you think.
+            
+    tr
+      td colspan="3" height="30"

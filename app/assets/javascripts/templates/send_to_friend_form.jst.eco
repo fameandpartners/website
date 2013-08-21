@@ -1,12 +1,22 @@
 <div class="item">
   <div class="form">
-    <div class="item-details input">
-      <label for="friend_name">Your friend name <span class="required">*</span></label>
-      <input type="text" size="30" name="friend_name" id="friend_name" placeholder="John Smith">
+    <div class="member-fields">
+      <div class="item-details input">
+        <label for="sender_name">Your name <span class="required">*</span></label>
+        <input type="text" size="30" sender_name="sender_name" id="sender_name" placeholder="your first and last name">
+      </div>
+      <div class="item-details input">
+        <label for="sender_email">Your email <span class="required">*</span></label>
+        <input type="text" size="30" sender_email="sender_email" id="sender_email" placeholder="your email address">
+      </div>
     </div>
     <div class="item-details input">
-      <label for="friend_email">Your friend email <span class="required">*</span></label>
-      <input type="text" size="30" email="friend_email" id="friend_email" placeholder="john.smit@example.com">
+      <label for="friend_name">Your friend's name <span class="required">*</span></label>
+      <input type="text" size="30" name="friend_name" id="friend_name" placeholder="your friends first and last name">
+    </div>
+    <div class="item-details input">
+      <label for="friend_email">Your friend's email <span class="required">*</span></label>
+      <input type="text" size="30" email="friend_email" id="friend_email" placeholder="your friends email address">
     </div>
     <div class="item-details input">
       <label for="friend_message">Message</label>

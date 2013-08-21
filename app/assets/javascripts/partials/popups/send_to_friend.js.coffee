@@ -2,7 +2,7 @@ window.popups or= {}
 
 #$('link').on('click', popups.showSendToFriendPopup)
 
-window.popups.showSendToFriendPopup = (productId) ->
+window.popups.showSendToFriendPopup = (productId, userEmail, userName) ->
 
   # init
   if $('.modal.popup-placeholder').length == 0
@@ -16,6 +16,9 @@ window.popups.showSendToFriendPopup = (productId) ->
     content:    $('.modal.popup-placeholder .modal-container')
     overlay:    $('.modal.popup-placeholder .overlay')
     productId:  productId
+    userName:   userName
+    userEmail:  userEmail
+    
 
     init: () ->
       popup.container.find('.item').html(JST['templates/send_to_friend_form']())
@@ -26,7 +29,13 @@ window.popups.showSendToFriendPopup = (productId) ->
 
       popup.container.find(".modal-title").text("Send to a friend")
       popup.container.find(".save input[type=submit]").val('Send')
-
+        
+      popup.container.find('#sender_name').val(popup.userName)
+      popup.container.find('#sender_email').val(popup.userEmail)
+      
+      popup.container.find('#sender_name').on('change', _.debounce(popup.onInputChanged))
+      popup.container.find('#sender_email').on('change', _.debounce(popup.onInputChanged)) 
+                                                                                           
       popup.container.find('#friend_name').on('change', _.debounce(popup.onInputChanged))
       popup.container.find('#friend_email').on('change', _.debounce(popup.onInputChanged))
 
@@ -45,6 +54,8 @@ window.popups.showSendToFriendPopup = (productId) ->
 
     getFormData: () ->
       return {
+        sender_name: popup.container.find('#sender_name').val()
+        sender_email: popup.container.find('#sender_email').val()
         name: popup.container.find('#friend_name').val()
         email: popup.container.find('#friend_email').val()
         message: popup.container.find('#friend_message').val()
@@ -56,7 +67,8 @@ window.popups.showSendToFriendPopup = (productId) ->
     formDataValid: () ->
       valid = true
       _.each(['name', 'email'], (name) ->
-        input = popup.container.find("#friend_#{name}")
+        input = popup.container.find("#sender_#{name}") 
+        input == popup.container.find("#friend_#{name}")
         valid = false unless popup.validateValue(input)
       )
       return valid

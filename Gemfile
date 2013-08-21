@@ -19,6 +19,7 @@ gem 'newrelic_rpm'
 gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
+gem 'titleize'
 
 # assets
 gem 'jquery-rails'

@@ -94,9 +94,13 @@ module ProductsHelper
     render 'shared/share_buttons', product: product
   end
 
-  def send_to_a_friend_link(product)
+  def send_to_a_friend_link(product, user = "")
     if Rails.env.development?
-      link_to 'Send to a Friend', '#', class: 'send-to-friend', data: { product: product.permalink }
+      if user != ""
+        link_to 'Send to a Friend', '#', class: 'send-to-friend', data: { product: product.permalink, userName: user.full_name, userEmail: user.email }
+      else
+        link_to 'Send to a Friend', '#', class: 'send-to-friend', data: { product: product.permalink }
+      end
     end
   end
 
