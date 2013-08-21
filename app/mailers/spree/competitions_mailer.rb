@@ -6,6 +6,6 @@ class Spree::CompetitionsMailer < ActionMailer::Base
   def invite(invitation)
     @invitation = invitation
 
-    mail(:to => invitation.email, :subject => "Subject: Win a celebrity inspired formal outfit from Fame & Partners")
+    mail(:to => invitation.email, :subject => "Win a celebrity inspired formal outfit from Fame & Partners")
   end
 end
