@@ -98,11 +98,17 @@
   }
 }
 .competitions.share {
+  .facebook-send {
+    position: absolute;
+    right: 186px;
+    top: 268px;
+  }
   .content-wrapper {
+    position: relative;
     background: image-url('image-landing-2.png') center 28px no-repeat #fff;
   }
   .signup-form {
-    padding: 268px 80px 0 0;
+    padding: 368px 80px 0 0;
     float: right;
   }
   .form-fields, .submit {
