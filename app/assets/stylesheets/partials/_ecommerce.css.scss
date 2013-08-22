@@ -687,9 +687,13 @@
         }
       }
       .tab-content {
-        padding: 14px 18px;
+        padding: 20px 18px;
+        line-height: 1.3em;
         .info {
           padding: 5px 0 10px;
+        }  
+        p{
+          padding: 5px 0 0 0;
         }
       }
     }
