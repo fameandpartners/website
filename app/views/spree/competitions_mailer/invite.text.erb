@@ -1,14 +1,12 @@
-Subject: Win a celebrity inspired formal outfit from Fame & Partners 
+Win a celebrity inspired formal outfit from Fame & Partners 
 
 Hi <%= @invitation.name %>,
 
 Your friend <%= @invitation.user.full_name %> entered a competition and wants to share it with you.
 
-Win a celebrity inspired formal outfit
-Over $800 worth of fashion for your formal event.
-
+Win a celebrity inspired formal outfit $1000 value.
 1. Formal Dress valued up to $399
-2. Shoes to match from Shoes of Prey up to $249
-3. Accessories picked by out stylist up to $249
+2. Shoes & Bag to match from Betts - unlimited value
+3. Accessories and styling prep sourced just for you up to $200  
 
-a href="<%= main_app.competition_url(invite: @invitation.token) %>" Enter now to be in the chance to win!
+a href="<%= main_app.competition_url(invite: @invitation.token)+'&utm_source=transactional&utm_medium=email&utm_term=competitioninvite&utm_content=calltoaction&utm_campaign=competition' %>" Enter now to be in the chance to win!

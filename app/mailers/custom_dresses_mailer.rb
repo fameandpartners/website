@@ -9,7 +9,7 @@ class CustomDressesMailer < ActionMailer::Base
     mail(
       to: 'team@fameandpartners.com',
       from: @info[:email],
-      subject: "Custom dress request"
+      subject: "Custom Dress Enquiry"
     )
   end
 end

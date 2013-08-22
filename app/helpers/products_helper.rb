@@ -100,7 +100,7 @@ module ProductsHelper
     data = { product: product.permalink }
     data.update({ guest: true }) unless spree_user_signed_in?
 
-    link_to 'Send to a Friend', '#', class: 'send-to-friend', data: data
+    link_to 'Ask mum', '#', class: 'send-to-friend askmumbtn', data: data, title: 'Send this dress to your mum, aunty, dad or anyone that will help you buy this dress'
   end
 
   def wishlist_move_to_cart_link(wishlist_item)

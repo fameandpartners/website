@@ -12,16 +12,16 @@
       /= render 'shared/error_messages', target: @user
       = hidden_field_tag :invite, params[:invite]
 
-      = link_to 'Sign up with facebook',
+      .hide = link_to 'Sign up with facebook',
         fb_auth_path(competition: true, invite: params[:invite]), class: 'facebook-signup fleft'
-      .or.fleft
+      .hide.or.fleft
         span or
       .form-fields.fleft
         - if (user = try_spree_current_user).present?
           .input
-            = text_field_tag :first_name, user.first_name, placeholder: 'First Name'
+            = text_field_tag :first_name, user.first_name, placeholder: 'First Name', disabled: true
           .input
-            = text_field_tag :last_name, user.last_name, placeholder: 'Last Name'
+            = text_field_tag :last_name, user.last_name, placeholder: 'Last Name', disabled: true
         - elsif (email = params[:member]).present?
           .input
             = email_field_tag :email, email, required: true, placeholder: 'mail@example.com'
@@ -38,4 +38,4 @@
         input type="submit" value="Enter now"
     .terms-line
       ' Clicking ENTER NOW means you agree to the competition 
-      = link_to 'Terms & Conditions', terms_path
+      = link_to 'Terms & Conditions', compterms_path

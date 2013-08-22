@@ -11,6 +11,7 @@ ruby:
 
 .wrap
   .product-page.grid-container
+    
     .grid-55
       .tabs
         ul.tabs-links
@@ -51,9 +52,9 @@ ruby:
 
         .share-buttons
           .fleft = share_buttons(@product)
-          .fright = send_to_a_friend_link(@product)
     .grid-45
       .product-info
+        .ask-mum-badge = send_to_a_friend_link(@product)
         .name = @product.name
         .desc = @product.property('short_description')
         .price-delivery
