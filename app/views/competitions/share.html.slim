@@ -6,7 +6,7 @@
   .clearfix
     .facebook-send
       #fb-root
-      .fb-send data-href="http://fameandpartners.com"
+      .fb-send data-href="http://fameandpartners.com#{ competition_path(invite: @invitation.token) }"
     .signup-form.aligncenter
       = form_tag invite_competition_path, class: 'form' do
         - 8.times do |index|

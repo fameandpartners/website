@@ -32,6 +32,8 @@ class CompetitionsController < ApplicationController
   def share
     @user = try_spree_current_user
     ensure_user_joined_to_competition(@user)
+
+    @invitation = CompetitionInvitation.fb_invitation_from(@user)
   end
 
   # send invitaitons & redirect to last step
@@ -48,9 +50,7 @@ class CompetitionsController < ApplicationController
 
   # logged through fb user comes here with GET request
   def ensure_user_joined_to_competition(user)
-    if session[:competition] && user.competition_entry.blank?
-      CompetitionEntry.create_for(user, get_invitation)
-    end
+    CompetitionEntry.create_for(user, get_invitation)
   end
 
   def create_invitations(names, emails)
