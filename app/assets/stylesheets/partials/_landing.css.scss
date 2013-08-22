@@ -29,7 +29,7 @@
       background: #fe9f91;
       margin: 0 auto;
       .signup-title {
-        margin: 0 0 42px;
+        margin: 0 0 22px;
       }
     }
     .signup-fields {
@@ -63,7 +63,15 @@
       float: left;
       margin: 0 12px 0 0;
       input {
-        width: 200px;
+        width: 200px; 
+        
+        &:disabled{
+          box-shadow: none !important;
+          border: none;
+          color: #999;
+          font-style: italic;
+          font-size: 16px;
+        }
       }
     }
     .submit {
@@ -120,15 +128,6 @@
     padding: 46px 0;
     text-align: center;
     position: relative;
-    .show-style-quiz {
-      position: absolute;
-      right: 361px;
-      top: 662px;
-      width: 134px;
-      height: 28px;
-      overflow: hidden;
-      text-align: left;
-      text-indent: -999px;
-    }
+
   }
 }
