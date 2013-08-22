@@ -1,5 +1,6 @@
 <div class="item">
   <div class="form">
+    <div class="askmumintro">Send this dress to your mum, your dad, your sister, your aunt - whoever you need to get on board to help you buy it.</div>
     <% if @guest: %>
       <div class="member-fields">
         <div class="item-details input">
@@ -13,12 +14,12 @@
       </div>
     <% end %>
     <div class="item-details input">
-      <label for="friend_name">Your friend's name <span class="required">*</span></label>
-      <input type="text" size="30" name="friend_name" id="friend_name" required placeholder="your friends first and last name">
+      <label for="friend_name">Recipient's name <span class="required">*</span></label>
+      <input type="text" size="30" name="friend_name" id="friend_name" required placeholder="recipient's first and last name">
     </div>
     <div class="item-details input">
-      <label for="friend_email">Your friend's email <span class="required">*</span></label>
-      <input type="text" size="30" email="friend_email" id="friend_email" required placeholder="your friends email address">
+      <label for="friend_email">Recipient's email <span class="required">*</span></label>
+      <input type="text" size="30" email="friend_email" id="friend_email" required placeholder="recipient's email address">
     </div>
     <div class="item-details input">
       <label for="friend_message">Message</label>

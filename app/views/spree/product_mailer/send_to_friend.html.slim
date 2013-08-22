@@ -4,25 +4,32 @@ table align="center" border="0" cellpadding="10" cellspacing="0" width="100%"
       td colspan="3" height="30"
     tr
       td width="254"
-        - googleurl = "?utm_source=transactionalemail&utm_medium=email&utm_term=sendtofriend&utm_content=product&utm_campaign=sendtofriend"
+        - googleurl = "?utm_source=transactionalemail&utm_medium=email&utm_term=mum&utm_content=calltoaction&utm_campaign=sendtofriend"
         - product_show_url = "#{ActionMailer::Base.default_url_options[:host]}#{collection_product_path(@product)+googleurl}"
         - if (product_image = @product.images.first).present?
           = link_to image_tag(product_image.attachment(:product), width: 254, style: "border: 0;", alt: "#{@product.name}"), product_show_url
       td width="10"
       td.main-content style="font: 400 12px/1.5 Arial, sans-serif; color: #979797;"
-        h1 style="color: #e19889; font: 400 italic 32px/1.1 'Times New Roman', Georgia, 'Trebuchet MS', sans-serif; margin: 0 0 5px;"
+        h1 style="width: 260px; color: #e19889; font: 400 italic 32px/1.1 'Times New Roman', Georgia, 'Trebuchet MS', sans-serif; margin: 0 0 5px;"
           ' What do you think of this dress?
         h2 style="color: #000; font: 400 italic 18px/1.2 'Times New Roman', Georgia, 'Trebuchet MS', sans-serif; margin: 0 0 20px;" #{@friend_info[:message]}
-        .product-name style="margin: 0 0 16px;"
+        .product-name style="margin: 0 0 4px; color: #000;"
           a href="#{product_show_url}" style="text-decoration: none; color: #000; text-transform: uppercase; font-size: 18px; text-decoration: underline;" #{@product.name}
         .product-description style="margin: 0 0 16px;" #{@product.description}
         .price style="color: #363636; font-size: 14px; font-weight: 700;" #{@product.price_in(Spree::Config[:currency]).display_price}
+        table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+          tbody
+            tr
+              td width='140'
+                .buynow style="margin: 20px 0 5px; float: left"
+                  a href="#{product_show_url}" style="display: block; width: 130px; height: 38px; background: #000; color: #fff; text-decoration: none; text-transform: uppercase; text-align: center; font: 400 18px/38px 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" BUY NOW
+              td text-align="left"
+                .laybuy style="margin: 14px 0 0 0;"
+                  a href="mailto:team@fameandpartners.com?subject=Laybuy Enquiry about #{@product.sku} from Ask Mum" style="color: #000; text-decoration: underline; font: 400 14px/18px 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Layby this dress
         .salutation style="margin-top: 40px;"
           ' Yours Sincerely,
           br
           ' #{{ @user_name.titleize }}
-          
-          p P.S. Just reply to this email to tell me what you think.
             
     tr
       td colspan="3" height="30"
