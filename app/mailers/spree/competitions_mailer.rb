@@ -1,5 +1,5 @@
 class Spree::CompetitionsMailer < ActionMailer::Base
-  layout 'mailer'
+  layout 'mailer', except: [:marketing_email]
 
   default :from => configatron.noreply
 
