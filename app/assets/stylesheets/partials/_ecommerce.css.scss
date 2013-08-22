@@ -337,17 +337,26 @@
   }
 }
 
+.products.show {
+  #content {
+    .wrap {
+      overflow: visible;
+    }
+  }
+}
+
 .product-page {
   margin: 34px 0 0;
   .grid-55 {
     padding: 0;
   }  
-  .askmumbtn{
+  .askmumbtn {
     width: 110px;
     height: 110px;
+    text-indent: -999px;
     position: absolute;
     top: -30px;
-    right: -30px;
+    right: -60px;
     z-index: 1200;
     background: image-url('askmum.png') center 0 no-repeat;
   }
@@ -486,12 +495,12 @@
       font-size: 24px;
       font-weight: 300;
       color: #000;
-      margin: 0 0 4px;
+      margin: 0 70px 4px 0;
     }
     .desc {
       font-size: 16px;
       color: #999898;
-      margin: 0 0 14px;
+      margin: 0 70px 14px 0;
       &.small {
         margin: 30px 0;
         font-size: 14px;
