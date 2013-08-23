@@ -1343,6 +1343,26 @@
         display: none;
       }
     }
+    .help-info{
+      padding: 10px 0;
+      font-family: $fontOne;
+      font-weight: 300;
+      .promocode-help{
+        font-family: $fontTwo;
+        padding: 20px 0 10px;
+        b{
+          display: block-inline;
+          font-style: italic;
+          font-size: 18px;
+        }
+        span{
+          font-family: $fontOne;
+          font-weight: 300;
+          font-size: 13px;
+          display: block;
+        }
+      }
+    }
     .accordion-container {
       font: 300 14px/1.1 $fontOne;
       .accordion-title {
@@ -1483,8 +1503,21 @@
         }
         .coupon-block {
           margin: 20px 0 0;
+          label{
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+          }
+          .promo-help{
+              display: block;
+              font-size: 12px !important;
+              text-transform: normal !important;
+              font-weight: 300;
+              margin: 0 0 8px 0;
+            }
           .submit {
-            margin: 25px 0 0;
+            margin: 54px 0 0;
             input {
               border: 0;
               padding: 0 26px;

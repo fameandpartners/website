@@ -21,11 +21,12 @@
     = form_for @order, url: update_checkout_path('payment'),remote: true do |f|
       .grid-50
         .input
-          label Enter your coupon code
+          label Enter coupon or promocode
+          .promo-help You might have seen one in an email, from a friend or even by completing our Style Quiz.
           = f.text_field :coupon_code
       .grid-50
         .submit
-          = f.submit 'Redeem'
+          = f.submit 'Redeem Now'
 
 .grid-container
   .grid-100
