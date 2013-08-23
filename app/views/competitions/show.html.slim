@@ -1,3 +1,13 @@
+- content_for :head do
+  meta property="og:site_name" content="Fame & Partners - Beautiful dresses crafted from red carpet looks"
+  meta property="og:locale" content="en_US"
+  meta property="og:title" content="Win a $1000 Celebrity Inspired Formal Outfit"
+  meta property="og:type" content="website"
+  meta property="og:description" content="Win a $1000 Celebrity Inspired Formal Outfit. Fame & Partners is committed to bringing the world of celebrity fashion to you. We offer our customers the opportunity to create a look that they love, that is unique to them and will ensure they feel like a celebrity on their special night."
+  meta name="twitter:card" content="Win $1000 Celebrity Inspired Formal Outfit"
+  meta name="twitter:title" content="Fame & Partners"
+  meta name="twitter:description" content="Win $1000 Celebrity Inspired Formal Outfit. Fame & Partners is committed to bringing the world of celebrity fashion to you. We offer our customers the opportunity to create a look that they love, that is unique to them and will ensure they feel like a celebrity on their special night."
+
 .top-logo
   = link_to root_path do
     = image_tag 'logo-white.png', width: 215, height: 15, alt: ''
@@ -12,9 +22,9 @@
       /= render 'shared/error_messages', target: @user
       = hidden_field_tag :invite, params[:invite]
 
-      .hide = link_to 'Sign up with facebook',
+      = link_to 'Sign up with facebook',
         fb_auth_path(competition: true, invite: params[:invite]), class: 'facebook-signup fleft'
-      .hide.or.fleft
+      .or.fleft
         span or
       .form-fields.fleft
         - if (user = try_spree_current_user).present?
