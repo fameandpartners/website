@@ -106,6 +106,8 @@ class ApplicationController < ActionController::Base
           'Style quiz'
         when 'workshop' then
           'Workshop'
+        when 'competition' then
+          'Competition'
       end
     end
   end

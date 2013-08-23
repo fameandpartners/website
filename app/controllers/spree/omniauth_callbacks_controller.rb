@@ -19,8 +19,11 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             flash[:notice] = "Signed in successfully"
             sign_in :spree_user, authentication.user
 
-            if session.delete(:sign_up_reason).eql?('custom_dress')
+            sign_up_reason = session.delete(:sign_up_reason)
+            if sign_up_reason.eql?('custom_dress')
               session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
+            elsif sign_up_reason.eql?('competition')
+              session[:spree_user_return_to] = main_app.share_competition_path
             end
 
             redirect_to after_sign_in_path_for(authentication.user)
@@ -42,7 +45,11 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               user.sign_up_via = Spree::User::SIGN_UP_VIA.index('Facebook')
               user.sign_up_reason = session[:sign_up_reason]
 
-              session[:spree_user_return_to] = main_app.root_path(:cf => :signup)
+              if session[:sign_up_reason].eql?('competition')
+                session[:spree_user_return_to] = main_app.share_competition_path
+              else
+                session[:spree_user_return_to] = main_app.root_path(:cf => :signup)
+              end
             end
 
             if user.save
@@ -51,8 +58,11 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
               sign_in :spree_user, user
 
-              if session.delete(:sign_up_reason).eql?('custom_dress')
+              sign_up_reason = session.delete(:sign_up_reason)
+              if sign_up_reason.eql?('custom_dress')
                 session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
+              elsif sign_up_reason.eql?('competition')
+                session[:spree_user_return_to] = main_app.share_competition_path
               end
 
               redirect_to after_sign_in_path_for(user)
