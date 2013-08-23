@@ -21,6 +21,7 @@
   .signup-fields
     = form_tag competition_path, class: 'form' do
       = hidden_field_tag :invite, params[:invite]
+      = hidden_field_tag :member, params[:member]
 
       - if @user && @user.errors.any?
         #errorExplanation.errorExplanation
