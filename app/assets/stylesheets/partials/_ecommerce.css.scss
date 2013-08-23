@@ -358,7 +358,8 @@
     top: -30px;
     right: -60px;
     z-index: 1200;
-    background: image-url('askmum.png') center 0 no-repeat;
+    background: image-url('askmum.png') center 0 no-repeat; 
+    overflow: hidden;
   }
   .photos-carousel {
     float: left;
