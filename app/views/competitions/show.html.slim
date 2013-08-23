@@ -19,9 +19,14 @@
   .signup-title
     = image_tag 'title-landing.png', width: 646, height: 61, alt: 'Enter using facebook or your email'
   .signup-fields
-    = form_tag enter_competition_path, class: 'form' do
-      /= render 'shared/error_messages', target: @user
+    = form_tag competition_path, class: 'form' do
       = hidden_field_tag :invite, params[:invite]
+
+      - if @user && @user.errors.any?
+        #errorExplanation.errorExplanation
+          ul
+            - @user.errors.full_messages.each do |error_message|
+              li = error_message
 
       = link_to 'Sign up with facebook',
         fb_auth_path(competition: true, invite: params[:invite]), class: 'facebook-signup fleft'
@@ -39,12 +44,14 @@
           .input
             = password_field_tag :password, '', required: true, placeholder: 'password'
         - else
+          /- if @user && @user.errors.any?
+            = link_to "Enter to competition with existing account?", competition_path(member: @user.email)
           .input
-            = text_field_tag :first_name, '', placeholder: 'First Name'
+            = text_field_tag :first_name, @user.try(:first_name), placeholder: 'First Name', required: true
           .input
-            = text_field_tag :last_name, '', placeholder: 'Last Name'
+            = text_field_tag :last_name, @user.try(:last_name), placeholder: 'Last Name', required: true
           .input
-            = email_field_tag :email, '', required: true, placeholder: 'mail@example.com'
+            = email_field_tag :email, @user.try(:email), placeholder: 'mail@example.com', required: true
       .submit.fleft
         input type="submit" value="Enter now"
     .terms-line

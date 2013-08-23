@@ -143,8 +143,8 @@ FameAndPartners::Application.routes.draw do
 
   root :to => 'index#show'
 
-  resource :competition, only: [:show] do
-    post 'enter', on: :member
+  resource :competition, only: [:show, :create] do
+    post 'enter', on: :member, action: :create
     get 'share(/:user_id)', on: :member, action: 'share', as: 'share'
     post 'invite', on: :member
     get 'stylequiz', on: :member

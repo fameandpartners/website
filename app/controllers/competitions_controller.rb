@@ -1,25 +1,32 @@
 class CompetitionsController < ApplicationController
-  before_filter :authenticate_spree_user!, except: [:show, :enter]
+  before_filter :authenticate_spree_user!, except: [:show, :create]
   layout 'spree/layouts/spree_application'
 
   # step 1 # GET
   def show
     session[:invite] = params[:invite] if params[:invite].present?
     @user = try_spree_current_user
+
+    if @user.try(:competition_entry).present?
+      redirect_to share_competition_path(@user.slug)
+    end
   end
 
-  def enter
-    if @user = try_spree_current_user
-      @user.update_attributes(params.extract!(:first_name, :last_name))
+  # enter # POST
+  def create
+    if spree_user_signed_in?
+      @user = try_spree_current_user
     elsif params[:email].present? and params[:password].present? # try login existing user
-      user = Spree::User.where(email: params[:email]).first
-      @user = user if user.valid_password?(params[:password])
+      @user = Spree::User.where(email: params[:email]).first_or_initialize 
+      unless @user.valid_password?(params[:password])
+        # invalid email or password
+        @user.errors[:base] << t('devise.failure.invalid')
+      end
     else
       @user = Spree::User.create_user(params.extract!(:email, :first_name, :last_name))
     end
 
-    if !@user.persisted?
-      flash.now[:notice] = "can't create"
+    if !@user.persisted? || @user.errors.present?
       render action: :show
     else
       sign_in(:spree_user, @user)
