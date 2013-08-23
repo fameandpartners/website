@@ -1,4 +1,5 @@
 .shopping-bag-popup {
+  z-index: 1000;
   .arrow-up, .arrow-down {
     background: image-url('icons-shopping-bag-arrows.png') center 0 no-repeat;
     width: 100%;
@@ -357,7 +358,7 @@
     position: absolute;
     top: -30px;
     right: -60px;
-    z-index: 1200;
+    z-index: 100;
     background: image-url('askmum.png') center 0 no-repeat; 
     overflow: hidden;
   }
