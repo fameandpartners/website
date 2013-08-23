@@ -11,8 +11,9 @@ class CompetitionsController < ApplicationController
   def enter
     if @user = try_spree_current_user
       @user.update_attributes(params.extract!(:first_name, :last_name))
-    elsif params[:password].present? # try login existing user
-      @user = warden.authenticate!(params.extract!(:email, :password))
+    elsif params[:email].present? and params[:password].present? # try login existing user
+      user = Spree::User.where(email: params[:email]).first
+      @user = user if user.valid_password?(params[:password])
     else
       @user = Spree::User.create_user(params.extract!(:email, :first_name, :last_name))
     end
