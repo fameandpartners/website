@@ -29,7 +29,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             redirect_to after_sign_in_path_for(authentication.user)
           elsif spree_current_user
             spree_current_user.apply_omniauth(auth_hash)
-            spree_current_user.save!
+            spree_current_user.save
             flash[:notice] = "Authentication successful."
             redirect_back_or_default(account_url)
           else
@@ -69,7 +69,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             else
               session[:omniauth] = auth_hash.except('extra')
               flash[:notice] = t(:one_more_step, :kind => auth_hash['provider'].capitalize)
-              redirect_to new_user_registration_url
+              redirect_to main_app.new_user_registration_url
             end
           end
 
