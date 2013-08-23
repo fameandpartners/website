@@ -183,6 +183,9 @@ FameAndPartners::Application.routes.draw do
       match '/product_images/upload' => 'product_images#upload', as: 'upload_product_images'
 
       match '/blog' => redirect('/admin/blog/posts')
+
+      resources :competition_entries, only: [:index, :show]
+
       namespace :blog do
         resources :promo_banners
         resources :categories

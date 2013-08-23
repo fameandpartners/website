@@ -8,6 +8,7 @@ class CompetitionEntry < ActiveRecord::Base
     if self.invitation.present?
       additional_entry = CompetitionEntry.new
       additional_entry.user = self.invitation.user
+      additional_entry.inviter = self.user
       additional_entry.invitation_id = self.invitation.id
       additional_entry.master = false
       additional_entry.save

@@ -86,7 +86,7 @@ Spree::CheckoutController.class_eval do
         return
       end
 
-      @order.reload
+      #@order.reload
 
       if @order.state == 'complete' || @order.completed?
         flash.notice = t(:order_processed_successfully)

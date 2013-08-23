@@ -1,0 +1,19 @@
+h4 Details 
+
+- aux_entries = @user.entries.where(master: false).to_a
+- if aux_entries.length > 0
+  table
+    - aux_entries.each do |aux_entry|
+      tr
+        - if invited_user = aux_entry.inviter
+          td = invited_user.full_name
+          td = invited_user.email
+          td = aux_entry.created_at.to_s(:db)
+          td = aux_entry.invitation.personal? ? 'email' : 'facebook'
+        - else
+          td colspan="4" No details for this entry available
+
+  tr
+    td colspan="4"
+      Personal invitations sent total:
+      = @user.invitations.where(invitation_type: 'personal').count
