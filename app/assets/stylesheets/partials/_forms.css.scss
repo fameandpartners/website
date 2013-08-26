@@ -248,7 +248,11 @@
   width: 700px;
   margin: 20px auto;
   color: #cc0000;
-  h2, p {
+  font: 400 16px/1.2 $fontOne;
+  h2 {
     margin: 0 0 10px;
+  }
+  p {
+    display: none;
   }
 }
