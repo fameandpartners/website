@@ -3,8 +3,6 @@ Spree::CheckoutController.class_eval do
   before_filter :find_payment_methods, only: [:edit, :update]
   skip_before_filter :check_registration
 
-  before_filter :disable_cloudflare
-
   def update_registration
     fire_event("spree.user.signup", :order => current_order)
     
@@ -55,7 +53,10 @@ Spree::CheckoutController.class_eval do
     end
   end
 
+  # update - address/payment
   def update
+    move_order_from_cart_state(@order)
+
     if @order.update_attributes(object_params)
 
       fire_event('spree.checkout.update')
@@ -85,8 +86,6 @@ Spree::CheckoutController.class_eval do
         end
         return
       end
-
-      #@order.reload
 
       if @order.state == 'complete' || @order.completed?
         flash.notice = t(:order_processed_successfully)
@@ -137,14 +136,18 @@ Spree::CheckoutController.class_eval do
     before_address
   end
 
+  # after user submitted some shipping/biliing/payment data
+  # order should not be in cart state
+  def move_order_from_cart_state(order)
+    if order.state == 'cart'
+      order.next
+      order.state_callback(:after)
+    end
+  end
+
   def find_payment_methods
     @credit_card_gateway = @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
     @pay_pal_method = @order.available_payment_methods.detect{ |method| method.method_type.eql?('paypalexpress') }
-  end
-
-  def disable_cloudflare
-    # prevent issues with checkout
-    @disable_cloudflare = true
   end
 
   helper_method :completion_route
