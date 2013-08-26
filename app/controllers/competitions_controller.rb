@@ -47,7 +47,11 @@ class CompetitionsController < ApplicationController
   # send invitaitons & redirect to last step
   def invite
     create_invitations(params[:name], params[:email])
-    redirect_to stylequiz_competition_path
+    if spree_current_user.style_profile.present?
+      redirect_to my_boutique_url
+    else
+      redirect_to stylequiz_competition_path
+    end
   end
 
   # step 3 # GET
