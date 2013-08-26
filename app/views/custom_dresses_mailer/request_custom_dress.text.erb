@@ -1,8 +1,8 @@
 hi, team
 
-user: <%= @info[:first_name] %> <%= @info[:last_name] %>
+user: <%= @dress_request.first_name %> <%= @dress_request.last_name %>
 
-has requested custom dress <%= @info[:description] %>
-to date <%= @info[:event_date] %>
+has requested custom dress <%= @dress_request.description %>
+to date <%= @dress_request.event_date %>
 
-please, answer to <%= @info[:email] %>
+please, answer to <%= @dress_request.email %>

@@ -7,21 +7,30 @@
       p We will get back to you within 24 hours of receiving your enquiry.
 
     = form_tag custom_dresses_request_path, class: 'form' do
+      - if @custom_dress && @custom_dress.errors.any?
+        .errorExplanation#errorExplanation
+          h2
+            = pluralize(@custom_dress.errors.count, 'Error')
+            |  prohibited this request from being sent
+          ul
+            - @custom_dress.errors.full_messages.each do |msg|
+              li = msg
+
       .input.string
-        label for="first_name" First Name *
-        = text_field_tag :first_name, spree_current_user.try(:first_name), required: true
+        label for="custom_dress_first_name" First Name *
+        = text_field_tag 'custom_dress[first_name]', spree_current_user.try(:first_name)
       .input.string
-        label for="last_name" Last Name *
-        = text_field_tag :last_name, spree_current_user.try(:last_name), required: true
+        label for="custom_dress_last_name" Last Name *
+        = text_field_tag 'custom_dress[last_name]', spree_current_user.try(:last_name)
       .input.string
-        label for="email" Email *
-        = text_field_tag :email, spree_current_user.try(:email), required: true
+        label for="custom_dress_email" Email *
+        = text_field_tag 'custom_dress[email]', spree_current_user.try(:email)
       .input.string
-        label for="description" Product Links (not mandatory)
-        = text_area_tag :description
+        label for="custom_dress_description" Product Links (not mandatory)
+        = text_area_tag 'custom_dress[description]'
       .input.string
-        label for="event_date" Event Date
-        = text_field_tag :event_date
+        label for="custom_dress_event_date" Event Date
+        = text_field_tag 'custom_dress[event_date]'
       .submit
         input type="submit" value="Submit enquiry"
 
