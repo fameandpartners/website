@@ -120,7 +120,10 @@ FameAndPartners::Application.routes.draw do
   get '/compterms' => 'statics#comp_terms'
 
   get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
-  post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+  post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request   
+  
+  # testing email
+  get '/email/comp' => 'competition_mailer#marketing_email'
   
   # External URLs
   get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
@@ -228,4 +231,8 @@ FameAndPartners::Application.routes.draw do
   end
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
+  
+  if Rails.env.development?
+    mount MailPreview => 'mail_view'
+  end
 end

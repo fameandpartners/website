@@ -108,8 +108,41 @@
 .competitions.share {
   .facebook-send {
     position: absolute;
-    right: 288px;
+    width: 300px;
+    right: 58px;
     top: 264px;
+    
+    .fb-send{
+      width: 80px;
+    }
+    
+    .next-step{
+      float: right;
+    }
+    
+    .next{
+      display: inline-block;
+      text-decoration: none;
+      border: 0;
+      padding: 0 12px;
+      text-transform: uppercase;
+      text-align: center;
+      color: #fff;
+      font: 300 16px/22px $fontOne;
+      height: 22px;
+      @include linear-gradient(#414141, #252525); 
+      &.light {
+        color: #787878;
+        @include linear-gradient(#e9e9e9, #d9d9d9);
+      } 
+    }
+    .msg{
+      font-size: 12px;
+      font-family: $fontOne;
+      font-weight: 300;
+      padding: 5px 0;
+      width: 200px;
+    }
   }
   .content-wrapper {
     position: relative;

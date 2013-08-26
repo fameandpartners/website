@@ -6,7 +6,11 @@
   .clearfix
     .facebook-send
       #fb-root
-      .fb-send data-href="http://www.fameandpartners.com#{ competition_path(invite: @invitation.token) }&fb_ref=competition&fb_source=message"
+      .fb-send.fleft data-href="http://www.fameandpartners.com#{ competition_path(invite: @invitation.token) }&fb_ref=competition&fb_source=message"
+      .next-step.fright
+        = link_to "Next", stylequiz_competition_path, class:"next"
+        .msg Finished sharing via Facebook? Either share with others below or click next.
+        
     .signup-form.aligncenter
       = form_tag invite_competition_path, class: 'form' do
         - 8.times do |index|

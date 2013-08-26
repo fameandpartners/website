@@ -20,6 +20,7 @@ gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
+gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
 
 # assets
 gem 'jquery-rails'
