@@ -141,7 +141,7 @@ Spree::CheckoutController.class_eval do
   def move_order_from_cart_state(order)
     if order.state == 'cart'
       order.next
-      order.state_callback(:after)
+      state_callback(:after)
     end
   end
 
