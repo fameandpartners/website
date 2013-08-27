@@ -21,6 +21,7 @@ ruby:
           - if enabled_tabs.include?('inspiration')
             li = link_to 'Celebrity Inspiration', '#inspiration'
         #photos.tab-content
+          .ask-mum-badge = send_to_a_friend_link(@product)
           .tab-content-inner
             .photos-carousel
               #product-images-up.arrow-up
@@ -54,7 +55,6 @@ ruby:
           .fleft = share_buttons(@product)
     .grid-45
       .product-info
-        .ask-mum-badge = send_to_a_friend_link(@product)
         .name = @product.name
         .desc = @product.property('short_description')
         .price-delivery
