@@ -30,8 +30,6 @@ FameAndPartners::Application.routes.draw do
   get 'products/:id/quick_view' => 'spree/products#quick_view'
   post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
 
-  get 'search' => 'pages#search'
-
   get 'my-boutique' => 'pages#my_boutique', :as => :my_boutique
 
   # account settings
@@ -229,6 +227,9 @@ FameAndPartners::Application.routes.draw do
       end
     end
   end
+
+  get 'search' => 'pages#search'
+
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
   
