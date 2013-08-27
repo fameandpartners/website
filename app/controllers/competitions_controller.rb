@@ -2,12 +2,16 @@ class CompetitionsController < ApplicationController
   before_filter :authenticate_spree_user!, except: [:show, :create]
   layout 'spree/layouts/spree_application'
 
+  helper_method :final_competition_step_path
+
   # step 1 # GET
   def show
     session[:invite] = params[:invite] if params[:invite].present?
+
     @user = try_spree_current_user
 
     if @user.try(:competition_entry).present?
+      session[:new_entrant] = nil
       redirect_to share_competition_path(@user.slug)
     end
   end
@@ -31,6 +35,7 @@ class CompetitionsController < ApplicationController
     else
       sign_in(:spree_user, @user)
       entry = CompetitionEntry.create_for(@user, get_invitation)
+      session[:new_entrant] = true
 
       redirect_to share_competition_path(@user.slug)
     end
@@ -47,15 +52,22 @@ class CompetitionsController < ApplicationController
   # send invitaitons & redirect to last step
   def invite
     create_invitations(params[:name], params[:email])
-    if spree_current_user.style_profile.present?
-      redirect_to my_boutique_url
-    else
-      redirect_to stylequiz_competition_path
-    end
+    redirect_to final_competition_step_path
   end
 
   # step 3 # GET
   def stylequiz
+  end
+
+  def final_competition_step_path
+    url_params = {}
+    url_params[:cf] = 'competition' if session[:new_entrant]
+
+    if try_spree_current_user.try(:style_profile).present?
+      my_boutique_url(url_params)
+    else
+      collection_path(url_params)
+    end
   end
 
   private
