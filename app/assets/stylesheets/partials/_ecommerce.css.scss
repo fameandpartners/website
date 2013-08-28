@@ -1891,6 +1891,22 @@
       }
     }
   }
+  .submission-complete {
+    text-align: center;
+    color: #000;
+    padding: 43px 73px;
+    border-color: #000;
+    margin-left: -365px;
+    margin-top: -146px;
+    .thanks {
+      text-transform: uppercase;
+      font: 400 56px/1.2 $fontFour;
+      margin: 0 0 20px;
+    }
+    .collection {
+      font: 400 italic 34px/1.2 $fontTwo;
+    }
+  }
   &.edit-line-item {
     .modal-container {
       margin-top: -196px;

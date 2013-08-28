@@ -136,4 +136,12 @@ module ApplicationHelper
       {}
     end
   end
+
+  # move method calls to layout, if there will be too many places 
+  def thanks_popup_for_new_competition_entrant
+    if session[:new_entrant] && params[:cf] == 'competition'
+      session[:new_entrant] = false
+      render 'competitions/thanks_popup'
+    end
+  end
 end
