@@ -26,8 +26,8 @@ environments:
   production:
     migrate: false
     migration_command: rake db:migrate
-    branch: master
+    branch: production
   production_blog:
     migrate: false
     migration_command: rake db:migrate
-    branch: master
+    branch: production
