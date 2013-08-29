@@ -363,7 +363,7 @@ header {
         &.with-dropdown {
           > a {
             position: relative;
-            z-index: 3;
+            z-index: 11;
             padding-right: 33px;
             background: image-url('icon-dropdown.png') right center no-repeat;
           }
