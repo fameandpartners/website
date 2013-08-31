@@ -190,6 +190,10 @@ header {
         &.turnaround {
           background-position: 0 -180px;
         }
+        &.tips {
+          background-position: 0 -82px;
+          height: 18px;
+        }
       }
       &:first-child {
         margin: 0;
