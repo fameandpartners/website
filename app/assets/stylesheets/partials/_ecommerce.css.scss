@@ -634,22 +634,24 @@
     .buy-wishlist {
       margin: 0 0 28px;
       position: relative;
-      .buy-now, .add-wishlist {
+      .buy-now, .btn-layby, .add-wishlist {
         display: inline-block;
         text-decoration: none;
         vertical-align: top;
       }
-      .buy-now {
-        position: relative;
-        width: 130px;
-        text-align: center;
-        overflow: hidden;
-        padding: 0 42px;
+      .buy-now, .btn-layby {
         text-transform: uppercase;
         color: #fff;
         font: 300 20px/38px $fontOne;
         height: 38px;
-        margin: 0 14px 0 0;
+        text-align: center;
+      }
+      .buy-now {
+        position: relative;
+        width: 130px;
+        overflow: hidden;
+        padding: 0 42px;
+        margin: 0 14px 14px 0;
         @include linear-gradient(#414141, #252525);
         &.adding, &.added {
           &:after {
@@ -672,6 +674,11 @@
             background-image: image-url('icon-added.png');
           }
         }
+      }
+      .btn-layby {
+        background: image-url('icon-layby-order.png') 9px 8px no-repeat #e99d8e;
+        color: #fff;
+        padding: 0 18px 0 36px;
       }
       .add-wishlist {
         border: 1px solid #dadadc;

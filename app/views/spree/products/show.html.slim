@@ -78,6 +78,7 @@ ruby:
           = link_to 'What size am I?', '#what-size', class: 'info toggle-sizes'
         .buy-wishlist.clearfix
           = add_to_bag_link(@product)
+          = layby_this_dress(@product)
           = add_to_wishlist_link(@product)
         .tabs
           ul.tabs-links
