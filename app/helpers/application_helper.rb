@@ -144,4 +144,21 @@ module ApplicationHelper
       render 'competitions/thanks_popup'
     end
   end
+
+  def paypal_express_button
+    payment_method = Spree::PaymentMethod.where(
+      type: "Spree::Gateway::PayPalExpress",
+      environment: Rails.env,
+      active: true,
+      deleted_at: nil
+    ).first
+
+    return '' if payment_method.blank?
+
+    link_to(
+      image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"),
+      paypal_express_url(:payment_method_id => payment_method.id),
+      :method => :post, :id => "paypal_button"
+    )
+  end
 end

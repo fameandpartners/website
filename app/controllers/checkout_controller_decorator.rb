@@ -87,6 +87,13 @@ Spree::CheckoutController.class_eval do
         return
       end
 
+      # with 'cart checkout' by paypal express we can return to fill address
+      if @order.state == 'payment' && @order.has_checkout_step?('payment')
+        state_callback(:before)
+        @order.next
+        state_callback(:before)
+      end
+
       if @order.state == 'complete' || @order.completed?
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special'
