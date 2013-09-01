@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130829230103) do
+ActiveRecord::Schema.define(:version => 20130901104329) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -611,6 +611,7 @@ ActiveRecord::Schema.define(:version => 20130829230103) do
     t.datetime "updated_at",                              :null => false
     t.boolean  "on_demand",            :default => false
     t.boolean  "featured",             :default => false
+    t.integer  "position",             :default => 0
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
