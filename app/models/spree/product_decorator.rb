@@ -18,6 +18,9 @@ Spree::Product.class_eval do
 
   attr_accessible :featured
   scope :featured, lambda { where(featured: true) }
+  scope :ordered, lambda { order('position asc') }
+
+  default_scope order: "#{self.table_name}.position"
 
   def remove_property(name)
     ActiveRecord::Base.transaction do

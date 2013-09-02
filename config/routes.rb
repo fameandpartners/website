@@ -187,6 +187,8 @@ FameAndPartners::Application.routes.draw do
 
       resources :competition_entries, only: [:index, :show]
 
+      resource :product_positions, only: [:show, :create]
+
       namespace :blog do
         resources :promo_banners
         resources :categories

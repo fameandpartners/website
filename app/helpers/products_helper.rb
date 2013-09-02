@@ -85,6 +85,10 @@ module ProductsHelper
     end
   end
 
+  def layby_this_dress(product)
+    link_to 'Layby this dress', "mailto:team@fameandpartners.com?subject=I would like to layby this dress: #{product.name}", class: 'btn-layby'
+  end
+
   def in_wishlist?(variant)
     return current_wished_product_ids.include?(variant.product_id)
   end

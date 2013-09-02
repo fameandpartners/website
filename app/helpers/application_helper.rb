@@ -136,4 +136,29 @@ module ApplicationHelper
       {}
     end
   end
+
+  # move method calls to layout, if there will be too many places 
+  def thanks_popup_for_new_competition_entrant
+    if session[:new_entrant] && params[:cf] == 'competition'
+      session[:new_entrant] = false
+      render 'competitions/thanks_popup'
+    end
+  end
+
+  def paypal_express_button
+    payment_method = Spree::PaymentMethod.where(
+      type: "Spree::Gateway::PayPalExpress",
+      environment: Rails.env,
+      active: true,
+      deleted_at: nil
+    ).first
+
+    return '' if payment_method.blank?
+
+    link_to(
+      image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"),
+      paypal_express_url(:payment_method_id => payment_method.id),
+      :method => :post, :id => "paypal_button"
+    )
+  end
 end
