@@ -26,7 +26,7 @@ window.popups.showSendToFriendPopup = (productId, options = {}) ->
 
       popup.overlay.on('click', popup.hide)
 
-      popup.container.find(".modal-title").text("Ask Mum")
+      popup.container.find(".modal-title").text("Show Mum")
       popup.container.find(".save input[type=submit]").val('Send')
 
       popup.container.find('#sender_name').on('change', _.debounce(popup.onInputChanged))
