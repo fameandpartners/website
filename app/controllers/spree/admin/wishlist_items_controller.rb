@@ -5,7 +5,6 @@ module Spree
   module Admin
     class WishlistItemsController < BaseController
       def download
-        puts csv_data
         send_data csv_data, filename: 'wishlist_details.csv', type: :csv
       end
 
@@ -20,7 +19,7 @@ module Spree
       end
 
       def generate_csv_data
-        data = CSV.generate do |csv|
+        data = CSV.generate(:col_sep => ";") do |csv|
           csv << [
             'product name',
             'product sku',
