@@ -185,6 +185,8 @@ FameAndPartners::Application.routes.draw do
 
       match '/blog' => redirect('/admin/blog/posts')
 
+      get '/wishlist_items/download' => 'wishlist_items#download', as: 'wishlist_export'
+
       resources :competition_entries, only: [:index, :show]
 
       namespace :blog do
