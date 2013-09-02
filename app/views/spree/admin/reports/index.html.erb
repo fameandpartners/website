@@ -19,3 +19,18 @@
   </tbody>
 </table>
 
+<h3> Exports </h3>
+<table class="index">
+  <thead>
+    <tr data-hook="exports_header">
+      <th><%= t(:name) %></th>
+      <th><%= t(:description) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-hook="exports_row">
+      <td><%= link_to 'Wishlist', admin_wishlist_export_url %></td>
+      <td>Csv file with wishlist items details [ product, user, timestamp]</td>
+    </tr>
+  </tbody>
+</table>
