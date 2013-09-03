@@ -91,7 +91,7 @@ Spree::CheckoutController.class_eval do
       if @order.state == 'payment' && @order.has_checkout_step?('payment')
         state_callback(:before)
         @order.next
-        state_callback(:before)
+        state_callback(:after)
       end
 
       if @order.state == 'complete' || @order.completed?

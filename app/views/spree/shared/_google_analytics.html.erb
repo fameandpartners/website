@@ -38,6 +38,19 @@
       _gaq.push(['_trackTrans']);
 
       window.track.conversion('purchase');
+
+      <%# facebook track successful order %>
+      var fb_param = {};
+      fb_param.pixel_id = '6009784531696';
+      fb_param.value = '0.00';
+      fb_param.currency = 'AUD';
+      (function(){
+        var fpw = document.createElement('script');
+        fpw.async = true;
+        fpw.src = '//connect.facebook.net/en_US/fp.js';
+        var ref = document.getElementsByTagName('script')[0];
+        ref.parentNode.insertBefore(fpw, ref);
+      })();
     <% end %>
 
     (function() {
