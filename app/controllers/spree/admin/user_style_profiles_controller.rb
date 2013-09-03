@@ -5,7 +5,7 @@ module Spree
   module Admin
     class UserStyleProfilesController < BaseController
       def download
-        send_data csv_data, filename: 'wishlist_details.csv', type: :csv
+        send_data csv_data, filename: 'user_style_profiles.csv', type: :csv
       end
 
       private
