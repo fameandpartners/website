@@ -1,4 +1,4 @@
-set :dns_name, "new.23stages.com"
+set :dns_name, "beta.23stages.com"
 
 set :application, "fame"
 set :repository,  "git@github.com:fameandpartners/website.git"
@@ -14,6 +14,6 @@ set :branch, 'master'
 set :use_sudo, false
 
 set :user, 'ninja'
-set :password, '2BHjsd3G123fsd'
+set :password, 'DC93zpfqgkekHw'
 set :port, 22
 set :db_username, "root"
