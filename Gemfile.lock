@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/evgeniypetrov/better_spree_paypal_express.git
-  revision: 615f763f508352d334de5c96ca4a24b54ae6ec58
+  revision: 2ff2d6bccd95dd120f8121443e18ebcb900ed6b5
   branch: 1-3-stable
   specs:
     spree_paypal_express (2.0.3)
@@ -131,10 +131,10 @@ GEM
       sprockets (~> 2.2.1)
     active_model_serializers (0.8.1)
       activemodel (>= 3.0)
-    active_utils (1.0.5)
+    active_utils (2.0.0)
       activesupport (>= 2.3.11)
       i18n
-    activemerchant (1.34.1)
+    activemerchant (1.37.0)
       active_utils (>= 1.0.2)
       activesupport (>= 2.3.14)
       builder (>= 2.0.0)
@@ -278,12 +278,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.1)
-    mime-types (1.23)
+    mime-types (1.25)
     money (5.0.0)
       i18n (~> 0.4)
       json
-    multi_json (1.7.7)
-    multi_xml (0.5.4)
+    multi_json (1.7.9)
+    multi_xml (0.5.5)
     multipart-post (1.2.0)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
@@ -457,7 +457,7 @@ GEM
       rake
       rest-client (~> 1.6)
     titleize (1.3.0)
-    treetop (1.4.14)
+    treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
     truncate_html (0.5.5)
