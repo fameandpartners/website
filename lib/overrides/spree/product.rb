@@ -45,52 +45,42 @@ module Overrides
         end
       end
 
-      SORT_SCRIPT =
+      BASIC_SORT_SCRIPT_INNER_PART =
         %q{
-          sqrt(
-            (
-              (doc['glam'].value - %{glam}) ** 2
-            ) + (
-              (doc['girly'].value - %{girly}) ** 2
-            ) + (
-              (doc['classic'].value - %{classic}) ** 2
-            ) + (
-              (doc['edgy'].value - %{edgy}) ** 2
-            ) + (
-              (doc['apple'].value - %{apple}) ** 2
-            ) + (
-              (doc['pear'].value - %{pear}) ** 2
-            ) + (
-              (doc['strawberry'].value - %{strawberry}) ** 2
-            ) + (
-              (doc['hour_glass'].value - %{hour_glass}) ** 2
-            ) + (
-              (doc['column'].value - %{column}) ** 2
-            ) + (
-              (doc['bra_aaa'].value - %{bra_aaa}) ** 2
-            ) + (
-              (doc['bra_aa'].value - %{bra_aa}) ** 2
-            ) + (
-              (doc['bra_a'].value - %{bra_a}) ** 2
-            ) + (
-              (doc['bra_b'].value - %{bra_b}) ** 2
-            ) + (
-              (doc['bra_c'].value - %{bra_c}) ** 2
-            ) + (
-              (doc['bra_d'].value - %{bra_d}) ** 2
-            ) + (
-              (doc['bra_e'].value - %{bra_e}) ** 2
-            ) + (
-              (doc['bra_fpp'].value - %{bra_fpp}) ** 2
-            ) + (
-              (doc['sexiness'].value - %{sexiness}) ** 2
-            ) + (
-              (doc['fashionability'].value - %{fashionability}) ** 2
-            )
-          );
+          (
+            (doc['glam'].value - %{glam}) ** 2
+          ) + (
+            (doc['girly'].value - %{girly}) ** 2
+          ) + (
+            (doc['classic'].value - %{classic}) ** 2
+          ) + (
+            (doc['edgy'].value - %{edgy}) ** 2
+          ) + (
+            (doc['bohemian'].value - %{bohemian}) ** 2
+          ) + (
+            (doc['sexiness'].value - %{sexiness}) ** 2
+          ) + (
+            (doc['fashionability'].value - %{fashionability}) ** 2
+          )
         }.gsub(/[\r\n]|([\s]{2,})/, '')
 
       module ClassMethods
+        def sort_script_for(style_profile)
+          additional_params = []
+          additional_params << style_profile.body_shape
+          additional_params << style_profile.brassiere_size
+
+          additional_inner_part = ''
+
+          additional_params.compact.each do |param|
+            additional_inner_part += " + ((doc['#{param}'].value - %{#{param}}) ** 2)"
+          end
+
+          %Q{
+            sqrt(#{BASIC_SORT_SCRIPT_INNER_PART}#{additional_inner_part})
+          }.gsub(/[\r\n]|([\s]{2,})/, '')
+        end
+
         def recommended_for(user)
           style_profile = UserStyleProfile.find_by_user_id(user.id)
 
@@ -117,17 +107,24 @@ module Overrides
             sort do
               by ({
                 :_script => {
-                  :script => SORT_SCRIPT % {
+                  :script => ::Spree::Product.sort_script_for(style_profile) % {
                     :glam => style_profile.glam,
                     :girly => style_profile.girly,
                     :classic => style_profile.classic,
                     :edgy => style_profile.edgy,
                     :bohemian => style_profile.bohemian,
+
+                    :sexiness => style_profile.sexiness,
+                    :fashionability => style_profile.fashionability,
+
                     :apple => style_profile.apple,
                     :pear => style_profile.pear,
+                    :athletic => style_profile.athletic,
                     :strawberry => style_profile.strawberry,
                     :hour_glass => style_profile.hour_glass,
                     :column => style_profile.column,
+                    :petite => style_profile.petite,
+
                     :bra_aaa => style_profile.bra_aaa,
                     :bra_aa => style_profile.bra_aa,
                     :bra_a => style_profile.bra_a,
@@ -135,9 +132,7 @@ module Overrides
                     :bra_c => style_profile.bra_c,
                     :bra_d => style_profile.bra_d,
                     :bra_e => style_profile.bra_e,
-                    :bra_fpp => style_profile.bra_fpp,
-                    :sexiness => style_profile.sexiness,
-                    :fashionability => style_profile.fashionability
+                    :bra_fpp => style_profile.bra_fpp
                   },
                   type:   'number',
                   order:  'asc'

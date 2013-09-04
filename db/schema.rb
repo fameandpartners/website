@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130819173717) do
+ActiveRecord::Schema.define(:version => 20130901104329) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -492,27 +492,6 @@ ActiveRecord::Schema.define(:version => 20130819173717) do
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
 
-  create_table "spree_pages", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.string   "slug"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.boolean  "show_in_header",           :default => false, :null => false
-    t.boolean  "show_in_footer",           :default => false, :null => false
-    t.string   "foreign_link"
-    t.integer  "position",                 :default => 1,     :null => false
-    t.boolean  "visible",                  :default => true
-    t.string   "meta_keywords"
-    t.string   "meta_description"
-    t.string   "layout"
-    t.boolean  "show_in_sidebar",          :default => false, :null => false
-    t.string   "meta_title"
-    t.boolean  "render_layout_as_partial", :default => false
-  end
-
-  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
-
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
     t.string   "name"
@@ -549,6 +528,19 @@ ActiveRecord::Schema.define(:version => 20130819173717) do
     t.string "payer_country"
     t.string "payer_status"
   end
+
+  create_table "spree_paypal_express_checkouts", :force => true do |t|
+    t.string   "token"
+    t.string   "payer_id"
+    t.string   "transaction_id"
+    t.string   "state",                 :default => "complete"
+    t.string   "refund_transaction_id"
+    t.datetime "refunded_at"
+    t.string   "refund_type"
+    t.datetime "created_at"
+  end
+
+  add_index "spree_paypal_express_checkouts", ["transaction_id"], :name => "index_spree_paypal_express_checkouts_on_transaction_id"
 
   create_table "spree_preferences", :force => true do |t|
     t.text     "value"
@@ -602,6 +594,7 @@ ActiveRecord::Schema.define(:version => 20130819173717) do
     t.datetime "updated_at",                              :null => false
     t.boolean  "on_demand",            :default => false
     t.boolean  "featured",             :default => false
+    t.integer  "position",             :default => 0
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"

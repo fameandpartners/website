@@ -11,11 +11,8 @@
   = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
   = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
 
-/.payment-method-details.border
-/  .selector
-/    input type="radio" name="cards"
-/    label PayPal
-/  .image = image_tag 'icon-paypal.png', width: 51, height: 33, alt: 'PayPal'
+= paypal_express_button
+
 .coupon-block.border
   .grid-container
     = form_for @order, url: update_checkout_path('payment'),remote: true do |f|

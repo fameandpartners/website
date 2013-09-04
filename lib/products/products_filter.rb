@@ -128,19 +128,26 @@ module Products
     end
 
     def add_order_scope(base_scope)
-      return base_scope if order.blank?
+      return base_scope if order.blank? && bodyshape.blank?
+
       case order
       when 'price_high'
-        base_scope.order("spree_prices.amount desc")
+        ordered_scope = base_scope.order('spree_prices.amount desc')
       when 'price_low'
-        base_scope.order("spree_prices.amount asc")
+        ordered_scope = base_scope.order('spree_prices.amount asc')
       when 'newest'
-        base_scope.order('spree_products.created_at desc')
+        ordered_scope = base_scope.order('spree_products.created_at desc')
       when 'popular'
-        base_scope
+        ordered_scope = base_scope
       else
-        base_scope
+        ordered_scope = base_scope
       end
+
+      if bodyshape.present?
+        ordered_scope = ordered_scope.order(bodyshape.map{|shape| %Q{"product_style_profiles"."#{shape}"} }.join(' + ') + ' DESC')
+      end
+
+      ordered_scope
     end
 
     def taxons

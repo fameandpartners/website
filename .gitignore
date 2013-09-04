@@ -41,3 +41,5 @@ config/database.yml
 
 # ignore cache
 /.sass-cache
+
+*.orig

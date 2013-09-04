@@ -8,7 +8,7 @@ class UserStyleProfile < ActiveRecord::Base
   SKIN_COLOURS = %w( fair medium_fair medium medium_dark dark )
   BODY_SHAPES = %w( apple pear athletic strawberry hour_glass column petite )
   TYPICAL_SIZES = %w( G4 G6 G8 G10 G12 G14 G16 )
-  BRA_SIZES = %w( AAA AA A B C D E FPP IT_IS_SECRET)
+  BRA_SIZES = %w( AAA AA A B C D E FPP )
 
   default_values :glam  => 0.0,
                  :girly => 0.0,
@@ -70,7 +70,7 @@ class UserStyleProfile < ActiveRecord::Base
   validates :bra_size,
             :inclusion => {
               :allow_blank => true,
-              :in => BRA_SIZES
+              :in => proc{ BRA_SIZES + %w(IT_IS_SECRET) }
             }
 
   def percentage
@@ -90,15 +90,19 @@ class UserStyleProfile < ActiveRecord::Base
     @percents
   end
 
+  def brassiere_size
+    BRA_SIZES.include?(bra_size) ? "bra_#{bra_size.downcase}" : nil
+  end
+
   BODY_SHAPES.each do |body_shape|
     define_method body_shape do
       self.body_shape.eql?(body_shape.to_s) ? 10 : 0
     end
   end
 
-  [:bra_aaa, :bra_aa, :bra_a, :bra_b, :bra_c, :bra_d, :bra_e, :bra_fpp].each do |bra_size|
-    define_method bra_size do
-      self.body_shape.eql?(bra_size.to_s) ? 10 : 0
+  BRA_SIZES.each do |bra_size|
+    define_method "bra_#{bra_size.downcase}" do
+      self.bra_size.eql?(bra_size.to_s) ? 10 : 0
     end
   end
 end
