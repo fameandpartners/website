@@ -256,3 +256,24 @@
     display: none;
   }
 }
+
+.or-line {
+  position: relative;
+  font: 400 italic 20px/1.1 $fontFour;
+  span {
+    color: #999;
+    background: #fff;
+    padding: 0 16px 0 0;
+    position: relative;
+    z-index: 2;
+  }
+  &:before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    background: #efefef;
+  }
+}
