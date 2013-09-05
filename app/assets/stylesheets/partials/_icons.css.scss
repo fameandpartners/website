@@ -1,0 +1,34 @@
+.icon-phone, .icon-home, .icon-bag, .icon-pencil, .icon-layby, .icon-signup, .icon-livechat, .icon-help {
+  font-family: 'Icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+.icon-phone:before {
+  content: "\e000";
+}
+.icon-home:before {
+  content: "\e001";
+}
+.icon-bag:before {
+  content: "\e002";
+}
+.icon-pencil:before {
+  content: "\e003";
+}
+.icon-layby:before {
+  content: "\e004";
+}
+.icon-signup:before {
+  content: "\e005";
+}
+.icon-livechat:before {
+  content: "\e006";
+}
+.icon-help:before {
+  content: "\e007";
+}
