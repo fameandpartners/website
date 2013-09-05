@@ -28,6 +28,10 @@ en:
         zipcode: "Billing address postcode"
       spree/order/ship_address:
         zipcode: "Shipping address postcode"
+  errors:
+    messages:
+      points_number:
+        invalid: 'Basic style`s points sum should be 10'
   page:
     blog:
       default:

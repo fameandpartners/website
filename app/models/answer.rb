@@ -24,7 +24,6 @@ class Answer < ActiveRecord::Base
             :uniqueness => {
               :scope => :question_id
             }
-
   validates :question,
             :presence => true
 

@@ -1,90 +1,13 @@
-@font-face {
-  font-family: 'GranjonLTStd';
-  src: url('/fonts/granjonltstd.eot');
-  src: url('/fonts/granjonltstd.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/granjonltstd.woff') format('woff'),
-       url('/fonts/granjonltstd.ttf') format('truetype'),
-       url('/fonts/granjonltstd.svg#GranjonLTStd') format('svg');
-  font-weight: 300;
-  font-style: normal;
-}
+@include font-face('GranjonLTStd', '/fonts/granjonltstd', '300');
+@include font-face('GranjonLTStd', '/fonts/granjonltstd-italic', '300', 'italic');
+@include font-face('GranjonLTStd', '/fonts/granjonltstd-bold', '700');
 
-@font-face {
-  font-family: 'GranjonLTStd';
-  src: url('/fonts/granjonltstd-italic.eot');
-  src: url('/fonts/granjonltstd-italic.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/granjonltstd-italic.woff') format('woff'),
-       url('/fonts/granjonltstd-italic.ttf') format('truetype'),
-       url('/fonts/granjonltstd-italic.svg#GranjonLTStd') format('svg');
-  font-weight: 300;
-  font-style: italic;
-}
+@include font-face('Annifont', '/fonts/annifont', '400');
 
-@font-face {
-  font-family: 'GranjonLTStd';
-  src: url('/fonts/granjonltstd-bold.eot');
-  src: url('/fonts/granjonltstd-bold.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/granjonltstd-bold.woff') format('woff'),
-       url('/fonts/granjonltstd-bold.ttf') format('truetype'),
-       url('/fonts/granjonltstd-bold.svg#GranjonLTStd') format('svg');
-  font-weight: 700;
-  font-style: normal;
-}
+@include font-face('Didot', '/fonts/didot', '400');
+@include font-face('Didot', '/fonts/didot-italic', '400', 'italic');
 
-@font-face {
-  font-family: 'Annifont';
-  src: url('/fonts/annifont.eot');
-  src: url('/fonts/annifont.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/annifont.woff') format('woff'),
-       url('/fonts/annifont.ttf') format('truetype'),
-       url('/fonts/annifont.svg#Annifont') format('svg');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Didot';
-  src: url('/fonts/didot-italic.eot');
-  src: url('/fonts/didot-italic.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/didot-italic.woff') format('woff'),
-       url('/fonts/didot-italic.ttf') format('truetype'),
-       url('/fonts/didot-italic.svg#Didot') format('svg');
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-    font-family: 'Bembo';
-    src: url('/fonts/bembo.eot');
-    src: url('/fonts/bembo.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/bembo.woff') format('woff'),
-         url('/fonts/bembo.ttf') format('truetype'),
-         url('/fonts/bembo.svg#Bembo') format('svg');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Didot';
-    src: url('/fonts/didot.eot');
-    src: url('/fonts/didot.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/didot.woff') format('woff'),
-         url('/fonts/didot.ttf') format('truetype'),
-         url('/fonts/didot.svg#Didot') format('svg');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Didot';
-    src: url('/fonts/didot-italic.eot');
-    src: url('/fonts/didot-italic.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/didot-italic.woff') format('woff'),
-         url('/fonts/didot-italic.ttf') format('truetype'),
-         url('/fonts/didot-italic.svg#Didot') format('svg');
-    font-weight: 400;
-    font-style: italic;
-}
+@include font-face('Icons', '/fonts/icomoon', '400');
 
 $fontOne: 'Lato', sans-serif;
 $fontTwo: 'GranjonLTStd', serif;

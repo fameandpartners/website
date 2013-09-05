@@ -547,6 +547,7 @@
       }
       .colors {
         float: left;
+        margin: 0 10px 0 0;
         .color {
           float: left;
           width: 23px;
@@ -560,6 +561,15 @@
             background-position: center center;
             background-repeat: no-repeat;
           } 
+        }
+      }
+      .customize {
+        float: left;
+        margin: 4px 0 0;
+        .icon-help {
+          margin: 0 0 0 3px;
+          position: relative;
+          top: 2px;
         }
       }
     }
@@ -634,24 +644,24 @@
     .buy-wishlist {
       margin: 0 0 28px;
       position: relative;
-      .buy-now, .btn-layby, .add-wishlist {
+      .buy-layby, .buy-now, .btn-layby, .add-wishlist {
         display: inline-block;
         text-decoration: none;
         vertical-align: top;
       }
-      .buy-now, .btn-layby {
+      .buy-layby {
+        text-align: center;
+        margin: 0 14px 0 0;
+      }
+      .buy-now {
         text-transform: uppercase;
         color: #fff;
         font: 300 20px/38px $fontOne;
         height: 38px;
-        text-align: center;
-      }
-      .buy-now {
         position: relative;
         width: 130px;
         overflow: hidden;
         padding: 0 42px;
-        margin: 0 14px 14px 0;
         @include linear-gradient(#414141, #252525);
         &.adding, &.added {
           &:after {
@@ -675,10 +685,27 @@
           }
         }
       }
+      .or-line {
+        margin: 4px 0;
+        span {
+          padding: 0 10px;
+        }
+      }
       .btn-layby {
-        background: image-url('icon-layby-order.png') 9px 8px no-repeat #e99d8e;
-        color: #fff;
-        padding: 0 18px 0 36px;
+        text-transform: uppercase;
+        text-shadow: 0 -1px 0 #fff;
+        font: 400 11px/22px $fontOne;
+        padding: 0 12px;
+        border: 1px solid #d4d4d4;
+        @include linear-gradient(#f4f4f4, #e1e1e1);
+        .icon {
+          vertical-align: middle;
+          position: relative;
+          top: -1px;
+          font-size: 14px;
+          color: #fe9881;
+          margin: 0 6px 0 0;
+        }
       }
       .add-wishlist {
         border: 1px solid #dadadc;

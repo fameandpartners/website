@@ -67,6 +67,9 @@ ruby:
           .colors
             - colors.each do |color|
               .color class='#{color}' data-color='#{color}' title='#{color}'
+          /.customize
+            = link_to 'Customize this dress', '#'
+            i.icon-help
         .notice
           .colour-images Images of other colours are on their way
         .size-select
@@ -77,8 +80,11 @@ ruby:
                 option{value=size} = size
           = link_to 'What size am I?', '#what-size', class: 'info toggle-sizes'
         .buy-wishlist.clearfix
-          = add_to_bag_link(@product)
-          = layby_this_dress(@product)
+          .buy-layby
+            = add_to_bag_link(@product)
+            .or-line
+              span or
+            = layby_this_dress(@product)
           = add_to_wishlist_link(@product)
         .tabs
           ul.tabs-links

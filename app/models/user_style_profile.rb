@@ -41,6 +41,12 @@ class UserStyleProfile < ActiveRecord::Base
     end
   end
 
+  validate do
+    unless attributes.slice(*BASIC_STYLES).values.sum.round(2).eql?(10.0)
+      errors.add(:base, :"points_number.invalid")
+    end
+  end
+
   #validate do
   #  unless trends.all?{ |trend| TRENDS.include?(trend) }
   #    errors.add(:trends, :inclusion)

@@ -1,6 +1,7 @@
 ruby:
   param_prefix = "payment_source[#{payment_method.id}]"
   options_hash = Rails.env.production? ? {:autocomplete => 'off'} : {}
+
 .grid-container
   .grid-50
     .input
@@ -10,7 +11,7 @@ ruby:
     .input
       label Name on Card
       = text_field_tag "#{param_prefix}[full_name]"
-.grid-container.border
+.grid-container
   .grid-50
     .input
       label Expiry Date
