@@ -547,6 +547,7 @@
       }
       .colors {
         float: left;
+        margin: 0 10px 0 0;
         .color {
           float: left;
           width: 23px;
@@ -560,6 +561,15 @@
             background-position: center center;
             background-repeat: no-repeat;
           } 
+        }
+      }
+      .customize {
+        float: left;
+        margin: 4px 0 0;
+        .icon-help {
+          margin: 0 0 0 3px;
+          position: relative;
+          top: 2px;
         }
       }
     }

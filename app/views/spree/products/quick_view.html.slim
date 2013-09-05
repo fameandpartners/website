@@ -55,6 +55,9 @@ ruby:
         .colors
           - colors.each do |color|
             .color class='#{color}' data-color='#{color}'
+        /.customize
+            = link_to 'Customize this dress', '#'
+            i.icon-help
       .notice
         .colour-images Images of other colours are on their way
       .size-select
