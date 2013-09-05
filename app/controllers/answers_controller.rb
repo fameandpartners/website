@@ -51,6 +51,8 @@ class AnswersController < ApplicationController
       style_profile = UserStyleProfile.new
       style_profile.user = current_spree_user
 
+      basic_styles = UserStyleProfile::BASIC_STYLES
+
       if session['quiz']['answers'].values.all?(&:present?)
         session['quiz']['answers'].each do |question_id, answer_ids|
           question = Question.find(question_id)
@@ -69,12 +71,31 @@ class AnswersController < ApplicationController
           UserStyleProfile::STYLE_ATTRIBUTES.each do |attribute|
             points = answers.map{|answer| answer.send(attribute) }.reduce(:+).to_f / answers.count
 
-            if UserStyleProfile::BASIC_STYLES.include?(attribute)
+            if basic_styles.include?(attribute)
               points = points / quiz.questions.select(&:pointable?).count
             end
 
             style_profile.send("#{attribute}=", style_profile.send(attribute) + points)
           end
+        end
+
+        factor = style_profile.attributes.slice(*basic_styles).values.sum / 10.0
+
+        total = 0
+
+        basic_styles.each do |attribute|
+          points = (style_profile.send(attribute) / factor).round(2)
+
+          if total >= 10
+            points = 0
+          elsif (points + total) > 10
+            points = (10.0 - total).round(2)
+          elsif basic_styles.last.eql?(attribute) && (total + points) < 10
+            points = (10.0 - total).round(2)
+          end
+
+          style_profile.send("#{attribute}=", points)
+          total = (total + points).round(2)
         end
 
         style_profile.serialized_answers = session['quiz']['answers']
