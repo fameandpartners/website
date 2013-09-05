@@ -90,8 +90,11 @@ Spree::CheckoutController.class_eval do
       # with 'cart checkout' by paypal express we can return to fill address
       if @order.state == 'payment' && @order.has_checkout_step?('payment')
         state_callback(:before)
-        @order.next
-        state_callback(:after)
+        if @order.next
+          state_callback(:after)
+        else
+          @order.errors.delete(:state)
+        end
       end
 
       if @order.state == 'complete' || @order.completed?
@@ -126,8 +129,11 @@ Spree::CheckoutController.class_eval do
 
   def edit
     unless signed_in?
-      @user = Spree::User.new
-      @user.email ||= @order.email
+      @user = Spree::User.new(
+        email: @order.email,
+        first_name: @order.user_first_name,
+        last_name: @order.user_last_name
+      )
     end
 
     respond_with(@order) do |format|
