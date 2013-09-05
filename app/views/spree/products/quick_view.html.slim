@@ -68,8 +68,11 @@ ruby:
               option{value=size} = size
         = link_to 'What size am I?', '#what-size', class: 'info toggle-sizes'
       .buy-wishlist
-        = add_to_bag_link(@product)
-        = layby_this_dress(@product)
+        .buy-layby
+          = add_to_bag_link(@product)
+          .or-line
+            span or
+          = layby_this_dress(@product)
         = add_to_wishlist_link(@product)
 
       .tabs

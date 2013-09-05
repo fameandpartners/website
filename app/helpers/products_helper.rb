@@ -86,7 +86,7 @@ module ProductsHelper
   end
 
   def layby_this_dress(product)
-    link_to 'Layby this dress', "mailto:team@fameandpartners.com?subject=I would like to layby this dress: #{product.name}", class: 'btn-layby'
+    mail_to "team@fameandpartners.com?subject=I would like to layby this dress: #{product.name}", content_tag(:i, '', class: 'icon icon-layby') + 'Layby this dress', class: 'btn-layby'
   end
 
   def in_wishlist?(variant)
