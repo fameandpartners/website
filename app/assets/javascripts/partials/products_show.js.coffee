@@ -46,19 +46,21 @@ $(".products.show").ready ->
 
   window.helpers.addBuyButtonHandlers($('.buy-wishlist .buy-now'), { expandShoppingBag: true})
 
-  $(".tabs .tabs-links a[href='#videos']").on('click', (e) ->
-    if !_.isEmpty(window.product_analytics_label)
-      track.viewVideo(window.product_analytics_label)
-  )
-
-  $(".tabs .tabs-links a[href='#inspiration']").on('click', (e) ->
-    if !_.isEmpty(window.product_analytics_label)
-      track.viewCelebrityInspiration(window.product_analytics_label)
-  )
-
   # send to friend
   $('a.send-to-friend').on('click', (e) ->
     e.preventDefault()
     productId = $(e.currentTarget).data('product')
     popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
   )
+
+  # track events on page
+  createTrackHandler = (method) ->
+    handler = (e) ->
+      if !_.isEmpty(window.product_analytics_label)
+        track[method].call(window, window.product_analytics_label)
+
+  $(".tabs .tabs-links a[href='#videos']").on('click', createTrackHandler('viewVideo'))
+  $(".tabs .tabs-links a[href='#inspiration']").on('click', createTrackHandler('viewCelebrityInspiration'))
+  $('.buy-wishlist a.btn-layby').on('click', createTrackHandler('laybyButtonClick'))
+  $('.product-info .customize a').on('click', createTrackHandler('customDressClick'))
+

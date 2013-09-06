@@ -84,4 +84,10 @@ window.track = {
 
   sentSendToFriend: (label) ->
     track.event('SendToFriend', 'Sent', label)
+
+  customDressClick: (label) ->
+    track.event('Products', 'CustomDressClicked', label)
+
+  laybyButtonClick: (label) ->
+    track.event('Products', 'LaybyClicked', label)
 }

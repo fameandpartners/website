@@ -94,16 +94,16 @@ window.helpers.quickViewer = {
     )
     helpers.buildImagesViewer(helpers.quickViewer.container).init()
 
-    # track product details viewing
-    $(".tabs .tabs-links a[href='#videos']").on('click', (e) ->
-      if helpers.quickViewer.product_analytics_label?
-        track.viewVideo(helpers.quickViewer.product_analytics_label)
-    )
+    # track events on page
+    createTrackHandler = (method) ->
+      handler = (e) ->
+        if !_.isEmpty(helpers.quickViewer.product_analytics_label)
+          track[method].call(window, helpers.quickViewer.product_analytics_label)
 
-    $(".tabs .tabs-links a[href='#inspiration']").on('click', (e) ->
-      if helpers.quickViewer.product_analytics_label?
-        track.viewCelebrityInspiration(helpers.quickViewer.product_analytics_label)
-    )
+    $(".tabs .tabs-links a[href='#videos']").on('click', createTrackHandler('viewVideo'))
+    $(".tabs .tabs-links a[href='#inspiration']").on('click', createTrackHandler('viewCelebrityInspiration'))
+    $('.buy-wishlist a.btn-layby').on('click', createTrackHandler('laybyButtonClick'))
+    $('.product-info .customize a').on('click', createTrackHandler('customDressClick'))
 
   movePopupToCenter: () ->
     window.helpers.quickViewer.container.center()
