@@ -1,13 +1,13 @@
-@include font-face('GranjonLTStd', '/fonts/granjonltstd', '300');
-@include font-face('GranjonLTStd', '/fonts/granjonltstd-italic', '300', 'italic');
-@include font-face('GranjonLTStd', '/fonts/granjonltstd-bold', '700');
+@include font-face('GranjonLTStd', '/fonts/granjonltstd', 300);
+@include font-face('GranjonLTStd', '/fonts/granjonltstd-italic', 300, italic);
+@include font-face('GranjonLTStd', '/fonts/granjonltstd-bold', 700);
 
-@include font-face('Annifont', '/fonts/annifont', '400');
+@include font-face('Annifont', '/fonts/annifont', 400);
 
-@include font-face('Didot', '/fonts/didot', '400');
-@include font-face('Didot', '/fonts/didot-italic', '400', 'italic');
+@include font-face('Didot', '/fonts/didot', 400);
+@include font-face('Didot', '/fonts/didot-italic', 400, italic);
 
-@include font-face('Icons', '/fonts/icomoon', '400');
+@include font-face('Icons', '/fonts/icomoon', 400);
 
 $fontOne: 'Lato', sans-serif;
 $fontTwo: 'GranjonLTStd', serif;
