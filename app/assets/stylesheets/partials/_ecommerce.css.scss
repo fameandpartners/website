@@ -1027,7 +1027,7 @@
     }
   }
   .continue-buy {
-    .grid-70 {
+    .grid-75 {
       padding-left: 0;
     }
     .grid-25 {
@@ -1066,6 +1066,10 @@
       margin: 0;
       @include linear-gradient(#414141, #252525);
     }
+    .ask-parents {
+      width: auto;
+      @include linear-gradient(#fea99c, #fe9686);
+    }
     .or {
       margin: 4px 0;
       text-transform: uppercase;
@@ -1083,9 +1087,11 @@
 
 .promo-summary {
   margin: 20px 0 10px;
-  .grid-70 {
+  .promo-block {
     padding: 34px 0;
     background: #f3f3f3;
+  }
+  .grid-75 {
     input {
       border: 1px solid #c7c7c7;
       background: #fff;
