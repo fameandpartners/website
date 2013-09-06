@@ -87,7 +87,7 @@ ruby:
         .tabs
           ul.tabs-links
             li.active = link_to 'Description', '#description'
-            - if @product.property('fit').present? or @product.style_profile.present? and @product.style_profile.suitable_shapes.present?
+            - if @product.property('fit').present? or (@product.style_profile.present? and @product.style_profile.suitable_shapes.present?)
               li = link_to 'Size and fit', '#sizes'
             li = link_to 'Details', '#details'
             li = link_to 'Styling Notes', '#notes'
