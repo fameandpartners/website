@@ -19,6 +19,11 @@ $(".orders.edit").ready ->
       root_element.find('.remove-item-from-cart').on('click', page.removeItemClickHandler)
       root_element.find('.edit-link').on('click', page.editItemClickHandler)
       root_element.find('.wishlist a.move-to-wishlist').on('click', page.moveItemToWishlistClickHandler)
+      root_element.find('#ask-parent-to-pay-button').on('click', page.askParentToPayHandler)
+
+    askParentToPayHandler: (e) ->
+      e.preventDefault()
+      $('#ask-parent-to-pay-modal').show()
 
     removeItemClickHandler: (e) ->
       e.preventDefault()

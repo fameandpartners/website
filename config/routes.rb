@@ -240,6 +240,8 @@ FameAndPartners::Application.routes.draw do
 
   get 'search' => 'pages#search'
 
+  get '/cart/guest' => 'spree/orders#guest'
+
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
