@@ -2152,9 +2152,6 @@
   padding: 20px 0;
 }
 
-
-
-
 .twin-alert-block {
   margin: 20px 0 10px 0;
   .reserved {
@@ -2212,5 +2209,13 @@
     display: inline-block;
     vertical-align: top;
     margin: 1px 0 0;
+  }
+}
+
+.orders.guest {
+  #content h2 {
+    font: 400 italic 46px/1.2 $fontTwo;
+    color: #e79e90;
+    margin: 38px 0 0;
   }
 }
