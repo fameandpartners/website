@@ -567,13 +567,14 @@
         float: left;
         margin: 4px 0 0;
         a {
-          font-size: 10px;
+          font-size: 11px;
           text-transform: uppercase;
         }
         .icon-help {
           margin: 0 0 0 3px;
           position: relative;
           top: 2px;
+          font-size: 14px;
         }
         .customize-dropdown-wrapper {
           display: inline-block;
@@ -585,7 +586,9 @@
             left: 0;
             margin: 0 0 0 -97px;
             z-index: 2;
-            padding: 8px 10px;
+            padding: 12px 14px; 
+            font-size: 12px; 
+            line-height: 1.3em;
             background: #fff;
             width: 180px;
             border: 1px solid #ebebeb;

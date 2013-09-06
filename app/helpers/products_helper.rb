@@ -86,16 +86,16 @@ module ProductsHelper
   end
 
   def layby_this_dress(product)
-    mail_to "team@fameandpartners.com?subject=I would like to layby this dress: #{product.name}", content_tag(:i, '', class: 'icon icon-layby') + 'Layby this dress', class: 'btn-layby'
+    mail_to "team@fameandpartners.com?subject=I would like to layby this dress: #{product.sku}", content_tag(:i, '', class: 'icon icon-layby') + 'Layby this dress', class: 'btn-layby'
   end
 
   def customize_this_dress(product)
     content_tag :div, class: 'customize' do
-      mail = mail_to "team@fameandpartners.com?subject=I would like to customise this dress: #{product.name}", 'Customize this dress'
+      mail = mail_to "team@fameandpartners.com?subject=I would like to customise this dress: #{product.sku}", 'Free Customisation'
       dropdown = content_tag :div, class: 'customize-dropdown-wrapper' do
         content_tag(:i, '', class: 'icon-help') + 
         content_tag(:div, class: 'customize-dropdown') do
-          "here goes the info"
+          "FREE CUSTOMISATION You can customise almost any aspect of this dress. Contact us today to enquire about customising this dress."
         end
       end
       mail + dropdown
