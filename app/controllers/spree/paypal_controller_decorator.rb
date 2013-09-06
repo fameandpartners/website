@@ -4,6 +4,7 @@ Spree::PaypalController.class_eval do
   # update order step using info from paypal
   def update_order_steps
     order = current_order
+    original_state = order.state
 
     if !signed_in? # 'personal'
       update_order_personal_info
@@ -12,6 +13,9 @@ Spree::PaypalController.class_eval do
     if !order.has_checkout_step?("address") || order.bill_address.blank? || order.shipping_address.blank?
       update_order_addresses
     end
+
+    order.state = original_state
+    order.save
   end
 
   protected
@@ -22,9 +26,9 @@ Spree::PaypalController.class_eval do
     user = order.user
     user ||= build_user(payment_details_response.get_express_checkout_details_response_details.payer_info)
 
-    order.email = prepare_email(user.email)
-    order.user_first_name = user.first_name
-    order.user_last_name = user.last_name
+    order.email           ||= prepare_email(user.email)
+    order.user_first_name ||= user.first_name
+    order.user_last_name  ||= user.last_name
 
     complete_order_step(order, 'cart')
   end
