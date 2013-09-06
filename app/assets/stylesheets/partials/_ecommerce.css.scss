@@ -593,10 +593,14 @@
             width: 180px;
             border: 1px solid #ebebeb;
             box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+            b {
+              text-transform: uppercase;
+            }
             &:before, &:after {
               content: '';
               position: absolute;
               left: 50%;
+              margin: 0 0 0 -3px;
               border-left: 6px solid transparent;
               border-right: 6px solid transparent;
             }
