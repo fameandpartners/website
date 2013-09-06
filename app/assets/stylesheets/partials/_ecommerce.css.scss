@@ -933,10 +933,16 @@
           left: 0;
           a {
             display: inline-block;
-            padding: 0 0 0 30px;
-            background: image-url('icon-product-like.png') 0 center no-repeat;
             text-decoration: none;
             font: 300 14px/36px $fontThree;
+          }
+          .icon {
+            color: #fea99c;
+            font-size: 26px;
+            position: relative;
+            top: -3px;
+            margin: 0 4px 0 0;
+            vertical-align: middle;
           }
         }
       }
@@ -1069,6 +1075,9 @@
     .ask-parents {
       width: auto;
       @include linear-gradient(#fea99c, #fe9686);
+    }
+    .wide {
+      width: 100%;
     }
     .or {
       margin: 4px 0;

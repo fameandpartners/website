@@ -7,7 +7,7 @@
 @include font-face('Didot', '/fonts/didot', 400);
 @include font-face('Didot', '/fonts/didot-italic', 400, italic);
 
-@include font-face('Icons', '/fonts/icomoon', 400);
+@include font-face('Icons', '/fonts/icomoon');
 
 $fontOne: 'Lato', sans-serif;
 $fontTwo: 'GranjonLTStd', serif;
