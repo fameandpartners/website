@@ -55,9 +55,7 @@ ruby:
         .colors
           - colors.each do |color|
             .color class='#{color}' data-color='#{color}'
-        .customize
-          = mail_to "team@fameandpartners.com?subject=I would like to customise this dress: #{@product.name}", 'Customize this dress'
-          i.icon-help
+        = customize_this_dress(@product)
       .notice
         .colour-images Images of other colours are on their way
       .size-select

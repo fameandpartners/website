@@ -89,6 +89,19 @@ module ProductsHelper
     mail_to "team@fameandpartners.com?subject=I would like to layby this dress: #{product.name}", content_tag(:i, '', class: 'icon icon-layby') + 'Layby this dress', class: 'btn-layby'
   end
 
+  def customize_this_dress(product)
+    content_tag :div, class: 'customize' do
+      mail = mail_to "team@fameandpartners.com?subject=I would like to customise this dress: #{product.name}", 'Customize this dress'
+      dropdown = content_tag :div, class: 'customize-dropdown-wrapper' do
+        content_tag(:i, '', class: 'icon-help') + 
+        content_tag(:div, class: 'customize-dropdown') do
+          "here goes the info"
+        end
+      end
+      mail + dropdown
+    end
+  end
+
   def in_wishlist?(variant)
     return current_wished_product_ids.include?(variant.product_id)
   end
