@@ -4,7 +4,6 @@ Spree::PaypalController.class_eval do
   # update order step using info from paypal
   def update_order_steps
     order = current_order
-    original_state = order.state
 
     if !signed_in? # 'personal'
       update_order_personal_info
@@ -14,7 +13,7 @@ Spree::PaypalController.class_eval do
       update_order_addresses
     end
 
-    order.state = original_state
+    order.state = 'payment'
     order.save
   end
 
