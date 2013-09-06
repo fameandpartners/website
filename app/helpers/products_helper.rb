@@ -95,7 +95,7 @@ module ProductsHelper
       dropdown = content_tag :div, class: 'customize-dropdown-wrapper' do
         content_tag(:i, '', class: 'icon-help') + 
         content_tag(:div, class: 'customize-dropdown') do
-          content_tag(:b, 'Free customization') +
+          content_tag(:b, 'Free customisation') +
           tag(:br) +
           "You can customise almost any aspect of this dress. Contact us today to enquire about customising this dress."
         end
