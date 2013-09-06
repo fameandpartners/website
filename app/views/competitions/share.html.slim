@@ -33,3 +33,6 @@ javascript:
     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=498032100286782";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
+- if session[:new_entrant]
+  = fb_analytics_track('6009830748096')
