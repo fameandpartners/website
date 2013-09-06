@@ -87,7 +87,7 @@ ruby:
         .tabs
           ul.tabs-links
             li.active = link_to 'Description', '#description'
-            - if @product.property('fit').present?
+            - if @product.property('fit').present? or @product.style_profile.present? and @product.style_profile.suitable_shapes.present?
               li = link_to 'Size and fit', '#sizes'
             li = link_to 'Details', '#details'
             li = link_to 'Styling Notes', '#notes'
@@ -98,21 +98,20 @@ ruby:
               = t('product_has_no_description')
           #sizes.tab-content
             = @product.property('fit')
-            .hide
-              - if @product.style_profile and !@product.style_profile.suitable_shapes.empty?
-                .body-shapes
-                  .desc The body shapes that this dress suits:
+            - if @product.style_profile and !@product.style_profile.suitable_shapes.empty?
+              .body-shapes
+                .desc The body shapes that this dress suits:
 
-                  ul
-                    - @product.style_profile.suitable_shapes.each do |shape|
-                      li
-                        = link_to spree.products_path(bodyshape: shape) do
-                          - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
-                          .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
-                          .name #{title}
+                ul
+                  - @product.style_profile.suitable_shapes.each do |shape|
+                    li
+                      = link_to spree.products_path(bodyshape: shape) do
+                        - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
+                        .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
+                        .name #{title}
           #details.tab-content
-            .info SKU:  #{@product.sku}
-            | Material:
+            .info SKU: #{@product.sku}
+            ' Material:
             = @product.property('fabric')
           - if @product.property('style_notes').present?
             #notes.tab-content
