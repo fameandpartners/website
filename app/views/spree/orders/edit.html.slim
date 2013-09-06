@@ -68,16 +68,16 @@
             .column.grid-25
               .title Full security
               .desc = image_tag 'comodo-secure.png', alt: "Comodo SSl Security", width: 101, height: 32
-            .column.grid-75
+            .column.grid-45
               .title Payment methods
               .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
 
-            .hide.column.grid-30
-              .title Promo code
+            .column.grid-30
+              .title Promocode
               .desc
                 = form_for @order, remote: true do |f|
-                  = f.submit 'Send', style: 'float: right;'
-                  = f.text_field :coupon_code, style: "width: 120px;"
+                  = f.submit 'Redeem', style: 'float: right;'
+                  = f.text_field :coupon_code, style: "width: 110px;"
         .summary.grid-25.prefix-5.order-summary
           = render 'summary'
       .continue-buy.grid-container
