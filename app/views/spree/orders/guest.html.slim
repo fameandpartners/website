@@ -9,6 +9,7 @@
           ' Free shipping
           br
           ' on all items
+
   h2 Your daugther Ella asks you to pay for her dress
   
   - if @order.line_items.empty?
@@ -84,11 +85,10 @@
           = render 'summary'
       .continue-buy.grid-container
         .grid-75
-          .fleft = link_to 'Continue shopping', products_path, class: 'continue-shopping'
-          .fright = link_to 'Ask parents to pay', '#', class: 'buy-now ask-parents', id: 'ask-parent-to-pay-button'
+          ' &nbsp;
         .grid-25
           = form_for @order, url: update_cart_path do |f|
-            = f.button :checkout, name: 'checkout', class: 'buy-now'
+            = f.button :checkout, name: 'checkout', class: 'buy-now ask-parents wide'
           - if (paypal_button_html = paypal_express_button).present?
             div
               .or or
