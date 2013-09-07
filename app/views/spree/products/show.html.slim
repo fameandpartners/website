@@ -1,6 +1,6 @@
 javascript: 
   window.product_variants = #{{ @product_variants.to_json }}
-  window.product_analytics_label = '#{{ analytics_label(:product, @product) }}'
+  window.product_analytics_label = '#{{j analytics_label(:product, @product) }}'
 
 ruby:
  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
@@ -67,6 +67,7 @@ ruby:
           .colors
             - colors.each do |color|
               .color class='#{color}' data-color='#{color}' title='#{color}'
+          = customize_this_dress(@product)
         .notice
           .colour-images Images of other colours are on their way
         .size-select
@@ -77,13 +78,16 @@ ruby:
                 option{value=size} = size
           = link_to 'What size am I?', '#what-size', class: 'info toggle-sizes'
         .buy-wishlist.clearfix
-          = add_to_bag_link(@product)
-          = layby_this_dress(@product)
+          .buy-layby
+            = add_to_bag_link(@product)
+            .or-line
+              span or
+            = layby_this_dress(@product)
           = add_to_wishlist_link(@product)
         .tabs
           ul.tabs-links
             li.active = link_to 'Description', '#description'
-            - if @product.property('fit').present?
+            - if @product.property('fit').present? or (@product.style_profile.present? and @product.style_profile.suitable_shapes.present?)
               li = link_to 'Size and fit', '#sizes'
             li = link_to 'Details', '#details'
             li = link_to 'Styling Notes', '#notes'
@@ -94,21 +98,20 @@ ruby:
               = t('product_has_no_description')
           #sizes.tab-content
             = @product.property('fit')
-            .hide
-              - if @product.style_profile and !@product.style_profile.suitable_shapes.empty?
-                .body-shapes
-                  .desc The body shapes that this dress suits:
+            - if @product.style_profile and !@product.style_profile.suitable_shapes.empty?
+              .body-shapes
+                .desc The body shapes that this dress suits:
 
-                  ul
-                    - @product.style_profile.suitable_shapes.each do |shape|
-                      li
-                        = link_to spree.products_path(bodyshape: shape) do
-                          - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
-                          .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
-                          .name #{title}
+                ul
+                  - @product.style_profile.suitable_shapes.each do |shape|
+                    li
+                      = link_to spree.products_path(bodyshape: shape) do
+                        - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
+                        .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
+                        .name #{title}
           #details.tab-content
-            .info SKU:  #{@product.sku}
-            | Material:
+            .info SKU: #{@product.sku}
+            ' Material:
             = @product.property('fabric')
           - if @product.property('style_notes').present?
             #notes.tab-content

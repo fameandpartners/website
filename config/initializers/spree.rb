@@ -36,7 +36,7 @@ Spree.config do |config|
 
   config.checkout_zone = 'Australia'
 
-  config.emails_sent_from = 'noreply@fameandpartners.com'
+  config.emails_sent_from = 'Fame And Partners<noreply@fameandpartners.com>'
 end
 
 Spree.user_class = "Spree::User"

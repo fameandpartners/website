@@ -18,16 +18,24 @@ module Overrides
           indexes :description, :analyzer => :snowball
           indexes :taxons, :as => 'taxons.map(&:name)'
           indexes :colors, :as => 'colors'
+
           indexes :glam, :type => :float, :as => 'style_profile.try(:glam)'
           indexes :girly, :type => :float, :as => 'style_profile.try(:girly)'
           indexes :classic, :type => :float, :as => 'style_profile.try(:classic)'
           indexes :edgy, :type => :float, :as => 'style_profile.try(:edgy)'
           indexes :bohemian, :type => :float, :as => 'style_profile.try(:bohemian)'
+
+          indexes :sexiness, :type => :float, :as => 'style_profile.try(:sexiness)'
+          indexes :fashionability, :type => :float, :as => 'style_profile.try(:fashionability)'
+
           indexes :apple, :type => :float, :as => 'style_profile.try(:apple)'
           indexes :pear, :type => :float, :as => 'style_profile.try(:pear)'
+          indexes :athletic, :type => :float, :as => 'style_profile.try(:athletic)'
           indexes :strawberry, :type => :float, :as => 'style_profile.try(:strawberry)'
           indexes :hour_glass, :type => :float, :as => 'style_profile.try(:hour_glass)'
           indexes :column, :type => :float, :as => 'style_profile.try(:column)'
+          indexes :petite, :type => :float, :as => 'style_profile.try(:petite)'
+
           indexes :bra_aaa, :type => :float, :as => 'style_profile.try(:bra_aaa)'
           indexes :bra_aa, :type => :float, :as => 'style_profile.try(:bra_aa)'
           indexes :bra_a, :type => :float, :as => 'style_profile.try(:bra_a)'
@@ -36,8 +44,6 @@ module Overrides
           indexes :bra_d, :type => :float, :as => 'style_profile.try(:bra_d)'
           indexes :bra_e, :type => :float, :as => 'style_profile.try(:bra_e)'
           indexes :bra_fpp, :type => :float, :as => 'style_profile.try(:bra_fpp)'
-          indexes :sexiness, :type => :float, :as => 'style_profile.try(:sexiness)'
-          indexes :fashionability, :type => :float, :as => 'style_profile.try(:fashionability)'
         end
 
         before_create do

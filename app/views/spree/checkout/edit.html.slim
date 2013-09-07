@@ -32,6 +32,7 @@
         else
           active = 'personal'
         end
+        active = 'personal' if active == 'cart'
        else
         if @order.state.eql?('cart')
           active = 'address'

@@ -1,6 +1,6 @@
 # application base
 configatron.host = 'example.com'
-configatron.noreply = 'noreply@fameandpartners.com'
+configatron.noreply = 'Fame And Partners<noreply@fameandpartners.com>'
 configatron.admin = 'team@fameandpartners.com'
 configatron.app_name = 'Fame And Partners'
 
