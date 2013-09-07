@@ -16,6 +16,7 @@ after   'deploy:setup', 'deploy:first'
 
 after   'deploy:update_code', 'db:create_symlink'
 after   'deploy:create_symlink', 'deploy:cleanup'
+after   'deploy:finalize_update', 'rbenv:create_version_file'
 
 # local precompile assets
 before  'deploy:finalize_update', 'deploy:assets:symlink'
