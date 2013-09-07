@@ -2030,6 +2030,29 @@
 #content #order {
   .grid-35 {
     padding-left: 0;
+    .pricing {
+      font-size: 14px;
+      color: #000;
+      li {
+        margin: 10px 0 0;
+        .label {
+          display: inline-block;
+          vertical-align: top;
+          width: 124px;
+        }
+        .desc {
+          display: inline-block;
+          vertical-align: top;
+          span {
+            font-size: 10px;
+            margin: 0 10px 0 0;
+          }
+        }
+        .taxes {
+          font-size: 10px;
+        }
+      }
+    }
   }
   .grid-65 {
     h2 {
