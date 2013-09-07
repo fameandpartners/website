@@ -1,4 +1,4 @@
 $('.quiz-box-inner').html('<%=j render(:template => 'quizzes/thanks.html.slim') %>');
 setTimeout(function(){ window.location = "<%= my_boutique_url %>"; }, 3000);
 
-track.quizFinished('<%= analytics_label(:user) %>');
+track.quizFinished('<%=j analytics_label(:user) %>');
