@@ -1,29 +1,30 @@
-.block-name Item description
+.checkout-summary
+  .block-name Item description
 
-.shopping-bag-popup
-  ul.items-carousel
-    = render partial: "shared/line_item",
-      collection: @order.line_items,
-      as: :line_item,
-      locals: {hide_remove: true}
+  .shopping-bag-popup
+    ul.items-carousel
+      = render partial: "shared/line_item",
+        collection: @order.line_items,
+        as: :line_item,
+        locals: {hide_remove: true}
 
-ul.pricing
-  li
-    .label Subtotal
-    .desc
-      span = @order.currency
-      = @order.display_item_total
-  li
-    .label Shipping
-    .desc
-      = show_order_shipment_total(@order)
-  li
-    .label Promotion
-    .desc
-      = show_order_adjustment_total(@order)
-  li.totals
-    .label Total
-    .desc
-      span = @order.currency
-      = @order.display_total
-      .taxes Including GST
+  ul.pricing
+    li
+      .label Subtotal
+      .desc
+        span = @order.currency
+        = @order.display_item_total
+    li
+      .label Shipping
+      .desc
+        = show_order_shipment_total(@order)
+    li
+      .label Promotion
+      .desc
+        = show_order_adjustment_total(@order)
+    li.totals
+      .label Total
+      .desc
+        span = @order.currency
+        = @order.display_total
+        .taxes Including GST

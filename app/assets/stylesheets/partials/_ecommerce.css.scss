@@ -1660,41 +1660,6 @@
       }
     }
   }
-  .checkout-summary {
-    background: #eee;
-    padding: 16px;
-    font: 300 13px/1.1 $fontOne;
-    .block-name  {
-      text-transform: uppercase;
-      color: #a4a4a4;
-    }
-    .shopping-bag-popup {
-      display: block;
-    }
-    .pricing {
-      font-size: 14px;
-      color: #000;
-      li {
-        margin: 10px 0 0;
-        .label {
-          display: inline-block;
-          vertical-align: top;
-          width: 124px;
-        }
-        .desc {
-          display: inline-block;
-          vertical-align: top;
-          span {
-            font-size: 10px;
-            margin: 0 10px 0 0;
-          }
-        }
-        .taxes {
-          font-size: 10px;
-        }
-      }
-    }
-  }
 }
 
 #content .account-pages {
@@ -2027,9 +1992,18 @@
   }
 }
 
-#content #order {
-  .grid-35 {
-    padding-left: 0;
+#checkout, #order {
+  .checkout-summary {
+    background: #eee;
+    padding: 16px;
+    font: 300 13px/1.1 $fontOne;
+    .block-name  {
+      text-transform: uppercase;
+      color: #a4a4a4;
+    }
+    .shopping-bag-popup {
+      display: block;
+    }
     .pricing {
       font-size: 14px;
       color: #000;
@@ -2053,6 +2027,12 @@
         }
       }
     }
+  }
+}
+
+#content #order {
+  .grid-35 {
+    padding-left: 0;
   }
   .grid-65 {
     h2 {
