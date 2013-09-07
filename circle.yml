@@ -5,4 +5,4 @@ deployment:
   staging:
     branch: master
     commands:
-      - cap staging deploy:migrations
+      - bundle exec cap staging deploy:migrations
