@@ -473,6 +473,12 @@
       li {
         float: left;
         margin: 0 0 0 10px;
+        &.active {
+          label {
+            padding: 0;
+            border: 8px solid #b7f0e5;
+          }
+        }
       }
       label {
         display: block;
@@ -484,6 +490,10 @@
           width: 44px;
           height: 44px;
           border-radius: 50%;
+        }
+        input[type=radio] {
+          opacity: 0;
+          filter: alpha(opacity=0);
         }
       }
       .value-1 {
