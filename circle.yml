@@ -1,0 +1,9 @@
+machine:
+  ruby:
+    version: 1.9.3-p448
+deployment:
+  staging:
+    branch: master
+    commands:
+      - bundle exec cap staging deploy:migrations:
+          timeout: 480
