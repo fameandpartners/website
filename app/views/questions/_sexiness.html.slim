@@ -1,6 +1,24 @@
-.subtitle From least important to most important.
-ul.lips
-  - question.answers.order('sexiness ASC').each do |answer|
-    li
+.sexiness
+  .sexiness-profile.first
+  ul.values
+    li.value-1
       label
-        = form.radio_button :code, answer.code
+        .inner
+          = form.radio_button :code, 'sxs2'
+    li.value-2
+      label
+        .inner
+          = form.radio_button :code, 'sxs4'
+    li.value-3
+      label
+        .inner
+          = form.radio_button :code, 'sxs6'
+    li.value-4
+      label
+        .inner
+          = form.radio_button :code, 'sxs8'
+    li.value-5
+      label
+        .inner
+          = form.radio_button :code, 'sxs10'
+  .sexiness-profile.second
