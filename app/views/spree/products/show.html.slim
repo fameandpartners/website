@@ -1,4 +1,4 @@
-javascript: 
+javascript:
   window.product_variants = #{{ @product_variants.to_json }}
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}'
 
@@ -11,7 +11,7 @@ ruby:
 
 .wrap
   .product-page.grid-container
-    
+
     .grid-55
       .tabs
         ul.tabs-links
@@ -52,13 +52,13 @@ ruby:
                 .name = celebrity.celebrity_name
 
         .share-buttons
-          .fleft = share_buttons(@product)  
+          .fleft = share_buttons(@product)
       .notice
         .colour
-          ' Want a different colour? 
-          = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour." 
-        .faster                                                                                                         
-          ' Need this faster? 
+          ' Want a different colour?
+          = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour."
+        .faster
+          ' Need this faster?
           = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
       .free-styling-tips
         ' Free styling tips
@@ -163,6 +163,8 @@ ruby:
                 ' Free styling
                 br
                 ' advice
+        .twin-alert
+          a.twin-alert-link data-id=(@product.id) Twin Alert
 
   .page-name
     .inner

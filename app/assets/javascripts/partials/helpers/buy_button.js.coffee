@@ -40,7 +40,7 @@ window.helpers.addBuyButtonHandlers = (addButton, args = {}) ->
       if options.expandShoppingBag
         window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
     else
-      addErrorMessage($(e.currentTarget).parent(), 'Please, select size and color')
+      addErrorMessage($(e.currentTarget).parent(), 'Please, select size and colour')
   )
 
   $button.on('variant_selected', (e) ->
