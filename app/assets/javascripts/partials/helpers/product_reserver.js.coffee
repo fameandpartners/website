@@ -7,10 +7,15 @@ window.helpers.initProductReserver = (elements, variantsSelector) ->
       element: $(element),
 
       onButtonClickHandler: (e) ->
+        e.preventDefault()
         if productReserver.validate.call(productReserver)
           productId = $(e.target).data('id')
           color = productReserver.selectedColor()
-          popups.showProductReservationPopup(productId, color)
+          popups.showProductReservationPopup(productId, color, productReserver.remove)
+
+      remove: () ->
+        productReserver.element.hide()
+        productReserver = null
 
       # 'private'
       validate: () ->

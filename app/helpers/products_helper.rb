@@ -143,4 +143,18 @@ module ProductsHelper
       link_to 'Move to wish list', spree_signup_path
     end
   end
+
+  # 'product reservation' link or 'twin alert'
+  def product_twin_alert_link(product)
+    return '' if product.blank?
+
+    if signed_in? && spree_current_user.reserved_dress?(product)
+      # don't show for registered users who already made reservation
+      return ''
+    else
+      content_tag(:div,
+        link_to("Twin Alert", '#', class: 'twin-alert-link', data: { id: product.id }),
+        class: 'twin-alert')
+    end
+  end
 end

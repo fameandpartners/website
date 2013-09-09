@@ -39,6 +39,10 @@ Spree::User.class_eval do
     self.entries.where(master: true).first
   end
 
+  def reserved_dress?(product)
+    self.reservations.where(product_id: product.id).exists?
+  end
+
   class << self
     def create_user(args)
       new_password = generate_password(12)

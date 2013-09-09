@@ -1,6 +1,8 @@
 window.popups or= {}
 
-window.popups.showProductReservationPopup = (productId, color) ->
+window.popups.showProductReservationPopup = (productId, color, callback = null) ->
+  completeCallback = callback
+
   fields = [
     'first_name',
     'last_name',
@@ -44,14 +46,19 @@ window.popups.showProductReservationPopup = (productId, color) ->
       popup.container.find('.modal-container').addClass('form')
       popup.container.find('.save').addClass('submit')
 
+      popup.container.find('input').on('keyup', (e) ->
+        popup.onButtonClick(e) if e.which == 13
+      )
+
     show: () ->
       popup.container.show().center()
       popup.container.find('select').chosen()
 
     successCallback: (data) ->
-      console.log(data)
       if data.success
         popup.hide()
+        popup = null
+        completeCallback.call() if completeCallback
       else
         _.each(data.errors, (name) ->
           input = $("input##{name}")
