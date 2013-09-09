@@ -113,8 +113,6 @@ ruby:
             = description
           - else
             = t('product_has_no_description')
-      /.share-buttons
-        = share_buttons(@product)
       .product-features
         .feature
           i.icon.icon-shipping
@@ -146,3 +144,4 @@ ruby:
             ' Free styling
             br
             ' advice
+      = product_twin_alert_link(@product)

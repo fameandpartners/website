@@ -80,6 +80,12 @@ window.helpers.quickViewer = {
 
     @popupContainer.find('.toggle-sizes').fancybox({width: '1000', height: '183'})
 
+    window.helpers.initProductReserver(
+      @popupContainer.find('.twin-alert a.twin-alert-link'),
+      helpers.quickViewer.product_analytics_label,
+      selector
+    )
+
     # code should be executed after images loaded in order to correctly set carousel height
     @popupContainer.waitForImages(() ->
       # show big images from carouseled small images
