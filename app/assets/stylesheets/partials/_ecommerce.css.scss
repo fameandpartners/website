@@ -487,6 +487,14 @@
       -webkit-filter: grayscale(0%);
       filter: grayscale(0%);
     }
+    .start-moodboard{
+      text-transform: uppercase;
+      font-family: $fontOne;
+      display: inline-block;
+      font-weight: 300; 
+      margin: 3px 0 0 30px;
+      font-size: 13px;
+    }
   }
   .product-info {
     position: relative;
