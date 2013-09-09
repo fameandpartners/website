@@ -1,6 +1,17 @@
 window.popups or= {}
 
 window.popups.showProductReservationPopup = (productId, color) ->
+  fields = [
+    'first_name',
+    'last_name',
+    'email',
+    'password',
+    'password_confirmation',
+    'school_name',
+    'formal_name',
+    'school_year'
+  ]
+
   # init
   if $('.modal.popup-placeholder').length == 0
     $('body.ecommerce #wrap #content').append(JST['templates/modal_popup']())
@@ -12,7 +23,9 @@ window.popups.showProductReservationPopup = (productId, color) ->
     container:  $('.modal.popup-placeholder')
     content:    $('.modal.popup-placeholder .modal-container')
     overlay:    $('.modal.popup-placeholder .overlay')
-    guest: _.isEmpty(window.current_user)
+    guest: _.isEmpty(window.current_user),
+    productId: productId,
+    color: color
 
     init: () ->
       currentYear = new Date().getFullYear()
@@ -26,13 +39,8 @@ window.popups.showProductReservationPopup = (productId, color) ->
       popup.container.find(".modal-title").text("Twin Alert")
       popup.container.find(".save input[type=submit]").val('Register Now')
 
-      popup.container.find('#sender_name').on('change', _.debounce(popup.onInputChanged))
-      popup.container.find('#sender_email').on('change', _.debounce(popup.onInputChanged))
-                                                                                           
-      popup.container.find('#friend_name').on('change', _.debounce(popup.onInputChanged))
-      popup.container.find('#friend_email').on('change', _.debounce(popup.onInputChanged))
-
-      popup.container.addClass('send-to-friend')
+      _.each(fields, (id) -> $("##{id}").on('change', _.debounce(popup.onInputChanged)))
+      
       popup.container.find('.modal-container').addClass('form')
       popup.container.find('.save').addClass('submit')
 
@@ -41,9 +49,15 @@ window.popups.showProductReservationPopup = (productId, color) ->
       popup.container.find('select').chosen()
 
     successCallback: (data) ->
-      #data.success_message
-      unless _.isEmpty(popup.analyticsLabel)
-        track.sentSendToFriend(popup.analyticsLabel)
+      console.log(data)
+      if data.success
+        popup.hide()
+      else
+        _.each(data.errors, (name) ->
+          input = $("input##{name}")
+          input.addClass("error")
+          popup.errorMessage("Please, check this value").insertBefore(input)
+        )
 
     hide: () ->
       popup.container.hide()
@@ -52,18 +66,23 @@ window.popups.showProductReservationPopup = (productId, color) ->
       popup.container.find('.save').removeClass('submit')
 
     getFormData: () ->
-      return {
-        sender_name: popup.container.find('#sender_name').val()
-        sender_email: popup.container.find('#sender_email').val()
-        name: popup.container.find('#friend_name').val()
-        email: popup.container.find('#friend_email').val()
-        message: popup.container.find('#friend_message').val()
-      }
+      result = {user: {}, reservation: {}}
 
-    errorMessage: () ->
+      _.each(['first_name', 'last_name', 'email', 'password', 'password_confirmation'], (name) ->
+        result.user[name] = popup.container.find("##{name}").val()
+      )
+
+      _.each(['school_name', 'formal_name', 'school_year'], (name) ->
+        result.reservation[name] = popup.container.find("##{name}").val()
+      )
+      result.reservation.product_id = popup.productId
+      result.reservation.color = popup.color
+      result
+
+    errorMessage: (errorText = "Can't be empty") ->
       $('<span>', {
         class: 'error',
-        text: "Can't be empty",
+        text: errorText,
         style: 'font-size: small; color: red;'
       })
 
@@ -94,13 +113,12 @@ window.popups.showProductReservationPopup = (productId, color) ->
 
       if popup.formDataValid()
         $.ajax(
-          url: "/products/#{popup.productId}/send_to_friend"
+          url: "/product_reservations"
           type: 'POST'
           dataType: 'json'
           data: formData
           success: popup.successCallback
         )
-        popup.hide()
   }
 
   popup.init()

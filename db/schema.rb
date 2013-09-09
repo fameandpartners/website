@@ -213,6 +213,28 @@ ActiveRecord::Schema.define(:version => 20130912112336) do
 
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
 
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "product_reservations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.string   "school_name"
+    t.string   "formal_name"
+    t.string   "school_year"
+    t.string   "color"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "product_style_profiles", :force => true do |t|
     t.integer  "product_id"
     t.integer  "glam"

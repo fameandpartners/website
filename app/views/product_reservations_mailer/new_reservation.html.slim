@@ -1,0 +1,11 @@
+h1 New Dress reservation
+
+p = "#{ @reservation.user.full_name} reserved dress '#{ @reservation.product.name }'"
+
+.description
+  h3 Details
+  p = @reservation.product.name
+  p = @reservation.product.sku
+  p = @reservation.color
+  p = @reservation.user.first_name
+  p = @reservation.user.last_name

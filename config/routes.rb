@@ -47,6 +47,8 @@ FameAndPartners::Application.routes.draw do
   get 'wishlist' => 'users/wishlists_items#index', as: 'wishlist'
   get 'reviews' => 'users/reviews#index', as: 'reviews'
   # eo account settings
+  
+  resources :product_reservations, only: [:create]
 
   # Blog routes
   blog_constraint = lambda { |request|

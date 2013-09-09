@@ -5,6 +5,8 @@ Spree::User.class_eval do
   has_many :entries, class_name: 'CompetitionEntry'
   has_many :invitations, class_name: 'CompetitionInvitation'
 
+  has_many :reservations, class_name: 'ProductReservation'
+
   attr_accessor :skip_welcome_email
 
   def update_profile(args = {})
