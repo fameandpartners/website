@@ -2,22 +2,24 @@ class ProductReservationsController < ApplicationController
   respond_to :json
 
   def create
-    if signed_in?
-      # create only reservation
-      @reservation = spree_current_user.reservations.build(params[:reservation])
-      if @reservation.save
-        render json: { success: true }
+    user = try_spree_current_user
+    if user.blank?
+      user = Spree::User.new(params[:user])
+      if user.save
+        sign_in(:spree_user, user)
       else
-        errors = @reservation.errors.keys
+        errors = user.errors.messages
         render json: { success: false, errors: errors }
+        return
       end
-    else
-      # create user too
     end
-  end
 
-  private
-
-  def create_reservation
+    reservation = user.reservations.build(params[:reservation])
+    if reservation.save
+      render json: { success: true, user: serialize_user(user) }
+    else
+      errors = reservation.errors.messages
+      render json: { success: false, errors: errors, user: serialize_user(user) }
+    end
   end
 end

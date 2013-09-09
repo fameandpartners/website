@@ -152,8 +152,16 @@ module ProductsHelper
       # don't show for registered users who already made reservation
       return ''
     else
+      data_attrs = { id: product.id }
+      if signed_in? && previous_reservation = spree_current_user.reservations.last
+        data_attrs.update(
+          school_name: previous_reservation.school_name,
+          formal_name: previous_reservation.formal_name,
+          school_year: previous_reservation.school_year
+        )
+      end
       content_tag(:div,
-        link_to("Twin Alert", '#', class: 'twin-alert-link', data: { id: product.id }),
+        link_to("Twin Alert", '#', class: 'twin-alert-link', data: data_attrs),
         class: 'twin-alert')
     end
   end

@@ -126,4 +126,18 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_wished_product_ids
+
+  def serialized_current_user
+    if spree_user_signed_in?
+      serialize_user(spree_current_user)
+    else
+      {}
+    end
+  end
+
+  def serialize_user(user)
+    { fullname: user.fullname, email: user.email }
+  end
+
+  helper_method :serialized_current_user, :serialize_user
 end

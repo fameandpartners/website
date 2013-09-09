@@ -55,6 +55,7 @@ $(".products.show").ready ->
 
   window.helpers.initProductReserver(
     $('.twin-alert a.twin-alert-link'),
+    window.product_analytics_label,
     variantsSelector
   )
 

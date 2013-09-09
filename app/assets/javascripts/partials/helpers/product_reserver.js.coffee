@@ -1,17 +1,24 @@
 window.helpers or= {}
-window.helpers.initProductReserver = (elements, variantsSelector) ->
+window.helpers.initProductReserver = (elements, label, variantsSelector) ->
 
   _.each(elements, (element) ->
     productReserver = {
       selector: variantsSelector,
       element: $(element),
+      label: label,
 
       onButtonClickHandler: (e) ->
         e.preventDefault()
         if productReserver.validate.call(productReserver)
-          productId = $(e.target).data('id')
-          color = productReserver.selectedColor()
-          popups.showProductReservationPopup(productId, color, productReserver.remove)
+          options = {
+            productId:  $(e.target).data('id'),
+            schoolName: $(e.target).data('school-name'),
+            formalName: $(e.target).data('formal-name'),
+            schoolYear: $(e.target).data('school-year'),
+            color: productReserver.selectedColor(),
+            label: productReserver.label
+          }
+          popups.showProductReservationPopup(options, productReserver.remove)
 
       remove: () ->
         productReserver.element.hide()

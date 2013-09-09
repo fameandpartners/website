@@ -1,6 +1,6 @@
 window.popups or= {}
 
-window.popups.showProductReservationPopup = (productId, color, callback = null) ->
+window.popups.showProductReservationPopup = (options, callback = null) ->
   completeCallback = callback
 
   fields = [
@@ -25,14 +25,24 @@ window.popups.showProductReservationPopup = (productId, color, callback = null) 
     container:  $('.modal.popup-placeholder')
     content:    $('.modal.popup-placeholder .modal-container')
     overlay:    $('.modal.popup-placeholder .overlay')
-    guest: _.isEmpty(window.current_user),
-    productId: productId,
-    color: color
+    guest: _.isEmpty(window.current_user)
+    options: options
 
     init: () ->
       currentYear = new Date().getFullYear()
-      templateData = { guest: popup.guest, years: [currentYear..(currentYear+5)] }
+      templateData = {
+        school_name: popup.options.schoolName,
+        formal_name: popup.options.formalName,
+        school_year: popup.options.schoolYear,
+        guest: popup.guest,
+        years: [currentYear..(currentYear+5)]
+      }
       popup.container.find('.item').html(JST['templates/product_reservation_form'](templateData))
+      if popup.guest
+        popup.container.find('.description.guest').show()
+      else
+        popup.container.find('.description.member').show()
+
       popup.container.find('.close-lightbox').on('click', popup.hide)
       popup.container.find('.save input.btn').on('click', popup.onButtonClick)
 
@@ -52,18 +62,29 @@ window.popups.showProductReservationPopup = (productId, color, callback = null) 
 
     show: () ->
       popup.container.show().center()
-      popup.container.find('select').chosen()
+      popup.container.find('select').val(popup.options.schoolYear).chosen()
+      track.twinAlertOpen(popup.options.label)
 
     successCallback: (data) ->
+      if data.user && _.isEmpty(window.current_user)
+        window.current_user = data.user
+        popup.user_created = true
+        popup.container.find('.member-fields.guest').hide()
+        popup.container.find('.description.guest').hide()
+        popup.container.find('.description.member').show()
+
       if data.success
+        track.twinAlertRegister(popup.options.label)
         popup.hide()
-        popup = null
+        if popup.user_created
+          window.location = window.location = window.location
         completeCallback.call() if completeCallback
+        popup = null
       else
-        _.each(data.errors, (name) ->
+        _.each(_.keys(data.errors), (name) ->
           input = $("input##{name}")
           input.addClass("error")
-          popup.errorMessage("Please, check this value").insertBefore(input)
+          popup.errorMessage(data.errors[name]).insertBefore(input)
         )
 
     hide: () ->
@@ -82,8 +103,8 @@ window.popups.showProductReservationPopup = (productId, color, callback = null) 
       _.each(['school_name', 'formal_name', 'school_year'], (name) ->
         result.reservation[name] = popup.container.find("##{name}").val()
       )
-      result.reservation.product_id = popup.productId
-      result.reservation.color = popup.color
+      result.reservation.product_id = popup.options.productId
+      result.reservation.color = popup.options.color
       result
 
     errorMessage: (errorText = "Can't be empty") ->
@@ -105,13 +126,14 @@ window.popups.showProductReservationPopup = (productId, color, callback = null) 
       popup.validateValue($(e.currentTarget))
 
     validateValue: (input) ->
+      input.removeClass("error")
+      input.siblings('.error').remove()
+
       if _.isEmpty(input.val())
         input.addClass("error")
         popup.errorMessage().insertBefore(input)
         return false
       else
-        input.removeClass("error")
-        input.siblings('.error').remove()
         return true
 
     onButtonClick: (e) ->
