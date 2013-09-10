@@ -40,7 +40,14 @@ ruby:
               = image_tag celebrity.photo.url(:preview)
             .inspiration
               = celebrity.celebrity_name
-              = celebrity.celebrity_description
+              = celebrity.celebrity_description 
+    .notice                                                                                                       
+      .colour
+        ' Want a different colour? 
+        = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour." 
+      .faster                                                                                                         
+        ' Need this faster? 
+        = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
   .grid-40
     .product-info
       .name = @product.name
@@ -106,12 +113,36 @@ ruby:
             = description
           - else
             = t('product_has_no_description')
-      .notice                                                                                                       
-        .colour
-          ' Want a different colour? 
-          = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour." 
-        .faster                                                                                                         
-          ' Need this faster? 
-          = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
       /.share-buttons
         = share_buttons(@product)
+      .product-features
+        .feature
+          i.icon.icon-shipping
+          .text
+            ' Free
+            br
+            ' Shipping
+        .feature
+          i.icon.icon-returns
+          .text
+            ' Free
+            br
+            ' Returns
+        .feature
+          i.icon.icon-dress
+          .text
+            ' Fit
+            br
+            ' Guarantee
+        .feature
+          i.icon.icon-customization
+          .text
+            ' Free
+            br
+            ' Customization
+        .feature
+          i.icon.icon-pencil
+          .text
+            ' Free styling
+            br
+            ' advice
