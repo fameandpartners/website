@@ -8,6 +8,7 @@
 //= require libs/jquery.chosen.min
 //= require libs/jquery.mousewheel
 //= require libs/jquery.waitforimages.min
+//= require libs/jquery.timeago
 //= require libs/underscore-min
 //= require libs/live_chat_with_fancybox.min
 //= require helpers

@@ -2,6 +2,8 @@ Spree::ProductsController.class_eval do
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
 
+  after_filter :log_product_viewed
+
   def index
     @searcher = Products::ProductsFilter.new(params)
     @searcher.current_user = try_spree_current_user
@@ -26,21 +28,26 @@ Spree::ProductsController.class_eval do
     set_product_show_page_title(@product)
     @product_properties = @product.product_properties.includes(:property)
 
-    @similar_products   = Products::SimilarProducts.new(@product).fetch(4)
+    @similar_products = Products::SimilarProducts.new(@product).fetch(4)
     @product_variants = Products::VariantsReceiver.new(@product).available_options
+
+    @activities = load_product_activities(@product)
 
     respond_with(@product)
   end
 
   def quick_view
-    #return unless request.xhr? && @product
     @product_variants = Products::VariantsReceiver.new(@product).available_options
 
     popup_html = render_to_string(template: 'spree/products/quick_view.html.slim', product: @product, layout: false)
+
+    @activities = load_product_activities(@product)
+
     render json: { 
       popup_html: popup_html,
       variants: @product_variants,
-      analytics_label: analytics_label(:product, @product)
+      analytics_label: analytics_label(:product, @product),
+      activities: activites
     }
   end
 
@@ -87,4 +94,15 @@ Spree::ProductsController.class_eval do
   end
 
   helper_method :colors
+
+  def log_product_viewed
+    return unless @product
+    Activity.log_product_viewed(@product, try_spree_current_user)
+  end
+
+  def load_product_activities(owner)
+    scope = Activity.where(owner_type: owner.class.to_s, owner_id: owner.id)
+    scope = scope.where("updated_at > ?", 5.days.ago).order('updated_at desc')
+    scope.limit(10)
+  end
 end

@@ -13,6 +13,22 @@
 
 ActiveRecord::Schema.define(:version => 20130912112336) do
 
+  create_table "activities", :force => true do |t|
+    t.string   "action"
+    t.integer  "number"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.string   "actor_type"
+    t.integer  "actor_id"
+    t.string   "item_type"
+    t.integer  "item_id"
+    t.text     "info"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "activities", ["action", "owner_type", "owner_id"], :name => "index_activities_on_action_and_owner_type_and_owner_id"
+
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
     t.string   "code"

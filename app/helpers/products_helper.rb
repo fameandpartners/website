@@ -165,4 +165,32 @@ module ProductsHelper
         class: 'twin-alert')
     end
   end
+
+  def activity_description(activity, user)
+    if activity.info[:school_name]
+      actor_description = "Someone from #{activity.info[:school_name]}"
+    elsif (actor = activity.actor).present?
+      actor_description = actor.first_name
+    else
+      actor_description = "Someone"
+    end
+
+    action_description = case activity.action
+    when "purchased"
+      "purchased this item"
+    when "added_to_cart"
+      "added this item to their cart"
+    when "added_to_wishlist"
+      "added this item to their wishlist"
+    else # when 'viewed' & by default
+      "viewed this item"
+    end
+
+    raw("#{actor_description} #{action_description} #{timeago(activity.updated_at)}")
+  end
+
+  def timeago(time, options = {})
+    options[:class] ||= "timeago"
+    content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
+  end
 end
