@@ -108,6 +108,7 @@ FameAndPartners::Application.routes.draw do
 
   # Static pages
   get '/about'   => 'statics#about'
+  get '/why_us'   => 'statics#why_us'
   get '/team'    => 'statics#team'
   get '/terms'   => 'statics#ecom_terms'
   get '/privacy' => 'statics#ecom_privacy'

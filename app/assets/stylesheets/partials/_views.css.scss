@@ -864,3 +864,35 @@
     height: 4px;
   }
 }
+
+.why-us {
+  margin: 0 100px;
+  .reason {
+    margin: 0 0 60px;
+  }
+  .icon {
+    width: 125px;
+    text-align: center;
+    color: #e99d8e;
+    font-size: 100px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .title {
+    margin: 0 46px;
+    width: 270px;
+    color: #5f5f5f;
+    font: 400 italic 32px/1.1 $fontFour;
+    text-transform: uppercase;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .description {
+    width: 350px;
+    display: inline-block;
+    vertical-align: middle;
+    a {
+      color: #e99d8e;
+    }
+  }
+}
