@@ -841,6 +841,9 @@
       .feature {
         margin: 0 14px;
         display: inline-block;
+        a{
+          text-decoration: none;
+        }
       }
     }
   }

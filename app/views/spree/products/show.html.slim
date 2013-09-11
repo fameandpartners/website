@@ -128,35 +128,40 @@ ruby:
               = @product.property('style_notes')
         .product-features
           .feature
-            i.icon.icon-shipping
-            .text
-              ' Free
-              br
-              ' Shipping
+            = link_to why_us_path+"#shipping" do
+              i.icon.icon-shipping
+              .text
+                ' Free
+                br
+                ' Shipping
           .feature
-            i.icon.icon-returns
-            .text
-              ' Free
-              br
-              ' Returns
+            = link_to why_us_path+"#returns" do
+              i.icon.icon-returns
+              .text
+                ' Free
+                br
+                ' Returns
           .feature
-            i.icon.icon-dress
-            .text
-              ' Fit
-              br
-              ' Guarantee
+            = link_to why_us_path+"#fit" do
+              i.icon.icon-dress
+              .text
+                ' Fit
+                br
+                ' Guarantee
           .feature
-            i.icon.icon-customization
-            .text
-              ' Free
-              br
-              ' Customization
+            = link_to why_us_path+"#customisation" do
+              i.icon.icon-customization
+              .text
+                ' Free
+                br
+                ' Customisation
           .feature
-            i.icon.icon-pencil
-            .text
-              ' Free styling
-              br
-              ' advice
+            = link_to why_us_path+"#advice" do
+              i.icon.icon-pencil
+              .text
+                ' Free styling
+                br
+                ' advice
 
   .page-name
     .inner

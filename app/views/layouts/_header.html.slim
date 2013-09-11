@@ -32,29 +32,33 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
       .wrap.no-overflow
         ul.icons
           li
-            .icon.shipping
-            span
-              ' Free
-              br
-              ' Shipping
+            = link_to why_us_path+"#shipping" do
+              .icon.shipping
+              span
+                ' Free
+                br
+                ' Shipping
           li
-            .icon.returns
-            span
-              ' Free Returns
-              br
-              ' for 30 Days
+            = link_to why_us_path+"#returns" do
+              .icon.returns
+              span
+                ' Free Returns
+                br
+                ' for 30 Days
           li
-            .icon.guarantee
-            span
-              ' Best Fit
-              br
-              ' Process
+            = link_to why_us_path+"#fit" do
+              .icon.guarantee
+              span
+                ' Best Fit
+                br
+                ' Process
           li
-            .icon.tips
-            span
-              ' Free
-              br
-              ' styling tips
+            = link_to why_us_path+"#advice" do
+              .icon.tips
+              span
+                ' Free
+                br
+                ' styling tips
           /li.empty
           /li
             .icon.turnaround
