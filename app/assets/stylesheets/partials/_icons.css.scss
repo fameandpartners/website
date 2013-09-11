@@ -1,4 +1,4 @@
-.icon-phone, .icon-home, .icon-bag, .icon-pencil, .icon-layby, .icon-signup, .icon-livechat, .icon-help {
+.icon-phone, .icon-home, .icon-bag, .icon-pencil, .icon-layby, .icon-signup, .icon-livechat, .icon-help, .icon-shipping, .icon-returns, .icon-dress, .icon-customization {
   font-family: 'Icons';
   color: #000;
   speak: none;
@@ -32,4 +32,16 @@
 }
 .icon-help:before {
   content: "\e007";
+}
+.icon-shipping:before {
+  content: "\e008";
+}
+.icon-returns:before {
+  content: "\e009";
+}
+.icon-dress:before {
+  content: "\e00a";
+}
+.icon-customization:before {
+  content: "\e00b";
 }

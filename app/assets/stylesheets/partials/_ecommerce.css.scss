@@ -487,6 +487,42 @@
       -webkit-filter: grayscale(0%);
       filter: grayscale(0%);
     }
+    .start-moodboard{
+      text-transform: uppercase;
+      font-family: $fontOne;
+      display: inline-block;
+      font-weight: 300; 
+      margin: 3px 0 0 30px;
+      font-size: 13px;
+    }
+  }  
+  .notice {
+    font: 300 14px/1 $fontOne;
+    .colour-images {
+      color: #999;
+      font-size: 11px;
+      font-style: italic;
+      margin: 0 0 25px 0;
+    }
+    .colour, .faster {
+      padding-top: 10px;
+      color: #333;
+    }
+  }
+  .free-styling-tips {
+    background: image-url('icon-pencil-pink.png') 0 0 no-repeat;
+    line-height: 24px;
+    margin: 30px 0;
+    padding: 0 0 0 30px;
+    color: #000;
+    font-family: $fontThree;
+    font-size: 16px;
+    span {
+      font-family: $fontOne;
+      color: #9b9b9b;
+      font-weight: 300;
+      font-size: 11px;
+    }
   }
   .product-info {
     position: relative;
@@ -678,6 +714,7 @@
       }
       .name {
         font-size: 11px;
+        margin: 0;
       }
       ul {
         overflow: hidden;
@@ -790,32 +827,23 @@
         }
       }
     }
-    .notice {
-      font-family: $fontOne;
-      .colour-images {
-        color: #999;
-        font-size: 11px;
-        font-style: italic;
-        margin: 0 0 25px 0;
+    .product-features {
+      margin: 20px 0 0;
+      padding: 0 0 20px;
+      border-bottom: 1px solid #efefef;
+      text-align: center;
+      font: 300 10px/12px $fontOne;
+      text-transform: uppercase;
+      .icon {
+        font-size: 22px;
+        color: #626262;
       }
-      .colour, .faster {
-        padding-top: 10px;
-        color: #333;
-      }
-    }
-    .free-styling-tips {
-      background: image-url('icon-pencil-pink.png') 0 0 no-repeat;
-      line-height: 24px;
-      margin: 30px 0 0;
-      padding: 0 0 0 30px;
-      color: #000;
-      font-family: $fontThree;
-      font-size: 16px;
-      span {
-        font-family: $fontOne;
-        color: #9b9b9b;
-        font-weight: 300;
-        font-size: 11px;
+      .feature {
+        margin: 0 14px;
+        display: inline-block;
+        a{
+          text-decoration: none;
+        }
       }
     }
   }
@@ -1169,7 +1197,6 @@
     margin: 19px 0;
     .product-info {
       position: relative;
-      height: 623px;
     }
     .buy-now {
       padding: 0 30px !important;
@@ -1186,6 +1213,11 @@
       width: 100%;
       padding: 0;
       margin: 0;
+    }
+    .product-features {
+      .feature {
+        margin: 0 6px;
+      }
     }
   }
 }

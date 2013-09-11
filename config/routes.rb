@@ -108,12 +108,13 @@ FameAndPartners::Application.routes.draw do
 
   # Static pages
   get '/about'   => 'statics#about'
+  get '/why-us'  => 'statics#why_us', :as => :why_us
   get '/team'    => 'statics#team'
   get '/terms'   => 'statics#ecom_terms'
   get '/privacy' => 'statics#ecom_privacy'
   get '/legal'   => 'statics#legal'
   get '/faqs'   => 'statics#faqs'
-  get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works 
+  get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
   get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program 
   get '/compterms' => 'statics#comp_terms'
 

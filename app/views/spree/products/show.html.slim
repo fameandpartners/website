@@ -52,7 +52,17 @@ ruby:
                 .name = celebrity.celebrity_name
 
         .share-buttons
-          .fleft = share_buttons(@product)
+          .fleft = share_buttons(@product)  
+      .notice
+        .colour
+          ' Want a different colour? 
+          = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour." 
+        .faster                                                                                                         
+          ' Need this faster? 
+          = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
+      .free-styling-tips
+        ' Free styling tips
+        span with every dress
     .grid-45
       .product-info
         .name = @product.name
@@ -116,17 +126,42 @@ ruby:
           - if @product.property('style_notes').present?
             #notes.tab-content
               = @product.property('style_notes')
-        .notice
-          .colour
-            ' Want a different colour? 
-            = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour." 
-          .faster                                                                                                         
-            ' Need this faster? 
-            = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
-        .free-styling-tips
-          ' Free styling tips
-          span with every dress
-
+        .product-features
+          .feature
+            = link_to why_us_path+"#shipping" do
+              i.icon.icon-shipping
+              .text
+                ' Free
+                br
+                ' Shipping
+          .feature
+            = link_to why_us_path+"#returns" do
+              i.icon.icon-returns
+              .text
+                ' Free
+                br
+                ' Returns
+          .feature
+            = link_to why_us_path+"#fit" do
+              i.icon.icon-dress
+              .text
+                ' Fit
+                br
+                ' Guarantee
+          .feature
+            = link_to why_us_path+"#customisation" do
+              i.icon.icon-customization
+              .text
+                ' Free
+                br
+                ' Customisation
+          .feature
+            = link_to why_us_path+"#advice" do
+              i.icon.icon-pencil
+              .text
+                ' Free styling
+                br
+                ' advice
 
   .page-name
     .inner
