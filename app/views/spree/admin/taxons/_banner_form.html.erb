@@ -22,7 +22,14 @@
   <div class="omega seven columns">
     <%= banner_form.field_container :description do %>
       <%= banner_form.label :description, t(:description) %><br />
-      <%= banner_form.text_area :description, :class => 'fullwidth', :rows => 6 %>
+      <%= banner_form.text_area :description, :class => 'fullwidth', style: 'width: 600px;', :rows => 6 %>
+    <% end %>
+  </div>
+
+  <div class="omega seven columns">
+    <%= banner_form.field_container :footer_text do %>
+      <%= banner_form.label :footer_text, t(:footer_text) %><br />
+      <%= banner_form.text_area :footer_text, :class => 'fullwidth', style: 'width: 600px;', :rows => 6 %>
     <% end %>
   </div>
 </div>

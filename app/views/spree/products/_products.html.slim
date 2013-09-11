@@ -28,3 +28,7 @@ ul.products-list.grid-container
         .colors
           - colors[product.id].map(&:name).sort.each do |color|
             .color{class=color}
+
+- if info[:footer_text]
+  .description
+    = info[:footer_text]

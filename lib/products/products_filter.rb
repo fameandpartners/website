@@ -162,6 +162,7 @@ module Products
 
       # this block works as proxy, between human readable url params like 'red', 'skirt'
       # and required for search ids
+      @properties[:collection] ||= []
       Spree::Taxon.roots.each do |taxon|
         permalink = taxon.permalink
         @properties[permalink] = prepare_taxon(permalink, params[permalink])
