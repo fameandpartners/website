@@ -10,4 +10,8 @@ Spree::OrderMailer.class_eval do
 
     mail(:to => to, :from => from, :subject => subject)
   end
+
+  def guest_payment_request(quest_payment_request = nil)
+    mail(:to => 'team@fameandpartners.com', :from => 'team@fameandpartners.com', :subject => 'Guest Checkout')
+  end
 end
