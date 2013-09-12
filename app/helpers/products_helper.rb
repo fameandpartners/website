@@ -161,7 +161,7 @@ module ProductsHelper
         )
       end
       content_tag(:div,
-        link_to("Twin Alert", '#', class: 'twin-alert-link', data: data_attrs),
+        link_to("Twin Alert", '#', class: 'twin-alert-link btn black', data: data_attrs),
         class: 'twin-alert')
     end
   end
@@ -175,18 +175,18 @@ module ProductsHelper
       actor_description = "Someone"
     end
 
-    action_description = case activity.action
+    action_description, action_class = case activity.action
     when "purchased"
-      "purchased this item"
+      [ "purchased this item", "icon-purchase" ]
     when "added_to_cart"
-      "added this item to their cart"
+      [ "added this item to their cart", "icon-bag" ]
     when "added_to_wishlist"
-      "added this item to their wishlist"
+      [ "added this item to their wishlist", "icon-heart" ]
     else # when 'viewed' & by default
-      "viewed this item"
+      [ "viewed this item", "icon-eye" ]
     end
 
-    raw("#{actor_description} #{action_description} #{timeago(activity.updated_at)}")
+    raw("#{content_tag(:i, '', class: 'icon ' + action_class)} #{actor_description} #{action_description} #{timeago(activity.updated_at)}")
   end
 
   def timeago(time, options = {})

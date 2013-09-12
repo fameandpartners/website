@@ -163,11 +163,12 @@ ruby:
                 ' Free styling
                 br
                 ' advice
-        = product_twin_alert_link(@product)
-        - if @activities.present?
-          ul
-            - @activities.each do |activity|
-              li class=(activity.action) = activity_description(activity, try_spree_current_user)
+        .twin-alert-block
+          = product_twin_alert_link(@product)
+          - if @activities.present?
+            ul
+              - @activities.each do |activity|
+                li class=(activity.action) = activity_description(activity, try_spree_current_user)
 
   .page-name
     .inner

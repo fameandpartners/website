@@ -43,6 +43,7 @@ window.popups.showProductReservationPopup = (options, callback = null) ->
       else
         popup.container.find('.description.member').show()
 
+      popup.container.addClass('send-to-friend')
       popup.container.find('.close-lightbox').on('click', popup.hide)
       popup.container.find('.save input.btn').on('click', popup.onButtonClick)
 

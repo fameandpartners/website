@@ -1,10 +1,10 @@
 <div class="item">
   <div class="form">
     <div class="description guest" style="display: none;">
-      Your formal is a big night, and turning up in the exact same outfit as another girl would be a disaster. Our unique Twin Alert means that once you've purchased a dress, we guarantee not to sell the same dress in the same colour to anyone else from your school.
+      <p>Your formal is a big night, and turning up in the exact same outfit as another girl would be a disaster. Our unique Twin Alert means that once you've purchased a dress, we guarantee not to sell the same dress in the same colour to anyone else from your school.</p>
     </div>
     <div class="description member" style="display: none;">
-      Create an account to uncover your Style Profile and gain access to your Personalised Boutique, to use our Twin Alert to ensure that no one at your school can buy the same dress, and to edit your favourite dresses into a Wishlist.
+      <p>Create an account to uncover your Style Profile and gain access to your Personalised Boutique, to use our Twin Alert to ensure that no one at your school can buy the same dress, and to edit your favourite dresses into a Wishlist.</p>
     </div>
 
     <% if @guest: %>
