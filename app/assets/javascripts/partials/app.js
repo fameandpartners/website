@@ -115,17 +115,6 @@ $(function(){
 
   $('.selectbox').chosen();
 
-  deskTimerCheck = function () {
-    if ($('#assistly-widget-1 .a-desk-widget-chat').length) {
-      $("#assistly-widget-1 .a-desk-widget-chat")
-        .html("Live Chat")
-        .css("background-image", "none")
-        .on('click', function() { window.track.conversion('live_chat'); return true });
-    } else {
-      setTimeout(deskTimerCheck, 1000);
-    }
-  };
-  deskTimerCheck();
 
   window.initHoverableProductImages()
 

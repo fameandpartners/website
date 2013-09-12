@@ -4,12 +4,13 @@ doctype html
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'spree/shared/google_analytics'
+    = render 'spree/shared/offerchat'
 
     - if content_for?(:payment_gateway)
       = yield :payment_gateway
   body class="ecommerce #{controller_action_class}" id=(controller_action_id)
     #fb-root
-    javascript:
+    /javascript:
       (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
