@@ -66,10 +66,6 @@ Spree::Product.class_eval do
     update_index
   end
 
-  def in_sale?
-    Spree::Sale.first.active?
-  end
-
   private
 
   def build_variants_from_option_values_hash
