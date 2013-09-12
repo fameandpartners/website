@@ -24,7 +24,7 @@ ul.products-list.grid-container
       - cache ['products_page', 'product', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
         .name = link_to product.name, product
         /.description = product_short_description(product)
-        .price = product.price_in(current_currency).display_price
+        .price = price_for_product(product)
         .colors
           - colors[product.id].map(&:name).sort.each do |color|
             .color{class=color}

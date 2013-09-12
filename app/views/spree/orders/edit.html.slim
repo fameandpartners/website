@@ -55,7 +55,7 @@
             .grid-20.price
               .pricing
                 = current_order.currency
-                = line_item.money
+                = price_for_line_item(line_item)
               /.style-notes
                 input type="checkbox" name="note"
                 label

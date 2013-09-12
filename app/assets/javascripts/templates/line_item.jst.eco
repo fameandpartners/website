@@ -67,7 +67,9 @@
 <div class="grid-20 price">
   <div class="pricing">
     <%= @line_item.currency %>
-    <%= @line_item.money %>
+    <% if (@line_item.money_without_discount) : %>
+      <del><%= @line_item.money_without_discount %></del>
+    <span><%= @line_item.money %></span>
   </div>
   <!--
   <div class="style-notes">

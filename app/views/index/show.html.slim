@@ -74,5 +74,6 @@
                 = link_to product_image(product, itemprop: "image", width: 243, height: 352, alt: product.name), collection_product_path(product)
             - cache ['home_page', 'featured_dresses', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
               .name = link_to product.name, collection_product_path(product)
-              .price = product.price_in(current_currency).display_price
+              .price
+                = price_for_product(product)
       #product-items-next

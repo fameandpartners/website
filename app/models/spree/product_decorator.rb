@@ -22,6 +22,8 @@ Spree::Product.class_eval do
 
   default_scope order: "#{self.table_name}.position"
 
+  delegate_belongs_to :master, :in_sale?, :original_price, :price_without_discount
+
   def remove_property(name)
     ActiveRecord::Base.transaction do
       property = Spree::Property.where(name: name).first
@@ -62,6 +64,10 @@ Spree::Product.class_eval do
     self.update_column(:deleted_at, Time.now)
     variants_including_master.update_all(:deleted_at => Time.now)
     update_index
+  end
+
+  def in_sale?
+    Spree::Sale.first.active?
   end
 
   private

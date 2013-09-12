@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130901104329) do
+ActiveRecord::Schema.define(:version => 20130912112336) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -416,6 +416,7 @@ ActiveRecord::Schema.define(:version => 20130901104329) do
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.string   "currency"
+    t.decimal  "old_price",  :precision => 8, :scale => 2
   end
 
   add_index "spree_line_items", ["order_id"], :name => "index_spree_line_items_on_order_id"
@@ -690,6 +691,14 @@ ActiveRecord::Schema.define(:version => 20130901104329) do
 
   add_index "spree_roles_users", ["role_id"], :name => "index_spree_roles_users_on_role_id"
   add_index "spree_roles_users", ["user_id"], :name => "index_spree_roles_users_on_user_id"
+
+  create_table "spree_sales", :force => true do |t|
+    t.boolean  "is_active"
+    t.decimal  "discount_size"
+    t.integer  "discount_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "spree_shipments", :force => true do |t|
     t.string   "tracking"

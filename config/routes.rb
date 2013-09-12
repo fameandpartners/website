@@ -193,6 +193,8 @@ FameAndPartners::Application.routes.draw do
 
       resource :product_positions, only: [:show, :create]
 
+      resource :sale, :only => [:edit, :update]
+
       namespace :blog do
         resources :promo_banners
         resources :categories

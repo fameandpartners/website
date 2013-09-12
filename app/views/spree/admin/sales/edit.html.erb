@@ -1,0 +1,43 @@
+<% content_for :page_title do %>
+  Sale Settings
+<% end %>
+<div data-hook="admin_sale_edit_form">
+  <div id="sale-form-wrapper">
+    <%= form_for [:admin, @sale], :url => admin_sale_path, :method => :put do |f| %>
+      <% if @sale.try(:errors).present? %>
+        <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @sale } %>
+      <% end %>
+      <fieldset>
+        <div class="clearfix">
+          <div class="four columns">
+            <%= f.field_container :is_active, :class => ['checkbox'] do %>
+              <label>
+                <%= f.check_box :is_active %>
+                is Active
+                <%= f.error_message_on :is_active %>
+              </label>
+            <% end %>
+          </div>
+          <div class="four columns">
+            <%= f.field_container :discount_size do %>
+              <%= f.label :discount_size, t(:discount_size) %> <span class="required">*</span><br />
+              <%= f.text_field :discount_size, :class => 'fullwidth' %>
+              <%= f.error_message_on :discount_size %>
+            <% end %>
+          </div>
+          <div class="four columns">
+            <%= f.field_container :discount_type do %>
+              <%= f.label :discount_type, t(:discount_type) %> <span class="required">*</span><br />
+              <%= f.select :discount_type, Spree::Sale::DISCOUNT_TYPES.to_a.map(&:reverse), {:include_blank => true}, {:class => 'select2 fullwidth'} %>
+            <% end %>
+          </div>
+        </div>
+        <p class="form-buttons">
+          <div class="form-buttons filter-actions actions" data-hook="buttons">
+            <%= button t(:update), 'icon-refresh' %>
+          </div>
+        </p>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

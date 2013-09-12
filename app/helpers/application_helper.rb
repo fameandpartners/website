@@ -177,4 +177,26 @@ module ApplicationHelper
       value: value
     }
   end
+
+  def price_for_product(product)
+    if product.in_sale?
+      [
+        content_tag(:del, product.price_in(current_currency).display_price_without_discount),
+        content_tag(:span, product.price_in(current_currency).display_price_with_discount)
+      ].join("\n").html_safe
+    else
+      content_tag(:span, product.price_in(current_currency).display_price).html_safe
+    end
+  end
+
+  def price_for_line_item(line_item)
+    if line_item.in_sale?
+      [
+        content_tag(:del, line_item.money_without_discount),
+        content_tag(:span, line_item.money)
+      ].join("\n").html_safe
+    else
+      content_tag(:span, line_item.money).html_safe
+    end
+  end
 end
