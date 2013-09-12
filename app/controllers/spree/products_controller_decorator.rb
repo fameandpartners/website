@@ -9,7 +9,7 @@ Spree::ProductsController.class_eval do
     @searcher.current_currency = current_currency
     @products = @searcher.retrieve_products
 
-    set_collection_title(@searcher.collection)
+    set_collection_title(@searcher)
 
     if !request.xhr?
       render action: 'index', layout: true
@@ -66,16 +66,26 @@ Spree::ProductsController.class_eval do
 
   private
 
-  def set_collection_title(taxon_ids = [])
+  def set_collection_title(searcher)
+    taxon_ids = searcher.collection || []
     taxons = Spree::Taxon.where(id: taxon_ids)
-    if taxon_ids.blank? || taxons.blank? || taxons.count > 1
-      prefix = "Our Dress Collection"
+
+    # generate custom meta for paths like 'Black-Dresses', 'Red-Dresses' & etc
+    if searcher.colour && searcher.colour.length == 1
+      colour_name = searcher.colour.first.name
+      collection_title ="#{colour_name.capitalize} Dresses, #{colour_name.capitalize} Evening Dresses Online, Prom and Formals - Fame & Partners"
+      collection_description = "Fame & Partners stock a wide range of #{colour_name} dresses online for all occasions, visit our store today."
+    # if only one taxon selected, use its meta or name
+    elsif taxon_ids.present? && taxons.count == 1 && (taxon = taxons.first)
+      collection_title = taxon.meta_title || [taxon.name, default_seo_title].join(' - ')
+      collection_description = taxon.meta_description || [taxon.name, default_meta_description].join(' - ')
     else
-      prefix = taxons.first.name
+      collection_title = ['Our Dress Collection', default_seo_title].join(' - ')
+      collection_description = ['Our Dress Collection', default_meta_description].join(' - ')
     end
 
-    self.title = [prefix, default_seo_title].join(' - ')
-    description([prefix, default_meta_description].join(' - '))
+    self.title = collection_title
+    description(collection_description)
   end
 
   def set_product_show_page_title(product)

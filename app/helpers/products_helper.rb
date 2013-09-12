@@ -22,6 +22,14 @@ module ProductsHelper
     color_option.present? ? color_option.option_values : []
   end
 
+  def seo_taxonomy
+    @seo_taxonomy ||= Spree::Taxonomy.where("lower(name) = ?", 'SeoCollection'.downcase).first
+  end
+
+  def available_seo_taxonomy_urls
+    seo_taxonomy.present? ? seo_taxonomy.root.children : []
+  end
+
   def product_short_description(product)
     description_text = product.property('short_description') || product.description
     truncate(description_text, length: 80, separator: ' ')

@@ -5,7 +5,7 @@ module Products
     attr_accessor :current_currency
 
     class << self
-      def available_orders
+      def available_sort_orders
         [
           ['price_high', 'Price High'],
           ['price_low', 'Price Low'],

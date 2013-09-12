@@ -11,7 +11,7 @@
     .results.fleft = pluralize(products.length, 'result')
     .sort.fright
       ' Sort by
-      - options = options_from_collection_for_select(Products::ProductsFilter.available_orders, :first, :second, params[:order])
+      - options = options_from_collection_for_select(Products::ProductsFilter.available_sort_orders, :first, :second, params[:order])
       = select_tag "product_order", options, class: 'selectbox', :include_blank => true, :'data-placeholder' => 'Choose'
 ul.products-list.grid-container
   - products.each do |product|
