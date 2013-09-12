@@ -996,7 +996,7 @@
   width: 878px;
   margin: 0 auto;
   .question {
-    margin: 80px 0 34px;
+    margin: 0 0 34px;
     text-align: center;
     font: italic 400 24px/1 $fontFour;
   }
@@ -1007,15 +1007,20 @@
       display: inline-block;
       vertical-align: top;
       margin: 0 5px 18px;
-      font: 400 30px/45px $fontOne;
+      font: 400 25px/35px $fontOne;
       text-transform: uppercase;
       background: #ebebeb;
       border-radius: 3px;
       label {
-        min-width: 40px;
+        min-width: 30px;
         padding: 0 10px;
-        height: 45px;
+        height: 35px;
         display: block;
+      }
+      &.title {
+        font-weight: 300;
+        background: transparent;
+        font-size: 16px;
       }
       &.smaller {
         font-size: 18px;
