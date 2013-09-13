@@ -21,6 +21,7 @@
               <div class="price">
                 <% if (line_item.money_without_discount) : %>
                   <del><%= line_item.money_without_discount %></del>
+                <% end %>
                 <span><%= line_item.money %></span>
               </div>
               <div class="name">
