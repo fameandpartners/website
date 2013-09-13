@@ -896,3 +896,24 @@
     }
   }
 }
+
+.blake-lively {
+  background: image-url('bg-main.jpg') 0 0 repeat;
+  #wrap {
+    margin: 0 auto;
+  }
+  #content {
+    .wrap {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, .1);
+      background: #fff;
+    }
+  }
+  .get-the-look {
+    padding: 60px 0 0;
+    position: relative;
+    left: -14px;
+  }
+  .blake-lively-title {
+    margin: 0 20px 0 0;
+  }
+}
