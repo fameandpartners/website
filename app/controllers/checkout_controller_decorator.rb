@@ -9,6 +9,8 @@ Spree::CheckoutController.class_eval do
     if params[:create_account]
       @user = Spree::User.new(params[:user])
       if @user.save
+        sign_in :spree_user, @user
+
         # hack - temporarily change the state to something other than cart so we can validate the order email address
         current_order.state = current_order.checkout_steps.first
 

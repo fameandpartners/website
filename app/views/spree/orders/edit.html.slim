@@ -85,7 +85,6 @@
       .continue-buy.grid-container
         .grid-75
           .fleft = link_to 'Continue shopping', products_path, class: 'continue-shopping'
-          .fright = link_to 'Ask parents to pay', '#', class: 'buy-now ask-parents', id: 'ask-parent-to-pay-button'
         .grid-25
           = form_for @order, url: update_cart_path do |f|
             = f.button :checkout, name: 'checkout', class: 'buy-now'
@@ -103,39 +102,3 @@
       .item
       .save
         input.btn.black type="submit" value="Save changes"
-
-#ask-parent-to-pay-modal.modal.send-to-friend.hide
-  .overlay
-  .modal-container
-    .close-lightbox
-    .modal-title Ask Parent To Pay
-    .item
-      .form
-        .askmumintro Send this dress to your mum, your dad, your sister, your aunt - whoever you need to get on board to help you buy it.
-        - if @guest
-          .member-fields
-            .item-details.input
-              label for="sender_name"
-                ' Your name
-                span.required *
-              input type="text" size="30" sender_name="sender_name" id="sender_name" required="required" placeholder="your first and last name"
-            .item-details.input
-              label for="sender_email"
-                ' Your email
-                span.required *
-              input type="text" size="30" sender_email="sender_email" id="sender_email" required="required" placeholder="your email address"
-        .item-details.input
-          label for="friend_name"
-            ' Recipient's name
-            span.required *
-          input type="text" size="30" name="friend_name" id="friend_name" required="required" placeholder="recipient's first and last name"
-        .item-details.input
-          label for="friend_email"
-            ' Recipient's email 
-            span.required *
-          input type="text" size="30" email="friend_email" id="friend_email" required="required" placeholder="recipient's email address"
-        .item-details.input
-          label for="friend_message" Message
-          textarea rows="5" name="friend_message" id="friend_message" cols="30"
-        .save.submit
-          input.btn.black type="submit" value="Ask"

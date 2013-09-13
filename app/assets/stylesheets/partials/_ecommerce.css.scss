@@ -1072,10 +1072,7 @@
       margin: 0;
       @include linear-gradient(#414141, #252525);
     }
-    .ask-parents {
-      width: auto;
-      @include linear-gradient(#fea99c, #fe9686);
-    }
+
     .wide {
       width: 100%;
     }
@@ -1702,7 +1699,8 @@
     .place-order {
       margin: 28px 0;
       input,
-      button {
+      button,
+      a {
         text-transform: uppercase;
         padding: 0 64px;
         height: 38px;
@@ -1711,6 +1709,12 @@
         border: 0;
         display: inline-block;
         @include linear-gradient(#414141, #262626);
+      }
+      .ask-parents {
+        padding: 0 32px;
+        text-decoration: none;
+        width: auto;
+        @include linear-gradient(#fea99c, #fe9686);
       }
     }
   }
@@ -2028,7 +2032,7 @@
     .modal-container {
       padding: 24px 66px;
       width: 364px;
-      margin-left: -182px;
+      margin-left: -204px;
     }
     .input {   
       margin-top: 16px !important;
@@ -2212,7 +2216,7 @@
   }
 }
 
-.orders.guest {
+.checkout.guest {
   #content h2 {
     font: 400 italic 46px/1.2 $fontTwo;
     color: #e79e90;

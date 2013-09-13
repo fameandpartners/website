@@ -1,5 +1,5 @@
-= form_for @order, :url => update_checkout_path(@order.state), :remote => true do |form|
-  = render :partial => 'spree/shared/error_messages', :locals => { :target => @order }
+= form_for @order, :url => guest_update_checkout_path(@payment_request.token, @order.state), :remote => true do |form|
+  = render :partial => 'shared/error_messages', :locals => { :target => @order }
 
   = form.fields_for :bill_address do |bill_form|
     = render :partial => 'spree/checkout/address_form', :locals => {:form => bill_form, :address_type => 'billing', :address => @order.bill_address}
@@ -11,6 +11,4 @@
     .grid-100.padding
       .place-order
         .fleft = form.submit 'Submit Details', data: { loading: 'Submitting...' }
-        - if spree_user_signed_in? && !@order.payment_request.present?
-          .fright = link_to 'Ask parents to pay', '#', class: 'ask-parents', id: 'ask-parent-to-pay-button'
         .clear
