@@ -1044,6 +1044,11 @@
     opacity: 0;
     filter: alpha(opacity=0);
   }
+  &.joined {
+    .question {
+      margin: 0 0 34px;
+    }
+  }
 }
 
 .fashion-things {
