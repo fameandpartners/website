@@ -19,11 +19,12 @@
               span Checkout
           .help-info
             .need-help Need help? Call us 1300 924 860 or email #{mail_to("team@fameandpartners.com", "team@fameandpartners.com", subject:"Help from the Checkout Page")}
-            .promocode-help
-              b Got a promocode or coupon?
-              span
-                ' Add it in the last step of this checkout process.
-                ' You'll see your cart update on the right when you redeem it.
+            - unless sale_active?
+              .promocode-help
+                b Got a promocode or coupon?
+                span
+                  ' Add it in the last step of this checkout process.
+                  ' You'll see your cart update on the right when you redeem it.
     ruby:
       index = 0
       if !signed_in?

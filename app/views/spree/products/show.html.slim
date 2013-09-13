@@ -148,13 +148,14 @@ ruby:
                 ' Fit
                 br
                 ' Guarantee
-          .feature
-            = link_to why_us_path+"#customisation" do
-              i.icon.icon-customization
-              .text
-                ' Free
-                br
-                ' Customisation
+          - unless @product.in_sale?
+            .feature
+              = link_to why_us_path+"#customisation" do
+                i.icon.icon-customization
+                .text
+                  ' Free
+                  br
+                  ' Customisation
           .feature
             = link_to why_us_path+"#advice" do
               i.icon.icon-pencil

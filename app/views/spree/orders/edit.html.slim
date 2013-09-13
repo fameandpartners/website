@@ -72,12 +72,13 @@
               .title Payment methods
               .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
 
-            .column.grid-30
-              .title Promocode
-              .desc
-                = form_for @order, remote: true do |f|
-                  = f.submit 'Redeem', style: 'float: right;'
-                  = f.text_field :coupon_code, style: "width: 110px;"
+            - unless sale_active?
+              .column.grid-30
+                .title Promocode
+                .desc
+                  = form_for @order, remote: true do |f|
+                    = f.submit 'Redeem', style: 'float: right;'
+                    = f.text_field :coupon_code, style: "width: 110px;"
         .summary.grid-25.prefix-5.order-summary
           = render 'summary'
       .continue-buy.grid-container

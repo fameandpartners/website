@@ -199,4 +199,14 @@ module ApplicationHelper
       content_tag(:span, line_item.money).html_safe
     end
   end
+  
+  def sale_active?
+    current_sale.active?
+  end
+  
+  private
+
+  def current_sale
+    @current_sale ||= Spree::Sale.first_or_initialize
+  end
 end
