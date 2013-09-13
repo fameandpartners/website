@@ -150,7 +150,10 @@ module ProductsHelper
 
     if signed_in? && spree_current_user.reserved_dress?(product)
       # don't show for registered users who already made reservation
-      return ''
+      return content_tag(:div,
+      'You have reserved this dress',
+      class: 'reserved'
+      )
     else
       data_attrs = { id: product.id }
       if signed_in? && previous_reservation = spree_current_user.reservations.last
