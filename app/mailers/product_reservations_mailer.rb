@@ -8,6 +8,7 @@ class ProductReservationsMailer < ActionMailer::Base
 
     mail(
       to: 'team@fameandpartners.com',
+      from: @reservation.user.email,
       subject: "Product Reservation created"
     )
   end

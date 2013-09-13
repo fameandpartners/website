@@ -1,7 +1,6 @@
 Spree::ProductsController.class_eval do
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
-
   after_filter :log_product_viewed
 
   def index
@@ -97,7 +96,7 @@ Spree::ProductsController.class_eval do
 
   def log_product_viewed
     return unless @product
-    Activity.log_product_viewed(@product, try_spree_current_user)
+    Activity.log_product_viewed(@product, temporary_user_key, try_spree_current_user)
   end
 
   def load_product_activities(owner)

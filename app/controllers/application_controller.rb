@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :analytics_label, :get_user_type
 
+  before_filter :try_reveal_guest_activity
+
   private
 
   def title(*args)
@@ -135,9 +137,24 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  helper_method :serialized_current_user, :serialize_user
+
   def serialize_user(user)
     { fullname: user.fullname, email: user.email }
   end
 
-  helper_method :serialized_current_user, :serialize_user
+  def temporary_user_key
+    if spree_user_signed_in?
+      "user_#{try_spree_current_user.try(:id)}"
+    else
+      session[:temporary_user_key] ||= SecureRandom.hex(16)
+    end
+  end
+
+  def try_reveal_guest_activity
+    if spree_user_signed_in? && session[:temporary_user_key].present?
+      Activity.replace_temporary_keys(session[:temporary_user_key], try_spree_current_user)
+      session[:temporary_user_key] = nil
+    end
+  end
 end

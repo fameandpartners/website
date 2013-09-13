@@ -15,5 +15,8 @@ class ProductReservation < ActiveRecord::Base
 
   def notify_team
     ProductReservationsMailer.new_reservation(self).deliver
+  rescue Exception => e
+    logger.error("#{e.class.name}: #{e.message}")
+    logger.error(e.backtrace * "\n")
   end
 end

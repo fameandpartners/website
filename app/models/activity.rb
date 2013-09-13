@@ -23,14 +23,17 @@ class Activity < ActiveRecord::Base
   end
 
   class << self
-    def log_product_viewed(product, user = nil)
+    def log_product_viewed(product, session_key = nil, user = nil)
+      session_key ||= 'user_without_session_key'
       args = {
         action: 'viewed',
         owner_id: product.id, owner_type: product.class.to_s
       }
-      args.update({
-        actor_id: user.id, actor_type: user.class.to_s
-      }) if user.present?
+      if user.present?
+        args.update({ actor_id: user.id, actor_type: user.class.to_s })
+      else
+        args.update({ session_key: session_key })
+      end
 
       activity = Activity.where(args).first_or_initialize
       activity.number = activity.number.to_i + 1
@@ -69,7 +72,8 @@ class Activity < ActiveRecord::Base
       activity.save
     end
 
-    def log_product_added_to_cart(product, user = nil, order = nil)
+    def log_product_added_to_cart(product, session_key = nil, user = nil, order = nil)
+      session_key ||= 'user_without_session_key'
       args = {
         action: 'added_to_cart',
         owner_id: product.id, owner_type: product.class.to_s,
@@ -80,8 +84,21 @@ class Activity < ActiveRecord::Base
       if user.present?
         activity.actor = user
         activity.info = user.reservation_info(product)
+      else
+        activity.session_key = session_key
       end
       activity.save
+    end
+
+    def replace_temporary_keys(session_key, user)
+      return if session_key.blank? || user.blank?
+      reservation_info = user.reservation_info
+      Activity.where(session_key: session_key).each do |record|
+        record.session_key  = nil
+        record.actor        = user
+        record.info         = user.reservation_info
+        record.save
+      end
     end
   end
 end

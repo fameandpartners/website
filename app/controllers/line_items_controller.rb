@@ -15,7 +15,7 @@ class LineItemsController < Spree::StoreController
 
     product = Spree::Variant.where(id: params[:variant_id]).first.try(:product)
 
-    Activity.log_product_added_to_cart(product, try_spree_current_user, current_order) rescue nil
+    Activity.log_product_added_to_cart(product, temporary_user_key, try_spree_current_user, current_order) rescue nil
 
     render json: {
       order: CartSerializer.new(current_order).to_json,

@@ -10,9 +10,9 @@ class ActivityObserver < ActiveRecord::Observer
 #      order = record.order
 #      Activity.log_product_added_to_cart(record.product, order.user, record)
     end
-#  rescue Exception => e
-#    logger.error("#{e.class.name}: #{e.message}")
-#    logger.error(e.backtrace * "\n")
+  rescue Exception => e
+    logger.error("#{e.class.name}: #{e.message}")
+    logger.error(e.backtrace * "\n")
   end
 
   def after_destroy(record)
@@ -31,8 +31,8 @@ class ActivityObserver < ActiveRecord::Observer
         activity.destroy
       end
     end
-#  rescue Exception => e
-#    logger.error("#{e.class.name}: #{e.message}")
-#    logger.error(e.backtrace * "\n")
+  rescue Exception => e
+    logger.error("#{e.class.name}: #{e.message}")
+    logger.error(e.backtrace * "\n")
   end
 end
