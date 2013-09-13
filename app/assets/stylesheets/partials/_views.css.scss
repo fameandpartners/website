@@ -916,4 +916,41 @@
   .blake-lively-title {
     margin: 0 20px 0 0;
   }
+  .item {
+    display: inline-block;
+    width: 210px;
+    margin: 0 10px 20px;
+    .image {
+      position: relative;
+      img {
+        padding: 5px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, .3);
+      }
+      a {
+        font: 300 13px/1.2 $fontOne;
+        background: #f79d91;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        text-align: center;
+        width: 44px;
+        padding: 6px 0;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        border-radius: 50%;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, .6);
+      }
+    }
+    .title {
+      margin: 10px 0 4px;
+      font: 400 20px/1.1 $fontFive;
+      text-transform: uppercase;
+      color: #000;
+    }
+    .description {
+      font: 400 italic 16px/1.2 $fontFour;
+    }
+
+  }
 }
