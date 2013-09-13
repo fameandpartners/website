@@ -79,7 +79,7 @@ window.popups.showProductReservationPopup = (options, callback = null) ->
         popup.hide()
         if popup.user_created
           window.location = window.location = window.location
-        completeCallback.call() if completeCallback
+        completeCallback.call(window, data.message) if completeCallback
         popup = null
       else
         _.each(_.keys(data.errors), (name) ->

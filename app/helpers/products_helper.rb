@@ -148,10 +148,9 @@ module ProductsHelper
   def product_twin_alert_link(product)
     return '' if product.blank?
 
-    if signed_in? && spree_current_user.reserved_dress?(product)
-      # don't show for registered users who already made reservation
+    if signed_in? && (reservation = spree_current_user.reservation_for(product)).present?
       return content_tag(:div,
-      'You have reserved this dress',
+      "#{spree_current_user.first_name}, you have reserved this dress in #{reservation.color}.",
       class: 'reserved'
       )
     else

@@ -39,8 +39,8 @@ Spree::User.class_eval do
     self.entries.where(master: true).first
   end
 
-  def reserved_dress?(product)
-    self.reservations.where(product_id: product.id).exists?
+  def reservation_for(product)
+    self.reservations.where(product_id: product.id).first
   end
 
   def reservation_info(product = nil)

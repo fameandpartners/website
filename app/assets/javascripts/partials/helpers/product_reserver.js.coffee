@@ -18,10 +18,14 @@ window.helpers.initProductReserver = (elements, label, variantsSelector) ->
             color: productReserver.selectedColor(),
             label: productReserver.label
           }
-          popups.showProductReservationPopup(options, productReserver.remove)
+          popups.showProductReservationPopup(options, productReserver.markReserved)
 
-      remove: () ->
-        productReserver.element.hide()
+      markReserved: (message) ->
+        placeholder = $('<div>', {
+          class: 'reserved',
+          text: message or= "#{window.current_user.fullname}, you have reserved this dress"
+        })
+        productReserver.element.replaceWith(placeholder)
         productReserver = null
 
       # 'private'

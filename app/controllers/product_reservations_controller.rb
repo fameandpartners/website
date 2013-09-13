@@ -16,7 +16,8 @@ class ProductReservationsController < ApplicationController
 
     reservation = user.reservations.build(params[:reservation])
     if reservation.save
-      render json: { success: true, user: serialize_user(user) }
+      message = "#{user.first_name}, you have reserved this dress in #{reservation.color}."
+      render json: { success: true, user: serialize_user(user), message: message }
     else
       errors = reservation.errors.messages
       render json: { success: false, errors: errors, user: serialize_user(user) }
