@@ -938,6 +938,7 @@
         position: absolute;
         left: 0;
         bottom: 0;
+        z-index: 2;
         border-radius: 50%;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, .6);
       }
@@ -952,6 +953,11 @@
       font: 400 italic 16px/1.2 $fontFour;
       margin: 0 0 10px;
     }
-
+    .rotate-1 {
+      @include transform(rotate(-2deg));
+    }
+    .rotate-2 {
+      @include transform(rotate(2deg));
+    }
   }
 }
