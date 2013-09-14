@@ -149,10 +149,7 @@ module ProductsHelper
     return '' if product.blank?
 
     if signed_in? && (reservation = spree_current_user.reservation_for(product)).present?
-      return content_tag(:div,
-      "#{spree_current_user.first_name}, you have reserved this dress in #{reservation.color}.",
-      class: 'reserved'
-      )
+      raw("<div class='reserved'><i class='icon icon-tick-circle'></i> #{spree_current_user.first_name}, you have reserved this dress in #{reservation.color}.</div>")
     else
       data_attrs = { id: product.id }
       if signed_in? && previous_reservation = spree_current_user.reservations.last

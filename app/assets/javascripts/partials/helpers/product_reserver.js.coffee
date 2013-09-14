@@ -23,7 +23,7 @@ window.helpers.initProductReserver = (elements, label, variantsSelector) ->
       markReserved: (message) ->
         placeholder = $('<div>', {
           class: 'reserved',
-          text: message or= "#{window.current_user.fullname}, you have reserved this dress"
+          text: message or= "<i class='icon icon-tick-circle'></i> #{window.current_user.fullname}, you have reserved this dress"
         })
         productReserver.element.replaceWith(placeholder)
         productReserver = null

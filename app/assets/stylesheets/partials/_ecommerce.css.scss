@@ -2123,11 +2123,9 @@
 
 .twin-alert-block {
   margin: 20px 0 0;
-  .reserved{
+  .reserved {
     padding: 0 0 10px 0;
-    font-size: 18px;
-    font-family: $fontTwo;
-    font-style: italic;
+    font: 400 italic 18px/25px $fontTwo;
   }
   .btn {
     background: #000;
