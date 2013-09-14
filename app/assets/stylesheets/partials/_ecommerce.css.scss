@@ -41,13 +41,8 @@
         color: #333;
         font-weight: 700;
         margin: 0 0 10px;
-        &.sale {
-          color: #f59a8c;
-          span {
-            text-decoration: line-through;
-            color: #6e6e6e;
-            margin: 0 0 0 3px;
-          }
+        span {
+          color: #fe9f91;
         }
       }
       .name {
@@ -298,6 +293,9 @@
       color: #000;
       font-weight: 400;
       margin: 0 0 10px;
+      span {
+        color: #fe9f91;
+      }
     }
     .colors {
       .color {
@@ -553,8 +551,7 @@
         color: #333;
         float: left;
         min-width: 110px;
-        em {
-          text-decoration: line-through;
+        del {
           font-style: normal;
           margin: 0 4px 0 0;
         }
@@ -1013,6 +1010,9 @@
           margin: 90px 0 0;
           font-size: 24px;
           color: #000;
+          span {
+            color: #fe9f91;
+          }
         }
         input {
           margin: 2px 4px 0 0;
@@ -1458,7 +1458,7 @@
       }
     }
     .help-info{
-      padding: 10px 0;
+      padding: 20px 0;
       font-family: $fontOne;
       font-weight: 300;
       .promocode-help{

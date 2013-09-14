@@ -51,13 +51,14 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                 ' Fit
                 br
                 ' Guarantee
-          li
-            = link_to why_us_path+"#customisation" do
-              .icon.customization
-              span
-                ' Free
-                br
-                ' Customisation
+          - unless sale_active?
+            li
+              = link_to why_us_path+"#customisation" do
+                .icon.customization
+                span
+                  ' Free
+                  br
+                  ' Customisation
           
           li
             = link_to why_us_path+"#advice" do

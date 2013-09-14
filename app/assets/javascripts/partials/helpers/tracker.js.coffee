@@ -3,10 +3,12 @@ window.track = {
   tracked: []
 
   pageView: (page_url, page_params) ->
+    window._gaq or= {}
     if _gaq && _gaq.push
       _gaq.push(['_trackPageview', page_url])
 
   quickView: (page_url) ->
+    window._gaq or= {}
     if _gaq && _gaq.push
       _gaq.push(['_trackPageview', page_url])
 
@@ -45,6 +47,7 @@ window.track = {
 
   # events
   event: (category, action, label, value) ->
+    window._gaq or= {}
     if _gaq && _gaq.push
       eventParams = ['_trackEvent', category, action, null, null]
       eventParams[3] = label if label?

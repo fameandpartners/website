@@ -109,6 +109,7 @@ FameAndPartners::Application.routes.draw do
   # Static pages
   get '/about'   => 'statics#about'
   get '/why-us'  => 'statics#why_us', :as => :why_us
+  get '/blake-lively'  => 'statics#blake-lively', :as => :blake_lively
   get '/team'    => 'statics#team'
   get '/terms'   => 'statics#ecom_terms'
   get '/privacy' => 'statics#ecom_privacy'
@@ -192,6 +193,8 @@ FameAndPartners::Application.routes.draw do
       resources :competition_entries, only: [:index, :show]
 
       resource :product_positions, only: [:show, :create]
+
+      resource :sale, :only => [:edit, :update]
 
       namespace :blog do
         resources :promo_banners

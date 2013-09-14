@@ -8,7 +8,8 @@ class LineItemSerializer < ActiveModel::Serializer
   attributes :count_on_hand,
     :image_small,
     :product_image,
-    :money, 
+    :money,
+    :money_without_discount,
     :price,
     :product_name,
     :product_permalink,
@@ -38,6 +39,10 @@ class LineItemSerializer < ActiveModel::Serializer
 
   def money
     object.money.to_s
+  end
+
+  def money_without_discount
+    object.in_sale? ? object.money_without_discount.to_s : nil
   end
 
   def count_on_hand

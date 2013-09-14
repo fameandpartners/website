@@ -18,7 +18,12 @@
               <a href="#" class="remove-item-from-cart" data-id="<%= line_item.variant_id %>">Remove</a>
             </div>
             <div class="item-info">
-              <div class="price"><%= line_item.money %></div>
+              <div class="price">
+                <% if (line_item.money_without_discount) : %>
+                  <del><%= line_item.money_without_discount %></del>
+                <% end %>
+                <span><%= line_item.money %></span>
+              </div>
               <div class="name">
                 <a href="/products/<%= line_item.product_permalink %>" target="blank"><%= line_item.product_name %></a>
               </div>

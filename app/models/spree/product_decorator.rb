@@ -22,6 +22,8 @@ Spree::Product.class_eval do
 
   default_scope order: "#{self.table_name}.position"
 
+  delegate_belongs_to :master, :in_sale?, :original_price, :price_without_discount
+
   def remove_property(name)
     ActiveRecord::Base.transaction do
       property = Spree::Property.where(name: name).first

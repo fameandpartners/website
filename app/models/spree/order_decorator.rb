@@ -54,4 +54,32 @@ Spree::Order.class_eval do
       logger.error(e.backtrace * "\n")
     end
   end
+
+  def add_variant(variant, quantity = 1, currency = nil)
+    current_item = find_line_item_by_variant(variant)
+    if current_item
+      current_item.quantity += quantity
+      current_item.currency = currency unless currency.nil?
+      current_item.save
+    else
+      current_item = Spree::LineItem.new(:quantity => quantity)
+      current_item.variant = variant
+      if currency
+        current_item.currency    = currency unless currency.nil?
+        current_item.price       = variant.price_in(currency).final_amount
+        if variant.in_sale?
+          current_item.old_price = variant.price_in(currency).amount_without_discount
+        end
+      else
+        current_item.price       = variant.final_price
+        if variant.in_sale?
+          current_item.old_price = variant.price_without_discount
+        end
+      end
+      self.line_items << current_item
+    end
+
+    self.reload
+    current_item
+  end
 end

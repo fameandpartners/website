@@ -1,6 +1,6 @@
 class IndexController < Spree::StoreController
   layout 'spree/layouts/spree_application'
-  helper 'spree/taxons'
+  helper :all
 
   respond_to :html 
 
