@@ -1995,6 +1995,9 @@
     p {
       margin: 0 0 20px;
     }
+    h3 {
+      margin: 20px 0 0;
+    }
     .modal-title {
       font-size: 24px;
       text-transform: uppercase;
@@ -2022,6 +2025,11 @@
       input {
         width: 100%;
         margin: 34px 0 0;
+      }
+    }
+    .fields-group {
+      .input {
+        width: 172px;
       }
     }
   }
@@ -2128,7 +2136,7 @@
     font: 400 italic 18px/25px $fontTwo;
   }
   .btn {
-    background: #000;
+    background: #cc0000;
     color: #fff;
     font: 300 14px/30px $fontOne;
     padding: 0 12px;

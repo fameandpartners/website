@@ -9,25 +9,29 @@
 
     <% if @guest: %>
       <div class="member-fields guest">
-        <div class="item-details input">
-          <label for="first_name">First name<span class="required">*</span></label>
-          <input type="text" size="30" name="first_name" id="first_name" required placeholder="John" tabindex='1' />
-        </div>
-        <div class="item-details input">
-          <label for="last_name">Last name<span class="required">*</span></label>
-          <input type="text" size="30" name="last_name" id="last_name" required placeholder="Smith" tabindex='2' />
+        <div class="fields-group">
+          <div class="item-details input">
+            <label for="first_name">First name<span class="required">*</span></label>
+            <input type="text" size="30" name="first_name" id="first_name" required placeholder="John" tabindex='1' />
+          </div>
+          <div class="item-details input">
+            <label for="last_name">Last name<span class="required">*</span></label>
+            <input type="text" size="30" name="last_name" id="last_name" required placeholder="Smith" tabindex='2' />
+          </div>
         </div>
         <div class="item-details input">
           <label for="email">Email<span class="required">*</span></label>
           <input type="text" size="30" name="email" id="email" required placeholder="john.smith@example.com" tabindex='3' />
         </div>
-        <div class="item-details input">
-          <label for="password">Password<span class="required">*</span></label>
-          <input type="password" size="10" name="password" id="password" required tabindex='4'/>
-        </div>
-        <div class="item-details input">
-          <label for="password_confirmation">Password Confirmation<span class="required">*</span></label>
-          <input type="password" size="10" name="password_confirmation" id="password_confirmation" required tabindex='5' />
+        <div class="fields-group">
+          <div class="item-details input">
+            <label for="password">Password<span class="required">*</span></label>
+            <input type="password" size="10" name="password" id="password" required tabindex='4'/>
+          </div>
+          <div class="item-details input">
+            <label for="password_confirmation">Password Confirmation<span class="required">*</span></label>
+            <input type="password" size="10" name="password_confirmation" id="password_confirmation" required tabindex='5' />
+          </div>
         </div>
       </div>
     <% end %>
