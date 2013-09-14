@@ -1,7 +1,8 @@
+h1 = question.text
 .subtitle Choose as many as you like:
 ul.choices.brands
   - question.answers.each do |answer|
     li
       label
-        = check_box_tag 'answer[codes][]', answer.code
+        = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
         = image_tag "brands/#{answer.code}.jpg", width: 154, height: 40, alt: ''

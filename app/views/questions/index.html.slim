@@ -6,13 +6,16 @@
     '
     .inline.label of
     '
-    .inline.total = @quiz.questions.count
+    .inline.total = @quiz.questions.map(&:step).uniq.count
   .film style="position: relative;"
-    - @quiz.questions.order('position ASC').each do |question|
-      .film-frame style="float: left; width: 1054px;" id="question-#{question.id}"
-        = form_for :answer, :url => quiz_question_answer_path(question),:remote => true do |f|
-          h1 = question.text
-          = render question.partial, :form => f, :question => question
+    = form_for :quiz, :url => quiz_answers_path,:remote => true do |f|
+      - @quiz.questions.order('position ASC').group_by(&:step).each do |step, questions|
+        .step.film-frame id="step-#{step}" style="float: left; width: 1054px;"
+          - questions.each do |question|
+            .question id="question-#{question.id}" data-a-label="#{analytics_label(:question, question, step)}"
+              = f.fields_for "questions][#{question.id}" do |ff|
+                = ff.fields_for :answer do |fff|
+                  = render question.partial, :form => fff, :question => question
   .progress-next.clearfix
     .prev
       a href="#" Previous question

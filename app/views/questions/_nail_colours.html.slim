@@ -1,3 +1,4 @@
+h1 = question.text
 .subtitle Choose as many as you like:
 ul.nails
   - question.answers.each do |answer|
@@ -5,4 +6,4 @@ ul.nails
       label
         .image style="background: url('#{image_path "quiz/nails/#{answer.code.dasherize}.png"}') center center no-repeat;"
         .name = answer.code.titleize
-        = check_box_tag 'answer[codes][]', answer.code
+        = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code

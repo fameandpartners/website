@@ -1,4 +1,5 @@
-/ul.body-shapes
+h1 = question.text
+ul.body-shapes
   li
     label
       .image
@@ -45,93 +46,6 @@
     label
       .image
         = image_tag 'quiz/body-shapes/petite.png', width: 65, height: 137, alt: ''
-      .label
-        span Petite
-      = form.radio_button :code, 'petite'
-
-/.quiz-sizes.joined
-  .typical
-    .question &nbsp;
-    ul.sizes
-      li.title Size:
-      li
-        label
-          = form.radio_button :code, 'G4'
-          | 4
-      li
-        label
-          = form.radio_button :code, 'G6'
-          | 6
-      li
-        label
-          = form.radio_button :code, 'G8'
-          | 8
-      li
-        label
-          = form.radio_button :code, 'G10'
-          | 10
-      li
-        label
-          = form.radio_button :code, 'G12'
-          | 12
-      li
-        label
-          = form.radio_button :code, 'G14'
-          | 14
-      li
-        label
-          = form.radio_button :code, 'G16'
-          | 16
-
-
-
-ul.body-shapes
-  li
-    label
-      .image
-        = image_tag 'quiz/body-shapes/apple.png', width: 95, height: 200, alt: ''
-      .label
-        span Apple
-      = form.radio_button :code, 'apple'
-  li
-    label
-      .image
-        = image_tag 'quiz/body-shapes/pear.png', width: 95, height: 200, alt: ''
-      .label
-        span Pear
-      = form.radio_button :code, 'pear'
-  li
-    label
-      .image
-        = image_tag 'quiz/body-shapes/athletic.png', width: 95, height: 200, alt: ''
-      .label
-        span Athletic
-      = form.radio_button :code, 'athletic'
-  li
-    label
-      .image
-        = image_tag 'quiz/body-shapes/strawberry.png', width: 95, height: 200, alt: ''
-      .label
-        span Strawberry
-      = form.radio_button :code, 'strawberry'
-  li
-    label
-      .image
-        = image_tag 'quiz/body-shapes/hour-glass.png', width: 95, height: 200, alt: ''
-      .label
-        span Hour Glass
-      = form.radio_button :code, 'hour_glass'
-  li
-    label
-      .image
-        = image_tag 'quiz/body-shapes/column.png', width: 95, height: 200, alt: ''
-      .label
-        span Column
-      = form.radio_button :code, 'column'
-  li
-    label
-      .image
-        = image_tag 'quiz/body-shapes/petite.png', width: 95, height: 200, alt: ''
       .label
         span Petite
       = form.radio_button :code, 'petite'

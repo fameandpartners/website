@@ -156,9 +156,8 @@ FameAndPartners::Application.routes.draw do
   end
 
   resource :quiz, :only => [:show] do
-    resources :questions, :only => [:index, :show] do
-      resource :answer, :only => [:create]
-    end
+    resources :questions, :only => [:index]
+    resources :answers, :only => [:create]
   end
 
   scope '/users/:user_id', :as => :user do
