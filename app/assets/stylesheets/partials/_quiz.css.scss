@@ -573,10 +573,13 @@
       position: relative;
       img {
         display: block;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
       }
     }
     .stat {
       position: absolute;
+      z-index: 2;
       text-align: center;
       bottom: 26px;
       left: 50%;
