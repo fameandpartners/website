@@ -135,7 +135,7 @@
     font: 300 14px/1.2 $fontOne;
     width: 200px;
     text-align: center;
-    a {   
+    a {
       display: inline-block;
       margin-top: 5px;
       text-transform: uppercase;
@@ -348,7 +348,7 @@
   margin: 34px 0 0;
   .grid-55 {
     padding: 0;
-  }  
+  }
   .askmumbtn {
     width: 110px;
     height: 110px;
@@ -357,7 +357,7 @@
     top: 11px;
     left: 122px;
     z-index: 3;
-    background: image-url('askmum.png') center 0 no-repeat; 
+    background: image-url('askmum.png') center 0 no-repeat;
     overflow: hidden;
   }
   .photos-carousel {
@@ -489,11 +489,11 @@
       text-transform: uppercase;
       font-family: $fontOne;
       display: inline-block;
-      font-weight: 300; 
+      font-weight: 300;
       margin: 3px 0 0 30px;
       font-size: 13px;
     }
-  }  
+  }
   .notice {
     font: 300 14px/1 $fontOne;
     .colour-images {
@@ -575,7 +575,7 @@
       background: #fff;
       .label {
         float: left;
-        line-height: 23px; 
+        line-height: 23px;
         color: #333;
       }
       .colors {
@@ -593,7 +593,7 @@
             background-image: image-url('icon-color-tick.png');
             background-position: center center;
             background-repeat: no-repeat;
-          } 
+          }
         }
       }
       .customize {
@@ -619,8 +619,8 @@
             left: 0;
             margin: 0 0 0 -97px;
             z-index: 2;
-            padding: 12px 14px; 
-            font-size: 12px; 
+            padding: 12px 14px;
+            font-size: 12px;
             line-height: 1.3em;
             background: #fff;
             width: 180px;
@@ -818,7 +818,7 @@
         line-height: 1.3em;
         .info {
           padding: 5px 0 10px;
-        }  
+        }
         p{
           padding: 5px 0 0 0;
         }
@@ -1355,7 +1355,7 @@
     text-align: center;
     h1 {
       font-family: $fontTwo;
-      font-size: 38px;     
+      font-size: 38px;
       font-weight: normal;
       font-style: italic;
       color: #000 !important;
@@ -1363,7 +1363,7 @@
     h2 {
       width: 320px;
       font-family: $fontOne !important;
-      font-size: 14px !important;     
+      font-size: 14px !important;
       font-weight: 300 !important;
       color: #333 !important;
       margin: 20px auto 0 auto;
@@ -2136,7 +2136,7 @@
     font: 400 italic 18px/25px $fontTwo;
   }
   .btn {
-    background: #cc0000;
+    background: #000;
     color: #fff;
     font: 300 14px/30px $fontOne;
     padding: 0 12px;
@@ -2144,6 +2144,9 @@
     text-transform: uppercase;
     display: inline-block;
     text-decoration: none;
+  }
+  .error {
+    color: #c00;
   }
   ul {
     margin: 10px 0 0;
