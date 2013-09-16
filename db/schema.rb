@@ -207,6 +207,12 @@ ActiveRecord::Schema.define(:version => 20130912112336) do
     t.string   "school_name"
   end
 
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
   create_table "product_style_profiles", :force => true do |t|
     t.integer  "product_id"
     t.integer  "glam"

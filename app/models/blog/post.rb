@@ -28,7 +28,7 @@ class Blog::Post < ActiveRecord::Base
   scope :published, where('published_at IS NOT NULL').order('published_at desc')
   scope :sidebar, red_carpet.published.limit(20)
   scope :simple_posts, order('created_at desc').where(post_type_id: PostTypes::SIMPLE)
-  scope :red_carpet_posts, order('created_at desc').where(post_type_id: PostTypes::RED_CARPET)
+  scope :red_carpet_posts, order('occured_at desc').where(post_type_id: PostTypes::RED_CARPET)
   scope :featured, where(post_type_id: PostTypes::SIMPLE).where('featured_at is not null').order('featured_at desc').limit(5)
 
   after_save do
