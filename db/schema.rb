@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913122839) do
+ActiveRecord::Schema.define(:version => 20130916125148) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -229,17 +229,6 @@ ActiveRecord::Schema.define(:version => 20130913122839) do
   end
 
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
-
-  create_table "inspirations", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.string   "name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
 
   create_table "product_reservations", :force => true do |t|
     t.integer  "user_id"
@@ -858,6 +847,7 @@ ActiveRecord::Schema.define(:version => 20130913122839) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.text     "footer_text"
+    t.text     "seo_description"
   end
 
   create_table "spree_taxonomies", :force => true do |t|

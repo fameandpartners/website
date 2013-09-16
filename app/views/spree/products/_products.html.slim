@@ -1,10 +1,12 @@
 - info = @searcher.selected_products_info
 - collection_title = info[:title]
-- if collection_title == "Range"
+- if @searcher.colour.present?
+  - collection_title = "#{@searcher.colour.first.presentation} Dresses"
+- elsif collection_title == "Range"
   - collection_title = "Our Collection"
 
 .ad style=(info[:image].blank? ? '' : "background: url('#{info[:image]}') 0 0 no-repeat;")
-  h1 = collection_title
+  h1 class=(@searcher.colour.present? ? @searcher.colour.first.name : 'black') = collection_title
   h2 = info[:description]
 .results-sort.clearfix
   .results-sort-inner
@@ -28,6 +30,10 @@ ul.products-list.grid-container
         .colors
           - colors[product.id].map(&:name).sort.each do |color|
             .color{class=color}
+
+- if info[:seo_description]
+  .description
+    = info[:seo_description]
 
 - if info[:footer_text]
   .description

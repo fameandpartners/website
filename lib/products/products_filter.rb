@@ -26,7 +26,6 @@ module Products
 
     def retrieve_products
       @products_scope = get_base_scope
-
       @products = @products_scope.includes([:master => :prices])
       unless Spree::Config.show_products_without_price
         @products = @products.where("spree_prices.amount IS NOT NULL").where("spree_prices.currency" => current_currency)
@@ -100,12 +99,12 @@ module Products
       query = nil
       taxons.each do |name, ids|
         if query.blank? # first level, without subquery
-          query = "select distinct(product_id) 
-                   from spree_products_taxons 
+          query = "select distinct(product_id)
+                   from spree_products_taxons
                    where taxon_id in (#{ids.join(',')})"
         else
-          query = "select distinct(product_id) 
-                   from spree_products_taxons 
+          query = "select distinct(product_id)
+                   from spree_products_taxons
                    where taxon_id in (#{ids.join(',')})
                     and product_id in (#{query})"
         end
@@ -152,7 +151,6 @@ module Products
 
     def taxons
       permalinks = Spree::Taxon.roots.map(&:permalink)
-
       @properties.slice(*permalinks).reject{ |k, v| v.blank? }
     end
 
@@ -167,6 +165,8 @@ module Products
         permalink = taxon.permalink
         @properties[permalink] = prepare_taxon(permalink, params[permalink])
       end
+      # Array.wrap(params[:collection]).each do |taxon_name|
+      # end
 
       @properties[:colour]      = prepare_colours(params[:colour])
       @properties[:bodyshape]   = prepare_bodyshape(params[:bodyshape])
@@ -185,8 +185,8 @@ module Products
       return nil if permalinks.blank?
       permalinks = Array.wrap(permalinks)
 
-      db_permalinks = permalinks.map{|permalink| "#{root}/#{permalink}"}
-      Spree::Taxon.select(:id).where(permalink: db_permalinks).map(&:id)
+      db_permalinks = permalinks.map{|permalink| "#{root}/#{permalink.downcase}"}
+      Spree::Taxon.select(:id).where("lower(permalink) IN (?)", db_permalinks).map(&:id)
     end
 
     def prepare_colours(colour_names)

@@ -39,10 +39,9 @@ Spree::ProductsController.class_eval do
     @product_variants = Products::VariantsReceiver.new(@product).available_options
 
     popup_html = render_to_string(template: 'spree/products/quick_view.html.slim', product: @product, layout: false)
-
     @activities = load_product_activities(@product)
 
-    render json: { 
+    render json: {
       popup_html: popup_html,
       variants: @product_variants,
       analytics_label: analytics_label(:product, @product),

@@ -1358,7 +1358,13 @@
       font-size: 38px;
       font-weight: normal;
       font-style: italic;
-      color: #000 !important;
+      #content & {
+        &.black { color: #000; }
+        &.blue { color: #15558B; }
+        &.pink { color: #FF3B9D; }
+        &.red { color: #ED0234; }
+        &.green {color: #269C36;}
+      }
     }
     h2 {
       width: 320px;

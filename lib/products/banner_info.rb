@@ -35,7 +35,7 @@ module Products
     end
 
     def multiple_collections_info
-      { 
+      {
         image: taxon_image(root_range_taxon),
         title: "Fame & Partners Formal Dresses",
         description: "High fashion dresses."
@@ -47,7 +47,8 @@ module Products
         image: taxon_image(taxon) || taxon_image(root_range_taxon),
         title: taxon.try(:banner).try(:title) || taxon.name,
         description: taxon.try(:banner).try(:description) || multiple_collections_info[:description],
-        footer_text: taxon.try(:banner).try(:footer_text)
+        footer_text: taxon.try(:banner).try(:footer_text),
+        seo_description: taxon.try(:banner).try(:seo_description)
       }
     end
   end
