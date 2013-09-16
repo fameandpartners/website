@@ -1,6 +1,7 @@
 Spree::ProductsController.class_eval do
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
+  before_filter :load_activities, :only => [:show, :quick_view]
   after_filter :log_product_viewed
 
   def index
@@ -30,8 +31,6 @@ Spree::ProductsController.class_eval do
     @similar_products = Products::SimilarProducts.new(@product).fetch(4)
     @product_variants = Products::VariantsReceiver.new(@product).available_options
 
-    @activities = load_product_activities(@product)
-
     respond_with(@product)
   end
 
@@ -39,13 +38,12 @@ Spree::ProductsController.class_eval do
     @product_variants = Products::VariantsReceiver.new(@product).available_options
 
     popup_html = render_to_string(template: 'spree/products/quick_view.html.slim', product: @product, layout: false)
-    @activities = load_product_activities(@product)
 
     render json: {
       popup_html: popup_html,
       variants: @product_variants,
       analytics_label: analytics_label(:product, @product),
-      activities: activites
+      activities: @activites
     }
   end
 
@@ -106,6 +104,10 @@ Spree::ProductsController.class_eval do
   def log_product_viewed
     return unless @product
     Activity.log_product_viewed(@product, temporary_user_key, try_spree_current_user)
+  end
+
+  def load_activities
+    @activities = load_product_activities(@product)
   end
 
   def load_product_activities(owner)
