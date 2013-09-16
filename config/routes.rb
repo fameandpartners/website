@@ -47,6 +47,8 @@ FameAndPartners::Application.routes.draw do
   get 'wishlist' => 'users/wishlists_items#index', as: 'wishlist'
   get 'reviews' => 'users/reviews#index', as: 'reviews'
   # eo account settings
+  
+  resources :product_reservations, only: [:create]
 
   # Blog routes
   blog_constraint = lambda { |request|
@@ -241,6 +243,11 @@ FameAndPartners::Application.routes.draw do
 
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
+
+  # seo routes
+  %w{black red pink bpue green}.each do |colour|
+    get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour
+  end
   
   if Rails.env.development?
     mount MailPreview => 'mail_view'

@@ -5,6 +5,8 @@ Spree::User.class_eval do
   has_many :entries, class_name: 'CompetitionEntry'
   has_many :invitations, class_name: 'CompetitionInvitation'
 
+  has_many :reservations, class_name: 'ProductReservation', foreign_key: :user_id
+
   attr_accessor :skip_welcome_email
 
   def update_profile(args = {})
@@ -35,6 +37,23 @@ Spree::User.class_eval do
 
   def competition_entry
     self.entries.where(master: true).first
+  end
+
+  def reservation_for(product)
+    self.reservations.where(product_id: product.id).first
+  end
+
+  def reservation_info(product = nil)
+    info = { first_name: self.first_name, last_name: self.last_name }
+    reservation = if product.present?
+      self.reservations.where(product_id: product.id).first || self.reservations.first
+    else
+      self.reservations.first
+    end
+    if reservation.present?
+      info.update({ school_name: reservation.school_name })
+    end
+    info
   end
 
   class << self

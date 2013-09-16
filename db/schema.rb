@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912112336) do
+ActiveRecord::Schema.define(:version => 20130916125148) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "action"
+    t.integer  "number"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.string   "actor_type"
+    t.integer  "actor_id"
+    t.string   "item_type"
+    t.integer  "item_id"
+    t.text     "info"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "session_key"
+  end
+
+  add_index "activities", ["action", "owner_type", "owner_id"], :name => "index_activities_on_action_and_owner_type_and_owner_id"
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -205,6 +222,23 @@ ActiveRecord::Schema.define(:version => 20130912112336) do
     t.boolean  "ghost",         :default => true
     t.date     "required_at"
     t.string   "school_name"
+  end
+
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "product_reservations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.string   "school_name"
+    t.string   "formal_name"
+    t.string   "school_year"
+    t.string   "color"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "product_style_profiles", :force => true do |t|
@@ -812,6 +846,8 @@ ActiveRecord::Schema.define(:version => 20130912112336) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.text     "footer_text"
+    t.text     "seo_description"
   end
 
   create_table "spree_taxonomies", :force => true do |t|

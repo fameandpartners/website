@@ -25,7 +25,7 @@ namespace :db do
                                  :partial => 'brands',
                                  :populate => 'brands'
                                }, {
-                                 :text => "You've won a shoe shopping spree. Which ones do you nab?",
+                                 :text => "You've won a pair of shoes. Which ones do you choose?",
                                  :position => 1005,
                                  :partial => 'prom_shoes'
                                }, {

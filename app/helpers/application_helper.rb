@@ -137,7 +137,7 @@ module ApplicationHelper
     end
   end
 
-  # move method calls to layout, if there will be too many places 
+  # move method calls to layout, if there will be too many places
   def thanks_popup_for_new_competition_entrant
     if session[:new_entrant] && params[:cf] == 'competition'
       session[:new_entrant] = false
@@ -159,19 +159,19 @@ module ApplicationHelper
   end
 
   def paypal_express_button
-    return '' if paypal_payment_method.blank?
+    return if paypal_payment_method.blank?
 
+    url = paypal_express_url(payment_method_id: paypal_payment_method.id, protocol: 'http')
     link_to(
       image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"),
-      paypal_express_url(:payment_method_id => paypal_payment_method.id),
-      :method => :post, :id => "paypal_button"
+      url, method: :post, id: "paypal_button"
     )
   end
 
   # competition share - 6009830748096
   # order purchased   - 6009784531696
   def fb_analytics_track(pixel_id, currency = 'AUD', value = '0.00')
-    render 'spree/shared/facebook_analytics', { 
+    render 'spree/shared/facebook_analytics', {
       pixel_id: pixel_id,
       currency: currency,
       value: value
@@ -199,11 +199,11 @@ module ApplicationHelper
       content_tag(:span, line_item.money).html_safe
     end
   end
-  
+
   def sale_active?
     current_sale.active?
   end
-  
+
   private
 
   def current_sale

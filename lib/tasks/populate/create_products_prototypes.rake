@@ -28,7 +28,7 @@ end
 
 def add_dress_properties(dress)
   properties = %w{short_description fit fabric weight inspiration inspiration_photo video_id}
-  
+
   properties.each do |property_name|
     unless dress.properties.where(name: property_name).exists?
       property = Spree::Property.where(name: property_name).first_or_create

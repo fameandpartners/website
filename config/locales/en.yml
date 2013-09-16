@@ -8,7 +8,7 @@ en:
       users:
         welcome: 'Welcome'
         confirmation: 'Email Confirmation'
-        custom_dress: 'Custom Dress' 
+        custom_dress: 'Custom Dress'
         style_profile: 'Your Style Profile'
       admins:
         custom_dress: 'Custom Dress | %{full_name} %{id}'
@@ -38,3 +38,12 @@ en:
         title: 'Fame & Partners Formal Dresses Blog'
         description: 'Formal Dresses, Celebrity Fashion and Style Inspiration. Follow the Fame & Partners blog to stay in touch with the latest trends for your next formal event.'
   zip: 'Postcode'
+  spree:
+    admin:
+      products:
+        form:
+          variant_color: "Color"
+          select_color: "Color"
+          new_variant_size: "Size"
+          custom_image: "Custom Color Image"
+          add_new_variant: "Add Variant"

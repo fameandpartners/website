@@ -1,4 +1,6 @@
 class CustomDressRequestsController < ApplicationController
+  before_filter :set_seo_meta
+
   def new
     @custom_dress = CustomDressRequest.new()
   end
@@ -11,5 +13,11 @@ class CustomDressRequestsController < ApplicationController
     else
       render action: :new
     end
+  end
+
+  private
+
+  def set_seo_meta
+    @title = "Custom Dresses Online - Fame & Partners"
   end
 end

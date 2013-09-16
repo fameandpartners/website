@@ -49,6 +49,7 @@ Spree::Order.class_eval do
     begin
       Spree::OrderMailer.confirm_email(self.id).deliver
       Spree::OrderMailer.team_confirm_email(self.id).deliver
+      log_product_purchased
     rescue Exception => e
       logger.error("#{e.class.name}: #{e.message}")
       logger.error(e.backtrace * "\n")
@@ -81,5 +82,11 @@ Spree::Order.class_eval do
 
     self.reload
     current_item
+  end
+
+  def log_products_purchased
+    line_items.each do |line_item|
+      Activity.log_product_purchased(line_item.product, self.user, self)
+    end
   end
 end

@@ -22,6 +22,14 @@ module ProductsHelper
     color_option.present? ? color_option.option_values : []
   end
 
+  def seo_taxonomy
+    @seo_taxonomy ||= Spree::Taxonomy.where("lower(name) = ?", 'SeoCollection'.downcase).first
+  end
+
+  def available_seo_taxonomy_urls
+    seo_taxonomy.present? ? seo_taxonomy.root.children : []
+  end
+
   def product_short_description(product)
     description_text = product.property('short_description') || product.description
     truncate(description_text, length: 80, separator: ' ')
@@ -142,5 +150,54 @@ module ProductsHelper
     else
       link_to 'Move to wish list', spree_signup_path
     end
+  end
+
+  # 'product reservation' link or 'twin alert'
+  def product_twin_alert_link(product)
+    return '' if product.blank?
+
+    if signed_in? && (reservation = spree_current_user.reservation_for(product)).present?
+      raw("<div class='reserved'><i class='icon icon-tick-circle'></i> #{spree_current_user.first_name}, you have reserved this dress in #{reservation.color}.</div>")
+    else
+      data_attrs = { id: product.id }
+      if signed_in? && previous_reservation = spree_current_user.reservations.last
+        data_attrs.update(
+          school_name: previous_reservation.school_name,
+          formal_name: previous_reservation.formal_name,
+          school_year: previous_reservation.school_year
+        )
+      end
+      content_tag(:div,
+        link_to("Twin Alert", '#', class: 'twin-alert-link btn black', data: data_attrs),
+        class: 'twin-alert')
+    end
+  end
+
+  def activity_description(activity, user)
+    if activity.info[:school_name]
+      actor_description = "Someone from #{activity.info[:school_name]}"
+    elsif (actor = activity.actor).present?
+      actor_description = actor.first_name
+    else
+      actor_description = "Someone"
+    end
+
+    action_description, action_class = case activity.action
+    when "purchased"
+      [ "purchased this item", "icon-purchase" ]
+    when "added_to_cart"
+      [ "added this item to their cart", "icon-bag" ]
+    when "added_to_wishlist"
+      [ "added this item to their wishlist", "icon-heart" ]
+    else # when 'viewed' & by default
+      [ "viewed this item", "icon-eye" ]
+    end
+
+    raw("#{content_tag(:i, '', class: 'icon ' + action_class)} #{actor_description} #{action_description} #{timeago(activity.updated_at)}")
+  end
+
+  def timeago(time, options = {})
+    options[:class] ||= "timeago"
+    content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
   end
 end

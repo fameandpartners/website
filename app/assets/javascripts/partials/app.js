@@ -118,6 +118,8 @@ $(function(){
 
   window.initHoverableProductImages()
 
+  $("abbr.timeago").timeago();
+
   //track.remarketing_tag()
 });
 

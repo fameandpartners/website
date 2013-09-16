@@ -53,6 +53,12 @@ $(".products.show").ready ->
     popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
   )
 
+  window.helpers.initProductReserver(
+    $('.twin-alert a.twin-alert-link'),
+    window.product_analytics_label,
+    variantsSelector
+  )
+
   # track events on page
   createTrackHandler = (method) ->
     handler = (e) ->

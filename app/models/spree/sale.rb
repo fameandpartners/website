@@ -26,6 +26,10 @@ class Spree::Sale < ActiveRecord::Base
               :greater_than_or_equal_to => 0
             }
 
+  after_save do
+    ActiveSupport::Cache::RedisStore.new.delete_matched('*main_info')
+  end
+
   DISCOUNT_TYPES.each do |id, name|
     define_method "#{name.downcase}?" do
       self.discount_type.eql?(id)

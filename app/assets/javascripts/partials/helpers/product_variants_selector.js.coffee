@@ -6,6 +6,7 @@ window.helpers.createProductVariantsSelector = (root) ->
   variantsSelector = {
     selected: { color: null, size: null },
     variants: null,
+    container: root,
 
     init: (variants, selected) ->
       variantsSelector.variants = variants
