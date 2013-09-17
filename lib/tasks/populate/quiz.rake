@@ -7,37 +7,45 @@ namespace :db do
       quiz.questions.create!([
                                {
                                  :text => "Choose the look that's closest to your everyday style?",
+                                 :step => 1,
                                  :position => 1001,
                                  :partial => 'outfits'
                                }, {
                                  :text => "You're walking the red carpet. Which dress would you wear?",
+                                 :step => 2,
                                  :position => 1002,
                                  :partial => 'oscar_dresses'
                                }, {
                                  :text => "It's time to dress up. Which best describes your style.",
+                                 :step => 3,
                                  :position => 1003,
                                  :multiple => true,
                                  :partial => 'style_words'
                                }, {
                                  :text => "Which brands speak to your style?",
+                                 :step => 4,
                                  :position => 1004,
                                  :multiple => true,
                                  :partial => 'brands',
                                  :populate => 'brands'
                                }, {
                                  :text => "You've won a pair of shoes. Which ones do you choose?",
+                                 :step => 5,
                                  :position => 1005,
                                  :partial => 'prom_shoes'
                                }, {
                                  :text => 'Tell us which eye makeup look you love.',
+                                 :step => 6,
                                  :position => 1006,
                                  :partial => 'prom_makeup'
                                }, {
                                  :text => 'Whether it works for you or not, which hair style do you love?',
+                                 :step => 7,
                                  :position => 1007,
                                  :partial => 'prom_hair'
                                }, {
                                  :text => 'Which of these runway looks would inspire your dream formal dress?',
+                                 :step => 8,
                                  :position => 1008,
                                  :partial => 'prom_dresses'
                                #}, {
@@ -48,16 +56,19 @@ namespace :db do
                                #  :populate => 'nail_colours'
                                }, {
                                  :text => 'What are your favorite colors?',
+                                 :step => 9,
                                  :position => 1010,
                                  :multiple => true,
                                  :partial => 'colours',
                                  :populate => 'colours'
                                }, {
                                  :text => 'How important is fashion to you?',
+                                 :step => 10,
                                  :position => 1011,
                                  :partial => 'fashionability'
                                }, {
                                  :text => 'Do you prefer to show some skin or to cover up? Rank how sexy you like to look.',
+                                 :step => 11,
                                  :position => 1012,
                                  :partial => 'sexiness'
                                #}, {
@@ -67,26 +78,31 @@ namespace :db do
                                #  :populate => 'trends'
                                }, {
                                  :text => 'What is your hair colour?',
+                                 :step => 12,
                                  :position => 1014,
                                  :partial => 'hair_colours',
                                  :populate => 'hair_colour'
                                }, {
                                  :text => 'What is your skin colour?',
+                                 :step => 13,
                                  :position => 1015,
                                  :partial => 'skin_colours',
                                  :populate => 'skin_colour'
                                }, {
                                  :text => 'What is your body shape?',
+                                 :step => 14,
                                  :position => 1016,
                                  :partial => 'body_shapes',
                                  :populate => 'body_shape'
                                }, {
                                  :text => 'What is your typical size?',
+                                 :step => 14,
                                  :position => 1017,
                                  :partial => 'typical_sizes',
                                  :populate => 'typical_size'
                                }, {
                                  :text => 'What is your bra size?',
+                                 :step => 15,
                                  :position => 1018,
                                  :partial => 'bra_sizes',
                                  :populate => 'bra_size'

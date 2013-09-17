@@ -156,9 +156,8 @@ FameAndPartners::Application.routes.draw do
   end
 
   resource :quiz, :only => [:show] do
-    resources :questions, :only => [:index, :show] do
-      resource :answer, :only => [:create]
-    end
+    resources :questions, :only => [:index]
+    resources :answers, :only => [:create]
   end
 
   scope '/users/:user_id', :as => :user do
@@ -245,7 +244,7 @@ FameAndPartners::Application.routes.draw do
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
   # seo routes
-  %w{black red pink bpue green}.each do |colour|
+  %w{black red pink blue green}.each do |colour|
     get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour
   end
   
