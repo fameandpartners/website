@@ -6,7 +6,7 @@
   - collection_title = "Our Collection"
 
 .ad style=(info[:image].blank? ? '' : "background: url('#{info[:image]}') 0 0 no-repeat;")
-  h1 class=(@searcher.colour.present? ? @searcher.colour.first.name : 'black') = collection_title
+  h1 class='black' = collection_title
   h2 = info[:description]
 .results-sort.clearfix
   .results-sort-inner

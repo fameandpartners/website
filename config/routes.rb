@@ -245,7 +245,7 @@ FameAndPartners::Application.routes.draw do
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
   # seo routes
-  %w{black red pink bpue green}.each do |colour|
+  %w{black red pink blue green}.each do |colour|
     get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour
   end
   
