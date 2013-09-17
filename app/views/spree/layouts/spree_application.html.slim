@@ -26,8 +26,7 @@ doctype html
     - if spree_user_signed_in? and session['show_quiz'] and session.delete('show_quiz')
       javascript:
         $(function(){
-          showStyleQuiz();
-          bindStyleQuizEvents();
+          Quiz.show();
         });
     #wrap
       - cached_header = render('layouts/header')
