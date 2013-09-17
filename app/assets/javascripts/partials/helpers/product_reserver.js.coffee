@@ -34,7 +34,7 @@ window.helpers.initProductReserver = (elements, label, variantsSelector) ->
         color = @selectedColor()
         if _.isEmpty(color)
           result = false
-          @showErrorMessage('Please, select dress colour')
+          @showErrorMessage('Please select a dress colour from above.')
         return result
 
       selectedColor: () ->

@@ -167,9 +167,10 @@ module ProductsHelper
           school_year: previous_reservation.school_year
         )
       end
-      content_tag(:div,
-        link_to("Twin Alert", '#', class: 'twin-alert-link btn black', data: data_attrs),
-        class: 'twin-alert')
+      content_tag(:div, class: 'twin-alert') do
+        link_to("Twin Alert", '#', class: 'twin-alert-link btn black', data: data_attrs) +
+        content_tag(:div, "Make sure you dont buy the same dress as someone else. First choose a colour above.", class: 'twin-alert-info')
+      end
     end
   end
 

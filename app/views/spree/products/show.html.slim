@@ -163,9 +163,11 @@ ruby:
                 ' Free styling
                 br
                 ' advice
-        .twin-alert-block
+        .twin-alert-block.clearfix
           = product_twin_alert_link(@product)
-          - if @activities.present?
+        - if @activities.present?
+          .activities.clearfix
+            .activities-title Recent Activity
             ul
               - @activities.each do |activity|
                 li class=(activity.action) = activity_description(activity, try_spree_current_user)

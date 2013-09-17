@@ -2014,9 +2014,10 @@
       width: 364px;
       margin-left: -182px;
     }
-    .input {
+    .input {   
+      margin-top: 16px !important;
       label {
-        margin: 0 0 10px;
+        margin: 0 0 5px;
         display: block;
       }
       input {
@@ -2135,8 +2136,11 @@
   padding: 20px 0;
 }
 
+
+
+
 .twin-alert-block {
-  margin: 20px 0 0;
+  margin: 20px 0 10px 0;
   .reserved {
     padding: 0 0 10px 0;
     font: 400 italic 18px/25px $fontTwo;
@@ -2151,9 +2155,32 @@
     display: inline-block;
     text-decoration: none;
   }
+  .twin-alert-link{
+    float: left;
+  }
+  .twin-alert-info{
+    width: 260px;
+    margin: 0 0 0 110px;
+    font-size: 13px;
+    line-height: 1.1em;
+    font-family: $fontOne;
+  }
   .error {
     color: #c00;
   }
+}
+
+.activities{
+  width: 100%;
+  margin: 30px 0 0 0; 
+  .activities-title{
+    font-family: $fontTwo;
+    font-style: italic;
+    font-size: 22px;
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid #efefef;
+  }
+  
   ul {
     margin: 10px 0 0;
     line-height: 20px;
