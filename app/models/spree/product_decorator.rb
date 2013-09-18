@@ -42,7 +42,7 @@ Spree::Product.class_eval do
       video_id = self.property('video_id') 
       # youtube
       # video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}?rel=0&showinfo=0" 
-      video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=1&loop=1"
+      video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
     end
   end
 
