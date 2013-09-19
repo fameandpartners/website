@@ -2187,10 +2187,10 @@
   }
 }
 
-.activities{
+.activities {
   width: 100%;
   margin: 30px 0 0 0; 
-  .activities-title{
+  .activities-title {
     font-family: $fontTwo;
     font-style: italic;
     font-size: 22px;
@@ -2221,5 +2221,14 @@
     font: 400 italic 46px/1.2 $fontTwo;
     color: #e79e90;
     margin: 38px 0 0;
+  }
+  .account-pages {
+    margin: 0 !important;
+  }
+  .tabs {
+    .tab-content {
+      border: 0;
+      position: static;
+    }
   }
 }
