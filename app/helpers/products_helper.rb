@@ -93,10 +93,6 @@ module ProductsHelper
     end
   end
 
-  def layby_this_dress(product)
-    mail_to "team@fameandpartners.com?subject=I would like to layby this dress: #{product.sku}", content_tag(:i, '', class: 'icon icon-layby') + 'Layby this dress', class: 'btn-layby'
-  end
-
   def customize_this_dress(product)
     content_tag :div, class: 'customize' do
       mail = mail_to "team@fameandpartners.com?subject=I would like to customise this dress: #{product.sku}", 'Free Customisation'

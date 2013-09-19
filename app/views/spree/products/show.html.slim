@@ -88,11 +88,13 @@ ruby:
                 option{value=size} = size
           = link_to 'What size am I?', '#what-size', class: 'info toggle-sizes'
         .buy-wishlist.clearfix
-          .buy-layby
+          .buy-customize
             = add_to_bag_link(@product)
             .or-line
               span or
-            = link_to 'Free Customisation', '#', id: 'customize-dress-button'
+            = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
+              i.icon.icon-layby
+              ' Free Customization
           = add_to_wishlist_link(@product)
         .tabs
           ul.tabs-links
