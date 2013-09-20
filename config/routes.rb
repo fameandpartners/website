@@ -50,33 +50,14 @@ FameAndPartners::Application.routes.draw do
   
   resources :product_reservations, only: [:create]
 
+  # Redirects from old blog urls
+  constraints host: /blog\./ do
+    get '/' => redirect(host: configatron.host)
+    match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
+  end
+
   # Blog routes
-  blog_constraint = lambda { |request|
-    if Rails.env.development?
-      request.host =~ /blog\.localdomain/
-    elsif Rails.env.staging?
-      request.host =~ /blog.fame.23stages.com/
-    else
-      request.host =~ /blog\.fameandpartners\.com/
-    end
-  }
-
-  constraints blog_constraint do
-    devise_for :spree_user,
-               :class_name => 'Spree::User',
-               :controllers => {:sessions => 'spree/user_sessions',
-                                :registrations => 'spree/user_registrations',
-                                :passwords => 'spree/user_passwords',
-                                :confirmations => 'spree/user_confirmations',
-                                :omniauth_callbacks => 'spree/omniauth_callbacks'
-               },
-               :skip => [:unlocks, :omniauth_callbacks],
-               :path_names => {:sign_out => 'logout'} do
-      get '/login' => 'spree/user_sessions#new'
-      get '/signup' => 'spree/user_registrations#new'
-      get '/logout' => 'spree/user_sessions#destroy'
-    end
-
+  scope '/blog' do
     get '/' => 'blog#index', as: :blog
 
     get '/about'   => 'blog#about', as: :about
