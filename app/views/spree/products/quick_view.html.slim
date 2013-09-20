@@ -62,7 +62,6 @@ ruby:
         .colors
           - colors.each do |color|
             .color class='#{color}' data-color='#{color}'
-        = customize_this_dress(@product) unless @product.in_sale?
       .notice
         .colour-images Images of other colours are on their way
       .size-select
@@ -75,11 +74,12 @@ ruby:
       .buy-wishlist
         .buy-customize
           = add_to_bag_link(@product)
-          .or-line
-            span or
-            = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
-              i.icon.icon-layby
-              ' Free Customization
+          - unless true #@product.in_sale?
+            .or-line
+              span or
+              = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
+                i.icon.icon-layby
+                ' Free Customization
         = add_to_wishlist_link(@product)
 
       .tabs

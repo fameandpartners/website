@@ -1,6 +1,9 @@
 window.paymentRequestModal = {
+  scope: () ->
+    $('#ask-parent-to-pay-modal')
+
   show: () ->
-    $scope = $('#ask-parent-to-pay-modal')
+    $scope = paymentRequestModal.scope()
     $container = $scope.find('.modal-container')
 
     expected = $(window).scrollTop() + 60
@@ -17,20 +20,20 @@ window.paymentRequestModal = {
     $(document).bind 'keyup', paymentRequestModal.keyPressHandler
 
   hide: () ->
-    $scope = $('#ask-parent-to-pay-modal')
+    $scope = paymentRequestModal.scope()
     $scope.hide()
     $scope.find('.close-lightbox').bind 'click', paymentRequestModal.hide
     $scope.find('.overlay').unbind 'click', paymentRequestModal.hide
     $(document).unbind 'keyup', paymentRequestModal.keyPressHandler
 
   success: (html) ->
-    $scope = $('#ask-parent-to-pay-modal')
+    $scope = paymentRequestModal.scope()
     $scope.find('.modal-container').html(html)
     $('#ask-parent-to-pay-button').remove()
     setTimeout paymentRequestModal.hide, 3000
 
   fail: (html) ->
-    $scope = $('#ask-parent-to-pay-modal')
+    $scope = paymentRequestModal.scope()
     $container = $scope.find('.modal-container')
     $container.find('.form').html(html)
 

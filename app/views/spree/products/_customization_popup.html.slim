@@ -1,48 +1,8 @@
-#customize-dress-modal.modal.send-to-friend.hide
+#personalize-dress-popup.modal.send-to-friend.hide
   .overlay
   .modal-container
     .close-lightbox
     .modal-title Tell us how you would like to customise this dress.
     p Free customisation when you buy this dress. Change the colour, length and fabric. We will contact you to confirm your customisation details.
     .form
-      .fields-group
-        .item-details.input
-          label for="first_name"
-            ' First name
-            span.required *
-          input type="text" size="30" name="first_name" id="first_name" required="required" placeholder="John" tabindex='1'
-        .item-details.input
-          label for="last_name"
-            ' Last name
-            span.required *
-          input type="text" size="30" name="last_name" id="last_name" required="required" placeholder="Smith" tabindex='2'
-      .item-details.input
-        label for="email"
-          ' Email
-          span.required *
-        input type="text" size="30" name="email" id="email" required="required" placeholder="john.smith@example.com" tabindex='3'
-      .item-details.input.boolean
-        input type="checkbox" name=""
-        label for="" Request colour not already offered
-      .item-details.input.boolean
-        input type="checkbox" name=""
-        label for="" Change hem length
-      .item-details.input.boolean
-        input type="checkbox" name=""
-        label for="" Change neck line
-      .item-details.input.boolean
-        input type="checkbox" name=""
-        label for="" Change fabric type
-      .item-details.input.boolean
-        input type="checkbox" name=""
-        label for="" Merge two styles from the website
-      .item-details.input.boolean
-        input type="checkbox" name=""
-        label for="" Add beading/sequins
-      .item-details.input
-        label for="comments"
-          ' Your comments
-          span.required *
-        textarea name="comments" id="comments" required="required" tabindex='4'
-      .submit
-        input type="submit" value="Submit your request"
+      = render 'product_personalizations/form', personalization: ProductPersonalization.new

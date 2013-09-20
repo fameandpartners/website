@@ -53,9 +53,7 @@ $(".products.show").ready ->
     popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
   )
 
-  $('#customize-dress-button').bind 'click', (event) ->
-    event.preventDefault()
-    $('#customize-dress-modal').show()
+  window.helpers.addCustomizationButtonHandlers($('#customize-dress-button'))
 
   window.helpers.initProductReserver(
     $('.twin-alert a.twin-alert-link'),

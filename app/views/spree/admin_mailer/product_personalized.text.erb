@@ -1,0 +1,13 @@
+First Name: <%= @personalization.user_first_name %>
+Last Name: <%= @personalization.user_last_name %>
+Order Number: <%= @personalization.order.number %>
+Product SKU: <%= @personalization.variant.sku %>
+
+Request colour not already offered: <%= @personalization.change_color? ? 'YES' : 'NO' %>
+Change hem length: <%= @personalization.change_hem_length? ? 'YES' : 'NO' %>
+Change neck line: <%= @personalization.change_neck_line? ? 'YES' : 'NO' %>
+Change fabric type: <%= @personalization.change_fabric_type? ? 'YES' : 'NO' %>
+Merge two styles from the website: <%= @personalization.merge_styles? ? 'YES' : 'NO' %>
+Add beading/sequins: <%= @personalization.add_beads_or_sequins? ? 'YES' : 'NO' %>
+Comments:
+<%= @personalization.comments %>
