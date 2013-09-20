@@ -52,7 +52,7 @@ FameAndPartners::Application.routes.draw do
 
   # Redirects from old blog urls
   constraints host: /blog\./ do
-    get '/' => redirect(host: configatron.host)
+    get '/' => redirect(host: configatron.host, path: "/blog")
     match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
   end
 
