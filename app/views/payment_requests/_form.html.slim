@@ -1,0 +1,18 @@
+= form_for @payment_request, remote: true do |f|
+  = render :partial => 'shared/error_messages', locals: { target: @payment_request }
+  .askmumintro Send this dress to your mum, your dad, your sister, your aunt - whoever you need to get on board to help you buy it.
+  .item-details.input
+    = f.label :recipient_full_name do
+      ' Recipient's name
+      span.required *
+    = f.text_field :recipient_full_name, placeholder: "recipient's first and last name", size: 30
+  .item-details.input
+    = f.label :recipien_email do
+      ' Recipient's email
+      span.required *
+    = f.text_field :recipient_email, placeholder: "recipient's email address", size: 30
+  .item-details.input
+    = f.label :message
+    = f.text_area :message, rows: 5, cols: 30
+  .save.submit
+    = f.submit 'Ask', class: 'btn black'

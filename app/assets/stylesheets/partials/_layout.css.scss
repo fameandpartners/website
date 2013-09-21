@@ -3,7 +3,7 @@
   overflow: hidden;
 }
 
-.index.show, .checkout.edit {
+.index.show, .checkout.edit, .checkout.guest {
   background: image-url('bg-main.jpg') 0 0 repeat;
   header {
     box-shadow: 0 3px 6px rgba(0, 0, 0, .2);

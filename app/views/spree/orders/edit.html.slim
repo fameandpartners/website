@@ -63,14 +63,15 @@
                   span $4.55
 
       .promo-summary.grid-container
-        .promo-block.grid-70
-          .columns.grid-container
-            .column.grid-25
-              .title Full security
-              .desc = image_tag 'comodo-secure.png', alt: "Comodo SSl Security", width: 101, height: 32
-            .column.grid-45
-              .title Payment methods
-              .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
+        .grid-75
+          .promo-block
+            .columns.grid-container
+              .column.grid-25
+                .title Full security
+                .desc = image_tag 'comodo-secure.png', alt: "Comodo SSl Security", width: 101, height: 32
+              .column.grid-45
+                .title Payment methods
+                .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
 
             - unless sale_active?
               .column.grid-30
@@ -79,11 +80,12 @@
                   = form_for @order, remote: true do |f|
                     = f.submit 'Redeem', style: 'float: right;'
                     = f.text_field :coupon_code, style: "width: 110px;"
-        .summary.grid-25.prefix-5.order-summary
+        .summary.grid-25.order-summary
           = render 'summary'
       .continue-buy.grid-container
-        .grid-70 = link_to 'Continue shopping', products_path, class: 'continue-shopping'
-        .grid-25.prefix-5
+        .grid-75
+          .fleft = link_to 'Continue shopping', products_path, class: 'continue-shopping'
+        .grid-25
           = form_for @order, url: update_cart_path do |f|
             = f.button :checkout, name: 'checkout', class: 'buy-now'
           - if (paypal_button_html = paypal_express_button).present?

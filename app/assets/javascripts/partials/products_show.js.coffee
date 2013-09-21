@@ -53,6 +53,8 @@ $(".products.show").ready ->
     popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
   )
 
+  window.helpers.addCustomizationButtonHandlers($('#customize-dress-button'))
+
   window.helpers.initProductReserver(
     $('.twin-alert a.twin-alert-link'),
     window.product_analytics_label,

@@ -1,0 +1,44 @@
+doctype html
+= conditional_html do
+  head
+    = render 'layouts/head'
+    = csrf_meta_tags
+    = render 'spree/shared/google_analytics'
+
+    - if content_for?(:payment_gateway)
+      = yield :payment_gateway
+  body class="guest ecommerce #{controller_action_class}" id=(controller_action_id)
+    #fb-root
+    /javascript:
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=591959187490267";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+    - if spree_user_signed_in?
+      javascript:
+        window.current_user = #{raw serialized_current_user.to_json}
+
+    - if spree_user_signed_in? and session['show_quiz'] and session.delete('show_quiz')
+      javascript:
+        $(function(){
+          showStyleQuiz();
+          bindStyleQuizEvents();
+        });
+    #wrap
+      - cached_header = render('layouts/header')
+      = cached_header
+      #content
+        = yield
+      = render 'shared/quiz_popup'
+      #push
+      .fixed-bar style="position: fixed; top: -300px; width: 100%; height: 106px; background-color: rgba(255, 255, 255, 1); z-index: 2001;"
+        = cached_header
+        .top-bar style="top: 62px;"
+          = render 'shared/top_bar_inner'
+    = render 'layouts/footer'
+
+    = render 'shared/remarketing_tag'

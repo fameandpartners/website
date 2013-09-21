@@ -77,7 +77,6 @@ ruby:
           .colors
             - colors.each do |color|
               .color class='#{color}' data-color='#{color}' title='#{color}'
-          = customize_this_dress(@product) unless @product.in_sale?
         .notice
           .colour-images Images of other colours are on their way
         .size-select
@@ -88,11 +87,14 @@ ruby:
                 option{value=size} = size
           = link_to 'What size am I?', '#what-size', class: 'info toggle-sizes'
         .buy-wishlist.clearfix
-          .buy-layby
+          .buy-customize
             = add_to_bag_link(@product)
-            .or-line
-              span or
-            = layby_this_dress(@product)
+            - unless @product.in_sale?
+              .or-line
+                span or
+              = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
+                i.icon.icon-layby
+                ' Free Customization
           = add_to_wishlist_link(@product)
         .tabs
           ul.tabs-links
@@ -193,3 +195,4 @@ ruby:
             span = product.price_in(current_currency).display_price_with_discount
           - else
             span = product.price_in(current_currency).display_price
+= render 'customization_popup'

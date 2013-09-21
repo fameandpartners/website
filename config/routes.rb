@@ -30,6 +30,8 @@ FameAndPartners::Application.routes.draw do
   get 'products/:id/quick_view' => 'spree/products#quick_view'
   post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
 
+  post '/product_personalizations' => 'product_personalizations#create'
+
   get 'my-boutique' => 'pages#my_boutique', :as => :my_boutique
 
   # account settings
@@ -50,33 +52,14 @@ FameAndPartners::Application.routes.draw do
   
   resources :product_reservations, only: [:create]
 
+  # Redirects from old blog urls
+  constraints host: /blog\./ do
+    get '/' => redirect(host: configatron.host, path: "/blog")
+    match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
+  end
+
   # Blog routes
-  blog_constraint = lambda { |request|
-    if Rails.env.development?
-      request.host =~ /blog\.localdomain/
-    elsif Rails.env.staging?
-      request.host =~ /blog.fame.23stages.com/
-    else
-      request.host =~ /blog\.fameandpartners\.com/
-    end
-  }
-
-  constraints blog_constraint do
-    devise_for :spree_user,
-               :class_name => 'Spree::User',
-               :controllers => {:sessions => 'spree/user_sessions',
-                                :registrations => 'spree/user_registrations',
-                                :passwords => 'spree/user_passwords',
-                                :confirmations => 'spree/user_confirmations',
-                                :omniauth_callbacks => 'spree/omniauth_callbacks'
-               },
-               :skip => [:unlocks, :omniauth_callbacks],
-               :path_names => {:sign_out => 'logout'} do
-      get '/login' => 'spree/user_sessions#new'
-      get '/signup' => 'spree/user_registrations#new'
-      get '/logout' => 'spree/user_sessions#destroy'
-    end
-
+  scope '/blog' do
     get '/' => 'blog#index', as: :blog
 
     get '/about'   => 'blog#about', as: :about
@@ -239,6 +222,17 @@ FameAndPartners::Application.routes.draw do
   end
 
   get 'search' => 'pages#search'
+
+  get '/cart/guest' => 'spree/orders#guest'
+
+  # Guest checkout routes
+  resources :payment_requests, only: [:new, :create]
+  namespace :guest do
+    put '/checkout/:token/update/:state', :to => 'checkout#update', :as => :update_checkout
+    get '/checkout/:token/thanks', :to => 'checkout#show' , :as => :checkout_thanks
+    get '/checkout/:token/:state', :to => 'checkout#edit', :as => :checkout_state
+    get '/checkout/:token', :to => 'checkout#edit' , :as => :checkout
+  end
 
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'

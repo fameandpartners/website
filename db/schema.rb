@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130916125148) do
+ActiveRecord::Schema.define(:version => 20130920095136) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -222,6 +222,34 @@ ActiveRecord::Schema.define(:version => 20130916125148) do
     t.boolean  "ghost",         :default => true
     t.date     "required_at"
     t.string   "school_name"
+  end
+
+  create_table "payment_requests", :force => true do |t|
+    t.integer  "order_id"
+    t.string   "recipient_full_name"
+    t.string   "recipient_email"
+    t.text     "message"
+    t.string   "token"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "product_personalizations", :force => true do |t|
+    t.integer  "variant_id"
+    t.integer  "line_item_id"
+    t.integer  "user_id"
+    t.string   "user_first_name"
+    t.string   "user_last_name"
+    t.string   "user_email"
+    t.boolean  "change_color"
+    t.boolean  "change_hem_length"
+    t.boolean  "change_neck_line"
+    t.boolean  "change_fabric_type"
+    t.boolean  "merge_styles"
+    t.boolean  "add_beads_or_sequins"
+    t.text     "comments"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "product_reservations", :force => true do |t|
@@ -521,27 +549,6 @@ ActiveRecord::Schema.define(:version => 20130916125148) do
   end
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
-
-  create_table "spree_pages", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.string   "slug"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.boolean  "show_in_header",           :default => false, :null => false
-    t.boolean  "show_in_footer",           :default => false, :null => false
-    t.string   "foreign_link"
-    t.integer  "position",                 :default => 1,     :null => false
-    t.boolean  "visible",                  :default => true
-    t.string   "meta_keywords"
-    t.string   "meta_description"
-    t.string   "layout"
-    t.boolean  "show_in_sidebar",          :default => false, :null => false
-    t.string   "meta_title"
-    t.boolean  "render_layout_as_partial", :default => false
-  end
-
-  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"

@@ -10,4 +10,7 @@
   .grid-container
     .grid-100.padding
       .place-order
-        = form.submit 'Submit Details', data: { loading: 'Submitting...' }
+        .fleft = form.submit 'Submit Details', data: { loading: 'Submitting...' }
+        - if spree_user_signed_in? && !@order.payment_request.present?
+          .fright = link_to 'Ask parents to pay', '#', class: 'ask-parents', id: 'ask-parent-to-pay-button'
+        .clear

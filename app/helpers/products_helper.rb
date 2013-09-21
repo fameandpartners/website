@@ -93,10 +93,6 @@ module ProductsHelper
     end
   end
 
-  def layby_this_dress(product)
-    mail_to "team@fameandpartners.com?subject=I would like to layby this dress: #{product.sku}", content_tag(:i, '', class: 'icon icon-layby') + 'Layby this dress', class: 'btn-layby'
-  end
-
   def customize_this_dress(product)
     content_tag :div, class: 'customize' do
       mail = mail_to "team@fameandpartners.com?subject=I would like to customise this dress: #{product.sku}", 'Free Customisation'
@@ -146,9 +142,9 @@ module ProductsHelper
 
   def product_move_to_wishlist_link(variant)
     if spree_user_signed_in?
-      link_to 'Move to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist'
+      link_to content_tag(:i, '', class: 'icon icon-heart') + 'Move to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist'
     else
-      link_to 'Move to wish list', spree_signup_path
+      link_to content_tag(:i, '', class: 'icon icon-heart') + 'Move to wish list', spree_signup_path
     end
   end
 

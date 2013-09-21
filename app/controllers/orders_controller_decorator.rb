@@ -1,4 +1,9 @@
 Spree::OrdersController.class_eval do
+  def guest
+    @order = current_order(true)
+    associate_user
+  end
+
   def update
     @order = current_order
     unless @order

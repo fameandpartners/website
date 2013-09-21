@@ -17,6 +17,8 @@ Spree::Order.class_eval do
     false
   end
 
+  has_one :payment_request
+
   def process_payments!
     begin
       pending_payments.each do |payment|
