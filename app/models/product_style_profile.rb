@@ -24,11 +24,13 @@ class ProductStyleProfile < ActiveRecord::Base
   validates *BODY_SHAPES, numericality: numericality
   validates *BRA_SIZES, numericality: numericality
   validates :sexiness, :fashionability, numericality: numericality
-#  validate do
-#    unless attributes.slice(*BASIC_STYLES).values.sum.eql?(10)
-#      errors.add(:base, :"points_number.invalid")
-#    end
-#  end
+  validate do
+    if (changes.keys & BASIC_STYLES).present?
+      unless attributes.slice(*BASIC_STYLES).values.sum.eql?(10)
+        errors.add(:base, :"points_number.invalid")
+      end
+    end
+  end
 
   belongs_to :product,
              :class_name => 'Spree::Product'
