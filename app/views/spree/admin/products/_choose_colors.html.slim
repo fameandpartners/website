@@ -1,0 +1,19 @@
+h2 Choose Colors
+
+.select-all-wrapper
+  = check_box_tag "option_types[]", option_type.id, (params[:option_types] || []).include?(option_type.id.to_s), :id => "option_type_#{option_type.id}", :class => "option-type"
+  = label_tag "option_type_#{option_type.id}", "Select All"
+.product-prototype-options.clearfix
+  - option_type.option_values.each do |ov|
+    .columns.three
+      = check_box_tag "product[option_values_hash[#{option_type.id}]][]", ov.id, params[:product] && (params[:product][:option_values_hash] || {}).values.flatten.include?(ov.id.to_s), :id => "option_value_#{ov.id}", :class => "option-value"
+      = label_tag "option_value_#{ov.id}", ov.presentation
+
+coffee:
+  $ ->
+    $selectAll = $('.select-all-wrapper :checkbox')
+    $subItems = $('.product-prototype-options :checkbox')
+    $selectAll.on 'change', ->
+      $subItems.prop('checked', this.checked)
+    $subItems.on 'change', ->
+      $selectAll.prop('checked', $subItems.not(':checked').length == 0)

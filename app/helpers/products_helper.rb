@@ -62,7 +62,7 @@ module ProductsHelper
       end
       options[:onerror] = "window.switchToAltImage(this, '/assets/#{no_image}')"
       link_to image_tag(image.attachment.url(:product), options), collection_product_path(product)
-    end 
+    end
   end
 
   def quick_view_link(product)
@@ -101,7 +101,7 @@ module ProductsHelper
     content_tag :div, class: 'customize' do
       mail = mail_to "team@fameandpartners.com?subject=I would like to customise this dress: #{product.sku}", 'Free Customisation'
       dropdown = content_tag :div, class: 'customize-dropdown-wrapper' do
-        content_tag(:i, '', class: 'icon-help') + 
+        content_tag(:i, '', class: 'icon-help') +
         content_tag(:div, class: 'customize-dropdown') do
           content_tag(:b, 'Free customisation') +
           tag(:br) +
@@ -127,7 +127,7 @@ module ProductsHelper
     data = { product: product.permalink }
     data.update({ guest: true }) unless spree_user_signed_in?
 
-    link_to 'Show mum', '#', class: 'send-to-friend askmumbtn', data: data, title: 'Send this dress to your mum, aunty, dad or anyone that will help you buy this dress'
+    link_to 'Show mum', '#', class: 'send-to-friend askmumbtn', data: data, title: 'Send this dress to whoever you want to get a second opinion from!'
   end
 
   def wishlist_move_to_cart_link(wishlist_item)

@@ -24,6 +24,8 @@ Spree::Product.class_eval do
 
   delegate_belongs_to :master, :in_sale?, :original_price, :price_without_discount
 
+  before_create :set_default_prototype
+
   def remove_property(name)
     ActiveRecord::Base.transaction do
       property = Spree::Property.where(name: name).first
@@ -39,9 +41,9 @@ Spree::Product.class_eval do
 
   def video_url
     @video_url ||= begin
-      video_id = self.property('video_id') 
+      video_id = self.property('video_id')
       # youtube
-      # video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}?rel=0&showinfo=0" 
+      # video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}?rel=0&showinfo=0"
       video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
     end
   end
@@ -66,20 +68,32 @@ Spree::Product.class_eval do
     update_index
   end
 
+  def set_default_prototype
+    self.prototype_id = self.class.default_prototype.try(:id)
+  end
+
+  def self.default_prototype
+    Spree::Prototype.find_by_name('Dress')
+  end
+
   private
 
   def build_variants_from_option_values_hash
     ensure_option_types_exist_for_values_hash
-    values = option_values_hash.values
-    values = values.inject(values.shift) { |memo, value| memo.product(value).map(&:flatten) }
+    if prototype_id && prototype = Spree::Prototype.find_by_id(prototype_id)
+      return unless sizes = prototype.option_types.find_by_name('dress-size').try(:option_values)
 
-    values.each do |ids|
-      variant = variants.create({
-                                  :option_value_ids => ids,
-                                  :price => master.price,
-                                  :on_demand => on_demand
-                                }, :without_protection => true)
+      colors = option_values_hash.values.first
+      values = colors.product(sizes.map(&:id))
+
+      values.each do |ids|
+        variant = variants.create({
+          :option_value_ids => ids,
+          :price => master.price,
+          :on_demand => true
+        }, :without_protection => true)
+      end
+      save
     end
-    save
   end
 end

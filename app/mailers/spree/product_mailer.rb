@@ -11,12 +11,12 @@ class Spree::ProductMailer < ActionMailer::Base
   def send_to_friend(product, friend_info)
     @product = product
     @friend_info = friend_info
-    @user_name = friend_info[:sender_name]
+    @user_name = friend_info[:sender_name].titleize || friend_info[:sender_email]
 
     mail(
       from: friend_info[:sender_email],
       to: friend_info[:email],
-      subject: "#{@user_name.titleize} wants you to approve of her dress at #{Spree::Config[:site_name]}"
+      subject: "#{@user_name} wants you to approve of her dress at #{Spree::Config[:site_name]}"
     )
   end
 end
