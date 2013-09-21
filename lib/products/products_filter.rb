@@ -118,7 +118,7 @@ module Products
       return base_scope if bodyshape.blank?
       conditions = [].tap do |condition|
         bodyshape.each do |shape|
-          condition.push("product_style_profiles.#{shape} > 0")
+          condition.push("product_style_profiles.#{shape} > 4")
         end
       end.join(' or ')
 
