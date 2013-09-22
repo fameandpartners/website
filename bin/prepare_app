@@ -1,0 +1,27 @@
+#!/bin/sh
+
+echo "*** Setup application"
+bundle install
+bundle exec rake db:setup
+result=$?
+
+
+echo "*** Populate Spree Data"
+bundle exec rake spree_sample:load
+result+=$?
+
+
+echo "*** Populate FameAndPartners"
+bundle exec rake db:populate:dresses
+bundle exec rake db:populate:taxonomy
+bundle exec rake db:populate:product_options
+bundle exec rake db:populate:prototypes
+result+=$?
+
+if [ $result -eq 0 ]; then
+  echo "SUCCESS"
+else
+  echo "FAILURE"
+fi
+
+exit $result
