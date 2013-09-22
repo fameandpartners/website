@@ -2,10 +2,10 @@
 
 ### Getting started
 
-$ `git clone git@github.com:droidlabs/fame_and_partners.git`
-$ `cd ./fame_and_partners`
-$ `cp config/database.yml.example config/database.yml`
-$ `bin/prepare_app`
+* `$ git clone git@github.com:droidlabs/fame_and_partners.git`
+* `$ cd ./fame_and_partners`
+* `$ cp config/database.yml.example config/database.yml`
+* `$ bin/prepare_app`
 
 ### Development information
 
@@ -16,10 +16,10 @@ $ `bin/prepare_app`
 
 Note: these commands not needed after bin/prepare_app
 
-$ `bundle exec rake db:populate:dresses`
-$ `bundle exec rake db:populate:taxonomy`
-$ `bundle exec rake db:populate:product_options`
-$ `bundle exec rake db:populate:prototypes`
+* `$ bundle exec rake db:populate:dresses`
+* `$ bundle exec rake db:populate:taxonomy`
+* `$ bundle exec rake db:populate:product_options`
+* `$ bundle exec rake db:populate:prototypes`
 
 ## Deploy
 
@@ -31,9 +31,9 @@ $ `cap staging deploy`
 
 ### Deploy to production
 
-* $ `gem install engineyard`
+* `$ gem install engineyard`
 * merge master branch to production branch
-* $ `ey deploy -e production_blog`
+* `$ ey deploy -e production_blog`
 
 ### Thanks for using Fame and Partners!
 
