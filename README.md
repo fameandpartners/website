@@ -1,4 +1,4 @@
-## Welcome to Fame and Partners  ![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
+## Welcome to FameAndPartners [ ![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
 
 ### Getting started
 
@@ -35,7 +35,7 @@ Note: we are using CircleCi for master branch, manual deplyment usually not need
 * merge master branch to production branch
 * `$ ey deploy -e production_blog`
 
-### Thanks for using Fame and Partners!
+### Thanks for using FameAndPartners!
 
 Cheers, [Droid Labs](http://droidlabs.pro).
 
