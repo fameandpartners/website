@@ -1,0 +1,21 @@
+h2 Choose Customisations
+= link_to 'None', '#', class: 'skip-customisation_'
+ul.customisation-types
+  - CustomisationType.all.each do |type|
+    li
+      var.expand-state
+      = label_tag "customisation_type_#{type.id}", type.presentation
+      ul.clearfix
+        - type.customisation_values.each do |cv|
+          li
+            = check_box_tag "product[customisation_values_hash[#{type.id}]][]", cv.id, params[:product] && (params[:product][:customisation_values_hash] || {}).values.flatten.include?(cv.id.to_s), :id => "customisation_value_#{cv.id}", :class => "customisation-value"
+            = label_tag "customisation_value_#{cv.id}", cv.presentation
+
+coffee:
+  $ ->
+    $selectAll = $('.select-all-wrapper :checkbox')
+    $subItems = $('.product-prototype-options :checkbox')
+    $selectAll.on 'change', ->
+      $subItems.prop('checked', this.checked)
+    $subItems.on 'change', ->
+      $selectAll.prop('checked', $subItems.not(':checked').length == 0)

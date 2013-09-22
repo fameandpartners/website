@@ -5,10 +5,10 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, .2);
   border: 1px solid #ccc;
   display: inline-block;
-  
+
   &.linen { background: #E3D0C5; }
   &.black { background: #000; }
-  &.blue { background: #15558B; } 
+  &.blue { background: #15558B; }
   &.pink { background: #FF3B9D; }
   &.gray, &.grey { background: #A3A7A8; }
   &.orange { background: #FF8434; }
@@ -72,7 +72,7 @@
   &.gold { background:#D6AE28; }
   &.nude { background:#E7D0A6; }
   &.cream { background:#EBE5CD; }
-  
+
   &.active {
     cursor: default;
     background-image: image-url('icon-color-tick.png');
@@ -80,4 +80,15 @@
     background-repeat: no-repeat;
   }
 }
- 
+
+.color-image-popup {
+  width: 100px;
+  height: 100px;
+  background: white;
+  border: 1px solid #ccc;
+  position: absolute;
+  // display: none;
+  opacity: 0;
+  z-index: 9999;
+  padding: 2px;
+}

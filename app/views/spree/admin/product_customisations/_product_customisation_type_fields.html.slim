@@ -1,0 +1,27 @@
+tr class="product_customisation_type fields" id="spree_#{dom_id(f.object)}" data-hook="product_customisation_type"
+  td
+    = f.hidden_field :id
+    - if f.object.new_record?
+      = f.select :customisation_type_id, CustomisationType.all.map {|ct| [ct.presentation, ct.id]}, {prompt: '- Select -'}, class: 'select2-hidden'
+    - else
+      = f.hidden_field :customisation_type_id
+      = text_field_tag :customisation_type_id, f.object.customisation_type.presentation
+    .values.hidden
+      label Values
+      .clear
+      = link_to_add_fields t(:add_new_customisation), "#spree_#{dom_id(f.object)} .values-holder", class: 'icon-plus button'
+      .clear
+      .values-holder data-include-invisible="true" data-child-tag=".single-value"
+        = f.fields_for :product_customisation_values do |value_form|
+          .single-value.fields id="spree_cv_#{dom_id(value_form.object)}"
+            = value_form.select :customisation_value_id, f.object.customisation_type.customisation_values.all.map {|cv| [cv.presentation, cv.id]}, {}, class: 'select2'
+            - if value_form.object.image?
+              = image_tag value_form.object.image.url(:mini), width: 30, height: 30
+            = value_form.file_field :image
+            = link_to_remove_fields t(:remove), value_form, no_text: true, url: [:admin, f.object.product, value_form.object], data: {wrapper_selector: '.single-value'}
+            = value_form.hidden_field :id
+
+  td class="actions"
+    = link_to '', '#', class: "edit icon_link with-tip icon-edit no-text #{'hidden' if f.object.new_record?}"
+    ' &nbsp;
+    = link_to_remove_fields t(:remove), f, :no_text => true, url: [:admin, f.object.product, f.object], html: {confirm: "Do you really want delete this customisation category with all children?"}

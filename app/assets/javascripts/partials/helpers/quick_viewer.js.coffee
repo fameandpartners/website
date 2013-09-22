@@ -1,4 +1,4 @@
-window.helpers or= {}
+window.helpers ||= {}
 window.helpers.quickViewer = {
   popupContainer: null,
   overlayContainer: null,
@@ -86,19 +86,24 @@ window.helpers.quickViewer = {
       selector
     )
 
-    # code should be executed after images loaded in order to correctly set carousel height
-    @popupContainer.waitForImages(() ->
+    window.initProductImagesCarousel = (filterOptions = {}) ->
+      $wrapper = helpers.quickViewer.container.find("#product-images")
+      populateImagesCarousel($wrapper, filterOptions)
       # show big images from carouseled small images
       options =
         prev:
           button: '#quick-view-product-images-up'
         next:
           button: '#quick-view-product-images-down'
-      helpers.quickViewer.container.find("#product-images").carouFredSel(
+      $wrapper.carouFredSel(
         helpers.get_vertical_carousel_options(options)
       )
+      helpers.buildImagesViewer(helpers.quickViewer.container).init()
+
+    # code should be executed after images loaded in order to correctly set carousel height
+    @popupContainer.waitForImages(() ->
+      initProductImagesCarousel()
     )
-    helpers.buildImagesViewer(helpers.quickViewer.container).init()
 
     # track events on page
     createTrackHandler = (method) ->

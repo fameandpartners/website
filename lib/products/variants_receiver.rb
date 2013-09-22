@@ -16,6 +16,7 @@ module Products
         variant.option_values.each do |option_value|
           if option_value.option_type_id == color_option.id
             available_option[:color] = option_value.name
+            available_option[:image] = option_value.image.url(:small_square) if option_value.image?
           elsif option_value.option_type_id == size_option.id
             available_option[:size] = option_value.name
           end

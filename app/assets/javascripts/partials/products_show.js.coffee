@@ -1,3 +1,14 @@
+window.populateImagesCarousel = ($wrapper, filterOptions = {}) ->
+  $wrapper.empty()
+  hasAny = _(filterOptions).keys().length == 0 || _(window.productImagesData).any (data) ->
+    filterOptions.color && data.color == filterOptions.color
+  filterOptions = {} unless hasAny
+  _(window.productImagesData).each (data) ->
+    if (!filterOptions.color || data.color == filterOptions.color)
+      $img = $('<img />', width: 83, height: 115, alt: '', src: data.small)
+      $link = $('<a/>', href: '#', data: data).html($img)
+      $wrapper.append($('<li/>').html($link))
+
 $(".products.show").ready ->
   window.shopping_cart.init(window.bootstrap)
 
@@ -9,24 +20,29 @@ $(".products.show").ready ->
     window.helpers.get_horizontal_carousel_options()
   )
   # enable images carousel
-  $("#product-images").carouFredSel(
-    window.helpers.get_vertical_carousel_options(
-      width: 83
-      height: 528
-      items:
-        start: 0
-        visible: 4
-        height: 132
-      scroll:
-        items: 1
-    )
-  )
+  window.initProductImagesCarousel = (filterOptions = {}) ->
+    $wrapper = $("#product-images")
+    populateImagesCarousel($wrapper, filterOptions)
 
-  # show big images from carouseled small images
-  viewer = null
-  setTimeout ()->
-      viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()
-    , 1000
+    $wrapper.carouFredSel(
+      window.helpers.get_vertical_carousel_options(
+        width: 83
+        height: 528
+        items:
+          start: 0
+          visible: 4
+          height: 132
+        scroll:
+          items: 1
+      )
+    )
+
+    # show big images from carouseled small images
+    viewer = null
+    viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()
+
+  initProductImagesCarousel()
+
 
   # enable color-size combination selection
   if window.product_variants

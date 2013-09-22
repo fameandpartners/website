@@ -49,7 +49,7 @@ FameAndPartners::Application.routes.draw do
   get 'wishlist' => 'users/wishlists_items#index', as: 'wishlist'
   get 'reviews' => 'users/reviews#index', as: 'reviews'
   # eo account settings
-  
+
   resources :product_reservations, only: [:create]
 
   # Redirects from old blog urls
@@ -101,19 +101,19 @@ FameAndPartners::Application.routes.draw do
   get '/legal'   => 'statics#legal'
   get '/faqs'   => 'statics#faqs'
   get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
-  get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program 
+  get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program
   get '/compterms' => 'statics#comp_terms'
 
   get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
-  post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request   
-  
+  post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+
   # testing email
   get '/email/comp' => 'competition_mailer#marketing_email'
-  
+
   # External URLs
   get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
   get '/workshops', to: redirect('http://www.fameandpartners.com/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
-  
+
 
   # MonkeyPatch for redirecting to Custom Dress page
   get '/fb_auth' => 'pages#fb_auth'
@@ -180,6 +180,20 @@ FameAndPartners::Application.routes.draw do
 
       resource :sale, :only => [:edit, :update]
 
+      resources :customisation_types do
+        collection do
+          post :update_positions
+          post :update_values_positions
+        end
+      end
+      delete '/customisation_values/:id', :to => "customisation_values#destroy", :as => :customisation_value
+
+      resources :products do
+        resources :product_customisations
+        resources :product_customisation_types, only: :destroy
+        resources :product_customisation_values, only: :destroy
+      end
+
       namespace :blog do
         resources :promo_banners
         resources :categories
@@ -241,7 +255,7 @@ FameAndPartners::Application.routes.draw do
   %w{black red pink blue green}.each do |colour|
     get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour
   end
-  
+
   if Rails.env.development?
     mount MailPreview => 'mail_view'
   end

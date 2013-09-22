@@ -1,14 +1,18 @@
 module Spree
   module Admin
     class ProductImagesController < BaseController
+      include Spree::Admin::ImagesHelper
+
       respond_to :json
       before_filter :load_product
 
       def upload
         if params[:product] && params[:product][:images]
+          viewable = viewable_by_id(@product, params[:product][:viewable_type])
+
           images = params[:product][:images].collect do |attachment|
             image = Spree::Image.new(attachment: attachment)
-            image.viewable = @product.master
+            image.viewable = viewable
             image.save!
             image
           end
@@ -20,7 +24,7 @@ module Spree
       end
 
       private
-      
+
       def load_product
         @product = Spree::Product.find(params[:product_id])
       end
@@ -33,8 +37,9 @@ module Spree
           "thumbnail_url" => image.attachment.url(:mini),
           "image_url" => image.attachment.url(:product),
           "edit_url" => edit_admin_product_image_url(@product, image),
-          "delete_url" => admin_product_image_url(@product, image), 
-          "delete_type" => "DELETE"
+          "delete_url" => admin_product_image_url(@product, image),
+          "delete_type" => "DELETE",
+          "variant" => options_text_for(image)
         }
       end
     end

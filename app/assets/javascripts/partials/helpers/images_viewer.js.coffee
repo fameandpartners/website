@@ -1,4 +1,4 @@
-window.helpers or= {}
+window.helpers ||= {}
 
 window.helpers.buildImagesViewer = (rootElement) ->
   rootElement = rootElement

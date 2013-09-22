@@ -77,13 +77,13 @@ window.popups.showSendToFriendPopup = (productId, options = {}) ->
       popup.validateValue($(e.currentTarget))
 
     validateValue: (input) ->
+      input.siblings('.error').remove()
       if _.isEmpty(input.val())
         input.addClass("error")
         popup.errorMessage().insertBefore(input)
         return false
       else
         input.removeClass("error")
-        input.siblings('.error').remove()
         return true
 
     onButtonClick: (e) ->

@@ -1,6 +1,9 @@
+javascript:
+  window.productImagesData = #{{@product.images_json.to_json}};
 ruby:
  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+ color_images  = @product_variants.inject({}){|res, t| res[t[:color].to_s] = t[:image].to_s; res }
  enabled_tabs = ['photos']
  enabled_tabs.push('inspiration') if @product.celebrity_inspiration
  enabled_tabs.push('video') if @product.video_url.present?
@@ -19,11 +22,6 @@ ruby:
           .photos-carousel
             #quick-view-product-images-up.arrow-up
             ul#product-images.carousel-pictures
-              - @product.images.each do |image|
-                li
-                  - images_data =  { large: image.attachment.url(:large), xlarge: image.attachment.url(:xlarge) }
-                  = link_to('#', data: images_data) do
-                    = image_tag(image.attachment.url(:small), width: 83, heigth: 115, alt: '')
             #quick-view-product-images-down.arrow-down
           .big-photo
             .zoom = link_to 'Zoom', '#'
@@ -40,13 +38,13 @@ ruby:
               = image_tag celebrity.photo.url(:preview)
             .inspiration
               = celebrity.celebrity_name
-              = celebrity.celebrity_description 
-    .notice                                                                                                       
+              = celebrity.celebrity_description
+    .notice
       .colour
-        ' Want a different colour? 
-        = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour." 
-      .faster                                                                                                         
-        ' Need this faster? 
+        ' Want a different colour?
+        = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour."
+      .faster
+        ' Need this faster?
         = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
   .grid-40
     .product-info
@@ -61,7 +59,7 @@ ruby:
         .label Choose a colour:
         .colors
           - colors.each do |color|
-            .color class='#{color}' data-color='#{color}'
+            .color class='#{color}' data-color='#{color}' data-image="#{{color_images[color]}}"
       .notice
         .colour-images Images of other colours are on their way
       .size-select

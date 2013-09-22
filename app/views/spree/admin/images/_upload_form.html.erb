@@ -1,4 +1,4 @@
-<div class="container" style="width: 700px;">
+<div class="container" style="width: 700px;top:30px;">
   <%= form_for @product, url: admin_upload_product_images_path(product_id: @product.id),
         :html => { :multipart => true, :id => "fileupload"  } do |f| %>
 
@@ -75,7 +75,7 @@
         <td>
           <a href="{%=file.image_url%}" title="{%=file.name%}"><img src="{%=file.thumbnail_url%}" height="48"></a>
         </td>
-        <td>All</td>
+        <td>{%=file.variant%}</td>
         <td></td>
         {% } %}
       <td class="actions">
@@ -92,7 +92,10 @@
      $('#fileupload').fileupload({
        autoUpload: true,
        maxFileSize: 5000000,
-       acceptFileTypes: /(\.|\/)(jpe?g|png)$/i
+       acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
+       formData: function(form) {
+         return [{name: 'product[viewable_type]', value: $('#image_viewable_type').val()}]
+       }
      }).bind('fileuploadcompleted', function (e, data) {
        if (data.context) {
          if ($('table.index.sortable[data-hook=images_table]').length > 0){

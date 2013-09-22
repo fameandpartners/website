@@ -45,8 +45,14 @@
   </div>
 
   <div class="new-product-step <%= 'hidden' if @product.errors.empty? %>">
-    <div class="clearfix" data-hook="product-from-prototype" id="product-from-prototype">
+    <div class="row clearfix" data-hook="product-from-prototype" id="product-from-prototype">
       <%= render 'choose_colors', {option_type: @prototype.option_types.find_by_name('dress-color') } if @prototype %>
+    </div>
+  </div>
+
+  <div class="new-product-step <%= 'hidden' if @product.errors.empty? %>">
+    <div class="row clearfix" data-hook="product_customisations" id="product_customisations">
+      <%= render 'choose_customisations' %>
     </div>
   </div>
 
