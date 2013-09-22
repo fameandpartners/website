@@ -1,4 +1,4 @@
-## Welcome to Fame and Partners
+## Welcome to Fame and Partners  ![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
 
 ### Getting started
 
@@ -27,7 +27,7 @@ Note: these commands not needed after bin/prepare_app
 
 Note: we are using CircleCi for master branch, manual deplyment usually not needed.
 
-$ `cap staging deploy`
+* $ `cap staging deploy`
 
 ### Deploy to production
 
