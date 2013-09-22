@@ -1,5 +1,5 @@
 class Spree::TaxonBanner < ActiveRecord::Base
-  set_table_name "spree_taxon_banners"
+  self.table_name = "spree_taxon_banners"
 
   belongs_to :taxon
 
