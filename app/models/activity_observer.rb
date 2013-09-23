@@ -1,5 +1,5 @@
 class ActivityObserver < ActiveRecord::Observer
-  observe 'WishlistItem', 'Spree::LineItem'
+  observe WishlistItem, Spree::LineItem
 
   def after_create(record)
     case record.class.to_s
@@ -11,8 +11,8 @@ class ActivityObserver < ActiveRecord::Observer
 #      Activity.log_product_added_to_cart(record.product, order.user, record)
     end
   rescue Exception => e
-    logger.error("#{e.class.name}: #{e.message}")
-    logger.error(e.backtrace * "\n")
+    record.logger.error("#{e.class.name}: #{e.message}")
+    record.logger.error(e.backtrace * "\n")
   end
 
   def after_destroy(record)
@@ -32,7 +32,7 @@ class ActivityObserver < ActiveRecord::Observer
       end
     end
   rescue Exception => e
-    logger.error("#{e.class.name}: #{e.message}")
-    logger.error(e.backtrace * "\n")
+    record.logger.error("#{e.class.name}: #{e.message}")
+    record.logger.error(e.backtrace * "\n")
   end
 end
