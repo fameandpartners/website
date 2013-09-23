@@ -15,6 +15,8 @@ window.paymentRequestModal = {
 
     $.getScript '/payment_requests/new' if $container.find('.form').is(':empty')
 
+    track.inviteToPayOpened()
+
     $scope.find('.close-lightbox').bind 'click', paymentRequestModal.hide
     $scope.find('.overlay').bind 'click', paymentRequestModal.hide
     $(document).bind 'keyup', paymentRequestModal.keyPressHandler
@@ -27,6 +29,7 @@ window.paymentRequestModal = {
     $(document).unbind 'keyup', paymentRequestModal.keyPressHandler
 
   success: (html) ->
+    track.inviteToPaySent()
     $scope = paymentRequestModal.scope()
     $scope.find('.modal-container').html(html)
     $('#ask-parent-to-pay-button').remove()

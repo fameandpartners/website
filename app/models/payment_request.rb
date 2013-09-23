@@ -37,5 +37,6 @@ class PaymentRequest < ActiveRecord::Base
 
   after_create do
     Spree::OrderMailer.guest_payment_request(self).deliver
+    Spree::OrderMailer.delay_for(12.hours).guest_payment_request(self, true)
   end
 end

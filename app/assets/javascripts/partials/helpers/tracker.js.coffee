@@ -105,4 +105,10 @@ window.track = {
 
   customizationAddedToCart: (label) ->
     track.event('Product Customization', 'AddedToCart', label)
+
+  inviteToPayOpened: () ->
+    track.event('InviteToPay', 'Opened')
+
+  inviteToPaySent: () ->
+    track.event('InviteToPay', 'Sent')
 }
