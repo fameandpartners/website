@@ -1710,11 +1710,21 @@
         display: inline-block;
         @include linear-gradient(#414141, #262626);
       }
-      .ask-parents {
-        padding: 0 32px;
-        text-decoration: none;
-        width: auto;
-        @include linear-gradient(#fea99c, #fe9686);
+      .ask-parents-block{
+        .info{
+          display: block;
+          padding: 6px 6px;
+          width: 280px;
+          font-size: 12px;
+          line-height: 1.3em;
+        }
+        .ask-parents {
+          padding: 0 12px;
+          text-decoration: none;
+          width: auto;
+          @include linear-gradient(#fea99c, #fe9686);
+        }
+        
       }
     }
   }

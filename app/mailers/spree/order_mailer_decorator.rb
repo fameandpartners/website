@@ -22,8 +22,8 @@ Spree::OrderMailer.class_eval do
     find_order(payment_request.order_id)
 
     to = "#{@payment_request.recipient_full_name} <#{@payment_request.recipient_email}>"
-    from = configatron.noreply
-    subject = "#{Spree::Config[:site_name]} Mum, can you please pay for my dresses?"
+    from = "#{@order.full_name} <#{@order.email}>"
+    subject = "Can you please pay for my order at #{Spree::Config[:site_name]}?"
 
     mail(to: to, from: from, subject: subject)
   end

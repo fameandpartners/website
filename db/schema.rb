@@ -224,6 +224,16 @@ ActiveRecord::Schema.define(:version => 20130916125148) do
     t.string   "school_name"
   end
 
+  create_table "payment_requests", :force => true do |t|
+    t.integer  "order_id"
+    t.string   "recipient_full_name"
+    t.string   "recipient_email"
+    t.text     "message"
+    t.string   "token"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
   create_table "product_reservations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "product_id"
@@ -233,16 +243,6 @@ ActiveRecord::Schema.define(:version => 20130916125148) do
     t.string   "color"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "payment_requests", :force => true do |t|
-    t.integer  "order_id"
-    t.string   "recipient_full_name"
-    t.string   "recipient_email"
-    t.text     "message"
-    t.string   "token"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
   end
 
   create_table "product_style_profiles", :force => true do |t|

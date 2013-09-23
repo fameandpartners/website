@@ -11,8 +11,8 @@
       ' Recipient's email
       span.required *
     = f.text_field :recipient_email, placeholder: "recipient's email address", size: 30
-  .item-details.input
-    = f.label :message
-    = f.text_area :message, rows: 5, cols: 30
+    / .item-details.input
+      = f.label :message
+      = f.text_area :message, rows: 5, cols: 30
   .save.submit
-    = f.submit 'Ask', class: 'btn black'
+    = f.submit 'Invite someone to pay', class: 'btn black'
