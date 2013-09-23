@@ -2,6 +2,7 @@ Spree::ProductsController.class_eval do
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
   before_filter :load_activities, :only => [:show, :quick_view]
+
   after_filter :log_product_viewed
 
   def index
@@ -48,11 +49,11 @@ Spree::ProductsController.class_eval do
   end
 
   def send_to_friend
-    user_info = params.extract!(:sender_name, :sender_email, :name, :email, :message)
+    user_info = params.extract!(:sender_email, :email)
     if spree_user_signed_in?
       user_info.update(
-        sender_name: spree_current_user.fullname,
-        sender_email: spree_current_user.email
+        sender_email: spree_current_user.email,
+        sender_name: spree_current_user.fullname
       )
     end
 

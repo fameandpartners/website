@@ -14,6 +14,7 @@
 //= require ../spree/admin/blog
 //= require ../spree/admin/blog/posts
 //= require ../spree/admin/admin
+//= require_tree ../spree/admin/products
 //= require ../libs/jquery.tagsinput.min
 //= require ckeditor/init
 //= require jquery-fileupload

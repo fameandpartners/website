@@ -11,6 +11,16 @@ window.helpers.createProductVariantsSelector = (root) ->
     init: (variants, selected) ->
       variantsSelector.variants = variants
       rootElement.find(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
+      $hoverPopup = $('<div />', class: 'color-image-popup').html('<img />')
+      $hoverPopup.appendTo($('body'))
+
+      rootElement.find(".colors-choser .colors .color[data-image]").on 'mouseenter', ->
+        if $(this).data('image').length
+          $hoverPopup.find('img').prop('src', $(this).data('image'))
+          $hoverPopup.stop(true, false).animate(opacity: 1, 'fast').css(left: $(this).offset().left-($hoverPopup.outerWidth() - $(this).outerWidth())/2, top: $(this).offset().top - ($hoverPopup.outerHeight() + 5))
+      rootElement.find(".colors-choser .colors .color[data-image]").on 'mouseleave', ->
+        $hoverPopup.stop(true, false).animate(opacity: 0, 'fast')
+
 
       rootElement.find('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
       variantsSelector.preselectSize()
@@ -65,6 +75,8 @@ window.helpers.createProductVariantsSelector = (root) ->
       @updateColorsSelector(avaialable_variants)
 
     onVariantsChanged: () ->
+      window.initProductImagesCarousel(@selected)
+
       variant = @getSelectedVariant()
 
       @exportSelectedVariant(variant)

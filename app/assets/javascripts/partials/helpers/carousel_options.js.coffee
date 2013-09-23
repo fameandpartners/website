@@ -1,4 +1,4 @@
-window.helpers or= {}
+window.helpers ||= {}
 
 window.helpers.get_vertical_carousel_options = (options = {}) ->
   prev = _.extend({ button: "#product-images-up", key: "up", items: 4 }, options.prev || {})

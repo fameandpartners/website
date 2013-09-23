@@ -1,5 +1,5 @@
 class Spree::CelebrityInspiration < ActiveRecord::Base
-  set_table_name "celebrity_inspirations"
+  self.table_name = "celebrity_inspirations"
 
   attr_accessible :photo, :celebrity_name, :celebrity_description
 

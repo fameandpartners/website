@@ -38,6 +38,7 @@ en:
         title: 'Fame & Partners Formal Dresses Blog'
         description: 'Formal Dresses, Celebrity Fashion and Style Inspiration. Follow the Fame & Partners blog to stay in touch with the latest trends for your next formal event.'
   zip: 'Postcode'
+  color: 'Colour'
   spree:
     admin:
       products:

@@ -30,6 +30,8 @@ FameAndPartners::Application.routes.draw do
   get 'products/:id/quick_view' => 'spree/products#quick_view'
   post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
 
+  post '/product_personalizations' => 'product_personalizations#create'
+
   get 'my-boutique' => 'pages#my_boutique', :as => :my_boutique
 
   # account settings
@@ -47,36 +49,17 @@ FameAndPartners::Application.routes.draw do
   get 'wishlist' => 'users/wishlists_items#index', as: 'wishlist'
   get 'reviews' => 'users/reviews#index', as: 'reviews'
   # eo account settings
-  
+
   resources :product_reservations, only: [:create]
 
+  # Redirects from old blog urls
+  constraints host: /blog\./ do
+    get '/' => redirect(host: configatron.host, path: "/blog")
+    match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
+  end
+
   # Blog routes
-  blog_constraint = lambda { |request|
-    if Rails.env.development?
-      request.host =~ /blog\.localdomain/
-    elsif Rails.env.staging?
-      request.host =~ /blog.fame.23stages.com/
-    else
-      request.host =~ /blog\.fameandpartners\.com/
-    end
-  }
-
-  constraints blog_constraint do
-    devise_for :spree_user,
-               :class_name => 'Spree::User',
-               :controllers => {:sessions => 'spree/user_sessions',
-                                :registrations => 'spree/user_registrations',
-                                :passwords => 'spree/user_passwords',
-                                :confirmations => 'spree/user_confirmations',
-                                :omniauth_callbacks => 'spree/omniauth_callbacks'
-               },
-               :skip => [:unlocks, :omniauth_callbacks],
-               :path_names => {:sign_out => 'logout'} do
-      get '/login' => 'spree/user_sessions#new'
-      get '/signup' => 'spree/user_registrations#new'
-      get '/logout' => 'spree/user_sessions#destroy'
-    end
-
+  scope '/blog' do
     get '/' => 'blog#index', as: :blog
 
     get '/about'   => 'blog#about', as: :about
@@ -118,19 +101,19 @@ FameAndPartners::Application.routes.draw do
   get '/legal'   => 'statics#legal'
   get '/faqs'   => 'statics#faqs'
   get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
-  get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program 
+  get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program
   get '/compterms' => 'statics#comp_terms'
 
   get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
-  post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request   
-  
+  post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+
   # testing email
   get '/email/comp' => 'competition_mailer#marketing_email'
-  
+
   # External URLs
   get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
   get '/workshops', to: redirect('http://www.fameandpartners.com/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
-  
+
 
   # MonkeyPatch for redirecting to Custom Dress page
   get '/fb_auth' => 'pages#fb_auth'
@@ -197,6 +180,20 @@ FameAndPartners::Application.routes.draw do
 
       resource :sale, :only => [:edit, :update]
 
+      resources :customisation_types do
+        collection do
+          post :update_positions
+          post :update_values_positions
+        end
+      end
+      delete '/customisation_values/:id', :to => "customisation_values#destroy", :as => :customisation_value
+
+      resources :products do
+        resources :product_customisations
+        resources :product_customisation_types, only: :destroy
+        resources :product_customisation_values, only: :destroy
+      end
+
       namespace :blog do
         resources :promo_banners
         resources :categories
@@ -258,7 +255,7 @@ FameAndPartners::Application.routes.draw do
   %w{black red pink blue green}.each do |colour|
     get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour
   end
-  
+
   if Rails.env.development?
     mount MailPreview => 'mail_view'
   end
