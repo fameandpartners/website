@@ -37,11 +37,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             user.apply_omniauth_with_additional_attributes(auth_hash)
 
             if user.new_record?
-              custom_fields = {
-                :Signupreason => sign_up_reason_for_campaign_monitor,
-                :Signupdate => Date.today.to_s
-              }
-
               user.sign_up_via = Spree::User::SIGN_UP_VIA.index('Facebook')
               user.sign_up_reason = session[:sign_up_reason]
 
@@ -53,7 +48,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             end
 
             if user.save
-              CampaignMonitor.delay.synchronize(user.email, user, custom_fields)
               flash[:notice] = "Signed in successfully."
 
               sign_in :spree_user, user

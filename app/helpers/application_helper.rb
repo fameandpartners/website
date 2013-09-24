@@ -204,6 +204,14 @@ module ApplicationHelper
     current_sale.active?
   end
 
+  def dynamic_colors
+    type = Spree::OptionType.where(name: 'dress-color').first
+    return [] unless type
+    values_table = Arel::Table.new(:spree_option_values)
+    type.option_values.
+      where(values_table[:value].not_eq(nil).and(values_table[:value].not_eq('')))
+  end
+
   private
 
   def current_sale

@@ -29,10 +29,7 @@ window.popups.showSendToFriendPopup = (productId, options = {}) ->
       popup.container.find(".modal-title").text("Show Mum")
       popup.container.find(".save input[type=submit]").val('Send')
 
-      popup.container.find('#sender_name').on('change', _.debounce(popup.onInputChanged))
       popup.container.find('#sender_email').on('change', _.debounce(popup.onInputChanged))
-                                                                                           
-      popup.container.find('#friend_name').on('change', _.debounce(popup.onInputChanged))
       popup.container.find('#friend_email').on('change', _.debounce(popup.onInputChanged))
 
       popup.container.addClass('send-to-friend')
@@ -57,11 +54,8 @@ window.popups.showSendToFriendPopup = (productId, options = {}) ->
 
     getFormData: () ->
       return {
-        sender_name: popup.container.find('#sender_name').val()
         sender_email: popup.container.find('#sender_email').val()
-        name: popup.container.find('#friend_name').val()
         email: popup.container.find('#friend_email').val()
-        message: popup.container.find('#friend_message').val()
       }
 
     errorMessage: () ->
@@ -83,13 +77,13 @@ window.popups.showSendToFriendPopup = (productId, options = {}) ->
       popup.validateValue($(e.currentTarget))
 
     validateValue: (input) ->
+      input.siblings('.error').remove()
       if _.isEmpty(input.val())
         input.addClass("error")
         popup.errorMessage().insertBefore(input)
         return false
       else
         input.removeClass("error")
-        input.siblings('.error').remove()
         return true
 
     onButtonClick: (e) ->

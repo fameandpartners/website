@@ -44,10 +44,15 @@ group :development do
   gem 'quiet_assets', '1.0.2'
   gem 'thin', '1.5.1'
   gem 'pry-rails'
+  gem 'debugger'
 end
 
-group :development, :test do
-  gem 'debugger'
+group :test do
+  gem 'rspec-rails', '~> 2.13.1'
+  gem 'shoulda', '~> 3.4.0'
+  gem 'database_cleaner', '0.9.1'
+  gem 'factory_girl_rails', '4.2.1'
+  gem 'mocha', '~> 0.13.3', require: 'mocha/setup'
 end
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'

@@ -15,7 +15,7 @@ module OrdersHelper
   end
 
   def show_order_adjustment_total(order)
-    content_tag('span', order.currency) + order.display_adjustment_total
+    content_tag('span', order.currency) + ' ' + order.display_adjustment_total
   end
 
   def show_order_shipment_total(order)

@@ -1,0 +1,69 @@
+table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+  tbody
+    tr
+      td height="36"
+    tr
+      td
+        h1 style="font: 400 italic 34px/1.2 'Georgia', 'Trebuchet MS', 'Times New Roman', serif; margin: 0; padding: 0;"
+        - if @resubmission
+          = "#{@payment_request.recipient_full_name}, can you please pay for my order?"
+        - else
+          = "#{@payment_request.recipient_full_name}, can you please pay for my order?"
+    tr
+      td height="36"
+    tr
+      td
+        table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+          tbody
+            tr
+              td width="70%" style="vertical-align: top;"
+                table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top: 1px solid #ccc;"
+                  tbody
+                    - @order.line_items.each do |line_item|
+                      - variant = line_item.variant
+                      - product = variant.product
+                      tr
+                        td width="144" style="vertical-align: top; border-left: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 17px;"
+                          = small_image(product, width: 144, height: 185)
+                        td style="vertical-align: top; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 17px;"
+                          .title style="font: 400 19px/1.2 Arial, sans-serif; color: #000; text-transform: uppercase; margin: 0 0 10px;"
+                            = link_to product.name, product_url(product), style: 'color: #000; text-decoration: none;'
+                          .price style="font: 700 14px/1.2 Arial, sans-serif; color: #df998b; margin: 0 0 20px;" = line_item.money
+                          .description style="font: 400 12px/1.2 Arial, sans-serif; color: #979797;"
+                            =raw simple_format(line_item.variant.product.description.gsub('<p>', "\n\n")).gsub('<p>', '<p style="margin: 0 0 10px;">')
+              td width="20"
+              td style="vertical-align: top;"
+                .thanks style="color: #000; font: 400 italic 13px/1.2 'Georgia', 'Trebuchet MS', 'Times New Roman', serif;"
+                  - if @payment_request.message.present?
+                    =raw simple_format(@payment_request.message).gsub('<p>', '<p style="margin: 0 0 10px;">')
+                  - else
+                    p style="margin: 0 0 10px;" #{@order.full_name} would love it if you could complete the purchase of their formal dress. It will only take a few minutes to complete the process.
+                  p style="margin: 0 0 10px;" Thank you!
+                .summary style="margin: 20px 0;"
+                  table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border: 1px solid #ccc; font: 400 12px/1.2 Arial, sans-serif;"
+                    tbody
+                      tr
+                        td colspan="2" style="background: #f3f3f3; padding: 10px 13px; font: 400 12px/1.2 Arial, sans-serif; text-transform: uppercase;" Order summary
+                      tr
+                        td style="padding: 6px 13px;" Subtotal
+                        td style="padding: 6px 13px;"
+                          =' @order.currency
+                          = @order.display_item_total
+                      / tr
+                        / td style="padding: 6px 13px;" Shipping
+                        / td style="padding: 6px 13px;" = show_order_shipment_total(@order)
+                      / tr
+                        / td style="padding: 6px 13px;" Promotion
+                        / td style="padding: 6px 13px;" = show_order_adjustment_total(@order)
+                      tr
+                        td style="padding: 6px 13px; font-weight: 700;" Total
+                        td style="padding: 6px 13px; font-weight: 700;"
+                          =' @order.currency
+                          = @order.display_total
+                .button style="margin: 0 0 6px;"
+                  a href="#{main_app.guest_checkout_url(:token => @order.payment_request.token)}" style="display: block; background: #000; color: #fff; padding: 10px 0; text-align: center; font: 400 14px/1.2 Arial, sans-serif; text-transform: uppercase; text-decoration: none;" Pay for this dress
+                .details style="color: #000; text-align: center; font: 400 italic 16px/1.2 'Georgia', 'Trebuchet MS', 'Times New Roman', serif;"
+                  /' or
+                  /a href="#" style="text-decoration: underline; color: #000;" See order's details
+    tr
+      td height="36"

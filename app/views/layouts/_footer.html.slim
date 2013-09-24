@@ -13,10 +13,10 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
     .grid-20.links
       .title Style Inspiration
       ul
-        li = link_to 'Celebrity edit', 'http://blog.fameandpartners.com/celebrities/photos', target: "_blank"
-        li = link_to 'Red carpet gallery', 'http://blog.fameandpartners.com/red-carpet-events', target: "_blank"
+        li = link_to 'Celebrity edit', blog_celebrities_url, target: "_blank"
+        li = link_to 'Red carpet gallery', blog_red_carpet_posts_url, target: "_blank"
         li = link_to 'Colour boards', 'http://pinterest.com/fameandpartners/', target: "_blank"
-        li = link_to 'Trends', 'http://blog.fameandpartners.com/trends', target: "_blank"
+        li = link_to 'Trends', blog_posts_by_category_url("trends"), target: "_blank"
     .grid-20.links
       .title Customer Service
       ul
@@ -27,7 +27,7 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
     .grid-20.links
       .title About us
       ul
-        li = link_to 'About us', about_path
+        li = link_to 'About us', about_us_path
         li.hide = link_to 'Meet our Team', team_path
         li = link_to 'Terms & Conditions', terms_path
         li = link_to 'Privacy', privacy_path

@@ -9,6 +9,11 @@ Spree::Product.class_eval do
     class_name: 'ProductStyleProfile',
     foreign_key: :product_id
 
+  has_many :product_customisation_types
+  has_many :customisation_types, through: :product_customisation_types
+  has_many :product_customisation_values, through: :product_customisation_types
+  has_many :product_color_values, dependent: :destroy
+
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
       "spree_option_values.id" => value_ids,
@@ -16,13 +21,40 @@ Spree::Product.class_eval do
     )
   }
 
-  attr_accessible :featured
+
+  accepts_nested_attributes_for :product_customisation_types,
+    reject_if: lambda { |ct| ct[:customisation_type_id].blank? && ct[:id].blank? },
+    allow_destroy: true
+  attr_accessor :customisation_values_hash
+  attr_accessible :featured, :customisation_values_hash, :product_customisation_types_attributes
+
   scope :featured, lambda { where(featured: true) }
   scope :ordered, lambda { order('position asc') }
 
   default_scope order: "#{self.table_name}.position"
 
   delegate_belongs_to :master, :in_sale?, :original_price, :price_without_discount
+
+  before_create :set_default_prototype
+  after_create :build_customisations_from_values_hash, :if => :customisation_values_hash
+
+  def images
+    Spree::Image.where(
+      "(#{Spree::Image.quoted_table_name}.viewable_type = 'ProductColorValue' AND #{Spree::Image.quoted_table_name}.viewable_id IN (?))
+        OR
+      (#{Spree::Image.quoted_table_name}.viewable_type = 'Spree::Variant' AND #{Spree::Image.quoted_table_name}.viewable_id IN (?))",
+      product_color_value_ids, variants_including_master_ids
+    )
+  end
+
+  def images_for_variant(variant)
+    Spree::Image.where(
+      "(#{Spree::Image.quoted_table_name}.viewable_type = 'ProductColorValue' AND #{Spree::Image.quoted_table_name}.viewable_id IN (?))
+        OR
+      (#{Spree::Image.quoted_table_name}.viewable_type = 'Spree::Variant' AND #{Spree::Image.quoted_table_name}.viewable_id IN (?))",
+      product_color_values.where(option_value_id: variant.option_value_ids).id, variant.id
+    )
+  end
 
   def remove_property(name)
     ActiveRecord::Base.transaction do
@@ -39,10 +71,10 @@ Spree::Product.class_eval do
 
   def video_url
     @video_url ||= begin
-      video_id = self.property('video_id') 
+      video_id = self.property('video_id')
       # youtube
-      # video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}?rel=0&showinfo=0" 
-      video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=1&loop=1"
+      # video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}?rel=0&showinfo=0"
+      video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
     end
   end
 
@@ -66,19 +98,64 @@ Spree::Product.class_eval do
     update_index
   end
 
+  def set_default_prototype
+    self.prototype_id = self.class.default_prototype.try(:id)
+  end
+
+  def self.default_prototype
+    Spree::Prototype.find_by_name('Dress')
+  end
+
+  def images_json
+    color_type_id = option_types.find_by_name('dress-color').try(:id)
+    size_type_id = option_types.find_by_name('dress-size').try(:id)
+    images.map do |image|
+      case image.viewable_type
+      when 'Spree::Variant'
+        color = image.viewable.option_values.detect { |ov| ov[:option_type_id] == color_type_id }.try(:name)
+        size = image.viewable.option_values.detect { |ov| ov[:option_type_id] == size_type_id }.try(:name)
+      when 'ProductColorValue'
+        color = image.viewable.option_value.name
+      end
+      {
+        large: image.attachment.url(:large),
+        xlarge: image.attachment.url(:xlarge),
+        small: image.attachment.url(:small),
+        color: color,
+        size: size
+      }
+    end
+  end
+
   private
 
   def build_variants_from_option_values_hash
     ensure_option_types_exist_for_values_hash
-    values = option_values_hash.values
-    values = values.inject(values.shift) { |memo, value| memo.product(value).map(&:flatten) }
+    if prototype_id && prototype = Spree::Prototype.find_by_id(prototype_id)
+      return unless sizes = prototype.option_types.find_by_name('dress-size').try(:option_values)
 
-    values.each do |ids|
-      variant = variants.create({
-                                  :option_value_ids => ids,
-                                  :price => master.price,
-                                  :on_demand => on_demand
-                                }, :without_protection => true)
+      colors = option_values_hash.values.first
+      values = colors.product(sizes.map(&:id))
+
+      values.each do |ids|
+        variant = variants.create({
+          :option_value_ids => ids,
+          :price => master.price,
+          :on_demand => true
+        }, :without_protection => true)
+      end
+      save
+    end
+  end
+
+  def build_customisations_from_values_hash
+    customisation_values_hash.each do |type_id, value_ids|
+      next unless type = CustomisationType.find_by_id(type_id)
+      values = type.customisation_values.where(id: value_ids).map(&:id)
+      next if values.empty?
+      product_type = self.product_customisation_types.new
+      product_type.customisation_type = type
+      product_type.customisation_value_ids = values
     end
     save
   end

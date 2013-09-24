@@ -1,4 +1,5 @@
 Spree::Variant.class_eval do
+  belongs_to :product, touch: true, inverse_of: :master
   before_validation :set_default_sku
 
   after_save do

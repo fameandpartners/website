@@ -10,4 +10,10 @@
   .grid-container
     .grid-100.padding
       .place-order
-        = form.submit 'Submit Details', data: { loading: 'Submitting...' }
+        .fleft = form.submit 'Submit Details', data: { loading: 'Submitting...' }
+        /- if spree_user_signed_in? && !@order.payment_request.present?
+        /  .fright
+        /    .ask-parents-block
+        /      = link_to 'Invite someone to pay', '#', class: 'ask-parents', id: 'ask-parent-to-pay-button'
+        /      .info Need help paying for this order? Just send an invite to your mum, dad or relative to ask them to pay :)
+        .clear

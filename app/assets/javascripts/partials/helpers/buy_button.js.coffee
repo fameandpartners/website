@@ -8,20 +8,6 @@ window.helpers.addBuyButtonHandlers = (addButton, args = {}) ->
   $button.off('click')
   $button.off('variant_selected')
 
-  # helper methods
-  addErrorMessage = (container, messageText) ->
-    block = container.find('.error.message')
-    if block.length == 0
-      container.append($("<span class='error message' style='display: none;'></span>"))
-      block = container.find('.error.message')
-    block.text(messageText).fadeIn()
-    setTimeout( () ->
-      hideErrorMessage(container)
-    , 3000)
-
-  hideErrorMessage = (container) ->
-    container.find('.error.message').fadeOut('slow')
-
   # add product to cart
   $button.on('click', (e) ->
     e.preventDefault()
@@ -40,9 +26,9 @@ window.helpers.addBuyButtonHandlers = (addButton, args = {}) ->
       if options.expandShoppingBag
         window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
     else
-      addErrorMessage($(e.currentTarget).parent(), 'Please, select size and colour')
+      window.helpers.showErrors($(e.currentTarget).parent(), 'Please, select size and colour')
   )
 
   $button.on('variant_selected', (e) ->
-    hideErrorMessage($(e.currentTarget).parent())
+    window.helpers.showErrors($(e.currentTarget).parent())
   )

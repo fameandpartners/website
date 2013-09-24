@@ -99,4 +99,16 @@ window.track = {
 
   twinAlertRegister: (label) ->
     track.event('Products', 'TwinAlertRegister', label)
+
+  customizationOpened: (label) ->
+    track.event('Product Customization', 'Opened', label)
+
+  customizationAddedToCart: (label) ->
+    track.event('Product Customization', 'AddedToCart', label)
+
+  inviteToPayOpened: () ->
+    track.event('InviteToPay', 'Opened')
+
+  inviteToPaySent: () ->
+    track.event('InviteToPay', 'Sent')
 }

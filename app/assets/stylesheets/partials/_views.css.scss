@@ -906,6 +906,7 @@
     .wrap {
       box-shadow: 0 3px 6px rgba(0, 0, 0, .1);
       background: #fff;
+      padding-bottom: 60px;
     }
   }
   .get-the-look {
@@ -916,7 +917,10 @@
   .item {
     display: inline-block;
     width: 210px;
-    margin: 0 10px 20px;
+    margin: 0 10px 20px;  
+    a{
+      text-decoration: none;
+    }
     .image {
       position: relative;
       img {
@@ -924,6 +928,9 @@
         box-shadow: 0 0 6px rgba(0, 0, 0, .3);
       }
       a {
+        display: block;
+      }
+      .buy{
         font: 300 13px/1.2 $fontOne;
         background: #f79d91;
         color: #fff;

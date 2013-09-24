@@ -1,6 +1,6 @@
 table align="center" border="0" cellpadding="10" cellspacing="0" width="100%"
   tbody
-    tr                      
+    tr
       td colspan="3" height="30"
     tr
       td width="254"
@@ -12,7 +12,6 @@ table align="center" border="0" cellpadding="10" cellspacing="0" width="100%"
       td.main-content style="font: 400 12px/1.5 Arial, sans-serif; color: #979797;"
         h1 style="width: 260px; color: #e19889; font: 400 italic 32px/1.1 'Times New Roman', Georgia, 'Trebuchet MS', sans-serif; margin: 0 0 5px;"
           ' I love this dress, what do you think?
-        h2 style="color: #000; font: 400 italic 18px/1.2 'Times New Roman', Georgia, 'Trebuchet MS', sans-serif; margin: 0 0 20px;" #{@friend_info[:message]}
         .product-name style="margin: 0 0 4px; color: #000;"
           a href="#{product_show_url}" style="text-decoration: none; color: #000; text-transform: uppercase; font-size: 18px; text-decoration: underline;" #{@product.name}
         .product-description style="margin: 0 0 16px;" #{@product.description}
@@ -26,10 +25,11 @@ table align="center" border="0" cellpadding="10" cellspacing="0" width="100%"
               td text-align="left"
                 .laybuy style="margin: 14px 0 0 0;"
                   a href="mailto:team@fameandpartners.com?subject=Layby Enquiry about #{@product.sku} from Show Mum" style="color: #000; text-decoration: underline; font: 400 14px/18px 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Layby this dress
-        .salutation style="margin-top: 40px;"
-          ' Yours Sincerely,
-          br
-          ' #{{ @user_name.titleize }}
-            
+        - if @user_name.present?
+          .salutation style="margin-top: 40px;"
+            ' Yours Sincerely,
+            br
+            ' #{{ @user_name }}
+
     tr
       td colspan="3" height="30"

@@ -10,4 +10,14 @@ class Spree::AdminMailer  < ActionMailer::Base
       :subject => t('emails.subjects.admins.custom_dress', :full_name => @user.full_name, :id => @user.id)
     )
   end
+
+  def product_personalized(personalization)
+    @personalization = personalization
+
+    to = 'team@fameandpartners.com'
+    subject = 'Product Customization'
+    from = "#{@personalization.user_full_name}<#{@personalization.user_email}>"
+
+    mail(to: to, from: from, subject: subject)
+  end
 end

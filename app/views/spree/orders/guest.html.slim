@@ -1,0 +1,115 @@
+.wrap
+  .page-name.with-border
+    .inner
+      h1.title
+        em shopping
+        span Bag
+        .shipping-icon
+          .icon
+          ' Free shipping
+          br
+          ' on all items
+
+  h2 Your daugther Ella asks you to pay for her dress
+  
+  - if @order.line_items.empty?
+    .empty-cart(data-hook="empty_cart")
+      p = t(:your_cart_is_empty)
+      p = link_to t(:continue_shopping), products_path, class: 'button continue'
+  - else
+    .cart-page
+      .cart-labels.grid-container
+        .grid-50.name Item description
+        .grid-30.details Details
+        .grid-20.price Price
+      ul.items
+        - @order.line_items.each do |line_item|
+          - variant = line_item.variant
+          - product = variant.product
+          li.item.grid-container data-id='#{variant.id}' data-line-item-id='#{line_item.id}'
+            .grid-50.description
+              .image
+                = link_to product_image(product, itemprop: "image", width: 136, height: 200, alt: product.name), collection_product_path(product)
+                .remove = link_to 'Remove from bag', '#', data: { id: variant.id }, class: 'remove-item-from-cart'
+              .desc
+                .name = link_to product.name, collection_product_path(product), target: 'blank'
+                .text = line_item_description(variant)
+                .wishlist = link_to "Look dress's details", collection_product_path(product), data: { id: variant.id }
+
+            .grid-30.details
+              .static-dynamic-block
+                .static
+                  .line
+                    .label Color
+                    .value
+                      .color{class=variant.dress_color.try(:name)}
+                  .line
+                    .label Size
+                    .value = variant.dress_size.try(:name)
+                  .line
+                    .label Quantity
+                    .value = line_item.quantity
+                  .line
+                    .label Estimated Delivery
+                    .value 7-10 days
+                    /.value = variant.count_on_hand.to_i != 0 ? '1-2 weeks' : '3-4 weeks'
+
+            .grid-20.price
+              .pricing
+                = current_order.currency
+                = line_item.money
+              /.style-notes
+                input type="checkbox" name="note"
+                label
+                  ' Add Style Notes
+                  span $4.55
+
+      .promo-summary.grid-container
+        .grid-75
+          .promo-block
+            .columns.grid-container
+              .column.grid-25
+                .title Full security
+                .desc = image_tag 'comodo-secure.png', alt: "Comodo SSl Security", width: 101, height: 32
+              .column.grid-45
+                .title Payment methods
+                .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
+
+              .column.grid-30
+                .title Promocode
+                .desc
+                  = form_for @order, remote: true do |f|
+                    = f.submit 'Redeem', style: 'float: right;'
+                    = f.text_field :coupon_code, style: "width: 110px;"
+        .summary.grid-25.order-summary
+          = render 'summary'
+      .continue-buy.grid-container
+        .grid-75
+          ' &nbsp;
+        .grid-25
+          = form_for @order, url: update_cart_path do |f|
+            = f.button :checkout, name: 'checkout', class: 'buy-now ask-parents wide'
+          - if (paypal_button_html = paypal_express_button).present?
+            div
+              .or or
+              .paypal = paypal_button_html
+
+.modal.edit-line-item(style="display: none;")
+  .overlay
+  .modal-container
+    .close-lightbox
+    .edit-details
+      .modal-title Edit product details
+      .item
+      .save
+        input.btn.black type="submit" value="Save changes"
+
+#ask-parent-to-pay-modal.modal.edit-line-item(style="display: none;")
+  .overlay
+  .modal-container
+    .close-lightbox
+    .edit-details
+      .modal-title Ask Someone To Pay
+      .item
+      .save
+        input.btn.black type="submit" value="Ask"

@@ -485,13 +485,27 @@
       -webkit-filter: grayscale(0%);
       filter: grayscale(0%);
     }
-    .start-moodboard{
+    .start-moodboard {
       text-transform: uppercase;
       font-family: $fontOne;
       display: inline-block;
       font-weight: 300;
       margin: 3px 0 0 30px;
       font-size: 13px;
+    }  
+    .ask-parents {
+      display: block;
+      text-decoration: none;
+      text-transform: uppercase;
+      text-shadow: 0 -1px 0 #fff;
+      font: 400 11px/22px $fontOne;
+      padding: 0 12px;
+      border: 1px solid #d4d4d4;
+      @include linear-gradient(#f4f4f4, #e1e1e1);
+    }
+    .error {
+      color: #cc0000;
+      font: 400 12px/1.1 $fontOne;
     }
   }
   .notice {
@@ -726,12 +740,12 @@
     .buy-wishlist {
       margin: 0 0 28px;
       position: relative;
-      .buy-layby, .buy-now, .btn-layby, .add-wishlist {
+      .buy-customize, .buy-now, .btn-customize, .add-wishlist {
         display: inline-block;
         text-decoration: none;
         vertical-align: top;
       }
-      .buy-layby {
+      .buy-customize {
         text-align: center;
         margin: 0 14px 0 0;
       }
@@ -773,7 +787,7 @@
           padding: 0 10px;
         }
       }
-      .btn-layby {
+      .btn-customize {
         text-transform: uppercase;
         text-shadow: 0 -1px 0 #fff;
         font: 400 11px/22px $fontOne;
@@ -933,10 +947,16 @@
           left: 0;
           a {
             display: inline-block;
-            padding: 0 0 0 30px;
-            background: image-url('icon-product-like.png') 0 center no-repeat;
             text-decoration: none;
             font: 300 14px/36px $fontThree;
+          }
+          .icon {
+            color: #fea99c;
+            font-size: 26px;
+            position: relative;
+            top: -3px;
+            margin: 0 4px 0 0;
+            vertical-align: middle;
           }
         }
       }
@@ -1027,7 +1047,7 @@
     }
   }
   .continue-buy {
-    .grid-70 {
+    .grid-75 {
       padding-left: 0;
     }
     .grid-25 {
@@ -1066,6 +1086,13 @@
       margin: 0;
       @include linear-gradient(#414141, #252525);
     }
+    .ask-parents {
+      width: auto;
+      @include linear-gradient(#fea99c, #fe9686);
+    }
+    .wide {
+      width: 100%;
+    }
     .or {
       margin: 4px 0;
       text-transform: uppercase;
@@ -1083,9 +1110,12 @@
 
 .promo-summary {
   margin: 20px 0 10px;
-  .grid-70 {
+  .promo-block {
     padding: 34px 0;
     background: #f3f3f3;
+  }
+  .grid-75 {
+    padding-left: 0;
     input {
       border: 1px solid #c7c7c7;
       background: #fff;
@@ -1686,7 +1716,8 @@
     .place-order {
       margin: 28px 0;
       input,
-      button {
+      button,
+      a {
         text-transform: uppercase;
         padding: 0 64px;
         height: 38px;
@@ -1695,6 +1726,22 @@
         border: 0;
         display: inline-block;
         @include linear-gradient(#414141, #262626);
+      }
+      .ask-parents-block{
+        .info{
+          display: block;
+          padding: 6px 6px;
+          width: 280px;
+          font-size: 12px;
+          line-height: 1.3em;
+        }
+        .ask-parents {
+          padding: 0 12px;
+          text-decoration: none;
+          width: auto;
+          @include linear-gradient(#fea99c, #fe9686);
+        }
+        
       }
     }
   }
@@ -2012,7 +2059,7 @@
     .modal-container {
       padding: 24px 66px;
       width: 364px;
-      margin-left: -182px;
+      margin-left: -204px;
     }
     .input {   
       margin-top: 16px !important;
@@ -2026,6 +2073,19 @@
       }
       textarea {
         height: 72px;
+      }
+      &.boolean {
+        input {
+          vertical-align: top;
+          height: auto;
+          line-height: 1;
+          margin: 2px 0 0;
+        }
+        label {
+          display: inline-block;
+          margin: 0px 0 0 4px;
+          vertical-align: top;
+        }
       }
     }
     .submit {
@@ -2136,9 +2196,6 @@
   padding: 20px 0;
 }
 
-
-
-
 .twin-alert-block {
   margin: 20px 0 10px 0;
   .reserved {
@@ -2170,10 +2227,10 @@
   }
 }
 
-.activities{
+.activities {
   width: 100%;
   margin: 30px 0 0 0; 
-  .activities-title{
+  .activities-title {
     font-family: $fontTwo;
     font-style: italic;
     font-size: 22px;
@@ -2196,5 +2253,22 @@
     display: inline-block;
     vertical-align: top;
     margin: 1px 0 0;
+  }
+}
+
+.checkout.guest {
+  #content h2 {
+    font: 400 italic 46px/1.2 $fontTwo;
+    color: #e79e90;
+    margin: 38px 0 0;
+  }
+  .account-pages {
+    margin: 0 !important;
+  }
+  .tabs {
+    .tab-content {
+      border: 0;
+      position: static;
+    }
   }
 }
