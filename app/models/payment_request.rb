@@ -1,5 +1,5 @@
 class PaymentRequest < ActiveRecord::Base
-  ORDER_VALID_STATES = %w(address payment)
+  ORDER_VALID_STATES = %w(cart address payment)
 
   belongs_to :order,
              class_name: 'Spree::Order'
@@ -28,6 +28,11 @@ class PaymentRequest < ActiveRecord::Base
   validate do
     unless ORDER_VALID_STATES.include?(order.state)
       errors.add(:order, 'is in invalid state')
+    end
+  end
+  validate do
+    unless order.reload.user.present?
+      errors.add(:base, 'You should be registered user')
     end
   end
 

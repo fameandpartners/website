@@ -8,6 +8,10 @@
       $(function(){
         Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
       })
+
+ruby:
+  active = @order.state.eql?('cart') ? 'address' : @order.state
+
 .wrap
   .checkout-page
     .grid-container
@@ -20,14 +24,14 @@
     .grid-container
       .grid-65
         .accordion-container
-          .accordion-title data-step="address" *{ :class => @order.state.eql?('address') && 'active' }
+          .accordion-title data-step="address" *{ :class => active.eql?('address') && 'active' }
             .name 1. Billing and shipping details
-            .check-edit class="#{ @order.state.eql?('payment') ? "" : "hide" }"
+            .check-edit class="#{ active.eql?('payment') ? "" : "hide" }"
               .check
               .edit = link_to 'Edit', guest_checkout_state_path(@payment_request.token, 'address'), :remote => true
-          .accordion-content data-step="address" *{ :class => !@order.state.eql?('address') && 'hide' }
+          .accordion-content data-step="address" *{ :class => !active.eql?('address') && 'hide' }
             = render 'guest/checkout/address'
-          .accordion-title data-step="payment" *{ :class => @order.state.eql?('payment') && 'active' }
+          .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }
             .name 2. Payment details
           .accordion-content data-step="payment"
             = render 'guest/checkout/payment' if @order.state.eql?('payment')

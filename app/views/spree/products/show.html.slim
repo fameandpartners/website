@@ -51,6 +51,9 @@ ruby:
 
         .share-buttons
           .fleft = share_buttons(@product)
+          .fright
+            - unless current_order(true).payment_request.present?
+              = link_to 'Invite someone to pay', '#', class: 'ask-parents', id: 'ask-parent-to-pay-button'
       .notice
         .colour
           ' Want a different colour?
@@ -194,3 +197,4 @@ ruby:
           - else
             span = product.price_in(current_currency).display_price
 = render 'customization_popup'
+= render 'spree/checkout/payment_request_popup'

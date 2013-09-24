@@ -5,6 +5,8 @@ module Guest
     skip_before_filter :check_authorization
     skip_before_filter :check_registration
 
+    before_filter :check_order_state, :only => [:update]
+
     include SslRequirement
     ssl_required :edit, :update
 
@@ -13,11 +15,13 @@ module Guest
     def edit
       respond_with(@order) do |format|
         format.js { render 'guest/checkout/update/success' }
-        format.html{ render }
+        format.html{ @order.complete? ? render('complete') : render }
       end
     end
 
     def update
+      move_order_from_cart_state(@order)
+
       if @order.update_attributes(object_params)
         if object_params.key?(:coupon_code)
           if object_params[:coupon_code].present? && apply_coupon_code
@@ -84,19 +88,13 @@ module Guest
       if token = params[:token]
         @payment_request ||= PaymentRequest.find_by_token!(token)
 
-        if params[:action].eql?('show')
-          @order = Spree::Order.find(@payment_request.order_id)
-        else
-          unless @order = Spree::Order.find_by_id_and_state!(@payment_request.order_id, ['address', 'payment'])
-            raise ActiveRecord::NotFound
-          end
+        @order = Spree::Order.find(@payment_request.order_id)
 
-          if params[:state]
-            redirect_to guest_checkout_state_path(@payment_request.token, @order.state) if @order.can_go_to_state?(params[:state]) && !skip_state_validation?
-            @order.state = params[:state]
-          end
-          state_callback(:before)
+        if params[:state]
+          redirect_to guest_checkout_state_path(@payment_request.token, @order.state) if @order.can_go_to_state?(params[:state]) && !skip_state_validation?
+          @order.state = params[:state]
         end
+        state_callback(:before)
       else
         raise ActiveRecord::NotFound
       end
@@ -105,6 +103,10 @@ module Guest
     def before_address
       @order.bill_address ||= Spree::Address.default
       @order.ship_address ||= Spree::Address.default
+    end
+
+    def check_order_state
+      !@order.complete?
     end
   end
 end

@@ -87,4 +87,11 @@ $(".products.show").ready ->
   $(".tabs .tabs-links a[href='#inspiration']").on('click', createTrackHandler('viewCelebrityInspiration'))
   $('.buy-wishlist a.btn-layby').on('click', createTrackHandler('laybyButtonClick'))
   $('.product-info .customize a').on('click', createTrackHandler('customDressClick'))
+  $(document).on 'click', '#ask-parent-to-pay-button', (e) ->
+    e.preventDefault()
+    variantId = $('.buy-now').data('id')
 
+    if variantId?
+      paymentRequestModal.show(variantId)
+    else
+      window.helpers.showErrors($(e.currentTarget).parent(), 'Please, select size and colour')

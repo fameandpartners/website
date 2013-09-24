@@ -19,6 +19,7 @@ $(".orders.edit").ready ->
       root_element.find('.remove-item-from-cart').on('click', page.removeItemClickHandler)
       root_element.find('.edit-link').on('click', page.editItemClickHandler)
       root_element.find('.wishlist a.move-to-wishlist').on('click', page.moveItemToWishlistClickHandler)
+      root_element.on('click', '#ask-parent-to-pay-button', page.askParentToPayHandler)
 
     removeItemClickHandler: (e) ->
       e.preventDefault()
@@ -77,6 +78,10 @@ $(".orders.edit").ready ->
     updateOrderSummary: (order) ->
       newSummaryHtml = JST['templates/order_summary'](order: order)
       page.container.find('.order-summary').first().replaceWith(newSummaryHtml)
+
+    askParentToPayHandler: (e) ->
+      e.preventDefault()
+      paymentRequestModal.show()
   }
 
   page.init()
