@@ -84,10 +84,10 @@
       .continue-buy.grid-container
         .grid-75
           .fleft = link_to 'Continue shopping', products_path, class: 'continue-shopping'
-          - unless @order.payment_request.present?
-            .fright
-              .ask-parents-block
-                = link_to 'Invite someone to pay', '#', class: 'buy-now ask-parents', id: 'ask-parent-to-pay-button'
+          /- unless @order.payment_request.present?
+          /  .fright
+          /    .ask-parents-block
+          /      = link_to 'Invite someone to pay', '#', class: 'buy-now ask-parents', id: 'ask-parent-to-pay-button'
         .grid-25
           = form_for @order, url: update_cart_path do |f|
             = f.button :checkout, name: 'checkout', class: 'buy-now'
@@ -107,4 +107,4 @@
       .item
       .save
         input.btn.black type="submit" value="Save changes"
-= render 'spree/checkout/payment_request_popup'
+/= render 'spree/checkout/payment_request_popup'

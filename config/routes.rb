@@ -240,13 +240,13 @@ FameAndPartners::Application.routes.draw do
   get '/cart/guest' => 'spree/orders#guest'
 
   # Guest checkout routes
-  resources :payment_requests, only: [:new, :create]
-  namespace :guest do
-    put '/checkout/:token/update/:state', :to => 'checkout#update', :as => :update_checkout
-    get '/checkout/:token/thanks', :to => 'checkout#show' , :as => :checkout_thanks
-    get '/checkout/:token/:state', :to => 'checkout#edit', :as => :checkout_state
-    get '/checkout/:token', :to => 'checkout#edit' , :as => :checkout
-  end
+  #resources :payment_requests, only: [:new, :create]
+  #namespace :guest do
+  #  put '/checkout/:token/update/:state', :to => 'checkout#update', :as => :update_checkout
+  #  get '/checkout/:token/thanks', :to => 'checkout#show' , :as => :checkout_thanks
+  #  get '/checkout/:token/:state', :to => 'checkout#edit', :as => :checkout_state
+  #  get '/checkout/:token', :to => 'checkout#edit' , :as => :checkout
+  #end
 
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
