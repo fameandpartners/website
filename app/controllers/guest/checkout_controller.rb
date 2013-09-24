@@ -5,8 +5,6 @@ module Guest
     skip_before_filter :check_authorization
     skip_before_filter :check_registration
 
-    before_filter :check_order_state, :only => [:update]
-
     include SslRequirement
     ssl_required :edit, :update
 
@@ -90,23 +88,23 @@ module Guest
 
         @order = Spree::Order.find(@payment_request.order_id)
 
+        if params[:action].eql?('update') && @order.complete?
+          raise ActiveRecord::RecordNotFound
+        end
+
         if params[:state]
           redirect_to guest_checkout_state_path(@payment_request.token, @order.state) if @order.can_go_to_state?(params[:state]) && !skip_state_validation?
           @order.state = params[:state]
         end
         state_callback(:before)
       else
-        raise ActiveRecord::NotFound
+        raise ActiveRecord::RecordNotFound
       end
     end
 
     def before_address
       @order.bill_address ||= Spree::Address.default
       @order.ship_address ||= Spree::Address.default
-    end
-
-    def check_order_state
-      !@order.complete?
     end
   end
 end
