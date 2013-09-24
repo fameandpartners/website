@@ -575,6 +575,10 @@
         display: block;
         -webkit-filter: grayscale(100%);
         filter: grayscale(100%);
+        &.large {
+          -webkit-filter: none;
+          filter: none;
+        }
       }
     }
     .stat {

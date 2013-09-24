@@ -21,7 +21,7 @@
             .sublabel You are
             .rate #{@style_profile.percentage[0].second}%
             .label = @style_profile.percentage[0].first.titleize
-          = image_tag 'quiz/report/'+@style_profile.percentage[0].first+'.jpg', alt: @style_profile.percentage[0].first, size:"456x682"
+          = image_tag 'quiz/report/'+@style_profile.percentage[0].first+'.jpg', alt: @style_profile.percentage[0].first, size:"456x682", class: 'large'
       .column.column-3
         .block
           .stat
