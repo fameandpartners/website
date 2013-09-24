@@ -10,7 +10,9 @@ I would love your opinion.
 
 <%= "#{ActionMailer::Base.default_url_options[:host]}#{collection_product_path(@product)}" %>'
 
-Yours Sincerly, <%= @user_name %>
+<% if @user_name.present? %>
+  Yours Sincerly, <%= @user_name %>
+<% end %>
 
 
 Fame & Partners PTY LTD

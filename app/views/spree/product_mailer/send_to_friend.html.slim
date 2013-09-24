@@ -25,10 +25,11 @@ table align="center" border="0" cellpadding="10" cellspacing="0" width="100%"
               td text-align="left"
                 .laybuy style="margin: 14px 0 0 0;"
                   a href="mailto:team@fameandpartners.com?subject=Layby Enquiry about #{@product.sku} from Show Mum" style="color: #000; text-decoration: underline; font: 400 14px/18px 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Layby this dress
-        .salutation style="margin-top: 40px;"
-          ' Yours Sincerely,
-          br
-          ' #{{ @user_name }}
+        - if @user_name.present?
+          .salutation style="margin-top: 40px;"
+            ' Yours Sincerely,
+            br
+            ' #{{ @user_name }}
 
     tr
       td colspan="3" height="30"
