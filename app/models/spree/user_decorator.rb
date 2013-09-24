@@ -9,6 +9,10 @@ Spree::User.class_eval do
 
   attr_accessor :skip_welcome_email
 
+  after_create :synchronize_with_campaign_monitor!
+  after_update :synchronize_with_campaign_monitor!,
+               if: :campaign_monitor_should_be_updated?
+
   def update_profile(args = {})
     if args[:password].blank?
       args.delete(:password)
@@ -80,6 +84,45 @@ Spree::User.class_eval do
       letters = (("a".."z").to_a + ('A'..'Z').to_a + (0..9).to_a)
 
       Array.new(length){|i| letters[rand(letters.count)]}.join
+    end
+  end
+
+  def synchronize_with_campaign_monitor!
+    CampaignMonitor.delay.synchronize(email_was || email, self, campaign_monitor_custom_fields)
+  end
+
+  private
+
+  def campaign_monitor_sign_up_reason
+    case sign_up_reason
+      when 'custom_dress' then
+        'Custom dress'
+      when 'style_quiz' then
+        'Style quiz'
+      when 'workshop' then
+        'Workshop'
+      when 'competition' then
+        'Competition'
+      else
+        nil
+    end
+  end
+
+  def campaign_monitor_custom_fields
+    custom_fields = {
+      :Signupdate => created_at.to_date.to_s
+    }
+
+    if campaign_monitor_sign_up_reason.present?
+      custom_fields[:Signupreason] = campaign_monitor_sign_up_reason
+    end
+
+    custom_fields
+  end
+
+  def campaign_monitor_should_be_updated?
+    %w(email first_name last_name).any? do |attribute_name|
+      changes.keys.include?(attribute_name)
     end
   end
 end
