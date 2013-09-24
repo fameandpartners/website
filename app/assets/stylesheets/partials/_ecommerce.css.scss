@@ -1072,7 +1072,10 @@
       margin: 0;
       @include linear-gradient(#414141, #252525);
     }
-
+    .ask-parents {
+      width: auto;
+      @include linear-gradient(#fea99c, #fe9686);
+    }
     .wide {
       width: 100%;
     }
