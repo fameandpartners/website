@@ -92,7 +92,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Static pages
-  get '/about'   => 'statics#about'
+  get '/about'   => 'statics#about', :as => :about_us
   get '/why-us'  => 'statics#why_us', :as => :why_us
   get '/blake-lively'  => 'statics#blake-lively', :as => :blake_lively
   get '/team'    => 'statics#team'
