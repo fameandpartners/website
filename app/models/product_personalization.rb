@@ -35,8 +35,6 @@ class ProductPersonalization < ActiveRecord::Base
               allow_blank: true,
               with: Devise.email_regexp
             }
-  validates :comments,
-            presence: true
   validates :variant,
             presence: true
   validate do
