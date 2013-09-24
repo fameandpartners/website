@@ -10,7 +10,7 @@ class PagesController < Spree::StoreController
     ids = @recommended_dresses.map(&:id)
     @other_dresses = Spree::Product.active.includes(:master, :variants)
     @other_dresses = @other_dresses.where(['spree_products.id NOT IN (?)', ids]) if ids.present?
-    @other_dresses = @other_dresses.uniq.sample(4)
+    @other_dresses = @other_dresses.uniq.sample(48)
 
     @style_profile = UserStyleProfile.find_by_user_id(current_spree_user.id)
   end
