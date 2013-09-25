@@ -8,13 +8,13 @@
     #main-promo.promo-image
       ul.slides
         li
-          = link_to collection_path+"?cf=flashsale-feature" do
+          = link_to collection_path(cf: 'flashsale-feature') do
             = image_tag 'homepage/flash-promo.jpg', width: 1078, height: 532, alt: '72 Hour Flash Sale 40% Off from Midnight Thursday 26th September'
         li
-          = link_to '/competition?cf=homefeature' do
+          = link_to competition_path(cf: 'homefeature') do
             = image_tag 'homepage/comp.jpg', width: 1078, height: 532, alt: 'Win $1000 Celebrity Inspired Formal Outfit'
         li
-          = link_to '/collection/?edits=dark' do
+          = link_to collection_path(edits: 'dark') do
             = image_tag 'homepage/dark-romance.jpg', width: 1078, height: 532, alt: ''
         li
           = link_to '#', class: 'show-style-quiz' do
@@ -28,7 +28,7 @@
 
 .home-images
   .wrap
-    = link_to 'http://www.fameandpartners.com/trendsetters', class: 'image trendsetter', target: '_blank' do
+    = link_to trendsetters_path, class: 'image trendsetter', target: '_blank' do
       = image_tag 'homepage/trendsetter.jpg'  
     /*
       = link_to '/collection/?edits=neon', class: 'image' do
@@ -44,15 +44,15 @@
   .wrap.no-overflow
     .blog-post
       .label Blog
-      = link_to 'http://blog.fameandpartners.com/trends/go-punk-to-prom', class: 'image-preview', target: '_blank' do
+      = link_to blog_post_by_category_path('trends', 'go-punk-to-prom'), class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/blog1.jpg'
     .blog-post.rotate-1
       .label Blog
-      = link_to 'http://blog.fameandpartners.com/trends/trending-baroque-2', class: 'image-preview', target: '_blank' do
+      = link_to blog_post_by_category_path('trends', 'trending-baroque-2'), class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/blog2.jpg'
     .blog-post.rotate-2
       .label Blog
-      = link_to 'http://blog.fameandpartners.com/red-carpet-events/young-hollywood-awards-2013', class: 'image-preview', target: '_blank' do
+      = link_to blog_red_carpet_post_path('young-hollywood-awards-2013'), class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/blog3.jpg'
 
 - if featured_products.length > 0
