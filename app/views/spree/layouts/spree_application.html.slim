@@ -32,6 +32,7 @@ doctype html
       - cached_header = render('layouts/header')
       = cached_header
       #content
+        = render 'shared/sale_banner'
         = yield
       = render 'shared/quiz_popup'
       #push

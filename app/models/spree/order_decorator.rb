@@ -13,6 +13,31 @@ Spree::Order.class_eval do
     go_to_state :complete, :if => lambda { |order| (order.payment_required? && order.has_unprocessed_payments?) || !order.payment_required? }
   end
 
+  def sale_shipping_method
+    Spree::ShippingMethod.find_by_name('sale_11_95')
+  end
+
+  def has_sale_shipping?
+    sale_shipping_method.present? && shipments.exists?(shipping_method_id: sale_shipping_method.id)
+  end
+
+  def update!
+    if sale_shipping_method.present? && (shipping_method.nil? && Spree::Sale.any?) || has_sale_shipping?
+      update_totals
+
+      if item_total < 100
+        unless has_sale_shipping?
+          self.shipping_method = sale_shipping_method
+          create_shipment!
+        end
+      elsif has_sale_shipping?
+        shipments.find_by_shipping_method_id(sale_shipping_method.id).try(:destroy)
+      end
+    end
+
+    updater.update
+  end
+
   def confirmation_required?
     false
   end
