@@ -8,17 +8,17 @@
     #main-promo.promo-image
       ul.slides
         li
-          = link_to collection_path do
-            = image_tag 'homepage/welcome.png', width: 1096, height: 541, alt: ''
+          = link_to collection_path+"?cf=flashsale-feature" do
+            = image_tag 'homepage/flash-promo.jpg', width: 1078, height: 532, alt: '72 Hour Flash Sale 40% Off from Midnight Thursday 26th September'
         li
           = link_to '/competition?cf=homefeature' do
-            = image_tag 'homepage/comp.jpg', width: 1096, height: 541, alt: 'Win $1000 Celebrity Inspired Formal Outfit'
+            = image_tag 'homepage/comp.jpg', width: 1078, height: 532, alt: 'Win $1000 Celebrity Inspired Formal Outfit'
         li
           = link_to '/collection/?edits=dark' do
-            = image_tag 'homepage/dark-romance.jpg', width: 1096, height: 541, alt: ''
+            = image_tag 'homepage/dark-romance.jpg', width: 1078, height: 532, alt: ''
         li
           = link_to '#', class: 'show-style-quiz' do
-            = image_tag 'homepage/style-quiz.jpg', width: 1096, height: 541, alt: ''
+            = image_tag 'homepage/style-quiz.jpg', width: 1078, height: 532, alt: ''
       .pagination
         a.selected href="#" 1
         a href="#" 2
