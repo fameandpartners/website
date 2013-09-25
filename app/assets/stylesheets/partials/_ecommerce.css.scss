@@ -119,15 +119,25 @@
         background: image-url('icon-continue-shopping.png') 0 0 no-repeat;
       }
     }
-    .buy-now {
+    .buy-now, .ask-parents a {
       font-size: 14px;
-      float: right;
-      width: 147px;
       height: 28px;
       color: #fff;
       border: 0;
       text-transform: uppercase;
+    }
+    .buy-now {
+      float: right;
+      width: 147px;
       @include linear-gradient(#414141, #252525);
+    }
+    .ask-parents {
+      clear: both;
+      padding: 9px 0 0;
+      a {
+        display: block;
+        background: #ff958b;
+      }
     }
   }
   .empty {
@@ -485,13 +495,27 @@
       -webkit-filter: grayscale(0%);
       filter: grayscale(0%);
     }
-    .start-moodboard{
+    .start-moodboard {
       text-transform: uppercase;
       font-family: $fontOne;
       display: inline-block;
       font-weight: 300;
       margin: 3px 0 0 30px;
       font-size: 13px;
+    }  
+    .ask-parents {
+      display: block;
+      text-decoration: none;
+      text-transform: uppercase;
+      text-shadow: 0 -1px 0 #fff;
+      font: 400 11px/22px $fontOne;
+      padding: 0 12px;
+      border: 1px solid #d4d4d4;
+      @include linear-gradient(#f4f4f4, #e1e1e1);
+    }
+    .error {
+      color: #cc0000;
+      font: 400 12px/1.1 $fontOne;
     }
   }
   .notice {
@@ -1072,7 +1096,10 @@
       margin: 0;
       @include linear-gradient(#414141, #252525);
     }
-
+    .ask-parents {
+      width: auto;
+      @include linear-gradient(#fea99c, #fe9686);
+    }
     .wide {
       width: 100%;
     }

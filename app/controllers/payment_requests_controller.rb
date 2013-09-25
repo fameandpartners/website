@@ -12,7 +12,7 @@ class PaymentRequestsController < ApplicationController
       object.order = current_order
     end
 
-    if params[:variant_id] && current_order(true).line_items.find_by_variant_id(params[:variant_id]).blank?
+    if params[:variant_id].present? && current_order(true).line_items.find_by_variant_id(params[:variant_id]).blank?
       populator = Spree::OrderPopulator.new(current_order(true), current_currency)
 
       if populator.populate(variants: { params[:variant_id] => 1 })
