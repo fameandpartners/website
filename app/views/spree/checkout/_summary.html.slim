@@ -3,9 +3,9 @@
 
   .shopping-bag-popup
     ul.items-carousel style="height: auto;"
-      = render partial: "shared/line_item",
-        collection: @order.line_items,
-        as: :line_item,
+      = render partial: "shared/line_item", \
+        collection: @order.line_items, \
+        as: :line_item, \
         locals: {hide_remove: true}
 
   ul.pricing
