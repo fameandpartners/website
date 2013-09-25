@@ -3,7 +3,7 @@ namespace "db" do
     desc "create 11.95 shipping method"
     task sale_shipping_method: :environment do
       method = Spree::ShippingMethod.where(name: 'sale_11_95').first_or_initialize
-      method.zone = Spree::Zone.find_by_name('EU_VAT')
+      method.zone = Spree::Zone.first
       method.assign_attributes({
         display_on: 'back_end',
         calculator_type: 'Spree::Calculator::FlatRate'
