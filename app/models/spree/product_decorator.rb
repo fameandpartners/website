@@ -39,21 +39,25 @@ Spree::Product.class_eval do
   after_create :build_customisations_from_values_hash, :if => :customisation_values_hash
 
   def images
+    table_name = Spree::Image.quoted_table_name
+
     Spree::Image.where(
-      "(#{Spree::Image.quoted_table_name}.viewable_type = 'ProductColorValue' AND #{Spree::Image.quoted_table_name}.viewable_id IN (?))
+      "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
         OR
-      (#{Spree::Image.quoted_table_name}.viewable_type = 'Spree::Variant' AND #{Spree::Image.quoted_table_name}.viewable_id IN (?))",
+      (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
       product_color_value_ids, variants_including_master_ids
-    )
+    ).order('position ASC')
   end
 
   def images_for_variant(variant)
+    table_name = Spree::Image.quoted_table_name
+
     Spree::Image.where(
-      "(#{Spree::Image.quoted_table_name}.viewable_type = 'ProductColorValue' AND #{Spree::Image.quoted_table_name}.viewable_id IN (?))
+      "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
         OR
-      (#{Spree::Image.quoted_table_name}.viewable_type = 'Spree::Variant' AND #{Spree::Image.quoted_table_name}.viewable_id IN (?))",
+      (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
       product_color_values.where(option_value_id: variant.option_value_ids).id, variant.id
-    )
+    ).order('position ASC')
   end
 
   def remove_property(name)
