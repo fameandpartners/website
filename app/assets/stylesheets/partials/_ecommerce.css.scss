@@ -119,15 +119,25 @@
         background: image-url('icon-continue-shopping.png') 0 0 no-repeat;
       }
     }
-    .buy-now {
+    .buy-now, .ask-parents a {
       font-size: 14px;
-      float: right;
-      width: 147px;
       height: 28px;
       color: #fff;
       border: 0;
       text-transform: uppercase;
+    }
+    .buy-now {
+      float: right;
+      width: 147px;
       @include linear-gradient(#414141, #252525);
+    }
+    .ask-parents {
+      clear: both;
+      padding: 9px 0 0;
+      a {
+        display: block;
+        background: #ff958b;
+      }
     }
   }
   .empty {
