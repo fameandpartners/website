@@ -42,7 +42,7 @@ Spree::Order.class_eval do
     false
   end
 
-  has_one :payment_request
+  has_many :payment_requests
 
   def process_payments!
     begin

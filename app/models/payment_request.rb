@@ -21,11 +21,6 @@ class PaymentRequest < ActiveRecord::Base
               maximum: 2048
             }
   validate do
-    if PaymentRequest.exists?(order_id: order_id)
-      errors.add(:base, 'Already sent for this order')
-    end
-  end
-  validate do
     unless ORDER_VALID_STATES.include?(order.state)
       errors.add(:order, 'is in invalid state')
     end
