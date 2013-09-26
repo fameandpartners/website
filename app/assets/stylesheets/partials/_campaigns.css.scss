@@ -42,6 +42,19 @@
       border-top: 1px solid #bababb;
       border-bottom: 1px solid #bababb;
     }
+    .errors {
+      color: #cc0000;
+      font-size: 13px;
+      margin: 4px 0 0;
+      width: 384px;
+      margin: 14px auto;
+      li {
+        margin: 4px 0 0;
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
     .form {
       width: 384px;
       margin: 0 auto;
@@ -57,11 +70,6 @@
           width: 182px;
           height: 34px;
           line-height: 34px;
-        }
-        .error {
-          color: #cc0000;
-          font-size: 12px;
-          margin: 4px 0 0;
         }
       }
       .submit-form {
