@@ -7,7 +7,15 @@ Spree::User.class_eval do
 
   has_many :reservations, class_name: 'ProductReservation', foreign_key: :user_id
 
-  attr_accessor :skip_welcome_email
+  attr_accessor :skip_welcome_email,
+                :validate_presence_of_phone
+
+  attr_accessible :phone
+
+  validates :phone,
+            presence: {
+              if: :validate_presence_of_phone
+            }
 
   after_create :synchronize_with_campaign_monitor!
   after_update :synchronize_with_campaign_monitor!,
@@ -67,13 +75,14 @@ Spree::User.class_eval do
         first_name: args[:first_name],
         last_name: args[:last_name],
         email: args[:email],
+        phone: args[:phone],
         password: new_password,
         password_confirmation: new_password
       )
+      user.sign_up_reason = args[:sign_up_reason]
+      user.validate_presence_of_phone = args[:validate_presence_of_phone]
       user.skip_welcome_email = true
-      user.save!
-
-      ::Spree::UserMailer.welcome_to_competition(user).deliver
+      user.save
 
       user
     rescue
@@ -103,6 +112,8 @@ Spree::User.class_eval do
         'Workshop'
       when 'competition' then
         'Competition'
+      when 'campaign_style_call' then
+        'Campaign Style Call'
       else
         nil
     end

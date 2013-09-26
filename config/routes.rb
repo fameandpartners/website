@@ -103,8 +103,10 @@ FameAndPartners::Application.routes.draw do
   get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
   get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program
   get '/compterms' => 'statics#comp_terms'
-  get '/campaigns/stylecall' => 'campaigns#stylecall'
-  get '/campaigns/stylecall/thankyou' => 'campaigns#thankyou'
+
+  get '/campaigns/stylecall' => 'campaigns#show'
+  post '/campaigns/stylecall' => 'campaigns#create'
+  get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
 
   get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
   post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request

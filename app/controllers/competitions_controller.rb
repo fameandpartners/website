@@ -27,7 +27,11 @@ class CompetitionsController < ApplicationController
         @user.errors[:base] << t('devise.failure.invalid')
       end
     else
-      @user = Spree::User.create_user(params.extract!(:email, :first_name, :last_name))
+      @user = Spree::User.create_user(params.extract!(:email, :first_name, :last_name).merge(sign_up_reason: 'competition'))
+
+      if @user.persisted?
+        Spree::UserMailer.welcome_to_competition(@user).deliver
+      end
     end
 
     if !@user.persisted? || @user.errors.present?
