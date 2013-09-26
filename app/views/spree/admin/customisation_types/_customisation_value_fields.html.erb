@@ -5,5 +5,11 @@
   </td>
   <td class="name"><%= f.text_field :name %></td>
   <td class="presentation"><%= f.text_field :presentation %></td>
+  <td class="image">
+    <% if f.object.image? %>
+      <span><%= image_tag(f.object.image.url(:mini), width: 30, height: 30) %></span>
+    <% end %>
+    <%= f.file_field :image %>
+  </td>
   <td class="actions"><%= link_to_remove_fields t(:remove), f, :no_text => true %></td>
 </tr>
