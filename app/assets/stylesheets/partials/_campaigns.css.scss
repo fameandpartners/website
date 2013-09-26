@@ -47,9 +47,9 @@
       margin: 0 auto;
       .input {
         width: 182px;
+        font-family: $fontOne;
         label {
           display: block;
-          font-family: $fontOne;
           margin: 0 0 3px;
           font-size: 13px;
         }
@@ -57,6 +57,11 @@
           width: 182px;
           height: 34px;
           line-height: 34px;
+        }
+        .error {
+          color: #cc0000;
+          font-size: 12px;
+          margin: 4px 0 0;
         }
       }
       .submit-form {
