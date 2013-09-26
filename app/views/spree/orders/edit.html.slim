@@ -9,7 +9,7 @@
           ' Free shipping
           br
           ' on all items
-  
+
   - if @order.line_items.empty?
     .empty-cart(data-hook="empty_cart")
       p = t(:your_cart_is_empty)
@@ -84,7 +84,7 @@
       .continue-buy.grid-container
         .grid-75
           .fleft = link_to 'Continue shopping', products_path, class: 'continue-shopping'
-          .fright
+          /.fright
             .ask-parents-block
               = link_to 'Invite someone to pay', '#', class: 'buy-now ask-parents ask-parent-to-pay-button'
         .grid-25

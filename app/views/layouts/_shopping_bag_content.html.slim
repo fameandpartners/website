@@ -18,4 +18,4 @@
       = link_to 'View cart', spree.cart_path, class: 'continue'
       = form_for current_order, url:  spree.cart_path do |form|
         = form.submit 'Buy now', name: :checkout, class: 'buy-now'
-      .ask-parents = link_to 'Invite someone to pay', '#', class: 'ask-parent-to-pay-button'
+      /.ask-parents = link_to 'Invite someone to pay', '#', class: 'ask-parent-to-pay-button'
