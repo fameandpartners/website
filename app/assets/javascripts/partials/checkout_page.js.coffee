@@ -8,7 +8,6 @@ $('.checkout.edit').ready ->
       $(document).on('click', '.place-order button', page.onAjaxLoadingHandler)
       $(document).on('click', '.place-order button', page.orderProccessHandler)
       $(document).on('submit', 'form.payment_details.credit_card', page.doNothing)
-      $(document).on('click', '#ask-parent-to-pay-button', page.askParentToPayHandler)
 
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
@@ -167,10 +166,6 @@ $('.checkout.edit').ready ->
         page.onAjaxFailureHandler()
 
         page.pin_request_in_process = false
-
-    askParentToPayHandler: (e) ->
-      e.preventDefault()
-      paymentRequestModal.show()
   }
 
   page.init()

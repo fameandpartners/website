@@ -1,10 +1,13 @@
-= form_for @payment_request, remote: true do |f|
-  = hidden_field_tag :variant_id, params[:variant_id]
-  = render :partial => 'shared/error_messages', locals: { target: @user }
-  = render :partial => 'shared/error_messages', locals: { target: @payment_request }
+ruby:
+  payment_request = defined?(payment_request) && payment_request.present? ? payment_request : PaymentRequest.new
+  user = defined?(user) && user.present? ? user : Spree::User.new
+
+= form_for payment_request, remote: true do |f|
+  = render :partial => 'shared/error_messages', locals: { target: user }
+  = render :partial => 'shared/error_messages', locals: { target: payment_request }
   .askmumintro Send this dress to your mum, your dad, your sister, your aunt - whoever you need to get on board to help you buy it.
   - unless spree_user_signed_in?
-    = f.fields_for :user, @user || Spree::User.new do |ff|
+    = fields_for user do |ff|
       .fields-group
         .item-details.input
           = ff.label :first_name do
