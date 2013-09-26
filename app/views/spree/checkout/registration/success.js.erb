@@ -4,6 +4,10 @@ $('.accordion-title[data-step="address"]').addClass('active');
 $('.accordion-content[data-step="address"]').html('<%=j render('spree/checkout/address') %>');
 $('.accordion-content[data-step="address"]').slideDown();
 
+<% if params[:create_account] %>
+  $('#ask-parent-to-pay-modal .form').html('');
+<% end %>
+
 if (window.checkout_page && window.checkout_page.onAjaxSuccessHandler) {
   window.checkout_page.onAjaxSuccessHandler()
 }

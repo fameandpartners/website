@@ -2,7 +2,7 @@ window.paymentRequestModal = {
   scope: () ->
     $('#ask-parent-to-pay-modal')
 
-  show: (variantId) ->
+  show: () ->
     $scope = paymentRequestModal.scope()
     $container = $scope.find('.modal-container')
 
@@ -10,13 +10,8 @@ window.paymentRequestModal = {
 
     paymentRequestModal.updatePosition()
 
-    url = '/payment_requests/new'
-
-    if variantId?
-      url = url + '?variant_id=' + variantId
-
     if $container.find('.form').is(':empty')
-      $.getScript url, paymentRequestModal.updatePosition
+      $.getScript '/payment_requests/new', paymentRequestModal.updatePosition
 
     track.inviteToPayOpened()
 

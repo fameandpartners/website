@@ -126,3 +126,11 @@ $(function(){
 $('body.blog').ready(function(){
   track.conversion('blog_view')
 });
+
+$('.ecommerce').ready(function(){
+  $(document).on('click', '.ask-parent-to-pay-button', function(e){
+    e.preventDefault();
+    paymentRequestModal.show();
+    if (window.shoppingBag) window.shoppingBag.hide();
+  });
+});
