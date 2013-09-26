@@ -22,7 +22,7 @@ Spree::Order.class_eval do
   end
 
   def update!
-    if sale_shipping_method.present? && ((shipping_method.nil? && Spree::Sale.any?) || has_sale_shipping?)
+    if sale_shipping_method.present? && ((shipping_method.nil? && Spree::Sale.first.try(:active?)) || has_sale_shipping?)
       update_totals
 
       if item_total < 100

@@ -9,10 +9,15 @@ class CartSerializer < ActiveModel::Serializer
     :display_item_total,
     :display_adjustment_total,
     :display_promotion_total,
-    :display_total
+    :display_total,
+    :sale_active
+
+  def sale_active
+    Spree::Sale.first.try(:active?)
+  end
 
   def display_shipment_total
-    if object.shipment.present? 
+    if object.shipment.present?
       object.shipment.display_amount.to_s
     else
       nil
