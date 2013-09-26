@@ -9,10 +9,11 @@ ul
     .label Shipping
     .desc
       = show_order_shipment_total(@order)
-  li
-    .label Promotion
-    .desc
-      = show_order_adjustment_total(@order)
+  - unless sale_active?
+    li
+      .label Promotion
+      .desc
+        = show_order_adjustment_total(@order)
   li.totals
     .label Total
     .desc

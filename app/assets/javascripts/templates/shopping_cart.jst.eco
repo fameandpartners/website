@@ -80,6 +80,9 @@
         </div>
         <input type="submit" name="checkout" class="buy-now" value="Buy now">
       </form>
+      <div class="ask-parents">
+        <a href="#" class="ask-parent-to-pay-button">Invite someone to pay</a>
+      </div>
     </div>
   <% end %>
 </div>

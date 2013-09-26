@@ -24,18 +24,20 @@
           Free
       </div>
     </li>
-    <li>
-      <div class="label">
-        Promotion
-      </div>
-      <div class="desc">
-        <span><%= @order.currency %></span>
-        <% if @order.display_shipment_total?: %>
-          <%= @order.display_shipment_total %>
-        <% else: %>
-          $0.00
-      </div>
-    </li>
+    <% unless @order.sale_active: %>
+      <li>
+        <div class="label">
+          Promotion
+        </div>
+        <div class="desc">
+          <span><%= @order.currency %></span>
+          <% if @order.display_shipment_total?: %>
+            <%= @order.display_shipment_total %>
+          <% else: %>
+            $0.00
+        </div>
+      </li>
+    <% end %>
     <li class="totals">
       <div class="label">
         Total

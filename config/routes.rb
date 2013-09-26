@@ -103,6 +103,8 @@ FameAndPartners::Application.routes.draw do
   get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
   get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program
   get '/compterms' => 'statics#comp_terms'
+  get '/campaigns/stylecall' => 'campaigns#stylecall'
+  get '/campaigns/stylecall/thankyou' => 'campaigns#thankyou'
 
   get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
   post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
@@ -240,13 +242,13 @@ FameAndPartners::Application.routes.draw do
   get '/cart/guest' => 'spree/orders#guest'
 
   # Guest checkout routes
-  #resources :payment_requests, only: [:new, :create]
-  #namespace :guest do
-  #  put '/checkout/:token/update/:state', :to => 'checkout#update', :as => :update_checkout
-  #  get '/checkout/:token/thanks', :to => 'checkout#show' , :as => :checkout_thanks
-  #  get '/checkout/:token/:state', :to => 'checkout#edit', :as => :checkout_state
-  #  get '/checkout/:token', :to => 'checkout#edit' , :as => :checkout
-  #end
+  resources :payment_requests, only: [:new, :create]
+  namespace :guest do
+    put '/checkout/:token/update/:state', :to => 'checkout#update', :as => :update_checkout
+    get '/checkout/:token/thanks', :to => 'checkout#show' , :as => :checkout_thanks
+    get '/checkout/:token/:state', :to => 'checkout#edit', :as => :checkout_state
+    get '/checkout/:token', :to => 'checkout#edit' , :as => :checkout
+  end
 
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
   match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
