@@ -1,0 +1,37 @@
+.top-logo
+  = link_to root_path do
+    = image_tag 'logo-white.png', width: 215, height: 15, alt: ''
+
+#content
+  #campaign.stylecall
+    .content-block.aligncenter
+      .logo
+        = link_to root_path do
+          = image_tag 'logo-round.png', width: 92, height: 92, alt: 'Fame&Partners'
+      .main-title
+        span Free stylist consultation
+      .main-title-desc Get help from professional stylists to create your perfect look.
+      .alignright
+        = image_tag 'campaigns/stylecall-items.png', width: '591', height: '153', alt: ''
+      .title.enter.small-label Enter your contact details
+      .form.alignleft
+        .fields-group
+          .input
+            label First name
+            input type="text" name="first-name"
+          .input
+            label Last name
+            input type="text" name="last-name"
+        .fields-group
+          .input
+            label Email address
+            input type="email" name="email"
+          .input
+            label Contact Phone
+            input type="phone" name="phone"
+
+        .submit-form
+          input type="submit" value="Get free style consultation now!"
+      .terms
+        ' By clicking above you agree to our 
+        = link_to 'Terms & Conditions', terms_path
