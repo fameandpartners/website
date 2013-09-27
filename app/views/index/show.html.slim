@@ -9,7 +9,7 @@
       ul.slides
         li
           = link_to collection_path(cf: 'flashsale-feature') do
-            = image_tag 'homepage/flash-promo.jpg', width: 1078, height: 532, alt: '72 Hour Flash Sale 40% Off from Midnight Thursday 26th September'
+            = image_tag 'homepage/flash-promo-now.jpg', width: 1078, height: 532, alt: 'Sale now on. Be quick ends midnight Sunday! 40% Off.'
         li
           = link_to competition_path(cf: 'homefeature') do
             = image_tag 'homepage/comp.jpg', width: 1078, height: 532, alt: 'Win $1000 Celebrity Inspired Formal Outfit'
@@ -28,15 +28,12 @@
 
 .home-images
   .wrap
-    = link_to trendsetters_path, class: 'image trendsetter', target: '_blank' do
-      = image_tag 'homepage/trendsetter.jpg'  
-    /*
-      = link_to '/collection/?edits=neon', class: 'image' do
-        = image_tag 'homepage/neon1.jpg'
-      = link_to '/collection/?edits=neon', class: 'image rotate-1' do
-        = image_tag 'homepage/neon2.jpg'
-      = link_to '/collection/?edits=neon', class: 'image rotate-2' do
-        = image_tag 'homepage/neon3.jpg'
+    = link_to '/collection/?edits=neon', class: 'image' do
+      = image_tag 'homepage/neon1.jpg'
+    = link_to '/collection/?edits=neon', class: 'image rotate-1' do
+      = image_tag 'homepage/neon2.jpg'
+    = link_to '/collection/?edits=neon', class: 'image rotate-2' do
+      = image_tag 'homepage/neon3.jpg'
     = link_to '#', class: 'show-style-quiz image large' do
       = image_tag 'homepage/right.jpg'
 
