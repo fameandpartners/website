@@ -19,7 +19,10 @@ class CampaignsController < ApplicationController
     if !@user.persisted? || @user.errors.present?
       render 'stylecall'
     else
-      sign_in(:spree_user, @user)
+      if @just_registered
+        sign_in(:spree_user, @user)
+        Spree::UserMailer.welcome_with_password(@user).deliver
+      end
       Spree::AdminMailer.stylist_consultation_requested(@user).deliver
       session['just_registered'] = @just_registered
       session['stylist_consultation_just_requested'] = true
