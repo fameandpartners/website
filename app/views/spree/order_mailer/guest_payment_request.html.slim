@@ -61,7 +61,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                           =' @order.currency
                           = @order.display_total
                 .button style="margin: 0 0 6px;"
-                  a href="#{main_app.guest_checkout_url(:token => @order.payment_request.token)}" style="display: block; background: #000; color: #fff; padding: 10px 0; text-align: center; font: 400 14px/1.2 Arial, sans-serif; text-transform: uppercase; text-decoration: none;" Pay for this dress
+                  a href="#{main_app.guest_checkout_url(:token => @payment_request.token)}" style="display: block; background: #000; color: #fff; padding: 10px 0; text-align: center; font: 400 14px/1.2 Arial, sans-serif; text-transform: uppercase; text-decoration: none;" Pay for this dress
                 .details style="color: #000; text-align: center; font: 400 italic 16px/1.2 'Georgia', 'Trebuchet MS', 'Times New Roman', serif;"
                   /' or
                   /a href="#" style="text-decoration: underline; color: #000;" See order's details
