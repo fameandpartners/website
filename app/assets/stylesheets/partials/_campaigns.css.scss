@@ -109,5 +109,22 @@
         margin: 0 10px 14px;
       }
     }
+    .visit-style-quiz {
+      width: 420px;
+      margin: 10px auto 0;
+      padding: 0 0 200px;
+      a {
+        display: block;
+        height: 48px;
+        line-height: 48px;
+        font-family: $fontFive;
+        font-size: 18px;
+        background: #000;
+        color: #fff;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration: none;
+      }
+    }
   }
 }
