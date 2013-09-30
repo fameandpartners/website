@@ -1,4 +1,4 @@
-= form_for @order, :url => guest_update_checkout_path(@payment_request.token, @order.state), :remote => true do |form|
+= form_for @order, :url => guest_update_checkout_path(@order.state), :remote => true do |form|
   = render :partial => 'shared/error_messages', :locals => { :target => @order }
 
   = form.fields_for :bill_address do |bill_form|
