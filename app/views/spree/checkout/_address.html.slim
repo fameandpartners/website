@@ -11,7 +11,7 @@
     .grid-100.padding
       .place-order
         .fleft = form.submit 'Submit Details', data: { loading: 'Submitting...' }
-        /- if spree_user_signed_in?
+        - if spree_user_signed_in?
           .fright
             .ask-parents-block
               = link_to 'Invite someone to pay', '#', class: 'ask-parents ask-parent-to-pay-button'
