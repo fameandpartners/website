@@ -9,6 +9,12 @@ class Spree::UserMailer < ActionMailer::Base
          :subject => t('emails.subjects.users.welcome') + ' to ' + Spree::Config[:site_name])
   end
 
+  def welcome_with_password(user)
+    @user = user
+    mail(:to => user.email,
+         :subject => t('emails.subjects.users.welcome') + ' to ' + Spree::Config[:site_name])
+  end
+
   def welcome_to_competition(user)
     @user = user
     mail(:to => user.email,

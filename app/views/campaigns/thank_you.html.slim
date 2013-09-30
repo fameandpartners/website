@@ -34,3 +34,5 @@
               .colors
                 - @colors[product.id].map(&:name).sort.each do |color|
                   .color{class=color}
+      .visit-style-quiz
+        = link_to 'Find out what your style profile is', 'javascript: Quiz.show()'

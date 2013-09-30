@@ -29,9 +29,19 @@ window.paymentRequestModal = {
   success: (html) ->
     track.inviteToPaySent()
     $scope = paymentRequestModal.scope()
-    $scope.find('.modal-container').html(html)
-    $('#ask-parent-to-pay-button').remove()
-    setTimeout paymentRequestModal.hide, 3000
+    $container = $scope.find('.modal-container')
+    $container.find(':visible').hide()
+    $container.append(html)
+    setTimeout () ->
+        $scope = paymentRequestModal.scope()
+        $container = $scope.find('.modal-container')
+        paymentRequestModal.hide()
+
+        $container.find('.block-title, .aligncenter').remove();
+        $container.find('.close-lightbox, .modal-title, .form').show()
+        $container.find('.form').html('')
+
+      , 3000
 
   fail: (html) ->
     $scope = paymentRequestModal.scope()
