@@ -93,9 +93,9 @@ module Guest
     def current_order
       return @order if @order.present?
 
-      raise ActiveRecord::RecordNotFound unless session[:token].present?
+      raise ActiveRecord::RecordNotFound unless session['guest_checkout_token'].present?
 
-      @payment_request = PaymentRequest.find_by_token!(session[:token])
+      @payment_request = PaymentRequest.find_by_token!(session['guest_checkout_token'])
 
       order = Spree::Order.find(@payment_request.order_id)
 

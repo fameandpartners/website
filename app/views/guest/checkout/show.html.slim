@@ -2,7 +2,7 @@
   .account-pages
     ruby:
       successfully_ordered = session.delete(:successfully_ordered)
-      session.delete(:guest_checkout_token)
+      session.delete('guest_checkout_token')
     .tabs
       #order.tab-content
         - if successfully_ordered
