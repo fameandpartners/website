@@ -33,6 +33,18 @@
     height: 1174px;
     background: image-url('campaigns/stylecall-main.jpg') center top #fff;
     background-size: cover;
+    .main-title {
+      position: relative;
+      .coupon {
+        background: image-url('campaigns/plus-20-to-spend.png') 0 0 no-repeat;
+        width: 90px;
+        height: 90px;
+        display: block;
+        position: absolute;
+        top: -50px;
+        right: 26px;
+      }
+    }
     .content-block {
       width: 654px;
       margin: 0 0 0 424px;
