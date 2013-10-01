@@ -1,5 +1,9 @@
 module Guest
   class CheckoutController < Spree::CheckoutController
+    include GuestHelper
+    prepend_before_filter :check_presence_of_token
+    prepend_before_filter :save_token_to_session, only: [:edit]
+
     skip_before_filter :ensure_valid_state
     skip_before_filter :associate_user
     skip_before_filter :check_authorization
@@ -83,23 +87,19 @@ module Guest
     private
 
     def load_order
-      if token = params[:token]
-        @payment_request ||= PaymentRequest.find_by_token!(token)
+      @payment_request ||= PaymentRequest.find_by_token!(session['guest_checkout_token'])
 
-        @order = Spree::Order.find(@payment_request.order_id)
+      @order = Spree::Order.find(@payment_request.order_id)
 
-        if params[:action].eql?('update') && @order.complete?
-          raise ActiveRecord::RecordNotFound
-        end
-
-        if params[:state]
-          redirect_to guest_checkout_state_path(@payment_request.token, @order.state) if @order.can_go_to_state?(params[:state]) && !skip_state_validation?
-          @order.state = params[:state]
-        end
-        state_callback(:before)
-      else
+      if params[:action].eql?('update') && @order.complete?
         raise ActiveRecord::RecordNotFound
       end
+
+      if params[:state]
+        redirect_to guest_checkout_state_path(@order.state) if @order.can_go_to_state?(params[:state]) && !skip_state_validation?
+        @order.state = params[:state]
+      end
+      state_callback(:before)
     end
 
     def before_address

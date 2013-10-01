@@ -15,11 +15,11 @@
 
 - if paypal_available?
   .grid-container.border
-    = render :partial => "spree/checkout/payment/paypal"
+    = render 'guest/checkout/payment/paypal'
 
 .coupon-block.border
   .grid-container
-    = form_for @order, url: guest_update_checkout_path(@payment_request.token, 'payment'),remote: true do |f|
+    = form_for @order, url: guest_update_checkout_path('payment'),remote: true do |f|
       .grid-50
         .input
           label Enter coupon or promocode

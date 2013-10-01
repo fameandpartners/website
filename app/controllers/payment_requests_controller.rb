@@ -9,7 +9,9 @@ class PaymentRequestsController < ApplicationController
       object.order = current_order
     end
 
-    unless spree_user_signed_in?
+    if spree_user_signed_in?
+      associate_user
+    else
       @user = Spree::User.new(params[:user])
 
       if @user.save

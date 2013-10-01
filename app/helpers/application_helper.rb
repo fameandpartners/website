@@ -168,6 +168,16 @@ module ApplicationHelper
     )
   end
 
+  def guest_paypal_express_button
+    return if paypal_payment_method.blank?
+
+    url = guest_paypal_express_url(payment_method_id: paypal_payment_method.id, protocol: 'http')
+    link_to(
+      image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"),
+      url, method: :post, id: "paypal_button"
+    )
+  end
+
   # competition share - 6009830748096
   # order purchased   - 6009784531696
   def fb_analytics_track(pixel_id, currency = 'AUD', value = '0.00')

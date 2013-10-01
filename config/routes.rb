@@ -246,10 +246,15 @@ FameAndPartners::Application.routes.draw do
   # Guest checkout routes
   resources :payment_requests, only: [:new, :create]
   namespace :guest do
-    put '/checkout/:token/update/:state', :to => 'checkout#update', :as => :update_checkout
-    get '/checkout/:token/thanks', :to => 'checkout#show' , :as => :checkout_thanks
-    get '/checkout/:token/:state', :to => 'checkout#edit', :as => :checkout_state
-    get '/checkout/:token', :to => 'checkout#edit' , :as => :checkout
+    put '/checkout/update/:state', :to => 'checkout#update', :as => :update_checkout
+    get '/checkout/thanks', :to => 'checkout#show' , :as => :checkout_thanks
+    get '/checkout/:state', :to => 'checkout#edit', :as => :checkout_state
+    get '/checkout/', :to => 'checkout#edit' , :as => :checkout
+
+    post '/paypal', :to => 'paypal#express', :as => :paypal_express
+    get '/paypal/confirm', :to => 'paypal#confirm', :as => :confirm_paypal
+    get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
+    get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
   end
 
   match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'

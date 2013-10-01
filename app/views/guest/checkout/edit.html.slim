@@ -28,7 +28,7 @@ ruby:
             .name 1. Billing and shipping details
             .check-edit class="#{ active.eql?('payment') ? "" : "hide" }"
               .check
-              .edit = link_to 'Edit', guest_checkout_state_path(@payment_request.token, 'address'), :remote => true
+              .edit = link_to 'Edit', guest_checkout_state_path('address'), :remote => true
           .accordion-content data-step="address" *{ :class => !active.eql?('address') && 'hide' }
             = render 'guest/checkout/address'
           .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }
