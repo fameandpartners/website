@@ -121,15 +121,15 @@ Spree::Order.class_eval do
     end
   end
 
-  def customer_bill_address
+  def customer_shipping_address
     return unless bill_address.present?
-    bill_address.active_merchant_hash.slice(:address1, :zip, :city, :state, :country).values.reject(&:blank?).join(', ')
+    ship_address.active_merchant_hash.slice(:address1, :zip, :city, :state, :country).values.reject(&:blank?).join(', ')
   end
 
   def as_csv
     result = as_json({
       only: [:id, :created_at],
-      methods: [:customer_full_name, :customer_bill_address]
+      methods: [:customer_full_name, :customer_shipping_address]
     })
     line_item_columns = [:style_name, :sku, :colour, :size, :customisations]
     line_item_columns.each do |line_item_column|
