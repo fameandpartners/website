@@ -1,8 +1,6 @@
 Spree::Order.class_eval do
   self.include_root_in_json = false
 
-  delegate :full_name, to: :user, prefix: 'customer', allow_nil: true
-
   checkout_flow do
     go_to_state :address
     go_to_state :payment, :if => lambda { |order|
@@ -126,10 +124,18 @@ Spree::Order.class_eval do
     ship_address.active_merchant_hash.slice(:address1, :zip, :city, :state, :country).values.reject(&:blank?).join(', ')
   end
 
+  def customer_full_name
+    user.try(:full_name) || [user_first_name, user_last_name].join(' ')
+  end
+
+  def customer_email
+    user.try(:email) || email
+  end
+
   def as_csv
     result = as_json({
-      only: [:id, :created_at],
-      methods: [:customer_full_name, :customer_shipping_address]
+      only: [:number, :created_at],
+      methods: [:customer_email, :customer_full_name, :customer_shipping_address]
     })
     line_item_columns = [:style_name, :sku, :colour, :size, :customisations]
     line_item_columns.each do |line_item_column|
