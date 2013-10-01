@@ -150,3 +150,15 @@ ul.customisation-types {
     }
   }
 }
+
+.orders-filter {
+  .state-select {
+    float: left;
+    width: 100px;
+    margin-right: 20px;
+    &:last-child { margin: 0 }
+  }
+  .icon-search.button {
+    margin-right: 20px;
+  }
+}

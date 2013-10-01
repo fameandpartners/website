@@ -1,4 +1,8 @@
 Spree::Order.class_eval do
+  self.include_root_in_json = false
+
+  delegate :full_name, to: :user, prefix: 'customer', allow_nil: true
+
   checkout_flow do
     go_to_state :address
     go_to_state :payment, :if => lambda { |order|
@@ -115,5 +119,45 @@ Spree::Order.class_eval do
     line_items.each do |line_item|
       Activity.log_product_purchased(line_item.product, self.user, self)
     end
+  end
+
+  def customer_bill_address
+    return unless bill_address.present?
+    bill_address.active_merchant_hash.slice(:address1, :zip, :city, :state, :country).values.reject(&:blank?).join(', ')
+  end
+
+  def as_csv
+    result = as_json({
+      only: [:id, :created_at],
+      methods: [:customer_full_name, :customer_bill_address]
+    })
+    line_item_columns = [:style_name, :sku, :colour, :size, :customisations]
+    line_item_columns.each do |line_item_column|
+      result[line_item_column] = []
+    end
+    line_items.includes(:product, :variant).each do |line_item|
+      result[:style_name] << line_item.product.name
+      result[:sku] << line_item.variant.sku
+      size = 'n/a'
+      colour = 'n/a'
+      customisations = 'n/a'
+      line_item.variant.option_values.each do |value|
+        case value.option_type.name.to_s.downcase
+        when 'dress-size'
+          size = value.presentation
+        when 'dress-color'
+          colour = value.presentation
+        else
+          customisations = "#{value.option_type.presentation}: #{value.presentation}"
+        end
+      end
+      result[:size] << size
+      result[:colour] << colour
+      result[:customisations] << customisations
+    end
+    line_item_columns.each do |line_item_column|
+      result[line_item_column] = result[line_item_column].join(';')
+    end
+    result
   end
 end
