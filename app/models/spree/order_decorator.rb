@@ -156,7 +156,7 @@ Spree::Order.class_eval do
       result[:customisations] << customisations
     end
     line_item_columns.each do |line_item_column|
-      result[line_item_column] = result[line_item_column].join(';')
+      result[line_item_column] = result[line_item_column].join('|')
     end
     result
   end
