@@ -120,8 +120,12 @@ Spree::Order.class_eval do
   end
 
   def customer_shipping_address
-    return unless bill_address.present?
-    ship_address.active_merchant_hash.slice(:address1, :zip, :city, :state, :country).values.reject(&:blank?).join(', ')
+    return unless ship_address.present?
+    components = ship_address.attributes.slice(*%w[address1 address2 city]).values
+    components << ship_address.state_text
+    components << ship_address.zipcode
+    components << ship_address.country.name
+    components.reject(&:blank?).join(', ')
   end
 
   def customer_full_name
