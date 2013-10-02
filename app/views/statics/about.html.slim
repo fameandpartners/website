@@ -23,3 +23,43 @@
   p
     ' And so Fame & Partners was born, to provide girls with a way to get a celebrity, high-fashion look and feel amazing for their high school formal!
     ' Fame & Partners is a new venture and we warmly welcome feedback from our customers. Please feel free to send us an email at: team@fameandpartners.com
+
+/.modal.campaign-dolly
+  .overlay
+  .modal-container
+    .close-lightbox
+    .modal-form
+      .hide
+        / Campaign form
+        .title.aligncenter = image_tag 'campaigns/dolly-title.png', width: 224, height: 53, alt: 'Dolly'
+        .campaign-benefits.aligncenter
+          | Exclusive 30
+          sup %
+          |  discount
+        .dashed-box
+          .form-title Enter your email
+          .form
+            .input.string
+              input.inputbox type="email" name="email" placeholder="Enter your email"
+            .submit-form
+              input.submitbox type="submit" value="Join"
+          .form-subtitle
+            ' To reveal your secret code
+        .logo-block
+          = image_tag 'logo.png', height: 22, alt: 'Fame&Partners'
+        .slogan-block
+          ' Celebrity looks crafted just for you.
+      / Thanks screen
+      .campaign-benefits.aligncenter Thanks for signing up!
+      .dashed-box.transparent
+        .form-title Your code
+        .form
+          .input.single
+            input.inputbox.coupon type="text" value="Dolly30"
+          .form-hint Get 30% off your order by adding the following promo code when you checkout.
+      .share-this.aligncenter
+        .share-title Share this offer
+        .share
+        .share
+      .aligncenter
+        = link_to 'Start shopping', '#', class: 'btn btn-black'

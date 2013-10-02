@@ -140,3 +140,126 @@
     }
   }
 }
+
+.campaign-dolly {
+  .modal-container {
+    width: 680px;
+    height: 460px;
+    padding: 0;
+    border: 0;
+    background: image-url('campaigns/dolly-background.jpg') center center no-repeat;
+  }
+  .modal-form {
+    float: right;
+    width: 360px;
+    margin: 48px 56px 0 0;
+  }
+  .title {
+    margin: 0 0 14px;
+  }
+  .campaign-benefits {
+    font: 400 38px/1 $fontFive;
+    color: #333;
+    text-transform: uppercase;
+    sup {
+      position: relative;
+      top: 2px;
+      font-size: 28px;
+      vertical-align: top;
+    }
+  }
+  .dashed-box {
+    border: 2px dashed #999;
+    margin: 28px 30px;
+    background: image-url('campaigns/dolly-corner.png') right bottom no-repeat;
+    &.transparent {
+      background: transparent;
+    }
+  }
+  .form-title {
+    color: #ec008c;
+    font: 400 48px/1 $fontFive;
+    text-transform: uppercase;
+    padding: 8px 13px;
+    text-align: center;
+  }
+  .form {
+    overflow: hidden;
+    margin: 0 13px;
+    .input {
+      margin: 0;
+      float: left;
+      input {
+        width: 204px;
+        height: 34px;
+        line-height: 34px;
+      }
+      .coupon {
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+        width: 150px;
+        text-transform: uppercase;
+        height: 50px;
+        line-height: 50px;
+        font-size: 24px;
+        font-family: $fontFive;
+      }
+      &.single {
+        float: none;
+      }
+    }
+    .submit-form {
+      float: right;
+      input {
+        background: #000;
+        border-radius: 0;
+        padding: 0 10px;
+        height: 34px;
+        line-height: 34px;
+        width: auto;
+      }
+    }
+    .form-hint {
+      text-align: center;
+      font: italic 14px/1.2 $fontFour;
+      margin: 15px 0;
+    }
+  }
+  .form-subtitle {
+    margin: 0 13px 10px;
+    font: 400 26px/1 $fontFive;
+    text-transform: uppercase;
+  }
+  .share-this {
+    margin: 0 0 24px;
+    .share-title {
+      text-transform: uppercase;
+    }
+    .share {
+      margin: 0 10px;
+      display: inline-block;
+    }
+  }
+  .btn-black {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: #000;
+    color: #fff;
+    width: 184px;
+    text-align: center;
+    height: 38px;
+    font: 400 18px/38px $fontFive;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+  }
+  .logo-block {
+    border-top: 1px solid #999;
+    text-align: center;
+    padding: 15px 0 10px;
+  }
+  .slogan-block {
+    text-align: center;
+    font: 400 italic 16px/1.1 $fontFour;
+  }
+}
