@@ -1,0 +1,74 @@
+.famechain
+  .wrap
+    h1 The Fame Chain
+    .chain-desc
+      ' Fame & Partners is excited to be helping teenage girls jumpstart a career in fashion,
+      br
+      ' retail or technology... and help them earn some cash along the way!
+    .grid-container
+      .grid-50
+        .bordered-picture.rotate-1
+          = image_tag 'famechain/picture-1.jpg', width: 432, height: 648, alt: ''
+      .grid-50
+        .works-title How it works
+        ul.features
+          li.feature
+            .number 1.
+            .text Apply to join The Fame Chain
+          li.feature
+            .number 2.
+            .text Upon acceptance, get free social media training
+          li.feature
+            .number 3.
+            .text Receive endorsement from Fame & Partners as an official member of The Fame Chain
+          li.feature
+            .number 4.
+            .text Get the opportunity to guest post on The Fame Issue
+          li.feature
+            .number 5.
+            .text Receive unique content & special discounts to offer the readers of your blog
+          li.feature
+            .number 6.
+            .text Get sneak peek access to our collections before others
+          li.feature
+            .number 7.
+            .text Have a say in our range design
+          li.feature
+            .number 8.
+            .text Send 5 customers to our site and get your formal dress for free!
+          li.feature
+            .number 9.
+            .text Earn cash for every dress sale that comes from any of your social media profiles
+    .get-started Get started now... For free
+    .grid-container
+      .grid-40
+        .form-desc If you would like to apply to become part of The Fame Chain, simply provide your details below. We assess every application on a case-by-case basis and will let you know within 5 business days if your application has been successful.
+        form.form
+          .input
+            label Name
+            input type="text" name="name"
+          .input
+            label Email
+            input type="email" name="email"
+          .input
+            label Blog
+            input type="url" name="blog"
+          .input
+            label Pinteres
+            input type="url" name="pinteres"
+          .input
+            label Facebook
+            input type="url" name="facebook"
+          .input
+            label Twitter
+            input type="url" name="twitter"
+          .submit
+            input type="submit" value="Join the Fame Chain Today"
+        .signature
+          .top Yours in Style!
+          ' The Fame Team
+      .grid-60
+        .bordered-picture.rotate-1
+          = image_tag 'famechain/picture-2.jpg', width: 582, height: 388, alt: ''
+        .bordered-picture
+          = image_tag 'famechain/picture-3.jpg', width: 582, height: 388, alt: ''

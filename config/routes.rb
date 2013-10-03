@@ -107,6 +107,7 @@ FameAndPartners::Application.routes.draw do
   get '/campaigns/stylecall' => 'campaigns#show'
   post '/campaigns/stylecall' => 'campaigns#create'
   get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
+  get '/famechain' => 'statics#famechain'
 
   get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
   post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
