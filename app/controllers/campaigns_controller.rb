@@ -42,4 +42,12 @@ class CampaignsController < ApplicationController
     @products = Spree::Product.first(3)
     @colors = Products::ColorsSearcher.new(@products.to_a).retrieve_colors
   end
+
+  def dolly
+    @participation = Participation.new(params[:participation])
+
+    if @participation.valid?
+      CampaignMonitor.delay.synchronize(@participation.email, nil, Signupreason: 'Dolly campaign')
+    end
+  end
 end
