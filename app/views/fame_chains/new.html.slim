@@ -43,27 +43,27 @@
     .grid-container
       .grid-40
         .form-desc If you would like to apply to become part of The Fame Chain, simply provide your details below. We assess every application on a case-by-case basis and will let you know within 5 business days if your application has been successful.
-        form.form
+        = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
           .input
             label Name
-            input type="text" name="name"
+            = f.text_field :name
           .input
             label Email
-            input type="email" name="email"
+            = f.text_field :email, type: 'email'
           .input
             label Blog
-            input type="url" name="blog"
+            = f.text_field :blog, type: 'url'
           .input
-            label Pinteres
-            input type="url" name="pinteres"
+            label Pinterest
+            = f.text_field :pinterest, type: 'url'
           .input
             label Facebook
-            input type="url" name="facebook"
+            = f.text_field :facebook, type: 'url'
           .input
             label Twitter
-            input type="url" name="twitter"
+            = f.text_field :twitter, type: 'url'
           .submit
-            input type="submit" value="Join the Fame Chain Today"
+            = f.submit "Join the Fame Chain Today"
         .signature
           .top Yours in Style!
           ' The Fame Team
