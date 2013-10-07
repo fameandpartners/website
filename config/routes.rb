@@ -112,7 +112,9 @@ FameAndPartners::Application.routes.draw do
   post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
 
   get '/fame-chain' => 'fame_chains#new'
-  resource 'fame-chain', as: 'fame_chain', only: [:new, :create]
+  resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
+    get 'success'
+  end
 
   # testing email
   get '/email/comp' => 'competition_mailer#marketing_email'
