@@ -1,0 +1,19 @@
+.title.aligncenter = image_tag 'campaigns/dolly-title.png', width: 224, height: 53, alt: 'Dolly'
+.campaign-benefits.aligncenter
+  | Exclusive 30
+  sup %
+  |  discount
+.dashed-box
+  .form-title Enter your email
+  .form
+    = form_for (@participation || Participation.new), as: :participation, url: dolly_campaign_path, remote: true do |f|
+      .input.string
+        = f.email_field :email, class: 'inputbox', placeholder: 'Enter your email'
+      .submit-form
+        input.submitbox type="submit" value="Join"
+  .form-subtitle
+    ' To reveal your secret code
+.logo-block
+  = image_tag 'logo.png', height: 22, alt: 'Fame&Partners'
+.slogan-block
+  ' Celebrity looks crafted just for you.
