@@ -8,7 +8,7 @@
 .share-this.aligncenter
   .share-title Share this offer
   .share
-    a.twitter-share-button href="https://twitter.com/share" Tweet
+    a.twitter-share-button href="https://twitter.com/share" data-url="http://#{configatron.host}" Tweet
     javascript:
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
   .share
@@ -18,9 +18,9 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=498032100286782";
+        js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=#{facebook_application.api_key}";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    .fb-like data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="false" data-send="false"
+    .fb-like data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="false" data-send="false" data-href="http://#{configatron.host}"
 .aligncenter
   = link_to 'Start shopping', main_app.collection_path, class: 'btn btn-black'
