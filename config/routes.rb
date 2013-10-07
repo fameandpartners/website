@@ -107,9 +107,13 @@ FameAndPartners::Application.routes.draw do
   get '/campaigns/stylecall' => 'campaigns#show'
   post '/campaigns/stylecall' => 'campaigns#create'
   get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
+  post '/campaigns/dolly' => 'campaigns#dolly', as: :dolly_campaign
 
   get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
   post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+
+  get '/fame-chain' => 'fame_chains#new'
+  resource 'fame-chain', as: 'fame_chain', only: [:new, :create]
 
   # testing email
   get '/email/comp' => 'competition_mailer#marketing_email'

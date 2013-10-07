@@ -7,10 +7,12 @@
 @include font-face('Didot', '/fonts/didot', 400);
 @include font-face('Didot', '/fonts/didot-italic', 400, italic);
 
+@include font-face('LeagueGothic', '/fonts/leaguegothic-regular', 400);
+
 @include font-face('Icons', '/fonts/icomoon');
 
 $fontOne: 'Lato', sans-serif;
 $fontTwo: 'GranjonLTStd', serif;
 $fontThree: 'Annifont', serif;
 $fontFour: 'Didot', serif;
-$fontFive: 'Pathway Gothic One', serif;
+$fontFive: 'LeagueGothic', serif;
