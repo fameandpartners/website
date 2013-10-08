@@ -79,7 +79,11 @@ module ApplicationHelper
   end
 
   def facebook_authentication_available?
-    Spree::AuthenticationMethod.exists?(:environment => ::Rails.env, :provider => :facebook, :active => true)
+    facebook_application.present?
+  end
+
+  def facebook_application
+    Spree::AuthenticationMethod.where(environment: ::Rails.env, provider: :facebook, active: true).first
   end
 
   def make_url prefix, text
