@@ -1,4 +1,4 @@
-.icon-phone, .icon-home, .icon-bag, .icon-pencil, .icon-layby, .icon-signup, .icon-livechat, .icon-help, .icon-shipping, .icon-returns, .icon-dress, .icon-customization, .icon-purchase, .icon-eye, .icon-heart, .icon-tick-circle {
+.icon-phone, .icon-home, .icon-bag, .icon-pencil, .icon-layby, .icon-signup, .icon-livechat, .icon-help, .icon-shipping, .icon-returns, .icon-dress, .icon-customization, .icon-purchase, .icon-eye, .icon-heart, .icon-tick-circle, .icon-tickmark, .icon-arrow-left, .icon-arrow-right {
   font-family: 'Icons';
   color: #000;
   speak: none;
@@ -57,6 +57,12 @@
 .icon-tick-circle:before {
   content: "\e00f";
 }
-.icon-heart:before {
-  content: "\e008";
+.icon-tickmark:before {
+  content: "\e010";
+}
+.icon-arrow-left:before {
+  content: "\e011";
+}
+.icon-arrow-right:before {
+  content: "\e012";
 }

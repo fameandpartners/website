@@ -1,0 +1,10 @@
+.custom-dresses
+  #custom-dresses.custom-dresses-signup
+    .wrap.text-left
+      .center-form
+        h1.black.lato Create the perfect dress
+        .subtitle Get your next prom dress made by one of the fashion industries top designers.
+        .signup-buttons.aligncenter
+          = link_to 'Signup with facebook', fb_auth_path(quiz: 'true'), class: 'facebook-signup'
+          .or or
+          = link_to 'Sign up using your email address', spree.signup_path(quiz: 'true', cl: 'stylequiz'), class: 'regular-signup'

@@ -1,0 +1,11 @@
+.personal-boutique
+  .wrap
+    h1.gothic.black.small Choose a dress to customise
+    .subtitle Lorem ipsum. Dress length is a list of pictures (long, short, knee length) fabric again is a list of pictures that can be selected.
+    .subtitle
+      ' or
+      = link_to 'Edit my settings', '#'
+
+    ul.products-list.grid-container
+      - @products.each do |product|
+        = render 'shared/product', product: product

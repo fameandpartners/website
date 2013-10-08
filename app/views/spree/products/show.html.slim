@@ -94,6 +94,141 @@ ruby:
                 i.icon.icon-layby
                 ' Free Customization
           = add_to_wishlist_link(@product)
+        .customize-block
+          .title Customise this dress
+          .desc Its easy to customise this dress for your perfect formal event. Start by selecting customisations below.
+        .add-to-bag
+          = link_to 'Add customized dress to bag', '#', class: 'btn'
+        .tabs
+          ul.tabs-links.custom-sizes
+            li.active
+              = link_to '#' do
+                ' 1
+                .done
+                  i.icon.icon-tickmark
+            li = link_to '2', '#'
+            li = link_to '3', '#'
+            li = link_to '4', '#'
+            li = link_to '5', '#'
+            li = link_to '6', '#'
+          /.tab-content.body-sizes
+            .tab-title Body / size
+            .form
+              .input
+                label Size
+                select.selectbox
+                  option 1
+                  option 2
+                  option 3
+              .input
+                label Height
+                .hint cm.
+                input type="text" name="height"
+              .input
+                label Body shape
+                select.selectbox
+                  option 1
+                  option 2
+                  option 3
+            .tabs-arrows
+              = link_to '#', class: 'arrow arrow-prev' do
+                i.icon.icon-arrow-left
+              = link_to '#', class: 'arrow arrow-next' do
+                i.icon.icon-arrow-right
+          /.tab-content.dress-color
+            .tab-title Choose color
+            /.colors
+              .color.red
+              .color.linen
+              .color.blue
+              .color.pink
+              .color.orange
+              .color.yellow
+              .color.green
+              .color.peach
+              .color.silver
+              .color.colorpicker
+            .text-center
+              .color-picker-container
+                .color-picker-block put colorpicker here
+                .form
+                  .input
+                    input type="text" name="color" placeholer="Color value"
+            .tabs-arrows
+              = link_to '#', class: 'arrow arrow-prev' do
+                i.icon.icon-arrow-left
+              = link_to '#', class: 'arrow arrow-next' do
+                i.icon.icon-arrow-right
+          /.tab-content.dress-fabric
+            .tab-title Choose Fabric
+            .colors.fabric-select
+              .fabric
+                .image
+                .text Linen
+              .fabric
+                .image
+                .text Silk
+              .fabric
+                .image
+                .text Silk
+              .fabric
+                .image
+                .text Silk
+              .fabric
+                .image
+                .text Silk
+              .fabric
+                .image
+                .text Silk
+              .fabric
+                .image
+                .text Silk
+              .fabric
+                .image
+                .text Silk
+              .fabric
+                .image
+                .text Silk
+              .fabric
+                .image
+                .text Silk
+            .tabs-arrows
+              = link_to '#', class: 'arrow arrow-prev' do
+                i.icon.icon-arrow-left
+              = link_to '#', class: 'arrow arrow-next' do
+                i.icon.icon-arrow-right
+          .tab-content.dress-fabric
+            .tab-title Neckline
+            .colors.neckline-select
+              .neckline.active
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+              .neckline
+                = image_tag 'http://placehold.it/78x94', alt: ''
+            .tabs-arrows
+              = link_to '#', class: 'arrow arrow-prev' do
+                i.icon.icon-arrow-left
+              = link_to '#', class: 'arrow arrow-next' do
+                i.icon.icon-arrow-right
         .tabs
           ul.tabs-links
             li.active = link_to 'Description', '#description'

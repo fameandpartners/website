@@ -73,6 +73,8 @@
   &.nude { background:#E7D0A6; }
   &.cream { background:#EBE5CD; }
 
+  &.colorpicker { background: image-url('colours/colorpicker.png') center center no-repeat; }
+
   &.active {
     cursor: default;
     background-image: image-url('icon-color-tick.png');
