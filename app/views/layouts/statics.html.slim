@@ -23,4 +23,4 @@ doctype html
       = render 'shared/dolly_campaign_popup'
       #push
     = render 'layouts/footer'
-    = render 'shared/remarketing_tag'
+    = render 'shared/remarketing_tag' unless request.path == "/campaigns/stylecall/thankyou"
