@@ -43,7 +43,6 @@ class LineItemPersonalization < ActiveRecord::Base
 
   validate do
     if product.present? && customization_value_ids.present?
-      debugger
       unless customization_value_ids.all?{ |id| product.product_customisation_values.map(&:customisation_value_id).include?(id) }
         errors.add(:base, 'Some customization options can not be selected')
       end
@@ -66,7 +65,7 @@ class LineItemPersonalization < ActiveRecord::Base
     CustomisationType.find(customization_values.map(&:customisation_type_id)).uniq
   end
 
-  def customization_value_ids=(value)
-    super(value.map(&:to_i))
+  def customization_value_ids=(hash)
+    super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
   end
 end
