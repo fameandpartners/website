@@ -159,7 +159,7 @@ class ApplicationController < ActionController::Base
   end
 
   def custom_dresses_path
-    personalization_path
+    main_app.personalization_path
   end
   helper_method :custom_dresses_path
 
