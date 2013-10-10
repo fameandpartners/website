@@ -1000,6 +1000,9 @@
         &.active {
           border-color: #ffab98;
         }
+        input[type=radio] {
+          display: none;
+        }
       }
     }
     .product-features {

@@ -1,4 +1,7 @@
 Spree::LineItem.class_eval do
+  has_one :personalization,
+          class_name: 'LineItemPersonalization'
+
   def in_sale?
     old_price.present?
   end

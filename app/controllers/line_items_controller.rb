@@ -1,26 +1,46 @@
 class LineItemsController < Spree::StoreController
   respond_to :json
+  respond_to :js, only: [:create]
 
   def create
     populator = Spree::OrderPopulator.new(current_order(true), current_currency)
 
     quantity = params[:quantity].to_i > 0 ? params[:quantity].to_i : 1
 
-    if populator.populate(variants: { params[:variant_id] => quantity })
+    @product = Spree::Variant.where(id: params[:variant_id]).first.try(:product)
+
+    if params[:line_item_personalization].present?
+      @personalization = LineItemPersonalization.new(params[:line_item_personalization])
+      @personalization.product = @product
+    end
+
+    if (@personalization.blank? || @personalization.valid?) && populator.populate(variants: { params[:variant_id] => quantity })
       fire_event('spree.cart.add')
       fire_event('spree.order.contents_changed')
 
       current_order.reload
     end
 
-    product = Spree::Variant.where(id: params[:variant_id]).first.try(:product)
+    Activity.log_product_added_to_cart(@product, temporary_user_key, try_spree_current_user, current_order) rescue nil
 
-    Activity.log_product_added_to_cart(product, temporary_user_key, try_spree_current_user, current_order) rescue nil
+    @line_item = current_order.line_items.find_by_variant_id(params[:variant_id])
 
-    render json: {
-      order: CartSerializer.new(current_order).to_json,
-      analytics_label: analytics_label(:product, product)
-    }
+    if @personalization.present? && @line_item.present?
+      @personalization.line_item = @line_item
+      @personalization.save
+    end
+
+    respond_with @line_item do |format|
+      format.json do
+        render json: {
+          order: CartSerializer.new(current_order).to_json,
+          analytics_label: analytics_label(:product, @product)
+        }
+      end
+      format.js do
+        render :create
+      end
+    end
   end
 
   # edit item in cart

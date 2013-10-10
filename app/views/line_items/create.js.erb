@@ -1,0 +1,5 @@
+$form = '<%=j render('personalization/products/form') %>';
+$('#personalization').html($form);
+window.helpers.enableTabs($('#personalization .tabs'));
+$('#personalization .tabs').find('.selectbox').chosen();
+window.helpers.addPersonalizationFormHandlers($('#personalization'))

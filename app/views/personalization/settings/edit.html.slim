@@ -1,0 +1,25 @@
+.custom-dresses
+  #custom-dresses.custom-dresses-shape
+    .wrap.text-left.no-overflow
+      .center-form
+        h1.black.gothic
+          ' Let’s start
+          br
+          ' with more about you
+        .subtitle Tell us about your size and body shape so we can make the perfect dress.
+        
+        .form
+          = form_for @settings, url: :update_personalization_settings, method: :put do |f|
+            = render :partial => 'shared/error_messages', locals: { target: @settings }
+            .input
+              = f.label :size, 'Size:'
+              = f.select :size, PersonalizationSettings::SIZES, {include_blank: true}, class: 'selectbox'
+            .input
+              = f.label :height, 'Height:'
+              = f.text_field :height
+              .hint cm.
+            .input
+              = f.label :body_shape_id, 'Body shape:'
+              = f.select :body_shape_id, PersonalizationSettings.body_shapes_for_select, {include_blank: true}, class: 'selectbox'
+            .submit
+              = f.submit 'Start customization'

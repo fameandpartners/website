@@ -50,7 +50,7 @@ module ProductsHelper
   def hoverable_product_image_tag(product, options = {})
     no_image = "noimage/product.png"
     if product.images.empty?
-      link_to image_tag(no_image, options), collection_product_path(product)
+      image_tag(no_image, options)
     else
       images = product.images
       image = images.first
@@ -61,7 +61,7 @@ module ProductsHelper
         options[:second_image]    = images.second.attachment.url(:product)
       end
       options[:onerror] = "window.switchToAltImage(this, '/assets/#{no_image}')"
-      link_to image_tag(image.attachment.url(:product), options), collection_product_path(product)
+      image_tag(image.attachment.url(:product), options)
     end
   end
 

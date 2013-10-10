@@ -49,18 +49,9 @@ class CustomDressesController < ApplicationController
     end
   end
 
-  def choose_dress
-    @products = Spree::Product.all
-  end
-
   private
 
   def destroy_ghosts
     CustomDress.destroy_all(:spree_user_id => current_spree_user.id, :ghost => true)
   end
-
-  def colors
-    @colors ||= Products::ColorsSearcher.new(@products.to_a).retrieve_colors
-  end
-  helper_method :colors
 end

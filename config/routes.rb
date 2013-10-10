@@ -109,8 +109,8 @@ FameAndPartners::Application.routes.draw do
   get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
   post '/campaigns/dolly' => 'campaigns#dolly', as: :dolly_campaign
 
-  get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
-  post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+  #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
+  #post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
 
   get '/fame-chain' => 'fame_chains#new'
   resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
@@ -132,15 +132,15 @@ FameAndPartners::Application.routes.draw do
   get '/custom_dresses/body-shape' => 'custom_dresses#body_shape'
   get '/custom_dresses/choose-dress' => 'custom_dresses#choose_dress'
 
-  resources :custom_dresses, :only => [:create, :update] do
-    collection do
-      get :step1
-    end
-    member do
-      get :step2
-      put :success
-    end
-    resources :custom_dress_images, :only => [:create]
+  # Custom Dresses part II
+  scope '/custom-dresses', module: 'personalization' do
+    get '/', to: 'base#authenticate', as: :personalization
+
+    get '/my-settings', to: 'settings#edit', as: :edit_personalization_settings
+    put '/my-settings', to: 'settings#update', as: :update_personalization_settings
+
+    get '/browse', to: 'products#index', as: :personalization_products
+    get '/:permalink', to: 'products#show', as: :personalization_product
   end
 
   root :to => 'index#show'

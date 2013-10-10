@@ -7,6 +7,7 @@ class CustomisationValue < ActiveRecord::Base
   attr_accessible :name, :presentation, :image
 
   has_attached_file :image, styles: {
-    mini: '48x48>', small: '100x100>', product: '240x240>', large: '600x600>'
+    mini: '48x48>',
+    small: '78x94#'
   }
 end

@@ -5,6 +5,6 @@
         h1.black.gothic Create the perfect dress
         .subtitle Create the perfect formal dress with our easy to use customisation service.
         .signup-buttons.aligncenter
-          = link_to 'Signup with facebook', fb_auth_path(quiz: 'true'), class: 'facebook-signup'
+          = link_to 'Signup with facebook', fb_auth_path(personalization: 'true'), class: 'facebook-signup'
           .or or
-          = link_to 'Sign up using your email address', spree.signup_path(quiz: 'true', cl: 'stylequiz'), class: 'regular-signup'
+          = link_to 'Sign up using your email address', spree.signup_path(personalization: 'true'), class: 'regular-signup'

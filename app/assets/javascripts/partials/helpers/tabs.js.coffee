@@ -15,6 +15,7 @@ window.helpers.enableTabs = (elements, options = {}) ->
     tabs: 'tabs-links'
     content: 'tab-content'
   }
+
   options = _.extend({}, defaultOptions, options)
   elements.each((index, element) ->
     window.helpers.enableTab($(element), options)
@@ -33,7 +34,7 @@ window.helpers.enableTab = (element, options) ->
     # show tab content
     tabId = $(e.currentTarget).attr('href')
 
-    check_anchor_regexp = /(\#|\.)\w+$/
+    check_anchor_regexp = /(\#|\.)[a-z0-9\-\_]+$/i
     if check_anchor_regexp.test(tabId)
       element.find(".#{options.content}#{tabId}").show()
         .siblings(".#{options.content}").hide()

@@ -157,4 +157,19 @@ class ApplicationController < ActionController::Base
       session[:temporary_user_key] = nil
     end
   end
+
+  def custom_dresses_path
+    personalization_path
+  end
+  helper_method :custom_dresses_path
+
+  def set_product_show_page_title(product)
+    range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
+
+    if range_taxonomy.present? && range_taxon = @product.taxons.where(taxonomy_id: range_taxonomy.id).first
+      prefix = "#{@product.name} in #{range_taxon.name}"
+      self.title = [prefix, default_seo_title].join(' - ')
+      description([prefix, default_meta_description].join(' - '))
+    end
+  end
 end
