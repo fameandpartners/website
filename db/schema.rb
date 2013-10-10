@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130926152904) do
+ActiveRecord::Schema.define(:version => 20131010055500) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -569,52 +569,30 @@ ActiveRecord::Schema.define(:version => 20130926152904) do
   add_index "spree_option_values_variants", ["variant_id"], :name => "index_spree_option_values_variants_on_variant_id"
 
   create_table "spree_orders", :force => true do |t|
-    t.string   "number",                  :limit => 15
-    t.decimal  "item_total",                            :precision => 10, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "total",                                 :precision => 10, :scale => 2, :default => 0.0, :null => false
+    t.string   "number",               :limit => 15
+    t.decimal  "item_total",                         :precision => 10, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "total",                              :precision => 10, :scale => 2, :default => 0.0, :null => false
     t.string   "state"
-    t.decimal  "adjustment_total",                      :precision => 10, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "adjustment_total",                   :precision => 10, :scale => 2, :default => 0.0, :null => false
     t.integer  "user_id"
     t.datetime "completed_at"
     t.integer  "bill_address_id"
     t.integer  "ship_address_id"
-    t.decimal  "payment_total",                         :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "payment_total",                      :precision => 10, :scale => 2, :default => 0.0
     t.integer  "shipping_method_id"
     t.string   "shipment_state"
     t.string   "payment_state"
     t.string   "email"
     t.text     "special_instructions"
-    t.datetime "created_at",                                                                            :null => false
-    t.datetime "updated_at",                                                                            :null => false
+    t.datetime "created_at",                                                                         :null => false
+    t.datetime "updated_at",                                                                         :null => false
     t.string   "currency"
     t.string   "last_ip_address"
     t.string   "user_first_name"
     t.string   "user_last_name"
-    t.datetime "abandoned_email_sent_at"
   end
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
-
-  create_table "spree_pages", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.string   "slug"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.boolean  "show_in_header",           :default => false, :null => false
-    t.boolean  "show_in_footer",           :default => false, :null => false
-    t.string   "foreign_link"
-    t.integer  "position",                 :default => 1,     :null => false
-    t.boolean  "visible",                  :default => true
-    t.string   "meta_keywords"
-    t.string   "meta_description"
-    t.string   "layout"
-    t.boolean  "show_in_sidebar",          :default => false, :null => false
-    t.string   "meta_title"
-    t.boolean  "render_layout_as_partial", :default => false
-  end
-
-  add_index "spree_pages", ["slug"], :name => "index_pages_on_slug"
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
@@ -1013,6 +991,7 @@ ActiveRecord::Schema.define(:version => 20130926152904) do
     t.string   "slug"
     t.string   "sign_up_reason"
     t.string   "phone"
+    t.boolean  "newsletter"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
