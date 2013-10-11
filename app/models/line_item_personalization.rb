@@ -37,14 +37,14 @@ class LineItemPersonalization < ActiveRecord::Base
 
   validate do
     unless customization_value_ids.present?
-      errors.add(:base, 'Customization options should be selected')
+      errors.add(:base, 'Please select some customisations.')
     end
   end
 
   validate do
     if product.present? && customization_value_ids.present?
       unless customization_value_ids.all?{ |id| product.product_customisation_values.map(&:customisation_value_id).include?(id) }
-        errors.add(:base, 'Some customization options can not be selected')
+        errors.add(:base, 'Some customisation options can not be selected')
       end
     end
   end
@@ -52,7 +52,7 @@ class LineItemPersonalization < ActiveRecord::Base
   validate do
     if product.present? && customization_value_ids.present?
       unless customization_types.count.eql?(product.product_customisation_types.with_values.count)
-        errors.add(:base, 'Invalid customization options selected')
+        errors.add(:base, 'Invalid customisation options selected')
       end
     end
   end
