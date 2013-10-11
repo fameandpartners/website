@@ -23,7 +23,6 @@ ruby:
           - if enabled_tabs.include?('inspiration')
             li = link_to 'Celebrity Inspiration', '#inspiration'
         #photos.tab-content
-          .ask-mum-badge = send_to_a_friend_link(@product)
           .tab-content-inner
             .photos-carousel
               #product-images-up.arrow-up
@@ -64,13 +63,13 @@ ruby:
     .grid-45
       .product-info
         .name = @product.name
-        .desc = @product.property('short_description')
         .price-delivery
           .price.sale
             = price_for_product(@product)
           /.delivery 3-4 week delivery
           .delivery 7-10 days delivery
         .customize-block
+          .desc == @product.description
           .title Customise this dress
           .desc Its easy to customise this dress for your perfect formal event. Start by selecting customisations below.
         #personalization
@@ -113,34 +112,9 @@ ruby:
                 br
                 ' advice
         .twin-alert-block.clearfix
-          = product_twin_alert_link(@product)
         - if @activities.present?
           .activities.clearfix
             .activities-title Recent Activity
             ul
               - @activities.each do |activity|
                 li class=(activity.action) = activity_description(activity, try_spree_current_user)
-
-  .page-name
-    .inner
-      h1.title
-        em Similar
-        span Dresses
-
-  /ul.similar-dresses.products-list.grid-container
-  /  - @similar_products.each do |product|
-  /    li.product-item.grid-25
-  /      .thumbnail
-  /        .like = add_to_wishlist_link(product)
-  /        .quick-view = quick_view_link(product)
-  /        = link_to collection_product_path(product) do
-  /          = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
-  /      .name = link_to product.name, product
-  /      /.description = product_short_description(product)
-  /      .price
-  /        - if product.in_sale?
-  /          del = product.price_in(current_currency).display_price_without_discount
-  /          span = product.price_in(current_currency).display_price_with_discount
-  /        - else
-  /          span = product.price_in(current_currency).display_price
-/= render 'customization_popup'
