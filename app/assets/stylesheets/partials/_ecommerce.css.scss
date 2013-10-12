@@ -995,13 +995,39 @@
     }
     .color-picker-container {
       display: inline-block;
+      margin: 10px 0 0;
       .color-picker-block {
         display: inline-block;
         margin: 0 10px 20px 0;
       }
       .form {
         display: inline-block;
-        width: 100px;
+        vertical-align: top;
+        margin: 35px 0 0 40px;
+        .input, .submit {
+          display: inline-block;
+          vertical-align: top;
+        }
+        .input {
+          width: 100px;
+        }
+        .submit {
+          margin: 26px 0 0 10px;
+        }
+      }
+      .choose-color {
+        display: block;
+        text-decoration: none;
+        width: 26px;
+        height: 26px;
+        background: #fe9f91;
+        border-radius: 50%;
+        line-height: 30px;
+        text-align: center;
+        .icon {
+          color: #fff;
+          font-size: 18px;
+        }
       }
     }
     .neckline-select {

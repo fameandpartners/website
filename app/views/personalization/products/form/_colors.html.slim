@@ -27,3 +27,6 @@
       .form
         .input
           input type="text" name="color" value="#{f.object.color}" style="background-color: #{f.object.color}"
+        /.submit
+          = link_to '#', class: 'choose-color' do
+            i.icon.icon-tickmark
