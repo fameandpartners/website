@@ -1,18 +1,28 @@
-.tab-title Choose color
-/.colors
-  .color.red
-  .color.linen
-  .color.blue
-  .color.pink
-  .color.orange
-  .color.yellow
-  .color.green
-  .color.peach
-  .color.silver
-  .color.colorpicker
-.text-center
-  .color-picker-container
-    .color-picker-block put colorpicker here
-    .form
-      .input
-        input type="text" name="color" placeholer="Color value"
+#customize-color.tab-content.dress-color
+  .tab-title Color
+  .colors
+    label.color.red
+      = f.radio_button :color, '#ED0234', data: {required: true}
+    label.color.linen
+      = f.radio_button :color, '#E3D0C5', data: {required: true}
+    label.color.blue
+      = f.radio_button :color, '#15558B', data: {required: true}
+    label.color.pink
+      = f.radio_button :color, '#FF3B9D', data: {required: true}
+    label.color.orange
+      = f.radio_button :color, '#FF8434', data: {required: true}
+    label.color.yellow
+      = f.radio_button :color, '#FFE100', data: {required: true}
+    label.color.green
+      = f.radio_button :color, '#269C36', data: {required: true}
+    label.color.peach
+      = f.radio_button :color, '#FFC598', data: {required: true}
+    label.color.silver
+      = f.radio_button :color, '#D0D1CC', data: {required: true}
+    /.color.colorpicker
+  /.text-center
+  /  .color-picker-container
+  /    .color-picker-block put colorpicker here
+  /    .form
+  /      .input
+  /        input type="text" name="color" placeholer="Color value"

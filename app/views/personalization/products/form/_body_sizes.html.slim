@@ -1,0 +1,13 @@
+#customize-body-sizes.tab-content.body-sizes
+  .tab-title Body / size
+  .form
+    .input
+      = f.label :size, 'Size'
+      = f.select :size, PersonalizationSettings::SIZES, {selected: current_spree_user.personalization_settings.size}, class: 'selectbox', data: {required: true}
+    .input
+      = f.label :height, 'Height'
+      .hint cm.
+      = f.text_field :height, value: current_spree_user.personalization_settings.height, data: {required: true}
+    .input
+      = f.label :body_shape_id, 'Body shape:'
+      = f.select :body_shape_id, PersonalizationSettings.body_shapes_for_select, { selected: current_spree_user.personalization_settings.body_shape_id }, class: 'selectbox', data: {required: true}

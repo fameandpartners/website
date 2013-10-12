@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010103630) do
+ActiveRecord::Schema.define(:version => 20131011142152) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -253,6 +253,7 @@ ActiveRecord::Schema.define(:version => 20131010103630) do
     t.string   "customization_value_ids"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+    t.string   "color"
   end
 
   create_table "payment_requests", :force => true do |t|

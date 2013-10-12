@@ -965,6 +965,10 @@
         height: 66px;
         margin: 12px 6px 0 0;
         border: 4px solid #fff;
+
+        input[type=radio] {
+          display: none;
+        }
       }
     }
     .dress-fabric {

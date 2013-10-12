@@ -11,7 +11,8 @@ class LineItemPersonalization < ActiveRecord::Base
   attr_accessible :body_shape_id,
                   :customization_value_ids,
                   :height,
-                  :size
+                  :size,
+                  :color
 
   validates :body_shape_id,
             presence: true,
@@ -33,6 +34,13 @@ class LineItemPersonalization < ActiveRecord::Base
             inclusion: {
               allow_blank: true,
               in: PersonalizationSettings::SIZES
+            }
+
+  validates :color,
+            presence: true,
+            format: {
+              allow_blank: true,
+              with: /^#(?:[0-9a-fA-F]{3}){1,2}$/
             }
 
   validate do

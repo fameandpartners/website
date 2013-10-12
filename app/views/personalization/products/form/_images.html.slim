@@ -1,7 +1,7 @@
 .tab-title = type.presentation
-.colors.neckline-select
+.neckline-select
   - values.each do |value|
     label.neckline
       = image_tag value.image.url, width: 78, height: 94, alt: value.presentation, title: value.presentation
-      = radio_button_tag "line_item_personalization[customization_value_ids][#{type.id}][]", value.id
+      = radio_button_tag "line_item_personalization[customization_value_ids][#{type.id}][]", value.id, @personalization.customization_value_ids.include?(value.id), data: {required: true}
       .aligncenter #{value.presentation}
