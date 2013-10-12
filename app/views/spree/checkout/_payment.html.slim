@@ -17,7 +17,7 @@
   .grid-container.border
     = render :partial => "spree/checkout/payment/paypal"
 
-- unless sale_active?
+- unless (sale_active? or current_order.has_personalized_items?)
   .coupon-block.border
     .grid-container
       = form_for @order, url: update_checkout_path('payment'),remote: true do |f|

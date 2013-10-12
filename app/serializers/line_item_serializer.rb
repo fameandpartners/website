@@ -17,6 +17,8 @@ class LineItemSerializer < ActiveModel::Serializer
     :product_color,
     :product_size
 
+  has_one :personalization
+
   def price
     object.price.to_s
   end

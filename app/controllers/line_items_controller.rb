@@ -28,6 +28,8 @@ class LineItemsController < Spree::StoreController
     if @personalization.present? && @line_item.present?
       @personalization.line_item = @line_item
       @personalization.save
+      current_order.update!
+      current_order.reload
     end
 
     respond_with @line_item do |format|

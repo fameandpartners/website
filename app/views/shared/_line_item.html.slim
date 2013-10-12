@@ -10,7 +10,8 @@ li.item-block
     .price
       = price_for_line_item(line_item)
     .name = link_to product.name, collection_product_path(product), target: 'blank'
-    .custom-label Custom dress
+    - if line_item.personalization.present?
+      .custom-label Custom dress
     .desc = product_short_description(product)
     ul.specs
       li

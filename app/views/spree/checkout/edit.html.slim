@@ -19,7 +19,7 @@
               span Checkout
           .help-info
             .need-help Need help? Call us 1300 924 860 or email #{mail_to("team@fameandpartners.com", "team@fameandpartners.com", subject:"Help from the Checkout Page")}
-            - unless sale_active?
+            - unless (sale_active? or current_order.has_personalized_items?)
               .promocode-help
                 b Got a promocode or coupon?
                 span

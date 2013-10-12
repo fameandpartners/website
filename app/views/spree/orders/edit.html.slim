@@ -72,7 +72,7 @@
               .column.grid-45
                 .title Payment methods
                 .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
-              - unless sale_active?
+              - unless (sale_active? or @order.has_personalized_items?)
                 .column.grid-30
                   .title Promocode
                   .desc
