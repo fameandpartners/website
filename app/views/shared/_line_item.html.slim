@@ -7,8 +7,10 @@ li.item-block
     - unless hide_remove
       = link_to 'Remove', '#', class: 'remove-item-from-cart', data: { id: variant.id }
   .item-info
-    .price = price_for_line_item(line_item)
+    .price
+      = price_for_line_item(line_item)
     .name = link_to product.name, collection_product_path(product), target: 'blank'
+    .custom-label Custom dress
     .desc = product_short_description(product)
     ul.specs
       li
