@@ -4,3 +4,4 @@
     label.neckline
       = image_tag value.image.url, width: 78, height: 94, alt: value.presentation, title: value.presentation
       = radio_button_tag "line_item_personalization[customization_value_ids][#{type.id}][]", value.id
+      .aligncenter #{value.presentation}
