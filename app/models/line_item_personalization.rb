@@ -1,4 +1,5 @@
 class LineItemPersonalization < ActiveRecord::Base
+  COLORS = %w( #ED0234 #E3D0C5 #15558B #FF3B9D #FF8434 #FFE100 #269C36 #FFC598 #D0D1CC )
   default_value_for :customization_value_ids, []
 
   serialize :customization_value_ids, Array
@@ -63,6 +64,10 @@ class LineItemPersonalization < ActiveRecord::Base
         errors.add(:base, 'Invalid customisation options selected')
       end
     end
+  end
+
+  def color_picker?
+    !COLORS.include?(color)
   end
 
   def customization_values

@@ -1,12 +1,6 @@
 ruby:
   product_customization_types = @product.product_customisation_types.includes(:customisation_type, :customisation_values).with_values
-- if @personalization.persisted?
-  javascript:
-    $('.buy-personalized').val('Added to Cart');
-    setTimeout(function(){ $('.buy-personalized').val('Add customized dress to bag') }, 3000);
-  ruby:
-    @personalization = LineItemPersonalization.new
-= form_for @personalization, url: line_items_path, remote: true do |f|
+= form_for @personalization, url: line_items_path, method: :post, remote: true do |f|
   = hidden_field_tag :variant_id, @product.master.id
   .add-to-bag
     = f.submit 'Add customized dress to bag', class: 'btn buy-personalized'

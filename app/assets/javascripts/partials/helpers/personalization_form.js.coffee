@@ -3,6 +3,14 @@ window.helpers or= {}
 window.helpers.addPersonalizationFormHandlers = (form) ->
   $form = $(form)
 
+  color_picker_handler = () ->
+    if $('.colorpicker :radio').is(':checked')
+      $('.colors').hide()
+      $('.color-picker').show()
+    else
+      $('.colors').show()
+      $('.color-picker').hide()
+
   is_required_presence = (scope) ->
     $scope = $(scope)
 
@@ -35,6 +43,7 @@ window.helpers.addPersonalizationFormHandlers = (form) ->
 
   $form.find(':checkbox, :radio').change (event) ->
     highlighter($(event.target).parents('.tab-content'))
+    color_picker_handler()
 
   $form.find(':input').change (event) ->
     tick_marker($(event.target).parents('.tab-content'))
@@ -43,5 +52,14 @@ window.helpers.addPersonalizationFormHandlers = (form) ->
     highlighter(item)
     tick_marker(item)
 
+  color_picker_handler()
+
   $form.find('a:not(:has(.done))').first().click()
 
+  $('.color-picker-block').minicolors
+    inline: true,
+    control: 'wheel',
+    change: (hex, opacity) ->
+      $('.colorpicker :radio').val(hex)
+      $('.color-picker-container .input input').val(hex)
+      $('.color-picker-container .input input').css('background-color', hex);

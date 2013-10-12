@@ -19,10 +19,11 @@
       = f.radio_button :color, '#FFC598', data: {required: true}
     label.color.silver
       = f.radio_button :color, '#D0D1CC', data: {required: true}
-    /.color.colorpicker
-  /.text-center
-  /  .color-picker-container
-  /    .color-picker-block put colorpicker here
-  /    .form
-  /      .input
-  /        input type="text" name="color" placeholer="Color value"
+    label.color.colorpicker
+      = f.radio_button :color, f.object.color_picker? ? f.object.color : '', data: {required: true}
+  .color-picker.text-center.hide
+    .color-picker-container
+      input.color-picker-block type="hidden" value="#{f.object.color}"
+      .form
+        .input
+          input type="text" name="color" value="#{f.object.color}" style="background-color: #{f.object.color}"

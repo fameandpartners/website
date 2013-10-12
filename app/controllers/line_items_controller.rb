@@ -26,6 +26,7 @@ class LineItemsController < Spree::StoreController
     @line_item = current_order.line_items.find_by_variant_id(params[:variant_id])
 
     if @personalization.present? && @line_item.present?
+      @line_item.personalization.try(:destroy)
       @personalization.line_item = @line_item
       @personalization.save
       current_order.update!
