@@ -52,13 +52,13 @@
                     .line
                       .label Size
                       .value = line_item.personalization.size
-                    .line
+                    /.line
                       .label Height
                       .value = line_item.personalization.height
-                    .line
+                    /.line
                       .label Body Shape
                       .value = line_item.personalization.body_shape
-                    - line_item.personalization.customization_values.each do |value|
+                    /- line_item.personalization.customization_values.each do |value|
                       .line
                         .label = value.customisation_type.presentation
                         .value = value.presentation
@@ -70,7 +70,14 @@
                     .value 7-10 days
                     /.value = variant.count_on_hand.to_i != 0 ? '1-2 weeks' : '3-4 weeks'
                     - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
-                    .edit = link_to 'Edit item', '#', class: 'edit-link', data: link_data
+                    .edit
+                      - unless line_item.personalization.present?
+                        = link_to 'Edit item', '#', class: 'edit-link', data: link_data
+                      - else
+                        = link_to 'Edit item', personalization_product_path(product)
+                  .clearfix
+                .clearfix
+              .clearfix
             .grid-20.price
               .pricing
                 = current_order.currency
