@@ -14,11 +14,20 @@ class LineItemsController < Spree::StoreController
       @personalization.product = @product
     end
 
-    if (@personalization.blank? || @personalization.valid?) && populator.populate(variants: { params[:variant_id] => quantity })
+    if @personalization.blank? && populator.populate(variants: { params[:variant_id] => quantity })
       fire_event('spree.cart.add')
       fire_event('spree.order.contents_changed')
 
       current_order.reload
+    elsif @personalization.valid?
+      unless current_order.line_items.find_by_variant_id(params[:variant_id]).present?
+        if populator.populate(variants: { params[:variant_id] => quantity })
+          fire_event('spree.cart.add')
+          fire_event('spree.order.contents_changed')
+
+          current_order.reload
+        end
+      end
     end
 
     Activity.log_product_added_to_cart(@product, temporary_user_key, try_spree_current_user, current_order) rescue nil
