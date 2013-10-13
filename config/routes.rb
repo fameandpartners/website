@@ -15,6 +15,18 @@ FameAndPartners::Application.routes.draw do
     get '/account_settings' => 'spree/user_registrations#edit'
   end
 
+  # Custom Dresses part II
+  scope '/custom-dresses', module: 'personalization' do
+    get '/', to: 'base#authenticate', as: :personalization
+
+    get '/my-settings', to: 'settings#edit', as: :edit_personalization_settings
+    put '/my-settings', to: 'settings#update', as: :update_personalization_settings
+
+    get '/browse', to: 'products#index', as: :personalization_products
+    get '/:permalink', to: 'products#show', as: :personalization_product
+  end
+
+
   resources :line_items, only: [:create, :edit, :update, :destroy] do
     post 'move_to_wishlist', on: :member
   end
@@ -109,8 +121,8 @@ FameAndPartners::Application.routes.draw do
   get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
   post '/campaigns/dolly' => 'campaigns#dolly', as: :dolly_campaign
 
-  get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
-  post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+  #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
+  #post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
 
   get '/fame-chain' => 'fame_chains#new'
   resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
@@ -127,17 +139,6 @@ FameAndPartners::Application.routes.draw do
 
   # MonkeyPatch for redirecting to Custom Dress page
   get '/fb_auth' => 'pages#fb_auth'
-
-  resources :custom_dresses, :only => [:create, :update] do
-    collection do
-      get :step1
-    end
-    member do
-      get :step2
-      put :success
-    end
-    resources :custom_dress_images, :only => [:create]
-  end
 
   root :to => 'index#show'
 

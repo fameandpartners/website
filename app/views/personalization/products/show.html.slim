@@ -1,0 +1,120 @@
+javascript:
+  window.product_variants = #{{ @product_variants.to_json }};
+  window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
+  window.productImagesData = #{{@product.images_json.to_json}};
+
+ruby:
+ sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+ colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+ color_images  = @product_variants.inject({}){|res, t| res[t[:color].to_s] = t[:image].to_s; res }
+ enabled_tabs = ['photos']
+ enabled_tabs.push('inspiration') if @product.celebrity_inspiration
+ enabled_tabs.push('video') if @product.video_url.present?
+
+.wrap
+  .product-page.grid-container
+
+    .grid-55
+      .tabs
+        ul.tabs-links
+          li.active = link_to 'Photos', '#photos'
+          - if enabled_tabs.include?('video')
+            li = link_to 'Video', '#videos'
+          - if enabled_tabs.include?('inspiration')
+            li = link_to 'Celebrity Inspiration', '#inspiration'
+        #photos.tab-content
+          .tab-content-inner
+            .photos-carousel
+              #product-images-up.arrow-up
+              ul#product-images.carousel-pictures
+
+              #product-images-down.arrow-down
+            .big-photo
+              .zoom
+                = link_to 'Zoom', '#'
+              = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
+        - if enabled_tabs.include?('video')
+          #videos.tab-content style="display: none;"
+            == product_video(@product)
+            .initials = image_tag 'video-initials.png', width: 420, height: 54, alt: ''
+
+        - if enabled_tabs.include?('inspiration')
+          - celebrity = @product.celebrity_inspiration
+          #inspiration.tab-content style="display: none;"
+            .tab-content-inner
+              .big-photo
+                = image_tag celebrity.photo.url(:preview), width: 418, height: 600, alt: ''
+              .inspiration
+                .desc = celebrity.celebrity_description
+                .name = celebrity.celebrity_name
+
+        .share-buttons
+          .fleft = share_buttons(@product)
+      .notice
+        .colour
+          ' Want a different colour?
+          = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour."
+        .faster
+          ' Need this faster?
+          = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
+      .free-styling-tips
+        ' Free styling tips
+        span with every dress
+    .grid-45
+      .product-info
+        .name = @product.name
+        .price-delivery
+          .price.sale
+            = price_for_product(@product)
+          /.delivery 3-4 week delivery
+          .delivery 7-10 days delivery
+        .customize-block
+          .desc == @product.description
+          .title Customise this dress
+          .desc Its easy to customise this dress for your perfect formal event. Start by selecting customisations below.
+        #personalization
+          = render 'form'
+        .product-features
+          .feature
+            = link_to why_us_path+"#shipping" do
+              i.icon.icon-shipping
+              .text
+                ' Free
+                br
+                ' Shipping
+          .feature
+            = link_to why_us_path+"#returns" do
+              i.icon.icon-returns
+              .text
+                ' Free
+                br
+                ' Returns
+          .feature
+            = link_to why_us_path+"#fit" do
+              i.icon.icon-dress
+              .text
+                ' Fit
+                br
+                ' Guarantee
+          - unless @product.in_sale?
+            .feature
+              = link_to why_us_path+"#customisation" do
+                i.icon.icon-customization
+                .text
+                  ' Free
+                  br
+                  ' Customisation
+          .feature
+            = link_to why_us_path+"#advice" do
+              i.icon.icon-pencil
+              .text
+                ' Free styling
+                br
+                ' advice
+        .twin-alert-block.clearfix
+        - if @activities.present?
+          .activities.clearfix
+            .activities-title Recent Activity
+            ul
+              - @activities.each do |activity|
+                li class=(activity.action) = activity_description(activity, try_spree_current_user)

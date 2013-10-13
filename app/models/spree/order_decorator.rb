@@ -23,6 +23,10 @@ Spree::Order.class_eval do
     sale_shipping_method.present? && shipments.exists?(shipping_method_id: sale_shipping_method.id)
   end
 
+  def has_personalized_items?
+    line_items.map(&:personalization).any?(&:present?)
+  end
+
   def update!
     if sale_shipping_method.present? && ((shipping_method.nil? && Spree::Sale.first.try(:active?)) || has_sale_shipping?)
       update_totals

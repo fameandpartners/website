@@ -36,13 +36,32 @@
             .grid-30.details
               .static-dynamic-block
                 .static
-                  .line
-                    .label Color
-                    .value
-                      .color{class=variant.dress_color.try(:name)}
-                  .line
-                    .label Size
-                    .value = variant.dress_size.try(:name)
+                  - unless line_item.personalization.present?
+                    .line
+                      .label Color
+                      .value
+                        .color{class=variant.dress_color.try(:name)}
+                    .line
+                      .label Size
+                      .value = variant.dress_size.try(:name)
+                  - else
+                    .line
+                      .label Color
+                      .value
+                        .color style="background-color: #{line_item.personalization.color};"
+                    .line
+                      .label Size
+                      .value = line_item.personalization.size
+                    /.line
+                      .label Height
+                      .value = line_item.personalization.height
+                    /.line
+                      .label Body Shape
+                      .value = line_item.personalization.body_shape
+                    /- line_item.personalization.customization_values.each do |value|
+                      .line
+                        .label = value.customisation_type.presentation
+                        .value = value.presentation
                   .line
                     .label Quantity
                     .value = line_item.quantity
@@ -51,7 +70,14 @@
                     .value 7-10 days
                     /.value = variant.count_on_hand.to_i != 0 ? '1-2 weeks' : '3-4 weeks'
                     - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
-                    .edit = link_to 'Edit item', '#', class: 'edit-link', data: link_data
+                    .edit
+                      - unless line_item.personalization.present?
+                        = link_to 'Edit item', '#', class: 'edit-link', data: link_data
+                      - else
+                        = link_to 'Edit item', personalization_product_path(product)
+                  .clearfix
+                .clearfix
+              .clearfix
             .grid-20.price
               .pricing
                 = current_order.currency
@@ -72,7 +98,7 @@
               .column.grid-45
                 .title Payment methods
                 .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
-              - unless sale_active?
+              - unless (sale_active? or @order.has_personalized_items?)
                 .column.grid-30
                   .title Promocode
                   .desc

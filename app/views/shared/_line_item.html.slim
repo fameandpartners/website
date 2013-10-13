@@ -1,24 +1,48 @@
-- variant = line_item.variant
-- product = variant.product
-- hide_remove ||= false
+ruby:
+  variant = line_item.variant
+  product = variant.product
+  hide_remove ||= false
+  show_customizations ||= false
 li.item-block
   .thumbnail
     = link_to small_image(product, itemprop: "image", width: 83, height: 115, alt: product.name), collection_product_path(product)
     - unless hide_remove
       = link_to 'Remove', '#', class: 'remove-item-from-cart', data: { id: variant.id }
   .item-info
-    .price = price_for_line_item(line_item)
+    .price
+      = price_for_line_item(line_item)
     .name = link_to product.name, collection_product_path(product), target: 'blank'
+    - if line_item.personalization.present?
+      .custom-label Custom dress
     .desc = product_short_description(product)
     ul.specs
-      li
-        .label Color
-        .value
-          - color = variant.dress_color
-          .color{class=color.try(:name)}
-      li
-        .label Size
-        .value = variant.dress_size.try(:presentation)
+      - if show_customizations && line_item.personalization.present?
+        li
+          .label Color
+          .value
+            .color style="background-color: #{line_item.personalization.color};"
+        li
+          .label Size
+          .value = line_item.personalization.size
+        li
+          .label Height
+          .value = line_item.personalization.height
+        li
+          .label Body Shape
+          .value = line_item.personalization.body_shape
+        - line_item.personalization.customization_values.each do |value|
+          li
+            .label = value.customisation_type.presentation
+            .value = value.presentation
+      - else
+        li
+          .label Color
+          .value
+            - color = variant.dress_color
+            .color{class=color.try(:name)}
+        li
+          .label Size
+          .value = variant.dress_size.try(:presentation)
       li
         .label Quantity
         .value = line_item.quantity

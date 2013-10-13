@@ -5,6 +5,12 @@ Spree::Variant.class_eval do
     current_sale.active?
   end
 
+  def options_hash
+    values = self.option_values.joins(:option_type).order("#{Spree::OptionType.table_name}.position asc")
+
+    Hash[*values.map{ |ov| [ov.option_type.presentation, ov.presentation] }]
+  end
+
   private
 
   def current_sale

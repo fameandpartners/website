@@ -7,6 +7,8 @@ Spree::User.class_eval do
 
   has_many :reservations, class_name: 'ProductReservation', foreign_key: :user_id
 
+  has_one :personalization_settings
+
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
 

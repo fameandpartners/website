@@ -43,7 +43,6 @@ $(".products.show").ready ->
 
   initProductImagesCarousel()
 
-
   # enable color-size combination selection
   if window.product_variants
     variantsSelector = window.helpers.createProductVariantsSelector($('#content .wrap'))
@@ -70,6 +69,8 @@ $(".products.show").ready ->
   )
 
   window.helpers.addCustomizationButtonHandlers($('#customize-dress-button'))
+
+  window.helpers.addPersonalizationFormHandlers($('#personalization')) if $('#personalization').size() isnt 0
 
   window.helpers.initProductReserver(
     $('.twin-alert a.twin-alert-link'),

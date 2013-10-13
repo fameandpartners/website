@@ -73,6 +73,8 @@
   &.nude { background:#E7D0A6; }
   &.cream { background:#EBE5CD; }
 
+  &.colorpicker { background: image-url('colours/colorpicker.png') center center no-repeat; }
+
   &.active {
     cursor: default;
     background-image: image-url('icon-color-tick.png');
@@ -87,7 +89,7 @@
   background: white;
   border: 1px solid #ccc;
   position: absolute;
-  // display: none;
+  display: none; // need this. otherwise it will be shown in the footer
   opacity: 0;
   z-index: 9999;
   padding: 2px;

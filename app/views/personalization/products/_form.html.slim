@@ -1,0 +1,27 @@
+ruby:
+  product_customization_types = @product.product_customisation_types.includes(:customisation_type, :customisation_values).with_values
+= form_for @personalization, url: line_items_path, method: :post, remote: true do |f|
+  = hidden_field_tag :variant_id, @product.master.id
+  .add-to-bag
+    = f.submit 'Add customized dress to bag', class: 'btn buy-personalized'
+  = render :partial => 'shared/error_messages', :locals => { :target => @personalization }
+  .tabs
+    ul.tabs-links.custom-sizes
+      li
+        = link_to '#customize-body-sizes' do
+          ' 1
+      li
+        = link_to '#customize-color' do
+          ' 2
+      - product_customization_types.each_with_index do |relation, index|
+        li = link_to index + 3, "#customize-#{relation.customisation_type.name}"
+    = render 'personalization/products/form/body_sizes', f: f
+    = render 'personalization/products/form/colors', f: f
+    - product_customization_types.each do |relation|
+      .tab-content id="customize-#{relation.customisation_type.name}" class="#{relation.customisation_type.name.downcase.dasherize}"
+        = render 'personalization/products/form/images', type: relation.customisation_type, values: relation.customisation_values
+        /.tabs-arrows
+        /  = link_to '#', class: 'arrow arrow-prev' do
+        /    i.icon.icon-arrow-left
+        /  = link_to '#', class: 'arrow arrow-next' do
+        /    i.icon.icon-arrow-right

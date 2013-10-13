@@ -276,4 +276,20 @@
     left: 0;
     background: #efefef;
   }
+} 
+
+.newsletter-field{
+  display: block;
+  font: 300 14px/14px $fontOne;
+  margin: 30px 0 0 0;
+  
+  input{
+    margin-top: -1px;
+  }
+  
+  .pitch{
+    display: none;
+    margin: 2px 0 0 18px;
+    font: 400 italic 14px/1.1 $fontFour;
+  }
 }

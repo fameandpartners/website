@@ -10,9 +10,12 @@ Spree::Product.class_eval do
     foreign_key: :product_id
 
   has_many :product_customisation_types
-  has_many :customisation_types, through: :product_customisation_types
-  has_many :product_customisation_values, through: :product_customisation_types
-  has_many :product_color_values, dependent: :destroy
+  has_many :customisation_types,
+           through: :product_customisation_types
+  has_many :product_customisation_values,
+           through: :product_customisation_types
+  has_many :product_color_values,
+           dependent: :destroy
 
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(

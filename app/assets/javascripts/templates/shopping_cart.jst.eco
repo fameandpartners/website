@@ -27,6 +27,9 @@
               <div class="name">
                 <a href="/products/<%= line_item.product_permalink %>" target="blank"><%= line_item.product_name %></a>
               </div>
+              <% if (!_.isNull(line_item.personalization)) : %>
+                <div class="custom-label">Custom dress</div>
+              <% end %>
               <ul class="specs">
                 <li>
                   <div class="label">Color</div>
