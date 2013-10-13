@@ -65,11 +65,11 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def customization_values
-    CustomisationValue.find(customization_value_ids)
+    CustomisationValue.includes(:customisation_type).find(customization_value_ids)
   end
 
   def customization_types
-    CustomisationType.find(customization_values.map(&:customisation_type_id)).uniq
+    customization_values.map(&:customisation_type).uniq
   end
 
   def customization_value_ids=(hash)
@@ -88,7 +88,7 @@ class LineItemPersonalization < ActiveRecord::Base
     values['Color'] = color if color.present?
 
 
-    CustomisationValue.includes(:customisation_type).find(customization_value_ids).each do |value|
+    customization_values.each do |value|
       values[value.customisation_type.presentation] = value.presentation
     end
 

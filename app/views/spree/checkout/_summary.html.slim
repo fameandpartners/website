@@ -6,7 +6,7 @@
       = render partial: "shared/line_item", \
         collection: @order.line_items, \
         as: :line_item, \
-        locals: {hide_remove: true}
+        locals: {hide_remove: true, show_customizations: true}
 
   ul.pricing
     li

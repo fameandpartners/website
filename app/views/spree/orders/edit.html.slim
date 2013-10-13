@@ -36,13 +36,32 @@
             .grid-30.details
               .static-dynamic-block
                 .static
-                  .line
-                    .label Color
-                    .value
-                      .color{class=variant.dress_color.try(:name)}
-                  .line
-                    .label Size
-                    .value = variant.dress_size.try(:name)
+                  - unless line_item.personalization.present?
+                    .line
+                      .label Color
+                      .value
+                        .color{class=variant.dress_color.try(:name)}
+                    .line
+                      .label Size
+                      .value = variant.dress_size.try(:name)
+                  - else
+                    .line
+                      .label Color
+                      .value
+                        .color style="background-color: #{line_item.personalization.color};"
+                    .line
+                      .label Size
+                      .value = line_item.personalization.size
+                    .line
+                      .label Height
+                      .value = line_item.personalization.height
+                    .line
+                      .label Body Shape
+                      .value = line_item.personalization.body_shape
+                    - line_item.personalization.customization_values.each do |value|
+                      .line
+                        .label = value.customisation_type.presentation
+                        .value = value.presentation
                   .line
                     .label Quantity
                     .value = line_item.quantity

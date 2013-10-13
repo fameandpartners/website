@@ -18,7 +18,7 @@ ruby:
     = render 'personalization/products/form/body_sizes', f: f
     = render 'personalization/products/form/colors', f: f
     - product_customization_types.each do |relation|
-      .tab-content.dress-fabric id="customize-#{relation.customisation_type.name}"
+      .tab-content id="customize-#{relation.customisation_type.name}" class="#{relation.customisation_type.name.downcase.dasherize}"
         = render 'personalization/products/form/images', type: relation.customisation_type, values: relation.customisation_values
         /.tabs-arrows
         /  = link_to '#', class: 'arrow arrow-prev' do
