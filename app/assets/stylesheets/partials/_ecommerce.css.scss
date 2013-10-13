@@ -1032,14 +1032,16 @@
     }
     .neckline-select {
       .neckline {
-        border: 3px solid transparent;
         margin: 12px 6px 0 0;
         display: inline-block;
         img {
           display: block;
+          border: 3px solid transparent;
         }
         &.active {
-          border-color: #ffab98;
+          img {
+            border-color: #ffab98;
+          }
         }
         input[type=radio] {
           display: none;
