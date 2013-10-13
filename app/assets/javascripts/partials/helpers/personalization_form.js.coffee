@@ -14,13 +14,16 @@ window.helpers.addPersonalizationFormHandlers = (form) ->
   is_required_presence = (scope) ->
     $scope = $(scope)
 
-    names = _.map($scope.find(':input[data-required="true"]'), (item) -> $(item).attr('name'))
+    names = _.uniq(_.map($scope.find(':input[data-required="true"]'), (item) -> $(item).attr('name')))
 
     _.all names, (name) ->
       $item = $(':input[name="' + name + '"]')
 
       if $item.is(':radio')
-        _.any($item, (item) -> $(item).is(':checked'))
+        if _.any($item, (item) -> $(item).is(':checked'))
+          $item.filter(':checked').val() isnt ''
+        else
+          false
       else
         $item.val() != ''
 
@@ -61,5 +64,15 @@ window.helpers.addPersonalizationFormHandlers = (form) ->
     control: 'wheel',
     change: (hex, opacity) ->
       $('.colorpicker :radio').val(hex)
+      $('.colorpicker').css({'background-color': hex})
+      $('.colorpicker :radio').change()
       $('.color-picker-container .input input').val(hex)
       $('.color-picker-container .input input').css('background-color', hex);
+
+  $('.color-picker .back-to-list').click (event) ->
+    event.preventDefault()
+    $('.color-picker').hide()
+    $('.colors').show()
+
+  $('.colorpicker').click (event) ->
+    color_picker_handler()

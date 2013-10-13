@@ -20,13 +20,13 @@
     label.color.silver
       = f.radio_button :color, '#D0D1CC', data: {required: true}
     label.color.colorpicker
-      = f.radio_button :color, f.object.color_picker? ? f.object.color : '', data: {required: true}
+      = f.radio_button :color, f.object.color_picker? ? f.object.color : '', data: {required: true}, checked: f.object.color_picker?
   .color-picker.text-center.hide
     .color-picker-container
       input.color-picker-block type="hidden" value="#{f.object.color}"
       .form
         .input
           input type="text" name="color" value="#{f.object.color}" style="background-color: #{f.object.color}"
-        /.submit
-          = link_to '#', class: 'choose-color' do
+        .submit
+          = link_to '#', class: 'choose-color back-to-list' do
             i.icon.icon-tickmark

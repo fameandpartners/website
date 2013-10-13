@@ -2,9 +2,11 @@ $form = '<%=j render('personalization/products/form') %>';
 $('#personalization').html($form);
 window.helpers.enableTabs($('#personalization .tabs'));
 $('#personalization .tabs').find('.selectbox').chosen();
-window.helpers.addPersonalizationFormHandlers($('#personalization'))
+window.helpers.addPersonalizationFormHandlers($('#personalization'));
+
 <% if @personalization.persisted? %>
   $('.buy-personalized').val('Added to Cart');
   setTimeout(function(){ $('.buy-personalized').val('Add customized dress to bag') }, 3000);
-  window.shopping_cart.buildOnSuccessCallback(['item_added'], <%= params[:variant_id] %>, null)(<%= CartSerializer.new(current_order).to_json %>);
+  window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily);
+  window.shopping_cart.buildOnSuccessCallback(['item_added'], <%= params[:variant_id] %>, null)('<%=raw j( { order: CartSerializer.new(current_order).to_json }.to_json )%>');
 <% end %>

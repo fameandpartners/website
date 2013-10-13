@@ -45,12 +45,6 @@ class LineItemPersonalization < ActiveRecord::Base
             }
 
   validate do
-    unless customization_value_ids.present?
-      errors.add(:base, 'Please select some customisations.')
-    end
-  end
-
-  validate do
     if product.present? && customization_value_ids.present?
       unless customization_value_ids.all?{ |id| product.product_customisation_values.map(&:customisation_value_id).include?(id) }
         errors.add(:base, 'Some customisation options can not be selected')
@@ -60,14 +54,14 @@ class LineItemPersonalization < ActiveRecord::Base
 
   validate do
     if product.present? && customization_value_ids.present?
-      unless customization_types.count.eql?(product.product_customisation_types.with_values.count)
+      unless customization_values.count.eql?(customization_types.count)
         errors.add(:base, 'Invalid customisation options selected')
       end
     end
   end
 
   def color_picker?
-    !COLORS.include?(color)
+    color.present? && !COLORS.include?(color)
   end
 
   def customization_values
@@ -80,5 +74,24 @@ class LineItemPersonalization < ActiveRecord::Base
 
   def customization_value_ids=(hash)
     super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
+  end
+
+  def body_shape
+    PersonalizationSettings::BODY_SHAPES[body_shape_id].titleize if body_shape_id.present?
+  end
+
+  def options_hash
+    values = {}
+    values['Size'] = size
+    values['Height'] = height
+    values['Body Shape'] = body_shape
+    values['Color'] = color if color.present?
+
+
+    CustomisationValue.includes(:customisation_type).find(customization_value_ids).each do |value|
+      values[value.customisation_type.presentation] = value.presentation
+    end
+
+    values
   end
 end
