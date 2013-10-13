@@ -1105,11 +1105,30 @@
     border-left: 1px solid #e0e0e0;
     border-top: 1px solid #e0e0e0;
     .item {
+      position: relative;
       border-bottom: 1px solid #e0e0e0;
       .grid-50, .grid-30, .grid-20 {
         background: #fff;
-        height: 236px;
-        border-right: 1px solid #e0e0e0;
+        &:before {
+          content: '';
+          position: absolute;
+          left: 548px;
+          top: 0;
+          bottom: 0;
+          width: 1px;
+          background: #e0e0e0;
+        }
+      }
+      .grid-30 {
+        &:before {
+          left: 876px;
+        }
+      }
+      .grid-20 {
+        &:before {
+          left: auto;
+          right: 0;
+        }
       }
       .image {
         float: left;
