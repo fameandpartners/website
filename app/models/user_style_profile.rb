@@ -96,6 +96,14 @@ class UserStyleProfile < ActiveRecord::Base
     @percents
   end
 
+  def size_as_integer
+    typical_size.gsub('G', '').to_i
+  end
+
+  def body_shape_id
+    BODY_SHAPES.index(body_shape)
+  end
+
   def brassiere_size
     BRA_SIZES.include?(bra_size) ? "bra_#{bra_size.downcase}" : nil
   end
