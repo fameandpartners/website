@@ -1060,6 +1060,10 @@
           width: 25%;
           margin: 0;
           text-align: center;
+          img {
+            display: inline;
+            padding: 6px;
+          }
         }
       }
     }
