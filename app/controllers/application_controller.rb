@@ -100,18 +100,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_up_reason_for_campaign_monitor
-    if session[:sign_up_reason]
-      case session[:sign_up_reason]
-        when 'custom_dress' then
-          'Custom dress'
-        when 'style_quiz' then
-          'Style quiz'
-        when 'workshop' then
-          'Workshop'
-        when 'competition' then
-          'Competition'
-      end
-    end
+    Spree::User.campaign_monitor_sign_up_reason(session['sign_up_reason'])
   end
 
   def current_spree_user

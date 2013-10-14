@@ -1,7 +1,5 @@
 module Personalization
   class ProductsController < BaseController
-    before_filter :check_presence_of_settings
-
     respond_to :html
 
     require 'spree/products_helper'
@@ -30,12 +28,6 @@ module Personalization
     end
 
     private
-
-    def check_presence_of_settings
-      unless current_spree_user.personalization_settings.present?
-        redirect_to edit_personalization_settings_path
-      end
-    end
 
     def colors
       @colors ||= Products::ColorsSearcher.new(@products.to_a).retrieve_colors

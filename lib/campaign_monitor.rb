@@ -5,7 +5,7 @@ class CampaignMonitor
     attributes = {}
 
     if user.present?
-      attributes.merge(user.attributes.slice('full_name', 'email').symbolize_keys)
+      attributes.merge!(user.attributes.slice('full_name', 'email').symbolize_keys)
     else
       attributes[:email] = email
       attributes[:full_name] = ''

@@ -1,5 +1,3 @@
-= render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user }
-
 .wrap.devise-forms
   .fleft
     h1 Create an Account
@@ -9,6 +7,7 @@
       span or
     .default-form
       = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, params.slice(:cl)) do |f|
+        = render 'shared/error_messages', :target => @spree_user
         = render :partial => 'spree/shared/user_form', :locals => { :f => f }
     .terms
       ' By clicking above you acknowledge and accept our Terms of Service.

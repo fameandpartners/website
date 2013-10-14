@@ -5,7 +5,7 @@ Spree::UserRegistrationsController.class_eval do
     elsif params[:quiz]
       session[:show_quiz] = true
     elsif params[:personalization]
-      session['personalization'] = true
+      session[:personalization] = true
     end
 
     if session[:sign_up_reason].blank?
@@ -15,6 +15,8 @@ Spree::UserRegistrationsController.class_eval do
         session[:sign_up_reason] = 'style_quiz'
       elsif params[:workshop]
         session[:sign_up_reason] = 'workshop'
+      elsif params[:personalization]
+        session[:sign_up_reason] = 'customise_dress'
       end
     elsif params[:workshop]
       session[:sign_up_reason] = 'workshop'
@@ -40,8 +42,8 @@ Spree::UserRegistrationsController.class_eval do
       session[:spree_user_signup] = true
       associate_user
 
-      if session.delete('personalization')
-        redirect_to main_app.personalization_path
+      if session.delete(:personalization)
+        redirect_to main_app.personalization_products_path(cf: 'custom-dresses-signup')
       else
         redirect_to main_app.root_path({ci: 'signup'}.merge(params.slice(:cl)))
       end
