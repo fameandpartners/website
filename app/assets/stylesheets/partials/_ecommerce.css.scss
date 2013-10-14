@@ -1207,13 +1207,7 @@
       .details {
         background: #fdfdfd;
         .static-dynamic-block {
-          height: 170px;
           position: relative;
-        }
-        .static, .dynamic {
-          position: absolute;
-          top: 0;
-          left: 0;
         }
         .dynamic {
           display: none;
@@ -1258,7 +1252,7 @@
           }
         }
         .edit {
-          margin: 23px 0 0;
+          margin: 23px 0 17px;
           a {
             display: inline-block;
             font: 300 14px/36px $fontThree;
