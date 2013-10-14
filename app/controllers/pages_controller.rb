@@ -40,7 +40,7 @@ class PagesController < Spree::StoreController
       session[:invite] = params[:invite]
       session[:competition] = params[:competition]
     elsif params[:personalization]
-      session[:spree_user_return_to] = main_app.personalization_path
+      session[:spree_user_return_to] = main_app.personalization_products_path(cf: 'custom-dresses-signup')
     end
 
     if session[:sign_up_reason].blank?
