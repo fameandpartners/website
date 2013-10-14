@@ -97,11 +97,11 @@ class UserStyleProfile < ActiveRecord::Base
   end
 
   def size_as_integer
-    typical_size.gsub('G', '').to_i
+    typical_size.present? ? typical_size.gsub('G', '').to_i : nil
   end
 
   def body_shape_id
-    BODY_SHAPES.index(body_shape)
+    body_shape.present? ? BODY_SHAPES.index(body_shape) : nil
   end
 
   def brassiere_size
