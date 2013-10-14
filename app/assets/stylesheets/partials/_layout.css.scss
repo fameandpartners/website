@@ -3,6 +3,15 @@
   overflow: hidden;
 }
 
+.m-pixel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .index.show, .checkout.edit, .checkout.guest {
   background: image-url('bg-main.jpg') 0 0 repeat;
   header {

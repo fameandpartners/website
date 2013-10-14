@@ -11,6 +11,9 @@ ruby:
  enabled_tabs.push('inspiration') if @product.celebrity_inspiration
  enabled_tabs.push('video') if @product.video_url.present?
 
+.m-pixel
+  img src="http://tags.rtbidder.net/track?sid=525646ee8bc06f1060d9f3a7" width="0" height="0" border="0" alt=""
+
 .wrap
   .product-page.grid-container
 
@@ -50,16 +53,6 @@ ruby:
 
         .share-buttons
           .fleft = share_buttons(@product)
-      .notice
-        .colour
-          ' Want a different colour?
-          = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour."
-        .faster
-          ' Need this faster?
-          = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
-      .free-styling-tips
-        ' Free styling tips
-        span with every dress
     .grid-45
       .product-info
         .name = @product.name
@@ -71,7 +64,7 @@ ruby:
         .customize-block
           .desc == @product.description
           .title Customise this dress
-          .desc Its easy to customise this dress for your perfect formal event. Start by selecting customisations below.
+          .desc Its easy to customise this dress for your perfect formal event. Start by selecting customisations below. Start with Colour.
         #personalization
           = render 'form'
         .product-features
@@ -111,10 +104,3 @@ ruby:
                 ' Free styling
                 br
                 ' advice
-        .twin-alert-block.clearfix
-        - if @activities.present?
-          .activities.clearfix
-            .activities-title Recent Activity
-            ul
-              - @activities.each do |activity|
-                li class=(activity.action) = activity_description(activity, try_spree_current_user)

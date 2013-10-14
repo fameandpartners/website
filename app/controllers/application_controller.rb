@@ -100,18 +100,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_up_reason_for_campaign_monitor
-    if session[:sign_up_reason]
-      case session[:sign_up_reason]
-        when 'custom_dress' then
-          'Custom dress'
-        when 'style_quiz' then
-          'Style quiz'
-        when 'workshop' then
-          'Workshop'
-        when 'competition' then
-          'Competition'
-      end
-    end
+    Spree::User.campaign_monitor_sign_up_reason(session['sign_up_reason'])
   end
 
   def current_spree_user
@@ -163,11 +152,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :custom_dresses_path
 
-  def set_product_show_page_title(product)
+  def set_product_show_page_title(product, info = "")
     range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
 
     if range_taxonomy.present? && range_taxon = @product.taxons.where(taxonomy_id: range_taxonomy.id).first
-      prefix = "#{@product.name} in #{range_taxon.name}"
+      prefix = " #{info} #{@product.name} in #{range_taxon.name}"
       self.title = [prefix, default_seo_title].join(' - ')
       description([prefix, default_meta_description].join(' - '))
     end

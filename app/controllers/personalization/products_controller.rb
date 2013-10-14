@@ -1,7 +1,5 @@
 module Personalization
   class ProductsController < BaseController
-    before_filter :check_presence_of_settings
-
     respond_to :html
 
     require 'spree/products_helper'
@@ -14,7 +12,7 @@ module Personalization
     def show
       @product = Spree::Product.active(current_currency).find_by_permalink!(params[:permalink])
 
-      set_product_show_page_title(@product)
+      set_product_show_page_title(@product, "Custom Formal Dress ")
       @product_properties = @product.product_properties.includes(:property)
 
       @similar_products = Products::SimilarProducts.new(@product).fetch(4)
@@ -30,12 +28,6 @@ module Personalization
     end
 
     private
-
-    def check_presence_of_settings
-      unless current_spree_user.personalization_settings.present?
-        redirect_to edit_personalization_settings_path
-      end
-    end
 
     def colors
       @colors ||= Products::ColorsSearcher.new(@products.to_a).retrieve_colors

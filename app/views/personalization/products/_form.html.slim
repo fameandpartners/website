@@ -9,17 +9,17 @@ ruby:
     ul.tabs-links.custom-sizes
       li
         = link_to '#customize-body-sizes' do
-          ' 1
+          ' Size
       li
         = link_to '#customize-color' do
-          ' 2
+          ' Colour
       - product_customization_types.each_with_index do |relation, index|
-        li = link_to index + 3, "#customize-#{relation.customisation_type.name}"
+        li = link_to relation.customisation_type.name, "#customize-#{relation.customisation_type.name}"
     = render 'personalization/products/form/body_sizes', f: f
     = render 'personalization/products/form/colors', f: f
     - product_customization_types.each do |relation|
       .tab-content id="customize-#{relation.customisation_type.name}" class="#{relation.customisation_type.name.downcase.dasherize}"
-        = render 'personalization/products/form/images', type: relation.customisation_type, values: relation.customisation_values
+        = render 'personalization/products/form/images', type: relation.customisation_type, values: relation.customisation_values.order('position ASC')
         /.tabs-arrows
         /  = link_to '#', class: 'arrow arrow-prev' do
         /    i.icon.icon-arrow-left

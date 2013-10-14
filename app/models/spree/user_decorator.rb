@@ -105,7 +105,11 @@ Spree::User.class_eval do
   private
 
   def campaign_monitor_sign_up_reason
-    case sign_up_reason
+    self.class.campaign_monitor_sign_up_reason(sign_up_reason)
+  end
+
+  def self.campaign_monitor_sign_up_reason(code)
+    case code
       when 'custom_dress' then
         'Custom dress'
       when 'style_quiz' then
@@ -116,6 +120,8 @@ Spree::User.class_eval do
         'Competition'
       when 'campaign_style_call' then
         'Campaign Style Call'
+      when 'customise_dress' then
+        'Customise dress'
       else
         nil
     end
