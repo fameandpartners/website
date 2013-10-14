@@ -873,22 +873,23 @@
         }
         .done {
           position: absolute;
-          top: -6px;
-          right: -2px;
-          width: 26px;
-          height: 26px;
+          top: -8px;
+          right: -6px;
+          width: 22px;
+          height: 22px;
           background: #fe9f91;
           border-radius: 50%;
-          line-height: 30px;
+          line-height: 24px;
           text-align: center;
+          z-index: 100;
           .icon {
             color: #fff;
-            font-size: 18px;
+            font-size: 14px;
           }
         }
         &.custom-sizes {
           li a {
-            width: 26px;
+            width: auto;
             text-align: center;
           }
         }
@@ -904,6 +905,10 @@
         }
         .tab-title {
           text-transform: uppercase;
+        }
+        .tab-subtitle{
+          font-style: italic;
+          font-size: 14px;
         }
       }
       .tabs-arrows {
@@ -1034,6 +1039,7 @@
       .neckline {
         margin: 12px 6px 0 0;
         display: inline-block;
+        font-size: 11px;
         img {
           display: block;
           border: 3px solid transparent;

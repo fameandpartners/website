@@ -14,7 +14,7 @@ module Personalization
     def show
       @product = Spree::Product.active(current_currency).find_by_permalink!(params[:permalink])
 
-      set_product_show_page_title(@product)
+      set_product_show_page_title(@product, "Custom Formal Dress ")
       @product_properties = @product.product_properties.includes(:property)
 
       @similar_products = Products::SimilarProducts.new(@product).fetch(4)

@@ -1,20 +1,21 @@
 #customize-color.tab-content.dress-color
-  .tab-title Color
+  .tab-title Colour
+  .tab-subtitle Choose a colour from this list or select a colour from the colour picker (the rainbow colour at the end).
   .colors
+    label.color.black
+      = f.radio_button :color, '#000000', data: {required: true}
     label.color.red
       = f.radio_button :color, '#ED0234', data: {required: true}
-    label.color.linen
-      = f.radio_button :color, '#E3D0C5', data: {required: true}
     label.color.blue
       = f.radio_button :color, '#15558B', data: {required: true}
+    label.color.green
+      = f.radio_button :color, '#269C36', data: {required: true}
+    label.color.yellow
+      = f.radio_button :color, '#FFE100', data: {required: true}
     label.color.pink
       = f.radio_button :color, '#FF3B9D', data: {required: true}
     label.color.orange
       = f.radio_button :color, '#FF8434', data: {required: true}
-    label.color.yellow
-      = f.radio_button :color, '#FFE100', data: {required: true}
-    label.color.green
-      = f.radio_button :color, '#269C36', data: {required: true}
     label.color.peach
       = f.radio_button :color, '#FFC598', data: {required: true}
     label.color.silver
