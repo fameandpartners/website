@@ -10,12 +10,15 @@ module Personalization
     end
 
     def show
+      unless spree_user_signed_in?
+        return redirect_to personalization_path
+      end
+      
       @product = Spree::Product.active(current_currency).find_by_permalink!(params[:permalink])
 
       set_product_show_page_title(@product, "Custom Formal Dress ")
       @product_properties = @product.product_properties.includes(:property)
 
-      @similar_products = Products::SimilarProducts.new(@product).fetch(4)
       @product_variants = Products::VariantsReceiver.new(@product).available_options
 
       if line_item = current_order.find_line_item_by_variant(@product.master)

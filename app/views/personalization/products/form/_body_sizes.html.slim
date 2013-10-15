@@ -5,9 +5,5 @@
       = f.label :size, 'Size'
       = f.select :size, PersonalizationSettings::SIZES, {selected: current_spree_user.style_profile.try(:size_as_integer)}, class: 'selectbox', data: {required: true}
     .input
-      = f.label :height, 'Height'
-      .hint cm.
-      = f.text_field :height, data: {required: true}
-    .input
       = f.label :body_shape_id, 'Body shape:'
       = f.select :body_shape_id, PersonalizationSettings.body_shapes_for_select, { selected: current_spree_user.style_profile.try(:body_shape_id )}, class: 'selectbox', data: {required: true}

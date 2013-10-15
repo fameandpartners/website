@@ -854,15 +854,22 @@
     .customize-block {
       margin: 0 0 30px;
       .title {
-        font: 400 22px/1.1 $fontFive;
+        font: 400 32px/1.1 $fontFive;
         color: #000;
         text-transform: uppercase;
         margin: 50px 0 4px;
       }
-      .desc {
-        font: 300 normal 14px/1.3 $fontOne;
+      .prod-desc {
+        font: 300 normal 13px/1.3 $fontOne;
         margin: 0 0 30px 0;
         color: #333;
+      }
+      .desc {
+        font: 300 normal 18px/1.2 $fontTwo;
+        margin: 0 0 30px 0;
+        color: #333;
+        font-style: italic;
+        width: 80%;
       }
     }
     .tabs {
@@ -2526,6 +2533,9 @@
 }
 
 #personalization {
+  .buy-personalized{
+    margin: 0 0 20px !important;
+  }
   .tab-content {
     min-height: 116px;
   }

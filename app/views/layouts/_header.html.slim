@@ -97,6 +97,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                             .range-image
                               = image_tag "dropdown/#{taxon.name.downcase.gsub(/\s+/, "")}.jpg", width: 150, height: 150, alt: taxon.name
                             = taxon.name
+            li = link_to 'Custom Dresses', custom_dresses_path, title: "Fame & Partners Custom Dresses", class: 'inverse'
             - if spree_user_signed_in? && current_spree_user.style_profile.present?
               li *{:class => request_path?("#{my_boutique_path}") && 'active' }
                 = link_to 'Personalised Boutique', my_boutique_path
@@ -104,7 +105,6 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
               li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
             li *{:class => request_path?("#{how_it_works_path}") && 'active' }
               = link_to 'About us', about_us_path, title: "About Fame & Partners"
-            li = link_to 'Custom Dresses', custom_dresses_path, title: "Fame & Partners Custom Dresses" 
             li = link_to 'Why Shop With Us?', why_us_path, title: "Fame & Partners Why shop with us?" 
             li = link_to 'Blog', blog_url, title: "Fame & Partners Blog", target: "_blank"
             - unless spree_user_signed_in? && current_spree_user.style_profile.present?
