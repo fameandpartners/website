@@ -3,5 +3,5 @@
   - values.each do |value|
     label.neckline
       = image_tag value.image.url, alt: value.presentation, title: value.presentation
-      = radio_button_tag "line_item_personalization[customization_value_ids][#{type.id}][]", value.id, @personalization.customization_value_ids.include?(value.id), data: {required: true}
+      = radio_button_tag "line_item_personalization[customization_value_ids][#{type.id}][]", value.id, @personalization.customization_value_ids.include?(value.id), data: {required: true}, class: value.name.parameterize
       .aligncenter #{value.presentation}

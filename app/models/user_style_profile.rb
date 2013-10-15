@@ -7,7 +7,7 @@ class UserStyleProfile < ActiveRecord::Base
   HAIR_COLOURS = %w( black brunette auburn blonde platinum_blonde strawberry_blonde red coloured )
   SKIN_COLOURS = %w( fair medium_fair medium medium_dark dark )
   BODY_SHAPES = %w( apple pear athletic strawberry hour_glass column petite )
-  TYPICAL_SIZES = %w( G4 G6 G8 G10 G12 G14 G16 )
+  TYPICAL_SIZES = %w( G4 G6 G8 G10 G12 G14 G16 G18 G20 )
   BRA_SIZES = %w( AAA AA A B C D E FPP )
 
   default_values :glam  => 0.0,

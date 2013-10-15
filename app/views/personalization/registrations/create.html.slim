@@ -1,0 +1,28 @@
+.m-pixel
+  img src="http://tags.rtbidder.net/track?sid=525646ee8bc06f1060d9f3a7" width="0" height="0" border="0" alt=""
+
+.custom-dresses
+  #custom-dresses.custom-dresses-signup
+    .wrap
+      .center-form.alignleft
+        h1.black.gothic Create the perfect dress
+        .subtitle Jump into our easy to use customisation service to create your perfect dress.
+        .signup-buttons
+          = link_to 'Signup with facebook', fb_auth_path(personalization: 'true'), class: 'facebook-signup'
+          .devise-forms
+            .or
+              span or
+          = link_to 'Sign up using your email address', spree.signup_path(personalization: 'true'), class: 'regular-signup'
+          .form
+            = render 'form'
+        .how-it-works How it works
+        .steps = image_tag 'custom-dresses/steps.png', width: 473, height: 292, alt: ''
+        .view-all
+          div
+            = link_to 'View the collection of dress styles.', personalization_products_path
+          div Then sign up to start customising.
+
+javascript:
+  $(function(){
+    $('.toggle-sizes').fancybox({width: '1000', height: '183'})
+  });

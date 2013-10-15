@@ -1,5 +1,7 @@
 module Personalization
   class ProductsController < BaseController
+    skip_before_filter :authenticate_spree_user!, only: [:index]
+
     respond_to :html
 
     require 'spree/products_helper'
