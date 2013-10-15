@@ -95,37 +95,38 @@ ruby:
                 ' Free Customization
           = add_to_wishlist_link(@product)
         .tabs
-          ul.tabs-links
-            li.active = link_to 'Description', '#description'
-            - if @product.property('fit').present? or (@product.style_profile.present? and @product.style_profile.suitable_shapes.present?)
-              li = link_to 'Size and fit', '#sizes'
-            li = link_to 'Details', '#details'
-            li = link_to 'Styling Notes', '#notes'
-          #description.tab-content
-            - if (description = product_description(@product)).present?
-              = description
-            - else
-              = t('product_has_no_description')
-          #sizes.tab-content
-            = @product.property('fit')
-            - if @product.style_profile and !@product.style_profile.suitable_shapes.empty?
-              .body-shapes
-                .desc The body shapes that this dress suits:
+          - cache ['product_page', @product.id, 'info_tabs'], expires_in: configatron.cache.expire.normally do
+            ul.tabs-links
+              li.active = link_to 'Description', '#description'
+              - if @product.property('fit').present? or (@product.style_profile.present? and @product.style_profile.suitable_shapes.present?)
+                li = link_to 'Size and fit', '#sizes'
+              li = link_to 'Details', '#details'
+              li = link_to 'Styling Notes', '#notes'
+            #description.tab-content
+              - if (description = product_description(@product)).present?
+                = description
+              - else
+                = t('product_has_no_description')
+            #sizes.tab-content
+              = @product.property('fit')
+              - if @product.style_profile and !@product.style_profile.suitable_shapes.empty?
+                .body-shapes
+                  .desc The body shapes that this dress suits:
 
-                ul
-                  - @product.style_profile.suitable_shapes.each do |shape|
-                    li
-                      = link_to spree.products_path(bodyshape: shape) do
-                        - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
-                        .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
-                        .name #{title}
-          #details.tab-content
-            .info SKU: #{@product.sku}
-            ' Material:
-            = @product.property('fabric')
-          - if @product.property('style_notes').present?
-            #notes.tab-content
-              = @product.property('style_notes')
+                  ul
+                    - @product.style_profile.suitable_shapes.each do |shape|
+                      li
+                        = link_to spree.products_path(bodyshape: shape) do
+                          - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
+                          .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
+                          .name #{title}
+            #details.tab-content
+              .info SKU: #{@product.sku}
+              ' Material:
+              = @product.property('fabric')
+            - if @product.property('style_notes').present?
+              #notes.tab-content
+                = @product.property('style_notes')
         .product-features
           .feature
             = link_to why_us_path+"#shipping" do

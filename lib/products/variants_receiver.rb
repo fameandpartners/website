@@ -11,7 +11,7 @@ module Products
       size_option   = Spree::OptionType.where(name: 'dress-size').first
 
       available_options = []
-      Spree::Variant.active.where(is_master: false, product_id: @product_id).each do |variant|
+      Spree::Variant.active.where(is_master: false, product_id: @product_id).includes(:option_values).each do |variant|
         available_option = { id: variant.id }
         variant.option_values.each do |option_value|
           if option_value.option_type_id == color_option.id
