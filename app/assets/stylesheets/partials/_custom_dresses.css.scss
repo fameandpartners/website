@@ -1,4 +1,4 @@
-.ecommerce.settings {
+.ecommerce.settings, .ecommerce.authenticate {
   #wrap {
     margin: 0;
   }
@@ -10,13 +10,79 @@
   .center-form {
     margin-top: 150px;
     width: 600px;
+    h1 {
+      text-align: left !important;
+      padding: 0 !important;
+      &:before {
+        display: none !important;
+      }
+    }
+    .subtitle {
+      font: 400 italic 22px/1.2 $fontFour !important;
+      margin: 16px 0 !important;
+      text-align: left !important;
+    }
   }
   .signup-buttons {
     margin: 30px 0 0;
-    .or {
-      font-style: italic;
-      margin: 6px 0 4px;
+    position: relative;
+    z-index: 1;
+    .facebook-signup {
+      margin: 0;
     }
+    .or {
+      width: 85px;
+      margin: 6px 0 12px;
+      span {
+        background: #d4d6d9 !important;
+      }
+      &:before {
+        background: #ababac !important;
+      }
+    }
+  }
+  .form {
+    width: 500px;
+    .fields-group {
+      .input {
+        width: 240px;
+        input {
+          height: 32px;
+          line-height: 32px;
+        }
+      }
+    }
+    .inline-block {
+      display: inline-block;
+    }
+    .chzn-container {
+      min-width: 60px;
+    }
+    .hint {
+      display: inline-block;
+      margin-top: 10px;
+      margin-left: 6px;
+    }
+    .submit {
+      margin: 30px 0 10px;
+      input {
+        width: 100%;
+      }
+    }
+    .call-to-action {
+      text-align: center;
+      font: 400 italic 16px/1.2 $fontFour;
+    }
+  }
+  .how-it-works {
+    font: 400 48px/1.1 $fontFive;
+    color: #ff958b;
+    text-transform: uppercase;
+    margin: 52px 0 30px;
+  }
+  .view-all {
+    margin: 20px 0 0;
+    font: 400 14px/1.4 $fontOne;
   }
 }
 
