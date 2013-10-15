@@ -17,10 +17,8 @@ FameAndPartners::Application.routes.draw do
 
   # Custom Dresses part II
   scope '/custom-dresses', module: 'personalization' do
-    get '/', to: 'base#authenticate', as: :personalization
-
-    get '/my-settings', to: 'settings#edit', as: :edit_personalization_settings
-    put '/my-settings', to: 'settings#update', as: :update_personalization_settings
+    get '/', to: 'registrations#new', as: :personalization
+    post '/', to: 'registrations#create'
 
     get '/browse', to: 'products#index', as: :personalization_products
     get '/:permalink', to: 'products#show', as: :personalization_product
