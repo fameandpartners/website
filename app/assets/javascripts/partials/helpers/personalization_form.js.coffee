@@ -21,7 +21,7 @@ window.helpers.addPersonalizationFormHandlers = (form) ->
 
       if $item.is(':radio')
         if _.any($item, (item) -> $(item).is(':checked'))
-          $item.filter(':checked').val() isnt ''
+          $item.filter(':checked').val() isnt '' && $item.filter(':checked').is(':not(.default)')
         else
           false
       else
@@ -44,6 +44,13 @@ window.helpers.addPersonalizationFormHandlers = (form) ->
     $scope.find('label:not(:has(:input:checked))').removeClass('active')
     $scope.find('label:has(:input:checked)').addClass('active')
 
+  defaulter = (scope) ->
+    $scope = $(scope)
+    return unless $scope.has(':radio')
+
+    unless $scope.is(':has(:radio:checked)')
+      $scope.find(':radio.default').click()
+
   $form.find(':checkbox, :radio').change (event) ->
     highlighter($(event.target).parents('.tab-content'))
     color_picker_handler()
@@ -54,6 +61,7 @@ window.helpers.addPersonalizationFormHandlers = (form) ->
   $form.find('.tab-content').each (index, item)->
     highlighter(item)
     tick_marker(item)
+    defaulter(item)
 
   color_picker_handler()
 
