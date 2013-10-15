@@ -5,10 +5,13 @@
   .wrap
     h1.gothic.black.small Choose a dress to customise
     .subtitle Create your perfect dress by selecting a base design below. Then go ahead and start customising.
-    .subtitle
-      ' or
-      = link_to 'Edit my settings', edit_personalization_settings_path
 
     ul.products-list.grid-container
       - @products.each do |product|
         = render 'personalization/products/product', product: product
+
+- if params[:cf] == 'custom-dresses-signup'
+  javascript:
+    $(function(){
+      track.conversion('customisation_sign_up')
+    })

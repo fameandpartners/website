@@ -15,21 +15,6 @@ class LineItemPersonalization < ActiveRecord::Base
                   :size,
                   :color
 
-  validates :body_shape_id,
-            presence: true,
-            inclusion: {
-              allow_blank: true,
-              in: 0...PersonalizationSettings::BODY_SHAPES.size
-            }
-
-  validates :height,
-            presence: true,
-            numericality: {
-              allow_blank: true,
-              only_integer: true,
-              greater_than_or_equal_to: 1
-            }
-
   validates :size,
             presence: true,
             inclusion: {

@@ -280,6 +280,12 @@ header {
           display: block;
           padding: 0 24px;
         }
+        .inverse{
+
+          &:hover{
+
+          }
+        } 
         .dropdown-menu-wrapper {
           display: none;
           top: 0;
