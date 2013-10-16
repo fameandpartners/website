@@ -1,3 +1,9 @@
+#registrations{
+  #wrap{
+    margin-bottom: 0px !important;
+  }
+}
+
 .ecommerce.settings, .ecommerce.authenticate {
   #wrap {
     margin: 0;
@@ -5,11 +11,12 @@
 }
 
 .custom-dresses-signup {
-  height: 1134px;
-  background: image-url('custom-dresses/bg-signup.jpg') right center no-repeat #d4d6d9;
+  min-height: 1120px;
+  background: image-url('custom-dresses/bgblue.jpg') right top no-repeat #EFF0F2;
   .center-form {
-    margin-top: 150px;
+    margin-top: 80px;
     width: 600px;
+    padding-bottom: 60px;
     h1 {
       text-align: left !important;
       padding: 0 !important;
@@ -34,7 +41,7 @@
       width: 85px;
       margin: 6px 0 12px;
       span {
-        background: #d4d6d9 !important;
+        background: #EFF0F2 !important;
       }
       &:before {
         background: #ababac !important;
@@ -56,7 +63,7 @@
       display: inline-block;
     }
     .chzn-container {
-      min-width: 60px;
+      min-width: 180px;
     }
     .hint {
       display: inline-block;
