@@ -9,8 +9,7 @@ class LineItemPersonalization < ActiveRecord::Base
   belongs_to :line_item,
              class_name: 'Spree::LineItem'
 
-  attr_accessible :body_shape_id,
-                  :customization_value_ids,
+  attr_accessible :customization_value_ids,
                   :height,
                   :size,
                   :color
@@ -19,7 +18,7 @@ class LineItemPersonalization < ActiveRecord::Base
             presence: true,
             inclusion: {
               allow_blank: true,
-              in: PersonalizationSettings::SIZES
+              in: [4, 6, 8, 10, 12, 14, 16, 18, 20]
             }
 
   validates :color,
@@ -61,15 +60,9 @@ class LineItemPersonalization < ActiveRecord::Base
     super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
   end
 
-  def body_shape
-    PersonalizationSettings::BODY_SHAPES[body_shape_id].titleize if body_shape_id.present?
-  end
-
   def options_hash
     values = {}
     values['Size'] = size
-    values['Height'] = height
-    values['Body Shape'] = body_shape
     values['Color'] = color if color.present?
 
 
