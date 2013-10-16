@@ -16,10 +16,10 @@
       = f.phone_field :phone, placeholder: 'Enter your phone number'
   .input
     = f.fields_for :style_profile do |ff|
-      = ff.label :typical_size, 'Size'
+      = ff.label :typical_size, 'Dress Size'
       div
         .inline-block
-          = ff.select :typical_size, UserStyleProfile::TYPICAL_SIZES.map{|i| [i.gsub('G', ''), i]}, {selected: @user.style_profile.try(:typical_size)}, class: 'selectbox'
+          = ff.select :typical_size, UserStyleProfile::TYPICAL_SIZES.map{|i| [i.gsub('G', ''), i]}, {selected: @user.style_profile.try(:typical_size), prompt: "Select Your Dress Size"}, class: 'selectbox'
         .hint = link_to 'What size am I?', '#what-size', class: 'toggle-sizes'
   .submit
     = f.submit 'Create your perfect dress now'

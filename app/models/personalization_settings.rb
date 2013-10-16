@@ -1,6 +1,6 @@
 class PersonalizationSettings < ActiveRecord::Base
   BODY_SHAPES = %w( apple pear athletic strawberry hour_glass column petite )
-  SIZES = [6, 8, 10, 12, 14, 16, 18, 20]
+  SIZES = [6, 8, 10, 12, 14, 16]
 
   belongs_to :user,
              class_name: 'Spree::User'
