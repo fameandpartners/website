@@ -964,6 +964,12 @@
           }
           .chzn-container {
             min-width: 190px;
+          }
+          .hint {
+            display: inline-block;
+            margin: 0 0 0 10px;
+          }
+          &.colors-select .chzn-container {
             li {
               width: 14px;
               padding: 0;
@@ -981,10 +987,6 @@
                 background-repeat: no-repeat;
               }
             }
-          }
-          .hint {
-            display: inline-block;
-            margin: 0 0 0 10px;
           }
         }
         .separate {
