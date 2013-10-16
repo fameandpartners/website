@@ -52,9 +52,6 @@
                     .line
                       .label Size
                       .value = line_item.personalization.size
-                    .line
-                      .label Body Shape
-                      .value = line_item.personalization.body_shape
                     - line_item.personalization.customization_values.each do |value|
                       .line
                         .label = value.customisation_type.presentation

@@ -87,9 +87,31 @@ Spree::Product.class_eval do
 
   def colors
     if option_type = option_types.find_by_name('dress-color')
-      variants.map do |variant|
-        variant.option_values.where(:option_type_id => option_type.id).map(&:name)
-      end.flatten.uniq
+      option_type.
+        option_values.
+        joins(:variants).
+        where(spree_variants: {id: product.variant_ids}).uniq.map(&:name)
+    else
+      []
+    end
+  end
+
+  def basic_colors
+    if option_type = option_types.find_by_name('dress-color')
+      option_type.
+        option_values.
+        joins(:variants).
+        where(spree_variants: {id: variant_ids}).uniq
+    else
+      []
+    end
+  end
+
+  def custom_colors
+    if option_type = option_types.find_by_name('dress-color')
+      option_type.
+        option_values.
+        where('spree_option_values.id NOT IN (?)', basic_colors.map(&:id)).uniq
     else
       []
     end

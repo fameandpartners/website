@@ -1,6 +1,0 @@
-#customize-body-sizes.tab-content.body-sizes
-  .tab-title Body / size
-  .form
-    .input
-      = f.label :size, 'Size'
-      = f.select :size, UserStyleProfile::TYPICAL_SIZES.map{|i| [i.gsub('G', ''), i]}, {selected: current_spree_user.style_profile.try(:size_as_integer)}, class: 'selectbox', data: {required: true}
