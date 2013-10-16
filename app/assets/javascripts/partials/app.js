@@ -134,3 +134,15 @@ $('.ecommerce').ready(function(){
     if (window.shoppingBag) window.shoppingBag.hide();
   });
 });
+
+$(document).ready(function() {
+  if ($(".modal.newsletter-modal.hide").length > 0){
+    var popup = new window.popups.newsletterModalPopup();
+    popup.initialize($(".modal.newsletter-modal.hide").first());
+    popup.show();
+
+    window.newsletterModalPopup = popup;
+
+    return popup;
+  };
+});

@@ -50,4 +50,12 @@ class CampaignsController < ApplicationController
       CampaignMonitor.delay.synchronize(@participation.email, nil, Signupreason: 'Dolly campaign')
     end
   end
+
+  def newsletter
+    @participation = Participation.new(params[:participation])
+
+    if @participation.valid?
+      CampaignMonitor.delay.synchronize(@participation.email, nil, Signupreason: 'Newsletter Modal')
+    end
+  end
 end
