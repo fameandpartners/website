@@ -11,7 +11,7 @@ window.popups.newsletterModalPopup = class newsletterModalPopup
     @updatePosition()
 
     @scope.find('.close-lightbox').bind 'click', () =>
-      $.cookie('newsletter_mp', 'hide')
+      $.cookie('newsletter_mp', 'hide', { expires: 365 })
       @hide()
 
     @scope.find('.overlay').bind 'click', @hide
