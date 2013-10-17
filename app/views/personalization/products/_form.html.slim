@@ -8,15 +8,11 @@ ruby:
   .tabs
     ul.tabs-links.custom-sizes
       li
-        = link_to '#customize-body-sizes' do
-          ' Size
-      li
-        = link_to '#customize-color' do
-          ' Colour
+        = link_to '#customize-basics' do
+          ' Basic
       - product_customization_types.each_with_index do |relation, index|
-        li = link_to relation.customisation_type.name, "#customize-#{relation.customisation_type.name}"
-    = render 'personalization/products/form/body_sizes', f: f
-    = render 'personalization/products/form/colors', f: f
+        li = link_to relation.customisation_type.presentation, "#customize-#{relation.customisation_type.name}"
+    = render 'personalization/products/form/basics', form: f
     - product_customization_types.each do |relation|
       .tab-content id="customize-#{relation.customisation_type.name}" class="#{relation.customisation_type.name.parameterize}"
         = render 'personalization/products/form/images', type: relation.customisation_type, values: relation.customisation_values.order('position ASC')

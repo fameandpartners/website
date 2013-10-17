@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011142152) do
+ActiveRecord::Schema.define(:version => 20131016150103) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -248,12 +248,11 @@ ActiveRecord::Schema.define(:version => 20131011142152) do
     t.integer  "line_item_id"
     t.integer  "product_id"
     t.integer  "size"
-    t.integer  "height"
-    t.integer  "body_shape_id"
     t.string   "customization_value_ids"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.string   "color"
+    t.integer  "color_id"
   end
 
   create_table "payment_requests", :force => true do |t|
@@ -264,15 +263,6 @@ ActiveRecord::Schema.define(:version => 20131011142152) do
     t.string   "token"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
-  end
-
-  create_table "personalization_settings", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "size"
-    t.integer  "height"
-    t.integer  "body_shape_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
   end
 
   create_table "product_color_values", :force => true do |t|

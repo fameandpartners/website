@@ -1,5 +1,4 @@
 class LineItemPersonalization < ActiveRecord::Base
-  COLORS = %w( #ED0234 #E3D0C5 #15558B #FF3B9D #FF8434 #FFE100 #269C36 #FFC598 #D0D1CC )
   default_value_for :customization_value_ids, []
 
   serialize :customization_value_ids, Array
@@ -8,26 +7,23 @@ class LineItemPersonalization < ActiveRecord::Base
              class_name: 'Spree::Product'
   belongs_to :line_item,
              class_name: 'Spree::LineItem'
+  belongs_to :color,
+             class_name: 'Spree::OptionValue'
 
-  attr_accessible :body_shape_id,
-                  :customization_value_ids,
+  attr_accessible :customization_value_ids,
                   :height,
                   :size,
-                  :color
+                  :color_id
 
   validates :size,
             presence: true,
             inclusion: {
               allow_blank: true,
-              in: PersonalizationSettings::SIZES
+              in: [4, 6, 8, 10, 12, 14, 16, 18, 20]
             }
 
   validates :color,
-            presence: true,
-            format: {
-              allow_blank: true,
-              with: /^#(?:[0-9a-fA-F]{3}){1,2}$/
-            }
+            presence: true
 
   validate do
     if product.present? && customization_value_ids.present?
@@ -42,6 +38,16 @@ class LineItemPersonalization < ActiveRecord::Base
       unless customization_values.count.eql?(customization_types.count)
         errors.add(:base, 'Invalid customisation options selected')
       end
+    end
+  end
+
+  def color
+    if attributes['color'].present?
+      attributes['color']
+    elsif super.present?
+      super.presentation
+    else
+      nil
     end
   end
 
@@ -61,15 +67,9 @@ class LineItemPersonalization < ActiveRecord::Base
     super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
   end
 
-  def body_shape
-    PersonalizationSettings::BODY_SHAPES[body_shape_id].titleize if body_shape_id.present?
-  end
-
   def options_hash
     values = {}
     values['Size'] = size
-    values['Height'] = height
-    values['Body Shape'] = body_shape
     values['Color'] = color if color.present?
 
 
