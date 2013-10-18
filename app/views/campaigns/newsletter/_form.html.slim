@@ -1,0 +1,10 @@
+.price-tag
+.title-join Join the party!
+.campaign-desc Sign up for exclusive updates, competitions, events, new arrivals and more...
+
+.form
+  = form_for (@participation || Participation.new), as: :participation, url: newsletter_campaign_path, remote: true do |f|
+    .input.string
+      = f.email_field :email, class: 'inputbox', placeholder: 'Enter your email'
+    .submit-form
+      input.submitbox type="submit" value="Join"

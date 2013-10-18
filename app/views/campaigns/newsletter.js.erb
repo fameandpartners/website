@@ -1,0 +1,8 @@
+$scope = window.newsletterModalPopup.scope.find('.modal-form');
+
+<% if @participation.valid? %>
+  $.cookie('newsletter_mp', 'hide', { expires: 365 });
+  $scope.html('<%=j render('campaigns/newsletter/thanks') %>');
+<% else %>
+  $scope.html('<%=j render('campaigns/newsletter/form') %>');
+<% end %>

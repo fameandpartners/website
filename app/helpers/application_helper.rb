@@ -149,6 +149,12 @@ module ApplicationHelper
     end
   end
 
+  def newsletter_modal_popup
+    if !spree_user_signed_in? && cookies[:newsletter_mp] != 'hide'
+      render 'shared/newsletter_modal_popup'
+    end
+  end
+
   def paypal_payment_method
     @paypal_payment_method ||= Spree::PaymentMethod.where(
       type: "Spree::Gateway::PayPalExpress",
