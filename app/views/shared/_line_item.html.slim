@@ -24,9 +24,6 @@ li.item-block
         li
           .label Size
           .value = line_item.personalization.size
-        li
-          .label Body Shape
-          .value = line_item.personalization.body_shape
         - line_item.personalization.customization_values.each do |value|
           li
             .label = value.customisation_type.presentation
