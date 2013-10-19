@@ -42,8 +42,10 @@ class UserStyleProfile < ActiveRecord::Base
   end
 
   validate do
-    unless attributes.slice(*BASIC_STYLES).values.sum.round(2).eql?(10.0)
-      errors.add(:base, :"points_number.invalid")
+    unless attributes.slice(*BASIC_STYLES).values.all?(&:zero?)
+      unless attributes.slice(*BASIC_STYLES).values.sum.round(2).eql?(10.0)
+        errors.add(:base, :"points_number.invalid")
+      end
     end
   end
 
@@ -55,28 +57,32 @@ class UserStyleProfile < ActiveRecord::Base
 
   validates :hair_colour,
             :inclusion => {
-              :in => HAIR_COLOURS
+              allow_blank: true,
+              in: HAIR_COLOURS
             }
 
   validates :skin_colour,
             :inclusion => {
-              :in => SKIN_COLOURS
+              allow_blank: true,
+              in: SKIN_COLOURS
             }
 
   validates :body_shape,
             :inclusion => {
-              :in => BODY_SHAPES
+              allow_blank: true,
+              in: BODY_SHAPES
             }
 
   validates :typical_size,
             :inclusion => {
-              :in => TYPICAL_SIZES
+              allow_blank: true,
+              in: TYPICAL_SIZES
             }
 
   validates :bra_size,
             :inclusion => {
-              :allow_blank => true,
-              :in => proc{ BRA_SIZES + %w(IT_IS_SECRET) }
+              allow_blank: true,
+              in: proc{ BRA_SIZES + %w(IT_IS_SECRET) }
             }
 
   def percentage

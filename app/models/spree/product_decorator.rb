@@ -90,7 +90,7 @@ Spree::Product.class_eval do
       option_type.
         option_values.
         joins(:variants).
-        where(spree_variants: {id: product.variant_ids}).uniq.map(&:name)
+        where(spree_variants: {id: variant_ids}).uniq.map(&:name)
     else
       []
     end
