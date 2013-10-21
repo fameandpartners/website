@@ -141,7 +141,7 @@ $(document).ready(function() {
     popup.initialize($(".modal.campaign-newsletter.hide").first());
     
     
-    if (document.URL == 'http://localhost:3000/' && $.cookie('newsletter_mp') != 'hide'){
+    if (document.URL == 'http://www.fameandpartners.com/' && $.cookie('newsletter_mp') != 'hide'){
       
       popup.show();
 
