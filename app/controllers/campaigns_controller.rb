@@ -21,7 +21,7 @@ class CampaignsController < ApplicationController
     else
       if @just_registered
         sign_in(:spree_user, @user)
-        Spree::UserMailer.welcome_with_password(@user).deliver
+        Spree::UserMailer.style_call_welcome(@user).deliver
       end
       Spree::AdminMailer.stylist_consultation_requested(@user).deliver
       session['just_registered'] = @just_registered
