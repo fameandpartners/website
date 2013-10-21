@@ -57,6 +57,8 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
                 session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
               elsif sign_up_reason.eql?('competition')
                 session[:spree_user_return_to] = main_app.share_competition_path
+              elsif sign_up_reason.eql?('customise_dress')
+                session[:spree_user_return_to] = main_app.personalization_products_path(cf: 'custom-dresses-signup')
               end
 
               redirect_to after_sign_in_path_for(user)
