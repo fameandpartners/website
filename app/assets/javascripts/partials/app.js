@@ -139,10 +139,15 @@ $(document).ready(function() {
   if ($(".modal.campaign-newsletter.hide").length > 0){
     var popup = new window.popups.newsletterModalPopup();
     popup.initialize($(".modal.campaign-newsletter.hide").first());
-    popup.show();
+    
+    
+    if (document.URL == 'http://localhost:3000/' && $.cookie('newsletter_mp') != 'hide'){
+      
+      popup.show();
 
-    window.newsletterModalPopup = popup;
+      window.newsletterModalPopup = popup;
 
-    return popup;
+      return popup;
+    };
   };
 });
