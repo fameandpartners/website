@@ -50,6 +50,8 @@ class PagesController < Spree::StoreController
         session[:sign_up_reason] = 'style_quiz'
       elsif params[:competition]
         session[:sign_up_reason] = 'competition'
+      elsif params[:personalization]
+        session[:sign_up_reason] = 'customise_dress'
       end
     end
 
