@@ -10,6 +10,7 @@ en:
         confirmation: 'Email Confirmation'
         custom_dress: 'Custom Dress'
         style_profile: 'Your Style Profile'
+        style_call: 'Thank you for registering for your free stylist consultation'
       admins:
         custom_dress: 'Custom Dress | %{full_name} %{id}'
   activerecord:
