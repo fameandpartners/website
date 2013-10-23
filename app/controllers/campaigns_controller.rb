@@ -14,6 +14,9 @@ class CampaignsController < ApplicationController
     else
       @user = Spree::User.create_user(params[:user].extract!(:email, :first_name, :last_name, :phone).merge(sign_up_reason: 'campaign_style_call', validate_presence_of_phone: true))
       @just_registered = true
+
+      # Marketing pixel
+      session[:signed_up_just_now] = true
     end
 
     if !@user.persisted? || @user.errors.present?

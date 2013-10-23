@@ -12,6 +12,7 @@ Spree::ProductsController.class_eval do
     @products = @searcher.retrieve_products
 
     set_collection_title(@searcher)
+    set_marketing_pixels(@searcher)
 
     if !request.xhr?
       render action: 'index', layout: true
@@ -84,6 +85,32 @@ Spree::ProductsController.class_eval do
 
     self.title = collection_title
     description(collection_description)
+  end
+
+  def set_marketing_pixels(searcher)
+    taxons = Spree::Taxon.where(id: searcher.collection || [])
+
+    @marketing_pixels = ''
+
+    return if taxons.empty?
+
+    taxon_names = taxons.map(&:name).map(&:downcase).uniq
+
+    if taxon_names.include?('long dresses')
+      @marketing_pixels += '<img src="http://tags.rtbidder.net/track?sid=525646058bc06f1060d9edfa" width="0" height="0" border="0" alt="" />'
+    end
+
+    if taxon_names.include?('short dresses')
+      @marketing_pixels += '<img src="http://tags.rtbidder.net/track?sid=525646288bc06f1060d9eed9" width="0" height="0" border="0" alt="" />'
+    end
+
+    if taxon_names.include?('skirts')
+      @marketing_pixels += '<img src="http://tags.rtbidder.net/track?sid=5256465f8bc06f1060d9f036" width="0" height="0" border="0" alt="" />'
+    end
+
+    if taxon_names.include?('tops')
+      @marketing_pixels += '<img src="http://tags.rtbidder.net/track?sid=5256468c8bc06f1060d9f0bf" width="0" height="0" border="0" alt="" />'
+    end
   end
 
   def colors

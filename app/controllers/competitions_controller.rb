@@ -30,6 +30,9 @@ class CompetitionsController < ApplicationController
       @user = Spree::User.create_user(params.extract!(:email, :first_name, :last_name).merge(sign_up_reason: 'competition'))
 
       if @user.persisted?
+        # Marketing pixel
+        session[:signed_up_just_now] = true
+
         Spree::UserMailer.welcome_to_competition(@user).deliver
       end
     end
