@@ -3,7 +3,20 @@ window.Quiz = {
     $('.quiz-box').show()
     $('body').css 'overflow', 'hidden'
     $.getScript '/quiz'
-    $('.quiz-overlay').one('click', Quiz.hide)
+    $('.quiz-overlay').one 'click', Quiz.hide
+    $('.quiz-box .close-quiz').one 'click', Quiz.hide
+
+    $(document).keyup (event) ->
+      if event.which is 27
+        $(document).off 'keyup'
+        $('#wrap').off 'click'
+        Quiz.hide()
+
+    $('#wrap').on 'click', () ->
+      $('#wrap').off 'click'
+      $(document).off 'keyup'
+      Quiz.hide()
+
     $('#main-promo .slides').trigger('pause')
 
   hide: () ->
@@ -119,20 +132,6 @@ window.Quiz = {
   _bindEvents: () ->
     $('.quiz-box').on 'click', (event) ->
       event.stopPropagation()
-
-    $('.quiz-box .close-quiz').on 'click', () ->
-      Quiz.hide()
-
-    $(document).keyup (event) ->
-      if event.which is 27
-        $(document).off "keyup"
-        $("#wrap").off "click"
-        Quiz.hide()
-
-    $("#wrap").on "click", () ->
-      $("#wrap").off "click"
-      $(document).off "keyup"
-      Quiz.hide()
 
     Quiz.bindCheckboxesAndRadios()
 
