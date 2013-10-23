@@ -74,8 +74,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/about'   => 'blog#about', as: :about
 
-    mount Spree::Core::Engine, at: '/'
-
     get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
     get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
 
