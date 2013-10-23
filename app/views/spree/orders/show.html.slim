@@ -3,6 +3,8 @@
     .tabs
       #order.tab-content
         - if session.delete(:successfully_ordered)
+          .m-pixel
+            img src="http://tags.rtbidder.net/convert?sid=52564c0e8bc06f1060da24f8" width="0" height="0" border="0" alt=""
           h1.page-title Thanks for your order #{@order.full_name}!
 
         .grid-container

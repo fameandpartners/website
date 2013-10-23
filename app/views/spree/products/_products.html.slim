@@ -1,9 +1,14 @@
-- info = @searcher.selected_products_info
-- collection_title = info[:title]
-- if @searcher.colour.present?
-  - collection_title = "#{@searcher.colour.first.presentation} Dresses"
-- elsif collection_title == "Range"
-  - collection_title = "Our Collection"
+ruby:
+  info = @searcher.selected_products_info
+  collection_title = info[:title]
+  if @searcher.colour.present?
+    collection_title = "#{@searcher.colour.first.presentation} Dresses"
+  elsif collection_title == "Range"
+    collection_title = "Our Collection"
+  end
+
+.m-pixel
+  == @marketing_pixels
 
 .ad style=(info[:image].blank? ? '' : "background: url('#{info[:image]}') 0 0 no-repeat;")
   h1 class='black' = collection_title

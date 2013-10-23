@@ -29,19 +29,21 @@ section.sidebar
       .latest Popular
       .block-subtitle Tags
     .block-content
-      select.selectbox name="tags" id="tags_search_filter"
-        option value="" Choose...
-        - Blog::Post.tag_counts_on(:tags).sort_by(&:count).reverse[0..19].each do |tag|
-          option value="#{tag.name}" #{tag.name}
+      form *{ action: blog_search_by_tag_path('') }
+        select.selectbox name="tags" id="tags_search_filter"
+          option value="" Choose...
+          - Blog::Post.tag_counts_on(:tags).sort_by(&:count).reverse[0..19].each do |tag|
+            option value="#{tag.name}" #{tag.name}
 
   .block
     .blog-block-title.inline
       .latest Events
     .block-content
-      select.selectbox name="tags" id="events_search_filter"
-        option value="" Choose...
-        - Blog::Post.sidebar.each do |post|
-          option value="#{post.slug}" #{post.title}  
+      form *{ action: blog_red_carpet_post_path('') }
+        select.selectbox name="tags" id="events_search_filter"
+          option value="" Choose...
+          - Blog::Post.sidebar.each do |post|
+            option value="#{post.slug}" #{post.title}
           
   .block.facebook
     .block-content 

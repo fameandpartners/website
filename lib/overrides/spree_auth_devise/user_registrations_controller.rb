@@ -42,6 +42,9 @@ Spree::UserRegistrationsController.class_eval do
       session[:spree_user_signup] = true
       associate_user
 
+      # Marketing pixel
+      session[:signed_up_just_now] = true
+
       if session.delete(:personalization)
         redirect_to main_app.personalization_products_path(cf: 'custom-dresses-signup')
       else

@@ -1,19 +1,21 @@
 $ ->
   $('#tags_search_filter').on 'change', (e)->
-    tag = $(e.target).val()
-    window.location = "/search/tags/#{tag}"
+    $target = $(e.target)
+    window.location = $target.parents('form').attr('action') + $target.val()
     false
 
   $('#events_search_filter').on 'change', (e)->
-    event = $(e.target).val()
-    window.location = "/red-carpet-events/#{event}"
+    $target = $(e.target)
+    window.location = $target.parents('form').attr('action') + $target.val()
     false
 
   $('#search_by_query').on 'keyup', (e) ->
+    $target = $(e.target)
+
     if e.keyCode == 13
-      term = $(e.target).val()
+      term = $target.val()
       if term != ""
-        window.location = "/search?q=#{term}"
+        window.location = "#{$target.parents('form').attr('action')}?q=#{term}"
     false
 
 

@@ -19,6 +19,9 @@ module Personalization
 
         @user.style_profile.save
 
+        # Marketing pixel
+        session[:signed_up_just_now] = true
+
         Spree::UserMailer.welcome_with_password(@user).deliver
 
         redirect_to personalization_products_path(cf: 'custom-dresses-signup')

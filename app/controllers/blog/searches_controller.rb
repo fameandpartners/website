@@ -37,7 +37,7 @@ class Blog::SearchesController < BlogBaseController
         generate_breadcrumbs_for_index
       end
     end
-  	render :index
+    render :index
   end
 
   private
