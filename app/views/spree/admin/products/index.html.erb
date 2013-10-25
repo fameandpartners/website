@@ -8,6 +8,10 @@
       <li id="new_product_link">
         <%= button_link_to t(:new_product), new_object_url, { :remote => true, :icon => 'icon-plus', :id => 'admin_new_product' } %>
       </li>
+      <li id="product_batch_upload_link">
+        <%= link_to "Batch upload", new_admin_product_uploads_url,
+          { remote: true, id: 'admin_product_batch_upload', class: 'button icon-plus'} %>
+      </li>
     </ul>
   </div>
 <% end %>
@@ -58,6 +62,7 @@
 <% end %>
 
 <div id="new_product" data-hook></div>
+<div id="product_batch_upload" data-hook></div>
 
 <% if @collection.any? %>
   <table class="index" id="listing_products">
