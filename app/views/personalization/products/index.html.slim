@@ -11,7 +11,22 @@
         = render 'personalization/products/product', product: product
 
 - if params[:cf] == 'custom-dresses-signup'
+  
   javascript:
     $(function(){
       track.conversion('customisation_sign_up')
     })
+    
+    var fb_param = {};
+    fb_param.pixel_id = '6010550195096';
+    fb_param.value = '0.00';
+    fb_param.currency = 'AUD';
+    (function(){
+      var fpw = document.createElement('script');
+      fpw.async = true;
+      fpw.src = '//connect.facebook.net/en_US/fp.js';
+      var ref = document.getElementsByTagName('script')[0];
+      ref.parentNode.insertBefore(fpw, ref);
+    })();
+    noscript
+      img alt="" height="1" src="https://www.facebook.com/offsite_event.php?id=6010550195096&amp;value=0&amp;currency=AUD" style="display:none" width="1"
