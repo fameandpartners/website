@@ -4,6 +4,7 @@
 
 <%# Place for new variant form %>
 <div id="new_variant" data-hook></div>
+<div id="new_product_colors" data-hook></div>
 
 <% if @variants.any? %>
   <table class="index sortable" data-sortable-link="<%= update_positions_admin_product_variants_path(@product) %>">
@@ -68,6 +69,15 @@
                               new_admin_product_variant_url(@product), 
                               :remote => :true, 
                               :'data-update' => 'new_variant', 
+                              :class => 'button'
+                             ) %>
+      </li>
+      <li id="new_colors_link" data-hook>
+        <%= link_to_with_icon('icon-plus', 
+                              t(:new_colors), 
+                              new_admin_product_colors_path(@product.id), 
+                              :remote => :true, 
+                              :'data-update' => 'new_admin_product_colors',
                               :class => 'button'
                              ) %>
       </li>

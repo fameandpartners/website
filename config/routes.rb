@@ -173,6 +173,8 @@ FameAndPartners::Application.routes.draw do
 
       scope 'products/:product_id', :as => 'product' do
         resource :inspiration, :only => [:edit, :update]
+
+        resource :colors, only: [:new, :create], controller: 'product_colors'
       end
 
       match '/product_images/upload' => 'product_images#upload', as: 'upload_product_images'
