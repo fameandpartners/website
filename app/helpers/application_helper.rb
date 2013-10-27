@@ -171,7 +171,7 @@ module ApplicationHelper
   def paypal_express_button
     return if paypal_payment_method.blank?
 
-    url = paypal_express_url(payment_method_id: paypal_payment_method.id, protocol: 'http')
+    url = paypal_express_url(payment_method_id: paypal_payment_method.id, protocol: request.protocol)
     link_to(
       image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"),
       url, method: :post, id: "paypal_button"
@@ -181,7 +181,7 @@ module ApplicationHelper
   def guest_paypal_express_button
     return if paypal_payment_method.blank?
 
-    url = guest_paypal_express_url(payment_method_id: paypal_payment_method.id, protocol: 'http')
+    url = guest_paypal_express_url(payment_method_id: paypal_payment_method.id, protocol: request.protocol)
     link_to(
       image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"),
       url, method: :post, id: "paypal_button"

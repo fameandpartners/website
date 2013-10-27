@@ -1,6 +1,10 @@
 module Guest
   class PaypalController < Spree::PaypalController
     include GuestHelper
+    include SslRequirement
+
+    ssl_allowed
+
     prepend_before_filter :check_presence_of_token
     skip_before_filter :check_cart
 
