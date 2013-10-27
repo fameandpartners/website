@@ -49,3 +49,6 @@ en:
           new_variant_size: "Size"
           custom_image: "Custom Color Image"
           add_new_variant: "Add Variant"
+  date:
+    formats:
+      default: '%d/%m/%Y'
