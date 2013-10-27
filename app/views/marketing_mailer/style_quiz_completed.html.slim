@@ -4,7 +4,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
       td height="60"
     tr
       td
-        h2 style="margin: 0; padding: 0; text-transform: uppercase; color: #737373; font: 400 italic 14px/1.1 Arial, sans-serif;" Hi, Ksenia!
+        h2 style="margin: 0; padding: 0; text-transform: uppercase; color: #737373; font: 400 italic 14px/1.1 Arial, sans-serif;" Hi, #{@user.first_name}!
     tr
       td height="38"
     tr
@@ -34,71 +34,30 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
         table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
           tbody
             tr
-              td style="text-align: center; padding: 5px 0;"
-                .name style="color: #333; font: 400 18px/1.2 Arial, sans-serif; text-transform: uppercase;" Classic
-                .percent style="color: #f39a8e; font: 400 40px/1.2 Arial, sans-serif;" 50%
-              td style="text-align: center; border-left: 1px solid #e5e5e5; padding: 5px 0;"
-                .name style="color: #333; font: 400 18px/1.2 Arial, sans-serif; text-transform: uppercase;" Edgy
-                .percent style="color: #f39a8e; font: 400 40px/1.2 Arial, sans-serif;" 10%
-              td style="text-align: center; border-left: 1px solid #e5e5e5; padding: 5px 0;"
-                .name style="color: #333; font: 400 18px/1.2 Arial, sans-serif; text-transform: uppercase;" Girly
-                .percent style="color: #f39a8e; font: 400 40px/1.2 Arial, sans-serif;" 10%
-              td style="text-align: center; border-left: 1px solid #e5e5e5; padding: 5px 0;"
-                .name style="color: #333; font: 400 18px/1.2 Arial, sans-serif; text-transform: uppercase;" Bohemian
-                .percent style="color: #f39a8e; font: 400 40px/1.2 Arial, sans-serif;" 10%
-              td style="text-align: center; border-left: 1px solid #e5e5e5; padding: 5px 0;"
-                .name style="color: #333; font: 400 18px/1.2 Arial, sans-serif; text-transform: uppercase;" Glam
-                .percent style="color: #f39a8e; font: 400 40px/1.2 Arial, sans-serif;" 20%
+              - @user.style_profile.percentage.each_with_index do |style, index|
+                td style="text-align: center; padding: 5px 0;#{ ' border-left: 1px solid #e5e5e5;' unless index.eql?(0)}"
+                  .name style="color: #333; font: 400 18px/1.2 Arial, sans-serif; text-transform: uppercase;" = style.first.titleize
+                  .percent style="color: #f39a8e; font: 400 40px/1.2 Arial, sans-serif;" #{style.last}%
     tr
       td height="40"
     tr
       td
         table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
-          tr
-            td style="padding: 0 0 25px;"
-              .image-container style="background: #f3f3f3; padding: 5px; box-shadow: 1px 1px 4px rgba(0, 0, 0, .1);"
-                = image_tag 'http://placehold.it/290x372', width: 196, height: 284, alt: '', style: 'display: block; max-width: 100%; height: auto;'
-              .name style="text-transform: uppercase; color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 14px 0 4px;" Dress name goes here
-              .price style="color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 0 0 4px;" $169
-              .colors
-                .color style="display: inline-block; width: 10px; height: 10px; margin: 0 2px 0 0; border-radius: 50%; background: #000;"
-                .color style="display: inline-block; width: 10px; height: 10px; margin: 0 2px 0 0; border-radius: 50%; background: #cc0000"
-            td width="33"
-            td style="padding: 0 0 25px;"
-              .image-container style="background: #f3f3f3; padding: 5px; box-shadow: 1px 1px 4px rgba(0, 0, 0, .1);"
-                = image_tag 'http://placehold.it/290x372', width: 196, height: 284, alt: '', style: 'display: block; max-width: 100%; height: auto;'
-              .name style="text-transform: uppercase; color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 14px 0 4px;" Dress name goes here
-              .price style="color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 0 0 4px;" $169
-              .colors
-                .color style="display: inline-block; width: 10px; height: 10px; margin: 0 2px 0 0; border-radius: 50%; background: #000;"
-                .color style="display: inline-block; width: 10px; height: 10px; margin: 0 2px 0 0; border-radius: 50%; background: #cc0000"
-            td width="33"
-            td style="padding: 0 0 25px;"
-              .image-container style="background: #f3f3f3; padding: 5px; box-shadow: 1px 1px 4px rgba(0, 0, 0, .1);"
-                = image_tag 'http://placehold.it/290x372', width: 196, height: 284, alt: '', style: 'display: block; max-width: 100%; height: auto;'
-              .name style="text-transform: uppercase; color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 14px 0 4px;" Dress name goes here
-              .price style="color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 0 0 4px;" $169
-              .colors
-                .color style="display: inline-block; width: 10px; height: 10px; margin: 0 2px 0 0; border-radius: 50%; background: #000;"
-                .color style="display: inline-block; width: 10px; height: 10px; margin: 0 2px 0 0; border-radius: 50%; background: #cc0000"
-          tr
-            td style="padding: 0 0 25px;"
-              .image-container style="background: #f3f3f3; padding: 5px; box-shadow: 1px 1px 4px rgba(0, 0, 0, .1);"
-                = image_tag 'http://placehold.it/290x372', width: 196, height: 284, alt: '', style: 'display: block; max-width: 100%; height: auto;'
-              .name style="text-transform: uppercase; color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 14px 0 4px;" Dress name goes here
-              .price style="color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 0 0 4px;" $169
-              .colors
-                .color style="display: inline-block; width: 10px; height: 10px; margin: 0 2px 0 0; border-radius: 50%; background: #000;"
-                .color style="display: inline-block; width: 10px; height: 10px; margin: 0 2px 0 0; border-radius: 50%; background: #cc0000"
-            td
-            td
-            td
-            td
+          - @dresses.in_groups_of(3).each do |group|
+            tr
+              - group.each_with_index do |dress, index|
+                td style="padding: 0 0 25px;"
+                  .image-container style="background: #f3f3f3; padding: 5px; box-shadow: 1px 1px 4px rgba(0, 0, 0, .1);"
+                    = product_image_tag(dress, nil, width: 196, height: 284, alt: '', style: 'display: block; max-width: 100%; height: auto;')
+                  .name style="text-transform: uppercase; color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 14px 0 4px;" = dress.name
+                  .price style="color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 0 0 4px;" = dress.display_price
+                - unless index.eql?(2)
+                  td width="33"
     tr
       td height="40"
     tr
       td style="text-align: center;"
-        = link_to 'See all your recommended dresses', '#', style: 'display: inline-block; background: #000; color: #fff; text-decoration: none; text-transform: uppercase; padding: 16px 78px; font: 400 16px/1 Arial, sans-serif;'
+        = link_to 'See all your recommended dresses', my_boutique_url, style: 'display: inline-block; background: #000; color: #fff; text-decoration: none; text-transform: uppercase; padding: 16px 78px; font: 400 16px/1 Arial, sans-serif;'
     tr
       td height="18"
     tr

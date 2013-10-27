@@ -1,5 +1,6 @@
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
+require 'whenever/capistrano'
 require 'capistrano-rbenv'
 
 set :stages, %w(staging feature)
@@ -7,6 +8,8 @@ set :default_stage, "staging"
 set :deploy_via, :remote_cache
 set :keep_releases, 5
 set :scm, :git
+set :whenever_command, 'bundle exec whenever'
+set :whenever_environment, defer { stage }
 
 before  'deploy:setup', 'db:create_config'
 after   'deploy:setup', 'deploy:first'

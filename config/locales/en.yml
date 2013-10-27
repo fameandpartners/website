@@ -11,6 +11,11 @@ en:
         custom_dress: 'Custom Dress'
         style_profile: 'Your Style Profile'
         style_call: 'Thank you for registering for your free stylist consultation'
+      marketing:
+        abandoned_cart: 'You have items to purchaise in your shopping bag'
+        added_to_wishlist: 'We love what you added to your wishlist'
+        style_quiz_not_completed: 'You didn’t complete your Style Profile'
+        style_quiz_completed: 'Your Style Profile'
       admins:
         custom_dress: 'Custom Dress | %{full_name} %{id}'
   activerecord:

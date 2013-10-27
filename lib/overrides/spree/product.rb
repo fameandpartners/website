@@ -87,7 +87,9 @@ module Overrides
           }.gsub(/[\r\n]|([\s]{2,})/, '')
         end
 
-        def recommended_for(user)
+        def recommended_for(user, options = {})
+          limit = options[:limit] || 12
+
           style_profile = UserStyleProfile.find_by_user_id(user.id)
 
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
@@ -147,7 +149,7 @@ module Overrides
             end
 
             from 0
-            size 12
+            size limit
           end
 
           begin

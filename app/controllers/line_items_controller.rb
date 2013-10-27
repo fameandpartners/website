@@ -42,6 +42,8 @@ class LineItemsController < Spree::StoreController
       current_order.reload
     end
 
+    associate_user if spree_user_signed_in?
+
     respond_with @line_item do |format|
       format.json do
         render json: {
