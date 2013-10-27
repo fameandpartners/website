@@ -1,6 +1,7 @@
 .form data-hook="login"
   = form_for :spree_user, :url => spree.spree_user_session_path do |f|
     #password-credentials
+      = flash_messages
       .input.string
         = f.label :email
         = f.email_field :email, class: 'title', tabindex: 1, placeholder: t(:email)
