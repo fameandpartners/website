@@ -71,8 +71,8 @@ FameAndPartners::Application.routes.draw do
   # Blog routes
   scope '/blog' do
     get '/' => 'blog#index', as: :blog
-
     get '/about'   => 'blog#about', as: :about
+    get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
 
     get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
     get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos

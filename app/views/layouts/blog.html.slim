@@ -2,6 +2,7 @@ doctype html
 = conditional_html do
   head
     = render 'layouts/head'
+    = auto_discovery_link_tag :rss, blog_rss_url
     = csrf_meta_tags
     = render 'spree/shared/google_analytics'
   body class="blog #{controller_action_class}" id=(controller_action_id)
