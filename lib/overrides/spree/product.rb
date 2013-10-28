@@ -150,7 +150,18 @@ module Overrides
             size 12
           end
 
-          query.results.results
+          begin
+            query.results.results
+          rescue ActiveRecord::RecordNotFound
+            Tire.index(:spree_products) do
+              delete
+              import ::Spree::Product.all
+            end
+
+            Tire.index(:spree_products).refresh
+
+            recommended_for(user)
+          end
         end
       end
     end
