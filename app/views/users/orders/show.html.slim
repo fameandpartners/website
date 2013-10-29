@@ -13,7 +13,7 @@
             = render 'spree/checkout/summary'
           .grid-65
             h2 Order Number: #{ @order.number }
-            p Order Date: #{ @order.updated_at.strftime('%D') }
+            p Order Date: #{ l(@order.updated_at.to_date) }
             h3.uppercase Shipping Address
             - if address = @order.shipping_address
               p = address.full_name

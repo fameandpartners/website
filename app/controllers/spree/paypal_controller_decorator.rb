@@ -1,4 +1,8 @@
 Spree::PaypalController.class_eval do
+  include SslRequirement
+
+  ssl_allowed
+
   before_filter :update_order_steps, only: [:confirm]
 
   # update order step using info from paypal
