@@ -1,5 +1,10 @@
 xml.instruct! :xml, version: 1.0
 xml.rss version: 2.0 do
+  def get_desc(post)
+    return post.body unless post.primary_photo.present?
+    return "<p> #{image_tag post.primary_photo.photo.url(:preview), width: 742, height: 355, alt: ''}</p><p>#{post.body}</p>"
+  end
+  
   xml.channel do
     xml.title 'The Fame Issue'
     xml.description 'Tracking Fashion, Celebrity, Style and Trends. Edited by the Stylists at Fame & Partners'
@@ -21,8 +26,4 @@ xml.rss version: 2.0 do
       end
     end
   end
-end
-def get_desc(post)
-  return post.body unless post.primary_photo.present?
-  return "<p> #{image_tag post.primary_photo.photo.url(:preview), width: 742, height: 355, alt: ''}</p><p>#{post.body}</p>"
 end
