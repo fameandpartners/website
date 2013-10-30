@@ -1,8 +1,8 @@
 xml.instruct! :xml, version: 1.0
 xml.rss version: 2.0 do
   xml.channel do
-    xml.title 'Fame & Partners Formal Dresses Blog'
-    xml.description 'Fame & Partners are a leading online website selling all types of dresses including formal, evening and prom dresses online.'
+    xml.title 'The Fame Issue'
+    xml.description 'Tracking Fashion, Celebrity, Style and Trends. Edited by the Stylists at Fame & Partners'
     xml.link blog_url
 
     @posts.each do |post|
@@ -14,11 +14,15 @@ xml.rss version: 2.0 do
 
       xml.item do
         xml.title post.title
-        xml.description post.body
+        xml.description get_desc(post)
         xml.pubDate post.published_at.to_s(:rfc822)
         xml.link url
         xml.guid url
       end
     end
   end
+end
+def get_desc(post)
+  return post.body unless post.primary_photo.present?
+  return "<p> #{image_tag post.primary_photo.photo.url(:preview), width: 742, height: 355, alt: ''}</p><p>#{post.body}</p>"
 end
