@@ -1,4 +1,6 @@
 class ProductPersonalizationsController < ApplicationController
+  respond_to :js
+
   def create
     populator = Spree::OrderPopulator.new(current_order(true), current_currency)
 
