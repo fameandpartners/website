@@ -22,6 +22,8 @@ gem 'redis-rails'
 gem 'titleize'
 gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
 
+gem 'geoip', require: false
+
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'

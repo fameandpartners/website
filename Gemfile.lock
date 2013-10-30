@@ -250,6 +250,7 @@ GEM
     faraday (0.8.7)
       multipart-post (~> 1.1)
     ffaker (1.15.0)
+    geoip (1.3.3)
     gyoku (0.4.6)
       builder (>= 2.1.2)
     hashie (1.2.0)
@@ -532,6 +533,7 @@ DEPENDENCIES
   eco
   execjs (= 1.4.0)
   factory_girl_rails (= 4.2.1)
+  geoip
   jquery-fileupload-rails (= 0.4.1)
   jquery-rails
   jquery-ui-rails

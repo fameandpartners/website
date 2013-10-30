@@ -161,4 +161,46 @@ class ApplicationController < ActionController::Base
       description([prefix, default_meta_description].join(' - '))
     end
   end
+
+  helper_method :current_site_version
+
+  def current_site_version
+    params[:site_version]
+  end
+
+  def selected_site_version
+    session[:site_version] ||= fetch_user_country
+  end
+
+  def selected_site_version=(site_version)
+    session[:site_version] = site_version
+  end
+
+  def fetch_user_country
+    require 'geoip'
+    geoip = GeoIP.new(File.join(Rails.root, 'db', 'GeoIP.dat'))
+    remote_ip = request.remote_ip
+    country_code = 'US'
+    if remote_ip != "127.0.0.1"
+      country_code = geoip.country(request.remote_ip).try(:country_code2)
+    end
+
+    country_code.downcase
+  end
+
+  def set_locale
+    if selected_site_version == 'us'
+      I18n.locale = 'en_US'
+    else
+      I18n.locale = 'en_AU'
+    end
+  end
+
+  def default_url_options
+    if selected_site_version == 'us'
+      { locale: 'en_US' }
+    else
+      { site_version: selected_site_version, locale: 'en_AU' }
+    end
+  end
 end
