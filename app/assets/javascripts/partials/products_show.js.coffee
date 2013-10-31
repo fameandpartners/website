@@ -68,8 +68,6 @@ $(".products.show").ready ->
     popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
   )
 
-  window.helpers.addCustomizationButtonHandlers($('#customize-dress-button'))
-
   window.helpers.addPersonalizationFormHandlers($('#personalization')) if $('#personalization').size() isnt 0
 
   window.helpers.initProductReserver(

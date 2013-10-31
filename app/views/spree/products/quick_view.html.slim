@@ -72,10 +72,10 @@ ruby:
       .buy-wishlist
         .buy-customize
           = add_to_bag_link(@product)
-          - unless true #@product.in_sale?
+          /- unless @product.in_sale?
             .or-line
               span or
-              = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
+              = link_to personalization_product_path(@product, cf: 'readytowear'), class: 'btn-customize' do
                 i.icon.icon-layby
                 ' Free Customization
         = add_to_wishlist_link(@product)
