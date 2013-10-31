@@ -146,11 +146,11 @@
 header {
   width: 100%;
   position: relative;
-  height: 199px;
+  height: 217px;
   background: #fff;
   border-bottom: 1px solid #efefef;
   .logo {
-    padding: 32px 0 29px;
+    padding: 27px 0 20px;
     a {
       width: 488px;
       height: 34px;
@@ -161,12 +161,19 @@ header {
       text-indent: -999px;
     }
   }
+  .tag-line{
+    text-align: center;
+    font: 300 14px/1.2 $fontTwo;
+    text-transform: uppercase;
+    padding: 0 0 19px;
+  }
   .second-level {
     height: 28px;
-    margin: 17px 0 17px;
+    margin: 14px 0 14px;
   }
   .icons {
     float: left;
+    padding: 3px 0 0 0;
     li {
       float: left;
       margin: 0 0 0 20px;
@@ -248,11 +255,11 @@ header {
     margin: 0 0 0 60px;
     input {
       font: 400 italic 14px/30px $fontOne;
-      color: #acacac;
+      color: #ddd;
       width: 202px;
       height: 30px;
       padding: 0 34px 0 8px;
-      border: 1px solid #e0e0e0;
+      border: 1px solid #FFA793;
       background: image-url('icon-search.png') right center no-repeat #fff;
     }
   }
@@ -410,7 +417,7 @@ header {
     height: 1px;
     background: #efefef;
     position: absolute;
-    bottom: 42px;
+    bottom: 43px;
     left: 0;
     right: 0;
   }
@@ -419,7 +426,7 @@ header {
     height: 1px;
     background: #efefef;
     position: absolute;
-    top: 94px;
+    top: 117px;
     left: 0;
     right: 0;
   }

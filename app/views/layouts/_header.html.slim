@@ -3,7 +3,7 @@
     nav.fleft
       ul
         li = link_to 'Home', root_path, class: 'top-icon link-root'
-        li.top-icon.phone AU. 1300 924 860
+        li.top-icon.phone Order on the phone / Customer Service 1300 924 860
     nav.fright
       ul
         - unless spree_user_signed_in?
@@ -27,6 +27,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .header-wrapper
     .first-level
       .logo = link_to 'Fame&Partners', root_path
+      .tag-line Celebrity-inspired looks for your formal event.
     .second-level
       .wrap.no-overflow
         ul.icons
@@ -69,7 +70,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                 ' styling advice
         .search.fleft
           = form_tag search_path, method: :get do
-            input type="text" name="q" placeholder="Search the site"
+            input type="text" name="q" placeholder="Search formal dresses"
         .fright
           .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
           .shopping-bag
