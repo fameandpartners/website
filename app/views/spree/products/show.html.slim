@@ -87,7 +87,7 @@ ruby:
         .buy-wishlist.clearfix
           .buy-customize
             = add_to_bag_link(@product)
-            - unless @product.in_sale?
+            - if (@product.can_be_customized? and !@product.in_sale?)
               .or-line
                 span or
               = link_to personalization_product_path(@product, cf:"readytowear"), class: 'btn-customize' do
