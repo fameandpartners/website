@@ -1,4 +1,6 @@
 FameAndPartners::Application.routes.draw do
+  match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
+
   scope "(/:site_version)" do
     devise_for :spree_user,
                :class_name => 'Spree::User',
