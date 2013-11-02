@@ -1,6 +1,6 @@
-#registrations{
-  #wrap{
-    margin-bottom: 0px !important;
+#registrations, .custom_dresses {
+  #wrap {
+    margin-bottom: 0 !important;
   }
 }
 
@@ -130,6 +130,127 @@
       }
       .chzn-container {
         min-width: 186px;
+      }
+    }
+  }
+}
+
+#content .custom-dress-landing {
+  .signup-block {
+    height: 680px;
+    background: image-url('custom-dresses/bg-start.jpg') 0 0 repeat #e4e4e3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1) inset;
+    .side-left {
+      float: left;
+      margin: 120px 0 0 55px;
+      width: 400px;
+      h1 {
+        font-size: 70px;
+        margin-bottom: 30px;
+        &:before {
+          width: 220px !important;
+          margin-left: -110px;
+        }
+      }
+      .subtitle {
+        margin-bottom: 40px;
+      }
+      .or {
+        margin: 20px 0 5px;
+      }
+    }
+    .side-right {
+      float: right;
+      margin: 28px 85px 0 0;
+    }
+  }
+  .how-it-works {
+    padding: 0 0 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1) inset;
+    background: image-url('custom-dresses/bg-pattern.jpg') 0 0 repeat #e3e3df;
+    font: 400 italic 24px/1.2 $fontTwo;
+    text-align: center;
+    h1 {
+      margin-top: 50px;
+      font-size: 70px;
+      &:before {
+        width: 160px !important;
+        margin-left: -80px;
+      }
+    }
+    img {
+      padding: 9px;
+      background: #fff;
+      box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+      display: inline-block;
+    }
+    .step {
+      margin: 56px auto 0;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: #000;
+      color: #fff;
+      font-size: 40px;
+      line-height: 98px;
+    }
+    .action {
+      font-size: 46px;
+      margin: 30px 0 0;
+      color: #000
+    }
+    .subtitle {
+      width: 100%;
+      margin: 0 0 40px;
+    }
+    .images {
+      position: relative;
+      height: 220px;
+      .image-1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include transform(rotate(-5deg));
+      }
+      .image-2 {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+    .colors {
+      padding: 10px 0 0;
+    }
+    .color {
+      width: 66px;
+      height: 66px;
+      border: 5px solid #fff;
+      margin: 5px;
+    }
+    .start-now {
+      margin: 76px 0 0;
+      padding: 52px 0 0;
+      position: relative;
+      .label {
+        font: 400 36px/1.1 $fontFive;
+        color: #000;
+        display: inline-block;
+        text-transform: uppercase;
+        margin: 0 34px 0 0;
+      }
+      .facebook-signup {
+        display: inline-block;
+        margin: 6px 0 0;
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 232px;
+        height: 1px;
+        background: #000;
+        margin: 0 0 0 -116px;
       }
     }
   }
