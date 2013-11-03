@@ -13,9 +13,10 @@ module Overrides
 
         mapping do
           indexes :id, :index => :not_analyzed
-          indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
           indexes :name, :analyzer => :snowball
           indexes :description, :analyzer => :snowball
+          indexes :available_on, :type => :date, :include_in_all => false
+          indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
           indexes :taxons, :as => 'taxons.map(&:name)'
           indexes :colors, :as => 'colors'
 
@@ -96,6 +97,11 @@ module Overrides
             filter :bool, :must => {
               :term => {
                 :deleted => false
+              }
+            }
+            filter :bool, :should => {
+              :range => {
+                :available_on => { :lte => Time.now }
               }
             }
 
