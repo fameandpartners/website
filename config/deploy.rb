@@ -1,6 +1,5 @@
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
-require 'whenever/capistrano'
 require 'capistrano-rbenv'
 
 set :stages, %w(staging feature)
@@ -8,13 +7,12 @@ set :default_stage, "staging"
 set :deploy_via, :remote_cache
 set :keep_releases, 5
 set :scm, :git
-set :whenever_command, 'bundle exec whenever'
-set :whenever_environment, defer { stage }
 
 before  'deploy:setup', 'db:create_config'
 after   'deploy:setup', 'deploy:first'
 
 after   'deploy:update_code', 'db:create_symlink'
+after   'deploy:update_code', 'cron:update'
 after   'deploy:create_symlink', 'deploy:cleanup'
 after   'deploy:finalize_update', 'rbenv:create_version_file'
 
