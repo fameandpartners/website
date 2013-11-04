@@ -1,5 +1,5 @@
 class MarketingMailer < ActionMailer::Base
-  self.delivery_method = :mandrill
+  self.delivery_method = :mandrill if Rails.env.production?
 
   include ProductsHelper
 
