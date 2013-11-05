@@ -41,5 +41,5 @@
               = image_tag 'custom-dresses/customize-1.jpg', width: 176, height: 176, alt: '', class: 'image-1'
               = image_tag 'custom-dresses/customize-2.jpg', width: 176, height: 176, alt: '', class: 'image-2'
       .start-now
-        .label Start now!
+        = link_to 'Start now!', spree.signup_path(personalization: 'true'), class: 'label'
         = link_to 'Signup with facebook', fb_auth_path(personalization: 'true'), class: 'facebook-signup'

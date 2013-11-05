@@ -235,12 +235,18 @@
         font: 400 36px/1.1 $fontFive;
         color: #000;
         display: inline-block;
+        vertical-align: top;
         text-transform: uppercase;
+        text-decoration: none;
         margin: 0 34px 0 0;
+        &:hover {
+          text-decoration: underline;
+        }
       }
       .facebook-signup {
         display: inline-block;
-        margin: 6px 0 0;
+        vertical-align: top;
+        margin: 2px 0 0;
       }
       &:before {
         content: '';
