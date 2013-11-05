@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131016150103) do
+ActiveRecord::Schema.define(:version => 20131030065323) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1003,6 +1003,9 @@ ActiveRecord::Schema.define(:version => 20131016150103) do
     t.string   "sign_up_reason"
     t.string   "phone"
     t.boolean  "newsletter"
+    t.datetime "last_cart_notification_sent_at"
+    t.datetime "last_wishlist_notification_sent_at"
+    t.datetime "last_quiz_notification_sent_at"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true

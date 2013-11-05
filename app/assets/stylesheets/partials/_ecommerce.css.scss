@@ -531,9 +531,15 @@
       font-style: italic;
       margin: 0 0 25px 0;
     }
-    .colour, .faster {
+    .colour, .faster, .peter-lang {
       padding-top: 10px;
       color: #333;
+    } 
+    
+    .peter-lang{
+      color: #999;
+      font-style: italic; 
+      margin-bottom: 20px;
     }
   }
   .free-styling-tips {
