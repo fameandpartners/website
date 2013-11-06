@@ -8,7 +8,7 @@ en-US:
         zipcode: "Billing address zipcode"
       spree/order/ship_address:
         zipcode: "Shipping address zipcode"
-  zip: 'Zip'
+  zip: 'Zipcode'
   color: 'Color'
   spree:
     admin:

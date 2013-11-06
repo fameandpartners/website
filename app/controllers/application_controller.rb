@@ -174,24 +174,29 @@ class ApplicationController < ActionController::Base
 
     if session[:site_version]
       @current_site_version = SiteVersion.by_permalink_or_default(session[:site_version])
+    elsif params[:site_version]
+      @current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
+      self.current_site_version = @current_site_version
     else
-      @current_site_version = find_suitable_site_version()
+      @current_site_version = SiteVersion.by_country_code_or_default(fetch_user_country_code)
     end
-
-    @current_site_version ||= SiteVersion.by_permalink_or_default(params[:site_version])
   end
 
   def current_site_version=(site_version)
     if session[:site_version] != site_version.permalink
       session[:site_version] = site_version.permalink
+
+      # TODO: it seems, spree reset cart if we changing currency
+      # current_order(true).use_prices_from(site_version)
+
       # clear or update order
     end
 
     site_version
   end
 
-  def find_suitable_country
-    SiteVersion.by_permalink_or_default(fetch_user_country_code)
+  def current_currency
+    current_site_version.try(:currency) || Spree::Config[:currency]
   end
 
   def fetch_user_country_code
@@ -218,12 +223,11 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     version = current_site_version
-    if version.default
-      #{ locale: (version.locale || default_locale) }
-      {}
-    else
-      #{ site_version: version.permalink.html_safe, locale: (version.locale || default_locale).html_safe }
-      { site_version: version.permalink.html_safe }
-    end
+    options = {}
+    options[:site_version] = version.permalink.html_safe if version.permalink.present?
+#    if !version.default? && version.permalink.present?
+#      options[:site_version] = version.permalink.html_safe
+#    end
+    options
   end
 end
