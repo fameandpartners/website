@@ -15,8 +15,6 @@ FameAndPartners::Application.routes.draw do
     get '/account_settings' => 'spree/user_registrations#edit'
   end
 
-  get '/custom-landing'   => 'custom_dresses#landing'
-
   # Custom Dresses part II
   scope '/custom-dresses', module: 'personalization' do
     get '/', to: 'registrations#new', as: :personalization
