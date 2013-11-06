@@ -1,3 +1,3 @@
-every 5.minutes do
+every :hour do
   runner 'EmailMarketing.send_emails'
 end
