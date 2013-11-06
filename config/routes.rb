@@ -132,6 +132,10 @@ FameAndPartners::Application.routes.draw do
   # External URLs
   get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
   get '/workshops', to: redirect('http://www.fameandpartners.com/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
+  
+  
+  # Fallen Product URL
+  get '/thefallen', to: redirect("http://www.fameandpartners.com/collection/Long-Dresses/the-fallen")
 
 
   # MonkeyPatch for redirecting to Custom Dress page
