@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   def check_cart
     # if can't find order, create it ( true )
     current_order(true) if current_order.blank?
+    current_order.zone_id = current_site_version.zone_id
   end
 
   helper_method :default_seo_title, :default_meta_description
@@ -17,6 +18,8 @@ class ApplicationController < ActionController::Base
   helper_method :analytics_label, :get_user_type
 
   before_filter :try_reveal_guest_activity
+
+  before_filter :set_locale
 
   private
 
@@ -164,23 +167,38 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_site_version
 
+  # site_version : [us | au]
+  # site_version_id : [1,2...]
   def current_site_version
-    params[:site_version]
+    return @current_site_version if @current_site_version
+
+    if session[:site_version]
+      @current_site_version = SiteVersion.by_permalink_or_default(session[:site_version])
+    else
+      @current_site_version = find_suitable_site_version()
+    end
+
+    @current_site_version ||= SiteVersion.by_permalink_or_default(params[:site_version])
   end
 
-  def selected_site_version
-    session[:site_version] ||= fetch_user_country
+  def current_site_version=(site_version)
+    if session[:site_version] != site_version.permalink
+      session[:site_version] = site_version.permalink
+      # clear or update order
+    end
+
+    site_version
   end
 
-  def selected_site_version=(site_version)
-    session[:site_version] = site_version
+  def find_suitable_country
+    SiteVersion.by_permalink_or_default(fetch_user_country_code)
   end
 
-  def fetch_user_country
+  def fetch_user_country_code
     require 'geoip'
     geoip = GeoIP.new(File.join(Rails.root, 'db', 'GeoIP.dat'))
     remote_ip = request.remote_ip
-    country_code = 'US'
+    country_code = 'us'
     if remote_ip != "127.0.0.1"
       country_code = geoip.country(request.remote_ip).try(:country_code2)
     end
@@ -188,19 +206,24 @@ class ApplicationController < ActionController::Base
     country_code.downcase
   end
 
-  def set_locale
-    if selected_site_version == 'us'
-      I18n.locale = 'en_US'
-    else
-      I18n.locale = 'en_AU'
-    end
+  def default_locale
+    'en_US'
   end
 
+  def set_locale
+    I18n.locale = current_site_version.try(:locale) || default_locale
+  end
+
+  helper_method :default_url_options
+
   def default_url_options
-    if selected_site_version == 'us'
-      { locale: 'en_US' }
+    version = current_site_version
+    if version.default
+      #{ locale: (version.locale || default_locale) }
+      {}
     else
-      { site_version: selected_site_version, locale: 'en_AU' }
+      #{ site_version: version.permalink.html_safe, locale: (version.locale || default_locale).html_safe }
+      { site_version: version.permalink.html_safe }
     end
   end
 end

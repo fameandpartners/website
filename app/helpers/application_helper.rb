@@ -105,7 +105,8 @@ module ApplicationHelper
   def collection_taxon_path(taxon)
     if range_taxonomy && range_taxonomy.taxons.where(id: taxon.id).exists?
       permalink = taxon.permalink.split('/').last
-      "/collection/#{permalink}"
+      site_version_prefix = self.default_url_options[:site_version]
+      "#{site_version_prefix}/collection/#{permalink}"
     else
       collection_path
     end
@@ -114,8 +115,9 @@ module ApplicationHelper
   def collection_product_path(product)
     taxon = range_taxon_for(product)
     if taxon
-      permalink = taxon.permalink.split('/').last
-      "/collection/#{permalink}/#{product.to_param}"
+      taxon_permalink = taxon.permalink.split('/').last
+      site_version_prefix = self.default_url_options[:site_version]
+      "/#{site_version_prefix}/collection/#{taxon_permalink}/#{product.to_param}"
     else
       spree.product_path(product)
     end
@@ -199,13 +201,14 @@ module ApplicationHelper
   end
 
   def price_for_product(product)
+    price = product.zone_price_for(current_site_version)
     if product.in_sale?
       [
-        content_tag(:del, product.price_in(current_currency).display_price_without_discount),
-        content_tag(:span, product.price_in(current_currency).display_price_with_discount)
+        content_tag(:del, price.display_price_without_discount),
+        content_tag(:span, price.display_price_with_discount)
       ].join("\n").html_safe
     else
-      content_tag(:span, product.price_in(current_currency).display_price).html_safe
+      content_tag(:span, price.display_price).html_safe
     end
   end
 

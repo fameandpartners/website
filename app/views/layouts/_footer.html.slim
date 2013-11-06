@@ -51,10 +51,10 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
       .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
 
   h3
-    - if current_site_version == 'us'
-      = link_to 'Switch to Australian version', site_version_path('au')
-    - else
+    - if current_site_version.is_australia?
       = link_to 'Switch to United states version', site_version_path('us')
+    - else
+      = link_to 'Switch to Australian version', site_version_path('au')
 
 .hide
   #what-size

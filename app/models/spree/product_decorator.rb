@@ -31,6 +31,9 @@ Spree::Product.class_eval do
   attr_accessor :customisation_values_hash
   attr_accessible :featured, :customisation_values_hash, :product_customisation_types_attributes
 
+  attr_accessible :zone_prices_hash
+  attr_accessor :zone_prices_hash
+
   scope :featured, lambda { where(featured: true) }
   scope :ordered, lambda { order('position asc') }
 
@@ -40,6 +43,8 @@ Spree::Product.class_eval do
 
   before_create :set_default_prototype
   after_create :build_customisations_from_values_hash, :if => :customisation_values_hash
+
+  after_save :update_zone_prices, if: :zone_prices_hash
 
   def images
     table_name = Spree::Image.quoted_table_name
@@ -156,6 +161,14 @@ Spree::Product.class_eval do
     end
   end
 
+  def zone_price_for(site_version = nil)
+    if site_version.try(:default)
+      self.price_in(Spree::Config.currency)
+    else
+      self.master.zone_price_for(site_version.zone)
+    end
+  end
+
   private
 
   def build_variants_from_option_values_hash
@@ -187,5 +200,9 @@ Spree::Product.class_eval do
       product_type.customisation_value_ids = values
     end
     save
+  end
+
+  def update_zone_prices
+    self.master.update_zone_prices(self.zone_prices_hash)
   end
 end

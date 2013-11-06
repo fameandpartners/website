@@ -1,7 +1,7 @@
 FameAndPartners::Application.routes.draw do
   match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
 
-  scope "(/:site_version)" do
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
                :class_name => 'Spree::User',
                :controllers => { :sessions => 'spree/user_sessions',

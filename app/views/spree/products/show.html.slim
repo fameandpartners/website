@@ -90,7 +90,7 @@ ruby:
             - unless @product.in_sale?
               .or-line
                 span or
-              = link_to personalization_product_path(@product, cf:"readytowear"), class: 'btn-customize' do
+              = link_to personalization_product_path(permalink: @product.permalink, cf:"readytowear"), class: 'btn-customize' do
                 i.icon.icon-layby
                 ' Free Customization
           = add_to_wishlist_link(@product)

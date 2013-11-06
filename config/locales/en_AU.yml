@@ -1,0 +1,24 @@
+en-AU:
+  activerecord:
+    attributes:
+      # rename zip to postcode
+      spree/address:
+        zipcode: "Postcode"
+      spree/order/bill_address:
+        zipcode: "Billing address postcode"
+      spree/order/ship_address:
+        zipcode: "Shipping address postcode"
+  zip: 'Postcode'
+  color: 'Colour'
+  spree:
+    admin:
+      products:
+        form:
+          variant_color: "colour"
+          select_color: "colour"
+          new_variant_size: "size"
+          custom_image: "custom colour image"
+          add_new_variant: "add variant"
+  date:
+    formats:
+      default: '%d/%m/%y'

@@ -17,13 +17,15 @@
 <% else %>
   <table class="index" id='listing_zones' data-hook>
     <colgroup>
-      <col style="width: 30%" />
-      <col style="width: 40%" />
+      <col style="width: 10%" />
+      <col style="width: 25%" />
+      <col style="width: 35%" />
       <col style="width: 15%" />
       <col style="width: 15%" />
     </colgroup>
     <thead>
       <tr data-hook="zones_header">
+        <th>site version</th>
         <th><%= sort_link @search,:name, t(:name), :title => 'zones_order_by_name_title' %></th>
         <th>
           <%= sort_link @search,:description, t(:description), {}, {:title => 'zones_order_by_description_title'} %>
@@ -35,6 +37,15 @@
     <tbody>
       <% @zones.each do |zone| %>
         <tr id="<%= spree_dom_id zone %>" data-hook="zones_row" class="<%= cycle('odd', 'even')%>">
+          <td>
+            <% if zone.site_version %>
+              <%= zone.site_version.permalink %>
+              <%= "(default)" if zone.site_version.default %>
+              
+            <% else %>
+              -
+            <% end %>
+          </td>
           <td><%=zone.name %></td>
           <td><%=zone.description %></td>
           <td class="align-center"><%=zone.default_tax %></td>
