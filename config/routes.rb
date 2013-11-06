@@ -136,6 +136,7 @@ FameAndPartners::Application.routes.draw do
   
   # Fallen Product URL
   get '/thefallen', to: redirect("http://www.fameandpartners.com/collection/Long-Dresses/the-fallen")
+  get '/thefallendress', to: redirect("http://www.fameandpartners.com/collection/Long-Dresses/the-fallen")
 
 
   # MonkeyPatch for redirecting to Custom Dress page
