@@ -10,6 +10,43 @@
   }
 }
 
+.custom-dresses-signup, .custom-dress-landing {
+  .form {
+    width: 500px;
+    margin: 0 0 40px;
+    .fields-group {
+      .input {
+        width: 240px;
+        input {
+          height: 32px;
+          line-height: 32px;
+        }
+      }
+    }
+    .inline-block {
+      display: inline-block;
+    }
+    .chzn-container {
+      min-width: 180px;
+    }
+    .hint {
+      display: inline-block;
+      margin-top: 10px;
+      margin-left: 6px;
+    }
+    .submit {
+      margin: 30px 0 10px;
+      input {
+        width: 100%;
+      }
+    }
+    .call-to-action {
+      text-align: center;
+      font: 400 italic 16px/1.2 $fontFour;
+    }
+  }
+}
+
 .custom-dresses-signup {
   min-height: 1120px;
   background: image-url('custom-dresses/bgblue.jpg') right top no-repeat #EFF0F2;
@@ -46,39 +83,6 @@
       &:before {
         background: #ababac !important;
       }
-    }
-  }
-  .form {
-    width: 500px;
-    .fields-group {
-      .input {
-        width: 240px;
-        input {
-          height: 32px;
-          line-height: 32px;
-        }
-      }
-    }
-    .inline-block {
-      display: inline-block;
-    }
-    .chzn-container {
-      min-width: 180px;
-    }
-    .hint {
-      display: inline-block;
-      margin-top: 10px;
-      margin-left: 6px;
-    }
-    .submit {
-      margin: 30px 0 10px;
-      input {
-        width: 100%;
-      }
-    }
-    .call-to-action {
-      text-align: center;
-      font: 400 italic 16px/1.2 $fontFour;
     }
   }
   .how-it-works {
@@ -137,9 +141,12 @@
 
 #content .custom-dress-landing {
   .signup-block {
-    height: 680px;
     background: image-url('custom-dresses/bg-start.jpg') 0 0 repeat #e4e4e3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, .1) inset;
+    .wrap {
+      min-height: 680px;
+      position: relative;
+    }
     .side-left {
       float: left;
       margin: 120px 0 0 55px;
@@ -160,8 +167,13 @@
       }
     }
     .side-right {
+      position: absolute;
+      bottom: 0;
+      right: 85px;
       float: right;
-      margin: 28px 85px 0 0;
+      img {
+        display: block;
+      }
     }
   }
   .how-it-works {
@@ -258,6 +270,10 @@
         background: #000;
         margin: 0 0 0 -116px;
       }
+    }
+    .form {
+      margin: 0 auto 40px;
+      text-align: left;
     }
   }
 }
