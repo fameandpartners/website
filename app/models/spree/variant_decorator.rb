@@ -43,10 +43,16 @@ Spree::Variant.class_eval do
     end
 
     if zone_price.present?
-      Spree::Price.new(zone_price.attributes.except(*%w{id zone_id}))
+      zone_price.to_spree_price
     else
       default_price
     end
+  end
+
+  # NOTE: this differs from spree version by '|| prices.first'
+  # for case, if we use price_in for site_version with another currency
+  def price_in(currency)
+    prices.select{ |price| price.currency == currency }.first || prices.first || Spree::Price.new(:variant_id => self.id, :currency => currency)
   end
 
   private

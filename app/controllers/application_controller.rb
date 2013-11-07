@@ -165,7 +165,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_site_version
+  helper_method :current_site_version, :site_versions_enabled?
+
+  def site_versions_enabled?
+    @site_versions_enabled ||= (SiteVersion.count > 1)
+  end
 
   # site_version : [us | au]
   # site_version_id : [1,2...]
@@ -224,10 +228,10 @@ class ApplicationController < ActionController::Base
   def default_url_options
     version = current_site_version
     options = {}
-    options[:site_version] = version.permalink.html_safe if version.permalink.present?
-#    if !version.default? && version.permalink.present?
-#      options[:site_version] = version.permalink.html_safe
-#    end
+    #options[:site_version] = version.permalink.html_safe if version.permalink.present?
+    if !version.default? && version.permalink.present?
+      options[:site_version] = version.permalink.html_safe
+    end
     options
   end
 end

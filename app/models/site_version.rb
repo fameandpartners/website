@@ -22,6 +22,10 @@ class SiteVersion < ActiveRecord::Base
     permalink.to_s.downcase.gsub(/\W/, '') == 'au'
   end
 
+  def code
+    @code ||= permalink.to_s.downcase.gsub(/\W/, '')
+  end
+
   class << self
     def by_permalink_or_default(permalink)
       version = nil

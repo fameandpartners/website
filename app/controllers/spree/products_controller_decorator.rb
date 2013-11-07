@@ -58,7 +58,7 @@ Spree::ProductsController.class_eval do
       )
     end
 
-    Spree::ProductMailer.send_to_friend(@product, user_info).deliver
+    Spree::ProductMailer.send_to_friend(@product, user_info, current_site_version).deliver
 
     render json: { success_message: 'successfully sended' }
   end

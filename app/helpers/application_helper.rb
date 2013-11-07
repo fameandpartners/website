@@ -235,6 +235,13 @@ module ApplicationHelper
       where(values_table[:value].not_eq(nil).and(values_table[:value].not_eq('')))
   end
 
+  def cache(name = {}, options = nil, &block)
+    name.push(current_site_version.code) if name.is_a?(Array)
+    name[:site_version] = current_site_version.code if name.is_a?(Hash)
+
+    super(name, options, &block)
+  end
+
   private
 
   def current_sale
