@@ -3,7 +3,7 @@ class SiteVersion < ActiveRecord::Base
 
   validates :zone, presence: true
   validates :name, presence: true
-  validates :permalink, allow_blank: true, uniqueness: { case_sensitive: false }
+  validates :permalink, presence: true, uniqueness: { case_sensitive: false }
 
   attr_accessible :name, :permalink, :zone_id, :currency, :locale, :default
 

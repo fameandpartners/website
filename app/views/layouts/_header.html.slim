@@ -26,7 +26,6 @@
 header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .header-wrapper
     .some-level.site-version
-      .image =# image_tag("site_versions/#{current_site_version.code}")
       h3 = current_site_version.name
     .first-level
       .logo = link_to 'fame&partners', root_path
