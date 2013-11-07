@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131030065323) do
+ActiveRecord::Schema.define(:version => 20131030070401) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -966,15 +966,15 @@ ActiveRecord::Schema.define(:version => 20131030065323) do
   end
 
   create_table "spree_users", :force => true do |t|
-    t.string   "encrypted_password",     :limit => 128
-    t.string   "password_salt",          :limit => 128
+    t.string   "encrypted_password",                 :limit => 128
+    t.string   "password_salt",                      :limit => 128
     t.string   "email"
     t.string   "remember_token"
     t.string   "persistence_token"
     t.string   "reset_password_token"
     t.string   "perishable_token"
-    t.integer  "sign_in_count",                         :default => 0, :null => false
-    t.integer  "failed_attempts",                       :default => 0, :null => false
+    t.integer  "sign_in_count",                                     :default => 0, :null => false
+    t.integer  "failed_attempts",                                   :default => 0, :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -987,9 +987,9 @@ ActiveRecord::Schema.define(:version => 20131030065323) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "reset_password_sent_at"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.string   "spree_api_key",          :limit => 48
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
+    t.string   "spree_api_key",                      :limit => 48
     t.datetime "remember_created_at"
     t.string   "first_name"
     t.string   "last_name"

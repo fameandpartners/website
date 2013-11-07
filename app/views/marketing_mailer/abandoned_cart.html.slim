@@ -1,0 +1,44 @@
+table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+  tbody
+    tr
+      td height="60"
+    tr
+      td
+        h1 style="margin: 0; padding: 0; font: 400 italic 32px/1.1 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif; color: #000;" Hi, #{@user.first_name}!
+    tr
+      td height="14"
+    tr
+      td
+        h2 style="margin: 0; padding: 0; text-transform: uppercase; color: #737373; font: 400 14px/1.1 Arial, sans-serif;" You have items to purchaise in your shopping bag.
+    tr
+      td height="40"
+    tr
+      td
+        .position style="position: relative;"
+          = link_to spree.cart_url, style: 'text-decoration: none;' do
+            = image_tag root_url + 'images/email/marketing/finish-my-order.png', width: 138, height: 138, alt: 'Finish my order', style: 'position: absolute; top: -100px; right: 20px; border: 0;'
+        table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+          - @order.line_items.in_groups_of(2).each do |group|
+            tr
+              td width="20"
+              td width="40%" style="padding-bottom: 50px;"
+                ruby:
+                  line_item = group.first
+                - if line_item.present?
+                  .image-container style="background: #fff; padding: 10px; border: 1px solid #dedede; box-shadow: 1px 1px 4px rgba(0, 0, 0, .3);"
+                    = product_image_tag(line_item.variant.product, 'large', width: 290, height: 372, alt: '', style: 'display: block; max-width: 100%; height: auto;')
+              td width="15"
+              td width="40%" style="padding-bottom: 50px;"
+                ruby:
+                  line_item = group.second
+                - if line_item.present?
+                  .image-container style="background: #fff; padding: 10px; border: 1px solid #dedede; box-shadow: 1px 1px 4px rgba(0, 0, 0, .3);"
+                    = product_image_tag(line_item.variant.product, 'large', width: 290, height: 372, alt: '', style: 'display: block; max-width: 100%; height: auto;')
+              td width="20"
+    tr
+      td height="40"
+    tr
+      td style="text-align: center;"
+        = link_to 'Finish my order', spree.cart_url, style: 'display: inline-block; background: #000; color: #fff; text-decoration: none; text-transform: uppercase; padding: 16px 78px; font: 400 16px/1 Arial, sans-serif;'
+    tr
+      td height="40"

@@ -190,6 +190,7 @@ GEM
       capistrano
     celluloid (0.14.1)
       timers (>= 1.0.0)
+    chronic (0.10.2)
     ckeditor (4.0.4)
       mime-types
       orm_adapter
@@ -509,6 +510,9 @@ GEM
     wasabi (2.5.1)
       httpi (~> 1.0)
       nokogiri (>= 1.4.0)
+    whenever (0.8.4)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     xml-simple (1.1.2)
     yamler (0.1.0)
 
@@ -565,3 +569,4 @@ DEPENDENCIES
   titleize
   uglifier (= 1.3.0)
   unicorn
+  whenever

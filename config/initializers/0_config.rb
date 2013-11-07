@@ -21,6 +21,9 @@ configatron.cache.expire.quickly = 15.minutes
 configatron.cache.expire.normally = 1.hour
 configatron.cache.expire.long = 1.day
 
+configatron.email_marketing.delay_time.abandoned_cart = 1.hour
+configatron.email_marketing.delay_time.added_to_wishlist = 12.hours
+configatron.email_marketing.delay_time.quiz_unfinished = 12.hours
 
 case Rails.env.to_sym
 when :development
@@ -33,6 +36,9 @@ when :staging
   configatron.mailgun.mailbox.domain = '23stages.com'
   configatron.mailgun.mailbox.username = 'mailer@23stages.com'
   configatron.mailgun.mailbox.password = '80kmdvXlufsZOW'
+
+  configatron.mandrill.smtp.username = 'eltons@fameandpartners.com'
+  configatron.mandrill.smtp.password = '189aQIbDBG2pBeKxqoth5A'
 when :production
   configatron.host = 'www.fameandpartners.com'
   configatron.blog_host = 'blog.fameandpartners.com'
@@ -43,5 +49,8 @@ when :production
 
   configatron.campaign_monitor.api_key = '3f7e4ac86b143e32a5c7b46b83641143'
   configatron.campaign_monitor.list_id = 'cc9be877f40c64cf389f6e3ea95daa0a'
+
+  configatron.mandrill.smtp.username = 'eltons@fameandpartners.com'
+  configatron.mandrill.smtp.password = '189aQIbDBG2pBeKxqoth5A'
 when :test
 end

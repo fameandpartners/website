@@ -156,6 +156,10 @@ Spree::Product.class_eval do
     end
   end
 
+  def can_be_customized?
+    product_customisation_values.present?
+  end
+
   private
 
   def build_variants_from_option_values_hash
