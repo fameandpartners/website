@@ -244,23 +244,6 @@ ActiveRecord::Schema.define(:version => 20131031184353) do
     t.integer  "image_file_size"
   end
 
-  create_table "data_migrations", :id => false, :force => true do |t|
-    t.string "version", :null => false
-  end
-
-  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
-
-  create_table "inspirations", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.string   "name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
     t.integer  "product_id"
@@ -997,15 +980,15 @@ ActiveRecord::Schema.define(:version => 20131031184353) do
   end
 
   create_table "spree_users", :force => true do |t|
-    t.string   "encrypted_password",     :limit => 128
-    t.string   "password_salt",          :limit => 128
+    t.string   "encrypted_password",                 :limit => 128
+    t.string   "password_salt",                      :limit => 128
     t.string   "email"
     t.string   "remember_token"
     t.string   "persistence_token"
     t.string   "reset_password_token"
     t.string   "perishable_token"
-    t.integer  "sign_in_count",                         :default => 0, :null => false
-    t.integer  "failed_attempts",                       :default => 0, :null => false
+    t.integer  "sign_in_count",                                     :default => 0, :null => false
+    t.integer  "failed_attempts",                                   :default => 0, :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -1018,9 +1001,9 @@ ActiveRecord::Schema.define(:version => 20131031184353) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "reset_password_sent_at"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.string   "spree_api_key",          :limit => 48
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
+    t.string   "spree_api_key",                      :limit => 48
     t.datetime "remember_created_at"
     t.string   "first_name"
     t.string   "last_name"
@@ -1034,6 +1017,9 @@ ActiveRecord::Schema.define(:version => 20131031184353) do
     t.string   "sign_up_reason"
     t.string   "phone"
     t.boolean  "newsletter"
+    t.datetime "last_cart_notification_sent_at"
+    t.datetime "last_wishlist_notification_sent_at"
+    t.datetime "last_quiz_notification_sent_at"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
