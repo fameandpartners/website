@@ -41,10 +41,6 @@ Spree::Product.class_eval do
   before_create :set_default_prototype
   after_create :build_customisations_from_values_hash, :if => :customisation_values_hash
 
-  def on_hand
-    has_variants? ? variants.sum(&:on_hand) : (master.try(:on_hand) || 0)
-  end
-
   def images
     table_name = Spree::Image.quoted_table_name
 
