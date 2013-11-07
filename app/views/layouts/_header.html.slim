@@ -4,29 +4,29 @@
       ul
         li = link_to 'home', root_path, class: 'top-icon link-root'
         li.top-icon.phone order on the phone / customer service 1300 924 860
-    nav.fright
-      ul
-        - unless spree_user_signed_in?
-          li = link_to 'sign up', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
-          li = link_to 'log-in', spree_login_path, class: 'link-login'
-        - else
-          li.loggedin
-            .dropdown-trigger
-              - if current_spree_user.image.present?
-                .avatar
-                  = image_tag current_spree_user.image, width: 20
-              =' current_spree_user.full_name
-            .dropdown-menu
-              ul
-                li = link_to 'account settings', profile_path
-                li = link_to 'your orders', user_orders_path
-                li = link_to 'style profile', styleprofile_path
-                li = link_to 'sign out', spree_logout_path
-
+    .fright
+      nav.fleft
+        ul
+          - unless spree_user_signed_in?
+            li = link_to 'sign up', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
+            li = link_to 'log-in', spree_login_path, class: 'link-login'
+          - else
+            li.loggedin
+              .dropdown-trigger
+                - if current_spree_user.image.present?
+                  .avatar
+                    = image_tag current_spree_user.image, width: 20
+                =' current_spree_user.full_name
+              .dropdown-menu
+                ul
+                  li = link_to 'account settings', profile_path
+                  li = link_to 'your orders', user_orders_path
+                  li = link_to 'style profile', styleprofile_path
+                  li = link_to 'sign out', spree_logout_path
+      .some-level.site-version.fright
+        h3 = current_site_version.name
 header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .header-wrapper
-    .some-level.site-version
-      h3 = current_site_version.name
     .first-level
       .logo = link_to 'fame&partners', root_path
       .tag-line formal dresses for fashion forward, free thinking young women
