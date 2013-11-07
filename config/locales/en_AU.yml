@@ -10,6 +10,7 @@ en-AU:
         zipcode: "Shipping address postcode"
   zip: 'Postcode'
   color: 'Colour'
+  customization: 'customisation'
   spree:
     admin:
       products:

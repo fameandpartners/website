@@ -1,28 +1,29 @@
 class CreateSiteVersions < ActiveRecord::Migration
   def create_default_site_versions
-    australia = Spree::Zone.where(name: 'australia').first
-    version = SiteVersion.create(
+    australia = Spree::Zone.all.detect{ |zone| zone.name.downcase.eql?('australia') }
+    SiteVersion.create(
       permalink: 'au',
       name: 'australia',
       zone_id: australia.try(:id),
       currency: 'AUD',
-      locale: 'en_AU',
+      locale: 'en-AU',
       default: true
     )
 
-    usa = Spree::Zone.where(name: 'USA').first
-    version = SiteVersion.create(
+    usa = Spree::Zone.all.detect{ |zone| zone.name.downcase.eql?('usa') }
+    usa = Spree::Zone.create(name: 'USA', description: 'USA') unless usa.present?
+    SiteVersion.create(
       permalink: 'us',
       name: 'usa',
       zone_id: usa.try(:id),
       currency: 'USD',
-      locale: 'en_US',
+      locale: 'en-US',
       default: false
     )
   end
 
-  def change
-    create_table :site_versions, force: true do |t|
+  def up
+    create_table :site_versions do |t|
       t.references :zone
       t.string :name
       t.string :permalink
@@ -38,5 +39,10 @@ class CreateSiteVersions < ActiveRecord::Migration
     create_default_site_versions
 
     add_index :site_versions, :zone_id
+  end
+
+  def down
+    drop_table :site_versions
+    remove_index :site_versions, :zone_id
   end
 end

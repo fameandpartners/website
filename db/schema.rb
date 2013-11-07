@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031184353) do
+ActiveRecord::Schema.define(:version => 20131103173802) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1026,20 +1026,21 @@ ActiveRecord::Schema.define(:version => 20131031184353) do
   add_index "spree_users", ["slug"], :name => "index_spree_users_on_slug"
 
   create_table "spree_variants", :force => true do |t|
-    t.string   "sku",                                         :default => "",    :null => false
-    t.decimal  "weight",        :precision => 8, :scale => 2
-    t.decimal  "height",        :precision => 8, :scale => 2
-    t.decimal  "width",         :precision => 8, :scale => 2
-    t.decimal  "depth",         :precision => 8, :scale => 2
+    t.string   "sku",                                           :default => "",    :null => false
+    t.decimal  "weight",          :precision => 8, :scale => 2
+    t.decimal  "height",          :precision => 8, :scale => 2
+    t.decimal  "width",           :precision => 8, :scale => 2
+    t.decimal  "depth",           :precision => 8, :scale => 2
     t.datetime "deleted_at"
-    t.boolean  "is_master",                                   :default => false
+    t.boolean  "is_master",                                     :default => false
     t.integer  "product_id"
-    t.integer  "count_on_hand",                               :default => 0
-    t.decimal  "cost_price",    :precision => 8, :scale => 2
+    t.integer  "count_on_hand",                                 :default => 0
+    t.decimal  "cost_price",      :precision => 8, :scale => 2
     t.integer  "position"
-    t.integer  "lock_version",                                :default => 0
-    t.boolean  "on_demand",                                   :default => false
+    t.integer  "lock_version",                                  :default => 0
+    t.boolean  "on_demand",                                     :default => false
     t.string   "cost_currency"
+    t.boolean  "is_customizable",                               :default => false
   end
 
   add_index "spree_variants", ["product_id"], :name => "index_spree_variants_on_product_id"

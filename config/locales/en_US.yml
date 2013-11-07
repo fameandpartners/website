@@ -10,6 +10,7 @@ en-US:
         zipcode: "Shipping address zipcode"
   zip: 'Zipcode'
   color: 'Color'
+  customization: 'customization'
   spree:
     admin:
       products:
@@ -21,4 +22,4 @@ en-US:
           add_new_variant: "add variant"
   date:
     formats:
-      default: '%d/%m/%y'
+      default: '%m/%d/%y'

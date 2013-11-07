@@ -176,9 +176,9 @@ class ApplicationController < ActionController::Base
   def current_site_version
     return @current_site_version if @current_site_version
 
-    if session[:site_version]
+    if session[:site_version].present?
       @current_site_version = SiteVersion.by_permalink_or_default(session[:site_version])
-    elsif params[:site_version]
+    elsif params[:site_version].present?
       @current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
       self.current_site_version = @current_site_version
     else
@@ -216,11 +216,11 @@ class ApplicationController < ActionController::Base
   end
 
   def default_locale
-    'en_US'
+    'en-US'
   end
 
   def set_locale
-    I18n.locale = current_site_version.try(:locale) || default_locale
+    session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
 
   helper_method :default_url_options
