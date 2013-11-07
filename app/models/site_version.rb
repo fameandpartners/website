@@ -23,7 +23,7 @@ class SiteVersion < ActiveRecord::Base
   end
 
   def code
-    @code ||= permalink.to_s.downcase.gsub(/\W/, '')
+    permalink.to_s.downcase.gsub(/\W/, '')
   end
 
   class << self

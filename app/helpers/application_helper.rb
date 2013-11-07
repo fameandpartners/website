@@ -106,7 +106,7 @@ module ApplicationHelper
     if range_taxonomy && range_taxonomy.taxons.where(id: taxon.id).exists?
       permalink = taxon.permalink.split('/').last
       site_version_prefix = self.default_url_options[:site_version]
-      if site_version_prefix.prefix.present?
+      if site_version_prefix.present?
         "#{site_version_prefix}/collection/#{permalink}"
       else
         "/collection/#{permalink}"
