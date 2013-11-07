@@ -151,3 +151,10 @@ $(document).ready(function() {
     };
   };
 });
+
+$(document).ready(function() {
+  $('.current-version').on('click', function() {
+    $(this).toggleClass('active');
+    $('.site-version-switch').toggle();
+  })
+});

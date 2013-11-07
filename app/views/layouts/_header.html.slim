@@ -23,8 +23,20 @@
                   li = link_to 'your orders', user_orders_path
                   li = link_to 'style profile', styleprofile_path
                   li = link_to 'sign out', spree_logout_path
-      .some-level.site-version.fright
-        h3 = current_site_version.name
+      .site-version.fright
+        .current-version
+          = image_tag 'flags/us.png', width: 16, height: 11, alt: 'USA'
+          i.icon.icon-dropdown-down
+        .site-version-switch
+          ul
+            li
+              = link_to '#' do
+                = image_tag 'flags/au.png', width: 16, height: 11, alt: 'Australia'
+                ' Australia
+            li
+              = link_to '#' do
+                = image_tag 'flags/us.png', width: 16, height: 11, alt: 'USA'
+                ' USA
 header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .header-wrapper
     .first-level
