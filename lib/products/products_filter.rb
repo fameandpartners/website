@@ -28,7 +28,11 @@ module Products
       @products_scope = get_base_scope
       @products = @products_scope.includes([:master => :prices])
       unless Spree::Config.show_products_without_price
-        @products = @products.where("spree_prices.amount IS NOT NULL").where("spree_prices.currency" => current_currency)
+        # note - we don't count different currencies here
+        @products = @products.joins(
+          "LEFT OUTER JOIN spree_zone_prices ON spree_zone_prices.variant_id = spree_variants.id"
+        )
+        @products = @products.where("(spree_prices.amount IS NOT NULL) or (spree_zone_prices.amount is not null)")
       end
       @products.offset((page - 1) * per_page).limit(per_page)
     end
