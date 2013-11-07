@@ -1,22 +1,23 @@
 FameAndPartners::Application.routes.draw do
   match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
 
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-    devise_for :spree_user,
-               :class_name => 'Spree::User',
-               :controllers => { :sessions => 'spree/user_sessions',
-                                 :registrations => 'spree/user_registrations',
-                                 :passwords => 'spree/user_passwords',
-                                 :confirmations => 'spree/user_confirmations',
-                                 :omniauth_callbacks => 'spree/omniauth_callbacks'
-               },
-               :skip => [:unlocks, :omniauth_callbacks],
-               :path_names => { :sign_out => 'logout' }
+  devise_for :spree_user,
+             :class_name => 'Spree::User',
+             :controllers => { :sessions => 'spree/user_sessions',
+                               :registrations => 'spree/user_registrations',
+                               :passwords => 'spree/user_passwords',
+                               :confirmations => 'spree/user_confirmations',
+                               :omniauth_callbacks => 'spree/omniauth_callbacks'
+             },
+             :skip => [:unlocks, :omniauth_callbacks],
+             :path_names => { :sign_out => 'logout' }
 
-    devise_scope :spree_user do
-      get '/spree_user/thanks' => 'spree/user_registrations#thanks'
-      get '/account_settings' => 'spree/user_registrations#edit'
-    end
+  devise_scope :spree_user do
+    get '/spree_user/thanks' => 'spree/user_registrations#thanks'
+    get '/account_settings' => 'spree/user_registrations#edit'
+  end
+
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Custom Dresses part II
     scope '/custom-dresses', module: 'personalization' do
@@ -64,43 +65,46 @@ FameAndPartners::Application.routes.draw do
     # eo account settings
 
     resources :product_reservations, only: [:create]
+  end
 
-    # Redirects from old blog urls
-    constraints host: /blog\./ do
-      get '/' => redirect(host: configatron.host, path: "/blog")
-      match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
-    end
+  # Redirects from old blog urls
+  constraints host: /blog\./ do
+    get '/' => redirect(host: configatron.host, path: "/blog")
+    match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
+  end
 
-    # Blog routes
-    scope '/blog' do
-      get '/' => 'blog#index', as: :blog
-      get '/about'   => 'blog#about', as: :about
-      get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
+  # Blog routes
+  scope '/blog' do
+    get '/' => 'blog#index', as: :blog
+    get '/about'   => 'blog#about', as: :about
+    get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
 
-      get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
-      get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
+    get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
+    get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
 
-      get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
-      get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
+    get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
+    get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
 
-      post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
-      post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
+    post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
+    post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
 
-      get '/stylists' => 'blog/authors#index', as: :blog_authors
-      get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
-
-
-      get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
-      get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
+    get '/stylists' => 'blog/authors#index', as: :blog_authors
+    get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
 
 
-      get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
-      get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+    get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
+    get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
 
-      get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
-      get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
 
-    end
+    get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
+    get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+
+    get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
+    get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
+
+  end
+
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
@@ -159,94 +163,97 @@ FameAndPartners::Application.routes.draw do
       get '/style-report-debug' => 'user_style_profiles#debug'
       get '/recomendations' => 'user_style_profiles#recomendations'
     end
+  end
 
-    get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
+  get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
 
-    mount Spree::Core::Engine, at: '/'
+  mount Spree::Core::Engine, at: '/'
 
-    Spree::Core::Engine.routes.append do
-      namespace :admin do
-        scope 'products/:product_id', :as => 'product' do
-          resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
+  Spree::Core::Engine.routes.append do
+    namespace :admin do
+      scope 'products/:product_id', :as => 'product' do
+        resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
+      end
+
+      scope 'taxonomies/:taxonomy_id/taxons/:id' do
+        resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
+      end
+
+      scope 'products/:product_id', :as => 'product' do
+        resource :inspiration, :only => [:edit, :update]
+
+        resource :colors, only: [:new, :create], controller: 'product_colors'
+      end
+
+      match '/product_images/upload' => 'product_images#upload', as: 'upload_product_images'
+
+      match '/blog' => redirect('/admin/blog/posts')
+
+      get '/wishlist_items/download' => 'wishlist_items#download', as: 'wishlist_export'
+      get '/user_style_profiles/download' => 'user_style_profiles#download', as: 'user_style_profiles_export'
+
+      resources :competition_entries, only: [:index, :show]
+
+      resource :product_positions, only: [:show, :create]
+
+      resource :sale, :only => [:edit, :update]
+
+      resources :customisation_types do
+        collection do
+          post :update_positions
+          post :update_values_positions
+        end
+      end
+      delete '/customisation_values/:id', :to => "customisation_values#destroy", :as => :customisation_value
+
+      resources :products do
+        resources :product_customisations
+        resources :product_customisation_types, only: :destroy
+        resources :product_customisation_values, only: :destroy
+      end
+
+      namespace :blog do
+        resources :promo_banners
+        resources :categories
+        resources :events
+
+        resources :red_carpet_events, only: [:index] do
         end
 
-        scope 'taxonomies/:taxonomy_id/taxons/:id' do
-          resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
-        end
+        resources :assets, only: [:create, :destroy, :index]
 
-        scope 'products/:product_id', :as => 'product' do
-          resource :inspiration, :only => [:edit, :update]
-
-          resource :colors, only: [:new, :create], controller: 'product_colors'
-        end
-
-        match '/product_images/upload' => 'product_images#upload', as: 'upload_product_images'
-
-        match '/blog' => redirect('/admin/blog/posts')
-
-        get '/wishlist_items/download' => 'wishlist_items#download', as: 'wishlist_export'
-        get '/user_style_profiles/download' => 'user_style_profiles#download', as: 'user_style_profiles_export'
-
-        resources :competition_entries, only: [:index, :show]
-
-        resource :product_positions, only: [:show, :create]
-
-        resource :sale, :only => [:edit, :update]
-
-        resources :customisation_types do
-          collection do
-            post :update_positions
-            post :update_values_positions
+        resources :post_photos
+        resources :celebrity_photos do
+          member do
+            put :assign_celebrity
+            put :assign_post
+            put :make_primary
           end
         end
-        delete '/customisation_values/:id', :to => "customisation_values#destroy", :as => :customisation_value
 
-        resources :products do
-          resources :product_customisations
-          resources :product_customisation_types, only: :destroy
-          resources :product_customisation_values, only: :destroy
+        resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
+          member do
+            put :toggle_publish
+            put :toggle_featured
+          end
         end
 
-        namespace :blog do
-          resources :promo_banners
-          resources :categories
-          resources :events
-
-          resources :red_carpet_events, only: [:index] do
+        resources :red_carpet_events, only: [:new, :create, :edit, :update, :index, :destroy] do
+          member do
+            put :toggle_publish
           end
+        end
 
-          resources :assets, only: [:create, :destroy, :index]
-
-          resources :post_photos
-          resources :celebrity_photos do
-            member do
-              put :assign_celebrity
-              put :assign_post
-              put :make_primary
-            end
-          end
-
-          resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
-            member do
-              put :toggle_publish
-              put :toggle_featured
-            end
-          end
-
-          resources :red_carpet_events, only: [:new, :create, :edit, :update, :index, :destroy] do
-            member do
-              put :toggle_publish
-            end
-          end
-
-          resources :celebrities do
-            member do
-              put :toggle_featured
-            end
+        resources :celebrities do
+          member do
+            put :toggle_featured
           end
         end
       end
     end
+  end
+
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     get 'search' => 'pages#search'
 
