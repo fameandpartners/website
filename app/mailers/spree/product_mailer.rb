@@ -41,7 +41,7 @@ class Spree::ProductMailer < ActionMailer::Base
   def get_product_show_url(product, site_version = nil)
     googleurl = "?utm_source=transactionalemail&utm_medium=email&utm_term=mum&utm_content=calltoaction&utm_campaign=sendtofriend"
     prefix = ''
-    if site_version.present? && !site_version.default? && site_version.permalink.present?
+    if site_version.present? && site_version.permalink.present?
       prefix = "/#{site_version.permalink}"
     end
 

@@ -228,8 +228,7 @@ class ApplicationController < ActionController::Base
   def default_url_options
     version = current_site_version
     options = {}
-    #options[:site_version] = version.permalink.html_safe if version.permalink.present?
-    if !version.default? && version.permalink.present?
+    if version.permalink.present?
       options[:site_version] = version.permalink.html_safe
     end
     options

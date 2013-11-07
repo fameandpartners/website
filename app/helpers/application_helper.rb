@@ -106,7 +106,11 @@ module ApplicationHelper
     if range_taxonomy && range_taxonomy.taxons.where(id: taxon.id).exists?
       permalink = taxon.permalink.split('/').last
       site_version_prefix = self.default_url_options[:site_version]
-      "#{site_version_prefix}/collection/#{permalink}"
+      if site_version_prefix.prefix.present?
+        "#{site_version_prefix}/collection/#{permalink}"
+      else
+        "/collection/#{permalink}"
+      end
     else
       collection_path
     end
@@ -117,7 +121,11 @@ module ApplicationHelper
     if taxon
       taxon_permalink = taxon.permalink.split('/').last
       site_version_prefix = self.default_url_options[:site_version]
-      "/#{site_version_prefix}/collection/#{taxon_permalink}/#{product.to_param}"
+      if site_version_prefix.present?
+        "/#{site_version_prefix}/collection/#{taxon_permalink}/#{product.to_param}"
+      else
+        "/collection/#{taxon_permalink}/#{product.to_param}"
+      end
     else
       spree.product_path(product)
     end
