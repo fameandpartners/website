@@ -6,7 +6,8 @@
     .or
       span or
     .default-form
-      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, params.slice(:cl)) do |f|
+      - signup_params = params.slice(:cl).merge(site_version: current_site_version.code)
+      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
         = render 'shared/error_messages', :target => @spree_user
         = render :partial => 'spree/shared/user_form', :locals => { :f => f }
     .terms

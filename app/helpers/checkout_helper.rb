@@ -1,5 +1,6 @@
 module CheckoutHelper
-  def available_countries
+  # updated code from spree::base_helper#available_countries
+  def available_countries_for_current_zone
     checkout_zone = current_site_version.try(:zone) || Zone.find_by_name(Spree::Config[:checkout_zone])
 
     if checkout_zone && checkout_zone.kind == 'country'

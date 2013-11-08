@@ -144,6 +144,11 @@ Spree::CheckoutController.class_eval do
     end
   end
 
+  def before_address
+    @order.bill_address ||= Spree::Address.default(current_site_version)
+    @order.ship_address ||= Spree::Address.default(current_site_version)
+  end 
+
   private
 
   # run callback - preparations to order states

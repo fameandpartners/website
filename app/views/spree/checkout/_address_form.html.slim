@@ -34,7 +34,7 @@ ruby:
   .grid-45.input id="#{address_id}country"
     = form.label :country_id, with_required_mark(t(:country))
     span id="#{address_id}country-selection"
-      = form.collection_select :country_id, available_countries, :id, :name, {}, {:class => 'required selectbox'}
+      = form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required selectbox'}
 
   .clear
 

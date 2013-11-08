@@ -26,6 +26,21 @@ class SiteVersion < ActiveRecord::Base
     permalink.to_s.downcase.gsub(/\W/, '')
   end
 
+  def countries
+    if self.zone
+      country_ids = zone.zone_members.where(zoneable_type: "Spree::Country").collect(&:zoneable_id)
+      Spree::Country.where(id: country_ids)
+    else
+      Spree::Country.all
+    end
+  rescue
+    Spree::Country.all
+  end
+
+  def default_country
+    Spree::Country.where("lower(iso) = ?", self.code).first
+  end
+
   class << self
     def by_permalink_or_default(permalink)
       version = nil
