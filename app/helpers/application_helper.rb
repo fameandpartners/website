@@ -107,7 +107,7 @@ module ApplicationHelper
       permalink = taxon.permalink.split('/').last
       site_version_prefix = self.url_options[:site_version]
       if site_version_prefix.present?
-        "#{site_version_prefix}/collection/#{permalink}".gsub(/\/+/, '/')
+        "/#{site_version_prefix}/collection/#{permalink}".gsub(/\/+/, '/')
       else
         "/collection/#{permalink}"
       end
