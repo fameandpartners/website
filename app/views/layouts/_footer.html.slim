@@ -42,6 +42,13 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
         li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
         li.hide = link_to 'google', configatron.links.google, target: :blank, class: 'google'
         li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
+  - if site_versions_enabled?
+    .wrap
+      h3
+        - if current_site_version.is_australia?
+          = link_to 'Switch to United states version', site_version_path('us')
+        - else
+          = link_to 'Switch to Australian version', site_version_path('au')
   .wrap
     .logo-copyright
       .logo
