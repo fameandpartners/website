@@ -30,9 +30,6 @@ class ApplicationController < ActionController::Base
       site_version = nil
     end
 
-    debugger
-    super
-
     { site_version: site_version }.merge(super)
   end
 
