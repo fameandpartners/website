@@ -105,9 +105,9 @@ module ApplicationHelper
   def collection_taxon_path(taxon)
     if range_taxonomy && range_taxonomy.taxons.where(id: taxon.id).exists?
       permalink = taxon.permalink.split('/').last
-      site_version_prefix = self.default_url_options[:site_version]
+      site_version_prefix = self.url_options[:site_version]
       if site_version_prefix.present?
-        "#{site_version_prefix}/collection/#{permalink}"
+        "#{site_version_prefix}/collection/#{permalink}".gsub(/\/+/, '/')
       else
         "/collection/#{permalink}"
       end
@@ -120,9 +120,9 @@ module ApplicationHelper
     taxon = range_taxon_for(product)
     if taxon
       taxon_permalink = taxon.permalink.split('/').last
-      site_version_prefix = self.default_url_options[:site_version]
+      site_version_prefix = self.url_options[:site_version]
       if site_version_prefix.present?
-        "/#{site_version_prefix}/collection/#{taxon_permalink}/#{product.to_param}"
+        "/#{site_version_prefix}/collection/#{taxon_permalink}/#{product.to_param}".gsub(/\/+/, '/')
       else
         "/collection/#{taxon_permalink}/#{product.to_param}"
       end
@@ -132,7 +132,7 @@ module ApplicationHelper
   end
 
   def collection_product_url(product)
-    root_url + collection_product_path(product)
+    (root_url + collection_product_path(product)).gsub(/\/+/, '/')
   end
 
   def absolute_image_url(image_url, protocol = nil)
