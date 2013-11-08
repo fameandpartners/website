@@ -21,6 +21,21 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_locale
 
+  def url_options
+    version = current_site_version
+
+    if version.permalink.present? && version.permalink != 'us'
+      site_version = version.permalink.html_safe
+    else
+      site_version = nil
+    end
+
+    debugger
+    super
+
+    { site_version: site_version }.merge(super)
+  end
+
   private
 
   def title(*args)
@@ -221,16 +236,5 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
-  end
-
-  helper_method :default_url_options
-
-  def default_url_options
-    version = current_site_version
-    options = {}
-    if version.permalink.present? && version.permalink != 'us'
-      options[:site_version] = version.permalink.html_safe
-    end
-    options
   end
 end
