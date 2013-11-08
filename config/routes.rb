@@ -163,11 +163,11 @@ FameAndPartners::Application.routes.draw do
       get '/style-report-debug' => 'user_style_profiles#debug'
       get '/recomendations' => 'user_style_profiles#recomendations'
     end
+
+    mount Spree::Core::Engine, at: '/'
   end
 
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
-
-  mount Spree::Core::Engine, at: '/'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
