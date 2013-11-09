@@ -9,7 +9,8 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
       td height="14"
     tr
       td style="text-align: center;"
-        = image_tag root_url + 'images/email/marketing/discover-style-profile.jpg', width: 683, height: 333, alt: 'Discover your style profile', style: 'display: block; max-width: 100%; height: auto;'
+        link_to root_url(osq: 1) do
+          = image_tag root_url + 'images/email/marketing/discover-style-profile.jpg', width: 683, height: 333, alt: 'Discover your style profile', style: 'display: block; max-width: 100%; height: auto;'
     tr
       td height="34"
     tr

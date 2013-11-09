@@ -14,7 +14,7 @@ class MarketingMailer < ActionMailer::Base
 
     mail(
       to: @user.email,
-      subject: Spree::Config[:site_name] + ' ' + t('emails.subjects.marketing.abandoned_cart')
+      subject: t('emails.subjects.marketing.abandoned_cart')
     )
   end
 
@@ -24,7 +24,7 @@ class MarketingMailer < ActionMailer::Base
 
     mail(
       to: @user.email,
-      subject: Spree::Config[:site_name] + ' ' + t('emails.subjects.marketing.added_to_wishlist')
+      subject: t('emails.subjects.marketing.added_to_wishlist')
     )
   end
 
@@ -34,7 +34,7 @@ class MarketingMailer < ActionMailer::Base
 
     mail(
       to: @user.email,
-      subject: Spree::Config[:site_name] + ' ' + t('emails.subjects.marketing.style_quiz_completed')
+      subject: t('emails.subjects.marketing.style_quiz_completed')
     )
   end
 
@@ -43,7 +43,7 @@ class MarketingMailer < ActionMailer::Base
 
     mail(
       to: @user.email,
-      subject: Spree::Config[:site_name] + ' ' + t('emails.subjects.marketing.style_quiz_not_completed')
+      subject: t('emails.subjects.marketing.style_quiz_not_completed')
     )
   end
 end
