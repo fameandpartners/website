@@ -1,4 +1,103 @@
-.famechain
+.wrap
+  .thefamechain
+    .logo
+      = image_tag 'famechain/logo.png', width: 531, height: 179, alt: 'The Fame Chain'
+    .the-word
+      .word Noun.
+      .text-center
+        ' A network of fashion forward,
+        br
+        ' free thinking bloggers 
+        i increasing 
+        ' their 
+        b bling 
+        br
+        ' through being linked.
+    .apply
+      .big Apply for membership
+      ' /
+      br
+      ' Members
+      br
+      ' Perks
+    .perks
+      = image_tag 'famechain/perks.png', width: 942, height: 147, alt: 'The Fame Chain Perks'
+    .chain-line
+      = image_tag 'famechain/chain.png', width: 1046, height: 11, alt: ''
+    .circles
+      = image_tag 'famechain/circles.jpg', width: 1040, height: 613, alt: ''
+    .benefits
+      .title What you get
+      ul.benefits-list
+        li
+          ' • 
+          i.didot 15% commission 
+          '  on every dress that one of your followers buys from us
+        li
+          ' • A 
+          i.didot.uppercase  free formal dress
+          ' when 5 of your followers buy from our store
+        li • Free blog and content creation training
+        li
+          ' • Opportunity to link to other blogs and 
+          i.didot.uppercase  increase your own blog's visibility
+        li • Public endorsement of your blog as part of The Fame Chain
+        li • Opportunity to guest post on The Fame Issue
+        li
+          ' • 
+          i.didot VIP access 
+          '  to special discounts for you and your followers
+        li
+          i.didot.uppercase • CO-DESIGN A FORMAL DRESS
+        li • Access to a network of like-minded young women and content
+        li
+          ' • 
+          i.didot.uppercase JUMPSTART  
+          '  in your blogging, fashion and/or technology career
+        li • VIP access to our annual paid internship competition
+    .apply-now
+      .chain-line
+        = image_tag 'famechain/chain.png', width: 1046, height: 11, alt: ''
+      .title Apply now
+      .form
+        = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
+          .input
+            label Name
+            = f.text_field :name
+          .input
+            label Email
+            = f.text_field :email, type: 'email'
+          .input
+            label Blog
+            = f.text_field :blog, type: 'url'
+          .input
+            label Pinterest
+            = f.text_field :pinterest, type: 'url'
+          .input
+            label Facebook
+            = f.text_field :facebook, type: 'url'
+          .input
+            label Twitter
+            = f.text_field :twitter, type: 'url'
+          .submit
+            = f.submit "Apply now"
+    .how-it-works
+      .chain-line
+        = image_tag 'famechain/chain.png', width: 1046, height: 11, alt: ''
+      .title How does it works?
+      ul.steps
+        li Apply to join The Fame Chain
+        li = image_tag 'famechain/chain-item.png', width: 32, height: 31, alt: ''
+        li Applications are assessed within 5 days
+        li = image_tag 'famechain/chain-item.png', width: 32, height: 31, alt: ''
+        li If you are accepted, you get all the perks above
+        li = image_tag 'famechain/chain-item.png', width: 32, height: 31, alt: ''
+        li
+          ' Receive The Fame Chain Welcome Kit
+          br
+          ' with technical instructions on how to join
+
+/.famechain
   .wrap
     h1 The Fame Chain
     .chain-desc

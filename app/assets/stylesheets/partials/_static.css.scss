@@ -90,3 +90,141 @@
     }
   }
 }
+
+.thefamechain {
+  .logo {
+    position: relative;
+    text-align: center;
+    height: 219px;
+    img {
+      margin: 49px 0 0;
+    }
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 8px;
+    }
+    &:before {
+      top: 0;
+      background: image-url('famechain/border-logo-top.jpg') center 0 no-repeat;
+    }
+    &:after {
+      bottom: 0;
+      background: image-url('famechain/border-logo-bottom.jpg') center 0 no-repeat;
+    }
+  }
+  .the-word {
+    padding: 24px 0;
+    text-align: center;
+    font: 400 23px/1.3 $fontFour;
+    @include radial-gradient(bottom left, #edbfbb, #faebf4);
+    .word {
+      margin: 0 0 24px;
+    }
+  }
+  .apply {
+    text-align: center;
+    color: #000;
+    font: 400 33px/.8 $fontFour;
+    text-transform: uppercase;
+    margin: 40px 0;
+    .big {
+      font-size: 80px;
+    }
+  }
+  .perks {
+    text-align: center;
+    margin: 0 0 60px;
+  }
+  .chain-line {
+    text-align: center;
+  }
+  .circles {
+    text-align: center;
+    margin: 20px 0 28px;
+  }
+  .benefits {
+    text-align: center;
+    padding: 20px 0;
+    background: #000;
+    color: #fff;
+    font: 300 15px/2 $fontOne;
+    .title {
+      font: 400 46px/1.1 $fontFive;
+      text-transform: uppercase;
+    }
+    .didot {
+      font-family: $fontFour;
+    }
+    .uppercase {
+      text-transform: uppercase;
+    }
+  }
+  .apply-now {
+    padding: 26px 0 0;
+    background: image-url('famechain/paint.jpg') center top no-repeat;
+    .title {
+      margin: 10px 0 0;
+      text-align: center;
+      font: 400 80px/1.1 $fontFour;
+      text-transform: uppercase;
+      color: #000;
+    }
+    .input {
+      label {
+        width: 358px;
+        font: 400 38px/1 $fontFive;
+        color: #000;
+        text-transform: uppercase;
+        display: inline-block;
+        vertical-align: top;
+        text-align: right;
+      }
+      input {
+        width: 435px;
+        height: 28px;
+        line-height: 28px;
+        border: 1px solid #000;
+        background: #fff;
+        margin: 0 0 0 32px;
+        display: inline-block;
+        vertical-align: top;
+        border-radius: 0;
+        box-shadow: 6px 6px 0 #000;
+      }
+    }
+    .submit {
+      margin: 20px 0 80px;
+      input {
+        margin: 0 0 0 390px;
+        font: 400 italic 24px/28px $fontFour;
+        text-transform: uppercase;
+        color: #fff;
+        background: #dd44d6;
+        height: 28px;
+        box-shadow: 6px 6px 0 #000;
+      }
+    }
+  }
+  .how-it-works {
+    background: #faebf4;
+    width: 1046px;
+    padding: 0 0 20px;
+    margin: 0 auto;
+    text-align: center;
+    font: 400 italic 28px/1 $fontFour;
+    ul {
+      li {
+        margin: 10px 0;
+      }
+    }
+    .title {
+      margin: 10px 0 20px;
+      font: 400 40px/1.2 $fontFive;
+      color: #000;
+      text-transform: uppercase;
+    }
+  }
+}
