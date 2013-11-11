@@ -224,6 +224,8 @@ Spree::Product.class_eval do
   end
 
   def update_zone_prices
-    self.master.update_zone_prices(self.zone_prices_hash)
+    self.variants_including_master.each do |variant|
+      variant.update_zone_prices(self.zone_prices_hash)
+    end
   end
 end
