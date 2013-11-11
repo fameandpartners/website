@@ -15,8 +15,8 @@ namespace "db" do
 end
 
 def create_site_versions
-  create_site_version('australia', 'au', 'en_AU')
-  create_site_version('usa', 'us', 'en_AU')
+  create_site_version('australia', 'au', 'en-AU')
+  create_site_version('usa', 'us', 'en-US')
 end
 
 def create_site_version(name, code, locale)
