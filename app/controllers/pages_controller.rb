@@ -27,6 +27,12 @@ class PagesController < Spree::StoreController
           :deleted => false
         }
       }
+      filter :exists, :field => :available_on
+      filter :bool, :should => {
+        :range => {
+          :available_on => { :lte => Time.now }
+        }
+      }
     end.results.results
   end
 

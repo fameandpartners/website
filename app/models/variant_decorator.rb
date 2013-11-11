@@ -1,5 +1,4 @@
 Spree::Variant.class_eval do
-  belongs_to :product, touch: true, inverse_of: :master
   before_validation :set_default_sku
 
   after_save do
@@ -51,6 +50,15 @@ Spree::Variant.class_eval do
   rescue Exception => e
     # do nothing, sku required for analytics mostly
     return true
+  end
+
+  private
+
+  def recalculate_product_on_hand
+    on_hand = product(true).on_hand
+    if Spree::Config[:track_inventory_levels] && on_hand != (1.0 / 0) # Infinity
+      product.update_column(:count_on_hand, on_hand)
+    end
   end
 
   class << self
