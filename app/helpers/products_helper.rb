@@ -65,8 +65,9 @@ module ProductsHelper
     end
   end
 
-  def product_image_tag(product, size = :product, options = {})
+  def product_image_tag(product, size = nil, options = {})
     no_image = 'noimage/product.png'
+    size = size.present? ? size : 'product'
 
     if product.images.empty?
       image_tag(no_image, options)
