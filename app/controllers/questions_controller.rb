@@ -8,5 +8,6 @@ class QuestionsController < ApplicationController
 
   def index
     @quiz = Quiz.last
+    Activity.log_quiz_started(@quiz, current_spree_user)
   end
 end

@@ -1,26 +1,55 @@
 .m-pixel
   img src="http://tags.rtbidder.net/track?sid=525646ee8bc06f1060d9f3a7" width="0" height="0" border="0" alt=""
 
-.custom-dresses
-  #custom-dresses.custom-dresses-signup
+.custom-dress-landing
+  .signup-block
     .wrap
-      .center-form.alignleft
-        h1.black.gothic Create the perfect dress
+      .side-left
+        h1.black.gothic Create your perfect formal dress!
         .subtitle Jump into our easy to use customisation service to create your perfect dress.
-        .signup-buttons
+        .signup-buttons.aligncenter
           = link_to 'Signup with facebook', fb_auth_path(personalization: 'true'), class: 'facebook-signup'
-          .devise-forms
-            .or
-              span or
+          .or or
           = link_to 'Sign up using your email address', spree.signup_path(personalization: 'true'), class: 'regular-signup'
-          .form.hide
-            = render 'form'
-        .how-it-works How it works
-        .steps = image_tag 'custom-dresses/steps.png', width: 473, height: 292, alt: ''
-        .view-all
-          div
-            = link_to 'View the collection of dress styles.', personalization_products_path
-          div Then sign up to start customising.
+        .form.hide
+          = render 'form'
+      .side-right
+        .image = image_tag 'custom-dresses/image-girl.jpg', width: 422, height: 652, alt: ''
+  .how-it-works
+    .wrap
+      h1.black.gothic How it works
+      .columns
+        .grid-container
+          .grid-35
+            .step 1.
+            .action Choose a dress style
+            .subtitle Browse over 40 styles
+            .images
+              = image_tag 'custom-dresses/choose-dress-1.jpg', width: 176, height: 176, alt: '', class: 'image-1'
+              = image_tag 'custom-dresses/choose-dress-2.jpg', width: 176, height: 176, alt: '', class: 'image-2'
+          .grid-30
+            .step 2.
+            .action Select a colour
+            .subtitle Choose from almost unlimited colours
+            .colors
+              .color.black
+              .color.blood-red
+              .color.blue
+              .color.green
+              .color.yellow
+              .color.pink
+          .grid-35
+            .step 3.
+            .action Customise away!
+            .subtitle Change the neckline, the skirts shape and more
+            .images
+              = image_tag 'custom-dresses/customize-1.jpg', width: 176, height: 176, alt: '', class: 'image-1'
+              = image_tag 'custom-dresses/customize-2.jpg', width: 176, height: 176, alt: '', class: 'image-2'
+      .start-now
+        = link_to 'Start now!', spree.signup_path(personalization: 'true'), class: 'label regular-signup'
+        = link_to 'Signup with facebook', fb_auth_path(personalization: 'true'), class: 'facebook-signup'
+      .form.hide
+        = render 'form'
 
 javascript:
   $(function(){
@@ -29,7 +58,7 @@ javascript:
       event.preventDefault();
 
       $link = $(event.target)
-      $form = $link.next('.form');
+      $form = $link.parent().next('.form');
       if ($form.is(':visible')) {
         $form.fadeOut();
       } else {

@@ -52,6 +52,8 @@ ruby:
         .share-buttons
           .fleft = share_buttons(@product)
       .notice
+        .peter-lang
+          ' Jewellery provided Peter Lang
         .colour
           ' Want a different colour?
           = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour."
@@ -87,7 +89,7 @@ ruby:
         .buy-wishlist.clearfix
           .buy-customize
             = add_to_bag_link(@product)
-            - unless @product.in_sale?
+            - if (@product.can_be_customized? and !@product.in_sale?)
               .or-line
                 span or
               = link_to personalization_product_path(permalink: @product.permalink, cf:"readytowear"), class: 'btn-customize' do

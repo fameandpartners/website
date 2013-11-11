@@ -1,7 +1,7 @@
 class Activity < ActiveRecord::Base
   validates :owner_id, :owner_type, presence: true
 
-  validates :action, inclusion: { in: %w{viewed purchased added_to_cart added_to_wishlist}}
+  validates :action, inclusion: { in: %w{viewed purchased added_to_cart added_to_wishlist quiz_started}}
 
   serialize :info, Hash
 
@@ -88,6 +88,17 @@ class Activity < ActiveRecord::Base
         activity.session_key = session_key
       end
       activity.save
+    end
+
+    def log_quiz_started(quiz, user)
+      args = {
+        action: 'quiz_started'
+      }
+
+      Activity.create(args) do |object|
+        object.actor = user
+        object.owner = quiz
+      end
     end
 
     def replace_temporary_keys(session_key, user)

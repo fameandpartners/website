@@ -89,7 +89,8 @@ class AnswersController < ApplicationController
 
     style_profile.save
 
-    Spree::UserMailer.style_profile_created(style_profile.user).deliver
+
+    MarketingMailer.style_quiz_completed(style_profile.user).deliver
 
     render 'quizzes/thanks'
   end

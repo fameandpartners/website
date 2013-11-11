@@ -13,9 +13,10 @@ module Overrides
 
         mapping do
           indexes :id, :index => :not_analyzed
-          indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
           indexes :name, :analyzer => :snowball
           indexes :description, :analyzer => :snowball
+          indexes :available_on, :type => :date, :include_in_all => false
+          indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
           indexes :taxons, :as => 'taxons.map(&:name)'
           indexes :colors, :as => 'colors'
 
@@ -87,13 +88,23 @@ module Overrides
           }.gsub(/[\r\n]|([\s]{2,})/, '')
         end
 
-        def recommended_for(user)
+        def recommended_for(user, options = {})
+          limit = options[:limit] || 12
+
           style_profile = UserStyleProfile.find_by_user_id(user.id)
 
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => {
               :term => {
                 :deleted => false
+              }
+            }
+
+            filter :exists, :field => :available_on
+
+            filter :bool, :should => {
+              :range => {
+                :available_on => { :lte => Time.now }
               }
             }
 
@@ -147,7 +158,7 @@ module Overrides
             end
 
             from 0
-            size 12
+            size limit
           end
 
           begin
