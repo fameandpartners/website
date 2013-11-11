@@ -4,6 +4,13 @@ namespace "db" do
     task site_versions: :environment do
       create_site_versions
     end
+
+    desc "create prices for each site version"
+    task site_version_prices: :environment do
+      SiteVersion.where(default: false).each do |site_version|
+        site_version.update_exchange_rate
+      end
+    end
   end
 end
 

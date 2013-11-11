@@ -179,6 +179,8 @@ FameAndPartners::Application.routes.draw do
         resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
       end
 
+      resources :site_versions, only: [:index, :edit, :update]
+
       scope 'products/:product_id', :as => 'product' do
         resource :inspiration, :only => [:edit, :update]
 

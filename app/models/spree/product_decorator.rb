@@ -44,6 +44,7 @@ Spree::Product.class_eval do
   before_create :set_default_prototype
   after_create :build_customisations_from_values_hash, :if => :customisation_values_hash
 
+  before_save :update_price_conversions
   after_save :update_zone_prices, if: :zone_prices_hash
 
   def images
@@ -162,11 +163,27 @@ Spree::Product.class_eval do
   end
 
   def zone_price_for(site_version = nil)
-    if site_version.try(:default)
+    if site_version.blank? or site_version.try(:default?)
       self.price_in(Spree::Config.currency)
     else
-      self.master.zone_price_for(site_version.zone)
+      self.master.zone_price_for(site_version)
     end
+  end
+
+  def update_price_conversions
+    SiteVersion.where(default: false).each do |site_version|
+      self.add_price_conversion(site_version.currency, site_version.exchange_rate)
+    end
+  end
+
+  def add_price_conversion(new_currency, exchange_rate)
+    return if new_currency == Spree::Config.currency
+
+    default_price = self.price_in(Spree::Config.currency)
+    price = prices.where(currency: new_currency).first_or_initialize
+    price.variant_id ||= self.master.id
+    price.amount = default_price.amount * exchange_rate
+    price.save
   end
 
   private

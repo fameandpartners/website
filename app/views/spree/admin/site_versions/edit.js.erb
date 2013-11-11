@@ -1,0 +1,3 @@
+form_cell = $('#site_version_form_<%= @site_version.id %>').show().closest('td')
+form_cell.find('a.update').hide()
+form_cell.find('#site_version_exchange_rate').val('<%= @rate %>')
