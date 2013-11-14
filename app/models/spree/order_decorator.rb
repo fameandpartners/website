@@ -183,6 +183,8 @@ Spree::Order.class_eval do
   end
 
   def use_prices_from(site_version)
+    return if self.currency == site_version.currency
+
     self.zone_id = site_version.zone_id
     
     # update line items
@@ -203,6 +205,7 @@ Spree::Order.class_eval do
         current_item.save
       end
     end
+    self.save
 
     self.reload
   end

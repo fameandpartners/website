@@ -9,8 +9,19 @@ class ApplicationController < ActionController::Base
 
   def check_cart
     # if can't find order, create it ( true )
+    # current order calls current currency which calls current site version
+    # and convert current order to current currency
     current_order(true) if current_order.blank?
     current_order.zone_id = current_site_version.zone_id
+  end
+
+  def convert_current_order_prices
+    if session[:order_id]
+      order = Spree::Order.where(id: session[:order_id]).first
+      if !order.completed?
+        order.use_prices_from(current_site_version)
+      end
+    end
   end
 
   helper_method :default_seo_title, :default_meta_description
@@ -188,24 +199,32 @@ class ApplicationController < ActionController::Base
   def current_site_version
     return @current_site_version if @current_site_version
 
-    if session[:site_version].present?
-      @current_site_version = SiteVersion.by_permalink_or_default(session[:site_version])
-    elsif params[:site_version].present?
-      @current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
-      self.current_site_version = @current_site_version
+    if request.get?
+      self.current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
     else
-      @current_site_version = SiteVersion.by_country_code_or_default(fetch_user_country_code)
+      # url without site_version, but we have version in session 
+      if params[:site_version].blank? or params[:site_version].to_s != session[:site_version].to_s
+        self.current_site_version = SiteVersion.by_permalink_or_default(session[:site_version])
+      else
+        self.current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
+      end
     end
   end
+
+=begin
+  def current_site_version
+    return @current_site_version if @current_site_version
+    self.current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
+  end
+=end
+
 
   def current_site_version=(site_version)
     if session[:site_version] != site_version.permalink
       session[:site_version] = site_version.permalink
+      @current_site_version = site_version
 
-      # TODO: it seems, spree reset cart if we changing currency
-      # current_order(true).use_prices_from(site_version)
-
-      # clear or update order
+      convert_current_order_prices
     end
 
     site_version

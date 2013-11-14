@@ -24,6 +24,7 @@ Spree::Product.class_eval do
     )
   }
 
+  has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 
   accepts_nested_attributes_for :product_customisation_types,
     reject_if: lambda { |ct| ct[:customisation_type_id].blank? && ct[:id].blank? },
@@ -163,7 +164,7 @@ Spree::Product.class_eval do
   end
 
   def zone_price_for(site_version = nil)
-    if site_version.blank? or site_version.try(:default?)
+    if site_version.blank?
       self.price_in(Spree::Config.currency)
     else
       self.master.zone_price_for(site_version)

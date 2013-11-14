@@ -23,7 +23,7 @@ Spree::Variant.class_eval do
   def update_zone_prices(zone_prices_attrs = {})
     zone_prices_attrs ||= self.zone_prices_hash
     if zone_prices_attrs.present?
-      SiteVersion.where(default: false).each do |site_version|
+      SiteVersion.where("currency != ?", Spree::Config.currency).each do |site_version|
         price = self.zone_prices.where(zone_id: site_version.zone_id).first_or_initialize
         attrs = (zone_prices_attrs[site_version.zone_id.to_s] || {}).merge(currency: site_version.currency)
         if attrs[:amount].blank?
