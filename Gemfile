@@ -24,6 +24,8 @@ gem 'titleize'
 gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
 
 gem 'geoip', require: false
+gem 'rubyzip', '< 0.9.9', require: false
+gem 'roo', require: false
 
 # assets
 gem 'jquery-rails'
