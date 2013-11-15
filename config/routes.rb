@@ -1,20 +1,22 @@
 FameAndPartners::Application.routes.draw do
   match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
 
-  devise_for :spree_user,
-             :class_name => 'Spree::User',
-             :controllers => { :sessions => 'spree/user_sessions',
-                               :registrations => 'spree/user_registrations',
-                               :passwords => 'spree/user_passwords',
-                               :confirmations => 'spree/user_confirmations',
-                               :omniauth_callbacks => 'spree/omniauth_callbacks'
-             },
-             :skip => [:unlocks, :omniauth_callbacks],
-             :path_names => { :sign_out => 'logout' }
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+    devise_for :spree_user,
+               :class_name => 'Spree::User',
+               :controllers => { :sessions => 'spree/user_sessions',
+                                 :registrations => 'spree/user_registrations',
+                                 :passwords => 'spree/user_passwords',
+                                 :confirmations => 'spree/user_confirmations',
+                                 :omniauth_callbacks => 'spree/omniauth_callbacks'
+               },
+               :skip => [:unlocks, :omniauth_callbacks],
+               :path_names => { :sign_out => 'logout' }
 
-  devise_scope :spree_user do
-    get '/spree_user/thanks' => 'spree/user_registrations#thanks'
-    get '/account_settings' => 'spree/user_registrations#edit'
+    devise_scope :spree_user do
+      get '/spree_user/thanks' => 'spree/user_registrations#thanks'
+      get '/account_settings' => 'spree/user_registrations#edit'
+    end
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
@@ -74,7 +76,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Blog routes
-  scope '/blog' do
+  scope '(:site_version)/blog', constraints: { site_version: /(us|au)/ } do
     get '/' => 'blog#index', as: :blog
     get '/about'   => 'blog#about', as: :about
     get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss

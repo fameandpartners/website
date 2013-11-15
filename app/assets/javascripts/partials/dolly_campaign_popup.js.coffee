@@ -11,7 +11,7 @@ window.dollyCampaignModal = {
     dollyCampaignModal.updatePosition()
 
     $scope.find('.close-lightbox').bind 'click', () ->
-      $.cookie('nmc_dolly', 'hide')
+      $.cookie('nmc_dolly', 'hide', { expires: 365, path: '/' })
       dollyCampaignModal.hide()
     $scope.find('.overlay').bind 'click', dollyCampaignModal.hide
     $(document).bind 'keyup', dollyCampaignModal.keyPressHandler

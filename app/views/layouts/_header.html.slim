@@ -22,7 +22,7 @@
                   li = link_to 'account settings', profile_path
                   li = link_to 'your orders', user_orders_path
                   li = link_to 'style profile', styleprofile_path
-                  li = link_to 'sign out', destroy_spree_user_session_path
+                  li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
       .site-version.fright
         .current-version
           = image_tag "flags/#{current_site_version.code}.png", width: 16, height: 11, alt: "#{current_site_version.code}"

@@ -136,16 +136,18 @@ module ApplicationHelper
     url_without_double_slashes(root_url(site_version: nil) + collection_product_path(product, options))
   end
 
+  def build_collection_taxon_path(collection, options = {})
+    build_collection_product_path(collection, nil, options)
+  end
+
   # custom_collection_product_url('Long-Dresses', 'the-fallen', cf: 'homefeature')
   # "http://www.fameandpartners.com/collection/Long-Dresses/the-fallen?cf=homefeature" 
   def build_collection_product_path(collection_id, product_id, options = {})
     site_version_prefix = self.url_options[:site_version]
-    if site_version_prefix.present?
-      path = "/#{site_version_prefix}/collection/#{collection_id}/#{product_id}"
-    else
-      path = "/collection/#{collection_id}/#{product_id}"
-    end
+    path_parts = [site_version_prefix, 'collection', collection_id, product_id]
+    path = "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?
+
     url_without_double_slashes(path)
   end
 

@@ -41,14 +41,12 @@
 
 .home-images
   .wrap
-    = link_to '/collection/?edits=neon', class: 'image' do
-      = image_tag 'homepage/neon1.jpg'
-    = link_to '/collection/?edits=neon', class: 'image rotate-1' do
-      = image_tag 'homepage/neon2.jpg'
-    = link_to '/collection/?edits=neon', class: 'image rotate-2' do
-      = image_tag 'homepage/neon3.jpg'
-    = link_to '#', class: 'show-style-quiz image large' do
-      = image_tag 'homepage/right.jpg'
+    - neon_path = collection_path(edits: 'neon')
+    == link_to image_tag('homepage/neon1.jpg'), neon_path, class: 'image'
+    == link_to image_tag('homepage/neon2.jpg'), neon_path, class: 'image rotate-1'
+    == link_to image_tag('homepage/neon3.jpg'), neon_path, class: 'image rotate-2'
+    == link_to image_tag('homepage/right.jpg'), '#', class: 'image large show-style-quiz'
+
 
 .blog-posts-preview
   .wrap.no-overflow

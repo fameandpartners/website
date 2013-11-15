@@ -129,7 +129,7 @@ $(".products.index").ready ->
       searchData = @currentFilter()
       pageUrl = @updatePageLocation(searchData)
 
-      $.ajax('/products',
+      $.ajax(urlWithSitePrefix('/products'),
         type: "GET",
         dataType: 'html',
         data: $.param(searchData)

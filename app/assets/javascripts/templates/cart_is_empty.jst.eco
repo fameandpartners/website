@@ -3,6 +3,6 @@
     Your cart is empty
   </p>
   <p>
-    <a href="/products" class="button continue">Continue shopping</a>
+    <a href="<%= getSiteVersionPrefix() %>/products" class="button continue">Continue shopping</a>
   </p>
 </div>

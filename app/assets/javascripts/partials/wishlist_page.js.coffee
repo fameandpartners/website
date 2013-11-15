@@ -30,7 +30,7 @@ $('.wishlists_items').ready ->
       page.editPopup.one('selected', (e, data) ->
         itemId = data.params.id
         $.ajax(
-          url: "/wishlists_items/#{itemId}/move_to_cart",
+          url: urlWithSitePrefix("/wishlists_items/#{itemId}/move_to_cart"),
           dataType: 'script',
           data: data
         )

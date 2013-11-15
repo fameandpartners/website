@@ -23,7 +23,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
 
     options = _.extend({ variant_id: variantId, quantity: 1 }, options)
     $.ajax(
-      url: "/line_items"
+      url: urlWithSitePrefix("/line_items")
       type: 'POST'
       dataType: 'json'
       data: window.shopping_cart.prepareParams(options)
@@ -38,7 +38,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
       return false
 
     $.ajax(
-      url: "/line_items/#{itemId}"
+      url: urlWithSitePrefix("/line_items/#{itemId}")
       type: 'PUT'
       dataType: 'json'
       data: window.shopping_cart.prepareParams(options)
@@ -54,7 +54,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
     options = _.extend({ variant_id: variantId }, options)
 
     $.ajax(
-      url: "/line_items/#{variantId}/move_to_wishlist"
+      url: urlWithSitePrefix("/line_items/#{variantId}/move_to_wishlist")
       type: 'POST'
       dataType: 'json'
       data: window.shopping_cart.prepareParams(options)
@@ -74,7 +74,7 @@ window.shopping_cart = _.extend(window.shopping_cart, {
     options = _.extend({ variant_id: variantId }, options)
 
     $.ajax(
-      url: "/line_items/#{variantId}"
+      url: urlWithSitePrefix("/line_items/#{variantId}")
       type: 'DELETE'
       dataType: 'json'
       data: window.shopping_cart.prepareParams(options)

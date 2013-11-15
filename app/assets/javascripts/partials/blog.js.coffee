@@ -148,7 +148,7 @@ $ ->
     $this.parent().find('.hate').removeClass('active')
     $.ajax
       method: 'post'
-      url: "/celebrity_photo/#{photo_id}/like.json"
+      url: urlWithSitePrefix("/celebrity_photo/#{photo_id}/like.json")
       success: (data) ->
         true
       error: (data) ->
@@ -163,7 +163,7 @@ $ ->
     photo_id = $this.parent().attr('data-id')
     $.ajax
       method: 'post'
-      url: "/celebrity_photo/#{photo_id}/dislike.json"
+      url: urlWithSitePrefix("/celebrity_photo/#{photo_id}/dislike.json")
       success: (data) ->
         true
       error: (data) ->
