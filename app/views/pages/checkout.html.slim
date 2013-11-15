@@ -165,6 +165,7 @@
               .desc
                 span AUD
                 ' $320
-                .taxes Including GST
+                - if current_site_version.is_australia?
+                  .taxes Including GST
     .place-order
       input type="submit" value="Place order"
