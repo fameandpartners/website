@@ -102,6 +102,12 @@ module ApplicationHelper
     raw (text + content_tag(:span, ' * ', class: 'required'))
   end
 
+  # don't touch http:// or ftp://
+  def url_without_double_slashes(url)
+    # search elements with not colons and replace inside them
+    url.gsub(/\w+(\/\/)/){|a| a.sub('//', '/')}
+  end
+
   def collection_taxon_path(taxon)
     if range_taxonomy && range_taxonomy.taxons.where(id: taxon.id).exists?
       permalink = taxon.permalink.split('/').last
@@ -116,23 +122,49 @@ module ApplicationHelper
     end
   end
 
-  def collection_product_path(product)
+  def collection_product_path(product, options = {})
     taxon = range_taxon_for(product)
     if taxon
       taxon_permalink = taxon.permalink.split('/').last
-      site_version_prefix = self.url_options[:site_version]
-      if site_version_prefix.present?
-        "/#{site_version_prefix}/collection/#{taxon_permalink}/#{product.to_param}".gsub(/\/+/, '/')
-      else
-        "/collection/#{taxon_permalink}/#{product.to_param}"
-      end
+      build_collection_product_path(taxon_permalink, product.to_param, options)
     else
-      spree.product_path(product)
+      spree.product_path(product, options)
     end
   end
 
-  def collection_product_url(product)
-    (root_url + collection_product_path(product)).gsub(/\/+/, '/')
+  def collection_product_url(product, options)
+    url_without_double_slashes(root_url(site_version: nil) + collection_product_path(product, options))
+  end
+
+  # custom_collection_product_url('Long-Dresses', 'the-fallen', cf: 'homefeature')
+  # "http://www.fameandpartners.com/collection/Long-Dresses/the-fallen?cf=homefeature" 
+  def build_collection_product_path(collection_id, product_id, options = {})
+    site_version_prefix = self.url_options[:site_version]
+    if site_version_prefix.present?
+      path = "/#{site_version_prefix}/collection/#{collection_id}/#{product_id}"
+    else
+      path = "/collection/#{collection_id}/#{product_id}"
+    end
+    path = "#{path}?#{options.to_param}" if options.present?
+    url_without_double_slashes(path)
+  end
+
+  def build_collection_product_url(collection_id, product_id, options = {})
+    url_without_double_slashes(
+      root_url(site_version: nil) + build_collection_product_path(collection_id, product_id, options)
+    )
+  end
+
+  def taxon_path(taxon)
+    site_version_prefix = self.url_options[:site_version]
+
+    if site_version_prefix.present?
+      result = "/#{site_version_prefix}/#{taxon.permalink}"
+    else
+      result = "/#{taxon.permalink}"
+    end
+
+    result.gsub(/\/+/, '/')
   end
 
   def absolute_image_url(image_url, protocol = nil)

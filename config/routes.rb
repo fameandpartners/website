@@ -138,11 +138,11 @@ FameAndPartners::Application.routes.draw do
 
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
-    get '/workshops', to: redirect('http://www.fameandpartners.com/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
+    get '/workshops', to: redirect('http://www.fameandpartners.com/%{site_version}/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
     
     # Fallen Product URL
-    get '/thefallen', to: redirect("http://www.fameandpartners.com/collection/Long-Dresses/the-fallen")
-    get '/thefallendress', to: redirect("http://www.fameandpartners.com/collection/Long-Dresses/the-fallen")
+    get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
+    get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
 
     # MonkeyPatch for redirecting to Custom Dress page
     get '/fb_auth' => 'pages#fb_auth'
@@ -284,11 +284,11 @@ FameAndPartners::Application.routes.draw do
 
     # seo routes
     %w{black red pink blue green}.each do |colour|
-      get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour
+      get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour, as: "#{colour}_formal_dresses"
     end
-  end
 
-  resources :site_versions, only: [:show]
+    resources :site_versions, only: [:show]
+  end
 
   if Rails.env.development?
     mount MailPreview => 'mail_view'

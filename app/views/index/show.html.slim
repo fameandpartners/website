@@ -1,5 +1,5 @@
 - content_for :head do
-  meta property="og:url" content="http://www.fameandpartners.com/"
+  meta property="og:url" content="#{ root_url }"
   meta property="og:site_name" content="Fame & Partners - Beautiful dresses crafted from red carpet looks"
   meta property="og:image" content="#{absolute_image_url(image_path('famehomepage.jpg'), 'http')}"
   meta property="og:locale" content="en_US"
@@ -24,12 +24,11 @@
           = link_to personalization_path(cf: 'homefeature') do
             = image_tag 'homepage/customise.jpg', width: 1078, height: 532, alt: 'Customise a Dress from Fame & Partners '
         li
-          = link_to "http://www.fameandpartners.com/collection/Long-Dresses/the-fallen?cf=homefeature" do
+          = link_to build_collection_product_url('Long-Dresses', 'the-fallen', cf: 'homefeature') do
             = image_tag 'homepage/fallen.jpg', width: 1078, height: 532, alt: 'The Fallen Dress inspired by the Fallen Novels'
         li
           = link_to collection_path(cf: 'homefeature') do
             = image_tag 'homepage/welcome.png', width: 1078, height: 532, alt: 'Fame & Partners Formal Dresses'
-
         li
           = link_to '#', class: 'show-style-quiz' do
             = image_tag 'homepage/style-quiz.jpg', width: 1078, height: 532, alt: ''

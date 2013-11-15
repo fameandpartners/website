@@ -16,7 +16,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
       td
         .position style="position: relative;"
           = link_to spree.cart_url, style: 'text-decoration: none;' do
-            = image_tag root_url + 'images/email/marketing/finish-my-order.png', width: 138, height: 138, alt: 'Finish my order', style: 'position: absolute; top: -100px; right: 20px; border: 0;'
+            = image_tag root_url(site_version: nil) + 'images/email/marketing/finish-my-order.png', width: 138, height: 138, alt: 'Finish my order', style: 'position: absolute; top: -100px; right: 20px; border: 0;'
         table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
           - @order.line_items.in_groups_of(2).each do |group|
             tr

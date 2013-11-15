@@ -7,12 +7,12 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
           - available_product_ranges.each do |taxon|
             li = link_to taxon.name, collection_taxon_path(taxon), title: "Buy " + taxon.name
           - available_seo_taxonomy_urls.each do |taxon|
-            li = link_to taxon.name, "/#{taxon.permalink}", title: "Buy " + taxon.name
-          li = link_to "Black Formal Dresses", "http://www.fameandpartners.com/Black-Dresses"
-          li = link_to "Red Formal Dresses", "http://www.fameandpartners.com/Red-Dresses"
-          li = link_to "Blue Dresses", "http://www.fameandpartners.com/Blue-Dresses"
-          li = link_to "Green Dresses", "http://www.fameandpartners.com/Green-Dresses"
-          li = link_to "Pink Dresses", "http://www.fameandpartners.com/Pink-Dresses"
+            li = link_to taxon.name, taxon_path(taxon), title: "Buy " + taxon.name
+          li = link_to "Black Formal Dresses", black_formal_dresses_url
+          li = link_to "Red Formal Dresses", red_formal_dresses_url
+          li = link_to "Blue Dresses", blue_formal_dresses_url
+          li = link_to "Green Dresses", green_formal_dresses_url
+          li = link_to "Pink Dresses", pink_formal_dresses_url
     .grid-20.links
       .title Style Inspiration
       ul
