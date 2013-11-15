@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Common
 
   append_before_filter :check_cart
+  append_before_filter :add_site_version_to_mailer
 
   def check_cart
     # if can't find order, create it ( true )
@@ -13,6 +14,12 @@ class ApplicationController < ActionController::Base
     # and convert current order to current currency
     current_order(true) if current_order.blank?
     current_order.zone_id = current_site_version.zone_id
+  end
+
+  def add_site_version_to_mailer
+    ActionMailer::Base.default_url_options.merge!(
+      site_version: self.url_options[:site_version]
+    )
   end
 
   def convert_current_order_prices

@@ -18,9 +18,10 @@ class MarketingMailer < ActionMailer::Base
     )
   end
 
-  def added_to_wishlist(user)
+  def added_to_wishlist(user, site_version = nil)
     @user = user
     @wishlist = @user.wishlist_items
+    @site_version = site_version
 
     mail(
       to: @user.email,
@@ -28,9 +29,10 @@ class MarketingMailer < ActionMailer::Base
     )
   end
 
-  def style_quiz_completed(user)
+  def style_quiz_completed(user, site_version = nil)
     @user = user
     @dresses = Spree::Product.recommended_for(@user, limit: 6)
+    @site_version = site_version
 
     mail(
       to: @user.email,
