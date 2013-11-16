@@ -213,15 +213,21 @@ module Products
     def create_products(products_attrs)
       products_attrs.map do |attrs|
         args = attrs.symbolize_keys
-        product = create_product(args.merge!(
-          sizes: %W{8 10 12 14 16}
-        ))
 
-        add_product_properties(product, args[:properties].symbolize_keys)
-        add_product_variants(product, args[:sizes], args[:colors])
-        add_product_style_profile(product, args[:style_profile].symbolize_keys)
+        begin
+          product = create_product(args.merge!(
+            sizes: %W{8 10 12 14 16}
+          ))
 
-        product
+          add_product_properties(product, args[:properties].symbolize_keys)
+          add_product_variants(product, args[:sizes], args[:colors] || [])
+          add_product_style_profile(product, args[:style_profile].symbolize_keys)
+
+          product
+        rescue Exception => message
+          Rails.logger.warn(message)
+          nil
+        end
       end
     end
 
@@ -237,7 +243,7 @@ module Products
         on_demand: true,
         sku: args[:sku],
         permalink: args[:name].downcase.gsub(/\s/, '_'),
-        taxon_ids: args[:taxon_ids]
+        taxon_ids: args[:taxon_ids] || []
       }
 
       product = Spree::Product.create!(product_attributes)
