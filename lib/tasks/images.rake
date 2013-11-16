@@ -1,6 +1,8 @@
 namespace :images do
   desc 'Upload images from directory supplied by LOCATION and associate with products & colors by file name'
   task :import => :environment do
+    regexp = /^((?<sku>\S+)[\-_]+(?<color>\S+)[\-_]+(?<position>\S+)\.(?<extension>\S+))|((?<sku>\S+)[\-_]+(?<position>\S+)\.(?<extension>\S+))$/i
+
     require 'pathname'
 
     raise 'Directory to import images is not set' unless ENV['LOCATION'].present?
@@ -13,7 +15,7 @@ namespace :images do
 
       file_name = file_path.rpartition('/').last.strip
 
-      matches = /(?<sku>\S+)-(?<color>\S+)-(?<position>\S+)\.(?<extension>\S+)/i.match(file_name)
+      matches = regexp.match(file_name)
 
       unless matches.present? # file have invalid format of name
         puts "File \"#{file_name}\" have invalid format of name"
@@ -27,17 +29,24 @@ namespace :images do
         next
       end
 
-      color = matches[:color].strip.downcase
       position = matches[:position].downcase.include?('front') ? 0 : matches[:position].to_s.to_i
 
-      option_value = product.option_types.find_by_name('dress-color').option_values.detect do |option_value|
-        option_value.name.downcase.eql?(color) || option_value.presentation.downcase.eql?(color)
+      if matches[:color].present?
+        color = matches[:color].strip.downcase
+        option_value = product.option_types.find_by_name('dress-color').option_values.detect do |option_value|
+          option_value.name.downcase.eql?(color) || option_value.presentation.downcase.eql?(color)
+        end
+      else
+        option_value = product.option_types.find_by_name('dress-color').option_values.first
       end
 
       unless option_value.present? # color with given name can not be find
         puts "Color with the given name \"#{matches[:color]}\" can not be find"
         next
       end
+
+      puts "Sku: #{product.sku}, Color: #{option_value.presentation}, Position: #{position}"
+      next
 
       viewable = ProductColorValue.where(product_id: product.id, option_value_id: option_value.id).first_or_create
 
