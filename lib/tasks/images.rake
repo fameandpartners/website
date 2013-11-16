@@ -45,9 +45,6 @@ namespace :images do
         next
       end
 
-      puts "Sku: #{product.sku}, Color: #{option_value.presentation}, Position: #{position}"
-      next
-
       viewable = ProductColorValue.where(product_id: product.id, option_value_id: option_value.id).first_or_create
 
       Spree::Image.create!(
