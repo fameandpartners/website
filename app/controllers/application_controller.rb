@@ -231,6 +231,10 @@ class ApplicationController < ActionController::Base
       session[:site_version] = site_version.permalink
       @current_site_version = site_version
 
+      if user = try_spree_current_user
+        user.update_site_version(site_version)
+      end
+
       convert_current_order_prices
     end
 

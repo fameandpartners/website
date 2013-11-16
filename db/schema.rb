@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108204233) do
+ActiveRecord::Schema.define(:version => 20131116114518) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1039,6 +1039,7 @@ ActiveRecord::Schema.define(:version => 20131108204233) do
     t.datetime "last_cart_notification_sent_at"
     t.datetime "last_wishlist_notification_sent_at"
     t.datetime "last_quiz_notification_sent_at"
+    t.integer  "site_version_id"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true

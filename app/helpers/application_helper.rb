@@ -132,7 +132,7 @@ module ApplicationHelper
     end
   end
 
-  def collection_product_url(product, options)
+  def collection_product_url(product, options = {})
     url_without_double_slashes(root_url(site_version: nil) + collection_product_path(product, options))
   end
 

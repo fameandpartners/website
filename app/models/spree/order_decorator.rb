@@ -182,6 +182,10 @@ Spree::Order.class_eval do
     result
   end
 
+  def get_site_version
+    @site_version ||= SiteVersion.by_currency_or_default(self.currency)
+  end
+
   def use_prices_from(site_version)
     return if self.currency == site_version.currency
 

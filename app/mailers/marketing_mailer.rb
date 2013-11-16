@@ -11,6 +11,8 @@ class MarketingMailer < ActionMailer::Base
   def abandoned_cart(order, user)
     @user = user
     @order = order
+    site_version = order.get_site_version
+    @site_version_code = site_version.default? ? '' : site_version.code
 
     mail(
       to: @user.email,
@@ -21,7 +23,7 @@ class MarketingMailer < ActionMailer::Base
   def added_to_wishlist(user, site_version = nil)
     @user = user
     @wishlist = @user.wishlist_items
-    @site_version = site_version
+    @site_version = site_version || @user.recent_site_version
 
     mail(
       to: @user.email,
@@ -32,7 +34,7 @@ class MarketingMailer < ActionMailer::Base
   def style_quiz_completed(user, site_version = nil)
     @user = user
     @dresses = Spree::Product.recommended_for(@user, limit: 6)
-    @site_version = site_version
+    @site_version = site_version || @user.recent_site_version
 
     mail(
       to: @user.email,
@@ -40,8 +42,9 @@ class MarketingMailer < ActionMailer::Base
     )
   end
 
-  def style_quiz_not_completed(user)
+  def style_quiz_not_completed(user, site_version = nil)
     @user = user
+    @site_version = site_version || @user.recent_site_version
 
     mail(
       to: @user.email,

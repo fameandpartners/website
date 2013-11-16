@@ -12,6 +12,10 @@ class SiteVersion < ActiveRecord::Base
 
   after_initialize :set_default_values
 
+  def to_param
+    self.default? ? '' : self.code
+  end
+
   def set_default_values
     if self.new_record?
       self.name ||= 'Australia'
@@ -103,8 +107,12 @@ class SiteVersion < ActiveRecord::Base
       site_version || SiteVersion.default
     end
 
+    def by_currency_or_default(currency)
+      SiteVersion.where(currency: currency).first || SiteVersion.default
+    end
+
     def default
-      self.where(default: true).first_or_initialize
+      @default ||= self.where(default: true).first_or_initialize
     end
 
     # NOTE  exchange rate 0.8 means 1 default currency == 0.8 site version currency
