@@ -183,6 +183,11 @@ FameAndPartners::Application.routes.draw do
         resource :colors, only: [:new, :create], controller: 'product_colors'
       end
 
+      resource :product_uploads, only: [:new, :create, :show] do
+        post :parse, on: :member, as: 'parse'
+        get :preview, on: :member, as: 'preview'
+      end
+
       match '/product_images/upload' => 'product_images#upload', as: 'upload_product_images'
 
       match '/blog' => redirect('/admin/blog/posts')

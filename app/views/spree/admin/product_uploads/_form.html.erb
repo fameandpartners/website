@@ -1,0 +1,12 @@
+<%= form_tag parse_admin_product_uploads_path, id: :product_batch_upload, multipart: true do %>
+  <h2>Batch upload data form</h2>
+  <div>
+    <div>
+      <%= label_tag 'file', 'Upload .xls file' %>
+      <%= file_field_tag :file %>
+    </div>
+    <div>
+      <%= submit_tag "Upload" %>
+    </div>
+  </div>
+<% end %>

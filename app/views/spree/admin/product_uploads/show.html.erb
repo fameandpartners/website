@@ -1,0 +1,233 @@
+<style>
+  table.upload-preview td {
+    padding: 2px;
+  }
+
+  table.upload-preview td textarea {
+    width: 100%;
+  }
+</style>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('table.index td a.deletion-link').on('ajax:success', function(e) { 
+      $(e.target).closest('tr').remove();
+      return false;
+    });
+  });
+</script>
+
+<% content_for :page_actions do %>
+  <div class="toolbar" data-hook="toolbar">
+    <ul class="actions header-action-links inline-menu">
+      <li id="product_batch_upload_link">
+        <%= link_to "Batch upload", new_admin_product_uploads_url,
+          { remote: true, id: 'admin_product_batch_upload', class: 'button icon-plus'} %>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<div id="product_batch_upload" data-hook>
+  <%= render partial: "spree/admin/product_uploads/form" %>
+</div>
+
+<% if @products %>
+  <h3>Following products have been created</h3>
+
+  <table class="index preview">
+    <% @products.each do |product| %>
+      <tr id="product-preview-<%= product.id %>">
+        <td>#<%= product.id %>
+        <td><%= product.name %>
+        <td><%= link_to 'Edit', spree.edit_admin_product_path(product) %></td>
+        <td><%= link_to 'Edit images', spree.admin_product_images_path(product) %></td>
+        <td><%= link_to 'Edit variants', spree.admin_product_variants_path(product) %></td>
+        <td>
+          <%= link_to 'Delete', spree.admin_product_path(product),
+                class: 'deletion-link', remote: true, method: :delete, confirm: I18n.t(:confirm_delete) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+<% end %>
+
+<% if @parsed_data %>
+  <style type="text/css">
+    .field.lower {
+      padding: 5px 0;
+    }
+  </style>
+  <%= form_tag admin_product_uploads_path, id: :product_batch_upload do %>
+    <table class="index upload-preview" id="listing_products">
+      <colgroup>
+         <col style="width: 1%;">
+         <col style="width: 25%;">
+         <col style="width: 30%;">
+         <col style="width: 18%;">
+         <col style="width: 26%;">
+      </colgroup>
+      <thead>
+        <tr>
+          <th></th>
+          <th><%= t(:sku) %>, <%= t(:name) %>, <%= t(:description) %> & <%= t(:prices) %></th>
+          <th><%= t(:taxons) %> & <%= t(:colors) %></th>
+          <th><%= t(:style_profile) %></th>
+          <th><%= t(:properties) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @parsed_data.each_with_index do |product, index| %>
+          <tr>
+            <td><%= check_box_tag "products[#{index}][upload]", 1, false %></td>
+            <td style="vertical-align: top;">
+              <div class="field lower">
+                <label for="products_<%= index %>_sku"><%= t(:sku) %></label>
+                <%= text_field_tag "products[#{index}][sku]", product.sku %>
+              </div>
+              <div class="field lower">
+                <label for="products_<%= index %>_name"><%= t(:name) %></label>
+                <%= text_field_tag "products[#{index}][name]", product.name %>
+              </div>
+              <div class="field lower">
+                <label for="products_<%= index %>_description"><%= t(:description) %></label>
+                <%= text_area_tag  "products[#{index}][description]", product.description, rows: 11 %>
+              </div>
+              <div class="alpha columns" style="width: 70px;">
+                <div class="field lower">
+                  <label for="products_<%= index %>_price_in_aud">AUD</label>
+                  <%= text_field_tag "products[#{index}][price_in_aud]", product.price_in_aud %>
+                </div>
+              </div>
+              <div class="omega columns" style="width: 70px;">
+                <div class="field lower">
+                  <label for="products_<%= index %>_price_in_usd">USD</label>
+                  <%= text_field_tag "products[#{index}][price_in_usd]", product.price_in_usd %>
+                </div>
+              </div>
+            </td>
+            <td style="vertical-align: top;">
+              <div class="field lower" style="height: 221px;">
+                <label for="products_<%= index %>_taxon_ids"><%= t(:taxons) %></label>
+                <%= select_tag "products[#{index}][taxon_ids][]", options_from_collection_for_select(
+                  Spree::Taxon.all,
+                  :id,
+                  :pretty_name,
+                  product.taxon_ids
+                ), multiple: true, id: "products_#{index}_taxon_ids", class: 'select2', style: 'width: 278px;' %>
+              </div>
+              <div class="field lower" style="height: 221px;">
+                <label for="products_<%= index %>_colors"><%= t(:colors) %></label>
+                <%= select_tag "products[#{index}][colors][]", options_from_collection_for_select(
+                  Spree::OptionType.find_by_name('dress-color').option_values,
+                  :name,
+                  :presentation,
+                  product.colors
+                ), multiple: true, id: "products_#{index}_colors", class: 'select2', style: 'width: 278px;' %>
+              </div>
+            </td>
+            <td style="vertical-align: top;">
+              <div class="alpha columns" style="width: 70px;">
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_glam"><%= t(:glam) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][glam]", product.glam %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_girly"><%= t(:girly) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][girly]", product.girly %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_classic"><%= t(:classic) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][classic]", product.classic %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_edgy"><%= t(:edgy) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][edgy]", product.edgy %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_bohemian"><%= t(:bohemian) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][bohemian]", product.bohemian %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_sexiness"><%= t(:sexiness) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][sexiness]", product.sexiness %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_fashionability"><%= t(:fashionability) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][fashionability]", product.fashionability %>
+                </div>
+              </div>
+              <div class="omega columns" style="width: 70px;">
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_apple"><%= t(:apple) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][apple]", product.apple %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_pear"><%= t(:pear) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][pear]", product.pear %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_strawberry"><%= t(:strawberry) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][strawberry]", product.strawberry %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_hour_glass"><%= t(:hour_glass) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][hour_glass]", product.hour_glass %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_column"><%= t(:column) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][column]", product.column %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_athletic"><%= t(:athletic) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][athletic]", product.athletic %>
+                </div>
+                <div class="field lower">
+                  <label for="products_<%= index %>_style_profile_petite"><%= t(:petite) %></label>
+                  <%= text_field_tag "products[#{index}][style_profile][petite]", product.petite %>
+                </div>
+              </div>
+            </td>
+            <td style="vertical-align: top;">
+              <div class="field lower">
+                <label for="products_<%= index %>_properties_style_notes"><%= t(:style_notes) %></label>
+                <%= text_field_tag "products[#{index}][properties][style_notes]", product.style_notes %>
+              </div>
+              <div class="field lower">
+                <label for="products_<%= index %>_properties_fit"><%= t(:fit) %> & <%= t(:size) %></label>
+                <%= text_field_tag "products[#{index}][properties][fit]", product.fit %>
+              </div>
+              <div class="field lower">
+                <label for="products_<%= index %>_properties_fabric"><%= t(:fabric) %></label>
+                <%= text_field_tag "products[#{index}][properties][fabric]", product.fabric %>
+              </div>
+              <div class="field lower">
+                <label for="products_<%= index %>_properties_product_type"><%= t(:product_type) %></label>
+                <%= text_field_tag "products[#{index}][properties][product_type]", product.product_type %>
+              </div>
+              <div class="field lower">
+                <label for="products_<%= index %>_properties_product_category"><%= t(:product_category) %></label>
+                <%= text_field_tag "products[#{index}][properties][product_category]", product.product_category %>
+              </div>
+              <div class="field lower">
+                <label for="products_<%= index %>_properties_factory_id"><%= t(:factory_id) %></label>
+                <%= text_field_tag "products[#{index}][properties][factory_id]", product.factory_id %>
+              </div>
+              <div class="field lower">
+                <label for="products_<%= index %>_properties_factory_name"><%= t(:factory_name) %></label>
+                <%= text_field_tag "products[#{index}][properties][factory_name]", product.factory_name %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= submit_tag 'Create products from checked rows' %>
+  <% end %>
+<% else %>
+<h4>No products preview available. Upload some to start</h4>
+<% end %>

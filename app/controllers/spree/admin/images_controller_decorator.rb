@@ -10,7 +10,6 @@ Spree::Admin::ImagesController.class_eval do
     color_type_id = @product.option_types.find_by_name('dress-color').try(:id)
 
     color_variants = @product.variants.map do |variant|
-      @variants.push(variant_data_for(variant))
       variant.option_values.select { |ov| ov[:option_type_id] == color_type_id }
     end.flatten.uniq
 
@@ -18,7 +17,7 @@ Spree::Admin::ImagesController.class_eval do
       variant_data_for(color)
     end
 
-    @variants.insert(0, *color_data)
+    @variants.insert(-1,  *color_data)
   end
 
   def set_viewable
