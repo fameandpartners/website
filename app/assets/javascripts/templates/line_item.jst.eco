@@ -55,7 +55,7 @@
           <!--<% else: %>-->
             <!--3-4 weeks-->
           <!--<% end %>-->
-          7-10 days
+           <%= t('delivery_time') %>
         </div>
         <div class="edit">
           <a data-id="<%= @line_item.id %>" data-quantity="<%= @line_item.quantity %>" data-variant="<%= @line_item.variant_id %>" class="edit-link" href="#">Edit item</a>

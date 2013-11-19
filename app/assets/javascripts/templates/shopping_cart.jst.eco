@@ -57,7 +57,7 @@
                     <!--<% else: %>-->
                       <!--3-4 weeks-->
                     <!--<% end %>-->
-                    7-10 days
+                    <%= t('delivery_time') %>
                   </div>
                 </li>
               </ul>

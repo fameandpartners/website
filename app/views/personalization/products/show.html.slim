@@ -60,7 +60,7 @@ ruby:
           .price.sale
             = price_for_product(@product)
           /.delivery 3-4 week delivery
-          .delivery 7-10 days delivery
+          .delivery = t('delivery_time')
         .customize-block
           .prod-desc == @product.description
           .title Customise this dress
