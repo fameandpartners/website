@@ -21,15 +21,14 @@
     #main-promo.promo-image
       ul.slides
         li
-          = link_to personalization_path(cf: 'homefeature') do
-            = image_tag 'homepage/customise.jpg', width: 1078, height: 532, alt: 'Customise a Dress from Fame & Partners '
+          = link_to collection_path(edit: 'sequins', cf: 'homefeature') do
+            = image_tag 'homepage/Disco.jpg', width: 1078, height: 532, alt: 'Sequined Disco Dresses - Fame & Partners Formal Dresses'
         li
-          = link_to "http://www.fameandpartners.com/collection/Long-Dresses/the-fallen?cf=homefeature" do
-            = image_tag 'homepage/fallen.jpg', width: 1078, height: 532, alt: 'The Fallen Dress inspired by the Fallen Novels'
+          = link_to personalization_path(cf: 'homefeature') do
+            = image_tag 'homepage/customise.jpg', width: 1078, height: 532, alt: 'Customise a Dress from Fame & Partners'
         li
           = link_to collection_path(cf: 'homefeature') do
-            = image_tag 'homepage/welcome.png', width: 1078, height: 532, alt: 'Fame & Partners Formal Dresses'
-
+            = image_tag 'homepage/ClaimToFame.jpg', width: 1078, height: 532, alt: 'New Dress Styles'
         li
           = link_to '#', class: 'show-style-quiz' do
             = image_tag 'homepage/style-quiz.jpg', width: 1078, height: 532, alt: ''
@@ -42,11 +41,11 @@
 
 .home-images
   .wrap
-    = link_to '/collection/?edits=neon', class: 'image' do
+    = link_to collection_path(edits: 'neon'), class: 'image' do
       = image_tag 'homepage/neon1.jpg'
-    = link_to '/collection/?edits=neon', class: 'image rotate-1' do
+    = link_to collection_path(edits: 'neon'), class: 'image rotate-1' do
       = image_tag 'homepage/neon2.jpg'
-    = link_to '/collection/?edits=neon', class: 'image rotate-2' do
+    = link_to collection_path(edits: 'neon'), class: 'image rotate-2' do
       = image_tag 'homepage/neon3.jpg'
     = link_to '#', class: 'show-style-quiz image large' do
       = image_tag 'homepage/right.jpg'
