@@ -49,7 +49,7 @@
     </div>
     <div class="delivery">
       <!--3-4 week delivery-->
-      <%= t('delivery_time') %>
+      7-10 days delivery
     </div>
   </div>
 </div>
