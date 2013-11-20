@@ -126,7 +126,7 @@ window.helpers.createProductVariantsSelector = (root) ->
 #        deliveryText = '1-2 weeks delivery'
 #      else
 #        deliveryText = '3-4 weeks delivery'
-      deliveryText = '10-14 days delivery'
+      deliveryText = '7-10 days delivery'
       rootElement.find('.delivery').text(deliveryText)
 
     getSelectedVariant: () ->

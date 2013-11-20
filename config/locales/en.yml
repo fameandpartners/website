@@ -2,7 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  delivery_time: "10-14 days"
+  delivery_time: "7-10 days"
   password_confirmation: 'Password Confirmation'
   emails:
     subjects:
