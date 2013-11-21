@@ -1,13 +1,22 @@
-.icon-phone, .icon-home, .icon-bag, .icon-pencil, .icon-layby, .icon-signup, .icon-livechat, .icon-help, .icon-shipping, .icon-returns, .icon-dress, .icon-customization, .icon-purchase, .icon-eye, .icon-heart, .icon-tick-circle, .icon-tickmark, .icon-arrow-left, .icon-arrow-right {
+[class*="icon-"] {
   font-family: 'Icons';
-  color: #000;
   speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
+
+  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-dropdown-up:before {
+  content: "\e600";
+}
+.icon-dropdown-down:before {
+  content: "\e601";
 }
 .icon-phone:before {
   content: "\e000";
@@ -51,9 +60,6 @@
 .icon-eye:before {
   content: "\e00d";
 }
-.icon-heart:before {
-  content: "\e00e";
-}
 .icon-tick-circle:before {
   content: "\e00f";
 }
@@ -65,4 +71,7 @@
 }
 .icon-arrow-right:before {
   content: "\e012";
+}
+.icon-heart:before {
+  content: "\e00e";
 }

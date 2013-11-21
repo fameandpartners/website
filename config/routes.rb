@@ -1,66 +1,73 @@
 FameAndPartners::Application.routes.draw do
-  devise_for :spree_user,
-             :class_name => 'Spree::User',
-             :controllers => { :sessions => 'spree/user_sessions',
-                               :registrations => 'spree/user_registrations',
-                               :passwords => 'spree/user_passwords',
-                               :confirmations => 'spree/user_confirmations',
-                               :omniauth_callbacks => 'spree/omniauth_callbacks'
-             },
-             :skip => [:unlocks, :omniauth_callbacks],
-             :path_names => { :sign_out => 'logout' }
+  match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
 
-  devise_scope :spree_user do
-    get '/spree_user/thanks' => 'spree/user_registrations#thanks'
-    get '/account_settings' => 'spree/user_registrations#edit'
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+    devise_for :spree_user,
+               :class_name => 'Spree::User',
+               :controllers => { :sessions => 'spree/user_sessions',
+                                 :registrations => 'spree/user_registrations',
+                                 :passwords => 'spree/user_passwords',
+                                 :confirmations => 'spree/user_confirmations',
+                                 :omniauth_callbacks => 'spree/omniauth_callbacks'
+               },
+               :skip => [:unlocks, :omniauth_callbacks],
+               :path_names => { :sign_out => 'logout' }
+
+    devise_scope :spree_user do
+      get '/spree_user/thanks' => 'spree/user_registrations#thanks'
+      get '/account_settings' => 'spree/user_registrations#edit'
+    end
   end
 
-  # Custom Dresses part II
-  scope '/custom-dresses', module: 'personalization' do
-    get '/', to: 'registrations#new', as: :personalization
-    post '/', to: 'registrations#create'
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
-    get '/browse', to: 'products#index', as: :personalization_products
-    get '/:permalink', to: 'products#show', as: :personalization_product
+    # Custom Dresses part II
+    scope '/custom-dresses', module: 'personalization' do
+      get '/', to: 'registrations#new', as: :personalization
+      post '/', to: 'registrations#create'
+
+      get '/browse', to: 'products#index', as: :personalization_products
+      get '/:permalink', to: 'products#show', as: :personalization_product
+    end
+
+
+    resources :line_items, only: [:create, :edit, :update, :destroy] do
+      post 'move_to_wishlist', on: :member
+    end
+
+    resource :product_variants, only: [:show]
+
+    scope '/collection' do
+      root to: 'spree/products#index', as: 'collection'
+      get '/:collection' => 'spree/products#index'
+      get '/:collection/:id' => 'spree/products#show'
+    end
+
+    get 'products/:id/quick_view' => 'spree/products#quick_view'
+    post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
+
+    post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
+
+    get 'my-boutique' => 'pages#my_boutique', :as => :my_boutique
+
+    # account settings
+    resource :profile, only: [:show, :update], controller: 'users/profiles' do
+      put 'update_image', on: :member
+    end
+    get 'user_orders' => 'users/orders#index', as: 'user_orders'
+    get 'user_orders/:id' => 'users/orders#show', as: 'user_order'
+
+    get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
+
+    resources :wishlists_items, only: [:index, :create, :destroy], controller: 'users/wishlists_items' do
+      get 'move_to_cart', on: :member
+    end
+    get 'wishlist' => 'users/wishlists_items#index', as: 'wishlist'
+    get 'reviews' => 'users/reviews#index', as: 'reviews'
+    # eo account settings
+
+    resources :product_reservations, only: [:create]
   end
-
-
-  resources :line_items, only: [:create, :edit, :update, :destroy] do
-    post 'move_to_wishlist', on: :member
-  end
-
-  resource :product_variants, only: [:show]
-
-  scope '/collection' do
-    root to: 'spree/products#index', as: 'collection'
-    get '/:collection' => 'spree/products#index'
-    get '/:collection/:id' => 'spree/products#show'
-  end
-
-  get 'products/:id/quick_view' => 'spree/products#quick_view'
-  post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
-
-  post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
-
-  get 'my-boutique' => 'pages#my_boutique', :as => :my_boutique
-
-  # account settings
-  resource :profile, only: [:show, :update], controller: 'users/profiles' do
-    put 'update_image', on: :member
-  end
-  get 'user_orders' => 'users/orders#index', as: 'user_orders'
-  get 'user_orders/:id' => 'users/orders#show', as: 'user_order'
-
-  get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
-
-  resources :wishlists_items, only: [:index, :create, :destroy], controller: 'users/wishlists_items' do
-    get 'move_to_cart', on: :member
-  end
-  get 'wishlist' => 'users/wishlists_items#index', as: 'wishlist'
-  get 'reviews' => 'users/reviews#index', as: 'reviews'
-  # eo account settings
-
-  resources :product_reservations, only: [:create]
 
   # Redirects from old blog urls
   constraints host: /blog\./ do
@@ -69,7 +76,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Blog routes
-  scope '/blog' do
+  scope '(:site_version)/blog', constraints: { site_version: /(us|au)/ } do
     get '/' => 'blog#index', as: :blog
     get '/about'   => 'blog#about', as: :about
     get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
@@ -99,73 +106,74 @@ FameAndPartners::Application.routes.draw do
 
   end
 
-  # Static pages
-  get '/about'   => 'statics#about', :as => :about_us
-  get '/why-us'  => 'statics#why_us', :as => :why_us
-  get '/blake-lively'  => 'statics#blake-lively', :as => :blake_lively
-  get '/team'    => 'statics#team'
-  get '/terms'   => 'statics#ecom_terms'
-  get '/privacy' => 'statics#ecom_privacy'
-  get '/legal'   => 'statics#legal'
-  get '/faqs'   => 'statics#faqs'
-  get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
-  get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program
-  get '/compterms' => 'statics#comp_terms'
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
-  get '/campaigns/stylecall' => 'campaigns#show'
-  post '/campaigns/stylecall' => 'campaigns#create'
-  get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
-  post '/campaigns/dolly' => 'campaigns#dolly', as: :dolly_campaign
-  post '/campaigns/newsletter' => 'campaigns#newsletter', as: :newsletter_campaign
+    # Static pages
+    get '/about'   => 'statics#about', :as => :about_us
+    get '/why-us'  => 'statics#why_us', :as => :why_us
+    get '/blake-lively'  => 'statics#blake-lively', :as => :blake_lively
+    get '/team'    => 'statics#team'
+    get '/terms'   => 'statics#ecom_terms'
+    get '/privacy' => 'statics#ecom_privacy'
+    get '/legal'   => 'statics#legal'
+    get '/faqs'   => 'statics#faqs'
+    get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
+    get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program
+    get '/compterms' => 'statics#comp_terms'
 
-  #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
-  #post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+    get '/campaigns/stylecall' => 'campaigns#show'
+    post '/campaigns/stylecall' => 'campaigns#create'
+    get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
+    post '/campaigns/dolly' => 'campaigns#dolly', as: :dolly_campaign
+    post '/campaigns/newsletter' => 'campaigns#newsletter', as: :newsletter_campaign
 
-  get '/fame-chain' => 'fame_chains#new'
-  resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
-    get 'success'
-  end
+    #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
+    #post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
 
-  # testing email
-  get '/email/comp' => 'competition_mailer#marketing_email'
+    get '/fame-chain' => 'fame_chains#new'
+    resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
+      get 'success'
+    end
 
-  # External URLs
-  get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
-  get '/workshops', to: redirect('http://www.fameandpartners.com/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
-  
-  
-  # Fallen Product URL
-  get '/thefallen', to: redirect("http://www.fameandpartners.com/collection/Long-Dresses/the-fallen")
-  get '/thefallendress', to: redirect("http://www.fameandpartners.com/collection/Long-Dresses/the-fallen")
+    # testing email
+    get '/email/comp' => 'competition_mailer#marketing_email'
 
+    # External URLs
+    get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
+    get '/workshops', to: redirect('http://www.fameandpartners.com/%{site_version}/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
+    
+    # Fallen Product URL
+    get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
+    get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
 
-  # MonkeyPatch for redirecting to Custom Dress page
-  get '/fb_auth' => 'pages#fb_auth'
+    # MonkeyPatch for redirecting to Custom Dress page
+    get '/fb_auth' => 'pages#fb_auth'
 
-  root :to => 'index#show'
+    root :to => 'index#show'
 
-  resource :competition, only: [:show, :create] do
-    post 'enter', on: :member, action: :create
-    get 'share(/:user_id)', on: :member, action: 'share', as: 'share'
-    post 'invite', on: :member
-    get 'stylequiz', on: :member
-  end
+    resource :competition, only: [:show, :create] do
+      post 'enter', on: :member, action: :create
+      get 'share(/:user_id)', on: :member, action: 'share', as: 'share'
+      post 'invite', on: :member
+      get 'stylequiz', on: :member
+    end
 
-  resource :quiz, :only => [:show] do
-    resources :questions, :only => [:index]
-    resources :answers, :only => [:create]
-  end
+    resource :quiz, :only => [:show] do
+      resources :questions, :only => [:index]
+      resources :answers, :only => [:create]
+    end
 
-  scope '/users/:user_id', :as => :user do
-    get '/style-report' => 'user_style_profiles#show', :as => :style_profile
-    get '/style-report-debug' => 'user_style_profiles#debug'
-    get '/recomendations' => 'user_style_profiles#recomendations'
+    scope '/users/:user_id', :as => :user do
+      get '/style-report' => 'user_style_profiles#show', :as => :style_profile
+      get '/style-report-debug' => 'user_style_profiles#debug'
+      get '/recomendations' => 'user_style_profiles#recomendations'
+    end
+
+    mount Spree::Core::Engine, at: '/'
   end
 
   get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
-
-  mount Spree::Core::Engine, at: '/'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
@@ -176,6 +184,8 @@ FameAndPartners::Application.routes.draw do
       scope 'taxonomies/:taxonomy_id/taxons/:id' do
         resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
       end
+
+      resources :site_versions, only: [:index, :edit, :update]
 
       scope 'products/:product_id', :as => 'product' do
         resource :inspiration, :only => [:edit, :update]
@@ -256,30 +266,35 @@ FameAndPartners::Application.routes.draw do
     end
   end
 
-  get 'search' => 'pages#search'
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
-  get '/cart/guest' => 'spree/orders#guest'
+    get 'search' => 'pages#search'
 
-  # Guest checkout routes
-  resources :payment_requests, only: [:new, :create]
-  namespace :guest do
-    put '/checkout/update/:state', :to => 'checkout#update', :as => :update_checkout
-    get '/checkout/thanks', :to => 'checkout#show' , :as => :checkout_thanks
-    get '/checkout/:state', :to => 'checkout#edit', :as => :checkout_state
-    get '/checkout/', :to => 'checkout#edit' , :as => :checkout
+    get '/cart/guest' => 'spree/orders#guest'
 
-    post '/paypal', :to => 'paypal#express', :as => :paypal_express
-    get '/paypal/confirm', :to => 'paypal#confirm', :as => :confirm_paypal
-    get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
-    get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
-  end
+    # Guest checkout routes
+    resources :payment_requests, only: [:new, :create]
+    namespace :guest do
+      put '/checkout/update/:state', :to => 'checkout#update', :as => :update_checkout
+      get '/checkout/thanks', :to => 'checkout#show' , :as => :checkout_thanks
+      get '/checkout/:state', :to => 'checkout#edit', :as => :checkout_state
+      get '/checkout/', :to => 'checkout#edit' , :as => :checkout
 
-  match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
-  match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
+      post '/paypal', :to => 'paypal#express', :as => :paypal_express
+      get '/paypal/confirm', :to => 'paypal#confirm', :as => :confirm_paypal
+      get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
+      get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
+    end
 
-  # seo routes
-  %w{black red pink blue green}.each do |colour|
-    get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour
+    match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
+    match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
+
+    # seo routes
+    %w{black red pink blue green}.each do |colour|
+      get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour, as: "#{colour}_formal_dresses"
+    end
+
+    resources :site_versions, only: [:show]
   end
 
   if Rails.env.development?

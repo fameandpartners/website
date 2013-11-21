@@ -11,7 +11,7 @@
       <% for line_item in @order.line_items: %>
           <li class="item-block">
             <div class='thumbnail'>
-              <a href='/products/<%= line_item.product_permalink %>'>
+              <a href='<%= getSiteVersionPrefix() %>/products/<%= line_item.product_permalink %>'>
                 <img src="<%= line_item.image_small %>" 
                   itemprop="image" width="83" height="115" alt="<%= line_item.product_name %>"/>
               </a>
@@ -25,7 +25,7 @@
                 <span><%= line_item.money %></span>
               </div>
               <div class="name">
-                <a href="/products/<%= line_item.product_permalink %>" target="blank"><%= line_item.product_name %></a>
+                <a href="<%= getSiteVersionPrefix() %>/products/<%= line_item.product_permalink %>" target="blank"><%= line_item.product_name %></a>
               </div>
               <% if (!_.isNull(line_item.personalization)) : %>
                 <div class="custom-label">Custom dress</div>
@@ -74,7 +74,7 @@
       </div>
     </div>
     <div class="buttons">
-      <a href="/cart" class="continue">View cart</a>
+      <a href="<%= getSiteVersionPrefix() %>/cart" class="continue">View cart</a>
       <form accept-charset="UTF-8" action="/cart" method="post">
         <div style="margin:0;padding:0;display:inline">
           <input name="utf8" type="hidden" value="✓">

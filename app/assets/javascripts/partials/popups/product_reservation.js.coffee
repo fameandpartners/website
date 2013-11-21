@@ -143,7 +143,7 @@ window.popups.showProductReservationPopup = (options, callback = null) ->
 
       if popup.formDataValid()
         $.ajax(
-          url: "/product_reservations"
+          url: urlWithSitePrefix("/product_reservations")
           type: 'POST'
           dataType: 'json'
           data: formData

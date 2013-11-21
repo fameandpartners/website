@@ -43,12 +43,47 @@
   }
 }
 
+.site-version {
+  position: relative;
+  .current-version {
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
+  .site-version-switch {
+    display: none;
+    position: absolute;
+    padding: 6px 15px;
+    background: #fff;
+    white-space: nowrap;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+    a {
+      color: #000;
+      text-decoration: none;
+      text-shadow: none;
+    }
+    img {
+      position: relative;
+      top: 1px;
+      margin: 0 6px 0 0;
+    }
+    li {
+      border: 0;
+      padding: 0;
+      margin: 4px 0;
+      float: none;
+    }
+  }
+}
+
 .top-links {
   background: #333;
   height: 33px;
   font: 700 11px/26px $fontOne;
   color: #d1d1d1;
   text-transform: uppercase;
+  position: relative;
+  z-index: 2;
   a {
     text-decoration: none;
     color: #d1d1d1;
@@ -135,6 +170,23 @@
       .dropdown-menu {
         display: block;
       }
+    }
+  }
+  .site-version {
+    .current-version {
+      margin: 0 -6px 0 30px;
+      padding: 5px 6px 3px;
+      .icon {
+        margin: 0 0 0 3px;
+      }
+      &.active {
+        background: #fff;
+        color: #000;
+      }
+    }
+    .site-version-switch {
+      top: 33px;
+      right: -6px;
     }
   }
 }
@@ -288,12 +340,6 @@ header {
           display: block;
           padding: 0 24px;
         }
-        .inverse{
-
-          &:hover{
-
-          }
-        } 
         .dropdown-menu-wrapper {
           display: none;
           top: 0;
@@ -906,6 +952,34 @@ footer {
     }
     .copyright, .address, .abn {
       margin: 10px 0 0;
+    }
+  }
+  .site-version-block {
+    text-align: center;
+  }
+  .site-version {
+    margin: 12px 0 0;
+    display: inline-block;
+    text-align: left;
+    .current-version {
+      img {
+        margin: 0 2px 0 3px;
+        position: relative;
+        top: 1px;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        &:hover {
+          -webkit-filter: grayscale(0%);
+          filter: grayscale(0%);
+        }
+      }
+    }
+    .site-version-switch {
+      bottom: 16px;
+      right: 0;
+      li {
+        margin: 8px 0;
+      }
     }
   }
   &.blog {

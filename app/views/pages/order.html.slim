@@ -79,7 +79,8 @@
                   .desc
                     span AUD
                     ' $320
-                    .taxes Including GST
+                    - if current_site_version.is_australia?
+                      .taxes Including GST
           .grid-65
             h2 Order Number: #R9798
             p Order Date: 29/06/2013

@@ -22,7 +22,7 @@
       return unless variantId?
       options = _.extend({ variant_id: variantId, quantity: 1}, options)
       $.ajax(
-        url: "/wishlists_items"
+        url: urlWithSitePrefix("/wishlists_items")
         type: 'POST'
         dataType: 'json'
         data: productWishlist.prepareParams(options)

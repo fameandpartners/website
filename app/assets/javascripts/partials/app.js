@@ -136,18 +136,8 @@ $('.ecommerce').ready(function(){
 });
 
 $(document).ready(function() {
-  if ($(".modal.campaign-newsletter.hide").length > 0){
-    var popup = new window.popups.newsletterModalPopup();
-    popup.initialize($(".modal.campaign-newsletter.hide").first());
-    
-    
-    if (document.URL == 'http://www.fameandpartners.com/' && $.cookie('newsletter_mp') != 'hide'){
-      
-      popup.show();
-
-      window.newsletterModalPopup = popup;
-
-      return popup;
-    };
-  };
+  $('.current-version').on('click', function() {
+    $(this).toggleClass('active');
+    $('.site-version-switch').toggle();
+  })
 });

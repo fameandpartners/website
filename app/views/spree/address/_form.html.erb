@@ -29,7 +29,7 @@
   <p class="field" id=<%="#{address_id}country" %>>
     <%= form.label :country_id, t(:country) %><span class="required">*</span><br />
     <span id=<%="#{address_id}country-selection" %>>
-      <%= form.collection_select :country_id, available_countries, :id, :name, {}, {:class => 'required'} %>
+      <%= form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required'} %>
     </span>
   </p>
 

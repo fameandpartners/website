@@ -102,6 +102,17 @@ Spree::User.class_eval do
     CampaignMonitor.delay.synchronize(email_was || email, self, campaign_monitor_custom_fields)
   end
 
+  def update_site_version(site_version)
+    return false  if site_version.blank?
+    return true   if self.site_version_id == site_version.id
+
+    self.update_attribute(:site_version_id, site_version.id)
+  end
+
+  def recent_site_version
+    SiteVersion.where(id: self.site_version_id) || SiteVersion.default
+  end
+
   private
 
   def campaign_monitor_sign_up_reason

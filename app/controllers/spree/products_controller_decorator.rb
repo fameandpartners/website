@@ -58,12 +58,22 @@ Spree::ProductsController.class_eval do
       )
     end
 
-    Spree::ProductMailer.send_to_friend(@product, user_info).deliver
+    Spree::ProductMailer.send_to_friend(@product, user_info, current_site_version).deliver
 
     render json: { success_message: 'successfully sended' }
   end
 
   private
+
+  def load_product
+    if try_spree_current_user.try(:has_spree_role?, "admin")
+      @product = Spree::Product.find_by_permalink!(params[:id])
+    else
+      #@product = Product.active(current_currency).find_by_permalink!(params[:id])
+      @product = Spree::Product.active.find_by_permalink!(params[:id])
+    end
+  end
+
 
   def set_collection_title(searcher)
     taxon_ids = searcher.collection || []

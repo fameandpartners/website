@@ -2,32 +2,49 @@
   .wrap.no-overflow
     nav.fleft
       ul
-        li = link_to 'Home', root_path, class: 'top-icon link-root'
-        li.top-icon.phone Order on the phone / Customer Service 1300 924 860
-    nav.fright
-      ul
-        - unless spree_user_signed_in?
-          li = link_to 'Sign up', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
-          li = link_to 'Log-in', spree_login_path, class: 'link-login'
+        li = link_to 'home', root_path, class: 'top-icon link-root'
+        - if current_site_version.is_australia?
+          li.top-icon.phone order on the phone / customer service 1300 924 860
         - else
-          li.loggedin
-            .dropdown-trigger
-              - if current_spree_user.image.present?
-                .avatar
-                  = image_tag current_spree_user.image, width: 20
-              =' current_spree_user.full_name
-            .dropdown-menu
-              ul
-                li = link_to 'Account settings', profile_path
-                li = link_to 'Your orders', user_orders_path
-                li = link_to 'Style profile', styleprofile_path
-                li = link_to 'Sign out', spree_logout_path
-
+          li.top-icon.phone USA Formal Dresses
+    .fright
+      nav.fleft
+        ul
+          - unless spree_user_signed_in?
+            li = link_to 'sign up', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
+            li = link_to 'log-in', spree_login_path, class: 'link-login'
+          - else
+            li.loggedin
+              .dropdown-trigger
+                - if current_spree_user.image.present?
+                  .avatar
+                    = image_tag current_spree_user.image, width: 20
+                =' current_spree_user.full_name
+              .dropdown-menu
+                ul
+                  li = link_to 'account settings', profile_path
+                  li = link_to 'your orders', user_orders_path
+                  li = link_to 'style profile', styleprofile_path
+                  li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
+      .site-version.fright
+        .current-version
+          = image_tag "flags/#{current_site_version.code}.png", width: 16, height: 11, alt: "#{current_site_version.code}"
+          i.icon.icon-dropdown-down
+        .site-version-switch
+          ul
+            li
+              = link_to site_version_path('au') do
+                = image_tag 'flags/au.png', width: 16, height: 11, alt: 'Australia'
+                ' Australia
+            li
+              = link_to site_version_path('us') do
+                = image_tag 'flags/us.png', width: 16, height: 11, alt: 'USA'
+                ' USA
 header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .header-wrapper
     .first-level
-      .logo = link_to 'Fame&Partners', root_path
-      .tag-line Formal dresses for fashion forward, free thinking young women
+      .logo = link_to 'fame&partners', root_path
+      .tag-line formal dresses for fashion forward, free thinking young women
     .second-level
       .wrap.no-overflow
         ul.icons
@@ -35,48 +52,48 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
             = link_to why_us_path+"#shipping" do
               .icon.shipping
               span
-                ' Free
+                ' free
                 br
-                ' Shipping
+                ' shipping
           li
             = link_to why_us_path+"#returns" do
               .icon.returns
               span
-                ' Free
+                ' free
                 br
-                ' Returns
+                ' returns
           li
             = link_to why_us_path+"#fit" do
               .icon.guarantee
               span
-                ' Fit
+                ' fit
                 br
-                ' Guarantee
+                ' guarantee
           - unless sale_active?
             li
               = link_to why_us_path+"#customisation" do
                 .icon.customization
                 span
-                  ' Free
+                  ' free
                   br
-                  ' Customisation
+                  =' t(:customization)
           
           li
             = link_to why_us_path+"#advice" do
               .icon.tips
               span
-                ' Free
+                ' free
                 br
                 ' styling advice
         .search.fleft
           = form_tag search_path, method: :get do
-            input type="text" name="q" placeholder="Search formal dresses"
+            input type="text" name="q" placeholder="search formal dresses"
         .fright
-          .wishlist = link_to 'Wish list', wishlist_path, class: 'wishlist-link'
+          .wishlist = link_to 'wish list', wishlist_path, class: 'wishlist-link'
           .shopping-bag
             = link_to spree.cart_path, class: 'shopping-bag-toggler' do
               .counter = current_order(true).item_count
-              ' Shopping bag
+              ' shopping bag
             = render 'layouts/shopping_bag_content'
 
     .third-level
@@ -84,12 +101,12 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
         nav
           ul.clearfix
             li.with-dropdown *{:class => request_path?('/products') && 'active' }
-              = link_to 'Collection', collection_path, title: "Formal Dresses Fame & Partners"
+              = link_to 'collection', collection_path, title: "formal dresses fame & partners"
               .dropdown-menu-wrapper
                 .dropdown-menu
                   .dropdown-title
-                    ' Browse our Collection
-                    .link.fright = link_to 'View entire collection', collection_path, title: "Browse our collection of Formal Dresses"
+                    ' browse our collection
+                    .link.fright = link_to 'view entire collection', collection_path, title: "browse our collection of formal dresses"
                   ul
                     - cache ['header', 'ranges'], :expires_in => configatron.cache.expire.long do
                       - available_product_ranges.each do |taxon|
@@ -98,18 +115,18 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                             .range-image
                               = image_tag "dropdown/#{taxon.name.downcase.gsub(/\s+/, "")}.jpg", width: 150, height: 150, alt: taxon.name
                             = taxon.name
-            li = link_to 'Custom Dresses', custom_dresses_path, title: "Fame & Partners Custom Dresses", class: 'inverse'
+            li = link_to 'custom dresses', custom_dresses_path, title: "fame & partners custom dresses", class: 'inverse'
             - if spree_user_signed_in? && current_spree_user.style_profile.present?
               li *{:class => request_path?("#{my_boutique_path}") && 'active' }
-                = link_to 'Personalised Boutique', my_boutique_path
+                = link_to 'personalised boutique', my_boutique_path
             - else
-              li = link_to 'Personalised Boutique', '#', :class => 'show-style-quiz'
+              li = link_to 'personalised boutique', '#', :class => 'show-style-quiz'
             li *{:class => request_path?("#{how_it_works_path}") && 'active' }
-              = link_to 'About us', about_us_path, title: "About Fame & Partners"
-            li = link_to 'Why Shop With Us?', why_us_path, title: "Fame & Partners Why shop with us?" 
-            li = link_to 'Blog', blog_url, title: "Fame & Partners Blog", target: "_blank"
+              = link_to 'about us', about_us_path, title: "about fame & partners"
+            li = link_to 'why shop with us?', why_us_path, title: "fame & partners why shop with us?" 
+            li = link_to 'blog', blog_url, title: "fame & partners blog", target: "_blank"
             - unless spree_user_signed_in? && current_spree_user.style_profile.present?
-              li = link_to 'Style quiz', '#', :class => 'show-style-quiz'
+              li = link_to 'style quiz', '#', :class => 'show-style-quiz'
 
   javascript:
     window.bootstrap = {}

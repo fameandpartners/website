@@ -1,0 +1,70 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+  <%= t(:site_versions) %>
+<% end %>
+
+ <% if @site_versions.empty? %>
+  <div class="no-objects-found">
+    <%= t(:none) %>
+  </div>
+<% else %>
+  <table class="index" id='listing_zones' data-hook>
+    <colgroup>
+      <col style="width: 5%" />
+      <col style="width: 10%" />
+      <col style="width: 5%" />
+      <col style="width: 10%" />
+      <col style="width: 5%" />
+      <col style="width: 5%" />
+      <col style="width: 20%" />
+      <col style="width: 20%" />
+    </colgroup>
+    <thead>
+      <tr data-hook="zones_header">
+        <th>Default</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Zone</th>
+        <th>Currency</th>
+        <th>Locale</th>
+        <th>Exchange Rate</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @site_versions.each do |site_version| %>
+        <tr id="<%= spree_dom_id site_version %>" data-hook="site_version_row" class="<%= cycle('odd', 'even')%>">
+          <td class="align-center"><%= site_version.default? ? 'Yes' : 'No' %></td>
+          <td><%= site_version.name %></td>
+          <td><%= site_version.permalink %></td>
+          <td><%= site_version.zone.name %></td>
+          <td><%= site_version.currency %></td>
+          <td><%= site_version.locale %></td>
+          <td class="exchange_rate">
+            <div class="rate">
+              <%= site_version.exchange_rate %>
+            </div>
+            <br />
+            <small>( from <%= site_version.exchange_rate_timestamp %> )</small>
+          </td>
+          <td>
+            <% if !site_version.default %>
+              <%= link_to "Update rate", edit_admin_site_version_path(site_version), remote: true, class: 'update' %>
+              <%= form_for [:admin, site_version], remote: true,
+                    html: { id: "site_version_form_#{site_version.id}", style: 'display: none;' } do |f| %>
+                <div class="fields">
+                  <%= f.label :exchange_rate %>
+                  <%= f.text_field :exchange_rate, placeholder: '0.0000' %>
+                </div>
+                <div>
+                  <%= f.submit "Update" %>
+                </div>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end%>

@@ -1,5 +1,5 @@
 - content_for :head do
-  meta property="og:url" content="http://www.fameandpartners.com/"
+  meta property="og:url" content="#{ root_url }"
   meta property="og:site_name" content="Fame & Partners - Beautiful dresses crafted from red carpet looks"
   meta property="og:image" content="#{absolute_image_url(image_path('famehomepage.jpg'), 'http')}"
   meta property="og:locale" content="en_US"
@@ -54,15 +54,15 @@
   .wrap.no-overflow
     .blog-post
       .label Blog
-      = link_to blog_post_by_category_path('trends', 'go-punk-to-prom'), class: 'image-preview', target: '_blank' do
+      = link_to blog_post_by_category_path(category_slug: 'trends', post_slug: 'go-punk-to-prom'), class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/blog1.jpg'
     .blog-post.rotate-1
       .label Blog
-      = link_to blog_post_by_category_path('trends', 'trending-baroque-2'), class: 'image-preview', target: '_blank' do
+      = link_to blog_post_by_category_path(category_slug: 'trends', post_slug: 'trending-baroque-2'), class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/blog2.jpg'
     .blog-post.rotate-2
       .label Blog
-      = link_to blog_red_carpet_post_path('the-65th-emmy-awards'), class: 'image-preview', target: '_blank' do
+      = link_to blog_red_carpet_post_path(post_slug: 'the-65th-emmy-awards'), class: 'image-preview', target: '_blank' do
         = image_tag 'homepage/65emmy.jpg'
 
 - if featured_products.length > 0

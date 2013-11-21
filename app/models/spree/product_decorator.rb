@@ -24,12 +24,16 @@ Spree::Product.class_eval do
     )
   }
 
+  has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 
   accepts_nested_attributes_for :product_customisation_types,
     reject_if: lambda { |ct| ct[:customisation_type_id].blank? && ct[:id].blank? },
     allow_destroy: true
   attr_accessor :customisation_values_hash
   attr_accessible :featured, :customisation_values_hash, :product_customisation_types_attributes
+
+  attr_accessible :zone_prices_hash
+  attr_accessor :zone_prices_hash
 
   scope :featured, lambda { where(featured: true) }
   scope :ordered, lambda { order('position asc') }
@@ -40,6 +44,9 @@ Spree::Product.class_eval do
 
   before_create :set_default_prototype
   after_create :build_customisations_from_values_hash, :if => :customisation_values_hash
+
+  before_save :update_price_conversions
+  after_save :update_zone_prices, if: :zone_prices_hash
 
   def images
     table_name = Spree::Image.quoted_table_name
@@ -156,6 +163,30 @@ Spree::Product.class_eval do
     end
   end
 
+  def zone_price_for(site_version = nil)
+    if site_version.blank?
+      self.price_in(Spree::Config.currency)
+    else
+      self.master.zone_price_for(site_version)
+    end
+  end
+
+  def update_price_conversions
+    SiteVersion.where(default: false).each do |site_version|
+      self.add_price_conversion(site_version.currency, site_version.exchange_rate)
+    end
+  end
+
+  def add_price_conversion(new_currency, exchange_rate)
+    return if new_currency == Spree::Config.currency
+
+    default_price = self.price_in(Spree::Config.currency)
+    price = prices.where(currency: new_currency).first_or_initialize
+    price.variant_id ||= self.master.id
+    price.amount = default_price.amount * exchange_rate
+    price.save
+  end
+
   def can_be_customized?
     product_customisation_values.present?
   end
@@ -191,5 +222,11 @@ Spree::Product.class_eval do
       product_type.customisation_value_ids = values
     end
     save
+  end
+
+  def update_zone_prices
+    self.variants_including_master.each do |variant|
+      variant.update_zone_prices(self.zone_prices_hash)
+    end
   end
 end

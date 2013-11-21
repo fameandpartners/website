@@ -121,6 +121,7 @@ $(".products.index").ready ->
         else
           url = "/collection/#{filter.collection}?#{$.param(cleared_filter)}"
 
+      url = window.getSiteVersionPrefix() + url
       window.history.pushState({ path: url }, '', url)
       url
 
@@ -128,7 +129,7 @@ $(".products.index").ready ->
       searchData = @currentFilter()
       pageUrl = @updatePageLocation(searchData)
 
-      $.ajax('/products',
+      $.ajax(urlWithSitePrefix('/products'),
         type: "GET",
         dataType: 'html',
         data: $.param(searchData)
