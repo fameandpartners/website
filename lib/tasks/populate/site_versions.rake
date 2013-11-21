@@ -3,6 +3,12 @@ namespace "db" do
     desc "create number of dresses with images and properties"
     task site_versions: :environment do
       create_site_versions
+
+      SiteVersion.update_all(exchange_rate: 1)
+      SiteVersion.update_all(exchange_rate_timestamp: 1.year.ago)
+
+      site_version = SiteVersion.default || SiteVersion.first
+      Spree::User.update_all(site_version_id:  site_version.id)
     end
 
     desc "create prices for each site version"
@@ -15,18 +21,18 @@ namespace "db" do
 end
 
 def create_site_versions
-  create_site_version('australia', 'au', 'en-AU')
-  create_site_version('usa', 'us', 'en-US')
+  create_site_version('australia', 'au', 'en-AU', 'AUD')
+  create_site_version('usa', 'us', 'en-US', 'USD')
 end
 
-def create_site_version(name, code, locale)
+def create_site_version(name, code, locale, currency)
   args = {
     permalink: code,
     name: name,
     zone_id: get_zone_id(name),
-    currency: 'AUD',
+    currency: currency,
     locale: locale,
-    default: code.downcase == 'us'
+    default: code.downcase == 'ua'
   }
 
   site_version = SiteVersion.where(zone_id: args[:zone_id], permalink: args[:permalink]).first
