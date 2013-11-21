@@ -32,7 +32,7 @@ def create_site_version(name, code, locale, currency)
     zone_id: get_zone_id(name),
     currency: currency,
     locale: locale,
-    default: code.downcase == 'au'
+    default: code.downcase == 'us'
   }
 
   site_version = SiteVersion.where(zone_id: args[:zone_id], permalink: args[:permalink]).first
