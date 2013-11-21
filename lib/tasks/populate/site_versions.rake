@@ -44,7 +44,8 @@ end
 
 def get_zone_id(name)
   zone = Spree::Zone.where("lower(name) = :name", name: name).first
-  zone.id if zone.present?
 
-  Spree::Zone.create(name: name)
+  return zone.id if zone.present?
+
+  Spree::Zone.create(name: name).id
 end
