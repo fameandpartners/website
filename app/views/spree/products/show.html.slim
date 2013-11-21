@@ -71,7 +71,7 @@ ruby:
           .price.sale
             = price_for_product(@product)
           /.delivery 3-4 week delivery
-          .delivery 7-10 days delivery
+          .delivery = t('delivery_time')+ " delivery"
         .colors-choser
           .label Choose a colour:
           .colors
@@ -92,7 +92,7 @@ ruby:
             - if (@product.can_be_customized? and !@product.in_sale?)
               .or-line
                 span or
-              = link_to personalization_product_path(@product, cf:"readytowear"), class: 'btn-customize' do
+              = link_to personalization_product_path(permalink: @product.permalink, cf:"readytowear"), class: 'btn-customize' do
                 i.icon.icon-layby
                 ' Free Customization
           = add_to_wishlist_link(@product)
@@ -191,9 +191,5 @@ ruby:
         .name = link_to product.name, product
         /.description = product_short_description(product)
         .price
-          - if product.in_sale?
-            del = product.price_in(current_currency).display_price_without_discount
-            span = product.price_in(current_currency).display_price_with_discount
-          - else
-            span = product.price_in(current_currency).display_price
+          = price_for_product(product)
 = render 'customization_popup'

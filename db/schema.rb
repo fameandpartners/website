@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131030070401) do
+ActiveRecord::Schema.define(:version => 20131116114518) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -244,6 +244,23 @@ ActiveRecord::Schema.define(:version => 20131030070401) do
     t.integer  "image_file_size"
   end
 
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
     t.integer  "product_id"
@@ -364,6 +381,22 @@ ActiveRecord::Schema.define(:version => 20131030070401) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "site_versions", :force => true do |t|
+    t.integer  "zone_id"
+    t.string   "name"
+    t.string   "permalink"
+    t.boolean  "default",                 :default => false
+    t.boolean  "active",                  :default => false
+    t.string   "currency"
+    t.string   "locale"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.date     "exchange_rate_timestamp"
+    t.decimal  "exchange_rate",           :default => 1.0
+  end
+
+  add_index "site_versions", ["zone_id"], :name => "index_site_versions_on_zone_id"
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -1006,6 +1039,7 @@ ActiveRecord::Schema.define(:version => 20131030070401) do
     t.datetime "last_cart_notification_sent_at"
     t.datetime "last_wishlist_notification_sent_at"
     t.datetime "last_quiz_notification_sent_at"
+    t.integer  "site_version_id"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
@@ -1037,6 +1071,16 @@ ActiveRecord::Schema.define(:version => 20131030070401) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  create_table "spree_zone_prices", :force => true do |t|
+    t.integer "variant_id"
+    t.integer "zone_id"
+    t.decimal "amount",     :precision => 8, :scale => 2
+    t.string  "currency"
+  end
+
+  add_index "spree_zone_prices", ["variant_id"], :name => "index_spree_zone_prices_on_variant_id"
+  add_index "spree_zone_prices", ["zone_id"], :name => "index_spree_zone_prices_on_zone_id"
 
   create_table "spree_zones", :force => true do |t|
     t.string   "name"

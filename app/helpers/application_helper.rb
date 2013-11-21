@@ -102,27 +102,71 @@ module ApplicationHelper
     raw (text + content_tag(:span, ' * ', class: 'required'))
   end
 
+  # don't touch http:// or ftp://
+  def url_without_double_slashes(url)
+    # search elements with not colons and replace inside them
+    url.gsub(/\w+(\/\/)/){|a| a.sub('//', '/')}
+  end
+
   def collection_taxon_path(taxon)
     if range_taxonomy && range_taxonomy.taxons.where(id: taxon.id).exists?
       permalink = taxon.permalink.split('/').last
-      "/collection/#{permalink}"
+      site_version_prefix = self.url_options[:site_version]
+      if site_version_prefix.present?
+        "/#{site_version_prefix}/collection/#{permalink}".gsub(/\/+/, '/')
+      else
+        "/collection/#{permalink}"
+      end
     else
       collection_path
     end
   end
 
-  def collection_product_path(product)
+  def collection_product_path(product, options = {})
     taxon = range_taxon_for(product)
     if taxon
-      permalink = taxon.permalink.split('/').last
-      "/collection/#{permalink}/#{product.to_param}"
+      taxon_permalink = taxon.permalink.split('/').last
+      build_collection_product_path(taxon_permalink, product.to_param, options)
     else
-      spree.product_path(product)
+      spree.product_path(product, options)
     end
   end
 
-  def collection_product_url(product)
-    root_url + collection_product_path(product)
+  def collection_product_url(product, options = {})
+    url_without_double_slashes(root_url(site_version: nil) + collection_product_path(product, options))
+  end
+
+  def build_collection_taxon_path(collection, options = {})
+    build_collection_product_path(collection, nil, options)
+  end
+
+  # custom_collection_product_url('Long-Dresses', 'the-fallen', cf: 'homefeature')
+  # "http://www.fameandpartners.com/collection/Long-Dresses/the-fallen?cf=homefeature" 
+  def build_collection_product_path(collection_id, product_id, options = {})
+    site_version_prefix = self.url_options[:site_version]
+    path_parts = [site_version_prefix, 'collection', collection_id, product_id]
+    path = "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.present?
+
+    url_without_double_slashes(path)
+  end
+
+  def build_collection_product_url(collection_id, product_id, options = {})
+    url_without_double_slashes(
+      root_url(site_version: nil) + build_collection_product_path(collection_id, product_id, options)
+    )
+  end
+
+  def taxon_path(taxon)
+    site_version_prefix = self.url_options[:site_version]
+
+    if site_version_prefix.present?
+      result = "/#{site_version_prefix}/#{taxon.permalink}"
+    else
+      result = "/#{taxon.permalink}"
+    end
+
+    result.gsub(/\/+/, '/')
   end
 
   def absolute_image_url(image_url, protocol = nil)
@@ -199,13 +243,14 @@ module ApplicationHelper
   end
 
   def price_for_product(product)
+    price = product.zone_price_for(current_site_version)
     if product.in_sale?
       [
-        content_tag(:del, product.price_in(current_currency).display_price_without_discount),
-        content_tag(:span, product.price_in(current_currency).display_price_with_discount)
+        content_tag(:del, price.display_price_without_discount),
+        content_tag(:span, price.display_price_with_discount)
       ].join("\n").html_safe
     else
-      content_tag(:span, product.price_in(current_currency).display_price).html_safe
+      content_tag(:span, price.display_price).html_safe
     end
   end
 
@@ -230,6 +275,13 @@ module ApplicationHelper
     values_table = Arel::Table.new(:spree_option_values)
     type.option_values.
       where(values_table[:value].not_eq(nil).and(values_table[:value].not_eq('')))
+  end
+
+  def cache(name = {}, options = nil, &block)
+    name.push(current_site_version.code) if name.is_a?(Array)
+    name[:site_version] = current_site_version.code if name.is_a?(Hash)
+
+    super(name, options, &block)
   end
 
   private

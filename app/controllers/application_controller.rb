@@ -6,10 +6,29 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Common
 
   append_before_filter :check_cart
+  append_before_filter :add_site_version_to_mailer
 
   def check_cart
     # if can't find order, create it ( true )
+    # current order calls current currency which calls current site version
+    # and convert current order to current currency
     current_order(true) if current_order.blank?
+    current_order.zone_id = current_site_version.zone_id
+  end
+
+  def add_site_version_to_mailer
+    ActionMailer::Base.default_url_options.merge!(
+      site_version: self.url_options[:site_version]
+    )
+  end
+
+  def convert_current_order_prices
+    if session[:order_id]
+      order = Spree::Order.where(id: session[:order_id]).first
+      if !order.completed?
+        order.use_prices_from(current_site_version)
+      end
+    end
   end
 
   helper_method :default_seo_title, :default_meta_description
@@ -17,6 +36,20 @@ class ApplicationController < ActionController::Base
   helper_method :analytics_label, :get_user_type
 
   before_filter :try_reveal_guest_activity
+
+  before_filter :set_locale
+
+  def url_options
+    version = current_site_version
+
+    if version.permalink.present? && version.permalink != 'us'
+      site_version = version.permalink.html_safe
+    else
+      site_version = nil
+    end
+
+    { site_version: site_version }.merge(super)
+  end
 
   private
 
@@ -160,5 +193,98 @@ class ApplicationController < ActionController::Base
       self.title = [prefix, default_seo_title].join(' - ')
       description([prefix, default_meta_description].join(' - '))
     end
+  end
+
+  helper_method :current_site_version, :site_versions_enabled?
+
+  def site_versions_enabled?
+    @site_versions_enabled ||= (SiteVersion.count > 1)
+  end
+
+  # site_version : [us | au]
+  # site_version_id : [1,2...]
+  def current_site_version
+    return @current_site_version if @current_site_version
+
+    # instead of magic with before filters order...
+    # otherwise, this will update session and we will lost first visit or not
+    check_default_site_version
+
+    if request.get?
+      self.current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
+    else
+      # url without site_version, but we have version in session 
+      if params[:site_version].blank? or params[:site_version].to_s != session[:site_version].to_s
+        self.current_site_version = SiteVersion.by_permalink_or_default(session[:site_version])
+      else
+        self.current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
+      end
+    end
+  end
+
+  # * when visiting from AUS it is defaulting to USA, it should default to /au
+  def first_visit?
+    if params[:site_version].nil? && session[:site_version].nil? 
+      return true if request.referrer.blank?
+      host = URI.parse(request.referrer).host
+      if host.match(/localhost|fameandpartners/)
+        return false
+      else
+        return true
+      end
+    else
+      return false
+    end
+  rescue Exception => e
+    false
+  end
+
+  def check_default_site_version
+    if first_visit?
+      country_code = fetch_user_country_code
+      self.current_site_version = SiteVersion.by_permalink_or_default(country_code)
+      if country_code == 'au'
+        redirect_to root_url(site_version: country_code) and return
+      end
+    end
+  end
+
+  def current_site_version=(site_version)
+    if session[:site_version] != site_version.permalink
+      session[:site_version] = site_version.permalink
+      @current_site_version = site_version
+
+      if user = try_spree_current_user
+        user.update_site_version(site_version)
+      end
+
+      convert_current_order_prices
+    end
+
+    site_version
+  end
+
+  def current_currency
+    current_site_version.try(:currency) || Spree::Config[:currency]
+  end
+
+  def fetch_user_country_code
+    require 'geoip'
+    geoip = GeoIP.new(File.join(Rails.root, 'db', 'GeoIP.dat'))
+    remote_ip = request.remote_ip
+    country_code = 'us'
+    if remote_ip != "127.0.0.1"
+      country_code = geoip.country(request.remote_ip).try(:country_code2)
+    end
+
+    country_code.downcase
+  end
+
+  def default_locale
+    'en-US'
+  end
+
+  def set_locale
+    session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
 end

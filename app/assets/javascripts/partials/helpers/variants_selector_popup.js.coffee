@@ -22,7 +22,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     show: (params = {}, eventParams = {}) ->
       popup.params = params
       popup.eventParams = eventParams
-      $.ajax("/product_variants"
+      $.ajax(urlWithSitePrefix("/product_variants")
         type: 'GET',
         dataType: 'json',
         data: params

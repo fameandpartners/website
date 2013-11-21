@@ -27,6 +27,10 @@ doctype html
       javascript:
         window.current_user = #{raw serialized_current_user.to_json}
 
+    - if current_site_version
+      javascript:
+        window.current_site_version = #{raw current_site_version.to_json}
+
     - if spree_user_signed_in? and session['show_quiz'] and session.delete('show_quiz')
       javascript:
         $(function(){

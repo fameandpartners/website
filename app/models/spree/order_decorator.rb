@@ -1,6 +1,8 @@
 Spree::Order.class_eval do
   self.include_root_in_json = false
 
+  attr_accessor :zone_id
+
   checkout_flow do
     go_to_state :address
     go_to_state :payment, :if => lambda { |order|
@@ -96,18 +98,23 @@ Spree::Order.class_eval do
       current_item.currency = currency unless currency.nil?
       current_item.save
     else
+      if @zone_id
+        price = variant.zone_price_for(Spree::Zone.find(@zone_id))
+      else
+        price = variant.price_in(currency)
+      end
       current_item = Spree::LineItem.new(:quantity => quantity)
       current_item.variant = variant
       if currency
         current_item.currency    = currency unless currency.nil?
-        current_item.price       = variant.price_in(currency).final_amount
+        current_item.price       = price.final_amount
         if variant.in_sale?
-          current_item.old_price = variant.price_in(currency).amount_without_discount
+          current_item.old_price = price.amount_without_discount
         end
       else
-        current_item.price       = variant.final_price
+        current_item.price       = price.final_price
         if variant.in_sale?
-          current_item.old_price = variant.price_without_discount
+          current_item.old_price = price.price_without_discount
         end
       end
       self.line_items << current_item
@@ -173,5 +180,37 @@ Spree::Order.class_eval do
       result[line_item_column] = result[line_item_column].join('|')
     end
     result
+  end
+
+  def get_site_version
+    @site_version ||= SiteVersion.by_currency_or_default(self.currency)
+  end
+
+  def use_prices_from(site_version)
+    return if self.currency == site_version.currency
+
+    self.zone_id = site_version.zone_id
+    
+    # update line items
+    # update currency
+    self.currency = site_version.currency
+
+    self.line_items.each do |current_item|
+      variant = current_item.variant
+      price = variant.zone_price_for(Spree::Zone.find(@zone_id))
+
+      # if price or currency has been changed
+      if current_item.price.to_i != price.final_amount.to_i && current_item.currency != price.currency
+        current_item.currency = price.currency
+        current_item.price = price.final_amount
+        if variant.in_sale?
+          current_item.old_price = price.amount_without_discount
+        end
+        current_item.save
+      end
+    end
+    self.save
+
+    self.reload
   end
 end

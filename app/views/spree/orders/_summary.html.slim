@@ -19,4 +19,5 @@ ul
     .desc
       span = @order.currency
       = @order.display_total
-      .taxes Including GST
+      - if current_site_version.is_australia?
+        .taxes Including GST

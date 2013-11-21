@@ -35,7 +35,7 @@ window.helpers.quickViewer = {
     helpers.quickViewer.showProduct.call(helpers.quickViewer, productId)
 
   showProduct: (productId) ->
-    quickViewUrl = "/products/#{productId}/quick_view"
+    quickViewUrl = urlWithSitePrefix("/products/#{productId}/quick_view")
     $.ajax(
       url: quickViewUrl
       type: 'GET'

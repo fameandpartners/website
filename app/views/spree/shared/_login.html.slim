@@ -1,5 +1,6 @@
 .form data-hook="login"
-  = form_for :spree_user, :url => spree.spree_user_session_path do |f|
+  - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
+  = form_for :spree_user, :url => login_path do |f|
     #password-credentials
       = flash_messages
       .input.string

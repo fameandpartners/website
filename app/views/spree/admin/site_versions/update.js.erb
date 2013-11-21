@@ -1,0 +1,6 @@
+form_cell = $('#site_version_form_<%= @site_version.id %>').hide().closest('td')
+form_cell.find('a.update').show()
+rate_cell = form_cell.siblings('td.exchange_rate');
+console.log(rate_cell)
+rate_cell.find('div.rate').html('<%= @site_version.exchange_rate %>');
+rate_cell.find('small').html('(from <%= @site_version.exchange_rate_timestamp  %>)');

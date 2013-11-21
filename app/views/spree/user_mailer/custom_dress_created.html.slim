@@ -23,14 +23,14 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                 p style="margin: 0 0 20px;" One of our designers will be in touch in the next 48 hours to chat to you about your new look. Look out for our call!
                 p style="margin: 0;"
                   ' If you miss our call, or have any questions, simply send us an email at
-                  = mail_to 'team@fameandpartners.com', style: 'color: #666; font-weight: 700;'
+                  = mail_to 'team@fameandpartners.com', 'team@fameandpartners.com', style: 'color: #666; font-weight: 700;'
             tr
               td height="130"
             tr
               td style="color: #666; text-transform: uppercase; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
-                = link_to "Our Collection", collection_url, style: "color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                = link_to "Our Collection", main_app.collection_url, style: "color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
                 '  |  
-                = link_to "About", about_url, style: "color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
+                = link_to "About", main_app.about_url, style: "color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
                 '  |  
-                a href="http://blog.fameandpartners.com" style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" Blog
+                = link_to 'Blog', main_app.blog_url, style: "color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
       td width="38"

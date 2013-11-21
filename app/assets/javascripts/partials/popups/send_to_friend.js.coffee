@@ -92,7 +92,7 @@ window.popups.showSendToFriendPopup = (productId, options = {}) ->
 
       if popup.formDataValid()
         $.ajax(
-          url: "/products/#{popup.productId}/send_to_friend"
+          url: urlWithSitePrefix("/products/#{popup.productId}/send_to_friend")
           type: 'POST'
           dataType: 'json'
           data: formData
