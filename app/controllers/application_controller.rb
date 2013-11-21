@@ -235,8 +235,8 @@ class ApplicationController < ActionController::Base
     else
       return false
     end
-#  rescue Exception => e
-#    false
+  rescue Exception => e
+    false
   end
 
   def check_default_site_version
