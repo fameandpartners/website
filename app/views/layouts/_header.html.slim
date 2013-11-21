@@ -3,7 +3,10 @@
     nav.fleft
       ul
         li = link_to 'home', root_path, class: 'top-icon link-root'
-        li.top-icon.phone order on the phone / customer service 1300 924 860
+        - if current_site_version.is_australia?
+          li.top-icon.phone order on the phone / customer service 1300 924 860
+        - else
+          li.top-icon.phone USA Formal Dresses
     .fright
       nav.fleft
         ul

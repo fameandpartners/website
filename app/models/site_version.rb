@@ -30,6 +30,10 @@ class SiteVersion < ActiveRecord::Base
     permalink.to_s.downcase.gsub(/\W/, '') == 'au'
   end
 
+  def is_usa?
+    permalink.to_s.downcase.gsub(/\W/, '') == 'us'
+  end
+
   def code
     permalink.to_s.downcase.gsub(/\W/, '')
   end

@@ -206,6 +206,10 @@ class ApplicationController < ActionController::Base
   def current_site_version
     return @current_site_version if @current_site_version
 
+    # instead of magic with before filters order...
+    # otherwise, this will update session and we will lost first visit or not
+    check_default_site_version
+
     if request.get?
       self.current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
     else
@@ -218,13 +222,32 @@ class ApplicationController < ActionController::Base
     end
   end
 
-=begin
-  def current_site_version
-    return @current_site_version if @current_site_version
-    self.current_site_version = SiteVersion.by_permalink_or_default(params[:site_version])
+  # * when visiting from AUS it is defaulting to USA, it should default to /au
+  def first_visit?
+    if params[:site_version].nil? && session[:site_version].nil? 
+      return true if request.referrer.blank?
+      host = URI.parse(request.referrer).host
+      if host.match(/localhost|fameandpartners/)
+        return false
+      else
+        return true
+      end
+    else
+      return false
+    end
+#  rescue Exception => e
+#    false
   end
-=end
 
+  def check_default_site_version
+    if first_visit?
+      country_code = fetch_user_country_code
+      self.current_site_version = SiteVersion.by_permalink_or_default(country_code)
+      if country_code == 'au'
+        redirect_to root_url(site_version: country_code) and return
+      end
+    end
+  end
 
   def current_site_version=(site_version)
     if session[:site_version] != site_version.permalink
