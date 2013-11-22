@@ -43,3 +43,5 @@ end
 Spree.user_class = "Spree::User"
 
 Spree::Ability.register_ability(Blog::Ability)
+
+Spree::SocialConfig[:path_prefix] = 'user'
