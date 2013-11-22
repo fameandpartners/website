@@ -270,8 +270,6 @@ FameAndPartners::Application.routes.draw do
 
     get 'search' => 'pages#search'
 
-    get '/cart/guest' => 'spree/orders#guest'
-
     # Guest checkout routes
     resources :payment_requests, only: [:new, :create]
     namespace :guest do

@@ -2,11 +2,11 @@
   .wrap.no-overflow
     nav.fleft
       ul
-        li = link_to 'home', root_path, class: 'top-icon link-root'
         - if current_site_version.is_australia?
+          li = link_to 'Australia Home', root_path, class: 'top-icon link-root'
           li.top-icon.phone order on the phone / customer service 1300 924 860
-        - else
-          li.top-icon.phone USA Formal Dresses
+        - else                                                       
+          li = link_to 'USA Home', root_path, class: 'top-icon link-root'
     .fright
       nav.fleft
         ul
