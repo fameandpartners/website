@@ -2,7 +2,7 @@ module OmniAuth
   module Strategies
     class Facebook
       def on_request_path?
-        !!(current_path =~ /^\/?(au|us)\/user\/auth\/facebook$/i)
+        !!(current_path =~ /^\/?(au|us)?\/user\/auth\/facebook$/i)
       end
 
       def site_version
