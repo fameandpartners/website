@@ -6,7 +6,7 @@ module CheckoutHelper
     if checkout_zone && checkout_zone.kind == 'country'
       countries = checkout_zone.country_list
     else
-      countries = Country.all
+      countries = Spree::Country.all
     end 
 
     countries.collect do |country|
