@@ -16,7 +16,7 @@ module Personalization
         return redirect_to personalization_path
       end
       
-      @product = Spree::Product.joins(:product_customisation_values).uniq.active(current_currency).find_by_permalink!(params[:permalink])
+      @product = Spree::Product.joins(:product_customisation_values).uniq.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
 
       set_product_show_page_title(@product, "Custom Formal Dress ")
       @product_properties = @product.product_properties.includes(:property)
