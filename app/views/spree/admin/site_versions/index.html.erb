@@ -49,9 +49,9 @@
             <small>( from <%= site_version.exchange_rate_timestamp %> )</small>
           </td>
           <td>
-            <% if !site_version.default %>
-              <%= link_to "Update rate", edit_admin_site_version_path(site_version), remote: true, class: 'update' %>
-              <%= form_for [:admin, site_version], remote: true,
+            <% if site_version.currency != Spree::Config.currency %>
+              <%= link_to "Update rate", edit_admin_site_version_path(site_version.id), remote: true, class: 'update' %>
+              <%= form_for [:admin, site_version], url: admin_site_version_path(site_version.id), remote: true,
                     html: { id: "site_version_form_#{site_version.id}", style: 'display: none;' } do |f| %>
                 <div class="fields">
                   <%= f.label :exchange_rate %>
