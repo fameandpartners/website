@@ -23,7 +23,8 @@ GIT
 
 GIT
   remote: git://github.com/evgeniypetrov/better_spree_paypal_express.git
-  revision: 2ff2d6bccd95dd120f8121443e18ebcb900ed6b5
+  revision: 478b27281f7ed806df5ae86a41f9890595f8d242
+  ref: 478b27281f7ed806df5ae86a41f9890595f8d242
   branch: 1-3-stable
   specs:
     spree_paypal_express (2.0.3)

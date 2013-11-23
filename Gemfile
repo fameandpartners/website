@@ -68,7 +68,10 @@ gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 
 # spree extensions for payments
 gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
-gem 'spree_paypal_express', github: 'evgeniypetrov/better_spree_paypal_express', branch: '1-3-stable'
+gem 'spree_paypal_express',
+  github: 'evgeniypetrov/better_spree_paypal_express',
+  branch: '1-3-stable',
+  ref: '478b27281f7ed806df5ae86a41f9890595f8d242'
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
