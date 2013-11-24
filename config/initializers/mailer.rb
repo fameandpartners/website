@@ -13,7 +13,8 @@ if Rails.env.staging? || Rails.env.production?
   ActionMailer::Base.add_delivery_method :mandrill, Mail::SMTP
   ActionMailer::Base.mandrill_settings = {
     :address              => 'smtp.mandrillapp.com',
-    :port                 => 587,
+    :port                 => 25,
+    :enable_starttls_auto => true,
     :user_name            => configatron.mandrill.smtp.username,
     :password             => configatron.mandrill.smtp.password
   }
