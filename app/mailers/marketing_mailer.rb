@@ -14,10 +14,12 @@ class MarketingMailer < ActionMailer::Base
     site_version = order.get_site_version
     @site_version_code = site_version.default? ? '' : site_version.code
 
-    mail(
-      to: @user.email,
-      subject: t('emails.subjects.marketing.abandoned_cart')
-    )
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: @user.email,
+        subject: t('emails.subjects.marketing.abandoned_cart')
+      )
+    end
   end
 
   def added_to_wishlist(user, site_version = nil)
@@ -25,10 +27,12 @@ class MarketingMailer < ActionMailer::Base
     @wishlist = @user.wishlist_items
     @site_version = site_version || @user.recent_site_version
 
-    mail(
-      to: @user.email,
-      subject: t('emails.subjects.marketing.added_to_wishlist')
-    )
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: @user.email,
+        subject: t('emails.subjects.marketing.added_to_wishlist')
+      )
+    end
   end
 
   def style_quiz_completed(user, site_version = nil)
@@ -36,19 +40,23 @@ class MarketingMailer < ActionMailer::Base
     @dresses = Spree::Product.recommended_for(@user, limit: 6)
     @site_version = site_version || @user.recent_site_version
 
-    mail(
-      to: @user.email,
-      subject: t('emails.subjects.marketing.style_quiz_completed')
-    )
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: @user.email,
+        subject: t('emails.subjects.marketing.style_quiz_completed')
+      )
+    end
   end
 
   def style_quiz_not_completed(user, site_version = nil)
     @user = user
     @site_version = site_version || @user.recent_site_version
 
-    mail(
-      to: @user.email,
-      subject: t('emails.subjects.marketing.style_quiz_not_completed')
-    )
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: @user.email,
+        subject: t('emails.subjects.marketing.style_quiz_not_completed')
+      )
+    end
   end
 end
