@@ -2,9 +2,11 @@ class MarketingMailer < ActionMailer::Base
   self.delivery_method = :mandrill if Rails.env.production?
 
   include ProductsHelper
+  include ApplicationHelper
 
   layout 'mailer'
   helper :products
+  helper :application
 
   default :from => configatron.noreply
 

@@ -28,28 +28,19 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                   ruby:
                     dress = group.first.product
                     display_price = dress.zone_price_for(@site_version).display_price
-                  .image-container style="background: #fff; padding: 10px; border: 1px solid #dedede; box-shadow: 1px 1px 4px rgba(0, 0, 0, .3);"
-                    = product_image_tag(dress, 'large', width: 290, height: 372, alt: '', style: 'display: block; max-width: 100%; height: auto;')
-                  .name style="text-transform: uppercase; color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 14px 0 4px;" = dress.name
-                  .price style="color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 0 0 4px;" = display_price
+                  = render 'marketing_mailer/wishlist/product', dress: dress, display_price: display_price
                 td width="15"
                 td width="40%" style="padding-bottom: 50px;"
                   ruby:
                     dress = group.second.product
                     display_price = dress.zone_price_for(@site_version).display_price
-                  .image-container style="background: #fff; padding: 10px; border: 1px solid #dedede; box-shadow: 1px 1px 4px rgba(0, 0, 0, .3);"
-                    = product_image_tag(dress, 'large', width: 290, height: 372, alt: '', style: 'display: block; max-width: 100%; height: auto;')
-                  .name style="text-transform: uppercase; color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 14px 0 4px;" = dress.name
-                  .price style="color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 0 0 4px;" = display_price
+                  = render 'marketing_mailer/wishlist/product', dress: dress, display_price: display_price
               - else
-                ruby:
-                  dress = group.first.product
-                  display_price = dress.zone_price_for(@site_version).display_price
                 td width="40%" style="padding-bottom: 50px;"
-                  .image-container style="background: #fff; padding: 10px; border: 1px solid #dedede; box-shadow: 1px 1px 4px rgba(0, 0, 0, .3);"
-                    = product_image_tag(dress, 'large', width: 290, height: 372, alt: '', style: 'display: block; max-width: 100%; height: auto;')
-                  .name style="text-transform: uppercase; color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 14px 0 4px;" = dress.name
-                  .price style="color: #000; font: 400 14px/1.1 Arial, sans-serif; margin: 0 0 4px;" = display_price
+                  ruby:
+                    dress = group.first.product
+                    display_price = dress.zone_price_for(@site_version).display_price
+                  = render 'marketing_mailer/wishlist/product', dress: dress, display_price: display_price
                 td
                 td
               td width="20"
