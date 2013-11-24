@@ -20,10 +20,27 @@ class CampaignMonitor
 
     list_id = configatron.campaign_monitor.list_id
 
-    subscriber = CreateSend::Subscriber.get(list_id, email)
+    subscriber = CreateSend::Subscriber.new(list_id, email)
 
     subscriber.update(attributes[:email], attributes[:full_name], formatted_custom_fields)
   rescue => exception
     CreateSend::Subscriber.add(list_id, attributes[:email], attributes[:full_name], formatted_custom_fields, false)
+  end
+
+  def self.set_purchase_date(user, purchase_date)
+    list_id = configatron.campaign_monitor.list_id
+
+    subscriber = CreateSend::Subscriber.new(list_id, user.email)
+
+    formatted_custom_fields = [{
+      'Key'   => 'Purchasedate',
+      'Value' => purchase_date.to_date.to_s
+    }]
+
+    subscriber.update(user.email, user.full_name, formatted_custom_fields, false)
+  rescue => exception
+    user.synchronize_with_campaign_monitor!
+
+    CampaignMonitor.delay.set_purchase_date(user, purchase_date)
   end
 end

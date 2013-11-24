@@ -84,7 +84,8 @@ Spree::Order.class_eval do
     begin
       Spree::OrderMailer.confirm_email(self.id).deliver
       Spree::OrderMailer.team_confirm_email(self.id).deliver
-      log_product_purchased
+      log_products_purchased
+      update_campaign_monitor
     rescue Exception => e
       logger.error("#{e.class.name}: #{e.message}")
       logger.error(e.backtrace * "\n")
@@ -212,5 +213,11 @@ Spree::Order.class_eval do
     self.save
 
     self.reload
+  end
+
+  def update_campaign_monitor
+    if user.present?
+      CampaignMonitor.delay.set_purchase_date(user, Date.today)
+    end
   end
 end
