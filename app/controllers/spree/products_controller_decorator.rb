@@ -80,7 +80,11 @@ Spree::ProductsController.class_eval do
     taxons = Spree::Taxon.where(id: taxon_ids)
 
     # generate custom meta for paths like 'Black-Dresses', 'Red-Dresses' & etc
-    if searcher.colour && searcher.colour.length == 1
+    if searcher.seo && searcher.seo[:title_colour]
+      colour_name = searcher.seo[:title_colour]
+      collection_title ="#{colour_name} Dresses, #{colour_name} Evening Dresses Online, Prom and Formals - Fame & Partners"
+      collection_description = "Fame & Partners stock a wide range of #{colour_name} dresses online for all occasions, visit our store today."
+    elsif searcher.colour && searcher.colour.length == 1
       colour_name = searcher.colour.first.name
       collection_title ="#{colour_name.capitalize} Dresses, #{colour_name.capitalize} Evening Dresses Online, Prom and Formals - Fame & Partners"
       collection_description = "Fame & Partners stock a wide range of #{colour_name} dresses online for all occasions, visit our store today."

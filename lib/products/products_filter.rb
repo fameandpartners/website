@@ -16,6 +16,11 @@ module Products
       def available_body_shapes
         ProductStyleProfile::BODY_SHAPES
       end
+
+      def available_formal_dresses_colours
+        colors = %w{black red pink blue green coral turquoise gold peach teal champagne blush coral turquoise teal neon}
+        colors + ['light blue', 'black and white']
+      end
     end
 
     def initialize(params)
@@ -169,12 +174,9 @@ module Products
         permalink = taxon.permalink
         @properties[permalink] = prepare_taxon(permalink, params[permalink])
       end
-      # Array.wrap(params[:collection]).each do |taxon_name|
-      # end
 
       @properties[:colour]      = prepare_colours(params[:colour])
       @properties[:bodyshape]   = prepare_bodyshape(params[:bodyshape])
-      # eo proxy
 
       @properties[:search] = params[:search]
 
@@ -182,6 +184,8 @@ module Products
       @properties[:per_page] = per_page > 0 ? per_page : Spree::Config[:products_per_page]
       @properties[:page] = (params[:page].to_i <= 0) ? 1 : params[:page].to_i
       @properties[:order] = params[:order]
+
+      @properties[:seo] = prepare_seo_info(Array.wrap(params[:colour]))
     end
 
     # get by permalinks. array or single param
@@ -195,13 +199,29 @@ module Products
 
     def prepare_colours(colour_names)
       return nil if colour_names.blank?
-      Spree::OptionValue.where(name: colour_names).to_a
+      colours = Array.wrap(colour_names).collect{|colour| colour.to_s.downcase.split(/[_-]/).join(' ')}
+      Spree::OptionValue.where("lower(name) in (?)", colours).to_a
     end
 
     def prepare_bodyshape(bodyshapes)
       return nil if bodyshapes.blank?
       bodyshapes = [bodyshapes] unless bodyshapes.is_a?(Array)
       bodyshapes.map(&:downcase)
+    end
+
+    def prepare_seo_info(colour_names)
+      seo_info = {}
+      # if single colour, and color allowed
+      if colour_names.present? && colour_names.length == 1
+        colour = colour_names.first.to_s.downcase.split(/[_-]/).join(' ')
+        if self.class.available_formal_dresses_colours.include?(colour)
+          seo_info[:title_colour] = colour.split(' ').map(&:capitalize).join(' ')
+        end
+      end
+
+      seo_info
+    rescue
+      {}
     end
   end
 end

@@ -288,11 +288,9 @@ FameAndPartners::Application.routes.draw do
     match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
     match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
-    # seo routes
-    %w{black red pink blue green}.each do |colour|
-      get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour, as: "#{colour}_formal_dresses"
-    end
-
+    # seo routes like *COLOR*-Dress
+    get "(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses
+  
     resources :site_versions, only: [:show]
   end
 

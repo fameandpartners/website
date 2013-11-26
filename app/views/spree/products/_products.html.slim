@@ -1,7 +1,9 @@
 ruby:
   info = @searcher.selected_products_info
   collection_title = info[:title]
-  if @searcher.colour.present?
+  if @searcher.seo.present? && @searcher.seo[:title_colour]
+    collection_title = "#{ @searcher.seo[:title_colour] } Dresses"
+  elsif @searcher.colour.present?
     collection_title = "#{@searcher.colour.first.presentation} Dresses"
   elsif collection_title == "Range"
     collection_title = "Our Collection"
