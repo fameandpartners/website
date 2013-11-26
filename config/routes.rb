@@ -76,7 +76,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Blog routes
-  scope '(:site_version)/blog', constraints: { site_version: /(us|au)/ } do
+  scope '/blog' do
     get '/' => 'blog#index', as: :blog
     get '/about'   => 'blog#about', as: :about
     get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
@@ -174,6 +174,7 @@ FameAndPartners::Application.routes.draw do
 
   get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
+
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
