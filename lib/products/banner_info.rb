@@ -1,27 +1,133 @@
 module Products
   class BannerInfo
-    def initialize(taxon_ids = [])
-      @taxon_ids = taxon_ids || []
+    def initialize(searcher)
+      @collection = searcher.collection || []
+      @searcher = searcher
     end
 
-    def get
-      if selected_taxons.count == 0
-        from_taxon(root_range_taxon)
-      elsif selected_taxons.count == 1
-        from_taxon(selected_taxons.first)
+    def available_formal_dresses_colours
+      colors = %w{black red pink blue green coral turquoise gold peach teal champagne blush coral turquoise teal neon}
+      colors + ['light blue', 'black and white']
+    end
+
+    def default_seo_title
+      if Spree::Config[:default_seo_title].present? 
+        Spree::Config[:default_seo_title]
       else
-        multiple_collections_info
+        "Fame & Partners - Dream Formal Dresses"
+      end
+    end
+
+    def default_meta_description
+      if Spree::Config[:default_meta_description].present?
+        Spree::Config[:default_meta_description]
+      else
+        "Fame & Partners is committed to bringing the world of celebrity fashion to you. We offer our customers the opportunity to create a look that they love, that is unique to them and will ensure they feel like a celebrity on their special night."
+      end
+    end
+
+    # in result, we should receive following
+    #  {
+    #    page_title
+    #    meta_description
+    #    banner_image
+    #    banner_title
+    #    banner_text
+    #    category_description
+    #    footer_text
+    #  }
+    def get
+      info = get_info_by_taxons
+
+      info[:page_title] = get_page_title
+      info[:meta_description] = get_page_meta_description
+      info[:banner_title] = get_banner_title(info[:banner_title])
+
+      info
+    end
+
+    # this returns
+    #  {
+    #    :banner_image
+    #    :banner_title
+    #    :banner_text
+    #    :footer_text
+    #    :category_description
+    #  }
+    def get_info_by_taxons
+      if selected_edits_taxons.count == 1
+        from_taxon(selected_edits_taxons.first)
+      elsif selected_collection_taxons.count == 1
+        from_taxon(selected_collection_taxons.first)
+      elsif selected_edits_taxons.count == 0 and selected_collection_taxons.count == 0
+        from_taxon(root_range_taxon)
+      else
+        default_collections_info
+      end
+    end
+
+    def get_page_title
+      if available_formal_dresses_colours.include?(@searcher.seo_colour)
+        "#{seo_colour} Dresses, #{seo_colour} Evening Dresses Online, Prom and Formals - Fame & Partners"
+      elsif selected_edits_taxons.count == 1
+        taxon = selected_edits_taxons.first
+        taxon.meta_title || [taxon.name, default_seo_title].join(' - ')
+      elsif selected_collection_taxons.count == 1
+        taxon = selected_collection_taxons.first
+        taxon.meta_title || [taxon.name, default_seo_title].join(' - ')
+      else
+        default_seo_title
+      end
+    end
+
+    def get_page_meta_description
+      if available_formal_dresses_colours.include?(@searcher.seo_colour)
+        "Fame & Partners stock a wide range of #{seo_colour} dresses online for all occasions, visit our store today."
+      elsif selected_edits_taxons.count == 1
+        taxon = selected_edits_taxons.first
+        taxon.meta_description || [taxon.name, default_meta_description].join(' - ')
+      elsif selected_collection_taxons.count == 1
+        taxon = selected_collection_taxons.first
+        taxon.meta_description || [taxon.name, default_meta_description].join(' - ')
+      else
+        default_meta_description
+      end
+    end
+
+    def get_banner_title(title)
+      if available_formal_dresses_colours.include?(@searcher.seo_colour)
+        "#{seo_colour} Dresses"
+      elsif title.to_s.downcase == 'range'
+        'Our Collection'
+      else
+        title
       end
     end
 
     private
 
-    def selected_taxons
-      @selected_taxons ||= begin
-        if @taxon_ids.blank?
-          []
+    def seo_colour
+      @searcher.seo_colour.to_s.split(' ').map(&:capitalize).join(' ')
+    rescue
+      @searcher.seo_colour
+    end
+
+    def selected_collection_taxons
+      @selected_collection ||= selected_taxons(@searcher.collection, false)
+    end
+
+    def selected_edits_taxons
+      @selected_edits ||= selected_taxons(@searcher.edits, false)
+    end
+
+    def selected_taxons(taxon_ids, with_banner = false)
+      if taxon_ids.blank?
+        []
+      else
+        if with_banner
+          Spree::Taxon.join(:banner).where(id: taxon_ids).to_a
         else
-          Spree::Taxon.where(id: @taxon_ids)
+          Spree::Taxon.where(id: taxon_ids)
         end
       end
     end
@@ -34,21 +140,21 @@ module Products
       taxon.try(:banner).try(:image).present? ? taxon.banner.image.url(:banner) : nil
     end
 
-    def multiple_collections_info
+    def default_collections_info
       {
-        image: taxon_image(root_range_taxon),
-        title: "Fame & Partners Formal Dresses",
-        description: "High fashion dresses."
+        banner_image: taxon_image(root_range_taxon),
+        banner_title: "Fame & Partners Formal Dresses",
+        banner_text: "High fashion dresses."
       }
     end
 
     def from_taxon(taxon)
       {
-        image: taxon_image(taxon) || taxon_image(root_range_taxon),
-        title: taxon.try(:banner).try(:title) || taxon.name,
-        description: taxon.try(:banner).try(:description) || multiple_collections_info[:description],
+        banner_image: taxon_image(taxon) || taxon_image(root_range_taxon),
+        banner_title: taxon.try(:banner).try(:title) || taxon.name,
+        banner_text: taxon.try(:banner).try(:description) || default_collections_info[:description],
         footer_text: taxon.try(:banner).try(:footer_text),
-        seo_description: taxon.try(:banner).try(:seo_description)
+        category_description: taxon.try(:banner).try(:seo_description)
       }
     end
   end

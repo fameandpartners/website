@@ -16,11 +16,6 @@ module Products
       def available_body_shapes
         ProductStyleProfile::BODY_SHAPES
       end
-
-      def available_formal_dresses_colours
-        colors = %w{black red pink blue green coral turquoise gold peach teal champagne blush coral turquoise teal neon}
-        colors + ['light blue', 'black and white']
-      end
     end
 
     def initialize(params)
@@ -51,7 +46,7 @@ module Products
     end
 
     def selected_products_info
-      Products::BannerInfo.new(collection).get
+      info = Products::BannerInfo.new(self).get
     end
 
     protected
@@ -169,14 +164,16 @@ module Products
 
       # this block works as proxy, between human readable url params like 'red', 'skirt'
       # and required for search ids
-      @properties[:collection] ||= []
+      @properties[:collection]  ||= []
+      @properties[:edits]       ||= []
       Spree::Taxon.roots.each do |taxon|
         permalink = taxon.permalink
         @properties[permalink] = prepare_taxon(permalink, params[permalink])
       end
 
-      @properties[:colour]      = prepare_colours(params[:colour])
-      @properties[:bodyshape]   = prepare_bodyshape(params[:bodyshape])
+      @properties[:colour]        = prepare_colours(params[:colour])
+      @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
+      @properties[:bodyshape]     = prepare_bodyshape(params[:bodyshape])
 
       @properties[:search] = params[:search]
 
@@ -184,8 +181,6 @@ module Products
       @properties[:per_page] = per_page > 0 ? per_page : Spree::Config[:products_per_page]
       @properties[:page] = (params[:page].to_i <= 0) ? 1 : params[:page].to_i
       @properties[:order] = params[:order]
-
-      @properties[:seo] = prepare_seo_info(Array.wrap(params[:colour]))
     end
 
     # get by permalinks. array or single param
@@ -209,19 +204,8 @@ module Products
       bodyshapes.map(&:downcase)
     end
 
-    def prepare_seo_info(colour_names)
-      seo_info = {}
-      # if single colour, and color allowed
-      if colour_names.present? && colour_names.length == 1
-        colour = colour_names.first.to_s.downcase.split(/[_-]/).join(' ')
-        if self.class.available_formal_dresses_colours.include?(colour)
-          seo_info[:title_colour] = colour.split(' ').map(&:capitalize).join(' ')
-        end
-      end
-
-      seo_info
-    rescue
-      {}
+    def prepare_seo_colour(colour_names)
+      (Array.wrap(colour_names) || []).first.to_s.downcase.split(/[_-]/).compact.join(' ')
     end
   end
 end

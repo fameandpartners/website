@@ -1,20 +1,9 @@
-ruby:
-  info = @searcher.selected_products_info
-  collection_title = info[:title]
-  if @searcher.seo.present? && @searcher.seo[:title_colour]
-    collection_title = "#{ @searcher.seo[:title_colour] } Dresses"
-  elsif @searcher.colour.present?
-    collection_title = "#{@searcher.colour.first.presentation} Dresses"
-  elsif collection_title == "Range"
-    collection_title = "Our Collection"
-  end
-
 .m-pixel
   == @marketing_pixels
 
-.ad style=(info[:image].blank? ? '' : "background: url('#{info[:image]}') 0 0 no-repeat;")
-  h1 class='black' = collection_title
-  h2 = info[:description]
+.ad style=(@page_info[:banner_image].blank? ? '' : "background: url('#{@page_info[:banner_image]}') 0 0 no-repeat;")
+  h1 class='black' = @page_info[:banner_title]
+  h2 = @page_info[:banner_text]
 .results-sort.clearfix
   .results-sort-inner
     .results.fleft = pluralize(products.length, 'result')
@@ -39,10 +28,10 @@ ul.products-list.grid-container
           - colors[product.id].map(&:name).sort.each do |color|
             .color{class=color}
 
-- if info[:seo_description]
+- if @page_info[:category_description]
   .category-description
-    = info[:seo_description]
+    = @page_info[:category_description]
 
-- if info[:footer_text]
+- if @page_info[:footer_text]
   .description
-    = info[:footer_text]
+    = @page_info[:footer_text]
