@@ -3,4 +3,8 @@ $('#wrap > #content > .wrap').replaceWith(html)
 
 window.setCurrentPath('<%= styleprofile_path %>')
 
-$("a.show-style-quiz").off('click').on("click", startStyleQuizClickHandler)
+$('#wrap > #content > .wrap a.show-style-quiz').on("click", function(event){
+  event.preventDefault();
+  event.stopPropagation();
+  Quiz.show();
+})

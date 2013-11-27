@@ -90,6 +90,10 @@ class UserStyleProfile < ActiveRecord::Base
       @percents = []
       basic_styles = attributes.slice(*BASIC_STYLES).sort_by(&:last).reverse
       sum = basic_styles.map(&:last).reduce(:+)
+      if ((sum * 100).round == 0)
+        @percents = basic_styles
+        return @percents
+      end
       basic_styles.each do |arr|
         unless basic_styles.last.eql?(arr)
           @percents << [arr.first, (arr.last / sum * 100).round ]
