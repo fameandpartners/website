@@ -21,7 +21,7 @@
     #main-promo.promo-image
       ul.slides
         li
-          = link_to collection_path(edit: 'sequins', cf: 'homefeature') do
+          = link_to collection_path(edits: 'sequins', cf: 'homefeature') do
             = image_tag 'homepage/Disco.jpg', width: 1078, height: 532, alt: 'Sequined Disco Dresses - Fame & Partners Formal Dresses'
         li
           = link_to personalization_path(cf: 'homefeature') do
@@ -54,8 +54,8 @@
   .wrap.no-overflow
     .blog-post
       .label Blog
-      = link_to blog_post_by_category_path(category_slug: 'trends', post_slug: 'go-punk-to-prom'), class: 'image-preview', target: '_blank' do
-        = image_tag 'homepage/blog1.jpg'
+      = link_to blog_post_by_category_path(category_slug: 'trends', post_slug: 'latest-celebrity-red-carpet-hair-trends'), class: 'image-preview', target: '_blank' do
+        = image_tag 'homepage/hair.jpg'
     .blog-post.rotate-1
       .label Blog
       = link_to blog_post_by_category_path(category_slug: 'trends', post_slug: 'trending-baroque-2'), class: 'image-preview', target: '_blank' do
