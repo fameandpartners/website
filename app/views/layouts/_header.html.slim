@@ -116,7 +116,7 @@ header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
                               = image_tag "dropdown/#{taxon.name.downcase.gsub(/\s+/, "")}.jpg", width: 150, height: 150, alt: taxon.name
                             = taxon.name
             li = link_to 'custom dresses', custom_dresses_path, title: "fame & partners custom dresses", class: 'inverse'
-            - if spree_user_signed_in? && current_spree_user.style_profile.present?
+            - if personalised_store_available?
               li *{:class => request_path?("#{my_boutique_path}") && 'active' }
                 = link_to 'personalised boutique', my_boutique_path
             - else

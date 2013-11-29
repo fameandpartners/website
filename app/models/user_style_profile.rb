@@ -129,4 +129,12 @@ class UserStyleProfile < ActiveRecord::Base
       self.bra_size.eql?(bra_size.to_s) ? 10 : 0
     end
   end
+
+  def active?
+    !empty_basic_styles?
+  end
+
+  def empty_basic_styles?
+    attributes.slice(*BASIC_STYLES).values.all?(&:zero?)
+  end
 end

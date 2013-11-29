@@ -284,6 +284,10 @@ module ApplicationHelper
     super(name, options, &block)
   end
 
+  def personalised_store_available?
+    spree_user_signed_in? && current_spree_user.style_profile.try(:active?)
+  end
+
   private
 
   def current_sale
