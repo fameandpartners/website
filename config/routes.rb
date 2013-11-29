@@ -1,6 +1,9 @@
 FameAndPartners::Application.routes.draw do
   match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
 
+  get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
+  get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
+
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
                :class_name => 'Spree::User',
@@ -171,10 +174,6 @@ FameAndPartners::Application.routes.draw do
 
     mount Spree::Core::Engine, at: '/'
   end
-
-  get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
-  get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
-
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
