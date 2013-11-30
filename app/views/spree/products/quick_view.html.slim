@@ -53,8 +53,7 @@ ruby:
       .price-delivery
         .price.sale
           = price_for_product(@product)
-        /.delivery 3-4 week delivery
-        .delivery = t('delivery_time')+ " delivery"
+        .delivery = @product.delivery_time_as_string(:long)
       .colors-choser
         .label = t('views.quick_view.labels.color')
         .colors
