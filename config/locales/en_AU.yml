@@ -23,3 +23,78 @@ en-AU:
   date:
     formats:
       default: '%d/%m/%y'
+
+  helpers:
+    submit:
+      line_item_personalization:
+        create: 'Add customised dress to bag'
+
+  words:
+    customization: 'customisation'
+    color: 'colour'
+  views:
+    footer:
+      style_inspiration:
+        color_boards: 'Colour boards'
+    pages:
+      personalization:
+        products:
+          index:
+            title: 'Choose a dress to customise'
+            subtitle: 'Create your perfect dress by selecting a base design below. Then go ahead and start customising.'
+          show:
+            title: 'Customise this dress'
+            description: 'Its easy to customise this dress for your perfect formal event. Start by selecting customisations below. Start with Colour.'
+            tabs:
+              basics:
+                subtitle: 'Select the basic dress size and colour.'
+                labels:
+                  basic_colors: 'Basic colours'
+                  custom_colors: 'Custom colours'
+                placeholders:
+                  custom_color: 'Select a custom colour'
+        registrations:
+          new:
+            title: 'Customise dress as you want!'
+            subtitle: 'Jump into our easy to use customisation service to create your perfect dress.'
+            steps:
+              second:
+                title: 'Select a colour'
+                subtitle: 'Choose from almost unlimited colours'
+              third:
+                title: 'Customise away!'
+      products:
+        show:
+          different_color:
+            question: 'Want a different colour?'
+            email:
+              subject: 'I would like this dress (%{sku}) in a different colour.'
+          labels:
+            color: 'Choose a colour:'
+          notices:
+            color_images: 'Images of other colours are on their way'
+            twin_alert: 'Make sure you dont buy the same dress as someone else. First choose a colour above.'
+          modals:
+            customization:
+              title: 'Tell us how you would like to customise this dress.'
+              description: 'Free customisation when you buy this dress. Change the colour, length and fabric. We will contact you to confirm your customisation details.'
+      blake_lively:
+        color_blast: 'Colour Blast'
+
+    quiz:
+      questions:
+        colors:
+          answers:
+            fluro: 'Neon colours / fluro'
+        hair_colors:
+          answers:
+            colored: 'Coloured'
+    quick_view:
+      different_color:
+        question: 'Want a different colour?'
+        email:
+          subject: 'I would like this dress (%{sku}) in a different colour.'
+      labels:
+        color: 'Choose a colour:'
+      notices:
+        color_images: 'Images of other colours are on their way'

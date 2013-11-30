@@ -3,7 +3,7 @@ ruby:
 = form_for @personalization, url: line_items_path, method: :post, remote: true do |f|
   = hidden_field_tag :variant_id, @product.master.id
   .add-to-bag
-    = f.submit 'Add customized dress to bag', class: 'btn buy-personalized'
+    = f.submit class: 'btn buy-personalized'
   = render :partial => 'shared/error_messages', :locals => { :target => @personalization }
   .tabs
     ul.tabs-links.custom-sizes

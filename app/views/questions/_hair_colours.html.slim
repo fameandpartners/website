@@ -54,5 +54,5 @@ ul.quiz-hair
       .hair-image
         = image_tag 'quiz/hair/coloured.jpg', width: 118, height: 118, alt: ''
       .hair-label
-        span Coloured
+        span = t('views.quiz.questions.hair_colors.answers.colored')
       = form.radio_button :code, 'coloured'

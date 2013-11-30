@@ -25,6 +25,8 @@ module Personalization
         Spree::UserMailer.welcome_with_password(@user).deliver
 
         redirect_to personalization_products_path(cf: 'custom-dresses-signup')
+      else
+        render :new
       end
     end
 

@@ -3,8 +3,8 @@
 
 .personal-boutique
   .wrap
-    h1.gothic.black.small Choose a dress to customise
-    .subtitle Create your perfect dress by selecting a base design below. Then go ahead and start customising.
+    h1.gothic.black.small = t('views.pages.personalization.products.index.title')
+    .subtitle = t('views.pages.personalization.products.index.subtitle')
 
     ul.products-list.grid-container
       - @products.each do |product|

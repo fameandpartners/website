@@ -14,7 +14,9 @@
       <%= @line_item.product_description %>
     </div>
     <div class="wishlist">
-      <a href="#" data-id="<%= @line_item.variant_id %>">Move to wish list</a>
+      <a href="#" data-id="<%= @line_item.variant_id %>">
+        <i class="icon icon-heart"></i>Move to wish list
+      </a>
     </div>
   </div>
 </div>
@@ -50,12 +52,7 @@
           Estimated Delivery
         </div>
         <div class="value">
-          <!--<% if (parseInt(@line_item.count_on_hand) > 0): %>-->
-            <!--1-2 weeks-->
-          <!--<% else: %>-->
-            <!--3-4 weeks-->
-          <!--<% end %>-->
-          7-10 days
+          <%= @line_item.product_delivery_time %>
         </div>
         <div class="edit">
           <a data-id="<%= @line_item.id %>" data-quantity="<%= @line_item.quantity %>" data-variant="<%= @line_item.variant_id %>" class="edit-link" href="#">Edit item</a>
@@ -66,11 +63,9 @@
 </div>
 <div class="grid-20 price">
   <div class="pricing">
-    <%= @line_item.currency %>
-    <% if (@line_item.money_without_discount) : %>
+    <%= @line_item.currency %><% if (@line_item.money_without_discount) : %>
       <del><%= @line_item.money_without_discount %></del>
-    <% end %>
-    <span><%= @line_item.money %></span>
+    <% end %><span><%= @line_item.money %></span>
   </div>
   <!--
   <div class="style-notes">

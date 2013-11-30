@@ -1,5 +1,11 @@
 en:
-  delivery_time: "7-10 days"
+  delivery_time:
+    quick:
+     long: '24 hours delivery'
+     short: '24 hours'
+    standard:
+      long: '7-10 days delivery'
+      short: '7-10 days'
   password_confirmation: 'Password Confirmation'
   emails:
     subjects:
