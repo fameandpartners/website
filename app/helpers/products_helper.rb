@@ -179,7 +179,7 @@ module ProductsHelper
       end
       content_tag(:div, class: 'twin-alert') do
         link_to("Twin Alert", '#', class: 'twin-alert-link btn black', data: data_attrs) +
-        content_tag(:div, "Make sure you dont buy the same dress as someone else. First choose a colour above.", class: 'twin-alert-info')
+        content_tag(:div, t('views.pages.products.show.notices.twin_alert'), class: 'twin-alert-info')
       end
     end
   end

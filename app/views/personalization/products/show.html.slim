@@ -63,8 +63,8 @@ ruby:
           .delivery = t('delivery_time')
         .customize-block
           .prod-desc == @product.description
-          .title Customise this dress
-          .desc Its easy to customise this dress for your perfect formal event. Start by selecting customisations below. Start with Colour.
+          .title = t('views.pages.personalization.products.show.title')
+          .desc = t('views.pages.personalization.products.show.description')
         #personalization
           = render 'form'
         .product-features
@@ -96,7 +96,7 @@ ruby:
                 .text
                   ' Free
                   br
-                  ' Customisation
+                  =' t('words.customization').titleize
           .feature
             = link_to why_us_path+"#advice" do
               i.icon.icon-pencil

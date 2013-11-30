@@ -45,7 +45,7 @@ Spree::Price.class_eval do
 
     rate = SiteVersion.get_exchange_rate(currency, new_currency)
     if rate.present? 
-      Spree::Price.new(amount: self.amount * rate, currency: new_currency)
+      Spree::Price.new(amount: self.amount ? self.amount * rate : nil, currency: new_currency)
     else
       self
     end

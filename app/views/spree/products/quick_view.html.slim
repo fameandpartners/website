@@ -41,8 +41,8 @@ ruby:
               = celebrity.celebrity_description
     .notice
       .colour
-        ' Want a different colour?
-        = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour."
+        =' t('views.quick_view.different_color.question')
+        = mail_to "team@fameandpartners.com", 'Just ask us!', subject: t('views.quick_view.different_color.email.subject', sku: @product.sku)
       .faster
         ' Need this faster?
         = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
@@ -56,12 +56,12 @@ ruby:
         /.delivery 3-4 week delivery
         .delivery = t('delivery_time')+ " delivery"
       .colors-choser
-        .label Choose a colour:
+        .label = t('views.quick_view.labels.color')
         .colors
           - colors.each do |color|
             .color class='#{color}' data-color='#{color}' data-image="#{{color_images[color]}}"
       .notice
-        .colour-images Images of other colours are on their way
+        .colour-images = t('views.quick_view.notices.color_images')
       .size-select
         .select-box
           select#toggle-selectbox.select2 name="size"
@@ -77,7 +77,8 @@ ruby:
               span or
               = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
                 i.icon.icon-layby
-                ' Free Customization
+                ' Free
+                = t('words.customization').titleize
         = add_to_wishlist_link(@product)
 
       .tabs
@@ -137,7 +138,7 @@ ruby:
           .text
             ' Free
             br
-            ' Customization
+            =' t('words.customization').titleize
         .feature
           i.icon.icon-pencil
           .text
