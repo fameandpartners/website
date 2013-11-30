@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   def convert_current_order_prices
     if session[:order_id]
       order = Spree::Order.where(id: session[:order_id]).first
-      if !order.completed?
+      if order.present? && !order.completed?
         order.use_prices_from(current_site_version)
       end
     end
