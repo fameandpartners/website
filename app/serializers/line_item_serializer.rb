@@ -15,7 +15,8 @@ class LineItemSerializer < ActiveModel::Serializer
     :product_permalink,
     :product_description,
     :product_color,
-    :product_size
+    :product_size,
+    :product_delivery_time
 
   has_one :personalization
 
@@ -64,6 +65,10 @@ class LineItemSerializer < ActiveModel::Serializer
     else
       I18n.t(:product_has_no_description)
     end
+  end
+
+  def product_delivery_time
+    object.variant.product.delivery_time_as_string(:short)
   end
 
   def product_color

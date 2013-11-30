@@ -75,7 +75,7 @@ window.helpers.createProductVariantsSelector = (root) ->
       @updateColorsSelector(avaialable_variants)
 
     onVariantsChanged: () ->
-      window.initProductImagesCarousel(@selected)
+      window.initProductImagesCarousel(@selected) if window.initProductImagesCarousel
 
       variant = @getSelectedVariant()
 
@@ -120,14 +120,14 @@ window.helpers.createProductVariantsSelector = (root) ->
         $button.data(id: null)
 
     updateDeliveryTime: (variant) ->
-      return unless variant?
+      return # unless variant?
 
 #      if variant.fast_delivery
 #        deliveryText = '1-2 weeks delivery'
 #      else
 #        deliveryText = '3-4 weeks delivery'
-      deliveryText = '7-10 days delivery'
-      rootElement.find('.delivery').text(deliveryText)
+#      deliveryText = '7-10 days delivery'
+#      rootElement.find('.delivery').text(deliveryText)
 
     getSelectedVariant: () ->
       variant = _.findWhere(@variants, @selected)
