@@ -61,8 +61,7 @@
                     .value = line_item.quantity
                   .line
                     .label Estimated Delivery
-                    .value = t('delivery_time')
-                    /.value = variant.count_on_hand.to_i != 0 ? '1-2 weeks' : '3-4 weeks'
+                    .value = product.delivery_time_as_string
                     - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
                   .edit
                     - unless line_item.personalization.present?

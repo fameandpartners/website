@@ -191,6 +191,15 @@ Spree::Product.class_eval do
     product_customisation_values.present?
   end
 
+  # Someday, a time of magic and sorcery, move this one and some another methods to decorator/presenter
+  def delivery_time_as_string(format = :short)
+    if property('factory_name').to_s.strip =~ /^surry ?hills$/i
+      I18n.t(format, scope: [:delivery_time, :quick])
+    else
+      I18n.t(format, scope: [:delivery_time, :standard])
+    end
+  end
+
   private
 
   def build_variants_from_option_values_hash

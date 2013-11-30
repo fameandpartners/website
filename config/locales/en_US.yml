@@ -8,6 +8,11 @@ en-US:
         zipcode: "Billing address zipcode"
       spree/order/ship_address:
         zipcode: "Shipping address zipcode"
+      product_personalization:
+        change_color: 'Request color not already offered'
+      custom_dress:
+        required_at: 'Formal/Event Date'
+
   zip: 'Zipcode'
   color: 'Color'
   customization: 'customization'
@@ -23,3 +28,78 @@ en-US:
   date:
     formats:
       default: '%m/%d/%y'
+
+  helpers:
+    submit:
+      line_item_personalization:
+        create: 'Add customized dress to bag'
+
+  words:
+    customization: 'customization'
+    color: 'color'
+  views:
+    footer:
+      style_inspiration:
+        color_boards: 'Color boards'
+    pages:
+      personalization:
+        products:
+          index:
+            title: 'Choose a dress to customize'
+            subtitle: 'Create your perfect dress by selecting a base design below. Then go ahead and start customizing.'
+          show:
+            title: 'Customize this dress'
+            description: 'Its easy to customize this dress for your perfect formal event. Start by selecting customizations below. Start with Color.'
+            tabs:
+              basics:
+                subtitle: 'Select the basic dress size and color.'
+                labels:
+                  basic_colors: 'Basic colors'
+                  custom_colors: 'Custom colors'
+                placeholders:
+                  custom_color: 'Select a custom color'
+        registrations:
+          new:
+            title: 'Customize dress as you want!'
+            subtitle: 'Jump into our easy to use customization service to create your perfect dress.'
+            steps:
+              second:
+                title: 'Select a color'
+                subtitle: 'Choose from almost unlimited colors'
+              third:
+                title: 'Customize away!'
+      products:
+        show:
+          different_color:
+            question: 'Want a different color?'
+            email:
+              subject: 'I would like this dress (%{sku}) in a different color.'
+          labels:
+            color: 'Choose a color:'
+          notices:
+            color_images: 'Images of other colors are on their way'
+            twin_alert: 'Make sure you dont buy the same dress as someone else. First choose a color above.'
+          modals:
+            customization:
+              title: 'Tell us how you would like to customize this dress.'
+              description: 'Free customization when you buy this dress. Change the color, length and fabric. We will contact you to confirm your customization details.'
+      blake_lively:
+        color_blast: 'Color Blast'
+
+    quiz:
+      questions:
+        colors:
+          answers:
+            fluro: 'Neon colors / fluro'
+        hair_colors:
+          answers:
+            colored: 'Colored'
+    quick_view:
+      different_color:
+        question: 'Want a different color?'
+        email:
+          subject: 'I would like this dress (%{sku}) in a different color.'
+      labels:
+        color: 'Choose a color:'
+      notices:
+        color_images: 'Images of other colors are on their way'

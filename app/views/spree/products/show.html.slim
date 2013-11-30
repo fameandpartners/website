@@ -55,8 +55,8 @@ ruby:
         .peter-lang
           ' Jewellery provided Peter Lang
         .colour
-          ' Want a different colour?
-          = mail_to "team@fameandpartners.com", 'Just ask us!', subject: "I would like this dress (#{@product.sku}) in a different colour."
+          =' t('views.pages.products.show.different_color.question')
+          = mail_to "team@fameandpartners.com", 'Just ask us!', subject: t('views.pages.products.show.different_color.email.subject', sku: @product.sku)
         .faster
           ' Need this faster?
           = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
@@ -70,15 +70,14 @@ ruby:
         .price-delivery
           .price.sale
             = price_for_product(@product)
-          /.delivery 3-4 week delivery
-          .delivery = t('delivery_time')+ " delivery"
+          .delivery = @product.delivery_time_as_string(:long)
         .colors-choser
-          .label Choose a colour:
+          .label = t('views.pages.products.show.labels.color')
           .colors
             - colors.each do |color|
               .color class='#{color}' data-color='#{color}' title='#{color}' data-image="#{{color_images[color]}}"
         .notice
-          .colour-images Images of other colours are on their way
+          .colour-images = t('views.pages.products.show.notices.color_images')
         .size-select
           .select-box
             select#toggle-selectbox.select2 name="size"
@@ -94,7 +93,8 @@ ruby:
                 span or
               = link_to personalization_product_path(permalink: @product.permalink, cf:"readytowear"), class: 'btn-customize' do
                 i.icon.icon-layby
-                ' Free Customization
+                ' Free
+                = t('words.customization').titleize
           = add_to_wishlist_link(@product)
         .tabs
           - cache ['product_page', @product.id, 'info_tabs'], expires_in: configatron.cache.expire.normally do
@@ -158,7 +158,7 @@ ruby:
                 .text
                   ' Free
                   br
-                  ' Customisation
+                  =' t('words.customization').titleize
           .feature
             = link_to why_us_path+"#advice" do
               i.icon.icon-pencil

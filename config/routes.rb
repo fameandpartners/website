@@ -1,6 +1,9 @@
 FameAndPartners::Application.routes.draw do
   match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
 
+  get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
+  get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
+
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
                :class_name => 'Spree::User',
@@ -172,10 +175,6 @@ FameAndPartners::Application.routes.draw do
     mount Spree::Core::Engine, at: '/'
   end
 
-  get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
-  get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
-
-
   Spree::Core::Engine.routes.append do
     namespace :admin do
       scope 'products/:product_id', :as => 'product' do
@@ -288,11 +287,9 @@ FameAndPartners::Application.routes.draw do
     match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
     match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
-    # seo routes
-    %w{black red pink blue green}.each do |colour|
-      get "#{colour.capitalize}-Dresses" => 'spree/products#index', colour: colour, as: "#{colour}_formal_dresses"
-    end
-
+    # seo routes like *COLOR*-Dress
+    get "(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses
+  
     resources :site_versions, only: [:show]
   end
 

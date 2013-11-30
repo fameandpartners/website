@@ -1,14 +1,14 @@
 .tab-content.basic-tab id="customize-basics"
-  .tab-subtitle Select the basic dress size and colour.
+  .tab-subtitle = t('views.pages.personalization.tabs.basics.subtitle')
   .input
-    label Basic colors
+    label = t('views.pages.personalization.products.show.tabs.basics.labels.basic_colors')
     .colors
       - @product.basic_colors.each do |color|
         label.color class="#{color.name}"
           = form.radio_button :color_id, color.id, data: {required: true, color: color.name}, class: 'color basic'
   .input.colors-select
-    label Custom colors
-    = form.select :color_id, options_for_select(@product.custom_colors.map{|color| [ color.presentation, color.id,{class: "color #{color.name}"}]}, form.object.color_id), {include_blank: true}, data: {placeholder: 'Select a custom color'}, class: 'selectbox colors-select'
+    label = t('views.pages.personalization.products.show.tabs.basics.labels.custom_colors')
+    = form.select :color_id, options_for_select(@product.custom_colors.map{|color| [ color.presentation, color.id,{class: "color #{color.name}"}]}, form.object.color_id), {include_blank: true}, data: {placeholder: t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color') }, class: 'selectbox colors-select'
   .separate
   .input
     = form.label :size, 'Your dress size:'

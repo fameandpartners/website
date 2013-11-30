@@ -20,12 +20,8 @@
 <% end %>
 
 <hr />
-<% if @taxon.root.permalink  == 'collection' %>
-  <% if @taxon.banner.present? %>
-    <h3>Edit banner on products page</h3>
-  <% else %>
-    <h3>Add banner for products page</h3>
-  <% end %>
+<% if @taxon.have_banner_info? %>
+  <h3>Edit banner on products page</h3>
 
   <% @banner = @taxon.banner || @taxon.build_banner(title: @taxon.name) %>
 

@@ -35,7 +35,7 @@ class FeedsController < ApplicationController
       availability: variant.in_stock? ? 'in stock' : 'out of stock',
       title: "#{product.name} - Size #{size} - Colour #{color}",
       description: product.description,
-      price: "#{current_currency} #{variant.price_in(current_currency).display_price}",
+      price: "#{current_currency} #{variant.zone_price_for(current_site_version).display_price}",
       google_product_category: "Apparel & Accessories > Clothing > Dresses",
       id: "#{product.id.to_s}-#{variant.id.to_s}",
       group_id: product.id.to_s,

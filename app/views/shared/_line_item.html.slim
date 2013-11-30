@@ -42,5 +42,4 @@ li.item-block
         .value = line_item.quantity
       li
         .label Estimated delivery
-        .value = t('delivery_time')
-        /.value = variant.count_on_hand > 0 ? '1-2 weeks' : '3-4 weeks'
+        .value = product.delivery_time_as_string

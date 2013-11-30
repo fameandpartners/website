@@ -31,7 +31,7 @@ ul.quiz-colors
       = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", 'fuchsia'
   li
     label.color.fluro
-      .color-name Neon colours / fluro
+      .color-name = t('views.quiz.questions.colors.answers.fluro')
       = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", 'fluro'
   li
     label.color.maroon

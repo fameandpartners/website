@@ -22,7 +22,8 @@ window.helpers.createVariantsSelectorPopup = () ->
     show: (params = {}, eventParams = {}) ->
       popup.params = params
       popup.eventParams = eventParams
-      $.ajax(urlWithSitePrefix("/product_variants")
+      $.ajax(
+        url: urlWithSitePrefix('/product_variants'),
         type: 'GET',
         dataType: 'json',
         data: params
@@ -44,6 +45,7 @@ window.helpers.createVariantsSelectorPopup = () ->
       popup.container.find('.value select.quantity-select').val(quantity)
 
       popup.container.center()
+
 
     prepareTemplateArgs: (response) ->
       result = {

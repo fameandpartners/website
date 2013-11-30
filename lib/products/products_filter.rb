@@ -46,7 +46,7 @@ module Products
     end
 
     def selected_products_info
-      Products::BannerInfo.new(collection).get
+      info = Products::BannerInfo.new(self).get
     end
 
     protected
@@ -164,17 +164,16 @@ module Products
 
       # this block works as proxy, between human readable url params like 'red', 'skirt'
       # and required for search ids
-      @properties[:collection] ||= []
+      @properties[:collection]  ||= []
+      @properties[:edits]       ||= []
       Spree::Taxon.roots.each do |taxon|
         permalink = taxon.permalink
         @properties[permalink] = prepare_taxon(permalink, params[permalink])
       end
-      # Array.wrap(params[:collection]).each do |taxon_name|
-      # end
 
-      @properties[:colour]      = prepare_colours(params[:colour])
-      @properties[:bodyshape]   = prepare_bodyshape(params[:bodyshape])
-      # eo proxy
+      @properties[:colour]        = prepare_colours(params[:colour])
+      @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
+      @properties[:bodyshape]     = prepare_bodyshape(params[:bodyshape])
 
       @properties[:search] = params[:search]
 
@@ -195,13 +194,18 @@ module Products
 
     def prepare_colours(colour_names)
       return nil if colour_names.blank?
-      Spree::OptionValue.where(name: colour_names).to_a
+      colours = Array.wrap(colour_names).collect{|colour| colour.to_s.downcase.split(/[_-]/).join(' ')}
+      Spree::OptionValue.where("lower(name) in (?)", colours).to_a
     end
 
     def prepare_bodyshape(bodyshapes)
       return nil if bodyshapes.blank?
       bodyshapes = [bodyshapes] unless bodyshapes.is_a?(Array)
       bodyshapes.map(&:downcase)
+    end
+
+    def prepare_seo_colour(colour_names)
+      (Array.wrap(colour_names) || []).first.to_s.downcase.split(/[_-]/).compact.join(' ')
     end
   end
 end

@@ -4,10 +4,10 @@
   </div>
   <div class="item-details">
     <div class="name">
-      Hello
+      <%= @product.name %>
     </div>
     <div class="description">
-      <%= @product.name %>
+      <%= @product.short_description %>
     </div>
     <div class="colors-choser">
       <div class="label">
@@ -36,7 +36,7 @@
         Quantity
       </div>
       <div class="value">
-        <select name="quantity" class="quantity-select selectbox">
+        <select name="quantity" class="quantity-select select2 selectbox">
           <% for quantity in [1..@max_quantity]: %>
             <% if quantity == @quantity: %>
               <option selected='selected' value='<%= quantity %>'><%= quantity %></option>
@@ -48,8 +48,7 @@
       </div>
     </div>
     <div class="delivery">
-      <!--3-4 week delivery-->
-      7-10 days delivery
+      <%= @product.delivery_time %>
     </div>
   </div>
 </div>
