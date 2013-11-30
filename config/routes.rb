@@ -1,6 +1,8 @@
 FameAndPartners::Application.routes.draw do
   match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
 
+  get 'celebrity' => 'pages#celebrity'
+
   get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
 

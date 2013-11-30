@@ -1,87 +1,37 @@
-= render 'shared/blog_top_bar'
-= render 'shared/breadcrumbs'
+h1 Celebrity Style Profile
 
-.wrap.no-overflow
+.image-blocks
+  .thin
+    = image_tag 'http://placehold.it/273x263', width: 273, height: 263, alt: ''
+    = image_tag 'http://placehold.it/273x263', width: 273, height: 263, alt: ''
+  .wide
+    = image_tag 'http://placehold.it/538x538', width: 538, height: 538, alt: ''
+  .thin
+    = image_tag 'http://placehold.it/273x263', width: 273, height: 263, alt: ''
+    = image_tag 'http://placehold.it/273x263', width: 273, height: 263, alt: ''
+  .thin
+    = image_tag 'http://placehold.it/273x263', width: 273, height: 263, alt: ''
+  .wide
+    .name Jenifer Aniston
+    .style-report-block
+      .block.first
+        .name Classic
+        .percent 15%
+      .block
+        .name Edgy
+        .percent 15%
+      .block
+        .name Girly
+        .percent 15%
+      .block
+        .name Bohemian
+        .percent 15%
+      .block
+        .name Glam
+        .percent 15%
+    .desc This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh velveli t auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.
+  .thin
+    = image_tag 'http://placehold.it/273x263', width: 273, height: 263, alt: ''
 
-  .page-title
-    h1.block-title.dark Beyonce Noles
-    .track-celebrity = link_to 'Track this celebrity', '#', class: 'active'
-    .block-select
-      select.selectbox name="tags"
-        option Choose option
-        option Option one
-
-  .content-sidebar.clearfix
-    section.content-area
-      .celebrity-photos.columns-3
-        ul
-          li
-            .zoom
-            = link_to '#', class: 'celebrity-photo' do
-              = image_tag 'sample/celebrity.jpg', width: 269, height: 375, alt: ''
-              .overlay
-                .name Jessica Biel
-                .event Ipsum Awards 2013
-            .love-share
-              .love-hate
-                .icons
-                  .love
-                  .hate
-                .label Love it or loathe it
-              .share
-                .icons
-                  .share-block
-                .label Share
-          li
-            .zoom
-            = link_to '#', class: 'celebrity-photo' do
-              = image_tag 'sample/celebrity.jpg', width: 269, height: 375, alt: ''
-              .overlay
-                .name Jessica Biel
-                .event Ipsum Awards 2013
-            .love-share
-              .love-hate
-                .icons
-                  .love
-                  .hate
-                .label Love it or loathe it
-              .share
-                .icons
-                  .share-block
-                .label Share
-          li
-            .zoom
-            = link_to '#', class: 'celebrity-photo' do
-              = image_tag 'sample/celebrity.jpg', width: 269, height: 375, alt: ''
-              .overlay
-                .name Jessica Biel
-                .event Ipsum Awards 2013
-            .love-share
-              .love-hate
-                .icons
-                  .love
-                  .hate
-                .label Love it or loathe it
-              .share
-                .icons
-                  .share-block
-                .label Share
-          li
-            .zoom
-            = link_to '#', class: 'celebrity-photo' do
-              = image_tag 'sample/celebrity.jpg', width: 269, height: 375, alt: ''
-              .overlay
-                .name Jessica Biel
-                .event Ipsum Awards 2013
-            .love-share
-              .love-hate
-                .icons
-                  .love
-                  .hate
-                .label Love it or loathe it
-              .share
-                .icons
-                  .share-block
-                .label Share
-
-    = render 'shared/blog_sidebar'
+h2 Try these dresses that Jennifer Aniston would wear
+.subtitle Select a dress & make it your own
