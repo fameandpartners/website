@@ -24,9 +24,6 @@
           = link_to collection_path(edits: 'sequins', cf: 'homefeature') do
             = image_tag 'homepage/Disco.jpg', width: 1078, height: 532, alt: 'Sequined Disco Dresses - Fame & Partners Formal Dresses'
         li
-          = link_to personalization_path(cf: 'homefeature') do
-            = image_tag 'homepage/customise.jpg', width: 1078, height: 532, alt: 'Customise a Dress from Fame & Partners'
-        li
           = link_to collection_path(cf: 'homefeature') do
             = image_tag 'homepage/ClaimToFame.jpg', width: 1078, height: 532, alt: 'New Dress Styles'
         li
@@ -36,7 +33,6 @@
         a.selected href="#" 1
         a href="#" 2
         a href="#" 3
-        a href="#" 4
     
 
 .home-images
@@ -58,12 +54,11 @@
         = image_tag 'homepage/hair.jpg'
     .blog-post.rotate-1
       .label Blog
-      = link_to blog_post_by_category_path(category_slug: 'trends', post_slug: 'trending-baroque-2'), class: 'image-preview', target: '_blank' do
-        = image_tag 'homepage/blog2.jpg'
+      = link_to blog_post_by_category_path(category_slug: 'trends', post_slug: 'the-american-music-awards-2013'), class: 'image-preview', target: '_blank' do
+        = image_tag 'homepage/amma2013.jpg'
     .blog-post.rotate-2
-      .label Blog
-      = link_to blog_red_carpet_post_path(post_slug: 'the-65th-emmy-awards'), class: 'image-preview', target: '_blank' do
-        = image_tag 'homepage/65emmy.jpg'
+      = link_to personalization_path(cf: 'homefeature'), title: "Customised Dresses - Create your perfect dress", class: 'image-preview' do
+        = image_tag 'homepage/customdresses.jpg'
 
 - if featured_products.length > 0
   .featured-dresses
