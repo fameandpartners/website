@@ -11,7 +11,8 @@
         - if image = @left_column[1]
           = image_tag image.file.url(:medium), width: 261, height: 263, alt: @celebrity.full_name
       .wide
-        = image_tag @primary_image.file.url(:large), width: 538, height: 538, alt: @celebrity.full_name
+        - if @primary_image.present?
+          = image_tag @primary_image.file.url(:large), width: 538, height: 538, alt: @celebrity.full_name
       .thin
         - if image = @right_column[0]
           = image_tag image.file.url(:medium), width: 261, height: 263, alt: @celebrity.full_name
@@ -30,7 +31,6 @@
               .block class="#{ 'first' if index.eql?(0) }"
                 .name = array.first.titleize
                 .percent #{array.second}%
-
           .desc
             = simple_format(@style_profile.description)
       .thin

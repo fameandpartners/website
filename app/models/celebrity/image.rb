@@ -6,7 +6,6 @@ class Celebrity::Image < ActiveRecord::Base
                     path: ':rails_root/public/system/celebrities/images/file/:id/:style/:filename',
                     styles: {
                       thumbnail: ['48x48#', :jpg],
-                      small: ['243x352#', :jpg],
                       medium: ['261x263#', :jpg],
                       large: ['538x538#', :jpg]
                     }
