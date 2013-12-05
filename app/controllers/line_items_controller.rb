@@ -19,7 +19,7 @@ class LineItemsController < Spree::StoreController
       fire_event('spree.order.contents_changed')
 
       current_order.reload
-    elsif @personalization.valid?
+    elsif @personalization.try(:valid?)
       unless current_order.line_items.find_by_variant_id(params[:variant_id]).present?
         if populator.populate(variants: { params[:variant_id] => quantity })
           fire_event('spree.cart.add')

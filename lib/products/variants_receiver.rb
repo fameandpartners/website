@@ -5,7 +5,7 @@ module Products
       @product_id = product_or_id.respond_to?(:id) ? product_or_id.id : product_or_id
     end
 
-    # returns [{ variant_id: 123, color: 'black', size: 12, fast_delivery: true} ]
+    # returns [{ variant_id: 123, color: 'black', size: 12, available: true} ]
     def available_options
       color_option  = Spree::OptionType.where(name: 'dress-color').first
       size_option   = Spree::OptionType.where(name: 'dress-size').first
@@ -22,8 +22,8 @@ module Products
           end
         end
 
-        # if item in stock
-        available_option[:fast_delivery] = variant.count_on_hand > 0
+        # spree has more correct available? method,
+        available_option[:available] = variant.available?
 
         available_options.push(available_option)
       end

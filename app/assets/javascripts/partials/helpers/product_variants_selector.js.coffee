@@ -80,7 +80,7 @@ window.helpers.createProductVariantsSelector = (root) ->
       variant = @getSelectedVariant()
 
       @exportSelectedVariant(variant)
-      @updateDeliveryTime(variant)
+      @updateItemAvailability(variant)
 
       if ! _.isEmpty(variant)
         $button = rootElement.find('.buy-wishlist .buy-now')
@@ -108,26 +108,20 @@ window.helpers.createProductVariantsSelector = (root) ->
       $button = rootElement.find('.buy-wishlist .buy-now')
       $wishlist_button = rootElement.find('.buy-wishlist .add-wishlist')
       if ! _.isEmpty(variant)
-        $button.data(id: variant.id)
-        $wishlist_button.data(id: variant.id)
-        if variant.purchased
-          $button.addClass('added')
+        if variant.available
+          $button.data(id: variant.id, error: null)
+          $wishlist_button.data(id: variant.id)
+          if variant.purchased
+            $button.addClass('added')
+          else
+            $button.removeClass('added')
+            # don't change master variant data, if product don't have variants
         else
           $button.removeClass('added')
-          # don't change master variant data, if product don't have variants
+          $button.data(id: null, error: 'This item is out of stock')
       else if @variants? && @variants.length > 0
         $button.removeClass('added')
-        $button.data(id: null)
-
-    updateDeliveryTime: (variant) ->
-      return # unless variant?
-
-#      if variant.fast_delivery
-#        deliveryText = '1-2 weeks delivery'
-#      else
-#        deliveryText = '3-4 weeks delivery'
-#      deliveryText = '7-10 days delivery'
-#      rootElement.find('.delivery').text(deliveryText)
+        $button.data(id: null, error: 'Please, select size and colour')
 
     getSelectedVariant: () ->
       variant = _.findWhere(@variants, @selected)
@@ -137,6 +131,14 @@ window.helpers.createProductVariantsSelector = (root) ->
         variant
       else
         {}
+
+    updateItemAvailability: (variant) ->
+      $button = rootElement.find('.buy-wishlist .buy-now')
+
+      if variant and variant.available
+        $button.removeAttr('disabled').removeClass('out-of-stock')
+      else
+        $button.attr('disabled', true).addClass('out-of-stock')
 
     selectOptions: (selected) ->
       if selected
