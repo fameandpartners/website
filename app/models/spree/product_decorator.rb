@@ -193,11 +193,15 @@ Spree::Product.class_eval do
 
   # Someday, a time of magic and sorcery, move this one and some another methods to decorator/presenter
   def delivery_time_as_string(format = :short)
-    if property('factory_name').to_s.strip =~ /^surry ?hills$/i
+    if fast_delivery?
       I18n.t(format, scope: [:delivery_time, :quick])
     else
       I18n.t(format, scope: [:delivery_time, :standard])
     end
+  end
+
+  def fast_delivery?
+    property('factory_name').to_s.strip =~ /^surry ?hills$/i
   end
 
   private
