@@ -33,7 +33,7 @@ FameAndPartners::Application.routes.draw do
       get '/:permalink', to: 'products#show', as: :personalization_product
     end
 
-    resources :celebrities, only: [:index, :show]
+    resources :celebrities, only: [:show]
 
     resources :line_items, only: [:create, :edit, :update, :destroy] do
       post 'move_to_wishlist', on: :member

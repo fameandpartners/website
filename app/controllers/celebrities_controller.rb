@@ -1,11 +1,6 @@
 class CelebritiesController < ApplicationController
   layout 'spree/layouts/spree_application'
 
-  def index
-    @controller_action_id = 'products'
-    @celebrities = Celebrity.joins(:primary_image).where(is_published: true).order('first_name ASC, last_name ASC').limit(20)
-  end
-
   def show
     @controller_action_id = 'products'
     @celebrity = Celebrity.find_by_slug(params[:id])
