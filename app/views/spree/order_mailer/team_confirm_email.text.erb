@@ -12,3 +12,7 @@
 <% end %>
 
 <%= t('order_mailer.confirm_email.total', :total => @order.display_total) %>
+
+
+Billing Address: <%= @order.billing_address.to_string %>
+Shipping Address: <%= @order.shipping_address.to_string %>
