@@ -1,0 +1,42 @@
+<% content_for :page_actions do %>
+  <div class="toolbar" data-hook="toolbar">
+    <ul class="actions header-action-links inline-menu">
+      <li id="new_celebrity_link">
+        <%= button_link_to t(:new_celebrity), new_admin_celebrity_path, :icon => 'icon-plus' %>
+      </li>
+      <li id="celebrities_link">
+        <%= button_link_to t(:celebrities), admin_celebrities_path, :icon => 'icon-list' %>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Products' } %>
+
+<%= form_for @celebrity, url: admin_celebrity_products_path(@celebrity) do |f| %>
+  <%= hidden_field_tag "celebrity[product_ids][]", nil%>
+  <fieldset>
+    <legend align="center"><%= t(:edit_celebrity) %></legend>
+    <table>
+      <tbody>
+        <% @products.in_groups_of(3).each do |group| %>
+          <tr>
+            <% group.each do |product| %>
+              <td style="width: 33%;">
+                <% if product.present? %>
+                  <label>
+                    <%= check_box_tag "celebrity[product_ids][]", product.id, @celebrity.product_ids.include?(product.id) %> <%= product.name %>
+                  </label>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="form-buttons filter-actions actions">
+      <%= button t(:update), 'icon-refresh' %>
+    </div>
+  </fieldset>
+<% end %>

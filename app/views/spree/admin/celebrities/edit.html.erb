@@ -1,0 +1,57 @@
+<% content_for :page_actions do %>
+  <div class="toolbar" data-hook="toolbar">
+    <ul class="actions header-action-links inline-menu">
+      <li id="new_celebrity_link">
+        <%= button_link_to t(:new_celebrity), new_admin_celebrity_path, :icon => 'icon-plus' %>
+      </li>
+      <li id="celebrities_link">
+        <%= button_link_to t(:celebrities), admin_celebrities_path, :icon => 'icon-list' %>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Basic Details' } %>
+
+<%= form_for [:admin, @celebrity] do |f| %>
+  <fieldset>
+    <legend align="center"><%= t(:edit_celebrity) %></legend>
+    <div class="row">
+      <div class="four columns">
+        <%= f.field_container :first_name do %>
+          <%= f.label :last_name, t(:first_name) %> <span class="required">*</span><br />
+          <%= f.text_field :first_name, :class => 'fullwidth' %>
+          <%= f.error_message_on :first_name %>
+        <% end %>
+      </div>
+      <div class="four columns">
+        <%= f.field_container :last_name do %>
+          <%= f.label :last_name, t(:last_name) %>
+          <%= f.text_field :last_name, :class => 'fullwidth' %>
+          <%= f.error_message_on :last_name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns">
+        <%= f.field_container :slug do %>
+          <%= f.label :slug, t(:slug) %> <span class="required">*</span><br />
+          <%= f.text_field :slug, :class => 'fullwidth' %>
+          <%= f.error_message_on :slug %>
+        <% end %>
+      </div>
+      <div class="four columns">
+        <%= f.field_container :primary, :class => ['checkbox'] do %>
+          <label>
+            <%= f.check_box :is_published %>
+            <%= t(:published) %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-buttons filter-actions actions">
+      <%= button t(:update), 'icon-refresh' %>
+    </div>
+  </fieldset>
+<% end %>
+

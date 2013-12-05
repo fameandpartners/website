@@ -75,7 +75,7 @@ module ApplicationHelper
   end
 
   def controller_action_id
-    "#{controller.controller_name}"
+    @controller_action_id || "#{controller.controller_name}"
   end
 
   def facebook_authentication_available?

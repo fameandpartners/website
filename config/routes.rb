@@ -1,8 +1,6 @@
 FameAndPartners::Application.routes.draw do
   match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
 
-  get 'celebrity' => 'pages#celebrity'
-
   get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
 
@@ -35,6 +33,7 @@ FameAndPartners::Application.routes.draw do
       get '/:permalink', to: 'products#show', as: :personalization_product
     end
 
+    resources :celebrities, only: [:index, :show]
 
     resources :line_items, only: [:create, :edit, :update, :destroy] do
       post 'move_to_wishlist', on: :member
@@ -262,6 +261,18 @@ FameAndPartners::Application.routes.draw do
         resources :celebrities do
           member do
             put :toggle_featured
+          end
+        end
+      end
+
+      resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
+        scope module: :celebrity do
+          resource :products, only: [:edit, :update]
+          resource :style_profile, only: [:edit, :update]
+          resources :images, only: [:index, :new, :create, :edit, :update, :destroy] do
+            collection do
+              post :update_positions
+            end
           end
         end
       end

@@ -1,0 +1,62 @@
+<% content_for :page_actions do %>
+  <div class="toolbar" data-hook="toolbar">
+    <ul class="actions header-action-links inline-menu">
+      <li id="new_celebrity_link">
+        <%= button_link_to t(:new_celebrity), new_admin_celebrity_path, :icon => 'icon-plus' %>
+      </li>
+      <li id="celebrities_link">
+        <%= button_link_to t(:celebrities), admin_celebrities_path, :icon => 'icon-list' %>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Style Profile' } %>
+
+<%= form_for @style_profile, as: :style_profile, url: admin_celebrity_style_profile_path(@celebrity), method: :put do |f| %>
+  <fieldset>
+    <legend align="center"><%= t(:edit_celebrity) %></legend>
+    <table>
+      <tbody>
+      <tr>
+        <td style="width: 20%;">
+          <%= f.label :glam %>
+          <span>%</span>
+          <%= f.number_field :glam %>
+        </td>
+        <td style="width: 20%;">
+          <%= f.label :girly %>
+          <span>%</span>
+          <%= f.number_field :girly %>
+        </td>
+        <td style="width: 20%;">
+          <%= f.label :classic %>
+          <span>%</span>
+          <%= f.number_field :classic %>
+        </td>
+        <td style="width: 20%;">
+          <%= f.label :edgy %>
+          <span>%</span>
+          <%= f.number_field :edgy %>
+        </td>
+        <td style="width: 20%;">
+          <%= f.label :bohemian %>
+          <span>%</span>
+          <%= f.number_field :bohemian %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="row">
+      <div class="columns">
+        <%= f.label :description, t(:description) %>
+        <%= f.text_area :description, {:cols => 90, :rows => 13, :class => 'fullwidth'} %>
+      </div>
+    </div>
+
+    <div class="form-buttons filter-actions actions">
+      <%= button t(:update), 'icon-refresh' %>
+    </div>
+  </fieldset>
+<% end %>
