@@ -31,10 +31,10 @@ class Blog::AuthorsController < BlogBaseController
   private
 
   def generate_breadcrumbs_for_index
-    @breadcrumbs = [[root_path, 'Home'], [blog_authors_path, 'Stylists']]
+    @breadcrumbs = [[blog_path, 'Home'], [blog_authors_path, 'Stylists']]
   end
 
   def generate_breadcrumbs_for_show
-    @breadcrumbs = [[root_path, 'Home'], [blog_authors_path, 'Stylists'], [blog_authors_post_path, @author.fullname]]
+    @breadcrumbs = [[blog_path, 'Home'], [blog_authors_path, 'Stylists'], [blog_authors_post_path, @author.fullname]]
   end
 end

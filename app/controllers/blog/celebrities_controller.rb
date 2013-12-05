@@ -52,10 +52,10 @@ class Blog::CelebritiesController < BlogBaseController
   private
 
   def generate_breadcrumbs_for_show
-    @breadcrumbs = [[root_path, 'Home'], [blog_celebrity_path(@celebrity.slug), @celebrity.fullname]]
+    @breadcrumbs = [[blog_path, 'Home'], [blog_celebrity_path(@celebrity.slug), @celebrity.fullname]]
   end
 
   def generate_breadcrumbs_for_index
-    @breadcrumbs = [[root_path, 'Home'], [blog_celebrities_path, 'All Celebrities']]
+    @breadcrumbs = [[blog_path, 'Home'], [blog_celebrities_path, 'All Celebrities']]
   end
 end
