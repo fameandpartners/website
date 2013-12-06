@@ -42,6 +42,7 @@ en:
     messages:
       points_number:
         invalid: 'Basic style`s points sum should be 10'
+        should_be_100: 'Basic style`s points sum should be 100'
   page:
     blog:
       default:

@@ -1,3 +1,5 @@
+<%= render 'spree/shared/error_messages', target: @celebrity %>
+
 <%= form_for [:admin, @celebrity] do |f| %>
   <fieldset>
     <legend align="center"><%= t(:new_celebrity) %></legend>

@@ -27,7 +27,7 @@ class Celebrity::StyleProfile < ActiveRecord::Base
 
   validate do
     unless attributes.slice('glam', 'girly', 'classic', 'edgy', 'bohemian').values.sum.eql?(100)
-      errors.add(:base, :"points_number.invalid")
+      errors.add(:base, :"points_number.should_be_100")
     end
   end
 

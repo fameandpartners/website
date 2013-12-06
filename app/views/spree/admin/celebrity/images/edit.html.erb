@@ -4,6 +4,8 @@
   <li><%= button_link_to t(:back_to_images_list), admin_celebrity_images_path(@celebrity), :icon => 'icon-arrow-left' %></li>
 <% end %>
 
+<%= render 'spree/shared/error_messages', target: @image %>
+
 <%= form_for @image, as: :image, url: admin_celebrity_image_path(@celebrity, @image) , html: { multipart: true } do |f| %>
   <fieldset data-hook="edit_image">
     <legend align="center"><%= @image.file_file_name%></legend>

@@ -13,6 +13,8 @@
 
 <%= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Products' } %>
 
+<%= render 'spree/shared/error_messages', target: @celebrity %>
+
 <%= form_for @celebrity, url: admin_celebrity_products_path(@celebrity) do |f| %>
   <%= hidden_field_tag "celebrity[product_ids][]", nil%>
   <fieldset>

@@ -13,6 +13,8 @@
 
 <%= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Basic Details' } %>
 
+<%= render 'spree/shared/error_messages', target: @celebrity %>
+
 <%= form_for [:admin, @celebrity] do |f| %>
   <fieldset>
     <legend align="center"><%= t(:edit_celebrity) %></legend>
