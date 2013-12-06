@@ -705,10 +705,20 @@
           color: #333;
         }
       }
+      a.chzn-single.unavailable {
+        text-decoration: line-through;
+      }
       .info {
         color: #999898;
         margin: 8px 0 0 16px;
         display: inline-block;
+      }
+      .error {
+        position: absolute;
+        left: 0;
+        top: 215px;
+        display: block;
+        color: #cc0000;
       }
     }
     .body-shapes {

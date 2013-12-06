@@ -1,7 +1,6 @@
 window.helpers or= {}
 
 window.helpers.showErrors = (container, messageText) ->
-  console.log('here')
   block = container.find('.error.message')
   if block.length == 0
     container.append($("<span class='error message' style='display: none;'></span>"))

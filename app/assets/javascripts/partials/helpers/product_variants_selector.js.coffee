@@ -87,12 +87,18 @@ window.helpers.createProductVariantsSelector = (root) ->
         $button.trigger('variant_selected', variant)
 
     updateSelectbox: (selectBox, available_options, method_name) ->
-      selectBox.find('option').attr('disabled', 'disabled')
+      selectBox.find("option[value!='']").attr('disabled', 'disabled').removeClass('unavailable')
 
       _.each(available_options, (variant) ->
-        selectBox.find("option[value=#{variant.size}]").removeAttr('disabled')
+        selectOption = selectBox.find("option[value=#{variant.size}]")
+        selectOption.removeAttr('disabled')
+        if !variant.available
+          selectOption.addClass('unavailable')
+          selectOption.html("<span style='text-decoration: line-through;'>#{variant.size} SOLD OUT</span>")
+        else
+          selectOption.text(variant.size)
+        selectOption.addClass('unavailable')
       )
-      selectBox.find("option[value='']").removeAttr('disabled')
 
       selectBox.trigger("liszt:updated")
 
@@ -107,6 +113,8 @@ window.helpers.createProductVariantsSelector = (root) ->
       # update buttons
       $button = rootElement.find('.buy-wishlist .buy-now')
       $wishlist_button = rootElement.find('.buy-wishlist .add-wishlist')
+      $selectedSize = rootElement.find('#toggle_selectbox_chzn a.chzn-single').removeClass('unavailable')
+
       if ! _.isEmpty(variant)
         if variant.available
           $button.data(id: variant.id, error: null)
@@ -118,7 +126,9 @@ window.helpers.createProductVariantsSelector = (root) ->
             # don't change master variant data, if product don't have variants
         else
           $button.removeClass('added')
-          $button.data(id: null, error: 'This item is out of stock')
+          $button.data(id: null, error: 'Sorry, this item is out of stock')
+          window.helpers.showErrors(rootElement.find('.size-select'), 'Sorry, out of stock')
+          $selectedSize.addClass('unavailable')
       else if @variants? && @variants.length > 0
         $button.removeClass('added')
         $button.data(id: null, error: 'Please, select size and colour')
