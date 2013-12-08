@@ -42,6 +42,7 @@ module Products
       info[:page_title] = get_page_title
       info[:meta_description] = get_page_meta_description
       info[:banner_title] = get_banner_title(info[:banner_title])
+      info[:banner_text] = get_banner_text(info[:banner_text])
 
       info
     end
@@ -96,11 +97,19 @@ module Products
 
     def get_banner_title(title)
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        "#{seo_colour} Dresses"
+        I18n.t(:title, scope: [:collection, :colors, @searcher.seo_colour.parameterize.underscore], default: "#{seo_colour} Dresses")
       elsif title.to_s.downcase == 'range'
         'Our Collection'
       else
         title
+      end
+    end
+
+    def get_banner_text(text)
+      if available_formal_dresses_colours.include?(@searcher.seo_colour)
+        I18n.t(:subtitle, scope: [:collection, :colors, @searcher.seo_colour.parameterize.underscore], default: text)
+      else
+        text
       end
     end
 

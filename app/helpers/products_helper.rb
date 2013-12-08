@@ -49,10 +49,17 @@ module ProductsHelper
 
   def hoverable_product_image_tag(product, options = {})
     no_image = 'noimage/product.png'
+    colors = options.delete(:colors)
+
     if product.images.empty?
       image_tag(no_image, options)
     else
-      images = product.images
+      if colors.present? && product.images_for_colors(colors).present?
+        images = product.images_for_colors(colors)
+      else
+        images = product.images
+      end
+
       image = images.first
       options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
       if images.size > 1

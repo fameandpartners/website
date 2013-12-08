@@ -9,9 +9,13 @@ Spree::ProductsController.class_eval do
     @searcher = Products::ProductsFilter.new(params)
     @searcher.current_user = try_spree_current_user
     @searcher.current_currency = current_currency
+
     @products = @searcher.retrieve_products
 
     @page_info = @searcher.selected_products_info
+
+    @current_colors = @searcher.colour.present? ? @searcher.colour : []
+
     set_collection_title(@page_info)
     set_marketing_pixels(@searcher)
 

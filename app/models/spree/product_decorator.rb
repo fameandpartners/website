@@ -59,6 +59,15 @@ Spree::Product.class_eval do
     ).order('position ASC')
   end
 
+  def images_for_colors(colors)
+    table_name = Spree::Image.quoted_table_name
+    product_color_value_ids = product_color_values.where(option_value_id: colors.map(&:id)).map(&:id)
+
+    Spree::Image.where(
+      "#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?)",
+      product_color_value_ids).order('position ASC')
+  end
+
   def images_for_variant(variant)
     table_name = Spree::Image.quoted_table_name
 
@@ -101,6 +110,21 @@ Spree::Product.class_eval do
     else
       []
     end
+  end
+
+  def color_ids
+    if option_type = option_types.find_by_name('dress-color')
+      option_type.
+        option_values.
+        joins(:variants).
+        where(spree_variants: {id: variant_ids}).uniq.map(&:id)
+    else
+      []
+    end
+  end
+
+  def viewable_color_ids
+    product_color_values.joins(:images).map(&:option_value_id)
   end
 
   def basic_colors

@@ -1,4 +1,10 @@
 en:
+  collection:
+    colors:
+      black:
+        title: 'Black Dresses'
+        subtitle: 'Perfect formal dresses for any special occasion.'
+
   delivery_time:
     quick:
      long: '24 hours delivery'
