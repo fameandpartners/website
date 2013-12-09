@@ -531,15 +531,22 @@
       font-style: italic;
       margin: 0 0 25px 0;
     }
-    .colour, .faster, .peter-lang {
+    .colour, .faster, .peter-lang, .shoes-of-prey {
       padding-top: 10px;
       color: #333;
     } 
     
-    .peter-lang{
+    .peter-lang, .shoes-of-prey{
       color: #999;
       font-style: italic; 
       margin-bottom: 20px;
+    }
+    
+    .shoes-of-prey{
+      color: #999;
+      font-style: italic; 
+      margin: 10px 0 0 0;
+      
     }
   }
   .free-styling-tips {
