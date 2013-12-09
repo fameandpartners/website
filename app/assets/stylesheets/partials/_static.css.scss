@@ -307,3 +307,70 @@
     font: 400 14px/1.3 $fontOne;
   }
 }
+
+.about-page {
+  font: 400 18px/1.3 $fontFour;
+  p {
+    margin: 0 0 29px;
+  }
+  .about-title {
+    font-size: 36px;
+    font-style: italic;
+    padding: 0 0 9px;
+    margin: 0 0 20px;
+    border-bottom: 1px solid #dcdcdc;
+  }
+  .benefits-title {
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0 0 18px;
+  }
+  .benefits-list {
+    margin: 0 0 29px;
+    li {
+      margin: 0 0 20px;
+      @include clearfix;
+      .icon {
+        float: left;
+        color: #fd43d2;
+        font-size: 22px;
+      }
+      .text {
+        margin: 2px 0 0 30px;
+        span {
+          color: #fd43d2;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+  .rotate {
+    margin-top: -20px;
+    box-shadow: 0 -7px 7px rgba(0, 0, 0, .05);
+    &:first-child {
+      margin-top: 0;
+      box-shadow: none;
+    }
+  }
+  .rotate-1 {
+    @include transform((rotate(-7deg)));
+  }
+  .rotate-2 {
+    @include transform((rotate(4.4deg)));
+  }
+  .rotate-3 {
+    @include transform((rotate(-3.8deg)));
+  }
+  .rotate-4 {
+    @include transform((rotate(9.6deg)));
+  }
+  .team-member {
+    margin-top: 30px;
+  }
+  .section-title {
+    font-size: 26px;
+    font-style: italic;
+    color: #fd43d2;
+    margin: 0 0 6px;
+  }
+}
