@@ -9,6 +9,12 @@ Spree::Address.class_eval do
   end
 
   def to_string
-    [zipcode, country.try(:name), state.try(:name), city, address1, address2].reject(&:blank?).join(', ')
+    [
+      [address1, address2].reject(&:blank?).join(' '),
+      city,
+      state.try(:name),
+      zipcode,
+      country.try(:name)
+    ].reject(&:blank?).join(', ')
   end
 end
