@@ -48,6 +48,8 @@ Spree::Product.class_eval do
   before_save :update_price_conversions
   after_save :update_zone_prices, if: :zone_prices_hash
 
+  after_initialize :set_default_values
+
   def images
     table_name = Spree::Image.quoted_table_name
 
@@ -264,6 +266,13 @@ Spree::Product.class_eval do
   def update_zone_prices
     self.variants_including_master.each do |variant|
       variant.update_zone_prices(self.zone_prices_hash)
+    end
+  end
+
+  def set_default_values
+    if self.new_record?
+      self.on_demand = true
+      self.cound_on_hand = 10
     end
   end
 end
