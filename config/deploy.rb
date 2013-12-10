@@ -7,6 +7,7 @@ set :default_stage, "staging"
 set :deploy_via, :remote_cache
 set :keep_releases, 5
 set :scm, :git
+set :shared_children, shared_children + %w{public/spree}
 
 before  'deploy:setup', 'db:create_config'
 after   'deploy:setup', 'deploy:first'
