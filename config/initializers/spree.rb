@@ -38,6 +38,18 @@ Spree.config do |config|
   config.checkout_zone = 'Australia'
 
   config.emails_sent_from = 'Fame And Partners<noreply@fameandpartners.com>'
+
+  if Rails.env.production?
+    config.use_s3 = true
+    config.s3_bucket = configatron.aws.s3.bucket
+    config.s3_access_key = configatron.aws.s3.access_key_id
+    config.s3_secret = configatron.aws.s3.secret_access_key
+
+    config.attachment_url = ":s3_domain_url"
+    config.attachment_path = '/spree/products/:id/:style/:basename.:extension'
+  else
+    config.use_s3 = false
+  end
 end
 
 Spree.user_class = "Spree::User"
