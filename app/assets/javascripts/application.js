@@ -13,6 +13,10 @@
 //= require libs/underscore-min
 //= require libs/live_chat_with_fancybox.min
 //= require libs/purl
+
+//= require libs/soundcloud/soundcloud.player.api
+//= require libs/soundcloud/sc-player
+
 //= require helpers
 //= require_tree ./partials
 //= require_tree ./templates

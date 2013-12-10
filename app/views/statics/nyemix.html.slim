@@ -7,7 +7,7 @@
   h2 Did we get it right? Like it to vote yes.
   .grid-container
     - if @products.try(:length) > 0 
-      ul.products-list.grid-container
+      ul.products-list.grid-container.no-margin
         - @products.each do |product|
           li.product-item.grid-20
             .thumbnail
@@ -15,9 +15,24 @@
                 = product_image(product, itemprop: "image", width: 243, height: 352, alt: product.name)
             .name = link_to product.name, collection_product_path(product)
             .description = product_short_description(product)
-
+  .grid-container.soundcloud-container
+    .grid-20
+      .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/johnlegend/all-of-me-3', class: 'sc-player'
+    .grid-20
+      .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/thevampsfansite/the-vamps-can-we-dance', class: 'sc-player'
+    .grid-20
+      .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/newyfreshmusic/katy-perry-dark-horse-ft-juicy', class: 'sc-player'
+    .grid-20
+      .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/lordemusic/royals', class: 'sc-player'
+    .grid-20
+      .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/rap-up-music/the-monster-eminem-ft-rihanna', class: 'sc-player'
+  .grid-container.soundcloud-container
+    .grid-20
+      .fleft like
+      .fright addthisto
+  hr
   .grid-container
-    h2 all products
+    h2 All of our dresses
     ul.products-list.grid-container
       - @other_products.each do |product|
         li.product-item.grid-25
@@ -31,3 +46,13 @@
             .colors
               - colors[product.id].map(&:name).sort.each do |color|
                 .color{class=color}
+
+.modal.coupon-code
+  .overlay
+  .modal-container
+    .close-lightbox
+    .modal-title Get $30 off your order*
+    .couponcode
+      ' Promo code:
+      span Music30
+    .hint * When your order is over $100

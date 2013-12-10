@@ -387,3 +387,55 @@
     box-shadow: 0 0 4px rgba(0, 0, 0, .3);
   }
 }
+
+#content .nyemix {
+  h2 {
+    font: 400 italic 36px/1.2 $fontFour;
+    text-align: center;
+  }
+  .products-list.no-margin {
+    margin-bottom: 0;
+    .product-item {
+      margin-bottom: 0;
+    }
+  }
+  .soundcloud-container {
+    margin: 0 -19px 30px;
+  }
+}
+
+/* NYE Party Mix Model */
+
+.modal {
+  &.coupon-code {
+    .modal-container {
+      width: 300px;
+      padding: 20px;
+      border-color: #FFA793;
+      top: 50%;
+      margin: -176px 0 0 -170px;
+    }
+    .modal-title {
+      text-align: center;
+      font: 400 32px/1.2 $fontFive;
+      padding: 0 0 16px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #c7c7c7;
+    }
+    .couponcode {
+      text-align: center;
+      font: 400 italic 20px/1.2 $fontFour;
+      text-transform: uppercase;
+      span {
+        color: #ff887a;
+      }
+    }
+    .hint {
+      margin: 14px 0 0;
+      border-top: 1px solid #c7c7c7;
+      padding: 16px 0 0;
+      text-align: center;
+      font: 400 14px/1.2 $fontFour;
+    }
+  }
+}
