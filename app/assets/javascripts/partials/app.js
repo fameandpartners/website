@@ -141,3 +141,7 @@ $(document).ready(function() {
     $('.site-version-switch').toggle();
   })
 });
+
+$('.nyemix').ready(function(){
+  $('.sc-player').scPlayer();
+});
