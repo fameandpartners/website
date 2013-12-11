@@ -7,6 +7,7 @@ Spree::Variant.class_eval do
   attr_accessor :zone_prices_hash
 
   after_save :update_zone_prices
+  after_initialize :set_default_values
 
   def in_sale?
     current_sale.active?
@@ -80,5 +81,12 @@ Spree::Variant.class_eval do
 
   def current_sale
     @current_sale ||= Spree::Sale.first_or_initialize
+  end
+
+  def set_default_values
+    if self.new_record?
+      self.on_demand     = true
+      self.count_on_hand = 10
+    end
   end
 end

@@ -1,0 +1,53 @@
+<% content_for :page_title do %>
+  <%= t(:celebritites) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <div class="toolbar" data-hook="toolbar">
+    <ul class="actions header-action-links inline-menu">
+      <li id="new_celebrity_link">
+        <%= button_link_to t(:new_celebrity), new_admin_celebrity_path, :icon => 'icon-plus' %>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<% if @celebrities.any? %>
+  <table class="index">
+    <colgroup>
+      <col style="width: 5%;">
+      <col style="width: 25%;">
+      <col style="width: 25%;">
+      <col style="width: 25%;">
+      <col style="width: 20%;">
+    </colgroup>
+    <thead>
+      <tr>
+        <th><%= t(:id) %></th>
+        <th><%= t(:first_name) %></th>
+        <th><%= t(:last_name) %></th>
+        <th><%= t(:slug) %></th>
+        <th></th>
+      </tr>  
+    </thead>  
+    <tbody>
+      <% @celebrities.each do |celebrity| %>
+          <tr class="<%= cycle('odd', 'even') %>">
+            <td class="align-center"><%= celebrity.id %></td>
+            <td class="align-left"><%= celebrity.first_name %></td>
+            <td class="align-left"><%= celebrity.last_name %></td>
+            <td class="align-left"><%= celebrity.slug %></td>
+            <td class="align-left">
+              <%= link_to_with_icon('icon-edit', t(:edit), edit_admin_celebrity_path(celebrity)) %>
+              &nbsp;
+              <%= link_to_with_icon( 'icon-trash', t(:delete), admin_celebrity_path(celebrity), method: :delete) %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <%= t(:no_results) %>
+  </div>
+<% end %>

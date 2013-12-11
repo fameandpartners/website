@@ -13,7 +13,7 @@ Spree.config do |config|
   config.allow_ssl_in_staging = false
 
   config.products_per_page = 100 # disable pagination at all
-  config.allow_backorders = true # allow order items out of stock - we have 90% items by order
+  config.allow_backorders = false # allow order items out of stock - we have 90% items by order
   config.show_zero_stock_products = true
 
   config.attachment_styles = {
@@ -38,6 +38,21 @@ Spree.config do |config|
   config.checkout_zone = 'Australia'
 
   config.emails_sent_from = 'Fame And Partners<noreply@fameandpartners.com>'
+
+  if Rails.env.production?
+    config.use_s3 = true
+    config.s3_bucket = configatron.aws.s3.bucket
+    config.s3_access_key = configatron.aws.s3.access_key_id
+    config.s3_secret = configatron.aws.s3.secret_access_key
+
+    config.attachment_url = ":s3_domain_url"
+    config.attachment_path = '/spree/products/:id/:style/:basename.:extension'
+  else
+    config.use_s3 = false
+
+    config.attachment_path = ':rails_root/public/spree/products/:id/:style/:basename.:extension'
+    config.attachment_url = '/spree/products/:id/:style/:basename.:extension'
+  end
 end
 
 Spree.user_class = "Spree::User"

@@ -532,6 +532,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   acts-as-taggable-on
+  aws-sdk
   bourbon
   capistrano (= 2.15.4)
   capistrano-rbenv (= 0.0.10)

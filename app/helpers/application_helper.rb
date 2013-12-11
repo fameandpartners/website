@@ -75,7 +75,7 @@ module ApplicationHelper
   end
 
   def controller_action_id
-    "#{controller.controller_name}"
+    @controller_action_id || "#{controller.controller_name}"
   end
 
   def facebook_authentication_available?
@@ -286,6 +286,22 @@ module ApplicationHelper
 
   def personalised_store_available?
     spree_user_signed_in? && current_spree_user.style_profile.try(:active?)
+  end
+
+  def soundcloud_widget(product)
+    if product.property('soundcloud_song_id')
+      song_id = product.property('soundcloud_song_id')
+      player_url_options = {
+        color: 'ff6600',
+        authors: false,
+        show_artwork: true,
+        url: "https://api.soundcloud.com/tracks/#{ song_id }"
+      }
+      media_player_url = "https://w.soundcloud.com/player/?#{ player_url_options.to_query }"
+      iframe_options = { width: "100%", height: '166', scrolling: 'no', frameborder: 'no' }
+
+      content_tag(:iframe, '', iframe_options.merge(src: media_player_url))
+    end
   end
 
   private

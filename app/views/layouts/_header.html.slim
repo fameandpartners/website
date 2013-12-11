@@ -1,45 +1,47 @@
-.top-links
-  .wrap.no-overflow
-    nav.fleft
-      ul
-        - if current_site_version.is_australia?
-          li = link_to 'Australia Home', root_path, class: 'top-icon link-root'
-          li.top-icon.phone order on the phone / customer service 1300 924 860
-        - else                                                       
-          li = link_to 'USA Home', root_path, class: 'top-icon link-root'
-    .fright
+- links_cache_key = ['header-top-links', current_site_version.is_australia?, current_spree_user.try(:cache_key)]
+- cache links_cache_key, expires_in: configatron.cache.expire.long do
+  .top-links
+    .wrap.no-overflow
       nav.fleft
         ul
-          - unless spree_user_signed_in?
-            li = link_to 'sign up', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
-            li = link_to 'log-in', spree_login_path, class: 'link-login'
-          - else
-            li.loggedin
-              .dropdown-trigger
-                - if current_spree_user.image.present?
-                  .avatar
-                    = image_tag current_spree_user.image, width: 20
-                =' current_spree_user.full_name
-              .dropdown-menu
-                ul
-                  li = link_to 'account settings', profile_path
-                  li = link_to 'your orders', user_orders_path
-                  li = link_to 'style profile', styleprofile_path
-                  li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
-      .site-version.fright
-        .current-version
-          = image_tag "flags/#{current_site_version.code}.png", width: 16, height: 11, alt: "#{current_site_version.code}"
-          i.icon.icon-dropdown-down
-        .site-version-switch
+          - if current_site_version.is_australia?
+            li = link_to 'Australia Home', root_path, class: 'top-icon link-root'
+            li.top-icon.phone order on the phone / customer service 1300 924 860
+          - else                                                       
+            li = link_to 'USA Home', root_path, class: 'top-icon link-root'
+      .fright
+        nav.fleft
           ul
-            li
-              = link_to site_version_path('au') do
-                = image_tag 'flags/au.png', width: 16, height: 11, alt: 'Australia'
-                ' Australia
-            li
-              = link_to site_version_path('us') do
-                = image_tag 'flags/us.png', width: 16, height: 11, alt: 'USA'
-                ' USA
+            - unless spree_user_signed_in?
+              li = link_to 'sign up', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
+              li = link_to 'log-in', spree_login_path, class: 'link-login'
+            - else
+              li.loggedin
+                .dropdown-trigger
+                  - if current_spree_user.image.present?
+                    .avatar
+                      = image_tag current_spree_user.image, width: 20
+                  =' current_spree_user.full_name
+                .dropdown-menu
+                  ul
+                    li = link_to 'account settings', profile_path
+                    li = link_to 'your orders', user_orders_path
+                    li = link_to 'style profile', styleprofile_path
+                    li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
+        .site-version.fright
+          .current-version
+            = image_tag "flags/#{current_site_version.code}.png", width: 16, height: 11, alt: "#{current_site_version.code}"
+            i.icon.icon-dropdown-down
+          .site-version-switch
+            ul
+              li
+                = link_to site_version_path('au') do
+                  = image_tag 'flags/au.png', width: 16, height: 11, alt: 'Australia'
+                  ' Australia
+              li
+                = link_to site_version_path('us') do
+                  = image_tag 'flags/us.png', width: 16, height: 11, alt: 'USA'
+                  ' USA
 header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .header-wrapper
     .first-level

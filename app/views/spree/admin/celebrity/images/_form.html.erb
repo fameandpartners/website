@@ -1,0 +1,18 @@
+<div data-hook="admin_image_form_fields">
+  <div class="six columns alpha">
+    <div data-hook="file" class="field">
+      <%= f.label t(:filename) %><br>
+      <%= f.file_field :file%>
+    </div>
+  </div>
+  <div class="six columns alpha">
+    <%= f.field_container :primary, :class => ['checkbox'] do %>
+      <label>
+        <%= f.check_box :is_primary %>
+        <%= t(:primary) %>
+      </label>
+    <% end %>
+  </div>
+</div>
+
+<div class="clear"></div>

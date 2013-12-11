@@ -1,4 +1,10 @@
 en:
+  collection:
+    colors:
+      black:
+        title: 'Black Dresses'
+        subtitle: 'Perfect formal dresses for any special occasion.'
+
   delivery_time:
     quick:
      long: '24 hours delivery'
@@ -42,6 +48,7 @@ en:
     messages:
       points_number:
         invalid: 'Basic style`s points sum should be 10'
+        should_be_100: 'Basic style`s points sum should be 100'
   page:
     blog:
       default:
@@ -61,3 +68,9 @@ en:
   date:
     formats:
       default: '%d/%m/%Y'
+  views:
+    pages:
+      celebrities:
+        index:
+          title: 'Celebrities'
+          subtitle: ''

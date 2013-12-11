@@ -25,8 +25,133 @@ module Products
     end
 
     def retrieve_products
+      color_ids  = colour.present? ? colour.map(&:id) : []
+      taxon_ids  = taxons.present? ? taxons : {}
+      keywords   = keywords.present? ? keywords.split : []
+      bodyshapes = bodyshape
+      order_by   = order
+      limit      = per_page
+      offset     = ((page - 1) * per_page)
+
+      Tire.search(:spree_products, load: { include: { master: :prices } }) do
+        # Filter only undeleted & available products
+        filter :bool, :must => { :term => { :deleted => false } }
+        filter :exists, :field => :available_on
+        filter :bool, :should => {
+          :range => {
+            :available_on => { :lte => Time.now }
+          }
+        }
+
+        # Filter by colors
+        if color_ids.present?
+          filter :terms, :color_ids => color_ids
+        end
+
+        # Filter by taxons
+        if taxon_ids.present?
+          taxon_ids.each do |scope_name, ids|
+            filter :terms, :taxon_ids => ids
+          end
+        end
+
+        # Filter by keywords
+        query :term, :name => keywords if keywords.present?
+        query :term, :description => keywords if keywords.present?
+
+        # Show only products from stock
+        filter :bool, :must => { :term => { :in_stock => true } }
+
+        # Show only products with prices
+        unless Spree::Config.show_products_without_price
+          filter :exists, :field => :price
+        end
+
+
+        # Filter by bodyshapes
+        if bodyshapes.present?
+          if bodyshapes.size.eql?(1)
+            filter :bool, :should => {
+              :range => {
+                bodyshapes.first.to_sym => {
+                  :gte => 4
+                }
+              }
+            }
+          else
+            filter :or,
+              *bodyshapes.map do |bodyshape|
+                {
+                  :bool => {
+                    :should => {
+                      :range => {
+                        bodyshape.to_sym => {
+                          :gte => 4
+                        }
+                      }
+                    }
+                  }
+                }
+              end
+          end
+        end
+
+        sort do
+          if color_ids.present?
+            by ({
+              :_script => {
+                script: %q{
+                  intersection_size = 0;
+                  foreach(color_id : color_ids) {
+                    foreach(viewable_color_id : doc['viewable_color_ids'].values) {
+                      if (viewable_color_id == color_id) {
+                        intersection_size = intersection_size + 1;
+                      }
+                    }
+                  }
+                  intersection_size
+                }.gsub(/[\r\n]|([\s]{2,})/, ''),
+                params: {
+                  color_ids: color_ids
+                },
+                type: 'number',
+                order: 'desc'
+              }
+            })
+          end
+
+          if bodyshapes.present?
+            by ({
+              :_script => {
+                script: bodyshapes.map{|bodyshape| "doc['#{bodyshape}'].value" }.join(' + '),
+                type:   'number',
+                order:  'desc'
+              }
+            })
+          end
+
+          case order_by
+            when 'price_high'
+              by :price, 'desc'
+            when 'price_low'
+              by :price, 'asc'
+            when 'newest'
+              by :created_at, 'desc'
+            when 'popular'
+              # default ordering scope
+            else
+              # default ordering scope
+          end
+        end
+
+        from offset
+        size limit
+      end.results.results
+    end
+
+    def retrieve_products_old
       @products_scope = get_base_scope
-      @products = @products_scope.includes([:master => :prices])
+      @products = @products_scope.includes(:master => :prices).scoped
       unless Spree::Config.show_products_without_price
         # note - we don't count different currencies here
         @products = @products.joins(
@@ -90,12 +215,13 @@ module Products
 
     def add_color_scope(base_scope)
       return base_scope if colour.blank?
-      base_scope = base_scope.has_options(Spree::Variant.color_option_type, colour)
+      base_scope.has_options(Spree::Variant.color_option_type, colour)
     end
 
     def add_taxonomy_scope(base_scope)
       return base_scope if taxons.blank?
       # simple taxon_id in (...) condition
+
       if taxons.keys.length == 1
         return base_scope.in_taxons(taxons.values.flatten)
       end
@@ -131,19 +257,21 @@ module Products
     end
 
     def add_order_scope(base_scope)
-      return base_scope if order.blank? && bodyshape.blank?
+      return base_scope if colour.blank? && order.blank? && bodyshape.blank?
+
+      ordered_scope = base_scope
 
       case order
       when 'price_high'
-        ordered_scope = base_scope.order('spree_prices.amount desc')
+        ordered_scope = ordered_scope.order('spree_prices.amount desc')
       when 'price_low'
-        ordered_scope = base_scope.order('spree_prices.amount asc')
+        ordered_scope = ordered_scope.order('spree_prices.amount asc')
       when 'newest'
-        ordered_scope = base_scope.order('spree_products.created_at desc')
+        ordered_scope = ordered_scope.order('spree_products.created_at desc')
       when 'popular'
-        ordered_scope = base_scope
+        ordered_scope = ordered_scope
       else
-        ordered_scope = base_scope
+        ordered_scope = ordered_scope
       end
 
       if bodyshape.present?

@@ -69,17 +69,17 @@ class Blog::PostsController < BlogBaseController
 
   def generate_breadcrumbs_for_show
     if params[:type] == 'red_carpet'
-      @breadcrumbs = [[root_path, 'Home'], [blog_red_carpet_posts_path, 'Red Carpet Events'], [blog_red_carpet_post_path(@post.slug), @post.title]]
+      @breadcrumbs = [[blog_path, 'Home'], [blog_red_carpet_posts_path, 'Red Carpet Events'], [blog_red_carpet_post_path(@post.slug), @post.title]]
     else
-      @breadcrumbs = [[root_path, 'Home'], [blog_posts_by_category_path(@post.category.slug), @post.category.name], [blog_post_by_category_path(@post.category.slug, @post.slug), @post.title]]
+      @breadcrumbs = [[blog_path, 'Home'], [blog_posts_by_category_path(@post.category.slug), @post.category.name], [blog_post_by_category_path(@post.category.slug, @post.slug), @post.title]]
     end
   end
 
   def generate_breadcrumbs_for_index
     if params[:type] == 'red_carpet'
-      @breadcrumbs = [[root_path, 'Home'], [blog_red_carpet_posts_path, 'Red Carpet Events']]
+      @breadcrumbs = [[blog_path, 'Home'], [blog_red_carpet_posts_path, 'Red Carpet Events']]
     else
-      @breadcrumbs = [[root_path, 'Home'], [blog_posts_by_category_path(@category.try(:slug)), @category.try(:name)]]
+      @breadcrumbs = [[blog_path, 'Home'], [blog_posts_by_category_path(@category.try(:slug)), @category.try(:name)]]
     end
   end
 end

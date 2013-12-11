@@ -43,6 +43,6 @@ class Blog::SearchesController < BlogBaseController
   private
 
   def generate_breadcrumbs_for_index
-    @breadcrumbs = [[root_path, 'Home'], [request.path, 'Search']]
+    @breadcrumbs = [[blog_path, 'Home'], [request.path, 'Search']]
   end
 end

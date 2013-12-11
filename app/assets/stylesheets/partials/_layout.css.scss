@@ -1,3 +1,9 @@
+.row {
+  margin-left: -19px;
+  margin-right: -19px;
+  @include clearfix;
+}
+
 .remarketing {
   height: 0;
   overflow: hidden;
@@ -541,6 +547,11 @@ header {
       text-transform: uppercase;
       &,small {
         font-size: 50px;
+      }
+    }
+    &.no-separate {
+      &:before {
+        display: none;
       }
     }
   }

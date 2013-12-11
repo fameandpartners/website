@@ -531,15 +531,22 @@
       font-style: italic;
       margin: 0 0 25px 0;
     }
-    .colour, .faster, .peter-lang {
+    .colour, .faster, .peter-lang, .shoes-of-prey {
       padding-top: 10px;
       color: #333;
     } 
     
-    .peter-lang{
+    .peter-lang, .shoes-of-prey{
       color: #999;
       font-style: italic; 
       margin-bottom: 20px;
+    }
+    
+    .shoes-of-prey{
+      color: #999;
+      font-style: italic; 
+      margin: 10px 0 0 0;
+      
     }
   }
   .free-styling-tips {
@@ -705,10 +712,20 @@
           color: #333;
         }
       }
+      a.chzn-single.unavailable {
+        text-decoration: line-through;
+      }
       .info {
         color: #999898;
         margin: 8px 0 0 16px;
         display: inline-block;
+      }
+      .error {
+        position: absolute;
+        left: 0;
+        top: 215px;
+        display: block;
+        color: #cc0000;
       }
     }
     .body-shapes {

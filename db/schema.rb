@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131116114518) do
+ActiveRecord::Schema.define(:version => 20131204161903) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -172,6 +172,37 @@ ActiveRecord::Schema.define(:version => 20131116114518) do
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
 
+  create_table "celebrities", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "slug"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.boolean  "is_published"
+  end
+
+  add_index "celebrities", ["slug"], :name => "index_celebrities_on_slug"
+
+  create_table "celebrities_products", :force => true do |t|
+    t.integer "celebrity_id"
+    t.integer "product_id"
+  end
+
+  add_index "celebrities_products", ["celebrity_id"], :name => "index_celebrities_products_on_celebrity_id"
+
+  create_table "celebrity_images", :force => true do |t|
+    t.integer  "celebrity_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.boolean  "is_primary",        :default => false
+    t.integer  "position"
+  end
+
+  add_index "celebrity_images", ["celebrity_id"], :name => "index_celebrity_images_on_celebrity_id"
+  add_index "celebrity_images", ["is_primary"], :name => "index_celebrity_images_on_is_primary"
+
   create_table "celebrity_inspirations", :force => true do |t|
     t.integer  "spree_product_id"
     t.string   "celebrity_name"
@@ -183,6 +214,20 @@ ActiveRecord::Schema.define(:version => 20131116114518) do
     t.datetime "updated_at",            :null => false
     t.text     "celebrity_description"
   end
+
+  create_table "celebrity_style_profiles", :force => true do |t|
+    t.integer  "celebrity_id"
+    t.integer  "glam"
+    t.integer  "girly"
+    t.integer  "classic"
+    t.integer  "edgy"
+    t.integer  "bohemian"
+    t.text     "description"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "celebrity_style_profiles", ["celebrity_id"], :name => "index_celebrity_style_profiles_on_celebrity_id"
 
   create_table "competition_entries", :force => true do |t|
     t.integer  "user_id"
@@ -1029,21 +1074,20 @@ ActiveRecord::Schema.define(:version => 20131116114518) do
   add_index "spree_users", ["slug"], :name => "index_spree_users_on_slug"
 
   create_table "spree_variants", :force => true do |t|
-    t.string   "sku",                                           :default => "",    :null => false
-    t.decimal  "weight",          :precision => 8, :scale => 2
-    t.decimal  "height",          :precision => 8, :scale => 2
-    t.decimal  "width",           :precision => 8, :scale => 2
-    t.decimal  "depth",           :precision => 8, :scale => 2
+    t.string   "sku",                                         :default => "",    :null => false
+    t.decimal  "weight",        :precision => 8, :scale => 2
+    t.decimal  "height",        :precision => 8, :scale => 2
+    t.decimal  "width",         :precision => 8, :scale => 2
+    t.decimal  "depth",         :precision => 8, :scale => 2
     t.datetime "deleted_at"
-    t.boolean  "is_master",                                     :default => false
+    t.boolean  "is_master",                                   :default => false
     t.integer  "product_id"
-    t.integer  "count_on_hand",                                 :default => 0
-    t.decimal  "cost_price",      :precision => 8, :scale => 2
+    t.integer  "count_on_hand",                               :default => 0
+    t.decimal  "cost_price",    :precision => 8, :scale => 2
     t.integer  "position"
-    t.integer  "lock_version",                                  :default => 0
-    t.boolean  "on_demand",                                     :default => false
+    t.integer  "lock_version",                                :default => 0
+    t.boolean  "on_demand",                                   :default => false
     t.string   "cost_currency"
-    t.boolean  "is_customizable",                               :default => false
   end
 
   add_index "spree_variants", ["product_id"], :name => "index_spree_variants_on_product_id"

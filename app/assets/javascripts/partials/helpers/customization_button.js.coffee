@@ -17,7 +17,8 @@ window.helpers.addCustomizationButtonHandlers = (customizationButton) ->
     if variantId?
       productPersonalizationPopup.show({variant_id: variantId})
     else
-      window.helpers.showErrors($(e.currentTarget).parent(), 'Please, select size and colour')
+      errorMessage = button.data('error') || 'Please, select size and colour'
+      window.helpers.showErrors($(e.currentTarget).parent(), errorMessage)
   )
 
   $button.on('variant_selected', (e) ->

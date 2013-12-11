@@ -78,4 +78,5 @@ gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :
 
 group :production do
   gem 'unicorn'
+  gem 'aws-sdk'
 end

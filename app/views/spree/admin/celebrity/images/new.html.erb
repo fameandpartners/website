@@ -1,0 +1,17 @@
+<%= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Images' } %>
+
+<%= render 'spree/shared/error_messages', target: @image %>
+
+<%= form_for @image, as: :image, url: admin_celebrity_images_path, html: { multipart: true } do |f| %>
+  <fieldset data-hook="new_image">
+    <legend align="center"><%= t(:new_image) %></legend>
+
+      <%= render :partial => 'form', :locals => { :f => f } %>
+    
+      <div class="form-buttons filter-actions actions" data-hook="buttons">
+        <%= button t(:create), 'icon-ok' %>
+        <span class="or"><%= t(:or) %></span>
+        <%= link_to_with_icon 'icon-remove', t(:cancel), admin_celebrity_images_path(@celebrity), :class => 'button' %>
+      </div>
+  </fieldset>
+<% end %>

@@ -13,12 +13,24 @@ module Overrides
 
         mapping do
           indexes :id, :index => :not_analyzed
+
+          indexes :created_at, :type => :date
+
           indexes :name, :analyzer => :snowball
           indexes :description, :analyzer => :snowball
+          indexes :price, :type => :float, :as => 'price.to_f'
+
           indexes :available_on, :type => :date, :include_in_all => false
           indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
+          indexes :in_stock, :type => :boolean, :as => 'has_stock?'
+
           indexes :taxons, :as => 'taxons.map(&:name)'
+          indexes :taxon_ids, :as => 'taxons.map(&:id)'
+
           indexes :colors, :as => 'colors'
+          indexes :color_ids, :as => 'color_ids'
+
+          indexes :viewable_color_ids, :as => 'viewable_color_ids'
 
           indexes :glam, :type => :float, :as => 'style_profile.try(:glam)'
           indexes :girly, :type => :float, :as => 'style_profile.try(:girly)'

@@ -10,5 +10,5 @@ window.helpers.showErrors = (container, messageText) ->
     window.helpers.hideErrors(container)
   , 3000)
 
-window.helpers.hideErrors = (container) ->
-  container.find('.error.message').fadeOut('slow')
+window.helpers.hideErrors = (container, duration = 'slow') ->
+  container.find('.error.message').fadeOut(duration)
