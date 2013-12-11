@@ -396,7 +396,7 @@
     text-align: center;
   }
   .fbbutton{
-    width: 100px;
+    width: 90px;
     height: 20px;
     display: block;
     overflow: hidden;
@@ -408,22 +408,20 @@
   .coupon-code{
     text-align: center;
   }
-  .couponcode{
+  .couponcode {
     border-top: 3px solid #333;
     padding: 20px 0;
     width: 500px;
-    margin: 40px auto;
-    .title{
+    margin: 40px auto 0;
+    .title {
       font: 400 42px/1.2 $fontFive;
       text-transform: uppercase;
     }
-    span{
-      font-family: $fontOne;
-      font-size: 38px;
-      font-weight: 300;
+    span {
+      font: 300 38px/1.2 $fontOne;
       text-transform: uppercase;
     }
-    .hint{
+    .hint {
       margin: 30px 0 0 0;
       font-size: 14px;
       font-style: italic;
