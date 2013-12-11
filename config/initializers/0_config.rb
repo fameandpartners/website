@@ -9,6 +9,7 @@ configatron.aws.enabled = false
 configatron.aws.bucket = ""
 configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
+configatron.aws.host = "d1sd72h9dq237j.cloudfront.net"
 
 configatron.links.twitter = 'https://twitter.com/fameandpartners'
 configatron.links.facebook = 'http://www.facebook.com/FameandPartners'
