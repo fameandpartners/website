@@ -374,3 +374,55 @@
     margin: 0 0 6px;
   }
 }
+
+.nyemix{
+  h1{
+    margin: 0 !important;
+  }
+  .instructions{
+    width: 100%;
+    text-align: center;
+    font-family: $fontOne;
+    margin: 40px 0 0;
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .viewmore-container{
+    padding: 60px 0;
+  }
+  .ilmml-container{
+    margin: 30px 0 0;
+    width: 100%;
+    text-align: center;
+  }
+  .fbbutton{
+    width: 100px;
+    height: 20px;
+    display: block;
+    overflow: hidden;
+  }
+  .coupon-code{
+    text-align: center;
+  }
+  .couponcode{
+    border-top: 3px solid #333;
+    padding: 20px 0;
+    width: 500px;
+    margin: 40px auto;
+    .title{
+      font: 400 42px/1.2 $fontFive;
+      text-transform: uppercase;
+    }
+    span{
+      font-family: $fontOne;
+      font-size: 38px;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+    .hint{
+      margin: 30px 0 0 0;
+      font-size: 14px;
+      font-style: italic;
+    }
+  }
+}

@@ -1,20 +1,59 @@
-- @products = Spree::Product.limit(5)
-- @other_products = Spree::Product.limit(8)
-- colors = Products::ColorsSearcher.new(@other_products.to_a).retrieve_colors
+javascript:
+  window.fbAsyncInit = function() {
+    FB.init({status: true, cookie: true, xfbml: true});
+    FB.Event.subscribe('edge.create', function() {
+      $(".coupon-code").show();
+    });
+  };
+
+
+- @other_products = Spree::Product.limit(40)
+- p1 = Spree::Product.find_by_permalink("white_dimension-3")
+- p2 = Spree::Product.find_by_permalink("dramatic-silk")
+- p3 = Spree::Product.find_by_permalink("white_cut_out_dress")
+- p4 = Spree::Product.find_by_permalink("now_you_see_me")
+- p5 = Spree::Product.find_by_permalink("beauty-4")
 
 .wrap.nyemix
+  .grid-container.ilmml-container
+    = link_to "http://www.ilikemymusicloud.com/?utm_campaign=fameandpartners" do
+      = image_tag("campaigns/ilmml.jpg", width: "180")
+    h3.hide In association with I Like My Music Loud
   h1.gothic.black.small.no-separate NYE Party Mix
-  h2 Did we get it right? Like it to vote yes.
+  h2 Like a song to get a $30 voucher
+  .instructions Its easy, just play the songs below and tell us whether we have matched the song to the dress. Click the Like button when you think we nailed it.
   .grid-container
-    - if @products.try(:length) > 0 
-      ul.products-list.grid-container.no-margin
-        - @products.each do |product|
-          li.product-item.grid-20
-            .thumbnail
-              = link_to collection_product_path(product) do
-                = product_image(product, itemprop: "image", width: 243, height: 352, alt: product.name)
-            .name = link_to product.name, collection_product_path(product)
-            .description = product_short_description(product)
+    ul.products-list.grid-container.no-margin
+      li.product-item.grid-20
+        .thumbnail
+          = link_to collection_product_path(p1) do
+            = product_image(p1, itemprop: "image", width: 243, height: 352, alt: p1.name)
+        .name = link_to p1.name, collection_product_path(p1)
+        .description.hide = product_short_description(p1)
+      li.product-item.grid-20
+        .thumbnail
+          = link_to collection_product_path(p2) do
+            = product_image(p2, itemprop: "image", width: 243, height: 352, alt: p2.name)
+        .name = link_to p2.name, collection_product_path(p2)
+        .description.hide = product_short_description(p2)
+      li.product-item.grid-20
+        .thumbnail
+          = link_to collection_product_path(p3) do
+            = product_image(p3, itemprop: "image", width: 243, height: 352, alt: p3.name)
+        .name = link_to p3.name, collection_product_path(p3)
+        .description.hide = product_short_description(p3)
+      li.product-item.grid-20
+        .thumbnail
+          = link_to collection_product_path(p4) do
+            = product_image(p4, itemprop: "image", width: 243, height: 352, alt: p4.name)
+        .name = link_to p4.name, collection_product_path(p4)
+        .description.hide = product_short_description(p4)
+      li.product-item.grid-20
+        .thumbnail
+          = link_to collection_product_path(p5) do
+            = product_image(p5, itemprop: "image", width: 243, height: 352, alt: p5.name)
+        .name = link_to p5.name, collection_product_path(p5)
+        .description.hide = product_short_description(p5)
   .grid-container.soundcloud-container
     .grid-20
       .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/johnlegend/all-of-me-3', class: 'sc-player'
@@ -26,13 +65,36 @@
       .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/lordemusic/royals', class: 'sc-player'
     .grid-20
       .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/rap-up-music/the-monster-eminem-ft-rihanna', class: 'sc-player'
+ 
   .grid-container.soundcloud-container
     .grid-20
-      .fleft like
-      .fright addthisto
-  hr
-  .grid-container
-    h2 All of our dresses
+      .fleft.fbbutton
+        div class="fb-like" data-href="http://www.fameandpartners.com/collection/Long-Dresses/white_dimension-3" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" notify="true"
+      .fright
+    .grid-20
+      .fleft.fbbutton
+        div class="fb-like" data-href="http://www.fameandpartners.com/collection/Long-Dresses/dramatic-silk" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" notify="true"
+      .fright
+    .grid-20
+      .fleft.fbbutton
+        div class="fb-like" data-href="http://www.fameandpartners.com/collection/Long-Dresses/white_cut_out_dress" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" notify="true"
+      .fright
+    .grid-20
+      .fleft.fbbutton
+        div class="fb-like" data-href="http://www.fameandpartners.com/collection/Long-Dresses/now_you_see_me" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" notify="true"
+      .fright
+    .grid-20
+      .fleft.fbbutton
+        div class="fb-like" data-href="http://www.fameandpartners.com/collection/Long-Dresses/beauty-4" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" notify="true"
+      .fright
+  .grid-container.coupon-code.hide
+    .couponcode
+      .title Your Promo code:
+      span Music30
+      .hint $30 off when your order is over $100
+  .grid-container.viewmore-container
+    hr
+    h2 See more of our dresses
     ul.products-list.grid-container
       - @other_products.each do |product|
         li.product-item.grid-25
@@ -43,16 +105,3 @@
                 = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
           - cache ['nyemix', 'product', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
             .name = link_to product.name, collection_product_path(product)
-            .colors
-              - colors[product.id].map(&:name).sort.each do |color|
-                .color{class=color}
-
-.modal.coupon-code
-  .overlay
-  .modal-container
-    .close-lightbox
-    .modal-title Get $30 off your order*
-    .couponcode
-      ' Promo code:
-      span Music30
-    .hint * When your order is over $100
