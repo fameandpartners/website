@@ -5,7 +5,7 @@ javascript:
       $(".coupon-code").show();
     });
   };
-- @other_products = Spree::Product.limit(40)
+- @other_products = Spree::Product.active(current_currency).limit(40)
 
 .wrap.nyemix
   .grid-container.ilmml-container
