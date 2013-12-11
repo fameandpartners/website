@@ -23,11 +23,8 @@
 #
 ---
 environments:
-  production:
-    migrate: false
-    migration_command: rake db:migrate
-    branch: production
   production_blog:
     migrate: true
     migration_command: rake db:migrate
     branch: production
+    precompile_assets: true
