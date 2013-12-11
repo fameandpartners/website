@@ -401,6 +401,10 @@
     display: block;
     overflow: hidden;
   }
+  .addthis_toolbox{
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
   .coupon-code{
     text-align: center;
   }
