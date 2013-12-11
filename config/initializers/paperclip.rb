@@ -1,4 +1,4 @@
-if Rails.env.production?
+if false && Rails.env.production?
   Paperclip::Attachment.default_options.merge!(
     :storage => :s3,
     :path => "/system/:class/:attachment/:id_partition/:style/:filename",
