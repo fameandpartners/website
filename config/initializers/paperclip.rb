@@ -1,13 +1,14 @@
 if Rails.env.production?
   Paperclip::Attachment.default_options.merge!(
     :storage => :s3,
-    :path => "/system/:class/:attachment/:id_partition/:style/:filename",
+    :path => "/system/:attachment/:id/:style/:basename.:extension",
     :url => ":s3_domain_url",
     :s3_credentials => {
       :bucket => configatron.aws.s3.bucket,
       :access_key_id => configatron.aws.s3.access_key_id,
       :secret_access_key => configatron.aws.s3.secret_access_key
-    }
+    },
+    s3_host_alias: 'fameandpartners.s3.amazonaws.com'
   )
 else
   Paperclip::Attachment.default_options.merge!(
