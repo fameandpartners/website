@@ -5,6 +5,6 @@ if Rails.env.staging? && Rails.root.to_s.match('feature')
 end
 if Rails.env.production?
   Tire.configure do
-    url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts].first
+    url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
   end
 end
