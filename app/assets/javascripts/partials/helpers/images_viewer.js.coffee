@@ -35,8 +35,8 @@ window.helpers.buildImagesViewer = (rootElement) ->
     showBigImage: () ->
       bigImageUrl = viewer.currentImages.xlarge
       if bigImageUrl?
-        $.fancybox
-          href: location.origin + bigImageUrl
+        bigImageUrl = (location.origin + bigImageUrl) if !bigImageUrl.match(/^https?:\/\//)
+        $.fancybox href: bigImageUrl
       else
         return false
   }
