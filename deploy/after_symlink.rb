@@ -3,4 +3,6 @@
   run "ln -nfs #{config.shared_path}/#{folder} #{config.release_path}/public/#{folder}"
 end
 
-run "cd #{config.release_path} && bundle exec whenever --update-crontab '#{config.app}_#{config.node[:environment][:framework_env]}'"
+on_app_master do
+  run "cd #{config.release_path} && bundle exec whenever --update-crontab '#{config.app}_#{config.node[:environment][:framework_env]}'"
+end
