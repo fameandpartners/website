@@ -1,20 +1,15 @@
-@include font-face('GranjonLTStd', '/fonts/granjonltstd', 300);
-@include font-face('GranjonLTStd', '/fonts/granjonltstd-italic', 300, italic);
-@include font-face('GranjonLTStd', '/fonts/granjonltstd-bold', 700);
+@include font-face('Novecento', 'novecentosanswide-light', 300);
+@include font-face('Novecento', 'novecentosanswide');
+@include font-face('Novecento', 'novecentosanswide-bold', 700);
 
-@include font-face('Annifont', '/fonts/annifont', 400);
+@include font-face('Didot', 'didot', 400);
+@include font-face('Didot', 'didot-italic', 400, italic);
+@include font-face('Didot', 'didot-bold', 700);
 
-@include font-face('Didot', '/fonts/didot', 400);
-@include font-face('Didot', '/fonts/didot-italic', 400, italic);
-@include font-face('Didot', '/fonts/didot-bold', 700);
+@include font-face('LeagueGothic', 'leaguegothic-regular', 400);
 
-@include font-face('LeagueGothic', '/fonts/leaguegothic-regular', 400);
+@include font-face('Icons', 'icomoon');
 
-@include font-face('Icons', '/fonts/icomoon');
-
-$fontOne: 'Lato', sans-serif;
-$fontTwo: 'GranjonLTStd', serif;
-$fontThree: 'Annifont', serif;
-$fontFour: 'Didot', serif;
-$fontFive: 'LeagueGothic', serif;
-$fontSix: Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif;
+$fontOne: 'Novecento', sans-serif;
+$fontTwo: 'Didot', serif;
+$fontThree: 'LeagueGothic', serif;

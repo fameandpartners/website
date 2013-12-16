@@ -30,6 +30,7 @@ gem 'roo', require: false
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
+gem 'droidcss'
 
 group :assets do
   gem 'bourbon'
