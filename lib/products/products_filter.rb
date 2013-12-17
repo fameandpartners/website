@@ -185,6 +185,11 @@ module Products
       info = Products::BannerInfo.new(self).get
     end
 
+    def colors_with_similar
+      similar_colors = colour.map(&:similars).flatten
+      colour + similar_colors
+    end
+
     protected
 
     def taxons
@@ -230,11 +235,6 @@ module Products
       return nil if colour_names.blank?
       colours = Array.wrap(colour_names).collect{|colour| colour.to_s.downcase.split(/[_-]/).join(' ')}
       Spree::OptionValue.where("lower(name) in (?)", colours).to_a
-    end
-
-    def colors_with_similar
-      similar_colors = colour.map(&:similars).flatten
-      colour + similar_colors
     end
 
     def prepare_bodyshape(bodyshapes)
