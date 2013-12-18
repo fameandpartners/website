@@ -232,7 +232,7 @@ module Products
     end
 
     def prepare_colours(colour_names)
-      return nil if colour_names.blank?
+      return [] if colour_names.blank?
       colours = Array.wrap(colour_names).collect{|colour| colour.to_s.downcase.split(/[_-]/).join(' ')}
       Spree::OptionValue.where("lower(name) in (?)", colours).to_a
     end
