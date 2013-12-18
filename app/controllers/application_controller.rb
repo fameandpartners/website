@@ -243,8 +243,8 @@ class ApplicationController < ActionController::Base
     if first_visit?
       country_code = fetch_user_country_code
       self.current_site_version = SiteVersion.by_permalink_or_default(country_code)
-      if country_code == 'au'
-        redirect_to root_url(site_version: country_code) and return
+      if country_code.eql?('au') && request.get?
+        redirect_to url_for(params.merge(site_version: country_code)) and return
       end
     end
   end
