@@ -250,10 +250,13 @@ namespace :colors do
       option_values.from(index + 1).each do |similar_option_value|
         similar_color = Color::HEX.new(similar_option_value.value).to_lab
 
-        if Color::Base.delta_e_cie2000(original_color, similar_color) < 30
-          original_option_value.similarities.create do |similarity|
-            similarity.similar = similar_option_value
-          end
+        delta_e = Color::Base.delta_e_cie2000(original_color, similar_color)
+
+        if delta_e < 30
+          similarity = original_option_value.similarities.build
+          similarity.similar = similar_option_value
+          similarity.coefficient = delta_e
+          similarity.save
         end
       end
     end

@@ -1,4 +1,6 @@
 class Similarity < ActiveRecord::Base
+  default_scope order('similarities.coefficient ASC')
+
   belongs_to :original,
              class_name: 'Spree::OptionValue'
   belongs_to :similar,
@@ -20,5 +22,9 @@ class Similarity < ActiveRecord::Base
               scope: :original_id
             }
 
-  after_create :create_reverse, unless: :reverse
+  after_create unless: :reverse do
+    create_reverse do |reverse|
+      reverse.coefficient = coefficient
+    end
+  end
 end

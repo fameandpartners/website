@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131116114518) do
+ActiveRecord::Schema.define(:version => 20131218071822) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -413,6 +413,7 @@ ActiveRecord::Schema.define(:version => 20131116114518) do
   create_table "similarities", :force => true do |t|
     t.integer "original_id"
     t.integer "similar_id"
+    t.float   "coefficient"
   end
 
   add_index "similarities", ["original_id"], :name => "index_similarities_on_original_id"
