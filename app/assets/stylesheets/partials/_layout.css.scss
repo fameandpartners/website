@@ -1,0 +1,15 @@
+html, body { height: 100%;}
+body {
+	font-weight: 400;
+	font-size: $fontSize;
+	line-height: 1.2;
+	font-family: $fontOne;
+	text-transform: uppercase;
+}
+
+#wrap {
+	min-height: 100%;
+}
+#push {
+	height: 160px;
+}

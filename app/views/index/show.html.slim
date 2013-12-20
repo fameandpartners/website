@@ -16,7 +16,141 @@
     $(function(){
       track.conversion('sign_up')
     })
-.promo
+
+.content-offer
+  .title
+    ' GET YOUR 
+    em UNIQUE 
+    ' STYLE.
+  .fright
+    .text-with-arrow 
+      ' Lorem ipsum dolor sit amet, consectetu,
+      br
+      ' Integer vel felis sit amet massa conguet.
+      .arrow
+    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
+
+.landing-promo
+  .grid-container
+    .row
+      .grid-8
+        .picture-large 
+          = link_to '#' do
+            = image_tag '_sample/promo-large.jpg'
+      .grid-4
+        .picture-small 
+          = link_to '#' do
+            = image_tag '_sample/promo-small-1.jpg'
+        .picture-small 
+          = link_to '#' do
+            = image_tag '_sample/promo-small-2.jpg'    
+
+.how-it-works
+  .arrows-line
+  h2.section-title How it WORKS
+  .grid-container
+    .row
+      .grid-4
+        .step
+          = image_tag '_front/step-1.jpg'
+          h3.step-title.white
+            ' FIND
+            br
+            ' YOUR STYLE
+          .line-top  
+          .line-bottom  
+      .grid-4
+        .step
+          = image_tag '_front/step-2.jpg'
+          h3.step-title
+            ' DISCOVER
+            br
+            ' YOUR DRESS
+          .line-top  
+          .line-bottom    
+      .grid-4
+        .step
+          = image_tag '_front/step-3.jpg'
+          h3.step-title.pink-shadow
+            ' CREATE YOUR
+            br
+            ' UNIQUE LOOK
+          .line-top  
+          .line-bottom    
+.create-your-look
+  .section-title
+    em.mark CREATE
+    br
+    ' YOUR 
+    em LOOK 
+    ' NOW
+  .arrows-line
+  .grid-container
+    .row
+      .grid-4
+        .frame
+          = image_tag '_front/frame.jpg'
+          .text
+            .title 
+              em FEATURED
+              br
+              ' BLOGGER
+            .rss  
+      .grid-4.face-holder
+        .face
+          = image_tag '_front/face.jpg'
+      .grid-4
+        .text
+          .title 
+            em SUSIE
+            br
+            ' BUBBLE
+          p 
+            ' Lorem ipsum dolor sit amet, consectetu, Intege
+            br
+            ' vel felis sit amet massa conguet.  
+        = link_to 'VIEW MORE', '#', class: 'btn small'
+.pictures-gallery
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-1.jpg'
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-2.jpg'
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-3.jpg'
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-4.jpg'
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-2.jpg'
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-1.jpg' 
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-4.jpg'
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-3.jpg'
+  .arrows-line
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-1.jpg'
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-2.jpg'
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-3.jpg'
+  .section
+    = link_to '#' do
+      = image_tag '_sample/catalog-4.jpg'    
+
+
+/ .promo
   .wrap
     #main-promo.promo-image
       ul.slides
@@ -35,7 +169,7 @@
         a href="#" 3
     
 
-.home-images
+/ .home-images
   .wrap
     = link_to collection_path(edits: 'neon'), class: 'image' do
       = image_tag 'homepage/neon1.jpg'
@@ -46,7 +180,7 @@
     = link_to '#', class: 'show-style-quiz image large' do
       = image_tag 'homepage/right.jpg'
 
-.blog-posts-preview
+/ .blog-posts-preview
   .wrap.no-overflow
     .blog-post
       .label Blog
@@ -60,7 +194,7 @@
       = link_to personalization_path(cf: 'homefeature'), title: "Customised Dresses - Create your perfect dress", class: 'image-preview' do
         = image_tag 'homepage/customdresses.jpg'
 
-- if featured_products.length > 0
+/ - if featured_products.length > 0
   .featured-dresses
     .wrap.no-overflow
       .page-name

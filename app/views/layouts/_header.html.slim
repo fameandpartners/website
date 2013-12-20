@@ -1,134 +1,212 @@
 - links_cache_key = ['header-top-links', current_site_version.is_australia?, current_spree_user.try(:cache_key)]
 - cache links_cache_key, expires_in: configatron.cache.expire.long do
   .top-links
-    .wrap.no-overflow
-      nav.fleft
-        ul
-          - if current_site_version.is_australia?
-            li = link_to 'Australia Home', root_path, class: 'top-icon link-root'
-            li.top-icon.phone order on the phone / customer service 1300 924 860
-          - else                                                       
-            li = link_to 'USA Home', root_path, class: 'top-icon link-root'
-      .fright
-        nav.fleft
+    / nav.fleft
+    /   ul
+    /     - if current_site_version.is_australia?
+    /       li = link_to 'Australia Home', root_path, class: 'top-icon link-root'
+    /       li.top-icon.phone order on the phone / customer service 1300 924 860
+    /     - else                                                       
+    /       li = link_to 'USA Home', root_path, class: 'top-icon link-root'
+    .site-version
+      .current-version
+        span SHIPPING TO
+        .site-version-switch
+          em Australia
+          i.icon-dropdown-down
           ul
-            - unless spree_user_signed_in?
-              li = link_to 'sign up', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
-              li = link_to 'log-in', spree_login_path, class: 'link-login'
-            - else
-              li.loggedin
-                .dropdown-trigger
-                  - if current_spree_user.image.present?
-                    .avatar
-                      = image_tag current_spree_user.image, width: 20
-                  =' current_spree_user.full_name
-                .dropdown-menu
-                  ul
-                    li = link_to 'account settings', profile_path
-                    li = link_to 'your orders', user_orders_path
-                    li = link_to 'style profile', styleprofile_path
-                    li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
-        .site-version.fright
-          .current-version
-            = image_tag "flags/#{current_site_version.code}.png", width: 16, height: 11, alt: "#{current_site_version.code}"
-            i.icon.icon-dropdown-down
-          .site-version-switch
+            li = link_to 'Australia', site_version_path('au')
+            li = link_to 'USA', site_version_path('us')
+    nav.user-nav
+      - unless spree_user_signed_in?
+        .no-loggedin
+          =' link_to 'login', spree_login_path, class: 'link-login'
+          span 
+            ' /
+          =' link_to 'register', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
+      - else
+        .loggedin
+          .dropdown-trigger
+            - if current_spree_user.image.present?
+              .avatar
+                = image_tag current_spree_user.image, width: 20
+            =' current_spree_user.full_name
+          .dropdown-menu
             ul
-              li
-                = link_to site_version_path('au') do
-                  = image_tag 'flags/au.png', width: 16, height: 11, alt: 'Australia'
-                  ' Australia
-              li
-                = link_to site_version_path('us') do
-                  = image_tag 'flags/us.png', width: 16, height: 11, alt: 'USA'
-                  ' USA
-header class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
-  .header-wrapper
-    .first-level
-      .logo = link_to 'fame&partners', root_path
-      .tag-line Formal dresses for fashion mavens
-    .second-level
-      .wrap.no-overflow
-        ul.icons
-          li
-            = link_to why_us_path+"#shipping" do
-              .icon.shipping
-              span
-                ' free
-                br
-                ' shipping
-          li
-            = link_to why_us_path+"#returns" do
-              .icon.returns
-              span
-                ' free
-                br
-                ' returns
-          li
-            = link_to why_us_path+"#fit" do
-              .icon.guarantee
-              span
-                ' fit
-                br
-                ' guarantee
-          - unless sale_active?
-            li
-              = link_to why_us_path+"#customisation" do
-                .icon.customization
-                span
-                  ' free
-                  br
-                  =' t(:customization)
-          
-          li
-            = link_to why_us_path+"#advice" do
-              .icon.tips
-              span
-                ' free
-                br
-                ' styling advice
-        .search.fleft
-          = form_tag search_path, method: :get do
-            input type="text" name="q" placeholder="search formal dresses"
-        .fright
-          .wishlist = link_to 'wish list', wishlist_path, class: 'wishlist-link'
-          .shopping-bag
-            = link_to spree.cart_path, class: 'shopping-bag-toggler' do
-              .counter = current_order(true).item_count
-              ' shopping bag
-            = render 'layouts/shopping_bag_content'
+              li = link_to 'account settings', profile_path
+              li = link_to 'your orders', user_orders_path
+              li = link_to 'style profile', styleprofile_path
+              li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
+      
+header.header-global class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
+  .logo
+    span.fap-icon-logo.black
+      span.fap-icon-logo.white
+.nav-site
+  nav
+    ul 
+      li
+        = link_to why_us_path+"#shipping" do
+          span.icon-holder
+            span.fap-icon-dollar
+            span.fap-icon-erase
+          span
+            ' free
+            br
+            ' shipping
+      li
+        = link_to why_us_path+"#returns" do
+          span.icon-holder
+            span.fap-icon-arrows
+          span
+            ' free
+            br
+            ' returns
+      li
+        = link_to why_us_path+"#fit" do
+          span.icon-holder
+            span.fap-icon-guarantee
+          span
+            ' fit
+            br
+            ' guarantee
+      - unless sale_active?
+        li
+          = link_to why_us_path+"#customisation" do
+            span.icon-holder
+              span.fap-icon-cutline
+              span.fap-icon-scissors
+            span
+              ' free
+              br
+              =' t(:customization)
+      li
+        = link_to why_us_path+"#advice" do
+          span.icon-holder
+            span.fap-icon-comment
+          span
+            ' free
+            br
+            ' styling advice
+  .fright
+    .search
+      = form_tag search_path, method: :get do
+        input type="text" name="q" placeholder="search for dresses"
+        .arrow
+    .cart 
+      .wishlist 
+        = link_to wishlist_path, class: 'wishlist-link' do
+          span.icon-heart
+          span wish list
+      .shopping-bag
+        = link_to spree.cart_path, class: 'shopping-bag-toggler' do
+          span.counter = current_order(true).item_count
+          ' shopping bag
+        / = render 'layouts/shopping_bag_content'
+.nav-user
+  nav.fleft
+    ul
+      li = link_to 'CREATE YOUR LOOK', '#', class: 'btn'
+      li 
+        = link_to collection_path, class: 'btn' do
+          span COLLECTIONS
+          span.icon-dropdown-down
+      li = link_to 'ABOUT US', about_us_path, class: 'btn'
+  
+  nav.fright
+    ul
+      li = link_to 'WHY SHOP WITH US?', why_us_path, class: 'btn'
+  = link_to '#', class: 'offer' do
+    span.p.title FORMAL DRESSES FOR FASHION MAVENS
+    span.p Lorem ipsum dolor sit amet, consectetu    
+  
 
-    .third-level
-      .wrap.no-overflow
-        nav
-          ul.clearfix
-            li.with-dropdown *{:class => request_path?('/products') && 'active' }
-              = link_to 'collection', collection_path, title: "formal dresses fame & partners"
-              .dropdown-menu-wrapper
-                .dropdown-menu
-                  .dropdown-title
-                    ' browse our collection
-                    .link.fright = link_to 'view entire collection', collection_path, title: "browse our collection of formal dresses"
-                  ul
-                    - cache ['header', 'ranges'], :expires_in => configatron.cache.expire.long do
-                      - available_product_ranges.each do |taxon|
-                        li
-                          = link_to collection_taxon_path(taxon) do
-                            .range-image
-                              = image_tag "dropdown/#{taxon.name.downcase.gsub(/\s+/, "")}.jpg", width: 150, height: 150, alt: taxon.name
-                            = taxon.name
-            li = link_to 'custom dresses', custom_dresses_path, title: "fame & partners custom dresses", class: 'inverse'
-            - if personalised_store_available?
-              li *{:class => request_path?("#{my_boutique_path}") && 'active' }
-                = link_to 'personalised boutique', my_boutique_path
-            - else
-              li = link_to 'personalised boutique', '#', :class => 'show-style-quiz'
-            li *{:class => request_path?("#{how_it_works_path}") && 'active' }
-              = link_to 'about us', about_us_path, title: "about fame & partners"
-            li = link_to 'why shop with us?', why_us_path, title: "fame & partners why shop with us?" 
-            li = link_to 'blog', blog_url, title: "fame & partners blog", target: "_blank"
-            - unless spree_user_signed_in? && current_spree_user.style_profile.present?
-              li = link_to 'style quiz', '#', :class => 'show-style-quiz'
+  / .header-wrapper
+  /   .first-level
+  /     .logo = link_to 'fame&partners', root_path
+  /     .tag-line Formal dresses for fashion mavens
+  /   .second-level
+  /     .wrap.no-overflow
+  /       ul.icons
+  /         li
+  /           = link_to why_us_path+"#shipping" do
+  /             .icon.shipping
+  /             span
+  /               ' free
+  /               br
+  /               ' shipping
+  /         li
+  /           = link_to why_us_path+"#returns" do
+  /             .icon.returns
+  /             span
+  /               ' free
+  /               br
+  /               ' returns
+  /         li
+  /           = link_to why_us_path+"#fit" do
+  /             .icon.guarantee
+  /             span
+  /               ' fit
+  /               br
+  /               ' guarantee
+  /         - unless sale_active?
+  /           li
+  /             = link_to why_us_path+"#customisation" do
+  /               .icon.customization
+  /               span
+  /                 ' free
+  /                 br
+  /                 =' t(:customization)
+          
+  /         li
+  /           = link_to why_us_path+"#advice" do
+  /             .icon.tips
+  /             span
+  /               ' free
+  /               br
+  /               ' styling advice
+  /       .search.fleft
+  /         = form_tag search_path, method: :get do
+  /           input type="text" name="q" placeholder="search formal dresses"
+  /       .fright
+  /         .wishlist = link_to 'wish list', wishlist_path, class: 'wishlist-link'
+  /         .shopping-bag
+  /           = link_to spree.cart_path, class: 'shopping-bag-toggler' do
+  /             .counter = current_order(true).item_count
+  /             ' shopping bag
+  /           = render 'layouts/shopping_bag_content'
+
+  /   .third-level
+  /     .wrap.no-overflow
+  /       nav
+  /         ul.clearfix
+  /           li.with-dropdown *{:class => request_path?('/products') && 'active' }
+  /             = link_to 'collection', collection_path, title: "formal dresses fame & partners"
+  /             .dropdown-menu-wrapper
+  /               .dropdown-menu
+  /                 .dropdown-title
+  /                   ' browse our collection
+  /                   .link.fright = link_to 'view entire collection', collection_path, title: "browse our collection of formal dresses"
+  /                 ul
+  /                   - cache ['header', 'ranges'], :expires_in => configatron.cache.expire.long do
+  /                     - available_product_ranges.each do |taxon|
+  /                       li
+  /                         = link_to collection_taxon_path(taxon) do
+  /                           .range-image
+  /                             = image_tag "dropdown/#{taxon.name.downcase.gsub(/\s+/, "")}.jpg", width: 150, height: 150, alt: taxon.name
+  /                           = taxon.name
+  /           li = link_to 'custom dresses', custom_dresses_path, title: "fame & partners custom dresses", class: 'inverse'
+  /           - if personalised_store_available?
+  /             li *{:class => request_path?("#{my_boutique_path}") && 'active' }
+  /               = link_to 'personalised boutique', my_boutique_path
+  /           - else
+  /             li = link_to 'personalised boutique', '#', :class => 'show-style-quiz'
+  /           li *{:class => request_path?("#{how_it_works_path}") && 'active' }
+  /             = link_to 'about us', about_us_path, title: "about fame & partners"
+  /           li = link_to 'why shop with us?', why_us_path, title: "fame & partners why shop with us?" 
+  /           li = link_to 'blog', blog_url, title: "fame & partners blog", target: "_blank"
+  /           - unless spree_user_signed_in? && current_spree_user.style_profile.present?
+  /             li = link_to 'style quiz', '#', :class => 'show-style-quiz'
 
   javascript:
     window.bootstrap = {}

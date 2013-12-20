@@ -135,10 +135,10 @@ $('.ecommerce').ready(function(){
   });
 });
 
-$(document).ready(function() {
+$(function() {
   $('.current-version').on('click', function() {
     $(this).toggleClass('active');
-    $('.site-version-switch').toggle();
+    $('.site-version-switch ul').toggle();
   })
 });
 

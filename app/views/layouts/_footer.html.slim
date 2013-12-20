@@ -1,4 +1,22 @@
-footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
+footer.footer-global
+  .arrows-line
+  nav.nav-footer
+    ul.fleft
+      li = link_to 'COLLECTIONS', collection_path, class: 'btn small empty'
+      li = link_to 'STYLE INSPIRATION', '#', class: 'btn small empty'
+      li = link_to 'ABOUT US', about_us_path, class: 'btn small empty'
+      li = link_to 'TEAM', team_path, class: 'btn small empty'
+    .logo 
+      span.fap-icon-logo  
+    ul.fright
+      li = link_to 'HELP', faqs_path, class: 'btn small empty'
+      li = link_to 'TERMS & CONDITIONS', terms_path, class: 'btn small empty'
+      li.active = link_to 'SIGN UP FOR OUR NEWSLETTER', '#', class: 'btn small empty'
+  .arrows-line
+  .copy 
+    ' &copy; 2013 Fame & Partners – All Rights Reserved
+    
+/ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .grid-container
     .grid-20.prefix-3.links
       .title Collection

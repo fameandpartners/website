@@ -1,9 +1,15 @@
 @import 'droidcss/mixins';
 
 @import 'partials/setup';
+@import 'partials/mixins';
 @import 'partials/fonts';
+@import 'partials/icons';
+@import 'partials/global_elements';
 
 @import 'droidcss/base';
 
 @import 'partials/layout';
+@import 'partials/header';
+@import 'partials/footer';
+@import 'partials/front';
 @import 'partials/views';

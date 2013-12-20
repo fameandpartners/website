@@ -47,3 +47,59 @@
 .icon-logo:before {
   content: "\e00c";
 }
+
+
+
+.fap-icon-customize, 
+.fap-icon-scissors, 
+.fap-icon-cutline, 
+.fap-icon-guarantee, 
+.fap-icon-comment, 
+.fap-icon-arrows,
+.fap-icon-logo,
+.fap-icon-price-free,
+.fap-icon-erase, 
+.fap-icon-dollar {
+  font-family: 'FAPIcons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fap-icon-customize:before {
+  content: "\e600";
+}
+.fap-icon-scissors:before {
+  content: "\e601";
+}
+.fap-icon-cutline:before {
+  content: "\e602";
+}
+.fap-icon-guarantee:before {
+  content: "\e603";
+}
+.fap-icon-comment:before {
+  content: "\e604";
+}
+.fap-icon-arrows:before {
+  content: "\e605";
+}
+.fap-icon-logo:before {
+  content: "\e606";
+}
+.fap-icon-price-free:before {
+  content: "\e607";
+}
+.fap-icon-erase:before {
+  content: "\e608";
+}
+.fap-icon-dollar:before {
+  content: "\e609";
+}

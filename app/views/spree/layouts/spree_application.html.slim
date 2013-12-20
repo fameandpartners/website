@@ -9,7 +9,7 @@ doctype html
     - if content_for?(:payment_gateway)
       = yield :payment_gateway
   body class="ecommerce #{controller_action_class}" id=(controller_action_id)
-    .m-pixel
+    / .m-pixel
       img src="http://tags.rtbidder.net/track?sid=525645858bc06f1060d9e531" width="0" height="0" border="0" alt=""
       - if session.delete(:signed_up_just_now)
         img src="http://tags.rtbidder.net/convert?sid=52564c5b8bc06f1060da28a2" width="0" height="0" border="0" alt=""
@@ -46,7 +46,7 @@ doctype html
       = render 'shared/dolly_campaign_popup'
       = newsletter_modal_popup
       #push
-      .fixed-bar style="position: fixed; top: -300px; width: 100%; height: 106px; background-color: rgba(255, 255, 255, 1); z-index: 2001;"
+      / .fixed-bar style="position: fixed; top: -300px; width: 100%; height: 106px; background-color: rgba(255, 255, 255, 1); z-index: 2001;"
         = cached_header
         .top-bar style="top: 62px;"
           = render 'shared/top_bar_inner'
