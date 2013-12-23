@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Arapey:400italic,400);
+
 @include font-face('Novecento', 'novecentosanswide-light', 300);
 @include font-face('Novecento', 'novecentosanswide');
 @include font-face('Novecento', 'novecentosanswide-bold', 700);
@@ -10,7 +12,9 @@
 
 @include font-face('Icons', 'icomoon');
 @include font-face('FAPIcons', 'fap-icons');
+@include font-face('Icon Numbers', 'icon-numbers');
 
 $fontOne: 'Novecento', sans-serif;
 $fontTwo: 'Didot', serif;
 $fontThree: 'LeagueGothic', serif;
+$fontFour: 'Arapey', serif;

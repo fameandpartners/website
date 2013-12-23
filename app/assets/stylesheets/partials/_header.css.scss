@@ -87,6 +87,10 @@
 			display: inline-block;
 			vertical-align: top;
 			padding-left: 14px;
+			&.active > a {
+				color: #000;
+				background-color: $pinkColor;
+			}
 		}
 		a {
 			display: inline-block;

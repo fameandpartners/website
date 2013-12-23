@@ -3,6 +3,7 @@
 	margin-top: -160px;
 	text-transform: uppercase;
 	padding-top: 15px;
+	@extend .centered-layout;
 	.copy {
 		text-align: center;
 		line-height: 67px;

@@ -37,88 +37,88 @@
               li = link_to 'your orders', user_orders_path
               li = link_to 'style profile', styleprofile_path
               li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
-      
-header.header-global class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
-  .logo
-    span.fap-icon-logo.black
-      span.fap-icon-logo.white
-.nav-site
-  nav
-    ul 
-      li
-        = link_to why_us_path+"#shipping" do
-          span.icon-holder
-            span.fap-icon-dollar
-            span.fap-icon-erase
-          span
-            ' free
-            br
-            ' shipping
-      li
-        = link_to why_us_path+"#returns" do
-          span.icon-holder
-            span.fap-icon-arrows
-          span
-            ' free
-            br
-            ' returns
-      li
-        = link_to why_us_path+"#fit" do
-          span.icon-holder
-            span.fap-icon-guarantee
-          span
-            ' fit
-            br
-            ' guarantee
-      - unless sale_active?
+.centered-layout      
+  header.header-global class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
+    .logo
+      span.fap-icon-logo.black
+        span.fap-icon-logo.white
+  .nav-site
+    nav
+      ul 
         li
-          = link_to why_us_path+"#customisation" do
+          = link_to why_us_path+"#shipping" do
             span.icon-holder
-              span.fap-icon-cutline
-              span.fap-icon-scissors
+              span.fap-icon-dollar
+              span.fap-icon-erase
             span
               ' free
               br
-              =' t(:customization)
-      li
-        = link_to why_us_path+"#advice" do
-          span.icon-holder
-            span.fap-icon-comment
-          span
-            ' free
-            br
-            ' styling advice
-  .fright
-    .search
-      = form_tag search_path, method: :get do
-        input type="text" name="q" placeholder="search for dresses"
-        .arrow
-    .cart 
-      .wishlist 
-        = link_to wishlist_path, class: 'wishlist-link' do
-          span.icon-heart
-          span wish list
-      .shopping-bag
-        = link_to spree.cart_path, class: 'shopping-bag-toggler' do
-          span.counter = current_order(true).item_count
-          ' shopping bag
-        / = render 'layouts/shopping_bag_content'
-.nav-user
-  nav.fleft
-    ul
-      li = link_to 'CREATE YOUR LOOK', '#', class: 'btn'
-      li 
-        = link_to collection_path, class: 'btn' do
-          span COLLECTIONS
-          span.icon-dropdown-down
-      li = link_to 'ABOUT US', about_us_path, class: 'btn'
-  
-  nav.fright
-    ul
-      li = link_to 'WHY SHOP WITH US?', why_us_path, class: 'btn'
-  = link_to '#', class: 'offer' do
-    span.p.title FORMAL DRESSES FOR FASHION MAVENS
-    span.p Lorem ipsum dolor sit amet, consectetu    
+              ' shipping
+        li
+          = link_to why_us_path+"#returns" do
+            span.icon-holder
+              span.fap-icon-arrows
+            span
+              ' free
+              br
+              ' returns
+        li
+          = link_to why_us_path+"#fit" do
+            span.icon-holder
+              span.fap-icon-guarantee
+            span
+              ' fit
+              br
+              ' guarantee
+        - unless sale_active?
+          li
+            = link_to why_us_path+"#customisation" do
+              span.icon-holder
+                span.fap-icon-cutline
+                span.fap-icon-scissors
+              span
+                ' free
+                br
+                =' t(:customization)
+        li
+          = link_to why_us_path+"#advice" do
+            span.icon-holder
+              span.fap-icon-comment
+            span
+              ' free
+              br
+              ' styling advice
+    .fright
+      .search
+        = form_tag search_path, method: :get do
+          input type="text" name="q" placeholder="search for dresses"
+          .arrow
+      .cart 
+        .wishlist 
+          = link_to wishlist_path, class: 'wishlist-link' do
+            span.icon-heart
+            span wish list
+        .shopping-bag
+          = link_to spree.cart_path, class: 'shopping-bag-toggler' do
+            span.counter = current_order(true).item_count
+            ' shopping bag
+          / = render 'layouts/shopping_bag_content'
+  .nav-user
+    nav.fleft
+      ul
+        li = link_to 'CREATE YOUR LOOK', '#', class: 'btn'
+        li 
+          = link_to collection_path, class: 'btn' do
+            span COLLECTIONS
+            span.icon-dropdown-down
+        li = link_to 'ABOUT US', about_us_path, class: 'btn'
+    
+    nav.fright
+      ul
+        li = link_to 'WHY SHOP WITH US?', why_us_path, class: 'btn'
+    = link_to '#', class: 'offer' do
+      span.p.title FORMAL DRESSES FOR FASHION MAVENS
+      span.p Lorem ipsum dolor sit amet, consectetu    
   
 
   / .header-wrapper

@@ -1,55 +1,183 @@
-.wrap.about-page
-  h1.gothic.black.small.no-separate About us
+.about-page
+  .content-offer
+    .title
+      ' GET YOUR 
+      em UNIQUE 
+      ' STYLE.
+    .fright
+      .text-with-arrow 
+        ' Lorem ipsum dolor sit amet, consectetu,
+        br
+        ' Integer vel felis sit amet massa conguet.
+        .arrow
+      = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
   
-  .grid-container
-    .row
-      .grid-65
-        .about-title What are we?
-        p The destination for girls to discover, explore and craft current, cool and individual looks for their special occasions.
-        .about-title Who are we?
-        p We are girls that love fashion and technology. The mish mash of the two means that millions of girls are inspiring other girls, every day, with style inspiration; we love that this sharing is shaping a culture of girls that want an individual look.
-        p Fame & Partners is here to bring the global community of style arbiters to special occasion wear. We celebrate each girl’s individuality and help her craft a look that is special, just like her, inspired by the style of those in the world around her, for her special occasion.
-        p The team at Fame & Partners celebrates creativity, intelligence and individuality; we love the new, the different, the quirky… and the plain weird. We love the complexities of what being a woman is. Because of this, we believe that fashion is a form of self-expression to be celebrated; and what better time to do so than at a special occasion.
-        .about-title How we do it different.
-        p We have started The Fame Chain to inspire girls across the globe with the most current catalogue of what’s trending for special occasion inspiration. We use this to get instant access to what you want, right now. It’s our promise to have the most current looks available as you want them.
-        .benefits-title When you come to Fame & Partners, we help you:
-        ul.benefits-list
-          li
-            .icon
-              span.icon-tickmark
-            .text
-              span Discover:
-              '  Dive into your style profile and the dresses we suspect will suit you best;
-          li
-            .icon
-              span.icon-tickmark
-            .text
-              span Explore:
-              '  Immerse yourself in our dresses; understand what inspired us to make them, what inspires us about wearing them and hopefully share some of your inspiration too;
-          li
-            .icon
-              span.icon-tickmark
-            .text
-              span Create:
-              '  Make customisations that will ensure the dress is totally unique to you;
-          li
-            .icon
-              span.icon-tickmark
-            .text
-              span Style:
-              '  Workshop your total look with our in house stylists who are here to put the finishing touches on your look; we will actively source the coolest accessories to suit you.
-        .about-title Why do we exist?
-        p We exist to inspire girls in the discovery of their own unique style and craft a current special occasion look they love.
-        / 
-          .about-title The Team
-          p There are no limits at Fame & Partners; we encourage every team member to find their own talents, their own look, their own inspiration and see where they land...
+  .about-boxes.grid-container
+    .table-row.row
+      .grid-6.with-bg
+        h3 
+          em What 
+          br
+          ' are we?
+        h4 
+          ' THE DESTINATION FOR GIRLS TO DISCOVER, 
+          br
+          ' EXPLORE AND CRAFT CURRENT, 
+          br
+          ' COOL AND INDIVIDUAL LOOKS FOR THEIR SPECIAL OCCASIONS.  
+        .arrows-line-vertical  
+      .grid-6 
+        h3 
+          em Who 
+          br
+          ' are we?
+        h4 
+          ' WE ARE GIRLS THAT LOVE FASHION AND TECHNOLOGY.
+          br
+          ' THE MISH MASH OF THE TWO MEANS THAT MILLIONS OF GIRLS ARE INSPIRING OTHER GIRLS, EVERY DAY, WITH STYLE INSPIRATION; WE LOVE THAT THIS SHARING IS SHAPING 
+          br
+          ' A CULTURE OF GIRLS THAT WANT AN INDIVIDUAL LOOK.
+        p Fame & Partners is here to bring the global community of style arbiters to special occasion wear.We celebrate each girl’s individuality and help her craft a look that is special, just like her, inspired by the style of those in the world around her, for her special occasion.
+        p The team at Fame & Partners celebrates creativity, intelligence and individuality; we love the new, the different, the quirky… and the plain weird. We love the complexities of what being a woman is. Because of this, we believe that fashion is a form of self-expression to be celebrated; and what better time to do so than at a special occasion.  
+      .icon-heart
+    .table-row.row
+      .grid-6
+        h3 
+          em How we do it
+          br
+          ' DIFFERENT
+        h4 WE HAVE STARTED THE FAME CHAIN TO INSPIRE GIRLS ACROSS THE GLOBE WITH THE MOST CURRENT CATALOGUE OF WHAT’S TRENDING FOR SPECIAL OCCASION INSPIRATION.
+        p We use this to get instant access to what you want, right now. It’s our promise to have the most current looks available as you want them.
+        .arrows-line-vertical  
+      .grid-6.with-bg 
+        h3 
+          em Why
+          br
+          ' DO WE EXIST?
+        h4 WE EXIST TO INSPIRE GIRLS IN THE DISCOVERY OF THEIR OWN UNIQUE STYLE AND CRAFT A CURRENT SPECIAL OCCASION LOOK THEY LOVE.   
+      .arrows-line-horizontal    
 
+    .benefits
+      h2 
+        ' WHEN YOU COME TO FAME & PARTNERS, 
+        br
+        em WE HELP YOU:
+      .row
+        .grid-3
+          .text
+            h3 DISCOVER
+            p Dive into your style profile and the dresses we suspect will suit you best.
+          span.numbers.icon-number-one
+          .arrows-line-horizontal
+        .grid-3
+          .text
+            h3
+              em EXPLORE
+            p Immerse yourself in our dresses; understand what inspired us to make them, what inspires us about wearing them and hopefully share some of your inspiration too.
+          span.numbers.icon-number-two
+          .arrows-line-horizontal
+        .grid-3
+          .text
+            h3 CREATE
+            p Make customisations that will ensure the dress is totally to you.
+          span.numbers.icon-number-three
+          .arrows-line-horizontal
+        .grid-3
+          .text
+            h3
+              em STYLE
+            p Workshop your total look with our in house stylisT who are here to put the finishing touches on your look; we will actively source the coolest accessories to suit you.
+          span.numbers.icon-number-four    
+          .arrows-line-horizontal
 
-      .grid-35
-        = image_tag 'about/photo-1.jpg', width: 290, height: 342, alt: '', class: 'rotate rotate-1'
-        = image_tag 'about/photo-2.jpg', width: 294, height: 346, alt: '', class: 'rotate rotate-2'
-        = image_tag 'about/photo-3.jpg', width: 294, height: 347, alt: '', class: 'rotate rotate-3'
-        = image_tag 'about/photo-4.jpg', width: 273, height: 324, alt: '', class: 'rotate rotate-4'
+    .team
+      h2 
+        em 
+          ' the TEAM
+          / span.fap-icon-hexagon
+          / span.fap-icon-hexagon
+        small 
+          ' There are no limits at Fame & Partners;
+          br
+          ' we encourage every team member to find their own talents,
+          br
+          ' their own look, their own inspiration and see  where they land…
+      .row
+        .grid-4
+          .portrait
+            = image_tag 'http://www.leonneal.com/blog/wp-content/uploads/2010/05/Cameron-portrait1.jpg'
+            .mask
+          .info
+            h6 CEO & Co-Founder:
+            h4 NYREE CORBY
+            h6 First formal event
+            p I was rocking metallic back then and spray painted a pair of cheap Payless Shoes with silver spray paint; teeming it with a low back ivory dress and vintage gem stone bangle I sourced at the local St Vincents.
+            h6 How has your style evolved today
+            p My style is boho/glam when dressed up and boho/edgy for every day. I am seriously inspired by the big wide world around me; what we can build, create, manifest I just find awe-inspiring. Crafting daily looks is part of this ritual of self-expression for me. I love helping other girls do the same.
+            h6 Why did you start Fame & Partners
+            p I love getting dressed up but was so underwhelmed by the lack of inspiring formal wear options at accessible prices… so I decided to do something about it. 
+            h6 My Style
+            p will this be another gallery widget? or a link out?
+
+          .portrait
+            = image_tag 'http://www.leonneal.com/blog/wp-content/uploads/2010/05/Cameron-portrait1.jpg'
+            .mask
+          .info
+            h6 Creative Director:
+            h4 THYRA ELLICOTT
+            h6 First formal event
+            p I was rocking metallic back then and spray painted a pair of cheap Payless Shoes with silver spray paint; teeming it with a low back ivory dress and vintage gem stone bangle I sourced at the local St Vincents.
+            h6 How has your style evolved today
+            p My style is boho/glam when dressed up and boho/edgy for every day. I am seriously inspired by the big wide world around me; what we can build, create, manifest I just find awe-inspiring. Crafting daily looks is part of this ritual of self-expression for me. I love helping other girls do the same.
+            h6 Why did you start Fame & Partners
+            p I love getting dressed up but was so underwhelmed by the lack of inspiring formal wear options at accessible prices… so I decided to do something about it. 
+            h6 My Style
+            p will this be another gallery widget? or a link out?
+        .grid-4.align
+          .portrait
+            = image_tag 'http://www.leonneal.com/blog/wp-content/uploads/2010/05/Cameron-portrait1.jpg'
+            .mask
+          .info
+            h6 CTO & Co-Founder:
+            h4 ELTON STEWART
+            h6 First formal event
+            p I was rocking metallic back then and spray painted a pair of cheap Payless Shoes with silver spray paint; teeming it with a low back ivory dress and vintage gem stone bangle I sourced at the local St Vincents.
+            h6 How has your style evolved today
+            p My style is boho/glam when dressed up and boho/edgy for every day. I am seriously inspired by the big wide world around me; what we can build, create, manifest I just find awe-inspiring. Crafting daily looks is part of this ritual of self-expression for me. I love helping other girls do the same.
+            h6 Why did you start Fame & Partners
+            p I love getting dressed up but was so underwhelmed by the lack of inspiring formal wear options at accessible prices… so I decided to do something about it. 
+            h6 My Style
+            p will this be another gallery widget? or a link out?
+          .portrait
+            = image_tag 'http://www.leonneal.com/blog/wp-content/uploads/2010/05/Cameron-portrait1.jpg'
+            .mask
+          .info
+            h6 COO:
+            h4 NIKEE POMPER
+            h6 First formal event
+            p I was rocking metallic back then and spray painted a pair of cheap Payless Shoes with silver spray paint; teeming it with a low back ivory dress and vintage gem stone bangle I sourced at the local St Vincents.
+            h6 How has your style evolved today
+            p My style is boho/glam when dressed up and boho/edgy for every day. I am seriously inspired by the big wide world around me; what we can build, create, manifest I just find awe-inspiring. Crafting daily looks is part of this ritual of self-expression for me. I love helping other girls do the same.
+            h6 Why did you start Fame & Partners
+            p I love getting dressed up but was so underwhelmed by the lack of inspiring formal wear options at accessible prices… so I decided to do something about it. 
+            h6 My Style
+            p will this be another gallery widget? or a link out?
+            p 
+        .grid-4
+          .portrait
+            = image_tag 'http://www.leonneal.com/blog/wp-content/uploads/2010/05/Cameron-portrait1.jpg'
+            .mask
+          .info
+            h6 CHIEF STYLIST:
+            h4 TAMARA LOCKWOOD
+            h6 First formal event
+            p I was rocking metallic back then and spray painted a pair of cheap Payless Shoes with silver spray paint; teeming it with a low back ivory dress and vintage gem stone bangle I sourced at the local St Vincents.
+            h6 How has your style evolved today
+            p My style is boho/glam when dressed up and boho/edgy for every day. I am seriously inspired by the big wide world around me; what we can build, create, manifest I just find awe-inspiring. Crafting daily looks is part of this ritual of self-expression for me. I love helping other girls do the same.
+            h6 Why did you start Fame & Partners
+            p I love getting dressed up but was so underwhelmed by the lack of inspiring formal wear options at accessible prices… so I decided to do something about it. 
+            h6 My Style
+            p will this be another gallery widget? or a link out?
     /
       .row.team-member
         .grid-100

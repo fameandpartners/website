@@ -59,7 +59,8 @@
 .fap-icon-logo,
 .fap-icon-price-free,
 .fap-icon-erase, 
-.fap-icon-dollar {
+.fap-icon-dollar,
+.fap-icon-hexagon {
   font-family: 'FAPIcons';
   speak: none;
   font-style: normal;
@@ -102,4 +103,33 @@
 }
 .fap-icon-dollar:before {
   content: "\e609";
+}
+.fap-icon-hexagon:before {
+  content: "\e60a";
+}
+
+
+.icon-number-one, .icon-number-two, .icon-number-three, .icon-number-four {
+  font-family: 'Icon Numbers';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-number-four:before {
+  content: "\e600";
+}
+.icon-number-three:before {
+  content: "\e601";
+}
+.icon-number-two:before {
+  content: "\e602";
+}
+.icon-number-one:before {
+  content: "\e603";
 }

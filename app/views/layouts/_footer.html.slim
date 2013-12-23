@@ -1,5 +1,5 @@
 footer.footer-global
-  .arrows-line
+  .arrows-line-horizontal
   nav.nav-footer
     ul.fleft
       li = link_to 'COLLECTIONS', collection_path, class: 'btn small empty'
@@ -12,10 +12,10 @@ footer.footer-global
       li = link_to 'HELP', faqs_path, class: 'btn small empty'
       li = link_to 'TERMS & CONDITIONS', terms_path, class: 'btn small empty'
       li.active = link_to 'SIGN UP FOR OUR NEWSLETTER', '#', class: 'btn small empty'
-  .arrows-line
+  .arrows-line-horizontal
   .copy 
     ' &copy; 2013 Fame & Partners – All Rights Reserved
-    
+
 / footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .grid-container
     .grid-20.prefix-3.links
