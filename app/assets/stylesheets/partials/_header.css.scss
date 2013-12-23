@@ -87,10 +87,6 @@
 			display: inline-block;
 			vertical-align: top;
 			padding-left: 14px;
-			&.active > a {
-				color: #000;
-				background-color: $pinkColor;
-			}
 		}
 		a {
 			display: inline-block;
@@ -214,6 +210,10 @@
 		display: inline-block;
 		vertical-align: top;
 		position: relative;
+		&.active > .btn {
+			color: #000;
+			background-color: $pinkColor;
+		}
 		+ li { margin-left: 5px;}
 	}
 	.icon-dropdown-down {

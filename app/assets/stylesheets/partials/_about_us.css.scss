@@ -149,6 +149,22 @@
 				text-transform: none;
 			}
 		}
+		p {
+			text-transform: none;
+			font-family: $fontFour;
+			font-size: 12px;
+			margin: 0 0 15px;
+		}
+		h4 {
+			font-size: 23px;
+			font-family: $fontThree;
+			margin: 0 0 15px;
+		}
+		h6 {
+			margin: 0;
+			font-weight: 400;
+			letter-spacing: 0.125em;
+		}
 		.row {
 			font-size: 0;
 			margin: 0 10px;
@@ -183,21 +199,5 @@
 		.info {
 			margin-bottom: 30px;
 		}
-	}
-	p {
-		text-transform: none;
-		font-family: $fontFour;
-		font-size: 12px;
-		margin: 0 0 15px;
-	}
-	h4 {
-		font-size: 23px;
-		font-family: $fontThree;
-		margin: 0 0 15px;
-	}
-	h6 {
-		margin: 0;
-		font-weight: 400;
-		letter-spacing: 0.125em;
 	}
 }

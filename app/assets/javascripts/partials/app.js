@@ -111,9 +111,12 @@ $(function(){
 
   $(".promo-badge").delay(500).fadeIn('slow');
 
-  $('#toggle-selectbox').chosen();
+  // $('#toggle-selectbox').chosen();
 
-  $('.selectbox').chosen();
+  $('.selectbox').chosen({
+    width: '100%',
+    disable_search: true
+  });
 
 
   window.initHoverableProductImages()
@@ -139,6 +142,7 @@ $(function() {
   $('.current-version').on('click', function() {
     $(this).toggleClass('active');
     $('.site-version-switch ul').toggle();
-  })
+  });
+
 });
 
