@@ -195,4 +195,133 @@
 			+ a { margin-left: 10px;}
 		}
 	}
+	.style-it {
+		.heading {
+			background-color: #fde4df;
+			padding: 30px;
+			text-align: center;
+			h4 {
+				font-size: 23px;
+				font-family: $fontThree;
+				line-height: 1;
+				margin-top: 30px;
+			}
+			p {
+				font-size: 25px;
+				font-style: italic;
+				font-family: $fontTwo;
+				margin: 0 0 50px;
+				text-transform: none;
+			}
+		}
+		.lookbox {
+			.title {
+				background-color: #000;
+				color: #fff;
+				padding: 8px 15px;
+				font-family: $fontThree;
+				font-size: 23px;
+				font-style: italic;
+				letter-spacing: 0.08em;
+			}
+			.category-catalog { 
+				margin: 0;
+				.row { margin-top: -5px;}
+			}
+			.row { font-size: 0;}
+			.grid-6 {
+				display: inline-block;
+				vertical-align: top;
+				float: none;
+				font-size: $fontSize;
+			}
+			.picture {
+				img {
+					display: block;
+					width: 100%;
+				}
+			}
+			.text {
+				padding: 8px 8px 8px 15px;
+				p { margin: 0;}
+				a { 
+					color: $pinkColor;
+					text-decoration: none;
+				}
+				h4 {
+					font-size: 23px;
+					font-family: $fontThree;
+				}
+			}
+			.price-list {
+				text-align: center;
+				padding: 20px 0;
+				margin: 0;
+				list-style: none;
+				> li { margin: 7px 0;}
+				p { margin: 0;}
+				.number { font-size: 15px;}
+			}
+			.arrows-line-horizontal:before { display: none;}
+		}
+	}
+	.cumtomize {
+		margin-top: 15px;
+		.row {
+			margin: 0 -5px;
+			.grid-6 { padding: 0 5px;}
+		}
+		.picture img {
+			display: block;
+			width: 100%;
+		}
+		.heading {
+			font-size: 47px;
+			font-family: $fontThree;
+			line-height: 0.9;
+			margin-bottom: 25px;
+			padding-bottom: 25px;
+			position: relative;
+			em {
+				font-family: $fontTwo;
+				text-transform: none;
+			}
+			p {
+				margin: 0;
+				+ p { margin-top: 20px;}
+			}
+			.pink { color: $pinkColor;}
+			.arrows-line-horizontal {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				&:before { display: none;}
+			}
+		}
+		.style {
+			margin-top: 30px;
+			.button {
+				margin-top: 35px;
+				text-align: center;
+				.btn {
+					display: block;
+				}
+			}
+			.cross {
+				position: relative;
+				&:before {
+					content: '';
+					position: absolute;
+					display: block;
+					height: 1px;
+					left: 0;
+					right: 0;
+					top: 50%;
+					margin-top: -1px;
+					background-color: $pinkColor;
+				}
+			}
+		}
+	}
 }

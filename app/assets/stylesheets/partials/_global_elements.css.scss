@@ -40,6 +40,14 @@
 	&.striped {
 		background: url('_pink-stripe.png');
 	}
+	&.striped-disable {
+		background: url('_nav-bg.png');
+		font-size: 12px;
+		line-height: 1;
+		color: $pinkColor;
+		padding-top: 6px;
+		cursor: default;
+	}
 }
 
 .arrows-line-horizontal, .arrows-line-vertical {
@@ -59,7 +67,6 @@
 }
 .arrows-line-horizontal {
 	height: 1px;
-	margin: 0 1px;
 	background-color: #666;
 	position: relative;
 	&:before, &:after {
@@ -77,7 +84,6 @@
 	width: 1px;
 	background-color: #666;
 	position: relative;
-	margin: 1px 0;
 	&:before, &:after {
 		content: '\e007';
 		top: -4px;
