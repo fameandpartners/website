@@ -11,6 +11,218 @@ ruby:
  enabled_tabs.push('inspiration') if @product.celebrity_inspiration
  enabled_tabs.push('video') if @product.video_url.present?
 
+.content-offer
+  .title
+    ' GET YOUR 
+    em UNIQUE 
+    ' STYLE.
+  .fright
+    .text-with-arrow 
+      ' Lorem ipsum dolor sit amet, consectetu,
+      br
+      ' Integer vel felis sit amet massa conguet.
+      .arrow
+    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
+    
+.product-page
+  .row
+    .grid-8
+      .bread-crumbs
+        .fleft
+          = link_to 'EXPLORE', '#', class: 'btn pink'
+          = link_to 'CUSTOMISE', '#', class: 'btn'
+          = link_to 'STYLE IT', '#', class: 'btn'
+        .fright
+          = link_to '2ND OPINION', '#', class: 'btn'
+      .category-catalog
+        .row
+          .grid-6
+            .picture
+              = link_to '#' do
+                = image_tag '_sample/category-grey-1.jpg'
+              .popup
+                .fleft = link_to '+ QUICKVIEW', '#'
+                .fright = link_to '+ WISHLIST', '#'
+          .grid-6
+            .picture
+              = link_to '#' do
+                = image_tag '_sample/category-grey-2.jpg'
+              .popup
+                .fleft = link_to 'play video', '#'
+                .fright
+                  = link_to '#' do
+                    span.icon-expand
+          .grid-6
+            .picture
+              = link_to '#' do
+                = image_tag '_sample/category-grey-2.jpg'
+              .popup
+                .fleft = link_to 'play video', '#'
+                .fright
+                  = link_to '#' do
+                    span.icon-expand
+          .grid-6
+            .row
+              .grid-6
+                .picture
+                  = link_to '#' do
+                    = image_tag '_sample/category-grey-2.jpg'
+                  .popup
+                    .fleft = link_to 'play video', '#'
+                    .fright
+                      = link_to '#' do
+                        span.icon-expand
+              .grid-6
+                .picture
+                  = link_to '#' do
+                    = image_tag '_sample/category-grey-2.jpg'
+                  .popup
+                    .fleft = link_to 'play video', '#'
+                    .fright
+                      = link_to '#' do
+                        span.icon-expand
+              .grid-6
+                .picture
+                  = link_to '#' do
+                    = image_tag '_sample/category-grey-2.jpg'
+                  .popup
+                    .fleft = link_to 'play video', '#'
+                    .fright
+                      = link_to '#' do
+                        span.icon-expand
+              .grid-6
+                .picture
+                  = link_to '#' do
+                    = image_tag '_sample/category-grey-2.jpg'
+                  .popup
+                    .fleft = link_to 'play video', '#'
+                    .fright
+                      = link_to '#' do
+                        span.icon-expand
+          .grid-6    
+            .picture
+              = link_to '#' do
+                = image_tag '_sample/catalog-ad.jpg' 
+          .grid-6
+            .row
+              .grid-6
+                .picture
+                  = link_to '#' do
+                    = image_tag '_sample/category-grey-2.jpg'
+                  .popup
+                    .fleft = link_to 'play video', '#'
+                    .fright
+                      = link_to '#' do
+                        span.icon-expand
+              .grid-6
+                .picture
+                  = link_to '#' do
+                    = image_tag '_sample/category-grey-2.jpg'
+                  .popup
+                    .fleft = link_to 'play video', '#'
+                    .fright
+                      = link_to '#' do
+                        span.icon-expand
+          .grid-6
+            .row
+              .grid-6
+                .picture
+                  = link_to '#' do
+                    = image_tag '_sample/category-grey-2.jpg'
+                  .popup
+                    .fleft = link_to 'play video', '#'
+                    .fright
+                      = link_to '#' do
+                        span.icon-expand
+              .grid-6
+                .picture
+                  = link_to '#' do
+                    = image_tag '_sample/category-grey-2.jpg'
+                  .popup
+                    .fleft = link_to 'play video', '#'
+                    .fright
+                      = link_to '#' do
+                        span.icon-expand 
+          .grid-6
+            .social
+              = link_to '#' do
+                span.icon-facebook
+              = link_to '#' do
+                span.icon-pinterest
+              = link_to '#' do
+                span.icon-mail
+              .arrows-line-horizontal.top
+              .arrows-line-horizontal.bottom
+    .grid-4
+      .product-info
+        h6 LONG DRESSES
+        h1.product-title
+          ' PRODUCT NAME
+          span.price $295
+        .section  
+          select.selectbox data-placeholder="colour"
+            option 
+            option value="#fff" white
+            option value="#EDDDC8" camel
+            option value="#CB9E11" tobacco
+            option value="#F86D22" flame
+            option value="#DC4C78" berry
+            option value="#F51A8D" neon pink
+            option value="#E00027" lipstick
+            option value="#0A2183" navy
+            option value="#15437A" ultra-marine
+        .section
+          h6 SELECT A SIZE (whats my size?)
+          .sizebox
+            .button 4
+            .button 6
+            .button 8
+            .button.selected 10
+            .button 12
+            .button 14
+            .button 16
+        .section
+          .btn.empty.border.striped PLEASE SELECT A SIZE
+          = link_to 'add to card', '#', class: 'btn'
+        .section      
+          = link_to '+ TO WISH LIST', '#', class: 'btn empty border'
+        .section
+          ul.slider
+            li.opened 
+              .title DESCRIPTION
+              .text 
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            li 
+              .title details
+              .text
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            li 
+              .title styling notes
+              .text
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            li 
+              .title delivery
+              .text
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            li 
+              .title returns
+              .text
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            li.opened 
+              .title recommended
+              .text
+                .category-catalog
+                  .row
+                    .grid-4
+                      = link_to '#' do
+                        = image_tag '_sample/category-grey-2.jpg'
+                    .grid-4
+                      = link_to '#' do
+                        = image_tag '_sample/category-grey-2.jpg'
+                    .grid-4
+                      = link_to '#' do
+                        = image_tag '_sample/category-grey-2.jpg'        
+
 
 
 // OLD HTML ---->
