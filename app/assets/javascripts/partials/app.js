@@ -111,12 +111,6 @@ $(function(){
 
   $(".promo-badge").delay(500).fadeIn('slow');
 
-  // $('#toggle-selectbox').chosen();
-
-  $('.selectbox').chosen({
-    width: '100%',
-    disable_search: true
-  });
 
 
   window.initHoverableProductImages()
@@ -139,6 +133,11 @@ $('.ecommerce').ready(function(){
 });
 
 $(function() {
+  $('.selectbox').chosen({
+    width: '100%',
+    disable_search: true
+  });
+
   $('.current-version').on('click', function() {
     $(this).toggleClass('active');
     $('.site-version-switch ul').toggle();

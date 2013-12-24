@@ -1,4 +1,28 @@
-.icon-dropdown-up, .icon-dropdown-down, .icon-warranty, .icon-square, .icon-hr-right, .icon-hr-left, .icon-heart, .icon-dollar, .icon-customization, .icon-cross, .icon-arrows, .icon-advice, .icon-logo {
+.icon-heart,
+.icon-hr-left,
+.icon-hr-right,
+.icon-hexagon,
+.icon-dropdown-down,
+.icon-dropdown-up,
+.icon-square,
+.icon-hr-up,
+.icon-hr-down,
+.icon-customize,
+.icon-scissors,
+.icon-cutline,
+.icon-expand,
+.icon-pinterest,
+.icon-facebook,
+.icon-twitter,
+.icon-mail,
+.icon-google-plus,
+.icon-guarantee,
+.icon-comment,
+.icon-arrows,
+.icon-logo,
+.icon-price-free,
+.icon-erase,
+.icon-dollar {
   font-family: 'Icons';
   speak: none;
   font-style: normal;
@@ -6,107 +30,36 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  -webkit-font-smoothing: antialiased;
-}
-.icon-dropdown-up:before {
-  content: "\e000";
-}
-.icon-dropdown-down:before {
-  content: "\e001";
-}
-.icon-warranty:before {
-  content: "\e002";
-}
-.icon-square:before {
-  content: "\e003";
-}
-.icon-hr-right:before {
-  content: "\e004";
-}
-.icon-hr-left:before {
-  content: "\e005";
-}
-.icon-heart:before {
-  content: "\e006";
-}
-.icon-dollar:before {
-  content: "\e007";
-}
-.icon-customization:before {
-  content: "\e008";
-}
-.icon-cross:before {
-  content: "\e009";
-}
-.icon-arrows:before {
-  content: "\e00a";
-}
-.icon-advice:before {
-  content: "\e00b";
-}
-.icon-logo:before {
-  content: "\e00c";
-}
-
-
-
-.fap-icon-customize, 
-.fap-icon-scissors, 
-.fap-icon-cutline, 
-.fap-icon-guarantee, 
-.fap-icon-comment, 
-.fap-icon-arrows,
-.fap-icon-logo,
-.fap-icon-price-free,
-.fap-icon-erase, 
-.fap-icon-dollar,
-.fap-icon-hexagon {
-  font-family: 'FAPIcons';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.fap-icon-customize:before {
-  content: "\e600";
-}
-.fap-icon-scissors:before {
-  content: "\e601";
-}
-.fap-icon-cutline:before {
-  content: "\e602";
-}
-.fap-icon-guarantee:before {
-  content: "\e603";
-}
-.fap-icon-comment:before {
-  content: "\e604";
-}
-.fap-icon-arrows:before {
-  content: "\e605";
-}
-.fap-icon-logo:before {
-  content: "\e606";
-}
-.fap-icon-price-free:before {
-  content: "\e607";
-}
-.fap-icon-erase:before {
-  content: "\e608";
-}
-.fap-icon-dollar:before {
-  content: "\e609";
-}
-.fap-icon-hexagon:before {
-  content: "\e60a";
-}
+.icon-heart:before {content: "\e006"; }
+.icon-hr-left:before {content: "\e005"; }
+.icon-hr-right:before {content: "\e004"; }
+.icon-hexagon:before {content: "\e60a"; }
+.icon-dropdown-down:before {content: "\e001"; }
+.icon-dropdown-up:before {content: "\e000"; }
+.icon-square:before {content: "\e003"; }
+.icon-hr-up:before {content: "\e007"; }
+.icon-hr-down:before {content: "\e008"; }
+.icon-customize:before {content: "\e600"; }
+.icon-scissors:before {content: "\e601"; }
+.icon-cutline:before {content: "\e602"; }
+.icon-expand:before {content: "\e60b"; }
+.icon-pinterest:before {content: "\e60c"; }
+.icon-facebook:before {content: "\e60d"; }
+.icon-twitter:before {content: "\e60e"; }
+.icon-mail:before {content: "\e60f"; }
+.icon-google-plus:before {content: "\e610"; }
+.icon-guarantee:before {content: "\e603"; }
+.icon-comment:before {content: "\e604"; }
+.icon-arrows:before {content: "\e605"; }
+.icon-logo:before {content: "\e606"; }
+.icon-price-free:before {content: "\e607"; }
+.icon-erase:before {content: "\e608"; }
+.icon-dollar:before {content: "\e609"; }
 
 
 .icon-number-one, .icon-number-two, .icon-number-three, .icon-number-four {
@@ -121,15 +74,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-number-four:before {
-  content: "\e600";
-}
-.icon-number-three:before {
-  content: "\e601";
-}
-.icon-number-two:before {
-  content: "\e602";
-}
-.icon-number-one:before {
-  content: "\e603";
-}
+.icon-number-four:before {content: "\e600"; }
+.icon-number-three:before {content: "\e601"; }
+.icon-number-two:before {content: "\e602"; }
+.icon-number-one:before {content: "\e603"; }

@@ -13,6 +13,7 @@
 	outline: none;
 	text-transform: uppercase;
 	height: 36px;
+	text-align: center;
 	color: #fff;
 	font: 300 22px/36px $fontThree;
 	padding: 0 15px;
@@ -33,27 +34,43 @@
 		color: #000;
 		background-color: $pinkColor;
 	}
+	&.border {
+		border: solid 1px #000;
+	}
+	&.striped {
+		background: url('_pink-stripe.png');
+	}
 }
 
+.arrows-line-horizontal, .arrows-line-vertical {
+	&:before, &:after {
+		font-family: 'Icons';
+	  speak: none;
+	  font-style: normal;
+	  font-weight: normal;
+	  font-variant: normal;
+	  text-transform: none;
+	  line-height: 1;
+	  font-size: 15px;
+		position: absolute;
+		-webkit-font-smoothing: antialiased;
+	  -moz-osx-font-smoothing: grayscale;
+	}
+}
 .arrows-line-horizontal {
 	height: 1px;
 	margin: 0 1px;
 	background-color: #666;
 	position: relative;
 	&:before, &:after {
-		content: '';
-		display: block;
-		width: 9px;
-		height: 15px;
-		position: absolute;
+		content: '\e005';
 		top: -7px;
-		left: -1px;
-		background: url('_arrows.png') no-repeat;
+		left: -4px;
 	}
 	&:after {
+		content: '\e004';
 		left: auto;
-		right: -1px;
-		background-position: -9px 0;
+		right: -4px;
 	}
 }
 .arrows-line-vertical {
@@ -62,19 +79,66 @@
 	position: relative;
 	margin: 1px 0;
 	&:before, &:after {
-		content: '';
-		display: block;
-		width: 15px;
-		height: 9px;
-		position: absolute;
-		top: -1px;
-		left: -6px;
-		background: url('_arrows.png') no-repeat 0 -15px;
+		content: '\e007';
+		top: -4px;
+		left: -7px;
 	}
 	&:after {
+		content: '\e008';
 		top: auto;
-		bottom: -1px;
-		background-position: 0 -24px;
+		bottom: -4px;
 	}
 }
 
+.bread-crumbs {
+	@include clearfix;
+	background: url('_nav-bg.png');
+	font-size: 0;
+	.btn {
+		position: relative;
+		&:before {
+			content: '';
+			width: 20px;
+			height: 1px;
+			background-color: #000;
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: -30px;
+		}
+		&:after {
+			content: '\e004';
+			font-family: 'Icons';
+		  speak: none;
+		  font-style: normal;
+		  font-weight: normal;
+		  font-variant: normal;
+		  text-transform: none;
+		  line-height: 1;
+		  /* Better Font Rendering =========== */
+		  -webkit-font-smoothing: antialiased;
+		  -moz-osx-font-smoothing: grayscale;
+		  font-size: 15px;
+		  position: absolute;
+		  top: 50%;
+		  margin-top: -7px;
+		  left: -20px;
+		  color: #000;
+		}
+		+ .btn { margin-left: 30px;}
+	}
+	.fleft {
+		.btn:first-child {
+			&:before, &:after { display: none;}
+		}
+	}
+	.fright {
+		.btn {
+			&:before { left: -20px;}
+			&:after {
+				content: '\e005';
+				left: -25px;
+			}
+		}
+	} 
+}
