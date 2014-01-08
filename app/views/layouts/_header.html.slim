@@ -6,7 +6,7 @@
     /     - if current_site_version.is_australia?
     /       li = link_to 'Australia Home', root_path, class: 'top-icon link-root'
     /       li.top-icon.phone order on the phone / customer service 1300 924 860
-    /     - else                                                       
+    /     - else
     /       li = link_to 'USA Home', root_path, class: 'top-icon link-root'
     .site-version
       .current-version
@@ -102,7 +102,7 @@
           = link_to spree.cart_path, class: 'shopping-bag-toggler' do
             span.counter = current_order(true).item_count
             ' shopping bag
-          / = render 'layouts/shopping_bag_content'
+        = render 'layouts/shopping_bag_content'
   .nav-user
     nav.fleft
       ul

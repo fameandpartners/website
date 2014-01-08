@@ -19,3 +19,78 @@
       = form_for current_order, url:  spree.cart_path do |form|
         = form.submit 'Buy now', name: :checkout, class: 'buy-now'
       .ask-parents = link_to 'Invite someone to pay', '#', class: 'ask-parent-to-pay-button'
+
+.shopping-bag-popup style="display:none;"
+  .shopping-list
+    .item
+      .picture
+        = image_tag '_sample/category-grey-1.jpg'
+      .info
+        h6 Draped Twist
+        .price $249
+        .description
+          table
+            tr
+              td Color:
+              td 
+                .color style="background: #ed0234"
+            tr
+              td Size
+              td 8  
+            tr
+              td Quantity:
+              td 1  
+            tr
+              td Estimated Delivery:
+              td 7-10 days
+       
+      = link_to '#', class: 'delete' do
+        span.icon-close
+    .item
+      .picture
+        = image_tag '_sample/category-grey-2.jpg'
+      .info
+        h6 Draped Twist
+        .price $249
+        .description
+          table
+            tr
+              td Color:
+              td 
+                .color style="background: #ed0234"
+            tr
+              td Size
+              td 8  
+            tr
+              td Quantity:
+              td 1  
+            tr
+              td Estimated Delivery:
+              td 7-10 days
+       
+      = link_to '#', class: 'delete' do
+        span.icon-close
+    .item
+      .picture
+        = image_tag '_sample/category-grey-3.jpg'
+      .info
+        h6 Draped Twist
+        .price $249
+        .description
+          table
+            tr
+              td Color:
+              td 
+                .color style="background: #ed0234"
+            tr
+              td Size
+              td 8  
+            tr
+              td Quantity:
+              td 1  
+            tr
+              td Estimated Delivery:
+              td 7-10 days
+       
+      = link_to '#', class: 'delete' do
+        span.icon-close    

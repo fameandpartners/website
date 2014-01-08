@@ -1,3 +1,4 @@
+.icon-close,
 .icon-heart,
 .icon-hr-left,
 .icon-hr-right,
@@ -35,6 +36,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-close:before { content: "\e611";}
 .icon-heart:before {content: "\e006"; }
 .icon-hr-left:before {content: "\e005"; }
 .icon-hr-right:before {content: "\e004"; }
@@ -60,6 +62,7 @@
 .icon-price-free:before {content: "\e607"; }
 .icon-erase:before {content: "\e608"; }
 .icon-dollar:before {content: "\e609"; }
+
 
 
 .icon-number-one, .icon-number-two, .icon-number-three, .icon-number-four {

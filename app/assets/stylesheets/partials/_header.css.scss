@@ -199,6 +199,87 @@
 			@include longBoxShadowRight($pinkColor, 5);
 		}
 	}
+	.cart {
+		position: relative;
+		z-index: 10;
+	}
+	.shopping-bag-popup {
+		position: absolute;
+		right: 0;
+		top: 100%;
+		margin-top: 5px;
+		border: solid 1px #000;
+		width: 340px;
+		background-color: #fff;
+		text-transform: none;
+		font: 400 12px/1 $fontFive;
+		color: #555;
+		letter-spacing: 0;
+		.shopping-list {
+			background: url('_nav-bg.png');
+			border: solid 3px #fff;
+			padding: 15px;
+			.item {
+				background-color: #fff;
+				border: solid 1px #e9e9eb;
+				padding: 15px;
+				position: relative;
+				@include clearfix;
+				+ .item { margin-top: 10px;}
+				.delete {
+					background-color: #000;
+					position: absolute;
+					right: -1px;
+					top: -1px;
+					width: 16px;
+					height: 16px;
+					text-align: center;
+					line-height: 15px;
+					font-size: 10px;
+					color: #fff;
+					display: block;
+				}
+			}
+		}
+	}
+	.picture {
+		float: left;
+		margin-right: 15px;
+		img {
+			display: block;
+			width: 80px;
+		}
+	}
+	.info {
+		overflow: hidden;
+		h6 {
+			margin: 0 0 10px;
+			font-size: 13px;
+			text-transform: uppercase;
+			color: #000;
+		}
+		.price {
+			color: $pinkColor;
+			font-size: 16px;
+		}
+		.description {
+			margin-top: 10px;
+			padding-top: 7px;
+			border-top: solid 1px #d5d5d5;
+			table {
+				width: 100%;
+			}
+			td { padding: 3px 0;}
+			.color {
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				border-radius: 100%;
+				border: solid 1px #ccc;
+				box-shadow: 0 0 0 1px #f0f0f0;
+			}
+		}
+	}
 }
 
 .nav-user {

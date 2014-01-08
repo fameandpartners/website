@@ -132,6 +132,7 @@ $('.ecommerce').ready(function(){
   });
 });
 
+
 $(function() {
   $('.selectbox').chosen({
     width: '100%',
@@ -141,6 +142,11 @@ $(function() {
   $('.current-version').on('click', function() {
     $(this).toggleClass('active');
     $('.site-version-switch ul').toggle();
+  });
+
+  $('.shopping-bag').on('click', function() {
+    $(this).siblings('.shopping-bag-popup').toggle();
+    return false
   });
 
 });
