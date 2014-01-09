@@ -5,8 +5,8 @@ doctype html
     = auto_discovery_link_tag :rss, blog_rss_url
     = csrf_meta_tags
     = render 'spree/shared/google_analytics'
-  body class="blog #{controller_action_class}" id=(controller_action_id)
-    .m-pixel
+  body class="blog-layout #{controller_action_class}" id=(controller_action_id)
+    / .m-pixel
       img src="http://tags.rtbidder.net/track?sid=525645858bc06f1060d9e531" width="0" height="0" border="0" alt=""
       img src="http://tags.rtbidder.net/convert?sid=525647468bc06f1060d9f9bb" width="0" height="0" border="0" alt=""
       - if session.delete(:signed_up_just_now)

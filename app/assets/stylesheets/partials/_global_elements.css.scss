@@ -34,6 +34,18 @@
 		color: #000;
 		background-color: $pinkColor;
 	}
+	&.green {
+		background-color: $greenColor;
+		&:hover {
+			color: $greenColor;
+			background-color: #000;
+			&.border { border-color: $greenColor;}
+			&.shadow {@include longBoxShadowRight ($greenColor, 3);}
+		}
+	}
+	&.shadow {
+		@include longBoxShadowRight(#000, 3);
+	}
 	&.border {
 		border: solid 1px #000;
 	}
