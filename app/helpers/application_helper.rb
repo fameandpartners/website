@@ -242,26 +242,28 @@ module ApplicationHelper
     }
   end
 
+  # span.price-old $355
+  # ' $295
   def price_for_product(product)
     price = product.zone_price_for(current_site_version)
     if product.in_sale?
       [
-        content_tag(:del, price.display_price_without_discount),
-        content_tag(:span, price.display_price_with_discount)
+        content_tag(:span, price.display_price_without_discount, class: 'price-old'),
+        price.display_price_with_discount.to_s
       ].join("\n").html_safe
     else
-      content_tag(:span, price.display_price).html_safe
+      price.display_price.to_s.html_safe
     end
   end
 
   def price_for_line_item(line_item)
     if line_item.in_sale?
       [
-        content_tag(:del, line_item.money_without_discount),
-        content_tag(:span, line_item.money)
+        content_tag(:span, line_item.money_without_discount, class: 'price-old'),
+        line_item.money
       ].join("\n").html_safe
     else
-      content_tag(:span, line_item.money).html_safe
+      line_item.money.html_safe
     end
   end
 
