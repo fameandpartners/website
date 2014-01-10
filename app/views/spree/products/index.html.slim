@@ -28,46 +28,21 @@
 .category-filter
   .fleft 
     .filter-section
-      select.selectbox
-        option value="0" styles 
-        option value="1" styles
-        option value="2" styles
-        option value="3" styles
-        option value="4" styles
-        option value="5" styles
-        option value="6" styles
-        option value="7" styles
+      - options = options_from_collection_for_select(available_product_styles, :id, :name, @searcher.collection)
+      = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Styles'
+
     .filter-section
-      select.selectbox
-        option value="0" body shape 
-        option value="1" body shape
-        option value="2" body shape
-        option value="3" body shape
-        option value="4" body shape
-        option value="5" body shape
-        option value="6" body shape
-        option value="7" body shape
+      - options = options_from_collection_for_select(ProductStyleProfile::BODY_SHAPES, :to_s, :to_s, @searcher.bodyshape)
+      = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Body Shape'
+
     .filter-section
-      select.selectbox
-        option value="0" colour 
-        option value="1" colour
-        option value="2" colour
-        option value="3" colour
-        option value="4" colour
-        option value="5" colour
-        option value="6" colour
-        option value="7" colour        
+      - options = options_from_collection_for_select(available_product_colors, :id, :name, @searcher.colour)
+      = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Colour'
+
   .fright
     .filter-section
-      select.selectbox
-        option value="0" sort by 
-        option value="1" sort by
-        option value="2" sort by
-        option value="3" sort by
-        option value="4" sort by
-        option value="5" sort by
-        option value="6" sort by
-        option value="7" sort by     
+      - options = options_from_collection_for_select(Products::ProductsFilter.available_sort_orders, :first, :second, @searcher.order)
+      = select_tag "product_order", options, class: 'selectbox', prompt: 'Sort By'
 
 .category-catalog
   .row
