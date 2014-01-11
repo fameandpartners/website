@@ -149,5 +149,13 @@ $(function() {
     return false
   });
 
+
+  // blog
+  if ($('.blog-header').length) {
+    $('.toggle-search').on('click', function(){
+      $('.blog-header .search').toggle();
+      return false
+    });
+  }
 });
 
