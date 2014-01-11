@@ -11,124 +11,47 @@
       .arrow
     = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
 
-
-
+//style=(@page_info[:banner_image].blank? ? '' : "background: url('#{@page_info[:banner_image]}') 0 0 no-repeat;")
 .category-header
   h2
     span
-      em Catagory
+      em = @page_info[:banner_title]
     span HEADER
   p 
-    ' this image area will be variable length.
-    br
-    ' Lorem ipsum dolor sit amet, consectetu,
-    br
-    ' Integer vel felis sit amet massa conguet
+    = @page_info[:banner_text]
 
 .category-filter
   .fleft 
     .filter-section
-      select.selectbox
-        option value="0" styles 
-        option value="1" styles
-        option value="2" styles
-        option value="3" styles
-        option value="4" styles
-        option value="5" styles
-        option value="6" styles
-        option value="7" styles
+      - options = options_from_collection_for_select(available_product_styles, :id, :name, @searcher.collection)
+      = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Styles'
+
     .filter-section
-      select.selectbox
-        option value="0" body shape 
-        option value="1" body shape
-        option value="2" body shape
-        option value="3" body shape
-        option value="4" body shape
-        option value="5" body shape
-        option value="6" body shape
-        option value="7" body shape
+      - options = options_from_collection_for_select(ProductStyleProfile::BODY_SHAPES, :to_s, :to_s, @searcher.bodyshape)
+      = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Body Shape'
+
     .filter-section
-      select.selectbox
-        option value="0" colour 
-        option value="1" colour
-        option value="2" colour
-        option value="3" colour
-        option value="4" colour
-        option value="5" colour
-        option value="6" colour
-        option value="7" colour        
+      - options = options_from_collection_for_select(available_product_colors, :id, :name, @searcher.colour)
+      = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Colour'
+
   .fright
     .filter-section
-      select.selectbox
-        option value="0" sort by 
-        option value="1" sort by
-        option value="2" sort by
-        option value="3" sort by
-        option value="4" sort by
-        option value="5" sort by
-        option value="6" sort by
-        option value="7" sort by     
+      - options = options_from_collection_for_select(Products::ProductsFilter.available_sort_orders, :first, :second, @searcher.order)
+      = select_tag "product_order", options, class: 'selectbox', prompt: 'Sort By'
 
 .category-catalog
   .row
-    .grid-4
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-white-1.jpg'
-        .popup.striped
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295
-    .grid-4
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-white-3.jpg'
-        .popup.striped
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295
-    .grid-4
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-white-2.jpg'
-        .popup.striped
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295
-    .grid-4
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-grey-1.jpg'
-        .popup
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price 
-        span.price-old $355
-        ' $295 
-    .grid-4
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-grey-2.jpg'
-        .popup
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295
-    .grid-4
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-grey-1.jpg'
-        .popup
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price 
-        span.price-old $355
-        ' $295          
+    - products = @products.first(6)
+    - products.each do |product|
+      .grid-4
+        .picture
+          = link_to collection_product_path(product) do
+            = hoverable_product_image_tag(product, colors: @current_colors, itemprop: "image", width: 262, height: 336, alt: product.name) 
+          .popup.striped
+            .fleft.quick-view  = quick_view_link(product)
+            .fright.like = add_to_wishlist_link(product)
+        h6 = product.name
+        .price = price_for_product(product)
 
 .category-catalog
   h2 
@@ -136,83 +59,17 @@
     br
     ' YOU MIGHT LIKE
   .row
-    .grid-3
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-white-1.jpg'
-        .popup.striped
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295
-    .grid-3
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-white-3.jpg'
-        .popup.striped
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295
-    .grid-3
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-white-2.jpg'
-        .popup.striped
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295
-    .grid-3
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-white-3.jpg'
-        .popup.striped
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295  
-    .grid-3
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-grey-1.jpg'
-        .popup
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price 
-        span.price-old $355
-        ' $295 
-    .grid-3
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-grey-2.jpg'
-        .popup
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295
-    .grid-3
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-grey-1.jpg'
-        .popup
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price 
-        span.price-old $355
-        ' $295 
-    .grid-3
-      .picture
-        = link_to '#' do
-          = image_tag '_sample/category-grey-2.jpg'
-        .popup
-          .fleft = link_to '+ QUICKVIEW', '#'
-          .fright = link_to '+ WISHLIST', '#'
-      h6 Dress name
-      .price $295
-
+    - products = @products.last(8)
+    - products.each do |product|
+      .grid-3
+        .picture
+          = link_to collection_product_path(product) do
+            = hoverable_product_image_tag(product, colors: @current_colors, itemprop: "image", alt: product.name) 
+          .popup.striped
+            .fleft.quick-view  = quick_view_link(product)
+            .fright.like = add_to_wishlist_link(product)
+        h6 = product.name
+        .price = price_for_product(product)
 
 // OLD HTML ---->
 / .m-pixel

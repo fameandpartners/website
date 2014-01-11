@@ -11,7 +11,6 @@
 *= require_self
 *= require_tree .
 *= require admin/spree_social
-*= require libs/jquery.tagsinput
 *= require jquery.fileupload-ui
  *= require admin/spree_paypal_express
 */
