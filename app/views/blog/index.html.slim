@@ -4,6 +4,65 @@
 
 = render 'shared/breadcrumbs'
 
+.blog-carousel
+  ul.carousel
+    li.current style="background-image: url('assets/_sample/blog-carousel.jpg')" 
+      .mask
+      .text
+        .title.big OH LORDEY
+        p 
+          ' Lorem ipsum dolor sit amet, 
+          br
+          ' consectetur adipisicing elit,
+          br
+          ' sed do eiusmod tempor...
+    li.next-slide style="background-image: url('assets/_sample/blog-carousel.jpg')"
+      .mask
+      .text
+        .title.big M.K & A.
+        p 
+          ' Lorem ipsum dolor sit amet, 
+          br
+          ' consectetur adipisicing elit,
+          br
+          ' sed do eiusmod tempor...
+    li style="background-image: url('assets/_sample/blog-carousel.jpg')"
+      .mask
+      .text
+        .title.big M.K & A.
+        p 
+          ' Lorem ipsum dolor sit amet, 
+          br
+          ' consectetur adipisicing elit,
+          br
+          ' sed do eiusmod tempor...
+    li style="background-image: url('assets/_sample/blog-carousel.jpg')"
+      .mask
+      .text
+        .title.big M.K & A.
+        p 
+          ' Lorem ipsum dolor sit amet, 
+          br
+          ' consectetur adipisicing elit,
+          br
+          ' sed do eiusmod tempor...
+    li.prev-slide style="background-image: url('assets/_sample/blog-carousel.jpg')"
+      .mask
+      .text
+        .title.small title type can change size
+        p 
+          ' Lorem ipsum dolor sit amet, 
+          br
+          ' consectetur adipisicing elit,
+          br
+          ' sed do eiusmod tempor...
+  .controls
+    span.prev
+      span.icon-hr-left
+    span.pager
+    span.next  
+      span.icon-hr-right
+
 / .wrap
   = render 'blog/shared/promo_banner'
   = render 'latest_celebrity_photos'

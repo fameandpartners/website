@@ -10,6 +10,7 @@
 //= require libs/jquery.waitforimages.min
 //= require libs/jquery.timeago
 //= require libs/jquery.cookie
+//= require libs/jquery.bxslider
 //= require libs/underscore-min
 //= require libs/live_chat_with_fancybox.min
 //= require libs/purl

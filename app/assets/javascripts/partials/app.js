@@ -157,5 +157,34 @@ $(function() {
       return false
     });
   }
+
+
+  // blog carousel
+  // generate custom carousel pager
+  $blogCarouselBox = $('.blog-carousel');
+  $blogCarousel = $blogCarouselBox.find('.carousel');
+  pagerStr = '';
+  $blogCarouselPager = $blogCarouselBox.find('.controls').find('.pager')
+  for (var i = 0; i < $blogCarousel.find('li').length; i++ ) 
+    pagerStr += '<a href="#" data-slide-index="'+i+'"></a>'
+  $blogCarouselPager.html(pagerStr);
+
+  // init carousel
+  $blogCarousel.bxSlider({
+    minSlides: 3,
+    maxSlides: 3,
+    slideWidth: 460,
+    slideMargin: 5,
+    moveSlides: 1,
+    pagerCustom:  '.blog-carousel .pager',
+    nextSelector: '.blog-carousel .next',
+    prevSelector: '.blog-carousel .prev',
+    onSlideAfter: function($slideElement, oldIndex, newIndex) {
+      $slideElement.addClass('current').siblings('li').removeClass('current next-slide prev-slide');
+      $slideElement.removeClass('next-slide').next().addClass('next-slide');
+      $slideElement.removeClass('prev-slide').prev().addClass('prev-slide');
+    }
+  });
+
 });
 

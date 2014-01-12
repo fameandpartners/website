@@ -4,7 +4,7 @@
 }
 .blog-nav {
 	font-family: $cinzelBold;
-	margin-bottom: 17px;
+	margin-bottom: 30px;
 	ul {
 		@include clearfix;
 		border-bottom: solid 1px #e1e1e1;
@@ -69,6 +69,118 @@
 		.second-line {
 			text-indent: 20px;
 			display: block;
+		}
+	}
+}
+
+.blog-carousel {
+	ul { 
+		margin: 0 0 0 318px;
+	}
+	li {
+		min-height: 360px;
+		width: 460px !important;
+		position: relative;
+		background-size: cover;
+		background-repeat: no-repeat;
+		color: #fff;
+		&.current { 
+			.mask { display: none;}
+			.title { color: $greenLightColor;}
+		}
+		&.prev-slide { 
+			.mask {
+				margin-right: 140px;
+				&:after {
+					right: -140px;
+					background: url('_blog/carousel-mask.png') no-repeat;
+				}
+			}
+		}
+		&.next-slide { 
+			.mask {
+				margin-left: 140px;
+				&:after {
+					left: -140px;
+					background: url('_blog/carousel-mask-flip.png') no-repeat;
+				}
+			}
+		}
+		.mask {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+			background-color: rgba(255, 255, 255, 0.5);
+			z-index: 0;
+			&:after {
+				content: '';
+				display: block;
+				position: absolute;
+				width: 140px;
+				top: 0;
+				bottom: 0;
+			}
+		}
+		.text {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 100px;
+			background-color: rgba(0, 0, 0, 0.5);
+			text-align: center;
+			font-family: $sourceLight;
+			text-transform: none;
+			.title {
+				position: relative;
+				font-family: $cinzelNormal;
+				&.big {
+					margin-top: -28px;
+					font-size: 50px;
+					text-transform: uppercase;
+				}
+				&.small {
+					font-size: 30px;
+					margin: -17px 0 5px;
+					font-family: $sourceLight;
+				}
+			}
+			p { margin: 0;}
+		}
+	}
+	.controls {
+		text-align: center;
+		margin-top: 17px;
+		span { vertical-align: middle;}
+		.pager {
+			margin: 0 5px;
+			a {
+				display: inline-block;
+				width: 5px;
+				height: 5px;
+				border-radius: 100%;
+				background-color: #000;
+				border: solid 4px #fff;
+				vertical-align: middle;
+				margin: 0 2px;
+				&.active {
+					border-color: $greenLightColor;
+				}
+			}
+		}
+		.prev, .next {
+			position: relative;
+		}
+		.bx-prev, .bx-next {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 17px;
+			height: 17px;
+			overflow: hidden;
+			text-indent: -9999px;
 		}
 	}
 }

@@ -4,6 +4,7 @@
 	min-height: 200px;
 	padding-top: 20px;
 	position: relative;
+	@extend .centered-layout;
 	.logo-holder {
 		margin: 0 auto;
 		width: 269px;
