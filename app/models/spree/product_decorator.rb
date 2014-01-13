@@ -272,7 +272,7 @@ Spree::Product.class_eval do
   def set_default_values
     if self.new_record?
       self.on_demand = true
-      self.cound_on_hand = 10
+      self.count_on_hand = 10
     end
   end
 end
