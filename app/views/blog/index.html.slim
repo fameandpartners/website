@@ -62,6 +62,173 @@
     span.pager
     span.next  
       span.icon-hr-right
+.blog-features
+  h2 features
+  .grid-container
+    .grid-4
+      .picture
+        = link_to '#' do
+          = image_tag '_sample/blog-carousel.jpg'
+          span.circle
+      h4.title-1 article title
+      p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...
+    .grid-4
+      .picture
+        = link_to '#' do
+          = image_tag '_sample/blog-carousel.jpg'
+          span.circle
+      h4.title-2 article title
+      p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...
+    .grid-4
+      .picture
+        = link_to '#' do
+          = image_tag '_sample/blog-carousel.jpg'
+          span.circle
+      h4.title-3 article title
+      p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...    
+    .grid-4
+      .picture
+        = link_to '#' do
+          = image_tag '_sample/blog-carousel.jpg'
+          span.circle
+      h4.title-1 article title
+      p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...
+    .grid-4
+      .picture
+        = link_to '#' do
+          = image_tag '_sample/blog-carousel.jpg'
+          span.circle
+      h4.title-1 article title
+      p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...
+    .grid-4
+      .picture
+        = link_to '#' do
+          = image_tag '_sample/blog-carousel.jpg'
+          span.circle
+      h4.title-1 article title
+      p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor... 
+.soundcloud-widget 
+  .grid-container
+    .grid-8
+      h2 soundcloud title
+      p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+      iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/103699725&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=true"
+    .quote.grid-4
+      h2 “featured quote, lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor”
+    .author.grid-4 - FIRST NAME LAST NAME
+.social-blocks
+  .grid-container
+    .grid-8
+      .video-responsive
+        iframe width="560" height="315" src="//www.youtube.com/embed/4j3u9fxHMkI" frameborder="0" allowfullscreen
+      .section-title
+        h2 ON INSTAGRAM
+        = link_to '#', class: 'btn green border shadow' do
+          i.icon-instagram
+          span FOLLOW @FAMEANDPARTNERS
+      .instagram-widget
+        .grid-container
+          .grid-6
+            = link_to '#' do
+              = image_tag '_sample/instagram-pic.jpg'
+              span.circle
+          .grid-6
+            .grid-container
+              .grid-6
+                = link_to '#' do
+                  = image_tag '_sample/instagram-pic.jpg'
+                  span.circle
+              .grid-6
+                = link_to '#' do
+                  = image_tag '_sample/instagram-pic.jpg'
+                  span.circle
+              .grid-6
+                = link_to '#' do
+                  = image_tag '_sample/instagram-pic.jpg'
+                  span.circle
+              .grid-6
+                = link_to '#' do
+                  = image_tag '_sample/instagram-pic.jpg'    
+                  span.circle
+      .section-title
+        h2 ON TWITTER
+        = link_to '#', class: 'btn green border shadow' do
+          i.icon-twitter
+          span FOLLOW @FAMEANDPARTNERS
+      .twitter-widget
+        .grid-container
+          .grid-4
+            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+            p 
+              ' @twitterusername
+              br
+              ' 21st December
+          .grid-4
+            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+            p 
+              ' @twitterusername
+              br
+              ' 21st December
+          .grid-4
+            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+            p 
+              ' @twitterusername
+              br
+              ' 21st December
+          .grid-4
+            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+            p 
+              ' @twitterusername
+              br
+              ' 21st December
+          .grid-4
+            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+            p 
+              ' @twitterusername
+              br
+              ' 21st December        
+
+    .grid-4
+      .about
+        .icon-hexagon.left
+        .icon-hexagon.right
+        .icon-logo
+        p About Fame & Partners lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor. Lorem ipsum dolor sit amet,  consectetur adipisicing elit, sed do eiusmod.
+      form.sign-in
+        h2 become a member of fame & partners
+        input type="text" placeholder="Enter email here"
+        input.btn.green.shadow.border type="submit" value="SIGN UP"
+      .follow-us
+        h2 FOLLOW US
+        ul
+          li 
+            = link_to '#' do
+              i.icon-facebook
+              span FACEBOOK
+          li 
+            = link_to '#' do
+              i.icon-twitter
+              span TWITTER
+          li
+            = link_to '#' do
+              i.icon-tumblr
+              span TUMBLR
+          li
+            = link_to '#' do
+              i.icon-instagram
+              span INSTAGRAM
+          li
+            = link_to '#' do
+              i.icon-pinterest
+              span PINTEREST
+          li
+            = link_to '#' do
+              i.icon-youtube
+              span YOUTUBE
+          li
+            = link_to '#' do
+              i.icon-vimeo
+              span VIMEO
 
 / .wrap
   = render 'blog/shared/promo_banner'
