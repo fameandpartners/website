@@ -12,9 +12,9 @@
 	border: 0;
 	outline: none;
 	text-transform: uppercase;
-	height: 36px;
 	text-align: center;
 	color: #fff;
+	height: 36px;
 	font: 300 22px/36px $fontThree;
 	padding: 0 15px;
 	letter-spacing: 0.125em;
@@ -35,6 +35,7 @@
 		background-color: $pinkColor;
 	}
 	&.green {
+		color: #000;
 		background-color: $greenColor;
 		&:hover {
 			color: $greenColor;

@@ -15,6 +15,7 @@ a { color: inherit;}
 
 #content {
 	@extend .centered-layout;
+	margin-bottom: -160px;
 }
 
 #push {
