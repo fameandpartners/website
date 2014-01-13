@@ -28,30 +28,20 @@
 
     .filter-section
       - options = options_from_collection_for_select(ProductStyleProfile::BODY_SHAPES, :to_s, :to_s, @searcher.bodyshape)
-      = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Body Shape'
+      = select_tag :bodyshape, options, class: 'selectbox', multipe: true, prompt: 'Body Shape'
 
     .filter-section
       - options = options_from_collection_for_select(available_product_colors, :id, :name, @searcher.colour)
-      = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Colour'
+      = select_tag :colour, options, class: 'selectbox', multipe: true, prompt: 'Colour'
 
   .fright
     .filter-section
       - options = options_from_collection_for_select(Products::ProductsFilter.available_sort_orders, :first, :second, @searcher.order)
       = select_tag "product_order", options, class: 'selectbox', prompt: 'Sort By'
 
-.category-catalog
+.category-catalog.products
   .row
-    - products = @products.first(6)
-    - products.each do |product|
-      .grid-4
-        .picture
-          = link_to collection_product_path(product) do
-            = hoverable_product_image_tag(product, colors: @current_colors, itemprop: "image", width: 262, height: 336, alt: product.name) 
-          .popup.striped
-            .fleft.quick-view  = quick_view_link(product)
-            .fright.like = add_to_wishlist_link(product)
-        h6 = product.name
-        .price = price_for_product(product)
+    = render @products.first(6)
 
 .category-catalog
   h2 
@@ -59,17 +49,7 @@
     br
     ' YOU MIGHT LIKE
   .row
-    - products = @products.last(8)
-    - products.each do |product|
-      .grid-3
-        .picture
-          = link_to collection_product_path(product) do
-            = hoverable_product_image_tag(product, colors: @current_colors, itemprop: "image", alt: product.name) 
-          .popup.striped
-            .fleft.quick-view  = quick_view_link(product)
-            .fright.like = add_to_wishlist_link(product)
-        h6 = product.name
-        .price = price_for_product(product)
+    = render @products.last(8), element_class: 'grid-3'
 
 // OLD HTML ---->
 / .m-pixel

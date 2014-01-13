@@ -22,7 +22,7 @@ Spree::ProductsController.class_eval do
     if !request.xhr?
       render action: 'index', layout: true
     else
-      text = render_to_string(partial: 'products', locals: { products: @products })
+      text = render_to_string(partial: 'product', collection: @products.first(6))
       render text: text, layout: false
     end
   end
