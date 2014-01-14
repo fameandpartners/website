@@ -10,7 +10,7 @@ $ ->
     listeners: []
 
     init: () ->
-      window.shoppingBag.container = $('header .shopping-bag')
+      window.shoppingBag.container = $('#wrap .cart')
 
       shoppingBag.updateElementsHandlers()
       shoppingBag.container.find("#shopping-bag-popup-wrapper").hide()

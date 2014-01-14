@@ -144,10 +144,11 @@ $(function() {
     $('.site-version-switch ul').toggle();
   });
 
-  $('.shopping-bag').on('click', function() {
-    $(this).siblings('.shopping-bag-popup').toggle();
-    return false
-  });
+
+  //$('.shopping-bag').on('click', function() {
+  //  $(this).siblings('.shopping-bag-popup').toggle();
+  //  return false
+  //});
 
 
   // blog
