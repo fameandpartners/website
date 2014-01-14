@@ -7,7 +7,7 @@
     - options = options_from_collection_for_select(colors, :to_s, :to_s)
     = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: '', multipe: true
   .section
-    h6 SELECT A SIZE (whats my size?)
+    h6.info.toggle-sizes href='#what-size' SELECT A SIZE (whats my size?)
     .sizebox
       - sizes.each_with_index do |size, index|
         div.button class=(index == 0 ? 'selected' : '') data-size="#{size}" = size
