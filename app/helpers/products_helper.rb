@@ -8,6 +8,15 @@ module ProductsHelper
     taxon = product.taxons.where(taxonomy_id: range_taxonomy.id).first
   end
 
+  def range_taxon_name_for(product)
+    taxon = range_taxon_for(product)
+    if taxon.present?
+      taxon.name.upcase
+    else
+      'LONG DRESSES' 
+    end
+  end
+
   def available_product_ranges
     range_taxonomy.present? ? range_taxonomy.root.children : []
   end
@@ -99,18 +108,23 @@ module ProductsHelper
     end
   end
 
-  def add_to_wishlist_link(product_or_variant)
+  def add_to_wishlist_link(product_or_variant, options = {})
+    options[:title] ||= 'Wish list'
+    options[:class] ||= ''
+    options[:class] += ' add-wishlist'
+
     if spree_user_signed_in?
       variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
 
-      link_options = { data: { action: 'add-to-wishlist', id: variant.id }}
+      link_options = { data: { action: 'add-to-wishlist', id: variant.id }, class: options[:class]}
       if in_wishlist?(variant)
-        link_to 'Remove', '#', link_options.merge(class: 'active add-wishlist')
+        link_options[:class] += ' active'
+        link_to 'Remove', '#', link_options
       else
-        link_to 'Wish list', '#', link_options.merge(class: 'add-wishlist')
+        link_to options[:title], '#', link_options
       end
     else # user not logged in, wishlist unavailable
-      link_to 'Wish list', spree_signup_path, class: 'add-wishlist', data: { action: 'auth-required' }
+      link_to options[:title], spree_signup_path, class: options[:class], data: { action: 'auth-required' }
     end
   end
 

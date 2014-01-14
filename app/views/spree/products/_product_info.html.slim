@@ -1,0 +1,54 @@
+.product-info
+  h6 = range_taxon_name_for(product)
+  h1.product-title
+    = product.name
+    span.price = price_for_product(product)
+  .section  
+    - options = options_from_collection_for_select(colors, :to_s, :to_s)
+    = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: '', multipe: true
+  .section
+    h6 SELECT A SIZE (whats my size?)
+    .sizebox
+      - sizes.each_with_index do |size, index|
+        div.button class=(index == 0 ? 'selected' : '') data-size="#{size}" = size
+  .section
+    .btn.empty.border.striped PLEASE SELECT A SIZE
+    = link_to 'add to cart', '#', class: 'btn buy-now'
+  .section      
+    = add_to_wishlist_link(product, title: '+ TO WISH LIST', class: 'btn empty border')
+  .section
+    ul.slider
+      li.opened 
+        .title DESCRIPTION
+        .text 
+          p = product_description(product)
+      li 
+        .title details
+        .text
+          p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+      li 
+        .title styling notes
+        .text
+          p = product.property('style_notes')
+      li 
+        .title delivery
+        .text
+          p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+      li 
+        .title returns
+        .text
+          p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+      li.opened 
+        .title recommended
+        .text
+          .category-catalog
+            .row
+              .grid-4
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-2.jpg'
+              .grid-4
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-2.jpg'
+              .grid-4
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-2.jpg'        

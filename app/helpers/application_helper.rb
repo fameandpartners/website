@@ -263,7 +263,7 @@ module ApplicationHelper
         line_item.money
       ].join("\n").html_safe
     else
-      line_item.money.html_safe
+      line_item.money.to_s.html_safe
     end
   end
 

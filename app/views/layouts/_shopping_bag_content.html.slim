@@ -5,22 +5,24 @@
       p
         = link_to "Our Dress Collection", collection_path
   - else
-    #shopping-arrow-up.arrow-up
-    ul#shopping-bag-popup.items-carousel
+    /#shopping-arrow-up.arrow-up
+    /ul#shopping-bag-popup.items-carousel
       = render partial: "shared/line_item", collection: current_order.line_items, as: :line_item
-    #shopping-arrow-down.arrow-down
-    .totals
+    /#shopping-arrow-down.arrow-down
+    /.totals
       .label.fleft Total
       .value.fright
         = current_order.currency
         span = current_order.display_total
-    .buttons
+    /.buttons
       = link_to 'View cart', spree.cart_path, class: 'continue'
       = form_for current_order, url:  spree.cart_path do |form|
         = form.submit 'Buy now', name: :checkout, class: 'buy-now'
       .ask-parents = link_to 'Invite someone to pay', '#', class: 'ask-parent-to-pay-button'
+    .shopping-list
+      = render partial: "shared/line_item", collection: current_order.line_items, as: :line_item
 
-.shopping-bag-popup style="display:none;"
+/.shopping-bag-popup style="display:none;"
   .shopping-list
     .item
       .picture

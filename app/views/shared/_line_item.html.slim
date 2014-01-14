@@ -3,7 +3,46 @@ ruby:
   product = variant.product
   hide_remove ||= false
   show_customizations ||= false
-li.item-block
+
+.item
+  .picture
+    = link_to small_image(product, itemprop: "image", width: 83, height: 115, alt: product.name), collection_product_path(product)
+  .info
+    h6 = link_to product.name, collection_product_path(product), target: 'blank'
+    .price = price_for_line_item(line_item)
+    .description
+      table
+        tr
+          td Color:
+          td 
+            - if show_customizations && line_item.personalization.present?
+              .color style="background-color: #{line_item.personalization.color};"
+            - else
+              - color = variant.dress_color
+              .color{class=color.try(:name)}
+        - if show_customizations && line_item.personalization.present?
+          tr
+            td Size
+            td = line_item.personalization.size
+          - line_item.personalization.customization_values.each do |value|
+            tr
+              td = value.customisation_type.presentation
+              td = value.presentation
+        - else
+          tr
+            td Size
+            td = variant.dress_size.try(:presentation)
+        tr
+          td Quantity:
+          td = line_item.quantity  
+        tr
+          td Estimated Delivery:
+          td = product.delivery_time_as_string
+  = link_to '#', class: 'delete' do
+    span.icon-close
+
+// <!-- old html -->
+/li.item-block
   .thumbnail
     = link_to small_image(product, itemprop: "image", width: 83, height: 115, alt: product.name), collection_product_path(product)
     - unless hide_remove

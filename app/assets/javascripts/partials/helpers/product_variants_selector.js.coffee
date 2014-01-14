@@ -2,31 +2,18 @@ window.helpers or= {}
 
 window.helpers.createProductVariantsSelector = (root) ->
   rootElement = root
-
   variantsSelector = {
-    selected: { color: null, size: null },
-    variants: null,
-    container: root,
+    selected:   { color: null, size: null },
+    variants:   null,
+    container:  root,
+    target:     null,
 
     init: (variants, selected) ->
       variantsSelector.variants = variants
-      rootElement.find(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
-      $hoverPopup = $('<div />', class: 'color-image-popup').html('<img />')
-      $hoverPopup.appendTo($('body'))
+      variantsSelector.target = rootElement.find('.section .btn.buy-now')
 
-      rootElement.find(".colors-choser .colors .color[data-image]").on 'mouseenter', ->
-        if $(this).data('image').length
-          $hoverPopup.find('img').prop('src', $(this).data('image'))
-          $hoverPopup.stop(true, false).animate(opacity: 1, 'fast').css(left: $(this).offset().left-($hoverPopup.outerWidth() - $(this).outerWidth())/2, top: $(this).offset().top - ($hoverPopup.outerHeight() + 5))
-      rootElement.find(".colors-choser .colors .color[data-image]").on 'mouseleave', ->
-        $hoverPopup.stop(true, false).animate(opacity: 0, 'fast')
-
-
-      rootElement.find('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
-      variantsSelector.preselectSize()
-      variantsSelector.selectOptions.call(variantsSelector, selected)
-      rootElement.find('#toggle-selectbox').chosen()
-      rootElement.find('.selectbox').chosen()
+      rootElement.find(".section .sizebox .button").on('click', variantsSelector.onSizeClickHandler)
+      rootElement.find('select#colour').on('change', _.bind(variantsSelector.onVariantsChanged, variantsSelector))
 
       if window.shopping_cart
         window.shopping_cart.on('item_added',   variantsSelector.cartItemsChangedHandler)
@@ -34,104 +21,30 @@ window.helpers.createProductVariantsSelector = (root) ->
 
       return variantsSelector
 
-    preselectSize: () ->
-      if rootElement.find('#toggle-selectbox option[value=""]').length > 0
-        variantsSelector.selected.size = null
-        newSize = ''
-      else
-        newSize = rootElement.find('#toggle-selectbox option:first').val()
-        variantsSelector.selected.size = newSize
-
-      rootElement.find('#toggle-selectbox').val(newSize)
-
-    onColorClickHandler: (e) ->
-      e.preventDefault()
-      $(e.currentTarget).addClass('active').siblings().removeClass('active')
-      color = $(e.currentTarget).data('color')
-      variantsSelector.selectColor.call(variantsSelector, color)
-
-    onSizeChangeHandler: (e) ->
-      e.preventDefault()
-      size = $(e.currentTarget).val()
-      variantsSelector.selectSize.call(variantsSelector, size)
-
     cartItemsChangedHandler: (e, data) ->
       variantsSelector.onVariantsChanged.call(variantsSelector)
 
-    selectColor: (color) ->
-      @selected.color = color
-      avaialable_variants = _.where(@variants, { color: color })
-      @updateSelectbox(rootElement.find('#toggle-selectbox'), avaialable_variants, 'size')
-      @onVariantsChanged()
-
-    selectSize: (size) ->
-      @selected.size = size
-      @onVariantsChanged()
-
-      if !!size
-        avaialable_variants = _.where(@variants, { size: size })
+    exportSelectedVariant: (variant) ->
+      if ! _.isEmpty(variant)
+        variantsSelector.target.data(id: variant.id, error: null)
       else
-        avaialable_variants = @variants
-      @updateColorsSelector(avaialable_variants)
+        variantsSelector.target.data(id: null, error: 'Please, select size and colour')
+      variant
+
+    onSizeClickHandler: (e) ->
+      # update DOM
+      e.preventDefault()
+      $(e.target).siblings().removeClass('selected')
+      $(e.target).addClass('selected')
+      # update selected data
+      variantsSelector.onVariantsChanged.call(variantsSelector)
 
     onVariantsChanged: () ->
-      window.initProductImagesCarousel(@selected) if window.initProductImagesCarousel
+      variantsSelector.selected.size   = rootElement.find(".section .sizebox .button.selected:first").data('size').toString()
+      variantsSelector.selected.color  = rootElement.find('select#colour').val()
 
       variant = @getSelectedVariant()
-
       @exportSelectedVariant(variant)
-      @updateItemAvailability(variant)
-
-      if ! _.isEmpty(variant)
-        $button = rootElement.find('.buy-wishlist .buy-now')
-        $button.trigger('variant_selected', variant)
-
-    updateSelectbox: (selectBox, available_options, method_name) ->
-      selectBox.find("option[value!='']").attr('disabled', 'disabled').removeClass('unavailable')
-
-      _.each(available_options, (variant) ->
-        selectOption = selectBox.find("option[value=#{variant.size}]")
-        selectOption.removeAttr('disabled')
-        if !variant.available
-          selectOption.addClass('unavailable')
-          selectOption.html("<span style='text-decoration: line-through;'>#{variant.size} SOLD OUT</span>")
-        else
-          selectOption.text(variant.size)
-        selectOption.addClass('unavailable')
-      )
-
-      selectBox.trigger("liszt:updated")
-
-    updateColorsSelector: (avaialable_variants) ->
-      $('.colors-choser .colors .color').hide()
-      _.each(avaialable_variants, (variant) ->
-        $(".colors-choser .colors .color[data-color='#{variant.color}']").show()
-      )
-      return
-
-    exportSelectedVariant: (variant) ->
-      # update buttons
-      $button = rootElement.find('.buy-wishlist .buy-now')
-      $wishlist_button = rootElement.find('.buy-wishlist .add-wishlist')
-      $selectedSize = rootElement.find('#toggle_selectbox_chzn a.chzn-single').removeClass('unavailable')
-
-      if ! _.isEmpty(variant)
-        if variant.available
-          $button.data(id: variant.id, error: null)
-          $wishlist_button.data(id: variant.id)
-          if variant.purchased
-            $button.addClass('added')
-          else
-            $button.removeClass('added')
-            # don't change master variant data, if product don't have variants
-        else
-          $button.removeClass('added')
-          $button.data(id: null, error: 'Sorry, this item is out of stock')
-          window.helpers.showErrors(rootElement.find('.size-select'), 'Sorry, out of stock')
-          $selectedSize.addClass('unavailable')
-      else if @variants? && @variants.length > 0
-        $button.removeClass('added')
-        $button.data(id: null, error: 'Please, select size and colour')
 
     getSelectedVariant: () ->
       variant = _.findWhere(@variants, @selected)
@@ -141,28 +54,171 @@ window.helpers.createProductVariantsSelector = (root) ->
         variant
       else
         {}
-
-    updateItemAvailability: (variant) ->
-      $button = rootElement.find('.buy-wishlist .buy-now')
-
-      if variant and variant.available
-        $button.removeAttr('disabled').removeClass('out-of-stock')
-      else
-        $button.attr('disabled', true).addClass('out-of-stock')
-
-    selectOptions: (selected) ->
-      if selected
-        variant = _.findWhere(@variants, { id: selected.id })
-        variant or= _.findWhere(@variants, selected)
-        variant or= _.findWhere(@variant, { color: selected.color })
-        variant or= _.findWhere(@variant, { size: selected.size })
-
-      if variant
-        variantsSelector.selectSizeAndColor(variant.size, variant.color)
-
-    selectSizeAndColor: (size, color) ->
-      rootElement.find('#toggle-selectbox').val(size).trigger("liszt:updated")
-      rootElement.find(".colors-choser .colors .color.#{color}").click()
-
-      variantsSelector.selectSize.call(variantsSelector, size)
   }
+
+#window.helpers.createProductVariantsSelector = (root) ->
+#  rootElement = root
+#
+#  variantsSelector = {
+#    selected: { color: null, size: null },
+#    variants: null,
+#    container: root,
+#
+#    init: (variants, selected) ->
+#      variantsSelector.variants = variants
+#      rootElement.find(".colors-choser .colors .color:not(.active)").on('click', variantsSelector.onColorClickHandler)
+#      $hoverPopup = $('<div />', class: 'color-image-popup').html('<img />')
+#      $hoverPopup.appendTo($('body'))
+#
+#      rootElement.find(".colors-choser .colors .color[data-image]").on 'mouseenter', ->
+#        if $(this).data('image').length
+#          $hoverPopup.find('img').prop('src', $(this).data('image'))
+#          $hoverPopup.stop(true, false).animate(opacity: 1, 'fast').css(left: $(this).offset().left-($hoverPopup.outerWidth() - $(this).outerWidth())/2, top: $(this).offset().top - ($hoverPopup.outerHeight() + 5))
+#      rootElement.find(".colors-choser .colors .color[data-image]").on 'mouseleave', ->
+#        $hoverPopup.stop(true, false).animate(opacity: 0, 'fast')
+#
+#
+#      rootElement.find('#toggle-selectbox').on('change', variantsSelector.onSizeChangeHandler)
+#      variantsSelector.preselectSize()
+#      variantsSelector.selectOptions.call(variantsSelector, selected)
+#      rootElement.find('#toggle-selectbox').chosen()
+#      rootElement.find('.selectbox').chosen()
+#
+#      if window.shopping_cart
+#        window.shopping_cart.on('item_added',   variantsSelector.cartItemsChangedHandler)
+#        window.shopping_cart.on('item_removed', variantsSelector.cartItemsChangedHandler)
+#
+#      return variantsSelector
+#
+#    preselectSize: () ->
+#      if rootElement.find('#toggle-selectbox option[value=""]').length > 0
+#        variantsSelector.selected.size = null
+#        newSize = ''
+#      else
+#        newSize = rootElement.find('#toggle-selectbox option:first').val()
+#        variantsSelector.selected.size = newSize
+#
+#      rootElement.find('#toggle-selectbox').val(newSize)
+#
+#    onColorClickHandler: (e) ->
+#      e.preventDefault()
+#      $(e.currentTarget).addClass('active').siblings().removeClass('active')
+#      color = $(e.currentTarget).data('color')
+#      variantsSelector.selectColor.call(variantsSelector, color)
+#
+#    onSizeChangeHandler: (e) ->
+#      e.preventDefault()
+#      size = $(e.currentTarget).val()
+#      variantsSelector.selectSize.call(variantsSelector, size)
+#
+#    cartItemsChangedHandler: (e, data) ->
+#      variantsSelector.onVariantsChanged.call(variantsSelector)
+#
+#    selectColor: (color) ->
+#      @selected.color = color
+#      avaialable_variants = _.where(@variants, { color: color })
+#      @updateSelectbox(rootElement.find('#toggle-selectbox'), avaialable_variants, 'size')
+#      @onVariantsChanged()
+#
+#    selectSize: (size) ->
+#      @selected.size = size
+#      @onVariantsChanged()
+#
+#      if !!size
+#        avaialable_variants = _.where(@variants, { size: size })
+#      else
+#        avaialable_variants = @variants
+#      @updateColorsSelector(avaialable_variants)
+#
+#    onVariantsChanged: () ->
+#      window.initProductImagesCarousel(@selected) if window.initProductImagesCarousel
+#
+#      variant = @getSelectedVariant()
+#
+#      @exportSelectedVariant(variant)
+#      @updateItemAvailability(variant)
+#
+#      if ! _.isEmpty(variant)
+#        $button = rootElement.find('.buy-wishlist .buy-now')
+#        $button.trigger('variant_selected', variant)
+#
+#    updateSelectbox: (selectBox, available_options, method_name) ->
+#      selectBox.find("option[value!='']").attr('disabled', 'disabled').removeClass('unavailable')
+#
+#      _.each(available_options, (variant) ->
+#        selectOption = selectBox.find("option[value=#{variant.size}]")
+#        selectOption.removeAttr('disabled')
+#        if !variant.available
+#          selectOption.addClass('unavailable')
+#          selectOption.html("<span style='text-decoration: line-through;'>#{variant.size} SOLD OUT</span>")
+#        else
+#          selectOption.text(variant.size)
+#        selectOption.addClass('unavailable')
+#      )
+#
+#      selectBox.trigger("liszt:updated")
+#
+#    updateColorsSelector: (avaialable_variants) ->
+#      $('.colors-choser .colors .color').hide()
+#      _.each(avaialable_variants, (variant) ->
+#        $(".colors-choser .colors .color[data-color='#{variant.color}']").show()
+#      )
+#      return
+#
+#    exportSelectedVariant: (variant) ->
+#      # update buttons
+#      $button = rootElement.find('.buy-wishlist .buy-now')
+#      $wishlist_button = rootElement.find('.buy-wishlist .add-wishlist')
+#      $selectedSize = rootElement.find('#toggle_selectbox_chzn a.chzn-single').removeClass('unavailable')
+#
+#      if ! _.isEmpty(variant)
+#        if variant.available
+#          $button.data(id: variant.id, error: null)
+#          $wishlist_button.data(id: variant.id)
+#          if variant.purchased
+#            $button.addClass('added')
+#          else
+#            $button.removeClass('added')
+#            # don't change master variant data, if product don't have variants
+#        else
+#          $button.removeClass('added')
+#          $button.data(id: null, error: 'Sorry, this item is out of stock')
+#          window.helpers.showErrors(rootElement.find('.size-select'), 'Sorry, out of stock')
+#          $selectedSize.addClass('unavailable')
+#      else if @variants? && @variants.length > 0
+#        $button.removeClass('added')
+#        $button.data(id: null, error: 'Please, select size and colour')
+#
+#    getSelectedVariant: () ->
+#      variant = _.findWhere(@variants, @selected)
+#      if variant and window.shopping_cart
+#        line_item = _.find(window.shopping_cart.line_items, (line_item) -> line_item.variant_id == variant.id)
+#        variant.purchased = !!line_item
+#        variant
+#      else
+#        {}
+#
+#    updateItemAvailability: (variant) ->
+#      $button = rootElement.find('.buy-wishlist .buy-now')
+#
+#      if variant and variant.available
+#        $button.removeAttr('disabled').removeClass('out-of-stock')
+#      else
+#        $button.attr('disabled', true).addClass('out-of-stock')
+#
+#    selectOptions: (selected) ->
+#      if selected
+#        variant = _.findWhere(@variants, { id: selected.id })
+#        variant or= _.findWhere(@variants, selected)
+#        variant or= _.findWhere(@variant, { color: selected.color })
+#        variant or= _.findWhere(@variant, { size: selected.size })
+#
+#      if variant
+#        variantsSelector.selectSizeAndColor(variant.size, variant.color)
+#
+#    selectSizeAndColor: (size, color) ->
+#      rootElement.find('#toggle-selectbox').val(size).trigger("liszt:updated")
+#      rootElement.find(".colors-choser .colors .color.#{color}").click()
+#
+#      variantsSelector.selectSize.call(variantsSelector, size)
+#  }

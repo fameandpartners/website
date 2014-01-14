@@ -12,40 +12,40 @@ window.populateImagesCarousel = ($wrapper, filterOptions = {}) ->
 $(".products.show").ready ->
   window.shopping_cart.init(window.bootstrap)
 
-  # enable product main tabs
-  window.helpers.enableTabs($('.tabs'))
-
-  # carousel for similar or related products
-  carousel = $("#product-items").carouFredSel(
-    window.helpers.get_horizontal_carousel_options()
-  )
-  # enable images carousel
-  window.initProductImagesCarousel = (filterOptions = {}) ->
-    $wrapper = $("#product-images")
-    populateImagesCarousel($wrapper, filterOptions)
-
-    $wrapper.carouFredSel(
-      window.helpers.get_vertical_carousel_options(
-        width: 83
-        height: 528
-        items:
-          start: 0
-          visible: 4
-          height: 132
-        scroll:
-          items: 1
-      )
-    )
-
-    # show big images from carouseled small images
-    viewer = null
-    viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()
-
-  initProductImagesCarousel()
+#  # enable product main tabs
+#  window.helpers.enableTabs($('.tabs'))
+#
+#  # carousel for similar or related products
+#  carousel = $("#product-items").carouFredSel(
+#    window.helpers.get_horizontal_carousel_options()
+#  )
+#  # enable images carousel
+#  window.initProductImagesCarousel = (filterOptions = {}) ->
+#    $wrapper = $("#product-images")
+#    populateImagesCarousel($wrapper, filterOptions)
+#
+#    $wrapper.carouFredSel(
+#      window.helpers.get_vertical_carousel_options(
+#        width: 83
+#        height: 528
+#        items:
+#          start: 0
+#          visible: 4
+#          height: 132
+#        scroll:
+#          items: 1
+#      )
+#    )
+#
+#    # show big images from carouseled small images
+#    viewer = null
+#    viewer = window.helpers.buildImagesViewer($('#content .wrap')).init()
+#
+#  initProductImagesCarousel()
 
   # enable color-size combination selection
   if window.product_variants
-    variantsSelector = window.helpers.createProductVariantsSelector($('#content .wrap'))
+    variantsSelector = window.helpers.createProductVariantsSelector($('#content .product-info'))
     variantsSelector.init(window.product_variants)
 
   # add quick view feature
@@ -59,7 +59,7 @@ $(".products.show").ready ->
   # what size i'm
   $('.toggle-sizes').fancybox({width: '1000', height: '183'})
 
-  window.helpers.addBuyButtonHandlers($('.buy-wishlist .buy-now'), { expandShoppingBag: true})
+  window.helpers.addBuyButtonHandlers($('.buy-now'), { expandShoppingBag: true})
 
   # send to friend
   $('a.send-to-friend').on('click', (e) ->
@@ -96,3 +96,8 @@ $(".products.show").ready ->
       paymentRequestModal.show(variantId)
     else
       window.helpers.showErrors($(e.currentTarget).parent(), 'Please, select size and colour')
+
+  # toggle accordeon bars on right
+  $('ul.slider li').on('click', (e) ->
+    $(e.target).closest('li').toggleClass('opened')
+  )
