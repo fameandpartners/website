@@ -77,18 +77,30 @@ noscript
           .input
             label Email
             = f.text_field :email, type: 'email'
-          .input
+          .input.small
             label Blog
             = f.text_field :blog, type: 'url'
-          .input
+          .input.inline
+            label Visitors p/month
+            = f.text_field :blog_size, type: 'text'
+          .clearfix
+          .input.small
             label Pinterest
-            = f.text_field :pinterest, type: 'url'
+            = f.text_field :pinterest, type: 'url' 
+          .input.inline
+            label Number of Followers
+            = f.text_field :pinterest_size, type: 'text'
+          .clearfix
+          .input.small
+            label Twitter
+            = f.text_field :twitter, type: 'url'
+          .input.inline
+            label Number of Followers
+            = f.text_field :twitter_size, type: 'text'
+          .clearfix
           .input
             label Facebook
             = f.text_field :facebook, type: 'url'
-          .input
-            label Twitter
-            = f.text_field :twitter, type: 'url'
           .submit
             = f.submit "Apply now"
     .how-it-works

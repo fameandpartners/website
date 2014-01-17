@@ -171,7 +171,7 @@
       font: 400 80px/1.1 $fontFour;
       text-transform: uppercase;
       color: #000;
-    }
+    } 
     .input {
       label {
         width: 358px;
@@ -195,6 +195,23 @@
         box-shadow: 6px 6px 0 #000;
       }
     }
+    .small{
+      float: left;
+      input{
+        width: 240px;
+      }
+    }
+    .inline{
+      label{
+        width: 70px;
+        font: 400 16px/1 $fontFive;
+      }
+      input{
+        width: 120px;
+        margin: 0 0 0 10px;
+      }
+    }
+    
     .submit {
       margin: 20px 0 80px;
       input {

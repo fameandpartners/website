@@ -1,10 +1,18 @@
-hi, team
+hi team,
 
-user: <%= @fame_chain.name %>
+<%= @fame_chain.name %> has submitted fame chain request.
+user email address: <%= @fame_chain.email %>
 
-has submitted fame chain request
+
+::URLS::
 <% %w[blog pinterest facebook twitter].each do |url_type| %>
   <%= url_type.humanize %>: <%= @fame_chain.send(url_type) %>
 <% end %>
 
-please, answer to <%= @fame_chain.email %>
+::STATS::
+  blog visitors p/month: <%= @fame_chain.blog_size %>
+  pinterest followers: <%= @fame_chain.pinterest_size %>
+  twitter followers: <%= @fame_chain.twitter_size %>
+
+
+
