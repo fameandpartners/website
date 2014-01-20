@@ -1,0 +1,1334 @@
+.quiz-box .quiz-overlay {
+  background: #000;
+  background: rgba(0, 0, 0, .7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.quiz-wrapper-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1100px;
+  height: 720px;
+  z-index: 2000;
+  margin: -360px 0 0 -550px;
+  background: #fff;
+  z-index: 11;
+
+  top: 30px;
+  margin-top: 0;
+  .close-quiz {
+    position: absolute;
+    top: 19px;
+    right: 19px;
+    z-index: 2;
+    cursor: pointer;
+    display: block;
+    width: 46px;
+    height: 46px;
+    background: url('_quiz/close.png') no-repeat;
+  }
+}
+
+.quiz-box {
+  .opacity-zero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+  .quiz-box-inner {
+    height: 720px;
+    padding: 42px 20px 130px;
+    position: relative;
+    @include box-sizing(border-box);
+  }
+  .signup-box-wrapper {
+    width: 1074px;
+    height: 525px;
+    overflow: hidden;
+    background: image-url('bg-quiz-start.jpg') center center no-repeat;
+    background-size: cover;
+  }
+  .signup-box,
+  .thanks-box {
+    height: 530px;
+    text-align: center;
+    h1 {
+      padding-top: 80px;
+      font: 300 48px/1 $fontTwo;
+      font-style: italic;
+      width: 100%;
+      text-align: center;
+    }
+    h2 {
+      font: 300 24px/1 $fontOne;
+      text-transform: uppercase;
+      margin: 40px auto 0 auto;
+      width: 600px;
+      &:before {
+        background: #454545;
+      }
+    }
+    .subtitle {
+      margin: 35px auto;
+      font-size: 28px;
+      width: 500px;
+    }
+  }
+  .signup-box {
+    background: #fff;
+    width: 610px;
+    height: 310px;
+    margin: 107px auto 0;
+    .title, .subtitle {
+      text-align: center;
+      text-transform: uppercase;
+      color: #333;
+    }
+    .title {
+      font: 100 32px/1 $fontOne;
+      position: relative;
+      padding: 30px 0 11px;
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin: 0 0 0 -110px;
+        background: #333;
+        width: 220px;
+        height: 1px;
+      }
+    }
+    .subtitle {
+      margin: 9px 0 25px;
+      width: auto;
+      font: 400 58px/1 $fontTwo;
+    }
+    .desc {
+      font: 300 17px/1.2 $fontOne;
+      text-align: center;
+      margin: 0 0 36px;
+    }
+    .signup-buttons {
+      text-align: center;
+      font: 300 14px/33px $fontOne;
+      .facebook-signup {
+        vertical-align: top;
+        display: inline-block;
+      }
+      .or {
+        margin: 0 16px;
+        vertical-align: top;
+        display: inline-block;
+        text-transform: uppercase;
+        font-size: 18px;
+      }
+      .regular-signup {
+        padding: 0 13px;
+        height: 33px;
+        vertical-align: top;
+        display: inline-block;
+        background: #454545;
+        color: #fff;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 400;
+        box-shadow: 0 1px 3px rgba(255, 255, 255, .7) inset;
+      }
+    }
+    .signin-link {
+      position: absolute;
+      padding: 12px 26px 6px;
+      bottom: 0;
+      right: 0;
+      font-size: 18px;
+      font-style: italic;
+      background: #bffbef;
+      a {
+        font-weight: 700;
+      }
+    }
+    .get20{
+      width: 170px;
+      height: 170px;
+      position: absolute;
+      top: 30px;
+      right: 160px;
+      z-index: 100;
+      background: image-url('quiz/get20.png') center center no-repeat;
+    }
+  }
+  .thanks-box {
+    position: relative;
+    h1, h2 {
+      position: relative;
+      z-index: 2;
+    }
+    .image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+  }
+  .steps-box {
+    width: 1054px;
+    .questions-count {
+      position: absolute;
+      top: 19px;
+      left: 19px;
+      font: 400 18px/1 $fontThree;
+      color: #fff;
+      background-color: #000;
+      width: 82px;
+      height: 36px;
+      line-height: 35px;
+      white-space: nowrap;
+      text-align: center;
+    }
+    h1 {
+      font: 400 47px/0.8 $fontThree;
+      text-align: center;
+      padding-top: 4px;
+      em { 
+        text-transform: none;
+        display: block;
+        font-family: $fontTwo;
+      }
+    }
+    .subtitle {
+      text-align: center;
+      position: relative;
+      z-index: 5;
+      span {
+        display: inline-block;
+        margin-top: 20px;
+        font: 400 italic 23px/1 $fontThree;
+        padding: 5px 20px;
+        color: #fff;
+        background-color: #000;
+      }
+    }
+    .photos-wrapper {
+      margin: 25px 0 0;
+      height: 425px;
+      overflow: hidden;
+      position: relative;
+      .photos-nav {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 40px;
+        bottom: 12px;
+        background-color: rgba(255, 255, 255, 0.75);
+        box-shadow: 0 2px 2px #000, 0 12px 0 #fff;
+        &:before, &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: -12px;
+          width: 100px;
+          height: 12px;
+          background: url('_quiz/photos-nav-shadow-l.png') no-repeat;
+        }
+        &:after {
+          left: auto;
+          right: 0;
+          background: url('_quiz/photos-nav-shadow-r.png') no-repeat;
+        }
+        .up, .down {
+          position: absolute;
+          top: 50%;
+          height: 20px;
+          width: 20px;
+          margin-top: -10px;
+          cursor: pointer;
+        }
+        .up {
+          left: 10px;
+          .arrows-line-vertical:after { display: none;}
+        }
+        .down { 
+          right: 10px;
+          .arrows-line-vertical:before { display: none;}
+        }
+        .arrows-line-vertical {
+          height: 20px;
+          margin-left: 10px;
+        }
+      }
+    }
+    .photos {
+      .item {
+        width: 13.4333%;
+        margin-bottom: 10px;
+        height: auto;
+        &.active {
+          .selected { display: block;}
+        }
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+        label {
+          cursor: pointer;
+          input[type=checkbox], input[type=radio] {
+            display: none;
+          }
+        }
+        .selected {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          margin: -27px 0 0 -60px;
+          height: 55px;
+          width: 120px;
+          background-color: rgba(255, 255, 255, 0.75);
+          border: solid 1px #000;
+          line-height: 55px;
+          text-align: center;
+          font-size: 23px;
+          font-family: $fontThree;
+          font-style: italic;
+          display: none;
+        }
+      }
+      // li {
+      //   list-style: none;
+      //   float: left;
+      //   margin: 0 0 0 37px;
+      //   box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+      //   width: 176px;
+      //   position: relative;
+      //   .label {
+      //     bottom: 30px;
+      //     left: 30px;
+      //     right: 30px;
+      //     position: absolute;
+      //     background: #e8e8e8;
+      //     text-transform: uppercase;
+      //     font-size: 12px;
+      //     padding: 4px 0 0;
+      //     text-align: center;
+      //   }
+      //   &:first-child {
+      //     margin: 0;
+      //   }
+      //   &.active {
+      //     label {
+      //       border-color: #b7f0e5;
+      //     }
+      //   }
+      // }
+    }
+    .choices {
+      font-size: 0;
+      .item {
+        display: inline-block;
+        vertical-align: top;
+        text-align: center;
+        position: relative;
+        width: 20%;
+        margin-top: 70px;
+        font-size: 30px;
+        font-family: $fontThree;
+        input[type=checkbox], input[type=radio] { display: none;}
+        &.active:after {
+          display: block;
+        } 
+        &:after {
+          content: '';
+          z-index: -1;
+          position: absolute;
+          left: 0;
+          right: 0;
+          background-repeat: no-repeat;
+          background-position: center center;
+          display: none;
+        }
+        &.active-type-0:after {
+          background-image: url('_quiz/choice-type-0.png');
+          top: -11px;
+          height: 56px;
+        }
+        &.active-type-1:after {
+          background-image: url('_quiz/choice-type-1.png');
+          top: -20px;
+          left: 30px;
+          height: 32px;
+        }
+        &.active-type-2:after {
+          background-image: url('_quiz/choice-type-2.png');
+          top: -21px;
+          height: 62px;
+        }
+        &.active-type-3:after {
+          background-image: url('_quiz/choice-type-3.png');
+          top: -35px;
+          height: 72px;
+        }
+      }
+    }
+    // .choices {
+    //   margin: 10px 7px 20px;
+    //   overflow: hidden;
+    //   li {
+    //     margin: 0 0 20px;
+    //     width: 208px;
+    //     float: left;
+    //     text-align: center;
+    //     text-transform: uppercase;
+    //     font: 400 16px/1 $fontOne;
+    //     label {
+    //       text-decoration: none;
+    //       display: inline-block;
+    //       padding: 4px;
+    //       border: 5px solid transparent;
+    //       position: relative;
+    //       overflow: hidden;
+    //       width: 154px;
+    //       height: 40px;
+    //       line-height: 40px;
+    //       input {
+    //         position: absolute;
+    //         top: 0;
+    //         left: 0;
+    //         width: 200px;
+    //         height: 200px;
+    //         opacity: 0;
+    //         filter: alpha(opacity=0);
+    //       }
+    //     }
+    //     &.active {
+    //       label {
+    //         border-color: #b7f0e5;
+    //       }
+    //     }
+    //   }
+    //   &.brands{
+    //     margin-left: 100px;
+    //     li{
+    //       width: 280px;
+    //     }
+    //   }
+    // }
+    .nails {
+      width: 956px;
+      margin: 30px auto;
+      li {
+        width: 126px;
+        height: 126px;
+        margin: 0 10px;
+        border: 5px solid transparent;
+        position: relative;
+        text-align: center;
+        display: inline-block;
+        input {
+          opacity: 0;
+          filter: alpha(opacity=0);
+        }
+        .image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+        .name {
+          top: 50%;
+          left: 8px;
+          right: 8px;
+          margin: -8px 0 0;
+          position: absolute;
+          background: #e8e8e8;
+          text-transform: uppercase;
+          font-size: 12px;
+          padding: 4px 0 0;
+        }
+        &.active {
+          border-color: #b7f0e5;
+        }
+      }
+    }
+    .stars, .lips {
+      margin: 20px 0 0;
+      font-size: 0;
+      white-space: nowrap;      
+      .item {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: bottom;
+        width: 105px;
+        position: relative;
+        label {
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          input[type=radio] { display: none;}
+        }
+        // &.active {
+        //   background-position: 0 0;
+        // }
+      }
+    }
+    .stars {
+      .item {
+        &.step-0 {
+          height: 67px;
+          position: relative;
+          bottom: -37px;
+          width: 103px;
+          background: url('_quiz/steps/0.png') no-repeat;
+          &.active { background-position: 0 -67px;}
+        }
+        &.step-1 {
+          height: 58px;
+          background: url('_quiz/steps/1.png') no-repeat;
+          &.active { background-position: 0 -58px;}
+        }
+        &.step-2 {
+          height: 86px;
+          background: url('_quiz/steps/2.png') no-repeat;
+          &.active { background-position: 0 -86px;}
+        }
+        &.step-3 {
+          height: 114px;
+          background: url('_quiz/steps/3.png') no-repeat;
+          &.active { background-position: 0 -114px;}
+        }
+        &.step-4 {
+          height: 142px;
+          background: url('_quiz/steps/4.png') no-repeat;
+          &.active { background-position: 0 -142px;}
+        }
+        &.step-5 {
+          height: 171px;
+          background: url('_quiz/steps/5.png') no-repeat;
+          &.active { background-position: 0 -171px;}
+        }
+        &.step-6 {
+          height: 199px;
+          background: url('_quiz/steps/6.png') no-repeat;
+          &.active { background-position: 0 -199px;}
+        }
+        &.step-7 {
+          height: 227px;
+          background: url('_quiz/steps/7.png') no-repeat;
+          &.active { background-position: 0 -227px;}
+        }
+        &.step-8 {
+          height: 255px;
+          background: url('_quiz/steps/8.png') no-repeat;
+          &.active { background-position: 0 -255px;}
+        }
+        &.step-9 {
+          height: 363px;
+          width: 109px;
+          background: url('_quiz/steps/9.png') no-repeat;
+          &.active { background-position: 0 -363px;}
+        }
+      }
+    }
+    .lips {
+      margin-top: 80px;
+      .item {
+        width: 104px;
+        background-color: #000;
+        &.step-0, &.step-1 { height: 57px;}
+        &.step-2, &.step-3 { height: 113px;}
+        &.step-4, &.step-5 { height: 170px;}
+        &.step-6, &.step-7 { height: 226px;}
+        &.step-8, &.step-9 { height: 282px;}
+        &.step-0 { 
+          background: url('_quiz/lips/0.png') no-repeat;
+          &.active { background-position: 0 -57px;}
+        }
+        &.step-1 { 
+          background: url('_quiz/lips/1.png') no-repeat;
+          &.active { background-position: 0 -57px;}
+        }
+        &.step-2 { 
+          background: url('_quiz/lips/2.png') no-repeat;
+          &.active { background-position: 0 -113px;}
+        }
+        &.step-3 { 
+          background: url('_quiz/lips/3.png') no-repeat;
+          &.active { background-position: 0 -113px;}
+        }
+        &.step-4 { 
+          background: url('_quiz/lips/4.png') no-repeat;
+          &.active { background-position: 0 -170px;}
+        }
+        &.step-5 { 
+          background: url('_quiz/lips/5.png') no-repeat;
+          width: 107px;
+          &.active { background-position: 0 -170px;}
+        }
+        &.step-6 { 
+          background: url('_quiz/lips/6.png') no-repeat;
+          width: 108px;
+          &.active { background-position: 0 -226px;}
+        }
+        &.step-7 { 
+          background: url('_quiz/lips/7.png') no-repeat;
+          width: 107px;
+          &.active { background-position: 0 -226px;}
+        }
+        &.step-8 { 
+          background: url('_quiz/lips/8.png') no-repeat;
+          &.active { background-position: 0 -282px;}
+        }
+        &.step-9 { 
+          background: url('_quiz/lips/9.png') no-repeat;
+          &.active { background-position: 0 -282px;}
+        }
+      }
+    }
+    .progress-next {
+      position: absolute;
+      margin: 0 84px;
+      bottom: 40px;
+      left: 20px;
+      right: 20px;
+      .progress-bar {
+        border: solid 1px #000;
+        background-color: #fff;
+        height: 34px;
+        .filler {
+          position: relative;
+          text-align: right;
+          height: 34px;
+          background: url('_pink-stripe.png');
+          .tooltip {
+            padding: 0 5px;
+            font: 400 23px/34px $fontThree;
+          }
+        }
+      }
+      .prev, .next {
+        text-align: center;
+        position: absolute;
+        top: 0;
+        height: 36px;
+        width: 84px;
+        line-height: 36px;
+        a {
+          text-decoration: none;
+          font-size: 31px;
+        }
+      }
+      .prev {
+        left: -84px;
+        a { font-family: $fontThree;}
+      }
+      .next {
+        right: -84px;
+        a { 
+          font-family: $fontTwo;
+          text-transform: none;
+          font-style: italic;
+        }
+      }
+    }
+  }
+  .sexiness {
+    width: 855px;
+    margin: 60px auto 0;
+    overflow: hidden;
+    position: relative;
+    .sexiness-profile {
+      width: 200px;
+      height: 200px;
+      float: left;
+      background: image-url('quiz/sexiness.jpg') center 7px no-repeat #fff;
+      padding: 7px;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      &.second {
+        float: right;
+        background-position: center -207px;
+      }
+    }
+    .values {
+      margin: 78px 0 0 36px;
+      float: left;
+      li {
+        float: left;
+        margin: 0 0 0 10px;
+        &.active {
+          label {
+            padding: 0;
+            border: 8px solid #b7f0e5;
+          }
+        }
+      }
+      label {
+        display: block;
+        padding: 7px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        .inner {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+        }
+        input[type=radio] {
+          opacity: 0;
+          filter: alpha(opacity=0);
+        }
+      }
+      .value-1 {
+        .inner {
+          background: #b4e1f4;
+        }
+      }
+      .value-2 {
+        .inner {
+          background: #bcc9da;
+        }
+      }
+      .value-3 {
+        .inner {
+          background: #cdaab7;
+        }
+      }
+      .value-4 {
+        .inner {
+          background: #ea8e94;
+        }
+      }
+      .value-5 {
+        .inner {
+          background: #f48082;
+        }
+      }
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #ddd;
+      z-index: -1;
+    }
+  }
+}
+
+#content .style-report {
+  border: 10px solid #fff;
+  background: #fafafa;
+  width: 932px;
+  position: relative;
+  margin: 40px auto 24px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  .page-name {
+    position: absolute;
+    z-index: 2;
+    top: 5px;
+    left: 262px;
+    .title {
+      text-transform: uppercase;
+      font: 400 62px/1 $fontFour;
+    }
+    .subtitle {
+      margin: 0;
+      width: auto;
+      text-align: left;
+      position: absolute;
+      left: 200px;
+      top: 44px;
+      font-style: italic;
+      color: #fff;
+      font: 400 italic 50px/1 $fontFour;
+    }
+  }
+  .grid {
+    overflow: hidden;
+    margin: 80px 0 64px;
+    .column {
+      float: left;
+    }
+    .block {
+      position: relative;
+      img {
+        display: block;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        &.large {
+          -webkit-filter: none;
+          filter: none;
+        }
+      }
+    }
+    .stat {
+      position: absolute;
+      z-index: 2;
+      text-align: center;
+      bottom: 26px;
+      left: 50%;
+      width: 116px;
+      height: 116px;
+      margin: 0 0 0 -58px;
+      border-radius: 50%;
+      background: #333;
+      background: rgba(51, 51, 51, .8);
+      color: #fff;
+      text-transform: uppercase;
+      font: 400 26px/1 $fontFour;
+      .rate, .label {
+        position: relative;
+        &:before {
+          width: 56px;
+          height: 1px;
+          background: #fff;
+          background: rgba(255, 255, 255, .4);
+          content: '';
+          position: absolute;
+          left: 50%;
+          margin: 0 0 0 -28px;
+        }
+      }
+      .rate {
+        margin: 26px 0 6px;
+        padding: 9px 0 0;
+        position: relative;
+        &:before {
+          top: 1px;
+        }
+      }
+      .label {
+        font-size: 16px;
+        padding: 0 0 11px;
+        &:before {
+          bottom: 0;
+        }
+      }
+      &.large {
+        background: #fff;
+        background: rgba(255, 255, 255, .8);
+        color: #333;
+        width: 214px;
+        height: 214px;
+        margin: -107px 0 0 -107px;
+        bottom: 0;
+        top: 50%;
+        .sublabel {
+          margin: 46px 0 0;
+          font: 300 26px/1 $fontOne;
+        }
+        .rate, .label {
+          &:before {
+            width: 96px;
+            margin-left: -48px;
+            background: #333;
+            background: rgba(51, 51, 51, .8);
+          }
+        }
+        .rate {
+          font-size: 40px;
+          margin-top: 6px;
+        }
+        .label {
+          font-size: 27px;
+        }
+      }
+    }
+  }
+  .sexiness-colors-fashionability {
+    overflow: hidden;
+    text-align: center;
+    .column {
+      float: left;
+    }
+    .column-1, .column-3 {
+      width: 274px;
+      margin: 115px 0 0;
+      font: 400 26px/1 $fontFour;
+      .label {
+        text-transform: uppercase;
+        margin: 0 0 5px;
+      }
+      .value {
+        .current {
+          display: inline-block;
+          vertical-align: bottom;
+          font-size: 68px;
+        }
+        .total {
+          display: inline-block;
+          vertical-align: bottom;
+          font-size: 47px;
+          margin: 0 0 3px;
+        }
+      }
+    }
+    .column-2 {
+      width: 384px;
+      padding: 21px 0 0;
+      position: relative;
+      .colors {
+        margin: 0 0 32px;
+        text-align: center;
+        .color {
+          width: 52px;
+          height: 52px;
+          display: inline-block;
+          margin: 0 6px;
+          border-radius: 50%;
+          box-shadow: none;
+          &.black {
+            background: #3d3d3d;
+          }
+          &.navy {
+            background: #4b5994;
+          }
+          &.cobalt {
+            background: #336dc4;
+          }
+          &.blue {
+            background: #94e9fe;
+          }
+          &.brown {
+            background: #5f4545;
+          }
+          &.purple {
+            background: #8f478f;
+          }
+          &.fuchsia {
+            background: #f269a9;
+          }
+          &.fluro {
+            background: #fb6cd2;
+          }
+          &.maroon {
+            background: #bb2727;
+          }
+          &.red {
+            background: #d83f3d;
+          }
+          &.pink {
+            background: #ffd6d8;
+          }
+          &.mauve {
+            background: #ae8991;
+          }
+          &.ivory {
+            background: #f1e5cf;
+          }
+          &.camel {
+            background: #f2d094;
+          }
+          &.beige {
+            background: #ccb581;
+          }
+          &.orange {
+            background: #ffa94c;
+          }
+          &.burnt-orange {
+            background: #d8712e;
+          }
+          &.canary {
+            background: #f9ef5d;
+          }
+          &.green {
+            background: #31a367;
+          }
+          &.white {
+            background: #fff;
+            box-shadow: 0 0 1px rgba(0, 0, 0, .3);
+          }
+        }
+      }
+      .label {
+        text-transform: uppercase;
+        .title {
+          font: 300 32px/1 $fontOne;
+          margin: 0;
+          padding: 0 0 15px;
+          position: relative;
+          &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 112px;
+            height: 2px;
+            margin: 0 0 0 -56px;
+            background: #b8b8b8;
+          }
+        }
+        .subtitle {
+          margin: 15px 0 0;
+          width: auto;
+          font-size: 28px;
+          font-style: normal;
+        }
+      }
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 1px;
+        height: 176px;
+        background: #d7d7d7;
+      }
+      &:before {
+        left: 0;
+      }
+      &:after {
+        right: 0;
+      }
+    }
+  }
+}
+
+.style-report-social {
+  text-align: right;
+  width: 952px;
+  margin: 0 auto;
+  .social {
+    display: inline-block;
+    text-align: left;
+    margin: 0 0 0 10px;
+    .addthis_button_tweet {
+      width: 80px;
+    }
+  }
+}
+
+.quiz-colors {
+  text-align: center;
+  margin: 34px 0 0;
+  .active {
+    .color {
+      border-color: #b7f0e5;
+    }
+  }
+  .color {
+    display: block;
+    width: 73px;
+    height: 73px;
+    border: 6px solid #fff;
+    border-radius: 50%;
+    position: relative;
+    .color-name {
+      position: absolute;
+      top: 85px;
+      text-align: center;
+      left: 0;
+      right: 0;
+      color: #707070;
+      font: 400 11px/1 $fontOne;
+      text-transform: uppercase;
+    }
+    &.black {
+      background: #3d3d3d;
+    }
+    &.navy {
+      background: #4b5994;
+    }
+    &.cobalt {
+      background: #336dc4;
+    }
+    &.blue {
+      background: #94e9fe;
+    }
+    &.brown {
+      background: #5f4545;
+    }
+    &.purple {
+      background: #8f478f;
+    }
+    &.fuchsia {
+      background: #f269a9;
+    }
+    &.fluro {
+      background: #fb6cd2;
+    }
+    &.maroon {
+      background: #bb2727;
+    }
+    &.red {
+      background: #d83f3d;
+    }
+    &.pink {
+      background: #ffd6d8;
+    }
+    &.mauve {
+      background: #ae8991;
+    }
+    &.ivory {
+      background: #f1e5cf;
+    }
+    &.camel {
+      background: #f2d094;
+    }
+    &.beige {
+      background: #ccb581;
+    }
+    &.orange {
+      background: #ffa94c;
+    }
+    &.burnt-orange {
+      background: #d8712e;
+    }
+    &.canary {
+      background: #f9ef5d;
+    }
+    &.green {
+      background: #31a367;
+    }
+    &.white {
+      background: #fff;
+      box-shadow: 0 0 1px rgba(0, 0, 0, .4);
+    }
+  }
+  li {
+    display: inline-block;
+    margin: 0 6px 52px;
+    input {
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+  }
+}
+
+.rounded-list {
+  text-align: center;
+  margin: -25px 0 0;
+  padding: 0;
+  &.heir {
+    .selected { background: url('_quiz/choice-type-3.png') no-repeat 115% center;}
+  }
+  &.body-colour {
+    .selected { background: url('_quiz/choice-type-2.png') no-repeat center center;}
+  }
+  li {
+    display: inline-block;
+    vertical-align: top;
+    width: 101px;
+    height: 101px;
+    margin: 0 12px;
+    position: relative;
+    &.active {
+      .selected {
+        display: block;
+      }
+    }
+  }
+  input {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    filter: alpha(opacity=0);
+  }
+  .selected {
+    position: absolute;
+    display: none;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 101px;
+  }
+}
+
+.body-shapes {
+  text-align: center;
+  padding: 0;
+  margin: 20px 0 0;
+  li {
+    margin: 0 12px;
+    min-width: 90px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    &.active {
+      .selected { display: block;}
+    }
+  }
+  .image {
+    height: 146px;
+    img { vertical-align: bottom;}
+  }
+  .label {
+    margin: 8px 0 0;
+    span {
+      display: block;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  .selected {
+    position: absolute;
+    display: none;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 150px;
+    background: url('_quiz/choice-type-3.png') no-repeat center center;
+  }
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+}
+
+.quiz-sizes {
+  overflow: hidden;
+  width: 878px;
+  margin: 0 auto;
+  .question {
+    margin: 80px 0 34px;
+    text-align: center;
+    font: italic 400 24px/1 $fontFour;
+  }
+  .sizes {
+    text-align: center;
+    li {
+      cursor: pointer;
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 5px 18px;
+      font: 400 25px/35px $fontOne;
+      text-transform: uppercase;
+      background: #ebebeb;
+      border-radius: 3px;
+      label {
+        min-width: 30px;
+        padding: 0 10px;
+        height: 35px;
+        display: block;
+      }
+      &.title {
+        font-weight: 300;
+        background: transparent;
+        font-size: 16px;
+      }
+      &.smaller {
+        font-size: 18px;
+        line-height: 34.5px;
+        width: 204px;
+      }
+      &.active {
+        background: #b7f0e5;
+      }
+    }
+  }
+  .bra {
+    li {
+      min-width: 65px;
+    }
+  }
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+  &.joined {
+    .question {
+      margin: 0 0 34px;
+    }
+  }
+}
+
+.fashion-things {
+  text-align: center;
+  li {
+    display: inline-block;
+    width: 144px;
+    margin: 32px 0 0 3px;
+    &:first-child {
+      margin: 0;
+    }
+    &.active {
+      .image {
+        img {
+          border-color: #b7f0e5;
+        }
+      }
+    }
+  }
+  .image {
+    position: relative;
+    img {
+      border: 3px solid #eaeaea;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    }
+    .label {
+      position: absolute;
+      left: 0;
+      bottom: 14px;
+      width: 100%;
+      text-align: center;
+      padding: 3px 0 0;
+      background: #e8e8e8;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+  }
+  .text {
+    margin: 14px 10px 0;
+    font: 400 13px/1.2 $fontOne;
+  }
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+}
+
+
+.style-report-block {
+  text-align: center;
+  font-family: $fontOne;
+  .block {
+    text-transform: uppercase;
+    display: inline-block;
+    width: 200px;
+    border-left: 1px solid #ebebeb;
+    margin: 70px 0;
+    .name {
+      font-size: 22px;
+      color: #333;
+      font-weight: 300;
+    }
+    .percent {
+      font-weight: 100;
+      font-size: 44px;
+      color: #f59a8c;
+    }
+    &.first {
+      border-left: 0;
+    }
+  }
+}

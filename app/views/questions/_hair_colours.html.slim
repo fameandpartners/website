@@ -1,58 +1,163 @@
-h1 = question.text
-ul.quiz-hair
+/ h1 = question.text
+h1
+  em Tell us
+  ' ABOUT YOURSELF
+.subtitle
+  span WHAT IS YOUR HAIR COLOUR?  
+
+ul.rounded-list.heir
   li
     label
       .hair-image
-        = image_tag 'quiz/hair/black.jpg', width: 118, height: 118, alt: ''
-      .hair-label
+        = image_tag '_quiz/hair/black.png', width: 101, height: 101, alt: ''
+        .selected
+      / .hair-label
         span Black
       = form.radio_button :code, 'black'
   li
     label
       .hair-image
-        = image_tag 'quiz/hair/brunette.jpg', width: 118, height: 118, alt: ''
-      .hair-label
+        = image_tag '_quiz/hair/brunette.png', width: 101, height: 101, alt: ''
+        .selected
+      / .hair-label
         span Brunette
       = form.radio_button :code, 'brunette'
   li
     label
       .hair-image
-        = image_tag 'quiz/hair/auburn.jpg', width: 118, height: 118, alt: ''
-      .hair-label
+        = image_tag '_quiz/hair/auburn.png', width: 101, height: 101, alt: ''
+        .selected
+      / .hair-label
         span Auburn
       = form.radio_button :code, 'auburn'
   li
     label
       .hair-image
-        = image_tag 'quiz/hair/red.jpg', width: 118, height: 118, alt: ''
-      .hair-label
+        = image_tag '_quiz/hair/red.png', width: 101, height: 101, alt: ''
+        .selected  
+      / .hair-label
         span Red
       = form.radio_button :code, 'red'
   li
     label
       .hair-image
-        = image_tag 'quiz/hair/blonde.jpg', width: 118, height: 118, alt: ''
-      .hair-label
+        = image_tag '_quiz/hair/blonde.png', width: 101, height: 101, alt: ''
+        .selected  
+      / .hair-label
         span Blonde
       = form.radio_button :code, 'blonde'
   li
     label
       .hair-image
-        = image_tag 'quiz/hair/platinum-blonde.jpg', width: 118, height: 118, alt: ''
-      .hair-label
+        = image_tag '_quiz/hair/platinum.png', width: 101, height: 101, alt: ''
+        .selected  
+      / .hair-label
         span Platinum Blonde
       = form.radio_button :code, 'platinum_blonde'
   li
     label
       .hair-image
-        = image_tag 'quiz/hair/strawberry-blonde.jpg', width: 118, height: 118, alt: ''
-      .hair-label
+        = image_tag '_quiz/hair/strawberry.png', width: 101, height: 101, alt: ''
+        .selected  
+      / .hair-label
         span Strawberry Blonde
       = form.radio_button :code, 'strawberry_blonde'
   li
     label
       .hair-image
-        = image_tag 'quiz/hair/coloured.jpg', width: 118, height: 118, alt: ''
-      .hair-label
+        = image_tag '_quiz/hair/coloured.png', width: 101, height: 101, alt: ''
+        .selected
+      / .hair-label
         span = t('views.quiz.questions.hair_colors.answers.colored')
       = form.radio_button :code, 'coloured'
+
+.subtitle
+  span WHAT IS YOUR SKIN COLOUR?
+
+ul.rounded-list.body-colour
+  li
+    label
+      = image_tag '_quiz/colour/fair.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'fair'
+      .selected
+  li
+    label
+      = image_tag '_quiz/colour/fair-medium.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'medium_fair'
+      .selected
+  li
+    label
+      = image_tag '_quiz/colour/medium.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'medium'
+      .selected 
+  li
+    label
+      = image_tag '_quiz/colour/medium-dark.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'medium_dark'
+      .selected
+  li
+    label
+      = image_tag '_quiz/colour/dark.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'dark'
+      .selected    
+
+.subtitle
+  span WHICH BEST DESCRIBES YOUR BODY SHAPE?
+
+ul.body-shapes
+  li
+    label
+      .image
+        = image_tag '_quiz/body/apple.png', alt: ''
+      .selected  
+      .label
+        span Apple
+      = form.radio_button :code, 'apple'
+  li
+    label
+      .image
+        = image_tag '_quiz/body/pear.png', alt: ''
+      .selected  
+      .label
+        span Pear
+      = form.radio_button :code, 'pear'
+  li
+    label
+      .image
+        = image_tag '_quiz/body/athletic.png', alt: ''
+      .selected  
+      .label
+        span Athletic
+      = form.radio_button :code, 'athletic'
+  li
+    label
+      .image
+        = image_tag '_quiz/body/strawberry.png', alt: ''
+      .selected  
+      .label
+        span Strawberry
+      = form.radio_button :code, 'strawberry'
+  li
+    label
+      .image
+        = image_tag '_quiz/body/hour-glass.png', alt: ''
+      .selected  
+      .label
+        span Hour Glass
+      = form.radio_button :code, 'hour_glass'
+  li
+    label
+      .image
+        = image_tag '_quiz/body/column.png', alt: ''
+      .selected  
+      .label
+        span Column
+      = form.radio_button :code, 'column'
+  li
+    label
+      .image
+        = image_tag '_quiz/body/petite.png', alt: ''
+      .selected  
+      .label
+        span Petite
+      = form.radio_button :code, 'petite'      

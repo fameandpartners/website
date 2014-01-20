@@ -14,6 +14,7 @@
 //= require libs/underscore-min
 //= require libs/live_chat_with_fancybox.min
 //= require libs/purl
+//= require libs/masonry.pkgd
 
 //= require libs/soundcloud/soundcloud.player.api
 //= require libs/soundcloud/sc-player
