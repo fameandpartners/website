@@ -144,6 +144,15 @@ $(function() {
     $('.site-version-switch ul').toggle();
   });
 
+  $('.nav-user li:has(.dropdown)').hover(
+    function() {
+      $(this).find('.dropdown').stop(true, true).fadeIn('fast');
+    }, 
+    function() {
+      $(this).find('.dropdown').stop(true, true).fadeOut('fast');
+    }
+  );
+
   $('.dropdown-trigger').hover(
     function() {
       $(this).find('.dropdown-menu').stop(true, true).fadeIn('fast');

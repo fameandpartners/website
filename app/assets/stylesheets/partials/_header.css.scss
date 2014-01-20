@@ -332,6 +332,36 @@
 		position: relative;
 		top: -1px;
 	}
+	.dropdown {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background-color: #000;
+		white-space: nowrap;
+		min-width: 100%;
+		letter-spacing: 0.125em;
+		display: none;
+		ul { 
+			padding: 0;
+			margin: 0;
+		}
+		li {
+			display: block;
+			a { 
+				display: block;
+				color: #fff;
+				text-decoration: none;
+				font-size: 20px;
+				font-family: $fontThree;
+				padding: 5px 8px;
+				&:hover {
+					background-color: $pinkColor;
+					color: #000;
+				}
+			}
+			+ li { margin: 0;}
+		}
+	}
 	.offer {
 		float: right;
 		font-size: $fontSize;
