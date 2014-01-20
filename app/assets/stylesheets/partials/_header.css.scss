@@ -1,8 +1,8 @@
 .top-links {
 	background-color: #000;
 	color: #fff;
-	min-height: 20px;
-	line-height: 20px;
+	min-height: 30px;
+	line-height: 30px;
 	padding: 0 10px;
 	text-transform: uppercase;
 	letter-spacing: 0.125em;
@@ -43,6 +43,33 @@
 	}
 	.user-nav {
 		float: right;
+		.dropdown-trigger {
+			position: relative;
+			.dropdown-menu {
+				position: absolute;
+				top: 100%;
+				right: 0;
+				background-color: #000;
+				display: none;
+				white-space: nowrap;
+				li {
+					padding: 0 10px;
+				}
+			}
+		}
+		.avatar, .name {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.avatar {
+			margin-right: 5px;
+			img {
+				width: 20px;
+				height: 20px;
+				display: block;
+				border-radius: 100%;
+			}
+		}
 	}
 	.no-loggedin span {
 		padding: 0 3px;
