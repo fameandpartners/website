@@ -52,8 +52,10 @@
 				background-color: #000;
 				display: none;
 				white-space: nowrap;
-				li {
+				a {
+					display: block;
 					padding: 0 10px;
+					&:hover { background-color: #222;}
 				}
 			}
 		}
