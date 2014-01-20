@@ -33,6 +33,7 @@ FameAndPartners::Application.routes.draw do
 
       get '/browse', to: 'products#index', as: :personalization_products
       get '/:permalink', to: 'products#show', as: :personalization_product
+      get '/:permalink/style', to: 'products#style', as: :personalization_style_product
     end
 
     resources :celebrities, only: [:show]

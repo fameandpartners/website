@@ -32,6 +32,20 @@ module Personalization
       respond_with(@product)
     end
 
+    def style
+      unless spree_user_signed_in?
+        return redirect_to personalization_path
+      end
+      
+      @product = Spree::Product.joins(:product_customisation_values).uniq.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
+
+      set_product_show_page_title(@product, "Custom Formal Dress ")
+      @product_properties = @product.product_properties.includes(:property)
+      @product_variants = Products::VariantsReceiver.new(@product).available_options
+
+      respond_with(@product)
+    end
+
     private
 
     def colors

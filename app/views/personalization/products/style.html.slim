@@ -1,0 +1,200 @@
+javascript:
+  window.product_variants = #{{ @product_variants.to_json }};
+/
+  window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
+  window.productImagesData = #{{@product.images_json.to_json}};
+
+ruby:
+ sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+ colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+/
+ color_images  = @product_variants.inject({}){|res, t| res[t[:color].to_s] = t[:image].to_s; res }
+ enabled_tabs = ['photos']
+ enabled_tabs.push('inspiration') if @product.celebrity_inspiration
+ enabled_tabs.push('video') if @product.video_url.present?
+
+.content-offer
+  .title
+    ' GET YOUR 
+    em UNIQUE 
+    ' STYLE.
+  .fright
+    .text-with-arrow 
+      ' Lorem ipsum dolor sit amet, consectetu,
+      br
+      ' Integer vel felis sit amet massa conguet.
+      .arrow
+    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
+
+// PRODUCT STYLE IT ---->
+.product-page
+  .row
+    .grid-8
+      .bread-crumbs
+        .fleft
+          = link_to 'EXPLORE', collection_product_path(@product), class: 'btn'
+          - if (@product.can_be_customized? and !@product.in_sale?)
+            = link_to 'CUSTOMISE', personalization_product_path(permalink: @product.permalink), class: 'btn'
+          = link_to 'STYLE IT', personalization_style_product_path(permalink: @product.permalink), class: 'btn pink'
+        .fright
+          = send_to_a_friend_link(@product)
+      .style-it
+        .heading
+          p 
+            ' “LOREM ipsum dolor sit amet, lorem ipsum
+            br
+            ' dolor sit amet, consectetur adipisicing elit.”
+          = link_to 'BOOK A FREE STYLING SESSION', '#', class: 'btn empty border'
+          h4 
+            ' WANT US TO SOURCE THIS COMPLETE LOOK? 
+            br
+            ' BUY TODAY AND WE'LL DO IT FOR FREE.
+        .lookbox
+          .row
+            .grid-6
+              .title BOHO LOOK
+              .picture
+                = image_tag '_sample/category-grey-2.jpg'
+              .text
+                h4 WANT US TO SOURCE THE COMPLETE LOOK?
+                p 
+                  =' link_to 'BUY TODAY', '#'
+                  ' AND WE WILL SOURCE FOR FREE!  
+            .grid-6
+              .arrows-line-horizontal
+              ul.price-list
+                li
+                  .number 1.
+                  p PRODUCT NAME
+                  p $555
+                li
+                  .number 2.
+                  p PRODUCT NAME
+                  p $555
+                li
+                  .number 3.
+                  p PRODUCT NAME
+                  p $555
+                li
+                  .number 4.
+                  p PRODUCT NAME
+                  p $555
+                li
+                  .number 5.
+                  p PRODUCT NAME
+                  p $555        
+              .arrows-line-horizontal
+            .grid-6
+              .title EDGY LOOK
+              .category-catalog
+                .row
+                  .grid-6
+                    .picture
+                      = image_tag '_sample/category-grey-2.jpg'
+                  .grid-6
+                    .picture
+                      = image_tag '_sample/category-grey-2.jpg'
+                  .grid-6
+                    .picture
+                      = image_tag '_sample/category-grey-2.jpg'
+                  .grid-6
+                    .picture
+                      = image_tag '_sample/category-grey-2.jpg'            
+              .text
+                h4 WANT US TO SOURCE THE COMPLETE LOOK?
+                p 
+                  =' link_to 'BUY TODAY', '#'
+                  ' AND WE WILL SOURCE FOR FREE!  
+            .grid-6
+              .arrows-line-horizontal
+              ul.price-list
+                li
+                  .number 1.
+                  p PRODUCT NAME
+                  p $555
+                li
+                  .number 2.
+                  p PRODUCT NAME
+                  p $555
+                li
+                  .number 3.
+                  p PRODUCT NAME
+                  p $555
+                li
+                  .number 4.
+                  p PRODUCT NAME
+                  p $555
+                li
+                  .number 5.
+                  p PRODUCT NAME
+                  p $555 
+              .arrows-line-horizontal  
+    .grid-4
+      .product-info
+        h6 LONG DRESSES
+        h1.product-title
+          ' PRODUCT NAME
+          span.price $295
+        .section  
+          select.selectbox data-placeholder="colour"
+            option 
+            option value="#fff" white
+            option value="#EDDDC8" camel
+            option value="#CB9E11" tobacco
+            option value="#F86D22" flame
+            option value="#DC4C78" berry
+            option value="#F51A8D" neon pink
+            option value="#E00027" lipstick
+            option value="#0A2183" navy
+            option value="#15437A" ultra-marine
+        .section
+          h6 SELECT A SIZE (whats my size?)
+          .sizebox
+            .button 4
+            .button 6
+            .button 8
+            .button.selected 10
+            .button 12
+            .button 14
+            .button 16
+        .section
+          .btn.empty.border.striped PLEASE SELECT A SIZE
+          = link_to 'add to card', '#', class: 'btn'
+        .section      
+          = link_to '+ TO WISH LIST', '#', class: 'btn empty border'
+        .section
+          ul.slider
+            li.opened 
+              .title DESCRIPTION
+              .text 
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            li 
+              .title details
+              .text
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            li 
+              .title styling notes
+              .text
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            li 
+              .title delivery
+              .text
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            li 
+              .title returns
+              .text
+                p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            li.opened 
+              .title recommended
+              .text
+                .category-catalog
+                  .row
+                    .grid-4
+                      = link_to '#' do
+                        = image_tag '_sample/category-grey-2.jpg'
+                    .grid-4
+                      = link_to '#' do
+                        = image_tag '_sample/category-grey-2.jpg'
+                    .grid-4
+                      = link_to '#' do
+                        = image_tag '_sample/category-grey-2.jpg' 
