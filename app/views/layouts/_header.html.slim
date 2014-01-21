@@ -12,7 +12,7 @@
       .current-version
         span SHIPPING TO
         .site-version-switch
-          em Australia
+          em = current_site_version.name
           i.icon-dropdown-down
           ul
             li = link_to 'Australia', site_version_path('au')
@@ -114,10 +114,8 @@
             span.icon-dropdown-down
           .dropdown
             ul
-              li = link_to 'Long Dresses', '#'  
-              li = link_to 'Short Dresses', '#'  
-              li = link_to 'Skirts', '#'  
-              li = link_to 'Tops', '#'  
+              - available_product_ranges.each do |taxon|
+                li = link_to taxon.name, collection_taxon_path(taxon)
         li = link_to 'ABOUT US', about_us_path, class: 'btn'
     
     nav.fright
