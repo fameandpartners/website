@@ -41,7 +41,7 @@ $(".products.index").ready ->
       )
 
     updateOrder: () ->
-      #console.log('updateOrder')
+      @update()
 
     updatePageLocation: (filter) ->
       url = '/collection'

@@ -23,7 +23,7 @@
 .category-filter
   .fleft 
     .filter-section
-      - options = options_from_collection_for_select(available_product_styles, :id, :name, @searcher.collection)
+      - options = options_from_collection_for_select(available_product_styles, :base_permalink, :name, @searcher.collection)
       = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Styles'
 
     .filter-section
@@ -31,7 +31,7 @@
       = select_tag :bodyshape, options, class: 'selectbox', multipe: true, prompt: 'Body Shape'
 
     .filter-section
-      - options = options_from_collection_for_select(available_product_colors, :id, :name, @searcher.colour)
+      - options = options_from_collection_for_select(available_product_colors, :name, :presentation, @searcher.colour)
       = select_tag :colour, options, class: 'selectbox', multipe: true, prompt: 'Colour'
 
   .fright
