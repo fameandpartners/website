@@ -7,7 +7,7 @@
 
   ul.products-list.grid-container
     - @products.each do |product|
-      = render 'shared/product', product: product
+      = render 'spree/products/product', product: product
 
 javascript: 
   track.search('#{{j analytics_label(:search_query, params[:q]) }}');
