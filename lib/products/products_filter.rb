@@ -25,7 +25,7 @@ module Products
     end
 
     def retrieve_products
-      color_ids  = colour.present? ? colour.map(&:id) : []
+      color_ids  = colors_with_similar.present? ? colors_with_similar.map(&:id) : []
       taxon_ids  = taxons.present? ? taxons : {}
       keywords   = keywords.present? ? keywords.split : []
       bodyshapes = bodyshape
@@ -101,15 +101,37 @@ module Products
             by ({
               :_script => {
                 script: %q{
-                  intersection_size = 0;
-                  foreach(color_id : color_ids) {
-                    foreach(viewable_color_id : doc['viewable_color_ids'].values) {
-                      if (viewable_color_id == color_id) {
-                        intersection_size = intersection_size + 1;
+                  int intersection_size = 0;
+
+                  for ( int i = 0; i < color_ids.size(); i++ ) {
+                    color_id = color_ids[i];
+
+                    foreach( viewable_color_id : doc['viewable_color_ids'].values ) {
+                      if ( viewable_color_id == color_id ) {
+                        intersection_size += 1;
                       }
                     }
+
+                    if ( intersection_size > 0 ) {
+                      return color_ids.size() + color_ids.size() - i;
+                    }
                   }
-                  intersection_size
+
+                  for ( int i = 0; i < color_ids.size(); i++ ) {
+                    color_id = color_ids[i];
+
+                    foreach( doc_color_id : doc['color_ids'].values ) {
+                      if ( doc_color_id == color_id ) {
+                        intersection_size += 1;
+                      }
+                    }
+
+                    if ( intersection_size > 0 ) {
+                      return color_ids.size() - i;
+                    }
+                  }
+
+                  return 0;
                 }.gsub(/[\r\n]|([\s]{2,})/, ''),
                 params: {
                   color_ids: color_ids
@@ -142,24 +164,13 @@ module Products
             else
               # default ordering scope
           end
+
+          by :position, 'asc'
         end
 
         from offset
         size limit
       end.results.results
-    end
-
-    def retrieve_products_old
-      @products_scope = get_base_scope
-      @products = @products_scope.includes(:master => :prices).scoped
-      unless Spree::Config.show_products_without_price
-        # note - we don't count different currencies here
-        @products = @products.joins(
-          "LEFT OUTER JOIN spree_zone_prices ON spree_zone_prices.variant_id = spree_variants.id"
-        )
-        @products = @products.where("(spree_prices.amount IS NOT NULL) or (spree_zone_prices.amount is not null)")
-      end
-      @products.offset((page - 1) * per_page).limit(per_page)
     end
 
     def method_missing(name)
@@ -174,112 +185,12 @@ module Products
       info = Products::BannerInfo.new(self).get
     end
 
+    def colors_with_similar
+      similar_colors = colour.map(&:similars).flatten
+      colour + similar_colors
+    end
+
     protected
-
-    def get_base_scope
-      base_scope = Spree::Product.active
-      # has options modify already applied scopes.
-      base_scope = add_color_scope(base_scope)
-
-      base_scope = add_taxonomy_scope(base_scope)
-      base_scope = get_products_conditions_for(base_scope, keywords)
-      base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
-      base_scope = add_search_scopes(base_scope)
-
-      base_scope = add_bodyshape_scope(base_scope)
-
-      base_scope = add_order_scope(base_scope)
-
-      base_scope
-    end
-
-    def add_search_scopes(base_scope)
-      search.each do |name, scope_attribute|
-        scope_name = name.to_sym
-        if base_scope.respond_to?(:search_scopes) && base_scope.search_scopes.include?(scope_name.to_sym)
-          base_scope = base_scope.send(scope_name, *scope_attribute)
-        else
-          base_scope = base_scope.merge(Spree::Product.search({scope_name => scope_attribute}).result)
-        end
-      end if search
-      base_scope
-    end
-
-    # method should return new scope based on base_scope
-    def get_products_conditions_for(base_scope, query)
-      unless query.blank?
-        base_scope = base_scope.like_any([:name, :description], query.split)
-      end
-      base_scope
-    end
-
-    def add_color_scope(base_scope)
-      return base_scope if colour.blank?
-      base_scope.has_options(Spree::Variant.color_option_type, colour)
-    end
-
-    def add_taxonomy_scope(base_scope)
-      return base_scope if taxons.blank?
-      # simple taxon_id in (...) condition
-
-      if taxons.keys.length == 1
-        return base_scope.in_taxons(taxons.values.flatten)
-      end
-      # here we should search products which have taxons from both or more sets of taxons
-      query = nil
-      taxons.each do |name, ids|
-        if query.blank? # first level, without subquery
-          query = "select distinct(product_id)
-                   from spree_products_taxons
-                   where taxon_id in (#{ids.join(',')})"
-        else
-          query = "select distinct(product_id)
-                   from spree_products_taxons
-                   where taxon_id in (#{ids.join(',')})
-                    and product_id in (#{query})"
-        end
-      end
-      product_ids = Spree::Classification.find_by_sql(query).map(&:product_id)
-
-      base_scope.where(id: product_ids)
-    end
-
-    def add_bodyshape_scope(base_scope)
-      return base_scope if bodyshape.blank?
-      conditions = [].tap do |condition|
-        bodyshape.each do |shape|
-          condition.push("product_style_profiles.#{shape} > 4")
-        end
-      end.join(' or ')
-
-      #joins_string = "LEFT OUTER JOIN product_style_profiles ON spree_products.id = product_style_profiles.product_id"
-      base_scope.joins(:style_profile).where("(#{conditions})")
-    end
-
-    def add_order_scope(base_scope)
-      return base_scope if colour.blank? && order.blank? && bodyshape.blank?
-
-      ordered_scope = base_scope
-
-      case order
-      when 'price_high'
-        ordered_scope = ordered_scope.order('spree_prices.amount desc')
-      when 'price_low'
-        ordered_scope = ordered_scope.order('spree_prices.amount asc')
-      when 'newest'
-        ordered_scope = ordered_scope.order('spree_products.created_at desc')
-      when 'popular'
-        ordered_scope = ordered_scope
-      else
-        ordered_scope = ordered_scope
-      end
-
-      if bodyshape.present?
-        ordered_scope = ordered_scope.order(bodyshape.map{|shape| %Q{"product_style_profiles"."#{shape}"} }.join(' + ') + ' DESC')
-      end
-
-      ordered_scope
-    end
 
     def taxons
       permalinks = Spree::Taxon.roots.map(&:permalink)
@@ -321,7 +232,7 @@ module Products
     end
 
     def prepare_colours(colour_names)
-      return nil if colour_names.blank?
+      return [] if colour_names.blank?
       colours = Array.wrap(colour_names).collect{|colour| colour.to_s.downcase.split(/[_-]/).join(' ')}
       Spree::OptionValue.where("lower(name) in (?)", colours).to_a
     end

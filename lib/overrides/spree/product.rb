@@ -23,6 +23,7 @@ module Overrides
           indexes :available_on, :type => :date, :include_in_all => false
           indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
           indexes :in_stock, :type => :boolean, :as => 'has_stock?'
+          indexes :position, :type => :integer
 
           indexes :taxons, :as => 'taxons.map(&:name)'
           indexes :taxon_ids, :as => 'taxons.map(&:id)'

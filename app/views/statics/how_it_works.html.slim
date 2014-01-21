@@ -56,10 +56,10 @@
           .create-now
             h3.calltoaction Get a free quote now!
             - if facebook_authentication_available?
-              .signup = link_to 'Start now with Facebook', fb_auth_path(:prom => true), class: 'facebook-signup signup'
-              .signup-link = link_to 'or get started with your email address instead', spree.signup_path(:prom => true) 
+              .signup = link_to 'Start now with Facebook', fb_auth_path, class: 'facebook-signup signup'
+              .signup-link = link_to 'or get started with your email address instead', spree.signup_path 
             - else
-              .signup-link = link_to 'Get started with your email address', spree.signup_path(:prom => true)
+              .signup-link = link_to 'Get started with your email address', spree.signup_path
         
         
   .moreinfo.clearfix 

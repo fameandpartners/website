@@ -14,7 +14,7 @@ Spree::ProductsController.class_eval do
 
     @page_info = @searcher.selected_products_info
 
-    @current_colors = @searcher.colour.present? ? @searcher.colour : []
+    @current_colors = @searcher.colour.present? ? @searcher.colors_with_similar : []
 
     set_collection_title(@page_info)
     set_marketing_pixels(@searcher)

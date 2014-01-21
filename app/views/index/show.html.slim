@@ -155,11 +155,11 @@
     #main-promo.promo-image
       ul.slides
         li
+          = link_to collection_path(cf: 'homefeature') do
+            = image_tag 'homepage/Colour.jpg', width: 1078, height: 532, alt: 'Get your colour on'
+        li
           = link_to collection_path(edits: 'sequins', cf: 'homefeature') do
             = image_tag 'homepage/Disco.jpg', width: 1078, height: 532, alt: 'Sequined Disco Dresses - Fame & Partners Formal Dresses'
-        li
-          = link_to collection_path(cf: 'homefeature') do
-            = image_tag 'homepage/ClaimToFame.jpg', width: 1078, height: 532, alt: 'New Dress Styles'
         li
           = link_to '#', class: 'show-style-quiz' do
             = image_tag 'homepage/style-quiz.jpg', width: 1078, height: 532, alt: ''
