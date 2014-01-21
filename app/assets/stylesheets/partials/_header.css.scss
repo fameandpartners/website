@@ -1,8 +1,8 @@
 .top-links {
 	background-color: #000;
 	color: #fff;
-	min-height: 20px;
-	line-height: 20px;
+	min-height: 30px;
+	line-height: 30px;
 	padding: 0 10px;
 	text-transform: uppercase;
 	letter-spacing: 0.125em;
@@ -43,6 +43,35 @@
 	}
 	.user-nav {
 		float: right;
+		.dropdown-trigger {
+			position: relative;
+			.dropdown-menu {
+				position: absolute;
+				top: 100%;
+				right: 0;
+				background-color: #000;
+				display: none;
+				white-space: nowrap;
+				a {
+					display: block;
+					padding: 0 10px;
+					&:hover { background-color: #222;}
+				}
+			}
+		}
+		.avatar, .name {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.avatar {
+			margin-right: 5px;
+			img {
+				width: 20px;
+				height: 20px;
+				display: block;
+				border-radius: 100%;
+			}
+		}
 	}
 	.no-loggedin span {
 		padding: 0 3px;
@@ -302,6 +331,36 @@
 		padding-left: 10px;
 		position: relative;
 		top: -1px;
+	}
+	.dropdown {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background-color: #000;
+		white-space: nowrap;
+		min-width: 100%;
+		letter-spacing: 0.125em;
+		display: none;
+		ul { 
+			padding: 0;
+			margin: 0;
+		}
+		li {
+			display: block;
+			a { 
+				display: block;
+				color: #fff;
+				text-decoration: none;
+				font-size: 20px;
+				font-family: $fontThree;
+				padding: 5px 8px;
+				&:hover {
+					background-color: $pinkColor;
+					color: #000;
+				}
+			}
+			+ li { margin: 0;}
+		}
 	}
 	.offer {
 		float: right;

@@ -1,25 +1,68 @@
-.opacity-zero
-  = image_tag 'quiz/bg-thanks.jpg', width: 1074, height: 530, alt: ''
+/ .opacity-zero
+/   = image_tag 'quiz/bg-thanks.jpg', width: 1074, height: 530, alt: ''
 
-h1 = question.text
-ul.photos.clearfix
-  li
-    label
-      = form.radio_button :code, 'img1'
-      = image_tag 'quiz/outfit-1.jpg', width: 190, height: 294, alt: ''
-  li
-    label
-      = form.radio_button :code, 'img2'
-      = image_tag 'quiz/outfit-2.jpg', width: 190, height: 294, alt: ''
-  li
-    label
-      = form.radio_button :code, 'img3'
-      = image_tag 'quiz/outfit-3.jpg', width: 190, height: 294, alt: ''
-  li
-    label
-      = form.radio_button :code, 'img4'
-      = image_tag 'quiz/outfit-4.jpg', width: 190, height: 294, alt: ''
-  li
-    label
-      = form.radio_button :code, 'img5'
-      = image_tag 'quiz/outfit-5.jpg', width: 190, height: 294, alt: ''
+/ h1 = question.text
+
+h1
+  em Choose the look
+  ' THAT’S CLOSEST TO YOR EVERYDAY STYLE
+.subtitle
+  span SCROLL THROUGH & CHOOSE AS MANY AS YOU LIKE  
+.photos-wrapper  
+  .photos.items-box
+    .item
+      label
+        = check_box_tag :code, 'img1'
+        = image_tag 'quiz/outfit-1.jpg', alt: ''
+        span.selected selected
+    .item
+      label
+        = check_box_tag :code, 'img2'
+        = image_tag 'quiz/outfit-2.jpg', alt: ''
+        span.selected selected
+    .item
+      label
+        = check_box_tag :code, 'img3'
+        = image_tag 'quiz/outfit-3.jpg', alt: ''
+        span.selected selected
+    .item
+      label
+        = check_box_tag :code, 'img4'
+        = image_tag 'quiz/outfit-4.jpg', alt: ''
+        span.selected selected
+    .item
+      label
+        = check_box_tag :code, 'img5'
+        = image_tag 'quiz/outfit-5.jpg', alt: ''
+        span.selected selected
+    .item
+      label
+        = check_box_tag :code, 'img1'
+        = image_tag 'quiz/outfit-1.jpg', alt: ''
+        span.selected selected
+    .item
+      label
+        = check_box_tag :code, 'img2'
+        = image_tag 'quiz/outfit-2.jpg', alt: ''
+        span.selected selected
+    .item
+      label
+        = check_box_tag :code, 'img3'
+        = image_tag 'quiz/outfit-3.jpg', alt: ''
+        span.selected selected
+    .item
+      label
+        = check_box_tag :code, 'img4'
+        = image_tag 'quiz/outfit-4.jpg', alt: ''
+        span.selected selected
+    .item
+      label
+        = check_box_tag :code, 'img5'
+        = image_tag 'quiz/outfit-5.jpg', alt: ''    
+        span.selected selected
+
+  .photos-nav
+    .up
+      .arrows-line-vertical
+    .down
+      .arrows-line-vertical

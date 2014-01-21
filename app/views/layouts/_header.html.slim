@@ -28,15 +28,16 @@
         .loggedin
           .dropdown-trigger
             - if current_spree_user.image.present?
-              .avatar
+              span.avatar
                 = image_tag current_spree_user.image, width: 20
-            =' current_spree_user.full_name
-          .dropdown-menu
-            ul
-              li = link_to 'account settings', profile_path
-              li = link_to 'your orders', user_orders_path
-              li = link_to 'style profile', styleprofile_path
-              li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
+            span.name =' current_spree_user.full_name
+            i.icon-dropdown-down
+            .dropdown-menu
+              ul
+                li = link_to 'account settings', profile_path
+                li = link_to 'your orders', user_orders_path
+                li = link_to 'style profile', styleprofile_path
+                li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
 .centered-layout      
   header.header-global class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
     .logo
@@ -111,6 +112,12 @@
           = link_to collection_path, class: 'btn' do
             span COLLECTIONS
             span.icon-dropdown-down
+          .dropdown
+            ul
+              li = link_to 'Long Dresses', '#'  
+              li = link_to 'Short Dresses', '#'  
+              li = link_to 'Skirts', '#'  
+              li = link_to 'Tops', '#'  
         li = link_to 'ABOUT US', about_us_path, class: 'btn'
     
     nav.fright

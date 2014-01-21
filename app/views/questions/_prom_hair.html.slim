@@ -1,22 +1,28 @@
 h1 = question.text
-ul.photos.clearfix
-  li
-    label
-      = image_tag 'quiz/hairstyles/glam.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'glam'
-  li
-    label
-      = image_tag 'quiz/hairstyles/classic.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'classic'
-  li
-    label
-      = image_tag 'quiz/hairstyles/boho.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'bohemian'
-  li
-    label
-      = image_tag 'quiz/hairstyles/edgy.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'edgy'
-  li
-    label
-      = image_tag 'quiz/hairstyles/girly.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'girly'
+.photos-wrapper
+  .photos.items-box
+    .item
+      label
+        = image_tag 'quiz/hairstyles/glam.jpg', width: 190, height: 294, alt: ''
+        = form.radio_button :code, 'glam'
+        span.selected selected
+    .item
+      label
+        = image_tag 'quiz/hairstyles/classic.jpg', width: 190, height: 294, alt: ''
+        = form.radio_button :code, 'classic'
+        span.selected selected
+    .item
+      label
+        = image_tag 'quiz/hairstyles/boho.jpg', width: 190, height: 294, alt: ''
+        = form.radio_button :code, 'bohemian'
+        span.selected selected
+    .item
+      label
+        = image_tag 'quiz/hairstyles/edgy.jpg', width: 190, height: 294, alt: ''
+        = form.radio_button :code, 'edgy'
+        span.selected selected
+    .item
+      label
+        = image_tag 'quiz/hairstyles/girly.jpg', width: 190, height: 294, alt: ''
+        = form.radio_button :code, 'girly'
+        span.selected selected

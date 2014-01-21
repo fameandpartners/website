@@ -1,7 +1,7 @@
 window.Quiz = {
   show: () ->
     $('.quiz-box').show()
-    $('body').css 'overflow', 'hidden'
+    # $('body').css 'overflow', 'hidden'
     $.getScript '/quiz'
     $('.quiz-overlay').one 'click', Quiz.hide
     $('.quiz-box .close-quiz').one 'click', Quiz.hide
@@ -105,22 +105,22 @@ window.Quiz = {
       width: Quiz.currentProgress() + '%'
 
   updateCurrentStepNumber: () ->
-    $('.questions-count .inline.current').text(Quiz.currentStepNumber())
+    $('.questions-count .current').text(Quiz.currentStepNumber())
 
   bindCheckboxesAndRadios: () ->
     Quiz.steps().find(':checkbox, :radio').change (event) ->
       $question = $(event.target).parents('.question')
-      $list = $question.find('ul')
+      $list = $question.find('.items-box')
 
       if ($list.hasClass('lips') || $list.hasClass('stars'))
-        $item = $(event.target).parents('li')
+        $item = $(event.target).parents('.item')
 
         $item.prevAll().addClass('active')
         $item.nextAll().removeClass('active')
       else
-        $question.find('li:not(:has(:input:checked))').removeClass('active')
+        $question.find('.item:not(:has(:input:checked))').removeClass('active')
 
-      $question.find('li:has(:input:checked)').addClass('active')
+      $question.find('.item:has(:input:checked)').addClass('active')
 
   triggerEvents: (step) ->
     if Quiz.steps().index(step) is 2
@@ -138,6 +138,12 @@ window.Quiz = {
     $('.quiz-box').find('.next a').click Quiz.nextStepEventHandler
 
     $('.quiz-box').find('.prev a').click Quiz.previousStepEventHandler
+    
+    $('.quiz-box .photos img').on 'load', ->
+      $('.quiz-box .photos').masonry
+        gutter: 10
+        columnWidth: '.item'
+        itemSelector: '.item'
 }
 
 $ ->
@@ -148,3 +154,5 @@ $ ->
 
   if location.href.match(/[\?\&]osq\=1/)
     Quiz.show()
+
+

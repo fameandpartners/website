@@ -144,12 +144,23 @@ $(function() {
     $('.site-version-switch ul').toggle();
   });
 
+  $('.nav-user li:has(.dropdown)').hover(
+    function() {
+      $(this).find('.dropdown').stop(true, true).fadeIn('fast');
+    }, 
+    function() {
+      $(this).find('.dropdown').stop(true, true).fadeOut('fast');
+    }
+  );
 
-  //$('.shopping-bag').on('click', function() {
-  //  $(this).siblings('.shopping-bag-popup').toggle();
-  //  return false
-  //});
-
+  $('.dropdown-trigger').hover(
+    function() {
+      $(this).find('.dropdown-menu').stop(true, true).fadeIn('fast');
+    },
+    function() {
+      $(this).find('.dropdown-menu').stop(true, true).fadeOut('fast');
+    }
+  );
 
   // blog
   if ($('.blog-header').length) {
