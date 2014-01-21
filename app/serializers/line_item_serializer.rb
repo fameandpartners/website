@@ -72,7 +72,11 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def product_color
-    object.variant.dress_color.try(:name) || ""
+    if (personalization = object.personalization).present?
+      return personalization.color || ''
+    else
+      object.variant.dress_color.try(:name) || ""
+    end
   end
 
   def product_size
