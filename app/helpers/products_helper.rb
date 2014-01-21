@@ -153,12 +153,10 @@ module ProductsHelper
   end
 
   def send_to_a_friend_link(product)
-    #return '' unless Rails.env.development?
-
     data = { product: product.permalink }
     data.update({ guest: true }) unless spree_user_signed_in?
 
-    link_to 'Show mum', '#', class: 'send-to-friend askmumbtn', data: data, title: 'Send this dress to whoever you want to get a second opinion from!'
+    link_to '2ND OPINION', '#', class: 'send-to-friend askmumbtn', data: data, title: 'Send this dress to whoever you want to get a second opinion from!'
   end
 
   def wishlist_move_to_cart_link(wishlist_item)
