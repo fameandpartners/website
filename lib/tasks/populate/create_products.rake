@@ -3,8 +3,24 @@ namespace "db" do
     desc "create number of dresses with images and properties"
     task dresses: :environment do
       num_of_dresses = 15
+      disable_tire_indexes
       create_dresses(num_of_dresses)
+      update_tire_indexes
     end
+  end
+end
+
+def disable_tire_indexes
+  Spree::Product.class_eval do
+    def update_index
+    end
+  end
+end
+
+def update_tire_indexes
+  Tire.index(:spree_products) do
+    delete
+    import Spree::Product.all
   end
 end
 

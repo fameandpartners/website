@@ -1,6 +1,6 @@
 namespace "db" do
   namespace "populate" do
-    desc "create number of dresses with images and properties"
+    desc "states/countries"
     task states: :environment do
       countries_with_states.each do |country_name, states|
         country = Spree::Country.where(iso_name: country_name).first
