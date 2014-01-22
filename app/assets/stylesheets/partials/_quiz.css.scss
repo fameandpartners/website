@@ -53,11 +53,90 @@
     @include box-sizing(border-box);
   }
   .signup-box-wrapper {
-    width: 1074px;
-    height: 525px;
+    width: 1100px;
+    height: 720px;
     overflow: hidden;
-    background: image-url('bg-quiz-start.jpg') center center no-repeat;
+    background: image-url('_quiz/signin-bg.png') center center no-repeat;
     background-size: cover;
+    margin: -42px -20px -130px;
+    position: relative;
+    .text1 {
+      color: #fff;
+      font-size: 47px;
+      position: absolute;
+      left: 75px;
+      top: 110px;
+      font-family: $fontThree;
+      width: 240px;
+      text-align: center;
+      line-height: 0.8;
+      em { 
+        font-family: $fontTwo;
+        display: block;
+        margin-top: -8px;
+        color: #000;
+        text-transform: none;
+        z-index: 1;
+        position: relative;
+      }
+    }
+    .text2 {
+      color: #fff;
+      position: absolute;
+      left: 218px;
+      top: 395px;
+      width: 185px;
+      text-align: center;
+      font-family: $fontThree;
+      .title {
+        font-size: 47px;
+        line-height: 0.9;
+        margin-bottom: 20px;
+        em { 
+          font-family: $fontTwo;
+          display: block;
+        }
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+    .already-member {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 31px;
+      font-family: $fontThree;
+      text-align: right;
+      color: #fff;
+      em { 
+        font-family: $fontTwo;
+        display: block;
+        text-transform: none;
+      }
+      a {
+        color: $pinkColor;
+        text-decoration: none;
+      }
+    }
+    .fields {
+      position: absolute;
+      right: 105px;
+      top: 150px;
+      width: 350px;
+      .section {
+        margin-bottom: 70px;
+      }
+      .btn {
+        width: 100%;
+        + .btn { margin-top: 16px;}
+      }
+      .or {
+        font: 300 22px/36px $fontThree;
+        text-align: center;
+        margin: 15px 0;
+      }
+    }
   }
   .signup-box,
   .thanks-box {
