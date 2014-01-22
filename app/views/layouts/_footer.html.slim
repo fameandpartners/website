@@ -48,7 +48,10 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
         = link_to 'Fame&Partners', root_url(:host => configatron.host)
       .copyright
         ' 2013 Fame & Partners &copy;
-      .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
+      - if current_site_version.is_australia?
+        .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
+      - else
+        .address New York &nbsp; &nbsp; | &nbsp; &nbsp; USA
       .site-version-block.hide-on-mobile
         .site-version
           .current-version
