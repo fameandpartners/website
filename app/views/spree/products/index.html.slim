@@ -11,7 +11,6 @@
       .arrow
     = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
 
-//style=(@page_info[:banner_image].blank? ? '' : "background: url('#{@page_info[:banner_image]}') 0 0 no-repeat;")
 .category-header
   h2
     span
@@ -41,7 +40,7 @@
 
 .category-catalog.products
   .row
-    = render @products.first(6)
+    = render(@products) || "Sorry, no dresses match your criteria"
 
 .category-catalog
   h2 
@@ -49,7 +48,7 @@
     br
     ' YOU MIGHT LIKE
   .row
-    = render @products.last(8), element_class: 'grid-3'
+    = render featured_products, element_class: 'grid-3'
 
 // OLD HTML ---->
 / .m-pixel

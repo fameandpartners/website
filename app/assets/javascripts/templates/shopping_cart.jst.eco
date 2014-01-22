@@ -6,79 +6,67 @@
   <% if @order.item_count == 0: %>
     <div class="empty">Your shopping bag is empty. Browse for formal dresses now.</div>
   <% else: %>
-    <div id="shopping-arrow-up" class="arrow-up"></div>
-    <ul id="shopping-bag-popup" class="items-carousel">
+    <div class="shopping-list">
       <% for line_item in @order.line_items: %>
-          <li class="item-block">
-            <div class='thumbnail'>
-              <a href='<%= getSiteVersionPrefix() %>/products/<%= line_item.product_permalink %>'>
-                <img src="<%= line_item.image_small %>" 
-                  itemprop="image" width="83" height="115" alt="<%= line_item.product_name %>"/>
-              </a>
-              <a href="#" class="remove-item-from-cart" data-id="<%= line_item.variant_id %>">Remove</a>
-            </div>
-            <div class="item-info">
-              <div class="price">
-                <% if (line_item.money_without_discount) : %>
-                  <del><%= line_item.money_without_discount %></del>
-                <% end %>
-                <span><%= line_item.money %></span>
-              </div>
-              <div class="name">
-                <a href="<%= getSiteVersionPrefix() %>/products/<%= line_item.product_permalink %>" target="blank"><%= line_item.product_name %></a>
-              </div>
-              <% if (!_.isNull(line_item.personalization)) : %>
-                <div class="custom-label">Custom dress</div>
+        <div class="item">
+          <div class="picture">
+            <a href='<%= getSiteVersionPrefix() %>/products/<%= line_item.product_permalink %>'>
+              <img src="<%= line_item.image_small %>" 
+                itemprop="image" width="83" height="115" alt="<%= line_item.product_name %>"/>
+            </a>
+          </div>
+          <div class="info">
+            <h6><a href="<%= getSiteVersionPrefix() %>/products/<%= line_item.product_permalink %>" target="blank"><%= line_item.product_name %></a></h6>
+            <div class="price">
+              <% if (line_item.money_without_discount) : %>
+                <span class="price-old"><%= line_item.money_without_discount %></span>
               <% end %>
-              <ul class="specs">
-                <li>
-                  <div class="label">Color</div>
-                  <div class="value">
-                    <div class="color <%= line_item.product_color %>">&nbsp;</div>
-                  </div>
-                </li>
-                <li>
-                  <div class="label">Size</div>
-                  <div class="value">
-                    <%= line_item.product_size %>
-                  </div>
-                </li>
-                <li>
-                  <div class="label">Quantity</div>
-                  <div class="value">
-                    <%= line_item.quantity %>
-                  </div>
-                </li>
-                <li>
-                  <div class="label">Estimated delivery</div>
-                  <div class="value"><%= line_item.product_delivery_time %></div>
-                </li>
-              </ul>
+              <%= line_item.money %>
             </div>
-          </li>
-        <% end %>
-      </ul>
-    <div id="shopping-arrow-down" class="arrow-down"></div>
-    <div class="totals">
-      <div class="label fleft">Total</div>
-      <div class="value fright">
-        <%= @order.currency %>
-        <span><%= @order.display_total %></span>
-      </div>
-    </div>
-    <div class="buttons">
-      <a href="<%= getSiteVersionPrefix() %>/cart" class="continue">View cart</a>
-      <form accept-charset="UTF-8" action="/cart" method="post">
-        <div style="margin:0;padding:0;display:inline">
-          <input name="utf8" type="hidden" value="✓">
-          <input name="_method" type="hidden" value="put">
-          <input name="<%= @csrf_param %>" type="hidden" value="<%= @csrf_token %>">
+            <div class="description">
+              <table>
+                <tr>
+                  <td>Color:</td>
+                  <td>
+                    <% if (!_.isNull(line_item.personalization)) : %>
+                      <div class="color" style="background-color: <%= line_item.product_color %>;"></div>
+                    <% else: %>
+                      <div class="color <%= line_item.product_color %>"></div>
+                    <% end %>
+                  </td>
+                </tr>
+                <% if (!_.isNull(line_item.personalization)) : %>
+                  <tr>
+                    <td>Size:</td>
+                    <td><%= line_item.personalization.size %></td>
+                  </tr>
+                  <% for value in line_item.personalization.customization_values: %>
+                    <tr>
+                      <td><%= value.customisation_type.presentation %></td>
+                      <td><%= value %></td>
+                    </tr>
+                  <% end %>
+                <% else: %>
+                  <tr>
+                    <td>Size:</td>
+                    <td><%= line_item.product_size %></td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td>Quantity:</td>
+                  <td><%= line_item.quantity %></td>
+                </tr>
+                <tr>
+                  <td>Estimated Delivery:</td>
+                  <td><%= line_item.product_delivery_time %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <a href="#" class='delete remove-item-from-cart' data-id="<%= line_item.variant_id %>">
+            <span class="icon-close"></span>
+          </a>
         </div>
-        <input type="submit" name="checkout" class="buy-now" value="Buy now">
-      </form>
-      <div class="ask-parents">
-        <a href="#" class="ask-parent-to-pay-button">Invite someone to pay</a>
-      </div>
+      <% end %>
     </div>
   <% end %>
-</div>

@@ -28,7 +28,7 @@
       br
       ' Integer vel felis sit amet massa conguet.
       .arrow
-    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
+    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
 
 .landing-promo
   .grid-container
@@ -79,11 +79,12 @@
           .line-bottom    
 .create-your-look
   .section-title
-    em.mark CREATE
-    br
-    ' YOUR 
-    em LOOK 
-    ' NOW
+    = link_to "#", class: 'show-style-quiz' do
+      em.mark CREATE
+      br
+      ' YOUR 
+      em LOOK 
+      ' NOW
   .arrows-line-horizontal
   .grid-container
     .row
@@ -112,42 +113,16 @@
         = link_to 'VIEW MORE', '#', class: 'btn small'
 .pictures-gallery
   .section
-    = link_to '#' do
-      = image_tag '_sample/catalog-1.jpg'
+    = image_tag '_sample/catalog-1.jpg'
   .section
-    = link_to '#' do
+    = link_to 'http://www.pinterest.com/fameandpartners/' do
       = image_tag '_sample/catalog-2.jpg'
   .section
-    = link_to '#' do
+    = link_to 'http://instagram.com/fameandpartners' do
       = image_tag '_sample/catalog-3.jpg'
   .section
-    = link_to '#' do
+    = link_to 'http://www.spotify.com' do
       = image_tag '_sample/catalog-4.jpg'
-  .section
-    = link_to '#' do
-      = image_tag '_sample/catalog-2.jpg'
-  .section
-    = link_to '#' do
-      = image_tag '_sample/catalog-1.jpg' 
-  .section
-    = link_to '#' do
-      = image_tag '_sample/catalog-4.jpg'
-  .section
-    = link_to '#' do
-      = image_tag '_sample/catalog-3.jpg'
-  .arrows-line-horizontal
-  .section
-    = link_to '#' do
-      = image_tag '_sample/catalog-1.jpg'
-  .section
-    = link_to '#' do
-      = image_tag '_sample/catalog-2.jpg'
-  .section
-    = link_to '#' do
-      = image_tag '_sample/catalog-3.jpg'
-  .section
-    = link_to '#' do
-      = image_tag '_sample/catalog-4.jpg'    
 
 
 / .promo

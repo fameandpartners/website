@@ -157,6 +157,7 @@
 			display: inline-block;
 			&:before, &:after {
 				content: '';
+				text-decoration: none;
 			}
 		}
 	}

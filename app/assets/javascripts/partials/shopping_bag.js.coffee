@@ -62,6 +62,7 @@ $ ->
       shoppingBag.closeTimerId = setTimeout(shoppingBag.hide, period)
 
     renderCart: (e, data) ->
+      window.cart_info = data
       cartHtml = shoppingBag.cartTemplate
         opened: shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
         order: data.cart
@@ -90,6 +91,8 @@ $ ->
         .on('click', shoppingBag.removeProductClickHandler)
 
     updateCarousel: (variantId) ->
+      # currently, shopping bag doesn't have carousel
+      return
       return unless $("#shopping-bag-popup").is(":visible")
 
       start = $('#shopping-bag-popup').first().find(' > li')

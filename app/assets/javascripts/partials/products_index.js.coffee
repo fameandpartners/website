@@ -32,10 +32,14 @@ $(".products.index").ready ->
       pageUrl = @updatePageLocation(searchData)
       $.ajax(urlWithSitePrefix('/products'),
         type: "GET",
-        dataType: 'html',
+        dataType: 'json',
         data: $.param(searchData)
-        success: (html) ->
-          productsFilter.$el.find('.category-catalog.products .row').html(html)
+        success: (data) ->
+          productsFilter.$el.find('.category-catalog.products .row').html(data.products_html)
+          header = productsFilter.$el.find('.category-header')
+          header.find('h2 span em').html(data.page_info.banner_title)
+          header.find('p').html(data.page_info.banner_text)
+
           productsFilter.updateContentHandlers()
           track.pageView(pageUrl, searchData)
       )
