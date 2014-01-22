@@ -88,7 +88,7 @@ window.helpers.quickViewer = {
 
     window.initProductImagesCarousel = (filterOptions = {}) ->
       $wrapper = helpers.quickViewer.container.find("#product-images")
-      populateImagesCarousel($wrapper, filterOptions)
+      #populateImagesCarousel($wrapper, filterOptions)
       # show big images from carouseled small images
       options =
         prev:

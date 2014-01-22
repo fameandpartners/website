@@ -16,15 +16,20 @@ Spree::ProductsController.class_eval do
 
     @current_colors = @searcher.colour.present? ? @searcher.colors_with_similar : []
 
-    set_collection_title(@page_info)
-    set_marketing_pixels(@searcher)
+    respond_to do |format|
+      format.html do
+        set_collection_title(@page_info)
+        set_marketing_pixels(@searcher)
 
-    if !request.xhr?
-      render action: 'index', layout: true
-    else
-      text = render_to_string(partial: 'product', collection: @products.first(6))
-      render text: text, layout: false
-    end
+        render action: 'index', layout: true
+      end
+      format.json do
+        render json: {
+          products_html: render_to_string(partial: 'spree/products/product.html.slim', collection: @products.first(6)),
+          page_info:  @page_info
+        }
+      end
+    end 
   end
 
   # NOTE: original method check case when user comes from page
