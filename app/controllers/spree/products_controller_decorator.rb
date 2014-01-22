@@ -24,10 +24,9 @@ Spree::ProductsController.class_eval do
         render action: 'index', layout: true
       end
       format.json do
-        render json: {
-          products_html: render_to_string(partial: 'spree/products/product.html.slim', collection: @products.first(6)),
-          page_info:  @page_info
-        }
+        products_html = render_to_string(partial: 'spree/products/product.html.slim', collection: @products) || 'Sorry, no dresses match your criteria'
+
+        render json: { products_html: products_html, page_info:  @page_info }
       end
     end 
   end
@@ -120,6 +119,12 @@ Spree::ProductsController.class_eval do
   end
 
   helper_method :colors
+
+  def featured_products
+    @featured_products ||= Spree::Product.active.featured.uniq.includes(:master)
+  end
+
+  helper_method :featured_products
 
   def log_product_viewed
     return unless @product
