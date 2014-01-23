@@ -49,6 +49,7 @@ end
 def create_taxonomy_node(root_element_attributes, childs_info)
   taxonomy = Spree::Taxonomy.where(name: root_element_attributes[:name]).first_or_create
   root_taxon = taxonomy.root || Spree::Taxon.where(root_element_attributes.merge(taxonomy_id: taxonomy.id)).first_or_create
+  root_taxon.update_attribute(:permalink, root_element_attributes[:permalink])
 
   if root_element_attributes[:description].present? || root_element_attributes[:title].present?
     banner = root_taxon.build_banner(
@@ -61,7 +62,7 @@ def create_taxonomy_node(root_element_attributes, childs_info)
   childs_info.each do |name, description|
     child = Spree::Taxon.where(
       name: name,
-      permalink: "#{root_taxon.permalink}/#{name.parameterize}",
+      permalink: "#{root_element_attributes[:permalink]}/#{name.parameterize}",
       taxonomy_id: taxonomy.id
     ).first_or_create
 
@@ -75,7 +76,7 @@ def create_taxonomy_node(root_element_attributes, childs_info)
 end
 
 def randomly_assign_taxons_to_products
-  collections = Spree::Taxon.roots.where(permalink: 'range').first.leaves
+  collections = Spree::Taxon.roots.where(permalink: 'collection').first.leaves
   styles = Spree::Taxon.roots.where(permalink: 'style').first.leaves
 
   Spree::Product.all.each do |product|
