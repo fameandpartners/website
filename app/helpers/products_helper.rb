@@ -144,12 +144,7 @@ module ProductsHelper
   end
 
   def in_wishlist?(variant)
-    return current_wished_product_ids.include?(variant.product_id)
-  end
-
-  def share_buttons(product = nil)
-    return '' if Rails.env.development?
-    render 'shared/share_buttons', product: product
+    current_wished_product_ids.include?(variant.product_id)
   end
 
   def send_to_a_friend_link(product)
