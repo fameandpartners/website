@@ -21,34 +21,41 @@
       li.opened 
         .title DESCRIPTION
         .text 
-          p = product_description(product)
+          - if (description = product_description(@product)).present?
+            p = description
+          - else
+            p = t('product_has_no_description')
       li 
         .title details
         .text
-          p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-      li 
-        .title styling notes
-        .text
-          p = product.property('style_notes')
+          p SKU: #{@product.sku}
+          p Material: #{@product.property('fabric')}
+      - if @product.property('style_notes').present?
+        li 
+          .title styling notes
+          .text
+            p = product.property('style_notes')
       li 
         .title delivery
         .text
-          p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+          p = @product.delivery_time_as_string(:long)
       li 
         .title returns
         .text
-          p Lorem ipsum dolor sit amet, consectetur Adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-      li.opened 
-        .title recommended
-        .text
-          .category-catalog
-            .row
-              .grid-4
-                = link_to '#' do
-                  = image_tag '_sample/category-grey-2.jpg'
-              .grid-4
-                = link_to '#' do
-                  = image_tag '_sample/category-grey-2.jpg'
-              .grid-4
-                = link_to '#' do
-                  = image_tag '_sample/category-grey-2.jpg'        
+          p What is your returns policy?
+          p We are sorry to learn you are unhappy with your dress. We accept returns under the following circumstances: 
+          ul
+            li Full Price Items: 30 days from date of shipment
+            li Sale Items- Up to 30% off: 14 days from date of shipment  
+            li Sale Items- 31%- 49% off: 7 days from date of shipment 
+            li Sale Items- > 50%: No Returns 
+      - if similar_products.present?
+        li.opened 
+          .title recommended
+          .text
+            .category-catalog
+              .row
+                - similar_products.each do |product|
+                  .grid-4
+                    = link_to collection_product_path(product) do
+                      = product_image_tag(product)

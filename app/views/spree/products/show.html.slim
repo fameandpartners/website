@@ -41,95 +41,54 @@ ruby:
           = send_to_a_friend_link(@product)
       .category-catalog
         .row
-          .grid-6
-            .picture
-              = link_to '#' do
-                = image_tag '_sample/category-grey-1.jpg'
+          - if @product.images.present?
+            - @product.images.each do |image|
+              .grid-6
+                .picture
+                  = image_tag(image.attachment.url(:large), title: @product.name)
+                  .popup
+                    .fright
+                      a href='#' data-action='show-large-image' data-image='#{ image.attachment.url(:xlarge) }'
+                        span.icon-expand
+          - if (celebrity = @product.celebrity_inspiration).present?
+            .grid-6
+              .picture
+                = image_tag celebrity.photo.url(:preview), width: 418, height: 600, alt: ''
               .popup
-                .fleft = link_to '+ QUICKVIEW', '#'
-                .fright = link_to '+ WISHLIST', '#'
-          .grid-6
-            .picture
-              = link_to '#' do
-                = image_tag '_sample/category-grey-2.jpg'
+                .fright
+                  a href='#' data-action='show-large-image' data-image='#{ celebrity.photo.url(:large) }'
+                    span.icon-expand
+          - if @product.video_url.present?
+            .grid-6
+              .picture
+                == product_video(@product, width: 360, height: 480)
+                /.initials = image_tag 'video-initials.png', width: 360, height: 480, alt: ''
               .popup
                 .fleft = link_to 'play video', '#'
-                .fright
-                  = link_to '#' do
-                    span.icon-expand
-          .grid-6
-            .picture
-              = link_to '#' do
-                = image_tag '_sample/category-grey-2.jpg'
-              .popup
-                .fleft = link_to 'play video', '#'
-                .fright
-                  = link_to '#' do
-                    span.icon-expand
+          / moodboard
           .grid-6
             .row
-              .grid-6
-                .picture
-                  = link_to '#' do
-                    = image_tag '_sample/category-grey-2.jpg'
-                  .popup
-                    .fleft = link_to 'play video', '#'
-                    .fright
-                      = link_to '#' do
-                        span.icon-expand
-              .grid-6
-                .picture
-                  = link_to '#' do
-                    = image_tag '_sample/category-grey-2.jpg'
-                  .popup
-                    .fleft = link_to 'play video', '#'
-                    .fright
-                      = link_to '#' do
-                        span.icon-expand
-              .grid-6
-                .picture
-                  = link_to '#' do
-                    = image_tag '_sample/category-grey-2.jpg'
-                  .popup
-                    .fleft = link_to 'play video', '#'
-                    .fright
-                      = link_to '#' do
-                        span.icon-expand
-              .grid-6
-                .picture
-                  = link_to '#' do
-                    = image_tag '_sample/category-grey-2.jpg'
-                  .popup
-                    .fleft = link_to 'play video', '#'
-                    .fright
-                      = link_to '#' do
-                        span.icon-expand
+              / moodboard item
+              - 6.times do |index|
+                .grid-6
+                  .picture
+                    = link_to '#' do
+                      = image_tag '_sample/category-grey-2.jpg'
+                    .popup
+                      /.fleft = link_to 'play video', '#'
+                      .fright
+                        = link_to '#' do
+                          span.icon-expand
           .grid-6    
             .picture
               = link_to '#' do
                 = image_tag '_sample/catalog-ad.jpg' 
+          / statics, accessory product +  song
           .grid-6
             .row
               .grid-6
-                .picture
-                  = link_to '#' do
-                    = image_tag '_sample/category-grey-2.jpg'
-                  .popup
-                    .fleft = link_to 'play video', '#'
-                    .fright
-                      = link_to '#' do
-                        span.icon-expand
-              .grid-6
-                .picture
-                  = link_to '#' do
-                    = image_tag '_sample/category-grey-2.jpg'
-                  .popup
-                    .fleft = link_to 'play video', '#'
-                    .fright
-                      = link_to '#' do
-                        span.icon-expand
-          .grid-6
-            .row
+                .grid-20
+                  .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/johnlegend/all-of-me-3', class: 'sc-player'
               .grid-6
                 .picture
                   = link_to '#' do
@@ -159,7 +118,7 @@ ruby:
               .arrows-line-horizontal.top
               .arrows-line-horizontal.bottom
     .grid-4
-      = render 'product_info', { product: @product, sizes: sizes, colors: colors }
+      = render 'product_info', { product: @product, sizes: sizes, colors: colors, similar_products: @similar_products }
 
 // OLD HTML ---->
 / .wrap

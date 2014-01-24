@@ -47,7 +47,7 @@ module ProductsHelper
   end
 
   def product_video(product, options = {})
-    return '' if Rails.env.development?
+    #return '' if Rails.env.development?
     return '' if product.video_url.blank?
 
     width   = options[:width] || 300
@@ -84,6 +84,8 @@ module ProductsHelper
   def product_image_tag(product, size = nil, options = {})
     no_image = 'noimage/product.png'
     size = size.present? ? size : 'product'
+
+    options[:title] ||= product.name
 
     if product.images.empty?
       image_tag(no_image, options)

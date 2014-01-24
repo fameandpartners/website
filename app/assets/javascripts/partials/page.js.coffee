@@ -31,4 +31,21 @@ window.page = {
 
   enableWishlistLinks: (links) ->
     productWishlist.addWishlistButtonActions(links)
+
+  enableImageZoomButtons: (buttons) ->
+    buttons.on('click', (e) ->
+      source = $(e.target).closest('*[data-image]')
+      bigImageUrl = source.data('image')
+      if bigImageUrl?
+        bigImageUrl = (location.origin + bigImageUrl) if !bigImageUrl.match(/^https?:\/\//)
+        $.fancybox href: bigImageUrl
+
+        # development
+        setTimeout( ->
+          $('.fancybox-overlay').click()
+          console.log('[FIXME] fancybox popup with large image closed manually by timeout')
+        , 10000)
+
+      return false
+    )
 }

@@ -1,12 +1,21 @@
 $(".products.show").ready ->
+  # common
   page.enableShoppingCart()
+
+  # products_info partial
   page.enableProductVariantsSelector($('#content .product-info'))
-  page.enableQuickView($(".quick-view a[data-action='quick-view']"))
   page.enableWhatSizeIam($('.toggle-sizes'))
   page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
-  page.enableSendToFriendButton($('a.send-to-friend'))
   page.enableAccordeonBars($('ul.slider li'))
-  page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
+
+  # header - nav partial
+  page.enableSendToFriendButton($('a.send-to-friend'))
+
+  # products
+  page.enableImageZoomButtons($("a[data-action='show-large-image']"))
+
+  #page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
+  #page.enableQuickView($(".quick-view a[data-action='quick-view']"))
 
 #window.populateImagesCarousel = ($wrapper, filterOptions = {}) ->
 #  $wrapper.empty()
