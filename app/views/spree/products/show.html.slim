@@ -1,3 +1,6 @@
+css:
+  .sc-player { display: none; }
+
 javascript:
   window.product_variants = #{{ @product_variants.to_json }};
   //window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
@@ -74,11 +77,6 @@ ruby:
                   .picture
                     = link_to '#' do
                       = image_tag '_sample/category-grey-2.jpg'
-                    .popup
-                      /.fleft = link_to 'play video', '#'
-                      .fright
-                        = link_to '#' do
-                          span.icon-expand
           .grid-6    
             .picture
               = link_to '#' do
@@ -86,18 +84,15 @@ ruby:
           / statics, accessory product +  song
           .grid-6
             .row
-              .grid-6
-                .grid-20
-                  .soundcloud = link_to 'SoundCloud tune', 'http://soundcloud.com/johnlegend/all-of-me-3', class: 'sc-player'
-              .grid-6
-                .picture
-                  = link_to '#' do
-                    = image_tag '_sample/category-grey-2.jpg'
-                  .popup
-                    .fleft = link_to 'play video', '#'
-                    .fright
-                      = link_to '#' do
-                        span.icon-expand
+              - song = @product.property('soundcloud_song_id') || 'http://soundcloud.com/johnlegend/all-of-me-3'
+              - if song.present?
+                .grid-6
+                  .picture
+                    = link_to 'SoundCloud tune', song, class: 'sc-player'
+                    = link_to '#', data: { action: 'soundcloud' } do
+                      = image_tag '_sample/category-grey-2.jpg'
+                    .popup
+                      .fleft = link_to 'Play', '#', data: { action: 'soundcloud' }
               .grid-6
                 .picture
                   = link_to '#' do
