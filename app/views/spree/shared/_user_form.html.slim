@@ -19,10 +19,12 @@
           = f.label :password_confirmation
           = f.password_field :password_confirmation, autocomplete: :off
     .newsletter-field
-      label for="spree_user_newsletter"
+      label.nice-checkbox for="spree_user_newsletter"
         = f.check_box :newsletter
-        = f.label :newsletter, "Subscribe to our Newsletter"  
-        .pitch Stay in touch with the hottest trends and new arrivals direct to your inbox.
+        = f.label :newsletter do 
+          span
+          ' Subscribe to our Newsletter
+        / .pitch Stay in touch with the hottest trends and new arrivals direct to your inbox.
       
     div data-hook="signup_below_password_fields"
     .submit-form.input.clearfix
