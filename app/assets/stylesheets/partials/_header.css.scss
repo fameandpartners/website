@@ -269,6 +269,28 @@
 					display: block;
 				}
 			}
+			.buttons {
+				margin-top: 10px;
+				.total {
+					font-size: 18px;
+					margin-bottom: 10px;
+					span { 
+						color: $pinkColor;
+						vertical-align: baseline;
+					}
+				}
+				.edit_order {
+					float: right;
+				}
+				.btn {
+					display: block;
+					width: 147px;
+				}
+				.ask-parents .btn {
+					width: 100%;
+					margin-top: 10px;
+				}
+			}
 		}
 	}
 	.picture {

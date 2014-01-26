@@ -112,6 +112,10 @@
 			&.shadow {@include longBoxShadowRight ($greenColor, 3);}
 		}
 	}
+	&.grey {
+		color: #fff;
+		background-color: #b9b9b9;
+	}
 	&.shadow {
 		@include longBoxShadowRight(#000, 3);
 	}
