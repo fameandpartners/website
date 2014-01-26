@@ -1,9 +1,12 @@
 #shopping-bag-popup-wrapper.shopping-bag-popup style="display:none;"
   - if current_order.item_count == 0
-    .empty
-      ' Your shopping bag is empty. Browse for formal dresses now.
+    .empty-box
       p
-        = link_to "Our Dress Collection", collection_path
+        ' Your shopping bag is empty. 
+        br
+        ' Browse for formal dresses now.
+      p
+        = link_to "Our Dress Collection", collection_path, class: 'btn mid empty border'
   - else
     /#shopping-arrow-up.arrow-up
     /ul#shopping-bag-popup.items-carousel

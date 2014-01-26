@@ -244,6 +244,11 @@
 		font: 400 12px/1 $fontFive;
 		color: #555;
 		letter-spacing: 0;
+		.empty-box {
+			text-align: center;
+			padding: 45px;
+			font-size: 16px;
+		}
 		.shopping-list {
 			background: url('_nav-bg.png');
 			border: solid 3px #fff;
