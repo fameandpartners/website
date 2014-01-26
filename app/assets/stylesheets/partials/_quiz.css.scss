@@ -1393,18 +1393,19 @@
     width: 200px;
     border-left: 1px solid #ebebeb;
     margin: 70px 0;
+    &.first, &:first-child {
+      border-left: 0;
+    }
     .name {
       font-size: 22px;
       color: #333;
-      font-weight: 300;
+      font-weight: 100;
     }
     .percent {
       font-weight: 100;
       font-size: 44px;
-      color: #f59a8c;
+      color: $pinkColor;
     }
-    &.first {
-      border-left: 0;
-    }
+    
   }
 }

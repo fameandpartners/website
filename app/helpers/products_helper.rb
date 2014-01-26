@@ -162,9 +162,9 @@ module ProductsHelper
         item: wishlist_item.id,
         quantity: wishlist_item.quantity
       }
-      link_to 'Add to cart', '#', class: 'add-to-cart master', data: data
+      link_to 'Add to cart', '#', class: 'add-to-cart master btn mid fleft', data: data
     else
-      link_to 'Add to cart', move_to_cart_wishlists_item_path(wishlist_item), class: 'add-to-cart', remote: true
+      link_to 'Add to cart', move_to_cart_wishlists_item_path(wishlist_item), class: 'add-to-cart btn mid fleft', remote: true
     end
   end
 
