@@ -170,9 +170,9 @@ module ProductsHelper
 
   def product_move_to_wishlist_link(variant)
     if spree_user_signed_in?
-      link_to content_tag(:i, '', class: 'icon icon-heart') + 'Move to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist'
+      link_to '+ to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist btn empty border'
     else
-      link_to content_tag(:i, '', class: 'icon icon-heart') + 'Move to wish list', spree_signup_path
+      link_to '+ to wish list', spree_signup_path, class: 'btn empty border'
     end
   end
 

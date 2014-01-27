@@ -28,7 +28,8 @@
 .icon-tumblr,
 .icon-instagram,
 .icon-youtube,
-.icon-facebook2 {
+.icon-facebook2,
+.icon-trash {
   font-family: 'Icons';
   speak: none;
   font-style: normal;
@@ -72,6 +73,7 @@
 .icon-price-free:before {content: "\e607"; }
 .icon-erase:before {content: "\e608"; }
 .icon-dollar:before {content: "\e609"; }
+.icon-trash:before { content: "\e617";}
 
 
 
