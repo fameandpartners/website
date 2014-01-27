@@ -30,12 +30,12 @@ window.Quiz = {
     $container = $('.quiz-wrapper-box')
 
     actual = $container.position().top
-    expected = $(window).scrollTop() + ($(window).height() - $container.outerHeight()) / 2
+    expected = Math.max(20, $(window).scrollTop() + ($(window).height() - $container.outerHeight()) / 2)
 
     correction = if expected > actual then expected - actual else (actual - expected) * -1
 
     $container.css
-      'margin-top': correction + 'px'
+      'margin-top': correction
 
   nextStepEventHandler: (event) ->
     event.preventDefault()
