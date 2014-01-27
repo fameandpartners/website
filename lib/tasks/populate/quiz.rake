@@ -22,93 +22,50 @@ namespace :db do
                                  :multiple => true,
                                  :partial => 'style_words'
                                }, {
-                                 :text => "Which brands speak to your style?",
+                                 :text => 'Tell us which makeup look you love.',
                                  :step => 4,
                                  :position => 1004,
-                                 :multiple => true,
-                                 :partial => 'brands',
-                                 :populate => 'brands'
-                               }, {
-                                 :text => "You've won a pair of shoes. Which ones do you choose?",
-                                 :step => 5,
-                                 :position => 1005,
-                                 :partial => 'prom_shoes'
-                               }, {
-                                 :text => 'Tell us which eye makeup look you love.',
-                                 :step => 6,
-                                 :position => 1006,
                                  :partial => 'prom_makeup'
                                }, {
                                  :text => 'Whether it works for you or not, which hair style do you love?',
-                                 :step => 7,
-                                 :position => 1007,
+                                 :step => 5,
+                                 :position => 1005,
                                  :partial => 'prom_hair'
                                }, {
                                  :text => 'Which of these runway looks would inspire your dream formal dress?',
-                                 :step => 8,
-                                 :position => 1008,
+                                 :step => 6,
+                                 :position => 1006,
                                  :partial => 'prom_dresses'
-                               #}, {
-                               #  :text => 'Which of these nail colours do you regularly wear?',
-                               #  :position => 1009,
-                               #  :multiple => true,
-                               #  :partial => 'nail_colours',
-                               #  :populate => 'nail_colours'
-                               }, {
-                                 :text => 'What are your favorite colors?',
-                                 :step => 9,
-                                 :position => 1010,
-                                 :multiple => true,
-                                 :partial => 'colours',
-                                 :populate => 'colours'
                                }, {
                                  :text => 'How important is fashion to you?',
-                                 :step => 10,
-                                 :position => 1011,
+                                 :step => 7,
+                                 :position => 1007,
                                  :partial => 'fashionability'
                                }, {
                                  :text => 'Do you prefer to show some skin or to cover up? Rank how sexy you like to look.',
-                                 :step => 11,
-                                 :position => 1012,
+                                 :step => 8,
+                                 :position => 1008,
                                  :partial => 'sexiness'
-                               #}, {
-                               #  :text => 'Do you loathe or love any of these current fashion trends?',
-                               #  :position => 1013,
-                               #  :partial => 'trends',
-                               #  :populate => 'trends'
                                }, {
                                  :text => 'What is your hair colour?',
-                                 :step => 12,
-                                 :position => 1014,
+                                 :step => 9,
+                                 :position => 1008,
                                  :partial => 'hair_colours',
                                  :populate => 'hair_colour'
                                }, {
                                  :text => 'What is your skin colour?',
-                                 :step => 13,
-                                 :position => 1015,
+                                 :step => 9,
+                                 :position => 1009,
                                  :partial => 'skin_colours',
                                  :populate => 'skin_colour'
                                }, {
                                  :text => 'What is your body shape?',
-                                 :step => 14,
-                                 :position => 1016,
+                                 :step => 9,
+                                 :position => 1010,
                                  :partial => 'body_shapes',
                                  :populate => 'body_shape'
-                               }, {
-                                 :text => 'What is your typical size?',
-                                 :step => 14,
-                                 :position => 1017,
-                                 :partial => 'typical_sizes',
-                                 :populate => 'typical_size'
-                               }, {
-                                 :text => 'What is your bra size?',
-                                 :step => 15,
-                                 :position => 1018,
-                                 :partial => 'bra_sizes',
-                                 :populate => 'bra_size'
                                }
                              ])
-
 
       question = quiz.questions.find_by_partial!('outfits')
       question.answers.create!([
@@ -130,7 +87,6 @@ namespace :db do
                                  }
                                ])
 
-
       question = quiz.questions.find_by_partial!('oscar_dresses')
       question.answers.create!([
                                  {
@@ -150,7 +106,6 @@ namespace :db do
                                    :edgy => 10
                                  }
                                ])
-
 
       question = quiz.questions.find_by_partial!('style_words')
       question.answers.create!([
@@ -225,84 +180,6 @@ namespace :db do
                                  }
                                ])
 
-
-      question = quiz.questions.find_by_partial!('brands')
-      question.answers.create!([
-                                 {
-                                   :code => 'chanel',
-                                   :glam => 5,
-                                   :classic => 5
-                                 }, {
-                                   :code => 'burberry',
-                                   :edgy => 3,
-                                   :bohemian => 2,
-                                   :classic => 5
-                                 }, {
-                                   :code => 'lavin',
-                                   :glam => 5,
-                                   :edgy => 2,
-                                   :bohemian => 3
-                                 }, {
-                                   :code => 'christian_dior',
-                                   :glam => 10
-                                 }, {
-                                   :code => 'jil_sander',
-                                   :edgy => 10
-                                 }, {
-                                   :code => 'zuhair_murad',
-                                   :glam => 5,
-                                   :bohemian => 5
-                                 }, {
-                                   :code => 'gucci',
-                                   :glam => 5,
-                                   :edgy => 5
-                                 }, {
-                                   :code => 'sass_bide',
-                                   :edgy => 5,
-                                   :bohemian => 5
-                                 }, {
-                                   :code => 'miu_miu',
-                                   :glam => 2,
-                                   :girly => 6,
-                                   :classic => 2
-                                 }, {
-                                   :code => 'chloe',
-                                   :girly => 2,
-                                   :edgy => 6,
-                                   :classic => 2
-                                 }, {
-                                   :code => 'kate_spade',
-                                   :girly => 5,
-                                   :classic => 5
-                                 }, {
-                                   :code => 'ralph_lauren',
-                                   :girly => 3,
-                                   :classic => 7
-                                 }
-                               ])
-
-
-      question = quiz.questions.find_by_partial!('prom_shoes')
-      question.answers.create!([
-                                 {
-                                   :code => 'glam',
-                                   :glam => 10
-                                 }, {
-                                   :code => 'classic',
-                                   :classic => 10
-                                 }, {
-                                   :code => 'girly',
-                                   :girly => 10
-                                 }, {
-                                   :code => 'boho',
-                                   :bohemian => 10
-                                 }, {
-                                   :code => 'edgy',
-                                   :edgy => 10
-                                 }
-                               ])
-
-
       question = quiz.questions.find_by_partial!('prom_makeup')
       question.answers.create!([
                                  {
@@ -329,7 +206,6 @@ namespace :db do
                                  }
                                ])
 
-
       question = quiz.questions.find_by_partial!('prom_hair')
       question.answers.create!([
                                  {
@@ -350,7 +226,6 @@ namespace :db do
                                  }
                                ])
 
-
       question = quiz.questions.find_by_partial!('prom_dresses')
       question.answers.create!([
                                  {
@@ -370,113 +245,6 @@ namespace :db do
                                    :edgy => 10
                                  }
                                ])
-
-
-      #question = quiz.questions.find_by_partial!('nail_colours')
-      #question.answers.create!([
-      #                           {
-      #                             :code => 'neon_yellow',
-      #                             :glam => 3,
-      #                             :edgy => 5,
-      #                             :bohemian => 2
-      #                           }, {
-      #                             :code => 'neutral',
-      #                             :girly => 4,
-      #                             :classic => 6
-      #                           }, {
-      #                             :code => 'mint',
-      #                             :girly => 3,
-      #                             :edgy => 3,
-      #                             :bohemian => 3
-      #                           }, {
-      #                             :code => 'navy',
-      #                             :glam => 4,
-      #                             :edgy => 2,
-      #                             :bohemian => 2,
-      #                             :classic => 2
-      #                           }, {
-      #                             :code => 'black',
-      #                             :glam => 3,
-      #                             :edgy => 3,
-      #                             :bohemian => 4
-      #                           }, {
-      #                             :code => 'glittery',
-      #                             :glam => 2,
-      #                             :girly => 4,
-      #                             :edgy => 4
-      #                           }, {
-      #                             :code => 'lilac',
-      #                             :girly => 8,
-      #                             :classic => 2
-      #                           }, {
-      #                             :code => 'light_pink',
-      #                             :girly => 6,
-      #                             :classic => 4
-      #                           }, {
-      #                             :code => 'french_tip',
-      #                             :girly => 4,
-      #                             :classic => 6
-      #                           }, {
-      #                             :code => 'gold',
-      #                             :glam => 4,
-      #                             :edgy => 4,
-      #                             :classic => 2
-      #                           }, {
-      #                             :code => 'purple',
-      #                             :edgy => 2,
-      #                             :bohemian => 5
-      #                           }, {
-      #                             :code => 'bright_red',
-      #                             :glam => 7,
-      #                             :edgy => 3
-      #                           }
-      #                         ])
-
-      question = quiz.questions.find_by_partial!('colours')
-      question.answers.create!([
-                                 {
-                                   :code => 'black'
-                                 }, {
-                                   :code => 'navy'
-                                 }, {
-                                   :code => 'cobalt'
-                                 }, {
-                                   :code => 'blue'
-                                 }, {
-                                   :code => 'brown'
-                                 }, {
-                                   :code => 'purple'
-                                 }, {
-                                   :code => 'fuchsia'
-                                 }, {
-                                   :code => 'fluro'
-                                 }, {
-                                   :code => 'maroon'
-                                 }, {
-                                   :code => 'red'
-                                 }, {
-                                   :code => 'pink'
-                                 }, {
-                                   :code => 'mauve'
-                                 }, {
-                                   :code => 'ivory'
-                                 }, {
-                                   :code => 'camel'
-                                 }, {
-                                   :code => 'beige'
-                                 }, {
-                                   :code => 'orange'
-                                 }, {
-                                   :code => 'burnt_orange'
-                                 }, {
-                                   :code => 'canary'
-                                 }, {
-                                   :code => 'green'
-                                 }, {
-                                   :code => 'white'
-                                 }
-                               ])
-
 
       question = quiz.questions.find_by_partial!('fashionability')
       question.answers.create!([
@@ -513,7 +281,6 @@ namespace :db do
                                  }
                                ])
 
-
       question = quiz.questions.find_by_partial!('sexiness')
       question.answers.create!([
                                  {
@@ -548,26 +315,6 @@ namespace :db do
                                    :sexiness => 10
                                  }
                                ])
-
-
-      #question = quiz.questions.find_by_partial!('trends')
-      #question.answers.create!([
-      #                           {
-      #                             :code => 'jewel_tones'
-      #                           }, {
-      #                             :code => 'volumnious_skirts'
-      #                           }, {
-      #                             :code => 'sequins'
-      #                           }, {
-      #                             :code => 'neon'
-      #                           }, {
-      #                             :code => 'lace_and_mesh'
-      #                           }, {
-      #                             :code => 'applique'
-      #                           }, {
-      #                             :code => 'digital_prints'
-      #                           }
-      #                         ])
 
       question = quiz.questions.find_by_partial!('hair_colours')
       question.answers.create!([
@@ -621,48 +368,6 @@ namespace :db do
                                    :code => 'column'
                                  }, {
                                    :code => 'petite'
-                                 }
-                               ])
-
-      question = quiz.questions.find_by_partial!('typical_sizes')
-      question.answers.create!([
-                                 {
-                                   :code => 'G4'
-                                 }, {
-                                   :code => 'G6'
-                                 }, {
-                                   :code => 'G8'
-                                 }, {
-                                   :code => 'G10'
-                                 }, {
-                                   :code => 'G12'
-                                 }, {
-                                   :code => 'G14'
-                                 }, {
-                                   :code => 'G16'
-                                 }
-                               ])
-
-      question = quiz.questions.find_by_partial!('bra_sizes')
-      question.answers.create!([
-                                 {
-                                   :code => 'AAA'
-                                 }, {
-                                   :code => 'AA'
-                                 }, {
-                                   :code => 'A'
-                                 }, {
-                                   :code => 'B'
-                                 }, {
-                                   :code => 'C'
-                                 }, {
-                                   :code => 'D'
-                                 }, {
-                                   :code => 'E'
-                                 }, {
-                                   :code => 'FPP'
-                                 }, {
-                                   :code => 'IT_IS_SECRET'
                                  }
                                ])
     end

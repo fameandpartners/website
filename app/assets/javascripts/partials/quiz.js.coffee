@@ -1,7 +1,8 @@
 window.Quiz = {
   show: () ->
     $('.quiz-box').show()
-    # $('body').css 'overflow', 'hidden'
+    Quiz.updatePosition()
+    $('body').css 'overflow', 'hidden'
     $.getScript '/quiz'
     $('.quiz-overlay').one 'click', Quiz.hide
     $('.quiz-box .close-quiz').one 'click', Quiz.hide
@@ -17,12 +18,24 @@ window.Quiz = {
       $(document).off 'keyup'
       Quiz.hide()
 
-    $('#main-promo .slides').trigger('pause')
+    $('.quiz-box').on 'click', (event) ->
+      event.stopPropagation()
 
   hide: () ->
     $('.quiz-box').hide()
     $('body').css 'overflow', 'auto'
     $('#main-promo .slides').trigger('resume')
+
+  updatePosition: () ->
+    $container = $('.quiz-wrapper-box')
+
+    actual = $container.position().top
+    expected = $(window).scrollTop() + ($(window).height() - $container.outerHeight()) / 2
+
+    correction = if expected > actual then expected - actual else (actual - expected) * -1
+
+    $container.css
+      'margin-top': correction + 'px'
 
   nextStepEventHandler: (event) ->
     event.preventDefault()

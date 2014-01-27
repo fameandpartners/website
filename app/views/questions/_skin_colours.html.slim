@@ -1,28 +1,29 @@
-h1 = question.text
-.photos-wrapper
-  .photos.items-box
-    .item
-      label
-        = form.radio_button :code, 'fair'
-        = image_tag 'quiz/skin-colors/fair.png', width: 190, height: 294, alt: ''
-        span.selected selected
-    .item
-      label
-        = form.radio_button :code, 'medium_fair'
-        = image_tag 'quiz/skin-colors/medium-fair.png', width: 190, height: 294, alt: ''
-        span.selected selected
-    .item
-      label
-        = form.radio_button :code, 'medium'
-        = image_tag 'quiz/skin-colors/medium.png', width: 190, height: 294, alt: ''
-        span.selected selected
-    .item
-      label
-        = form.radio_button :code, 'medium_dark'
-        = image_tag 'quiz/skin-colors/medium-dark.png', width: 190, height: 294, alt: ''
-        span.selected selected
-    .item
-      label
-        = form.radio_button :code, 'dark'
-        = image_tag 'quiz/skin-colors/dark.png', width: 190, height: 294, alt: ''
-        span.selected selected
+.subtitle
+  span WHAT IS YOUR SKIN COLOUR?
+
+ul.rounded-list.body-colour
+  li
+    label
+      = image_tag '_quiz/colour/fair.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'fair'
+      .selected
+  li
+    label
+      = image_tag '_quiz/colour/fair-medium.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'medium_fair'
+      .selected
+  li
+    label
+      = image_tag '_quiz/colour/medium.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'medium'
+      .selected 
+  li
+    label
+      = image_tag '_quiz/colour/medium-dark.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'medium_dark'
+      .selected
+  li
+    label
+      = image_tag '_quiz/colour/dark.png', width: 101, height: 101, alt: ''
+      = form.radio_button :code, 'dark'
+      .selected
