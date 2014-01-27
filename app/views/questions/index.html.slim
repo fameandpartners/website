@@ -2,7 +2,7 @@
   .questions-count
     ' Q
     span.current 1
-    ' /
+    | /
     span.total = @quiz.questions.map(&:step).uniq.count
   .film style="position: relative;"
     = form_for :quiz, :url => quiz_answers_path,:remote => true do |f|

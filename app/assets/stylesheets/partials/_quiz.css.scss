@@ -304,7 +304,8 @@
     .photos-wrapper {
       margin: 25px 0 0;
       height: 425px;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: scroll;
       position: relative;
       .photos-nav {
         position: absolute;
