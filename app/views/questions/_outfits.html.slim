@@ -1,66 +1,17 @@
-/ .opacity-zero
-/   = image_tag 'quiz/bg-thanks.jpg', width: 1074, height: 530, alt: ''
-
-/ h1 = question.text
-
 h1
   em Choose the look
   ' THAT’S CLOSEST TO YOR EVERYDAY STYLE
 .subtitle
-  span SCROLL THROUGH & CHOOSE AS MANY AS YOU LIKE  
-.photos-wrapper  
-  .photos.items-box
-    .item
-      label
-        = check_box_tag :code, 'img1'
-        = image_tag 'quiz/outfit-1.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img2'
-        = image_tag 'quiz/outfit-2.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img3'
-        = image_tag 'quiz/outfit-3.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img4'
-        = image_tag 'quiz/outfit-4.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img5'
-        = image_tag 'quiz/outfit-5.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img1'
-        = image_tag 'quiz/outfit-1.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img2'
-        = image_tag 'quiz/outfit-2.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img3'
-        = image_tag 'quiz/outfit-3.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img4'
-        = image_tag 'quiz/outfit-4.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img5'
-        = image_tag 'quiz/outfit-5.jpg', alt: ''    
-        span.selected selected
-
+  span SCROLL THROUGH & CHOOSE AS MANY AS YOU LIKE
+.photos-wrapper
+  .scrollable
+    .photos.items-box
+      - question.answers.shuffle.each do |answer|
+        .item
+          label
+            = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
+            = image_tag "style_quiz/outfits/#{answer.code}.jpg", alt: ''
+            span.selected selected
   .photos-nav
     .up
       .arrows-line-vertical

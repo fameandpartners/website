@@ -1,28 +1,19 @@
-h1 = question.text
+h1
+  em Which of these runway looks would
+  | INSPIRE YOUR DREAM FORMAL DRESS?
+.subtitle
+  span SCROLL THROUGH & CHOOSE AS MANY AS YOU LIKE
 .photos-wrapper
-  .photos.items-box
-    .item
-      label
-        = image_tag 'quiz/runway/glam.jpg', alt: ''
-        = form.radio_button :code, 'glam'
-        span.selected selected
-    .item
-      label
-        = image_tag 'quiz/runway/boho.jpg', alt: ''
-        = form.radio_button :code, 'boho'
-        span.selected selected
-    .item
-      label
-        = image_tag 'quiz/runway/classic.jpg', alt: ''
-        = form.radio_button :code, 'classic'
-        span.selected selected
-    .item
-      label
-        = image_tag 'quiz/runway/girly.jpg', alt: ''
-        = form.radio_button :code, 'girly'
-        span.selected selected
-    .item
-      label
-        = image_tag 'quiz/runway/edgy.jpg', alt: ''
-        = form.radio_button :code, 'edgy'
-        span.selected selected
+  .scrollable
+    .photos.items-box
+      - question.answers.shuffle.each do |answer|
+        .item
+          label
+            = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
+            = image_tag "style_quiz/outfits/#{answer.code}.jpg", alt: ''
+            span.selected selected
+  .photos-nav
+    .up
+      .arrows-line-vertical
+    .down
+      .arrows-line-vertical

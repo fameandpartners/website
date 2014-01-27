@@ -2,28 +2,9 @@
   span WHAT IS YOUR SKIN COLOUR?
 
 ul.rounded-list.body-colour
-  li
-    label
-      = image_tag '_quiz/colour/fair.png', width: 101, height: 101, alt: ''
-      = form.radio_button :code, 'fair'
-      .selected
-  li
-    label
-      = image_tag '_quiz/colour/fair-medium.png', width: 101, height: 101, alt: ''
-      = form.radio_button :code, 'medium_fair'
-      .selected
-  li
-    label
-      = image_tag '_quiz/colour/medium.png', width: 101, height: 101, alt: ''
-      = form.radio_button :code, 'medium'
-      .selected 
-  li
-    label
-      = image_tag '_quiz/colour/medium-dark.png', width: 101, height: 101, alt: ''
-      = form.radio_button :code, 'medium_dark'
-      .selected
-  li
-    label
-      = image_tag '_quiz/colour/dark.png', width: 101, height: 101, alt: ''
-      = form.radio_button :code, 'dark'
-      .selected
+  - question.answers.each do |answer|
+    li.item
+      label
+        = image_tag "_quiz/colour/#{answer.code}.png", width: 101, height: 101, alt: ''
+        = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
+        .selected

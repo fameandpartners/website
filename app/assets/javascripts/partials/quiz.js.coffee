@@ -21,10 +21,12 @@ window.Quiz = {
     $('.quiz-box').on 'click', (event) ->
       event.stopPropagation()
 
+    $(window).on 'resize', Quiz.updatePosition
+
   hide: () ->
     $('.quiz-box').hide()
     $('body').css 'overflow', 'auto'
-    $('#main-promo .slides').trigger('resume')
+    $(window).off 'resize', Quiz.updatePosition
 
   updatePosition: () ->
     $container = $('.quiz-wrapper-box')
@@ -65,6 +67,13 @@ window.Quiz = {
       left: '-' + $step.position().left
     Quiz.steps().removeClass('current')
     $step.addClass('current')
+
+    if $step.find('.scrollable')
+      if $step.find('.scrollable').data('jsp')
+        $step.find('.scrollable').data('jsp').reinitialise()
+      else
+        $step.find('.scrollable').jScrollPane
+          contentWidth: $step.width()
     Quiz.updateProgressBar()
     Quiz.updateCurrentStepNumber()
     Quiz.triggerEvents($step)
@@ -157,6 +166,29 @@ window.Quiz = {
         gutter: 10
         columnWidth: '.item'
         itemSelector: '.item'
+
+    $('.quiz-box .photos:first img').on 'load', ->
+      $scrollable = $(this).parents('.scrollable')
+
+      if $scrollable.data('jsp')
+        $scrollable.data('jsp').reinitialise()
+      else
+        $scrollable.jScrollPane
+          contentWidth: $(this).width() + 'px'
+
+    $('.quiz-box .photos-nav .up').on 'click', (event) ->
+      $button = $(event.target)
+      $scrollable = $button.parents('.photos-nav').prev('.scrollable')
+
+      if $scrollable.data('jsp')
+        $scrollable.data('jsp').scrollByY(-100)
+
+    $('.quiz-box .photos-nav .down').on 'click', (event) ->
+      $button = $(event.target)
+      $scrollable = $button.parents('.photos-nav').prev('.scrollable')
+
+      if $scrollable.data('jsp')
+        $scrollable.data('jsp').scrollByY(100)
 }
 
 $ ->

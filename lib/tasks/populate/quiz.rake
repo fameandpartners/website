@@ -9,11 +9,13 @@ namespace :db do
                                  :text => "Choose the look that's closest to your everyday style?",
                                  :step => 1,
                                  :position => 1001,
+                                 :multiple => true,
                                  :partial => 'outfits'
                                }, {
                                  :text => "You're walking the red carpet. Which dress would you wear?",
                                  :step => 2,
                                  :position => 1002,
+                                 :multiple => true,
                                  :partial => 'oscar_dresses'
                                }, {
                                  :text => "It's time to dress up. Which best describes your style.",
@@ -25,16 +27,19 @@ namespace :db do
                                  :text => 'Tell us which makeup look you love.',
                                  :step => 4,
                                  :position => 1004,
+                                 :multiple => true,
                                  :partial => 'prom_makeup'
                                }, {
                                  :text => 'Whether it works for you or not, which hair style do you love?',
                                  :step => 5,
                                  :position => 1005,
+                                 :multiple => true,
                                  :partial => 'prom_hair'
                                }, {
                                  :text => 'Which of these runway looks would inspire your dream formal dress?',
                                  :step => 6,
                                  :position => 1006,
+                                 :multiple => true,
                                  :partial => 'prom_dresses'
                                }, {
                                  :text => 'How important is fashion to you?',
@@ -70,40 +75,220 @@ namespace :db do
       question = quiz.questions.find_by_partial!('outfits')
       question.answers.create!([
                                  {
-                                   :code => 'img1',
-                                   :glam => 10
-                                 }, {
-                                   :code => 'img2',
-                                   :classic => 10
-                                 }, {
-                                   :code => 'img3',
-                                   :girly => 10
-                                 }, {
-                                   :code => 'img4',
+                                   :code => 'image_1',
                                    :bohemian => 10
                                  }, {
-                                   :code => 'img5',
+                                   :code => 'image_4',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_10',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_13',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_21',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_27',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_34',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_3',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_7',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_14',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_19',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_23',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_28',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_33',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_2',
                                    :edgy => 10
+                                 }, {
+                                   :code => 'image_6',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_17',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_20',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_25',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_30',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_35',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_5',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_9',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_12',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_16',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_18',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_26',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_31',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_8',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_11',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_15',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_22',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_24',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_29',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_32',
+                                   :glam => 10
                                  }
                                ])
 
       question = quiz.questions.find_by_partial!('oscar_dresses')
       question.answers.create!([
                                  {
-                                   :code => 'img1',
-                                   :glam => 10
-                                 }, {
-                                   :code => 'img2',
-                                   :classic => 10
-                                 }, {
-                                   :code => 'img3',
-                                   :girly => 10
-                                 }, {
-                                   :code => 'img4',
+                                   :code => 'image_1',
                                    :bohemian => 10
                                  }, {
-                                   :code => 'img5',
+                                   :code => 'image_4',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_10',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_13',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_21',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_27',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_34',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_3',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_7',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_14',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_19',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_23',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_28',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_33',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_2',
                                    :edgy => 10
+                                 }, {
+                                   :code => 'image_6',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_17',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_20',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_25',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_30',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_35',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_5',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_9',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_12',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_16',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_18',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_26',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_31',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_8',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_11',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_15',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_22',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_24',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_29',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_32',
+                                   :glam => 10
                                  }
                                ])
 
@@ -183,66 +368,330 @@ namespace :db do
       question = quiz.questions.find_by_partial!('prom_makeup')
       question.answers.create!([
                                  {
-                                   :code => 'natural',
-                                   :glam => 8,
-                                   :classic => 2
-                                 }, {
-                                   :code => 'dramatic',
-                                   :edgy => 6,
-                                   :bohemian => 2
-                                 }, {
-                                   :code => 'romantic',
-                                   :girly => 5,
-                                   :glam => 7,
-                                   :classic => 5
-                                 }, {
-                                   :code => 'statement',
+                                   :code => 'image_1',
                                    :bohemian => 10
                                  }, {
-                                   :code => 'edgy',
-                                   :edgy => 5,
-                                   :glam => 3,
-                                   :bohemian => 3
+                                   :code => 'image_4',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_10',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_13',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_21',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_27',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_34',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_3',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_7',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_14',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_19',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_23',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_28',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_33',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_2',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_6',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_17',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_20',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_25',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_30',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_35',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_5',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_9',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_12',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_16',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_18',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_26',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_31',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_8',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_11',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_15',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_22',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_24',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_29',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_32',
+                                   :glam => 10
                                  }
                                ])
 
       question = quiz.questions.find_by_partial!('prom_hair')
       question.answers.create!([
                                  {
-                                   :code => 'glam',
-                                   :glam => 10
-                                 }, {
-                                   :code => 'classic',
-                                   :classic => 10
-                                 }, {
-                                   :code => 'girly',
-                                   :girly => 10
-                                 }, {
-                                   :code => 'bohemian',
+                                   :code => 'image_1',
                                    :bohemian => 10
                                  }, {
-                                   :code => 'edgy',
+                                   :code => 'image_4',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_10',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_13',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_21',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_27',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_34',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_3',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_7',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_14',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_19',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_23',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_28',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_33',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_2',
                                    :edgy => 10
+                                 }, {
+                                   :code => 'image_6',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_17',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_20',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_25',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_30',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_35',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_5',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_9',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_12',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_16',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_18',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_26',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_31',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_8',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_11',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_15',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_22',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_24',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_29',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_32',
+                                   :glam => 10
                                  }
                                ])
 
       question = quiz.questions.find_by_partial!('prom_dresses')
       question.answers.create!([
                                  {
-                                   :code => 'glam',
-                                   :glam => 10
-                                 }, {
-                                   :code => 'classic',
-                                   :classic => 10
-                                 }, {
-                                   :code => 'girly',
-                                   :girly => 10
-                                 }, {
-                                   :code => 'boho',
+                                   :code => 'image_1',
                                    :bohemian => 10
                                  }, {
-                                   :code => 'edgy',
+                                   :code => 'image_4',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_10',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_13',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_21',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_27',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_34',
+                                   :bohemian => 10
+                                 }, {
+                                   :code => 'image_3',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_7',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_14',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_19',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_23',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_28',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_33',
+                                   :classic => 10
+                                 }, {
+                                   :code => 'image_2',
                                    :edgy => 10
+                                 }, {
+                                   :code => 'image_6',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_17',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_20',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_25',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_30',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_35',
+                                   :edgy => 10
+                                 }, {
+                                   :code => 'image_5',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_9',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_12',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_16',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_18',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_26',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_31',
+                                   :girly => 10
+                                 }, {
+                                   :code => 'image_8',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_11',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_15',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_22',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_24',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_29',
+                                   :glam => 10
+                                 }, {
+                                   :code => 'image_32',
+                                   :glam => 10
                                  }
                                ])
 
@@ -325,13 +774,13 @@ namespace :db do
                                  }, {
                                    :code => 'auburn'
                                  }, {
+                                   :code => 'red'
+                                 }, {
                                    :code => 'blonde'
                                  }, {
                                    :code => 'platinum_blonde'
                                  }, {
                                    :code => 'strawberry_blonde'
-                                 }, {
-                                   :code => 'red'
                                  }, {
                                    :code => 'coloured'
                                  }

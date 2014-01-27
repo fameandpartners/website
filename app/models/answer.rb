@@ -1,4 +1,5 @@
 class Answer < ActiveRecord::Base
+  default_scope order('id ASC')
   default_values :glam  => 0,
                  :girly => 0,
                  :classic => 0,
