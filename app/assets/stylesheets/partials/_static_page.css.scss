@@ -1,0 +1,37 @@
+.page-static {
+	margin-top: 45px;
+	text-transform: none;
+	font: 400 15px/1.1 $fontFour;
+	h1 {
+		font: 400 47px/1.1 $fontThree;
+	}
+	h2 {
+		font: 600 22px/1.1 $fontTwo;
+	}
+	h3 {
+		font: 600 18px/1.1 $fontTwo;
+	}
+	h1, h2, h3 {
+		margin: 25px 0 5px;
+		&:first-child { margin-top: 0;}
+		+ p { margin-top: 0;}
+		+ h3 { margin-top: 10px;}
+	}
+	p { 
+		margin: 10px 0;
+		&:first-child { margin-top: 0;}
+	}
+	li {
+		margin: 5px 0;
+	}
+	table {
+		width: 100%;
+		margin: 15px 0;
+		th {
+			text-align: left;
+			font-family: $fontTwo;
+		}
+		td, th { padding: 5px 3px;}
+		td { border-top: solid 1px #eee;}
+	}
+}

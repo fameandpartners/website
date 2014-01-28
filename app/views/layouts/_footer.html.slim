@@ -3,13 +3,13 @@ footer.footer-global
   nav.nav-footer
     ul.fleft
       li = link_to 'COLLECTIONS', collection_path, class: 'btn small empty'
-      li = link_to 'STYLE INSPIRATION', '#', class: 'btn small empty'
+      / li = link_to 'STYLE INSPIRATION', '#', class: 'btn small empty'
       li = link_to 'ABOUT US', about_us_path, class: 'btn small empty'
       li = link_to 'TEAM', team_path, class: 'btn small empty'
-    .logo 
+      li = link_to 'HELP', faqs_path, class: 'btn small empty'
+    = link_to root_path, class: 'logo' do
       span.icon-logo
     ul.fright
-      li = link_to 'HELP', faqs_path, class: 'btn small empty'
       li = link_to 'TERMS & CONDITIONS', terms_path, class: 'btn small empty'
       li.active = link_to 'SIGN UP FOR OUR NEWSLETTER', '#', class: 'btn small empty'
   .arrows-line-horizontal
