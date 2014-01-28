@@ -1,21 +1,120 @@
 .wrap
-  .page-name.with-border
+  .shopping-bag-page
     .inner
-      h1.title
-        em shopping
-        span Bag
+      h1
+        span.title shopping Bag
         .shipping-icon
           .icon
+            span.icon-dollar
+            span.icon-erase
           ' Free shipping
-          br
-          ' on all items
   
   - if @order.line_items.empty?
     .empty-cart(data-hook="empty_cart")
       p = t(:your_cart_is_empty)
       p = link_to t(:continue_shopping), products_path, class: 'button continue'
   - else
-    .cart-page
+    table.cart-table
+      thead
+        tr
+          th.column-1 Item description
+          th.column-2 Details
+          th.column-3 Price
+      tbody
+        - @order.line_items.each do |line_item|
+          - variant = line_item.variant
+          - product = variant.product
+          tr data-id='#{variant.id}' data-line-item-id='#{line_item.id}'
+            td.column-1
+              .product-info
+                .image
+                  = link_to product_image(product, itemprop: "image", width: 136, height: 200, alt: product.name), collection_product_path(product)
+                .desc
+                  .name = link_to product.name, collection_product_path(product), target: 'blank'
+                  .text = line_item_description(variant)
+                .buttons
+                  = link_to '#', data: { id: variant.id }, class: 'remove-item-from-cart  btn empty border' do
+                    span.icon-trash
+                  = product_move_to_wishlist_link(variant)
+            td.column-2
+              .details-box
+                .static
+                  - unless line_item.personalization.present?
+                    .line
+                      .label Color
+                      .value = variant.dress_color.try(:name)
+                    .line
+                      .label Size
+                      .value = variant.dress_size.try(:name)
+                  - else
+                    .line
+                      .label Color
+                      .value = variant.dress_color.try(:name)
+                    .line
+                      .label Size
+                      .value = line_item.personalization.size
+                    - line_item.personalization.customization_values.each do |value|
+                      .line
+                        .label = value.customisation_type.presentation
+                        .value = value.presentation
+                  .line
+                    .label Quantity
+                    .value = line_item.quantity
+                  .line
+                    .label Estimated Delivery
+                    .value = product.delivery_time_as_string
+                    - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
+                .edit
+                  - unless line_item.personalization.present?
+                    = link_to 'Edit item', '#', class: 'edit-link btn empty border', data: link_data
+                  - else
+                    = link_to 'Edit item', personalization_product_path(product), class: 'btn empty border'
+            td.column-3
+              .pricing
+                = current_order.currency
+                = price_for_line_item(line_item)    
+
+    .cart-summary
+      .card-info
+        .payment.fleft
+          .title 
+            ' Payment 
+            br
+            ' methods
+          .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
+        - unless (sale_active? or @order.has_personalized_items?)
+          .promocode.fright
+            = form_for @order, remote: true, html: {class: 'form-global'} do |f|
+              = f.submit 'Redeem', style: 'float: right;', class: 'btn empty border'
+              = f.text_field :coupon_code, style: "width: 110px;", placeholder: 'promocode'
+        .clearfix      
+        .security
+          .title 
+            ' Full 
+            br
+            ' security
+          .desc = image_tag 'comodo-secure.png', alt: "Comodo SSl Security", width: 101, height: 32      
+      .summary.grid-25.order-summary
+        = render 'summary'
+    .continue-buy
+      .fleft = link_to '&lt; Continue shopping'.html_safe, products_path, class: 'btn empty border continue-shopping'
+      .fright.checkout
+        = form_for @order, url: update_cart_path do |f|
+          = f.button :checkout, name: 'checkout', class: 'buy-now btn striped border'
+          .or or
+          = link_to 'CHECKOUT WITH PAYPAL', '#', class: 'btn striped border'
+        / - if (paypal_button_html = paypal_express_button).present?
+          div
+            .or or
+            .paypal = paypal_button_html
+      .fright
+        .ask-parents-block
+          = link_to 'Invite someone to pay', '#', class: 'btn empty border buy-now ask-parents ask-parent-to-pay-button'      
+
+
+
+
+    / .cart-page
       .cart-labels.grid-container
         .grid-50.name Item description
         .grid-30.details Details

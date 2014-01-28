@@ -164,17 +164,17 @@ module ProductsHelper
         item: wishlist_item.id,
         quantity: wishlist_item.quantity
       }
-      link_to 'Add to cart', '#', class: 'add-to-cart master', data: data
+      link_to 'Add to cart', '#', class: 'add-to-cart master btn mid fleft', data: data
     else
-      link_to 'Add to cart', move_to_cart_wishlists_item_path(wishlist_item), class: 'add-to-cart', remote: true
+      link_to 'Add to cart', move_to_cart_wishlists_item_path(wishlist_item), class: 'add-to-cart btn mid fleft', remote: true
     end
   end
 
   def product_move_to_wishlist_link(variant)
     if spree_user_signed_in?
-      link_to content_tag(:i, '', class: 'icon icon-heart') + 'Move to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist'
+      link_to '+ to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist btn empty border'
     else
-      link_to content_tag(:i, '', class: 'icon icon-heart') + 'Move to wish list', spree_signup_path
+      link_to '+ to wish list', spree_signup_path, class: 'btn empty border'
     end
   end
 

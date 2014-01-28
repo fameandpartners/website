@@ -304,7 +304,8 @@
     .photos-wrapper {
       margin: 25px 0 0;
       height: 425px;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: scroll;
       position: relative;
       .photos-nav {
         position: absolute;
@@ -458,6 +459,7 @@
         }
         &.active-type-3:after {
           background-image: url('_quiz/choice-type-3.png');
+          background-position: 60% center;
           top: -35px;
           height: 72px;
         }
@@ -810,6 +812,35 @@
       height: 1px;
       background: #ddd;
       z-index: -1;
+    }
+  }
+  .finish-slide {
+    background-color: #fce5de;
+    width: 1100px;
+    height: 720px;
+    margin: -42px -20px -130px;
+    text-align: center;
+    h1 {
+      padding: 50px 0;
+    }
+    .secondary { letter-spacing: 0.125em;}
+    .pink { color: $pinkColor;}
+    .arrows-line-vertical {
+      height: 100px;
+      display: inline-block;
+      &:before {
+        display: none;
+      }
+    }
+    .kiss {
+      background: url('_quiz/kiss.png') no-repeat;
+      width: 53px;
+      height: 25px;
+      display: block;
+      margin: -20px auto 10px;
+    }
+    .icon-logo {
+      font-size: 120px;
     }
   }
 }
@@ -1393,18 +1424,19 @@
     width: 200px;
     border-left: 1px solid #ebebeb;
     margin: 70px 0;
+    &.first, &:first-child {
+      border-left: 0;
+    }
     .name {
       font-size: 22px;
       color: #333;
-      font-weight: 300;
+      font-weight: 100;
     }
     .percent {
       font-weight: 100;
       font-size: 44px;
-      color: #f59a8c;
+      color: $pinkColor;
     }
-    &.first {
-      border-left: 0;
-    }
+    
   }
 }

@@ -1,9 +1,0 @@
-h1 = question.text
-.subtitle 
-  span Choose as many as you like:
-.choices.brands.items-box
-  - question.answers.each do |answer|
-    .item class="active-type-#{Random.rand(4)}"
-      label
-        = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
-        = image_tag "brands/#{answer.code}.jpg", width: 154, height: 40, alt: ''
