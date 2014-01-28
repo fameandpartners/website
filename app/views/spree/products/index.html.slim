@@ -22,7 +22,11 @@
 .category-filter
   .fleft 
     .filter-section
-      - options = options_from_collection_for_select(available_product_styles, :base_permalink, :name, @searcher.collection)
+      - options = options_from_collection_for_select(available_product_ranges, :base_permalink, :name, params[:collection])
+      = select_tag :collection, options, class: 'selectbox', prompt: 'Collection'
+
+    .filter-section
+      - options = options_from_collection_for_select(available_product_styles, :base_permalink, :name, params[:style])
       = select_tag :style, options, class: 'selectbox', prompt: 'Styles'
 
     .filter-section
@@ -41,14 +45,6 @@
 .category-catalog.products
   .row
     = render(@products) || "Sorry, no dresses match your criteria"
-
-.category-catalog
-  h2 
-    em More styles
-    br
-    ' YOU MIGHT LIKE
-  .row
-    = render featured_products, element_class: 'grid-3'
 
 // OLD HTML ---->
 / .m-pixel
