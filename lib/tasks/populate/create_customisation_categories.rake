@@ -27,10 +27,10 @@ namespace "db" do
       end
 
       customisations = [
-        {name: 'length', values: %w[short mid-length high]},
-        {name: 'neck-line', values: %w[vneck round straight]},
-        {name: 'waist-line', values: %w[vneck round straight]},
-        {name: 'hem-line', values: %w[vneck round straight]}
+        {name: 'length', values: %w[default short mid-length high]},
+        {name: 'neck-line', values: %w[default vneck round straight]},
+        {name: 'waist-line', values: %w[default triangle round square]},
+        {name: 'hem-line', values: %w[default first second third]}
       ]
       customisations.each do |attrs|
         populate_type_with_values(attrs[:name], attrs[:values])
