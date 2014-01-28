@@ -19,6 +19,12 @@
 		margin-left: -70px;
 		top: 10px;
 		font-size: 78px;
+		display: block;
+		text-decoration: none;
+		&:hover {
+			color: #000;
+			background-color: #fff;
+		}
 	}
 	a:hover {
 		color: #fff;
@@ -33,6 +39,9 @@
 			background-color: #000;
 		}
 		+ li { margin-left: 3px;}
+	}
+	.fleft li + li {
+		margin-left: 20px;
 	}
 }
 .blog-footer {
