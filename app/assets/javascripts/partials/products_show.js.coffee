@@ -15,6 +15,9 @@ $(".products.show").ready ->
   page.enableImageZoomButtons($("a[data-action='show-large-image']"))
   page.enableSoundCloudSongPlayer($("a[data-action=soundcloud]"))
 
+  # customisation page only
+  window.helpers.addPersonalizationFormHandlers($('#personalization'))
+
   #page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
   #page.enableQuickView($(".quick-view a[data-action='quick-view']"))
 

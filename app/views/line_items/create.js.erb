@@ -1,7 +1,7 @@
-$form = '<%=j render('personalization/products/form') %>';
+$form = '<%=j render('personalization/products/form', product: @product, personalization: @personalization) %>';
 $('#personalization').html($form);
-window.helpers.enableTabs($('#personalization .tabs'));
-$('#personalization .tabs').find('.selectbox').chosen();
+//window.helpers.enableTabs($('#personalization .tabs'));
+//$('#personalization .tabs').find('.selectbox').chosen();
 window.helpers.addPersonalizationFormHandlers($('#personalization'));
 
 <% if @personalization.persisted? %>

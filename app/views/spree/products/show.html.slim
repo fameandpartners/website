@@ -3,7 +3,7 @@ css:
 
 javascript:
   window.product_variants = #{{ @product_variants.to_json }};
-  //window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
+  window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
   //window.productImagesData = #{{@product.images_json.to_json}};
 
 ruby:
@@ -34,14 +34,7 @@ ruby:
 .product-page
   .row
     .grid-8
-      .bread-crumbs
-        .fleft
-          = link_to 'EXPLORE', collection_product_path(@product), class: 'btn pink'
-          - if (@product.can_be_customized? and !@product.in_sale?)
-            = link_to 'CUSTOMISE', personalization_product_path(permalink: @product.permalink), class: 'btn'
-          = link_to 'STYLE IT', personalization_style_product_path(permalink: @product.permalink), class: 'btn'
-        .fright
-          = send_to_a_friend_link(@product)
+      = render 'spree/products/breadcrumbs', product: @product, active: :explore
       .category-catalog
         .row
           - if @product.images.present?

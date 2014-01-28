@@ -23,15 +23,15 @@
   .fleft 
     .filter-section
       - options = options_from_collection_for_select(available_product_styles, :base_permalink, :name, @searcher.collection)
-      = select_tag :style, options, class: 'selectbox', multipe: true, prompt: 'Styles'
+      = select_tag :style, options, class: 'selectbox', prompt: 'Styles'
 
     .filter-section
       - options = options_from_collection_for_select(ProductStyleProfile::BODY_SHAPES, :to_s, :to_s, @searcher.bodyshape)
-      = select_tag :bodyshape, options, class: 'selectbox', multipe: true, prompt: 'Body Shape'
+      = select_tag :bodyshape, options, class: 'selectbox', prompt: 'Body Shape'
 
     .filter-section
       - options = options_from_collection_for_select(available_product_colors, :name, :presentation, @searcher.colour)
-      = select_tag :colour, options, class: 'selectbox', multipe: true, prompt: 'Colour'
+      = select_tag :colour, options, class: 'selectbox', prompt: 'Colour'
 
   .fright
     .filter-section
