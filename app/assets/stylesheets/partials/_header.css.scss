@@ -26,7 +26,9 @@
 	.site-version-switch {
 		display: inline-block;
 		position: relative;
+		z-index: 99;
 		min-height: 20px;
+		margin-left: 10px;
 		ul {
 			position: absolute;
 			top: 100%;
@@ -79,12 +81,18 @@
 }
 
 .header-global {
+	height: 165px;
+	position: relative;
 	.logo {
 		text-align: center;
 		font-size: 171px;
 		overflow: hidden;
-		height: 165px;
-		margin: -15px 0 15px;
+		text-decoration: none;
+		position: absolute;
+		top: -15px;
+		left: 50%;
+		margin-left: -133px;
+		display: block;
 		.black {
 			position: relative;
 		}
