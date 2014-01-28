@@ -4,7 +4,16 @@
   <div id="shopping-bag-popup-wrapper" class="shopping-bag-popup" style="display: none;">
 <% end %>
   <% if @order.item_count == 0: %>
-    <div class="empty">Your shopping bag is empty. Browse for formal dresses now.</div>
+    <div class="empty-box" data-hook="empty_cart">
+      <p>
+        Your shopping bag is empty. 
+        <br />
+        Browse for formal dresses now.
+      </p>
+      <p>
+        <a href="<%= getSiteVersionPrefix() %>/collection" class="btn mid empty border">Our Dress Collection</a>
+      </p>
+    </div>
   <% else: %>
     <div class="shopping-list">
       <% for line_item in @order.line_items: %>
