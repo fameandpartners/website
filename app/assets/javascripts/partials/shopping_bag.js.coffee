@@ -12,20 +12,25 @@ $ ->
     init: () ->
       window.shoppingBag.container = $('#wrap .cart')
 
-      shoppingBag.updateElementsHandlers()
+#      shoppingBag.updateElementsHandlers()
       shoppingBag.container.find("#shopping-bag-popup-wrapper").hide()
       shoppingBag.container.find(".shopping-bag-toggler").on(
         'click', shoppingBag.toggleVisibilityClickHandler
       )
+      shoppingBag.container.find(".close-cart-button").on('click', shoppingBag.closeButtonClickHandler)
 
       window.shopping_cart.on('item_added',   shoppingBag.renderCart)
       window.shopping_cart.on('item_changed', shoppingBag.renderCart)
       window.shopping_cart.on('item_removed', shoppingBag.renderCart)
 
-    removeProductClickHandler: (e) ->
+#    removeProductClickHandler: (e) ->
+#      e.preventDefault()
+#      variantId = $(e.currentTarget).data('id')
+#      window.shopping_cart.removeProduct(variantId)
+
+    closeButtonClickHandler: (e) ->
       e.preventDefault()
-      variantId = $(e.currentTarget).data('id')
-      window.shopping_cart.removeProduct(variantId)
+      shoppingBag.hide()
 
     toggleVisibilityClickHandler: (e) ->
       e.preventDefault()
@@ -85,10 +90,10 @@ $ ->
       unless _.contains(shoppingBag.listeners, callback)
         shoppingBag.listeners.push(callback)
 
-    updateElementsHandlers: () ->
-      shoppingBag.container.find('.remove-item-from-cart')
-        .off('click', shoppingBag.removeProductClickHandler)
-        .on('click', shoppingBag.removeProductClickHandler)
+#    updateElementsHandlers: () ->
+#      shoppingBag.container.find('.remove-item-from-cart')
+#        .off('click', shoppingBag.removeProductClickHandler)
+#        .on('click', shoppingBag.removeProductClickHandler)
 
     updateCarousel: (variantId) ->
       # currently, shopping bag doesn't have carousel
