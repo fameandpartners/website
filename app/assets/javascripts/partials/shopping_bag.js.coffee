@@ -77,7 +77,7 @@ $ ->
 
       #shoppingBag.show()
       # update actions
-      shoppingBag.updateElementsHandlers()
+      #shoppingBag.updateElementsHandlers()
       shoppingBag.carouselEnabled = false
       shoppingBag.updateCarousel(data.id)
       item_count = _.reduce(data.cart.line_items, ((memo, item) -> memo += item.quantity), 0)

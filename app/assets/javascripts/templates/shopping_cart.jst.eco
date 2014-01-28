@@ -16,6 +16,7 @@
     </div>
   <% else: %>
     <div class="shopping-list">
+      <a href="#" class='close-cart-button'><span class='icon-close'></span></a>
       <% for line_item in @order.line_items: %>
         <div class="item">
           <div class="picture">
@@ -72,10 +73,27 @@
               </table>
             </div>
           </div>
-          <a href="#" class='delete remove-item-from-cart' data-id="<%= line_item.variant_id %>">
-            <span class="icon-close"></span>
-          </a>
         </div>
       <% end %>
+      <div class="buttons">
+        <div class="total">
+          Total
+          <span><%= @order.display_total %></span>
+        </div>
+        <div class="clearfix">
+          <a href="<%= getSiteVersionPrefix() %>/cart" class="continue btn mid grey fleft">View cart</a>
+          <form accept-charset="UTF-8" action="<%= getSiteVersionPrefix() %>/cart" method="post" class="edit_order">
+            <div style="margin:0;padding:0;display:inline">
+              <input name="utf8" type="hidden" value="✓">
+              <input name="_method" type="hidden" value="put">
+              <input name="<%= @csrf_param %>" type="hidden" value="<%= @csrf_token %>">
+            </div>
+            <input type="submit" name="checkout" class="buy-now btn mid fright" value="Buy now">
+          </form>
+        </div>
+        <div class="ask-parents">
+          <a href='#' class="btn mid empty border ask-parent-to-pay-button">Invite someone to pay</a>
+        </div>
+      </div>
     </div>
   <% end %>
