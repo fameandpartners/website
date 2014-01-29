@@ -3,23 +3,24 @@ ruby:
   options_hash = Rails.env.production? ? {:autocomplete => 'off'} : {}
 
 .grid-container
-  .grid-50
+  .grid-6
     .input
       label Credit Card Number
       = text_field_tag "#{param_prefix}[number]", '', options_hash
-  .grid-50
+  .grid-6
     .input
       label Name on Card
       = text_field_tag "#{param_prefix}[full_name]"
 .grid-container
-  .grid-50
+  .grid-6
     .input
       label Expiry Date
       = select_month(Date.today, :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month')
       = select_year(Date.today, :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year')
-  .grid-50
-    .input
+  .grid-6
+    .input.card-verification
       label Card Verification Number
+      br
       = text_field_tag "#{param_prefix}[verification_value]", '', options_hash.merge(:id => 'card_code', :class => 'cvv', :size => 5)
-      .card-hints = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
+      = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
       .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.

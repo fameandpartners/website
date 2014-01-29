@@ -759,6 +759,29 @@
 				"name": "pause",
 				"ligatures": ""
 			}
+		},
+		{
+			"icon": {
+				"paths": [
+					"M864 128l-480 480-224-224-160 160 384 384 640-640z"
+				],
+				"tags": [
+					"checkmark",
+					"tick",
+					"correct",
+					"accept",
+					"ok"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"id": 254,
+				"order": 35,
+				"prevSize": 32,
+				"code": 58906,
+				"name": "checkmark",
+				"ligatures": ""
+			}
 		}
 	],
 	"height": 1024,

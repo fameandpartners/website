@@ -50,8 +50,8 @@
             = index += 1
             | . Billing and shipping details
           .check-edit class="#{ @order.state.eql?('payment') ? "" : "hide" }"
-            .check
-            .edit = link_to 'Edit', checkout_state_path('address'), :remote => true
+            span.icon-checkmark
+            = link_to 'Edit', checkout_state_path('address'), :remote => true, class: 'edit'
         .accordion-content data-step="address" *{ :class => !active.eql?('address') && 'hide' }
           = render 'spree/checkout/address' if active.eql?('address') || active.eql?('payment')
         .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }

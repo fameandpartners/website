@@ -23,7 +23,20 @@
 			border-top: solid 1px #000;
 			border-bottom: solid 1px #000;
 			margin: 10px 20px 10px 0;
+			@include clearfix;
 			&:first-child { margin-top: 0;}
+			.name {
+				float: left;
+			}
+			.check-edit {
+				float: right;
+				.icon-checkmark, .edit { vertical-align: middle;}
+				.icon-checkmark { 
+					padding-right: 5px;
+					margin-top: -2px;
+				}
+				.edit {font-size: 10px;}
+			}
 		}
 	}
 	.accordion-content {
@@ -113,5 +126,34 @@
 			@include box-sizing(border-box);
 		}
 		.desc { text-align: right;}
+	}
+}
+
+.payment-method-details {
+	padding-right: 20px;
+	.coupon-block {
+		margin-bottom: 20px;
+		input[type="text"] {
+			width: 170px;
+			margin-right: 20px;
+			vertical-align: top;
+		}
+	}
+	.payments-cart {
+		@include clearfix;
+		.fleft { line-height: 32px;}
+	}
+	.payment_details {
+		margin: 20px 0;
+	}
+	.card-verification {
+		input[type="text"] {
+			width: 200px;
+			vertical-align: top;
+			margin-right: 15px;
+		}
+		.hint {
+			margin-top: 5px;
+		}
 	}
 }
