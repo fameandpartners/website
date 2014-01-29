@@ -13,10 +13,14 @@ ruby:
       = text_field_tag "#{param_prefix}[full_name]"
 .grid-container
   .grid-6
-    .input
+    .input.expiry-date
       label Expiry Date
-      = select_month(Date.today, :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month')
-      = select_year(Date.today, :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year')
+      br
+      = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, { :class => 'selectbox' })
+      = select_year(Date.today, { :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year' }, { :class => 'selectbox' })
+
+      / = select_month(Date.today, :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month')
+      / = select_year(Date.today, :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year')
   .grid-6
     .input.card-verification
       label Card Verification Number

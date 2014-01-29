@@ -276,3 +276,15 @@
     }
 	}
 }
+
+
+.errorExplanation {
+	margin: 20px 0;
+	color: #d33d0f;
+	h2 {
+		font: 300 25px/1 $fontFive;
+	}
+	li {
+		margin: 5px 0;
+	}
+}

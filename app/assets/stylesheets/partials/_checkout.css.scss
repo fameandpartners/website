@@ -57,6 +57,11 @@
 	.submit-button {
 		.fleft { margin-right: 5px;}
 	}
+	.form-address {
+		.chosen-container {
+			min-width: 100%;
+		}
+	}
 }
 
 .checkout-summary {
@@ -154,6 +159,15 @@
 		}
 		.hint {
 			margin-top: 5px;
+		}
+	}
+	.expiry-date {
+		white-space: nowrap;
+		.chosen-container {
+			max-width: 45%;
+		}
+		#payment_source_1_month_chosen {
+			margin-right: 7%;
 		}
 	}
 }

@@ -3,7 +3,7 @@ ruby:
   first_name = form.object.firstname.present? ? form.object.firstname : (@order.try(:first_name) || @user.try(:first_name))
   last_name = form.object.lastname.present? ? form.object.lastname : (@order.try(:last_name) || @user.try(:last_name))
 
-.grid-container.form-global data-hook="#{address_type}_inner"
+.grid-container.form-global.form-address data-hook="#{address_type}_inner"
 
   - if address_type == 'billing'
     h3 = t(:billing_address)
