@@ -19,7 +19,8 @@ ruby:
               .color style="background-color: #{line_item.personalization.color};"
             - else
               - color = variant.dress_color
-              .color{class=color.try(:name)}
+              / .color{class=color.try(:name)}
+              = color.try(:name)
         - if show_customizations && line_item.personalization.present?
           tr
             td Size

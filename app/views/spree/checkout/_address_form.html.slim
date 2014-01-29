@@ -5,12 +5,10 @@ ruby:
 
 .grid-container.form-global data-hook="#{address_type}_inner"
 
-  / - if address_type == 'billing'
-  /   .grid-100.padding
-  /     legend = t(:billing_address)
-  / - elsif address_type == 'shipping'
-  /   .grid-100.padding
-  /     legend = t(:shipping_address)
+  - if address_type == 'billing'
+    h3 = t(:billing_address)
+  - elsif address_type == 'shipping'
+    h3 = t(:shipping_address)
 
   .grid-6.input id="#{address_id}firstname"
     = form.label :firstname, with_required_mark(t(:first_name))
