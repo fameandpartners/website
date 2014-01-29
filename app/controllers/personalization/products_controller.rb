@@ -8,7 +8,7 @@ module Personalization
     helper Spree::ProductsHelper
 
     def index
-      @products = Spree::Product.joins(:product_customisation_values).uniq
+      @products = Spree::Product.active.joins(:product_customisation_values).uniq
     end
 
     def show
