@@ -10,9 +10,9 @@ $(".products.index").ready ->
     init: (el) ->
       @$el = $(el)
 
-      @$el.find('#style').on('change', _.bind(productsFilter.update, productsFilter))
-      @$el.find('#bodyshape').on('change', _.bind(productsFilter.update, productsFilter))
-      @$el.find('#colour').on('change', _.bind(productsFilter.update, productsFilter))
+      @$el.find('#collection, #style, #bodyshape, #colour').on(
+        'change', _.bind(productsFilter.update, productsFilter)
+      )
       @$el.find('#product_order').on('change', _.bind(productsFilter.updateOrder, productsFilter))
 
       productsFilter.updateContentHandlers()
@@ -66,6 +66,7 @@ $(".products.index").ready ->
 
     getSelectedValues: () ->
       result = addValue({}, 'style', '#style')
+      addValue(result, 'collection', '#collection')
       addValue(result, 'bodyshape', '#bodyshape')
       addValue(result, 'colour', '#colour')
       addValue(result, 'order', '#product_order')

@@ -39,7 +39,7 @@ Spree::ProductsController.class_eval do
     set_product_show_page_title(@product)
     @product_properties = @product.product_properties.includes(:property)
 
-    @similar_products = Products::SimilarProducts.new(@product).fetch(4)
+    @similar_products = Products::SimilarProducts.new(@product).fetch(3)
     @product_variants = Products::VariantsReceiver.new(@product).available_options
 
     respond_with(@product)

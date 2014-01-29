@@ -31,4 +31,30 @@ window.page = {
 
   enableWishlistLinks: (links) ->
     productWishlist.addWishlistButtonActions(links)
+
+  enableImageZoomButtons: (buttons) ->
+    # possible, we should move this code to image_viewer
+    buttons.on('click', (e) ->
+      source = $(e.target).closest('*[data-image]')
+      bigImageUrl = source.data('image')
+      if bigImageUrl?
+        bigImageUrl = (location.origin + bigImageUrl) if !bigImageUrl.match(/^https?:\/\//)
+        $.fancybox href: bigImageUrl
+
+        # development, remove me
+        setTimeout( ->
+          $('.fancybox-overlay').click()
+          console.log('[FIXME] fancybox popup with large image closed manually by timeout')
+        , 10000)
+
+      return false
+    )
+
+  enableSoundCloudSongPlayer: (links) ->
+    links.on('click', (e) ->
+      player = $(e.currentTarget).closest('.picture').find('.sc-player')
+      player.find('.sc-controls a.sc-pause').click()
+
+      return false
+    )
 }

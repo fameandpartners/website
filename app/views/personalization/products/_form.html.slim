@@ -1,23 +1,26 @@
 ruby:
-  product_customization_types = @product.product_customisation_types.includes(:customisation_type, :customisation_values).with_values
-= form_for @personalization, url: line_items_path, method: :post, remote: true do |f|
-  = hidden_field_tag :variant_id, @product.master.id
-  .add-to-bag
-    = f.submit class: 'btn buy-personalized'
-  = render :partial => 'shared/error_messages', :locals => { :target => @personalization }
-  .tabs
-    ul.tabs-links.custom-sizes
-      li
-        = link_to '#customize-basics' do
-          ' Basic
-      - product_customization_types.each_with_index do |relation, index|
-        li = link_to relation.customisation_type.presentation, "#customize-#{relation.customisation_type.name}"
-    = render 'personalization/products/form/basics', form: f
-    - product_customization_types.each do |relation|
-      .tab-content id="customize-#{relation.customisation_type.name}" class="#{relation.customisation_type.name.parameterize}"
-        = render 'personalization/products/form/images', type: relation.customisation_type, values: relation.customisation_values.order('position ASC')
-        /.tabs-arrows
-        /  = link_to '#', class: 'arrow arrow-prev' do
-        /    i.icon.icon-arrow-left
-        /  = link_to '#', class: 'arrow arrow-next' do
-        /    i.icon.icon-arrow-right
+  product_customisation_types = @product.product_customisation_types.includes(:customisation_type, :customisation_values).with_values
+
+= form_for personalization, url: line_items_path, method: :post, remote: true, html: { class: 'personalization-form' } do |f|
+  = hidden_field_tag :variant_id, product.master.id
+
+  h4 Custom colours ARE only $16 
+  - options = options_from_collection_for_select(product.custom_colors, :presentation, :name)
+  = select_tag :custom_color, options, class: 'selectbox', prompt: 'ADD a custom colour', data: { placeholder: "ADD a custom colour" }
+  - product_customisation_types.each do |product_customisation_type|
+    .style
+      .row.customisation-type
+        .grid-12
+          .button
+            p = product_customisation_type.customisation_type.presentation
+        .grid-12.customisation-values data-id="#{ product_customisation_type }"
+          - type = product_customisation_type.customisation_type
+          - product_customisation_type.customisation_values.order('position asc').each_with_index do |value, index|
+            label.customisation-value
+              - if Rails.env.production? || value.image.present?
+                = image_tag value.image.url, alt: value.presentation, title: value.presentation
+              - else
+                = image_tag 'http://placehold.it/111x167', alt: value.presentation, title: value.presentation
+              = radio_button_tag "line_item_personalization[customization_value_ids][#{type.id}][]", value.id, personalization.customization_value_ids.include?(value.id), data: {required: true}, class: "#{value.name.parameterize} #{ 'default' if index == 0 }"
+              /.aligncenter #{value.presentation}
+  = submit_tag "Add customised variant to bag"

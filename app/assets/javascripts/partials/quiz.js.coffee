@@ -21,10 +21,12 @@ window.Quiz = {
     $('.quiz-box').on 'click', (event) ->
       event.stopPropagation()
 
+    $(window).on 'resize', Quiz.updatePosition
+
   hide: () ->
     $('.quiz-box').hide()
     $('body').css 'overflow', 'auto'
-    $('#main-promo .slides').trigger('resume')
+    $(window).off 'resize', Quiz.updatePosition
 
   updatePosition: () ->
     $container = $('.quiz-wrapper-box')
@@ -65,6 +67,13 @@ window.Quiz = {
       left: '-' + $step.position().left
     Quiz.steps().removeClass('current')
     $step.addClass('current')
+
+    if $step.find('.scrollable')
+      if $step.find('.scrollable').data('jsp')
+        $step.find('.scrollable').data('jsp').reinitialise()
+      else
+        $step.find('.scrollable').jScrollPane
+          contentWidth: $step.width()
     Quiz.updateProgressBar()
     Quiz.updateCurrentStepNumber()
     Quiz.triggerEvents($step)
@@ -141,6 +150,82 @@ window.Quiz = {
     else if Quiz.steps().index(step) is 3
       track.conversion('quiz_step2')
 
+  loadImagesForStep: (step) ->
+    $step = $(step)
+    for image in $step.find('img')
+      $image = $(image)
+      if $image.attr('src') is '' && $image.data('src') isnt ''
+        $image.css
+          'position': 'absolute'
+          'left': '-4500px'
+        $image.attr('src', $image.data('src'))
+
+  applyMasonryForStep: (step) ->
+    $step = $(step)
+
+    Quiz.applyScrollForStep($step)
+
+    $step.find('.photos').masonry
+      gutter: 10
+      columnWidth: '.item'
+      itemSelector: '.item.loaded'
+
+    $step.find('.photos img').on 'load', () ->
+      $image = $(this)
+      $item = $image.parents('.item')
+      $item.removeClass('unloaded').addClass('loaded')
+
+      $unappended = $step.find('.item.loaded:not(.appended)')
+
+      if $unappended.size() >= 7
+        $unappended.find('img').css
+          'position': ''
+          'left': ''
+
+        $step.find('.photos').masonry 'appended', $unappended
+
+        $unappended.addClass('appended')
+
+        Quiz.applyScrollForStep($step)
+
+  applyScrollForStep: (step) ->
+    $scrollable = $(step).find('.scrollable')
+
+    if $scrollable.data('jsp')
+      $scrollable.data('jsp').reinitialise()
+    else
+      $scrollable.jScrollPane
+        contentWidth: $(step).width() + 'px'
+
+  processImagesForStepsInSeries: () ->
+    $steps = Quiz.stepsWithUnLoadedImage()
+    index = 0
+
+    Quiz.applyMasonryForStep($steps[index])
+    Quiz.loadImagesForStep($steps[index])
+
+    setTimeout () ->
+      Quiz.poller($steps, index)
+    , 500
+
+  poller: ($steps, index) ->
+    unless $steps[index].is(':has(.item.unloaded)')
+      index += 1
+
+      if $steps[index]
+        Quiz.applyMasonryForStep($steps[index])
+        Quiz.loadImagesForStep($steps[index])
+
+        setTimeout () ->
+          Quiz.poller($steps, index)
+        , 500
+    else
+      setTimeout () ->
+        Quiz.poller($steps, index)
+      , 500
+
+  stepsWithUnLoadedImage: () ->
+    $(step) for step in Quiz.steps() when $(step).is(':has(img[src=""][data-src!=""])')
 
   _bindEvents: () ->
     $('.quiz-box').on 'click', (event) ->
@@ -151,12 +236,22 @@ window.Quiz = {
     $('.quiz-box').find('.next a').click Quiz.nextStepEventHandler
 
     $('.quiz-box').find('.prev a').click Quiz.previousStepEventHandler
-    
-    $('.quiz-box .photos img').on 'load', ->
-      $('.quiz-box .photos').masonry
-        gutter: 10
-        columnWidth: '.item'
-        itemSelector: '.item'
+
+    Quiz.processImagesForStepsInSeries()
+
+    $('.quiz-box .photos-nav .up').on 'click', (event) ->
+      $button = $(event.target)
+      $scrollable = $button.parents('.photos-nav').prev('.scrollable')
+
+      if $scrollable.data('jsp')
+        $scrollable.data('jsp').scrollByY(-100)
+
+    $('.quiz-box .photos-nav .down').on 'click', (event) ->
+      $button = $(event.target)
+      $scrollable = $button.parents('.photos-nav').prev('.scrollable')
+
+      if $scrollable.data('jsp')
+        $scrollable.data('jsp').scrollByY(100)
 }
 
 $ ->
@@ -167,5 +262,3 @@ $ ->
 
   if location.href.match(/[\?\&]osq\=1/)
     Quiz.show()
-
-

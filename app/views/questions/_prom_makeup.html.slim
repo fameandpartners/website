@@ -1,28 +1,19 @@
-h1 = question.text
+h1
+  em Which make-up
+  | DO YOU LOVE?
+.subtitle
+  span SCROLL THROUGH & CHOOSE AS MANY AS YOU LIKE
 .photos-wrapper
-  .photos.items-box
-    .item
-      label
-        = form.radio_button :code, 'natural'
-        = image_tag 'quiz/makeup/natural.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = form.radio_button :code, 'dramatic'
-        = image_tag 'quiz/makeup/dramatic.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = form.radio_button :code, 'romantic'
-        = image_tag 'quiz/makeup/romantic.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = form.radio_button :code, 'statement'
-        = image_tag 'quiz/makeup/statement.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = form.radio_button :code, 'edgy'
-        = image_tag 'quiz/makeup/edgy.jpg', alt: ''
-        span.selected selected
+  .scrollable
+    .photos.items-box
+      - question.answers.shuffle.each do |answer|
+        .item.unloaded
+          label
+            = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
+            img src="" alt="" data-src="#{image_path("style_quiz/outfits/#{answer.code}.jpg")}"
+            span.selected selected
+  .photos-nav
+    .up
+      .arrows-line-vertical
+    .down
+      .arrows-line-vertical

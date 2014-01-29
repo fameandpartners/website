@@ -5,51 +5,10 @@ h1
   span WHAT IS YOUR HAIR COLOUR?
 
 ul.rounded-list.heir
-  li
-    label
-      .hair-image
-        = image_tag '_quiz/hair/black.png', width: 101, height: 101, alt: ''
-        .selected
-      = form.radio_button :code, 'black'
-  li
-    label
-      .hair-image
-        = image_tag '_quiz/hair/brunette.png', width: 101, height: 101, alt: ''
-        .selected
-      = form.radio_button :code, 'brunette'
-  li
-    label
-      .hair-image
-        = image_tag '_quiz/hair/auburn.png', width: 101, height: 101, alt: ''
-        .selected
-      = form.radio_button :code, 'auburn'
-  li
-    label
-      .hair-image
-        = image_tag '_quiz/hair/red.png', width: 101, height: 101, alt: ''
-        .selected
-      = form.radio_button :code, 'red'
-  li
-    label
-      .hair-image
-        = image_tag '_quiz/hair/blonde.png', width: 101, height: 101, alt: ''
-        .selected
-      = form.radio_button :code, 'blonde'
-  li
-    label
-      .hair-image
-        = image_tag '_quiz/hair/platinum.png', width: 101, height: 101, alt: ''
-        .selected
-      = form.radio_button :code, 'platinum_blonde'
-  li
-    label
-      .hair-image
-        = image_tag '_quiz/hair/strawberry.png', width: 101, height: 101, alt: ''
-        .selected
-      = form.radio_button :code, 'strawberry_blonde'
-  li
-    label
-      .hair-image
-        = image_tag '_quiz/hair/coloured.png', width: 101, height: 101, alt: ''
-        .selected
-      = form.radio_button :code, 'coloured'
+  - question.answers.each do |answer|
+    li.item
+      label
+        .hair-image
+          = image_tag "_quiz/hair/#{answer.code}.png", width: 101, height: 101, alt: ''
+          .selected
+        = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code

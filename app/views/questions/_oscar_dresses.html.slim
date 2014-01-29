@@ -4,108 +4,14 @@ h1
 .subtitle
   span SCROLL THROUGH & CHOOSE AS MANY AS YOU LIKE
 .photos-wrapper
-  .photos.items-box
-    .item
-      label
-        = check_box_tag :code, 'img1'
-        = image_tag 'quiz/redcarpet-1.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img2'
-        = image_tag 'quiz/redcarpet-2.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img3'
-        = image_tag 'quiz/redcarpet-3.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img4'
-        = image_tag 'quiz/redcarpet-4.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img5'
-        = image_tag 'quiz/redcarpet-5.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img1'
-        = image_tag 'quiz/redcarpet-1.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img2'
-        = image_tag 'quiz/redcarpet-2.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img3'
-        = image_tag 'quiz/redcarpet-3.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img4'
-        = image_tag 'quiz/redcarpet-4.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img5'
-        = image_tag 'quiz/redcarpet-5.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img1'
-        = image_tag 'quiz/redcarpet-1.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img2'
-        = image_tag 'quiz/redcarpet-2.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img3'
-        = image_tag 'quiz/redcarpet-3.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img4'
-        = image_tag 'quiz/redcarpet-4.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img5'
-        = image_tag 'quiz/redcarpet-5.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img1'
-        = image_tag 'quiz/redcarpet-1.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img2'
-        = image_tag 'quiz/redcarpet-2.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img3'
-        = image_tag 'quiz/redcarpet-3.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img4'
-        = image_tag 'quiz/redcarpet-4.jpg', alt: ''
-        span.selected selected
-    .item
-      label
-        = check_box_tag :code, 'img5'
-        = image_tag 'quiz/redcarpet-5.jpg', alt: ''
-        span.selected selected
-
+  .scrollable
+    .photos.items-box
+      - question.answers.shuffle.each do |answer|
+        .item.unloaded
+          label
+            = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
+            img src="" alt="" data-src="#{image_path("style_quiz/outfits/#{answer.code}.jpg")}"
+            span.selected selected
   .photos-nav
     .up
       .arrows-line-vertical

@@ -30,14 +30,7 @@ ruby:
 .product-page
   .row
     .grid-8
-      .bread-crumbs
-        .fleft
-          = link_to 'EXPLORE', collection_product_path(@product), class: 'btn'
-          - if (@product.can_be_customized? and !@product.in_sale?)
-            = link_to 'CUSTOMISE', personalization_product_path(permalink: @product.permalink), class: 'btn'
-          = link_to 'STYLE IT', personalization_style_product_path(permalink: @product.permalink), class: 'btn pink'
-        .fright
-          = send_to_a_friend_link(@product)
+      = render 'spree/products/breadcrumbs', product: @product, active: :style
       .style-it
         .heading
           p 

@@ -2,59 +2,12 @@
   span WHICH BEST DESCRIBES YOUR BODY SHAPE?
 
 ul.body-shapes
-  li
-    label
-      .image
-        = image_tag '_quiz/body/apple.png', alt: ''
-      .selected
-      .label
-        span Apple
-      = form.radio_button :code, 'apple'
-  li
-    label
-      .image
-        = image_tag '_quiz/body/pear.png', alt: ''
-      .selected
-      .label
-        span Pear
-      = form.radio_button :code, 'pear'
-  li
-    label
-      .image
-        = image_tag '_quiz/body/athletic.png', alt: ''
-      .selected
-      .label
-        span Athletic
-      = form.radio_button :code, 'athletic'
-  li
-    label
-      .image
-        = image_tag '_quiz/body/strawberry.png', alt: ''
-      .selected
-      .label
-        span Strawberry
-      = form.radio_button :code, 'strawberry'
-  li
-    label
-      .image
-        = image_tag '_quiz/body/hour-glass.png', alt: ''
-      .selected
-      .label
-        span Hour Glass
-      = form.radio_button :code, 'hour_glass'
-  li
-    label
-      .image
-        = image_tag '_quiz/body/column.png', alt: ''
-      .selected
-      .label
-        span Column
-      = form.radio_button :code, 'column'
-  li
-    label
-      .image
-        = image_tag '_quiz/body/petite.png', alt: ''
-      .selected
-      .label
-        span Petite
-      = form.radio_button :code, 'petite'
+  - question.answers.each do |answer|
+    li.item
+      label
+        .image
+          = image_tag "_quiz/body/#{answer.code}.png", alt: ''
+        .selected
+        .label
+          span = answer.code.humanize.titleize
+        = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
