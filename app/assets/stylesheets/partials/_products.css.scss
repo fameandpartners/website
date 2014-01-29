@@ -69,6 +69,10 @@
 			}		
 		}
 	}
+	.sc-player.playing ~ .popup {
+		.icon-play { display: none;}
+		.icon-pause { display: inline;}
+	}
 	.popup {
 		position: absolute;
 		left: 0;
@@ -81,6 +85,10 @@
 		@include clearfix;
 		@include transition((all) (0.2s) (linear));
 		&.striped { background: url('_nav-bg.png');}
+		.icon-pause, .icon-play {
+			font-size: 15px;
+		}
+		.icon-pause { display: none;}
 	}
 	h6 { 
 		font-weight: 600;
