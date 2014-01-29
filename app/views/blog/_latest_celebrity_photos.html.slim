@@ -11,7 +11,7 @@
           .zoom
           .celebrity-photo
             = link_to blog_celebrity_path(celebrity_photo.celebrity.slug) do
-              = image_tag celebrity_photo.photo.url(:small), width: 269, height: 375, alt: ''
+              = image_tag celebrity_photo.photo.url(:small), alt: ''
             .overlay
               .name= link_to celebrity_photo.celebrity.fullname, blog_celebrity_path(celebrity_photo.celebrity.slug)
               - if post = celebrity_photo.post

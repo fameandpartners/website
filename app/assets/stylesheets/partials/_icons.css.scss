@@ -29,7 +29,11 @@
 .icon-instagram,
 .icon-youtube,
 .icon-facebook2,
-.icon-trash {
+.icon-trash,
+.icon-play,
+.icon-pause,
+.icon-checkmark 
+{
   font-family: 'Icons';
   speak: none;
   font-style: normal;
@@ -74,7 +78,9 @@
 .icon-erase:before {content: "\e608"; }
 .icon-dollar:before {content: "\e609"; }
 .icon-trash:before { content: "\e617";}
-
+.icon-play:before { content: "\e618";}
+.icon-pause:before { content: "\e619";}
+.icon-checkmark:before { content: "\e61a";}
 
 
 .icon-number-one, .icon-number-two, .icon-number-three, .icon-number-four {

@@ -1,6 +1,6 @@
 .wrap
   .checkout-page
-    h1.page-title Welcome to the checkout
+    h1 Welcome to the checkout
     - steps_to_finish = @order.checkout_steps
     = form_for @order, :url => update_checkout_path(@order.state) do |form|
       .grid-container

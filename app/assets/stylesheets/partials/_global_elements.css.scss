@@ -16,7 +16,7 @@
 	label {
 		font: 400 10px/17px $fontOne;
 	}
-	input[type="text"], input[type="password"], input[type="search"], input[type="email"] {
+	input[type="text"], input[type="password"], input[type="search"], input[type="email"], input[type="tel"] {
 		width: 100%;
 		height: 32px;
 		font: 400 10px/32px $fontOne;
@@ -32,6 +32,10 @@
 	}
 	.input.string {
 		margin-bottom: 30px;
+	}
+	.chosen-container-single .chosen-single {
+		height: 32px;
+		line-height: 32px;
 	}
 }
 
@@ -270,5 +274,17 @@
 		    @include longBoxShadowRight(#000, 5);
     	}	
     }
+	}
+}
+
+
+.errorExplanation {
+	margin: 20px 0;
+	color: #d33d0f;
+	h2 {
+		font: 300 25px/1 $fontFive;
+	}
+	li {
+		margin: 5px 0;
 	}
 }
