@@ -78,6 +78,10 @@ module FameAndPartners
 
     config.cache_store = :redis_store
 
+    config.generators do |generator|
+      generator.test_framework :rspec
+    end 
+
     config.after_initialize do
       Rails.configuration.spree.payment_methods << Spree::Gateway::Pin
     end
