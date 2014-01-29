@@ -10,21 +10,16 @@
       })
 .wrap
   .checkout-page
-    .grid-container
-      .grid-100
-        .page-name
-          .inner
-            h1.title
-              em Welcome to the
-              span Checkout
-          .help-info
-            .need-help Need help? Call us 1300 924 860 or email #{mail_to("team@fameandpartners.com", "team@fameandpartners.com", subject:"Help from the Checkout Page")}
-            - unless (sale_active? or current_order.has_personalized_items?)
-              .promocode-help
-                b Got a promocode or coupon?
-                span
-                  ' Add it in the last step of this checkout process.
-                  ' You'll see your cart update on the right when you redeem it.
+    h1 Checkout
+    .help-info
+      .need-help Need help? Call us 1300 924 860 or email #{mail_to("team@fameandpartners.com", "team@fameandpartners.com", subject:"Help from the Checkout Page")}
+      - unless (sale_active? or current_order.has_personalized_items?)
+        .promocode-help
+          h4 Got a promocode or coupon?
+          span
+            ' Add it in the last step of this checkout process.
+            ' You'll see your cart update on the right when you redeem it.
+    .arrows-line-horizontal        
     ruby:
       index = 0
       if !signed_in?
@@ -41,31 +36,30 @@
           active = @order.state
         end
       end
-    .grid-container
-      .grid-65
-        .accordion-container
-          - unless signed_in?
-            .accordion-title data-step="personal" *{ :class => active.eql?('personal') && 'active' }
-              .name
-                = index += 1
-                | . Personal details
-            .accordion-content data-step="personal" *{ :class => !active.eql?('personal') && 'hide' }
-              = render 'spree/checkout/personal' if active.eql?('personal')
-          .accordion-title data-step="address" *{ :class => active.eql?('address') && 'active' }
+    .checkout-box.grid-container 
+      .accordion-container.grid-8
+        - unless signed_in?
+          .accordion-title data-step="personal" *{ :class => active.eql?('personal') && 'active' }
             .name
               = index += 1
-              | . Billing and shipping details
-            .check-edit class="#{ @order.state.eql?('payment') ? "" : "hide" }"
-              .check
-              .edit = link_to 'Edit', checkout_state_path('address'), :remote => true
-          .accordion-content data-step="address" *{ :class => !active.eql?('address') && 'hide' }
-            = render 'spree/checkout/address' if active.eql?('address') || active.eql?('payment')
-          .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }
-            .name
-              = index += 1
-              | . Payment details
-          .accordion-content data-step="payment"
-            = render 'spree/checkout/payment' if active.eql?('payment')
-      .grid-35
-        .checkout-summary
-          = render 'spree/checkout/summary'
+              | . Personal details
+          .accordion-content data-step="personal" *{ :class => !active.eql?('personal') && 'hide' }
+            = render 'spree/checkout/personal' if active.eql?('personal')
+        .accordion-title data-step="address" *{ :class => active.eql?('address') && 'active' }
+          .name
+            = index += 1
+            | . Billing and shipping details
+          .check-edit class="#{ @order.state.eql?('payment') ? "" : "hide" }"
+            .check
+            .edit = link_to 'Edit', checkout_state_path('address'), :remote => true
+        .accordion-content data-step="address" *{ :class => !active.eql?('address') && 'hide' }
+          = render 'spree/checkout/address' if active.eql?('address') || active.eql?('payment')
+        .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }
+          .name
+            = index += 1
+            | . Payment details
+        .accordion-content data-step="payment"
+          = render 'spree/checkout/payment' if active.eql?('payment')
+      
+      .checkout-summary.grid-4
+        = render 'spree/checkout/summary'

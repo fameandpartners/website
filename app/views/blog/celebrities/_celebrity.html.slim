@@ -4,7 +4,7 @@ li[data-name="#{celebrity.fullname}" data-date="#{celebrity.primary_photo.try(:c
   .zoom
   = link_to blog_celebrity_path(celebrity.slug), class: 'celebrity-photo' do
     - if celebrity.primary_photo.present?
-      = image_tag celebrity.primary_photo.photo.url(:small), width: 269, height: 375, alt: ''
+      = image_tag celebrity.primary_photo.photo.url(:small), alt: ''
       .overlay
         .name= celebrity.fullname
     - else

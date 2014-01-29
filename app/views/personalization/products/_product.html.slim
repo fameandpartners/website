@@ -3,7 +3,7 @@ li.product-item.grid-25
     .like = add_to_wishlist_link(product)
     - cache ['personalization', 'product', product.id, 'thumbnail_and_quick_view'], :expires_in => configatron.cache.expire.normally do
       = link_to personalization_product_path(product) do
-        = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
+        = hoverable_product_image_tag product, itemprop: "image", alt: product.name
   - cache ['personalization', 'product', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
     .name = link_to product.name, personalization_product_path(product)
     /.description = product_short_description(product)
