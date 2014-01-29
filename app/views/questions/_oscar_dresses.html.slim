@@ -7,10 +7,10 @@ h1
   .scrollable
     .photos.items-box
       - question.answers.shuffle.each do |answer|
-        .item
+        .item.unloaded
           label
             = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
-            = image_tag "style_quiz/outfits/#{answer.code}.jpg", alt: ''
+            img src="" alt="" data-src="#{image_path("style_quiz/outfits/#{answer.code}.jpg")}"
             span.selected selected
   .photos-nav
     .up
