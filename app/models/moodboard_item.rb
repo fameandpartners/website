@@ -3,7 +3,10 @@ class MoodboardItem < ActiveRecord::Base
 
   belongs_to :product, class_name: 'Spree::Product', foreign_key: :spree_product_id
 
-  has_attached_file :image, styles: { product: "375x480#", thumbnail: "187x240#" }
+  has_attached_file :image,
+    styles: { product: "375x480#", thumbnail: "187x240#" },
+    default_style: :product,
+    default_url:   :default_image_for_item_type
 
   default_scope order: 'position asc'
 
@@ -15,4 +18,31 @@ class MoodboardItem < ActiveRecord::Base
   end
 
   validates :item_type, inclusion: ITEM_TYPES, presence: true
+
+  # in a magic day, far far away, this will be moved to decorator
+  def default_image_for_item_type
+    case item_type.to_s
+    when 'link'
+      '/images/original/missing.png'
+    when 'song'
+      '/images/_sample/category-grey-2.jpg'
+    else
+      '/images/original/missing.png'
+    end
+  end
+
+  def source
+    self.content || self.default_source
+  end
+
+  def default_source
+    case item_type.to_s
+    when 'link'
+      'http://fameandpartners.com'
+    when 'song'
+      'https://soundcloud.com/pedro-noe/game-of-thrones-main-title'
+    else
+      ''
+    end
+  end
 end

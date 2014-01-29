@@ -68,19 +68,19 @@ ruby:
           - if @product.video_url.present?
             .grid-6
               .picture
-                == product_video(@product, width: 360, height: 480)
+                == product_video(@product, width: 375, height: 480)
                 /.initials = image_tag 'video-initials.png', width: 360, height: 480, alt: ''
               .popup
                 .fleft = link_to 'play video', '#'
           / moodboard
           .grid-6
             .row
-              / moodboard item
-              - 6.times do |index|
+              - @product.moodboard_items.active.moodboard.each do |mood_item|
                 .grid-6
                   .picture
                     = link_to '#' do
-                      = image_tag '_sample/category-grey-2.jpg'
+                      = image_tag mood_item.image.url(:product)
+          / this should be background image + configurable text
           .grid-6    
             .picture
               = link_to '#' do
@@ -88,27 +88,22 @@ ruby:
           / statics, accessory product +  song
           .grid-6
             .row
-              - song = @product.property('soundcloud_song_id') || 'http://soundcloud.com/johnlegend/all-of-me-3'
-              - if song.present?
+              - @product.moodboard_items.active.song.each do |song_item|
                 .grid-6
                   .picture
-                    = link_to 'SoundCloud tune', song, class: 'sc-player'
+                    = link_to 'SoundCloud tune', song_item.source, class: 'sc-player'
                     = link_to '#', data: { action: 'soundcloud' } do
-                      = image_tag '_sample/category-grey-2.jpg'
+                      = image_tag song_item.image
                     .popup
                       .fleft 
                         = link_to '#', data: { action: 'soundcloud' } do
                           span.icon-play
                           span.icon-pause
-              .grid-6
-                .picture
-                  = link_to '#' do
-                    = image_tag '_sample/category-grey-2.jpg'
-                  .popup
-                    .fleft = link_to 'play video', '#'
-                    .fright
-                      = link_to '#' do
-                        span.icon-expand 
+              - @product.moodboard_items.active.link.each do |link_item|
+                .grid-6
+                  .picture
+                    = link_to link_item.source, target: 'blank' do
+                      = image_tag link_item.image
           /.grid-6
             .social
               = link_to '#' do
