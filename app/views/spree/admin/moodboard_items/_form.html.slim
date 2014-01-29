@@ -1,0 +1,28 @@
+= form_for item, url: admin_product_moodboard_items_path(product),  multipart: true do |form|
+  .alpha.twelve.columns
+    = form.hidden_field :spree_product_id, value: product.id
+
+    - if item.errors.any?
+      ul.errors
+        - item.errors.full_messages.each do |error_message|
+          li = error_message
+
+    = form.field_container :item_type do
+      = form.label :item_type, 'Item Type'
+      = form.select :item_type, options_from_collection_for_select(MoodboardItem::ITEM_TYPES, :to_s, :to_s)
+
+    = form.field_container :active do
+      = form.check_box :active
+      = form.label :active, 'Active'
+      
+    = form.field_container :content do
+      = form.label :content, 'Url, eg link to song or parfume'
+      = form.text_field :content, class: "fullwidth"
+
+    = form.field_container :image do
+      - if item.image.present?
+        = image_tag(item.image(:thumbnail), size: '78x100')
+      = form.label :image, 'Cover Image'
+      = form.file_field :image
+
+    = form.submit "Create"

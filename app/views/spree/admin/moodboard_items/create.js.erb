@@ -1,0 +1,12 @@
+<% if item.persisted? %>
+  new_item_html = '<%= escape_javascript(render 'spree/admin/moodboard_items/item', item: item) %>'
+  $('table.index#moodboard_items tbody').append(new_item_html);
+
+  $('.no-objects-found').remove()
+  $('table.index#moodboard_items').show()
+
+  <% item = product.moodboard_items.build %>
+<% end %>
+
+form_html = '<%= escape_javascript(render "spree/admin/moodboard_items/form", item: item, product: product) %>';
+$("#new_moodboard_item").html(form_html);

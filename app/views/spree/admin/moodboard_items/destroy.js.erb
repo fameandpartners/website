@@ -1,0 +1,3 @@
+<% if item.nil? || !item.try(:persisted?) %>
+  $('table.index#moodboard_items tbody tr[data-id="<%= params[:id]%>"]').remove()
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131218071822) do
+ActiveRecord::Schema.define(:version => 20140129091937) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -289,6 +289,23 @@ ActiveRecord::Schema.define(:version => 20131218071822) do
     t.integer  "image_file_size"
   end
 
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
     t.integer  "product_id"
@@ -298,6 +315,20 @@ ActiveRecord::Schema.define(:version => 20131218071822) do
     t.datetime "updated_at",              :null => false
     t.string   "color"
     t.integer  "color_id"
+  end
+
+  create_table "moodboard_items", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.boolean  "active",                           :default => true
+    t.string   "item_type",          :limit => 50
+    t.string   "content"
+    t.integer  "position",                         :default => 0
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
   create_table "payment_requests", :force => true do |t|

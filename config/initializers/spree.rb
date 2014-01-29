@@ -25,6 +25,7 @@ Spree.config do |config|
     'xlarge'  => '1280x800>',
     'email'   => '144x185#'
   }.to_json
+  # 375х480
 
   config.currency = 'AUD'
 
