@@ -1,0 +1,42 @@
+.checkout-page {
+	margin-top: 45px;
+	h1 {
+		font: 400 47px/1 $fontThree;
+	}
+	h4 {
+		font: 400 17px/1 $fontThree;
+		margin: 10px 0 5px;
+	}
+	.arrows-line-horizontal {
+		margin: 20px 0;
+	}
+	.checkout-box {
+		.accordion-conteiner {
+			padding-right: 20px;
+			@include box-sizing(border-box);
+		}
+		.accordion-title {
+			padding: 10px 0;
+			padding-right: 20px;
+			font-size: 18px;
+			letter-spacing: 0.125em;
+			border-top: solid 1px #000;
+			border-bottom: solid 1px #000;
+			margin: 10px 0;
+		}
+	}
+	.accordion-content {
+		.grid-6 {
+			display: inline-block;
+			vertical-align: top;
+			padding-right: 20px;
+			@include box-sizing(border-box);
+		}
+		.input {
+			margin-bottom: 20px;
+		}
+	}
+	.submit-button {
+		.fleft { margin-right: 5px;}
+	}
+}
