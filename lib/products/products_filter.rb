@@ -190,6 +190,10 @@ module Products
       colour + similar_colors
     end
 
+    def selected_color_name
+      colour.present? ? colour.first.name : nil
+    end
+
     protected
 
     def taxons
@@ -233,7 +237,7 @@ module Products
 
     def prepare_colours(colour_names)
       return [] if colour_names.blank?
-      colours = Array.wrap(colour_names).collect{|colour| colour.to_s.downcase.split(/[_-]/).join(' ')}
+      colours = Array.wrap(colour_names).collect{|colour| colour.to_s.downcase }
       Spree::OptionValue.where("lower(name) in (?)", colours).to_a
     end
 
