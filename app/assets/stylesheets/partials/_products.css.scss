@@ -69,6 +69,18 @@
 			}		
 		}
 	}
+	.text {
+		background-color: #fce5de;
+		padding: 20px;
+		font: italic 400 20px/1.1 $fontTwo;
+		text-transform: none;
+		text-align: left;
+		.inner {
+			background: url('_quiz/kiss.png') no-repeat bottom right;
+			padding-bottom: 35px;
+			min-height: 150px;
+		}
+	}
 	.sc-player.playing ~ .popup {
 		.icon-play { display: none;}
 		.icon-pause { display: inline;}
