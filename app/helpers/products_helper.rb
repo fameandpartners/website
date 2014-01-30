@@ -28,7 +28,7 @@ module ProductsHelper
 
   def available_product_colors
     color_option = Spree::Variant.color_option_type
-    color_option.present? ? color_option.option_values : []
+    color_option.present? ? color_option.option_values.joins(:product_color_values).uniq : []
   end
 
   def seo_taxonomy

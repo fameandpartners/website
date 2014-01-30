@@ -17,7 +17,19 @@ $ ->
       shoppingBag.container.find(".shopping-bag-toggler").on(
         'click', shoppingBag.toggleVisibilityClickHandler
       )
-      shoppingBag.container.find(".close-cart-button").on('click', shoppingBag.closeButtonClickHandler)
+
+      shoppingBag.container.on 'mouseleave', '#shopping-bag-popup-wrapper', (event) ->
+        if shoppingBag.closeTimerId
+          clearTimeout(shoppingBag.closeTimerId)
+
+        shoppingBag.closeTimerId = setTimeout shoppingBag.hide, 5000
+
+      shoppingBag.container.on 'mouseenter', '#shopping-bag-popup-wrapper', (event) ->
+        $wrapper = shoppingBag.container.find("#shopping-bag-popup-wrapper")
+
+        if shoppingBag.closeTimerId
+          clearTimeout(shoppingBag.closeTimerId)
+          shoppingBag.closeTimerId = null
 
       window.shopping_cart.on('item_added',   shoppingBag.renderCart)
       window.shopping_cart.on('item_changed', shoppingBag.renderCart)

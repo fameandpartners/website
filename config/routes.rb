@@ -228,6 +228,14 @@ FameAndPartners::Application.routes.draw do
         resources :product_customisation_values, only: :destroy
       end
 
+      resources :products do
+        resources :moodboard_items do
+          collection do
+            post :update_positions, as: :update_positions
+          end
+        end
+      end
+
       namespace :blog do
         resources :promo_banners
         resources :categories

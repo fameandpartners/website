@@ -18,20 +18,20 @@ ruby:
             - if show_customizations && line_item.personalization.present?
               .color style="background-color: #{line_item.personalization.color};"
             - else
-              - color = variant.dress_color
-              / .color{class=color.try(:name)}
-              = color.try(:name)
+              = variant.dress_color.try(:presentation)
         - if show_customizations && line_item.personalization.present?
           tr
-            td Size
+            td Size:
             td = line_item.personalization.size
           - line_item.personalization.customization_values.each do |value|
             tr
-              td = value.customisation_type.presentation
+              td
+                = value.customisation_type.presentation
+                | :
               td = value.presentation
         - else
           tr
-            td Size
+            td Size:
             td = variant.dress_size.try(:presentation)
         tr
           td Quantity:

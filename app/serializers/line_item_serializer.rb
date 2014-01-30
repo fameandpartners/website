@@ -75,7 +75,7 @@ class LineItemSerializer < ActiveModel::Serializer
     if (personalization = object.personalization).present?
       return personalization.color || ''
     else
-      object.variant.dress_color.try(:name) || ""
+      object.variant.dress_color.try(:presentation) || ''
     end
   end
 

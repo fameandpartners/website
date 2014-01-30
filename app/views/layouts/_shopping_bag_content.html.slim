@@ -19,9 +19,7 @@
         span = current_order.display_total
     
     .shopping-list
-      = link_to '#', class: 'close-cart-button' do
-        span.icon-close
-      = render partial: "shared/line_item", collection: current_order.line_items, as: :line_item
+      = render partial: 'shared/line_item', collection: current_order.line_items, as: :line_item
       .buttons
         .total
           ' Total
