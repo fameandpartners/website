@@ -67,6 +67,9 @@
 			vertical-align: middle;
 		}
 		.avatar {
+          &.empty {
+            display: none;
+          }
 			margin-right: 5px;
 			img {
 				width: 20px;

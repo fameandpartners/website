@@ -27,6 +27,9 @@
             - if current_spree_user.image.present?
               span.avatar
                 = image_tag current_spree_user.image, width: 20
+            - else
+              span.avatar.empty
+                img
             span.name =' current_spree_user.full_name
             i.icon-dropdown-down
             .dropdown-menu
