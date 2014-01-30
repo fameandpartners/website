@@ -6,7 +6,8 @@ $('.profiles.show').ready ->
       $image = $("<img />", {src: img_src, width: '100px'})
       $('.avatar-field .avatar').append($image)
     $('.avatar-field .avatar').removeClass('empty')
-    $('.top-links li.loggedin .avatar img').attr(src: img_src)
+    $('.top-links .loggedin .avatar img').attr(src: img_src)
+    $('.top-links .loggedin .avatar').removeClass('empty')
 
   submitButtonText = null
   previousAvatarImage = null
@@ -18,7 +19,10 @@ $('.profiles.show').ready ->
 
     $('.btn-upload').attr('disabled', true).val('Loading ...')
     updateUserAvatarImage(transparentImage)
-    $('.avatar-field .avatar img').css('background-image', 'url('+spinnerImage+')')
+    $('.avatar-field .avatar img').css
+      background: 'url('+spinnerImage+') no-repeat transparent center center'
+
+
     return true
 
   hideSpinner = () ->
