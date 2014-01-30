@@ -1,13 +1,10 @@
 - links_cache_key = ['header-top-links', current_site_version.is_australia?, current_spree_user.try(:cache_key)]
 - cache links_cache_key, expires_in: configatron.cache.expire.long do
   .top-links
-    / nav.fleft
-    /   ul
-    /     - if current_site_version.is_australia?
-    /       li = link_to 'Australia Home', root_path, class: 'top-icon link-root'
-    /       li.top-icon.phone order on the phone / customer service 1300 924 860
-    /     - else
-    /       li = link_to 'USA Home', root_path, class: 'top-icon link-root'
+    - if current_site_version.is_australia?
+      // Artem, please fix this as it need!
+      div style="position: absolute; width: 100%"
+        p style="margin: 0; text-align: center;" order on the phone / customer service 1300 924 860
     .site-version
       .current-version
         span SHIPPING TO
@@ -38,7 +35,7 @@
                 li = link_to 'your orders', user_orders_path
                 li = link_to 'style profile', styleprofile_path
                 li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
-.centered-layout      
+.centered-layout
   header.header-global class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
     = link_to root_path, class: 'logo' do
       span.icon-logo.black
