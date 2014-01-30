@@ -26,9 +26,15 @@ window.helpers.createProductVariantsSelector = (root) ->
 
     exportSelectedVariant: (variant) ->
       if ! _.isEmpty(variant)
-        variantsSelector.target.data(id: variant.id, error: null)
+        id = variant.id
+      else if !_.isEmpty(variantsSelector.selected.size)
+        error_message = 'Please select a colour'
+      else if !_.isEmpty(variantsSelector.selected.color)
+        error_message = 'Please select a size'
       else
-        variantsSelector.target.data(id: null, error: 'Please, select size and colour')
+        error_message = 'Please select size and colour'
+
+      variantsSelector.target.data(id: id, error: error_message)
       variant
 
     onSizeClickHandler: (e) ->
@@ -40,8 +46,12 @@ window.helpers.createProductVariantsSelector = (root) ->
       variantsSelector.onVariantsChanged.call(variantsSelector)
 
     onVariantsChanged: () ->
-      variantsSelector.selected.size   = rootElement.find(".section .sizebox .button.selected:first").data('size').toString()
       variantsSelector.selected.color  = rootElement.find('select#colour').val()
+      selectedSizeElement = rootElement.find(".section .sizebox .button.selected:first")
+      if selectedSizeElement.length > 0
+        variantsSelector.selected.size  = selectedSizeElement.data('size').toString()
+      else
+        variantsSelector.selected.size = null
 
       variant = @getSelectedVariant()
       @exportSelectedVariant(variant)

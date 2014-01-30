@@ -12,7 +12,7 @@
       - sizes.each_with_index do |size|
         div.button data-size="#{size}" = size
   .section
-    .btn.empty.border.striped PLEASE SELECT A SIZE
+    .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
     = link_to 'add to cart', '#', class: 'btn buy-now'
   .section      
     = add_to_wishlist_link(product, title: '+ TO WISH LIST', class: 'btn empty border')
