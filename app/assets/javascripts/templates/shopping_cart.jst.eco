@@ -16,7 +16,6 @@
     </div>
   <% else: %>
     <div class="shopping-list">
-      <a href="#" class='close-cart-button'><span class='icon-close'></span></a>
       <% for line_item in @order.line_items: %>
         <div class="item">
           <div class="picture">
@@ -41,7 +40,7 @@
                     <% if (!_.isNull(line_item.personalization)) : %>
                       <div class="color" style="background-color: <%= line_item.product_color %>;"></div>
                     <% else: %>
-                      <div class="color <%= line_item.product_color %>"></div>
+                      <%= line_item.product_color %>
                     <% end %>
                   </td>
                 </tr>
