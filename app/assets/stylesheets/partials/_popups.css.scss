@@ -1,0 +1,65 @@
+.popup-placeholder {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+	.overlay {
+		position: fixed;
+		z-index: 0;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+}
+.modal-container {
+	background-color: #fff;
+	border: solid 5px #000;
+	padding: 40px;
+	margin: 0;
+	z-index: 1;
+	.form { 
+		margin: 0;
+		@extend .devise-forms;
+		.input { margin-bottom: 20px;}
+	}
+	.submit {
+		margin-top: 20px;
+		.btn { width: 100%;}
+	}
+	.close-lightbox {
+		width: 24px;
+		height: 24px;
+		color: #fff;
+		cursor: pointer;
+		position: absolute;
+		right: 0;
+		top: 0;
+		background-color: #000;
+		font-family: 'Icons';
+	  speak: none;
+	  font-size: 14px;
+	  font-style: normal;
+	  font-weight: 300;
+	  font-variant: normal;
+	  text-transform: none;
+	  text-align: center;
+	  line-height: 19px;
+	  text-indent: 4px;
+	  -webkit-font-smoothing: antialiased;
+	  -moz-osx-font-smoothing: grayscale;
+	  &:before { content: "\e611";}
+	}
+	h2, .modal-title {
+		text-transform: uppercase;
+		font: 300 30px/1 $fontFive;
+		margin-bottom: 20px;
+	}
+	p {
+		font: 400 14px/1.1 $fontFour;
+		text-transform: none;
+	}
+}

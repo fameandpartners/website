@@ -61,17 +61,17 @@ ruby:
             .grid-6
               .picture
                 = image_tag celebrity.photo.url(:preview), width: 418, height: 600, alt: ''
-              .popup
-                .fright
-                  a href='#' data-action='show-large-image' data-image='#{ celebrity.photo.url(:large) }'
-                    span.icon-expand
+                .popup
+                  .fright
+                    a href='#' data-action='show-large-image' data-image='#{ celebrity.photo.url(:large) }'
+                      span.icon-expand
           - if @product.video_url.present?
             .grid-6
               .picture
                 == product_video(@product, width: 360, height: 480)
                 /.initials = image_tag 'video-initials.png', width: 360, height: 480, alt: ''
-              .popup
-                .fleft = link_to 'play video', '#'
+                .popup
+                  .fleft = link_to 'play video', '#'
           / moodboard
           .grid-6
             .row
