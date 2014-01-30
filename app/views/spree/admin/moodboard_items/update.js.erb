@@ -1,0 +1,5 @@
+$('#moodboard_items tr.form').remove()
+
+item_html = '<%= escape_javascript(render "spree/admin/moodboard_items/item", item: item, product: product) %>';
+
+$('#moodboard_items tr#<%= spree_dom_id item %>').replaceWith(item_html);

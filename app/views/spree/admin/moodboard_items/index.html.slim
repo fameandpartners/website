@@ -10,7 +10,7 @@
 
 
 #new_moodboard_item
-  - if defined?(item)
+  - if defined?(item) && item.errors.any?
     = render "spree/admin/moodboard_items/form", item: item, product: product
 
 .alpha.twelve.columns
