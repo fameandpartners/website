@@ -12,6 +12,8 @@ Spree::OptionValue.class_eval do
     mini: '48x48#', small: '100x100>', small_square: '100x100#', medium: '240x240>'
   }
 
+  scope :none, where(id: nil)
+
   attr_accessible :image, :value
   validates :value, format: /^#([0-9a-f]{3}|[0-9a-f]{6})$/i, allow_blank: true
 end

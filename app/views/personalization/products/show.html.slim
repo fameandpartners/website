@@ -8,6 +8,7 @@ css:
   }
 
 javascript:
+  window.product_master_variant = '#{{ @product.master.id }}';
   window.product_variants = #{{ @product_variants.to_json }};
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
 

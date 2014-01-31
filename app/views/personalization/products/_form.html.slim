@@ -6,14 +6,16 @@ ruby:
 
   h4 Custom colours ARE only $16 
   - options = options_from_collection_for_select(product.custom_colors, :presentation, :name)
-  = select_tag :custom_color, options, class: 'selectbox', prompt: 'ADD a custom colour', data: { placeholder: "ADD a custom colour" }
+  - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
+  = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
+
   - product_customisation_types.each do |product_customisation_type|
     .style
-      .row.customisation-type
+      .row.customisation-type data-id="#{ product_customisation_type.id }"
         .grid-12
           .button
             p = product_customisation_type.customisation_type.presentation
-        .grid-12.customisation-values data-id="#{ product_customisation_type }"
+        .grid-12.customisation-values
           - type = product_customisation_type.customisation_type
           - product_customisation_type.customisation_values.order('position asc').each_with_index do |value, index|
             label.customisation-value
@@ -23,4 +25,3 @@ ruby:
                 = image_tag 'http://placehold.it/111x167', alt: value.presentation, title: value.presentation
               = radio_button_tag "line_item_personalization[customization_value_ids][#{type.id}][]", value.id, personalization.customization_value_ids.include?(value.id), data: {required: true}, class: "#{value.name.parameterize} #{ 'default' if index == 0 }"
               /.aligncenter #{value.presentation}
-  = submit_tag "Add customised variant to bag"

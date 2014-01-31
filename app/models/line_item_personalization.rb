@@ -13,7 +13,7 @@ class LineItemPersonalization < ActiveRecord::Base
   attr_accessible :customization_value_ids,
                   :height,
                   :size,
-                  :color_id
+                  :color_id, :color_name
 
   validates :size,
             presence: true,
@@ -24,6 +24,8 @@ class LineItemPersonalization < ActiveRecord::Base
 
   validates :color,
             presence: true
+
+  attr_accessor :color_name
 
   validate do
     if product.present? && customization_value_ids.present?
@@ -46,6 +48,8 @@ class LineItemPersonalization < ActiveRecord::Base
       attributes['color']
     elsif super.present?
       super.presentation
+    elsif @color_name.present?
+      attributes['color'] = get_color_by_name(@color_name)
     else
       nil
     end
@@ -78,5 +82,11 @@ class LineItemPersonalization < ActiveRecord::Base
     end
 
     values
+  end
+
+  def get_color_by_name(name)
+    return nil if product.blank?
+
+    product.basic_colors.where(name: name).first || product.custom_colors.where(name: name).first
   end
 end
