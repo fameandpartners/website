@@ -1,4 +1,4 @@
-$(".products.index").ready ->
+$(".spree_products.index").ready ->
 
   addValue = (object, propertyName, elementSelector) ->
     propertyValue = productsFilter.$el.find(elementSelector).val()

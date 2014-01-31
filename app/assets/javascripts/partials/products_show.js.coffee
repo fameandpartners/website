@@ -1,4 +1,4 @@
-$(".products.show").ready ->
+$(".spree_products.show").ready ->
   # common
   page.enableShoppingCart()
 

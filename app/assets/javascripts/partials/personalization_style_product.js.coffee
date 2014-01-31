@@ -1,4 +1,4 @@
-$(".products.style").ready ->
+$(".personalization_products.style").ready ->
   window.shopping_cart.init(window.bootstrap)
 
   if window.product_variants
