@@ -37,7 +37,8 @@ window.popups.showSendToFriendPopup = (productId, options = {}) ->
       popup.container.find('.save').addClass('submit')
 
     show: () ->
-      popup.container.show().center()
+      popup.container.show()
+      popup.content.center()
       unless _.isEmpty(popup.analyticsLabel)
         track.openedSendToFriend(popup.analyticsLabel)
 

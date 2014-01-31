@@ -1,5 +1,5 @@
 <div class="form">
-  <div class="askmumintro">Send this dress to whoever you want to get a second opinion from!</div>
+  <p>Send this dress to whoever you want to get a second opinion from!</p>
   <% if @guest: %>
     <div class="member-fields">
       <div class="item-details input">

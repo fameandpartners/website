@@ -68,9 +68,10 @@ ruby:
           - if @product.video_url.present?
             .grid-6
               .picture
-                == product_video(@product, width: 375, height: 480)
-                .popup
-                  .fleft = link_to 'play video', '#'
+                == product_video(@product, width: 360, height: 480)
+                /.initials = image_tag 'video-initials.png', width: 360, height: 480, alt: ''
+                / .popup
+                /   .fleft = link_to 'play video', '#'
           / moodboard
           .grid-6
             .row
@@ -81,9 +82,8 @@ ruby:
                       = image_tag mood_item.image.url(:product)
           / this should be background image + configurable text
           .grid-6    
-            .picture
-              = link_to '#' do
-                = image_tag '_sample/catalog-ad.jpg' 
+            .text
+              .inner Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
           / statics, accessory product +  song
           .grid-6
             .row

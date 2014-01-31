@@ -69,6 +69,18 @@
 			}		
 		}
 	}
+	.text {
+		background-color: #fce5de;
+		padding: 20px;
+		font: italic 400 20px/1.1 $fontTwo;
+		text-transform: none;
+		text-align: left;
+		.inner {
+			background: url('_quiz/kiss.png') no-repeat bottom right;
+			padding-bottom: 35px;
+			min-height: 150px;
+		}
+	}
 	.sc-player.playing ~ .popup {
 		.icon-play { display: none;}
 		.icon-pause { display: inline;}
@@ -384,5 +396,58 @@
 	}
 	.price {
 		font-size: 18px;
+	}
+}
+
+.personal-boutique {
+
+	.page-title {
+		margin: 40px 0;
+		h1 {
+			font: italic 400 44px/1 $fontTwo;
+			position: relative;
+			text-transform: none;
+			margin-bottom: 15px;
+			padding-bottom: 15px;
+			text-align: center;
+			&:before {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				margin-left: -165px;
+				height: 1px;
+				width: 330px;
+				background-color: #e0e0e0;
+			}
+		}
+		h2 {
+			text-align: center;
+			font: 400 26px/1 $fontThree;
+		}
+		.filters {
+			list-style: none;
+			margin: 20px 0 0;
+			padding: 0;
+			text-align: center;
+			li {
+				display: inline-block;
+				vertical-align: middle;
+				margin: 0 10px;
+				&.active {
+					a { 
+						color: #fff;
+						background-color: $pinkColor;
+					}
+				}
+			}
+			a {
+				display: block;
+				font: 300 16px/20px $fontFive;
+				height: 20px;
+				padding: 0 10px;
+				text-decoration: none;
+			}
+		}
 	}
 }
