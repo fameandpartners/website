@@ -5,7 +5,7 @@ ruby:
   = hidden_field_tag :variant_id, product.master.id
 
   h4 Custom colours ARE only $16 
-  - options = options_from_collection_for_select(product.custom_colors, :presentation, :name)
+  - options = options_from_collection_for_select(product.custom_colors, :name, :presentation)
   - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
   = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
 

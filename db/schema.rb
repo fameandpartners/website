@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140129091937) do
+ActiveRecord::Schema.define(:version => 20140131145806) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -289,15 +289,33 @@ ActiveRecord::Schema.define(:version => 20140129091937) do
     t.integer  "image_file_size"
   end
 
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
     t.integer  "product_id"
     t.integer  "size"
     t.string   "customization_value_ids"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
     t.string   "color"
     t.integer  "color_id"
+    t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
   end
 
   create_table "moodboard_items", :force => true do |t|

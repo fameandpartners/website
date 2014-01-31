@@ -19,7 +19,7 @@
         span = current_order.display_total
     
     .shopping-list
-      = render partial: 'shared/line_item', collection: current_order.line_items, as: :line_item
+      = render partial: 'shared/line_item', collection: current_order.line_items, as: :line_item, locals: { show_customizations: true }
       .buttons
         .total
           ' Total

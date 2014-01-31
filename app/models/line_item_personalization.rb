@@ -26,6 +26,8 @@ class LineItemPersonalization < ActiveRecord::Base
             presence: true
 
   attr_accessor :color_name
+  before_validation :set_color_by_name
+  before_save :recalculate_price
 
   validate do
     if product.present? && customization_value_ids.present?
@@ -43,21 +45,19 @@ class LineItemPersonalization < ActiveRecord::Base
     end
   end
 
-  def color
-    if attributes['color'].present?
-      attributes['color']
-    elsif super.present?
-      super.presentation
-    elsif @color_name.present?
-      attributes['color'] = get_color_by_name(@color_name)
-    else
-      nil
-    end
-  end
+#  def color
+#    if attributes['color'].present?
+#      attributes['color']
+#    elsif super.present?
+#      super.presentation
+#    else
+#      nil
+#    end
+#  end
 
-  def color_picker?
-    color.present? && !COLORS.include?(color)
-  end
+#  def color_picker?
+#    color.present? && !COLORS.include?(color)
+#  end
 
   def customization_values
     CustomisationValue.includes(:customisation_type).find(customization_value_ids)
@@ -76,7 +76,6 @@ class LineItemPersonalization < ActiveRecord::Base
     values['Size'] = size
     values['Color'] = color if color.present?
 
-
     customization_values.each do |value|
       values[value.customisation_type.presentation] = value.presentation
     end
@@ -84,9 +83,27 @@ class LineItemPersonalization < ActiveRecord::Base
     values
   end
 
-  def get_color_by_name(name)
-    return nil if product.blank?
+  def set_color_by_name
+    if @color_name.present? and color.blank? and product.present?
+      self.color = product.basic_colors.where(name: @color_name).first
+      self.color ||=  product.custom_colors.where(name: @color_name).first
+    end
+    return true
+  end
 
-    product.basic_colors.where(name: name).first || product.custom_colors.where(name: name).first
+  # calculate additional cost
+  #   - custom color costs addional 16$ in current currency
+  def recalculate_price
+    self.price = 0.0
+    self.price += 16.0 if !basic_color?
+    self.price
+  rescue
+    self.price = 0.0
+  end
+
+  def basic_color?
+    return false if product.blank? || color.blank?
+
+    product.basic_colors.where(id: color_id).exists?
   end
 end
