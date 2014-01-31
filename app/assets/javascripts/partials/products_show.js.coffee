@@ -7,6 +7,7 @@ $(".spree_products.show").ready ->
   page.enableWhatSizeIam($('.toggle-sizes'))
   page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
   page.enableAccordeonBars($('ul.slider li'))
+  page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
 
   # header - nav partial
   page.enableSendToFriendButton($('a.send-to-friend'))
@@ -15,7 +16,8 @@ $(".spree_products.show").ready ->
   page.enableImageZoomButtons($("a[data-action='show-large-image']"))
   page.enableSoundCloudSongPlayer($("a[data-action=soundcloud]"))
 
-  #page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
+  page.enableShareButtons()
+
   #page.enableQuickView($(".quick-view a[data-action='quick-view']"))
 
 #window.populateImagesCarousel = ($wrapper, filterOptions = {}) ->

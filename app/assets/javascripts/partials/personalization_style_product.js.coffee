@@ -1,22 +1,13 @@
 $(".personalization_products.style").ready ->
-  window.shopping_cart.init(window.bootstrap)
+  # common
+  page.enableShoppingCart()
 
-  if window.product_variants
-    variantsSelector = window.helpers.createProductVariantsSelector($('#content .product-info'))
-    variantsSelector.init(window.product_variants)
+  # products_info partial
+  page.enableProductVariantsSelector($('#content .product-info'))
+  page.enableWhatSizeIam($('.toggle-sizes'))
+  page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
+  page.enableAccordeonBars($('ul.slider li'))
+  page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
 
-  productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
-
-  window.helpers.addBuyButtonHandlers($('.buy-now'), { expandShoppingBag: true})
-
-  # send to friend
-  $('a.send-to-friend').on('click', (e) ->
-    e.preventDefault()
-    productId = $(e.currentTarget).data('product')
-    popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
-  )
-
-  # toggle accordeon bars on right
-  $('ul.slider li').on('click', (e) ->
-    $(e.target).closest('li').toggleClass('opened')
-  )
+  # header - nav partial
+  page.enableSendToFriendButton($('a.send-to-friend'))

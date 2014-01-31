@@ -25,8 +25,12 @@ ruby:
     product_image_url = get_absolute_image_url("/assets/noimage/product.png", 'http')
   end
   share_url = collection_product_url(@product)
+  share_url = 'http://feature.fameandpartners.com/collection/long-dresses/posuere_placerat_dress'
 
 = render 'product_meta', product: @product
+
+- content_for :head do
+  script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"
 
 .content-offer
   .title
@@ -103,27 +107,16 @@ ruby:
                   .picture
                     = link_to link_item.source, target: 'blank' do
                       = image_tag link_item.image
-          /.grid-6
-            .social
-              = link_to '#' do
-                span.icon-facebook
-              = link_to '#' do
-                span.icon-pinterest
-              = link_to '#' do
-                span.icon-mail
-              .arrows-line-horizontal.top
-              .arrows-line-horizontal.bottom
           .grid-6
             .social.addthis_toolbox.addthis_default_style
-              div.fb-like data-href="#{ share_url }" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"
-              a class="addthis_button_pinterest_pinit" pi:pinit:url="#{ share_url }" pi:pinit:media="#{ product_image_url }" pi:pinit:layout="horizontal"
-              /div class="fb-share-button" data-href="#{ share_url }" data-type="icon"
-              = link_to '#' do
+              = facebook_share_button(share_url)
+              = pin_share_button(share_url, product_image_url, @product.name)
+
+              /= link_to '#' do
                 span.icon-facebook
-              = link_to '#' do
+              = link_to '#', data: { action: 'pin-it' } do
                 span.icon-pinterest
-              = link_to 'mailto:team@fameandpartners.com' do
-                span.icon-mail
+
               .arrows-line-horizontal.top
               .arrows-line-horizontal.bottom
     .grid-4
