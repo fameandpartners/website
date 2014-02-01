@@ -32,7 +32,8 @@
 .icon-trash,
 .icon-play,
 .icon-pause,
-.icon-checkmark 
+.icon-checkmark,
+.icon-zoom-in 
 {
   font-family: 'Icons';
   speak: none;
@@ -81,6 +82,7 @@
 .icon-play:before { content: "\e618";}
 .icon-pause:before { content: "\e619";}
 .icon-checkmark:before { content: "\e61a";}
+.icon-zoom-in:before { content: "\e61b";}
 
 
 .icon-number-one, .icon-number-two, .icon-number-three, .icon-number-four {

@@ -104,9 +104,9 @@ module ProductsHelper
   def add_to_bag_link(product_or_variant)
     if product_or_variant.is_a?(Spree::Product)
       # don't use master variant as default
-      link_to 'Add to bag', '#', class: 'buy-now'
+      link_to 'Add to bag', '#', class: 'buy-now btn'
     else
-      link_to 'Add to bag', '#', class: 'buy-now', data: { id: product_or_variant.id }
+      link_to 'Add to bag', '#', class: 'buy-now btn', data: { id: product_or_variant.id }
     end
   end
 
@@ -194,8 +194,8 @@ module ProductsHelper
         )
       end
       content_tag(:div, class: 'twin-alert') do
-        link_to("Twin Alert", '#', class: 'twin-alert-link btn black', data: data_attrs) +
-        content_tag(:div, t('views.pages.products.show.notices.twin_alert'), class: 'twin-alert-info')
+        link_to("Twin Alert", '#', class: 'twin-alert-link btn', data: data_attrs) +
+        content_tag(:div, t('views.pages.products.show.notices.twin_alert').html_safe, class: 'hint')
       end
     end
   end

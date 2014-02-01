@@ -60,7 +60,7 @@ ruby:
           - if (celebrity = @product.celebrity_inspiration).present?
             .grid-6
               .picture
-                = image_tag celebrity.photo.url(:preview), width: 418, height: 600, alt: ''
+                = image_tag celebrity.photo.url(:preview), alt: ''
                 .popup
                   .fright
                     a href='#' data-action='show-large-image' data-image='#{ celebrity.photo.url(:large) }'
@@ -68,7 +68,7 @@ ruby:
           - if @product.video_url.present?
             .grid-6
               .picture
-                == product_video(@product, width: 360, height: 480)
+                == product_video(@product)
                 /.initials = image_tag 'video-initials.png', width: 360, height: 480, alt: ''
                 / .popup
                 /   .fleft = link_to 'play video', '#'
@@ -152,7 +152,7 @@ ruby:
             .big-photo
               .zoom
                 = link_to 'Zoom', '#'
-              = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
+              = image_tag 'noimage/large.png', alt: ''
         - if enabled_tabs.include?('video')
           #videos.tab-content style="display: none;"
             == product_video(@product)
@@ -163,7 +163,7 @@ ruby:
           #inspiration.tab-content style="display: none;"
             .tab-content-inner
               .big-photo
-                = image_tag celebrity.photo.url(:preview), width: 418, height: 600, alt: ''
+                = image_tag celebrity.photo.url(:preview), alt: ''
               .inspiration
                 .desc = celebrity.celebrity_description
                 .name = celebrity.celebrity_name
