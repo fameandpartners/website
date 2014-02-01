@@ -16,7 +16,7 @@ ruby:
           td Color:
           td 
             - if show_customizations && line_item.personalization.present?
-              .color style="background-color: #{line_item.personalization.color};"
+              .color style="background-color: #{line_item.personalization.color.value};"
             - else
               = variant.dress_color.try(:presentation)
         - if show_customizations && line_item.personalization.present?

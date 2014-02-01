@@ -52,7 +52,7 @@
                   <% for value in line_item.personalization.customization_values: %>
                     <tr>
                       <td><%= value.customisation_type.presentation %></td>
-                      <td><%= value %></td>
+                      <td><%= value.name %></td>
                     </tr>
                   <% end %>
                 <% else: %>

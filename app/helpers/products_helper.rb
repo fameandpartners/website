@@ -121,7 +121,7 @@ module ProductsHelper
       link_options = { data: { action: 'add-to-wishlist', id: variant.id }, class: options[:class]}
       if in_wishlist?(variant)
         link_options[:class] += ' active'
-        link_to 'Remove', '#', link_options
+        link_to 'Remove from wishlist', '#', link_options
       else
         link_to options[:title], '#', link_options
       end

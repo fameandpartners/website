@@ -57,4 +57,17 @@ window.page = {
 
       return false
     )
+
+  enablePersonalisatonForm: (container) ->
+    if window.product_variants
+      form = window.helpers.createPersonalisationForm(container)
+      form.init(window.product_variants, window.product_master_variant)
+      form
+
+  enableShareButtons: () ->
+    # pinterest. proxies click to real pin button
+    $("a[data-action='pin-it']").on('click', (e) ->
+      e.preventDefault()
+      $("a[data-pin-log='button_pinit']").click()
+    )
 }

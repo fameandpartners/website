@@ -5,7 +5,7 @@
     span.price = price_for_product(product)
   .section  
     - options = options_from_collection_for_select(colors, :to_s, :to_s)
-    = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'
+    = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour', data: { select: 'colour' }
   .section
     h6.info.toggle-sizes href='#what-size' SELECT A SIZE (whats my size?)
     .sizebox

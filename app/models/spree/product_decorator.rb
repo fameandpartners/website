@@ -138,7 +138,7 @@ Spree::Product.class_eval do
         joins(:variants).
         where(spree_variants: {id: variant_ids}).uniq
     else
-      []
+      Spree::OptionValue.none
     end
   end
 
@@ -148,7 +148,7 @@ Spree::Product.class_eval do
         option_values.
         where('spree_option_values.id NOT IN (?)', basic_colors.map(&:id)).uniq
     else
-      []
+      Spree::OptionValue.none
     end
   end
 

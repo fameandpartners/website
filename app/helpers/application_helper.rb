@@ -71,7 +71,9 @@ module ApplicationHelper
   end
 
   def controller_action_class
-    "#{controller.controller_name} #{restfull_action_name}"
+    # controller_name don't have namespace information
+    name = controller.controller_path.gsub(/\W+/, '_')
+    "#{name} #{restfull_action_name}"
   end
 
   def controller_action_id
