@@ -11,9 +11,9 @@ window.helpers.quickViewer = {
   __init: () ->
     if !@popupContainer? and !@overlayContainer?
       popupPlaceholderHtml = "
-        <div class='quick-view-mode modal'>
+        <div class='quick-view-mode modal popup-placeholder'>
           <div class='overlay'></div>
-          <div class='quick-view'>
+          <div class='quick-view modal-container'>
             <div class='close-lightbox'></div>
             <div class='product-page grid-container'></div>
           </div>
@@ -88,7 +88,7 @@ window.helpers.quickViewer = {
 
     window.initProductImagesCarousel = (filterOptions = {}) ->
       $wrapper = helpers.quickViewer.container.find("#product-images")
-      #populateImagesCarousel($wrapper, filterOptions)
+      # populateImagesCarousel($wrapper, filterOptions)
       # show big images from carouseled small images
       options =
         prev:
@@ -100,9 +100,15 @@ window.helpers.quickViewer = {
       )
       helpers.buildImagesViewer(helpers.quickViewer.container).init()
 
+    window.initChosen = ->
+      $('.selectbox').chosen
+        width: '100%'
+        disable_search: true
+
     # code should be executed after images loaded in order to correctly set carousel height
     @popupContainer.waitForImages(() ->
       initProductImagesCarousel()
+      initChosen()
     )
 
     # track events on page
@@ -117,6 +123,6 @@ window.helpers.quickViewer = {
     $('.product-info .customize a').on('click', createTrackHandler('customDressClick'))
 
   movePopupToCenter: () ->
-    window.helpers.quickViewer.container.center()
+    window.helpers.quickViewer.container.find('.quick-view').center()
 }
 

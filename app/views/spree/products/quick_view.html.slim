@@ -9,7 +9,7 @@ ruby:
  enabled_tabs.push('video') if @product.video_url.present?
 
 .product-page.grid-container
-  .grid-60
+  .grid-7
     .tabs
       ul.tabs-links
         li.active = link_to 'Photos', '#photos'
@@ -22,14 +22,37 @@ ruby:
           .photos-carousel
             #quick-view-product-images-up.arrow-up
             ul#product-images.carousel-pictures
+              li
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-2.jpg'
+              li
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-2.jpg'
+              li
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-1.jpg'
+              li
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-2.jpg'
+              li
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-1.jpg'
+              li
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-2.jpg'
+              li
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-2.jpg'            
             #quick-view-product-images-down.arrow-down
           .big-photo
-            .zoom = link_to 'Zoom', '#'
-            = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
+            .zoom 
+              span.icon-zoom-in
+            / = image_tag 'noimage/large.png', alt: ''
+            = image_tag '_sample/category-grey-2.jpg'
       - if enabled_tabs.include?('video')
         #videos.tab-content
-          == product_video(@product)
-          .initials = image_tag 'video-initials.png', width: 420, height: 54, alt: ''
+          == product_video(@product, width: 518, height: 330)
+          / .initials = image_tag 'video-initials.png', alt: ''
       - if enabled_tabs.include?('inspiration')
         - celebrity = @product.celebrity_inspiration
         #inspiration.tab-content
@@ -46,39 +69,42 @@ ruby:
       .faster
         ' Need this faster?
         = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
-  .grid-40
+  .grid-5
     .product-info
       .name = @product.name
-      .desc = @product.property('short_description')
+      / .desc = @product.property('short_description')
       .price-delivery
-        .price.sale
+        span.price
           = price_for_product(@product)
-        .delivery = @product.delivery_time_as_string(:long)
+        span.delivery = @product.delivery_time_as_string(:long)
       .colors-choser
         .label = t('views.quick_view.labels.color')
-        .colors
-          - colors.each do |color|
-            .color class='#{color}' data-color='#{color}' data-image="#{{color_images[color]}}"
-      .notice
-        .colour-images = t('views.quick_view.notices.color_images')
+        .select-holder
+          select.selectbox name="color"
+            option value='' Choose a color:
+            - colors.each do |color|
+              option{value=color} = color
+              / .color class='#{color}' data-color='#{color}' data-image="#{{color_images[color]}}"
+        .hint = t('views.quick_view.notices.color_images').html_safe
       .size-select
-        .select-box
-          select#toggle-selectbox.select2 name="size"
+        .label = t('views.quick_view.labels.color')
+        .select-holder
+          select#toggle-selectbox.selectbox name="size"
             option value='' Choose your size
             - sizes.each do |size|
               option{value=size} = size
-        = link_to 'What size am I?', '#what-size', class: 'info toggle-sizes'
+        = link_to 'What size am I?', '#what-size', class: 'hint toggle-sizes'
       .buy-wishlist
-        .buy-customize
-          = add_to_bag_link(@product)
-          - unless true #@product.in_sale?
-            .or-line
-              span or
-              = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
-                i.icon.icon-layby
-                ' Free
-                = t('words.customization').titleize
-        = add_to_wishlist_link(@product)
+        = add_to_bag_link(@product)
+        = add_to_wishlist_link(@product, class: 'btn empty border')
+        / - unless true #@product.in_sale?
+        /   span.or-line
+        /     span or
+        /     = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
+        /       i.icon.icon-layby
+        /       ' Free
+        /       = t('words.customization').titleize
+        
 
       .tabs
         ul.tabs-links
@@ -115,33 +141,40 @@ ruby:
             = t('product_has_no_description')
       .product-features
         .feature
-          i.icon.icon-shipping
-          .text
-            ' Free
+          span.icon-holder
+            span.icon-dollar
+            span.icon-erase
+          div
+            ' free
             br
-            ' Shipping
+            ' shipping
         .feature
-          i.icon.icon-returns
-          .text
-            ' Free
+          span.icon-holder
+            span.icon-arrows
+          div
+            ' free
             br
-            ' Returns
+            ' returns
         .feature
-          i.icon.icon-dress
-          .text
-            ' Fit
+          span.icon-holder
+            span.icon-guarantee
+          div
+            ' fit
             br
-            ' Guarantee
+            ' guarantee
         .feature
-          i.icon.icon-customization
-          .text
-            ' Free
+          span.icon-holder
+            span.icon-cutline
+            span.icon-scissors
+          div
+            ' free
             br
             =' t('words.customization').titleize
         .feature
-          i.icon.icon-pencil
-          .text
-            ' Free styling
+          span.icon-holder
+            span.icon-comment
+          div
+            ' free styling
             br
             ' advice
       .twin-alert-block = product_twin_alert_link(@product)
