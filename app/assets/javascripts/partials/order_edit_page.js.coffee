@@ -1,6 +1,68 @@
-$(".orders.edit").ready ->
+$(".spree_orders.edit").ready ->
   # common
   page.enableShoppingCart()
+
+  # common
+  orderEditForm = {
+    emptyCartTemplate: JST['templates/cart_is_empty']
+    container: $('#content')
+    editPopup: null
+
+    init: () ->
+      orderEditForm.__init.apply(orderEditForm, arguments)
+
+    __init: () ->
+      _.bindAll(@, 'onEditItemClickHandler', 'onDeleteItemClickHandler', 'updateItemInList', 'removeItemFromList', 'updateOrderSummary')
+      @container.on('click', '.edit-link', @onEditItemClickHandler)
+      @container.on('click', '.remove-item-from-cart', @onDeleteItemClickHandler)
+
+      window.shopping_cart.on('item_changed', @updateItemInList)
+      window.shopping_cart.on('item_removed', @removeItemFromList)
+
+    onEditItemClickHandler: (e) ->
+      e.preventDefault()
+      data = $(e.currentTarget).data()
+      @showEditPopup(data.id, data.variant, data.quantity)
+
+    onDeleteItemClickHandler: (e) ->
+      e.preventDefault()
+      button = $(e.currentTarget)
+      button.addClass('removing')
+      window.shopping_cart.removeProduct(button.data('id'), {
+        failure: () -> button.removeClass('removing')
+      })
+
+    showEditPopup: (line_item_id, variant_id, quantity) ->
+      @editPopup ||= window.helpers.createVariantsSelectorPopup()
+      @editPopup.show({ variant_id: variant_id, quantity: quantity }, { id: line_item_id })
+      @editPopup.one('selected', (e, data) ->
+        window.shopping_cart.updateProduct(data.params.id, data)
+      )
+
+    updateItemInList: (e, data) ->
+      itemId = data.id
+      line_item = _.find(data.cart.line_items, (item) -> item.id == itemId)
+      line_item_html = JST['templates/line_item'](order: data.cart, line_item: line_item)
+      row_selector = "table.cart-table tr[data-line-item-id='#{line_item.id}']"
+      @container.find(row_selector).replaceWith(line_item_html)
+      @updateOrderSummary(data.cart)
+
+    removeItemFromList: (e, data) ->
+      if data.cart.line_items.length == 0
+        table = @container.find("table.cart-table")
+        emptyCartHtml = @emptyCartTemplate()
+        table.fadeOut('slow', () -> table.replaceWith(emptyCartHtml).hide().fadeIn('slow'))
+      else
+        @container.find("table.cart-table tr[data-id='#{data.id}']").slideToggle('slow')
+      @updateOrderSummary(data.cart)
+
+    updateOrderSummary: (order) ->
+      newSummaryHtml = JST['templates/order_summary'](order: order)
+      @container.find('.order-summary:first').replaceWith(newSummaryHtml)
+  }
+  window.orderEditForm = orderEditForm
+
+  orderEditForm.init()
 
 
 #$(".orders.edit").ready ->

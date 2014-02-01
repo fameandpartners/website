@@ -35,7 +35,7 @@
                 .buttons
                   = link_to '#', data: { id: variant.id }, class: 'remove-item-from-cart  btn empty border' do
                     span.icon-trash
-                  = product_move_to_wishlist_link(variant)
+                  = product_move_to_wishlist_link(variant, title: "Move to wishlist")
             td.column-2
               .details-box
                 .static
@@ -204,15 +204,3 @@
             div
               .or or
               .paypal = paypal_button_html
-
-
-
-.modal.edit-line-item(style="display: none;")
-  .overlay
-  .modal-container
-    .close-lightbox
-    .edit-details
-      .modal-title Edit product details
-      .item
-      .save
-        input.btn.black type="submit" value="Save changes"

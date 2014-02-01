@@ -1,76 +1,51 @@
-<li data-id="<%= @line_item.variant_id %>" data-line-item-id="<%= @line_item.id %>" class="item grid-container">
-<div class="grid-50 description">
-  <div class="image">
-    <img width="136" height="200" src="<%= @line_item.image_small %>" itemprop="image" alt="<%= @line_item.product_name %>">
-    <div class="remove">
-      <a data-id="<%= @line_item.variant_id %>" class="remove-item-from-cart" href="#">Remove from bag</a>
-    </div>
-  </div>
-  <div class="desc">
-    <div class="name">
-      <a target="blank" href="/products/<%= @line_item.product_permalink %>"><%= @line_item.product_name %></a>
-    </div>
-    <div class="text">
-      <%= @line_item.product_description %>
-    </div>
-    <div class="wishlist">
-      <a href="#" data-id="<%= @line_item.variant_id %>">
-        <i class="icon icon-heart"></i>Move to wish list
-      </a>
-    </div>
-  </div>
-</div>
-<div class="grid-30 details">
-  <div class="static-dynamic-block">
-    <div class="static">
-      <div class="line">
-        <div class="label">
-          Color
-        </div>
-        <div class="value">
-          <div class="color <%= @line_item.product_color %>"></div>
-        </div>
+ <tr data-id='<%= @line_item.variant_id %>' data-line-item-id='<%= @line_item.id %>'>
+  <td class="column-1">
+    <div class="product-info">
+      <div class="image">
+        <a href='<%= urlWithSitePrefix("/products/#{ @line_item.product_permalink }") %>'><img alt="<%= @line_item.product_name %>" itemprop="image" src="<%= @line_item.product_image %>" height="200" width="136"></a>
       </div>
-      <div class="line">
-        <div class="label">
-          Size
+      <div class="desc">
+        <div class="name">
+          <a target="blank" href='<%= urlWithSitePrefix("/products/#{ @line_item.product_permalink }") %>'>
+            <%= @line_item.product_name %>
+          </a>
         </div>
-        <div class="value">
-          <%= @line_item.product_size %>
-        </div>
+        <div class="text"><%= @line_item.product_description %></div>
       </div>
-      <div class="line">
-        <div class="label">
-          Quantity
-        </div>
-        <div class="value">
-          <%= @line_item.quantity %>
-        </div>
-      </div>
-      <div class="line">
-        <div class="label">
-          Estimated Delivery
-        </div>
-        <div class="value">
-          <%= @line_item.product_delivery_time %>
-        </div>
-        <div class="edit">
-          <a data-id="<%= @line_item.id %>" data-quantity="<%= @line_item.quantity %>" data-variant="<%= @line_item.variant_id %>" class="edit-link" href="#">Edit item</a>
-        </div>
+      <div class="buttons">
+        <a href="#" class="remove-item-from-cart  btn empty border" data-id="<%= @line_item.id %>"><span class="icon-trash"></span></a>
+        <a href="#" class="move-to-wishlist btn empty border" data-id="<%= @line_item.id %>">+ move to wish list</a>
       </div>
     </div>
-  </div>
-</div>
-<div class="grid-20 price">
-  <div class="pricing">
-    <%= @line_item.currency %><% if (@line_item.money_without_discount) : %>
-      <del><%= @line_item.money_without_discount %></del>
-    <% end %><span><%= @line_item.money %></span>
-  </div>
-  <!--
-  <div class="style-notes">
-    <input type="checkbox" name="note"><label>Add Style Notes <span>$4.55</span></label>
-  </div>
-  -->
-</div>
-</li>
+  </td>
+  <td class="column-2">
+    <div class="details-box">
+      <div class="static">
+        <div class="line">
+          <div class="label">Color</div>
+          <div class="value"><%= @line_item.product_color %></div>
+        </div>
+        <div class="line">
+          <div class="label">Size</div>
+          <div class="value"><%= @line_item.product_size %></div>
+        </div>
+        <div class="line">
+          <div class="label">Quantity</div>
+          <div class="value"><%= @line_item.quantity %></div>
+        </div>
+        <div class="line">
+          <div class="label">Estimated Delivery</div>
+          <div class="value"><%= @line_item.product_delivery_time %></div>
+        </div>
+      </div>
+      <div class="edit">
+        <a href="#" class="edit-link btn empty border" data-id="<%= @line_item.id %>" data-quantity="<%= @line_item.quantity %>" data-variant="<%= @line_item.variant_id %>">Edit item</a>
+      </div>
+    </div>
+  </td>
+  <td class="column-3">
+    <div class="pricing">
+      <%= @line_item.money %>
+    </div>
+  </td>
+</tr>

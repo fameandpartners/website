@@ -8,7 +8,7 @@ window.helpers.createProductVariantsSelector = (root) ->
     container:  root,
     target:     null,
 
-    init: (variants, selected) ->
+    init: (variants, preselected) ->
       variantsSelector.variants = variants
       variantsSelector.target = rootElement.find('.section .btn.buy-now')
 
@@ -18,6 +18,9 @@ window.helpers.createProductVariantsSelector = (root) ->
       if window.shopping_cart
         window.shopping_cart.on('item_added',   variantsSelector.cartItemsChangedHandler)
         window.shopping_cart.on('item_removed', variantsSelector.cartItemsChangedHandler)
+
+      if preselected
+        variantsSelector.setPreselectedValues(preselected)
 
       return variantsSelector
 
@@ -37,6 +40,14 @@ window.helpers.createProductVariantsSelector = (root) ->
       variantsSelector.target.data(id: id, error: error_message)
       variant
 
+    setPreselectedValues: (preselected) ->
+      variant = _.findWhere(@variants, preselected)
+      if variant
+        rootElement.find('select#colour').val(variant.color).trigger('chosen:updated')
+        selectedSize = rootElement.find(".section .sizebox .button[data-size='#{ variant.size }']")
+        selectedSize.siblings().removeClass('selected').end().addClass('selected')
+        variantsSelector.onVariantsChanged.call(variantsSelector)
+
     onSizeClickHandler: (e) ->
       # update DOM
       e.preventDefault()
@@ -47,9 +58,9 @@ window.helpers.createProductVariantsSelector = (root) ->
 
     onVariantsChanged: () ->
       variantsSelector.selected.color  = rootElement.find('select#colour').val()
-      selectedSizeElement = rootElement.find(".section .sizebox .button.selected:first")
-      if selectedSizeElement.length > 0
-        variantsSelector.selected.size  = selectedSizeElement.data('size').toString()
+      selectedSize = rootElement.find(".section .sizebox .button.selected:first").data('size')
+      if selectedSize
+        variantsSelector.selected.size = selectedSize.toString()
       else
         variantsSelector.selected.size = null
 

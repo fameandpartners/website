@@ -9,14 +9,15 @@ window.helpers.createVariantsSelectorPopup = () ->
     variantsSelector: null
     initialized: false
 
-    # return hided placeholder
     init: () ->
-      popup.container = $('.edit-line-item.modal').hide()
-      popup.container.find('.close-lightbox').on('click', popup.cancelButtonClickHandler)
-      popup.container.find('.save input.btn').on('click', popup.saveButtonClickHandler)
-      popup.container.find('.overlay').on('click', popup.cancelButtonClickHandler)
+      if !popup.initialized
+        popup.container = window.popups.getModalContainer('Edit product details', 'Save changes')
+        popup.container.find('.close-lightbox').on('click', popup.cancelButtonClickHandler)
+        popup.container.find('.save input.btn').on('click', popup.saveButtonClickHandler)
+        popup.container.find('.overlay').on('click', popup.cancelButtonClickHandler)
+        popup.initialized = true
 
-      return popup.container
+      return popup
   
     # options should contains one of id, product_id, variant_id
     show: (params = {}, eventParams = {}) ->
@@ -61,6 +62,7 @@ window.helpers.createVariantsSelectorPopup = () ->
       result
 
     updateFormHandlers: (variants, variantId) ->
+      popup.container.find('.selectbox').chosen({width: '100%', disable_search: true })
       popup.variantsSelector = window.helpers.createProductVariantsSelector(popup.container)
       popup.variantsSelector.init(variants, { id: variantId })
 
@@ -100,5 +102,7 @@ window.helpers.createVariantsSelectorPopup = () ->
   popup.one     = delegateTo(popup.eventBus, 'one')
   popup.off     = delegateTo(popup.eventBus, 'off')
   popup.trigger = delegateTo(popup.eventBus, 'trigger')
+
+  popup.init()
 
   return popup
