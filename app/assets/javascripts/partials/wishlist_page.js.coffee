@@ -1,4 +1,4 @@
-$('.wishlists_items').ready ->
+$('.users_wishlists_items').ready ->
   page = {
     editPopup: null
 

@@ -12,9 +12,10 @@ $(".spree_orders.edit").ready ->
       orderEditForm.__init.apply(orderEditForm, arguments)
 
     __init: () ->
-      _.bindAll(@, 'onEditItemClickHandler', 'onDeleteItemClickHandler', 'updateItemInList', 'removeItemFromList', 'updateOrderSummary')
+      _.bindAll(@, 'onEditItemClickHandler', 'onDeleteItemClickHandler', 'moveItemToWishlistClickHandler', 'updateItemInList', 'removeItemFromList', 'updateOrderSummary')
       @container.on('click', '.edit-link', @onEditItemClickHandler)
-      @container.on('click', '.remove-item-from-cart', @onDeleteItemClickHandler)
+      @container.on('click', '.buttons .move-to-wishlist', @moveItemToWishlistClickHandler)
+      @container.on('click', '.buttons .remove-item-from-cart', @onDeleteItemClickHandler)
 
       window.shopping_cart.on('item_changed', @updateItemInList)
       window.shopping_cart.on('item_removed', @removeItemFromList)
@@ -23,6 +24,18 @@ $(".spree_orders.edit").ready ->
       e.preventDefault()
       data = $(e.currentTarget).data()
       @showEditPopup(data.id, data.variant, data.quantity)
+
+    moveItemToWishlistClickHandler: (e) ->
+      e.preventDefault()
+      button = $(e.currentTarget)
+      previousText = button.html()
+      button.off('click').addClass('moving').html('moving...')
+      window.shopping_cart.moveProductToWishlist(button.data('id'), {
+        success: (data) ->
+          track.addedToWishlist(data.analytics_label) if data.analytics_label?
+        failure: () ->
+          button.removeClass('moving').html(previousText).on('click', page.moveItemToWishlistClickHandler)
+      })
 
     onDeleteItemClickHandler: (e) ->
       e.preventDefault()
