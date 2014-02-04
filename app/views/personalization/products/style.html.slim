@@ -1,7 +1,7 @@
 javascript:
   window.product_variants = #{{ @product_variants.to_json }};
-/
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
+/
   window.productImagesData = #{{@product.images_json.to_json}};
 
 ruby:
@@ -48,83 +48,25 @@ ruby:
             ' BUY TODAY AND WE'LL DO IT FOR FREE.
         .lookbox
           .row
-            .grid-6
-              .title BOHO LOOK
-              .picture
-                = image_tag '_sample/category-grey-2.jpg'
-              .text
-                h4 WANT US TO SOURCE THE COMPLETE LOOK?
-                p 
-                  =' link_to 'BUY TODAY', '#'
-                  ' AND WE WILL SOURCE FOR FREE!  
-            .grid-6
-              .arrows-line-horizontal
-              ul.price-list
-                li
-                  .number 1.
-                  p PRODUCT NAME
-                  p $555
-                li
-                  .number 2.
-                  p PRODUCT NAME
-                  p $555
-                li
-                  .number 3.
-                  p PRODUCT NAME
-                  p $555
-                li
-                  .number 4.
-                  p PRODUCT NAME
-                  p $555
-                li
-                  .number 5.
-                  p PRODUCT NAME
-                  p $555        
-              .arrows-line-horizontal
-            .grid-6
-              .title EDGY LOOK
-              .category-catalog
-                .row
-                  .grid-6
-                    .picture
-                      = image_tag '_sample/category-grey-2.jpg'
-                  .grid-6
-                    .picture
-                      = image_tag '_sample/category-grey-2.jpg'
-                  .grid-6
-                    .picture
-                      = image_tag '_sample/category-grey-2.jpg'
-                  .grid-6
-                    .picture
-                      = image_tag '_sample/category-grey-2.jpg'            
-              .text
-                h4 WANT US TO SOURCE THE COMPLETE LOOK?
-                p 
-                  =' link_to 'BUY TODAY', '#'
-                  ' AND WE WILL SOURCE FOR FREE!  
-            .grid-6
-              .arrows-line-horizontal
-              ul.price-list
-                li
-                  .number 1.
-                  p PRODUCT NAME
-                  p $555
-                li
-                  .number 2.
-                  p PRODUCT NAME
-                  p $555
-                li
-                  .number 3.
-                  p PRODUCT NAME
-                  p $555
-                li
-                  .number 4.
-                  p PRODUCT NAME
-                  p $555
-                li
-                  .number 5.
-                  p PRODUCT NAME
-                  p $555 
-              .arrows-line-horizontal  
+            - suitable_styles = @product.style_profile.suitable_styles || []
+            - suitable_styles.each do |style|
+              .grid-6
+                .title = "#{style.name.upcase} LOOK"
+                .picture
+                  = image_tag style.image(:product)
+                .text
+                  h4 WANT US TO SOURCE THE COMPLETE LOOK?
+                  p 
+                    span BUY TODAY
+                    ' AND WE WILL SOURCE FOR FREE!  
+              .grid-6
+                .arrows-line-horizontal
+                ul.price-list
+                  - style.accessories.each_with_index do |item, index|
+                    li
+                      .number = "#{index.next}."
+                      p = item[:name]
+                      p = item[:price]
+                .arrows-line-horizontal
     .grid-4
       = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, similar_products: @similar_products }

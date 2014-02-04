@@ -236,6 +236,10 @@ FameAndPartners::Application.routes.draw do
         end
       end
 
+      resources :styles, only: [:index, :update] do
+        put 'update_image', on: :member
+      end
+
       namespace :blog do
         resources :promo_banners
         resources :categories

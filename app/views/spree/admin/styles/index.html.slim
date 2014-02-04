@@ -1,0 +1,89 @@
+css:
+  table.accessories tr.new-item a.remove-item { display: none; }
+
+- content_for :page_title do
+  = "Styles && accessories"
+
+= render :partial => 'spree/admin/shared/product_sub_menu'
+
+#template-upload
+
+table.index.compact
+  colgroup
+     col style="width: 40%;"
+     col style="width: 60%;"
+  thead
+    tr
+      th Image
+      th Accessories
+  tbody
+    - styles.each do |style|
+      tr data-name=( style.name )
+        td
+          h2 = style.name
+          = image_tag(style.image.url(:thumbnail), class: 'style_preview')
+          = form_for style, :url =>  update_image_admin_style_url(style.name), :method => :put do |f|
+            = f.file_field :image, style: 'display: none;'
+        td
+          = form_for style, :url =>  admin_style_url(style.name), method: :put, remote: true do |f|
+            table.accessories
+              colgroup
+                col style="width: 50%;"
+                col style="width: 40%;"
+                col style="width: 10%;"
+              tbody
+                - (style.accessories || []).each do |item|
+                  tr
+                    td = text_field_tag "accessories[][name]", item[:name]
+                    td = text_field_tag "accessories[][price]", item[:price]
+                    td = link_to 'Remove', '#', class: 'remove-item'
+                tr.new-item
+                  td = text_field_tag "accessories[][name]"
+                  td = text_field_tag "accessories[][price]"
+                  td = link_to 'Remove', '#', class: 'remove-item'
+            = f.submit 'save'
+
+javascript:
+  $(function(){
+    $('table.index.compact input[type="file"]').fileupload({
+      acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
+      autoUpload: true,
+      multipart: true,
+      //url: '/admin/styles/update_image',
+      dataType: 'json',
+      type: 'PUT',
+      uploadTemplateId: null,
+      downloadTemplateId: null,
+      formData: function(form) { return [{name: '1', value: '1'}] },
+      singleFileUploads: true,
+      done: function(e, data){
+        row = $('table.index.compact tr[data-name="' + data.result.file.style_name + '"]')
+        row.find('img.style_preview').attr('src', data.result.file.thumbnail_url);
+        return
+      }
+    });
+
+    $('table.index.compact img').on('click', function(e){
+      e.preventDefault()
+      $(e.currentTarget).closest('tr').find('input[type="file"]').click()
+    })
+
+    var addRowToTable = function(row) {
+      new_row = row.clone().find('input').val('').end()
+      row.closest('table.accessories').append(new_row)
+      row.removeClass('new-item')
+    }
+
+    $('table.accessories').on('change', 'tr.new-item input', function(e) {
+      addRowToTable($(e.currentTarget).closest('tr'))
+    });
+
+    $('table.accessories').on('blur', 'tr.new-item input', function(e) {
+      addRowToTable($(e.currentTarget).closest('tr'))
+    });
+
+    $('table.accessories').on('click', 'a.remove-item', function(e) {
+      e.preventDefault()
+      $(e.currentTarget).closest('tr').remove()
+    })
+  })

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140131145806) do
+ActiveRecord::Schema.define(:version => 20140203152220) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1158,6 +1158,17 @@ ActiveRecord::Schema.define(:version => 20140131145806) do
     t.integer  "zone_members_count", :default => 0
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+  end
+
+  create_table "styles", :force => true do |t|
+    t.string   "name"
+    t.text     "accessories"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "taggings", :force => true do |t|

@@ -44,4 +44,17 @@ class ProductStyleProfile < ActiveRecord::Base
       attributes[shape].to_i > 0
     end
   end
+
+  def suitable_style_names
+    sorted_styles = BASIC_STYLES.sort do |x, y|
+      self.attributes[y].to_i <=> self.attributes[x].to_i
+    end
+    sorted_styles.first(2)
+  end
+
+  def suitable_styles
+    suitable_style_names.map do |name|
+      Style.get_by_name(name)
+    end
+  end
 end
