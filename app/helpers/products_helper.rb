@@ -228,4 +228,8 @@ module ProductsHelper
     options[:class] ||= "timeago"
     content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
   end
+
+  def product_designer_notes(product)
+    product.property('designer_notes') || range_taxon_name_for(product)
+  end
 end

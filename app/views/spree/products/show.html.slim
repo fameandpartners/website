@@ -84,11 +84,9 @@ ruby:
                   .picture
                     = link_to '#' do
                       = image_tag mood_item.image.url(:product)
-          / this should be background image + configurable text
           .grid-6    
             .text
-              .inner Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          / statics, accessory product +  song
+              .inner = product_designer_notes(@product)
           .grid-6
             .row
               - @product.moodboard_items.active.song.each do |song_item|

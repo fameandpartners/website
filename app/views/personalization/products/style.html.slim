@@ -33,10 +33,7 @@ ruby:
       = render 'spree/products/breadcrumbs', product: @product, active: :style
       .style-it
         .heading
-          p 
-            ' “LOREM ipsum dolor sit amet, lorem ipsum
-            br
-            ' dolor sit amet, consectetur adipisicing elit.”
+          p = product_designer_notes(@product)
           /= link_to 'BOOK A FREE STYLING SESSION', '#', class: 'btn empty border'
           - if personalised_store_available?
             = link_to 'BOOK A FREE STYLING SESSION', my_boutique_path, class: 'btn empty border'
