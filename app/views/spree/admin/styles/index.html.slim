@@ -15,7 +15,7 @@ table.index.compact
   thead
     tr
       th Image
-      th Accessories
+      th Details
   tbody
     - styles.each do |style|
       tr data-name=( style.name )
@@ -32,14 +32,17 @@ table.index.compact
                 col style="width: 40%;"
                 col style="width: 10%;"
               tbody
+                tr
+                  td colspan="3"
+                    = text_field_tag "style[title]", style.title
                 - (style.accessories || []).each do |item|
                   tr
-                    td = text_field_tag "accessories[][name]", item[:name]
-                    td = text_field_tag "accessories[][price]", item[:price]
+                    td = text_field_tag "style[accessories][][name]", item[:name]
+                    td = text_field_tag "style[accessories][][price]", item[:price]
                     td = link_to 'Remove', '#', class: 'remove-item'
                 tr.new-item
-                  td = text_field_tag "accessories[][name]"
-                  td = text_field_tag "accessories[][price]"
+                  td = text_field_tag "style[accessories][][name]", '', placeholder: 'Product name'
+                  td = text_field_tag "style[accessories][][price]", '', placeholder: '$0.00'
                   td = link_to 'Remove', '#', class: 'remove-item'
             = f.submit 'save'
 
