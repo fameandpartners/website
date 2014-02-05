@@ -21,6 +21,9 @@
 	padding: 40px;
 	margin: 0;
 	z-index: 1;
+	.product-title {
+		font: 400 32px/1 $fontThree;
+	}
 	.form { 
 		margin: 0;
 		@extend .devise-forms;

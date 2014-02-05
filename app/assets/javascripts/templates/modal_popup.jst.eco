@@ -1,13 +1,13 @@
 <div style="display: none;" class="modal popup-placeholder">
   <div class="overlay"></div>
-  <div class="modal-container">
+  <div class="modal-container" style="min-height: 350px; width: 500px; background-color: #fff;">
     <div class="close-lightbox"></div>
     <% if @title: %>
       <div class="edit-details"><div class="modal-title"><%= @title %></div></div>
     <% end %>
     <div class="item"></div>
     <% if @button: %>
-    <div class="save"><input type="submit" value="<%= @button %>" class="btn black"><%= @button %></div>
+      <div class="save submit"><input type="submit" value="<%= @button %>" class="btn black"><%= @button %></div>
     <% end %>
   </div>
 </div>

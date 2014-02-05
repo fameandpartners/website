@@ -12,6 +12,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     init: () ->
       if !popup.initialized
         popup.container = window.popups.getModalContainer('Edit product details', 'Save changes')
+        popup.content = popup.container.find('.modal-container')
         popup.container.find('.close-lightbox').on('click', popup.cancelButtonClickHandler)
         popup.container.find('.save input.btn').on('click', popup.saveButtonClickHandler)
         popup.container.find('.overlay').on('click', popup.cancelButtonClickHandler)
@@ -34,6 +35,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     showModalWindow: (data) ->
       templateArgs = popup.prepareTemplateArgs(data)
       popup.container.show()
+      
       item_html = JST['templates/variants_selector_form'](templateArgs)
       popup.container.find('.item').replaceWith(item_html)
 
@@ -45,8 +47,7 @@ window.helpers.createVariantsSelectorPopup = () ->
       quantity = 1 unless quantity?
       popup.container.find('.value select.quantity-select').val(quantity)
 
-      popup.container.center()
-
+      popup.content.center()
 
     prepareTemplateArgs: (response) ->
       result = {

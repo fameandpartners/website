@@ -1,6 +1,7 @@
-<div class="product-info">
-  <h1 class="product-title"><%= @product.name %></h1>
-  <div class="section">
+<div class="product-info form">
+  <div class="product-title input"><%= @product.name %></div>
+  <div class="input">
+    <label>Select colour</label>
     <select id="colour" class="selectbox" name="size">
       <option value=''>Select colour</option>
       <% for color in @colors: %>
@@ -8,15 +9,16 @@
       <% end %>
     </select>
   </div>
-  <div class="section">
-    <h6 class="info toggle-sizes">SELECT A SIZE</h6>
+  <div class="input">
+    <label>SELECT A SIZE</label>
     <div class="sizebox">
       <% for size in @sizes: %>
         <div class="button" data-size="<%= size %>"><%= size %></div>
       <% end %>
     </div>
   </div>
-  <div class="section">
+  <div class="input">
+    <label>Select quantity</label>
     <select name="quantity" class="quantity-select select2 selectbox">
       <% for quantity in [1..@max_quantity]: %>
         <% if quantity == @quantity: %>
