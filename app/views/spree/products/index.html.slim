@@ -39,7 +39,7 @@
   .fright
     .filter-section
       - options = options_from_collection_for_select(Products::ProductsFilter.available_sort_orders, :first, :second, @searcher.order)
-      = select_tag "product_order", options, class: 'selectbox', prompt: 'Sort By'
+      = select_tag 'product_order', options, class: 'selectbox', prompt: 'Sort By'
 
 .category-catalog.products
   .row
