@@ -24,6 +24,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     show: (params = {}, eventParams = {}) ->
       popup.params = params
       popup.eventParams = eventParams
+
       $.ajax(
         url: urlWithSitePrefix('/product_variants'),
         type: 'GET',
@@ -37,7 +38,7 @@ window.helpers.createVariantsSelectorPopup = () ->
       popup.container.show()
       
       item_html = JST['templates/variants_selector_form'](templateArgs)
-      popup.container.find('.item').replaceWith(item_html)
+      popup.container.find('.item').html(item_html)
 
       preselectedVariant = popup.params.variant_id
       preselectedVariant = data.variants[0].id unless preselectedVariant?
@@ -52,7 +53,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     prepareTemplateArgs: (response) ->
       result = {
         product: response.product.product,
-        sizes: window.getUniqueValues(response.variants, 'size')
+        sizes: window.getUniqueValues(response.variants, 'size').sort (a, b) -> a - b
         colors: window.getUniqueValues(response.variants, 'color')
         max_quantity: 10
       }
@@ -89,14 +90,7 @@ window.helpers.createVariantsSelectorPopup = () ->
         popup.trigger('selected', formData)
         popup.close()
       else
-        popup.showErrorMessage()
-
-    showErrorMessage: (messageText = 'Please, select size and color') ->
-      popup.container.find('.error.message').text(messageText).fadeIn()
-      setTimeout(popup.hideErrorMessage, 3000)
-
-    hideErrorMessage: () ->
-      popup.container.find('.error.message').fadeOut()
+        window.helpers.showErrors(popup.container, 'Please, select size and color')
   }
 
   popup.on      = delegateTo(popup.eventBus, 'on')
