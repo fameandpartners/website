@@ -45,7 +45,7 @@ ruby:
             ' BUY TODAY AND WE'LL DO IT FOR FREE.
         .lookbox
           .row
-            - suitable_styles = @product.style_profile.suitable_styles || []
+            - suitable_styles = @product.style_profile.try(:suitable_styles) || []
             - suitable_styles.each do |style|
               .grid-6
                 .title = "#{style.name.upcase} LOOK"
@@ -62,8 +62,8 @@ ruby:
                   - style.accessories.each_with_index do |item, index|
                     li
                       .number = "#{index.next}."
-                      p = item[:name]
-                      p = item[:price]
+                      p = item['name']
+                      p = item['price']
                 .arrows-line-horizontal
     .grid-4
       = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, similar_products: @similar_products }
