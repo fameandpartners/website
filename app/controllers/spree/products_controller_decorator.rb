@@ -39,8 +39,8 @@ Spree::ProductsController.class_eval do
     set_product_show_page_title(@product)
     @product_properties = @product.product_properties.includes(:property)
 
-    @similar_products = Products::SimilarProducts.new(@product).fetch(3)
     @product_variants = Products::VariantsReceiver.new(@product).available_options
+    @recommended_products = get_recommended_products(limit: 3)
 
     respond_with(@product)
   end

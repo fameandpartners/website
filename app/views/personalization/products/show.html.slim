@@ -79,7 +79,7 @@ ruby:
                     = link_to '+ ADD', '#', class: 'btn empty border'
                     p SHORT VERSION
     .grid-4
-      = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, similar_products: @similar_products }
+      = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }
 
 // <!-- old html -->
 /.m-pixel
