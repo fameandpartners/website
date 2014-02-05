@@ -185,6 +185,30 @@
 	}
 }
 
+.sizebox {
+	font-size: 0;
+	margin-top: 5px;
+	border-left: solid 1px #000;
+	.button {
+		display: inline-block;
+		border: solid 1px #000;
+		border-left: 0;
+		margin-bottom: -1px;
+		vertical-align: top;
+		font-size: $fontSize;
+		height: 36px;
+		text-align: center;
+		width: 14.2857143%;
+		line-height: 36px;
+		cursor: pointer;
+		@include box-sizing(border-box);
+		&.selected {
+			color: #fff;
+			background-color: #000;
+		}
+	}
+}
+
 .bread-crumbs {
 	@include clearfix;
 	background: url('_nav-bg.png');

@@ -1,9 +1,9 @@
 <div style="display: none;" class="modal popup-placeholder">
   <div class="overlay"></div>
-  <div class="modal-container" style="height: 350px; width: 500px; background-color: #fff;">
+  <div class="modal-container" style="min-height: 350px; width: 500px; background-color: #fff;">
     <div class="close-lightbox"></div>
     <div class="edit-details"><div class="modal-title">Modal Popup Title</div></div>
     <div class="item"></div>
-    <div class="save"><input type="submit" value="Send" class="btn black"></div>
+    <div class="save submit"><input type="submit" value="Send" class="btn black"></div>
   </div>
 </div>
