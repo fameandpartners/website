@@ -1,4 +1,4 @@
-$item = $("ul.products-list.grid-container li.product-item.grid-25[data-id=<%= @item.id %>]")
+$item = $("ul.products-list li.product-item[data-id=<%= @item.id %>]")
 $item.fadeOut('slow')
 
 order = <%=raw CartSerializer.new(current_order).to_json %>
