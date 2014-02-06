@@ -14,7 +14,7 @@ $(".spree_products.index").ready ->
         'change', _.bind(productsFilter.update, productsFilter)
       )
       @$el.find('#product_order').on('change', _.bind(productsFilter.updateOrder, productsFilter))
-      page.enableQuickViewLinks(@$el)
+      page.enableQuickView(@$el)
 
       productsFilter.updateContentHandlers()
 

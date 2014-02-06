@@ -18,8 +18,6 @@ $(".spree_products.show").ready ->
 
   page.enableShareButtons()
 
-  #page.enableQuickView($(".quick-view a[data-action='quick-view']"))
-
 #window.populateImagesCarousel = ($wrapper, filterOptions = {}) ->
 #  $wrapper.empty()
 #  hasAny = _(filterOptions).keys().length == 0 || _(window.productImagesData).any (data) ->

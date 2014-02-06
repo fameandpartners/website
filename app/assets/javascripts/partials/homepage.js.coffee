@@ -21,11 +21,6 @@ $(".index.show").ready ->
       height: 532
   )
 
-  # add quick view feature
-  window.helpers.quickViewer.init()
-
-  $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
-
   productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
 
   # show campaign - newsletter popup

@@ -1,6 +1,3 @@
 $('.recommended_dresses.index').ready ->
-
-  window.helpers.quickViewer.init()
-  $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
-
-  productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
+  page.enableQuickView($('.recommended_dresses.index'))
+  page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))

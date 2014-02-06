@@ -7,8 +7,8 @@ window.page = {
       page.variantsSelector = window.helpers.createProductVariantsSelector(parentContainer)
       page.variantsSelector.init(window.product_variants)
 
-  enableQuickView: (quickViewLinks) ->
-    quickViewLinks.on('click', (e) ->
+  enableQuickView: (container, selector = '*[data-action="quick-view"]') ->
+    container.on('click', selector, (e) ->
       e.preventDefault()
       productId = $(e.currentTarget).data("id")
       popup = new popups.ProductQuickView(productId)

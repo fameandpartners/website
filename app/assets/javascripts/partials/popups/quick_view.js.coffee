@@ -7,7 +7,7 @@ window.popups.ProductQuickView = class ProductQuickView
   productImages: []
 
   constructor: (@productId) ->
-    _.bindAll(@, 'hide', 'show', 'showPopup', 'renderImages')
+    _.bindAll(@, 'hide', 'show', 'showModalWindow', 'renderImages')
     _.bindAll(@, 'track', 'trackPopupOpened')
     _.bindAll(@, 'closeButtonClickHandler')
 
@@ -22,7 +22,7 @@ window.popups.ProductQuickView = class ProductQuickView
   # external api
   show: () ->
     @popupDataRequest()
-      .done(@showPopup, @trackPopupOpened)
+      .done(@showModalWindow, @trackPopupOpened)
       .fail(@hide)
   
   hide: () ->
@@ -44,7 +44,7 @@ window.popups.ProductQuickView = class ProductQuickView
       data: $.param({ product_id: @productId })
     )
 
-  showPopup: (response) ->
+  showModalWindow: (response) ->
     @productVariants = response.variants
     @productImages = response.images
     @container.find('.product-page').replaceWith(response.popup_html)
@@ -93,4 +93,5 @@ window.popups.ProductQuickView = class ProductQuickView
     @container.find('.selectbox').chosen(width: '100%', disable_search: true)
 
     selector = window.helpers.createProductVariantsSelector(@container).init(@productVariants)
+    window.selector = selector
     window.helpers.initProductReserver(@container.find('.twin-alert a.twin-alert-link'), @analytics_label, selector)
