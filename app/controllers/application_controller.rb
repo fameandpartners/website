@@ -243,8 +243,17 @@ class ApplicationController < ActionController::Base
     if first_visit?
       country_code = fetch_user_country_code
       self.current_site_version = SiteVersion.by_permalink_or_default(country_code)
+      
       if country_code.eql?('au') && request.get?
-        redirect_to url_for(params.merge(site_version: country_code)) and return
+        # when a new user goes to the homepage and gets redirected to AUS the /orders/populate url appears and is broken
+        # detect if user wanted homepage if yes then redirect specifically to homepage
+        redirect_url = params.merge(site_version: country_code)
+
+        if params[:controller] == "index" && params[:action] == "show"
+          redirect_url = root_path(params.except(:controller, :action).merge(site_version: country_code))
+        end
+        
+        redirect_to url_for(redirect_url) and return
       end
     end
   end
@@ -276,6 +285,7 @@ class ApplicationController < ActionController::Base
     if remote_ip != "127.0.0.1"
       country_code = geoip.country(request.remote_ip).try(:country_code2)
     end
+    
 
     country_code.downcase
   end
