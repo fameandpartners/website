@@ -7,8 +7,8 @@ window.helpers.buildImagesViewer = (rootElement) ->
     currentImages: null
     init: () ->
       rootElement.find('ul#product-images li a').on("click", viewer.onClickHandler)
-      rootElement.find('#photos .big-photo .zoom a').on('click', viewer.showFullImageEventHandler)
-      viewer.showImageFromItem(rootElement.find('ul#product-images li a').first())
+      rootElement.find('#photos .big-photo .zoom .icon-zoom-in').on('click', viewer.showFullImageEventHandler)
+      viewer.showImageFromItem(rootElement.find('ul#product-images li:first a'))
       return viewer
 
     onClickHandler: (e) ->

@@ -10,8 +10,8 @@ window.helpers.quickViewer = {
 
   __init: () ->
     @container = window.popups.getQuickViewModalContainer(null, null)
-    @popupContainer = @container.find('.product-page').first().hide()
-    @overlayContainer = @container.find('.overlay').first().hide()
+    @popupContainer = @container.find('.product-page:first')
+    @overlayContainer = @container.find('.overlay:first')
     @container.on('click', '.close-lightbox', @onCloseButtonHandler)
     @container.on('click', '.overlay', @onCloseButtonHandler)
 
@@ -43,6 +43,7 @@ window.helpers.quickViewer = {
   showPopup: (popup_html, product_variants) ->
     @popupContainer.replaceWith(popup_html)
     @popupContainer = @container.find('.product-page').first()
+    @showProductImages(window.productImagesData) if window.productImagesData
     @overlayContainer.show()
     @popupContainer.show()
     @container.show()
@@ -53,6 +54,9 @@ window.helpers.quickViewer = {
     @popupContainer.hide()
     @overlayContainer.hide()
     @container.hide()
+
+  showProductImages: (images) ->
+    _.where(window.productImagesData, { size: null, color: null }).length
 
   updatePopupHandlers: (product_variants) ->
     window.helpers.enableTabs(helpers.quickViewer.container.find('.tabs'))

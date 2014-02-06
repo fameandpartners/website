@@ -54,7 +54,8 @@ Spree::ProductsController.class_eval do
       popup_html: popup_html,
       variants: @product_variants,
       analytics_label: analytics_label(:product, @product),
-      activities: @activites
+      activities: @activites,
+      images: @product.images_json
     }
   end
 

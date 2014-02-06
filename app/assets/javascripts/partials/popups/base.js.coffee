@@ -15,4 +15,6 @@ window.popups.getQuickViewModalContainer = () ->
   container.addClass('quick-view-mode')
   container.find('.modal-container').addClass('quick-view')
   container.find('.item').replaceWith($("<div class='product-page grid-container'></div>"))
+  container.hide()
+
   container

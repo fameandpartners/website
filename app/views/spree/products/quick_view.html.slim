@@ -1,9 +1,7 @@
-javascript:
-  window.productImagesData = #{{@product.images_json.to_json}};
 ruby:
  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
- color_images  = @product_variants.inject({}){|res, t| res[t[:color].to_s] = t[:image].to_s; res }
+ /color_images  = @product_variants.inject({}){|res, t| res[t[:color].to_s] = t[:image].to_s; res }
  enabled_tabs = ['photos']
  enabled_tabs.push('inspiration') if @product.celebrity_inspiration
  enabled_tabs.push('video') if @product.video_url.present?
@@ -22,27 +20,10 @@ ruby:
           .photos-carousel
             #quick-view-product-images-up.arrow-up
             ul#product-images.carousel-pictures
-              li
+              / this populates with js
+              /li
                 = link_to '#' do
                   = image_tag '_sample/category-grey-2.jpg'
-              li
-                = link_to '#' do
-                  = image_tag '_sample/category-grey-2.jpg'
-              li
-                = link_to '#' do
-                  = image_tag '_sample/category-grey-1.jpg'
-              li
-                = link_to '#' do
-                  = image_tag '_sample/category-grey-2.jpg'
-              li
-                = link_to '#' do
-                  = image_tag '_sample/category-grey-1.jpg'
-              li
-                = link_to '#' do
-                  = image_tag '_sample/category-grey-2.jpg'
-              li
-                = link_to '#' do
-                  = image_tag '_sample/category-grey-2.jpg'            
             #quick-view-product-images-down.arrow-down
           .big-photo
             .zoom 
@@ -96,14 +77,6 @@ ruby:
       .buy-wishlist
         = add_to_bag_link(@product)
         = add_to_wishlist_link(@product, class: 'btn empty border')
-        / - unless true #@product.in_sale?
-        /   span.or-line
-        /     span or
-        /     = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
-        /       i.icon.icon-layby
-        /       ' Free
-        /       = t('words.customization').titleize
-        
 
       .tabs
         ul.tabs-links

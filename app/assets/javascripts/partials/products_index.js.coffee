@@ -14,12 +14,13 @@ $(".spree_products.index").ready ->
         'change', _.bind(productsFilter.update, productsFilter)
       )
       @$el.find('#product_order').on('change', _.bind(productsFilter.updateOrder, productsFilter))
+      page.enableQuickViewLinks(@$el)
 
       productsFilter.updateContentHandlers()
 
     updateContentHandlers: () ->
       # bind quick view
-      @$el.find(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
+      #@$el.find(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
 
       window.addSwitcherToAltImage() if window.addSwitcherToAltImage
       productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))

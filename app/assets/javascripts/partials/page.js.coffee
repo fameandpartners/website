@@ -8,11 +8,12 @@ window.page = {
       page.variantsSelector.init(window.product_variants)
 
   enableQuickView: (quickViewLinks) ->
-    window.helpers.quickViewer.init()
     quickViewLinks.on('click', (e) ->
       e.preventDefault()
       productId = $(e.currentTarget).data("id")
-      window.helpers.quickViewer.showProduct(productId)
+      popup = new popups.ProductQuickView(productId)
+      popup.show()
+      return
     )
 
   enableWhatSizeIam: (link) ->
@@ -44,12 +45,6 @@ window.page = {
       if bigImageUrl?
         bigImageUrl = (location.origin + bigImageUrl) if !bigImageUrl.match(/^https?:\/\//)
         $.fancybox href: bigImageUrl
-
-        # development, remove me
-        setTimeout( ->
-          $('.fancybox-overlay').click()
-          console.log('[FIXME] fancybox popup with large image closed manually by timeout')
-        , 10000)
 
       return false
     )
