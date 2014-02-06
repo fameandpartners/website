@@ -24,6 +24,6 @@ end
 def add_designer_notes_to_products
   default_note = 'Lorem ipsum dolor sit amet, consectetu, integer vel felis sit amet massa conguet.'
   Spree::Product.each do |product|
-    product.set_property('designer_note', default_note)
+    product.set_property('designer_notes', default_note)
   end
 end

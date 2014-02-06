@@ -12,7 +12,7 @@ window.helpers.createProductVariantsSelector = (root) ->
       variantsSelector.variants = variants
       variantsSelector.target = rootElement.find('.section .btn.buy-now')
 
-      rootElement.find(".section .sizebox .button").on('click', variantsSelector.onSizeClickHandler)
+      rootElement.find('.section .sizebox .button').on('click', variantsSelector.onSizeClickHandler)
       rootElement.find('select#colour').on('change', _.bind(variantsSelector.onVariantsChanged, variantsSelector))
 
       if window.shopping_cart
@@ -30,12 +30,12 @@ window.helpers.createProductVariantsSelector = (root) ->
     exportSelectedVariant: (variant) ->
       if ! _.isEmpty(variant)
         id = variant.id
-      else if !_.isEmpty(variantsSelector.selected.size)
+      else if !_.isNull(variantsSelector.selected.size)
         error_message = 'Please select a colour'
       else if !_.isEmpty(variantsSelector.selected.color)
         error_message = 'Please select a size'
       else
-        error_message = 'Please select size and colour'
+        error_message = 'Please, select size and colour'
 
       variantsSelector.target.data(id: id, error: error_message)
       variant
@@ -58,9 +58,9 @@ window.helpers.createProductVariantsSelector = (root) ->
 
     onVariantsChanged: () ->
       variantsSelector.selected.color  = rootElement.find('select#colour').val()
-      selectedSize = rootElement.find(".section .sizebox .button.selected:first").data('size')
+      selectedSize = rootElement.find('.section .sizebox .button.selected:first').data('size')
       if selectedSize
-        variantsSelector.selected.size = selectedSize.toString()
+        variantsSelector.selected.size = selectedSize
       else
         variantsSelector.selected.size = null
 

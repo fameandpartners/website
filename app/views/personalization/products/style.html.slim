@@ -45,10 +45,10 @@ ruby:
             ' BUY TODAY AND WE'LL DO IT FOR FREE.
         .lookbox
           .row
-            - suitable_styles = @product.style_profile.suitable_styles || []
+            - suitable_styles = @product.style_profile.try(:suitable_styles) || []
             - suitable_styles.each do |style|
               .grid-6
-                .title = "#{style.name.upcase} LOOK"
+                .title = style.title
                 .picture
                   = image_tag style.image(:product)
                 .text

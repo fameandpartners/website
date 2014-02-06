@@ -9,21 +9,11 @@ window.helpers.quickViewer = {
     window.helpers.quickViewer.__init.apply(window.helpers.quickViewer, arguments)
 
   __init: () ->
-    if !@popupContainer? and !@overlayContainer?
-      popupPlaceholderHtml = "
-        <div class='quick-view-mode modal popup-placeholder'>
-          <div class='overlay'></div>
-          <div class='quick-view modal-container'>
-            <div class='close-lightbox'></div>
-            <div class='product-page grid-container'></div>
-          </div>
-        </div>"
-      $('#content').append(popupPlaceholderHtml)
-      @container = $('#content .quick-view-mode ').first().hide()
-      @popupContainer = @container.find('.product-page').first().hide()
-      @overlayContainer = @container.find('.overlay').first().hide()
-    # init
-    $('.close-lightbox').on('click', @onCloseButtonHandler)
+    @container = window.popups.getQuickViewModalContainer(null, null)
+    @popupContainer = @container.find('.product-page').first().hide()
+    @overlayContainer = @container.find('.overlay').first().hide()
+    @container.on('click', '.close-lightbox', @onCloseButtonHandler)
+    @container.on('click', '.overlay', @onCloseButtonHandler)
 
   onCloseButtonHandler: (e) ->
     e.preventDefault()
@@ -57,7 +47,6 @@ window.helpers.quickViewer = {
     @popupContainer.show()
     @container.show()
     @movePopupToCenter()
-    @overlayContainer.one('click', @onCloseButtonHandler)
     @updatePopupHandlers(product_variants)
 
   closePopup: () ->

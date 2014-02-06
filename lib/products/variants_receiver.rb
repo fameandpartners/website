@@ -18,7 +18,7 @@ module Products
             available_option[:color] = option_value.name
             available_option[:image] = option_value.image.url(:small_square) if option_value.image?
           elsif option_value.option_type_id == size_option.id
-            available_option[:size] = option_value.name
+            available_option[:size] = Integer(option_value.name) rescue option_value.name
           end
         end
 

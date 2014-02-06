@@ -7,8 +7,7 @@ class Spree::Admin::StylesController < Spree::Admin::BaseController
 
   def update
     style = Style.get_by_name(params[:id])
-    style.accessories = params[:accessories]
-    style.save
+    style.update_attributes(params[:style])
 
     render nothing: true
   end

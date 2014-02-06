@@ -1,5 +1,5 @@
 class Style < ActiveRecord::Base
-  attr_accessible :name, :currency, :accessories
+  attr_accessible :name, :title, :accessories
 
   serialize :accessories, Array
   before_save :prepare_accessories
@@ -15,8 +15,12 @@ class Style < ActiveRecord::Base
     '/assets/_sample/category-grey-2.jpg'
   end
 
+  def title
+    super || "#{self.name.to_s.upcase} LOOK"
+  end
+
   def accessories
-    super || []
+    (super || []).map{|data| ActiveSupport::HashWithIndifferentAccess.new(data) }
   end
 
   def prepare_accessories

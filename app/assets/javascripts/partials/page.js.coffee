@@ -9,7 +9,11 @@ window.page = {
 
   enableQuickView: (quickViewLinks) ->
     window.helpers.quickViewer.init()
-    quickViewLinks.on('click', window.helpers.quickViewer.onShowButtonHandler)
+    quickViewLinks.on('click', (e) ->
+      e.preventDefault()
+      productId = $(e.currentTarget).data("id")
+      window.helpers.quickViewer.showProduct(productId)
+    )
 
   enableWhatSizeIam: (link) ->
     link.fancybox({width: '1000', height: '183'})

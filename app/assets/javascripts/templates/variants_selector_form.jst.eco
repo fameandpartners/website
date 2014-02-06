@@ -9,7 +9,7 @@
       <% end %>
     </select>
   </div>
-  <div class="input">
+  <div class="input section">
     <label>SELECT A SIZE</label>
     <div class="sizebox">
       <% for size in @sizes: %>

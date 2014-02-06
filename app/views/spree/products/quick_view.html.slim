@@ -52,7 +52,6 @@ ruby:
       - if enabled_tabs.include?('video')
         #videos.tab-content
           == product_video(@product, width: 518, height: 330)
-          / .initials = image_tag 'video-initials.png', alt: ''
       - if enabled_tabs.include?('inspiration')
         - celebrity = @product.celebrity_inspiration
         #inspiration.tab-content
@@ -87,7 +86,7 @@ ruby:
               / .color class='#{color}' data-color='#{color}' data-image="#{{color_images[color]}}"
         .hint = t('views.quick_view.notices.color_images').html_safe
       .size-select
-        .label = t('views.quick_view.labels.color')
+        .label = t('views.quick_view.labels.size')
         .select-holder
           select#toggle-selectbox.selectbox name="size"
             option value='' Choose your size
@@ -125,11 +124,7 @@ ruby:
               .desc The body shapes that this dress suits:
               ul
                 - @product.style_profile.suitable_shapes.each do |shape|
-                  li
-                    = link_to spree.products_path(bodyshape: shape) do
-                      - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
-                      .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
-                      .name #{title}
+                  li = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
         #details.tab-content
           .info SKU:  #{@product.sku}
           | Material:
