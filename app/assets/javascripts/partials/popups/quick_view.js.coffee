@@ -59,7 +59,7 @@ window.popups.ProductQuickView = class ProductQuickView
       track.openedQuickView(response.analytics_label)
 
   track: (method_name) ->
-    track_func = (e) ->
+    track_func = (e) =>
       if !_.isEmpty(@analytics_label)
         track[method_name].call(window, @analytics_label)
     return track_func
@@ -92,6 +92,10 @@ window.popups.ProductQuickView = class ProductQuickView
 
     @container.find('.selectbox').chosen(width: '100%', disable_search: true)
 
-    selector = window.helpers.createProductVariantsSelector(@container).init(@productVariants)
+    selector = window.helpers.createProductVariantsSelector(@container)
+    selector.sizeInput = new inputs.ChosenSelector(@container.find('select#toggle-selectbox'))
+    selector.target = @container.find('.buy-wishlist .btn.buy-now')
+    selector.init(@productVariants)
+
     window.selector = selector
     window.helpers.initProductReserver(@container.find('.twin-alert a.twin-alert-link'), @analytics_label, selector)

@@ -59,21 +59,17 @@ ruby:
       .colors-choser
         .label = t('views.quick_view.labels.color')
         .select-holder
-          select.selectbox name="color"
-            option value='' Choose a color:
-            - colors.each do |color|
-              option{value=color} = color
-              / .color class='#{color}' data-color='#{color}' data-image="#{{color_images[color]}}"
+          - options = options_from_collection_for_select(colors, :to_s, :to_s)
+          = select_tag :colour, options, class: 'selectbox', name: 'color', include_blank: true, prompt: 'Select colour', data: { select: 'colour' }
         .hint = t('views.quick_view.notices.color_images').html_safe
       .size-select
         .label = t('views.quick_view.labels.size')
         .select-holder
-          select#toggle-selectbox.selectbox name="size"
-            option value='' Choose your size
-            - sizes.each do |size|
-              option{value=size} = size
+          - options = options_from_collection_for_select(sizes, :to_s, :to_s)
+          = select_tag :size, options, id: 'toggle-selectbox', class: 'selectbox', include_blank: true, prompt: 'Choose your size', data: { select: 'size' }
         = link_to 'What size am I?', '#what-size', class: 'hint toggle-sizes'
       .buy-wishlist
+        .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
         = add_to_bag_link(@product)
         = add_to_wishlist_link(@product, class: 'btn empty border')
 

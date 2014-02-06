@@ -3,69 +3,65 @@ window.helpers or= {}
 window.helpers.createProductVariantsSelector = (root) ->
   rootElement = root
   variantsSelector = {
-    selected:   { color: null, size: null },
-    variants:   null,
-    container:  root,
-    target:     null,
+    selected:   { color: null, size: null }
+    variants:   null
+    container:  root
+    target:     null
+    sizeInput:  null
+    colorInput: null
 
-    init: (variants, preselected) ->
-      variantsSelector.variants = variants
-      variantsSelector.target = rootElement.find('.section .btn.buy-now')
-
-      rootElement.find('.section .sizebox .button').on('click', variantsSelector.onSizeClickHandler)
-      rootElement.find('select#colour').on('change', _.bind(variantsSelector.onVariantsChanged, variantsSelector))
-
-      if window.shopping_cart
-        window.shopping_cart.on('item_added',   variantsSelector.cartItemsChangedHandler)
-        window.shopping_cart.on('item_removed', variantsSelector.cartItemsChangedHandler)
-
-      if preselected
-        variantsSelector.setPreselectedValues(preselected)
-
+    init: () ->
+      variantsSelector.__init.apply(variantsSelector, arguments)
       return variantsSelector
 
-    cartItemsChangedHandler: (e, data) ->
-      variantsSelector.onVariantsChanged.call(variantsSelector)
+    __init: (variants, preselected) ->
+      _.bindAll(@, 'onVariantsChanged')
+      @variants = variants
+      @target or= rootElement.find('.section .btn.buy-now')
+
+      @sizeInput  or= new inputs.ButtonsBoxSelector(@container.find('.section .sizebox'), '.button')
+      @colorInput or= new inputs.ChosenSelector(@container.find('select#colour'))
+
+      @sizeInput.on('change',  @onVariantsChanged)
+      @colorInput.on('change', @onVariantsChanged)
+
+      if window.shopping_cart
+        window.shopping_cart.on('item_added',   @onVariantsChanged)
+        window.shopping_cart.on('item_removed', @onVariantsChanged)
+
+      if preselected
+        @setPreselectedValues(preselected)
+
+      return @
 
     exportSelectedVariant: (variant) ->
+      target_data = { id: null, error: null }
       if ! _.isEmpty(variant)
-        id = variant.id
+        target_data.id = variant.id
       else if !_.isNull(variantsSelector.selected.size)
-        error_message = 'Please select a colour'
+        target_data.error = 'Please select a colour'
       else if !_.isEmpty(variantsSelector.selected.color)
-        error_message = 'Please select a size'
+        target_data.error = 'Please select a size'
       else
-        error_message = 'Please, select size and colour'
+        target_data.error = 'Please, select size and colour'
 
-      variantsSelector.target.data(id: id, error: error_message)
+      variantsSelector.target.data(target_data)
       variant
 
     setPreselectedValues: (preselected) ->
       variant = _.findWhere(@variants, preselected)
       if variant
-        rootElement.find('select#colour').val(variant.color).trigger('chosen:updated')
-        selectedSize = rootElement.find(".section .sizebox .button[data-size='#{ variant.size }']")
-        selectedSize.siblings().removeClass('selected').end().addClass('selected')
-        variantsSelector.onVariantsChanged.call(variantsSelector)
-
-    onSizeClickHandler: (e) ->
-      # update DOM
-      e.preventDefault()
-      $(e.target).siblings().removeClass('selected')
-      $(e.target).addClass('selected')
-      # update selected data
-      variantsSelector.onVariantsChanged.call(variantsSelector)
+        @colorInput.val(variant.color)
+        @sizeInput.val(varaint.size)
+        @onVariantsChanged()
 
     onVariantsChanged: () ->
-      variantsSelector.selected.color  = rootElement.find('select#colour').val()
-      selectedSize = rootElement.find('.section .sizebox .button.selected:first').data('size')
-      if selectedSize
-        variantsSelector.selected.size = selectedSize
-      else
-        variantsSelector.selected.size = null
-
-      variant = @getSelectedVariant()
-      @exportSelectedVariant(variant)
+      @selected = {
+        color: @colorInput.val(),
+        size: @sizeInput.val()
+      }
+      @selected.size = parseInt(@selected.size) if @selected.size
+      @exportSelectedVariant(@getSelectedVariant())
 
     getSelectedVariant: () ->
       variant = _.findWhere(@variants, @selected)
