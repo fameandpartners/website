@@ -29,10 +29,9 @@ window.popups.newsletterModalPopup = class newsletterModalPopup
   updatePosition: () =>
     $container = @scope.find('.modal-container')
 
-    actual = $container.position().top
-    expected = $(window).scrollTop() + ($(window).height() - $container.outerHeight()) / 2
+    # actual = $container.position().top
+    # expected = $(window).scrollTop() + ($(window).height() - $container.outerHeight()) / 2
 
-    correction = if expected > actual then expected - actual else (actual - expected) * -1
+    # correction = if expected > actual then expected - actual else (actual - expected) * -1
 
-    $container.css
-      'margin-top': correction + 'px'
+    $container.center()
