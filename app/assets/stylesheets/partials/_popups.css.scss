@@ -266,3 +266,46 @@
 		}
 	}
 }
+
+.campaign-newsletter {
+	.modal-container {
+		padding: 0;
+		width: 670px;
+		height: 450px;
+		background: url('_popups/dolly-background.jpg') no-repeat;
+	}
+	.modal-form {
+		float: right;
+		width: 360px;
+		margin: 30px 56px 0 0;
+		input[type="email"] {
+			width: 280px;
+			vertical-align: top;
+			margin-right: 13px;
+		}
+	}
+	.title-join {
+		text-align: center;
+		font: 400 78px/0.9 $fontThree;
+		margin: 30px 0;
+	}
+	.campaign-desc {
+		font: italic 400 18px/1.2 $fontTwo;
+		text-transform: none;
+		padding: 20px 0;
+		color: #333;
+		border-top: solid 1px #333;
+		border-bottom: solid 1px #333;
+		text-align: center;
+		margin-bottom: 40px;
+	}
+	.price-tag {
+		width: 105px;
+		height: 105px;
+		display: block;
+		position: absolute;
+		top: 300px;
+		left: 140px;
+		background: url('_popups/newsletter-20-to-spend.png') no-repeat;
+	}
+}

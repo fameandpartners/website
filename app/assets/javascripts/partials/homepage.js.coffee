@@ -31,8 +31,11 @@ $(".index.show").ready ->
   # show campaign - newsletter popup
   if ($(".modal.campaign-newsletter.hide").length > 0)
     if $.cookie('newsletter_mp') != 'hide'
+      $popupWrapper = $(".campaign-newsletter")
+      $popupContent = $popupWrapper.find('.modal-container')
       popup = new window.popups.newsletterModalPopup()
-      popup.initialize($(".modal.campaign-newsletter.hide").first())
+      popup.initialize($popupWrapper.first())
       popup.show()
+      $popupContent.center()
       window.newsletterModalPopup = popup
       popup
