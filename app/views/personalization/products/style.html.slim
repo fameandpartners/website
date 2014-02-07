@@ -33,7 +33,9 @@ ruby:
       = render 'spree/products/breadcrumbs', product: @product, active: :style
       .style-it
         .heading
-          p = product_designer_notes(@product)
+          - if (notes = @product.property('designer_notes')).present?
+            p = notes
+
           /= link_to 'BOOK A FREE STYLING SESSION', '#', class: 'btn empty border'
           - if personalised_store_available?
             = link_to 'BOOK A FREE STYLING SESSION', my_boutique_path, class: 'btn empty border'

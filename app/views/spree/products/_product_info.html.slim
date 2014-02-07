@@ -1,5 +1,5 @@
 .product-info
-  h6 = range_taxon_name_for(product)
+  h6 = link_to range_taxon_name_for(product), collection_product_path(product)
   h1.product-title
     = product.name
     span.price = price_for_product(product)
@@ -51,13 +51,13 @@
             li Sale Items- Up to 30% off: 14 days from date of shipment  
             li Sale Items- 31%- 49% off: 7 days from date of shipment 
             li Sale Items- > 50%: No Returns 
-      - if products.present?
-        li.opened 
+      - if defined?(products)
+        li 
           .title recommended
           .text
             .category-catalog
               .row
-                - similar_products.each do |product|
+                - products.each do |product|
                   .grid-4
                     = link_to collection_product_path(product) do
                       = product_image_tag(product)

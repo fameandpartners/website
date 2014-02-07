@@ -34,10 +34,6 @@ module Personalization
     end
 
     def style
-      unless spree_user_signed_in?
-        return redirect_to personalization_path
-      end
-      
       @product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
 
       set_product_show_page_title(@product, "Custom Formal Dress ")

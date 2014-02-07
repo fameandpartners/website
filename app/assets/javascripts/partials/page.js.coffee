@@ -30,8 +30,25 @@ window.page = {
     )
 
   enableAccordeonBars: (elements) ->
+    hide = (elements) ->
+      elements.find('.text').slideUp(500, () ->
+        $(this).hide().closest('li').removeClass('opened')
+      )
+
+    show = (elements) ->
+      elements.find('.text').slideDown(500, () ->
+        $(this).show().closest('li').addClass('opened')
+      )
+
     elements.on('click', (e) ->
-      $(e.target).closest('li').toggleClass('opened')
+      e.preventDefault()
+      target = $(e.target).closest('li')
+
+      if target.is('.opened')
+        hide(target.siblings('.opened').andSelf())
+      else
+        show(target)
+        hide(target.siblings('.opened'))
     )
 
   enableWishlistLinks: (links) ->

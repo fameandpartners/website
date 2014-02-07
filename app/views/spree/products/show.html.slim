@@ -4,18 +4,11 @@ css:
 javascript:
   window.product_variants = #{{ @product_variants.to_json }};
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
-  //window.productImagesData = #{{@product.images_json.to_json}};
+/  window.productImagesData = #{{@product.images_json.to_json}};
 
 ruby:
  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
-
-/
- sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
- color_images  = @product_variants.inject({}){|res, t| res[t[:color].to_s] = t[:image].to_s; res }
- enabled_tabs = ['photos']
- enabled_tabs.push('inspiration') if @product.celebrity_inspiration
- enabled_tabs.push('video') if @product.video_url.present?
 
 ruby:
   image = @product.images.first
@@ -84,9 +77,10 @@ ruby:
                   .picture
                     = link_to '#' do
                       = image_tag mood_item.image.url(:product)
-          .grid-6    
-            .text
-              .inner = product_designer_notes(@product)
+          - if (notes = @product.property('designer_notes')).present?
+            .grid-6
+              .text
+                .inner = notes
           .grid-6
             .row
               - @product.moodboard_items.active.song.each do |song_item|
