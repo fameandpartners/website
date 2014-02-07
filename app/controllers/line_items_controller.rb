@@ -119,7 +119,7 @@ class LineItemsController < Spree::StoreController
   def destroy
     line_item = current_order.line_items.where(variant_id: params[:variant_id]).first
 
-    if true #line_item.destroy
+    if line_item.destroy
       current_order.reload
       render json: { order: CartSerializer.new(current_order).to_json}, status: :ok
     else

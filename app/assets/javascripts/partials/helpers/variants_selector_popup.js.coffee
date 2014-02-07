@@ -47,8 +47,8 @@ window.helpers.createVariantsSelectorPopup = () ->
       quantity = popup.params.quantity
       quantity = 1 unless quantity?
       popup.container.find('.value select.quantity-select').val(quantity)
-
-      popup.content.center()
+      popup.container.center()
+      popup
 
     prepareTemplateArgs: (response) ->
       result = {

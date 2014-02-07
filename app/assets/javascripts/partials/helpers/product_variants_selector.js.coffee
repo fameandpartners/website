@@ -52,7 +52,7 @@ window.helpers.createProductVariantsSelector = (root) ->
       variant = _.findWhere(@variants, preselected)
       if variant
         @colorInput.val(variant.color)
-        @sizeInput.val(varaint.size)
+        @sizeInput.val(variant.size)
         @onVariantsChanged()
 
     onVariantsChanged: () ->
