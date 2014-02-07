@@ -120,9 +120,8 @@
 	}
 	.product-info {
 		padding: 30px 0 0 10px;
-		.name {
-			font: 300 30px/1.1 $fontFive;		
-		}
+		.name { font: 300 30px/1.1 $fontFive;}
+		.tabs-links li + li { margin-left: 2px;}
 		.price-delivery {
 			color: $pinkColor;
 			margin-bottom: 10px;

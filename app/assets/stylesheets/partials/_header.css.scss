@@ -354,6 +354,8 @@
 	@include clearfix;
 	margin: 5px 0;
 	font-size: 0;
+	position: relative;
+	z-index: 19;
 	li {
 		font-size: $fontSize;
 		display: inline-block;
