@@ -4,8 +4,8 @@
     = product.name
     span.price = price_for_product(product)
   .section  
-    - options = options_from_collection_for_select(colors, :to_s, :to_s)
-    = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour', data: { select: 'colour' }
+    - options = color_options_for_select(colors)
+    = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'
   .section
     h6.info
      ' SELECT A SIZE 

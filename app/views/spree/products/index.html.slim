@@ -33,7 +33,7 @@
       = select_tag :bodyshape, options, class: 'selectbox', prompt: 'Body Shape'
 
     .filter-section
-      - options = options_from_collection_for_select(available_product_colors, :name, :presentation, @searcher.selected_color_name)
+      - options = color_options_for_select_from_options_values(available_product_colors)
       = select_tag :colour, options, class: 'selectbox', prompt: 'Colour'
 
   .fright
