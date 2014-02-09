@@ -4,8 +4,8 @@
     <label>Select colour</label>
     <select id="colour" class="selectbox" name="size">
       <option value=''>Select colour</option>
-      <% for color in @colors: %>
-        <option value='<%= color %>'><%= color %></option>
+      <% for name in _.keys(@colors): %>
+        <option style="background-color: <%= @colors[name] %>" value='<%= name %>'><%= name %></option>
       <% end %>
     </select>
   </div>

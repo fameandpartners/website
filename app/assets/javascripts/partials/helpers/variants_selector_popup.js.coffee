@@ -54,7 +54,7 @@ window.helpers.createVariantsSelectorPopup = () ->
       result = {
         product: response.product.product,
         sizes: window.getUniqueValues(response.variants, 'size').sort (a, b) -> a - b
-        colors: window.getUniqueValues(response.variants, 'color')
+        colors: popup.getColorsMap(response.variants)
         max_quantity: 10
       }
       if popup.params.quantity
@@ -91,6 +91,13 @@ window.helpers.createVariantsSelectorPopup = () ->
         popup.close()
       else
         window.helpers.showErrors(popup.container, 'Please, select size and color')
+
+    getColorsMap: (variants) ->
+      map = {}
+      _.each(variants, (variant) ->
+        map[variant.color] = variant.color_code
+      )
+      map
   }
 
   popup.on      = delegateTo(popup.eventBus, 'on')

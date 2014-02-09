@@ -59,7 +59,7 @@ ruby:
       .colors-choser
         .label = t('views.quick_view.labels.color')
         .select-holder
-          - options = options_from_collection_for_select(colors, :to_s, :to_s)
+          - options = color_options_for_select(colors)
           = select_tag :colour, options, class: 'selectbox', name: 'color', include_blank: true, prompt: 'Select colour', data: { select: 'colour' }
         .hint = t('views.quick_view.notices.color_images').html_safe
       .size-select
