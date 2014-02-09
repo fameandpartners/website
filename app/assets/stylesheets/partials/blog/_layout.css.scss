@@ -426,3 +426,25 @@
 		}
 	}
 }
+
+.blog-post {
+	.post-title {
+		font: 400 32px/1 $cinzelBold;
+		color: $pinkColor;
+	}
+	.post-meta {
+		margin: 30px 0 20px;
+		.date {
+			font: 400 32px/1 $fontThree;
+			text-transform: none;
+		}
+		.author {
+			font-size: 16px;
+			margin-top: 10px;
+		}
+	}
+	.post-content {
+		font: 400 18px/1.2 $sourceLight;
+		text-transform: none;
+	}
+}
