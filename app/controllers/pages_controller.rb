@@ -14,24 +14,29 @@ class PagesController < Spree::StoreController
   end
 
   def search
-    query_string = params[:q]
+    @query_string = params[:q]
 
-    @products = Tire.search('spree_products', :load => { :include => :master }) do
-      query do
-        string Tire::Utils.escape(query_string), :default_operator => 'AND' , :use_dis_max => true
-      end
-      filter :bool, :must => {
-        :term => {
-          :deleted => false
+    if @query_string.present?
+      query_string = @query_string
+      @products = Tire.search('spree_products', :load => { :include => :master }) do
+        query do
+          string Tire::Utils.escape(query_string), :default_operator => 'AND' , :use_dis_max => true
+        end
+        filter :bool, :must => {
+          :term => {
+            :deleted => false
+          }
         }
-      }
-      filter :exists, :field => :available_on
-      filter :bool, :should => {
-        :range => {
-          :available_on => { :lte => Time.now }
+        filter :exists, :field => :available_on
+        filter :bool, :should => {
+          :range => {
+            :available_on => { :lte => Time.now }
+          }
         }
-      }
-    end.results.results
+      end.results.results
+    else
+      @products = []
+    end
   end
 
   def fb_auth
