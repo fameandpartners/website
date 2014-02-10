@@ -16,6 +16,9 @@ $(".spree_products.show").ready ->
   page.enableImageZoomButtons($("a[data-action='show-large-image']"))
   page.enableSoundCloudSongPlayer($("a[data-action=soundcloud]"))
 
+  # sync video iframe height with images height
+  $('.grid-6 .product.picture iframe').height($('.grid-6 .picture img').height())
+
 #window.populateImagesCarousel = ($wrapper, filterOptions = {}) ->
 #  $wrapper.empty()
 #  hasAny = _(filterOptions).keys().length == 0 || _(window.productImagesData).any (data) ->

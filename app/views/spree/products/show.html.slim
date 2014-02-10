@@ -44,7 +44,7 @@ ruby:
           - if @product.images.present?
             - @product.images.each do |image|
               .grid-6
-                .picture
+                .picture.product
                   = image_tag(image.attachment.url(:large), title: @product.name)
                   .popup
                     .fright
@@ -61,18 +61,14 @@ ruby:
           - if @product.video_url.present?
             .grid-6
               .picture
-                == product_video(@product)
-                /.initials = image_tag 'video-initials.png', width: 360, height: 480, alt: ''
-                / .popup
-                /   .fleft = link_to 'play video', '#'
+                == product_video(@product, width: '100%', height: '481')
           / moodboard
           .grid-6
             .row
               - @product.moodboard_items.active.moodboard.each do |mood_item|
                 .grid-6
                   .picture
-                    = link_to '#' do
-                      = image_tag mood_item.image.url(:product)
+                    = image_tag mood_item.image.url(:product)
           - if (notes = @product.property('designer_notes')).present?
             .grid-6
               .text
