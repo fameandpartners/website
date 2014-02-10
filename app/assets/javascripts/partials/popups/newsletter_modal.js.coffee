@@ -27,11 +27,4 @@ window.popups.newsletterModalPopup = class newsletterModalPopup
     @hide() if event.which is 27
 
   updatePosition: () =>
-    $container = @scope.find('.modal-container')
-
-    # actual = $container.position().top
-    # expected = $(window).scrollTop() + ($(window).height() - $container.outerHeight()) / 2
-
-    # correction = if expected > actual then expected - actual else (actual - expected) * -1
-
-    $container.center()
+    @scope.find('.modal-container').center()

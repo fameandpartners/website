@@ -198,5 +198,20 @@ $(function() {
     }
   });
 
+  // TODO Need to refactor to new popup style
+  window.showNewsletterPopup = function (event) {
+    if (event != undefined) event.preventDefault();
+
+    $popupWrapper = $(".campaign-newsletter");
+    $popupContent = $popupWrapper.find('.modal-container');
+    popup = new window.popups.newsletterModalPopup();
+    popup.initialize($popupWrapper.first());
+    popup.show();
+    $popupContent.center();
+    window.newsletterModalPopup = popup;
+    return popup;
+  }
+
+  $('a.btn.newsletter').click(showNewsletterPopup);
 });
 
