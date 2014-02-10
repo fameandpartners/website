@@ -12,7 +12,7 @@
     = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
 
 .category-header
-  h2
+  h1
     span
       em = @page_info[:banner_title]
   p 
@@ -33,7 +33,7 @@
       = select_tag :bodyshape, options, class: 'selectbox', prompt: 'Body Shape'
 
     .filter-section
-      - options = color_options_for_select_from_options_values(available_product_colors)
+      - options = color_options_for_select_from_options_values(available_product_colors, @searcher.selected_color_name)
       = select_tag :colour, options, class: 'selectbox', prompt: 'Colour'
 
   .fright

@@ -234,13 +234,13 @@ module ProductsHelper
     color_options_for_select_from_options_values(color_option_values)
   end
 
-  def color_options_for_select_from_options_values(color_option_values)
+  def color_options_for_select_from_options_values(color_option_values, selected = nil)
     options_for_select(color_option_values.map do |option_value|
       [
         option_value.presentation, 
         option_value.name,
         class: "color #{option_value.name}", style: "background-color: #{option_value.value}"
       ]
-    end)
+    end, selected)
   end
 end
