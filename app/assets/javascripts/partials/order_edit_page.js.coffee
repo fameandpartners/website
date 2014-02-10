@@ -65,6 +65,8 @@ $(".spree_orders.edit").ready ->
         table = @container.find("table.cart-table")
         emptyCartHtml = @emptyCartTemplate()
         table.fadeOut('slow', () -> table.replaceWith(emptyCartHtml).hide().fadeIn('slow'))
+        @container.find('.cart-summary').fadeOut('slow', () -> $(this).remove())
+        @container.find('.continue-buy').fadeOut('slow', () -> $(this).remove())
       else
         @container.find("table.cart-table tr[data-id='#{data.id}']").slideToggle('slow')
       @updateOrderSummary(data.cart)

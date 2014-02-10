@@ -1,10 +1,8 @@
-<div class="empty-box" data-hook="empty_cart">
+<div class="empty-cart" data-hook="empty_cart">
   <p>
-    Your shopping bag is empty. 
-    <br />
-    Browse for formal dresses now.
+    YOUR CART IS EMPTY
   </p>
   <p>
-    <a href="<%= getSiteVersionPrefix() %>/collection" class="btn mid empty border">Our Dress Collection</a>
+    <a href="<%= getSiteVersionPrefix() %>/collection" class="button continue">Continue shopping</a>
   </p>
 </div>

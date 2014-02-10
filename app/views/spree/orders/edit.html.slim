@@ -28,14 +28,14 @@
             td.column-1
               .product-info
                 .image
-                  = link_to product_image(product, itemprop: "image", width: 136, height: 200, alt: product.name), collection_product_path(product)
+                  = link_to product_image(product, itemprop: 'image', width: 136, height: 200, alt: product.name), collection_product_path(product)
                 .desc
                   .name = link_to product.name, collection_product_path(product), target: 'blank'
                   .text = line_item_description(variant)
                 .buttons
                   = link_to '#', data: { id: variant.id }, class: 'remove-item-from-cart  btn empty border' do
                     span.icon-trash
-                  = product_move_to_wishlist_link(variant, title: "Move to wishlist")
+                  = product_move_to_wishlist_link(variant, title: 'Move to wishlist')
             td.column-2
               .details-box
                 .static
@@ -71,7 +71,7 @@
                     = link_to 'Edit item', '#', class: 'edit-link btn empty border', data: link_data
             td.column-3
               .pricing
-                = current_order.currency
+                =' current_order.currency
                 = price_for_line_item(line_item)    
 
     .cart-summary

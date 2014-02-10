@@ -13,8 +13,7 @@
         <div class="text"><%= @line_item.product_description %></div>
       </div>
       <div class="buttons">
-        <a href="#" class="remove-item-from-cart  btn empty border" data-id="<%= @line_item.id %>"><span class="icon-trash"></span></a>
-        <a href="#" class="move-to-wishlist btn empty border" data-id="<%= @line_item.id %>">+ move to wish list</a>
+        <a href="#" class="remove-item-from-cart btn empty border" data-id="<%= @line_item.variant_id %>"><span class="icon-trash"></span></a><a href="#" class="move-to-wishlist btn empty border" data-id="<%= @line_item.variant_id %>">+ move to wish list</a>
       </div>
     </div>
   </td>
@@ -45,7 +44,7 @@
   </td>
   <td class="column-3">
     <div class="pricing">
-      <%= @line_item.money %>
+      <%= @order.currency %> <%= @line_item.money %>
     </div>
   </td>
 </tr>
