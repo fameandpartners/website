@@ -1,13 +1,14 @@
-.wrap
-  .page-name
-    .inner
-      h1.title
-        em Search
-        span Results
+.wrap.page-static
+  h1.block-title Search Results
 
-  ul.products-list.grid-container
-    - @products.each do |product|
-      = render 'spree/products/product', product: product
+- if @query_string.blank?
+  p Search query should not be blank
+- elsif @products.present?
+  .category-catalog.products
+    .row
+      = render(@products)
+- else
+  p Sorry, no dresses match your criteria
 
 javascript: 
   track.search('#{{j analytics_label(:search_query, params[:q]) }}');
