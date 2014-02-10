@@ -8,5 +8,13 @@ class ProductCustomisationValue < ActiveRecord::Base
     mini: '48x48>', small: '100x100>', product: '240x240>', large: '600x600>'
   }
 
-  attr_accessible :customisation_value_id, :image
+  attr_accessible :customisation_value_id, :image, :price
+
+  def price
+    (read_attribute(:price) || self.customisation_value.price).to_f
+  end
+
+  def display_price
+    Spree::Money.new(price)
+  end
 end

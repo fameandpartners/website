@@ -94,16 +94,33 @@ class LineItemPersonalization < ActiveRecord::Base
   # calculate additional cost
   #   - custom color costs addional 16$ in current currency
   def recalculate_price
-    self.price = 0.0
-    self.price += 16.0 if !basic_color?
-    self.price
+    self.price = calculate_price
+  end
+
+  def calculate_price
+    result = 0.0
+    result += 16.0 if !basic_color?
+    product_customisation_values.each do |product_customisation|
+      result += product_customisation.price
+    end
+    result
   rescue
-    self.price = 0.0
+    result
   end
 
   def basic_color?
     return false if product.blank? || color.blank?
 
     product.basic_colors.where(id: color_id).exists?
+  end
+
+  def product_customisation_values
+    CustomisationValue.where(id: customization_value_ids).map do |customisation_value|
+      product_customisation_type = ProductCustomisationType.where(
+        product_id: self.product_id,
+        customisation_type_id: customisation_value.customisation_type_id
+      ).first
+      product_customisation_type.product_customisation_values.where(customisation_value_id: customisation_value.id).includes(:customisation_value).first
+    end
   end
 end

@@ -28,6 +28,7 @@
         <tr>
           <th colspan="2"><%= t(:name) %></th>
           <th><%= t(:display) %></th>
+          <th><%= t(:price) %></th>
           <th><%= t(:image) %></th>
           <th class="actions"></th>
         </tr>
@@ -35,7 +36,7 @@
       <tbody id="customisation_values">
         <% if @customisation_type.customisation_values.empty? %>
           <tr id="none" data-hook="customisation_none" class="<%= cycle('odd', 'even')%>">
-            <td colspan="2"><%= t(:none) %></td>
+            <td colspan="5"><%= t(:none) %></td>
             <td class="actions"></td>
           </tr>
         <% else %>
