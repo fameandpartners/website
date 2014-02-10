@@ -103,31 +103,35 @@ module Products
                 script: %q{
                   int intersection_size = 0;
 
-                  for ( int i = 0; i < color_ids.size(); i++ ) {
-                    color_id = color_ids[i];
+                  if (doc.containsKey('viewable_color_ids')) {
+                    for ( int i = 0; i < color_ids.size(); i++ ) {
+                      color_id = color_ids[i];
 
-                    foreach( viewable_color_id : doc['viewable_color_ids'].values ) {
-                      if ( viewable_color_id == color_id ) {
-                        intersection_size += 1;
+                      foreach( viewable_color_id : doc['viewable_color_ids'].values ) {
+                        if ( viewable_color_id == color_id ) {
+                          intersection_size += 1;
+                        }
                       }
-                    }
 
-                    if ( intersection_size > 0 ) {
-                      return color_ids.size() + color_ids.size() - i;
+                      if ( intersection_size > 0 ) {
+                        return color_ids.size() + color_ids.size() - i;
+                      }
                     }
                   }
 
-                  for ( int i = 0; i < color_ids.size(); i++ ) {
-                    color_id = color_ids[i];
+                  if (doc.containsKey('color_ids')) {
+                    for ( int i = 0; i < color_ids.size(); i++ ) {
+                      color_id = color_ids[i];
 
-                    foreach( doc_color_id : doc['color_ids'].values ) {
-                      if ( doc_color_id == color_id ) {
-                        intersection_size += 1;
+                      foreach( doc_color_id : doc['color_ids'].values ) {
+                        if ( doc_color_id == color_id ) {
+                          intersection_size += 1;
+                        }
                       }
-                    }
 
-                    if ( intersection_size > 0 ) {
-                      return color_ids.size() - i;
+                      if ( intersection_size > 0 ) {
+                        return color_ids.size() - i;
+                      }
                     }
                   }
 
