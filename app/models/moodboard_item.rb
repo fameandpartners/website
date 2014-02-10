@@ -23,11 +23,11 @@ class MoodboardItem < ActiveRecord::Base
   def default_image_for_item_type
     case item_type.to_s
     when 'link'
-      '/images/original/missing.png'
+      '/assets/_sample/category-grey-1.jpg'
     when 'song'
-      '/images/_sample/category-grey-2.jpg'
+      '/assets/_sample/category-grey-2.jpg'
     else
-      '/images/original/missing.png'
+      '/assets/_sample/category-grey-3.jpg'
     end
   end
 
