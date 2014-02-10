@@ -17,18 +17,19 @@
       track.conversion('sign_up')
     })
 
-.content-offer
-  .title
-    ' GET YOUR 
-    em UNIQUE 
-    ' STYLE.
-  .fright
-    .text-with-arrow 
-      ' Lorem ipsum dolor sit amet, consectetu,
-      br
-      ' Integer vel felis sit amet massa conguet.
-      .arrow
-    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
+- unless try_spree_current_user.try(:style_profile).try(:active?)
+  .content-offer
+    .title
+      ' GET YOUR
+      em UNIQUE
+      ' STYLE.
+    .fright
+      .text-with-arrow
+        ' Lorem ipsum dolor sit amet, consectetu,
+        br
+        ' Integer vel felis sit amet massa conguet.
+        .arrow
+      = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
 
 .landing-promo
   .grid-container
