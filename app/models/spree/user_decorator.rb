@@ -111,7 +111,7 @@ Spree::User.class_eval do
   end
 
   def recent_site_version
-    SiteVersion.where(id: self.site_version_id) || SiteVersion.default
+    SiteVersion.where(id: self.site_version_id).first || SiteVersion.default
   end
 
   private
