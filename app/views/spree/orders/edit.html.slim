@@ -100,11 +100,11 @@
       .fleft = link_to '&lt; Continue shopping'.html_safe, collection_path, class: 'btn empty border continue-shopping'
       .fright.checkout
         = form_for @order, url: update_cart_path do |f|
-          = f.button :checkout, name: 'checkout', class: 'buy-now btn striped border'
-        - if paypal_payment_method.present?
+          = f.button :checkout, name: 'checkout', class: 'buy-now btn border'
+        - if (paypal_button_html = paypal_express_button).present?
           .or or
-          - express_url = paypal_express_url(payment_method_id: paypal_payment_method.id, protocol: request.protocol)
-          = link_to 'CHECKOUT WITH PAYPAL', express_url, class: 'btn striped border', method: :post, id: "paypal_button"
+          .paypal
+            = paypal_button_html
       .fright
         .ask-parents-block
           = link_to 'Invite someone to pay', '#', class: 'btn empty border buy-now ask-parents ask-parent-to-pay-button'      
