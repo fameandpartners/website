@@ -1,4 +1,4 @@
-- links_cache_key = ['header-top-links', current_site_version.is_australia?, current_spree_user.try(:cache_key)]
+- links_cache_key = ['header-top-links', current_site_version.code, current_spree_user.try(:cache_key)]
 - cache links_cache_key, expires_in: configatron.cache.expire.long do
   .top-links
     - if current_site_version.is_australia?
