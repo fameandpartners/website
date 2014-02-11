@@ -1,7 +1,5 @@
 module Personalization
   class ProductsController < BaseController
-    skip_before_filter :authenticate_spree_user!, only: [:index]
-
     respond_to :html
 
     require 'spree/products_helper'
@@ -12,10 +10,6 @@ module Personalization
     end
 
     def show
-      unless spree_user_signed_in?
-        return redirect_to personalization_path
-      end
-      
       @product = Spree::Product.joins(:product_customisation_values).uniq.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
 
       set_product_show_page_title(@product, "Custom Formal Dress ")
