@@ -77,10 +77,12 @@ ruby:
             .row
               - @product.moodboard_items.active.song.each do |song_item|
                 .grid-6
-                  .picture
+                  .picture.audio-cover
                     = link_to 'SoundCloud tune', song_item.source, class: 'sc-player'
                     = link_to '#', data: { action: 'soundcloud' } do
                       = image_tag song_item.image
+                      = image_tag '_audio-icon.png', class: 'icon'
+                      span.mask
                     .popup
                       .fleft 
                         = link_to '#', data: { action: 'soundcloud' } do
@@ -88,7 +90,13 @@ ruby:
                           span.icon-pause
               - @product.moodboard_items.active.link.each do |link_item|
                 .grid-6
-                  .picture
+                  .moodboard-title
+                    = image_tag '_moodboard-bg.png'
+                    .title
+                      h3 Dress
+                      em inspiration
+                      .gothic MOODBOARD
+                  / .picture
                     = link_to link_item.source, target: 'blank' do
                       = image_tag link_item.image
           .grid-6

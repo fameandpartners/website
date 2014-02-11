@@ -45,7 +45,10 @@
 	.row {
 		margin: 0 -5px;
 		font-size: 0;
-		.row { margin-top: -5px;}
+		.row { 
+			margin-top: -5px;
+			text-align: left;
+		}
 	}
 	.grid-3, .grid-4, .grid-6, .grid-8{
 		float: none;
@@ -68,6 +71,25 @@
 				filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 			}		
 		}
+		&.audio-cover {
+			.icon {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin: -45px 0 0 -50px;
+				width: auto;
+				z-index: 1;
+			}
+		}
+		.mask {
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			background-color: rgba(0, 0, 0, 0.4);
+			z-index: 0;
+		}
 	}
 	.text {
 		background-color: #fce5de;
@@ -79,6 +101,45 @@
 			background: url('_quiz/kiss.png') no-repeat bottom right;
 			padding-bottom: 35px;
 			min-height: 150px;
+		}
+	}
+	.moodboard-title {
+		position: relative;
+		.title {
+			position: absolute;
+			height: 110px;
+			left: 0;
+			right: 0;
+			top: 50%;
+			margin-top: -55px;
+			font: italic 400 31px/0.9 $fontTwo;
+			color: #fff;
+			text-align: center;
+			h3 {
+				margin-bottom: 13px;
+				padding-bottom: 16px;
+				position: relative;
+				color: #fee0de;
+				&:before {
+					content: '';
+					display: block;
+					position: absolute;
+					bottom: 0;
+					left: 50%;
+					margin-left: -50px;
+					height: 1px;
+					width: 100px;
+					background-color: #fff;
+				}
+			}
+			em {
+				text-transform: none;
+			}
+			.gothic {
+				font-family: $fontThree;
+				font-style: normal;
+				color: #fee0de;
+			}
 		}
 	}
 	.sc-player.playing ~ .popup {
@@ -191,6 +252,37 @@
 			vertical-align: top;
 			+ a { margin-left: 10px;}
 		}
+		// > .fb-like, > a[class*="_pin_it"] {
+		// 	vertical-align: top;
+		// 	display: inline-block;
+		// 	// overflow: hidden;
+		// 	font-size: 22px;
+		// 	width: 24px !important;
+		// 	height: 24px !important;
+		// 	position: relative;
+		// 	background: 0 !important;
+		// 	// icons fonts
+		// 	font-family: 'Icons';
+		//   speak: none;
+		//   font-style: normal;
+		//   font-weight: normal;
+		//   font-variant: normal;
+		//   text-transform: none;
+		//   line-height: 1;
+		//   -webkit-font-smoothing: antialiased;
+		//   -moz-osx-font-smoothing: grayscale;
+		//   > * {
+		//   	// opacity: 0; 
+		//   	position: absolute;
+		//   	left: 0;
+		//   	top: 0;
+		//   }
+		// }
+		// > .fb-like {
+		// 	&:before { content: "\e60d";}
+		// 	iframe table { opacity: 0;}
+		// }
+		// a[class*="_pin_it"]:before { content: "\e60c";}
 	}
 	.style-it {
 		.heading {
