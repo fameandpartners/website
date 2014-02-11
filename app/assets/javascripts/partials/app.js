@@ -119,10 +119,11 @@ $(function(){
 
   //track.remarketing_tag()
 });
-
+/*
 $('body.blog').ready(function(){
   track.conversion('blog_view')
 });
+*/
 
 $('.ecommerce').ready(function(){
   $(document).on('click', '.ask-parent-to-pay-button', function(e){
@@ -161,7 +162,7 @@ $(function() {
       $(this).find('.dropdown-menu').stop(true, true).fadeOut('fast');
     }
   );
-
+/*
   // blog
   if ($('.blog-header').length) {
     $('.toggle-search').on('click', function(){
@@ -169,7 +170,6 @@ $(function() {
       return false
     });
   }
-
 
   // blog carousel
   // generate custom carousel pager
@@ -197,7 +197,7 @@ $(function() {
       $slideElement.removeClass('prev-slide').prev().addClass('prev-slide');
     }
   });
-
+*/
   // TODO Need to refactor to new popup style
   window.showNewsletterPopup = function (event) {
     if (event != undefined) event.preventDefault();

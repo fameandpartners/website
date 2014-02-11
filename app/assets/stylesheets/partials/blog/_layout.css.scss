@@ -185,7 +185,7 @@
 		}
 	}
 }
-
+/*
 %circle-hover {
 	display: inline-block;
 	width: 84px;
@@ -204,6 +204,7 @@
 	@include box-sizing(border-box);
 	@include transform(rotate(15deg));
 }
+*/
 
 .blog-features {
 	margin: 25px 0;
@@ -230,7 +231,7 @@
 			opacity: 1;
 			filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 		}
-		.circle { @extend %circle-hover;}
+		//.circle { @extend %circle-hover;}
 	}
 	img {
 		display: block;
@@ -400,7 +401,7 @@
 				opacity: 1;
 				filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 			}
-			.circle { @extend %circle-hover;}
+			//.circle { @extend %circle-hover;}
 		}
 	}
 	.twitter-widget {
