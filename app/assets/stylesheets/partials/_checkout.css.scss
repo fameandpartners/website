@@ -40,7 +40,8 @@
 		}
 	}
 	.accordion-content {
-		.grid-6 {
+		.grid-6,
+    .grid-12 {
 			display: inline-block;
 			vertical-align: top;
 			padding-right: 20px;
