@@ -25,3 +25,6 @@ bundle exec rake db:populate:quiz
 bundle exec rake db:populate:sale_shipping_method
 bundle exec rake db:populate:payment_methods  
 
+
+# optional
+bundle exec rake db:populate:moodboard
