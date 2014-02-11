@@ -1,5 +1,5 @@
-css:
-  .row.customisation-type input[type="radio"] { display: none; }
+/ css:
+  .row.customisation-type  { display: none; }
   .row.customisation-type label img { 
     margin: 3px;
   }
@@ -33,7 +33,7 @@ ruby:
   .row
     .grid-8
       = render 'spree/products/breadcrumbs', product: @product, active: :customise
-      .customize    
+      .cumtomise
         .row
           .grid-6
             .picture
@@ -51,7 +51,7 @@ ruby:
               .arrows-line-horizontal
             #personalization
               = render 'form', product: @product, personalization: @personalization
-            /.style
+            / .style
               .row
                 .grid-6
                   = image_tag '_customize/style-1.jpg'
@@ -59,7 +59,7 @@ ruby:
                   .button
                     = link_to '+ ADDED', '#', class: 'btn'
                     p A CENTRE LOOP NECK STRAP
-            /.style
+            / .style
               .row
                 .grid-6
                   = image_tag '_customize/style-2.jpg'
@@ -70,7 +70,7 @@ ruby:
                       br
                       ' is unavailable
                     p.cross A BOW
-            /.style
+            / .style
               .row
                 .grid-6
                   = image_tag '_customize/style-3.jpg'

@@ -11,6 +11,7 @@
 		li { 
 			float: left;
 			padding-right: 47px;
+			&.active { a:before { display: block;}}
 		}
 		a {
 			text-decoration: none;
@@ -387,19 +388,6 @@
 			span { font-size: 11px;}
 		}
 	}
-	.video-responsive {
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:relative;
-    height:0;
-		iframe {
-	    left:0;
-	    top:0;
-	    height:100%;
-	    width:100%;
-	    position:absolute;
-		}
-	}
 	.instagram-widget {
 
 		img {
@@ -429,10 +417,52 @@
 }
 
 .blog-post {
+	.blog-category {
+		text-align: center;
+		margin: 20px 0 35px;
+		font: 400 50px/1 $cinzelNormal;
+	}
+	.blog-top-picture {
+		position: relative;
+		margin-bottom: 30px;
+		img {
+			display: block;
+			width: 100%;
+		}
+		.text {
+			background-color: rgba(0, 0, 0, .5);
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			padding: 10px;
+			text-align: center;
+			color: #fff;
+			text-transform: none;
+			.post-title {
+				font: 400 50px/1 $cinzelBold;
+				margin: -30px 0 20px;
+				color: $greenColor;
+			}
+			p {
+				font: 400 17px/1.2 $sourceBold;
+			}
+		}
+	}
+	.video-fluid {
+		padding-bottom: 36%;
+		margin-bottom: 20px;
+	}	
 	.post-title {
 		font: 400 32px/1 $cinzelBold;
 		color: $pinkColor;
 	}
+	.post-subtitle {
+		font: 400 18px/1 $sourceBold;
+		text-transform: none;
+		margin-top: 10px;
+	}
+	.post-column { padding-right: 15px;}
 	.post-meta {
 		margin: 30px 0 20px;
 		.date {
@@ -447,5 +477,55 @@
 	.post-content {
 		font: 400 18px/1.2 $sourceLight;
 		text-transform: none;
+		h3 {}
+	}
+	.fav-product {
+		margin: 20px 0;
+		h3 { 
+			font: 400 18px/1.1 $abrilfatface;
+			text-transform: none;
+		}
+		img {
+			display: block;
+			width: 100%;
+		}
+		.picture {
+			margin-bottom: 5px;
+		}
+		.grid-container { 
+			margin: 0 -5px;
+			font-size: 0;
+		}
+		.grid-6 {
+			display: inline-block;
+			vertical-align: top;
+			text-align: center;
+			float: none;
+			padding: 5px;
+			font: 400 14px/1.2 $fontThree;
+			a { text-decoration: none;}
+		}
+	}
+	.other-articles {
+		margin: 20px 0;
+		h3 { 
+			font: 400 30px/1 $abrilfatface;
+			text-transform: none;
+			margin-bottom: 5px;
+		}
+		img {
+			width: 100%;
+			display: block;
+		}
+		.grid-container {
+			margin: 0 -7px;
+		}
+		.grid-4 {
+			padding: 7px;
+			text-align: center;
+			font: 400 18px/1 $abrilfatface;
+			text-transform: none;
+			a { text-decoration: none;}
+		}
 	}
 }
