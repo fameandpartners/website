@@ -11,9 +11,7 @@
 		li { 
 			float: left;
 			padding-right: 47px;
-			&.active {
-				a:before { display: block;}
-			}
+			&.active { a:before { display: block;}}
 		}
 		a {
 			text-decoration: none;
