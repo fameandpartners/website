@@ -1,5 +1,5 @@
 = form_for @order, :url => update_checkout_path(@order.state), :remote => true do |form|
-  = render :partial => 'spree/shared/error_messages', :locals => { :target => @order }
+  = render :partial => 'shared/error_messages', :locals => { :target => @order }
 
   = form.fields_for :bill_address do |bill_form|
     = render :partial => 'spree/checkout/address_form', :locals => {:form => bill_form, :address_type => 'billing', :address => @order.bill_address}
@@ -8,7 +8,7 @@
     = render :partial => 'spree/checkout/address_form', :locals => {:form => ship_form, :address_type => 'shipping', :address => @order.ship_address}
 
   .submit-button.clearfix
-    .fleft = form.submit 'Submit Details', data: { loading: 'Submitting...' }, class: 'btn mid empty border'
+    .fleft = form.submit 'Submit Details', data: { loading: 'Submitting...' }, class: 'btn mid border'
     - if spree_user_signed_in?
       .fleft
         .ask-parents-block

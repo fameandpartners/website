@@ -7,6 +7,7 @@ window.paymentRequestModal = {
     $container = $scope.find('.modal-container')
 
     $scope.show()
+    $container.center()
 
     paymentRequestModal.updatePosition()
 

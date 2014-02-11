@@ -1,38 +1,28 @@
 = form_for @user, :url => spree.update_checkout_registration_path, :remote => true, :method => :put do |form|
-  .grid-container
-    .grid-100
-      = render :partial => 'spree/shared/error_messages', :locals => { :target => @user }
-  .grid-container
-    .grid-50
-      .input
-        = form.label :first_name, with_required_mark(t(:first_name))
-        = form.text_field :first_name, class: 'required'
-    .grid-50
-      .input
-        = form.label :last_name, with_required_mark(t(:last_name))
-        = form.text_field :last_name, class: 'required'
-  .grid-container
-    .grid-100
-      .input
-        = form.label :email, with_required_mark(t(:email))
-        = form.text_field :email, class: 'required'
-  .grid-container
-    .grid-100
-      .use-same-address-block
-        .input
-          = check_box_tag 'create_account', true, params[:create_account].present?
-          = label_tag :create_account, 'Create an Account'
-
-  .grid-container.passwords
-    .grid-50
-      .input
-        = form.label :password, with_required_mark(t(:password))
-        = form.password_field :password, class: 'required'
-    .grid-50
-      .input
-        = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
-        = form.password_field :password_confirmation, class: 'required'
-  .grid-container
-    .grid-100.center
-      .place-order
-        = form.submit 'Submit Details', data: { loading: 'Submitting...' }
+  = render :partial => 'shared/error_messages', :locals => { :target => @user }
+  .grid-container.form-global.form-personal
+    .grid-6.input
+      = form.label :first_name, with_required_mark(t(:first_name))
+      = form.text_field :first_name, class: 'required'
+    .grid-6.input
+      = form.label :last_name, with_required_mark(t(:last_name))
+      = form.text_field :last_name, class: 'required'
+    .grid-12.input
+      = form.label :email, with_required_mark(t(:email))
+      = form.text_field :email, class: 'required'
+    .grid-12.use-same-address-block.input
+      label.nice-checkbox
+        = check_box_tag :create_account, true, params[:create_account].present?
+        = label_tag :create_account, :id => :create_account do
+          span
+          | Create an Account
+  .grid-container.form-global.passwords
+    .grid-6.input
+      = form.label :password, with_required_mark(t(:password))
+      = form.password_field :password, class: 'required'
+    .grid-6.input
+      = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
+      = form.password_field :password_confirmation, class: 'required'
+  .submit-button.clearfix
+    .fleft
+      = form.submit 'Submit Details', data: { loading: 'Submitting...' }, class: 'btn mid border'
