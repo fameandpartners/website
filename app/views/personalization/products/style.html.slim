@@ -42,8 +42,7 @@ ruby:
           .row
             - suitable_styles = @product.style_profile.try(:suitable_styles) || []
             - suitable_styles.each do |style|
-              / enable style based cache
-              - cache ['products', 'style', 'image_and_accessories'], :expires_in => configatron.cache.expire.normally do
+              - cache ['style', style.name, 'image_and_accessories'], :expires_in => configatron.cache.expire.normally do
                 .grid-6
                   .title = style.title
                   - images = style.get_images
