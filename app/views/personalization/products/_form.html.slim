@@ -7,15 +7,15 @@ ruby:
   h4 Custom colours ARE only $16 
   - options = color_options_for_select_from_options_values(product.custom_colors)
   - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
-  = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
+  .dropdown = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
 
   - product_customisation_types.each do |product_customisation_type|
     .style
       .row.customisation-type data-id="#{ product_customisation_type.id }"
-        .grid-6.customisation-values
-          - type = product_customisation_type.customisation_type
-          - product_customisation_type.product_customisation_values.includes(:customisation_value).order('customisation_values.position asc').each_with_index do |product_customisation_value, index|
-            - value = product_customisation_value.customisation_value
+        - type = product_customisation_type.customisation_type
+        - product_customisation_type.product_customisation_values.includes(:customisation_value).order('customisation_values.position asc').each_with_index do |product_customisation_value, index|
+          - value = product_customisation_value.customisation_value
+          .grid-6.customisation-values
             .picture
               label.customisation-value
                 - if Rails.env.production? || value.image.present?
@@ -23,8 +23,8 @@ ruby:
                 - else
                   = image_tag 'http://placehold.it/111x167', alt: value.presentation, title: value.presentation
                 = radio_button_tag "line_item_personalization[customization_value_ids][#{type.id}][]", value.id, personalization.customization_value_ids.include?(value.id), data: {required: true}, class: "#{value.name.parameterize} #{ 'default' if index == 0 }"
-                / .aligncenter = product_customisation_value.display_price
-        .grid-6
-          .button
-            = link_to '+ ADD', '#', class: 'btn empty border'
-            p = product_customisation_type.customisation_type.presentation
+          .grid-6
+            .price = product_customisation_value.display_price
+            .button
+              = link_to '+ ADD', '#', class: 'btn empty border'
+              p = product_customisation_type.customisation_type.presentation

@@ -361,9 +361,22 @@
 			margin-bottom: 15px;
 			font-weight: 400;
 		}
+		.dropdown { margin-bottom: 35px;}
 		.row {
 			margin: 0 -5px;
-			.grid-6 { padding: 0 5px;}
+			&.customisation-type {
+				font-size: 0;
+				.grid-6 {
+					font-size: $fontSize;
+					display: inline-block;
+					vertical-align: top;
+					float: none;
+					margin-bottom: 20px;
+				}
+			}
+			.grid-6 { 
+				padding: 0 5px;
+			}
 		}
 		.picture img {
 			display: block;
@@ -394,10 +407,12 @@
 			}
 		}
 		.style {
-			margin-top: 30px;
 			input[type="radio"] { display: none;}
+			.price {
+				margin-bottom: 35px;
+				font: 400 20px/1 $fontThree;
+			}
 			.button {
-				margin-top: 35px;
 				text-align: center;
 				.btn {
 					display: block;

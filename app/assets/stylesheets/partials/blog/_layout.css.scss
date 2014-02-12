@@ -290,6 +290,7 @@
 
 .social-blocks {
 	margin: 25px 0;
+	&:first-child { margin-top: 0;}
 	.grid-container { margin: 0 -5px;}
 	.grid-4, .grid-8 {
 		@include box-sizing(border-box);
@@ -416,11 +417,26 @@
 	}
 }
 
+.blog-content-column { padding-right: 15px;}
+.blog-search-box {
+	margin-bottom: 35px;
+	h1 {
+		margin-top: 40px;
+		font: 400 50px/1 $fontThree;
+	}
+}
 .blog-post {
+	+ .blog-post {
+		margin-top: 35px;
+	}
 	.blog-category {
 		text-align: center;
 		margin: 20px 0 35px;
 		font: 400 50px/1 $cinzelNormal;
+	}
+	.featured-image img {
+		display: block;
+		width: 100%;
 	}
 	.blog-top-picture {
 		position: relative;
@@ -462,7 +478,6 @@
 		text-transform: none;
 		margin-top: 10px;
 	}
-	.post-column { padding-right: 15px;}
 	.post-meta {
 		margin: 30px 0 20px;
 		.date {

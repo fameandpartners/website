@@ -1,6 +1,6 @@
 <div style="display: none;" class="modal popup-placeholder">
   <div class="overlay"></div>
-  <div class="modal-container" style="min-height: 350px; width: 500px; background-color: #fff;">
+  <div class="modal-container" style="width: 500px; background-color: #fff;">
     <div class="close-lightbox"></div>
     <% if @title: %>
       <div class="edit-details"><div class="modal-title"><%= @title %></div></div>
