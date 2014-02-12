@@ -6,14 +6,7 @@ class Style < ActiveRecord::Base
 
   validates :name, presence: true, inclusion: ProductStyleProfile::BASIC_STYLES
 
-  has_attached_file :image,
-    styles: { product: "375x480#", thumbnail: "187x240#" },
-    default_style: :product,
-    default_url:   :default_image_for_style
-
-  def default_image_for_style
-    '/assets/_sample/category-grey-2.jpg'
-  end
+  has_many :images, class_name: 'StyleImage'
 
   def title
     super || "#{self.name.to_s.upcase} LOOK"
@@ -31,6 +24,19 @@ class Style < ActiveRecord::Base
       end
     end
     self.accessories = new_values
+  end
+
+  # returns 1 or 4 images
+  def get_images
+    stored_images = self.images.limit(4).to_a
+    case stored_images.size
+    when 0
+      [self.images.new]
+    when 1,4
+      Array.wrap(stored_images)
+    else
+      Array.new(4) { |i| stored_images[i] || self.images.new(position: i) }
+    end
   end
 
   class << self

@@ -237,8 +237,9 @@ FameAndPartners::Application.routes.draw do
       end
 
       resources :styles, only: [:index, :update] do
-        put 'update_image', on: :member
+        resources :style_images, only: [:update]
       end
+      delete '/styles/:style_name/style_images/:position', to: "style_images#destroy", as: :delete_style_image
 
       namespace :blog do
         resources :promo_banners

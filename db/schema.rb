@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140210090904) do
+ActiveRecord::Schema.define(:version => 20140212110458) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -295,6 +295,17 @@ ActiveRecord::Schema.define(:version => 20140210090904) do
   end
 
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
@@ -1151,15 +1162,23 @@ ActiveRecord::Schema.define(:version => 20140210090904) do
     t.datetime "updated_at",                            :null => false
   end
 
-  create_table "styles", :force => true do |t|
-    t.string   "name"
-    t.text     "accessories"
+  create_table "style_images", :force => true do |t|
+    t.integer  "style_id"
+    t.integer  "position"
+    t.boolean  "active",             :default => true
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  create_table "styles", :force => true do |t|
+    t.string   "name"
+    t.text     "accessories"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "title"
   end
 
