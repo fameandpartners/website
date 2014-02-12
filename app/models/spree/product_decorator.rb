@@ -131,6 +131,14 @@ Spree::Product.class_eval do
     product_color_values.joins(:images).map(&:option_value_id)
   end
 
+  # for case, when we trying to update indexes with no price [ in creating process]
+  # TODO: it should be check in update index
+  def price_for_search
+    price.to_f
+  rescue
+    0.00
+  end
+
   def basic_colors
     if option_type = option_types.find_by_name('dress-color')
       option_type.

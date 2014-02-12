@@ -18,7 +18,7 @@ module Overrides
 
           indexes :name, :analyzer => :snowball
           indexes :description, :analyzer => :snowball
-          indexes :price, :type => :float, :as => 'price.to_f'
+          indexes :price, :type => :float, :as => 'price_for_search'
 
           indexes :available_on, :type => :date, :include_in_all => false
           indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
