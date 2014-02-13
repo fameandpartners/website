@@ -1,8 +1,20 @@
-$scope = window.newsletterModalPopup.scope.find('.modal-form');
-
 <% if @participation.valid? %>
   $.cookie('newsletter_mp', 'hide', { expires: 365, path: '/' });
-  $scope.html('<%=j render('campaigns/newsletter/thanks') %>');
+<% end %>
+
+<% if params[:from] == 'blog' %>
+  $form = $('#newsletter-sign-up');
+  <% if @participation.valid? %>
+    thank_html = '<%=j render('campaigns/newsletter/thanks', blog_version: true) %>';
+    $form.replaceWith(thank_html);
+  <% else %>
+    $form.find('input.email').addClass('invalid')
+  <% end %>
 <% else %>
-  $scope.html('<%=j render('campaigns/newsletter/form') %>');
+  $scope = window.newsletterModalPopup.scope.find('.modal-form');
+  <% if @participation.valid? %>
+    $scope.html('<%=j render('campaigns/newsletter/thanks') %>');
+  <% else %>
+    $scope.html('<%=j render('campaigns/newsletter/form') %>');
+  <% end %>
 <% end %>

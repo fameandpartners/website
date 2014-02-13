@@ -7,13 +7,9 @@ footer.blog-footer class="#{(controller_action_class) == 'pages-home' ? "inverse
       '&copy; 2013 Fame & Partners – all rights reserved
   nav
     ul
-      li = link_to 'MUSING', '#'
-      li = link_to 'TRENDING', '#'
-      li = link_to 'FAN GIRLING', '#'
-      li = link_to 'FAME CHAIN', '#'
-      li = link_to 'GIRL STUFF', '#'
-      li = link_to 'VIDEO', '#'
-      li = link_to 'SHOP FAME & PARTNERS', '#'
+      - (@categories || []).each do |category|
+        li = link_to category.name.downcase, blog_posts_by_category_path(category_slug: category.slug)
+      li = link_to 'SHOP FAME & PARTNERS', root_url
     / ul
       li = link_to 'About us', about_url(:host => configatron.host), :target => :blank
       li = link_to 'Meet our Team', team_url(:host => configatron.host), :target => :blank

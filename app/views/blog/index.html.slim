@@ -120,9 +120,9 @@
         .icon-hexagon.right
         .icon-logo
         p About Fame & Partners lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor. Lorem ipsum dolor sit amet,  consectetur adipisicing elit, sed do eiusmod.
-      form.sign-in
+      = form_for (Participation.new), as: :participation, url: newsletter_campaign_path(from: 'blog'), remote: true, html: { class: 'sign-in', id: 'newsletter-sign-up' } do |f|
         h2 become a member of fame & partners
-        input type="text" placeholder="Enter email here"
+        = f.text_field :email, class: 'inputbox', placeholder: 'Enter email here'
         input.btn.green.shadow.border type="submit" value="SIGN UP"
       .follow-us
         h2 FOLLOW US

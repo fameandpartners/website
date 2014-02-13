@@ -3,7 +3,7 @@ nav.blog-nav
     - @categories.each do |category|
       - if category.slug != 'fan-girling'
         li[class="#{params[:category_slug] == category.slug ? 'selected' : ''}"]
-          = link_to raw(category.name), blog_posts_by_category_path(category.slug)
+          = link_to category.name, blog_posts_by_category_path(category_slug: category.slug)
       - else
         li[class="two-lines #{params[:category_slug] == category.slug ? 'selected' : ''}"]
           = link_to category.name do
