@@ -73,17 +73,17 @@ module ProductsHelper
       options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
       if images.size > 1
         # original_image - quick fix for cdn & and empty attr['src']
-        options[:original_image]  = image.attachment.url(:product)
-        options[:second_image]    = images.second.attachment.url(:product)
+        options[:original_image]  = image.attachment.url(:large)
+        options[:second_image]    = images.second.attachment.url(:large)
       end
       options[:onerror] = "window.switchToAltImage(this, '/assets/#{no_image}')"
-      image_tag(image.attachment.url(:product), options)
+      image_tag(image.attachment.url(:large), options)
     end
   end
 
   def product_image_tag(product, size = nil, options = {})
     no_image = 'noimage/product.png'
-    size = size.present? ? size : 'product'
+    size = size.present? ? size : 'large'
 
     options[:title] ||= product.name
 
