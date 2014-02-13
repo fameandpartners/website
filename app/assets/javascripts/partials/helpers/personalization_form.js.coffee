@@ -13,7 +13,9 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
       $scope.find(':radio.default').click()
  
   personalisationForm = {
-    container:  parentContainer,
+    container: parentContainer,
+    sizeInput: null,
+    colorInput: null,
     selected: {
       color: null,
       size: null,
@@ -28,27 +30,26 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
       personalisationForm.__init.apply(personalisationForm, arguments)
 
     __init: (variants, master_id) ->
+      _.bindAll(@, 'update')
+      _.bindAll(@, 'onColourChangedHandler', 'onCustomisationValueChangeHandler', 'onBuyButtonClickHandler')
+
       @variants = variants
       @masterVariantId  = master_id
 
-      @container.find(".section .sizebox .button").on('click', _.bind(@onSizeClickHandler, @))
-      @container.find('select#colour').on('change', _.bind(@onColourChangedHandler, @))
-      @container.find('select#custom_colour').on('change', _.bind(@onColourChangedHandler, @))
-      @container.find(':radio').on('change', _.bind(@onCustomisationValueChangeHandler, @))
+      @sizeInput  or= new inputs.ButtonsBoxSelector(@container.find('.section .sizebox'), '.button')
+      @sizeInput.on('change',  @update)
 
-      @container.find('.product-info .btn.buy-now').on('click', _.bind(@onBuyButtonClickHandler, @))
+      @container.find('select#colour').on('change', @onColourChangedHandler)
+      @container.find('select#custom_colour').on('change', @onColourChangedHandler)
+      @container.find(':radio').on('change', @onCustomisationValueChangeHandler)
+
+      @container.find('.product-info .btn.buy-now').on('click', @onBuyButtonClickHandler)
 
       # set values
       @container.find('.customisation-type').each (index, item)->
         highlighter(item)
         defaulter(item)
 
-      @update()
-
-    onSizeClickHandler: (e) ->
-      e.preventDefault()
-      $(e.target).siblings().removeClass('selected')
-      $(e.target).addClass('selected')
       @update()
 
     onColourChangedHandler: (e) ->
@@ -67,7 +68,7 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
 
     update: () ->
       @selected = {
-        size: @getSelectedSize(),
+        size: @sizeInput.val(),
         color: @getSelectedColor(),
         customization_value_ids: @getSelectedCustomisation()
       }
