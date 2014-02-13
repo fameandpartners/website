@@ -18,12 +18,12 @@ module Overrides
 
           indexes :name, :analyzer => :snowball
           indexes :description, :analyzer => :snowball
-          indexes :price, :type => :float, :as => 'price.to_f'
+          indexes :price, :type => :float, :as => 'price_for_search'
 
           indexes :available_on, :type => :date, :include_in_all => false
           indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
           indexes :in_stock, :type => :boolean, :as => 'has_stock?'
-          indexes :position, :type => :integer
+          indexes :position, :type => :integer, :index => :not_analyzed
 
           indexes :taxons, :as => 'taxons.map(&:name)'
           indexes :taxon_ids, :as => 'taxons.map(&:id)'

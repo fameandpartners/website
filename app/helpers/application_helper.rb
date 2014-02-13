@@ -71,7 +71,9 @@ module ApplicationHelper
   end
 
   def controller_action_class
-    "#{controller.controller_name} #{restfull_action_name}"
+    name = controller.controller_name.to_s.downcase
+    path = controller.controller_path.gsub(/\W+/, '_')
+    "#{name} #{path} #{restfull_action_name}"
   end
 
   def controller_action_id
@@ -194,9 +196,9 @@ module ApplicationHelper
   end
 
   def newsletter_modal_popup
-    if !spree_user_signed_in? && cookies[:newsletter_mp] != 'hide'
+    #if !spree_user_signed_in?
       render 'shared/newsletter_modal_popup'
-    end
+    #end
   end
 
   def paypal_payment_method
@@ -242,26 +244,28 @@ module ApplicationHelper
     }
   end
 
+  # span.price-old $355
+  # ' $295
   def price_for_product(product)
     price = product.zone_price_for(current_site_version)
     if product.in_sale?
       [
-        content_tag(:del, price.display_price_without_discount),
-        content_tag(:span, price.display_price_with_discount)
+        content_tag(:span, price.display_price_without_discount, class: 'price-old'),
+        price.display_price_with_discount.to_s
       ].join("\n").html_safe
     else
-      content_tag(:span, price.display_price).html_safe
+      price.display_price.to_s.html_safe
     end
   end
 
   def price_for_line_item(line_item)
     if line_item.in_sale?
       [
-        content_tag(:del, line_item.money_without_discount),
-        content_tag(:span, line_item.money)
+        content_tag(:span, line_item.money_without_discount, class: 'price-old'),
+        line_item.money
       ].join("\n").html_safe
     else
-      content_tag(:span, line_item.money).html_safe
+      line_item.money.to_s.html_safe
     end
   end
 

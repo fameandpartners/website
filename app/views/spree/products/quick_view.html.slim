@@ -1,15 +1,12 @@
-javascript:
-  window.productImagesData = #{{@product.images_json.to_json}};
 ruby:
  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
- color_images  = @product_variants.inject({}){|res, t| res[t[:color].to_s] = t[:image].to_s; res }
  enabled_tabs = ['photos']
  enabled_tabs.push('inspiration') if @product.celebrity_inspiration
  enabled_tabs.push('video') if @product.video_url.present?
 
 .product-page.grid-container
-  .grid-60
+  .grid-7
     .tabs
       ul.tabs-links
         li.active = link_to 'Photos', '#photos'
@@ -22,14 +19,19 @@ ruby:
           .photos-carousel
             #quick-view-product-images-up.arrow-up
             ul#product-images.carousel-pictures
+              / this populates with js
+              /li
+                = link_to '#' do
+                  = image_tag '_sample/category-grey-2.jpg'
             #quick-view-product-images-down.arrow-down
           .big-photo
-            .zoom = link_to 'Zoom', '#'
-            = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
+            .zoom 
+              span.icon-zoom-in
+            / = image_tag 'noimage/large.png', alt: ''
+            = image_tag '_sample/category-grey-2.jpg'
       - if enabled_tabs.include?('video')
         #videos.tab-content
-          == product_video(@product)
-          .initials = image_tag 'video-initials.png', width: 420, height: 54, alt: ''
+          == product_video(@product, width: 518, height: 330)
       - if enabled_tabs.include?('inspiration')
         - celebrity = @product.celebrity_inspiration
         #inspiration.tab-content
@@ -46,39 +48,30 @@ ruby:
       .faster
         ' Need this faster?
         = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
-  .grid-40
+  .grid-5
     .product-info
       .name = @product.name
-      .desc = @product.property('short_description')
+      / .desc = @product.property('short_description')
       .price-delivery
-        .price.sale
+        span.price
           = price_for_product(@product)
-        .delivery = @product.delivery_time_as_string(:long)
+        span.delivery = @product.delivery_time_as_string(:long)
       .colors-choser
         .label = t('views.quick_view.labels.color')
-        .colors
-          - colors.each do |color|
-            .color class='#{color}' data-color='#{color}' data-image="#{{color_images[color]}}"
-      .notice
-        .colour-images = t('views.quick_view.notices.color_images')
+        .select-holder
+          - options = color_options_for_select(colors)
+          = select_tag :colour, options, class: 'selectbox', name: 'color', include_blank: true, prompt: 'Select colour', data: { select: 'colour' }
+        .hint = t('views.quick_view.notices.color_images').html_safe
       .size-select
-        .select-box
-          select#toggle-selectbox.select2 name="size"
-            option value='' Choose your size
-            - sizes.each do |size|
-              option{value=size} = size
-        = link_to 'What size am I?', '#what-size', class: 'info toggle-sizes'
+        .label = t('views.quick_view.labels.size')
+        .select-holder
+          - options = options_from_collection_for_select(sizes, :to_s, :to_s)
+          = select_tag :size, options, id: 'toggle-selectbox', class: 'selectbox', include_blank: true, prompt: 'Choose your size', data: { select: 'size' }
+        = link_to 'What size am I?', '#what-size', class: 'hint toggle-sizes'
       .buy-wishlist
-        .buy-customize
-          = add_to_bag_link(@product)
-          - unless true #@product.in_sale?
-            .or-line
-              span or
-              = link_to '#', id: 'customize-dress-button', class: 'btn-customize' do
-                i.icon.icon-layby
-                ' Free
-                = t('words.customization').titleize
-        = add_to_wishlist_link(@product)
+        .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
+        = add_to_bag_link(@product)
+        = add_to_wishlist_link(@product, class: 'btn empty border')
 
       .tabs
         ul.tabs-links
@@ -99,11 +92,7 @@ ruby:
               .desc The body shapes that this dress suits:
               ul
                 - @product.style_profile.suitable_shapes.each do |shape|
-                  li
-                    = link_to spree.products_path(bodyshape: shape) do
-                      - title = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
-                      .image class="#{shape.humanize.downcase.gsub(/ /, '-')}"
-                      .name #{title}
+                  li = "#{shape.humanize}: #{@product.style_profile[shape]}/10"
         #details.tab-content
           .info SKU:  #{@product.sku}
           | Material:
@@ -115,33 +104,40 @@ ruby:
             = t('product_has_no_description')
       .product-features
         .feature
-          i.icon.icon-shipping
-          .text
-            ' Free
+          span.icon-holder
+            span.icon-dollar
+            span.icon-erase
+          div
+            ' free
             br
-            ' Shipping
+            ' shipping
         .feature
-          i.icon.icon-returns
-          .text
-            ' Free
+          span.icon-holder
+            span.icon-arrows
+          div
+            ' free
             br
-            ' Returns
+            ' returns
         .feature
-          i.icon.icon-dress
-          .text
-            ' Fit
+          span.icon-holder
+            span.icon-guarantee
+          div
+            ' fit
             br
-            ' Guarantee
+            ' guarantee
         .feature
-          i.icon.icon-customization
-          .text
-            ' Free
+          span.icon-holder
+            span.icon-cutline
+            span.icon-scissors
+          div
+            ' free
             br
             =' t('words.customization').titleize
         .feature
-          i.icon.icon-pencil
-          .text
-            ' Free styling
+          span.icon-holder
+            span.icon-comment
+          div
+            ' free styling
             br
             ' advice
       .twin-alert-block = product_twin_alert_link(@product)

@@ -1,0 +1,26 @@
+<% if product %>
+  <% content_for :head do %>
+    <% product.images.each_with_index do |image, index| %>
+      <meta property="og:image" content="<%= absolute_image_url(image.attachment.url(:large), 'http') %>" />
+      <meta property="og:image:secure_url" content="<%= absolute_image_url(image.attachment.url(:large), 'https') %>" />
+
+      <% if index == 0 %>
+        <meta name="twitter:image:src" content="<%= absolute_image_url(image.attachment.url(:large), 'http') %>" />
+      <% end %>
+    <% end %>
+    <meta property="og:site_name" content="<%= 'Fame&Partners' %>" />
+    <meta property="og:locale" content="<%= current_site_version.locale %>" />
+    <meta property="og:title" content="<%= get_title %>" />
+    <meta property="og:type" content="product" />
+    <meta property="og:price:amount" content="<%= product.price %>" />
+    <meta property="og:url" content="<%= collection_product_url(product) %>" />
+    <meta property="og:description" content="<%= get_meta_description %>" />
+    <meta property="og:price:currency" content="<%= current_site_version.currency %>" /> 
+    <meta property="og:availability" content="instock" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="<%= get_title %>" />
+    <meta name="twitter:description" content="<%= get_meta_description %>" />
+
+    <script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
+  <% end %>
+<% end %>

@@ -62,7 +62,8 @@ window.popups.showProductReservationPopup = (options, callback = null) ->
       )
 
     show: () ->
-      popup.container.show().center()
+      popup.container.show()
+      popup.content.center()
       popup.container.find('select').val(popup.options.schoolYear).chosen()
       track.twinAlertOpen(popup.options.label)
 

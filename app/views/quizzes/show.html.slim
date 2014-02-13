@@ -1,18 +1,28 @@
 .m-pixel
   img src="http://tags.rtbidder.net/convert?sid=52564c2b8bc06f1060da2599" width="0" height="0" border="0" alt=""
-
 .signup-box-wrapper
-  .signup-box
-    .get20
-    .title Discover your true
-    .subtitle Style profile
-    .desc
-      ' Take our quick quiz to determine your styling needs, and get access 
+  .text1
+    span DISCOVER
+    em your true
+    span STYLE PROFILE
+  .text2
+    .title  
+      em GET $20
+      span TO SPEND
+    p
+      ' JUST COMPLETE
       br
-      ' to your personalised shopping boutique.
-    .signup-buttons
-      = link_to 'Signup with facebook', fb_auth_path(quiz: 'true'), class: 'facebook-signup'
-      .or or
-      = link_to 'Sign up using your email address', spree.signup_path(quiz: 'true', cl: 'stylequiz'), class: 'regular-signup'
-    .signin-link
-      ' Already a member? #{link_to 'Sign in here', spree.login_path(:quiz => true)}
+      ' YOUR STYLE PROFILE!
+  .fields
+    .section
+      span.btn TAKE OUR QUICK QUIZ
+      span.btn TO DETERMINE YOUR STYLING NEEDS,
+      span.btn AND GET ACCESS TO YOUR
+      span.btn PERSONALISED SHOPPING BOUTIQUE.
+    = link_to 'SIGN UP WITH FACEBOOK', fb_auth_path(quiz: 'true'), class: 'btn empty border'
+    .or OR
+    = link_to 'SIGN UP USING YOUR EMAIL ADDRESS', spree.signup_path(quiz: 'true', cl: 'stylequiz'), class: 'btn empty border'
+
+  .already-member
+    em Already a member?
+    = link_to 'Sign in here', spree.login_path(:quiz => true)

@@ -21,6 +21,12 @@ Note: these commands not needed after bin/prepare_app
 * `$ bundle exec rake db:populate:product_options`
 * `$ bundle exec rake db:populate:prototypes`
 
+### Update indexes
+Tire.index(:spree_products) do
+  delete
+  import Spree::Product.all
+end
+
 ## Deploy
 
 ### Deploy to staging

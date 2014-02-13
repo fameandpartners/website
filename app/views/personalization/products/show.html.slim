@@ -1,20 +1,91 @@
+/ css:
+  .row.customisation-type  { display: none; }
+  .row.customisation-type label img { 
+    margin: 3px;
+  }
+  .row.customisation-type label.active img { 
+    border: 3px solid #FFAB98;
+  }
+
 javascript:
+  window.product_master_variant = '#{{ @product.master.id }}';
   window.product_variants = #{{ @product_variants.to_json }};
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
-  window.productImagesData = #{{@product.images_json.to_json}};
 
 ruby:
- sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
- colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
- color_images  = @product_variants.inject({}){|res, t| res[t[:color].to_s] = t[:image].to_s; res }
- enabled_tabs = ['photos']
- enabled_tabs.push('inspiration') if @product.celebrity_inspiration
- enabled_tabs.push('video') if @product.video_url.present?
+  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
 
-.m-pixel
+.content-offer
+  .title
+    ' GET YOUR 
+    em UNIQUE 
+    ' STYLE.
+  .fright
+    .text-with-arrow 
+      ' Lorem ipsum dolor sit amet, consectetu,
+      br
+      ' Integer vel felis sit amet massa conguet.
+      .arrow
+    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
+
+.product-page
+  .row
+    .grid-8
+      = render 'spree/products/breadcrumbs', product: @product, active: :customise
+      .cumtomise
+        .row
+          .grid-6
+            .picture
+              = product_image_tag(@product)
+          .grid-6
+            .heading
+              p 
+                em Create your
+                br
+                ' UNIQUE DRESS
+                br 
+                span.pink BY CUSTOMISING
+              p 
+                em Delivery time is only 14-21 days
+              .arrows-line-horizontal
+            #personalization
+              = render 'form', product: @product, personalization: @personalization
+            / .style
+              .row
+                .grid-6
+                  = image_tag '_customize/style-1.jpg'
+                .grid-6
+                  .button
+                    = link_to '+ ADDED', '#', class: 'btn'
+                    p A CENTRE LOOP NECK STRAP
+            / .style
+              .row
+                .grid-6
+                  = image_tag '_customize/style-2.jpg'
+                .grid-6
+                  .button
+                    .btn.striped-disable
+                      ' this combination 
+                      br
+                      ' is unavailable
+                    p.cross A BOW
+            / .style
+              .row
+                .grid-6
+                  = image_tag '_customize/style-3.jpg'
+                .grid-6
+                  .button
+                    = link_to '+ ADD', '#', class: 'btn empty border'
+                    p SHORT VERSION
+    .grid-4
+      = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }
+
+// <!-- old html -->
+/.m-pixel
   img src="http://tags.rtbidder.net/track?sid=525646ee8bc06f1060d9f3a7" width="0" height="0" border="0" alt=""
 
-.wrap
+/.wrap
   .product-page.grid-container
 
     .grid-55

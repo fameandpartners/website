@@ -8,6 +8,15 @@ module ProductsHelper
     taxon = product.taxons.where(taxonomy_id: range_taxonomy.id).first
   end
 
+  def range_taxon_name_for(product)
+    taxon = range_taxon_for(product)
+    if taxon.present?
+      taxon.name.upcase
+    else
+      'LONG DRESSES' 
+    end
+  end
+
   def available_product_ranges
     range_taxonomy.present? ? range_taxonomy.root.children : []
   end
@@ -38,7 +47,7 @@ module ProductsHelper
   end
 
   def product_video(product, options = {})
-    return '' if Rails.env.development?
+    #return '' if Rails.env.development?
     return '' if product.video_url.blank?
 
     width   = options[:width] || 300
@@ -64,17 +73,19 @@ module ProductsHelper
       options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
       if images.size > 1
         # original_image - quick fix for cdn & and empty attr['src']
-        options[:original_image]  = image.attachment.url(:product)
-        options[:second_image]    = images.second.attachment.url(:product)
+        options[:original_image]  = image.attachment.url(:large)
+        options[:second_image]    = images.second.attachment.url(:large)
       end
       options[:onerror] = "window.switchToAltImage(this, '/assets/#{no_image}')"
-      image_tag(image.attachment.url(:product), options)
+      image_tag(image.attachment.url(:large), options)
     end
   end
 
   def product_image_tag(product, size = nil, options = {})
     no_image = 'noimage/product.png'
-    size = size.present? ? size : 'product'
+    size = size.present? ? size : 'large'
+
+    options[:title] ||= product.name
 
     if product.images.empty?
       image_tag(no_image, options)
@@ -93,24 +104,29 @@ module ProductsHelper
   def add_to_bag_link(product_or_variant)
     if product_or_variant.is_a?(Spree::Product)
       # don't use master variant as default
-      link_to 'Add to bag', '#', class: 'buy-now'
+      link_to 'Add to bag', '#', class: 'buy-now btn'
     else
-      link_to 'Add to bag', '#', class: 'buy-now', data: { id: product_or_variant.id }
+      link_to 'Add to bag', '#', class: 'buy-now btn', data: { id: product_or_variant.id }
     end
   end
 
-  def add_to_wishlist_link(product_or_variant)
+  def add_to_wishlist_link(product_or_variant, options = {})
+    options[:title] ||= 'Wish list'
+    options[:class] ||= ''
+    options[:class] += ' add-wishlist'
+
     if spree_user_signed_in?
       variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
 
-      link_options = { data: { action: 'add-to-wishlist', id: variant.id }}
+      link_options = { data: { action: 'add-to-wishlist', id: variant.id }, class: options[:class]}
       if in_wishlist?(variant)
-        link_to 'Remove', '#', link_options.merge(class: 'active add-wishlist')
+        link_options[:class] += ' active'
+        link_to 'Remove from wishlist', '#', link_options
       else
-        link_to 'Wish list', '#', link_options.merge(class: 'add-wishlist')
+        link_to options[:title], '#', link_options
       end
     else # user not logged in, wishlist unavailable
-      link_to 'Wish list', spree_signup_path, class: 'add-wishlist', data: { action: 'auth-required' }
+      link_to options[:title], spree_signup_path, class: options[:class], data: { action: 'auth-required' }
     end
   end
 
@@ -130,21 +146,14 @@ module ProductsHelper
   end
 
   def in_wishlist?(variant)
-    return current_wished_product_ids.include?(variant.product_id)
-  end
-
-  def share_buttons(product = nil)
-    return '' if Rails.env.development?
-    render 'shared/share_buttons', product: product
+    current_wished_product_ids.include?(variant.product_id)
   end
 
   def send_to_a_friend_link(product)
-    #return '' unless Rails.env.development?
-
     data = { product: product.permalink }
     data.update({ guest: true }) unless spree_user_signed_in?
 
-    link_to 'Show mum', '#', class: 'send-to-friend askmumbtn', data: data, title: 'Send this dress to whoever you want to get a second opinion from!'
+    link_to '2ND OPINION', '#', class: 'btn send-to-friend askmumbtn', data: data, title: 'Send this dress to whoever you want to get a second opinion from!'
   end
 
   def wishlist_move_to_cart_link(wishlist_item)
@@ -155,17 +164,18 @@ module ProductsHelper
         item: wishlist_item.id,
         quantity: wishlist_item.quantity
       }
-      link_to 'Add to cart', '#', class: 'add-to-cart master', data: data
+      link_to 'Move to cart', '#', class: 'add-to-cart master btn mid fleft', data: data
     else
-      link_to 'Add to cart', move_to_cart_wishlists_item_path(wishlist_item), class: 'add-to-cart', remote: true
+      url = move_to_cart_wishlists_item_path(wishlist_item)
+      link_to 'Move to cart', url, class: 'add-to-cart btn mid fleft', remote: true
     end
   end
 
-  def product_move_to_wishlist_link(variant)
+  def product_move_to_wishlist_link(variant, options = {})
     if spree_user_signed_in?
-      link_to content_tag(:i, '', class: 'icon icon-heart') + 'Move to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist'
+      link_to '+ move to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist btn empty border'
     else
-      link_to content_tag(:i, '', class: 'icon icon-heart') + 'Move to wish list', spree_signup_path
+      link_to '+ move to wish list', spree_signup_path, class: 'btn empty border'
     end
   end
 
@@ -185,8 +195,8 @@ module ProductsHelper
         )
       end
       content_tag(:div, class: 'twin-alert') do
-        link_to("Twin Alert", '#', class: 'twin-alert-link btn black', data: data_attrs) +
-        content_tag(:div, t('views.pages.products.show.notices.twin_alert'), class: 'twin-alert-info')
+        link_to("Twin Alert", '#', class: 'twin-alert-link btn', data: data_attrs) +
+        content_tag(:div, t('views.pages.products.show.notices.twin_alert').html_safe, class: 'hint')
       end
     end
   end
@@ -217,5 +227,20 @@ module ProductsHelper
   def timeago(time, options = {})
     options[:class] ||= "timeago"
     content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
+  end
+
+  def color_options_for_select(color_names)
+    color_option_values = Spree::Variant.color_option_type.option_values.where(name: color_names)
+    color_options_for_select_from_options_values(color_option_values)
+  end
+
+  def color_options_for_select_from_options_values(color_option_values, selected = nil)
+    options_for_select(color_option_values.map do |option_value|
+      [
+        option_value.presentation, 
+        option_value.name,
+        class: "color #{option_value.name}", style: "background-color: #{option_value.value}"
+      ]
+    end, selected)
   end
 end

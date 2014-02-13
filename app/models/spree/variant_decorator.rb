@@ -9,6 +9,12 @@ Spree::Variant.class_eval do
   after_save :update_zone_prices
   after_initialize :set_default_values
 
+  before_validation :set_default_sku
+
+  after_save do
+    product.update_index
+  end
+
   def in_sale?
     current_sale.active?
   end
@@ -18,6 +24,54 @@ Spree::Variant.class_eval do
 
     Hash[*values.map{ |ov| [ov.option_type.presentation, ov.presentation] }]
   end
+
+  def dress_color
+    get_option_value(self.class.color_option_type)
+  end
+
+  def dress_size
+    get_option_value(self.class.size_option_type)
+  end
+
+  def get_option_value(option_type)
+    return nil unless option_type
+    self.option_values.detect do |option|
+      option.option_type_id == option_type.id
+    end
+  end
+
+  # Master SKU + VarientValue1 + VarientValue2
+  def set_default_sku
+    return if self.sku.present?
+    sku_chunks = []
+    master = nil
+
+    if product.master.present?
+      master = product.master
+    elsif product.variants.present?
+      master = product.variants.first
+    end
+
+    if master && master.sku.present?
+      sku_chunks.push(master.sku)
+    else
+      sku_chunks.push(product.permalink)
+    end
+
+    self.option_values.sort_by(&:id).each do |value|
+      name = value.option_type.name.sub(/^dress-/, '').try(:capitalize)
+      chunk = "#{name}:#{value.presentation}"
+      sku_chunks.push(chunk)
+    end
+
+    sku_chunks.push(self.id.to_s)
+
+    self.sku = sku_chunks.reject(&:blank?).join('-')
+  rescue Exception => e
+    # do nothing, sku required for analytics mostly
+    return true
+  end
+
 
   #{"3"=>{"amount"=>"", "currency"=>""}, "2"=>{"amount"=>"62.0", "currency"=>"AUD"}}
   # or take from self.zone_prices_hash
@@ -87,6 +141,23 @@ Spree::Variant.class_eval do
     if self.new_record?
       self.on_demand     = true
       self.count_on_hand = 10
+    end
+  end
+
+  def recalculate_product_on_hand
+    on_hand = product(true).on_hand
+    if Spree::Config[:track_inventory_levels] && on_hand != (1.0 / 0) # Infinity
+      product.update_column(:count_on_hand, on_hand)
+    end
+  end
+
+  class << self
+    def size_option_type
+      @size_option_type ||= Spree::OptionType.where(name: 'dress-size').first
+    end
+
+    def color_option_type
+      @color_option_type ||= Spree::OptionType.where(name: 'dress-color').first
     end
   end
 end

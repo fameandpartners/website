@@ -17,4 +17,8 @@ Spree::Taxon.class_eval do
   def banner_position
     @banner_position ||= (taxons_with_banner_info.index(self.root.permalink) || taxons_with_banner_info.size)
   end
+
+  def base_permalink
+    self.permalink.to_s.split('/').last
+  end
 end

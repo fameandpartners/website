@@ -13,7 +13,7 @@ class LineItemPersonalization < ActiveRecord::Base
   attr_accessible :customization_value_ids,
                   :height,
                   :size,
-                  :color_id
+                  :color_id, :color_name
 
   validates :size,
             presence: true,
@@ -24,6 +24,10 @@ class LineItemPersonalization < ActiveRecord::Base
 
   validates :color,
             presence: true
+
+  attr_accessor :color_name
+  before_validation :set_color_by_name
+  before_save :recalculate_price
 
   validate do
     if product.present? && customization_value_ids.present?
@@ -41,19 +45,19 @@ class LineItemPersonalization < ActiveRecord::Base
     end
   end
 
-  def color
-    if attributes['color'].present?
-      attributes['color']
-    elsif super.present?
-      super.presentation
-    else
-      nil
-    end
-  end
+#  def color
+#    if attributes['color'].present?
+#      attributes['color']
+#    elsif super.present?
+#      super.presentation
+#    else
+#      nil
+#    end
+#  end
 
-  def color_picker?
-    color.present? && !COLORS.include?(color)
-  end
+#  def color_picker?
+#    color.present? && !COLORS.include?(color)
+#  end
 
   def customization_values
     CustomisationValue.includes(:customisation_type).find(customization_value_ids)
@@ -72,11 +76,51 @@ class LineItemPersonalization < ActiveRecord::Base
     values['Size'] = size
     values['Color'] = color if color.present?
 
-
     customization_values.each do |value|
       values[value.customisation_type.presentation] = value.presentation
     end
 
     values
+  end
+
+  def set_color_by_name
+    if @color_name.present? and color.blank? and product.present?
+      self.color = product.basic_colors.where(name: @color_name).first
+      self.color ||=  product.custom_colors.where(name: @color_name).first
+    end
+    return true
+  end
+
+  # calculate additional cost
+  #   - custom color costs addional 16$ in current currency
+  def recalculate_price
+    self.price = calculate_price
+  end
+
+  def calculate_price
+    result = 0.0
+    result += 16.0 if !basic_color?
+    product_customisation_values.each do |product_customisation|
+      result += product_customisation.price
+    end
+    result
+  rescue
+    result
+  end
+
+  def basic_color?
+    return false if product.blank? || color.blank?
+
+    product.basic_colors.where(id: color_id).exists?
+  end
+
+  def product_customisation_values
+    CustomisationValue.where(id: customization_value_ids).map do |customisation_value|
+      product_customisation_type = ProductCustomisationType.where(
+        product_id: self.product_id,
+        customisation_type_id: customisation_value.customisation_type_id
+      ).first
+      product_customisation_type.product_customisation_values.where(customisation_value_id: customisation_value.id).includes(:customisation_value).first
+    end
   end
 end

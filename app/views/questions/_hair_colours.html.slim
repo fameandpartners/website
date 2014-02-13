@@ -1,58 +1,14 @@
-h1 = question.text
-ul.quiz-hair
-  li
-    label
-      .hair-image
-        = image_tag 'quiz/hair/black.jpg', width: 118, height: 118, alt: ''
-      .hair-label
-        span Black
-      = form.radio_button :code, 'black'
-  li
-    label
-      .hair-image
-        = image_tag 'quiz/hair/brunette.jpg', width: 118, height: 118, alt: ''
-      .hair-label
-        span Brunette
-      = form.radio_button :code, 'brunette'
-  li
-    label
-      .hair-image
-        = image_tag 'quiz/hair/auburn.jpg', width: 118, height: 118, alt: ''
-      .hair-label
-        span Auburn
-      = form.radio_button :code, 'auburn'
-  li
-    label
-      .hair-image
-        = image_tag 'quiz/hair/red.jpg', width: 118, height: 118, alt: ''
-      .hair-label
-        span Red
-      = form.radio_button :code, 'red'
-  li
-    label
-      .hair-image
-        = image_tag 'quiz/hair/blonde.jpg', width: 118, height: 118, alt: ''
-      .hair-label
-        span Blonde
-      = form.radio_button :code, 'blonde'
-  li
-    label
-      .hair-image
-        = image_tag 'quiz/hair/platinum-blonde.jpg', width: 118, height: 118, alt: ''
-      .hair-label
-        span Platinum Blonde
-      = form.radio_button :code, 'platinum_blonde'
-  li
-    label
-      .hair-image
-        = image_tag 'quiz/hair/strawberry-blonde.jpg', width: 118, height: 118, alt: ''
-      .hair-label
-        span Strawberry Blonde
-      = form.radio_button :code, 'strawberry_blonde'
-  li
-    label
-      .hair-image
-        = image_tag 'quiz/hair/coloured.jpg', width: 118, height: 118, alt: ''
-      .hair-label
-        span = t('views.quiz.questions.hair_colors.answers.colored')
-      = form.radio_button :code, 'coloured'
+h1
+  em Tell us
+  ' ABOUT YOURSELF
+.subtitle
+  span WHAT IS YOUR HAIR COLOUR?
+
+ul.rounded-list.heir
+  - question.answers.each do |answer|
+    li.item
+      label
+        .hair-image
+          = image_tag "_quiz/hair/#{answer.code}.png", width: 101, height: 101, alt: ''
+          .selected
+        = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code

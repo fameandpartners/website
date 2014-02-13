@@ -1,25 +1,10 @@
-h1 = question.text
-.sexiness
-  .sexiness-profile.first
-  ul.values
-    li.value-1
+h1
+  em Do you prefer to show some skin or cover up?
+  | RANK HOW SEXY YOU LIKE TO LOOK
+.subtitle
+  span Click on the scale - from least important to very important
+.lips.items-box
+  - question.answers.order('sexiness ASC').each_with_index do |answer, index|
+    .item class="step-#{index}"
       label
-        .inner
-          = form.radio_button :code, 'sxs2'
-    li.value-2
-      label
-        .inner
-          = form.radio_button :code, 'sxs4'
-    li.value-3
-      label
-        .inner
-          = form.radio_button :code, 'sxs6'
-    li.value-4
-      label
-        .inner
-          = form.radio_button :code, 'sxs8'
-    li.value-5
-      label
-        .inner
-          = form.radio_button :code, 'sxs10'
-  .sexiness-profile.second
+        = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code

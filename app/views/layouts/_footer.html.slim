@@ -1,4 +1,22 @@
-footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
+footer.footer-global
+  .arrows-line-horizontal
+  nav.nav-footer
+    ul.fleft
+      li = link_to 'COLLECTIONS', collection_path, class: 'btn small empty'
+      / li = link_to 'STYLE INSPIRATION', '#', class: 'btn small empty'
+      li = link_to 'ABOUT US', about_us_path, class: 'btn small empty'
+      li = link_to 'TEAM', team_path, class: 'btn small empty'
+      li = link_to 'HELP', faqs_path, class: 'btn small empty'
+    = link_to root_path, class: 'logo' do
+      span.icon-logo
+    ul.fright
+      li = link_to 'TERMS & CONDITIONS', terms_path, class: 'btn small empty'
+      li.active = link_to 'SIGN UP FOR OUR NEWSLETTER', '#', class: 'btn small empty newsletter'
+  .arrows-line-horizontal
+  .copy 
+    ' &copy; 2013 Fame & Partners – All Rights Reserved
+
+/ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .grid-container
     .grid-20.prefix-3.links
       .title Collection
@@ -75,7 +93,7 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
 
 .hide
   #what-size
-    table.table
+    table.table-global
       thead
         tr
           th Measurements
@@ -112,5 +130,5 @@ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : 
           td 92 cm
           td 97 cm
           td 102 cm
-          td 107cm
+          td 107 cm
           td 112 cm

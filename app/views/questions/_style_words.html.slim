@@ -1,8 +1,12 @@
-h1 = question.text
-.subtitle Choose as many as you like:
-ul.choices
+/ h1 = question.text
+h1 
+  em It's time to dress up
+  ' WHICH BEST DESCRIBES YOUR STYLE?
+.subtitle 
+  span Choose as many as you like
+.choices.items-box
   - question.answers.each do |answer|
-    li
+    .item class="active-type-#{Random.rand(4)}"
       label
         = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
         = answer.code.humanize.upcase

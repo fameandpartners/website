@@ -5,7 +5,7 @@ module Products
       @product_id = product_or_id.respond_to?(:id) ? product_or_id.id : product_or_id
     end
 
-    # returns [{ variant_id: 123, color: 'black', size: 12, available: true} ]
+    # returns [{ variant_id: 123, color: 'black', color_code: '#000000', image: '', size: 12, available: true} ]
     def available_options
       color_option  = Spree::OptionType.where(name: 'dress-color').first
       size_option   = Spree::OptionType.where(name: 'dress-size').first
@@ -17,8 +17,9 @@ module Products
           if option_value.option_type_id == color_option.id
             available_option[:color] = option_value.name
             available_option[:image] = option_value.image.url(:small_square) if option_value.image?
+            available_option[:color_code]  = option_value.value
           elsif option_value.option_type_id == size_option.id
-            available_option[:size] = option_value.name
+            available_option[:size] = Integer(option_value.name) rescue option_value.name
           end
         end
 

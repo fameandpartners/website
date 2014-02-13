@@ -1,12 +1,9 @@
 .steps-box style="overflow: hidden;"
   .questions-count
-    .inline.label Question
-    '
-    .inline.current 1
-    '
-    .inline.label of
-    '
-    .inline.total = @quiz.questions.map(&:step).uniq.count
+    ' Q
+    span.current 1
+    | /
+    span.total = @quiz.questions.map(&:step).uniq.count
   .film style="position: relative;"
     = form_for :quiz, :url => quiz_answers_path,:remote => true do |f|
       - @quiz.questions.order('position ASC').group_by(&:step).each do |step, questions|
@@ -16,11 +13,11 @@
               = f.fields_for "questions][#{question.id}" do |ff|
                 = ff.fields_for :answer do |fff|
                   = render question.partial, :form => fff, :question => question
-  .progress-next.clearfix
+  .progress-next
     .prev
-      a href="#" Previous question
+      a href="#" Back
     .progress-bar
       .filler style="width: 0%;"
         .tooltip 0%
     .next
-      a href="#" Next question
+      a href="#" Next

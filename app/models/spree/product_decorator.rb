@@ -17,6 +17,8 @@ Spree::Product.class_eval do
   has_many :product_color_values,
            dependent: :destroy
 
+  has_many :moodboard_items, foreign_key: :spree_product_id
+
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
       "spree_option_values.id" => value_ids,
@@ -129,6 +131,14 @@ Spree::Product.class_eval do
     product_color_values.joins(:images).map(&:option_value_id)
   end
 
+  # for case, when we trying to update indexes with no price [ in creating process]
+  # TODO: it should be check in update index
+  def price_for_search
+    price.to_f
+  rescue
+    0.00
+  end
+
   def basic_colors
     if option_type = option_types.find_by_name('dress-color')
       option_type.
@@ -136,7 +146,7 @@ Spree::Product.class_eval do
         joins(:variants).
         where(spree_variants: {id: variant_ids}).uniq
     else
-      []
+      Spree::OptionValue.none
     end
   end
 
@@ -146,7 +156,7 @@ Spree::Product.class_eval do
         option_values.
         where('spree_option_values.id NOT IN (?)', basic_colors.map(&:id)).uniq
     else
-      []
+      Spree::OptionValue.none
     end
   end
 

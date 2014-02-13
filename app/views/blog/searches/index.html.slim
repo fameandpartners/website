@@ -1,22 +1,20 @@
 = render 'shared/blog_top_bar'
-= render 'shared/breadcrumbs'
+/ = render 'shared/breadcrumbs'
 
 .wrap.no-overflow
-
-  .content-sidebar.clearfix
-    section.content-area
-      .search-box
-        form *{ action: blog_search_by_query_path }
+  .grid-container
+    .grid-8.blog-content-column
+      .blog-search-box
+        form.form-global *{ action: blog_search_by_query_path }
           input type="text" name="search" placeholder="Search for..." id="search_by_query" value="#{params[:q].present? ? params[:q] : ''}"
-      .blog-block-title.inline
-        .latest search
-        .block-subtitle Results
+        h1 search Results
+        
       - if @posts.blank?
         .empty-results Nothing found
       - else
         = render @posts
-
-    = render 'shared/blog_sidebar'
+    .grid-4
+      = render 'shared/blog_sidebar'
 
 javascript:
   var disqus_shortname = 'fameandpartners';
@@ -31,3 +29,4 @@ javascript:
   $(function() {
     window.initInfiniteScroll("#{request.path}", #{@posts_count});
   });
+/Users/artembydiansky/apps/fame_and_partners/app/views/blog/searches/index.html.slim

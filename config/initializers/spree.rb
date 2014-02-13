@@ -17,12 +17,12 @@ Spree.config do |config|
   config.show_zero_stock_products = true
 
   config.attachment_styles = {
-    'mini'    => '48x48#',
-    'small'   => '83x115#',
-    'product' => '243x352#',
-    'large'   => '460x590#',
-    'xlarge'  => '1280x800>',
-    'email'   => '144x185#'
+    mini:     '48x48#',
+    small:    '80x115#',
+    product:  '234x336#',
+    large:    '411x590#',
+    xlarge:   '1280x800>',
+    email:    '129x185'
   }.to_json
 
   config.currency = 'AUD'

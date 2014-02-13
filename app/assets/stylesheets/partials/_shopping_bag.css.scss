@@ -1,0 +1,179 @@
+.shopping-bag-page {
+	margin-top: 45px;
+	h1 {
+		font-size: 47px;
+		font-family: $fontThree;
+		@include clearfix;
+		.title { float: left;}
+		.shipping-icon {
+			float: right;
+			font-size: 28px;
+			margin-top: 13px;
+			.icon {
+				position: relative;
+				display: inline-block;
+				vertical-align: middle;
+				span {
+					font-size: 32px;
+					height: 27px;
+					line-height: 27px;	
+				}
+				.icon-erase { 
+					position: absolute;
+					left: 0;
+					top: 0;
+					color: $pinkColor;
+				}
+			}
+		}
+	}
+}
+
+.cart-table {
+	width: 100%;
+	margin: 20px 0;
+	thead tr {
+		background: url('_nav-bg.png') top left;
+	}
+	th {
+		font-weight: 400;
+		text-transform: uppercase;
+		font-size: 18px;
+		padding: 6px 10px;
+		text-align: left;
+		background: 0;
+		vertical-align: top;
+	}
+	td {
+		padding: 10px;
+		vertical-align: top;
+		&:first-child { padding-left: 0;}
+	}
+	.column-1 { width: 55%;}
+	.column-2 { width: 25%;}
+	.column-3 { 
+		width: 20%;
+		text-align: right;
+	}
+	.image {
+		float: left;
+		margin-right: 20px;
+		img { display: block;}
+	}
+	.product-info {
+		@include clearfix;
+		position: relative;
+		.name {
+			font-size: 32px;
+			font-family: $fontThree;
+			margin-bottom: 5px;
+			a { text-decoration: none;}
+		}
+		.desc {
+			padding-bottom: 50px;
+			font-size: 12px;
+		}
+		.buttons {
+			position: absolute;
+			bottom: 0;
+			left: 156px;
+			.btn { margin-right: 10px;}
+		}
+	}
+	.details-box {
+		min-height: 200px;
+		position: relative;
+	}
+	.static {
+		font-size: 0;
+		padding-bottom: 50px;
+		.line {
+			padding: 2px 0;
+		}
+		.label, .value {
+			display: inline-block;
+			vertical-align: top;
+			width: 50%;
+			font-size: 12px;
+		}
+		.value {
+			text-align: right;
+		}
+	}
+	.edit {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		text-align: center;
+	}
+	.pricing {
+		font-size: 18px;
+	}
+}
+
+.continue-buy, .cart-summary {
+	@include clearfix;
+}
+
+.cart-summary {
+	margin-bottom: 20px;
+	padding-top: 25px;
+	border-top: solid 1px #000;
+	.card-info {
+		float: left;
+		width: 55%;
+		.promocode {
+			.btn { margin-left: 10px;}
+		}
+		.security {
+			margin-top: 20px;
+		}
+		.title {
+			margin-right: 10px;
+		}
+		.title, .desc {
+			vertical-align: middle;
+			display: inline-block;
+		}
+	}
+	.summary {
+		float: right;
+		width: 45%;
+		ul { list-style: none;}
+		li { 
+			padding: 3px 0;
+			font-size: 0;
+		}
+		.totals { font-weight: 600;}
+		.label, .desc {
+			font-size: 16px;
+			display: inline-block;
+			vertical-align: top;
+			width: 50%;
+		}
+		.desc {
+			text-align: right;
+		}
+	}
+}
+.ask-parents-block {
+	margin-right: 20px;
+}
+.continue-buy {
+	.btn { color: #000;}
+	.checkout {
+		.btn {
+			width: 400px;
+      color: #fff;
+		}
+		.or {
+			text-align: center;
+			font-size: 18px;
+			line-height: 40px;
+		}
+    .paypal {
+      text-align: center;
+    }
+	}
+}

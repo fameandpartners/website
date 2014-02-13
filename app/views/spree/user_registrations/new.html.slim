@@ -1,8 +1,11 @@
-.wrap.devise-forms
-  .fleft
+.wrap.devise-forms.row
+  .grid-6
     h1 Create an Account
     .description Create an account to save your dress to a Wishlist to discover your Style Profile, share with friends and to manage your profile. Its easy just enter some basic details!
-    = link_to 'Sign up with facebook', fb_auth_path, class: 'facebook-signup'
+    = link_to fb_auth_path, class: 'facebook-button' do
+      span.icon
+        span.icon-facebook2
+      span Sign up with facebook
     .or
       span or
     .default-form
@@ -12,5 +15,5 @@
         = render :partial => 'spree/shared/user_form', :locals => { :f => f }
     .terms
       ' By clicking above you acknowledge and accept our Terms of Service.
-  .fright
-    = image_tag 'image-signup.jpg', width: 533, height: 562, alt: ''
+  .picture.grid-6
+    = image_tag '_reg/signup.jpg', alt: ''

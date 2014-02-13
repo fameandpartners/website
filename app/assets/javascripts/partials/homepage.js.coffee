@@ -21,18 +21,9 @@ $(".index.show").ready ->
       height: 532
   )
 
-  # add quick view feature
-  window.helpers.quickViewer.init()
-
-  $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
-
   productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
 
   # show campaign - newsletter popup
   if ($(".modal.campaign-newsletter.hide").length > 0)
     if $.cookie('newsletter_mp') != 'hide'
-      popup = new window.popups.newsletterModalPopup()
-      popup.initialize($(".modal.campaign-newsletter.hide").first())
-      popup.show()
-      window.newsletterModalPopup = popup
-      popup
+      showNewsletterPopup()

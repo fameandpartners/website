@@ -1,22 +1,19 @@
-h1 = question.text
-ul.photos.clearfix
-  li
-    label
-      = image_tag 'quiz/hairstyles/glam.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'glam'
-  li
-    label
-      = image_tag 'quiz/hairstyles/classic.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'classic'
-  li
-    label
-      = image_tag 'quiz/hairstyles/boho.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'bohemian'
-  li
-    label
-      = image_tag 'quiz/hairstyles/edgy.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'edgy'
-  li
-    label
-      = image_tag 'quiz/hairstyles/girly.jpg', width: 190, height: 294, alt: ''
-      = form.radio_button :code, 'girly'
+h1
+  em Whether it works for you or not,
+  | WHICH HAIR STYLE DO YOU LOVE?
+.subtitle
+  span SCROLL THROUGH & CHOOSE AS MANY AS YOU LIKE
+.photos-wrapper
+  .scrollable
+    .photos.items-box
+      - question.answers.shuffle.each do |answer|
+        .item.unloaded
+          label
+            = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
+            img src="" alt="" data-src="#{image_path("style_quiz/outfits/#{answer.code}.jpg")}"
+            span.selected selected
+  .photos-nav
+    .up
+      .arrows-line-vertical
+    .down
+      .arrows-line-vertical

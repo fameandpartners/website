@@ -1,7 +1,10 @@
-h1 = question.text
-.subtitle From least important to most important.
-ul.stars
-  - question.answers.order('fashionability ASC').each do |answer|
-    li
+h1
+  em How important
+  ' IS FASHION TO YOU?
+.subtitle 
+  span Click on the scale - from least important to very important
+.stars.items-box
+  - question.answers.order('fashionability ASC').each_with_index do |answer, index|
+    .item class="step-#{index}"
       label
-        = form.radio_button :code, answer.code
+        = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code

@@ -1,24 +1,19 @@
-$('.wishlists_items').ready ->
-  page = {
+$('.users_wishlists_items').ready ->
+  wishlistPage = {
     editPopup: null
 
     init: () ->
-      page.container = $('#wishlists_items')
+      wishlistPage.container = $('#wishlists_items')
+      wishlistPage.updateContentHandlers()
+      wishlistPage.editPopup = window.helpers.createVariantsSelectorPopup()
+      wishlistPage.container.append(wishlistPage.editPopup.init())
 
-      window.helpers.quickViewer.init()
-      page.updateContentHandlers()
-
-      page.editPopup = window.helpers.createVariantsSelectorPopup()
-      page.container.append(page.editPopup.init())
+      page.enableQuickView(wishlistPage.container)
 
     updateContentHandlers: () ->
-      # bind quick view
-      $(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
       productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
       window.initHoverableProductImages()
-
-      $('.add-to-cart.master').on('click', page.moveToCartClickHander)
-
+      $('.add-to-cart.master').on('click', wishlistPage.moveToCartClickHander)
       window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
 
     moveToCartClickHander: (e) ->
@@ -26,8 +21,8 @@ $('.wishlists_items').ready ->
       variant_id = $(e.currentTarget).data('variant')
       item_id = $(e.currentTarget).data('item')
       quantity = $(e.currentTarget).data('quantity')
-      page.editPopup.show({ variant_id: variant_id, quantity: quantity }, { id: item_id })
-      page.editPopup.one('selected', (e, data) ->
+      wishlistPage.editPopup.show({ variant_id: variant_id, quantity: quantity }, { id: item_id })
+      wishlistPage.editPopup.one('selected', (e, data) ->
         itemId = data.params.id
         $.ajax(
           url: urlWithSitePrefix("/wishlists_items/#{itemId}/move_to_cart"),
@@ -37,4 +32,4 @@ $('.wishlists_items').ready ->
       )
   }
 
-  page.init()
+  wishlistPage.init()

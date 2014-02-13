@@ -4,7 +4,6 @@
 
 .form
   = form_for (@participation || Participation.new), as: :participation, url: newsletter_campaign_path, remote: true do |f|
-    .input.string
+    .string
       = f.email_field :email, class: 'inputbox', placeholder: 'Enter your email'
-    .submit-form
-      input.submitbox type="submit" value="Join"
+      input.btn.submitbox type="submit" value="Join"

@@ -30,6 +30,7 @@ gem 'roo', require: false
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
+gem 'droidcss'
 
 group :assets do
   gem 'bourbon'
@@ -75,6 +76,9 @@ gem 'spree_paypal_express',
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
+group :staging do
+  gem "therubyracer"
+end
 
 group :production do
   gem 'unicorn'

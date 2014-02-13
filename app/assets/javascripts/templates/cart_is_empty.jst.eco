@@ -1,8 +1,8 @@
 <div class="empty-cart" data-hook="empty_cart">
   <p>
-    Your cart is empty
+    YOUR CART IS EMPTY
   </p>
   <p>
-    <a href="<%= getSiteVersionPrefix() %>/products" class="button continue">Continue shopping</a>
+    <a href="<%= getSiteVersionPrefix() %>/collection" class="button continue">Continue shopping</a>
   </p>
 </div>

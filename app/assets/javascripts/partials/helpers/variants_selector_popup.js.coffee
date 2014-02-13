@@ -9,19 +9,22 @@ window.helpers.createVariantsSelectorPopup = () ->
     variantsSelector: null
     initialized: false
 
-    # return hided placeholder
     init: () ->
-      popup.container = $('.edit-line-item.modal').hide()
-      popup.container.find('.close-lightbox').on('click', popup.cancelButtonClickHandler)
-      popup.container.find('.save input.btn').on('click', popup.saveButtonClickHandler)
-      popup.container.find('.overlay').on('click', popup.cancelButtonClickHandler)
+      if !popup.initialized
+        popup.container = window.popups.getModalContainer('Edit product details', 'Save changes')
+        popup.content = popup.container.find('.modal-container')
+        popup.container.find('.close-lightbox').on('click', popup.cancelButtonClickHandler)
+        popup.container.find('.save input.btn').on('click', popup.saveButtonClickHandler)
+        popup.container.find('.overlay').on('click', popup.cancelButtonClickHandler)
+        popup.initialized = true
 
-      return popup.container
+      return popup
   
     # options should contains one of id, product_id, variant_id
     show: (params = {}, eventParams = {}) ->
       popup.params = params
       popup.eventParams = eventParams
+
       $.ajax(
         url: urlWithSitePrefix('/product_variants'),
         type: 'GET',
@@ -33,8 +36,9 @@ window.helpers.createVariantsSelectorPopup = () ->
     showModalWindow: (data) ->
       templateArgs = popup.prepareTemplateArgs(data)
       popup.container.show()
+      
       item_html = JST['templates/variants_selector_form'](templateArgs)
-      popup.container.find('.item').replaceWith(item_html)
+      popup.container.find('.item').html(item_html)
 
       preselectedVariant = popup.params.variant_id
       preselectedVariant = data.variants[0].id unless preselectedVariant?
@@ -43,15 +47,14 @@ window.helpers.createVariantsSelectorPopup = () ->
       quantity = popup.params.quantity
       quantity = 1 unless quantity?
       popup.container.find('.value select.quantity-select').val(quantity)
-
-      popup.container.center()
-
+      popup.content.center()
+      popup
 
     prepareTemplateArgs: (response) ->
       result = {
         product: response.product.product,
-        sizes: window.getUniqueValues(response.variants, 'size')
-        colors: window.getUniqueValues(response.variants, 'color')
+        sizes: window.getUniqueValues(response.variants, 'size').sort (a, b) -> a - b
+        colors: popup.getColorsMap(response.variants)
         max_quantity: 10
       }
       if popup.params.quantity
@@ -61,6 +64,7 @@ window.helpers.createVariantsSelectorPopup = () ->
       result
 
     updateFormHandlers: (variants, variantId) ->
+      popup.container.find('.selectbox').chosen({width: '100%', disable_search: true })
       popup.variantsSelector = window.helpers.createProductVariantsSelector(popup.container)
       popup.variantsSelector.init(variants, { id: variantId })
 
@@ -86,19 +90,21 @@ window.helpers.createVariantsSelectorPopup = () ->
         popup.trigger('selected', formData)
         popup.close()
       else
-        popup.showErrorMessage()
+        window.helpers.showErrors(popup.container, 'Please, select size and color')
 
-    showErrorMessage: (messageText = 'Please, select size and color') ->
-      popup.container.find('.error.message').text(messageText).fadeIn()
-      setTimeout(popup.hideErrorMessage, 3000)
-
-    hideErrorMessage: () ->
-      popup.container.find('.error.message').fadeOut()
+    getColorsMap: (variants) ->
+      map = {}
+      _.each(variants, (variant) ->
+        map[variant.color] = variant.color_code
+      )
+      map
   }
 
   popup.on      = delegateTo(popup.eventBus, 'on')
   popup.one     = delegateTo(popup.eventBus, 'one')
   popup.off     = delegateTo(popup.eventBus, 'off')
   popup.trigger = delegateTo(popup.eventBus, 'trigger')
+
+  popup.init()
 
   return popup

@@ -73,7 +73,7 @@ en-AU:
             color: 'Choose a colour:'
           notices:
             color_images: 'Images of other colours are on their way'
-            twin_alert: 'Make sure you dont buy the same dress as someone else. First choose a colour above.'
+            twin_alert: 'Make sure you dont buy the same dress as <br/> someone else. First choose a color above.'
           modals:
             customization:
               title: 'Tell us how you would like to customise this dress.'
@@ -97,4 +97,4 @@ en-AU:
       labels:
         color: 'Choose a colour:'
       notices:
-        color_images: 'Images of other colours are on their way'
+        color_images: 'Images of other colours <br/> are on their way'

@@ -18,7 +18,7 @@ class LineItemSerializer < ActiveModel::Serializer
     :product_size,
     :product_delivery_time
 
-  has_one :personalization
+  has_one :personalization, serializer: LineItemPersonalizationSerializer
 
   def price
     object.price.to_s
@@ -72,7 +72,11 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def product_color
-    object.variant.dress_color.try(:name) || ""
+    if (personalization = object.personalization).present?
+      return personalization.color.try(:value) || ''
+    else
+      object.variant.dress_color.try(:presentation) || ''
+    end
   end
 
   def product_size

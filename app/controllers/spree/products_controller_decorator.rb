@@ -16,15 +16,19 @@ Spree::ProductsController.class_eval do
 
     @current_colors = @searcher.colour.present? ? @searcher.colors_with_similar : []
 
-    set_collection_title(@page_info)
-    set_marketing_pixels(@searcher)
+    respond_to do |format|
+      format.html do
+        set_collection_title(@page_info)
+        set_marketing_pixels(@searcher)
 
-    if !request.xhr?
-      render action: 'index', layout: true
-    else
-      text = render_to_string(partial: 'products', locals: { products: @products })
-      render text: text, layout: false
-    end
+        render action: 'index', layout: true
+      end
+      format.json do
+        products_html = render_to_string(partial: 'spree/products/product.html.slim', collection: @products) || 'Sorry, no dresses match your criteria'
+
+        render json: { products_html: products_html, page_info:  @page_info }
+      end
+    end 
   end
 
   # NOTE: original method check case when user comes from page
@@ -35,8 +39,8 @@ Spree::ProductsController.class_eval do
     set_product_show_page_title(@product)
     @product_properties = @product.product_properties.includes(:property)
 
-    @similar_products = Products::SimilarProducts.new(@product).fetch(4)
     @product_variants = Products::VariantsReceiver.new(@product).available_options
+    @recommended_products = get_recommended_products(limit: 3)
 
     respond_with(@product)
   end
@@ -50,7 +54,8 @@ Spree::ProductsController.class_eval do
       popup_html: popup_html,
       variants: @product_variants,
       analytics_label: analytics_label(:product, @product),
-      activities: @activites
+      activities: @activites,
+      images: @product.images_json
     }
   end
 
@@ -115,6 +120,12 @@ Spree::ProductsController.class_eval do
   end
 
   helper_method :colors
+
+  def featured_products
+    @featured_products ||= Spree::Product.active.featured.uniq.includes(:master)
+  end
+
+  helper_method :featured_products
 
   def log_product_viewed
     return unless @product

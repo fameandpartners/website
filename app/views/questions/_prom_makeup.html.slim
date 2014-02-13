@@ -1,27 +1,19 @@
-h1 = question.text
-ul.photos.clearfix
-  li
-    label
-      = form.radio_button :code, 'natural'
-      = image_tag 'quiz/makeup/natural.jpg', width: 190, height: 294, alt: ''
-      .label Natural
-  li
-    label
-      = form.radio_button :code, 'dramatic'
-      = image_tag 'quiz/makeup/dramatic.jpg', width: 190, height: 294, alt: ''
-      .label Dramatic
-  li
-    label
-      = form.radio_button :code, 'romantic'
-      = image_tag 'quiz/makeup/romantic.jpg', width: 190, height: 294, alt: ''
-      .label Romantic
-  li
-    label
-      = form.radio_button :code, 'statement'
-      = image_tag 'quiz/makeup/statement.jpg', width: 190, height: 294, alt: ''
-      .label Statement
-  li
-    label
-      = form.radio_button :code, 'edgy'
-      = image_tag 'quiz/makeup/edgy.jpg', width: 190, height: 294, alt: ''
-      .label Edgy
+h1
+  em Which make-up
+  | DO YOU LOVE?
+.subtitle
+  span SCROLL THROUGH & CHOOSE AS MANY AS YOU LIKE
+.photos-wrapper
+  .scrollable
+    .photos.items-box
+      - question.answers.shuffle.each do |answer|
+        .item.unloaded
+          label
+            = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
+            img src="" alt="" data-src="#{image_path("style_quiz/outfits/#{answer.code}.jpg")}"
+            span.selected selected
+  .photos-nav
+    .up
+      .arrows-line-vertical
+    .down
+      .arrows-line-vertical

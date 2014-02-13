@@ -1,39 +1,31 @@
 .payment-method-details
+  - unless (sale_active? or current_order.has_personalized_items?)
+    .coupon-block
+      = form_for @order, url: update_checkout_path('payment'), remote: true, html: {class: 'form-global'} do |f|
+        h4 Enter coupon or promocode
+        p You might have seen one in an email, from a friend or even by completing our Style Quiz.
+        = f.text_field :coupon_code
+        = f.submit 'Redeem Now', class: 'btn empty border'
+
+  .payments-cart
+    /input type="radio" name="cards"
+    .fleft Secure credit card payment
+    .fright 
+      span.image = image_tag 'icons-cards.png', alt: 'Visa, MasterCard, Amex'
+
+  = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
+    = render 'shared/error_messages', :target => @order
+    = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
+    = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
+
+  - if paypal_available?
+    .grid-container.border
+      = render :partial => "spree/checkout/payment/paypal"
+
   .grid-container
-    .grid-100.selector
-      legend
-        /input type="radio" name="cards"
-        label Secure credit card payment
-        span.image = image_tag 'icons-cards.png', width: 176, height: 33, alt: 'Visa, MasterCard, Amex'
-
-.grid-container
-  .grid-100
-    = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
-      = render 'shared/error_messages', :target => @order
-      = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
-      = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
-
-- if paypal_available?
-  .grid-container.border
-    = render :partial => "spree/checkout/payment/paypal"
-
-- unless (sale_active? or current_order.has_personalized_items?)
-  .coupon-block.border
-    .grid-container
-      = form_for @order, url: update_checkout_path('payment'),remote: true do |f|
-        .grid-50
-          .input
-            label Enter coupon or promocode
-            .promo-help You might have seen one in an email, from a friend or even by completing our Style Quiz.
-            = f.text_field :coupon_code
-        .grid-50
-          .submit
-            = f.submit 'Redeem Now'
-
-.grid-container
-  .grid-100
-    .place-order
-      button data-loading="Placing..." Place order
+    .grid-100
+      .place-order
+        button.btn.border data-loading="Placing..." Place order
 
 /.style-tips.border
 /  .grid-container

@@ -1,8 +1,7 @@
 .checkout-summary
-  .block-name Item description
-
+  h3 Item description
   .shopping-bag-popup
-    ul.items-carousel style="height: auto;"
+    .items-carousel style="height: auto;"
       = render partial: "shared/line_item", \
         collection: @order.line_items, \
         as: :line_item, \

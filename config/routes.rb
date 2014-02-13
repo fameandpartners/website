@@ -32,6 +32,7 @@ FameAndPartners::Application.routes.draw do
 
       get '/browse', to: 'products#index', as: :personalization_products
       get '/:permalink', to: 'products#show', as: :personalization_product
+      get '/:permalink/style', to: 'products#style', as: :personalization_style_product
     end
 
     resources :celebrities, only: [:show]
@@ -226,6 +227,19 @@ FameAndPartners::Application.routes.draw do
         resources :product_customisation_types, only: :destroy
         resources :product_customisation_values, only: :destroy
       end
+
+      resources :products do
+        resources :moodboard_items do
+          collection do
+            post :update_positions, as: :update_positions
+          end
+        end
+      end
+
+      resources :styles, only: [:index, :update] do
+        resources :style_images, only: [:update]
+      end
+      delete '/styles/:style_name/style_images/:position', to: "style_images#destroy", as: :delete_style_image
 
       namespace :blog do
         resources :promo_banners

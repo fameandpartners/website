@@ -76,7 +76,14 @@ module FameAndPartners
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
 
-    config.cache_store = :redis_store
+    cache_store_options = {}
+    cache_store_options[:namespace] = ['fame_and_partners', Rails.env, 'cache'].join('_')
+
+    config.cache_store = :redis_store, cache_store_options
+
+    config.generators do |generator|
+      generator.test_framework :rspec
+    end 
 
     config.generators do |generator|
       generator.test_framework :rspec

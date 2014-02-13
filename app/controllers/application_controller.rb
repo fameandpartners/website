@@ -297,4 +297,14 @@ class ApplicationController < ActionController::Base
   def set_locale
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
+
+  def get_recommended_products(options = {})
+    if try_spree_current_user && try_spree_current_user.style_profile.present?
+      Spree::Product.recommended_for(try_spree_current_user, options)
+    else
+      []
+    end
+  rescue
+    []
+  end
 end

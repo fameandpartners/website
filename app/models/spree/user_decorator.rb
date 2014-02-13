@@ -34,7 +34,7 @@ Spree::User.class_eval do
 
   def update_profile_image(file)
     return if file.nil?
-    image = self.profile_image || Spree::Image.new()
+    image = profile_image || build_profile_image
     image.viewable = self
     image.attachment = file
     image.save
@@ -42,6 +42,7 @@ Spree::User.class_eval do
 
   def image(style = :small)
     img = self.profile_image
+
     if img.blank?
       return nil
     else
@@ -110,7 +111,7 @@ Spree::User.class_eval do
   end
 
   def recent_site_version
-    SiteVersion.where(id: self.site_version_id) || SiteVersion.default
+    SiteVersion.where(id: self.site_version_id).first || SiteVersion.default
   end
 
   private

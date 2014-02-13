@@ -1,0 +1,63 @@
+.product-info
+  h6 = link_to range_taxon_name_for(product), collection_product_path(product)
+  h1.product-title
+    = product.name
+    span.price = price_for_product(product)
+  .section  
+    - options = color_options_for_select(colors)
+    = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'
+  .section
+    h6.info
+     ' SELECT A SIZE 
+     = link_to '(whats my size?)', '#what-size', class: 'toggle-sizes '
+    .sizebox
+      - sizes.each_with_index do |size|
+        div.button data-size="#{size}" = size
+  .section
+    .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
+    = link_to 'add to cart', '#', class: 'btn buy-now'
+  .section      
+    = add_to_wishlist_link(product, title: '+ TO WISH LIST', class: 'btn empty border')
+  .section
+    ul.slider
+      li.opened 
+        .title DESCRIPTION
+        .text 
+          - if (description = product_description(@product)).present?
+            p = description
+          - else
+            p = t('product_has_no_description')
+      li 
+        .title details
+        .text
+          p SKU: #{@product.sku}
+          p Material: #{@product.property('fabric')}
+      - if @product.property('style_notes').present?
+        li 
+          .title styling notes
+          .text
+            p = product.property('style_notes')
+      li 
+        .title delivery
+        .text
+          p = @product.delivery_time_as_string(:long)
+      li 
+        .title returns
+        .text
+          p What is your returns policy?
+          p We are sorry to learn you are unhappy with your dress. We accept returns under the following circumstances: 
+          ul
+            li Full Price Items: 30 days from date of shipment
+            li Sale Items- Up to 30% off: 14 days from date of shipment  
+            li Sale Items- 31%- 49% off: 7 days from date of shipment 
+            li Sale Items- > 50%: No Returns 
+      - if defined?(products)
+        li 
+          .title recommended
+          .text
+            .category-catalog
+              .row
+                - products.each do |product|
+                  .grid-4
+                    = link_to collection_product_path(product) do
+                      = product_image_tag(product)

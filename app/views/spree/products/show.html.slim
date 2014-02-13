@@ -1,17 +1,116 @@
+css:
+  .sc-player { display: none; }
+
 javascript:
   window.product_variants = #{{ @product_variants.to_json }};
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
-  window.productImagesData = #{{@product.images_json.to_json}};
+/  window.productImagesData = #{{@product.images_json.to_json}};
 
 ruby:
- sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
- color_images  = @product_variants.inject({}){|res, t| res[t[:color].to_s] = t[:image].to_s; res }
- enabled_tabs = ['photos']
- enabled_tabs.push('inspiration') if @product.celebrity_inspiration
- enabled_tabs.push('video') if @product.video_url.present?
+ sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
 
-.wrap
+ruby:
+  image = @product.images.first
+  if image.present? and image.attachment.present?
+    product_image_url = absolute_image_url(image.attachment.url(:large), 'http')
+  else
+    product_image_url = get_absolute_image_url("/assets/noimage/product.png", 'http')
+  end
+  share_url = collection_product_url(@product)
+
+= render 'product_meta', product: @product
+
+.content-offer
+  .title
+    ' GET YOUR 
+    em UNIQUE 
+    ' STYLE.
+  .fright
+    .text-with-arrow 
+      ' Lorem ipsum dolor sit amet, consectetu,
+      br
+      ' Integer vel felis sit amet massa conguet.
+      .arrow
+    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
+
+// PRODUCT EXPLORE ---->
+.product-page
+  .row
+    .grid-8
+      = render 'spree/products/breadcrumbs', product: @product, active: :explore
+      .category-catalog
+        .row
+          - if @product.images.present?
+            - @product.images.each do |image|
+              .grid-6
+                .picture.product
+                  = image_tag(image.attachment.url(:large), title: @product.name)
+                  .popup
+                    .fright
+                      a href='#' data-action='show-large-image' data-image='#{ image.attachment.url(:xlarge) }'
+                        span.icon-expand
+          - if (celebrity = @product.celebrity_inspiration).present?
+            .grid-6
+              .picture
+                = image_tag celebrity.photo.url(:preview), alt: ''
+                .popup
+                  .fright
+                    a href='#' data-action='show-large-image' data-image='#{ celebrity.photo.url(:large) }'
+                      span.icon-expand
+          - if @product.video_url.present?
+            .grid-6
+              .picture
+                == product_video(@product, width: '100%', height: '481')
+          / moodboard
+          .grid-6
+            .row
+              - @product.moodboard_items.active.moodboard.each do |mood_item|
+                .grid-6
+                  .picture
+                    = image_tag mood_item.image.url(:product)
+          - if (notes = @product.property('designer_notes')).present?
+            .grid-6
+              .text
+                .inner = notes
+          .grid-6
+            .row
+              - @product.moodboard_items.active.song.each do |song_item|
+                .grid-6
+                  .picture.audio-cover
+                    = link_to 'SoundCloud tune', song_item.source, class: 'sc-player'
+                    = link_to '#', data: { action: 'soundcloud' } do
+                      = image_tag song_item.image
+                      = image_tag '_audio-icon.png', class: 'icon'
+                      span.mask
+                    .popup
+                      .fleft 
+                        = link_to '#', data: { action: 'soundcloud' } do
+                          span.icon-play
+                          span.icon-pause
+              - @product.moodboard_items.active.link.each do |link_item|
+                .grid-6
+                  .moodboard-title
+                    = image_tag '_moodboard-bg.png'
+                    .title
+                      h3 Dress
+                      em inspiration
+                      .gothic MOODBOARD
+                  / .picture
+                    = link_to link_item.source, target: 'blank' do
+                      = image_tag link_item.image
+          .grid-6
+            .social.addthis_toolbox.addthis_default_style
+              = facebook_share_button(share_url)
+              = pin_share_button(share_url, product_image_url, @product.name)
+
+              .arrows-line-horizontal.top
+              .arrows-line-horizontal.bottom
+    .grid-4
+      = render 'product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }
+
+// OLD HTML ---->
+/ .wrap
   .product-page.grid-container
 
     .grid-55
@@ -33,7 +132,7 @@ ruby:
             .big-photo
               .zoom
                 = link_to 'Zoom', '#'
-              = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
+              = image_tag 'noimage/large.png', alt: ''
         - if enabled_tabs.include?('video')
           #videos.tab-content style="display: none;"
             == product_video(@product)
@@ -44,7 +143,7 @@ ruby:
           #inspiration.tab-content style="display: none;"
             .tab-content-inner
               .big-photo
-                = image_tag celebrity.photo.url(:preview), width: 418, height: 600, alt: ''
+                = image_tag celebrity.photo.url(:preview), alt: ''
               .inspiration
                 .desc = celebrity.celebrity_description
                 .name = celebrity.celebrity_name
@@ -191,7 +290,7 @@ ruby:
           .like = add_to_wishlist_link(product)
           .quick-view = quick_view_link(product)
           = link_to collection_product_path(product) do
-            = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
+            = hoverable_product_image_tag product, itemprop: "image", alt: product.name
         .name = link_to product.name, product
         /.description = product_short_description(product)
         .price

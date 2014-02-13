@@ -92,6 +92,7 @@ class LineItemsController < Spree::StoreController
     line_item = current_order.line_items.where(variant_id: variant.id).first
 
     status = :bad_request
+
     if line_item
       wishlist_item = user.wishlist_items.where(spree_product_id: variant.product_id).first
       wishlist_item ||= user.wishlist_items.create(

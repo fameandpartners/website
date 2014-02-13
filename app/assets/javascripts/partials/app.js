@@ -111,9 +111,6 @@ $(function(){
 
   $(".promo-badge").delay(500).fadeIn('slow');
 
-  $('#toggle-selectbox').chosen();
-
-  $('.selectbox').chosen();
 
 
   window.initHoverableProductImages()
@@ -122,10 +119,11 @@ $(function(){
 
   //track.remarketing_tag()
 });
-
+/*
 $('body.blog').ready(function(){
   track.conversion('blog_view')
 });
+*/
 
 $('.ecommerce').ready(function(){
   $(document).on('click', '.ask-parent-to-pay-button', function(e){
@@ -135,10 +133,85 @@ $('.ecommerce').ready(function(){
   });
 });
 
-$(document).ready(function() {
+
+$(function() {
+  $('.selectbox').chosen({
+    width: '100%',
+    disable_search: true
+  });
+
   $('.current-version').on('click', function() {
     $(this).toggleClass('active');
-    $('.site-version-switch').toggle();
-  })
+    $('.site-version-switch ul').toggle();
+  });
+
+  $('.nav-user li:has(.dropdown)').hover(
+    function() {
+      $(this).find('.dropdown').stop(true, true).fadeIn('fast');
+    }, 
+    function() {
+      $(this).find('.dropdown').stop(true, true).fadeOut('fast');
+    }
+  );
+
+  $('.dropdown-trigger').hover(
+    function() {
+      $(this).find('.dropdown-menu').stop(true, true).fadeIn('fast');
+    },
+    function() {
+      $(this).find('.dropdown-menu').stop(true, true).fadeOut('fast');
+    }
+  );
+/*
+  // blog
+  if ($('.blog-header').length) {
+    $('.toggle-search').on('click', function(){
+      $('.blog-header .search').toggle();
+      return false
+    });
+  }
+
+  // blog carousel
+  // generate custom carousel pager
+  $blogCarouselBox = $('.blog-carousel');
+  $blogCarousel = $blogCarouselBox.find('.carousel');
+  pagerStr = '';
+  $blogCarouselPager = $blogCarouselBox.find('.controls').find('.pager')
+  for (var i = 0; i < $blogCarousel.find('li').length; i++ ) 
+    pagerStr += '<a href="#" data-slide-index="'+i+'"></a>'
+  $blogCarouselPager.html(pagerStr);
+
+  // init carousel
+  $blogCarousel.bxSlider({
+    minSlides: 3,
+    maxSlides: 3,
+    slideWidth: 460,
+    slideMargin: 5,
+    moveSlides: 1,
+    pagerCustom:  '.blog-carousel .pager',
+    nextSelector: '.blog-carousel .next',
+    prevSelector: '.blog-carousel .prev',
+    onSlideAfter: function($slideElement, oldIndex, newIndex) {
+      $slideElement.addClass('current').siblings('li').removeClass('current next-slide prev-slide');
+      $slideElement.removeClass('next-slide').next().addClass('next-slide');
+      $slideElement.removeClass('prev-slide').prev().addClass('prev-slide');
+    }
+  });
+*/
+  // TODO Need to refactor to new popup style
+  window.showNewsletterPopup = function (event) {
+    if (event != undefined) event.preventDefault();
+
+    $popupWrapper = $(".campaign-newsletter");
+    $popupContent = $popupWrapper.find('.modal-container');
+    popup = new window.popups.newsletterModalPopup();
+    popup.initialize($popupWrapper.first());
+    popup.show();
+    $popupContent.center();
+    window.newsletterModalPopup = popup;
+    return popup;
+  }
+
+  $('a.btn.newsletter').click(showNewsletterPopup);
 });
 

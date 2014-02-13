@@ -1,7 +1,55 @@
-.m-pixel
+.content-offer
+  .title
+    ' GET YOUR 
+    em UNIQUE 
+    ' STYLE.
+  .fright
+    .text-with-arrow 
+      ' Lorem ipsum dolor sit amet, consectetu,
+      br
+      ' Integer vel felis sit amet massa conguet.
+      .arrow
+    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
+
+.category-header
+  h1
+    span
+      em = @page_info[:banner_title]
+  p 
+    = @page_info[:banner_text]
+
+.category-filter
+  .fleft 
+    .filter-section
+      - options = options_from_collection_for_select(available_product_ranges, :base_permalink, :name, params[:collection])
+      = select_tag :collection, options, class: 'selectbox', prompt: 'Collection'
+
+    .filter-section
+      - options = options_from_collection_for_select(available_product_styles, :base_permalink, :name, params[:style])
+      = select_tag :style, options, class: 'selectbox', prompt: 'Styles'
+
+    .filter-section
+      - options = options_from_collection_for_select(ProductStyleProfile::BODY_SHAPES, :to_s, :to_s, @searcher.bodyshape)
+      = select_tag :bodyshape, options, class: 'selectbox', prompt: 'Body Shape'
+
+    .filter-section
+      - options = color_options_for_select_from_options_values(available_product_colors, @searcher.selected_color_name)
+      = select_tag :colour, options, class: 'selectbox', prompt: 'Colour'
+
+  .fright
+    .filter-section
+      - options = options_from_collection_for_select(Products::ProductsFilter.available_sort_orders, :first, :second, @searcher.order)
+      = select_tag 'product_order', options, class: 'selectbox', prompt: 'Sort By'
+
+.category-catalog.products
+  .row
+    = render(@products) || 'Sorry, no dresses match your criteria'
+
+// OLD HTML ---->
+/ .m-pixel
   img src="http://tags.rtbidder.net/track?sid=525645e58bc06f1060d9eb38" width="0" height="0" border="0" alt=""
 
-.wrap
+/ .wrap
   .browse-page.grid-container
     .grid-25.filters
       .main-title Refine by

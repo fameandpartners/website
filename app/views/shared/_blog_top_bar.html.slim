@@ -1,21 +1,31 @@
-.position-relative
-  .top-bar.blog
-    .wrap
-      nav.main
-        ul
-          li.with-dropdown[class="#{celebrities_page? ? 'active' : ''}"]
-            = link_to 'Celebrity Style', blog_celebrities_path
-            .dropdown-menu-wrapper
-              ul.dropdown-menu
-                li.title = link_to 'All Celebrities', blog_celebrities_path, class: ''
-                - @featured_celebrities.each do |celebrity|
-                  li = link_to celebrity.fullname, blog_celebrity_path(celebrity.slug)
-          li[class="#{red_carpet_posts_page? ? 'active' : ''}"] = link_to 'Red Carpet Events', blog_red_carpet_posts_path
-          - @categories.each do |category|
-            li[class="#{simple_posts_page? && params[:category_slug] == category.slug ? 'active' : ''}"] = link_to category.name, blog_posts_by_category_path(category.slug)
-          li[class="hide #{authors_page? ? 'active' : ''}"] = link_to 'Stylists', blog_authors_path 
-          li = link_to 'About us', about_url
-          li = link_to "Shop", root_url, title: "Shop Fame & Partners Formal Dresses"
-      .search
-        = form_tag blog_search_by_query_path, method: :get do
-          = text_field_tag :q, nil, placeholder: "Search the blog"
+nav.blog-nav
+  ul
+    li.selected = link_to 'MUSINGS', '#'
+    li = link_to 'TRENDING', '#'
+    li.two-lines 
+      = link_to '#' do
+        span.first-line FAN
+        span.second-line GIRLING
+    li.active = link_to 'FAME CHAIN', '#'
+    li = link_to 'GIRL STUFF', '#'
+    li = link_to 'VIDEO', '#'
+    li.last
+      = link_to root_url do
+        em SHOP
+        ' FAME & PARTNERS
+
+/ nav.main
+  ul
+    li.with-dropdown[class="#{celebrities_page? ? 'active' : ''}"]
+      = link_to 'Celebrity Style', blog_celebrities_path
+      .dropdown-menu-wrapper
+        ul.dropdown-menu
+          li.title = link_to 'All Celebrities', blog_celebrities_path, class: ''
+          - @featured_celebrities.each do |celebrity|
+            li = link_to celebrity.fullname, blog_celebrity_path(celebrity.slug)
+    li[class="#{red_carpet_posts_page? ? 'active' : ''}"] = link_to 'Red Carpet Events', blog_red_carpet_posts_path
+    - @categories.each do |category|
+      li[class="#{simple_posts_page? && params[:category_slug] == category.slug ? 'active' : ''}"] = link_to category.name, blog_posts_by_category_path(category.slug)
+    li[class="hide #{authors_page? ? 'active' : ''}"] = link_to 'Stylists', blog_authors_path 
+    li = link_to 'About us', about_url
+    li = link_to "Shop", root_url, title: "Shop Fame & Partners Formal Dresses"

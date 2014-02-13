@@ -10,22 +10,39 @@ $ ->
     listeners: []
 
     init: () ->
-      window.shoppingBag.container = $('header .shopping-bag')
+      window.shoppingBag.container = $('#wrap .cart')
 
-      shoppingBag.updateElementsHandlers()
+#      shoppingBag.updateElementsHandlers()
       shoppingBag.container.find("#shopping-bag-popup-wrapper").hide()
       shoppingBag.container.find(".shopping-bag-toggler").on(
         'click', shoppingBag.toggleVisibilityClickHandler
       )
 
+      shoppingBag.container.on 'mouseleave', '#shopping-bag-popup-wrapper', (event) ->
+        if shoppingBag.closeTimerId
+          clearTimeout(shoppingBag.closeTimerId)
+
+        shoppingBag.closeTimerId = setTimeout shoppingBag.hide, 5000
+
+      shoppingBag.container.on 'mouseenter', '#shopping-bag-popup-wrapper', (event) ->
+        $wrapper = shoppingBag.container.find("#shopping-bag-popup-wrapper")
+
+        if shoppingBag.closeTimerId
+          clearTimeout(shoppingBag.closeTimerId)
+          shoppingBag.closeTimerId = null
+
       window.shopping_cart.on('item_added',   shoppingBag.renderCart)
       window.shopping_cart.on('item_changed', shoppingBag.renderCart)
       window.shopping_cart.on('item_removed', shoppingBag.renderCart)
 
-    removeProductClickHandler: (e) ->
+#    removeProductClickHandler: (e) ->
+#      e.preventDefault()
+#      variantId = $(e.currentTarget).data('id')
+#      window.shopping_cart.removeProduct(variantId)
+
+    closeButtonClickHandler: (e) ->
       e.preventDefault()
-      variantId = $(e.currentTarget).data('id')
-      window.shopping_cart.removeProduct(variantId)
+      shoppingBag.hide()
 
     toggleVisibilityClickHandler: (e) ->
       e.preventDefault()
@@ -62,6 +79,7 @@ $ ->
       shoppingBag.closeTimerId = setTimeout(shoppingBag.hide, period)
 
     renderCart: (e, data) ->
+      window.cart_info = data
       cartHtml = shoppingBag.cartTemplate
         opened: shoppingBag.container.find("#shopping-bag-popup-wrapper").is(":visible")
         order: data.cart
@@ -71,7 +89,7 @@ $ ->
 
       #shoppingBag.show()
       # update actions
-      shoppingBag.updateElementsHandlers()
+      #shoppingBag.updateElementsHandlers()
       shoppingBag.carouselEnabled = false
       shoppingBag.updateCarousel(data.id)
       item_count = _.reduce(data.cart.line_items, ((memo, item) -> memo += item.quantity), 0)
@@ -84,12 +102,14 @@ $ ->
       unless _.contains(shoppingBag.listeners, callback)
         shoppingBag.listeners.push(callback)
 
-    updateElementsHandlers: () ->
-      shoppingBag.container.find('.remove-item-from-cart')
-        .off('click', shoppingBag.removeProductClickHandler)
-        .on('click', shoppingBag.removeProductClickHandler)
+#    updateElementsHandlers: () ->
+#      shoppingBag.container.find('.remove-item-from-cart')
+#        .off('click', shoppingBag.removeProductClickHandler)
+#        .on('click', shoppingBag.removeProductClickHandler)
 
     updateCarousel: (variantId) ->
+      # currently, shopping bag doesn't have carousel
+      return
       return unless $("#shopping-bag-popup").is(":visible")
 
       start = $('#shopping-bag-popup').first().find(' > li')

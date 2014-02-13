@@ -1,0 +1,74 @@
+javascript:
+  window.product_variants = #{{ @product_variants.to_json }};
+  window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
+
+ruby:
+ sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+ colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+
+.content-offer
+  .title
+    ' GET YOUR 
+    em UNIQUE 
+    ' STYLE.
+  .fright
+    .text-with-arrow 
+      ' Lorem ipsum dolor sit amet, consectetu,
+      br
+      ' Integer vel felis sit amet massa conguet.
+      .arrow
+    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
+
+// PRODUCT STYLE IT ---->
+.product-page
+  .row
+    .grid-8
+      = render 'spree/products/breadcrumbs', product: @product, active: :style
+      .style-it
+        .heading
+          - if (notes = @product.property('designer_notes')).present?
+            p = notes
+
+          /= link_to 'BOOK A FREE STYLING SESSION', '#', class: 'btn empty border'
+          - if personalised_store_available?
+            = link_to 'BOOK A FREE STYLING SESSION', my_boutique_path, class: 'btn empty border'
+          - else
+            = link_to 'BOOK A FREE STYLING SESSION', '#', :class => 'btn empty border show-style-quiz'
+          h4 
+            ' WANT US TO SOURCE THIS COMPLETE LOOK? 
+            br
+            ' BUY TODAY AND WE'LL DO IT FOR FREE.
+        .lookbox
+          .row
+            - suitable_styles = @product.style_profile.try(:suitable_styles) || []
+            - suitable_styles.each do |style|
+              - cache ['style', style.name, 'image_and_accessories'], :expires_in => configatron.cache.expire.normally do
+                .grid-6
+                  .title = style.title
+                  - images = style.get_images
+                  - if images.size == 1
+                    .picture
+                      = image_tag images.first.image(:product)
+                  - else
+                    .category-catalog
+                      .row
+                        - images.each do |image|
+                          .grid-6
+                            .picture
+                              = image_tag image.image.url(:product)
+                  .text
+                    h4 WANT US TO SOURCE THE COMPLETE LOOK?
+                    p 
+                      span BUY TODAY
+                      ' AND WE WILL SOURCE FOR FREE!  
+                .grid-6
+                  .arrows-line-horizontal
+                  ul.price-list
+                    - style.accessories.each_with_index do |item, index|
+                      li
+                        .number = "#{index.next}."
+                        p = item[:name]
+                        p = item[:price]
+                  .arrows-line-horizontal
+    .grid-4
+      = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }

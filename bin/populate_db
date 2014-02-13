@@ -1,0 +1,30 @@
+#!/bin/sh
+
+bundle exec rake db:schema:load
+
+bundle exec rake db:seed
+
+bundle exec rake spree_sample:load
+
+bundle exec rake db:populate:users
+
+bundle exec rake db:populate:site_versions
+
+bundle exec rake db:populate:dresses
+
+# update products with 
+bundle exec rake db:populate:taxonomy
+bundle exec rake db:populate:product_options
+bundle exec rake db:populate:product_style_profiles
+bundle exec rake db:populate:customisation_categories
+
+# common settings
+bundle exec rake db:populate:seo
+bundle exec rake db:populate:seo_taxonomy
+bundle exec rake db:populate:quiz
+bundle exec rake db:populate:sale_shipping_method
+bundle exec rake db:populate:payment_methods  
+
+
+# optional
+bundle exec rake db:populate:moodboard

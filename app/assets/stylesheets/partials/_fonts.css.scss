@@ -1,20 +1,38 @@
-@include font-face('GranjonLTStd', '/fonts/granjonltstd', 300);
-@include font-face('GranjonLTStd', '/fonts/granjonltstd-italic', 300, italic);
-@include font-face('GranjonLTStd', '/fonts/granjonltstd-bold', 700);
+@import url(http://fonts.googleapis.com/css?family=Arapey:400italic,400);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic);
 
-@include font-face('Annifont', '/fonts/annifont', 400);
+@include font-face('Novecento', 'novecentosanswide-light', 300);
+@include font-face('Novecento', 'novecentosanswide');
+@include font-face('Novecento', 'novecentosanswide-bold', 700);
 
-@include font-face('Didot', '/fonts/didot', 400);
-@include font-face('Didot', '/fonts/didot-italic', 400, italic);
-@include font-face('Didot', '/fonts/didot-bold', 700);
+@include font-face('Didot', 'didot', 400);
+@include font-face('Didot', 'didot-italic', 400, italic);
+@include font-face('Didot', 'didot-bold', 700);
 
-@include font-face('LeagueGothic', '/fonts/leaguegothic-regular', 400);
+@include font-face('LeagueGothic', 'leaguegothic-regular', 400);
 
-@include font-face('Icons', '/fonts/icomoon');
+@include font-face('Icons', 'icomoon');
+@include font-face('Icon Numbers', 'icon-numbers');
 
-$fontOne: 'Lato', sans-serif;
-$fontTwo: 'GranjonLTStd', serif;
-$fontThree: 'Annifont', serif;
-$fontFour: 'Didot', serif;
-$fontFive: 'LeagueGothic', serif;
-$fontSix: Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif;
+
+$fontOne: 'Novecento', sans-serif;
+$fontTwo: 'Didot', serif;
+$fontThree: 'LeagueGothic', serif;
+$fontFour: 'Arapey', serif;
+$fontFive: 'Lato', sans-serif;
+
+// BLOG FONTS
+@include font-face('Vampiro One', 'vampiroone-regular');
+@include font-face('Cinzel Bold', 'cinzel-bold');
+@include font-face('Cinzel Regular', 'cinzel-regular');
+@include font-face('Abrilfatface', 'abrilfatface-regular');
+@include font-face('source_sans_probold', 'sourcesanspro-bold');
+@include font-face('source_sans_prolight', 'sourcesanspro-light');
+
+
+$vampiro: 'Vampiro One', sans-serif;
+$cinzelNormal: 'Cinzel Regular', sans-serif;
+$cinzelBold: 'Cinzel Bold', sans-serif;
+$abrilfatface: 'Abrilfatface', sans-serif;
+$sourceBold: 'source_sans_probold', sans-serif;
+$sourceLight: 'source_sans_prolight', sans-serif;
