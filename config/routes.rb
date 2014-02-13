@@ -278,6 +278,8 @@ FameAndPartners::Application.routes.draw do
             put :toggle_featured
           end
         end
+
+        resource :configuration, only: [:show, :update]
       end
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do

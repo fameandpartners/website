@@ -31,4 +31,9 @@ class BlogBaseController < ApplicationController
     []
   end
   helper_method :bread_crumbs
+
+  def blog_config
+    @blog_config ||= Blog.config
+  end
+  helper_method :blog_config
 end

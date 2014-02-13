@@ -7,3 +7,4 @@
       = tab :promo_banners, url: admin_blog_promo_banners_path
     - if can? :manage, Blog::Category
       = tab :categories, url: admin_blog_categories_path
+    = tab :settings, url: admin_blog_configuration_path

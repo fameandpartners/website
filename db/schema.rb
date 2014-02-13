@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140212110458) do
+ActiveRecord::Schema.define(:version => 20140213205349) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20140212110458) do
     t.integer  "primary_photo_id"
     t.integer  "event_id"
     t.datetime "featured_at"
+    t.string   "description"
   end
 
   add_index "blog_posts", ["category_id", "published_at"], :name => "index_blog_posts_on_category_id_and_published_at"
@@ -153,6 +154,14 @@ ActiveRecord::Schema.define(:version => 20140212110458) do
   add_index "blog_posts", ["post_type_id"], :name => "index_blog_posts_on_post_type_id"
   add_index "blog_posts", ["slug"], :name => "index_blog_posts_on_slug"
   add_index "blog_posts", ["user_id"], :name => "index_blog_posts_on_user_id"
+
+  create_table "blog_preferences", :force => true do |t|
+    t.text     "value"
+    t.string   "key"
+    t.string   "value_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "blog_promo_banners", :force => true do |t|
     t.string   "url"
@@ -331,6 +340,8 @@ ActiveRecord::Schema.define(:version => 20140212110458) do
     t.datetime "image_updated_at"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
+    t.string   "name"
+    t.string   "title"
   end
 
   create_table "payment_requests", :force => true do |t|

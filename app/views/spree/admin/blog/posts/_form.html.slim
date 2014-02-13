@@ -41,6 +41,13 @@
       br
       = f.error_message_on :title
 
+    = f.field_container :description do
+      = f.label :description, "Short description"
+      br
+      = f.text_area :description, class: 'text', rows: 3, width: 30
+      br
+      = f.error_message_on :description
+
     = f.field_container :body do
       = f.label :body, "Body"
       br

@@ -4,7 +4,7 @@ class Blog::Post < ActiveRecord::Base
     RED_CARPET = 1
   end
 
-  attr_accessible :body, :title, :category_id, :occured_at,
+  attr_accessible :body, :title, :description, :category_id, :occured_at,
                   :published_at, :user_id, :slug, :post_type_id,
                   :tag_list
 
