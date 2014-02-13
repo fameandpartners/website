@@ -88,17 +88,18 @@ ruby:
                         = link_to '#', data: { action: 'soundcloud' } do
                           span.icon-play
                           span.icon-pause
-              - @product.moodboard_items.active.link.each do |link_item|
+              - @product.moodboard_items.active.parfume.each do |parfume|
                 .grid-6
-                  .moodboard-title
-                    = image_tag '_moodboard-bg.png'
-                    .title
-                      h3 Dress
-                      em inspiration
-                      .gothic MOODBOARD
-                  / .picture
-                    = link_to link_item.source, target: 'blank' do
-                      = image_tag link_item.image
+                  .picture
+                    = link_to parfume.source, target: 'blank' do
+                      = image_tag parfume.image.url
+              .grid-6
+                .moodboard-title
+                  = image_tag '_moodboard-bg.png'
+                  .title
+                    h3 Dress
+                    em inspiration
+                    .gothic MOODBOARD
           .grid-6
             .social.addthis_toolbox.addthis_default_style
               = facebook_share_button(share_url)
@@ -269,7 +270,7 @@ ruby:
                 ' advice
         .twin-alert-block.clearfix
           = product_twin_alert_link(@product)
-        = soundcloud_widget(@product)
+        /= soundcloud_widget(@product)
         - if @activities.present?
           .activities.clearfix
             .activities-title Recent Activity

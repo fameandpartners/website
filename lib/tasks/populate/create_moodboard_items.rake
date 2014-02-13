@@ -11,7 +11,7 @@ end
 def add_default_set_of_items_to(product)
   moodboard = product.moodboard_items
   ensure_moodboard_items_set_exists(moodboard.moodboard, '', 5)
-  ensure_moodboard_items_set_exists(moodboard.link, 'http://habrahabr.ru')
+  ensure_moodboard_items_set_exists(moodboard.parfume, 'http://habrahabr.ru')
   ensure_moodboard_items_set_exists(moodboard.song, 'https://soundcloud.com/pedro-noe/game-of-thrones-main-title')  
 end
 

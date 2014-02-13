@@ -4,7 +4,12 @@ tr data-id="#{item.id}" id=( spree_dom_id item )
   td = item.active? ? 'Active' : 'Disabled'
   td = item.item_type
   td = image_tag(item.image.url(:thumbnail), height: '60', width: '80')
-  td title="#{ item.content }" = truncate(item.content, length: 20)
+  td title="#{ item.content }"
+      ' name:
+      = item.name
+      br
+      'content:
+      = truncate(item.content, length: 20)
   td
     = link_to "Edit", edit_admin_product_moodboard_item_url(product, item), remote: true
     br

@@ -24,9 +24,13 @@ ruby:
     = form.field_container :active do
       = form.check_box :active
       = form.label :active, 'Active'
+
+    = form.field_container :name do
+      = form.label :name, 'Name'
+      = form.text_field :name, class: "fullwidth"
       
     = form.field_container :content do
-      = form.label :content, 'Url, eg link to song or parfume'
+      = form.label :content, 'Content'
       = form.text_field :content, class: "fullwidth"
 
     = form.field_container :image do
