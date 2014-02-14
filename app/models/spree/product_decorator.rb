@@ -18,6 +18,7 @@ Spree::Product.class_eval do
            dependent: :destroy
 
   has_many :moodboard_items, foreign_key: :spree_product_id
+  has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
 
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(

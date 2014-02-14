@@ -3,8 +3,14 @@ javascript:
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
 
 ruby:
- sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
- colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+
+  style_accessories = {}
+  @product.accessories.includes(:style).order('style_id asc, position asc').each do |accessory|
+    style_accessories[accessory.style_id] ||= []
+    style_accessories[accessory.style_id].push(accessory)
+  end
 
 .content-offer
   .title
@@ -40,35 +46,34 @@ ruby:
             ' BUY TODAY AND WE'LL DO IT FOR FREE.
         .lookbox
           .row
-            - suitable_styles = @product.style_profile.try(:suitable_styles) || []
-            - suitable_styles.each do |style|
-              - cache ['style', style.name, 'image_and_accessories'], :expires_in => configatron.cache.expire.normally do
-                .grid-6
-                  .title = style.title
-                  - images = style.get_images
-                  - if images.size == 1
-                    .picture
-                      = image_tag images.first.image(:product)
-                  - else
-                    .category-catalog
-                      .row
-                        - images.each do |image|
-                          .grid-6
-                            .picture
-                              = image_tag image.image.url(:product)
-                  .text
-                    h4 WANT US TO SOURCE THE COMPLETE LOOK?
-                    p 
-                      span BUY TODAY
-                      ' AND WE WILL SOURCE FOR FREE!  
-                .grid-6
-                  .arrows-line-horizontal
-                  ul.price-list
-                    - style.accessories.each_with_index do |item, index|
-                      li
-                        .number = "#{index.next}."
-                        p = item[:name]
-                        p = item[:price]
-                  .arrows-line-horizontal
+            - style_accessories.each do |style_id, accessories|
+              /- cache ['style', style_id, 'image_and_accessories'], :expires_in => configatron.cache.expire.normally do
+              .grid-6
+                .title = accessories.first.style.title
+                - images = accessories.map{|t| t.image.present? ? t.image.url(:product) : nil}.compact
+                - if images.size == 1
+                  .picture
+                    = image_tag images.first
+                - else
+                  .category-catalog
+                    .row
+                      - images.first(4).each do |image_url|
+                        .grid-6
+                          .picture
+                            = image_tag image_url
+                .text
+                  h4 WANT US TO SOURCE THE COMPLETE LOOK?
+                  p 
+                    span BUY TODAY
+                    ' AND WE WILL SOURCE FOR FREE!  
+              .grid-6
+                .arrows-line-horizontal
+                ul.price-list
+                  - accessories.each_with_index do |item, index|
+                    li
+                      .number = "#{index.next}."
+                      p = link_to item.name, item.source
+                      p = item.display_price
+                .arrows-line-horizontal
     .grid-4
       = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }

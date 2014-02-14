@@ -1,13 +1,15 @@
 class Spree::Admin::StylesController < Spree::Admin::BaseController
   def index
-    render locals: {
-      styles: Style.get_all
-    }
+  end
+
+  def show
+    render action: index
   end
 
   def update
-    style = Style.get_by_name(params[:style_image])
-    style.update_attributes(params[:style])
+    params[:styles].each do |style_name, style_title|
+      Style.update_all({ title: style_title }, {name: style_name})
+    end
 
     render nothing: true
   end
