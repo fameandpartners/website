@@ -10,13 +10,35 @@ css:
 
 #template-upload
 
-= form_for StyleImage.new,
+table.index.compact
+  colgroup
+     col style="width: 10%;"
+     col style="width: 40%;"
+     col style="width: 50%;"
+  thead
+    tr
+      th ID
+      th Name
+      th Title
+      th 
+  tbody
+    = form_tag admin_styles_path, class: 'form', remote: true, method: :put do
+      - Style.all.each do |style|
+        tr data-name=( style.name )
+          td = style.id
+          td = style.name
+          td = text_field_tag "styles[#{style.name}]"
+      tr
+        td colspan="3"
+          = submit_tag "Update"
+
+/= form_for StyleImage.new,
   :url => admin_style_style_image_url('style', 'id'), method: :post, html: { id: 'update_style_form' } do |f|
   = f.hidden_field :position
   = f.hidden_field :style_id
   = f.file_field :image, style: 'display: none;'
 
-table.index.compact
+/table.index.compact
   colgroup
      col style="width: 40%;"
      col style="width: 60%;"
@@ -61,7 +83,7 @@ table.index.compact
                   td = link_to 'Remove', '#', class: 'remove-item'
             = f.submit 'save'
 
-javascript:
+/javascript:
   $(function(){
     $('#update_style_form input[type="file"]').fileupload({
       acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,

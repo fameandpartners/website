@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140213205349) do
+ActiveRecord::Schema.define(:version => 20140214124223) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -156,14 +156,12 @@ ActiveRecord::Schema.define(:version => 20140213205349) do
   add_index "blog_posts", ["user_id"], :name => "index_blog_posts_on_user_id"
 
   create_table "blog_preferences", :force => true do |t|
-    t.string   "key"
     t.text     "value"
+    t.string   "key"
     t.string   "value_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "blog_preferences", ["key"], :name => "index_blog_preferences_on_key"
 
   create_table "blog_promo_banners", :force => true do |t|
     t.string   "url"
@@ -301,6 +299,23 @@ ActiveRecord::Schema.define(:version => 20140213205349) do
     t.decimal  "price",                 :precision => 8, :scale => 2
   end
 
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
     t.integer  "product_id"
@@ -337,6 +352,24 @@ ActiveRecord::Schema.define(:version => 20140213205349) do
     t.string   "token"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "product_accessories", :force => true do |t|
+    t.integer  "style_id"
+    t.integer  "spree_product_id"
+    t.integer  "position"
+    t.boolean  "active",                                           :default => true
+    t.string   "title"
+    t.string   "name"
+    t.string   "source"
+    t.decimal  "price",              :precision => 8, :scale => 2
+    t.string   "currency"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                                                         :null => false
+    t.datetime "updated_at",                                                         :null => false
   end
 
   create_table "product_color_values", :force => true do |t|
@@ -1158,23 +1191,10 @@ ActiveRecord::Schema.define(:version => 20140213205349) do
     t.datetime "updated_at",                            :null => false
   end
 
-  create_table "style_images", :force => true do |t|
-    t.integer  "style_id"
-    t.integer  "position"
-    t.boolean  "active",             :default => true
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-  end
-
   create_table "styles", :force => true do |t|
     t.string   "name"
-    t.text     "accessories"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "title"
   end
 
