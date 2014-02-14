@@ -4,6 +4,7 @@
       = render 'users/shared/tabs', active_tab: 'orders'
       #orders.tab-content
         h1.page-title My Orders
+        
         - if @orders.size == 0
           p You have no orders
         - else
@@ -25,3 +26,6 @@
                   td = order_payment_state(order)
                   td = order_shipment_state(order)
                   td = order.display_total
+
+          
+                 
