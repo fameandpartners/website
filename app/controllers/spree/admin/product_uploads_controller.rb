@@ -9,7 +9,7 @@ module Spree
 
       def parse
         uploader = Products::BatchUploader.new()
-        uploader.parse_file(params[:file])
+        uploader.parse_file(params[:file], params[:start])
 
         @parsed_data = uploader.parsed_data
 
@@ -23,7 +23,7 @@ module Spree
             products_data.push(args)
           end
         end
-        @products = Products::BatchUploader.new.create_products(products_data)
+        @products = Products::BatchUploader.new.create_or_update_products(products_data)
 
         render action: :show
       end
