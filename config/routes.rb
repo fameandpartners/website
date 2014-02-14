@@ -214,18 +214,24 @@ FameAndPartners::Application.routes.draw do
 
       resource :sale, :only => [:edit, :update]
 
-      resources :customisation_types do
-        collection do
-          post :update_positions
-          post :update_values_positions
-        end
-      end
-      delete '/customisation_values/:id', :to => "customisation_values#destroy", :as => :customisation_value
+      #resources :customisation_types do
+      #  collection do
+      #    post :update_positions
+      #    post :update_values_positions
+      #  end
+      #end
+      #delete '/customisation_values/:id', :to => "customisation_values#destroy", :as => :customisation_value
 
+      #resources :products do
+      #  resources :product_customisations
+      #  resources :product_customisation_types, only: :destroy
+      #  resources :product_customisation_values, only: :destroy
+      #end
       resources :products do
-        resources :product_customisations
-        resources :product_customisation_types, only: :destroy
-        resources :product_customisation_values, only: :destroy
+        resource :customisation, only: [:show, :update], controller: 'product_customisations'
+      end
+      resources :customisation_values do
+        post :update_positions, on: :collection
       end
 
       resources :products do

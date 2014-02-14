@@ -9,11 +9,13 @@ Spree::Product.class_eval do
     class_name: 'ProductStyleProfile',
     foreign_key: :product_id
 
-  has_many :product_customisation_types
-  has_many :customisation_types,
-           through: :product_customisation_types
-  has_many :product_customisation_values,
-           through: :product_customisation_types
+  has_many  :customisation_values, through: :product_customisation_values
+  has_many  :product_customisation_values
+  #has_many :product_customisation_types
+  #has_many :customisation_types,
+  #         through: :product_customisation_types
+  #has_many :product_customisation_values,
+  #         through: :product_customisation_types
   has_many :product_color_values,
            dependent: :destroy
 
@@ -29,11 +31,12 @@ Spree::Product.class_eval do
 
   has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 
-  accepts_nested_attributes_for :product_customisation_types,
-    reject_if: lambda { |ct| ct[:customisation_type_id].blank? && ct[:id].blank? },
-    allow_destroy: true
-  attr_accessor :customisation_values_hash
-  attr_accessible :featured, :customisation_values_hash, :product_customisation_types_attributes
+  #accepts_nested_attributes_for :product_customisation_types,
+  #  reject_if: lambda { |ct| ct[:customisation_type_id].blank? && ct[:id].blank? },
+  #  allow_destroy: true
+  #attr_accessor :customisation_values_array
+  attr_accessible :featured#, :customisation_values_array#, :product_customisation_types_attributes
+  attr_accessible :customisation_value_ids
 
   attr_accessible :zone_prices_hash
   attr_accessor :zone_prices_hash
@@ -46,7 +49,8 @@ Spree::Product.class_eval do
   delegate_belongs_to :master, :in_sale?, :original_price, :price_without_discount
 
   before_create :set_default_prototype
-  after_create :build_customisations_from_values_hash, :if => :customisation_values_hash
+  #after_create :build_customisations_from_values_hash, :if => :customisation_values_hash
+  #after_create :build_customisations_from_values_array, :if => :customisation_values_array
 
   before_save :update_price_conversions
   after_save :update_zone_prices, if: :zone_prices_hash
@@ -262,17 +266,34 @@ Spree::Product.class_eval do
     end
   end
 
-  def build_customisations_from_values_hash
-    customisation_values_hash.each do |type_id, value_ids|
-      next unless type = CustomisationType.find_by_id(type_id)
-      values = type.customisation_values.where(id: value_ids).map(&:id)
-      next if values.empty?
-      product_type = self.product_customisation_types.new
-      product_type.customisation_type = type
-      product_type.customisation_value_ids = values
+#  def build_customisations_from_values_hash
+#    customisation_values_hash.each do |type_id, value_ids|
+#      next unless type = CustomisationType.find_by_id(type_id)
+#      values = type.customisation_values.where(id: value_ids).map(&:id)
+#      next if values.empty?
+#      product_type = self.product_customisation_types.new
+#      product_type.customisation_type = type
+#      product_type.customisation_value_ids = values
+#    end
+#    save
+#  end
+=begin
+  def build_customisations_from_values_array
+    self.customisation_value_ids
+    existings_ids = self.customisation_values.map{|i| i.id.to_s}
+
+    new_values_ids = [customisation_values_array - existings_ids]
+    if new_values_ids.present?
+      new_values = CustomisationValue.where(id: new_values_ids)
+      new_values.each do |value|
+        #self.customisation_values.create()
+      end
     end
-    save
+
+    obsoleted_ids = [existings_ids - customisation_values_array]
+    self.customisation_values.where(id: obsoleted_ids).destroy_all
   end
+=end
 
   def update_zone_prices
     self.variants_including_master.each do |variant|

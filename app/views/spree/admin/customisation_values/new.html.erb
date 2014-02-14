@@ -1,0 +1,19 @@
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @customisation_value } %>
+
+<%= form_for [:admin, @customisation_value], :html => { :multipart => true } do |f| %>
+
+<fieldset data-hook="new_customisation_value">
+
+  <legend align="center"><%= t(:new_customisation_value) %></legend>
+
+  <%= render :partial => 'form', :locals => { :f => f } %>
+
+  <div class="form-buttons filter-actions actions" data-hook="buttons">
+    <%= button t('actions.create'), 'icon-ok' %>
+    <span class="or"><%= t(:or) %></span>
+    <%= link_to_with_icon 'icon-remove', t('actions.cancel'), admin_customisation_values_path, :class => 'button' %>
+  </div>
+</fieldset>
+<% end %>
