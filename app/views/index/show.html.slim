@@ -25,9 +25,9 @@
       ' STYLE.
     .fright
       .text-with-arrow
-        ' Lorem ipsum dolor sit amet, consectetu,
+        ' Create your perfect look,
         br
-        ' Integer vel felis sit amet massa conguet.
+        ' start by taking our style quiz!
         .arrow
       = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
 
@@ -36,15 +36,15 @@
     .row
       .grid-8
         .picture-large 
-          = link_to '#' do
-            = image_tag '_sample/promo-large.jpg'
+          = link_to collection_path do
+            = image_tag 'homepage/new/hero.jpg'
       .grid-4
         .picture-small 
           = link_to '#' do
-            = image_tag '_sample/promo-small-1.jpg'
+            = image_tag 'homepage/new/small-jesinta.jpg'
         .picture-small 
-          = link_to '#' do
-            = image_tag '_sample/promo-small-2.jpg'    
+          = link_to collection_path(:edits => "monochrome") do
+            = image_tag 'homepage/new/small-monochrome.gif'    
 
 .how-it-works
   .arrows-line-horizontal
