@@ -6,7 +6,7 @@ nav.blog-nav
           = link_to category.name, blog_posts_by_category_path(category_slug: category.slug)
       - else
         li[class="two-lines #{params[:category_slug] == category.slug ? 'selected' : ''}"]
-          = link_to category.name do
+          = link_to blog_posts_by_category_path(category_slug: category.slug) do
             span.first-line FAN
             span.second-line GIRLING
         
