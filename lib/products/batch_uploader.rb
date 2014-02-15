@@ -347,15 +347,15 @@ module Products
           add_product_properties(product, args[:properties].symbolize_keys)
           add_product_variants(product, args[:sizes], args[:colors] || [])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
-          add_product_customizations(product, args[:customizations] || [])
+          add_product_customizations(product, args[:customizations] || {})
           add_product_accessories(product, args[:recommendations] || {})
           add_product_song(product, args[:song].symbolize_keys || {})
           add_product_perfume(product, args[:perfume].symbolize_keys || {})
 
           product
-        rescue Exception => message
-          Rails.logger.warn(message)
-          nil
+        #rescue Exception => message
+        #  Rails.logger.warn(message)
+        #  nil
         end
       end
     end
@@ -459,14 +459,15 @@ module Products
       variants
     end
 
-    def add_product_customizations(product, array_of_attributes)
+    def add_product_customizations(product, hash_of_attributes)
+
       customizations = []
 
       allowed = [:name,
                  :price,
                  :position]
 
-      array_of_attributes.values.each do |raw_attrs|
+      hash_of_attributes.values.each do |raw_attrs|
         attrs = raw_attrs.symbolize_keys.slice(*allowed)
 
         next unless attrs.values.any?(&:present?)
