@@ -1,6 +1,3 @@
-ruby:
-  product_customisation_types = @product.product_customisation_types.includes(:customisation_type, :customisation_values).with_values
-
 = form_for personalization, url: line_items_path, method: :post, remote: true, html: { class: 'personalization-form' } do |f|
   = hidden_field_tag :variant_id, product.master.id
 
@@ -9,7 +6,30 @@ ruby:
   - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
   .dropdown = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
 
-  - product_customisation_types.each do |product_customisation_type|
+  .style.customisation-selector
+    - product.product_customisation_values.each do |value|
+      .row.customisation-value data-customisation-value-id=(value.customisation_value_id)
+        .grid-6
+          .picture
+            = product_customisation_value_image(value)
+        .grid-6
+          .price = value.display_price
+          .button
+            = link_to '+ ADD', '#', class: 'btn empty border'
+            p = value.presentation
+
+/ruby:
+  product_customisation_types = @product.product_customisation_types.includes(:customisation_type, :customisation_values).with_values
+
+/= form_for personalization, url: line_items_path, method: :post, remote: true, html: { class: 'personalization-form' } do |f|
+  = hidden_field_tag :variant_id, product.master.id
+
+/  h4 Custom colours ARE only $16 
+  - options = color_options_for_select_from_options_values(product.custom_colors)
+  - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
+  .dropdown = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
+
+/  - product_customisation_types.each do |product_customisation_type|
     .style
       .row.customisation-type data-id="#{ product_customisation_type.id }"
         - type = product_customisation_type.customisation_type

@@ -1,25 +1,15 @@
 window.helpers or= {}
 
 window.helpers.createPersonalisationForm = (parentContainer) ->
-  highlighter = (scope) ->
-    $scope = $(scope)
-    $scope.find('label:not(:has(:input:checked))').removeClass('active')
-    $scope.find('label:has(:input:checked)').addClass('active')
-
-  defaulter = (scope) ->
-    $scope = $(scope)
-    return unless $scope.has(':radio')
-    unless $scope.is(':has(:radio:checked)')
-      $scope.find(':radio.default').click()
- 
   personalisationForm = {
     container: parentContainer,
     sizeInput: null,
     colorInput: null,
+    customisationsInput: null,
     selected: {
       color: null,
       size: null,
-      customization_value_ids: {}
+      customization_value_ids: []
     },
     variants:   null,
     masterVariantId: null,
@@ -31,90 +21,53 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
 
     __init: (variants, master_id) ->
       _.bindAll(@, 'update')
-      _.bindAll(@, 'onColourChangedHandler', 'onCustomisationValueChangeHandler', 'onBuyButtonClickHandler')
+      _.bindAll(@, 'onBuyButtonClickHandler')
 
       @variants = variants
       @masterVariantId  = master_id
 
       @sizeInput  or= new inputs.ButtonsBoxSelector(@container.find('.section .sizebox'), '.button')
-      @sizeInput.on('change',  @update)
 
-      @container.find('select#colour').on('change', @onColourChangedHandler)
-      @container.find('select#custom_colour').on('change', @onColourChangedHandler)
-      @container.find(':radio').on('change', @onCustomisationValueChangeHandler)
+      @colorInput or= new window.inputs.CustomAndBaseColourSelector(
+        @container.find('select#colour'),
+        @container.find('select#custom_colour')
+      )
+      @colorInput.val('')
+
+      @customisationsInput or= new window.inputs.CustomisationsSelector(
+        @container.find('.style.customisation-selector')
+      )
+
+      @sizeInput.on('change',  @update)
+      @colorInput.on('change',  @update)
+      @customisationsInput.on('change',  @update)
 
       @container.find('.product-info .btn.buy-now').on('click', @onBuyButtonClickHandler)
-
-      # set values
-      @container.find('.customisation-type').each (index, item)->
-        highlighter(item)
-        defaulter(item)
-
-      @update()
-
-    onColourChangedHandler: (e) ->
-      e.preventDefault()
-      selector = $(e.currentTarget)
-      # reset other selector
-      if !_.isEmpty(selector.val())
-        _.each(@container.find("select[data-select='colour']:not(##{ selector.attr('id') })"), (other_color_selector) ->
-          $(other_color_selector).find('option:first-child').prop('selected', true).end().trigger('chosen:updated')
-        , @)
-      @update()
-
-    onCustomisationValueChangeHandler: (e) ->
-      highlighter($(e.target).parents('.customisation-type'))
       @update()
 
     update: () ->
       @selected = {
         size: @sizeInput.val(),
-        color: @getSelectedColor(),
-        customization_value_ids: @getSelectedCustomisation()
+        color: @colorInput.val(),
+        customization_value_ids: @customisationsInput.val()
       }
       @updateChoosenVariantId()
       @updateWishlistButton()
       @updateBuyButton()
       return true
 
-    getSelectedSize: () ->
-      size = @container.find(".section .sizebox .button.selected").data('size')
-      size or= ''
-      return size.toString()
-
-    getSelectedColor: () ->
-      color = null
-      if !_.isEmpty(@container.find('select#colour').val())
-        color = @container.find('select#colour').val()
-      else if !_.isEmpty(@container.find('select#custom_colour').val())
-        color = @container.find('select#custom_colour').val()
-      else
-        color = null
-      return color
-
-    getSelectedCustomisation: () ->
-      result = {}
-      _.each(@container.find('.row.customisation-type'), (element) ->
-        customisation_type_id = $(element).data('id')
-        checked = $(element).find("input[type='radio']:checked:not(.default)")
-        if checked.length > 0
-          result[customisation_type_id] = checked.val()
-      , @)
-      return result
-
     isCustomProduct: () ->
       return true if !_.isEmpty(@selected.customization_value_ids)
-      result = _.isEmpty(@container.find('select#colour').val()) and !_.isEmpty(@container.find('select#custom_colour').val())
-      return result
+      return @colorInput.isCustomColour()
 
     updateChoosenVariantId: () ->
       @choosenVariantId = null
 
       window.helpers.hideErrors(@container.find('.product-info'))
 
-      if _.isEmpty(@selected.size) && _.isEmpty(@selected.color)
+      if !@selected.size && _.isEmpty(@selected.color)
         @errorMessage = 'Please, select size and color'
-      else if _.isEmpty(@selected.size)
+      else if !@selected.size
         @errorMessage = 'Please, select size'
       else if _.isEmpty(@selected.color)
         @errorMessage = 'Please, select color'

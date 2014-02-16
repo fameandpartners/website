@@ -37,13 +37,13 @@ class LineItemPersonalization < ActiveRecord::Base
     end
   end
 
-  validate do
-    if product.present? && customization_value_ids.present?
-      unless customization_values.count.eql?(customization_types.count)
-        errors.add(:base, 'Invalid customisation options selected')
-      end
-    end
-  end
+#  validate do
+#    if product.present? && customization_value_ids.present?
+#      unless customization_values.count.eql?(customization_types.count)
+#        errors.add(:base, 'Invalid customisation options selected')
+#      end
+#    end
+#  end
 
 #  def color
 #    if attributes['color'].present?
@@ -60,16 +60,17 @@ class LineItemPersonalization < ActiveRecord::Base
 #  end
 
   def customization_values
-    CustomisationValue.includes(:customisation_type).find(customization_value_ids)
+    #CustomisationValue.includes(:customisation_type).find(customization_value_ids)
+    CustomisationValue.find(customization_value_ids)
   end
 
-  def customization_types
-    customization_values.map(&:customisation_type).uniq
-  end
+  #def customization_types
+  #  customization_values.map(&:customisation_type).uniq
+  #end
 
-  def customization_value_ids=(hash)
-    super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
-  end
+  #def customization_value_ids=(hash)
+  #  super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
+  #end
 
   def options_hash
     values = {}

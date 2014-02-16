@@ -1,12 +1,3 @@
-/ css:
-  .row.customisation-type  { display: none; }
-  .row.customisation-type label img { 
-    margin: 3px;
-  }
-  .row.customisation-type label.active img { 
-    border: 3px solid #FFAB98;
-  }
-
 javascript:
   window.product_master_variant = '#{{ @product.master.id }}';
   window.product_variants = #{{ @product_variants.to_json }};
