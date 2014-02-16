@@ -369,7 +369,7 @@ module Products
 
       product = Spree::Variant.where(['is_master = ? AND LOWER(sku) = ?', true, sku]).first.try(:product)
 
-      unless product.present?
+      if product.blank?
         product = Spree::Product.new(sku: sku, featured: false, on_demand: true)
       end
 
@@ -377,13 +377,20 @@ module Products
         name: args[:name],
         price: args[:price_in_aud],
         description: args[:description],
-        permalink: args[:name].downcase.gsub(/\s/, '_'),
         taxon_ids: args[:taxon_ids] || []
       }
 
       attributes.select!{ |name, value| value.present? }
 
       product.assign_attributes(attributes, without_protection: true)
+
+      if product.persisted? && product.valid?
+        unless product.name_was.downcase == attributes[:name].downcase
+          product.save_permalink(attributes[:name].downcase.gsub(/\s/, '_'))
+        end
+      else
+        product.permalink = attributes[:name].downcase.gsub(/\s/, '_')
+      end
 
       product.save!
 
