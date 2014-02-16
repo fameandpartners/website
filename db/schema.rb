@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140215213352) do
+ActiveRecord::Schema.define(:version => 20140216133229) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -315,16 +315,16 @@ ActiveRecord::Schema.define(:version => 20140215213352) do
 
   create_table "moodboard_items", :force => true do |t|
     t.integer  "spree_product_id"
-    t.boolean  "active",                           :default => true
+    t.boolean  "active",                            :default => true
     t.string   "item_type",          :limit => 50
-    t.string   "content"
-    t.integer  "position",                         :default => 0
+    t.string   "content",            :limit => 512
+    t.integer  "position",                          :default => 0
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.string   "name"
     t.string   "title"
   end

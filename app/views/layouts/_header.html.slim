@@ -88,7 +88,7 @@
             span
               ' free
               br
-              ' styling advice
+              ' stylists
     .fright
       .search
         = form_tag search_path, method: :get do
@@ -107,10 +107,10 @@
   .nav-user
     nav.fleft
       ul
-        li = link_to 'CREATE YOUR LOOK', '#', class: 'btn show-style-quiz'
+        li = link_to 'CREATE YOUR PROM LOOK NOW', '#', class: 'btn show-style-quiz pink'
         li 
           = link_to collection_path, class: 'btn' do
-            span COLLECTIONS
+            span PROM DRESSES
             span.icon-dropdown-down
           .dropdown
             ul
@@ -124,7 +124,7 @@
         li = link_to 'WHY SHOP WITH US?', why_us_path, class: 'btn'
     = link_to '#', class: 'offer' do
       span.p.title FORMAL DRESSES FOR FASHION MAVENS
-      span.p Perfect dresses for proms and formal events    
+      span.p Your unique look. guaranteed.
   
 
   / .header-wrapper

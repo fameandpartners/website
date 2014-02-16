@@ -34,7 +34,7 @@ module Products
 
       book.default_sheet = book.sheets.first
 
-      rows.to_a.from(from).to(4).each do |row_num|
+      rows.to_a.from(from).to(9).each do |row_num|
         raw = {}
 
         # Basic
@@ -327,7 +327,7 @@ module Products
       first_empty_row_num = @@first_content_row_number
 
       total_rows = book.last_row(book.sheets.first)
-      while first_empty_row_num < total_rows and book.cell(first_empty_row_num, columns[:name]).present?
+      while first_empty_row_num < total_rows and book.cell(first_empty_row_num, columns[:sku]).present?
         first_empty_row_num += 1
       end
 
@@ -353,11 +353,11 @@ module Products
           add_product_perfume(product, args[:perfume].symbolize_keys || {})
 
           product
-        #rescue Exception => message
-        #  Rails.logger.warn(message)
-        #  nil
+        rescue Exception => message
+          Rails.logger.warn(message)
+          nil
         end
-      end
+      end.compact
     end
 
     private
@@ -369,7 +369,7 @@ module Products
 
       product = Spree::Variant.where(['is_master = ? AND LOWER(sku) = ?', true, sku]).first.try(:product)
 
-      unless product.present?
+      if product.blank?
         product = Spree::Product.new(sku: sku, featured: false, on_demand: true)
       end
 
@@ -377,13 +377,20 @@ module Products
         name: args[:name],
         price: args[:price_in_aud],
         description: args[:description],
-        permalink: args[:name].downcase.gsub(/\s/, '_'),
         taxon_ids: args[:taxon_ids] || []
       }
 
       attributes.select!{ |name, value| value.present? }
 
       product.assign_attributes(attributes, without_protection: true)
+
+      if product.persisted? && product.valid?
+        unless product.name_was.downcase == attributes[:name].downcase
+          product.save_permalink(attributes[:name].downcase.gsub(/\s/, '_'))
+        end
+      else
+        product.permalink = attributes[:name].downcase.gsub(/\s/, '_')
+      end
 
       product.save!
 
@@ -529,7 +536,7 @@ module Products
 
       unless factor.eql?(0.0)
         basic_style_names.each do |style_name|
-          points = (attributes[style_name] / factor).round
+          points = (attributes[style_name].to_i / factor).round
 
           if total >= 10
             points = 0
