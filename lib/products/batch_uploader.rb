@@ -34,7 +34,7 @@ module Products
 
       book.default_sheet = book.sheets.first
 
-      rows.to_a.from(from).to(4).each do |row_num|
+      rows.to_a.from(from).to(9).each do |row_num|
         raw = {}
 
         # Basic

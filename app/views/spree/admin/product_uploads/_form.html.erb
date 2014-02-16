@@ -16,8 +16,8 @@
           <div class="field">
             <%
                options = []
-               40.times do |time|
-                  options << ["#{time * 5 + 1}..#{time * 5 + 5}", time  * 5]
+               20.times do |time|
+                  options << ["#{time * 10 + 1}..#{time * 10 + 10}", time  * 10]
                end
             %>
             <%= label_tag 'start', 'Scope of rows' %>

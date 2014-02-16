@@ -122,7 +122,19 @@ namespace :images do
                 end
               end
             when /perfume/i then
-              puts 'Perfume'
+              file_data.each do |file_path, file_name|
+                parfume = product.moodboard_items.parfume.first
+
+                unless parfume.present?
+                  puts "Parfume was not found for product \"#{product.name}\""
+                  next
+                end
+
+                parfume.image = File.open(file_path)
+                if parfume.save
+                  puts "File \"#{file_name}\" was loaded as Parfume (Moodboard) to product \"#{product.name}\""
+                end
+              end
             when /song/i then
               file_data.each do |file_path, file_name|
                 song = product.moodboard_items.song.first
@@ -141,7 +153,7 @@ namespace :images do
               file_data.each do |file_path, file_name|
                 matches = /^(?<style>\S+)(?<position>\d+)\.\S+/.match(file_name)
 
-                if matches[:style].blank? || matches[:position].blank?
+                if matches.blank? || matches[:style].blank? || matches[:position].blank?
                   puts "File \"#{file_name}\" have invalid format of name"
                   next
                 end
