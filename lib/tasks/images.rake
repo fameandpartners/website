@@ -1,7 +1,7 @@
 namespace :images do
   desc 'Upload images from directory supplied by LOCATION and associate with products & colors by file name'
   task :import => :environment do
-    product_sku_regexp = /(?<sku>\S+)/
+    product_sku_regexp = /(?<sku>[[:alnum:]]+)[\-_]?/i
     product_image_regexp = /(^\S+[\-_]+(?<color>\S+)[\-_]+(?<position>\S+)\.(?<extension>\S+))|(\S+[\-_]+(?<position>\S+)\.(?<extension>\S+))$/i
 
     require 'pathname'
@@ -23,7 +23,8 @@ namespace :images do
         next
       end
 
-      master = Spree::Variant.where(sku: matches[:sku], is_master: true).first
+      master = Spree::Variant.where(['LOWER(sku) = ? AND is_master = ?', matches[:sku].downcase, true]).first
+
       product = master.try(:product)
 
       unless product.present? # product with given sku can not be find
