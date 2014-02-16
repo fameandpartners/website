@@ -536,7 +536,7 @@ module Products
 
       unless factor.eql?(0.0)
         basic_style_names.each do |style_name|
-          points = (attributes[style_name] / factor).round
+          points = (attributes[style_name].to_i / factor).round
 
           if total >= 10
             points = 0
