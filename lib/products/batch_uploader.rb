@@ -327,7 +327,7 @@ module Products
       first_empty_row_num = @@first_content_row_number
 
       total_rows = book.last_row(book.sheets.first)
-      while first_empty_row_num < total_rows and book.cell(first_empty_row_num, columns[:name]).present?
+      while first_empty_row_num < total_rows and book.cell(first_empty_row_num, columns[:sku]).present?
         first_empty_row_num += 1
       end
 
@@ -353,11 +353,11 @@ module Products
           add_product_perfume(product, args[:perfume].symbolize_keys || {})
 
           product
-        #rescue Exception => message
-        #  Rails.logger.warn(message)
-        #  nil
+        rescue Exception => message
+          Rails.logger.warn(message)
+          nil
         end
-      end
+      end.compact
     end
 
     private

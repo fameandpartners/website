@@ -33,148 +33,159 @@ module Products
       limit      = per_page
       offset     = ((page - 1) * per_page)
 
-      Tire.search(:spree_products, load: { include: { master: :prices } }) do
-        # Filter only undeleted & available products
-        filter :bool, :must => { :term => { :deleted => false } }
-        filter :exists, :field => :available_on
-        filter :bool, :should => {
-          :range => {
-            :available_on => { :lte => Time.now }
-          }
-        }
-
-        # Filter by colors
-        if color_ids.present?
-          filter :terms, :color_ids => color_ids
-        end
-
-        # Filter by taxons
-        if taxon_ids.present?
-          taxon_ids.each do |scope_name, ids|
-            filter :terms, :taxon_ids => ids
-          end
-        end
-
-        # Filter by keywords
-        query :term, :name => keywords if keywords.present?
-        query :term, :description => keywords if keywords.present?
-
-        # Show only products from stock
-        filter :bool, :must => { :term => { :in_stock => true } }
-
-        # Show only products with prices
-        unless Spree::Config.show_products_without_price
-          filter :exists, :field => :price
-        end
-
-
-        # Filter by bodyshapes
-        if bodyshapes.present?
-          if bodyshapes.size.eql?(1)
-            filter :bool, :should => {
-              :range => {
-                bodyshapes.first.to_sym => {
-                  :gte => 4
-                }
-              }
+      begin
+        Tire.search(:spree_products, load: { include: { master: :prices } }) do
+          # Filter only undeleted & available products
+          filter :bool, :must => { :term => { :deleted => false } }
+          filter :exists, :field => :available_on
+          filter :bool, :should => {
+            :range => {
+              :available_on => { :lte => Time.now }
             }
-          else
-            filter :or,
-              *bodyshapes.map do |bodyshape|
-                {
-                  :bool => {
-                    :should => {
-                      :range => {
-                        bodyshape.to_sym => {
-                          :gte => 4
-                        }
-                      }
-                    }
+          }
+
+          # Filter by colors
+          if color_ids.present?
+            filter :terms, :color_ids => color_ids
+          end
+
+          # Filter by taxons
+          if taxon_ids.present?
+            taxon_ids.each do |scope_name, ids|
+              filter :terms, :taxon_ids => ids
+            end
+          end
+
+          # Filter by keywords
+          query :term, :name => keywords if keywords.present?
+          query :term, :description => keywords if keywords.present?
+
+          # Show only products from stock
+          filter :bool, :must => { :term => { :in_stock => true } }
+
+          # Show only products with prices
+          unless Spree::Config.show_products_without_price
+            filter :exists, :field => :price
+          end
+
+
+          # Filter by bodyshapes
+          if bodyshapes.present?
+            if bodyshapes.size.eql?(1)
+              filter :bool, :should => {
+                :range => {
+                  bodyshapes.first.to_sym => {
+                    :gte => 4
                   }
                 }
-              end
-          end
-        end
-
-        sort do
-          if color_ids.present?
-            by ({
-              :_script => {
-                script: %q{
-                  int intersection_size = 0;
-
-                  if (doc.containsKey('viewable_color_ids')) {
-                    for ( int i = 0; i < color_ids.size(); i++ ) {
-                      color_id = color_ids[i];
-
-                      foreach( viewable_color_id : doc['viewable_color_ids'].values ) {
-                        if ( viewable_color_id == color_id ) {
-                          intersection_size += 1;
-                        }
-                      }
-
-                      if ( intersection_size > 0 ) {
-                        return color_ids.size() + color_ids.size() - i;
-                      }
-                    }
-                  }
-
-                  if (doc.containsKey('color_ids')) {
-                    for ( int i = 0; i < color_ids.size(); i++ ) {
-                      color_id = color_ids[i];
-
-                      foreach( doc_color_id : doc['color_ids'].values ) {
-                        if ( doc_color_id == color_id ) {
-                          intersection_size += 1;
-                        }
-                      }
-
-                      if ( intersection_size > 0 ) {
-                        return color_ids.size() - i;
-                      }
-                    }
-                  }
-
-                  return 0;
-                }.gsub(/[\r\n]|([\s]{2,})/, ''),
-                params: {
-                  color_ids: color_ids
-                },
-                type: 'number',
-                order: 'desc'
               }
-            })
-          end
-
-          if bodyshapes.present?
-            by ({
-              :_script => {
-                script: bodyshapes.map{|bodyshape| "doc['#{bodyshape}'].value" }.join(' + '),
-                type:   'number',
-                order:  'desc'
-              }
-            })
-          end
-
-          case order_by
-            when 'price_high'
-              by :price, 'desc'
-            when 'price_low'
-              by :price, 'asc'
-            when 'newest'
-              by :created_at, 'desc'
-            when 'popular'
-              # default ordering scope
             else
-              # default ordering scope
+              filter :or,
+                *bodyshapes.map do |bodyshape|
+                  {
+                    :bool => {
+                      :should => {
+                        :range => {
+                          bodyshape.to_sym => {
+                            :gte => 4
+                          }
+                        }
+                      }
+                    }
+                  }
+                end
+            end
           end
 
-          by :position, 'asc'
+          sort do
+            if color_ids.present?
+              by ({
+                :_script => {
+                  script: %q{
+                    int intersection_size = 0;
+
+                    if (doc.containsKey('viewable_color_ids')) {
+                      for ( int i = 0; i < color_ids.size(); i++ ) {
+                        color_id = color_ids[i];
+
+                        foreach( viewable_color_id : doc['viewable_color_ids'].values ) {
+                          if ( viewable_color_id == color_id ) {
+                            intersection_size += 1;
+                          }
+                        }
+
+                        if ( intersection_size > 0 ) {
+                          return color_ids.size() + color_ids.size() - i;
+                        }
+                      }
+                    }
+
+                    if (doc.containsKey('color_ids')) {
+                      for ( int i = 0; i < color_ids.size(); i++ ) {
+                        color_id = color_ids[i];
+
+                        foreach( doc_color_id : doc['color_ids'].values ) {
+                          if ( doc_color_id == color_id ) {
+                            intersection_size += 1;
+                          }
+                        }
+
+                        if ( intersection_size > 0 ) {
+                          return color_ids.size() - i;
+                        }
+                      }
+                    }
+
+                    return 0;
+                  }.gsub(/[\r\n]|([\s]{2,})/, ''),
+                  params: {
+                    color_ids: color_ids
+                  },
+                  type: 'number',
+                  order: 'desc'
+                }
+              })
+            end
+
+            if bodyshapes.present?
+              by ({
+                :_script => {
+                  script: bodyshapes.map{|bodyshape| "doc['#{bodyshape}'].value" }.join(' + '),
+                  type:   'number',
+                  order:  'desc'
+                }
+              })
+            end
+
+            case order_by
+              when 'price_high'
+                by :price, 'desc'
+              when 'price_low'
+                by :price, 'asc'
+              when 'newest'
+                by :created_at, 'desc'
+              when 'popular'
+                # default ordering scope
+              else
+                # default ordering scope
+            end
+
+            by :position, 'asc'
+          end
+
+          from offset
+          size limit
+        end.results.results
+      rescue ActiveRecord::RecordNotFound
+        Tire.index(:spree_products) do
+          delete
+          import ::Spree::Product.all
         end
 
-        from offset
-        size limit
-      end.results.results
+        Tire.index(:spree_products).refresh
+
+        retrieve_products
+      end
     end
 
     def method_missing(name)
