@@ -74,7 +74,7 @@ ruby:
               .text
                 .inner = notes
           .grid-6
-            .row.hide
+            .row.hide style="display: none;"
               - @product.moodboard_items.active.song.each do |song_item|
                 .grid-6
                   .picture.audio-cover
@@ -94,8 +94,8 @@ ruby:
                     = link_to parfume.source, target: 'blank' do
                       = image_tag parfume.image.url
                   
-          .grid-6
-            .social.addthis_toolbox.addthis_default_style.hide
+          .grid-6.hide style="display: none;"
+            .social.addthis_toolbox.addthis_default_style.hide style="display: none;"
               /= addthis_buttons(@product, product_image_url)
               = facebook_share_button(share_url)
               = pin_share_button(share_url, product_image_url, @product.name)
