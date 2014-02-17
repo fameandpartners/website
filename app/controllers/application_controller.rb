@@ -302,11 +302,11 @@ class ApplicationController < ActionController::Base
     options[:limit] ||= 3
     recommended_dresses = []
 
-    if try_spree_current_user && try_spree_current_user.style_profile.present?
-      recommended_dresses = Spree::Product.recommended_for(try_spree_current_user, options)
-    end
-    return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
-    recommended_dresses += SimilarProducts.new(product).fetch(products_required).to_a
+    #if try_spree_current_user && try_spree_current_user.style_profile.present?
+    #  recommended_dresses = Spree::Product.recommended_for(try_spree_current_user, options)
+    #end
+    #return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
+    recommended_dresses = SimilarProducts.new(product).fetch(products_required).to_a
 
     return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
     recommended_dresses += Spree::Product.active.featured.limit(products_required).to_a

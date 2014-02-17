@@ -51,8 +51,11 @@ module CommonHelper
     link_to image_tag("//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png"), url, link_options
   end
 
-  def addthis_links
-    javascript_include_tag "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
+  def addthis_buttons(share_url, product_image_url)
+    render partial: 'shared/addthis_buttons', locals: {
+      share_url: share_url,
+      product_image_url: product_image_url
+    }
   end
 end
 
