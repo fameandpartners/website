@@ -57,6 +57,14 @@ ruby:
           / moodboard
           .grid-6
             .row
+              - if @product.moodboard_items.active.moodboard.present?
+                .grid-6
+                  .moodboard-title
+                    = image_tag '_moodboard-bg.png'
+                    .title
+                      h3 Dress
+                      em inspiration
+                      .gothic MOODBOARD
               - @product.moodboard_items.active.moodboard.each do |mood_item|
                 .grid-6
                   .picture
@@ -68,7 +76,7 @@ ruby:
           .grid-6
             .row
               - @product.moodboard_items.active.song.each do |song_item|
-                .grid-6
+                .grid-6.hide
                   .picture.audio-cover
                     = link_to 'SoundCloud tune', song_item.source, class: 'sc-player'
                     = link_to '#', data: { action: 'soundcloud' } do
@@ -85,20 +93,14 @@ ruby:
                   .picture
                     = link_to parfume.source, target: 'blank' do
                       = image_tag parfume.image.url
-              .grid-6
-                .moodboard-title
-                  = image_tag '_moodboard-bg.png'
-                  .title
-                    h3 Dress
-                    em inspiration
-                    .gothic MOODBOARD
+                  
           .grid-6
             .social.addthis_toolbox.addthis_default_style
               /= addthis_buttons(@product, product_image_url)
               = facebook_share_button(share_url)
               = pin_share_button(share_url, product_image_url, @product.name)
-              .arrows-line-horizontal.top
-              .arrows-line-horizontal.bottom
+              span.arrows-line-horizontal.top
+              span.arrows-line-horizontal.bottom
     .grid-4
       = render 'product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }
 
