@@ -57,6 +57,14 @@ ruby:
           / moodboard
           .grid-6
             .row
+              - if @product.moodboard_items.active.moodboard.present?
+                .grid-6
+                  .moodboard-title
+                    = image_tag '_moodboard-bg.png'
+                    .title
+                      h3 Dress
+                      em inspiration
+                      .gothic MOODBOARD
               - @product.moodboard_items.active.moodboard.each do |mood_item|
                 .grid-6
                   .picture
@@ -85,14 +93,7 @@ ruby:
                   .picture
                     = link_to parfume.source, target: 'blank' do
                       = image_tag parfume.image.url
-              - if @product.moodboard_items.active.moodboard.present?
-                .grid-6
-                  .moodboard-title
-                    = image_tag '_moodboard-bg.png'
-                    .title
-                      h3 Dress
-                      em inspiration
-                      .gothic MOODBOARD
+                  
           .grid-6
             .social.addthis_toolbox.addthis_default_style
               /= addthis_buttons(@product, product_image_url)
