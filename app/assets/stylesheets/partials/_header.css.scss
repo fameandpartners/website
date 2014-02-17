@@ -67,9 +67,9 @@
 			vertical-align: middle;
 		}
 		.avatar {
-          &.empty {
-            display: none;
-          }
+      &.empty {
+        display: none;
+      }
 			margin-right: 5px;
 			img {
 				width: 20px;
@@ -89,26 +89,26 @@
 	position: relative;
 	.logo {
 		text-align: center;
-		font-size: 171px;
+		font-size: 160px;
 		overflow: hidden;
 		text-decoration: none;
 		position: absolute;
-		top: -15px;
+		top: 0;
 		left: 50%;
-		margin-left: -133px;
+		margin-left: -90px;
 		display: block;
-		.black {
-			position: relative;
-		}
-		.white {
-			position: absolute;
-			color: #fff;
-			left: 0;
-			top: 0;
-			right: 0;
-			height: 15px;
-			overflow: hidden;
-		}
+		// .black {
+		// 	position: relative;
+		// }
+		// .white {
+		// 	position: absolute;
+		// 	color: #fff;
+		// 	left: 0;
+		// 	top: 0;
+		// 	right: 0;
+		// 	height: 15px;
+		// 	overflow: hidden;
+		// }
 	}
 }
 
