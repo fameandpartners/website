@@ -13,10 +13,10 @@
           .picture
             = product_customisation_value_image(value)
         .grid-6
-          .price = value.display_price
+          .title = value.presentation
           .button
             = link_to '+ ADD', '#', class: 'btn empty border'
-            p = value.presentation
+            p.price = value.display_price
 
 /ruby:
   product_customisation_types = @product.product_customisation_types.includes(:customisation_type, :customisation_values).with_values

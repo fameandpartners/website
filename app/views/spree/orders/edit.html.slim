@@ -53,9 +53,13 @@
                     .line
                       .label Size
                       .value = line_item.personalization.size
+                    .line
+                      .label Personalizations
+                      .value
                     - line_item.personalization.customization_values.each do |value|
                       .line
-                        .label = value.customisation_type.presentation
+                        /.label = value.customisation_type.presentation
+                        .label
                         .value = value.presentation
                   .line
                     .label Quantity
