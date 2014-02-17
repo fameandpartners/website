@@ -44,7 +44,7 @@ module Products
         raw[:price_in_aud]        = book.cell(row_num, columns[:price_in_aud])
         raw[:price_in_usd]        = book.cell(row_num, columns[:price_in_usd])
         raw[:taxons]              = Array.wrap(columns[:taxons]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
-        raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?).map{|i| i.downcase.gsub(' ', '-') }
+        raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
         # Style
         raw[:glam]                = book.cell(row_num, columns[:glam])
         raw[:girly]               = book.cell(row_num, columns[:girly])
@@ -131,9 +131,33 @@ module Products
         raw[:taxons].each do |taxon_name|
           taxon = Spree::Taxon.where('LOWER(name) = ?', taxon_name.downcase).first
 
-          taxon = range.children.create(name: taxon_name) unless taxon.present?
+          if taxon.blank?
+            taxon = range.children.create do |object|
+              object.name = taxon_name
+              object.taxonomy = range.taxonomy
+            end
+          end
 
           processed[:taxon_ids] << taxon.id
+        end
+
+        color_option = Spree::OptionType.where(name: 'dress-color').first
+
+
+        processed[:colors] = []
+        raw[:colors].each do |presentation|
+          presentation = presentation.strip
+
+          color = color_option.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
+
+          if color.blank?
+            color = color_option.option_values.create do |object|
+              object.name = presentation.downcase.gsub(' ', '-')
+              object.presentation = presentation
+            end
+          end
+
+          processed[:colors] << color.name
         end
 
         processed[:customizations] = []
@@ -160,7 +184,7 @@ module Products
           name:                 processed[:name] || raw[:name],
           price_in_aud:         raw[:price_in_aud],
           description:          processed[:description] || raw[:description],
-          colors:               raw[:colors],
+          colors:               processed[:colors],
           taxon_ids:            processed[:taxon_ids],
           # Style Profile   
           glam:                 raw[:glam],
@@ -367,7 +391,7 @@ module Products
 
       raise 'SKU should be present!' unless sku.present?
 
-      product = Spree::Variant.where(['is_master = ? AND LOWER(sku) = ?', true, sku]).first.try(:product)
+      product = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(sku) = ?', sku).first.try(:product)
 
       if product.blank?
         product = Spree::Product.new(sku: sku, featured: false, on_demand: true)
@@ -439,7 +463,7 @@ module Products
       sizes.each do |size_name|
         colors.each do |color_name|
           size_value  = size_option.option_values.where(name: size_name).first
-          color_value = color_option.option_values.where(name: color_name).first
+          color_value = color_option.option_values.where('LOWER(name) = ?', color_name.downcase).first
 
           next if size_value.blank? || color_value.blank?
 
@@ -483,7 +507,15 @@ module Products
         attrs[:name] = attrs[:name].downcase.gsub(' ', '-')
         attrs[:price] = 0 unless attrs[:price].present?
 
-        customizations.push(product.customisation_values.create(attrs, without_protection: true))
+        customization = product.customisation_values.where(position: attrs[:position]).first
+
+        if customization.blank?
+          customization = product.customisation_values.build
+        end
+
+        customization.update_attributes(attrs, without_protection: true)
+
+        customizations.push(customization)
       end
 
       customizations
@@ -498,14 +530,20 @@ module Products
         next unless style.present?
 
         accessories.values.each do |accessory|
-          product.accessories.create do |object|
-            object.style = style
-            object.name = accessory[:name]
-            object.title = accessory[:description]
-            object.price = accessory[:price]
-            object.source = accessory[:link]
-            object.position = accessory[:position]
+          accessory = product.accessories.where(style_id: style.id, position: accessory[:position]).first
+
+          if accessory.blank?
+            accessory = product.accessories.build
           end
+
+          accessory.style = style
+          accessory.name = accessory[:name]
+          accessory.title = accessory[:description]
+          accessory.price = accessory[:price]
+          accessory.source = accessory[:link]
+          accessory.position = accessory[:position]
+
+          accessory.save
         end
       end
     end
@@ -556,7 +594,9 @@ module Products
 
     def add_product_song(product, raw_attrs)
       if raw_attrs[:link].present?
-        product.moodboard_items.song.create(content: raw_attrs[:link])
+        song = product.moodboard_items.song.first || product.moodboard_items.song.build
+
+        song.update_attributes(content: raw_attrs[:link])
       end
     end
 
@@ -568,11 +608,13 @@ module Products
       attrs = raw_attrs.slice(*allowed).select{ |name, value| value.present? }
 
       if attrs.any?
-        product.moodboard_items.parfume.create do |object|
-          object.name = attrs[:name]
-          object.title = attrs[:brand]
-          object.content = attrs[:link]
-        end
+        parfume = product.moodboard_items.parfume.first || product.moodboard_items.parfume.build
+
+        parfume.name = attrs[:name]
+        parfume.title = attrs[:brand]
+        parfume.content = attrs[:link]
+
+        parfume.save
       end
     end
 
