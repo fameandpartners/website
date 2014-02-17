@@ -301,6 +301,12 @@ ActiveRecord::Schema.define(:version => 20140216133229) do
     t.decimal  "price",                 :precision => 8, :scale => 2
   end
 
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
     t.integer  "product_id"

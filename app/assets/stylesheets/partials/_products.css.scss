@@ -234,6 +234,12 @@
 		font-size: 26px;
 		line-height: 26px;
 		text-align: left;
+		> div, > a {
+			display: inline-block;
+			vertical-align: top !important;
+			margin-right: 5px;
+		}
+		.fb-like > span { vertical-align: top !important;}
 		.arrows-line-horizontal {
 			position: absolute;
 			left: 0;
