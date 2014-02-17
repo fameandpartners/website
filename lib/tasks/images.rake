@@ -23,7 +23,7 @@ namespace :images do
         next
       end
 
-      master = Spree::Variant.where(['LOWER(sku) = ? AND is_master = ?', matches[:sku].downcase, true]).first
+      master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(sku) = ?', matches[:sku].downcase).first
 
       product = master.try(:product)
 
