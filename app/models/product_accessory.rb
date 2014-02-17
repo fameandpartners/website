@@ -9,6 +9,8 @@ class ProductAccessory < ActiveRecord::Base
     default_style: :product,
     default_url:   :default_image_for_accessory
 
+  scope :active, where(active: true)
+
   def default_image_for_accessory
     '/assets/_sample/category-grey-2.jpg'
   end
