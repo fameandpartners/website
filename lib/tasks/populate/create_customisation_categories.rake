@@ -3,6 +3,9 @@ namespace "db" do
     task customisation_values: :environment do
       remove_old_customisations if Rails.env.development?
       create_set_of_customisations(10)
+      Spree::Product.all.each do |product|
+        assign_random_customisations_to_product(product, 5)
+      end
     end
 =begin
     desc "create Length/NeckLine customisation categories"
@@ -68,6 +71,7 @@ namespace "db" do
       ProductCustomisationType.delete_all
       CustomisationValue.delete_all
       CustomisationType.delete_all
+      LineItemPersonalization.delete_all# or we can just clean stored customisation_values
     end
 
     def create_set_of_customisations(records_num)
@@ -79,6 +83,14 @@ namespace "db" do
         value.price = 10 + rand(10)
         value.save
       end
+    end
+
+    def customisation_values
+      @customisation_values ||= CustomisationValue.all.to_a
+    end
+
+    def assign_random_customisations_to_product(product, num)
+      product.customisation_values = customisation_values.shuffle.first(num)
     end
 
     def generate_text(words_num)

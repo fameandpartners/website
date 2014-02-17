@@ -5,7 +5,7 @@ class LineItemPersonalizationSerializer < ActiveModel::Serializer
     object.customization_values.map do |customization_value|
       {
         name: customization_value.name,
-        customisation_type: { presentation: customization_value.customisation_type.presentation  }
+        presentation: customization_value.presentation
       }
     end
   end

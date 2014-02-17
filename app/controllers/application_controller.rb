@@ -298,13 +298,22 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
 
-  def get_recommended_products(options = {})
-    if try_spree_current_user && try_spree_current_user.style_profile.present?
-      Spree::Product.recommended_for(try_spree_current_user, options)
-    else
-      []
-    end
+  def get_recommended_products(product, options = {})
+    options[:limit] ||= 3
+    recommended_dresses = []
+
+    #if try_spree_current_user && try_spree_current_user.style_profile.present?
+    #  recommended_dresses = Spree::Product.recommended_for(try_spree_current_user, options)
+    #end
+    #return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
+    recommended_dresses = SimilarProducts.new(product).fetch(products_required).to_a
+
+    return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
+    recommended_dresses += Spree::Product.active.featured.limit(products_required).to_a
+
+    return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
+    recommended_dresses + Spree::Product.active.limit(products_required).to_a
   rescue
-    []
+    Spree::Product.active.limit(3)
   end
 end

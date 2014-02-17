@@ -40,7 +40,7 @@ Spree::ProductsController.class_eval do
     @product_properties = @product.product_properties.includes(:property)
 
     @product_variants = Products::VariantsReceiver.new(@product).available_options
-    @recommended_products = get_recommended_products(limit: 3)
+    @recommended_products = get_recommended_products(@product, limit: 3)
 
     respond_with(@product)
   end

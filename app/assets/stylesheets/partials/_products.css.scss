@@ -408,7 +408,7 @@
 		}
 		.style {
 			input[type="radio"] { display: none;}
-			.price {
+			.title {
 				margin-bottom: 35px;
 				font: 400 20px/1 $fontThree;
 			}
@@ -417,6 +417,7 @@
 				.btn {
 					display: block;
 				}
+        .price { font-size: 12px;}
 			}
 			.cross {
 				position: relative;

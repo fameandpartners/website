@@ -16,7 +16,7 @@ module Personalization
       @product_properties = @product.product_properties.includes(:property)
 
       @product_variants = Products::VariantsReceiver.new(@product).available_options
-      @recommended_products = get_recommended_products(limit: 3)
+      @recommended_products = get_recommended_products(@product, limit: 3)
 
       if line_item = current_order.find_line_item_by_variant(@product.master)
         @personalization = line_item.personalization || LineItemPersonalization.new
@@ -34,7 +34,7 @@ module Personalization
       @product_properties = @product.product_properties.includes(:property)
       @product_variants = Products::VariantsReceiver.new(@product).available_options
 
-      @recommended_products = get_recommended_products(limit: 3)
+      @recommended_products = get_recommended_products(@product, limit: 3)
 
       respond_with(@product)
     end

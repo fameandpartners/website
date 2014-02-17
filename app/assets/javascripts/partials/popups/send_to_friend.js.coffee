@@ -10,7 +10,7 @@ window.popups.showSendToFriendPopup = (productId, options = {}) ->
     guest: _.isEmpty(window.current_user)
 
     init: () ->
-      popup.container = popups.getModalContainer('Show mum', 'Submit').addClass('send-to-friend')
+      popup.container = popups.getModalContainer("Second Opinion", 'Send').addClass('send-to-friend')
       popup.content = popup.container.find('.modal-container').addClass('form')
       popup.overlay = popup.container.find('.overlay')
 

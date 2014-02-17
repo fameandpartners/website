@@ -44,7 +44,7 @@ module Products
         raw[:price_in_aud]        = book.cell(row_num, columns[:price_in_aud])
         raw[:price_in_usd]        = book.cell(row_num, columns[:price_in_usd])
         raw[:taxons]              = Array.wrap(columns[:taxons]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
-        raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?).map{|i| i.downcase.gsub(' ', '-') }
+        raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
         # Style
         raw[:glam]                = book.cell(row_num, columns[:glam])
         raw[:girly]               = book.cell(row_num, columns[:girly])
@@ -131,9 +131,33 @@ module Products
         raw[:taxons].each do |taxon_name|
           taxon = Spree::Taxon.where('LOWER(name) = ?', taxon_name.downcase).first
 
-          taxon = range.children.create(name: taxon_name) unless taxon.present?
+          if taxon.blank?
+            taxon = range.children.create do |object|
+              object.name = taxon_name
+              object.taxonomy = range.taxonomy
+            end
+          end
 
           processed[:taxon_ids] << taxon.id
+        end
+
+        color_option = Spree::OptionType.where(name: 'dress-color').first
+
+
+        processed[:colors] = []
+        raw[:colors].each do |presentation|
+          presentation = presentation.strip
+
+          color = color_option.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
+
+          if color.blank?
+            color = color_option.option_values.create do |object|
+              object.name = presentation.downcase.gsub(' ', '-')
+              object.presentation = presentation
+            end
+          end
+
+          processed[:colors] << color.name
         end
 
         processed[:customizations] = []
@@ -160,7 +184,7 @@ module Products
           name:                 processed[:name] || raw[:name],
           price_in_aud:         raw[:price_in_aud],
           description:          processed[:description] || raw[:description],
-          colors:               raw[:colors],
+          colors:               processed[:colors],
           taxon_ids:            processed[:taxon_ids],
           # Style Profile   
           glam:                 raw[:glam],
@@ -347,10 +371,10 @@ module Products
           add_product_properties(product, args[:properties].symbolize_keys)
           add_product_variants(product, args[:sizes], args[:colors] || [])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
-          add_product_customizations(product, args[:customizations] || {})
-          add_product_accessories(product, args[:recommendations] || {})
-          add_product_song(product, args[:song].symbolize_keys || {})
-          add_product_perfume(product, args[:perfume].symbolize_keys || {})
+          #add_product_customizations(product, args[:customizations] || {})
+          #add_product_accessories(product, args[:recommendations] || {})
+          #add_product_song(product, args[:song].symbolize_keys || {})
+          #add_product_perfume(product, args[:perfume].symbolize_keys || {})
 
           product
         rescue Exception => message
@@ -439,7 +463,7 @@ module Products
       sizes.each do |size_name|
         colors.each do |color_name|
           size_value  = size_option.option_values.where(name: size_name).first
-          color_value = color_option.option_values.where(name: color_name).first
+          color_value = color_option.option_values.where('LOWER(name) = ?', color_name.downcase).first
 
           next if size_value.blank? || color_value.blank?
 
@@ -506,7 +530,7 @@ module Products
         next unless style.present?
 
         accessories.values.each do |accessory|
-          accessory = product.accessories.where(style_id: style.id, position: matches[:position]).first
+          accessory = product.accessories.where(style_id: style.id, position: accessory[:position]).first
 
           if accessory.blank?
             accessory = product.accessories.build

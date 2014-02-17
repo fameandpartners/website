@@ -66,3 +66,81 @@ window.inputs.ChosenSelector = class ChosenSelector extends BaseInput
 
   setValue: (newValue) ->
     @container.val(newValue).trigger('chosen:updated')
+
+
+window.inputs.CustomAndBaseColourSelector = class CustomAndBaseColourSelector extends BaseInput
+  # note: all inputs should have unique id to separate them from each other
+  constructor: (@baseColourInput, @customColourInput) ->
+    super()
+    _.bindAll(@, 'onValueSelectedHandler')
+    @baseColourInput.on('change', @onValueSelectedHandler)
+    @customColourInput.on('change', @onValueSelectedHandler)
+
+  onValueSelectedHandler: (e) ->
+    e.preventDefault()
+    if $(e.target).attr('id') == @baseColourInput.attr('id')
+      @customColourInput.val('').trigger('chosen:updated')
+    else
+      @baseColourInput.val('').trigger('chosen:updated')
+    @trigger('change')
+
+  getValue: () ->
+    if !_.isEmpty(@customColourInput.val())
+      @customColourInput.val()
+    else if !_.isEmpty(@baseColourInput.val())
+      @baseColourInput.val()
+    else
+      ''
+
+  setValue: (newValue) ->
+    @baseColourInput.val(newValue).trigger('chosen:updated')
+    # if base colours not have such value or we reseting all values
+    if _.isEmpty(@baseColourInput.val())
+      @customColourInput.val(newValue).trigger('chosen:updated')
+    newValue
+
+  isCustomColour: () ->
+    _.isEmpty(@baseColourInput.val()) && !_.isEmpty(@customColourInput.val())
+
+# this little different from other inputs, it's more like a widget
+# we should have  customisationValues object in order to manage interdependencies
+# between customisation values
+window.inputs.CustomisationsSelector = class CustomisationsSelector extends BaseInput
+  constructor: (@container) ->
+    super()
+    _.bindAll(@, 'onAddProductButtonClickHandler')
+    @container.on('click', '.btn.empty.border', @onAddProductButtonClickHandler)
+
+  onAddProductButtonClickHandler: (e) ->
+    e.preventDefault()
+    valueContainer = $(e.currentTarget).closest('.row.customisation-value')
+    valueContainer.toggleClass('selected')
+    CustomisationsSelector.syncLabelsWithSelectionState(valueContainer)
+    @trigger('change')
+    return
+
+  getValue: () ->
+    _.map(@container.find('.row.customisation-value.selected'), (item) ->
+      $(item).data('customisation-value-id').toString()
+    , @)
+
+  # reset selected state for all items if not array passed
+  setValue: (newValues) ->
+    return if !_.isArray(newValues)
+      _.each(@container.find('.row.customisation-value.selected'), (item) ->
+        CustomisationsSelector.syncLabelsWithSelectionState($(item).removeClass('selected'))
+      )
+    else
+      @container.find('.row.customisation-value.selected').removeClass('selected')
+      _.each(newValues, (id) ->
+        @container.find(".row.customisation-value[data-customisation-value-id=#{ id }").addClass('selected')
+      , @)
+      _.each(@container.find(".row.customisation-value"), CustomisationsSelector.syncLabelsWithSelectionState)
+
+  # set markup accordingly to state [ selected, not selected, not available]
+  @syncLabelsWithSelectionState: (valueContainer) ->
+    button = valueContainer.find('.btn.empty.border')
+    if valueContainer.is('.selected')
+      button.html('ADDED')
+    else
+      button.html(' + ADD')

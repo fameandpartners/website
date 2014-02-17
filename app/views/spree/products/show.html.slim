@@ -50,14 +50,6 @@ ruby:
                     .fright
                       a href='#' data-action='show-large-image' data-image='#{ image.attachment.url(:xlarge) }'
                         span.icon-expand
-          - if (celebrity = @product.celebrity_inspiration).present?
-            .grid-6
-              .picture
-                = image_tag celebrity.photo.url(:preview), alt: ''
-                .popup
-                  .fright
-                    a href='#' data-action='show-large-image' data-image='#{ celebrity.photo.url(:large) }'
-                      span.icon-expand
           - if @product.video_url.present?
             .grid-6
               .picture
@@ -102,9 +94,9 @@ ruby:
                     .gothic MOODBOARD
           .grid-6
             .social.addthis_toolbox.addthis_default_style
+              /= addthis_buttons(@product, product_image_url)
               = facebook_share_button(share_url)
               = pin_share_button(share_url, product_image_url, @product.name)
-
               .arrows-line-horizontal.top
               .arrows-line-horizontal.bottom
     .grid-4

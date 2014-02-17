@@ -36,9 +36,9 @@ ruby:
             p = notes
 
           /= link_to 'BOOK A FREE STYLING SESSION', '#', class: 'btn empty border'
-          - if personalised_store_available?
+          /- if personalised_store_available?
             = link_to 'BOOK A FREE STYLING SESSION', my_boutique_path, class: 'btn empty border'
-          - else
+          /- else
             = link_to 'BOOK A FREE STYLING SESSION', '#', :class => 'btn empty border show-style-quiz'
           h4 
             ' WANT US TO SOURCE THIS COMPLETE LOOK? 
