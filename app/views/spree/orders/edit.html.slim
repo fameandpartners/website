@@ -35,8 +35,7 @@
                 .buttons
                   = link_to '#', data: { id: variant.id }, class: 'remove-item-from-cart  btn empty border' do
                     span.icon-trash
-                  - unless line_item.personalization.present?
-                    = product_move_to_wishlist_link(variant, title: 'Move to wishlist')
+                  = product_move_to_wishlist_link(variant, title: 'Move to wishlist')
             td.column-2
               .details-box
                 .static
