@@ -34,7 +34,7 @@ module Products
 
       book.default_sheet = book.sheets.first
 
-      rows.to_a.from(from).to(4).each do |row_num|
+      rows.to_a.from(from).to(9).each do |row_num|
         raw = {}
 
         # Basic
@@ -367,7 +367,7 @@ module Products
 
       raise 'SKU should be present!' unless sku.present?
 
-      product = Spree::Variant.where(['is_master = ? AND LOWER(sku) = ?', true, sku]).first.try(:product)
+      product = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(sku) = ?', sku).first.try(:product)
 
       if product.blank?
         product = Spree::Product.new(sku: sku, featured: false, on_demand: true)
@@ -483,7 +483,15 @@ module Products
         attrs[:name] = attrs[:name].downcase.gsub(' ', '-')
         attrs[:price] = 0 unless attrs[:price].present?
 
-        customizations.push(product.customisation_values.create(attrs, without_protection: true))
+        customization = product.customisation_values.where(position: attrs[:position]).first
+
+        if customization.blank?
+          customization = product.customisation_values.build
+        end
+
+        customization.update_attributes(attrs, without_protection: true)
+
+        customizations.push(customization)
       end
 
       customizations
@@ -498,14 +506,20 @@ module Products
         next unless style.present?
 
         accessories.values.each do |accessory|
-          product.accessories.create do |object|
-            object.style = style
-            object.name = accessory[:name]
-            object.title = accessory[:description]
-            object.price = accessory[:price]
-            object.source = accessory[:link]
-            object.position = accessory[:position]
+          accessory = product.accessories.where(style_id: style.id, position: matches[:position]).first
+
+          if accessory.blank?
+            accessory = product.accessories.build
           end
+
+          accessory.style = style
+          accessory.name = accessory[:name]
+          accessory.title = accessory[:description]
+          accessory.price = accessory[:price]
+          accessory.source = accessory[:link]
+          accessory.position = accessory[:position]
+
+          accessory.save
         end
       end
     end
@@ -536,7 +550,7 @@ module Products
 
       unless factor.eql?(0.0)
         basic_style_names.each do |style_name|
-          points = (attributes[style_name] / factor).round
+          points = (attributes[style_name].to_i / factor).round
 
           if total >= 10
             points = 0
@@ -556,7 +570,9 @@ module Products
 
     def add_product_song(product, raw_attrs)
       if raw_attrs[:link].present?
-        product.moodboard_items.song.create(content: raw_attrs[:link])
+        song = product.moodboard_items.song.first || product.moodboard_items.song.build
+
+        song.update_attributes(content: raw_attrs[:link])
       end
     end
 
@@ -568,11 +584,13 @@ module Products
       attrs = raw_attrs.slice(*allowed).select{ |name, value| value.present? }
 
       if attrs.any?
-        product.moodboard_items.parfume.create do |object|
-          object.name = attrs[:name]
-          object.title = attrs[:brand]
-          object.content = attrs[:link]
-        end
+        parfume = product.moodboard_items.parfume.first || product.moodboard_items.parfume.build
+
+        parfume.name = attrs[:name]
+        parfume.title = attrs[:brand]
+        parfume.content = attrs[:link]
+
+        parfume.save
       end
     end
 
