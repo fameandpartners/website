@@ -75,220 +75,501 @@ namespace :db do
       question = quiz.questions.find_by_partial!('outfits')
       question.answers.create!([
                                  {
-                                   :code => 'image_1',
-                                   :bohemian => 10
+                                   :code => 'boho1',
+                                   :bohemian => 9,
+                                   :classic => 2,
+                                   :edgy => 5,
+                                   :girly => 4,
+                                   :glam => 2
                                  }, {
-                                   :code => 'image_4',
-                                   :bohemian => 10
+                                   :code => 'boho2',
+                                   :bohemian => 9,
+                                   :classic => 2,
+                                   :edgy => 3,
+                                   :girly => 6,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_10',
-                                   :bohemian => 10
+                                   :code => 'boho3',
+                                   :bohemian => 9,
+                                   :classic => 2,
+                                   :edgy => 3,
+                                   :girly => 4,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_13',
-                                   :bohemian => 10
+                                   :code => 'boho4',
+                                   :bohemian => 9,
+                                   :classic => 2,
+                                   :edgy => 5,
+                                   :girly => 4,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_21',
-                                   :bohemian => 10
+                                   :code => 'boho5',
+                                   :bohemian => 9,
+                                   :classic => 3,
+                                   :edgy => 6,
+                                   :girly => 3,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_27',
-                                   :bohemian => 10
+                                   :code => 'boho6',
+                                   :bohemian => 9,
+                                   :classic => 3,
+                                   :edgy => 5,
+                                   :girly => 4,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_34',
-                                   :bohemian => 10
+                                   :code => 'boho7',
+                                   :bohemian => 8,
+                                   :classic => 3,
+                                   :edgy => 6,
+                                   :girly => 5,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_3',
-                                   :classic => 10
+                                   :code => 'classic1',
+                                   :bohemian => 3,
+                                   :classic => 8,
+                                   :edgy => 6,
+                                   :girly => 3,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_7',
-                                   :classic => 10
+                                   :code => 'classic2',
+                                   :bohemian => 2,
+                                   :classic => 9,
+                                   :edgy => 3,
+                                   :girly => 6,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_14',
-                                   :classic => 10
+                                   :code => 'classic3',
+                                   :bohemian => 2,
+                                   :classic => 8,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_19',
-                                   :classic => 10
+                                   :code => 'classic4',
+                                   :bohemian => 3,
+                                   :classic => 7,
+                                   :edgy => 6,
+                                   :girly => 4,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_23',
-                                   :classic => 10
+                                   :code => 'classic5',
+                                   :bohemian => 4,
+                                   :classic => 8,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_28',
-                                   :classic => 10
+                                   :code => 'classic6',
+                                   :bohemian => 5,
+                                   :classic => 8,
+                                   :edgy => 7,
+                                   :girly => 6,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_33',
-                                   :classic => 10
+                                   :code => 'classic7',
+                                   :bohemian => 4,
+                                   :classic => 9,
+                                   :edgy => 3,
+                                   :girly => 7,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_2',
-                                   :edgy => 10
+                                   :code => 'edgy1',
+                                   :bohemian => 2,
+                                   :classic => 2,
+                                   :edgy => 9,
+                                   :girly => 2,
+                                   :glam => 2
                                  }, {
-                                   :code => 'image_6',
-                                   :edgy => 10
+                                   :code => 'edgy2',
+                                   :bohemian => 2,
+                                   :classic => 2,
+                                   :edgy => 9,
+                                   :girly => 2,
+                                   :glam => 2
                                  }, {
-                                   :code => 'image_17',
-                                   :edgy => 10
+                                   :code => 'edgy3',
+                                   :bohemian => 3,
+                                   :classic => 3,
+                                   :edgy => 9,
+                                   :girly => 3,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_20',
-                                   :edgy => 10
+                                   :code => 'edgy4',
+                                   :bohemian => 3,
+                                   :classic => 2,
+                                   :edgy => 9,
+                                   :girly => 2,
+                                   :glam => 2
                                  }, {
-                                   :code => 'image_25',
-                                   :edgy => 10
+                                   :code => 'edgy5',
+                                   :bohemian => 2,
+                                   :classic => 2,
+                                   :edgy => 9,
+                                   :girly => 3,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_30',
-                                   :edgy => 10
+                                   :code => 'edgy6',
+                                   :bohemian => 4,
+                                   :classic => 3,
+                                   :edgy => 9,
+                                   :girly => 3,
+                                   :glam => 4 
                                  }, {
-                                   :code => 'image_35',
-                                   :edgy => 10
+                                   :code => 'edgy7',
+                                   :bohemian => 3,
+                                   :classic => 3,
+                                   :edgy => 9,
+                                   :girly => 5,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_5',
-                                   :girly => 10
+                                   :code => 'girly1',
+                                   :bohemian => 5,
+                                   :classic => 7,
+                                   :edgy => 3,
+                                   :girly => 9,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_9',
-                                   :girly => 10
+                                   :code => 'girly2',
+                                   :bohemian => 3,
+                                   :classic => 8,
+                                   :edgy => 2,
+                                   :girly => 9,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_12',
-                                   :girly => 10
+                                   :code => 'girly3',
+                                   :bohemian => 2,
+                                   :classic => 6,
+                                   :edgy => 6,
+                                   :girly => 9,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_16',
-                                   :girly => 10
+                                   :code => 'girly4',
+                                   :bohemian => 2,
+                                   :classic => 8,
+                                   :edgy => 2,
+                                   :girly => 9,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_18',
-                                   :girly => 10
+                                   :code => 'girly5',
+                                   :bohemian => 2,
+                                   :classic => 8,
+                                   :edgy => 2,
+                                   :girly => 9,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_26',
-                                   :girly => 10
+                                   :code => 'girly6',
+                                   :bohemian => 3,
+                                   :classic => 8,
+                                   :edgy => 5,
+                                   :girly => 9,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_31',
-                                   :girly => 10
+                                   :code => 'girly7',
+                                   :bohemian => 4,
+                                   :classic => 7,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_8',
-                                   :glam => 10
+                                   :code => 'glam1',
+                                   :bohemian => 2,
+                                   :classic => 7,
+                                   :edgy => 2,
+                                   :girly => 6,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_11',
-                                   :glam => 10
+                                   :code => 'glam2',
+                                   :bohemian => 3,
+                                   :classic => 7,
+                                   :edgy => 6,
+                                   :girly => 5,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_15',
-                                   :glam => 10
+                                   :code => 'glam3',
+                                   :bohemian => 3,
+                                   :classic => 4,
+                                   :edgy => 4,
+                                   :girly => 4,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_22',
-                                   :glam => 10
+                                   :code => 'glam4',
+                                   :bohemian => 5,
+                                   :classic => 6,
+                                   :edgy => 6,
+                                   :girly => 5,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_24',
-                                   :glam => 10
+                                   :code => 'glam5',
+                                   :bohemian => 4,
+                                   :classic => 7,
+                                   :edgy => 4,
+                                   :girly => 7,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_29',
-                                   :glam => 10
+                                   :code => 'glam6',
+                                   :bohemian => 3,
+                                   :classic => 7,
+                                   :edgy => 6,
+                                   :girly => 5,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_32',
-                                   :glam => 10
+                                   :code => 'glam7',
+                                   :bohemian => 3,
+                                   :classic => 6,
+                                   :edgy => 6,
+                                   :girly => 5,
+                                   :glam => 9
                                  }
                                ])
 
+      # red carpet questions
       question = quiz.questions.find_by_partial!('oscar_dresses')
       question.answers.create!([
                                  {
-                                   :code => 'image_1',
-                                   :bohemian => 10
+                                   :code => 'boho1',
+                                   :bohemian => 10,
+                                   :classic => 0,
+                                   :edgy => 3,
+                                   :girly => 1,
+                                   :glam => 1
                                  }, {
-                                   :code => 'image_4',
-                                   :bohemian => 10
+                                   :code => 'boho2',
+                                   :bohemian => 7,
+                                   :classic => 4,
+                                   :edgy => 1,
+                                   :girly => 1,
+                                   :glam => 0
                                  }, {
-                                   :code => 'image_10',
-                                   :bohemian => 10
+                                   :code => 'boho3',
+                                   :bohemian => 10,
+                                   :classic => 0,
+                                   :edgy => 2,
+                                   :girly => 7,
+                                   :glam => 1
                                  }, {
-                                   :code => 'image_13',
-                                   :bohemian => 10
+                                   :code => 'boho4',
+                                   :bohemian => 10,
+                                   :classic => 0,
+                                   :edgy => 0,
+                                   :girly => 2,
+                                   :glam => 0
                                  }, {
-                                   :code => 'image_21',
-                                   :bohemian => 10
+                                   :code => 'boho5',
+                                   :bohemian => 10,
+                                   :classic => 3,
+                                   :edgy => 0,
+                                   :girly => 0,
+                                   :glam => 0
                                  }, {
-                                   :code => 'image_27',
-                                   :bohemian => 10
+                                   :code => 'boho6',
+                                   :bohemian => 10,
+                                   :classic => 0,
+                                   :edgy => 0,
+                                   :girly => 2,
+                                   :glam => 0
                                  }, {
-                                   :code => 'image_34',
-                                   :bohemian => 10
+                                   :code => 'boho7',
+                                   :bohemian => 10,
+                                   :classic => 0,
+                                   :edgy => 0,
+                                   :girly => 4,
+                                   :glam => 0
                                  }, {
-                                   :code => 'image_3',
-                                   :classic => 10
+                                   :code => 'classic1',
+                                   :bohemian => 0,
+                                   :classic => 8,
+                                   :edgy => 0,
+                                   :girly => 5,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_7',
-                                   :classic => 10
+                                   :code => 'classic2',
+                                   :bohemian => 0,
+                                   :classic => 10,
+                                   :edgy => 3,
+                                   :girly => 0,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_14',
-                                   :classic => 10
+                                   :code => 'classic3',
+                                   :bohemian => 0,
+                                   :classic => 9,
+                                   :edgy => 0,
+                                   :girly => 3,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_19',
-                                   :classic => 10
+                                   :code => 'classic4',
+                                   :bohemian => 0,
+                                   :classic => 10,
+                                   :edgy => 0,
+                                   :girly => 2,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_23',
-                                   :classic => 10
+                                   :code => 'classic5',
+                                   :bohemian => 0,
+                                   :classic => 10,
+                                   :edgy => 0,
+                                   :girly => 1,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_28',
-                                   :classic => 10
+                                   :code => 'classic6',
+                                   :bohemian => 0,
+                                   :classic => 10,
+                                   :edgy => 0,
+                                   :girly => 1,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_33',
-                                   :classic => 10
+                                   :code => 'classic7',
+                                   :bohemian => 0,
+                                   :classic => 10,
+                                   :edgy => 0,
+                                   :girly => 4,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_2',
-                                   :edgy => 10
+                                   :code => 'edgy1',
+                                   :bohemian => 0,
+                                   :classic => 0,
+                                   :edgy => 10,
+                                   :girly => 0,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_6',
-                                   :edgy => 10
+                                   :code => 'edgy2',
+                                   :bohemian => 2,
+                                   :classic => 4,
+                                   :edgy => 9,
+                                   :girly => 0,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_17',
-                                   :edgy => 10
+                                   :code => 'edgy3',
+                                   :bohemian => 1,
+                                   :classic => 5,
+                                   :edgy => 10,
+                                   :girly => 0,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_20',
-                                   :edgy => 10
+                                   :code => 'edgy4',
+                                   :bohemian => 5,
+                                   :classic => 0,
+                                   :edgy => 8,
+                                   :girly => 0,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_25',
-                                   :edgy => 10
+                                   :code => 'edgy5',
+                                   :bohemian => 4,
+                                   :classic => 0,
+                                   :edgy => 10,
+                                   :girly => 2,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_30',
-                                   :edgy => 10
+                                   :code => 'edgy6',
+                                   :bohemian => 0,
+                                   :classic => 0,
+                                   :edgy => 10,
+                                   :girly => 0,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_35',
-                                   :edgy => 10
+                                   :code => 'edgy7',
+                                   :bohemian => 0,
+                                   :classic => 0,
+                                   :edgy => 10,
+                                   :girly => 0,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_5',
-                                   :girly => 10
+                                   :code => 'girly1',
+                                   :bohemian => 2,
+                                   :classic => 6,
+                                   :edgy => 0,
+                                   :girly => 9,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_9',
-                                   :girly => 10
+                                   :code => 'girly2',
+                                   :bohemian => 0,
+                                   :classic => 6,
+                                   :edgy => 0,
+                                   :girly => 10,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_12',
-                                   :girly => 10
+                                   :code => 'girly3',
+                                   :bohemian => 0,
+                                   :classic => 9,
+                                   :edgy => 0,
+                                   :girly => 10,
+                                   :glam => 1
                                  }, {
-                                   :code => 'image_16',
-                                   :girly => 10
+                                   :code => 'girly4',
+                                   :bohemian => 3,
+                                   :classic => 5,
+                                   :edgy => 0,
+                                   :girly => 10,
+                                   :glam => 0
                                  }, {
-                                   :code => 'image_18',
-                                   :girly => 10
+                                   :code => 'girly5',
+                                   :bohemian => 0,
+                                   :classic => 7,
+                                   :edgy => 0,
+                                   :girly => 10,
+                                   :glam => 1
                                  }, {
-                                   :code => 'image_26',
-                                   :girly => 10
+                                   :code => 'girly6',
+                                   :bohemian => 0,
+                                   :classic => 4,
+                                   :edgy => 1,
+                                   :girly => 9,
+                                   :glam => 7 
                                  }, {
-                                   :code => 'image_31',
-                                   :girly => 10
+                                   :code => 'girly7',
+                                   :bohemian => 2,
+                                   :classic => 6,
+                                   :edgy => 4,
+                                   :girly => 7,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_8',
+                                   :code => 'glam1',
+                                   :bohemian => 0,
+                                   :classic => 5,
+                                   :edgy => 5,
+                                   :girly => 0,
                                    :glam => 10
                                  }, {
-                                   :code => 'image_11',
+                                   :code => 'glam2',
+                                   :bohemian => 2,
+                                   :classic => 3,
+                                   :edgy => 4,
+                                   :girly => 0,
+                                   :glam => 9
+                                 }, {
+                                   :code => 'glam3',
+                                   :bohemian => 0,
+                                   :classic => 3,
+                                   :edgy => 7,
+                                   :girly => 0,
+                                   :glam => 9
+                                 }, {
+                                   :code => 'glam4',
+                                   :bohemian => 0,
+                                   :classic => 3,
+                                   :edgy => 5,
+                                   :girly => 0,
                                    :glam => 10
                                  }, {
-                                   :code => 'image_15',
+                                   :code => 'glam5',
+                                   :bohemian => 1,
+                                   :classic => 3,
+                                   :edgy => 5,
+                                   :girly => 0,
                                    :glam => 10
                                  }, {
-                                   :code => 'image_22',
-                                   :glam => 10
+                                   :code => 'glam6',
+                                   :bohemian => 4,
+                                   :classic => 0,
+                                   :edgy => 4,
+                                   :girly => 0,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_24',
-                                   :glam => 10
-                                 }, {
-                                   :code => 'image_29',
-                                   :glam => 10
-                                 }, {
-                                   :code => 'image_32',
-                                   :glam => 10
+                                   :code => 'glam7',
+                                   :bohemian => 0,
+                                   :classic => 3,
+                                   :edgy => 2,
+                                   :girly => 0,
+                                   :glam => 9
                                  }
                                ])
 
@@ -368,330 +649,751 @@ namespace :db do
       question = quiz.questions.find_by_partial!('prom_makeup')
       question.answers.create!([
                                  {
-                                   :code => 'image_1',
-                                   :bohemian => 10
+                                   :code => 'dramatic1',
+                                   :bohemian => 2,
+                                   :classic => 5,
+                                   :edgy => 8,
+                                   :girly => 3,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_4',
-                                   :bohemian => 10
+                                   :code => 'dramatic2',
+                                   :bohemian => 3,
+                                   :classic => 7,
+                                   :edgy => 7,
+                                   :girly => 6,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_10',
-                                   :bohemian => 10
+                                   :code => 'dramatic3',
+                                   :bohemian => 2,
+                                   :classic => 4,
+                                   :edgy => 5,
+                                   :girly => 7,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_13',
-                                   :bohemian => 10
+                                   :code => 'dramatic4',
+                                   :bohemian => 4,
+                                   :classic => 6,
+                                   :edgy => 6,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_21',
-                                   :bohemian => 10
+                                   :code => 'dramatic5',
+                                   :bohemian => 4,
+                                   :classic => 2,
+                                   :edgy => 8,
+                                   :girly => 4,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_27',
-                                   :bohemian => 10
+                                   :code => 'dramatic6',
+                                   :bohemian => 3,
+                                   :classic => 8,
+                                   :edgy => 6,
+                                   :girly => 7,
+                                   :glam => 8 
                                  }, {
-                                   :code => 'image_34',
-                                   :bohemian => 10
+                                   :code => 'dramatic7',
+                                   :bohemian => 4,
+                                   :classic => 8,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_3',
-                                   :classic => 10
+                                   :code => 'romantic1',
+                                   :bohemian => 5,
+                                   :classic => 8,
+                                   :edgy => 5,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_7',
-                                   :classic => 10
+                                   :code => 'romantic2',
+                                   :bohemian => 5,
+                                   :classic => 8,
+                                   :edgy => 3,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_14',
-                                   :classic => 10
+                                   :code => 'romantic3',
+                                   :bohemian => 6,
+                                   :classic => 5,
+                                   :edgy => 6,
+                                   :girly => 8,
+                                   :glam =>5 
                                  }, {
-                                   :code => 'image_19',
-                                   :classic => 10
+                                   :code => 'romantic4',
+                                   :bohemian => 5,
+                                   :classic => 7,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_23',
-                                   :classic => 10
+                                   :code => 'romantic5',
+                                   :bohemian => 5,
+                                   :classic => 7,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_28',
-                                   :classic => 10
+                                   :code => 'romantic6',
+                                   :bohemian => 4,
+                                   :classic => 8,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_33',
-                                   :classic => 10
+                                   :code => 'romantic7',
+                                   :bohemian => 3,
+                                   :classic => 6,
+                                   :edgy => 3,
+                                   :girly => 9,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_2',
-                                   :edgy => 10
+                                   :code => 'edgy1',
+                                   :bohemian => 2,
+                                   :classic => 4,
+                                   :edgy => 9,
+                                   :girly => 2,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_6',
-                                   :edgy => 10
+                                   :code => 'edgy2',
+                                   :bohemian => 3,
+                                   :classic => 1,
+                                   :edgy => 9,
+                                   :girly => 2,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_17',
-                                   :edgy => 10
+                                   :code => 'edgy3',
+                                   :bohemian => 3,
+                                   :classic => 5,
+                                   :edgy => 8,
+                                   :girly => 5,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_20',
-                                   :edgy => 10
+                                   :code => 'edgy4',
+                                   :bohemian => 3,
+                                   :classic => 3,
+                                   :edgy => 9,
+                                   :girly => 5,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_25',
-                                   :edgy => 10
+                                   :code => 'edgy5',
+                                   :bohemian => 3,
+                                   :classic => 2,
+                                   :edgy => 9,
+                                   :girly => 2,
+                                   :glam => 2
                                  }, {
-                                   :code => 'image_30',
-                                   :edgy => 10
+                                   :code => 'edgy6',
+                                   :bohemian => 1,
+                                   :classic => 1,
+                                   :edgy => 9,
+                                   :girly => 2,
+                                   :glam => 2
                                  }, {
-                                   :code => 'image_35',
-                                   :edgy => 10
+                                   :code => 'edgy7',
+                                   :bohemian => 4,
+                                   :classic => 5,
+                                   :edgy => 8,
+                                   :girly => 5,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_5',
-                                   :girly => 10
+                                   :code => 'statement1',
+                                   :bohemian => 3,
+                                   :classic => 2,
+                                   :edgy => 6,
+                                   :girly => 6,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_9',
-                                   :girly => 10
+                                   :code => 'statement2',
+                                   :bohemian => 3,
+                                   :classic => 2,
+                                   :edgy => 5,
+                                   :girly => 5,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_12',
-                                   :girly => 10
+                                   :code => 'statement3',
+                                   :bohemian => 4,
+                                   :classic => 5,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_16',
-                                   :girly => 10
+                                   :code => 'statement4',
+                                   :bohemian => 4,
+                                   :classic => 4,
+                                   :edgy => 6,
+                                   :girly => 7,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_18',
-                                   :girly => 10
+                                   :code => 'statement5',
+                                   :bohemian => 3,
+                                   :classic => 3,
+                                   :edgy => 5,
+                                   :girly => 6,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_26',
-                                   :girly => 10
+                                   :code => 'statement6',
+                                   :bohemian => 3,
+                                   :classic => 3,
+                                   :edgy => 7,
+                                   :girly => 6,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_31',
-                                   :girly => 10
+                                   :code => 'statement7',
+                                   :bohemian => 3,
+                                   :classic => 4,
+                                   :edgy => 7,
+                                   :girly => 7,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_8',
-                                   :glam => 10
+                                   :code => 'natural1',
+                                   :bohemian => 9,
+                                   :classic => 7,
+                                   :edgy => 4,
+                                   :girly => 7,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_11',
-                                   :glam => 10
+                                   :code => 'natural2',
+                                   :bohemian => 9,
+                                   :classic => 8,
+                                   :edgy => 4,
+                                   :girly => 6,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_15',
-                                   :glam => 10
+                                   :code => 'natural3',
+                                   :bohemian => 9,
+                                   :classic => 7,
+                                   :edgy => 4,
+                                   :girly => 7,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_22',
-                                   :glam => 10
+                                   :code => 'natural4',
+                                   :bohemian => 9,
+                                   :classic => 8,
+                                   :edgy => 2,
+                                   :girly => 8,
+                                   :glam => 5 
                                  }, {
-                                   :code => 'image_24',
-                                   :glam => 10
+                                   :code => 'natural5',
+                                   :bohemian => 9,
+                                   :classic => 8,
+                                   :edgy => 4,
+                                   :girly => 6,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_29',
-                                   :glam => 10
+                                   :code => 'natural6',
+                                   :bohemian => 9,
+                                   :classic => 7,
+                                   :edgy => 4,
+                                   :girly => 7,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_32',
-                                   :glam => 10
+                                   :code => 'natural7',
+                                   :bohemian => 9,
+                                   :classic => 7,
+                                   :edgy => 4,
+                                   :girly => 7,
+                                   :glam => 4
                                  }
                                ])
 
       question = quiz.questions.find_by_partial!('prom_hair')
       question.answers.create!([
                                  {
-                                   :code => 'image_1',
-                                   :bohemian => 10
+                                   :code => 'boho1',
+                                   :bohemian => 9,
+                                   :classic => 3,
+                                   :edgy => 4,
+                                   :girly => 6,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_4',
-                                   :bohemian => 10
+                                   :code => 'boho2',
+                                   :bohemian => 9,
+                                   :classic => 5,
+                                   :edgy => 5,
+                                   :girly => 6,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_10',
-                                   :bohemian => 10
+                                   :code => 'boho3',
+                                   :bohemian => 9,
+                                   :classic => 5,
+                                   :edgy => 5,
+                                   :girly => 6,
+                                   :glam => 4 
                                  }, {
-                                   :code => 'image_13',
-                                   :bohemian => 10
+                                   :code => 'boho4',
+                                   :bohemian => 9,
+                                   :classic => 3,
+                                   :edgy => 6,
+                                   :girly => 5,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_21',
-                                   :bohemian => 10
+                                   :code => 'boho5',
+                                   :bohemian => 9,
+                                   :classic => 4,
+                                   :edgy => 6,
+                                   :girly => 6,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_27',
-                                   :bohemian => 10
+                                   :code => 'boho6',
+                                   :bohemian => 9,
+                                   :classic => 3,
+                                   :edgy => 5,
+                                   :girly => 6,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_34',
-                                   :bohemian => 10
+                                   :code => 'boho7',
+                                   :bohemian => 9,
+                                   :classic => 7,
+                                   :edgy => 7,
+                                   :girly => 7,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_3',
-                                   :classic => 10
+                                   :code => 'classic1',
+                                   :bohemian => 3,
+                                   :classic => 9,
+                                   :edgy => 3,
+                                   :girly => 7,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_7',
-                                   :classic => 10
+                                   :code => 'classic2',
+                                   :bohemian => 2,
+                                   :classic => 9,
+                                   :edgy => 4,
+                                   :girly => 7,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_14',
-                                   :classic => 10
+                                   :code => 'classic3',
+                                   :bohemian => 5,
+                                   :classic => 9,
+                                   :edgy => 5,
+                                   :girly => 8,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_19',
-                                   :classic => 10
+                                   :code => 'classic4',
+                                   :bohemian => 2,
+                                   :classic => 9,
+                                   :edgy => 2,
+                                   :girly => 7,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_23',
-                                   :classic => 10
+                                   :code => 'classic5',
+                                   :bohemian => 2,
+                                   :classic => 9,
+                                   :edgy => 2,
+                                   :girly => 7,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_28',
-                                   :classic => 10
+                                   :code => 'classic6',
+                                   :bohemian => 2,
+                                   :classic => 9,
+                                   :edgy => 3,
+                                   :girly => 7,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_33',
-                                   :classic => 10
+                                   :code => 'classic7',
+                                   :bohemian => 4,
+                                   :classic => 9,
+                                   :edgy => 1,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_2',
-                                   :edgy => 10
+                                   :code => 'edgy1',
+                                   :bohemian => 3,
+                                   :classic => 2,
+                                   :edgy => 9,
+                                   :girly => 4,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_6',
-                                   :edgy => 10
+                                   :code => 'edgy2',
+                                   :bohemian => 2,
+                                   :classic => 7,
+                                   :edgy => 6,
+                                   :girly => 7,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_17',
-                                   :edgy => 10
+                                   :code => 'edgy3',
+                                   :bohemian => 5,
+                                   :classic => 7,
+                                   :edgy => 7,
+                                   :girly => 7,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_20',
-                                   :edgy => 10
+                                   :code => 'edgy4',
+                                   :bohemian => 6,
+                                   :classic => 4,
+                                   :edgy => 8,
+                                   :girly => 7,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_25',
-                                   :edgy => 10
+                                   :code => 'edgy5',
+                                   :bohemian => 6,
+                                   :classic => 3,
+                                   :edgy => 8,
+                                   :girly => 6,
+                                   :glam => 4
                                  }, {
-                                   :code => 'image_30',
-                                   :edgy => 10
+                                   :code => 'edgy6',
+                                   :bohemian => 6,
+                                   :classic => 5,
+                                   :edgy => 8,
+                                   :girly => 7,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_35',
-                                   :edgy => 10
+                                   :code => 'edgy7',
+                                   :bohemian => 4,
+                                   :classic => 2,
+                                   :edgy => 8,
+                                   :girly => 5,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_5',
-                                   :girly => 10
+                                   :code => 'girly1',
+                                   :bohemian => 5,
+                                   :classic => 7,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_9',
-                                   :girly => 10
+                                   :code => 'girly2',
+                                   :bohemian => 5,
+                                   :classic => 4,
+                                   :edgy => 6,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_12',
-                                   :girly => 10
+                                   :code => 'girly3',
+                                   :bohemian => 3,
+                                   :classic => 5,
+                                   :edgy => 5,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_16',
-                                   :girly => 10
+                                   :code => 'girly4',
+                                   :bohemian => 6,
+                                   :classic => 6,
+                                   :edgy => 6,
+                                   :girly => 8,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_18',
-                                   :girly => 10
+                                   :code => 'girly5',
+                                   :bohemian => 5,
+                                   :classic => 5,
+                                   :edgy => 5,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_26',
-                                   :girly => 10
+                                   :code => 'girly6',
+                                   :bohemian => 4,
+                                   :classic => 5,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_31',
-                                   :girly => 10
+                                   :code => 'girly7',
+                                   :bohemian => 4,
+                                   :classic => 7,
+                                   :edgy => 5,
+                                   :girly => 8,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_8',
-                                   :glam => 10
+                                   :code => 'glam1',
+                                   :bohemian => 2,
+                                   :classic => 8,
+                                   :edgy => 2,
+                                   :girly => 7,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_11',
-                                   :glam => 10
+                                   :code => 'glam2',
+                                   :bohemian => 3,
+                                   :classic => 8,
+                                   :edgy => 2,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_15',
-                                   :glam => 10
+                                   :code => 'glam3',
+                                   :bohemian => 3,
+                                   :classic => 8,
+                                   :edgy => 3,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_22',
-                                   :glam => 10
+                                   :code => 'glam4',
+                                   :bohemian => 3,
+                                   :classic => 8,
+                                   :edgy => 6,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_24',
-                                   :glam => 10
+                                   :code => 'glam5',
+                                   :bohemian => 3,
+                                   :classic => 6,
+                                   :edgy => 6,
+                                   :girly => 6,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_29',
-                                   :glam => 10
+                                   :code => 'glam6',
+                                   :bohemian => 2,
+                                   :classic => 8,
+                                   :edgy => 2,
+                                   :girly => 8,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_32',
-                                   :glam => 10
+                                   :code => 'glam7',
+                                   :bohemian => 3,
+                                   :classic => 8,
+                                   :edgy => 5,
+                                   :girly => 8,
+                                   :glam => 9
                                  }
                                ])
 
+      # runway question
       question = quiz.questions.find_by_partial!('prom_dresses')
       question.answers.create!([
                                  {
-                                   :code => 'image_1',
-                                   :bohemian => 10
+                                   :code => 'boho1',
+                                   :bohemian => 8,
+                                   :classic => 5,
+                                   :edgy => 6,
+                                   :girly => 5,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_4',
-                                   :bohemian => 10
+                                   :code => 'boho2',
+                                   :bohemian => 8,
+                                   :classic => 2,
+                                   :edgy => 8,
+                                   :girly => 5,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_10',
-                                   :bohemian => 10
+                                   :code => 'boho3',
+                                   :bohemian => 9,
+                                   :classic => 3,
+                                   :edgy => 3,
+                                   :girly => 5,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_13',
-                                   :bohemian => 10
+                                   :code => 'boho4',
+                                   :bohemian => 9,
+                                   :classic => 7,
+                                   :edgy => 3,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_21',
-                                   :bohemian => 10
+                                   :code => 'boho5',
+                                   :bohemian => 9,
+                                   :classic => 3,
+                                   :edgy => 4,
+                                   :girly => 5,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_27',
-                                   :bohemian => 10
+                                   :code => 'boho6',
+                                   :bohemian => 9,
+                                   :classic => 3,
+                                   :edgy => 5,
+                                   :girly => 5,
+                                   :glam => 3
                                  }, {
-                                   :code => 'image_34',
-                                   :bohemian => 10
+                                   :code => 'boho7',
+                                   :bohemian => 9,
+                                   :classic => 3,
+                                   :edgy => 5,
+                                   :girly => 5,
+                                   :glam => 5
                                  }, {
-                                   :code => 'image_3',
-                                   :classic => 10
+                                   :code => 'classic1',
+                                   :bohemian => 5,
+                                   :classic => 9,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_7',
-                                   :classic => 10
+                                   :code => 'classic2',
+                                   :bohemian => 3,
+                                   :classic => 9,
+                                   :edgy => 3,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_14',
-                                   :classic => 10
+                                   :code => 'classic3',
+                                   :bohemian => 2,
+                                   :classic => 9,
+                                   :edgy => 3,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_19',
-                                   :classic => 10
+                                   :code => 'classic4',
+                                   :bohemian => 4,
+                                   :classic => 8,
+                                   :edgy => 4,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_23',
-                                   :classic => 10
+                                   :code => 'classic5',
+                                   :bohemian => 5,
+                                   :classic => 8,
+                                   :edgy => 3,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_28',
-                                   :classic => 10
+                                   :code => 'classic6',
+                                   :bohemian => 2,
+                                   :classic => 9,
+                                   :edgy => 3,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_33',
-                                   :classic => 10
+                                   :code => 'classic7',
+                                   :bohemian => 4,
+                                   :classic => 9,
+                                   :edgy => 3,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_2',
-                                   :edgy => 10
+                                   :code => 'edgy1',
+                                   :bohemian => 4,
+                                   :classic => 3,
+                                   :edgy => 8,
+                                   :girly => 6,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_6',
-                                   :edgy => 10
+                                   :code => 'edgy2',
+                                   :bohemian => 4,
+                                   :classic => 5,
+                                   :edgy => 9,
+                                   :girly => 6,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_17',
-                                   :edgy => 10
+                                   :code => 'edgy3',
+                                   :bohemian => 2,
+                                   :classic => 5,
+                                   :edgy => 8,
+                                   :girly => 5,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_20',
-                                   :edgy => 10
+                                   :code => 'edgy4',
+                                   :bohemian => 4,
+                                   :classic => 5,
+                                   :edgy => 8,
+                                   :girly => 5,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_25',
-                                   :edgy => 10
+                                   :code => 'edgy5',
+                                   :bohemian => 6,
+                                   :classic => 5,
+                                   :edgy => 8,
+                                   :girly => 7,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_30',
-                                   :edgy => 10
+                                   :code => 'edgy6',
+                                   :bohemian => 6,
+                                   :classic => 3,
+                                   :edgy => 8,
+                                   :girly => 6,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_35',
-                                   :edgy => 10
+                                   :code => 'edgy7',
+                                   :bohemian => 6,
+                                   :classic => 3,
+                                   :edgy => 8,
+                                   :girly => 6,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_5',
-                                   :girly => 10
+                                   :code => 'girly1',
+                                   :bohemian => 5,
+                                   :classic => 3,
+                                   :edgy => 6,
+                                   :girly => 9,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_9',
-                                   :girly => 10
+                                   :code => 'girly2',
+                                   :bohemian => 5,
+                                   :classic => 4,
+                                   :edgy => 7,
+                                   :girly => 8,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_12',
-                                   :girly => 10
+                                   :code => 'girly3',
+                                   :bohemian => 2,
+                                   :classic => 7,
+                                   :edgy => 3,
+                                   :girly => 8,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_16',
-                                   :girly => 10
+                                   :code => 'girly4',
+                                   :bohemian => 6,
+                                   :classic => 6,
+                                   :edgy => 6,
+                                   :girly => 9,
+                                   :glam => 7
                                  }, {
-                                   :code => 'image_18',
-                                   :girly => 10
+                                   :code => 'girly5',
+                                   :bohemian => 6,
+                                   :classic => 7,
+                                   :edgy => 8,
+                                   :girly => 7,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_26',
-                                   :girly => 10
+                                   :code => 'girly6',
+                                   :bohemian => 8,
+                                   :classic => 8,
+                                   :edgy => 5,
+                                   :girly => 8,
+                                   :glam => 6
                                  }, {
-                                   :code => 'image_31',
-                                   :girly => 10
+                                   :code => 'girly7',
+                                   :bohemian => 5,
+                                   :classic => 8,
+                                   :edgy => 6,
+                                   :girly => 9,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_8',
-                                   :glam => 10
+                                   :code => 'glam1',
+                                   :bohemian => 4,
+                                   :classic => 5,
+                                   :edgy => 5,
+                                   :girly => 5,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_11',
-                                   :glam => 10
+                                   :code => 'glam2',
+                                   :bohemian => 5,
+                                   :classic => 7,
+                                   :edgy => 5,
+                                   :girly => 8,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_15',
-                                   :glam => 10
+                                   :code => 'glam3',
+                                   :bohemian => 2,
+                                   :classic => 4,
+                                   :edgy => 4,
+                                   :girly => 5,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_22',
-                                   :glam => 10
+                                   :code => 'glam4',
+                                   :bohemian => 3,
+                                   :classic => 6,
+                                   :edgy => 3,
+                                   :girly => 7,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_24',
-                                   :glam => 10
+                                   :code => 'glam5',
+                                   :bohemian => 2,
+                                   :classic => 2,
+                                   :edgy => 6,
+                                   :girly => 5,
+                                   :glam => 9
                                  }, {
-                                   :code => 'image_29',
-                                   :glam => 10
+                                   :code => 'glam6',
+                                   :bohemian => 4,
+                                   :classic => 7,
+                                   :edgy => 3,
+                                   :girly => 6,
+                                   :glam => 8
                                  }, {
-                                   :code => 'image_32',
-                                   :glam => 10
+                                   :code => 'glam7',
+                                   :bohemian => 2,
+                                   :classic => 8,
+                                   :edgy => 2,
+                                   :girly => 7,
+                                   :glam => 9
                                  }
                                ])
 
