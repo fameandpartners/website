@@ -1,6 +1,6 @@
 .category-header {
 	margin: 10px 0;
-	background-color: #dbdbdb;
+	background-color: #fff;
 	text-align: center;
 	padding: 60px;
 	h1 {
@@ -408,7 +408,7 @@
 		}
 		.style {
 			input[type="radio"] { display: none;}
-			.price {
+			.title {
 				margin-bottom: 35px;
 				font: 400 20px/1 $fontThree;
 			}
@@ -417,6 +417,7 @@
 				.btn {
 					display: block;
 				}
+        .price { font-size: 12px;}
 			}
 			.cross {
 				position: relative;

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140213205349) do
+ActiveRecord::Schema.define(:version => 20140216133229) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -321,16 +321,16 @@ ActiveRecord::Schema.define(:version => 20140213205349) do
 
   create_table "moodboard_items", :force => true do |t|
     t.integer  "spree_product_id"
-    t.boolean  "active",                           :default => true
+    t.boolean  "active",                            :default => true
     t.string   "item_type",          :limit => 50
-    t.string   "content"
-    t.integer  "position",                         :default => 0
+    t.string   "content",            :limit => 512
+    t.integer  "position",                          :default => 0
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.string   "name"
     t.string   "title"
   end
@@ -343,6 +343,24 @@ ActiveRecord::Schema.define(:version => 20140213205349) do
     t.string   "token"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "product_accessories", :force => true do |t|
+    t.integer  "style_id"
+    t.integer  "spree_product_id"
+    t.integer  "position"
+    t.boolean  "active",                                                          :default => true
+    t.string   "title"
+    t.string   "name"
+    t.string   "source",             :limit => 512
+    t.decimal  "price",                             :precision => 8, :scale => 2
+    t.string   "currency"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                                                                        :null => false
+    t.datetime "updated_at",                                                                        :null => false
   end
 
   create_table "product_color_values", :force => true do |t|
@@ -364,6 +382,9 @@ ActiveRecord::Schema.define(:version => 20140213205349) do
     t.string  "image_content_type"
     t.integer "image_file_size"
     t.decimal "price",                         :precision => 8, :scale => 2
+    t.integer "product_id"
+    t.string  "name"
+    t.string  "presentation"
   end
 
   create_table "product_personalizations", :force => true do |t|
@@ -1164,23 +1185,10 @@ ActiveRecord::Schema.define(:version => 20140213205349) do
     t.datetime "updated_at",                            :null => false
   end
 
-  create_table "style_images", :force => true do |t|
-    t.integer  "style_id"
-    t.integer  "position"
-    t.boolean  "active",             :default => true
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-  end
-
   create_table "styles", :force => true do |t|
     t.string   "name"
-    t.text     "accessories"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "title"
   end
 

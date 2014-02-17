@@ -2,19 +2,23 @@ footer.footer-global
   .arrows-line-horizontal
   nav.nav-footer
     ul.fleft
-      li = link_to 'COLLECTIONS', collection_path, class: 'btn small empty'
+      li = link_to 'PROM DRESSES', collection_path, class: 'btn small empty'
       / li = link_to 'STYLE INSPIRATION', '#', class: 'btn small empty'
       li = link_to 'ABOUT US', about_us_path, class: 'btn small empty'
-      li = link_to 'TEAM', team_path, class: 'btn small empty'
+      li = link_to 'FAME CHAIN', fame_chain_path, class: 'btn small empty'
       li = link_to 'HELP', faqs_path, class: 'btn small empty'
     = link_to root_path, class: 'logo' do
       span.icon-logo
     ul.fright
       li = link_to 'TERMS & CONDITIONS', terms_path, class: 'btn small empty'
-      li.active = link_to 'SIGN UP FOR OUR NEWSLETTER', '#', class: 'btn small empty newsletter'
+      li.active = link_to 'SIGN UP FOR FREE STYLING ADVICE', '#', class: 'btn small empty newsletter'
   .arrows-line-horizontal
   .copy 
     ' &copy; 2013 Fame & Partners – All Rights Reserved
+    - if current_site_version.is_australia?
+        .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
+    - else
+      .address New York &nbsp; &nbsp; | &nbsp; &nbsp; USA
 
 / footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .grid-container

@@ -31,19 +31,19 @@ class LineItemPersonalization < ActiveRecord::Base
 
   validate do
     if product.present? && customization_value_ids.present?
-      unless customization_value_ids.all?{ |id| product.product_customisation_values.map(&:customisation_value_id).include?(id) }
+      unless customization_value_ids.all?{ |id| product.product_customisation_values.map(&:customisation_value_id).include?(id.to_i) }
         errors.add(:base, 'Some customisation options can not be selected')
       end
     end
   end
 
-  validate do
-    if product.present? && customization_value_ids.present?
-      unless customization_values.count.eql?(customization_types.count)
-        errors.add(:base, 'Invalid customisation options selected')
-      end
-    end
-  end
+#  validate do
+#    if product.present? && customization_value_ids.present?
+#      unless customization_values.count.eql?(customization_types.count)
+#        errors.add(:base, 'Invalid customisation options selected')
+#      end
+#    end
+#  end
 
 #  def color
 #    if attributes['color'].present?
@@ -60,16 +60,17 @@ class LineItemPersonalization < ActiveRecord::Base
 #  end
 
   def customization_values
-    CustomisationValue.includes(:customisation_type).find(customization_value_ids)
+    #CustomisationValue.includes(:customisation_type).find(customization_value_ids)
+    CustomisationValue.where(id: customization_value_ids)
   end
 
-  def customization_types
-    customization_values.map(&:customisation_type).uniq
-  end
+  #def customization_types
+  #  customization_values.map(&:customisation_type).uniq
+  #end
 
-  def customization_value_ids=(hash)
-    super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
-  end
+  #def customization_value_ids=(hash)
+  #  super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
+  #end
 
   def options_hash
     values = {}
@@ -115,12 +116,8 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def product_customisation_values
-    CustomisationValue.where(id: customization_value_ids).map do |customisation_value|
-      product_customisation_type = ProductCustomisationType.where(
-        product_id: self.product_id,
-        customisation_type_id: customisation_value.customisation_type_id
-      ).first
-      product_customisation_type.product_customisation_values.where(customisation_value_id: customisation_value.id).includes(:customisation_value).first
-    end
+    product.product_customisation_values.where(
+      customisation_value_id: self.customization_value_ids
+    ).includes(:customisation_value)
   end
 end

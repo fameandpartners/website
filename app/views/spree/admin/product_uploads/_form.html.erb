@@ -1,12 +1,39 @@
-<%= form_tag parse_admin_product_uploads_path, id: :product_batch_upload, multipart: true do %>
-  <h2>Batch upload data form</h2>
-  <div>
-    <div>
-      <%= label_tag 'file', 'Upload .xls file' %>
-      <%= file_field_tag :file %>
-    </div>
-    <div>
-      <%= submit_tag "Upload" %>
-    </div>
+<fieldset>
+  <legend align="center">Batch upload data form</legend>
+  <div data-hook="">
+    <%= form_tag parse_admin_product_uploads_path, id: :product_batch_upload, multipart: true do %>
+      <div>
+        <div class="alpha four columns">
+          <div class="field">&nbsp;</div>
+        </div>
+        <div class="four columns">
+          <div class="field">
+            <%= label_tag 'file', 'Upload .xls file' %>
+            <%= file_field_tag :file %>
+          </div>
+        </div>
+        <div class="four columns">
+          <div class="field">
+            <%
+               options = []
+               20.times do |time|
+                  options << ["#{time * 10 + 1}..#{time * 10 + 10}", time  * 10]
+               end
+            %>
+            <%= label_tag 'start', 'Scope of rows' %>
+            <%= select_tag(:start, options_for_select(options), :include_blank => false, :class => 'select2 fullwidth') %>
+          </div>
+        </div>
+        <div class="four columns omega">
+          <div class="field">&nbsp;</div>
+        </div>
+      </div>
+
+      <div class="clear"></div>
+
+      <div class="form-buttons actions filter-actions">
+        <%= submit_tag 'Upload' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</fieldset>

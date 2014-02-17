@@ -2,12 +2,12 @@ window.popups or= {}
 
 window.popups.getModalContainer = (title = null, button = null) ->
   options = { title: title, button: button }
+  container = $(JST['templates/modal_popup'](options)).hide()
   if $('.modal.popup-placeholder').length == 0
-    $('body.ecommerce #wrap #content').append(JST['templates/modal_popup'](options))
+    $('body.ecommerce #wrap #content').append(container)
   else
-    $('.modal.popup-placeholder').replaceWith(JST['templates/modal_popup'](options))
+    $('.modal.popup-placeholder').replaceWith(container)
 
-  container = $('.modal.popup-placeholder').hide()
   return container
 
 window.popups.getQuickViewModalContainer = () ->

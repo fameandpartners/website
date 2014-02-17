@@ -51,8 +51,8 @@
                   </tr>
                   <% for value in line_item.personalization.customization_values: %>
                     <tr>
-                      <td><%= value.customisation_type.presentation %></td>
-                      <td><%= value.name %></td>
+                      <td colspan="2"><%= value.name %></td>
+                      <!-- <td><%= value.name %></td> -->
                     </tr>
                   <% end %>
                 <% else: %>

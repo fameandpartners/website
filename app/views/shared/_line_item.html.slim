@@ -25,10 +25,8 @@ ruby:
             td = line_item.personalization.size
           - line_item.personalization.customization_values.each do |value|
             tr
-              td
-                = value.customisation_type.presentation
-                | :
-              td = value.presentation
+              td colspan="2"
+                = value.presentation
         - else
           tr
             td Size:

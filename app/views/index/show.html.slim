@@ -40,8 +40,8 @@
             = image_tag 'homepage/new/hero.jpg'
       .grid-4
         .picture-small 
-          = link_to '#' do
-            = image_tag 'homepage/new/small-jesinta.jpg'
+          = link_to collection_path(:edits => "pastels") do
+            = image_tag 'homepage/new/small-pastels.jpg'
         .picture-small 
           = link_to collection_path(:edits => "monochrome") do
             = image_tag 'homepage/new/small-monochrome.gif'    
@@ -73,21 +73,17 @@
         .step
           = image_tag '_front/step-3.jpg'
           h3.step-title.pink-shadow
-            ' CREATE YOUR
+            ' Style your unique
             br
-            ' UNIQUE LOOK
+            ' look, for free!
           .line-top  
           .line-bottom    
 .create-your-look
   .section-title
     = link_to "#", class: 'show-style-quiz' do
-      em.mark CREATE
-      br
-      ' YOUR 
-      em LOOK 
-      ' NOW
+      em.mark Get started now!
   .arrows-line-horizontal
-  .grid-container
+  .grid-container.hide
     .row
       .grid-4
         .frame
@@ -122,7 +118,7 @@
     = link_to 'http://instagram.com/fameandpartners' do
       = image_tag '_sample/catalog-3.jpg'
   .section
-    = link_to 'http://www.spotify.com' do
+    = link_to 'http://www.facebook.com/fameandpartners' do
       = image_tag '_sample/catalog-4.jpg'
 
 

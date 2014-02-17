@@ -45,16 +45,16 @@ class ProductStyleProfile < ActiveRecord::Base
     end
   end
 
-  def suitable_style_names
-    sorted_styles = BASIC_STYLES.sort do |x, y|
-      self.attributes[y].to_i <=> self.attributes[x].to_i
-    end
-    sorted_styles.first(2)
-  end
-
-  def suitable_styles
-    suitable_style_names.map do |name|
-      Style.get_by_name(name)
-    end
-  end
+#  def suitable_style_names
+#    sorted_styles = BASIC_STYLES.sort do |x, y|
+#      self.attributes[y].to_i <=> self.attributes[x].to_i
+#    end
+#    sorted_styles.first(2)
+#  end
+#
+#  def suitable_styles
+#    suitable_style_names.map do |name|
+#      Style.where(name: name).first_or_initialize
+#    end
+#  end
 end

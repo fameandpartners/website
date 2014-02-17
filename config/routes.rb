@@ -214,18 +214,24 @@ FameAndPartners::Application.routes.draw do
 
       resource :sale, :only => [:edit, :update]
 
-      resources :customisation_types do
-        collection do
-          post :update_positions
-          post :update_values_positions
-        end
-      end
-      delete '/customisation_values/:id', :to => "customisation_values#destroy", :as => :customisation_value
+      #resources :customisation_types do
+      #  collection do
+      #    post :update_positions
+      #    post :update_values_positions
+      #  end
+      #end
+      #delete '/customisation_values/:id', :to => "customisation_values#destroy", :as => :customisation_value
 
+      #resources :products do
+      #  resources :product_customisations
+      #  resources :product_customisation_types, only: :destroy
+      #  resources :product_customisation_values, only: :destroy
+      #end
       resources :products do
-        resources :product_customisations
-        resources :product_customisation_types, only: :destroy
-        resources :product_customisation_values, only: :destroy
+        resource :customisation, only: [:show, :update], controller: 'product_customisations'
+      end
+      resources :customisation_values do
+        post :update_positions, on: :collection
       end
 
       resources :products do
@@ -234,12 +240,17 @@ FameAndPartners::Application.routes.draw do
             post :update_positions, as: :update_positions
           end
         end
+
+        resources :accessories, controller: 'product_accessories' do
+          post :update_positions, on: :collection
+        end
       end
 
-      resources :styles, only: [:index, :update] do
-        resources :style_images, only: [:update]
-      end
-      delete '/styles/:style_name/style_images/:position', to: "style_images#destroy", as: :delete_style_image
+      resource :styles, only: [:show, :update]
+      #resources :styles, only: [:index, :update] do
+      #  resources :style_images, only: [:update]
+      #end
+      #delete '/styles/:style_name/style_images/:position', to: "style_images#destroy", as: :delete_style_image
 
       namespace :blog do
         resources :promo_banners

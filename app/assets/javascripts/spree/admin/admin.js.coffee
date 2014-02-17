@@ -1,4 +1,6 @@
 $ ->
+  $('.product-batch-upload').tabs()
+
   bindGoogleMapEvents = ->
     return if document.getElementById('gmap') is null
     currentLat = parseFloat($("#red_carpet_event_latitude").prop('value')) || 34.07711866840051
