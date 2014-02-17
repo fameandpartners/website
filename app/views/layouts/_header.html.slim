@@ -114,7 +114,7 @@
             span.icon-dropdown-down
           .dropdown
             ul
-              li = link_to 'Entire Range', collection_path
+              li = link_to 'All Prom Dresses', collection_path
               - available_product_ranges.each do |taxon|
                 li = link_to taxon.name, collection_taxon_path(taxon)
         li = link_to 'ABOUT US', about_us_path, class: 'btn'
