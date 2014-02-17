@@ -66,6 +66,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     updateFormHandlers: (variants, variantId) ->
       popup.container.find('.selectbox').chosen({width: '100%', disable_search: true })
       popup.variantsSelector = window.helpers.createProductVariantsSelector(popup.container)
+      popup.variantsSelector.target = popup.container.find('.submit input.btn')
       popup.variantsSelector.init(variants, { id: variantId })
 
     close: () ->
@@ -90,7 +91,9 @@ window.helpers.createVariantsSelectorPopup = () ->
         popup.trigger('selected', formData)
         popup.close()
       else
-        window.helpers.showErrors(popup.container, 'Please, select size and color')
+        error_message = $(e.target).data('error')
+        error_message = 'Please, select size and color' if _.isEmpty(error_message)
+        window.helpers.showErrors(popup.container, error_message)
 
     getColorsMap: (variants) ->
       map = {}
