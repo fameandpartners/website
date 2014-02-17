@@ -371,10 +371,10 @@ module Products
           add_product_properties(product, args[:properties].symbolize_keys)
           add_product_variants(product, args[:sizes], args[:colors] || [])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
-          add_product_customizations(product, args[:customizations] || {})
-          add_product_accessories(product, args[:recommendations] || {})
-          add_product_song(product, args[:song].symbolize_keys || {})
-          add_product_perfume(product, args[:perfume].symbolize_keys || {})
+          #add_product_customizations(product, args[:customizations] || {})
+          #add_product_accessories(product, args[:recommendations] || {})
+          #add_product_song(product, args[:song].symbolize_keys || {})
+          #add_product_perfume(product, args[:perfume].symbolize_keys || {})
 
           product
         rescue Exception => message
