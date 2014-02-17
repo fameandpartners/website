@@ -7,7 +7,7 @@ module CustomisationHelper
     elsif Rails.env.development?
       image_url = 'http://placehold.it/240x240'
     end
-    if image.url.present?
+    if image_url.present?
       image_tag(image_url, alt: product_customisation_value.presentation, title: product_customisation_value.presentation)
     else
       ''
