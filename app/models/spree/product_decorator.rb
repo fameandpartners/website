@@ -65,7 +65,7 @@ Spree::Product.class_eval do
         OR
       (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
       product_color_value_ids, variants_including_master_ids
-    ).order('position ASC')
+    ).order('viewable_type ASC, viewable_id ASC, position ASC')
   end
 
   def images_for_colors(colors)
