@@ -96,8 +96,8 @@ FameAndPartners::Application.routes.draw do
     #post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
     #post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
 
-    #get '/stylists' => 'blog/authors#index', as: :blog_authors
-    #get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
+    get '/stylists' => 'blog/authors#index', as: :blog_authors
+    get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
 
     #get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
     #get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post

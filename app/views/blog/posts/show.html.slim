@@ -6,24 +6,21 @@
   .content-sidebar.clearfix
     section.content-area
       article.blog-post
-        .blog-category fan girling
+        .blog-category = @post.category.name
         .blog-top-picture
           = image_tag '_sample/post-picture.jpg'
           .text
-            h1.post-title POST TITLE
-            p 
-              ' Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              br
-              ' sed do eiusmod tempor...
+            h1.post-title = @post.title
+            p = post_description(@post)
         .video-fluid
           iframe width="560" height="315" src="//www.youtube.com/embed/4j3u9fxHMkI" frameborder="0" allowfullscreen
         .grid-container
           .grid-8.blog-content-column
             h2.post-title = @post.title
-            h3.post-subtitle Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+            h3.post-subtitle = post_description(@post)
             
             .post-meta
-              .date= @post.occured_at_formatted
+              .date = @post.occured_at_formatted
               .author
                 ' BY
                 = link_to blog_authors_post_path(@post.user.slug) do
@@ -33,24 +30,15 @@
             - if @post.primary_photo.present?
               .featured-image = image_tag @post.primary_photo.photo.url(:preview), alt: ''
             .post-content= raw(@post.body)
-            .other-articles
-              h3 Other Articles
-              .grid-container
-                .grid-4
-                  .picture
-                    = link_to '#' do
-                      = image_tag '_sample/promo-small-1.jpg'
-                  p = link_to 'article title', '#'
-                .grid-4
-                  .picture
-                    = link_to '#' do
-                      = image_tag '_sample/promo-small-1.jpg'
-                  p = link_to 'article title', '#'
-                .grid-4
-                  .picture
-                    = link_to '#' do
-                      = image_tag '_sample/promo-small-1.jpg'
-                  p = link_to 'article title', '#'  
+            - if @recommended_posts.present?
+              .other-articles
+                h3 Other Articles
+                .grid-container
+                  - @recommended_posts.each do |post|
+                    .grid-4
+                      .picture
+                        = link_to image_tag(post_photo_url(post)), post_path(post)
+                      p = link_to post.title, post_path(post)
             .comments
               - if @post.red_carpet?
                 = link_to '', blog_red_carpet_post_path(@post.slug) + '#disqus_thread'
@@ -67,35 +55,21 @@
                 var addthis_config = {"data_track_addressbar":true};
               script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
             
-            .fav-product
-              h3 Our Fav Products
-              .grid-container
-                .grid-6
-                  .picture
-                    = link_to '#' do
-                      = image_tag '_sample/category-grey-2.jpg'
-                  .text 
-                    = link_to 'FLIRTY MINI', '#'
-                .grid-6
-                  .picture
-                    = link_to '#' do
-                      = image_tag '_sample/category-grey-2.jpg'
-                  .text 
-                    = link_to 'FLIRTY MINI', '#'
-                .grid-6
-                  .picture
-                    = link_to '#' do
-                      = image_tag '_sample/category-grey-2.jpg'
-                  .text 
-                    = link_to 'FLIRTY MINI', '#'
-                .grid-6
-                  .picture
-                    = link_to '#' do
-                      = image_tag '_sample/category-grey-2.jpg'
-                  .text 
-                    = link_to 'FLIRTY MINI', '#'        
-
-            = render 'shared/blog_sidebar'
+            - if @recommended_dresses.present?
+              .fav-product
+                h3 Our Fav Products
+                .grid-container
+                  - @recommended_dresses.each do |product|
+                    .grid-6
+                      .picture
+                        - dress_url = collection_product_path(product)
+                        = link_to dress_url do
+                          = product_image_tag(product, :product)
+                      .text 
+                        = link_to product.name, dress_url
+            section.sidebar
+              .social-blocks
+                = render 'blog/shared/social_blocks'
             / .share-tags
               - if @post.tag_list.present?
                 .tag-list
@@ -172,5 +146,3 @@
 noscript
   ' Please enable JavaScript to view the
   a href="http://disqus.com/?ref_noscript" comments powered by Disqus.
-
-

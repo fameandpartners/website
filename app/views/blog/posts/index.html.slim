@@ -2,16 +2,19 @@
 = render 'shared/breadcrumbs'
 
 .wrap.no-overflow
-
   .content-sidebar.clearfix
     section.content-area
-      - if @posts.present?
-        = render @posts, locals: {index_page: true}
-      - else
-        .blog-block-title
-          .empty No posts found
-
-    = render 'shared/blog_sidebar'
+      .grid-container
+        .grid-8.blog-content-column
+          - if @posts.present?
+            = render @posts, locals: {index_page: true}
+          - else
+            .blog-block-title
+              .empty No posts found
+        .grid-4
+          section.sidebar
+            .social-blocks
+              = render 'blog/shared/social_blocks'
 
   /javascript:
   /  var disqus_shortname = 'fameandpartners';

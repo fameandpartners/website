@@ -7,22 +7,12 @@
   ul.carousel
     - @featured_posts.each do |post|
       li.current style="background-image: url('#{ post_photo_url(post) }')" 
+        .mask
         = link_to post_path(post) do
-          .mask
           .text
             /.title.small = post.title
             .title.big = post.title
             p = post_description(post)
-    /li.current style="background-image: url('assets/_sample/blog-carousel.jpg')" 
-      .mask
-      .text
-        .title.big OH LORDEY
-        p 
-          ' Lorem ipsum dolor sit amet, 
-          br
-          ' consectetur adipisicing elit,
-          br
-          ' sed do eiusmod tempor...
   .controls
     span.prev
       span.icon-hr-left
@@ -116,16 +106,17 @@
               ' 21st December        
 
     .grid-4
-      .about
+      = render 'blog/shared/social_blocks'
+      /.about
         .icon-hexagon.left
         .icon-hexagon.right
         .icon-logo
         p About Fame & Partners lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor. Lorem ipsum dolor sit amet,  consectetur adipisicing elit, sed do eiusmod.
-      = form_for (Participation.new), as: :participation, url: newsletter_campaign_path(from: 'blog'), remote: true, html: { class: 'sign-in', id: 'newsletter-sign-up' } do |f|
+      /= form_for (Participation.new), as: :participation, url: newsletter_campaign_path(from: 'blog'), remote: true, html: { class: 'sign-in', id: 'newsletter-sign-up' } do |f|
         h2 become a member of fame & partners
         = f.text_field :email, class: 'inputbox', placeholder: 'Enter email here'
         input.btn.green.shadow.border type="submit" value="SIGN UP"
-      .follow-us
+      /.follow-us
         h2 FOLLOW US
         ul
           li 
