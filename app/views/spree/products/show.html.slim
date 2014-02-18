@@ -1,17 +1,16 @@
 ruby:
   images = @product.images_json
-  images_sets   = images.inject({}){|res, t| res[t[:color]] = (res[t[:color]].to_i + 1); res}
-  if images_sets[nil].present?
-    default_color = nil
-  else
-    default_color = images_sets.sort{|a, b| a.last <=> b.last }.first.try(:first) # ['color', count].first
+  default_color = nil
+  default_images = images.select{|image| image[:color].blank? }
+  if default_images.blank? and images.present?
+    default_color = images.first[:color]
+    default_images = images.select{|image| image[:color] == default_color}
   end
-  default_images = images.select{|image| image[:color] == default_color}
-  images_limit = @product.video_url.present? ? 6 : 7
 
   colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
   sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
 
+  images_limit = @product.video_url.present? ? 6 : 7
   if images.present?
     product_image_url = absolute_image_url(images.first[:large], 'http')
   else
