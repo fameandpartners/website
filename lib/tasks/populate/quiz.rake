@@ -36,7 +36,7 @@ namespace :db do
                                  :multiple => true,
                                  :partial => 'prom_hair'
                                }, {
-                                 :text => 'Which of these runway looks would inspire your dream formal dress?',
+                                 :text => 'Which of these runway looks would inspire your dream prom dress?',
                                  :step => 6,
                                  :position => 1006,
                                  :multiple => true,

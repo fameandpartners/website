@@ -4,8 +4,8 @@ window.page = {
 
   enableProductVariantsSelector: (parentContainer) ->
     if window.product_variants
-      page.variantsSelector = window.helpers.createProductVariantsSelector(parentContainer)
-      page.variantsSelector.init(window.product_variants)
+      window.page.variantsSelector = window.helpers.createProductVariantsSelector(parentContainer)
+      window.page.variantsSelector.init(window.product_variants)
 
   enableQuickView: (container, selector = '*[data-action="quick-view"]') ->
     container.on('click', selector, (e) ->

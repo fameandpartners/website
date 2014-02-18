@@ -3,7 +3,9 @@ $(".spree_products.show").ready ->
   page.enableShoppingCart()
 
   # products_info partial
-  page.enableProductVariantsSelector($('#content .product-info'))
+  variantsSelectorContainer = $('#content .product-info')
+  page.enableProductVariantsSelector(variantsSelectorContainer)
+
   page.enableWhatSizeIam($('.toggle-sizes'))
   page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
   page.enableAccordeonBars($('ul.slider li'))
@@ -18,6 +20,45 @@ $(".spree_products.show").ready ->
 
   # sync video iframe height with images height
   $('.grid-6 .product.picture iframe').height($('.grid-6 .picture img').height())
+
+  # start of product color images code
+  # listen to custom events
+  window.current_product_color = window.product_default_color
+  variantsSelectorContainer.on('selection_changed', (e, filter) ->
+    page.showProductImagesFor(filter.color)
+  )
+
+  page.getImagesForSelectedColor = (color) ->
+    new_images = _.where(window.productImagesData, { color: color })
+    if new_images.length == 0
+      new_images = _.where(window.productImagesData, { color: window.product_default_color })
+
+    if new_images.length > window.product_images_limit
+      new_images = new_images.slice(0, window.product_images_limit)
+    new_images
+
+  page.showProductImagesFor = (color) ->
+    return if window.current_product_color == color
+    window.current_product_color == color
+
+    new_images = page.getImagesForSelectedColor(color)
+
+    scope = $('.category-catalog .row .grid-6.product-image')
+    _.times(window.product_images_limit, (i) ->
+      if scope[i]
+        $image_container = $(scope[i])
+      else
+        $image_container = $(scope[0]).clone().hide()
+        scope.add($image_container)
+
+      if image_data = new_images[i]
+        $image_container.find('img').attr('src', image_data.large)
+        $image_container.find("a[data-action='show-large-image']").data('image', image_data.xlarge)
+        $image_container.show()
+      else
+        $image_container.hide()
+    )
+  # end of product color images code
 
 #window.populateImagesCarousel = ($wrapper, filterOptions = {}) ->
 #  $wrapper.empty()
