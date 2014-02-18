@@ -42,6 +42,15 @@ class Spree::Admin::Blog::PostPhotosController < Spree::Admin::Blog::BaseControl
     render json: true
   end
 
+  def make_primary
+    post_photo = Blog::PostPhoto.find(params[:id])
+    post_photo.post.update_attribute(:primary_photo_id, post_photo.id)
+
+    render locals: {
+      post_photo: post_photo
+    }
+  end
+
   private
 
   def model_class

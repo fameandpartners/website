@@ -7,8 +7,8 @@ class PagesController < Spree::StoreController
 
   def my_boutique
     @sorted_dresses = Spree::Product.recommended_for(current_spree_user, :limit => 1000)
-    @recommended_dresses = @sorted_dresses.first(6)
-    @dresses = @sorted_dresses.from(6)
+    @recommended_dresses = @sorted_dresses.first(9)
+    @dresses = @sorted_dresses.from(9)
 
     @style_profile = UserStyleProfile.find_by_user_id(current_spree_user.id)
   end

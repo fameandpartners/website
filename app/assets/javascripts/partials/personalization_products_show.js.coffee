@@ -11,4 +11,15 @@ $(".personalization_products.show").ready ->
   page.enableSendToFriendButton($('a.send-to-friend'))
 
   # personalization
-  page.enablePersonalisatonForm($('#content .product-page'))
+  formContainer = $('#content .product-page')
+  page.enablePersonalisatonForm(formContainer)
+
+  image = formContainer.find('.grid-6.product-image img')
+  formContainer.on('selection_changed', (e, selected) ->
+    return if _.isEmpty(window.productImagesData)
+    image_data = _.findWhere(window.productImagesData, (color: selected.color))
+    image_data or= _.findWhere(window.productImagesData, (color: window.product_default_color))
+    image.attr('src', image_data.large) if image_data
+    return
+  )
+

@@ -60,6 +60,7 @@ window.helpers.createProductVariantsSelector = (root) ->
         color: @colorInput.val(),
         size: @sizeInput.val()
       }
+      @container.trigger('selection_changed', @selected)
       @selected.size = parseInt(@selected.size) if @selected.size
       @exportSelectedVariant(@getSelectedVariant())
 

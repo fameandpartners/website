@@ -2,9 +2,9 @@ module BlogHelper
   # this should be in decorator
   def post_description(post)
     if post.description.present?
-      post.description
+      ActionView::Base.full_sanitizer.sanitize(post.description)
     else
-      truncate(post.body, length: 100, omission: '', separator: ' ')
+      truncate(ActionView::Base.full_sanitizer.sanitize(post.body), length: 100, omission: '', separator: ' ')
     end
   end
 
@@ -17,6 +17,15 @@ module BlogHelper
     else
       # default image url
       Blog::PostPhoto.new.photo.url
+    end
+  end
+
+  def post_path(post)
+    return '#' if post.nil?
+    if (category = post.category).present?
+      blog_post_by_category_url(category_slug: category.slug, post_slug: post.slug) 
+    else
+      blog_post_path(post_slug: post.slug)
     end
   end
 end

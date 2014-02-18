@@ -37,7 +37,7 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def image
-    @image ||= object.variant.product.images.first
+    @image ||= object.image
   end
 
   def money

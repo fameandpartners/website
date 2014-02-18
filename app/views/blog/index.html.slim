@@ -7,11 +7,12 @@
   ul.carousel
     - @featured_posts.each do |post|
       li.current style="background-image: url('#{ post_photo_url(post) }')" 
-        .mask
-        .text
-          /.title.small = post.title
-          .title.big = post.title
-          p = post_description(post)
+        = link_to post_path(post) do
+          .mask
+          .text
+            /.title.small = post.title
+            .title.big = post.title
+            p = post_description(post)
     /li.current style="background-image: url('assets/_sample/blog-carousel.jpg')" 
       .mask
       .text
@@ -34,7 +35,7 @@
     - @latest_posts.each do |post|
       .grid-4
         .picture
-          = link_to blog_post_by_category_url(category_slug: post.category.slug, post_slug: post.slug) do
+          = link_to post_path(post) do
             = image_tag post_photo_url(post)
         h4.title-1 = post.title
         p = post_description(post)
