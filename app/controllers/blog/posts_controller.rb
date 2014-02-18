@@ -38,11 +38,15 @@ class Blog::PostsController < BlogBaseController
       description "#{@post.title}. #{view_context.truncate(@post.body, :length => 200)}"
     end
 
+    @recommended_posts = @post.category.posts.published.simple_posts.limit(3).where("id != ?", @post.id).includes(:post_photos, :category)
+    @recommended_dresses = Spree::Product.featured.limit(4)
+=begin
     if current_spree_user.present?
       @photo_votes = Blog::CelebrityPhotoVote.where(
         user_id: current_spree_user.id, celebrity_photo_id: @post.celebrity_photos.map(&:id)
       )
     end
+=end
     generate_breadcrumbs_for_show
   end
 

@@ -22,10 +22,14 @@ module BlogHelper
 
   def post_path(post)
     return '#' if post.nil?
-    if (category = post.category).present?
-      blog_post_by_category_url(category_slug: category.slug, post_slug: post.slug) 
+    if post.red_carpet?
+      blog_red_carpet_post_path(post.slug)
     else
-      blog_post_path(post_slug: post.slug)
+      if (category = post.category).present?
+        blog_post_by_category_url(category_slug: category.slug, post_slug: post.slug) 
+      else
+        blog_post_path(post_slug: post.slug)
+      end
     end
   end
 end

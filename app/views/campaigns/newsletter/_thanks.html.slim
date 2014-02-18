@@ -1,11 +1,15 @@
-.title-join.campaign-benefits Thanks for joining!
-.thanks-desc Here’s your promo code to use against your purchase.
-.form-title Use promo code
-.form
-  .input.single
-    input.inputbox.coupon type="text" value="News20" readonly="true"
-
-- if !defined?(blog_version)
+- if defined?(blog_version)
+  .sign-in
+    h2 Thanks for joining!
+    h2 Here’s your promo code:
+    input.inputbox.email type="text" value="News20" readonly="true"
+- else
+  .title-join.campaign-benefits Thanks for joining!
+  .thanks-desc Here’s your promo code to use against your purchase.
+  .form-title Use promo code
+  .form
+    .input.single
+      input.inputbox.coupon type="text" value="News20" readonly="true"
   .share-this.aligncenter
     .share-title Share this offer
     .share
