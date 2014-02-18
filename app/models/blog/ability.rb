@@ -11,7 +11,7 @@ class Blog::Ability
         can [:edit, :index, :destroy, :create, :update, :new], Blog::Post
         can [:edit, :index, :destroy, :create, :update, :new], Blog::Celebrity
         can [:edit, :index, :destroy, :create, :update, :new, :assign_celebrity, :assign_post, :make_primary], Blog::CelebrityPhoto
-        can [:edit, :index, :destroy, :create, :update, :new], Blog::PostPhoto
+        can [:edit, :index, :destroy, :create, :update, :new, :make_primary], Blog::PostPhoto
       end
 
       if user.has_spree_role?("Blog Admin") || user.has_spree_role?("admin")

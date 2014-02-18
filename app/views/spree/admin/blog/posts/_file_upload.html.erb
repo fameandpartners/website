@@ -89,6 +89,7 @@
         <td colspan="2"></td>
         {% } %}
       <td class="delete">
+        <a rel="nofollow" data-update="blog_post_photo_field" class="button" icon="icon-plus" data-remote="true" data-method="PUT" href="/admin/blog/post_photos/{%=file.id%}/make_primary">make primary</a>
         <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
           <i class="icon-trash icon-white"></i>
           <span>{%=locale.fileupload.destroy%}</span>

@@ -87,22 +87,20 @@ FameAndPartners::Application.routes.draw do
     get '/about'   => 'blog#about', as: :about
     get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
 
-    get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
-    get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
+    #get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
+    #get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
 
-    get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
-    get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
+    #get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
+    #get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
 
-    post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
-    post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
+    #post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
+    #post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
 
-    get '/stylists' => 'blog/authors#index', as: :blog_authors
-    get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
+    #get '/stylists' => 'blog/authors#index', as: :blog_authors
+    #get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
 
-
-    get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
-    get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
-
+    #get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
+    #get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
 
     get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
     get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
@@ -110,6 +108,7 @@ FameAndPartners::Application.routes.draw do
     get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
     get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
 
+    get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
@@ -262,7 +261,10 @@ FameAndPartners::Application.routes.draw do
 
         resources :assets, only: [:create, :destroy, :index]
 
-        resources :post_photos
+        resources :post_photos do
+          put :make_primary, on: :member
+        end
+
         resources :celebrity_photos do
           member do
             put :assign_celebrity

@@ -26,6 +26,7 @@ class Blog::PostPhoto < ActiveRecord::Base
       "size" => read_attribute(:photo_file_size),
       "thumbnail_url" => photo.url,
       "url" => photo.url,
+      "id" => self.id,
       "delete_url" => "/admin/blog/post_photos/#{self.id}",
       "delete_type" => "DELETE"
     }
