@@ -8,10 +8,7 @@ module Spree
       end
 
       def parse
-        uploader = Products::BatchUploader.new()
-        uploader.parse_file(params[:file], params[:start])
 
-        @parsed_data = uploader.parsed_data
 
         render action: :show
       end

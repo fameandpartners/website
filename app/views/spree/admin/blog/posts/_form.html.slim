@@ -5,7 +5,7 @@
       = f.field_container :photo do
         = f.label :photo, "Primary Photo"
         br
-          = image_tag @blog_post.primary_photo.photo.url, height: '300'
+        = image_tag @blog_post.primary_photo.photo.url, height: '300'
 
     = f.field_container :title do
       = f.label :title, "Title"
