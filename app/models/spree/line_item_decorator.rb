@@ -36,4 +36,14 @@ Spree::LineItem.class_eval do
       array.to_sentence({ :words_connector => ", ", :two_words_connector => ", " })
     end
   end
+
+  def image
+    @image ||= begin
+      result = product.images_for_variant(variant).first
+      if result.nil? && !variant.is_master?
+        result = product.images_for_variant(product.master).first
+      end
+      result ||= product.images.first
+    end
+  end
 end

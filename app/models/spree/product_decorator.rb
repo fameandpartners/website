@@ -84,7 +84,7 @@ Spree::Product.class_eval do
       "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
         OR
       (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
-      product_color_values.where(option_value_id: variant.option_value_ids).id, variant.id
+      product_color_values.where(option_value_id: variant.option_value_ids).map(&:id), variant.id
     ).order('position ASC')
   end
 

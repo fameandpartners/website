@@ -97,6 +97,16 @@ module ProductsHelper
     end
   end
 
+
+  def line_item_image_url(line_item, size = :small)
+    image = line_item.image
+    if image.present? && image.attachment.present?
+      image.attachment.url(size)
+    else
+      'noimage/product.png'
+    end
+  end
+
   def quick_view_link(product)
     link_to 'Quick view', collection_product_path(product), data: { action: 'quick-view', id: product.permalink }
   end

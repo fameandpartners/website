@@ -28,7 +28,7 @@
             td.column-1
               .product-info
                 .image
-                  = link_to product_image(product, itemprop: 'image', width: 136, height: 200, alt: product.name), collection_product_path(product)
+                  = link_to image_tag(line_item_image_url(line_item, :product), itemprop: 'image', width: 136, height: 200, alt: product.name), collection_product_path(product)
                 .desc
                   .name = link_to product.name, collection_product_path(product), target: 'blank'
                   .text = line_item_description(variant)
