@@ -1,11 +1,14 @@
+ruby:
+  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+  images  = @product.images_json
+
 javascript:
   window.product_master_variant = '#{{ @product.master.id }}';
   window.product_variants = #{{ @product_variants.to_json }};
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
-
-ruby:
-  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
-  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+  window.productImagesData = #{{images.to_json}};
+  window.product_default_color = null;
 
 .content-offer
   .title
@@ -26,7 +29,7 @@ ruby:
       = render 'spree/products/breadcrumbs', product: @product, active: :customise
       .cumtomise
         .row
-          .grid-6
+          .grid-6.product-image
             .picture
               = product_image_tag(@product)
           .grid-6

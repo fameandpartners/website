@@ -184,13 +184,12 @@ Spree::Product.class_eval do
   end
 
   def images_json
-    color_type_id = option_types.find_by_name('dress-color').try(:id)
-    size_type_id = option_types.find_by_name('dress-size').try(:id)
     images.map do |image|
+      size = color = nil
       case image.viewable_type
       when 'Spree::Variant'
-        color = image.viewable.option_values.detect { |ov| ov[:option_type_id] == color_type_id }.try(:name)
-        size = image.viewable.option_values.detect { |ov| ov[:option_type_id] == size_type_id }.try(:name)
+        color = image.viewable.dress_color.try(:name)
+        size  = image.viewable.dress_size.try(:name)
       when 'ProductColorValue'
         color = image.viewable.option_value.name
       end
