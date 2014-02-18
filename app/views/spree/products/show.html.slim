@@ -65,7 +65,7 @@ ruby:
                       h3 Dress
                       em inspiration
                       .gothic MOODBOARD
-              - @product.moodboard_items.active.moodboard.each do |mood_item|
+              - @product.moodboard_items.active.moodboard.limit(5).each do |mood_item|
                 .grid-6
                   .picture
                     = image_tag mood_item.image.url(:product)
