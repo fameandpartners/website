@@ -4,7 +4,7 @@ $(".personalization_products.show").ready ->
 
   # products_info partial
   page.enableWhatSizeIam($('.toggle-sizes'))
-  page.enableAccordeonBars($('ul.slider li'))
+  page.enableAccordeonBars($('ul.slider > li:not(.recommended)'))
   page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
 
   # header - nav partial

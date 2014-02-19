@@ -6,7 +6,7 @@ $(".personalization_products.style").ready ->
   page.enableProductVariantsSelector($('#content .product-info'))
   page.enableWhatSizeIam($('.toggle-sizes'))
   page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
-  page.enableAccordeonBars($('ul.slider li'))
+  page.enableAccordeonBars($('ul.slider > li:not(.recommended)'))
   page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
 
   # header - nav partial
