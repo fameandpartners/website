@@ -139,7 +139,7 @@ module Products
         range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
 
         processed[:taxon_ids] = []
-        raw[:taxons].each do |taxon_name|
+        raw[:taxons].select(&:present?).map(&:humanize).map(&:titleize).each do |taxon_name|
           taxon = Spree::Taxon.where('LOWER(name) = ?', taxon_name.downcase).first
 
           if taxon.blank?
@@ -433,6 +433,7 @@ module Products
         if product.persisted?
           if product.valid? && product.name_was.downcase != attributes[:name].downcase
             product.save_permalink(attributes[:name].downcase.gsub(/\s/, '_'))
+            product.assign_attributes(attributes, without_protection: true)
           end
         else
           product.permalink = attributes[:name].downcase.gsub(/\s/, '_')
@@ -508,11 +509,13 @@ module Products
 
           variant.save
 
-          variants.push(variant)
+          variants.push(variant) if variant.persisted?
         end
       end
 
       variants
+
+      product.variants.where('id NOT IN (?)', variants.map(&:id)).destroy_all
     end
 
     def add_product_customizations(product, array_of_attributes)
@@ -555,6 +558,8 @@ module Products
         next unless style.present?
 
         accessories.each do |attrs|
+          next unless attrs.values_at(:name, :link).any?(&:present?)
+
           accessory = product.accessories.where(style_id: style.id, position: attrs[:position]).first
 
           if accessory.blank?

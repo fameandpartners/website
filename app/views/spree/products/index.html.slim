@@ -13,10 +13,11 @@
 
 .category-header
   h1
-    span
-      em = @page_info[:banner_title]
+    em = @page_info[:banner_title]
+    span = @page_info[:banner_title]
   p 
     = @page_info[:banner_text]
+  .arrows-line-horizontal
 
 .category-filter
   .fleft 
