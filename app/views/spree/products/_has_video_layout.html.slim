@@ -21,7 +21,7 @@ ruby:
         .picture
           = image_tag mood_item.image.url(:product)
 .row
-  - if (notes = @product.property('designer_notes')).present?
+  - if (notes = @product.property('stylist_quote_short')).present?
     .grid-6
       .text
         .inner = notes
