@@ -24,8 +24,50 @@ module Products
       prepare(params)
     end
 
+    # returns all products [ color + images for this color, similar color + images, color, similar color]
+    def products_with_similar
+      @products_with_similar ||= begin
+        if colors_with_similar.present?
+          search(colors_with_similar.map(&:id))
+        else
+          products
+        end
+      end
+    end
+
+    def products
+      @products ||= begin
+        color_ids = colour.present? ? colour.map(&:id) : []
+        search(color_ids)
+      end
+    end
+
+    def similar_products
+      @similar_products ||= begin
+        if similar_colors.present?
+          search(similar_colors.map(&:id), products.map(&:id))
+        else
+          products
+        end
+      end
+    end
+
     def retrieve_products
+      #color_ids  = colors_with_similar.present? ? colors_with_similar.map(&:id) : []
+      #color_ids  = color.map(&:id)
       color_ids  = colors_with_similar.present? ? colors_with_similar.map(&:id) : []
+
+      taxon_ids  = taxons.present? ? taxons : {}
+      keywords   = keywords.present? ? keywords.split : []
+      bodyshapes = bodyshape
+      order_by   = order
+      limit      = per_page
+      offset     = ((page - 1) * per_page)
+    end
+
+    #private 
+
+    def search(color_ids = [], exclude_products_ids = [])
       taxon_ids  = taxons.present? ? taxons : {}
       keywords   = keywords.present? ? keywords.split : []
       bodyshapes = bodyshape
@@ -43,6 +85,15 @@ module Products
               :available_on => { :lte => Time.now }
             }
           }
+          if exclude_products_ids.present?
+            filter :bool, :must => {
+              :not => {
+                :terms => {
+                  :id => exclude_products_ids
+                }
+              }
+            }
+          end
 
           # Filter by colors
           if color_ids.present?
@@ -201,8 +252,14 @@ module Products
     end
 
     def colors_with_similar
+      return [] if colour.blank?
       similar_colors = colour.map(&:similars).flatten
       colour + similar_colors
+    end
+
+    def similar_colors
+      return [] if colour.blank?
+      colour.map(&:similars).flatten
     end
 
     def selected_color_name

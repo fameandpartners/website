@@ -334,7 +334,7 @@ FameAndPartners::Application.routes.draw do
     match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
     # seo routes like *COLOR*-Dress
-    get "(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses
+    get "(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses, defaults: { separate_similar: true }
   
     resources :site_versions, only: [:show]
   end

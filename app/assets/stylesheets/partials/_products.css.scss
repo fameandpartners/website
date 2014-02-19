@@ -73,10 +73,11 @@
 		}
 		&.audio-cover {
 			.icon {
+				width: 25px !important;
 				position: absolute;
 				left: 50%;
 				top: 50%;
-				margin: -45px 0 0 -50px;
+				margin: 85px 0 0 54px;
 				width: auto;
 				z-index: 1;
 			}
@@ -100,7 +101,7 @@
 		.inner {
 			background: url('_quiz/kiss.png') no-repeat bottom right;
 			padding-bottom: 35px;
-			min-height: 150px;
+			min-height: 165px;
 		}
 	}
 	.moodboard-title {
@@ -234,6 +235,11 @@
 		font-size: 26px;
 		line-height: 20px;
 		text-align: left;
+		filter: grayscale(100%);
+		-webkit-filter: grayscale(100%);
+		-moz-filter: grayscale(100%);
+		-ms-filter: grayscale(100%);
+		-o-filter: grayscale(100%);
 		> div, > a {
 			display: inline-block;
 			vertical-align: top !important;
