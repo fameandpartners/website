@@ -10,7 +10,7 @@ Spree::ProductsController.class_eval do
     @searcher.current_user = try_spree_current_user
     @searcher.current_currency = current_currency
 
-    if params[:separate_similar]
+    if false && params[:separate_similar]
       @products = @searcher.products
       @similar_products = @searcher.similar_products
     else
