@@ -508,11 +508,13 @@ module Products
 
           variant.save
 
-          variants.push(variant)
+          variants.push(variant) if variant.persisted?
         end
       end
 
       variants
+
+      product.variants.where('id NOT IN (?)', variants.map(&:id)).destroy_all
     end
 
     def add_product_customizations(product, array_of_attributes)
