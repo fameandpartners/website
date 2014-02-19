@@ -557,6 +557,8 @@ module Products
         next unless style.present?
 
         accessories.each do |attrs|
+          next unless attrs.values_at(:name, :link).any?(&:present?)
+
           accessory = product.accessories.where(style_id: style.id, position: attrs[:position]).first
 
           if accessory.blank?
