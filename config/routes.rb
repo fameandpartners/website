@@ -81,6 +81,8 @@ FameAndPartners::Application.routes.draw do
     match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
   end
 
+  match '/blog(/*path)' => redirect(host: configatron.host, path: '/')
+
   # Blog routes
   scope '/blog' do
     get '/' => 'blog#index', as: :blog
