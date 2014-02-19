@@ -139,7 +139,7 @@ module Products
         range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
 
         processed[:taxon_ids] = []
-        raw[:taxons].each do |taxon_name|
+        raw[:taxons].select(&:present?).map(&:humanize).map(&:titleize).each do |taxon_name|
           taxon = Spree::Taxon.where('LOWER(name) = ?', taxon_name.downcase).first
 
           if taxon.blank?
