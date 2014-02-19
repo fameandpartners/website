@@ -433,6 +433,7 @@ module Products
         if product.persisted?
           if product.valid? && product.name_was.downcase != attributes[:name].downcase
             product.save_permalink(attributes[:name].downcase.gsub(/\s/, '_'))
+            product.assign_attributes(attributes, without_protection: true)
           end
         else
           product.permalink = attributes[:name].downcase.gsub(/\s/, '_')
