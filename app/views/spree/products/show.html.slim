@@ -60,7 +60,7 @@ css:
                       a href='#' data-action='show-large-image' data-image='#{ image[:xlarge] }'
                         span.icon-expand
           - if @product.video_url.present?
-            .grid-6
+            .grid-6.video
               .picture
                 == product_video(@product, width: '100%', height: '481')
           / moodboard

@@ -8,7 +8,7 @@ $(".spree_products.show").ready ->
 
   page.enableWhatSizeIam($('.toggle-sizes'))
   page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
-  page.enableAccordeonBars($('ul.slider li'))
+  page.enableAccordeonBars($('ul.slider > li:not(.recommended)'))
   page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
 
   # header - nav partial
@@ -19,7 +19,7 @@ $(".spree_products.show").ready ->
   page.enableSoundCloudSongPlayer($("a[data-action=soundcloud]"))
 
   # sync video iframe height with images height
-  $('.grid-6 .product.picture iframe').height($('.grid-6 .picture img').height())
+  $('.grid-6.video iframe').height($('.grid-6.product-image .picture img').height())
 
   # start of product color images code
   # listen to custom events
