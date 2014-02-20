@@ -1,8 +1,8 @@
 .category-header {
-	margin: 10px 0 30px;
-	background-color: #fff;
 	text-align: center;
+	margin: 10px 0 30px;
 	padding: 60px 0 30px;
+	background-color: #fff;
 	h1 {
 		font-size: 47px;
 		font-family: $fontThree;
@@ -505,8 +505,8 @@
 	}
 }
 
-.personal-boutique {
 
+.personal-boutique, .category-catalog.products {
 	.page-title {
 		margin: 40px 0;
 		h1 {
