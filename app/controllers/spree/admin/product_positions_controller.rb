@@ -8,7 +8,9 @@ module Spree
       def create
         # add ability to sort inside taxon
         params[:positions].each do |id, index|
-          Spree::Product.where(:id => id).update_all(:position => index)
+          product = Spree::Product.find_by_id(id)
+          product.update_column(:position, index)
+          product.update_index
         end
       end
     end
