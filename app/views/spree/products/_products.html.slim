@@ -8,7 +8,8 @@
 
   - if @similar_products.present?
     .row
-      h1.no-border View more dresses
-      h2.border These dresses can also be made in #{ @searcher.selected_color_name }
+      .page-title
+        h1 View more dresses
+        h2.border These dresses can also be made in #{ @searcher.selected_color_name }
 
       = render(@similar_products)

@@ -53,6 +53,7 @@ module Products
       order_by   = order
       limit      = per_page
       offset     = ((page - 1) * per_page)
+      fetched_products_ids = @fetched_products_ids
 
       begin
         Tire.search(:spree_products, load: { include: { master: :prices } }) do
@@ -65,11 +66,11 @@ module Products
             }
           }
 
-          if @fetched_products_ids.present?
+          if fetched_products_ids.present?
             filter :bool, :must => {
               :not => {
                 :terms => {
-                  :id => @fetched_products_ids
+                  :id => fetched_products_ids
                 }
               }
             }
