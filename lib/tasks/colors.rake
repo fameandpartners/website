@@ -1,7 +1,18 @@
 namespace :colors do
+  task :import_from_file => :environment do
+    option_type = Spree::OptionType.where(name: 'dress-color').first
+    option_values = YAML.load(File.open(File.join(Rails.root, 'lib', 'color', 'map.yml'))) rescue []
+
+    option_values.each do |option_value|
+      option_type.option_values.
+        where(option_value.slice(:name)).
+        first_or_create(option_value.slice(:presentation)).
+        update_attributes(option_value.slice(:value, :image))
+    end
+  end
+
   task :import => :environment do
     option_type = Spree::OptionType.where(name: 'dress-color').first
-
     option_values = [
       {
         name: 'black',
