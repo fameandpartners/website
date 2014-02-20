@@ -2,6 +2,9 @@ ruby:
   sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
   colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
   images  = @product.images_json
+  if @product.property('color_customization').present? && @product.property('color_customization') == "yes"
+    show_custom_colors = true
+  end
 
 javascript:
   window.product_master_variant = '#{{ @product.master.id }}';
@@ -10,18 +13,7 @@ javascript:
   window.productImagesData = #{{images.to_json}};
   window.product_default_color = null;
 
-.content-offer
-  .title
-    ' GET YOUR 
-    em UNIQUE 
-    ' STYLE.
-  .fright
-    .text-with-arrow 
-      ' Lorem ipsum dolor sit amet, consectetu,
-      br
-      ' Integer vel felis sit amet massa conguet.
-      .arrow
-    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
+
 
 .product-page
   .row
@@ -44,7 +36,12 @@ javascript:
                 em Delivery time is only 14-21 days
               .arrows-line-horizontal
             #personalization
-              = render 'form', product: @product, personalization: @personalization
+              .instructions
+                - if show_custom_colors
+                  ' Choose a custom color or a dress customisation then select a size on the right side of the page.
+                - else
+                  ' Choose a dress customisation then select a color and size on the right side of the page.
+              = render 'form', product: @product, personalization: @personalization, show_custom_colors: show_custom_colors
             / .style
               .row
                 .grid-6

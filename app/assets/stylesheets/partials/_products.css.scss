@@ -373,7 +373,10 @@
 			margin-bottom: 15px;
 			font-weight: 400;
 		}
-		.dropdown { margin-bottom: 35px;}
+		.instructions{
+			padding: 0px 40px 30px 0;
+		}
+		.dropdown { margin-bottom: 35px; width: 98%;}
 		.row {
 			margin: 0 -5px;
 			&.customisation-type {
@@ -421,7 +424,7 @@
 		.style {
 			input[type="radio"] { display: none;}
 			.title {
-				margin-bottom: 35px;
+				margin-bottom: 5px;
 				font: 400 20px/1 $fontThree;
 			}
 			.button {
