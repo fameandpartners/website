@@ -1,37 +1,14 @@
-.m-pixel
-  == @marketing_pixels
+- self.formats = [:html, :json]
+.category-catalog.products
+  .row
+    - if @products.present?
+      = render(@products) 
+    - else
+      .not-found Sorry, no dresses match your criteria
 
-.ad style=(@page_info[:banner_image].blank? ? '' : "background: url('#{@page_info[:banner_image]}') 0 0 no-repeat;")
-  h1 class='black' = @page_info[:banner_title]
-  h2 = @page_info[:banner_text]
-.results-sort.clearfix
-  .results-sort-inner
-    .results.fleft = pluralize(products.length, 'result')
-    .sort.fright
-      ' Sort by
-      - options = options_from_collection_for_select(Products::ProductsFilter.available_sort_orders, :first, :second, params[:order])
-      = select_tag "product_order", options, class: 'selectbox', :include_blank => true, :'data-placeholder' => 'Choose'
-ul.products-list.grid-container
-  - products.each do |product|
-    li.product-item.grid-33
-      .thumbnail
-        .like = add_to_wishlist_link(product)
-        - cache ['products_page', 'product', product.id, @current_colors.map(&:name).join('-'), 'thumbnail_and_quick_view'], :expires_in => configatron.cache.expire.normally do
-          .quick-view = quick_view_link(product)
-          = link_to collection_product_path(product) do
-            = hoverable_product_image_tag product, colors: @current_colors, itemprop: "image", width: 243, height: 352, alt: product.name
-      - cache ['products_page', 'product', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
-        .name = link_to product.name, product
-        /.description = product_short_description(product)
-        .price = price_for_product(product)
-        .colors
-          - colors[product.id].map(&:name).sort.each do |color|
-            .color{class=color}
+  - if @similar_products.present?
+    .row
+      h1.no-border View more dresses
+      h2.border These dresses can also be made in #{ @searcher.selected_color_name }
 
-- if @page_info[:category_description]
-  .category-description
-    = @page_info[:category_description]
-
-- if @page_info[:footer_text]
-  .description
-    = @page_info[:footer_text]
+      = render(@similar_products)

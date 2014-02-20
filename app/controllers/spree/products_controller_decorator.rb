@@ -10,12 +10,8 @@ Spree::ProductsController.class_eval do
     @searcher.current_user = try_spree_current_user
     @searcher.current_currency = current_currency
 
-    if false && params[:separate_similar]
-      @products = @searcher.products
-      @similar_products = @searcher.similar_products
-    else
-      @products = @searcher.products_with_similar
-    end
+    @products         = @searcher.products
+    @similar_products = @searcher.similar_products
 
     @page_info = @searcher.selected_products_info
 
@@ -29,8 +25,10 @@ Spree::ProductsController.class_eval do
         render action: 'index', layout: true
       end
       format.json do
-        products_html = render_to_string(partial: 'spree/products/product.html.slim', collection: @products) || 'Sorry, no dresses match your criteria'
-
+        products_html = render_to_string(
+          partial: 'spree/products/products',
+          formats: [:html]
+        ) 
         render json: { products_html: products_html, page_info:  @page_info }
       end
     end 

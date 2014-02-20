@@ -42,27 +42,7 @@
       - options = options_from_collection_for_select(Products::ProductsFilter.available_sort_orders, :first, :second, @searcher.order)
       = select_tag 'product_order', options, class: 'selectbox', prompt: 'Sort By'
 
-.category-catalog.products
-  .row
-    - if @products.present?
-      = render(@products) 
-    - else
-      .not-found Sorry, no dresses match your criteria
-
-- if @similar_products.present?
-  .view-more-separate
-
-  .page-title
-    h1.no-border View more dresses
-    h2.border These dresses can also be made in #{ @searcher.selected_color_name }
-
-    / show preferred color images firstly..
-    ul.products-list.grid-container
-      - @similar_products.each do |product|
-        = render 'shared/product', product: product
-
-  .view-more-separate
-
+= render 'products'
 
 // OLD HTML ---->
 / .m-pixel
