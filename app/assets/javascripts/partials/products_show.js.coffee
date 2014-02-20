@@ -39,7 +39,7 @@ $(".spree_products.show").ready ->
 
   page.showProductImagesFor = (color) ->
     return if window.current_product_color == color
-    window.current_product_color == color
+    window.current_product_color = color
 
     new_images = page.getImagesForSelectedColor(color)
 

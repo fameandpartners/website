@@ -36,7 +36,7 @@ $(".spree_products.index").ready ->
         dataType: 'json',
         data: $.param(searchData)
         success: (data) ->
-          productsFilter.$el.find('.category-catalog.products .row').html(data.products_html)
+          productsFilter.$el.find('.category-catalog.products').replaceWith(data.products_html)
           header = productsFilter.$el.find('.category-header')
           header.find('h1 span em').html(data.page_info.banner_title)
           header.find('p').html(data.page_info.banner_text)

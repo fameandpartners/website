@@ -18,7 +18,7 @@ ruby:
   end
   share_url = collection_product_url(@product)
 
-  moodboard_pics =  @product.moodboard_items.active.moodboard.limit(5)
+  moodboard_pics = @product.moodboard_items.active.moodboard.limit(5)
 
 javascript:
   window.product_variants = #{{ @product_variants.to_json }};
@@ -32,18 +32,7 @@ css:
 
 = render 'product_meta', product: @product
 
-.content-offer
-  .title
-    ' GET YOUR 
-    em UNIQUE 
-    ' STYLE.
-  .fright
-    .text-with-arrow 
-      ' Lorem ipsum dolor sit amet, consectetu,
-      br
-      ' Integer vel felis sit amet massa conguet.
-      .arrow
-    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
+
 
 // PRODUCT EXPLORE ---->
 .product-page
