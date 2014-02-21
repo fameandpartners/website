@@ -30,7 +30,7 @@ module Products
         if colour.blank?
           search
         else
-          search(colors_with_similar(:very_close).map(&:id))
+          search(colors_with_similar(:very_close).map(&:id), only_viewable_colors: true)
         end
       end
     end
@@ -46,7 +46,7 @@ module Products
       end
     end
 
-    def search(color_ids = [])
+    def search(color_ids = [], options = {})
       taxon_ids  = taxons.present? ? taxons : {}
       keywords   = keywords.present? ? keywords.split : []
       bodyshapes = bodyshape
@@ -54,6 +54,7 @@ module Products
       limit      = per_page
       offset     = ((page - 1) * per_page)
       fetched_products_ids = @fetched_products_ids
+      only_viewable_colors = options[:only_viewable_colors]
 
       begin
         Tire.search(:spree_products, load: { include: { master: :prices } }) do
@@ -78,7 +79,11 @@ module Products
 
           # Filter by colors
           if color_ids.present?
-            filter :terms, :color_ids => color_ids
+            if only_viewable_colors
+              filter :terms, :viewable_color_ids => color_ids
+            else
+              filter :terms, :color_ids => color_ids
+            end
           end
 
           # Filter by taxons

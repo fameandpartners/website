@@ -18,11 +18,11 @@ Spree.config do |config|
 
   config.attachment_styles = {
     mini:     '48x48#',
-    small:    '80x115#',
-    product:  '234x336#',
-    large:    '411x590#',
+    small:    '80x115>',
+    product:  '234x336>',
+    large:    '411x590>',
     xlarge:   '1280x800>',
-    email:    '129x185'
+    email:    '129x185>'
   }.to_json
 
   config.currency = 'AUD'
