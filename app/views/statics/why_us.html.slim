@@ -1,34 +1,59 @@
-.wrap.page-static
+.why-us-page.page-static
   h1 Why shop with us?
-  p Fame & Partners is the destination for crafting the most current, coolest and individual look for your prom and special events.
-  p When you shop with us, you will get a prom dress and total look that is uniquely yours. Guaranteed.
+  p 
+    ' Fame & Partners is the destination for crafting the most current, coolest and individual look for your prom and special events.
+    br
+    ' When you shop with us, you will get a prom dress and total look that is uniquely yours. Guaranteed.
+  .row
+    .grid-6.pink
+      a name="twin"
+      .icon.twin
+      h2 Twin Alert
+      p Our Twin Alert feature means that no girl attending the same event can purchase the same dress with the same customizations, in the same colour. This guarantees that no one will be wearing the same dress or look as you. #{link_to 'Register Now', spree_login_path}.
+      .arrows-line-horizontal
+      .arrows-line-vertical
 
-  a name="twin"
-  h2 Twin Alert
-  p Our Twin Alert feature means that no girl attending the same event can purchase the same dress with the same customizations, in the same colour. This guarantees that no one will be wearing the same dress or look as you. #{link_to 'Register Now', spree_login_path}.
+    .grid-6
+      a name="advice"
+      .icon.stylists
+      h2 Free stylists
+      p If you need some help sourcing your complete look, Fame & Partners Stylists will source the total look for you, for free! When you purchase your dress with us, our Stylists will give you completely free, tailored advice based on your style profile and then actively find the best products that will match your dress, within your budget.
+      .arrows-line-horizontal
 
-  a name="advice"
-  h2 Free stylists
-  p If you need some help sourcing your complete look, Fame & Partners Stylists will source the total look for you, for free! When you purchase your dress with us, our Stylists will give you completely free, tailored advice based on your style profile and then actively find the best products that will match your dress, within your budget.
+    .grid-6
+      a name="customisation"
+      .icon.customize
+      h2 Customize your Dress
+      p Want to make a dress completely your own? Choose to get one of our styles made in a different #{t('words.color')} or fabric, change the hemline length, select another unique #{t('words.customization')} or get it made in a size not offered on the site.
+      .arrows-line-horizontal
+      .arrows-line-vertical
 
-  a name="customisation"
-  h2 #{t('words.customization')}s
-  p Want to make a dress completely your own? Choose to get one of our styles made in a different #{t('words.color')} or fabric, change the hemline length, select another unique #{t('words.customization')} or get it made in a size not offered on the site.
+    .grid-6.pink
+      a name="shipping"
+      .icon.shipping
+      h2 Free shipping
+      p Standard shipping is FREE within Australia for items over $49. View shipping delivery times #{link_to 'here', terms_path}.
+      .arrows-line-horizontal
 
-  a name="shipping"
-  h2 Free shipping
-  p Standard shipping is FREE within Australia for items over $49. View shipping delivery times #{link_to 'here', terms_path}.
+    .grid-6.pink
+      a name="returns"
+      .icon.returns
+      h2 Free returns
+      p You may return any item for free, provided it’s within 30 days of purchase, it is unused and in resalable condition, and the DO NOT REMOVE tag is still attached.
+      .arrows-line-horizontal
+      .arrows-line-vertical
+
+    .grid-6
+      a name="fit"
+      .icon.guarantee
+      h2 Fit guarantee
+      p If the size you purchase isn’t right for you, you can exchange it for another size up or down one size, for free.
+      .arrows-line-horizontal
   
-  a name="returns"
-  h2 Free returns
-  p You may return any item for free, provided it’s within 30 days of purchase, it is unused and in resalable condition, and the DO NOT REMOVE tag is still attached.
-  
-  a name="fit"
-  h2 Fit guarantee
-  p If the size you purchase isn’t right for you, you can exchange it for another size up or down one size, for free.
-  
-  a name="ondemand"
-  h2 On Demand
-  p We make all of our dresses on demand which is how we offer #{t('words.customization')}s and multiple #{t('words.color')} options. This means your dress is uniquely yours, made just for you.
+    .grid-12.pink-light
+      a name="ondemand"
+      .icon.ondemand
+      h2 On Demand
+      p We make all of our dresses on demand which is how we offer #{t('words.customization')}s and multiple #{t('words.color')} options. This means your dress is uniquely yours, made just for you.
 
   
