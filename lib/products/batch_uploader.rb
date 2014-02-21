@@ -140,7 +140,7 @@ module Products
 
         processed[:taxon_ids] = []
         raw[:taxons].select(&:present?).map(&:humanize).map(&:titleize).each do |taxon_name|
-          taxon = Spree::Taxon.where('LOWER(name) = ?', taxon_name.downcase).first
+          taxon = Spree::Taxon.where("LOWER(REPLACE(name, '-', ' ')) = ?", taxon_name.downcase).first
 
           if taxon.blank?
             taxon = range.children.create do |object|
