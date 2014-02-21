@@ -161,37 +161,37 @@ namespace :images do
                   end
                 end
               when /styleit/i then
-                #file_data.each do |file_path, file_name|
-                #  matches = /^(?<style>\S+)(?<position>\d+)\.\S+/.match(file_name)
-                #
-                #  if matches.blank? || matches[:style].blank? || matches[:position].blank?
-                #    puts "File \"#{file_name}\" have invalid format of name"
-                #    next
-                #  end
-                #
-                #  if matches[:style].downcase == 'boho'
-                #    style = Style.find_by_name('bohemian')
-                #  else
-                #    style = Style.find_by_name(matches[:style].downcase)
-                #  end
-                #
-                #  if style.blank?
-                #    puts "Style with name \"#{matches[:style].downcase}\" was not found"
-                #    next
-                #  end
-                #
-                #  accessory = product.accessories.where(style_id: style.id, position: matches[:position]).first
-                #
-                #  if accessory.blank?
-                #    puts "Accessory for style \"#{style.name}\" with position \"#{matches[:position]}\" was not found"
-                #    next
-                #  end
-                #
-                #  accessory.image = File.open(file_path)
-                #  if accessory.save
-                #    puts "File \"#{file_name}\" was loaded for Accessory in product \"#{product.name}\""
-                #  end
-                #end
+                file_data.each do |file_path, file_name|
+                  matches = /^(?<style>\S+)(?<position>\d+)\.\S+/.match(file_name)
+
+                  if matches.blank? || matches[:style].blank? || matches[:position].blank?
+                    puts "File \"#{file_name}\" have invalid format of name"
+                    next
+                  end
+
+                  if matches[:style].downcase == 'boho'
+                    style = Style.find_by_name('bohemian')
+                  else
+                    style = Style.find_by_name(matches[:style].downcase)
+                  end
+
+                  if style.blank?
+                    puts "Style with name \"#{matches[:style].downcase}\" was not found"
+                    next
+                  end
+
+                  accessory = product.accessories.where(style_id: style.id, position: matches[:position]).first
+
+                  if accessory.blank?
+                    puts "Accessory for style \"#{style.name}\" with position \"#{matches[:position]}\" was not found"
+                    next
+                  end
+
+                  accessory.image = File.open(file_path)
+                  if accessory.save
+                    puts "File \"#{file_name}\" was loaded for Accessory in product \"#{product.name}\""
+                  end
+                end
               else
                 puts "Directory #{content_name} has invalid format of name"
             end
