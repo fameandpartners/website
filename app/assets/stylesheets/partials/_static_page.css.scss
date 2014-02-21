@@ -173,18 +173,5 @@
 		bottom: 10px;
 		z-index: 1;
 	}
-	.icon {
-		display: block;
-		width: 120px;
-		height: 120px;
-		margin: 0 auto;
-		background: url('_static-pages/icons-why-us.png') no-repeat;
-		&.twin { background-position: 0 0;}
-		&.stylists { background-position: -120px 0;}
-		&.customize { background-position: -240px 0;}
-		&.shipping { background-position: -360px 0;}
-		&.returns { background-position: -480px 0;}
-		&.guarantee { background-position: -600px 0;}
-		&.ondemand { background-position: -720px 0;}
-	}
+	.icon { font-size: 120px;}
 }
