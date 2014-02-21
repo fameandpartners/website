@@ -2,7 +2,7 @@ window.Quiz = {
   show: () ->
     $('.quiz-box').show()
     Quiz.updatePosition()
-    $('body').css 'overflow', 'hidden'
+    # $('body').css 'overflow', 'hidden'
     $.getScript '/quiz'
     $('.quiz-overlay').one 'click', Quiz.hide
     $('.quiz-box .close-quiz').one 'click', Quiz.hide
