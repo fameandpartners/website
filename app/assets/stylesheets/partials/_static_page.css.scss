@@ -128,3 +128,50 @@
 		}
 	}
 }
+
+.why-us-page {
+	text-align: center;
+	font: 400 16px/1.2 $fontFive;
+	h1 {
+		font: italic 42px/1.2 $fontTwo;
+		margin-bottom: 20px;
+	}
+	h2 {
+		font: 400 48px/1 $fontThree;
+		margin: 20px 0;
+	}
+	.row { 
+		font-size: 0;
+		margin-top: 30px;
+		background-color: #fbf5f3;
+	}
+	.grid-6, .grid-12 {
+		float: none;
+		display: inline-block;
+		vertical-align: top;
+		padding: 30px;
+		font: 400 16px/1.2 $fontFive;
+	}
+	.grid-6 {
+		min-height: 400px;
+		position: relative;
+	}
+	.grid-12 { padding: 50px 170px;}
+	.pink { background-color: #f3dbd5;}
+	.pink-light { background-color: #f8ece9;}
+	.arrows-line-horizontal {
+		position: absolute;
+		bottom: 0;
+		left: 10px;
+		right: 10px;
+		z-index: 1;
+	}
+	.arrows-line-vertical {
+		position: absolute;
+		right: 0;
+		top: 10px;
+		bottom: 10px;
+		z-index: 1;
+	}
+	.icon { font-size: 120px;}
+}
