@@ -116,7 +116,7 @@ FameAndPartners::Application.routes.draw do
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
-    get '/bloggers/racheletncole'   => 'statics#blogger'
+    get '/bloggers/racheletnicole' => 'statics#blogger'
     
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us

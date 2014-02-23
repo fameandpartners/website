@@ -1,22 +1,7 @@
-.content-offer
-  .title
-    ' GET YOUR 
-    em UNIQUE 
-    ' STYLE.
-  .fright
-    .text-with-arrow 
-      ' Lorem ipsum dolor sit amet, consectetu,
-      br
-      ' Integer vel felis sit amet massa conguet.
-      .arrow
-    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
-
 .category-header
-  h1
-    em = @page_info[:banner_title]
+  h1 = @page_info[:banner_title]
     /span = @page_info[:banner_title]
-  p 
-    = @page_info[:banner_text]
+  h2 = @page_info[:banner_text]
   .arrows-line-horizontal
 
 .category-filter
@@ -43,6 +28,8 @@
       = select_tag 'product_order', options, class: 'selectbox', prompt: 'Sort By'
 
 = render 'products'
+.m-pixel
+  = raw @marketing_pixels
 
 // OLD HTML ---->
 / .m-pixel

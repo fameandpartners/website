@@ -5,14 +5,12 @@
 	background-color: #fff;
 	h1 {
 		font-size: 47px;
-		font-family: $fontThree;
+		font-family: $fontTwo;
 		line-height: 1;
-		em {
-			font-family: $fontTwo;
-			position: relative;
-			z-index: 1;
-		}
-		span { display: block;}
+		font-style: italic;
+	}
+	h2{
+		font-weight: 100;
 	}
 	p { margin: 0;}
 	.arrows-line-horizontal {
