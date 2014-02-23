@@ -1,22 +1,25 @@
 .category-header {
 	text-align: center;
 	margin: 10px 0 30px;
-	padding: 60px 0 30px;
+	padding: 40px 0 30px;
 	background-color: #fff;
 	h1 {
 		font-size: 47px;
-		font-family: $fontThree;
+		font-family: $fontTwo;
 		line-height: 1;
-		em {
-			font-family: $fontTwo;
-			position: relative;
-			z-index: 1;
-		}
-		span { display: block;}
+		font-style: italic;
+	}
+	h2{
+		font-weight: 100;
 	}
 	p { margin: 0;}
 	.arrows-line-horizontal {
 		margin-top: 30px;
+	}
+	.category-banner{
+		img{
+			
+		}
 	}
 }
 
@@ -378,7 +381,7 @@
 		}
 		.dropdown { margin-bottom: 35px; width: 98%;}
 		.row {
-			margin: 0 -5px;
+			margin: 0 -5px 25px -5px;
 			&.customisation-type {
 				font-size: 0;
 				.grid-6 {

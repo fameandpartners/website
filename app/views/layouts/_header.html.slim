@@ -117,14 +117,12 @@
               li = link_to 'All Prom Dresses', collection_path
               li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Prom Dresses'
               li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Prom Dresses'
-              li = link_to 'Sexy and Sleek', build_collection_product_path('sexy-and-sleek', nil), title: 'Sleek and Sexy Prom Dresses'
-              li = link_to 'Ball Gowns', build_collection_product_path('ball-gown', nil), title: 'Ball Gowns'
         li = link_to 'ABOUT US', about_us_path, class: 'btn'
     
     nav.fright
       ul
         li = link_to 'WHY SHOP WITH US?', why_us_path, class: 'btn'
-    = link_to '#', class: 'offer' do
+    .offer
       span.p.title FORMAL DRESSES FOR FASHION MAVENS
       span.p Your unique look. guaranteed.
   
