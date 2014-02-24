@@ -1,0 +1,13 @@
+= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Accessories' }
+
+= render :partial => 'spree/shared/error_messages', :locals => { :target => @accessory }
+
+= form_for [:admin, @accessory], url: admin_celebrity_accessories_path(@celebrity), :html => { :multipart => true } do |f|
+  fieldset data-hook="new_celebrity_product_accessory"
+    legend align="center" = t(:new_celebrity_product_accessory)
+    = render :partial => 'form', :locals => { :f => f }
+
+    .form-buttons.filter-actions.actions data-hook="buttons"
+      = button t('actions.create'), 'icon-ok'
+      span.or = t(:or)
+      = link_to_with_icon 'icon-remove', t('actions.cancel'), admin_celebrity_accessories_path(@celebrity), :class => 'button'

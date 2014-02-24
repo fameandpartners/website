@@ -11,3 +11,5 @@
         = link_to_with_icon 'icon-picture', t(:images), admin_celebrity_images_path(@celebrity)
       li class="#{ 'active' if current == 'Moodboard Items' }"
         = link_to_with_icon 'icon-picture', t(:moodboard_items), admin_celebrity_moodboard_items_path(@celebrity)
+      li class="#{ 'active' if current == 'Accessories' }"
+        = link_to_with_icon 'icon-picture', t(:accessories), admin_celebrity_accessories_path(@celebrity)

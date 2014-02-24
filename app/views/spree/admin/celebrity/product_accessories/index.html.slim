@@ -1,0 +1,51 @@
+- content_for :page_title do
+  = t(:listing_celebrity_product_accessories)
+
+- content_for :page_actions do
+  ul.toolbar.inline-menu
+    - if @products.present?
+      li
+        span#new_ptype_link
+          = link_to 'Add accessory', new_admin_celebrity_accessory_url(@celebrity), remote: true, class: 'icon-plus button', id: 'new_admin_celebrity_product_accessory_link'
+
+= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Accessories' }
+
+#new_celebrity_product_accessory data-hook="new-celebrity-product-accessory"
+
+- if @products.blank?
+  .no-objects-found = t(:no_results) 
+- else
+  table.index#product_accessories
+    colgroup
+      col style="width: 30%;"
+      col style="width: 70%;"
+    tbody
+      - @products.each do |product|
+        tr id=(spree_dom_id(product))
+          td
+            = link_to product.name, collection_product_url(product)
+            br
+            = link_to product_image_tag(product, :small), collection_product_url(product)
+            br
+            = link_to 'Add accessory', new_admin_celebrity_accessory_url(@celebrity, product_id: product.id), remote: true, class: 'icon-plus button'
+          td
+            - accessories = @celebrity.accessories.for_product(product)
+            - if accessories.blank?
+              .no-objects-found = t(:no_product_accessories) 
+            - else
+              table.index.sortable data-sortable-link=( update_positions_admin_celebrity_accessories_url(@celebrity, product_id: product.id))
+                colgroup
+                  col style="width: 10%;"
+                  col style="width: 70%;"
+                  col style="width: 20%;"
+                - accessories.each do |accessory|
+                  tr data-id="#{accessory.id}" id=( spree_dom_id accessory )
+                    td
+                      span.handle 
+                    td
+                      = link_to accessory.source, target: 'blank' do
+                        = image_tag(accessory.image.url(:thumbnail), title: accessory.title)
+                    td
+                      = link_to 'Edit', edit_admin_celebrity_accessory_url(@celebrity, accessory)
+                      br
+                      = link_to 'Delete', admin_celebrity_accessory_path(@celebrity, accessory), remote: true, method: 'delete'

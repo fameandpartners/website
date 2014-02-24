@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140224150729) do
+ActiveRecord::Schema.define(:version => 20140224210602) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -239,6 +239,23 @@ ActiveRecord::Schema.define(:version => 20140224150729) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
+
+  create_table "celebrity_product_accessories", :force => true do |t|
+    t.integer  "celebrity_id"
+    t.integer  "spree_product_id"
+    t.integer  "position"
+    t.boolean  "active",             :default => true
+    t.string   "title"
+    t.string   "source"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "celebrity_product_accessories", ["celebrity_id", "spree_product_id"], :name => "celebrity_product_accessories_main"
 
   create_table "celebrity_style_profiles", :force => true do |t|
     t.integer  "celebrity_id"

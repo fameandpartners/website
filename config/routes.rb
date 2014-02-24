@@ -306,6 +306,9 @@ FameAndPartners::Application.routes.draw do
           resources :moodboard_items do
             post :update_positions, as: :update_positions, on: :collection
           end
+          resources :accessories, controller: 'product_accessories' do
+            post :update_positions, on: :collection
+          end
           #resource :style_profile, only: [:edit, :update]
           resources :images, only: [:index, :new, :create, :edit, :update, :destroy] do
             collection do

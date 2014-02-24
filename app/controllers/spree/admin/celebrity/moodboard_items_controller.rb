@@ -47,16 +47,9 @@ class Spree::Admin::Celebrity::MoodboardItemsController < Spree::Admin::BaseCont
 
   private
 
-  def location_after_save
-    raise 'here'
-    #admin_celebrity_images_url(@celebrity)
-  end
-
   def load_data
     @celebrity = Celebrity.find(params[:celebrity_id])
   end
-
-  private
 
   def model_class
     Celebrity::MoodboardItem
