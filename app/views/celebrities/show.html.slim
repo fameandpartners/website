@@ -21,7 +21,7 @@
                 h4 = link_to product.name, collection_product_url(product)
                 .info = product_short_description(product)
               .grid-7
-                - @celebrity.accessories.for_product(product).each do |accessory|
+                - @celebrity.accessories.for_product(product).limit(4).each do |accessory|
                   .grid-6
                     = link_to accessory.source, target: 'blank' do
                       = image_tag(accessory.image.url(:product), title: accessory.title)
