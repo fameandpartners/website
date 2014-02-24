@@ -7,7 +7,8 @@ class Celebrity::Image < ActiveRecord::Base
                     styles: {
                       thumbnail: ['48x48#', :jpg],
                       medium: ['261x263#', :jpg],
-                      large: ['538x538#', :jpg]
+                      large: ['538x538#', :jpg],
+                      banner: ['1084x429#', :jpg]
                     }
 
   before_save :update_celebrity_primary_image

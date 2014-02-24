@@ -23,7 +23,7 @@ class Celebrity < ActiveRecord::Base
                   :product_ids,
                   :is_published
 
-  has_many :moodboard_items
+  has_many :moodboard_items, dependent: :destroy
 
   validates :first_name,
             presence: true

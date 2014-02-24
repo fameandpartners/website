@@ -10,4 +10,6 @@ class Celebrity::MoodboardItem < ActiveRecord::Base
 
   scope :right, where(side: 'right')
   scope :left, where('side != ?', 'right')
+
+  default_scope order('side ASC, position ASC')
 end

@@ -1,5 +1,8 @@
 .page-static.blogger-page
-  .blogger-header
+  - if @celebrity.primary_image && @celebrity.primary_image.file.exists?
+    .blogger-header style="background-image: url('#{ @celebrity.primary_image.file.url(:banner)})'"
+  - else
+    .blogger-header 
   .blogger-wrapper
     .blogger-content
       h1 = @celebrity.title || @celebrity.full_name
