@@ -515,7 +515,7 @@ module Products
 
       variants
 
-      product.variants.where('id NOT IN (?)', variants.map(&:id)).destroy_all
+      product.variants.where('id NOT IN (?)', variants.map(&:id)).update_all(deleted_at: Time.now)
     end
 
     def add_product_customizations(product, array_of_attributes)

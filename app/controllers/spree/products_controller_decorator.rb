@@ -5,6 +5,8 @@ Spree::ProductsController.class_eval do
 
   after_filter :log_product_viewed
 
+  # caches_action :index, layout: false, cache_path: proc{ |c| c.request.url + '/' + c.request.format.ref.to_s }
+
   def index
     @searcher = Products::ProductsFilter.new(params)
     @searcher.current_user = try_spree_current_user
@@ -28,7 +30,7 @@ Spree::ProductsController.class_eval do
         products_html = render_to_string(
           partial: 'spree/products/products',
           formats: [:html]
-        ) 
+        )
         render json: { products_html: products_html, page_info:  @page_info }
       end
     end 

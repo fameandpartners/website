@@ -1,4 +1,24 @@
-$(".spree_products.index").ready ->
+$('.spree_products.index').ready ->
+
+  processWishListLinks = () ->
+    $links = $('a.wish-list-link')
+
+    if _.isUndefined(window.current_user)
+      $links.data('action', 'auth-required')
+      $links.attr('href', '/login')
+    else
+      $links.data('action', 'add-to-wishlist')
+
+      unless _.isEmpty(window.current_user.wish_list)
+        $links.each (index, link) ->
+          $link = $(link)
+
+          wish = _.findWhere(window.current_user.wish_list, { variant_id: $link.data('id') })
+
+          unless _.isUndefined(wish)
+            $link.text('Remove from wishlist')
+            $link.addClass('active')
+
 
   addValue = (object, propertyName, elementSelector) ->
     propertyValue = productsFilter.$el.find(elementSelector).val()
@@ -21,9 +41,9 @@ $(".spree_products.index").ready ->
     updateContentHandlers: () ->
       # bind quick view
       #@$el.find(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
-
+      processWishListLinks()
       window.addSwitcherToAltImage() if window.addSwitcherToAltImage
-      productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
+      productWishlist.addWishlistButtonActions($('a.wish-list-link')) unless _.isUndefined(window.current_user)
       window.initHoverableProductImages()
 
       $('.selectbox').chosen()
@@ -74,8 +94,8 @@ $(".spree_products.index").ready ->
       result
   }
 
-  productsFilter.init($('#content'))
   window.helpers.quickViewer.init()
+  productsFilter.init($('#content'))
 
 # $('.filters-block .color').on('click', productsFilter.toggleColorClicked)
 

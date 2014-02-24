@@ -27,7 +27,7 @@ class Spree::Sale < ActiveRecord::Base
             }
 
   after_save do
-    ActiveSupport::Cache::RedisStore.new.delete_matched('*main_info')
+    ActiveSupport::Cache::RedisStore.new.clear
   end
 
   DISCOUNT_TYPES.each do |id, name|
