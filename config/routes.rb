@@ -303,7 +303,10 @@ FameAndPartners::Application.routes.draw do
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do
           resource :products, only: [:edit, :update]
-          resource :style_profile, only: [:edit, :update]
+          resources :moodboard_items do
+            post :update_positions, as: :update_positions, on: :collection
+          end
+          #resource :style_profile, only: [:edit, :update]
           resources :images, only: [:index, :new, :create, :edit, :update, :destroy] do
             collection do
               post :update_positions

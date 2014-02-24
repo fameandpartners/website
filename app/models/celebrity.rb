@@ -17,8 +17,13 @@ class Celebrity < ActiveRecord::Base
   attr_accessible :first_name,
                   :last_name,
                   :slug,
+                  :title,
+                  :quote,
+                  :body,
                   :product_ids,
                   :is_published
+
+  has_many :moodboard_items
 
   validates :first_name,
             presence: true

@@ -44,10 +44,35 @@
       </div>
       <div class="four columns">
         <%= f.field_container :primary, :class => ['checkbox'] do %>
-          <label>
+          <label for="celebrity_is_published">
             <%= f.check_box :is_published %>
             <%= t(:published) %>
           </label>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns">
+        <%= f.field_container :title do %>
+          <%= f.label :title, t(:title) %>
+          <%= f.text_field :title, :class => 'fullwidth' %>
+          <%= f.error_message_on :title %>
+        <% end %>
+      </div>
+      <div class="eight columns">
+        <%= f.field_container :quote do %>
+          <%= f.label :quote, t(:quote) %>
+          <%= f.text_field :quote, :class => 'fullwidth' %>
+          <%= f.error_message_on :quote %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+        <%= f.field_container :body do %>
+          <%= f.label :body, t(:body) %>
+          <%= f.cktext_area :body, :ckeditor => {:uiColor => "#5498da", :toolbar => "mini"} %>
+          <%= f.error_message_on :body %>
         <% end %>
       </div>
     </div>
@@ -56,4 +81,3 @@
     </div>
   </fieldset>
 <% end %>
-

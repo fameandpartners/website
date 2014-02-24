@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140216133229) do
+ActiveRecord::Schema.define(:version => 20140224150729) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -156,14 +156,12 @@ ActiveRecord::Schema.define(:version => 20140216133229) do
   add_index "blog_posts", ["user_id"], :name => "index_blog_posts_on_user_id"
 
   create_table "blog_preferences", :force => true do |t|
-    t.string   "key"
     t.text     "value"
+    t.string   "key"
     t.string   "value_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "blog_preferences", ["key"], :name => "index_blog_preferences_on_key"
 
   create_table "blog_promo_banners", :force => true do |t|
     t.string   "url"
@@ -187,9 +185,12 @@ ActiveRecord::Schema.define(:version => 20140216133229) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "slug"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.boolean  "is_published"
+    t.string   "title"
+    t.string   "quote",        :limit => 512
+    t.text     "body"
   end
 
   add_index "celebrities", ["slug"], :name => "index_celebrities_on_slug"
@@ -224,6 +225,19 @@ ActiveRecord::Schema.define(:version => 20140216133229) do
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.text     "celebrity_description"
+  end
+
+  create_table "celebrity_moodboard_items", :force => true do |t|
+    t.integer  "celebrity_id"
+    t.boolean  "active",             :default => true
+    t.string   "side"
+    t.integer  "position",           :default => 0
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "celebrity_style_profiles", :force => true do |t|
@@ -306,6 +320,17 @@ ActiveRecord::Schema.define(:version => 20140216133229) do
   end
 
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"

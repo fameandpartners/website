@@ -1,0 +1,17 @@
+- content_for :page_title do
+  = t(:listing_celebrity_moodboard_items)
+
+- content_for :page_actions do
+  ul.toolbar.inline-menu
+    li = button_link_to t(:back_to), admin_celebrity_moodboard_items_path(@celebrity), :icon => 'icon-arrow-left'
+
+= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Moodboard Items' }
+
+= render 'spree/shared/error_messages', target: @moodboard_item
+
+= form_for [:admin, @moodboard_item], url: admin_celebrity_moodboard_item_path(@celebrity, @moodboard_item), :method => :put, :html => { :multipart => true } do |f|
+  fieldset.no-border-top
+    legend align="center"
+      = t(:edit_celebrity_moodboard_item)
+    = render :partial => 'form', :locals => { :f => f }
+    = render :partial => 'spree/admin/shared/edit_resource_links'
