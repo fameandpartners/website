@@ -1437,22 +1437,22 @@
   .block {
     text-transform: uppercase;
     display: inline-block;
-    width: 200px;
+    width: 120px;
     border-left: 1px solid #ebebeb;
-    margin: 70px 0;
+    margin: 20px 0 60px;
     &.first, &:first-child {
       border-left: 0;
     }
     .name {
-      font-size: 22px;
+      font-family: $fontThree;
+      font-size: 16px;
       color: #333;
       font-weight: 100;
     }
     .percent {
       font-weight: 100;
-      font-size: 44px;
-      color: $pinkColor;
+      font-size: 32px;
+      color: #999;
     }
-    
   }
 }
