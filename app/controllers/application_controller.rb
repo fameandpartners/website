@@ -162,7 +162,21 @@ class ApplicationController < ActionController::Base
   helper_method :serialized_current_user, :serialize_user
 
   def serialize_user(user)
-    { fullname: user.fullname, email: user.email }
+    {
+      fullname: user.fullname,
+      email: user.email,
+      wish_list: serialize_wish_list(user)
+    }
+  end
+
+  def serialize_wish_list(user)
+    user.wishlist_items.map do |item|
+      if item.spree_variant_id.present?
+        { variant_id: item.spree_variant_id }
+      else
+        { product_id: item.spree_product_id }
+      end
+    end
   end
 
   def temporary_user_key

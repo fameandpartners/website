@@ -2,7 +2,9 @@
 .category-catalog.products
   .row
     - if @products.present?
-      = render(@products) 
+      - @products.each do |product|
+        - cache ['collection', 'product', product.id], :expires_in => configatron.cache.expire.normally do
+          = render 'spree/products/cached_product', product: product
     - else
       .not-found Sorry, no dresses match your criteria
 
@@ -11,5 +13,6 @@
       .page-title
         h1 View more dresses
         h2.border These dresses can also be made in #{ @searcher.selected_color_name }
-
-      = render(@similar_products)
+      - @similar_products.each do |product|
+        - cache ['collection', 'product', product.id], :expires_in => configatron.cache.expire.normally do
+          = render 'spree/products/cached_product', product: product
