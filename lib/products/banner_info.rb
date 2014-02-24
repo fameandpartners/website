@@ -14,7 +14,7 @@ module Products
       if Spree::Config[:default_seo_title].present? 
         Spree::Config[:default_seo_title]
       else
-        "Fame & Partners - Dream Formal Dresses"
+        "Prom Dresses"
       end
     end
 
@@ -22,7 +22,7 @@ module Products
       if Spree::Config[:default_meta_description].present?
         Spree::Config[:default_meta_description]
       else
-        "Fame & Partners is committed to bringing the world of celebrity fashion to you. We offer our customers the opportunity to create a look that they love, that is unique to them and will ensure they feel like a celebrity on their special night."
+        "The latest catwalk and red carpet trends... crafted just for you."
       end
     end
 
@@ -43,6 +43,7 @@ module Products
       info[:meta_description] = get_page_meta_description
       info[:banner_title] = get_banner_title(info[:banner_title])
       info[:banner_text] = get_banner_text(info[:banner_text])
+      info[:banner_image] = get_banner_image
 
       info
     end
@@ -99,7 +100,7 @@ module Products
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
         I18n.t(:title, scope: [:collection, :colors, @searcher.seo_colour.parameterize.underscore], default: "#{seo_colour} Dresses")
       elsif title.to_s.downcase == 'range'
-        'Our Collection'
+        'Prom Dresses'
       else
         title
       end
@@ -112,6 +113,22 @@ module Products
         text
       end
     end
+
+    def get_banner_image
+      if available_formal_dresses_colours.include?(@searcher.seo_colour)
+        return
+      elsif selected_edits_taxons.count == 1
+        taxon_image(selected_edits_taxons.first)
+      elsif selected_collection_taxons.count == 1
+        taxon_image(selected_collection_taxons.first)
+      elsif selected_edits_taxons.count == 0 and selected_collection_taxons.count == 0
+        taxon_image(root_range_taxon)
+      else
+        return
+      end
+    end
+
+    
 
     private
 
