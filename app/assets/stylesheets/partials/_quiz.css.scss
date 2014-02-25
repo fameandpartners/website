@@ -860,6 +860,201 @@
       font-size: 120px;
     }
   }
+  .invite-friends {
+    width: 670px;
+    height: 430px;
+    position: relative;
+    margin: 45px auto 0;
+    .choose-friends {
+      width: 338px;
+      height: 138px;
+      position: absolute;
+      left: 160px;
+      top: 130px;
+      border: solid 1px #d7d7d7;
+      text-align: center;
+      h3 {
+        margin: 25px 0;
+        font: 400 26px/1 $fontFive;
+      }
+    }
+    .facebook-popup {
+      width: 460px;
+      height: 270px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -135px 0 0 -230px;
+      border-radius: 6px;
+      background-color: #fff;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+      padding: 20px;
+      @include box-sizing(border-box);
+    }
+    .picture {
+      position: absolute;
+      img {
+        display: block;
+        width: 100%;
+      }
+      // size
+      &.size-1 {
+        width: 70px;
+        height: 70px;
+      }
+      &.size-2 {
+        width: 60px;
+        height: 60px;
+      }
+      &.size-3 {
+        width: 50px;
+        height: 50px;
+      }
+      &.size-4 {
+        width: 40px;
+        height: 40px;
+      }
+      &.size-5 {
+        width: 30px;
+        height: 30px;
+      }
+      &.size-6 {
+        width: 20px;
+        height: 20px;
+      }
+      &.size-7 {
+        width: 80px;
+        height: 80px;
+      }
+
+      // position
+      $top: 280px;
+      $left: 510px;
+      $right: 520px;
+      $bottom: 310px;
+      &.img-1 {
+        top: $top;
+        left: 250px;
+      }
+      &.img-2 {
+        top: 0;
+        left: 260px;
+      }
+      &.img-3 {
+        top: 170px;
+        right: $right;
+      }
+      &.img-4 {
+        top: 130px;
+        left: $left + 30px;
+      }
+      &.img-5 {
+        bottom: $bottom;
+        left: 340px;
+      }
+      &.img-6 {
+        top: $top;
+        left: 140px;
+      }
+      &.img-7 {
+        top: $top;
+        left: 140px;
+      }
+      &.img-8 {
+        top: $top;
+        left: 430px;
+      }
+      &.img-9 {
+        bottom: $bottom;
+        left: 490px;
+      }
+      &.img-10 {
+        top: 210px;
+        left: $left;
+      }
+      &.img-11 {
+        top: 310px;
+        left: 540px;
+      }
+      &.img-12 {
+        bottom: $bottom;
+        left: 200px;
+      }
+      &.img-13 {
+        top: 30px;
+        left: 90px;
+      }
+      &.img-14 {
+        top: 100px;
+        right: $right;
+      }
+      &.img-15 {
+        top: 170px;
+        left: 0;
+      }
+      &.img-16 {
+        top: 290px;
+        left: 90px;
+      }
+      &.img-17 {
+        top: $top + 10px;
+        left: 340px;
+      }
+      &.img-18 {
+        top: 340px;
+        left: 380px;
+      }
+      &.img-19 {
+        top: 340px;
+        left: 380px;
+      }
+      &.img-20 {
+        bottom: $bottom;
+        left: 410px;
+      }
+      &.img-21 {
+        top: 30px;
+        left: 440px;
+      }
+      &.img-22 {
+        top: 70px;
+        left: 600px;
+      }
+      &.img-23 {
+        bottom: $bottom;
+        left: 160px;
+      }
+      &.img-24 {
+        bottom: $bottom;
+        left: 300px;
+      }
+      &.img-25 {
+        top: 310px;
+        left: 210px;
+      }
+      &.img-26 {
+        top: 270px;
+        left: $left;
+      }
+      &.img-27 {
+        bottom: 0;
+        left: 310px;
+      }
+      &.img-28 {
+        bottom: 30px;
+        left: 60px;
+      }
+      &.img-29 {
+        top: 210px;
+        right: 20px;
+      }
+      &.img-30 {
+        top: 150px;
+        left: $left;
+      }
+    }
+  }
 }
 
 #content .style-report {
