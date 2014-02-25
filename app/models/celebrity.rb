@@ -17,8 +17,14 @@ class Celebrity < ActiveRecord::Base
   attr_accessible :first_name,
                   :last_name,
                   :slug,
+                  :title,
+                  :quote,
+                  :body,
                   :product_ids,
                   :is_published
+
+  has_many :moodboard_items, dependent: :destroy
+  has_many :accessories, class_name: 'ProductAccessory', foreign_key: :celebrity_id
 
   validates :first_name,
             presence: true

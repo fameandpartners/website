@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140216133229) do
+ActiveRecord::Schema.define(:version => 20140224210602) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -187,9 +187,12 @@ ActiveRecord::Schema.define(:version => 20140216133229) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "slug"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.boolean  "is_published"
+    t.string   "title"
+    t.string   "quote",        :limit => 512
+    t.text     "body"
   end
 
   add_index "celebrities", ["slug"], :name => "index_celebrities_on_slug"
@@ -225,6 +228,38 @@ ActiveRecord::Schema.define(:version => 20140216133229) do
     t.datetime "updated_at",            :null => false
     t.text     "celebrity_description"
   end
+
+  create_table "celebrity_moodboard_items", :force => true do |t|
+    t.integer  "celebrity_id"
+    t.boolean  "active",             :default => true
+    t.string   "side"
+    t.integer  "position",           :default => 0
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "celebrity_moodboard_items", ["side"], :name => "index_celebrity_moodboard_items_on_side"
+
+  create_table "celebrity_product_accessories", :force => true do |t|
+    t.integer  "celebrity_id"
+    t.integer  "spree_product_id"
+    t.integer  "position"
+    t.boolean  "active",             :default => true
+    t.string   "title"
+    t.string   "source"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "celebrity_product_accessories", ["celebrity_id", "spree_product_id"], :name => "celebrity_product_accessories_main"
 
   create_table "celebrity_style_profiles", :force => true do |t|
     t.integer  "celebrity_id"
@@ -300,12 +335,6 @@ ActiveRecord::Schema.define(:version => 20140216133229) do
     t.integer  "image_file_size"
     t.decimal  "price",                 :precision => 8, :scale => 2
   end
-
-  create_table "data_migrations", :id => false, :force => true do |t|
-    t.string "version", :null => false
-  end
-
-  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"

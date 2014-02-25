@@ -29,6 +29,14 @@ class LineItemPersonalization < ActiveRecord::Base
   before_validation :set_color_by_name
   before_save :recalculate_price
 
+  after_save do
+    line_item.order.clean_cache!
+  end
+
+  after_destroy do
+    line_item.order.clean_cache!
+  end
+
   validate do
     if product.present? && customization_value_ids.present?
       unless customization_value_ids.all?{ |id| product.product_customisation_values.map(&:customisation_value_id).include?(id.to_i) }

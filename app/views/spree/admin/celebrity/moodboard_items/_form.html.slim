@@ -1,0 +1,24 @@
+.new-product-step
+  .row
+    .four.columns
+    .four.columns
+      = f.field_container :side do
+        = f.label :side, t(:side)
+        br
+        = f.select :side, options_from_collection_for_select(%w{left right}, :to_s, :to_s, f.object.side)
+        = f.error_message_on :side
+
+    .four.columns
+      = f.field_container :position do
+        = f.label :position, t(:position)
+        = f.error_message_on :position
+        = f.text_field :position, class: 'short', size: 10
+
+  .row
+    .six.columns
+      = f.field_container :image do
+        = f.label :image, t(:image)
+        = f.error_message_on :image
+        = f.file_field :image
+        - if f.object.image?
+          = image_tag f.object.image.url(:product)

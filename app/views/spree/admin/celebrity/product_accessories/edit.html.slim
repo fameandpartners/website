@@ -1,0 +1,14 @@
+- content_for :page_actions do
+  ul.toolbar.inline-menu
+    li = button_link_to t(:back_to), admin_celebrity_accessories_path(@celebrity), :icon => 'icon-arrow-left'
+
+= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Accessories' }
+
+= render :partial => 'spree/shared/error_messages', :locals => { :target => @accessory }
+
+= form_for [:admin, @accessory], url: admin_celebrity_accessory_url(@celebrity, @accessory), :method => :put, :html => { :multipart => true } do |f|
+  fieldset.no-border-top
+    legend align="center"
+      = t(:edit_celebrity_product_accessory)
+    = render :partial => 'form', :locals => { :f => f }
+    = render :partial => 'spree/admin/shared/edit_resource_links'

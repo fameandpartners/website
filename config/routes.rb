@@ -116,7 +116,7 @@ FameAndPartners::Application.routes.draw do
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
-    get '/bloggers/racheletnicole' => 'statics#blogger'
+    get '/bloggers/racheletnicole' => 'statics#blogger', as: :featured_blogger
     
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
@@ -303,7 +303,13 @@ FameAndPartners::Application.routes.draw do
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do
           resource :products, only: [:edit, :update]
-          resource :style_profile, only: [:edit, :update]
+          resources :moodboard_items do
+            post :update_positions, as: :update_positions, on: :collection
+          end
+          resources :accessories, controller: 'product_accessories' do
+            post :update_positions, on: :collection
+          end
+          #resource :style_profile, only: [:edit, :update]
           resources :images, only: [:index, :new, :create, :edit, :update, :destroy] do
             collection do
               post :update_positions

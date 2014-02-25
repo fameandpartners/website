@@ -2,7 +2,7 @@
   .wrap
     .page-title
       h1 #{current_spree_user.first_name}'s Personalised Boutique
-      h2 Based on your Style Profile, here is a collection of dresses that our stylists have mached to you!
+      h2 Below is a collection of dresses that our stylists have mached to you!
 
     - if @style_profile.present?
       .style-report-block
@@ -11,6 +11,38 @@
             .name = style.first
             .percent #{style.last}%
 
+    .hide.about-boxes
+      .benefits
+        .row
+          .grid-3
+            .text
+              h3 DISCOVER
+              p Dive into your style profile and the dresses we suspect will suit you best.
+            span.numbers.icon-number-one
+            .arrows-line-horizontal
+          .grid-3
+            .text
+              h3
+                em EXPLORE
+              p Immerse yourself in our dresses; understand what inspired us to make them, what inspires us about wearing them and hopefully share some of your inspiration too.
+            span.numbers.icon-number-two
+            .arrows-line-horizontal
+          .grid-3
+            .text
+              h3 CREATE
+              p Make customisations that will ensure the dress is totally to you.
+            span.numbers.icon-number-three
+            .arrows-line-horizontal
+          .grid-3
+            .text
+              h3
+                em STYLE
+              p Workshop your total look with our in house stylists who are here to put the finishing touches on your look; we will actively source the coolest accessories to suit you.
+            span.numbers.icon-number-four    
+            .arrows-line-horizontal
+
+    .instructions
+      ' Select a dress below... Then if you want to make it your own click the Customize tab.
     .category-catalog.products
       .row
         = render(@recommended_dresses) || 'Sorry, no dresses match your criteria'

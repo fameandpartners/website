@@ -1,0 +1,13 @@
+= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Moodboard Items' }
+
+= render :partial => 'spree/shared/error_messages', :locals => { :target => @moodboard_item }
+
+= form_for [:admin, @moodboard_item], :html => { :multipart => true } do |f|
+  fieldset data-hook="new_product_accessory"
+    legend align="center" = t(:new_celebrity_moodboard_item)
+    = render :partial => 'form', :locals => { :f => f }
+
+    .form-buttons.filter-actions.actions data-hook="buttons"
+      = button t('actions.create'), 'icon-ok'
+      span.or = t(:or)
+      = link_to_with_icon 'icon-remove', t('actions.cancel'), admin_celebrity_moodboard_items_path(@celebrity), :class => 'button'

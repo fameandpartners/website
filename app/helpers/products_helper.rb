@@ -41,7 +41,8 @@ module ProductsHelper
 
   def product_short_description(product)
     description_text = product.property('short_description') || product.description
-    truncate(description_text, length: 80, separator: ' ')
+    escaped_text = ActionView::Base.full_sanitizer.sanitize(description_text)
+    truncate(escaped_text, length: 80, separator: ' ')
   rescue
     t('product_has_no_description')
   end
