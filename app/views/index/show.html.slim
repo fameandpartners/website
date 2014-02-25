@@ -69,7 +69,7 @@
     = link_to "#", class: 'show-style-quiz' do
       em.mark Get started now!
   .arrows-line-horizontal
-  .grid-container.hide
+  .grid-container
     .row
       .grid-4
         .frame
@@ -82,18 +82,17 @@
             .rss  
       .grid-4.face-holder
         .face
-          = image_tag '_front/face.jpg'
+          = image_tag 'homepage/new/blogger-portrait.jpg'
       .grid-4
-        .text
+        .text.blogger-name
           .title 
-            em SUSIE
-            br
-            ' BUBBLE
+            em Rachel
+            ' et Nicole
           p 
-            ' Lorem ipsum dolor sit amet, consectetu, Intege
+            ' Rachel and Nicole are sisters by blood and 
             br
-            ' vel felis sit amet massa conguet.  
-        = link_to 'VIEW MORE', '#', class: 'btn small'
+            ' on good days, by choice. 
+        = link_to 'VIEW MORE', featured_blogger_path, class: 'btn small'
 .pictures-gallery
   .section
     = image_tag '_sample/catalog-1.jpg'
