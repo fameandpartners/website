@@ -10,7 +10,7 @@
     - Blog::Preference.defaults.each do |key, default_value|
       tr
         td
-          = key
+          = key.to_s.humanize
         td
           = text_field_tag "config[#{key}]", @config.send(key), placeholder: default_value
   = submit_tag "Update"
