@@ -21,14 +21,10 @@ ruby:
       = render 'spree/products/breadcrumbs', product: @product, active: :style
       .style-it
         .heading
-          - if (notes = @product.property('designer_notes')).present?
+          - if (notes = @product.property('stylist_quote_short')).present?
             p = notes
 
-          /= link_to 'BOOK A FREE STYLING SESSION', '#', class: 'btn empty border'
-          /- if personalised_store_available?
-            = link_to 'BOOK A FREE STYLING SESSION', my_boutique_path, class: 'btn empty border'
-          /- else
-            = link_to 'BOOK A FREE STYLING SESSION', '#', :class => 'btn empty border show-style-quiz'
+          = mail_to 'team@fameandpartners.com', "Book a free styling session", subject: "Free Styling Session for #{@product.name} | #{@product.sku}", class: 'btn empty border'
           h4 
             ' WANT US TO SOURCE THIS COMPLETE LOOK? 
             br
@@ -61,7 +57,7 @@ ruby:
                   - accessories.each_with_index do |item, index|
                     li
                       .number = "#{index.next}."
-                      p = link_to item.name, item.source
+                      p = link_to item.name, item.source, target: '_blank'
                       p = item.display_price
                 .arrows-line-horizontal
     .grid-4
