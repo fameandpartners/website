@@ -8,8 +8,8 @@ class Celebrity::MoodboardItem < ActiveRecord::Base
     styles: { product: "160", thumbnail: '80'},
     default_style: :product
 
+  scope :left, where(side: 'left')
   scope :right, where(side: 'right')
-  scope :left, where('side != ?', 'right')
 
   default_scope order('side ASC, position ASC')
 end
