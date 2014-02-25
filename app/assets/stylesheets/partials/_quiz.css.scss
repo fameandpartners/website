@@ -60,6 +60,12 @@
     background-size: cover;
     margin: -42px -20px -130px;
     position: relative;
+    .facebook-button {
+      display: block;
+      text-align: center;
+      font-size: 15px;
+      .icon { font-size: 21px;}
+    }
     .text1 {
       color: #fff;
       font-size: 47px;
