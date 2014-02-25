@@ -28,7 +28,7 @@ Spree::ProductsController.class_eval do
         products_html = render_to_string(
           partial: 'spree/products/products',
           formats: [:html]
-        ) 
+        )
         render json: { products_html: products_html, page_info:  @page_info }
       end
     end 

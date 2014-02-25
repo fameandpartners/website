@@ -39,6 +39,7 @@
 
     buildSuccessCallback: (options) ->
       callback = (data) ->
+        window.current_user.wish_list.push({ variant_id: data.item.wishlist_item.spree_variant_id })
         options.success.apply(window, arguments) if options.success
         track.addedToWishlist(data.analytics_label) if data.analytics_label?
       return callback

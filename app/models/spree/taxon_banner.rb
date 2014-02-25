@@ -5,5 +5,5 @@ class Spree::TaxonBanner < ActiveRecord::Base
 
   attr_accessible :title, :image, :description, :footer_text, :seo_description
 
-  has_attached_file :image, styles: { banner: "746x180#" }
+  has_attached_file :image, styles: { banner: "1140x" }
 end

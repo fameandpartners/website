@@ -11,6 +11,29 @@ namespace :colors do
     end
   end
 
+  task :export_to_file => :environment do
+    option_type = Spree::OptionType.where(name: 'dress-color').first
+    stored_values = YAML.load(File.open(File.join(Rails.root, 'lib', 'color', 'map.yml'))) rescue []
+    if stored_values.present?
+      new_values = stored_values
+      option_type.option_values.each do |color|
+        color_definition = { name: color.name, presentation: color.presentation, value: color.value }
+        index = new_values.index {|object| object[:name] == color.name }
+        if index.present?
+          new_values[index] = color_definition
+        else
+          new_values.push(color_definition)
+        end
+      end
+    else
+      new_values = option_type.option_values.map do |color|
+        { name: color.name, presentation: color.presentation, value: color.value }
+      end
+    end
+    File.open(File.join(Rails.root, 'lib', 'color', 'map.yml'), 'w+'){|f| f.puts new_values.to_yaml}
+  end
+
+
   task :import => :environment do
     option_type = Spree::OptionType.where(name: 'dress-color').first
     option_values = [

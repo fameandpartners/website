@@ -14,7 +14,7 @@
   top: 50%;
   left: 50%;
   width: 1100px;
-  height: 720px;
+  height: 680px;
   z-index: 2000;
   margin: -360px 0 0 -550px;
   background: #fff;
@@ -47,14 +47,14 @@
     filter: alpha(opacity=0);
   }
   .quiz-box-inner {
-    height: 720px;
-    padding: 42px 20px 130px;
+    height: 680px;
+    padding: 22px 20px 130px;
     position: relative;
     @include box-sizing(border-box);
   }
   .signup-box-wrapper {
     width: 1100px;
-    height: 720px;
+    height: 700px;
     overflow: hidden;
     background: image-url('_quiz/signin-bg.png') center center no-repeat;
     background-size: cover;
@@ -320,6 +320,11 @@
         bottom: 12px;
         background-color: rgba(255, 255, 255, 0.75);
         box-shadow: 0 2px 2px #000, 0 12px 0 #fff;
+        .instructions{
+          text-align: center;
+          padding-top: 15px;
+          font: 100 italic 14px/1 $fontThree; 
+        }
         &:before, &:after {
           content: '';
           display: block;
@@ -698,7 +703,7 @@
     .progress-next {
       position: absolute;
       margin: 0 84px;
-      bottom: 40px;
+      bottom: 25px;
       left: 20px;
       right: 20px;
       .progress-bar {
@@ -1438,22 +1443,22 @@
   .block {
     text-transform: uppercase;
     display: inline-block;
-    width: 200px;
+    width: 120px;
     border-left: 1px solid #ebebeb;
-    margin: 70px 0;
+    margin: 20px 0 60px;
     &.first, &:first-child {
       border-left: 0;
     }
     .name {
-      font-size: 22px;
+      font-family: $fontThree;
+      font-size: 16px;
       color: #333;
       font-weight: 100;
     }
     .percent {
       font-weight: 100;
-      font-size: 44px;
-      color: $pinkColor;
+      font-size: 32px;
+      color: #999;
     }
-    
   }
 }

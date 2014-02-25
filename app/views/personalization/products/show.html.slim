@@ -2,7 +2,7 @@ ruby:
   sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
   colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
   images  = @product.images_json
-  if @product.property('color_customization').present? && @product.property('color_customization') == "yes"
+  if @product.property('color_customization').present? && @product.property('color_customization').downcase == "yes"
     show_custom_colors = true
   end
 
@@ -33,7 +33,7 @@ javascript:
                 br 
                 span.pink BY CUSTOMISING
               p 
-                em Delivery time is only 14-21 days
+                em Delivery time is only 10-14 days
               .arrows-line-horizontal
             #personalization
               .instructions

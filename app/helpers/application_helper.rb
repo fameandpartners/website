@@ -282,8 +282,12 @@ module ApplicationHelper
   end
 
   def cache(name = {}, options = nil, &block)
-    name.push(current_site_version.code) if name.is_a?(Array)
-    name[:site_version] = current_site_version.code if name.is_a?(Hash)
+    if name.is_a?(Array)
+      name.push(current_site_version.code)
+      name.compact!
+    elsif name.is_a?(Hash)
+      name[:site_version] = current_site_version.code
+    end
 
     super(name, options, &block)
   end

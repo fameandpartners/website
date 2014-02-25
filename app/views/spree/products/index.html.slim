@@ -1,31 +1,20 @@
-.content-offer
-  .title
-    ' GET YOUR 
-    em UNIQUE 
-    ' STYLE.
-  .fright
-    .text-with-arrow 
-      ' Lorem ipsum dolor sit amet, consectetu,
-      br
-      ' Integer vel felis sit amet massa conguet.
-      .arrow
-    = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn'
-
 .category-header
-  h1
-    em = @page_info[:banner_title]
-    /span = @page_info[:banner_title]
-  p 
-    = @page_info[:banner_text]
-  .arrows-line-horizontal
+  - if @page_info[:banner_image].blank?
+    h1 = @page_info[:banner_title]
+    h2 = @page_info[:banner_text]
+    .arrows-line-horizontal
+  - else
+    .category-banner
+      = image_tag(@page_info[:banner_image], :title => @page_info[:banner_title]+" "+@page_info[:banner_text] )
+    
 
 .category-filter
   .fleft 
     .filter-section
       - options = options_from_collection_for_select(available_product_ranges, :base_permalink, :name, params[:collection])
-      = select_tag :collection, options, class: 'selectbox', prompt: 'Collection'
+      = select_tag :collection, options, class: 'selectbox', prompt: 'Styles'
 
-    .filter-section
+    /.filter-section
       - options = options_from_collection_for_select(available_product_styles, :base_permalink, :name, params[:style])
       = select_tag :style, options, class: 'selectbox', prompt: 'Styles'
 
@@ -43,63 +32,11 @@
       = select_tag 'product_order', options, class: 'selectbox', prompt: 'Sort By'
 
 = render 'products'
+.m-pixel
+  = raw @marketing_pixels
 
 // OLD HTML ---->
 / .m-pixel
   img src="http://tags.rtbidder.net/track?sid=525645e58bc06f1060d9eb38" width="0" height="0" border="0" alt=""
-
-/ .wrap
-  .browse-page.grid-container
-    .grid-25.filters
-      .main-title Refine by
-      .filters-block
-        .title Collection
-        ul.filters-boxes.collection
-          - selected_items = @searcher.collection || []
-          li class=(selected_items.blank? ? 'active' : '')
-            label Full Range
-            = check_box_tag 'collection', 'all', selected_items.blank?
-          - available_product_ranges.each do |taxon|
-            - enabled = selected_items.include?(taxon.id)
-            li class=(enabled ? 'active' : '')
-              label = taxon.name
-              = check_box_tag 'collection', taxon.permalink.split('/').last, enabled
-      .filters-block
-        .title Style
-        ul.filters-boxes.style
-          - selected_items = @searcher.style || []
-          li class=(selected_items.blank? ? 'active' : '')
-            label All
-            = check_box_tag 'style', 'all', selected_items.blank?
-          - available_product_styles.each do |taxon|
-            - enabled = selected_items.include?(taxon.id)
-            li class=(enabled ? 'active' : '')
-              label = taxon.name
-              = check_box_tag 'style', taxon.permalink.split('/').last, enabled
-      .filters-block
-        .title Body shape
-        ul.filters-boxes.squares.body_shapes
-          - selected_items = @searcher.bodyshape || []
-          li class=(selected_items.blank? ? 'active' : '')
-            label All
-            = check_box_tag 'bodyshape', 'all', selected_items.blank?
-          - ProductStyleProfile::BODY_SHAPES.each do |body_shape|
-            - enabled = selected_items.include?(body_shape.to_s) 
-            li class="#{body_shape} #{enabled ? 'active' : ''}"
-              label = body_shape.humanize
-              = check_box_tag 'bodyshape', body_shape, enabled
-      .hide.filters-block
-        .title Color
-        .colors
-          - selected_colors = (@searcher.colour || []).map(&:id)
-          .color.white.all class="#{ selected_colors.blank? ? 'active' : '' }" data-color='all' All
-          - available_product_colors.each do |color|
-            - if selected_colors.include?(color.id)
-              .color.active class='#{color.name}' data-color='#{color.name}' title='#{color.display} dresses'
-            - else
-              .color class='#{color.name}' data-color='#{color.name}' title='#{color.name} dresses'
-          
-    .grid-75.fright.content-margin
-      = render 'products', products: @products
 
 = thanks_popup_for_new_competition_entrant

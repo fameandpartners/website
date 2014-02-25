@@ -1,0 +1,46 @@
+css:
+  table#moodboard_items td img.moodboard-pic {
+    image-orientation: 270deg;
+  }
+
+- content_for :page_title do
+  = t(:listing_celebrity_moodboard_items)
+
+- content_for :page_actions do
+  ul.toolbar.inline-menu
+    li
+      span#new_ptype_link
+        = link_to 'Add Item', new_admin_celebrity_moodboard_item_path(@celebrity), remote: true, class: 'icon-plus button', id: 'new_admin_celebrity_moodboard_item_link'
+
+= render :partial => 'spree/admin/shared/celebrities_tabs', :locals => { :current => 'Moodboard Items' }
+
+#new_celebrity_moodboard_item data-hook="new-celebrity-moodboard-item"
+
+- if @moodboard_items.blank?
+  .no-objects-found = t(:no_results) 
+- else
+  table.index.sortable#moodboard_items data-sortable-link=(update_positions_admin_celebrity_moodboard_items_path(@celebrity))
+    colgroup
+      col style="width: 10%;"
+      col style="width: 10%;"
+      col style="width: 60%;"
+      col style="width: 20%;"
+    thead
+      tr
+        th
+        th Side
+        th Image
+        th Tools
+    tbody
+      - @moodboard_items.each do |moodboard_item|
+        tr data-id="#{moodboard_item.id}" id=( spree_dom_id moodboard_item )
+          td
+            span.handle 
+          td = moodboard_item.side
+          td 
+            - if moodboard_item.image.present?
+              = image_tag moodboard_item.image.url(:product), class: 'moodboard-pic'
+          td
+            = link_to 'Edit', edit_admin_celebrity_moodboard_item_url(@celebrity, moodboard_item)
+            br
+            = link_to 'Delete', admin_celebrity_moodboard_item_url(@celebrity, moodboard_item), remote: true, method: 'delete'

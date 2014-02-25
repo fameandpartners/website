@@ -162,6 +162,12 @@
 			}
 		}
 	}
+	.it{
+		font-family: $fontFour;
+		font-style: italic;
+		font-size: 48px;
+		text-transform: lowercase;
+	}
 	.grid-container {
 		margin-top: 25px;
 		text-align: center;
@@ -182,6 +188,7 @@
 			font-family: $fontThree;
 			em { font-family: $fontTwo;}
 		}
+		
 	}
 	.frame {
 		.text { 

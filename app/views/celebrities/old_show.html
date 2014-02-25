@@ -1,0 +1,63 @@
+.celebrity-page
+  h1 Celebrity Style Profile
+  .subtitle
+    ' Get
+    = @celebrity.first_name + "'s "
+    ' look today!
+  .wrap
+    .image-blocks.clearfix
+      .thin style="width: 273px;"
+        - unless @left_column[0..1].any?
+          | &nbsp;
+        - if image = @left_column[0]
+          = image_tag image.file.url(:medium), width: 261, height: 263, alt: @celebrity.full_name
+        - if image = @left_column[1]
+          = image_tag image.file.url(:medium), width: 261, height: 263, alt: @celebrity.full_name
+      .wide
+        - if @primary_image.present?
+          = image_tag @primary_image.file.url(:large), width: 538, height: 538, alt: @celebrity.full_name
+      .thin
+        - if image = @right_column[0]
+          = image_tag image.file.url(:medium), width: 261, height: 263, alt: @celebrity.full_name
+        - if image = @right_column[1]
+          = image_tag image.file.url(:medium), width: 261, height: 263, alt: @celebrity.full_name
+      .thin style="width: 273px; clear: both;"
+        - if image = @left_column[2]
+          = image_tag image.file.url(:medium), width: 261, height: 263, alt: @celebrity.full_name
+        - else
+          | &nbsp;
+      .wide
+        .celebrity-name = @celebrity.full_name
+        - if @style_profile.present?
+          .style-report-block
+            - @style_profile.sorted.each_with_index do |array, index|
+              .block class="#{ 'first' if index.eql?(0) }"
+                .name = array.first.titleize
+                .percent #{array.second}%
+          .desc
+            = simple_format(@style_profile.description)
+      .thin
+        - if image = @right_column[2]
+          = image_tag image.file.url(:medium), width: 261, height: 263, alt: @celebrity.full_name
+
+    - if @products.present?
+      h2
+        ' Try these dresses that
+        span = @celebrity.full_name
+        '  would wear
+      .subtitle Select a dress & make it your own
+      ul.products-list.grid-container
+        - @products.each do |product|
+          li.product-item.grid-25
+            .thumbnail
+              .like = add_to_wishlist_link(product)
+              - cache ['celebrity', 'product', product.id, 'thumbnail_and_quick_view'], :expires_in => configatron.cache.expire.normally do
+                = link_to collection_product_path(product) do
+                  = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
+            - cache ['celebrity', 'product', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
+              .name = link_to product.name, collection_product_path(product)
+              .price = price_for_product(product)
+              .colors
+                - colors[product.id].map(&:name).sort.each do |color|
+                  .color{class=color}
+

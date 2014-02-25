@@ -1,0 +1,11 @@
+div class=(element_class ||= 'grid-4')
+  .picture
+    = link_to collection_product_path(product) do
+      = hoverable_product_image_tag(product, colors: @current_colors, itemprop: 'image', alt: product.name)
+    .popup.striped
+      .fleft.quick-view
+        = quick_view_link(product)
+      .fright.like
+        = link_to 'Wish list', '#', class: 'wish-list-link add-wishlist', data: { id: product.master.id }
+  h6 = product.name
+  .price = price_for_product(product)

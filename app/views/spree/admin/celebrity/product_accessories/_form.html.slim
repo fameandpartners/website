@@ -1,0 +1,37 @@
+.row
+  .ten.columns
+    = f.field_container :title do
+      = f.label :title, t(:title)
+      br
+      = f.error_message_on :title
+      = f.text_field :title, class: 'fullwidth'
+.row
+  .ten.columns
+    = f.field_container :source do
+      = f.label :source, t(:source)
+      br
+      = f.error_message_on :source
+      = f.text_field :source, class: 'fullwidth'
+.row
+  .four.columns
+    = f.field_container :spree_product_id do
+      = f.label :spree_product_id, t(:product)
+      = f.select :spree_product_id, options_from_collection_for_select(@celebrity.products, :id, :name, f.object.spree_product_id)
+      = f.error_message_on :spree_product_id
+  .four.columns
+    = f.field_container :position do
+      = f.label :position, t(:position)
+      br
+      = f.error_message_on :position
+      = f.text_field :position, class: 'short', size: 40
+
+
+.row
+  .six.columns
+    = f.field_container :image do
+      = f.label :image, t(:image)
+      = f.file_field :image
+      = f.error_message_on :image
+  .six.columns
+    - if f.object.image?
+      = image_tag f.object.image.url(:product)
