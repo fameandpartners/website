@@ -17,20 +17,6 @@
       track.conversion('sign_up')
     })
 
-- unless try_spree_current_user.try(:style_profile).try(:active?)
-  .content-offer
-    .title
-      ' GET YOUR
-      em UNIQUE
-      ' STYLE.
-    .fright
-      .text-with-arrow
-        ' Create your perfect look,
-        br
-        ' start by taking our style quiz!
-        .arrow
-      = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
-
 .landing-promo
   .grid-container
     .row
@@ -40,11 +26,11 @@
             = image_tag 'homepage/new/hero.jpg'
       .grid-4
         .picture-small 
-          = link_to collection_path(:edits => "pastels") do
-            = image_tag 'homepage/new/small-pastels.jpg'
+          = link_to collection_path(cf: 'banner_customize'), title: 'Free Customization for our launch' do
+            = image_tag 'homepage/new/customize.jpg', alt: 'Free Customization for our launch'
         .picture-small 
           = link_to collection_path(:edits => "monochrome") do
-            = image_tag 'homepage/new/small-monochrome.gif'    
+            = image_tag 'homepage/new/small-monochrome.gif', alt: 'Monochrome style prom dresses'    
 
 .how-it-works
   .arrows-line-horizontal
