@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe CelebrityMoodboardItem do
+describe Celebrity::ProductAccessory do
   pending "add some examples to (or delete) #{__FILE__}"
 end
