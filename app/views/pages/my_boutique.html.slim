@@ -54,9 +54,10 @@
       h2.border Nothing you love above? Check out more of our range below
       ul.filters
         li.active = link_to 'View all of our dresses.', collection_path
-    ul.products-list.grid-container
-      - @dresses.each do |product|
-        = render 'shared/product', product: product
+    .category-catalog
+      .row
+        - @dresses.each do |product|
+          = render 'shared/product', product: product
 
     .view-more-separate
 = thanks_popup_for_new_competition_entrant
