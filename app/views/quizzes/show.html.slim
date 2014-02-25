@@ -19,7 +19,11 @@
       span.btn TO DETERMINE YOUR STYLING NEEDS,
       span.btn AND GET ACCESS TO YOUR
       span.btn PERSONALISED SHOPPING BOUTIQUE.
-    = link_to 'SIGN UP WITH FACEBOOK', fb_auth_path(quiz: 'true'), class: 'btn empty border'
+    / = link_to 'SIGN UP WITH FACEBOOK', fb_auth_path(quiz: 'true'), class: 'btn empty border'
+    = link_to fb_auth_path(quiz: 'true'), class: 'facebook-button' do
+      span.icon
+        span.icon-facebook2
+      span Sign up with facebook
     .or OR
     = link_to 'SIGN UP USING YOUR EMAIL ADDRESS', spree.signup_path(quiz: 'true', cl: 'stylequiz'), class: 'btn empty border'
 

@@ -9,7 +9,8 @@ $(".spree_products.show").ready ->
   page.enableWhatSizeIam($('.toggle-sizes'))
   page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
   page.enableAccordeonBars($('ul.slider > li:not(.recommended)'))
-  page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
+  processWishListLinks()
+  page.enableWishlistLinks($('a.wish-list-link')) unless _.isUndefined(window.current_user)
 
   # header - nav partial
   page.enableSendToFriendButton($('a.send-to-friend'))
