@@ -6,18 +6,8 @@
         br
         ' Browse for formal dresses now.
       p
-        = link_to "Our Dress Collection", collection_path, class: 'btn mid empty border'
+        = link_to 'Our Dress Collection', collection_path, class: 'btn mid empty border'
   - else
-    /#shopping-arrow-up.arrow-up
-    /ul#shopping-bag-popup.items-carousel
-      = render partial: "shared/line_item", collection: current_order.line_items, as: :line_item
-    /#shopping-arrow-down.arrow-down
-    /.totals
-      .label.fleft Total
-      .value.fright
-        = current_order.currency
-        span = current_order.display_total
-    
     .shopping-list
       = render partial: 'shared/line_item', collection: current_order.line_items, as: :line_item, locals: { show_customizations: true }
       .buttons
@@ -29,78 +19,3 @@
           = form_for current_order, url:  spree.cart_path do |form|
             = form.submit 'Buy now', name: :checkout, class: 'buy-now btn mid fright'
         .ask-parents = link_to 'Invite someone to pay', '#', class: 'btn mid empty border ask-parent-to-pay-button'
-
-/.shopping-bag-popup style="display:none;"
-  .shopping-list
-    .item
-      .picture
-        = image_tag '_sample/category-grey-1.jpg'
-      .info
-        h6 Draped Twist
-        .price $249
-        .description
-          table
-            tr
-              td Color:
-              td 
-                .color style="background: #ed0234"
-            tr
-              td Size
-              td 8  
-            tr
-              td Quantity:
-              td 1  
-            tr
-              td Estimated Delivery:
-              td 7-10 days
-       
-      = link_to '#', class: 'delete' do
-        span.icon-close
-    .item
-      .picture
-        = image_tag '_sample/category-grey-2.jpg'
-      .info
-        h6 Draped Twist
-        .price $249
-        .description
-          table
-            tr
-              td Color:
-              td 
-                .color style="background: #ed0234"
-            tr
-              td Size
-              td 8  
-            tr
-              td Quantity:
-              td 1  
-            tr
-              td Estimated Delivery:
-              td 7-10 days
-       
-      = link_to '#', class: 'delete' do
-        span.icon-close
-    .item
-      .picture
-        = image_tag '_sample/category-grey-3.jpg'
-      .info
-        h6 Draped Twist
-        .price $249
-        .description
-          table
-            tr
-              td Color:
-              td 
-                .color style="background: #ed0234"
-            tr
-              td Size
-              td 8  
-            tr
-              td Quantity:
-              td 1  
-            tr
-              td Estimated Delivery:
-              td 7-10 days
-       
-      = link_to '#', class: 'delete' do
-        span.icon-close    
