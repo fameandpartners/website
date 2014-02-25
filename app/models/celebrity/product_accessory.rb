@@ -1,6 +1,6 @@
 class Celebrity::ProductAccessory < ActiveRecord::Base
   attr_accessible :celebrity_id, :spree_product_id
-  attr_accessible :title, :name, :source, :position, :image
+  attr_accessible :title, :source, :position, :image
 
   belongs_to :celebrity
   belongs_to :product, class_name: 'Spree::Product', foreign_key: :spree_product_id
