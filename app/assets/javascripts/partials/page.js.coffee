@@ -83,3 +83,22 @@ window.page = {
       form.init(window.product_variants, window.product_master_variant)
       form
 }
+
+window.processWishListLinks = () ->
+  $links = $('a.wish-list-link')
+
+  if _.isUndefined(window.current_user)
+    $links.data('action', 'auth-required')
+    $links.attr('href', '/login')
+  else
+    $links.data('action', 'add-to-wishlist')
+
+    unless _.isEmpty(window.current_user.wish_list)
+      $links.each (index, link) ->
+        $link = $(link)
+
+        wish = _.findWhere(window.current_user.wish_list, { variant_id: $link.data('id') })
+
+        unless _.isUndefined(wish)
+          $link.text('Remove from wishlist')
+          $link.addClass('active')
