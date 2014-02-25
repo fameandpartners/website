@@ -13,6 +13,7 @@ class Celebrity::ProductAccessory < ActiveRecord::Base
   scope :active, where(active: true)
   scope :for_product, lambda {|product| where(spree_product_id: product.id) }
   scope :for_product_id, lambda {|product_id| where(spree_product_id: product_id) }
+  default_scope 'position asc'
 
   def default_image_for_accessory
     '/assets/_sample/category-grey-2.jpg'
