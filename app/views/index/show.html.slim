@@ -17,20 +17,6 @@
       track.conversion('sign_up')
     })
 
-- unless try_spree_current_user.try(:style_profile).try(:active?)
-  .content-offer
-    .title
-      ' GET YOUR
-      em UNIQUE
-      ' STYLE.
-    .fright
-      .text-with-arrow
-        ' Create your perfect look,
-        br
-        ' start by taking our style quiz!
-        .arrow
-      = link_to 'CREATE YOUR LOOK NOW!', '#', class: 'btn show-style-quiz'
-
 .landing-promo
   .grid-container
     .row
@@ -40,11 +26,11 @@
             = image_tag 'homepage/new/hero.jpg'
       .grid-4
         .picture-small 
-          = link_to collection_path(:edits => "pastels") do
-            = image_tag 'homepage/new/small-pastels.jpg'
+          = link_to collection_path(cf: 'banner_customize'), title: 'Free Customization for our launch' do
+            = image_tag 'homepage/new/customize.jpg', alt: 'Free Customization for our launch'
         .picture-small 
           = link_to collection_path(:edits => "monochrome") do
-            = image_tag 'homepage/new/small-monochrome.gif'    
+            = image_tag 'homepage/new/small-monochrome.gif', alt: 'Monochrome style prom dresses'    
 
 .how-it-works
   .arrows-line-horizontal
@@ -83,7 +69,7 @@
     = link_to "#", class: 'show-style-quiz' do
       em.mark Get started now!
   .arrows-line-horizontal
-  .grid-container.hide
+  .grid-container
     .row
       .grid-4
         .frame
@@ -96,18 +82,17 @@
             .rss  
       .grid-4.face-holder
         .face
-          = image_tag '_front/face.jpg'
+          = image_tag 'homepage/new/blogger-portrait.jpg'
       .grid-4
-        .text
+        .text.blogger-name
           .title 
-            em SUSIE
-            br
-            ' BUBBLE
+            em Rachel
+            ' et Nicole
           p 
-            ' Lorem ipsum dolor sit amet, consectetu, Intege
+            ' Rachel and Nicole are sisters by blood and 
             br
-            ' vel felis sit amet massa conguet.  
-        = link_to 'VIEW MORE', '#', class: 'btn small'
+            ' on good days, by choice. 
+        = link_to 'VIEW MORE', featured_blogger_path, class: 'btn small'
 .pictures-gallery
   .section
     = image_tag '_sample/catalog-1.jpg'
@@ -120,71 +105,3 @@
   .section
     = link_to 'http://www.facebook.com/fameandpartners', target: '_blank' do
       = image_tag '_sample/catalog-4.jpg'
-
-
-/ .promo
-  .wrap
-    #main-promo.promo-image
-      ul.slides
-        li
-          = link_to collection_path(cf: 'homefeature') do
-            = image_tag 'homepage/Colour.jpg', width: 1078, height: 532, alt: 'Get your colour on'
-        li
-          = link_to collection_path(edits: 'sequins', cf: 'homefeature') do
-            = image_tag 'homepage/Disco.jpg', width: 1078, height: 532, alt: 'Sequined Disco Dresses - Fame & Partners Formal Dresses'
-        li
-          = link_to '#', class: 'show-style-quiz' do
-            = image_tag 'homepage/style-quiz.jpg', width: 1078, height: 532, alt: ''
-      .pagination
-        a.selected href="#" 1
-        a href="#" 2
-        a href="#" 3
-    
-
-/ .home-images
-  .wrap
-    = link_to collection_path(edits: 'neon'), class: 'image' do
-      = image_tag 'homepage/neon1.jpg'
-    = link_to collection_path(edits: 'neon'), class: 'image rotate-1' do
-      = image_tag 'homepage/neon2.jpg'
-    = link_to collection_path(edits: 'neon'), class: 'image rotate-2' do
-      = image_tag 'homepage/neon3.jpg'
-    = link_to '#', class: 'show-style-quiz image large' do
-      = image_tag 'homepage/right.jpg'
-
-/ .blog-posts-preview
-  .wrap.no-overflow
-    .blog-post
-      .label Blog
-      = link_to blog_post_by_category_path(category_slug: 'trends', post_slug: 'latest-celebrity-red-carpet-hair-trends'), class: 'image-preview', target: '_blank' do
-        = image_tag 'homepage/hair.jpg'
-    .blog-post.rotate-1
-      .label Blog
-      = link_to blog_post_by_category_path(category_slug: 'trends', post_slug: 'the-american-music-awards-2013'), class: 'image-preview', target: '_blank' do
-        = image_tag 'homepage/amma2013.jpg'
-    .blog-post.rotate-2
-      = link_to personalization_path(cf: 'homefeature'), title: "Customised Dresses - Create your perfect dress", class: 'image-preview' do
-        = image_tag 'homepage/customdresses.jpg'
-
-/ - if featured_products.length > 0
-  .featured-dresses
-    .wrap.no-overflow
-      .page-name
-        .inner
-          h1.title.aligncenter
-            em featured
-            span Dresses
-
-      #product-items-prev
-      ul#product-items.products-list.grid-container.featured style="height: 458px;"
-        - featured_products.each do |product|
-          li.product-item.grid-25
-            .thumbnail
-              .like = add_to_wishlist_link(product)
-              - cache ['home_page', 'featured_dresses', product.id, 'thumbnail_and_quick_view'], :expires_in => configatron.cache.expire.normally do
-                = link_to product_image(product, itemprop: "image", width: 243, height: 352, alt: product.name), collection_product_path(product)
-            - cache ['home_page', 'featured_dresses', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
-              .name = link_to product.name, collection_product_path(product)
-              .price
-                = price_for_product(product)
-      #product-items-next

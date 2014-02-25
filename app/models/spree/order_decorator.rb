@@ -3,6 +3,8 @@ Spree::Order.class_eval do
 
   attr_accessor :zone_id
 
+  after_save :clean_cache!
+
   checkout_flow do
     go_to_state :address
     go_to_state :payment, :if => lambda { |order|
@@ -15,6 +17,14 @@ Spree::Order.class_eval do
     }
     go_to_state :confirm, :if => lambda { |order| order.confirmation_required? }
     go_to_state :complete, :if => lambda { |order| (order.payment_required? && order.has_unprocessed_payments?) || !order.payment_required? }
+  end
+
+  def cache_key
+    "orders/#{id}-#{updated_at.to_s(:number)}"
+  end
+
+  def clean_cache!
+    ActiveSupport::Cache::RedisStore.new.delete_matched("*#{cache_key}*")
   end
 
   def sale_shipping_method

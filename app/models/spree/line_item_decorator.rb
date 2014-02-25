@@ -2,6 +2,14 @@ Spree::LineItem.class_eval do
   has_one :personalization,
           class_name: 'LineItemPersonalization'
 
+  after_save do
+    order.clean_cache!
+  end
+
+  after_destroy do
+    order.clean_cache!
+  end
+
   def price
     if personalization.present?
       super + personalization.price
