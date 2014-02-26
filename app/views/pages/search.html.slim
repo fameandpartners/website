@@ -6,7 +6,10 @@
 - elsif @products.present?
   .category-catalog.products
     .row
-      = render(@products)
+      - @products.each do |product|
+        .grid-4
+          - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
+            = render 'spree/products/cached_product', product: product
 - else
   p Sorry, no dresses match your criteria
 
