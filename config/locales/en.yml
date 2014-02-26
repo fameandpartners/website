@@ -3,8 +3,31 @@ en:
     colors:
       black:
         title: 'Black Dresses'
-        subtitle: 'Sexy black dresses for any special occasion.'
-
+        subtitle: 'Transform that little black dress with a modern twist by playing with gothic, rock star or ultra glam looks.'
+      pink:
+        title: 'Pink Dresses'
+        subtitle: 'Designers like Carven and Moschino flirted with their pink tinted glasses on for their latest runway looks. Embrace these candy palettes with your own pink prom dress.'
+      red:
+        title: 'Red Dresses'
+        subtitle: 'Sultry sirens like Rihanna know how to work Lady in Red on the carpet. Add some scandal with a red dress.'
+      blue:
+        title: 'Blue Dresses'
+        subtitle: 'Swim into the ocean of blue that has washed over the catwalks at Paris Fashion Week this year, by finding your perfect blue gown.'
+      turquoise:
+        title: 'Turquoise Dresses'
+        subtitle: 'Turquoise is the Hollywood star favourite for escaping into Caribbean nights. Get tropical with turquoise dresses.'
+      green:
+        title: 'Green Dresses'
+        subtitle: 'Standout pieces in red carpet events played with daring greens like Rosie Huntington-Whiteley in Gucci. Make a bold statement with a formal dress in emeralds and forest greens.'
+      peach:
+        title: 'Peach Dresses'
+        subtitle: 'For a sweeter than sweet look, channel music star, Peaches, with the perfect peach dress.'
+      gold:
+        title: 'Gold Dresses'
+        subtitle: 'Shine, sparkle and shimmy into your prom with gold and metallic looks like those worn by celebrity stars like Taylor Swift and Rita Ora.'
+      coral:
+        title: 'Coral Dresses'
+        subtitle: 'Cascading coral was worn by Taylor Swift at the 2014 Golden Globes. Craft your cutest coral look with one of our dresses below.'
   delivery_time:
     quick:
      long: '24 hours delivery'
