@@ -1,10 +1,7 @@
 class Celebrity::Image < ActiveRecord::Base
   belongs_to :celebrity
 
-  has_attached_file :file,
-                    url: '/system/celebrities/images/file/:id/:style/:filename',
-                    path: ':rails_root/public/system/celebrities/images/file/:id/:style/:filename',
-                    styles: {
+  has_attached_file :file, styles: {
                       thumbnail: ['48x48#', :jpg],
                       medium: ['261x263#', :jpg],
                       large: ['538x538#', :jpg],
