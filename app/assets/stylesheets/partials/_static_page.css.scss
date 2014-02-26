@@ -52,15 +52,18 @@
 		position: relative;
 	}
 	.blogger-content { 
-		margin: 0 160px;
+		margin: 0 160px 60px;
+		text-align: center;
 		h1 { 
-			font-size: 67px;
+			font-size: 51px;
 			text-align: center;
 			color: #fff;
-			padding: 20px;
-			margin-bottom: 50px;
-			background-color: rgba(0, 0, 0, 0.9);
+			padding: 14px 40px 12px 40px;
+			margin: 120px auto 30px auto;
+			background-color: rgba(0, 0, 0, 0.8);
 			text-transform: uppercase;
+			width: auto;
+			display: inline-block;
 		}
 		.content {
 			background-color: #fff;
@@ -74,12 +77,14 @@
 			}
 			.see-collection {
 				text-align: center;
+				margin: 80px 0;
 			}
 		}
 		.blogger-title {
 			font: italic 400 46px/1.1 $fontTwo;
 			color: #2e0f0f;
 			text-align: center;
+			margin-top: 20px; 
 			padding-bottom: 0.4em;
 			margin-bottom: .6em;
 			border-bottom: solid 1px #e8e8e8;
@@ -117,9 +122,10 @@
 			.see-more {
 				margin-top: 10px;
 				text-align: left;
+				font-size: 11px;
 			}
 			.price {
-				margin-top: 10px;
+				margin: 10px 0;
 				span {
 					color: $pinkColor;
 					font-size: 20px;
@@ -134,7 +140,7 @@
 		width: 160px;
 		bottom: 0;
 		overflow: hidden;
-		background-color: #ccc;
+		background-color: #fff;
 		&.left { left: 0;}
 		&.right { right: 0;}
 		img {
