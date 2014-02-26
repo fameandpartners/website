@@ -6,7 +6,7 @@ class PagesController < Spree::StoreController
   respond_to :html
 
   def my_boutique
-    @sorted_dresses = Spree::Product.recommended_for(current_spree_user, :limit => 200)
+    @sorted_dresses = Spree::Product.recommended_for(current_spree_user, :limit => 28)
     @recommended_dresses = @sorted_dresses.first(12)
     @dresses = @sorted_dresses.from(12)
 
