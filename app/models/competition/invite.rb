@@ -1,4 +1,6 @@
-class CompetitionInvitation < ActiveRecord::Base
+class Competition::Invite < ActiveRecord::Base
+  self.table_name = "competition_invitations"
+
   belongs_to :user, class_name: 'Spree::User'
 
   before_create :generate_token

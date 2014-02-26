@@ -1,4 +1,4 @@
-class CompetitionEntry < ActiveRecord::Base
+class Competition::Entry < ActiveRecord::Base
   belongs_to :user, class_name: 'Spree::User'
   belongs_to :inviter, class_name: 'Spree::User'
 

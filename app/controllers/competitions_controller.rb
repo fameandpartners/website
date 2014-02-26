@@ -1,3 +1,4 @@
+=begin
 class CompetitionsController < ApplicationController
   before_filter :authenticate_spree_user!, except: [:show, :create]
   layout 'spree/layouts/spree_application'
@@ -100,3 +101,4 @@ class CompetitionsController < ApplicationController
     invitation ||= CompetitionInvitation.where(token: session[:invite]).first if session[:invite].present?
   end
 end
+=end

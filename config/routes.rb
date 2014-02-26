@@ -161,12 +161,21 @@ FameAndPartners::Application.routes.draw do
 
     root :to => 'index#show'
 
-    resource :competition, only: [:show, :create] do
-      post 'enter', on: :member, action: :create
-      get 'share(/:user_id)', on: :member, action: 'share', as: 'share'
-      post 'invite', on: :member
-      get 'stylequiz', on: :member
+#    resource :competition, only: [:show, :create] do
+#      post 'enter', on: :member, action: :create
+#      get 'share(/:user_id)', on: :member, action: 'share', as: 'share'
+#      post 'invite', on: :member
+#      get 'stylequiz', on: :member
+#    end
+
+    # competitions page
+    scope "competition/:competition_id" do
+      resource :entry, only: [:new, :create], controller: 'competition/entries'
     end
+    get "/gregg-sulkin" => "competition/entries#new",
+      defaults: { competition_id: 'gregg-sulkin' }, as: :new_competition_entry
+    post "/gregg-sulkin" => "competition/entries#create",
+      defaults: { competition_id: 'gregg-sulkin' }, as: :competition_entry
 
     resource :quiz, :only => [:show] do
       resources :questions, :only => [:index]
@@ -343,7 +352,7 @@ FameAndPartners::Application.routes.draw do
 
     # seo routes like *COLOR*-Dress
     get "(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses
-  
+
     resources :site_versions, only: [:show]
   end
 
