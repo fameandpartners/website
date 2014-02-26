@@ -45,7 +45,13 @@
       ' Select a dress below... Then if you want to make it your own click the Customize tab.
     .category-catalog.products
       .row
-        = render(@recommended_dresses) || 'Sorry, no dresses match your criteria'
+        - if @recommended_dresses.present?
+          - @recommended_dresses.each do |product|
+            .grid-4
+              - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
+                = render 'spree/products/cached_product', product: product
+        - else
+          .not-found Sorry, no dresses match your criteria
 
     .view-more-separate
 
@@ -56,6 +62,10 @@
         li.active = link_to 'View all of our dresses.', collection_path
     .category-catalog
       .row
+        - @dresses.each do |product|
+          .grid-3
+            - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
+              = render 'spree/products/cached_product', product: product
         - @dresses.each do |product|
           = render 'shared/product', product: product
 
