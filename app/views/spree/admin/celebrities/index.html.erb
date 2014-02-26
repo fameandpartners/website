@@ -36,7 +36,7 @@
             <td class="align-center"><%= celebrity.id %></td>
             <td class="align-left"><%= celebrity.first_name %></td>
             <td class="align-left"><%= celebrity.last_name %></td>
-            <td class="align-left"><%= celebrity.slug %></td>
+            <td class="align-left"><%= link_to celebrity.slug, celebrity_path(id: celebrity.slug) %></td>
             <td class="align-left">
               <%= link_to_with_icon('icon-edit', t(:edit), edit_admin_celebrity_path(celebrity)) %>
               &nbsp;

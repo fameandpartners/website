@@ -57,6 +57,10 @@ Spree::Product.class_eval do
 
   after_initialize :set_default_values
 
+  def cache_key
+    "products/#{id}-#{updated_at.to_s(:number)}"
+  end
+
   def images
     table_name = Spree::Image.quoted_table_name
 

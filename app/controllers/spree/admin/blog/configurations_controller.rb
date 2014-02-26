@@ -8,7 +8,7 @@ class Spree::Admin::Blog::ConfigurationsController < Spree::Admin::Blog::BaseCon
   def update
     config = Blog.config
     params[:config].each do |key, value|
-      Blog::Preference.update_preference(key, value) if @config.send(key) != value
+      Blog::Preference.update_preference(key, value) if config.send(key) != value
     end
 
     render nothing: true

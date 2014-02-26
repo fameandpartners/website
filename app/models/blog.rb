@@ -8,7 +8,9 @@ module Blog
   def self.config
     result = OpenStruct.new
     Blog::Preference.all.each do |preference|
-      result.send("#{preference.key}=", preference.value)
+      if preference.value.present?
+        result.send("#{preference.key}=", preference.value)
+      end
     end
     result
   end
