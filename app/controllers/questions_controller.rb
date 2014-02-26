@@ -22,6 +22,6 @@ class QuestionsController < ApplicationController
   private
 
   def log_activity
-    Activity.log_quiz_started(@quiz, current_spree_user)
+    Activity.log_quiz_started(Quiz.last, current_spree_user)
   end
 end
