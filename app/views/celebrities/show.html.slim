@@ -1,6 +1,6 @@
 .page-static.blogger-page
   - if @celebrity.primary_image && @celebrity.primary_image.file.exists?
-    .blogger-header style="background-image: url('#{ @celebrity.primary_image.file.url(:banner)})'"
+    .blogger-header style="background-image: url('#{ @celebrity.primary_image.file.url(:banner)}')"
   - else
     .blogger-header 
   .blogger-wrapper
@@ -23,14 +23,14 @@
                 .info = product_short_description(product)
                 .price
                   span = price_for_product(product)
-                  = link_to "SHOP NOW", path_to_product, class: 'btn mid'
+                = link_to "SHOP NOW", path_to_product, class: 'btn mid'
               .grid-7
                 - @celebrity.accessories.for_product(product).limit(4).each do |accessory|
                   .grid-6
                     = link_to accessory.source, target: 'blank' do
                       = image_tag(accessory.image.url(:product), title: accessory.title)
                 .see-more
-                  = link_to "See more styling advice link", personalization_style_product_path(permalink: product.permalink), class: 'btn empty mid'
+                  = link_to "See more styling advice", personalization_style_product_path(permalink: product.permalink), class: 'btn empty mid'
         .see-collection = link_to "SEE MORE KILLER DRESSES HERE", collection_path, class: 'btn pink'
 
     .blogger-bg.left
