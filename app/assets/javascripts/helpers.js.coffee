@@ -3,6 +3,15 @@ jQuery.fn.center = () ->
   @css("top", Math.max(10, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()))
   @css("left", Math.max(10, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()))
 
+jQuery.fn.randomize = () ->
+  @each () ->
+    $this = $(this)
+
+    $children = _.shuffle($this.children())
+
+    $this.children().remove()
+    $this.append($children)
+
 
 window.parseIfString = (obj_or_string) ->
   if typeof obj_or_string == 'string'
