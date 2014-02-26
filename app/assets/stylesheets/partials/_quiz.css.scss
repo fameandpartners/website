@@ -893,7 +893,10 @@
       @include box-sizing(border-box);
     }
     .picture {
+      background-size: cover;
+      background-position: center center;
       position: absolute;
+
       img {
         display: block;
         width: 100%;

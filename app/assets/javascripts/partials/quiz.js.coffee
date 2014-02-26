@@ -1,6 +1,7 @@
 window.Quiz = {
   show: () ->
     $('.quiz-box').show()
+    $('.quiz-box-inner').html('')
     Quiz.updatePosition()
     # $('body').css 'overflow', 'hidden'
     $.getScript '/quiz'
