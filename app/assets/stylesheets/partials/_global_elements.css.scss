@@ -277,7 +277,7 @@
 	}
 	#what-size & {
 		th, td { padding: 15px 10px;}
-		td { font-weight: 300;}
+		td { font-weight: 300; text-transform: none !important;}
 	}
 }
 

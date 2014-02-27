@@ -390,8 +390,13 @@
 			margin-bottom: 15px;
 			font-weight: 400;
 		}
-		.instructions{
+		.instructions, .delivery{
 			padding: 0px 40px 30px 0;
+		}
+		.delivery{
+			font-style: italic;
+			font-size: 1.3em;
+			font-weight: 100;
 		}
 		.dropdown { margin-bottom: 35px; width: 98%;}
 		.row {
@@ -421,15 +426,19 @@
 			margin-bottom: 25px;
 			padding-bottom: 25px;
 			position: relative;
+			h1{
+				padding-bottom: 38px;
+			}
 			em {
 				font-family: $fontTwo;
 				text-transform: none;
 			}
 			p {
 				margin: 0;
+				font-size: 0.55em;
 				+ p { margin-top: 20px;}
 			}
-			.pink { color: $pinkColor;}
+			.pink { font-size: 38px; color: $pinkColor;}
 			.arrows-line-horizontal {
 				position: absolute;
 				left: 0;
