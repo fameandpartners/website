@@ -182,6 +182,10 @@
 
 .product-page {
 	margin: 10px 0;
+	.purchase-instructions{
+		margin: 20px 0 0;
+		font-family: $fontThree;
+	}
 	.product-info { 
 		padding: 28px 0 0 10px;
 		.product-title {
@@ -306,18 +310,27 @@
 			background-color: #fde4df;
 			padding: 30px;
 			text-align: center;
-			h4 {
-				font-size: 23px;
-				font-family: $fontThree;
-				line-height: 1;
-				margin-top: 30px;
-			}
-			p {
+			h1 {
 				font-size: 25px;
 				font-style: italic;
 				font-family: $fontTwo;
-				margin: 0 0 50px;
+				margin: 0 0 20px;
 				text-transform: none;
+			}
+			h2 {
+				font-size: 14px;
+				font-style: normal;
+				font-family: $fontOne;
+				font-weight: 100;
+				margin: 0 0 32px;
+				text-transform: none;
+			}
+			h4 {
+				width: 420px;
+				margin: 30px auto 0 auto;
+				font-size: 23px;
+				font-family: $fontThree;
+				line-height: 1;
 			}
 		}
 		.lookbox {
@@ -348,7 +361,7 @@
 				}
 			}
 			.text {
-				padding: 8px 8px 8px 15px;
+				padding: 8px 8px 38px 0px;
 				p { margin: 0;}
 				a { 
 					color: $pinkColor;
@@ -357,6 +370,9 @@
 				h4 {
 					font-size: 23px;
 					font-family: $fontThree;
+				}
+				.italic{
+					font-style: italic;
 				}
 			}
 			.price-list {
@@ -378,8 +394,13 @@
 			margin-bottom: 15px;
 			font-weight: 400;
 		}
-		.instructions{
+		.instructions, .delivery{
 			padding: 0px 40px 30px 0;
+		}
+		.delivery{
+			font-style: italic;
+			font-size: 1.3em;
+			font-weight: 100;
 		}
 		.dropdown { margin-bottom: 35px; width: 98%;}
 		.row {
@@ -409,15 +430,19 @@
 			margin-bottom: 25px;
 			padding-bottom: 25px;
 			position: relative;
+			h1{
+				padding-bottom: 38px;
+			}
 			em {
 				font-family: $fontTwo;
 				text-transform: none;
 			}
 			p {
 				margin: 0;
+				font-size: 0.55em;
 				+ p { margin-top: 20px;}
 			}
-			.pink { color: $pinkColor;}
+			.pink { font-size: 38px; color: $pinkColor;}
 			.arrows-line-horizontal {
 				position: absolute;
 				left: 0;

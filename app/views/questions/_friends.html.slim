@@ -31,11 +31,13 @@ javascript:
   });
 h1
   em Who do you go shopping with
-  ' For your prom dress
+  ' For your prom dress?
 .invite-friends
   .choose-friends
-    h3 Shop with friends
-    = link_to 'Choose friends', '#', class: 'btn mid choose-friends-link'
+    = link_to 'Choose friends', '#', class: 'btn pink mid choose-friends-link'
+  .skip
+    .next
+      = link_to 'Skip this step', '#', class: 'btn empty border'
   .picture.img-1.size-7.hide
   .picture.img-2.size-1.hide
   .picture.img-3.size-1.hide

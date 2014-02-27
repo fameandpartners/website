@@ -26,22 +26,17 @@ javascript:
               = product_image_tag(@product)
           .grid-6
             .heading
-              p 
-                em Create your
-                br
-                ' UNIQUE DRESS
+              h1 
+                em Make it yours
                 br 
-                span.pink BY CUSTOMISING
+                span.pink by customising your dress
               p 
-                em Delivery time is only 10-14 days
+                em Select from the options below to customise your dress!
               .arrows-line-horizontal
             #personalization
-              .instructions
-                - if show_custom_colors
-                  ' Choose a custom color or a dress customisation then select a size on the right side of the page.
-                - else
-                  ' Choose a dress customisation then select a color and size on the right side of the page.
+              .delivery DELIVERY TIME IS ONLY 10 - 14 DAYS
               = render 'form', product: @product, personalization: @personalization, show_custom_colors: show_custom_colors
+              .instructions Once you have made your selections, simple choose your size on the right and add to cart!
             / .style
               .row
                 .grid-6

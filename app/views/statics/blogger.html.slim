@@ -18,8 +18,12 @@
               .picture 
                 = link_to build_collection_product_url('v-neck', 'queen_of_diamonds') do
                   = image_tag '_blogger/products/product-1-1.jpg'
-              h4 = link_to 'Breezy', build_collection_product_url('v-neck', 'queen_of_diamonds')
-              .info Not your typical LBD, this full-circle pleated skirt turns your sexy bodycon LBD to a flirty cocktail dress.
+              h4 = link_to 'Queeen of Diamonds', build_collection_product_url('v-neck', 'queen_of_diamonds')
+              .info
+                ' Be daring in this diamond cut midriff with a complimenting neckline.
+                .price
+                  span $189
+                = link_to "SHOP NOW", build_collection_product_url('v-neck', 'queen_of_diamonds'), class: 'btn mid'
             .grid-7
               .grid-6
                 = link_to '//polyvore.com/lanvin_choker/thing?id=97666858', target: '_blank' do
@@ -33,6 +37,8 @@
               .grid-6
                 = link_to '#' do
                   = image_tag '_blogger/products/product-1-5.jpg'
+              .see-more
+                  = link_to "See more styling advice", personalization_style_product_path(permalink: 'queen_of_diamonds'), class: 'btn empty mid'
         .product
           .grid-container
             .grid-5
@@ -40,7 +46,11 @@
                 = link_to build_collection_product_url('ball-gown', 'roman_shadow') do
                   = image_tag '_blogger/products/roman-shadow.jpg'
               h4 = link_to 'Roman Shadow', build_collection_product_url('ball-gown', 'roman_shadow')
-              .info Join the embellishment party with this beaded top set, a girl can never have enough embellishments.
+              .info
+                ' Join the embellishment party with this beaded top set, a girl can never have enough embellishments.
+                .price
+                  span $399
+                = link_to "SHOP NOW", build_collection_product_url('ball-gown', 'roman_shadow'), class: 'btn mid'
             .grid-7
               .grid-6
                 = link_to '//polyvore.com/mogul_18k_black_onyx_chain/thing?id=94863968', target: '_blank' do
@@ -54,6 +64,8 @@
               .grid-6
                 = link_to '//barneys.com/on/demandware.store/Sites-BNY-Site/default/Product-Show?pid=502698738&utm_source=Hy3bqNL2jtQ&utm_medium=affiliate&siteID=Hy3bqNL2jtQ-xh6IGYU.LjXXCFUvZCE5jA', target: '_blank' do
                   = image_tag '_blogger/products/product-2-5.jpg'
+              .see-more
+                  = link_to "See more styling advice", personalization_style_product_path(permalink: 'roman_shadow'), class: 'btn empty mid'
         .product
           .grid-container
             .grid-5
@@ -61,7 +73,11 @@
                 = link_to build_collection_product_url('v-neck', 'mirrored_dreams') do
                   = image_tag '_blogger/products/mirrored-dream.jpg'
               h4 = link_to 'MIRRORED DREAMS', build_collection_product_url('v-neck', 'mirrored_dreams')
-              .info Sexiness comes from within, but who's to say we can't get help from meshed-lace cutouts and a sheer skirting.
+              .info
+                ' Sexiness comes from within, but who's to say we can't get help from meshed-lace cutouts and a sheer skirting.
+                .price
+                  span $229
+                = link_to "SHOP NOW", build_collection_product_url('v-neck', 'mirrored_dreams'), class: 'btn mid'
             .grid-7
               .grid-6
                 = link_to '//www1.bloomingdales.com/shop/product/david-yurman-labyrinth-earrings-with-black-onyx-and-diamonds?ID=924456&PartnerID=LINKSHARE&cm_mmc=LINKSHARE-_-n-_-n-_-n&LinkshareID=Hy3bqNL2jtQ-cv3B6tG7XfafRlz1JOJ1ZA&intnl=true', target: '_blank' do
@@ -74,7 +90,10 @@
                   = image_tag '_blogger/products/product-3-4.jpg'
               .grid-6
                 = link_to '//matchesfashion.com/product/157292?qxjkl=tsid:38929', target: '_blank' do
-                  = image_tag '_blogger/products/product-3-5.jpg'          
+                  = image_tag '_blogger/products/product-3-5.jpg'  
+              .see-more
+                  = link_to "See more styling advice", personalization_style_product_path(permalink: 'mirrored_dreams'), class: 'btn empty mid'
+        .see-collection = link_to "SEE MORE KILLER DRESSES HERE", collection_path, class: 'btn pink'            
     .blogger-bg.left
       = image_tag '_blogger/moodboard/blogger-mood-1.jpg'   
       = image_tag '_blogger/moodboard/blogger-mood-2.jpg'   
