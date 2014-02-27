@@ -419,10 +419,13 @@
 				padding: 0 5px;
 			}
 		}
-		.picture {
+		.picture img {
+			width: 100%;
+		}
+		.customisation-picture {
 			text-align: center;
 		}
-		.picture img {
+		.customisation-picture img {
 			display: inline-block;
 			width: 80px;
 			margin: 0 auto 0 auto;
