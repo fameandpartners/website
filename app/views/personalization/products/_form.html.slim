@@ -10,15 +10,16 @@
   .style.customisation-selector
     - product.product_customisation_values.each do |value|
       .row.customisation-value data-customisation-value-id=(value.customisation_value_id)
-        / .grid-6
-            .picture
-              = product_customisation_value_image(value)
         .grid-6
           .title = value.presentation
           .button
             = link_to '+ ADD', '#', class: 'btn empty border'
             - if value.price > 0 
               p.price = value.display_price
+        .grid-6
+          .picture
+            = product_customisation_value_image(value)
+        
 
 /ruby:
   product_customisation_types = @product.product_customisation_types.includes(:customisation_type, :customisation_values).with_values
