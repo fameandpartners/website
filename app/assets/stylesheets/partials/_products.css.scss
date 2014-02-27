@@ -182,6 +182,10 @@
 
 .product-page {
 	margin: 10px 0;
+	.purchase-instructions{
+		margin: 20px 0 0;
+		font-family: $fontThree;
+	}
 	.product-info { 
 		padding: 28px 0 0 10px;
 		.product-title {
