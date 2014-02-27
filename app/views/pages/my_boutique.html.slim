@@ -85,3 +85,71 @@
     .view-more-dresses
       = link_to 'VIEW MORE DRESSES', '#', class: 'btn mid'
 = thanks_popup_for_new_competition_entrant
+
+
+// Competition My Boutique Page
+/ .personal-boutique.boutique-competition-page
+  .wrap
+    .page-title
+      h1 Nyree & Gregg
+    .competition-header
+      = image_tag '_boutique/competition-header.jpg'
+      .match
+        .pink 70%
+        span match
+      .text
+        .title Promocode:
+        .code 
+          'GREGG
+          span.pink 
+            '25
+        = link_to 'share', '#', class: 'btn mid empty border'
+    .page-title-secondary
+      h2.bordered 
+        span Gregg’s favourite dresses
+
+    .category-catalog.products
+      .row
+        - if @recommended_dresses.present?
+          - @recommended_dresses.each do |product|
+            .grid-4
+              - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
+                = render 'spree/products/cached_product', product: product
+        - else
+          .not-found Sorry, no dresses match your criteria  
+
+
+    .page-title-secondary
+      h2 Recommended DRESSES
+      .arrows-line-horizontal
+      .bg-elem-1
+      .bg-elem-2
+      .bg-elem-3
+
+    .category-catalog
+      .row
+        - @dresses.each do |product|
+          .grid-3
+            - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
+              = render 'spree/products/cached_product', product: product
+        - @dresses.each do |product|
+          = render 'shared/product', product: product  
+    
+
+    .page-title-secondary
+      h2 more dresses
+      .arrows-line-horizontal
+      h3 Nothing you love above? Check out more of our range below
+      = link_to 'View all of our dresses.', collection_path, class: 'btn mid'
+      .bg-elem-1
+      .bg-elem-2
+      .bg-elem-3
+    
+    .category-catalog
+      .row
+        - @dresses.each do |product|
+          .grid-3
+            - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
+              = render 'spree/products/cached_product', product: product
+        - @dresses.each do |product|
+          = render 'shared/product', product: product
