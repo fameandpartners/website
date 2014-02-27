@@ -15,16 +15,19 @@ javascript:
 
     FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-        FB.ui({
-          method: 'send',
-          display: 'iframe',
-          link: 'http://www.fameandpartners.com/?osq=1'
-        });
+        FB.ui(
+          {
+            method: 'send',
+            display: 'iframe',
+            link: 'http://www.fameandpartners.com/'
+          },
+          Quiz.goToNextStep
+        );
       } else {
         FB.ui({
           method: 'send',
           display: 'popup',
-          link: 'http://www.fameandpartners.com/?osq=1'
+          link: 'http://www.fameandpartners.com/'
         });
       }
     });
