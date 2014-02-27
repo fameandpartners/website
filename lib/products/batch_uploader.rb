@@ -541,6 +541,7 @@ module Products
 
         if customization.blank?
           customization = product.customisation_values.build
+          customization.products << product
         end
 
         customization.update_attributes(attrs, without_protection: true)
