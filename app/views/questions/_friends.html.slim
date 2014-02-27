@@ -15,11 +15,14 @@ javascript:
 
     FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-        FB.ui({
-          method: 'send',
-          display: 'iframe',
-          link: 'http://www.fameandpartners.com/'
-        });
+        FB.ui(
+          {
+            method: 'send',
+            display: 'iframe',
+            link: 'http://www.fameandpartners.com/'
+          },
+          Quiz.goToNextStep
+        );
       } else {
         FB.ui({
           method: 'send',
