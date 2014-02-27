@@ -8,6 +8,9 @@ class IndexController < Spree::StoreController
     if params[:workshop]
       session[:sign_up_reason] = 'workshop'
     end
+    if params[:cf].to_s.match(/^competition-\w+/)
+      @show_competition_quiz = true
+    end
   end
 
   private

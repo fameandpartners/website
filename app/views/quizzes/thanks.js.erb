@@ -1,4 +1,10 @@
 $('.quiz-box-inner').html('<%=j render(:template => 'quizzes/thanks.html.slim') %>');
-setTimeout(function(){ window.location = "<%= my_boutique_url %>"; }, 3000);
+
+if (!window.Quiz.redirectUrl) {
+  window.Quiz.redirectUrl = "<%= my_boutique_url %>";
+}
+setTimeout(function(){
+  window.location = window.Quiz.redirectUrl;
+}, 3000);
 
 track.quizFinished('<%=j analytics_label(:user) %>');

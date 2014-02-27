@@ -9,15 +9,18 @@
   meta name="twitter:card" content="Fame & Partners - Prom Dresses for Fashion Mavens"
   meta name="twitter:title" content="Fame & Partners - Prom Dresses for Fashion Mavens"
   meta name="twitter:description" content="Find out what your style profile is and we'll match the most stylish dresses to you."
- 
-
-
 
 - if spree_user_signed_in? and (params[:ci] == 'signup' or params[:cf] == 'signup')
   javascript:
     $(function(){
       track.conversion('sign_up')
     })
+
+- if @show_competition_quiz
+  javascript:
+    window.Quiz.autoShow = true;
+    window.Quiz.welcomeMessage = "THANKS! NOW COMPLETE YOUR STYLE PROFILE";
+    window.Quiz.redirectUrl = "#{ my_boutique_path }";
 
 .landing-promo
   .grid-container
