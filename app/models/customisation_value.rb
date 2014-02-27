@@ -3,6 +3,7 @@ class CustomisationValue < ActiveRecord::Base
 
   #belongs_to :customisation_type
   has_many :product_customisation_values, :dependent => :destroy
+  has_many :products, through: :product_customisation_values
 
   attr_accessible :name, :presentation, :image, :price
 

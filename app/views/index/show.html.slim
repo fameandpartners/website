@@ -1,14 +1,16 @@
 - content_for :head do
   meta property="og:url" content="#{ root_url }"
-  meta property="og:site_name" content="Fame & Partners - Beautiful dresses crafted from red carpet looks"
-  meta property="og:image" content="#{absolute_image_url(image_path('famehomepage.jpg'), 'http')}"
+  meta property="og:site_name" content="Fame & Partners - Prom Dresses for Fashion Mavens"
+  meta property="og:image" content="#{absolute_image_url(image_path('homepage.jpeg'), 'http')}"
   meta property="og:locale" content="en_US"
-  meta property="og:title" content="Fame & Partners - Beautiful dresses crafted from red carpet looks"
+  meta property="og:title" content="Fame & Partners - Prom Dresses for Fashion Mavens"
   meta property="og:type" content="website"
-  meta property="og:description" content="Fame and Partners are a leading online website selling all types of dresses including formal, evening and prom dresses online."
-  meta name="twitter:card" content="Fame & Partners - Beautiful dresses crafted from red carpet looks"
-  meta name="twitter:title" content="Fame & Partners - Beautiful dresses crafted from red carpet looks"
-  meta name="twitter:description" content="Fame and Partners are a leading online website selling all types of dresses including formal, evening and prom dresses online."
+  meta property="og:description" content="Find out what your style profile is and we'll match the most stylish dresses to you."
+  meta name="twitter:card" content="Fame & Partners - Prom Dresses for Fashion Mavens"
+  meta name="twitter:title" content="Fame & Partners - Prom Dresses for Fashion Mavens"
+  meta name="twitter:description" content="Find out what your style profile is and we'll match the most stylish dresses to you."
+ 
+
 
 
 - if spree_user_signed_in? and (params[:ci] == 'signup' or params[:cf] == 'signup')

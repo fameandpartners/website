@@ -1,0 +1,6 @@
+.step.film-frame id="step-#{step}" style="float: left; width: 1054px;"
+  - questions.each do |question|
+    .question id="question-#{question.id}" data-a-label="#{analytics_label(:question, question, step)}"
+      = f.fields_for "questions][#{question.id}" do |ff|
+        = ff.fields_for :answer do |fff|
+          = render question.partial, :form => fff, :question => question

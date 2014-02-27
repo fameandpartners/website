@@ -873,9 +873,18 @@
       top: 130px;
       border: solid 1px #d7d7d7;
       text-align: center;
-      h3 {
-        margin: 25px 0;
-        font: 400 26px/1 $fontFive;
+      .choose-friends-link{
+        margin-top: 55px;
+      }
+    }
+    .skip{
+      position: absolute;
+      width: 100%;
+      top: 330px;
+      text-align: center;
+      z-index: 1000;
+      a{
+        font-size: 14px;
       }
     }
     .facebook-popup {
@@ -893,7 +902,10 @@
       @include box-sizing(border-box);
     }
     .picture {
+      background-size: cover;
+      background-position: center center;
       position: absolute;
+
       img {
         display: block;
         width: 100%;
