@@ -14,22 +14,23 @@ doctype html
       - if session.delete(:signed_up_just_now)
         img src="http://tags.rtbidder.net/convert?sid=52564c5b8bc06f1060da28a2" width="0" height="0" border="0" alt=""
     #fb-root
-    javascript:
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '#{facebook_application.api_key}',
-          status     : true,
-          xfbml      : true
-        });
-      };
+    - if facebook_application.present?
+      javascript:
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '#{facebook_application.api_key}',
+            status     : true,
+            xfbml      : true
+          });
+        };
 
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{facebook_application.api_key}";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{facebook_application.api_key}";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 
     - if spree_user_signed_in?
       javascript:
