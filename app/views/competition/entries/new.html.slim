@@ -33,32 +33,25 @@ iframe#tracking-iframe src="http://tracking.jackmedia.com.au/SL19v" scrolling="n
             - @user.errors.full_messages.each do |error_message|
               li = error_message
 
-      = link_to fb_auth_path(competition: true, invite: params[:invite]), class: 'facebook-button' do
+      = link_to fb_auth_path(competition: @entrant.competition_slug, invite: params[:invite]), class: 'facebook-button' do
         span.icon
           span.icon-facebook2
         span Sign up with facebook
       .or
         span or
       .form-fields
-        - if (user = try_spree_current_user).present?
+        - if @user.present? && @user.persisted?
           .input
-            = text_field_tag :first_name, user.first_name, placeholder: 'First Name', disabled: true
+            = text_field_tag :first_name, @user.first_name, placeholder: 'First Name', disabled: true
           .input
-            = text_field_tag :last_name, user.last_name, placeholder: 'Last Name', disabled: true
-        - elsif (email = params[:member]).present?
-          .input
-            = email_field_tag :email, email, required: true, placeholder: 'mail@example.com'
-          .input
-            = password_field_tag :password, '', required: true, placeholder: 'password'
+            = text_field_tag :last_name, @user.last_name, placeholder: 'Last Name', disabled: true
         - else
-          /- if @user && @user.errors.any?
-            = link_to "Enter to competition with existing account?", competition_path(member: @user.email)
           .input
-            = text_field_tag :first_name, @user.try(:first_name), placeholder: 'First Name', required: true
+            = text_field_tag :first_name, @user.try(:first_name), placeholder: 'First Name', required: false
           .input
-            = text_field_tag :last_name, @user.try(:last_name), placeholder: 'Last Name', required: true
+            = text_field_tag :last_name, @user.try(:last_name), placeholder: 'Last Name', required: false
           .input
-            = email_field_tag :email, @user.try(:email), placeholder: 'mail@example.com', required: true
+            = email_field_tag :email, @user.try(:email), placeholder: 'mail@example.com', required: false
       .submit
         input.btn.pink.shadow type="submit" value="Enter now"
     .terms-line
