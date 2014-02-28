@@ -9,6 +9,15 @@
   z-index: 30;
 }
 
+.flash-notification {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 118px;
+  text-align: center;
+  z-index: 9;
+}
+
 .quiz-wrapper-box {
   position: absolute;
   top: 50%;
