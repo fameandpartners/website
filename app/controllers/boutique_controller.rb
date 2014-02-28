@@ -16,6 +16,7 @@ class BoutiqueController < Spree::StoreController
       @celebrity_style_profile = boutique.celebrity_style_profile
       @celebrity_dresses = boutique.celebrity_dresses
       @fb_invite = boutique.competition_fb_invite
+      @user = boutique.user
 
       render 'competition'
     else
@@ -60,11 +61,11 @@ class BoutiqueController < Spree::StoreController
       @actor.present? ? Competition::Invite.fb_invite_from(@actor, competition) : nil
     end
 
-    private
-
     def user
       @user ||= get_user
     end
+
+    private
 
     def get_user
       if @options[:user_id].present?

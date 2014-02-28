@@ -21,11 +21,13 @@ javascript:
 .personal-boutique.boutique-competition-page
   .wrap
     .page-title
-      h1 Nyree & Gregg
+      h1 = "#{ @user.try(:first_name) } & Gregg"
     .competition-header
       = image_tag '_boutique/competition-header.jpg'
       .match
-        .pink = UserStyleProfile.calculate_match(@style_profile, @celebrity_style_profile)
+        .pink
+          = UserStyleProfile.calculate_match(@style_profile, @celebrity_style_profile)
+          '%
         span match
       .text
         .title Promocode:
