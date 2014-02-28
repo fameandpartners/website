@@ -23,7 +23,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             if sign_up_reason.eql?('custom_dress')
               session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
             elsif sign_up_reason.eql?('competition')
-              session[:spree_user_return_to] = main_app.share_competition_path
+              session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
             end
 
             redirect_to after_sign_in_path_for(authentication.user)
@@ -41,7 +41,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               user.sign_up_reason = session[:sign_up_reason]
 
               if session[:sign_up_reason].eql?('competition')
-                session[:spree_user_return_to] = main_app.share_competition_path
+                session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
               else
                 session[:spree_user_return_to] = main_app.root_path(:cf => :signup)
               end
@@ -56,7 +56,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               if sign_up_reason.eql?('custom_dress')
                 session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
               elsif sign_up_reason.eql?('competition')
-                session[:spree_user_return_to] = main_app.share_competition_path
+                session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
               elsif sign_up_reason.eql?('customise_dress')
                 session[:spree_user_return_to] = main_app.personalization_products_path(cf: 'custom-dresses-signup')
               end

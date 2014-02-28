@@ -9,6 +9,8 @@ class Competition::Invite < ActiveRecord::Base
 
   attr_accessible :email, :name, :invitation_type
 
+  scope :for_competition, lambda {|name| where(competition_name: name)}
+
   def generate_token
     self.token = loop do
       random_token = SecureRandom.urlsafe_base64(nil, false)
@@ -32,8 +34,10 @@ class Competition::Invite < ActiveRecord::Base
       end
     end
 
-    def fb_invite_from(user)
-      user.competition_invites.where(invitation_type: 'broadcast').first_or_create
+    def fb_invite_from(user, competition_name = nil)
+      scope = user.competition_invites.where(invitation_type: 'broadcast')
+      scope = scope.for_competition(competition_name) if competition_name.present?
+      scope.first_or_create
     end
   end
 end

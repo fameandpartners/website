@@ -5,7 +5,6 @@ class Competition::EntriesController < ApplicationController
     @entrant = CompetitionEntrant.new(try_spree_current_user, invite_token, params)
 
     if @entrant.already_entered?
-      #reset_new_entrant_flag
       redirect_to next_step_path(@entrant)
     else
       @user = @entrant.user
@@ -31,10 +30,6 @@ class Competition::EntriesController < ApplicationController
 
   private
 
-#  def reset_new_entrant_flag
-#    session[:new_entrant] = nil
-#  end
-
   def store_invite_token
     session[:invite] = params[:invite] if params[:invite].present?
   end
@@ -50,7 +45,7 @@ class Competition::EntriesController < ApplicationController
     when :new_entry
       competition_entry_path
     when :competition_boutique
-      my_boutique_path(user: entrant.user.slug)
+      user_competition_boutique_path(user_id: entrant.user.slug, competition_id: entrant.competition_name)
     when :competition_quiz
       root_path(entrant.url_options)
     else
@@ -60,6 +55,7 @@ class Competition::EntriesController < ApplicationController
 
   class CompetitionEntrant
     attr_accessor :user
+    attr_accessor :signed_up_just_now
 
     def initialize(user, token, params)
       @user = user
@@ -121,7 +117,8 @@ class Competition::EntriesController < ApplicationController
         )
       )
       if user.persisted?
-        session[:signed_up_just_now] = true
+        Spree::UserMailer.welcome_to_competition(user).deliver
+        @signed_up_just_now = true
       else
         user.errors.delete(:sign_up_reason) if user.errors
       end
@@ -133,7 +130,6 @@ class Competition::EntriesController < ApplicationController
       return false if !user.persisted?
 
       Competition::Entry.create_for(user, competition_name, competition_invite)
-      #Spree::UserMailer.welcome_to_competition(user).deliver
     end
 
     def competition_entry

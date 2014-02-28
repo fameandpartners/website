@@ -45,7 +45,7 @@ class PagesController < Spree::StoreController
     elsif params[:quiz]
       session[:show_quiz] = true
     elsif params[:competition]
-      session[:spree_user_return_to] = main_app.share_competition_path
+      session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
       session[:invite] = params[:invite]
       session[:competition] = params[:competition]
     elsif params[:personalization]

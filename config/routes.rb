@@ -174,6 +174,8 @@ FameAndPartners::Application.routes.draw do
     scope "competition/:competition_id" do
       resource :entry, only: [:new, :create], controller: 'competition/entries'
     end
+    # shortcat to auto enter logged in user to competition
+    get "/competition/:competition_id/enter" => 'competition/entries#create', as: :enter_competition
     get "/gregg-sulkin" => "competition/entries#new",
       defaults: { competition_id: 'gregg-sulkin' }, as: :new_competition_entry
     post "/gregg-sulkin" => "competition/entries#create",

@@ -9,7 +9,7 @@ your email:
 your pass:
   <%= @user.password %>
 
-competition url: '<%= main_app.share_competition_url(@user.slug) %>'
+competition url: '<%= main_app.user_competition_boutique_path(user_id: @user.slug, competition_id: Competition.current) %>
 
 Our Collection
 <%= main_app.collection_url %>

@@ -2,13 +2,13 @@ class Competition::Entry < ActiveRecord::Base
   belongs_to :user, class_name: 'Spree::User'
   belongs_to :inviter, class_name: 'Spree::User'
 
-  belongs_to :invitation, class_name: "CompetitionInvitation"
+  belongs_to :invitation, class_name: "Competition::Invite", foreign_key: 'invitation_id'
 
   scope :for_competition, lambda {|name| where(competition_name: name)}
 
   def create_additional_entry_for_inviter
     if self.invitation.present?
-      additional_entry = CompetitionEntry.new
+      additional_entry = Competition::Entry.new
       additional_entry.user = self.invitation.user
       additional_entry.inviter = self.user
       additional_entry.invitation_id = self.invitation.id

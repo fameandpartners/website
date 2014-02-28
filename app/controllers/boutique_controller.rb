@@ -10,6 +10,7 @@ class BoutiqueController < Spree::StoreController
     @style_profile = boutique.style_profile
     @recommended_dresses = boutique.recommended_dresses
     @dresses = boutique.other_dresses
+    #http://www.fameandpartners.com/gregg-sulkin?invite=h_boRyLwO2MPT9LDixfumw&fb_ref=competition&fb_source=message
 
     if boutique.competition.present?
       @celebrity_style_profile = boutique.celebrity_style_profile
@@ -56,7 +57,7 @@ class BoutiqueController < Spree::StoreController
     end
 
     def competition_fb_invite
-      @actor.present? ? Competition::Invite.fb_invite_from(@actor) : nil
+      @actor.present? ? Competition::Invite.fb_invite_from(@actor, competition) : nil
     end
 
     private
