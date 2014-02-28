@@ -10,14 +10,22 @@
   meta name="twitter:title" content="Fame & Partners - Prom Dresses for Fashion Mavens"
   meta name="twitter:description" content="Find out what your style profile is and we'll match the most stylish dresses to you."
 
+ruby:
+  if @show_competition_quiz && spree_user_signed_in?
+    redirectUrl = user_competition_boutique_path(
+      user_id: try_spree_current_user.try(:slug),
+      competition_id: Competition.current
+    )
+  else
+    redirectUrl = my_boutique_path
+  end
+
 - if spree_user_signed_in? and (params[:ci] == 'signup' or params[:cf] == 'signup')
   javascript:
     $(function(){
       track.conversion('sign_up')
     })
 
-- if @show_competition_quiz
-  - redirectUrl = user_competition_boutique_path(user_id: try_spree_current_user.try(:slug), competition_id: Competition.current)
   javascript:
     window.Quiz.autoShow = true;
     window.Quiz.welcomeMessage = "THANKS! NOW COMPLETE YOUR STYLE PROFILE";
