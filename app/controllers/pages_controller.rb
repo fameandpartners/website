@@ -1,17 +1,17 @@
 class PagesController < Spree::StoreController
-  before_filter :authenticate_spree_user!, :only => [:my_boutique]
-  before_filter :check_style_profile_presence!, :only => [:my_boutique]
+  #before_filter :authenticate_spree_user!, :only => [:my_boutique]
+  #before_filter :check_style_profile_presence!, :only => [:my_boutique]
 
   layout 'spree/layouts/spree_application'
   respond_to :html
 
-  def my_boutique
-    @sorted_dresses = Spree::Product.recommended_for(current_spree_user, :limit => 28)
-    @recommended_dresses = @sorted_dresses.first(12)
-    @dresses = @sorted_dresses.from(12)
-
-    @style_profile = UserStyleProfile.find_by_user_id(current_spree_user.id)
-  end
+#  def my_boutique
+#    @sorted_dresses = Spree::Product.recommended_for(current_spree_user, :limit => 28)
+#    @recommended_dresses = @sorted_dresses.first(12)
+#    @dresses = @sorted_dresses.from(12)
+#
+#    @style_profile = UserStyleProfile.find_by_user_id(current_spree_user.id)
+#  end
 
   def search
     @query_string = params[:q]
@@ -66,7 +66,7 @@ class PagesController < Spree::StoreController
 
     redirect_to spree.spree_user_omniauth_authorize_url(:provider => :facebook)
   end
-
+=begin
   private
 
   def check_style_profile_presence!
@@ -80,4 +80,5 @@ class PagesController < Spree::StoreController
   end
 
   helper_method :colors
+=end
 end

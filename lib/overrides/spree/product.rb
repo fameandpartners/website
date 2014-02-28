@@ -103,9 +103,12 @@ module Overrides
 
         def recommended_for(user, options = {})
           limit = options[:limit] || 12
-
           style_profile = UserStyleProfile.find_by_user_id(user.id)
 
+          recommended_for_style_profile(style_profile, limit)
+        end
+
+        def recommended_for_style_profile(style_profile, limit = 12)
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => {
               :term => {
@@ -184,7 +187,7 @@ module Overrides
 
             Tire.index(:spree_products).refresh
 
-            recommended_for(user)
+            recommended_for_style_profile(style_profile, limit)
           end
         end
       end

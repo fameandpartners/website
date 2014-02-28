@@ -54,7 +54,9 @@ FameAndPartners::Application.routes.draw do
 
     post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
 
-    get 'my-boutique' => 'pages#my_boutique', :as => :my_boutique
+    get 'my-boutique' => 'boutique#show', :as => :my_boutique
+    get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
+    get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do

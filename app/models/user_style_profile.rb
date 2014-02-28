@@ -137,4 +137,24 @@ class UserStyleProfile < ActiveRecord::Base
   def empty_basic_styles?
     attributes.slice(*BASIC_STYLES).values.all?(&:zero?)
   end
+
+  class << self
+    def calculate_match(profile_a, profile_b)
+      default_value = 78
+      if profile_a.present? && profile_b.present?
+        percentage_a = Hash[profile_a.percentage]
+        percentage_b = Hash[profile_b.percentage]
+
+        match = 100
+        percentage_a.each do |key, value|
+          match -= (percentage_b[key] - value).abs
+        end
+        match
+      else
+        default_value
+      end
+    rescue
+      78 # not close, but close enough
+    end
+  end
 end

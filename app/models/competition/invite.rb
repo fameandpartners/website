@@ -12,7 +12,7 @@ class Competition::Invite < ActiveRecord::Base
   def generate_token
     self.token = loop do
       random_token = SecureRandom.urlsafe_base64(nil, false)
-      break random_token unless CompetitionInvitation.where(token: random_token).exists?
+      break random_token unless Competition::Invite.where(token: random_token).exists?
     end
   end
 
@@ -32,8 +32,8 @@ class Competition::Invite < ActiveRecord::Base
       end
     end
 
-    def fb_invitation_from(user)
-      user.invitations.where(invitation_type: 'broadcast').first_or_create
+    def fb_invite_from(user)
+      user.competition_invites.where(invitation_type: 'broadcast').first_or_create
     end
   end
 end
