@@ -4,11 +4,11 @@ module Spree
       respond_to :html, :json
 
       def index
-        @entries = CompetitionEntry.where(master: true).page(params[:page]).per(10)
+        @entries = Competition::Entry.where(master: true).page(params[:page]).per(10)
       end
 
       def show
-        @entry = CompetitionEntry.find(params[:id])
+        @entry = Competition::Entry.find(params[:id])
         @user = @entry.user
         @invited_users = 
         respond_with(@entry) do |format|
@@ -19,7 +19,7 @@ module Spree
       private
 
       def model_class
-        CompetitionEntry
+        Competition::Entry
       end
     end
   end
