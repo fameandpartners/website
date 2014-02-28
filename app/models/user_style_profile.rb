@@ -145,11 +145,12 @@ class UserStyleProfile < ActiveRecord::Base
         percentage_a = Hash[profile_a.percentage]
         percentage_b = Hash[profile_b.percentage]
 
-        match = 100
+        diff = 0
         percentage_a.each do |key, value|
-          match -= (percentage_b[key] - value).abs
+          diff += (percentage_b[key] - value).abs
         end
-        match
+        diff = diff / 5 if diff > 20
+        100 - diff
       else
         default_value
       end
