@@ -15,8 +15,13 @@ class BoutiqueController < Spree::StoreController
     if boutique.competition.present?
       @celebrity_style_profile = boutique.celebrity_style_profile
       @celebrity_dresses = boutique.celebrity_dresses
-      @fb_invite = boutique.competition_fb_invite
       @user = boutique.user
+
+      @competition_share_url = main_app.new_competition_entry_url(boutique.competition_share_url_params)
+      # to make it workable on dev
+      #@competition_share_url = main_app.new_competition_entry_url(
+      #  boutique.competition_share_url_params.merge(host: 'stage.fameandpartners.com', port: '80')
+      #)
 
       render 'competition'
     else
@@ -57,8 +62,16 @@ class BoutiqueController < Spree::StoreController
       id.present? && Competition.exists?(id) ? id : nil
     end
 
-    def competition_fb_invite
-      @actor.present? ? Competition::Invite.fb_invite_from(@actor, competition) : nil
+    def competition_share_url_params
+      return {} if @actor.blank?
+      invite = Competition::Invite.fb_invite_from(@actor, competition)
+
+      url_params = {
+        invite: invite.token,
+        fb_ref: 'competition',
+        fb_source: 'message'
+      }
+      url_params
     end
 
     def user
@@ -90,17 +103,3 @@ class BoutiqueController < Spree::StoreController
     end
   end
 end
-=begin
-
-class MyBoutiqueController
-  user
-  raise PermissionDenied ? with auto catch/redirect to home
-  competition
-end
-
-  def check_style_profile_presence!
-    unless current_spree_user.style_profile.present?
-      raise CanCan::AccessDenied
-    end
-  end
-=end

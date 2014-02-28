@@ -10,6 +10,29 @@
   meta name="twitter:description" content="Win $1000 Celebrity Inspired Formal Outfit. Fame & Partners is a new online shopping destination providing celebrity-inspired looks for high school formals."
 
 javascript:
+  share_url = '#{ raw @competition_share_url }';
+  $( document ).ready(function() {
+    $('a.send-to-friends').click(function(event){
+      event.preventDefault();
+
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          FB.ui({
+            method: 'send',
+            display: 'iframe',
+            link: share_url
+          });
+        } else {
+          FB.ui({
+            method: 'send',
+            display: 'popup',
+            link: share_url
+          });
+        };
+      });
+    });
+  });
+
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
@@ -35,10 +58,7 @@ javascript:
           'GREGG
           span.pink 
             '25
-        /= link_to 'share', '#', class: 'btn mid empty border'
-        - if @fb_invite.present?
-          #fb-root
-          .fb-send.btn.mid.empty.border data-href="http://www.fameandpartners.com#{ new_competition_entry_path(invite: @fb_invite.token) }&fb_ref=competition&fb_source=message" Share
+        = link_to 'share', '#', class: 'btn mid empty border send-to-friends'
     .page-title-secondary
       h2.bordered 
         span Gregg’s favourite dresses
