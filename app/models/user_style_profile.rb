@@ -149,7 +149,7 @@ class UserStyleProfile < ActiveRecord::Base
         percentage_a.each do |key, value|
           diff += (percentage_b[key] - value).abs
         end
-        diff = diff / 5 if diff > 20
+        diff = 20 + (diff - 20) / 5 if diff > 20
         100 - diff
       else
         default_value

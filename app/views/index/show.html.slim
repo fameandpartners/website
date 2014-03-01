@@ -26,6 +26,7 @@ ruby:
       track.conversion('sign_up')
     })
 
+- if @show_competition_quiz && spree_user_signed_in?
   javascript:
     window.Quiz.autoShow = true;
     window.Quiz.welcomeMessage = "THANKS! NOW COMPLETE YOUR STYLE PROFILE";
