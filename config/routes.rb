@@ -54,7 +54,9 @@ FameAndPartners::Application.routes.draw do
 
     post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
 
-    get 'my-boutique' => 'pages#my_boutique', :as => :my_boutique
+    get 'my-boutique' => 'boutique#show', :as => :my_boutique
+    get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
+    get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
@@ -161,12 +163,23 @@ FameAndPartners::Application.routes.draw do
 
     root :to => 'index#show'
 
-    resource :competition, only: [:show, :create] do
-      post 'enter', on: :member, action: :create
-      get 'share(/:user_id)', on: :member, action: 'share', as: 'share'
-      post 'invite', on: :member
-      get 'stylequiz', on: :member
+#    resource :competition, only: [:show, :create] do
+#      post 'enter', on: :member, action: :create
+#      get 'share(/:user_id)', on: :member, action: 'share', as: 'share'
+#      post 'invite', on: :member
+#      get 'stylequiz', on: :member
+#    end
+
+    # competitions page
+    scope "competition/:competition_id" do
+      resource :entry, only: [:new, :create], controller: 'competition/entries'
     end
+    # shortcat to auto enter logged in user to competition
+    get "/competition/:competition_id/enter" => 'competition/entries#create', as: :enter_competition
+    get "/gregg-sulkin" => "competition/entries#new",
+      defaults: { competition_id: 'gregg-sulkin' }, as: :new_competition_entry
+    post "/gregg-sulkin" => "competition/entries#create",
+      defaults: { competition_id: 'gregg-sulkin' }, as: :competition_entry
 
     resource :quiz, :only => [:show] do
       resources :questions, :only => [:index]
@@ -343,7 +356,7 @@ FameAndPartners::Application.routes.draw do
 
     # seo routes like *COLOR*-Dress
     get "(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses
-  
+
     resources :site_versions, only: [:show]
   end
 

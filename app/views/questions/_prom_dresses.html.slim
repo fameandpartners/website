@@ -5,8 +5,8 @@ h1
   span CHOOSE AS MANY AS YOU LIKE
 .photos-wrapper
   .scrollable
-    .photos.items-box
-      - question.answers.shuffle.each do |answer|
+    .photos.randomize.items-box
+      - question.answers.each do |answer|
         .item.unloaded
           label
             = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code

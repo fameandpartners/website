@@ -23,15 +23,17 @@ namespace :images do
         next
       end
 
-      master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(sku) = ?', matches[:sku].downcase).first
+      sku = matches[:sku].downcase.strip
+
+      master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
 
       product = master.try(:product)
 
       unless product.present? # product with given sku can not be find
-        puts "Product with given sku \"#{matches[:sku]}\" can not be find"
+        puts "Product with given sku \"#{sku}\" can not be find"
         next
       else
-        puts "Working on product ##{matches[:sku]}"
+        puts "Working on product ##{sku}"
       end
 
       Dir["#{product_directory_path}/*"].each do |content_path|
@@ -96,12 +98,14 @@ namespace :images do
             file_data = Hash[file_paths.map{|file_path| [file_path, file_path.rpartition('/').last.strip] }]
 
             case content_name
-              when /customisations?/i then
+              when /customisations?|customizations?/i then
                 file_data.each do |file_path, file_name|
-                  matches = /^(?<position>\d+)\.\S+/.match(file_name)
+                  matches = /^(?<position>\d+)\S+/.match(file_name)
+
                   position = matches.present? ? matches[:position] : nil
+
                   unless position.present?
-                    puts "  File \"#{file_name}\" should have digital name, which contain position of customization for \"#{product.name}\""
+                    puts "  File \"#{file_name}\" should have name started with digit, which contain position of customization for \"#{product.name}\""
                     next
                   end
 
@@ -119,79 +123,79 @@ namespace :images do
                   end
                 end
               when /moodboard/i then
-                product.moodboard_items.moodboard.where('created_at < ?', 5.hour.ago).destroy_all
-
-                file_data.each do |file_path, file_name|
-                  matches = /^(?<position>\d+)\.\S+/.match(file_name)
-                  position = matches.present? ? matches[:position] : nil
-                  moodboard = product.moodboard_items.moodboard.build do |object|
-                    object.image = File.open(file_path)
-                    object.position = position
-                  end
-                  if moodboard.save
-                    puts "  File \"#{file_name}\" was loaded as Moodboard"
-                  end
-                end
+                #product.moodboard_items.moodboard.where('created_at < ?', 5.hour.ago).destroy_all
+                #
+                #file_data.each do |file_path, file_name|
+                #  matches = /^(?<position>\d+)\.\S+/.match(file_name)
+                #  position = matches.present? ? matches[:position] : nil
+                #  moodboard = product.moodboard_items.moodboard.build do |object|
+                #    object.image = File.open(file_path)
+                #    object.position = position
+                #  end
+                #  if moodboard.save
+                #    puts "  File \"#{file_name}\" was loaded as Moodboard"
+                #  end
+                #end
               when /perfume/i then
-                file_data.each do |file_path, file_name|
-                  parfume = product.moodboard_items.parfume.first
-
-                  unless parfume.present?
-                    puts "  Parfume was not found for product \"#{product.name}\""
-                    next
-                  end
-
-                  parfume.image = File.open(file_path)
-                  if parfume.save
-                    puts "  File \"#{file_name}\" was loaded as Parfume (Moodboard)"
-                  end
-                end
+                #file_data.each do |file_path, file_name|
+                #  parfume = product.moodboard_items.parfume.first
+                #
+                #  unless parfume.present?
+                #    puts "  Parfume was not found for product \"#{product.name}\""
+                #    next
+                #  end
+                #
+                #  parfume.image = File.open(file_path)
+                #  if parfume.save
+                #    puts "  File \"#{file_name}\" was loaded as Parfume (Moodboard)"
+                #  end
+                #end
               when /song/i then
-                file_data.each do |file_path, file_name|
-                  song = product.moodboard_items.song.first
-
-                  unless song.present?
-                    puts "  Song was not found for product \"#{product.name}\""
-                    next
-                  end
-
-                  song.image = File.open(file_path)
-                  if song.save
-                    puts "  File \"#{file_name}\" was loaded as Song (Moodboard)"
-                  end
-                end
+                #file_data.each do |file_path, file_name|
+                #  song = product.moodboard_items.song.first
+                #
+                #  unless song.present?
+                #    puts "  Song was not found for product \"#{product.name}\""
+                #    next
+                #  end
+                #
+                #  song.image = File.open(file_path)
+                #  if song.save
+                #    puts "  File \"#{file_name}\" was loaded as Song (Moodboard)"
+                #  end
+                #end
               when /styleit/i then
-                file_data.each do |file_path, file_name|
-                  matches = /^(?<style>\S+)(?<position>\d+)\.\S+/.match(file_name)
-
-                  if matches.blank? || matches[:style].blank? || matches[:position].blank?
-                    puts "File \"#{file_name}\" have invalid format of name"
-                    next
-                  end
-
-                  if matches[:style].downcase == 'boho'
-                    style = Style.find_by_name('bohemian')
-                  else
-                    style = Style.find_by_name(matches[:style].downcase)
-                  end
-
-                  if style.blank?
-                    puts "Style with name \"#{matches[:style].downcase}\" was not found"
-                    next
-                  end
-
-                  accessory = product.accessories.where(style_id: style.id, position: matches[:position]).first
-
-                  if accessory.blank?
-                    puts "Accessory for style \"#{style.name}\" with position \"#{matches[:position]}\" was not found"
-                    next
-                  end
-
-                  accessory.image = File.open(file_path)
-                  if accessory.save
-                    puts "File \"#{file_name}\" was loaded for Accessory in product \"#{product.name}\""
-                  end
-                end
+                #file_data.each do |file_path, file_name|
+                #  matches = /^(?<style>\S+)(?<position>\d+)\.\S+/.match(file_name)
+                #
+                #  if matches.blank? || matches[:style].blank? || matches[:position].blank?
+                #    puts "File \"#{file_name}\" have invalid format of name"
+                #    next
+                #  end
+                #
+                #  if matches[:style].downcase == 'boho'
+                #    style = Style.find_by_name('bohemian')
+                #  else
+                #    style = Style.find_by_name(matches[:style].downcase)
+                #  end
+                #
+                #  if style.blank?
+                #    puts "Style with name \"#{matches[:style].downcase}\" was not found"
+                #    next
+                #  end
+                #
+                #  accessory = product.accessories.where(style_id: style.id, position: matches[:position]).first
+                #
+                #  if accessory.blank?
+                #    puts "Accessory for style \"#{style.name}\" with position \"#{matches[:position]}\" was not found"
+                #    next
+                #  end
+                #
+                #  accessory.image = File.open(file_path)
+                #  if accessory.save
+                #    puts "File \"#{file_name}\" was loaded for Accessory in product \"#{product.name}\""
+                #  end
+                #end
               else
                 puts "Directory #{content_name} has invalid format of name"
             end

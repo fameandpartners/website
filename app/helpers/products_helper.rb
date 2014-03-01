@@ -241,7 +241,7 @@ module ProductsHelper
   end
 
   def color_options_for_select(color_names)
-    color_option_values = Spree::Variant.color_option_type.option_values.where(name: color_names)
+    color_option_values = Spree::OptionValue.colors.where(name: color_names)
     color_options_for_select_from_options_values(color_option_values)
   end
 
@@ -250,7 +250,7 @@ module ProductsHelper
       [
         option_value.presentation, 
         option_value.name,
-        class: "color #{option_value.name}", style: "background-color: #{option_value.value}"
+        class: "color #{option_value.name}"
       ]
     end, selected)
   end

@@ -408,11 +408,13 @@ module Products
     private
 
     def create_or_update_product(args)
-      sku = args[:sku].to_s.downcase
+      sku = args[:sku].to_s.downcase.strip
 
       raise 'SKU should be present!' unless sku.present?
 
-      product = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(sku) = ?', sku).first.try(:product)
+      master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
+
+      product = master.try(:product)
 
       if product.blank?
         product = Spree::Product.new(sku: sku, featured: false, on_demand: true)
@@ -539,6 +541,7 @@ module Products
 
         if customization.blank?
           customization = product.customisation_values.build
+          customization.products << product
         end
 
         customization.update_attributes(attrs, without_protection: true)

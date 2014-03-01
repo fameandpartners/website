@@ -1,5 +1,9 @@
-- dynamic_colors.each do |option_value|
-  css:
-    body .color.#{option_value.name} {
-      background-color: #{option_value.value};
-    }
+ruby:
+  black = Spree::OptionValue.colors.find_by_name('black')
+
+css:
+  #{([black] + black.similars).map{ |color| "body .color.#{color.name}" }.join(",\n")} {
+    color: #fff;
+  }
+
+  #{dynamic_colors.map{ |color| "body .color.#{color.name} { background-color: #{color.value}; }"}.join("\n")}

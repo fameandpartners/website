@@ -1,0 +1,71 @@
+- content_for :head do
+  meta property="og:site_name" content="Fame & Partners - Beautiful dresses crafted from red carpet looks"
+  meta property="og:image" content="#{absolute_image_url(image_path('image-landing.jpg'), 'http')}"
+  meta property="og:locale" content="en_US"
+  meta property="og:title" content="Win a $1000 Celebrity Inspired Formal Outfit"
+  meta property="og:type" content="website"
+  meta property="og:description" content="Win a $1000 Celebrity Inspired Formal Outfit. Fame & Partners is a new online shopping destination providing celebrity-inspired looks for high school formals."
+  meta name="twitter:card" content="Win $1000 Celebrity Inspired Formal Outfit"
+  meta name="twitter:title" content="Fame & Partners"
+  meta name="twitter:description" content="Win $1000 Celebrity Inspired Formal Outfit. Fame & Partners is a new online shopping destination providing celebrity-inspired looks for high school formals."
+
+/! Offer Conversion: Fame & Partners CPC
+iframe#tracking-iframe src="http://tracking.jackmedia.com.au/SL19v" scrolling="no" frameborder="0" width="1" height="1"
+/! End Offer Conversion
+
+/ .top-logo
+/   = link_to root_path do
+/     = image_tag 'logo-white.png', width: 215, height: 15, alt: ''
+
+.competitions-landing = image_tag '_competition-landing.jpg', alt: ''
+
+.signup-form.form-global
+  / .signup-title
+    = image_tag 'title-landing.png', width: 646, height: 61, alt: 'Enter using facebook or your email'
+  .signup-fields
+    = form_tag competition_entry_path, class: 'form' do
+      = hidden_field_tag :invite, params[:invite]
+      = hidden_field_tag :member, params[:member]
+
+      - if @user && @user.errors.any?
+        #errorExplanation.errorExplanation
+          ul
+            - @user.errors.full_messages.each do |error_message|
+              li = error_message
+
+      = link_to fb_auth_path(competition: @entrant.competition_slug, invite: params[:invite]), class: 'facebook-button' do
+        span.icon
+          span.icon-facebook2
+        span Sign up with facebook
+      .or
+        span or
+      .form-fields
+        - if @user.present? && @user.persisted?
+          .input
+            = text_field_tag :first_name, @user.first_name, placeholder: 'First Name', disabled: true
+          .input
+            = text_field_tag :last_name, @user.last_name, placeholder: 'Last Name', disabled: true
+        - else
+          .input
+            = text_field_tag :first_name, @user.try(:first_name), placeholder: 'First Name', required: false
+          .input
+            = text_field_tag :last_name, @user.try(:last_name), placeholder: 'Last Name', required: false
+          .input
+            = email_field_tag :email, @user.try(:email), placeholder: 'mail@example.com', required: false
+      .submit
+        input.btn.pink.shadow type="submit" value="Enter now"
+    .terms-line
+      ' Clicking ENTER NOW means you agree to the competition 
+      = link_to 'Terms & Conditions', compterms_path
+
+.competitions-landing-section
+  h3 SUPPORTED BY
+  .row
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+.competitions-landing-section
+  h3 PRIZES  

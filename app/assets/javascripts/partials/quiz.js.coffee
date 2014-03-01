@@ -1,9 +1,18 @@
 window.Quiz = {
+  autoShow: false
+  welcomeMessage: null
+  redirectPath: null
+
   show: () ->
     $('.quiz-box').show()
+    $('.quiz-box-inner').html('')
     Quiz.updatePosition()
     # $('body').css 'overflow', 'hidden'
-    $.getScript '/quiz'
+    $.getScript('/quiz').
+      success(() ->
+        # execute 'after render'. can be refactor to list, for external api
+        Quiz.showWelcomeMessage()
+      )
     $('.quiz-overlay').one 'click', Quiz.hide
     $('.quiz-box .close-quiz').one 'click', Quiz.hide
 
@@ -252,6 +261,18 @@ window.Quiz = {
 
       if $scrollable.data('jsp')
         $scrollable.data('jsp').scrollByY(100)
+
+  showWelcomeMessage: () ->
+    return if _.isEmpty(window.Quiz.welcomeMessage)
+    $message_container = $('.quiz-box-inner .flash.message')
+    $message_container.html(window.Quiz.welcomeMessage).removeClass('hide').show()
+    _.delay(Quiz.hideWelcomeMessage, 10000)
+
+  hideWelcomeMessage: () ->
+    $message_container = $('.quiz-box-inner .flash.message')
+    $message_container.fadeOut(() ->
+      $message_container.addClass('hide').hide()
+    )
 }
 
 $ ->
@@ -260,5 +281,5 @@ $ ->
     event.stopPropagation()
     Quiz.show()
 
-  if location.href.match(/[\?\&]osq\=1/)
+  if location.href.match(/[\?\&]osq\=1/) || window.Quiz.autoShow
     Quiz.show()

@@ -1,4 +1,6 @@
-class CompetitionInvitation < ActiveRecord::Base
+class Competition::Invite < ActiveRecord::Base
+  self.table_name = "competition_invitations"
+
   belongs_to :user, class_name: 'Spree::User'
 
   before_create :generate_token
@@ -7,10 +9,12 @@ class CompetitionInvitation < ActiveRecord::Base
 
   attr_accessible :email, :name, :invitation_type
 
+  scope :for_competition, lambda {|name| where(competition_name: name)}
+
   def generate_token
     self.token = loop do
       random_token = SecureRandom.urlsafe_base64(nil, false)
-      break random_token unless CompetitionInvitation.where(token: random_token).exists?
+      break random_token unless Competition::Invite.where(token: random_token).exists?
     end
   end
 
@@ -30,8 +34,10 @@ class CompetitionInvitation < ActiveRecord::Base
       end
     end
 
-    def fb_invitation_from(user)
-      user.invitations.where(invitation_type: 'broadcast').first_or_create
+    def fb_invite_from(user, competition_name = nil)
+      scope = user.competition_invites.where(invitation_type: 'broadcast')
+      scope = scope.for_competition(competition_name) if competition_name.present?
+      scope.first_or_create
     end
   end
 end

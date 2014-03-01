@@ -13,14 +13,14 @@
 iframe#tracking-iframe src="http://tracking.jackmedia.com.au/SL19v" scrolling="no" frameborder="0" width="1" height="1"
 /! End Offer Conversion
 
-.top-logo
-  = link_to root_path do
-    = image_tag 'logo-white.png', width: 215, height: 15, alt: ''
+/ .top-logo
+/   = link_to root_path do
+/     = image_tag 'logo-white.png', width: 215, height: 15, alt: ''
 
-.image-container = image_tag 'image-landing.jpg', width: 1160, height: 1196, alt: 'Win a celebrity inspired formal outfit'
+.competitions-landing = image_tag '_competition-landing.jpg', alt: ''
 
-.signup-form.aligncenter
-  .signup-title
+.signup-form.form-global
+  / .signup-title
     = image_tag 'title-landing.png', width: 646, height: 61, alt: 'Enter using facebook or your email'
   .signup-fields
     = form_tag competition_path, class: 'form' do
@@ -33,11 +33,13 @@ iframe#tracking-iframe src="http://tracking.jackmedia.com.au/SL19v" scrolling="n
             - @user.errors.full_messages.each do |error_message|
               li = error_message
 
-      = link_to 'Sign up with facebook',
-        fb_auth_path(competition: true, invite: params[:invite]), class: 'facebook-signup fleft'
-      .or.fleft
+      = link_to fb_auth_path(competition: true, invite: params[:invite]), class: 'facebook-button' do
+        span.icon
+          span.icon-facebook2
+        span Sign up with facebook
+      .or
         span or
-      .form-fields.fleft
+      .form-fields
         - if (user = try_spree_current_user).present?
           .input
             = text_field_tag :first_name, user.first_name, placeholder: 'First Name', disabled: true
@@ -57,8 +59,20 @@ iframe#tracking-iframe src="http://tracking.jackmedia.com.au/SL19v" scrolling="n
             = text_field_tag :last_name, @user.try(:last_name), placeholder: 'Last Name', required: true
           .input
             = email_field_tag :email, @user.try(:email), placeholder: 'mail@example.com', required: true
-      .submit.fleft
-        input type="submit" value="Enter now"
+      .submit
+        input.btn.pink.shadow type="submit" value="Enter now"
     .terms-line
       ' Clicking ENTER NOW means you agree to the competition 
       = link_to 'Terms & Conditions', compterms_path
+
+.competitions-landing-section
+  h3 SUPPORTED BY
+  .row
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+    .grid-2 = image_tag 'http://placehold.it/160x40'
+.competitions-landing-section
+  h3 PRIZES  

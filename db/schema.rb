@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140224210602) do
+ActiveRecord::Schema.define(:version => 20140227101550) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -156,14 +156,12 @@ ActiveRecord::Schema.define(:version => 20140224210602) do
   add_index "blog_posts", ["user_id"], :name => "index_blog_posts_on_user_id"
 
   create_table "blog_preferences", :force => true do |t|
-    t.string   "key"
     t.text     "value"
+    t.string   "key"
     t.string   "value_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "blog_preferences", ["key"], :name => "index_blog_preferences_on_key"
 
   create_table "blog_promo_banners", :force => true do |t|
     t.string   "url"
@@ -242,8 +240,6 @@ ActiveRecord::Schema.define(:version => 20140224210602) do
     t.datetime "updated_at",                           :null => false
   end
 
-  add_index "celebrity_moodboard_items", ["side"], :name => "index_celebrity_moodboard_items_on_side"
-
   create_table "celebrity_product_accessories", :force => true do |t|
     t.integer  "celebrity_id"
     t.integer  "spree_product_id"
@@ -279,17 +275,21 @@ ActiveRecord::Schema.define(:version => 20140224210602) do
     t.integer  "user_id"
     t.integer  "inviter_id"
     t.integer  "invitation_id"
-    t.boolean  "master",        :default => false
+    t.boolean  "master",           :default => false
     t.datetime "created_at"
+    t.string   "competition_name"
+    t.integer  "competition_id"
   end
 
   create_table "competition_invitations", :force => true do |t|
     t.integer  "user_id"
-    t.string   "token",           :limit => 50
+    t.string   "token",            :limit => 50
     t.string   "email"
     t.string   "name"
-    t.string   "invitation_type", :limit => 50
+    t.string   "invitation_type",  :limit => 50
     t.datetime "created_at"
+    t.string   "competition_name"
+    t.integer  "competition_id"
   end
 
   create_table "custom_dress_images", :force => true do |t|
@@ -341,6 +341,17 @@ ActiveRecord::Schema.define(:version => 20140224210602) do
   end
 
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"

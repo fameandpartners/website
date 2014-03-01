@@ -2,8 +2,8 @@ Spree::User.class_eval do
   has_one :profile_image, as: :viewable, dependent: :destroy, class_name: "Spree::Image"
   has_many :wishlist_items, dependent: :destroy, class_name: "WishlistItem", foreign_key: :spree_user_id
 
-  has_many :entries, class_name: 'CompetitionEntry'
-  has_many :invitations, class_name: 'CompetitionInvitation'
+  has_many :competition_entries, class_name: 'Competition::Entry'
+  has_many :competition_invites, class_name: 'Competition::Invite'
 
   has_many :reservations, class_name: 'ProductReservation', foreign_key: :user_id
 
@@ -48,10 +48,6 @@ Spree::User.class_eval do
     else
       img.attachment.url(style)
     end
-  end
-
-  def competition_entry
-    self.entries.where(master: true).first
   end
 
   def reservation_for(product)

@@ -1,59 +1,60 @@
-ruby:
-  images = @product.images_json
-  default_color = nil
-  default_images = images.select{|image| image[:color].blank? }
-  if default_images.blank? and images.present?
-    default_color = images.first[:color]
-    default_images = images.select{|image| image[:color] == default_color}
-  end
+- cache [:pages, :product, @product.id], expires_in: configatron.cache.expire.long do
+  ruby:
+    images = @product.images_json
+    default_color = nil
+    default_images = images.select{|image| image[:color].blank? }
+    if default_images.blank? and images.present?
+      default_color = images.first[:color]
+      default_images = images.select{|image| image[:color] == default_color}
+    end
 
-  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
-  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+    colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+    sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
 
-  images_limit = @product.video_url.present? ? 6 : 7
-  if images.present?
-    product_image_url = absolute_image_url(images.first[:large], 'http')
-  else
-    product_image_url = get_absolute_image_url("/assets/noimage/product.png", 'http')
-  end
-  share_url = collection_product_url(@product)
+    images_limit = @product.video_url.present? ? 6 : 7
+    if images.present?
+      product_image_url = absolute_image_url(images.first[:large], 'http')
+    else
+      product_image_url = get_absolute_image_url("/assets/noimage/product.png", 'http')
+    end
+    share_url = collection_product_url(@product)
 
-  moodboard_pics = @product.moodboard_items.active.moodboard.limit(5)
+    moodboard_pics = @product.moodboard_items.active.moodboard.limit(5)
 
-javascript:
-  window.product_variants = #{{ @product_variants.to_json }};
-  window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
-  window.productImagesData = #{{images.to_json}};
-  window.product_default_color = #{{ default_color.to_json }};
-  window.product_images_limit = #{{ images_limit}};
+  javascript:
+    window.product_variants = #{{ @product_variants.to_json }};
+    window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
+    window.productImagesData = #{{images.to_json}};
+    window.product_default_color = #{{ default_color.to_json }};
+    window.product_images_limit = #{{ images_limit}};
 
-css:
-  .sc-player { display: none; }
+  css:
+    .sc-player { display: none; }
 
-= render 'product_meta', product: @product
+  = render 'product_meta', product: @product
 
 
 
-// PRODUCT EXPLORE ---->
-.product-page
-  .row
-    .grid-8
-      = render 'spree/products/breadcrumbs', product: @product, active: :explore
-      .category-catalog
-        .row
-          - if default_images.present?
-            - default_images[0...images_limit].each do |image|
-              .grid-6.product-image
-                .picture.product
-                  = image_tag(image[:large], title: @product.name)
-                  .popup
-                    .fright
-                      a href='#' data-action='show-large-image' data-image='#{ image[:xlarge] }'
-                        span.icon-expand
+  // PRODUCT EXPLORE ---->
+  .product-page
+    .row
+      .grid-8
+        = render 'spree/products/breadcrumbs', product: @product, active: :explore
+        .category-catalog
           .row
-            - if @product.video_url.present?
-              = render 'has_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
-            - else
-              = render 'no_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
-    .grid-4
-      = render 'product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }
+            - if default_images.present?
+              - default_images[0...images_limit].each do |image|
+                .grid-6.product-image
+                  .picture.product
+                    = image_tag(image[:large], title: @product.name)
+                    .popup
+                      .fright
+                        a href='#' data-action='show-large-image' data-image='#{ image[:xlarge] }'
+                          span.icon-expand
+            .row
+              - if @product.video_url.present?
+                = render 'has_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
+              - else
+                = render 'no_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
+      .grid-4
+        = render 'product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }

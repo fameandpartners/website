@@ -14,7 +14,7 @@ table class="index" id="listing_users" data-hook='admin_competition_entries'
       td = entry.user.full_name
       td = entry.user.email
       td = entry.created_at.to_s(:db)
-      td = entry.user.entries.count
+      td = entry.user.competition_entries.count
     tr data-details=(entry.id) style="display: none;"
       td colspan="4"
         = image_tag 'spinner.gif'
