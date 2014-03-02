@@ -321,6 +321,15 @@
       height: 425px;
       overflow: hidden;
       position: relative;
+      .loader {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 425px;
+        background: url('_quiz/loader.gif') no-repeat center 150px rgba(255, 255, 255, 0.8);
+        display: none;
+      }
       .photos-nav {
         position: absolute;
         left: 0;

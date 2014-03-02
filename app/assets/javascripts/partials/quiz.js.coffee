@@ -171,13 +171,17 @@ window.Quiz = {
 
   applyMasonryForStep: (step) ->
     $step = $(step)
-
+    $step.find('.loader').show()
     Quiz.applyScrollForStep($step)
 
-    $step.find('.photos').masonry
+    $quizPhotos = $step.find('.photos')
+
+    $quizPhotos.masonry
       gutter: 10
       columnWidth: '.item'
       itemSelector: '.item.loaded'
+
+    
 
     $step.find('.photos img').on 'load', () ->
       $image = $(this)
@@ -192,7 +196,7 @@ window.Quiz = {
           'left': ''
 
         $step.find('.photos').masonry 'appended', $unappended
-
+        $step.find('.loader').hide()
         $unappended.addClass('appended')
 
         Quiz.applyScrollForStep($step)
