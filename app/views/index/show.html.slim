@@ -26,24 +26,25 @@ ruby:
       track.conversion('sign_up')
     })
 
+- if @show_competition_quiz && spree_user_signed_in?
   javascript:
     window.Quiz.autoShow = true;
     window.Quiz.welcomeMessage = "THANKS! NOW COMPLETE YOUR STYLE PROFILE";
     window.Quiz.redirectUrl = "#{ redirectUrl }";
 
-  .grid-container
-    .row
-      .grid-8
-        .picture-large 
-          = link_to collection_path do
-            = image_tag 'homepage/new/hero.jpg'
-      .grid-4
-        .picture-small 
-          = link_to collection_path(cf: 'banner_customize'), title: 'Free Customization for our launch' do
-            = image_tag 'homepage/new/customize.jpg', alt: 'Free Customization for our launch'
-        .picture-small 
-          = link_to collection_path(:edits => "monochrome") do
-            = image_tag 'homepage/new/small-monochrome.gif', alt: 'Monochrome style prom dresses'    
+.grid-container
+  .row
+    .grid-8
+      .picture-large 
+        = link_to collection_path do
+          = image_tag 'homepage/new/hero.jpg'
+    .grid-4
+      .picture-small 
+        = link_to collection_path(cf: 'banner_customize'), title: 'Free Customization for our launch' do
+          = image_tag 'homepage/new/customize.jpg', alt: 'Free Customization for our launch'
+      .picture-small 
+        = link_to collection_path(:edits => "monochrome") do
+          = image_tag 'homepage/new/small-monochrome.gif', alt: 'Monochrome style prom dresses'    
 
 .how-it-works
   .arrows-line-horizontal

@@ -16,4 +16,14 @@ Spree::OptionValue.class_eval do
 
   attr_accessible :image, :value
   validates :value, format: /^#([0-9a-f]{3}|[0-9a-f]{6})$/i, allow_blank: true
+
+  class << self
+    def colors
+      if (option_type = Spree::OptionType.color).present?
+        where(option_type_id: option_type.id)
+      else
+        []
+      end
+    end
+  end
 end
