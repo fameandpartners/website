@@ -46,7 +46,9 @@ class MarketingMailer < ActionMailer::Base
       mail(
         to: @user.email,
         subject: t('emails.subjects.marketing.style_quiz_completed')
-      )
+      ) do |format|
+        format.html{ render layout: false }
+      end
     end
   end
 
