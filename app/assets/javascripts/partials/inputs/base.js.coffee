@@ -40,11 +40,7 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
     @trigger('change')
 
   getValue: () ->
-    value = @container.find("#{@buttons_selector}.selected:first").data('size')
-    if value
-      return value
-    else
-      return null
+    @container.find("#{@buttons_selector}.selected:first").data('size')
 
   setValue: (newValue) ->
     selectedButton = @container.find("#{@buttons_selector}[data-size='#{ newValue }']")

@@ -17,7 +17,7 @@ def add_product_size_option(force = false)
 
   option_type.option_values.delete_all if force
 
-  option_values = Array.new(5){|i| (8 + i * 2).to_s}
+  option_values = Array.new(7){|i| (i * 2).to_s}
   build_option_values(option_type, option_values)
 
   option_type
