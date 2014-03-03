@@ -183,9 +183,15 @@
 
 .product-page {
 	margin: 10px 0;
+	
 	.purchase-instructions{
-		margin: 20px 0 0;
-		font-family: $fontThree;
+		margin: 28px 0 0 0;
+		font-size: 14px;
+		font-family: $fontTwo;
+		font-weight: 100;
+		text-transform: none;
+		font-style: italic;
+		width: 80%;
 	}
 	.product-info { 
 		padding: 28px 0 0 10px;

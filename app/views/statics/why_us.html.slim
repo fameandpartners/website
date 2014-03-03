@@ -3,13 +3,15 @@
   p 
     ' Fame & Partners is the destination for crafting the most current, coolest and individual look for your prom and special events.
     br
-    ' When you shop with us, you will get a prom dress and total look that is uniquely yours. Guaranteed.
+    ' When you shop with us, you will get a dress and total look that is uniquely yours. Guaranteed.
   .row
     .grid-6.pink
       a name="twin"
       .icon.icon-twin
       h2 Twin Alert
-      p Our Twin Alert feature means that no girl attending the same event can purchase the same dress with the same customizations, in the same colour. This guarantees that no one will be wearing the same dress or look as you. #{link_to 'Register Now', spree_login_path}.
+      p Our Twin Alert feature means that no girl attending the same event can purchase the same dress with the same customizations, in the same colour. This guarantees that no one will be wearing the same dress or look as you.
+      p &nbsp;
+      p= link_to 'Register Now', spree_login_path, class: "btn empty border small"
       .arrows-line-horizontal
       .arrows-line-vertical
 
@@ -32,7 +34,7 @@
       a name="shipping"
       .icon.icon-shipping
       h2 Free Shipping
-      p Standard shipping is FREE within Australia for items over $49. View shipping delivery times #{link_to 'here', terms_path}.
+      p Standard Shipping is FREE within Australia and United States for items over $49. View shipping delivery times #{link_to 'here', terms_path}.
       .arrows-line-horizontal
 
     .grid-6.pink

@@ -37,6 +37,7 @@
           .title styling notes
           .text
             p = product.property('style_notes')
+            p= link_to "Click for more styling tips", personalization_style_product_path(permalink: @product.permalink) 
       li
         .title color and material
         .text
@@ -50,7 +51,7 @@
         .title returns
         .text
           p What is your returns policy?
-          p We are sorry to learn you are unhappy with your dress. We accept returns under the following circumstances: 
+          p We accept returns under the following circumstances: 
           ul
             li Full Price Items: 30 days from date of shipment
             li Sale Items- Up to 30% off: 14 days from date of shipment  
