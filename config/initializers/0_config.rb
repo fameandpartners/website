@@ -13,7 +13,7 @@ configatron.aws.host = "d1sd72h9dq237j.cloudfront.net"
 
 configatron.links.twitter = 'https://twitter.com/fameandpartners'
 configatron.links.facebook = 'http://www.facebook.com/FameandPartners'
-configatron.links.yputube = 'http://www.youtube.com/user/fameandpartners'
+configatron.links.youtube = 'http://www.youtube.com/user/fameandpartners'
 configatron.links.google = 'https://plus.google.com/b/117433562249244184743/117433562249244184743/about/p/pub'
 configatron.links.pinterest = 'http://pinterest.com/fameandpartners/'
 configatron.links.rss = ''
