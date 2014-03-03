@@ -1,5 +1,5 @@
 .product-info
-  h6 = link_to range_taxon_name_for(product), collection_product_path(product)
+  h6 = breadcrumbs_for(product)
   h1.product-title
     = product.name
     span.price = price_for_product(product)

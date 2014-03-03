@@ -254,4 +254,24 @@ module ProductsHelper
       ]
     end, selected)
   end
+
+  def is_directed_from?(path)
+    Regexp.new(path, true) =~ request.env['HTTP_REFERER']
+  end
+
+  def breadcrumbs_for(product)
+    items = []
+
+    if is_directed_from?(my_boutique_path)
+      items << link_to('My Boutique', my_boutique_path)
+    else
+      items << link_to('Collection', collection_path)
+    end
+
+    if (taxon = range_taxon_for(product)).present?
+      items << link_to(taxon.name, "/#{taxon.permalink}")
+    end
+
+    items.join(' / ').html_safe
+  end
 end
