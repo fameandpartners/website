@@ -64,7 +64,11 @@ end
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 
 # spree extensions for authentication
-gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '1-3-stable'
+gem 'spree_auth_devise',
+  :github => 'spree/spree_auth_devise',
+  :branch => '1-3-stable',
+  :ref => 'c4466de3748618971dc401e6e30c0d87f2b9c143'
+
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 
 # spree extensions for payments

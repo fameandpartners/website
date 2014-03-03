@@ -36,6 +36,7 @@ window.Quiz = {
     $('.quiz-box').hide()
     $('body').css 'overflow', 'auto'
     $(window).off 'resize', Quiz.updatePosition
+    $.cookie('quiz_shown', 'true', { expires: 3650, path: '/' })
 
   updatePosition: () ->
     $container = $('.quiz-wrapper-box')
