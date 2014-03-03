@@ -1,4 +1,4 @@
-- cache [:pages, :product, @product.id], expires_in: configatron.cache.expire.long do
+- cache [:pages, ( is_directed_from?(my_boutique_path) ? :boutique : :collection ), :product, @product.id], expires_in: configatron.cache.expire.long do
   ruby:
     images = @product.images_json
     default_color = nil
