@@ -108,16 +108,17 @@
   .nav-user
     nav.fleft
       ul
-        li = link_to 'CREATE YOUR PROM LOOK NOW', '#', class: 'btn show-style-quiz pink'
+        li = link_to 'CREATE YOUR FORMAL LOOK NOW', '#', class: 'btn show-style-quiz pink'
         li 
           = link_to collection_path, class: 'btn' do
-            span PROM DRESSES
+            span Dress Collection
             span.icon-dropdown-down
           .dropdown
             ul
-              li = link_to 'All Prom Dresses', collection_path
-              li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Prom Dresses'
-              li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Prom Dresses'
+              li = link_to 'All Dresses', collection_path
+              li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Dresses'
+              li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses'
+              li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses'
         li = link_to 'ABOUT US', about_us_path, class: 'btn'
     
     nav.fright
