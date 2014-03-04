@@ -41,7 +41,8 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
 
   getValue: () ->
     value = @container.find("#{@buttons_selector}.selected:first").data('size')
-    if value
+
+    if !_.isUndefined(value)
       return value
     else
       return null

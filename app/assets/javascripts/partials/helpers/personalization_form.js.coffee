@@ -66,9 +66,9 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
 
       window.helpers.hideErrors(@container.find('.product-info'))
 
-      if !@selected.size && _.isEmpty(@selected.color)
+      if !_.isNumber(@selected.size) && _.isEmpty(@selected.color)
         @errorMessage = 'Please, select size and color'
-      else if !@selected.size
+      else if !_.isNumber(@selected.size)
         @errorMessage = 'Please, select size'
       else if _.isEmpty(@selected.color)
         @errorMessage = 'Please, select color'
