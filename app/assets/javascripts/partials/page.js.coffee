@@ -52,6 +52,7 @@ window.page = {
       else
         hide(scope.filter('.opened').not(target))
         show(target)
+        track.openedProductInfo(window.product_analytics_label)
     )
 
   enableWishlistLinks: (links) ->
@@ -73,7 +74,7 @@ window.page = {
     links.on('click', (e) ->
       player = $(e.currentTarget).closest('.picture').find('.sc-player')
       player.find('.sc-controls a.sc-pause').click()
-
+      track.playedSong(window.product_analytics_label)
       return false
     )
 

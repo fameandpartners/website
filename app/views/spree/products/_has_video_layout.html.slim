@@ -49,7 +49,7 @@ ruby:
                   span.icon-play
                   span.icon-pause
       - @product.moodboard_items.active.parfume.each do |parfume|
-        .grid-6
+        .grid-6.perfume
           .picture
             = link_to parfume.source, target: 'blank' do
               = image_tag parfume.image.url
