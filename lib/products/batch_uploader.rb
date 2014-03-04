@@ -385,7 +385,7 @@ module Products
 
         begin
           product = create_or_update_product(args.merge!(
-            sizes: %W{4 6 8 10 12 14 16}
+            sizes: %W{0 2 4 6 8 10 12}
           ))
 
           add_product_properties(product, args[:properties].symbolize_keys)
