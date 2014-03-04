@@ -22,4 +22,3 @@ $(".personalization_products.show").ready ->
     image.attr('src', image_data.large) if image_data
     return
   )
-

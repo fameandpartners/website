@@ -112,4 +112,22 @@ window.track = {
 
   inviteToPaySent: () ->
     track.event('InviteToPay', 'Sent')
+
+  playedSong: (label) ->
+    track.event('Product', 'PlaySong', label)
+
+  followedPerfumeLink: (label) ->
+    track.event('Product', 'PerfumeClicked', label)
+
+  openedProductInfo: (label) ->
+    track.event('Product', 'ProductInfoOpened', label)
+
+  selectedCustomisation: (label) ->
+    track.event('Product', 'CustomisatioSelected', label)
+
+  followedStyleProductLink: (label) ->
+    track.event('Product', 'StyleItLinkClicked', label)
+
+  clickedBookFreeStylingSession: (label) ->
+    track.event('Product', 'BookFreeStylingSessionClicked', label)
 }

@@ -11,3 +11,10 @@ $(".personalization_products.style").ready ->
 
   # header - nav partial
   page.enableSendToFriendButton($('a.send-to-friend'))
+
+  $('.book-free-style-session').on('click', (e) ->
+    track.clickedBookFreeStylingSession(window.product_analytics_label)
+  )
+  $('.grid-6 ul.price-list li a').on('click', (e) ->
+    track.followedStyleProductLink(window.product_analytics_label)
+  )

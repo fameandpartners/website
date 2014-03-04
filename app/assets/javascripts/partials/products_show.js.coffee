@@ -19,6 +19,11 @@ $(".spree_products.show").ready ->
   page.enableImageZoomButtons($("a[data-action='show-large-image']"))
   page.enableSoundCloudSongPlayer($("a[data-action=soundcloud]"))
 
+  # track user followed perfume 
+  $('.grid-6.perfume a').on('click', () ->
+    track.followedPerfumeLink(window.product_analytics_label)
+  )
+
   # sync video iframe height with images height
   $('.grid-6.video iframe').height($('.grid-6.product-image .picture img').height())
 
