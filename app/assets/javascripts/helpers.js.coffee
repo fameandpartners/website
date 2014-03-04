@@ -28,7 +28,7 @@ window.getUniqueValues = (array, property) ->
   result = []
   _.each(array, (item) ->
     value = item[property]
-    if value and result.indexOf(value) == -1
+    if !_.isUndefined(value) and result.indexOf(value) == -1
       result.unshift(value)
   )
   return result
