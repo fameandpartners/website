@@ -36,6 +36,7 @@ window.helpers.createProductVariantsSelector = (root) ->
 
     exportSelectedVariant: (variant) ->
       target_data = { id: null, error: null }
+
       if ! _.isEmpty(variant)
         target_data.id = variant.id
       else if !_.isNull(variantsSelector.selected.size)
@@ -61,7 +62,7 @@ window.helpers.createProductVariantsSelector = (root) ->
         size: @sizeInput.val()
       }
       @container.trigger('selection_changed', @selected)
-      @selected.size = parseInt(@selected.size) if @selected.size
+      @selected.size = parseInt(@selected.size) if _.isNumber(@selected.size)
       @exportSelectedVariant(@getSelectedVariant())
 
     getSelectedVariant: () ->
