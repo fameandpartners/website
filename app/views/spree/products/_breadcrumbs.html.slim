@@ -1,12 +1,11 @@
 - active ||= :explore
 .purchase-instructions
-  ' Select the dress you love... customise if you like... see how to style it or book a free session!
-  br If you buy it, our stylists will source accessories to match... for free!
+  ' Select the dress you love... customize if you like... see how to style it or book a free session!
 .bread-crumbs
   .fleft
     = link_to 'EXPLORE', collection_product_path(product), class: "btn #{'pink' if active == :explore}"
     - if (product.can_be_customized? and !product.in_sale?)
-      = link_to 'CUSTOMISE', personalization_product_path(permalink: product.permalink), class: "btn #{'pink' if active == :customise}"
+      = link_to t(:customization), personalization_product_path(permalink: product.permalink), class: "btn #{'pink' if active == :customise}"
     - if product.accessories.active.present?
       = link_to 'STYLE IT', personalization_style_product_path(permalink: product.permalink), class: "btn #{'pink' if active == :style}"
   .fright

@@ -44,7 +44,9 @@ ruby:
                           .picture
                             = image_tag image_url
                 .text
-                  h4 BUY YOUR DRESS TODAY AND WE WILL SOURCE ACCESSORIES FOR FREE!
+                  h4 WANT US TO SOURCE A DIFFERENT LOOK? 
+                  p BUY YOUR DRESS TODAY AND WE WILL SOURCE ACCESSORIES FOR FREE!
+                  p= mail_to 'team@fameandpartners.com', "or book a free styling session now", subject: "Free Styling Session for #{@product.name} | #{@product.sku}", class: 'italic'
               .grid-6
                 .arrows-line-horizontal
                 ul.price-list
