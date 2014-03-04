@@ -8,8 +8,8 @@
     .dropdown = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
 
   .style.customisation-selector
-    - product.product_customisation_values.each do |value|
-      .row.customisation-value data-customisation-value-id=(value.customisation_value_id)
+    - product.customisation_values.each do |value|
+      .row.customisation-value data-customisation-value-id=(value.id)
         .grid-6
           .title = value.presentation
           .button
