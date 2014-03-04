@@ -2,6 +2,9 @@ tr class="option_value fields" id="spree_#{dom_id(f.object)}"  data-hook="option
   td class="no-border"
     span class="handle"
     = f.hidden_field :id
+  td class="use_in_customisation"
+    = f.label :use_in_customisation, 'custom', title: 'can be used on customisation page'
+    = f.check_box :use_in_customisation
   td class="name" = f.text_field :name
   td class="presentation" = f.text_field :presentation
   td class="value" = f.text_field :value

@@ -3,9 +3,10 @@
 
   - if show_custom_colors
     / h4 Custom colours ARE only $16 
-    - options = color_options_for_select_from_options_values(product.custom_colors)
-    - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
-    .dropdown = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
+    - options = color_options_for_select_from_options_values(product.customisation_colors)
+    - if options.present? && options.length > 0
+      - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
+      .dropdown = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
 
   .style.customisation-selector
     - product.customisation_values.each do |value|

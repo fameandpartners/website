@@ -169,6 +169,17 @@ Spree::Product.class_eval do
     end
   end
 
+  def customisation_colors
+    if option_type = option_types.find_by_name('dress-color')
+      option_type.
+        option_values.
+        where(use_in_customisation: true).
+        where('spree_option_values.id NOT IN (?)', basic_colors.map(&:id)).uniq
+    else
+      Spree::OptionValue.none
+    end
+  end
+
   def description
     read_attribute(:description) || ''
   end

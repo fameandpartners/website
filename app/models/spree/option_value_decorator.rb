@@ -14,7 +14,7 @@ Spree::OptionValue.class_eval do
 
   scope :none, where(id: nil)
 
-  attr_accessible :image, :value
+  attr_accessible :image, :value, :use_in_customisation
   validates :value, format: /^#([0-9a-f]{3}|[0-9a-f]{6})$/i, allow_blank: true
 
   class << self
