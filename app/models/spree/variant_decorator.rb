@@ -43,6 +43,15 @@ Spree::Variant.class_eval do
   # Master SKU + VarientValue1 + VarientValue2
   def set_default_sku
     return if self.sku.present?
+
+    if (sku = generate_sku).present?
+      self.sku = sku
+    end
+  end
+
+  def generate_sku
+    return sku if is_master?
+
     sku_chunks = []
     master = nil
 
@@ -64,12 +73,15 @@ Spree::Variant.class_eval do
       sku_chunks.push(chunk)
     end
 
-    sku_chunks.push(self.id.to_s)
+    sku_chunks.reject(&:blank?).join('-')
+  rescue Exception => exception
+    return nil
+  end
 
-    self.sku = sku_chunks.reject(&:blank?).join('-')
-  rescue Exception => e
-    # do nothing, sku required for analytics mostly
-    return true
+  def generate_sku!
+    if (sku = generate_sku).present?
+      update_column(:sku, sku)
+    end
   end
 
 
