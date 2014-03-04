@@ -1,5 +1,8 @@
 class CustomDress < ActiveRecord::Base
   GIRL_SIZES = {
+    'Girls 0'  => 'G0',
+    'Girls 2'  => 'G2',
+    'Girls 4'  => 'G4',
     'Girls 6'  => 'G6',
     'Girls 8'  => 'G8',
     'Girls 10' => 'G10',
@@ -8,6 +11,9 @@ class CustomDress < ActiveRecord::Base
   }
 
   LADY_SIZES = {
+    'Ladies 0'  => 'L0',
+    'Ladies 2'  => 'L2',
+    'Ladies 4'  => 'L4',
     'Ladies 6'  => 'L6',
     'Ladies 8'  => 'L8',
     'Ladies 10' => 'L10',

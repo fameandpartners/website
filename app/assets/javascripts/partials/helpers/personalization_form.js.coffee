@@ -22,6 +22,7 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
     __init: (variants, master_id) ->
       _.bindAll(@, 'update')
       _.bindAll(@, 'onBuyButtonClickHandler')
+      _.bindAll(@, 'trackCustomisationSelected')
 
       @variants = variants
       @masterVariantId  = master_id
@@ -40,7 +41,8 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
 
       @sizeInput.on('change',  @update)
       @colorInput.on('change',  @update)
-      @customisationsInput.on('change',  @update)
+      @customisationsInput.on('change', @update)
+      @customisationsInput.on('change', @trackCustomisationSelected)
 
       @container.find('.product-info .btn.buy-now').on('click', @onBuyButtonClickHandler)
       @update()
@@ -66,9 +68,9 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
 
       window.helpers.hideErrors(@container.find('.product-info'))
 
-      if !_.isNumber(@selected.size) && _.isEmpty(@selected.color)
+      if _.isNull(@selected.size) && _.isEmpty(@selected.color)
         @errorMessage = 'Please, select size and color'
-      else if !_.isNumber(@selected.size)
+      else if _.isNull(@selected.size)
         @errorMessage = 'Please, select size'
       else if _.isEmpty(@selected.color)
         @errorMessage = 'Please, select color'
@@ -101,6 +103,10 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
       $button.data(id: @choosenVariantId, error: @errorMessage)
 
       return true
+
+    trackCustomisationSelected: (e) ->
+      if !_.isEmpty(@customisationsInput.val())
+        track.selectedCustomisation(window.product_analytics_label)
 
     onBuyButtonClickHandler: (e) ->
       e.preventDefault()

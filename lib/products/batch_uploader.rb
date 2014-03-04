@@ -427,6 +427,12 @@ module Products
         taxon_ids: args[:taxon_ids] || []
       }
 
+      edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
+
+      if product.persisted?
+        attributes[:taxon_ids] += product.taxons.where(taxonomy_id: edits.try(:id)).map(&:id)
+      end
+
       attributes.select!{ |name, value| value.present? }
 
       product.assign_attributes(attributes, without_protection: true)

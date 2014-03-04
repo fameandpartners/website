@@ -195,10 +195,16 @@ module ApplicationHelper
     end
   end
 
-  def newsletter_modal_popup
-    #if !spree_user_signed_in?
-      render 'shared/newsletter_modal_popup'
-    #end
+#  def newsletter_modal_popup
+#    #if !spree_user_signed_in?
+#      render 'shared/newsletter_modal_popup'
+#    #end
+#  end
+
+  def check_users_first_visit
+    if !spree_user_signed_in? && !cookies[:quiz_shown]
+      render 'shared/first_visit'
+    end
   end
 
   def paypal_payment_method

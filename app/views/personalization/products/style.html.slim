@@ -23,7 +23,7 @@ ruby:
         .heading
           h1 Fame & Partners' styling team has compiled the cutest accessories to complete your look with this dress.
           h2 Scroll below or simply book a free styling session
-          = mail_to 'team@fameandpartners.com', "Book a free styling session", subject: "Free Styling Session for #{@product.name} | #{@product.sku}", class: 'btn empty border'
+          = mail_to 'team@fameandpartners.com', "Book a free styling session", subject: "Free Styling Session for #{@product.name} | #{@product.sku}", class: 'btn empty border book-free-style-session'
           h4 
             ' Remember, if you BUY NOW, you can brief us on sourcing any accessories you like, completely free!
         .lookbox
@@ -44,7 +44,9 @@ ruby:
                           .picture
                             = image_tag image_url
                 .text
-                  h4 BUY YOUR DRESS TODAY AND WE WILL SOURCE ACCESSORIES FOR FREE!
+                  h4 WANT US TO SOURCE A DIFFERENT LOOK? 
+                  p BUY YOUR DRESS TODAY AND WE WILL SOURCE ACCESSORIES FOR FREE!
+                  p= mail_to 'team@fameandpartners.com', "or book a free styling session now", subject: "Free Styling Session for #{@product.name} | #{@product.sku}", class: 'italic'
               .grid-6
                 .arrows-line-horizontal
                 ul.price-list
