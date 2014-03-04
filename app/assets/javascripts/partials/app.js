@@ -115,6 +115,7 @@ $(function() {
     }
   });
 */
+/*
   // TODO Need to refactor to new popup style
   window.showNewsletterPopup = function (event) {
     if (event != undefined) event.preventDefault();
@@ -130,5 +131,12 @@ $(function() {
   }
 
   $('a.btn.newsletter').click(showNewsletterPopup);
-});
+*/
 
+  $('a.btn.newsletter').on('click', function(e) {
+    e.preventDefault();
+    popup = new window.popups.NewsletterModalPopup();
+    popup.show();
+    return true;
+  });
+});

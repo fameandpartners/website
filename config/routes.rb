@@ -137,7 +137,11 @@ FameAndPartners::Application.routes.draw do
     post '/campaigns/stylecall' => 'campaigns#create'
     get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
     post '/campaigns/dolly' => 'campaigns#dolly', as: :dolly_campaign
-    post '/campaigns/newsletter' => 'campaigns#newsletter', as: :newsletter_campaign
+    #post '/campaigns/newsletter' => 'campaigns#newsletter', as: :newsletter_campaign
+
+    namespace "campaigns" do
+      resource :newsletter, only: [:new, :create], controller: :newsletter
+    end
 
     #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
     #post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request

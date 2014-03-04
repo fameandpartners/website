@@ -25,7 +25,6 @@ doctype html
         = yield
       = render 'shared/quiz_popup'
       = render 'shared/dolly_campaign_popup'
-      = newsletter_modal_popup
       #push
     = render 'layouts/footer'
     = render 'shared/remarketing_tag' unless request.path == "/campaigns/stylecall/thankyou"

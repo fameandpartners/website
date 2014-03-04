@@ -11,7 +11,7 @@
     $form.find('input.email').addClass('invalid')
   <% end %>
 <% else %>
-  $scope = window.newsletterModalPopup.scope.find('.modal-form');
+  $scope = $('.modal.popup-placeholder.campaign-newsletter .modal-form');
   <% if @participation.valid? %>
     $scope.html('<%=j render('campaigns/newsletter/thanks') %>');
   <% else %>
