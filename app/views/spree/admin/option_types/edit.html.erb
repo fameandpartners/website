@@ -28,11 +28,14 @@
     <table class="index sortable" data-hook data-sortable-link="<%= update_values_positions_admin_option_types_url %>">
       <thead data-hook="option_header">
         <tr>
-          <th colspan="2"><%= t(:name) %></th>
-          <th><%= t(:display) %></th>
           <% if color_type %>
+            <th colspan="3"><%= t(:name) %></th>
+            <th><%= t(:display) %></th>
             <th><%= t(:css_color_hex) %></th>
             <th><%= t(:image) %></th>
+          <% else %>
+            <th colspan="2"><%= t(:name) %></th>
+            <th><%= t(:display) %></th>
           <% end %>
           <th class="actions"></th>
         </tr>

@@ -16,8 +16,17 @@
 		margin: 0;
 		padding: 0;
 	}
+	.text {
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: 100%;
+		text-align: center;
+	}
 	.site-version {
 		float: left;
+		z-index: 29;
+		position: relative;
 		em { 
 			font-family: $fontTwo;
 			padding-right: 3px;
@@ -26,7 +35,6 @@
 	.site-version-switch {
 		display: inline-block;
 		position: relative;
-		z-index: 99;
 		min-height: 20px;
 		margin-left: 10px;
 		ul {
@@ -45,6 +53,8 @@
 	}
 	.user-nav {
 		float: right;
+		z-index: 29;
+		position: relative;
 		.dropdown-trigger {
 			position: relative;
 			.dropdown-menu {

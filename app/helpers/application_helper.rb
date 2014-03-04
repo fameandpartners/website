@@ -172,10 +172,14 @@ module ApplicationHelper
   end
 
   def absolute_image_url(image_url, protocol = nil)
-    if protocol.blank?
-      protocol = request.protocol
-    end
-    "#{protocol}://#{request.host_with_port}#{image_url}"
+    parsed_url = URI.parse(image_url)
+    parsed_url.scheme ||= (protocol.present? ? protocol : request.protocol )
+    parsed_url.host ||= request.host
+    parsed_url.path.to_s[/^\/?/] = '/' # prepend path with /
+    parsed_url.port ||= request.port # uri parse set 80/443 if scheme exists
+    parsed_url.to_s
+  rescue
+    image_url
   end
 
   def serialized_current_user
