@@ -5,6 +5,6 @@
     .fleft.quick-view
       = quick_view_link(product)
     .fright.like
-      = add_to_wishlist_link(product, class: 'wish-list-link')
+      = cached_add_to_wishlist_link(product, class: 'wish-list-link')
 h6 = product.name
 .price = price_for_product(product)

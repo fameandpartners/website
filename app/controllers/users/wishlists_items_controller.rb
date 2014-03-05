@@ -25,19 +25,23 @@ class Users::WishlistsItemsController < Users::BaseController
     )
 
     if @item.persisted?
-      render json: { item: @item, analytics_label: analytics_label(:product, @item.product) }
+      render json: {
+        item: WishlistItemSerializer.new(@item).to_json,
+        analytics_label: analytics_label(:product, @item.product)
+      }
     else
       render json: {}
     end
   end
 
   def destroy
-    @item = @user.wishlist_items.find(params[:id])
-    @item.destroy
+    @item = @user.wishlist_items.find_by_id(params[:id])
+    @item.try(:destroy)
 
-    respond_with(@item) do |format|
+    respond_with({}) do |format|
       format.html { redirect_to wishlist_path }
       format.js   {}
+      format.json { render json: {} }
     end
   end
 

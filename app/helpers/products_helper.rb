@@ -122,7 +122,7 @@ module ProductsHelper
     end
   end
 =end
-=begin
+
   # old, not cacheable variant
   def add_to_wishlist_link(product_or_variant, options = {})
     options[:title] ||= 'Wish list'
@@ -132,7 +132,17 @@ module ProductsHelper
     if spree_user_signed_in?
       variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
 
-      link_options = { data: { action: 'add-to-wishlist', id: variant.id }, class: options[:class]}
+      link_options = {
+        data: { 
+          'title-add'     => options[:title],
+          'title-remove'  => 'Remove from wishlist',
+          'action'        => 'add-to-wishlist',
+          'product-id'    => variant.product_id,
+          'id'            => variant.id
+        },
+        class: options[:class]
+      }
+
       if in_wishlist?(variant)
         link_options[:class] += ' active'
         link_to 'Remove from wishlist', '#', link_options
@@ -143,13 +153,13 @@ module ProductsHelper
       link_to options[:title], spree_signup_path, class: options[:class], data: { action: 'auth-required' }
     end
   end
-=end
+
   # render just placeholder
   # add_to_wishlist_link(variant, 
   #      title: 'Add to wishlist',
   #      class: 'wishlist-link',
   #      title-remove: 'Remove from wishlist'
-  def add_to_wishlist_link(product_or_variant, options = {})
+  def cached_add_to_wishlist_link(product_or_variant, options = {})
     variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
 
     title = options.delete(:title) || 'Add to wishlist'
@@ -157,7 +167,7 @@ module ProductsHelper
     link_class = options.delete(:class)
     link_class = link_class.to_s + ' add-wishlist'
 
-    link_to title, '#', class: link_class, data: {
+    link_to title, spree_signup_path, class: link_class, data: {
       'title-add'     => title,
       'title-remove'  => title_remove,
       'action'        => 'wishlist-toggle',
@@ -166,9 +176,9 @@ module ProductsHelper
     }
   end
 
-#  def in_wishlist?(variant)
-#    current_wished_product_ids.include?(variant.product_id)
-#  end
+  def in_wishlist?(variant)
+    current_wished_product_ids.include?(variant.product_id)
+  end
 
   def customize_this_dress(product)
     content_tag :div, class: 'customize' do
