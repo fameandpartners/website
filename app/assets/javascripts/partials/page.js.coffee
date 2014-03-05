@@ -43,7 +43,7 @@ window.page = {
       elements_to_show
 
     scope = elements
-    elements.on('click', (e) ->
+    elements.on('click', '.title', (e) ->
       e.preventDefault()
       target = $(e.target).closest('li')
 
