@@ -112,6 +112,7 @@ module ProductsHelper
     link_to 'Quick view', collection_product_path(product), data: { action: 'quick-view', id: product.permalink }
   end
 
+=begin
   def add_to_bag_link(product_or_variant)
     if product_or_variant.is_a?(Spree::Product)
       # don't use master variant as default
@@ -120,7 +121,9 @@ module ProductsHelper
       link_to 'Add to bag', '#', class: 'buy-now btn', data: { id: product_or_variant.id }
     end
   end
-
+=end
+=begin
+  # old, not cacheable variant
   def add_to_wishlist_link(product_or_variant, options = {})
     options[:title] ||= 'Wish list'
     options[:class] ||= ''
@@ -140,6 +143,32 @@ module ProductsHelper
       link_to options[:title], spree_signup_path, class: options[:class], data: { action: 'auth-required' }
     end
   end
+=end
+  # render just placeholder
+  # add_to_wishlist_link(variant, 
+  #      title: 'Add to wishlist',
+  #      class: 'wishlist-link',
+  #      title-remove: 'Remove from wishlist'
+  def add_to_wishlist_link(product_or_variant, options = {})
+    variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
+
+    title = options.delete(:title) || 'Add to wishlist'
+    title_remove = options.delete(:title_remove) || 'Remove from wishlist'
+    link_class = options.delete(:class)
+    link_class = link_class.to_s + ' add-wishlist'
+
+    link_to title, '#', class: link_class, data: {
+      'title-add'     => title,
+      'title-remove'  => title_remove,
+      'action'        => 'wishlist-toggle',
+      'product-id'    => variant.product_id,
+      'id'            => variant.id
+    }
+  end
+
+#  def in_wishlist?(variant)
+#    current_wished_product_ids.include?(variant.product_id)
+#  end
 
   def customize_this_dress(product)
     content_tag :div, class: 'customize' do
@@ -154,10 +183,6 @@ module ProductsHelper
       end
       mail + dropdown
     end
-  end
-
-  def in_wishlist?(variant)
-    current_wished_product_ids.include?(variant.product_id)
   end
 
   def send_to_a_friend_link(product)
