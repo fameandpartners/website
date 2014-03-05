@@ -164,6 +164,7 @@ class ApplicationController < ActionController::Base
   def serialize_user(user)
     {
       fullname: user.fullname,
+      first_name: user.first_name,
       email: user.email,
       wish_list: serialize_wish_list(user)
     }

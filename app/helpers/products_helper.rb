@@ -225,6 +225,7 @@ module ProductsHelper
     end
   end
 
+=begin
   # 'product reservation' link or 'twin alert'
   def product_twin_alert_link(product)
     return '' if product.blank?
@@ -244,6 +245,19 @@ module ProductsHelper
         link_to("Twin Alert", '#', class: 'twin-alert-link btn', data: data_attrs) +
         content_tag(:div, t('views.pages.products.show.notices.twin_alert').html_safe, class: 'hint')
       end
+    end
+  end
+=end
+
+  def product_twin_alert_link(product)
+    return '' if product.blank?
+
+    data_attrs = { product_id: product.id }
+
+    content_tag(:div, class: 'twin-alert') do
+      link_to("Twin Alert", '#', class: 'twin-alert-link btn', data: data_attrs) +
+      content_tag(:div, t('views.pages.products.show.notices.twin_alert').html_safe, class: 'hint') +
+      raw("<div class='hide reserved'><i class='icon icon-tick-circle'></i><span class='username'></span>, you have reserved this dress in <span class='color'></span>.</div>")
     end
   end
 
