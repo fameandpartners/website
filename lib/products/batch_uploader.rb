@@ -136,6 +136,10 @@ module Products
           processed[:description] = ActionController::Base.helpers.simple_format(raw[:description])
         end
 
+        if raw[:product_details].present?
+          processed[:product_details] = ActionController::Base.helpers.simple_format(raw[:product_details])
+        end
+
         range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
 
         processed[:taxon_ids] = []
@@ -225,7 +229,7 @@ module Products
             shipping:             raw[:shipping],
             stylist_quote_short:  raw[:stylist_quote_short],
             stylist_quote_long:   raw[:stylist_quote_long],
-            product_details:      raw[:product_details],
+            product_details:      processed[:product_details],
             revenue:              raw[:revenue],
             cogs:                 raw[:cogs],
             video_id:             processed[:video_id],
