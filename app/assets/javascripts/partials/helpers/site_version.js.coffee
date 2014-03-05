@@ -2,7 +2,7 @@ window.getSiteVersionPrefix = () ->
   defaultPrefix = ''
   try
     if window.current_site_version
-      code = window.current_site_version.site_version.permalink
+      code = window.site_version.permalink
       if code && !code.match('us')
         return "/" + code.replace('/', '')
       else

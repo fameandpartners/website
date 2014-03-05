@@ -1,3 +1,5 @@
+= render 'layouts/js_bootstrap'
+
 - links_cache_key = [:layout, :header, 'top-links', current_spree_user.try(:cache_key)]
 - cache links_cache_key, expires_in: configatron.cache.expire.long do
   .top-links
@@ -126,4 +128,3 @@
     .offer
       span.p.title FORMAL DRESSES FOR FASHION MAVENS
       span.p Your unique look. guaranteed.
-  = render 'layouts/js_bootstrap'
