@@ -32,6 +32,7 @@
         .text
           p SKU: #{@product.sku}
           p Material: #{@product.property('fabric')}
+          p = product.property('product_details') if product.property('product_details').present?
       - if @product.property('style_notes').present?
         li 
           .title styling notes
