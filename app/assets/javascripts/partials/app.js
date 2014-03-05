@@ -1,4 +1,6 @@
 $(function(){
+  window.productWishlist.initialize()
+
   $('form .size-choser :radio').change(function(event){
     $('form .size-choser li').removeClass('active');
     $(event.target).parents('li:first').addClass('active');
