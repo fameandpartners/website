@@ -62,7 +62,7 @@ window.helpers.createProductVariantsSelector = (root) ->
         size: @sizeInput.val()
       }
       @container.trigger('selection_changed', @selected)
-      @selected.size = parseInt(@selected.size) if _.isNumber(@selected.size)
+      @container.data('selected', @selected)
       @exportSelectedVariant(@getSelectedVariant())
 
     getSelectedVariant: () ->

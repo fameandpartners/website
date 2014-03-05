@@ -59,6 +59,9 @@
             li Sale Items- Up to 30% off: 14 days from date of shipment  
             li Sale Items- 31%- 49% off: 7 days from date of shipment 
             li Sale Items- > 50%: No Returns 
+      li.twin-alert
+        .title Twin alert
+        .text = product_twin_alert_link(@product)
       - if defined?(products) && products.present?
         li.opened.recommended 
           .title more killer dresses

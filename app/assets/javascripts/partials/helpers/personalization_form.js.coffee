@@ -57,6 +57,7 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
       @updateWishlistButton()
       @updateBuyButton()
       @container.trigger('selection_changed', @selected)
+      @container.data('selected', @selected)
       return true
 
     isCustomProduct: () ->

@@ -3,7 +3,9 @@ $(".personalization_products.style").ready ->
   page.enableShoppingCart()
 
   # products_info partial
-  page.enableProductVariantsSelector($('#content .product-info'))
+  variantsSelectorContainer = $('#content .product-info')
+  page.enableProductVariantsSelector(variantsSelectorContainer)
+
   page.enableWhatSizeIam($('.toggle-sizes'))
   page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
   page.enableAccordeonBars($('ul.slider > li:not(.recommended)'))
@@ -17,4 +19,12 @@ $(".personalization_products.style").ready ->
   )
   $('.grid-6 ul.price-list li a').on('click', (e) ->
     track.followedStyleProductLink(window.product_analytics_label)
+  )
+
+  page.enableTwinAlertButton($('.twin-alert a.twin-alert-link'), () ->
+    selected = variantsSelectorContainer.data('selected')
+    if _.isUndefined(selected) || _.isNull(selected.color)
+      return null
+    else
+      return selected.color
   )

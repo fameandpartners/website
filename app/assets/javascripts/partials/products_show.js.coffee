@@ -19,6 +19,14 @@ $(".spree_products.show").ready ->
   page.enableImageZoomButtons($("a[data-action='show-large-image']"))
   page.enableSoundCloudSongPlayer($("a[data-action=soundcloud]"))
 
+  page.enableTwinAlertButton($('.twin-alert a.twin-alert-link'), () ->
+    selected = variantsSelectorContainer.data('selected')
+    if _.isUndefined(selected) || _.isNull(selected.color)
+      return null
+    else
+      return selected.color
+  )
+
   # track user followed perfume 
   $('.grid-6.perfume a').on('click', () ->
     track.followedPerfumeLink(window.product_analytics_label)

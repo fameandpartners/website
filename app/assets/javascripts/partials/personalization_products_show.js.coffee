@@ -22,3 +22,11 @@ $(".personalization_products.show").ready ->
     image.attr('src', image_data.large) if image_data
     return
   )
+
+  page.enableTwinAlertButton($('.twin-alert a.twin-alert-link'), () ->
+    selected = formContainer.data('selected')
+    if _.isUndefined(selected) || _.isNull(selected.color)
+      return null
+    else
+      return selected.color
+  )

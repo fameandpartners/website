@@ -29,6 +29,13 @@ window.page = {
       popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
     )
 
+  enableTwinAlertButton: (elements, get_color_func) ->
+    window.helpers.initProductReserver(
+      $(elements),
+      window.product_analytics_label,
+      get_color_func
+    )
+
   enableAccordeonBars: (elements) ->
     hide = (elements_to_hide) ->
       elements_to_hide.find('.text').slideUp(500, () ->

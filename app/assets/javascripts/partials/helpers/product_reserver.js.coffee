@@ -1,11 +1,11 @@
 window.helpers or= {}
-window.helpers.initProductReserver = (elements, label, variantsSelector) ->
+window.helpers.initProductReserver = (elements, label, get_selected_color_func) ->
 
   _.each(elements, (element) ->
     productReserver = {
-      selector: variantsSelector,
       element: $(element),
       label: label,
+      get_selected_color_func: get_selected_color_func,
 
       onButtonClickHandler: (e) ->
         e.preventDefault()
@@ -15,49 +15,28 @@ window.helpers.initProductReserver = (elements, label, variantsSelector) ->
             schoolName: $(e.target).data('school-name'),
             formalName: $(e.target).data('formal-name'),
             schoolYear: $(e.target).data('school-year'),
-            color: productReserver.selectedColor(),
+            color: productReserver.get_selected_color_func(),
             label: productReserver.label
           }
-          popups.showProductReservationPopup(options, productReserver.markReserved)
+          popup = new window.popups.ProductReservationPopup(options, productReserver.markReserved)
+          popup.show()
+          #popups.showProductReservationPopup(options, productReserver.markReserved)
 
       markReserved: (message) ->
         placeholder = $('<div>', {
           class: 'reserved',
           text: message or= "<i class='icon icon-tick-circle'></i> #{window.current_user.fullname}, you have reserved this dress"
         })
-        productReserver.element.replaceWith(placeholder)
+        productReserver.element.parent().replaceWith(placeholder)
         productReserver = null
 
       # 'private'
       validate: () ->
-        result = true
-        color = @selectedColor()
-        if _.isEmpty(color)
-          result = false
-          @showErrorMessage('Please select a dress colour from above.')
-        return result
-
-      selectedColor: () ->
-        return null if _.isEmpty(@selector.selected)
-        color = @selector.selected.color
-        return null if _.isEmpty(color)
-        return color
-
-      showErrorMessage: (messageText) ->
-        container = @element.parent()
-        block = container.find('.error.message')
-        if block.length == 0
-          container.append($("<span class='error message' style='display: none;'></span>"))
-          block = container.find('.error.message')
-        block.text(messageText).fadeIn()
-
-        setTimeout(productReserver.hideErrorMessage, 3000)
-        # i know, this should be separate event bus line...
-        @selector.container.find(".colors-choser .colors .color").
-          one('click', productReserver.hideErrorMessage)
-
-      hideErrorMessage: () ->
-        productReserver.element.parent().find('.error.message').fadeOut()
+        if _.isEmpty(@get_selected_color_func())
+          window.helpers.showErrors(@element.parent(), 'Please select a dress colour from above.')
+          return false
+        else
+          return true
     }
 
     $(element).on('click', productReserver.onButtonClickHandler)
