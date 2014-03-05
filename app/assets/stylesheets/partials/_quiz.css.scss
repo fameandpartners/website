@@ -83,6 +83,7 @@
       top: 110px;
       font-family: $fontThree;
       width: 240px;
+      white-space: nowrap;
       text-align: center;
       line-height: 0.8;
       em { 
@@ -98,8 +99,8 @@
     .text2 {
       color: #fff;
       position: absolute;
-      left: 218px;
-      top: 395px;
+      left: 227px;
+      top: 357px;
       width: 185px;
       text-align: center;
       font-family: $fontThree;
@@ -107,7 +108,7 @@
         font-size: 47px;
         line-height: 0.9;
         margin-bottom: 20px;
-        em { 
+        em {
           font-family: $fontTwo;
           display: block;
         }
