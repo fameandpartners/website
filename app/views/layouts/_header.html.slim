@@ -126,7 +126,4 @@
     .offer
       span.p.title FORMAL DRESSES FOR FASHION MAVENS
       span.p Your unique look. guaranteed.
-  - cache [:layout, :header, :cart, :js, current_order.cache_key], expires_in: configatron.cache.expire.normally do
-    javascript:
-      window.bootstrap = {}
-      window.bootstrap.order = #{{ ::CartSerializer.new(current_order).to_json }}
+  = render 'layouts/js_bootstrap'
