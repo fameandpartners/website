@@ -70,7 +70,8 @@ ruby:
         = link_to 'What size am I?', '#what-size', class: 'hint toggle-sizes'
       .buy-wishlist
         .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
-        = add_to_bag_link(@product)
+        /= add_to_bag_link(@product)
+        = link_to 'Add to bag', '#', class: 'buy-now btn'
         = add_to_wishlist_link(@product, class: 'btn empty border')
 
       .tabs

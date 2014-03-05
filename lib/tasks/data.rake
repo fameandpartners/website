@@ -13,5 +13,7 @@ namespace :import do
     @parsed_data = uploader.parsed_data
 
     uploader.create_or_update_products(@parsed_data)
+
+    Rake::Task['update:images:positions'].execute
   end
 end

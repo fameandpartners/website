@@ -42,11 +42,11 @@ class BoutiqueController < Spree::StoreController
     end
 
     def recommended_dresses
-      sorted_dresses.first(8)
+      sorted_dresses.first(12)
     end
 
     def other_dresses
-      sorted_dresses.from(8)
+      sorted_dresses.from(12)
     end
 
     def celebrity_style_profile
