@@ -114,6 +114,16 @@ Spree::Product.class_eval do
     video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
   end
 
+  def videos_json
+    @videos_json ||= self.videos.includes(:color).map do |product_video|
+      {
+        default: product_video.is_master?,
+        color: (product_video.color.present? ? product_video.color.name : nil),
+        video_url: product_video.video_url
+      }
+    end
+  end
+
   def colors
     if option_type = option_types.find_by_name('dress-color')
       option_type.
