@@ -25,7 +25,11 @@
             .grid-4
               .customisation-value data-customisation-value-id=(value.id)
                 .customisation-picture
-                  = product_customisation_value_image(value)
+                  - if product_customisation_value_image(value).empty?
+                    = image_tag('logo_empty.png')
+                  - else
+                    = product_customisation_value_image(value) 
+                  
                 .title = value.presentation
                 .button
                   = link_to '+ ADD', '#', class: 'btn empty border'
