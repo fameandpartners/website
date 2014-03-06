@@ -5,7 +5,7 @@
   .fleft
     = link_to 'EXPLORE', collection_product_path(product), class: "btn #{'pink' if active == :explore}"
     - if (product.can_be_customized? and !product.in_sale?)
-      = link_to t(:customization), personalization_product_path(permalink: product.permalink), class: "btn #{'pink' if active == :customise}"
+      = link_to t(:customize), personalization_product_path(permalink: product.permalink), class: "btn #{'pink' if active == :customise}"
     - if product.accessories.active.present?
       = link_to 'STYLE IT', personalization_style_product_path(permalink: product.permalink), class: "btn #{'pink' if active == :style}"
   .fright

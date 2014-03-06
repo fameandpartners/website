@@ -113,29 +113,29 @@ window.inputs.CustomisationsSelector = class CustomisationsSelector extends Base
 
   onAddProductButtonClickHandler: (e) ->
     e.preventDefault()
-    valueContainer = $(e.currentTarget).closest('.row.customisation-value')
+    valueContainer = $(e.currentTarget).closest('.customisation-value')
     valueContainer.toggleClass('selected')
     CustomisationsSelector.syncLabelsWithSelectionState(valueContainer)
     @trigger('change')
     return
 
   getValue: () ->
-    _.map(@container.find('.row.customisation-value.selected'), (item) ->
+    _.map(@container.find('.customisation-value.selected'), (item) ->
       $(item).data('customisation-value-id').toString()
     , @)
 
   # reset selected state for all items if not array passed
   setValue: (newValues) ->
     return if !_.isArray(newValues)
-      _.each(@container.find('.row.customisation-value.selected'), (item) ->
+      _.each(@container.find('.customisation-value.selected'), (item) ->
         CustomisationsSelector.syncLabelsWithSelectionState($(item).removeClass('selected'))
       )
     else
-      @container.find('.row.customisation-value.selected').removeClass('selected')
+      @container.find('.customisation-value.selected').removeClass('selected')
       _.each(newValues, (id) ->
-        @container.find(".row.customisation-value[data-customisation-value-id=#{ id }").addClass('selected')
+        @container.find(".customisation-value[data-customisation-value-id=#{ id }").addClass('selected')
       , @)
-      _.each(@container.find(".row.customisation-value"), CustomisationsSelector.syncLabelsWithSelectionState)
+      _.each(@container.find(".customisation-value"), CustomisationsSelector.syncLabelsWithSelectionState)
 
   # set markup accordingly to state [ selected, not selected, not available]
   @syncLabelsWithSelectionState: (valueContainer) ->

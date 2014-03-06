@@ -1,25 +1,38 @@
 = form_for personalization, url: line_items_path, method: :post, remote: true, html: { class: 'personalization-form' } do |f|
   = hidden_field_tag :variant_id, product.master.id
 
-  - if show_custom_colors
-    / h4 Custom colours ARE only $16 
-    - options = color_options_for_select_from_options_values(product.customisation_colors)
-    - if options.present? && options.length > 0
-      - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
-      .dropdown = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
+  
 
   .style.customisation-selector
-    - product.customisation_values.each do |value|
-      .row.customisation-value data-customisation-value-id=(value.id)
-        .grid-6
-          .title = value.presentation
-          .button
-            = link_to '+ ADD', '#', class: 'btn empty border'
-            - if value.price > 0 
-              p.price = value.display_price
-        .grid-6
-          .customisation-picture
-            = product_customisation_value_image(value)
+    .row
+      .grid-4
+        .picture
+          = product_image_tag(@product)
+      .grid-8
+        - if show_custom_colors
+          .row
+            .custom-colours
+              / h4 Custom colours ARE only $16 
+              h4 Choose a custom colour
+              - options = color_options_for_select_from_options_values(product.customisation_colors)
+              - if options.present? && options.length > 0
+                - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
+                .dropdown = select_tag :custom_colour, options, class: 'selectbox', prompt: prompt, data: { placeholder: prompt, select: 'colour' }
+
+        .row
+          h4 Choose a style customization
+          - product.customisation_values.each do |value|
+            .grid-4
+              .customisation-value data-customisation-value-id=(value.id)
+                .customisation-picture
+                  = product_customisation_value_image(value)
+                .title = value.presentation
+                .button
+                  = link_to '+ ADD', '#', class: 'btn empty border'
+                  - if value.price > 0 
+                    p.price = value.display_price
+
+        .instructions Once you have made your selections, simple choose your size on the right and add to cart!
         
 
 /ruby:

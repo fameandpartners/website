@@ -32,6 +32,8 @@ en-AU:
   words:
     customization: 'customisation'
     color: 'colour'
+    customize: 'customise'
+    customizing: 'customising'
   views:
     footer:
       style_inspiration:

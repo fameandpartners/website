@@ -37,6 +37,8 @@ en-US:
   words:
     customization: 'customization'
     color: 'color'
+    customize: 'customize'
+    customizing: 'customizing'
   views:
     footer:
       style_inspiration:

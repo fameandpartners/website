@@ -19,22 +19,22 @@ javascript:
       = render 'spree/products/breadcrumbs', product: @product, active: :customise
       .cumtomise
         .row
-          .grid-6.product-image
-            .picture
-              = product_image_tag(@product)
-          .grid-6
+          .grid-12
             .heading
               h1 
                 em Make it yours
                 br 
-                span.pink by customising this dress
+                span.pink by #{t(:customizing)} this dress
               p 
-                em Select from the options below to customise your dress!
+                em
+                  ' Select from the options below to
+                  span #{t(:customize)} your dress!
+              .delivery DELIVERY TIME IS ONLY 10 - 14 DAYS
               .arrows-line-horizontal
             #personalization
-              .delivery DELIVERY TIME IS ONLY 10 - 14 DAYS
+              
               = render 'form', product: @product, personalization: @personalization, show_custom_colors: show_custom_colors
-              .instructions Once you have made your selections, simple choose your size on the right and add to cart!
+              
             / .style
               .row
                 .grid-6
@@ -66,7 +66,7 @@ javascript:
       = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }
 
 // <!-- old html -->
-/.m-pixel
+.m-pixel
   img src="http://tags.rtbidder.net/track?sid=525646ee8bc06f1060d9f3a7" width="0" height="0" border="0" alt=""
 
 /.wrap
