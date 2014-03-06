@@ -20,7 +20,7 @@ $('.spree_products.index').ready ->
     updateContentHandlers: () ->
       # bind quick view
       #@$el.find(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
-      processWishListLinks()
+      #processWishListLinks()
       window.addSwitcherToAltImage() if window.addSwitcherToAltImage
       productWishlist.addWishlistButtonActions($('a.wish-list-link')) unless _.isUndefined(window.current_user)
       window.initHoverableProductImages()

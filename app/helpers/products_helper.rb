@@ -170,7 +170,7 @@ module ProductsHelper
     link_to title, spree_signup_path, class: link_class, data: {
       'title-add'     => title,
       'title-remove'  => title_remove,
-      'action'        => 'wishlist-toggle',
+      'action'        => 'add-to-wishlist',
       'product-id'    => variant.product_id,
       'id'            => variant.id
     }
