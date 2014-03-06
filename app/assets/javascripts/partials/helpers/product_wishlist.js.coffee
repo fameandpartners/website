@@ -50,6 +50,7 @@ window.productWishlist = {
         unless productWishlist.isInWishlist(item.spree_product_id)
           productWishlist.items.push(item)
         productWishlist.events_bus.trigger('changed', item)
+        track.addedToWishlist(data.analytics_label) if data.analytics_label?
     )
 
   removeProduct: (product_id) ->
