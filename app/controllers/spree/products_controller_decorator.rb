@@ -5,10 +5,10 @@ Spree::ProductsController.class_eval do
 
   after_filter :log_product_viewed
 
-  caches_action :show,
-                layout: false,
-                expires_in: configatron.cache.expire.long,
-                cache_path: proc{ |c| c.request.url + '.' + c.request.format.ref.to_s }
+  #caches_action :show,
+  #              layout: false,
+  #              expires_in: configatron.cache.expire.long,
+  #              cache_path: proc{ |c| c.request.url + '.' + c.request.format.ref.to_s }
 
   def index
     @searcher = Products::ProductsFilter.new(params)
