@@ -21,6 +21,7 @@ Spree::Product.class_eval do
 
   has_many :moodboard_items, foreign_key: :spree_product_id
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
+  has_many :videos, class_name: 'ProductVideo', foreign_key: :spree_product_id
 
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
@@ -106,12 +107,11 @@ Spree::Product.class_eval do
   end
 
   def video_url
-    @video_url ||= begin
-      video_id = self.property('video_id')
-      # youtube
-      # video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}?rel=0&showinfo=0"
-      video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
-    end
+    @video_url ||= get_video_url(self.property('video_id'))
+  end
+
+  def get_video_url(video_id = nil)
+    video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
   end
 
   def colors
