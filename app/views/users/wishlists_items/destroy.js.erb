@@ -1,2 +1,6 @@
 $item = $("ul.products-list li.product-item[data-id=<%= @item.id %>]")
 $item.remove()
+
+<% if @item.present? && (label = analytics_label(:product, @item.try(:product))).present? %>
+  track.removedFromWishlist('<%= label %>');
+<% end %>

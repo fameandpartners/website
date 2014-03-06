@@ -41,7 +41,16 @@ class Users::WishlistsItemsController < Users::BaseController
     respond_with({}) do |format|
       format.html { redirect_to wishlist_path }
       format.js   {}
-      format.json { render json: {} }
+      format.json {
+        if @item.present?
+          render json: {
+            item: WishlistItemSerializer.new(@item).to_json,
+            analytics_label: analytics_label(:product, @item.try(:product))
+          }
+        else
+          render json: {}
+        end
+      }
     end
   end
 

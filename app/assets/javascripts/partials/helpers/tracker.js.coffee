@@ -59,6 +59,9 @@ window.track = {
   addedToWishlist: (label) ->
     track.event('Wishlist', 'AddedToWishlist', label)
 
+  removedFromWishlist: (label) ->
+    track.event('Wishlist', 'RemovedFromWishlist', label)
+
   addedToCart: (label) ->
     track.event('Products', 'AddedToCart', label)
 

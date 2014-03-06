@@ -60,12 +60,13 @@ window.productWishlist = {
       url: urlWithSitePrefix("/wishlists_items/#{ item.id }")
       type: 'DELETE'
       dataType: 'json'
-      success: () ->
+      success: (data) ->
         if productWishlist.isInWishlist(item.spree_product_id)
           productWishlist.items = _.reject(productWishlist.items, (element) ->
             element.product_id = item.spree_product_id
           )
         productWishlist.events_bus.trigger('changed', item)
+        track.removedFromWishlist(data.analytics_label) if data.analytics_label?
     )
 
   # internal methods
