@@ -14,8 +14,8 @@ class Users::OrdersController < Users::BaseController
     @order = user.orders.where(number: params[:id]).first
 
     respond_with(@order) do |format|
-      format.html { }
-      format.js   { }
+      format.html { render 'spree/orders/show' }
+      format.js
     end
   end
 end
