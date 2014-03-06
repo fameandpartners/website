@@ -21,6 +21,7 @@ Spree::Product.class_eval do
 
   has_many :moodboard_items, foreign_key: :spree_product_id
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
+  has_many :videos, class_name: 'ProductVideo', foreign_key: :spree_product_id
 
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
@@ -104,13 +105,30 @@ Spree::Product.class_eval do
       true
     end
   end
+=begin
+  def video_url
+    @video_url ||= get_video_url(self.property('video_id'))
+  end
 
+  def get_video_url(video_id = nil)
+    video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
+  end
+=end
   def video_url
     @video_url ||= begin
-      video_id = self.property('video_id')
-      # youtube
-      # video_id.blank? ? '' : "//www.youtube.com/embed/#{video_id}?rel=0&showinfo=0"
-      video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
+      videos = self.videos_json
+      video = videos.find{|i| i[:default]} || videos.find{|i| i[:color] == default_color } || videos.first
+      video.present? ? video[:video_url] : nil
+   end
+  end
+
+  def videos_json
+    @videos_json ||= self.videos.includes(:color).map do |product_video|
+      {
+        default: product_video.is_master?,
+        color: (product_video.color.present? ? product_video.color.name : nil),
+        video_url: product_video.video_url
+      }
     end
   end
 
