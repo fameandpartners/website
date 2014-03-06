@@ -1,4 +1,4 @@
-html = '<%=j  render(template: "users/orders/show.html") %>';
-$('#wrap > #content > .wrap').replaceWith(html)
+html = '<%=j  render(template: 'spree/orders/show') %>';
+$('#wrap > #content > .wrap').replaceWith(html);
 
-window.setCurrentPath('<%= user_order_path(@order) %>')
+window.setCurrentPath('<%= user_order_path(@order) %>');
