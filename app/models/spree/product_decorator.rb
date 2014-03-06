@@ -105,13 +105,21 @@ Spree::Product.class_eval do
       true
     end
   end
-
+=begin
   def video_url
     @video_url ||= get_video_url(self.property('video_id'))
   end
 
   def get_video_url(video_id = nil)
     video_id.blank? ? '' : "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
+  end
+=end
+  def video_url
+    @video_url ||= begin
+      videos = self.videos_json
+      video = videos.find{|i| i[:default]} || videos.find{|i| i[:color] == default_color } || videos.first
+      video.present? ? video[:video_url] : nil
+   end
   end
 
   def videos_json
