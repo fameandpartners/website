@@ -431,8 +431,17 @@
 		.custom-colours{
 			width: 300px;
 		}
+		.picture{
+			width: 320px;
+			position: relative;
+		}
 		.picture img {
-			width: 100%;
+			width: 380px;
+			margin: 0 100px 0 0;
+			position: absolute;
+			left: -66px;
+			top: -36px;
+			z-index: -100;
 		}
 		.customisation-value{
 			padding: 0 20px 0 0;
@@ -440,7 +449,6 @@
 		.customisation-picture {
 			text-align: center;
 			height: 200px;
-			background: url('logo_empty.png') 50% center no-repeat;
 		}
 		.customisation-picture img {
 			display: inline-block;
@@ -485,6 +493,7 @@
 				text-align: center;
 				margin: 10px 0 5px 0;
 				font: 400 16px/1 $fontThree;
+				height: 34px;
 			}
 			.button {
 				text-align: center;
