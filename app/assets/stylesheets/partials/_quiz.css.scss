@@ -141,11 +141,14 @@
       top: 150px;
       width: 350px;
       .section {
-        margin-bottom: 70px;
-      }
-      .btn {
-        width: 100%;
-        + .btn { margin-top: 16px;}
+        margin-bottom: 30px;
+        padding: 20px;
+        border: solid 1px #000;
+        span{
+          display: block;
+          font: 300 32px/40px $fontThree;
+          text-align: center;
+        }
       }
       .or {
         font: 300 22px/36px $fontThree;
