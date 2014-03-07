@@ -83,10 +83,10 @@ class LineItemPersonalization < ActiveRecord::Base
   def options_hash
     values = {}
     values['Size'] = size
-    values['Color'] = color if color.present?
+    values['Color'] = color.presentation if color.present?
 
     customization_values.each do |value|
-      values[value.customisation_type.presentation] = value.presentation
+      values[value.presentation] = nil
     end
 
     values
