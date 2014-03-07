@@ -38,7 +38,7 @@ Spree::LineItem.class_eval do
       array = []
 
       values.each do |type, value|
-        array << "#{type}: #{value}"
+        array << (value.present? ? "#{type}: #{value}" : type.to_s)
       end
 
       array.to_sentence({ :words_connector => ", ", :two_words_connector => ", " })
