@@ -3,8 +3,9 @@ ruby:
   moodboard_pics
 
 .grid-6
-  .picture
-    == product_video(@product, width: '100%', height: '484')
+  .picture.video-player
+    - if defined?(video_url)
+      == embed_video_player(video_url, width: '100%', height: '484')
   / moodboard
 .grid-6
   .row

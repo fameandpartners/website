@@ -39,7 +39,10 @@ $(".spree_products.show").ready ->
   # listen to custom events
   window.current_product_color = window.product_default_color
   variantsSelectorContainer.on('selection_changed', (e, filter) ->
-    page.showProductImagesFor(filter.color)
+    if window.current_product_color != filter.color
+      window.current_product_color = filter.color
+      page.showProductImagesFor(filter.color)
+      page.showProductVideoFor(filter.color)
   )
 
   page.getImagesForSelectedColor = (color) ->
@@ -52,9 +55,6 @@ $(".spree_products.show").ready ->
     new_images
 
   page.showProductImagesFor = (color) ->
-    return if window.current_product_color == color
-    window.current_product_color = color
-
     new_images = page.getImagesForSelectedColor(color)
 
     scope = $('.category-catalog .row .grid-6.product-image')
@@ -73,6 +73,17 @@ $(".spree_products.show").ready ->
         $image_container.hide()
     )
   # end of product color images code
+
+  page.showProductVideoFor = (color) ->
+    $player = $('.picture.video-player iframe')
+    return if $player.length == 0 # for non-video layout..
+    new_video = _.findWhere(window.productVideosData, { color: color })
+    if _.isEmpty(new_video)
+      new_video_url = window.productDefaultVideoUrl
+    else
+      new_video_url = new_video.video_url
+    $player.attr('src', new_video_url)
+
 
 #window.populateImagesCarousel = ($wrapper, filterOptions = {}) ->
 #  $wrapper.empty()

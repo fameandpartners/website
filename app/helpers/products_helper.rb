@@ -57,6 +57,13 @@ module ProductsHelper
     "<iframe width='#{width}' height='#{height}' src='#{product.video_url}' frameborder='0' allowfullscreen></iframe>"
   end
 
+  def embed_video_player(video_url, options = {})
+    width   = options[:width] || 300
+    height  = options[:height] || 533
+
+    "<iframe width='#{width}' height='#{height}' src='#{video_url}' frameborder='0' allowfullscreen></iframe>"
+  end
+
   def hoverable_product_image_tag(product, options = {})
     no_image = 'noimage/product.png'
     colors = options.delete(:colors)
