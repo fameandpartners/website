@@ -262,8 +262,8 @@ module ProductsHelper
     data_attrs = { product_id: product.id }
 
     content_tag(:div, class: 'twin-alert') do
-      link_to("Twin Alert", '#', class: 'twin-alert-link btn', data: data_attrs) +
       content_tag(:div, t('views.pages.products.show.notices.twin_alert').html_safe, class: 'hint') +
+      link_to("Twin Alert", '#', class: 'twin-alert-link btn', data: data_attrs) +
       raw("<div class='hide reserved'><i class='icon icon-tick-circle'></i><span class='username'></span>, you have reserved this dress in <span class='color'></span>.</div>")
     end
   end
