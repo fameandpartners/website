@@ -155,7 +155,7 @@ FameAndPartners::Application.routes.draw do
     get '/email/comp' => 'competition_mailer#marketing_email'
 
     # return form
-    get '/returnform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
+    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
 
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
