@@ -1,8 +1,6 @@
 <script type="text/javascript">
   window.bootstrap = {};
-  <% cache [:user, :bootstrap, :shopping_cart, current_order.cache_key], expires_in: configatron.cache.expire.normally do %>
-    window.bootstrap.order = <%=raw ::CartSerializer.new(current_order).to_json %>
-  <% end %>
+  window.bootstrap.order = <%=raw ::CartSerializer.new(current_order).to_json %>
 
   <% if spree_user_signed_in? %>
     window.bootstrap.wishlist_items = <%=raw try_spree_current_user.wishlist_items.map{|i| WishlistItemSerializer.new(i).attributes }.to_json %>
