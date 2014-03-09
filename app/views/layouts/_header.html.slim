@@ -94,17 +94,17 @@
         = form_tag search_path, method: :get do
           = text_field_tag :q, params[:q], placeholder: 'search for dresses'
           .arrow
-      - cache [:layout, :header, :cart, current_order(true).cache_key], expires_in: configatron.cache.expire.normally do
-        .cart
-          .wishlist
-            = link_to wishlist_path, class: 'wishlist-link' do
-              span.icon-heart
-              span wish list
-          .shopping-bag
-            = link_to spree.cart_path, class: 'shopping-bag-toggler' do
-              span.counter = current_order.item_count
-              ' shopping bag
-          = render 'layouts/shopping_bag_content'
+      /- cache [:layout, :header, :cart, current_order(true).cache_key], expires_in: configatron.cache.expire.normally do
+      .cart
+        .wishlist
+          = link_to wishlist_path, class: 'wishlist-link' do
+            span.icon-heart
+            span wish list
+        .shopping-bag
+          = link_to spree.cart_path, class: 'shopping-bag-toggler' do
+            span.counter = current_order.item_count
+            ' shopping bag
+        = render 'layouts/shopping_bag_content'
   .nav-user
     nav.fleft
       ul
