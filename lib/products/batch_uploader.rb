@@ -295,7 +295,7 @@ module Products
         #product_coding: /product coding/i,
         shipping: /shipping/i,
         stylist_quote_short: /stylist inspiration quote/i,
-        stylist_quote_long: /expanded stylist quote/i,
+        #stylist_quote_long: /expanded stylist quote/i,
         product_details: /product details/i
       }
 
@@ -396,7 +396,7 @@ module Products
           add_product_variants(product, args[:sizes], args[:colors] || [])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
-          add_product_accessories(product, args[:recommendations] || {})
+          # add_product_accessories(product, args[:recommendations] || {})
           add_product_song(product, args[:song].symbolize_keys || {})
           add_product_perfume(product, args[:perfume].symbolize_keys || {})
 
