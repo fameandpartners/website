@@ -28,6 +28,7 @@ gem 'rubyzip', '< 0.9.9', require: false
 gem 'roo', require: false
 
 gem 'twitter'
+gem 'instagram'
 
 # assets
 gem 'jquery-rails'
