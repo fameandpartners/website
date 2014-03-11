@@ -41,133 +41,40 @@
 .social-blocks
   .grid-container
     .grid-8
-      .video-fluid
-        iframe width="560" height="315" src="#{ blog_config.homepage_video_url }" frameborder="0" allowfullscreen
+      - if blog_config.homepage_video_url.present?
+        .video-fluid
+          iframe width="560" height="315" src="#{ blog_config.homepage_video_url }" frameborder="0" allowfullscreen
       .section-title
         h2 ON INSTAGRAM
-        = link_to '#', class: 'btn green border shadow' do
+        = link_to configatron.links.instagram, class: 'btn green border shadow', target: 'blank' do
           i.icon-instagram
           span FOLLOW @FAMEANDPARTNERS
-      .instagram-widget
-        .grid-container
+      - cache [:blog, :homepage, :instagram_widget], expires_in: configatron.cache.expire.long do
+        .instagram-widget
           .grid-6
-            = link_to '#' do
-              = image_tag '_sample/instagram-pic.jpg'
+            - post = instagram_posts.first
+            = link_to post.url, target: 'blank' do
+              = image_tag post.image_url
           .grid-6
             .grid-container
-              .grid-6
-                = link_to '#' do
-                  = image_tag '_sample/instagram-pic.jpg'
-              .grid-6
-                = link_to '#' do
-                  = image_tag '_sample/instagram-pic.jpg'
-              .grid-6
-                = link_to '#' do
-                  = image_tag '_sample/instagram-pic.jpg'
-              .grid-6
-                = link_to '#' do
-                  = image_tag '_sample/instagram-pic.jpg'    
+              - instagram_posts[1..-1].each do |post|
+                .grid-6
+                  = link_to post.url, target: 'blank' do
+                    = image_tag post.image_url
       .section-title
         h2 ON TWITTER
-        = link_to '#', class: 'btn green border shadow' do
+        = link_to configatron.links.twitter, class: 'btn green border shadow', target: 'blank' do
           i.icon-twitter
           span FOLLOW @FAMEANDPARTNERS
-      .twitter-widget
-        .grid-container
-          .grid-4
-            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
-            p 
-              ' @twitterusername
-              br
-              ' 21st December
-          .grid-4
-            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
-            p 
-              ' @twitterusername
-              br
-              ' 21st December
-          .grid-4
-            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
-            p 
-              ' @twitterusername
-              br
-              ' 21st December
-          .grid-4
-            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
-            p 
-              ' @twitterusername
-              br
-              ' 21st December
-          .grid-4
-            p LOREM ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
-            p 
-              ' @twitterusername
-              br
-              ' 21st December        
-
+      - cache [:blog, :homepage, :twitter_widget], expires_in: configatron.cache.expire.long do
+        .twitter-widget
+          .grid-container
+            - tweets.each do |tweet|
+              .grid-4
+                p = tweet.full_text
+                p
+                  = link_to "@#{tweet.user.name}", "https://twitter.com/#{tweet.user.screen_name}", target: 'blank'
+                  br
+                  = tweet.created_at.strftime("#{tweet.created_at.day.ordinalize} %B")
     .grid-4
       = render 'blog/shared/social_blocks'
-      /.about
-        .icon-hexagon.left
-        .icon-hexagon.right
-        .icon-logo
-        p About Fame & Partners lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor. Lorem ipsum dolor sit amet,  consectetur adipisicing elit, sed do eiusmod.
-      /= form_for (Participation.new), as: :participation, url: newsletter_campaign_path(from: 'blog'), remote: true, html: { class: 'sign-in', id: 'newsletter-sign-up' } do |f|
-        h2 become a member of fame & partners
-        = f.text_field :email, class: 'inputbox', placeholder: 'Enter email here'
-        input.btn.green.shadow.border type="submit" value="SIGN UP"
-      /.follow-us
-        h2 FOLLOW US
-        ul
-          li 
-            = link_to '#' do
-              i.icon-facebook
-              span FACEBOOK
-          li 
-            = link_to '#' do
-              i.icon-twitter
-              span TWITTER
-          li
-            = link_to '#' do
-              i.icon-tumblr
-              span TUMBLR
-          li
-            = link_to '#' do
-              i.icon-instagram
-              span INSTAGRAM
-          li
-            = link_to '#' do
-              i.icon-pinterest
-              span PINTEREST
-          li
-            = link_to '#' do
-              i.icon-youtube
-              span YOUTUBE
-          li
-            = link_to '#' do
-              i.icon-vimeo
-              span VIMEO
-
-/ .wrap
-  = render 'blog/shared/promo_banner'
-  = render 'latest_celebrity_photos'
-  .content-sidebar
-    section.content-area
-      .blog-block-title
-        .latest Featured
-        - if @featured_posts.present?
-          - @featured_posts.each do |post|
-            = render partial: 'latest_post_by_category', locals: {post: post}
-        - else
-          .empty No posts found
-    = render 'shared/blog_sidebar'
-
-
-/javascript:
-/  var disqus_shortname = 'fameandpartners';
-/  (function () {
-/    var s = document.createElement('script'); s.async = true;
-/    s.type = 'text/javascript';
-/    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-/    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-/  }());

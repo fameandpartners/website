@@ -16,6 +16,7 @@ configatron.links.facebook = 'http://www.facebook.com/FameandPartners'
 configatron.links.youtube = 'http://www.youtube.com/user/fameandpartners'
 configatron.links.google = 'https://plus.google.com/b/117433562249244184743/117433562249244184743/about/p/pub'
 configatron.links.pinterest = 'http://pinterest.com/fameandpartners/'
+configatron.links.instagram = 'http://instagram.com/fameandpartners'
 configatron.links.rss = ''
 
 configatron.cache.expire.quickly = 15.minutes

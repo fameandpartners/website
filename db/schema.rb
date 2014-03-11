@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140306150008) do
+ActiveRecord::Schema.define(:version => 20140311133004) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -855,12 +855,12 @@ ActiveRecord::Schema.define(:version => 20140306150008) do
   end
 
   create_table "spree_product_properties", :force => true do |t|
-    t.string   "value"
+    t.string   "value",       :limit => 512
     t.integer  "product_id"
     t.integer  "property_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.integer  "position",    :default => 0
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.integer  "position",                   :default => 0
   end
 
   add_index "spree_product_properties", ["product_id"], :name => "index_product_properties_on_product_id"
