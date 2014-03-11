@@ -10,8 +10,9 @@
         - if @celebrity.quote.present?
           h2.blogger-title.quote = @celebrity.quote
         = raw(@celebrity.body)
-        h2.blogger-title = "Dresses #{@celebrity.full_name} would love!"
-
+        .blogger-title
+          h2 Dresses #{@celebrity.full_name} would love!
+          h3 We've analysed #{@celebrity.first_name}'s style profile and here's what they would love...
         - @products.each do |product|
           - path_to_product = collection_product_path(product)
           .product
