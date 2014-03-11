@@ -25,4 +25,23 @@ class BlogController < BlogBaseController
   def generate_breadcrumbs
     @breadcrumbs = [[root_path, 'Home']]
   end
+
+  # move to services/
+  def load_tweets
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key        = "9CrsZ73XUMF19Sqv9akhw"
+      config.consumer_secret     = "0Xj2nCqmWh6GnujKUddY6yJYkMHVTcPVTDXdF5BFwYQ"
+      config.access_token        = "193256975-g07S2EKhBXymooIt0wzkNcVV8PNPNXlGdBbxFjtM"
+      config.access_token_secret = "XuWMmeTO2giLOhHv77Uh80G8IjfR112TFF0TfbIILRqKc"
+    end
+    client.search("@fameandpartners OR #fameandpartners OR from:fameandpartners", count: 6).count
+
+    tweets.first.full_text
+    tweets.first.created_at
+    tweets.first.user.name
+    # * display 6 recent tweets where #fameandpartners or @fameandpartners or from famepartners
+  end
+
+  def load_instagram_posts
+  end
 end
