@@ -272,7 +272,7 @@
 		padding: 0;
 		width: 670px;
 		height: 450px;
-		background: url('_popups/dolly-background.jpg') no-repeat;
+		background: url('_popups/background.jpg') no-repeat;
 	}
 	.modal-form {
 		float: right;
@@ -289,15 +289,33 @@
 		font: 400 78px/0.9 $fontThree;
 		margin: 30px 0;
 	}
+	.promo-title{
+
+	}
+	.promo-code{
+		margin: 10px 0 0;
+		font: 400 22px/0.9 $fontThree;
+	}
+	.share-this{
+		margin-bottom: 20px;
+	}
+	.share{
+		display: inline-block;
+	}
 	.campaign-desc {
-		font: italic 400 18px/1.2 $fontTwo;
+		font: italic 100 16px/1.2 $fontTwo;
 		text-transform: none;
-		padding: 20px 0;
-		color: #333;
-		border-top: solid 1px #333;
-		border-bottom: solid 1px #333;
+		padding: 20px 30px;
+		color: #fff;
+		background: #000;
 		text-align: center;
 		margin-bottom: 40px;
+		-moz-box-shadow:    6px 6px 0px 0px $pinkColor;
+	  -webkit-box-shadow: 6px 6px 0px 0px $pinkColor;
+	  box-shadow:         6px 6px 0px 0px $pinkColor;
+	}
+	.thanks{
+		margin-bottom: 10px;
 	}
 	.price-tag {
 		width: 105px;
@@ -307,5 +325,8 @@
 		top: 300px;
 		left: 140px;
 		background: url('_popups/newsletter-20-to-spend.png') no-repeat;
+	}
+	.aligncenter{
+		text-align: center;
 	}
 }

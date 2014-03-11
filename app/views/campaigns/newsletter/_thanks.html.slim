@@ -5,13 +5,10 @@
     input.inputbox.email type="text" value="News20" readonly="true"
 - else
   .title-join.campaign-benefits Thanks for joining!
-  .thanks-desc Here’s your promo code to use against your purchase.
-  .form-title Use promo code
-  .form
-    .input.single
-      input.inputbox.coupon type="text" value="News20" readonly="true"
-  .share-this.aligncenter
-    .share-title Share this offer
+  .campaign-desc.thanks
+    .thanks-desc Here’s your promo code to use against your purchase.
+    .promo-code NEWS20
+  .share-this
     .share
       a.twitter-share-button href="https://twitter.com/share" data-url="#{ root_url }" Tweet
       javascript:
@@ -21,4 +18,4 @@
       javascript:
         FB.XFBML.parse()
   .aligncenter
-    = link_to 'Start shopping', main_app.collection_path, class: 'btn btn-black'
+    = link_to 'Start shopping', main_app.collection_path, class: 'btn black'
