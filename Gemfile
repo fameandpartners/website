@@ -27,6 +27,9 @@ gem 'geoip', require: false
 gem 'rubyzip', '< 0.9.9', require: false
 gem 'roo', require: false
 
+gem 'twitter'
+gem 'instagram'
+
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
