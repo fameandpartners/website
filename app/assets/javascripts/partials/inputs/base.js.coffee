@@ -52,7 +52,7 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
     return newValue
 
 window.inputs.ChosenSelector = class ChosenSelector extends BaseInput
-  constructor: (@container) ->
+  constructor: (@container, @valueType = 'string') ->
     super()
     _.bindAll(@, 'onValueChanged')
     @container.on('change', @onValueChanged)
@@ -61,11 +61,18 @@ window.inputs.ChosenSelector = class ChosenSelector extends BaseInput
     @trigger('change')
 
   getValue: () ->
-    value = @container.val()
-    if value then value else null
+    @prepareValue(@container.val())
 
   setValue: (newValue) ->
     @container.val(newValue).trigger('chosen:updated')
+
+  prepareValue: (value) ->
+    if _.isUndefined(value)
+      return null
+    else if @valueType == 'integer'
+      parseInt(value)
+    else
+      value
 
 
 window.inputs.CustomAndBaseColourSelector = class CustomAndBaseColourSelector extends BaseInput
