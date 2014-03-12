@@ -39,58 +39,58 @@ namespace :images do
       Dir["#{product_directory_path}/*"].each do |content_path|
         content_name = content_path.rpartition('/').last.strip
 
-        if File.file?(content_path) && process_product_images?(sku)
-          begin
-           matches = product_image_regexp.match(content_name)
+        if File.file?(content_path) # && process_product_images?(sku)
+          # begin
+          #  matches = product_image_regexp.match(content_name)
           
-           unless matches.present? # directory have invalid format of name
-             puts "  File \"#{content_name}\" have invalid format of name"
-             next
-           end
+          #  unless matches.present? # directory have invalid format of name
+          #    puts "  File \"#{content_name}\" have invalid format of name"
+          #    next
+          #  end
           
-           position = matches[:position].downcase.include?('front') ? 0 : matches[:position].to_s.to_i
+          #  position = matches[:position].downcase.include?('front') ? 0 : matches[:position].to_s.to_i
           
-           if matches[:color].present?
-             color = matches[:color].strip.underscore.downcase.dasherize
-             option_value = product.option_types.find_by_name('dress-color').option_values.where('LOWER(name) = ?', color).first
-           end
+          #  if matches[:color].present?
+          #    color = matches[:color].strip.underscore.downcase.dasherize
+          #    option_value = product.option_types.find_by_name('dress-color').option_values.where('LOWER(name) = ?', color).first
+          #  end
           
-           if matches[:color].present? && option_value.blank? # color with given name can not be find
-             puts "  Color with the given name \"#{matches[:color]}\" can not be find"
-             next
-           end
+          #  if matches[:color].present? && option_value.blank? # color with given name can not be find
+          #    puts "  Color with the given name \"#{matches[:color]}\" can not be find"
+          #    next
+          #  end
           
-           if option_value.present?
-             puts "  Color: \"#{option_value.presentation}\", Position: \"#{matches[:position]}\""
-           else
-             puts "  Color: \"None\", Position: \"#{matches[:position]}\""
-           end
+          #  if option_value.present?
+          #    puts "  Color: \"#{option_value.presentation}\", Position: \"#{matches[:position]}\""
+          #  else
+          #    puts "  Color: \"None\", Position: \"#{matches[:position]}\""
+          #  end
           
-           if option_value.present?
-             viewable = ProductColorValue.where(product_id: product.id, option_value_id: option_value.id).first_or_create
-           else
-             viewable = master
-           end
+          #  if option_value.present?
+          #    viewable = ProductColorValue.where(product_id: product.id, option_value_id: option_value.id).first_or_create
+          #  else
+          #    viewable = master
+          #  end
           
-           if viewable.is_a?(ProductColorValue)
-             viewable.images.where('attachment_updated_at < ?', 6.hours.ago).destroy_all
-           end
+          #  if viewable.is_a?(ProductColorValue)
+          #    viewable.images.where('attachment_updated_at < ?', 6.hours.ago).destroy_all
+          #  end
           
-           Spree::Image.create!(
-             :attachment    => File.open(content_path),
-             :viewable_type => viewable.class.name,
-             :viewable_id   => viewable.id,
-             :position      => position
-           )
+          #  Spree::Image.create!(
+          #    :attachment    => File.open(content_path),
+          #    :viewable_type => viewable.class.name,
+          #    :viewable_id   => viewable.id,
+          #    :position      => position
+          #  )
           
-           if viewable.is_a?(ProductColorValue)
-             puts "  File \"#{content_name}\" was loaded and attached to color \"#{viewable.option_value.presentation}\""
-           else
-             puts "  File \"#{content_name}\" was loaded and attached"
-           end
-          rescue Exception => message
-           puts "  #{message.inspect}"
-          end
+          #  if viewable.is_a?(ProductColorValue)
+          #    puts "  File \"#{content_name}\" was loaded and attached to color \"#{viewable.option_value.presentation}\""
+          #  else
+          #    puts "  File \"#{content_name}\" was loaded and attached"
+          #  end
+          # rescue Exception => message
+          #  puts "  #{message.inspect}"
+          # end
         elsif File.directory?(content_path)
           begin
             file_paths = Dir["#{content_path}/*"]
