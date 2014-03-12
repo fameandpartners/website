@@ -20,6 +20,10 @@ class Answer < ActiveRecord::Base
 
   belongs_to :question
 
+  has_many :answer_taxons
+  has_many :taxons,
+           through: :answer_taxons
+
   validates :code,
             :presence => true,
             :uniqueness => {

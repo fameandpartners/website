@@ -20,6 +20,8 @@ class AnswersController < ApplicationController
 
     basic_styles = UserStyleProfile::BASIC_STYLES
 
+    taxons = []
+
     params['quiz']['questions'].each do |id, attrs|
       question = quiz.questions.find(id)
 
@@ -46,6 +48,8 @@ class AnswersController < ApplicationController
       end
 
       style_profile.serialized_answers[question.id] = answers.map(&:id)
+
+      taxons += answers.map(&:taxons).flatten
 
       if question.populate.present?
         if style_profile.respond_to?("#{question.populate}=")
@@ -88,6 +92,16 @@ class AnswersController < ApplicationController
     end
 
     style_profile.save
+
+    if taxons.present?
+      taxons.group_by(&:id).each do |id, group|
+        debugger
+        style_profile.user_style_profile_taxons.create do |object|
+          object.taxon = group.first
+          object.capacity = group.size
+        end
+      end
+    end
 
 
     MarketingMailer.style_quiz_completed(style_profile.user, current_site_version).deliver

@@ -105,10 +105,89 @@ module Overrides
           limit = options[:limit] || 12
           style_profile = UserStyleProfile.find_by_user_id(user.id)
 
-          recommended_for_style_profile(style_profile, limit)
+          recommended_for_style_profile(style_profile, (limit * 0.7).round) + 
+            recommended_by_taxon_ids(style_profile.user_style_profile_taxons.map(&:taxon_id), (limit * 0.3).round)
         end
 
-        def recommended_for_style_profile(style_profile, limit = 12)
+        def recommended_by_taxon_ids(taxon_ids, limit = 4)
+          query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
+            filter :bool, :must => {
+              :term => {
+                :deleted => false
+              }
+            }
+
+            filter :exists, :field => :available_on
+
+            filter :bool, :should => {
+              :range => {
+                :available_on => { :lte => Time.now }
+              }
+            }
+
+            sort do
+              by ({
+                :_script => {
+                  script: %q{    
+                    intersection_size = 0;
+
+                    if ( doc.containsKey('taxon_ids') ) {
+                      foreach( target_id : taxon_ids ) {
+                        foreach( taxon_id : doc['taxon_ids'].values ) {
+                          if ( target_id == taxon_id ) {
+                            intersection_size += 1;
+                          }
+                        }
+                      }
+
+                      ratio = intersection_size / taxon_ids.size();
+                      factor = 1;
+
+                      if ( intersection_size == taxon_ids.size() ) {
+                        if ( intersection_size == doc['taxon_ids'].values.size() ) {
+                          factor = 2;
+                        } else {
+                          factor = 1.75;
+                        }
+                      } else {
+                        if ( intersection_size == doc['taxon_ids'].values.size() ) {
+                          factor = 1.5;
+                        }
+                      }
+
+                      return (ratio * factor);
+                    }
+
+                    return 0;
+                  }.gsub(/[\r\n]|([\s]{2,})/, ''),
+                  params: {
+                    taxon_ids: taxon_ids
+                  },
+                  type:   'number',
+                  order:  'desc'
+                }
+              })
+            end
+
+            from 0
+            size limit
+          end
+
+          begin
+            query.results.results
+          rescue ActiveRecord::RecordNotFound
+            Tire.index(:spree_products) do
+              delete
+              import ::Spree::Product.all
+            end
+
+            Tire.index(:spree_products).refresh
+
+            recommended_by_taxon_ids(taxon_ids, limit)
+          end
+        end
+
+        def recommended_for_style_profile(style_profile, limit = 8)
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => {
               :term => {

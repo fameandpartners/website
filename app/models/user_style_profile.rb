@@ -28,6 +28,7 @@ class UserStyleProfile < ActiveRecord::Base
 
   belongs_to :user,
              :class_name => 'Spree::User'
+  has_many   :user_style_profile_taxons
 
   validate do
     unless brands.all?{ |brand| BRANDS.include?(brand) }
