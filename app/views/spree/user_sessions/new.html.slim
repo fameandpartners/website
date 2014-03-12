@@ -3,7 +3,7 @@
     h1 Log-in
     .description Log-in to check your order, save your dress to a Wishlist, to discover your Style Profile, share with friends and to manage your profile.
     / = link_to 'Log-in with facebook', fb_auth_path, class: 'facebook-signup'
-    = link_to fb_auth_path, class: 'facebook-button' do
+    = link_to fb_auth_path(site_version: current_site_version.code), class: 'facebook-button' do
       span.icon
         span.icon-facebook2
       span Sign up with facebook
