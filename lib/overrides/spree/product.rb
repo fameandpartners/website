@@ -105,8 +105,12 @@ module Overrides
           limit = options[:limit] || 12
           style_profile = UserStyleProfile.find_by_user_id(user.id)
 
-          recommended_for_style_profile(style_profile, (limit * 0.7).round) + 
-            recommended_by_taxon_ids(style_profile.user_style_profile_taxons.map(&:taxon_id), (limit * 0.3).round)
+          if style_profile.user_style_profile_taxons.present?
+            recommended_for_style_profile(style_profile, (limit * 0.7).round) +
+              recommended_by_taxon_ids(style_profile.user_style_profile_taxons.map(&:taxon_id), (limit * 0.3).round)
+          else
+            recommended_for_style_profile(style_profile, limit)
+          end
         end
 
         def recommended_by_taxon_ids(taxon_ids, limit = 4)
