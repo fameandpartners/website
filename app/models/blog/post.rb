@@ -26,7 +26,7 @@ class Blog::Post < ActiveRecord::Base
   validates :category_id, presence: true, if: :simple?
   validates :post_type_id, inclusion: [PostTypes::SIMPLE, PostTypes::RED_CARPET]
   validates :slug, uniqueness: true
-  validates :primary_type, inclusion: PRIMARY_TYPES
+  validates :primary_type, inclusion: PRIMARY_TYPES, allow_blank: true
 
   scope :red_carpet, where(post_type_id: PostTypes::RED_CARPET)
   scope :published, where('published_at IS NOT NULL').order('published_at desc')

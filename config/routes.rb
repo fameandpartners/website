@@ -287,8 +287,8 @@ FameAndPartners::Application.routes.draw do
         resources :categories
         resources :events
 
-        resources :red_carpet_events, only: [:index] do
-        end
+        #resources :red_carpet_events, only: [:index] do
+        #end
 
         resources :assets, only: [:create, :destroy, :index]
 

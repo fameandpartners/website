@@ -20,12 +20,13 @@
         tr
           td= link_to post.title, edit_admin_blog_red_carpet_event_path(post)
           td= post.occured_at_formatted
-          - if can? :toggle_publish, post
+          /- if can? :toggle_publish, post
             td[data-url="#{toggle_publish_admin_blog_red_carpet_event_path(post)}"]
               =' check_box_tag :published, '', post.published?
               = link_to '[Preview]', blog_red_carpet_post_url(post.slug, :host => configatron.blog_host), :target => :blank
-          - else
+          /- else
             td= post.state
+          td Not available
           td= post.created_at_formatted
           td
             = link_to "", edit_admin_blog_red_carpet_event_path(post), class: "icon_link with-tip icon-edit no-text", "data-action" => "edit"
