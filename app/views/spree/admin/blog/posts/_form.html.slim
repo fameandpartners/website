@@ -14,7 +14,6 @@
       br
       = f.error_message_on :title
 
-
     = f.field_container :slug do
       = f.label :slug, "Slug"
       br
@@ -28,6 +27,20 @@
       = f.select :category_id, options_from_collection_for_select(@categories, :id, :name, f.object.category_id), {}, class: 'select2'
       br
       = f.error_message_on :category_id
+
+    = f.field_container :primary_type do
+      = f.label :primary_type, 'Show on top of post '
+      br
+      = f.select :primary_type, options_from_collection_for_select(Blog::Post::PRIMARY_TYPES, :to_s, :to_s)
+      br
+      = f.error_message_on :primary_type
+
+    = f.field_container :video_url do
+      = f.label :video_url, 'Video url'
+      br
+      = f.text_field :video_url, placeholder: "//www.youtube.com/embed/4j3u9fxHMkI", class: 'fullwidth'
+      br
+      = f.error_message_on :video_url
 
     = f.field_container :occured_at do
       = f.label :occured_at, "Occured at/Publish Date "
@@ -60,7 +73,6 @@
       br
 
 = render 'file_upload'
-
 
 javascript:
   window.initBlogPostForm();

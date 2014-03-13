@@ -3,7 +3,7 @@ class Spree::Admin::Blog::CelebrityPhotosController < Spree::Admin::Blog::BaseCo
 
   def index
     if params[:post_id].blank? && params[:celebrity_id].blank?
-      post_photos = Blog::CelebrityPhoto.includes(:celebrity).where(user_id: current_spree_user.id, post_id: nil, celebrity_id: nil)
+      photos = Blog::CelebrityPhoto.includes(:celebrity).where(user_id: current_spree_user.id, post_id: nil, celebrity_id: nil)
     elsif params[:post_id].present?
       post        = Blog::Post.find(params[:post_id])
       photos      = post.celebrity_photos.includes(:celebrity)

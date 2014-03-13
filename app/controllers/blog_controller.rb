@@ -13,11 +13,12 @@ class BlogController < BlogBaseController
     #end
 
     @featured_posts = Blog::Post.featured
+    @latest_posts   = Blog::Post.simple_posts.where('featured_at is null').limit(6)
 
-    @latest_posts = Blog::Category.limit(6).map(&:latest_post).compact
-    if (posts_needed = 6 - @latest_posts.length) > 0
-      @latest_posts += Blog::Post.offset(@featured_posts.to_a.size).limit(posts_needed).to_a
-    end
+    #@latest_posts = Blog::Category.limit(6).map(&:latest_post).compact
+    #if (posts_needed = 6 - @latest_posts.length) > 0
+    #  @latest_posts += Blog::Post.offset(@featured_posts.to_a.size).limit(posts_needed).to_a
+    #end
   end
 
   def tweets

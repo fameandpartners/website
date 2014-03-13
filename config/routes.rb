@@ -83,9 +83,9 @@ FameAndPartners::Application.routes.draw do
     match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
   end
 
-  if Rails.env.production?
-    match '/blog(/*path)' => redirect(host: configatron.host, path: '/')
-  end
+  #if Rails.env.production?
+  #  match '/blog(/*path)' => redirect(host: configatron.host, path: '/')
+  #end
 
   # Blog routes
   scope '/blog' do
@@ -287,8 +287,8 @@ FameAndPartners::Application.routes.draw do
         resources :categories
         resources :events
 
-        resources :red_carpet_events, only: [:index] do
-        end
+        #resources :red_carpet_events, only: [:index] do
+        #end
 
         resources :assets, only: [:create, :destroy, :index]
 
