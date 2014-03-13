@@ -7,13 +7,15 @@
     section.content-area
       article.blog-post
         .blog-category = @post.category.name
-        .blog-top-picture
-          = image_tag '_sample/post-picture.jpg'
-          .text
-            h1.post-title = @post.title
-            p = post_description(@post)
-        .video-fluid
-          iframe width="560" height="315" src="//www.youtube.com/embed/4j3u9fxHMkI" frameborder="0" allowfullscreen
+        - if @post.primary_type == 'video' && @post.video_url.present?
+          .video-fluid
+            iframe width="560" height="315" src="#{ @post.video_url }" frameborder="0" allowfullscreen
+        - else
+          .blog-top-picture
+            = image_tag post_photo_url(@post)
+            .text
+              h1.post-title = @post.title
+              p = post_description(@post)
         .grid-container
           .grid-8.blog-content-column
             h2.post-title = @post.title
@@ -27,8 +29,14 @@
                   / .avatar
                     = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
                   span.name = @post.user.fullname
-            - if @post.primary_photo.present?
+
+            - if @post.primary_type == 'video' && @post.primary_photo.present?
               .featured-image = image_tag @post.primary_photo.photo.url(:preview), alt: ''
+
+            - if @post.primary_type != 'video' && @post.video_url.present?
+              .video-fluid
+                iframe width="560" height="315" src="#{ @post.video_url }" frameborder="0" allowfullscreen
+
             .post-content= raw(@post.body)
             - if @recommended_posts.present?
               .other-articles
