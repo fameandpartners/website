@@ -72,7 +72,9 @@ class ApplicationController < ActionController::Base
       site_version = nil
     end
 
-    { site_version: site_version }.merge(super)
+    result = { site_version: site_version }.merge(super)
+    result.delete(:script_name)
+    result
   end
 
   private
