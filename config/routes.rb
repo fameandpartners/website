@@ -83,9 +83,9 @@ FameAndPartners::Application.routes.draw do
     match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
   end
 
-  if Rails.env.production?
-    match '/blog(/*path)' => redirect(host: configatron.host, path: '/')
-  end
+  #if Rails.env.production?
+  #  match '/blog(/*path)' => redirect(host: configatron.host, path: '/')
+  #end
 
   # Blog routes
   scope '/blog' do
