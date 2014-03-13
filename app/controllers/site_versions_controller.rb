@@ -11,6 +11,6 @@ class SiteVersionsController < ApplicationController
       user.update_site_version(site_version)
     end
 
-    redirect_to root_url(site_version: site_version.permalink)
+    redirect_to previous_location_or_default(root_url(site_version: site_version.permalink))
   end
 end

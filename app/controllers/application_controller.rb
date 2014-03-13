@@ -16,20 +16,35 @@ class ApplicationController < ActionController::Base
     if params[:site_version].blank?
       if current_site_version.default?
         # do nothing
+        store_current_location
       else
         redirect_to url_with_correct_site_version
       end
     else
       if params[:site_version] == current_site_version.code
         # do nothing
+        store_current_location
       else params[:site_version] != current_site_version.code
         redirect_to url_with_correct_site_version
       end
     end
   end
 
+  # default version. overrided in spree based controllers
   def url_with_correct_site_version
     main_app.url_for(params.merge(site_version: current_site_version.code))
+  end
+
+  def store_current_location
+    session[:previous_location] = url_with_correct_site_version
+  end
+
+  def previous_location_or_default(default_url)
+    if session[:previous_location].present?
+      session[:previous_location]
+    else
+      default_url
+    end
   end
 
   def check_cart
