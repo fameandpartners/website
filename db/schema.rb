@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140311133004) do
+ActiveRecord::Schema.define(:version => 20140312123919) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(:version => 20140311133004) do
   end
 
   add_index "activities", ["action", "owner_type", "owner_id"], :name => "index_activities_on_action_and_owner_type_and_owner_id"
+
+  create_table "answer_taxons", :force => true do |t|
+    t.integer  "answer_id"
+    t.integer  "taxon_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -1253,6 +1260,12 @@ ActiveRecord::Schema.define(:version => 20140311133004) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "user_style_profile_taxons", :force => true do |t|
+    t.integer "user_style_profile_id"
+    t.integer "taxon_id"
+    t.integer "capacity"
   end
 
   create_table "user_style_profiles", :force => true do |t|
