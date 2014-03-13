@@ -60,7 +60,7 @@ $('.spree_products.index').ready ->
         else
           url = "/collection/#{filter.collection}?#{$.param(cleared_filter)}"
 
-      url = window.getSiteVersionPrefix() + url
+      url = urlWithSitePrefix(url)
       window.history.pushState({ path: url }, '', url)
       url
 

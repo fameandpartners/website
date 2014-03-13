@@ -128,4 +128,8 @@ class LineItemsController < Spree::StoreController
       render json: { order: CartSerializer.new(current_order).to_json}, status: :bad_request
     end
   end
+
+  def url_with_correct_site_version
+    main_app.url_for(params.merge(site_version: current_site_version.code))
+  end
 end

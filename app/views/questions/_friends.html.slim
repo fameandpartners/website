@@ -1,37 +1,42 @@
 javascript:
-  FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      FB.api('/me/friends', 'get', { limit: 30 }, function(response){
-        _.each(response.data, function(item, index){
-          $block = $('.img-' + (index + 1), $('.invite-friends'));
-          $block.css('background-image', 'url(https://graph.facebook.com/' + item.id + '/picture?type=large)');
-          $block.fadeIn('slow');
-         });
-       });
-    }
-  });
-  $('a.choose-friends-link').click(function(event){
-    event.preventDefault();
-
+  try {
     FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-        FB.ui(
-          {
-            method: 'send',
-            display: 'iframe',
-            link: 'http://www.fameandpartners.com/'
-          },
-          Quiz.goToNextStep
-        );
-      } else {
-        FB.ui({
-          method: 'send',
-          display: 'popup',
-          link: 'http://www.fameandpartners.com/'
-        });
+        FB.api('/me/friends', 'get', { limit: 30 }, function(response){
+          _.each(response.data, function(item, index){
+            $block = $('.img-' + (index + 1), $('.invite-friends'));
+            $block.css('background-image', 'url(https://graph.facebook.com/' + item.id + '/picture?type=large)');
+            $block.fadeIn('slow');
+           });
+         });
       }
     });
-  });
+    $('a.choose-friends-link').click(function(event){
+      event.preventDefault();
+
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          FB.ui(
+            {
+              method: 'send',
+              display: 'iframe',
+              link: 'http://www.fameandpartners.com/'
+            },
+            Quiz.goToNextStep
+          );
+        } else {
+          FB.ui({
+            method: 'send',
+            display: 'popup',
+            link: 'http://www.fameandpartners.com/'
+          });
+        }
+      });
+    });
+  } catch (exception) {
+    console.log(exception)
+  }
+
 h1
   em Who do you go shopping with
   ' For your prom dress?

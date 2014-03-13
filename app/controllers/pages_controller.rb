@@ -66,6 +66,10 @@ class PagesController < Spree::StoreController
 
     redirect_to spree.spree_user_omniauth_authorize_url(:provider => :facebook)
   end
+
+  def url_with_correct_site_version
+    main_app.url_for(params.merge(site_version: current_site_version.code))
+  end
 =begin
   private
 

@@ -29,6 +29,10 @@ class BoutiqueController < Spree::StoreController
     end
   end
 
+  def url_with_correct_site_version
+    main_app.url_for(params.merge(site_version: current_site_version.code))
+  end
+
   private
 
   class BoutiqueView

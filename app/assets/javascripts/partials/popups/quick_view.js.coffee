@@ -98,7 +98,7 @@ window.popups.ProductQuickView = class ProductQuickView
     @container.find('.selectbox').chosen(width: '100%', disable_search: true)
 
     selector = window.helpers.createProductVariantsSelector(@container)
-    selector.sizeInput = new inputs.ChosenSelector(@container.find('select#toggle-selectbox'))
+    selector.sizeInput = new inputs.ChosenSelector(@container.find('select#toggle-selectbox'), 'integer')
     selector.target = @container.find('.buy-wishlist .btn.buy-now')
     selector.init(@productVariants)
 
@@ -126,4 +126,4 @@ window.popups.ProductQuickView = class ProductQuickView
       new_video_url = @productVideoUrl
     else
       new_video_url = new_video.video_url
-    $player.attr('src', new_video_url)
+    $player.attr('src', new_video_url) if $player.attr('src') != new_video_url

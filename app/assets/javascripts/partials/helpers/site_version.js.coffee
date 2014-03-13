@@ -2,7 +2,7 @@ window.getSiteVersionPrefix = () ->
   defaultPrefix = ''
   try
     if window.current_site_version
-      code = window.site_version.permalink
+      code = window.current_site_version.permalink
       if code && !code.match('us')
         return "/" + code.replace('/', '')
       else
@@ -14,5 +14,5 @@ window.getSiteVersionPrefix = () ->
 
 window.urlWithSitePrefix = (url) ->
   prefix = getSiteVersionPrefix()
-  cleanedUrl = url.replace(/^\/au/, '').replace(/^\/us/, '')
+  cleanedUrl = url.replace(/^\/au\b/, '').replace(/^\/us\b/, '')
   return (prefix + cleanedUrl)

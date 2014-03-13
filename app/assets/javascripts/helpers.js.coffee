@@ -34,8 +34,8 @@ window.getUniqueValues = (array, property) ->
   return result
 
 window.setCurrentPath = (path) ->
-  url = "#{ window.location.origin }#{ path }"
-  window.history.pushState({path:url},'',url)
+  url = "#{ window.location.origin }#{ urlWithSitePrefix(path) }"
+  window.history.pushState({ path: url }, '', url)
 
 window.switchToAltImage = (element, no_image_src) ->
   $(element).attr('src', no_image_src).removeAttr('onerror')

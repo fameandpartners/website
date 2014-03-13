@@ -39,10 +39,10 @@ window.helpers.createProductVariantsSelector = (root) ->
 
       if ! _.isEmpty(variant)
         target_data.id = variant.id
-      else if !_.isNull(variantsSelector.selected.size)
-        target_data.error = 'Please select a colour'
-      else if !_.isEmpty(variantsSelector.selected.color)
+      else if _.isNull(variantsSelector.selected.size)
         target_data.error = 'Please select a size'
+      else if _.isEmpty(variantsSelector.selected.color)
+        target_data.error = 'Please select a colour'
       else
         target_data.error = 'Please, select size and colour'
 

@@ -8,7 +8,7 @@ window.Quiz = {
     $('.quiz-box-inner').html('')
     Quiz.updatePosition()
     # $('body').css 'overflow', 'hidden'
-    $.getScript('/quiz').
+    $.getScript(urlWithSitePrefix('/quiz')).
       success(() ->
         # execute 'after render'. can be refactor to list, for external api
         Quiz.showWelcomeMessage()
