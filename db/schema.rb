@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140313131540) do
+ActiveRecord::Schema.define(:version => 20140314083146) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -165,12 +165,14 @@ ActiveRecord::Schema.define(:version => 20140313131540) do
   add_index "blog_posts", ["user_id"], :name => "index_blog_posts_on_user_id"
 
   create_table "blog_preferences", :force => true do |t|
-    t.text     "value"
     t.string   "key"
+    t.text     "value"
     t.string   "value_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "blog_preferences", ["key"], :name => "index_blog_preferences_on_key"
 
   create_table "blog_promo_banners", :force => true do |t|
     t.string   "url"
@@ -249,6 +251,8 @@ ActiveRecord::Schema.define(:version => 20140313131540) do
     t.datetime "updated_at",                           :null => false
   end
 
+  add_index "celebrity_moodboard_items", ["side"], :name => "index_celebrity_moodboard_items_on_side"
+
   create_table "celebrity_product_accessories", :force => true do |t|
     t.integer  "celebrity_id"
     t.integer  "spree_product_id"
@@ -324,25 +328,17 @@ ActiveRecord::Schema.define(:version => 20140313131540) do
     t.string   "school_name"
   end
 
-  create_table "customisation_types", :force => true do |t|
-    t.integer  "position"
-    t.string   "name"
-    t.string   "presentation"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "customisation_values", :force => true do |t|
     t.integer  "position"
     t.string   "name"
     t.string   "presentation"
-    t.integer  "customisation_type_id"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
-    t.decimal  "price",                 :precision => 8, :scale => 2
+    t.decimal  "price",              :precision => 8, :scale => 2
+    t.integer  "product_id"
   end
 
   create_table "data_migrations", :id => false, :force => true do |t|
@@ -350,17 +346,6 @@ ActiveRecord::Schema.define(:version => 20140313131540) do
   end
 
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
-
-  create_table "inspirations", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.string   "name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
@@ -421,25 +406,6 @@ ActiveRecord::Schema.define(:version => 20140313131540) do
   create_table "product_color_values", :force => true do |t|
     t.integer "product_id"
     t.integer "option_value_id"
-  end
-
-  create_table "product_customisation_types", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "customisation_type_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-  end
-
-  create_table "product_customisation_values", :force => true do |t|
-    t.integer "product_customisation_type_id"
-    t.integer "customisation_value_id"
-    t.string  "image_file_name"
-    t.string  "image_content_type"
-    t.integer "image_file_size"
-    t.decimal "price",                         :precision => 8, :scale => 2
-    t.integer "product_id"
-    t.string  "name"
-    t.string  "presentation"
   end
 
   create_table "product_personalizations", :force => true do |t|
@@ -504,13 +470,13 @@ ActiveRecord::Schema.define(:version => 20140313131540) do
   create_table "product_videos", :force => true do |t|
     t.integer  "spree_product_id"
     t.integer  "spree_option_value_id"
-    t.boolean  "is_master",             :default => false
+    t.boolean  "is_master",                            :default => false
     t.string   "color"
-    t.string   "url"
+    t.string   "url",                   :limit => 512
     t.string   "video_id"
     t.integer  "position"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
   end
 
   create_table "questions", :force => true do |t|

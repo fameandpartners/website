@@ -1,5 +1,5 @@
 = render 'shared/blog_top_bar'
-= render partial: 'blog/shared/celebrity_popup'
+/= render partial: 'blog/shared/celebrity_popup'
 
 = render 'shared/breadcrumbs'
 
@@ -12,7 +12,7 @@
           .text
             /.title.small = post.title
             .title.big = post.title
-            p = post_description(post)
+            p = post.description
   .controls
     span.prev
       span.icon-hr-left
@@ -20,7 +20,7 @@
     span.next  
       span.icon-hr-right
 .blog-features
-  h2 features
+  h2 Recent
   .grid-container
     - @latest_posts.each do |post|
       .grid-4
@@ -28,7 +28,7 @@
           = link_to post_path(post) do
             = image_tag post_photo_url(post)
         h4.title-1 = post.title
-        p = post_description(post)
+        p = post.description
 .soundcloud-widget 
   .grid-container
     .grid-8
@@ -44,37 +44,39 @@
       - if blog_config.homepage_video_url.present?
         .video-fluid
           iframe width="560" height="315" src="#{ blog_config.homepage_video_url }" frameborder="0" allowfullscreen
-      .section-title
-        h2 ON INSTAGRAM
-        = link_to configatron.links.instagram, class: 'btn green border shadow', target: 'blank' do
-          i.icon-instagram
-          span FOLLOW @FAMEANDPARTNERS
-      - cache [:blog, :homepage, :instagram_widget], expires_in: configatron.cache.expire.long do
-        .instagram-widget
-          .grid-6
-            - post = instagram_posts.first
-            = link_to post.url, target: 'blank' do
-              = image_tag post.image_url
-          .grid-6
+      .row
+        .section-title
+          h2 ON INSTAGRAM
+          = link_to configatron.links.instagram, class: 'btn green border shadow', target: 'blank' do
+            i.icon-instagram
+            span FOLLOW @FAMEANDPARTNERS
+        - cache [:blog, :homepage, :instagram_widget], expires_in: configatron.cache.expire.long do
+          .instagram-widget
+            .grid-6
+              - post = instagram_posts.first
+              = link_to post.url, target: 'blank' do
+                = image_tag post.image_url
+            .grid-6
+              .grid-container
+                - instagram_posts[1..-1].each do |post|
+                  .grid-6
+                    = link_to post.url, target: 'blank' do
+                      = image_tag post.image_url
+      .row
+        .section-title
+          h2 ON TWITTER
+          = link_to configatron.links.twitter, class: 'btn green border shadow', target: 'blank' do
+            i.icon-twitter
+            span FOLLOW @FAMEANDPARTNERS
+        - cache [:blog, :homepage, :twitter_widget], expires_in: configatron.cache.expire.long do
+          .twitter-widget
             .grid-container
-              - instagram_posts[1..-1].each do |post|
-                .grid-6
-                  = link_to post.url, target: 'blank' do
-                    = image_tag post.image_url
-      .section-title
-        h2 ON TWITTER
-        = link_to configatron.links.twitter, class: 'btn green border shadow', target: 'blank' do
-          i.icon-twitter
-          span FOLLOW @FAMEANDPARTNERS
-      - cache [:blog, :homepage, :twitter_widget], expires_in: configatron.cache.expire.long do
-        .twitter-widget
-          .grid-container
-            - tweets.each do |tweet|
-              .grid-4
-                p = tweet.full_text
-                p
-                  = link_to "@#{tweet.user.name}", "https://twitter.com/#{tweet.user.screen_name}", target: 'blank'
-                  br
-                  = tweet.created_at.strftime("#{tweet.created_at.day.ordinalize} %B")
+              - tweets.each do |tweet|
+                .grid-4
+                  p = tweet.full_text
+                  p
+                    = link_to "@#{tweet.user.name}", "https://twitter.com/#{tweet.user.screen_name}", target: 'blank'
+                    br
+                    = tweet.created_at.strftime("#{tweet.created_at.day.ordinalize} %B")
     .grid-4
       = render 'blog/shared/social_blocks'
