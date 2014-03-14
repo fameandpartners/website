@@ -113,41 +113,66 @@ window.inputs.CustomAndBaseColourSelector = class CustomAndBaseColourSelector ex
 # we should have  customisationValues object in order to manage interdependencies
 # between customisation values
 window.inputs.CustomisationsSelector = class CustomisationsSelector extends BaseInput
-  constructor: (@container) ->
+  allValuesIds: []
+
+  constructor: (@container, @incompatibility_map) ->
     super()
     _.bindAll(@, 'onAddProductButtonClickHandler')
-    @container.on('click', '.btn.empty.border', @onAddProductButtonClickHandler)
+    @container.on('click', '.customisation-value .btn.empty.border', @onAddProductButtonClickHandler)
+    @allValuesIds = _.map(@container.find('.customisation-value'), (item) -> $(item).data('customisation-value-id'))
 
   onAddProductButtonClickHandler: (e) ->
     e.preventDefault()
     valueContainer = $(e.currentTarget).closest('.customisation-value')
+    return if valueContainer.is('.unavailable')
+
     valueContainer.toggleClass('selected')
-    CustomisationsSelector.syncLabelsWithSelectionState(valueContainer)
+    value_id = valueContainer.data('customisation-value-id')
+    if valueContainer.is('.selected')
+      @updateValuesContainer(value_id, 'selected')
+    else
+      @updateValuesContainer(value_id, 'available')
+    @updateIncompatibility()
     @trigger('change')
     return
 
   getValue: () ->
     _.map(@container.find('.customisation-value.selected'), (item) ->
-      $(item).data('customisation-value-id').toString()
+      parseInt($(item).data('customisation-value-id'))
     , @)
 
   # reset selected state for all items if not array passed
   setValue: (newValues) ->
-    return if !_.isArray(newValues)
-      _.each(@container.find('.customisation-value.selected'), (item) ->
-        CustomisationsSelector.syncLabelsWithSelectionState($(item).removeClass('selected'))
-      )
-    else
-      @container.find('.customisation-value.selected').removeClass('selected')
-      _.each(newValues, (id) ->
-        @container.find(".customisation-value[data-customisation-value-id=#{ id }").addClass('selected')
-      , @)
-      _.each(@container.find(".customisation-value"), CustomisationsSelector.syncLabelsWithSelectionState)
+    # reset old values
+    @updateValuesContainer(@allValuesIds, 'available')
+    @updateValuesContainer(newValues, 'selected') if _.isArray(newValues)
 
-  # set markup accordingly to state [ selected, not selected, not available]
-  @syncLabelsWithSelectionState: (valueContainer) ->
-    button = valueContainer.find('.btn.empty.border')
-    if valueContainer.is('.selected')
-      button.html('ADDED')
-    else
-      button.html(' + ADD')
+  updateIncompatibility: () ->
+    selected_items = @getValue()
+    # note: possible, we should contain values in js, and DOM only reflects state
+    incompatible_items = _.map(selected_items, (item_id) ->
+      @incompatibility_map[item_id] || []
+    , @)
+    incompatible_items = _.union.apply(@, incompatible_items)
+    available_items = _.difference(@allValuesIds, selected_items, incompatible_items)
+    @updateValuesContainer(incompatible_items, 'incompatible')
+    @updateValuesContainer(available_items, 'available')
+
+  updateValuesContainer: (value_ids, new_state) ->
+    value_ids = [value_ids] if !_.isArray(value_ids)
+    _.each(value_ids, (value_id) ->
+      @updateValueContainer(value_id, new_state)
+    , @)
+
+  updateValueContainer: (value_id, new_state) ->
+    $valueContainer = @container.find(".customisation-value[data-customisation-value-id=#{ value_id }]")
+    $button = $valueContainer.find('.btn.empty.border')
+    if new_state == 'selected'
+      $valueContainer.addClass('selected').removeClass('unavailable')
+      $button.html('ADDED')
+    else if new_state == 'available'
+      $valueContainer.removeClass('selected').removeClass('unavailable')
+      $button.html('+ ADD')
+    else if new_state == 'incompatible'
+      $valueContainer.removeClass('selected').addClass('unavailable')
+      $button.html('NOT COMPATIBLE')

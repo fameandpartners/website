@@ -45,5 +45,14 @@ module Personalization
       @colors ||= Products::ColorsSearcher.new(@products.to_a).retrieve_colors
     end
     helper_method :colors
+
+    def incompatibility_map(product = @product)
+      result = {}
+      product.customisation_values.includes(:incompatibilities).each do |customisation_value|
+        result[customisation_value.id] = customisation_value.incompatibilities.map(&:incompatible_id)
+      end
+      result
+    end
+    helper_method :incompatibility_map
   end
 end

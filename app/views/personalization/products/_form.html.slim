@@ -1,8 +1,6 @@
 = form_for personalization, url: line_items_path, method: :post, remote: true, html: { class: 'personalization-form' } do |f|
   = hidden_field_tag :variant_id, product.master.id
 
-  
-
   .style.customisation-selector
     .row
       .grid-3

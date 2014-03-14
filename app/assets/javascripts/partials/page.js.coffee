@@ -88,7 +88,7 @@ window.page = {
   enablePersonalisatonForm: (container) ->
     if window.product_variants
       form = window.helpers.createPersonalisationForm(container)
-      form.init(window.product_variants, window.product_master_variant)
+      form.init(window.product_variants, window.product_master_variant, window.incompatibility_map)
       form
 }
 
