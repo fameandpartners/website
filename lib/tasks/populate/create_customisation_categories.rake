@@ -2,9 +2,9 @@ namespace "db" do
   namespace "populate" do
     task customisation_values: :environment do
       remove_old_customisations if Rails.env.development?
-      create_set_of_customisations(10)
       Spree::Product.all.each do |product|
-        assign_random_customisations_to_product(product, 5)
+        create_set_of_customisations(product, 5)
+        set_random_incompatibilities(product.customisation_values(true))
       end
     end
 =begin
@@ -67,30 +67,28 @@ namespace "db" do
     end
 =end
     def remove_old_customisations
-      ProductCustomisationValue.delete_all
-      ProductCustomisationType.delete_all
       CustomisationValue.delete_all
-      CustomisationType.delete_all
+      Incompatibility.delete_all
       LineItemPersonalization.delete_all# or we can just clean stored customisation_values
     end
 
-    def create_set_of_customisations(records_num)
+    def create_set_of_customisations(product, records_num)
       records_num.times do |position|
         value = CustomisationValue.new
+        value.product = product
         value.position = position
-        value.name = generate_text(3)
-        value.presentation = value.name
+        value.presentation = generate_text(3).titleize
+        value.name = value.presentation.downcase.gsub(' ', '-')
         value.price = 10 + rand(10)
         value.save
       end
     end
 
-    def customisation_values
-      @customisation_values ||= CustomisationValue.all.to_a
-    end
-
-    def assign_random_customisations_to_product(product, num)
-      product.customisation_values = customisation_values.shuffle.first(num)
+    def set_random_incompatibilities(customisation_values)
+      samples = customisation_values.sample(2)
+      samples.each do |customisation_value|
+        customisation_value.incompatibles = (customisation_values - samples).sample(2)
+      end
     end
 
     def generate_text(words_num)

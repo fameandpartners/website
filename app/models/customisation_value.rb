@@ -1,13 +1,44 @@
 class CustomisationValue < ActiveRecord::Base
-  default_scope order('position ASC')
-
   belongs_to :product,
              class_name: 'Spree::Product'
 
-  attr_accessible :name, :presentation, :image, :price
+  has_many :incompatibilities,
+           inverse_of: :original,
+           foreign_key: :original_id
+  has_many :incompatibles,
+           through: :incompatibilities
 
-  validates :name, :presentation, :price, presence: true
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  attr_accessible :position,
+                  :name,
+                  :presentation,
+                  :image,
+                  :price
+
+  validates :name,
+            presence: true,
+            uniqueness: {
+              scope: :product_id,
+              case_sensitive: false
+            }
+  validates :presentation,
+            presence: true,
+            uniqueness: {
+              scope: :product_id,
+              case_sensitive: false
+            }
+  validates :price,
+            presence: true,
+            numericality: {
+              greater_than_or_equal_to: 0
+            }
+  validates :position,
+            presence: true,
+            numericality: {
+              only_integer: true
+            },
+            uniqueness: {
+              scope: :product_id
+            }
 
   scope :ordered, order('position ASC')
 

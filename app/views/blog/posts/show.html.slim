@@ -12,7 +12,7 @@
             iframe width="560" height="315" src="#{ @post.video_url }" frameborder="0" allowfullscreen
         - else
           .blog-top-picture
-            = image_tag post_photo_url(@post)
+            = image_tag post_photo_url(@post, :banner)
             .text
               h1.post-title = @post.title
               p = post_description(@post)
@@ -31,7 +31,7 @@
                   span.name = @post.user.fullname
 
             - if @post.primary_type == 'video' && @post.primary_photo.present?
-              .featured-image = image_tag @post.primary_photo.photo.url(:preview), alt: ''
+              .featured-image = image_tag post_photo_url(@post, :preview), alt: ''
 
             - if @post.primary_type != 'video' && @post.video_url.present?
               .video-fluid
@@ -45,7 +45,7 @@
                   - @recommended_posts.each do |post|
                     .grid-4
                       .picture
-                        = link_to image_tag(post_photo_url(post)), post_path(post)
+                        = link_to image_tag(post_photo_url(post, :thumbnail)), post_path(post)
                       p = link_to post.title, post_path(post)
             .comments
               - if @post.red_carpet?
@@ -86,12 +86,11 @@
                     .tag= link_to tag, blog_search_by_tag_path(tag.downcase)
               
 
-      - if @post.red_carpet? && @post.celebrity_photos.assigned.count >= 3
+      /- if @post.red_carpet? && @post.celebrity_photos.assigned.count >= 3
         .blog-block-title
           .latest Photos
           .block-subtitle From the event
-
-        .celebrity-photos.columns-3
+        /.celebrity-photos.columns-3
           - photos = @post.celebrity_photos.assigned.to_a
           - if photos.present?
             ul
@@ -150,7 +149,6 @@
 /    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 /    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 /  })();
-
-noscript
+/noscript
   ' Please enable JavaScript to view the
   a href="http://disqus.com/?ref_noscript" comments powered by Disqus.

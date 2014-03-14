@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140314083146) do
+ActiveRecord::Schema.define(:version => 20140314102016) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -346,6 +346,14 @@ ActiveRecord::Schema.define(:version => 20140314083146) do
   end
 
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "incompatibilities", :force => true do |t|
+    t.integer "original_id"
+    t.integer "incompatible_id"
+  end
+
+  add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
+  add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
