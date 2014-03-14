@@ -9,7 +9,8 @@ Spree::Product.class_eval do
     class_name: 'ProductStyleProfile',
     foreign_key: :product_id
 
-  has_many  :customisation_values
+  has_many  :customisation_values,
+            order: 'customisation_values.position ASC'
   has_many :product_color_values,
            dependent: :destroy
 
