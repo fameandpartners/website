@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140313131540) do
+ActiveRecord::Schema.define(:version => 20140314083146) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -328,26 +328,24 @@ ActiveRecord::Schema.define(:version => 20140313131540) do
     t.string   "school_name"
   end
 
-  create_table "customisation_types", :force => true do |t|
-    t.integer  "position"
-    t.string   "name"
-    t.string   "presentation"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "customisation_values", :force => true do |t|
     t.integer  "position"
     t.string   "name"
     t.string   "presentation"
-    t.integer  "customisation_type_id"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
-    t.decimal  "price",                 :precision => 8, :scale => 2
+    t.decimal  "price",              :precision => 8, :scale => 2
+    t.integer  "product_id"
   end
+
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
@@ -408,25 +406,6 @@ ActiveRecord::Schema.define(:version => 20140313131540) do
   create_table "product_color_values", :force => true do |t|
     t.integer "product_id"
     t.integer "option_value_id"
-  end
-
-  create_table "product_customisation_types", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "customisation_type_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-  end
-
-  create_table "product_customisation_values", :force => true do |t|
-    t.integer "product_customisation_type_id"
-    t.integer "customisation_value_id"
-    t.string  "image_file_name"
-    t.string  "image_content_type"
-    t.integer "image_file_size"
-    t.decimal "price",                         :precision => 8, :scale => 2
-    t.integer "product_id"
-    t.string  "name"
-    t.string  "presentation"
   end
 
   create_table "product_personalizations", :force => true do |t|

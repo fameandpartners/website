@@ -4,8 +4,8 @@
 - content_for :page_actions do
   .toolbar data-hook="toolbar"
     ul.toolbar.inline-menu
-      li#new_admin_customisation_value_link
-        = link_to 'Add customisation value', new_admin_customisation_value_path, remote: true, class: 'icon-plus button', id: 'new_admin_customisation_value'
+      /li#new_admin_customisation_value_link
+      /  = link_to 'Add customisation value', new_admin_customisation_value_path, remote: true, class: 'icon-plus button', id: 'new_admin_customisation_value'
 
 = render 'spree/admin/shared/product_sub_menu'
 
@@ -14,7 +14,7 @@
 - if @customisation_values.blank?
   .no-objects-found = t(:no_results) 
 - else
-  table.index.sortable#customisation_values data-sortable-link=( update_positions_admin_customisation_values_path)
+  table.index.sortable#customisation_values
     colgroup
       col style="width: 5%;"
       col style="width: 25%;"
@@ -33,7 +33,7 @@
       - @customisation_values.each do |customisation_value|
         tr data-id="#{customisation_value.id}" id=( spree_dom_id customisation_value )
           td
-            span.handle 
+            /span.handle
           td = customisation_value.name
           td = customisation_value.presentation
           td 
@@ -41,6 +41,5 @@
               = image_tag customisation_value.image.url(:small)
           td = customisation_value.display_price
           td
-            = link_to 'Edit', edit_admin_customisation_value_url(customisation_value)
-            br
-            = link_to 'Delete', admin_customisation_value_url(customisation_value), remote: true, method: 'delete'
+            /= link_to 'Edit', edit_admin_customisation_value_url(customisation_value)
+            /= link_to 'Delete', admin_customisation_value_url(customisation_value), remote: true, method: 'delete'

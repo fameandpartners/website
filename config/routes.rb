@@ -258,11 +258,11 @@ FameAndPartners::Application.routes.draw do
       #  resources :product_customisation_values, only: :destroy
       #end
       resources :products do
-        resource :customisation, only: [:show, :update], controller: 'product_customisations'
+        resources :customisation_values, only: [:index]
       end
-      resources :customisation_values do
-        post :update_positions, on: :collection
-      end
+      #resources :customisation_values do
+      #  post :update_positions, on: :collection
+      #end
 
       resources :products do
         resources :moodboard_items do
