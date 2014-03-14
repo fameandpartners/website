@@ -1,11 +1,3 @@
 $inner = $('.quiz-box-inner');
 $inner.html("<%=j render(:template => 'questions/index.html.slim') %>");
-_.each($inner.find('.randomize'), function(scope){
-  $(scope).randomize();
-});
-$frames = $inner.find('.film-frame');
-$frame = $frames.first();
-$frame.addClass('current');
-$inner.find('.film').css('width', $frame.width() * $frames.size());
-Quiz._bindEvents();
 track.quizOpened('<%=j analytics_label(:user) %>');

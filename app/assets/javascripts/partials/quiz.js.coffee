@@ -1,42 +1,86 @@
 window.Quiz = {
+  delay: 20000
+  delayShow: false
   autoShow: false
   welcomeMessage: null
   redirectPath: null
 
+  binding:
+    onShow: () ->
+      $(document).keyup (event) ->
+        if event.which is 27
+          Quiz.hide()
+
+      $('#wrap').on 'click', () ->
+        Quiz.hide()
+
+      $('.quiz-box').on 'click', (event) ->
+        event.stopPropagation()
+
+      $(window).on 'resize', Quiz.updatePosition
+
+    onLoad: () ->
+      _.each Quiz.scope().find('.randomize'), (scope) ->
+        $(scope).randomize()
+      $frames = Quiz.scope().find('.film-frame')
+      $frame = $frames.first()
+      $frame.addClass('current')
+      Quiz.scope().find('.film').css('width', $frame.width() * $frames.size())
+
+      Quiz.bindCheckboxesAndRadios()
+
+      $('.quiz-box').find('.next a').click Quiz.nextStepEventHandler
+
+      $('.quiz-box').find('.prev a').click Quiz.previousStepEventHandler
+
+      Quiz.processImagesForStepsInSeries()
+
+      $('.quiz-box .photos-nav .up').on 'click', (event) ->
+        $button = $(event.target)
+        $scrollable = $button.parents('.photos-nav').prev('.scrollable')
+
+        if $scrollable.data('jsp')
+          $scrollable.data('jsp').scrollByY(-100)
+
+      $('.quiz-box .photos-nav .down').on 'click', (event) ->
+        $button = $(event.target)
+        $scrollable = $button.parents('.photos-nav').prev('.scrollable')
+
+        if $scrollable.data('jsp')
+          $scrollable.data('jsp').scrollByY(100)
+
+    onHide: () ->
+      $('#wrap').off 'click'
+      $(document).off 'keyup'
+      $(window).off 'resize', Quiz.updatePosition
+
+  is_visible: () ->
+    Quiz.scope().is(':visible')
+
   show: () ->
+    return if Quiz.is_visible()
+
+    $('#content').after(JST['templates/quiz_popup']())
     $('.quiz-box').show()
     $('.quiz-box-inner').html('')
     Quiz.updatePosition()
-    # $('body').css 'overflow', 'hidden'
     $.getScript(urlWithSitePrefix('/quiz')).
       success(() ->
         # execute 'after render'. can be refactor to list, for external api
+        Quiz.binding.onLoad()
         Quiz.showWelcomeMessage()
       )
     $('.quiz-overlay').one 'click', Quiz.hide
     $('.quiz-box .close-quiz').one 'click', Quiz.hide
 
-    $(document).keyup (event) ->
-      if event.which is 27
-        $(document).off 'keyup'
-        $('#wrap').off 'click'
-        Quiz.hide()
-
-    $('#wrap').on 'click', () ->
-      $('#wrap').off 'click'
-      $(document).off 'keyup'
-      Quiz.hide()
-
-    $('.quiz-box').on 'click', (event) ->
-      event.stopPropagation()
-
-    $(window).on 'resize', Quiz.updatePosition
+    Quiz.binding.onShow()
 
   hide: () ->
     $('.quiz-box').hide()
-    $('body').css 'overflow', 'auto'
-    $(window).off 'resize', Quiz.updatePosition
+    $('.quiz-box').remove()
+    Quiz.binding.onHide()
     $.cookie('quiz_shown', 'true', { expires: 3650, path: '/' })
+
 
   updatePosition: () ->
     $container = $('.quiz-wrapper-box')
@@ -182,7 +226,7 @@ window.Quiz = {
       columnWidth: '.item'
       itemSelector: '.item.loaded'
 
-    
+
 
     $step.find('.photos img').on 'load', () ->
       $image = $(this)
@@ -241,32 +285,6 @@ window.Quiz = {
   stepsWithUnLoadedImage: () ->
     $(step) for step in Quiz.steps() when $(step).is(':has(img[src=""][data-src!=""])')
 
-  _bindEvents: () ->
-    $('.quiz-box').on 'click', (event) ->
-      event.stopPropagation()
-
-    Quiz.bindCheckboxesAndRadios()
-
-    $('.quiz-box').find('.next a').click Quiz.nextStepEventHandler
-
-    $('.quiz-box').find('.prev a').click Quiz.previousStepEventHandler
-
-    Quiz.processImagesForStepsInSeries()
-
-    $('.quiz-box .photos-nav .up').on 'click', (event) ->
-      $button = $(event.target)
-      $scrollable = $button.parents('.photos-nav').prev('.scrollable')
-
-      if $scrollable.data('jsp')
-        $scrollable.data('jsp').scrollByY(-100)
-
-    $('.quiz-box .photos-nav .down').on 'click', (event) ->
-      $button = $(event.target)
-      $scrollable = $button.parents('.photos-nav').prev('.scrollable')
-
-      if $scrollable.data('jsp')
-        $scrollable.data('jsp').scrollByY(100)
-
   showWelcomeMessage: () ->
     return if _.isEmpty(window.Quiz.welcomeMessage)
     $message_container = $('.quiz-box-inner .flash.message')
@@ -287,4 +305,7 @@ $ ->
     Quiz.show()
 
   if location.href.match(/[\?\&]osq\=1/) || window.Quiz.autoShow
-    Quiz.show()
+    if location.href.match(/[\?\&]delayed\=1/) || window.Quiz.delayShow
+      setTimeout Quiz.show, window.Quiz.delay
+    else
+      Quiz.show()
