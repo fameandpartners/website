@@ -13,7 +13,8 @@ class LineItemPersonalization < ActiveRecord::Base
   attr_accessible :customization_value_ids,
                   :height,
                   :size,
-                  :color_id, :color_name
+                  :color_id,
+                  :color_name
 
   validates :size,
             presence: true,
@@ -42,16 +43,14 @@ class LineItemPersonalization < ActiveRecord::Base
       unless customization_value_ids.all?{ |id| product.customisation_value_ids.include?(id.to_i) }
         errors.add(:base, 'Some customisation options can not be selected')
       end
+
+      customization_values.includes(:incompatibles).each_with_index do |customization_value, index|
+        unless customization_values.to_a.from(index + 1).all?{ |cv| cv.is_compatible_with?(customization_value) }
+          errors.add(:base, 'Some customisation options can not be selected')
+        end
+      end
     end
   end
-
-#  validate do
-#    if product.present? && customization_value_ids.present?
-#      unless customization_values.count.eql?(customization_types.count)
-#        errors.add(:base, 'Invalid customisation options selected')
-#      end
-#    end
-#  end
 
 #  def color
 #    if attributes['color'].present?
@@ -68,13 +67,8 @@ class LineItemPersonalization < ActiveRecord::Base
 #  end
 
   def customization_values
-    #CustomisationValue.includes(:customisation_type).find(customization_value_ids)
-    CustomisationValue.where(id: customization_value_ids)
+    @customization_values ||= CustomisationValue.where(id: customization_value_ids)
   end
-
-  #def customization_types
-  #  customization_values.map(&:customisation_type).uniq
-  #end
 
   #def customization_value_ids=(hash)
   #  super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
@@ -109,8 +103,8 @@ class LineItemPersonalization < ActiveRecord::Base
   def calculate_price
     result = 0.0
     result += 16.0 if !basic_color?
-    customisation_values.each do |customisation_value|
-      result += customisation_value.price
+    customization_values.each do |customization_value|
+      result += customization_value.price
     end
     result
   rescue
