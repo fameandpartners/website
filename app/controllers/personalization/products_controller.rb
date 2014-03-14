@@ -6,11 +6,11 @@ module Personalization
     helper Spree::ProductsHelper
 
     def index
-      @products = Spree::Product.active.joins(:product_customisation_values).uniq
+      @products = Spree::Product.active.joins(:customisation_values).uniq
     end
 
     def show
-      @product = Spree::Product.joins(:product_customisation_values).uniq.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
+      @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
 
       set_product_show_page_title(@product, "Custom Formal Dress ")
       @product_properties = @product.product_properties.includes(:property)

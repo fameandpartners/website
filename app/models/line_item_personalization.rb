@@ -39,7 +39,7 @@ class LineItemPersonalization < ActiveRecord::Base
 
   validate do
     if product.present? && customization_value_ids.present?
-      unless customization_value_ids.all?{ |id| product.product_customisation_values.map(&:customisation_value_id).include?(id.to_i) }
+      unless customization_value_ids.all?{ |id| product.customisation_value_ids.include?(id.to_i) }
         errors.add(:base, 'Some customisation options can not be selected')
       end
     end
@@ -109,8 +109,8 @@ class LineItemPersonalization < ActiveRecord::Base
   def calculate_price
     result = 0.0
     result += 16.0 if !basic_color?
-    product_customisation_values.each do |product_customisation|
-      result += product_customisation.price
+    customisation_values.each do |customisation_value|
+      result += customisation_value.price
     end
     result
   rescue
@@ -121,11 +121,5 @@ class LineItemPersonalization < ActiveRecord::Base
     return false if product.blank? || color.blank?
 
     product.basic_colors.where(id: color_id).exists?
-  end
-
-  def product_customisation_values
-    product.product_customisation_values.where(
-      customisation_value_id: self.customization_value_ids
-    ).includes(:customisation_value)
   end
 end

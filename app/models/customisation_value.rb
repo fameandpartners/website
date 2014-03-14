@@ -1,9 +1,14 @@
 class CustomisationValue < ActiveRecord::Base
-  #acts_as_list :scope => :customisation_type
+  default_scope order('position ASC')
 
-  #belongs_to :customisation_type
-  has_many :product_customisation_values, :dependent => :destroy
-  has_many :products, through: :product_customisation_values
+  belongs_to :product,
+             class_name: 'Spree::Product'
+
+  has_many :incompatibilities,
+           inverse_of: :original,
+           foreign_key: :original_id
+  has_many :incompatibles,
+           through: :incompatibilities
 
   attr_accessible :name, :presentation, :image, :price
 

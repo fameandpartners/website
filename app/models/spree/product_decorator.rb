@@ -9,13 +9,7 @@ Spree::Product.class_eval do
     class_name: 'ProductStyleProfile',
     foreign_key: :product_id
 
-  has_many  :customisation_values, through: :product_customisation_values
-  has_many  :product_customisation_values
-  #has_many :product_customisation_types
-  #has_many :customisation_types,
-  #         through: :product_customisation_types
-  #has_many :product_customisation_values,
-  #         through: :product_customisation_types
+  has_many  :customisation_values
   has_many :product_color_values,
            dependent: :destroy
 
@@ -261,7 +255,7 @@ Spree::Product.class_eval do
   end
 
   def can_be_customized?
-    product_customisation_values.present?
+    customisation_values.present?
   end
 
   # Someday, a time of magic and sorcery, move this one and some another methods to decorator/presenter
