@@ -205,6 +205,8 @@ namespace :images do
         end
       end
     end
+
+    Rake::Task['update:images:positions'].execute
   end
 end
 
