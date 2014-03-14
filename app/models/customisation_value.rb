@@ -53,4 +53,8 @@ class CustomisationValue < ActiveRecord::Base
   def display_price
     Spree::Money.new(price)
   end
+
+  def is_compatible_with?(customisation_value)
+    !incompatible_ids.include?(customisation_value.id)
+  end
 end

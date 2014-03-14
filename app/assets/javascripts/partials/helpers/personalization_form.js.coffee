@@ -6,6 +6,7 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
     sizeInput: null,
     colorInput: null,
     customisationsInput: null,
+    incompatibility_map: {},
     selected: {
       color: null,
       size: null,
@@ -16,16 +17,17 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
     choosenVariantId: null,
     errorMessage: 'please, select size and color'
 
-    init: (variants, master_id) ->
+    init: (variants, master_id, incompatibility_map) ->
       personalisationForm.__init.apply(personalisationForm, arguments)
 
-    __init: (variants, master_id) ->
+    __init: (variants, master_id, incompatibility_map) ->
       _.bindAll(@, 'update')
       _.bindAll(@, 'onBuyButtonClickHandler')
       _.bindAll(@, 'trackCustomisationSelected')
 
       @variants = variants
       @masterVariantId  = master_id
+      @incompatibility_map = incompatibility_map
 
       @sizeInput  or= new inputs.ButtonsBoxSelector(@container.find('.section .sizebox'), '.button')
 
@@ -36,7 +38,8 @@ window.helpers.createPersonalisationForm = (parentContainer) ->
       @colorInput.val('')
 
       @customisationsInput or= new window.inputs.CustomisationsSelector(
-        @container.find('.style.customisation-selector')
+        @container.find('.style.customisation-selector'),
+        @incompatibility_map
       )
 
       @sizeInput.on('change',  @update)
