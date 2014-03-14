@@ -7,7 +7,16 @@ class Blog::PostPhoto < ActiveRecord::Base
   belongs_to :post, class_name: Blog::Post, counter_cache: true
   belongs_to :user, class_name: Spree::User
 
-  has_attached_file :photo, styles: { preview: "742x355#"}
+  #has_attached_file :photo, styles: { preview: "742x355#"}
+  has_attached_file :photo, 
+    default_style: 'post',
+    styles: { 
+      banner_small: '460x360#',
+      banner: '1140x400#',
+      preview: '745x261#',
+      post: '373x230#',
+      thumbnail: '239x147#'
+    }
 
   validates_attachment_presence :photo
   validates :user_id, presence: true

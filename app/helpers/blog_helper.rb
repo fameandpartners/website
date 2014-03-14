@@ -8,15 +8,15 @@ module BlogHelper
     end
   end
 
-  def post_photo_url(post)
+  def post_photo_url(post, style = 'post')
     image = post.primary_photo
     image ||= post.post_photos.first
 
     if image.present?
-      image.photo.url
+      image.photo.url(style)
     else
       # default image url
-      Blog::PostPhoto.new.photo.url
+      Blog::PostPhoto.new.photo.url(style)
     end
   end
 

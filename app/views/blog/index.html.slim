@@ -6,7 +6,7 @@
 .blog-carousel
   ul.carousel
     - @featured_posts.each do |post|
-      li.current style="background-image: url('#{ post_photo_url(post) }')" 
+      li.current style="background-image: url('#{ post_photo_url(post, :banner_small) }')" 
         .mask
         = link_to post_path(post) do
           .text
