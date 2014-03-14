@@ -1,26 +1,4 @@
-$(".index.show").ready ->
-
-  # enable products scroll
-  $(".featured#product-items").carouFredSel(
-    window.helpers.get_horizontal_carousel_options(
-      infinite: true,
-      circular: true,
-      height: 458
-    )
-  )
-
-  $("#main-promo .slides").carouFredSel(
-    infinite: true,
-    circular: true,
-    auto: 5000,
-    width: 1078,
-    pagination: '#main-promo .pagination',
-    items:
-      visible: 1,
-      width: 1078,
-      height: 532
-  )
-
+$('.index.show').ready ->
   productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
 
   # show campaign - newsletter popup
