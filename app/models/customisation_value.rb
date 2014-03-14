@@ -4,6 +4,12 @@ class CustomisationValue < ActiveRecord::Base
   belongs_to :product,
              class_name: 'Spree::Product'
 
+  has_many :incompatibilities,
+           inverse_of: :original,
+           foreign_key: :original_id
+  has_many :incompatibles,
+           through: :incompatibilities
+
   attr_accessible :name, :presentation, :image, :price
 
   validates :name, :presentation, :price, presence: true
