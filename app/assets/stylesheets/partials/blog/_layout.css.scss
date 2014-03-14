@@ -130,17 +130,19 @@
 			left: 0;
 			right: 0;
 			height: 100px;
-			background-color: rgba(0, 0, 0, 0.5);
+			background-color: rgba(0, 0, 0, 0.8);
 			text-align: center;
 			font-family: $sourceLight;
 			text-transform: none;
 			.title {
 				position: relative;
-				font-family: $cinzelNormal;
+				font-family: $cinzelBold;
 				&.big {
 					margin-top: -28px;
-					font-size: 50px;
+					font-size: 38px;
 					text-transform: uppercase;
+					font-weight: bold;
+					line-height: 1em;
 				}
 				&.small {
 					font-size: 30px;
@@ -148,7 +150,11 @@
 					font-family: $sourceLight;
 				}
 			}
-			p { margin: 0;}
+			p { 
+				margin: 0;
+				padding: 0 30px;
+				font-size: 15px;
+			}
 		}
 	}
 	.controls {
@@ -322,7 +328,7 @@
 	}
 	.about {
 		background-color: $greenColor;
-		padding: 10px;
+		padding: 20px;
 		text-align: center;
 		position: relative;
 		text-transform: none;
