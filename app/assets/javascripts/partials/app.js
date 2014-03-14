@@ -8,30 +8,6 @@ $(function(){
 
   $('form .size-choser li:has(:radio:checked)').addClass('active');
 
-  $("#carousel").carouFredSel({
-    circular: false,
-    infinite: false,
-    responsive: true,
-    auto  : false,
-    scroll: {
-      fx: 'slide'
-    },
-    prev  : {
-      button  : "#carousel-prev",
-      key   : "left"
-    },
-    next  : {
-      button  : "#carousel-next",
-      key   : "right"
-    },
-    pagination  : {
-      anchorBuilder: function( nr ) {
-        return '<a href="#'+ (nr-1) +'" class="item-'+ (nr-1) +'">'+ (nr-1) +'</a>';
-      },
-      container: "#carousel-pagination"
-    }
-  });
-
   window.initHoverableProductImages()
 
   $("abbr.timeago").timeago();
