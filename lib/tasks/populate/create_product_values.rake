@@ -6,7 +6,7 @@ namespace "db" do
       color_option = add_product_color_option
       add_options_to_products(size_option, color_option)
 
-      randomize_product_variants(size_option, color_option)
+      fullfill_product_variants(size_option, color_option)
     end
   end
 end
@@ -17,7 +17,7 @@ def add_product_size_option(force = false)
 
   option_type.option_values.delete_all if force
 
-  option_values = Array.new(7){|i| (i * 2).to_s}
+  option_values = Array.new(12){|i| (i * 2).to_s}
   build_option_values(option_type, option_values)
 
   option_type
@@ -38,6 +38,27 @@ end
 def add_options_to_products(*options)
   Spree::Product.all.each do |product|
     product.option_types = options
+  end
+end
+
+def fullfill_product_variants(size_option, color_option)
+  sizes   = size_option.option_values
+  colors  = color_option.option_values
+
+  # each product should has all sizes. and random colors
+  Spree::Product.all.each do |product|
+    basic_colors = product.basic_colors.to_a.length > 0 ? product.basic_colors.to_a : get_random(colors)
+    
+    variant_combinations = product.variants.includes(:option_values).map{|v| "#{v.dress_size.name}-#{v.dress_color.name}"}
+
+    sizes.each do |size_value|
+      basic_colors.each do |color_value|
+        if !variant_combinations.include?("#{size_value.name}-#{color_value.name}")
+          variant = Spree::Variant.create(product_id: product.id)
+          variant.option_values = [size_value, color_value]
+        end
+      end
+    end
   end
 end
 

@@ -11,8 +11,12 @@
       ' SELECT A SIZE
       = link_to '(whats my size?)', '#what-size', class: 'toggle-sizes '
     .sizebox
-      - sizes.each_with_index do |size|
-        div.button data-size="#{size}" = size
+      - sizes.first(6).each do |size|
+        .button data-size="#{size}" = size
+      - if sizes.length > 6
+        .dropdown-button data-open="-" data-close="+" +
+        - sizes[6..-1].each do |size|
+          .button.dropdown-size data-size="#{size}" = size
   .section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
     = link_to 'add to cart', '#', class: 'btn buy-now'
