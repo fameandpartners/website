@@ -1,3 +1,11 @@
+ruby:
+  if sizes.size <= 7
+    base_sizes = sizes
+    dropdown_sizes = []
+  else
+    base_sizes = sizes.first(6)
+    dropdown_sizes = sizes[6..-1]
+  end
 .product-info
   h6 = breadcrumbs_for(product)
   h1.product-title
@@ -11,11 +19,11 @@
       ' SELECT A SIZE
       = link_to '(whats my size?)', '#what-size', class: 'toggle-sizes '
     .sizebox
-      - sizes.first(6).each do |size|
+      - base_sizes.each do |size|
         .button data-size="#{size}" = size
-      - if sizes.length > 6
+      - if dropdown_sizes.present?
         .dropdown-button data-open="-" data-close="+" +
-        - sizes[6..-1].each do |size|
+        - dropdown_sizes.each do |size|
           .button.dropdown-size data-size="#{size}" = size
   .section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
