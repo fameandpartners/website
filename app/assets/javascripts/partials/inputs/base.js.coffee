@@ -29,13 +29,15 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
 
   constructor: (@container, @buttons_selector) ->
     super()
+    @container.find('.dropdown-size').wrapAll('<div class="dropdown-content"></div>')
+    @container.find('.dropdown-button ').on 'click', @toggleDropdown  
     _.bindAll(@, 'onButtonClickHandler')
     @container.on('click', @buttons_selector, @onButtonClickHandler)
 
   # private
   onButtonClickHandler: (e) ->
     e.preventDefault()
-    $(e.target).siblings().removeClass('selected')
+    $(e.target).closest('.sizebox').find('.button').removeClass('selected')
     $(e.target).addClass('selected')
     @trigger('change')
 
@@ -48,8 +50,15 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
 
   setValue: (newValue) ->
     selectedButton = @container.find("#{@buttons_selector}[data-size='#{ newValue }']")
-    selectedButton.siblings().removeClass('selected').end().addClass('selected')
+    console.log selectedButton
+    selectedButton.closest('.sizebox').find('.button').removeClass('selected').end().addClass('selected')
     return newValue
+
+  toggleDropdown: (e) ->
+    $this = $(this)
+    $this.text if $.trim($this.text()) is $this.data('close') then $this.data('open') else $this.data('close')
+    $this.toggleClass('selected').next('.dropdown-content').toggle()
+
 
 window.inputs.ChosenSelector = class ChosenSelector extends BaseInput
   constructor: (@container, @valueType = 'string') ->
