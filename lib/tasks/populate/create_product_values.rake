@@ -48,7 +48,8 @@ def fullfill_product_variants(size_option, color_option)
   # each product should has all sizes. and random colors
   Spree::Product.all.each do |product|
     basic_colors = product.basic_colors.to_a.length > 0 ? product.basic_colors.to_a : get_random(colors)
-    
+    fullfill_product(product, sizes, basic_colors)
+
     variant_combinations = product.variants.includes(:option_values).map{|v| "#{v.dress_size.name}-#{v.dress_color.name}"}
 
     sizes.each do |size_value|
@@ -96,4 +97,31 @@ def get_random(args)
   length = rand(args.length)
   result = args.shuffle[0..length]
   result
+end
+
+# to work in console only, not to run
+def size_option
+  @size_option ||= begin
+    args = {  name: 'dress-size', presentation: 'Size' }
+    option_type = Spree::OptionType.where(args).first
+  end
+end
+
+def add_all_sizes_to_product(product)
+  sizes = size_option.option_values
+  colors = product.basic_colors
+
+  variant_combinations = product.variants.includes(:option_values).map{|v| "#{v.dress_size.name}-#{v.dress_color.name}"}
+
+  count = 0
+  sizes.each do |size_value|
+    colors.each do |color_value|
+      if !variant_combinations.include?("#{size_value.name}-#{color_value.name}")
+        variant = Spree::Variant.create(product_id: product.id)
+        variant.option_values = [size_value, color_value]
+        count += 1
+      end
+    end
+  end
+  count
 end
