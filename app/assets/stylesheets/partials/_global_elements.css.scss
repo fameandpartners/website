@@ -214,7 +214,7 @@
 			font-size: 18px;
 		}
 	}
-	.secondary { display: none;}
+	.dropdown-size { display: none;}
 	.dropdown-content {
 		position: absolute;
 		top: 100%;
@@ -225,7 +225,7 @@
 		border-right: solid 1px #000;
 		border-top: solid 1px #000;
 		direction: rtl;
-		.secondary { display: inline-block;}
+		.dropdown-size { display: inline-block;}
 		.button { 
 			border-left: 1px solid #000;
 			border-top: 0;

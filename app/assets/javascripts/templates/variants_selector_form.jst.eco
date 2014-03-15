@@ -18,7 +18,7 @@
       <% if @sizes.length > 6: %>
         <div class="dropdown-button" data-open="-" data-close="+">+</div>
         <% for size in _.rest(@sizes, 6): %>
-          <div class="button dropdown-size secondary" data-size="<%= size %>"><%= size %></div>
+          <div class="button dropdown-size" data-size="<%= size %>"><%= size %></div>
         <% end %>
       <% end %>
     </div>
