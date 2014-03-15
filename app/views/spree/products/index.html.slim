@@ -1,7 +1,7 @@
 .category-header
   - if @page_info[:banner_image].blank?
     h1 = @page_info[:banner_title]
-    h2 = @page_info[:banner_text]
+    h2 = raw @page_info[:banner_text]
     .arrows-line-horizontal
   - else
     .category-banner

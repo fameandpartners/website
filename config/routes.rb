@@ -117,6 +117,11 @@ FameAndPartners::Application.routes.draw do
     get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
   end
 
+  
+  # static pages not needed to be processed unser site_version
+  get '/lp/facebook' => 'statics#landing_facebook', :as => :lp_facebook
+
+
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
