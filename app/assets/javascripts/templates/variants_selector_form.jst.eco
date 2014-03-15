@@ -12,13 +12,19 @@
   <div class="input section">
     <label>SELECT A SIZE</label>
     <div class="sizebox">
-      <% for size in _.first(@sizes, 6): %>
-        <div class="button" data-size="<%= size %>"><%= size %></div>
-      <% end %>
-      <% if @sizes.length > 6: %>
-        <div class="dropdown-button" data-open="-" data-close="+">+</div>
-        <% for size in _.rest(@sizes, 6): %>
-          <div class="button dropdown-size" data-size="<%= size %>"><%= size %></div>
+      <% if @sizes.length <= 7: %>
+        <% for size in @sizes: %>
+          <div class="button" data-size="<%= size %>"><%= size %></div>
+        <% end %>
+      <% else: %>
+        <% for size in _.first(@sizes, 6): %>
+          <div class="button" data-size="<%= size %>"><%= size %></div>
+        <% end %>
+        <% if @sizes.length > 6: %>
+          <div class="dropdown-button" data-open="-" data-close="+">+</div>
+          <% for size in _.rest(@sizes, 6): %>
+            <div class="button dropdown-size" data-size="<%= size %>"><%= size %></div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
