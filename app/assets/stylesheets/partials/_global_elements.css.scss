@@ -190,7 +190,9 @@
 	font-size: 0;
 	margin-top: 5px;
 	border-left: solid 1px #000;
-	.button {
+	position: relative;
+	z-index: 5;
+	.button, .dropdown-button {
 		display: inline-block;
 		border: solid 1px #000;
 		border-left: 0;
@@ -202,10 +204,34 @@
 		width: 14.2857143%;
 		line-height: 36px;
 		cursor: pointer;
+		background-color: #fff;
 		@include box-sizing(border-box);
 		&.selected {
 			color: #fff;
 			background-color: #000;
+		}
+		&.dropdown-button {
+			font-size: 18px;
+		}
+	}
+	.secondary { display: none;}
+	.dropdown-content {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		left: -1px;
+		text-align: right;
+		display: none;
+		border-right: solid 1px #000;
+		border-top: solid 1px #000;
+		direction: rtl;
+		.secondary { display: inline-block;}
+		.button { 
+			border-left: 1px solid #000;
+			border-top: 0;
+			direction: ltr;
+			border-right: 0;
+			&:first-child { margin-right: -1px; }
 		}
 	}
 }
