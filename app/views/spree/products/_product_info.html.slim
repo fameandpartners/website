@@ -15,9 +15,9 @@
       - sizes.each_with_index do |size, index|
         - if index == rowSize
           .dropdown-button data-open="-" data-close="+" +
-          .button.dropdown-size.secondary data-size="#{size}" = size
+          .button.dropdown-size data-size="#{size}" = size
         - elsif index > rowSize
-          .button.dropdown-size.secondary data-size="#{size}" = size
+          .button.dropdown-size data-size="#{size}" = size
         - else  
           .button data-size="#{size}" = size
   .section
