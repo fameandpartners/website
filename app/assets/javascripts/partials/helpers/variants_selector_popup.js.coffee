@@ -36,7 +36,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     showModalWindow: (data) ->
       templateArgs = popup.prepareTemplateArgs(data)
       popup.container.show()
-      
+
       item_html = JST['templates/variants_selector_form'](templateArgs)
       popup.container.find('.item').html(item_html)
 
