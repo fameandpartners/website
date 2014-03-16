@@ -120,6 +120,7 @@ FameAndPartners::Application.routes.draw do
   
   # static pages not needed to be processed unser site_version
   get '/lp/facebook' => 'statics#landing_facebook', :as => :lp_facebook
+  get '/lp/prom' => 'statics#landing_prom', :as => :lp_prom
 
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
