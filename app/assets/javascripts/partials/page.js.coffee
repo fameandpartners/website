@@ -17,7 +17,7 @@ window.page = {
     )
 
   enableWhatSizeIam: (link) ->
-    link.fancybox({width: '1000', height: '183'})
+    link.fancybox({width: '1000', height: '410'})
 
   enableBuyButton: (button, options = {}) ->
     window.helpers.addBuyButtonHandlers(button, options)
