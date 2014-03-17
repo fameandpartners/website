@@ -16,8 +16,10 @@ ruby:
     = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'
   .section
     h6.info
-      ' SELECT A SIZE
+      ' SELECT A SIZE 
       = link_to '(whats my size?)', '#what-size', class: 'toggle-sizes '
+      - if current_site_version.is_australia?
+        .size-info US Sizes Displayed
     .sizebox
       - base_sizes.each do |size|
         .button data-size="#{size}" = size
