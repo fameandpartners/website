@@ -117,8 +117,10 @@ def add_all_sizes_to_product(product)
   sizes.each do |size_value|
     colors.each do |color_value|
       if !variant_combinations.include?("#{size_value.name}-#{color_value.name}")
-        variant = Spree::Variant.create(product_id: product.id)
+        variant = Spree::Variant.new(product_id: product.id)
         variant.option_values = [size_value, color_value]
+        variant.sku = nil
+        variant.save
         count += 1
       end
     end
