@@ -71,7 +71,7 @@ window.helpers.quickViewer = {
       @popupContainer.find(".buy-wishlist a[data-action='add-to-wishlist']")
     )
 
-    @popupContainer.find('.toggle-sizes').fancybox({width: '1000', height: '183'})
+    @popupContainer.find('.toggle-sizes').fancybox({width: '1000', height: '410'})
 
     window.helpers.initProductReserver(
       @popupContainer.find('.twin-alert a.twin-alert-link'),

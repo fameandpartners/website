@@ -26,20 +26,22 @@ window.inputs.BaseInput = class BaseInput
 window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
   container: null
   buttons_selector: null
+  easing_time = 380
 
   constructor: (@container, @buttons_selector) ->
     super()
-    @container.find('.dropdown-size').wrapAll('<div class="dropdown-content"></div>')
-    @container.find('.dropdown-button ').on 'click', @toggleDropdown  
     _.bindAll(@, 'onButtonClickHandler')
     @container.on('click', @buttons_selector, @onButtonClickHandler)
+    @makeDropdown(@container)
 
   # private
   onButtonClickHandler: (e) ->
     e.preventDefault()
     $(e.target).closest('.sizebox').find('.button').removeClass('selected')
     $(e.target).addClass('selected')
+    @container.find('.dropdown-content').fadeOut(easing_time)
     @trigger('change')
+    @closeDropdown(@container.find('.dropdown-button'), @container.find('.dropdown-content'))
 
   getValue: () ->
     value = @container.find("#{@buttons_selector}.selected:first").data('size')
@@ -50,14 +52,28 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
 
   setValue: (newValue) ->
     selectedButton = @container.find("#{@buttons_selector}[data-size='#{ newValue }']")
-    console.log selectedButton
     selectedButton.closest('.sizebox').find('.button').removeClass('selected').end().addClass('selected')
     return newValue
 
-  toggleDropdown: (e) ->
+  makeDropdown: (@container) ->
+    @container.find('.dropdown-size').wrapAll('<div class="dropdown-content"></div>')
+    @bindDropdown(@container.find('.dropdown-button'), @container.find('.dropdown-content'))
+
+  bindDropdown: (button, dropdown) ->
+    button.on 'click', @toggleDropdown
+    dropdown.on 'mouseleave', => @closeDropdown(button, dropdown)
+
+  toggleDropdown: () ->
     $this = $(this)
     $this.text if $.trim($this.text()) is $this.data('close') then $this.data('open') else $this.data('close')
     $this.toggleClass('selected').next('.dropdown-content').toggle()
+
+  closeDropdown: (button, dropdown) ->
+    if button.is('.selected')
+      dropdown.fadeOut(easing_time)
+      button.removeClass('selected').text('+')
+
+
 
 
 window.inputs.ChosenSelector = class ChosenSelector extends BaseInput
