@@ -26,7 +26,7 @@ window.inputs.BaseInput = class BaseInput
 window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
   container: null
   buttons_selector: null
-  easing_time = 200
+  easing_time = 380
 
   constructor: (@container, @buttons_selector) ->
     super()
