@@ -13,6 +13,8 @@ module Personalization
       @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
 
       set_product_show_page_title(@product, "Custom Formal Dress ")
+      display_marketing_banner
+
       @product_properties = @product.product_properties.includes(:property)
 
       @product_variants = Products::VariantsReceiver.new(@product).available_options
@@ -31,6 +33,8 @@ module Personalization
       @product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
 
       set_product_show_page_title(@product, "Custom Formal Dress ")
+      display_marketing_banner
+
       @product_properties = @product.product_properties.includes(:property)
       @product_variants = Products::VariantsReceiver.new(@product).available_options
 

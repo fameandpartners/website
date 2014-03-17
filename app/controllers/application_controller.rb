@@ -427,4 +427,9 @@ class ApplicationController < ActionController::Base
   rescue
     Spree::Product.active.limit(3)
   end
+
+  def display_marketing_banner
+    @display_marketing_banner = true
+  end
+
 end
