@@ -30,8 +30,19 @@
             h3 Delivery Status
             p.labeled = order_shipment_state(@order)
             - if @order.shipment
-              h3 Tracking Number
-              p.labeled = @order.shipment.number
+              - if @order.shipment.is_dhl?
+                p
+                  ' Track your order with DHL:
+                  = link_to shipment_tracking_url(@order.shipment), target: 'blank' do
+                    DHL [#{ @order.shipment.tracking }]
+              - elsif @order.shipment.is_auspost?
+                p
+                  ' Track your order with Australia Post:
+                  = link_to shipment_tracking_url(@order.shipment), target: 'blank' do
+                    AUSPOST [#{ @order.shipment.tracking }]
+              - else
+                h3 Tracking Number
+                p.labeled = @order.shipment.number
 
             - if successfully_ordered
               h3 Customer Support

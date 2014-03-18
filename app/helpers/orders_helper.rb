@@ -25,4 +25,13 @@ module OrdersHelper
       'Free'
     end
   end
+
+  def shipment_tracking_url(shipment)
+    return '#' if shipment.blank?
+    if shipment.is_dhl?
+      "http://www.dhl.com/content/g0/en/express/tracking.shtml?brand=DHL&AWB=#{ shipment.tracking }%0D%0A"
+    elsif shipment.is_auspost?
+      "http://auspost.com.au/track/track.html?id=#{ shipment.tracking }"
+    end
+  end
 end
