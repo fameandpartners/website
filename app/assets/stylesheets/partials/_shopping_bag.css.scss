@@ -109,6 +109,10 @@
 	}
 	.pricing {
 		font-size: 18px;
+    .price-old { 
+      text-decoration: line-through;
+      padding: 0 4px;
+    }
 	}
 }
 

@@ -178,11 +178,13 @@
 		font-weight: 600;
 		margin-top: 12px;
 	}
-	.price { font-size: 12px;}
-	.price-old { 
-		text-decoration: line-through;
-		padding: 0 4px;
-	}
+	.price {
+    font-size: 12px;
+    .price-old { 
+      text-decoration: line-through;
+      padding: 0 4px;
+    }
+  }
 }
 
 .product-page {
@@ -207,6 +209,10 @@
 				display: block;
 				font-size: 12px;
 				font-weight: 400;
+        .price-old {
+          text-decoration: line-through;
+          padding: 0 4px;
+        }
 			}
 		}
 		.size-info{
@@ -516,7 +522,13 @@
 					display: block;
 					font-size: 18px;
 				}
-        .price { font-size: 12px;}
+        .price { 
+          font-size: 12px;
+          .price-old {
+            text-decoration: line-through;
+            padding: 0 4px;
+          }
+        }
 			}
 			.cross {
 				position: relative;
@@ -592,5 +604,9 @@
 	}
 	.price {
 		font-size: 18px;
+    .price-old {
+      text-decoration: line-through;
+      padding: 0 4px;
+    }
 	}
 }

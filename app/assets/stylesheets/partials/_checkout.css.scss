@@ -95,7 +95,13 @@
 						font: 400 26px/1.1 $fontThree;
 						a { text-decoration: none;}
 					}
-					.price { font-size: 18px;}
+					.price {
+            font-size: 18px;
+            .price-old { 
+              text-decoration: line-through;
+              padding: 0 4px;
+            }
+          }
 					.description { 
 						margin-top: 20px;
 						table { width: 100%;}
@@ -132,6 +138,10 @@
 			@include box-sizing(border-box);
 		}
 		.desc { text-align: right;}
+    .price-old { 
+      text-decoration: line-through;
+      padding: 0 4px;
+    }
 	}
 }
 

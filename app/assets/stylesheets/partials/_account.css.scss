@@ -125,6 +125,12 @@
 			text-transform: none;
 			color: #666;
 		}
-		.price { color: $pinkColor;}
+		.price {
+      color: $pinkColor;
+      .price-old { 
+        text-decoration: line-through;
+        padding: 0 4px;
+      }
+    }
 	}
 }
