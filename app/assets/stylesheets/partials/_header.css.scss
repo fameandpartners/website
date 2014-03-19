@@ -97,6 +97,20 @@
 .header-global {
 	height: 165px;
 	position: relative;
+	&.lp {
+		height: auto;
+		margin-bottom: 20px;
+		.logo {
+			left: 100px;
+			margin-left: 0;
+		}	
+		.banner {
+			float: right;
+			margin-top: 20px;
+			padding-left: 15px;
+			border-left: solid 2px #000;
+		}
+	}
 	.logo {
 		line-height: 1;
 		text-align: center;
@@ -108,18 +122,6 @@
 		left: 50%;
 		margin-left: -90px;
 		display: block;
-		// .black {
-		// 	position: relative;
-		// }
-		// .white {
-		// 	position: absolute;
-		// 	color: #fff;
-		// 	left: 0;
-		// 	top: 0;
-		// 	right: 0;
-		// 	height: 15px;
-		// 	overflow: hidden;
-		// }
 	}
 }
 
