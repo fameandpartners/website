@@ -96,3 +96,7 @@ fame_chain = FameChain.new(
   pinterest_size: 'small'
 )
 FameChainMailer.fame_chain(fame_chain).deliver
+
+# Shipping
+shipment = Spree::Shipment.last
+Spree::ShipmentMailer.shipped_email(shipment).deliver

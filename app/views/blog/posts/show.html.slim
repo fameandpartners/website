@@ -15,11 +15,12 @@
             = image_tag post_photo_url(@post, :banner)
             .text
               h1.post-title = @post.title
-              p = post_description(@post)
+              p = raw @post.description
         .grid-container
           .grid-8.blog-content-column
-            h2.post-title = @post.title
-            h3.post-subtitle = post_description(@post)
+            /
+              h2.post-title = @post.title
+              h3.post-subtitle = post_description(@post)
             
             .post-meta
               .date = @post.occured_at_formatted

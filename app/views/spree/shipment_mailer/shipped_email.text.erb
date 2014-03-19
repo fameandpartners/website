@@ -12,4 +12,15 @@
 
 <%= t('shipment_mailer.shipped_email.track_information', :tracking => @shipment.tracking) if @shipment.tracking %>
 
+<% if @shipment.tracking %>
+  <% if @shipment.is_dhl? %>
+    Track your order with DHL: <%= link_to "DHL [#{ @shipment.tracking }]", shipment_tracking_url(@shipment) %>
+  <% elsif @shipment.is_auspost? %>
+    Track your order with Australia Post: <%= link_to "AUSPOST [#{ @shipment.tracking }]", shipment_tracking_url(@shipment) %>
+  <% else %>
+    <%= t('shipment_mailer.shipped_email.track_information', :tracking => @shipment.tracking) %>
+  <% end %>
+<% end %>
+
 <%= t('shipment_mailer.shipped_email.thanks') %>
+

@@ -12,7 +12,11 @@ module Personalization
     def show
       @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
 
+      ensure_customization_available(@product) and return
+
       set_product_show_page_title(@product, "Custom Formal Dress ")
+      display_marketing_banner
+
       @product_properties = @product.product_properties.includes(:property)
 
       @product_variants = Products::VariantsReceiver.new(@product).available_options
@@ -31,6 +35,8 @@ module Personalization
       @product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
 
       set_product_show_page_title(@product, "Custom Formal Dress ")
+      display_marketing_banner
+
       @product_properties = @product.product_properties.includes(:property)
       @product_variants = Products::VariantsReceiver.new(@product).available_options
 
@@ -40,6 +46,17 @@ module Personalization
     end
 
     private
+
+    def ensure_customization_available(product)
+      if product.blank?
+        redirect_to(collection_path)
+      elsif !product.can_be_customized? or product.in_sale?
+        redirect_to view_context.collection_product_path(product)
+      else
+        # all ok, do nothing
+        return false
+      end
+    end
 
     def colors
       @colors ||= Products::ColorsSearcher.new(@products.to_a).retrieve_colors

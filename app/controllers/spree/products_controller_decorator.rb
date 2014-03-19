@@ -45,6 +45,8 @@ Spree::ProductsController.class_eval do
     return unless @product
 
     set_product_show_page_title(@product)
+    display_marketing_banner
+
     @product_properties = @product.product_properties.includes(:property)
 
     @product_variants = Products::VariantsReceiver.new(@product).available_options
