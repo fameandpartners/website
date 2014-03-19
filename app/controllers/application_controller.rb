@@ -5,11 +5,10 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
 
+  append_before_filter :store_marketing_params
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
-
-  before_filter :store_marketing_params
 
   def check_site_version
     # redirects should work only on non-ajax GET requests from users
