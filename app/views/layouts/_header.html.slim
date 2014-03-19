@@ -43,9 +43,9 @@
 .centered-layout
   - if marketing_landing_page? && (banner_url = marketing_banner_image_url(:small)).present?
     header.header-global.lp.clearfix
-      = link_to root_path, class: 'logo', style: 'left: 0; margin: 20px 0 0 100px;' do
+      = link_to root_path, class: 'logo' do
         span.icon-logo
-      .banner = image_tag banner_url, style: 'float: right;'
+      .banner = image_tag banner_url
   - else
     header.header-global
       = link_to root_path, class: 'logo' do
