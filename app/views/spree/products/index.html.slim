@@ -1,12 +1,15 @@
-.category-header
-  - if @page_info[:banner_image].blank?
-    h1 = @page_info[:banner_title]
-    h2 = raw @page_info[:banner_text]
-    .arrows-line-horizontal
-  - else
-    .category-banner
-      = image_tag(@page_info[:banner_image], :title => @page_info[:banner_title]+" "+@page_info[:banner_text] )
-    
+- if marketing_landing_page?
+  javascript:
+    window.marketing_landing_page = true
+- else
+  .category-header
+    - if @page_info[:banner_image].blank?
+      h1 = @page_info[:banner_title]
+      h2 = raw @page_info[:banner_text]
+      .arrows-line-horizontal
+    - else
+      .category-banner
+        = image_tag(@page_info[:banner_image], :title => @page_info[:banner_title]+" "+@page_info[:banner_text] )
 
 .category-filter
   .fleft 

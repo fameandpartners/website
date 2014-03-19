@@ -6,6 +6,7 @@ $('.spree_products.index').ready ->
 
   productsFilter = {
     $el: null
+    updateParams: {}
     init: (el) ->
       @$el = $(el)
 
@@ -14,6 +15,9 @@ $('.spree_products.index').ready ->
       )
       @$el.find('#product_order').on('change', _.bind(productsFilter.updateOrder, productsFilter))
       page.enableQuickView(@$el)
+
+      if window.marketing_landing_page
+        _.extend(productsFilter.updateParams, { lp: true })
 
       productsFilter.updateContentHandlers()
 
@@ -28,12 +32,12 @@ $('.spree_products.index').ready ->
       $('.selectbox').chosen()
 
     update: () ->
-      searchData = @getSelectedValues()
-      pageUrl = @updatePageLocation(searchData)
+      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+      pageUrl = @updatePageLocation(updateRequestParams)
       $.ajax(urlWithSitePrefix('/products'),
         type: "GET",
         dataType: 'json',
-        data: $.param(searchData)
+        data: $.param(updateRequestParams)
         success: (data) ->
           productsFilter.$el.find('.category-catalog.products').replaceWith(data.products_html)
           header = productsFilter.$el.find('.category-header')
@@ -41,7 +45,7 @@ $('.spree_products.index').ready ->
           header.find('p').html(data.page_info.banner_text)
 
           productsFilter.updateContentHandlers()
-          track.pageView(pageUrl, searchData)
+          track.pageView(pageUrl, updateRequestParams)
       )
 
     updateOrder: () ->
@@ -54,12 +58,13 @@ $('.spree_products.index').ready ->
       else if _.isEmpty(filter.collection) || (typeof filter.collection != 'string')
         url = "/collection?#{ $.param(filter) }"
       else # single selected collection
-        cleared_filter = _.omit(filter, 'collection')
+        cleared_filter = _.omit(filter, 'collection', 'lp')
         if _.isEmpty(cleared_filter)
           url = "/collection/#{filter.collection}"
         else
           url = "/collection/#{filter.collection}?#{$.param(cleared_filter)}"
 
+      url = "/lp#{ url }" if !_.isUndefined(filter.lp)
       url = urlWithSitePrefix(url)
       window.history.pushState({ path: url }, '', url)
       url

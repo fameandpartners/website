@@ -432,4 +432,12 @@ class ApplicationController < ActionController::Base
     @display_marketing_banner = true
   end
 
+  def marketing_landing_page?
+    params[:lp].present?
+  end
+
+  def show_small_product_images?
+    marketing_landing_page?
+  end
+  helper_method :marketing_landing_page?, :show_small_product_images?
 end
