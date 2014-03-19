@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
 
+  before_filter :store_marketing_params
+
   def check_site_version
     # redirects should work only on non-ajax GET requests from users
     return if (!request.get? || request.xhr? || request_from_bot?)
@@ -428,16 +430,13 @@ class ApplicationController < ActionController::Base
     Spree::Product.active.limit(3)
   end
 
+  def store_marketing_params
+    if params[:dmb].present?
+      cookies[:dmb] = { value: params[:dmb], expires: 1.day.from_now }
+    end
+  end
+
   def display_marketing_banner
     @display_marketing_banner = true
   end
-
-  def marketing_landing_page?
-    params[:lp].present?
-  end
-
-  def show_small_product_images?
-    marketing_landing_page?
-  end
-  helper_method :marketing_landing_page?, :show_small_product_images?
 end

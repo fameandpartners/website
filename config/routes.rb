@@ -48,7 +48,7 @@ FameAndPartners::Application.routes.draw do
       get '/:collection' => 'spree/products#index'
       get '/:collection/:id' => 'spree/products#show'
     end
-    get '/lp/collection/:collection' => 'spree/products#index', defaults: { lp: true }
+    get '/lp/collection(/:collection)' => 'spree/products#index', defaults: { lp: true }
 
     get 'products/:id/quick_view' => 'spree/products#quick_view'
     post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'

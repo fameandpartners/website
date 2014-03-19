@@ -41,11 +41,11 @@
                 li = link_to 'style profile', styleprofile_path
                 li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
 .centered-layout
-  - if marketing_landing_page?
+  - if marketing_landing_page? && (banner_url = marketing_banner_image_url(:small)).present?
     header.header-global.lp style="height: 210px;"
       = link_to root_path, class: 'logo', style: 'left: 0; margin: 20px 0 0 100px;' do
         span.icon-logo
-      = image_tag '/assets/banners/birthday_small.gif', style: 'float: right;'
+      = image_tag banner_url, style: 'float: right;'
   - else
     header.header-global
       = link_to root_path, class: 'logo' do

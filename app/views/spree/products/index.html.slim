@@ -2,6 +2,8 @@
   javascript:
     window.marketing_landing_page = true
 - else
+  - if (image_url = marketing_banner_image_url).present?
+    - @page_info[:banner_image] = image_url
   .category-header
     - if @page_info[:banner_image].blank?
       h1 = @page_info[:banner_title]

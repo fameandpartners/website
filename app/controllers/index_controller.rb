@@ -5,6 +5,7 @@ class IndexController < Spree::StoreController
   respond_to :html 
 
   def show
+    display_marketing_banner
     if params[:workshop]
       session[:sign_up_reason] = 'workshop'
     end
