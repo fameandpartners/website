@@ -9,7 +9,7 @@ class Blog::PostPhoto < ActiveRecord::Base
 
   #has_attached_file :photo, styles: { preview: "742x355#"}
   has_attached_file :photo, 
-    default_style: 'post',
+    default_style: 'original',
     styles: { 
       banner_small: '460x360#',
       banner: '1140x400#',
