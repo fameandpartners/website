@@ -41,8 +41,8 @@ $('.spree_products.index').ready ->
         success: (data) ->
           productsFilter.$el.find('.category-catalog.products').replaceWith(data.products_html)
           header = productsFilter.$el.find('.category-header')
-          header.find('h1 span em').html(data.page_info.banner_title)
-          header.find('p').html(data.page_info.banner_text)
+          header.find('h1').html(data.page_info.banner_title)
+          header.find('h2').html(data.page_info.banner_text)
 
           productsFilter.updateContentHandlers()
           track.pageView(pageUrl, updateRequestParams)
