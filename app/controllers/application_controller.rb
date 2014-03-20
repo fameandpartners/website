@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
 
-  append_before_filter :store_marketing_params
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
@@ -13,6 +12,9 @@ class ApplicationController < ActionController::Base
   def check_site_version
     # redirects should work only on non-ajax GET requests from users
     return if (!request.get? || request.xhr? || request_from_bot?)
+
+    store_marketing_params
+    check_referrer
 
     if params[:site_version].blank?
       if current_site_version.default?
@@ -435,6 +437,13 @@ class ApplicationController < ActionController::Base
     end
     if params[:promocode].present?
       cookies[:promocode] = { value: params[:promocode], expires: 1.day.from_now }
+    end
+  end
+
+  # if user comes to site directly, resets quiz autoshow
+  def check_referrer
+    if request.referrer.blank? && cookies[:quiz_shown].blank?
+      cookies[:quiz_shown] = true
     end
   end
 
