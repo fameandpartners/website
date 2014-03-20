@@ -79,11 +79,11 @@ javascript:
   }
 
   getPositions = function() {
-    result = [];
-    _.each($('table.sortable tbody tr'), function(tr) {
+    result = {};
+    _.each($('table.sortable tbody tr'), function(tr, position) {
       id = $(tr).data('id');
       if (id) {
-        result.push(id)
+        result[id] = position;
       }
     });
     return result

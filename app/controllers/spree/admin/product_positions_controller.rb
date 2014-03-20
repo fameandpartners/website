@@ -13,7 +13,7 @@ module Spree
         #    product.save
         #  end
         #end
-        params[:positions].each_with_index do |id, position|
+        params[:positions].each do |id, position|
           Spree::Product.update_all({ position: position }, {id: id})
         end
 
