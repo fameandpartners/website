@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
 
+  append_before_filter :store_marketing_params
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
@@ -428,8 +429,13 @@ class ApplicationController < ActionController::Base
     Spree::Product.active.limit(3)
   end
 
+  def store_marketing_params
+    if params[:dmb].present?
+      cookies[:dmb] = { value: params[:dmb], expires: 1.day.from_now }
+    end
+  end
+
   def display_marketing_banner
     @display_marketing_banner = true
   end
-
 end

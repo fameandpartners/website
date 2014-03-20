@@ -41,10 +41,16 @@
                 li = link_to 'style profile', styleprofile_path
                 li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
 .centered-layout
-  header.header-global class="#{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
-    = link_to root_path, class: 'logo' do
-      span.icon-logo
-        / span.icon-logo.white
+  - if marketing_landing_page? && (banner_url = marketing_banner_image_url(:small)).present?
+    header.header-global.lp.clearfix
+      = link_to root_path, class: 'logo' do
+        span.icon-logo
+      .banner = image_tag banner_url
+  - else
+    header.header-global
+      = link_to root_path, class: 'logo' do
+        span.icon-logo
+          / span.icon-logo.white
   .nav-site
     nav
       ul 
