@@ -2,16 +2,33 @@ module Spree
   module Admin
     class ProductPositionsController < BaseController
       def show
-        @collection = Product.active.ordered.group_by_products_id.includes(:taxons).to_a
+        @collection = Product.active.ordered.group_by_products_id.includes(:master, :taxons).to_a
       end
 
       def create
-        # add ability to sort inside taxon
-        params[:positions].each do |id, index|
-          product = Spree::Product.find_by_id(id)
-          product.update_column(:position, index)
-          product.update_index
+        #params[:positions].each_with_index do |id, position|
+        #  product = Spree::Product.find_by_id(id)
+        #  if product.present?
+        #    product.position = position
+        #    product.save
+        #  end
+        #end
+        params[:positions].each_with_index do |id, position|
+          Spree::Product.update_all({ position: position }, {id: id})
         end
+
+        render nothing: true
+      end
+
+      # update changes
+      def update
+        Tire.index(:spree_products) do
+          delete
+          import ::Spree::Product.active
+        end
+        Tire.index(:spree_products).refresh
+
+        render nothing: true
       end
     end
   end
