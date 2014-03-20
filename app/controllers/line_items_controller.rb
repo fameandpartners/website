@@ -31,6 +31,14 @@ class LineItemsController < Spree::StoreController
       end
     end
 
+    if current_promotion.present?
+      @order = current_order
+      @order.update_attributes(coupon_code: current_promotion.code)
+      apply_coupon_code
+      fire_event('spree.order.contents_changed')
+      current_order.reload
+    end
+
     Activity.log_product_added_to_cart(@product, temporary_user_key, try_spree_current_user, current_order) rescue nil
 
     @line_item = current_order.line_items.find_by_variant_id(params[:variant_id])

@@ -1,11 +1,16 @@
-- self.formats = [:html, :json]
+ruby:
+  self.formats = [:html, :json]
+  cache_name_fragments = [:shared, :product, @searcher.colour.first.try(:name)]
+  if show_prices_with_applied_promocode? && current_promotion.present?
+    cache_name_fragments.push(current_promotion.code)
+  end
+
 .category-catalog.products
   .row
     - if @products.present?
       - @products.each do |product|
-        /.grid-4
         div class="#{ show_small_product_images? ? 'grid-3' : 'grid-4'}"
-          - cache [:shared, :product, product.id, @searcher.colour.first.try(:name)], :expires_in => configatron.cache.expire.long do
+          - cache (cache_name_fragments + [product.id]), :expires_in => configatron.cache.expire.long do
             = render 'spree/products/cached_product', product: product
     - else
       .not-found Sorry, no dresses match your criteria
@@ -16,7 +21,6 @@
         h1 View more dresses
         h2.border These dresses can also be made in #{ @searcher.selected_color_name }
       - @similar_products.each do |product|
-        /.grid-4
         div class="#{ show_small_product_images? ? 'grid-3' : 'grid-4'}"
-          - cache [:shared, :product, product.id, @searcher.colour.first.try(:name)], :expires_in => configatron.cache.expire.long do
+          - cache (cache_name_fragments + [product.id]), :expires_in => configatron.cache.expire.long do
             = render 'spree/products/cached_product', product: product
