@@ -186,10 +186,14 @@
 	}
 	.price {
     font-size: 12px;
-    .price-old { 
-      text-decoration: line-through;
-      padding: 0 4px;
+    color: $pinkColor;
+    .old-price {
+    	padding: 0 4px;
     }
+  }
+  .old-price { 
+    text-decoration: line-through;
+    color: #000;
   }
 }
 
