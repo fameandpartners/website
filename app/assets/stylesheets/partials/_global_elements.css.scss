@@ -213,6 +213,24 @@
 		&.dropdown-button {
 			font-size: 18px;
 		}
+		&.unavailable {
+			cursor: default;
+			color: #eee;
+			background-color: #eee;
+			position: relative;
+			&:after {
+				content: 'SOLD UOT';
+				color: #000;
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				white-space: normal;
+				line-height: 1.15;
+				padding: 7px 10px;
+			}
+		}
 	}
 	.dropdown-size { display: none;}
 	.dropdown-content {
