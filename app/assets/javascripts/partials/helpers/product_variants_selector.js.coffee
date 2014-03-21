@@ -24,6 +24,7 @@ window.helpers.createProductVariantsSelector = (root) ->
 
       @sizeInput.on('change',  @onVariantsChanged)
       @colorInput.on('change', @onVariantsChanged)
+      window.sizeInput = @sizeInput
 
       if window.shopping_cart
         window.shopping_cart.on('item_added',   @onVariantsChanged)
@@ -38,16 +39,30 @@ window.helpers.createProductVariantsSelector = (root) ->
       target_data = { id: null, error: null }
 
       if ! _.isEmpty(variant)
-        target_data.id = variant.id
+        if variant.available
+          target_data.id = variant.id
+        else
+          window.helpers.showErrors(@target.parent(), 'Sorry, out of stock')
+          target_data.error = 'Sorry, out of stock'
       else if _.isNull(variantsSelector.selected.size)
         target_data.error = 'Please select a size'
       else if _.isEmpty(variantsSelector.selected.color)
         target_data.error = 'Please select a colour'
+      else if !_.isEmpty(variantsSelector.selected.color) && ! _.isNull(variantsSelector.selected.size)
+        target_data.error = 'Sorry, this combination unavailable'
       else
         target_data.error = 'Please, select size and colour'
 
-      variantsSelector.target.data(target_data)
+      @target.data(target_data)
       variant
+
+    updateSizeInputStockAvailability: (selected) ->
+      return unless _.isFunction(@sizeInput.disableSelectionOptions)
+      unavailable_options = []
+      if !_.isEmpty(selected) and !_.isNull(selected.color)
+        unavailable_variants = _.where(@variants, { color: selected.color, available: false })
+        unavailable_options = _.pluck(unavailable_variants, 'size')
+      @sizeInput.disableSelectionOptions(unavailable_options, 'SOLD OUT')
 
     setPreselectedValues: (preselected) ->
       variant = _.findWhere(@variants, preselected)
@@ -63,16 +78,18 @@ window.helpers.createProductVariantsSelector = (root) ->
       }
       @container.trigger('selection_changed', @selected)
       @container.data('selected', @selected)
+      @updateSizeInputStockAvailability(@selected)
       @exportSelectedVariant(@getSelectedVariant())
 
     getSelectedVariant: () ->
       variant = _.findWhere(@variants, @selected)
-      if variant and window.shopping_cart
-        line_item = _.find(window.shopping_cart.line_items, (line_item) -> line_item.variant_id == variant.id)
-        variant.purchased = !!line_item
-        variant
-      else
-        {}
+      #if variant and window.shopping_cart
+      #  line_item = _.find(window.shopping_cart.line_items, (line_item) -> line_item.variant_id == variant.id)
+      #  variant.purchased = !!line_item
+      #  variant
+      #else
+      #  {}
+      return variant
   }
 
 #window.helpers.createProductVariantsSelector = (root) ->

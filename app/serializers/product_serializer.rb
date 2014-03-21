@@ -22,7 +22,7 @@ class ProductSerializer < ActiveModel::Serializer
     if object.description.present?
       truncate(strip_tags(object.description.gsub('&nbsp;', ' ')), :length => 100)
     else
-      t(:product_has_no_description)
+      I18n.t(:product_has_no_description)
     end
   end
 
