@@ -55,7 +55,7 @@
     nav
       ul 
         li
-          = link_to why_us_path+"#shipping" do
+          = link_to why_us_path(anchor: 'shipping') do
             span.icon-holder
               span.icon-dollar
               span.icon-erase
@@ -64,7 +64,7 @@
               br
               ' shipping
         li
-          = link_to why_us_path+"#returns" do
+          = link_to why_us_path(anchor: 'returns') do
             span.icon-holder
               span.icon-arrows
             span
@@ -72,7 +72,7 @@
               br
               ' returns
         li
-          = link_to why_us_path+"#fit" do
+          = link_to why_us_path(anchor: 'fit') do
             span.icon-holder
               span.icon-guarantee
             span
@@ -81,7 +81,7 @@
               ' guarantee
         - unless sale_active?
           li
-            = link_to why_us_path+"#customisation" do
+            = link_to why_us_path(anchor: 'customisation') do
               span.icon-holder
                 span.icon-cutline
                 span.icon-scissors
@@ -90,7 +90,7 @@
                 br
                 =' t(:customization)
         li
-          = link_to why_us_path+"#advice" do
+          = link_to why_us_path(anchor: 'advice') do
             span.icon-holder
               span.icon-comment
             span

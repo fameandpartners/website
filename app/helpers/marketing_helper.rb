@@ -38,4 +38,8 @@ module MarketingHelper
   def show_small_product_images?
     marketing_landing_page?
   end
+
+  def show_prices_with_applied_promocode?
+    marketing_landing_page? && current_promotion.present?
+  end
 end

@@ -27,7 +27,8 @@ def build_taxonomy
       ['Long Dresses', 'View our complete range of long dresses perfect for your next formal event.'],
       ['Short Dresses', 'View our complete range of short dresses, perfect for your next formal event.'],
       ['Skirts', 'View our complete range of skirts, mix and match with a top for something truly unique.'],
-      ['Tops', 'View our complete range of tops, mix and match with a skirt for something truly unique.']
+      ['Tops', 'View our complete range of tops, mix and match with a skirt for something truly unique.'],
+      ['Prom Dresses', 'View our complete range of tops, mix and match with a skirt for something truly unique.']
     ]
   }
   style_taxons_tree = {
@@ -82,7 +83,8 @@ def randomly_assign_taxons_to_products
   Spree::Product.all.each do |product|
     product.taxons = [
       collections[rand(collections.size)],
+      collections[rand(collections.size)],
       styles[rand(styles.size)]
-    ]
+    ].uniq
   end
 end

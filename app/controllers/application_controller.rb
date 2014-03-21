@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
 
-  append_before_filter :store_marketing_params
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
@@ -13,6 +12,9 @@ class ApplicationController < ActionController::Base
   def check_site_version
     # redirects should work only on non-ajax GET requests from users
     return if (!request.get? || request.xhr? || request_from_bot?)
+
+    store_marketing_params
+    check_marketing_traffic
 
     if params[:site_version].blank?
       if current_site_version.default?
@@ -433,7 +435,25 @@ class ApplicationController < ActionController::Base
     if params[:dmb].present?
       cookies[:dmb] = { value: params[:dmb], expires: 1.day.from_now }
     end
+    if params[:promocode].present?
+      cookies[:promocode] = { value: params[:promocode], expires: 1.day.from_now }
+    end
   end
+
+  # if user comes via marketing then dont pop stye quiz
+  def check_marketing_traffic
+    if (params[:utm_campaign].present? || params[:gclid].present?) && cookies[:quiz_shown].blank?
+      cookies[:quiz_shown] = true
+    end
+  end
+
+  def current_promotion
+    @current_promotion ||= begin
+      code = params[:promocode] || cookies[:promocode]
+      code.present? ? Spree::Promotion.find_by_code(code) : nil
+    end
+  end
+  helper_method :current_promotion
 
   def display_marketing_banner
     @display_marketing_banner = true

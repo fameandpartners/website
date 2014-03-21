@@ -247,7 +247,7 @@ FameAndPartners::Application.routes.draw do
 
       resources :competition_entries, only: [:index, :show]
 
-      resource :product_positions, only: [:show, :create]
+      resource :product_positions, only: [:show, :create, :update]
 
       resource :sale, :only => [:edit, :update]
 

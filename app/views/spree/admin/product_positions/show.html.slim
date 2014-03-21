@@ -7,6 +7,12 @@ css:
 - content_for :page_title do
   = "Products order"
 
+- content_for :page_actions do
+  .toolbar data-hook="toolbar"
+    ul.toolbar.inline-menu
+      li#apply_changes
+        = link_to 'Apply changes', admin_product_positions_path, method: 'put', remote: true, class: 'icon-plus button', id: 'admin_new_product_accessory'
+
 = render :partial => 'spree/admin/shared/product_sub_menu'
 
 ul.filters-boxes.collection
@@ -15,7 +21,7 @@ ul.filters-boxes.collection
     li data-range=( taxon.id ) = taxon.name
 
 - if @collection.any?
-  table.index.sortable.compact data-sortable=( admin_product_positions_url )
+  table.index.sortable.compact#product-positions data-sortable=( admin_product_positions_url )
     colgroup
        col style="width: 15%;"
        col style="width: 20%;"
@@ -27,8 +33,8 @@ ul.filters-boxes.collection
         th = t(:name)
     tbody
       - @collection.each do |product| 
-        - taxon = range_taxon_for(product)
-        tr data-range=(taxon.try(:id)) id=( spree_dom_id product )
+        - taxon_ids = product.taxons.select{|t| t.taxonomy_id == range_taxonomy.id}.map(&:id)
+        tr data-ids=( taxon_ids ) data-id="#{product.id}" id=( spree_dom_id product )
           td
             span.handle 
             = link_to 'to top', '#', data: { move: 'top' }
@@ -67,31 +73,37 @@ javascript:
       type: 'POST',
       dataType: 'script',
       url: $("table.sortable").data("sortable-link"),
-      data: getPositions(),
+      data: { positions: getPositions() },
       success: function(data){ $("#progress").hide(); }
     }); 
   }
 
   getPositions = function() {
-    positions = {}
-    $.each($('table.sortable tbody tr'), function(position, obj){
-      reg = /spree_(\w+_?)+_(\d+)/;
-      parts = reg.exec($(obj).attr('id'));
-      if (parts) {
-        positions['positions['+parts[2]+']'] = position;
+    result = {};
+    _.each($('table.sortable tbody tr'), function(tr, position) {
+      id = $(tr).data('id');
+      if (id) {
+        result[id] = position;
       }
     });
-    return positions;
+    return result
   }
 
   applyFilter = function(e) {
-    console.log('apply filter');
     e.preventDefault();
     selected = $(e.target).data('range')
     $(e.target).addClass('active').siblings().removeClass('active');
-    $('table.sortable tbody tr').show();
-    if (selected !== 'all') {
-      $('table.sortable tbody tr[data-range!=' + selected + ']').hide();
+    if (selected == 'all') {
+      $('table.sortable tbody tr').show();
+    } else {
+      _.each($('table.sortable tbody tr'), function(row) {
+        $row = $(row)
+        if (_.indexOf($row.data('ids'), selected) == -1) {
+          $row.hide();
+        } else {
+          $row.show();
+        };
+      });
     }
     return true;
   }
