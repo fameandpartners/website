@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     return if (!request.get? || request.xhr? || request_from_bot?)
 
     store_marketing_params
-    check_referrer
+    check_marketing_traffic
 
     if params[:site_version].blank?
       if current_site_version.default?
@@ -440,9 +440,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # if user comes to site directly, resets quiz autoshow
-  def check_referrer
-    if request.referrer.blank? && cookies[:quiz_shown].blank?
+  # if user comes via marketing then dont pop stye quiz
+  def check_marketing_traffic
+    if (params[:utm_campaign].present? || params[:gclid].present?) && cookies[:quiz_shown].blank?
       cookies[:quiz_shown] = true
     end
   end
