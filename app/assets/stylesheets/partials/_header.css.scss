@@ -381,6 +381,9 @@
 		display: inline-block;
 		vertical-align: top;
 		position: relative;
+		.btn{
+			font-size: 20px;
+		}
 		&.active > .btn {
 			color: #000;
 			background-color: $pinkColor;
@@ -429,7 +432,7 @@
 		display: block;
 		border-top: solid 1px #666;
 		border-bottom: solid 1px #666;
-		padding: 0 32px 0 10px;
+		padding: 0 32px 0 4px;
 		margin-right: 11px;
 		text-decoration: none;
 		color: #000;
