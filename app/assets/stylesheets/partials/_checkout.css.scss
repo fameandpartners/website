@@ -97,10 +97,12 @@
 					}
 					.price {
             font-size: 18px;
-            .price-old { 
-              text-decoration: line-through;
-              padding: 0 4px;
-            }
+            color: $pinkColor;
+          }
+          .price-old { 
+            text-decoration: line-through;
+            padding: 0 4px;
+            color: #000;
           }
 					.description { 
 						margin-top: 20px;
@@ -138,9 +140,13 @@
 			@include box-sizing(border-box);
 		}
 		.desc { text-align: right;}
+    .price {
+      color: $pinkColor;
+    }
     .price-old { 
       text-decoration: line-through;
       padding: 0 4px;
+      color: #000;
     }
 	}
 }

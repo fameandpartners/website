@@ -345,11 +345,12 @@
 		.price {
 			color: $pinkColor;
 			font-size: 16px;
-      .price-old { 
-        text-decoration: line-through;
-        padding: 0 4px;
-      }
 		}
+		.price-old { 
+      text-decoration: line-through;
+      padding: 0 4px;
+      color: #000;
+    }
 		.description {
 			margin-top: 10px;
 			padding-top: 7px;
