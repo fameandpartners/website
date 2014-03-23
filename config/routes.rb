@@ -35,7 +35,7 @@ FameAndPartners::Application.routes.draw do
       get '/:permalink/style', to: 'products#style', as: :personalization_style_product
     end
 
-    resources :celebrities, only: [:show]
+    resources :celebrities, defaults: { lp: 'celebrity' }, only: [:show]
 
     resources :line_items, only: [:create, :edit, :update, :destroy] do
       post 'move_to_wishlist', on: :member
