@@ -109,11 +109,13 @@
 	}
 	.pricing {
 		font-size: 18px;
-    .price-old { 
-      text-decoration: line-through;
-      padding: 0 4px;
-    }
+		color: $pinkColor;
 	}
+	.price-old { 
+    text-decoration: line-through;
+    padding: 0 4px;
+    color: #000;
+  }
 }
 
 .continue-buy, .cart-summary {

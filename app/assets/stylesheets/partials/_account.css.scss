@@ -127,10 +127,11 @@
 		}
 		.price {
       color: $pinkColor;
-      .price-old { 
-        text-decoration: line-through;
-        padding: 0 4px;
-      }
+    }
+    .price-old { 
+      text-decoration: line-through;
+      padding: 0 4px;
+      color: #000;
     }
 	}
 }

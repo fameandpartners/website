@@ -219,11 +219,13 @@
 				display: block;
 				font-size: 12px;
 				font-weight: 400;
-        .price-old {
-          text-decoration: line-through;
-          padding: 0 4px;
-        }
+      	color: $pinkColor;  
 			}
+			.price-old {
+        text-decoration: line-through;
+        padding: 0 4px;
+        color: #000;
+      }
 		}
 		.size-info{
 			float: right;
@@ -534,10 +536,12 @@
 				}
         .price { 
           font-size: 12px;
-          .price-old {
-            text-decoration: line-through;
-            padding: 0 4px;
-          }
+          color: $pinkColor;
+        }
+        .price-old {
+          text-decoration: line-through;
+          padding: 0 4px;
+          color: #000;
         }
 			}
 			.cross {
@@ -609,14 +613,16 @@
 	}
 	.name, .price {
 		text-align: center;
-		font-size: 14px;
+		font-size: 12px;
 		margin: 5px 0;
 	}
 	.price {
-		font-size: 18px;
-    .price-old {
-      text-decoration: line-through;
-      padding: 0 4px;
-    }
+		font-size: 12px;
+		color: $pinkColor;
 	}
+	.price-old {
+    text-decoration: line-through;
+    padding: 0 4px;
+    color: #000;
+  }
 }
