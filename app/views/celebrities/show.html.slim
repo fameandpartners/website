@@ -1,17 +1,14 @@
-.page-static.blogger-page
-  - if @celebrity.primary_image && @celebrity.primary_image.file.exists?
-    .blogger-header style="background-image: url('#{ @celebrity.primary_image.file.url(:banner)}')"
-  - else
-    .blogger-header 
+.page-static.celebrity-page
   .blogger-wrapper
     .blogger-content
-      h1 = @celebrity.title || @celebrity.full_name
       .content
-        - if @celebrity.quote.present?
-          h2.blogger-title.quote = @celebrity.quote
-        = raw(@celebrity.body)
         .blogger-title
-          h2 Dresses #{@celebrity.full_name} would love!
+          h2 25% off formal dresses inspired by #{@celebrity.full_name}
+          - if @celebrity.quote.present?
+            .blogger-title.quote = @celebrity.quote
+          .body = raw(@celebrity.body)
+          .promocode
+            .btn.empty.border Promocode: celeb25p
           h3 We've analyzed #{@celebrity.first_name}'s style profile and here's what she would love...
         - @products.each do |product|
           - path_to_product = collection_product_path(product)
@@ -22,8 +19,7 @@
                   = link_to product_image_tag(product, :product), path_to_product
                 h4 = link_to product.name, path_to_product
                 .info = product_short_description(product)
-                .price
-                  span = price_for_product(product)
+                .price = price_for_product(product)
                 = link_to "SHOP NOW", path_to_product, class: 'btn mid'
               .grid-7
                 - @celebrity.accessories.for_product(product).limit(4).each do |accessory|

@@ -41,7 +41,14 @@
                 li = link_to 'style profile', styleprofile_path
                 li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
 .centered-layout
-  - if marketing_landing_page? && (banner_url = marketing_banner_image_url(:small)).present?
+  - if celebrity_landing_page?
+    header.header-global.lp.clearfix
+      = link_to root_path, class: 'logo' do
+        span.icon-logo
+      - if @celebrity.primary_image && @celebrity.primary_image.file.exists?
+        .celebrity-header style="background-image: url('#{ @celebrity.primary_image.file.url(:banner) }')"
+          h1 = @celebrity.title || @celebrity.full_name
+  - elsif marketing_landing_page? && (banner_url = marketing_banner_image_url(:small)).present?
     header.header-global.lp.clearfix
       = link_to root_path, class: 'logo' do
         span.icon-logo
@@ -51,6 +58,8 @@
       = link_to root_path, class: 'logo' do
         span.icon-logo
           / span.icon-logo.white
+
+  
   .nav-site
     nav
       ul 

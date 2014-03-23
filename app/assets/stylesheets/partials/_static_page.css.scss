@@ -36,7 +36,7 @@
 	}
 }
 
-.blogger-page {
+.blogger-page, .celebrity-page {
 	.blogger-header{
 		border: solid 8px #000;
 		background: url('_blogger/header.jpg') no-repeat;
@@ -137,12 +137,14 @@
 			}
 			.price {
 				margin: 10px 0;
-				span {
-					color: $pinkColor;
-					font-size: 20px;
-					padding: 0 8px;
-				}
+				color: $pinkColor;
+				font-size: 20px;
 			}
+			.price-old { 
+				text-decoration: line-through;
+  			padding: 0 4px;
+  			color: #000;
+  		}
 		}
 	}
 	.blogger-bg {
@@ -158,6 +160,59 @@
 			width: 100%;
 			display: block;
 		}
+	}
+}
+
+.celebrity-page{
+	margin-top: 20px; 
+	
+	.blogger-wrapper {
+		margin-top: 0;
+		position: relative;
+	}
+
+	.blogger-content{
+		.blogger-title{
+			margin-top: 20px;
+		}
+	}
+
+	.blogger-bg {
+		top: 0px;
+	}
+
+	.body{
+		font-size: 11px;
+		font-family: $fontOne;
+		font-weight: 100;
+		padding: 0 40px;
+	}
+	
+}
+
+.celebrity-header{
+	float: right;
+	margin-top: 20px;
+	padding-left: 15px;
+	border: solid 5px #000;
+	background-size: cover;
+	min-height: 200px;
+	min-width: 738px;
+	text-align: right;
+	h1 { 
+		font-size: 25px;
+		text-align: center;
+		color: #fff;
+		padding: 14px 20px 12px 20px;
+		margin: 130px 10px 10px auto;
+		background-color: rgba(0, 0, 0, 0.8);
+		text-transform: uppercase;
+		width: auto;
+		display: inline-block;
+	}
+	img {
+		display: block;
+		width: 100%;
 	}
 }
 
