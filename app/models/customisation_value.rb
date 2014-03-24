@@ -12,7 +12,8 @@ class CustomisationValue < ActiveRecord::Base
                   :name,
                   :presentation,
                   :image,
-                  :price
+                  :price,
+                  :incompatible_ids
 
   validates :name,
             presence: true,
