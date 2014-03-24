@@ -1,11 +1,13 @@
-h1 New Dress reservation
+div style="padding: 40px"
+  h1 Twin Alert
 
-p = "#{ @reservation.user.full_name} reserved dress '#{ @reservation.product.name }'"
+  p = "#{ @reservation.user.full_name} reserved dress '#{ @reservation.product.name }'"
 
-.description
-  h3 Details
-  p = @reservation.product.name
-  p = @reservation.product.sku
-  p = @reservation.color
-  p = @reservation.user.first_name
-  p = @reservation.user.last_name
+  div style="padding: 20px 0px"
+    h3 Details
+    = @reservation.product.name
+    br
+    = @reservation.product.sku
+    br
+    = @reservation.color
+    
