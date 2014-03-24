@@ -1,6 +1,8 @@
 doctype html
 = conditional_html do
   head
+    - if content_for?(:head)
+      = yield :head
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'spree/shared/google_analytics'

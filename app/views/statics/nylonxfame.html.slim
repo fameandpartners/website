@@ -1,3 +1,13 @@
+- content_for :head do
+  - stylesheet_link_tag '//vjs.zencdn.net/4.4/video-js.css'
+  - javascript_include_tag '//vjs.zencdn.net/4.4/video.js'
+
+  javascript:
+    document.createElement('video');
+    document.createElement('audio');
+    document.createElement('track');
+
+
 .nylon-wrapper
   .nylon-header
     = image_tag '_static_fullscreen/nylon-header.jpg'
@@ -7,9 +17,16 @@
       ' COLLABORATION
   .category-catalog.products
     .row
-      .grid-4
+      .grid-4.video
         .picture
-          = link_to '#' do
+          - options = { controls: true, preload: true, autoplay: true, poster: "/assets/_sample/category-grey-1.jpg" }
+          video class="video-js vjs-default-skin" width="100%" height="477" controls="true" preload="false" poster="/assets/_sample/category-grey-1.jpg" data-setup='#{options.to_json }'
+            source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4'
+            source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm'
+            source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg'
+          /- video_url = '//www.youtube.com/embed/4j3u9fxHMkI'
+          /iframe width="100%" height="477" src="#{ video_url }" frameborder="0" allowfullscreen
+          /= link_to '#' do
             = image_tag '_sample/category-grey-1.jpg'
       .grid-4
         .catalog-slider-wrapper
