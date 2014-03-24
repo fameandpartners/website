@@ -17,6 +17,12 @@
     <%= f.error_message_on :price %>
   <% end %>
 
+  <%= f.field_container :position do %>
+    <%= f.label :position, t(:position) %> <span class="required">*</span><br />
+    <%= f.text_field :position, size: '10', placeholder: 0 %>
+    <%= f.error_message_on :position %>
+  <% end %>
+
   <%= f.field_container :image do %>
     <%= f.label :image, t(:image) %>
     <%= f.error_message_on :image %>
