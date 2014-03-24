@@ -7,6 +7,6 @@ class StaticsController < ApplicationController
   before_filter :display_marketing_banner
 
   def nylonxfame
-    render layout: false
+    render layout: 'statics_fullscreen'
   end
 end
