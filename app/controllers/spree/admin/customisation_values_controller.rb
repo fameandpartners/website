@@ -12,7 +12,7 @@ module Spree
         respond_to do |format|
           format.html do
             flash[:success] = "Customisation set been updated"
-            redirect_to admin_product_customisation_url(@product)
+            redirect_to admin_product_customisation_values_url(@product)
           end
           format.js do
             render nothing: true

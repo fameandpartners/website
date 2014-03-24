@@ -266,7 +266,7 @@ FameAndPartners::Application.routes.draw do
       #  resources :product_customisation_values, only: :destroy
       #end
       resources :products do
-        resources :customisation_values, only: [:index]
+        resources :customisation_values
       end
       #resources :customisation_values do
       #  post :update_positions, on: :collection
