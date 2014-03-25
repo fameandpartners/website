@@ -5,3 +5,6 @@ Twin Alert
 <%= @reservation.product.name %>
 <%= @reservation.product.sku %>
 <%= @reservation.color %>
+<%= @reservation.school_name unless @reservation.school_name.empty? %>
+<%= @reservation.formal_name unless @reservation.formal_name.empty? %>
+<%= @reservation.school_year unless @reservation.school_year.empty? %>
