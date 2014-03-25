@@ -239,7 +239,7 @@ module Products
 
     def colors_with_similar(range = :default)
       return [] if colour.blank?
-      max_diff = range == :very_close ? 10 : 30
+      max_diff = range == :very_close ? 15 : 30
 
       similar_colors = colour.map do |colour|
         colour.similars.where('similarities.coefficient < ?', max_diff)
