@@ -12,7 +12,8 @@ class CustomisationValue < ActiveRecord::Base
                   :name,
                   :presentation,
                   :image,
-                  :price
+                  :price,
+                  :incompatible_ids
 
   validates :name,
             presence: true,
@@ -45,6 +46,15 @@ class CustomisationValue < ActiveRecord::Base
   has_attached_file :image, styles: {
     mini: '48x48>', small: '100x100>', product: '240x240>'#, large: '600x600>'
   }
+
+  before_validation :set_default_position, on: :create
+
+  def set_default_position
+    return true if self.position.present? || product.blank?
+    if product.present?
+      self.position = product.customisation_values.maximum(:position).to_i + 1
+    end
+  end
 
   def price
     read_attribute('price').to_f

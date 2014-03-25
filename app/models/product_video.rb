@@ -12,6 +12,13 @@ class ProductVideo < ActiveRecord::Base
   end
 
   def generate_url_by_id
-    "http://player.vimeo.com/video/#{self.video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
+    ProductVideo.generate_url(id: self.video_id)
+  end
+
+  class << self
+    def generate_url(options = {})
+      video_id = options[:id]
+      "http://player.vimeo.com/video/#{ video_id }?title=0&byline=0&portrait=0&autoplay=0&loop=1"
+    end
   end
 end

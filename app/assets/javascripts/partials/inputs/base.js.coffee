@@ -37,6 +37,7 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
   # private
   onButtonClickHandler: (e) ->
     e.preventDefault()
+    return if $(e.target).is('.unavailable')
     $(e.target).closest('.sizebox').find('.button').removeClass('selected')
     $(e.target).addClass('selected')
     @container.find('.dropdown-content').fadeOut(easing_time)
@@ -52,7 +53,8 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
 
   setValue: (newValue) ->
     selectedButton = @container.find("#{@buttons_selector}[data-size='#{ newValue }']")
-    selectedButton.closest('.sizebox').find('.button').removeClass('selected').end().addClass('selected')
+    selectedButton.closest('.sizebox').find('.button').removeClass('selected')
+    selectedButton.addClass('selected')
     return newValue
 
   makeDropdown: (@container) ->
@@ -72,6 +74,32 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
     if button.is('.selected')
       dropdown.fadeOut(easing_time)
       button.removeClass('selected').text('+')
+
+  disableSelectionOptions: (unavailable_values, text) ->
+    _.each(@container.find(@buttons_selector), (button) ->
+      $button = $(button)
+      value = $button.data('size')
+      if _.indexOf(unavailable_values, value) == -1
+        $button.removeClass('unavailable').attr('title', value)
+      else
+        $button.addClass('unavailable').attr('title', text)
+
+    , @)
+
+    _.each(@container.find("option[value!='']"), (option) ->
+      $option = $(option)
+      value = @prepareValue($option.attr('value'))
+
+      if _.indexOf(unavailable_values, value) == -1
+        $option.removeAttr('disabled').removeClass('unavailable')
+        $option.html(value)
+      else
+        $option.addClass('unavailable').attr('disabled', 'disabled')
+        $option.html("<span style='text-decoration: line-through;'>#{value} SOLD OUT</span>")
+
+    , @)
+    @container.trigger('chosen:updated')
+
 
 
 
@@ -99,6 +127,20 @@ window.inputs.ChosenSelector = class ChosenSelector extends BaseInput
     else
       value
 
+  disableSelectionOptions: (unavailable_values, text) ->
+    _.each(@container.find("option[value!='']"), (option) ->
+      $option = $(option)
+      value = @prepareValue($option.attr('value'))
+
+      if _.indexOf(unavailable_values, value) == -1
+        $option.removeAttr('disabled').removeClass('unavailable')
+        $option.html(value)
+      else
+        $option.addClass('unavailable').attr('disabled', 'disabled')
+        $option.html("<span style='text-decoration: line-through;'>#{value} SOLD OUT</span>")
+
+    , @)
+    @container.trigger('chosen:updated')
 
 window.inputs.CustomAndBaseColourSelector = class CustomAndBaseColourSelector extends BaseInput
   # note: all inputs should have unique id to separate them from each other

@@ -83,7 +83,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     saveButtonClickHandler: (e) ->
       e.preventDefault()
       formData = {
-        variant_id: popup.variantsSelector.getSelectedVariant().id,
+        variant_id: popup.variantsSelector.target.data('id')
         quantity: $('.quantity-select').val()
         params: popup.eventParams
       }

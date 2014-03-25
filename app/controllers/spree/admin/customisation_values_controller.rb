@@ -8,11 +8,12 @@ module Spree
       end
 
       def update
-        @product.update_attributes(params[:product])
+        customisation_value = @product.customisation_values.find(params[:id])
+        customisation_value.update_attributes(params[:customisation_value])
         respond_to do |format|
           format.html do
             flash[:success] = "Customisation set been updated"
-            redirect_to admin_product_customisation_url(@product)
+            redirect_to admin_product_customisation_values_url(@product)
           end
           format.js do
             render nothing: true
@@ -27,7 +28,7 @@ module Spree
       end
 
       def collection
-        parent.customisation_values
+        parent.customisation_values.includes(:incompatibles)
       end
     end
   end
