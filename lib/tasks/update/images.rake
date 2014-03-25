@@ -2,6 +2,8 @@ namespace :update do
   namespace :images do
     task :positions => :environment do
       Spree::Product.active.each do |product|
+        next if product.images.blank?
+
         grouped = product.images.group_by(&:viewable)
         positions = grouped.values.first.map(&:position).sort
 

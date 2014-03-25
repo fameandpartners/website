@@ -35,6 +35,7 @@ module Products
 
       book.default_sheet = book.sheets.first
 
+      #rows = [rows.first] if Rails.env.development?
       rows.to_a.each do |row_num|
         raw = {}
 
@@ -106,6 +107,19 @@ module Products
             price: book.cell(row_num, customization[:price]),
             position: index + 1
           }
+        end
+
+        columns[:customization_exclusions].each do |column_num|
+          title = book.cell(row_num, column_num).to_s.strip
+          if title.present?
+            mutally_exclusive = title.split('|').map(&:to_i)
+            mutally_exclusive.each do |item_position|
+              item = raw[:customizations].find{|x| x[:position] == item_position}
+              if item
+                item[:incompatibles] = mutally_exclusive.select{|i| i != item_position}
+              end
+            end
+          end
         end
 
         processed = {}
@@ -243,6 +257,9 @@ module Products
           song: {
             link:            raw[:song_link]
           },
+          video: {
+            default: processed[:video_id]
+          },
           customizations:       processed[:customizations],
           recommendations:      processed[:recommendations]
         }
@@ -325,7 +342,7 @@ module Products
 
       @codes[:customizations] = []
 
-      start = 22
+      start = 22 # ?
       3.times do |time|
         @codes[:customizations] << {
           name: start,
@@ -334,11 +351,20 @@ module Products
         start += 2
       end
 
-      @codes[:perfume_link] = 28
-      @codes[:perfume_name] = 29
-      @codes[:perfume_brand] = 30
+      @codes[:customization_exclusions] = []
+      exclusion_regexp = /customisation.*exclusion/i
+      book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        if title.present? and title.strip.to_s =~ exclusion_regexp
+          @codes[:customization_exclusions].push(index.next)
+        end
+      end
 
-      @codes[:song_link] = 31
+      scent_start = @codes[:customization_exclusions].present? ? (@codes[:customization_exclusions].first.to_i + 1) : 28
+
+      @codes[:perfume_link]   = scent_start
+      @codes[:perfume_name]   = scent_start + 1
+      @codes[:perfume_brand]  = scent_start + 2
+      @codes[:song_link]      = scent_start + 3
 
       @codes[:recommendations] = {}
       @codes[:recommendations][:edgy] = []
@@ -347,7 +373,7 @@ module Products
       @codes[:recommendations][:girly] = []
       @codes[:recommendations][:classic] = []
 
-      start = 35
+      start = scent_start + 3 + 3
 
       [:edgy, :bohemian, :glam, :girly, :classic].each_with_index do |style, index|
         4.times do |time|
@@ -362,11 +388,11 @@ module Products
         start += 16
       end
 
-      @codes[:revenue] = 131
-      @codes[:cogs] = 132
-      @codes[:product_coding] = 133
-      @codes[:price_in_aud] = 4
-      @codes[:video_id] = 135
+      @codes[:price_in_aud]   = 4
+      @codes[:revenue]        = 134
+      @codes[:cogs]           = 135
+      @codes[:product_coding] = 136
+      @codes[:video_id]       = 138 # 135
 
       @codes
     end
@@ -389,7 +415,7 @@ module Products
 
         begin
           product = create_or_update_product(args.merge!(
-            sizes: %W{0 2 4 6 8 10 12}
+            sizes: %W{0 2 4 6 8 10 12 14 16 18 20 22}
           ))
 
           add_product_properties(product, args[:properties].symbolize_keys)
@@ -399,6 +425,7 @@ module Products
           # add_product_accessories(product, args[:recommendations] || {})
           add_product_song(product, args[:song].symbolize_keys || {})
           add_product_perfume(product, args[:perfume].symbolize_keys || {})
+          add_product_videos(product, args[:video].symbolize_keys || {})
 
           product
         rescue Exception => message
@@ -531,7 +558,6 @@ module Products
     end
 
     def add_product_customizations(product, array_of_attributes)
-
       customizations = []
 
       allowed = [:name,
@@ -551,12 +577,24 @@ module Products
 
         if customization.blank?
           customization = product.customisation_values.build
-          customization.products << product
         end
 
         customization.update_attributes(attrs, without_protection: true)
 
         customizations.push(customization)
+      end
+
+      array_of_attributes.each do |attrs|
+        next unless attrs.values.any?(&:present?)
+
+        customization = product.customisation_values.where(position: attrs[:position]).first
+
+        if attrs[:incompatibles].present?
+          customization.incompatible_ids = product.customisation_values.where(position: attrs[:incompatibles]).map(&:id)
+        else
+          customization.incompatible_ids = []
+        end
+        customization.save(validate: false)
       end
 
       customizations
@@ -667,6 +705,16 @@ module Products
       #product.us_price = us_price
 
       product.save
+    end
+
+    def add_product_videos(product, videos_attrs = {})
+      video_id = videos_attrs[:default]
+      return if video_id.blank?
+
+      default_video = product.videos.master.first_or_initialize
+      default_video.video_id = video_id
+      default_video.position = 0
+      default_video.save(validate: false)
     end
   end
 end

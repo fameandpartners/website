@@ -113,7 +113,7 @@ Spree::Product.class_eval do
     @video_url ||= begin
       videos = self.videos_json
       video = videos.find{|i| i[:default]} || videos.find{|i| i[:color] == default_color } || videos.first
-      video.present? ? video[:video_url] : nil
+      video.present? ? video[:video_url] : video_url_from_property
    end
   end
 
@@ -125,6 +125,12 @@ Spree::Product.class_eval do
         video_url: product_video.video_url
       }
     end
+  end
+
+  def video_url_from_property
+    video_id = self.property('video_id')
+    return nil if video_id.blank?
+    "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
   end
 
   def colors
