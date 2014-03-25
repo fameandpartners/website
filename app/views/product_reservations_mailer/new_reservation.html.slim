@@ -10,4 +10,9 @@ div style="padding: 40px"
     = @reservation.product.sku
     br
     = @reservation.color
-    
+    br
+    = @reservation.school_name unless @reservation.school_name.empty?
+    br
+    = @reservation.formal_name unless @reservation.formal_name.empty?
+    br
+    = @reservation.school_year unless @reservation.school_year.empty?
