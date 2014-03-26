@@ -1,11 +1,12 @@
-- content_for :head do
-  - stylesheet_link_tag '//vjs.zencdn.net/4.4/video-js.css'
-  - javascript_include_tag '//vjs.zencdn.net/4.4/video.js'
+/
+  - content_for :head do
+    - stylesheet_link_tag '//vjs.zencdn.net/4.4/video-js.css'
+    - javascript_include_tag '//vjs.zencdn.net/4.4/video.js'
 
-  javascript:
-    document.createElement('video');
-    document.createElement('audio');
-    document.createElement('track');
+    javascript:
+      document.createElement('video');
+      document.createElement('audio');
+      document.createElement('track');
 
 
 .nylon-wrapper
@@ -102,11 +103,11 @@
             br
             ' IN STYLE.
           .btn-wrapper.pink
-            = link_to '#', class: 'btn' do
+            = link_to '#', class: 'btn empty border' do
               em 3-PIECE 
               ' BUY NOW - $249
           .btn-wrapper.black
-            = link_to '#', class: 'btn empty border' do
+            = link_to '#', class: 'btn' do
               em 5-PIECE 
               ' BUY NOW - $399
 
@@ -188,11 +189,11 @@
     .row
       .grid-6
         .btn-wrapper.pink
-          = link_to '#', class: 'btn' do
+          = link_to '#', class: 'btn empty border' do
             em 3-PIECE 
             ' BUY NOW - $249
       .grid-6
         .btn-wrapper.black
-          = link_to '#', class: 'btn empty border' do
+          = link_to '#', class: 'btn' do
             em 5-PIECE 
             ' BUY NOW - $399
