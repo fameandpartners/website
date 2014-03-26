@@ -13,4 +13,6 @@ class StaticsController < ApplicationController
       render layout: 'statics_fullscreen'
     end
   end
+
+  
 end
