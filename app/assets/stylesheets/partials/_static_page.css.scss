@@ -190,6 +190,137 @@
 	
 }
 
+.celebrity-index-page{
+	margin-top: 20px; 
+
+	.header{
+		margin: 56px 0 10px 0;
+		text-align: center;
+
+		h1{
+			font-family: $fontTwo;
+			font-style: italic;
+			color: #ff00ff;
+			line-height:.7em;
+		}
+		h2{
+			font-family: $fontThree;
+			text-transform: uppercase;
+			font-size: 38px;
+			letter-spacing: .15em;
+			line-height:.7em;
+			padding: 0 0 56px 0;
+			margin: 0;
+		}
+	}
+	
+	.item{
+		padding: 0 10px 20px 0;
+
+		a{
+			text-decoration: none;
+		}
+		.celeb{
+			height:303px;
+		}
+		
+		.celeb-product{
+			max-height: 303px;
+			position: relative;
+			overflow: hidden;
+		
+			img{
+				max-height: 303px;
+				margin-left: -10px;
+			}
+		}
+		
+		.celeb-price{
+			font-family: $fontOne;
+			font-weight: 100;
+			background: #fff;
+			position: absolute;
+			text-align: center;
+			width: 100%;
+			bottom: 0px;
+			padding: 6px 10px 7px 10px;
+			opacity:0.8;
+  		filter:alpha(opacity=80);
+
+			.price-old{
+				text-decoration: line-through;
+				display: inline-block;
+				margin-right: 10px;
+				opacity:1;
+  			filter:alpha(opacity=100);
+			}
+			.price{
+				display: inline-block;
+				color: #ff00ff;
+				opacity:1;
+  			filter:alpha(opacity=100);
+			}
+		}
+		.button{
+			width: 100%;
+			text-align: center;
+
+			.circle{
+				border-radius: 50%;
+				width: 100px;
+				height: 100px; 
+				border: 1px solid #000;
+				text-align: center;
+				margin: 10px auto 20px auto;
+				text-decoration: none;
+				
+				.shop{
+					margin: 14px 0 0 0;
+				}
+
+				.shop, .now{
+					font-family: $fontThree;
+					text-transform: uppercase;
+					font-size: 26px;
+					text-decoration: none;
+				}
+				.more{
+					font-style: italic;
+					font-size: 16px;
+				}
+			}
+		}
+
+	}
+
+	.item.last{
+		padding-right: 0;
+	}
+	
+	.blogger-wrapper {
+		margin-top: 0;
+		position: relative;
+	}
+
+	.blogger-content{
+		.blogger-title{
+			margin-top: 20px;
+		}
+	}
+
+	.blogger-bg {
+		top: 0px;
+	}
+
+	.body{
+		font-size: 11px;
+		font-family: $fontOne;
+		font-weight: 100;
+		padding: 0 40px;
+	}
+	
+}
+
 .celebrity-header{
 	float: right;
 	margin-top: 20px;
