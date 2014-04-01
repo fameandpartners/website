@@ -25,6 +25,7 @@ FameAndPartners::Application.routes.draw do
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     get '/nyemix'   => 'statics#nyemix'
     get '/nylonxfame'   => 'statics#nylonxfame'
+    get '/renxfame'   => 'statics#renxfame'
 
     # Custom Dresses part II
     scope '/custom-dresses', module: 'personalization' do
