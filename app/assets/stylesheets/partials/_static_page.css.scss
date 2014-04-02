@@ -39,7 +39,6 @@
 .blogger-page, .celebrity-page {
 	.blogger-header{
 		border: solid 8px #000;
-		background: url('_blogger/header.jpg') no-repeat;
 		background-size: cover;
 		min-height: 440px;
 		img {
@@ -54,6 +53,14 @@
 	.blogger-content { 
 		margin: 0 160px 60px;
 		text-align: center;
+		
+		.logo{
+			margin: 20px auto 40px auto;
+			img{
+				max-width: 280px;
+			}
+		}
+
 		h1 { 
 			font-size: 51px;
 			text-align: center;
@@ -64,6 +71,11 @@
 			text-transform: uppercase;
 			width: auto;
 			display: inline-block;
+			span{
+				font-size: 14px;
+				display: block;
+				font-weight: 100;
+			}
 		}
 		.content {
 			background-color: #fff;
@@ -78,6 +90,23 @@
 			.see-collection {
 				text-align: center;
 				margin: 80px 0;
+			}
+			.interview{
+				.title{
+					font: 300 28px/1.2 $fontTwo;
+					text-transform: uppercase;
+					padding: 20px 0;
+				}		
+				.q{
+					font-size:13px;
+					padding: 0 60px 6px;
+					font-weight: 700;
+					font-style: italic;
+				}
+				.a{
+					font-size:14px;
+					padding: 0 100px 40px;
+				}
 			}
 		}
 		.blogger-title {
