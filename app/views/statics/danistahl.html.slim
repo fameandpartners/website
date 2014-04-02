@@ -1,0 +1,113 @@
+.page-static.blogger-page
+  .blogger-header style="background: url('#{image_path('_blogger/danistahl.jpg')}') no-repeat;"
+
+  .blogger-wrapper
+    .blogger-content
+      h1
+        ' Dani Stahl 
+        span Style Ed-at-Large NYLON Mag
+      .content
+        h2.blogger-title.quote I'm inspired by my environment, travel, creativity is everywhere.
+        .interview
+          .title Our Interview with Dani
+          .q How would you describe your personal style?
+          .a Fun. Eclectic. 
+
+          .q What’s one piece of fashion advice you could give to a girl preparing to go to her formal?
+          .a Make sure the dress is flattering on your figure. Don't wear something just because it's trendy, it has to look good on you.
+
+
+          .q What initially attracted you to the fashion industry?
+          .a Creativity and glamour.
+
+
+          .q Which female icon inspires you the most?
+          .a I love the way Kate Moss wears clothes. I mean, who doesn't?...
+
+
+          .q Describe your fashion evolution from teenager to now - what inspired you along the way?
+          .a I was always reading magazines and trying to get that look! I kind of dress somewhat similarly from high school now that I think about it, my wardrobe has just gotten increasingly expensive over the years!
+
+
+          .q Where do you draw your fashion inspiration from?
+          .a I'm inspired by my environment, travel, creativity is everywhere.
+
+
+          .q F&P is all about individuality; if you could choose one word to describe the way you express your individuality, what would it be?
+          .a Fun.
+
+
+          .q Discovering who you are as a young woman can be a tough process; what do you say to young girls out there going through this?
+          .a Always feel comfortable whatever you are doing. Comfortable equals confident. And when you feel confident you look good!
+
+
+          .q If there is a defining moment in your life where you feel you did something that screams your individuality as a woman, what was it?
+          .a Dying my hair, green, blue, purple - that was pretty individual! 
+
+          .q What inspired you to collaborate with Fame & Partners?
+          .a That brand is so in sync with Nylon style it was a perfect match!
+
+        .blogger-title
+          h2 The NylonxFame Collaboration
+          h3 
+            ' Like Fame & Partners, NYLON encourages young women to express themselves through their own personal style. So when we had the opportunity to co-design a limited edition dress with their Style Editor, Dani Stahl, we knew we could create something bold, provocative and fashion forward.... just like the NYLON girl. The result is a flexible, 5-piece set that can take you from formal event to after party and more.
+        .product
+          .grid-container
+            .grid-5
+              .picture 
+                = link_to build_collection_product_url('mesh', 'nylonxfame-kiss-kiss-party-dress-deluxe') do
+                  = image_tag '_blogger/products/NYLONKK-1-front-2.jpg'
+              h4 = link_to 'NYLONXFAME KISS KISS PARTY DRESS Deluxe', build_collection_product_url('v-neck', 'queen_of_diamonds')
+              .info
+                .price
+                  span $399
+                = link_to "SHOP NOW", build_collection_product_url('mesh', 'nylonxfame-kiss-kiss-party-dress-deluxe'), class: 'btn mid'
+            .grid-7
+              .grid-6
+                = link_to 'http://www.asos.com/au/ASOS/ASOS-V-Bar-Clutch-Bag/Prod/pgeproduct.aspx?iid=3762640&cid=11305&sh=0&pge=1&pgesize=36&sort=-1&clr=Black', target: '_blank' do
+                  = image_tag '_blogger/products/nylon5classic1.jpg'
+              .grid-6
+                = link_to 'http://www.nastygal.com/accessories-jewelry/make-a-point-earrings', target: '_blank' do
+                  = image_tag '_blogger/products/nylon5classic2.png'
+              .grid-6
+                = link_to 'http://www.nastygal.com/accessories-jewelry/chronicle-ring-set', target: '_blank' do
+                  = image_tag '_blogger/products/nylon5classic3.png'        
+              .grid-6
+                = link_to 'http://www.windsorsmith.com.au/pow-97855?color=Black+leather', target: '_blank' do
+                  = image_tag '_blogger/products/nylon5classic4.png'
+              .see-more
+                  = link_to "See more styling advice", personalization_style_product_path(permalink: 'nylonxfame-kiss-kiss-party-dress-deluxe'), class: 'btn empty mid'
+        .product
+          .grid-container
+            .grid-5
+              .picture 
+                = link_to build_collection_product_url('mesh', 'nylonxfame-kiss-kiss-party-dress') do
+                  = image_tag '_blogger/products/NYLONKK-3-front-2.jpg'
+              h4 = link_to 'NYLONXFAME KISS KISS PARTY DRESS', build_collection_product_url('mesh', 'nylonxfame-kiss-kiss-party-dress')
+              .info
+                .price
+                  span $249
+                = link_to "SHOP NOW", build_collection_product_url('mesh', 'nylonxfame-kiss-kiss-party-dress'), class: 'btn mid'
+            .grid-7
+              .grid-6
+                = link_to 'http://www.urbanoutfitters.com/urban/catalog/productdetail.jsp?id=32002586&parentid=W_ACC_JEWELRY', target: '_blank' do
+                  = image_tag '_blogger/products/nylon3glam1.png'
+              .grid-6
+                = link_to 'http://shop.nylonmag.com/collections/flair/products/standard-flat-in-crinkle', target: '_blank' do
+                  = image_tag '_blogger/products/nylon3glam2.png'
+              .grid-6
+                = link_to 'http://www.nastygal.com/accessories-jewelry/sonya-cuff', target: '_blank' do
+                  = image_tag '_blogger/products/nylon3glam3.png'
+              .grid-6
+                = link_to 'http://www.windsorsmith.com.au/miley?color=Black+croc', target: '_blank' do
+                  = image_tag '_blogger/products/nylon3glam4.png'
+              .see-more
+                  = link_to "See more styling advice", personalization_style_product_path(permalink: 'roman_shadow'), class: 'btn empty mid'
+    .blogger-bg.left
+      = image_tag '_blogger/moodboard/nylon1.jpg'   
+      = image_tag '_blogger/moodboard/nylon3.jpg'   
+      = image_tag '_blogger/moodboard/nylon5.jpg'      
+    .blogger-bg.right
+      = image_tag '_blogger/moodboard/nylon2.jpg'
+      = image_tag '_blogger/moodboard/nylon4.jpg'
+      = image_tag '_blogger/moodboard/nylon6.jpg'
