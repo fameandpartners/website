@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140314102016) do
+ActiveRecord::Schema.define(:version => 20140409141803) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -165,12 +165,14 @@ ActiveRecord::Schema.define(:version => 20140314102016) do
   add_index "blog_posts", ["user_id"], :name => "index_blog_posts_on_user_id"
 
   create_table "blog_preferences", :force => true do |t|
-    t.text     "value"
     t.string   "key"
+    t.text     "value"
     t.string   "value_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "blog_preferences", ["key"], :name => "index_blog_preferences_on_key"
 
   create_table "blog_promo_banners", :force => true do |t|
     t.string   "url"
@@ -248,6 +250,8 @@ ActiveRecord::Schema.define(:version => 20140314102016) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
+
+  add_index "celebrity_moodboard_items", ["side"], :name => "index_celebrity_moodboard_items_on_side"
 
   create_table "celebrity_product_accessories", :force => true do |t|
     t.integer  "celebrity_id"
@@ -337,6 +341,12 @@ ActiveRecord::Schema.define(:version => 20140314102016) do
     t.integer  "product_id"
   end
 
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
   create_table "incompatibilities", :force => true do |t|
     t.integer "original_id"
     t.integer "incompatible_id"
@@ -344,17 +354,6 @@ ActiveRecord::Schema.define(:version => 20140314102016) do
 
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
-
-  create_table "inspirations", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.string   "name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
@@ -399,8 +398,8 @@ ActiveRecord::Schema.define(:version => 20140314102016) do
     t.integer  "spree_product_id"
     t.integer  "position"
     t.boolean  "active",                                                          :default => true
-    t.string   "title"
-    t.string   "name"
+    t.string   "title",              :limit => 512
+    t.string   "name",               :limit => 512
     t.string   "source",             :limit => 512
     t.decimal  "price",                             :precision => 8, :scale => 2
     t.string   "currency"

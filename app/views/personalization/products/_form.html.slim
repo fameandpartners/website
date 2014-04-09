@@ -7,10 +7,13 @@
         .picture
           = product_image_tag(@product)
       .grid-8
-        - if show_custom_colors
+        - if true || show_custom_colors
           .row
             .custom-colours
-              / h4 Custom colours ARE only $16 
+              /- if Spree::Config[:free_customisations]
+              /  h4 Custom colours are FREE!
+              /- else
+                h4 Custom colours ARE only $16 
               h4 Choose a custom colour
               - options = color_options_for_select_from_options_values(product.customisation_colors)
               - if options.present? && options.length > 0
@@ -32,7 +35,13 @@
                 .button
                   = link_to '+ ADD', '#', class: 'btn empty border'
                   - if value.price > 0 
-                    p.price = value.display_price
+                    - if Spree::Config[:free_customisations]
+                      p.price
+                        span.price-old = value.display_price
+                        = Spree::Money.new(0.00)
+                      /p Free for limited time only!
+                    - else
+                      p.price = value.display_price
 
         .instructions Once you have made your selections, simply choose your size on the right and add to cart!
         

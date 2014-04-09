@@ -254,6 +254,7 @@ FameAndPartners::Application.routes.draw do
       resource :product_positions, only: [:show, :create, :update]
 
       resource :sale, :only => [:edit, :update]
+      put 'sales/set_free_customisations' => 'sales#set_free_customisations'
 
       #resources :customisation_types do
       #  collection do
