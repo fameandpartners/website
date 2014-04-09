@@ -85,15 +85,21 @@ module Products
         raw[:perfume_name]        = book.cell(row_num, columns[:perfume_name])
         raw[:perfume_brand]       = book.cell(row_num, columns[:perfume_brand])
         raw[:song_link]           = book.cell(row_num, columns[:song_link])
+        raw[:song_name]           = book.cell(row_num, columns[:song_name])
 
         raw[:recommendations]     = {}
         columns[:recommendations].each do |style, recommendations|
           raw[:recommendations][style] ||= []
           recommendations.each_with_index do |recommendation, index|
+            price = book.cell(row_num, recommendation[:price])
+            if price.is_a?(String)
+              price = price.match(/\d+.?\d*/)[0].to_f
+            end
+
             raw[:recommendations][style] << {
               name: book.cell(row_num, recommendation[:name]).to_s.gsub("_x000D_", '').strip,
               description: book.cell(row_num, recommendation[:description]).to_s.gsub("_x000D_", '').strip,
-              price: book.cell(row_num, recommendation[:price]),
+              price: price,
               link: book.cell(row_num, recommendation[:link]),
               position: index + 1
             }
@@ -109,18 +115,18 @@ module Products
           }
         end
 
-        columns[:customization_exclusions].each do |column_num|
-          title = book.cell(row_num, column_num).to_s.strip
-          if title.present?
-            mutally_exclusive = title.split('|').map(&:to_i)
-            mutally_exclusive.each do |item_position|
-              item = raw[:customizations].find{|x| x[:position] == item_position}
-              if item
-                item[:incompatibles] = mutally_exclusive.select{|i| i != item_position}
-              end
-            end
-          end
-        end
+        #columns[:customization_exclusions].each do |column_num|
+        #  title = book.cell(row_num, column_num).to_s.strip
+        #  if title.present?
+        #    mutally_exclusive = title.split('|').map(&:to_i)
+        #    mutally_exclusive.each do |item_position|
+        #      item = raw[:customizations].find{|x| x[:position] == item_position}
+        #      if item
+        #        item[:incompatibles] = mutally_exclusive.select{|i| i != item_position}
+        #      end
+        #    end
+        #  end
+        #end
 
         processed = {}
 
@@ -255,7 +261,8 @@ module Products
             brand:        raw[:perfume_brand]
           },
           song: {
-            link:            raw[:song_link]
+            link:            raw[:song_link],
+            name:            raw[:song_name],
           },
           video: {
             default: processed[:video_id]
@@ -351,20 +358,22 @@ module Products
         start += 2
       end
 
-      @codes[:customization_exclusions] = []
-      exclusion_regexp = /customisation.*exclusion/i
-      book.row(@@titles_row_numbers.second).each_with_index do |title, index|
-        if title.present? and title.strip.to_s =~ exclusion_regexp
-          @codes[:customization_exclusions].push(index.next)
-        end
-      end
+      #@codes[:customization_exclusions] = []
+      #exclusion_regexp = /customisation.*exclusion/i
+      #book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+      #  if title.present? and title.strip.to_s =~ exclusion_regexp
+      #    @codes[:customization_exclusions].push(index.next)
+      #  end
+      #end
 
-      scent_start = @codes[:customization_exclusions].present? ? (@codes[:customization_exclusions].first.to_i + 1) : 28
+      #scent_start = @codes[:customization_exclusions].present? ? (@codes[:customization_exclusions].first.to_i + 1) : 28
+      scent_start = 28
 
       @codes[:perfume_link]   = scent_start
       @codes[:perfume_name]   = scent_start + 1
       @codes[:perfume_brand]  = scent_start + 2
       @codes[:song_link]      = scent_start + 3
+      @codes[:song_name]      = scent_start + 4
 
       @codes[:recommendations] = {}
       @codes[:recommendations][:edgy] = []
@@ -373,7 +382,7 @@ module Products
       @codes[:recommendations][:girly] = []
       @codes[:recommendations][:classic] = []
 
-      start = scent_start + 3 + 3
+      start = scent_start + 4 + 3
 
       [:edgy, :bohemian, :glam, :girly, :classic].each_with_index do |style, index|
         4.times do |time|
@@ -389,10 +398,10 @@ module Products
       end
 
       @codes[:price_in_aud]   = 4
-      @codes[:revenue]        = 134
-      @codes[:cogs]           = 135
-      @codes[:product_coding] = 136
-      @codes[:video_id]       = 138 # 135
+      @codes[:revenue]        = 131
+      @codes[:cogs]           = 132
+      @codes[:product_coding] = 133
+      @codes[:video_id]       = 135 # 138
 
       @codes
     end
@@ -422,14 +431,13 @@ module Products
           add_product_variants(product, args[:sizes], args[:colors] || [])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
-          # add_product_accessories(product, args[:recommendations] || {})
+          add_product_accessories(product, args[:recommendations] || {})
           add_product_song(product, args[:song].symbolize_keys || {})
           add_product_perfume(product, args[:perfume].symbolize_keys || {})
           add_product_videos(product, args[:video].symbolize_keys || {})
 
           product
         rescue Exception => message
-          puts message
           Rails.logger.warn(message)
           nil
         end
@@ -448,7 +456,7 @@ module Products
       product = master.try(:product)
 
       if product.blank?
-        product = Spree::Product.new(sku: sku, featured: false, on_demand: true)
+        product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: Time.now)
       end
 
       attributes = {
@@ -584,18 +592,18 @@ module Products
         customizations.push(customization)
       end
 
-      array_of_attributes.each do |attrs|
-        next unless attrs.values.any?(&:present?)
-
-        customization = product.customisation_values.where(position: attrs[:position]).first
-
-        if attrs[:incompatibles].present?
-          customization.incompatible_ids = product.customisation_values.where(position: attrs[:incompatibles]).map(&:id)
-        else
-          customization.incompatible_ids = []
-        end
-        customization.save(validate: false)
-      end
+      #array_of_attributes.each do |attrs|
+      #  next unless attrs.values.any?(&:present?)
+      #
+      #  customization = product.customisation_values.where(position: attrs[:position]).first
+      #
+      #  if attrs[:incompatibles].present?
+      #    customization.incompatible_ids = product.customisation_values.where(position: attrs[:incompatibles]).map(&:id)
+      #  else
+      #    customization.incompatible_ids = []
+      #  end
+      #  customization.save(validate: false)
+      #end
 
       customizations
     end
@@ -677,7 +685,7 @@ module Products
       if raw_attrs[:link].present?
         song = product.moodboard_items.song.first || product.moodboard_items.song.build
 
-        song.update_attributes(content: raw_attrs[:link])
+        song.update_attributes(content: raw_attrs[:link], name: raw_attrs[:name])
       end
     end
 
