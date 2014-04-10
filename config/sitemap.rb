@@ -11,7 +11,7 @@ require File.expand_path("../application", __FILE__)
 #
 # on production
 #   RAILS_ENV=production bundle exec ruby config/sitemap.rb 
-#   RAILS_ENV=production bundle exec rake sitemap:refresh
+#   RAILS_ENV=production bundle exec rake sitemap:refresh:no_ping
 #
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "http://#{configatron.host}"
@@ -68,4 +68,4 @@ if !FileTest.exists?(target_file_path) && FileTest.exists?(source_file_path)
   system("ln -s #{source_file_path} #{target_file_path}")
 end
 
-#SitemapGenerator::Sitemap.ping_search_engines("http://#{configatron.host}/sitemap.xml.gz")
+SitemapGenerator::Sitemap.ping_search_engines("http://#{configatron.host}/sitemap.xml.gz")
