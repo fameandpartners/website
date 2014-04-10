@@ -76,7 +76,7 @@ target_file_path = File.join(Rails.root, 'public', file_name)
 source_file_path = File.join(Rails.root, 'public', 'system', file_name)
 
 # create symlink
-if !FileTest.exists?(target_file_path) && FileTest.exists?(source_file_path)
+if !FileTest.exists?(target_file_path) #&& FileTest.exists?(source_file_path)
   system("ln -s #{source_file_path} #{target_file_path}")
 end
 
