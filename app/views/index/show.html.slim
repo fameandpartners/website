@@ -38,7 +38,7 @@ ruby:
   .row
     .grid-8
       .picture-large 
-        = link_to new_collection_path do
+        = link_to collection_path(:order => "newest") do
           = image_tag 'homepage/new/hero.gif'
     .grid-4
       .picture-small 
