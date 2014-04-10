@@ -25,6 +25,34 @@
 .nylon-wrapper {
 	padding: 0 0 60px 0;
 	.catalog-slider-wrapper {
+		position: relative;
+
+		ul{
+			position: relative;
+		}
+
+		.dress-title{
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+			z-index: 1000;
+			padding: 3px 7px;
+			text-align: left;
+			font-family: $fontThree;
+			color: #fff;
+			font-weight: 300;
+			font-size: 18px;
+			background: #000;
+			opacity:0.8;
+  		filter:alpha(opacity=80);
+
+  		span{
+  			display: block;
+  			opacity:1 !important;
+	  		filter:alpha(opacity=100); 
+  		}
+		}
+
 		.bx-prev, .bx-next {
 			text-indent: 0;
 			font-size: 17px;
@@ -98,7 +126,6 @@
 		}
 	}
 	.quote {
-		border-top: 10px solid #000;
 		border-bottom: 1px solid #000;
 		padding: 55px 0;
 		text-align: center;
@@ -160,24 +187,28 @@
 			font-size: 30px;
 			font-style: italic;
 			font-family: $fontTwo;
-			padding: 18px 0;
 			position: relative;
-			&:after {
-				content: '';
-				display: block;
-				position: absolute;
-				left: 0;
-				bottom: 0;
-				width: 40px;
-				height: 1px;
-				background-color: #000;
-			}
+		}
+		.line{
+			width: 50px;
+			height: 1px;
+			background: #666;
+			margin: 18px 0;
+		}
+		.small{
+			font-size: 14px;
+			line-height: 1.3em;
 		}
 		h4 {
 			padding: 18px 0;
 			font-family: $fontThree;
 			font-size: 30px;
 		}
+		
+		.btns{
+			padding-top: 30px;
+		}
+
 		.btn-wrapper + .btn-wrapper {
 			margin-top: 10px;
 		}
