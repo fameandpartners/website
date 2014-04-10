@@ -19,6 +19,18 @@ SitemapGenerator::Sitemap.default_host = "http://#{configatron.host}"
 SitemapGenerator::Interpreter.send :include, ApplicationHelper
 SitemapGenerator::Interpreter.send :include, ProductsHelper
 
+SitemapGenerator::Interpreter.class_eval do
+  def collection_product_path(product, options = {})
+    taxon = range_taxon_for(product)
+    if taxon
+      taxon_permalink = taxon.permalink.split('/').last
+      build_collection_product_path(taxon_permalink, product.to_param, options)
+    else
+      "/collection/long-dresses/#{ product.permalink }"
+    end
+  end
+end
+
 # we create sitemap in xml, /public/sitemap.xml should be only symlink
 options = {
   sitemaps_path: 'system' # folder not in repository
@@ -68,4 +80,6 @@ if !FileTest.exists?(target_file_path) && FileTest.exists?(source_file_path)
   system("ln -s #{source_file_path} #{target_file_path}")
 end
 
-SitemapGenerator::Sitemap.ping_search_engines("http://#{configatron.host}/sitemap.xml.gz")
+unless Rails.env.development?
+  SitemapGenerator::Sitemap.ping_search_engines("http://#{configatron.host}/sitemap.xml.gz")
+end
