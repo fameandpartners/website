@@ -27,6 +27,11 @@ FameAndPartners::Application.routes.draw do
     get '/nylonxfame'   => 'statics#nylonxfame'
     get '/renxfame'   => 'statics#renxfame'
 
+    # to correctly redirect, we should know product taxon or extract collection from param
+    get "/products"             => 'redirects#products_index'
+    get "/products/:product_id" => 'redirects#products_show'
+    get "/products/:collection/:product_id" => 'redirects#products_show'
+
     # Custom Dresses part II
     scope '/custom-dresses', module: 'personalization' do
       get '/', to: 'registrations#new', as: :personalization
@@ -254,6 +259,7 @@ FameAndPartners::Application.routes.draw do
       resource :product_positions, only: [:show, :create, :update]
 
       resource :sale, :only => [:edit, :update]
+      put 'sales/set_free_customisations' => 'sales#set_free_customisations'
 
       #resources :customisation_types do
       #  collection do

@@ -1,6 +1,7 @@
 <% content_for :page_title do %>
   Sale Settings
 <% end %>
+
 <div data-hook="admin_sale_edit_form">
   <div id="sale-form-wrapper">
     <%= form_for [:admin, @sale], :url => admin_sale_path, :method => :put do |f| %>
@@ -41,3 +42,21 @@
     <% end %>
   </div>
 </div>
+
+<div data-hook="free_customisation_price_form">
+  <div id="free-customisation-form-wrapper">
+    <%= form_tag admin_sales_set_free_customisations_path, method: :put, remote: true do %>
+      <fieldset class="customisation_values sale">
+        <div class="field">
+          <%= check_box_tag :free_customisations, true, Spree::Config[:free_customisations] %>
+          <%= label_tag(:free_customisations, 'Free customisations') %>
+        </div>
+      </fieldset>
+
+      <div class="form-buttons filter-actions actions" data-hook="buttons">
+        <%= button t(:update), 'icon-refresh' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

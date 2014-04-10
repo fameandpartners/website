@@ -12,6 +12,12 @@ class Spree::Admin::SalesController < Spree::Admin::BaseController
     end
   end
 
+  def set_free_customisations
+    Spree::Config.set_preference(:free_customisations, params[:free_customisations])
+    
+    render nothing: true
+  end
+
   private
 
   def model_class

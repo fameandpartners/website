@@ -3,7 +3,7 @@ class Spree::Admin::StylesController < Spree::Admin::BaseController
   end
 
   def show
-    render action: index
+    render action: :index
   end
 
   def update
