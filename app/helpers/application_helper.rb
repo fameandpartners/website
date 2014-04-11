@@ -130,6 +130,7 @@ module ApplicationHelper
       taxon_permalink = taxon.permalink.split('/').last
       build_collection_product_path(taxon_permalink, product.to_param, options)
     else
+      # switch to "/collection/long-dresses/#{ product.permalink }" ?
       spree.product_path(product, options)
     end
   end

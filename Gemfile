@@ -30,6 +30,8 @@ gem 'roo', require: false
 gem 'twitter'
 gem 'instagram'
 
+gem 'sitemap_generator'
+
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'

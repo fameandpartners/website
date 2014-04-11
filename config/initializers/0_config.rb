@@ -32,8 +32,10 @@ when :development
   configatron.host = 'localhost.localdomain'
   configatron.blog_host = 'blog.localdomain'
 when :staging
-  configatron.host = 'fame.23stages.com'
-  configatron.blog_host = 'blog.fame.23stages.com'
+  #configatron.host = 'fame.23stages.com'
+  #configatron.blog_host = 'blog.fame.23stages.com'
+  configatron.host = 'stage.fameandpartners.com'
+  configatron.blog_host = 'stage.fameandpartners.com'
 
   configatron.mailgun.mailbox.domain = '23stages.com'
   configatron.mailgun.mailbox.username = 'mailer@23stages.com'
