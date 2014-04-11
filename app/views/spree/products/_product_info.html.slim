@@ -38,6 +38,10 @@ ruby:
       li.opened 
         .title DESCRIPTION
         .text 
+          - if product.property('preorder').present? && product.property('preorder').downcase == "yes"
+            .pre-order
+              strong Pre-order
+              ' This item will ship within 4 weeks
           - if (description = product_description(@product)).present?
             p = description
           - else
