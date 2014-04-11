@@ -267,7 +267,16 @@
 					border-color: #000 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 				}
 			}
-			.text { display: none;}
+			.text {
+				display: none;
+				i{
+					font-family: $fontTwo;
+					display: block;
+					padding-bottom: 18px;
+					text-transform: none;
+					font-size: 12px;	
+				}
+			}
 			.opened {
 				.title:after {
 					border-width: 0 6px 6px 6px;
