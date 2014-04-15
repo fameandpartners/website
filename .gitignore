@@ -43,3 +43,5 @@ config/database.yml
 /.sass-cache
 
 *.orig
+
+~/Library/Application Support/Sublime Text 3/Packages/
