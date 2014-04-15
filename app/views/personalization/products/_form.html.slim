@@ -10,11 +10,15 @@
         - if true || show_custom_colors
           .row
             .custom-colours
-              /- if Spree::Config[:free_customisations]
-              /  h4 Custom colours are FREE!
-              /- else
-                h4 Custom colours ARE only $16 
-              h4 Choose a custom colour
+              h4
+                ' Choose a custom colour
+                - if Spree::Config[:free_customisations]
+                  .price
+                    span.price-old $16 
+                    ' Free!
+                    
+                - else
+                  .price $16
               - options = color_options_for_select_from_options_values(product.customisation_colors)
               - if options.present? && options.length > 0
                 - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
@@ -38,7 +42,7 @@
                     - if Spree::Config[:free_customisations]
                       p.price
                         span.price-old = value.display_price
-                        = Spree::Money.new(0.00)
+                        ' Free
                       /p Free for limited time only!
                     - else
                       p.price = value.display_price

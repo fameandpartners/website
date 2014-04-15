@@ -486,6 +486,18 @@
 		}
 		.custom-colours{
 			width: 300px;
+
+			.price, .price-old{
+				display: inline-block;
+				color: $pinkColor;
+				padding-left: 5px;
+				font-size: 12px;
+			}
+			.price-old{
+				color: #333;
+				text-decoration: line-through;
+				padding-right: 5px;
+			}
 		}
 		.picture{
 			width: 320px;
