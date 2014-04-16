@@ -126,13 +126,11 @@ module ApplicationHelper
 
   def collection_product_path(product, options = {})
     taxon = range_taxon_for(product)
-    if taxon
-      taxon_permalink = taxon.permalink.split('/').last
-      build_collection_product_path(taxon_permalink, product.to_param, options)
-    else
-      # switch to "/collection/long-dresses/#{ product.permalink }" ?
-      spree.product_path(product, options)
-    end
+    taxon ||= range_taxonomy.taxons.first if range_taxonomy.present?
+
+    taxon_permalink = taxon.present? ? taxon.permalink.split('/').last : 'long-dresses'
+
+    build_collection_product_path(taxon_permalink, product.to_param, options)
   end
 
   def collection_product_url(product, options = {})
