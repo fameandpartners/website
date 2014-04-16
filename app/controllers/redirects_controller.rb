@@ -1,4 +1,4 @@
-class RedirectsController < ActionController::Base
+class RedirectsController < ApplicationController
   def products_index
     redirect_to generate_collection_path(params[:collection], params), status: 301
   rescue
