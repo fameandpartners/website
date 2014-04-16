@@ -1,6 +1,6 @@
 class CelebritiesController < ApplicationController
   layout 'spree/layouts/spree_application'
-
+  
   def index
 
   end
