@@ -6,7 +6,7 @@
       = render('users/shared/tabs', active_tab: 'orders') unless successfully_ordered
       #order.tab-content
         - if successfully_ordered
-          h1.page-title Thanks for your order #{@order.user.full_name}!
+          h1.page-title Thanks for your order #{@order.full_name}!
 
         .grid-container
           .grid-4
@@ -53,7 +53,8 @@
                 =' link_to 'FAQs.', 'http://fameandpartners.com/faqs', target: '_blank'
               p Or otherwise contact our friendly team if you need any help.
               p = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
-              .back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn'
+              - unless @order.user.blank?
+                .back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn'
               .m-pixel
                 img src="http://tags.rtbidder.net/convert?sid=52564c0e8bc06f1060da24f8" width="0" height="0" border="0" alt=""
               script src="https://secure.adnxs.com/px?id=154031&seg=1436880&order_id=#{ @order.number }&value=#{ @order.display_item_total }&t=1" type="text/javascript"

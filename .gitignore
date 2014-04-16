@@ -45,3 +45,5 @@ config/database.yml
 /public/sitemap*
 
 *.orig
+
+~/Library/Application Support/Sublime Text 3/Packages/
