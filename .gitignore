@@ -42,4 +42,6 @@ config/database.yml
 # ignore cache
 /.sass-cache
 
+/public/sitemap*
+
 *.orig
