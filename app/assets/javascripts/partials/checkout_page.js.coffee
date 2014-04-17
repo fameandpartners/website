@@ -11,6 +11,7 @@ $('.checkout.edit').ready ->
 
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
+      page.updateDatepicker()
 
     onAjaxLoadingHandler: (e) ->
       $button = $(e.currentTarget)
@@ -69,6 +70,7 @@ $('.checkout.edit').ready ->
     refreshFormView: () ->
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
+      page.updateDatepicker()
       $('.selectbox').chosen()
 
     updateShippingFormVisibility: () ->
@@ -86,6 +88,13 @@ $('.checkout.edit').ready ->
       else
         $('form#new_user .passwords input').prop('disabled', true)
         $('form#new_user .passwords').hide()
+
+    updateDatepicker: () ->
+      $('#order_required_to').datepicker({
+        minDate: '+1D',
+        showButtonPanel: true,
+        dateFormat: 'yy-mm-dd'
+      })
 
     doNothing: (event) ->
       event.preventDefault()

@@ -21,6 +21,10 @@
         <dd id='payment_status'><span class="state <%= @order.payment_state %>"><%= t(@order.payment_state, :scope => :payment_states, :default => [:missing, "none"]) %></span></dd>
         <dt data-hook><%= t(:date_completed) %>:</dt>
         <dd id='date_complete'><%= pretty_time(@order.completed? ? @order.completed_at : @order.created_at) %></dd>
+        <% if @order.required_to.present? %>
+          <dt data-hook><%= t(:required_to) %>:</dt>
+          <dd id='required_to'><%= @order.required_to.to_date.to_s(:long) %></dd>
+        <% end %>
       <% end %>
     </dl>
   </header>
