@@ -2,7 +2,7 @@
 app/views/marketing_mailer/
 
 # abandoned cart
-order = Spree::Order.where("user_id is not null").first
+order = Spree::Order.joins(:line_items).where("user_id is not null").first
 MarketingMailer.abandoned_cart(order, order.user).deliver
 
 # added wishlist
