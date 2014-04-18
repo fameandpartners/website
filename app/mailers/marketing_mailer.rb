@@ -8,13 +8,23 @@ class MarketingMailer < ActionMailer::Base
   helper :products
   helper :application
 
+  #require 'lib/products/similar_products'
+  require File.join(Rails.root, 'lib', 'products', 'similar_products.rb')
+
   default :from => configatron.noreply
 
   def abandoned_cart(order, user)
     @user = user
     @order = order
-    site_version = order.get_site_version
-    @site_version_code = site_version.default? ? '' : site_version.code
+    @site_version = order.get_site_version
+    @site_version_code = @site_version.default? ? '' : @site_version.code
+
+    # fill data required for template
+    @product = @order.line_items.first.product
+    @images = (@product.images * 5).first(5) 
+    @product_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ collection_product_path(@product) }"
+    @personalisation_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ personalization_product_path(permalink: @product.permalink) }"
+    @recommended_dresses = Products::SimilarProducts.new(@product).fetch(6).to_a
 
     Slim::Engine.with_options(:pretty => true) do
       mail(
