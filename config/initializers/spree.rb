@@ -12,7 +12,7 @@ Spree.config do |config|
   config.allow_ssl_in_production = true
   config.allow_ssl_in_staging = false
 
-  config.products_per_page = 100 # disable pagination at all
+  config.products_per_page = 1000 # disable pagination at all
   config.allow_backorders = false # allow order items out of stock - we have 90% items by order
   config.show_zero_stock_products = true
 

@@ -139,7 +139,14 @@ module Products
     end
 
     def selected_collection_taxons
-      @selected_collection ||= selected_taxons(@searcher.collection, false)
+      @selected_collection ||= begin
+        collection_ids = @searcher.collection
+        seo_collection = @searcher.seocollection rescue []
+        if seo_collection.present?
+          collection_ids += seo_collection
+        end
+        selected_taxons(collection_ids, false)
+      end
     end
 
     def selected_edits_taxons
