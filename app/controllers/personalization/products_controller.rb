@@ -10,8 +10,8 @@ module Personalization
     end
 
     def show
-      @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
-
+      @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink(params[:permalink])
+      # check and redirect if needed
       ensure_customization_available(@product) and return
 
       set_product_show_page_title(@product, "Custom Formal Dress ")

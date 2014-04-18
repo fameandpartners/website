@@ -16,3 +16,7 @@
 
 Billing Address: <%= @order.billing_address.to_string %>
 Shipping Address: <%= @order.shipping_address.to_string %>
+
+<% if @order.required_to.present? %>
+Order required to : <%= @order.required_to %>
+<% end %>

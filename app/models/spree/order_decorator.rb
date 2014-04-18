@@ -2,6 +2,7 @@ Spree::Order.class_eval do
   self.include_root_in_json = false
 
   attr_accessor :zone_id
+  attr_accessible :required_to
 
   after_save :clean_cache!
 
@@ -168,19 +169,23 @@ Spree::Order.class_eval do
       result[line_item_column] = []
     end
     line_items.includes(:product, :variant).each do |line_item|
-      result[:style_name] << line_item.product.name
-      result[:sku] << line_item.variant.sku
+      result[:style_name] << (line_item.product.present? ? line_item.product.name : 'Deleted Product')
+      result[:sku]        << (line_item.variant.present? ? line_item.variant.sku : 'n/a')
+
       size = 'n/a'
       colour = 'n/a'
       customisations = 'n/a'
-      line_item.variant.option_values.each do |value|
-        case value.option_type.name.to_s.downcase
-        when 'dress-size'
-          size = value.presentation
-        when 'dress-color'
-          colour = value.presentation
-        else
-          customisations = "#{value.option_type.presentation}: #{value.presentation}"
+
+      if line_item.variant.present?
+        line_item.variant.option_values.each do |value|
+          case value.option_type.name.to_s.downcase
+          when 'dress-size'
+            size = value.presentation
+          when 'dress-color'
+            colour = value.presentation
+          else
+            customisations = "#{value.option_type.presentation}: #{value.presentation}"
+          end
         end
       end
       result[:size] << size

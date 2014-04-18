@@ -28,7 +28,15 @@ class Blog::PostsController < BlogBaseController
   def show
     @post = post_scope.includes(
       :user, :post_photos, :celebrity_photos, :category, :celebrities
-    ).find_by_slug!(params[:post_slug])
+    ).find_by_slug(params[:post_slug])
+
+    if @post.blank?
+      if params[:category_slug] and (category = Blog::Category.find_by_slug(params[:category_slug]))
+        redirect_to blog_posts_by_category_path(category.slug) and return
+      else
+        redirect_to(blog_path) and return
+      end
+    end
 
     if params[:type] == 'red_carpet'
       title "#{@post.title} in Events"
@@ -38,7 +46,10 @@ class Blog::PostsController < BlogBaseController
       description "#{@post.title}. #{view_context.truncate(@post.body, :length => 200)}"
     end
 
-    @recommended_posts = @post.category.posts.published.simple_posts.limit(3).where("id != ?", @post.id).includes(:post_photos, :category)
+    @recommended_posts = []
+    if @post.category.present?
+      @recommended_posts = @post.category.posts.published.simple_posts.limit(3).where("id != ?", @post.id).includes(:post_photos, :category)
+    end
     @recommended_dresses = Spree::Product.featured.limit(4)
 =begin
     if current_spree_user.present?

@@ -7,6 +7,11 @@
   = form.fields_for :ship_address do |ship_form|
     = render :partial => 'spree/checkout/address_form', :locals => {:form => ship_form, :address_type => 'shipping', :address => @order.ship_address}
 
+  .grid-12.input id="required_to"
+    = form.label :required_to, t(:required_to)
+    br
+    = form.text_field :required_to, value: @order.required_to
+
   .submit-button.clearfix
     .fleft = form.submit 'Submit Details', data: { loading: 'Submitting...' }, class: 'btn mid border'
     - if spree_user_signed_in?
