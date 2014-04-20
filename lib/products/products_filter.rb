@@ -266,6 +266,11 @@ module Products
       # and required for search ids
       @properties[:collection]  ||= []
       @properties[:edits]       ||= []
+
+      # it's dirty hack, we equal collection with some other collection
+      if params[:collection].present? && params[:seocollection].blank?
+        params[:seocollection] = params[:collection]
+      end
       Spree::Taxon.roots.each do |taxon|
         permalink = taxon.permalink
         @properties[permalink] = prepare_taxon(permalink, params[permalink])
@@ -284,6 +289,7 @@ module Products
     end
 
     # get by permalinks. array or single param
+    # todo: create root taxon - independed search
     def prepare_taxon(root, permalinks)
       return nil if permalinks.blank?
       permalinks = Array.wrap(permalinks)

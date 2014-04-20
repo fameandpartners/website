@@ -48,6 +48,10 @@ $('.spree_products.index').ready ->
           track.pageView(pageUrl, updateRequestParams)
       )
 
+    reset: () ->
+      @$el.find('#colour, #collection, #bodyshape, #product_order').val('').trigger('chosen:updated')
+      @update()
+
     updateOrder: () ->
       @update()
 
@@ -70,16 +74,22 @@ $('.spree_products.index').ready ->
       url
 
     getSelectedValues: () ->
-      result = addValue({}, 'style', '#style')
-      addValue(result, 'collection', '#collection')
+      result = addValue({}, 'collection', '#collection')
       addValue(result, 'bodyshape', '#bodyshape')
       addValue(result, 'colour', '#colour')
+      #addValue(result, 'style', '#style')
       addValue(result, 'order', '#product_order')
       result
   }
 
   window.helpers.quickViewer.init()
   productsFilter.init($('#content'))
+  window.pf = productsFilter
+
+  $('.spree_products.index').on('click', "a[data-action='show-collection']", (e) ->
+    e.preventDefault()
+    productsFilter.reset()
+  )
 
 # $('.filters-block .color').on('click', productsFilter.toggleColorClicked)
 

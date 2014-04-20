@@ -26,6 +26,12 @@ FameAndPartners::Application.routes.draw do
     get '/nyemix'   => 'statics#nyemix'
     get '/nylonxfame'   => 'statics#nylonxfame'
     get '/renxfame'   => 'statics#renxfame'
+    get '/lilyxfame'   => 'statics#lilyxfame'
+
+    # to correctly redirect, we should know product taxon or extract collection from param
+    get "/products"             => 'redirects#products_index'
+    get "/products/:product_id" => 'redirects#products_show'
+    get "/products/:collection/:product_id" => 'redirects#products_show'
 
     # Custom Dresses part II
     scope '/custom-dresses', module: 'personalization' do
@@ -109,8 +115,8 @@ FameAndPartners::Application.routes.draw do
     get '/stylists' => 'blog/authors#index', as: :blog_authors
     get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
 
-    #get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
-    #get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
+    get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
+    get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
 
     get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
     get '/search' => 'blog/searches#by_query', as: :blog_search_by_query

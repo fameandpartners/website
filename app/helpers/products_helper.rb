@@ -330,4 +330,21 @@ module ProductsHelper
 
     items.join(' / ').html_safe
   end
+
+  def collection_page_breadcrumb(searcher)
+    items = []
+    if searcher.collection.present?
+      taxon = Spree::Taxon.find_by_id(searcher.collection.first)
+      if taxon.present?
+        items << taxon.name
+      end
+    end
+
+    if items.present?
+      items.unshift( link_to('Collection', collection_path, data: { action: 'show-collection' }))
+      items.join(' / ').html_safe
+    else
+      ''
+    end
+  end
 end

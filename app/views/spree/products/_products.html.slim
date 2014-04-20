@@ -5,7 +5,9 @@ ruby:
     cache_name_fragments.push(current_promotion.code)
   end
 
+
 .category-catalog.products-list
+  h5.breadcrumb = collection_page_breadcrumb(@searcher)
   .row
     - if @products.present?
       - @products.each do |product|
