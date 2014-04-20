@@ -21,18 +21,31 @@ namespace :import do
         sku, price = book.row(index)
         sku = sku.dup.to_s.downcase.strip
 
-        if sku.present? && price.present?
-          master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
+        next if sku.blank? || price.blank?
+
+        puts %Q(Search product by SKU "#{sku}")
+
+        masters = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku)
+
+        if masters.blank?
+          puts %q(  Products not found)
+          next
         end
 
-        next unless master.present?
+        puts %Q(  #{masters.count} products found)
 
-        master.price = price
-        master.save!
+        masters.each do |master|
+          puts %Q(    Processing master variant with id "#{master.id}")
+          master.price = price
+          master.save!
+          puts %q(      Saved)
 
-        master.product.variants.each do |variant|
-          variant.price = price
-          variant.save!
+          master.product.variants.each do |variant|
+            puts %Q(    Processing variant with id "#{variant.id}")
+            variant.price = price
+            variant.save!
+            puts %q(      Saved)
+          end
         end
       end
     end
