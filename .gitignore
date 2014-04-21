@@ -42,8 +42,6 @@ config/database.yml
 # ignore cache
 /.sass-cache
 
-/public/sitemap*
-
 *.orig
 
 ~/Library/Application Support/Sublime Text 3/Packages/

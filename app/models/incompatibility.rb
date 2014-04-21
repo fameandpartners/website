@@ -23,4 +23,8 @@ class Incompatibility < ActiveRecord::Base
   after_create unless: :reverse do
     create_reverse
   end
+
+  after_destroy if: :reverse do
+    reverse.destroy
+  end
 end

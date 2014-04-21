@@ -98,6 +98,7 @@ Spree::Order.class_eval do
       log_products_purchased
       update_campaign_monitor
     rescue Exception => e
+      log_confirm_email_error(e)
       logger.error("#{e.class.name}: #{e.message}")
       logger.error(e.backtrace * "\n")
     end
@@ -140,6 +141,18 @@ Spree::Order.class_eval do
     line_items.each do |line_item|
       Activity.log_product_purchased(line_item.product, self.user, self)
     end
+  end
+
+  def log_confirm_email_error(error = nil)
+    NewRelic::Agent.agent.error_collector.notice_error( error )
+    File.open(File.join(Rails.root, 'log', 'errors.log'), 'a+') do |file|
+      file.puts(Time.now.to_s(:db))
+      file.puts("order_id: #{ self.id }")
+      file.puts(error.inspect)
+      file.puts(error.try(:backtrace))
+      file.puts
+    end
+  #rescue
   end
 
   def customer_shipping_address

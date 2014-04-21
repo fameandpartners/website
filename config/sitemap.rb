@@ -33,12 +33,13 @@ end
 
 # we create sitemap in xml, /public/sitemap.xml should be only symlink
 options = {
+  compress: true,
   sitemaps_path: 'system' # folder not in repository
 }
 
 if Rails.env.development?
   SitemapGenerator::Sitemap.default_host = "http://localhost:3600"
-  options.merge!({ compress: true })
+  options[:compress] = false
 end
 
 SitemapGenerator::Sitemap.create(options) do
@@ -81,5 +82,5 @@ if !FileTest.exists?(target_file_path) #&& FileTest.exists?(source_file_path)
 end
 
 unless Rails.env.development?
-  SitemapGenerator::Sitemap.ping_search_engines("http://#{configatron.host}/sitemap.xml.gz")
+  SitemapGenerator::Sitemap.ping_search_engines("http://#{configatron.host}/#{ file_name }")
 end

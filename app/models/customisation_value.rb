@@ -6,7 +6,8 @@ class CustomisationValue < ActiveRecord::Base
            inverse_of: :original,
            foreign_key: :original_id
   has_many :incompatibles,
-           through: :incompatibilities
+           through: :incompatibilities,
+           dependent: :destroy # without this, 'after_destroy' in Incompatibility wouldn't be called :(
 
   attr_accessible :position,
                   :name,
