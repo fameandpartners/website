@@ -9,7 +9,9 @@ module Spree
 
       def update
         customisation_value = @product.customisation_values.find(params[:id])
-        customisation_value.update_attributes(params[:customisation_value])
+        customisation_value.update_attributes(
+          params[:customisation_value].reverse_merge(incompatible_ids: [])
+        )
         respond_to do |format|
           format.html do
             flash[:success] = "Customisation set been updated"
