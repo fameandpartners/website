@@ -7,15 +7,12 @@
   = form.fields_for :ship_address do |ship_form|
     = render :partial => 'spree/checkout/address_form', :locals => {:form => ship_form, :address_type => 'shipping', :address => @order.ship_address}
 
-  .clearfix
-    .grid-6.input id="required_to"
-      = form.label :required_to, t(:required_to)
-      = form.text_field :required_to, value: @order.required_to
+  
 
-  .submit-button.clearfix
-    .fleft = form.submit 'Submit Details', data: { loading: 'Submitting...' }, class: 'btn mid border'
-    - if spree_user_signed_in?
-      .fleft
-        .ask-parents-block
-          = link_to 'Invite someone to pay', '#', class: 'btn mid empty border ask-parents ask-parent-to-pay-button'
+  .submit-button.text-right
+    = form.submit 'Submit Details', data: { loading: 'Submitting...' }, class: 'btn pink'
+    / - if spree_user_signed_in?
+    /   .fleft
+    /     .ask-parents-block
+    /       = link_to 'Invite someone to pay', '#', class: 'btn mid empty border ask-parents ask-parent-to-pay-button'
           / .info Need help paying for this order? Just send an invite to your mum, dad or relative to ask them to pay :)
