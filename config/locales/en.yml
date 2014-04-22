@@ -79,6 +79,7 @@ en:
         description: 'Formal Dresses, Celebrity Fashion and Style Inspiration. Follow the Fame & Partners blog to stay in touch with the latest trends for your next formal event.'
   zip: 'Postcode'
   color: 'Colour'
+  required_to: 'When do you need the dress by?'
   spree:
     admin:
       products:
