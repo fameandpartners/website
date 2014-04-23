@@ -156,6 +156,8 @@
 	padding-right: 20px;
 	.coupon-block {
 		margin-bottom: 20px;
+		padding-bottom: 25px;
+		border-bottom: solid 1px #eee;
 		input[type="text"] {
 			width: 170px;
 			margin-right: 20px;
@@ -240,6 +242,10 @@ body.checkout {
 		background-color: #000;
 		color: #fff;
 	}
+	&.grey {
+		color: #fff;
+		background-color: #ccc;
+	}
 	h3 {
 		font: 400 20px/1 $fontThree;
 		margin: 0;
@@ -275,6 +281,10 @@ body.checkout {
 		font-family: $fontFive;
 		font-size: 13px;
 	}
+	input[type="radio"], input[type="checkbox"] {
+		margin-right: 5px;
+	}
+	.hint { margin-top: 5px;}
 	
 	.text-title {
 		font: italic 400 21px/1 $fontTwo;
@@ -286,6 +296,8 @@ body.checkout {
 		text-transform: none;
 		font-size: 14px;
 		color: #666;
+		margin-bottom: 0;
+		+ p { margin: 4px 0;}
 	}
 	.open-login-popup {
 		margin-top: 30px;
@@ -351,5 +363,13 @@ body.checkout {
 				}
 			}
 		}
+	}
+
+	.what-this {
+		text-transform: none;
+		font-family: $fontFive;
+		margin-left: 20px;
+		line-height: 32px;
+		font-size: 13px;
 	}
 }

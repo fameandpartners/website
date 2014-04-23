@@ -2,16 +2,26 @@
   - unless (sale_active? or current_order.has_personalized_items?)
     .coupon-block
       = form_for @order, url: update_checkout_path('payment'), remote: true, html: {class: 'form-global'} do |f|
-        h4 Enter coupon or promocode
-        p You might have seen one in an email, from a friend or even by completing our Style Quiz.
-        = f.text_field :coupon_code
-        = f.submit 'Redeem Now', class: 'btn empty border'
+        h4 Have a promocode?
+        = f.text_field :coupon_code, class: 'without-shadow'
+        = f.submit 'Apply promocode', class: 'btn border without-shadow'
 
-  .payments-cart
-    /input type="radio" name="cards"
-    .fleft Secure credit card payment
-    .fright 
-      span.image = image_tag 'icons-cards.png', alt: 'Visa, MasterCard, Amex'
+  / .payments-cart
+  /   input type="radio" name="cards"
+  /   .fleft Secure credit card payment
+  /   .fright 
+  /     span.image = image_tag 'icons-cards.png', alt: 'Visa, MasterCard, Amex'
+
+  .payments-choose
+    .input.clearfix
+      .grid-3
+        label
+          input type="radio"
+          span Credit Card
+      .grid-9
+        label
+          input type="radio"
+          span Pay Pal
 
   = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
     = render 'shared/error_messages', :target => @order
@@ -19,13 +29,20 @@
     = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
 
   - if paypal_available?
-    .grid-container.border
+    .grid-container
       = render :partial => "spree/checkout/payment/paypal"
 
   .grid-container
-    .grid-100
-      .place-order
-        button.btn.border data-loading="Placing..." Place order
+    .place-order.text-right
+      p 
+        label
+          input type="checkbox"
+          span I want to subscibe to Fame &amp; Partners Newsletter
+      p 
+        label
+          input type="checkbox"
+          span I agree to the Terms &amp; Conditions
+      button.btn.pink data-loading="Placing..." Place My order
 
 /.style-tips.border
 /  .grid-container

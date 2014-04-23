@@ -72,9 +72,28 @@
               = link_to 'Edit', checkout_state_path('address'), :remote => true, class: 'edit'
           div data-step="address" *{ :class => !active.eql?('address') && 'hide' }
             = render 'spree/checkout/address' if active.eql?('address') || active.eql?('payment')
+          
+          .checkout-title.grey data-step="payment"
+            h3 Billing and shipping Address
+          .checkout-content
+            .grid-container
+              .grid-6
+                .text-title Billing Address
+                p Elton 
+                p 213/13124
+                p streen
+                p city
+              .grid-6
+                .text-title Shipping Address
+                p Elton 
+                p 213/13124
+                p streen
+                p city
+
           .checkout-title.black data-step="payment" *{ :class => active.eql?('payment') && 'active' }
             h3 Payment
-
+          
+          
           - if active.eql?('payment')
             .checkout-content data-step="payment"
               = render 'spree/checkout/payment' 

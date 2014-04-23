@@ -2,7 +2,7 @@
   .grid-container
     .grid-100.selector
       legend
-        /input type="radio" name="cards"
+        input type="radio" name="cards"
         label Secure credit card payment
         span.image = image_tag 'icons-cards.png', width: 176, height: 33, alt: 'Visa, MasterCard, Amex'
 
@@ -19,20 +19,22 @@
 
 .coupon-block.border
   .grid-container
-    = form_for @order, url: guest_update_checkout_path('payment'),remote: true do |f|
-      .grid-50
-        .input
-          label Enter coupon or promocode
-          .promo-help You might have seen one in an email, from a friend or even by completing our Style Quiz.
-          = f.text_field :coupon_code
-      .grid-50
-        .submit
-          = f.submit 'Redeem Now'
+    = form_for @order, url: guest_update_checkout_path('payment'),remote: true, html: {class: 'form-global'} do |f|
+      h4 Have a promocode?
+      = f.text_field :coupon_code, class: 'without-shadow'
+      = f.submit 'Apply promocode', class: 'btn border without-shadow'
 
 .grid-container
-  .grid-100
-    .place-order
-      button data-loading="Placing..." Place order
+  .place-order.text-right
+    p 
+      label
+        input type="checkbox"
+        span I want to subscibe to Fame &amp; Partners Newsletter
+    p 
+      label
+        input type="checkbox"
+        span I agree to the Terms &amp; Conditions
+    button.pink data-loading="Placing..." Place My order
 
 /.style-tips.border
 /  .grid-container

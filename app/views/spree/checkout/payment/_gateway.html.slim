@@ -1,30 +1,38 @@
 ruby:
   param_prefix = "payment_source[#{payment_method.id}]"
-  options_hash = Rails.env.production? ? {:autocomplete => 'off'} : {}
+  options_hash = Rails.env.production? ? {:autocomplete => 'off', class: 'without-shadow'} : {class: 'without-shadow'}
 
 .grid-container
-  .grid-6
-    .input
-      label Credit Card Number
-      = text_field_tag "#{param_prefix}[number]", '', options_hash
-  .grid-6
-    .input
+  .input.clearfix
+    .grid-3
       label Name on Card
-      = text_field_tag "#{param_prefix}[full_name]"
-.grid-container
-  .grid-6
-    .input.expiry-date
+    .grid-9
+      = text_field_tag "#{param_prefix}[full_name]", '', class: 'without-shadow'
+  .input.clearfix
+    .grid-3
+      label Credit Card Number
+    .grid-9 
+      = text_field_tag "#{param_prefix}[number]", '', options_hash
+      .hint = image_tag 'icons-cards.png', alt: 'Visa, MasterCard, Amex'
+  .input.clearfix
+    .grid-3
       label Expiry Date
-      br
-      = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, { :class => 'selectbox' })
-      = select_year(Date.today, { :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year' }, { :class => 'selectbox' })
+    .grid-9
+      .row
+        .grid-4.without-shadow
+          = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, { :class => 'selectbox' })
+        .grid-1  
+        .grid-4.without-shadow
+          = select_year(Date.today, { :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year' }, { :class => 'selectbox' })
 
       / = select_month(Date.today, :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month')
       / = select_year(Date.today, :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year')
-  .grid-6
-    .input.card-verification
+  .input.clearfix
+    .grid-3
       label Card Verification Number
-      br
-      = text_field_tag "#{param_prefix}[verification_value]", '', options_hash.merge(:id => 'card_code', :class => 'cvv', :size => 5)
-      = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
-      .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.
+    .grid-9
+      .row
+        .grid-4 = text_field_tag "#{param_prefix}[verification_value]", '', options_hash.merge(:id => 'card_code', :class => 'cvv without-shadow', :size => 5)
+        .grid-4 = link_to "What's this?", "#", class: 'what-this'
+      / = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
+      / .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.
