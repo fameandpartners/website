@@ -1,3 +1,5 @@
+require File.join(Rails.root, 'app/services/find_shipping_method_for_order.rb')
+
 Spree::Order.class_eval do
   self.include_root_in_json = false
 
@@ -28,33 +30,30 @@ Spree::Order.class_eval do
     ActiveSupport::Cache::RedisStore.new.delete_matched("*#{cache_key}*")
   end
 
-  def sale_shipping_method
-    Spree::ShippingMethod.find_by_name('sale_11_95')
-  end
-
-  def has_sale_shipping?
-    sale_shipping_method.present? && shipments.exists?(shipping_method_id: sale_shipping_method.id)
-  end
-
   def has_personalized_items?
     line_items.map(&:personalization).any?(&:present?)
   end
 
   def update!
-    if sale_shipping_method.present? && ((shipping_method.nil? && Spree::Sale.first.try(:active?)) || has_sale_shipping?)
-      update_totals
-
-      if item_total < 100
-        unless has_sale_shipping?
-          self.shipping_method = sale_shipping_method
-          create_shipment!
-        end
-      elsif has_sale_shipping?
-        shipments.find_by_shipping_method_id(sale_shipping_method.id).try(:destroy)
-      end
+    if self.shipping_method.blank?
+      self.update_attribute(:shipping_method_id, Services::FindShippingMethodForOrder.new(self).get.try(:id))
+      self.reload
+      create_shipment!
     end
 
     updater.update
+  end
+
+  def promotion_total
+    if self.shipment.blank?
+      self.adjustment_total
+    else
+      self.adjustments.where("originator_type != 'Spree::ShippingMethod'").eligible.map(&:amount).sum
+    end
+  end
+
+  def display_promotion_total
+    Spree::Money.new(promotion_total, { :currency => currency })
   end
 
   def confirmation_required?
