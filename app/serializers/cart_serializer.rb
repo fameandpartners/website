@@ -37,7 +37,11 @@ class CartSerializer < ActiveModel::Serializer
   end
 
   def display_promotion_total
-    Spree::Money.new(0).to_s
+    if object.promotion_total.to_i.abs > 0
+      object.display_promotion_total.to_s
+    else
+      nil
+    end
   end
 
   def display_total
