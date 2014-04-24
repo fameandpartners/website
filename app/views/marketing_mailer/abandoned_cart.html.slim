@@ -54,7 +54,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                   td width="33.3333%" style="padding: 10px;"
                     - if customisation.present?
                       = link_to @personalisation_url do
-                        = image_tag customisation.image.url(:product), style: 'display: block; border: solid 1px #ebebeb;'
+                        = image_tag customisation.image.url(:product), style: 'display: block; border: solid 1px #ebebeb; width: 100%'
                       p style="margin: 10px 0; padding: 0; font: 400 10px/1.1 Times New Roman, sans-serif;"
                         = link_to customisation.presentation, @personalisation_url, style: 'color: #999; text-decoration: none;'
                       p style="margin: 0; padding: 0; font: 400 18px/1.1 Times New Roman, sans-serif;"
