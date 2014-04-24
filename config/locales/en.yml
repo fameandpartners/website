@@ -1,4 +1,6 @@
 en:
+  product:
+    extra_size_price: "This size is an additional $10"
   collection:
     colors:
       black:

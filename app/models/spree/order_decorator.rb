@@ -1,5 +1,3 @@
-require File.join(Rails.root, 'app/services/find_shipping_method_for_order.rb')
-
 Spree::Order.class_eval do
   self.include_root_in_json = false
 
@@ -103,6 +101,20 @@ Spree::Order.class_eval do
     end
   end
 
+  def get_price_for_line_item(variant, zone_id, currency)
+    if zone_id
+      price = variant.zone_price_for(Spree::Zone.find(zone_id))
+    else
+      currency ||= self.currency
+      price = variant.price_in(currency)
+    end
+    # extra size
+    if variant.dress_size && variant.dress_size.name.to_i >= 14
+      price.amount += 10
+    end
+    price
+  end
+
   def add_variant(variant, quantity = 1, currency = nil)
     current_item = find_line_item_by_variant(variant)
     if current_item
@@ -110,21 +122,17 @@ Spree::Order.class_eval do
       current_item.currency = currency unless currency.nil?
       current_item.save
     else
-      if @zone_id
-        price = variant.zone_price_for(Spree::Zone.find(@zone_id))
-      else
-        price = variant.price_in(currency)
-      end
+      price = get_price_for_line_item(variant, @zone_id, currency)
       current_item = Spree::LineItem.new(:quantity => quantity)
       current_item.variant = variant
       if currency
-        current_item.currency    = currency unless currency.nil?
+        current_item.currency    = currency
         current_item.price       = price.final_amount
         if variant.in_sale?
           current_item.old_price = price.amount_without_discount
         end
       else
-        current_item.price       = price.final_price
+        current_item.price       = price.final_amount
         if variant.in_sale?
           current_item.old_price = price.price_without_discount
         end
@@ -134,6 +142,21 @@ Spree::Order.class_eval do
 
     self.reload
     current_item
+  end
+
+  def update_line_item(current_item, variant, quantity, currency)
+    price = get_price_for_line_item(variant, @zone_id, currency)
+
+    current_item.currency    = currency
+    current_item.price       = price.final_amount
+    current_item.variant     = variant
+
+    if variant.in_sale?
+      current_item.old_price = price.amount_without_discount
+    end
+
+    current_item.save
+    self.reload
   end
 
   def log_products_purchased

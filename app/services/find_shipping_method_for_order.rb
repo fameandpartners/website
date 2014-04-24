@@ -1,4 +1,3 @@
-require 'spree'
 # we can find suitable shipping method
 #   - by shipping address [ order.address -> country -> zone -> shipping methods ]
 #   - by site version [ order -> user -> site_version -> zone -> shipping methods ]]
