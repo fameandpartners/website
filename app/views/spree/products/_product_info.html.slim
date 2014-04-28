@@ -23,11 +23,11 @@ ruby:
         .size-info US Sizes Displayed
     .sizebox
       - base_sizes.each do |size|
-        .button data-size="#{size}" title='#{ size.to_i >= 14 ? extra_size_title : size }' = size
+        .button data-size="#{size}" title=( extra_size_title if size.to_i >= 14 ) = size
       - if dropdown_sizes.present?
         .dropdown-button data-open="-" data-close="+" +
         - dropdown_sizes.each do |size|
-          .button.dropdown-size data-size="#{size}" title='#{ size.to_i >= 14 ? extra_size_title : size }' = size
+          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= 14 ) = size
   .section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
     = link_to 'add to cart', '#', class: 'btn buy-now'

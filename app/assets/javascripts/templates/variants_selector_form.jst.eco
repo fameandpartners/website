@@ -15,7 +15,7 @@
       <% if @sizes.length <= 7: %>
         <% for size in @sizes: %>
           <% if size < 14: %>
-            <div class="button" data-size="<%= size %>" title="<%= size %>"><%= size %></div>
+            <div class="button" data-size="<%= size %>"><%= size %></div>
           <% else: %>
             <div class="button" data-size="<%= size %>" title="This size is an additional $10">
               <%= size %>
@@ -25,7 +25,7 @@
       <% else: %>
         <% for size in _.first(@sizes, 6): %>
           <% if size < 14: %>
-            <div class="button" data-size="<%= size %>" title="<%= size %>"><%= size %></div>
+            <div class="button" data-size="<%= size %>"><%= size %></div>
           <% else: %>
             <div class="button" data-size="<%= size %>" title="This size is an additional $10">
               <%= size %>
@@ -36,7 +36,7 @@
           <div class="dropdown-button" data-open="-" data-close="+">+</div>
           <% for size in _.rest(@sizes, 6): %>
             <% if size < 14: %>
-              <div class="button dropdown-size" data-size="<%= size %>" title="<%= size %>"><%= size %></div>
+              <div class="button dropdown-size" data-size="<%= size %>"><%= size %></div>
             <% else: %>
               <div class="button dropdown-size" data-size="<%= size %>" title="This size is an additional $10">
                 <%= size %>
