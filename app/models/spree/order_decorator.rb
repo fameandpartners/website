@@ -150,6 +150,7 @@ Spree::Order.class_eval do
     current_item.currency    = currency
     current_item.price       = price.final_amount
     current_item.variant     = variant
+    current_item.quantity    = quantity
 
     if variant.in_sale?
       current_item.old_price = price.amount_without_discount
