@@ -6,7 +6,7 @@ Spree::Variant.class_eval do
   attr_accessible :zone_prices_hash
   attr_accessor :zone_prices_hash
 
-  after_save :update_zone_prices
+  #after_save :update_zone_prices
   after_initialize :set_default_values
 
   before_validation :set_default_sku
@@ -14,6 +14,17 @@ Spree::Variant.class_eval do
   after_save do
     product.update_index
   end
+
+  def save_default_price
+    # store price dependendent 
+    #self.price = Services::VariantPriceCalculator.new(self).get
+
+    if default_price && (default_price.changed? || default_price.new_record?)
+      default_price.save 
+    end
+
+    update_zone_prices
+  end 
 
   def in_sale?
     current_sale.active?

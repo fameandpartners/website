@@ -44,7 +44,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
       td 
         = image_tag '_email/line-5.png', style: 'width: 100%; display: block'
 
-    - if (@product.can_be_customized? and !@product.in_sale?)
+    - if (@product.can_be_customized? and !@product.in_sale? and @product.customisation_values.present?)
       tr
         td style="background-color: #fafafa;"
           table border="0" cellpadding="0" cellspacing="0" width="100%" style="text-align: center;"
@@ -54,14 +54,17 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                   td width="33.3333%" style="padding: 10px;"
                     - if customisation.present?
                       = link_to @personalisation_url do
-                        = image_tag customisation.image.url(:product), style: 'display: block; border: solid 1px #ebebeb;'
+                        = image_tag customisation.image.url(:product), style: 'display: block; border: solid 1px #ebebeb; width: 100%'
                       p style="margin: 10px 0; padding: 0; font: 400 10px/1.1 Times New Roman, sans-serif;"
                         = link_to customisation.presentation, @personalisation_url, style: 'color: #999; text-decoration: none;'
                       p style="margin: 0; padding: 0; font: 400 18px/1.1 Times New Roman, sans-serif;"
-                        = customisation.display_price
+                        - if Spree::Config[:free_customisations]
+                          ' Free
+                        - else
+                          = customisation.price.to_i > 0 ? customisation.display_price : 'Free'
             tr
               td style="text-align: center;" colspan="5"
-                a href="#{spree.cart_url(site_version: @site_version_code)}" style="display: inline-block; background: #fff; border: solid 1px #000; color: #000; margin-top: 20px; text-decoration: none; text-transform: uppercase; padding: 8px 55px; font: 400 14px/1 Arial, sans-serif;" Cutomize it!
+                a href="#{ @personalisation_url }" style="display: inline-block; background: #fff; border: solid 1px #000; color: #000; margin-top: 20px; text-decoration: none; text-transform: uppercase; padding: 8px 55px; font: 400 14px/1 Arial, sans-serif;" Customize it!
       tr
         td style="background-color: #fafafa;" height="40"
 

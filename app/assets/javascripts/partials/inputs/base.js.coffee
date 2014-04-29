@@ -33,6 +33,7 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
     _.bindAll(@, 'onButtonClickHandler')
     @container.on('click', @buttons_selector, @onButtonClickHandler)
     @makeDropdown(@container)
+    @container.find("#{@buttons_selector}[title]").tooltipsy()
 
   # private
   onButtonClickHandler: (e) ->
@@ -79,8 +80,12 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
     _.each(@container.find(@buttons_selector), (button) ->
       $button = $(button)
       value = $button.data('size')
+      $button.removeData('tooltip')
       if _.indexOf(unavailable_values, value) == -1
-        $button.removeClass('unavailable').attr('title', value)
+        if value >= 14
+          $button.removeClass('unavailable').attr('title', "This size is an additional $10")
+        else
+          $button.removeClass('unavailable').removeAttr('title')
       else
         $button.addClass('unavailable').attr('title', text)
 
@@ -98,6 +103,7 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
         $option.html("<span style='text-decoration: line-through;'>#{value} SOLD OUT</span>")
 
     , @)
+    @container.find("#{@buttons_selector}[title]").tooltipsy()
     @container.trigger('chosen:updated')
 
 

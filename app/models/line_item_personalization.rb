@@ -102,6 +102,11 @@ class LineItemPersonalization < ActiveRecord::Base
 
   def calculate_price
     result = 0.0
+
+    if self.size.present? && self.size.to_i >= 14
+      result += 10.0
+    end
+
     return result if Spree::Config[:free_customisations]
 
     result += 16.0 if !basic_color?

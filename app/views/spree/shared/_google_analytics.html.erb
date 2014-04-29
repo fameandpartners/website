@@ -50,5 +50,5 @@
 
 <%# fb tracking pixel %>
 <% if flash[:commerce_tracking] %>
-  <%= fb_analytics_track('6009784531696') %>
+  <%= fb_analytics_track('6013645244896', 'AUD', @order.display_item_total) %>
 <% end %>

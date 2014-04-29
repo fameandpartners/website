@@ -18,6 +18,10 @@ module OrdersHelper
     content_tag('span', order.currency) + ' ' + order.display_adjustment_total
   end
 
+  def show_order_promotion_total(order)
+    content_tag('span', order.currency) + ' ' + order.display_promotion_total
+  end
+
   def show_order_shipment_total(order)
     if order.shipment && order.shipment.display_amount && order.shipment.display_amount.money.cents > 0
       content_tag('span', order.currency) + order.shipment.display_amount
@@ -32,6 +36,8 @@ module OrdersHelper
       "http://www.dhl.com/content/g0/en/express/tracking.shtml?brand=DHL&AWB=#{ shipment.tracking }%0D%0A"
     elsif shipment.is_auspost?
       "http://auspost.com.au/track/track.html?id=#{ shipment.tracking }"
+    elsif shipment.is_tnt?
+      "http://www.tnt.com/webtracker/tracking.do?respCountry=us&respLang=en&navigation=1&page=1&sourceID=1&sourceCountry=ww&plazaKey=&refs=&requesttype=GEN&searchType=CON&cons=#{ shipment.tracking }"
     end
   end
 end
