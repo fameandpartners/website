@@ -140,13 +140,14 @@ Spree::CheckoutController.class_eval do
 
     respond_with(@order) do |format|
       format.js { render 'spree/checkout/update/success' }
-      format.html{ render }
+      format.html{ render 'edit' }
+      #format.html{ render 'markup_edit' }
     end
   end
 
   def before_address
-    @order.bill_address ||= Spree::Address.default(current_site_version)
-    @order.ship_address ||= Spree::Address.default(current_site_version)
+    @order.bill_address ||= build_default_address
+    @order.ship_address ||= build_default_address
   end 
 
   private
@@ -154,6 +155,23 @@ Spree::CheckoutController.class_eval do
   # run callback - preparations to order states
   def prepare_order
     before_address
+  end
+
+  def build_default_address
+    address = Spree::Address.default(current_site_version)
+    if (user = try_spree_current_user).present?
+      address.firstname ||= user.first_name
+      address.lastname ||= user.last_name
+      address.email ||= user.email
+    end
+
+    if @order.present?
+      address.firstname ||= @order.user_first_name
+      address.lastname ||= @order.user_last_name
+      address.email ||= @order.email
+    end
+
+    address
   end
 
   # after user submitted some shipping/biliing/payment data

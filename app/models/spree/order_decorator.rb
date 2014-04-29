@@ -58,7 +58,7 @@ Spree::Order.class_eval do
   end
 
   def confirmation_required?
-    false
+    true
   end
 
   has_many :payment_requests

@@ -1,15 +1,5 @@
 = form_for @user, :url => spree.update_checkout_registration_path, :remote => true, :method => :put do |form|
-  = render :partial => 'shared/error_messages', :locals => { :target => @user }
-  / .grid-container.form-global.form-personal
-  /   .input.clearfix
-  /     .grid-3 = form.label :first_name, with_required_mark(t(:first_name))
-  /     .grid-9 = form.text_field :first_name, class: 'required without-shadow'
-  /   .input.clearfix
-  /     .grid-3 = form.label :last_name, with_required_mark(t(:last_name))
-  /     .grid-9 = form.text_field :last_name, class: 'required without-shadow'
-  /   .input.clearfix
-  /     .grid-3 = form.label :email, with_required_mark(t(:email))
-  /     .grid-9 = form.text_field :email, class: 'required without-shadow'
+  /= render :partial => 'shared/error_messages', :locals => { :target => @user }
   .checkout-content.line
     .clearfix
       .grid-7

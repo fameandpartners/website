@@ -4,13 +4,9 @@ ruby:
   last_name = form.object.lastname.present? ? form.object.lastname : (@order.try(:last_name) || @user.try(:last_name))
 
 .grid-container.form-global.form-address data-hook="#{address_type}_inner"
-
   - if address_type == 'billing'
     .checkout-title
       h3 = t(:billing_address)
-  / - elsif address_type == 'shipping'
-  /   .checkout-title
-  /     h3 = t(:shipping_address)
   .checkout-content.line
     .input.clearfix id="#{address_id}firstname"
       .grid-3
@@ -22,6 +18,12 @@ ruby:
         = form.label :lastname, with_required_mark(t(:last_name))
       .grid-9
         = form.text_field :lastname, :class => 'required without-shadow', :value => last_name
+
+    .input.clearfix id="#{address_id}email"
+      .grid-3
+        = form.label :email, with_required_mark(t(:email))
+      .grid-9
+        = form.text_field :email, :class => 'required without-shadow', value: form.object.email
 
     - if Spree::Config[:company]
       .input.clearfix id="#{address_id}company"

@@ -7,10 +7,8 @@
   = form.fields_for :ship_address do |ship_form|
     = render :partial => 'spree/checkout/address_form', :locals => {:form => ship_form, :address_type => 'shipping', :address => @order.ship_address}
 
-  
-
   .submit-button.text-right
-    = form.submit 'Submit Details', data: { loading: 'Submitting...' }, class: 'btn pink'
+    = form.submit 'Next Step', data: { loading: 'Submitting...' }, class: 'btn pink'
     / - if spree_user_signed_in?
     /   .fleft
     /     .ask-parents-block

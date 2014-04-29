@@ -82,12 +82,13 @@ $('.checkout.edit').ready ->
         $('[data-hook="shipping_inner"]').find(':input').prop('disabled', false)
 
     updatePasswordFieldsVisibility: () ->
+      container = $('.checkout-content.line.form-global.passwords')
       if $('#create_account').is(':checked')
-        $('form#new_user .passwords input').prop('disabled', false)
-        $('form#new_user .passwords').show()
+        container.find('input').prop('disabled', false)
+        container.show()
       else
-        $('form#new_user .passwords input').prop('disabled', true)
-        $('form#new_user .passwords').hide()
+        container.find('input').prop('disabled', true)
+        container.hide()
 
     updateDatepicker: () ->
       $('#order_required_to').datepicker({

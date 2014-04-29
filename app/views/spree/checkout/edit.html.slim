@@ -8,167 +8,70 @@
       $(function(){
         Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
       })
+
+ruby:
+  current_step = @order.state.to_s
+  if current_step == 'cart'
+    current_step = 'address'
+  end
+
 .wrap
   .checkout-page
-    / h1 Checkout
-    / .help-info
-    /   .need-help Need help? Call us 1300 924 860 or email #{mail_to("team@fameandpartners.com", "team@fameandpartners.com", subject:"Help from the Checkout Page")}
-    /   - unless (sale_active? or current_order.has_personalized_items?)
-    /     .promocode-help
-    /       h4 Got a promocode or coupon?
-    /       span
-    /         ' Add it in the last step of this checkout process.
-    /         ' You'll see your cart update on the right when you redeem it.
-    / .arrows-line-horizontal        
-    ruby:
-      index = 0
-      if !signed_in?
-        if current_order.user.present? || current_order.email.present?
-          active = @order.state
-        else
-          active = 'personal'
-        end
-        active = 'personal' if active == 'cart'
-       else
-        if @order.state.eql?('cart')
-          active = 'address'
-        else
-          active = @order.state
-        end
-      end
-    
     .checkout-breadcrumbs
       = link_to root_path, class: 'logo' do
         span.icon-logo
       span
-        = link_to 'Shopping Bag'.html_safe, '#'
+        = link_to 'Shopping Bag'.html_safe, spree.cart_path
       span.active Checkout
       span Payment Methods
       span Confirmation
-    
+
     .checkout-box.grid-container
       .accordion-container.grid-8
         .checkout-section
-          - unless signed_in?
-            .checkout-title data-step="personal" *{ :class => active.eql?('personal') && 'active' }
-              .fleft 
-                h3 
-                  ' GET $25 TO SPEND
-                  em optional
-              .fright 
-                .use-same-address-block
-                  label.nice-checkbox.without-shadow
-                    = check_box_tag :create_account, true, params[:create_account].present?
-                    = label_tag :create_account, :id => :create_account do
-                      span
-                      | Create an Account
-            div data-step="personal" *{ :class => !active.eql?('personal') && 'hide' }
-              = render 'spree/checkout/personal' if active.eql?('personal')
-            
-          .checkout-title.black data-step="address" *{ :class => active.eql?('address') && 'active' }
+          .checkout-title.black data-step="address" *{ class: current_step.eql?('address') && 'active' }
             h3 Billing and shipping Address
-            .check-edit class="#{ @order.state.eql?('payment') ? "" : "hide" }"
-              span.icon-checkmark
-              = link_to 'Edit', checkout_state_path('address'), :remote => true, class: 'edit'
-          div data-step="address" *{ :class => !active.eql?('address') && 'hide' }
-            = render 'spree/checkout/address' if active.eql?('address') || active.eql?('payment')
-          
-          .checkout-title.grey data-step="payment"
-            h3 Billing and shipping Address
-          .checkout-content
-            .grid-container
-              .grid-6
-                .text-title Billing Address
-                p Elton 
-                p 213/13124
-                p streen
-                p city
-              .grid-6
-                .text-title Shipping Address
-                p Elton 
-                p 213/13124
-                p streen
-                p city
+          .checkout-content.line data-step="address" *{class: current_step.eql?('address') && 'active'}
+            .clearfix
+              .grid-7
+                .text-title Fames &amp; Partners Customer
+                p Login now if you are already a customer, or you can order as a guest and choose to register as you checkout.
+              .grid-5.text-center
+                = link_to 'login', '#', class: 'btn open-login-popup'
+                = link_to 'FB login', '#', class: 'btn open-login-popup'
 
-          .checkout-title.black data-step="payment" *{ :class => active.eql?('payment') && 'active' }
-            h3 Payment
-          
-          
-          - if active.eql?('payment')
-            .checkout-content data-step="payment"
-              = render 'spree/checkout/payment' 
-      
-      .grid-4
-        / = render 'spree/checkout/summary'
+            = form_for @order, url: update_checkout_path(@order.state), html: {class: 'form-global'}, remote: true do |form|
+              = render :partial => 'shared/error_messages', locals: { target: @order }
 
-        .checkout-title
-          h3 Item description
-        .checkout-content.line  
-          .checkout-summary
-            .shopping-bag-popup 
-              .items-carousel
-                .item
-                  .picture
-                    = image_tag '_sample/category-white-1.jpg', itemprop: "image", width: 83, height: 115
-                  .info
-                    h6 = link_to 'Flower in may', '#', target: 'blank'
-                    .description
-                      table
-                        tr
-                          td Size: 6
-                          td 
-                        tr
-                          td Color: red
-                          td 
-                        tr
-                          td Quantity: 1
-                          td.text-right $120
-            ul.pricing
-              li
-                .label Shipping cost
-                .desc
-                  span FREE
-              li
-                .label Promotion
-                .desc USD $20
-              li.totals
-                .label Final cost of your order
-                .desc
-                  span $140
+              = form.fields_for :bill_address do |bill_form|
+                = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
+              
+              = form.fields_for :ship_address do |ship_form|
+                = render partial: 'spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
 
-        .checkout-title
-          h3 Shopping Fame &amp; Partners
-        .checkout-content.line
-          .nav-site
-            nav
-              ul 
-                li
-                  = link_to why_us_path(anchor: 'shipping') do
-                    span.icon-holder
-                      span.icon-dollar
-                      span.icon-erase
-                    span free shipping
-                li
-                  = link_to why_us_path(anchor: 'returns') do
-                    span.icon-holder
-                      span.icon-arrows
-                    span free returns
-                li
-                  = link_to why_us_path(anchor: 'fit') do
-                    span.icon-holder
-                      span.icon-guarantee
-                    span fit guarantee
-                - unless sale_active?
-                  li
-                    = link_to why_us_path(anchor: 'customisation') do
-                      span.icon-holder
-                        span.icon-cutline
-                        span.icon-scissors
-                      span
-                        ' free
-                        =' t(:customization)
-                li
-                  = link_to why_us_path(anchor: 'advice') do
-                    span.icon-holder
-                      span.icon-comment
-                    span free stylists
+              - unless signed_in?
+                .checkout-title
+                  .fleft 
+                    h3 
+                      ' GET $25 TO SPEND
+                      em optional
+                  .fright.use-same-address-block
+                    label.nice-checkbox.without-shadow
+                      = check_box_tag :create_account, true, params[:create_account].present?
+                      = label_tag :create_account, id: :create_account do
+                        span
+                        | Create an Account
+                        
+                .checkout-content.line.form-global.passwords
+                  .input
+                    .text-title Who you should join
+                    p Create an account to save your dress to a Wishlist to discover your Style Profile, share with friends and to manage your profile. Ist easy just enter some basic details!
+                  .input.clearfix
+                    .grid-3 = form.label :password, with_required_mark(t(:password))
+                    .grid-9 = form.password_field :password, class: 'required without-shadow'
+                  .input.clearfix
+                    .grid-3 = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
+                    .grid-9 = form.password_field :password_confirmation, class: 'required without-shadow'
+
+                .submit-button.text-right
+                  = form.submit 'Next Step', data: { loading: 'Submitting...' }, class: 'btn pink'
