@@ -35,10 +35,9 @@ class Services::FindShippingMethodForOrder
     address = @order.shipping_address
     return nil if address.blank? or address.country.blank?
 
-    zone_member = if address.country.states_required? 
-      Spree::ZoneMember.where("(zoneable_type = 'Spree::Country' and zoneable_id = :country_id) or (zoneable_type = 'Spree::State' and zoneable_id = :state_id", country_id: address.country_id, state_id: address.state_id).first
-    else
-      Spree::ZoneMember.where(zoneable_type: 'Spree::Country', zoneable_id: address.country_id).first
+    zone_member = Spree::ZoneMember.where(zoneable_type: 'Spree::Country', zoneable_id: address.country_id).first
+    if zone_member.blank? && address.state_id.present?
+      zone_member = Spree::ZoneMember.where(zoneable_type: 'Spree::State', zoneable_id: address.state_id).first
     end
     zone_member.try(:zone)
   end
