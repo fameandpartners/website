@@ -58,22 +58,23 @@ Spree::CheckoutController.class_eval do
 
   # update - address/payment
   def update
-    #debugger
     move_order_from_cart_state(@order)
 
-    # update first/last names, email
-    registration = Services::UpdateUserRegistrationForOrder.new(@order, params)
-    registration.update
-    if registration.new_user_created?
-      fire_event("spree.user.signup", order: current_order)
-      sign_in :spree_user, registration.user
-    end
-    if !registration.successfull?
-      respond_with(@order) do |format|
-        format.html { redirect_to checkout_state_path(@order.state) }
-        format.js   { render 'spree/checkout/registration/failed' }
+    if @order.state == 'address'
+      # update first/last names, email
+      registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params)
+      registration.update
+      if registration.new_user_created?
+        fire_event("spree.user.signup", order: current_order)
+        sign_in :spree_user, registration.user
       end
-      return
+      if !registration.successfull?
+        respond_with(@order) do |format|
+          format.html { redirect_to checkout_state_path(@order.state) }
+          format.js   { render 'spree/checkout/registration/failed' }
+        end
+        return
+      end
     end
 
     if @order.update_attributes(object_params)

@@ -8,6 +8,7 @@
       $(function(){
         Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
       })
+      window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
 
 ruby:
   current_step = @order.state.to_s

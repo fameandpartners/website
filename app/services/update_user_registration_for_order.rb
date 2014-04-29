@@ -11,8 +11,9 @@
 #
 module Services; end
 class Services::UpdateUserRegistrationForOrder
-  def initialize(order, params)
+  def initialize(order, user, params)
     @order = order
+    @user = user
     @params = params
 
     @order.errors.clear
@@ -39,14 +40,16 @@ class Services::UpdateUserRegistrationForOrder
   private
 
   def create_user?
-    @params[:create_account]
+    @user.blank? && @params[:create_account]
   end
 
   def create_user
-    @user ||= Spree::User.new(user_params)
+    @user ||= Spree::User.new
+    @user.assign_attributes(user_params)
     if @user.save
       @order.user = @user
-      @order.save
+      @order.save(validate: false)
+      @order.errors.clear
     else
       @user.errors.messages.each do |field, messages|
         @order.errors.add(field, *messages)
