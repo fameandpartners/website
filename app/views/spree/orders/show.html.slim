@@ -5,8 +5,8 @@
     .tabs
       = render('users/shared/tabs', active_tab: 'orders') unless successfully_ordered
       #order.tab-content
-        / - if successfully_ordered
-        h1.page-title #{@order.full_name}, YOUR DRESS IS NOW ON IT'S WAY
+        - if successfully_ordered
+          h1.page-title #{@order.full_name}, YOUR DRESS IS NOW ON IT'S WAY
         .subtitle  Don't forget to book your free styling session! Email: #{mail_to("team@fameandpartners.com", "team@fameandpartners.com", subject:"STYLING SESSION BOOKING")}
         .grid-container
           .grid-4
