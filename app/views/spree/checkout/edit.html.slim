@@ -22,56 +22,16 @@ ruby:
         span.icon-logo
       span
         = link_to 'Shopping Bag'.html_safe, spree.cart_path
-      span.active Checkout
-      span Payment Methods
+      span *{ class: current_step.eql?('address') && 'active' }
+        ' Checkout
+      span *{ class: current_step.eql?('payment') && 'active' }
+        ' Payment Methods
       span Confirmation
 
     .checkout-box.grid-container
       .accordion-container.grid-8
         .checkout-section
-          .checkout-title.black data-step="address" *{ class: current_step.eql?('address') && 'active' }
-            h3 Billing and shipping Address
-          .checkout-content.line data-step="address" *{class: current_step.eql?('address') && 'active'}
-            .clearfix
-              .grid-7
-                .text-title Fames &amp; Partners Customer
-                p Login now if you are already a customer, or you can order as a guest and choose to register as you checkout.
-              .grid-5.text-center
-                = link_to 'login', '#', class: 'btn open-login-popup'
-                = link_to 'FB login', '#', class: 'btn open-login-popup'
-
-            = form_for @order, url: update_checkout_path(@order.state), html: {class: 'form-global'}, remote: true do |form|
-              = render :partial => 'shared/error_messages', locals: { target: @order }
-
-              = form.fields_for :bill_address do |bill_form|
-                = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
-              
-              = form.fields_for :ship_address do |ship_form|
-                = render partial: 'spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
-
-              - unless signed_in?
-                .checkout-title
-                  .fleft 
-                    h3 
-                      ' GET $25 TO SPEND
-                      em optional
-                  .fright.use-same-address-block
-                    label.nice-checkbox.without-shadow
-                      = check_box_tag :create_account, true, params[:create_account].present?
-                      = label_tag :create_account, id: :create_account do
-                        span
-                        | Create an Account
-                        
-                .checkout-content.line.form-global.passwords
-                  .input
-                    .text-title Who you should join
-                    p Create an account to save your dress to a Wishlist to discover your Style Profile, share with friends and to manage your profile. Ist easy just enter some basic details!
-                  .input.clearfix
-                    .grid-3 = form.label :password, with_required_mark(t(:password))
-                    .grid-9 = form.password_field :password, class: 'required without-shadow'
-                  .input.clearfix
-                    .grid-3 = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
-                    .grid-9 = form.password_field :password_confirmation, class: 'required without-shadow'
-
-                .submit-button.text-right
-                  = form.submit 'Next Step', data: { loading: 'Submitting...' }, class: 'btn pink'
+          = render 'address_step', current_step: current_step
+          = render 'payment',      current_step: current_step
+      .grid-4
+          = render 'spree/checkout/order_summary'

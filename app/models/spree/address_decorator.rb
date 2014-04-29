@@ -1,7 +1,5 @@
 Spree::Address.class_eval do
-  def email
-    'malleus.petrov@gmail'
-  end
+  attr_accessible :email
 
   def self.default(site_version = nil)
     if site_version.present?

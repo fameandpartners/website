@@ -92,10 +92,12 @@ ruby:
           = form.label :alternative_phone, t(:alternative_phone)
         .grid-9 
           = form.phone_field :alternative_phone
-    .input.clearfix
-      div id="required_to"
-        .grid-3  = form.label :required_to, 'When you need yout dress?'
-        .grid-9  = form.text_field :required_to, value: @order.required_to, :class => 'without-shadow'
+
+    - if address_type == 'billing'
+      .input.clearfix
+        div id="required_to"
+          .grid-3  = form.parent_builder.label :required_to, 'When you need yout dress?'
+          .grid-9  = form.parent_builder.text_field :required_to, value: @order.required_to, :class => 'without-shadow'
 
 - if address_type == 'billing'
   .checkout-title

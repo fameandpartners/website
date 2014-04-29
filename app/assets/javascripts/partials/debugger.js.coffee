@@ -8,6 +8,7 @@ $('#dev_console').ready ->
     else
       fill_addresses()
       fill_payments()
+      fill_personal()
 
   window.fill_addresses = () ->
     fill_address('bill_address')
@@ -34,10 +35,14 @@ $('#dev_console').ready ->
     state_id = $("#order_#{address}_attributes_state_id").find("option:last").val()
     $("#order_#{address}_attributes_state_id").val(state_id).trigger("chosen:updated")
 
+  window.fill_personal = () ->
+    container = $('.checkout-content.line.form-global.passwords')
+    container.find('input[type=password]').val('123456')
 
   window.fill_payments = () ->
     # card tab
-    $('#payment_source_6_number').val('5520000000000000')
-    $('#payment_source_6_full_name').val('NotJohn NotSmith')
-    $('#payment_source_6_year').val(2015)
+    $('input[id^=payment_source][id$=number]').val('5520000000000000')
+    $('input[id^=payment_source][id$=full_name]').val('NotJohn NotSmith')
+    year = new Date().getFullYear() + 2
+    $('select[id^=payment_source][id$=year]').val(year).trigger('chosen:updated')
     $('#card_code').val(123)

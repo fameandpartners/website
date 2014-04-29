@@ -8,10 +8,12 @@ $('.checkout.edit').ready ->
       $(document).on('click', '.place-order button', page.onAjaxLoadingHandler)
       $(document).on('click', '.place-order button', page.orderProccessHandler)
       $(document).on('submit', 'form.payment_details.credit_card', page.doNothing)
+      $(document).on('change', '#terms_and_conditions', page.updatePayButtonAvailability)
 
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
       page.updateDatepicker()
+      page.updatePayButtonAvailability()
 
     onAjaxLoadingHandler: (e) ->
       $button = $(e.currentTarget)
@@ -71,6 +73,7 @@ $('.checkout.edit').ready ->
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
       page.updateDatepicker()
+      page.updatePayButtonAvailability()
       $('.selectbox').chosen()
 
     updateShippingFormVisibility: () ->
@@ -100,6 +103,19 @@ $('.checkout.edit').ready ->
     doNothing: (event) ->
       event.preventDefault()
       false
+
+    updatePayButtonAvailability: (event) ->
+      buttons = $("*[date-require='terms_and_conditions']")
+      links = $('#paypal_button')
+      if $('#terms_and_conditions').is(':checked')
+        buttons.prop('disabled', false)
+        links.prop('disabled', false)
+        links.off('click', page.doNothing)
+      else
+        links.on('click', page.doNothing)
+        links.prop('disabled', true)
+        buttons.prop('disabled', true)
+      true
 
     orderProccessHandler: (event) ->
       return if page.pin_request_in_process

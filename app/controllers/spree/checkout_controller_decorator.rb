@@ -2,7 +2,7 @@ Spree::CheckoutController.class_eval do
   before_filter :prepare_order, only: :edit
   before_filter :find_payment_methods, only: [:edit, :update]
   skip_before_filter :check_registration
-
+=begin
   def update_registration
     fire_event("spree.user.signup", :order => current_order)
     
@@ -54,10 +54,27 @@ Spree::CheckoutController.class_eval do
       end
     end
   end
+=end
 
   # update - address/payment
   def update
+    #debugger
     move_order_from_cart_state(@order)
+
+    # update first/last names, email
+    registration = Services::UpdateUserRegistrationForOrder.new(@order, params)
+    registration.update
+    if registration.new_user_created?
+      fire_event("spree.user.signup", order: current_order)
+      sign_in :spree_user, registration.user
+    end
+    if !registration.successfull?
+      respond_with(@order) do |format|
+        format.html { redirect_to checkout_state_path(@order.state) }
+        format.js   { render 'spree/checkout/registration/failed' }
+      end
+      return
+    end
 
     if @order.update_attributes(object_params)
 
@@ -151,6 +168,19 @@ Spree::CheckoutController.class_eval do
   end 
 
   private
+
+  def object_params
+    # For payment step, filter order parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
+    if @order.has_checkout_step?("payment") && @order.payment?
+      if params[:payment_source].present? && source_params = params.delete(:payment_source)[params[:order][:payments_attributes].first[:payment_method_id].underscore]
+        params[:order][:payments_attributes].first[:source_attributes] = source_params
+      end 
+      if (params[:order][:payments_attributes])
+        params[:order][:payments_attributes].first[:amount] = @order.total
+      end 
+    end 
+    params[:order].except(:password, :password_confirmation)
+  end
 
   # run callback - preparations to order states
   def prepare_order
