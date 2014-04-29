@@ -44,8 +44,7 @@ class Services::UpdateUserRegistrationForOrder
   end
 
   def create_user
-    @user ||= Spree::User.new
-    @user.assign_attributes(user_params)
+    @user ||= Spree::User.new(user_params)
     if @user.save
       @order.user = @user
       @order.save(validate: false)

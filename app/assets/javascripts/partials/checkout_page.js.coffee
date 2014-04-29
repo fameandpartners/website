@@ -2,13 +2,14 @@ $('.checkout.edit').ready ->
   page = {
     ajax_callbacks: {}
     init: () ->
-      $(document).on('change', '#order_use_billing', page.updateShippingFormVisibility)
-      $(document).on('change', '#create_account', page.updatePasswordFieldsVisibility)
-      $(document).on('click', 'form input[type=submit]', page.onAjaxLoadingHandler)
-      $(document).on('click', '.place-order button', page.onAjaxLoadingHandler)
-      $(document).on('click', '.place-order button', page.orderProccessHandler)
-      $(document).on('submit', 'form.payment_details.credit_card', page.doNothing)
-      $(document).on('change', '#terms_and_conditions', page.updatePayButtonAvailability)
+      $(document).on('change',  '#order_use_billing', page.updateShippingFormVisibility)
+      $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
+      $(document).on('click',   'form input[type=submit]', page.onAjaxLoadingHandler)
+      $(document).on('click',   '.place-order button', page.onAjaxLoadingHandler)
+      $(document).on('click',   '.place-order button', page.orderProccessHandler)
+      $(document).on('submit',  'form.payment_details.credit_card', page.doNothing)
+      $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
+      $(document).on('click',   '.open-login-popup', page.openLoginPopup)
 
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
@@ -116,6 +117,11 @@ $('.checkout.edit').ready ->
         links.prop('disabled', true)
         buttons.prop('disabled', true)
       true
+
+    openLoginPopup: (e) ->
+      e.preventDefault()
+      popup = new window.popups.LoginPopup()
+      popup.show()
 
     orderProccessHandler: (event) ->
       return if page.pin_request_in_process

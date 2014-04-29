@@ -8,7 +8,7 @@
         p Login now if you are already a customer, or you can order as a guest and choose to register as you checkout.
       .grid-5.text-center
         = link_to 'login', '#', class: 'btn open-login-popup'
-        = link_to 'FB login', '#', class: 'btn open-login-popup'
+        = link_to 'FB login', fb_auth_path(return_to: 'checkout'), class: 'btn open-login-popup'
 
     = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global'}, remote: false do |form|
       = render :partial => 'shared/error_messages', locals: { target: @order }

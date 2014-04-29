@@ -50,6 +50,8 @@ class PagesController < Spree::StoreController
       session[:competition] = params[:competition]
     elsif params[:personalization]
       session[:spree_user_return_to] = main_app.personalization_products_path(cf: 'custom-dresses-signup')
+    elsif params[:return_to] && params[:return_to] == 'checkout'
+      session[:spree_user_return_to] = spree.checkout_path
     end
 
     if session[:sign_up_reason].blank?
