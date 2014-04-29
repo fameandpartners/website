@@ -5,11 +5,22 @@
     .tabs
       = render('users/shared/tabs', active_tab: 'orders') unless successfully_ordered
       #order.tab-content
-        - if successfully_ordered
-          h1.page-title Thanks for your order #{@order.full_name}!
-
+        / - if successfully_ordered
+        h1.page-title #{@order.full_name}, YOUR DRESS IS NOW ON IT'S WAY
+        .subtitle  Don't forget to book your free styling session! Email: #{mail_to("team@fameandpartners.com", "team@fameandpartners.com", subject:"STYLING SESSION BOOKING")}
         .grid-container
           .grid-4
+            p SHARE YOUR PURCHASE WITH YOUR FRIENDS SO NO ONE BUYS THE SAME DRESS FOR YOUR EVENT!
+            .share
+              .social.addthis_toolbox.addthis_default_style
+                a.addthis_button_facebook_like fb:like:layout="button_count"
+                a.addthis_button_pinterest_pinit
+                a.addthis_button_tweet
+                a.addthis_counter.addthis_pill_style
+              javascript:
+                var addthis_config = {"data_track_addressbar":true};
+              script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
+
             = render 'spree/checkout/summary'
           .order-info.grid-8
             h2 Order Number: #{ @order.number }
