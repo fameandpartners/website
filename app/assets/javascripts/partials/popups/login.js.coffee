@@ -17,8 +17,9 @@ window.popups.LoginPopup = class LoginPopup
     @container.find('.save').addClass('submit')
 
     @container.on('click', '.save input.btn', @saveButtonClickHandler)
+    submitHandler = @saveButtonClickHandler
     @container.on('keyup', 'input', (e) ->
-      @saveButtonClickHandler(e) if e.which == 13
+      submitHandler(e) if e.which == 13
     )
 
   # external api
