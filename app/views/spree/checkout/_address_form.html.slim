@@ -12,55 +12,55 @@ ruby:
       .grid-3
         = form.label :firstname, with_required_mark(t(:first_name))
       .grid-9
-        = form.text_field :firstname, :class => 'required without-shadow', :value => first_name
+        = form.text_field :firstname, :class => 'required without-shadow', :value => first_name, :required => 'required'
     .input.clearfix id="#{address_id}lastname"
       .grid-3
         = form.label :lastname, with_required_mark(t(:last_name))
       .grid-9
-        = form.text_field :lastname, :class => 'required without-shadow', :value => last_name
+        = form.text_field :lastname, :class => 'required without-shadow', :value => last_name, :required => 'required'
 
     .input.clearfix id="#{address_id}email"
       .grid-3
         = form.label :email, with_required_mark(t(:email))
       .grid-9
-        = form.text_field :email, :class => 'required without-shadow', value: form.object.email
+        = form.text_field :email, :class => 'required without-shadow', value: form.object.email, :required => 'required'
 
     - if Spree::Config[:company]
-      .input.clearfix id="#{address_id}company"
+      .input.clearfix id="#{address_id}company" data-require='user-credentials'
         .grid-3
           = form.label :company, t(:company)
         .grid-9
           = form.text_field :company, :class => 'without-shadow'
-    .input.clearfix id="#{address_id}address1"
+    .input.clearfix id="#{address_id}address1" data-require='user-credentials'
       .grid-3 
         = form.label :address1, with_required_mark(t(:street_address))
       .grid-9
-        = form.text_field :address1, :class => 'required without-shadow'
-    .input.clearfix id="#{address_id}address2"
+        = form.text_field :address1, :class => 'required without-shadow', :required => 'required'
+    .input.clearfix id="#{address_id}address2" data-require='user-credentials'
       .grid-3
         = form.label :address2, t(:street_address_2)
       .grid-9
         = form.text_field :address2, :class => 'without-shadow'
-    .input.clearfix id="#{address_id}city"
+    .input.clearfix id="#{address_id}city" data-require='user-credentials'
       .grid-3
         = form.label :city, with_required_mark(t(:city))
       .grid-9  
-        = form.text_field :city, :class => 'required without-shadow'
-    .input.clearfix id="#{address_id}country"
+        = form.text_field :city, :class => 'required without-shadow', :required => 'required'
+    .input.clearfix id="#{address_id}country" data-require='user-credentials'
       .grid-3 
         = form.label :country_id, with_required_mark(t(:country))
       .grid-9 
         span.without-shadow id="#{address_id}country-selection"
           = form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required selectbox'}
 
-    .input.clearfix id="#{address_id}zipcode"
+    .input.clearfix id="#{address_id}zipcode" data-require='user-credentials'
       .grid-3
         = form.label :zipcode, with_required_mark(t(:zip))
       .grid-9
-        = form.text_field :zipcode, :class => 'required without-shadow'
+        = form.text_field :zipcode, :class => 'required without-shadow', :required => 'required'
 
     - if Spree::Config[:address_requires_state]
-      .input.clearfix id="#{address_id}state"
+      .input.clearfix id="#{address_id}state" data-require='user-credentials'
         - have_states = !address.country.states.empty?
         .grid-3 
           = form.label :state, with_required_mark(t(:state))
@@ -80,21 +80,21 @@ ruby:
         noscript
           .grid-9 = form.text_field :state_name, :class => 'required without-shadow'
 
-    .input.clearfix id="#{address_id}phone"
+    .input.clearfix id="#{address_id}phone" data-require='user-credentials'
       .grid-3 
         = form.label :phone, with_required_mark(t(:phone))
       .grid-9 
-        = form.phone_field :phone, :class => 'required without-shadow'
+        = form.phone_field :phone, :class => 'required without-shadow', :required => 'required'
 
     - if Spree::Config[:alternative_shipping_phone]
-      .input.clearfix id="#{address_id}altphone"
+      .input.clearfix id="#{address_id}altphone" data-require='user-credentials'
         .grid-3
           = form.label :alternative_phone, t(:alternative_phone)
         .grid-9 
           = form.phone_field :alternative_phone
 
     - if address_type == 'billing'
-      .input.clearfix
+      .input.clearfix data-require='user-credentials'
         div id="required_to"
           .grid-3  = form.parent_builder.label :required_to, 'When you need yout dress?'
           .grid-9  = form.parent_builder.text_field :required_to, value: @order.required_to, :class => 'without-shadow'

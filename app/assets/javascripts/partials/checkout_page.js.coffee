@@ -10,11 +10,13 @@ $('.checkout.edit').ready ->
       $(document).on('submit',  'form.payment_details.credit_card', page.doNothing)
       $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
       $(document).on('click',   '.open-login-popup', page.openLoginPopup)
+      $(document).on('change',  'input', page.updateAddressFormVisibility)
 
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
       page.updateDatepicker()
       page.updatePayButtonAvailability()
+      page.updateAddressFormVisibility()
 
     onAjaxLoadingHandler: (e) ->
       $button = $(e.currentTarget)
@@ -75,6 +77,7 @@ $('.checkout.edit').ready ->
       page.updatePasswordFieldsVisibility()
       page.updateDatepicker()
       page.updatePayButtonAvailability()
+      page.updateAddressFormVisibility()
       $('.selectbox').chosen()
 
     updateShippingFormVisibility: () ->
@@ -117,6 +120,22 @@ $('.checkout.edit').ready ->
         links.prop('disabled', true)
         buttons.prop('disabled', true)
       true
+
+    updateAddressFormVisibility: (event) ->
+      order_bill_address_attributes_firstname
+      $('.grid-container.form-global.form-address').each((index, element) ->
+        $container = $(element)
+        firstname = $container.find('input[id$=address_attributes_firstname]').val()
+        lastname = $container.find('input[id$=address_attributes_lastname]').val()
+        email = $container.find('input[id$=address_attributes_email]').val()
+
+        if (_.isEmpty(firstname) || _.isEmpty(lastname) || _.isEmpty(email))
+          $container.find(".input.clearfix[data-require=user-credentials]").addClass('hide')
+        else
+          $container.find(".input.clearfix[data-require=user-credentials]").removeClass('hide')
+      )
+      # if user filled first last email, show other elements
+      # otherwise - hide&disable
 
     openLoginPopup: (e) ->
       e.preventDefault()
