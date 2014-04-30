@@ -2,13 +2,14 @@
   .checkout-title.black.active data-step="address"
     h3 Billing and shipping Address
   .checkout-content.line.active data-step="address"
-    .clearfix
-      .grid-7
-        .text-title Fames &amp; Partners Customer
-        p Login now if you are already a customer, or you can order as a guest and choose to register as you checkout.
-      .grid-5.text-center
-        = link_to 'login', '#', class: 'btn open-login-popup'
-        = link_to 'FB login', fb_auth_path(return_to: 'checkout'), class: 'btn open-login-popup'
+    - unless signed_in?
+      .clearfix
+        .grid-7
+          .text-title Fames &amp; Partners Customer
+          p Login now if you are already a customer, or you can order as a guest and choose to register as you checkout.
+        .grid-5.text-center
+          = link_to 'login', '#', class: 'btn open-login-popup'
+          = link_to 'FB login', fb_auth_path(return_to: 'checkout'), class: 'btn open-login-popup'
 
     = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global'}, remote: false do |form|
       = render :partial => 'shared/error_messages', locals: { target: @order }
@@ -43,8 +44,8 @@
             .grid-3 = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
             .grid-9 = form.password_field :password_confirmation, class: 'required without-shadow'
 
-        .submit-button.text-right
-          = form.submit 'Next Step', data: { loading: 'Submitting...' }, class: 'btn pink'
+      .submit-button.text-right
+        = form.submit 'Next Step', data: { loading: 'Submitting...' }, class: 'btn pink'
 
 - else
   .checkout-title.grey data-step="address"

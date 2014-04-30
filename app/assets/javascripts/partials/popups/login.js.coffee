@@ -4,8 +4,7 @@ window.popups.LoginPopup = class LoginPopup
   constructor: (@options) ->
     @options or= {}
     _.bindAll(@, 'hide', 'show')
-    _.bindAll(@, 'closeButtonClickHandler')
-    _.bindAll(@, 'onButtonClick')
+    _.bindAll(@, 'closeButtonClickHandler', 'saveButtonClickHandler')
 
     @container = window.popups.getModalContainer('Login')
 
@@ -17,9 +16,9 @@ window.popups.LoginPopup = class LoginPopup
     @container.find('.modal-container').addClass('form')
     @container.find('.save').addClass('submit')
 
-    @container.on('click', '.save input.btn', @onButtonClick)
+    @container.on('click', '.save input.btn', @saveButtonClickHandler)
     @container.on('keyup', 'input', (e) ->
-      @onButtonClick(e) if e.which == 13
+      @saveButtonClickHandler(e) if e.which == 13
     )
 
   # external api
@@ -40,30 +39,27 @@ window.popups.LoginPopup = class LoginPopup
     e.preventDefault()
     @hide()
 
-  onButtonClick: (e) ->
+  saveButtonClickHandler: (e) ->
     e.preventDefault()
     @loginUserRequest()
-      .complete( () ->
-        1 + 1
-        debugger
-        1 + 1
+      .done( (data, state) =>
+        if data && !data.error && state == 'success'
+          window.location.reload()
+          @hide()
+        else
+          window.helpers.showErrors(@content.find('.item'), 'invalid login or password')
       )
-    #  .done(@refreshPage)
-    #  .fail(@hide)
-    #
-
-    #@hide()
 
   # helpers
   loginUserRequest: () ->
     formData = {
       spree_user: {
-        email: @content.find('input#email_address'),
-        password: @content.find('input#password')
+        email: @content.find('input#email_address').val(),
+        password: @content.find('input#password').val()
       }
     }
     $.ajax(
-      url: urlWithSitePrefix("/user/spree_user/sign_in")
+      url: urlWithSitePrefix("/spree_user/sign_in")
       type: 'POST'
       dataType: 'json'
       data: $.param(formData)
