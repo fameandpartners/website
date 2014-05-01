@@ -80,6 +80,8 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
     _.each(@container.find(@buttons_selector), (button) ->
       $button = $(button)
       value = $button.data('size')
+      if $button.data('tooltipsy')
+        $button.data('tooltipsy').destroy()
       $button.removeData('tooltip')
       if _.indexOf(unavailable_values, value) == -1
         if value >= 14
@@ -90,25 +92,7 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
         $button.addClass('unavailable').attr('title', text)
 
     , @)
-
-    _.each(@container.find("option[value!='']"), (option) ->
-      $option = $(option)
-      value = @prepareValue($option.attr('value'))
-
-      if _.indexOf(unavailable_values, value) == -1
-        $option.removeAttr('disabled').removeClass('unavailable')
-        $option.html(value)
-      else
-        $option.addClass('unavailable').attr('disabled', 'disabled')
-        $option.html("<span style='text-decoration: line-through;'>#{value} SOLD OUT</span>")
-
-    , @)
     @container.find("#{@buttons_selector}[title]").tooltipsy()
-    @container.trigger('chosen:updated')
-
-
-
-
 
 window.inputs.ChosenSelector = class ChosenSelector extends BaseInput
   constructor: (@container, @valueType = 'string') ->
