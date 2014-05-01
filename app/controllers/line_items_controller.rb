@@ -84,11 +84,10 @@ class LineItemsController < Spree::StoreController
   # params[:quantity]
   def update
     line_item = current_order.line_items.find(params[:id])
-
     quantity = params[:quantity].to_i > 0 ? params[:quantity].to_i : 1
-    if line_item.update_attributes(variant_id: params[:variant_id], quantity: quantity)
-      current_order.reload
-    end
+    variant = Spree::Variant.find(params[:variant_id])
+
+    current_order.update_line_item(line_item, variant, quantity, currency = nil)
 
     render json: { order: CartSerializer.new(current_order).to_json }
   end

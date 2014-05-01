@@ -9,6 +9,9 @@ link rel='shortcut icon' type='image/png' href='/favicon.png'
 link rel='shortcut icon' type='image/x-icon' href='/favicon.ico'
 meta property="fb:app_id" content="591959187490267"
 
+- unless Rails.env.production?
+  meta name="robots" content="noindex, nofollow"
+
 /[if lt IE 9]
   = javascript_include_tag 'html5.js'
 

@@ -17,10 +17,10 @@ class CartSerializer < ActiveModel::Serializer
   end
 
   def display_shipment_total
-    if object.shipment.present?
+    if object.shipment.present? && object.shipment.amount.to_i > 0
       object.shipment.display_amount.to_s
     else
-      nil
+      nil # JST will set FREE
     end
   end
 
@@ -29,15 +29,11 @@ class CartSerializer < ActiveModel::Serializer
   end
 
   def display_adjustment_total
-    if object.display_adjustment_total.money.cents > 0
-      object.display_adjustment_total.to_s
-    else
-      nil
-    end
+    object.display_adjustment_total.to_s
   end
 
   def display_promotion_total
-    Spree::Money.new(0).to_s
+    object.display_promotion_total.to_s
   end
 
   def display_total

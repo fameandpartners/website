@@ -18,6 +18,10 @@ module OrdersHelper
     content_tag('span', order.currency) + ' ' + order.display_adjustment_total
   end
 
+  def show_order_promotion_total(order)
+    content_tag('span', order.currency) + ' ' + order.display_promotion_total
+  end
+
   def show_order_shipment_total(order)
     if order.shipment && order.shipment.display_amount && order.shipment.display_amount.money.cents > 0
       content_tag('span', order.currency) + order.shipment.display_amount

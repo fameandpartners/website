@@ -11,6 +11,7 @@
       <div class="label">Shipping</div>
       <div class="desc">
         <% if @order.display_shipment_total: %>
+          <span><%= @order.currency %></span>
           <%= @order.display_shipment_total %>
         <% else: %>
           Free
