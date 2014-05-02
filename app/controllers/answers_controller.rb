@@ -95,7 +95,6 @@ class AnswersController < ApplicationController
 
     if taxons.present?
       taxons.group_by(&:id).each do |id, group|
-        debugger
         style_profile.user_style_profile_taxons.create do |object|
           object.taxon = group.first
           object.capacity = group.size
@@ -104,7 +103,7 @@ class AnswersController < ApplicationController
     end
 
 
-    MarketingMailer.style_quiz_completed(style_profile.user, current_site_version).deliver
+    MarketingMailer.delay.style_quiz_completed(style_profile.user, current_site_version)
 
     render 'quizzes/thanks'
   end
