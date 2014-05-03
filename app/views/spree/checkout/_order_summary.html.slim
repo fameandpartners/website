@@ -21,3 +21,40 @@
           span = @order.display_total
           - if current_site_version.is_australia?
             .taxes Including GST
+
+.checkout-title
+  h3 Shopping Fame &amp; Partners
+.checkout-content.line
+  .nav-site
+    nav
+      ul 
+        li
+          = link_to why_us_path(anchor: 'shipping') do
+            span.icon-holder
+              span.icon-dollar
+              span.icon-erase
+            span free shipping
+        li
+          = link_to why_us_path(anchor: 'returns') do
+            span.icon-holder
+              span.icon-arrows
+            span free returns
+        li
+          = link_to why_us_path(anchor: 'fit') do
+            span.icon-holder
+              span.icon-guarantee
+            span fit guarantee
+        - unless sale_active?
+          li
+            = link_to why_us_path(anchor: 'customisation') do
+              span.icon-holder
+                span.icon-cutline
+                span.icon-scissors
+              span
+                ' free
+                =' t(:customization)
+        li
+          = link_to why_us_path(anchor: 'advice') do
+            span.icon-holder
+              span.icon-comment
+            span free stylists

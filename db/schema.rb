@@ -324,14 +324,6 @@ ActiveRecord::Schema.define(:version => 20140429140316) do
     t.string   "school_name"
   end
 
-  create_table "customisation_types", :force => true do |t|
-    t.integer  "position"
-    t.string   "name"
-    t.string   "presentation"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "customisation_values", :force => true do |t|
     t.integer  "position"
     t.string   "name"
@@ -431,21 +423,6 @@ ActiveRecord::Schema.define(:version => 20140429140316) do
     t.integer "option_value_id"
   end
 
-  create_table "product_customisation_types", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "customisation_type_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-  end
-
-  create_table "product_customisation_values", :force => true do |t|
-    t.integer "product_customisation_type_id"
-    t.integer "customisation_value_id"
-    t.string  "image_file_name"
-    t.string  "image_content_type"
-    t.integer "image_file_size"
-  end
-
   create_table "product_personalizations", :force => true do |t|
     t.integer  "variant_id"
     t.integer  "line_item_id"
@@ -508,13 +485,13 @@ ActiveRecord::Schema.define(:version => 20140429140316) do
   create_table "product_videos", :force => true do |t|
     t.integer  "spree_product_id"
     t.integer  "spree_option_value_id"
-    t.boolean  "is_master",             :default => false
+    t.boolean  "is_master",                            :default => false
     t.string   "color"
-    t.string   "url"
+    t.string   "url",                   :limit => 512
     t.string   "video_id"
     t.integer  "position"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
   end
 
   create_table "questions", :force => true do |t|

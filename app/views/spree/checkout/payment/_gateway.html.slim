@@ -20,10 +20,10 @@ ruby:
     .grid-9
       .row
         .grid-4.without-shadow
-          = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, { :class => 'selectbox' })
+          = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, { :class => '' })
         .grid-1  
         .grid-4.without-shadow
-          = select_year(Date.today, { :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year' }, { :class => 'selectbox' })
+          = select_year(Date.today, { :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year' }, { :class => '' })
 
       / = select_month(Date.today, :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month')
       / = select_year(Date.today, :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year')

@@ -40,15 +40,17 @@
 		}
 	}
 	.checkout-content {
-		// .grid-6,
-  //   .grid-12 {
-		// 	display: inline-block;
-		// 	vertical-align: top;
-		// 	padding-right: 20px;
-		// 	@include box-sizing(border-box);
-		// }
 		.input {
 			margin-bottom: 20px;
+		}
+		.check-edit {
+			text-align: right;
+			padding-top: 20px;
+			margin-top: 20px;
+			border-top: solid 1px #eee;
+			font: 400 14px/1 $fontFive;
+			text-transform: none;
+			color: #666;
 		}
 	}
 	h3 {
@@ -56,7 +58,8 @@
 		margin-bottom: 10px;
 	}
 	.submit-button {
-		margin-top: 10px;
+		margin-top: 20px;
+		margin-bottom: 20px;
 		.fleft { margin-right: 5px;}
 	}
 	.form-address {
@@ -153,7 +156,6 @@
 }
 
 .payment-method-details {
-	padding-right: 20px;
 	.coupon-block {
 		margin-bottom: 20px;
 		padding-bottom: 25px;
@@ -189,6 +191,11 @@
 		#payment_source_1_month_chosen {
 			margin-right: 7%;
 		}
+	}
+	.place-order {
+		margin: -20px;
+		padding: 20px;
+		background-color: #f9f9f9;
 	}
 }
 
@@ -266,6 +273,22 @@ body.checkout {
 	position: relative;
 	margin-bottom: 10px;
 	background-color: #fff;
+	.checkout-content {
+		padding-left: 0;
+		padding-right: 0;
+		&.line:before {
+			left: 0;
+			right: 0;
+		}
+	}
+	.checkout-title {
+		padding-left: 0;
+		padding-right: 0;	
+		&:first-child {
+			padding-top: 0;
+			margin-top: 0;
+		}
+	}
 	&.line:before {
 		content: '';
 		position: absolute;

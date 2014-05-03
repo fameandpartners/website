@@ -2,6 +2,8 @@
   .checkout-title.black data-step="payment"
     h3 Payment
 - else
+  .checkout-title.black data-step="payment"
+    h3 Payment
   .checkout-content data-step="payment" class="active"
     .payment-method-details
       - unless (sale_active? or current_order.has_personalized_items?)

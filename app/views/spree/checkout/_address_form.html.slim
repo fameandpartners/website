@@ -51,7 +51,7 @@ ruby:
         = form.label :country_id, with_required_mark(t(:country))
       .grid-9 
         span.without-shadow id="#{address_id}country-selection"
-          = form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required selectbox'}
+          = form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required'}
 
     .input.clearfix id="#{address_id}zipcode" data-require='user-credentials'
       .grid-3
@@ -69,7 +69,7 @@ ruby:
            form.collection_select(:state_id, address.country.states,
                               :id, :name,
                               {:include_blank => true},
-                              {:class => have_states ? 'required selectbox' : 'hidden selectbox',
+                              {:class => have_states ? 'required' : 'hidden',
                               :disabled => !have_states}) +
            form.text_field(:state_name,
                               :class => !have_states ? 'required' : 'hidden',

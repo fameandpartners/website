@@ -1,8 +1,8 @@
 - if current_step.eql?('address')
   .checkout-title.black.active data-step="address"
     h3 Billing and shipping Address
-  .checkout-content.line.active data-step="address"
-    - unless signed_in?
+  - unless signed_in?  
+    .checkout-content.line.active data-step="address"
       .clearfix
         .grid-7
           .text-title Fames &amp; Partners Customer
@@ -11,7 +11,8 @@
           = link_to 'login', '#', class: 'btn open-login-popup'
           = link_to 'FB login', fb_auth_path(return_to: 'checkout'), class: 'btn open-login-popup'
 
-    = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global'}, remote: false do |form|
+  = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global'}, remote: false do |form|
+    .checkout-content.line
       = render :partial => 'shared/error_messages', locals: { target: @order }
 
       = form.fields_for :bill_address do |bill_form|
@@ -44,15 +45,13 @@
             .grid-3 = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
             .grid-9 = form.password_field :password_confirmation, class: 'required without-shadow'
 
-      .submit-button.text-right
-        = form.submit 'Next Step', data: { loading: 'Submitting...' }, class: 'btn pink'
+    .submit-button.text-right
+      = form.submit 'Next Step', data: { loading: 'Submitting...' }, class: 'btn pink'
 
 - else
   .checkout-title.grey data-step="address"
     h3 Billing and shipping Address
-    .check-edit
-      span.icon-checkmark
-      = link_to 'Edit', checkout_state_path('address'), :remote => false, class: 'edit'
+    
   .checkout-content
     .grid-container
       - if (address = @order.bill_address).present?
@@ -71,3 +70,6 @@
           p = address.address2
           p = address.city
           p = address.country
+      .grid-12
+        .check-edit
+          = link_to 'Edit your Billing or Shipping Ditails', checkout_state_path('address'), :remote => false, class: 'edit'
