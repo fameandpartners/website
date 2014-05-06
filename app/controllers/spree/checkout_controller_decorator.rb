@@ -2,7 +2,7 @@ Spree::CheckoutController.class_eval do
   before_filter :prepare_order, only: :edit
   before_filter :find_payment_methods, only: [:edit, :update]
   skip_before_filter :check_registration
-
+=begin
   def update_registration
     fire_event("spree.user.signup", :order => current_order)
     
@@ -54,10 +54,28 @@ Spree::CheckoutController.class_eval do
       end
     end
   end
+=end
 
   # update - address/payment
   def update
     move_order_from_cart_state(@order)
+
+    if @order.state == 'address'
+      # update first/last names, email
+      registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params)
+      registration.update
+      if registration.new_user_created?
+        fire_event("spree.user.signup", order: current_order)
+        sign_in :spree_user, registration.user
+      end
+      if !registration.successfull?
+        respond_with(@order) do |format|
+          format.html { redirect_to checkout_state_path(@order.state) }
+          format.js   { render 'spree/checkout/registration/failed' }
+        end
+        return
+      end
+    end
 
     if @order.update_attributes(object_params)
 
@@ -140,20 +158,51 @@ Spree::CheckoutController.class_eval do
 
     respond_with(@order) do |format|
       format.js { render 'spree/checkout/update/success' }
-      format.html{ render }
+      format.html{ render 'edit' }
+      #format.html{ render 'markup_edit' }
     end
   end
 
   def before_address
-    @order.bill_address ||= Spree::Address.default(current_site_version)
-    @order.ship_address ||= Spree::Address.default(current_site_version)
+    @order.bill_address ||= build_default_address
+    @order.ship_address ||= build_default_address
   end 
 
   private
 
+  def object_params
+    # For payment step, filter order parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
+    if @order.has_checkout_step?("payment") && @order.payment?
+      if params[:payment_source].present? && source_params = params.delete(:payment_source)[params[:order][:payments_attributes].first[:payment_method_id].underscore]
+        params[:order][:payments_attributes].first[:source_attributes] = source_params
+      end 
+      if (params[:order][:payments_attributes])
+        params[:order][:payments_attributes].first[:amount] = @order.total
+      end 
+    end 
+    params[:order].except(:password, :password_confirmation)
+  end
+
   # run callback - preparations to order states
   def prepare_order
     before_address
+  end
+
+  def build_default_address
+    address = Spree::Address.default(current_site_version)
+    if (user = try_spree_current_user).present?
+      address.firstname ||= user.first_name
+      address.lastname ||= user.last_name
+      address.email ||= user.email
+    end
+
+    if @order.present?
+      address.firstname ||= @order.user_first_name
+      address.lastname ||= @order.user_last_name
+      address.email ||= @order.email
+    end
+
+    address
   end
 
   # after user submitted some shipping/biliing/payment data

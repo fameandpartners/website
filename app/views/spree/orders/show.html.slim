@@ -1,3 +1,13 @@
+- addthis_config = {}
+- if product = @order.products.first
+  = render 'spree/products/product_meta', product: product
+  - addthis_config['addthis:url'] = product_url(product) 
+  - addthis_config['addthis:title'] = product.name
+  - addthis_config['addthis:description'] = product.description
+
+javascript:
+  var addthis_config = {"data_track_addressbar":true};
+
 .wrap
   .account-pages
     ruby:
@@ -12,13 +22,11 @@
           .grid-4
             p SHARE YOUR PURCHASE WITH YOUR FRIENDS SO NO ONE BUYS THE SAME DRESS FOR YOUR EVENT!
             .share
-              .social.addthis_toolbox.addthis_default_style
+              .social.addthis_toolbox.addthis_default_style *addthis_config
                 a.addthis_button_facebook_like fb:like:layout="button_count"
                 a.addthis_button_pinterest_pinit
                 a.addthis_button_tweet
                 a.addthis_counter.addthis_pill_style
-              javascript:
-                var addthis_config = {"data_track_addressbar":true};
               script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
 
             = render 'spree/checkout/summary'

@@ -2,16 +2,21 @@ $('.checkout.edit').ready ->
   page = {
     ajax_callbacks: {}
     init: () ->
-      $(document).on('change', '#order_use_billing', page.updateShippingFormVisibility)
-      $(document).on('change', '#create_account', page.updatePasswordFieldsVisibility)
-      $(document).on('click', 'form input[type=submit]', page.onAjaxLoadingHandler)
-      $(document).on('click', '.place-order button', page.onAjaxLoadingHandler)
-      $(document).on('click', '.place-order button', page.orderProccessHandler)
-      $(document).on('submit', 'form.payment_details.credit_card', page.doNothing)
+      $(document).on('change',  '#order_use_billing', page.updateShippingFormVisibility)
+      $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
+      $(document).on('click',   'form input[type=submit]', page.onAjaxLoadingHandler)
+      $(document).on('click',   '.place-order button', page.onAjaxLoadingHandler)
+      $(document).on('click',   '.place-order button', page.orderProccessHandler)
+      $(document).on('submit',  'form.payment_details.credit_card', page.doNothing)
+      $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
+      $(document).on('click',   '.open-login-popup', page.openLoginPopup)
+      $(document).on('change',  'input', page.updateAddressFormVisibility)
 
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
       page.updateDatepicker()
+      page.updatePayButtonAvailability()
+      page.updateAddressFormVisibility()
 
     onAjaxLoadingHandler: (e) ->
       $button = $(e.currentTarget)
@@ -71,6 +76,8 @@ $('.checkout.edit').ready ->
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
       page.updateDatepicker()
+      page.updatePayButtonAvailability()
+      page.updateAddressFormVisibility()
       $('.selectbox').chosen()
 
     updateShippingFormVisibility: () ->
@@ -82,12 +89,13 @@ $('.checkout.edit').ready ->
         $('[data-hook="shipping_inner"]').find(':input').prop('disabled', false)
 
     updatePasswordFieldsVisibility: () ->
+      container = $('.checkout-content.line.form-global.passwords')
       if $('#create_account').is(':checked')
-        $('form#new_user .passwords input').prop('disabled', false)
-        $('form#new_user .passwords').show()
+        container.find('input').prop('disabled', false)
+        container.show()
       else
-        $('form#new_user .passwords input').prop('disabled', true)
-        $('form#new_user .passwords').hide()
+        container.find('input').prop('disabled', true)
+        container.hide()
 
     updateDatepicker: () ->
       $('#order_required_to').datepicker({
@@ -99,6 +107,39 @@ $('.checkout.edit').ready ->
     doNothing: (event) ->
       event.preventDefault()
       false
+
+    updatePayButtonAvailability: (event) ->
+      buttons = $("*[date-require='terms_and_conditions']")
+      links = $('#paypal_button')
+      if $('#terms_and_conditions').is(':checked')
+        buttons.prop('disabled', false)
+        links.prop('disabled', false)
+        links.off('click', page.doNothing)
+      else
+        links.on('click', page.doNothing)
+        links.prop('disabled', true)
+        buttons.prop('disabled', true)
+      true
+
+    updateAddressFormVisibility: (event) ->
+      $('.grid-container.form-global.form-address').each((index, element) ->
+        $container = $(element)
+        firstname = $container.find('input[id$=address_attributes_firstname]').val()
+        lastname = $container.find('input[id$=address_attributes_lastname]').val()
+        email = $container.find('input[id$=address_attributes_email]').val()
+
+        if (_.isEmpty(firstname) || _.isEmpty(lastname) || _.isEmpty(email))
+          $container.find(".input.clearfix[data-require=user-credentials]").addClass('hide')
+        else
+          $container.find(".input.clearfix[data-require=user-credentials]").removeClass('hide')
+      )
+      # if user filled first last email, show other elements
+      # otherwise - hide&disable
+
+    openLoginPopup: (e) ->
+      e.preventDefault()
+      popup = new window.popups.LoginPopup()
+      popup.show()
 
     orderProccessHandler: (event) ->
       return if page.pin_request_in_process
@@ -121,6 +162,11 @@ $('.checkout.edit').ready ->
           address_country: $('#order_bill_address_attributes_country_id').find('option:selected').text()
           address_city: $('#order_bill_address_attributes_city').val()
           address_line1: $('#order_bill_address_attributes_address1').val()
+
+        if window.bill_address
+          credit_card_data.address_country  ||= window.bill_address.country
+          credit_card_data.address_city     ||= window.bill_address.city
+          credit_card_data.address_line1    ||= window.bill_address.address1
 
         Pin.createToken(credit_card_data, page.pinResponseHandler)
 

@@ -7,7 +7,7 @@ $(".spree_products.show").ready ->
   page.enableProductVariantsSelector(variantsSelectorContainer)
 
   page.enableWhatSizeIam($('.toggle-sizes'))
-  page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
+  page.enableBuyButton($('#content .buy-now'), { expandShoppingBag: true})
   page.enableAccordeonBars($('ul.slider > li:not(.recommended)'))
   #processWishListLinks()
   page.enableWishlistLinks($('a.wish-list-link')) unless _.isUndefined(window.current_user)

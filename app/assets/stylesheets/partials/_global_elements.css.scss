@@ -30,6 +30,12 @@
 		@include longBoxShadowRight(#000, 5);
 		@include box-sizing(border-box);
 	}
+	.without-shadow {
+		box-shadow: none !important;
+		.chosen-container-single .chosen-single {
+			box-shadow: none !important;
+		}
+	}
 	.input.string {
 		margin-bottom: 30px;
 	}
@@ -137,6 +143,11 @@
 		color: $pinkColor;
 		padding-top: 6px;
 		cursor: default;
+	}
+	&.without-shadow {
+		height: 32px;
+		line-height: 32px;
+		font-size: 16px;
 	}
 }
 
@@ -337,6 +348,11 @@
 .nice-checkbox {
 	margin-bottom: 5px;
 	display: inline-block;
+	&.without-shadow {
+		label, .label {
+			span { box-shadow: none !important;}
+		}
+	}
 	input[type="checkbox"] {
     display:none;
     &:checked {

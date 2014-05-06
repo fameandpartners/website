@@ -7,7 +7,7 @@ $(".personalization_products.style").ready ->
   page.enableProductVariantsSelector(variantsSelectorContainer)
 
   page.enableWhatSizeIam($('.toggle-sizes'))
-  page.enableBuyButton($('.buy-now'), { expandShoppingBag: true})
+  page.enableBuyButton($('#content .buy-now'), { expandShoppingBag: true})
   page.enableAccordeonBars($('ul.slider > li:not(.recommended)'))
   page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
 
