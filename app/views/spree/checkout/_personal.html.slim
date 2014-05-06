@@ -1,28 +1,22 @@
-= form_for @user, :url => spree.update_checkout_registration_path, :remote => true, :method => :put do |form|
-  = render :partial => 'shared/error_messages', :locals => { :target => @user }
-  .grid-container.form-global.form-personal
-    .grid-6.input
-      = form.label :first_name, with_required_mark(t(:first_name))
-      = form.text_field :first_name, class: 'required'
-    .grid-6.input
-      = form.label :last_name, with_required_mark(t(:last_name))
-      = form.text_field :last_name, class: 'required'
-    .grid-12.input
-      = form.label :email, with_required_mark(t(:email))
-      = form.text_field :email, class: 'required'
-    .grid-12.use-same-address-block.input
-      label.nice-checkbox
-        = check_box_tag :create_account, true, params[:create_account].present?
-        = label_tag :create_account, :id => :create_account do
-          span
-          | Create an Account
-  .grid-container.form-global.passwords
-    .grid-6.input
-      = form.label :password, with_required_mark(t(:password))
-      = form.password_field :password, class: 'required'
-    .grid-6.input
-      = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
-      = form.password_field :password_confirmation, class: 'required'
-  .submit-button.clearfix
-    .fleft
-      = form.submit 'Submit Details', data: { loading: 'Submitting...' }, class: 'btn mid border'
+= form_for @user, :url => spree.update_checkout_registration_path, :remote => false, :method => :put do |form|
+  /= render :partial => 'shared/error_messages', :locals => { :target => @user }
+  .checkout-content.line
+    .clearfix
+      .grid-7
+        .text-title Fames &amp; Partners Customer
+        p Login now if you are already a customer, or you can order as a guest and choose to register as you checkout.
+      .grid-5.text-center
+        = link_to 'login', '#', class: 'btn open-login-popup'
+    
+  .checkout-content.line.form-global.passwords
+    .input
+      .text-title Who you should join
+      p Create an account to save your dress to a Wishlist to discover your Style Profile, share with friends and to manage your profile. Ist easy just enter some basic details!
+    .input.clearfix
+      .grid-3 = form.label :password, with_required_mark(t(:password))
+      .grid-9 = form.password_field :password, class: 'required without-shadow'
+    .input.clearfix
+      .grid-3 = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
+      .grid-9 = form.password_field :password_confirmation, class: 'required without-shadow'
+  .submit-button.text-right
+    = form.submit 'Submit Details', data: { loading: 'Submitting...' }, class: 'btn pink'

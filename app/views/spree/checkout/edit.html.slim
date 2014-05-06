@@ -8,58 +8,31 @@
       $(function(){
         Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
       })
+      window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
+
+ruby:
+  current_step = @order.state.to_s
+  if current_step == 'cart'
+    current_step = 'address'
+  end
+
 .wrap
   .checkout-page
-    h1 Checkout
-    .help-info
-      .need-help Need help? Call us 1300 924 860 or email #{mail_to("team@fameandpartners.com", "team@fameandpartners.com", subject:"Help from the Checkout Page")}
-      - unless (sale_active? or current_order.has_personalized_items?)
-        .promocode-help
-          h4 Got a promocode or coupon?
-          span
-            ' Add it in the last step of this checkout process.
-            ' You'll see your cart update on the right when you redeem it.
-    .arrows-line-horizontal        
-    ruby:
-      index = 0
-      if !signed_in?
-        if current_order.user.present? || current_order.email.present?
-          active = @order.state
-        else
-          active = 'personal'
-        end
-        active = 'personal' if active == 'cart'
-       else
-        if @order.state.eql?('cart')
-          active = 'address'
-        else
-          active = @order.state
-        end
-      end
-    .checkout-box.grid-container 
+    .checkout-breadcrumbs
+      = link_to root_path, class: 'logo' do
+        span.icon-logo
+      span
+        = link_to 'Shopping Bag'.html_safe, spree.cart_path
+      span *{ class: current_step.eql?('address') && 'active' }
+        ' Checkout
+      span *{ class: current_step.eql?('payment') && 'active' }
+        ' Payment Methods
+      span Confirmation
+
+    .checkout-box.grid-container
       .accordion-container.grid-8
-        - unless signed_in?
-          .accordion-title data-step="personal" *{ :class => active.eql?('personal') && 'active' }
-            .name
-              = index += 1
-              | . Personal details
-          .accordion-content data-step="personal" *{ :class => !active.eql?('personal') && 'hide' }
-            = render 'spree/checkout/personal' if active.eql?('personal')
-        .accordion-title data-step="address" *{ :class => active.eql?('address') && 'active' }
-          .name
-            = index += 1
-            | . Billing and shipping details
-          .check-edit class="#{ @order.state.eql?('payment') ? "" : "hide" }"
-            span.icon-checkmark
-            = link_to 'Edit', checkout_state_path('address'), :remote => true, class: 'edit'
-        .accordion-content data-step="address" *{ :class => !active.eql?('address') && 'hide' }
-          = render 'spree/checkout/address' if active.eql?('address') || active.eql?('payment')
-        .accordion-title data-step="payment" *{ :class => active.eql?('payment') && 'active' }
-          .name
-            = index += 1
-            | . Payment details
-        .accordion-content data-step="payment"
-          = render 'spree/checkout/payment' if active.eql?('payment')
-      
+        .checkout-section
+          = render 'address_step', current_step: current_step
+          = render 'payment',      current_step: current_step
       .grid-4
-        = render 'spree/checkout/summary'
+          = render 'spree/checkout/order_summary'

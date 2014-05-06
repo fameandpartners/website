@@ -1,8 +1,8 @@
 Spree::Order.class_eval do
+  attr_accessible :required_to, :email
   self.include_root_in_json = false
 
   attr_accessor :zone_id
-  attr_accessible :required_to
 
   after_save :clean_cache!
 

@@ -1,0 +1,75 @@
+- if current_step.eql?('address')
+  .checkout-title.black.active data-step="address"
+    h3 Billing and shipping Address
+  - unless signed_in?  
+    .checkout-content.line.active data-step="address"
+      .clearfix
+        .grid-7
+          .text-title Fames &amp; Partners Customer
+          p Login now if you are already a customer, or you can order as a guest and choose to register as you checkout.
+        .grid-5.text-center
+          = link_to 'login', '#', class: 'btn open-login-popup'
+          = link_to 'FB login', fb_auth_path(return_to: 'checkout'), class: 'btn open-login-popup'
+
+  = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global'}, remote: false do |form|
+    .checkout-content.line
+      = render :partial => 'shared/error_messages', locals: { target: @order }
+
+      = form.fields_for :bill_address do |bill_form|
+        = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
+
+      = form.fields_for :ship_address do |ship_form|
+        = render partial: 'spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
+
+      - unless signed_in?
+        .checkout-title data-step="personal"
+          .fleft 
+            h3 
+              ' GET $25 TO SPEND
+              em optional
+          .fright.use-same-address-block
+            label.nice-checkbox.without-shadow
+              = check_box_tag :create_account, true, params[:create_account].present?
+              = label_tag :create_account, id: :create_account do
+                span
+                | Create an Account
+                
+        .checkout-content.line.form-global.passwords data-step="personal"
+          .input
+            .text-title Who you should join
+            p Add a password to sign up if you want a $25 voucher for your next purchase, plus other offers in the future!
+          .input.clearfix
+            .grid-3 = form.label :password, with_required_mark(t(:password))
+            .grid-9 = form.password_field :password, class: 'required without-shadow'
+          .input.clearfix
+            .grid-3 = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
+            .grid-9 = form.password_field :password_confirmation, class: 'required without-shadow'
+
+    .submit-button.text-right
+      = form.submit 'Next Step', data: { loading: 'Submitting...' }, class: 'btn pink'
+
+- else
+  .checkout-title.grey data-step="address"
+    h3 Billing and shipping Address
+    
+  .checkout-content
+    .grid-container
+      - if (address = @order.bill_address).present?
+        .grid-6
+          .text-title Billing Address
+          p = address.full_name 
+          p = address.address1
+          p = address.address2
+          p = address.city
+          p = address.country
+      - if (address = @order.ship_address).present?
+        .grid-6
+          .text-title Shipping Address
+          p = address.full_name 
+          p = address.address1
+          p = address.address2
+          p = address.city
+          p = address.country
+      .grid-12
+        .check-edit
+          = link_to 'Edit your Billing or Shipping Ditails', checkout_state_path('address'), :remote => false, class: 'edit'

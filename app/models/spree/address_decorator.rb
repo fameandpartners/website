@@ -1,4 +1,6 @@
 Spree::Address.class_eval do
+  attr_accessible :email
+
   def self.default(site_version = nil)
     if site_version.present?
       country = site_version.default_country || site_version.countries.first
