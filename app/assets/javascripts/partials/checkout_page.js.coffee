@@ -122,7 +122,6 @@ $('.checkout.edit').ready ->
       true
 
     updateAddressFormVisibility: (event) ->
-      order_bill_address_attributes_firstname
       $('.grid-container.form-global.form-address').each((index, element) ->
         $container = $(element)
         firstname = $container.find('input[id$=address_attributes_firstname]').val()
