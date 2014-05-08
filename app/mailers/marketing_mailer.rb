@@ -63,6 +63,7 @@ class MarketingMailer < ActionMailer::Base
   end
 
   def style_quiz_completed_reminder(user, site_version = nil)
+    return if user.nil?
     @user = user
     @site_version = site_version || @user.recent_site_version
     @site_version_code = @site_version.default? ? '' : @site_version.code
