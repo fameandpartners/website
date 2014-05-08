@@ -100,3 +100,16 @@ FameChainMailer.fame_chain(fame_chain).deliver
 # Shipping
 shipment = Spree::Shipment.last
 Spree::ShipmentMailer.shipped_email(shipment).deliver
+
+
+# wishlist item added - after 2 days
+item = WishlistItem.last
+MarketingMailer.wishlist_item_added(item.user, item).deliver
+
+# wishlist item added - after 2 weeks
+item = WishlistItem.last
+MarketingMailer.wishlist_item_added_reminder(item.user, item).deliver
+
+# style profile reminder - after 1 week
+user = UserStyleProfile.last.user
+MarketingMailer.style_quiz_completed_reminder(user).deliver
