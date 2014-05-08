@@ -4,17 +4,19 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
       td height="30"
     tr
       td style="background-color: #fafafa;"
-        = image_tag '_email/line-1.png', style: 'width: 100%; display: block'
+        = image_tag '_email/line-6.png', style: 'width: 100%; display: block'
     tr
-      td style="background-color: #000; color: #fff; text-align: center;"
-        h1 style="margin: 20px 0; padding: 0; font: 400 italic 32px/1.1 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif; color: #fc00ff;" Hey, #{@user.first_name}!
-        p style="margin: 0; padding: 10px 40px; font: 400 16px/1.1 Times New Roman, sans-serif;"
-          ' We totally love that super cute dress #{ @product.name }, too!
-        p style="margin: 0; padding-bottom: 20px; font: 400 16px/1.1 Times New Roman, sans-serif;"
+      td style="background-color: #000; color: #fff; text-align: center; font-style: italic; font-family: Georgia, 'Times New Roman', sans-serif; font-weight: 400; line-height: 1.1; font-size: 16px;"
+        h1 style="margin: 20px 0; padding: 0; font-size: 32px; color: #fc00ff; font-weight: 400;" Hey, #{@user.first_name}!
+        p style="margin: 0; padding: 10px 40px;"
+          ' We totally love that super cute dress 
+          span style="text-transform: uppercase;" #{ @product.name }
+          ' , too!
+        p style="margin: 0; padding-bottom: 20px;"
           ' Because we know you love it, we thought we would offer you a free styling session to learn how you might style a total look. Plus we can give you personalised advice about any customizations you may want to make.
     tr
       td
-        = image_tag '_email/line-2.png', style: 'width: 100%; display: block'
+        = image_tag '_email/line-7.png', style: 'width: 100%; display: block'
     tr
       td height="30"
 
@@ -73,7 +75,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
 
     tr
       td style="background-color: #fafafa;"
-        = image_tag '_email/line-3.png', style: 'width: 100%; display: block'
+        = image_tag '_email/line-8.png', style: 'width: 100%; display: block'
     tr
       td style="background-color: #fc00ff; color: #fff; text-align: center;"
         p style="margin: 10px 0 20px; padding: 0;"
@@ -81,7 +83,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
           a href="#{main_app.root_url(site_version: @site_version_code)}" style="display: inline-block; background: #fc00ff; border: solid 1px #fff; color: #fff; text-decoration: none; margin: 0 5px; text-transform: uppercase; padding: 8px 20px; font: 400 14px/1 Arial, sans-serif;" BOOK STYLING SESSION
     tr
       td
-        = image_tag '_email/line-4.png', style: 'width: 100%; display: block'
+        = image_tag '_email/line-9.png', style: 'width: 100%; display: block'
 
     - if @recommended_dresses.present?
       tr
