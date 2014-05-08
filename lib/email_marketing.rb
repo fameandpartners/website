@@ -28,8 +28,8 @@ class EmailMarketing
   end
 
   def self.remove_old_notifications
-    sent_before = (configatron.email_marketing.store_information || 1.month).ago
-    EmailNotification.delete_all(["created_at < ?", self.not_later_than.ago])
+    #sent_before = (configatron.email_marketing.store_information || 1.month).ago
+    #EmailNotification.delete_all(["created_at < ?", sent_before])
     EmailNotification.delete_all(created_at: nil)
   end
 
@@ -110,6 +110,7 @@ class EmailMarketing
 
     actor_ids = []
     activities.each do |activity|
+      next if activity.actor.blank? || activity.actor.style_profile.blank?
       next if activity.actor.style_profile.created_at > activity.created_at
       actor_ids.push(activity.actor_id)
     end
@@ -131,16 +132,17 @@ class EmailMarketing
     already_received = EmailNotification.where(
       "code = ? and created_at > ?", code, created_after
     ).map(&:spree_user_id)
-    UserStyleProfile.where(
-      "user_id not in (?) and created_at > ? and created_at < ?", already_received, created_after, created_before
-    ).each do |profile|
+    profiles_scope = UserStyleProfile.where(["created_at > ? and created_at < ?", created_after, created_before])
+    if already_received.present?
+      profiles_scope = profiles_scope.where("user_id not in (?)", already_received)
+    end
+    profiles_scope.each do |profile|
       notification = EmailNotification.where(spree_user_id: profile.user_id, code: code).first_or_initialize
       if notification.new_record? || notification.updated_at.nil?
-        MarketingMailer.style_quiz_completed_reminder(profile.user).deliver
-
-        notification.save
+        if notification.save
+          MarketingMailer.style_quiz_completed_reminder(profile.user).deliver
+        end
       end
-      profile.user_id
     end
   end
 
@@ -155,15 +157,17 @@ class EmailMarketing
       "code = ? and created_at > ?", code, created_after
     ).map(&:spree_user_id)
 
-    WishlistItem.where(
-      "spree_user_id not in (?) and created_at > ? and created_at < ?", already_received, created_after, created_before
-    ).each do |item|
+    items_scope = WishlistItem.where(["created_at > ? and created_at < ?", created_after, created_before])
+    if already_received.present?
+      items_scope = items_scope.where("spree_user_id not in (?)", already_received)
+    end
+    items_scope.each do |item|
       notification = EmailNotification.where(spree_user_id: item.spree_user_id, code: code).first_or_initialize
       if notification.new_record? || notification.updated_at.nil?
-        MarketingMailer.wishlist_item_added(item.user, item).deliver
-        notification.save
+        if notification.save
+          MarketingMailer.wishlist_item_added(item.user, item).deliver
+        end
       end
-      profile.user_id
     end
   end
 
@@ -177,23 +181,25 @@ class EmailMarketing
       "code = ? and created_at > ? and created_at < ?", code, created_after, created_before
     ).map(&:spree_user_id)
 
-    WishlistItem.where(
-      "spree_user_id not in (?) and created_at > ? and created_at < ?", already_received, created_after, created_before
-    ).each do |item|
+    items_scope = WishlistItem.where(["created_at > ? and created_at < ?", created_after, created_before])
+    if already_received.present?
+      items_scope = items_scope.where("spree_user_id not in (?)", already_received)
+    end
+    items_scope.each do |item|
       next if user_purchased_product?(item.spree_user_id, item.spree_product_id)
       notification = EmailNotification.where(spree_user_id: item.spree_user_id, code: code).first_or_initialize
       if notification.new_record? || notification.updated_at.nil?
-        MarketingMailer.wishlist_item_added_reminder(item.user, item).deliver
-        notification.save
+        if notification.save
+          MarketingMailer.wishlist_item_added_reminder(item.user, item).deliver
+        end
       end
-      profile.user_id
     end
   end
 
   # helper methods
   def self.user_purchased_product?(user_id, product_id, conditions = {})
     base_scope = Activity.where(
-      actor_id: item.spree_user_id, actor_type: 'Spree::User',
+      actor_id: user_id, actor_type: 'Spree::User',
       owner_id: product_id, owner_type: 'Spree::Product',
       action: 'purchased'
     )
