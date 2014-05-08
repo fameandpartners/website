@@ -62,6 +62,20 @@ class MarketingMailer < ActionMailer::Base
     end
   end
 
+  def style_quiz_completed_reminder(user, site_version = nil)
+    @user = user
+    @site_version = site_version || @user.recent_site_version
+    @site_version_code = @site_version.default? ? '' : @site_version.code
+    @recommended_dresses = Spree::Product.active.featured.limit(6)
+
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: @user.email,
+        subject: t('emails.subjects.marketing.style_quiz_completed_reminder')
+      ) 
+    end
+  end
+
   def style_quiz_not_completed(user, site_version = nil)
     @user = user
     @site_version = site_version || @user.recent_site_version
@@ -70,6 +84,44 @@ class MarketingMailer < ActionMailer::Base
       mail(
         to: @user.email,
         subject: t('emails.subjects.marketing.style_quiz_not_completed')
+      )
+    end
+  end
+
+  def wishlist_item_added(user, item, site_version = nil)
+    @user = user
+    @product = item.product
+    @site_version = site_version || @user.recent_site_version
+    @site_version_code = @site_version.default? ? '' : @site_version.code
+    @images = (@product.images * 5).first(5) 
+    @personalisation_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ personalization_product_path(permalink: @product.permalink) }"
+
+    @recommended_dresses = Products::SimilarProducts.new(@product).fetch(6).to_a
+    if @recommended_dresses.blank?
+      @recommended_dresses = Spree::Product.active.featured.limit(6)
+    end
+
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: @user.email,
+        subject: t('emails.subjects.marketing.wishlist_item_added')
+      )
+    end
+  end
+
+  def wishlist_item_added_reminder(user, item, site_version = nil)
+    @user = user
+    @product = item.product
+    @site_version = site_version || @user.recent_site_version
+    @site_version_code = @site_version.default? ? '' : @site_version.code
+    @images = (@product.images * 5).first(5) 
+    @personalisation_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ personalization_product_path(permalink: @product.permalink) }"
+    @recommended_dresses = Products::SimilarProducts.new(@product).fetch(6).to_a
+
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: @user.email,
+        subject: t('emails.subjects.marketing.wishlist_item_added_reminder')
       )
     end
   end

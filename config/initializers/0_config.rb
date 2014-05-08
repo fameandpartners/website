@@ -24,8 +24,13 @@ configatron.cache.expire.normally = 1.hour
 configatron.cache.expire.long = 1.day
 
 configatron.email_marketing.delay_time.abandoned_cart = 1.hour
-configatron.email_marketing.delay_time.added_to_wishlist = 12.hours
 configatron.email_marketing.delay_time.quiz_unfinished = 12.hours
+configatron.email_marketing.delay_time.style_profile_completed = 1.week
+configatron.email_marketing.delay_time.style_profile_completed_reminder = 1.week
+configatron.email_marketing.delay_time.added_to_wishlist = 12.hours
+configatron.email_marketing.delay_time.wishlist_item_added = 48.hours
+configatron.email_marketing.delay_time.wishlist_item_added_reminder = 2.week
+configatron.email_marketing.store_information = 1.month
 
 case Rails.env.to_sym
 when :development
