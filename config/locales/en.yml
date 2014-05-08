@@ -51,6 +51,9 @@ en:
         added_to_wishlist: 'We love what you added to your wishlist'
         style_quiz_not_completed: 'Get $20 to spend by completing your Style Profile'
         style_quiz_completed: 'Your Style Profile'
+        style_quiz_completed_reminder: 'More Dresses! Plus a FREE STYLING SESSION'
+        wishlist_item_added: 'We totally heart that dress too!'
+        wishlist_item_added_reminder: "Here's 20% OFF the dress in your wishlist!"
       admins:
         custom_dress: 'Custom Dress | %{full_name} %{id}'
   activerecord:

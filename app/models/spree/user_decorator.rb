@@ -9,6 +9,8 @@ Spree::User.class_eval do
 
   has_one :personalization_settings
 
+  has_many :email_notifications
+
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
 
