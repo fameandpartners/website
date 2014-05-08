@@ -4,17 +4,19 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
       td height="30"
     tr
       td style="background-color: #fafafa;"
-        = image_tag '_email/line-1.png', style: 'width: 100%; display: block'
+        = image_tag '_email/line-10.png', style: 'width: 100%; display: block'
     tr
-      td style="background-color: #000; color: #fff; text-align: center;"
-        h1 style="margin: 20px 0; padding: 0; font: 400 italic 32px/1.1 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif; color: #fc00ff;" Hey, #{@user.first_name}!
-        p style="margin: 0; padding: 10px 40px; font: 400 16px/1.1 Times New Roman, sans-serif;"
-          ' We see that #{ @product.name } is still in your wishlist. 
-        p style="margin: 0; padding-bottom: 20px; font: 400 16px/1.1 Times New Roman, sans-serif;"
+      td style="background-color: #000; color: #fff; text-align: center;font: 400 italic 16px/1.1 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif;"
+        h1 style="margin: 20px 0; padding: 0; color: #fc00ff; font-weight: 400; font-size: 32px;" Hey, #{@user.first_name}!
+        p style="margin: 0; padding: 10px 40px;"
+          ' We see that 
+          span style="text-transform: uppercase;" #{ @product.name } 
+          ' is still in your wishlist. 
+        p style="margin: 0; padding-bottom: 20px;"
           ' Because we really want you to have it, we thought we would offer you 20% OFF.
     tr
       td
-        = image_tag '_email/line-2.png', style: 'width: 100%; display: block'
+        = image_tag '_email/line-11.png', style: 'width: 100%; display: block'
     tr
       td height="30"
 
@@ -46,15 +48,15 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
 
     tr
       td style="background-color: #fafafa;"
-        = image_tag '_email/line-3.png', style: 'width: 100%; display: block'
+        = image_tag '_email/line-12.png', style: 'width: 100%; display: block'
     tr
       td style="background-color: #fc00ff; color: #fff; text-align: center;"
-        p style="margin: 0; padding: 10px 40px; font: 400 16px/1.1 Times New Roman, sans-serif;"
+        p style="margin: 0; padding: 10px 40px; font: 400 italic 16px/1.1 Georgia, Times New Roman, sans-serif;"
           ' Remember you get a free styling session with your dress purchase where our in house team will source any accessories you like, within your budget, for free!
         h1 style="margin: 20px 0; padding: 0; font: 400 italic 32px/1.1 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif; color: #000;" Use: AC20OFF at checkout
     tr
       td
-        = image_tag '_email/line-4.png', style: 'width: 100%; display: block'
+        = image_tag '_email/line-13.png', style: 'width: 100%; display: block'
 
     - if @recommended_dresses.present?
       tr
