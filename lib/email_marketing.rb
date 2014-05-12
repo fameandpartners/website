@@ -57,12 +57,7 @@ class EmailMarketing
     end
 
     scope.each do |order|
-      next unless %w(cart address payment).include?(order.state)
-      next unless order.user.present?
-
-      order.user.update_column(:last_cart_notification_sent_at, now)
-
-      MarketingMailer.abandoned_cart(order, order.user).deliver
+      AbandonedCartEmailWorker.perform_async(order.id)
     end
   end
 
@@ -89,9 +84,7 @@ class EmailMarketing
     end
 
     scope.each do |user|
-      user.update_column(:last_wishlist_notification_sent_at, now)
-
-      MarketingMailer.added_to_wishlist(user).deliver
+      AddedToWishlistEmailWorker.perform_async(user.id)
     end
   end
 
@@ -116,9 +109,7 @@ class EmailMarketing
     end
 
     actor_ids.compact.uniq.each do |user_id|
-      user = Spree::User.find(user_id)
-      user.update_column(:last_quiz_notification_sent_at, now)
-      MarketingMailer.style_quiz_not_completed(user).deliver
+      StyleQuizNotCompletedEmailWorker.perform_async(user_id)
     end
   end
 
@@ -137,12 +128,7 @@ class EmailMarketing
       profiles_scope = profiles_scope.where("user_id not in (?)", already_received)
     end
     profiles_scope.each do |profile|
-      notification = EmailNotification.where(spree_user_id: profile.user_id, code: code).first_or_initialize
-      if notification.new_record? || notification.updated_at.nil?
-        if notification.save
-          MarketingMailer.style_quiz_completed_reminder(profile.user).deliver
-        end
-      end
+      StyleQuizCompletedReminderEmailWorker.perform_async(profile.id)
     end
   end
 
@@ -162,12 +148,7 @@ class EmailMarketing
       items_scope = items_scope.where("spree_user_id not in (?)", already_received)
     end
     items_scope.each do |item|
-      notification = EmailNotification.where(spree_user_id: item.spree_user_id, code: code).first_or_initialize
-      if notification.new_record? || notification.updated_at.nil?
-        if notification.save
-          MarketingMailer.wishlist_item_added(item.user, item).deliver
-        end
-      end
+      WishlistItemAddedEmailWorker.perform_async(item.id)
     end
   end
 
@@ -186,25 +167,8 @@ class EmailMarketing
       items_scope = items_scope.where("spree_user_id not in (?)", already_received)
     end
     items_scope.each do |item|
-      next if user_purchased_product?(item.spree_user_id, item.spree_product_id)
-      notification = EmailNotification.where(spree_user_id: item.spree_user_id, code: code).first_or_initialize
-      if notification.new_record? || notification.updated_at.nil?
-        if notification.save
-          MarketingMailer.wishlist_item_added_reminder(item.user, item).deliver
-        end
-      end
+      WishlistItemAddedReminderEmailWorker.perform_async(item.id)
     end
-  end
-
-  # helper methods
-  def self.user_purchased_product?(user_id, product_id, conditions = {})
-    base_scope = Activity.where(
-      actor_id: user_id, actor_type: 'Spree::User',
-      owner_id: product_id, owner_type: 'Spree::Product',
-      action: 'purchased'
-    )
-    #base_scope = base_scope.where(conditions) if conditions.present?
-    base_scope.exists?
   end
 
 =begin
