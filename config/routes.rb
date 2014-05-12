@@ -1,4 +1,6 @@
 FameAndPartners::Application.routes.draw do
+  get '/robots', to: 'robots#show', constraints: { format: /txt/ }
+
   match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
 
   get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
