@@ -19,7 +19,7 @@ class StyleQuizCompletedReminderEmailWorker < BaseEmailMarketingWorker
           MarketingMailer.style_quiz_completed_reminder(profile.user).deliver
         rescue Exception => e
           log_mailer_error(e)
-          notification.delete
+          #notification.delete
         end
       end
     end

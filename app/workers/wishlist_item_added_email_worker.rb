@@ -19,7 +19,7 @@ class WishlistItemAddedEmailWorker < BaseEmailMarketingWorker
           MarketingMailer.wishlist_item_added(item.user, item).deliver
         rescue Exception => e
           log_mailer_error(e)
-          notification.delete
+          #notification.delete
         end
       end
     end

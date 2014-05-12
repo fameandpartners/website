@@ -12,15 +12,11 @@ class AbandonedCartEmailWorker < BaseEmailMarketingWorker
 
   def send_email(order)
     return unless %w(cart address payment).include?(order.state)
-    return unless order.user.present?
-    return unless order.user.last_cart_notification_sent_at.blank?
+    return if order.user.blank?
+    return if order.user.last_cart_notification_sent_at.present?
 
-    order.user.update_column(:last_cart_notification_sent_at, Time.now)
-    MarketingMailer.abandoned_cart(order, order.user).deliver
+    if order.user.update_column(:last_cart_notification_sent_at, Time.now)
+      MarketingMailer.abandoned_cart(order, order.user).deliver
+    end
   end
 end
-
-Spree::User.update_all(last_cart_notification_sent_at: nil)
-order = Spree::Order.includes(:line_items).last
-AbandonedCartEmailWorker.perform_async(order.id)
-#AbandonedCartEmailWorker.new.perform(order.id)
