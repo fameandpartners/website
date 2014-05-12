@@ -1,6 +1,7 @@
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 require 'capistrano-rbenv'
+require 'sidekiq/capistrano'
 
 set :stages, %w(staging feature)
 set :default_stage, "staging"

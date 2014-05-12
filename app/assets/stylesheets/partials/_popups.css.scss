@@ -336,3 +336,33 @@
 		text-align: center;
 	}
 }
+
+.birthday-popup, .prom-popup {
+	.modal-container {
+		border: 0;
+		padding: 28px;
+		height: 204px;
+		width: 700px;
+		@include box-sizing(border-box);
+	}
+	.title {
+		font: 400 48px/0.9 $fontThree;
+		margin-bottom: 10px;
+	}
+	.form-container {
+		width: 345px;
+		label { display: block;}
+		.input { 
+			max-width: 235px;
+			vertical-align: top;
+			margin-right: 10px;
+		}
+	}
+}
+.birthday-popup .modal-container {
+	background: url('_popups/birthday.jpg') no-repeat;
+}
+.prom-popup .modal-container {
+	background: url('_popups/prom.jpg') no-repeat;
+	padding-left: 290px;
+}
