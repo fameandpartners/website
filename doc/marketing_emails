@@ -8,8 +8,13 @@ lib/email_marketing
 how to run sidekiq
   - bundle exec sidekiq
 
+
   
 # Sidekig help notes
+
+# restart: 
+be cap staging sidekiq:restart
+
 # See workers
 Sidekiq::Client.registered_workers
 
