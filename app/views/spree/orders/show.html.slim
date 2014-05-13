@@ -52,17 +52,17 @@ javascript:
               - if @order.shipment.is_dhl?
                 p
                   ' Track your order with DHL:
-                  = link_to shipment_tracking_url(@order.shipment), target: 'blank' do
+                  = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
                     DHL [#{ @order.shipment.tracking }]
               - elsif @order.shipment.is_auspost?
                 p
                   ' Track your order with Australia Post:
-                  = link_to shipment_tracking_url(@order.shipment), target: 'blank' do
+                  = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
                     AUSPOST [#{ @order.shipment.tracking }]
               - elsif @order.shipment.is_tnt?
                 p
                   ' Track your order with TNT:
-                  = link_to shipment_tracking_url(@order.shipment), target: 'blank' do
+                  = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
                     TNT [#{ @order.shipment.tracking }]
               - else
                 h3 Tracking Number

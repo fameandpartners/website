@@ -8,7 +8,7 @@ ruby:
   .picture
     = link_to image_tag(line_item_image_url(line_item, :small), itemprop: "image", width: 83, height: 115, alt: product.name), collection_product_path(product)
   .info
-    h6 = link_to product.name, collection_product_path(product), target: 'blank'
+    h6 = link_to product.name, collection_product_path(product), target: '_blank'
     .price = price_for_line_item(line_item)
     .description
       table
