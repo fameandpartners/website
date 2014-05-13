@@ -21,8 +21,11 @@ $('.checkout.edit').ready ->
       page.updateAddressFormVisibility()
 
     onAjaxLoadingHandler: (e) ->
+      page.updateAddressFormVisibility()
+
+      # shipping address buttons
       $form = $(e.currentTarget).closest('form')[0]
-      if _.isFunction($form.checkValidity) && !$form.checkValidity()
+      if $form && _.isFunction($form.checkValidity) && !$form.checkValidity()
         # submit form in order to show validation messages
         # without messages updates & etc
         return true
@@ -219,9 +222,9 @@ $('.checkout.edit').ready ->
 
         $errors = $('<div/>').addClass('errorExplanation')
         $header = $('<h3/>').text(response.error_description)
-        $list = null;
+        $list = null
         if (response.messages)
-          $list = $('<ul/>');
+          $list = $('<ul/>')
           $.each response.messages, (index, message) ->
             $list.append($('<li/>').text(message.message))
 
