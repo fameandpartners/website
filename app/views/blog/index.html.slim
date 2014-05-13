@@ -47,25 +47,25 @@
       .row
         .section-title
           h2 ON INSTAGRAM
-          = link_to configatron.links.instagram, class: 'btn green border shadow', target: 'blank' do
+          = link_to configatron.links.instagram, class: 'btn green border shadow', target: '_blank' do
             i.icon-instagram
             span FOLLOW @FAMEANDPARTNERS
         - cache [:blog, :homepage, :instagram_widget], expires_in: configatron.cache.expire.long do
           .instagram-widget
             .grid-6
               - post = instagram_posts.first
-              = link_to post.url, target: 'blank' do
+              = link_to post.url, target: '_blank' do
                 = image_tag post.image_url
             .grid-6
               .grid-container
                 - instagram_posts[1..-1].each do |post|
                   .grid-6
-                    = link_to post.url, target: 'blank' do
+                    = link_to post.url, target: '_blank' do
                       = image_tag post.image_url
       .row
         .section-title
           h2 ON TWITTER
-          = link_to configatron.links.twitter, class: 'btn green border shadow', target: 'blank' do
+          = link_to configatron.links.twitter, class: 'btn green border shadow', target: '_blank' do
             i.icon-twitter
             span FOLLOW @FAMEANDPARTNERS
         - cache [:blog, :homepage, :twitter_widget], expires_in: configatron.cache.expire.long do
@@ -75,7 +75,7 @@
                 .grid-4
                   p = tweet.full_text
                   p
-                    = link_to "@#{tweet.user.name}", "https://twitter.com/#{tweet.user.screen_name}", target: 'blank'
+                    = link_to "@#{tweet.user.name}", "https://twitter.com/#{tweet.user.screen_name}", target: '_blank'
                     br
                     = tweet.created_at.strftime("#{tweet.created_at.day.ordinalize} %B")
     .grid-4

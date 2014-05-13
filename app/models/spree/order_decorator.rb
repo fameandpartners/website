@@ -39,6 +39,10 @@ Spree::Order.class_eval do
       create_shipment!
     end
 
+    # we need update adjustments first,
+    # bcz custom shipping calculator check order total, includings adjusments total,
+    # not only items total
+    updater.update_adjustments
     updater.update
   end
 
