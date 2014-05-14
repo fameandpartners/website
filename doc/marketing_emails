@@ -23,6 +23,7 @@ Sidekiq::Client.registered_queues
 
 # See all jobs for one queue
 Sidekiq.redis { |r| r.lrange "queue:default", 0, -1 }
+Sidekiq.redis { |r| r.lrange("queue:default", 0, -1).size }
 
 # See all jobs in all queues
 Sidekiq::Client.registered_queues.each do |q|
