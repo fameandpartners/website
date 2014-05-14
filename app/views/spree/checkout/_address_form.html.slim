@@ -72,7 +72,7 @@ ruby:
                               {:class => have_states ? 'required' : 'hidden',
                               :disabled => !have_states}) +
            form.text_field(:state_name,
-                              :class => !have_states ? 'required' : 'hidden',
+                              :class => !have_states ? 'required without-shadow' : 'hidden without-shadow',
                               :disabled => have_states)
            ].join.gsub('"', "'").gsub("\n", "")
         javascript:

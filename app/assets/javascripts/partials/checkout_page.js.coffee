@@ -10,6 +10,8 @@ $('.checkout.edit').ready ->
       $(document).on('submit',  'form.payment_details.credit_card', page.doNothing)
       $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
       $(document).on('click',   '.open-login-popup', page.openLoginPopup)
+      
+      $(document).on('click',   '.cvv-popup-toggle', page.toggleCVVCodePopup)
 
       $(document).on('keyup',   'input', page.updateAddressFormVisibility)
       $(document).on('change',  'input', page.updateAddressFormVisibility)
@@ -153,6 +155,10 @@ $('.checkout.edit').ready ->
       e.preventDefault()
       popup = new window.popups.LoginPopup()
       popup.show()
+
+    toggleCVVCodePopup: (e) ->
+      e.preventDefault()
+      $('#cvv-popup .modal-container').toggle()
 
     orderProccessHandler: (event) ->
       return if page.pin_request_in_process

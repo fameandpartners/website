@@ -33,6 +33,10 @@ ruby:
     .grid-9
       .row
         .grid-4 = text_field_tag "#{param_prefix}[verification_value]", '', options_hash.merge(:id => 'card_code', :class => 'cvv without-shadow', :size => 5)
-        .grid-4 = link_to "What's this?", "#", class: 'what-this'
-      / = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
-      / .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.
+        .grid-8
+          = link_to "What's this?", "#", class: 'what-this cvv-popup-toggle'
+          #cvv-popup
+            .modal-container.small.popover-left.hide
+              .close-lightbox.cvv-popup-toggle
+              = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
+              .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.

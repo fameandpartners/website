@@ -32,6 +32,11 @@
 	}
 	.without-shadow {
 		box-shadow: none !important;
+		.checkout-page & { 
+			text-transform: none !important;
+			font-family: $fontFive;
+			font-size: 12px;
+		}
 		.chosen-container-single .chosen-single {
 			box-shadow: none !important;
 		}
