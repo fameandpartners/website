@@ -9,6 +9,6 @@ class StyleQuizCompletedEmailWorker < BaseEmailMarketingWorker
   private
 
   def send_email(user, site_version)
-    MarketingMailer.style_quiz_completed(user, site_version)
+    MarketingMailer.style_quiz_completed(user, site_version).deliver
   end
 end
