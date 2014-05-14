@@ -9,7 +9,7 @@ Spree::User.class_eval do
 
   has_one :personalization_settings
 
-  has_many :email_notifications
+  has_many :email_notifications, foreign_key: :spree_user_id
 
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone

@@ -103,7 +103,8 @@ class AnswersController < ApplicationController
     end
 
 
-    MarketingMailer.delay.style_quiz_completed(style_profile.user, current_site_version)
+    #MarketingMailer.delay.style_quiz_completed(style_profile.user, current_site_version)
+    StyleQuizCompletedEmailWorker.perform_async(style_profile.user.id, current_site_version.id)
 
     render 'quizzes/thanks'
   end
