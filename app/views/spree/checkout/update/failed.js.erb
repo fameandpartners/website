@@ -1,6 +1,5 @@
-$('.accordion-content[data-step="<%= @order.state %>"]').
+$('.checkout-step[data-name="<%= @order.state %>"]').
   html('<%=j render("/spree/checkout/#{@order.state}") %>');
-
 if (window.checkout_page) {
   window.checkout_page.payment_request_in_process = false;
   window.checkout_page.pin_request_in_process = false;

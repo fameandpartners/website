@@ -220,4 +220,14 @@ Spree::CheckoutController.class_eval do
   end
 
   helper_method :completion_route
+
+  def current_step
+    return nil if @order.blank?
+    return @current_step if @current_step.present?
+
+    @current_step = @order.state.to_s
+    @current_step = 'address' if @current_step.eql?('cart')
+    @current_step
+  end
+  helper_method :current_step
 end
