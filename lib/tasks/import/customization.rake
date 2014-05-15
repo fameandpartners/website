@@ -19,7 +19,14 @@ namespace :import do
 
       (book.first_row..book.last_row).each do |index|
         sku = book.cell(index, 1)
-        sku = sku.to_s.dup.downcase.strip
+
+        if sku.is_a?(Float)
+          sku = sku.to_i.to_s.dup
+        else
+          sku = sku.to_s.dup
+        end
+
+        sku = sku.downcase.strip
 
         customizations = [
           {
