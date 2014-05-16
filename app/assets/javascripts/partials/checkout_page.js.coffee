@@ -10,6 +10,10 @@ $('.checkout.edit').ready ->
       $(document).on('submit',  'form.payment_details.credit_card', page.doNothing)
       $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
       $(document).on('click',   '.open-login-popup', page.openLoginPopup)
+      
+      $(document).on('click',   '.cvv-popup-toggle', page.toggleCVVCodePopup)
+
+      $(document).on('keyup',   'input', page.updateAddressFormVisibility)
       $(document).on('change',  'input', page.updateAddressFormVisibility)
 
       page.updateShippingFormVisibility()
@@ -19,6 +23,15 @@ $('.checkout.edit').ready ->
       page.updateAddressFormVisibility()
 
     onAjaxLoadingHandler: (e) ->
+      page.updateAddressFormVisibility()
+
+      # shipping address buttons
+      $form = $(e.currentTarget).closest('form')[0]
+      if $form && _.isFunction($form.checkValidity) && !$form.checkValidity()
+        # submit form in order to show validation messages
+        # without messages updates & etc
+        return true
+
       $button = $(e.currentTarget)
       if $button.is('input')
         previous_message = $button.val()
@@ -130,8 +143,10 @@ $('.checkout.edit').ready ->
 
         if (_.isEmpty(firstname) || _.isEmpty(lastname) || _.isEmpty(email))
           $container.find(".input.clearfix[data-require=user-credentials]").addClass('hide')
+          $container.find(".submit-button input").attr('disabled', true)
         else
           $container.find(".input.clearfix[data-require=user-credentials]").removeClass('hide')
+          $container.find(".submit-button input").removeAttr('disabled')
       )
       # if user filled first last email, show other elements
       # otherwise - hide&disable
@@ -140,6 +155,10 @@ $('.checkout.edit').ready ->
       e.preventDefault()
       popup = new window.popups.LoginPopup()
       popup.show()
+
+    toggleCVVCodePopup: (e) ->
+      e.preventDefault()
+      $('#cvv-popup .modal-container').toggle()
 
     orderProccessHandler: (event) ->
       return if page.pin_request_in_process
@@ -209,9 +228,9 @@ $('.checkout.edit').ready ->
 
         $errors = $('<div/>').addClass('errorExplanation')
         $header = $('<h3/>').text(response.error_description)
-        $list = null;
+        $list = null
         if (response.messages)
-          $list = $('<ul/>');
+          $list = $('<ul/>')
           $.each response.messages, (index, message) ->
             $list.append($('<li/>').text(message.message))
 
