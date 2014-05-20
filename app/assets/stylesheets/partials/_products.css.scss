@@ -214,19 +214,30 @@
 		padding: 28px 0 0 10px;
 		.product-title {
 			font-size: 15px;
-			margin: 15px 0 25px;
+			margin: 15px 0 0;
 			line-height: 1;
-			.price {
-				display: block;
-				font-size: 12px;
-				font-weight: 400;
-      	color: $pinkColor;  
-			}
-			.price-old {
-        text-decoration: line-through;
-        padding: 0 4px;
-        color: #000;
-      }
+		}
+		.product_short_description{
+			font-size: 14px;
+	    font-family: $fontTwo;
+	    font-weight: 100;
+	    text-transform: none;
+	    font-style: italic;
+	    margin-bottom: 5px;
+	    color: #666;
+		}
+		.price {
+			display: block;
+			font-size: 12px;
+			font-weight: 400;
+    	color: $pinkColor;  
+    	margin-bottom: 25px;
+		}
+		.price-old {
+      text-decoration: line-through;
+      padding: 0 4px;
+      color: #000;
+      margin-bottom: 25px;
 		}
 		.size-info{
 			float: right;

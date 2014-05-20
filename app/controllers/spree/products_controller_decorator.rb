@@ -97,8 +97,13 @@ Spree::ProductsController.class_eval do
   end
 
   def set_collection_title(info = {})
-    self.title = info[:page_title]
-    description(info[:meta_description])
+    unless info[:page_title].blank?
+      self.title = info[:page_title] + " " + default_seo_title
+      description(info[:meta_description] + " " + default_meta_description)
+    else
+      self.title = @page_info[:banner_title] + " - " + default_seo_title
+      description = ActionController::Base.helpers.strip_tags(@page_info[:banner_text]) + ". " + default_meta_description
+    end
   end
 
   def set_marketing_pixels(searcher)

@@ -203,6 +203,10 @@ Spree::Product.class_eval do
     read_attribute(:description) || ''
   end
 
+  def short_description
+    property('short_description')
+  end
+
   def delete
     self.update_column(:deleted_at, Time.now)
     variants_including_master.update_all(:deleted_at => Time.now)

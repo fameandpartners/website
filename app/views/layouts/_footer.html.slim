@@ -1,4 +1,6 @@
 footer.footer-global
+  - unless controller_action_id == "index"
+    = render "shared/featured_in", :locals => {:small => "_small"}
   .arrows-line-horizontal
   nav.nav-footer
     ul.fleft

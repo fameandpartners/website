@@ -248,7 +248,7 @@ class ApplicationController < ActionController::Base
     range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
 
     if range_taxonomy.present? && range_taxon = @product.taxons.where(taxonomy_id: range_taxonomy.id).first
-      prefix = " #{info} #{@product.name} in #{range_taxon.name}"
+      prefix = "#{product.short_description} #{info} #{@product.name} in #{range_taxon.name}"
       self.title = [prefix, default_seo_title].join(' - ')
       description([prefix, default_meta_description].join(' - '))
     end

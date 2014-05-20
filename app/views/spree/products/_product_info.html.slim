@@ -11,7 +11,9 @@ ruby:
   h6 = breadcrumbs_for(product)
   h1.product-title
     = product.name
-    span.price = price_for_product(product)
+  - unless product.short_description.empty?
+    h1.product_short_description = product.short_description
+  .price = price_for_product(product)
   .section  
     - options = color_options_for_select(colors)
     = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'

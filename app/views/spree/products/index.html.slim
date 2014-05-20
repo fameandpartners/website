@@ -1,8 +1,3 @@
-- unless @page_info[:banner_title].blank?
-  - @title = @page_info[:banner_title] + " - " + default_seo_title
-- unless @page_info[:banner_text].blank?
-  - @description = raw @page_info[:banner_text] + ". " + default_meta_description
-
 - if marketing_landing_page?
   javascript:
     window.marketing_landing_page = true
