@@ -204,7 +204,7 @@ Spree::Product.class_eval do
   end
 
   def short_description
-    property('short_description')
+    property('short_description') || ''
   end
 
   def delete
