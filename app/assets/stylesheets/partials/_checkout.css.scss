@@ -43,12 +43,15 @@
 		.input {
 			margin-bottom: 20px;
 		}
+		input[type="text"]{
+			border: 1px solid #999;	
+		}
 		.check-edit {
 			text-align: right;
 			padding-top: 20px;
 			margin-top: 20px;
 			border-top: solid 1px #eee;
-			font: 400 14px/1 $fontFive;
+			font: 100 14px/1 $fontFive;
 			text-transform: none;
 			color: #666;
 		}
@@ -96,7 +99,7 @@
 					font-family: $fontFive;
 					font-size: 12px;
 					h6 {
-						font: 400 26px/1.1 $fontThree;
+						font: 100 26px/1.1 $fontThree;
 						a { text-decoration: none;}
 					}
 					.price {
@@ -157,7 +160,7 @@
 
 .payment-method-details {
 	.coupon-block {
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 		padding-bottom: 25px;
 		border-bottom: solid 1px #eee;
 		input[type="text"] {
@@ -194,8 +197,11 @@
 	}
 	.place-order {
 		margin: -20px;
-		padding: 20px;
+		padding: 10px 20px 20px 20px;
 		background-color: #f9f9f9;
+		p.last{
+			padding-bottom: 10px;
+		}
 	}
 }
 
@@ -310,14 +316,15 @@ body.checkout {
 	.hint { margin-top: 5px;}
 	
 	.text-title {
-		font: italic 400 21px/1 $fontTwo;
-		margin-bottom: 15px;
+		font: italic 100 18px/1 $fontTwo;
+		margin: 0;
 		text-transform: none;
 	}
 	p {
 		font-family: $fontFive;
 		text-transform: none;
-		font-size: 14px;
+		font-size: 12px;
+		text-weight: 100;
 		color: #666;
 		margin-bottom: 0;
 		+ p { margin: 4px 0;}
@@ -328,6 +335,20 @@ body.checkout {
   .fb-login {
 		margin-top: 30px;
 		margin-left: 5px;
+  }
+
+  .payments-choose{
+  	h4{
+  		font-size: 28px;
+  		line-height: 1em;
+  		margin: 0;
+  	}
+  	span{
+  		font: italic 400 28px/18px $fontTwo;
+  		margin: 0;
+  		color: #999;
+  		text-transform: lowercase;
+  	}
   }
 
 
@@ -341,7 +362,8 @@ body.checkout {
 		.description {
 			font-family: $fontFive;
 			text-transform: none;
-			font-size: 14px;
+			font-size: 12px;
+			font-weight: 100;
 			color: #666;
 		}
 		h6 {
@@ -395,8 +417,9 @@ body.checkout {
 	.what-this {
 		text-transform: none;
 		font-family: $fontFive;
-		margin-left: 20px;
+		font-weight: 100;
+		margin-left: 10px;
 		line-height: 32px;
-		font-size: 13px;
+		font-size: 11px;
 	}
 }

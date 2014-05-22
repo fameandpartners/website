@@ -6,22 +6,21 @@ ruby:
   .input.clearfix
     .grid-3
       label Name on Card
-    .grid-9
+    .grid-6
       = text_field_tag "#{param_prefix}[full_name]", '', class: 'without-shadow'
   .input.clearfix
     .grid-3
       label Credit Card Number
-    .grid-9 
+    .grid-6 
       = text_field_tag "#{param_prefix}[number]", '', options_hash
-      .hint = image_tag 'icons-cards.png', alt: 'Visa, MasterCard'
+      .hint = image_tag 'icons-cards.png', alt: 'Visa, MasterCard', width: '170'
   .input.clearfix
     .grid-3
       label Expiry Date
-    .grid-9
+    .grid-6
       .row
-        .grid-4.without-shadow
-          = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, { :class => '' })
-        .grid-1  
+        .grid-3.without-shadow
+          = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, { :class => '' })  
         .grid-4.without-shadow
           = select_year(Date.today, { :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 15, :prompt => 'Year' }, { :class => '' })
 
@@ -30,7 +29,7 @@ ruby:
   .input.clearfix
     .grid-3
       label Card Verification Number
-    .grid-9
+    .grid-6
       .row
         .grid-4 = text_field_tag "#{param_prefix}[verification_value]", '', options_hash.merge(:id => 'card_code', :class => 'cvv without-shadow', :size => 5)
         .grid-8

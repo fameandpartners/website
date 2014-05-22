@@ -1,6 +1,6 @@
 $error = $('<span class="error" style="color: red; display: block;"/>').text('is invalid');
 $('.coupon-block form .error').remove();
-$('.coupon-block form input[name*="coupon_code"]').after($error);
+$('.coupon-block form').after($error);
 
 if (window.checkout_page && window.checkout_page.onAjaxFailureHandler) {
   window.checkout_page.onAjaxFailureHandler()

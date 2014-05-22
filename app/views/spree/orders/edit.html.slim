@@ -85,12 +85,17 @@
             ' Payment 
             br
             ' methods
-          .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
+          .desc = image_tag 'icons-cards.png', width: 200, height: 32, alt: 'Payment Methods'
         - unless (sale_active? or @order.has_personalized_items?)
           .promocode.fright.promo-block
             = form_for @order, remote: true, html: {class: 'form-global'} do |f|
               = f.submit 'Redeem', style: 'float: right;', class: 'btn empty border'
               = f.text_field :coupon_code, style: "width: 110px;", placeholder: 'promocode'
+        - else
+          .promocode.fright.promo-block
+            .title style='width: 210px;' 
+              h4 Promocode
+              ' Sorry we don't offer discounts on customized dresses or sale items.
         .clearfix      
         .security
           .title 

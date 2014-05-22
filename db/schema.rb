@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140429140316) do
+ActiveRecord::Schema.define(:version => 20140507161951) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -339,6 +339,13 @@ ActiveRecord::Schema.define(:version => 20140429140316) do
     t.integer  "image_file_size"
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
+  end
+
+  create_table "email_notifications", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.string   "code"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "incompatibilities", :force => true do |t|

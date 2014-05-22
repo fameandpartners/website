@@ -11,52 +11,52 @@ ruby:
     .input.clearfix id="#{address_id}firstname"
       .grid-3
         = form.label :firstname, with_required_mark(t(:first_name))
-      .grid-9
+      .grid-6
         = form.text_field :firstname, :class => 'required without-shadow', :value => first_name, :required => 'required'
     .input.clearfix id="#{address_id}lastname"
       .grid-3
         = form.label :lastname, with_required_mark(t(:last_name))
-      .grid-9
+      .grid-6
         = form.text_field :lastname, :class => 'required without-shadow', :value => last_name, :required => 'required'
 
     .input.clearfix id="#{address_id}email"
       .grid-3
         = form.label :email, with_required_mark(t(:email))
-      .grid-9
+      .grid-6
         = form.text_field :email, :class => 'required without-shadow', value: form.object.email, :required => 'required'
 
     - if Spree::Config[:company]
       .input.clearfix id="#{address_id}company" data-require=( address_type == 'billing' ? 'user-credentials' : '' )
         .grid-3
           = form.label :company, t(:company)
-        .grid-9
+        .grid-6
           = form.text_field :company, :class => 'without-shadow'
     .input.clearfix id="#{address_id}address1" data-require=( address_type == 'billing' ? 'user-credentials' : '' )
       .grid-3 
         = form.label :address1, with_required_mark(t(:street_address))
-      .grid-9
+      .grid-6
         = form.text_field :address1, :class => 'required without-shadow', :required => 'required'
     .input.clearfix id="#{address_id}address2" data-require=( address_type == 'billing' ? 'user-credentials' : '' )
       .grid-3
         = form.label :address2, t(:street_address_2)
-      .grid-9
+      .grid-6
         = form.text_field :address2, :class => 'without-shadow'
     .input.clearfix id="#{address_id}city" data-require=( address_type == 'billing' ? 'user-credentials' : '' )
       .grid-3
         = form.label :city, with_required_mark(t(:city))
-      .grid-9  
+      .grid-6  
         = form.text_field :city, :class => 'required without-shadow', :required => 'required'
     .input.clearfix id="#{address_id}country" data-require=( address_type == 'billing' ? 'user-credentials' : '' )
       .grid-3 
         = form.label :country_id, with_required_mark(t(:country))
-      .grid-9 
+      .grid-6 
         span.without-shadow id="#{address_id}country-selection"
           = form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required'}
 
     .input.clearfix id="#{address_id}zipcode" data-require=( address_type == 'billing' ? 'user-credentials' : '' )
       .grid-3
         = form.label :zipcode, with_required_mark(t(:zip))
-      .grid-9
+      .grid-6
         = form.text_field :zipcode, :class => 'required without-shadow', :required => 'required'
 
     - if Spree::Config[:address_requires_state]
@@ -78,26 +78,26 @@ ruby:
         javascript:
           $('##{address_id}state').append("<div class='grid-9 without-shadow'>#{{state_elements}}</div>");
         noscript
-          .grid-9 = form.text_field :state_name, :class => 'required without-shadow'
+          .grid-6 = form.text_field :state_name, :class => 'required without-shadow'
 
     .input.clearfix id="#{address_id}phone" data-require=( address_type == 'billing' ? 'user-credentials' : '' )
       .grid-3 
         = form.label :phone, with_required_mark(t(:phone))
-      .grid-9 
+      .grid-6 
         = form.phone_field :phone, :class => 'required without-shadow', :required => 'required'
 
     - if Spree::Config[:alternative_shipping_phone]
       .input.clearfix id="#{address_id}altphone" data-require=( address_type == 'billing' ? 'user-credentials' : '' )
         .grid-3
           = form.label :alternative_phone, t(:alternative_phone)
-        .grid-9 
+        .grid-6 
           = form.phone_field :alternative_phone
 
     - if address_type == 'billing'
       .input.clearfix data-require='user-credentials'
         div id="required_to"
           .grid-3  = form.parent_builder.label :required_to, 'When you need yout dress?'
-          .grid-9  = form.parent_builder.text_field :required_to, value: @order.required_to, :class => 'without-shadow'
+          .grid-6  = form.parent_builder.text_field :required_to, value: @order.required_to, :class => 'without-shadow'
 
 - if address_type == 'billing'
   .checkout-title
