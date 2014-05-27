@@ -1,6 +1,11 @@
 - if marketing_landing_page?
   javascript:
-    window.marketing_landing_page = true
+    window.marketing_landing_page = true;
+
+    $(document).ready(function(){
+      window.popups.EmailCaptureModalPopup.show();
+    });
+    
 
 - unless marketing_landing_page?
   - if (image_url = marketing_banner_image_url).present?
