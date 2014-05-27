@@ -1,9 +1,20 @@
 - if marketing_landing_page?
   javascript:
+    contentparam = '#{params[:dmb]}';
+
+    if (contentparam == 'birthday.gif' || contentparam == 'prom.jpg') {
+      if (contentparam == 'birthday.gif'){
+        content = 'bday';
+      } else if (contentparam == 'prom.jpg'){
+        content = 'prom';
+      };
+    };
+
     window.marketing_landing_page = true;
 
     $(document).ready(function(){
-      window.popups.EmailCaptureModalPopup.show();
+      popup = new window.popups.EmailCaptureModalPopup();
+      popup.show(content);
     });
     
 

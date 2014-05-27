@@ -354,9 +354,9 @@
 	}
 }
 
-.birthday-popup, .prom-popup {
+.bday-popup, .prom-popup {
 	.modal-container {
-		border: 0;
+		border: 5px solid #000;
 		padding: 28px;
 		height: 204px;
 		width: 700px;
@@ -364,6 +364,7 @@
 	}
 	.title {
 		font: 400 48px/0.9 $fontThree;
+		margin-top: 20px;
 		margin-bottom: 10px;
 	}
 	.form-container {
@@ -376,12 +377,16 @@
 		}
 	}
 }
-.birthday-popup .modal-container {
+.bday-popup .modal-container {
 	background: url('_popups/birthday.jpg') no-repeat;
 }
 .prom-popup .modal-container {
 	background: url('_popups/prom.jpg') no-repeat;
-	padding-left: 290px;
+	padding-left: 200px;
+}
+
+.prom-popup .title{
+	font-size: 38px;
 }
 
 // CVV Code Help Popover

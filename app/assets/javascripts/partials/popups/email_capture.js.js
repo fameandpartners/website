@@ -51,7 +51,7 @@ window.popups.EmailCaptureModalPopup = EmailCaptureModalPopup = (function() {
   };
 
   EmailCaptureModalPopup.prototype.showModalWindow = function(formHtml) {
-    this.container.addClass('birthday-popup').show();
+    this.container.addClass(content + '-popup').show();
     this.container.find('.modal-container .item').addClass('modal-form').html(formHtml);
     return this.container.find('.modal-container').css({
       width: '700px'

@@ -162,6 +162,7 @@ FameAndPartners::Application.routes.draw do
 
     namespace "campaigns" do
       resource :newsletter, only: [:new, :create], controller: :newsletter
+      resource :email_capture, only: [:new, :create], controller: :email_capture
     end
 
     #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
@@ -172,7 +173,7 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
-    # testing email
+    # testing marketing_email
     get '/email/comp' => 'competition_mailer#marketing_email'
 
     # return form

@@ -41,6 +41,6 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
 
   # callbacks
   showModalWindow: (formHtml) ->
-    @container.addClass('birthday-popup').show()
+    @container.addClass(content+'-popup').show()
     @container.find('.modal-container .item').addClass('modal-form').html(formHtml)
     @container.find('.modal-container').css({width: '700px'}).center()
