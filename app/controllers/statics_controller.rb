@@ -60,5 +60,10 @@ class StaticsController < ApplicationController
     @title = "Lily Patchett Design Collaboration - " + default_seo_title
     @description = "Lily Patchett Design Collaboration. " + default_meta_description
   end
+
+  def maryxfame
+    @title = "Mary Manaila Design Collaboration - " + default_seo_title
+    @description = "Mary Manaila Design Collaboration. " + default_meta_description
+  end
   
 end

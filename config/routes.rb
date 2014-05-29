@@ -29,6 +29,7 @@ FameAndPartners::Application.routes.draw do
     get '/nylonxfame'   => 'statics#nylonxfame'
     get '/renxfame'   => 'statics#renxfame'
     get '/lilyxfame'   => 'statics#lilyxfame'
+    get '/maryxfame'   => 'statics#maryxfame'
 
     # to correctly redirect, we should know product taxon or extract collection from param
     get "/products"             => 'redirects#products_index'
