@@ -1,12 +1,12 @@
 .title 
   - if params[:content] == 'bday'
-    ' A birthday gift for you!!
+    ' Get $40 to spend on your birthday!
   - elsif params[:content] == 'prom'
     ' GET $$$ TOWARDS YOUR PROM DRESS!
 .form-container
   .form
     = form_for (@participation || Participation.new), as: :participation, url: campaigns_email_capture_path, remote: true do |f|
-      hidden value="#{params['content']}" name="content"
+      = f.hidden_field :content, value: params[:content]
       .string
         = f.email_field :email, class: 'input', placeholder: 'Enter your email address'
         input.btn.submitbox type="submit" value="Submit"

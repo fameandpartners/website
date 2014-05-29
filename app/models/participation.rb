@@ -1,7 +1,7 @@
 class Participation
   include ActiveModel::Validations
 
-  attr_accessor :email
+  attr_accessor :email, :content
 
   validates :email,
             format: {

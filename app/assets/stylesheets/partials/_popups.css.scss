@@ -323,6 +323,7 @@
 		margin-bottom: 20px;
 	}
 	.share{
+		width: 100px;
 		display: inline-block;
 	}
 	.campaign-desc {
@@ -367,6 +368,20 @@
 		margin-top: 20px;
 		margin-bottom: 10px;
 	}
+	.thanks{
+		.title{
+			margin-top: 5px;
+		}
+		a.btn{
+			float: left;
+		}
+		.aligncenter{
+			margin-top: 10px;
+		}
+		.promo-code{
+			font: 400 28px/0.9 $fontThree;
+		}
+	}
 	.form-container {
 		width: 345px;
 		label { display: block;}
@@ -375,6 +390,14 @@
 			vertical-align: top;
 			margin-right: 10px;
 		}
+	}
+	.share-this{
+		margin-left: 180px;
+		padding-top: 8px;
+	}
+	.share{
+		width: 100px;
+		display: inline-block;
 	}
 }
 .bday-popup .modal-container {

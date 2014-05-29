@@ -14,7 +14,7 @@ Spree::User.class_eval do
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
 
-  attr_accessible :phone
+  attr_accessible :phone, :dob
 
   validates :phone,
             presence: {
@@ -132,6 +132,14 @@ Spree::User.class_eval do
         'Campaign Style Call'
       when 'customise_dress' then
         'Customise dress'
+      when 'customise_dress' then
+        'Customise dress'
+      when 'customise_dress' then
+        'Customise dress'
+      when 'email_capture_prom' then
+        'email_capture_prom'
+      when 'email_capture_bday' then
+        'email_capture_bday'
       else
         nil
     end

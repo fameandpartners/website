@@ -16,6 +16,7 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
     @popupLoadRequest(content)
       .done(@showModalWindow)
       .fail(@hide)
+    
 
   hide: () ->
     @container.hide()
@@ -41,6 +42,6 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
 
   # callbacks
   showModalWindow: (formHtml) ->
-    @container.addClass(content+'-popup').show()
+    @container.addClass(content+'-popup').fadeIn()
     @container.find('.modal-container .item').addClass('modal-form').html(formHtml)
     @container.find('.modal-container').css({width: '700px'}).center()
