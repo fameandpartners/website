@@ -25,7 +25,7 @@
     
 
 - unless marketing_landing_page?
-  - if (image_url = marketing_banner_image_url).present?
+  - if (image_url = marketing_banner_image_url).present? && !sale_active?
     .row
       .grid-12
         = image_tag(image_url)

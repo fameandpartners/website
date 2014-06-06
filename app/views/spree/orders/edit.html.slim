@@ -3,11 +3,12 @@
     .inner
       h1
         span.title shopping Bag
-        .shipping-icon
-          .icon
-            span.icon-dollar
-            span.icon-erase
-          ' Free shipping
+        - unless sale_active?
+          .shipping-icon
+            .icon
+              span.icon-dollar
+              span.icon-erase
+            ' Free shipping
   
   - if @order.line_items.empty?
     .empty-cart(data-hook="empty_cart")

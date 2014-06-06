@@ -65,15 +65,16 @@
   .nav-site
     nav
       ul 
-        li
-          = link_to why_us_path(anchor: 'shipping') do
-            span.icon-holder
-              span.icon-dollar
-              span.icon-erase
-            span
-              ' free
-              br
-              ' shipping
+        - unless sale_active?
+          li
+            = link_to why_us_path(anchor: 'shipping') do
+              span.icon-holder
+                span.icon-dollar
+                span.icon-erase
+              span
+                ' free
+                br
+                ' shipping
         li
           = link_to why_us_path(anchor: 'returns') do
             span.icon-holder

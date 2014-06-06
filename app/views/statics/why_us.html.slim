@@ -30,12 +30,13 @@
       .arrows-line-horizontal
       .arrows-line-vertical
 
-    .grid-6.pink
-      a name="shipping"
-      .icon.icon-shipping
-      h2 Free Shipping
-      p Standard Shipping is FREE within Australia and United States for items over $49. View shipping delivery times #{link_to 'here', terms_path}.
-      .arrows-line-horizontal
+    - unless sale_active?
+      .grid-6.pink
+        a name="shipping"
+        .icon.icon-shipping
+        h2 Free Shipping
+        p Standard Shipping is FREE within Australia and United States for items over $49. View shipping delivery times #{link_to 'here', terms_path}.
+        .arrows-line-horizontal
 
     .grid-6.pink
       a name="returns"
