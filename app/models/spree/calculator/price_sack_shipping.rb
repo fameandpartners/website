@@ -1,7 +1,9 @@
 require_dependency 'spree/calculator'
+require_dependency 'spree/sale'
 
 module Spree
   class Calculator::PriceSackShipping < Calculator
+    
     preference :minimal_amount, :decimal, :default => 0
     preference :normal_amount, :decimal, :default => 0
     preference :discount_amount, :decimal, :default => 0
@@ -11,6 +13,7 @@ module Spree
                     :preferred_normal_amount,
                     :preferred_discount_amount,
                     :preferred_currency
+
 
     def self.description
       'Price sack on total order amount'
@@ -24,7 +27,7 @@ module Spree
         base = get_object_base(object)
       end
 
-      if base < self.preferred_minimal_amount
+      if base < self.preferred_minimal_amount || current_sale.active?
         self.preferred_normal_amount
       else
         self.preferred_discount_amount
@@ -49,6 +52,11 @@ module Spree
       end
     rescue
       order.amount # items total
+    end
+    
+    
+    def current_sale
+      @current_sale ||= Spree::Sale.first_or_initialize
     end
   end
 end

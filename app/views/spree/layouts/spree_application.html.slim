@@ -38,7 +38,10 @@ doctype html
     #wrap
       = render('layouts/header')
       #content
-        = marketing_banner
+        - unless sale_active?
+          = marketing_banner
+        - else
+          = render 'shared/sale_banner'
         = yield
       = render 'shared/payment_request_popup'
       = render 'shared/dolly_campaign_popup'
