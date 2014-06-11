@@ -14,4 +14,29 @@ module CheckoutHelper
       country
     end.sort { |a, b| a.name <=> b.name }
   end 
+
+  def payment_failed_messages(error)
+
+    case error.downcase.gsub(/[^a-z ]/, "")
+    when /the card was declined/
+      save_purchase = true
+    when /there are not enough funds available to process the requested amount/
+      save_purchase = true
+    when /the transaction was flagged as possibly fraudulent and subsequently declined/
+      save_purchase = true
+    when /the card has expired/
+      save_purchase = true
+    when /an error occurred while processing the card/
+      save_purchase = true
+    else
+      save_purchase = false
+    end
+
+    if save_purchase == true
+      return true
+    else
+      return false
+    end
+
+  end
 end

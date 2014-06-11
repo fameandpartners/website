@@ -348,8 +348,37 @@ body.checkout {
   		margin: 0;
   		color: #999;
   		text-transform: lowercase;
-  	}
+  	}	
   }
+
+  .payment-failed{
+		margin: 20px auto 30px auto;
+		background: url('checkout/bg-print.png');
+		padding: 4px;
+		width: 620px;
+		.content{
+			background-color: #000;
+			padding: 20px;
+			text-align: center;
+			color: #fff;
+			.title{
+				color: #ff03ff;
+				font: normal 100 28px/28px $fontThree;
+				text-transform: uppercase;
+				margin-bottom: 5px;
+			}
+			.sub{
+				font: normal 100 12px/12px $fontOne;
+				margin-bottom: 10px;
+			}
+			.error{
+				font: italic 100 14px/14px $fontFive;
+				color: #ccc;
+				text-transform: none;
+				margin-bottom: 15px;
+			}
+		}
+	}
 
 
 	// checkout summary
