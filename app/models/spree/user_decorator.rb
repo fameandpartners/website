@@ -136,10 +136,6 @@ Spree::User.class_eval do
         'Customise dress'
       when 'customise_dress' then
         'Customise dress'
-      when 'email_capture_prom' then
-        'Email Capture prom'
-      when 'email_capture_bday' then
-        'Email Capture bday'
       else
         nil
     end

@@ -61,4 +61,12 @@ class CampaignsController < ApplicationController
       CampaignMonitor.delay.synchronize(@participation.email, nil, Signupreason: 'Newsletter Modal')
     end
   end
+
+  def email_capture
+    @participation = Participation.new(params[:participation])
+
+    if @participation.valid?
+      CampaignMonitor.delay.synchronize(@participation.email, nil, Signupreason: "email_capture_#{@participation.content}")
+    end
+  end
 end
