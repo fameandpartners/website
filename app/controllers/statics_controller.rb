@@ -65,5 +65,10 @@ class StaticsController < ApplicationController
     @title = "Mary Manaila Design Collaboration - " + default_seo_title
     @description = "Mary Manaila Design Collaboration. " + default_meta_description
   end
+
+  def fashionista
+    @title = "Fashionista Program - " + default_seo_title
+    @description = "Fashionista Program. " + default_meta_description
+  end
   
 end

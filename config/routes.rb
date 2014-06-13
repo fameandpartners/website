@@ -152,7 +152,7 @@ FameAndPartners::Application.routes.draw do
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
-    get '/trendsetter-program'   => 'statics#trendsetter_program', :as => :trendsetter_program
+    get '/fashionista'   => 'statics#fashionista', :as => :fashionista
     get '/compterms' => 'statics#comp_terms'
 
     get '/campaigns/stylecall' => 'campaigns#show'

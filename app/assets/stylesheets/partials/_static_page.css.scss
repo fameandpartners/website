@@ -2,6 +2,9 @@
 	margin-top: 45px;
 	text-transform: none;
 	font: 400 15px/1.1 $fontFour;
+	.logo{
+			text-align: center;
+	}
 	h1 {
 		font: 400 47px/1.1 $fontThree;
 	}
@@ -34,6 +37,10 @@
 		td, th { padding: 5px 3px;}
 		td { border-top: solid 1px #eee;}
 	}
+}
+
+.fashionista{
+	
 }
 
 .blogger-page, .celebrity-page {
