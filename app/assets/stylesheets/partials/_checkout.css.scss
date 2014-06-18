@@ -377,6 +377,9 @@ body.checkout {
 				text-transform: none;
 				margin-bottom: 15px;
 			}
+			.invite{
+				margin-top: 10px;
+			}
 		}
 	}
 
@@ -422,6 +425,7 @@ body.checkout {
 	// side bar summary
 	.nav-site {
 		background: 0;
+		z-index: 0;
 		nav {
 			float: none;
 			padding: 0;
