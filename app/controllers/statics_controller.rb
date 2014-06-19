@@ -6,6 +6,10 @@ class StaticsController < ApplicationController
   # enable showing of display banner
   before_filter :display_marketing_banner
 
+  def fashionistacomp
+    @title = "Fashionista 2014 Competition"
+  end
+
   def nylonxfame
     render layout: 'statics_fullscreen'
     @title = "About Fame & Partners"
