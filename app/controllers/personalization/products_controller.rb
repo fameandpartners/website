@@ -34,7 +34,7 @@ module Personalization
     def style
       @product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
 
-      set_product_show_page_title(@product, "Custom Formal Dress ")
+      set_product_show_page_title(@product, "Style your formal dress ")
       display_marketing_banner
 
       @product_properties = @product.product_properties.includes(:property)
