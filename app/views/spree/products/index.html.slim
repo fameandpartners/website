@@ -2,11 +2,13 @@
   javascript:
     contentparam = '#{params[:dmb]}';
 
-    if (contentparam == 'birthday.gif' || contentparam == 'prom.gif') {
+    if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.png') {
       if (contentparam == 'birthday.gif'){
         content = 'bday';
       } else if (contentparam == 'prom.gif'){
         content = 'prom';
+      } else if (contentparam == 'welcomeback.png'){
+        content = 'welcomeback';
       };
       
       $(document).ready(function(){

@@ -36,11 +36,15 @@ class Spree::Sale < ActiveRecord::Base
     end
   end
 
-  def apply(price)
+  def apply(price, surryhills)
     if fixed?
       discount_size < price ? price - discount_size : BigDecimal.new(0)
     elsif percentage?
-      price * (BigDecimal.new(100) - discount_size) / 100
+      unless surryhills
+        price * (BigDecimal.new(100) - discount_size) / 100
+      else
+        price * (BigDecimal.new(100) - 50) / 100  
+      end
     end
   end
 end

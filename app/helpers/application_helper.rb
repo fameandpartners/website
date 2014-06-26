@@ -263,7 +263,7 @@ module ApplicationHelper
     elsif product.in_sale?
       [
         content_tag(:span, price.display_price_without_discount, class: 'price-old'),
-        price.display_price_with_discount.to_s
+        price.display_price_with_discount(is_surryhills?(product)).to_s
       ].join("\n").html_safe
     else
       price.display_price.to_s.html_safe
@@ -326,5 +326,13 @@ module ApplicationHelper
 
   def current_sale
     @current_sale ||= Spree::Sale.first_or_initialize
+  end
+
+  def is_surryhills?(product)
+    if product.property('factory_name').present? && product.property('factory_name').downcase == "surryhills"
+      return true 
+    else
+      return false
+    end
   end
 end

@@ -3,16 +3,16 @@ Spree::Price.class_eval do
     self[:amount]
   end
 
-  def amount_with_discount
+  def amount_with_discount(surryhills = false)
     if current_sale.active?
-      current_sale.apply(amount_without_discount)
+      current_sale.apply(amount_without_discount, surryhills)
     else
       amount_without_discount
     end
   end
 
-  def display_amount_with_discount
-    money_with_discount
+  def display_amount_with_discount(surryhills = false)
+    money_with_discount(surryhills)
   end
 
   alias :display_price_with_discount :display_amount_with_discount
@@ -20,16 +20,16 @@ Spree::Price.class_eval do
   alias :display_amount_without_discount :display_amount
   alias :display_price_without_discount :display_amount_without_discount
 
-  def money_with_discount
-    Spree::Money.new(amount_with_discount || 0, { :currency => currency })
+  def money_with_discount(surryhills = false)
+    Spree::Money.new(amount_with_discount(surryhills) || 0, { :currency => currency })
   end
 
   def with_discount?
     current_sale.active? && current_sale != 0
   end
 
-  def final_amount
-    with_discount? ? amount_with_discount : amount_without_discount
+  def final_amount(surryhills = false)
+    with_discount? ? amount_with_discount(surryhills) : amount_without_discount
   end
 
   def to_spree_price
@@ -56,4 +56,6 @@ Spree::Price.class_eval do
   def current_sale
     @current_sale ||= Spree::Sale.first_or_initialize
   end
+
+
 end

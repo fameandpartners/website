@@ -3,7 +3,7 @@ Spree::Variant.class_eval do
 
   has_many :zone_prices, :dependent => :destroy
 
-  attr_accessible :zone_prices_hash
+  attr_accessible :zone_prices_hash, :product_factory_name
   attr_accessor :zone_prices_hash
 
   #after_save :update_zone_prices
@@ -152,6 +152,12 @@ Spree::Variant.class_eval do
 
   def get_price_in(currency)
     prices.select{ |price| price.currency == currency }.first
+  end
+
+  def product_factory_name
+    if product.property('factory_name').present?
+      return product.property('factory_name').downcase
+    end
   end
 
   private

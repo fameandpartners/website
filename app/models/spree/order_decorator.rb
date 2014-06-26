@@ -131,12 +131,12 @@ Spree::Order.class_eval do
       current_item.variant = variant
       if currency
         current_item.currency    = currency
-        current_item.price       = price.final_amount
+        current_item.price       = price.final_amount(is_surryhills?(variant))
         if variant.in_sale?
           current_item.old_price = price.amount_without_discount
         end
       else
-        current_item.price       = price.final_amount
+        current_item.price       = price.final_amount(is_surryhills?(variant))
         if variant.in_sale?
           current_item.old_price = price.price_without_discount
         end
@@ -240,6 +240,14 @@ Spree::Order.class_eval do
 
   def get_site_version
     @site_version ||= SiteVersion.by_currency_or_default(self.currency)
+  end
+
+  def is_surryhills?(item)
+    if item.product_factory_name == "surryhills"
+      return true 
+    else
+      return false
+    end
   end
 
   def use_prices_from(site_version)
