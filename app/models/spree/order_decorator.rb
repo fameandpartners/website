@@ -201,10 +201,10 @@ Spree::Order.class_eval do
 
   def as_csv
     result = as_json({
-      only: [:number, :created_at],
+      only: [:number, :created_at, :total, :adjustment_total, :currency],
       methods: [:customer_email, :customer_full_name, :customer_shipping_address]
     })
-    line_item_columns = [:style_name, :sku, :colour, :size, :customisations]
+    line_item_columns = [:style_name, :sku, :colour, :size, :customisations, ]
     line_item_columns.each do |line_item_column|
       result[line_item_column] = []
     end
