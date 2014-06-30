@@ -355,7 +355,7 @@
 	}
 }
 
-.bday-popup, .prom-popup {
+.bday-popup, .prom-popup, .welcomeback-popup {
 	.modal-container {
 		border: 5px solid #000;
 		padding: 28px;
@@ -403,7 +403,7 @@
 .bday-popup .modal-container {
 	background: url('_popups/birthday.jpg') no-repeat;
 }
-.prom-popup .modal-container {
+.prom-popup .modal-container, .welcomeback-popup .modal-container {
 	background: url('_popups/prom.jpg') no-repeat;
 	padding-left: 200px;
 }

@@ -3,6 +3,8 @@
     ' Get $40 to spend on your birthday!
   - elsif params[:content] == 'prom'
     ' GET $$$ TOWARDS YOUR PROM DRESS!
+  - elsif params[:content] == 'welcomeback'
+    ' WELCOME BACK, GET $25 OFF!
 .form-container
   .form
     = form_for (@participation || Participation.new), as: :participation, url: campaigns_email_capture_path, remote: true do |f|
