@@ -39,7 +39,26 @@
 	}
 }
 
-.fashionista{
+.fashionistacomp{
+	h1{
+		text-transform: uppercase;
+		font-size: 28px;
+		line-height: 28px;
+	}
+
+	.row .viewmore{
+		margin-top: 10px;
+		text-align: center;
+	}
+
+	.btn{
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	h6{
+		font: 400 16px/1.1 $fontThree;
+	}
 	
 }
 

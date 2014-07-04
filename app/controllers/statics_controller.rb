@@ -8,6 +8,10 @@ class StaticsController < ApplicationController
 
   def fashionistacomp
     @title = "Fashionista 2014 Competition"
+    @searcher = Products::ProductsFilter.new(:edits => "fashionista")
+    @searcher.current_user = try_spree_current_user
+    @searcher.current_currency = current_currency
+    @products = @searcher.products.first(8)
   end
 
   def nylonxfame
