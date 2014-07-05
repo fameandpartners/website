@@ -34,92 +34,64 @@ ruby:
     window.Quiz.welcomeMessage = "THANKS! NOW COMPLETE YOUR STYLE PROFILE";
     window.Quiz.redirectUrl = "#{ redirectUrl }";
 
+.promo-ticker
+  p SHOP NOW STYLED FOR FREE! <span>PROMO CODE AC25 /</span> FASHION <span>STATEMENT</span> DRESSES @FAME & PARTNERS PROM LOOK
+
 .grid-container
-  .row
-    .grid-8
-      .picture-large 
-        = link_to collection_path(:order => "newest") do
-          = image_tag 'homepage/new/hero.gif'
-    .grid-4
-      .picture-small 
-        = link_to maryxfame_path(cf: 'banner'), title: 'Mary Manaila Collaboration' do
-          = image_tag 'homepage/new/mary_manaila.jpg', alt: 'Mary Manaila Collaboration'
-      .picture-small 
-        = link_to "/nylonxfame" do
-          = image_tag 'homepage/nylonxfame.jpg', alt: 'NylonxFame dresses'    
+  .promo
+    = image_tag 'http://lorempixel.com/1140/600'   
 
-= render "shared/featured_in", :locals => {:small => ""}
 
-.how-it-works
-  .arrows-line-horizontal
-  h2.section-title How it WORKS
+.promo-tiles
   .grid-container
     .row
       .grid-4
         .step
-          = image_tag '_front/step-1.jpg'
+          = image_tag 'http://lorempixel.com/340/500'
           h3.step-title.white
             ' Discover
             br
             ' your dress
-          .line-top  
-          .line-bottom  
       .grid-4
         .step
-          = image_tag '_front/step-2.jpg'
+          = image_tag 'http://lorempixel.com/340/500'
           h3.step-title
             ' Customise
             br
-            ' if you like!
-          .line-top  
-          .line-bottom    
+            ' if you like! 
       .grid-4
-        .step
-          = image_tag '_front/step-3.jpg'
+        .step.last
+          = image_tag 'http://lorempixel.com/340/500'
           h3.step-title.pink-shadow
             ' Style your unique
             br
             ' look for free
-          .line-top  
-          .line-bottom    
-.create-your-look
-  .section-title
-    = link_to "#", class: 'show-style-quiz' do
-      em.mark Get started now!
-  .arrows-line-horizontal
+
+= render "shared/featured_in", :locals => {:small => ""}
+
+.grid-container
+  .fame-chain
+    = image_tag 'http://lorempixel.com/1140/200'  
+
+.formal-dresses
   .grid-container
     .row
-      .grid-4
-        .frame
-          = image_tag '_front/frame.jpg'
-          .text
-            .title 
-              em FEATURED
-              br
-              ' COLLABORATOR
-            .rss  
-      .grid-4.face-holder
-        .face
-          = image_tag 'homepage/new/danistahl.png'
-      .grid-4
-        .text.blogger-name
-          .title 
-            em Dani
-            ' Stahl
-          p 
-            ' Editor at large of Nylon Magazine 
-            br
-            ' Designer, Stylist & Consultant. 
-        = link_to 'Dani Stahl', featured_blogger_path, class: 'btn small'
-.pictures-gallery
-  .section
-    = image_tag '_sample/catalog-1.jpg'
-  .section
-    = link_to 'http://www.pinterest.com/fameandpartners/', target: '_blank' do
-      = image_tag '_sample/catalog-2.jpg'
-  .section
-    = link_to 'http://instagram.com/fameandpartners', target: '_blank' do
-      = image_tag '_sample/catalog-3.jpg'
-  .section
-    = link_to 'http://www.facebook.com/fameandpartners', target: '_blank' do
-      = image_tag '_sample/catalog-4.jpg'
+      = image_tag 'http://lorempixel.com/100/50'
+      h2 <span>FORMAL</span> DRESSES
+      = image_tag 'http://lorempixel.com/100/50'
+      p FOR EVERY EVENT
+      .formal-types
+        ul
+          li BALLS
+          li
+            ' /
+          li BIRTHDAYS
+          li
+            ' /
+          li PROM
+          li
+            ' /
+          li FORMALS
+          li
+            ' /
+          li GRADUATION 
