@@ -2,11 +2,11 @@ footer.footer-global
   .container
     - unless controller_action_id == "index"
       = render "shared/featured_in", :locals => {:small => "_small"}
-    .email-subscribe
-      label for="email" 
-        ' EMAIL SIGN UP
-      input type="text" name="email" placeholder="FREE STYLING ADVICE"
-      .email-submit
+    .form
+      = form_for (@participation || Participation.new), as: :participation, url: campaigns_newsletter_path, remote: true do |f|
+        = f.label 'EMAIL SIGN UP'
+        = f.email_field :email, class: 'inputbox', placeholder: 'FREE STYLING ADVICE'
+        input.btn.submitbox type="submit" value="join"
         i.fa.fa-caret-right
     .foot
     nav.nav-footer
