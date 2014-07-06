@@ -17,7 +17,7 @@
 		padding-top: 20px;
 		text-align: center;
 		font-size: 18px;
-		margin-right: 120px;
+		// margin-right: 120px;
 		.new_participation {
 			width: 100%;
 		}
@@ -49,8 +49,7 @@
 				width: 15px;
 				vertical-align: middle;
 				line-height: 34px;
-				margin-left: -30px;
-				margin-top: -1px;
+				margin-left: -105px;
 			}
 		}
 	}
@@ -74,8 +73,16 @@
 		display: inline-block;
 		min-width: 150px;	
 		text-align: left;
+		vertical-align: top;
 	}
-	ul { margin-top: 30px;}
+	.footer-label {
+		font-weight: bold;
+		font-size: 12px;
+		span {
+			font-size: 10px;
+			font-weight: normal;
+		}
+	}
 	li {margin-bottom: 10px;}
 	a {
 		text-decoration: none;
