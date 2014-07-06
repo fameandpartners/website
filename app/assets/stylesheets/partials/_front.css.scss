@@ -87,29 +87,13 @@
 	margin-top: 30px;
 	img {
 		display: block;
-		min-width: 100%;
-		max-width: 100%;
 	}
-	.step {
-		position: relative;
-		text-align: center;
-		margin-right: 60px;
-		height: 500px;
-		width: 340px;
-	}
-	.last {
-		margin-right: 0;
-	}
-	.step-title {
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 45%;
-		font-size: 47px;
-		font-family: $fontThree;
-		line-height: 1;
-		&.white { color: #fff;}
-		&.pink-shadow { @include longTextShadowRight($pinkColor, 3);}
+	.tile {
+		display: inline-block;
+		margin-right: 64px;
+		&:last-child {
+			margin-right: 0;
+		}
 	}
 }
 

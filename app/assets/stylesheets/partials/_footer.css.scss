@@ -34,15 +34,24 @@
 			padding:5px;
 			text-align: center;
 		}
-		i {
-			color: #000;
-			background: #fff;
-			height: 34px;
-			width: 15px;
-			vertical-align: middle;
-			line-height: 34px;
-			margin-left: -30px;
-			margin-top: -1px;
+		.submit {
+			position: relative;
+
+			.submitbox {
+				width: 100px;
+				padding: 0;
+			}
+			i {
+				position:absolute;
+				color: #000;
+				background: #fff;
+				height: 34px;
+				width: 15px;
+				vertical-align: middle;
+				line-height: 34px;
+				margin-left: -30px;
+				margin-top: -1px;
+			}
 		}
 	}
 	.email-submit {
@@ -57,29 +66,14 @@
 	position: relative;
 	min-height: 70px;
 	padding: 13px 0;
+	width: 1000px;
+	margin: 0 auto;
+	text-align: center;
 	@include clearfix;
-	// .logo {
-	// 	position: absolute;
-	// 	left: 50%;
-	// 	margin-left: -50px;
-	// 	top: 3px;
-	// 	font-size: 90px;
-	// 	display: block;
-	// 	text-decoration: none;
-	// 	&:hover {
-	// 		color: #000;
-	// 		background-color: #fff;
-	// 	}
-	// }
-	// a:hover {
-	// 	color: #fff;
-	// 	background-color: #000;
-	// }
-	.grid-6 {
-		padding: 0 20px;
-		&:first {
-			padding-right: 20px;
-		}
+	.footer-links {
+		display: inline-block;
+		min-width: 150px;	
+		text-align: left;
 	}
 	ul { margin-top: 30px;}
 	li {margin-bottom: 10px;}

@@ -45,27 +45,12 @@ ruby:
 .promo-tiles
   .grid-container
     .row
-      .grid-4
-        .step
-          = image_tag 'http://lorempixel.com/340/500'
-          h3.step-title.white
-            ' Discover
-            br
-            ' your dress
-      .grid-4
-        .step
-          = image_tag 'http://lorempixel.com/340/500'
-          h3.step-title
-            ' Customise
-            br
-            ' if you like! 
-      .grid-4
-        .step.last
-          = image_tag 'http://lorempixel.com/340/500'
-          h3.step-title.pink-shadow
-            ' Style your unique
-            br
-            ' look for free
+      .tile
+          = image_tag 'http://lorempixel.com/335/500'
+      .tile
+          = image_tag 'http://lorempixel.com/335/500'
+      .tile
+          = image_tag 'http://lorempixel.com/335/500'
 
 = render "shared/featured_in", :locals => {:small => ""}
 

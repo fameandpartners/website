@@ -6,40 +6,39 @@ footer.footer-global
       = form_for (@participation || Participation.new), as: :participation, url: campaigns_newsletter_path, remote: true do |f|
         = f.label 'EMAIL SIGN UP'
         = f.email_field :email, class: 'inputbox', placeholder: 'FREE STYLING ADVICE'
-        input.btn.submitbox type="submit" value="join"
-        i.fa.fa-caret-right
-    .foot
+        .submit
+          input.btn.submitbox type="submit" value=""
+          i.fa.fa-caret-right
     nav.nav-footer
-      .grid-container
-        .row
-          .grid-6
-            ul.fleft
-              li = link_to 'ABOUT US', about_us_path
-              li = link_to 'CONTACT', '/contact'
-              li = link_to 'TERMS', terms_path
-            ul.fright
-              li = link_to 'MY ACCOUNT', account_path
-              li = link_to 'FAQs', faqs_path
-              li = link_to 'PRESS & MORE', '/'  
-          .grid-6
-            ul.fleft
-              li = link_to 'MY ACCOUNT', account_path
-              li = link_to 'WISHLIST', wishlist_path
-              li = link_to 'ORDERS', orders_path
-            .fright
-              p
-                'FIND US ON
-              ul.social-links
-                li
-                  i.fa.fa-instagram
-                li 
-                  i.fa.fa-facebook
-                li 
-                  i.fa.fa-pinterest
-                li 
-                  i.fa.fa-twitter
-                li 
-                  i.fa.fa-tumblr
+      .footer-links
+        ul
+          li = link_to 'ABOUT US', about_us_path
+          li = link_to 'CONTACT', '/contact'
+          li = link_to 'TERMS', terms_path
+      .footer-links
+        ul
+          li = link_to 'MY ACCOUNT', account_path
+          li = link_to 'FAQs', faqs_path
+          li = link_to 'PRESS & MORE', '/'  
+      .footer-links
+        ul
+          li = link_to 'MY ACCOUNT', account_path
+          li = link_to 'WISHLIST', wishlist_path
+          li = link_to 'ORDERS', orders_path
+      .footer-links
+        p
+          'FIND US ON
+        ul.social-links
+          li
+            i.fa.fa-instagram
+          li 
+            i.fa.fa-facebook
+          li 
+            i.fa.fa-pinterest
+          li 
+            i.fa.fa-twitter
+          li 
+            i.fa.fa-tumblr
     .phone
           'ORDER ON THE PHONE CUSTOMER SERVICE 866 527 7797
     .copy 

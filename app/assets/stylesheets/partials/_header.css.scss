@@ -169,7 +169,7 @@
 		}
 		.fright {
 				width: ($navWidth - ($navWhyUs + 10));
-				max-height: 27px;
+				height: 27px;
 		}
 		.fleft {
 			width: $navWhyUs;
@@ -226,8 +226,12 @@
 			padding-left: 15px;
 		}
 		.site-version-switch {
+			cursor: pointer;
 			li {
 				display:block;
+			}
+			ul {
+				display: none;
 			}
 		}
 		.login {
