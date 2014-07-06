@@ -107,7 +107,7 @@
                   li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses'
                   li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses'
                   li = link_to 'Collaborations', collection_path(:edits => "collaborations"), title: 'Collaborations'
-            li
+            li.discover
               = link_to collection_path, class: 'btn' do
                 span Discover
                 span.icon-dropdown-down
@@ -119,17 +119,18 @@
                   li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses'
                   li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses'
                   li = link_to 'Collaborations', collection_path(:edits => "collaborations"), title: 'Collaborations' 
-            li = link_to 'Blog', blog_path, class: 'btn'
-            li = link_to wishlist_path, class: ' btn wishlist-link' do
+            li.blog = link_to 'Blog', blog_path, class: 'btn'
+            li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do
                 span.icon-heart
                 span wish list
             li.search
               i.fa.fa-search
               = form_tag search_path, method: :get do
-                = text_field_tag :q, params[:q], placeholder: 'search for dresses'
+                = text_field_tag :q, params[:q]
             li.cart
+              .bag-handle
               .shopping-bag
                 = link_to spree.cart_path, class: 'btn shopping-bag-toggler' do
                   span.counter = current_order.item_count
-                  ' shopping bag
+                  ' TOTE
               = render 'layouts/shopping_bag_content' 
