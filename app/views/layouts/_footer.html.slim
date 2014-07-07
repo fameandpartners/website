@@ -2,6 +2,7 @@ footer.footer-global
   .container
     - unless controller_action_id == "index"
       = render "shared/featured_in", :locals => {:small => "_small"}
+    .active = link_to 'SIGN UP FOR FREE STYLING ADVICE', '#', class: 'btn small empty newsletter'
     .form
       = form_for (@participation || Participation.new), as: :participation, url: campaigns_newsletter_path, remote: true do |f|
         = f.label 'EMAIL SIGN UP'
@@ -19,7 +20,7 @@ footer.footer-global
           li = link_to 'The Fame CHAIN', '/'  
       .footer-links
         p.footer-label
-           = link_to 'CUSTOMER SERVICE "UP"', account_path
+           = link_to 'CUSTOMER SERVICE', account_path
         ul
           li = link_to 'FAQs', faqs_path
           li = link_to 'CONTACT', '/contact'
@@ -188,3 +189,5 @@ footer.footer-global
           td 42.1" / 107cm
           td 33.9" / 86cm
           td 45.3" / 115cm
+
+

@@ -13,6 +13,10 @@
 		text-align: center;
 		line-height: 67px;
 	}
+	.active {
+		text-align: center;
+		font: $fontTwo;
+	}
 	.form {
 		padding-top: 20px;
 		text-align: center;
@@ -40,13 +44,16 @@
 			.submitbox {
 				width: 100px;
 				padding: 0;
+				margin-left: -60px;
 			}
 			i {
 				position:absolute;
 				color: #000;
 				background: #fff;
 				height: 34px;
-				width: 15px;
+				width: 80px;
+				text-align: right;
+				padding-right: 5px;
 				vertical-align: middle;
 				line-height: 34px;
 				margin-left: -105px;

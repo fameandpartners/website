@@ -32,62 +32,62 @@
 // 			padding-right: 3px;
 // 		}
 // 	}
-// 	.site-version-switch {
-// 		display: inline-block;
-// 		position: relative;
-// 		min-height: 20px;
-// 		margin-left: 10px;
-// 		ul {
-// 			position: absolute;
-// 			top: 100%;
-// 			left: 0;
-// 			min-width: 100%;
-// 			background-color: #000;
-// 			display: none;
-// 			a {
-// 				padding: 0 5px;
-// 				display: block;
-// 				&:hover { background-color: #222;}
-// 			}
-// 		}
-// 	}
+	// .site-version-switch {
+	// 	display: inline-block;
+	// 	position: relative;
+	// 	min-height: 20px;
+	// 	margin-left: 10px;
+	// 	ul {
+	// 		position: absolute;
+	// 		top: 100%;
+	// 		left: 0;
+	// 		min-width: 100%;
+	// 		background-color: #000;
+	// 		display: none;
+	// 		a {
+	// 			padding: 0 5px;
+	// 			display: block;
+	// 			&:hover { background-color: #222;}
+	// 		}
+	// 	}
+	// }
 // 	.user-nav {
 // 		float: right;
 // 		z-index: 29;
 // 		position: relative;
-// 		.dropdown-trigger {
-// 			position: relative;
-// 			.dropdown-menu {
-// 				position: absolute;
-// 				top: 100%;
-// 				right: 0;
-// 				background-color: #000;
-// 				display: none;
-// 				white-space: nowrap;
-// 				z-index: 99;
-// 				a {
-// 					display: block;
-// 					padding: 0 10px;
-// 					&:hover { background-color: #222;}
-// 				}
-// 			}
+// .dropdown-trigger {
+// 	position: relative;
+// 	.dropdown-menu {
+// 		position: absolute;
+// 		top: 100%;
+// 		right: 0;
+// 		background-color: #000;
+// 		display: none;
+// 		white-space: nowrap;
+// 		z-index: 99;
+// 		a {
+// 			display: block;
+// 			padding: 0 10px;
+// 			&:hover { background-color: #222;}
 // 		}
-// 		.avatar, .name {
-// 			display: inline-block;
-// 			vertical-align: middle;
-// 		}
-// 		.avatar {
-// 			&.empty {
-// 				display: none;
-// 			}
-// 			margin-right: 5px;
-// 			img {
-// 				width: 20px;
-// 				height: 20px;
-// 				display: block;
-// 				border-radius: 100%;
-// 			}
-// 		}
+// 	}
+// }
+// .avatar, .name {
+// 	display: inline-block;
+// 	vertical-align: middle;
+// }
+// .avatar {
+// 	&.empty {
+// 		display: none;
+// 	}
+// 	margin-right: 5px;
+// 	img {
+// 		width: 20px;
+// 		height: 20px;
+// 		display: block;
+// 		border-radius: 100%;
+// 	}
+// }
 // 	}
 // 	.no-loggedin span {
 // 		padding: 0 3px;
@@ -168,8 +168,8 @@
 			text-decoration: none;
 		}
 		.fright {
-				width: ($navWidth - ($navWhyUs + 10));
-				height: 27px;
+			width: ($navWidth - ($navWhyUs + 10));
+			height: 27px;
 		}
 		.fleft {
 			width: $navWhyUs;
@@ -226,12 +226,22 @@
 			padding-left: 15px;
 		}
 		.site-version-switch {
-			cursor: pointer;
-			li {
-				display:block;
-			}
+			display: inline-block;
+			position: relative;
+			min-height: 20px;
+			margin-left: 10px;
 			ul {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				min-width: 100%;
+				background-color: #fff;
 				display: none;
+				a {
+					padding: 5px;
+					display: block;
+					&:hover { background-color: #e6e6e6;}
+				}
 			}
 		}
 		.login {
@@ -239,10 +249,45 @@
 			font-size: $fontSize;
 			display: block;
 			padding: 0 32px 0 4px;
-			// margin-right: 11px;
 			color: #000;
 			text-transform: uppercase;
 			line-height: 1;
+		}
+		.dropdown-trigger {
+			position: relative;
+			.dropdown-menu {
+				position: absolute;
+				top: 100%;
+				right: 0;
+				background-color: #000;
+				display: none;
+				white-space: nowrap;
+				z-index: 99;
+				a {
+					display: block;
+					padding: 0 10px;
+					&:hover { background-color: #222;}
+				}
+			}
+		}
+		.avatar, .name {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.avatar {
+			&.empty {
+				display: none;
+			}
+			margin-right: 5px;
+			img {
+				width: 20px;
+				height: 20px;
+				display: block;
+				border-radius: 100%;
+			}
+		}
+		.no-loggedin span {
+			padding: 0 3px;
 		}
 	}
 	.nav-user {
@@ -276,10 +321,10 @@
 			}
 		}
 		.icon-heart { 
-				color: $pinkColor;
-				font-size: 15px;
-				padding-right: 5px;
-			}
+			color: $pinkColor;
+			font-size: 15px;
+			padding-right: 5px;
+		}
 		.icon-dropdown-down {
 			font-size: 12px;
 			padding-left: 10px;

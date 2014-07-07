@@ -5,8 +5,7 @@
 - links_cache_key = [:layout, :header, 'top-links', current_spree_user.try(:cache_key)]
 - cache links_cache_key, expires_in: configatron.cache.expire.long do
   .nav-container
-    .brand
-      header.header-global
+    header.brand
         = link_to root_path, class: 'logo' do
           span.icon-logo
     .navs
