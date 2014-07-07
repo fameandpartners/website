@@ -5,7 +5,6 @@ FameAndPartners::Application.routes.draw do
 
   get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
-  get '/fashionista2014comp'   => 'statics#fashionistacomp'
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
@@ -153,7 +152,8 @@ FameAndPartners::Application.routes.draw do
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
-    get '/fashionista2014'   => 'statics#fashionista', :as => :fashionista
+    get '/fashionista2014'   => 'statics#fashionistacomp'
+    get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista
     get '/compterms' => 'statics#comp_terms'
 
     get '/campaigns/stylecall' => 'campaigns#show'
