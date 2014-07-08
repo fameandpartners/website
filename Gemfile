@@ -32,8 +32,6 @@ gem 'instagram'
 
 gem 'sitemap_generator'
 
-gem 'font-awesome-sass'
-
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
