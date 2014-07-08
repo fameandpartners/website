@@ -42,7 +42,8 @@
 .promo-ticker {
 	text-align: right;
 	padding: 20px 0;
-	font-size: 18px;
+	font-size: 24px;
+	font-family: $fontThree;
 	span {
 		color: $pinkColor;
 	}
@@ -110,22 +111,26 @@
 	}
 	p {
 		max-width: 60%;
-		padding: 5px;
+		padding: 6px;
 		margin: 10px auto 15px auto;
 		border-top: solid 3px #000;
 		border-bottom: solid 3px #000;
 		font-size: 18px;
 		letter-spacing: 10px;
+		font-family: $fontFour;
 	}
 	span {
 		font-weight: normal;
+		font-family: $fontFive;
+	}
+	ul {
+		padding:0;
 	}
 	li {
 		display: inline-block;
 		font-size: 18px;
 		line-height: 18px;
-		margin: 15px 5px;
-		font-weight: bold;
+		margin: 15px 10px;
 	}
 	.formal-types {
 		border: solid 3px #000;

@@ -1,15 +1,6 @@
 footer.footer-global
   .container
-    - unless controller_action_id == "index"
-      = render "shared/featured_in", :locals => {:small => "_small"}
-    .active = link_to 'SIGN UP FOR FREE STYLING ADVICE', '#', class: 'btn small empty newsletter'
-    .form
-      = form_for (@participation || Participation.new), as: :participation, url: campaigns_newsletter_path, remote: true do |f|
-        = f.label 'EMAIL SIGN UP'
-        = f.email_field :email, class: 'inputbox', placeholder: 'FREE STYLING ADVICE'
-        .submit
-          input.btn.submitbox type="submit" value=""
-          i.fa.fa-caret-right
+    .active = link_to 'SIGN UP FOR FREE STYLING ADVICE', '#', class: 'btn empty newsletter'
     nav.nav-footer
       .footer-links
         p.footer-label
@@ -38,15 +29,15 @@ footer.footer-global
 
         ul.social-links
           li
-            i.fa.fa-instagram
+            i.icon-instagram
           li 
-            i.fa.fa-facebook
+            i.icon-facebook
           li 
-            i.fa.fa-pinterest
+            i.icon-pinterest
           li 
-            i.fa.fa-twitter
+            i.icon-twitter
           li 
-            i.fa.fa-tumblr
+            i.icon-tumblr
     .phone
           'ORDER ON THE PHONE CUSTOMER SERVICE 866 527 7797
     .copy 

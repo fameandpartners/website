@@ -361,6 +361,66 @@
 				+ li { margin: 0;}
 			}
 		}
+		.megamenu {
+			width: 800px;
+			height: 500px;
+			padding: 0;
+			background: #fff;
+			box-shadow: 2px 2px 2px #000;
+			.grid-5 {
+				padding: 15px;
+			}
+			.menu {
+				padding: 20px 10px;
+				margin: 0 10px;
+			}
+			li {
+				background: #fff;
+				.collection {
+					font-size: 24px;
+					border-bottom: solid 2px #000;
+				}
+				&:last-child {
+					margin-bottom: 30px;
+				}
+				a {
+					color: #000;
+					font-style: italic;
+					font-family: $fontThree;
+					padding: 5px 0;
+				}
+			}
+			.list-right {
+				li {
+					padding-bottom: 25px;
+				}
+			}
+			h3 {
+				padding-bottom: 5px;
+				border-bottom: solid 2px #000;
+				&.sale {
+					color: $pinkColor;
+					margin-bottom: 25px;
+				}
+			}
+			.tile {
+				display: inline-block;
+				width: 50%;
+				img {
+					width: 90%;
+				}
+			}
+			.promos {
+				height: 420px;
+				border-left: solid 2px #000;
+				font-style: italic;
+				text-align: center;
+				padding: 20px 0 20px 30px;
+				h2 {
+					padding-bottom: 30px;
+				}
+			}
+		}
 		.discover {
 			width: 170px;
 		}

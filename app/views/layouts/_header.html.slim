@@ -110,14 +110,46 @@
               = link_to collection_path, class: 'btn' do
                 span Discover
                 span.icon-dropdown-down
-              .dropdown
-                ul
-                  li = link_to 'All Dresses', collection_path, title: 'All Dresses'
-                  li = link_to 'New Collection', collection_path(:order => "newest"), title: 'New Collection'
-                  li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Dresses'
-                  li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses'
-                  li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses'
-                  li = link_to 'Collaborations', collection_path(:edits => "collaborations"), title: 'Collaborations' 
+              .dropdown.megamenu
+                .grid-container
+                  .row
+                    .grid-5
+                      .row
+                        .grid-6.menu.list-left
+                          h3 CLOTHES
+                          ul
+                            li = link_to 'All Dresses', collection_path, title: 'All Dresses'
+                            li = link_to 'New Collection', collection_path(:order => "newest"), title: 'New Collection'
+                            li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Dresses'
+                            li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses'
+                            li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses'
+                            li = link_to 'Collaborations', collection_path(:edits => "collaborations"), title: 'Collaborations'
+                          h3 SHOES
+                          ul
+                            li = link_to 'All Dresses', collection_path, title: 'All Dresses'
+                            li = link_to 'New Collection', collection_path(:order => "newest"), title: 'New Collection'
+                            li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Dresses'
+                            li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses'
+                            li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses'
+                            li = link_to 'Collaborations', collection_path(:edits => "collaborations"), title: 'Collaborations'  
+
+                        .grid-6.menu.list-right
+                          h3.sale SALE
+                          ul
+                            li = link_to 'All Dresses', collection_path, title: 'All Dresses', class: "collection"
+                            li = link_to 'New Collection', collection_path(:order => "newest"), title: 'New Collection', class: "collection"
+                            li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Dresses', class: "collection"
+                            li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses', class: "collection"
+                            li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses', class: "collection"
+                            li = link_to 'Collaborations', collection_path(:edits => "collaborations"), title: 'Collaborations' , class: "collection"
+                    .grid-7.promos
+                      h2 Can't Live Without
+                      .tile
+                        = image_tag "http://lorempixel.com/150/200"
+                        p Back in stock
+                      .tile
+                        = image_tag "http://lorempixel.com/150/200"
+                        p Sale
             li.blog = link_to 'Blog', blog_path, class: 'btn'
             li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do
                 span.icon-heart
