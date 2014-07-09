@@ -8,6 +8,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     container: null
     variantsSelector: null
     initialized: false
+    current_site: window.current_site_version.permalink
 
     init: () ->
       if !popup.initialized
@@ -53,7 +54,7 @@ window.helpers.createVariantsSelectorPopup = () ->
     prepareTemplateArgs: (response) ->
       result = {
         product: response.product.product,
-        sizes: window.getUniqueValues(response.variants, 'size').sort (a, b) -> a - b
+        sizes: popup.getSizes(response.variants),
         colors: popup.getColorsMap(response.variants)
         max_quantity: 10
       }
@@ -101,6 +102,14 @@ window.helpers.createVariantsSelectorPopup = () ->
         map[variant.color] = variant.color_code
       )
       map
+
+    getSizes: (response) ->
+      if popup.current_site == "au"
+        sizes = window.getUniqueValues(response, 'size')
+        sorted = sizes.sort (a, b) -> a - b
+        sorted[2..10]
+      else
+        window.getUniqueValues(response, 'size').sort (a, b) -> a - b  
   }
 
   popup.on      = delegateTo(popup.eventBus, 'on')

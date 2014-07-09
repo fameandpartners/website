@@ -1,4 +1,5 @@
 module ProductsHelper
+
   def range_taxonomy
     @range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
   end
@@ -345,6 +346,39 @@ module ProductsHelper
       items.join(' / ').html_safe
     else
       ''
+    end
+  end
+  
+  def base_sizes(sizes)
+    if sizes.size <= 7
+    if current_site_version.is_australia?
+      base_sizes = sizes.from(2)
+    else
+      base_sizes = sizes
+    end
+  else
+    if current_site_version.is_australia?
+      base_sizes = sizes[2..7]
+    else
+      base_sizes = sizes.first(6)
+    end
+  end
+  
+  end
+
+  def dropdown_sizes(sizes)
+    if sizes.size <= 7
+      if current_site_version.is_australia?
+        dropdown_sizes = []
+      else
+        dropdown_sizes = []
+      end
+    else
+      if current_site_version.is_australia?
+        dropdown_sizes = sizes[8..-1]
+      else
+        dropdown_sizes = sizes[6..-1]
+      end
     end
   end
 end

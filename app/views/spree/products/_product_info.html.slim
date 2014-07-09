@@ -1,11 +1,4 @@
 ruby:
-  if sizes.size <= 7
-    base_sizes = sizes
-    dropdown_sizes = []
-  else
-    base_sizes = sizes.first(6)
-    dropdown_sizes = sizes[6..-1]
-  end
   extra_size_title = I18n.t('product.extra_size_price')
 .product-info
   h6 = breadcrumbs_for(product)
@@ -21,14 +14,12 @@ ruby:
     h6.info
       ' SELECT A SIZE 
       = link_to '(whats my size?)', '#what-size', class: 'toggle-sizes '
-      - if current_site_version.is_australia?
-        .size-info US Sizes Displayed
     .sizebox
-      - base_sizes.each do |size|
+      - base_sizes(sizes).each do |size|
         .button data-size="#{size}" title=( extra_size_title if size.to_i >= 14 ) = size
-      - if dropdown_sizes.present?
+      - if dropdown_sizes(sizes).present?
         .dropdown-button data-open="-" data-close="+" +
-        - dropdown_sizes.each do |size|
+        - dropdown_sizes(sizes).each do |size|
           .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= 14 ) = size
   .section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
