@@ -14,6 +14,10 @@ ruby:
     h6.info
       ' SELECT A SIZE 
       = link_to '(whats my size?)', '#what-size', class: 'toggle-sizes '
+      - if current_site_version.is_australia?
+        .size-info AUS Sizes Displayed
+      - else
+        .size-info US Sizes Displayed
     .sizebox
       - base_sizes(sizes).each do |size|
         .button data-size="#{size}" title=( extra_size_title if size.to_i >= 14 ) = size
