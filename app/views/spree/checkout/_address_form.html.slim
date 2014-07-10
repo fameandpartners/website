@@ -96,7 +96,7 @@ ruby:
     - if address_type == 'billing'
       .input.clearfix data-require='user-credentials'
         div id="required_to"
-          .grid-3  = form.parent_builder.label :required_to, 'The date of your event'
+          .grid-3  = form.parent_builder.label :required_to, 'When is your dress needed?'
           .grid-6  = form.parent_builder.text_field :required_to, value: @order.required_to, :class => 'without-shadow'
 
 - if address_type == 'billing'
