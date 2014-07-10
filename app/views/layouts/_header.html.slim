@@ -116,25 +116,19 @@
                     .grid-5
                       .row
                         .grid-6.menu.list-left
-                          h3 CLOTHES
+                          h3 Styles
                           ul
-                            li = link_to 'All Dresses', collection_path, title: 'All Dresses'
-                            li = link_to 'New Collection', collection_path(:order => "newest"), title: 'New Collection'
-                            li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Dresses'
-                            li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses'
-                            li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses'
-                            li = link_to 'Collaborations', collection_path(:edits => "collaborations"), title: 'Collaborations'
-                          h3 SHOES
+                            li = link_to 'Celebrity Inspired', build_collection_product_path('celebrity-inspired', nil), title: 'Celebrity Inspired'
+                            li = link_to 'Ball Gown', build_collection_product_path('ball-gown', nil), title: 'Ball Gown'
+                          h3 Color
                           ul
-                            li = link_to 'All Dresses', collection_path, title: 'All Dresses'
-                            li = link_to 'New Collection', collection_path(:order => "newest"), title: 'New Collection'
-                            li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Dresses'
-                            li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses'
-                            li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses'
-                            li = link_to 'Collaborations', collection_path(:edits => "collaborations"), title: 'Collaborations'  
+                            li = link_to "Black Formal Dresses", colour_formal_dresses_path('Black')
+                            li = link_to "Red Formal Dresses", colour_formal_dresses_path('Red')
+                            li = link_to "Blue Dresses", colour_formal_dresses_path('Blue')
+                            li = link_to "Green Dresses", colour_formal_dresses_path('Green')
+                            li = link_to "Pink Dresses", colour_formal_dresses_path('Pink')
 
                         .grid-6.menu.list-right
-                          h3.sale SALE
                           ul
                             li = link_to 'All Dresses', collection_path, title: 'All Dresses', class: "collection"
                             li = link_to 'New Collection', collection_path(:order => "newest"), title: 'New Collection', class: "collection"

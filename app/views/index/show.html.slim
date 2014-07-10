@@ -34,49 +34,52 @@ ruby:
     window.Quiz.welcomeMessage = "THANKS! NOW COMPLETE YOUR STYLE PROFILE";
     window.Quiz.redirectUrl = "#{ redirectUrl }";
 
-.promo-ticker
-  p SHOP NOW STYLED FOR FREE! <span>PROMO CODE AC25 /</span> FASHION <span>STATEMENT</span> DRESSES @FAME & PARTNERS PROM LOOK
-
 .grid-container
   .promo
-    = image_tag 'http://lorempixel.com/1140/600'   
+    = link_to collection_path do
+      = image_tag 'homepage/new/main-bad-bride.jpg'   
 
 
 .promo-tiles
   .grid-container
-    .row
+    .rowsmall-stylequiz
       .tile
-          = image_tag 'http://lorempixel.com/335/500'
+        = link_to fashionista_path do
+          = image_tag 'homepage/new/small-fashionista.png'
       .tile
-          = image_tag 'http://lorempixel.com/335/500'
+        = link_to "", class: 'show-style-quiz' do
+          = image_tag 'homepage/new/small-stylequiz.jpg'
       .tile
-          = image_tag 'http://lorempixel.com/335/500'
+        = link_to fashionista_path do
+          = image_tag 'homepage/new/small-90s.jpg'
 
 = render "shared/featured_in", :locals => {:small => ""}
 
 .grid-container
   .fame-chain
-    = image_tag 'http://lorempixel.com/1140/200'  
+    = link_to fame_chain_path do
+      = image_tag 'homepage/new/famechain.jpg'
 
 .formal-dresses
   .grid-container
     .row
-      = image_tag 'http://lorempixel.com/100/50'
+      = image_tag 'homepage/new/bird_left.gif', :class => "bird"
       h2 <span>FORMAL</span> DRESSES
-      = image_tag 'http://lorempixel.com/100/50'
+      = image_tag 'homepage/new/bird_right.gif', :class => "bird"
+    .row
       p FOR EVERY EVENT
       .formal-types
         ul
-          li BALLS
+          li= link_to "BALLS", collection_path
           li
             ' /
-          li BIRTHDAYS
+          li= link_to "BIRTHDAYS", collection_path
           li
             ' /
-          li PROM
+          li= link_to "PROM", collection_path
           li
             ' /
-          li FORMALS
+          li= link_to "FORMALS", collection_path
           li
             ' /
-          li GRADUATION 
+          li= link_to "GRADUATION", collection_path
