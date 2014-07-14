@@ -4,149 +4,156 @@
 
 - links_cache_key = [:layout, :header, 'top-links', current_spree_user.try(:cache_key)]
 - cache links_cache_key, expires_in: configatron.cache.expire.long do
-  .top-links
-    - if current_site_version.is_australia?
-      .text order on the phone / customer service 1300 924 860
-    - else
-      .text order on the phone / customer service 866 527 7797
-    .site-version
-      .current-version
-        span SHIPPING TO
-        .site-version-switch
-          em = current_site_version.name
-          i.icon-dropdown-down
-          ul
-            li = link_to 'Australia', site_version_path('au')
-            li = link_to 'USA', site_version_path('us')
-    nav.user-nav
-      - unless spree_user_signed_in?
-        .no-loggedin
-          =' link_to 'login', spree_login_path, class: 'link-login'
-          span 
-            ' /
-          =' link_to 'register', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
-      - else
-        .loggedin
-          .dropdown-trigger
-            - if current_spree_user.image.present?
-              span.avatar
-                = image_tag current_spree_user.image, width: 20
+  .nav-container
+    header.brand
+        = link_to root_path, class: 'logo' do
+          span.icon-logo
+    .navs
+      .nav-site
+        nav.fleft
+          ul 
+            - unless sale_active?
+              li
+                = link_to why_us_path(anchor: 'shipping') do
+                  span.icon-holder
+                    span.icon-dollar
+                    span.icon-erase
+                  span
+                    ' free
+                    br
+                    ' shipping
+            li
+              = link_to why_us_path(anchor: 'returns') do
+                span.icon-holder
+                  span.icon-arrows
+                span
+                  ' free
+                  br
+                  ' returns
+            li
+              = link_to why_us_path(anchor: 'fit') do
+                span.icon-holder
+                  span.icon-guarantee
+                span
+                  ' fit
+                  br
+                  ' guarantee
+            - unless sale_active?
+              li
+                = link_to why_us_path(anchor: 'customisation') do
+                  span.icon-holder
+                    span.icon-cutline
+                    span.icon-scissors
+                  span
+                    ' dress
+                    br
+                    =' t(:customization)
+            li
+              = link_to why_us_path(anchor: 'advice') do
+                span.icon-holder
+                  span.icon-comment
+                span
+                  ' free
+                  br
+                  ' stylists
+        nav.fright
+          .region
+            .site-version
+              .current-version
+                .dropdown-trigger
+                  em= current_site_version.name
+                  i.icon-dropdown-down
+                  .dropdown-menu
+                    ul
+                      li = link_to 'Australia', site_version_path('au')
+                      li = link_to 'USA', site_version_path('us')
+          
+          .login
+            - unless spree_user_signed_in?
+              .no-loggedin
+                =' link_to 'login', spree_login_path, class: 'link-login'
+                span 
+                  ' /
+                =' link_to 'register', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
             - else
-              span.avatar.empty
-                img
-            span.name =' current_spree_user.full_name
-            i.icon-dropdown-down
-            .dropdown-menu
-              ul
-                li = link_to 'account settings', profile_path
-                li = link_to 'your orders', user_orders_path
-                li = link_to 'style profile', styleprofile_path
-                li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
-.centered-layout
-  - if celebrity_landing_page?
-    header.header-global.lp.clearfix
-      = link_to root_path, class: 'logo' do
-        span.icon-logo
-      - if @celebrity.primary_image && @celebrity.primary_image.file.exists?
-        .celebrity-header style="background-image: url('#{ @celebrity.primary_image.file.url(:banner) }')"
-          h1 = @celebrity.title || @celebrity.full_name
-  - elsif marketing_landing_page? && (banner_url = marketing_banner_image_url(:small)).present?
-    header.header-global.lp.clearfix
-      = link_to root_path, class: 'logo' do
-        span.icon-logo
-      .banner = image_tag banner_url
-  - else
-    header.header-global
-      = link_to root_path, class: 'logo' do
-        span.icon-logo
-          / span.icon-logo.white
-
-  
-  .nav-site
-    nav
-      ul 
-        - unless sale_active?
-          li
-            = link_to why_us_path(anchor: 'shipping') do
-              span.icon-holder
-                span.icon-dollar
-                span.icon-erase
-              span
-                ' free
-                br
-                ' shipping
-        li
-          = link_to why_us_path(anchor: 'returns') do
-            span.icon-holder
-              span.icon-arrows
-            span
-              ' free
-              br
-              ' returns
-        li
-          = link_to why_us_path(anchor: 'fit') do
-            span.icon-holder
-              span.icon-guarantee
-            span
-              ' fit
-              br
-              ' guarantee
-        - unless sale_active?
-          li
-            = link_to why_us_path(anchor: 'customisation') do
-              span.icon-holder
-                span.icon-cutline
-                span.icon-scissors
-              span
-                ' dress
-                br
-                =' t(:customization)
-        li
-          = link_to why_us_path(anchor: 'advice') do
-            span.icon-holder
-              span.icon-comment
-            span
-              ' free
-              br
-              ' stylists
-    .fright
-      .search
-        = form_tag search_path, method: :get do
-          = text_field_tag :q, params[:q], placeholder: 'search for dresses'
-          .arrow
-      /- cache [:layout, :header, :cart, current_order(true).cache_key], expires_in: configatron.cache.expire.normally do
-      .cart
-        .wishlist
-          = link_to wishlist_path, class: 'wishlist-link' do
-            span.icon-heart
-            span wish list
-        .shopping-bag
-          = link_to spree.cart_path, class: 'shopping-bag-toggler' do
-            span.counter = current_order.item_count
-            ' shopping bag
-        = render 'layouts/shopping_bag_content'
-  .nav-user
-    nav.fleft
-      ul
-        li = link_to 'Create your formal look now', '#', class: 'btn show-style-quiz pink'
-        li 
-          = link_to collection_path, class: 'btn' do
-            span Dress Collection
-            span.icon-dropdown-down
-          .dropdown
-            ul
-              li = link_to 'All Dresses', collection_path, title: 'All Dresses'
-              li = link_to 'New Collection', collection_path(:order => "newest"), title: 'New Collection'
-              li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Dresses'
-              li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses'
-              li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses'
-              li = link_to 'Collaborations', collection_path(:edits => "collaborations"), title: 'Collaborations'
-        li = link_to 'About us', about_us_path, class: 'btn'
-        li = link_to 'Blog', blog_path, class: 'btn'
-    
-    nav.fright
-      ul
-        li = link_to 'WHY SHOP WITH US?', why_us_path, class: 'btn'
-    .offer
-      span.p.title FORMAL DRESSES FOR FASHION MAVENS
-      span.p Your unique look. guaranteed.
+              .loggedin
+                .dropdown-trigger
+                  - if current_spree_user.image.present?
+                    span.avatar
+                      = image_tag current_spree_user.image, width: 20
+                  - else
+                    span.avatar.empty
+                      img
+                  span.name =' current_spree_user.full_name
+                  i.icon-dropdown-down
+                  .dropdown-menu
+                    ul
+                      li = link_to 'account settings', profile_path
+                      li = link_to 'your orders', user_orders_path
+                      li = link_to 'style profile', styleprofile_path
+                      li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
+          /- cache [:layout, :header, :cart, current_order(true).cache_key], expires_in: configatron.cache.expire.normally do
+      .nav-user
+        nav
+          ul
+            li 
+              = link_to collection_path, class: 'btn show-style-quiz' do
+                span Style Quiz
+            li.discover
+              = link_to collection_path, class: 'btn' do
+                span Shop
+                span.icon-dropdown-down
+              .dropdown.megamenu
+                .grid-container
+                  .row
+                    .grid-5
+                      .row
+                        .grid-6.menu.list-left
+                          h3 Styles
+                          ul
+                            li = link_to 'Celebrity Inspired', build_collection_product_path('celebrity-inspired', nil), title: 'Celebrity Inspired'
+                            li = link_to 'Ball Gown', build_collection_product_path('ball-gown', nil), title: 'Ball Gown'
+                            li = link_to 'Sexy and Sleek', build_collection_product_path('sexy-and-sleek', nil), title: 'Sexy and Sleek'
+                            li = link_to 'Sweetheart', build_collection_product_path('sweetheart', nil), title: 'Sweetheart'
+                            li = link_to 'Cocktail', build_collection_product_path('cocktail', nil), title: 'Cocktail'
+                            li = link_to 'A-Line', build_collection_product_path('a-line', nil), title: 'A-Line'
+                            li = link_to 'Sleeves', build_collection_product_path('sleeves', nil), title: 'Sleeves'
+                          h3 Color
+                          ul
+                            li = link_to "Black Dresses", colour_formal_dresses_path('Black')
+                            li = link_to "Red Dresses", colour_formal_dresses_path('Red')
+                            li = link_to "Blue Dresses", colour_formal_dresses_path('Blue')
+                            li = link_to "Green Dresses", colour_formal_dresses_path('Green')
+                            li = link_to "Pink Dresses", colour_formal_dresses_path('Pink')
+                        .grid-6.menu.list-right
+                          ul
+                            li = link_to 'All Dresses', collection_path, title: 'All Dresses', class: "collection"
+                            li = link_to 'New Collection', collection_path(:order => "newest"), title: 'New Collection', class: "collection"
+                            li = link_to 'Long Dresses', build_collection_product_path('Long-Dresses', nil), title: 'Long Dresses', class: "collection"
+                            li = link_to 'Short Dresses', build_collection_product_path('Short-Dresses', nil), title: 'Short Dresses', class: "collection"
+                            li = link_to 'Prom Dresses', build_collection_product_path('Prom-Dresses', nil), title: 'Prom Dresses', class: "collection"
+                    .grid-7.promos
+                      h2 Can't Live Without
+                      .tile
+                        = link_to collection_path(:edits => "collaborations"), title: 'Collaborations' do
+                          = image_tag "menu/nylon.jpg"
+                        p Exclusive Collaborations
+                      .tile
+                        = link_to collection_path(:order => "newest"), title: 'New Collection' do
+                          = image_tag "menu/new.jpg"
+                        p New Dresses
+            li.blog = link_to 'Blog', blog_path, class: 'btn'
+            li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do
+                span.icon-heart
+                span wish list
+            li.search
+              i.fa.fa-search
+              = form_tag search_path, method: :get do
+                = text_field_tag :q, params[:q]
+            li.cart
+              .bag-handle
+              .shopping-bag
+                = link_to spree.cart_path, class: 'btn shopping-bag-toggler' do
+                  span.counter = current_order.item_count
+                  ' TOTE
+              = render 'layouts/shopping_bag_content' 

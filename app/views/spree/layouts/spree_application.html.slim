@@ -36,7 +36,8 @@ doctype html
       javascript:
         window.Quiz.autoShow = true;
     #wrap
-      = render('layouts/header')
+      - unless controller_action_id == 'checkout'
+        = render('layouts/header')
       #content
         - unless controller_action_id == 'checkout'
           - unless sale_active?

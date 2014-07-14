@@ -1,26 +1,53 @@
+- unless controller_action_id == "index"
+  = render "shared/featured_in", :locals => {:small => "_small"}
 footer.footer-global
-  - unless controller_action_id == "index"
-    = render "shared/featured_in", :locals => {:small => "_small"}
-  .arrows-line-horizontal
-  nav.nav-footer
-    ul.fleft
-      li = link_to 'PROM DRESSES', collection_path, class: 'btn small empty'
-      / li = link_to 'STYLE INSPIRATION', '#', class: 'btn small empty'
-      li = link_to 'ABOUT US', about_us_path, class: 'btn small empty'
-      li = link_to 'FAME CHAIN', fame_chain_path, class: 'btn small empty'
-      li = link_to 'FAQs', faqs_path, class: 'btn small empty'
-    = link_to root_path, class: 'logo' do
-      span.icon-logo
-    ul.fright
-      li = link_to 'TERMS & CONDITIONS', terms_path, class: 'btn small empty'
-      li.active = link_to 'SIGN UP FOR FREE STYLING ADVICE', '#', class: 'btn small empty newsletter'
-  .arrows-line-horizontal
-  .copy 
-    ' &copy; 2014 Fame & Partners – All Rights Reserved
-    - if current_site_version.is_australia?
+  .container
+    .active = link_to 'SIGN UP FOR FREE STYLING ADVICE', '#', class: 'btn empty newsletter'
+    nav.nav-footer
+      .footer-links
+        p.footer-label
+          ' ABOUT US
+        ul
+          li = link_to 'The Fame Team', about_us_path
+          li = link_to 'WHY SHOP WITH US', why_us_path
+          li = link_to 'The Fame CHAIN', fame_chain_path 
+      .footer-links
+        p.footer-label
+           ' CUSTOMER SERVICE
+        ul
+          li = link_to 'FAQs', faqs_path
+          li = link_to 'TERMS', terms_path
+          li = mail_to "team@fameandpartners.com", "Get Styling Advice", subject: "Book a Personal Stylist"
+      - if spree_user_signed_in?
+        .footer-links
+          p.footer-label
+            ' MY ACCOUNT
+          ul
+            li = link_to 'WISHLIST', wishlist_path
+            li = link_to 'ORDERS', user_orders_path
+            li = link_to 'style profile', styleprofile_path
+      .footer-links
+        p.footer-label
+          ' FOLLOW US <br><span>(and get $20 to spend)</span>
+
+        ul.social-links
+          li
+            = link_to configatron.links.facebook, target: :blank, class: 'facebook' do
+              i.icon-facebook
+          li
+            = link_to configatron.links.pinterest, target: :blank, class: 'pinterest' do
+              i.icon-pinterest
+    .phone
+      - if current_site_version.is_australia?
+        ' ORDER ON THE PHONE CUSTOMER SERVICE 1300 924 860
+      - else
+        ' ORDER ON THE PHONE CUSTOMER SERVICE 866 527 7797
+          
+    .copy 
+      - if current_site_version.is_australia?
         .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
-    - else
-      .address New York &nbsp; &nbsp; | &nbsp; &nbsp; USA
+      - else
+        .address New York &nbsp; &nbsp; | &nbsp; &nbsp; USA
 
 / footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
   .grid-container
@@ -159,3 +186,5 @@ footer.footer-global
           td 42.1" / 107cm
           td 33.9" / 86cm
           td 45.3" / 115cm
+
+

@@ -35,11 +35,6 @@ $(function() {
     disable_search: true
   });
 
-  $('.current-version').on('click', function() {
-    $(this).toggleClass('active');
-    $('.site-version-switch ul').toggle();
-  });
-
   $('.nav-user li:has(.dropdown)').hover(
     function() {
       $(this).find('.dropdown').stop(true, true).fadeIn('fast');

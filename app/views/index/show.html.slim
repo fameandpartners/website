@@ -35,91 +35,51 @@ ruby:
     window.Quiz.redirectUrl = "#{ redirectUrl }";
 
 .grid-container
-  .row
-    .grid-8
-      .picture-large 
-        = link_to collection_path(:order => "newest") do
-          = image_tag 'homepage/new/hero.gif'
-    .grid-4
-      .picture-small 
-        = link_to maryxfame_path(cf: 'banner'), title: 'Mary Manaila Collaboration' do
-          = image_tag 'homepage/new/mary_manaila.jpg', alt: 'Mary Manaila Collaboration'
-      .picture-small 
-        = link_to "/nylonxfame" do
-          = image_tag 'homepage/nylonxfame.jpg', alt: 'NylonxFame dresses'    
+  .promo
+    = link_to colour_formal_dresses_path('Black') do
+      = image_tag 'homepage/new/main-bad-bride.jpg'   
+
+
+.promo-tiles
+  .grid-container
+    .rowsmall-stylequiz
+      .tile
+        = link_to fashionista_path do
+          = image_tag 'homepage/new/small-fashionista.jpg'
+      .tile
+        = link_to "", class: 'show-style-quiz' do
+          = image_tag 'homepage/new/small-stylequiz.jpg'
+      .tile
+        = link_to colour_formal_dresses_path('Black') do
+          = image_tag 'homepage/new/small-90s.jpg'
 
 = render "shared/featured_in", :locals => {:small => ""}
 
-.how-it-works
-  .arrows-line-horizontal
-  h2.section-title How it WORKS
+.grid-container
+  .fame-chain
+    = link_to fame_chain_path do
+      = image_tag 'homepage/new/famechain.jpg'
+
+.formal-dresses
   .grid-container
     .row
-      .grid-4
-        .step
-          = image_tag '_front/step-1.jpg'
-          h3.step-title.white
-            ' Discover
-            br
-            ' your dress
-          .line-top  
-          .line-bottom  
-      .grid-4
-        .step
-          = image_tag '_front/step-2.jpg'
-          h3.step-title
-            ' Customise
-            br
-            ' if you like!
-          .line-top  
-          .line-bottom    
-      .grid-4
-        .step
-          = image_tag '_front/step-3.jpg'
-          h3.step-title.pink-shadow
-            ' Style your unique
-            br
-            ' look for free
-          .line-top  
-          .line-bottom    
-.create-your-look
-  .section-title
-    = link_to "#", class: 'show-style-quiz' do
-      em.mark Get started now!
-  .arrows-line-horizontal
-  .grid-container
+      = image_tag 'homepage/new/bird_left.gif', :class => "bird"
+      h2 <span>FORMAL</span> DRESSES
+      = image_tag 'homepage/new/bird_right.gif', :class => "bird"
     .row
-      .grid-4
-        .frame
-          = image_tag '_front/frame.jpg'
-          .text
-            .title 
-              em FEATURED
-              br
-              ' COLLABORATOR
-            .rss  
-      .grid-4.face-holder
-        .face
-          = image_tag 'homepage/new/danistahl.png'
-      .grid-4
-        .text.blogger-name
-          .title 
-            em Dani
-            ' Stahl
-          p 
-            ' Editor at large of Nylon Magazine 
-            br
-            ' Designer, Stylist & Consultant. 
-        = link_to 'Dani Stahl', featured_blogger_path, class: 'btn small'
-.pictures-gallery
-  .section
-    = image_tag '_sample/catalog-1.jpg'
-  .section
-    = link_to 'http://www.pinterest.com/fameandpartners/', target: '_blank' do
-      = image_tag '_sample/catalog-2.jpg'
-  .section
-    = link_to 'http://instagram.com/fameandpartners', target: '_blank' do
-      = image_tag '_sample/catalog-3.jpg'
-  .section
-    = link_to 'http://www.facebook.com/fameandpartners', target: '_blank' do
-      = image_tag '_sample/catalog-4.jpg'
+      p FOR EVERY EVENT
+      .formal-types
+        ul
+          li= link_to "BALLS", collection_path
+          li
+            ' /
+          li= link_to "BIRTHDAYS", collection_path
+          li
+            ' /
+          li= link_to "PROM", collection_path
+          li
+            ' /
+          li= link_to "FORMALS", collection_path
+          li
+            ' /
+          li= link_to "GRADUATION", collection_path

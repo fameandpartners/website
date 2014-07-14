@@ -436,12 +436,45 @@ body.checkout {
 			a { 
 				font-family: $fontThree;
 				font-size: 20px;
+				text-decoration: none;
+			}
+			span{
+				vertical-align: middle;
+				display: inline-block;
 			}
 			.icon-holder {
 				width: 50px;
-				text-align: center;
-				.icon-erase {
-					left: 10px;
+				padding-right: 5px;
+				position: relative;
+				span {
+					font-size: 27px;
+					height: 27px;
+					line-height: 27px;	
+				}
+				.icon-erase, .icon-scissors { 
+					position: absolute;
+					left: 0;
+					top: 0;
+					color: $pinkColor;
+				}
+				.icon-dollar, .icon-erase {
+					font-size: 32px;
+				}
+				.icon-arrows {
+					font-size: 42px;
+				}
+				.icon-cutline {
+					font-size: 51px;
+					line-height: 32px;
+					text-indent: 3px;
+					margin-left: -5px;
+				}
+				.icon-scissors {
+					position: absolute;
+					left: 0;
+					top: 0;
+					color: $pinkColor;
+					font-size: 47px;
 				}
 			}
 		}

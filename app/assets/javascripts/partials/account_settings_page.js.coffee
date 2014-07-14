@@ -6,8 +6,8 @@ $('.profiles.show').ready ->
       $image = $("<img />", {src: img_src, width: '100px'})
       $('.avatar-field .avatar').append($image)
     $('.avatar-field .avatar').removeClass('empty')
-    $('.top-links .loggedin .avatar img').attr(src: img_src)
-    $('.top-links .loggedin .avatar').removeClass('empty')
+    $('.region .loggedin .avatar img').attr(src: img_src)
+    $('.region .loggedin .avatar').removeClass('empty')
 
   submitButtonText = null
   previousAvatarImage = null

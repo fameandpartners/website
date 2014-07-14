@@ -1,48 +1,119 @@
 .footer-global {
-	height: 145px;
 	text-transform: uppercase;
 	padding-top: 15px;
+	max-width: none;
+	background: #000;
+	color: #fff;
+	.container {
+		max-width: 1140px;
+		margin: 0 auto;
+	}
 	@extend .centered-layout;
 	.copy {
 		text-align: center;
 		line-height: 67px;
+	}
+	.active {
+		text-align: center;
+		font: $fontFive;
+	}
+	.form {
+		padding-top: 20px;
+		text-align: center;
+		font-size: 18px;
+		// margin-right: 120px;
+		.new_participation {
+			width: 100%;
+		}
+
+		* {
+			display: inline-block;
+		}
+		label {
+			margin-right: 10px;
+		}
+		.inputbox {
+			width: 45%;
+			border: solid 1px #fff;
+			padding:5px;
+			text-align: center;
+		}
+		.submit {
+			position: relative;
+
+			.submitbox {
+				width: 100px;
+				padding: 0;
+				margin-left: -60px;
+			}
+			i {
+				position:absolute;
+				color: #000;
+				background: #fff;
+				height: 34px;
+				width: 80px;
+				text-align: right;
+				padding-right: 5px;
+				vertical-align: middle;
+				line-height: 34px;
+				margin-left: -105px;
+			}
+		}
+	}
+	.email-submit {
+		background: #fff;
+		color: #000;
+		padding: 6px 10px;
+		border-top: solid 1px #fff;
+		margin-left: -5px;
 	}
 }
 .nav-footer {
 	position: relative;
 	min-height: 70px;
 	padding: 13px 0;
+	width: 1000px;
+	margin: 0 auto;
+	text-align: center;
 	@include clearfix;
-	.logo {
-		position: absolute;
-		left: 50%;
-		margin-left: -50px;
-		top: 3px;
-		font-size: 90px;
-		display: block;
-		text-decoration: none;
-		&:hover {
-			color: #000;
-			background-color: #fff;
-		}
-	}
-	a:hover {
-		color: #fff;
-		background-color: #000;
-	}
-	ul { margin-top: 30px;}
-	li {
+	.footer-links {
 		display: inline-block;
+		min-width: 150px;	
+		text-align: left;
 		vertical-align: top;
-		&.active a {
-			color: #fff;
-			background-color: #000;
+	}
+	.footer-label {
+		font-weight: bold;
+		font-size: 12px;
+		span {
+			font-size: 10px;
+			font-weight: normal;
 		}
-		+ li { margin-left: 3px;}
 	}
-	.fleft li + li {
-		margin-left: 20px;
+	li {margin-bottom: 10px;}
+	a {
+		text-decoration: none;
+		font-size: 11px;
+		font-family: $fontFive;
 	}
+	.social-links {
+		li {
+			display: inline-block;
+		}
+		i {
+			font-size: 24px;
+			margin: 0 10px;
+		}
+	}
+}
+
+.phone {
+	text-align: center;
+	width: 35%;
+	color: #fff;
+	margin: 0 auto;
+	padding: 5px 10px;
+	font-size: 14px;
 }
 .blog-footer {
 	@extend .centered-layout;
