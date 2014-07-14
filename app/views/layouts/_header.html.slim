@@ -2,107 +2,108 @@
 - if Rails.env.development? || Rails.env.staging?
   #dev_console
 
-- links_cache_key = [:layout, :header, 'top-links', current_spree_user.try(:cache_key)]
-- cache links_cache_key, expires_in: configatron.cache.expire.long do
-  .nav-container
-    header.brand
-        = link_to root_path, class: 'logo' do
-          span.icon-logo
-    .navs
-      .nav-site
-        nav.fleft
-          ul 
-            - unless sale_active?
-              li
-                = link_to why_us_path(anchor: 'shipping') do
-                  span.icon-holder
-                    span.icon-dollar
-                    span.icon-erase
-                  span
-                    ' free
-                    br
-                    ' shipping
+
+.nav-container
+  header.brand
+      = link_to root_path, class: 'logo' do
+        span.icon-logo
+  .navs
+    .nav-site
+      nav.fleft
+        ul 
+          - unless sale_active?
             li
-              = link_to why_us_path(anchor: 'returns') do
+              = link_to why_us_path(anchor: 'shipping') do
                 span.icon-holder
-                  span.icon-arrows
+                  span.icon-dollar
+                  span.icon-erase
                 span
                   ' free
                   br
-                  ' returns
+                  ' shipping
+          li
+            = link_to why_us_path(anchor: 'returns') do
+              span.icon-holder
+                span.icon-arrows
+              span
+                ' free
+                br
+                ' returns
+          li
+            = link_to why_us_path(anchor: 'fit') do
+              span.icon-holder
+                span.icon-guarantee
+              span
+                ' fit
+                br
+                ' guarantee
+          - unless sale_active?
             li
-              = link_to why_us_path(anchor: 'fit') do
+              = link_to why_us_path(anchor: 'customisation') do
                 span.icon-holder
-                  span.icon-guarantee
+                  span.icon-cutline
+                  span.icon-scissors
                 span
-                  ' fit
+                  ' dress
                   br
-                  ' guarantee
-            - unless sale_active?
-              li
-                = link_to why_us_path(anchor: 'customisation') do
-                  span.icon-holder
-                    span.icon-cutline
-                    span.icon-scissors
-                  span
-                    ' dress
-                    br
-                    =' t(:customization)
-            li
-              = link_to why_us_path(anchor: 'advice') do
-                span.icon-holder
-                  span.icon-comment
-                span
-                  ' free
-                  br
-                  ' stylists
-        nav.fright
-          .region
-            .site-version
-              .current-version
-                .dropdown-trigger
-                  em= current_site_version.name
-                  i.icon-dropdown-down
-                  .dropdown-menu
-                    ul
-                      li = link_to 'Australia', site_version_path('au')
-                      li = link_to 'USA', site_version_path('us')
-          
-          .login
-            - unless spree_user_signed_in?
-              .no-loggedin
-                =' link_to 'login', spree_login_path, class: 'link-login'
-                span 
-                  ' /
-                =' link_to 'register', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
-            - else
-              .loggedin
-                .dropdown-trigger
-                  - if current_spree_user.image.present?
-                    span.avatar
-                      = image_tag current_spree_user.image, width: 20
-                  - else
-                    span.avatar.empty
-                      img
-                  span.name =' current_spree_user.full_name
-                  i.icon-dropdown-down
-                  .dropdown-menu
-                    ul
-                      li = link_to 'account settings', profile_path
-                      li = link_to 'your orders', user_orders_path
-                      li = link_to 'style profile', styleprofile_path
-                      li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
-          /- cache [:layout, :header, :cart, current_order(true).cache_key], expires_in: configatron.cache.expire.normally do
-      .nav-user
-        nav
-          ul
-            li 
-              = link_to collection_path, class: 'btn show-style-quiz' do
-                span Style Quiz
-            li.discover
-              = link_to collection_path, class: 'btn' do
-                span Shop
-                span.icon-dropdown-down
+                  =' t(:customization)
+          li
+            = link_to why_us_path(anchor: 'advice') do
+              span.icon-holder
+                span.icon-comment
+              span
+                ' free
+                br
+                ' stylists
+      nav.fright
+        .region
+          .site-version
+            .current-version
+              .dropdown-trigger
+                em= current_site_version.name
+                i.icon-dropdown-down
+                .dropdown-menu
+                  ul
+                    li = link_to 'Australia', site_version_path('au')
+                    li = link_to 'USA', site_version_path('us')
+        
+        .login
+          - unless spree_user_signed_in?
+            .no-loggedin
+              =' link_to 'login', spree_login_path, class: 'link-login'
+              span 
+                ' /
+              =' link_to 'register', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
+          - else
+            .loggedin
+              .dropdown-trigger
+                - if current_spree_user.image.present?
+                  span.avatar
+                    = image_tag current_spree_user.image, width: 20
+                - else
+                  span.avatar.empty
+                    img
+                span.name =' current_spree_user.full_name
+                i.icon-dropdown-down
+                .dropdown-menu
+                  ul
+                    li = link_to 'account settings', profile_path
+                    li = link_to 'your orders', user_orders_path
+                    li = link_to 'style profile', styleprofile_path
+                    li = link_to 'sign out', destroy_spree_user_session_path(site_version: current_site_version.code)
+        /- cache [:layout, :header, :cart, current_order(true).cache_key], expires_in: configatron.cache.expire.normally do
+    .nav-user
+      nav
+        ul
+          li 
+            = link_to collection_path, class: 'btn show-style-quiz' do
+              span Style Quiz
+          li.discover
+            = link_to collection_path, class: 'btn' do
+              span Shop
+              span.icon-dropdown-down
+            - links_cache_key = [:layout, :header, 'top-links', current_spree_user.try(:cache_key)]
+            - cache links_cache_key, expires_in: configatron.cache.expire.long do
               .dropdown.megamenu
                 .grid-container
                   .row
@@ -142,18 +143,18 @@
                         = link_to collection_path(:order => "newest"), title: 'New Collection' do
                           = image_tag "menu/new.jpg"
                         p New Dresses
-            li.blog = link_to 'Blog', blog_path, class: 'btn'
-            li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do
-                span.icon-heart
-                span wish list
-            li.search
-              i.fa.fa-search
-              = form_tag search_path, method: :get do
-                = text_field_tag :q, params[:q]
-            li.cart
-              .bag-handle
-              .shopping-bag
-                = link_to spree.cart_path, class: 'btn shopping-bag-toggler' do
-                  span.counter = current_order.item_count
-                  ' TOTE
-              = render 'layouts/shopping_bag_content' 
+          li.blog = link_to 'Blog', blog_path, class: 'btn'
+          li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do
+              span.icon-heart
+              span wish list
+          li.search
+            i.fa.fa-search
+            = form_tag search_path, method: :get do
+              = text_field_tag :q, params[:q]
+          li.cart
+            .bag-handle
+            .shopping-bag
+              = link_to spree.cart_path, class: 'btn shopping-bag-toggler' do
+                span.counter = current_order.item_count
+                ' TOTE
+            = render 'layouts/shopping_bag_content' 
