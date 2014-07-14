@@ -162,7 +162,7 @@
 		letter-spacing: 0.1em;
 		position: relative;
 		z-index: 20;
-		height: 51px;
+		height: 53px;
 		@extend .clearfix;
 		a { 
 			color: inherit;	
@@ -170,7 +170,7 @@
 		}
 		.fright {
 			width: ($navWidth - ($navWhyUs + 10));
-			height: 27px;
+			
 		}
 		.fleft {
 			width: $navWhyUs;
@@ -178,7 +178,8 @@
 		nav {
 			display: inline-block;
 			border:solid 2px #000;
-			padding: 15px 0;
+			padding: 15px 0 0 0;
+			height: 44px;
 			li { 
 				display: inline-block;
 				vertical-align: top;
