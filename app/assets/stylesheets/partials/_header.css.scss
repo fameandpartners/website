@@ -162,6 +162,7 @@
 		letter-spacing: 0.1em;
 		position: relative;
 		z-index: 20;
+		height: 51px;
 		@extend .clearfix;
 		a { 
 			color: inherit;	
@@ -224,34 +225,20 @@
 		.region {
 			float: left;
 			padding-left: 15px;
-		}
-		.site-version-switch {
-			display: inline-block;
-			position: relative;
-			min-height: 20px;
-			margin-left: 10px;
-			ul {
-				position: absolute;
-				top: 100%;
-				left: 0;
-				min-width: 100%;
-				background-color: #fff;
-				display: none;
-				a {
-					padding: 5px;
-					display: block;
-					&:hover { background-color: #e6e6e6;}
-				}
+			margin-top: 8px;
+			em{
+				padding-right: 3px;
 			}
 		}
 		.login {
 			float: right;
 			font-size: $fontSize;
 			display: block;
-			padding: 0 32px 0 4px;
+			padding: 0 19px 0 4px;
 			color: #000;
 			text-transform: uppercase;
 			line-height: 1;
+			margin-top:  3px;
 		}
 		.dropdown-trigger {
 			position: relative;
@@ -259,14 +246,21 @@
 				position: absolute;
 				top: 100%;
 				right: 0;
-				background-color: #000;
+				background-color: #fff;
 				display: none;
 				white-space: nowrap;
 				z-index: 99;
+				li{
+					display: block;
+					padding-left: 0;
+				}
 				a {
 					display: block;
-					padding: 0 10px;
-					&:hover { background-color: #222;}
+					padding: 10px;
+					&:hover {
+						background-color: $pinkColor;
+						color: #000;
+					}
 				}
 			}
 		}
@@ -286,18 +280,23 @@
 				border-radius: 100%;
 			}
 		}
-		.no-loggedin span {
-			padding: 0 3px;
+		
+		.no-loggedin {
+			margin-top: 5px;
+
+			span {
+				padding: 0 3px;
+				margin: 0;
+			}
 		}
+
+		
 	}
 	.nav-user {
 		@include clearfix;
 		// margin: 5px 0;
 		font-size: 0;
-		position: absolute;
-		z-index: 19;
 		width: 970px;
-		top: 83px;
 		.nav {
 			display: inline-block;
 		}
@@ -340,9 +339,10 @@
 			min-width: 100%;
 			letter-spacing: 0.125em;
 			display: none;
+			z-index: 1000;
 			ul { 
 				padding: 0;
-				margin: 04
+				margin: 0;
 			}
 			li {
 				display: block;
@@ -414,7 +414,7 @@
 				border-left: solid 2px #000;
 				font-style: italic;
 				text-align: center;
-				padding: 20px 0 20px 30px;
+				padding: 20px 20px 20px 30px;
 				h2 {
 					padding-bottom: 30px;
 					padding-top: 20px;
@@ -422,7 +422,7 @@
 			}
 		}
 		.discover {
-			width: 170px;
+			width: 150px;
 		}
 		.blog {
 			width: 140px;
@@ -453,7 +453,7 @@
 		// 	}
 		// }
 		.search {
-			min-width: 300px;
+			min-width: 309px;
 			background: #000;
 			padding: 0 5px;
 			height: 36px;
@@ -492,7 +492,7 @@
 			padding: 0 8px;
 			letter-spacing: 0.125em;
 			font-size: 12px;
-			a { display: inline-block;}
+			a { display: inline-block; font-size:14px;}
 			span { vertical-align: middle;}
 			.wishlist {
 				margin-right: 18px;
@@ -591,10 +591,54 @@
 					.btn {
 						display: block;
 						width: 147px;
+						font-size: 14px;
 					}
 					.ask-parents .btn {
 						width: 100%;
 						margin-top: 10px;
+					}
+				}
+			}
+			.picture {
+				float: left;
+				margin-right: 15px;
+				img {
+					display: block;
+					width: 80px;
+				}
+			}
+			.info {
+				overflow: hidden;
+				h6 {
+					margin: 0 0 10px;
+					font-size: 13px;
+					text-transform: uppercase;
+					color: #000;
+				}
+				.price {
+					color: $pinkColor;
+					font-size: 16px;
+				}
+				.price-old { 
+		      text-decoration: line-through;
+		      padding: 0 4px;
+		      color: #000;
+		    }
+				.description {
+					margin-top: 10px;
+					padding-top: 7px;
+					border-top: solid 1px #d5d5d5;
+					table {
+						width: 100%;
+					}
+					td { padding: 3px 0;}
+					.color {
+						display: inline-block;
+						width: 10px;
+						height: 10px;
+						border-radius: 100%;
+						border: solid 1px #ccc;
+						box-shadow: 0 0 0 1px #f0f0f0;
 					}
 				}
 			}

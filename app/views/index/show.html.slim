@@ -45,12 +45,12 @@ ruby:
     .rowsmall-stylequiz
       .tile
         = link_to fashionista_path do
-          = image_tag 'homepage/new/small-fashionista.png'
+          = image_tag 'homepage/new/small-fashionista.jpg'
       .tile
         = link_to "", class: 'show-style-quiz' do
           = image_tag 'homepage/new/small-stylequiz.jpg'
       .tile
-        = link_to fashionista_path do
+        = link_to colour_formal_dresses_path('Black') do
           = image_tag 'homepage/new/small-90s.jpg'
 
 = render "shared/featured_in", :locals => {:small => ""}

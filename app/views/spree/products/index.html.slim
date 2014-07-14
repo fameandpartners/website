@@ -26,23 +26,22 @@
     }
     
 
-- unless marketing_landing_page?
-  - if (image_url = marketing_banner_image_url).present? && !sale_active?
-    .row
-      .grid-12
-        = image_tag(image_url)
-    .category-header
+- if (image_url = marketing_banner_image_url).present? && !sale_active?
+  .row
+    .grid-12
+      = image_tag(image_url)
+  .category-header
+    h1 = @page_info[:banner_title]
+    h2 = raw @page_info[:banner_text]
+- else  
+  .category-header
+    - if @page_info[:banner_image].blank?
       h1 = @page_info[:banner_title]
       h2 = raw @page_info[:banner_text]
-  - else  
-    .category-header
-      - if @page_info[:banner_image].blank?
-        h1 = @page_info[:banner_title]
-        h2 = raw @page_info[:banner_text]
-        .arrows-line-horizontal
-      - else
-        .category-banner
-          = image_tag(@page_info[:banner_image], :title => @page_info[:banner_title]+" "+@page_info[:banner_text] )
+      .arrows-line-horizontal
+    - else
+      .category-banner
+        = image_tag(@page_info[:banner_image], :title => @page_info[:banner_title]+" "+@page_info[:banner_text] )
 .category-filter
   .fleft 
     .filter-section
