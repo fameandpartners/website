@@ -25,7 +25,7 @@ Spree::Order.class_eval do
   end
 
   def clean_cache!
-    ActiveSupport::Cache::RedisStore.new.delete_matched("*#{cache_key}*")
+    ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).delete_matched("*#{cache_key}*")
   end
 
   def has_personalized_items?

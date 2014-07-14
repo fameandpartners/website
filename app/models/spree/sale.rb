@@ -27,7 +27,7 @@ class Spree::Sale < ActiveRecord::Base
             }
 
   after_save do
-    ActiveSupport::Cache::RedisStore.new.clear
+    ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).clear
   end
 
   DISCOUNT_TYPES.each do |id, name|
