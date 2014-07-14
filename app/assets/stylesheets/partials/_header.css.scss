@@ -175,6 +175,7 @@
 		.fleft {
 			width: $navWhyUs;
 		}
+		
 		nav {
 			display: inline-block;
 			border:solid 2px #000;
@@ -222,6 +223,9 @@
 					font-size: 47px;
 				}
 			}
+		}
+		.ie nav{
+			height: 62px;
 		}
 		.region {
 			float: left;

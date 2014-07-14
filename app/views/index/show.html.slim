@@ -36,19 +36,19 @@ ruby:
 
 .grid-container
   .promo
-    = link_to colour_formal_dresses_path('Black') do
-      = image_tag 'homepage/new/main-bad-bride.jpg'   
+    = link_to collection_path do
+      = image_tag 'homepage/new/main-fix.jpg'   
 
 
 .promo-tiles
   .grid-container
     .rowsmall-stylequiz
       .tile
-        = link_to fashionista_path do
-          = image_tag 'homepage/new/small-fashionista.jpg'
-      .tile
         = link_to "", class: 'show-style-quiz' do
           = image_tag 'homepage/new/small-stylequiz.jpg'
+      .tile
+        = link_to fashionista_path do
+          = image_tag 'homepage/new/small-fashionista.jpg'
       .tile
         = link_to colour_formal_dresses_path('Black') do
           = image_tag 'homepage/new/small-90s.jpg'
