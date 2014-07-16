@@ -9,6 +9,7 @@
 		margin: 0 auto;
 	}
 	@extend .centered-layout;
+
 	.copy {
 		text-align: center;
 		line-height: 67px;
@@ -17,48 +18,78 @@
 		text-align: center;
 		font: $fontFive;
 	}
+	.form-fixed{
+		position: fixed;
+		height: 70px;
+		bottom: 0;
+		left: 0;
+	}
+	.form-normal{
+		position: relative;
+	}
 	.form {
-		padding-top: 20px;
+		padding-top: 40px;
 		text-align: center;
 		font-size: 18px;
-		// margin-right: 120px;
-		.new_participation {
-			width: 100%;
-		}
+		width: 100%;
+		background: #000;
+		
 
 		* {
 			display: inline-block;
 		}
-		label {
-			margin-right: 10px;
-		}
-		.inputbox {
-			width: 45%;
-			border: solid 1px #fff;
-			padding:5px;
-			text-align: center;
-		}
-		.submit {
-			position: relative;
 
-			.submitbox {
-				width: 100px;
-				padding: 0;
-				margin-left: -60px;
+		.success-holder{
+			position: relative;
+		}
+
+		#sub-success{
+			position: absolute;
+			width: 520px;
+			height: 70px;
+			margin: 0 auto;
+			padding: 20px;
+			background: #000;
+			z-index: 1000;
+			top: -97px;
+			.heading{
+				font-size: 14px;
 			}
-			i {
-				position:absolute;
-				color: #000;
-				background: #fff;
-				height: 34px;
-				width: 80px;
-				text-align: right;
-				padding-right: 5px;
-				vertical-align: middle;
-				line-height: 34px;
-				margin-left: -105px;
+			.msg{
+				font-size: 10px;
 			}
 		}
+
+		.label {
+			margin: 8px 10px 0 0;
+			font: 22px/1em $fontThree;
+			float: left;
+		}
+		#fieldEmail {
+			width: 400px;
+			border: none;
+			padding: 0;
+			text-align: center;
+			height: 34px;
+			display: inline-block;
+			float: left;
+		}
+		button {
+			position: relative;
+			height: 34px;
+			display: inline-block;
+			margin: 0;
+			padding: 6px 10px 0 0;
+			border: 0;
+			background: #fff;
+			font-size: 22px;
+
+			.fa-caret-right::before{
+				position: absolute;
+				top: 8px;
+			}
+		}
+		
 	}
 	.email-submit {
 		background: #fff;

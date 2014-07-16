@@ -1,0 +1,65 @@
+.form.form-fixed style="display:none;"
+  .success-holder
+    #sub-success style="display:none;"
+      .heading
+      .msg
+  form action="http://fameandpartners.createsend.com/t/t/s/ekjll/" method="post" id="subForm"
+    .label EMAIL SIGN UP
+    .fields
+        input id="fieldEmail" name="cm-ekjll-ekjll" type="email" placeholder="Free Styling Advice"
+        input type="hidden" id="fieldurlkl" name="cm-fo-urlkl" value="190873"
+        input type="hidden" id="fieldqulir" name="cm-f-qulir" value=""
+        button.fa.fa-caret-right
+        
+
+
+javascript:
+    $(function () {
+        $('#subForm').submit(function (e) {
+            e.preventDefault();
+            $.getJSON(
+            this.action + "?callback=?",
+            $(this).serialize(),
+            function (data) {
+                if (data.Status === 400) {
+                    msg = data.Message;
+                    $('#sub-success .heading').text("Something went wrong!")
+                    $('#sub-success .msg').text(msg)
+                    $('#sub-success').show();
+                    $('#sub-success').delay(2000).fadeOut(300);
+                } else { // 200
+                    msg = "Thanks for signing up. " + data.Message;
+                    $('#sub-success .heading').text("Thanks for signing up!")
+                    $('#sub-success .msg').text(msg)
+                    $('#sub-success').show();
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        $('#fieldqulir').val(window.current_site_version.permalink)
+
+        if (window.current_page == 'index'){
+          $('.form').fadeIn("slow")
+
+
+          $('.form .close').click(function () {
+            $('.form').removeClass('form-fixed');
+          });
+
+          var navpos = $('.nav-container').offset();
+          console.log(navpos.top);
+          $(window).bind('scroll', function() {
+            if ($(window).scrollTop() < (navpos.top+300)){
+              $('.form').addClass('form-fixed');
+            }
+            else {
+              $('.form').removeClass('form-fixed');
+            }
+          });
+        } else {
+          $('.form').removeClass('form-fixed');
+          $('.form').show();
+        }        
+    });

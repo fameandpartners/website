@@ -12,4 +12,5 @@
   <% if current_site_version %>
     window.current_site_version = <%= raw SiteVersionSerializer.new(current_site_version).to_json %>
   <% end %>
+  window.current_page = "<%= controller_action_id %>"
 </script>

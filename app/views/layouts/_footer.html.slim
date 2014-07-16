@@ -2,7 +2,7 @@
   = render "shared/featured_in", :locals => {:small => "_small"}
 footer.footer-global
   .container
-    .active = link_to 'SIGN UP FOR FREE STYLING ADVICE', '#', class: 'btn empty newsletter'
+    = render 'shared/newsletter_signup' 
     nav.nav-footer
       .footer-links
         p.footer-label
@@ -37,6 +37,13 @@ footer.footer-global
           li
             = link_to configatron.links.pinterest, target: :blank, class: 'pinterest' do
               i.icon-pinterest
+          li
+            = link_to configatron.links.instagram, target: :blank, class: 'instagram' do
+              i.icon-instagram
+          li
+            = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
+              i.icon-twitter
+
     .phone
       - if current_site_version.is_australia?
         ' ORDER ON THE PHONE CUSTOMER SERVICE 1300 924 860
@@ -89,9 +96,9 @@ footer.footer-global
     .grid-15.social
       .title Let’s be friends
       ul
-        li.hide = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
+        li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
         li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
-        li.hide = link_to 'google', configatron.links.google, target: :blank, class: 'google'
+        li = link_to 'instagram', configatron.links.instagram, target: :blank, class: 'instagram'
         li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
   .wrap
     .logo-copyright
