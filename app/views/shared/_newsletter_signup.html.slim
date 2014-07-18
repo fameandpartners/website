@@ -1,65 +1,78 @@
-.form.form-fixed style="display:none;"
-  .success-holder
-    #sub-success style="display:none;"
-      .heading
-      .msg
-  form action="http://fameandpartners.createsend.com/t/t/s/ekjll/" method="post" id="subForm"
-    .label EMAIL SIGN UP
-    .fields
-        input id="fieldEmail" name="cm-ekjll-ekjll" type="email" placeholder="Free Styling Advice"
-        input type="hidden" id="fieldurlkl" name="cm-fo-urlkl" value="190873"
-        input type="hidden" id="fieldqulir" name="cm-f-qulir" value=""
-        button.fa.fa-caret-right
+.form style="display:none;"
+  .holder
+    .close
+      i.fa.fa-times
+    .success-holder
+      #sub-success style="display:none;"
+        .heading
+        .msg
+    form action="http://fameandpartners.createsend.com/t/t/s/ekjll/" method="post" id="subForm"
+      .title Get Free Styling Advice
+      .sub Enter your email address for free styling advice and special discounts.
+      .fields
+          input id="fieldEmail" name="cm-ekjll-ekjll" type="email" placeholder="enter your email address"
+          input type="hidden" id="fieldurlkl" name="cm-fo-urlkl" value="190873"
+          input type="hidden" id="fieldqulir" name="cm-f-qulir" value=""
+          button.fa.fa-caret-right
         
 
 
 javascript:
-    $(function () {
-        $('#subForm').submit(function (e) {
-            e.preventDefault();
-            $.getJSON(
-            this.action + "?callback=?",
-            $(this).serialize(),
-            function (data) {
-                if (data.Status === 400) {
-                    msg = data.Message;
-                    $('#sub-success .heading').text("Something went wrong!")
-                    $('#sub-success .msg').text(msg)
-                    $('#sub-success').show();
-                    $('#sub-success').delay(2000).fadeOut(300);
-                } else { // 200
-                    msg = "Thanks for signing up. " + data.Message;
-                    $('#sub-success .heading').text("Thanks for signing up!")
-                    $('#sub-success .msg').text(msg)
-                    $('#sub-success').show();
-                }
-            });
-        });
-    });
+  var close = false;
 
-    $(document).ready(function() {
-        $('#fieldqulir').val(window.current_site_version.permalink)
-
-        if (window.current_page == 'index'){
-          $('.form').fadeIn("slow")
-
-
-          $('.form .close').click(function () {
-            $('.form').removeClass('form-fixed');
+  $(function () {
+      $('#subForm').submit(function (e) {
+          e.preventDefault();
+          $.getJSON(
+          this.action + "?callback=?",
+          $(this).serialize(),
+          function (data) {
+              if (data.Status === 400) {
+                  msg = data.Message;
+                  $('#sub-success .heading').text("Something went wrong!");
+                  $('.form .holder form').hide();
+                  $('#sub-success .msg').text(msg);
+                  $('#sub-success').show();
+                  $('#sub-success').delay(2000).fadeOut(300);
+                  $('.form .holder form').delay(2000).fadeIn(300);
+              } else { // 200
+                  msg = "Thanks for signing up. " + data.Message;
+                  $('.form .holder form').hide();
+                  $('#sub-success .heading').text("Thanks for signing up!");
+                  $('#sub-success .msg').text(msg);
+                  $('#sub-success').show();
+                  $('.form').delay(1400).fadeOut(300);
+                  $.cookie('slide_newsletter', 'close', { expires: 365, path: '/' })
+              }
           });
+      });
+  });
 
-          var navpos = $('.nav-container').offset();
-          console.log(navpos.top);
-          $(window).bind('scroll', function() {
-            if ($(window).scrollTop() < (navpos.top+300)){
-              $('.form').addClass('form-fixed');
-            }
-            else {
-              $('.form').removeClass('form-fixed');
-            }
-          });
-        } else {
+  $(document).ready(function() {
+      $('#fieldqulir').val(window.current_site_version.permalink);
+
+      if (window.current_page == 'index' && $.cookie('slide_newsletter') != 'close'){
+        $('.form').addClass('form-fixed');
+        $('.form').delay(2000).slideDown(1000);
+        
+        $('.form .close').click(function () {
           $('.form').removeClass('form-fixed');
-          $('.form').show();
-        }        
-    });
+          close = true
+          $.cookie('slide_newsletter', 'close', { expires: 365, path: '/' })
+        });
+
+        var navpos = $('.nav-container').offset();
+        console.log(navpos.top);
+        $(window).bind('scroll', function() {
+          if ($(window).scrollTop() < (navpos.top+300) && close == false){
+            $('.form').addClass('form-fixed');
+          }
+          else {
+            $('.form').removeClass('form-fixed');
+          }
+        });
+      } else {
+        $('.form').removeClass('form-fixed');
+        $('.form').show();
+      }        
+  });
