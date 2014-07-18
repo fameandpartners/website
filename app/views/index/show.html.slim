@@ -10,8 +10,6 @@
   meta name="twitter:title" content="Fame & Partners - Formal dresses for fashion mavens"
   meta name="twitter:description" content="I want to go shopping with my formal dress with you. Discover what your style profile is."
 
-= check_users_first_visit
-
 ruby:
   if @show_competition_quiz && spree_user_signed_in?
     redirectUrl = user_competition_boutique_path(

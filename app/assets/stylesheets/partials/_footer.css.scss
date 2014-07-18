@@ -96,7 +96,7 @@
 				.sub{
 					width: 300px;
 					margin: 0 auto 20px auto;
-					font: 15px/1em "Lato", sans-serif;
+					font: 15px/1em $fontFive;
 					font-style: italic;
 					display: block;
 					text-transform: none;
@@ -111,7 +111,7 @@
 				height: 34px;
 				display: inline-block;
 				float: left;
-				font: 14px/1em "Lato", sans-serif;
+				font: 14px/1em $fontOne;
 			}
 			button {
 				position: relative;
