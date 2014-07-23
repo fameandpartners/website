@@ -7,8 +7,8 @@
         .heading
         .msg
     form action="http://fameandpartners.createsend.com/t/t/s/ekjll/" method="post" id="subForm"
-      .title Get Free Styling Advice
-      .sub Enter your email address for free styling advice and special discounts.
+      .title Get $25 to spend on a killer dress
+      .sub Plus free styling advice and birthday gifts!
       .fields
           input id="fieldEmail" name="cm-ekjll-ekjll" type="email" placeholder="enter your email address"
           input type="hidden" id="fieldurlkl" name="cm-fo-urlkl" value="190873"
@@ -51,7 +51,7 @@ javascript:
   $(document).ready(function() {
       $('#fieldqulir').val(window.current_site_version.permalink);
 
-      if (window.current_page == 'index' && $.cookie('slide_newsletter') != 'close'){
+      if ((window.current_page == 'index' || window.location.pathname == '/fashionista2014' || window.location.pathname == '/au/fashionista2014') && $.cookie('slide_newsletter') != 'close'){
         $('.form').addClass('form-fixed');
         $('.form').delay(2000).slideDown(1000);
         
