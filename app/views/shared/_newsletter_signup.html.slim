@@ -42,12 +42,12 @@ javascript:
                   $('.form .holder form').delay(2000).fadeIn(300);
                   window.track.event('Newsletter', 'Error', campaign)
               } else { // 200
-                  msg = "Thanks for signing up. " + data.Message;
+                  msg = "Thanks for signing up. Use this promocode for $25 off your purchase: NEWS25." + data.Message;
                   $('.form .holder form').hide();
                   $('#sub-success .heading').text("Thanks for signing up!");
                   $('#sub-success .msg').text(msg);
                   $('#sub-success').show();
-                  $('.form').delay(1400).fadeOut(300);
+                  $('.form').delay(6000).fadeOut(300);
                   $.cookie('slide_newsletter', 'close', { expires: 365, path: '/' })
                   window.track.event('Newsletter', 'Submitted', campaign)
               }
