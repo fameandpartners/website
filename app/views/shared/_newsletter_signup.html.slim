@@ -18,7 +18,7 @@
 
 
 javascript:
-  var close = true;
+  var close = false;
   var campaign = 'home'
 
   if (window.location.pathname == '/fashionista2014' || window.location.pathname == '/au/fashionista2014'){
@@ -44,7 +44,7 @@ javascript:
               } else { // 200
                   msg = "Thanks for signing up. Use this promocode for $25 off your purchase: NEWS25." + data.Message;
                   $('.form .holder form').hide();
-                  $('#sub-success .heading').text("Thanks for signing up!");
+                  $('#sub-success .heading').text("Thanks for signing up! PROMOCODE: NEWS25");
                   $('#sub-success .msg').text(msg);
                   $('#sub-success').show();
                   $('.form').delay(6000).fadeOut(300);
@@ -58,7 +58,7 @@ javascript:
   $(document).ready(function() {
       $('#fieldqulir').val(window.current_site_version.permalink);
 
-      if (close != true){
+      if ((window.current_page == 'index' || window.location.pathname == '/fashionista2014' || window.location.pathname == '/au/fashionista2014') && $.cookie('slide_newsletter') != 'close'){
         $('.form').addClass('form-fixed');
         $('.form').delay(2000).slideDown(1000);
         window.track.event('Newsletter', 'Opened', campaign)
