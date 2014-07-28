@@ -5,6 +5,8 @@ javascript:
   ruby:
     images = @product.images_json
     videos = @product.videos_json
+    sku = @product.sku
+    category = range_taxon_name_for(@product)
     default_color = nil
     default_images = images.select{|image| image[:color].blank? }
     if default_images.blank? and images.present?
@@ -27,6 +29,7 @@ javascript:
     share_url = collection_product_url(@product)
 
     moodboard_pics = @product.moodboard_items.active.moodboard.limit(5)
+
 
   javascript:
     window.product_variants = #{{ @product_variants.to_json }};
@@ -64,3 +67,5 @@ javascript:
                 = render 'no_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
       .grid-4
         = render 'product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }
+
+  script type="text/javascript" id="adacadoPixel" src="//pixel.adacado.com/1000668?segment=product&category=#{category}&product=#{sku}"

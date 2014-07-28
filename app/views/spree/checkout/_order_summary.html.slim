@@ -1,3 +1,15 @@
+ruby:
+  line_items_collection = @order.line_items
+  skus = Array.new
+
+  line_items_collection.each do |item|
+    variant = item.variant
+    product = variant.product
+    skus.push product.sku
+  end
+
+
+
 .checkout-title
   h3 Item description
 .checkout-content.line  
@@ -5,7 +17,7 @@
     .shopping-bag-popup
       .items-carousel style="height: auto;"
         = render partial: "shared/line_item", \
-          collection: @order.line_items, \
+          collection: line_items_collection, \
           as: :line_item, \
           locals: {hide_remove: true, show_customizations: true}
     ul.pricing
@@ -58,3 +70,6 @@
             span.icon-holder
               span.icon-comment
             span free stylists
+
+           
+script type="text/javascript" id="adacadoPixel" src="//pixel.adacado.com/1000668?segment=cart&product=#{skus.join(",")}"
