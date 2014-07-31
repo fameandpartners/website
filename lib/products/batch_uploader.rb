@@ -79,6 +79,7 @@ module Products
         raw[:cogs]                = book.cell(row_num, columns[:cogs])
         raw[:color_customization] = book.cell(row_num, columns[:color_customization])
         raw[:video_id]            = book.cell(row_num, columns[:video_id])
+        raw[:short_description]   = book.cell(row_num, columns[:short_description])
 
         # Additional
         raw[:perfume_link]        = book.cell(row_num, columns[:perfume_link])
@@ -86,6 +87,8 @@ module Products
         raw[:perfume_brand]       = book.cell(row_num, columns[:perfume_brand])
         raw[:song_link]           = book.cell(row_num, columns[:song_link])
         raw[:song_name]           = book.cell(row_num, columns[:song_name])
+        
+
 
         raw[:recommendations]     = {}
         columns[:recommendations].each do |style, recommendations|
@@ -158,6 +161,10 @@ module Products
 
         if raw[:product_details].present?
           processed[:product_details] = ActionController::Base.helpers.simple_format(raw[:product_details])
+        end
+
+        if raw[:short_description].present?
+          processed[:short_description] = ActionController::Base.helpers.simple_format(raw[:short_description])
         end
 
         range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
@@ -253,7 +260,8 @@ module Products
             revenue:              raw[:revenue],
             cogs:                 raw[:cogs],
             video_id:             processed[:video_id],
-            color_customization:  raw[:color_customization]
+            color_customization:  raw[:color_customization],
+            short_description:    raw[:short_description]
           },
           perfume: {
             link:         raw[:perfume_link],
@@ -320,7 +328,8 @@ module Products
         shipping: /shipping/i,
         stylist_quote_short: /stylist inspiration quote/i,
         #stylist_quote_long: /expanded stylist quote/i,
-        product_details: /product details/i
+        product_details: /product details/i,
+        short_description: /short description/i
       }
 
       conformities.each do |key, regex|
@@ -345,11 +354,13 @@ module Products
         end
       end
 
-      @codes[:price_in_aud] = 3
-
       @codes[:customizations] = []
 
-      start = 22 # ?
+      @codes[:price_in_aud] = 4
+      @codes[:price_in_usd] = 5
+      @codes[:description] = 6
+
+      start = 23 # ?
       3.times do |time|
         @codes[:customizations] << {
           name: start,
@@ -367,7 +378,7 @@ module Products
       #end
 
       #scent_start = @codes[:customization_exclusions].present? ? (@codes[:customization_exclusions].first.to_i + 1) : 28
-      scent_start = 28
+      scent_start = 32 #28 + (usd + customisation exclusions = 5 columns) = 32
 
       @codes[:perfume_link]   = scent_start
       @codes[:perfume_name]   = scent_start + 1
@@ -397,11 +408,13 @@ module Products
         start += 16
       end
 
-      @codes[:price_in_aud]   = 4
-      @codes[:revenue]        = 131
-      @codes[:cogs]           = 132
-      @codes[:product_coding] = 133
-      @codes[:video_id]       = 135 # 138
+      
+      @codes[:revenue]        = 135
+      @codes[:cogs]           = 136
+      @codes[:product_coding] = 137
+      @codes[:video_id]       = 139 # 138 139 with 
+      @codes[:short_description] = 140
+
 
       @codes
     end
@@ -456,7 +469,7 @@ module Products
       product = master.try(:product)
 
       if product.blank?
-        product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: Time.now)
+        product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: DateTime.now+2)
       end
 
       attributes = {
@@ -512,7 +525,8 @@ module Products
                  :revenue,
                  :cogs,
                  :video_id,
-                 :color_customization]
+                 :color_customization,
+                 :short_description]
 
       properties = args.slice(*allowed).select{ |name, value| value.present? }
 
