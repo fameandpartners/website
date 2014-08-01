@@ -146,7 +146,7 @@ FameAndPartners::Application.routes.draw do
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/blake-lively'  => 'statics#blake-lively', :as => :blake_lively
-    get '/team'    => 'statics#team'
+    get '/team', to: redirect("http://www.fameandpartners.com/%{site_version}/about")
     get '/terms'   => 'statics#ecom_terms'
     get '/privacy' => 'statics#ecom_privacy'
     get '/legal'   => 'statics#legal'
