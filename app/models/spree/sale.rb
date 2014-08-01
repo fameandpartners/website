@@ -43,7 +43,7 @@ class Spree::Sale < ActiveRecord::Base
       unless surryhills
         price * (BigDecimal.new(100) - discount_size) / 100
       else
-        price * (BigDecimal.new(100) - 60) / 100  
+        price * (BigDecimal.new(100) - 80) / 100  
       end
     end
   end
