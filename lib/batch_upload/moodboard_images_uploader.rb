@@ -20,10 +20,9 @@ module BatchUpload
 
               matches = /^(?<position>\d+)\.\S+/.match(file_name)
 
-              if matches.blank?
-                puts "  [ERROR] File name is invalid"
-              else
-                puts "  [INFO] File name successfully parsed"
+              puts "  [INFO] File name successfully parsed"
+
+              if matches.present? && matches[:position].present?
                 puts "    POSITION:   #{matches[:position]}"
               end
 

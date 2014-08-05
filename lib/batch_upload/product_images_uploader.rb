@@ -13,7 +13,7 @@ module BatchUpload
             puts "  [INFO] Process \"#{file_name}\" file"
             puts "  [INFO] Parse file name"
 
-            matches = /(^\S+[\-_]+(?<color_name>\S+)[\-_]+(?<position>\S+)\.(?<extension>\S+))|(\S+[\-_]+(?<position>\S+)\.(?<extension>\S+))$/i.match(file_name)
+            matches = /(^\S+[\-_]+(?<color_name>[^-]+)[\-_]+(?<position>\S+)\.(?<extension>\S+))|(\S+[\-_]+(?<position>\S+)\.(?<extension>\S+))$/i.match(file_name)
 
             if matches.blank?
               puts "  [ERROR] File name is invalid"
@@ -31,7 +31,7 @@ module BatchUpload
             puts "    POSITION: #{position}"
 
             if matches[:color_name].present?
-              color_name = matches[:color_name].strip.underscore.downcase.dasherize
+              color_name = matches[:color_name].strip.underscore.downcase.dasherize.gsub(' ', '-')
               puts "    COLOR:   #{color_name}"
             else
               color_name = nil
@@ -78,19 +78,19 @@ module BatchUpload
             puts "    VIEWABLE_ID:   #{viewable.id}"
             puts "    POSITION:      #{position}"
 
-              # image = Spree::Image.create(
-              #   :attachment    => File.open(file_path),
-              #   :viewable_type => viewable.class.name,
-              #   :viewable_id   => viewable.id,
-              #   :position      => position
-              # )
-              #
-              # if image.persisted?
-              #   puts "  [INFO] Image successfully created"
-              # else
-              #   puts "  [ERROR] Image can not created"
-              #   puts "    MESSAGES: #{image.errors.full_messages.map(&:downcase).to_sentence}"
-              # end
+            image = Spree::Image.create(
+              :attachment    => File.open(file_path),
+              :viewable_type => viewable.class.name,
+              :viewable_id   => viewable.id,
+              :position      => position
+            )
+
+            if image.persisted?
+              puts "  [INFO] Image successfully created"
+            else
+              puts "  [ERROR] Image can not created"
+              puts "    MESSAGES: #{image.errors.full_messages.map(&:downcase).to_sentence}"
+            end
 
           rescue Exception => message
             puts "  [ERROR] #{message.inspect}"

@@ -7,7 +7,7 @@ module BatchUpload
         get_list_of_directories(path).each do |directory_path|
           directory_name = directory_path.rpartition('/').last.strip
 
-          next unless directory_name =~ /perfume/i
+          next unless directory_name =~ /song/i
 
           get_list_of_files(directory_path).each do |file_path|
             begin
