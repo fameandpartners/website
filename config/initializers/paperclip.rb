@@ -8,8 +8,7 @@ if Rails.env.production?
       :access_key_id => configatron.aws.s3.access_key_id,
       :secret_access_key => configatron.aws.s3.secret_access_key
     },
-    s3_host_alias: configatron.aws.host,
-    :s3_protocol => ""
+    s3_host_alias: configatron.aws.host
   )
 else
   Paperclip::Attachment.default_options.merge!(
