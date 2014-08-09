@@ -35,11 +35,14 @@
     h2 = raw @page_info[:banner_text]
 - else  
   .category-header
-    - if @page_info[:banner_image].blank?
+    h1 = @page_info[:banner_title]
+    h2 = raw @page_info[:banner_text]
+    .arrows-line-horizontal
+    /- if @page_info[:banner_image].blank?
       h1 = @page_info[:banner_title]
       h2 = raw @page_info[:banner_text]
       .arrows-line-horizontal
-    - else
+    /- else
       .category-banner
         = image_tag(@page_info[:banner_image], :title => @page_info[:banner_title]+" "+@page_info[:banner_text] )
 .category-filter
