@@ -392,7 +392,7 @@ FameAndPartners::Application.routes.draw do
 
     # seo routes like *COLOR*-Dress
     get "(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses
-    get "lp/(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses, defaults: { lp: true }
+    #get "lp/(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses, defaults: { lp: true }
     get "new-collection" => 'spree/products#index', defaults: { edits: 'new-collection' }, as: :new_collection
 
     resources :site_versions, only: [:show]

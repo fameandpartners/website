@@ -11,7 +11,7 @@ ruby:
   .row
     - if @products.present?
       - @products.each do |product|
-        div class="#{ show_small_product_images? ? 'grid-3' : 'grid-4'}"
+        div class="grid-3"
           - cache (cache_name_fragments + [product.id]), :expires_in => configatron.cache.expire.long do
             = render 'spree/products/cached_product', product: product
     - else
@@ -23,6 +23,6 @@ ruby:
         h1 View more dresses
         h2.border These dresses can also be made in #{ @searcher.selected_color_name }
       - @similar_products.each do |product|
-        div class="#{ show_small_product_images? ? 'grid-3' : 'grid-4'}"
+        div class="grid-3"
           - cache (cache_name_fragments + [product.id]), :expires_in => configatron.cache.expire.long do
             = render 'spree/products/cached_product', product: product
