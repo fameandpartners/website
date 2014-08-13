@@ -1,3 +1,6 @@
+require 'paperclip/protocol_relative_url_support'
+Paperclip::Attachment.send :include, Paperclip::ProtocolRelativeURLSupport
+
 if Rails.env.production?
   Paperclip::Attachment.default_options.merge!(
     :storage => :s3,
