@@ -110,7 +110,7 @@ module ProductsHelper
   def line_item_image_url(line_item, size = :small)
     image = line_item.image
     if image.present? && image.attachment.present?
-      image.attachment.url(size)
+      image.attachment.url(size, protocol_relative: true)
     else
       'noimage/product.png'
     end
