@@ -78,6 +78,9 @@
 	.logo{
 		display: inline-block;
 		margin-right: 30px; 
+		img{
+			height: 21px;
+		}
 	}
 	.logo:last-child{
 		margin-right: 0px;
