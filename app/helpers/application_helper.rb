@@ -318,7 +318,7 @@ module ApplicationHelper
   end
 
   def is_surryhills?(product)
-    if product.property('factory_name').present? && product.property('factory_name').downcase == "surryhills"
+    if product.property('factory_name').present? && (product.property('factory_name').downcase == "surryhills" || product.property('factory_name').downcase == "iconic")
       return true 
     else
       return false

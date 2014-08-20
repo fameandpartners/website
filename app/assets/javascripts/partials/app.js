@@ -112,4 +112,9 @@ $(function() {
     popup.show();
     return true;
   });
+
+  zoomObj = $('.picture.product');
+  zoomObj.zoom({});
+
+
 });

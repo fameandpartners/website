@@ -232,6 +232,7 @@ Spree::Product.class_eval do
         color = image.viewable.option_value.name
       end
       {
+        original: image.attachment.url(:original),
         large: image.attachment.url(:large),
         xlarge: image.attachment.url(:xlarge),
         small: image.attachment.url(:small),
