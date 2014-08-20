@@ -84,3 +84,21 @@ javascript:
               .m-pixel
                 img src="http://tags.rtbidder.net/convert?sid=52564c0e8bc06f1060da24f8" width="0" height="0" border="0" alt=""
               script src="https://secure.adnxs.com/px?id=154031&seg=1436880&order_id=#{ @order.number }&value=#{ @order.display_item_total }&t=1" type="text/javascript"
+              // -- Facebook Conversion Code for Sales
+              javascript:
+                (function() {
+                var _fbq = window._fbq || (window._fbq = []);
+                if (!_fbq.loaded) {
+                var fbds = document.createElement('script');
+                fbds.async = true;
+                fbds.src = '//connect.facebook.net/en_US/fbds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(fbds, s);
+                _fbq.loaded = true;
+                }
+                })();
+                window._fbq = window._fbq || [];
+                window._fbq.push(['track', '6024018325820', {'value':'0.01','currency':'USD'}]);
+                
+              noscript
+                img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6024018325820&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1"
