@@ -762,10 +762,15 @@ body.competition_entries {
 }
 
 .landing-page{
+	h3{
+		font: 400 40px/1.4 $fontThree;
+	}
+	h4{
+		font: 400 18px/1.4 $fontThree;
+		text-transform: uppercase;
+	}
 	.feature{
-		height: 320px;
-		overflow: hidden;
-		margin: 0 0 12px 0;
+		margin: 0 0 40px 0;
 		position: relative;
 
 		.info{
@@ -814,5 +819,33 @@ body.competition_entries {
 	}
 	.last{
 		margin-right: 0;
+	}
+
+
+
+}
+
+.landing-page.plus-size{
+	.product{
+		margin-bottom: 40px;
+		.prod-image{
+			width: 277px;
+		}
+		.description{
+			line-height: 1.6em;
+		}
+		.quote{
+			margin: 20px 0;
+			font: normal 100 17px/1.3 $fontTwo;
+			font-style: italic;
+			text-transform: none;
+			p{
+				padding: 0;
+				margin: 0;
+			}
+		}
+	}
+	.section-title{
+		margin: 20px 0;
 	}
 }
