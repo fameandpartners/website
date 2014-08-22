@@ -80,12 +80,14 @@ module FameAndPartners
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
 
+    redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
     if !Rails.env.development? && !Rails.env.test?
-      redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-      config.cache_store = :redis_store, "redis://10.100.94.127:6379/0/#{redis_namespace}"
+      redis_host = '10.100.94.127'
     else
-      config.cache_store = :redis_store
+      redis_host = 'localhost'
     end
+
+    config.cache_store = :redis_store, "redis://#{redis_host}:6379/0/#{redis_namespace}"
 
     config.generators do |generator|
       generator.test_framework :rspec
