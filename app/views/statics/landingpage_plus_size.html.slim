@@ -3,7 +3,16 @@
     .grid-container
       .row
         .feature
-          = image_tag('landingpages/plus-size-banner.jpg')
+          ul.plus-size-slider
+            li
+              = link_to '/' do
+                = image_tag('landingpages/plus-size-banner.jpg')
+            li 
+              = link_to '/' do
+                = image_tag('landingpages/plus-size-banner.jpg')
+            li 
+              = link_to '/' do
+                = image_tag('landingpages/plus-size-banner.jpg')
       .row
         - @plus_size_dresses.each_slice(2).with_index do |slice, i|
           - slice.each do |product|

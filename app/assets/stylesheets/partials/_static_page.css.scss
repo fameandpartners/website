@@ -770,8 +770,12 @@ body.competition_entries {
 		text-transform: uppercase;
 	}
 	.feature{
-		margin: 0 0 40px 0;
 		position: relative;
+		width: 1140px;
+		height: 530px;
+		overflow: hidden;
+		margin: 0 0 30px 0;
+		padding: 0;
 
 		.info{
 			width: 320px;
