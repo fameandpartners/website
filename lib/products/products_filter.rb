@@ -301,7 +301,34 @@ module Products
     def prepare_colours(colour_names)
       return [] if colour_names.blank?
       colours = Array.wrap(colour_names).collect{|colour| colour.to_s.downcase }
-      Spree::OptionValue.where("lower(name) in (?)", colours).to_a
+
+      if colours.size.eql?(1)
+        color_names = case colours.first
+          when 'blue'
+            %w( blue navy )
+          when 'pink'
+            %w( pink blush-pink )
+          else
+            colours
+        end
+      else
+        color_names = colours
+      end
+
+      if color_names.size.eql?(1)
+        Spree::OptionValue.where("lower(name) = ?", color_names.first).to_a
+      else
+        whens = color_names.map do |color_name|
+          "WHEN lower(name) = #{ActiveRecord::Base.connection.quote(color_name)} THEN #{color_names.index(color_name)}"
+        end
+
+        ordering_sql = "CASE #{whens.join(' ')} END ASC"
+
+        Spree::OptionValue.
+          where("lower(name) IN (?)", color_names).
+          order(ordering_sql).
+          to_a
+      end
     end
 
     def prepare_bodyshape(bodyshapes)
