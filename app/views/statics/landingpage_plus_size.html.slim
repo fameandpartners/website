@@ -5,6 +5,8 @@
         .feature
           ul.plus-size-slider
             li
+              = image_tag('landingpages/plus-size-banner.jpg')
+            li
               = link_to '/collection/mesh/gloria' do
                 = image_tag('statics/plussize/GLORIA.jpg')
             li 
@@ -41,7 +43,8 @@
                   = link_to collection_product_path(product), :title => product.name do
                     = product_image(product, :class=>"prod-image")
                 .grid-6
-                  h3 = product.name
+                  h3
+                    = link_to product.name, collection_product_path(product), :title => product.name
                   .description
                     = product_description(product.description)
                   - unless style_notes.nil?
@@ -50,6 +53,7 @@
                       p
                         = style_notes
                   .category-catalog
+                    .price = price_for_product(product)
                     .buttons
                       .buy-button
                         = link_to "Buy", collection_product_path(product, :cf => 'collection'), class: 'btn black small', title: "Buy this dress"
@@ -59,7 +63,8 @@
             - else
               .product.grid-6
                 .grid-6
-                  h3 = product.name
+                  h3
+                  = link_to product.name, collection_product_path(product), :title => product.name
                   .description
                     = product_description(product.description)
                   - unless style_notes.nil?
@@ -68,6 +73,7 @@
                       p
                         = style_notes
                   .category-catalog
+                    .price = price_for_product(product)
                     .buttons
                       .buy-button
                         = link_to "Buy", collection_product_path(product, :cf => 'collection'), class: 'btn black small', title: "Buy this dress"
@@ -82,9 +88,9 @@
       .row.category-catalog
         .section-title
           - if current_site_version.code == 'us'
-            =image_tag('landingpages/plus-size-section-title_us.jpg')
-          - else
             =image_tag('landingpages/plus-size-section-title_au.jpg')
+          - else
+            =image_tag('landingpages/plus-size-section-title_us.jpg')
         - @plus_size_dresses_other.each do |product|
           div class="grid-3"
             .picture
