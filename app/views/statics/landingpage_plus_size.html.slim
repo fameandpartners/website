@@ -5,14 +5,32 @@
         .feature
           ul.plus-size-slider
             li
-              = link_to '/' do
-                = image_tag('landingpages/plus-size-banner.jpg')
+              = link_to '/collection/mesh/gloria' do
+                = image_tag('statics/plussize/GLORIA.jpg')
             li 
-              = link_to '/' do
-                = image_tag('landingpages/plus-size-banner.jpg')
+              = link_to '/collection/lace/harriet' do
+                = image_tag('statics/plussize/HARRIET.jpg')
             li 
-              = link_to '/' do
-                = image_tag('landingpages/plus-size-banner.jpg')
+              = link_to '/collection/v-neck/clara' do
+                = image_tag('statics/plussize/CLARA.jpg')
+            li 
+              = link_to '/collection/pleated/dorothy' do
+                = image_tag('statics/plussize/DOROTHY.jpg')
+            li 
+              = link_to '/collection/pleated/eleanor' do
+                = image_tag('statics/plussize/ELEANOR.jpg')
+            li 
+              = link_to '/collection/lace/malala' do
+                = image_tag('statics/plussize/MALALA.jpg')
+            li 
+              = link_to '/collection/balls/marie' do
+                = image_tag('statics/plussize/MARIE.jpg')
+            li 
+              = link_to '/collection/pleated/maya' do
+                = image_tag('statics/plussize/MAYA.jpg')
+            li 
+              = link_to '/collection/strapless/susan' do
+                = image_tag('statics/plussize/SUSAN.jpg')
       .row
         - @plus_size_dresses.each_slice(2).with_index do |slice, i|
           - slice.each do |product|
@@ -60,13 +78,10 @@
                   = link_to collection_product_path(product), :title => product.name do
                     = product_image(product, :class=>"prod-image")
                 
-
-
-
                 
       .row.category-catalog
         .section-title
-          - if current_site_version == 'us'
+          - if current_site_version.code == 'us'
             =image_tag('landingpages/plus-size-section-title_us.jpg')
           - else
             =image_tag('landingpages/plus-size-section-title_au.jpg')
