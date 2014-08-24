@@ -82,4 +82,24 @@
                           = link_to t('words.customize'), personalization_product_path(permalink: product.permalink, :cf => 'collection'), class: 'btn empty border small', title: "#{t('words.customize').titleize} this dress"
                 .grid-6
                   = link_to collection_product_path(product), :title => product.name do
-                    = product_image(product, :class=>"prod-ima
+                    = product_image(product, :class=>"prod-image")
+                
+                
+      .row.category-catalog
+        .section-title
+          - if current_site_version.code == 'us'
+            =image_tag('landingpages/plus-size-section-title_au.jpg')
+          - else
+            =image_tag('landingpages/plus-size-section-title_us.jpg')
+        - @plus_size_dresses_other.each do |product|
+          div class="grid-3"
+            .picture
+              = link_to collection_product_path(product), :title => product.name do
+                = hoverable_product_image_tag(product, colors: @current_colors, itemprop: 'image', alt: product.name)
+                h6 = product.name  
+            .buttons
+              .buy-button
+                = link_to "Buy", collection_product_path(product, :cf => 'collection'), class: 'btn black small', title: "Buy this dress"
+              - if (product.can_be_customized? and !product.in_sale?)
+                .custom-button
+                  = link_to t('words.customize'), personalization_product_path(permalink: product.permalink, :cf => 'collection'), class: 'btn empty border small', title: "#{t('words.customize').titleize} this dress"
