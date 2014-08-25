@@ -13,7 +13,7 @@ javascript:
     });
     $('a.choose-friends-link').click(function(event){
       event.preventDefault();
-      window.track.event('StyleQuiz', 'Share', '');
+      window.track.event('Style Quiz', 'Share', '');
       FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
           FB.ui(
