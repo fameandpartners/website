@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
@@ -58,6 +59,7 @@ group :development do
   gem 'thin', '1.5.1'
   gem 'pry-rails'
   gem 'debugger'
+  gem "therubyracer"
 end
 
 group :test do
@@ -69,7 +71,8 @@ group :test do
 end
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
-
+gem 'spree_banner', '~> 1.3.0'
+  
 # spree extensions for authentication
 gem 'spree_auth_devise',
   :github => 'spree/spree_auth_devise',
@@ -77,6 +80,7 @@ gem 'spree_auth_devise',
   :ref => 'c4466de3748618971dc401e6e30c0d87f2b9c143'
 
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
+
 
 # spree extensions for payments
 gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
