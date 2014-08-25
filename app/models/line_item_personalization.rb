@@ -20,7 +20,7 @@ class LineItemPersonalization < ActiveRecord::Base
             presence: true,
             inclusion: {
               allow_blank: true,
-              in: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
+              in: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
             }
 
   validates :color,
