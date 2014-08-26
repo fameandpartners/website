@@ -311,6 +311,13 @@ module ApplicationHelper
     content_tag(:iframe, '', iframe_options.merge(src: media_player_url))
   end
 
+  def get_products_from_edit (edit, currency, user, count=9)
+    searcher = Products::ProductsFilter.new(:edits => edit)
+    searcher.current_user = user
+    searcher.current_currency = currency
+    return searcher.products.first(count)
+  end
+
   private
 
   def current_sale

@@ -155,6 +155,7 @@ FameAndPartners::Application.routes.draw do
     get '/fashionista2014'   => 'statics#fashionistacomp', :as => :fashionista
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
     get '/compterms' => 'statics#comp_terms'
+    get '/plus-size' => 'statics#landingpage_plus_size', :as => :plus_size
 
     get '/campaigns/stylecall' => 'campaigns#show'
     post '/campaigns/stylecall' => 'campaigns#create'

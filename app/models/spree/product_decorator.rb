@@ -70,11 +70,22 @@ Spree::Product.class_eval do
 
   def images_for_colors(colors)
     table_name = Spree::Image.quoted_table_name
-    product_color_value_ids = product_color_values.where(option_value_id: colors.map(&:id)).map(&:id)
+    color_ids = colors.map(&:id)
+    viewables = product_color_values.where(option_value_id: color_ids)
 
-    Spree::Image.where(
-      "#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?)",
-      product_color_value_ids).order('position ASC')
+    if viewables.present?
+      whens = viewables.map do |viewable|
+        "WHEN #{table_name}.viewable_id = #{viewable.id} THEN #{color_ids.index(viewable.option_value_id)}"
+      end
+
+      ordering_sql = "CASE #{whens.join(' ')} END ASC, position ASC"
+    else
+      ordering_sql = 'position ASC'
+    end
+
+    Spree::Image.
+      where("#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?)", viewables.map(&:id)).
+      order(ordering_sql)
   end
 
   def images_for_variant(variant)
