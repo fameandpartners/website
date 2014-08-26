@@ -82,7 +82,10 @@
               h4 = link_to 'Maya', mayalink
               .info
                 .price
-                  span $209
+                  - if current_site_version.code == 'us'
+                    span $199
+                  - else
+                    span $209
                 = link_to "SHOP NOW", mayalink, class: 'btn mid'
             .grid-7
               .grid-6
@@ -104,7 +107,10 @@
               h4 = link_to 'Frida', fridalink
               .info
                 .price
-                  span $209
+                  - if current_site_version.code == 'us'
+                    span $199
+                  - else
+                    span $209
                 = link_to "SHOP NOW", fridalink, class: 'btn mid'
             .grid-7
               .grid-6
@@ -126,7 +132,10 @@
               h4 = link_to 'Dorothy', dorothylink
               .info
                 .price
-                  span $339
+                  - if current_site_version.code == 'us'
+                    span $329
+                  - else
+                    span $339
                 = link_to "SHOP NOW", dorothylink, class: 'btn mid'
             .grid-7
               .grid-6
@@ -141,9 +150,9 @@
                   = link_to "See more styling advice", '/custom-dresses/dorothy/style', class: 'btn empty mid'     
     .blogger-bg.left
       = image_tag '_blogger/moodboard/lizblack1.png'   
-      = image_tag '_blogger/moodboard/lizblack2.png'   
+      = image_tag '_blogger/moodboard/lizblack5.jpg'   
       = image_tag '_blogger/moodboard/lizblack3.jpg'      
     .blogger-bg.right
       = image_tag '_blogger/moodboard/lizblack4.jpg'
-      = image_tag '_blogger/moodboard/lizblack5.jpg'
+      = image_tag '_blogger/moodboard/lizblack2.png'
       = image_tag '_blogger/moodboard/lizblack6.jpg'
