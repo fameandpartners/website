@@ -35,16 +35,30 @@ ruby:
 .grid-container
   .home-promo
     = link_to collection_path, title: "Shop New Season Dresses" do
-      = image_tag @big_banner.attachment(:big)
+			-if @big_banner.present?
+				= image_tag @big_banner.attachment(:big)
+			-else
+				= image_tag "homepage/new/august2014.jpg"
 
 
 .promo-tiles
   .grid-container
     .rowsmall-stylequiz
-			-@small_banner.each do |small_banner|
+			-if @small_banner.present?
+				-@small_banner.each do |small_banner|
+					.tile
+						= link_to "", class: 'show-style-quiz' do
+							= image_tag small_banner.attachment(:small)
+			-else
 				.tile
 					= link_to "", class: 'show-style-quiz' do
-						= image_tag small_banner.attachment(:small)
+						= image_tag 'homepage/new/small-stylequiz.jpg'
+				.tile
+					= link_to "", class: 'show-style-quiz' do
+						= image_tag 'homepage/new/small-reserve.gif'
+				.tile
+					= link_to "", class: 'show-style-quiz' do
+						= image_tag 'homepage/new/small-fashionista1.jpg'
 
 
 = render "shared/featured_in", :locals => {:small => ""}
