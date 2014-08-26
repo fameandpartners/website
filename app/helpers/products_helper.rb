@@ -72,10 +72,16 @@ module ProductsHelper
     if product.images.empty?
       image_tag(no_image, options)
     else
-      if colors.present? && product.images_for_colors(colors).present?
-        images = product.images_for_colors(colors)
+      images = if colors.present?
+        images_for_colors = product.images_for_colors(colors).limit(2).to_a
+
+        if images_for_colors.present?
+          images_for_colors
+        else
+          product.images
+        end
       else
-        images = product.images
+        product.images
       end
 
       image = images.first

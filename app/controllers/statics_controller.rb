@@ -1,6 +1,7 @@
 class StaticsController < ApplicationController
   include Spree::Core::ControllerHelpers::Auth
-
+  require 'enumerator'
+  
   layout 'statics'
 
   # enable showing of display banner
@@ -11,7 +12,16 @@ class StaticsController < ApplicationController
     @searcher = Products::ProductsFilter.new(:edits => "fashionista")
     @searcher.current_user = try_spree_current_user
     @searcher.current_currency = current_currency
-    @products = @searcher.products.first(8)
+  end
+
+  def landingpage_plus_size
+    @title = "Plus Size Dresses"
+
+    user = try_spree_current_user
+    currency = current_currency
+
+    @plus_size_dresses = get_products_from_edit('plus-size', currency, user, 11)
+    @plus_size_dresses_other = get_products_from_edit('plus-size-other', currency, user, 8)
   end
 
   def nylonxfame
@@ -77,6 +87,15 @@ class StaticsController < ApplicationController
   def fashionista
     @title = "Fashionista Program - " + default_seo_title
     @description = "Fashionista Program. " + default_meta_description
+  end
+
+  private
+
+  def get_products_from_edit (edit, currency, user, count=9)
+    searcher = Products::ProductsFilter.new(:edits => edit)
+    searcher.current_user = user
+    searcher.current_currency = currency
+    return searcher.products.first(count)
   end
   
 end
