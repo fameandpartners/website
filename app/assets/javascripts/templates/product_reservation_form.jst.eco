@@ -4,7 +4,7 @@
       <p>RESERVE THIS DRESS FOR YOUR EVENT, BEFORE SOMEONE ELSE DOES! REGISTER FOR TWIN ALERT.</p>
     </div>
     <div class="description guest" style="display: none;">
-      <p>Simply sign up to use our Twin Alert and ensure that no one at your school can buy the same dress.</p>
+      <p>Simply sign up to use our Twin Alert and ensure that no one else attending your event can buy the same dress.</p>
     </div>
 
     <% if @guest: %>
