@@ -110,7 +110,7 @@
       .fleft = link_to '&lt; Continue shopping'.html_safe, collection_path, class: 'btn empty border continue-shopping'
       .fright.checkout
         = form_for @order, url: update_cart_path do |f|
-          = f.button :checkout, name: 'checkout', class: 'buy-now btn border'
+          = f.button :checkout, name: 'checkout', class: 'buy-now btn pink'
         - if (paypal_button_html = paypal_express_button).present?
           .or or
           .paypal
