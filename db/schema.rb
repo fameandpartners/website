@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140603043237) do
+ActiveRecord::Schema.define(:version => 20140828002342) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -196,12 +196,13 @@ ActiveRecord::Schema.define(:version => 20140603043237) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "slug"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.boolean  "is_published"
     t.string   "title"
     t.string   "quote",        :limit => 512
     t.text     "body"
+    t.string   "kind",                        :default => "celebrity"
   end
 
   add_index "celebrities", ["slug"], :name => "index_celebrities_on_slug"

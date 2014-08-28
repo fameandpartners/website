@@ -48,6 +48,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/celebrities' => 'celebrities#index', as: 'celebrities'
     get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
+    get '/featured-bloggers/:id' => 'celebrities#show', as: 'featured_blogger'
 
     resources :line_items, only: [:create, :edit, :update, :destroy] do
       post 'move_to_wishlist', on: :member

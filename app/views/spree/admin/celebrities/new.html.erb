@@ -5,6 +5,14 @@
     <legend align="center"><%= t(:new_celebrity) %></legend>
     <div class="row">
       <div class="free columns">
+        <%= f.field_container :kind do %>
+          <%= f.radio_button :kind, 'featured_blogger' %>
+          <%= f.label :kind, 'Featured blogger' %> <span class="required">*</span><br />
+          <%= f.radio_button :kind, 'celebrity', checked: true %>
+          <%= f.label :kind, 'Celebrity' %> <span class="required">*</span><br />
+          <%= f.error_message_on :kind %>
+        <% end %>
+      <div class="free columns">
         <%= f.field_container :first_name do %>
           <%= f.label :last_name, t(:first_name) %> <span class="required">*</span><br />
           <%= f.text_field :first_name, :class => 'fullwidth' %>

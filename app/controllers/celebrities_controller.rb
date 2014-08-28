@@ -13,5 +13,11 @@ class CelebritiesController < ApplicationController
     @description = "25% off dresses inspired by " + @celebrity.full_name + ". " + ActionController::Base.helpers.strip_tags(@celebrity.body) + " " + default_meta_description
 
     @products = @celebrity.products
+
+    if @celebrity.kind == 'featured_blogger' then
+      render 'show_featured_blogger'
+    else
+      render 'show'
+    end
   end
 end
