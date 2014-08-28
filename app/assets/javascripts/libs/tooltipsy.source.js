@@ -178,7 +178,7 @@
 
         readify: function () {
             this.ready = true;
-            this.$tipsy = $('<div id="tooltipsy' + this.random + '" style="position:fixed;z-index:2147483647;display:none">').appendTo('body');
+            this.$tipsy = $('<div id="tooltipsy' + this.random + '" style="position:fixed;z-index:100;display:none">').appendTo('body');
             this.$tip = $('<div class="' + this.settings.className + '">').appendTo(this.$tipsy);
             this.$tip.data('rootel', this.$el);
             var e = this.$el;

@@ -20,12 +20,12 @@ ruby:
         .size-info US Sizes Displayed
     .sizebox
       - base_sizes(sizes).each do |size|
-        .button data-size="#{size}" title=( extra_size_title if size.to_i >= 14 ) = size
+        .button data-size="#{size}" title=( extra_size_title if size.to_i >= 22 ) = size
       - if dropdown_sizes(sizes).present?
         .dropdown-button data-open="-" data-close="+" +
         - dropdown_sizes(sizes).each do |size|
-          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= 14 ) = size
-  .section
+          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= 22 ) = size
+  .section.buy-button-section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
     = link_to 'add to cart', '#', class: 'btn buy-now'
   .section
@@ -81,8 +81,10 @@ ruby:
             li Sale Items- 31%- 49% off: 7 days from date of shipment 
             li Sale Items- > 50%: No Returns 
       li
-        .title Twin alert
-        .text = product_twin_alert_link(@product)
+        .title Second Opinion
+        .text 
+          p Send this dress to a friend for their opinion
+          p = send_to_a_friend_link(product)
       - if defined?(products) && products.present?
         li.opened.recommended 
           .title more killer dresses

@@ -213,7 +213,7 @@ module ProductsHelper
     data = { product: product.permalink }
     data.update({ guest: true }) unless spree_user_signed_in?
 
-    link_to '2ND OPINION', '#', class: 'btn send-to-friend askmumbtn', data: data, title: 'Send this dress to whoever you want to get a second opinion from!'
+    link_to 'Get a Second Opinion', '#', class: 'btn small send-to-friend', data: data, title: 'Send this dress to whoever you want to get a second opinion!'
   end
 
   def wishlist_move_to_cart_link(wishlist_item)
@@ -266,12 +266,16 @@ module ProductsHelper
   def product_twin_alert_link(product)
     return '' if product.blank?
 
-    data_attrs = { product_id: product.id }
+    if signed_in? && (reservation = spree_current_user.reservation_for(product)).present?
+      content_tag(:div, class: 'twin-alert') do
+        raw("<div class='reserved btn' title='#{spree_current_user.first_name}, you have reserved this dress in #{reservation.color}.'><i class='icon icon-tick-circle'></i> Reserved</div>")
+      end
+    else
+      data_attrs = { product_id: product.id }
 
-    content_tag(:div, class: 'twin-alert') do
-      content_tag(:div, t('views.pages.products.show.notices.twin_alert').html_safe, class: 'hint') +
-      link_to("Twin Alert", '#', class: 'twin-alert-link btn', data: data_attrs) +
-      raw("<div class='hide reserved'><i class='icon icon-tick-circle'></i><span class='username'></span>, you have reserved this dress in <span class='color'></span>.</div>")
+      content_tag(:div, class: 'twin-alert') do
+        link_to("Reserve this Dress", '#', class: 'twin-alert-link btn', title: 'Reserve this dress for your event. Select a color first.', data: data_attrs)
+      end
     end
   end
 

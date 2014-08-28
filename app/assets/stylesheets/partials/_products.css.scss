@@ -243,10 +243,6 @@
 			float: right;
 			font-weight: 100;
 		}
-		.twin-alert, .reserved{
-			padding: 20px 20px 40px 20px;
-			width: 80%;
-		}
 		.hint{
 			padding: 10px 0;
 		}
@@ -311,6 +307,10 @@
 				text-transform: uppercase;
 				font-size: 12px;
 			}
+		}
+
+		.btn.send-to-friend{
+			display: inline-block;
 		}
 	}
 	.social {
@@ -678,4 +678,16 @@
     padding: 0 4px;
     color: #000;
   }
+}
+
+.twin-alert{
+	position: relative;
+
+	.error.message{
+		position: absolute;
+		top:10px;
+	}
+}
+.reserved.btn{
+	
 }

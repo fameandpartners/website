@@ -18,7 +18,7 @@ window.popups.ProductReservationPopup = class ProductReservationPopup
     _.bindAll(@, 'onButtonClick', 'onInputChanged', 'successCallback')
     _.bindAll(@, 'validateValue', 'formDataValid')
 
-    @container = window.popups.getModalContainer('Twin Alert', 'Register Now')
+    @container = window.popups.getModalContainer('Reserve this Dress', 'Register Now')
 
     @content = @container.find('.modal-container')
     @overlay = @container.find('.overlay')
