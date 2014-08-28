@@ -21,7 +21,7 @@ class StaticsController < ApplicationController
     currency = current_currency
 
     @plus_size_dresses = get_products_from_edit('plus-size', currency, user, 11)
-    @plus_size_dresses_other = get_products_from_edit('plus-size-other', currency, user, 8)
+    @plus_size_dresses_other = get_products_from_edit('plus-size-other', currency, user, 16)
   end
 
   def nylonxfame
