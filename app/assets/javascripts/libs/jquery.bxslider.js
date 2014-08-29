@@ -31,8 +31,8 @@
 		adaptiveHeightSpeed: 500,
 		video: false,
 		useCSS: true,
-		preloadImages: 'visible',
-		responsive: true,
+		preloadImages: 'all',
+		responsive: false,
 
 		// TOUCH
 		touchEnabled: true,
@@ -50,7 +50,7 @@
 		pagerCustom: null,
 
 		// CONTROLS
-		controls: true,
+		controls: false,
 		nextText: 'Next',
 		prevText: 'Prev',
 		nextSelector: null,
@@ -62,7 +62,7 @@
 		autoControlsSelector: null,
 
 		// AUTO
-		auto: false,
+		auto: true,
 		pause: 4000,
 		autoStart: true,
 		autoDirection: 'next',

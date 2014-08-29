@@ -98,6 +98,9 @@ window.track = {
   laybyButtonClick: (label) ->
     track.event('Products', 'LaybyClicked', label)
 
+  twinAlertClick: (label) ->
+    track.event('Products', 'TwinAlertClick', label)
+
   twinAlertOpen: (label) ->
     track.event('Products', 'TwinAlertOpen', label)
 

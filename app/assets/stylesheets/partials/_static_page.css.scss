@@ -764,14 +764,22 @@ body.competition_entries {
 .landing-page{
 	h3{
 		font: 400 40px/1.4 $fontThree;
+		
+		a{
+			text-decoration: none;
+		}
 	}
 	h4{
 		font: 400 18px/1.4 $fontThree;
 		text-transform: uppercase;
 	}
 	.feature{
-		margin: 0 0 40px 0;
 		position: relative;
+		width: 1140px;
+		height: 530px;
+		overflow: hidden;
+		margin: 0 0 30px 0;
+		padding: 0;
 
 		.info{
 			width: 320px;
@@ -828,6 +836,7 @@ body.competition_entries {
 .landing-page.plus-size{
 	.product{
 		margin-bottom: 40px;
+		height: 450px;
 		.prod-image{
 			width: 277px;
 		}

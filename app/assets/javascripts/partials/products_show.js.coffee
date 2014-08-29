@@ -20,6 +20,7 @@ $(".spree_products.show").ready ->
   page.enableSoundCloudSongPlayer($("a[data-action=soundcloud]"))
 
   page.enableTwinAlertButton($('.twin-alert a.twin-alert-link'), () ->
+    
     selected = variantsSelectorContainer.data('selected')
     if _.isUndefined(selected) || _.isNull(selected.color)
       return null

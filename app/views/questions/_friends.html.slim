@@ -13,7 +13,7 @@ javascript:
     });
     $('a.choose-friends-link').click(function(event){
       event.preventDefault();
-
+      window.track.event('Style Quiz', 'Share', '');
       FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
           FB.ui(
@@ -29,7 +29,8 @@ javascript:
             method: 'send',
             display: 'popup',
             link: 'http://www.fameandpartners.com/?utm_campaign=stylequiz&utm_source=fame&utm_medium=www'
-          });
+          }
+          );
         }
       });
     });

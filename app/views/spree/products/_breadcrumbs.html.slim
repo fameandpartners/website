@@ -7,4 +7,4 @@
     - if product.accessories.active.present?
       = link_to 'STYLE IT', personalization_style_product_path(permalink: product.permalink), class: "btn #{'pink' if active == :style}"
   .fright
-    = send_to_a_friend_link(product)
+    = product_twin_alert_link(product)

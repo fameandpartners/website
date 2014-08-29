@@ -20,7 +20,7 @@ class LineItemPersonalization < ActiveRecord::Base
             presence: true,
             inclusion: {
               allow_blank: true,
-              in: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
+              in: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
             }
 
   validates :color,
@@ -95,16 +95,19 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   # calculate additional cost
-  #   - custom color costs addional 16$ in current currency
+  # - custom color costs addional $16 in current currency
   def recalculate_price
     self.price = calculate_price
   end
 
   def calculate_price
     result = 0.0
-
-    if self.size.present? && self.size.to_i >= 14
-      result += 10.0
+    
+    # Plus Size Pricing
+    unless plus_size
+      if self.size.present? && self.size.to_i > 22
+        result += 20.0
+      end
     end
 
     return result if Spree::Config[:free_customisations]
@@ -123,4 +126,8 @@ class LineItemPersonalization < ActiveRecord::Base
 
     product.basic_colors.where(id: color_id).exists?
   end
+
+  def plus_size?
+    return true if product.taxons.where(:name => "Plus Size").first > 0
+  end  
 end

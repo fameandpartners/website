@@ -140,8 +140,9 @@ FameAndPartners::Application.routes.draw do
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
-    get '/bloggers/racheletnicole' => 'statics#blogger', as: :racheletnicole
-    get '/dani-stahl' => 'statics#danistahl', as: :featured_blogger
+    get '/bloggers/liz-black' => 'statics#blogger', as: :featured_blogger
+    get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
+    get '/dani-stahl' => 'statics#danistahl', as: :danistahl
     
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
@@ -156,7 +157,7 @@ FameAndPartners::Application.routes.draw do
     get '/fashionista2014'   => 'statics#fashionistacomp', :as => :fashionista
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
     get '/compterms' => 'statics#comp_terms'
-    get '/plus-size' => 'statics#landingpage_plus_size'
+    get '/plus-size' => 'statics#landingpage_plus_size', :as => :plus_size
 
     get '/campaigns/stylecall' => 'campaigns#show'
     post '/campaigns/stylecall' => 'campaigns#create'
