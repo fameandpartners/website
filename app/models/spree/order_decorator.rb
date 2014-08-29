@@ -112,9 +112,10 @@ Spree::Order.class_eval do
       currency ||= self.currency
       price = variant.price_in(currency)
     end
-    # extra size
-    if variant.dress_size && variant.dress_size.name.to_i >= 14
-      price.amount += 10
+    
+    # Plus Size Pricing
+    if variant.dress_size && variant.dress_size.name.to_i > 22
+      price.amount += 20
     end
     price
   end

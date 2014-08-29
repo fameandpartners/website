@@ -358,37 +358,44 @@ module ProductsHelper
       ''
     end
   end
-  
-  def base_sizes(sizes)
-    if sizes.size <= 7
+
+
+  # SIZES
+  # Should be 0 2 4 6 8 10 12 14 16 18 20 22 24 26
+  # AU should be 4 6 8 10 12 14 16 18 20 22 24 26
+  # US should be 0 2 4 6 8 10 12 14 16 18 20 22
+  # AU Plus Size should be 16 18 20 22 24 26
+  # US Plus Size should be 12 14 16 18 20 22
+
+
+  def locale_sizes(product, sizes)
+
     if current_site_version.is_australia?
-      base_sizes = sizes.from(2)
+      if is_plus_size?(product)
+        return sizes && [16, 18, 20, 22, 24, 26]
+      else
+        return sizes && [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
+      end
     else
-      base_sizes = sizes
+      if is_plus_size?(product)
+        return sizes && [12, 14, 16, 18, 20, 22]
+      else
+        return sizes && [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
+      end
     end
-  else
-    if current_site_version.is_australia?
-      base_sizes = sizes[2..7]
-    else
-      base_sizes = sizes.first(6)
-    end
-  end
-  
   end
 
-  def dropdown_sizes(sizes)
-    if sizes.size <= 7
-      if current_site_version.is_australia?
-        dropdown_sizes = []
-      else
-        dropdown_sizes = []
-      end
+  def dropdown_sizes(product, sizes)
+
+    if sizes.size < 7
+      return []
     else
-      if current_site_version.is_australia?
-        dropdown_sizes = sizes[8..-1]
-      else
-        dropdown_sizes = sizes[6..-1]
-      end
+      return sizes.from(6)
     end
+  end
+
+  def is_plus_size?(product)
+    is_plus = product.taxons.where(:name =>"Plus Size").first
+    return true if is_plus
   end
 end

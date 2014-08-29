@@ -1,5 +1,12 @@
 ruby:
   extra_size_title = I18n.t('product.extra_size_price')
+  if current_site_version.is_australia?
+    size_info_label = 'AUS Sizes Displayed'
+    size_charge_start = 28
+  else
+    size_info_label = 'US Sizes Displayed'
+    size_charge_start = 24
+  end
 .product-info
   h6 = breadcrumbs_for(product)
   h1.product-title
@@ -14,17 +21,14 @@ ruby:
     h6.info
       ' SELECT A SIZE 
       = link_to '(whats my size?)', '#what-size', class: 'toggle-sizes '
-      - if current_site_version.is_australia?
-        .size-info AUS Sizes Displayed
-      - else
-        .size-info US Sizes Displayed
+      .size-info = size_info_label
     .sizebox
-      - base_sizes(sizes).each do |size|
-        .button data-size="#{size}" title=( extra_size_title if size.to_i >= 22 ) = size
-      - if dropdown_sizes(sizes).present?
+      - sizes.take(6).each do |size|
+        .button data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start ) = size
+      - if dropdown_sizes(product, sizes).present?
         .dropdown-button data-open="-" data-close="+" +
-        - dropdown_sizes(sizes).each do |size|
-          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= 22 ) = size
+        - dropdown_sizes(product, sizes).each do |size|
+          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start ) = size
   .section.buy-button-section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
     = link_to 'add to cart', '#', class: 'btn buy-now'
