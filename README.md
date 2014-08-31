@@ -39,7 +39,7 @@ Note: we are using CircleCi for master branch, manual deplyment usually not need
 
 * `$ gem install engineyard`
 * merge master branch to production branch
-* `$ ey deploy -e production_blog`
+* `$ ey deploy -e production_new`
 
 ### Thanks for using FameAndPartners!
 
