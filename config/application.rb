@@ -82,7 +82,7 @@ module FameAndPartners
 
     redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
     if !Rails.env.development? && !Rails.env.test?
-      redis_host = '10.100.94.127'
+      redis_host = '10.203.172.84'
     else
       redis_host = 'localhost'
     end
@@ -91,7 +91,7 @@ module FameAndPartners
 
     config.generators do |generator|
       generator.test_framework :rspec
-    end 
+    end
 
     config.after_initialize do
       Rails.configuration.spree.payment_methods << Spree::Gateway::Pin
