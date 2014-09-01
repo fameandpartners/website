@@ -11,6 +11,7 @@ window.helpers.initProductReserver = (elements, label, get_selected_color_func) 
 
       onButtonClickHandler: (e) ->
         e.preventDefault()
+        track.twinAlertClick("")
         if productReserver.validate.call(productReserver)
           link = $(e.target)
           options = {
@@ -23,6 +24,7 @@ window.helpers.initProductReserver = (elements, label, get_selected_color_func) 
           }
           popup = new window.popups.ProductReservationPopup(options, productReserver.markReserved)
           popup.show()
+
           #popups.showProductReservationPopup(options, productReserver.markReserved)
 
       markReserved: (message) ->
@@ -36,7 +38,9 @@ window.helpers.initProductReserver = (elements, label, get_selected_color_func) 
       # 'private'
       validate: () ->
         if _.isEmpty(@get_selected_color_func())
-          window.helpers.showErrors(@element.parent(), 'Please select a dress colour from above.')
+          btn = $('.buy-button-section').parent()
+          #window.helpers.showErrors(@element.parent(), 'Please select a dress colour from above.')
+          window.helpers.showErrors(btn, 'Please select a dress color')
           return false
         else
           return true

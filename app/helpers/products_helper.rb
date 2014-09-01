@@ -213,7 +213,7 @@ module ProductsHelper
     data = { product: product.permalink }
     data.update({ guest: true }) unless spree_user_signed_in?
 
-    link_to '2ND OPINION', '#', class: 'btn send-to-friend askmumbtn', data: data, title: 'Send this dress to whoever you want to get a second opinion from!'
+    link_to 'Get a Second Opinion', '#', class: 'btn small send-to-friend', data: data, title: 'Send this dress to whoever you want to get a second opinion!'
   end
 
   def wishlist_move_to_cart_link(wishlist_item)
@@ -266,12 +266,16 @@ module ProductsHelper
   def product_twin_alert_link(product)
     return '' if product.blank?
 
-    data_attrs = { product_id: product.id }
+    if signed_in? && (reservation = spree_current_user.reservation_for(product)).present?
+      content_tag(:div, class: 'twin-alert') do
+        raw("<div class='reserved btn' title='#{spree_current_user.first_name}, you have reserved this dress in #{reservation.color}.'><i class='icon icon-tick-circle'></i> Reserved</div>")
+      end
+    else
+      data_attrs = { product_id: product.id }
 
-    content_tag(:div, class: 'twin-alert') do
-      content_tag(:div, t('views.pages.products.show.notices.twin_alert').html_safe, class: 'hint') +
-      link_to("Twin Alert", '#', class: 'twin-alert-link btn', data: data_attrs) +
-      raw("<div class='hide reserved'><i class='icon icon-tick-circle'></i><span class='username'></span>, you have reserved this dress in <span class='color'></span>.</div>")
+      content_tag(:div, class: 'twin-alert') do
+        link_to("Reserve this Dress", '#', class: 'twin-alert-link btn', title: 'Reserve this dress for your event. Select a color first.', data: data_attrs)
+      end
     end
   end
 
@@ -354,37 +358,44 @@ module ProductsHelper
       ''
     end
   end
-  
-  def base_sizes(sizes)
-    if sizes.size <= 7
+
+
+  # SIZES
+  # Should be 0 2 4 6 8 10 12 14 16 18 20 22 24 26
+  # AU should be 4 6 8 10 12 14 16 18 20 22 24 26
+  # US should be 0 2 4 6 8 10 12 14 16 18 20 22
+  # AU Plus Size should be 16 18 20 22 24 26
+  # US Plus Size should be 12 14 16 18 20 22
+
+
+  def locale_sizes(product, sizes)
+
     if current_site_version.is_australia?
-      base_sizes = sizes.from(2)
+      if is_plus_size?(product)
+        return sizes && [16, 18, 20, 22, 24, 26]
+      else
+        return sizes && [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
+      end
     else
-      base_sizes = sizes
+      if is_plus_size?(product)
+        return sizes && [12, 14, 16, 18, 20, 22]
+      else
+        return sizes && [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
+      end
     end
-  else
-    if current_site_version.is_australia?
-      base_sizes = sizes[2..7]
-    else
-      base_sizes = sizes.first(6)
-    end
-  end
-  
   end
 
-  def dropdown_sizes(sizes)
-    if sizes.size <= 7
-      if current_site_version.is_australia?
-        dropdown_sizes = []
-      else
-        dropdown_sizes = []
-      end
+  def dropdown_sizes(product, sizes)
+
+    if sizes.size < 7
+      return []
     else
-      if current_site_version.is_australia?
-        dropdown_sizes = sizes[8..-1]
-      else
-        dropdown_sizes = sizes[6..-1]
-      end
+      return sizes.from(6)
     end
+  end
+
+  def is_plus_size?(product)
+    is_plus = product.taxons.where(:name =>"Plus Size").first
+    return true if is_plus
   end
 end

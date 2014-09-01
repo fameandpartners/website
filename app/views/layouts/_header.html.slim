@@ -9,52 +9,54 @@
         span.icon-logo
   .navs
     .nav-site
-      nav.fleft
-        ul 
-          - unless sale_active?
+      - icon_links_cache_key = [:layout, :header, 'icon-top-links']
+      - cache icon_links_cache_key, expires_in: configatron.cache.expire.long do
+        nav.fleft
+          ul 
+            - unless sale_active?
+              li
+                = link_to why_us_path(anchor: 'shipping') do
+                  span.icon-holder
+                    span.icon-dollar
+                    span.icon-erase
+                  span
+                    ' free
+                    br
+                    ' shipping
             li
-              = link_to why_us_path(anchor: 'shipping') do
+              = link_to why_us_path(anchor: 'returns') do
                 span.icon-holder
-                  span.icon-dollar
-                  span.icon-erase
+                  span.icon-arrows
                 span
                   ' free
                   br
-                  ' shipping
-          li
-            = link_to why_us_path(anchor: 'returns') do
-              span.icon-holder
-                span.icon-arrows
-              span
-                ' free
-                br
-                ' returns
-          li
-            = link_to why_us_path(anchor: 'fit') do
-              span.icon-holder
-                span.icon-guarantee
-              span
-                ' fit
-                br
-                ' guarantee
-          - unless sale_active?
+                  ' returns
             li
-              = link_to why_us_path(anchor: 'customisation') do
+              = link_to why_us_path(anchor: 'fit') do
                 span.icon-holder
-                  span.icon-cutline
-                  span.icon-scissors
+                  span.icon-guarantee
                 span
-                  ' dress
+                  ' fit
                   br
-                  =' t(:customization)
-          li
-            = link_to why_us_path(anchor: 'advice') do
-              span.icon-holder
-                span.icon-comment
-              span
-                ' free
-                br
-                ' stylists
+                  ' guarantee
+            - unless sale_active?
+              li
+                = link_to why_us_path(anchor: 'customisation') do
+                  span.icon-holder
+                    span.icon-cutline
+                    span.icon-scissors
+                  span
+                    ' dress
+                    br
+                    =' t(:customization)
+            li
+              = link_to why_us_path(anchor: 'advice') do
+                span.icon-holder
+                  span.icon-comment
+                span
+                  ' free
+                  br
+                  ' stylists
       nav.fright
         .region
           .site-version
@@ -102,7 +104,7 @@
             = link_to collection_path, class: 'btn' do
               span Shop
               span.icon-dropdown-down
-            - links_cache_key = [:layout, :header, 'top-links', current_spree_user.try(:cache_key)]
+            - links_cache_key = [:layout, :header, 'top-links']
             - cache links_cache_key, expires_in: configatron.cache.expire.long do
               .dropdown.megamenu
                 .grid-container
@@ -135,12 +137,13 @@
                             li = link_to 'Long Dresses', build_collection_product_path('Long', nil), title: 'Long Dresses', class: "collection"
                             li = link_to 'Short Dresses', build_collection_product_path('Short', nil), title: 'Short Dresses', class: "collection"
                             li = link_to 'Prom Dresses', build_collection_product_path('Prom', nil), title: 'Prom Dresses', class: "collection"
+                            li = link_to 'Plus Size', plus_size_path, title: 'Plus Size Dresses', class: "collection"
                     .grid-7.promos
                       h2 Killer Event Dresses
                       .tile
-                        = link_to collection_path(:edits => "collaborations"), title: 'Collaborations' do
-                          = image_tag "menu/hannahxfame.jpg"
-                        p Exclusive Collaborations
+                        = link_to featured_blogger_path do
+                          = image_tag "menu/lizblack.jpg"
+                        p Liz Black Collaboration
                       .tile
                         = link_to collection_path, title: 'New Collection' do
                           = image_tag "menu/august.jpg"
