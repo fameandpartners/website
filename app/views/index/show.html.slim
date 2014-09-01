@@ -1,87 +1,73 @@
-- content_for :head do
-  meta property="og:url" content="#{ root_url }"
-  meta property="og:site_name" content="Fame & Partners - Formal dresses for fashion mavens"
-  meta property="og:image" content="#{absolute_image_url(image_path('homepage.jpeg'), 'http')}"
-  meta property="og:locale" content="en_US"
-  meta property="og:title" content="Fame & Partners - Formal dresses for fashion mavens"
-  meta property="og:type" content="website"
-  meta property="og:description" content="I want to go shopping with my formal dress with you. Discover what your style profile is."
-  meta name="twitter:card" content="Fame & Partners - Formal dresses for fashion mavens"
-  meta name="twitter:title" content="Fame & Partners - Formal dresses for fashion mavens"
-  meta name="twitter:description" content="I want to go shopping with my formal dress with you. Discover what your style profile is."
-
-ruby:
-  if @show_competition_quiz && spree_user_signed_in?
-    redirectUrl = user_competition_boutique_path(
-      user_id: try_spree_current_user.try(:slug),
-      competition_id: Competition.current
-    )
-  else
-    redirectUrl = my_boutique_path
-  end
-
 - if spree_user_signed_in? and (params[:ci] == 'signup' or params[:cf] == 'signup')
   javascript:
     $(function(){
       track.conversion('sign_up')
     })
 
-- if @show_competition_quiz && spree_user_signed_in?
-  javascript:
-    window.Quiz.autoShow = true;
-    window.Quiz.welcomeMessage = "THANKS! NOW COMPLETE YOUR STYLE PROFILE";
-    window.Quiz.redirectUrl = "#{ redirectUrl }";
+- homepage_cache_key = [:layout, :homepage]
+- cache homepage_cache_key, expires_in: configatron.cache.expire.long do
 
-.grid-container
-  .home-promo
-    = link_to collection_path, title: "Shop New Season Dresses" do
-      = image_tag 'homepage/new/august2014.jpg'   
+  - content_for :head do
+    meta property="og:url" content="#{ root_url }"
+    meta property="og:site_name" content="Fame & Partners - Formal dresses for fashion mavens"
+    meta property="og:image" content="#{absolute_image_url(image_path('homepage.jpeg'), 'http')}"
+    meta property="og:locale" content="en_US"
+    meta property="og:title" content="Fame & Partners - Formal dresses for fashion mavens"
+    meta property="og:type" content="website"
+    meta property="og:description" content="Formal dresses for fashion mavens. Discover what your style profile is."
+    meta name="twitter:card" content="Fame & Partners - Formal dresses for fashion mavens"
+    meta name="twitter:title" content="Fame & Partners - Formal dresses for fashion mavens"
+    meta name="twitter:description" content="I want to go shopping for my formal dress with you. Discover what your style profile is."
 
-
-.promo-tiles
   .grid-container
-    .rowsmall-stylequiz
-      .tile
-        = link_to "", class: 'show-style-quiz' do
-          = image_tag 'homepage/new/small-stylequiz.jpg'
-      .tile
-        = link_to collection_path do
-          = image_tag 'homepage/new/small-reserve.gif'
-      .tile
-        = link_to plus_size_path do
-          = image_tag 'homepage/new/plussize.jpg'
-      /
+    .home-promo
+      = link_to collection_path, title: "Shop New Season Dresses" do
+        = image_tag 'homepage/new/august2014.jpg'   
+
+  .promo-tiles
+    .grid-container
+      .rowsmall-stylequiz
         .tile
-          = link_to fashionista_path do
-            = image_tag 'homepage/new/small-fashionista1.jpg'
+          = link_to "", class: 'show-style-quiz' do
+            = image_tag 'homepage/new/small-stylequiz.jpg'
+        .tile
+          = link_to collection_path do
+            = image_tag 'homepage/new/small-reserve.gif'
+        .tile
+          = link_to plus_size_path do
+            = image_tag 'homepage/new/plussize.jpg'
+        /
+          .tile
+            = link_to fashionista_path do
+              = image_tag 'homepage/new/small-fashionista1.jpg'
 
-= render "shared/featured_in", :locals => {:small => ""}
+  = render "shared/featured_in", :locals => {:small => ""}
 
-.grid-container
-  .fame-chain
-    = link_to fame_chain_path do
-      = image_tag 'homepage/new/famechain.jpg'
-
-.formal-dresses
   .grid-container
-    .row
-      = image_tag 'homepage/new/bird_left.gif', :class => "bird"
-      h2 <span>FORMAL</span> DRESSES
-      = image_tag 'homepage/new/bird_right.gif', :class => "bird"
-    .row
-      p FOR EVERY EVENT
-      .formal-types
-        ul
-          li= link_to "BALLS", collection_path
-          li
-            ' /
-          li= link_to "BIRTHDAYS", collection_path
-          li
-            ' /
-          li= link_to "PROM", collection_path
-          li
-            ' /
-          li= link_to "FORMALS", collection_path
-          li
-            ' /
-          li= link_to "GRADUATION", collection_path
+    .fame-chain
+      = link_to fame_chain_path do
+        = image_tag 'homepage/new/famechain.jpg'
+
+  .formal-dresses
+    .grid-container
+      .row
+        = image_tag 'homepage/new/bird_left.gif', :class => "bird"
+        h2 <span>FORMAL</span> DRESSES
+        = image_tag 'homepage/new/bird_right.gif', :class => "bird"
+      .row
+        p FOR EVERY EVENT
+        .formal-types
+          ul
+            li= link_to "BALLS", collection_path
+            li
+              ' /
+            li= link_to "BIRTHDAYS", collection_path
+            li
+              ' /
+            li= link_to "PROM", collection_path
+            li
+              ' /
+            li= link_to "FORMALS", collection_path
+            li
+              ' /
+            li= link_to "GRADUATION", collection_path
