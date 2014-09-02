@@ -82,7 +82,7 @@ module FameAndPartners
 
     redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
     if !Rails.env.development? && !Rails.env.test?
-      redis_host = '10.203.172.84'
+      redis_host = '184.73.212.47'
     else
       redis_host = 'localhost'
     end
