@@ -84,10 +84,10 @@ module FameAndPartners
     if Rails.env.production?
       redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
     else
-      redis_host = 'localhost'
+      redis_host = 'localhost:6379'
     end
 
-    config.cache_store = :redis_store, "redis://#{redis_host}:6379/0/#{redis_namespace}"
+    config.cache_store = :redis_store, "redis://#{redis_host}/0/#{redis_namespace}"
 
     config.generators do |generator|
       generator.test_framework :rspec
