@@ -68,6 +68,7 @@ when :production
   configatron.aws.s3.access_key_id = 'AKIAJ7U3MBOEHSMUAOHQ'
   configatron.aws.s3.secret_access_key = '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'
 
-  configatron.redis_options = { namespace: 'fame_and_partners', url: 'redis://10.142.187.171:6379/0' }
+  redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
+  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}:6379/0" }
 when :test
 end
