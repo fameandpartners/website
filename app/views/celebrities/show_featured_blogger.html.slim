@@ -1,39 +1,42 @@
-- @title = "#{@celebrity.full_name} / Featured Blogger - " + default_seo_title
-- @description = @celebrity.title + default_meta_description
-.page-static.blogger-page
-  .blogger-header style="background: url('#{@celebrity.primary_image.file.url(:banner)}') no-repeat;"
+- celebrity_page_cache_key = [:layout, :celebrity, @celebrity.id]
+- cache celebrity_page_cache_key, expires_in: configatron.cache.expire.long do
 
-  .blogger-wrapper
-    .blogger-content
-      h1
-        =@celebrity.full_name
-        span = @celebrity.title
-      .content
-        h2.blogger-title.quote = @celebrity.quote
-        .interview = raw(@celebrity.body)
-        - @products.each do |product|
-          - path_to_product = collection_product_path(product)
-          .product
-            .grid-container
-              .grid-5
-                .picture 
-                  = link_to product_image_tag(product, :product), path_to_product
-                h4 = link_to product.name, path_to_product
-                .info = product_short_description(product)
-                .price = price_for_product(product)
-                = link_to "SHOP NOW", path_to_product, class: 'btn mid'
-              .grid-7
-                - @celebrity.accessories.for_product(product).limit(4).each do |accessory|
-                  .grid-6
-                    = link_to accessory.source, target: 'blank' do
-                      = image_tag(accessory.image.url(:product), title: accessory.title)
-                .see-more
-                  = link_to "See more styling advice", personalization_style_product_path(permalink: product.permalink), class: 'btn empty mid'
-        .see-collection = link_to "SEE MORE KILLER DRESSES HERE", collection_path, class: 'btn pink'
+  - @title = "#{@celebrity.full_name} / Featured Blogger - " + default_seo_title
+  - @description = @celebrity.title + default_meta_description
+  .page-static.blogger-page
+    .blogger-header style="background: url('#{@celebrity.primary_image.file.url(:banner)}') no-repeat;"
 
-    .blogger-bg.left
-      - @celebrity.moodboard_items.left.each do |item|
-        = image_tag item.image(:product)
-    .blogger-bg.right
-      - @celebrity.moodboard_items.right.each do |item|
-        = image_tag item.image(:product)
+    .blogger-wrapper
+      .blogger-content
+        h1
+          =@celebrity.full_name
+          span = @celebrity.title
+        .content
+          h2.blogger-title.quote = @celebrity.quote
+          .interview = raw(@celebrity.body)
+          - @products.each do |product|
+            - path_to_product = collection_product_path(product)
+            .product
+              .grid-container
+                .grid-5
+                  .picture 
+                    = link_to product_image_tag(product, :product), path_to_product
+                  h4 = link_to product.name, path_to_product
+                  .info = product_short_description(product)
+                  .price = price_for_product(product)
+                  = link_to "SHOP NOW", path_to_product, class: 'btn mid'
+                .grid-7
+                  - @celebrity.accessories.for_product(product).limit(4).each do |accessory|
+                    .grid-6
+                      = link_to accessory.source, target: 'blank' do
+                        = image_tag(accessory.image.url(:product), title: accessory.title)
+                  .see-more
+                    = link_to "See more styling advice", personalization_style_product_path(permalink: product.permalink), class: 'btn empty mid'
+          .see-collection = link_to "SEE MORE KILLER DRESSES HERE", collection_path, class: 'btn pink'
+
+      .blogger-bg.left
+        - @celebrity.moodboard_items.left.each do |item|
+          = image_tag item.image(:product)
+      .blogger-bg.right
+        - @celebrity.moodboard_items.right.each do |item|
+          = image_tag item.image(:product)

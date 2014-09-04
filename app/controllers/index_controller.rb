@@ -12,6 +12,8 @@ class IndexController < Spree::StoreController
     if params[:cf].to_s.match(/^competition-\w+/)
       @show_competition_quiz = true
     end
+    @big_banner = Spree::BannerBox.big_banner
+    @small_banner = Spree::BannerBox.small_banner
   end
 
   def url_with_correct_site_version
