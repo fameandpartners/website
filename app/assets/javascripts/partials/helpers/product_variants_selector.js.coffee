@@ -32,6 +32,9 @@ window.helpers.createProductVariantsSelector = (root) ->
 
       if preselected
         @setPreselectedValues(preselected)
+      else
+        if @colorInput.val() || @sizeInput.val()
+          @onVariantsChanged()
 
       return @
 

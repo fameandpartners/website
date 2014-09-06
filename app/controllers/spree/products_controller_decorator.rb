@@ -101,7 +101,11 @@ Spree::ProductsController.class_eval do
   def show
     return unless @product
 
-    set_product_show_page_title(@product)
+    if params[:color_name]
+      @color = Spree::OptionValue.colors.find_by_name!(params[:color_name])
+    end
+
+    set_product_show_page_title(@product, @color.try(:presentation))
     display_marketing_banner
 
     @product_properties = @product.product_properties.includes(:property)

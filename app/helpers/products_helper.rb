@@ -341,9 +341,9 @@ module ProductsHelper
     content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
   end
 
-  def color_options_for_select(color_names)
+  def color_options_for_select(color_names, selected_color_name)
     color_option_values = Spree::OptionValue.colors.where(name: color_names)
-    color_options_for_select_from_options_values(color_option_values)
+    color_options_for_select_from_options_values(color_option_values, selected_color_name)
   end
 
   def color_options_for_select_from_options_values(color_option_values, selected = nil)

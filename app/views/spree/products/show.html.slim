@@ -9,8 +9,15 @@ javascript:
     sku = @product.sku
     category = range_taxon_name_for(@product)
     default_color = nil
-    default_images = images.select{|image| image[:color].blank? }
-    if default_images.blank? and images.present?
+
+    if images.blank?
+      default_images = []
+    elsif @color.present? and images.any?{ |image| image[:color] == @color.name }
+      default_images = images.select{ |image| image[:color] == @color.name }
+      default_color = @color.name
+    elsif images.any?{ |image| image[:color].blank? }
+      default_images = images.select{|image| image[:color].blank? }
+    else
       default_color = images.first[:color]
       default_images = images.select{|image| image[:color] == default_color}
     end
@@ -76,6 +83,6 @@ javascript:
               - else
                 = render 'no_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
       .grid-4
-        = render 'product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products, site_version: site_version }
+        = render 'product_info', { product: @product, sizes: sizes, colors: colors, selected_color: @color.try(:name), products: @recommended_products, site_version: site_version }
 
   script type="text/javascript" id="adacadoPixel" src="//pixel.adacado.com/1000668?segment=product&category=#{category}&product=#{sku}"
