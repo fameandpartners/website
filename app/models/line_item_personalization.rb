@@ -95,7 +95,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   # calculate additional cost
-  # - custom color costs addional $16 in current currency
+  # custom color costs addional $16 in current currency
   def recalculate_price
     self.price = calculate_price
   end
@@ -104,20 +104,18 @@ class LineItemPersonalization < ActiveRecord::Base
     result = 0.0
     
     # Plus Size Pricing
-    unless plus_size
-      if self.size.present? && self.size.to_i > 22
-        result += 20.0
-      end
+    if add_plus_size_cost?(line_item.variant)
+      result += 20
     end
 
     return result if Spree::Config[:free_customisations]
 
     result += 16.0 if !basic_color?
+
     customization_values.each do |customization_value|
       result += customization_value.price
     end
-    result
-  rescue
+
     result
   end
 
@@ -127,7 +125,31 @@ class LineItemPersonalization < ActiveRecord::Base
     product.basic_colors.where(id: color_id).exists?
   end
 
+  #Plus Size Pricing
+  def add_plus_size_cost?(variant)
+    if plus_size? == nil
+      if size && size.to_i >= locale_plus_sizes
+        return true
+      end
+    end
+  end
+
+  def locale_plus_sizes
+    if @current_site_version
+      return 18
+    else
+      return 14
+    end
+  end
+
   def plus_size?
-    return true if product.taxons.where(:name => "Plus Size").first > 0
-  end  
+    return true if !product.blank? && product.taxons.where(:name => "Plus Size").count > 0
+  end
+
+  def get_site_version
+    # australie is true
+    @current_site_version ||= SiteVersion.is_australia?
+  end
+
+    
 end

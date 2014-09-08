@@ -160,6 +160,11 @@ Spree::Variant.class_eval do
     end
   end
 
+  def product_plus_size
+    is_plus = product.taxons.where(:name =>"Plus Size").first
+    return true if is_plus
+  end
+
   private
 
   def current_sale

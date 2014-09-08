@@ -27,6 +27,15 @@
         <% end %>
       </div>
       <div class="four columns">
+        <%= f.field_container :kind do %>
+          <%= f.radio_button :kind, 'celebrity', checked: celebrity_kind?(@celebrity, 'celebrity') %>
+          <%= f.label :kind, 'Celebrity' %>
+          <%= f.radio_button :kind, 'featured_blogger', checked: celebrity_kind?(@celebrity, 'featured_blogger') %>
+          <%= f.label :kind, 'Featured blogger' %>
+          <%= f.error_message_on :kind %>
+        <% end %>
+      </div>
+      <div class="four columns">
         <%= f.field_container :last_name do %>
           <%= f.label :last_name, t(:last_name) %>
           <%= f.text_field :last_name, :class => 'fullwidth' %>

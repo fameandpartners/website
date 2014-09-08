@@ -1,9 +1,16 @@
 ruby:
   sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+  sizes = locale_sizes(@product, sizes)
   colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
   images  = @product.images_json
   if @product.property('color_customization').present? && @product.property('color_customization').downcase == "yes"
     show_custom_colors = true
+  end
+  
+  if current_site_version.is_australia?
+    site_version = 'aus'
+  else
+    site_version = 'us'
   end
 
 javascript:
@@ -64,7 +71,7 @@ javascript:
                     = link_to '+ ADD', '#', class: 'btn empty border'
                     p SHORT VERSION
     .grid-4
-      = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }
+      = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products, site_version: site_version }
 
 .m-pixel
   img src="http://tags.rtbidder.net/track?sid=525646ee8bc06f1060d9f3a7" width="0" height="0" border="0" alt=""
