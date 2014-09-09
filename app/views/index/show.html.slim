@@ -44,7 +44,7 @@ ruby:
 .promo-tiles
   .grid-container
     .rowsmall-stylequiz
-			-if @small_banner.present?
+			-if @small_banner.present? && @small_banner.count > 2
 				-@small_banner.each do |small_banner|
 					.tile
 						= link_to "", class: 'show-style-quiz' do
