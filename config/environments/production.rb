@@ -65,8 +65,8 @@ FameAndPartners::Application.configure do
   config.active_support.deprecation = :notify
 
   # Set redis cache store location
-  redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-  config.cache_store = :redis_store, "redis://10.100.94.127:6379/0/#{redis_namespace}"
+  #redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
+  #config.cache_store = :redis_store, "redis://10.100.94.127:6379/0/#{redis_namespace}"
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
