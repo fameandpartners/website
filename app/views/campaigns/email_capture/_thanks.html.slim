@@ -1,12 +1,17 @@
+- promocode = cookies[:promocode]
 .thanks
   .title Thanks for joining!
   .thanks-desc Here’s your promocode to use against your purchase.
-  - if content == "bday"
-    .promo-code BDAY40
-  - elsif content == "prom"
-    .promo-code PROM30P
-  - elsif content == "welcomeback"
-    .promo-code WBACK25
+  - if promocode
+    .promo-code = promocode 
+  
+  /
+    - if content == "bday"
+      .promo-code BDAY40
+    - elsif content == "prom"
+      .promo-code PROM30P
+    - elsif content == "welcomeback"
+      .promo-code WBACK25
   .aligncenter
     = link_to 'Start shopping', main_app.collection_path, class: 'btn black'
     .share-this
