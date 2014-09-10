@@ -21,31 +21,33 @@
 
   .grid-container
     .home-promo
-      = link_to collection_path, title: "Shop New Season Dresses" do
-  			-if @big_banner.present?
-  				= image_tag @big_banner.attachment(:big)
-  			-else
-  				= image_tag "homepage/new/august2014.jpg"
+      -if @big_banner.present?
+        = link_to @big_banner.url, title: @big_banner.title do
+          = image_tag @big_banner.attachment(:big)
+      -else
+        = link_to collection_path(:cf => 'home'), title: 'New Collection'  do
+          = image_tag "homepage/new/august2014.jpg"
 
 
   .promo-tiles
     .grid-container
       .rowsmall-stylequiz
-  			-if @small_banner.present?
-  				-@small_banner.each do |small_banner|
-  					.tile
-  						= link_to "", class: 'show-style-quiz' do
-  							= image_tag small_banner.attachment(:small)
-  			-else
-  				.tile
-  					= link_to "", class: 'show-style-quiz' do
-  						= image_tag 'homepage/new/small-stylequiz.jpg'
-  				.tile
-  					= link_to "", class: 'show-style-quiz' do
-  						= image_tag 'homepage/new/small-reserve.gif'
-  				.tile
-  					= link_to "", class: 'show-style-quiz' do
-  						= image_tag 'homepage/new/small-fashionista1.jpg'
+        -if @small_banner.count > 2
+          -@small_banner.each do |small_banner|
+            .tile
+              = link_to small_banner.url, class: small_banner.css_class do
+                = image_tag small_banner.attachment(:small), title: small_banner.title
+        -else
+          .tile
+            = link_to "", class: 'show-style-quiz' do
+              = image_tag 'homepage/new/small-stylequiz.jpg'
+          .tile
+            = link_to plus_size_path(:cf => 'home') do
+              = image_tag 'homepage/new/plussize.jpg'
+          .tile
+            = link_to '/Black-Dresses?cf=home' do
+              = image_tag 'homepage/new/small-black-dresses.jpg'
+
 
   = render "shared/featured_in", :locals => {:small => ""}
 

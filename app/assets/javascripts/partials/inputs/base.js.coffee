@@ -77,15 +77,22 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
       button.removeClass('selected').text('+')
 
   disableSelectionOptions: (unavailable_values, text) ->
+    site_version = window.current_site_version.permalink
+    if site_version == 'au'
+      base_size = 18
+    else
+      base_size = 14
     _.each(@container.find(@buttons_selector), (button) ->
       $button = $(button)
       value = $button.data('size')
+      plus_size = $button.data('plussize')
       if $button.data('tooltipsy')
         $button.data('tooltipsy').destroy()
       $button.removeData('tooltip')
       if _.indexOf(unavailable_values, value) == -1
-        if value >= 14
-          $button.removeClass('unavailable').attr('title', "This size is an additional $10")
+        console.log(plus_size)
+        if value >= base_size && plus_size != true
+          $button.removeClass('unavailable').attr('title', "This size is an additional $20")
         else
           $button.removeClass('unavailable').removeAttr('title')
       else

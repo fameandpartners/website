@@ -44,7 +44,7 @@ when :staging
   configatron.host = 'stage.fameandpartners.com'
   configatron.blog_host = 'stage.fameandpartners.com'
 
-  configatron.mailgun.mailbox.domain = '23stages.com'
+  configatron.mailgun.mailbox.domain = '23st2ages.com'
   configatron.mailgun.mailbox.username = 'mailer@23stages.com'
   configatron.mailgun.mailbox.password = '80kmdvXlufsZOW'
 

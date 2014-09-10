@@ -364,21 +364,21 @@ module ProductsHelper
   # Should be 0 2 4 6 8 10 12 14 16 18 20 22 24 26
   # AU should be 4 6 8 10 12 14 16 18 20 22 24 26
   # US should be 0 2 4 6 8 10 12 14 16 18 20 22
-  # AU Plus Size should be 16 18 20 22 24 26
-  # US Plus Size should be 12 14 16 18 20 22
+  # AU Plus Size should be 18 20 22 24 26
+  # US Plus Size should be 14 16 18 20 22
 
 
   def locale_sizes(product, sizes)
 
     if current_site_version.is_australia?
       if is_plus_size?(product)
-        return sizes && [16, 18, 20, 22, 24, 26]
+        return sizes && [18, 20, 22, 24, 26]
       else
         return sizes && [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
       end
     else
       if is_plus_size?(product)
-        return sizes && [12, 14, 16, 18, 20, 22]
+        return sizes && [14, 16, 18, 20, 22]
       else
         return sizes && [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
       end

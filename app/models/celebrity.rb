@@ -16,6 +16,7 @@ class Celebrity < ActiveRecord::Base
 
   attr_accessible :first_name,
                   :last_name,
+                  :kind,
                   :slug,
                   :title,
                   :quote,
@@ -33,6 +34,8 @@ class Celebrity < ActiveRecord::Base
             presence: true
   validates :slug,
             uniqueness: true
+  validates :kind,
+            presence: true
 
   scope :published, where(is_published: true)
 
