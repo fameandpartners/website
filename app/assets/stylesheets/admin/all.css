@@ -6,7 +6,8 @@
 
  *= require admin/spree_core
  *= require admin/spree_promo
-
+ *= require store/spree_banner
+ 
 *= require_tree ../spree
 *= require_self
 *= require_tree .
@@ -14,4 +15,6 @@
 *= require jquery.fileupload-ui
 *= require admin/spree_paypal_express
 *= require jquery.ui.tabs
+*= require jquery.ui.tabs
+ 
 */

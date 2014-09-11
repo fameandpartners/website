@@ -18,7 +18,14 @@ javascript:
     default_video_url = video.present? ? video[:video_url] : nil
 
     colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
-    sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+    sizes = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+    sizes = locale_sizes(@product, sizes)
+
+    if current_site_version.is_australia?
+      site_version = 'aus'
+    else
+      site_version = 'us'
+    end
 
     images_limit = default_video_url.present? ? 6 : 7
     if images.present?
@@ -68,6 +75,6 @@ javascript:
               - else
                 = render 'no_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
       .grid-4
-        = render 'product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }
+        = render 'product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products, site_version: site_version }
 
   script type="text/javascript" id="adacadoPixel" src="//pixel.adacado.com/1000668?segment=product&category=#{category}&product=#{sku}"

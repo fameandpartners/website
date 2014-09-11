@@ -115,6 +115,8 @@ $(function() {
 
   zoomObj = $('.picture.product');
   zoomObj.zoom({});
-
+  
+  $('.twin-alert a.twin-alert-link').tooltipsy()
+  $('.twin-alert .reserved').tooltipsy()
 
 });

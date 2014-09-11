@@ -1,5 +1,5 @@
 Spree::BannerBox.class_eval do
-  attr_accessible :is_small
+  attr_accessible :is_small, :css_class, :title
   has_attached_file :attachment,
                 #~ :url  => "/spree/banners/:id/:style_:basename.:extension",
                 #~ :path => ":rails_root/public/spree/banners/:id/:style_:basename.:extension",

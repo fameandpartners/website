@@ -1,28 +1,31 @@
 ruby:
   self.formats = [:html, :json]
   cache_name_fragments = [:shared, :product, @searcher.colour.first.try(:name)]
+  cache_list_fragments = ['products-list', request.fullpath.gsub(/[\?\&]/, ':').gsub(/^\//, '')]
   if show_prices_with_applied_promocode? && current_promotion.present?
     cache_name_fragments.push(current_promotion.code)
   end
 
 
 .category-catalog.products-list
-  h5.breadcrumb = collection_page_breadcrumb(@searcher)
-  .row
-    - if @products.present?
-      - @products.each do |product|
-        div class="grid-3"
-          - cache (cache_name_fragments + [product.id]), :expires_in => configatron.cache.expire.long do
-            = render 'spree/products/cached_product', product: product
-    - else
-      .not-found Sorry, no dresses match your criteria
-
-  - if @similar_products.present?
+  // TODO: probably we should remove this caching after appearing many users on September 2
+  - cache cache_list_fragments, expires_in: configatron.cache.expire.quickly do
+    h5.breadcrumb = collection_page_breadcrumb(@searcher)
     .row
-      .page-title
-        h1 View more dresses
-        h2.border These dresses can also be made in #{ @searcher.selected_color_name }
-      - @similar_products.each do |product|
-        div class="grid-3"
-          - cache (cache_name_fragments + [product.id]), :expires_in => configatron.cache.expire.long do
-            = render 'spree/products/cached_product', product: product
+      - if @products.present?
+        - @products.each do |product|
+          div class="grid-3"
+            - cache (cache_name_fragments + [product.id]), expires_in: configatron.cache.expire.long do
+              = render 'spree/products/cached_product', product: product
+      - else
+        .not-found Sorry, no dresses match your criteria
+
+    - if @similar_products.present?
+      .row
+        .page-title
+          h1 View more dresses
+          h2.border These dresses can also be made in #{ @searcher.selected_color_name }
+        - @similar_products.each do |product|
+          div class="grid-3"
+            - cache (cache_name_fragments + [product.id]), expires_in: configatron.cache.expire.long do
+              = render 'spree/products/cached_product', product: product

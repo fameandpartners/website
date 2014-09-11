@@ -81,17 +81,17 @@ module FameAndPartners
     config.assets.initialize_on_precompile = false
 
     redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-    if !Rails.env.development? && !Rails.env.test?
-      redis_host = '10.100.94.127'
+    if Rails.env.production?
+      redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
     else
-      redis_host = 'localhost'
+      redis_host = 'localhost:6379'
     end
 
-    config.cache_store = :redis_store, "redis://#{redis_host}:6379/0/#{redis_namespace}"
+    config.cache_store = :redis_store, "redis://#{redis_host}/0/#{redis_namespace}"
 
     config.generators do |generator|
       generator.test_framework :rspec
-    end 
+    end
 
     config.after_initialize do
       Rails.configuration.spree.payment_methods << Spree::Gateway::Pin

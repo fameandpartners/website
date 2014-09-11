@@ -112,10 +112,12 @@ Spree::Order.class_eval do
       currency ||= self.currency
       price = variant.price_in(currency)
     end
-    # extra size
-    if variant.dress_size && variant.dress_size.name.to_i >= 14
-      price.amount += 10
+    
+    # Plus Size Pricing
+    if add_plus_size_cost?(variant)
+      price.amount += 20
     end
+
     price
   end
 
@@ -240,6 +242,22 @@ Spree::Order.class_eval do
 
   def get_site_version
     @site_version ||= SiteVersion.by_currency_or_default(self.currency)
+  end
+
+  def add_plus_size_cost?(variant)
+    unless variant.product_plus_size
+      if variant.dress_size && variant.dress_size.name.to_i >= locale_plus_sizes
+        return true
+      end
+    end
+  end
+
+  def locale_plus_sizes
+    if get_site_version.permalink == 'au'
+      return 18
+    else
+      return 14
+    end
   end
 
   def is_surryhills?(item)

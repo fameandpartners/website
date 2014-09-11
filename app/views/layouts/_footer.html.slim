@@ -2,51 +2,55 @@
   = render "shared/featured_in", :locals => {:small => "_small"}
 footer.footer-global
   .container
-    = render 'shared/newsletter_signup' 
-    nav.nav-footer
-      .footer-links
-        p.footer-label
-          ' ABOUT US
-        ul
-          li = link_to 'The Fame Team', about_us_path
-          li = link_to 'WHY SHOP WITH US', why_us_path
-          li = link_to 'The Fame CHAIN', fame_chain_path 
-      .footer-links
-        p.footer-label
-           ' CUSTOMER SERVICE
-        ul
-          li = link_to 'FAQs', faqs_path
-          li = link_to 'TERMS', terms_path
-          li = mail_to "team@fameandpartners.com", "Get Styling Advice", subject: "Book a Personal Stylist"
-      - if spree_user_signed_in?
+    - footer_links_cache_key = [:layout, :footer, 'footer-links']
+    - cache footer_links_cache_key, expires_in: configatron.cache.expire.long do
+      = render 'shared/newsletter_signup' 
+      nav.nav-footer
         .footer-links
           p.footer-label
-            ' MY ACCOUNT
+            ' ABOUT US
           ul
-            li = link_to 'WISHLIST', wishlist_path
-            li = link_to 'ORDERS', user_orders_path
-            li = link_to 'style profile', styleprofile_path
-      .footer-links
-        p.footer-label
-          ' FOLLOW US <br><span>(and get $20 to spend)</span>
+            li = link_to 'The Fame Team', about_us_path
+            li = link_to 'WHY SHOP WITH US', why_us_path
+            li = link_to 'The Fame CHAIN', fame_chain_path 
+        .footer-links
+          p.footer-label
+             ' CUSTOMER SERVICE
+          ul
+            li = link_to 'FAQs', faqs_path
+            li = link_to 'TERMS', terms_path
+            li = mail_to "team@fameandpartners.com", "Get Styling Advice", subject: "Book a Personal Stylist"
+        /
+          # TODO: Resinstate after tv spot traffic
+          - if spree_user_signed_in?
+          .footer-links
+            p.footer-label
+              ' MY ACCOUNT
+            ul
+              li = link_to 'WISHLIST', wishlist_path
+              li = link_to 'ORDERS', user_orders_path
+              li = link_to 'style profile', styleprofile_path
+        .footer-links
+          p.footer-label
+            ' FOLLOW US <br><span>(and get $20 to spend)</span>
 
-        ul.social-links
-          li
-            = link_to configatron.links.facebook, target: :blank, class: 'facebook' do
-              i.icon-facebook
-          li
-            = link_to configatron.links.pinterest, target: :blank, class: 'pinterest' do
-              i.icon-pinterest
-          li
-            = link_to configatron.links.instagram, target: :blank, class: 'instagram' do
-              i.icon-instagram
-          li
-            = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
-              i.icon-twitter
-        .girlfriend
-          div Get great formal styling tips
-          a href="http://www.girlfriend.com.au/style/formal?utm_campaign=fame_and_partners_formal" target="_blank"
-            = image_tag('girlfriend-logo-white.png')
+          ul.social-links
+            li
+              = link_to configatron.links.facebook, target: :blank, class: 'facebook' do
+                i.icon-facebook
+            li
+              = link_to configatron.links.pinterest, target: :blank, class: 'pinterest' do
+                i.icon-pinterest
+            li
+              = link_to configatron.links.instagram, target: :blank, class: 'instagram' do
+                i.icon-instagram
+            li
+              = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
+                i.icon-twitter
+          .girlfriend
+            div Get great formal styling tips
+            a href="http://www.girlfriend.com.au/style/formal?utm_campaign=fame_and_partners_formal" target="_blank"
+              = image_tag('girlfriend-logo-white.png')
             
 
     .phone
@@ -60,81 +64,6 @@ footer.footer-global
         .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
       - else
         .address New York &nbsp; &nbsp; | &nbsp; &nbsp; USA
-
-/ footer class="regular #{(controller_action_class) == 'pages-home' ? "inverse" : ""}"
-  .grid-container
-    .grid-20.prefix-3.links
-      .title Collection
-      ul
-        - cache ['footer', 'ranges'], :expires_in => configatron.cache.expire.long do
-          - available_product_ranges.each do |taxon|
-            li = link_to taxon.name, collection_taxon_path(taxon), title: "Buy " + taxon.name
-          - available_seo_taxonomy_urls.each do |taxon|
-            li = link_to taxon.name, taxon_path(taxon), title: "Buy " + taxon.name
-          li = link_to "Black Formal Dresses", colour_formal_dresses_path('Black')
-          li = link_to "Red Formal Dresses", colour_formal_dresses_path('Red')
-          li = link_to "Blue Dresses", colour_formal_dresses_path('Blue')
-          li = link_to "Green Dresses", colour_formal_dresses_path('Green')
-          li = link_to "Pink Dresses", colour_formal_dresses_path('Pink')
-    .grid-20.links
-      .title Style Inspiration
-      ul
-        li = link_to 'Celebrity edit', blog_celebrities_url, target: "_blank"
-        li = link_to 'Red carpet gallery', blog_red_carpet_posts_url, target: "_blank"
-        li = link_to t('views.footer.style_inspiration.color_boards'), 'http://pinterest.com/fameandpartners/', target: "_blank"
-        li = link_to 'Trends', blog_posts_by_category_url(category_slug: "trends"), target: "_blank"
-    .grid-20.links
-      .title Help
-      ul
-        li = link_to 'FAQs', faqs_path
-        li = link_to 'Become a Fame Chain Blogger', fame_chain_path
-        li = mail_to "team@fameandpartners.com", "Book a Personal Stylist", subject: "Book a Personal Stylist"
-        li = mail_to "team@fameandpartners.com", "team@fameandpartners.com", subject: "Customer Service from Website"
-        li 1300 924 860
-    .grid-20.links
-      .title About us
-      ul
-        li = link_to 'About us', about_us_path
-        li.hide = link_to 'Meet our Team', team_path
-        li = link_to 'Terms & Conditions', terms_path
-        li = link_to 'Privacy', privacy_path
-    .grid-15.social
-      .title Let’s be friends
-      ul
-        li = link_to 'twitter', configatron.links.twitter, target: :blank, class: 'twitter'
-        li = link_to 'facebook', configatron.links.facebook, target: :blank, class: 'facebook'
-        li = link_to 'instagram', configatron.links.instagram, target: :blank, class: 'instagram'
-        li = link_to 'pinterest', configatron.links.pinterest, target: :blank, class: 'pinterest'
-  .wrap
-    .logo-copyright
-      .logo
-        = link_to 'Fame&Partners', root_url(:host => configatron.host)
-      .copyright
-        ' 2013 Fame & Partners &copy;
-      - if current_site_version.is_australia?
-        .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
-      - else
-        .address New York &nbsp; &nbsp; | &nbsp; &nbsp; USA
-      .site-version-block.hide-on-mobile
-        .site-version
-          .current-version
-            ' Fame & Partners 
-            - if current_site_version.is_australia?
-              ' Australia
-            - else
-              ' USA
-            = image_tag "flags/#{current_site_version.code}.png", width: 16, height: 11, alt: "#{current_site_version.code}"
-            i.icon.icon-dropdown-up
-          .site-version-switch
-            ul
-              li
-                = link_to site_version_path('au') do
-                  = image_tag 'flags/au.png', width: 16, height: 11, alt: 'Australia'
-                  ' Australia
-              li
-                = link_to site_version_path('us') do
-                  = image_tag 'flags/us.png', width: 16, height: 11, alt: 'USA'
-                  ' USA
 
 .hide
   #what-size

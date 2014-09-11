@@ -12,8 +12,8 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
     $(document).bind 'keyup', @keyPressHandler
 
   # external api
-  show: (content) ->
-    @popupLoadRequest(content)
+  show: (content, pop_title) ->
+    @popupLoadRequest(content, pop_title)
       .done(@showModalWindow)
       .fail(@hide)
     
@@ -32,8 +32,8 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
   keyPressHandler: (e) ->
     @hide() if e.which is 27
 
-  popupLoadRequest: (content) ->
-    loadHtmlUrl = urlWithSitePrefix("/campaigns/email_capture/new?content="+content)
+  popupLoadRequest: (content, pop_title) ->
+    loadHtmlUrl = urlWithSitePrefix("/campaigns/email_capture/new?content="+content+"&pop_title="+pop_title)
     $.ajax(
       url: loadHtmlUrl
       type: 'GET'
