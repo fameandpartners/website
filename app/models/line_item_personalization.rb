@@ -104,7 +104,7 @@ class LineItemPersonalization < ActiveRecord::Base
     result = 0.0
     
     # Plus Size Pricing
-    if add_plus_size_cost?(line_item.variant)
+    if add_plus_size_cost?
       result += 20
     end
 
@@ -126,7 +126,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   #Plus Size Pricing
-  def add_plus_size_cost?(variant)
+  def add_plus_size_cost?
     if plus_size? == nil
       if size && size.to_i >= locale_plus_sizes
         return true
@@ -135,7 +135,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def locale_plus_sizes
-    if @current_site_version
+    if line_item.order.get_site_version.permalink == 'au'
       return 18
     else
       return 14
@@ -144,11 +144,6 @@ class LineItemPersonalization < ActiveRecord::Base
 
   def plus_size?
     return true if !product.blank? && product.taxons.where(:name => "Plus Size").count > 0
-  end
-
-  def get_site_version
-    # australie is true
-    @current_site_version ||= SiteVersion.is_australia?
   end
 
     
