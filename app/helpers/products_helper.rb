@@ -126,7 +126,7 @@ module ProductsHelper
         options[:second_image]    = images.second.attachment.url(:large)
       end
       options[:onerror] = "window.switchToAltImage(this, '/assets/#{no_image}')"
-      image_tag(image.attachment.url(:large), options)
+      image_tag('http://d1sd72h9dq237j.cloudfront.net' + image.attachment.url(:large), options)
     end
   end
 
@@ -207,8 +207,17 @@ module ProductsHelper
   #      title: 'Add to wishlist',
   #      class: 'wishlist-link',
   #      title-remove: 'Remove from wishlist'
-  def cached_add_to_wishlist_link(product_or_variant, options = {})
-    variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
+  def cached_add_to_wishlist_link(resource, options = {})
+    if resource.is_a?(Spree::Variant)
+      variant_id = resource.id
+      product_id = resource.product_id
+    elsif resource.is_a?(Spree::Product)
+      variant_id = resource.master.id
+      product_id = resource.id
+    else
+      variant_id = resource.master_id
+      product_id = resource.id
+    end
 
     title = options.delete(:title) || 'Add to wishlist'
     title_remove = options.delete(:title_remove) || 'Remove from wishlist'
@@ -219,8 +228,8 @@ module ProductsHelper
       'title-add'     => title,
       'title-remove'  => title_remove,
       'action'        => 'add-to-wishlist',
-      'product-id'    => variant.product_id,
-      'id'            => variant.id
+      'product-id'    => product_id,
+      'id'            => variant_id
     }
   end
 

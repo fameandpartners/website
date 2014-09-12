@@ -1,0 +1,27 @@
+.picture
+  = link_to colored_variant_path(variant) do
+    = image_tag 'http://d1sd72h9dq237j.cloudfront.net' + variant.images.first.large, alt: variant.product.name
+  .popup.striped
+    .fleft.quick-view
+      = quick_view_link(variant.product)
+    .fright.like
+      = cached_add_to_wishlist_link(variant.product, class: 'wish-list-link')
+h6 = variant.product.name
+.price
+  - if show_prices_with_applied_promocode?
+    span.price-old = variant.price.display_price
+    = current_promotion.calculate_price_with_discount(variant.price).display_price
+  - elsif current_sale.is_active?
+    span.price-old = variant.price.display_price_without_discount
+    = variant.price.display_price_with_discount(variant.product.is_surryhills).to_s
+  - else
+    = variant.price.display_price.to_s.html_safe
+.buttons
+  .buy-button
+    = link_to "Buy", colored_variant_path(variant, :cf => 'collection'), class: 'btn black small', title: "Buy this dress"
+  - if (variant.product.can_be_customized and !current_sale.is_active?)
+    .custom-button
+      = link_to t('words.customize'), personalization_product_path(permalink: variant.product.permalink, :cf => 'collection'), class: 'btn empty border small', title: "#{t('words.customize').titleize} this dress"
+- if variant.product.fast_delivery
+  .fast-delivery-icon title="Next day delivery*"
+    = I18n.t(:long, scope: [:delivery_time, :fast])

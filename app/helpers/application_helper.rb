@@ -173,22 +173,39 @@ module ApplicationHelper
   end
 
   def descriptive_url(product)
-    
-    r = "#{product.translated_short_description(I18n.locale).parameterize}-#{product.name.parameterize}-#{product.id}"
+    parts = []
+    parts << product.translated_short_description(I18n.locale).parameterize
+    parts << product.name.parameterize
+    parts << product.id
 
-    return r
+    parts.reject(&:blank?).join('-')
   end
 
   def collection_product_path(product, options = {})
-    # taxon = range_taxon_for(product)
-    # taxon_permalink = taxon.present? ? taxon.permalink.split('/').last : 'long-dresses'
-
-    # build_collection_product_path(taxon_permalink, product.to_param, options)
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 'p', descriptive_url(product)  ]
+    path_parts = [site_version_prefix, 'dresses', 'p']
+    if product.respond_to?(:descriptive_url)
+      path_parts << product.descriptive_url
+    else
+      path_parts << descriptive_url(product)
+    end
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?    
     
+    url_without_double_slashes(path)
+  end
+
+  def colored_variant_path(variant, options = {})
+    parts = []
+    parts << self.url_options[:site_version]
+    parts << 'dresses'
+    parts << 'p'
+    parts << variant.product.descriptive_url
+    parts << variant.color.name
+
+    path =  '/' + parts.reject(&:blank?).join('/')
+    path = "#{path}?#{options.to_param}" if options.present?
+
     url_without_double_slashes(path)
   end
 
@@ -360,6 +377,7 @@ module ApplicationHelper
   # ' $295
   def price_for_product(product)
     price = product.zone_price_for(current_site_version)
+
     if show_prices_with_applied_promocode?
       [
         content_tag(:span, price.display_price, class: 'price-old'),
@@ -433,8 +451,6 @@ module ApplicationHelper
     searcher.current_currency = currency
     return searcher.products.first(count)
   end
-
-  private
 
   def current_sale
     @current_sale ||= Spree::Sale.first_or_initialize

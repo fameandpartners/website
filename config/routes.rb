@@ -45,7 +45,6 @@ FameAndPartners::Application.routes.draw do
 
     scope '/dresses' do
       root to: 'spree/products#index', as: 'dresses'
-
       #roots categories
       get 't/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
       get 't/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
