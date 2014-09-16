@@ -308,6 +308,10 @@ module Products
             %w( blue navy )
           when 'pink'
             %w( pink blush-pink )
+          when 'red'
+            %w( burgundy )
+          when 'pastel'
+            %w( aqua nude lilac pale-blue pale-pink pale-grey pale-lavender pale-blush blush peach cream-and-blue dusty-pink silver sherbet blush-pink lavender )
           else
             colours
         end

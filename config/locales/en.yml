@@ -3,6 +3,9 @@ en:
     extra_size_price: "This size is an additional $20"
   collection:
     colors:
+      pastel:
+        title: 'Pastel Dresses'
+        subtitle: 'Cute pastel dresses.'
       black:
         title: 'Black Dresses'
         subtitle: 'Transform that little black dress with a modern twist by playing with gothic, rock star or ultra glam looks.'
