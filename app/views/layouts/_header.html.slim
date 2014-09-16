@@ -101,8 +101,8 @@
             = link_to collection_path, class: 'btn show-style-quiz' do
               span Style Quiz
           li.discover
-            = link_to collection_path, class: 'btn' do
-              span Shop
+            = link_to collection_path, class: 'btn', title: 'Shop Dresses' do
+              span Dresses
               span.icon-dropdown-down
             - links_cache_key = [:layout, :header, 'top-links']
             - cache links_cache_key, expires_in: configatron.cache.expire.long do
@@ -128,7 +128,7 @@
                             li = link_to "Blue Dresses", colour_formal_dresses_path('Blue'), title: "Blue Dresses"
                             li = link_to "Pink Dresses", colour_formal_dresses_path('Pink'), title: "Pink Dresses"
                             li = link_to "Red Dresses", colour_formal_dresses_path('Red'), title: "Red Dresses"
-                            li = link_to "Pastel Dresses", collection_path(:edits => "pastels"), title: "Pastel Dresses"
+                            li = link_to "Pastel Dresses", colour_formal_dresses_path('Pastel'), title: "Pastel Dresses"
                             
                         .grid-6.menu.list-right
                           ul
