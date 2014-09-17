@@ -2,6 +2,7 @@ class CelebritiesController < ApplicationController
   layout 'spree/layouts/spree_application'
   
   def index
+    display_marketing_banner
 
   end
 
