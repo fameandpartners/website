@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140904044908) do
+ActiveRecord::Schema.define(:version => 20140915230844) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -52,6 +52,22 @@ ActiveRecord::Schema.define(:version => 20140904044908) do
   end
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+
+  create_table "banners", :force => true do |t|
+    t.string   "presentation"
+    t.string   "url"
+    t.string   "category"
+    t.integer  "position"
+    t.boolean  "enabled",                 :default => false
+    t.string   "attachment_content_type"
+    t.string   "attachment_file_name"
+    t.datetime "attachment_updated_at"
+    t.integer  "attachment_width"
+    t.integer  "attachment_height"
+    t.integer  "attachment_size"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
 
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
