@@ -34,6 +34,8 @@ FameAndPartners::Application.routes.draw do
     # SEO categories routes, we want them in front
     scope '/dresses' do
       root to: 'spree/products#index', as: 'dresses'
+      get '/colour/:colour' => 'spree/products#index'
+      get '/body-shape/:bodyshape' => 'spree/products#index'
       get '/*permalink' => 'spree/products#index'
     end
 

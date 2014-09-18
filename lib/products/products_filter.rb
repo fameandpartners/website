@@ -275,6 +275,7 @@ module Products
       @properties[:edits]       ||= []
 
       @properties[:selected_taxons] ||= []
+      @properties[:selected_edits] ||= []
 
       binding.pry
 
@@ -291,7 +292,10 @@ module Products
       elsif params[:collection].present?
         params[:permalink] = "collection/#{params[:collection]}"
         @properties["collection"] = params[:collection]
-      elsif params[:collection].blank?
+      elsif params[:edits].present?
+        params[:permalink] = "edits/#{params[:edits]}"
+        binding.pry
+      elsif params[:collection].blank? && params[:edits].blank? && params[:permalink].present?
         params[:permalink].downcase!
         # chop off the end part of a permalink (after "/")
         params[:collection] = params[:permalink].split("/")[1]
@@ -299,14 +303,18 @@ module Products
         @properties["collection"] = params[:collection]
         @properties["seocollection"] = params[:collection]
       end
+
+      binding.pry
         
         # ugly, refactros ASAP
-        params[:permalink].downcase!
+        params[:permalink].downcase! unless params[:permalink].blank?
 
       Spree::Taxon.all.each do |taxon|
         permalink = taxon.permalink
         @properties[permalink] = prepare_taxon(permalink, params[:permalink])
-        if @properties[permalink].present?
+        if @properties[permalink].present? && params[:edits].blank?
+          @properties[:selected_edits] << @properties[permalink]
+        elsif @properties[permalink].present?
           @properties[:selected_taxons] << @properties[permalink]
         end
       end
@@ -327,13 +335,13 @@ module Products
 
     # get by permalinks. array or single param
     # todo: create root taxon - independed search
-    def prepare_taxon(root, permalinks)
-      return nil if permalinks.blank?
-      permalinks = Array.wrap(permalinks)
+    def prepare_taxon(taxon_permalink, requested_permalinks)
+      return nil if requested_permalinks.blank?
+      permalinks = Array.wrap(requested_permalinks)
 
       # db_permalinks = permalinks.map{|permalink| "#{root}/#{permalink.downcase}"}
       # Spree::Taxon.select(:id).where("lower(permalink) IN (?)", db_permalinks).map(&:id)
-      if permalinks.include? root
+      if permalinks.include? taxon_permalink
         r = Spree::Taxon.select(:id).where("lower(permalink) IN (?)", permalinks).map(&:id)
       else
         r = nil

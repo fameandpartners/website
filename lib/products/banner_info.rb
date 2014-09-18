@@ -151,7 +151,7 @@ module Products
     end
 
     def selected_edits_taxons
-      @selected_edits ||= selected_taxons(@searcher.edits, false)
+      @selected_edits ||= selected_taxons(@searcher.selected_edits, false)
     end
 
     def selected_taxons(taxon_ids, with_banner = false)
