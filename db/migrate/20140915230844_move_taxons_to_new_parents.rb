@@ -74,18 +74,14 @@ class MoveTaxonsToNewParents < ActiveRecord::Migration
 
   def self.move_to_taxonomy(taxon_names, taxonomy_name)
   	taxonomy = Spree::Taxonomy.where(name: taxonomy_name).first
-  	puts taxonomy_name
-  	puts taxonomy
-  	puts "Moving taxons into:"
-  	puts taxonomy.name
-  	puts taxonomy.id
+  	
   	taxon_names.each do |taxon_name|
-  		puts "Moving:"
-  		puts taxon_name
+  		
   		taxon = MoveTaxonsToNewParents.check_and_create(Spree::Taxon, taxon_name)
-  		puts taxon
-  		taxon.taxonomy_id = taxonomy.id
+  		
   		taxon.parent_id = taxonomy.root.id
+      #must call set_permalink to regenerate the permalink with the new parent
+      taxon.set_permalink
   		taxon.save
   	end
   end
