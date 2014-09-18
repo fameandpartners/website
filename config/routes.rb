@@ -31,6 +31,13 @@ FameAndPartners::Application.routes.draw do
     get '/lilyxfame'   => 'statics#lilyxfame'
     get '/maryxfame'   => 'statics#maryxfame'
 
+    # SEO categories routes, we want them in front
+    scope '/dresses' do
+      root to: 'spree/products#index', as: 'dresses'
+      get '/*permalink' => 'spree/products#index'
+    end
+
+
     # to correctly redirect, we should know product taxon or extract collection from param
     get "/products"             => 'redirects#products_index'
     get "/products/:product_id" => 'redirects#products_show'
@@ -61,6 +68,7 @@ FameAndPartners::Application.routes.draw do
       get '/:collection' => 'spree/products#index'
       get '/:collection/:id' => 'spree/products#show'
     end
+
     get '/lp/collection(/:collection)' => 'spree/products#index', defaults: { lp: 'lp' }
 
     get 'products/:id/quick_view' => 'spree/products#quick_view'

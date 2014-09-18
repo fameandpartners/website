@@ -140,11 +140,12 @@ module Products
 
     def selected_collection_taxons
       @selected_collection ||= begin
-        collection_ids = @searcher.collection
+        collection_ids = @searcher.selected_taxons
         seo_collection = @searcher.seocollection rescue []
         if seo_collection.present?
           collection_ids += seo_collection
         end
+        #binding.pry
         selected_taxons(collection_ids, false)
       end
     end
@@ -182,13 +183,15 @@ module Products
     end
 
     def from_taxon(taxon)
-      {
+      r ={
         banner_image: taxon_image(taxon) || taxon_image(root_range_taxon),
         banner_title: taxon.try(:banner).try(:title) || taxon.name,
         banner_text: taxon.try(:banner).try(:description) || default_collections_info[:description],
         footer_text: taxon.try(:banner).try(:footer_text),
         category_description: taxon.try(:banner).try(:seo_description)
       }
+      #binding.pry
+      return r
     end
   end
 end
