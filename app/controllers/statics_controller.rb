@@ -14,6 +14,11 @@ class StaticsController < ApplicationController
     @searcher.current_currency = current_currency
   end
 
+  def fashionista_winner
+    @title = "Fashionista 2014 Winner"
+    @description = "Fashionista 2014 Winner. " + default_meta_description
+  end
+
   def landingpage_plus_size
     @title = "Plus Size Dresses"
 
