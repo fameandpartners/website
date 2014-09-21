@@ -29,7 +29,7 @@ window.shopping_cart = _.extend(window.shopping_cart,
       type: "POST"
       dataType: "json"
       data: window.shopping_cart.prepareParams(options)
-      success: window.shopping_cart.buildOnSuccess()
+      success: window.shopping_cart.buildOnSuccess
       error: window.shopping_cart.buildOnErrorCallback(["item_add_failed"], options.failure)
 
 
