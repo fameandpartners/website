@@ -156,7 +156,7 @@ FameAndPartners::Application.routes.draw do
     get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
     get '/fashionista2014'   => 'statics#fashionistacomp', :as => :fashionista
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
-    get '/fashionista-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
+    get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
     get '/compterms' => 'statics#comp_terms'
     get '/plus-size' => 'statics#landingpage_plus_size', :as => :plus_size
 
