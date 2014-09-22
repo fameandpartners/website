@@ -119,3 +119,11 @@
         .name Tayla Alleyn 
         .name Jessica Hope
       .clearfix
+
+  .row.center
+    .ambassadors
+      h3 Register for next year
+      p To register for next year, email us.
+      p
+        = mail_to "fashionista@fameandpartners.com", "Register for next year", :subject => "Fashionista 2015", :class => 'btn'
+
