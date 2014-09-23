@@ -94,6 +94,10 @@ class StaticsController < ApplicationController
     @description = "Fashionista Program. " + default_meta_description
   end
 
+  def girlfriend
+    render layout: nil 
+  end
+
   private
 
   def get_products_from_edit (edit, currency, user, count=9)

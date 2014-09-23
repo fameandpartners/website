@@ -25,11 +25,12 @@ FameAndPartners::Application.routes.draw do
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-    get '/nyemix'   => 'statics#nyemix'
-    get '/nylonxfame'   => 'statics#nylonxfame'
+    get '/nyemix'     => 'statics#nyemix'
+    get '/nylonxfame' => 'statics#nylonxfame'
     get '/renxfame'   => 'statics#renxfame'
-    get '/lilyxfame'   => 'statics#lilyxfame'
-    get '/maryxfame'   => 'statics#maryxfame'
+    get '/lilyxfame'  => 'statics#lilyxfame'
+    get '/maryxfame'  => 'statics#maryxfame'
+    get '/girlfriend' => 'statics#girlfriend'
 
     # to correctly redirect, we should know product taxon or extract collection from param
     get "/products"             => 'redirects#products_index'
