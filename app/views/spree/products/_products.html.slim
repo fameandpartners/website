@@ -12,6 +12,16 @@ ruby:
   - cache cache_list_fragments, expires_in: configatron.cache.expire.quickly do
     h5.breadcrumb = collection_page_breadcrumb(@searcher)
     .row
+      - if @lp_featured_products.present?
+        .lp_featured_dresses
+          h2 Featured Dresses
+          .arrows-line-horizontal
+          - @lp_featured_products.each do |product|
+            div class="grid-3"
+              - cache (cache_name_fragments + [product.id]), expires_in: configatron.cache.expire.long do
+                = render 'spree/products/cached_product', product: product
+          .arrows-line-horizontal
+    .row
       - if @products.present?
         - @products.each do |product|
           div class="grid-3"
@@ -23,8 +33,7 @@ ruby:
     - if @similar_products.present?
       .row
         .page-title
-          h1 View more dresses
-          h2.border These dresses can also be made in #{ @searcher.selected_color_name }
+          h2 These dresses can also be made in #{ @searcher.selected_color_name }
         - @similar_products.each do |product|
           div class="grid-3"
             - cache (cache_name_fragments + [product.id]), expires_in: configatron.cache.expire.long do
