@@ -23,6 +23,7 @@ doctype html
       = render 'layouts/header'
       #content
         - unless sale_active?
+          = render 'shared/two_dresses_banner'
           = marketing_banner
         - else
           = render 'shared/sale_banner'
