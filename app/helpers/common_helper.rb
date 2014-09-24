@@ -23,7 +23,7 @@ module CommonHelper
   # social links helper
   def facebook_share_button(share_url)
     if Rails.env.development?
-      share_url = 'http://feature.fameandpartners.com/collection/long-dresses/posuere_placerat_dress'
+      share_url = 'http://www.fameandpartners.com/' + share_url
     end
     options = {
       'class' => 'fb-like',

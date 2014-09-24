@@ -94,9 +94,19 @@ class StaticsController < ApplicationController
     @description = "Fashionista Program. " + default_meta_description
   end
 
-  def girlfriend
+  def girlfriendxfame
+    if !spree_user_signed_in?
+      session[:spree_user_return_to] = girlfriendxfame_path(site_version: current_site_version.code)
+    else
+      @competition_participation = CompetitionParticipation.find_or_create_by_spree_user_id(spree_current_user.id)
+    end
+
+    user = try_spree_current_user
+    currency = current_currency
+
     @title = "Girlfriend x Fame & Partners Collaboration - " + default_seo_title
     @description = "Girlfriend Magazine x Fame & Partners Collaboration. " + default_meta_description
+    @dresses = get_products_from_edit('girlfriend', currency, user, 100)
   end
 
   private

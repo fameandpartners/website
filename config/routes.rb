@@ -30,7 +30,9 @@ FameAndPartners::Application.routes.draw do
     get '/renxfame'   => 'statics#renxfame'
     get '/lilyxfame'  => 'statics#lilyxfame'
     get '/maryxfame'  => 'statics#maryxfame'
-    get '/girlfriendxfame' => 'statics#girlfriend', :as => :girlfriendxfame
+    get '/girlfriendxfame' => 'statics#girlfriendxfame'
+
+    post '/shared/facebook' => 'competition/events#share'
 
     # to correctly redirect, we should know product taxon or extract collection from param
     get "/products"             => 'redirects#products_index'

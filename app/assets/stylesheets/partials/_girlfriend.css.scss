@@ -27,19 +27,27 @@
 		@include box-sizing(border-box);
 		.picture {
 			float: left;
+      width: 262px;
+      height: 336px;
 			margin-right: 10px;
+      text-align: center;
+        img {
+          height: 100%;
+        }
 		}
 		.title {
 			font-size: 40px;
 			font-family: $fontThree;
 		}
 		.text {
-			overflow: hidden;
+//			overflow: hidden;
+      margin-left: 272px;
 			text-align: center;
 			position: relative;
 		}
 		.social-grey-global {
 			text-align: center;
+      z-index: 3;
 		}
 		.shared {
 			width: 58px;
