@@ -18,6 +18,7 @@
 //= require libs/masonry.pkgd
 //= require libs/tooltipsy.source
 //= require libs/jquery.zoom.min
+//= require libs/spin.min
 
 //= require libs/soundcloud/soundcloud.player.api
 //= require libs/soundcloud/sc-player

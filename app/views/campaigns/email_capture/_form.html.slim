@@ -1,19 +1,20 @@
 - pop_title = params[:pop_title]
 - old_titles = params[:content]
+- content = cookies[:promocode]
 .title 
   - if pop_title != ""
     = pop_title
   - else
-    - if params[:content] == 'bday'
+    - if old_titles == 'bday'
       ' Get $40 to spend on your birthday!
-    - elsif params[:content] == 'prom'
+    - elsif old_titles == 'prom'
       ' GET $$$ TOWARDS YOUR PROM DRESS!
-    - elsif params[:content] == 'welcomeback'
+    - elsif old_titles == 'welcomeback'
       ' WELCOME BACK, GET $25 OFF!
 .form-container
   .form
     = form_for (@participation || Participation.new), as: :participation, url: campaigns_email_capture_path, remote: true do |f|
-      = f.hidden_field :content, value: params[:content]
+      = f.hidden_field :content, value: content
       .string
         = f.email_field :email, class: 'input', placeholder: 'Enter your email address'
         input.btn.submitbox type="submit" value="Submit"

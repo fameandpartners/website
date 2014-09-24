@@ -302,6 +302,8 @@
 		// margin: 5px 0;
 		font-size: 0;
 		width: 970px;
+		max-width: 970px;
+		white-space: nowrap;
 		.nav {
 			display: inline-block;
 		}
@@ -428,12 +430,15 @@
 		}
 		.discover {
 			width: 150px;
+			max-width: 150px;
 		}
 		.blog {
 			width: 140px;
+			max-width: 140px;
 		}
 		.wishlist {
 			width: 145px;
+			max-width: 145px;
 		}
 		// .offer {
 		// 	float: right;
@@ -458,7 +463,8 @@
 		// 	}
 		// }
 		.search {
-			min-width: 309px;
+			width: 309px;
+			max-width: 309px;
 			background: #000;
 			padding: 0 5px;
 			height: 36px;
@@ -497,6 +503,8 @@
 			padding: 0 8px;
 			letter-spacing: 0.125em;
 			font-size: 12px;
+			width: 76px;
+			max-width: 76px;
 			a { display: inline-block; font-size:14px;}
 			span { vertical-align: middle;}
 			.wishlist {
@@ -520,9 +528,9 @@
 				display: inline-block;
 				position: relative;
 				right: 13px;
-				font-size: 11px;
+				font-size: 10px;
 				top: -2px;
-				min-width: 20px;
+				width: 20px;
 				height: 20px;
 				line-height: 20px;
 				background-color: #fff;
