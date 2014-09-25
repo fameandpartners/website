@@ -92,7 +92,7 @@ module ProductsHelper
         options[:second_image]    = images.second.attachment.url(:large)
       end
       options[:onerror] = "window.switchToAltImage(this, '/assets/#{no_image}')"
-      image_tag('http://d1sd72h9dq237j.cloudfront.net' + image.attachment.url(:large), options)
+      image_tag(image.attachment.url(:large), options)
     end
   end
 
