@@ -21,7 +21,7 @@ module Products
     def initialize(params)
       self.current_currency = Spree::Config[:currency]
       @properties = ActiveSupport::HashWithIndifferentAccess.new
-      #binding.pry
+      ##binding.pry
       prepare(params)
     end
 
@@ -57,7 +57,7 @@ module Products
       fetched_products_ids = @fetched_products_ids
       only_viewable_colors = options[:only_viewable_colors]
 
-      #binding.pry
+      ##binding.pry
 
       begin
         Tire.search(:spree_products, load: { include: { master: :prices } }) do
@@ -277,24 +277,24 @@ module Products
       @properties[:selected_taxons] ||= []
       @properties[:selected_edits] ||= []
 
-      binding.pry
+      #binding.pry
 
       # it's dirty hack, we equal collection with some other collection
       if params[:collection].present? && params[:seocollection].blank?
-        binding.pry
+        #binding.pry
         params[:seocollection] = params[:collection]
         @properties["collection"] = params[:collection]
         @properties["seocollection"] = params[:collection]
         # MarkoK: continuing with dirty hacks, to ensure backwards compatibility
         # with the old links, we add "collection/" to the beggining of the permalink
         params[:permalink] = "collection/#{params[:collection]}"
-        binding.pry
+        #binding.pry
       elsif params[:collection].present?
         params[:permalink] = "collection/#{params[:collection]}"
         @properties["collection"] = params[:collection]
       elsif params[:edits].present?
         params[:permalink] = "edits/#{params[:edits]}"
-        binding.pry
+        #binding.pry
       elsif params[:collection].blank? && params[:edits].blank? && params[:permalink].present?
         params[:permalink].downcase!
         # chop off the end part of a permalink (after "/")
@@ -304,7 +304,7 @@ module Products
         @properties["seocollection"] = params[:collection]
       end
 
-      binding.pry
+      #binding.pry
         
         # ugly, refactros ASAP
         params[:permalink].downcase! unless params[:permalink].blank?
@@ -319,7 +319,7 @@ module Products
         end
       end
 
-      binding.pry
+      #binding.pry
 
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
@@ -347,7 +347,7 @@ module Products
         r = nil
       end
 
-      #binding.pry
+      ##binding.pry
       return r
     end
 

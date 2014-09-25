@@ -32,11 +32,19 @@ FameAndPartners::Application.routes.draw do
     get '/maryxfame'   => 'statics#maryxfame'
 
     # SEO categories routes, we want them in front
+
+    scope '/dresses', module: 'personalization' do
+      get 'p/custom-:product_desc-:product_name-:product_id', to: 'products#show'
+      get 'p/styleit-:product_desc-:product_name-:product_id', to: 'products#style'
+    end
+
+
     scope '/dresses' do
       root to: 'spree/products#index', as: 'dresses'
-      get '/colour/:colour' => 'spree/products#index'
-      get '/body-shape/:bodyshape' => 'spree/products#index'
-      get '/*permalink' => 'spree/products#index'
+      get 't/colour/:colour' => 'spree/products#index'
+      get 't/body-shape/:bodyshape' => 'spree/products#index'
+      get 't/*permalink' => 'spree/products#index'
+      get 'p/:product_desc-:product_name-:product_id' => 'spree/products#show'
     end
 
 

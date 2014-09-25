@@ -10,7 +10,12 @@ module Personalization
     end
 
     def show
-      @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink(params[:permalink])
+      if params[:product_id]
+        @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find(params[:product_id])
+      else
+        @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink(params[:permalink])
+      end
+
       # check and redirect if needed
       ensure_customization_available(@product) and return
 
@@ -32,7 +37,11 @@ module Personalization
     end
 
     def style
-      @product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
+      if params[:product_id]
+        @product = Spree::Product.active(Spree::Config.currency).find(params[:product_id])
+      else
+        @product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
+      end
 
       set_product_show_page_title(@product, "Style your formal dress ")
       display_marketing_banner

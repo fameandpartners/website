@@ -89,10 +89,18 @@ Spree::ProductsController.class_eval do
 
   def load_product
     if try_spree_current_user.try(:has_spree_role?, "admin")
-      @product = Spree::Product.find_by_permalink!(params[:id])
+      if params[:product_id]
+        @product = Spree::Product.find(params[:product_id])
+      else
+        @product = Spree::Product.find_by_permalink!(params[:id])
+      end
     else
-      #@product = Product.active(current_currency).find_by_permalink!(params[:id])
-      @product = Spree::Product.active.find_by_permalink!(params[:id])
+      if params[:product_id]
+        @product = Spree::Product.active.find(params[:product_id])
+      else
+        #@product = Product.active(current_currency).find_by_permalink!(params[:id])
+        @product = Spree::Product.active.find_by_permalink!(params[:id])
+      end
     end
   end
 
