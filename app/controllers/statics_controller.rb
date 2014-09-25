@@ -95,7 +95,8 @@ class StaticsController < ApplicationController
   end
 
   def girlfriend
-    render layout: nil 
+    @title = "Girlfriend x Fame & Partners Collaboration - " + default_seo_title
+    @description = "Girlfriend Magazine x Fame & Partners Collaboration. " + default_meta_description
   end
 
   private
