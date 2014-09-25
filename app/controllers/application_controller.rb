@@ -8,6 +8,21 @@ class ApplicationController < ActionController::Base
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
+  append_before_filter do
+    return if params[:cptoken].blank?
+
+    cptoken = params[:cptoken]
+    session[:cptokens] ||= []
+
+    return if session[:cptokens].include?(cptoken)
+
+    participation = CompetitionParticipation.find_by_token(cptoken)
+
+    return if participation.blank?
+    return if participation.spree_user.eql?(try_spree_current_user)
+
+    participation.increment!(:views_count)
+  end
 
   def check_site_version
     # redirects should work only on non-ajax GET requests from users

@@ -1,0 +1,107 @@
+#wrap
+  #content
+    .girlfriend-header
+      = image_tag '_girlfriend/header.jpg'
+      = link_to '', root_path, class: 'logo'
+    .girlfriend-catalog
+      - @dresses.each do |dress|
+        .catalog-item
+          .picture
+            = link_to collection_product_path(dress) do
+              = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+          .text
+            = link_to dress.name, collection_product_path(dress), class: 'title'
+            p = product_short_description(dress)
+            p = link_to 'buy', collection_product_path(dress), class: 'btn small'
+            .social-grey-global.addthis_toolbox.addthis_default_style
+              = facebook_share_button(collection_product_path(dress))
+            .social-popup style="display: none;"
+              .title THANKS FOR LIKING!
+              .discount $20 OFF
+              .code GF20
+              p ENTER CODE AT CHECKOUT
+            .actions
+              .shared.grey
+                .arrows-line-horizontal
+                ruby:
+                  classes = ['facebook', 'share']
+                  classes << 'not-authenticated' unless spree_user_signed_in?
+                = link_to collection_product_url(dress), class: classes do
+                  ' SHARE
+                  br
+                  ' /
+                  br
+                  ' ENTER
+                  br
+                  ' VIA
+                  br
+                  ' FACEBOOK
+              /.shared
+                ruby:
+                  classes = ['twitter', 'share']
+                  classes << 'not-authenticated' unless spree_user_signed_in?
+                = link_to collection_product_url(dress), class: classes do
+                  ' SHARE
+                  br
+                  ' /
+                  br
+                  ' ENTER
+                  br
+                  ' VIA
+                  br
+                  ' Twitter
+                .arrows-line-horizontal
+    .girlfriend-terms
+      = link_to 'Terms & Conditions', competition_terms_path
+    .girlfriend-footer
+      = image_tag '_girlfriend/footer.jpg'
+  #push
+  .girlfriend-popup.modal.popup-placeholder.hide
+    .overlay
+    .modal-container
+      .close-lightbox
+      h2 ENTER THE COMPETITION
+      p By signing up and sharing you will be entering the competition. Increase your chances of winning by sharing via Facebook and Twitter.
+      = link_to fb_auth_path(site_version: current_site_version.code), class: 'facebook-button' do
+        span.icon
+          span.icon-facebook2
+        span Sign up with facebook
+      p
+        ' Already a member of Fame & Partners?
+        = link_to 'Login', spree_login_path
+
+  coffee:
+    $ ->
+      FB.Event.subscribe 'edge.create', (url, element) ->
+        $popup = $(element).parents('.social-grey-global').next('.social-popup')
+        $popup.fadeIn 'fast', ->
+          $popup.bind 'mouseleave', ->
+            timeout_id = setTimeout ->
+              $popup.fadeOut 'fast'
+            , 5000
+            $popup.data('timeout-id', timeout_id)
+          $popup.bind 'mouseenter', ->
+            if $popup.data('timeout-id')
+              clearTimeout($popup.data('timeout-id'))
+
+      $('a.not-authenticated').bind 'click', (event)->
+        event.preventDefault()
+        $popup = $('.girlfriend-popup')
+        $popup.show()
+        $popup.find('.modal-container').center()
+        $popup.find('.close-lightbox').bind 'click', ->
+          $popup.hide()
+
+  - if spree_user_signed_in?
+    javascript:
+      facebook_application_id   = '#{facebook_application.api_key}';
+      competition_participation_token = '#{@competition_participation.token}';
+    coffee:
+      $('a.share.facebook').on 'click', (event) ->
+        event.preventDefault()
+        FB.ui
+            method: 'share'
+            href: $(event.target).attr('href') + '?cptoken=' + competition_participation_token
+          , (response) ->
+              if !response.error_code
+                $.post('/shared/facebook')
