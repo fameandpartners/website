@@ -30,7 +30,7 @@ FameAndPartners::Application.routes.draw do
     get '/renxfame'   => 'statics#renxfame'
     get '/lilyxfame'  => 'statics#lilyxfame'
     get '/maryxfame'  => 'statics#maryxfame'
-    get '/girlfriend' => 'statics#girlfriend'
+    get '/girlfriendxfame' => 'statics#girlfriend', :as => :girlfriendxfame
 
     # to correctly redirect, we should know product taxon or extract collection from param
     get "/products"             => 'redirects#products_index'
@@ -158,7 +158,7 @@ FameAndPartners::Application.routes.draw do
     get '/fashionista2014'   => 'statics#fashionistacomp', :as => :fashionista
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
     get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
-    get '/compterms' => 'statics#comp_terms'
+    get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size' => 'statics#landingpage_plus_size', :as => :plus_size
 
     get '/campaigns/stylecall' => 'campaigns#show'

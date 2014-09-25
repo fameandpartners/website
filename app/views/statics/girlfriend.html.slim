@@ -247,6 +247,8 @@
                 br
                 ' Twitter
               .arrows-line-horizontal
+    .girlfriend-terms
+      = link_to 'Terms & Conditions', competition_terms_path
     .girlfriend-footer
       = image_tag '_girlfriend/footer.jpg'
   #push
@@ -254,8 +256,8 @@
   .overlay
   .modal-container
     .close-lightbox
-    h2 ENTER THE COMPETITIO
-    p By signing up you will be entering the competition. Increase your chance of winning by sharing via Facebook and Twitter.
+    h2 ENTER THE COMPETITION
+    p By signing up and sharing you will be entering the competition. Increase your chances of winning by sharing via Facebook and Twitter.
     = link_to '#', class: 'facebook-button' do
       span.icon
         span.icon-facebook2
