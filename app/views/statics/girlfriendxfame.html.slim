@@ -4,53 +4,63 @@
       = image_tag '_girlfriend/header.jpg'
       = link_to '', root_path, class: 'logo'
     .girlfriend-catalog
-      - @dresses.each do |dress|
-        .catalog-item
-          .picture
-            = link_to collection_product_path(dress) do
-              = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
-          .text
-            = link_to dress.name, collection_product_path(dress), class: 'title'
-            p = product_short_description(dress)
-            p = link_to 'buy', collection_product_path(dress), class: 'btn small'
-            .social-grey-global.addthis_toolbox.addthis_default_style
-              = facebook_share_button(collection_product_path(dress))
-            .social-popup style="display: none;"
-              .title THANKS FOR LIKING!
-              .discount $20 OFF
-              .code GF20
-              p ENTER CODE AT CHECKOUT
-            .actions
-              .shared.grey
-                .arrows-line-horizontal
-                ruby:
-                  classes = ['facebook', 'share']
-                  classes << 'not-authenticated' unless spree_user_signed_in?
-                = link_to collection_product_url(dress), class: classes do
-                  ' SHARE
-                  br
-                  ' /
-                  br
-                  ' ENTER
-                  br
-                  ' VIA
-                  br
-                  ' FACEBOOK
-              /.shared
-                ruby:
-                  classes = ['twitter', 'share']
-                  classes << 'not-authenticated' unless spree_user_signed_in?
-                = link_to collection_product_url(dress), class: classes do
-                  ' SHARE
-                  br
-                  ' /
-                  br
-                  ' ENTER
-                  br
-                  ' VIA
-                  br
-                  ' Twitter
-                .arrows-line-horizontal
+      ruby:
+        cache_keys = ['girlfriendxfame']
+        if spree_user_signed_in?
+          cache_keys << 'authenticated'
+        else
+          cache_keys << 'not-authenticated'
+        end
+        cache_keys << 'products'
+
+      - cache cache_keys, expires_in: configatron.cache.expire.long do
+        - get_products_from_edit('girlfriend', nil, nil, 100).each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              p = product_short_description(dress)
+              p = link_to 'buy', collection_product_path(dress), class: 'btn small'
+              .social-grey-global.addthis_toolbox.addthis_default_style
+                = facebook_share_button(collection_product_path(dress))
+              .social-popup style="display: none;"
+                .title THANKS FOR LIKING!
+                .discount $20 OFF
+                .code GF20
+                p ENTER CODE AT CHECKOUT
+              .actions
+                .shared.grey
+                  .arrows-line-horizontal
+                  ruby:
+                    classes = ['facebook', 'share']
+                    classes << 'not-authenticated' unless spree_user_signed_in?
+                  = link_to collection_product_url(dress), title: dress.name, class: classes do
+                    ' SHARE
+                    br
+                    ' /
+                    br
+                    ' ENTER
+                    br
+                    ' VIA
+                    br
+                    ' FACEBOOK
+                .shared
+                  ruby:
+                    classes = ['twitter', 'share']
+                    classes << 'not-authenticated' unless spree_user_signed_in?
+                  = link_to collection_product_url(dress), title: dress.name, class: classes do
+                    ' SHARE
+                    br
+                    ' /
+                    br
+                    ' ENTER
+                    br
+                    ' VIA
+                    br
+                    ' Twitter
+                  .arrows-line-horizontal
     .girlfriend-terms
       = link_to 'Terms & Conditions', competition_terms_path
     .girlfriend-footer
@@ -105,3 +115,23 @@
           , (response) ->
               if !response.error_code
                 $.post('/shared/facebook')
+
+      $('a.share.twitter').on 'click', (event) ->
+        event.preventDefault()
+
+        $.post('/shared/facebook')
+
+        url  = 'https://twitter.com/share?url='
+        url += $(event.target).attr('href') + '?cptoken=' + competition_participation_token
+
+        width = 575
+        height = 400
+        left = ($(window).width() - width) / 2
+        top = ($(window).height() - height) / 2
+        opts  = 'status=0'
+        opts += ', width=' + width
+        opts += ', height=' + height
+        opts += ', top=' + top
+        opts += ', left=' + left
+
+        window.open(url, 'twitter', opts);
