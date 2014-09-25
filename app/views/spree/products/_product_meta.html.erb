@@ -1,11 +1,11 @@
 <% if product %>
   <% content_for :head do %>
     <% product.images.each_with_index do |image, index| %>
-      <meta property="og:image" content="<%= absolute_image_url(image.attachment.url(:large), 'http') %>" />
-      <meta property="og:image:secure_url" content="<%= absolute_image_url(image.attachment.url(:large), 'https') %>" />
+      <meta property="og:image" content="<%= absolute_image_url(image.attachment.url(:original), 'http') %>" />
+      <meta property="og:image:secure_url" content="<%= absolute_image_url(image.attachment.url(:original), 'https') %>" />
 
       <% if index == 0 %>
-        <meta name="twitter:image:src" content="<%= absolute_image_url(image.attachment.url(:large), 'http') %>" />
+        <meta name="twitter:image:src" content="<%= absolute_image_url(image.attachment.url(:original), 'http') %>" />
       <% end %>
     <% end %>
     <meta property="og:site_name" content="<%= 'Fame&Partners' %>" />
