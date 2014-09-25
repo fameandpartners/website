@@ -109,12 +109,18 @@
     coffee:
       $('a.share.facebook').on 'click', (event) ->
         event.preventDefault()
-        FB.ui
-            method: 'share'
-            href: $(event.target).attr('href') + '?cptoken=' + competition_participation_token
-          , (response) ->
-              if !response.error_code
-                $.post('/shared/facebook')
+
+        FB.ui({
+          method: 'share_open_graph',
+          action_type: 'og.likes',
+          action_properties: JSON.stringify({
+            object: ($(event.target).attr('href') + '?cptoken=' + competition_participation_token)
+          })
+        }, (response) ->
+          if !response.error_code
+            console.log(response)
+            $.post('/shared/facebook')
+        )
 
       $('a.share.twitter').on 'click', (event) ->
         event.preventDefault()
