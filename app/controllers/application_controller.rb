@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
     return if participation.blank?
     return if participation.spree_user.eql?(try_spree_current_user)
 
+    session[:cptokens] << cptoken
     participation.increment!(:views_count)
   end
 
