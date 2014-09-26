@@ -30,7 +30,8 @@ FameAndPartners::Application.routes.draw do
     get '/renxfame'   => 'statics#renxfame'
     get '/lilyxfame'  => 'statics#lilyxfame'
     get '/maryxfame'  => 'statics#maryxfame'
-    get '/girlfriendxfame' => 'statics#girlfriendxfame'
+    get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
+    get '/girlfriend' => 'statics#girlfriendxfame'
 
     post '/shared/facebook' => 'competition/events#share'
 
