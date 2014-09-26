@@ -3,6 +3,6 @@ class CompetitionParticipation < ActiveRecord::Base
              class_name: Spree::User
 
   before_create do
-    self.token = SecureRandom.hex
+    self.token = SecureRandom.urlsafe_base64(4)
   end
 end

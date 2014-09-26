@@ -9,19 +9,19 @@ class ApplicationController < ActionController::Base
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
   append_before_filter do
-    return if params[:cptoken].blank?
+    return if params[:cpt].blank?
 
-    cptoken = params[:cptoken]
-    session[:cptokens] ||= []
+    cpt = params[:cpt]
+    session[:cpts] ||= []
 
-    return if session[:cptokens].include?(cptoken)
+    return if session[:cpts].include?(cpt)
 
-    participation = CompetitionParticipation.find_by_token(cptoken)
+    participation = CompetitionParticipation.find_by_token(cpt)
 
     return if participation.blank?
     return if participation.spree_user.eql?(try_spree_current_user)
 
-    session[:cptokens] << cptoken
+    session[:cpts] << cpt
     participation.increment!(:views_count)
   end
 

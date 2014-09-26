@@ -15,16 +15,20 @@
 
       - cache cache_keys, expires_in: configatron.cache.expire.long do
         - get_products_from_edit('girlfriend', nil, nil, 100).each do |dress|
+          - special_description = dress.property("special_description")
+          - product_url = dress.property("bitly")
+          - if product_url.blank? then product_url = collection_product_path(dress) end
           .catalog-item
             .picture
               = link_to collection_product_path(dress) do
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              p = product_short_description(dress)
+              p = special_description
+              .price = price_for_product(dress)
               p = link_to 'buy', collection_product_path(dress), class: 'btn small'
               .social-grey-global.addthis_toolbox.addthis_default_style
-                = facebook_share_button(collection_product_path(dress))
+                = facebook_share_button(product_url)
               .social-popup style="display: none;"
                 .title THANKS FOR LIKING!
                 .discount $20 OFF
@@ -50,7 +54,7 @@
                   ruby:
                     classes = ['twitter', 'share']
                     classes << 'not-authenticated' unless spree_user_signed_in?
-                  = link_to collection_product_url(dress), title: dress.name, class: classes do
+                  = link_to product_url, title: dress.name, class: classes do
                     ' SHARE
                     br
                     ' /
@@ -114,7 +118,7 @@
           method: 'share_open_graph',
           action_type: 'og.likes',
           action_properties: JSON.stringify({
-            object: ($(event.target).attr('href') + '?cptoken=' + competition_participation_token)
+            object: ($(event.target).attr('href') + '?cpt=' + competition_participation_token)
           })
         }, (response) ->
           if !response.error_code
@@ -128,7 +132,13 @@
         $.post('/shared/facebook')
 
         url  = 'https://twitter.com/share?url='
-        url += $(event.target).attr('href') + '?cptoken=' + competition_participation_token
+        url += $(event.target).attr('href') + '?cpt=' + competition_participation_token
+        url += '&text=@GirlfriendMAG x @FameandPartners collab. Check it!'
+        url += '&via=fameandpartners'
+        url += '&hashtags=GFxfameandpartners,formaldress'
+        url += '&related=GirlfriendMAG'
+
+
 
         width = 575
         height = 400
@@ -139,5 +149,6 @@
         opts += ', height=' + height
         opts += ', top=' + top
         opts += ', left=' + left
+
 
         window.open(url, 'twitter', opts);
