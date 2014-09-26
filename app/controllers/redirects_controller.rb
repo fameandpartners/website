@@ -14,7 +14,7 @@ class RedirectsController < ApplicationController
 
     if product.present?
       # /collection/taxon/product_id
-      redirect_to view_context.collection_product_path(product), status: 301 
+      redirect_to view_context.collection_product_path(product, params.slice(:cpt)), status: 301
     elsif collection.present?
       # /collection/taxon
       redirect_to view_context.collection_taxon_path(collection), status: 301
