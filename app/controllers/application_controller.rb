@@ -322,7 +322,7 @@ class ApplicationController < ActionController::Base
   def request_from_bot?
     user_agent = request.env["HTTP_USER_AGENT"]
     #user_agent =~ /(bot|Google|Slurp)/i
-    user_agent =~ /(Baidu|bot|Google|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)/i
+    user_agent =~ /(Baidu|bot|Google|Facebook|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)/i
   end
 
   def current_site_version=(site_version)
