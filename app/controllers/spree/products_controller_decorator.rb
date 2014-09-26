@@ -85,6 +85,10 @@ Spree::ProductsController.class_eval do
     render json: { success_message: 'successfully sended' }
   end
 
+  def product_filtering
+    
+  end
+
   private
 
   def load_product

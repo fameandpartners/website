@@ -61,12 +61,12 @@
   .category-filter
     .fleft 
       .filter-section
-        - options = options_from_collection_for_select(available_product_ranges, :base_permalink, :name, params[:collection])
-        = select_tag :collection, options, class: 'selectbox', prompt: 'Styles'
-
-      /.filter-section
-        - options = options_from_collection_for_select(available_product_styles, :base_permalink, :name, params[:style])
+        - options = options_from_collection_for_select(available_product_styles, :base_permalink, :name, params[:collection])
         = select_tag :style, options, class: 'selectbox', prompt: 'Styles'
+
+      .filter-section
+        - options = options_from_collection_for_select(available_product_events, :base_permalink, :name, params[:collection])
+        = select_tag :collection, options, class: 'selectbox', prompt: 'Events'
 
       .filter-section
         - options = options_from_collection_for_select(ProductStyleProfile::BODY_SHAPES, :to_s, :to_s, @searcher.bodyshape)

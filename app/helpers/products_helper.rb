@@ -22,6 +22,16 @@ module ProductsHelper
     range_taxonomy.present? ? range_taxonomy.root.children : []
   end
 
+  def available_product_events
+    range_taxonomy = Spree::Taxonomy.where(name: 'Event').first
+    
+    if range_taxonomy.present?
+      return range_taxonomy.root.children
+    else
+      return []
+    end
+  end
+
   def available_product_styles
     range_taxonomy = Spree::Taxonomy.where(name: 'Style').first
     range_taxonomy.present? ? range_taxonomy.root.children : []
