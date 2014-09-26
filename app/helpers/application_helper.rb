@@ -125,10 +125,34 @@ module ApplicationHelper
   end
 
   def collection_product_path(product, options = {})
-    taxon = range_taxon_for(product)
-    taxon_permalink = taxon.present? ? taxon.permalink.split('/').last : 'long-dresses'
+    # taxon = range_taxon_for(product)
+    # taxon_permalink = taxon.present? ? taxon.permalink.split('/').last : 'long-dresses'
 
-    build_collection_product_path(taxon_permalink, product.to_param, options)
+    # build_collection_product_path(taxon_permalink, product.to_param, options)
+    site_version_prefix = self.url_options[:site_version]
+    path_parts = [site_version_prefix, 'dresses', 'p',  "#{product.short_description.parameterize}-#{product.name.parameterize}-#{product.id}" ]
+    path =  "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.present?    
+    
+    url_without_double_slashes(path)
+  end
+
+  def personalize_path(product, options={})
+    site_version_prefix = self.url_options[:site_version]
+    path_parts = [site_version_prefix, 'dresses', 'p',  "custom-#{product.short_description.parameterize}-#{product.name.parameterize}-#{product.id}" ]
+    path =  "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.present?    
+    
+    url_without_double_slashes(path)
+  end
+
+  def style_it_path(product, options={})
+    site_version_prefix = self.url_options[:site_version]
+    path_parts = [site_version_prefix, 'dresses', 'p',  "styleit-#{product.short_description.parameterize}-#{product.name.parameterize}-#{product.id}" ]
+    path =  "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.present?    
+    
+    url_without_double_slashes(path)
   end
 
   def collection_product_url(product, options = {})

@@ -89,19 +89,24 @@ Spree::ProductsController.class_eval do
 
   def load_product
     if try_spree_current_user.try(:has_spree_role?, "admin")
-      if params[:product_id]
-        @product = Spree::Product.find(params[:product_id])
+      if params[:product_slug]
+        @product = Spree::Product.find(get_id_from_slug(params[:product_slug]))
       else
         @product = Spree::Product.find_by_permalink!(params[:id])
       end
     else
-      if params[:product_id]
-        @product = Spree::Product.active.find(params[:product_id])
+      if params[:product_slug]
+        @product = Spree::Product.active.find(get_id_from_slug(params[:product_slug]))
       else
         #@product = Product.active(current_currency).find_by_permalink!(params[:id])
         @product = Spree::Product.active.find_by_permalink!(params[:id])
       end
     end
+  end
+
+  # gets the product id from the slug that is fomatted as "somethin-something-something-.....-product_id"
+  def get_id_from_slug(slug)
+    slug.match(/(\d)+$/)[0]
   end
 
   def set_collection_title(info = {})

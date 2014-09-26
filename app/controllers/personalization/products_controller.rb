@@ -10,8 +10,9 @@ module Personalization
     end
 
     def show
-      if params[:product_id]
-        @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find(params[:product_id])
+      if params[:product_slug]
+        product_id = get_id_from_slug(params[:product_slug])
+        @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find(product_id)
       else
         @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink(params[:permalink])
       end
@@ -37,8 +38,9 @@ module Personalization
     end
 
     def style
-      if params[:product_id]
-        @product = Spree::Product.active(Spree::Config.currency).find(params[:product_id])
+      if params[:product_slug]
+        product_id = get_id_from_slug(params[:product_slug])
+        @product = Spree::Product.active(Spree::Config.currency).find(product_id)
       else
         @product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
       end
@@ -55,6 +57,11 @@ module Personalization
     end
 
     private
+
+    # gets the product id from the slug that is fomatted as "somethin-something-something-.....-product_id"
+    def get_id_from_slug(slug)
+      slug.match(/(\d)+$/)[0]
+    end
 
     def ensure_customization_available(product)
       if product.blank?

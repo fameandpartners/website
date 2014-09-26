@@ -34,8 +34,8 @@ FameAndPartners::Application.routes.draw do
     # SEO categories routes, we want them in front
 
     scope '/dresses', module: 'personalization' do
-      get 'p/custom-:product_desc-:product_name-:product_id', to: 'products#show'
-      get 'p/styleit-:product_desc-:product_name-:product_id', to: 'products#style'
+      get 'p/custom-:product_slug', to: 'products#show'
+      get 'p/styleit-:product_slug', to: 'products#style'
     end
 
 
@@ -44,7 +44,7 @@ FameAndPartners::Application.routes.draw do
       get 't/colour/:colour' => 'spree/products#index'
       get 't/body-shape/:bodyshape' => 'spree/products#index'
       get 't/*permalink' => 'spree/products#index'
-      get 'p/:product_desc-:product_name-:product_id' => 'spree/products#show'
+      get 'p/:product_slug' => 'spree/products#show'
     end
 
 
