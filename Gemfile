@@ -59,7 +59,6 @@ group :development do
   gem 'thin', '1.5.1'
   gem 'pry-rails'
   gem 'debugger'
-  gem "therubyracer"
 end
 
 group :test do
@@ -91,8 +90,8 @@ gem 'spree_paypal_express',
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
-group :staging do
-  gem "therubyracer"
+group :staging, :development do
+  gem 'therubyracer'
 end
 
 group :production do
