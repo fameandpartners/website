@@ -136,4 +136,10 @@ window.track = {
 
   clickedBookFreeStylingSession: (label) ->
     track.event('Product', 'BookFreeStylingSessionClicked', label)
+
+  AddPromocodeSuccess: (label) ->
+    track.event('AddPromocode', 'Success', label)
+
+  AddPromocodeFailure: (label) ->
+    track.event('AddPromocode', 'Failure', label)
 }

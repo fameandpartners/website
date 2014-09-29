@@ -1,6 +1,9 @@
-$error = $('<span class="error" style="color: red; display: block;"/>').text('is invalid');
+$error = $('<span class="error" style="color: red; display: block;"/>').text("Check code and try again.");
 $('.coupon-block form .error').remove();
 $('.coupon-block form').after($error);
+
+promocode = $('#order_coupon_code').val();
+window.track.AddPromocodeFailure(promocode);
 
 if (window.checkout_page && window.checkout_page.onAjaxFailureHandler) {
   window.checkout_page.onAjaxFailureHandler()
