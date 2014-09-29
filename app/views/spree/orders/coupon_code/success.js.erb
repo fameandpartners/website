@@ -1,2 +1,5 @@
 $('.order-summary').html('<%=j render('summary') %>');
 $('.promo-block form .error').remove();
+
+promocode = $('#order_coupon_code').val();
+window.track.AddPromocodeSuccess(promocode);
