@@ -40,9 +40,10 @@
   .row
     .grid-12
       = image_tag(image_url)
-  .category-header
-    h1 = @page_info[:banner_title]
-    h2 = raw @page_info[:banner_text]
+  - unless marketing_landing_page?
+    .category-header
+      h1 = @page_info[:banner_title]
+      h2 = raw @page_info[:banner_text]
 - else  
   .category-header
     h1 = @page_info[:banner_title]

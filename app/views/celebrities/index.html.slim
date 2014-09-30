@@ -1,190 +1,203 @@
-.page-static.celebrity-index-page
-  .header
-    h1 a collection of dresses inspired
-    h2 by celebrities & red carpet
-    .arrows-line-horizontal
-  .list
-    .grid-container
-      .row
-        .grid-4
-          .item
-            = link_to "http://www.fameandpartners.com/collection/ball-gown/spellbound" do
-              .row
-                .grid-6
-                  .celeb
-                    = image_tag('celebrities/taylor-swift.jpg')
-                .grid-6
-                  .celeb-product
-                    = image_tag('celebrities/taylor-swift-prod.jpg')
-                    .celeb-price
-                      .price-old $199
-                      .price $149
-              .button.btn.black Taylor Swift
-            .button
-              = link_to collection_path do
-                .circle
-                  .shop shop
-                  .more more dresses
-                  .now  now
-        .grid-4
-          .item
-            = link_to "http://www.fameandpartners.com/collection/ball-gown/golden_bodice" do
-              .row
-                .grid-6
-                  .celeb
-                    = image_tag('celebrities/pixie-geldof.jpg')
-                .grid-6
-                  .celeb-product
-                    = image_tag('celebrities/pixie-geldof-prod.jpg')
-                    .celeb-price
-                      .price-old $169
-                      .price $127
-              .button.btn.black Pixie Geldof
-            .button
-              = link_to collection_path do
-                .circle
-                  .shop shop
-                  .more more dresses
-                  .now  now
-        .grid-4
-          .item.last
-            = link_to "http://www.fameandpartners.com/collection/prom-dresses/structured_curves-1" do
-              .row
-                .grid-6
-                  .celeb
-                    = image_tag('celebrities/allison-williams.jpg')
-                .grid-6
-                  .celeb-product
-                    = image_tag('celebrities/allison-williams-prod.jpg')
-                    .celeb-price
-                      .price-old $249
-                      .price $187
-              .button.btn.black Allison Williams
-            .button
-              = link_to collection_path do
-                .circle
-                  .shop shop
-                  .more more dresses
-                  .now  now
-      .row
-        .grid-4
-          .item
-            = link_to "http://www.fameandpartners.com/collection/v-neck/playful_red-3" do
-              .row
-                .grid-6
-                  .celeb
-                    = image_tag('celebrities/rihanna.jpg')
-                .grid-6
-                  .celeb-product
-                    = image_tag('celebrities/blake-lively-prod.jpg')
-                    .celeb-price
-                      .price-old $229
-                      .price $172
-              .button.btn.black Rihanna
-            .button
-              = link_to collection_path do
-                .circle
-                  .shop shop
-                  .more more dresses
-                  .now  now
-        .grid-4
-          .item
-            = link_to "http://www.fameandpartners.com/collection/ball-gown/starry_night" do
-              .row
-                .grid-6
-                  .celeb
-                    = image_tag('celebrities/anne-hathaway.jpg')
-                .grid-6
-                  .celeb-product
-                    = image_tag('celebrities/anne-hathaway-prod.jpg')
-                    .celeb-price
-                      .price-old $289
-                      .price $217
-              .button.btn.black Anne Hathaway
-            .button
-              = link_to collection_path do
-                .circle
-                  .shop shop
-                  .more more dresses
-                  .now  now
-        .grid-4
-          .item
-            = link_to "http://www.fameandpartners.com/collection/ball-gown/sequin_light" do
-              .row
-                .grid-6
-                  .celeb
-                    = image_tag('celebrities/beyonce.jpg')
-                .grid-6
-                  .celeb-product
-                    = image_tag('celebrities/beyonce-prod.jpg')
-                    .celeb-price
-                      .price-old $249
-                      .price $187
-              .button.btn.black Beyonce
-            .button
-              = link_to collection_path do
-                .circle
-                  .shop shop
-                  .more more dresses
-                  .now  now
-      .row
-        .grid-4
-          .item
-            = link_to "http://www.fameandpartners.com/collection/Long-Dresses/fire-walk-with-me" do
-              .row
-                .grid-6
-                  .celeb
-                    = image_tag('celebrities/blake-lively.jpg')
-                .grid-6
-                  .celeb-product
-                    = image_tag('celebrities/rihanna-prod.jpg')
-                    .celeb-price
-                      .price-old $229
-                      .price $172
-              .button.btn.black Blake Lively
-            .button
-              = link_to collection_path do
-                .circle
-                  .shop shop
-                  .more more dresses
-                  .now  now
-        .grid-4
-          .item
-            = link_to "http://www.fameandpartners.com/collection/ball-gown/swept_away" do
-              .row
-                .grid-6
-                  .celeb
-                    = image_tag('celebrities/selena-gomez.jpg')
-                .grid-6
-                  .celeb-product
-                    = image_tag('celebrities/selena-gomez-prod.jpg')
-                    .celeb-price
-                      .price-old $199
-                      .price $149
-              .button.btn.black Selena Gomez
-            .button
-              = link_to collection_path do
-                .circle
-                  .shop shop
-                  .more more dresses
-                  .now  now
-        .grid-4
-          .item
-            = link_to "http://www.fameandpartners.com/collection/celebrity-inspired/star-crossed-lover" do
-              .row
-                .grid-6
-                  .celeb
-                    = image_tag('celebrities/katy-perry.jpg')
-                .grid-6
-                  .celeb-product
-                    = image_tag('celebrities/katy-perry-prod.jpg')
-                    .celeb-price
-                      .price-old $289
-                      .price $217
-              .button.btn.black Katy Perry
-            .button
-              = link_to collection_path do
-                .circle
-                  .shop shop
-                  .more more dresses
-                  .now  now
+ruby:
+  def discount(price)
+    price = price-(price*0.15)
+    return "$"+price.to_s
+  end
+
+- celebrities_cache_key = [:layout, :celebrities]
+- cache celebrities_cache_key, expires_in: configatron.cache.expire.long do
+
+  .page-static.celebrity-index-page
+    .header
+      h1 a collection of dresses inspired
+      h2 by celebrities & red carpet
+      .arrows-line-horizontal
+    .list
+      .grid-container
+        .row
+          .grid-4
+            .item
+              = link_to "http://www.fameandpartners.com/collection/long-dresses/jewel_two_piece?cf=celebrities" do
+                .row
+                  .grid-6
+                    .celeb
+                      = image_tag('celebrities/taylor-swift.jpg')
+                  .grid-6
+                    .celeb-product
+                      = image_tag('http://d1sd72h9dq237j.cloudfront.net/spree/products/7323/large/4B066-Cream-Front.jpg')
+                      .celeb-price
+                        .price-old $299
+                        .price = discount(299)
+                .button.btn.black Taylor Swift
+              .button
+                = link_to collection_path(:cf => "celebrities") do
+                  .circle
+                    .shop shop
+                    .more more dresses
+                    .now  now
+          .grid-4
+            .item
+              = link_to "http://www.fameandpartners.com/collection/lace/night_watch-2?cf=celebrities" do
+                .row
+                  .grid-6
+                    .celeb
+                      = image_tag('celebrities/selena-gomez.jpg')
+                  .grid-6
+                    .celeb-product
+                      = image_tag('http://d1sd72h9dq237j.cloudfront.net/spree/products/6826/large/4B116-Black-Front.jpg')
+                      .celeb-price
+                        .price-old $269
+                        .price = discount(269)
+                .button.btn.black Selena Gomez
+              .button
+                = link_to collection_path(:cf => "celebrities") do
+                  .circle
+                    .shop shop
+                    .more more dresses
+                    .now  now
+
+          .grid-4
+            .item.last
+              = link_to "http://www.fameandpartners.com/au/collection/pleated/mirrored_sea?cf=celebrities" do
+                .row
+                  .grid-6
+                    .celeb
+                      = image_tag('celebrities/kylie-jenner.jpg')
+                  .grid-6
+                    .celeb-product
+                      = image_tag('http://d1sd72h9dq237j.cloudfront.net/spree/products/7084/large/4B113-Navy-Front.jpg')
+                      .celeb-price
+                        .price-old $269
+                        .price = discount(269)
+                .button.btn.black Kylie Jenner
+              .button
+                = link_to collection_path(:cf => "celebrities") do
+                  .circle
+                    .shop shop
+                    .more more dresses
+                    .now  now
+        .row
+          .grid-4
+            .item
+              = link_to "http://www.fameandpartners.com/collection/pastel/wired_cross?cf=celebrities" do
+                .row
+                  .grid-6
+                    .celeb
+                      = image_tag('celebrities/rihanna.jpg')
+                  .grid-6
+                    .celeb-product
+                      = image_tag('http://d1sd72h9dq237j.cloudfront.net/spree/products/7465/large/4B107-Navy-Front.jpg?1409125564')
+                      .celeb-price
+                        .price-old $229
+                        .price = discount(229)
+                .button.btn.black Rihanna
+              .button
+                = link_to collection_path(:cf => "celebrities") do
+                  .circle
+                    .shop shop
+                    .more more dresses
+                    .now  now
+          .grid-4
+            .item
+              = link_to "http://www.fameandpartners.com/collection/halter/dreamcatcher?cf=celebrities" do
+                .row
+                  .grid-6
+                    .celeb
+                      = image_tag('celebrities/blake-lively.jpg')
+                  .grid-6
+                    .celeb-product
+                      = image_tag('http://d1sd72h9dq237j.cloudfront.net/spree/products/6680/large/4B110-Royal_Blue-Front.jpg')
+                      .celeb-price
+                        .price-old $249
+                        .price = discount(249)
+                .button.btn.black Blake Lively
+              .button
+                = link_to collection_path(:cf => "celebrities") do
+                  .circle
+                    .shop shop
+                    .more more dresses
+                    .now  now
+
+          .grid-4
+            .item
+              = link_to "http://www.fameandpartners.com/au/collection/pleated/nightcall?cf=celebrities" do
+                .row
+                  .grid-6
+                    .celeb
+                      = image_tag('celebrities/emma-stone.jpg')
+                  .grid-6
+                    .celeb-product
+                      = image_tag('http://d1sd72h9dq237j.cloudfront.net/spree/products/6334/large/4B106-Black-Front.jpg')
+                      .celeb-price
+                        .price-old $199
+                        .price = discount(199)
+                .button.btn.black Emma Stone
+              .button
+                = link_to collection_path(:cf => "celebrities") do
+                  .circle
+                    .shop shop
+                    .more more dresses
+                    .now  now
+          
+        .row
+          .grid-4
+            .item
+              = link_to "http://www.fameandpartners.com/au/collection/cocktail/crystallised_youth?cf=celebrities" do
+                .row
+                  .grid-6
+                    .celeb
+                      = image_tag('celebrities/katy-perry.jpg')
+                  .grid-6
+                    .celeb-product
+                      = image_tag('http://d1sd72h9dq237j.cloudfront.net/spree/products/6432/large/4B091-CreamBlack-Front.jpg')
+                      .celeb-price
+                        .price-old $199
+                        .price = discount(199)
+                .button.btn.black Katy Perry
+              .button
+                = link_to collection_path(:cf => "celebrities") do
+                  .circle
+                    .shop shop
+                    .more more dresses
+                    .now  now
+          .grid-4
+            .item
+              = link_to "http://www.fameandpartners.com/au/collection/balls/phoenix?cf=celebrities" do
+                .row
+                  .grid-6
+                    .celeb
+                      = image_tag('celebrities/beyonce.jpg')
+                  .grid-6
+                    .celeb-product
+                      = image_tag('http://d1sd72h9dq237j.cloudfront.net/spree/products/6940/large/4B096-Nude-Front.jpg')
+                      .celeb-price
+                        .price-old $269
+                        .price = discount(269)
+                .button.btn.black Beyonce
+              .button
+                = link_to collection_path(:cf => "celebrities") do
+                  .circle
+                    .shop shop
+                    .more more dresses
+                    .now  now
+
+          .grid-4
+            .item
+              = link_to "http://www.fameandpartners.com/au/collection/special-events/glamour_two_piece?cf=celebrities" do
+                .row
+                  .grid-6
+                    .celeb
+                      = image_tag('celebrities/pixie-geldof.jpg')
+                  .grid-6
+                    .celeb-product
+                      = image_tag('http://d1sd72h9dq237j.cloudfront.net/spree/products/5638/large/4B128-Ivory-Front.jpg')
+                      .celeb-price
+                        .price-old $199
+                        .price = discount(199)
+                .button.btn.black Pixie Geldof
+              .button
+                = link_to collection_path(:cf => "celebrities") do
+                  .circle
+                    .shop shop
+                    .more more dresses
+                    .now  now

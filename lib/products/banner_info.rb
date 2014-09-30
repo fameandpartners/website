@@ -6,7 +6,7 @@ module Products
     end
 
     def available_formal_dresses_colours
-      colors = %w{black red pink blue green coral turquoise gold peach teal champagne blush coral turquoise teal neon}
+      colors = %w{pastel black red pink blue green coral turquoise gold peach teal champagne blush coral turquoise teal neon}
       colors + ['light blue', 'black and white']
     end
 

@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140915230844) do
+
+ActiveRecord::Schema.define(:version => 20140925181257) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -320,6 +321,15 @@ ActiveRecord::Schema.define(:version => 20140915230844) do
     t.datetime "created_at"
     t.string   "competition_name"
     t.integer  "competition_id"
+  end
+
+  create_table "competition_participations", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.string   "token"
+    t.integer  "shares_count",  :default => 0
+    t.integer  "views_count",   :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "custom_dress_images", :force => true do |t|

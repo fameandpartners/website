@@ -8,6 +8,22 @@ class ApplicationController < ActionController::Base
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
+  append_before_filter do
+    return if params[:cpt].blank?
+
+    cpt = params[:cpt]
+    session[:cpts] ||= []
+
+    return if session[:cpts].include?(cpt)
+
+    participation = CompetitionParticipation.find_by_token(cpt)
+
+    return if participation.blank?
+    return if participation.spree_user.eql?(try_spree_current_user)
+
+    session[:cpts] << cpt
+    participation.increment!(:views_count)
+  end
 
   def check_site_version
     # redirects should work only on non-ajax GET requests from users
@@ -306,7 +322,7 @@ class ApplicationController < ActionController::Base
   def request_from_bot?
     user_agent = request.env["HTTP_USER_AGENT"]
     #user_agent =~ /(bot|Google|Slurp)/i
-    user_agent =~ /(Baidu|bot|Google|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)/i
+    user_agent =~ /(Baidu|bot|Google|Facebook|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)/i
   end
 
   def current_site_version=(site_version)

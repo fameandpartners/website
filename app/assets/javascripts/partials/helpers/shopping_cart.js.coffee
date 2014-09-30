@@ -29,7 +29,7 @@ window.shopping_cart = _.extend(window.shopping_cart,
       type: "POST"
       dataType: "json"
       data: window.shopping_cart.prepareParams(options)
-      success: window.shopping_cart.buildOnSuccess()
+      success: window.shopping_cart.buildOnSuccess
       error: window.shopping_cart.buildOnErrorCallback(["item_add_failed"], options.failure)
 
 
@@ -98,9 +98,15 @@ window.shopping_cart = _.extend(window.shopping_cart,
       data[key] = options[key]  unless _.isFunction(options[key])
     $.param data
 
+
   buildOnSuccess: ->
-    window.location.href = "/cart"
-    return
+    console.log("Cart: Added to Cart.")
+    
+    _.delay ( ->
+      window.location.href = "/cart"
+      return
+    ), 1000
+
 
   buildOnSuccessCallback: (event_names, objectId, successCallback) ->
     func = undefined
@@ -120,6 +126,7 @@ window.shopping_cart = _.extend(window.shopping_cart,
     func
 
   buildOnErrorCallback: (event_name, objectId, failureCallback) ->
+    console.log("Cart: Add to Cart Failed.")
     func = undefined
     func = (response) ->
       failureCallback.apply window, arguments  if failureCallback?

@@ -1,4 +1,5 @@
 Spree::ProductsController.class_eval do
+  include ApplicationHelper
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
   before_filter :load_activities, :only => [:show, :quick_view]
@@ -11,9 +12,16 @@ Spree::ProductsController.class_eval do
   #              cache_path: proc{ |c| c.request.url + '.' + c.request.format.ref.to_s }
 
   def index
+
+    currency = current_currency
+    user = try_spree_current_user
+
+    display_featured_dresses = params[:dfd]
+    display_featured_dresses_edit = params[:dfde]
+
     @searcher = Products::ProductsFilter.new(params)
-    @searcher.current_user = try_spree_current_user
-    @searcher.current_currency = current_currency
+    @searcher.current_user = user
+    @searcher.current_currency = currency
 
     @products         = @searcher.products
     @similar_products = @searcher.similar_products
@@ -21,6 +29,10 @@ Spree::ProductsController.class_eval do
     @page_info = @searcher.selected_products_info
 
     @current_colors = @searcher.colour.present? ? @searcher.colors_with_similar : []
+
+    if (!display_featured_dresses.blank? && display_featured_dresses == "1") && !display_featured_dresses_edit.blank?
+      @lp_featured_products = get_products_from_edit(display_featured_dresses_edit, currency, user, 4)
+    end
 
     respond_to do |format|
       format.html do

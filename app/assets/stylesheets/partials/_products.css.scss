@@ -314,40 +314,7 @@
 		}
 	}
 	.social {
-		position: relative;
-		padding: 10px 0;
-		font-size: 26px;
-		line-height: 20px;
-		text-align: left;
-		filter: grayscale(100%);
-		-webkit-filter: grayscale(100%);
-		-moz-filter: grayscale(100%);
-		-ms-filter: grayscale(100%);
-		-o-filter: grayscale(100%);
-		> div, > a {
-			display: inline-block;
-			vertical-align: top !important;
-			margin-right: 5px;
-		}
-		.fb-like > span { vertical-align: top !important;}
-		.arrows-line-horizontal {
-			position: absolute;
-			left: 0;
-			right: 0;
-			&.top {
-				top: 0;
-				&:before { display: none;}
-			}
-			&.bottom {
-				bottom: 0;
-				&:after { display: none;}
-			}
-		}
-		a { 
-			display: inline-block;
-			vertical-align: top;
-			+ a { margin-left: 10px;}
-		}
+		@extend .social-grey-global;
 		// > .fb-like, > a[class*="_pin_it"] {
 		// 	vertical-align: top;
 		// 	display: inline-block;
@@ -620,6 +587,24 @@
 	margin: 0;
 	list-style: none;
 	font-size: 0;
+	
+	.lp_featured_dresses{
+		padding: 20px 0;
+
+		h2{
+			font-size: 28px;
+		}
+
+		.arrows-line-horizontal{
+			margin-bottom: 30px;
+		}
+
+		.arrows-line-horizontal:last-child{
+			margin-top: 20px;
+		}
+	}
+
+
 	h5.breadcrumb {
     font-size: 12px;
     font-weight: 100;

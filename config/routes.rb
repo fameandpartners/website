@@ -25,11 +25,15 @@ FameAndPartners::Application.routes.draw do
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-    get '/nyemix'   => 'statics#nyemix'
-    get '/nylonxfame'   => 'statics#nylonxfame'
+    get '/nyemix'     => 'statics#nyemix'
+    get '/nylonxfame' => 'statics#nylonxfame'
     get '/renxfame'   => 'statics#renxfame'
-    get '/lilyxfame'   => 'statics#lilyxfame'
-    get '/maryxfame'   => 'statics#maryxfame'
+    get '/lilyxfame'  => 'statics#lilyxfame'
+    get '/maryxfame'  => 'statics#maryxfame'
+    get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
+    get '/girlfriend' => 'statics#girlfriendxfame'
+
+    post '/shared/facebook' => 'competition/events#share'
 
     # SEO categories routes, we want them in front
 
@@ -174,7 +178,8 @@ FameAndPartners::Application.routes.draw do
     get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
     get '/fashionista2014'   => 'statics#fashionistacomp', :as => :fashionista
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
-    get '/compterms' => 'statics#comp_terms'
+    get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
+    get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size' => 'statics#landingpage_plus_size', :as => :plus_size
 
     get '/campaigns/stylecall' => 'campaigns#show'
@@ -249,6 +254,7 @@ FameAndPartners::Application.routes.draw do
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
+      resources :competition_participations, only: [:index], format: :csv
       scope 'products/:product_id', :as => 'product' do
         resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
       end

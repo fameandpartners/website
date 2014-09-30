@@ -14,6 +14,11 @@ class StaticsController < ApplicationController
     @searcher.current_currency = current_currency
   end
 
+  def fashionista_winner
+    @title = "Fashionista 2014 Winner"
+    @description = "Fashionista 2014 Winner. " + default_meta_description
+  end
+
   def landingpage_plus_size
     @title = "Plus Size Dresses"
 
@@ -89,6 +94,17 @@ class StaticsController < ApplicationController
     @description = "Fashionista Program. " + default_meta_description
   end
 
+  def girlfriendxfame
+    if !spree_user_signed_in?
+      session[:spree_user_return_to] = girlfriendxfame_path(site_version: current_site_version.code)
+    else
+      @competition_participation = CompetitionParticipation.find_or_create_by_spree_user_id(spree_current_user.id)
+    end
+
+    @title = "Girlfriend x Fame & Partners Collaboration - " + default_seo_title
+    @description = "Girlfriend Magazine x Fame & Partners Collaboration. " + default_meta_description
+  end
+
   private
 
   def get_products_from_edit (edit, currency, user, count=9)
@@ -97,5 +113,7 @@ class StaticsController < ApplicationController
     searcher.current_currency = currency
     return searcher.products.first(count)
   end
+
+  helper_method :get_products_from_edit
   
 end
