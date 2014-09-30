@@ -41,7 +41,6 @@ doctype html
       #content
         - unless controller_action_id == 'checkout'
           - unless sale_active?
-            = render 'shared/two_dresses_banner'
             = marketing_banner
           - else
             = render 'shared/sale_banner'
