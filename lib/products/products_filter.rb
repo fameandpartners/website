@@ -292,6 +292,7 @@ module Products
       elsif params[:collection].present?
         params[:permalink] = "collection/#{params[:collection]}"
         @properties["collection"] = params[:collection]
+        binding.pry
       elsif params[:edits].present?
         params[:permalink] = "edits/#{params[:edits]}"
         #binding.pry
@@ -309,9 +310,17 @@ module Products
         # ugly, refactros ASAP
         params[:permalink].downcase! unless params[:permalink].blank?
 
+        # adding support for faceted search (filtering) across multiple taxons
+        final_requested_taxons = []
+        final_requested_taxons << params[:permalink] unless params[:permalink].blank?
+        final_requested_taxons << "style/#{params[:style]}" unless params[:style].blank?
+        final_requested_taxons << "event/#{params[:event]}" unless params[:event].blank?
+
+        #binding.pry
+
       Spree::Taxon.all.each do |taxon|
         permalink = taxon.permalink
-        @properties[permalink] = prepare_taxon(permalink, params[:permalink])
+        @properties[permalink] = prepare_taxon(permalink, final_requested_taxons)
         if @properties[permalink].present? && params[:edits].blank?
           @properties[:selected_edits] << @properties[permalink]
         elsif @properties[permalink].present?
@@ -342,7 +351,7 @@ module Products
       # db_permalinks = permalinks.map{|permalink| "#{root}/#{permalink.downcase}"}
       # Spree::Taxon.select(:id).where("lower(permalink) IN (?)", db_permalinks).map(&:id)
       if permalinks.include? taxon_permalink
-        r = Spree::Taxon.select(:id).where("lower(permalink) IN (?)", permalinks).map(&:id)
+        r = Spree::Taxon.select(:id).where(permalink: taxon_permalink).map(&:id)
       else
         r = nil
       end

@@ -1,6 +1,9 @@
 class RedirectsController < ApplicationController
   def products_index
-    redirect_to generate_collection_path(params[:collection], params), status: 301
+    args = params.except(:action, :controller)
+    #binding.pry
+
+    redirect_to view_context.dresses_path(args)
   rescue
     redirect_to collection_path
   end
@@ -37,13 +40,20 @@ class RedirectsController < ApplicationController
       result ||= view_context.collection_taxon_path(collection)
     end
 
+    #binding.pry
+
     result || view_context.collection_path(args)
   end
 
   def get_collection_taxon(collection_name)
+    #binding.pry
     return nil if collection_name.blank?
     collection_taxon = view_context.range_taxonomy.root.children.where(
       "permalink like ? or name = ?", "%#{collection_name.downcase}%", collection_name.downcase
     ).first
+
+    binding.pry
+
+    return collection_taxon
   end
 end
