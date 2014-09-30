@@ -60,6 +60,7 @@ group :development do
   gem 'pry-rails'
   gem 'debugger'
   gem "therubyracer"
+  gem 'rails-dev-tweaks', '~> 1.1'
 end
 
 group :test do
