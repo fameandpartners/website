@@ -67,7 +67,7 @@ FameAndPartners::Application.routes.draw do
     end
     get '/lp/collection(/:collection)' => 'spree/products#index', defaults: { lp: 'lp' }
 
-    get 'products/:id/quick_view' => 'spree/products#quick_view'
+    get '/quick_view/:id' => 'spree/products#quick_view'
     post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
 
     post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
