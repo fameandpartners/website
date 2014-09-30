@@ -187,13 +187,26 @@ module ApplicationHelper
 
   def build_taxon_path(taxon_name, options={})
     site_version_prefix = self.url_options[:site_version]
-    taxon = Spree::Taxon.where(name: taxon_name).first
+
+    #must downcase because we want case insensitive urls
+    taxon = Spree::Taxon.where('lower(name) =?', taxon_name.downcase).last
+
+    
+
+    if taxon.nil?
+      #check for non-hyphenated version of the taxon name
+      taxon = Spree::Taxon.where('lower(name) = ?', taxon_name.downcase.gsub('-', ' ')).last
+    end
+
     root_name = nil
-    root_name = taxon.taxonomy.name unless taxon.nil?
+    root_name = taxon.parent.name.downcase unless taxon.nil?
+    taxon_name = taxon.name.parameterize unless taxon.nil?
 
     path_parts = [site_version_prefix, 'dresses', 't', root_name, taxon_name]
     path = "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.any?
+
+    
 
     url_without_double_slashes(path)
   end
@@ -202,7 +215,7 @@ module ApplicationHelper
     site_version_prefix = self.url_options[:site_version]
     path_parts = [site_version_prefix, 'dresses', 't', "colour", color]
     path = "/" + path_parts.compact.join('/')
-    path = "#{path}?#{options.to_param}"
+    path = "#{path}?#{options.to_param}" if options.any?
 
     url_without_double_slashes(path)
   end

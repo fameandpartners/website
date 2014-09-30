@@ -3,16 +3,23 @@ module CommonHelper
   # title method 
   def get_title
     # @title  : Spree::Config[:default_seo_title]
-    title_string = @title.present? ? @title : accurate_title
+
+    # @category_title is set in the products controller decorator#index
+    title_string = @category_title.present? ? @category_title : accurate_title
     if title_string.present?
       title_string
     else
-      [Spree::Config[:site_name], "Dream Formal Dresses"].join(' - ')
+      #[Spree::Config[:site_name], "Dream Formal Dresses"].join(' - ')
+      #return default
+      @title
     end 
   end
 
   def get_meta_description
-    if @description.present?
+    
+    if @category_description.present?
+      @category_description
+    elsif @description.present?
       @description
     else
       # default description or hardcoded

@@ -61,13 +61,17 @@ Spree::ProductsController.class_eval do
     @products         = @searcher.products
     @similar_products = @searcher.similar_products
 
+
     @page_info = @searcher.selected_products_info
+    @category_title = @page_info[:page_title]
+    @category_description = @page_info[:meta_description]
 
     @current_colors = @searcher.colour.present? ? @searcher.colors_with_similar : []
 
     if (!display_featured_dresses.blank? && display_featured_dresses == "1") && !display_featured_dresses_edit.blank?
       @lp_featured_products = get_products_from_edit(display_featured_dresses_edit, currency, user, 4)
     end
+    
 
     respond_to do |format|
       format.html do
@@ -137,6 +141,10 @@ Spree::ProductsController.class_eval do
   end
 
   private
+
+  def build_page_title(params)
+    binding.pry
+  end
 
   def load_product
     if try_spree_current_user.try(:has_spree_role?, "admin")

@@ -69,41 +69,95 @@ module Products
     end
 
     def get_page_title
+      #mind the spaces in the constructed strings
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        "#{seo_colour} Dresses, #{seo_colour} Evening Dresses Online, Prom and Formals - Fame & Partners"
-      elsif selected_edits_taxons.count == 1
-        taxon = selected_edits_taxons.first
-        taxon.meta_title || [taxon.name, default_seo_title].join(' - ')
-      elsif selected_collection_taxons.count == 1
-        taxon = selected_collection_taxons.first
-        taxon.meta_title || [taxon.name, default_seo_title].join(' - ')
-      else
-        default_seo_title
+        color = "#{seo_colour} "
       end
+
+      # selected_categories returns a nested array, fix later
+      taxon = selected_categories.first.first
+
+      
+      t_root = ""
+      t_root = taxon.parent.name if taxon.present?
+
+      if t_root == "Style"
+        style = "#{taxon.name} " || ""
+      end
+
+      if t_root == "Event"
+        event = "#{taxon.name} " || "Any event "
+      end
+
+      bodyshape = " for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
+
+      r =  "#{event}fashion starts with Fame & Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
+
+      return r.capitalize
     end
 
     def get_page_meta_description
+      #mind the spaces in the constructed strings!
+      r = nil
+
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        "Fame & Partners stock a wide range of #{seo_colour} dresses online for all occasions, visit our store today."
-      elsif selected_edits_taxons.count == 1
-        taxon = selected_edits_taxons.first
-        taxon.meta_description || [taxon.name, default_meta_description].join(' - ')
-      elsif selected_collection_taxons.count == 1
-        taxon = selected_collection_taxons.first
-        taxon.meta_description || [taxon.name, default_meta_description].join(' - ')
-      else
-        default_meta_description
+        color = " #{seo_colour} "
       end
+
+      # selected_categories returns a nested array, fix later
+      taxon = selected_categories.first.first
+
+      
+      t_root = ""
+      t_root = taxon.parent.name if taxon.present?
+
+      if t_root == "Style"
+        style = " #{taxon.name} " || ""
+      end
+
+      if t_root == "Event"
+        event = "for your #{taxon.name} " || "Any event "
+      end
+
+      r =  "Shop and customize the best of#{color}dress trends #{event}at Fame & Partners"
+
+      return r.capitalize
     end
 
     def get_banner_title(title)
+      #mind the spaces in the constructed strings!
+      r = nil
+
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        I18n.t(:title, scope: [:collection, :colors, @searcher.seo_colour.parameterize.underscore], default: "#{seo_colour} Dresses")
-      elsif title.to_s.downcase == 'range'
-        'Prom Dresses'
+        color = " #{seo_colour} dresses "
       else
-        title
+        color = ""
       end
+
+      # selected_categories returns a nested array, fix later
+      taxon = selected_categories.first.first
+
+      
+      t_root = ""
+      t_root = taxon.parent.name if taxon.present?
+
+      if t_root == "Style"
+        style = " #{taxon.name}"
+      else
+        style = "in a variety of styles"
+      end
+
+      if t_root == "Event"
+        event = "#{taxon.name} "
+      else
+        event = "Formal "
+      end
+
+      bodyshape = ", best for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
+
+      r =  "#{event}Dresses:#{color}#{style}#{bodyshape}"
+
+      return r.capitalize
     end
 
     def get_banner_text(text)
@@ -152,6 +206,10 @@ module Products
 
     def selected_edits_taxons
       @selected_edits ||= selected_taxons(@searcher.selected_edits, false)
+    end
+
+    def selected_categories
+      selected_collection_taxons << @selected_edits
     end
 
     def selected_taxons(taxon_ids, with_banner = false)
