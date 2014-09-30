@@ -39,7 +39,7 @@ window.popups.ProductQuickView = class ProductQuickView
   
   # private functions
   popupDataRequest: () ->
-    quickViewUrl = urlWithSitePrefix("/products/#{@productId}/quick_view")
+    quickViewUrl = urlWithSitePrefix("/quick_view/#{@productId}")
     $.ajax(
       url: quickViewUrl
       type: 'GET'
