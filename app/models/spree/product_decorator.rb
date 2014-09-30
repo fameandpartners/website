@@ -218,6 +218,45 @@ Spree::Product.class_eval do
     property('short_description') || ''
   end
 
+  def translated_short_description(locale = "us")
+    if locale == 'au' then
+      return property('short_description') || ''
+    else
+      whole_string = property('short_description') || ''
+      words = whole_string.split(/\W+/)
+
+      #load translations
+      root = Rails.root.to_s
+
+      aus_yml = YAML.load_file("#{root}/config/locales/en_AU.yml")["en-AU"]
+      
+      usa_yml = YAML.load_file("#{root}/config/locales/en_US.yml")["en-US"]
+
+      #check against au yml and if present, replace with american version
+      words.each do |word|
+        # gets the first result of hash.find
+        w_key = aus_yml.find do |key, val|
+          val == word
+        end
+
+        
+
+        if w_key.present?
+          # it's a two member array when it returns from find,
+          # we need the first member
+          w_key = w_key[0]
+
+          if usa_yml[w_key].present?
+            whole_string.gsub! word, usa_yml[w_key]
+          end
+        end
+      end
+    end
+
+    
+    return whole_string
+  end
+
   def delete
     self.update_column(:deleted_at, Time.now)
     variants_including_master.update_all(:deleted_at => Time.now)

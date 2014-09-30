@@ -124,13 +124,17 @@ module ApplicationHelper
     end
   end
 
+  def descriptive_url(product)
+    "#{product.translated_short_description(I18n.locale).parameterize}-#{product.name.parameterize}-#{product.id}"
+  end
+
   def collection_product_path(product, options = {})
     # taxon = range_taxon_for(product)
     # taxon_permalink = taxon.present? ? taxon.permalink.split('/').last : 'long-dresses'
 
     # build_collection_product_path(taxon_permalink, product.to_param, options)
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 'p',  "#{product.short_description.parameterize}-#{product.name.parameterize}-#{product.id}" ]
+    path_parts = [site_version_prefix, 'dresses', 'p', descriptive_url(product)  ]
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?    
     
@@ -139,7 +143,7 @@ module ApplicationHelper
 
   def personalize_path(product, options={})
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 'p',  "custom-#{product.short_description.parameterize}-#{product.name.parameterize}-#{product.id}" ]
+    path_parts = [site_version_prefix, 'dresses', 'p',  "custom-#{descriptive_url(product)}" ]
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?    
     
@@ -148,7 +152,7 @@ module ApplicationHelper
 
   def style_it_path(product, options={})
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 'p',  "styleit-#{product.short_description.parameterize}-#{product.name.parameterize}-#{product.id}" ]
+    path_parts = [site_version_prefix, 'dresses', 'p',  "styleit-#{descriptive_url(product)}" ]
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?    
     
