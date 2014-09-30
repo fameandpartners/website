@@ -1,5 +1,7 @@
 Spree::ProductsController.class_eval do
   include ApplicationHelper
+  include ProductsHelper
+
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
   before_filter :load_activities, :only => [:show, :quick_view]
@@ -10,6 +12,39 @@ Spree::ProductsController.class_eval do
   #              layout: false,
   #              expires_in: configatron.cache.expire.long,
   #              cache_path: proc{ |c| c.request.url + '.' + c.request.format.ref.to_s }
+
+
+
+  def root_taxon
+
+    @taxons = []
+
+    case params[:taxon_root]
+    when "style"
+      @title = "Shop for a specific style"
+      available_product_styles.each do |style|
+        @taxons << {name: style.name, url: "#{style.permalink}"}
+      end
+    when "event"
+      @title = "Shop dresses by event"
+      available_product_events.each do |event|
+        @taxons << {name: event.name, url: "#{event.permalink}"}
+      end
+    when "colour"
+      @title = "Shop dresses by color"
+      available_product_colors.each do |color|
+        @taxons << {name: color.name, url: "color/#{color.name}"}
+      end
+    when "bodyshape"
+      @title ="Shop dresses by body shape"
+      ProductStyleProfile::BODY_SHAPES.each do |shape|
+        @taxons << {name: shape, url: "body-shape/#{shape}"}
+      end
+    else
+      @taxons = []
+    end
+  end
+
 
   def index
 

@@ -45,9 +45,18 @@ FameAndPartners::Application.routes.draw do
 
     scope '/dresses' do
       root to: 'spree/products#index', as: 'dresses'
+
+      #roots categories
+      get 't/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
+      get 't/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
+      get 't/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
+      get 't/colour' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
+      get 't/color' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
+
       get 't/colour/:colour' => 'spree/products#index'
+      get 't/color/:colour' => 'spree/products#index'
       get 't/body-shape/:bodyshape' => 'spree/products#index'
-      get 't/*permalink' => 'spree/products#index'
+      get 't/*permalink' => 'spree/products#index', as: 'taxon'
       get 'p/:product_slug' => 'spree/products#show'
     end
 
