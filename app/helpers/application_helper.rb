@@ -184,6 +184,30 @@ module ApplicationHelper
     )
   end
 
+
+  def build_taxon_path(taxon_name, options={})
+    site_version_prefix = self.url_options[:site_version]
+    taxon = Spree::Taxon.where(name: taxon_name).first
+    root_name = nil
+    root_name = taxon.taxonomy.name unless taxon.nil?
+
+    path_parts = [site_version_prefix, 'dresses', 't', root_name, taxon_name]
+    path = "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.any?
+
+    url_without_double_slashes(path)
+  end
+
+  def colour_path(color, options={})
+    site_version_prefix = self.url_options[:site_version]
+    path_parts = [site_version_prefix, 'dresses', 't', "colour", color]
+    path = "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}"
+
+    url_without_double_slashes(path)
+  end
+
+
   def taxon_path(taxon)
     site_version_prefix = self.url_options[:site_version]
 

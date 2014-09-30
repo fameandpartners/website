@@ -98,10 +98,10 @@
       nav
         ul
           li 
-            = link_to collection_path, class: 'btn show-style-quiz' do
+            = link_to dresses_path, class: 'btn show-style-quiz' do
               span Style Quiz
           li.discover
-            = link_to collection_path, class: 'btn', title: 'Shop Dresses' do
+            = link_to dresses_path, class: 'btn', title: 'Shop Dresses' do
               span Dresses
               span.icon-dropdown-down
             - links_cache_key = [:layout, :header, 'top-links']
@@ -114,29 +114,29 @@
                         .grid-6.menu.list-left
                           h3 Styles
                           ul
-                            li = link_to 'Two-Piece', build_collection_product_path('Two-Piece', nil), title: "Two-Piece Dresses"
-                            li = link_to 'One Shoulder', build_collection_product_path('One-Shoulder', nil), title: "One Shoulder Dresses"
-                            li = link_to 'Strapless', build_collection_product_path('Strapless', nil), title: "Strapless Dresses"
-                            li = link_to 'V-Neck', build_collection_product_path('V-Neck', nil), title: "V-Neck Dresses"
-                            li = link_to 'Split', build_collection_product_path('Split', nil), title: "Split Dresses"
-                            li = link_to 'Open Back', build_collection_product_path('Open-Back', nil), title: "Open Back Dresses"
-                            li = link_to 'Lace', build_collection_product_path('Lace', nil), title: "Lace Dresses"
+                            li = link_to 'Two-Piece', build_taxon_path('Two-Piece'), title: "Two-Piece Dresses"
+                            li = link_to 'One Shoulder', build_taxon_path('One-Shoulder'), title: "One Shoulder Dresses"
+                            li = link_to 'Strapless', build_taxon_path('Strapless'), title: "Strapless Dresses"
+                            li = link_to 'V-Neck', build_taxon_path('V-Neck'), title: "V-Neck Dresses"
+                            li = link_to 'Split', build_taxon_path('Split'), title: "Split Dresses"
+                            li = link_to 'Open Back', build_taxon_path('Open-Back'), title: "Open Back Dresses"
+                            li = link_to 'Lace', build_taxon_path('Lace'), title: "Lace Dresses"
                           h3 Color
                           ul
-                            li = link_to "Black Dresses", colour_formal_dresses_path('Black'), title: "Black Dresses"
-                            li = link_to "White / Ivory Dresses", colour_formal_dresses_path('White'), title: "White / Ivory Dresses"
-                            li = link_to "Blue Dresses", colour_formal_dresses_path('Blue'), title: "Blue Dresses"
-                            li = link_to "Pink Dresses", colour_formal_dresses_path('Pink'), title: "Pink Dresses"
-                            li = link_to "Red Dresses", colour_formal_dresses_path('Red'), title: "Red Dresses"
-                            li = link_to "Pastel Dresses", colour_formal_dresses_path('Pastel'), title: "Pastel Dresses"
+                            li = link_to "Black Dresses", colour_path('Black'), title: "Black Dresses"
+                            li = link_to "White / Ivory Dresses", colour_path('White'), title: "White / Ivory Dresses"
+                            li = link_to "Blue Dresses", colour_path('Blue'), title: "Blue Dresses"
+                            li = link_to "Pink Dresses", colour_path('Pink'), title: "Pink Dresses"
+                            li = link_to "Red Dresses", colour_path('Red'), title: "Red Dresses"
+                            li = link_to "Pastel Dresses", colour_path('Pastel'), title: "Pastel Dresses"
                             
                         .grid-6.menu.list-right
                           ul
                             li = link_to 'All Dresses', collection_path, title: 'All Dresses', class: "collection"
                             li = link_to 'New Collection', collection_path, title: 'New Collection', class: "collection"
-                            li = link_to 'Long Dresses', build_collection_product_path('Long', nil), title: 'Long Dresses', class: "collection"
-                            li = link_to 'Short Dresses', build_collection_product_path('Short', nil), title: 'Short Dresses', class: "collection"
-                            li = link_to 'Prom Dresses', build_collection_product_path('Prom', nil), title: 'Prom Dresses', class: "collection"
+                            li = link_to 'Long Dresses', build_taxon_path('Long'), title: 'Long Dresses', class: "collection"
+                            li = link_to 'Short Dresses', build_taxon_path('Short'), title: 'Short Dresses', class: "collection"
+                            li = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses', class: "collection"
                             li = link_to 'Plus Size', plus_size_path, title: 'Plus Size Dresses', class: "collection"
                     .grid-7.promos
                       h2 Current Collaborations
