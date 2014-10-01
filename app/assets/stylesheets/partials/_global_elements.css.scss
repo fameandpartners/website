@@ -466,3 +466,25 @@
   background-color: #fff;
   border: 1px solid magenta;
 }
+
+
+.fast-delivery{
+	font: 400 12px/1 $fontOne;
+	text-transform: uppercase;
+	color: #FF639C;
+	padding: 4px 3px 3px;
+	display: inline-block;
+	border-top: 1px #FF639C solid;
+	border-bottom: 1px #FF639C solid;
+	-webkit-animation: hue 60s infinite linear;
+}
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
