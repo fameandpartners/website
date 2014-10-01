@@ -24,6 +24,7 @@ module Overrides
           indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
           indexes :in_stock, :type => :boolean, :as => 'has_stock?'
           indexes :position, :type => :integer, :index => :not_analyzed
+          indexes :fast_delivery, :type => :boolean, :as => 'fast_delivery'
 
           indexes :taxons, :as => 'taxons.map(&:name)'
           indexes :taxon_ids, :as => 'taxons.map(&:id)'

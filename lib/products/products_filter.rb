@@ -9,7 +9,8 @@ module Products
         [
           ['price_high', 'Price High'],
           ['price_low', 'Price Low'],
-          ['newest', "What's new"]
+          ['newest', "What's new"],
+          ['fast_delivery', 'Next day delivery']
         ]
       end
 
@@ -201,6 +202,8 @@ module Products
                 by :price, 'asc'
               when 'newest'
                 by :created_at, 'desc'
+              when 'fast_delivery'
+                by :fast_delivery, 'desc'
               when 'popular'
                 # default ordering scope
               else

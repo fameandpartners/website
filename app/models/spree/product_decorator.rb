@@ -283,15 +283,17 @@ Spree::Product.class_eval do
 
   # Someday, a time of magic and sorcery, move this one and some another methods to decorator/presenter
   def delivery_time_as_string(format = :short)
-    if fast_delivery?
-      I18n.t(format, scope: [:delivery_time, :quick])
+    if fast_delivery
+      I18n.t(format, scope: [:delivery_time, :fast])
     else
       I18n.t(format, scope: [:delivery_time, :standard])
     end
   end
 
-  def fast_delivery?
-    property('factory_name').to_s.strip =~ /^surry ?hills$/i
+  def fast_delivery
+    factory_name = property('factory_name').to_s.downcase.strip
+    in_stock = property('in_stock').to_s.downcase.strip
+    return (factory_name == "surry hills" || factory_name == "iconic") || in_stock == "yes"
   end
 
   private

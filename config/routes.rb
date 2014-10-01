@@ -404,6 +404,8 @@ FameAndPartners::Application.routes.draw do
     #get "lp/(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses, defaults: { lp: true }
     get "new-collection" => 'spree/products#index', as: :new_collection
 
+    get '/next-day-delivery' => 'spree/products#index', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
+
     resources :site_versions, only: [:show]
   end
 

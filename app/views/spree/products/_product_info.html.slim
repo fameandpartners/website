@@ -36,6 +36,8 @@ ruby:
     /= link_to '+ TO WISH LIST', '#', class: 'wish-list-link btn empty border', data: { id: product.master.id }
     = cached_add_to_wishlist_link(product, class: 'wish-list-link btn empty border', title: '+ TO WISHLIST', :'title-remove' => 'REMOVE FROM WISHLIST')
   .section
+    - if product.fast_delivery
+      .fast-delivery = product.delivery_time_as_string(:long)
     ul.slider
       li.opened 
         .title DESCRIPTION
