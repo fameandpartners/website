@@ -6,10 +6,7 @@
 			max-width: 1140px;
 			margin: 0 auto 0 auto;
 			min-width: 320px;
-		}
-
-		.nav-container{
-			display: none;
+			-webkit-text-size-adjust: 100%;
 		}
 	}
 
@@ -148,7 +145,11 @@
 	}
 
 	.girlfriend-footer {
-
+		img { 
+			width: 100%;
+			max-width: 1140px;
+			display: inline-block;
+		}
 	}
 
 	.girlfriend-popup {
@@ -181,9 +182,6 @@
 			.catalog-item {
 				min-width: 100%;
 				.arrows-line-horizontal{
-					display: none;
-				}
-				.description{
 					display: none;
 				}
 			}
