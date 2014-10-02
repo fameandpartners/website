@@ -4,7 +4,7 @@ doctype html
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'spree/shared/google_analytics'
-    = render 'spree/shared/offerchat' unless Rails.env.development?
+    = render '/shared/zopim'
 
     - if content_for?(:payment_gateway)
       = yield :payment_gateway
@@ -36,12 +36,11 @@ doctype html
       javascript:
         window.Quiz.autoShow = true;
     #wrap
-      - unless controller_action_id == 'checkout'
+      - unless controller_action_id == 'checkout' || controller_action_id == 'girlfriendxfame'
         = render('layouts/header')
       #content
         - unless controller_action_id == 'checkout'
           - unless sale_active?
-            = render 'shared/two_dresses_banner'
             = marketing_banner
           - else
             = render 'shared/sale_banner'

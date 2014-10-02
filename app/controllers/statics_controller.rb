@@ -95,6 +95,7 @@ class StaticsController < ApplicationController
   end
 
   def girlfriendxfame
+
     if !spree_user_signed_in?
       session[:spree_user_return_to] = girlfriendxfame_path(site_version: current_site_version.code)
     else

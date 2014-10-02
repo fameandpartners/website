@@ -8,6 +8,20 @@ GIT
       spree_core (~> 1.3.0)
 
 GIT
+  remote: git://github.com/droidlabs/data-migrate.git
+  revision: f3de5505d38fd6bb18cef26c97ca096ea3c45071
+  specs:
+    data_migrate (1.1.0)
+      rails (>= 3.0.0)
+
+GIT
+  remote: git://github.com/droidlabs/letter_opener.git
+  revision: 7e5793ccff0771861e46704821b86d6628fc3f35
+  specs:
+    letter_opener (0.0.2)
+      launchy
+
+GIT
   remote: git://github.com/evgeniypetrov/better_spree_paypal_express.git
   revision: 478b27281f7ed806df5ae86a41f9890595f8d242
   ref: 478b27281f7ed806df5ae86a41f9890595f8d242
@@ -16,41 +30,6 @@ GIT
     spree_paypal_express (2.0.3)
       paypal-sdk-merchant (= 1.103.0)
       spree_core (~> 1.3.3)
-
-GIT
-  remote: git://github.com/spree/spree_gateway.git
-  revision: 68758463a28cea89c3cba2ddc64e7a3f281505e0
-  branch: 1-3-stable
-  specs:
-    spree_gateway (1.2.0.rc2)
-      savon (~> 1.2)
-      spree_core (~> 1.0)
-
-GIT
-  remote: git://github.com/spree/spree_social.git
-  revision: 47f5239857f41234103b9c8abf62e8e41b258a57
-  branch: 1-3-stable
-  specs:
-    spree_social (2.3.0)
-      oa-core
-      omniauth
-      omniauth-facebook
-      omniauth-github
-      omniauth-google-oauth2
-      omniauth-twitter
-      spree_core (~> 1.3.0)
-
-GIT
-  remote: git://github.com/spree/spree_auth_devise.git
-  revision: c4466de3748618971dc401e6e30c0d87f2b9c143
-  ref: c4466de3748618971dc401e6e30c0d87f2b9c143
-  branch: 1-3-stable
-  specs:
-    spree_auth_devise (1.0.0)
-      cancan (~> 1.6.7)
-      devise (~> 2.2.3)
-      devise-encryptable (= 0.1.2)
-      spree_core
 
 GIT
   remote: git://github.com/spree/spree.git
@@ -95,11 +74,39 @@ GIT
       spree_core (= 1.3.3)
 
 GIT
-  remote: git://github.com/droidlabs/letter_opener.git
-  revision: 7e5793ccff0771861e46704821b86d6628fc3f35
+  remote: git://github.com/spree/spree_auth_devise.git
+  revision: c4466de3748618971dc401e6e30c0d87f2b9c143
+  ref: c4466de3748618971dc401e6e30c0d87f2b9c143
+  branch: 1-3-stable
   specs:
-    letter_opener (0.0.2)
-      launchy
+    spree_auth_devise (1.0.0)
+      cancan (~> 1.6.7)
+      devise (~> 2.2.3)
+      devise-encryptable (= 0.1.2)
+      spree_core
+
+GIT
+  remote: git://github.com/spree/spree_gateway.git
+  revision: 68758463a28cea89c3cba2ddc64e7a3f281505e0
+  branch: 1-3-stable
+  specs:
+    spree_gateway (1.2.0.rc2)
+      savon (~> 1.2)
+      spree_core (~> 1.0)
+
+GIT
+  remote: git://github.com/spree/spree_social.git
+  revision: 47f5239857f41234103b9c8abf62e8e41b258a57
+  branch: 1-3-stable
+  specs:
+    spree_social (2.3.0)
+      oa-core
+      omniauth
+      omniauth-facebook
+      omniauth-github
+      omniauth-google-oauth2
+      omniauth-twitter
+      spree_core (~> 1.3.0)
 
 GIT
   remote: https://github.com/37signals/mail_view.git
@@ -108,14 +115,8 @@ GIT
     mail_view (2.0.1)
       tilt
 
-GIT
-  remote: git://github.com/droidlabs/data-migrate.git
-  revision: f3de5505d38fd6bb18cef26c97ca096ea3c45071
-  specs:
-    data_migrate (1.1.0)
-      rails (>= 3.0.0)
-
 GEM
+  remote: https://rubygems.org/
   remote: https://rubygems.org/
   specs:
     actionmailer (3.2.13)

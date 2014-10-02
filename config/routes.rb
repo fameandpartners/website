@@ -94,7 +94,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/lp/collection(/:collection)' => 'spree/products#index', defaults: { lp: 'lp' }
 
-    get 'products/:id/quick_view' => 'spree/products#quick_view'
+    get '/quick_view/:id' => 'spree/products#quick_view'
     post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
 
     post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
@@ -430,6 +430,8 @@ FameAndPartners::Application.routes.draw do
     get "(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses
     #get "lp/(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses, defaults: { lp: true }
     get "new-collection" => 'spree/products#index', as: :new_collection
+
+    get '/next-day-delivery' => 'spree/products#index', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
 
     resources :site_versions, only: [:show]
   end
