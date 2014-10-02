@@ -13,6 +13,7 @@ en-US:
       custom_dress:
         required_at: 'Formal/Event Date'
 
+  prom_event: 'prom'
   zip: 'Zipcode'
   color: 'Color'
   customization: 'customization'

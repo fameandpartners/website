@@ -8,6 +8,7 @@ en-AU:
         zipcode: "Billing address postcode"
       spree/order/ship_address:
         zipcode: "Shipping address postcode"
+  prom_event: 'formal'
   zip: 'Postcode'
   color: 'Colour'
   customization: 'customisation'

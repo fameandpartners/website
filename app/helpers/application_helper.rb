@@ -21,7 +21,7 @@ module ApplicationHelper
 
     hreflang_link = get_hreflang_link
 
-    binding.pry
+    #binding.pry
     r = "<link href='#{hreflang_link}' hreflang='#{hreflang_language}' rel='alternate' />"
 
     r.html_safe
@@ -173,7 +173,10 @@ module ApplicationHelper
   end
 
   def descriptive_url(product)
-    "#{product.translated_short_description(I18n.locale).parameterize}-#{product.name.parameterize}-#{product.id}"
+    
+    r = "#{product.translated_short_description(I18n.locale).parameterize}-#{product.name.parameterize}-#{product.id}"
+
+    return r
   end
 
   def collection_product_path(product, options = {})

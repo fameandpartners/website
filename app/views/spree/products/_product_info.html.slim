@@ -12,7 +12,7 @@ ruby:
   h1.product-title
     = product.name
   - unless product.short_description.empty?
-    h1.product_short_description = product.short_description
+    h1.product_short_description = product.translated_short_description(I18n.locale)
   .price = price_for_product(product)
   .section  
     - options = color_options_for_select(colors)
