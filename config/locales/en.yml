@@ -34,6 +34,9 @@ en:
         title: 'Coral Dresses'
         subtitle: 'Cascading coral was worn by Taylor Swift at the 2014 Golden Globes. Craft your cutest coral look with one of our dresses below.'
   delivery_time:
+    fast:
+     long: 'Next day delivery'
+     short: 'Next day'
     quick:
      long: '24 hours delivery'
      short: '24 hours'

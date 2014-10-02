@@ -4,7 +4,8 @@ doctype html
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'spree/shared/google_analytics'
-  body class=(controller_action_class)
+    = render '/shared/zopim'
+  body class=(controller_action_class) id=(restfull_action_name)
     .m-pixel
       img src="http://tags.rtbidder.net/track?sid=525645858bc06f1060d9e531" width="0" height="0" border="0" alt=""
       - if session.delete(:signed_up_just_now)
@@ -32,11 +33,12 @@ doctype html
     #wrap
       = render 'layouts/header'
       #content
-        - unless sale_active?
-          = render 'shared/two_dresses_banner'
-          = marketing_banner
-        - else
-          = render 'shared/sale_banner'
+        - unless restfull_action_name == 'girlfriendxfame'
+          - unless sale_active?
+            = render 'shared/two_dresses_banner'
+            = marketing_banner
+          - else
+            = render 'shared/sale_banner'
         = yield
       = render 'shared/dolly_campaign_popup'
       #push
