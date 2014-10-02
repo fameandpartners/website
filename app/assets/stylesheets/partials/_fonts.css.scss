@@ -14,12 +14,15 @@
 @include font-face('Icons', 'icomoon');
 @include font-face('Icon Numbers', 'icon-numbers');
 
+@include font-face('Austin', 'austin-fatitalic', 700, italic);
+
 
 $fontOne: 'Novecento', sans-serif;
 $fontTwo: 'Didot', serif;
 $fontThree: 'LeagueGothic', serif;
 $fontFour: 'Arapey', serif;
 $fontFive: 'Lato', sans-serif;
+$fontSix: 'Austin', sans-serif;
 
 // BLOG FONTS
 @include font-face('Vampiro One', 'vampiroone-regular');

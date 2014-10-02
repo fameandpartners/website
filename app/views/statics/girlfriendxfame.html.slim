@@ -1,8 +1,13 @@
 #girlfriend
   .girlfriend-header
     = link_to root_path do
-      = image_tag '_girlfriend/header.jpg'
-    = link_to '', root_path, class: 'logo'
+      = image_tag '_girlfriend/header1.jpg'
+    .info
+      h1 Share and Win!
+      h2 Celebrate the launch of Girlfriend x Fame & Partners Ultimate Formal Collection by sharing and winning.
+      .girlfriend-terms
+        = link_to 'Terms & Conditions', competition_terms_path
+
   .girlfriend-catalog
     ruby:
       cache_keys = ['girlfriendxfame']
@@ -14,7 +19,7 @@
       cache_keys << 'products'
 
     - cache cache_keys, expires_in: configatron.cache.expire.long do
-      - get_products_from_edit('girlfriend', nil, nil, 100).each do |dress|
+      - get_products_from_edit('girlfriend', nil, nil, 12).each do |dress|
         - special_description = dress.property("special_description")
         - product_url = dress.property("bitly")
         - if product_url.blank? then product_url = collection_product_path(dress) end
@@ -35,30 +40,19 @@
               .code GF20
               p ENTER CODE AT CHECKOUT
             .actions
-              .shared.grey
-                .arrows-line-horizontal
+              .shared
                 ruby:
                   classes = ['facebook', 'share']
                   classes << 'not-authenticated' unless spree_user_signed_in?
-                = link_to collection_product_url(dress), title: dress.name, class: classes do
-                  ' SHARE
-                  br
-                  ' VIA
-                  br
-                  ' FACEBOOK
+                = link_to collection_product_url(dress), title: 'Share via Facebook to win! ' + dress.name, class: classes do
+                  = image_tag('_girlfriend/fb-share.png')
               .shared
                 ruby:
                   classes = ['twitter', 'share']
                   classes << 'not-authenticated' unless spree_user_signed_in?
-                = link_to product_url, title: dress.name, class: classes do
-                  ' SHARE
-                  br
-                  ' VIA
-                  br
-                  ' Twitter
-                .arrows-line-horizontal
-  .girlfriend-terms
-    = link_to 'Terms & Conditions', competition_terms_path
+                = link_to product_url, title: 'Share via Twitter to win! ' + dress.name, class: classes do
+                  = image_tag('_girlfriend/twitter-share.png')
+                
   .girlfriend-footer
     = image_tag '_girlfriend/footer.jpg'
 #push
