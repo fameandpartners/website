@@ -72,8 +72,8 @@ FameAndPartners::Application.routes.draw do
       post '/', to: 'registrations#create'
 
       get '/browse', to: 'products#index', as: :personalization_products
-      get '/:permalink', to: 'products#show', as: :personalization_product
-      get '/:permalink/style', to: 'products#style', as: :personalization_style_product
+      get '/:permalink', to: 'redirects#products_show', as: :personalization_product, defaults: {custom_dress: true}
+      get '/:permalink/style', to: 'redirects#products_show', as: :personalization_style_product, defaults: {style_dress: true}
     end
 
     get '/celebrities' => 'celebrities#index', as: 'celebrities'
@@ -87,9 +87,9 @@ FameAndPartners::Application.routes.draw do
     resource :product_variants, only: [:show]
 
     scope '/collection' do
-      root to: 'spree/products#index', as: 'collection'
-      get '/:collection' => 'spree/products#index'
-      get '/:collection/:id' => 'spree/products#show'
+      root to: 'redirects#products_index', as: 'collection'
+      get '/:collection/:product_id' => 'redirects#products_show'
+      get '/:collection' => 'redirects#products_index'
     end
 
     get '/lp/collection(/:collection)' => 'spree/products#index', defaults: { lp: 'lp' }

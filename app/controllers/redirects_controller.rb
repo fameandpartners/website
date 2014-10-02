@@ -1,9 +1,12 @@
 class RedirectsController < ApplicationController
   def products_index
     args = params.except(:action, :controller)
-    #binding.pry
-
-    redirect_to view_context.dresses_path(args)
+  
+    if params[:collection]
+      redirect_to view_context.build_taxon_path(params[:collection], args.except(:collection)), status: 301
+    else
+      redirect_to view_context.dresses_path(args), status: 301
+    end
   rescue
     redirect_to collection_path
   end
@@ -12,12 +15,21 @@ class RedirectsController < ApplicationController
   # process /products/:arg1/:arg2  
   #   if no product found, trying to interpretate it as collection_id
   def products_show
-    product = Spree::Product.active.find_by_permalink(params[:product_id])
+    product_id = params[:product_id] || params[:permalink]
+    product = Spree::Product.active.find_by_permalink(product_id)
     collection = get_collection_taxon(params[:collection])
+
+    
 
     if product.present?
       # /collection/taxon/product_id
-      redirect_to view_context.collection_product_path(product, params.slice(:cpt)), status: 301
+      if params[:custom_dress]
+        redirect_to view_context.personalize_path(product), status: 301
+      elsif params[:style_dress]
+        redirect_to view_context.style_it_path(product), status: 301
+      else
+        redirect_to view_context.collection_product_path(product, params.slice(:cpt)), status: 301
+      end
     elsif collection.present?
       # /collection/taxon
       redirect_to view_context.collection_taxon_path(collection), status: 301
