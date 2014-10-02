@@ -14,6 +14,54 @@ module ApplicationHelper
     html.html_safe
   end
 
+
+  def hreflang_tag
+
+    hreflang_language = get_hreflang_code
+
+    hreflang_link = get_hreflang_link
+
+    binding.pry
+    r = "<link href='#{hreflang_link}' hreflang='#{hreflang_language}' rel='alternate' />"
+
+    r.html_safe
+  end
+
+  def get_hreflang_link
+    hreflang_language = get_hreflang_code
+    current_language = get_current_language_code
+
+    if request.fullpath.include? current_language
+      hreflang_link = "http://#{request.host}:#{request.port}#{request.fullpath}"
+      hreflang_link.gsub!(current_language, hreflang_language)
+    else
+      # united states is default, so default hreflang should be australian
+      hreflang_link = "http://#{request.host}:#{request.port}/au#{request.fullpath}"
+    end
+
+    hreflang_link
+  end
+
+  def get_hreflang_code
+    if current_site_version.is_australia?
+      hreflang_language = 'us'
+    else
+      hreflang_language = 'au'
+    end
+
+    return hreflang_language
+  end
+
+  def get_current_language_code
+    if current_site_version.is_australia?
+      current_language = 'au'
+    else
+      current_language = 'us'
+    end
+
+    return current_language
+  end
+
   def restfull_action_name
     case controller.action_name.to_sym
     when :create

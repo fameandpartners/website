@@ -58,9 +58,11 @@ group :development do
   gem 'quiet_assets', '1.0.2'
   gem 'thin', '1.5.1'
   gem 'pry-rails'
+  gem 'pry-nav'
   gem 'debugger'
   gem "therubyracer"
   gem 'rails-dev-tweaks', '~> 1.1'
+  gem 'oink'
 end
 
 group :test do
