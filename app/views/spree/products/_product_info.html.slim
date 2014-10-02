@@ -24,11 +24,42 @@ ruby:
       .size-info = size_info_label
     .sizebox
       - sizes.take(6).each do |size|
-        .button data-size="#{size}" data-plussize=(is_plus_size?(product).to_s) title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) = size
+        .button data-size="#{size}" data-plussize=(is_plus_size?(product).to_s) title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
+          span = size
+          / Remove class .hide to show popup 
+          .size-popup.hide
+            .size-popup-container
+              .size-numbers AU 8 / US 4
+              .body
+                .dimension.bust
+                  .fleft B
+                  .fright 78
+                .dimension.waist
+                  .fleft W
+                  .fright 78
+                .dimension.hip
+                  .fleft H
+                  .fright 78
+              = link_to 'More Size Detail', '#what-size', class: 'toggle-sizes btn'
       - if dropdown_sizes(product, sizes).present?
         .dropdown-button data-open="-" data-close="+" +
         - dropdown_sizes(product, sizes).each do |size|
-          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) = size
+          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
+            span = size
+            / Remove class .hide to show popup
+            .size-popup.hide
+              .size-popup-container
+                .size-numbers AU 8 / US 4
+                .body
+                  .dimension.bust
+                    .fleft B
+                    .fright 78
+                  .dimension.waist
+                    .fleft W
+                    .fright 78
+                  .dimension.hip
+                    .fleft H
+                    .fright 78
   .section.buy-button-section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
     = link_to 'buy now', '#', class: 'btn buy-now'
