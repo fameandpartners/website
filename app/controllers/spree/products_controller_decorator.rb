@@ -22,27 +22,33 @@ Spree::ProductsController.class_eval do
     case params[:taxon_root]
     when "style"
       @title = "Shop for a specific style"
+      @products_title = "Some dresses in those styles"
       available_product_styles.each do |style|
         @taxons << {name: style.name, url: "#{style.permalink}"}
       end
     when "event"
       @title = "Shop dresses by event"
+      @products_title = "Some dresses for those events"
       available_product_events.each do |event|
         @taxons << {name: event.name, url: "#{event.permalink}"}
       end
     when "colour"
       @title = "Shop dresses by color"
+      @products_title = "Some dresses in those colors"
       available_product_colors.each do |color|
         @taxons << {name: color.name, url: "color/#{color.name}"}
       end
     when "bodyshape"
       @title ="Shop dresses by body shape"
+      @products_title = "Some dresses for those body shapes"
       ProductStyleProfile::BODY_SHAPES.each do |shape|
         @taxons << {name: shape, url: "body-shape/#{shape}"}
       end
     else
       @taxons = []
     end
+
+    @products = load_random_products amount: 8, taxon: params[:taxon_root]
   end
 
 
@@ -141,6 +147,15 @@ Spree::ProductsController.class_eval do
   end
 
   private
+
+  def load_random_products(args = {})
+    root_taxon = args[:taxon]
+    amount = args[:amount]
+
+    
+
+    return Spree::Product.active.all.shuffle[1..amount]
+  end
 
   def build_page_title(params)
     binding.pry
