@@ -113,6 +113,20 @@
 		font-size: 25px;
 	}
 
+	.winner .interview{
+		width: 80%;
+		font-family: $fontFive;
+		font-size: 11px;
+		line-height: 1.3em;
+
+		img{
+			width: 130px;
+			border: none;
+			display: block;
+			margin: 30px 0 5px 0;
+		}
+	}
+
 	.row.center{
 		text-align: center;
 	}
