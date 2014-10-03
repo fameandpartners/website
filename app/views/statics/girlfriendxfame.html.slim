@@ -99,12 +99,13 @@
     coffee:
       $('a.share.facebook').on 'click', (event) ->
         event.preventDefault()
-
+        
         FB.ui({
           method: 'share_open_graph',
           action_type: 'og.likes',
           action_properties: JSON.stringify({
-            object: ($(event.target).attr('href') + '?cpt=' + competition_participation_token)
+
+            object: ($(event.target).parent().attr('href') + '?cpt=' + competition_participation_token)
           })
         }, (response) ->
           if !response.error_code
@@ -118,7 +119,7 @@
         $.post('/shared/facebook')
 
         url  = 'https://twitter.com/share?url='
-        url += $(event.target).attr('href') + '?cpt=' + competition_participation_token
+        url += $(event.target).parent().attr('href') + '?cpt=' + competition_participation_token
         url += '&text=Ultimate Formal Collection - @GirlfriendMAG x @FameandPartners collab:'
         url += '&via=fameandpartners'
         url += '&hashtags=fashion,formaldress'

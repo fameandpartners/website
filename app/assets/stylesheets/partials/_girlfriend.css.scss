@@ -98,6 +98,9 @@
 				text-align: center;
 	      z-index: 3;
 			}
+			.btn{
+				background-color: #F3009E;
+			}
 
 			.shared {
 				width: 50px;
@@ -159,28 +162,7 @@
 		}
 	}
 
-	.girlfriend-popup {
-		text-align: center;
-		.modal-container {
-			background: url('_girlfriend/popup.jpg') no-repeat center center;
-			width: 534px;
-			height: 394px;
-			padding-left: 80px;
-			padding-right: 80px;
-			@include box-sizing(border-box);
-			h2 {
-				font-size: 58px;
-				font-family: $fontThree;
-			}
-			p {
-				font-family: $fontTwo;
-			}
-			.facebook-button {
-				margin: 40px 0 20px;
-			}
-		}
-	}
-
+	
 	
 
 	@media only screen and (max-width: 630px), only screen and (max-device-width: 630px) {
@@ -200,3 +182,24 @@
 
 }
 
+.girlfriend-popup {
+	text-align: center;
+	.modal-container {
+		background: url('_girlfriend/popup.jpg') no-repeat center center;
+		width: 534px;
+		height: 394px;
+		padding-left: 80px;
+		padding-right: 80px;
+		@include box-sizing(border-box);
+		h2 {
+			font-size: 58px;
+			font-family: $fontThree;
+		}
+		p {
+			font-family: $fontTwo;
+		}
+		.facebook-button {
+			margin: 40px 0 20px;
+		}
+	}
+}
