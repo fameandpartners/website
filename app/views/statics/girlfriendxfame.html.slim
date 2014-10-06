@@ -1,12 +1,7 @@
 #girlfriend
   .girlfriend-header
     = link_to root_path do
-      = image_tag '_girlfriend/header1.jpg'
-    .info
-      h1 Share and Win!
-      h2 Celebrate the launch of Girlfriend x Fame & Partners Ultimate Formal Collection by sharing and winning.
-      .girlfriend-terms
-        = link_to 'Terms & Conditions', competition_terms_path
+      = image_tag '_girlfriend/header.jpg'
 
   .girlfriend-catalog
     ruby:
@@ -39,36 +34,8 @@
               .discount $20 OFF
               .code GF20
               p ENTER CODE AT CHECKOUT
-            .actions
-              .shared
-                ruby:
-                  classes = ['facebook', 'share']
-                  classes << 'not-authenticated' unless spree_user_signed_in?
-                = link_to collection_product_url(dress), title: 'Share via Facebook to win! ' + dress.name, class: classes do
-                  = image_tag('_girlfriend/fb-share.png')
-              .shared
-                ruby:
-                  classes = ['twitter', 'share']
-                  classes << 'not-authenticated' unless spree_user_signed_in?
-                = link_to product_url, title: 'Share via Twitter to win! ' + dress.name, class: classes do
-                  = image_tag('_girlfriend/twitter-share.png')
                 
-  .girlfriend-footer
-    = image_tag '_girlfriend/footer.jpg'
 #push
-.girlfriend-popup.modal.popup-placeholder.hide
-  .overlay
-  .modal-container
-    .close-lightbox
-    h2 ENTER THE COMPETITION
-    p By signing up and sharing you will be entering the competition. Increase your chances of winning by sharing via Facebook and Twitter.
-    = link_to fb_auth_path(site_version: current_site_version.code), class: 'facebook-button' do
-      span.icon
-        span.icon-facebook2
-      span Sign up with facebook
-    p
-      ' Already a member of Fame & Partners?
-      = link_to 'Login', spree_login_path
 
   coffee:
     $ ->
