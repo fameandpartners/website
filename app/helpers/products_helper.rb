@@ -369,7 +369,6 @@ module ProductsHelper
 
 
   def locale_sizes(product, sizes)
-
     if current_site_version.is_australia?
       if is_plus_size?(product)
         return sizes && [18, 20, 22, 24, 26]
@@ -385,8 +384,23 @@ module ProductsHelper
     end
   end
 
-  def dropdown_sizes(product, sizes)
+  def locale_size_attributes(size)
+    if current_site_version.is_australia?
+      SIZE_ATTRIBUTES.find_by_au_name(size.to_s)
+    else
+      SIZE_ATTRIBUTES.find_by_us_name(size.to_s)
+    end
+  end
 
+  def locale_measurement_unit
+    if current_site_version.is_australia?
+      :cm
+    else
+      :in
+    end
+  end
+
+  def dropdown_sizes(product, sizes)
     if sizes.size < 7
       return []
     else
