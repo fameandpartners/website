@@ -74,8 +74,8 @@ module Products
         color = "#{seo_colour} "
       end
 
-      # selected_categories returns a nested array, fix later
-      taxon = selected_categories.first.first
+      
+      taxon = selected_categories.first
 
       
       t_root = ""
@@ -104,8 +104,8 @@ module Products
         color = " #{seo_colour} "
       end
 
-      # selected_categories returns a nested array, fix later
-      taxon = selected_categories.first.first
+      
+      taxon = selected_categories.first
 
       
       t_root = ""
@@ -134,8 +134,8 @@ module Products
         color = ""
       end
 
-      # selected_categories returns a nested array, fix later
-      taxon = selected_categories.first.first
+      
+      taxon = selected_categories.first
 
       
       t_root = ""
@@ -209,7 +209,7 @@ module Products
     end
 
     def selected_categories
-      selected_collection_taxons << @selected_edits
+      selected_collection_taxons.concat(@selected_edits)
     end
 
     def selected_taxons(taxon_ids, with_banner = false)
