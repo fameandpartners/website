@@ -211,6 +211,7 @@
 		width: 80%;
 	}
 	.product-info { 
+		position: relative;
 		padding: 18px 0 0 10px;
 		.product-title {
 			font-size: 15px;
@@ -248,6 +249,12 @@
 		}
 		.btn { 
 			display: block;
+		}
+
+		.breadcrumbs{
+			li{
+				display: inline;
+			}
 		}
 		.section + .section { margin-top: 10px;}
 		.slider {
@@ -587,6 +594,10 @@
 	margin: 0;
 	list-style: none;
 	font-size: 0;
+
+	.grid-3{
+		position: relative;
+	}
 	
 	.lp_featured_dresses{
 		padding: 20px 0;

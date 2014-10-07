@@ -58,6 +58,7 @@ FameAndPartners::Application.routes.draw do
       get 't/body-shape/:bodyshape' => 'spree/products#index'
       get 't/*permalink' => 'spree/products#index', as: 'taxon'
       get 'p/:product_slug' => 'spree/products#show'
+      get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
 

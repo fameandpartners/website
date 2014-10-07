@@ -58,13 +58,10 @@ class RedirectsController < ApplicationController
   end
 
   def get_collection_taxon(collection_name)
-    #binding.pry
     return nil if collection_name.blank?
     collection_taxon = view_context.range_taxonomy.root.children.where(
       "permalink like ? or name = ?", "%#{collection_name.downcase}%", collection_name.downcase
     ).first
-
-    binding.pry
 
     return collection_taxon
   end

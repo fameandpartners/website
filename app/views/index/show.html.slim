@@ -25,7 +25,7 @@
         = link_to @big_banner.url, title: @big_banner.title do
           = image_tag @big_banner.attachment(:big)
       -else
-        = link_to collection_path(:cf => 'home'), title: 'New Collection'  do
+        = link_to dresses_path(:cf => 'home'), title: 'New Collection'  do
           = image_tag "homepage/new/august2014.jpg"
 
 
@@ -66,16 +66,16 @@
         p FOR EVERY EVENT
         .formal-types
           ul
-            li= link_to "BALLS", collection_path
+            li= link_to "BALLS", dresses_path
             li
               ' /
-            li= link_to "BIRTHDAYS", collection_path
+            li= link_to "BIRTHDAYS", dresses_path
             li
               ' /
-            li= link_to "PROM", collection_path
+            li= link_to "PROM", dresses_path
             li
               ' /
-            li= link_to "FORMALS", collection_path
+            li= link_to "FORMALS", dresses_path
             li
               ' /
-            li= link_to "GRADUATION", collection_path
+            li= link_to "GRADUATION", dresses_path

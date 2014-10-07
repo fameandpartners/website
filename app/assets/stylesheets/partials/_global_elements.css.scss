@@ -263,6 +263,7 @@
 	.button, .dropdown-button {
 		display: inline-block;
 		border: solid 1px #000;
+		position: relative;
 		border-left: 0;
 		margin-bottom: -1px;
 		vertical-align: top;
@@ -274,6 +275,12 @@
 		cursor: pointer;
 		background-color: #fff;
 		@include box-sizing(border-box);
+		&:hover {
+			.size-popup {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
 		&.selected {
 			color: #fff;
 			background-color: #000;
@@ -318,6 +325,69 @@
 			direction: ltr;
 			border-right: 0;
 			&:first-child { margin-right: -1px; }
+		}
+	}
+
+	.size-popup {
+		position: absolute;
+		top: 98%;
+		padding-top: 12px;
+		right: -10px;
+		width: 190px;
+		text-align: center;
+		visibility: hidden;
+		opacity: 0;
+		color: #000;
+		@include transition(all 0.2s linear);
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 24px;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 12px 12px 12px;
+			border-color: transparent transparent #000 transparent;
+			border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) #000 rgba(255, 255, 255, 0);
+		}
+		.size-popup-container {
+			background-color: #fff;
+			border: solid 5px #000;
+			padding: 10px;
+		}
+		.size-numbers {
+			font-size: 24px;
+			font-family: $fontFive;
+		}
+		.body {
+			background: url('_chartsize-blank.jpg') no-repeat top center;
+			width: 100%;
+			height: 301px;
+			margin: 20px 0;
+			position: relative;
+			.dimension {
+				position: absolute;
+				width: 129px;
+				left: 50%;
+				margin-left: -65px;
+				font-size: 18px;
+				font-family: $fontFive;
+				border-bottom: dashed 2px #000;
+				padding-bottom: 5px;
+				overflow: hidden;
+				line-height: 18px;
+				.fright {
+					color: $pinkColor;
+				}
+			}
+			.bust { top: 58px;}
+			.waist { top: 90px;}
+			.hip { top: 130px;}
+		}
+		.btn {
+			padding: 0 10px;
+			font-size: 20px;
 		}
 	}
 }
@@ -387,17 +457,53 @@
 	th, td {
 		padding: 10px 5px;
 	}
-	#what-size & {
-		th, td { padding: 15px 10px;}
-		td { font-weight: 300; text-transform: none !important;}
-	}
 }
 
-#what-size{
-	.title{
-		font-size: 14px;
-		font-weight: 600;
-		padding-bottom: 10px;
+#what-size {
+	font-family: $fontFive;
+	font-size: 14px;
+	text-transform: none;
+	.title {
+		font-size: 30px;
+		font-weight: 300;
+		padding-bottom: 20px;
+		text-align: center;
+	}
+	h6 {
+		font-weight: 700;
+		font-size: 16px;
+		+ p { 
+			margin: 4px 0 20px;
+		}
+	}
+	.text {
+		width: 450px;
+	}
+
+	.table-global {
+		font-size: 16px;
+		text-align: center;
+		border-top: solid 1px #eaeaea;
+		tr:nth-child(even) td {
+			background-color: #f7f7f7;
+		}
+		th, td {
+			text-align: center;
+			border-bottom: solid 1px #eaeaea;
+			border-left: solid 1px #eaeaea;
+			&:first-child { border-left: 0;}
+		}
+		th {
+			font-weight: 700;
+		}
+		td {
+			font-weight: 300;
+			padding: 5px;
+		}
+		.dimension {
+			font-size: 14px;
+			color: #888;
+		}
 	}
 }
 	
@@ -468,15 +574,38 @@
 }
 
 
-.fast-delivery{
-	font: 400 12px/1 $fontOne;
-	text-transform: uppercase;
-	color: #FF639C;
-	padding: 4px 3px 3px;
-	display: inline-block;
-	border-top: 1px #FF639C solid;
-	border-bottom: 1px #FF639C solid;
-	-webkit-animation: hue 60s infinite linear;
+.fast-delivery-icon{
+	text-indent: -1000px;
+	overflow: hidden;
+	width: 71px;
+	height: 72px;
+	background:url('icons-corner-next-day-delivery.png') no-repeat;
+	position: absolute;
+	top: 10px;
+	left: 0px;
+}
+
+.fast-delivery-icon-right{
+	text-indent: -1000px;
+	overflow: hidden;
+	width: 71px;
+	height: 72px;
+	background:url('icons-corner-next-day-delivery-right.png') no-repeat;
+	position: absolute;
+	top: 10px;
+	right: 0px;
+}
+
+.fast-delivery-info{
+	padding: 20px 0 40px 0;
+	color: #999;
+	font-size: 13px;
+	font-family: $fontFive;
+	text-transform: none;
+	width: 50%;
+	max-width: 1140px;
+	min-width: 320px;
+	margin: 0 auto;
 }
 
 @-webkit-keyframes hue {

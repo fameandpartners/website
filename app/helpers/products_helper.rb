@@ -1,5 +1,29 @@
 module ProductsHelper
 
+  def product_breadcrumbs(taxon, separator="&nbsp;&#47;&nbsp;")
+    return "" if current_page?("/") || taxon.nil?
+    crumbs = []
+    if taxon
+      crumbs << ['Dresses', dresses_path]
+      crumbs += taxon.ancestors.collect { |a| [a.name.pluralize, dress_nested_taxons_path(a.permalink)] } unless taxon.ancestors.empty?
+      crumbs << [taxon.name, dress_nested_taxons_path(taxon.permalink)]
+    else
+      crumbs << ['Dresses', dresses_path]
+    end
+
+    separator = raw(separator)
+
+    crumbs.map! do |crumb|
+      content_tag(:li, itemscope:"itemscope", itemtype:"http://data-vocabulary.org/Breadcrumb") do
+        link_to(crumb.last, itemprop: "url") do
+          content_tag(:span, crumb.first, itemprop: "title")
+        end + (crumb == crumbs.last ? '' : separator)
+      end
+    end
+
+    content_tag(:nav, content_tag(:ul, raw(crumbs.map(&:mb_chars).join)), class: 'breadcrumbs')
+  end
+
   def range_taxonomy
     @range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
   end
@@ -342,7 +366,7 @@ module ProductsHelper
     if is_directed_from?(my_boutique_path)
       items << link_to('My Boutique', my_boutique_path)
     else
-      items << link_to('Collection', collection_path)
+      items << link_to('Dresses', collection_path)
     end
 
     if (taxon = range_taxon_for(product)).present?
@@ -379,7 +403,6 @@ module ProductsHelper
 
 
   def locale_sizes(product, sizes)
-
     if current_site_version.is_australia?
       if is_plus_size?(product)
         return sizes && [18, 20, 22, 24, 26]
@@ -395,8 +418,23 @@ module ProductsHelper
     end
   end
 
-  def dropdown_sizes(product, sizes)
+  def locale_size_attributes(size)
+    if current_site_version.is_australia?
+      SIZE_ATTRIBUTES.find_by_au_name(size.to_s)
+    else
+      SIZE_ATTRIBUTES.find_by_us_name(size.to_s)
+    end
+  end
 
+  def locale_measurement_unit
+    if current_site_version.is_australia?
+      :cm
+    else
+      :in
+    end
+  end
+
+  def dropdown_sizes(product, sizes)
     if sizes.size < 7
       return []
     else

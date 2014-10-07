@@ -8,7 +8,7 @@ ruby:
     size_charge_start = 14
   end
 .product-info
-  h6 = breadcrumbs_for(product)
+  = product_breadcrumbs(product.taxons.first)
   h1.product-title
     = product.name
   - unless product.short_description.empty?
@@ -24,11 +24,46 @@ ruby:
       .size-info = size_info_label
     .sizebox
       - sizes.take(6).each do |size|
-        .button data-size="#{size}" data-plussize=(is_plus_size?(product).to_s) title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) = size
+        .button data-size="#{size}" data-plussize=(is_plus_size?(product).to_s) title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
+          span = size
+          - if (attributes = locale_size_attributes(size)).present?
+            - unit = locale_measurement_unit
+            .size-popup
+              .size-popup-container
+                .size-numbers
+                  | AU #{attributes[:name][:au]} / US #{attributes[:name][:us]}
+                .body
+                  .dimension.bust
+                    .fleft B
+                    .fright = attributes[:attributes][:bust][unit]
+                  .dimension.waist
+                    .fleft W
+                    .fright = attributes[:attributes][:waist][unit]
+                  .dimension.hip
+                    .fleft H
+                    .fright = attributes[:attributes][:hip][unit]
+                = link_to 'More Size Detail', '#what-size', class: 'toggle-sizes btn'
       - if dropdown_sizes(product, sizes).present?
         .dropdown-button data-open="-" data-close="+" +
         - dropdown_sizes(product, sizes).each do |size|
-          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) = size
+          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
+            span = size
+            - if (attributes = locale_size_attributes(size)).present?
+              - unit = locale_measurement_unit
+              .size-popup
+                .size-popup-container
+                  .size-numbers
+                    | AU #{attributes[:name][:au]} / US #{attributes[:name][:us]}
+                  .body
+                    .dimension.bust
+                      .fleft B
+                      .fright = attributes[:attributes][:bust][unit]
+                    .dimension.waist
+                      .fleft W
+                      .fright = attributes[:attributes][:waist][unit]
+                    .dimension.hip
+                      .fleft H
+                      .fright = attributes[:attributes][:hip][unit]
   .section.buy-button-section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
     = link_to 'buy now', '#', class: 'btn buy-now'
@@ -36,8 +71,6 @@ ruby:
     /= link_to '+ TO WISH LIST', '#', class: 'wish-list-link btn empty border', data: { id: product.master.id }
     = cached_add_to_wishlist_link(product, class: 'wish-list-link btn empty border', title: '+ TO WISHLIST', :'title-remove' => 'REMOVE FROM WISHLIST')
   .section
-    - if product.fast_delivery
-      .fast-delivery = product.delivery_time_as_string(:long)
     ul.slider
       li.opened 
         .title DESCRIPTION
@@ -102,3 +135,6 @@ ruby:
                   .grid-4
                     = link_to collection_product_path(product) do
                       = product_image_tag(product)
+  - if product.fast_delivery
+    .fast-delivery-icon-right title="Next day delivery*"
+      = product.delivery_time_as_string(:long)

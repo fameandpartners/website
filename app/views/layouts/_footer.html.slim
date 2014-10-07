@@ -1,5 +1,7 @@
 - unless controller_action_id == "index"
   = render "shared/featured_in", :locals => {:small => "_small"}
+  .fast-delivery-info
+    ' * Dresses with an "Next Day Delivery" mark have at least some size and color combinations ready to ship immediately. Available sizes and colors may be limited due to demand. Our customer service team will inform you of any shipping delays.
 footer.footer-global
   .container
     - footer_links_cache_key = [:layout, :footer, 'footer-links']
@@ -16,7 +18,7 @@ footer.footer-global
             li = link_to 'Fashionista Winner 2014', fashionista_winner_path
         .footer-links
           p.footer-label
-             ' CUSTOMER SERVICE
+            ' CUSTOMER SERVICE
           ul
             li = link_to 'FAQs', faqs_path
             li = link_to 'TERMS', terms_path
@@ -68,65 +70,114 @@ footer.footer-global
 
 .hide
   #what-size
-    .title SEE YOUR SIZE BELOW AND CROSS CHECK YOUR MEASUREMENTS!
+    .title Easy Size & Measurement Guide
+    .clearfix
+      .fleft.text
+        h6 How to Measure Yourself
+        p Please use a cloth tape measure. Keep the tape measure parallel to the floor and don’t wrap it too tight.
+        p We recommend measuring yourself in your underwear, not over clothing and wearing the same bra (or no bra) that you intend to wear with the dress. We suggest getting a friend to help you if possible & remember to stand with your feet together.
+        
+        h6 Bust
+        p Measure around the fullest part of your bust
+
+        h6 Waist
+        p Measure around your natural waistline. 
+
+        h6 Hips
+        p Measure 20cm below your waistline at the fullest part of your hips.
+
+        h6 Skirt Length
+        p Stand with your heels together, keep the tape straight and perpendicular to the floor. Measure from your natural waistline.
+      .fright
+        = image_tag '_chartsize-popup.jpg'
+    
     table.table-global
       thead
         tr
           th US Size
           th AUS Size
           th UK Size
-          th Bust
-          th Waist
-          th Hip
+          th colspan="2" Bust
+          th colspan="2" Waist
+          th colspan="2" Hip
       tbody
+        tr
+          td 
+          td 
+          td 
+          td.dimension cm
+          td.dimension Inches
+          td.dimension cm
+          td.dimension Inches
+          td.dimension cm
+          td.dimension Inches
         tr
           td 0
           td 4
           td 4
-          td 30.3" / 77cm
-          td 22" / 56cm
-          td 33.5" / 85cm
+          td 77
+          td 30.3
+          td 56
+          td 22
+          td 85
+          td 33.5
         tr
           td 2
           td 6
           td 6
-          td 32.3" / 82cm
-          td 24" / 61cm
-          td 35.4" / 90cm
+          td 82
+          td 32.3
+          td 61
+          td 24
+          td 90
+          td 35.4
         tr
           td 4
           td 8
           td 8
-          td 34.3" / 87cm
-          td 26" / 66cm
-          td 37.4" / 95cm
+          td 87
+          td 34.3
+          td 66
+          td 26
+          td 95
+          td 37.4
         tr
           td 6
           td 10
           td 10
-          td 36.2" / 92cm
-          td 28" / 71cm
-          td 39.4" / 100cm
+          td 92
+          td 36.2
+          td 71
+          td 28
+          td 100
+          td 39.4
         tr
           td 8
           td 12
           td 12
-          td 38.2" / 97cm
-          td 30" / 76cm
-          td 41.3" / 105cm
+          td 97
+          td 38.2
+          td 76
+          td 30
+          td 105
+          td 41.3
         tr
           td 10
           td 14
           td 14
-          td 40.2" / 102cm
-          td 31.9" / 81cm
-          td 43.3" / 110cm
+          td 102
+          td 40.2
+          td 81
+          td 31.9
+          td 110
+          td 43.3
         tr
           td 12
           td 16
           td 16
-          td 42.1" / 107cm
-          td 33.9" / 86cm
-          td 45.3" / 115cm
-
-
+          td 107
+          td 42.1
+          td 86
+          td 33.9
+          td 115
+          td 45.3
