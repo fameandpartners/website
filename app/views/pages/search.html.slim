@@ -4,10 +4,10 @@
 - if @query_string.blank?
   p Search query should not be blank
 - elsif @products.present?
-  .category-catalog.products
+  .category-catalog.products-list
     .row
       - @products.each do |product|
-        .grid-4
+        .grid-3
           - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
             = render 'spree/products/cached_product', product: product
 - else
