@@ -197,7 +197,7 @@ module Products
         collection_ids = @searcher.selected_taxons
         seo_collection = @searcher.seocollection rescue []
         if seo_collection.present?
-          collection_ids += seo_collection
+          collection_ids << seo_collection
         end
         #binding.pry
         selected_taxons(collection_ids, false)
