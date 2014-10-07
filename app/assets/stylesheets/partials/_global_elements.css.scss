@@ -574,15 +574,38 @@
 }
 
 
-.fast-delivery{
-	font: 400 12px/1 $fontOne;
-	text-transform: uppercase;
-	color: #FF639C;
-	padding: 4px 3px 3px;
-	display: inline-block;
-	border-top: 1px #FF639C solid;
-	border-bottom: 1px #FF639C solid;
-	-webkit-animation: hue 60s infinite linear;
+.fast-delivery-icon{
+	text-indent: -1000px;
+	overflow: hidden;
+	width: 71px;
+	height: 72px;
+	background:url('icons-corner-next-day-delivery.png') no-repeat;
+	position: absolute;
+	top: 10px;
+	left: 0px;
+}
+
+.fast-delivery-icon-right{
+	text-indent: -1000px;
+	overflow: hidden;
+	width: 71px;
+	height: 72px;
+	background:url('icons-corner-next-day-delivery-right.png') no-repeat;
+	position: absolute;
+	top: 10px;
+	right: 0px;
+}
+
+.fast-delivery-info{
+	padding: 20px 0 40px 0;
+	color: #999;
+	font-size: 13px;
+	font-family: $fontFive;
+	text-transform: none;
+	width: 50%;
+	max-width: 1140px;
+	min-width: 320px;
+	margin: 0 auto;
 }
 
 @-webkit-keyframes hue {

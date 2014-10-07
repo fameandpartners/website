@@ -1,5 +1,7 @@
 - unless controller_action_id == "index"
   = render "shared/featured_in", :locals => {:small => "_small"}
+  .fast-delivery-info
+    ' * Dresses with an "Next Day Delivery" mark have at least some size and color combinations ready to ship immediately. Available sizes and colors may be limited due to demand. Our customer service team will inform you of any shipping delays.
 footer.footer-global
   .container
     - footer_links_cache_key = [:layout, :footer, 'footer-links']
