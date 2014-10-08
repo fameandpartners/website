@@ -3,10 +3,19 @@ ruby:
   if current_site_version.is_australia?
     size_info_label = 'AUS Sizes Displayed'
     size_charge_start = 18
+
+    locale_code = 'au'
+    locale_unit_code = 'cm'
+    locale_unit_symbol = 'cm'
   else
     size_info_label = 'US Sizes Displayed'
     size_charge_start = 14
+
+    locale_code = 'us'
+    locale_unit_code = 'in'
+    locale_unit_symbol = '&#8243;'.html_safe
   end
+
 .product-info
   h6 = breadcrumbs_for(product)
   h1.product-title
@@ -27,43 +36,14 @@ ruby:
         .button data-size="#{size}" data-plussize=(is_plus_size?(product).to_s) title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
           span = size
           - if (attributes = locale_size_attributes(size)).present?
-            - unit = locale_measurement_unit
-            .size-popup
-              .size-popup-container
-                .size-numbers
-                  | AU #{attributes[:name][:au]} / US #{attributes[:name][:us]}
-                .body
-                  .dimension.bust
-                    .fleft B
-                    .fright = attributes[:attributes][:bust][unit]
-                  .dimension.waist
-                    .fleft W
-                    .fright = attributes[:attributes][:waist][unit]
-                  .dimension.hip
-                    .fleft H
-                    .fright = attributes[:attributes][:hip][unit]
-                = link_to 'More Size Detail', '#what-size', class: 'toggle-sizes btn'
+            = render 'spree/products/size_popup', attributes: attributes, link: true, locale_code: locale_code, unit_code: locale_unit_code, unit_symbol: locale_unit_symbol
       - if dropdown_sizes(product, sizes).present?
         .dropdown-button data-open="-" data-close="+" +
         - dropdown_sizes(product, sizes).each do |size|
           .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
             span = size
             - if (attributes = locale_size_attributes(size)).present?
-              - unit = locale_measurement_unit
-              .size-popup
-                .size-popup-container
-                  .size-numbers
-                    | AU #{attributes[:name][:au]} / US #{attributes[:name][:us]}
-                  .body
-                    .dimension.bust
-                      .fleft B
-                      .fright = attributes[:attributes][:bust][unit]
-                    .dimension.waist
-                      .fleft W
-                      .fright = attributes[:attributes][:waist][unit]
-                    .dimension.hip
-                      .fleft H
-                      .fright = attributes[:attributes][:hip][unit]
+              = render 'spree/products/size_popup', attributes: attributes, link: false, locale_code: locale_code, unit_code: locale_unit_code, unit_symbol: locale_unit_symbol
   .section.buy-button-section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
     = link_to 'buy now', '#', class: 'btn buy-now'
