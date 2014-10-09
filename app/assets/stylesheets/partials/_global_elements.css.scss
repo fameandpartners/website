@@ -333,7 +333,7 @@
 		top: 98%;
 		padding-top: 12px;
 		right: -10px;
-		width: 190px;
+		width: 220px;
 		text-align: center;
 		visibility: hidden;
 		opacity: 0;
@@ -357,20 +357,20 @@
 			padding: 10px;
 		}
 		.size-numbers {
-			font-size: 24px;
+			font-size: 20px;
 			font-family: $fontFive;
 		}
 		.body {
 			background: url('_chartsize-blank.jpg') no-repeat top center;
 			width: 100%;
-			height: 301px;
-			margin: 20px 0;
+			height: 240px;
+			margin: 10px 0;
 			position: relative;
 			.dimension {
 				position: absolute;
-				width: 129px;
+				width: 159px;
 				left: 50%;
-				margin-left: -65px;
+				margin-left: -80px;
 				font-size: 18px;
 				font-family: $fontFive;
 				border-bottom: dashed 2px #000;

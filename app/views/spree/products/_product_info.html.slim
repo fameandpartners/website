@@ -43,7 +43,7 @@ ruby:
           .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
             span = size
             - if (attributes = locale_size_attributes(size)).present?
-              = render 'spree/products/size_popup', attributes: attributes, link: false, locale_code: locale_code, unit_code: locale_unit_code, unit_symbol: locale_unit_symbol
+              = render 'spree/products/size_popup', attributes: attributes, link: true, locale_code: locale_code, unit_code: locale_unit_code, unit_symbol: locale_unit_symbol
   .section.buy-button-section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE
     = link_to 'buy now', '#', class: 'btn buy-now'
