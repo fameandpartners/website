@@ -12,7 +12,7 @@ Spree::BannerBox.class_eval do
                 :convert_options => { :all => '-strip -auto-orient' }
                 
   def self.big_banner
-    self.where('is_small =? and enabled =?',false,true).order('updated_at DESC').first
+    self.where('is_small =? and enabled =?',false,true).order('position ASC')
   end  
 
   def self.small_banner

@@ -89,6 +89,23 @@
 
 .home-promo{
 	margin-top: 20px; 
+	position: relative;
+
+	.slidesjs-previous{
+		position: absolute;
+		left: 10px;
+		z-index: 100;
+		top: 210px;
+		cursor: pointer;
+	}
+
+	.slidesjs-next{
+		position: absolute;
+		right: 10px;
+		z-index: 100;
+		top: 210px;
+		cursor: pointer;
+	}
 }
 
 .promo-tiles {
