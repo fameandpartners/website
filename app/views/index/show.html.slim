@@ -22,8 +22,48 @@
   .grid-container
     .home-promo
       -if @big_banner.present?
-        = link_to @big_banner.url, title: @big_banner.title do
-          = image_tag @big_banner.attachment(:big)
+        - if @big_banner.count > 1
+          javascript:
+            $(function() {
+              $('#slides').slidesjs({
+                navigation: {
+                  active: false,
+                  effect: "slide"
+                },
+                pagination: {
+                  active: false,
+                  effect: "slide"
+                },
+                play: {
+                  active: false,
+                  effect: "slide",
+                  interval: 5000,
+                  auto: true,
+                  swap: false,
+                  pauseOnHover: true,
+                  restartDelay: 2500
+                },
+                effect: {
+                  slide: {
+                    speed: 500
+                  }
+                },
+                width: 1140,
+                height: 500
+              });
+            });
+          #slides
+            .slidesjs-previous.slidesjs-navigation
+              = image_tag('icon-arrow-left.png')
+            .slidesjs-next.slidesjs-navigation
+              = image_tag('icon-arrow-right.png')
+            
+            - @big_banner.limit(10).each do |banner|
+              = link_to banner.url, title: banner.title do
+                = image_tag banner.attachment(:big)
+        - else
+          = link_to @big_banner.first.url, title: @big_banner.first.title do
+            = image_tag @big_banner.first.attachment(:big)
       -else
         = link_to collection_path(:cf => 'home'), title: 'New Collection'  do
           = image_tag "homepage/new/august2014.jpg"

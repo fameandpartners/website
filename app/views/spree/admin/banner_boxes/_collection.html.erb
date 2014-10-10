@@ -1,5 +1,5 @@
 <% if @collection.any? %>
-<table class="index sortable" id="listing_banner_boxes" data-sortable-link="<%#= update_positions_admin_banner_boxes_url() %>">
+<table class="index sortable" id="listing_banner_boxes" data-sortable-link="<%= update_positions_admin_banner_boxes_url() %>">
 	<colgroup>
 	<col style="width: 5%">
 	<col style="width: 15%;">
@@ -9,7 +9,7 @@
 </colgroup>
 <thead>
 	<tr data-hook="admin_products_index_headers">
-		<th><%= t(:thumbnail) %></th>
+		<th colspan="2"><%= t(:thumbnail) %></th>
 		<th><%= t(:category) %></th>
 		<th><%= t(:url) %></th>
 		<th data-hook="admin_products_index_header_actions" class="actions"></th>
@@ -18,6 +18,9 @@
 <tbody>
 	<% @collection.each do |banner_box| %>
 	<tr id="<%= spree_dom_id banner_box %>" data-hook="admin_banner_boxes_index_rows" class="<%= cycle('odd', 'even') %>">
+		<td class="no-border">
+			<span class="handle"></span>
+		</td>
 		<td class="align-center"><%= image_tag(banner_box.attachment(:mini)) %></td>
 		<td class="align-center"><%= banner_box.category rescue '' %></td>
 		<td class="align-center"><%= banner_box.url rescue '' %></td>
