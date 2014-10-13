@@ -84,10 +84,8 @@ Spree::ProductsController.class_eval do
         render action: 'sorting', layout: true
       end
       format.json do
-        products_html = render_to_string(
-          partial: 'spree/products/color_variants',
-          formats: [:html]
-        )
+        self.formats += [:html]
+        products_html = render_to_string(partial: 'spree/products/color_variants')
         render json: { products_html: products_html, page_info:  @page_info }
       end
     end

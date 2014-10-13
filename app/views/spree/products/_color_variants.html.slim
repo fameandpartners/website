@@ -22,6 +22,6 @@
     .row
       .page-title
         h2 These dresses can also be made in #{ @searcher.selected_color_name }
-      - @similar_color_variants.each do |variant|
+      - @similar_color_variants.each do |color_variant|
         .grid-3
           = render 'spree/products/color_variant', variant: color_variant
