@@ -88,6 +88,7 @@ Spree::ProductsController.class_eval do
         products_html = render_to_string(partial: 'spree/products/color_variants')
         render json: { products_html: products_html, page_info:  @page_info }
       end
+      format.xml  { render 'feeds/simple_products', products: @color_variants}
     end
   end
 
