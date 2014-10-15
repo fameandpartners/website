@@ -48,7 +48,8 @@ Spree::ProductsController.class_eval do
         )
         render json: { products_html: products_html, page_info:  @page_info }
       end
-    end 
+      format.xml  { render 'feeds/simple_products', products: @products }
+    end
   end
 
   # NOTE: original method check case when user comes from page

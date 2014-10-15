@@ -5,6 +5,7 @@ FameAndPartners::Application.routes.draw do
 
   get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
+  get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
