@@ -144,15 +144,15 @@
                             li = link_to 'Next Day Delivery', next_day_delivery_path, title: 'Next Day Delivery', class: "collection highlight"
 
                     .grid-7.promos
-                      h2 Current Collaborations
+                      h2 What's New
                       .tile
-                        = link_to featured_blogger_path do
-                          = image_tag "menu/lizblack.jpg"
-                        p Liz Black Collaboration
+                        = link_to next_day_delivery_path do
+                          = image_tag "menu/nextday.jpg"
+                        .label Key styles now available for next day delivery
                       .tile
                         = link_to girlfriendxfame_path, title: 'Girlfriend x Fame Collection' do
                           = image_tag "menu/girlfriend.jpg"
-                        p Girlfriend x Fame
+                        .label Girlfriend x Fame
           li.blog = link_to 'Blog', blog_path, class: 'btn'
           li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do
               span.icon-heart
