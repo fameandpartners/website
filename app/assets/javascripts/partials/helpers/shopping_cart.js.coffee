@@ -103,7 +103,7 @@ window.shopping_cart = _.extend(window.shopping_cart,
     console.log("Cart: Added to Cart.")
     
     _.delay ( ->
-      window.location.href = "/cart"
+      window.location.href = "/cart?cf=buybtn"
       return
     ), 1000
 
