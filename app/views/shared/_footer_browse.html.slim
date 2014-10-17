@@ -1,51 +1,53 @@
-.footer-browse
-  h1 More Formal Dresses
-  h2 Find more dresses by browsing these categories.
-  .arrows-line-horizontal
-  .row
-    .grid-6
-      .all-dresses
-        = link_to collection_url do
-          = image_tag('menu/footer_image.jpg')
-          .label All Dresses
-      ul.featured-links
-        li = link_to 'New Collection', collection_path, title: 'New Collection'
-        li = link_to 'Long Dresses', build_taxon_path('Long'), title: 'Long Dresses'
-        li = link_to 'Short Dresses', build_taxon_path('Short'), title: 'Short Dresses'
-        li = link_to 'Plus Size', plus_size_path, title: 'Plus Size Dresses'
-        li = link_to 'Next Day Delivery', next_day_delivery_path, title: 'Next Day Delivery'
-    .grid-6
-      .row
-        .grid-4
-          .category-title Style
-          ul.links
-            li = link_to 'Two-Piece', build_taxon_path('Two Piece'), title: "Two-Piece Dresses"
-            li = link_to 'One Shoulder', build_taxon_path('One-Shoulder'), title: "One Shoulder Dresses"
-            li = link_to 'Strapless', build_taxon_path('Strapless'), title: "Strapless Dresses"
-            li = link_to 'V-Neck', build_taxon_path('V-Neck'), title: "V-Neck Dresses"
-            li = link_to 'Split', build_taxon_path('Split'), title: "Split Dresses"
-            li = link_to 'Open Back', build_taxon_path('Open-Back'), title: "Open Back Dresses"
-            li = link_to 'Lace', build_taxon_path('Lace'), title: "Lace Dresses"
-        .grid-4
-          .category-title Event
-          ul.links
-            li = link_to 'Formal', build_taxon_path('Formals'), title: 'Formal Dresses' 
-            li = link_to 'Prom', build_taxon_path('Prom'), title: 'Prom Dresses'
-            li = link_to 'Weddings', build_taxon_path('Weddings'), title: 'Wedding Dresses'
-            li = link_to 'Homecoming', build_taxon_path('Homecoming'), title: 'Homecoming Dresses'
-            li = link_to 'Balls', build_taxon_path('Balls'), title: 'Ball Dresses'
-            li = link_to 'Sweet 16', build_taxon_path('Sweet-16'), title: 'Sweet 16 Dresses'
-            li = link_to 'Birthdays', build_taxon_path('Birthdays'), title: 'Birthday Dresses'
-            li = link_to 'Debutante', build_taxon_path('Debutante'), title: 'Debutante Dresses'
-            li = link_to 'Graduation', build_taxon_path('Graduation'), title: 'Graduation Dresses'
-        .grid-4
-          .category-title Color
-          ul.links
-            li = link_to "Black Dresses", colour_path('Black'), title: "Black Dresses"
-            li = link_to "White / Ivory Dresses", colour_path('White'), title: "White / Ivory Dresses"
-            li = link_to "Blue Dresses", colour_path('Blue'), title: "Blue Dresses"
-            li = link_to "Pink Dresses", colour_path('Pink'), title: "Pink Dresses"
-            li = link_to "Red Dresses", colour_path('Red'), title: "Red Dresses"
-            li = link_to "Pastel Dresses", colour_path('Pastel'), title: "Pastel Dresses"
-  .row
-    .info Fame & Partners for killer formal dresses you can make your own; customise colour, hem and dress fabrics on evening gowns, prom, party and bridesmaids dresses with free fashion stylists to help.
+- products_footer_cache_key = [:layout, :products, 'footer_browse']
+- cache products_footer_cache_key, expires_in: configatron.cache.expire.long do
+  .footer-browse
+    h1 More Formal Dresses
+    h2 Find more dresses by browsing these categories.
+    .arrows-line-horizontal
+    .row
+      .grid-6
+        .all-dresses
+          = link_to collection_url do
+            = image_tag('menu/footer_image.jpg')
+            .label All Dresses
+        ul.featured-links
+          li = link_to 'New Collection', collection_path, title: 'New Collection'
+          li = link_to 'Long Dresses', build_collection_product_path('Long', nil), title: 'Long Dresses'
+          li = link_to 'Short Dresses', build_collection_product_path('Short', nil), title: 'Short Dresses'
+          li = link_to 'Plus Size', plus_size_path, title: 'Plus Size Dresses'
+          li = link_to 'Next Day Delivery', next_day_delivery_path, title: 'Next Day Delivery'
+      .grid-6
+        .row
+          .grid-4
+            .category-title Style
+            ul.links
+              li = link_to 'Two-Piece', build_collection_product_path('Two Piece', nil), title: "Two-Piece Dresses"
+              li = link_to 'One Shoulder', build_collection_product_path('One-Shoulder', nil), title: "One Shoulder Dresses"
+              li = link_to 'Strapless', build_collection_product_path('Strapless', nil), title: "Strapless Dresses"
+              li = link_to 'V-Neck', build_collection_product_path('V-Neck', nil), title: "V-Neck Dresses"
+              li = link_to 'Split', build_collection_product_path('Split', nil), title: "Split Dresses"
+              li = link_to 'Open Back', build_collection_product_path('Open-Back', nil), title: "Open Back Dresses"
+              li = link_to 'Lace', build_collection_product_path('Lace', nil), title: "Lace Dresses"
+          .grid-4
+            .category-title Event
+            ul.links
+              li = link_to 'Formal', build_collection_product_path('Formals', nil), title: 'Formal Dresses' 
+              li = link_to 'Prom', build_collection_product_path('Prom', nil), title: 'Prom Dresses'
+              li = link_to 'Weddings', build_collection_product_path('Weddings', nil), title: 'Wedding Dresses'
+              li = link_to 'Homecoming', build_collection_product_path('Homecoming', nil), title: 'Homecoming Dresses'
+              li = link_to 'Balls', build_collection_product_path('Balls', nil), title: 'Ball Dresses'
+              li = link_to 'Sweet 16', build_collection_product_path('Sweet-16', nil), title: 'Sweet 16 Dresses'
+              li = link_to 'Birthdays', build_collection_product_path('Birthdays', nil), title: 'Birthday Dresses'
+              li = link_to 'Debutante', build_collection_product_path('Debutante', nil), title: 'Debutante Dresses'
+              li = link_to 'Graduation', build_collection_product_path('Graduation', nil), title: 'Graduation Dresses'
+          .grid-4
+            .category-title Color
+            ul.links
+              li = link_to "Black Dresses", colour_formal_dresses_path('Black'), title: "Black Dresses"
+              li = link_to "White / Ivory Dresses", colour_formal_dresses_path('White'), title: "White / Ivory Dresses"
+              li = link_to "Blue Dresses", colour_formal_dresses_path('Blue'), title: "Blue Dresses"
+              li = link_to "Pink Dresses", colour_formal_dresses_path('Pink'), title: "Pink Dresses"
+              li = link_to "Red Dresses", colour_formal_dresses_path('Red'), title: "Red Dresses"
+              li = link_to "Pastel Dresses", colour_formal_dresses_path('Pastel'), title: "Pastel Dresses"
+    .row
+      .info Fame & Partners for killer formal dresses you can make your own; customise colour, hem and dress fabrics on evening gowns, prom, party and bridesmaids dresses with free fashion stylists to help.
