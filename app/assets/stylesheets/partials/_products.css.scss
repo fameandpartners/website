@@ -688,3 +688,99 @@
 	
 }
 
+.footer-browse{
+	position: relative;
+	max-width: 820px;
+	margin: 40px auto;
+	text-align: center;
+	@include clearfix;
+	ul { list-style: none; margin:0; padding: 0;}
+	li { margin: 10px 0; text-align:left;}
+	
+	h1{
+		font: 400 38px/1em $fontThree;
+		background: #fff;
+		display: inline-block;
+		padding: 3px 7px;
+	}
+	
+	h2{
+		font: 400 18px/1em $fontTwo;
+		background: #fff;
+		padding: 3px 7px;
+		font-style: italic;
+		margin-bottom: 30px;
+		text-transform: none;
+	}
+
+	.arrows-line-horizontal{
+		position: absolute;
+		top: 20px;
+		width: 100%;
+		z-index: -1;
+	}	
+
+	.all-dresses{
+		width: 150px;
+		position: relative;
+		text-decoration: none;
+		float: left;
+
+		.label{
+			font: 600 16px/1em $fontOne;
+			position: absolute;
+			width: 120px;
+			left: 15px;
+			bottom: -9px;
+			padding: 5px 0 4px 0;
+			border-bottom: 2px solid #000;
+			background: #fff;
+		}
+	}
+
+	.featured-links{
+		margin: 0 0 0 170px;
+		padding: 0;
+
+		li{
+			margin: 12px 0;
+		}
+
+		li:first-child{
+			margin: 0px;
+		}
+
+		a{
+			border-bottom: 2px solid #000;
+			padding: 8px 0 4px;
+			font: 600 12px/1em $fontOne;
+			text-decoration: none;
+			width: 60%;
+			display: block;
+		}
+	}
+
+	.category-title{
+		font: 600 16px/1em $fontOne;
+		text-align: left;
+		margin-bottom: 10px;
+	}
+
+	.links{
+		a{
+			font: 400 16px/1em $fontThree;			
+			text-decoration: none;
+		}
+	}
+
+	.info{
+		width: 70%;
+		margin: 40px auto 0; 
+		font: 400 18px/1.3em $fontTwo;
+		font-style: italic;
+		text-transform: none;
+		color: #666;
+	}
+
+
+}

@@ -75,6 +75,7 @@
         = select_tag 'product_order', options, class: 'selectbox', prompt: 'Sort By'
 
 = render 'color_variants'
+= render 'shared/footer_browse'
 .m-pixel
   = raw @marketing_pixels
 script type="text/javascript" id="adacadoPixel" src="//pixel.adacado.com/1000668?segment=category&category=#{@page_info[:banner_title]}"
