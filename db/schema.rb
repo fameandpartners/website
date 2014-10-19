@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141013211312) do
+ActiveRecord::Schema.define(:version => 20141019103649) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -400,6 +400,11 @@ ActiveRecord::Schema.define(:version => 20141013211312) do
     t.string   "title"
   end
 
+  create_table "option_values_option_values_groups", :id => false, :force => true do |t|
+    t.integer "option_value_id"
+    t.integer "option_values_group_id"
+  end
+
   create_table "payment_requests", :force => true do |t|
     t.integer  "order_id"
     t.string   "recipient_full_name"
@@ -775,6 +780,14 @@ ActiveRecord::Schema.define(:version => 20141013211312) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.boolean  "use_in_customisation", :default => false
+  end
+
+  create_table "spree_option_values_groups", :force => true do |t|
+    t.integer  "option_type_id"
+    t.string   "name"
+    t.string   "presentation"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "spree_option_values_variants", :id => false, :force => true do |t|

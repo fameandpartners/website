@@ -17,7 +17,7 @@ module Products
         if colour.blank?
           search
         else
-          search(colors_with_similar(:very_close).map(&:id))
+          search(colour.map(&:id))
         end
       end
     end
@@ -332,41 +332,37 @@ module Products
       return r
     end
 
-    def prepare_colours(colour_names)
-      return [] if colour_names.blank?
-      colours = Array.wrap(colour_names).collect{|colour| colour.to_s.downcase }
+    def prepare_colours(color_names)
+      color_names = Array.wrap(color_names).map{ |name| name.to_s.downcase }
+      option_type = Spree::OptionType.color
 
-      if colours.size.eql?(1)
-        color_names = case colours.first
-                        when 'blue'
-                          %w( blue navy )
-                        when 'pink'
-                          %w( pink blush-pink )
-                        when 'red'
-                          %w( red burgundy )
-                        when 'pastel'
-                          %w( aqua nude lilac pale-blue pale-pink pale-grey pale-lavender pale-blush blush peach cream-and-blue dusty-pink silver sherbet blush-pink lavender )
-                        else
-                          colours
-                      end
-      else
-        color_names = colours
-      end
+      if color_names.blank?
+        []
+      elsif color_names.size.eql?(1)
+        group = Spree::OptionValuesGroup.where(
+          ['option_type_id = ? AND LOWER(TRIM(name)) = ?', option_type.id, color_names.first]
+        ).first
 
-      if color_names.size.eql?(1)
-        Spree::OptionValue.where("lower(name) = ?", color_names.first).to_a
+        if group.present?
+          colors = group.option_values
+        else
+          colors = option_type.option_values.where(
+            ['LOWER(TRIM(name)) = ?', color_names.first]
+          )
+        end
       else
+        conditions = ['LOWER(TRIM(name)) IN (?)', color_names]
         whens = color_names.map do |color_name|
           "WHEN lower(name) = #{ActiveRecord::Base.connection.quote(color_name)} THEN #{color_names.index(color_name)}"
         end
+        orderings = "CASE #{whens.join(' ')} END ASC"
 
-        ordering_sql = "CASE #{whens.join(' ')} END ASC"
-
-        Spree::OptionValue.
-          where("lower(name) IN (?)", color_names).
-          order(ordering_sql).
-          to_a
+        colors = option_type.option_values.
+          where(conditions).
+          order(orderings)
       end
+
+      colors.to_a
     end
 
     def prepare_bodyshape(bodyshapes)
