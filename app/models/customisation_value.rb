@@ -58,7 +58,11 @@ class CustomisationValue < ActiveRecord::Base
   end
 
   def price
-    read_attribute('price').to_f
+    if presentation.downcase.include?('lace')
+      read_attribute('price').to_f
+    else
+      Float(0)
+    end
   end
 
   def display_price
