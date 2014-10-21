@@ -58,6 +58,7 @@ class CustomisationValue < ActiveRecord::Base
   end
 
   def price
+    #TODO: FREECUSTOMISATION revert this when free customisations is complete
     if presentation.downcase.include?('lace')
       read_attribute('price').to_f
     else
