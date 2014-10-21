@@ -128,34 +128,41 @@ module Products
       #mind the spaces in the constructed strings!
       r = nil
 
+      # The way titles should work:
+      # Black prom dresses //colour
+      # Black strapless formal dresses //colour + style
+      # Black strapless homecoming dresses // colour + style + event
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        color = " #{seo_colour} dresses "
+        color = seo_colour
       else
         color = ""
       end
 
       
       taxon = selected_categories.first
-
       
       t_root = ""
       t_root = taxon.parent.name if taxon.present?
 
+      # strapless formal dresses // style
+      # strapless homecoming dresss // style + event
       if t_root == "Style"
-        style = " #{taxon.name}"
+        style = taxon.name
       else
-        style = "in a variety of styles"
+        style = ""
       end
 
+      # homecoming dresses // event
       if t_root == "Event"
-        event = "#{taxon.name} "
+        event = taxon.name
       else
-        event = "Formal "
+        event = I18n.t('words.prom')
       end
 
-      bodyshape = ", best for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
+      # ignore body shape for no, too much information in the title.
+      #bodyshape = ", best for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
 
-      r =  "#{event}Dresses:#{color}#{style}#{bodyshape}"
+      r =  "#{color} #{style} #{event} dresses"
 
       return r.capitalize
     end

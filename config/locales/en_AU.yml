@@ -35,6 +35,7 @@ en-AU:
     color: 'colour'
     customize: 'customise'
     customizing: 'customising'
+    prom: 'formal'
   views:
     footer:
       style_inspiration:
