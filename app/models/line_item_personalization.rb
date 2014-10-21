@@ -110,7 +110,8 @@ class LineItemPersonalization < ActiveRecord::Base
 
     return result if Spree::Config[:free_customisations]
 
-    result += 16.0 if !basic_color?
+    #TODO: FREECUSTOMISATION Uncomment this when ready to put back normal customisation pricing
+    #result += 16.0 if !basic_color?
 
     customization_values.each do |customization_value|
       result += customization_value.price
