@@ -184,6 +184,11 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
+    get '/style-consultation' => 'style_consultations#new'
+    resource 'style-consultation', as: 'style_consultation', only: [:new, :create] do
+      get 'success'
+    end
+
     # testing marketing_email
     get '/email/comp' => 'competition_mailer#marketing_email'
 
