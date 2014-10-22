@@ -20,7 +20,7 @@ footer.footer-global
           ul
             li = link_to 'FAQs', faqs_path
             li = link_to 'TERMS', terms_path
-            li = mail_to "team@fameandpartners.com", "Get Styling Advice", subject: "Book a Personal Stylist"
+            li = link_to "Get Styling Advice", style_consultation_path
         /
           # TODO: Resinstate after tv spot traffic
           - if spree_user_signed_in?

@@ -515,6 +515,47 @@
 	}
 }
 
+.style-consultation-page {
+	text-align: center;
+	font: 100 16px/1.2 $fontFive;
+	h1 {
+		font: italic 42px/1 $fontTwo;
+	}
+	h2 {
+		font: 400 18px/1 $fontFive;
+		margin: 20px 0 40px 0;
+	}
+	.row { 
+		font-size: 0;
+		margin: 60px;
+		text-align: center;
+	}
+	.offer{
+		font: 400 28px/1 $fontThree;
+	}
+
+	.apply-now{
+		width: 520px;
+		margin: 0 auto;
+		background-color: #fbf5f3;
+
+		.form-global{
+			width: 70%;
+			text-align: center;
+			margin: 30px auto;
+		}
+	}
+
+	.input{
+		padding: 0 0 20px 0;
+	}
+
+	label{
+		font-size: 15px; 
+		margin-bottom: 10px;
+	}
+}
+
 .why-us-page {
 	text-align: center;
 	font: 100 16px/1.2 $fontFive;
