@@ -348,7 +348,7 @@ module ApplicationHelper
 
     url = paypal_express_url(payment_method_id: paypal_payment_method.id, protocol: request.protocol)
     link_to(
-      image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"),
+      image_tag('checkout/shopping_bag_paypal.png'),
       url, method: :post, id: "paypal_button"
     )
   end

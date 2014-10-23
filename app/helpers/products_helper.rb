@@ -275,10 +275,12 @@ module ProductsHelper
   end
 
   def product_move_to_wishlist_link(variant, options = {})
+    size = options[:size] ||= ''
+
     if spree_user_signed_in?
-      link_to '+ move to wish list', '#', data: { id: variant.id }, class: 'move-to-wishlist btn empty border'
+      link_to '+ move to wish list', '#', data: { id: variant.id }, class: "move-to-wishlist btn #{size} empty border"
     else
-      link_to '+ move to wish list', spree_signup_path, class: 'btn empty border'
+      link_to '+ move to wish list', spree_signup_path, class: "btn #{size} empty border"
     end
   end
 

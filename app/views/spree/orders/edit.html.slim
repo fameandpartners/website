@@ -1,216 +1,117 @@
-.wrap
-  .shopping-bag-page
-    .inner
-      h1
-        span.title shopping Bag
-        - unless sale_active?
-          .shipping-icon
-            .icon
-              span.icon-dollar
-              span.icon-erase
-            ' Free shipping
-  
-  - if @order.line_items.empty?
-    .empty-cart(data-hook="empty_cart")
-      p = t(:your_cart_is_empty)
-      p = link_to t(:continue_shopping), collection_path, class: 'button continue'
-  - else
-    table.cart-table
-      thead
-        tr
-          th.column-1 Item description
-          th.column-2 Details
-          th.column-3 Price
-      tbody
-        - @order.line_items.each do |line_item|
-          - variant = line_item.variant
-          - product = variant.product
-          tr data-id='#{variant.id}' data-line-item-id='#{line_item.id}'
-            td.column-1
-              .product-info
-                .image
-                  = link_to image_tag(line_item_image_url(line_item, :product), itemprop: 'image', width: 136, height: 200, alt: product.name), collection_product_path(product)
-                .desc
-                  .name = link_to product.name, collection_product_path(product), target: 'blank'
-                  .text = line_item_description(variant)
-                .buttons
-                  = link_to '#', data: { id: variant.id }, class: 'remove-item-from-cart  btn empty border' do
-                    span.icon-trash
-                  = product_move_to_wishlist_link(variant, title: 'Move to wishlist')
-            td.column-2
-              .details-box
-                .static
-                  - unless line_item.personalization.present?
-                    .line
-                      .label Color
-                      .value = variant.dress_color.try(:name)
-                    .line
-                      .label Size
-                      .value = variant.dress_size.try(:name)
-                  - else
-                    .line
-                      .label Color
-                      .value = line_item.personalization.color.try(:name)
-                    .line
-                      .label Size
-                      .value = line_item.personalization.size
-                    .line
-                      .label Personalizations
-                      .value
-                    - line_item.personalization.customization_values.each do |value|
-                      .line
-                        /.label = value.customisation_type.presentation
-                        .label
-                        .value = value.presentation
-                  .line
-                    .label Quantity
-                    .value = line_item.quantity
-                  .line
-                    .label Estimated Delivery
-                    .value = product.delivery_time_as_string
-                .edit
-                  - if line_item.personalization.present?
-                    = link_to 'Edit item', personalization_product_path(product), class: 'btn empty border'
-                  - else
-                    - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
-                    = link_to 'Edit item', '#', class: 'edit-link btn empty border', data: link_data
-            td.column-3
-              .pricing
-                =' current_order.currency
-                = price_for_line_item(line_item)    
-
-    .cart-summary
-      .card-info
-        .payment.fleft
-          .title 
-            ' Payment 
-            br
-            ' methods
-          .desc = image_tag 'icons-cards.png', width: 200, height: 32, alt: 'Payment Methods'
-        - unless (sale_active? or @order.has_personalized_items?)
-          .promocode.fright.promo-block
-            = form_for @order, remote: true, html: {class: 'form-global'} do |f|
-              = f.submit 'Redeem', style: 'float: right;', class: 'btn empty border'
-              = f.text_field :coupon_code, style: "width: 110px;", placeholder: 'promocode'
+.shopping-bag-page
+  .wrap
+    .row
+      .grid-9
+        .grid-6
+          h1 Shopping Bag
+        .grid-6
+          = image_tag 'checkout/shopping_bag_icons.png', alt: 'Security and Payment Methods', class: 'fright'
+  .wrap 
+    .row
+      .grid-9
+        .separator
+        - if @order.line_items.empty?
+        .empty-cart(data-hook="empty_cart")
+          p = t(:your_cart_is_empty)
+          p = link_to t(:continue_shopping), collection_path, class: 'button continue'
         - else
-          .promocode.fright.promo-block
-            .title style='width: 210px;' 
-              h4 Promocode
-              ' Sorry we don't offer discounts on customized dresses or sale items.
-        .clearfix      
-        .security
-          .title 
-            ' Full 
-            br
-            ' security
-          .desc = image_tag 'comodo-secure.png', alt: "Comodo SSl Security", width: 101, height: 32      
-      .summary.grid-25.order-summary
-        = render 'summary'
-    .continue-buy
-      .fleft = link_to '&lt; Continue shopping'.html_safe, collection_path, class: 'btn empty border continue-shopping'
-      .fright.checkout
-        = form_for @order, url: update_cart_path do |f|
-          = f.button :checkout, name: 'checkout', class: 'buy-now btn pink'
-        - if (paypal_button_html = paypal_express_button).present?
-          .or or
-          .paypal
-            = paypal_button_html
-      .fright
-        .ask-parents-block
-          = link_to 'Invite someone to pay', '#', class: 'btn empty border buy-now ask-parents ask-parent-to-pay-button'      
-
-    / .cart-page
-      .cart-labels.grid-container
-        .grid-50.name Item description
-        .grid-30.details Details
-        .grid-20.price Price
-      ul.items
-        - @order.line_items.each do |line_item|
-          - variant = line_item.variant
-          - product = variant.product
-          li.item.grid-container data-id='#{variant.id}' data-line-item-id='#{line_item.id}'
-            .grid-50.description
-              .image
-                = link_to product_image(product, itemprop: "image", width: 136, height: 200, alt: product.name), collection_product_path(product)
-                .remove = link_to 'Remove from bag', '#', data: { id: variant.id }, class: 'remove-item-from-cart'
-              .desc
-                .name = link_to product.name, collection_product_path(product), target: 'blank'
-                .text = line_item_description(variant)
-                .wishlist = product_move_to_wishlist_link(variant)
-            .grid-30.details
-              .static-dynamic-block
-                .static
-                  - unless line_item.personalization.present?
-                    .line
-                      .label Color
-                      .value
-                        .color{class=variant.dress_color.try(:name)}
-                    .line
-                      .label Size
-                      .value = variant.dress_size.try(:name)
-                  - else
-                    .line
-                      .label Color
-                      .value
-                        .color style="background-color: #{line_item.personalization.color};"
-                    .line
-                      .label Size
-                      .value = line_item.personalization.size
-                    - line_item.personalization.customization_values.each do |value|
-                      .line
-                        .label = value.customisation_type.presentation
-                        .value = value.presentation
-                  .line
-                    .label Quantity
-                    .value = line_item.quantity
-                  .line
-                    .label Estimated Delivery
-                    .value = product.delivery_time_as_string
-                    - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
-                  .edit
-                    - unless line_item.personalization.present?
-                      = link_to 'Edit item', '#', class: 'edit-link', data: link_data
+          table.cart-table
+            thead
+              tr
+                th.column-1 Product description
+                th.column-2 Style / Quantity
+            tbody
+              - @order.line_items.each do |line_item|
+                - variant = line_item.variant
+                - product = variant.product
+                tr data-id='#{variant.id}' data-line-item-id='#{line_item.id}'
+                  td.column-1
+                    .product-info
+                      .image
+                        = link_to image_tag(line_item_image_url(line_item, :product), itemprop: 'image', width: 136, height: 200, alt: product.name), collection_product_path(product)
+                      .desc
+                        .name = link_to product.name, collection_product_path(product), target: 'blank'
+                        .text = line_item_description(variant)
+                      .buttons
+                        - if line_item.personalization.present?
+                          = link_to 'Edit item', personalization_product_path(product), class: 'btn empty small border'
+                        - else
+                          - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
+                          = link_to 'Edit item', '#', class: 'edit-link btn small empty border', data: link_data
+                        = product_move_to_wishlist_link(variant, title: 'Move to wishlist', size:  'small')
+                        = link_to '#', data: { id: variant.id }, class: 'remove-item-from-cart  btn empty small border lighter' do
+                          span.icon-trash
+                  td.column-2
+                    .details-box
+                      .static
+                        - unless line_item.personalization.present?
+                          .smaller
+                            .line
+                              .label Color
+                              .value = variant.dress_color.try(:name)
+                            .line
+                              .label Size
+                              .value = variant.dress_size.try(:name)
+                            .line
+                              .label Quantity
+                              .value = line_item.quantity
+                        - else
+                          .smaller
+                            .line
+                              .label Color
+                              .value = line_item.personalization.color.try(:name)
+                            .line
+                              .label Size
+                              .value = line_item.personalization.size
+                            .line
+                              .label Quantity
+                              .value = line_item.quantity
+                          .separator.light
+                          .line
+                            .label Customizations
+                            .value
+                          - line_item.personalization.customization_values.each do |value|
+                            .line
+                              .label.strong = value.presentation
+                          .separator.light
+                          .smaller
+                            .line
+                              .label Estimated Delivery
+                              .value 10 - 14 Business Days
+                        .separator.light
+                        .pricing
+                          = price_for_line_item(line_item)
+                    
+          .row
+            .separator
+            .grid-12
+              .base-nav
+                .grid-6
+                  .fleft = link_to '&lt; Continue shopping'.html_safe, collection_path, class: 'btn empty border continue-shopping'
+                .grid-6
+                  .fright
+                    - unless (sale_active? or @order.has_personalized_items?)
+                      .promocode.fright.promo-block
+                        = form_for @order, remote: true, html: {class: 'form-global'} do |f|
+                          = f.submit 'Redeem', style: 'float: right;', class: 'btn empty border'
+                          = f.text_field :coupon_code, style: "width: 110px;", placeholder: 'promocode'
                     - else
-                      = link_to 'Edit item', personalization_product_path(product)
-            .grid-20.price
-              .pricing
-                = current_order.currency
-                = price_for_line_item(line_item)
-              /.style-notes
-                input type="checkbox" name="note"
-                label
-                  ' Add Style Notes
-                  span $4.55
-
-      .promo-summary.grid-container
-        .grid-75
-          .promo-block
-            .columns.grid-container
-              .column.grid-25
-                .title Full security
-                .desc = image_tag 'comodo-secure.png', alt: "Comodo SSl Security", width: 101, height: 32
-              .column.grid-45
-                .title Payment methods
-                .desc = image_tag 'icons-cards.png', width: 270, height: 32, alt: 'Payment Methods'
-              - unless (sale_active? or @order.has_personalized_items?)
-                .column.grid-30
-                  .title Promocode
-                  .desc
-                    = form_for @order, remote: true do |f|
-                      = f.submit 'Redeem', style: 'float: right;'
-                      = f.text_field :coupon_code, style: "width: 110px;"
-        .summary.grid-25.order-summary
-          = render 'summary'
-      .continue-buy.grid-container
-        .grid-75
-          .fleft = link_to 'Continue shopping', products_path, class: 'continue-shopping'
-          .fright
+                      .promocode.fright.promo-block
+                        .title style='width: 210px;' 
+                          h4 Promocode
+                          ' Sorry we don't offer discounts on customized dresses or sale items.
+      .grid-3
+        .cart-summary
+          .summary
+            = render 'summary'
+            .continue-buy
+              .checkout
+                = form_for @order, url: update_cart_path do |f|
+                  = f.button :checkout, name: 'checkout', class: 'buy-now btn pink'
+                - if (paypal_button_html = paypal_express_button).present?
+                  .or or
+                  .paypal
+                    = paypal_button_html
             .ask-parents-block
-              = link_to 'Invite someone to pay', '#', class: 'buy-now ask-parents ask-parent-to-pay-button'
-        .grid-25
-          = form_for @order, url: update_cart_path do |f|
-            = f.button :checkout, name: 'checkout', class: 'buy-now'
-          - if (paypal_button_html = paypal_express_button).present?
-            div
-              .or or
-              .paypal = paypal_button_html
+              = link_to 'Invite someone to pay', '#', class: 'buy-now ask-parents ask-parent-to-pay-button'      
+
