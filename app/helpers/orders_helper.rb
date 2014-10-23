@@ -26,7 +26,7 @@ module OrdersHelper
     if order.shipment && order.shipment.display_amount && order.shipment.display_amount.money.cents > 0
       content_tag('span', order.currency) + order.shipment.display_amount
     else
-      'Free'
+      'Free Shipping'
     end
   end
 
