@@ -11,7 +11,7 @@ module Feeds
             xml.product do
               xml.tag! 'Code', item[:product].sku
               xml.tag! 'Category', { 'xml:space' => 'preserve' }, 'Clothing'
-              xml.tag! 'Name', item[:product].name
+              xml.tag! 'Name', item[:title]
               xml.tag! 'Description', helpers.strip_tags(item[:description])
               xml.tag! 'Product_URL', "http://#{@config[:domain]}#{collection_product_path(item[:product])}"
               xml.tag! 'Price', item[:price]
