@@ -42,6 +42,9 @@ config/database.yml
 # ignore cache
 /.sass-cache
 
+# Ignore shopping data feeds
+/public/feeds
+
 *.orig
 
 ~/Library/Application Support/Sublime Text 3/Packages/
