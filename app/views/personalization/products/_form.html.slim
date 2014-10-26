@@ -18,9 +18,7 @@
                     ' Free!
                     
                 - else
-                  / TODO: FREECUSTOMISATION Revert when free customisation is complete
-                    .price $16
-                  .price FREE THIS WEEK
+                  .price $16
               - options = color_options_for_select_from_options_values(product.customisation_colors)
               - if options.present? && options.length > 0
                 - prompt = t('views.pages.personalization.products.show.tabs.basics.placeholders.custom_color')
@@ -48,9 +46,6 @@
                       /p Free for limited time only!
                     - else
                       p.price = value.display_price
-                  / TODO: FREECUSTOMISATION Revert when free customisation is complete
-                  - else
-                    p.price FREE THIS WEEK
 
 
 
