@@ -1,4 +1,4 @@
- <tr data-id='<%= @line_item.variant_id %>' data-line-item-id='<%= @line_item.id %>'>
+<tr data-id='<%= @line_item.variant_id %>' data-line-item-id='<%= @line_item.id %>'>
   <td class="column-1">
     <div class="product-info">
       <div class="image">
@@ -13,38 +13,34 @@
         <div class="text"><%= @line_item.product_description %></div>
       </div>
       <div class="buttons">
-        <a href="#" class="remove-item-from-cart btn empty border" data-id="<%= @line_item.variant_id %>"><span class="icon-trash"></span></a><a href="#" class="move-to-wishlist btn empty border" data-id="<%= @line_item.variant_id %>">+ move to wish list</a>
+        <a href="#" class="edit-link btn small empty border" data-id="<%= @line_item.id %>" data-quantity="<%= @line_item.quantity %>" data-variant="<%= @line_item.variant_id %>">Edit item</a>
+        <a href="#" class="move-to-wishlist btn small empty border" data-id="<%= @line_item.variant_id %>">+ move to wish list</a>
+        <a href="#" class="remove-item-from-cart btn small empty border lighter" data-id="<%= @line_item.variant_id %>"><span class="icon-trash"></span></a>
       </div>
     </div>
   </td>
   <td class="column-2">
     <div class="details-box">
       <div class="static">
-        <div class="line">
-          <div class="label">Color</div>
-          <div class="value"><%= @line_item.product_color %></div>
-        </div>
-        <div class="line">
-          <div class="label">Size</div>
-          <div class="value"><%= @line_item.product_size %></div>
-        </div>
-        <div class="line">
-          <div class="label">Quantity</div>
-          <div class="value"><%= @line_item.quantity %></div>
-        </div>
-        <div class="line">
-          <div class="label">Estimated Delivery</div>
-          <div class="value"><%= @line_item.product_delivery_time %></div>
+        <div class="smaller">
+          <div class="line">
+            <div class="label">Color</div>
+            <div class="value"><%= @line_item.product_color %></div>
+          </div>
+          <div class="line">
+            <div class="label">Size</div>
+            <div class="value"><%= @line_item.product_size %></div>
+          </div>
+          <div class="line">
+            <div class="label">Quantity</div>
+            <div class="value"><%= @line_item.quantity %></div>
+          </div>
+          <div class="separator light"></div>
+          <div class="pricing">
+            <%= @line_item.money %>
+          </div>
         </div>
       </div>
-      <div class="edit">
-        <a href="#" class="edit-link btn empty border" data-id="<%= @line_item.id %>" data-quantity="<%= @line_item.quantity %>" data-variant="<%= @line_item.variant_id %>">Edit item</a>
-      </div>
-    </div>
-  </td>
-  <td class="column-3">
-    <div class="pricing">
-      <%= @order.currency %> <%= @line_item.money %>
     </div>
   </td>
 </tr>
