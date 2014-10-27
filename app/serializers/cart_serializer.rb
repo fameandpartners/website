@@ -20,7 +20,7 @@ class CartSerializer < ActiveModel::Serializer
     if object.shipment.present? && object.shipment.amount.to_i > 0
       object.shipment.display_amount.to_s
     else
-      nil # JST will set FREE
+      'Free Shipping' # JST will set FREE
     end
   end
 

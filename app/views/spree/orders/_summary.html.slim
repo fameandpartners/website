@@ -1,23 +1,24 @@
-.title Summary
-.line
-  .label Subtotal
-  .value
-    = @order.display_item_total
-.line
-  .label Shipping
-  .value
-    = show_order_shipment_total(@order)
-- unless sale_active?
+.order-summary
+  .title Summary
   .line
-    .label Promotion
+    .label Subtotal
     .value
-      = show_order_promotion_total(@order)
-.separator.light
-.line.totals
-  .label Total
-  .value.pink
-    = @order.display_total
-  - if current_site_version.is_australia?
-    .taxes aus dollars including gst
-  - else
-    .taxes us dollars
+      = @order.display_item_total
+  .line
+    .label Shipping
+    .value
+      = show_order_shipment_total(@order)
+  - unless sale_active?
+    .line
+      .label Promotion
+      .value
+        = show_order_promotion_total(@order)
+  .separator.light
+  .line.totals
+    .label Total
+    .value.pink
+      = @order.display_total
+    - if current_site_version.is_australia?
+      .taxes aus dollars including gst
+    - else
+      .taxes us dollars
