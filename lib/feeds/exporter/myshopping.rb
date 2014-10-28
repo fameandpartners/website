@@ -1,6 +1,10 @@
 module Feeds
   module Exporter
     class Myshopping < Base
+      def export_file_name
+        'myshopping.xml'
+      end
+
       def export
         output = ''
         xml = Builder::XmlMarkup.new(target: output)
@@ -14,7 +18,7 @@ module Feeds
               xml.tag! 'Name', item[:product].name
               xml.tag! 'Description', helpers.strip_tags(item[:description])
               xml.tag! 'Product_URL', "http://#{@config[:domain]}#{collection_product_path(item[:product])}"
-              xml.tag! 'Price', item[:price]
+              xml.tag! 'Price', helpers.number_to_currency(item[:price], unit: '')
               xml.tag! 'Image_URL', item[:image]
               xml.tag! 'Brand', 'Fame & Partners'
               xml.tag! 'InStock', 'Y'
@@ -22,8 +26,7 @@ module Feeds
           end
         end
 
-        file_path = File.join(Rails.root, '/public/feeds/products/myshopping.xml')
-        file = File.open(file_path, 'w')
+        file = File.open(export_file_path, 'w')
         file.write(output.to_s)
         file.close
       end

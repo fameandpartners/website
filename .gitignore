@@ -43,7 +43,8 @@ config/database.yml
 /.sass-cache
 
 # Ignore shopping data feeds
-/public/feeds
+/public/au
+/public/us
 
 *.orig
 

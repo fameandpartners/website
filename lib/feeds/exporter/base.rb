@@ -8,6 +8,16 @@ module Feeds
 
       private
 
+      def export_file_path
+        path_parts = []
+        path_parts << Rails.root
+        path_parts << '/public/'
+        path_parts << current_site_version.permalink
+        path_parts << '/feeds/products/'
+        path_parts << export_file_name
+        File.join(path_parts)
+      end
+
       def current_currency
         current_site_version.currency
       end
@@ -21,14 +31,13 @@ module Feeds
       end
 
       def collection_product_path(product)
-        site_version_prefix = current_site_version.permalink
-        path_parts = [site_version_prefix, 'dresses', 'p']
+        path_parts = ['dresses', 'p']
         if product.respond_to?(:descriptive_url)
           path_parts << product.descriptive_url
         else
           path_parts << descriptive_url(product)
         end
-        path =  "/" + path_parts.compact.join('/')
+        path =  '/' + path_parts.compact.join('/')
 
         url_without_double_slashes(path)
       end

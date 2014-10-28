@@ -92,7 +92,7 @@ module Feeds
         availability: variant.in_stock? ? 'in stock' : 'out of stock',
         title: "#{product.name} - Size #{size} - Colour #{color}",
         description: product.description,
-        price: "#{current_currency} #{variant.zone_price_for(current_site_version).display_price}",
+        price: variant.zone_price_for(current_site_version).price,
         google_product_category: "Apparel & Accessories > Clothing > Dresses",
         id: "#{product.id.to_s}-#{variant.id.to_s}",
         group_id: product.id.to_s,
@@ -109,8 +109,8 @@ module Feeds
 
       if images.present?
         {
-          image: get_absolute_image_url(images.first.attachment),
-          images: images.from(1).map{|i| get_absolute_image_url(i.attachment)}
+          image: absolute_image_url(images.first.attachment),
+          images: images.from(1).map{|i| absolute_image_url(i.attachment) }
         }
       else
         {
@@ -126,12 +126,16 @@ module Feeds
       elsif product.weight.present?
         return product.weight?
       elsif
-      product.property("weight")
+        product.property("weight")
       end
     end
 
-    def get_absolute_image_url(path)
-      "http://#{@config[:domain]}#{path}"
+    def absolute_image_url(path)
+      if Rails.env.production?
+        path
+      else
+        "http://#{@config[:domain]}#{path}"
+      end
     end
   end
 end
