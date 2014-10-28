@@ -1,6 +1,10 @@
 module Feeds
   module Exporter
     class Google < Base
+      def export_file_name
+        'google.xml'
+      end
+
       def export
         output = ''
         xml = Builder::XmlMarkup.new(target: output)
@@ -23,7 +27,7 @@ module Feeds
 
                 xml.tag! "g:id", item[:id]
                 xml.tag! "g:condition", "new"
-                xml.tag! "g:price", item[:price]
+                xml.tag! "g:price", helpers.number_to_currency(item[:price], format: '%n %u', unit: current_currency)
                 xml.tag! "g:availability", item[:availability]
                 xml.tag! "g:image_link", item[:image]
                 xml.tag! "g:shipping_weight", item[:weight]
@@ -38,7 +42,7 @@ module Feeds
 
                 xml.tag! "g:brand", "Fame&Partners"
                 xml.tag! "g:product_type"
-                item[:images].each do |image|
+                item[:images].to(9).each do |image|
                   xml.tag! "g:additional_image_link", image
                 end
               end
@@ -46,8 +50,7 @@ module Feeds
           end
         end
 
-        file_path = File.join(Rails.root, '/public/feeds/products/google.xml')
-        file = File.open(file_path, 'w')
+        file = File.open(export_file_path, 'w')
         file.write(output.to_s)
         file.close
       end

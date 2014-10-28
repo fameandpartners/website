@@ -1,15 +1,16 @@
 module Feeds
   class Helpers
     include ActionView::Helpers::SanitizeHelper
+    include ActionView::Helpers::NumberHelper
     include ApplicationHelper
     include ProductsHelper
 
-    def initialize(version)
-      @current_site_version = version
-    end
+    def build_collection_product_path(collection_id, product_id, options = {})
+      path_parts = ['collection', collection_id, product_id]
+      path = "/" + path_parts.compact.join('/')
+      path = "#{path}?#{options.to_param}" if options.present?
 
-    def url_options
-      @url_options ||= HashWithIndifferentAccess.new(site_version: @current_site_version.permalink)
+      url_without_double_slashes(path)
     end
   end
 end
