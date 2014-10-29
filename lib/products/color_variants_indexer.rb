@@ -48,6 +48,7 @@ module Products
               fast_delivery: product.fast_delivery,
               is_surryhills: helpers.is_surryhills?(product),
               taxon_ids: product.taxons.map(&:id),
+              price: product.price.to_f,
 
               # bodyshape sorting
               apple: product.style_profile.try(:apple),

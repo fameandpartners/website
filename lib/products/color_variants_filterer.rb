@@ -175,20 +175,18 @@ module Products
 
             case order_by
               when 'price_high'
-                by :price, 'desc'
+                by 'product.price', 'desc'
               when 'price_low'
-                by :price, 'asc'
+                by 'product.price', 'asc'
               when 'newest'
-                by :created_at, 'desc'
+                by 'product.created_at', 'desc'
               when 'fast_delivery'
-                by :fast_delivery, 'desc'
+                by 'product.fast_delivery', 'desc'
               when 'popular'
-                # default ordering scope
+                by 'product.position', 'asc'
               else
-                # default ordering scope
+                by 'product.position', 'asc'
             end
-
-            by :position, 'asc'
           end
 
           from offset

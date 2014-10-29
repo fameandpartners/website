@@ -1,6 +1,6 @@
 .picture
   = link_to colored_variant_path(variant) do
-    = image_tag 'http://d1sd72h9dq237j.cloudfront.net' + variant.images.first.large, alt: variant.product.name
+    = image_tag variant.images.first.large, alt: variant.product.name
   .popup.striped
     .fleft.quick-view
       = quick_view_link(variant.product)
