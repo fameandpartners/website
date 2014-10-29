@@ -308,10 +308,14 @@ module Products
 
       #binding.pry
 
+      itsa_taxon = false
+
       Spree::Taxon.all.each do |taxon|
         permalink = taxon.permalink
         @properties[permalink] = prepare_taxon(permalink, final_requested_taxons)
         
+        itsa_taxon = true if @properties[permalink].present?
+
         if @properties[permalink].present? && params[:event].blank? && !taxon.permalink.match('event').nil?
           params[:event] = params[:permalink]
         end
@@ -319,16 +323,16 @@ module Products
         if @properties[permalink].present? && params[:edits].blank?
           @properties[:selected_edits] << @properties[permalink]
         elsif @properties[permalink].present?
-          @properties[:selected_taxons] << @properties[permalink]
-
-          unless params[:permalink].blank?
-            final_requested_taxons << taxon.permalink
-          end
-          
+          @properties[:selected_taxons] << @properties[permalink]          
         end
       end
 
       #binding.pry
+
+      unless itsa_taxon
+        params[:colour] = params[:permalink]
+        params[:bodyshape] = params[:permalink]
+      end
 
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])

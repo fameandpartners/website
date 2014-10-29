@@ -281,7 +281,7 @@ module ApplicationHelper
 
   def colour_path(color, options={})
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 't', "colour", color]
+    path_parts = [site_version_prefix, 'dresses', color.downcase.parameterize]
     path = "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.any?
 
