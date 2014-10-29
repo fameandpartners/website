@@ -172,9 +172,9 @@ module ApplicationHelper
     end
   end
 
-  def descriptive_url(product)
+  def descriptive_url(product, locale = nil)
     parts = []
-    parts << product.translated_short_description(I18n.locale).parameterize
+    parts << product.translated_short_description(locale || I18n.locale).parameterize
     parts << product.name.parameterize
     parts << product.id
 
@@ -183,17 +183,17 @@ module ApplicationHelper
 
   def collection_product_path(product, options = {})
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses']
+    path_parts = [site_version_prefix, 'dresses', 'p']
+    locale = I18n.locale.to_s.downcase.underscore.to_sym
 
-
-    if product.respond_to?(:descriptive_url)
-      path_parts << product.descriptive_url
+    if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
+      path_parts << product[:urls][locale]
     else
       path_parts << descriptive_url(product)
     end
 
     path =  "/" + path_parts.compact.join('/')
-    path = "#{path}?#{options.to_param}" if options.present?    
+    path = "#{path}?#{options.to_param}" if options.present?
     
     url_without_double_slashes(path)
   end
@@ -202,8 +202,8 @@ module ApplicationHelper
     parts = []
     parts << self.url_options[:site_version]
     parts << 'dresses'
-    #parts << 'p'
-    parts << variant.product.descriptive_url
+    parts << 'p'
+    parts << variant.product[:urls][I18n.locale.to_s.downcase.underscore.to_sym]
     parts << variant.color.name
 
     path =  '/' + parts.reject(&:blank?).join('/')

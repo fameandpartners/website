@@ -43,7 +43,10 @@ module Products
 
               # added because of... really, it more simple add it here instead
               # of trying to refactor all this code
-              descriptive_url: helpers.descriptive_url(product),
+              urls: {
+                en_au: helpers.descriptive_url(product, :"en-AU"),
+                en_us: helpers.descriptive_url(product, :"en-US")
+              },
               can_be_customized: product.can_be_customized?,
               fast_delivery: product.fast_delivery,
               is_surryhills: helpers.is_surryhills?(product),
