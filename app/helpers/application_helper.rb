@@ -269,14 +269,11 @@ module ApplicationHelper
       taxon = Spree::Taxon.where('lower(name) = ?', taxon_name.downcase.gsub('-', ' ')).last
     end
 
-    root_name = nil
-    root_name = taxon.parent.name.downcase unless taxon.nil?
     taxon_name = taxon.name.parameterize unless taxon.nil?
 
-    path_parts = [site_version_prefix, 'dresses', 't', root_name, taxon_name]
+    path_parts = [site_version_prefix, 'dresses',taxon_name]
     path = "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.any?
-
     
 
     url_without_double_slashes(path)
