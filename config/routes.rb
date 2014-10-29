@@ -39,25 +39,26 @@ FameAndPartners::Application.routes.draw do
     # SEO categories routes, we want them in front
 
     scope '/dresses', module: 'personalization' do
-      get 'p/custom-:product_slug', to: 'products#show'
-      get 'p/styleit-:product_slug', to: 'products#style'
+      get '/custom-:product_slug', to: 'products#show'
+      get '/styleit-:product_slug', to: 'products#style'
     end
 
 
     scope '/dresses' do
       root to: 'spree/products#index', as: 'dresses'
       #roots categories
-      get 't/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
-      get 't/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
-      get 't/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
-      get 't/colour' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
-      get 't/color' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
+      get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
+      get '/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
+      get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
+      get '/colour' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
+      get '/color' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
 
-      get 't/colour/:colour' => 'spree/products#index'
-      get 't/color/:colour' => 'spree/products#index'
-      get 't/body-shape/:bodyshape' => 'spree/products#index'
-      get 't/*permalink' => 'spree/products#index', as: 'taxon'
-      get 'p/:product_slug(/:color_name)' => 'spree/products#show'
+      # get '/colour/:colour' => 'spree/products#index'
+      # get '/color/:colour' => 'spree/products#index'
+      # get '/body-shape/:bodyshape' => 'spree/products#index'
+      get '/:event/:style' => 'spree/products#index'
+      get '/*permalink' => 'spree/products#index', as: 'taxon'
+      get '/dress-:product_slug(/:color_name)' => 'spree/products#show'
       get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 

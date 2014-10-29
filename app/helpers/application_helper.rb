@@ -183,12 +183,15 @@ module ApplicationHelper
 
   def collection_product_path(product, options = {})
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 'p']
+    path_parts = [site_version_prefix, 'dresses']
+
+
     if product.respond_to?(:descriptive_url)
       path_parts << product.descriptive_url
     else
       path_parts << descriptive_url(product)
     end
+
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?    
     
@@ -199,7 +202,7 @@ module ApplicationHelper
     parts = []
     parts << self.url_options[:site_version]
     parts << 'dresses'
-    parts << 'p'
+    #parts << 'p'
     parts << variant.product.descriptive_url
     parts << variant.color.name
 

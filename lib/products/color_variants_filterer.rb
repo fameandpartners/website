@@ -283,11 +283,13 @@ module Products
         params[:permalink] = "edits/#{params[:edits]}"
       elsif params[:collection].blank? && params[:edits].blank? && params[:permalink].present?
         params[:permalink].downcase!
-        # chop off the end part of a permalink (after "/")
-        params[:collection] = params[:permalink].split("/")[1]
+        
+        params[:collection] = params[:permalink]
         params[:seocollection] = params[:collection]
         @properties["collection"] = params[:collection]
         @properties["seocollection"] = params[:collection]
+      elsif params[:collection].blank? && params[:style].present?
+        params[:collection] = params[:style]
       end
 
       # ugly, refactros ASAP
@@ -295,19 +297,38 @@ module Products
 
       # adding support for faceted search (filtering) across multiple taxons
       final_requested_taxons = []
-      final_requested_taxons << params[:permalink] unless params[:permalink].blank?
+
+      # this is a really wrong way to check if both style and event contain the requested permalink...
+      final_requested_taxons << "style/#{params[:permalink]}" unless params[:permalink].blank?
+      final_requested_taxons << "event/#{params[:permalink]}" unless params[:permalink].blank?
+
+      #here we handle the filtering
       final_requested_taxons << "style/#{params[:style]}" unless params[:style].blank?
       final_requested_taxons << "event/#{params[:event]}" unless params[:event].blank?
+
+      #binding.pry
 
       Spree::Taxon.all.each do |taxon|
         permalink = taxon.permalink
         @properties[permalink] = prepare_taxon(permalink, final_requested_taxons)
+        
+        if @properties[permalink].present? && params[:event].blank? && !taxon.permalink.match('event').nil?
+          params[:event] = params[:permalink]
+        end
+
         if @properties[permalink].present? && params[:edits].blank?
           @properties[:selected_edits] << @properties[permalink]
         elsif @properties[permalink].present?
           @properties[:selected_taxons] << @properties[permalink]
+
+          unless params[:permalink].blank?
+            final_requested_taxons << taxon.permalink
+          end
+          
         end
       end
+
+      #binding.pry
 
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
