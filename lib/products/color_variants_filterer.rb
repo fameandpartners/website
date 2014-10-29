@@ -24,16 +24,14 @@ module Products
 
     def similar_color_variants
       @similar_color_variants ||= begin
-        if colour.blank?
-          []
-        else
-          @fetched_color_variant_ids = color_variants.map(&:id)
-          search(colors_with_similar(:default).map(&:id))
-        end
+        return [] if colour.blank?
+
+        @fetched_color_variant_ids = color_variants.map(&:id)
+        search([], customizable_color: true)
       end
     end
 
-    def search(color_ids = [])
+    def search(color_ids = [], options = {})
       taxon_ids  = taxons.present? ? taxons : {}
       keywords   = keywords.present? ? keywords.split : []
       bodyshapes = bodyshape
@@ -61,6 +59,15 @@ module Products
                      }
                    }
                  }
+
+          if options[:customizable_color]
+            filter :bool,
+                   :must => {
+                     :term => {
+                       'product.color_customizable' => true
+                     }
+                   }
+          end
 
           # Ignore already received color variants (for #similar_color_variants )
           if fetched_color_variant_ids.present?

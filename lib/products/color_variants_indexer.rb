@@ -19,6 +19,8 @@ module Products
           variant.option_values.colors.map(&:id)
         end.flatten.uniq
 
+        color_customizable = %w(yes y).include?(product.property('color_customization').to_s.downcase.strip)
+
         product.product_color_values.each do |product_color_value|
           color = product_color_value.option_value
 
@@ -54,8 +56,8 @@ module Products
               strawberry: product.style_profile.try(:strawberry),
               hour_glass: product.style_profile.try(:hour_glass),
               column: product.style_profile.try(:column),
-              petite: product.style_profile.try(:petite)
-
+              petite: product.style_profile.try(:petite),
+              color_customizable: color_customizable
             },
             color: {
               id: color.id,
