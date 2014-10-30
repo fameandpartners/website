@@ -51,7 +51,7 @@ Spree::ProductsController.class_eval do
 
   def index
     @searcher = Products::ColorVariantsFilterer.new(params)
-    
+
     if params[:colour].blank? && params[:style].blank?
       @sorter = Products::ColorVariantsSorter.new(@searcher.color_variants)
       @sorter.sort!
@@ -67,6 +67,8 @@ Spree::ProductsController.class_eval do
       @similar_color_variants = sorter.results
     end
 
+
+    binding.pry
     currency = current_currency
     user = try_spree_current_user
 
