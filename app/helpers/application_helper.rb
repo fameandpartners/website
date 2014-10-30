@@ -174,7 +174,6 @@ module ApplicationHelper
 
   def descriptive_url(product, locale = nil)
     parts = []
-    parts << "dress"
     parts << product.translated_short_description(locale || I18n.locale).parameterize
     parts << product.name.parameterize
     parts << product.id
