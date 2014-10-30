@@ -174,23 +174,26 @@ module ApplicationHelper
 
   def descriptive_url(product, locale = nil)
     parts = []
+    parts << "dress"
     parts << product.translated_short_description(locale || I18n.locale).parameterize
     parts << product.name.parameterize
     parts << product.id
 
     parts.reject(&:blank?).join('-')
+    return parts
   end
 
   def collection_product_path(product, options = {})
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 'p']
+    path_parts = [site_version_prefix, 'dresses']
     locale = I18n.locale.to_s.downcase.underscore.to_sym
 
     if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
-      path_parts << product[:urls][locale]
+      path_parts << "dress-#{product[:urls][locale]}"
     else
       path_parts << descriptive_url(product)
     end
+
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?
     
@@ -201,8 +204,8 @@ module ApplicationHelper
     parts = []
     parts << self.url_options[:site_version]
     parts << 'dresses'
-    parts << 'p'
-    parts << variant.product[:urls][I18n.locale.to_s.downcase.underscore.to_sym]
+   
+    parts << "dress-#{variant.product[:urls][I18n.locale.to_s.downcase.underscore.to_sym]}"
     parts << variant.color.name
 
     path =  '/' + parts.reject(&:blank?).join('/')
@@ -213,7 +216,7 @@ module ApplicationHelper
 
   def personalize_path(product, options={})
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 'p',  "custom-#{descriptive_url(product)}" ]
+    path_parts = [site_version_prefix, 'dresses', "custom-#{descriptive_url(product)}" ]
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?    
     
@@ -222,7 +225,7 @@ module ApplicationHelper
 
   def style_it_path(product, options={})
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 'p',  "styleit-#{descriptive_url(product)}" ]
+    path_parts = [site_version_prefix, 'dresses', "styleit-#{descriptive_url(product)}" ]
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?    
     
@@ -268,14 +271,11 @@ module ApplicationHelper
       taxon = Spree::Taxon.where('lower(name) = ?', taxon_name.downcase.gsub('-', ' ')).last
     end
 
-    root_name = nil
-    root_name = taxon.parent.name.downcase unless taxon.nil?
     taxon_name = taxon.name.parameterize unless taxon.nil?
 
-    path_parts = [site_version_prefix, 'dresses', 't', root_name, taxon_name]
+    path_parts = [site_version_prefix, 'dresses',taxon_name]
     path = "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.any?
-
     
 
     url_without_double_slashes(path)
@@ -283,7 +283,7 @@ module ApplicationHelper
 
   def colour_path(color, options={})
     site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', 't', "colour", color]
+    path_parts = [site_version_prefix, 'dresses', color.downcase.parameterize]
     path = "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.any?
 

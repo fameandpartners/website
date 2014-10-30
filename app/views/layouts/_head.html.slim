@@ -2,7 +2,7 @@ title = get_title
 meta name="description" content=(get_meta_description)
 
 = hreflang_tag
-
+= canonical_tag
 = stylesheet_link_tag    'application'
 - cache [:layout, :head, :colors], expires_in: configatron.cache.expire.long do
   = render 'shared/dynamic_color_styles'

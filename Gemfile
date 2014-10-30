@@ -35,6 +35,8 @@ gem 'sitemap_generator'
 
 gem 'font-awesome-sass'
 
+gem 'canonical-rails', github: 'jumph4x/canonical-rails'
+
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
@@ -57,8 +59,9 @@ group :development do
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
   gem 'quiet_assets', '1.0.2'
   gem 'thin', '1.5.1'
+  gem 'pry'
   gem 'pry-rails'
-  gem 'pry-nav'
+  gem 'pry-debugger'
   gem 'debugger'
   gem "therubyracer"
   gem 'rails-dev-tweaks', '~> 1.1'
