@@ -46,6 +46,7 @@ FameAndPartners::Application.routes.draw do
 
     scope '/dresses' do
       root to: 'spree/products#index', as: 'dresses'
+      get '/dress-:product_slug(/:color_name)' => 'spree/products#show'
       #roots categories
       get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
       get '/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
@@ -58,7 +59,6 @@ FameAndPartners::Application.routes.draw do
       # get '/body-shape/:bodyshape' => 'spree/products#index'
       get '/:event/:style' => 'spree/products#index'
       get '/*permalink' => 'spree/products#index', as: 'taxon'
-      get '/dress-:product_slug(/:color_name)' => 'spree/products#show'
       get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
