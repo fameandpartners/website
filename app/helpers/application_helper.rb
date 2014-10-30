@@ -180,7 +180,6 @@ module ApplicationHelper
     parts << product.id
 
     parts.reject(&:blank?).join('-')
-    return parts
   end
 
   def collection_product_path(product, options = {})

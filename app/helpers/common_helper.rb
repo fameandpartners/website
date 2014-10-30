@@ -27,6 +27,12 @@ module CommonHelper
     end
   end
 
+  def get_canonical_tag
+    if @product.present?
+      return "<link href='#{request.host}#{collection_product_path(@product)}' rel='canonical' />".html_safe
+    end
+  end
+
   # social links helper
   def facebook_share_button(share_url)
     if Rails.env.development?
