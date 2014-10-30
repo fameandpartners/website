@@ -51,7 +51,7 @@ Spree::ProductsController.class_eval do
 
   def index
     @searcher = Products::ColorVariantsFilterer.new(params)
-
+    
     if params[:colour].blank? && params[:style].blank?
       @sorter = Products::ColorVariantsSorter.new(@searcher.color_variants)
       @sorter.sort!

@@ -13,6 +13,7 @@ module Products
     end
 
     def color_variants
+      
       @color_variants ||= begin
         if colour.blank?
           search
@@ -327,12 +328,15 @@ module Products
         end
       end
 
-      #binding.pry
-
+      
       unless itsa_taxon
-        params[:colour] = params[:permalink]
-        params[:bodyshape] = params[:permalink]
+        if ProductStyleProfile::BODY_SHAPES.include? params[:permalink]
+          params[:bodyshape] = params[:permalink]
+        else
+          params[:colour] = params[:permalink]
+        end
       end
+
 
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
