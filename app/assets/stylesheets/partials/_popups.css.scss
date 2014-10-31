@@ -412,6 +412,116 @@
 	font-size: 38px;
 }
 
+.girlfriend-pop {
+	.modal-container {
+		border: 5px solid #000;
+		height: 400px;
+		width: 600px;
+		@include box-sizing(border-box);
+		text-align: center;
+		background: url('_popups/gfoffer1.jpg') no-repeat;
+	}
+
+	.modal-form{
+		width: 500px;
+		height: 250px;
+		text-align: center;
+		padding: 0;
+	}
+
+	.logo img{
+		width: 160px;
+		margin: 30px auto 0;
+	}
+
+	.title {
+		font: 400 58px/0.9 $fontThree;
+	}
+	.sub {
+		font: 400 38px/0.9 $fontThree;
+		margin-bottom: 20px;
+	}
+
+	.v2{
+		.logo img{
+			width: 160px;
+			margin: 30px auto 0;
+		}
+		.title {
+			font: 400 48px/0.9 $fontThree;
+			margin-bottom: 5px;
+		}
+		.sub {
+			font: 700 20px/0.9 $fontOne;
+			margin-bottom: 15px;
+		}
+	}
+
+
+
+
+	.thanks{
+		margin-top: 40px;
+
+		.title{
+			margin-top: 5px;
+			font: 400 58px/0.9 $fontThree;
+		}
+		.promo-code{
+			width: 70%;
+			font: 400 28px/0.9 $fontOne;
+			margin: 10px auto 20px auto;
+			span{
+				font: 400 38px/0.9 $fontThree;
+			}
+		}
+
+		.v2{
+			.promo-code{
+				span{
+					width: 70%;
+					font: 400 28px/0.9 $fontThree;
+				}
+			}
+			p{
+				font-size: 18px;
+				line-height: 0.9em;
+				padding: 0;
+			}
+		}
+		.share-this{
+			padding-bottom: 10px;
+		}
+		.share{
+			width: 100px;
+			display: inline-block;
+		}
+		.aligncenter{
+			width: 80%;
+			margin: 0 auto;
+			text-align: center;
+			margin-top: 10px;
+		}
+	}
+	.form {
+		text-align: center;
+		label { 
+			display: block;
+			font: 300 15px/0.9 $fontOne;
+			margin-bottom: 5px;
+		}
+		.inputbox { 
+			display: block;
+			width: 335px !important;
+			margin: 0 auto 5px auto;
+			background-color:rgba(0,0,0,0) !important;
+			color: #666 !important;
+			box-shadow: none !important;
+		}
+	}	
+}
+
+
 // CVV Code Help Popover
 #cvv-popup {
 	position: relative;

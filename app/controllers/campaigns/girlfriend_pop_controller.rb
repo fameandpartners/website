@@ -12,7 +12,7 @@ class Campaigns::GirlfriendPopController < ApplicationController
     @participation = Participation.new(params[:participation])
 
     if @participation.valid?
-      CampaignMonitor.delay.synchronize(@participation.email, nil, Signupreason: 'Girlfriend Pop')
+      CampaignMonitor.delay.synchronize(@participation.email, nil, Signupreason: "Girlfriend Pop #{@participation.version}")
     end
   end
 end

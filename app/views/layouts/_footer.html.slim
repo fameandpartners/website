@@ -1,3 +1,17 @@
+javascript:
+  gf_pop = "#{cookies[:gf_pop]}"
+
+  if (gf_pop == "show") {
+    $(document).ready(function(){
+      setTimeout(openpop, 20000);
+    });
+  };
+  
+  function openpop(){
+    popup = new window.popups.GirlfriendPop();
+    popup.show(1)
+  }
+
 - unless controller_action_id == "index"
   = render "shared/featured_in", :locals => {:small => "_small"}
 footer.footer-global

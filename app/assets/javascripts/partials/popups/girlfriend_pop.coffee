@@ -20,7 +20,8 @@ window.popups.GirlfriendPop = class GirlfriendPop
 
   hide: () ->
     @container.hide()
-    $.cookie('email_capture', 'hide', { expires: 365, path: '/' })
+    $.cookie('gf_pop', 'hide', { expires: 365, path: '/' })
+    console.log('COOKIE: ' + $.cookie('gf_pop', 'hide', { expires: 365, path: '/' }))
     $(document).unbind 'keyup', @keyPressHandler
     @
   

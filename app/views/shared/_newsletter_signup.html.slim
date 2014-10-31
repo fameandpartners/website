@@ -20,6 +20,7 @@
 javascript:
   var close = false;
   var campaign = 'home'
+  var gf_campaign = "#{cookies[:gf_campaign]}"
 
   if (window.location.pathname == '/fashionista2014' || window.location.pathname == '/au/fashionista2014'){
     campaign = 'fashionista'
@@ -58,30 +59,32 @@ javascript:
   $(document).ready(function() {
       $('#fieldqulir').val(window.current_site_version.permalink);
 
-      if ((window.current_page == 'index' || window.location.pathname == '/fashionista2014' || window.location.pathname == '/au/fashionista2014') && $.cookie('slide_newsletter') != 'close'){
-        $('.form').addClass('form-fixed');
-        $('.form').delay(2000).slideDown(1000);
-        window.track.event('Newsletter', 'Opened', campaign)
-        
-        $('.form .close').click(function () {
-          $('.form').removeClass('form-fixed');
-          close = true
-          $.cookie('slide_newsletter', 'close', { expires: 365, path: '/' })
-          window.track.event('Newsletter', 'Closed', campaign)
-        });
-
-        var navpos = $('.nav-container').offset();
-        console.log(navpos.top);
-        $(window).bind('scroll', function() {
-          if ($(window).scrollTop() < (navpos.top+300) && close == false){
-            $('.form').addClass('form-fixed');
-          }
-          else {
+      if (gf_campaign != 'true'){
+        if ((window.current_page == 'index' || window.location.pathname == '/fashionista2014' || window.location.pathname == '/au/fashionista2014') && $.cookie('slide_newsletter') != 'close'){
+          $('.form').addClass('form-fixed');
+          $('.form').delay(2000).slideDown(1000);
+          window.track.event('Newsletter', 'Opened', campaign)
+          
+          $('.form .close').click(function () {
             $('.form').removeClass('form-fixed');
-          }
-        });
-      } else {
-        $('.form').removeClass('form-fixed');
-        $('.form').show();
-      }        
+            close = true
+            $.cookie('slide_newsletter', 'close', { expires: 365, path: '/' })
+            window.track.event('Newsletter', 'Closed', campaign)
+          });
+
+          var navpos = $('.nav-container').offset();
+          console.log(navpos.top);
+          $(window).bind('scroll', function() {
+            if ($(window).scrollTop() < (navpos.top+300) && close == false){
+              $('.form').addClass('form-fixed');
+            }
+            else {
+              $('.form').removeClass('form-fixed');
+            }
+          });
+        } else {
+          $('.form').removeClass('form-fixed');
+          $('.form').show();
+        }        
+      }
   });
