@@ -164,7 +164,13 @@ module Products
 
       r =  "#{color} #{style} #{event} dresses"
 
-      return r.capitalize
+      # Edits always take presedance over other titles
+      if t_root == "Edits"
+        return taxon.name.capitalize
+      else
+        return r.capitalize
+      end
+
     end
 
     def get_banner_text(text)
