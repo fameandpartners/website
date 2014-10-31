@@ -67,8 +67,6 @@ Spree::ProductsController.class_eval do
       @similar_color_variants = sorter.results
     end
 
-
-    binding.pry
     currency = current_currency
     user = try_spree_current_user
 
