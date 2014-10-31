@@ -189,7 +189,7 @@ module ApplicationHelper
     if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
       path_parts << "dress-#{product[:urls][locale]}"
     else
-      path_parts << descriptive_url(product)
+      path_parts << "dress-#{descriptive_url(product, locale)}"
     end
 
     path =  "/" + path_parts.compact.join('/')
