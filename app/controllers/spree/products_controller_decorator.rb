@@ -68,7 +68,7 @@ Spree::ProductsController.class_eval do
     end
 
 
-    binding.pry
+    #binding.pry
     currency = current_currency
     user = try_spree_current_user
 

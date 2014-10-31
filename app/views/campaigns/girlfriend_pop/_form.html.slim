@@ -1,0 +1,24 @@
+- version = params[:version]
+- if version == 1
+  .v1
+    .logo = image_tag('_girlfriend/girlfriend_logo.png')
+    .title Special Offer  
+    .sub $20 off your dress!
+    .form
+      = form_for (@participation || Participation.new), as: :participation, url: campaigns_girlfriend_pop_path, remote: true do |f|
+        = f.hidden_field :version, value: version
+        = f.label :email, 'Enter your email address'
+        = f.email_field :email, class: 'inputbox', placeholder: 'Enter your email'
+        input.btn.submitbox type="submit" value="Submit"
+- else
+  .v2
+    .logo = image_tag('_girlfriend/girlfriend_logo.png')
+    .title Love what you see but need someone else to pay?  
+    .sub Sign up for layby options and more
+    .form
+      = form_for (@participation || Participation.new), as: :participation, url: campaigns_girlfriend_pop_path, remote: true do |f|
+        = f.hidden_field :version, value: version
+        = f.label :email, 'Enter your email address'
+        = f.email_field :email, class: 'inputbox', placeholder: 'Enter your email'
+        input.btn.submitbox type="submit" value="Submit"
+
