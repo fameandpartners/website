@@ -69,7 +69,7 @@ FameAndPartners::Application.routes.draw do
     get "/products/:collection/:product_id" => 'redirects#products_show'
 
     # Custom Dresses part II
-    scope '/custom-dresses', module: 'personalization' do
+    scope '/custom-dresses' do
       get '/', to: 'registrations#new', as: :personalization
       post '/', to: 'registrations#create'
 
