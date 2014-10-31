@@ -13,7 +13,7 @@ module Feeds
           @items.each do |item|
             xml.Product do
               xml.tag! 'Merchant_SKU', item[:product].sku
-              xml.tag! 'Product_Name', item[:title]
+              xml.tag! 'Product_Name', item[:product].name
               xml.tag! 'Product_URL', "http://#{@config[:domain]}#{collection_product_path(item[:product])}"
               xml.tag! 'Image_URL', item[:image]
               xml.tag! 'Current_Price', helpers.number_to_currency(item[:price])

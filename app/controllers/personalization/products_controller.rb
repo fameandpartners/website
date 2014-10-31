@@ -10,7 +10,13 @@ module Personalization
     end
 
     def show
-      @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink(params[:permalink])
+      if params[:product_slug]
+        product_id = get_id_from_slug(params[:product_slug])
+        @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find(product_id)
+      else
+        @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink(params[:permalink])
+      end
+
       # check and redirect if needed
       ensure_customization_available(@product) and return
 
@@ -32,7 +38,12 @@ module Personalization
     end
 
     def style
-      @product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
+      if params[:product_slug]
+        product_id = get_id_from_slug(params[:product_slug])
+        @product = Spree::Product.active(Spree::Config.currency).find(product_id)
+      else
+        @product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
+      end
 
       set_product_show_page_title(@product, "Style your formal dress ")
       display_marketing_banner
@@ -46,6 +57,11 @@ module Personalization
     end
 
     private
+
+    # gets the product id from the slug that is fomatted as "somethin-something-something-.....-product_id"
+    def get_id_from_slug(slug)
+      slug.match(/(\d)+$/)[0]
+    end
 
     def ensure_customization_available(product)
       if product.blank?

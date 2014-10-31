@@ -1,0 +1,27 @@
+.category-catalog.products-list
+  h5.breadcrumb = collection_page_breadcrumb(@searcher)
+  .row
+    - if @lp_featured_products.present?
+      .lp_featured_dresses
+        h2 Featured Dresses
+        .arrows-line-horizontal
+        - @lp_featured_products.each do |product|
+          .grid-3
+            - cache (cache_name_fragments + [product.id]), expires_in: configatron.cache.expire.long do
+              = render 'spree/products/cached_product', product: product
+        .arrows-line-horizontal
+  .row
+    - if @color_variants.present?
+      - @color_variants.each do |color_variant|
+        .grid-3
+          = render 'spree/products/color_variant', variant: color_variant
+    - else
+      .not-found Sorry, no dresses match your criteria
+
+  - if @similar_color_variants.present?
+    .row
+      .page-title
+        h2 These dresses can also be made in #{ @searcher.selected_color_name }
+      - @similar_color_variants.each do |color_variant|
+        .grid-3
+          = render 'spree/products/color_variant', variant: color_variant

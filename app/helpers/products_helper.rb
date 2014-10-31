@@ -1,12 +1,36 @@
 module ProductsHelper
 
+  def product_breadcrumbs(taxon, separator="&nbsp;&#47;&nbsp;")
+    return "" if current_page?("/") || taxon.nil?
+    crumbs = []
+    if taxon
+      crumbs << ['Dresses', dresses_path]
+      crumbs += taxon.ancestors.collect { |a| [a.name.pluralize, dress_nested_taxons_path(a.permalink)] } unless taxon.ancestors.empty?
+      crumbs << [taxon.name, dress_nested_taxons_path(taxon.permalink)]
+    else
+      crumbs << ['Dresses', dresses_path]
+    end
+
+    separator = raw(separator)
+
+    crumbs.map! do |crumb|
+      content_tag(:li, itemscope:"itemscope", itemtype:"http://data-vocabulary.org/Breadcrumb") do
+        link_to(crumb.last, itemprop: "url") do
+          content_tag(:span, crumb.first, itemprop: "title")
+        end + (crumb == crumbs.last ? '' : separator)
+      end
+    end
+
+    content_tag(:nav, content_tag(:ul, raw(crumbs.map(&:mb_chars).join)), class: 'breadcrumbs')
+  end
+
   def range_taxonomy
     @range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
   end
 
   def range_taxon_for(product)
     return nil if range_taxonomy.blank?
-    taxon = product.taxons.where(taxonomy_id: range_taxonomy.id).first
+    taxon = product.taxons.first
   end
 
   def range_taxon_name_for(product)
@@ -20,6 +44,16 @@ module ProductsHelper
 
   def available_product_ranges
     range_taxonomy.present? ? range_taxonomy.root.children : []
+  end
+
+  def available_product_events
+    range_taxonomy = Spree::Taxonomy.where(name: 'Event').first
+    
+    if range_taxonomy.present?
+      return range_taxonomy.root.children
+    else
+      return []
+    end
   end
 
   def available_product_styles
@@ -92,7 +126,7 @@ module ProductsHelper
         options[:second_image]    = images.second.attachment.url(:large)
       end
       options[:onerror] = "window.switchToAltImage(this, '/assets/#{no_image}')"
-      image_tag(image.attachment.url(:large), options)
+      image_tag('http://d1sd72h9dq237j.cloudfront.net' + image.attachment.url(:large), options)
     end
   end
 
@@ -173,8 +207,17 @@ module ProductsHelper
   #      title: 'Add to wishlist',
   #      class: 'wishlist-link',
   #      title-remove: 'Remove from wishlist'
-  def cached_add_to_wishlist_link(product_or_variant, options = {})
-    variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
+  def cached_add_to_wishlist_link(resource, options = {})
+    if resource.is_a?(Spree::Variant)
+      variant_id = resource.id
+      product_id = resource.product_id
+    elsif resource.is_a?(Spree::Product)
+      variant_id = resource.master.id
+      product_id = resource.id
+    else
+      variant_id = resource.master_id
+      product_id = resource.id
+    end
 
     title = options.delete(:title) || 'Add to wishlist'
     title_remove = options.delete(:title_remove) || 'Remove from wishlist'
@@ -185,8 +228,8 @@ module ProductsHelper
       'title-add'     => title,
       'title-remove'  => title_remove,
       'action'        => 'add-to-wishlist',
-      'product-id'    => variant.product_id,
-      'id'            => variant.id
+      'product-id'    => product_id,
+      'id'            => variant_id
     }
   end
 
@@ -309,9 +352,9 @@ module ProductsHelper
     content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
   end
 
-  def color_options_for_select(color_names)
+  def color_options_for_select(color_names, selected_color_name)
     color_option_values = Spree::OptionValue.colors.where(name: color_names)
-    color_options_for_select_from_options_values(color_option_values)
+    color_options_for_select_from_options_values(color_option_values, selected_color_name)
   end
 
   def color_options_for_select_from_options_values(color_option_values, selected = nil)
@@ -334,7 +377,7 @@ module ProductsHelper
     if is_directed_from?(my_boutique_path)
       items << link_to('My Boutique', my_boutique_path)
     else
-      items << link_to('Collection', collection_path)
+      items << link_to('Dresses', collection_path)
     end
 
     if (taxon = range_taxon_for(product)).present?

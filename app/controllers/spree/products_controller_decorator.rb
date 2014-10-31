@@ -1,5 +1,7 @@
 Spree::ProductsController.class_eval do
   include ApplicationHelper
+  include ProductsHelper
+
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
   before_filter :load_activities, :only => [:show, :quick_view]
@@ -11,24 +13,71 @@ Spree::ProductsController.class_eval do
   #              expires_in: configatron.cache.expire.long,
   #              cache_path: proc{ |c| c.request.url + '.' + c.request.format.ref.to_s }
 
-  def index
+  def root_taxon
 
+    @taxons = []
+
+    case params[:taxon_root]
+    when "style"
+      @title = "Shop for a specific style"
+      @products_title = "Featured dresses"
+      available_product_styles.each do |style|
+        @taxons << {name: style.name, url: "#{style.permalink}"}
+      end
+    when "event"
+      @title = "Shop dresses by event"
+      @products_title = "Featured dresses"
+      available_product_events.each do |event|
+        @taxons << {name: event.name, url: "#{event.permalink}"}
+      end
+    when "colour"
+      @title = "Shop dresses by color"
+      @products_title = "Featured dresses"
+      available_product_colors.each do |color|
+        @taxons << {name: color.name, url: "color/#{color.name}"}
+      end
+    when "bodyshape"
+      @title ="Shop dresses by body shape"
+      @products_title = "Featured dresses"
+      ProductStyleProfile::BODY_SHAPES.each do |shape|
+        @taxons << {name: shape, url: "body-shape/#{shape}"}
+      end
+    else
+      @taxons = []
+    end
+
+    @products = load_random_products amount: 8, taxon: params[:taxon_root]
+  end
+
+  def index
+    @searcher = Products::ColorVariantsFilterer.new(params)
+
+    if params[:colour].blank? && params[:style].blank?
+      @sorter = Products::ColorVariantsSorter.new(@searcher.color_variants)
+      @sorter.sort!
+      @color_variants = @sorter.results
+    else
+      @color_variants = @searcher.color_variants
+    end
+
+    similar_color_variants = @searcher.similar_color_variants
+    if similar_color_variants.present?
+      sorter = Products::ColorVariantsSorter.new(similar_color_variants)
+      sorter.sort!
+      @similar_color_variants = sorter.results
+    end
+
+
+    #binding.pry
     currency = current_currency
     user = try_spree_current_user
 
     display_featured_dresses = params[:dfd]
     display_featured_dresses_edit = params[:dfde]
 
-    @searcher = Products::ProductsFilter.new(params)
-    @searcher.current_user = user
-    @searcher.current_currency = currency
-
-    @products         = @searcher.products
-    @similar_products = @searcher.similar_products
-
     @page_info = @searcher.selected_products_info
-
-    @current_colors = @searcher.colour.present? ? @searcher.colors_with_similar : []
+    @category_title = @page_info[:page_title]
+    @category_description = @page_info[:meta_description]
 
     if (!display_featured_dresses.blank? && display_featured_dresses == "1") && !display_featured_dresses_edit.blank?
       @lp_featured_products = get_products_from_edit(display_featured_dresses_edit, currency, user, 4)
@@ -39,25 +88,71 @@ Spree::ProductsController.class_eval do
         set_collection_title(@page_info)
         set_marketing_pixels(@searcher)
 
-        render action: 'index', layout: true
+        render action: 'sorting', layout: true
       end
       format.json do
-        products_html = render_to_string(
-          partial: 'spree/products/products',
-          formats: [:html]
-        )
+        self.formats += [:html]
+        products_html = render_to_string(partial: 'spree/products/color_variants')
         render json: { products_html: products_html, page_info:  @page_info }
       end
-      format.xml  { render 'feeds/simple_products', products: @products }
+      format.xml  { render 'feeds/simple_products', products: @color_variants}
     end
   end
+
+
+  # def index
+  #   currency = current_currency
+  #   user = try_spree_current_user
+  #
+  #   display_featured_dresses = params[:dfd]
+  #   display_featured_dresses_edit = params[:dfde]
+  #
+  #   @searcher = Products::ProductsFilter.new(params)
+  #   @searcher.current_user = user
+  #   @searcher.current_currency = currency
+  #
+  #   @products         = @searcher.products
+  #   @similar_products = @searcher.similar_products
+  #
+  #
+  #   @page_info = @searcher.selected_products_info
+  #   @category_title = @page_info[:page_title]
+  #   @category_description = @page_info[:meta_description]
+  #
+  #   @current_colors = @searcher.colour.present? ? @searcher.colors_with_similar : []
+  #
+  #   if (!display_featured_dresses.blank? && display_featured_dresses == "1") && !display_featured_dresses_edit.blank?
+  #     @lp_featured_products = get_products_from_edit(display_featured_dresses_edit, currency, user, 4)
+  #   end
+  #
+  #
+  #   respond_to do |format|
+  #     format.html do
+  #       set_collection_title(@page_info)
+  #       set_marketing_pixels(@searcher)
+  #
+  #       render action: 'index', layout: true
+  #     end
+  #     format.json do
+  #       products_html = render_to_string(
+  #         partial: 'spree/products/products',
+  #         formats: [:html]
+  #       )
+  #       render json: { products_html: products_html, page_info:  @page_info }
+  #     end
+  #   end
+  # end
 
   # NOTE: original method check case when user comes from page
   # with t= params and load corresponding taxon
   def show
     return unless @product
 
-    set_product_show_page_title(@product)
+    if params[:color_name]
+      @color = Spree::OptionValue.colors.find_by_name!(params[:color_name])
+    end
+
+    set_product_show_page_title(@product, @color.try(:presentation))
     display_marketing_banner
 
     @product_properties = @product.product_properties.includes(:property)
@@ -98,15 +193,45 @@ Spree::ProductsController.class_eval do
     render json: { success_message: 'successfully sended' }
   end
 
+  def product_filtering
+    
+  end
+
   private
+
+  def load_random_products(args = {})
+    root_taxon = args[:taxon]
+    amount = args[:amount]
+
+    
+
+    return Spree::Product.active.all.shuffle[1..amount]
+  end
+
+  def build_page_title(params)
+    binding.pry
+  end
 
   def load_product
     if try_spree_current_user.try(:has_spree_role?, "admin")
-      @product = Spree::Product.find_by_permalink!(params[:id])
+      if params[:product_slug]
+        @product = Spree::Product.find(get_id_from_slug(params[:product_slug]))
+      else
+        @product = Spree::Product.find_by_permalink!(params[:id])
+      end
     else
-      #@product = Product.active(current_currency).find_by_permalink!(params[:id])
-      @product = Spree::Product.active.find_by_permalink!(params[:id])
+      if params[:product_slug]
+        @product = Spree::Product.active.find(get_id_from_slug(params[:product_slug]))
+      else
+        #@product = Product.active(current_currency).find_by_permalink!(params[:id])
+        @product = Spree::Product.active.find_by_permalink!(params[:id])
+      end
     end
+  end
+
+  # gets the product id from the slug that is fomatted as "somethin-something-something-.....-product_id"
+  def get_id_from_slug(slug)
+    slug.match(/(\d)+$/)[0]
   end
 
   def set_collection_title(info = {})

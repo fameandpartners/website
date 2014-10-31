@@ -250,6 +250,12 @@
 		.btn { 
 			display: block;
 		}
+
+		.breadcrumbs{
+			li{
+				display: inline;
+			}
+		}
 		.section + .section { margin-top: 10px;}
 		.slider {
 			margin: 0;

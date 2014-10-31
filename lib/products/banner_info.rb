@@ -69,41 +69,102 @@ module Products
     end
 
     def get_page_title
+      #mind the spaces in the constructed strings
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        "#{seo_colour} Dresses, #{seo_colour} Evening Dresses Online, Prom and Formals - Fame & Partners"
-      elsif selected_edits_taxons.count == 1
-        taxon = selected_edits_taxons.first
-        taxon.meta_title || [taxon.name, default_seo_title].join(' - ')
-      elsif selected_collection_taxons.count == 1
-        taxon = selected_collection_taxons.first
-        taxon.meta_title || [taxon.name, default_seo_title].join(' - ')
-      else
-        default_seo_title
+        color = "#{seo_colour} "
       end
+
+      
+      taxon = selected_categories.first
+
+      
+      t_root = ""
+      t_root = taxon.parent.name if taxon.present?
+
+      if t_root == "Style"
+        style = "#{taxon.name} " || ""
+      end
+
+      if t_root == "Event"
+        event = "#{taxon.name} " || "Any event "
+      end
+
+      bodyshape = " for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
+
+      r =  "#{event}fashion starts with Fame & Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
+
+      return r.capitalize
     end
 
     def get_page_meta_description
+      #mind the spaces in the constructed strings!
+      r = nil
+
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        "Fame & Partners stock a wide range of #{seo_colour} dresses online for all occasions, visit our store today."
-      elsif selected_edits_taxons.count == 1
-        taxon = selected_edits_taxons.first
-        taxon.meta_description || [taxon.name, default_meta_description].join(' - ')
-      elsif selected_collection_taxons.count == 1
-        taxon = selected_collection_taxons.first
-        taxon.meta_description || [taxon.name, default_meta_description].join(' - ')
-      else
-        default_meta_description
+        color = " #{seo_colour} "
       end
+
+      
+      taxon = selected_categories.first
+
+      
+      t_root = ""
+      t_root = taxon.parent.name if taxon.present?
+
+      if t_root == "Style"
+        style = " #{taxon.name} " || ""
+      end
+
+      if t_root == "Event"
+        event = "for your #{taxon.name} " || "Any event "
+      end
+
+      r =  "Shop and customize the best of#{color}dress trends #{event}at Fame & Partners"
+
+      return r.capitalize
     end
 
     def get_banner_title(title)
+      #mind the spaces in the constructed strings!
+      r = nil
+
+      # The way titles should work:
+      # Black prom dresses //colour
+      # Black strapless formal dresses //colour + style
+      # Black strapless homecoming dresses // colour + style + event
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        I18n.t(:title, scope: [:collection, :colors, @searcher.seo_colour.parameterize.underscore], default: "#{seo_colour} Dresses")
-      elsif title.to_s.downcase == 'range'
-        'Prom Dresses'
+        color = seo_colour
       else
-        title
+        color = ""
       end
+
+      
+      taxon = selected_categories.first
+      
+      t_root = ""
+      t_root = taxon.parent.name if taxon.present?
+
+      # strapless formal dresses // style
+      # strapless homecoming dresss // style + event
+      if t_root == "Style"
+        style = taxon.name
+      else
+        style = ""
+      end
+
+      # homecoming dresses // event
+      if t_root == "Event"
+        event = taxon.name
+      else
+        event = I18n.t('words.prom')
+      end
+
+      # ignore body shape for no, too much information in the title.
+      #bodyshape = ", best for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
+
+      r =  "#{color} #{style} #{event} dresses"
+
+      return r.capitalize
     end
 
     def get_banner_text(text)
@@ -140,17 +201,22 @@ module Products
 
     def selected_collection_taxons
       @selected_collection ||= begin
-        collection_ids = @searcher.collection
+        collection_ids = @searcher.selected_taxons
         seo_collection = @searcher.seocollection rescue []
         if seo_collection.present?
-          collection_ids += seo_collection
+          collection_ids << seo_collection
         end
+        #binding.pry
         selected_taxons(collection_ids, false)
       end
     end
 
     def selected_edits_taxons
-      @selected_edits ||= selected_taxons(@searcher.edits, false)
+      @selected_edits ||= selected_taxons(@searcher.selected_edits, false)
+    end
+
+    def selected_categories
+      selected_collection_taxons.concat(@selected_edits)
     end
 
     def selected_taxons(taxon_ids, with_banner = false)
@@ -182,13 +248,15 @@ module Products
     end
 
     def from_taxon(taxon)
-      {
+      r ={
         banner_image: taxon_image(taxon) || taxon_image(root_range_taxon),
         banner_title: taxon.try(:banner).try(:title) || taxon.name,
         banner_text: taxon.try(:banner).try(:description) || default_collections_info[:description],
         footer_text: taxon.try(:banner).try(:footer_text),
         category_description: taxon.try(:banner).try(:seo_description)
       }
+      #binding.pry
+      return r
     end
   end
 end

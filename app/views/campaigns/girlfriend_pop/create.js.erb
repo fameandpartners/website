@@ -1,0 +1,7 @@
+$scope = $('.modal.popup-placeholder.girlfriend-pop .modal-form');
+<% if @participation.valid? %>
+  $.cookie('gf_pop', 'hide', { expires: 365, path: '/' });
+  $scope.html('<%=j render('campaigns/girlfriend_pop/thanks', version: @participation.version) %>');
+<% else %>
+  $scope.html('<%=j render('campaigns/girlfriend_pop/form', version: @participation.version) %>');
+<% end %>

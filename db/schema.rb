@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141013211312) do
+ActiveRecord::Schema.define(:version => 20141030224601) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -52,6 +52,22 @@ ActiveRecord::Schema.define(:version => 20141013211312) do
   end
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+
+  create_table "banners", :force => true do |t|
+    t.string   "presentation"
+    t.string   "url"
+    t.string   "category"
+    t.integer  "position"
+    t.boolean  "enabled",                 :default => false
+    t.string   "attachment_content_type"
+    t.string   "attachment_file_name"
+    t.datetime "attachment_updated_at"
+    t.integer  "attachment_width"
+    t.integer  "attachment_height"
+    t.integer  "attachment_size"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
 
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
@@ -398,6 +414,11 @@ ActiveRecord::Schema.define(:version => 20141013211312) do
     t.datetime "updated_at",                                          :null => false
     t.string   "name"
     t.string   "title"
+  end
+
+  create_table "option_values_option_values_groups", :id => false, :force => true do |t|
+    t.integer "option_value_id"
+    t.integer "option_values_group_id"
   end
 
   create_table "payment_requests", :force => true do |t|
@@ -775,6 +796,14 @@ ActiveRecord::Schema.define(:version => 20141013211312) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.boolean  "use_in_customisation", :default => false
+  end
+
+  create_table "spree_option_values_groups", :force => true do |t|
+    t.integer  "option_type_id"
+    t.string   "name"
+    t.string   "presentation"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "spree_option_values_variants", :id => false, :force => true do |t|

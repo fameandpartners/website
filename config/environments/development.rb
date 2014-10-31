@@ -49,4 +49,6 @@ FameAndPartners::Application.configure do
     Spree::User.send(:include, Overrides::SpreeAuthDevise::User)
     Spree::Product.send(:include, Overrides::Spree::Product)
   end
+
+  Rails.application.middleware.use( Oink::Middleware, :logger => Rails.logger )
 end

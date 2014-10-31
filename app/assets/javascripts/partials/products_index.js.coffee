@@ -10,7 +10,7 @@ $('.spree_products.index').ready ->
     init: (el) ->
       @$el = $(el)
 
-      @$el.find('#collection, #style, #bodyshape, #colour').on(
+      @$el.find('#event, #style, #bodyshape, #colour').on(
         'change', _.bind(productsFilter.update, productsFilter)
       )
       @$el.find('#product_order').on('change', _.bind(productsFilter.updateOrder, productsFilter))
@@ -49,36 +49,30 @@ $('.spree_products.index').ready ->
       )
 
     reset: () ->
-      @$el.find('#colour, #collection, #bodyshape, #product_order').val('').trigger('chosen:updated')
+      @$el.find('#colour, #event, #bodyshape, #product_order').val('').trigger('chosen:updated')
       @update()
 
     updateOrder: () ->
       @update()
 
     updatePageLocation: (filter) ->
-      url = '/collection'
+      url = '/dresses'
       if _.isEmpty(filter)
-        url = '/collection'
-      else if _.isEmpty(filter.collection) || (typeof filter.collection != 'string')
-        url = "/collection?#{ $.param(filter) }"
-      else # single selected collection
-        cleared_filter = _.omit(filter, 'collection', 'lp')
-        if _.isEmpty(cleared_filter)
-          url = "/collection/#{filter.collection}"
-        else
-          url = "/collection/#{filter.collection}?#{$.param(cleared_filter)}"
+        url = '/dresses'
+      else
+        url = "/dresses?#{ $.param(filter) }"
 
-      url = "/lp#{ url }" if !_.isUndefined(filter.lp)
       url = urlWithSitePrefix(url)
       window.history.pushState({ path: url }, '', url)
       url
 
     getSelectedValues: () ->
-      result = addValue({}, 'collection', '#collection')
+      result = addValue({}, 'event', '#event')
       addValue(result, 'bodyshape', '#bodyshape')
       addValue(result, 'colour', '#colour')
-      #addValue(result, 'style', '#style')
+      addValue(result, 'style', '#style')
       addValue(result, 'order', '#product_order')
+      console.log(result)
       result
   }
 

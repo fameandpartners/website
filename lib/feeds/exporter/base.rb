@@ -31,7 +31,29 @@ module Feeds
       end
 
       def collection_product_path(product)
-        helpers.collection_product_path(product)
+        path_parts = ['dresses', 'p']
+        if product.respond_to?(:descriptive_url)
+          path_parts << product.descriptive_url
+        else
+          path_parts << descriptive_url(product)
+        end
+        path =  '/' + path_parts.compact.join('/')
+
+        url_without_double_slashes(path)
+      end
+
+      def descriptive_url(product)
+        parts = []
+        parts << product.translated_short_description(I18n.locale).parameterize
+        parts << product.name.parameterize
+        parts << product.id
+
+        parts.reject(&:blank?).join('-')
+      end
+
+      def url_without_double_slashes(url)
+        # search elements with not colons and replace inside them
+        url.gsub(/\w+(\/\/)/){|a| a.sub('//', '/')}
       end
     end
   end

@@ -14,6 +14,54 @@ module ApplicationHelper
     html.html_safe
   end
 
+
+  def hreflang_tag
+
+    hreflang_language = get_hreflang_code
+
+    hreflang_link = get_hreflang_link
+
+    #binding.pry
+    r = "<link href='#{hreflang_link}' hreflang='#{hreflang_language}' rel='alternate' />"
+
+    r.html_safe
+  end
+
+  def get_hreflang_link
+    hreflang_language = get_hreflang_code
+    current_language = get_current_language_code
+
+    if request.fullpath.include? current_language
+      hreflang_link = "http://#{request.host}:#{request.port}#{request.fullpath}"
+      hreflang_link.gsub!(current_language, hreflang_language)
+    else
+      # united states is default, so default hreflang should be australian
+      hreflang_link = "http://#{request.host}:#{request.port}/au#{request.fullpath}"
+    end
+
+    hreflang_link
+  end
+
+  def get_hreflang_code
+    if current_site_version.is_australia?
+      hreflang_language = 'us'
+    else
+      hreflang_language = 'au'
+    end
+
+    return hreflang_language
+  end
+
+  def get_current_language_code
+    if current_site_version.is_australia?
+      current_language = 'au'
+    else
+      current_language = 'us'
+    end
+
+    return current_language
+  end
+
   def restfull_action_name
     case controller.action_name.to_sym
     when :create
@@ -124,11 +172,62 @@ module ApplicationHelper
     end
   end
 
-  def collection_product_path(product, options = {})
-    taxon = range_taxon_for(product)
-    taxon_permalink = taxon.present? ? taxon.permalink.split('/').last : 'long-dresses'
+  def descriptive_url(product, locale = nil)
+    parts = []
+    parts << product.translated_short_description(locale || I18n.locale).parameterize
+    parts << product.name.parameterize
+    parts << product.id
 
-    build_collection_product_path(taxon_permalink, product.to_param, options)
+    parts.reject(&:blank?).join('-')
+  end
+
+  def collection_product_path(product, options = {})
+    site_version_prefix = self.url_options[:site_version]
+    path_parts = [site_version_prefix, 'dresses']
+    locale = I18n.locale.to_s.downcase.underscore.to_sym
+
+    if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
+      path_parts << "dress-#{product[:urls][locale]}"
+    else
+      path_parts << descriptive_url(product)
+    end
+
+    path =  "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.present?
+    
+    url_without_double_slashes(path)
+  end
+
+  def colored_variant_path(variant, options = {})
+    parts = []
+    parts << self.url_options[:site_version]
+    parts << 'dresses'
+   
+    parts << "dress-#{variant.product[:urls][I18n.locale.to_s.downcase.underscore.to_sym]}"
+    parts << variant.color.name
+
+    path =  '/' + parts.reject(&:blank?).join('/')
+    path = "#{path}?#{options.to_param}" if options.present?
+
+    url_without_double_slashes(path)
+  end
+
+  def personalize_path(product, options={})
+    site_version_prefix = self.url_options[:site_version]
+    path_parts = [site_version_prefix, 'dresses', "custom-#{descriptive_url(product)}" ]
+    path =  "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.present?    
+    
+    url_without_double_slashes(path)
+  end
+
+  def style_it_path(product, options={})
+    site_version_prefix = self.url_options[:site_version]
+    path_parts = [site_version_prefix, 'dresses', "styleit-#{descriptive_url(product)}" ]
+    path =  "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.present?    
+    
+    url_without_double_slashes(path)
   end
 
   def collection_product_url(product, options = {})
@@ -155,6 +254,40 @@ module ApplicationHelper
       root_url(site_version: nil) + build_collection_product_path(collection_id, product_id, options)
     )
   end
+
+
+  def build_taxon_path(taxon_name, options={})
+    site_version_prefix = self.url_options[:site_version]
+
+    #must downcase because we want case insensitive urls
+    taxon = Spree::Taxon.where('lower(name) =?', taxon_name.downcase).last
+
+    
+
+    if taxon.nil?
+      #check for non-hyphenated version of the taxon name
+      taxon = Spree::Taxon.where('lower(name) = ?', taxon_name.downcase.gsub('-', ' ')).last
+    end
+
+    taxon_name = taxon.name.parameterize unless taxon.nil?
+
+    path_parts = [site_version_prefix, 'dresses',taxon_name]
+    path = "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.any?
+    
+
+    url_without_double_slashes(path)
+  end
+
+  def colour_path(color, options={})
+    site_version_prefix = self.url_options[:site_version]
+    path_parts = [site_version_prefix, 'dresses', color.downcase.parameterize]
+    path = "/" + path_parts.compact.join('/')
+    path = "#{path}?#{options.to_param}" if options.any?
+
+    url_without_double_slashes(path)
+  end
+
 
   def taxon_path(taxon)
     site_version_prefix = self.url_options[:site_version]
@@ -244,6 +377,7 @@ module ApplicationHelper
   # ' $295
   def price_for_product(product)
     price = product.zone_price_for(current_site_version)
+
     if show_prices_with_applied_promocode?
       [
         content_tag(:span, price.display_price, class: 'price-old'),
@@ -317,8 +451,6 @@ module ApplicationHelper
     searcher.current_currency = currency
     return searcher.products.first(count)
   end
-
-  private
 
   def current_sale
     @current_sale ||= Spree::Sale.first_or_initialize

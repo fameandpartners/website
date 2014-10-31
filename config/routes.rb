@@ -36,6 +36,33 @@ FameAndPartners::Application.routes.draw do
 
     post '/shared/facebook' => 'competition/events#share'
 
+    # SEO categories routes, we want them in front
+
+    scope '/dresses', module: 'personalization' do
+      get '/custom-:product_slug', to: 'products#show'
+      get '/styleit-:product_slug', to: 'products#style'
+    end
+
+
+    scope '/dresses' do
+      root to: 'spree/products#index', as: 'dresses'
+      get '/dress-:product_slug(/:color_name)' => 'spree/products#show'
+      #roots categories
+      get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
+      get '/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
+      get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
+      get '/colour' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
+      get '/color' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
+
+      # get '/colour/:colour' => 'spree/products#index'
+      # get '/color/:colour' => 'spree/products#index'
+      # get '/body-shape/:bodyshape' => 'spree/products#index'
+      get '/:event/:style' => 'spree/products#index'
+      get '/*permalink' => 'spree/products#index', as: 'taxon'
+      get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
+    end
+
+
     # to correctly redirect, we should know product taxon or extract collection from param
     get "/products"             => 'redirects#products_index'
     get "/products/:product_id" => 'redirects#products_show'
@@ -47,8 +74,8 @@ FameAndPartners::Application.routes.draw do
       post '/', to: 'registrations#create'
 
       get '/browse', to: 'products#index', as: :personalization_products
-      get '/:permalink', to: 'products#show', as: :personalization_product
-      get '/:permalink/style', to: 'products#style', as: :personalization_style_product
+      get '/:permalink', to: 'redirects#products_show', as: :personalization_product, defaults: {custom_dress: true}
+      get '/:permalink/style', to: 'redirects#products_show', as: :personalization_style_product, defaults: {style_dress: true}
     end
 
     get '/celebrities' => 'celebrities#index', as: 'celebrities'
@@ -62,10 +89,11 @@ FameAndPartners::Application.routes.draw do
     resource :product_variants, only: [:show]
 
     scope '/collection' do
-      root to: 'spree/products#index', as: 'collection'
-      get '/:collection' => 'spree/products#index'
-      get '/:collection/:id' => 'spree/products#show'
+      root to: 'redirects#products_index', as: 'collection'
+      get '/:collection/:product_id' => 'redirects#products_show'
+      get '/:collection' => 'redirects#products_index'
     end
+
     get '/lp/collection(/:collection)' => 'spree/products#index', defaults: { lp: 'lp' }
 
     get '/quick_view/:id' => 'spree/products#quick_view'
@@ -174,6 +202,7 @@ FameAndPartners::Application.routes.draw do
     namespace "campaigns" do
       resource :newsletter, only: [:new, :create], controller: :newsletter
       resource :email_capture, only: [:new, :create], controller: :email_capture
+      resource :girlfriend_pop, only: [:new, :create], controller: :girlfriend_pop
     end
 
     #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses

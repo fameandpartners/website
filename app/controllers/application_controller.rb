@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
+  append_before_filter :get_visitor_info
   append_before_filter do
     return if params[:cpt].blank?
 
@@ -46,6 +47,58 @@ class ApplicationController < ActionController::Base
       else params[:site_version] != current_site_version.code
         redirect_to url_with_correct_site_version
       end
+    end
+  end
+
+  def get_visitor_info
+    # check referrer
+    
+
+    #if session[:user_info] == nil
+      host = request.referrer
+      in_referrer = false
+      in_campaign = false
+      in_source = false
+
+      if !host.blank?
+        in_referrer = host
+        cookies[:referrer] = host
+      end
+
+      if params[:utm_campaign].present?
+        in_campaign = params[:utm_campaign]
+        cookies[:utm_campaign] = params[:utm_campaign]
+      end
+      
+      if params[:utm_source].present?
+        in_source = cookies[:utm_source]
+        cookies[:utm_source] = params[:utm_source]
+      end
+
+      session[:user_info] = true
+
+      check_if_girlfriend(in_referrer, in_campaign, in_source)
+
+    #else
+    #  return
+    #end
+  
+  end 
+
+  def check_if_girlfriend(in_referrer, in_campaign, in_source)
+    return if cookies[:gf_pop].present?
+
+    referrer = in_referrer.match(/girlfriend|girlfriendmagazine/) unless in_referrer.blank?
+    campaign = in_campaign.match(/girlfriend|gfxfp/) unless in_campaign.blank?
+    source = in_source.match(/gf/) unless in_source.blank?
+  
+    if referrer || campaign || source
+      cookies[:gf_campaign] = 'true'
+      unless cookies[:gf_pop] == 'hide'
+        cookies[:gf_pop] = 'show'
+      end
+    else
+      return
     end
   end
 

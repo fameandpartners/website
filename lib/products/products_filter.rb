@@ -22,6 +22,7 @@ module Products
     def initialize(params)
       self.current_currency = Spree::Config[:currency]
       @properties = ActiveSupport::HashWithIndifferentAccess.new
+      ##binding.pry
       prepare(params)
     end
 
@@ -56,6 +57,8 @@ module Products
       offset     = ((page - 1) * per_page)
       fetched_products_ids = @fetched_products_ids
       only_viewable_colors = options[:only_viewable_colors]
+
+      ##binding.pry
 
       begin
         Tire.search(:spree_products, load: { include: { master: :prices } }) do
@@ -257,7 +260,11 @@ module Products
     protected
 
     def taxons
-      permalinks = Spree::Taxon.roots.map(&:permalink)
+      permalinks = Spree::Taxon.all.map(&:permalink)
+
+      # * = splat operator
+      # slice limits the hash to hold only provided values
+
       @properties.slice(*permalinks).reject{ |k, v| v.blank? }
     end
 
@@ -270,14 +277,61 @@ module Products
       @properties[:collection]  ||= []
       @properties[:edits]       ||= []
 
+      @properties[:selected_taxons] ||= []
+      @properties[:selected_edits] ||= []
+
+      #binding.pry
+
       # it's dirty hack, we equal collection with some other collection
       if params[:collection].present? && params[:seocollection].blank?
+        #binding.pry
         params[:seocollection] = params[:collection]
+        @properties["collection"] = params[:collection]
+        @properties["seocollection"] = params[:collection]
+        # MarkoK: continuing with dirty hacks, to ensure backwards compatibility
+        # with the old links, we add "collection/" to the beggining of the permalink
+        params[:permalink] = "collection/#{params[:collection]}"
+        #binding.pry
+      elsif params[:collection].present?
+        params[:permalink] = "collection/#{params[:collection]}"
+        @properties["collection"] = params[:collection]
+        binding.pry
+      elsif params[:edits].present?
+        params[:permalink] = "edits/#{params[:edits]}"
+        #binding.pry
+      elsif params[:collection].blank? && params[:edits].blank? && params[:permalink].present?
+        params[:permalink].downcase!
+        # chop off the end part of a permalink (after "/")
+        params[:collection] = params[:permalink].split("/")[1]
+        params[:seocollection] = params[:collection]
+        @properties["collection"] = params[:collection]
+        @properties["seocollection"] = params[:collection]
       end
-      Spree::Taxon.roots.each do |taxon|
+
+      #binding.pry
+        
+        # ugly, refactros ASAP
+        params[:permalink].downcase! unless params[:permalink].blank?
+
+        # adding support for faceted search (filtering) across multiple taxons
+        final_requested_taxons = []
+        final_requested_taxons << params[:permalink] unless params[:permalink].blank?
+        final_requested_taxons << "style/#{params[:style]}" unless params[:style].blank?
+        final_requested_taxons << "event/#{params[:event]}" unless params[:event].blank?
+
+        #binding.pry
+
+      Spree::Taxon.all.each do |taxon|
         permalink = taxon.permalink
-        @properties[permalink] = prepare_taxon(permalink, params[permalink])
+        @properties[permalink] = prepare_taxon(permalink, final_requested_taxons)
+        if @properties[permalink].present? && params[:edits].blank?
+          @properties[:selected_edits] << @properties[permalink]
+        elsif @properties[permalink].present?
+          @properties[:selected_taxons] << @properties[permalink]
+        end
       end
+
+      #binding.pry
 
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
@@ -293,12 +347,20 @@ module Products
 
     # get by permalinks. array or single param
     # todo: create root taxon - independed search
-    def prepare_taxon(root, permalinks)
-      return nil if permalinks.blank?
-      permalinks = Array.wrap(permalinks)
+    def prepare_taxon(taxon_permalink, requested_permalinks)
+      return nil if requested_permalinks.blank?
+      permalinks = Array.wrap(requested_permalinks)
 
-      db_permalinks = permalinks.map{|permalink| "#{root}/#{permalink.downcase}"}
-      Spree::Taxon.select(:id).where("lower(permalink) IN (?)", db_permalinks).map(&:id)
+      # db_permalinks = permalinks.map{|permalink| "#{root}/#{permalink.downcase}"}
+      # Spree::Taxon.select(:id).where("lower(permalink) IN (?)", db_permalinks).map(&:id)
+      if permalinks.include? taxon_permalink
+        r = Spree::Taxon.select(:id).where(permalink: taxon_permalink).map(&:id)
+      else
+        r = nil
+      end
+
+      ##binding.pry
+      return r
     end
 
     def prepare_colours(colour_names)
