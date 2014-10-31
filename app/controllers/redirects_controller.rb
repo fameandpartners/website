@@ -15,6 +15,7 @@ class RedirectsController < ApplicationController
   # process /products/:arg1/:arg2  
   #   if no product found, trying to interpretate it as collection_id
   def products_show
+
     product_id = params[:product_id] || params[:permalink]
     product = Spree::Product.active.find_by_permalink(product_id)
     collection = get_collection_taxon(params[:collection])
