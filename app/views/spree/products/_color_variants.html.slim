@@ -7,7 +7,7 @@
         .arrows-line-horizontal
         - @lp_featured_products.each do |product|
           .grid-3
-            - cache [:shared, :product, product.id], expires_in: configatron.cache.expire.long do
+            - cache [:shared, :product, @searcher.colour.first.try(:name), product.id], expires_in: configatron.cache.expire.long do
               = render 'spree/products/cached_product', product: product
         .arrows-line-horizontal
   .row
