@@ -339,7 +339,7 @@ module Products
         end
       end
 
-      binding.pry
+      
 
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
