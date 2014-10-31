@@ -202,6 +202,7 @@ FameAndPartners::Application.routes.draw do
     namespace "campaigns" do
       resource :newsletter, only: [:new, :create], controller: :newsletter
       resource :email_capture, only: [:new, :create], controller: :email_capture
+      resource :girlfriend_pop, only: [:new, :create], controller: :girlfriend_pop
     end
 
     #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
