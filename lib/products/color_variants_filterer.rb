@@ -281,7 +281,7 @@ module Products
         @properties["collection"] = params[:collection]
         binding.pry
       elsif params[:edits].present?
-        params[:permalink] = "edits/#{params[:edits]}"
+        params[:permalink] = params[:edits]
       elsif params[:collection].blank? && params[:edits].blank? && params[:permalink].present?
         params[:permalink].downcase!
         
@@ -299,10 +299,12 @@ module Products
       # adding support for faceted search (filtering) across multiple taxons
       final_requested_taxons = []
 
+      
       # this is a really wrong way to check if both style and event contain the requested permalink...
       final_requested_taxons << "style/#{params[:permalink]}" unless params[:permalink].blank?
       final_requested_taxons << "event/#{params[:permalink]}" unless params[:permalink].blank?
-
+      final_requested_taxons << "edits/#{params[:permalink]}" unless params[:permalink].blank?
+      
       #here we handle the filtering
       final_requested_taxons << "style/#{params[:style]}" unless params[:style].blank?
       final_requested_taxons << "event/#{params[:event]}" unless params[:event].blank?
@@ -337,6 +339,7 @@ module Products
         end
       end
 
+      binding.pry
 
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
