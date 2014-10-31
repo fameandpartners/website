@@ -67,6 +67,8 @@ Spree::ProductsController.class_eval do
       @similar_color_variants = sorter.results
     end
 
+    @current_colors = @searcher.colour.present? ? @searcher.colors_with_similar : []
+
     currency = current_currency
     user = try_spree_current_user
 
