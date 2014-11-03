@@ -146,13 +146,12 @@
                     .grid-7.promos
                       h2 What's hot now
                       .tile
-                        = link_to '/dresses/black?cf=home', title: 'Halloween Edit' do
-                          = image_tag "menu/black-dresses.jpg"
+                        = link_to '/dresses/?order=fast_delivery&cf=header', title: 'Next Day Delivery' do
+                          = image_tag "menu/nextday.jpg"
                         .label
-                          ' Halloween Edit
-                          br Use HALLOWEEN20P at checkout
+                          ' Next Day Delivery
                       .tile
-                        = link_to '/dresses?cf=home&edits=race-day', title: 'Spring Racing Edit' do
+                        = link_to '/dresses?cf=header&edits=race-day', title: 'Spring Racing Edit' do
                           = image_tag "menu/spring-racing.jpg"
                         .label Spring Racing Edit
           li.blog = link_to 'Blog', blog_path, class: 'btn'
