@@ -24,7 +24,7 @@ ruby:
     .row
       - if @products.present?
         - @products.each do |product|
-          div class="grid-3"
+          .grid-3
             - cache (cache_name_fragments + [product.id]), expires_in: configatron.cache.expire.long do
               = render 'spree/products/cached_product', product: product
       - else
