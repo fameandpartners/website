@@ -7,11 +7,11 @@ module Spree
         @taxonomy = Spree::Taxonomy.find(params[:taxonomy_id])
         @taxon = Spree::Taxon.find(params[:id])
 
-        @banner = @taxon.banner || @taxon.build_banner
+        @banner = @taxon.banner || @taxon.create_banner
 
         flash[:success] = flash_message_for(@taxon, :successfully_updated)
         
-        if @banner.update_attributes(params[:banner])
+        if @banner.update_attributes(params[:banner]) && @banner.save
           flash[:success] = flash_message_for(@taxon, :successfully_updated)
         else
           flash[:error] = "can't update banner"
