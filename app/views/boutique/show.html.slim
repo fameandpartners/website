@@ -13,7 +13,6 @@
       .arrows-line-horizontal
       h1 #{current_spree_user.first_name}'s Personalised Boutique
       .arrows-line-horizontal
-      / h2 Below is a collection of dresses that our stylists have mached to you!
       h2
         ' The most killer dresses 
         br
@@ -46,11 +45,8 @@
               ' Read our styling notes or book
               br
               ' a free styling session!
-
-    / .instructions
-      ' Select a dress below... Then if you want to make it your own click the Customize tab.
      
-    .category-catalog.products
+    .category-catalog.products-list
       .row
         - if @recommended_dresses.present?
           - @recommended_dresses.each do |product|
@@ -70,9 +66,7 @@
       .bg-elem-1
       .bg-elem-2
       .bg-elem-3
-      / ul.filters
-        li.active = link_to 'View all of our dresses.', collection_path
-    .category-catalog
+    .category-catalog.products-list
       .row
         - @dresses.each do |product|
           .grid-3
@@ -82,4 +76,3 @@
     .view-more-separate
     .view-more-dresses
       = link_to 'VIEW MORE DRESSES', collection_path, class: 'btn mid'
-= thanks_popup_for_new_competition_entrant
