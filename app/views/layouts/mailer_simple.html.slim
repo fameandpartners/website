@@ -20,27 +20,6 @@ html style="background: #fff none repeat scroll 0% 0%;"
             table align="center" border="0" cellpadding="0" cellspacing="0" width="682"
               tbody
                 tr
-                  td 
-                    table border="0" cellpadding="0" cellspacing="0" width="100%"
-                      tr
-                        td bgcolor="#000" width="100px"
-                          = link_to main_app.dresses_path do
-                            = image_tag '_email/nav-collection.png', style: 'display: block'
-                        td bgcolor="#000" width="100px"
-                          = link_to main_app.root_path do
-                            = image_tag '_email/nav-create.png', style: 'display: block'
-                        td bgcolor="#000"
-                          = link_to main_app.root_path do
-                            = image_tag '_email/nav-chain.png', style: 'display: block; float: right;'
-                tr
-                  td height="21"
-                tr
-                  td.logo style="text-align: center;"
-                    a href="#{ main_app.root_url }"
-                      img src="http://www.fameandpartners.com/images/email/logo-new.png" width="130" height="95" alt="Fame&Partners" style="border: 0;"
-                tr
-                  td height="21"
-                tr
                   td
                     table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                       tbody
@@ -49,6 +28,8 @@ html style="background: #fff none repeat scroll 0% 0%;"
                         tr
                           td style="background: #fff; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; color: #666;"
                             = yield
+                        tr
+                          td height="1" style="background: #cdcdcd;"
                 tr
                   td height="21"
                 tr
