@@ -1,4 +1,10 @@
-= cache [:shared, :color_variant, variant.product.id, variant.color.name], expires_in: configatron.cache.expire.long do
+ruby:
+  cache_name = [:shared, :color_variant, variant.product.id, variant.color.name]
+  if show_prices_with_applied_promocode? && current_promotion.present?
+    cache_name.push(current_promotion.code)
+  end
+
+= cache cache_name, expires_in: configatron.cache.expire.long do
   .picture
     = link_to colored_variant_path(variant) do
       = image_tag variant.images.first.large, alt: variant.product.name
