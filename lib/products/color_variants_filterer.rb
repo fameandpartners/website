@@ -279,7 +279,7 @@ module Products
       elsif params[:collection].present?
         params[:permalink] = "collection/#{params[:collection]}"
         @properties["collection"] = params[:collection]
-        binding.pry
+        
       elsif params[:edits].present?
         params[:permalink] = params[:edits]
       elsif params[:collection].blank? && params[:edits].blank? && params[:permalink].present?
