@@ -150,6 +150,9 @@ Spree::ProductsController.class_eval do
   def show
     return unless @product
 
+    #binding.pry
+
+
     if params[:color_name]
       @color = Spree::OptionValue.colors.find_by_name!(params[:color_name])
     end
