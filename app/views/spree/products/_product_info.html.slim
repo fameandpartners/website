@@ -8,6 +8,7 @@ ruby:
     locale_code = 'au'
     locale_unit_code = 'cm'
     locale_unit_symbol = 'cm'
+    currency_code = 'AUD'
   else
     size_info_label = 'US Sizes Displayed'
     size_charge_start = 14
@@ -15,15 +16,24 @@ ruby:
     locale_code = 'us'
     locale_unit_code = 'in'
     locale_unit_symbol = '&#8243;'.html_safe
+    currency_code = 'USD'
   end
 
-.product-info
-  = product_breadcrumbs(product.taxons.first)
-  h1.product-title
+.product-info itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"
+  
+  meta itemprop="priceCurrency" content="#{currency_code}" /
+  meta itemprop="condition" content="new" /
+  meta itemprop="availability" content="in_stock" /
+  meta itemprop="price" content="#{product.price}" /
+  meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
+  meta itemprop="identifier" content="sku:#{@product.sku}" /
+
+  = render "product_breadcrumbs", crumbs: product_style_and_event(product)
+  h1.product-title *{'itemprop'=>'name'}
     = product.name
   - unless product.short_description.empty?
     h1.product_short_description = product.translated_short_description(I18n.locale)
-  .price = price_for_product(product)
+  .price itemprop="price" = price_for_product(product)
   .section  
     - options = color_options_for_select(colors, selected_color)
     = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'
@@ -61,7 +71,8 @@ ruby:
               strong Pre-order
               ' This item will ship within 4 weeks
           - if (description = product_description(@product)).present?
-            p = description
+            div itemprop="description"
+              = description
           - else
             p = t('product_has_no_description')
       li 
@@ -81,7 +92,9 @@ ruby:
       li
         .title color and material
         .text
-          p Fame & Partners makes custom, on-demand dresses and as part of our bespoke customised process we often use small runs of special materials and dip dye some fabrics to ensure every dress is unique to every customer! 
+          p
+            span itemprop="brand" Fame & Partners 
+            ' makes custom, on-demand dresses and as part of our bespoke customised process we often use small runs of special materials and dip dye some fabrics to ensure every dress is unique to every customer! 
           p We understand you want to know what your special dress should look like when it arrives at your door, so we sometimes use digital colour replication on our Web site to show all the different colour variations you can select from. Therefore, while we're doing our best to show colours and material variations digitally across all different computer and mobile screens our customers use, we want you to understand that the digital colours and materials as they appear and are described on this Web site may not perfectly match the colours and materials of our actual garments and some slight variations may occur.
       - unless product.property('preorder').present? && product.property('preorder').downcase == "yes"
         li 
