@@ -28,7 +28,7 @@ ruby:
   meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
   meta itemprop="identifier" content="sku:#{@product.sku}" /
 
-  = product_breadcrumbs(product.taxons.first)
+  = render "product_breadcrumbs", crumbs: product_style_and_event(product)
   h1.product-title *{'itemprop'=>'name'}
     = product.name
   - unless product.short_description.empty?
