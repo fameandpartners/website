@@ -53,22 +53,6 @@ ActiveRecord::Schema.define(:version => 20141104194804) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
-  create_table "banners", :force => true do |t|
-    t.string   "presentation"
-    t.string   "url"
-    t.string   "category"
-    t.integer  "position"
-    t.boolean  "enabled",                 :default => false
-    t.string   "attachment_content_type"
-    t.string   "attachment_file_name"
-    t.datetime "attachment_updated_at"
-    t.integer  "attachment_width"
-    t.integer  "attachment_height"
-    t.integer  "attachment_size"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
-  end
-
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",  :null => false
