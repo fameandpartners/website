@@ -55,7 +55,7 @@ en:
       marketing:
         abandoned_cart: 'You have fast moving items in your shopping bag'
         added_to_wishlist: 'We love what you added to your wishlist'
-        style_quiz_not_completed: 'Get $25 to spend by completing your Style Profile'
+        style_quiz_not_completed: 'Get $20 to spend by completing your Style Profile'
         style_quiz_completed: 'Your Style Profile'
         style_quiz_completed_reminder: 'More Dresses! Plus a FREE STYLING SESSION'
         wishlist_item_added: 'We totally heart that dress too!'
