@@ -6,7 +6,7 @@
     h3 Payment
   .checkout-content data-step="payment" class="active"
     .payment-method-details
-      - unless (sale_active? or current_order.has_personalized_items?)
+      - unless sale_active?
         .coupon-block
           = form_for @order, url: update_checkout_path('payment'), remote: true, html: {class: 'form-global', id: 'coupon_code'} do |f|
             h4 Have a promocode?
@@ -15,7 +15,7 @@
       - else
         .coupon-block
           h4 Promocode
-          h5 Sorry we don't offer discounts on customized dresses or sale items.
+          h5 Sorry we don't offer discounts
 
       .payments-choose
         .input.clearfix

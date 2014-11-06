@@ -1,6 +1,6 @@
 Spree::Promotion.class_eval do
   def eligible?(order)
-    return false if expired? || usage_limit_exceeded?(order) || order.has_personalized_items?
+    return false if expired? || usage_limit_exceeded?(order) || customisation_order(order)
     rules_are_eligible?(order, {})
   end
 
@@ -26,4 +26,23 @@ Spree::Promotion.class_eval do
   rescue
     price
   end
+
+  private
+
+  def customisation_order(order)
+    customisation = order.has_personalized_items?
+    girlfriend = %w[swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25].include?(self.name.downcase)
+    
+    
+    if girlfriend || !customisation
+      # allow promocode usage
+      return false
+    else
+      # dont allow promocode usage
+      return true
+    end
+
+  end
+
+
 end
