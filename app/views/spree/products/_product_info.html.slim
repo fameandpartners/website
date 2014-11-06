@@ -26,9 +26,9 @@ ruby:
   meta itemprop="availability" content="in_stock" /
   meta itemprop="price" content="#{product.price}" /
   meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
-  meta itemprop="identifier" content="sku:#{@product.sku}" /
+  meta itemprop="identifier" content="sku:#{product.sku}" /
 
-  = render "product_breadcrumbs", crumbs: product_style_and_event(product)
+  = render "spree/products/product_breadcrumbs", crumbs: product_style_and_event(product)
   h1.product-title *{'itemprop'=>'name'}
     = product.name
   - unless product.short_description.empty?

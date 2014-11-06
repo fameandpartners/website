@@ -90,7 +90,7 @@
                   .fleft = link_to '&lt; Continue shopping'.html_safe, collection_path, class: 'btn empty border continue-shopping'
                 .grid-6
                   .fright
-                    - unless (sale_active? or @order.has_personalized_items?)
+                    - unless sale_active?
                       .promocode.fright.promo-block
                         = form_for @order, remote: true, html: {class: 'form-global'} do |f|
                           = f.submit 'Redeem', style: 'float: right;', class: 'btn empty border'
