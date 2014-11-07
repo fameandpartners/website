@@ -36,7 +36,7 @@ Spree::Promotion.class_eval do
 
     binding.pry
     
-    if girlfriend || !customisation
+    if girlfriend || customisation == false
       # allow promocode usage
       return false
     else
