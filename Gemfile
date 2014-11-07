@@ -37,6 +37,8 @@ gem 'font-awesome-sass'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
+gem 'pry-rails'
+
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
