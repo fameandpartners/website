@@ -31,7 +31,8 @@ Spree::Promotion.class_eval do
 
   def customisation_order(order)
     customisation = order.has_personalized_items?
-    girlfriend = %w[swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25].include?(self.name.downcase)
+    codes = %w(swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25)
+    girlfriend = codes.include?(self.name.downcase)
     
     
     if girlfriend || !customisation
