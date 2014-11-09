@@ -32,9 +32,9 @@ Spree::Promotion.class_eval do
   def customisation_order(order)
     customisation = order.has_personalized_items?
     codes = %w(swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25)
-    girlfriend = codes.include?(self.name.downcase)
+    girlfriend = codes.include?(self.code.downcase)
 
-    binding.pry
+    # binding.pry
     
     if girlfriend || customisation == false
       # allow promocode usage
@@ -43,8 +43,5 @@ Spree::Promotion.class_eval do
       # dont allow promocode usage
       return true
     end
-
   end
-
-
 end
