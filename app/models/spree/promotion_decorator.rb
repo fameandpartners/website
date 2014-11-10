@@ -30,26 +30,18 @@ Spree::Promotion.class_eval do
   private
 
   def customisation_order(order)
-    
-    # hack unitl fix on prod
-    return false
-
-
-    # customisation = order.has_personalized_items?
-    # codes = %w(swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25)
-    # girlfriend = codes.include?(self.name.downcase)
+    customisation = order.has_personalized_items?
+    codes = %w(swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25)
+    girlfriend = codes.include?(self.code.downcase)
 
     # binding.pry
     
-    # if girlfriend || customisation == false
-    #   # allow promocode usage
-    #   return false
-    # else
-    #   # dont allow promocode usage
-    #   return true
-    # end
-
+    if girlfriend || customisation == false
+      # allow promocode usage
+      return false
+    else
+      # dont allow promocode usage
+      return true
+    end
   end
-
-
 end
