@@ -151,9 +151,9 @@
                         .label
                           ' Next Day Delivery
                       .tile
-                        = link_to '/dresses?cf=header&edits=race-day', title: 'Spring Racing Edit' do
-                          = image_tag "menu/spring-racing.jpg"
-                        .label Spring Racing Edit
+                        = link_to colour_path('Pastel'), title: 'Pastel Dresses' do
+                          = image_tag "menu/pastel.jpg"
+                        .label $20 off pastel dresses
           li.blog = link_to 'Blog', blog_path, class: 'btn'
           li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do
               span.icon-heart
