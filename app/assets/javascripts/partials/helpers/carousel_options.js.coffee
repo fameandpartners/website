@@ -1,11 +1,11 @@
 window.helpers ||= {}
 
 window.helpers.get_vertical_carousel_options = (options = {}) ->
-  prev = _.extend({ button: "#product-images-up", key: "up", items: 4 }, options.prev || {})
-  next = _.extend({ button: "#product-images-down", key: "down", items: 4 }, options.next || {})
+  prev = _.extend({ button: "#product-images-up", key: "up", items: 3 }, options.prev || {})
+  next = _.extend({ button: "#product-images-down", key: "down", items: 3 }, options.next || {})
 
   result = _.extend(
-    { direction: "down", items: 4, circular: false, infinite: false, auto: false },
+    { direction: "down", items: 3, circular: false, infinite: false, auto: false },
     options,
     { prev: prev },
     { next: next }

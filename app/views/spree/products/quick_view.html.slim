@@ -1,4 +1,5 @@
 ruby:
+ selected_color ||= nil
  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
  enabled_tabs = ['photos']
@@ -30,13 +31,7 @@ ruby:
       - if enabled_tabs.include?('video')
         #videos.tab-content
           == product_video(@product, width: 518, height: 330)
-    .notice
-      .colour
-        =' t('views.quick_view.different_color.question')
-        = mail_to "team@fameandpartners.com", 'Just ask us!', subject: t('views.quick_view.different_color.email.subject', sku: @product.sku)
-      .faster
-        ' Need this faster?
-        = mail_to "team@fameandpartners.com", 'Get in touch', subject: "I would like this dress (#{@product.sku}) faster."
+
   .grid-5
     .product-info
       .name = @product.name
@@ -47,7 +42,7 @@ ruby:
       .colors-choser
         .label = t('views.quick_view.labels.color')
         .select-holder
-          - options = color_options_for_select(colors)
+          - options = color_options_for_select(colors, selected_color)
           = select_tag :colour, options, class: 'selectbox', name: 'color', include_blank: true, prompt: 'Select colour', data: { select: 'colour' }
       .size-select
         .label = t('views.quick_view.labels.size')
