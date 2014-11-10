@@ -1,27 +1,15 @@
 module ProductsHelper
 
-  def product_breadcrumbs(taxon, separator="&nbsp;&#47;&nbsp;")
-    return "" if current_page?("/") || taxon.nil?
-    crumbs = []
-    if taxon
-      crumbs << ['Dresses', dresses_path]
-      crumbs += taxon.ancestors.collect { |a| [a.name.pluralize, dress_nested_taxons_path(a.permalink)] } unless taxon.ancestors.empty?
-      crumbs << [taxon.name, dress_nested_taxons_path(taxon.permalink)]
-    else
-      crumbs << ['Dresses', dresses_path]
-    end
+  def product_style_and_event(product)
+    result = []
+    style_taxon = Spree::Taxonomy.where(name: "Style").first.root
+    event_taxon = Spree::Taxonomy.where(name: "Event").first.root
+    
+    result << product.taxons.where(parent_id: event_taxon.id).last
+    result << product.taxons.where(parent_id: style_taxon.id).last if result.empty?
 
-    separator = raw(separator)
-
-    crumbs.map! do |crumb|
-      content_tag(:li, itemscope:"itemscope", itemtype:"http://data-vocabulary.org/Breadcrumb") do
-        link_to(crumb.last, itemprop: "url") do
-          content_tag(:span, crumb.first, itemprop: "title")
-        end + (crumb == crumbs.last ? '' : separator)
-      end
-    end
-
-    content_tag(:nav, content_tag(:ul, raw(crumbs.map(&:mb_chars).join)), class: 'breadcrumbs')
+    #binding.pry
+    return result
   end
 
   def range_taxonomy
