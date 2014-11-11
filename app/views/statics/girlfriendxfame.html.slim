@@ -34,6 +34,7 @@
             p.description = special_description
             .price = price_for_product(dress)
             p = link_to 'buy', collection_product_path(dress), class: 'btn small'
+            .sale-discount 15% off
             .social-grey-global.addthis_toolbox.addthis_default_style
               = facebook_share_button(collection_product_path(dress))
             .social-popup style="display: none;"
