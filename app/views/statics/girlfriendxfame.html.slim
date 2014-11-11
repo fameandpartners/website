@@ -12,6 +12,10 @@
         cache_keys << 'not-authenticated'
       end
       cache_keys << 'products'
+      
+      if show_prices_with_applied_promocode? && current_promotion.present?
+        cache_keys.push(current_promotion.code)
+      end
 
     - cache cache_keys, expires_in: configatron.cache.expire.long do
       - get_products_from_edit('girlfriend', nil, nil, 12).each do |dress|

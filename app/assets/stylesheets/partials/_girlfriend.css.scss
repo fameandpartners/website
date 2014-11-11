@@ -83,6 +83,18 @@
 	          width: 100%;
 	        }
 			}
+			.price {
+		    font-size: 14px;
+		    color: $pinkColor;
+		    .price-old {
+		    	padding: 0 4px;
+		      color: #000;
+		    }
+		  }
+		  .price-old { 
+		    text-decoration: line-through;
+		    color: #000;
+		  }
 			.title {
 				font-size: 40px;
 				font-family: $fontThree;
