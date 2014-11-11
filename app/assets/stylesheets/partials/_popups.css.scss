@@ -354,7 +354,7 @@
 	}
 }
 
-.bday-popup, .prom-popup, .welcomeback-popup {
+.bday-popup, .prom-popup, .welcomeback-popup, .bridesmaid-popup {
 	.modal-container {
 		border: 5px solid #000;
 		padding: 28px;
@@ -402,9 +402,48 @@
 .bday-popup .modal-container {
 	background: url('_popups/birthday.jpg') no-repeat;
 }
-.prom-popup .modal-container, .welcomeback-popup .modal-container {
+.welcomeback-popup .modal-container {
 	background: url('_popups/prom.jpg') no-repeat;
 	padding-left: 200px;
+}
+.bridesmaid-popup .modal-container {
+	background: url('_popups/bridesmaid.jpg') no-repeat;
+	border-color: #FFDFEA;
+
+	.title {
+		margin-top: 13px;
+	}
+
+	.serif{
+		display: inline-block;
+		font: 700 22px/1 $fontSix;
+		font-style: italic;
+	}
+
+	.sans-serif{
+		display: inline-block;
+		font: 400 22px/1 $fontOne;
+	}
+
+	.close-lightbox{
+		background: #FFDFEA;
+		color: #000;
+		font-size: 12px;
+	}
+
+	.string {
+		.input {
+			border: 1px solid #FFDFEA;
+			@include longBoxShadowRight(#FFDFEA, 5);
+		}
+	}
+
+	.btn{
+		background: #FFDFEA;
+		color: #000;
+	}
+
+
 }
 
 .prom-popup .title{

@@ -1,39 +1,5 @@
 - if marketing_landing_page?
-  javascript:
-    contentparam = '#{params[:dmb]}';
-    pop_switch = '#{params[:pop_switch]}';
-    pop_title = '#{strip_tags(params[:pop_title])}';
-
-
-    if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || pop_switch == '1') {
-
-      switch (contentparam) {
-        case 'bday':
-          content = 'birthday.gif';
-          break;
-        case 'prom':
-          content = 'prom.gif';
-          break;
-        case 'welcomeback.jpg':
-          content = 'prom.gif';
-          break;
-        default:
-          content = 'bday';
-      }
-
-      $(document).ready(function () {
-        setTimeout(openpop, 5000);
-      });
-    }
-    ;
-
-    window.marketing_landing_page = true;
-
-
-    function openpop() {
-      popup = new window.popups.EmailCaptureModalPopup();
-      popup.show(content, pop_title)
-    }
+  = render '/shared/marketing_pop_js'
 
 - if (image_url = marketing_banner_image_url).present? && !sale_active?
   .row
@@ -79,5 +45,3 @@
 .m-pixel
   = raw @marketing_pixels
 script type="text/javascript" id="adacadoPixel" src="//pixel.adacado.com/1000668?segment=category&category=#{@page_info[:banner_title]}"
-
-= thanks_popup_for_new_competition_entrant
