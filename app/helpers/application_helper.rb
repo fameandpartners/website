@@ -44,9 +44,9 @@ module ApplicationHelper
 
   def get_hreflang_code
     if current_site_version.is_australia?
-      hreflang_language = 'us'
+      hreflang_language = 'en-us'
     else
-      hreflang_language = 'au'
+      hreflang_language = 'en-au'
     end
 
     return hreflang_language
