@@ -11,7 +11,7 @@ namespace :db do
         red:    ['red', 'cherry red', 'burgundy', 'hot pink and red', 'plum'],
         green:  ['green', 'emerald green', 'forrest green', 'seafoam'],
         silver: ['silver', 'pale grey', 'silver and black', 'silver and nude', 'stone'],
-        pastel: ['lilac', 'pale blue', 'pale pink', 'pale yellow', 'nude', 'moonstone', 'cream and blue', 'cream', 'blush', 'ivory', 'watermelon', 'salmon', 'seafoam', 'lavender', 'peach', 'pale grey', 'sky blue']
+        pastel: ['lilac', 'pale blue', 'pale pink', 'pale yellow', 'nude', 'moonstone', 'cream and blue', 'cream', 'blush', 'ivory', 'watermelon', 'salmon', 'seafoam', 'lavender', 'peach', 'pale grey', 'sky blue', 'dusty pink', 'aqua', 'shell']
       }
 
       groups_attributes.each do |group_name, color_names|
