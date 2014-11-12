@@ -376,7 +376,7 @@ module Products
           when 'red'
             %w( red burgundy )
           when 'pastel'
-            %w( aqua nude lilac pale-blue pale-pink pale-grey pale-lavender pale-blush blush peach cream-and-blue dusty-pink silver sherbet blush-pink lavender )
+            %w( aqua nude lilac pale-blue pale-pink pale-grey pale-lavender pale-blush blush peach cream-and-blue dusty-pink silver sherbet blush-pink lavender shell )
           else
             colours
         end
