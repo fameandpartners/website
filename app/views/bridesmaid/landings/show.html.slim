@@ -1,0 +1,14 @@
+h1 Build your perfect bridesmaid party
+
+.row
+  .grid-4 = image_tag "http://lorempixel.com/300/300/cats"
+  .grid-4 = image_tag "http://lorempixel.com/300/300/cats"
+  .grid-4 = image_tag "http://lorempixel.com/300/300/cats"
+.row
+  .grid-4
+  .grid-4 style="text-align: center;"
+    = link_to fb_auth_path(site_version: current_site_version.code), class: 'facebook-button' do
+      span.icon
+        span.icon-facebook2
+      span Sign up with facebook
+  .grid-4

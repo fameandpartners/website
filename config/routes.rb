@@ -441,6 +441,14 @@ FameAndPartners::Application.routes.draw do
 
     get '/next-day-delivery' => 'spree/products#index', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
 
+    # maybe,  events#bridesmaid?
+    get 'bridesmaid-party'          => 'bridesmaid/landings#show',  as: :bridesmaid_party
+    get 'bridesmaid-party/info'     => 'bridesmaid/details#edit',   as: :bridesmaid_party_info
+    put 'bridesmaid-party/info'     => 'bridesmaid/details#update'
+    get 'bridesmaid-party/colour'   => 'bridesmaid/colours#edit',   as: :bridesmaid_party_colour
+    get 'bridesmaid-party/colour'   => 'bridesmaid/colours#update'
+    get 'bridesmaid-party/dresses'  => 'bridesmaid/products#index', as: :bridesmaid_party_dresses
+
     resources :site_versions, only: [:show]
   end
 
