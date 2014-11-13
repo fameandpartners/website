@@ -1,4 +1,4 @@
-class BridesmaidEventUserProfile < ActiveRecord::Base
+class BridesmaidUserProfile < ActiveRecord::Base
   # attr_accessible :title, :body
   
   belongs_to :spree_user, class_name: 'Spree::User'
