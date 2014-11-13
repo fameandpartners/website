@@ -1,0 +1,15 @@
+.row
+  h1 
+    ' Colour palette
+  h2 
+    ' Select the colours that you would prefer your dresses in
+
+.row
+  .grid-4
+  .grid-4 style="text-align: center;"
+    = form_for @user_details, as: :info, url: bridesmaid_party_colour_path, method: :put do |f|
+      - options = color_options_for_select_from_options_values(@available_colors)
+      = f.select :color_name, options
+      br
+      = f.submit 'submit'
+  .grid-4

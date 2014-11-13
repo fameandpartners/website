@@ -40,11 +40,11 @@ class Bridesmaid::BaseController < ApplicationController
     end
 
 
-    def bridesmaid_event_user_profile
-      @bridesmaid_event_user_profile ||= begin
+    def bridesmaid_user_profile
+      @bridesmaid_user_profile ||= begin
         require_user_logged_in!
 
-        BridesmaidEventUserProfile.where(
+        BridesmaidUserProfile.where(
           spree_user_id: current_spree_user.id
         ).first_or_initialize
       end
