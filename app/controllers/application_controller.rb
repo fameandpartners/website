@@ -108,7 +108,7 @@ class ApplicationController < ActionController::Base
   end
 
   def store_current_location
-    session[:previous_location] = url_with_correct_site_version
+    session[:previous_location] = get_hreflang_link # url_with_correct_site_version
   end
 
   def previous_location_or_default(default_url)
