@@ -195,8 +195,9 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.datetime "wedding_date"
     t.integer  "status"
     t.integer  "bridesmaids_count"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.boolean  "special_suggestions"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   add_index "bridesmaid_event_user_profiles", ["spree_user_id"], :name => "index_bridesmaid_event_user_profiles_on_spree_user_id"

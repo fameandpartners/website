@@ -5,6 +5,7 @@ class CreateBridesmaidEventUserProfiles < ActiveRecord::Migration
       t.datetime    :wedding_date
       t.integer     :status
       t.integer     :bridesmaids_count
+      t.boolean     :special_suggestions
 
       t.timestamps
     end
