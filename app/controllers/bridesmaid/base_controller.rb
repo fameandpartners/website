@@ -3,11 +3,21 @@ class Bridesmaid::BaseController < ApplicationController
   module Bridesmaid::Errors; end
   class Bridesmaid::Errors::SpreeUserNotLoggedIn < StandardError; end
   class Bridesmaid::Errors::SpreeUserLoggedIn < StandardError; end
+  class Bridesmaid::Errors::NotDevelopedYet < StandardError; end
 
   rescue_from Bridesmaid::Errors::SpreeUserNotLoggedIn, with: :redirect_to_landing_page
   rescue_from Bridesmaid::Errors::SpreeUserLoggedIn, with: :redirect_to_details_page
+  rescue_from Bridesmaid::Errors::NotDevelopedYet, with: :redirect_to_main_app
+
+  before_filter :hide_module
 
   protected
+
+    def hide_module
+      if !Rails.env.development?
+        raise Bridesmaid::Errors::NotDevelopedYet
+      end
+    end
 
     def require_user_logged_in!
       raise Bridesmaid::Errors::SpreeUserNotLoggedIn if current_spree_user.blank?
@@ -18,12 +28,17 @@ class Bridesmaid::BaseController < ApplicationController
     end
 
     def redirect_to_landing_page(exception)
-      redirect_to(bridesmaid_party_path) and return
+      redirect_to(bridesmaid_party_path)
     end
 
-    def redirect_to_details_page
-      redirect_to(bridesmaid_party_info_path) and return
+    def redirect_to_details_page(exception)
+      redirect_to(bridesmaid_party_info_path)
     end
+
+    def redirect_to_main_app(exception)
+      redirect_to '/'
+    end
+
 
     def bridesmaid_event_user_profile
       @bridesmaid_event_user_profile ||= begin
