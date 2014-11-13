@@ -1,0 +1,73 @@
+javascript:
+  $(document).ready(function() {
+    // enable wedding date selector
+    (function() {
+      $('#wedding_date_info').prop('disabled', false);
+      $('#unknown_wedding_date').prop('checked', false);
+
+      $('#wedding_date_info').datepicker({
+        minDate: '+1D',
+        showButtonPanel: true,
+        dateFormat: 'yy-mm-dd'
+      })
+
+      $('#unknown_wedding_date').on('change', function(e) {
+        $checkbox = $(e.currentTarget);
+        if ($checkbox.is(':checked')) {
+          $('#wedding_date_info').prop('disabled', true)
+        } else {
+          $('#wedding_date_info').prop('disabled', false)
+        }
+      });
+    }(document));
+
+  })
+
+.row
+  .grid-4
+  .grid-4
+    = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put do |f|
+      .row
+        .grid-6
+          .fleft
+            = f.label :wedding_date do
+              ' WHEN IS THE BIG DAY?
+        .grid-6
+          .fright
+            = f.text_field :wedding_date, style: "width: 200px;", id: 'wedding_date_info', placeholder: 'yyyy-mm-dd'
+            .row
+              = label_tag :unknown_wedding_date do
+                = "Don't know the wedding date" 
+                = check_box_tag :unknown_wedding_date
+      .row
+        .grid-6
+          .fleft
+            = f.label :status do
+              ' WHICH BRIDAL PARTY MEMBER ARE YOU?
+        .grid-6
+          .fright
+            - options = options_from_collection_for_select(BridesmaidEventUserProfile::STATUSES, :first, :last)
+            = f.select :status, options, style: "width: 200px;"
+
+      .row
+        .grid-6
+          .fleft
+            = f.label :bridesmaids_count do
+              ' HOW MANY BRIDESMAIDS ARE THERE?
+        .grid-6
+          .fright
+            = f.text_field :bridesmaids_count, style: "width: 200px;"
+
+      .row
+        .grid-6
+          .fleft
+            = f.label :special_suggestions do
+              ' DO YOU WANT TO MAKE SUGGESTIONS TO OTHER SPECIAL GUESTS?
+        .grid-6
+          .fright
+            = f.check_box :special_suggestions
+
+      .row
+        .grid-12 style="text-align: center;"
+          = f.submit "Save"
+  .grid-4
