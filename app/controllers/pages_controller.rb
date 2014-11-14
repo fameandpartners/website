@@ -25,7 +25,8 @@ class PagesController < Spree::StoreController
         end
         filter :bool, :must => {
           :term => {
-            :deleted => false
+            :deleted => false,
+            :hidden  => false
           }
         }
         filter :exists, :field => :available_on
