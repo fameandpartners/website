@@ -11,6 +11,8 @@ class CreateBridesmaidEventUserProfiles < ActiveRecord::Migration
       t.string      :color_name
       t.string      :color_code
 
+      t.text        :additional_products
+
       t.timestamps
     end
 

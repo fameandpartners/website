@@ -13,4 +13,6 @@ class BridesmaidUserProfile < ActiveRecord::Base
     [3, "I'm a bride"],
     [4, "I'm the head bridesmaid"]
   ]
+
+  serialize :additional_products
 end
