@@ -140,6 +140,12 @@
       <%= f.label :featured, :featured %>
       <%= f.error_message_on :featured %>
     <% end %>
+
+    <%= f.field_container :hidden do %>
+      <%= f.check_box :hidden, style: 'width: 10%' %>
+      <%= f.label :hidden, :hidden %>
+      <%= f.error_message_on :hidden %>
+    <% end %>
   </div>
 
   <div class="twelve columns alpha omega">
