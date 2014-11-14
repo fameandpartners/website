@@ -40,7 +40,7 @@ javascript:
     if images.present?
       product_image_url = absolute_image_url(images.first[:large], 'http')
     else
-      product_image_url = get_absolute_image_url("/assets/noimage/product.png", 'http')
+      product_image_url = absolute_image_url("/assets/noimage/product.png", 'http')
     end
     share_url = collection_product_url(@product)
 
