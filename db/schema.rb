@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141112220734) do
+ActiveRecord::Schema.define(:version => 20141114172825) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.integer  "color_id"
     t.string   "color_name"
     t.string   "color_code"
+    t.text     "additional_products"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
@@ -973,6 +974,8 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.boolean  "on_demand",            :default => false
     t.boolean  "featured",             :default => false
     t.integer  "position",             :default => 0
+    t.boolean  "hidden",               :default => false
+    t.boolean  "is_service",           :default => false
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
