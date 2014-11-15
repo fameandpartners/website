@@ -14,5 +14,12 @@ class BridesmaidUserProfile < ActiveRecord::Base
     [4, "I'm the head bridesmaid"]
   ]
 
-  serialize :additional_products
+  serialize :additional_products, Array
+
+  # NOTE: this is not a belongs_to relation, but we keep relation instead of getter
+  belongs_to :color, class_name: 'Spree::OptionValue'
+
+  def completed?
+    status.present? && color.present?
+  end
 end

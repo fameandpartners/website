@@ -9,6 +9,7 @@ class Bridesmaid::AdditionalProductsController < Bridesmaid::BaseController
   # add consierge service
   def create
     add_product_to_user_cart(consierge_service)
+    store_product_added(:consierge_service)
 
     respond_to do |format|
       format.html do
@@ -55,5 +56,11 @@ class Bridesmaid::AdditionalProductsController < Bridesmaid::BaseController
       line_item.save!
 
       cart
+    end
+
+    def store_product_added(name)
+      products = bridesmaid_user_profile.additional_products ||= []
+      products.push(name.to_sym).uniq!
+      bridesmaid_user_profile.update_column(:additional_products, products)
     end
 end
