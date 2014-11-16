@@ -5,7 +5,7 @@ class IndexController < Spree::StoreController
   respond_to :html 
 
   def show
-    @title = "Fame & Partners " + default_seo_title
+    @title = default_seo_title
     @description = default_meta_description
 
     display_marketing_banner
