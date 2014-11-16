@@ -63,7 +63,7 @@ module Products
       begin
         Tire.search(:spree_products, load: { include: { master: :prices } }) do
           # Filter only undeleted & available products
-          filter :bool, :must => { :term => { :deleted => false } }
+          filter :bool, :must => { :term => { :deleted => false, :hidden => false } }
           filter :exists, :field => :available_on
           filter :bool, :should => {
             :range => {

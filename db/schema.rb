@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141112220734) do
+ActiveRecord::Schema.define(:version => 20141114172825) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -190,17 +190,21 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
 
-  create_table "bridesmaid_event_user_profiles", :force => true do |t|
+  create_table "bridesmaid_user_profiles", :force => true do |t|
     t.integer  "spree_user_id"
     t.datetime "wedding_date"
     t.integer  "status"
     t.integer  "bridesmaids_count"
     t.boolean  "special_suggestions"
+    t.integer  "color_id"
+    t.string   "color_name"
+    t.string   "color_code"
+    t.text     "additional_products"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
 
-  add_index "bridesmaid_event_user_profiles", ["spree_user_id"], :name => "index_bridesmaid_event_user_profiles_on_spree_user_id"
+  add_index "bridesmaid_user_profiles", ["spree_user_id"], :name => "index_bridesmaid_user_profiles_on_spree_user_id"
 
   create_table "celebrities", :force => true do |t|
     t.string   "first_name"
@@ -970,6 +974,8 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.boolean  "on_demand",            :default => false
     t.boolean  "featured",             :default => false
     t.integer  "position",             :default => 0
+    t.boolean  "hidden",               :default => false
+    t.boolean  "is_service",           :default => false
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"

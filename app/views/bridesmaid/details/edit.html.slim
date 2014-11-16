@@ -46,7 +46,7 @@ javascript:
               ' WHICH BRIDAL PARTY MEMBER ARE YOU?
         .grid-6
           .fright
-            - options = options_from_collection_for_select(BridesmaidEventUserProfile::STATUSES, :first, :last)
+            - options = options_from_collection_for_select(BridesmaidUserProfile::STATUSES, :first, :last)
             = f.select :status, options, style: "width: 200px;"
 
       .row

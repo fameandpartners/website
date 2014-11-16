@@ -11,28 +11,34 @@ ruby:
     h6 = link_to product.name, collection_product_path(product), target: '_blank'
     .price = price_for_line_item(line_item)
     .description
-      table
-        tr
-          td Color:
-          td 
-            - if show_customizations && line_item.personalization.present?
-              .color style="background-color: #{line_item.personalization.color.value};"
-            - else
-              = variant.dress_color.try(:presentation)
-        - if show_customizations && line_item.personalization.present?
+      - if product.service?
+        table
           tr
-            td Size:
-            td = line_item.personalization.size
-          - line_item.personalization.customization_values.each do |value|
+          tr
+          tr
+      - else
+        table
+          tr
+            td Color:
+            td 
+              - if show_customizations && line_item.personalization.present?
+                .color style="background-color: #{line_item.personalization.color.value};"
+              - else
+                = variant.dress_color.try(:presentation)
+          - if show_customizations && line_item.personalization.present?
             tr
-              td colspan="2"
-                = value.presentation
-        - else
+              td Size:
+              td = line_item.personalization.size
+            - line_item.personalization.customization_values.each do |value|
+              tr
+                td colspan="2"
+                  = value.presentation
+          - else
+            tr
+              td Size:
+              td = variant.dress_size.try(:presentation)
           tr
-            td Size:
-            td = variant.dress_size.try(:presentation)
-        tr
-          td Quantity:
-          td = line_item.quantity
+            td Quantity:
+            td = line_item.quantity
   /= link_to '#', class: 'delete remove-item-from-cart', data: { id: variant.id } do
     span.icon-close

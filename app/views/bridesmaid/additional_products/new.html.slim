@@ -1,0 +1,34 @@
+javascript:
+  $(document).ready(function() {
+    // enable buy button
+    (function() {
+      var itemId = '#{ @product.id }';
+      buy_service = function() {
+        $.ajax({
+          url:      urlWithSitePrefix("/bridesmaid-party/additional_products/consierge_service"),
+          type:     "POST",
+          dataType: "json",
+          success: window.shopping_cart.buildOnSuccessCallback(["item_changed"], itemId)
+        })
+      }
+      $('#add_consierge_service').on('click', buy_service)
+      window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
+
+    })(document)
+  })
+
+h1 Consierge service!
+
+.row
+  .grid-6
+    h2 
+      ' I want Fame & Partners to organise my Bridesmaids dress
+    p = " For $#{ @product.price.to_i }  we will help you pick the right dresses, organise the dresses with your bridesmaids and help you all style the perfect look for your wedding."
+    p = link_to 'Book Now', '#', class: 'button buy-button', id: "add_consierge_service"
+
+  .grid-6
+    h2
+      ' I want to explore and create a moodboard
+    p
+      ' Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+    p = link_to 'Explore Now', bridesmaid_party_dresses_path, class: 'button continue'
