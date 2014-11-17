@@ -117,10 +117,10 @@ module Products
       end
 
       if t_root == "Event"
-        event = "for your #{taxon.name.titleize} " || "Any event "
+        event = " #{taxon.name.titleize} " || "any event "
       end
 
-      r =  "Shop and customize the best of #{color}#{style}#{event}dress trends #{event}at Fame & Partners."
+      r =  "Shop and customize the best #{color}#{style}#{event}dress trends #{event}at Fame & Partners."
 
       return r
     end
