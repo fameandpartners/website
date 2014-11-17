@@ -1,3 +1,4 @@
+/ Landing
 .bridesmaid-landing-header
   = image_tag "_bridesmaid/pic1.jpg"
   .text-box
@@ -13,7 +14,7 @@
         span.icon
           span.icon-facebook2
         span connect with facebook
-.bridesmaid-steps.text-center
+.bridesmaid-landing-steps.text-center
   .row
     .grid-3
       .block-with-triangle style="background-image: url(assets/_bridesmaid/triangle1.png)"
@@ -76,7 +77,7 @@
       span.icon-facebook2
     span connect with facebook
 
-.bridesmaid-footer
+.bridesmaid-landing-footer
   = image_tag "_bridesmaid/pic2.jpg"
   .text-box
     .centered
@@ -90,3 +91,169 @@
     li = link_to '2', '#'
     li = link_to '3', '#'
 
+
+
+/ Info
+.bridesmaid-info-header
+  = image_tag "_bridesmaid/pic3.jpg"
+  .text-box
+    .mid FIRST, TELL US ABOUT YOUR 
+    .big SPECIAL DAY
+.bridesmaid-info-form
+  .row
+    .grid-5
+      label.label WHEN IS THE BIG DAY?
+    .grid-2
+      .arrows-line-horizontal
+    .grid-3
+      select.selectbox.selectbox-pink
+        option value="" please select
+        option value="" please select
+        option value="" please select
+        option value="" please select
+        option value="" please select
+  .row
+    .grid-5
+      label.label
+        ' WHICH BRIDAL PARTY
+        br
+        ' MEMBER ARE YOU?
+    .grid-2
+      .arrows-line-horizontal
+    .grid-3
+      select.selectbox.selectbox-pink
+        option value="" please select
+        option value="" please select
+        option value="" please select
+        option value="" please select
+        option value="" please select
+  .row
+    .grid-5
+      label.label HOW MANY BRIDESMAIDS ARE THERE?
+    .grid-2
+      .arrows-line-horizontal
+    .grid-3
+      select.selectbox.selectbox-pink
+        option value="" please select
+        option value="" please select
+        option value="" please select
+        option value="" please select
+        option value="" please select
+  .row
+    .grid-5
+      label.label 
+        ' DO YOU WANT TO MAKE SUGGESTIONS
+        br
+        ' TO OTHER SPECIAL GUESTS?
+    .grid-2
+      .arrows-line-horizontal
+    .grid-3.clearfix
+      .fleft
+        .checkbox-pink
+          input#ch1 type="checkbox" checked=""
+          label for="ch1" yes
+      .fright
+        .checkbox-pink
+          input#ch2 type="checkbox"
+          label for="ch2" no
+  = link_to '#', class: 'block-with-triangle' do
+    span.text NEXT STEP
+    span.triangle-bottom style="border-top-color: #e6a49d"
+
+
+/ Color
+.bridesmaid-info-header
+  = image_tag "_bridesmaid/pic3.jpg"
+  .text-box
+    .big Colour Palette
+    .small Select the colours that you would prefer your dresses in. 
+
+.bridesmaid-pallete
+  .pallete-color style="background-color: #111;"
+  .pallete-color style="background-color: #131313;"
+  .pallete-color style="background-color: #161616;"
+  .pallete-color style="background-color: #191919;"
+  .pallete-color style="background-color: #222;"
+  .pallete-color style="background-color: #232323;"
+  .pallete-color style="background-color: #272727;"
+  .pallete-color style="background-color: #303030;"
+  .pallete-color style="background-color: #333;"
+  .pallete-color style="background-color: #363636;"
+  .pallete-color style="background-color: #393939;"
+  .pallete-color style="background-color: #424242;"
+  .pallete-color style="background-color: #444;"
+  .pallete-color style="background-color: #464646;"
+  .pallete-color style="background-color: #494949;"
+  .pallete-color style="background-color: #525252;"
+  .pallete-color style="background-color: #555;"
+  .pallete-color style="background-color: #585858;"
+  .pallete-color.selected style="background-color: #616161;"
+  .pallete-color style="background-color: #646464;"
+  .pallete-color style="background-color: #676767;"
+  .pallete-color style="background-color: #707070;"
+  .pallete-color style="background-color: #737373;"
+  .pallete-color style="background-color: #767676;"
+  .pallete-color style="background-color: #797979;"
+  .pallete-color style="background-color: #818181;"
+  .pallete-color style="background-color: #848484;"
+  .pallete-color style="background-color: #878787;"
+  .pallete-color style="background-color: #909090;"
+  .pallete-color style="background-color: #959595;"
+  .pallete-color style="background-color: #999999;"
+  .pallete-color style="background-color: #464646;"
+  .pallete-color style="background-color: #494949;"
+  .pallete-color style="background-color: #525252;"
+  .pallete-color style="background-color: #555;"
+  .pallete-color style="background-color: #585858;"
+  .pallete-color style="background-color: #616161;"
+  .pallete-color style="background-color: #646464;"
+  .pallete-color style="background-color: #676767;"
+  .pallete-color style="background-color: #707070;"
+  .pallete-color style="background-color: #737373;"
+  .pallete-color style="background-color: #767676;"
+  .pallete-color style="background-color: #797979;"
+  .pallete-color.selected style="background-color: #818181;"
+  .pallete-color style="background-color: #848484;"
+  .pallete-color style="background-color: #878787;"
+= link_to '#', class: 'block-with-triangle' do
+  span.text NEXT STEP
+  span.triangle-bottom style="border-top-color: #e6a49d"
+
+
+/ Concierge
+.bridesmaid-info-header
+  = image_tag "_bridesmaid/pic3.jpg"
+  .text-box
+    .mid Wedding Concierge
+    .small Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+.bridesmaid-concierge
+  .row
+    .grid-6.text-center
+      h2 
+        ' I want Fame & Partners to organise my 
+        br
+        ' Bridesmaids dress
+      p 
+        ' For 
+        em $99 
+        ' we will help you pick the right dresses, organise the 
+        br
+        ' dresses with your bridesmaids and help you all style the 
+        br
+        ' perfect look for your wedding.
+      = link_to '#', class: 'block-with-triangle' do
+        span.text BOOK NOW
+        span.triangle-bottom style="border-top-color: #e6a49d"
+    .grid-6.text-center
+      h2 
+        ' I want to explore and create a 
+        br
+        ' moodboard
+      p 
+        ' Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed 
+        br
+        ' do eiusmod tempor
+      = link_to '#', class: 'block-with-triangle' do
+        span.text EXPLORE NOW
+        span.triangle-bottom style="border-top-color: #e6a49d"
+  .grid-6.text-center

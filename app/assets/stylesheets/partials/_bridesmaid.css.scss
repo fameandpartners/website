@@ -1,3 +1,4 @@
+// Landing Header
 .bridesmaid-landing-header {
 	position: relative;
 
@@ -24,34 +25,13 @@
 		font-size: 28px;
 	}
 }
+// @end
 
-.bridesmaid-steps {
-	margin: 30px;
-	padding: 30px;
-	background-color: #fdf5ef;
-	font-family: $fontTwo;
-	font-size: 20px;
-	text-transform: none;
-	small {
-		font-size: 11px;
-		margin-top: -15px;
-		display: block;
-	}
-	.number {
-		line-height: 1;
-		font-family: $fontTwo;
-		font-size: 60px;
-		font-style: italic;
-		letter-spacing: -6px;
-	}
-
-	.facebook-button-flat {
-		margin-top: 20px;
-	}
-}
-.bridesmaid-footer {
+// Landing Footer
+.bridesmaid-landing-footer {
 	position: relative;
 	color: #fff;
+	margin-bottom: 40px;
 	.text-box {
 		position: absolute;
 		top: 0;
@@ -129,3 +109,126 @@
 		}
 	}
 }
+// @end
+
+// Landing Steps
+.bridesmaid-landing-steps {
+	margin: 30px;
+	padding: 30px;
+	background-color: #fdf5ef;
+	font-family: $fontTwo;
+	font-size: 20px;
+	text-transform: none;
+	small {
+		font-size: 11px;
+		margin-top: -15px;
+		display: block;
+	}
+	.number {
+		line-height: 1;
+		font-family: $fontTwo;
+		font-size: 60px;
+		font-style: italic;
+		letter-spacing: -6px;
+	}
+
+	.facebook-button-flat {
+		margin-top: 20px;
+	}
+}
+// @end
+
+// Info Header
+.bridesmaid-info-header {
+	position: relative;
+	margin-bottom: 40px;
+	.text-box {
+		position: absolute;
+		left: 35px;
+		top: 35px;
+		right: 35px;
+		bottom: 35px;
+		background-color: #fff;
+		
+		font-family: $fontTwo;
+		text-align: center;
+		padding-top: 50px;
+		@include box-sizing(border-box);
+		.big { 
+			font-size: 80px;
+			font-style: italic;
+		}
+		.mid {
+			font-size: 40px;
+		}
+		.small {
+			font-size: 25px;
+		}
+	}
+}
+// @end
+
+// Info form
+.bridesmaid-info-form {
+	margin: 40px 0;
+	.row {
+		margin-bottom: 20px;
+	}
+	.grid-2, .grid-3, .grid-5 {
+		float: none;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.grid-2 {
+		padding-left: 35px;
+		padding-right: 35px;
+	}
+	.arrows-line-horizontal:before { display: none;}
+	.label {
+		display: block;
+		text-align: right;
+		font-family: $fontThree;
+		font-size: 30px;
+		line-height: 1;
+	}
+}
+// @end
+
+// Palette
+.bridesmaid-pallete {
+	@include clearfix;
+	width: 700px;
+	margin: 25px auto;
+	border: solid 4px #000;
+	.pallete-color {
+		width: 70px;
+		height: 70px;
+		float: left;
+		position: relative;
+		&.selected:before {
+			content: '';
+			position: absolute;
+			display: block;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			border: solid 4px #000;
+		}
+	}
+}
+// @end
+
+// Concierge
+.bridesmaid-concierge {
+	font-size: 16px;
+	text-transform: none;
+	h2 {
+		font-size: 25px;
+		font-family: $fontTwo;
+	}
+	em {
+		font-family: $fontTwo;
+	}
+}
+// @end
