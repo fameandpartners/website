@@ -121,7 +121,8 @@ module Overrides
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => {
               :term => {
-                :deleted => false
+                :deleted => false,
+                :hidden  => false
               }
             }
 
@@ -199,7 +200,8 @@ module Overrides
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => {
               :term => {
-                :deleted => false
+                :deleted => false,
+                :hidden  => false
               }
             }
 
