@@ -71,7 +71,7 @@ module Products
     def get_page_title
       #mind the spaces in the constructed strings
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        color = "#{seo_colour.capitalize} "
+        color = "#{seo_colour.titleize } "
       end
 
       
@@ -82,11 +82,11 @@ module Products
       t_root = taxon.parent.name if taxon.present?
 
       if t_root == "Style"
-        style = "#{taxon.name.capitalize} " || ""
+        style = "#{taxon.name.titleize} " || ""
       end
 
       if t_root == "Event"
-        event = "#{taxon.name.capitalize} " || "Any event "
+        event = "#{taxon.name.titleize} " || "Any event "
       end
 
       bodyshape = " for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
@@ -102,7 +102,7 @@ module Products
       r = nil
 
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        color = " #{seo_colour.capitalize} "
+        color = " #{seo_colour.titleize} "
       end
 
       
@@ -113,11 +113,11 @@ module Products
       t_root = taxon.parent.name if taxon.present?
 
       if t_root == "Style"
-        style = " #{taxon.name.capitalize} " || ""
+        style = " #{taxon.name.titleize} " || ""
       end
 
       if t_root == "Event"
-        event = "for your #{taxon.name.capitalize} " || "Any event "
+        event = "for your #{taxon.name.titleize} " || "Any event "
       end
 
       r =  "Shop and customize the best of #{color}#{style}#{event}dress trends #{event}at Fame & Partners."
