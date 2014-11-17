@@ -21,19 +21,16 @@ javascript:
     - if @products.present?
       - @products.each do |product|
         .grid-3
-          /- cache (cache_name_fragments + [product.id]), expires_in: configatron.cache.expire.long do
           = render 'product', product: product
     - else
       .not-found Sorry, no dresses match your criteria
 
-  / should be similar/other products. waiting spec
-  /- if @similar_products.present?
+  - if @colour_products.present?
     .row
       .page-title
-        h2 These dresses can also be made in #{ @color.try(:name) }
-      - @similar_products.each do |product|
+        h2 These dresses can also be made in #{ @color_name }
+      - @colour_products.each do |product|
         div class="grid-3"
-          /- cache (cache_name_fragments + [product.id]), expires_in: configatron.cache.expire.long do
           = render 'product', product: product
 
 = render 'shared/footer_browse'

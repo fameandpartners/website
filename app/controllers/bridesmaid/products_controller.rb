@@ -5,9 +5,11 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
     require_completed_profile!
     set_page_titles
 
-    @banner   = banner
-    @colors   = bridesmaid_user_profile.colors
-    @products = resource.read_all
+    @banner     = banner
+    @color_name = bridesmaid_user_profile.color_name
+    @products   = resource.read_all
+    # products, can be maked in same color
+    @colour_products = @products
   end
 
   private
