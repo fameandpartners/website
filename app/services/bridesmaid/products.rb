@@ -2,36 +2,39 @@
 # supposed to be wrapping over products extractor/finder/repository
 # implement it later
 class Bridesmaid::Products
-  attr_reader :profile, :collection, :site_version
+  attr_reader :site_version, :profile, :collection
 
   def initialize(site_version, bridesmaid_profile, collection)
+    @site_version = site_version
     @profile      = bridesmaid_profile
     @collection   = collection
-    @site_version = site_version
   end
 
   def read_all
-    unique_products = search.results.group_by{|item| item.product_id }
+    unique_products = search_results.group_by{|item| item.product.id }
     unique_products.map do |product_id, items|
       build_product(items.first) # they ordered by colors match, so first record - most closest
     end
   end
 
-  def in_development_mode?
-    true
-  end
-
   private
+
     def search_results
-      @search_result ||= search.results
+      @search_results ||= search.results
     end
 
+    # color, and similars
     def color_ids
-      [profile.color_id]
+      @color_ids ||= begin
+        color_id = profile.color_id
+        #color_ids = Similarity.get_similar_color_ids(color_id, Similarity::Range::VERY_CLOSE)
+        color_ids = Similarity.get_similar_color_ids(color_id, Similarity::Range::DEFAULT)
+        [color_id] + color_ids
+      end
     end
 
     def taxon_ids
-      [collection.id]
+      [collection.try(:id)].compact
     end
 
     def locale
@@ -105,12 +108,7 @@ class Bridesmaid::Products
       colors = color_ids
       taxons = taxon_ids
 
-      if in_development_mode?
-        colors = []
-        taxons = []
-      end
-
-      Tire.search(:color_variants, size: 1000) do
+      search = Tire.search(:color_variants, size: 1000) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false, 'product.is_hidden' => false } } 
         filter :exists, :field => :available_on
         filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } }
