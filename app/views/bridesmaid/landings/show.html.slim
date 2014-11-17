@@ -1,15 +1,92 @@
-h1 Build your perfect bridesmaid party
+.bridesmaid-landing-header
+  = image_tag "_bridesmaid/pic1.jpg"
+  .text-box
+    .font-two Design
+    ' BRIDESMAIDS DRESSES
+    br
+    ' YOUR BRIDESMAIDS WILL
+    br
+    span.font-two LOVE
+    span.font-two.small ... and wear again!
+    .text-center
+      = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
+        span.icon
+          span.icon-facebook2
+        span connect with facebook
+.bridesmaid-steps.text-center
+  .row
+    .grid-3
+      .block-with-triangle style="background-image: url(assets/_bridesmaid/triangle1.png)"
+      .block-with-triangle
+        .triangle-bottom
+        .text
+          small STEP
+          .number 1.
+      .block-with-triangle
+        .text
+          ' Tell us
+          br
+          ' what you want
+        .triangle-bottom
+    .grid-3
+      .block-with-triangle
+        .triangle-top style="border-bottom-color: #2e2f56;"
+      .block-with-triangle
+        .triangle-bottom style="border-top-color: #fcdfc5;"
+        .text
+          small STEP
+          .number 2.
+      .block-with-triangle
+        .text
+          ' Select dresses
+          br
+          ' you love
+        .triangle-bottom
+    .grid-3
+      .block-with-triangle style="background-image: url(assets/_bridesmaid/triangle2.png)"
+      .block-with-triangle
+        .triangle-bottom
+        .text
+          small STEP
+          .number 3.
+      .block-with-triangle
+        .text
+          ' Select
+          br
+          ' the colour palette
+        .triangle-bottom
+    .grid-3
+      .block-with-triangle style="background-image: url(assets/_bridesmaid/triangle3.png)"
+      .block-with-triangle
+        .triangle-bottom style="border-top-color: #e6a49d;"
+        .text
+          small STEP
+          .number 4.
+      .block-with-triangle
+        .text
+          ' Customise
+          br
+          ' to your tastes
+          br
+          ' and body shapes
+        .triangle-bottom
 
-.row
-  .grid-4 = image_tag "http://lorempixel.com/300/300/cats"
-  .grid-4 = image_tag "http://lorempixel.com/300/300/cats"
-  .grid-4 = image_tag "http://lorempixel.com/300/300/cats"
-.row
-  .grid-4
-  .grid-4 style="text-align: center;"
-    = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button' do
-      app.bridesmaid_party_info_path
-      span.icon
-        span.icon-facebook2
-      span Sign up with facebook
-  .grid-4
+  = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
+    span.icon
+      span.icon-facebook2
+    span connect with facebook
+
+.bridesmaid-footer
+  = image_tag "_bridesmaid/pic2.jpg"
+  .text-box
+    .centered
+      ' DRESSES TO BE WORN
+      br
+      ' MORE THAN ONCE
+  ul.social
+    li = link_to '', '#', class: 'facebook'
+  ul.numbers
+    li.active = link_to '1', '#'
+    li = link_to '2', '#'
+    li = link_to '3', '#'
+
