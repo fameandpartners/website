@@ -18,7 +18,11 @@ class Bridesmaid::DetailsController < Bridesmaid::BaseController
   private
 
     def update_bridesmaid_user_profile(info)
-      bridesmaid_user_profile.assign_attributes(info)
+      bridesmaid_user_profile.wedding_date = info[:wedding_date]
+      bridesmaid_user_profile.status = info[:status]
+      bridesmaid_user_profile.bridesmaids_count = info[:bridesmaids_count]
+      bridesmaid_user_profile.special_suggestions = (info[:special_suggestions] == 'true')
+
       bridesmaid_user_profile.save!
       true
     rescue ActiveRecord::RecordInvalid
