@@ -95,6 +95,65 @@
 		@include linear-gradient(#44619a 0%, #44619a 50%, #344f81 51%, #344f81 100%);
 	}
 }
+.facebook-button-flat {
+	border: solid 1px #2e2f56;
+	background-color: #fff;
+	color: #2e2f56;
+	height: 33px;
+	line-height: 34px;
+	padding: 0 18px 0 50px;
+	position: relative;
+	display: inline-block;
+	text-decoration: none;
+	font-family: $fontOne;
+	font-size: 10px;
+	.icon {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		line-height: 37px;
+		width: 35px;
+		font-size: 17px;
+		text-align: center;
+		color: #fff;
+		background-color: #2e2f56;
+	}
+}
+
+.block-with-triangle {
+	min-height: 106px;
+	position: relative;
+	padding: 20px 0;
+	min-width: 176px;
+	text-align: center;
+	background-position: top center;
+	background-repeat: no-repeat;
+	@include box-sizing(border-box);
+	.text {
+		position: relative;
+		z-index: 1;
+	}
+	.triangle-top, .triangle-bottom {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		margin-left: -90px;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		z-index: 0;
+	}
+	.triangle-bottom {
+		border-width: 106px 88px 0 88px;
+		border-color: #fff rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+	}
+	.triangle-top {
+		border-width: 0 88px 106px 88px;
+		border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) #fff rgba(255, 255, 255, 0);
+	}
+}
 
 .social-grey-global {
 	position: relative;
