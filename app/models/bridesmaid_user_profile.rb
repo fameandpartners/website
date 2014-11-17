@@ -22,4 +22,8 @@ class BridesmaidUserProfile < ActiveRecord::Base
   def completed?
     status.present? && color.present?
   end
+
+  def colors
+    [color]
+  end
 end
