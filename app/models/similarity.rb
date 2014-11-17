@@ -22,9 +22,22 @@ class Similarity < ActiveRecord::Base
               scope: :original_id
             }
 
+  # please, use this in calls
+  module Range
+    VERY_CLOSE = 15
+    DEFAULT    = 30
+  end
+
   after_create unless: :reverse do
     create_reverse do |reverse|
       reverse.coefficient = coefficient
+    end
+  end
+
+  class << self
+    def get_similar_color_ids(color_id, range = Similarity::Range::DEFAULT)
+      range = Similarity::Range::DEFAULT if range < 0 or range > 100
+      Similarity.where(original_id: color_id).where('coefficient <= ?', range).pluck(:similar_id)
     end
   end
 end
