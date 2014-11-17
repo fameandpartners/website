@@ -21,3 +21,5 @@
       .string
         = f.email_field :email, class: 'input', placeholder: 'Enter your email address'
         input.btn.submitbox type="submit" value="Submit"
+javascript:
+  window.track.event('LandingPageModal', 'Opened', '#{old_titles}')
