@@ -16,7 +16,7 @@ javascript:
         $item = $(e.currentTarget)
         $item.siblings('.selected').removeClass('selected');
         $item.addClass('selected');
-        $('#info_color_id').val($item.data('id'));
+        $('#info_color_code').val($item.data('code'));
       });
     })(document);
   })
@@ -25,14 +25,15 @@ javascript:
   = image_tag "_bridesmaid/pic3.jpg"
   .text-box
     .big Colour Palette
-    .small Select the colours that you would prefer your dresses in. 
+    .small Select the colours that you would prefer your dresses in.
 
 = form_for @user_details, as: :info, url: bridesmaid_party_colour_path, method: :put do |f|
-  = f.hidden_field :color_id, { value: @available_colors.first.try(:id) }
+  = f.hidden_field :color_code, { value: @palette.selected }
 
   .bridesmaid-pallete
-    - @available_colors.each_with_index do |color, index|
-      .pallete-color style="background-color: #{ color.value };" class="#{ index == 0 ? 'selected' : '' }" data-id=(color.id)
+    - @palette.colors.each do |color|
+      - selection_status_class = (color == @palette.selected) ? 'selected' : ''
+      .pallete-color style="background-color: #{ color };" class=(selection_status_class) data-code=(color)
 
   = link_to '#', class: 'block-with-triangle', id: 'next-button' do
     span.text NEXT STEP
