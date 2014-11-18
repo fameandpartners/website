@@ -3,10 +3,9 @@ javascript:
     // enable link
     (function() {
       $('#next-button').prop('disabled', false);
-
       $('#next-button').on('click', function(e) {
         e.preventDefault();
-        $('form#edit_info').submit();
+        $('form#bridesmaid_form').submit();
         $(e.currentTarget).prop('disabled', false);
       });
     })(document);
@@ -51,7 +50,7 @@ javascript:
     .big SPECIAL DAY
 
 .bridesmaid-info-form
-  = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put do |f|
+  = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put, id: 'bridesmaid_form' do |f|
     .row
       .grid-5
         = f.label :wedding_date, { class: 'label' } do
