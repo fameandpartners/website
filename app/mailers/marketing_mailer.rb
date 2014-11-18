@@ -42,7 +42,7 @@ class MarketingMailer < ActionMailer::Base
     Slim::Engine.with_options(:pretty => true) do
       mail(
         to: @user.email,
-        subject: t('emails.subjects.marketing.added_to_wishlist')
+        subject: t('emails.subjects.marketing.added_to_moodboard')
       )
     end
   end
