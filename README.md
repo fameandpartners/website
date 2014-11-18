@@ -38,6 +38,12 @@ Spree::OptionValuesGroup.where(option_type_id: type.id).destroy_all
 
 5) exit from console end run Rake task "db:populate:colors_groups"
 
+## Generate Shopping Feeds
+* $ `ey ssh -e production_new`
+* $ `cd /data/fame_and_partners/current`
+* $ `bundle exec rake feed:export:all`
+
+
 ## Deploy
 
 ### Deploy to staging
