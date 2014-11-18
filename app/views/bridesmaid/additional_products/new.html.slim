@@ -17,18 +17,40 @@ javascript:
     })(document)
   })
 
-h1 Consierge service!
+.bridesmaid-info-header
+  = image_tag "_bridesmaid/pic3.jpg"
+  .text-box
+    .mid Wedding Concierge
+    .small Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+.bridesmaid-concierge
+  .row
+    .grid-6.text-center
+      h2 
+        ' I want Fame & Partners to organise my 
+        br
+        ' Bridesmaids dress
+      p 
+        ' For 
+        em = @product.display_price
+        ' we will help you pick the right dresses, organise the 
+        br
+        ' dresses with your bridesmaids and help you all style the 
+        br
+        ' perfect look for your wedding.
+      = link_to '#', class: 'block-with-triangle', id: 'add_consierge_service' do
+        span.text BOOK NOW
+        span.triangle-bottom style="border-top-color: #e6a49d"
 
-.row
-  .grid-6
-    h2 
-      ' I want Fame & Partners to organise my Bridesmaids dress
-    p = " For $#{ @product.price.to_i }  we will help you pick the right dresses, organise the dresses with your bridesmaids and help you all style the perfect look for your wedding."
-    p = link_to 'Book Now', '#', class: 'button buy-button', id: "add_consierge_service"
-
-  .grid-6
-    h2
-      ' I want to explore and create a moodboard
-    p
-      ' Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-    p = link_to 'Explore Now', bridesmaid_party_dresses_path, class: 'button continue'
+    .grid-6.text-center
+      h2 
+        ' I want to explore and create a 
+        br
+        ' moodboard
+      p 
+        ' Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed 
+        br
+        ' do eiusmod tempor
+      = link_to bridesmaid_party_dresses_path, class: 'block-with-triangle' do
+        span.text EXPLORE NOW
+        span.triangle-bottom style="border-top-color: #e6a49d"
+  .grid-6.text-center

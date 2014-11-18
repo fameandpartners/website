@@ -55,12 +55,14 @@ class Bridesmaid::AdditionalProductsController < Bridesmaid::BaseController
 
       line_item.save!
 
+      cart.reload
+
       cart
     end
 
     def store_product_added(name)
-      products = bridesmaid_user_profile.additional_products ||= []
-      products.push(name.to_sym).uniq!
-      bridesmaid_user_profile.update_column(:additional_products, products)
+      bridesmaid_user_profile.additional_products ||= []
+      bridesmaid_user_profile.additional_products.push(name.to_sym).uniq!
+      bridesmaid_user_profile.save
     end
 end

@@ -13,7 +13,7 @@ h6 = product.name
   .buy-button
     = link_to "Buy", product.path, class: 'btn black small', title: "Buy this dress"
 
-    .custom-button
+    /.custom-button
       = link_to t('words.customize'), personalization_product_path(permalink: product.permalink, :cf => 'collection'), class: 'btn empty border small', title: "#{t('words.customize').titleize} this dress"
 
 - if product.fast_delivery

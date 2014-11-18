@@ -18,7 +18,7 @@ class Bridesmaid::BaseController < ApplicationController
   protected
 
     def hide_module
-      if !Rails.env.development?
+      if Rails.env.production?
         raise Bridesmaid::Errors::NotDevelopedYet
       end
     end
