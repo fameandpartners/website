@@ -6,7 +6,9 @@ class Users::WishlistsItemsController < Users::BaseController
   before_filter :load_user
 
   def index
+    @title = 'My Moodboard'
     @items = @user.wishlist_items
+
     respond_with(@items) do |format|
       format.html {}
       format.js   {}

@@ -3,9 +3,9 @@
     .tabs
       = render 'users/shared/tabs', active_tab: 'wishlist'
       #wishlist.tab-content
-        h1.page-title My wishlist
+        h1.page-title My Moodboard
         - if @items.size == 0
-          p Sorry, there are no items in your wishlist
+          p Sorry, there are no items in your moodboard
         - else
           ul.products-list
             - @items.each do |item|
