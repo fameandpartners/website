@@ -50,7 +50,7 @@ javascript:
     .big SPECIAL DAY
 
 .bridesmaid-info-form
-  = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put, id: 'bridesmaid_form' do |f|
+  = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put, html: { id: 'bridesmaid_form' } do |f|
     .row
       .grid-5
         = f.label :wedding_date, { class: 'label' } do
@@ -59,6 +59,10 @@ javascript:
         .arrows-line-horizontal
       .grid-3
         = f.text_field :wedding_date, id: 'wedding_date_info', placeholder: 'yyyy-mm-dd'
+        .row
+          = label_tag :unknown_wedding_date do
+            = "Don't know the wedding date" 
+          = check_box_tag :unknown_wedding_date
 
     .row
       .grid-5
