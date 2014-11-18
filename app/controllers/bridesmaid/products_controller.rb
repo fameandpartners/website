@@ -9,7 +9,7 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
     @color_name = bridesmaid_user_profile.color_name
     @products   = resource.read_all
     # products, can be maked in same color
-    @colour_products = @products
+    #@colour_products = @products
   end
 
   private

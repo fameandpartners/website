@@ -1,15 +1,39 @@
-.row
-  h1 
-    ' Colour palette
-  h2 
-    ' Select the colours that you would prefer your dresses in
+javascript:
+  $(document).ready(function() {
+    // enable link
+    (function() {
+      $('#next-button').prop('disabled', false);
+      $('#next-button').on('click', function(e) {
+        e.preventDefault();
+        $('form#edit_info').submit();
+        $(e.currentTarget).prop('disabled', false);
+      });
+    })(document);
 
-.row
-  .grid-4
-  .grid-4 style="text-align: center;"
-    = form_for @user_details, as: :info, url: bridesmaid_party_colour_path, method: :put do |f|
-      - options = color_options_for_select_from_options_values(@available_colors)
-      = f.select :color_name, options
-      br
-      = f.submit 'submit'
-  .grid-4
+    // enable paletter
+    (function() {
+      $('.bridesmaid-pallete .pallete-color').on('click', function(e) {
+        $item = $(e.currentTarget)
+        $item.siblings('.selected').removeClass('selected');
+        $item.addClass('selected');
+        $('#info_color_id').val($item.data('id'));
+      });
+    })(document);
+  })
+
+.bridesmaid-info-header
+  = image_tag "_bridesmaid/pic3.jpg"
+  .text-box
+    .big Colour Palette
+    .small Select the colours that you would prefer your dresses in. 
+
+= form_for @user_details, as: :info, url: bridesmaid_party_colour_path, method: :put do |f|
+  = f.hidden_field :color_id, { value: @available_colors.first.try(:id) }
+
+  .bridesmaid-pallete
+    - @available_colors.each_with_index do |color, index|
+      .pallete-color style="background-color: #{ color.value };" class="#{ index == 0 ? 'selected' : '' }" data-id=(color.id)
+
+  = link_to '#', class: 'block-with-triangle', id: 'next-button' do
+    span.text NEXT STEP
+    span.triangle-bottom style="border-top-color: #e6a49d"
