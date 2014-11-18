@@ -9,10 +9,11 @@ module Feeds
         output = ''
         xml = Builder::XmlMarkup.new(target: output)
 
+        xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
         xml.Products do
           @items.each do |item|
             xml.Product do
-              xml.tag! 'Merchant_SKU', item[:product].sku
+              xml.tag! 'Merchant_SKU', item[:variant_sku]
               xml.tag! 'Product_Name', item[:product].name
               xml.tag! 'Product_URL', "http://#{@config[:domain]}#{collection_product_path(item[:product])}"
               xml.tag! 'Image_URL', item[:image]
@@ -24,7 +25,7 @@ module Feeds
               xml.tag! 'Coupon_Code', 'Shopper20'
               xml.tag! 'Coupon_Code_Description', 'Get $20 off'
               xml.tag! 'Manufacturer', 'Fame & Partners'
-              xml.tag! 'Product_Description', CGI.escapeHTML(item[:description])
+              xml.tag! 'Product_Description', helpers.strip_tags(item[:description])
               xml.tag! 'Product_Type', 'Dress'
               xml.tag! 'Category', 'Clothing & Accessories > clothing > Dress'
               xml.tag! 'Category_ID', 31515
