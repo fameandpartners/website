@@ -13,7 +13,7 @@ module Feeds
         xml.productset do
           @items.each do |item|
             xml.product do
-              xml.tag! 'Code', item[:product].sku
+              xml.tag! 'Code', item[:variant_sku]
               xml.tag! 'Category', { 'xml:space' => 'preserve' }, 'Clothing'
               xml.tag! 'Name', item[:product].name
               xml.tag! 'Description', helpers.strip_tags(item[:description])

@@ -88,6 +88,7 @@ module Feeds
 
       item = HashWithIndifferentAccess.new(
         variant: variant,
+        variant_sku: product.sku+variant.id.to_s,
         product: product,
         availability: variant.in_stock? ? 'in stock' : 'out of stock',
         title: "#{product.name} - Size #{size} - Colour #{color}",
@@ -109,8 +110,8 @@ module Feeds
 
       if images.present?
         {
-          image: absolute_image_url(images.first.attachment),
-          images: images.from(1).map{|i| absolute_image_url(i.attachment) }
+          image: absolute_image_url(images.first.attachment(:large)),
+          images: images.from(1).map{|i| absolute_image_url(i.attachment(:large)) }
         }
       else
         {
