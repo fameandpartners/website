@@ -61,6 +61,10 @@ Spree::Product.class_eval do
     is_service?
   end
 
+  def free_shipping?
+    is_service?
+  end
+
   def images
     table_name = Spree::Image.quoted_table_name
 
