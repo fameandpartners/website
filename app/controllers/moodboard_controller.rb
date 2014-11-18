@@ -30,7 +30,7 @@ class MoodboardController < ApplicationController
 
     # generate some hash and share through it?
     def moodboard_owner
-      Spree::User.where(slug: params[:user_slug]).first
+      Spree::User.where(slug: params[:user_slug]).first || current_spree_user
     end
 
     def load_owner!

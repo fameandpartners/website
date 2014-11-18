@@ -46,7 +46,7 @@ class Bridesmaid::SimilarProducts
       OpenStruct.new(
         id: item.product.id,
         master_id: item.product.master_id,
-        variant_id: item.id,
+        #variant_id: item.id,
         name: item.product.name,
         permalink: item.product.permalink,
         'can_be_customized?'.to_sym => item.product.can_be_customized,
