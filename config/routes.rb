@@ -452,6 +452,8 @@ FameAndPartners::Application.routes.draw do
       get '/dresses'  => 'products#index', as: :bridesmaid_party_dresses
     end
 
+    get '/moodboard/:user_slug' => 'moodboard#show', as: :public_moodboard_path
+
     resources :site_versions, only: [:show]
   end
 
