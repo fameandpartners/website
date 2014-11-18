@@ -1,20 +1,25 @@
-# class, designed to extract products for bridesmaid-party/dresses only
+# class, designed to extract additional products for bridesmaid-party/dresss only
 # supposed to be wrapping over products extractor/finder/repository
 # implement it later
-# Description:
-# Display dress variants at the top of the page that match the colours the user selected 
-# when they completed the questionnaire.
-class Bridesmaid::Products
-  attr_reader :site_version, :profile
+#
+# In the second section of the page display dresses from the bridesmaid taxon 
+# that are also available in the colours the user selected.
+class Bridesmaid::SimilarProducts
+  attr_reader :site_version, :collection, :products_ids
 
   def initialize(options = {})
     @site_version = options[:site_version]
-    @profile      = options[:profile]
+    @collection   = options[:collection]
+    @products_ids = options[:except]
   end
 
   def read_all
-    search_results.map do |item|
-      build_product(item)
+    #search_results.map do |item|
+    #  build_product(item)
+    #end
+    unique_products = search_results.group_by{|item| item.product.id }
+    unique_products.map do |product_id, items|
+      build_product(items.first)
     end
   end
 
@@ -24,15 +29,8 @@ class Bridesmaid::Products
       @search_results ||= build_search_query.results
     end
 
-    # color, and similars
-    def color_ids
-      # it's not cached, and will generate second request in similar_products,
-      # solve it with placing similar colors search to own repo
-      @color_ids ||= begin
-        color_id = profile.color_id
-        color_ids = Similarity.get_similar_color_ids(color_id, Similarity::Range::VERY_CLOSE)
-        [color_id] + color_ids
-      end
+    def taxon_ids
+      [collection.try(:id)].compact
     end
 
     def locale
@@ -62,10 +60,8 @@ class Bridesmaid::Products
     def prices
       @prices ||= begin
         prices_ids = search_results.map do |item|
-          #item.prices[currency].present? ? item.prices[currency] : nil
-          item.prices.to_hash.values
-        end.flatten.compact
-
+          item.prices[currency].present? ? item.prices[currency] : nil
+        end.compact
         {}.tap do |result|
           Spree::Price.where(id: prices_ids).each do |price|
             result[price.id] = price
@@ -99,47 +95,45 @@ class Bridesmaid::Products
         )
       end
 
-      path_parts.push( color.try(:name) || profile.color.name )
+      if color.name
+        path_parts.push( color.name )
+      end
 
       "/" + path_parts.join('/')
     end
 
-    # first candidate to extract to repo
     def build_search_query
       # to make them visible inside Tire.search block
-      colors = color_ids
+      taxons = taxon_ids
+      products = products_ids
 
       search = Tire.search(:color_variants, size: 1000) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false, 'product.is_hidden' => false } } 
         filter :exists, :field => :available_on
         filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } }
 
-        # Filter by colors
-        filter(:terms, 'color.id' => colors) if colors.present?
+        # Filter by availability of customisation colour
+        filter :bool, :must => { :term => { 'product.color_customizable' => true } }
+
+        # Filter by taxons
+        filter(:terms, 'product.taxon_ids' => taxons) if taxons.present?
+
+        # exclude already found [ somethere else ]
+        if products.present?
+          filter :bool, :must => {
+            :not => {
+              :terms => {
+                :id => products
+              }
+            }
+          }
+        end
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
 
         sort do
-          if colors.present?
-            by ({
-              :_script => {
-                script: %q{
-                  for ( int i = 0; i < color_ids.size(); i++ ) {
-                    if ( doc['color.id'] == color_ids[i] ) {
-                      return i;
-                    }
-                  }
-                  return 99;
-                }.gsub(/[\r\n]|([\s]{2,})/, ''),
-                params: { color_ids: colors },
-                type: 'number',
-                order: 'asc'
-              }
-            })
-          else
-            by 'product.position', 'asc'
-          end
+          by 'product.position', 'asc'
         end
       end
     end
