@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141114172825) do
+ActiveRecord::Schema.define(:version => 20141119084010) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -376,6 +376,13 @@ ActiveRecord::Schema.define(:version => 20141114172825) do
   create_table "email_notifications", :force => true do |t|
     t.integer  "spree_user_id"
     t.string   "code"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "facebook_data", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.text     "value"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -1247,6 +1254,7 @@ ActiveRecord::Schema.define(:version => 20141114172825) do
     t.integer  "site_version_id"
     t.date     "dob"
     t.datetime "last_payment_failed_notification_sent_at"
+    t.date     "birthday"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true

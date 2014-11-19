@@ -21,6 +21,8 @@ Spree::User.class_eval do
   before_validation :generate_slug
 
   has_many :posts, class_name: Blog::Post
+  has_many :facebook_datas,
+           foreign_key: :spree_user_id
   before_post_process :randomize_file_name
 
   def fullname
