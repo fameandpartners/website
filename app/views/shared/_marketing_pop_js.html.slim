@@ -1,3 +1,8 @@
+ruby:
+  current_time = Time.now
+  dmb_time ||= cookies[:dmb_time]
+  countdown_time = dmb_time.to_i-current_time.to_i
+  
 javascript:
   contentparam = '#{params[:dmb]}';
   pop_switch = '#{params[:pop_switch]}';
@@ -36,3 +41,10 @@ javascript:
     popup = new window.popups.EmailCaptureModalPopup();
     popup.show(content, pop_title)
   }
+
+  $(function(){
+    $('#countdown').countdown({
+      timestamp : (new Date()).getTime() + 24*60*60*1000
+    });    
+  });
+

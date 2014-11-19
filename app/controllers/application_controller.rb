@@ -507,6 +507,7 @@ class ApplicationController < ActionController::Base
   def store_marketing_params
     if params[:dmb].present?
       cookies[:dmb] = { value: params[:dmb], expires: 1.day.from_now }
+      cookies[:dmb_time] = { value: Time.now.to_s, expires: 1.day.from_now }
     end
     if params[:promocode].present?
       cookies[:promocode] = { value: params[:promocode], expires: 1.day.from_now }

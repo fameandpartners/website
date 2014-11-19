@@ -5,6 +5,14 @@
   .row
     .grid-12
       = image_tag(image_url)
+    - if marketing_landing_page?
+      .grid-12
+        .saleperiod
+          .border
+            .title 
+              div Valid for 24hrs only
+            #countdown
+            .note Shop now because this offer won't last long!
   - unless marketing_landing_page?
     .category-header
       h1 = @page_info[:banner_title]
