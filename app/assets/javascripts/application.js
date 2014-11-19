@@ -20,6 +20,7 @@
 //= require libs/jquery.zoom.min
 //= require libs/spin.min
 //= require libs/jquery.slides.min
+//= require libs/jquery.countdown
 
 //= require libs/soundcloud/soundcloud.player.api
 //= require libs/soundcloud/sc-player
