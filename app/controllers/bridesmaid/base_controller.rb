@@ -11,7 +11,7 @@ class Bridesmaid::BaseController < ApplicationController
   rescue_from Bridesmaid::Errors::SpreeUserLoggedIn, with: :redirect_to_details_page
   rescue_from Bridesmaid::Errors::NotDevelopedYet, with: :redirect_to_main_app
   rescue_from Bridesmaid::Errors::ConsiergeServiceNotFound, with: :redirect_to_dresses_page
-  rescue_from Bridesmaid::Errors::ProfileNotCompleted, with: :redirect_to_details_page
+  rescue_from Bridesmaid::Errors::ProfileNotCompleted, with: :redirect_to_color_selection_page
 
   before_filter :hide_module
 
@@ -44,11 +44,15 @@ class Bridesmaid::BaseController < ApplicationController
     end
 
     def redirect_to_main_app(exception)
-      redirect_to '/'
+      redirect_to root_path
     end
 
     def redirect_to_dresses_page(exception)
       redirect_to(bridesmaid_party_dresses_path)
+    end
+
+    def redirect_to_color_selection_page(exception)
+      redirect_to bridesmaid_party_colour_path
     end
 
     def bridesmaid_user_profile
