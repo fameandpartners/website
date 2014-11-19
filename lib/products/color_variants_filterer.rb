@@ -142,54 +142,54 @@ module Products
             end
           end
 
-          # sort do
-          #   if color_ids.present?
-          #     by ({
-          #       :_script => {
-          #         script: %q{
-          #           for ( int i = 0; i < color_ids.size(); i++ ) {
-          #             if ( doc['color.id'] == color_ids[i] ) {
-          #               return i;
-          #             }
-          #           }
+          sort do
+            if color_ids.present?
+              by ({
+                :_script => {
+                  script: %q{
+                    for ( int i = 0; i < color_ids.size(); i++ ) {
+                      if ( doc['color.id'] == color_ids[i] ) {
+                        return i;
+                      }
+                    }
 
-          #           return 99;
+                    return 99;
 
-          #         }.gsub(/[\r\n]|([\s]{2,})/, ''),
-          #         params: {
-          #           color_ids: color_ids
-          #         },
-          #         type: 'number',
-          #         order: 'asc'
-          #       }
-          #     })
-          #   end
+                  }.gsub(/[\r\n]|([\s]{2,})/, ''),
+                  params: {
+                    color_ids: color_ids
+                  },
+                  type: 'number',
+                  order: 'asc'
+                }
+              })
+            end
 
-          #   if bodyshapes.present?
-          #     by ({
-          #       :_script => {
-          #         script: bodyshapes.map{|bodyshape| "doc['product.#{bodyshape}'].value" }.join(' + '),
-          #         type:   'number',
-          #         order:  'desc'
-          #       }
-          #     })
-          #   end
+            if bodyshapes.present?
+              by ({
+                :_script => {
+                  script: bodyshapes.map{|bodyshape| "doc['product.#{bodyshape}'].value" }.join(' + '),
+                  type:   'number',
+                  order:  'desc'
+                }
+              })
+            end
 
-          #   case order_by
-          #     when 'price_high'
-          #       by 'product.price', 'desc'
-          #     when 'price_low'
-          #       by 'product.price', 'asc'
-          #     when 'newest'
-          #       by 'product.created_at', 'desc'
-          #     when 'fast_delivery'
-          #       by 'product.fast_delivery', 'desc'
-          #     when 'popular'
-          #       by 'product.position', 'asc'
-          #     else
-          #       by 'product.position', 'asc'
-          #   end
-          # end
+            case order_by
+              when 'price_high'
+                by 'product.price', 'desc'
+              when 'price_low'
+                by 'product.price', 'asc'
+              when 'newest'
+                by 'product.created_at', 'desc'
+              when 'fast_delivery'
+                by 'product.fast_delivery', 'desc'
+              when 'popular'
+                by 'product.position', 'asc'
+              else
+                by 'product.position', 'asc'
+            end
+          end
 
           from offset
           size limit
