@@ -58,11 +58,11 @@ javascript:
       .grid-2
         .arrows-line-horizontal
       .grid-3
-        = f.text_field :wedding_date, id: 'wedding_date_info', placeholder: 'yyyy-mm-dd'
-        .row
+        .row = f.text_field :wedding_date, id: 'wedding_date_info', placeholder: 'yyyy-mm-dd', class: 'text-field pink'
+        .checkbox-pink.inline
+          = check_box_tag :unknown_wedding_date
           = label_tag :unknown_wedding_date do
             = "Don't know the wedding date" 
-          = check_box_tag :unknown_wedding_date
 
     .row
       .grid-5

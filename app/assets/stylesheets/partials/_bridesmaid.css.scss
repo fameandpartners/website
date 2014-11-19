@@ -173,6 +173,7 @@
 	margin: 40px 0;
 	.row {
 		margin-bottom: 20px;
+		.row { margin-bottom: 10px;}
 	}
 	.grid-2, .grid-3, .grid-5 {
 		float: none;
@@ -197,7 +198,7 @@
 // Palette
 .bridesmaid-pallete {
 	@include clearfix;
-	width: 700px;
+	width: 770px;
 	margin: 25px auto;
 	border: solid 4px #000;
 	.pallete-color {
