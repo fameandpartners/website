@@ -19,6 +19,8 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             flash[:notice] = "Signed in successfully"
             sign_in :spree_user, authentication.user
 
+            FacebookDataFetchWorker.perform_async(authentication.user.id, auth_hash['uid'], auth_hash['credentials']['token'])
+
             sign_up_reason = session.delete(:sign_up_reason)
             if sign_up_reason.eql?('custom_dress')
               session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
@@ -30,6 +32,9 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           elsif spree_current_user
             spree_current_user.apply_omniauth(auth_hash)
             spree_current_user.save
+
+            FacebookDataFetchWorker.perform_async(spree_current_user.id, auth_hash['uid'], auth_hash['credentials']['token'])
+
             flash[:notice] = "Authentication successful."
             redirect_back_or_default(account_url)
           else
@@ -49,6 +54,8 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
             if user.save
               flash[:notice] = "Signed in successfully."
+
+              FacebookDataFetchWorker.perform_async(user.id, auth_hash['uid'], auth_hash['credentials']['token'])
 
               sign_in :spree_user, user
 
