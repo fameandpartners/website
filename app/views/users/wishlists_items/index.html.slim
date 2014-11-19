@@ -1,3 +1,10 @@
+javascript:
+  $(document).ready(function() {
+    $('a[data-action=share-moodboard]').on('click', function(){
+      $('.modal.share-moodboard').modal('show')
+    });
+  });
+
 .wrap
   .account-pages
     .tabs
@@ -7,6 +14,7 @@
         - if @items.size == 0
           p Sorry, there are no items in your moodboard
         - else
+          = link_to 'Share with Friends', '#', data: { action: 'share-moodboard' }
           ul.products-list
             - @items.each do |item|
               - variant = item.variant
@@ -34,3 +42,14 @@
       .save
         span.error.message(style="display: none;") Please, select size and color
         input.btn.black type="submit" value="Move to cart & close"
+
+.modal.share-moodboard(style="display: none;")
+  .overlay
+  .modal-container
+    .close-lightbox
+    .edit-details
+      .modal-title Share With Friends
+      .item
+      .save
+        span.error.message(style="display: none;") Please, select size and color
+        input.btn.black type="submit" value="Share"
