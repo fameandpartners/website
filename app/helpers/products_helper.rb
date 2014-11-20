@@ -1,27 +1,15 @@
 module ProductsHelper
 
-  def product_breadcrumbs(taxon, separator="&nbsp;&#47;&nbsp;")
-    return "" if current_page?("/") || taxon.nil?
-    crumbs = []
-    if taxon
-      crumbs << ['Dresses', dresses_path]
-      crumbs += taxon.ancestors.collect { |a| [a.name.pluralize, dress_nested_taxons_path(a.permalink)] } unless taxon.ancestors.empty?
-      crumbs << [taxon.name, dress_nested_taxons_path(taxon.permalink)]
-    else
-      crumbs << ['Dresses', dresses_path]
-    end
+  def product_style_and_event(product)
+    result = []
+    style_taxon = Spree::Taxonomy.where(name: "Style").first.root
+    event_taxon = Spree::Taxonomy.where(name: "Event").first.root
+    
+    result << product.taxons.where(parent_id: event_taxon.id).last
+    result << product.taxons.where(parent_id: style_taxon.id).last if result.empty?
 
-    separator = raw(separator)
-
-    crumbs.map! do |crumb|
-      content_tag(:li, itemscope:"itemscope", itemtype:"http://data-vocabulary.org/Breadcrumb") do
-        link_to(crumb.last, itemprop: "url") do
-          content_tag(:span, crumb.first, itemprop: "title")
-        end + (crumb == crumbs.last ? '' : separator)
-      end
-    end
-
-    content_tag(:nav, content_tag(:ul, raw(crumbs.map(&:mb_chars).join)), class: 'breadcrumbs')
+    #binding.pry
+    return result
   end
 
   def range_taxonomy
@@ -173,7 +161,7 @@ module ProductsHelper
 
   # old, not cacheable variant
   def add_to_wishlist_link(product_or_variant, options = {})
-    options[:title] ||= 'Wish list'
+    options[:title] ||= 'Moodboard'
     options[:class] ||= ''
     options[:class] += ' add-wishlist'
 
@@ -183,7 +171,7 @@ module ProductsHelper
       link_options = {
         data: { 
           'title-add'     => options[:title],
-          'title-remove'  => 'Remove from wishlist',
+          'title-remove'  => 'Remove from moodboard',
           'action'        => 'add-to-wishlist',
           'product-id'    => variant.product_id,
           'id'            => variant.id
@@ -193,7 +181,7 @@ module ProductsHelper
 
       if in_wishlist?(variant)
         link_options[:class] += ' active'
-        link_to 'Remove from wishlist', '#', link_options
+        link_to 'Remove from moodboard', '#', link_options
       else
         link_to options[:title], '#', link_options
       end
@@ -219,8 +207,8 @@ module ProductsHelper
       product_id = resource.id
     end
 
-    title = options.delete(:title) || 'Add to wishlist'
-    title_remove = options.delete(:title_remove) || 'Remove from wishlist'
+    title = options.delete(:title) || 'Add to moodboard'
+    title_remove = options.delete(:title_remove) || 'Remove from moodboard'
     link_class = options.delete(:class)
     link_class = link_class.to_s + ' add-wishlist'
 
@@ -278,9 +266,9 @@ module ProductsHelper
     size = options[:size] ||= ''
 
     if spree_user_signed_in?
-      link_to '+ move to wish list', '#', data: { id: variant.id }, class: "move-to-wishlist btn #{size} empty border"
+      link_to '+ move to moodboard', '#', data: { id: variant.id }, class: "move-to-wishlist btn #{size} empty border"
     else
-      link_to '+ move to wish list', spree_signup_path, class: "btn #{size} empty border"
+      link_to '+ move to moodboard', spree_signup_path, class: "btn #{size} empty border"
     end
   end
 
@@ -339,7 +327,7 @@ module ProductsHelper
     when "added_to_cart"
       [ "added this item to their cart", "icon-bag" ]
     when "added_to_wishlist"
-      [ "added this item to their wishlist", "icon-heart" ]
+      [ "added this item to their moodboard", "icon-heart" ]
     else # when 'viewed' & by default
       [ "viewed this item", "icon-eye" ]
     end

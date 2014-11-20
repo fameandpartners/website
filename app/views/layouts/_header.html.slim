@@ -137,7 +137,7 @@
                             li = link_to 'Long Dresses', build_taxon_path('Long'), title: 'Long Dresses', class: "collection"
                             li = link_to 'Short Dresses', build_taxon_path('Short'), title: 'Short Dresses', class: "collection"
                             - if current_site_version.is_australia?
-                              li = link_to 'Formal Dresses', build_taxon_path('Formals'), title: 'Formal Dresses', class: "collection"
+                              li = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses', class: "collection"
                             - else 
                               li = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses', class: "collection"
                             li = link_to 'Plus Size', plus_size_path, title: 'Plus Size Dresses', class: "collection"
@@ -149,15 +149,15 @@
                         = link_to '/dresses/?order=fast_delivery&cf=header', title: 'Next Day Delivery' do
                           = image_tag "menu/nextday.jpg"
                         .label
-                          ' Next Day Delivery
+                          ' KEY STYLES NOW AVAILABLE FOR NEXT DAY DELIVERY
                       .tile
-                        = link_to '/dresses?cf=header&edits=race-day', title: 'Spring Racing Edit' do
-                          = image_tag "menu/spring-racing.jpg"
-                        .label Spring Racing Edit
+                        = link_to colour_path('Pastel'), title: 'Pastel Dresses' do
+                          = image_tag "menu/pastel.jpg"
+                        .label $20 off pastel dresses
           li.blog = link_to 'Blog', blog_path, class: 'btn'
           li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do
               span.icon-heart
-              span wish list
+              span Moodboard
           li.search
             i.fa.fa-search
             = form_tag search_path, method: :get do

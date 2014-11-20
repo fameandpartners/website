@@ -1,7 +1,10 @@
+- if marketing_landing_page?
+  = render '/shared/marketing_pop_js'
+
 #girlfriend
   .girlfriend-header
     = link_to root_path do
-      = image_tag '_girlfriend/header.jpg'
+      = image_tag '_girlfriend/header_new.jpg'
 
   .girlfriend-catalog
     ruby:
@@ -12,6 +15,10 @@
         cache_keys << 'not-authenticated'
       end
       cache_keys << 'products'
+      
+      if show_prices_with_applied_promocode? && current_promotion.present?
+        cache_keys.push(current_promotion.code)
+      end
 
     - cache cache_keys, expires_in: configatron.cache.expire.long do
       - get_products_from_edit('girlfriend', nil, nil, 12).each do |dress|
@@ -27,6 +34,7 @@
             p.description = special_description
             .price = price_for_product(dress)
             p = link_to 'buy', collection_product_path(dress), class: 'btn small'
+            .sale-discount 15% off
             .social-grey-global.addthis_toolbox.addthis_default_style
               = facebook_share_button(collection_product_path(dress))
             .social-popup style="display: none;"

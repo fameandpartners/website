@@ -1,0 +1,50 @@
+ruby:
+  current_time = Time.now
+  dmb_time ||= cookies[:dmb_time]
+  countdown_time = dmb_time.to_i-current_time.to_i
+  
+javascript:
+  contentparam = '#{params[:dmb]}';
+  pop_switch = '#{params[:pop_switch]}';
+  pop_title = '#{strip_tags(params[:pop_title])}';
+
+
+  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || pop_switch == '1') {
+
+    switch(contentparam) {
+      case 'birthday.gif':
+        content = 'bday';
+        break;
+      case 'prom.gif':
+        content = 'prom';
+        break;
+      case 'welcomeback.jpg':
+        content = 'welcomeback';
+        break;
+      case 'bridesmaid.jpg':
+        content = 'bridesmaid';
+        break;
+      default:
+        content = 'bday';
+    }
+    
+    $(document).ready(function(){
+      setTimeout(openpop, 5000);
+    });
+  };
+
+  window.marketing_landing_page = true;
+
+  
+
+  function openpop(){
+    popup = new window.popups.EmailCaptureModalPopup();
+    popup.show(content, pop_title)
+  }
+
+  $(function(){
+    $('#countdown').countdown({
+      timestamp : (new Date()).getTime() + 24*60*60*1000
+    });    
+  });
+

@@ -25,7 +25,8 @@ class PagesController < Spree::StoreController
         end
         filter :bool, :must => {
           :term => {
-            :deleted => false
+            :deleted => false,
+            :hidden  => false
           }
         }
         filter :exists, :field => :available_on
@@ -53,6 +54,8 @@ class PagesController < Spree::StoreController
       session[:spree_user_return_to] = main_app.personalization_products_path(cf: 'custom-dresses-signup')
     elsif params[:return_to] && params[:return_to] == 'checkout'
       session[:spree_user_return_to] = spree.checkout_path
+    elsif params[:bridesmaid_party]
+      session[:spree_user_return_to] = main_app.bridesmaid_party_info_path
     end
 
     if session[:sign_up_reason].blank?
@@ -64,6 +67,8 @@ class PagesController < Spree::StoreController
         session[:sign_up_reason] = 'competition'
       elsif params[:personalization]
         session[:sign_up_reason] = 'customise_dress'
+      elsif params[:bridesmaid_party]
+        session[:sign_up_reason] = 'bridesmaid_party'
       end
     end
 

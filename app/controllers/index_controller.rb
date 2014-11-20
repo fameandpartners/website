@@ -5,6 +5,9 @@ class IndexController < Spree::StoreController
   respond_to :html 
 
   def show
+    @title = default_seo_title
+    @description = default_meta_description
+
     display_marketing_banner
     if params[:workshop]
       session[:sign_up_reason] = 'workshop'

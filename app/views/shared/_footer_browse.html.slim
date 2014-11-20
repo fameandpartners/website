@@ -29,13 +29,15 @@
         .grid-4
           .category-title Event
           ul.links
-            li = link_to 'Formal', build_taxon_path('Formals'), title: 'Formal Dresses' 
-            li = link_to 'Prom', build_taxon_path('Prom'), title: 'Prom Dresses'
-            li = link_to 'Weddings', build_taxon_path('Weddings'), title: 'Wedding Dresses'
+            - if current_site_version.is_australia?
+              li = link_to 'Formal', build_taxon_path('Formal'), title: 'Formal Dresses'
+            - else 
+              li = link_to 'Prom', build_taxon_path('Prom'), title: 'Prom Dresses'
+            li = link_to 'Wedding', build_taxon_path('Wedding'), title: 'Wedding Dresses'
             li = link_to 'Homecoming', build_taxon_path('Homecoming'), title: 'Homecoming Dresses'
-            li = link_to 'Balls', build_taxon_path('Balls'), title: 'Ball Dresses'
+            li = link_to 'Ball', build_taxon_path('Ball'), title: 'Ball Dresses'
             li = link_to 'Sweet 16', build_taxon_path('Sweet-16'), title: 'Sweet 16 Dresses'
-            li = link_to 'Birthdays', build_taxon_path('Birthdays'), title: 'Birthday Dresses'
+            li = link_to 'Birthday', build_taxon_path('Birthday'), title: 'Birthday Dresses'
             li = link_to 'Debutante', build_taxon_path('Debutante'), title: 'Debutante Dresses'
             li = link_to 'Graduation', build_taxon_path('Graduation'), title: 'Graduation Dresses'
         .grid-4

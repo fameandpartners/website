@@ -32,6 +32,7 @@ $('.ecommerce').ready(function(){
 $(function() {
   $('.selectbox').chosen({
     width: '100%',
+    inherit_select_classes: true,
     disable_search: true
   });
 

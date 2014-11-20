@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141030224601) do
+ActiveRecord::Schema.define(:version => 20141119084010) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -52,22 +52,6 @@ ActiveRecord::Schema.define(:version => 20141030224601) do
   end
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
-
-  create_table "banners", :force => true do |t|
-    t.string   "presentation"
-    t.string   "url"
-    t.string   "category"
-    t.integer  "position"
-    t.boolean  "enabled",                 :default => false
-    t.string   "attachment_content_type"
-    t.string   "attachment_file_name"
-    t.datetime "attachment_updated_at"
-    t.integer  "attachment_width"
-    t.integer  "attachment_height"
-    t.integer  "attachment_size"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
-  end
 
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
@@ -207,6 +191,22 @@ ActiveRecord::Schema.define(:version => 20141030224601) do
 
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
+
+  create_table "bridesmaid_user_profiles", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.datetime "wedding_date"
+    t.integer  "status"
+    t.integer  "bridesmaids_count"
+    t.boolean  "special_suggestions"
+    t.integer  "color_id"
+    t.string   "color_name"
+    t.string   "color_code"
+    t.text     "additional_products"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "bridesmaid_user_profiles", ["spree_user_id"], :name => "index_bridesmaid_user_profiles_on_spree_user_id"
 
   create_table "celebrities", :force => true do |t|
     t.string   "first_name"
@@ -376,6 +376,13 @@ ActiveRecord::Schema.define(:version => 20141030224601) do
   create_table "email_notifications", :force => true do |t|
     t.integer  "spree_user_id"
     t.string   "code"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "facebook_data", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.text     "value"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -944,6 +951,8 @@ ActiveRecord::Schema.define(:version => 20141030224601) do
     t.boolean  "on_demand",            :default => false
     t.boolean  "featured",             :default => false
     t.integer  "position",             :default => 0
+    t.boolean  "hidden",               :default => false
+    t.boolean  "is_service",           :default => false
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
@@ -1245,6 +1254,7 @@ ActiveRecord::Schema.define(:version => 20141030224601) do
     t.integer  "site_version_id"
     t.date     "dob"
     t.datetime "last_payment_failed_notification_sent_at"
+    t.date     "birthday"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true

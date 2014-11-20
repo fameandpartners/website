@@ -40,7 +40,7 @@ javascript:
     if images.present?
       product_image_url = absolute_image_url(images.first[:large], 'http')
     else
-      product_image_url = get_absolute_image_url("/assets/noimage/product.png", 'http')
+      product_image_url = absolute_image_url("/assets/noimage/product.png", 'http')
     end
     share_url = collection_product_url(@product)
 
@@ -62,7 +62,7 @@ javascript:
 
   // PRODUCT EXPLORE ---->
   .product-page
-    .row
+    .row itemscope='' itemtype="http://data-vocabulary.org/Product"
       .grid-8
         = render 'spree/products/breadcrumbs', product: @product, active: :explore
         .category-catalog
@@ -71,7 +71,7 @@ javascript:
               - default_images[0...images_limit].each do |image|
                 .grid-6.product-image
                   .picture.product
-                    = image_tag(image[:original], style: "display:none;")
+                    = image_tag(image[:original], style: "display:none;", itemprop: "image")
                     = image_tag(image[:large], title: @product.name)
                     .popup
                       .fright

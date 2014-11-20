@@ -47,7 +47,8 @@ module Products
           filter :bool,
                  :must => {
                    :term => {
-                     'product.is_deleted' => false
+                     'product.is_deleted' => false,
+                     'product.is_hidden' => false
                    }
                  }
           filter :exists,
@@ -253,6 +254,7 @@ module Products
     end
 
     def prepare(params)
+     
       params = HashWithIndifferentAccess.new(params) unless params.is_a?(HashWithIndifferentAccess)
       @properties[:keywords] = params[:keywords]
 
@@ -264,22 +266,22 @@ module Products
       @properties[:selected_taxons] ||= []
       @properties[:selected_edits] ||= []
 
-      #binding.pry
+      
 
       # it's dirty hack, we equal collection with some other collection
       if params[:collection].present? && params[:seocollection].blank?
-        #binding.pry
+        
         params[:seocollection] = params[:collection]
         @properties["collection"] = params[:collection]
         @properties["seocollection"] = params[:collection]
         # MarkoK: continuing with dirty hacks, to ensure backwards compatibility
         # with the old links, we add "collection/" to the beggining of the permalink
         params[:permalink] = "collection/#{params[:collection]}"
-        #binding.pry
+        
       elsif params[:collection].present?
         params[:permalink] = "collection/#{params[:collection]}"
         @properties["collection"] = params[:collection]
-        binding.pry
+        
       elsif params[:edits].present?
         params[:permalink] = params[:edits]
       elsif params[:collection].blank? && params[:edits].blank? && params[:permalink].present?
@@ -309,7 +311,7 @@ module Products
       final_requested_taxons << "style/#{params[:style]}" unless params[:style].blank?
       final_requested_taxons << "event/#{params[:event]}" unless params[:event].blank?
 
-      #binding.pry
+     
 
       itsa_taxon = false
 
@@ -330,6 +332,7 @@ module Products
         end
       end
 
+     
       
       unless itsa_taxon
         if ProductStyleProfile::BODY_SHAPES.include? params[:permalink]
@@ -340,6 +343,7 @@ module Products
       end
 
       
+     
 
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
@@ -365,7 +369,7 @@ module Products
         r = nil
       end
 
-      ##binding.pry
+      
       return r
     end
 

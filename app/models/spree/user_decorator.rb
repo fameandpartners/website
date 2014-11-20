@@ -9,6 +9,8 @@ Spree::User.class_eval do
 
   has_one :personalization_settings
 
+  has_one :bridesmaid_user_profile, foreign_key: :spree_user_id
+
   has_many :email_notifications, foreign_key: :spree_user_id
 
   attr_accessor :skip_welcome_email,

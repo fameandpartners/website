@@ -6,6 +6,8 @@ class Users::StyleprofilesController < Users::BaseController
   def show
     @style_profile = UserStyleProfile.find_by_user_id(@user.id)
 
+    @title = 'My Style Profile'
+
     respond_with(@user) do |format|
       format.html {}
       format.js   {}

@@ -31,7 +31,7 @@ module Feeds
       end
 
       def collection_product_path(product)
-        path_parts = ['dresses', 'p']
+        path_parts = ['dresses']
         if product.respond_to?(:descriptive_url)
           path_parts << product.descriptive_url
         else
@@ -44,7 +44,7 @@ module Feeds
 
       def descriptive_url(product)
         parts = []
-        parts << product.translated_short_description(I18n.locale).parameterize
+        parts << "dress"
         parts << product.name.parameterize
         parts << product.id
 

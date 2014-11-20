@@ -12,7 +12,7 @@ class Campaigns::EmailCaptureController < ApplicationController
     @participation = Participation.new(params[:participation])
 
     if @participation.valid?
-      CampaignMonitor.delay.synchronize(@participation.email, nil, Signupreason: "email_capture_#{@participation.content}")
+      CampaignMonitor.delay.synchronize(@participation.email, nil, Signupreason: "email_capture_"+@participation.content)
     end
   end
 end

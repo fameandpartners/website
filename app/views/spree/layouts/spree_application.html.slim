@@ -51,3 +51,5 @@ doctype html
     = render 'layouts/footer'
 
     = render 'shared/remarketing_tag'
+    - cache [:layout, :head, :colors], expires_in: configatron.cache.expire.long do
+      = render 'shared/dynamic_color_styles'

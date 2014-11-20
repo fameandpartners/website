@@ -137,12 +137,11 @@
 		text-transform: none;
 	}
 	.product-info {
-		padding: 30px 0 0 10px;
+		padding: 0 0 0 10px;
 		.name { font: 300 30px/1.1 $fontFive;}
 		.tabs-links li + li { margin-left: 2px;}
 		.price-delivery {
 			color: $pinkColor;
-			margin-bottom: 10px;
 			span { 
 				vertical-align: middle;
 				display: inline-block;
@@ -177,8 +176,8 @@
 		.label { line-height: 1.3;}
 		.colors-choser, .size-select { margin-bottom: 15px;}
 		.buy-wishlist { 
-			margin: 25px 0;
-			padding: 20px 0;
+			margin: 0;
+			padding: 0 0 10px;
 			border-top: solid 1px #ebebeb;
 			border-bottom: solid 1px #ebebeb;
 		}
@@ -355,7 +354,7 @@
 	}
 }
 
-.bday-popup, .prom-popup, .welcomeback-popup {
+.bday-popup, .prom-popup, .welcomeback-popup, .bridesmaid-popup {
 	.modal-container {
 		border: 5px solid #000;
 		padding: 28px;
@@ -403,9 +402,49 @@
 .bday-popup .modal-container {
 	background: url('_popups/birthday.jpg') no-repeat;
 }
-.prom-popup .modal-container, .welcomeback-popup .modal-container {
+.welcomeback-popup .modal-container {
 	background: url('_popups/prom.jpg') no-repeat;
 	padding-left: 200px;
+}
+.bridesmaid-popup .modal-container {
+	background: url('_popups/bridesmaid.jpg') no-repeat;
+	border-color: #FFDFEA;
+
+	.title {
+		margin-top: 13px;
+	}
+
+	.serif{
+		display: inline-block;
+		font: 700 22px/1 $fontSix;
+		font-style: italic;
+		padding-right: 5px;
+	}
+
+	.sans-serif{
+		display: inline-block;
+		font: 400 22px/1 $fontOne;
+	}
+
+	.close-lightbox{
+		background: #FFDFEA;
+		color: #000;
+		font-size: 12px;
+	}
+
+	.string {
+		.input {
+			border: 1px solid #FFDFEA;
+			@include longBoxShadowRight(#FFDFEA, 5);
+		}
+	}
+
+	.btn{
+		background: #FFDFEA;
+		color: #000;
+	}
+
+
 }
 
 .prom-popup .title{
@@ -534,3 +573,14 @@
 		top: -55px;
 	}
 }
+
+// ADD FRIENDS
+.modal.send-to-friends {
+	.row {
+		margin: 0 -10px;
+	}
+	.grid-12, .grid-6 {
+		padding: 0 10px;
+	}
+}
+// @end

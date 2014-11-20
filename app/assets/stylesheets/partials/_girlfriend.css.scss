@@ -83,6 +83,25 @@
 	          width: 100%;
 	        }
 			}
+			.price {
+		    font-size: 14px;
+		    color: $pinkColor;
+		    .price-old {
+		    	padding: 0 4px;
+		      color: #000;
+		    }
+		  }
+		  .price-old { 
+		    text-decoration: line-through;
+		    color: #000;
+		  }
+		  .sale-discount {
+		  	font: 700 18px/1 $fontSix;
+		  	font-style: italic;
+		  	font-size: 16px;
+		    color: #000;
+		    margin-top: 6px;
+		  }
 			.title {
 				font-size: 40px;
 				font-family: $fontThree;

@@ -1,0 +1,56 @@
+javascript:
+  $(document).ready(function() {
+    // manually enable buy button - we have some troubles with original code
+    (function() {
+      var itemId = '#{ @product.id }';
+      buy_service = function() {
+        $.ajax({
+          url:      urlWithSitePrefix("/bridesmaid-party/additional_products/consierge_service"),
+          type:     "POST",
+          dataType: "json",
+          success: window.shopping_cart.buildOnSuccessCallback(["item_changed"], itemId)
+        })
+      }
+      $('#add_consierge_service').on('click', buy_service)
+      window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
+
+    })(document)
+  })
+
+.bridesmaid-info-header
+  = image_tag "_bridesmaid/pic3.jpg"
+  .text-box
+    .mid Wedding Concierge
+    .small Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+.bridesmaid-concierge
+  .row
+    .grid-6.text-center
+      h2 
+        ' I want Fame & Partners to organise my 
+        br
+        ' Bridesmaids dress
+      p 
+        ' For 
+        em = @product.display_price
+        ' we will help you pick the right dresses, organise the 
+        br
+        ' dresses with your bridesmaids and help you all style the 
+        br
+        ' perfect look for your wedding.
+      = link_to '#', class: 'block-with-triangle', id: 'add_consierge_service' do
+        span.text BOOK NOW
+        span.triangle-bottom style="border-top-color: #e6a49d"
+
+    .grid-6.text-center
+      h2 
+        ' I want to explore and create a 
+        br
+        ' moodboard
+      p 
+        ' Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed 
+        br
+        ' do eiusmod tempor
+      = link_to bridesmaid_party_dresses_path, class: 'block-with-triangle' do
+        span.text EXPLORE NOW
+        span.triangle-bottom style="border-top-color: #e6a49d"
+  .grid-6.text-center

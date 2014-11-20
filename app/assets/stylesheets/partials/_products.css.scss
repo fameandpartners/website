@@ -1,3 +1,35 @@
+.saleperiod{
+	position: relative;
+	width: 420px;
+	text-align: center;
+	margin: 30px auto;
+
+	.border{
+		border: solid 1px black;
+		padding: 10px 0;
+	}
+	.title{
+		position: absolute;
+		font: 400 18px/1 $fontFive;
+		top: -10px;
+		width: 420px;
+		text-align: center;
+		left: 0px;
+
+		div{
+			padding: 0 10px;
+			background: #fff;
+			display: inline-block;
+		}
+	}
+
+	.note{
+		font: 400 18px/1.3em $fontTwo;
+		font-style: italic;
+		text-transform: none;
+	}
+}
+
 .category-header {
 	text-align: center;
 	margin: 10px 0 30px;

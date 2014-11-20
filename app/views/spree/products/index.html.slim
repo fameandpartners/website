@@ -1,45 +1,16 @@
+// NOTE!
+// SEE sorting.html.slim this is not used anymore
+
 - if marketing_landing_page?
-  javascript:
-    contentparam = '#{params[:dmb]}';
-    pop_switch = '#{params[:pop_switch]}';
-    pop_title = '#{strip_tags(params[:pop_title])}';
-
-
-    if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || pop_switch == '1') {
-      
-      switch(contentparam) {
-        case 'bday':
-          content = 'birthday.gif';
-          break;
-        case 'prom':
-          content = 'prom.gif';
-          break;
-        case 'welcomeback.jpg':
-          content = 'prom.gif';
-          break;
-        default:
-          content = 'bday';
-      }
-      
-      $(document).ready(function(){
-        setTimeout(openpop, 5000);
-      });
-    };
-
-    window.marketing_landing_page = true;
-
+  = render '/shared/marketing_pop_js'
     
-
-    function openpop(){
-      popup = new window.popups.EmailCaptureModalPopup();
-      popup.show(content, pop_title)
-    }
-    
-
 - if (image_url = marketing_banner_image_url).present? && !sale_active?
   .row
     .grid-12
       = image_tag(image_url)
+    .grid-12
+      #countdown
+      #note
   - unless marketing_landing_page?
     .category-header
       h1 = @page_info[:banner_title]
@@ -91,5 +62,3 @@ script type="text/javascript" id="adacadoPixel" src="//pixel.adacado.com/1000668
 // OLD HTML ---->
 / .m-pixel
   img src="http://tags.rtbidder.net/track?sid=525645e58bc06f1060d9eb38" width="0" height="0" border="0" alt=""
-
-= thanks_popup_for_new_competition_entrant

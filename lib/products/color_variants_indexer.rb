@@ -36,6 +36,7 @@ module Products
               created_at:   product.created_at,
               available_on: product.available_on,
               is_deleted:   product.deleted_at.present?,
+              is_hidden:    product.hidden?,
               position:     product.position,
               permalink:    product.permalink,
               master_id:    product.master.id,

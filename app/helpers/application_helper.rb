@@ -21,7 +21,6 @@ module ApplicationHelper
 
     hreflang_link = get_hreflang_link
 
-    #binding.pry
     r = "<link href='#{hreflang_link}' hreflang='#{hreflang_language}' rel='alternate' />"
 
     r.html_safe
@@ -31,12 +30,13 @@ module ApplicationHelper
     hreflang_language = get_hreflang_code
     current_language = get_current_language_code
 
-    if request.fullpath.include? current_language
+    if request.fullpath.include? "au"
       hreflang_link = "http://#{request.host}:#{request.port}#{request.fullpath}"
-      hreflang_link.gsub!(current_language, hreflang_language)
+      hreflang_link.gsub!('au/', '')
     else
       # united states is default, so default hreflang should be australian
       hreflang_link = "http://#{request.host}:#{request.port}/au#{request.fullpath}"
+      hreflang_link.gsub!('us/', '')
     end
 
     hreflang_link
@@ -44,9 +44,9 @@ module ApplicationHelper
 
   def get_hreflang_code
     if current_site_version.is_australia?
-      hreflang_language = 'us'
+      hreflang_language = 'en-us'
     else
-      hreflang_language = 'au'
+      hreflang_language = 'en-au'
     end
 
     return hreflang_language
@@ -174,9 +174,13 @@ module ApplicationHelper
 
   def descriptive_url(product, locale = nil)
     parts = []
-    parts << product.translated_short_description(locale || I18n.locale).parameterize
+    # this was how we had translated short descriptions as a part of the url
+    # let's not delete it just yet, we might have to bring it back from the dead once again :)
+    #parts << product.translated_short_description(locale || I18n.locale).parameterize
     parts << product.name.parameterize
     parts << product.id
+
+    
 
     parts.reject(&:blank?).join('-')
   end
@@ -186,11 +190,14 @@ module ApplicationHelper
     path_parts = [site_version_prefix, 'dresses']
     locale = I18n.locale.to_s.downcase.underscore.to_sym
 
+    
+
     if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
       path_parts << "dress-#{product[:urls][locale]}"
     else
       path_parts << "dress-#{descriptive_url(product, locale)}"
     end
+
 
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?
@@ -199,6 +206,7 @@ module ApplicationHelper
   end
 
   def colored_variant_path(variant, options = {})
+    
     parts = []
     parts << self.url_options[:site_version]
     parts << 'dresses'

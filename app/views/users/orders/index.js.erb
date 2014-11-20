@@ -2,3 +2,7 @@ html = '<%=j  render(template: 'users/orders/index.html') %>';
 $('#wrap > #content > .wrap').replaceWith(html)
 
 window.setCurrentPath('<%= user_orders_path %>')
+
+<% if @title.present? %>
+  document.title = '<%=  @title %>';
+<% end %>

@@ -1,12 +1,20 @@
+javascript:
+  $(document).ready(function() {
+    $('a[data-action=share-moodboard]').on('click', function(){
+      $('.modal.share-moodboard').modal('show')
+    });
+  });
+
 .wrap
   .account-pages
     .tabs
       = render 'users/shared/tabs', active_tab: 'wishlist'
       #wishlist.tab-content
-        h1.page-title My wishlist
+        h1.page-title My Moodboard
         - if @items.size == 0
-          p Sorry, there are no items in your wishlist
+          p Sorry, there are no items in your moodboard
         - else
+          = link_to 'Share with Friends', '#', data: { action: 'share-moodboard' }
           ul.products-list
             - @items.each do |item|
               - variant = item.variant
@@ -34,3 +42,45 @@
       .save
         span.error.message(style="display: none;") Please, select size and color
         input.btn.black type="submit" value="Move to cart & close"
+
+.modal.share-moodboard(style="display: none;")
+  .overlay
+  .modal-container
+    .close-lightbox
+    .edit-details
+      .modal-title Share With Friends
+      .item
+      .save
+        span.error.message(style="display: none;") Please, select size and color
+        input.btn.black type="submit" value="Share"
+
+.modal.send-to-friends style="display: none;"
+  .overlay
+  .modal-container
+    .close-lightbox
+    .edit-details
+      .modal-title Send this moodboard to your friends
+      .form
+        .row
+          .grid-12
+            .input
+              textarea placeholder="Enter a note, if you like." rows="4"
+        .row
+          .grid-6
+            .input
+              input type="text" placeholder="Name"
+          .grid-6
+            .input
+              input type="text" placeholder="Email address"
+        .row
+          .grid-6
+            .input
+              input type="text" placeholder="Name"
+          .grid-6
+            .input
+              input type="text" placeholder="Email address"
+        .submit-form.text-center
+          = link_to 'Add more friends +', '#', class: 'btn mid black'
+
+      .save.text-center
+        input.btn.black type="submit" value="SEND TO FRIENDS"

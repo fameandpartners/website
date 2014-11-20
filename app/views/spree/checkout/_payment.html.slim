@@ -6,16 +6,11 @@
     h3 Payment
   .checkout-content data-step="payment" class="active"
     .payment-method-details
-      - unless (sale_active? or current_order.has_personalized_items?)
-        .coupon-block
-          = form_for @order, url: update_checkout_path('payment'), remote: true, html: {class: 'form-global', id: 'coupon_code'} do |f|
-            h4 Have a promocode?
-            = f.text_field :coupon_code, class: 'without-shadow'
-            = f.submit 'Apply promocode', class: 'btn border without-shadow'
-      - else
-        .coupon-block
-          h4 Promocode
-          h5 Sorry we don't offer discounts on customized dresses or sale items.
+      .coupon-block
+        = form_for @order, url: update_checkout_path('payment'), remote: true, html: {class: 'form-global', id: 'coupon_code'} do |f|
+          h4 Have a promocode?
+          = f.text_field :coupon_code, class: 'without-shadow'
+          = f.submit 'Apply promocode', class: 'btn border without-shadow'
 
       .payments-choose
         .input.clearfix

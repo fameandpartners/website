@@ -63,7 +63,7 @@ module Products
       begin
         Tire.search(:spree_products, load: { include: { master: :prices } }) do
           # Filter only undeleted & available products
-          filter :bool, :must => { :term => { :deleted => false } }
+          filter :bool, :must => { :term => { :deleted => false, :hidden => false } }
           filter :exists, :field => :available_on
           filter :bool, :should => {
             :range => {
@@ -376,7 +376,7 @@ module Products
           when 'red'
             %w( red burgundy )
           when 'pastel'
-            %w( aqua nude lilac pale-blue pale-pink pale-grey pale-lavender pale-blush blush peach cream-and-blue dusty-pink silver sherbet blush-pink lavender )
+            %w( aqua nude lilac pale-blue pale-pink pale-grey pale-lavender pale-blush blush peach cream-and-blue dusty-pink silver sherbet blush-pink lavender shell )
           else
             colours
         end

@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
@@ -37,6 +36,8 @@ gem 'font-awesome-sass'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
+gem 'pry-rails'
+
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
@@ -60,10 +61,8 @@ group :development do
   gem 'quiet_assets', '1.0.2'
   gem 'thin', '1.5.1'
   gem 'pry'
-  gem 'pry-rails'
   gem 'pry-debugger'
   gem 'debugger'
-  gem "therubyracer"
   gem 'rails-dev-tweaks', '~> 1.1'
   gem 'oink'
 end
@@ -97,8 +96,8 @@ gem 'spree_paypal_express',
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
-group :staging do
-  gem "therubyracer"
+group :staging, :development do
+  gem 'therubyracer'
 end
 
 group :production do

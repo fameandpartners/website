@@ -8,3 +8,7 @@ $('#wrap > #content > .wrap a.show-style-quiz').on("click", function(event){
   event.stopPropagation();
   Quiz.show();
 })
+
+<% if @title.present? %>
+  document.title = '<%=  @title %>';
+<% end %>

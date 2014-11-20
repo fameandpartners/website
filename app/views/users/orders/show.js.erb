@@ -2,3 +2,7 @@ html = '<%=j  render(template: 'spree/orders/show') %>';
 $('#wrap > #content > .wrap').replaceWith(html);
 
 window.setCurrentPath('<%= user_order_path(@order) %>');
+
+<% if @title.present? %>
+  document.title = '<%=  @title %>';
+<% end %>

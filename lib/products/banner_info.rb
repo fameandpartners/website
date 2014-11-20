@@ -72,7 +72,7 @@ module Products
     def get_page_title
       #mind the spaces in the constructed strings
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        color = "#{seo_colour} "
+        color = "#{seo_colour.titleize } "
       end
 
       
@@ -83,17 +83,17 @@ module Products
       t_root = taxon.parent.name if taxon.present?
 
       if t_root == "Style"
-        style = "#{taxon.name} " || ""
+        style = "#{taxon.name.titleize} " || ""
       end
 
       if t_root == "Event"
-        event = "#{taxon.name} " || "Any event "
+        event = "#{taxon.name.titleize} " || "Any event "
       end
 
       bodyshape = " for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
 
-      r =  "#{event}fashion starts with Fame & Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
-
+      #r =  "#{event}fashion starts with Fame & Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
+      r = "Shop the latest #{color}#{style}#{event}Dresses#{bodyshape} | Fame & Partners"
       
       if taxon.banner.present? && taxon.banner.title.present?
         return taxon.banner.title
@@ -107,7 +107,7 @@ module Products
       r = nil
 
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        color = " #{seo_colour} "
+        color = " #{seo_colour.titleize} "
       end
 
       
@@ -118,16 +118,16 @@ module Products
       t_root = taxon.parent.name if taxon.present?
 
       if t_root == "Style"
-        style = " #{taxon.name} " || ""
+        style = " #{taxon.name.titleize} " || ""
       end
 
       if t_root == "Event"
-        event = "for your #{taxon.name} " || "Any event "
+        event = " #{taxon.name.titleize} " || "any event "
       end
 
-      r =  "Shop and customize the best of#{color}dress trends #{event}at Fame & Partners"
+      r =  "Shop and customize the best #{color}#{style}#{event}dress trends #{event}at Fame & Partners."
 
-      return r.capitalize
+      return r
     end
 
     def get_banner_title(title)
