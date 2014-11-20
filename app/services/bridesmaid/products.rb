@@ -80,7 +80,6 @@ class Bridesmaid::Products
     end
 
     def product_image(images = [])
-      return 'noimage/product.png'
       images.map{|i| i.try(:large) }.compact.first || 'noimage/product.png'
     end
 
