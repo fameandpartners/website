@@ -12,7 +12,13 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
   end
 
   def destroy_item
-    raise 'here'
+    # not moodboard owner, user can delete only own items
+    variant = current_spree_user.wishlist_items.where(spree_variant_id: params[:variant_id]).destroy_all
+    respond_to do |format|
+      format.json do
+        render json: { variant_id: params[:variant_id] }, status: :ok
+      end
+    end
   end
 
   private

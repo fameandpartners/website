@@ -3,37 +3,56 @@ javascript:
     (function() {
       page.enableQuickView('#content', '*[data-action="quick-view"]');
       page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
-    })(document)
+    })(document);
+
+    (function() {
+      var removeItemFunc = function(e) {
+        e.preventDefault();
+        $link = $(e.currentTarget);
+
+        $.ajax({
+          url: $link.attr('href'),
+          type: 'delete',
+          dataType: "JSON",
+          success: function(data, status, response) {
+            $(".grid-3[data-id='" + data.variant_id + "']").remove();
+          }
+        });
+      };
+
+      $('a[data-action=moodboard-remove]').on('click', removeItemFunc)
+    })(document);
   })
 
-.wrap
-  .account-pages
-    .tabs
-      #moodboard.tab-content
-        h1.page-title = @moodboard.title
+.category-header
+  h1 = @moodboard.title
 
-        .row
-          - if @moodboard.products.blank?
-            p Sorry, there are no items in #{ @moodboard.title }
-          - else
-            - @moodboard.products.each do |product|
-              .grid-3
-                .picture
-                  = link_to product.path do
-                    = image_tag product.image_url, alt: product.name
-                  .popup.striped
-                    .fleft.quick-view
-                      = link_to 'Quick view', product.path, data: { action: 'quick-view', id: product.permalink }
-                    .fright.like
-                      - if product.removable?
-                        = link_to 'Remove', bridesmaid_party_delete_moodboard_item_path(user_slug: @moodboard.owner.slug, variant_id: product.variant_id), class: 'btn mid border empty remove fright', method: :delete, remote: true
-                .buttons
-                  .buy-button
-                    = link_to "Buy", product.path, class: 'btn black small', title: "Buy this dress"
+.category-catalog.products-list
+  .row
+    - if @moodboard.products.blank?
+      p Sorry, there are no items in #{ @moodboard.title }
+    - else
+      - @moodboard.products.each do |product|
+        .grid-3 data-id=(product.variant_id)
+          .picture
+            = link_to product.path do
+              = image_tag product.image_url, alt: product.name
+            .popup.striped
+              .fleft.quick-view
+                = link_to 'Quick view', product.path, data: { action: 'quick-view', id: product.permalink }
+              .fright.like
+                - if product.removable?
+                  = link_to 'Remove', bridesmaid_party_delete_moodboard_item_path(user_slug: @moodboard.owner.slug, variant_id: product.variant_id), class: 'wishlist-add', data: { action: 'moodboard-remove' }
+                - else
+                  = link_to 'Add to moodboard', product.path, class: 'wishlist-add', data: { 'title-add' => 'Add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'product-id' => product.id, 'id' => product.master_id }
 
-                h6 = product.name
-                .price = product.price.display_price
+          h6 = product.name
+          .price = product.price.display_price
 
-                - if product.fast_delivery
-                  .fast-delivery-icon title="Next day delivery*"
-                    = I18n.t(:long, scope: [:delivery_time, :fast])
+          .buttons
+            .buy-button
+              = link_to "Buy", product.path, class: 'btn black small', title: "Buy this dress"
+
+          - if product.fast_delivery
+            .fast-delivery-icon title="Next day delivery*"
+              = I18n.t(:long, scope: [:delivery_time, :fast])
