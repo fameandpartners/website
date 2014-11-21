@@ -4,7 +4,7 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
     set_page_titles
 
     @banner             = banner
-    @color_name         = bridesmaid_user_profile.color.name
+    @color_name         = bridesmaid_user_profile.colors.map{|color| color[:name]}.join(', ')
 
     # Display dress variants at the top of the page that match the colours the user selected 
     # when they completed the questionnaire.

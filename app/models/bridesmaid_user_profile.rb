@@ -18,6 +18,6 @@ class BridesmaidUserProfile < ActiveRecord::Base
   serialize :additional_products, Array
 
   def completed?
-    status.present? && color.present?
+    status.present? && colors.present?
   end
 end

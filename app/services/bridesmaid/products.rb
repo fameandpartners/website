@@ -29,9 +29,9 @@ class Bridesmaid::Products
       # it's not cached, and will generate second request in similar_products,
       # solve it with placing similar colors search to own repo
       @color_ids ||= begin
-        color_id = profile.color_id
-        color_ids = Similarity.get_similar_color_ids(color_id, Similarity::Range::VERY_CLOSE)
-        [color_id] + color_ids
+        color_ids = profile.colors.map{|c| c[:id]}
+        similar_color_ids = Similarity.get_similar_color_ids(color_ids, Similarity::Range::VERY_CLOSE)
+        color_ids + similar_color_ids
       end
     end
 
