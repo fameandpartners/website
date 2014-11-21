@@ -29,6 +29,11 @@
 .selectbox-pink.chosen-container .chosen-drop {
   border-color: #fdf5ef;
 }
+// Select Large
+.selectbox-large.chosen-container .chosen-drop {
+  border-color: #424242;
+}
+
 .chosen-container.chosen-with-drop .chosen-drop {
   left: 0;
 }
@@ -62,6 +67,20 @@
   padding-left: 15px;
   span { line-height: 36px;}
   div { width: 26px;}
+}
+
+// Select Large
+.selectbox-large.chosen-container-single .chosen-single {
+  height: 65px;
+  padding-left: 35px;
+  box-shadow: none;
+  font-size: 14px;
+  font-family: $shruti;
+  span { line-height: 65px;}
+  div { width: 35px;}
+}
+.selectbox-text-center.chosen-container-single .chosen-single {
+  text-align: center;
 }
 
 .chosen-container-single .chosen-default {
@@ -164,6 +183,10 @@
 // Pink 
 .selectbox-pink.chosen-container .chosen-results li {
   line-height: 25px;
+}
+// Large
+.selectbox-large.chosen-container .chosen-results li {
+  line-height: 30px;
 }
 .chosen-container .chosen-results li.active-result {
   display: list-item;
