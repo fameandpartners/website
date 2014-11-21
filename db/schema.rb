@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141119084010) do
+ActiveRecord::Schema.define(:version => 20141121095244) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -198,15 +198,9 @@ ActiveRecord::Schema.define(:version => 20141119084010) do
     t.integer  "status"
     t.integer  "bridesmaids_count"
     t.boolean  "special_suggestions"
-    t.integer  "color_id"
-    t.string   "color_name"
-    t.string   "color_code"
+    t.text     "colors"
     t.text     "additional_products"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
   end
-
-  add_index "bridesmaid_user_profiles", ["spree_user_id"], :name => "index_bridesmaid_user_profiles_on_spree_user_id"
 
   create_table "celebrities", :force => true do |t|
     t.string   "first_name"
@@ -354,6 +348,14 @@ ActiveRecord::Schema.define(:version => 20141119084010) do
     t.string   "school_name"
   end
 
+  create_table "customisation_types", :force => true do |t|
+    t.integer  "position"
+    t.string   "name"
+    t.string   "presentation"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "customisation_values", :force => true do |t|
     t.integer  "position"
     t.string   "name"
@@ -394,6 +396,17 @@ ActiveRecord::Schema.define(:version => 20141119084010) do
 
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
@@ -459,6 +472,21 @@ ActiveRecord::Schema.define(:version => 20141119084010) do
   create_table "product_color_values", :force => true do |t|
     t.integer "product_id"
     t.integer "option_value_id"
+  end
+
+  create_table "product_customisation_types", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "customisation_type_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  create_table "product_customisation_values", :force => true do |t|
+    t.integer "product_customisation_type_id"
+    t.integer "customisation_value_id"
+    t.string  "image_file_name"
+    t.string  "image_content_type"
+    t.integer "image_file_size"
   end
 
   create_table "product_personalizations", :force => true do |t|
