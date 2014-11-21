@@ -451,7 +451,7 @@ FameAndPartners::Application.routes.draw do
       get '/consierge_service'  => 'additional_products#new',  as: :bridesmaid_party_consierge_service
       post '/additional_products(/:product)' => 'additional_products#create'
       get '/dresses'  => 'products#index', as: :bridesmaid_party_dresses
-      get '/moodboard/:user_slug' => 'moodboard#show', as: :bridesmaid_party_moodboard
+      get '/moodboard(/:user_slug)' => 'moodboard#show', as: :bridesmaid_party_moodboard
       delete '/moodboard/:user_slug/:variant_id' => 'moodboard#destroy_item',
         as: :bridesmaid_party_delete_moodboard_item
     end

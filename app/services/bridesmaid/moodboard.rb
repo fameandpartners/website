@@ -56,7 +56,7 @@ class Bridesmaid::Moodboard
     end
 
     def product_image(item)
-      return 'noimage/product.png'
+      #return 'noimage/product.png' if Rails.env.development?
 
       dress_color = item.variant.dress_color
       if dress_color.present?

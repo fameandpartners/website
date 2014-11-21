@@ -1,4 +1,6 @@
 class Bridesmaid::ProductsController < Bridesmaid::BaseController
+  before_filter :require_user_logged_in!
+
   def index
     require_completed_profile!
     set_page_titles

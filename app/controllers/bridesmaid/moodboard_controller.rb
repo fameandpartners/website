@@ -1,9 +1,10 @@
 # public_moodboard_path
 # wishlist
 class Bridesmaid::MoodboardController < Bridesmaid::BaseController
+  before_filter :require_user_logged_in!
 
   def show
-    load_owner!
+    load_moodboard_owner!
     check_availability!
 
     @moodboard = moodboard_resource.read
@@ -33,10 +34,16 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
 
     # generate some hash and share through it?
     def moodboard_owner
-      Spree::User.where(slug: params[:user_slug]).first || current_spree_user
+      @moodboard_owner ||= begin
+        owner = nil
+        if params[:user_slug].present?
+          owner = Spree::User.where(slug: params[:user_slug]).first
+        end
+        owner ||= current_spree_user
+      end
     end
 
-    def load_owner!
+    def load_moodboard_owner!
       raise Bridesmaid::Errors::MoodboardOwnerNotFound if moodboard_owner.blank?
     end
 
