@@ -23,7 +23,7 @@ module FameAndPartners
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
-      Dir.glob(File.join(File.dirname(__FILE__), "../app/services/*.rb")) do |c|
+      Dir.glob(File.join(File.dirname(__FILE__), "../app/services/**/*.rb")) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
     end

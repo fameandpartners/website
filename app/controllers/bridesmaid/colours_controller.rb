@@ -8,7 +8,7 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
     
     @palette = OpenStruct.new(
       colors:   palette_colors,
-      selected: bridesmaid_user_profile.color_code || palette_colors.first.code
+      selected: bridesmaid_user_profile.color_code || palette_colors.first
     )
   end
 
