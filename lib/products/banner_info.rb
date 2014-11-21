@@ -57,6 +57,7 @@ module Products
     #    :category_description
     #  }
     def get_info_by_taxons
+      
       if selected_edits_taxons.count == 1
         from_taxon(selected_edits_taxons.first)
       elsif selected_collection_taxons.count == 1
@@ -93,8 +94,12 @@ module Products
 
       #r =  "#{event}fashion starts with Fame & Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
       r = "Shop the latest #{color}#{style}#{event}Dresses#{bodyshape} | Fame & Partners"
-
-      return r
+      
+      if taxon.banner.present? && taxon.banner.title.present?
+        return taxon.banner.title
+      else
+        return r.capitalize
+      end
     end
 
     def get_page_meta_description
@@ -175,6 +180,7 @@ module Products
     end
 
     def get_banner_text(text)
+      
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
         I18n.t(:subtitle, scope: [:collection, :colors, @searcher.seo_colour.parameterize.underscore], default: text)
       else
@@ -213,7 +219,7 @@ module Products
         if seo_collection.present?
           collection_ids << seo_collection
         end
-        #binding.pry
+        #
         selected_taxons(collection_ids, false)
       end
     end
@@ -262,7 +268,8 @@ module Products
         footer_text: taxon.try(:banner).try(:footer_text),
         category_description: taxon.try(:banner).try(:seo_description)
       }
-      #binding.pry
+
+      
       return r
     end
   end

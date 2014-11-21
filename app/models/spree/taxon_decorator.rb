@@ -7,7 +7,7 @@ Spree::Taxon.class_eval do
   accepts_nested_attributes_for :banner
 
   def taxons_with_banner_info
-    %w{edits collection}
+    %w{edits collection style event}
   end
 
   def have_banner_info?

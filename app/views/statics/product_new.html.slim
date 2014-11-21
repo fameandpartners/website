@@ -1,0 +1,109 @@
+/ h1 style="font-family: 'BaskervilleMTStdRegular', sans-serif;" dskvdsfjkbv
+/ h1 style="font-family: 'ShrutiRegular', sans-serif;" dskvdsfjkbv
+/ h1 style="font-family: 'bebas_neueregular', sans-serif;" dskvdsfjkbv
+
+.product-page-2 
+  .product-alert
+    span.title.old share to get a $20 voucher
+    = link_to '#' do
+      span.icon-facebook
+    = link_to '#' do
+      span.icon-pinterest
+
+  .row
+    .grid-8
+      .product-slider
+        ul.dresses-slider
+          li.text-center = image_tag '_sample/dress-large.jpg'
+          li.text-center = image_tag '_sample/dress-large.jpg'
+          li.text-center = image_tag '_sample/dress-large.jpg'
+          li.text-center = image_tag '_sample/dress-large.jpg'
+          li.text-center = image_tag '_sample/dress-large.jpg'
+          li.text-center = image_tag '_sample/dress-large.jpg'
+    .grid-4
+      .product-info
+        .product-header
+          .product-title wired cross dress
+          .product-price $229
+          .product-short-description 
+            ' Long, open back, plunging neck 
+            br
+            ' bridesmaid dress in black
+        .product-row
+          select.selectbox.selectbox-large.selectbox-text-center
+            option value="" select size
+            option value="" select size
+            option value="" select size
+            option value="" select size
+            option value="" select size
+        .product-row
+          select.selectbox.selectbox-large.selectbox-text-center
+            option value="" select colour
+            option value="" select colour
+            option value="" select colour
+            option value="" select colour
+            option value="" select colour
+        .product-row
+          select.selectbox.selectbox-large.selectbox-text-center
+            option value="" select customisation
+            option value="" select customisation
+            option value="" select customisation
+            option value="" select customisation
+            option value="" select customisation
+        .product-row
+          = link_to 'buy now', '#', class: 'btn large grey wide'
+        .product-row
+          = link_to '+ bridesmaids moodboard', '#', class: 'btn large pink wide'
+        .product-row
+          .row
+            .grid-4
+              = link_to '#', class: 'product-icons' do
+                .icon-hanger
+                br
+                span size guide
+            .grid-4.text-center
+              = link_to '#', class: 'product-icons' do
+                .icon-mannequin
+                br
+                span Styling tips
+            .grid-4.text-right
+              = link_to '#', class: 'product-icons' do
+                .icon-email
+                br
+                span 
+                  ' ask a friend
+                  br
+                  ' for opinion
+
+  .page-title-with-line
+    .title 
+      ' about the dress
+      .arrows-line-horizontal.left
+      .arrows-line-horizontal.right
+  .row
+    .grid-6
+      .category-catalog
+        .title DRESS INSPIRATION
+        .row
+          .grid-4: .picture = image_tag '_sample/catalog-2.jpg'
+          .grid-4: .picture = image_tag '_sample/catalog-1.jpg'
+          .grid-4: .picture = image_tag '_sample/catalog-2.jpg'
+          .grid-4: .picture = image_tag '_sample/catalog-3.jpg'
+          .grid-4: .picture = image_tag '_sample/catalog-1.jpg'
+          .grid-4: .picture = image_tag '_sample/catalog-2.jpg'
+    .grid-6
+      .product-full-description
+        p Transform your elegant black dress by adding a V-Neck and open back. Serpent features a plunging neckline with a criss-cross open back and a waistband. The skirt has a slight gather around the waist.
+        p Material: Taffeta with stretch matte satin lining. 
+        p Dry clean only.
+  .page-title-with-line
+    .title 
+      ' More cute dresses
+      .arrows-line-horizontal.left
+      .arrows-line-horizontal.right
+  .category-catalog.products-list
+    .row
+      .grid-3: .picture = link_to (image_tag '_sample/category-white-1.jpg'), '#'
+      .grid-3: .picture = link_to (image_tag '_sample/category-white-2.jpg'), '#'
+      .grid-3: .picture = link_to (image_tag '_sample/category-white-1.jpg'), '#'
+      .grid-3: .picture = link_to (image_tag '_sample/category-white-3.jpg'), '#'

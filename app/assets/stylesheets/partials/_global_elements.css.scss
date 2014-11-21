@@ -251,6 +251,9 @@ a.block-with-triangle .text {
 	letter-spacing: 0.125em;
 	background-color: #000;
 	@include box-sizing(border-box);
+	&.wide {
+		width: 100%;
+	}
 	&.small {
 		height: 20px;
 		line-height: 20px;
@@ -264,6 +267,10 @@ a.block-with-triangle .text {
 		font-size: 14px;
 		font-family: $fontFive;
 		letter-spacing: 0.1em;
+	}
+	&.large {
+		height: 65px;
+		line-height: 65px;
 	}
 	&.empty {
 		color: #000;
@@ -678,6 +685,35 @@ a.block-with-triangle .text {
 }
 // @end
 
+// Title with lines
+.page-title-with-line {
+	margin: 20px 0;
+	overflow: hidden;
+	text-align: center;
+	.title {
+		font-size: 32px;
+		font-family: $bebas;
+		display: inline-block;
+		position: relative;
+		padding: 0 20px;
+
+		.arrows-line-horizontal {
+			width: 1000%;
+			position: absolute;
+			top: 50%;
+			&.left {
+				left: auto;
+				right: 100%;
+			}
+			&.right {
+				left: 100%;
+				right: auto;
+			}
+		}
+	}
+	
+}
+// @end
 
 .errorExplanation {
 	margin: 20px 0;
