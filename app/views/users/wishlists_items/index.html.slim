@@ -19,13 +19,14 @@ javascript:
             - @items.each do |item|
               - variant = item.variant
               - product = variant.product
+
               li.product-item data-id=item.id
                 .thumbnail
                   .actions.clearfix
                     /.like.fright = add_to_wishlist_link(variant)
                     .quick-view.fleft = quick_view_link(product)
-                  = link_to collection_product_path(product) do
-                    = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
+                  = link_to collection_product_path(item.product) do
+                    = image_tag wishlist_item_color_image(item), itemprop: "image", width: 243, height: 352, alt: product.name
                 .name = link_to product.name, collection_product_path(product)
                 .price = price_for_product(product)
                 .add-remove.clearfix

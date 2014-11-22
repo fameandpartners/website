@@ -196,9 +196,12 @@ module ProductsHelper
   #      class: 'wishlist-link',
   #      title-remove: 'Remove from wishlist'
   def cached_add_to_wishlist_link(resource, options = {})
+    color_id   = options.delete(:color_id)
+
     if resource.is_a?(Spree::Variant)
       variant_id = resource.id
       product_id = resource.product_id
+      color_id   ||= resource.dress_color.try(:id)
     elsif resource.is_a?(Spree::Product)
       variant_id = resource.master.id
       product_id = resource.id
@@ -212,13 +215,16 @@ module ProductsHelper
     link_class = options.delete(:class)
     link_class = link_class.to_s + ' add-wishlist'
 
-    link_to title, spree_signup_path, class: link_class, data: {
+    data_args = {
       'title-add'     => title,
       'title-remove'  => title_remove,
       'action'        => 'add-to-wishlist',
       'product-id'    => product_id,
+      'color-id'      => color_id,
       'id'            => variant_id
     }
+
+    link_to title, spree_signup_path, class: link_class, data: data_args
   end
 
   def in_wishlist?(variant)

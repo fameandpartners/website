@@ -12,7 +12,8 @@ ruby:
       .fleft.quick-view
         = quick_view_link(variant.product)
       .fright.like
-        = cached_add_to_wishlist_link(variant.product, class: 'wish-list-link')
+        - color_id = variant.color.id rescue nil
+        = cached_add_to_wishlist_link(variant.product, color_id: color_id, class: 'wish-list-link')
   h6 = variant.product.name
   .price
     - if show_prices_with_applied_promocode?

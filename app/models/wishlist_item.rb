@@ -6,7 +6,7 @@ class WishlistItem < ActiveRecord::Base
   validates :user,    presence: true
   validates :variant, presence: true
 
-  attr_accessible  :spree_variant_id, :spree_product_id, :quantity
+  attr_accessible  :spree_variant_id, :spree_product_id, :product_color_id, :quantity
 
   validates :quantity, presence: true, numericality: {
     :allow_blank => false,

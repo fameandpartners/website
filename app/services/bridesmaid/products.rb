@@ -48,6 +48,7 @@ class Bridesmaid::Products
       OpenStruct.new(
         id: item.product.id,
         master_id: item.product.master_id,
+        color_id: item.color.id,
         #variant_id: item.id,
         name: item.product.name,
         permalink: item.product.permalink,

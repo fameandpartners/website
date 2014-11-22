@@ -5,7 +5,7 @@
     .fleft.quick-view
       = link_to 'Quick view', product.path, data: { action: 'quick-view', id: product.permalink }
     .fright.like
-      = link_to 'Add to moodboard', product.path, class: 'wishlist-add', data: { 'title-add' => 'Add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'product-id' => product.id, 'id' => product.master_id }
+      = link_to 'Add to moodboard', product.path, class: 'wishlist-add', data: { 'title-add' => 'Add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'color-id' => product.color_id, 'product-id' => product.id, 'id' => product.master_id }
 
 h6 = product.name
 .price = product.price.display_price
