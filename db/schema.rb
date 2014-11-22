@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141121095244) do
+ActiveRecord::Schema.define(:version => 20141121153610) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1396,6 +1396,7 @@ ActiveRecord::Schema.define(:version => 20141121095244) do
     t.datetime "updated_at",                      :null => false
     t.integer  "quantity",         :default => 1
     t.integer  "spree_product_id"
+    t.integer  "product_color_id"
   end
 
 end
