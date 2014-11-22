@@ -26,7 +26,7 @@ class Bridesmaid::Moodboard
     end
 
     def wishlist_items
-      @wishlist_items ||= moodboard_owner.wishlist_items.includes(:variant, product: {master: :zone_prices})
+      @wishlist_items ||= moodboard_owner.wishlist_items.includes(:variant, :color, product: {master: :zone_prices})
     end
 
     def moodboard_products
@@ -83,9 +83,8 @@ class Bridesmaid::Moodboard
       path_parts.push(
         ['dress', item.product.name.parameterize, item.product.id].reject(&:blank?).join('-')
       )
-      if color = item.variant.dress_color
-        path_parts.push(color.name)
-      end
+      color = item.color || item.variant.dress_color
+      path_parts.push(color.name) if color.present?
       "/" + path_parts.join('/')
     end
 end
