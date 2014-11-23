@@ -1,0 +1,71 @@
+- if marketing_landing_page?
+  = render '/shared/marketing_pop_js'
+
+#nye
+  .s1
+    h1 The party never dies
+    .sub "This collection of dresses is for the cool girl in the room; the girl who just wants to keep ..."
+    = image_tag 'nye/s1_1.jpg'
+  .s2
+    .part1
+      = image_tag 'nye/s2_1.jpg'
+      .copy
+        .title Time to celebrate
+        .sub "Make the most of the party season"
+
+    .part2
+      = image_tag 'nye/s2_2.jpg'
+      .note "Make a statement in this little number"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .girlfriend-catalog
+    ruby:
+      cache_keys = ['nye']
+      if spree_user_signed_in?
+        cache_keys << 'authenticated'
+      else
+        cache_keys << 'not-authenticated'
+      end
+      cache_keys << 'products'
+      
+      if show_prices_with_applied_promocode? && current_promotion.present?
+        cache_keys.push(current_promotion.code)
+      end
+
+    - cache cache_keys, expires_in: configatron.cache.expire.long do
+      - get_products_from_edit('nye14', nil, nil, 14).each do |dress|
+        - special_description = dress.property("special_description")
+        - product_url = dress.property("bitly")
+        - if product_url.blank? then product_url = collection_product_path(dress) end
+        .catalog-item
+          .picture
+            = link_to collection_product_path(dress) do
+              = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+          .text
+            = link_to dress.name, collection_product_path(dress), class: 'title'
+            p.description = special_description
+            .price = price_for_product(dress)
+            p = link_to 'buy', collection_product_path(dress), class: 'btn small'
+            .sale-discount 15% off
+            .social-grey-global.addthis_toolbox.addthis_default_style
+              = facebook_share_button(collection_product_path(dress))
+            .social-popup style="display: none;"
+              .title THANKS FOR LIKING!
+              .discount $20 OFF
+              .code GF20
+              p ENTER CODE AT CHECKOUT
+
+  
+script type="application/javascript" src="//s.uadx.com/6ef9a6c0-178d-11e4-80ee-22000afe405e:1a1d5400-480a-11e4-9e3e-22000afe405e.js"
