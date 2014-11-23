@@ -63,6 +63,7 @@ group :development do
   gem 'pry'
   gem 'pry-debugger'
   gem 'debugger'
+  gem 'awesome_print'
   gem 'rails-dev-tweaks', '~> 1.1'
   gem 'oink'
 end
