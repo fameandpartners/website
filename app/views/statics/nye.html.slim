@@ -105,7 +105,7 @@ ruby:
       h2 More Party Dresses
       .line
       .catalog
-        - products_other.first(8).each do |dress|
+        - other_products.first(8).each do |dress|
           .catalog-item
             .picture
               = link_to collection_product_path(dress) do
