@@ -107,9 +107,6 @@ class StaticsController < ApplicationController
   end
 
   def nye
-    user = try_spree_current_user
-    currency = current_currency
-    @dresses = get_products_from_edit('plus-size', currency, user, 11)
 
     @title = "New Years Eve Dresses - " + default_seo_title
     @description = "Perfect NYE Dresses 2014. " + default_meta_description

@@ -1,71 +1,118 @@
+ruby:
+  cache_keys = ['nye']
+  if spree_user_signed_in?
+    cache_keys << 'authenticated'
+  else
+    cache_keys << 'not-authenticated'
+  end
+  cache_keys << 'products'
+
+  products = get_products_from_edit('NYE14', nil, nil, 12)
+  other_products = get_products_from_edit('NYEOther', nil, nil, 8)
+  
+  
+  if show_prices_with_applied_promocode? && current_promotion.present?
+    cache_keys.push(current_promotion.code)
+  end
+
 - if marketing_landing_page?
   = render '/shared/marketing_pop_js'
 
-#nye
-  .s1
-    h1 The party never dies
-    .sub "This collection of dresses is for the cool girl in the room; the girl who just wants to keep ..."
-    = image_tag 'nye/s1_1.jpg'
-  .s2
-    .part1
-      = image_tag 'nye/s2_1.jpg'
-      .copy
-        .title Time to celebrate
-        .sub "Make the most of the party season"
+.nye
+  - cache cache_keys, expires_in: configatron.cache.expire.long do
+    .s1
+      h1 The party never dies
+      .sub "This collection of dresses is for the cool girl in the room; the girl who just wants to keep ..."
+      = image_tag 'nye/s1_1.jpg', class: 'image'
+    .s2
+      .part1
+        = image_tag 'nye/s2_1.jpg'
+        .copy
+          .title Time to celebrate
+          .sub "Make the most of the party season"
 
-    .part2
-      = image_tag 'nye/s2_2.jpg'
-      .note "Make a statement in this little number"
+      .part2
+        = image_tag 'nye/s2_2.jpg'
+        .note "Make a statement in this little number"
 
+      .catalog
+        - products[0..3].each do |dress|
+        -# get_products_from_edit('nye14', nil, nil, 4).each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
+    .s3
+      .part1
+        .copy
+          .title Time to celebrate
+          .sub "Make the most of the party season"
+        = image_tag 'nye/s3_1.jpg'
+      .part2
+        = image_tag 'nye/s3_2.jpg'
+        .note "Make a statement in this little number"
+    
+    .s4
+      .catalog
+        - products[4..7].each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
+      = image_tag 'nye/s4_1.jpg', class: 'image'
 
-
-
-
-
-
-
-
-
-
-
-
-
-  .girlfriend-catalog
-    ruby:
-      cache_keys = ['nye']
-      if spree_user_signed_in?
-        cache_keys << 'authenticated'
-      else
-        cache_keys << 'not-authenticated'
-      end
-      cache_keys << 'products'
-      
-      if show_prices_with_applied_promocode? && current_promotion.present?
-        cache_keys.push(current_promotion.code)
-      end
-
-    - cache cache_keys, expires_in: configatron.cache.expire.long do
-      - get_products_from_edit('nye14', nil, nil, 14).each do |dress|
-        - special_description = dress.property("special_description")
-        - product_url = dress.property("bitly")
-        - if product_url.blank? then product_url = collection_product_path(dress) end
+    .s5
+      .part2
+        .note "Make a statement in this little number"
+        = image_tag 'nye/s5_1.jpg'
+    .catalog
+      - products[8..11].each do |dress|
+      -# get_products_from_edit('nye14', nil, nil, 4).each do |dress|
         .catalog-item
           .picture
             = link_to collection_product_path(dress) do
               = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
           .text
             = link_to dress.name, collection_product_path(dress), class: 'title'
-            p.description = special_description
             .price = price_for_product(dress)
-            p = link_to 'buy', collection_product_path(dress), class: 'btn small'
-            .sale-discount 15% off
-            .social-grey-global.addthis_toolbox.addthis_default_style
-              = facebook_share_button(collection_product_path(dress))
-            .social-popup style="display: none;"
-              .title THANKS FOR LIKING!
-              .discount $20 OFF
-              .code GF20
-              p ENTER CODE AT CHECKOUT
+      
+    .s6
+      = image_tag 'nye/s6_1.jpg', class: 'image'
+      .right
+        .catalog
+          - products[12..13].each do |dress|
+            .catalog-item
+              .picture
+                = link_to collection_product_path(dress) do
+                  = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+              .text
+                = link_to dress.name, collection_product_path(dress), class: 'title'
+                .price = price_for_product(dress)
+        .copy  
+          .title The party never dies
+          .sub "This collection of dresses is for the cool girl; the girl who keeps ... "
+
+    .s7
+      = image_tag 'nye/s7_1.jpg', class: 'image'
+
+    .more
+      h2 More Party Dresses
+      .line
+      .catalog
+        - products_other.first(8).each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
 
   
 script type="application/javascript" src="//s.uadx.com/6ef9a6c0-178d-11e4-80ee-22000afe405e:1a1d5400-480a-11e4-9e3e-22000afe405e.js"
