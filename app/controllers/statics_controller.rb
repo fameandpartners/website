@@ -106,6 +106,12 @@ class StaticsController < ApplicationController
     @description = "Girlfriend Magazine x Fame & Partners Collaboration. " + default_meta_description
   end
 
+  def nye
+
+    @title = "New Years Eve Dresses - " + default_seo_title
+    @description = "Perfect NYE Dresses 2014. " + default_meta_description
+  end
+
   private
 
   def get_products_from_edit (edit, currency, user, count=9)
