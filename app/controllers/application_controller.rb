@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
+  include ApplicationHelper
 
   append_before_filter :check_site_version
   append_before_filter :check_cart
