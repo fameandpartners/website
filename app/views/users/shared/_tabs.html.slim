@@ -3,7 +3,7 @@ ul.tabs-links
   li class=( %w{profiles account_settings}.include?(active_tab.to_s) ? 'active' : '')
     = link_to 'Account Settings', profile_path, remote: true
   li class=( %w{wishlist wishlist_items}.include?(active_tab.to_s) ? 'active' : '')
-    = link_to 'My Wishlist', wishlist_path, remote: true
+    = link_to 'My Moodboard', wishlist_path, remote: true
   li class=( %w{orders order}.include?(active_tab.to_s) ? 'active' : '')
     = link_to 'My Orders', user_orders_path, remote: true
   /li class=( %w{reviews}.include?(active_tab.to_s) ? 'active' : '')

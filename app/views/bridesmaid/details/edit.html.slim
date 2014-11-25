@@ -1,5 +1,25 @@
 javascript:
   $(document).ready(function() {
+    // enable link
+    (function() {
+      $('#next-button').prop('disabled', false);
+      $('#next-button').on('click', function(e) {
+        e.preventDefault();
+        $('form#bridesmaid_form').submit();
+        $(e.currentTarget).prop('disabled', false);
+      });
+    })(document);
+
+    // enable special suggestions checkbox
+    (function() {
+      $('.special_suggestions input[type=checkbox]').on('change', function(e) {
+        // if current check - uncheck other and vice versa
+        $input = $(e.currentTarget)
+        $other_inputs = $input.closest('.row').find('input[type=checkbox]').not($input)
+        $other_inputs.prop('checked', !$input.is(':checked'))
+      });
+    })(document);
+
     // enable wedding date selector
     (function() {
       $('#wedding_date_info').prop('disabled', false);
@@ -23,51 +43,67 @@ javascript:
 
   })
 
-.row
-  .grid-4
-  .grid-4
-    = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put do |f|
-      .row
-        .grid-6
-          .fleft
-            = f.label :wedding_date do
-              ' WHEN IS THE BIG DAY?
-        .grid-6
-          .fright
-            = f.text_field :wedding_date, style: "width: 200px;", id: 'wedding_date_info', placeholder: 'yyyy-mm-dd'
-            .row
-              = label_tag :unknown_wedding_date do
-                = "Don't know the wedding date" 
-                = check_box_tag :unknown_wedding_date
-      .row
-        .grid-6
-          .fleft
-            = f.label :status do
-              ' WHICH BRIDAL PARTY MEMBER ARE YOU?
-        .grid-6
-          .fright
-            - options = options_from_collection_for_select(BridesmaidEventUserProfile::STATUSES, :first, :last)
-            = f.select :status, options, style: "width: 200px;"
+.bridesmaid-info-header
+  = image_tag "_bridesmaid/pic3.jpg"
+  .text-box
+    .mid FIRST, TELL US ABOUT YOUR 
+    .big SPECIAL DAY
 
-      .row
-        .grid-6
-          .fleft
-            = f.label :bridesmaids_count do
-              ' HOW MANY BRIDESMAIDS ARE THERE?
-        .grid-6
-          .fright
-            = f.text_field :bridesmaids_count, style: "width: 200px;"
+.bridesmaid-info-form
+  = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put, html: { id: 'bridesmaid_form' } do |f|
+    .row
+      .grid-5
+        = f.label :wedding_date, { class: 'label' } do
+          ' WHEN IS THE BIG DAY?
+      .grid-2
+        .arrows-line-horizontal
+      .grid-3
+        .row = f.text_field :wedding_date, id: 'wedding_date_info', placeholder: 'yyyy-mm-dd', class: 'text-field pink'
+        .checkbox-pink.inline
+          = check_box_tag :unknown_wedding_date
+          = label_tag :unknown_wedding_date do
+            = "Don't know the wedding date" 
 
-      .row
-        .grid-6
-          .fleft
-            = f.label :special_suggestions do
-              ' DO YOU WANT TO MAKE SUGGESTIONS TO OTHER SPECIAL GUESTS?
-        .grid-6
-          .fright
-            = f.check_box :special_suggestions
+    .row
+      .grid-5
+        = f.label :status, { class: 'label' } do
+          ' WHICH BRIDAL PARTY 
+          br
+          ' MEMBER ARE YOU?
+      .grid-2
+        .arrows-line-horizontal
+      .grid-3
+        - options = options_from_collection_for_select(BridesmaidUserProfile::STATUSES, :first, :last)
+        = f.select :status, options, {}, class: "selectbox selectbox-pink", prompt: 'please select'
 
-      .row
-        .grid-12 style="text-align: center;"
-          = f.submit "Save"
-  .grid-4
+    .row
+      .grid-5
+        = f.label :bridesmaids_count, { class: 'label' } do
+          ' HOW MANY BRIDESMAIDS ARE THERE?
+      .grid-2
+        .arrows-line-horizontal
+      .grid-3
+        - options = options_from_collection_for_select((1..20).to_a, :to_i, :to_i)
+        = f.select :bridesmaids_count, options, {}, class: "selectbox selectbox-pink", prompt: 'please select'
+
+    .row
+      .grid-5
+        = f.label :special_suggestions, { class: 'label' } do
+          ' DO YOU WANT TO MAKE SUGGESTIONS
+          br
+          ' TO OTHER SPECIAL GUESTS?
+      .grid-2
+        .arrows-line-horizontal
+      .grid-3.clearfix.special_suggestions
+        .fleft
+          .checkbox-pink
+            = f.check_box :special_suggestions, { id: 'special1', checked: true }, true, false
+            label for="special1" yes
+        .fright
+          .checkbox-pink
+            = f.check_box :special_suggestions, { id: 'special2' }, false, true
+            label for="special2" no
+
+    = link_to '#', class: 'block-with-triangle', id: 'next-button' do
+      span.text NEXT STEP
+      span.triangle-bottom style="border-top-color: #e6a49d"

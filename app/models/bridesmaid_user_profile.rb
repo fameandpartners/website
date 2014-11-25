@@ -1,4 +1,4 @@
-class BridesmaidEventUserProfile < ActiveRecord::Base
+class BridesmaidUserProfile < ActiveRecord::Base
   # attr_accessible :title, :body
   
   belongs_to :spree_user, class_name: 'Spree::User'
@@ -13,4 +13,11 @@ class BridesmaidEventUserProfile < ActiveRecord::Base
     [3, "I'm a bride"],
     [4, "I'm the head bridesmaid"]
   ]
+
+  serialize :colors, Array
+  serialize :additional_products, Array
+
+  def completed?
+    status.present? && colors.present?
+  end
 end

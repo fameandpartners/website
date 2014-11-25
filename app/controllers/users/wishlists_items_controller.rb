@@ -6,23 +6,42 @@ class Users::WishlistsItemsController < Users::BaseController
   before_filter :load_user
 
   def index
-    @items = @user.wishlist_items
+    @title = 'My Moodboard'
+    @items = @user.wishlist_items.includes(:variant, :product)
+
     respond_with(@items) do |format|
       format.html {}
       format.js   {}
     end
   end
 
-  # {"variant_id"=>"1240", "quantity"=>"1"}
+  # { product_id: 1, color_id: 2, variant_id: 3, quantity: 1 }
   def create
-    variant = Spree::Variant.find(params[:variant_id])
+    # add colored variant
+    add_as_colored_product = params[:product_id].present? && params[:color_id].present?
+    add_as_colored_product &&= ProductColorValue.where(
+      product_id: params[:product_id], option_value_id: params[:color_id]
+    ).exists?
 
-    @item = @user.wishlist_items.where(spree_product_id: variant.product_id).first
-    @item ||= @user.wishlist_items.create(
-      spree_variant_id: variant.id,
-      spree_product_id: variant.product_id,
-      quantity: params[:quantity]
-    )
+    if add_as_colored_product
+      @item = @user.wishlist_items.where(
+        spree_product_id: params[:product_id],
+        product_color_id: params[:color_id]
+      ).first_or_initialize
+      @item.spree_variant_id = params[:variant_id]
+      @item.quantity = params[:quantity]
+      @item.save
+    else
+      # add variant [ mostly, this will be master variant ]
+      variant = Spree::Variant.find(params[:variant_id])
+
+      @item = @user.wishlist_items.where(spree_product_id: variant.product_id).first
+      @item ||= @user.wishlist_items.create(
+        spree_variant_id: variant.id,
+        spree_product_id: variant.product_id,
+        quantity: params[:quantity]
+      )
+    end
 
     if @item.persisted?
       render json: {

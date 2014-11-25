@@ -2,6 +2,8 @@ class Users::ProfilesController < Users::BaseController
   before_filter :load_user
 
   def show
+    @title = 'My Account Settings'
+
     respond_with(@user) do |format|
       format.html {}
       format.js   {}

@@ -1,5 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Arapey:400italic,400);
 @import url(//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic);
+@import url(//fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 
 @include font-face('Novecento', 'novecentosanswide-light', 300);
 @include font-face('Novecento', 'novecentosanswide');
@@ -15,6 +16,10 @@
 @include font-face('Icon Numbers', 'icon-numbers');
 
 @include font-face('Austin', 'austin-fatitalic', 700, italic);
+
+@include font-face('bebas_neueregular', 'bebasneue', 400);
+@include font-face('ShrutiRegular', 'shruti', 400);
+@include font-face('BaskervilleMTStdRegular', 'baskervillemtstd-regular', 400);
 
 
 $fontOne: 'Novecento', sans-serif;
@@ -39,3 +44,7 @@ $cinzelBold: 'Cinzel Bold', sans-serif;
 $abrilfatface: 'Abrilfatface', sans-serif;
 $sourceBold: 'source_sans_probold', sans-serif;
 $sourceLight: 'source_sans_prolight', sans-serif;
+
+$baskerville: 'BaskervilleMTStdRegular', sans-serif;
+$shruti: 'ShrutiRegular', sans-serif;
+$bebas: 'bebas_neueregular', sans-serif;

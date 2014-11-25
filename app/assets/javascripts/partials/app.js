@@ -12,7 +12,11 @@ $(function(){
 
   $("abbr.timeago").timeago();
 
-  //track.remarketing_tag()
+  $('.product-slider .dresses-slider').bxSlider({
+    controls: true,
+    nextText: '<span class="icon-arrow-right" />',
+    prevText: '<span class="icon-arrow-left" />'
+  });
 });
 /*
 $('body.blog').ready(function(){
@@ -32,6 +36,7 @@ $('.ecommerce').ready(function(){
 $(function() {
   $('.selectbox').chosen({
     width: '100%',
+    inherit_select_classes: true,
     disable_search: true
   });
 

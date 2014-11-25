@@ -33,39 +33,43 @@
               <%= line_item.money %>
             </div>
             <div class="description">
-              <table>
-                <tr>
-                  <td>Color:</td>
-                  <td>
-                    <% if (!_.isNull(line_item.personalization)) : %>
-                      <div class="color" style="background-color: <%= line_item.product_color %>;"></div>
-                    <% else: %>
-                      <%= line_item.product_color %>
-                    <% end %>
-                  </td>
-                </tr>
-                <% if (!_.isNull(line_item.personalization)) : %>
+              <% if line_item.service_product: %>
+                <div class="service-description"></div>
+              <% else: %>
+                <table>
                   <tr>
-                    <td>Size:</td>
-                    <td><%= line_item.personalization.size %></td>
+                    <td>Color:</td>
+                    <td>
+                      <% if (!_.isNull(line_item.personalization)) : %>
+                        <div class="color" style="background-color: <%= line_item.product_color %>;"></div>
+                      <% else: %>
+                        <%= line_item.product_color %>
+                      <% end %>
+                    </td>
                   </tr>
-                  <% for value in line_item.personalization.customization_values: %>
+                  <% if (!_.isNull(line_item.personalization)) : %>
                     <tr>
-                      <td colspan="2"><%= value.presentation %></td>
-                      <!-- <td><%= value.name %></td> -->
+                      <td>Size:</td>
+                      <td><%= line_item.personalization.size %></td>
+                    </tr>
+                    <% for value in line_item.personalization.customization_values: %>
+                      <tr>
+                        <td colspan="2"><%= value.presentation %></td>
+                        <!-- <td><%= value.name %></td> -->
+                      </tr>
+                    <% end %>
+                  <% else: %>
+                    <tr>
+                      <td>Size:</td>
+                      <td><%= line_item.product_size %></td>
                     </tr>
                   <% end %>
-                <% else: %>
                   <tr>
-                    <td>Size:</td>
-                    <td><%= line_item.product_size %></td>
+                    <td>Quantity:</td>
+                    <td><%= line_item.quantity %></td>
                   </tr>
-                <% end %>
-                <tr>
-                  <td>Quantity:</td>
-                  <td><%= line_item.quantity %></td>
-                </tr>
-              </table>
+                </table>
+              <% end %>
             </div>
           </div>
         </div>

@@ -33,6 +33,7 @@ FameAndPartners::Application.routes.draw do
     get '/maryxfame'  => 'statics#maryxfame'
     get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
     get '/girlfriend' => 'statics#girlfriendxfame'
+    get '/new-years-eve-dresses' => 'statics#nye', :as => :nye
 
     post '/shared/facebook' => 'competition/events#share'
 
@@ -168,7 +169,6 @@ FameAndPartners::Application.routes.draw do
   # static pages not needed to be processed unser site_version
   get '/lp/facebook' => 'statics#landing_facebook', :as => :lp_facebook
   get '/lp/prom' => 'statics#landing_prom', :as => :lp_prom
-
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
@@ -441,13 +441,19 @@ FameAndPartners::Application.routes.draw do
 
     get '/next-day-delivery' => 'spree/products#index', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
 
-    # maybe,  events#bridesmaid?
-    get 'bridesmaid-party'          => 'bridesmaid/landings#show',  as: :bridesmaid_party
-    get 'bridesmaid-party/info'     => 'bridesmaid/details#edit',   as: :bridesmaid_party_info
-    put 'bridesmaid-party/info'     => 'bridesmaid/details#update'
-    get 'bridesmaid-party/colour'   => 'bridesmaid/colours#edit',   as: :bridesmaid_party_colour
-    get 'bridesmaid-party/colour'   => 'bridesmaid/colours#update'
-    get 'bridesmaid-party/dresses'  => 'bridesmaid/products#index', as: :bridesmaid_party_dresses
+    scope '/bridesmaid-party', module: 'bridesmaid' do
+      root to: 'landings#show', as: :bridesmaid_party
+      get '/info'     => 'details#edit',   as: :bridesmaid_party_info
+      put '/info'     => 'details#update'
+      get '/colour'   => 'colours#edit',   as: :bridesmaid_party_colour
+      put '/colour'   => 'colours#update'
+      get '/consierge_service'  => 'additional_products#new',  as: :bridesmaid_party_consierge_service
+      post '/additional_products(/:product)' => 'additional_products#create'
+      get '/dresses'  => 'products#index', as: :bridesmaid_party_dresses
+      get '/moodboard(/:user_slug)' => 'moodboard#show', as: :bridesmaid_party_moodboard
+      delete '/moodboard/:user_slug/:variant_id' => 'moodboard#destroy_item',
+        as: :bridesmaid_party_delete_moodboard_item
+    end
 
     resources :site_versions, only: [:show]
   end

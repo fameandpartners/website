@@ -27,6 +27,23 @@ Tire.index(:spree_products) do
   import Spree::Product.all
 end
 
+## Manage colous pages
+1) update "lib/tasks/populate/colors_groups.rake" file
+2) deploy to production
+3) connect to production via ssh
+4) run rails console and delete existing option value groups using:
+ruby
+type = Spree::OptionType.find_by_name('dress-color')
+Spree::OptionValuesGroup.where(option_type_id: type.id).destroy_all
+
+5) exit from console end run Rake task "db:populate:colors_groups"
+
+## Generate Shopping Feeds
+* $ `ey ssh -e production_new`
+* $ `cd /data/fame_and_partners/current`
+* $ `bundle exec rake feed:export:all`
+
+
 ## Deploy
 
 ### Deploy to staging

@@ -8,6 +8,9 @@
   .row
     .grid-12
       = image_tag(image_url)
+    .grid-12
+      #countdown
+      #note
   - unless marketing_landing_page?
     .category-header
       h1 = @page_info[:banner_title]

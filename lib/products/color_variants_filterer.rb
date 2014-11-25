@@ -47,7 +47,8 @@ module Products
           filter :bool,
                  :must => {
                    :term => {
-                     'product.is_deleted' => false
+                     'product.is_deleted' => false,
+                     'product.is_hidden' => false
                    }
                  }
           filter :exists,

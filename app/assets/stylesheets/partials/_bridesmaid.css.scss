@@ -1,0 +1,235 @@
+// Landing Header
+.bridesmaid-landing-header {
+	position: relative;
+
+	.text-box {
+		background-color: #fff;
+		position: absolute;
+		padding: 30px;
+		font-size: 50px;
+		line-height: 1;
+		font-family: $fontThree;
+		top: 70px;
+		left: 44px;
+		bottom: 70px;
+		width: 470px;
+		@include box-sizing(border-box);
+	}
+	.font-two {
+		font-family: $fontTwo;
+		font-size: 65px;
+		font-style: italic;
+		text-transform: none;
+	}
+	.small {
+		font-size: 28px;
+	}
+}
+// @end
+
+// Landing Footer
+.bridesmaid-landing-footer {
+	position: relative;
+	color: #fff;
+	margin-bottom: 40px;
+	.text-box {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		font-family: $fontThree;
+		line-height: 1.1;
+		font-size: 74px;
+		text-align: center;
+		&:before {
+			content: '';
+			display: inline-block;
+			vertical-align: middle;
+			height: 100%;
+			width: 1px;
+			margin-left: -0.25em;
+		}
+		.centered {
+			display: inline-block;
+			vertical-align: middle;
+			letter-spacing: 13px;
+		}
+	}
+
+	.numbers {
+		position: absolute;
+		right: 20px;
+		bottom: 20px;
+		font-family: $fontThree;
+		margin: 0;
+		padding: 0;
+		font-size: 41px;
+		line-height: 1;
+		li {
+			margin-left: 10px;
+			display: inline-block;
+		}
+		a { 
+			color: #fff;
+			text-decoration: none;
+		}
+		.active {
+			position: relative;
+			&:before {
+				content: '';
+				position: absolute;
+				bottom: -5px;
+				left: 50%;
+				margin-left: -6px;
+				display: block;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 6px 6px 0 6px;
+				border-color: #fff rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+			}
+		}
+	}
+
+	.social {
+		position: absolute;
+		left: 20px;
+		bottom: 20px;
+		margin: 0;
+		padding: 0;
+		li { display: inline;}
+		a {
+			display: inline-block;
+			width: 36px;
+			height: 36px;
+		}
+		.facebook {
+			background: url('_bridesmaid/fb.png');
+		}
+	}
+}
+// @end
+
+// Landing Steps
+.bridesmaid-landing-steps {
+	margin: 30px;
+	padding: 30px;
+	background-color: #fdf5ef;
+	font-family: $fontTwo;
+	font-size: 20px;
+	text-transform: none;
+	small {
+		font-size: 11px;
+		margin-top: -15px;
+		display: block;
+	}
+	.number {
+		line-height: 1;
+		font-family: $fontTwo;
+		font-size: 60px;
+		font-style: italic;
+		letter-spacing: -6px;
+	}
+
+	.facebook-button-flat {
+		margin-top: 20px;
+	}
+}
+// @end
+
+// Info Header
+.bridesmaid-info-header {
+	position: relative;
+	margin-bottom: 40px;
+	.text-box {
+		position: absolute;
+		left: 35px;
+		top: 35px;
+		right: 35px;
+		bottom: 35px;
+		background-color: #fff;
+		
+		font-family: $fontTwo;
+		text-align: center;
+		padding-top: 50px;
+		@include box-sizing(border-box);
+		.big { 
+			font-size: 80px;
+			font-style: italic;
+		}
+		.mid {
+			font-size: 40px;
+		}
+		.small {
+			font-size: 25px;
+		}
+	}
+}
+// @end
+
+// Info form
+.bridesmaid-info-form {
+	margin: 40px 0;
+	.row {
+		margin-bottom: 20px;
+		.row { margin-bottom: 10px;}
+	}
+	.grid-2, .grid-3, .grid-5 {
+		float: none;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.grid-2 {
+		padding-left: 35px;
+		padding-right: 35px;
+	}
+	.arrows-line-horizontal:before { display: none;}
+	.label {
+		display: block;
+		text-align: right;
+		font-family: $fontThree;
+		font-size: 30px;
+		line-height: 1;
+	}
+}
+// @end
+
+// Palette
+.bridesmaid-pallete {
+	@include clearfix;
+	width: 770px;
+	margin: 25px auto;
+	border: solid 4px #000;
+	.pallete-color {
+		width: 70px;
+		height: 70px;
+		float: left;
+		position: relative;
+		&.selected:before {
+			content: '';
+			position: absolute;
+			display: block;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			border: solid 4px #000;
+		}
+	}
+}
+// @end
+
+// Concierge
+.bridesmaid-concierge {
+	font-size: 16px;
+	text-transform: none;
+	h2 {
+		font-size: 25px;
+		font-family: $fontTwo;
+	}
+	em {
+		font-family: $fontTwo;
+	}
+}
+// @end

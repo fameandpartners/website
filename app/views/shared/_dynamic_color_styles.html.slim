@@ -1,8 +1,10 @@
 ruby:
+  colours = %w(black-and-navy taffeta-monochrome black-and-ivory black-on-cream black-and-white cherry plum black-with-black-bottom dark-blue black-on-pale-pink)
+  colours = Spree::OptionValue.colors.where(name: colours)
   black = Spree::OptionValue.colors.find_by_name('black')
-
 css:
-  #{([black] + black.similars).map{ |color| "body .color.#{color.name}" }.join(",\n")} {
+  
+  #{([black] + black.similars + colours).map{ |color| "body .color.#{color.name}" }.join(",\n")} {
     color: #fff;
   }
 

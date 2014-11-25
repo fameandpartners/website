@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141112220734) do
+ActiveRecord::Schema.define(:version => 20141121153610) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -165,12 +165,14 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
   add_index "blog_posts", ["user_id"], :name => "index_blog_posts_on_user_id"
 
   create_table "blog_preferences", :force => true do |t|
-    t.text     "value"
     t.string   "key"
+    t.text     "value"
     t.string   "value_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "blog_preferences", ["key"], :name => "index_blog_preferences_on_key"
 
   create_table "blog_promo_banners", :force => true do |t|
     t.string   "url"
@@ -190,17 +192,15 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
 
-  create_table "bridesmaid_event_user_profiles", :force => true do |t|
+  create_table "bridesmaid_user_profiles", :force => true do |t|
     t.integer  "spree_user_id"
     t.datetime "wedding_date"
     t.integer  "status"
     t.integer  "bridesmaids_count"
     t.boolean  "special_suggestions"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.text     "colors"
+    t.text     "additional_products"
   end
-
-  add_index "bridesmaid_event_user_profiles", ["spree_user_id"], :name => "index_bridesmaid_event_user_profiles_on_spree_user_id"
 
   create_table "celebrities", :force => true do |t|
     t.string   "first_name"
@@ -261,6 +261,8 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
+
+  add_index "celebrity_moodboard_items", ["side"], :name => "index_celebrity_moodboard_items_on_side"
 
   create_table "celebrity_product_accessories", :force => true do |t|
     t.integer  "celebrity_id"
@@ -346,14 +348,6 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.string   "school_name"
   end
 
-  create_table "customisation_types", :force => true do |t|
-    t.integer  "position"
-    t.string   "name"
-    t.string   "presentation"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "customisation_values", :force => true do |t|
     t.integer  "position"
     t.string   "name"
@@ -380,6 +374,13 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.datetime "updated_at",    :null => false
   end
 
+  create_table "facebook_data", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.text     "value"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "incompatibilities", :force => true do |t|
     t.integer "original_id"
     t.integer "incompatible_id"
@@ -387,17 +388,6 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
 
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
-
-  create_table "inspirations", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.string   "name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
@@ -465,21 +455,6 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.integer "option_value_id"
   end
 
-  create_table "product_customisation_types", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "customisation_type_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-  end
-
-  create_table "product_customisation_values", :force => true do |t|
-    t.integer "product_customisation_type_id"
-    t.integer "customisation_value_id"
-    t.string  "image_file_name"
-    t.string  "image_content_type"
-    t.integer "image_file_size"
-  end
-
   create_table "product_personalizations", :force => true do |t|
     t.integer  "variant_id"
     t.integer  "line_item_id"
@@ -542,13 +517,13 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
   create_table "product_videos", :force => true do |t|
     t.integer  "spree_product_id"
     t.integer  "spree_option_value_id"
-    t.boolean  "is_master",             :default => false
+    t.boolean  "is_master",                            :default => false
     t.string   "color"
-    t.string   "url"
+    t.string   "url",                   :limit => 512
     t.string   "video_id"
     t.integer  "position"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
   end
 
   create_table "questions", :force => true do |t|
@@ -970,6 +945,8 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.boolean  "on_demand",            :default => false
     t.boolean  "featured",             :default => false
     t.integer  "position",             :default => 0
+    t.boolean  "hidden",               :default => false
+    t.boolean  "is_service",           :default => false
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
@@ -1271,6 +1248,7 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.integer  "site_version_id"
     t.date     "dob"
     t.datetime "last_payment_failed_notification_sent_at"
+    t.date     "birthday"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
@@ -1384,6 +1362,7 @@ ActiveRecord::Schema.define(:version => 20141112220734) do
     t.datetime "updated_at",                      :null => false
     t.integer  "quantity",         :default => 1
     t.integer  "spree_product_id"
+    t.integer  "product_color_id"
   end
 
 end

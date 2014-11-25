@@ -57,6 +57,7 @@ module Products
     #    :category_description
     #  }
     def get_info_by_taxons
+      
       if selected_edits_taxons.count == 1
         from_taxon(selected_edits_taxons.first)
       elsif selected_collection_taxons.count == 1
@@ -71,7 +72,7 @@ module Products
     def get_page_title
       #mind the spaces in the constructed strings
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        color = "#{seo_colour} "
+        color = "#{seo_colour.titleize } "
       end
 
       
@@ -82,18 +83,23 @@ module Products
       t_root = taxon.parent.name if taxon.present?
 
       if t_root == "Style"
-        style = "#{taxon.name} " || ""
+        style = "#{taxon.name.titleize} " || ""
       end
 
       if t_root == "Event"
-        event = "#{taxon.name} " || "Any event "
+        event = "#{taxon.name.titleize} " || "Any event "
       end
 
       bodyshape = " for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
 
-      r =  "#{event}fashion starts with Fame & Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
-
-      return r.capitalize
+      #r =  "#{event}fashion starts with Fame & Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
+      r = "Shop the latest #{color}#{style}#{event}Dresses#{bodyshape} | Fame & Partners"
+      
+      if taxon.banner.present? && taxon.banner.title.present?
+        return taxon.banner.title
+      else
+        return r.capitalize
+      end
     end
 
     def get_page_meta_description
@@ -101,7 +107,7 @@ module Products
       r = nil
 
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
-        color = " #{seo_colour} "
+        color = " #{seo_colour.titleize} "
       end
 
       
@@ -112,16 +118,16 @@ module Products
       t_root = taxon.parent.name if taxon.present?
 
       if t_root == "Style"
-        style = " #{taxon.name} " || ""
+        style = " #{taxon.name.titleize} " || ""
       end
 
       if t_root == "Event"
-        event = "for your #{taxon.name} " || "Any event "
+        event = " #{taxon.name.titleize} " || "any event "
       end
 
-      r =  "Shop and customize the best of#{color}dress trends #{event}at Fame & Partners"
+      r =  "Shop and customize the best #{color}#{style}#{event}dress trends #{event}at Fame & Partners."
 
-      return r.capitalize
+      return r
     end
 
     def get_banner_title(title)
@@ -174,6 +180,7 @@ module Products
     end
 
     def get_banner_text(text)
+      
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
         I18n.t(:subtitle, scope: [:collection, :colors, @searcher.seo_colour.parameterize.underscore], default: text)
       else
@@ -212,7 +219,7 @@ module Products
         if seo_collection.present?
           collection_ids << seo_collection
         end
-        #binding.pry
+        #
         selected_taxons(collection_ids, false)
       end
     end
@@ -261,7 +268,8 @@ module Products
         footer_text: taxon.try(:banner).try(:footer_text),
         category_description: taxon.try(:banner).try(:seo_description)
       }
-      #binding.pry
+
+      
       return r
     end
   end

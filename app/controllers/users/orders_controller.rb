@@ -1,5 +1,7 @@
 class Users::OrdersController < Users::BaseController
   def index
+    @title = 'My Orders'
+
     user = try_spree_current_user
     @orders = user.orders.complete
 
@@ -12,6 +14,8 @@ class Users::OrdersController < Users::BaseController
   def show
     user = try_spree_current_user
     @order = user.orders.where(number: params[:id]).first
+
+    @title = "Order ##{ @order.number }"
 
     respond_with(@order) do |format|
       format.html { render 'spree/orders/show' }

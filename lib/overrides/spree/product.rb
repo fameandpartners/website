@@ -29,6 +29,9 @@ module Overrides
           indexes :taxons, :as => 'taxons.map(&:name)'
           indexes :taxon_ids, :as => 'taxons.map(&:id)'
 
+          indexes :featured, :type => :boolean, :as => 'featured'
+          indexes :hidden,   :type => :boolean, :as => 'hidden'
+
           indexes :colors, :as => 'colors'
           indexes :color_ids, :as => 'color_ids'
 
@@ -118,7 +121,8 @@ module Overrides
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => {
               :term => {
-                :deleted => false
+                :deleted => false,
+                :hidden  => false
               }
             }
 
@@ -196,7 +200,8 @@ module Overrides
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => {
               :term => {
-                :deleted => false
+                :deleted => false,
+                :hidden  => false
               }
             }
 
