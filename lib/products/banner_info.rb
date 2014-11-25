@@ -173,10 +173,13 @@ module Products
       # Edits always take presedance over other titles
       if t_root == "Edits"
         return taxon.name.capitalize
+      end
+
+      if taxon.present? && taxon.banner.present? && taxon.banner.title.present?
+        return taxon.banner.title
       else
         return r.capitalize
       end
-
     end
 
     def get_banner_text(text)
