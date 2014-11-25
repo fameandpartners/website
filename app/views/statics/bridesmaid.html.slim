@@ -14,26 +14,11 @@ ruby:
 - if marketing_landing_page?
   = render '/shared/marketing_pop_js'
 
-/ Header:
-/ THE PARTY NEVER DIES
-/ This collection of dresses is for the cool girl in the room; the girl who keeps the party going all night long..."
-
-/ Image 1: THE PARTY HAS ARRIVED.. AND YOU'RE OFFICIALY INVITED
-
-/ Image 2: NIGHT FEVER - faux fur and metallic skirts
-
-/ Image 3: NOT YOUR TYPICAL LITTLE BLACK DRESS HERE
-
-/ Image 4: SLIP INTO THE CITY NIGHTS WITH THIGH HIGH SPLITS
-
-/ Image 5: CUT-OUTS & CROPS SHOW SOME SKIN THIS SUMMER
-
-/ Last: A TOAST TO THE PARTY THAT NEVER DIES
 
 .bridesmaid-dresses
   - cache cache_keys, expires_in: configatron.cache.expire.long do
-    - products = get_products_from_edit('NYE14', nil, nil, 16)
-    - other_products = get_products_from_edit('NYEOther', nil, nil, 8)
+    - products = get_products_from_edit('Bridesmaid14', nil, nil, 16)
+    - other_products = get_products_from_edit('BridesmaidOther', nil, nil, 8)
     .s1
       = image_tag 'campaigns/bridemaid/top.jpg', width: 1139, height: 775, class: 'image'
     .grid-container

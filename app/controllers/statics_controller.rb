@@ -107,9 +107,12 @@ class StaticsController < ApplicationController
   end
 
   def nye
-
     @title = "New Years Eve Dresses - " + default_seo_title
     @description = "Perfect NYE Dresses 2014. " + default_meta_description
+  end
+  def bridesmaid
+    @title = "Bridesmaid Dresses - " + default_seo_title
+    @description = "Perfect Wedding Bridesmaid Dresses 2014. " + default_meta_description
   end
 
   private
