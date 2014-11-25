@@ -8,7 +8,7 @@ namespace :db do
         white:  ['white', 'optic white', 'ivory', 'nude', 'moonstone', 'cream and blue', 'cream'],
         blue:   ['blue', 'pale blue', 'sky blue', 'navy', 'electric blue', 'cobalt blue', 'cream and blue'],
         pink:   ['pink', 'pale pink', 'blush', 'peach', 'watermelon', 'hot pink', 'ivory and hot pink', 'hot pink and red', 'magenta', 'salmon'],
-        red:    ['red', 'cherry red', 'burgundy', 'hot pink and red', 'plum'],
+        red:    ['red', 'cherry red', 'burgundy', 'hot pink and red'],
         green:  ['green', 'emerald green', 'forrest green', 'seafoam'],
         silver: ['silver', 'pale grey', 'silver and black', 'silver and nude', 'stone'],
         pastel: ['lilac', 'pale blue', 'pale pink', 'pale yellow', 'nude', 'moonstone', 'cream and blue', 'cream', 'blush', 'ivory', 'watermelon', 'salmon', 'seafoam', 'lavender', 'peach', 'pale grey', 'sky blue', 'dusty pink', 'aqua', 'shell']
