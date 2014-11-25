@@ -95,7 +95,7 @@ module Products
       #r =  "#{event}fashion starts with Fame & Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
       r = "Shop the latest #{color}#{style}#{event}Dresses#{bodyshape} | Fame & Partners"
       
-      if taxon.banner.present? && taxon.banner.title.present?
+      if taxon.present? && taxon.banner.present? && taxon.banner.title.present?
         return taxon.banner.title
       else
         return r.capitalize

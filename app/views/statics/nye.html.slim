@@ -14,24 +14,40 @@ ruby:
 - if marketing_landing_page?
   = render '/shared/marketing_pop_js'
 
+/ Header:
+/ THE PARTY NEVER DIES
+/ This collection of dresses is for the cool girl in the room; the girl who keeps the party going all night long..."
+
+/ Image 1: THE PARTY HAS ARRIVED.. AND YOU'RE OFFICIALY INVITED
+
+/ Image 2: NIGHT FEVER - faux fur and metallic skirts
+
+/ Image 3: NOT YOUR TYPICAL LITTLE BLACK DRESS HERE
+
+/ Image 4: SLIP INTO THE CITY NIGHTS WITH THIGH HIGH SPLITS
+
+/ Image 5: CUT-OUTS & CROPS SHOW SOME SKIN THIS SUMMER
+
+/ Last: A TOAST TO THE PARTY THAT NEVER DIES
+
 .nye
   - cache cache_keys, expires_in: configatron.cache.expire.long do
     - products = get_products_from_edit('NYE14', nil, nil, 16)
     - other_products = get_products_from_edit('NYEOther', nil, nil, 8)
     .s1
       h1 The party never dies
-      .sub "This collection of dresses is for the cool girl in the room; the girl who just wants to keep ..."
+      .sub "This collection of dresses is for the cool girl in the room; the girl who keeps the party going all night long..."
       = image_tag 'nye/s1_1.jpg', class: 'image'
     .s2
       .part1
         = image_tag 'nye/s2_1.jpg'
         .copy
-          .title Time to celebrate
-          .sub "Make the most of the party season"
+          .title The party has arrived...
+          .sub and you're offically invited
 
       .part2
         = image_tag 'nye/s2_2.jpg'
-        .note "Make a statement in this little number"
+        .note "Night fever - faux fur and metallic skirts"
 
       .catalog
         - products[0..3].each do |dress|
@@ -45,12 +61,11 @@ ruby:
     .s3
       .part1
         .copy
-          .title Time to celebrate
-          .sub "Make the most of the party season"
+          .title Not your typical little black dress here
         = image_tag 'nye/s3_1.jpg'
       .part2
         = image_tag 'nye/s3_2.jpg'
-        .note "Make a statement in this little number"
+        .note "Slip into city nights with thigh high splits"
     
     .s4
       .catalog
@@ -66,7 +81,7 @@ ruby:
 
     .s5
       .part2
-        .note "Make a statement in this little number"
+        .note "Cut-outs and crops show some skin this summer"
         = image_tag 'nye/s5_1.jpg'
     .catalog
       - products[8..11].each do |dress|
@@ -91,8 +106,7 @@ ruby:
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
         .copy  
-          .title The party never dies
-          .sub "This collection of dresses is for the cool girl; the girl who keeps ... "
+          .title A toast to the party that never dies
 
     .s7
       = image_tag 'nye/s7_1.jpg', class: 'image'
