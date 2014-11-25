@@ -177,6 +177,7 @@ GEM
     atomic (1.1.15)
     awesome_nested_set (2.1.5)
       activerecord (>= 3.0.0)
+    awesome_print (1.2.0)
     aws-sdk (1.3.9)
       httparty (~> 0.7)
       json (~> 1.4)
@@ -597,6 +598,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   acts-as-taggable-on
+  awesome_print
   aws-sdk
   bourbon
   canonical-rails!
