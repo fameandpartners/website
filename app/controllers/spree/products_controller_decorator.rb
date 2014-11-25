@@ -101,57 +101,10 @@ Spree::ProductsController.class_eval do
     end
   end
 
-
-  # def index
-  #   currency = current_currency
-  #   user = try_spree_current_user
-  #
-  #   display_featured_dresses = params[:dfd]
-  #   display_featured_dresses_edit = params[:dfde]
-  #
-  #   @searcher = Products::ProductsFilter.new(params)
-  #   @searcher.current_user = user
-  #   @searcher.current_currency = currency
-  #
-  #   @products         = @searcher.products
-  #   @similar_products = @searcher.similar_products
-  #
-  #
-  #   @page_info = @searcher.selected_products_info
-  #   @category_title = @page_info[:page_title]
-  #   @category_description = @page_info[:meta_description]
-  #
-  #   @current_colors = @searcher.colour.present? ? @searcher.colors_with_similar : []
-  #
-  #   if (!display_featured_dresses.blank? && display_featured_dresses == "1") && !display_featured_dresses_edit.blank?
-  #     @lp_featured_products = get_products_from_edit(display_featured_dresses_edit, currency, user, 4)
-  #   end
-  #
-  #
-  #   respond_to do |format|
-  #     format.html do
-  #       set_collection_title(@page_info)
-  #       set_marketing_pixels(@searcher)
-  #
-  #       render action: 'index', layout: true
-  #     end
-  #     format.json do
-  #       products_html = render_to_string(
-  #         partial: 'spree/products/products',
-  #         formats: [:html]
-  #       )
-  #       render json: { products_html: products_html, page_info:  @page_info }
-  #     end
-  #   end
-  # end
-
   # NOTE: original method check case when user comes from page
   # with t= params and load corresponding taxon
-  def show
+  def old_show
     return unless @product
-
-    #binding.pry
-
 
     if params[:color_name]
       @color = Spree::OptionValue.colors.find_by_name!(params[:color_name])
@@ -165,7 +118,30 @@ Spree::ProductsController.class_eval do
     @product_variants = Products::VariantsReceiver.new(@product).available_options
     @recommended_products = get_recommended_products(@product, limit: 3)
 
+    #respond_with(@product)
+  end
+
+  def new_show
+    details = Products::ProductDetailsResource.new(
+      as: current_spree_user,
+      site_version: current_site_version,
+      product: @product,
+      selected_color: params[:color]
+    ).read
+
+    @recommended_products = get_recommended_products(@product, limit: 4)
+
+    @product = details
     respond_with(@product)
+  end
+
+  def show
+    if params[:show_old] || Rails.env.production?
+      old_show
+      render template: 'spree/products/old_show.html.slim'
+    else
+      new_show
+    end
   end
 
   def quick_view
