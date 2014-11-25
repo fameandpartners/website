@@ -118,7 +118,6 @@ class StaticsController < ApplicationController
   private
 
   def get_products_from_edit (edit, currency, user, count=9)
-    return Spree::Product.active.where(hidden: false).limit(count)
     searcher = Products::ProductsFilter.new(:edits => edit)
     searcher.current_user = user
     searcher.current_currency = currency

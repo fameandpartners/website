@@ -38,7 +38,7 @@ ruby:
         .grid-6.text-right = image_tag 'campaigns/bridemaid/big-dress.jpg', width: 496, height: 761, class: 'image', alt: ''
     .nye
       .catalog
-        - products[0..3].each do |dress|
+        - products[2..5].each do |dress|
           .catalog-item
             .picture
               = link_to collection_product_path(dress) do
@@ -50,7 +50,7 @@ ruby:
         .grid-6.s3 = image_tag 'campaigns/bridemaid/two-girls.jpg', width: 498, height: 348, class: 'image', alt: ''
         .grid-6
           .catalog
-            - products[0..1].each do |dress|
+            - products[6..7].each do |dress|
               .catalog-item
                 .picture
                   = link_to collection_product_path(dress) do
@@ -59,7 +59,7 @@ ruby:
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
       .catalog
-        - products[0..3].each do |dress|
+        - products[8..11].each do |dress|
           .catalog-item
             .picture
               = link_to collection_product_path(dress) do
@@ -70,7 +70,7 @@ ruby:
       .grid-container
         .grid-6
           .catalog
-            - products[0..1].each do |dress|
+            - products[12..13].each do |dress|
               .catalog-item
                 .picture
                   = link_to collection_product_path(dress) do
