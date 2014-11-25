@@ -33,6 +33,7 @@ FameAndPartners::Application.routes.draw do
     get '/maryxfame'  => 'statics#maryxfame'
     get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
     get '/girlfriend' => 'statics#girlfriendxfame'
+    get '/new-years-eve-dresses' => 'statics#nye', :as => :nye
 
     post '/shared/facebook' => 'competition/events#share'
 
@@ -168,8 +169,6 @@ FameAndPartners::Application.routes.draw do
   # static pages not needed to be processed unser site_version
   get '/lp/facebook' => 'statics#landing_facebook', :as => :lp_facebook
   get '/lp/prom' => 'statics#landing_prom', :as => :lp_prom
-  get '/product_new' => 'statics#product_new'
-
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
