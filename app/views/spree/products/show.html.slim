@@ -1,89 +1,152 @@
+/ h1 style="font-family: 'BaskervilleMTStdRegular', sans-serif;" dskvdsfjkbv
+/ h1 style="font-family: 'ShrutiRegular', sans-serif;" dskvdsfjkbv
+/ h1 style="font-family: 'bebas_neueregular', sans-serif;" dskvdsfjkbv
+
+css:
+  .sc-player { display: none; }
+
 javascript:
-  window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
+  console.log('enable here');
 
-= render 'product_meta', product: @product
+.product-page-2  itemscope='' itemtype="http://data-vocabulary.org/Product"
+  .product-info itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"
+    meta itemprop="priceCurrency" content="#{@product.price.currency}" /
+    meta itemprop="condition" content="new" /
+    meta itemprop="availability" content="in_stock" /
+    meta itemprop="price" content="#{@product.price.amount}" /
+    meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
+    meta itemprop="identifier" content="sku:#{@product.sku}" /
 
-- cache [:pages, ( is_directed_from?(my_boutique_path) ? :boutique : :collection ), :product, @product.id, @color.try(:name)].compact, expires_in: configatron.cache.expire.long do
-  ruby:
-    images = @product.images_json
-    videos = @product.videos_json
-    sku = @product.sku
-    category = range_taxon_name_for(@product)
-    default_color = nil
+  .product-alert
+    span.title.old share to get a $20 voucher
+    /= link_to '#' do
+      span.icon-facebook
+    /= link_to '#' do
+      span.icon-pinterest
+    = facebook_share_button(@product.path)
+    = pin_share_button(@product.path, absolute_image_url(@product.default_image), @product.name)
 
-    if images.blank?
-      default_images = []
-    elsif @color.present? and images.any?{ |image| image[:color] == @color.name }
-      default_images = images.select{ |image| image[:color] == @color.name }
-      default_color = @color.name
-    elsif images.any?{ |image| image[:color].blank? }
-      default_images = images.select{|image| image[:color].blank? }
-    else
-      default_color = images.first[:color]
-      default_images = images.select{|image| image[:color] == default_color}
-    end
-
-    video = videos.find{|i| i[:default]} || videos.find{|i| i[:color] == default_color } || videos.first
-    default_video_url = video.present? ? video[:video_url] : nil
-
-    colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
-    sizes = @product_variants.map{|t| t[:size].to_i}.uniq.sort
-    sizes = locale_sizes(@product, sizes)
-
-    if current_site_version.is_australia?
-      site_version = 'aus'
-    else
-      site_version = 'us'
-    end
-
-    images_limit = default_video_url.present? ? 6 : 7
-    if images.present?
-      product_image_url = absolute_image_url(images.first[:large], 'http')
-    else
-      product_image_url = absolute_image_url("/assets/noimage/product.png", 'http')
-    end
-    share_url = collection_product_url(@product)
-
-    moodboard_pics = @product.moodboard_items.active.moodboard.limit(5)
-
-
-  javascript:
-    window.product_variants = #{{ @product_variants.to_json }};
-    window.productImagesData = #{{images.to_json}};
-    window.product_default_color = #{{ default_color.to_json }};
-    window.productDefaultVideoUrl = #{{default_video_url.to_json}};
-    window.productVideosData = #{{videos.to_json}};
-    window.product_images_limit = #{{ images_limit}};
-
-  css:
-    .sc-player { display: none; }
-
-  //= render 'product_meta', product: @product
-
-  // PRODUCT EXPLORE ---->
-  .product-page
-    .row itemscope='' itemtype="http://data-vocabulary.org/Product"
-      .grid-8
-        = render 'spree/products/breadcrumbs', product: @product, active: :explore
-        .category-catalog
+  .row
+    .grid-8
+      .product-slider
+        ul.dresses-slider
+          - @product.images.each do |image|
+            li.text-center = image_tag image.large
+    .grid-4
+      .product-info
+        .product-header
+          .product-title = @product.name
+          .product-price = @product.price.display_price
+          .product-short-description 
+            = truncate(@product.short_description, length: 80, separator: ' ')
+        .product-row
+          .size-info = current_site_version.size_settings.size_info_label
+          select.selectbox.selectbox-large.selectbox-text-center
+            option value="" select size
+            optgroup label="base sizes"
+              - @product.sizes.each do |size|
+                option value=(size[:value]) = size[:name]
+            optgroup label="extra charge sizes "
+              - @product.extra_sizes.each do |size|
+                option value=(size[:value]) = size[:name]
+        .product-row
+          /- options = color_options_for_select(colors, selected_color)
+          /= select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'
+          select.selectbox.selectbox-large.selectbox-text-center
+            option value="" select color
+            optgroup label="Standard colors"
+              - @product.colors.each do |color|
+                option value=(color[:value]) = color[:name]
+            optgroup label="Custom colors #{ @product.extra_color_price.display_price }"
+              - @product.extra_colors.each do |color|
+                option class="color #{color[:value]}" value=(color[:value]) = color[:name] 
+        .product-row
+          select.selectbox.selectbox-large.selectbox-text-center
+            option value="" select customisation
+            option value="" select customisation
+            option value="" select customisation
+            option value="" select customisation
+            option value="" select customisation
+        .product-row
+          = link_to 'buy now', '#', class: 'btn large grey wide'
+        .product-row
+          = link_to '+ bridesmaids moodboard', '#', class: 'btn large pink wide'
+        .product-row
           .row
-            - if default_images.present?
-              - default_images[0...images_limit].each do |image|
-                .grid-6.product-image
-                  .picture.product
-                    = image_tag(image[:original], style: "display:none;", itemprop: "image")
-                    = image_tag(image[:large], title: @product.name)
-                    .popup
-                      .fright
-                        a href='#' data-action='show-large-image' data-image='#{ image[:xlarge] }'
-                          span.icon-expand
+            .grid-4
+              = link_to '#what-size', class: 'product-icons toggle-sizes' do
+                .icon-hanger
+                br
+                span size guide
 
-            .row
-              - if default_video_url.present?
-                = render 'has_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url, video_url: default_video_url
-              - else
-                = render 'no_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
-      .grid-4
-        = render 'product_info', { product: @product, sizes: sizes, colors: colors, selected_color: @color.try(:name), products: @recommended_products, site_version: site_version }
+            .grid-4.text-center
+              = link_to personalization_style_product_path(permalink: @product.permalink), class: 'product-icons' do
+                .icon-mannequin
+                br
+                span Styling tips
 
-  script type="text/javascript" id="adacadoPixel" src="//pixel.adacado.com/1000668?segment=product&category=#{category}&product=#{sku}"
+            .grid-4.text-right
+              - link_data = spree_user_signed_in? ? {} : { guest: true }
+              = link_to '#', data: link_data.merge({ permalink: @product.permalink }), title: 'Send this dress to whoever you want to get a second opinion!', class: 'product-icons send-to-friend' do
+                .icon-email
+                br
+                span 
+                  ' ask a friend
+                  br
+                  ' for opinion
+
+  .page-title-with-line
+    .title 
+      ' about the dress
+      .arrows-line-horizontal.left
+      .arrows-line-horizontal.right
+  .row
+    .grid-6
+      .category-catalog
+        .title DRESS INSPIRATION
+        .row
+          - @product.moodboard.song_items.each do |item|
+            .grid-4
+              .picture.audio-cover
+                = link_to 'SoundCloud tune', item.source, class: 'sc-player'
+                = link_to '#', data: { action: 'soundcloud' } do
+                  = image_tag item.image
+                  = image_tag '_audio-icon.png', class: 'icon'
+                  span.mask
+                .popup
+                  .fleft 
+                    = link_to '#', data: { action: 'soundcloud' } do
+                      span.icon-play
+                      span.icon-pause
+
+          - @product.moodboard.parfume_items.each do |item|
+            .grid-4.perfume
+              .picture
+                = link_to item.source, target: 'blank' do
+                  = image_tag item.image.url
+
+          - @product.moodboard.items.each do |item|
+            .grid-4
+              .picture
+                = link_to item.source, target: 'blank' do
+                  = image_tag item.image.url
+    .grid-6
+      .product-full-description
+        =raw @product.description
+        - if @product.fabric
+          ' fabric:
+          =raw @product.fabric
+        =raw @product.notes
+
+  - if @recommended_products.present?
+    .page-title-with-line
+      .title 
+        ' More cute dresses
+        .arrows-line-horizontal.left
+        .arrows-line-horizontal.right
+    .category-catalog.products-list
+      .row
+        - @recommended_products.each do |product|
+          .grid-3: .picture
+            = link_to collection_product_path(product) do
+              = product_image_tag(product)

@@ -16,10 +16,13 @@ module Products
         variant.option_values.each do |option_value|
           if option_value.option_type_id == color_option.id
             available_option[:color] = option_value.name
+            available_option[:color_id] = option_value.id
+            available_option[:color_value]  = option_value.value
             available_option[:image] = option_value.image.url(:small_square) if option_value.image?
-            available_option[:color_code]  = option_value.value
           elsif option_value.option_type_id == size_option.id
-            available_option[:size] = Integer(option_value.name) rescue option_value.name
+            available_option[:size] = option_value.name
+            available_option[:size_id] = option_value.id
+            available_option[:size_value] = Integer(option_value.name) rescue option_value.name
           end
         end
 
