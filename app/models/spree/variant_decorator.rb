@@ -37,11 +37,11 @@ Spree::Variant.class_eval do
   end
 
   def dress_color
-    get_option_value(self.class.color_option_type)
+    @dress_color ||= get_option_value(self.class.color_option_type)
   end
 
   def dress_size
-    get_option_value(self.class.size_option_type)
+    @dress_size ||= get_option_value(self.class.size_option_type)
   end
 
   def get_option_value(option_type)
