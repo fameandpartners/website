@@ -81,7 +81,7 @@ ruby:
       = image_tag 'nye/s6_1.jpg', class: 'image'
       .right
         .catalog
-          - products[12..13].each do |dress|
+          - products[12..15].each do |dress|
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
@@ -89,6 +89,8 @@ ruby:
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
+    .s7
+      .right
         .copy  
           .title The party that never dies.
       .catalog
