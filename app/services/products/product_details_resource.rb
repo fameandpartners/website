@@ -112,10 +112,34 @@ class Products::ProductDetailsResource
           all_sizes[variant_info[:size_id]] ||= { 
             id: variant_info[:size_id],
             name: variant_info[:size],
-            value: variant_info[:size_value].to_i
+            value: variant_info[:size_value].to_i,
+            size_details_attributes: get_size_details(variant_info[:size_value])
           }
         end
         all_sizes.values.sort_by{|item| item[:value] }
+      end
+    end
+
+    def default_size_details
+      {
+      }
+    end
+
+    def get_size_details(size)
+      if site_version.is_australia?
+        {
+          unit_code:   site_version.size_settings.locale_unit_code,
+          unit_symbol: site_version.size_settings.locale_unit_symbol,
+          locale_code: site_version.size_settings.locale_code,
+          attributes: SIZE_ATTRIBUTES.find_by_au_name(size.to_s)
+        }
+      else
+        {
+          unit_code:   site_version.size_settings.locale_unit_code,
+          unit_symbol: site_version.size_settings.locale_unit_symbol,
+          locale_code: site_version.size_settings.locale_code,
+          attributes: SIZE_ATTRIBUTES.find_by_us_name(size.to_s)
+        }
       end
     end
 
@@ -177,6 +201,7 @@ class Products::ProductDetailsResource
           id: value.id,
           name: value.presentation,
           image: value.image.present? ? value.image.url : 'logo_empty.png',
+          price: value.price,
           display_price: value.display_price
         })
       end
