@@ -110,7 +110,8 @@ class StaticsController < ApplicationController
     @title = "New Years Eve Dresses - " + default_seo_title
     @description = "Perfect NYE Dresses 2014. " + default_meta_description
   end
-  def bridesmaid
+  
+  def bridesmaid_lp
     @title = "Bridesmaid Dresses - " + default_seo_title
     @description = "Perfect Wedding Bridesmaid Dresses 2014. " + default_meta_description
   end
