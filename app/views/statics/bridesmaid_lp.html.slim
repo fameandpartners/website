@@ -16,14 +16,16 @@ ruby:
 
 .bridesmaid_lp
   - cache cache_keys, expires_in: configatron.cache.expire.long do
-    - products = get_products_from_edit('Bridesmaid14', nil, nil, 16)
-    - other_products = get_products_from_edit('BridesmaidOther', nil, nil, 8)
+    - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
+    - other_products = get_products_from_edit('BridesmaidOther', nil, nil, 16)
+    -# products = Spree::Product.active.where(hidden: false).limit(20)
+    -# other_products = Spree::Product.active.where(hidden: false).limit(16)
     .sb1
       = image_tag 'campaigns/bridemaid/top.jpg', width: 1140, class: 'image'
     .inner  
       .sb2
         .left
-          = image_tag 'campaigns/bridemaid/design.jpg', width: 500, class: 'image', alt: ''
+          = image_tag 'campaigns/bridemaid/text.jpg', width: 490, class: 'image', alt: ''
           .catalog
             - products[0..1].each do |dress|
               .catalog-item
@@ -34,7 +36,7 @@ ruby:
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
         .right
-          = image_tag 'campaigns/bridemaid/big-dress.jpg', width: 500, class: 'image1', alt: ''
+          = image_tag 'campaigns/bridemaid/image1.jpg', width: 490, class: 'image1', alt: ''
       .catalog
         - products[2..5].each do |dress|
           .catalog-item
@@ -46,7 +48,7 @@ ruby:
               .price = price_for_product(dress) 
       .sb3
         .left
-          = image_tag 'campaigns/bridemaid/two-girls.jpg', width: 500, class: 'image', alt: ''
+          = image_tag 'campaigns/bridemaid/image2.jpg', width: 490, class: 'image', alt: ''
         .right
           .catalog
             - products[6..7].each do |dress|
@@ -57,8 +59,17 @@ ruby:
                 .text
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
+          .catalog
+            - products[8..9].each do |dress|
+              .catalog-item
+                .picture
+                  = link_to collection_product_path(dress) do
+                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                .text
+                  = link_to dress.name, collection_product_path(dress), class: 'title'
+                  .price = price_for_product(dress)
       .catalog
-        - products[8..11].each do |dress|
+        - products[10..13].each do |dress|
           .catalog-item
             .picture
               = link_to collection_product_path(dress) do
@@ -69,7 +80,16 @@ ruby:
       .sb4
         .left
           .catalog
-            - products[12..13].each do |dress|
+            - products[14..15].each do |dress|
+              .catalog-item
+                .picture
+                  = link_to collection_product_path(dress) do
+                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                .text
+                  = link_to dress.name, collection_product_path(dress), class: 'title'
+                  .price = price_for_product(dress)
+          .catalog
+            - products[16..17].each do |dress|
               .catalog-item
                 .picture
                   = link_to collection_product_path(dress) do
@@ -78,7 +98,7 @@ ruby:
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
         .right
-          = image_tag 'campaigns/bridemaid/two-girls-2.jpg', width: 500, class: 'image', alt: ''
+          = image_tag 'campaigns/bridemaid/image3.jpg', width: 490, class: 'image', alt: ''
 
       .more
         h2 More Party Dresses
