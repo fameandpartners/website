@@ -14,29 +14,27 @@ ruby:
 - if marketing_landing_page?
   = render '/shared/marketing_pop_js'
 
-
-.bridesmaid-dresses
+.bridesmaid_lp
   - cache cache_keys, expires_in: configatron.cache.expire.long do
     - products = get_products_from_edit('Bridesmaid14', nil, nil, 16)
     - other_products = get_products_from_edit('BridesmaidOther', nil, nil, 8)
-    .s1
-      = image_tag 'campaigns/bridemaid/top.jpg', width: 1139, height: 775, class: 'image'
-    .grid-container
-      .row
-        .grid-6.s2
-          = image_tag 'campaigns/bridemaid/design.jpg', width: 534, height: 264, class: 'image', alt: ''
-          .nye
-            .catalog
-              - products[0..1].each do |dress|
-                .catalog-item
-                  .picture
-                    = link_to collection_product_path(dress) do
-                      = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
-                  .text
-                    = link_to dress.name, collection_product_path(dress), class: 'title'
-                    .price = price_for_product(dress)
-        .grid-6.text-right = image_tag 'campaigns/bridemaid/big-dress.jpg', width: 496, height: 761, class: 'image', alt: ''
-    .nye
+    .sb1
+      = image_tag 'campaigns/bridemaid/top.jpg', width: 1140, class: 'image'
+    .inner  
+      .sb2
+        .left
+          = image_tag 'campaigns/bridemaid/design.jpg', width: 500, class: 'image', alt: ''
+          .catalog
+            - products[0..1].each do |dress|
+              .catalog-item
+                .picture
+                  = link_to collection_product_path(dress) do
+                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                .text
+                  = link_to dress.name, collection_product_path(dress), class: 'title'
+                  .price = price_for_product(dress)
+        .right
+          = image_tag 'campaigns/bridemaid/big-dress.jpg', width: 500, class: 'image1', alt: ''
       .catalog
         - products[2..5].each do |dress|
           .catalog-item
@@ -45,10 +43,11 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
-      .grid-container
-        .grid-6.s3 = image_tag 'campaigns/bridemaid/two-girls.jpg', width: 498, height: 348, class: 'image', alt: ''
-        .grid-6
+              .price = price_for_product(dress) 
+      .sb3
+        .left
+          = image_tag 'campaigns/bridemaid/two-girls.jpg', width: 500, class: 'image', alt: ''
+        .right
           .catalog
             - products[6..7].each do |dress|
               .catalog-item
@@ -67,8 +66,8 @@ ruby:
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
               .price = price_for_product(dress)
-      .grid-container
-        .grid-6
+      .sb4
+        .left
           .catalog
             - products[12..13].each do |dress|
               .catalog-item
@@ -78,12 +77,13 @@ ruby:
                 .text
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
-        .grid-6.s3 = image_tag 'campaigns/bridemaid/two-girls-2.jpg', width: 496, height: 349, class: 'image', alt: ''
+        .right
+          = image_tag 'campaigns/bridemaid/two-girls-2.jpg', width: 500, class: 'image', alt: ''
 
       .more
         h2 More Party Dresses
         .catalog
-          - other_products.each do |dress|
+          - other_products[0..3].each do |dress|
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
@@ -91,6 +91,15 @@ ruby:
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
+        .catalog
+          - other_products[0..3].each do |dress|
+            .catalog-item
+              .picture
+                = link_to collection_product_path(dress) do
+                  = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+              .text
+                = link_to dress.name, collection_product_path(dress), class: 'title'
+                .price = price_for_product(dress)        
 
   
 script type="application/javascript" src="//s.uadx.com/6ef9a6c0-178d-11e4-80ee-22000afe405e:1a1d5400-480a-11e4-9e3e-22000afe405e.js"

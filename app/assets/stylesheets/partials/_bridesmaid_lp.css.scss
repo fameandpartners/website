@@ -1,19 +1,100 @@
-.bridesmaid-dresses {
+.bridesmaid_lp {
   margin-top: -8px;
-  .s2 {
-    .image {
-      padding: 80px 0 106px;
+
+  .inner{
+    width: 1030px;
+    margin: 0 auto;
+
+    .right{
+      float: right;
+    }
+    .left{
+      float: left;
+    }
+
+    .catalog{
+      .catalog-item{
+        width: 230px;
+        min-width: 230px;
+        margin-right: 30px;
+      }
+    }
+
+    .sb2 {
+      @include clearfix;
+      .image {
+        padding: 80px 0 106px;
+      }
+    }
+    .sb3 {
+      @include clearfix;
+      .image {
+        float: left;
+        margin-right: 30px;
+      }
+    }
+    .sb4{
+      @include clearfix;
+      .image {
+        float: right;
+        margin-left: 30px;
+      }
+      .catalog {
+        width: auto;
+      }
+    }
+
+    .more {
+      margin-top: 70px;
+      h2 {
+        margin-bottom: 40px;
+      }
     }
   }
-  .s3 {
-    .image {
-      width: auto;
-      height: 308px;
+}
+
+
+
+@media only screen and (max-width: 1000px), only screen and (max-device-width: 1000px) {
+  #bridesmaid_lp {
+    #content{
+      width: 1140px;
+      margin: 0 auto 0 auto;
+      -webkit-text-size-adjust: 100%;
+    }
+    .nav-container{
+      display: none;
+    }
+    .holder{
+      display: none;
+    } 
+  }
+}
+
+
+
+@media only screen and (max-width: 680px), only screen and (max-device-width: 680px) {
+  #content, .inner{
+    width: 100% !important;
+    min-width: 320px;
+  }
+
+  .sb1, .sb2 .image1 {
+    display: none;
+  }
+  .sb2, .sb3, .sb4{
+    .image{
+      width: 100%;
+    }
+    .image{
+      margin: 0;
     }
   }
-  .nye .more {
-    h2 {
-      margin-bottom: 40px;
+  .catalog{
+    width: 100% !important;
+    .catalog-item{
+      width: 100% !important;
+      margin-right: 0;
     }
   }
 }
