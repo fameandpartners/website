@@ -136,9 +136,11 @@ Spree::ProductsController.class_eval do
   end
 
   def show
+    #Deface::Override.all[:"spree/products/show"].delete('promo_product_properties')
+
     if params[:show_old] || Rails.env.production?
       old_show
-      render template: 'spree/products/old_show.html.slim'
+      render template: 'spree/products/old_show'
     else
       new_show
     end
