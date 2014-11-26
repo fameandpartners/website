@@ -90,9 +90,18 @@ ruby:
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
         .copy  
-          .title A toast to the party that never dies
-
-    .s7
+          .title The party that never dies.
+      .catalog
+        - products[16..18].each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
+      
+    .s8
       = image_tag 'nye/s7_1.jpg', class: 'image'
 
     .more
