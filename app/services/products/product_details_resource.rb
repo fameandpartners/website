@@ -25,6 +25,8 @@ class Products::ProductDetailsResource
 
       # product details
       OpenStruct.new({
+        id: product.id,
+        master_id: product.master.try(:id),
         sku:  product.sku,
         name: product.name,
         permalink: product.permalink,

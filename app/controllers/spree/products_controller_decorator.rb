@@ -129,6 +129,13 @@ Spree::ProductsController.class_eval do
       selected_color: nil # don't work for now. don
     ).read
 
+    if params[:color_name]
+      @color = Spree::OptionValue.colors.find_by_name!(params[:color_name])
+    end
+
+    set_product_show_page_title(@product, @color.try(:presentation))
+    display_marketing_banner
+
     @recommended_products = get_recommended_products(@product, limit: 4)
 
     @product = details
