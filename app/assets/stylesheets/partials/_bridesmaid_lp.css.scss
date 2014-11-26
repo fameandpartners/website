@@ -16,14 +16,14 @@
       .catalog-item{
         width: 230px;
         min-width: 230px;
-        margin-right: 30px;
+        margin-right: 36px;
       }
     }
 
     .sb2 {
       @include clearfix;
       .image {
-        padding: 10px 0 96px;
+        padding: 10px 0 80px;
       }
     }
     .sb3 {
