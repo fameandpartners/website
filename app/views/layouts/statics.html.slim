@@ -33,7 +33,7 @@ doctype html
     #wrap
       = render 'layouts/header'
       #content
-        - unless restfull_action_name == 'girlfriendxfame' || restfull_action_name == 'nye'
+        - unless restfull_action_name == 'girlfriendxfame'
           - unless sale_active?
             = marketing_banner
           - else
