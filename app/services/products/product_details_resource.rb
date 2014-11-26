@@ -3,35 +3,51 @@ class Products::ProductDetailsResource
 
   def initialize(options = {})
     @site_version     = options[:site_version]
-    @product          = product_with_associations(options[:product])
+    @product          = options[:product]
     @selected_color   = options[:selected_color]
   end
 
+  def cache_key
+    "product-details-#{ site_version.try(:permalink) }-#{ product.permalink }"
+  end
+
+  def cache_expiration_time
+    return configatron.cache.expire.quickly if Rails.env.development?
+    return configatron.cache.expire.quickly if Rails.env.staging?
+    return configatron.cache.expire.long
+  end
+
   def read
-    # product details
-    OpenStruct.new({
-      sku:  product.sku,
-      name: product.name,
-      permalink: product.permalink,
-      short_description: product_short_description,
-      fabric: product_properties['fabric'],
-      notes: product_properties['style_notes'],
-      description: product_description,
-      default_image: default_product_image,
-      images: product_images,
-      price: product_price,
-      free_customisations: Spree::Config[:free_customisations],
-      sizes: default_product_sizes,
-      extra_sizes: extra_product_sizes,
-      colors: default_product_colors,
-      extra_colors: extra_product_colors,
-      extra_color_price: extra_product_color_price,
-      customisations: available_product_customisations,
-      url: product_url,
-      path: product_path,
-      variants: product_variants,
-      moodboard: product_moodboard
-    })
+    Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
+
+      # load often used associations
+      @product = product_with_associations(@product)
+
+      # product details
+      OpenStruct.new({
+        sku:  product.sku,
+        name: product.name,
+        permalink: product.permalink,
+        short_description: product_short_description,
+        fabric: product_properties['fabric'],
+        notes: product_properties['style_notes'],
+        description: product_description,
+        default_image: default_product_image,
+        images: product_images,
+        price: product_price,
+        free_customisations: Spree::Config[:free_customisations],
+        sizes: default_product_sizes,
+        extra_sizes: extra_product_sizes,
+        colors: default_product_colors,
+        extra_colors: extra_product_colors,
+        extra_color_price: extra_product_color_price,
+        customisations: available_product_customisations,
+        url: product_url,
+        path: product_path,
+        variants: product_variants,
+        moodboard: product_moodboard
+      })
+    end
   end
 
   private
