@@ -34,7 +34,7 @@ FameAndPartners::Application.routes.draw do
     get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
     get '/girlfriend' => 'statics#girlfriendxfame'
     get '/new-years-eve-dresses' => 'statics#nye', :as => :nye
-    get '/bridesmaid-dresses' => 'statics#bridesmaid', :as => :bridesmaid
+    get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
 
     post '/shared/facebook' => 'competition/events#share'
 
