@@ -1,8 +1,7 @@
 class Products::ProductDetailsResource
-  attr_reader :accessor, :site_version, :product, :selected_color
+  attr_reader :site_version, :product, :selected_color
 
   def initialize(options = {})
-    @accessor         = options[:as]
     @site_version     = options[:site_version]
     @product          = product_with_associations(options[:product])
     @selected_color   = options[:selected_color]
@@ -21,12 +20,13 @@ class Products::ProductDetailsResource
       default_image: default_product_image,
       images: product_images,
       price: product_price,
+      free_customisations: Spree::Config[:free_customisations],
       sizes: default_product_sizes,
       extra_sizes: extra_product_sizes,
       colors: default_product_colors,
       extra_colors: extra_product_colors,
       extra_color_price: extra_product_color_price,
-      extra_color_free: Spree::Config[:free_customisations],
+      customisations: available_product_customisations,
       url: product_url,
       path: product_path,
       variants: product_variants,
@@ -155,28 +155,14 @@ class Products::ProductDetailsResource
       Products::ProductMoodboardResource.new(product: product).read
     end
 
-=begin
-  def read
-    OpenStruct.new({
-      name: 'wired cross dress',
-      short_description: 'Long, open back, plunging neck bridesmaid dress in black',
-      price: OpenStruct.new({ amount: 100, amount_with_discount: 95, currency: 'usd'}),
-      images: [
-        { url: '', color_id: '' }
-      ],
-      colors: [
-        { id: 123, name: 'red', value: '', image: '' }
-      ],
-      custom_colors: [
-        { id: 123, name: 'red', value: '', image: '' }
-      ],
-      customisations: [
-        { id: 123, name: 'short' }
-      ]
-    })
-  end
-=end
-
-  private
-
+    def available_product_customisations
+      product.customisation_values.map do |value|
+        OpenStruct.new({
+          id: value.id,
+          name: value.presentation,
+          image: value.image.present? ? value.image.url : 'logo_empty.png',
+          display_price: value.display_price
+        })
+      end
+    end
 end

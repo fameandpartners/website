@@ -123,10 +123,10 @@ Spree::ProductsController.class_eval do
 
   def new_show
     details = Products::ProductDetailsResource.new(
-      as: current_spree_user,
       site_version: current_site_version,
       product: @product,
-      selected_color: params[:color]
+      #selected_color: params[:color] 
+      selected_color: nil # don't work for now. don
     ).read
 
     @recommended_products = get_recommended_products(@product, limit: 4)

@@ -60,13 +60,16 @@ javascript:
             optgroup label="Custom colors #{ @product.extra_color_price.display_price }"
               - @product.extra_colors.each do |color|
                 option class="color #{color[:value]}" value=(color[:value]) = color[:name] 
-        .product-row
-          select.selectbox.selectbox-large.selectbox-text-center
-            option value="" select customisation
-            option value="" select customisation
-            option value="" select customisation
-            option value="" select customisation
-            option value="" select customisation
+
+        - if @product.customisations.present?
+          .product-row
+            select.selectbox.selectbox-large.selectbox-text-center
+              option value="" select customisation
+              - @product.customisations.each do |customisation|
+                option value=(customisation.value)
+                  = customisation.name
+                  = image_tag customisation.image, alt: customisation.name
+
         .product-row
           = link_to 'buy now', '#', class: 'btn large grey wide'
         .product-row
