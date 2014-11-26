@@ -25,7 +25,7 @@ ruby:
     .inner  
       .sb2
         .left
-          = image_tag 'campaigns/bridemaid/text.jpg', width: 490, class: 'image', alt: ''
+          = image_tag 'campaigns/bridemaid/text.jpg', width: 496, class: 'image', alt: ''
           .catalog
             - products[0..1].each do |dress|
               .catalog-item
@@ -36,7 +36,7 @@ ruby:
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
         .right
-          = image_tag 'campaigns/bridemaid/image1.jpg', width: 490, class: 'image1', alt: ''
+          = image_tag 'campaigns/bridemaid/image1.jpg', width: 496, class: 'image1', alt: ''
       .catalog
         - products[2..5].each do |dress|
           .catalog-item
@@ -48,7 +48,7 @@ ruby:
               .price = price_for_product(dress) 
       .sb3
         .left
-          = image_tag 'campaigns/bridemaid/image2.jpg', width: 490, class: 'image', alt: ''
+          = image_tag 'campaigns/bridemaid/image2.jpg', width: 496, class: 'image', alt: ''
         .right
           .catalog
             - products[6..7].each do |dress|
@@ -98,7 +98,7 @@ ruby:
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
         .right
-          = image_tag 'campaigns/bridemaid/image3.jpg', width: 490, class: 'image', alt: ''
+          = image_tag 'campaigns/bridemaid/image3.jpg', width: 496, class: 'image', alt: ''
 
       .more
         h2 More Party Dresses
