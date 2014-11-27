@@ -12,12 +12,12 @@ javascript:
   .arrows-line-horizontal
 
 .category-catalog.products-list
-  h5.breadcrumb
+  /h5.breadcrumb
     = link_to('Collection', collection_path, data: { action: 'show-collection' })
     '/
     = link_to('Bridesmaid Party Dresses', '/edits/bridesmaid-party', data: { action: 'show-collection' })
 
-  h5.breadcrumb
+  /h5.breadcrumb
     = link_to 'View Selected Dresses', bridesmaid_party_moodboard_path(user_slug: current_spree_user.slug)
 
   .row

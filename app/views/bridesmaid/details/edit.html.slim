@@ -11,14 +11,14 @@ javascript:
     })(document);
 
     // enable special suggestions checkbox
-    (function() {
-      $('.special_suggestions input[type=checkbox]').on('change', function(e) {
-        // if current check - uncheck other and vice versa
-        $input = $(e.currentTarget)
-        $other_inputs = $input.closest('.row').find('input[type=checkbox]').not($input)
-        $other_inputs.prop('checked', !$input.is(':checked'))
-      });
-    })(document);
+    //(function() {
+    //  $('.special_suggestions input[type=checkbox]').on('change', function(e) {
+    //    // if current check - uncheck other and vice versa
+    //    $input = $(e.currentTarget)
+    //    $other_inputs = $input.closest('.row').find('input[type=checkbox]').not($input)
+    //    $other_inputs.prop('checked', !$input.is(':checked'))
+    //  });
+    //})(document);
 
     // enable wedding date selector
     (function() {
@@ -51,6 +51,16 @@ javascript:
 
 .bridesmaid-info-form
   = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put, html: { id: 'bridesmaid_form' } do |f|
+    .row
+      .grid-5
+        = f.label :paying_for_bridesmaids, { class: 'label' } do
+          ' Are you paying for these bridesmaid's dresses?
+      .grid-2
+        .arrows-line-horizontal
+      .grid-3
+        - options = [["Yes, I am paying for them", true], ["No, someone else is paying", false]]
+        = f.select :paying_for_bridesmaids, options, {}, class: "selectbox selectbox-pink", prompt: 'please select'
+
     .row
       .grid-5
         = f.label :wedding_date, { class: 'label' } do
@@ -86,7 +96,7 @@ javascript:
         - options = options_from_collection_for_select((1..20).to_a, :to_i, :to_i)
         = f.select :bridesmaids_count, options, {}, class: "selectbox selectbox-pink", prompt: 'please select'
 
-    .row
+    /.row
       .grid-5
         = f.label :special_suggestions, { class: 'label' } do
           ' DO YOU WANT TO MAKE SUGGESTIONS

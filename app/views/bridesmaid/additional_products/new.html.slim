@@ -3,18 +3,28 @@ javascript:
     // manually enable buy button - we have some troubles with original code
     (function() {
       var itemId = '#{ @product.id }';
-      buy_service = function() {
+      buy_service = function(e) {
+        e.preventDefault();
+
         $.ajax({
           url:      urlWithSitePrefix("/bridesmaid-party/additional_products/consierge_service"),
           type:     "POST",
           dataType: "json",
-          success: window.shopping_cart.buildOnSuccessCallback(["item_changed"], itemId)
-        })
+          success: window.shopping_cart.buildOnSuccessCallback(["item_added", "item_changed"], itemId)
+        });
       }
       $('#add_consierge_service').on('click', buy_service)
-      window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
+      //window.shoppingBag.afterUpdateCallback(window.shoppingBag.showTemporarily)
+    })(document);
 
-    })(document)
+    // redirect after item has been added
+    (function() {
+      window.shopping_cart.on('item_added', function() {
+        _.delay(function() {
+          window.location.href = "/cart?cf=buybtn"
+          }, 1000)
+      });
+    })(document);
   })
 
 .bridesmaid-info-header

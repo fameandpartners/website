@@ -3,7 +3,8 @@ class BridesmaidUserProfile < ActiveRecord::Base
   
   belongs_to :spree_user, class_name: 'Spree::User'
 
-  attr_accessible :wedding_date, :status, :bridesmaids_count, :special_suggestions
+  #attr_accessible :wedding_date, :status, :bridesmaids_count, :special_suggestions
+  attr_accessible :wedding_date, :status, :bridesmaids_count, :paying_for_bridesmaids
 
   validates :spree_user, presence: true
 
