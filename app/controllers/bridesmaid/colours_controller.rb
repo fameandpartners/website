@@ -28,6 +28,7 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
       (bridesmaid_user_profile.colors || []).map{|c| c[:original_code]} || palette_colors.first
     end
 
+=begin
     # palette from wireframe
     def palette_colors
       @palette_colors ||= begin
@@ -41,7 +42,7 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
         colors.map{|code| "##{code}"}
       end
     end
-=begin
+
     # grey colors palette
     def palette_colors
       @palette_colors ||= begin
@@ -53,6 +54,18 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
         colors.map{|code| "##{code}"}
       end
     end
+
+    # avaialble_color_options_palette
+    def palette_colors
+      @palette_colors ||= begin
+        option_type = Spree::OptionType.where(name: 'dress-color').first
+        option_type.option_values.
+          select{|option_value| option_value.value.present? }.
+          sort_by{|option_value| option_value.hsv_value }.
+          collect{|option_value| option_value.value }.compact.uniq
+      end
+    end
+=end
 
     # static palette from available colors
     def palette_colors
@@ -69,17 +82,6 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
         colors.map{|code| "##{code}"}
       end
     end
-    # avaialble_color_options_palette
-    def palette_colors
-      @palette_colors ||= begin
-        option_type = Spree::OptionType.where(name: 'dress-color').first
-        option_type.option_values.
-          select{|option_value| option_value.value.present? }.
-          sort_by{|option_value| option_value.hsv_value }.
-          collect{|option_value| option_value.value }.compact.uniq
-      end
-    end
-=end
 
     def product_colors
       @product_colors ||= begin
