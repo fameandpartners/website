@@ -35,11 +35,13 @@
     }
     .sb4{
       @include clearfix;
+      .right{
+        height: 520px;
+        overflow: hidden;
+      }
       .image {
         float: right;
         margin-left: 30px;
-        height: 520px;
-        overflow: hidden;
       }
       .catalog {
         width: auto;
