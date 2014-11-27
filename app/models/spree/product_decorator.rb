@@ -25,6 +25,8 @@ Spree::Product.class_eval do
     )
   }
 
+  scope :not_hidden, lambda { where(hidden: false) }
+
   has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 
   #accepts_nested_attributes_for :product_customisation_types,
@@ -407,4 +409,9 @@ Spree::Product.class_eval do
       self.on_demand = true
     end
   end
+
+  # override spree core method
+  def self.active(currency = nil)
+    not_hidden.not_deleted.available(nil, currency)
+  end 
 end
