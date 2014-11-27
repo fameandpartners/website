@@ -54,6 +54,21 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
       end
     end
 
+    # static palette from available colors
+    def palette_colors
+      @palette_colors ||= begin
+        colors  = %w{ 000000 003200 006D43 009875 012D60 01A7F6 029351 033C21 0891CF 0AB9B7 0E3299 }
+        colors += %w{ 0F0063 151834 15558B 1D9946 269C36 343432 41B5A8 421160 45335D 620217 666666 }
+        colors += %w{ 6B3A62 7ED6C6 808080 837478 870200 88C5CA 8C001A 8F0620 96C0E6 9B171F 9BD8D9 }
+        colors += %w{ 9D6A4B A3A7A8 A68F97 AD225E ADD418 B60003 B91B29 B9B4B1 B9CDD8 BBA1CE BCE4DC }
+        colors += %w{ C00D1D C0C0C0 C74375 C7C3C9 CA2F2D CFDEE1 D09C9E D0D1CC D5C5E9 D6AE28 D6C7B4 }
+        colors += %w{ DDF1FA DFD1AE E08E7A E3075C E4B0DF E7CBC8 E7D0A6 E82658 E9658A E9B600 EBE5CD }
+        colors += %w{ ECE6D3 ED0234 ED675A EDB32D F14873 F1E4D3 F3D623 F4FF02 F6D400 F7742F F9D9DC }
+        colors += %w{ F9DAD8 F9E4CC FAB6B7 FAF8E9 FCCDC5 FDC3C2 FDD4DD FF0033 FF6903 FF7800 FF7F01 }
+        colors += %w{ FF8434 FF95CB FFBF98 FFC598 FFE100 FFFFF0 FFFFFF B4A794 CCCCFF E0E0E0 F4E6CB }
+        colors.map{|code| "##{code}"}
+      end
+    end
     # avaialble_color_options_palette
     def palette_colors
       @palette_colors ||= begin
@@ -61,7 +76,7 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
         option_type.option_values.
           select{|option_value| option_value.value.present? }.
           sort_by{|option_value| option_value.hsv_value }.
-          collect{|option_value| option_value.value }.compact
+          collect{|option_value| option_value.value }.compact.uniq
       end
     end
 =end
@@ -74,7 +89,7 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
     end
 
     def option_value_color_closest_to(color_code)
-      escaped_color_code = color_code.to_s.gsub('#', '')[0...6].rjust(6, '0') 
+      escaped_color_code = color_code.to_s[0..6].rjust(6, '0') 
       original_color = Color::HEX.new(escaped_color_code).to_lab
 
       product_colors_with_ranges = product_colors.map do |product_color|
