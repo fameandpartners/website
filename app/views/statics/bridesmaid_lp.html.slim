@@ -18,8 +18,6 @@ ruby:
   - cache cache_keys, expires_in: configatron.cache.expire.long do
     - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
     - other_products = get_products_from_edit('BridesmaidOther', nil, nil, 16)
-    -# products = Spree::Product.active.where(hidden: false).limit(20)
-    -# other_products = Spree::Product.active.where(hidden: false).limit(16)
     .sb1
       = image_tag 'campaigns/bridemaid/top.jpg', width: 1140, class: 'image'
     .inner  
@@ -88,15 +86,6 @@ ruby:
                 .text
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
-          .catalog
-            - products[16..17].each do |dress|
-              .catalog-item
-                .picture
-                  = link_to collection_product_path(dress) do
-                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
-                .text
-                  = link_to dress.name, collection_product_path(dress), class: 'title'
-                  .price = price_for_product(dress)
         .right
           = image_tag 'campaigns/bridemaid/image3.jpg', width: 496, class: 'image', alt: ''
 
@@ -112,7 +101,7 @@ ruby:
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
         .catalog
-          - other_products[0..3].each do |dress|
+          - other_products[4..7].each do |dress|
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
