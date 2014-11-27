@@ -5,7 +5,7 @@
 css:
   .sc-player { display: none; }
 
-javascript:
+/javascript:
   console.log('enable here');
 
 .product-page-2  itemscope='' itemtype="http://data-vocabulary.org/Product"
@@ -41,7 +41,7 @@ javascript:
             = truncate(@product.short_description, length: 80, separator: ' ')
         .product-row
           .size-info = current_site_version.size_settings.size_info_label
-          select.selectbox.selectbox-large.selectbox-text-center
+          /select.selectbox.selectbox-large.selectbox-text-center
             option value="" select size
             optgroup label="base sizes"
               - @product.sizes.each do |size|
@@ -49,9 +49,18 @@ javascript:
             optgroup label="extra charge sizes "
               - @product.extra_sizes.each do |size|
                 option value=(size[:value]) = size[:name]
+
+          div.btn.large.wide.grey.border Select size
+          .sizebox
+            - @product.sizes.each do |size|
+              .button data-size=(size[:value]) data-plussize=(false)
+                span = size[:name]
+                = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes]
+            - @product.extra_sizes.each do |size|
+              .button data-size=(size[:value]) data-plussize=(true) title=(I18n.t('product.extra_size_price'))
+                span = size[:name]
+                = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes]
         .product-row
-          /- options = color_options_for_select(colors, selected_color)
-          /= select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'
           select.selectbox.selectbox-large.selectbox-text-center
             option value="" select color
             optgroup label="Standard colors"
@@ -60,17 +69,40 @@ javascript:
             optgroup label="Custom colors #{ @product.extra_color_price.display_price }"
               - @product.extra_colors.each do |color|
                 option class="color #{color[:value]}" value=(color[:value]) = color[:name] 
+
+        /- if @product.customisations.present?
+          .product-row
+            select.selectbox.selectbox-large.selectbox-text-center
+              option value="" select customisation
+              - @product.customisations.each do |customisation|
+                option value=(customisation.value)
+                  = customisation.name
+                  = image_tag customisation.image, alt: customisation.name
+
+        - if @product.customisations.present?
+          div.btn.large.wide.grey.border Select customisation
+          .customisations
+            - @product.customisations.each do |customisation|
+              .grid-4.customisation-value data-customisation-value-id=(customisation.id)
+                .customisation-picture
+                  = image_tag customisation.image, alt: customisation.name, title: customisation.name, width: '100px', height:'200px'
+                .title = customisation.name
+                .button
+                  = link_to '+ ADD', '#', class: 'btn'
+                  - if customisation.price > 0
+                    - if @product.free_customisations
+                      p.price
+                        span.price-old = customisation.display_price
+                        ' Free
+                    - else
+                      p.price = customisation.display_price
+            .instructions Once you have made your selections, simply choose your size on the right and add to cart!
+
         .product-row
-          select.selectbox.selectbox-large.selectbox-text-center
-            option value="" select customisation
-            option value="" select customisation
-            option value="" select customisation
-            option value="" select customisation
-            option value="" select customisation
+          = link_to 'buy now', '#', class: 'btn buy-now large grey wide'
         .product-row
-          = link_to 'buy now', '#', class: 'btn large grey wide'
-        .product-row
-          = link_to '+ bridesmaids moodboard', '#', class: 'btn large pink wide'
+          - moodboard_link_data = { 'title-add' => 'add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'product-id' => @product.id }
+          = link_to '+ moodboard', @product.path, class: 'btn large pink wide wishlist-add', data: moodboard_link_data
         .product-row
           .row
             .grid-4

@@ -1,37 +1,53 @@
 class Products::ProductDetailsResource
-  attr_reader :accessor, :site_version, :product, :selected_color
+  attr_reader :site_version, :product, :selected_color
 
   def initialize(options = {})
-    @accessor         = options[:as]
     @site_version     = options[:site_version]
-    @product          = product_with_associations(options[:product])
+    @product          = options[:product]
     @selected_color   = options[:selected_color]
   end
 
+  def cache_key
+    "product-details-#{ site_version.try(:permalink) }-#{ product.permalink }"
+  end
+
+  def cache_expiration_time
+    return configatron.cache.expire.quickly if Rails.env.development?
+    return configatron.cache.expire.quickly if Rails.env.staging?
+    return configatron.cache.expire.long
+  end
+
   def read
-    # product details
-    OpenStruct.new({
-      sku:  product.sku,
-      name: product.name,
-      permalink: product.permalink,
-      short_description: product_short_description,
-      fabric: product_properties['fabric'],
-      notes: product_properties['style_notes'],
-      description: product_description,
-      default_image: default_product_image,
-      images: product_images,
-      price: product_price,
-      sizes: default_product_sizes,
-      extra_sizes: extra_product_sizes,
-      colors: default_product_colors,
-      extra_colors: extra_product_colors,
-      extra_color_price: extra_product_color_price,
-      extra_color_free: Spree::Config[:free_customisations],
-      url: product_url,
-      path: product_path,
-      variants: product_variants,
-      moodboard: product_moodboard
-    })
+    Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
+
+      # load often used associations
+      @product = product_with_associations(@product)
+
+      # product details
+      OpenStruct.new({
+        sku:  product.sku,
+        name: product.name,
+        permalink: product.permalink,
+        short_description: product_short_description,
+        fabric: product_properties['fabric'],
+        notes: product_properties['style_notes'],
+        description: product_description,
+        default_image: default_product_image,
+        images: product_images,
+        price: product_price,
+        free_customisations: Spree::Config[:free_customisations],
+        sizes: default_product_sizes,
+        extra_sizes: extra_product_sizes,
+        colors: default_product_colors,
+        extra_colors: extra_product_colors,
+        extra_color_price: extra_product_color_price,
+        customisations: available_product_customisations,
+        url: product_url,
+        path: product_path,
+        variants: product_variants,
+        moodboard: product_moodboard
+      })
+    end
   end
 
   private
@@ -96,10 +112,34 @@ class Products::ProductDetailsResource
           all_sizes[variant_info[:size_id]] ||= { 
             id: variant_info[:size_id],
             name: variant_info[:size],
-            value: variant_info[:size_value].to_i
+            value: variant_info[:size_value].to_i,
+            size_details_attributes: get_size_details(variant_info[:size_value])
           }
         end
         all_sizes.values.sort_by{|item| item[:value] }
+      end
+    end
+
+    def default_size_details
+      {
+      }
+    end
+
+    def get_size_details(size)
+      if site_version.is_australia?
+        {
+          unit_code:   site_version.size_settings.locale_unit_code,
+          unit_symbol: site_version.size_settings.locale_unit_symbol,
+          locale_code: site_version.size_settings.locale_code,
+          attributes: SIZE_ATTRIBUTES.find_by_au_name(size.to_s)
+        }
+      else
+        {
+          unit_code:   site_version.size_settings.locale_unit_code,
+          unit_symbol: site_version.size_settings.locale_unit_symbol,
+          locale_code: site_version.size_settings.locale_code,
+          attributes: SIZE_ATTRIBUTES.find_by_us_name(size.to_s)
+        }
       end
     end
 
@@ -155,28 +195,15 @@ class Products::ProductDetailsResource
       Products::ProductMoodboardResource.new(product: product).read
     end
 
-=begin
-  def read
-    OpenStruct.new({
-      name: 'wired cross dress',
-      short_description: 'Long, open back, plunging neck bridesmaid dress in black',
-      price: OpenStruct.new({ amount: 100, amount_with_discount: 95, currency: 'usd'}),
-      images: [
-        { url: '', color_id: '' }
-      ],
-      colors: [
-        { id: 123, name: 'red', value: '', image: '' }
-      ],
-      custom_colors: [
-        { id: 123, name: 'red', value: '', image: '' }
-      ],
-      customisations: [
-        { id: 123, name: 'short' }
-      ]
-    })
-  end
-=end
-
-  private
-
+    def available_product_customisations
+      product.customisation_values.map do |value|
+        OpenStruct.new({
+          id: value.id,
+          name: value.presentation,
+          image: value.image.present? ? value.image.url : 'logo_empty.png',
+          price: value.price,
+          display_price: value.display_price
+        })
+      end
+    end
 end
