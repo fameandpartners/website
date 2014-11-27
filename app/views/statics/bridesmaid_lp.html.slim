@@ -18,8 +18,6 @@ ruby:
   - cache cache_keys, expires_in: configatron.cache.expire.long do
     - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
     - other_products = get_products_from_edit('BridesmaidOther', nil, nil, 16)
-    -# products = Spree::Product.active.where(hidden: false).limit(20)
-    -# other_products = Spree::Product.active.where(hidden: false).limit(16)
     .sb1
       = image_tag 'campaigns/bridemaid/top.jpg', width: 1140, class: 'image'
     .inner  
