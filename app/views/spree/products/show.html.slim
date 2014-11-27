@@ -8,6 +8,22 @@ css:
 javascript:
   window.product_analytics_label  = '#{{j analytics_label(:product, @product) }}';
   window.product_variants         = #{{ @product.variants.to_json }};
+  window.product_variants, window.product_master_variant, window.incompatibility_map
+
+  window.product_master_id = '#{{ @product.master_id }}';
+  window.incompatibility_map = #{{ @product.customisations_incompatibility_map.to_json }};
+
+  $(document).ready(function() {
+    (function() {
+      window.page.newProductPageSelector = window.helpers.createNewProductPageSelector($('.product-page-2'));
+      window.page.newProductPageSelector.init(
+        window.product_variants,
+        window.product_master_id,
+        window.incompatibility_map
+      );
+    })(document)
+  })
+
 
 .product-page-2  itemscope='' itemtype="http://data-vocabulary.org/Product"
   .product-details itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"
@@ -40,7 +56,7 @@ javascript:
           .product-price = @product.price.display_price
           .product-short-description 
             = truncate(@product.short_description, length: 80, separator: ' ')
-        .product-row.section
+        .product-row
           .size-info = current_site_version.size_settings.size_info_label
           /select.selectbox.selectbox-large.selectbox-text-center
             option value="" select size
@@ -55,21 +71,23 @@ javascript:
           .sizebox
             - @product.sizes.each do |size|
               .button data-size=(size[:value]) data-plussize=(false)
-                span = size[:name]
+                span = size[:title]
                 = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes]
             - @product.extra_sizes.each do |size|
               .button data-size=(size[:value]) data-plussize=(true) title=(I18n.t('product.extra_size_price'))
-                span = size[:name]
+                span = size[:title]
                 = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes]
         .product-row
           select.selectbox.selectbox-large.selectbox-text-center id="colour"
             option value="" select color
             optgroup label="Standard colors"
               - @product.colors.each do |color|
-                option value=(color[:value]) = color[:name]
+                /option value=(color[:value]) = color[:title]
+                option value=(color[:name]) = color[:title]
             optgroup label="Custom colors #{ @product.extra_color_price.display_price }"
               - @product.extra_colors.each do |color|
-                option class="color #{color[:value]}" value=(color[:value]) = color[:name] 
+                /option class="color #{color[:name]}" value=(color[:value]) = color[:title] 
+                option class="custom color #{color[:name]}" value=(color[:name]) = color[:title] 
 
         /- if @product.customisations.present?
           .product-row
@@ -82,21 +100,22 @@ javascript:
 
         - if @product.customisations.present?
           div.btn.large.wide.grey.border Select customisation
-          .customisations
+          .customisations.customisation-selector
             - @product.customisations.each do |customisation|
-              .grid-4.customisation-value data-customisation-value-id=(customisation.id)
-                .customisation-picture
-                  = image_tag customisation.image, alt: customisation.name, title: customisation.name, width: '100px', height:'200px'
-                .title = customisation.name
-                .button
-                  = link_to '+ ADD', '#', class: 'btn'
-                  - if customisation.price > 0
-                    - if @product.free_customisations
-                      p.price
-                        span.price-old = customisation.display_price
-                        ' Free
-                    - else
-                      p.price = customisation.display_price
+              .grid-4
+                .customisation-value data-customisation-value-id=(customisation.id)
+                  .customisation-picture
+                    = image_tag customisation.image, alt: customisation.name, title: customisation.name, width: '100px', height:'200px'
+                  .title = customisation.name
+                  .button
+                    = link_to '+ ADD', '#', class: 'btn'
+                    - if customisation.price > 0
+                      - if @product.free_customisations
+                        p.price
+                          span.price-old = customisation.display_price
+                          ' Free
+                      - else
+                        p.price = customisation.display_price
             .instructions Once you have made your selections, simply choose your size on the right and add to cart!
 
         .product-row
@@ -143,7 +162,7 @@ javascript:
               .picture.audio-cover
                 = link_to 'SoundCloud tune', item.source, class: 'sc-player'
                 = link_to '#', data: { action: 'soundcloud' } do
-                  = image_tag item.image
+                  = image_tag item.image_url
                   = image_tag '_audio-icon.png', class: 'icon'
                   span.mask
                 .popup
@@ -156,13 +175,13 @@ javascript:
             .grid-4.perfume
               .picture
                 = link_to item.source, target: 'blank' do
-                  = image_tag item.image.url
+                  = image_tag item.image_url
 
           - @product.moodboard.items.each do |item|
             .grid-4
               .picture
                 = link_to item.source, target: 'blank' do
-                  = image_tag item.image.url
+                  = image_tag item.image_url
     .grid-6
       .product-full-description
         =raw @product.description

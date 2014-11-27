@@ -44,10 +44,11 @@ class Products::ProductDetailsResource
         extra_colors: extra_product_colors,
         extra_color_price: extra_product_color_price,
         customisations: available_product_customisations,
-        url: product_url,
-        path: product_path,
+        customisations_incompatibility_map: customisations_incompatibility_map,
         variants: product_variants,
-        moodboard: product_moodboard
+        moodboard: product_moodboard,
+        url: product_url,
+        path: product_path
       })
     end
   end
@@ -114,17 +115,13 @@ class Products::ProductDetailsResource
           all_sizes[variant_info[:size_id]] ||= { 
             id: variant_info[:size_id],
             name: variant_info[:size],
+            title: variant_info[:size_presentation].to_i,
             value: variant_info[:size_value].to_i,
             size_details_attributes: get_size_details(variant_info[:size_value])
           }
         end
         all_sizes.values.sort_by{|item| item[:value] }
       end
-    end
-
-    def default_size_details
-      {
-      }
     end
 
     def get_size_details(size)
@@ -166,6 +163,7 @@ class Products::ProductDetailsResource
           all_colors[variant_info[:color_id]] ||= { 
             id: variant_info[:color_id],
             name: variant_info[:color],
+            title: variant_info[:color_presentation],
             value: variant_info[:color_value],
             image: variant_info[:image]
           }
@@ -186,6 +184,7 @@ class Products::ProductDetailsResource
           {
             id: option_value.id,
             name: option_value.name,
+            title: option_value.presentation,
             value: option_value.value,
             image: option_value.image.present? ? option_value.image.url(:small_square) : nil
           }
@@ -197,8 +196,12 @@ class Products::ProductDetailsResource
       Products::ProductMoodboardResource.new(product: product).read
     end
 
+    def product_customisation_values
+      product.customisation_values.includes(:incompatibilities)
+    end
+
     def available_product_customisations
-      product.customisation_values.map do |value|
+      product_customisation_values.map do |value|
         OpenStruct.new({
           id: value.id,
           name: value.presentation,
@@ -208,4 +211,12 @@ class Products::ProductDetailsResource
         })
       end
     end
+
+    def customisations_incompatibility_map
+      result = {}
+      product_customisation_values.each do |value|
+        result[value.id] = value.incompatibilities.map(&:incompatible_id)
+      end
+      result
+    end 
 end
