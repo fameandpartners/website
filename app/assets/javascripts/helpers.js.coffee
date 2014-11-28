@@ -50,7 +50,7 @@ window.initHoverableProductImages = () ->
     # provide safe multiple calls on page
     $image.removeAttr('second_image')
 
-    $image.parents('.thumbnail').hover(
+    $image.parents('.picture').hover(
       () -> $image.attr('src', second_image),
       () -> $image.attr('src', original_image)
     )

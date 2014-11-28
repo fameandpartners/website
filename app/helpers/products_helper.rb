@@ -87,14 +87,30 @@ module ProductsHelper
     "<iframe width='#{width}' height='#{height}' src='#{video_url}' frameborder='0' allowfullscreen></iframe>"
   end
 
+  def hoverable_image_tag(sources = [], options = {})
+    blank   = 'assets/noimage/product.png'
+    sources = Array(sources)
+
+    if sources.empty?
+      image_tag(blank, options)
+    else
+      if sources.size > 1
+        options[:original_image] = sources.first
+        options[:second_image]   = sources.second
+      end
+      options[:onerror] = "window.switchToAltImage(this, '#{blank}')"
+
+      image_tag sources.first, options
+    end
+  end
+
   def hoverable_product_image_tag(product, options = {})
-    no_image = 'noimage/product.png'
     colors = options.delete(:colors)
 
-    if product.images.empty?
-      image_tag(no_image, options)
+    images = if product.images.empty?
+      []
     else
-      images = if colors.present?
+      if colors.present?
         images_for_colors = product.images_for_colors(colors).limit(2).to_a
 
         if images_for_colors.present?
@@ -105,17 +121,12 @@ module ProductsHelper
       else
         product.images
       end
-
-      image = images.first
-      options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
-      if images.size > 1
-        # original_image - quick fix for cdn & and empty attr['src']
-        options[:original_image]  = image.attachment.url(:large)
-        options[:second_image]    = images.second.attachment.url(:large)
-      end
-      options[:onerror] = "window.switchToAltImage(this, '/assets/#{no_image}')"
-      image_tag(image.attachment.url(:large), options)
     end
+
+    options.reverse_merge! :alt => images.first.alt.blank? ? product.name : images.first.alt
+    sources = images.map{ |image| image.attachment.url(:large) }
+
+    hoverable_image_tag(sources, options)
   end
 
   def product_image_tag(product, size = nil, options = {})
