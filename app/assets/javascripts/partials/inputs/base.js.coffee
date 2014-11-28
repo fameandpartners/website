@@ -149,6 +149,10 @@ window.inputs.CustomWithBaseColourSelector = class CustomWithBaseColourSelector 
     # selected option has class 'custom'
     @container.find("option[value=#{ @container.val() }]").is('.custom')
 
+  getColorId: () ->
+    value = @container.find("option[value=#{ @container.val() }]").data('id')
+    parseInt(value)
+
   onValueChanged: (e) ->
     @trigger('change')
 

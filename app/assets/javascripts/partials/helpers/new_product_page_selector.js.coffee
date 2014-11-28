@@ -44,7 +44,7 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       @customisationsInput.on('change', @update)
       #@customisationsInput.on('change', @trackCustomisationSelected)
 
-      @container.find('.product-info .btn.buy-now').on('click', @onBuyButtonClickHandler)
+      @container.find('.product-info .btn[data-action=buy]').on('click', @onBuyButtonClickHandler)
       @update()
 
     update: () ->
@@ -62,7 +62,6 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
 
     isCustomProduct: () ->
       return true if !_.isEmpty(@selected.customization_value_ids)
-      console.log('isCustomProduct', 1)
       return @colorInput.isCustomColour()
 
     updateChoosenVariantId: () ->
@@ -89,7 +88,9 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       return @choosenVariantId
 
     updateWishlistButton: () ->
-      $button = @container.find('.product-info .btn.add-wishlist')
+      $button = @container.find('.btn.wish-list-link')
+      $button.data('color-id', @colorInput.getColorId())
+
       if @choosenVariantId
         $button.data(id: @choosenVariantId)
       else
