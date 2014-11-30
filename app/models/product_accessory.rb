@@ -15,8 +15,8 @@ class ProductAccessory < ActiveRecord::Base
     '/assets/_sample/category-grey-2.jpg'
   end
 
-  def display_price
-    price_currency = self.currency || "AUD"
+  def display_price(default_currency = 'AUD')
+    price_currency = self.currency || default_currency
     Spree::Money.new(price, currency: price_currency)
   end
 end

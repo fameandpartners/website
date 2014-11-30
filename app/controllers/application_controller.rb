@@ -315,7 +315,7 @@ class ApplicationController < ActionController::Base
   helper_method :custom_dresses_path
 
   def set_product_show_page_title(product, info = "")
-    prefix = "#{product.short_description} #{info} #{@product.name}"
+    prefix = "#{product.short_description} #{info} #{product.name}"
     self.title = [prefix, default_seo_title].join(' - ')
     description([prefix, default_meta_description].join(' - '))
 
