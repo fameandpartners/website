@@ -51,15 +51,7 @@ javascript:
 
 .bridesmaid-info-form
   = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put, html: { id: 'bridesmaid_form' } do |f|
-    .row
-      .grid-5
-        = f.label :paying_for_bridesmaids, { class: 'label' } do
-          ' Are you paying for these bridesmaid's dresses?
-      .grid-2
-        .arrows-line-horizontal
-      .grid-3
-        - options = [["Yes, I am paying for them", true], ["No, someone else is paying", false]]
-        = f.select :paying_for_bridesmaids, options, {}, class: "selectbox selectbox-pink", prompt: 'please select'
+
 
     .row
       .grid-5
@@ -72,7 +64,7 @@ javascript:
         .checkbox-pink.inline
           = check_box_tag :unknown_wedding_date
           = label_tag :unknown_wedding_date do
-            = "Don't know the wedding date" 
+            = "We haven't quite settled on the date yet" 
 
     .row
       .grid-5
@@ -89,13 +81,21 @@ javascript:
     .row
       .grid-5
         = f.label :bridesmaids_count, { class: 'label' } do
-          ' HOW MANY BRIDESMAIDS ARE THERE?
+          ' How many bridesmaids are in the bridal party?
       .grid-2
         .arrows-line-horizontal
       .grid-3
         - options = options_from_collection_for_select((1..20).to_a, :to_i, :to_i)
         = f.select :bridesmaids_count, options, {}, class: "selectbox selectbox-pink", prompt: 'please select'
-
+    .row
+      .grid-5
+        = f.label :paying_for_bridesmaids, { class: 'label' } do
+          ' Who is picking up the bridesmaid dress tab?
+      .grid-2
+        .arrows-line-horizontal
+      .grid-3
+        - options = [["All expenses paid by the bride", true], ["It's a group effort & each will pay for their own", false]]
+        = f.select :paying_for_bridesmaids, options, {}, class: "selectbox selectbox-pink", prompt: 'please select'
     /.row
       .grid-5
         = f.label :special_suggestions, { class: 'label' } do
