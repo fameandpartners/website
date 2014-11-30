@@ -7,7 +7,7 @@ ruby:
 = cache cache_name, expires_in: configatron.cache.expire.long do
   .picture
     = link_to colored_variant_path(variant) do
-      = image_tag variant.images.first.large, alt: variant.product.name
+      = hoverable_image_tag variant.images.map(&:large), alt: variant.product.name
     .popup.striped
       .fleft.quick-view
         = quick_view_link(variant.product)

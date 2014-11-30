@@ -10,7 +10,7 @@ class BridesmaidUserProfile < ActiveRecord::Base
 
   STATUSES = [
     [1, "I'm ready for a ring"],
-    [2, "I'm the Bride"],
+    [2, "I'm the bride"],
     [3, "I'm the Maid of Honour"],
     [4, "I'm the Mother of the Bride"]
   ]

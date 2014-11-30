@@ -1,11 +1,24 @@
 javascript:
+  window.product_variants = #{{ @product_variants.to_json }};
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
 
+ruby:
+  sizes   = @product_variants.map{|t| t[:size].to_i}.uniq.sort
+  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
+
+  style_accessories = {}
+  @product.accessories.includes(:style).order('style_id asc, position asc').each do |accessory|
+    style_accessories[accessory.style_id] ||= []
+    style_accessories[accessory.style_id].push(accessory)
+  end
+
+
+
 // PRODUCT STYLE IT ---->
-.product-page itemscope='' itemtype="http://data-vocabulary.org/Product"
+.product-page
   .row
-    .grid-2
     .grid-8
+      = render 'spree/products/breadcrumbs', product: @product, active: :style
       .style-it
         .heading
           h1 Fame & Partners' styling team has compiled the cutest accessories to complete your look with this dress.
@@ -15,16 +28,18 @@ javascript:
             ' Remember, if you BUY NOW, you can brief us on sourcing any accessories you like, completely free!
         .lookbox
           .row
-            - @product.styles.each do |style|
+            - style_accessories.each do |style_id, accessories|
+              /- cache ['style', style_id, 'image_and_accessories'], :expires_in => configatron.cache.expire.normally do
               .grid-6
-                .title = style.title
-                - if style.images.size == 1
+                .title = accessories.first.style.title
+                - images = accessories.map{|t| t.image.present? ? t.image.url(:product) : nil}.compact
+                - if images.size == 1
                   .picture
-                    = image_tag style.images.first
+                    = image_tag images.first
                 - else
                   .category-catalog
                     .row
-                      - style.images.first(4).each do |image_url|
+                      - images.first(4).each do |image_url|
                         .grid-6
                           .picture
                             = image_tag image_url
@@ -35,10 +50,11 @@ javascript:
               .grid-6
                 .arrows-line-horizontal
                 ul.price-list
-                  - style.accessories.each_with_index do |item, index|
+                  - accessories.each_with_index do |item, index|
                     li
                       .number = "#{index.next}."
                       p = link_to item.name, item.source, target: '_blank'
                       p = item.display_price
                 .arrows-line-horizontal
-    .grid-2
+    .grid-4
+      = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products }

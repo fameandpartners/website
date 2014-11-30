@@ -75,7 +75,7 @@ javascript:
       .grid-2
         .arrows-line-horizontal
       .grid-3
-        - options = options_from_collection_for_select(BridesmaidUserProfile::STATUSES, :first, :last)
+        - options = options_from_collection_for_select(BridesmaidParty::Event::STATUSES, :first, :last)
         = f.select :status, options, {}, class: "selectbox selectbox-pink", prompt: 'please select'
 
     .row

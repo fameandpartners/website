@@ -66,7 +66,7 @@ class Bridesmaid::BaseController < ApplicationController
       @bridesmaid_user_profile ||= begin
         require_user_logged_in!
 
-        BridesmaidUserProfile.where(
+        BridesmaidParty::Event.where(
           spree_user_id: current_spree_user.id
         ).first_or_initialize
       end
