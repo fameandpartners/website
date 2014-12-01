@@ -13,7 +13,7 @@
       = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
         span.icon
           span.icon-facebook2
-        span connect with facebook
+        span Start designing now
 .bridesmaid-landing-steps.text-center
   .row
     .grid-3
@@ -39,9 +39,9 @@
           .number 2.
       .block-with-triangle
         .text
-          ' Select dresses
+          ' Select your
           br
-          ' you love
+          ' colour palette
         .triangle-bottom
     .grid-3
       .block-with-triangle style="background-image: url(assets/_bridesmaid/triangle2.png)"
@@ -52,9 +52,9 @@
           .number 3.
       .block-with-triangle
         .text
-          ' Select
+          ' Build a moodboard
           br
-          ' the colour palette
+          ' of dresses you love
         .triangle-bottom
     .grid-3
       .block-with-triangle style="background-image: url(assets/_bridesmaid/triangle3.png)"
@@ -65,28 +65,89 @@
           .number 4.
       .block-with-triangle
         .text
-          ' Customise
+          ' Vote and customise
           br
-          ' to your tastes
-          br
-          ' and body shapes
+          ' with your bridal party
         .triangle-bottom
 
   = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
     span.icon
       span.icon-facebook2
-    span connect with facebook
+    span Start Designing Now
 
 .bridesmaid-landing-footer
-  = image_tag "_bridesmaid/pic2.jpg"
-  .text-box
-    .centered
-      ' DRESSES TO BE WORN
-      br
-      ' MORE THAN ONCE
-  ul.social
-    li = link_to '', '#', class: 'facebook'
-  ul.numbers
+  javascript:
+    $(function() {
+      $('#slides').slidesjs({
+        navigation: {
+          active: false,
+          effect: "slide"
+        },
+        pagination: {
+          active: false,
+          effect: "slide"
+        },
+        play: {
+          active: false,
+          effect: "slide",
+          interval: 5000,
+          auto: true,
+          swap: false,
+          pauseOnHover: true,
+          restartDelay: 2500
+        },
+        effect: {
+          slide: {
+            speed: 500
+          }
+        },
+        width: 1140,
+        height: 500
+      });
+    });
+  #slides
+    .slidesjs-previous.slidesjs-navigation
+      = image_tag('icon-arrow-left.png')
+    .slidesjs-next.slidesjs-navigation
+      = image_tag('icon-arrow-right.png')
+    .msg1
+      .content
+        = image_tag "_bridesmaid/1.jpg"
+        .text-box
+          .centered
+            ' DRESSES TO BE WORN
+            br
+            ' MORE THAN ONCE
+        .social
+          = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook' do
+            = image_tag('_bridesmaid/fb.png')
+            .link Start designing now
+    .msg2
+      .content
+        = image_tag "_bridesmaid/2.jpg"
+        .text-box
+          .centered
+            ' DRESSES TO BE WORN
+            br
+            ' MORE THAN ONCE
+        .social
+          = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook' do
+            = image_tag('_bridesmaid/fb.png')
+            .link Start designing now
+    .msg2
+      .content
+        = image_tag "_bridesmaid/3.jpg"
+        .text-box
+          .centered
+            ' DRESSES TO BE WORN
+            br
+            ' MORE THAN ONCE
+        .social
+          = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook' do
+            = image_tag('_bridesmaid/fb.png')
+            .link Start designing now
+  
+/  ul.numbers
     li.active = link_to '1', '#'
     li = link_to '2', '#'
     li = link_to '3', '#'

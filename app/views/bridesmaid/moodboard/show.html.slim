@@ -27,6 +27,10 @@ javascript:
 .category-header
   h1 = @moodboard.title
 
+  .row
+    = link_to 'Send your moodboard to your bridesmaids', '#'
+    = link_to 'View other dresses', bridesmaid_party_dresses_path
+
 .category-catalog.products-list
   .row
     - if @moodboard.products.blank?

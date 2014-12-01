@@ -1,5 +1,5 @@
 $(function(){
-  window.productWishlist.initialize()
+  window.productWishlist.initialize();
 
   $('form .size-choser :radio').change(function(event){
     $('form .size-choser li').removeClass('active');
@@ -8,7 +8,7 @@ $(function(){
 
   $('form .size-choser li:has(:radio:checked)').addClass('active');
 
-  window.initHoverableProductImages()
+  window.initHoverableProductImages();
 
   $("abbr.timeago").timeago();
 

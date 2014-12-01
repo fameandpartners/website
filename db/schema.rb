@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141127203110) do
+ActiveRecord::Schema.define(:version => 20141130212501) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -220,7 +220,7 @@ ActiveRecord::Schema.define(:version => 20141127203110) do
 
   add_index "bridesmaid_event_user_profiles", ["spree_user_id"], :name => "index_bridesmaid_event_user_profiles_on_spree_user_id"
 
-  create_table "bridesmaid_user_profiles", :force => true do |t|
+  create_table "bridesmaid_party_events", :force => true do |t|
     t.integer  "spree_user_id"
     t.datetime "wedding_date"
     t.integer  "status"
@@ -229,6 +229,16 @@ ActiveRecord::Schema.define(:version => 20141127203110) do
     t.text     "colors"
     t.text     "additional_products"
     t.boolean  "paying_for_bridesmaids", :default => false
+  end
+
+  create_table "bridesmaid_party_members", :force => true do |t|
+    t.integer "event_id"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "email"
+    t.integer "variant_id"
+    t.integer "size"
+    t.integer "color_id"
   end
 
   create_table "celebrities", :force => true do |t|

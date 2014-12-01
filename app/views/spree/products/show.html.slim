@@ -8,7 +8,6 @@ css:
 javascript:
   window.product_analytics_label  = '#{{j analytics_label(:product, @product) }}';
   window.product_variants         = #{{ @product.variants.to_json }};
-  window.product_variants, window.product_master_variant, window.incompatibility_map
 
   window.product_master_id = '#{{ @product.master_id }}';
   window.incompatibility_map = #{{ @product.customisations_incompatibility_map.to_json }};
@@ -83,11 +82,11 @@ javascript:
             optgroup label="Standard colors"
               - @product.colors.each do |color|
                 /option value=(color[:value]) = color[:title]
-                option value=(color[:name]) = color[:title]
+                option data-id=(color[:id]) class="color #{color[:name]}" value=(color[:name]) = color[:title]
             optgroup label="Custom colors #{ @product.extra_color_price.display_price }"
               - @product.extra_colors.each do |color|
                 /option class="color #{color[:name]}" value=(color[:value]) = color[:title] 
-                option class="custom color #{color[:name]}" value=(color[:name]) = color[:title] 
+                option data-id=(color[:id]) class="custom color #{color[:name]}" value=(color[:name]) = color[:title] 
 
         /- if @product.customisations.present?
           .product-row
@@ -119,9 +118,9 @@ javascript:
             .instructions Once you have made your selections, simply choose your size on the right and add to cart!
 
         .product-row
-          = link_to 'buy now', '#', class: 'btn buy-now large grey wide'
+          = link_to 'buy now', '#', class: 'btn large grey wide', data: { action: 'buy' }
         .product-row
-          - moodboard_link_data = { 'title-add' => 'add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'product-id' => @product.id, 'id' => @product.master_id }
+          - moodboard_link_data = { 'title-add' => 'add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'product-id' => @product.id, 'id' => @product.master_id, 'color-id' => nil }
           = link_to '+ moodboard', @product.path, class: 'btn large pink wide wish-list-link', data: moodboard_link_data
         .product-row
           .row

@@ -17,8 +17,11 @@ javascript:
     '/
     = link_to('Bridesmaid Party Dresses', '/edits/bridesmaid-party', data: { action: 'show-collection' })
 
-  /h5.breadcrumb
-    = link_to 'View Selected Dresses', bridesmaid_party_moodboard_path(user_slug: current_spree_user.slug)
+  h5.breadcrumb
+    = link_to 'My moodboard', bridesmaid_party_moodboard_path(user_slug: current_spree_user.slug)
+
+  h5.breadcrumb
+    = link_to 'Review colors', bridesmaid_party_colour_path
 
   .row
     - if @products.present?

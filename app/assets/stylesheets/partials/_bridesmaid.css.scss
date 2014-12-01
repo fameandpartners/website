@@ -29,9 +29,31 @@
 
 // Landing Footer
 .bridesmaid-landing-footer {
+	margin-top: 20px; 
 	position: relative;
 	color: #fff;
 	margin-bottom: 40px;
+
+	.msg1 .content, .msg2 .content, .msg3 .content{
+		position: relative;		
+	}
+
+	.slidesjs-previous{
+		position: absolute;
+		left: 10px;
+		z-index: 100;
+		top: 210px;
+		cursor: pointer;
+	}
+
+	.slidesjs-next{
+		position: absolute;
+		right: 10px;
+		z-index: 100;
+		top: 210px;
+		cursor: pointer;
+	}
+
 	.text-box {
 		position: absolute;
 		top: 0;
@@ -52,7 +74,6 @@
 		}
 		.centered {
 			display: inline-block;
-			vertical-align: middle;
 			letter-spacing: 13px;
 		}
 	}
@@ -94,18 +115,28 @@
 
 	.social {
 		position: absolute;
-		left: 20px;
-		bottom: 20px;
+		left: 36px;
+		bottom: 175px;
 		margin: 0;
 		padding: 0;
-		li { display: inline;}
+		width: 300px;
+		z-index: 100;
 		a {
 			display: inline-block;
 			width: 36px;
 			height: 36px;
+			text-decoration: none;
 		}
 		.facebook {
-			background: url('_bridesmaid/fb.png');
+			img{
+				float: left;
+			}
+			.link{
+				font: 400 27px $fontThree;
+				margin-left: 45px;
+				width: 200px;
+				margin-top: 4px;
+			}
 		}
 	}
 }

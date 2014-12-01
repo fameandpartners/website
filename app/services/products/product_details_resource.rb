@@ -100,11 +100,17 @@ class Products::ProductDetailsResource
     end
 
     def product_path
-      '/us/dresses/dress-drama-queen-97'
+      @product_path ||= begin
+        path_parts      = [site_version.permalink, 'dresses']
+        path_parts.push([product.name.parameterize, product.id].join('-'))
+        # if colour present?
+        # path_part.push(colour)
+        "/" + path_parts.join('/')
+      end
     end
 
     def product_url
-      'http://localhost:3600/us/dresses/dress-drama-queen-97'
+      "//#{ configatron.host}#{product_path}"
     end
 
     # sizes
