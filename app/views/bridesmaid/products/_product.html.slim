@@ -1,20 +1,15 @@
 .picture
   = link_to product.path do
     = image_tag product.image_url, alt: product.name
-  .popup.striped
-    .fleft.quick-view
-      = link_to 'Quick view', product.path, data: { action: 'quick-view', id: product.permalink }
-    .fright.like
-      = link_to 'Add to bridesmaid moodboard', product.path, class: 'wishlist-add', data: { 'title-add' => 'Add to bridesmaid moodboard', 'title-remove' => 'Remove from bridesmaid moodboard', 'action' => 'add-to-wishlist', 'color-id' => product.color_id, 'product-id' => product.id, 'id' => product.master_id }
 
 h6 = product.name
 .price = product.price.display_price
-/.buttons
+.buttons
   .buy-button
-    = link_to "Buy", product.path, class: 'btn black small', title: "Buy this dress"
+    = link_to "Start Customising", product.path, class: 'btn black small', title: "Buy this dress"
+  .moodboard-button
+    = link_to 'Add to moodboard', product.path, class: 'btn empty border small wishlist-add', data: { 'title-add' => 'Add to bridesmaid moodboard', 'title-remove' => 'Remove from bridesmaid moodboard', 'action' => 'add-to-wishlist', 'color-id' => product.color_id, 'product-id' => product.id, 'id' => product.master_id }
 
-    /.custom-button
-      = link_to t('words.customize'), personalization_product_path(permalink: product.permalink, :cf => 'collection'), class: 'btn empty border small', title: "#{t('words.customize').titleize} this dress"
 
 - if product.fast_delivery
   .fast-delivery-icon title="Next day delivery*"
