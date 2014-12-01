@@ -25,14 +25,51 @@ class Bridesmaid::Moodboard
       site_version.currency.downcase
     end
 
+    def bridesmaid_party_event
+      @bridesmaid_party_event ||= BridesmaidParty::Event.where(spree_user_id: moodboard_owner.id).first_or_initialize
+    end
+
     def wishlist_items
       @wishlist_items ||= moodboard_owner.wishlist_items.includes(:variant, :color, product: {master: :zone_prices})
     end
 
     def moodboard_products
       wishlist_items.map do |item|
-        build_item(item)
+        item_suitable?(item) ? build_item(item) : nil
+      end.compact
+    end
+
+    def color_ids
+      # it's not cached, and will generate second request in similar_products,
+      # solve it with placing similar colors search to own repo
+      @color_ids ||= begin
+        color_ids = bridesmaid_party_event.colors.map{|c| c[:id]}
+        similar_color_ids = Similarity.get_similar_color_ids(color_ids, Similarity::Range::VERY_CLOSE)
+        color_ids + similar_color_ids
       end
+    end
+
+    def products_with_color_customisation
+      @products_with_color_customisation ||= begin
+        candidates = wishlist_items.map(&:spree_product_id)
+        property_id = Spree::Property.where(name: 'color_customization').first.try(:id)
+        Spree::ProductProperty.where(
+          property_id: property_id,
+          product_id: candidates,
+          value: %w{y yes}
+        ).pluck(:product_id)
+      end
+    end
+
+    # we don't show red ( or similar ) dresses in moodboard, if user don't selected red color or unselected it
+    # dresses, able to be customised also includes to list 
+    def item_suitable?(item)
+      color_id = if item.product_color_id.present?
+        item.product_color_id
+      else
+        item.variant.dress_color.try(:id)
+      end
+      color_ids.include?(color_id) || products_with_color_customisation.include?(item.spree_product_id)
     end
 
     def build_item(item)

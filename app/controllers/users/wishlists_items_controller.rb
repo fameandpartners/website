@@ -39,6 +39,7 @@ class Users::WishlistsItemsController < Users::BaseController
       @item ||= @user.wishlist_items.create(
         spree_variant_id: variant.id,
         spree_product_id: variant.product_id,
+        spree_color_id: variant.dress_color.try(:id),
         quantity: params[:quantity]
       )
     end
