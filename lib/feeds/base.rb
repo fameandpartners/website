@@ -90,6 +90,17 @@ module Feeds
     def get_item_properties(product, variant)
       size  = variant.dress_size.try(:presentation)
       color = variant.dress_color.try(:presentation)
+      price = variant.zone_price_for(current_site_version)
+      
+      original_price = price.display_price_without_discount
+      sale_price = price.display_price_with_discount
+      
+      original_price = original_price.to_s.delete('$').to_f
+      sale_price = sale_price.to_s.delete('$').to_f
+
+      if sale_price == original_price
+        sale_price = 0
+      end
 
       item = HashWithIndifferentAccess.new(
         variant: variant,
@@ -98,7 +109,8 @@ module Feeds
         availability: variant.in_stock? ? 'in stock' : 'out of stock',
         title: "#{product.name} - Size #{size} - Colour #{color}",
         description: product.description,
-        price: variant.zone_price_for(current_site_version).price,
+        price: original_price,
+        sale_price: sale_price,
         google_product_category: "Apparel & Accessories > Clothing > Dresses",
         id: "#{product.id.to_s}-#{variant.id.to_s}",
         group_id: product.id.to_s,
