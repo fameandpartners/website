@@ -17,7 +17,7 @@ module Feeds
               xml.tag! 'Product_Name', item[:product].name
               xml.tag! 'Product_URL', "http://#{@config[:domain]}#{collection_product_path(item[:product])}"
               xml.tag! 'Image_URL', item[:image]
-              xml.tag! 'Current_Price', helpers.number_to_currency(item[:price])
+              xml.tag! 'Current_Price', helpers.number_to_currency(item[:sale_price])
               xml.tag! 'Shipping_Rate', 'Free Shipping'
               xml.tag! 'Stock_Availability', 'In-stock'
               xml.tag! 'Condition', 'New'
