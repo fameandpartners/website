@@ -115,8 +115,9 @@ class Bridesmaid::Moodboard
       item.product.master.zone_price_for(site_version)
     end
 
+    #'/moodboard/:user_slug/dress-:product_slug(/:color_name)'
     def product_path(item)
-      path_parts = [site_version.permalink, 'dresses']
+      path_parts = [site_version.permalink, 'bridesmaid-party', bridesmaid_party_event.spree_user.slug]
       path_parts.push(
         ['dress', item.product.name.parameterize, item.product.id].reject(&:blank?).join('-')
       )

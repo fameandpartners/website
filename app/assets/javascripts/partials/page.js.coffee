@@ -103,6 +103,12 @@ window.page = {
       return false
     )
 
+  enableSendToBrideButton: (elements) ->
+    $(elements).on('click', (e) ->
+      e.preventDefault()
+      console.log('sendToBride')
+    )
+
   enablePersonalisatonForm: (container) ->
     if window.product_variants
       form = window.helpers.createPersonalisationForm(container)

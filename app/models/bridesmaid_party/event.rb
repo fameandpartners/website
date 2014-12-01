@@ -23,5 +23,9 @@ module BridesmaidParty
     def completed?
       status.present? && colors.present?
     end
+
+    def owned_by?(user)
+      self.spree_user_id.present? && self.spree_user_id == user.try(:id)
+    end
   end
 end
