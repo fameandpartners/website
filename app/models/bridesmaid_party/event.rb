@@ -12,9 +12,9 @@ module BridesmaidParty
 
     STATUSES = [
       [1, "I'm ready for a ring"],
-      [2, "I'm engaged"],
-      [3, "I'm a bride"],
-      [4, "I'm the head bridesmaid"]
+      [2, "I'm the bride"],
+      [3, "I'm the Maid of Honour"],
+      [4, "I'm the Mother of the Bride"]
     ]
 
     serialize :colors, Array
