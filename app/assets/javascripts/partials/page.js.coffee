@@ -33,6 +33,9 @@ window.page = {
   enableBuyButton: (button, options = {}) ->
     window.helpers.addBuyButtonHandlers(button, options)
 
+  enableSendToBrideButton: (element) ->
+    window.helpers.addSendToBrideButton(element)
+
   enableSendToFriendButton: (buttons) ->
     buttons.on('click', (e) ->
       e.preventDefault()
@@ -101,12 +104,6 @@ window.page = {
       player.find('.sc-controls a.sc-pause').click()
       track.playedSong(window.product_analytics_label)
       return false
-    )
-
-  enableSendToBrideButton: (elements) ->
-    $(elements).on('click', (e) ->
-      e.preventDefault()
-      console.log('sendToBride')
     )
 
   enablePersonalisatonForm: (container) ->

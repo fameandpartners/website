@@ -26,6 +26,16 @@ class Bridesmaid::ProductDetailsResource
       end
     end
 
+    def apply_bridesmaid_restrictions(details)
+      details.colors = details.colors.select{|color| color_ids.include?(color[:id]) }
+      details.extra_colors = details.extra_colors.select{|color| color_ids.include?(color[:id]) }
+      details.variants = details.variants.select{|variant| color_ids.include?(variant[:color_id]) }
+      details.images = details.images.select{|image| image.color_id.nil? || color_ids.include?(image.color_id)}
+      details.path = product_path(details)
+
+      details
+    end
+
     def bridesmaid_party_event
       @bridesmaid_party_event ||= BridesmaidParty::Event.where(spree_user_id: moodboard_owner.id).first_or_initialize
     end
@@ -38,11 +48,13 @@ class Bridesmaid::ProductDetailsResource
       end
     end
 
-    def apply_bridesmaid_restrictions(details)
-      details.colors = details.colors.select{|color| color_ids.include?(color[:id]) }
-      details.extra_colors = details.extra_colors.select{|color| color_ids.include?(color[:id]) }
-      details.variants = details.variants.select{|variant| color_ids.include?(variant[:color_id]) }
-
-      details
+    #'/moodboard/:user_slug/dress-:product_slug(/:color_name)'
+    def product_path(product)
+      path_parts = [site_version.permalink, 'bridesmaid-party', bridesmaid_party_event.spree_user.slug]
+      path_parts.push(
+        ['dress', product.name.parameterize, product.id].reject(&:blank?).join('-')
+      )
+      path_parts.push(selected_color.name) if selected_color.present?
+      "/" + path_parts.join('/')
     end
 end

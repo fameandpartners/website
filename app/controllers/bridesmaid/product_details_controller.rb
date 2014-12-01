@@ -1,5 +1,6 @@
 class Bridesmaid::ProductDetailsController < Bridesmaid::BaseController
   before_filter :require_user_logged_in!
+  respond_to :html, :json
 
   def show
     require_user_logged_in!
@@ -12,6 +13,25 @@ class Bridesmaid::ProductDetailsController < Bridesmaid::BaseController
     #@recommended_products = get_recommended_products(spree_product, limit: 4)
 
     @product = product_details_resource.read
+  end
+
+=begin 
+    { "size"=>"6", "color"=>"navy", "customization_value_ids"=>["560"], "id"=>"14946", "user_slug"=>"evgeniy-petrov", 
+      "product_slug"=>"starlet-282", "color_name"=>"navy" }
+=end
+  def select
+    member = bridesmaid_user_profile.members.where(
+      email: current_spree_user.email
+    ).first
+
+    if member.present?
+      member.variant_id = params[:id]
+      member.size = Spree::Variant.size_option_type.option_values.where(name: params[:size]).try(:id)
+      member.color_id = Spree::Variant.color_option_type.option_values.where(name: params[:color]).try(:id)
+      member.save!
+    end
+
+    respond_with(member)
   end
 
   private

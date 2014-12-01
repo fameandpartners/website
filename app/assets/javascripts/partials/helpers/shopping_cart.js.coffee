@@ -31,7 +31,8 @@ window.shopping_cart = _.extend(window.shopping_cart,
       data: window.shopping_cart.prepareParams(options)
       #TODO :implement buildOnSuccessCallback and assign listener to 'item_added' event
       #this is wrong way - 
-      success: window.shopping_cart.buildOnSuccess
+      #success: window.shopping_cart.buildOnSuccess
+      success: window.shopping_cart.buildOnSuccessCallback(['item_added'], variantId, options.success)
       error: window.shopping_cart.buildOnErrorCallback(["item_add_failed"], options.failure)
 
 

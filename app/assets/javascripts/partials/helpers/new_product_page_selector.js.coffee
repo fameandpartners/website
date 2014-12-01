@@ -58,6 +58,7 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       @updateChoosenVariantId()
       @updateWishlistButton()
       @updateBuyButton()
+      @updateSendToFriendButton()
       @container.trigger('selection_changed', @selected)
       @container.data('selected', @selected)
       return true
@@ -108,6 +109,10 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       $button.data(id: @choosenVariantId, error: @errorMessage)
 
       return true
+
+    updateSendToFriendButton: () ->
+      $button = @container.find('.product-info .btn.send-to-bride')
+      $button.data(id: @choosenVariantId, error: @errorMessage, selected: @selected)
 
     trackCustomisationSelected: (e) ->
       if !_.isEmpty(@customisationsInput.val())
