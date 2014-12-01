@@ -40,6 +40,13 @@ window.page = {
       popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
     )
 
+  enableConciergeServiceButton: (buttons, itemId)->
+    buttons.on('click', (e) ->
+      e.preventDefault()
+      
+      popups.showConciergeServicePopup(itemId)
+    )
+
   enableTwinAlertButton: (elements, get_color_func) ->
     window.helpers.initProductReserver(
       $(elements),
