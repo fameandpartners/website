@@ -1,4 +1,5 @@
-class Products::ProductImagesResource
+module Repositories
+class ProductImages
   attr_reader :product
 
   def initialize(options = {})
@@ -8,6 +9,7 @@ class Products::ProductImagesResource
   def read_all
     @images ||= (images_from_variants + images_from_product_color_values).flatten.compact
   end
+  alias_method :read, :read_all
 
   private
 
@@ -58,4 +60,5 @@ class Products::ProductImagesResource
         small: image.attachment.url(:small)
       }
     end
+end
 end

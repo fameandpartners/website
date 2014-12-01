@@ -1,4 +1,5 @@
-class Products::ProductMoodboardResource
+module Repositories
+class ProductMoodboard
   attr_reader :product
 
   def initialize(options = {})
@@ -39,4 +40,5 @@ class Products::ProductMoodboardResource
       items.map{|item| convert_item(item)}
     end
   end
+end
 end

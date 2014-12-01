@@ -1,9 +1,9 @@
-# product accessories
-class Products::ProductStyleAccessoriesResource
-  attr_reader :site_version, :product
+module Repositories
+class ProductStyles
+  attr_reader :currency, :product
 
   def initialize(options = {})
-    @site_version = options[:site_version]
+    @currency = options[:currency]
     @product = product_with_associations(options[:product])
   end
 
@@ -19,7 +19,7 @@ class Products::ProductStyleAccessoriesResource
             name: item.name,
             title: item.title,
             source: item.source,
-            display_price: item.display_price(site_version.currency)
+            display_price: item.display_price(currency)
           )
         end
       })
@@ -50,4 +50,5 @@ class Products::ProductStyleAccessoriesResource
         [styles[style_id],  style_accessories[style_id]]
       end
     end
+end
 end

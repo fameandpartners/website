@@ -69,7 +69,7 @@ class Products::ProductDetailsResource
 
     # todo: add sort by preferred color & position
     def product_images
-      Products::ProductImagesResource.new(
+      Repositories::ProductImages.new(
         product: product
       ).read_all.sort_by{|color| color.position.to_i }
     end
@@ -199,7 +199,7 @@ class Products::ProductDetailsResource
     end
 
     def product_moodboard
-      Products::ProductMoodboardResource.new(product: product).read
+      Repositories::ProductMoodboard.new(product: product).read
     end
 
     def product_customisation_values

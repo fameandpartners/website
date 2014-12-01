@@ -3,11 +3,11 @@
 
   div.btn.large.wide.grey.border Select size
   .sizebox
-    - @product.sizes.each do |size|
+    - product.sizes.each do |size|
       .button data-size=(size[:value]) data-plussize=(false)
         span = size[:title]
         = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes]
-    - @product.extra_sizes.each do |size|
+    - product.extra_sizes.each do |size|
       .button data-size=(size[:value]) data-plussize=(true) title=(I18n.t('product.extra_size_price'))
         span = size[:title]
         = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes]
@@ -16,16 +16,16 @@
   select.selectbox.selectbox-large.selectbox-text-center id="colour"
     option value="" select color
     optgroup label="Standard colors"
-      - @product.colors.each do |color|
+      - product.colors.each do |color|
         option data-id=(color[:id]) class="color #{color[:name]}" value=(color[:name]) = color[:title]
-    optgroup label="Custom colors #{ @product.extra_color_price.display_price }"
-      - @product.extra_colors.each do |color|
+    optgroup label="Custom colors #{ product.extra_color_price.display_price }"
+      - product.extra_colors.each do |color|
         option data-id=(color[:id]) class="custom color #{color[:name]}" value=(color[:name]) = color[:title] 
 
-- if @product.customisations.present?
+- if product.customisations.present?
   div.btn.large.wide.grey.border Select customisation
   .customisations.customisation-selector
-    - @product.customisations.each do |customisation|
+    - product.customisations.each do |customisation|
       .grid-4
         .customisation-value data-customisation-value-id=(customisation.id)
           .customisation-picture
@@ -34,7 +34,7 @@
           .button
             = link_to '+ ADD', '#', class: 'btn'
             - if customisation.price > 0
-              - if @product.free_customisations
+              - if product.free_customisations
                 p.price
                   span.price-old = customisation.display_price
                   ' Free

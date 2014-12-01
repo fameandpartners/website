@@ -4,7 +4,6 @@ javascript:
 // PRODUCT STYLE IT ---->
 .product-page itemscope='' itemtype="http://data-vocabulary.org/Product"
   .row
-    .grid-2
     .grid-8
       .style-it
         .heading
@@ -41,4 +40,35 @@ javascript:
                       p = link_to item.name, item.source, target: '_blank'
                       p = item.display_price
                 .arrows-line-horizontal
-    .grid-2
+    .grid-4
+      .product-info
+        .product-header
+          .product-title = @product.name
+          .product-price = @product.price.display_price
+          .product-short-description 
+            = truncate(@product.short_description, length: 80, separator: ' ')
+
+        = render 'spree/products/product_variants_selector', product: @product
+
+        .product-row
+          = link_to 'buy now', '#', class: 'btn large grey wide', data: { action: 'buy' }
+        .product-row
+          - moodboard_link_data = { 'title-add' => 'add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'product-id' => @product.id, 'id' => @product.master_id, 'color-id' => nil }
+          = link_to '+ moodboard', @product.path, class: 'btn large pink wide wish-list-link', data: moodboard_link_data
+        .product-row
+          .row
+            .grid-4
+              = link_to '#what-size', class: 'product-icons toggle-sizes' do
+                .icon-hanger
+                br
+                span size guide
+
+            .grid-4.text-right
+              - link_data = spree_user_signed_in? ? {} : { guest: true }
+              = link_to '#', data: link_data.merge({ permalink: @product.permalink }), title: 'Send this dress to whoever you want to get a second opinion!', class: 'product-icons send-to-friend' do
+                .icon-email
+                br
+                span 
+                  ' ask a friend
+                  br
+                  ' for opinion
