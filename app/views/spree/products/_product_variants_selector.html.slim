@@ -1,16 +1,16 @@
 .product-row
   .size-info = current_site_version.size_settings.size_info_label
 
-  .btn.large.wide.grey.border Select size
-  .sizebox
+  .btn.large.wide.grey.border.size-selector Select size
+  .sizebox style="display: none;"
     - product.sizes.each do |size|
       .button data-size=(size[:value]) data-plussize=(false)
         span = size[:title]
-        = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes]
+        = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes].merge(link: true)
     - product.extra_sizes.each do |size|
       .button data-size=(size[:value]) data-plussize=(true) title=(I18n.t('product.extra_size_price'))
         span = size[:title]
-        = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes]
+        = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes].merge(link: true)
 
 .product-row
   select.selectbox.selectbox-large.selectbox-colors.selectbox-text-center id="colour"

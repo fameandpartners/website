@@ -45,6 +45,8 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       #@customisationsInput.on('change', @trackCustomisationSelected)
 
       @container.find('.product-info .btn[data-action=buy]').on('click', @onBuyButtonClickHandler)
+      @container.find('.size-selector').on('click', -> $('.sizebox').slideToggle())
+      @container.find('.trigger-customisation-selector').on("click", -> $('.customisation-selector').slideToggle())
       @update()
 
     update: () ->
