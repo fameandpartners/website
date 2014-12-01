@@ -1,5 +1,20 @@
 javascript:
   window.product_analytics_label = '#{{j analytics_label(:product, @product) }}';
+  window.product_variants         = #{{ @product.variants.to_json }};
+
+  window.product_master_id = '#{{ @product.master_id }}';
+  window.incompatibility_map = #{{ @product.customisations_incompatibility_map.to_json }};
+
+  $(document).ready(function() {
+    (function() {
+      window.page.newProductPageSelector = window.helpers.createNewProductPageSelector($('.product-page'));
+      window.page.newProductPageSelector.init(
+        window.product_variants,
+        window.product_master_id,
+        window.incompatibility_map
+      );
+    })(document)
+  })
 
 // PRODUCT STYLE IT ---->
 .product-page itemscope='' itemtype="http://data-vocabulary.org/Product"
