@@ -367,6 +367,33 @@
   color: #111 !important;
 }
 
+// Colors
+.selectbox-colors {
+  .chosen-results li.active-result {
+    color: #000;
+    background: transparent;
+    position: relative;
+    padding-left: 50px;
+    &:before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      overflow: hidden;
+      border-radius: 50%;
+      position: absolute;
+      top: 6px;
+      left: 15px;
+    }
+    &:hover {
+      background: magenta;
+    }
+    &.default-value {
+      padding-left: 15px;
+      cursor: default;
+    }
+  }
+}
+
 /* @end */
 /* @group Disabled Support */
 .chosen-disabled {

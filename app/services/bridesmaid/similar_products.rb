@@ -10,6 +10,8 @@ class Bridesmaid::SimilarProducts
   def initialize(options = {})
     @site_version = options[:site_version]
     @collection   = options[:collection]
+    @taxon_ids    = options[:taxon_ids]
+    @body_shapes  = options[:body_shapes]
     @products_ids = options[:except]
   end
 
@@ -30,7 +32,7 @@ class Bridesmaid::SimilarProducts
     end
 
     def taxon_ids
-      [collection.try(:id)].compact
+      [collection.try(:id)].compact | Array(@taxon_ids)
     end
 
     def locale
@@ -105,8 +107,9 @@ class Bridesmaid::SimilarProducts
       # to make them visible inside Tire.search block
       taxons = taxon_ids
       products = products_ids
+      body_shapes = @body_shapes
 
-      search = Tire.search(:color_variants, size: 1000) do
+      Tire.search(:color_variants, size: 1000) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false, 'product.is_hidden' => false } } 
         filter :exists, :field => :available_on
         filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } }
@@ -126,6 +129,33 @@ class Bridesmaid::SimilarProducts
               }
             }
           }
+        end
+
+        if body_shapes.present?
+          if body_shapes.size.eql?(1)
+            filter :bool, :should => {
+                          :range => {
+                            "product.#{body_shapes.first}" => {
+                              :gte => 4
+                            }
+                          }
+                        }
+          else
+            filter :or,
+                   *body_shapes.map do |body_shape|
+                     {
+                       :bool => {
+                         :should => {
+                           :range => {
+                             "product.#{body_shape}" => {
+                               :gte => 4
+                             }
+                           }
+                         }
+                       }
+                     }
+                   end
+          end
         end
 
         # only available items

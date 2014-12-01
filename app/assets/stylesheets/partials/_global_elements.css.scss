@@ -440,6 +440,7 @@ a.block-with-triangle .text {
 
 	.size-popup {
 		position: absolute;
+		z-index: 5;
 		top: 98%;
 		padding-top: 12px;
 		right: -10px;

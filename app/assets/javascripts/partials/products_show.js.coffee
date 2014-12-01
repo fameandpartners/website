@@ -75,6 +75,11 @@ $(".spree_products.show").ready ->
     )
   # end of product color images code
 
+  # Show customisation options
+
+  $('.trigger-customisation-selector').on "click", ->
+    $('.customisation-selector').slideToggle()
+
   page.showProductVideoFor = (color) ->
     $player = $('.picture.video-player iframe')
     return if $player.length == 0 # for non-video layout..
