@@ -6,37 +6,36 @@ javascript:
     })(document)
   })
 
-.category-header
-  h1 = raw @banner.title
-  h2 = raw @banner.text
-  .arrows-line-horizontal
+.bridesmaid-dresses
 
-.category-catalog.products-list
-  /h5.breadcrumb
-    = link_to('Collection', collection_path, data: { action: 'show-collection' })
-    '/
-    = link_to('Bridesmaid Party Dresses', '/edits/bridesmaid-party', data: { action: 'show-collection' })
+  .category-header
+    = image_tag('_bridesmaid/bridesmaid_products.jpg')
 
-  h5.breadcrumb
-    = link_to 'My moodboard', bridesmaid_party_moodboard_path(user_slug: current_spree_user.slug)
+  .category-catalog.products-list
+    /h5.breadcrumb
+      = link_to('Collection', collection_path, data: { action: 'show-collection' })
+      '/
+      = link_to('Bridesmaid Party Dresses', '/edits/bridesmaid-party', data: { action: 'show-collection' })
 
-  h5.breadcrumb
-    = link_to 'Review colors', bridesmaid_party_colour_path
+    .navigation
+      = link_to 'My moodboard', bridesmaid_party_moodboard_path(user_slug: current_spree_user.slug), class: 'btn'
+      = link_to 'Review colors', bridesmaid_party_colour_path, class: 'btn'
 
-  .row
-    - if @products.present?
-      - @products.each do |product|
-        .grid-3
-          = render 'product', product: product
-    - else
-      .not-found Sorry, no dresses match your criteria
-
-  - if @similar_products.present?
     .row
-      .page-title
-        h2 These dresses can also be made in #{ @color_name }
-      - @similar_products.each do |product|
-        div class="grid-3"
-          = render 'product', product: product
+      - if @products.present?
+        - @products.each do |product|
+          .grid-3
+            = render 'product', product: product
+      - else
+        .not-found Sorry, no dresses match your criteria
 
-= render 'shared/footer_browse'
+    - if @similar_products.present?
+      .row
+        - if @products.present?
+          .page-title
+            h2 These dresses can also be made in your colours
+        - @similar_products.each do |product|
+          div class="grid-3"
+            = render 'product', product: product
+
+  = render 'shared/footer_browse'
