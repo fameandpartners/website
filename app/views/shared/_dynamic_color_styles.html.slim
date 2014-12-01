@@ -8,4 +8,4 @@ css:
     color: #fff;
   }
 
-  #{dynamic_colors.map{ |color| "body .color.#{color.name} { background-color: #{color.value}; }"}.join("\n")}
+  #{dynamic_colors.map{ |color| "body .color.#{color.name}, body .color.#{color.name}:before { background-color: #{color.value}; }"}.join("\n")}
