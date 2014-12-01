@@ -28,11 +28,13 @@ module Feeds
                 xml.tag! "g:id", item[:id]
                 xml.tag! "g:condition", "new"
                 xml.tag! "g:price", helpers.number_to_currency(item[:price], format: '%n %u', unit: current_currency)
+                xml.tag! "g:sale_price", helpers.number_to_currency(item[:sale_price], format: '%n %u', unit: current_currency)
                 xml.tag! "g:availability", item[:availability]
                 xml.tag! "g:image_link", item[:image]
                 xml.tag! "g:shipping_weight", item[:weight]
 
                 xml.tag! "g:google_product_category", CGI.escapeHTML(item[:google_product_category])
+                xml.tag! "g:product_type", CGI.escapeHTML(item[:google_product_category])
                 xml.tag! "g:gender", "Female"
                 xml.tag! "g:age_group", "Adult"
                 xml.tag! "g:color", item[:color]
