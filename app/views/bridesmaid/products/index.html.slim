@@ -33,7 +33,7 @@ javascript:
       .row
         - if @products.present?
           .page-title
-            h2 These dresses can also be made in your colours
+            h2 These dresses can also be made in your selected colour palette
         - @similar_products.each do |product|
           div class="grid-3"
             = render 'product', product: product

@@ -27,9 +27,10 @@ javascript:
 .category-header
   h1 = @moodboard.title
 
-  .row
-    = link_to 'Send your moodboard to your bridesmaids', '#'
-    = link_to 'View other dresses', bridesmaid_party_dresses_path
+  .row.navigation
+    = link_to 'Send your moodboard to your bridesmaids', '#', class: 'btn'
+    ' 
+    = link_to 'View other dresses', bridesmaid_party_dresses_path, class: 'btn'
 
 .category-catalog.products-list
   .row
