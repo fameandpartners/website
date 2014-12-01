@@ -303,9 +303,11 @@ module Products
 
       
       # this is a really wrong way to check if both style and event contain the requested permalink...
-      final_requested_taxons << "style/#{params[:permalink]}" unless params[:permalink].blank?
-      final_requested_taxons << "event/#{params[:permalink]}" unless params[:permalink].blank?
-      final_requested_taxons << "edits/#{params[:permalink]}" unless params[:permalink].blank?
+      if params[:permalink].present?
+        final_requested_taxons << "style/#{params[:permalink]}"
+        final_requested_taxons << "event/#{params[:permalink]}"
+        final_requested_taxons << "edits/#{params[:permalink]}"
+      end
       
       #here we handle the filtering
       final_requested_taxons << "style/#{params[:style]}" unless params[:style].blank?

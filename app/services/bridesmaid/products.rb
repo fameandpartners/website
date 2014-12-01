@@ -10,6 +10,8 @@ class Bridesmaid::Products
   def initialize(options = {})
     @site_version = options[:site_version]
     @profile      = options[:profile]
+    @taxon_ids    = options[:taxon_ids]
+    @body_shapes  = options[:body_shapes]
   end
 
   def read_all
@@ -107,18 +109,53 @@ class Bridesmaid::Products
     # first candidate to extract to repo
     def build_search_query
       # to make them visible inside Tire.search block
-      colors = color_ids
+      colors      = color_ids
+      body_shapes = @body_shapes
+      taxon_ids   = @taxon_ids
 
-      search = Tire.search(:color_variants, size: 1000) do
+      Tire.search(:color_variants, size: 1000) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false, 'product.is_hidden' => false } } 
         filter :exists, :field => :available_on
         filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } }
 
         # Filter by colors
-        filter(:terms, 'color.id' => colors) if colors.present?
+        if colors.present?
+          filter :terms, 'color.id' => colors
+        end
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
+
+        if taxon_ids.present?
+          filter :terms, 'product.taxon_ids' => taxon_ids
+        end
+
+        if body_shapes.present?
+          if body_shapes.size.eql?(1)
+            filter :bool, :should => {
+                          :range => {
+                            "product.#{body_shapes.first}" => {
+                              :gte => 4
+                            }
+                          }
+                        }
+          else
+            filter :or,
+                   *body_shapes.map do |body_shape|
+                     {
+                       :bool => {
+                         :should => {
+                           :range => {
+                             "product.#{body_shape}" => {
+                               :gte => 4
+                             }
+                           }
+                         }
+                       }
+                     }
+                   end
+          end
+        end
 
         sort do
           if colors.present?

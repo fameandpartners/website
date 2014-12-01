@@ -22,14 +22,22 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
     def products_resource
       @products_resource ||= Bridesmaid::Products.new(
         site_version: current_site_version,
-        profile: bridesmaid_user_profile
+        profile: bridesmaid_user_profile,
+        taxon_ids: search_params.taxon_ids,
+        body_shapes: search_params.body_shapes
       )
+    end
+
+    def search_params
+      @search_params ||= Search::Params.new(params)
     end
 
     def similar_products_resource(product_ids = [])
       @similar_products_resource ||= Bridesmaid::SimilarProducts.new(
         site_version: current_site_version,
         collection:   bridesmaid_party_collection,
+        taxon_ids:    search_params.taxon_ids,
+        body_shapes:  search_params.body_shapes,
         except:       product_ids
       )
     end

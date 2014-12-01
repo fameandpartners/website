@@ -72,7 +72,6 @@ $('.spree_products.index').ready ->
       addValue(result, 'colour', '#colour')
       addValue(result, 'style', '#style')
       addValue(result, 'order', '#product_order')
-      console.log(result)
       result
   }
 
