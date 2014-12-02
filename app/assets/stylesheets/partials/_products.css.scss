@@ -992,6 +992,8 @@
 	}
 	.customisation-picture {
 		float: left;
+		width: auto;
+		max-width: 80px;
 	}
 	.customisation-block {
 		margin: 0 0 0 100px;
