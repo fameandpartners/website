@@ -350,6 +350,9 @@
 		left: 187px;
 		bottom: 115px;
 	}
+	&.active {
+		background-image: image-url('_bridesmaid/bridesmaid_signed_in.jpg');
+	}
 }
 
 .bride-instructions{
