@@ -10,10 +10,14 @@
     span.font-two LOVE
     span.font-two.small ... and wear again!
     .text-center
-      = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
-        span.icon
-          span.icon-facebook2
-        span Start designing now
+      - if spree_user_signed_in?
+        = link_to bridesmaid_party_info_path, class: 'button-flat' do
+          span Start Designing Now
+      - else
+        = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
+          span.icon
+            span.icon-facebook2
+          span Start Designing Now
 .bride-landing-steps.text-center
   .row
     .grid-3
@@ -70,10 +74,14 @@
           ' with your bridal party
         .triangle-bottom
 
-  = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
-    span.icon
-      span.icon-facebook2
-    span Start Designing Now
+  - if spree_user_signed_in?
+    = link_to bridesmaid_party_info_path, class: 'button-flat' do
+      span Start Designing Now
+  - else
+    = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
+      span.icon
+        span.icon-facebook2
+      span Start Designing Now
 
 .bride-landing-footer
   javascript:

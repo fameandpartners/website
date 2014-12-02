@@ -133,6 +133,7 @@
 		@include linear-gradient(#44619a 0%, #44619a 50%, #344f81 51%, #344f81 100%);
 	}
 }
+.button-flat,
 .facebook-button-flat {
 	border: solid 1px #2e2f56;
 	background-color: #fff;
@@ -157,6 +158,10 @@
 		color: #fff;
 		background-color: #2e2f56;
 	}
+}
+
+.button-flat {
+  padding-left: 18px;
 }
 
 .block-with-triangle {

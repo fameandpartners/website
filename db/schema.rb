@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141130212501) do
+ActiveRecord::Schema.define(:version => 20141202120254) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -211,6 +211,8 @@ ActiveRecord::Schema.define(:version => 20141130212501) do
     t.integer "variant_id"
     t.integer "size"
     t.integer "color_id"
+    t.integer "spree_user_id"
+    t.string  "token"
   end
 
   create_table "celebrities", :force => true do |t|

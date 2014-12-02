@@ -163,6 +163,7 @@
 		letter-spacing: -6px;
 	}
 
+    .button-flat,
 	.facebook-button-flat {
 		margin-top: 20px;
 	}
@@ -227,26 +228,29 @@
 // @end
 
 // Palette
+
 .bridesmaid-pallete {
-	@include clearfix;
-	width: 770px;
-	margin: 25px auto;
-	border: solid 4px #000;
-	.pallete-color {
-		width: 70px;
-		height: 70px;
-		float: left;
-		position: relative;
-		&.selected:before {
-			content: '';
-			position: absolute;
-			display: block;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			border: solid 4px #000;
+	text-align: center;
+	.pallete-color-group {
+		cursor: pointer;
+		display: inline-block;
+		vertical-align: top;
+		width: 180px;
+		height: 180px;
+		border: 1px solid #000;
+		vertical-align: top;
+		margin: 0 2px 40px;
+		&.selected {
+			opacity: .4;
 		}
+	}
+	.pallete-color-group-wrap {
+		display: table;
+		width: 180px;
+		height: 180px;
+	}
+	.pallete-color {
+		display: table-cell;
 	}
 }
 // @end
@@ -308,6 +312,7 @@
 	height: 503px;
 	background: image_url('_bridesmaid/bridesmaid_signup.jpg');
 	position: relative;
+    .button-flat,
 	.facebook-button-flat{
 		position: absolute;
 		left: 187px;
