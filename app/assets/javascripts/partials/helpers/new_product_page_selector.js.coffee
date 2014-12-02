@@ -46,7 +46,7 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
 
       @container.find('.product-info .btn[data-action=buy]').on('click', @onBuyButtonClickHandler)
       @container.find('.size-selector').on('click', -> $('.sizebox').slideToggle())
-      @container.find('.trigger-customisation-selector').on("click", -> $('.customisation-selector').slideToggle())
+      @container.find('.trigger-customisation-selector').on("click", -> $('.customisation-selector').toggle())
       @container.find('.trigger-customisation-selector').on("click", -> $(this).toggleClass "active")
       @update()
 

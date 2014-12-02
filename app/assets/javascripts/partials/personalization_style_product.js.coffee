@@ -33,4 +33,4 @@ $(".personalization_products.style").ready ->
 
   $('.trigger-customisation-selector').on "click", ->
     $(this).toggleClass "active"
-    $('.customisation-selector').slideToggle()
+    $('.customisation-selector').toggle()
