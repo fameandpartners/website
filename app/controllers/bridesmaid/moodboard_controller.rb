@@ -12,6 +12,17 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
     set_page_titles(title: @moodboard.title)
   end
 
+  # NOT NEEDED?
+  def bridesmaid_show
+    load_moodboard_owner!
+    check_availability!
+
+    @moodboard = moodboard_resource.read
+
+    set_page_titles(title: @moodboard.title)
+  end
+
+
   def destroy_item
     # not moodboard owner, user can delete only own items
     variant = current_spree_user.wishlist_items.where(spree_variant_id: params[:variant_id]).destroy_all
