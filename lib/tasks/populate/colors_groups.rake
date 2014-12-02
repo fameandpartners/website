@@ -25,5 +25,27 @@ namespace :db do
         end
       end
     end
+
+    task additional_colors_groups: :environment do
+      group_option_type = Spree::OptionType.find_by_name('dress-color')
+
+      groups_attributes = {
+        purple:  ['purple', "dark-purple"],
+        yellow:  ["yellow", "fluoro-yellow", "canary-yellow"],
+        nude:    ["nude", "nude-with-black-lining", "silver-metallic-w/nude-lining", "silver-and-nude"]
+      }
+
+      groups_attributes.each do |group_name, color_names|
+        colors = group_option_type.option_values.where('LOWER(TRIM(presentation)) IN (?)', color_names)
+
+        group = Spree::OptionValuesGroup.where(name: group_name).first_or_initialize
+        group.option_type     = group_option_type
+        group.name           = group_name.to_s
+        group.presentation   = group_name.to_s.titleize
+        group.option_values  = colors
+        group.save!
+
+      end
+    end
   end
 end
