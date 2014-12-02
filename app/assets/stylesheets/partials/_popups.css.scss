@@ -717,3 +717,23 @@
 	}
 }
 //@end
+
+.share-popup {
+	width: 720px;
+	left: 50%;
+	top: 100px;
+	margin-left: -365px;
+	text-align: center;
+	.string {
+		margin: 0 10px 30px;
+	}
+	.add-more {
+		margin: 0 0 20px;
+		font-size: 16px;
+		a {
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}

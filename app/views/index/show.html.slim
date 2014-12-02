@@ -120,4 +120,45 @@
               ' /
             li= link_to "GRADUATION", dresses_path
 
-  
+/.popup-placeholder
+  .overlay
+  .modal-container.share-popup
+    .close-lightbox
+    .modal-title Send this moodboard to your friends
+    .grid-container.form
+      .row
+        .grid-12
+          .string
+            textarea placeholder="Enter a note, if you like."
+      .row
+        .grid-6
+          .string
+            input type="text" placeholder="Name"
+        .grid-6
+          .string
+            input type="email" placeholder="Email address"
+      .row
+        .grid-6
+          .string
+            input type="text" placeholder="Name"
+        .grid-6
+          .string
+            input type="email" placeholder="Email address"
+      .row
+        .grid-6
+          .string
+            input type="text" placeholder="Name"
+        .grid-6
+          .string
+            input type="email" placeholder="Email address"
+      .row
+        .grid-6
+          .string
+            input type="text" placeholder="Name"
+        .grid-6
+          .string
+            input type="email" placeholder="Email address"
+    .add-more
+      = link_to '+ Add more friends', '#'
+    .buttons
+      = link_to 'Send to friends', '#', class: 'btn'
