@@ -1,5 +1,5 @@
 class Bridesmaid::SelectedProduct
-  attr_reader :accessor, :moodboard_owner, :product, :variant_id, :color, :size
+  attr_reader :accessor, :site_version, :moodboard_owner, :product, :variant_id, :color, :size
 
   def initialize(options = {})
     @accessor         = options[:accessor]
@@ -8,6 +8,7 @@ class Bridesmaid::SelectedProduct
     @variant_id       = options[:variant_id]
     @color            = options[:color]
     @size             = options[:size]
+    @site_version     = options[:site_version]
   end
 
   def update
@@ -31,8 +32,10 @@ class Bridesmaid::SelectedProduct
 
     def notify_bride
       if member.present?
-        #
+        #BridesmaidPartyMailer.delay.bridesmaid_send(member, site_version)
+        BridesmaidPartyMailer.bridesmaid_send(member, site_version).deliver
       end
+    #rescue
     end
 
     def product_from_moodboard?
@@ -72,9 +75,8 @@ class Bridesmaid::SelectedProduct
 
     def member
       @member ||= begin
-        bridesmaid_user_profile.members.where(
-          spree_user_id: accessor.id
-        ).first
+        bridesmaid_user_profile.members.where(spree_user_id: accessor.id).first ||
+          bridesmaid_user_profile.members.where(email: accessor.email).first
       end
     end
 end

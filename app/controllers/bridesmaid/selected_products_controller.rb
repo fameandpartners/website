@@ -7,6 +7,7 @@ class Bridesmaid::SelectedProductsController < Bridesmaid::BaseController
       accessor: current_spree_user,
       moodboard_owner: moodboard_owner,
       product: spree_product,
+      site_version: current_site_version,
       variant_id: params[:id],
       color: color,
       size: size

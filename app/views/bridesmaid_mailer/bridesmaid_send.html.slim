@@ -1,27 +1,20 @@
 - track_options = { utm_source: 'transactional', utm_medium: 'email', utm_term: 'send', utm_campaign: 'bridesmaid' }
-- bride_name = "Bride's first name"
-- dress_name = "dres name"
-- price = "price"
-- colour = "colour"
-- size = "size"
-- image = "dressimage"
 table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
   tbody
     tr
-      td
-        = image_tag "_email/bridesmaid/bridesmaid_send_top.jpg" width="640" height="177" alt="Bridesmaid Dresses"
+      td = image_tag "_email/bridesmaid/bridesmaid_send_top.jpg", width: "640", height: "177", alt: "Bridesmaid Dresses"
     tr
       table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
         tr
           td style='padding: 20px; text-align: right;'
-            = image
+            = image_tag @image_url
           td style="font-family: 'Times New Roman', serif; font-size: 28px; letter-spacing: 30px; color: #000000; font-style: italic; line-height: 34px; text-align: center;"
-            p = bride_name
+            p = @bride_name
             p chose:
-            p = dress_name
-            p = price
-            p = colour
-            p = size
+            p = @dress_name
+            p = @price
+            p = @colour
+            p = @size
     tr
       td
-        = image_tag '_email/bridesmaid/bridesmaid_send_bottom.jpg" width="640" height="98" alt="Bridesmaid Dresses"
+        = image_tag "_email/bridesmaid/bridesmaid_send_bottom.jpg", width: "640", height: "98", alt: "Bridesmaid Dresses"
