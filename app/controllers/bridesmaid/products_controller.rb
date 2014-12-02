@@ -51,7 +51,7 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
 
     def bridesmaid_party_collection
       @bridesmaid_party_collection ||= begin
-        Spree::Taxon.where(["permalink = ? or permalink = ?", 'edits/bridesmaid-party', 'bridesmaid-party']).first
+        Spree::Taxon.where(["permalink = ? or permalink = ?", 'edits/Bridesmaid14', 'Bridesmaid14']).first
       end
     end
 end

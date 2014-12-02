@@ -69,6 +69,11 @@ class PagesController < Spree::StoreController
         session[:sign_up_reason] = 'customise_dress'
       elsif params[:bridesmaid_party]
         session[:sign_up_reason] = 'bridesmaid_party'
+
+        if session[:bridesmaid_party_event_id]
+          event = BridesmaidParty::Event.find(session[:bridesmaid_party_event_id])
+          session[:spree_user_return_to] = main_app.bridesmaid_party_moodboard_path(user_slug: event.spree_user.slug)
+        end
       end
     end
 
