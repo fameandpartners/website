@@ -26,6 +26,11 @@ class Bridesmaid::Products
       @search_results ||= build_search_query.results
     end
 
+    def color_ids
+      @color_ids ||= profile.color_ids
+    end
+
+=begin
     # color, and similars
     def color_ids
       # it's not cached, and will generate second request in similar_products,
@@ -36,6 +41,7 @@ class Bridesmaid::Products
         color_ids + similar_color_ids
       end
     end
+=end
 
     def locale
       I18n.locale.to_s.downcase.underscore.to_sym
@@ -101,7 +107,7 @@ class Bridesmaid::Products
         )
       end
 
-      path_parts.push( color.try(:name) || profile.color.name )
+      path_parts.push(color.name) if color.present?
 
       "/" + path_parts.join('/')
     end

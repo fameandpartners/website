@@ -27,6 +27,7 @@ class Bridesmaid::ProductDetailsResource
     end
 
     def apply_bridesmaid_restrictions(details)
+      original_colors = details.colors
       details.colors = details.colors.select{|color| color_ids.include?(color[:id]) }
       details.extra_colors = details.extra_colors.select{|color| color_ids.include?(color[:id]) }
       details.variants = details.variants.select{|variant| color_ids.include?(variant[:color_id]) }
@@ -41,12 +42,17 @@ class Bridesmaid::ProductDetailsResource
     end
 
     def color_ids
+      @color_ids ||= bridesmaid_party_event.color_ids
+    end
+=begin
+    def color_ids
       @color_ids ||= begin
         color_ids = bridesmaid_party_event.colors.map{|c| c[:id]}
         similar_color_ids = Similarity.get_similar_color_ids(color_ids, Similarity::Range::VERY_CLOSE)
         color_ids + similar_color_ids
       end
     end
+=end
 
     #'/moodboard/:user_slug/dress-:product_slug(/:color_name)'
     def product_path(product)

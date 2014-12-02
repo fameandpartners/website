@@ -27,5 +27,10 @@ module BridesmaidParty
     def owned_by?(user)
       self.spree_user_id.present? && self.spree_user_id == user.try(:id)
     end
+
+    def color_ids
+      self.colors ||= []
+      self.colors.map{|color| color[:ids]}.flatten
+    end
   end
 end

@@ -72,6 +72,10 @@ class Bridesmaid::BaseController < ApplicationController
       end
     end
 
+    def bridesmaid_event_profile
+      bridesmaid_user_profile
+    end
+
     def set_page_titles(options = {})
       @title        = options[:title].present?       ? options[:title] : 'Bridesmaid Party'
       @description  = options[:description].present? ? options[:description] : 'Bridesmaid Party'

@@ -4,6 +4,41 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
   def edit
     set_page_titles
 
+    @bridesmaid_event = bridesmaid_event_profile
+    @palette          = Bridesmaid::Palette.get
+  end
+
+  def update
+    if store_selected_colors(params[:info][:colours])
+      redirect_to bridesmaid_party_consierge_service_path
+    else
+      # empty or invalid colors
+      edit
+      render action: :edit
+    end
+  end
+
+  private
+
+    def store_selected_colors(groups)
+      colors = []
+      group_codes = groups.split(',').compact.uniq
+      group_codes.each do |group_code|
+        color_ids = Bridesmaid::Palette.color_ids_for_group(group_code)
+        colors.push({ group: group_code, ids: color_ids })
+      end
+      bridesmaid_event_profile.colors = colors
+      bridesmaid_event_profile.save!
+      true
+    rescue ActiveRecord::RecordInvalid
+      false
+
+    end
+
+=begin
+  def edit
+    set_page_titles
+
     @user_details       = bridesmaid_user_profile
     
     @palette = OpenStruct.new(
@@ -27,6 +62,7 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
     def selected_colors
       (bridesmaid_user_profile.colors || []).map{|c| c[:original_code]} || palette_colors.first
     end
+=end
 
 =begin
     # palette from wireframe
@@ -65,7 +101,6 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
           collect{|option_value| option_value.value }.compact.uniq
       end
     end
-=end
 
     # static palette from available colors
     def palette_colors
@@ -82,6 +117,8 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
         colors.map{|code| "##{code}"}
       end
     end
+=end
+=begin
 
     def product_colors
       @product_colors ||= begin
@@ -125,4 +162,5 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
     rescue ActiveRecord::RecordInvalid
       false
     end
+=end
 end

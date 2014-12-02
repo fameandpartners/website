@@ -5,7 +5,7 @@ javascript:
       $('#next-button').prop('disabled', false);
       $('#next-button').on('click', function(e) {
         e.preventDefault();
-        if ($('.bridesmaid-pallete .pallete-color.selected').length == 0){
+        if ($('.bridesmaid-pallete .pallete-color-group.selected').length == 0){
           console.log("please, select at least one color");
           return false;
         } else {
@@ -17,10 +17,10 @@ javascript:
 
     // enable paletter
     (function() {
-      $('.bridesmaid-pallete .pallete-color').on('click', function(e) {
+      $('.bridesmaid-pallete .pallete-color-group').on('click', function(e) {
         $item = $(e.currentTarget)
         $item.toggleClass('selected');
-        result = _.map($('.bridesmaid-pallete .pallete-color.selected'), function(item) {
+        result = _.map($('.bridesmaid-pallete .pallete-color-group.selected'), function(item) {
           return $(item).data('code');
         });
         $('#info_colours').val(result);
@@ -34,13 +34,16 @@ javascript:
     .big Colour Palette
     .small Select the colours that you would prefer your dresses in.
 
-= form_for @user_details, as: :info, url: bridesmaid_party_colour_path, method: :put do |f|
-  = f.hidden_field 'colours', { value: @palette.selected, id: 'info_colours' }
+= form_for @bridesmaid_event, as: :info, url: bridesmaid_party_colour_path, method: :put do |f|
+  = f.hidden_field 'colours', { value: @bridesmaid_event.colors.map{|color| color[:group]}, id: 'info_colours' }
 
   .bridesmaid-pallete
-    - @palette.colors.each do |color|
-      - selection_status_class = (@palette.selected.include?(color) ? 'selected' : '')
-      .pallete-color style="background-color: #{ color };" class=(selection_status_class) data-code=(color)
+    - @palette.color_groups.each do |group|
+      - selection_status = @bridesmaid_event.colors.include?(group.name) ? 'selected' : ''
+      .pallete-color-group data-code=(group.name) class=(selection_status)
+        - group.colors.each do |color|
+          .pallete-color style="background-color: #{ color.value };"
+        = group.presentation
 
   = link_to '#', class: 'block-with-triangle', id: 'next-button' do
     span.text NEXT STEP
