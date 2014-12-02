@@ -249,6 +249,31 @@
 		}
 	}
 }
+
+.bridesmaid-colors-pallete {
+	text-align: center;
+	.pallete-color-group {
+		cursor: pointer;
+		display: inline-block;
+		vertical-align: top;
+		width: 180px;
+		height: 180px;
+		border: 1px solid #000;
+		vertical-align: top;
+		margin: 0 2px 40px;
+		&.selected {
+			opacity: .4;
+		}
+	}
+	.pallete-color-group-wrap {
+		display: table;
+		width: 180px;
+		height: 180px;
+	}
+	.pallete-color {
+		display: table-cell;
+	}
+}
 // @end
 
 // Concierge
