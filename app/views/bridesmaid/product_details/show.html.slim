@@ -44,6 +44,9 @@ javascript:
     meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
     meta itemprop="identifier" content="sku:#{@product.sku}" /
 
+  .bride-instructions
+    / -- DISPLAY IF USER IS BRIDE
+    = image_tag('_bridesmaid/product_instructions.jpg')
   /.product-alert
     span.title.old share to get a $20 voucher
     /= link_to '#' do

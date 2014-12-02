@@ -1,0 +1,11 @@
+/ -- This nav replaces the anormal application headfer so that a bridesmaid can only view dresses that have been sent by the bride.
+- brides_name = "Bride's name"
+.bridesmaid-header
+  .nav-container
+    header.brand
+      = link_to root_path, class: 'logo' do
+        span.icon-logo
+    .navs
+      .name
+        = brides_name + " "
+        ' bridal party

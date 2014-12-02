@@ -457,6 +457,7 @@ FameAndPartners::Application.routes.draw do
       put '/:user_slug/dress-:product_slug(/:color_name)' => 'product_details#select', as: :bridesmaid_dress_selection
       delete '/moodboard/:user_slug/:variant_id' => 'moodboard#destroy_item',
         as: :bridesmaid_party_delete_moodboard_item
+      get '/bridesmaid-signup' => 'landings#bridesmaid_signup', as: :bridesmaid_signup
     end
 
     resources :site_versions, only: [:show]
