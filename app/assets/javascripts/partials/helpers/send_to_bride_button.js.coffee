@@ -21,8 +21,9 @@ window.helpers.addSendToBrideButton = (button) ->
         url: button.attr('href'),
         method: 'PUT',
         dataType: 'json',
-        data: data,
+        data: data
         success: () ->
-          $(button).html('selected')
+          console.log('success')
+          #$(button).html('selected')
       )
   )
