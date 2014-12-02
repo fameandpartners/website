@@ -44,9 +44,10 @@ javascript:
     meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
     meta itemprop="identifier" content="sku:#{@product.sku}" /
 
-  .bride-instructions
-    / -- DISPLAY IF USER IS BRIDE
-    = image_tag('_bridesmaid/product_instructions.jpg')
+  - if @bridesmaid_user_profile.owned_by?(current_spree_user)
+    .bride-instructions
+      = image_tag('_bridesmaid/product_instructions.jpg')
+
   /.product-alert
     span.title.old share to get a $20 voucher
     /= link_to '#' do
@@ -74,8 +75,6 @@ javascript:
 
         - if @bridesmaid_user_profile.owned_by?(current_spree_user)
           .product-row
-            = link_to 'buy now', '#', class: 'btn large grey wide buy-now', data: { action: 'buy' }
-          .product-row
             - moodboard_link_data = { 'title-add' => 'add to bridesmaid moodboard', 'title-remove' => 'Remove from bridesmaid moodboard', 'action' => 'add-to-wishlist', 'product-id' => @product.id, 'id' => @product.master_id, 'color-id' => nil }
             = link_to '+ bridesmaid moodboard', @product.path, class: 'btn large pink wide wish-list-link', data: moodboard_link_data
         - elsif @bridesmaid_user_profile.paying_for_bridesmaids
@@ -84,8 +83,6 @@ javascript:
         - else
           .product-row
             = link_to 'buy now', '#', class: 'btn large grey wide buy-now', data: { action: 'buy' }
-        /.product-row
-          = link_to 'choose this dress', @product.path, class: 'btn large grey wide send-to-bride', data: { action: 'send-to-bride' }
 
         .product-row
           .row
