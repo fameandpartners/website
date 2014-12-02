@@ -1,0 +1,11 @@
+- brides_name = "Bride's name"
+.bridesmaid-landing-header
+  .name = brides_name
+  .info is getting married and wants you to wear the most amazing dress...
+ 
+.bridesmaid-landing-signup
+  = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
+    span.icon
+      span.icon-facebook2
+    span Start Designing Now
+

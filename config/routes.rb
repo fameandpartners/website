@@ -454,6 +454,7 @@ FameAndPartners::Application.routes.draw do
       get '/moodboard(/:user_slug)' => 'moodboard#show', as: :bridesmaid_party_moodboard
       delete '/moodboard/:user_slug/:variant_id' => 'moodboard#destroy_item',
         as: :bridesmaid_party_delete_moodboard_item
+      get '/bridesmaid-signup' => 'landings#bridesmaid_signup', as: :bridesmaid_signup
     end
 
     resources :site_versions, only: [:show]
