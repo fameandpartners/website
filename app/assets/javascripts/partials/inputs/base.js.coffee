@@ -139,19 +139,19 @@ window.inputs.ChosenSelector = class ChosenSelector extends BaseInput
     , @)
     @container.trigger('chosen:updated')
 
-window.inputs.CustomWithBaseColourSelector = class CustomWithBaseColourSelector extends BaseInput
+window.inputs.GroupedOptionsChosenSelector = class GroupedOptionsChosenSelector extends BaseInput
   constructor: (@container, @valueType = 'string') ->
     super()
     _.bindAll(@, 'onValueChanged')
     @container.on('change', @onValueChanged)
 
-  isCustomColour: () ->
+  isCustomOption: () ->
     # selected option has class 'custom'
     @container.find("option[value=#{ @container.val() }]").is('.custom')
 
-  getColorId: () ->
+  getOptionValueId: () ->
     value = @container.find("option[value=#{ @container.val() }]").data('id')
-    parseInt(value)
+    @prepareValue(value)
 
   onValueChanged: (e) ->
     @trigger('change')

@@ -43,6 +43,7 @@ class SiteVersion < ActiveRecord::Base
       if is_australia?
         OpenStruct.new({
           size_info_label: 'AUS Sizes Displayed',
+          size_start: 4,
           size_charge_start: 18,
           locale_code: 'au',
           locale_unit_code: 'cm',
@@ -52,6 +53,7 @@ class SiteVersion < ActiveRecord::Base
       else
         OpenStruct.new({
           size_info_label: 'US Sizes Displayed',
+          size_start: 0,
           size_charge_start: 14,
           locale_code: 'us',
           locale_unit_code: 'in',

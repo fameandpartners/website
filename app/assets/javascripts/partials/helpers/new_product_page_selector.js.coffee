@@ -29,10 +29,9 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       @masterVariantId  = master_id
       @incompatibility_map = incompatibility_map
 
-      @sizeInput  or= new inputs.ButtonsBoxSelector(@container.find('.sizebox'), '.button')
-
-      @colorInput or= new window.inputs.CustomWithBaseColourSelector(@container.find('select#colour'))
-      @colorInput.val(null)
+      @sizeInput  or= new window.inputs.ChosenSelector(@container.find('select#size'), 'integer')
+      @colorInput or= new window.inputs.GroupedOptionsChosenSelector(@container.find('select#colour'))
+      @colorInput.val('')
 
       @customisationsInput or= new window.inputs.CustomisationsSelector(
         @container.find('.customisation-selector'),
@@ -66,7 +65,7 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
 
     isCustomProduct: () ->
       return true if !_.isEmpty(@selected.customization_value_ids)
-      return @colorInput.isCustomColour()
+      return @colorInput.isCustomOption()
 
     updateChoosenVariantId: () ->
       @choosenVariantId = null
@@ -93,7 +92,7 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
 
     updateWishlistButton: () ->
       $button = @container.find('.btn.wish-list-link')
-      $button.data('color-id', @colorInput.getColorId())
+      $button.data('color-id', @colorInput.getOptionValueId())
 
       if @choosenVariantId
         $button.data(id: @choosenVariantId)

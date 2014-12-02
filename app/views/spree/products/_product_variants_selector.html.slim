@@ -1,14 +1,15 @@
 .product-row
-  select.selectbox.selectbox-large.selectbox-text-center id="colour" data-placeholder="select size"
+  select.selectbox.selectbox-large.selectbox-text-center id="size" data-placeholder="select size"
     option.default-value value=""
     - if product.sizes.present?
       optgroup label="Standard sizes"
-        - product.sizes.each do |size|
-          option value=(size[:value]) data-size=(size[:value]) data-plussize=(false) #{size[:title]}
+      - product.sizes.each do |size|
+        option data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
+
     - if product.extra_sizes.present?
       optgroup label="#{(I18n.t('product.extra_size_price'))}"
         - product.extra_sizes.each do |size|
-          option value=(size[:value]) data-size=(size[:value]) data-plussize=(true) title=(I18n.t('product.extra_size_price')) #{size[:title]}
+          option data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
 
 .product-row
   select.selectbox.selectbox-large.selectbox-colors.selectbox-text-center id="colour" data-placeholder="Select color"

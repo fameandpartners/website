@@ -60,7 +60,7 @@ class Products::ProductDetailsResource
     end
 
     def product_with_associations(product_candidate)
-      Spree::Product.includes(:variants_including_master).find(product_candidate.id)
+      Spree::Product.includes(:variants_including_master, :taxons).find(product_candidate.id)
     end
 
     def default_product_image
@@ -114,17 +114,23 @@ class Products::ProductDetailsResource
     end
 
     # sizes
+    def available_sizes_values
+      [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
+    end
+
     def product_sizes
       @product_sizes ||= begin
         all_sizes = {}
         product_variants.each do |variant_info|
-          all_sizes[variant_info[:size_id]] ||= { 
-            id: variant_info[:size_id],
-            name: variant_info[:size],
-            title: variant_info[:size_presentation].to_i,
-            value: variant_info[:size_value].to_i,
-            size_details_attributes: get_size_details(variant_info[:size_value])
-          }
+          if available_sizes_values.include?(variant_info[:size_value].to_i)
+            all_sizes[variant_info[:size_id]] ||= { 
+              id: variant_info[:size_id],
+              name: variant_info[:size],
+              title: "#{ site_version.size_settings.locale_code } #{ variant_info[:size_presentation].to_i }",
+              value: variant_info[:size_value].to_i,
+              size_details_attributes: get_size_details(variant_info[:size_value])
+            }
+          end
         end
         all_sizes.values.sort_by{|item| item[:value] }
       end
@@ -152,12 +158,21 @@ class Products::ProductDetailsResource
       site_version.size_settings.size_charge_start rescue 18
     end
 
+    def default_size_start
+      site_version.size_settings.size_start rescue 4
+    end
+
     def default_product_sizes
-      product_sizes.select{|size| size[:value] < extra_size_start } 
+      product_sizes.select{|size| size[:value] >= default_size_start && size[:value] < extra_size_start } 
     end
 
     def extra_product_sizes
+      return [] unless product_has_extra_sizes?
       product_sizes.select{|size| size[:value] >= extra_size_start } 
+    end
+
+    def product_has_extra_sizes?
+      @product_has_extra_sizes ||= product.taxons.where(:name =>"Plus Size").exists?
     end
 
     # colors
