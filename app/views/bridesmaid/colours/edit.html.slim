@@ -37,7 +37,7 @@ javascript:
 = form_for @bridesmaid_event, as: :info, url: bridesmaid_party_colour_path, method: :put do |f|
   = f.hidden_field 'colours', { value: @bridesmaid_event.colors.map{|color| color[:group]}, id: 'info_colours' }
 
-  .bridesmaid-colors-pallete
+  .bridesmaid-pallete
     - @palette.color_groups.each do |group|
       - selection_status = @bridesmaid_event.colors.include?(group.name) ? 'selected' : ''
       .pallete-color-group data-code=(group.name) class=(selection_status)

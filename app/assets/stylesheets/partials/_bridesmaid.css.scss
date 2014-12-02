@@ -227,30 +227,8 @@
 // @end
 
 // Palette
-.bridesmaid-pallete {
-	@include clearfix;
-	width: 770px;
-	margin: 25px auto;
-	border: solid 4px #000;
-	.pallete-color {
-		width: 70px;
-		height: 70px;
-		float: left;
-		position: relative;
-		&.selected:before {
-			content: '';
-			position: absolute;
-			display: block;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			border: solid 4px #000;
-		}
-	}
-}
 
-.bridesmaid-colors-pallete {
+.bridesmaid-pallete {
 	text-align: center;
 	.pallete-color-group {
 		cursor: pointer;
