@@ -53,6 +53,22 @@ ActiveRecord::Schema.define(:version => 20141202120254) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
+  create_table "banners", :force => true do |t|
+    t.string   "presentation"
+    t.string   "url"
+    t.string   "category"
+    t.integer  "position"
+    t.boolean  "enabled",                 :default => false
+    t.string   "attachment_content_type"
+    t.string   "attachment_file_name"
+    t.datetime "attachment_updated_at"
+    t.integer  "attachment_width"
+    t.integer  "attachment_height"
+    t.integer  "attachment_size"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",  :null => false
@@ -191,6 +207,18 @@ ActiveRecord::Schema.define(:version => 20141202120254) do
 
   add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
   add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
+
+  create_table "bridesmaid_event_user_profiles", :force => true do |t|
+    t.integer  "spree_user_id"
+    t.datetime "wedding_date"
+    t.integer  "status"
+    t.integer  "bridesmaids_count"
+    t.boolean  "special_suggestions"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "bridesmaid_event_user_profiles", ["spree_user_id"], :name => "index_bridesmaid_event_user_profiles_on_spree_user_id"
 
   create_table "bridesmaid_party_events", :force => true do |t|
     t.integer  "spree_user_id"
@@ -593,12 +621,13 @@ ActiveRecord::Schema.define(:version => 20141202120254) do
     t.string   "event_name"
     t.string   "type"
     t.integer  "usage_limit"
-    t.string   "match_policy", :default => "all"
+    t.string   "match_policy",    :default => "all"
     t.string   "code"
-    t.boolean  "advertise",    :default => false
+    t.boolean  "advertise",       :default => false
     t.string   "path"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "allowed_in_sale", :default => false
   end
 
   create_table "spree_addresses", :force => true do |t|
@@ -783,6 +812,20 @@ ActiveRecord::Schema.define(:version => 20141202120254) do
     t.boolean  "active",      :default => true
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "spree_menu_feature_images", :force => true do |t|
+    t.integer  "menu_feature_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  create_table "spree_menu_features", :force => true do |t|
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "spree_option_types", :force => true do |t|
