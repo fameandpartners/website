@@ -3,7 +3,11 @@ class BridesmaidPartyMailer < ActionMailer::Base
   include ProductsHelper
 
   layout 'mailer'
-  default :from => configatron.noreply, :template_path => 'bridesmaid_mailer'
+  default :from => configatron.noreply, :template_path => 'mailers/bridesmaid_party_mailer'
+
+  def bridesmaid_purchase(bridesmaid_purchase)
+    #
+  end
 
   def bridesmaid_send(bridesmaid_member, site_version)
     event         = bridesmaid_member.event
@@ -13,7 +17,6 @@ class BridesmaidPartyMailer < ActionMailer::Base
 
     @bride_name   = bridesmaid.full_name
     @dress_name   = product.name
-    @dress_price  = product.price
     @colour       = color_option.try(:name)
     @size         = Spree::OptionValue.where(id: bridesmaid_member.size).first.try(:name)
     @price        = product.zone_price_for(site_version).display_price
@@ -27,4 +30,30 @@ class BridesmaidPartyMailer < ActionMailer::Base
       subject: 'Bridesmaid Party'
     )
   end
+
+  def invite(bridesmaid_member)
+    email = bridesmaid_member.spree_user.try(:email) || bridesmaid_member.email
+    @bride_name = bridesmaid_member.event.spree_user.full_name
+
+    mail(
+      to: email,
+      subject: 'Welcome to Bridesmaid Party'
+    )
+  end
+ 
+  def welcome(bride)
+    mail(
+      to: bride.email,
+      subject: 'Welcome to Bridesmaid Party'
+    )
+  end
+
+  private
+
+    # helper methods. details fetching should be somewhere else
 end
+
+# dev code
+# BridesmaidPartyMailer.welcome(Spree::User.last).deliver
+# BridesmaidPartyMailer.invite(BridesmaidParty::Member.last).deliver
+# BridesmaidPartyMailer.bridesmaid_send(BridesmaidParty::Member.last, SiteVersion.last).deliver
