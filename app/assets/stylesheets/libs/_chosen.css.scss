@@ -70,14 +70,31 @@
 }
 
 // Select Large
-.selectbox-large.chosen-container-single .chosen-single {
-  height: 65px;
-  padding-left: 35px;
-  box-shadow: none;
-  font-size: 14px;
-  font-family: $shruti;
-  span { line-height: 65px;}
-  div { width: 35px;}
+.selectbox-large.chosen-container-single {
+  .chosen-single {
+    height: 65px;
+    padding-left: 35px;
+    box-shadow: none;
+    font-size: 14px;
+    font-family: $shruti;
+    span {
+      font-size: 14px;
+      line-height: 65px;
+    }
+    div { width: 35px;}
+  }
+  &.chosen-container-active {
+    .chosen-single {
+      span {
+        color: #c0c0c0;
+      }
+      div {
+        b {
+          background-position: -18px -7px;
+        }
+      }
+    }
+  }
 }
 .selectbox-text-center.chosen-container-single .chosen-single {
   text-align: center;
@@ -178,6 +195,7 @@
   margin: 0;
   padding: 2px 8px;
   list-style: none;
+  font-size: 14px;
   line-height: 15px;
 }
 // Pink 
@@ -187,6 +205,16 @@
 // Large
 .selectbox-large.chosen-container .chosen-results li {
   line-height: 30px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 62px;
+  &.group-result {
+    background: #e0e0e0;
+    font-weight: 400;
+  }
+  &.highlighted {
+    background: magenta;
+  }
 }
 .chosen-container .chosen-results li.active-result {
   display: list-item;
@@ -376,19 +404,20 @@
     padding-left: 50px;
     &:before {
       content: '';
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
       overflow: hidden;
-      border-radius: 50%;
       position: absolute;
-      top: 6px;
+      top: 15px;
       left: 15px;
+      border: 1px dashed #000;
     }
     &:hover {
       background: magenta;
     }
     &.default-value {
       padding-left: 15px;
+      padding-right: 15px;
       cursor: default;
     }
   }

@@ -290,6 +290,10 @@ a.block-with-triangle .text {
 			&.shadow {@include longBoxShadowRight ($greenColor, 3);}
 		}
 	}
+	&.white {
+		background: #fff;
+		color: #000;
+	}
 	&.grey {
 		color: #fff;
 		background-color: #b9b9b9;
