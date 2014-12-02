@@ -10,7 +10,7 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
 
   def update
     if store_selected_colors(params[:info][:colours])
-      redirect_to bridesmaid_party_consierge_service_path
+      redirect_to bridesmaid_party_dresses_path
     else
       # empty or invalid colors
       edit

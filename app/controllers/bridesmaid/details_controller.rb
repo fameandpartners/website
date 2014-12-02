@@ -8,7 +8,7 @@ class Bridesmaid::DetailsController < Bridesmaid::BaseController
 
   def update
     if update_bridesmaid_user_profile(params[:info])
-      redirect_to bridesmaid_party_colour_path
+      redirect_to bridesmaid_party_consierge_service_path
     else
       edit
       render action: :edit
