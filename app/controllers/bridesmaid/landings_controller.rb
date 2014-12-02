@@ -1,15 +1,15 @@
 class Bridesmaid::LandingsController < Bridesmaid::BaseController
-  def show
-    #require_user_not_logged_in!
-
+  def bride
     set_page_titles
-    # render
   end
 
-  def bridesmaid_signup
-    #require_user_not_logged_in!
-
+  def bridesmaid
     set_page_titles
-    # render
+
+    user   = Spree::User.find_by_slug!(params[:user_slug])
+    event  = BridesmaidParty::Event.find_by_spree_user_id!(user.id)
+    member = event.members.find_by_token!(params[:token])
+
+    @bride = user
   end
 end

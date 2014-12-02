@@ -443,7 +443,7 @@ FameAndPartners::Application.routes.draw do
     get '/next-day-delivery' => 'spree/products#index', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
 
     scope '/bridesmaid-party', module: 'bridesmaid' do
-      root to: 'landings#show', as: :bridesmaid_party
+      root to: 'landings#bride', as: :bridesmaid_party
       get '/info'     => 'details#edit',   as: :bridesmaid_party_info
       put '/info'     => 'details#update'
       get '/colour'   => 'colours#edit',   as: :bridesmaid_party_colour
@@ -457,7 +457,7 @@ FameAndPartners::Application.routes.draw do
       put '/:user_slug/dress-:product_slug(/:color_name)' => 'product_details#select', as: :bridesmaid_dress_selection
       delete '/moodboard/:user_slug/:variant_id' => 'moodboard#destroy_item',
         as: :bridesmaid_party_delete_moodboard_item
-      get '/bridesmaid-signup' => 'landings#bridesmaid_signup', as: :bridesmaid_signup
+      get '/:user_slug' => 'landings#bridesmaid', as: :bridesmaid_signup
     end
 
     resources :site_versions, only: [:show]
