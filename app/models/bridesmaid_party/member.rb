@@ -13,6 +13,10 @@ module BridesmaidParty
               presence: true,
               uniqueness: true
 
+    def full_name
+      [first_name, last_name].reject(&:blank?).join(' ')
+    end
+
     def generate_token
       self.token = self.class.token
     end

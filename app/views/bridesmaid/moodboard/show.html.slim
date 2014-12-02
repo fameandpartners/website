@@ -45,12 +45,19 @@ javascript:
               = link_to product.path do
                 = image_tag product.image_url, alt: product.name
 
-
             h6 = product.name
             .price = product.price.display_price
 
             .buttons
               = link_to "Start Customising", product.path, class: 'btn small', title: "Customise this dress"
+
+            - if product.bridesmaides.present?
+              ul
+              - product.bridesmaides.each do |bridesmaid|
+                li.bridesmaid 
+                  = "#{ bridesmaid.name } #{ bridesmaid.color } #{bridesmaid.size }"
+                  = link_to 'Add to cart', '#', class: 'btn small'
+
 
             - if product.fast_delivery
               .fast-delivery-icon title="Next day delivery*"
