@@ -151,7 +151,7 @@
 	font-size: 20px;
 	text-transform: none;
 	small {
-		font-size: 11px;
+		font-size: 14px;
 		margin-top: -15px;
 		display: block;
 	}
@@ -314,3 +314,29 @@
 		bottom: 115px;
 	}
 }
+
+.bride-instructions{
+	margin-bottom:  20px;	
+}
+
+
+.bridesmaid-header{
+	.navs{
+		font: 400 28px/1 $fontTwo;
+		font-style: italic;
+		background: #fdf6f0;
+		text-align: center;
+		color: #000;
+		text-transform: uppercase;
+		height: 98px;
+		.name{
+			width: 70%;
+			margin: 0 auto;
+			display: inline-block;
+			vertical-align: middle;
+			line-height: 98px;
+		}
+	}
+}
+  
+  
