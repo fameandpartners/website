@@ -1,18 +1,6 @@
 .product-row
-
-  .btn.large.wide.grey.border.size-selector Select size
-  .sizebox style="display: none;"
-    - product.sizes.each do |size|
-      .button data-size=(size[:value]) data-plussize=(false)
-        span = size[:title]
-        = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes].merge(link: true)
-    - product.extra_sizes.each do |size|
-      .button data-size=(size[:value]) data-plussize=(true) title=(I18n.t('product.extra_size_price'))
-        span = size[:title]
-        = render partial: 'spree/products/size_popup', locals: size[:size_details_attributes].merge(link: true)
-
-  select.selectbox.selectbox-large.selectbox-text-center id="colour"
-    option.default-value value="" select size
+  select.selectbox.selectbox-large.selectbox-text-center id="colour" data-placeholder="select size"
+    option.default-value value=""
     - if product.sizes.present?
       optgroup label="Standard sizes"
         - product.sizes.each do |size|
@@ -20,12 +8,11 @@
     - if product.extra_sizes.present?
       optgroup label="#{(I18n.t('product.extra_size_price'))}"
         - product.extra_sizes.each do |size|
-          option value=(size[:value]) data-size=(size[:value]) data-plussize=(true) title=(I18n.t('product.extra_size_price')) #{size[:title]} 
-
+          option value=(size[:value]) data-size=(size[:value]) data-plussize=(true) title=(I18n.t('product.extra_size_price')) #{size[:title]}
 
 .product-row
-  select.selectbox.selectbox-large.selectbox-colors.selectbox-text-center id="colour"
-    option.default-value value="" select color
+  select.selectbox.selectbox-large.selectbox-colors.selectbox-text-center id="colour" data-placeholder="Select color"
+    option.default-value value=""
     optgroup label="Standard colors"
       - product.colors.each do |color|
         option data-id=(color[:id]) class="color #{color[:name]}" value=(color[:name]) = color[:title]
@@ -35,7 +22,9 @@
 
 - if product.customisations.present?
   .product-row.position-relative
-    .btn.large.wide.grey.border.trigger-customisation-selector Select customisation
+    .btn.large.wide.white.border.trigger-customisation-selector
+      ' Select customisation
+      .arrow
     .customisations.customisation-selector
       - product.customisations.each do |customisation|
         .customisation-value data-customisation-value-id=(customisation.id)
@@ -48,6 +37,6 @@
                   span.price-old = customisation.display_price
                   ' Free
               - else
-                .price = customisation.display_price
+                .price Additional +#{customisation.display_price}
             = link_to '+ ADD', '#', class: 'btn'
     .instructions Once you have made your selections, simply choose your size on the right and add to cart!
