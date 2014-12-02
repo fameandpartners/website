@@ -79,10 +79,13 @@ javascript:
             = link_to '+ bridesmaid moodboard', @product.path, class: 'btn large pink wide wish-list-link', data: moodboard_link_data
         - elsif @bridesmaid_user_profile.paying_for_bridesmaids
           .product-row
-            = link_to 'choose this dress', @product.path, class: 'btn large grey wide send-to-bride', data: { action: 'send-to-bride' }
+            = link_to 'send to bride', @product.path, class: 'btn large grey wide send-to-bride', data: { action: 'send-to-bride' }
         - else
           .product-row
             = link_to 'buy now', '#', class: 'btn large grey wide buy-now', data: { action: 'buy' }
+
+        .product-row
+          = link_to 'send to bride', @product.path, class: 'btn large grey wide send-to-bride', data: { action: 'send-to-bride' }
 
         .product-row
           .row

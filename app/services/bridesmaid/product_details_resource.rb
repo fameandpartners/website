@@ -31,8 +31,11 @@ class Bridesmaid::ProductDetailsResource
       details.colors = details.colors.select{|color| color_ids.include?(color[:id]) }
       details.extra_colors = details.extra_colors.select{|color| color_ids.include?(color[:id]) }
       details.variants = details.variants.select{|variant| color_ids.include?(variant[:color_id]) }
-      details.images = details.images.select{|image| image.color_id.nil? || color_ids.include?(image.color_id)}
       details.path = product_path(details)
+
+      # filter images, but ensure there are at least some images
+      images_with_selected_colors = details.images.select{|image| image.color_id.nil? || color_ids.include?(image.color_id)}
+      details.images = images_with_selected_colors if images_with_selected_colors.present?
 
       details
     end

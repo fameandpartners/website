@@ -81,6 +81,7 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       else
         if @isCustomProduct()
           @choosenVariantId = @masterVariantId
+          @errorMessage = null
         else
           variant = _.findWhere(@variants, { size: @selected.size, color: @selected.color })
           if _.isEmpty(variant)
