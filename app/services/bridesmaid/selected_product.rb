@@ -73,29 +73,8 @@ class Bridesmaid::SelectedProduct
     def member
       @member ||= begin
         bridesmaid_user_profile.members.where(
-          email: accessor.email
+          spree_user_id: accessor.id
         ).first
       end
     end
 end
-
-=begin
-    member = bridesmaid_user_profile.members.where(
-      email: current_spree_user.email
-    ).first
-
-    if member.present?
-      member.variant_id = params[:id]
-      member.size = Spree::Variant.size_option_type.option_values.where(name: params[:size]).try(:id)
-      member.color_id = Spree::Variant.color_option_type.option_values.where(name: params[:color]).try(:id)
-      member.save!
-    end
-
-    moodboard_owner.moodboard_items.where(variant_id: params[:id]).exists?
-
-    # add this item to bride moodboard
-    #bridesmaid_user_profile.spree_user.moodboard_items.
-
-    respond_with(member)
-  end
-=end
