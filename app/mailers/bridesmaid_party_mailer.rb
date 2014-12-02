@@ -3,7 +3,7 @@ class BridesmaidPartyMailer < ActionMailer::Base
   include ProductsHelper
 
   layout 'mailer'
-  default :from => configatron.noreply, :template_path => 'bridesmaid_mailer'
+  default :from => configatron.noreply, :template_path => 'mailers/bridesmaid_party_mailer'
 
   def bridesmaid_send(bridesmaid_member, site_version)
     event         = bridesmaid_member.event
