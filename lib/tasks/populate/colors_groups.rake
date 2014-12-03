@@ -30,9 +30,9 @@ namespace :db do
       group_option_type = Spree::OptionType.find_by_name('dress-color')
 
       groups_attributes = {
-        purple:  ['purple', "dark-purple"],
-        yellow:  ["yellow", "fluoro-yellow", "canary-yellow"],
-        nude:    ["nude", "nude-with-black-lining", "silver-metallic-w/nude-lining", "silver-and-nude"]
+        purple:  ['purple', "dark-purple", "lilac", "lavender", "eggplant", "plum", "orchid", "violet"],
+        yellow:  ["yellow", "fluoro-yellow", "canary-yellow", "canary", "gold", "pale yellow", "mustard", "lemon"],
+        nude:    ["nude", "ivory", "off-white", "cream", "blush", "white", "beige", "champagne", "moonstone", "shell"]
       }
 
       groups_attributes.each do |group_name, color_names|
