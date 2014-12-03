@@ -74,7 +74,7 @@ module Personalization
     end
 
     def style
-      if params[:show_old] || Rails.env.production?
+      if params[:show_old] #|| Rails.env.production?
         old_style
         render template: 'personalization/products/old_style'
       else
