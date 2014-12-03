@@ -143,7 +143,7 @@ Spree::ProductsController.class_eval do
   def show
     @is_bride = false;
     if current_spree_user.present?
-      if bridesmaid_party_events.first.status == 2
+      if current_spree_user.bridesmaid_party_events.first.status == 2
         @is_bride = true;
       end
     end

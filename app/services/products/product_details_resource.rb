@@ -168,12 +168,13 @@ class Products::ProductDetailsResource
     end
 
     def extra_product_sizes
-      return [] unless product_has_extra_sizes?
-      product_sizes.select{|size| size[:value] >= extra_size_start } 
+      sizes = product_sizes.select{|size| size[:value] >= extra_size_start } 
+      return sizes if product_has_free_extra_sizes?
+      sizes.map {|size| size[:extra_price] = true; size }
     end
 
-    def product_has_extra_sizes?
-      @product_has_extra_sizes ||= product.taxons.where(:name =>"Plus Size").exists?
+    def product_has_free_extra_sizes?
+      @product_has_free_extra_sizes ||= product.taxons.where(:name =>"Plus Size").exists?
     end
 
     # colors
