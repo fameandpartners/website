@@ -17,6 +17,9 @@ javascript:
         window.incompatibility_map
       );
 
+      productPageSelector.colorInput.setValue('#{ @color_name }');
+      productPageSelector.colorInput.onValueChanged();
+
       page.enableProductImagesSlider('.product-slider .dresses-slider', productPageSelector.colorInput);
     })(document);
 

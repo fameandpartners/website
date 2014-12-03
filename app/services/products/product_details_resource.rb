@@ -1,3 +1,4 @@
+# please, extract not user dependable data receiving to repo
 class Products::ProductDetailsResource
   attr_reader :site_version, :product, :selected_color
 
@@ -176,6 +177,10 @@ class Products::ProductDetailsResource
     end
 
     # colors
+    def color_selected?(color_id)
+      color_id.present? && selected_color.try(:id) == color_id
+    end
+
     def default_product_colors
       @product_colors ||= begin
         all_colors = {}
@@ -186,7 +191,8 @@ class Products::ProductDetailsResource
             name: variant_info[:color],
             title: variant_info[:color_presentation],
             value: variant_info[:color_value],
-            image: variant_info[:image]
+            image: variant_info[:image],
+            selected: color_selected?(variant_info[:color_id])
           }
         end
         all_colors.values.sort_by{|item| item[:value] }
@@ -207,7 +213,8 @@ class Products::ProductDetailsResource
             name: option_value.name,
             title: option_value.presentation,
             value: option_value.value,
-            image: option_value.image.present? ? option_value.image.url(:small_square) : nil
+            image: option_value.image.present? ? option_value.image.url(:small_square) : nil,
+            selected: color_selected?(option_value.id)
           }
         end
       end

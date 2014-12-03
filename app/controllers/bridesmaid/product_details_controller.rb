@@ -8,6 +8,7 @@ class Bridesmaid::ProductDetailsController < Bridesmaid::BaseController
     display_marketing_banner
 
     @bridesmaid_user_profile = bridesmaid_user_profile
+    @color_name = selected_color.try(:name)
 
     #@recommended_products = get_recommended_products(spree_product, limit: 4)
 

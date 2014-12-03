@@ -161,6 +161,7 @@ window.inputs.GroupedOptionsChosenSelector = class GroupedOptionsChosenSelector 
 
   setValue: (newValue) ->
     @container.val(newValue).trigger('chosen:updated')
+    @
 
   prepareValue: (value) ->
     if _.isUndefined(value)

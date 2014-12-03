@@ -4,22 +4,22 @@
     - if product.sizes.present?
       optgroup label="Standard sizes"
       - product.sizes.each do |size|
-        option selected=(size[:selected]) data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
+        option data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
 
     - if product.extra_sizes.present?
       optgroup label="#{(I18n.t('product.extra_size_price'))}"
         - product.extra_sizes.each do |size|
-          option selected=(size[:selected]) data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
+          option data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
 
 .product-row
   select.selectbox.selectbox-large.selectbox-colors.selectbox-text-center id="colour" data-placeholder="Select color"
     option.default-value value=""
     optgroup label="Standard colors"
       - product.colors.each do |color|
-        option data-id=(color[:id]) class="color #{color[:name]}" value=(color[:name]) = color[:title]
+        option selected=(color[:selected] ? 'selected' : nil) data-id=(color[:id]) class="color #{color[:name]}" value=(color[:name]) = color[:title]
     optgroup label="Custom colors #{ product.extra_color_price.display_price }"
       - product.extra_colors.each do |color|
-        option data-id=(color[:id]) class="custom color #{color[:name]}" value=(color[:name]) = color[:title] 
+        option selected=(color[:selected] ? 'selected' : nil) data-id=(color[:id]) class="custom color #{color[:name]}" value=(color[:name]) = color[:title] 
 
 - if product.customisations.present?
   .product-row.position-relative
