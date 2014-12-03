@@ -14,6 +14,8 @@ window.shopping_cart = _.extend(window.shopping_cart,
       )
       window.shopping_cart.order.line_items = window.shopping_cart.line_items
     window.shopping_cart.initialized = true
+    # add redirect
+    window.shopping_cart.on('item_added', buildDelayedRedirectToPage('/cart?cf=buybtn', 1000))
 
   addProduct: (variantId, options) ->
     options = {}  unless options?
@@ -29,9 +31,6 @@ window.shopping_cart = _.extend(window.shopping_cart,
       type: "POST"
       dataType: "json"
       data: window.shopping_cart.prepareParams(options)
-      #TODO :implement buildOnSuccessCallback and assign listener to 'item_added' event
-      #this is wrong way - 
-      #success: window.shopping_cart.buildOnSuccess
       success: window.shopping_cart.buildOnSuccessCallback(['item_added'], variantId, options.success)
       error: window.shopping_cart.buildOnErrorCallback(["item_add_failed"], options.failure)
 
@@ -101,15 +100,15 @@ window.shopping_cart = _.extend(window.shopping_cart,
       data[key] = options[key]  unless _.isFunction(options[key])
     $.param data
 
-
-  buildOnSuccess: ->
-    console.log("Cart: Added to Cart.")
-    
-    _.delay ( ->
-      window.location.href = "/cart?cf=buybtn"
-      return
-    ), 1000
-
+#  buildOnSuccess: ->
+#    console.log("Cart: Added to Cart.")
+#    
+#    _.delay ( ->
+#      window.location.href = "/cart?cf=buybtn"
+#      return
+#    ), 1000
+#
+#
 
   buildOnSuccessCallback: (event_names, objectId, successCallback) ->
     func = undefined
