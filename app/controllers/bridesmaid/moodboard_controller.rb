@@ -7,8 +7,10 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
     load_moodboard_owner!
     check_availability!
 
-    @moodboard = moodboard_resource.read
 
+
+    @moodboard = moodboard_resource.read
+    @brides_name = moodboard_owner.full_name
     set_page_titles(title: @moodboard.title)
   end
 
@@ -16,6 +18,8 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
   def bridesmaid_show
     load_moodboard_owner!
     check_availability!
+
+
 
     @moodboard = moodboard_resource.read
 
@@ -60,8 +64,14 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
 
     # check user access
     def check_availability!
-      return true if moodboard_owner.id == current_spree_user.id
-      return true if moodboard_owner.bridesmaid_user_profile.present?
+      if moodboard_owner.id == current_spree_user.id
+        @bride_viewing = true
+        return true 
+      else
+        @bridesmaid_viewing = true
+      end
+
+      return true if moodboard_owner.bridesmaid_party_events.first.completed?
 
       raise Bridesmaid::Errors::MoodboardAccessDenied
     end
