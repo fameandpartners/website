@@ -257,30 +257,59 @@
 	}
 }
 // @end
+
 // Palette
 
 .bridesmaid-pallete {
+	background: #fdf5ef;
+	width: 574px;
+	padding: 42px 54px 62px;
 	text-align: center;
+	margin: 0 auto -36px;
+	@include box-sizing(border-box);
 	.pallete-color-group {
+		margin: 0 0 12px;
 		cursor: pointer;
-		display: inline-block;
-		vertical-align: top;
-		width: 180px;
-		height: 180px;
 		border: 1px solid #000;
-		vertical-align: top;
-		margin: 0 2px 40px;
+		font-size: 16px;
+		padding: 8px 0;
 		&.selected {
 			opacity: .4;
 		}
-	}
-	.pallete-color-group-wrap {
-		display: table;
-		width: 180px;
-		height: 180px;
-	}
-	.pallete-color {
-		display: table-cell;
+		&.black {
+			background: image-url('_bridesmaid/colors/black.png') center center no-repeat;
+			color: #fff;
+		}
+		&.white {
+			background: #fff;
+		}
+		&.blue {
+			background: image-url('_bridesmaid/colors/blue.png') center center no-repeat;
+		}
+		&.pink {
+			background: image-url('_bridesmaid/colors/pink.png') center center no-repeat;
+		}
+		&.red {
+			background: image-url('_bridesmaid/colors/red.png') center center no-repeat;
+		}
+		&.green {
+			background: image-url('_bridesmaid/colors/green.png') center center no-repeat;
+		}
+		&.silver {
+			background: image-url('_bridesmaid/colors/silver.png') center center no-repeat;
+		}
+		&.pastel {
+			background: image-url('_bridesmaid/colors/pastel.png') center center no-repeat;
+		}
+		&.purple {
+			background: image-url('_bridesmaid/colors/purple.png') center center no-repeat;
+		}
+		&.yellow {
+			background: image-url('_bridesmaid/colors/yellow.png') center center no-repeat;
+		}
+		&.nude {
+			background: image-url('_bridesmaid/colors/nude.png') center center no-repeat;
+		}
 	}
 }
 // @end

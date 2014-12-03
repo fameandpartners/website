@@ -40,10 +40,8 @@ javascript:
   .bridesmaid-pallete
     - @palette.color_groups.each do |group|
       - selection_status = @bridesmaid_event.colors.include?(group.name) ? 'selected' : ''
-      .pallete-color-group data-code=(group.name) class=(selection_status)
-        .pallete-color-group-wrap
-          - group.colors.each do |color|
-            .pallete-color style="background-color: #{ color.value };"
+      .pallete-color-group data-code=(group.name) class=(selection_status) class=(group.presentation.downcase)
+        = group.presentation
 
   = link_to '#', class: 'block-with-triangle', id: 'next-button' do
     span.text NEXT STEP
