@@ -285,6 +285,12 @@ a.block-with-triangle .text {
 		color: #fff;
 		background-color: $pinkColor;
 	}
+	&.pink-pale {
+		background: #e2b3b6;
+		font-size: 16px;
+		font-family: $fontOne;
+		letter-spacing: 0;
+	}
 	&.green {
 		color: #000;
 		background-color: $greenColor;
