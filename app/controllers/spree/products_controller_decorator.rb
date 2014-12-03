@@ -122,23 +122,21 @@ Spree::ProductsController.class_eval do
   end
 
   def new_show
-    details = Products::ProductDetailsResource.new(
-      site_version: current_site_version,
-      product: @product,
-      #selected_color: params[:color] 
-      selected_color: nil # don't work for now. don
-    ).read
+    @recommended_products = get_recommended_products(@product, limit: 4)
 
     if params[:color_name]
       @color = Spree::OptionValue.colors.find_by_name!(params[:color_name])
     end
 
+    @product = Products::ProductDetailsResource.new(
+      site_version: current_site_version,
+      product: @product,
+      selected_color: @color
+    ).read
+
     set_product_show_page_title(@product, @color.try(:presentation))
     display_marketing_banner
 
-    @recommended_products = get_recommended_products(@product, limit: 4)
-
-    @product = details
     respond_with(@product)
   end
 
@@ -148,7 +146,6 @@ Spree::ProductsController.class_eval do
     else
       @is_bride = false;
     end
-
 
     #Deface::Override.all[:"spree/products/show"].delete('promo_product_properties')
     if params[:show_old] #|| Rails.env.production?

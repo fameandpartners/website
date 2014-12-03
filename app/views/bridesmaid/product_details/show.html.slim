@@ -10,12 +10,14 @@ javascript:
 
   $(document).ready(function() {
     (function() {
-      window.page.newProductPageSelector = window.helpers.createNewProductPageSelector($('.product-page-2'));
-      window.page.newProductPageSelector.init(
+      productPageSelector = window.helpers.createNewProductPageSelector($('.product-page-2'));
+      productPageSelector.init(
         window.product_variants,
         window.product_master_id,
         window.incompatibility_map
       );
+
+      page.enableProductImagesSlider('.product-slider .dresses-slider', productPageSelector.colorInput);
     })(document);
 
     (function() {
@@ -61,8 +63,9 @@ javascript:
     .grid-8
       .product-slider
         ul.dresses-slider
-          - @product.images.each do |image|
-            li.text-center = image_tag image.large
+          - @product.images.each_with_index do |image, index|
+            li.text-center data-color-id=(image.color_id) id="product-image-slide-#{ index }"
+              = image_tag image.xlarge
     .grid-4
       .product-info
         .product-header

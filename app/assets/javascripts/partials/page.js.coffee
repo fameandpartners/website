@@ -111,6 +111,10 @@ window.page = {
       form = window.helpers.createPersonalisationForm(container)
       form.init(window.product_variants, window.product_master_variant, window.incompatibility_map)
       form
+
+  enableProductImagesSlider: (container, input) ->
+    if $(container).length > 0  and !!input
+      window.helpers.createProductImagesSlider(container, input)
 }
 
 #window.processWishListLinks = () ->

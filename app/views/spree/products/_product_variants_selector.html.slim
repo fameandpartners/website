@@ -4,12 +4,12 @@
     - if product.sizes.present?
       optgroup label="Standard sizes"
       - product.sizes.each do |size|
-        option data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
+        option selected=(size[:selected]) data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
 
     - if product.extra_sizes.present?
       optgroup label="#{(I18n.t('product.extra_size_price'))}"
         - product.extra_sizes.each do |size|
-          option data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
+          option selected=(size[:selected]) data-id=(size[:id]) class="size" value=(size[:value]) = size[:title]
 
 .product-row
   select.selectbox.selectbox-large.selectbox-colors.selectbox-text-center id="colour" data-placeholder="Select color"

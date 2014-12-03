@@ -11,12 +11,6 @@ $(function(){
   window.initHoverableProductImages();
 
   $("abbr.timeago").timeago();
-
-  $('.product-slider .dresses-slider').bxSlider({
-    controls: true,
-    nextText: '<span class="icon-arrow-right" />',
-    prevText: '<span class="icon-arrow-left" />'
-  });
 });
 /*
 $('body.blog').ready(function(){
