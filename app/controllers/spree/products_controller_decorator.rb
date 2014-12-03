@@ -141,10 +141,11 @@ Spree::ProductsController.class_eval do
   end
 
   def show
-    if current_spree_user.bridesmaid_party_events.first.status == 2
-      @is_bride = true;
-    else
-      @is_bride = false;
+    @is_bride = false;
+    if current_spree_user.present?
+      if bridesmaid_party_events.first.status == 2
+        @is_bride = true;
+      end
     end
 
     #Deface::Override.all[:"spree/products/show"].delete('promo_product_properties')
