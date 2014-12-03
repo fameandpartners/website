@@ -35,7 +35,8 @@ javascript:
 
   .bride-instructions
     / -- DISPLAY IF USER IS BRIDE
-    = image_tag('_bridesmaid/product_instructions.jpg')
+    if @is_bride
+      = image_tag('_bridesmaid/product_instructions.jpg')
 
   / .product-alert
     / -- DONT IMPLEMENT THIS FOR NOW

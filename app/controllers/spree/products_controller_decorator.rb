@@ -143,8 +143,14 @@ Spree::ProductsController.class_eval do
   end
 
   def show
-    #Deface::Override.all[:"spree/products/show"].delete('promo_product_properties')
+    if current_spree_user.bridesmaid_party_events.first.status == 2
+      @is_bride = true;
+    else
+      @is_bride = false;
+    end
 
+
+    #Deface::Override.all[:"spree/products/show"].delete('promo_product_properties')
     if params[:show_old] #|| Rails.env.production?
       old_show
       render template: 'spree/products/old_show'
