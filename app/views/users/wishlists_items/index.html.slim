@@ -1,7 +1,83 @@
 javascript:
   $(document).ready(function() {
-    $('a[data-action=share-moodboard]').on('click', function(){
-      $('.modal.share-moodboard').modal('show')
+    function addBridesmaidRow(){
+      var $form = $('#share-moodboard .form');
+      var $tpl  = $form.find('.row.template');
+
+      var $row = $tpl.clone();
+      $row.css({display: 'block'});
+      $row.find(':input').attr('disabled', false);
+      $row.removeClass('template');
+
+      var $last = $form.find('.row.note, .row.bridesmaid:not(.template)').last();
+      $last.after($row);
+    }
+
+    function collectData(){
+      var $form = $('#share-moodboard .form');
+      var $rows = $form.find('.row.bridesmaid:not(.template)');
+      var data = {};
+
+      data['note'] = $form.find(':input[name="note"]').val();
+      data['friends'] = [];
+
+      _.each($rows, function (element) {
+        var $element = $(element);
+        var name  = $element.find(':input[name="name"]').val();
+        var email = $element.find(':input[name="email"]').val();
+
+        if (!!email && !!name) {
+          data['friends'].push({
+            full_name: name,
+            email: email
+          });
+        }
+      });
+
+      return data;
+    }
+
+    $('a[data-action=show-share-modal]').on('click', function(event){
+      event.preventDefault();
+
+      var $modal = $('#share-moodboard');
+
+      _.times(4, addBridesmaidRow);
+
+      $modal.show();
+
+      $modal.find('.close').one('click', function (event) {
+        event.preventDefault();
+
+        $modal.find('.row.bridesmaid:not(.template)').remove();
+        $modal.hide();
+      })
+    });
+
+    $('a[data-action=add-friend]').on('click', function(event){
+      event.preventDefault();
+
+      addBridesmaidRow();
+    });
+
+    $('a[data-action=send-data]').on('click', function (event) {
+      event.preventDefault();
+
+      var $modal = $('#share-moodboard');
+      var data = collectData();
+
+      if (!_.isEmpty(data['friends'])) {
+        $.ajax({
+          url: '/bridesmaid-party/share',
+          type: 'POST',
+          dataType: 'json',
+          data: data,
+          complete: function (data) {
+            $modal.find('.row.bridesmaid:not(.template)').remove();
+            $modal.hide();
+          }
+        });
+      }
     });
   });
 
@@ -14,7 +90,8 @@ javascript:
         - if @items.size == 0
           p Sorry, there are no items in your moodboard
         - else
-          = link_to 'Share with Bridesmaids', '#', data: { action: 'share-moodboard' }, class: 'btn share-moodboard'
+          - if current_spree_user.bridesmaid_party_events.present?
+            = link_to 'Share with Bridesmaids', '#', data: { action: 'show-share-modal' }, class: 'btn share-moodboard'
           ul.products-list
             - @items.each do |item|
               - variant = item.variant
@@ -55,33 +132,24 @@ javascript:
         span.error.message(style="display: none;") Please, select size and color
         input.btn.black type="submit" value="Share"
 
-.modal.send-to-friends style="display: none;"
+.popup-placeholder#share-moodboard style="display: none;"
   .overlay
-  .modal-container
-    .close-lightbox
-    .edit-details
-      .modal-title Send this moodboard to your friends
-      .form
-        .row
-          .grid-12
-            .input
-              textarea placeholder="Enter a note, if you like." rows="4"
-        .row
-          .grid-6
-            .input
-              input type="text" placeholder="Name"
-          .grid-6
-            .input
-              input type="text" placeholder="Email address"
-        .row
-          .grid-6
-            .input
-              input type="text" placeholder="Name"
-          .grid-6
-            .input
-              input type="text" placeholder="Email address"
-        .submit-form.text-center
-          = link_to 'Add more friends +', '#', class: 'btn mid black'
-
-      .save.text-center
-        input.btn.black type="submit" value="SEND TO FRIENDS"
+  .modal-container.share-popup
+    .close-lightbox.close
+    .modal-title Send this moodboard to your friends
+    .grid-container.form
+      .row.note
+        .grid-12
+          .string
+            textarea name="note" placeholder="Enter a note, if you like."
+      .row.bridesmaid.template style="display: none;"
+        .grid-6
+          .string
+            input type="text" name="name" disabled="disabled" required="required" placeholder="Name"
+        .grid-6
+          .string
+            input type="email" name="email" disabled="disabled" required="required" placeholder="Email address"
+    .add-more
+      = link_to '+ Add more friends', '#', data: { action: 'add-friend' }
+    .buttons
+      = link_to 'Send to friends', '#', class: 'btn', data: { action: 'send-data' }

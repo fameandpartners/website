@@ -13,6 +13,17 @@ module BridesmaidParty
               presence: true,
               uniqueness: true
 
+    validates :email,
+              presence: true,
+              uniqueness: {
+                allow_blank: true,
+                scope: :event_id
+              },
+              format: {
+                allow_blank: true,
+                with: Devise.email_regexp
+              }
+
     def full_name
       [first_name, last_name].reject(&:blank?).join(' ')
     end

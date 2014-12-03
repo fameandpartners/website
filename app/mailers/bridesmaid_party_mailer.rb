@@ -33,7 +33,9 @@ class BridesmaidPartyMailer < ActionMailer::Base
 
   def invite(bridesmaid_member)
     email = bridesmaid_member.spree_user.try(:email) || bridesmaid_member.email
-    @bride_name = bridesmaid_member.event.spree_user.full_name
+    @bride = bridesmaid_member.event.spree_user
+    @membership = bridesmaid_member
+
 
     mail(
       to: email,

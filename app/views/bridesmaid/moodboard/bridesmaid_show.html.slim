@@ -59,34 +59,3 @@ javascript:
       .save
         span.error.message(style="display: none;") Please, select size and color
         input.btn.black type="submit" value="Share"
-
-.modal.send-to-friends style="display: none;"
-  .overlay
-  .modal-container
-    .close-lightbox
-    .edit-details
-      .modal-title Send this moodboard to your friends
-      .form
-        .row
-          .grid-12
-            .input
-              textarea placeholder="Enter a note, if you like." rows="4"
-        .row
-          .grid-6
-            .input
-              input type="text" placeholder="Name"
-          .grid-6
-            .input
-              input type="text" placeholder="Email address"
-        .row
-          .grid-6
-            .input
-              input type="text" placeholder="Name"
-          .grid-6
-            .input
-              input type="text" placeholder="Email address"
-        .submit-form.text-center
-          = link_to 'Add more friends +', '#', class: 'btn mid black'
-
-      .save.text-center
-        input.btn.black type="submit" value="SEND TO FRIENDS"
