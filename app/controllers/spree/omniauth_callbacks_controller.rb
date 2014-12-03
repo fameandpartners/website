@@ -28,12 +28,16 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
             end
 
+            try_apply_bridesmaid_party_callback(authentication.user)
+
             redirect_to after_sign_in_path_for(authentication.user)
           elsif spree_current_user
             spree_current_user.apply_omniauth(auth_hash)
             spree_current_user.save
 
             FacebookDataFetchWorker.perform_async(spree_current_user.id, auth_hash['uid'], auth_hash['credentials']['token'])
+
+            try_apply_bridesmaid_party_callback(spree_current_user)
 
             flash[:notice] = "Authentication successful."
             redirect_back_or_default(account_url)
@@ -68,17 +72,19 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
                 session[:spree_user_return_to] = main_app.personalization_products_path(cf: 'custom-dresses-signup')
               end
 
+              try_apply_bridesmaid_party_callback(user)
+
               redirect_to after_sign_in_path_for(user)
             else
               session[:omniauth] = auth_hash.except('extra')
               flash[:notice] = t(:one_more_step, :kind => auth_hash['provider'].capitalize)
-              redirect_to main_app.new_user_registration_url
+              redirect_to main_app.new_spree_user_registration_url
             end
           end
 
           if current_order
-            user = spree_current_user || authentication.user
-            current_order.associate_user!(user)
+            user ||= (spree_current_user || authentication.try(:user))
+            current_order.associate_user!(user) if user.present?
             session[:guest_token] = nil
           end
         end
@@ -101,5 +107,17 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def auth_hash
     request.env["omniauth.auth"]
+  end
+
+  private
+
+  def try_apply_bridesmaid_party_callback(user)
+    if session[:bridesmaid_party_membership_id]
+      membership = BridesmaidParty::Member.find(session[:bridesmaid_party_membership_id])
+      if membership
+        membership.update_column(:spree_user_id, user.id)
+        session[:spree_user_return_to] = main_app.bridesmaid_party_moodboard_path(user_slug: membership.event.spree_user.slug)
+      end
+    end
   end
 end

@@ -31,6 +31,8 @@ javascript:
         dateFormat: 'yy-mm-dd'
       })
 
+      $('#ui-datepicker-div').addClass("bridesmaid_wedding_date_picker")
+
       $('#unknown_wedding_date').on('change', function(e) {
         $checkbox = $(e.currentTarget);
         if ($checkbox.is(':checked')) {

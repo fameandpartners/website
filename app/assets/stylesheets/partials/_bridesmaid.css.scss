@@ -227,6 +227,36 @@
 }
 // @end
 
+
+// datepicker
+.bridesmaid_wedding_date_picker{
+	.ui-datepicker-header{
+		background-color: #182139;
+		font: 300 17px $fontThree, serif;
+		text-transform: uppercase;		
+	}
+
+	button.ui-datepicker-close{
+		background-color: #182139;
+		font: 300 17px $fontThree, serif;
+		text-transform: uppercase;
+	}
+	
+	th{
+		font: 300 14px $fontThree, serif;
+		text-transform: uppercase;
+	}
+	td{
+		.ui-state-default{
+			background-color: #fcf6f0;
+		}
+
+		.ui-state-active{
+			background-color: #c6c6d4;
+		}
+	}
+}
+// @end
 // Palette
 
 .bridesmaid-pallete {
