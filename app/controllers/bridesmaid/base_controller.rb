@@ -17,7 +17,7 @@ class Bridesmaid::BaseController < ApplicationController
   rescue_from Bridesmaid::Errors::MoodboardOwnerNotFound, with: :redirect_to_main_app
   rescue_from Bridesmaid::Errors::MoodboardAccessDenied, with: :redirect_to_landing_page
 
-  before_filter :hide_module
+  #before_filter :hide_module
 
   protected
 

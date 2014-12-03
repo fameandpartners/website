@@ -11,6 +11,7 @@ class Bridesmaid::Moodboard
     OpenStruct.new({
       title:    title,
       owner:    moodboard_owner,
+      is_owner: is_owner,
       products: moodboard_products
     })
   end
@@ -19,6 +20,10 @@ class Bridesmaid::Moodboard
 
     def title
       @title ||= "#{ moodboard_owner.full_name }'s mooodboard"
+    end
+
+    def is_owner
+      accessor == moodboard_owner
     end
 
     def currency
@@ -73,10 +78,13 @@ class Bridesmaid::Moodboard
     end
 
     def build_item(item)
+      variant_id  = item.spree_variant_id
+      color_id    = item.product_color_id
+
       OpenStruct.new(
         id: item.product.id,
         master_id: item.product.master.id,
-        variant_id: item.spree_variant_id,
+        variant_id: variant_id,
         variants: [item.spree_variant_id],
         name: item.product.name,
         permalink: item.product.permalink,
@@ -84,7 +92,8 @@ class Bridesmaid::Moodboard
         image_url: product_image(item),
         price: product_price(item),
         path: product_path(item),
-        'removable?' => can_manage?
+        'removable?' => can_manage?,
+        bridesmaides: is_owner ? get_bridesmaides_for_item(item, variant_id, color_id) : []
       )
     end
 
@@ -124,5 +133,23 @@ class Bridesmaid::Moodboard
       color = item.color || item.variant.dress_color
       path_parts.push(color.name) if color.present?
       "/" + path_parts.join('/')
+    end
+
+    def bridesmaids
+      @bridesmaids ||= bridesmaid_party_event.members.includes(:spree_user)
+    end
+
+    def get_bridesmaides_for_item(item, variant_id, color_id)
+      bridesmaids_selected = bridesmaids.select do |bridesmaid| 
+        bridesmaid.color_id == color_id || bridesmaid.variant_id == variant_id
+      end
+
+      bridesmaids_selected.collect do |bridesmaid|
+        OpenStruct.new({
+          name: bridesmaid.spree_user.try(:full_name) || bridesmaid.full_name,
+          size: Spree::Variant.size_option_type.option_values.where(id: bridesmaid.size).first.try(:name),
+          color: Spree::Variant.color_option_type.option_values.where(id: bridesmaid.color_id).first.try(:name)
+        })
+      end
     end
 end
