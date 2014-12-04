@@ -62,30 +62,11 @@ class Bridesmaid::Moodboard
     def build_item(item)
       item.path = product_path(item)
       item.is_removable = can_manage?
-      item.bridesmaides = is_owner ? get_bridesmaides_for_item(item.variant_id, item.color.try(:id)) : []
       item
     end
 
     def can_manage?
       accessor == moodboard_owner
-    end
-
-    def bridesmaids
-      @bridesmaids ||= bridesmaid_party_event.members.includes(:spree_user)
-    end
-
-    def get_bridesmaides_for_item(variant_id, color_id)
-      bridesmaids_selected = bridesmaids.select do |bridesmaid| 
-        bridesmaid.color_id == color_id || bridesmaid.variant_id == variant_id
-      end
-
-      bridesmaids_selected.collect do |bridesmaid|
-        OpenStruct.new({
-          name: bridesmaid.spree_user.try(:full_name) || bridesmaid.full_name,
-          size: Spree::Variant.size_option_type.option_values.where(id: bridesmaid.size).first.try(:name),
-          color: Spree::Variant.color_option_type.option_values.where(id: bridesmaid.color_id).first.try(:name)
-        })
-      end
     end
 
     #'/moodboard/:user_slug/dress-:product_slug(/:color_name)'

@@ -75,7 +75,11 @@ class UserWishlist
 
     def product_image(product, color)
       product_images = Repositories::ProductImages.new(product: product).read_all
-      product_images.find{|image| image.color_id == color.id }.try(:large) || product_images.first.try(:large)
+      image = nil
+      if color.try(:id).present?
+        image = product_images.find{|image| image.color_id == color.id }.try(:large) 
+      end
+      image ||= product_images.first.try(:large)
     end
 
     def product_price(item)

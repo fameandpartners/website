@@ -10,12 +10,18 @@ class Bridesmaid::SelectedProductsController < Bridesmaid::BaseController
       site_version: current_site_version,
       variant_id: params[:id],
       color: color,
-      size: size
+      size: size,
+      customizations: params[:customization_value_ids]
     ).update
 
     render json: {}, status: :ok
-  #rescue
-  #  render json: {}, status: :error
+  rescue
+    render json: {}, status: :error
+  end
+
+  # bride can move this item to cart
+  def add_to_cart
+    raise 'user moved bridesmaid product to cart'
   end
 
   private

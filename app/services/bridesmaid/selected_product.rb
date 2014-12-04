@@ -1,17 +1,19 @@
 class Bridesmaid::SelectedProduct
-  attr_reader :accessor, :site_version, :moodboard_owner, :product, :variant_id, :color, :size
+  attr_reader :accessor, :site_version, :moodboard_owner, :product, :variant_id, :color, :size, :customizations
 
   def initialize(options = {})
     @accessor         = options[:accessor]
+    @site_version     = options[:site_version]
     @moodboard_owner  = options[:moodboard_owner]
     @product          = options[:product]
     @variant_id       = options[:variant_id]
     @color            = options[:color]
     @size             = options[:size]
-    @site_version     = options[:site_version]
+    @customizations   = Array.wrap(options[:customizations])
   end
 
   def update
+    validate!
     update_member_selection
     update_bride_moodboard
     notify_bride
@@ -21,11 +23,19 @@ class Bridesmaid::SelectedProduct
 
   private
 
+    # size, color, product should be
+    def validate!
+      if color.blank? || size.blank? || product.blank? || variant_id.blank?
+        raise 'Invalid Settings' 
+      end
+    end
+
     def update_member_selection
       if member.present?
         member.variant_id = product_variant.id
         member.size = size.try(:id)
         member.color_id = color.try(:id)
+        member.customization_value_ids = customizations
         member.save!
       end
     end

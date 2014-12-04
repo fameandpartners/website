@@ -79,19 +79,22 @@ javascript:
 
         = render 'spree/products/product_variants_selector', product: @product
 
-        - if @bridesmaid_user_profile.owned_by?(current_spree_user)
+        /- if @bridesmaid_user_profile.owned_by?(current_spree_user)
           .product-row
             - moodboard_link_data = { 'title-add' => 'add to bridesmaid moodboard', 'title-remove' => 'Remove from bridesmaid moodboard', 'action' => 'add-to-wishlist', 'product-id' => @product.id, 'id' => @product.master_id, 'color-id' => nil }
             = link_to '+ bridesmaid moodboard', @product.path, class: 'btn large pink wide wish-list-link', data: moodboard_link_data
-        - elsif @bridesmaid_user_profile.paying_for_bridesmaids
+        /- elsif @bridesmaid_user_profile.paying_for_bridesmaids
           .product-row
-            = link_to 'send to bride', @product.path, class: 'btn large grey wide send-to-bride', data: { action: 'send-to-bride' }
-        - else
+            = link_to "Send to Bride", @product.path, class: 'btn large grey wide send-to-bride', data: { action: 'send-to-bride' }
+        /- else
           .product-row
             = link_to 'buy now', '#', class: 'btn large grey wide buy-now', data: { action: 'buy' }
-
-        /.product-row
-          = link_to 'send to bride', @product.path, class: 'btn large grey wide send-to-bride', data: { action: 'send-to-bride' }
+        - if @bridesmaid_user_profile.paying_for_bridesmaids
+          .product-row
+            = link_to "Send to Bride", @product.path, class: 'btn large grey wide send-to-bride', data: { action: 'send-to-bride' }
+        - else
+          .product-row
+            = link_to 'Buy Now', '#', class: 'btn large grey wide buy-now', data: { action: 'buy' }
 
         .product-row
           .row

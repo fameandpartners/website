@@ -79,6 +79,23 @@ javascript:
         });
       }
     });
+
+    (function() {
+      $('a[data-action=buy-for-bridesmaid]').on('click', function (e) {
+        e.preventDefault();
+        $link = $(e.currentTarget)
+
+        $.ajax({
+          url: $link.attr('href'),
+          type: 'POST',
+          dataType: 'json',
+          data: {},
+          complete: function (data) {
+            $link.addClass('added');
+          }
+        });
+      });
+    })(document);
   });
 
 .wrap
@@ -86,10 +103,12 @@ javascript:
     .tabs
       = render 'users/shared/tabs', active_tab: 'wishlist'
       #wishlist.tab-content
-        .bridesmaid-moodboard
-          .header
-            .name My
-            .info moodboard
+        - if @moodboard.bride_moodboard
+          .bridesmaid-moodboard
+            .header
+              .name My
+              .info moodboard
+
         - if @moodboard.products.blank?
           p Sorry, there are no items in your moodboard
         - else
@@ -111,6 +130,13 @@ javascript:
                 .add-remove.clearfix
                   = link_to 'Move to cart', move_to_cart_wishlists_item_path(product.item_id), class: 'add-to-cart master btn mid fleft', remote: true
                   = link_to 'Remove', wishlists_item_path(product.item_id), class: 'btn mid border empty remove fright', method: :delete, remote: true
+
+                - if product.bridesmaides.present?
+                  .add-remove.clearfix
+                    - product.bridesmaides.each do |bridesmaid|
+                      - name = "Add '#{ bridesmaid.color } #{bridesmaid.size }' for #{ bridesmaid.name }"
+                      = link_to name, bridesmaid_add_for_bridesmaid_path(id: bridesmaid.id), class: 'btn small', data: { action: 'buy-for-bridesmaid' }
+
 
 .modal.edit-line-item(style="display: none;")
   .overlay
