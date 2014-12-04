@@ -5,11 +5,12 @@
 # Display dress variants at the top of the page that match the colours the user selected 
 # when they completed the questionnaire.
 class Bridesmaid::Products
-  attr_reader :site_version, :profile
+  attr_reader :site_version, :profile, :collection
 
   def initialize(options = {})
     @site_version = options[:site_version]
     @profile      = options[:profile]
+    @collection   = Array.wrap(options[:collection])
     @taxon_ids    = options[:taxon_ids]
     @body_shapes  = options[:body_shapes]
   end
@@ -24,6 +25,10 @@ class Bridesmaid::Products
 
     def search_results
       @search_results ||= build_search_query.results
+    end
+
+    def taxon_ids
+      collection.map(&:id).compact | Array(@taxon_ids)
     end
 
     def color_ids
@@ -117,7 +122,7 @@ class Bridesmaid::Products
       # to make them visible inside Tire.search block
       colors      = color_ids
       body_shapes = @body_shapes
-      taxon_ids   = @taxon_ids
+      taxons      = @taxon_ids
 
       Tire.search(:color_variants, size: 1000) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false, 'product.is_hidden' => false } } 
@@ -132,8 +137,8 @@ class Bridesmaid::Products
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
 
-        if taxon_ids.present?
-          filter :terms, 'product.taxon_ids' => taxon_ids
+        if taxons.present?
+          filter :terms, 'product.taxon_ids' => taxons
         end
 
         if body_shapes.present?

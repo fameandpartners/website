@@ -9,7 +9,7 @@ class Bridesmaid::SimilarProducts
 
   def initialize(options = {})
     @site_version = options[:site_version]
-    @collection   = options[:collection]
+    @collection   = Array.wrap(options[:collection])
     @taxon_ids    = options[:taxon_ids]
     @body_shapes  = options[:body_shapes]
     @products_ids = options[:except]
@@ -32,7 +32,7 @@ class Bridesmaid::SimilarProducts
     end
 
     def taxon_ids
-      [collection.try(:id)].compact | Array(@taxon_ids)
+      collection.map(&:id).compact | Array(@taxon_ids)
     end
 
     def locale
@@ -130,7 +130,6 @@ class Bridesmaid::SimilarProducts
             }
           }
         end
-
         if body_shapes.present?
           if body_shapes.size.eql?(1)
             filter :bool, :should => {

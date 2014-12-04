@@ -23,6 +23,7 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
       @products_resource ||= Bridesmaid::Products.new(
         site_version: current_site_version,
         profile: bridesmaid_user_profile,
+        collection: bridesmaid_dresses_collection,
         taxon_ids: search_params.taxon_ids,
         body_shapes: search_params.body_shapes
       )
@@ -35,7 +36,7 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
     def similar_products_resource(product_ids = [])
       @similar_products_resource ||= Bridesmaid::SimilarProducts.new(
         site_version: current_site_version,
-        collection:   bridesmaid_party_collection,
+        collection:   bridesmaid_dresses_collection,
         taxon_ids:    search_params.taxon_ids,
         body_shapes:  search_params.body_shapes,
         except:       product_ids
@@ -49,9 +50,10 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
       )
     end
 
-    def bridesmaid_party_collection
-      @bridesmaid_party_collection ||= begin
-        Spree::Taxon.where(["permalink = ? or permalink = ?", 'edits/Bridesmaid14', 'Bridesmaid14']).first
+    def bridesmaid_dresses_collection
+      @bridesmaid_dresses_collection ||= begin
+        permalinks = ["edits/bridesmaidother", "edits/bridesmaidother", "edits/bridesmaid14", "bridesmaid14"]
+        Spree::Taxon.where(["permalink in (?)", permalinks]).to_a
       end
     end
 end
