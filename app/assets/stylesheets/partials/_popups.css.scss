@@ -736,4 +736,19 @@
 			}
 		}
 	}
+	.buttons {
+		position: relative;
+	}
+	.alert-success {
+		display: none;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 240px;
+		background: #39b54a;
+		color: #fff;
+		padding: 6px 10px;
+		text-align: center;
+		font-size: 10px;
+	}
 }
