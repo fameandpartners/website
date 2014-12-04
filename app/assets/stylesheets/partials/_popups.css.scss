@@ -727,6 +727,17 @@
 	.string {
 		margin: 0 10px 30px;
 	}
+	.error {
+		input {
+			border-color: #cc0000 !important;
+			box-shadow: #cc0000 0px 0px, #cc0000 1px 1px, #cc0000 2px 2px, #cc0000 3px 3px, #cc0000 4px 4px, #cc0000 5px 5px !important;
+		}
+		.error-message {
+			color: #cc0000;
+			margin-top: 10px;
+			text-align: left;
+		}
+	}
 	.add-more {
 		margin: 0 0 20px;
 		font-size: 16px;
@@ -739,16 +750,21 @@
 	.buttons {
 		position: relative;
 	}
-	.alert-success {
+	.alert {
 		display: none;
 		position: absolute;
 		right: 0;
 		top: 0;
 		width: 240px;
-		background: #39b54a;
 		color: #fff;
 		padding: 6px 10px;
 		text-align: center;
 		font-size: 10px;
+	}
+	.alert-success {
+		background: #39b54a;
+	}
+	.alert-error {
+		background: #cc0000;
 	}
 }
