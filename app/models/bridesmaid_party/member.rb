@@ -24,6 +24,9 @@ module BridesmaidParty
                 with: Devise.email_regexp
               }
 
+    default_value_for :customization_value_ids, []
+    serialize :customization_value_ids, Array
+
     def full_name
       [first_name, last_name].reject(&:blank?).join(' ')
     end
