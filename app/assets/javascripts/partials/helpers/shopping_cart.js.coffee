@@ -64,7 +64,7 @@ window.shopping_cart = _.extend(window.shopping_cart,
       type: "POST"
       dataType: "json"
       data: window.shopping_cart.prepareParams(options)
-      success: window.shopping_cart.buildSuccessCallback([
+      success: window.shopping_cart.buildOnSuccessCallback([
         "item_removed"
         "moved_to_wishlist"
       ], variantId, options.success)
