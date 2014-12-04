@@ -6,10 +6,14 @@ class Users::WishlistsItemsController < Users::BaseController
   before_filter :load_user
 
   def index
-    @title = 'My Moodboard'
-    @items = @user.wishlist_items.includes(:variant, :product)
+    @moodboard = Wishlist::UserWishlistResource.new(
+      site_version: current_site_version,
+      owner: current_spree_user
+    ).read
 
-    respond_with(@items) do |format|
+    @title = @moodboard.title
+
+    respond_with(@moodboard) do |format|
       format.html {}
       format.js   {}
     end

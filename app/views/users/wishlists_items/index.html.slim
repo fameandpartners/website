@@ -87,39 +87,30 @@ javascript:
       = render 'users/shared/tabs', active_tab: 'wishlist'
       #wishlist.tab-content
         .bridesmaid-moodboard
-          /.header
-            .name Bride's name
-            .info moodboard
-          / For bridesmaid uncomment above & comment below
           .header
             .name My
             .info moodboard
-          /.intro Brides's name has chosen these dresses for you, she thinks you would look fantastic wearing any of them but would like you to select yours and customise it to create the perfect one for you. Click on your favourite dress to start customising it!
-        - if @items.size == 0
+        - if @moodboard.products.blank?
           p Sorry, there are no items in your moodboard
         - else
           - if current_spree_user.bridesmaid_party_events.present?
             = link_to 'Share with Bridesmaids', '#', data: { action: 'show-share-modal' }, class: 'btn share-moodboard'
-          ul.products-list
-            - @items.each do |item|
-              - variant = item.variant
-              - product = variant.product
 
-              li.product-item data-id=item.id
+          ul.products-list
+            - @moodboard.products.each do |product|
+              li.product-item data-id=(product.id)
                 .thumbnail
                   .actions.clearfix
-                    /.like.fright = add_to_wishlist_link(variant)
-                    .quick-view.fleft = quick_view_link(product)
-                  = link_to wishlist_item_product_with_color_path(item) do
-                    = image_tag wishlist_item_color_image(item), itemprop: "image", width: 243, height: 352, alt: product.name
-                .name = link_to product.name, collection_product_path(product)
-                .price = price_for_product(product)
+                    .quick-view.fleft
+                      = link_to 'Quick view', product.path, data: { action: 'quick-view', id: product.permalink }
+                  = link_to product.path do
+                    = image_tag product.image_url, itemprop: "image", width: 243, height: 352, alt: product.name
+
+                .name = link_to product.name, product.path
+                .price = product.price.display_price
                 .add-remove.clearfix
-                  = wishlist_move_to_cart_link(item)
-                  = link_to 'Remove', wishlists_item_path(item), class: 'btn mid border empty remove fright', method: :delete, remote: true
-                / For bridesmain comment .add-remove & price above, uncomment below
-                /.add-remove.clearfix
-                  = link_to 'Start customising!', '#', class: 'btn pink-pale wide'
+                  = link_to 'Move to cart', move_to_cart_wishlists_item_path(product.item_id), class: 'add-to-cart master btn mid fleft', remote: true
+                  = link_to 'Remove', wishlists_item_path(product.item_id), class: 'btn mid border empty remove fright', method: :delete, remote: true
 
 .modal.edit-line-item(style="display: none;")
   .overlay
