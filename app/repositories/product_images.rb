@@ -7,11 +7,23 @@ class ProductImages
   end
 
   def read_all
-    @images ||= (images_from_variants + images_from_product_color_values).flatten.compact
+    Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
+      (images_from_variants + images_from_product_color_values).flatten.compact.sort_by {|image| image.position }
+    end
   end
   alias_method :read, :read_all
 
   private
+
+    def cache_key
+      "product-images-#{ product.permalink }"
+    end
+
+    def cache_expiration_time
+      return configatron.cache.expire.quickly if Rails.env.development?
+      return configatron.cache.expire.quickly if Rails.env.staging?
+      return configatron.cache.expire.long
+    end
 
     def images_from_variants
       results = []
