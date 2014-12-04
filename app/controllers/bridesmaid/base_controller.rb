@@ -8,6 +8,8 @@ class Bridesmaid::BaseController < ApplicationController
   class Bridesmaid::Errors::ProfileNotCompleted < StandardError; end
   class Bridesmaid::Errors::MoodboardOwnerNotFound < StandardError; end
   class Bridesmaid::Errors::MoodboardAccessDenied < StandardError; end
+  class Bridesmaid::Errors::MoodboardNotReady < StandardError; end
+  class Bridesmaid::Errors::MoodboardNotAvailable < StandardError; end
 
   rescue_from Bridesmaid::Errors::SpreeUserNotLoggedIn, with: :redirect_to_landing_page
   rescue_from Bridesmaid::Errors::SpreeUserLoggedIn, with: :redirect_to_details_page
@@ -16,6 +18,8 @@ class Bridesmaid::BaseController < ApplicationController
   rescue_from Bridesmaid::Errors::ProfileNotCompleted, with: :redirect_to_color_selection_page
   rescue_from Bridesmaid::Errors::MoodboardOwnerNotFound, with: :redirect_to_main_app
   rescue_from Bridesmaid::Errors::MoodboardAccessDenied, with: :redirect_to_landing_page
+  rescue_from Bridesmaid::Errors::MoodboardNotReady, with: :redirect_to_landing_page
+  rescue_from Bridesmaid::Errors::MoodboardNotAvailable, with: :redirect_to_bride_moodboard
 
   #before_filter :hide_module
 
@@ -57,6 +61,10 @@ class Bridesmaid::BaseController < ApplicationController
 
     def redirect_to_color_selection_page(exception)
       redirect_to bridesmaid_party_colour_path
+    end
+
+    def redirect_to_bride_moodboard(exception)
+      redirect_to wishlist_path
     end
     # eo of code, related to exceptions handling
 

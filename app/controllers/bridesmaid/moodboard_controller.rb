@@ -48,17 +48,20 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
       raise Bridesmaid::Errors::MoodboardOwnerNotFound if moodboard_owner.blank?
     end
 
-    # check user access
+    # bride shouldn't view this page.
+    # instead, we should redirect to own moodboard
     def check_availability!
-      if moodboard_owner.id == current_spree_user.id
-        @bride_viewing = true
-        return true 
-      else
-        @bridesmaid_viewing = true
+      if !moodboard_owner.bridesmaid_party_events.first.completed?
+        raise Bridesmaid::Errors::MoodboardNotReady
       end
+      #if moodboard_owner.id == current_spree_user.id
+      #  raise Bridesmaid::Errors::MoodboardNotReady
+      #end
 
-      return true if moodboard_owner.bridesmaid_party_events.first.completed?
-
-      raise Bridesmaid::Errors::MoodboardAccessDenied
+      #if !bridesmaid_party_event.members.where(
+      #  "spree_user_id = ? or email = ?", current_spree_user.id, current_spree_user.email
+      #).exists?
+      #  raise Bridesmaid::Errors::MoodboardAccessDenied
+      #end
     end
 end

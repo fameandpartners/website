@@ -458,7 +458,6 @@ FameAndPartners::Application.routes.draw do
       delete '/moodboard/:user_slug/:variant_id' => 'moodboard#destroy_item',
         as: :bridesmaid_party_delete_moodboard_item
       get '/:user_slug' => 'landings#bridesmaid', as: :bridesmaid_signup
-      get '/bridesmaid-moodboard/:user_slug' => 'moodboard#bridesmaid_show', as: :bridesmaid_moodboard
 
       post '/share' => 'memberships#create'
     end
