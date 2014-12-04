@@ -2,31 +2,16 @@
 # wishlist
 class Bridesmaid::MoodboardController < Bridesmaid::BaseController
   before_filter :require_user_logged_in!
-  before_filter :require_completed_profile!, only: [:share]
 
   def show
     load_moodboard_owner!
     check_availability!
 
-
-
     @moodboard = moodboard_resource.read
     @brides_name = moodboard_owner.full_name
-    set_page_titles(title: @moodboard.title)
-  end
-
-  # NOT NEEDED?
-  def bridesmaid_show
-    load_moodboard_owner!
-    check_availability!
-
-
-
-    @moodboard = moodboard_resource.read
 
     set_page_titles(title: @moodboard.title)
   end
-
 
   def destroy_item
     # not moodboard owner, user can delete only own items
@@ -34,25 +19,6 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
     respond_to do |format|
       format.json do
         render json: { variant_id: params[:variant_id] }, status: :ok
-      end
-    end
-  end
-
-  def share
-    event = bridesmaid_user_profile
-
-    note = params[:note]
-    friends = params[:friends].values
-
-    friends.each do |friend|
-      first_name, last_name = friend[:full_name].split(' ')
-      membership = event.members.build
-      membership.first_name = first_name
-      membership.last_name = last_name
-      membership.email = friend[:email]
-
-      if membership.save
-        BridesmaidPartyMailer.delay.invite(membership)
       end
     end
   end

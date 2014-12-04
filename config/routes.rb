@@ -460,7 +460,7 @@ FameAndPartners::Application.routes.draw do
       get '/:user_slug' => 'landings#bridesmaid', as: :bridesmaid_signup
       get '/bridesmaid-moodboard/:user_slug' => 'moodboard#bridesmaid_show', as: :bridesmaid_moodboard
 
-      post '/share' => 'moodboard#share'
+      post '/share' => 'memberships#create'
     end
 
     resources :site_versions, only: [:show]
