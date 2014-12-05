@@ -21,7 +21,34 @@ class Bridesmaid::SelectedProductsController < Bridesmaid::BaseController
 
   # bride can move this item to cart
   def add_to_cart
-    raise 'user moved bridesmaid product to cart'
+    service = Bridesmaid::AddDressSelectedByBridesmaidToCart.new(
+      site_version: current_site_version,
+      accessor: current_spree_user,
+      cart: current_order(true),
+      membership_id: params[:id],
+      promotion: current_promotion
+    )
+    product = service.process
+
+    current_order.reload
+
+    respond_to do |format|
+      format.html { redirect_to(wishlist_path) }
+      format.json {
+        render json: {
+          order: CartSerializer.new(current_order).to_json,
+          analytics_label: analytics_label(:product, product)
+        }
+      }
+    end
+  rescue Exception => e
+    raise e if Rails.env.development?
+    respond_to do |format|
+      format.html { redirect_to(wishlist_path) }
+      format.json {
+        render json: {}, status: :error
+      }
+    end
   end
 
   private

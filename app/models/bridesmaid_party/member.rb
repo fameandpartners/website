@@ -27,6 +27,8 @@ module BridesmaidParty
     default_value_for :customization_value_ids, []
     serialize :customization_value_ids, Array
 
+    belongs_to :variant, class_name: 'Spree::Variant', foreign_key: 'variant_id'
+
     def full_name
       [first_name, last_name].reject(&:blank?).join(' ')
     end
