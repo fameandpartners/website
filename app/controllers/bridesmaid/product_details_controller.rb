@@ -10,6 +10,8 @@ class Bridesmaid::ProductDetailsController < Bridesmaid::BaseController
     @bridesmaid_user_profile = bridesmaid_user_profile
     @color_name = selected_color.try(:name)
 
+    show_bridesmaid_header unless @bridesmaid_user_profile.owned_by?(current_spree_user)
+
     #@recommended_products = get_recommended_products(spree_product, limit: 4)
 
     @product = product_details_resource.read
@@ -28,12 +30,6 @@ class Bridesmaid::ProductDetailsController < Bridesmaid::BaseController
     def selected_color
       return nil if params[:color_name].blank?
       @selected_color ||= Spree::OptionValue.colors.find_by_name!(params[:color_name])
-    end
-
-    def moodboard_owner
-      @moodboard_owner ||= begin
-        params[:user_slug].present? ? Spree::User.where(slug: params[:user_slug]).first : nil
-      end
     end
 
     def product_details_resource

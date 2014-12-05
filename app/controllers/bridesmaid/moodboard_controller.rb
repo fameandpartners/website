@@ -8,9 +8,9 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
     check_availability!
 
     @moodboard = moodboard_resource.read
-    @brides_name = moodboard_owner.full_name
 
     set_page_titles(title: @moodboard.title)
+    show_bridesmaid_header unless @moodboard.is_owner
   end
 
   def destroy_item
@@ -31,21 +31,6 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
         accessor: current_spree_user,
         moodboard_owner: moodboard_owner
       )
-    end
-
-    # generate some hash and share through it?
-    def moodboard_owner
-      @moodboard_owner ||= begin
-        owner = nil
-        if params[:user_slug].present?
-          owner = Spree::User.where(slug: params[:user_slug]).first
-        end
-        owner ||= current_spree_user
-      end
-    end
-
-    def load_moodboard_owner!
-      raise Bridesmaid::Errors::MoodboardOwnerNotFound if moodboard_owner.blank?
     end
 
     # bride shouldn't view this page.

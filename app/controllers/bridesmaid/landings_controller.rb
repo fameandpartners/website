@@ -5,6 +5,7 @@ class Bridesmaid::LandingsController < Bridesmaid::BaseController
 
   def bridesmaid
     set_page_titles
+    show_bridesmaid_header
 
     user   = Spree::User.find_by_slug(params[:user_slug])
     raise Bridesmaid::Errors::MoodboardAccessDenied if user.blank?

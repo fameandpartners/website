@@ -47,15 +47,6 @@ class Bridesmaid::ProductDetailsResource
     def color_ids
       @color_ids ||= bridesmaid_party_event.color_ids
     end
-=begin
-    def color_ids
-      @color_ids ||= begin
-        color_ids = bridesmaid_party_event.colors.map{|c| c[:id]}
-        similar_color_ids = Similarity.get_similar_color_ids(color_ids, Similarity::Range::VERY_CLOSE)
-        color_ids + similar_color_ids
-      end
-    end
-=end
 
     #'/moodboard/:user_slug/dress-:product_slug(/:color_name)'
     def product_path(product)

@@ -25,6 +25,10 @@ class Bridesmaid::BaseController < ApplicationController
 
   protected
 
+    def show_bridesmaid_header
+      @bridesmaid_viewing = true
+    end
+
     def hide_module
       if Rails.env.production?
         raise Bridesmaid::Errors::NotDevelopedYet
@@ -41,6 +45,10 @@ class Bridesmaid::BaseController < ApplicationController
 
     def require_completed_profile!
       raise Bridesmaid::Errors::ProfileNotCompleted if !bridesmaid_user_profile.completed?
+    end
+
+    def load_moodboard_owner!
+      raise Bridesmaid::Errors::MoodboardOwnerNotFound if moodboard_owner.blank?
     end
 
     def redirect_to_landing_page(exception)
@@ -82,6 +90,19 @@ class Bridesmaid::BaseController < ApplicationController
 
     def bridesmaid_event_profile
       bridesmaid_user_profile
+    end
+
+    def moodboard_owner
+      @moodboard_owner ||= begin
+        owner = nil
+        if params[:user_slug].present?
+          owner = Spree::User.where(slug: params[:user_slug]).first
+        end
+        owner ||= current_spree_user
+        @brides_name = owner.try(:full_name)
+
+        owner
+      end
     end
 
     def set_page_titles(options = {})
