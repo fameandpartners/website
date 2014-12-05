@@ -84,15 +84,14 @@ javascript:
       $('a[data-action=buy-for-bridesmaid]').on('click', function (e) {
         e.preventDefault();
         $link = $(e.currentTarget)
+        item_id = $link.data('id')
 
         $.ajax({
           url: $link.attr('href'),
           type: 'POST',
           dataType: 'json',
           data: {},
-          complete: function (data) {
-            $link.addClass('added');
-          }
+          success: window.shopping_cart.buildOnSuccessCallback(['item_changed'], item_id)
         });
       });
     })(document);
@@ -135,7 +134,7 @@ javascript:
                   .add-remove.clearfix
                     - product.bridesmaides.each do |bridesmaid|
                       - name = "Add '#{ bridesmaid.color } #{bridesmaid.size }' for #{ bridesmaid.name }"
-                      = link_to name, bridesmaid_add_for_bridesmaid_path(id: bridesmaid.id), class: 'btn small', data: { action: 'buy-for-bridesmaid' }
+                      = link_to name, bridesmaid_add_for_bridesmaid_path(id: bridesmaid.id), class: 'btn small', data: { action: 'buy-for-bridesmaid', id: bridesmaid.id }
 
 
 .modal.edit-line-item(style="display: none;")
