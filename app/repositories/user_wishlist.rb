@@ -17,6 +17,10 @@ class UserWishlist
     end
   end
 
+  def drop_cache
+    Rails.cache.delete(cache_key)
+  end
+
   private
 
     def cache_key
