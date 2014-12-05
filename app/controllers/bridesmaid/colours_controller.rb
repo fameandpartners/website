@@ -6,6 +6,7 @@ class Bridesmaid::ColoursController < Bridesmaid::BaseController
 
     @bridesmaid_event = bridesmaid_event_profile
     @palette          = Bridesmaid::Palette.get
+    @palette.selected = @bridesmaid_event.colors.map{|color| color[:group] }
   end
 
   def update
