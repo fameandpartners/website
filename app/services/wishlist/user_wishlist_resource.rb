@@ -65,6 +65,7 @@ class Wishlist::UserWishlistResource
     end
 
     def get_bridesmaides_for_item(variant_id, color_id)
+      return [] unless is_bride?
       bridesmaids_selected = bridesmaids.select do |bridesmaid| 
         bridesmaid.color_id == color_id || bridesmaid.variant_id == variant_id
       end
