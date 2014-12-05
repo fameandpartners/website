@@ -9,7 +9,7 @@ javascript:
           console.log("please, select at least one color");
           return false;
         } else {
-          $('form#edit_info').submit();
+          $('form#palette_form').submit();
           $(e.currentTarget).prop('disabled', false);
         };
       });
@@ -34,7 +34,7 @@ javascript:
     .big Colour Palette
     .small Select the colours that you would prefer your dresses in.
 
-= form_for @bridesmaid_event, as: :info, url: bridesmaid_party_colour_path, method: :put do |f|
+= form_for @bridesmaid_event, as: :info, url: bridesmaid_party_colour_path, method: :put, html: { id: 'palette_form' } do |f|
   = f.hidden_field 'colours', { value: @palette.selected.join(','), id: 'info_colours' }
 
   .bridesmaid-pallete
