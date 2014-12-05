@@ -6,9 +6,10 @@ class Bridesmaid::LandingsController < Bridesmaid::BaseController
   def bridesmaid
     set_page_titles
 
-    user   = Spree::User.find_by_slug!(params[:user_slug])
-    event  = BridesmaidParty::Event.find_by_spree_user_id!(user.id)
+    user   = Spree::User.find_by_slug(params[:user_slug])
+    raise Bridesmaid::Errors::MoodboardAccessDenied if user.blank?
 
+    event  = BridesmaidParty::Event.find_by_spree_user_id!(user.id)
     @bride = user
 
     if spree_user_signed_in?
