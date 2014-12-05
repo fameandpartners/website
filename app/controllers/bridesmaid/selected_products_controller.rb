@@ -61,12 +61,6 @@ class Bridesmaid::SelectedProductsController < Bridesmaid::BaseController
       end
     end
 
-    def moodboard_owner
-      @moodboard_owner ||= begin
-        params[:user_slug].present? ? Spree::User.where(slug: params[:user_slug]).first : nil
-      end
-    end
-
     def color
       Spree::Variant.color_option_type.option_values.where(name: params[:color]).first
     end

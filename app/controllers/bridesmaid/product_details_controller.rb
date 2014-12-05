@@ -19,6 +19,19 @@ class Bridesmaid::ProductDetailsController < Bridesmaid::BaseController
 
   private
 
+    def bridesmaid_user_profile
+      @bridesmaid_user_profile ||= begin
+        event = BridesmaidParty::Event.where(spree_user_id: moodboard_owner.id).first_or_initialize
+        event
+      end
+    end
+
+    def check_availability!
+      available = bridesmaid_user_profile.members.where(spree_user_id: current_spree_user.id).exists?
+      Bridesmaid::Errors::MoodboardAccessDenied if not available
+      true
+    end
+
     # params parsers
     def spree_product
       @spree_product ||= begin

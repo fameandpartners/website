@@ -25,6 +25,10 @@ class Bridesmaid::BaseController < ApplicationController
 
   protected
 
+    #def current_spree_user
+    #  @current_spree_user ||= Spree::User.find(19441)
+    #end
+
     def show_bridesmaid_header
       @bridesmaid_viewing = true
     end

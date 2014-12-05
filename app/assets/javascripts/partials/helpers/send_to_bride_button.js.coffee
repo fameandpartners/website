@@ -6,7 +6,7 @@ window.helpers.addSendToBrideButton = (button) ->
   # clear
   $button.off('click')
   $button.off('variant_selected')
-  
+
   $(button).on('click', (e) ->
     e.preventDefault()
     button = $(e.currentTarget)
@@ -23,7 +23,6 @@ window.helpers.addSendToBrideButton = (button) ->
         dataType: 'json',
         data: data
         success: () ->
-          console.log('success')
-          #$(button).html('selected')
+          $button.html('Your dress selection has been sent to the bride.')
       )
   )
