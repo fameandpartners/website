@@ -48,6 +48,8 @@ class Users::WishlistsItemsController < Users::BaseController
       )
     end
 
+    Repositories::UserWishlist.new(owner: current_spree_user).drop_cache
+
     if @item.persisted?
       render json: {
         item: WishlistItemSerializer.new(@item).to_json,
@@ -61,6 +63,8 @@ class Users::WishlistsItemsController < Users::BaseController
   def destroy
     @item = @user.wishlist_items.find_by_id(params[:id])
     @item.try(:destroy)
+
+    Repositories::UserWishlist.new(owner: current_spree_user).drop_cache
 
     respond_with({}) do |format|
       format.html { redirect_to wishlist_path }
@@ -98,6 +102,8 @@ class Users::WishlistsItemsController < Users::BaseController
 
       @item.destroy
     end
+
+    Repositories::UserWishlist.new(owner: current_spree_user).drop_cache
 
     respond_with(@item) do |format|
       format.html { redirect_to wishlist_path }
