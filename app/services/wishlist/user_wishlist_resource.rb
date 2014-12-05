@@ -1,3 +1,5 @@
+# this is not user wishlist, but bride wishlist
+# we have to split it. later. it will be never, though
 class Wishlist::UserWishlistResource
   attr_reader :site_version, :moodboard_owner
 
@@ -32,7 +34,7 @@ class Wishlist::UserWishlistResource
 
       moodboard_owner_moodboard.items.map do |item|
         item.path = product_path(item)
-        item.bridesmaides = get_bridesmaides_for_item(item.variant_id, item.color.try(:id))
+        item.bridesmaides = get_bridesmaides_for_item(item.product_id, item.variant_id, item.color.try(:id))
         item
       end
     end
@@ -61,13 +63,21 @@ class Wishlist::UserWishlistResource
     end
 
     def bridesmaids
-      @bridesmaids ||= bridesmaid_party_event.members.includes(:spree_user)
+      @bridesmaids ||= bridesmaid_party_event.members.includes(:spree_user, :variant)
     end
 
-    def get_bridesmaides_for_item(variant_id, color_id)
+    def get_bridesmaides_for_item(product_id, variant_id, color_id)
       return [] unless is_bride?
+
       bridesmaids_selected = bridesmaids.select do |bridesmaid| 
-        bridesmaid.color_id == color_id || bridesmaid.variant_id == variant_id
+        selected_product = bridesmaid.variant.try(:product_id)
+        if bridesmaid.variant_id == variant_id
+          true
+        elsif selected_product.present? && selected_product == product_id
+          true
+        else
+          false
+        end
       end
 
       bridesmaids_selected.collect do |bridesmaid|
