@@ -51,7 +51,8 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
     # bride shouldn't view this page.
     # instead, we should redirect to own moodboard
     def check_availability!
-      if !moodboard_owner.bridesmaid_party_events.first.completed?
+      event = moodboard_owner.bridesmaid_party_events.first
+      if event.blank? || !event.completed?
         raise Bridesmaid::Errors::MoodboardNotReady
       end
       #if moodboard_owner.id == current_spree_user.id
