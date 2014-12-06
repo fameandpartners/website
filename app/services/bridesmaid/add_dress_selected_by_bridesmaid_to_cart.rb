@@ -64,7 +64,7 @@ class Bridesmaid::AddDressSelectedByBridesmaidToCart
 
     def customized_item?
       return @is_item_customized if instance_variable_defined?('@is_item_customized')
-      @is_item_customized = variant.is_master? || customization_value_ids.present?  || variant.dress_color.blank?  || variant.dress_size.blank?
+      @is_item_customized = variant.is_master? || membership.customization_value_ids.present? || variant.dress_color.blank?  || variant.dress_size.blank?
       @is_item_customized
     end
 

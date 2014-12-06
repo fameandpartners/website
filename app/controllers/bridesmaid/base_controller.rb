@@ -96,6 +96,7 @@ class Bridesmaid::BaseController < ApplicationController
       bridesmaid_user_profile
     end
 
+    # note - this is bride, and general setting for microsite, rename?
     def moodboard_owner
       @moodboard_owner ||= begin
         owner = nil
