@@ -26,9 +26,9 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
             elsif sign_up_reason.eql?('competition')
               session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
+            elsif sign_up_reason.eql?('bridesmaid_party')
+              try_apply_bridesmaid_party_callback(authentication.user)
             end
-
-            try_apply_bridesmaid_party_callback(authentication.user)
 
             redirect_to after_sign_in_path_for(authentication.user)
           elsif spree_current_user
@@ -37,7 +37,9 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
             FacebookDataFetchWorker.perform_async(spree_current_user.id, auth_hash['uid'], auth_hash['credentials']['token'])
 
-            try_apply_bridesmaid_party_callback(spree_current_user)
+            if session[:sign_up_reason].eql?('bridesmaid_party')
+              try_apply_bridesmaid_party_callback(spree_current_user)
+            end
 
             flash[:notice] = "Authentication successful."
             redirect_back_or_default(account_url)
@@ -70,9 +72,9 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
                 session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
               elsif sign_up_reason.eql?('customise_dress')
                 session[:spree_user_return_to] = main_app.personalization_products_path(cf: 'custom-dresses-signup')
+              elsif sign_up_reason.eql?('bridesmaid_party')
+                try_apply_bridesmaid_party_callback(user)
               end
-
-              try_apply_bridesmaid_party_callback(user)
 
               redirect_to after_sign_in_path_for(user)
             else
@@ -118,6 +120,8 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         membership.update_column(:spree_user_id, user.id)
         session[:spree_user_return_to] = main_app.bridesmaid_party_moodboard_path(user_slug: membership.event.spree_user.slug)
       end
+    else
+      session[:spree_user_return_to] = main_app.bridesmaid_party_info_path
     end
   end
 end
