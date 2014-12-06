@@ -16,19 +16,14 @@ window.helpers.createProductImagesSlider = (container, input) ->
     selected_slides = _.filter(all_slides, (slide) ->
       $(slide).data('color-id') == colorId
     )
-
     selected_slides = all_slides if selected_slides.length == 0
     $container.html(selected_slides)
-
-    console.log('currentSlideId = ' + currentSlideId)
 
     # reload slider and set to previous slide
     if !!currentSlideId && $container.find("##{ currentSlideId }").length > 0
       startSlide = $container.find("##{ currentSlideId }").index()
     else
       startSlide = 0
-
-    console.log('startSlide = ' + startSlide)
     bxSlider.reloadSlider(startSlide: startSlide)
 
   bxSlider = $container.bxSlider({
