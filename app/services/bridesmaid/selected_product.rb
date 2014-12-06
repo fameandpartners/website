@@ -43,7 +43,7 @@ class Bridesmaid::SelectedProduct
     def notify_bride
       if member.present?
         #BridesmaidPartyMailer.delay.bridesmaid_send(member, site_version)
-        BridesmaidPartyMailer.bridesmaid_send(member, site_version).deliver
+        BridesmaidPartyMailer.bridesmaid_send(moodboard_owner, member, site_version).deliver
       end
     #rescue
     end

@@ -9,13 +9,14 @@ class BridesmaidPartyMailer < ActionMailer::Base
     #
   end
 
-  def bridesmaid_send(bridesmaid_member, site_version)
+  def bridesmaid_send(bride, bridesmaid_member, site_version)
     event         = bridesmaid_member.event
     bridesmaid    = bridesmaid_member.spree_user || Spree::User.where(email: bridesmaid_member.email).first
     product       = Spree::Variant.find(bridesmaid_member.variant_id).product
     color_option  = Spree::OptionValue.where(id: bridesmaid_member.color_id).first
 
-    @bride_name   = bridesmaid.full_name
+    @bride        = bride
+    @bridesmaid_name = bridesmaid.full_name
     @dress_name   = product.name
     @colour       = color_option.try(:name)
     @size         = Spree::OptionValue.where(id: bridesmaid_member.size).first.try(:name)
