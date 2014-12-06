@@ -6,5 +6,9 @@
         span.icon-logo
     .navs
       .name
-        = @brides_name.to_s + " "
-        ' bridal party
+        - if @bride.blank?
+            ' bridal party
+        - else
+          = link_to bridesmaid_party_moodboard_path(user_slug: @bride.try(:slug)) do
+            = @bride.try(:full_name).to_s + ' '
+            ' bridal party

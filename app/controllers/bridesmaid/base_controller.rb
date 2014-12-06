@@ -30,6 +30,7 @@ class Bridesmaid::BaseController < ApplicationController
     #end
 
     def show_bridesmaid_header
+      moodboard_owner # ensure user loaded
       @bridesmaid_viewing = true
     end
 
@@ -104,8 +105,7 @@ class Bridesmaid::BaseController < ApplicationController
           owner = Spree::User.where(slug: params[:user_slug]).first
         end
         owner ||= current_spree_user
-        @brides_name = owner.try(:full_name)
-
+        @bride = owner
         owner
       end
     end
