@@ -1,28 +1,141 @@
+javascript:
+  $(document).ready(function() {
+    function addBridesmaidRow(){
+      var $form = $('#share-moodboard .form');
+      var $tpl  = $form.find('.row.template');
+
+      var $row = $tpl.clone();
+      $row.css({display: 'block'});
+      $row.find(':input').attr('disabled', false);
+      $row.removeClass('template');
+
+      var $last = $form.find('.row.note, .row.bridesmaid:not(.template)').last();
+      $last.after($row);
+    }
+
+    function collectData(){
+      var $form = $('#share-moodboard .form');
+      var $rows = $form.find('.row.bridesmaid:not(.template)');
+      var data = {};
+
+      data['note'] = $form.find(':input[name="note"]').val();
+      data['friends'] = [];
+
+      _.each($rows, function (element) {
+        var $element = $(element);
+        var name  = $element.find(':input[name="name"]').val();
+        var email = $element.find(':input[name="email"]').val();
+
+        if (!!email && !!name) {
+          data['friends'].push({
+            full_name: name,
+            email: email
+          });
+        }
+      });
+
+      return data;
+    }
+
+    $('a[data-action=show-share-modal]').on('click', function(event){
+      event.preventDefault();
+
+      var $modal = $('#share-moodboard');
+
+      _.times(4, addBridesmaidRow);
+
+      $modal.show();
+
+      $modal.find('.close').one('click', function (event) {
+        event.preventDefault();
+
+        $modal.find('.row.bridesmaid:not(.template)').remove();
+        $modal.hide();
+      })
+    });
+
+    $('a[data-action=add-friend]').on('click', function(event){
+      event.preventDefault();
+
+      addBridesmaidRow();
+    });
+
+    $('a[data-action=send-data]').on('click', function (event) {
+      event.preventDefault();
+
+      var $modal = $('#share-moodboard');
+      var data = collectData();
+
+      if (!_.isEmpty(data['friends'])) {
+        $.ajax({
+          url: '/bridesmaid-party/share',
+          type: 'POST',
+          dataType: 'json',
+          data: data,
+          complete: function (data) {
+            $modal.find('.row.bridesmaid:not(.template)').remove();
+            $modal.hide();
+          }
+        });
+      }
+    });
+
+    (function() {
+      $('a[data-action=buy-for-bridesmaid]').on('click', function (e) {
+        e.preventDefault();
+        $link = $(e.currentTarget)
+        item_id = $link.data('id')
+
+        $.ajax({
+          url: $link.attr('href'),
+          type: 'POST',
+          dataType: 'json',
+          data: {},
+          success: window.shopping_cart.buildOnSuccessCallback(['item_changed'], item_id)
+        });
+      });
+    })(document);
+  });
+
 .wrap
   .account-pages
     .tabs
       = render 'users/shared/tabs', active_tab: 'wishlist'
       #wishlist.tab-content
-        h1.page-title My wishlist
-        - if @items.size == 0
-          p Sorry, there are no items in your wishlist
+        - if @moodboard.bride_moodboard
+          .bridesmaid-moodboard
+            .header
+              .name My
+              .info moodboard
+
+        - if @moodboard.products.blank?
+          p Sorry, there are no items in your moodboard
         - else
+          - if current_spree_user.bridesmaid_party_events.present?
+            = link_to 'Share with Bridesmaids', '#', data: { action: 'show-share-modal' }, class: 'btn share-moodboard'
+
           ul.products-list
-            - @items.each do |item|
-              - variant = item.variant
-              - product = variant.product
-              li.product-item data-id=item.id
+            - @moodboard.products.each do |product|
+              li.product-item data-id=(product.id)
                 .thumbnail
                   .actions.clearfix
-                    /.like.fright = add_to_wishlist_link(variant)
-                    .quick-view.fleft = quick_view_link(product)
-                  = link_to collection_product_path(product) do
-                    = hoverable_product_image_tag product, itemprop: "image", width: 243, height: 352, alt: product.name
-                .name = link_to product.name, collection_product_path(product)
-                .price = price_for_product(product)
+                    .quick-view.fleft
+                      = link_to 'Quick view', product.path, data: { action: 'quick-view', id: product.permalink }
+                  = link_to product.path do
+                    = image_tag product.image_url, itemprop: "image", width: 243, height: 352, alt: product.name
+
+                .name = link_to product.name, product.path
+                .price = product.price.display_price
                 .add-remove.clearfix
-                  = wishlist_move_to_cart_link(item)
-                  = link_to 'Remove', wishlists_item_path(item), class: 'btn mid border empty remove fright', method: :delete, remote: true
+                  = link_to 'Move to cart', move_to_cart_wishlists_item_path(product.item_id), class: 'add-to-cart master btn mid fleft', remote: true
+                  = link_to 'Remove', wishlists_item_path(product.item_id), class: 'btn mid border empty remove fright', method: :delete, remote: true
+
+                - if product.bridesmaides.present?
+                  .add-remove.clearfix
+                    - product.bridesmaides.each do |bridesmaid|
+                      - name = "Add '#{ bridesmaid.color } #{bridesmaid.size }' for #{ bridesmaid.name }"
+                      = link_to name, bridesmaid_add_for_bridesmaid_path(id: bridesmaid.id), class: 'btn small', data: { action: 'buy-for-bridesmaid', id: bridesmaid.id }
+
 
 .modal.edit-line-item(style="display: none;")
   .overlay
@@ -34,3 +147,38 @@
       .save
         span.error.message(style="display: none;") Please, select size and color
         input.btn.black type="submit" value="Move to cart & close"
+
+.modal.share-moodboard(style="display: none;")
+  .overlay
+  .modal-container
+    .close-lightbox
+    .edit-details
+      .modal-title Share With Friends
+      .item
+      .save
+        span.error.message(style="display: none;") Please, select size and color
+        input.btn.black type="submit" value="Share"
+
+.popup-placeholder#share-moodboard style="display: none;"
+  .overlay
+  .modal-container.share-popup
+    .close-lightbox.close
+    .modal-title Send this moodboard to your friends
+    .grid-container.form
+      .row.note
+        .grid-12
+          .string
+            textarea name="note" placeholder="Enter a note, if you like."
+      .row.bridesmaid.template style="display: none;"
+        .grid-6
+          .string
+            input type="text" name="name" disabled="disabled" required="required" placeholder="Name"
+        .grid-6
+          .string
+            input type="email" name="email" disabled="disabled" required="required" placeholder="Email address"
+    .add-more
+      = link_to '+ Add more friends', '#', data: { action: 'add-friend' }
+    .buttons
+      = link_to 'Send to friends', '#', class: 'btn', data: { action: 'send-data' }
+      .alert.alert-success Invitations have been sent to your bridesmaids.
+      .alert.alert-error We've found some errors in the form. Please take a look at the errors.

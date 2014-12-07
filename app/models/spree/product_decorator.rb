@@ -25,13 +25,15 @@ Spree::Product.class_eval do
     )
   }
 
+  scope :not_hidden, lambda { where(hidden: false) }
+
   has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 
   #accepts_nested_attributes_for :product_customisation_types,
   #  reject_if: lambda { |ct| ct[:customisation_type_id].blank? && ct[:id].blank? },
   #  allow_destroy: true
   #attr_accessor :customisation_values_array
-  attr_accessible :featured#, :customisation_values_array#, :product_customisation_types_attributes
+  attr_accessible :featured, :hidden, :is_service#, :customisation_values_array#, :product_customisation_types_attributes
   attr_accessible :customisation_value_ids
 
   attr_accessible :zone_prices_hash
@@ -55,6 +57,14 @@ Spree::Product.class_eval do
 
   def cache_key
     "products/#{id}-#{updated_at.to_s(:number)}"
+  end
+
+  def service?
+    is_service?
+  end
+
+  def free_shipping?
+    is_service?
   end
 
   def images
@@ -399,4 +409,9 @@ Spree::Product.class_eval do
       self.on_demand = true
     end
   end
+
+  # override spree core method
+  def self.active(currency = nil)
+    not_hidden.not_deleted.available(nil, currency)
+  end 
 end

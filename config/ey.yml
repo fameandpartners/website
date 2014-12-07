@@ -33,3 +33,6 @@ environments:
     migration_command: rake db:migrate
     branch: production
     precompile_assets: true
+  preprod: {}
+defaults:
+  migrate: false

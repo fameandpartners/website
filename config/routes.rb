@@ -171,7 +171,6 @@ FameAndPartners::Application.routes.draw do
   get '/lp/facebook' => 'statics#landing_facebook', :as => :lp_facebook
   get '/lp/prom' => 'statics#landing_prom', :as => :lp_prom
 
-
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
@@ -442,6 +441,27 @@ FameAndPartners::Application.routes.draw do
     get "new-collection" => 'spree/products#index', as: :new_collection
 
     get '/next-day-delivery' => 'spree/products#index', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
+
+    scope '/bridesmaid-party', module: 'bridesmaid' do
+      root to: 'landings#bride', as: :bridesmaid_party
+      get '/info'     => 'details#edit',   as: :bridesmaid_party_info
+      put '/info'     => 'details#update'
+      get '/colour'   => 'colours#edit',   as: :bridesmaid_party_colour
+      put '/colour'   => 'colours#update'
+      get '/concierge_service'  => 'additional_products#new',  as: :bridesmaid_party_consierge_service
+      post '/additional_products(/:product)' => 'additional_products#create'
+      get '/dresses'  => 'products#index', as: :bridesmaid_party_dresses
+      get '/dresses/dress-:product_slug(/:color_name)' => 'products#show', as: :bridesmaid_party_dress
+      get '/moodboard(/:user_slug)' => 'moodboard#show', as: :bridesmaid_party_moodboard
+      get '/:user_slug/dress-:product_slug(/:color_name)' => 'product_details#show', as: :bridesmaid_party_dress_details
+      put '/:user_slug/dress-:product_slug(/:color_name)' => 'selected_products#update', as: :bridesmaid_dress_selection
+      delete '/moodboard/:user_slug/:variant_id' => 'moodboard#destroy_item',
+        as: :bridesmaid_party_delete_moodboard_item
+      get '/:user_slug' => 'landings#bridesmaid', as: :bridesmaid_signup
+      post 'selected_product/:id/add_to_cart' => 'selected_products#add_to_cart', as: :bridesmaid_add_for_bridesmaid
+
+      post '/share' => 'memberships#create'
+    end
 
     resources :site_versions, only: [:show]
   end

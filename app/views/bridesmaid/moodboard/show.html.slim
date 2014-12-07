@@ -1,0 +1,61 @@
+javascript:
+  $(document).ready(function() {
+    (function() {
+      page.enableQuickView('#content', '*[data-action="quick-view"]');
+      page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
+    })(document);
+
+    (function() {
+      var removeItemFunc = function(e) {
+        e.preventDefault();
+        $link = $(e.currentTarget);
+
+        $.ajax({
+          url: $link.attr('href'),
+          type: 'delete',
+          dataType: "JSON",
+          success: function(data, status, response) {
+            $(".grid-3[data-id='" + data.variant_id + "']").remove();
+          }
+        });
+      };
+
+      $('a[data-action=moodboard-remove]').on('click', removeItemFunc)
+    })(document);
+  })
+
+.bridesmaid-moodboard
+  .header
+    .name = @moodboard.owner.first_name + "'s"
+    .info Moodboard
+  .intro
+    ' #{@moodboard.owner.first_name} has chosen these dresses for you, she thinks you would look fantastic wearing any of them but would like you to select yours and customise it to create the perfect one for you. click on your favourite dress to start customising it!
+
+  .category-catalog.products-list
+    .row
+      - if @moodboard.products.blank?
+        p Sorry, there are no items in #{ @moodboard.title }
+      - else
+        - @moodboard.products.each do |product|
+          .grid-3 data-id=(product.variant_id)
+            .picture
+              = link_to product.path do
+                = image_tag product.image_url, alt: product.name
+
+            h6 = product.name
+            .price = product.price.display_price
+
+            .buttons
+              = link_to "Start Customising", product.path, class: 'btn small', title: "Customise this dress"
+
+            /- if product.bridesmaides.present?
+              ul
+              - product.bridesmaides.each do |bridesmaid|
+                li.bridesmaid 
+                  = "#{ bridesmaid.name } #{ bridesmaid.color } #{bridesmaid.size }"
+                  = link_to 'Add to cart', '#', class: 'btn small'
+
+
+            - if product.fast_delivery
+              .fast-delivery-icon title="Next day delivery*"
+                = I18n.t(:long, scope: [:delivery_time, :fast])

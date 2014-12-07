@@ -9,6 +9,8 @@ Spree::User.class_eval do
 
   has_one :personalization_settings
 
+  has_many :bridesmaid_party_events, foreign_key: :spree_user_id, class_name: 'BridesmaidParty::Event', order: 'id desc'
+
   has_many :email_notifications, foreign_key: :spree_user_id
 
   attr_accessor :skip_welcome_email,

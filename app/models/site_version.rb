@@ -38,6 +38,32 @@ class SiteVersion < ActiveRecord::Base
     permalink.to_s.downcase.gsub(/\W/, '')
   end
 
+  def size_settings
+    @size_settings ||= begin
+      if is_australia?
+        OpenStruct.new({
+          size_info_label: 'AUS Sizes Displayed',
+          size_start: 4,
+          size_charge_start: 18,
+          locale_code: 'au',
+          locale_unit_code: 'cm',
+          locale_unit_symbol: 'cm',
+          currency_code: 'AUD'
+        }) 
+      else
+        OpenStruct.new({
+          size_info_label: 'US Sizes Displayed',
+          size_start: 0,
+          size_charge_start: 14,
+          locale_code: 'us',
+          locale_unit_code: 'in',
+          locale_unit_symbol: '&#8243;'.html_safe,
+          currency_code: 'USD'
+        })
+      end
+    end
+  end
+
   def countries
     if self.zone
       country_ids = zone.zone_members.where(zoneable_type: "Spree::Country").collect(&:zoneable_id)

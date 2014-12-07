@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <div class="head1">Fame & Partners Personal Wedding</div>  
+  <div class="head2">Concierge Service</div> 
+  <div class="head3">For $99, you will get a personal stylist to coordinate everything for you!</div>
+</div>
+
+<p><em>What you get:</em></p>
+<ul>
+    <li>1.A call with one of our stylists, at a time convenient to you</li>
+    <li>2.The stylist will build you a mood board</li>
+    <li>3.When you place the order, the $99 will come off the final cost of your order</li>
+</ul>
+
+
+
+<form action="" class="concierge">
+  <p><em>Love it? We need your details:</em></p>
+  <div class="item-details input">
+    <label for="phone_number">Phone Number: <span class="required">*</span></label>
+    <input type="text" size="30" email="phone_number" id="phone_number" required placeholder="your phone number">
+  </div>
+
+  <div class="item-details input">
+    <label for="user_email">Email: <span class="required">*</span></label>
+    <input type="text" size="30" email="user_email" id="user_email" required placeholder="your email">
+  </div>
+
+
+  <div class="item-details input">
+    <label for="suburb_state">Suburb & State:<span class="required">*</span></label>
+    <input type="text" size="30" email="suburb_state" id="suburb_state" required placeholder="Suburb & State">
+  </div>
+</form>
+
+<a href="#" class="block-with-triangle">
+  <span class="text">BUY NOW</span>
+  <span class="triangle-bottom" style="border-top-color: #e6a49d"></span>
+</a>
+
+<div class="risk_free">
+  <p><em>Risk Free:</em></p>
+  <p>If for whatever reason you don't proceed, we will give you this as credit to spend on any dress you like</p>
+</div>
+

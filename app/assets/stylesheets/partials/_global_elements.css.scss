@@ -6,6 +6,39 @@
 	margin-right: auto;
 }
 
+.text-field {
+	width: 100%;
+	height: 32px;
+	font: 400 10px/32px $fontOne;
+	letter-spacing: 0.125em;
+	text-transform: uppercase;
+	padding: 0 5px;
+	background-color: #fff;
+	border: solid 1px #000;
+	color: #000;
+	@include placeholder(#000);
+	@include box-sizing(border-box);
+
+	&:disabled {
+		background-color: #f4f4f4;
+		border-color: #ccc;
+		color: #ccc;
+	}
+
+	&.with-shadow {
+		@include longBoxShadowRight(#000, 5);
+	}
+
+	&.pink {
+		background-color: #fdf5ef;
+		border-color: #fdf5ef;
+		&:disabled {
+			background-color: #f4f4f4;
+			border-color: #f4f4f4;
+		}
+	}
+}
+
 .form-global {
 	h1 {
 		font-style: italic;
@@ -17,7 +50,7 @@
 	label {
 		font: 400 10px/17px $fontOne;
 	}
-	input[type="text"], input[type="password"], input[type="search"], input[type="email"], input[type="tel"], input[type="url"] {
+	input[type="text"], input[type="password"], input[type="search"], input[type="email"], input[type="tel"], input[type="url"], textarea {
 		width: 100%;
 		height: 32px;
 		font: 400 10px/32px $fontOne;
@@ -30,6 +63,11 @@
 		@include placeholder(#000);
 		@include longBoxShadowRight(#000, 5);
 		@include box-sizing(border-box);
+	}
+	textarea {
+		height: auto;
+		padding: 5px;
+		line-height: 1.2;
 	}
 	select {
 		height: 32px;
@@ -95,6 +133,76 @@
 		@include linear-gradient(#44619a 0%, #44619a 50%, #344f81 51%, #344f81 100%);
 	}
 }
+.button-flat,
+.facebook-button-flat {
+	border: solid 1px #2e2f56;
+	background-color: #fff;
+	color: #2e2f56;
+	height: 33px;
+	line-height: 34px;
+	padding: 0 18px 0 50px;
+	position: relative;
+	display: inline-block;
+	text-decoration: none;
+	font-family: $fontOne;
+	font-size: 10px;
+	.icon {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		line-height: 37px;
+		width: 35px;
+		font-size: 17px;
+		text-align: center;
+		color: #fff;
+		background-color: #2e2f56;
+	}
+}
+
+.button-flat {
+  padding-left: 18px;
+}
+
+.block-with-triangle {
+	min-height: 106px;
+	position: relative;
+	padding: 20px 0;
+	min-width: 176px;
+	text-align: center;
+	background-position: top center;
+	background-repeat: no-repeat;
+	display: block;
+	text-decoration: none;
+	@include box-sizing(border-box);
+	.text {
+		position: relative;
+		z-index: 1;
+	}
+	.triangle-top, .triangle-bottom {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		margin-left: -90px;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		z-index: 0;
+	}
+	.triangle-bottom {
+		border-width: 106px 88px 0 88px;
+		border-color: #fff rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+	}
+	.triangle-top {
+		border-width: 0 88px 106px 88px;
+		border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) #fff rgba(255, 255, 255, 0);
+	}
+}
+a.block-with-triangle .text {
+	font-family: $fontTwo;
+	font-size: 30px;
+}
 
 .social-grey-global {
 	position: relative;
@@ -148,6 +256,9 @@
 	letter-spacing: 0.125em;
 	background-color: #000;
 	@include box-sizing(border-box);
+	&.wide {
+		width: 100%;
+	}
 	&.small {
 		height: 20px;
 		line-height: 20px;
@@ -162,6 +273,10 @@
 		font-family: $fontFive;
 		letter-spacing: 0.1em;
 	}
+	&.large {
+		height: 65px;
+		line-height: 65px;
+	}
 	&.empty {
 		color: #000;
 		background-color: #fff;
@@ -169,6 +284,12 @@
 	&.pink {
 		color: #fff;
 		background-color: $pinkColor;
+	}
+	&.pink-pale {
+		background: #e2b3b6;
+		font-size: 16px;
+		font-family: $fontOne;
+		letter-spacing: 0;
 	}
 	&.green {
 		color: #000;
@@ -179,6 +300,10 @@
 			&.border { border-color: $greenColor;}
 			&.shadow {@include longBoxShadowRight ($greenColor, 3);}
 		}
+	}
+	&.white {
+		background: #fff;
+		color: #000;
 	}
 	&.grey {
 		color: #fff;
@@ -330,6 +455,7 @@
 
 	.size-popup {
 		position: absolute;
+		z-index: 5;
 		top: 98%;
 		padding-top: 12px;
 		right: -10px;
@@ -539,6 +665,71 @@
 	}
 }
 
+// Pink Checkbox
+.checkbox-pink {
+	position: relative;
+	input[type="checkbox"] {
+		position: absolute;
+		opacity: 0;
+		&:checked + label {
+			overflow: hidden;
+			&:before { background-color: #000;}
+			&:after {
+				content: '';
+				background: url('_cross.png') center center no-repeat;
+			}
+		}
+	}
+	label {
+		position: relative;
+		line-height: 36px;
+		padding-left: 50px;
+		display: inline-block;
+		vertical-align: top;
+		&:before, &:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 36px;
+			width: 36px;
+			background-color: #fdf5ef;
+			z-index: 0;
+		}
+		&:after { z-index: 1;}
+	}
+}
+// @end
+
+// Title with lines
+.page-title-with-line {
+	margin: 20px 0;
+	overflow: hidden;
+	text-align: center;
+	.title {
+		font-size: 32px;
+		font-family: $bebas;
+		display: inline-block;
+		position: relative;
+		padding: 0 20px;
+
+		.arrows-line-horizontal {
+			width: 1000%;
+			position: absolute;
+			top: 50%;
+			&.left {
+				left: auto;
+				right: 100%;
+			}
+			&.right {
+				left: 100%;
+				right: auto;
+			}
+		}
+	}
+	
+}
+// @end
 
 .errorExplanation {
 	margin: 20px 0;

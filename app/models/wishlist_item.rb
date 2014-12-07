@@ -3,10 +3,12 @@ class WishlistItem < ActiveRecord::Base
   belongs_to :variant, class_name: 'Spree::Variant', foreign_key: :spree_variant_id
   belongs_to :product, class_name: 'Spree::Product', foreign_key: :spree_product_id
 
+  belongs_to :color, class_name: 'Spree::OptionValue', foreign_key: :product_color_id
+
   validates :user,    presence: true
   validates :variant, presence: true
 
-  attr_accessible  :spree_variant_id, :spree_product_id, :quantity
+  attr_accessible  :spree_variant_id, :spree_product_id, :product_color_id, :quantity
 
   validates :quantity, presence: true, numericality: {
     :allow_blank => false,

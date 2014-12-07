@@ -50,7 +50,7 @@ window.initHoverableProductImages = () ->
     # provide safe multiple calls on page
     $image.removeAttr('second_image')
 
-    $image.parents('.thumbnail').hover(
+    $image.parents('.picture').hover(
       () -> $image.attr('src', second_image),
       () -> $image.attr('src', original_image)
     )
@@ -59,3 +59,12 @@ window.scrollScreenTo = (element) ->
   $element = $(element).first()
   return if $element.length == 0
   $('html').animate({ scrollTop: $element.offset().top })
+
+window.buildDelayedRedirectToPage = () ->
+  path  = arguments[0] || "/cart?cf=buybtn"
+  delay = arguments[1] || 1000
+
+  func = ->
+    _.delay ( ->
+      window.location.href = urlWithSitePrefix(path)
+    ), 1000

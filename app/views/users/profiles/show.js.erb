@@ -1,5 +1,9 @@
 html = '<%=j  render(template: 'users/profiles/show.html') %>';
 $('#wrap > #content > .wrap').replaceWith(html)
 
+<% if @title.present? %>
+  document.title = '<%=  @title %>';
+<% end %>
+
 window.setCurrentPath('<%= profile_path %>')
 window.initFileuploader()

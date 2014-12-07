@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
+  include ApplicationHelper
 
   append_before_filter :check_site_version
   append_before_filter :check_cart
@@ -108,7 +109,7 @@ class ApplicationController < ActionController::Base
   end
 
   def store_current_location
-    session[:previous_location] = url_with_correct_site_version
+    session[:previous_location] = get_hreflang_link # url_with_correct_site_version
   end
 
   def previous_location_or_default(default_url)
@@ -314,7 +315,7 @@ class ApplicationController < ActionController::Base
   helper_method :custom_dresses_path
 
   def set_product_show_page_title(product, info = "")
-    prefix = "#{product.short_description} #{info} #{@product.name}"
+    prefix = "#{product.short_description} #{info} #{product.name}"
     self.title = [prefix, default_seo_title].join(' - ')
     description([prefix, default_meta_description].join(' - '))
 
@@ -487,13 +488,14 @@ class ApplicationController < ActionController::Base
 
   def get_recommended_products(product, options = {})
     options[:limit] ||= 3
+    products_required = options[:limit]
     recommended_dresses = []
 
     #if try_spree_current_user && try_spree_current_user.style_profile.present?
     #  recommended_dresses = Spree::Product.recommended_for(try_spree_current_user, options)
     #end
     #return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
-    recommended_dresses = SimilarProducts.new(product).fetch(products_required).to_a
+    recommended_dresses = Products::SimilarProducts.new(product).fetch(products_required).to_a
 
     return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
     recommended_dresses += Spree::Product.active.featured.limit(products_required).to_a

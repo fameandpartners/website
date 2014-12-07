@@ -8,7 +8,7 @@ window.page = {
       window.page.variantsSelector.init(window.product_variants)
 
   enableQuickView: (container, selector = '*[data-action="quick-view"]') ->
-    container.on('click', selector, (e) ->
+    $(container).on('click', selector, (e) ->
       e.preventDefault()
       productId = $(e.currentTarget).data("id")
       popup = new popups.ProductQuickView(productId)
@@ -33,11 +33,21 @@ window.page = {
   enableBuyButton: (button, options = {}) ->
     window.helpers.addBuyButtonHandlers(button, options)
 
+  enableSendToBrideButton: (element) ->
+    window.helpers.addSendToBrideButton(element)
+
   enableSendToFriendButton: (buttons) ->
     buttons.on('click', (e) ->
       e.preventDefault()
       productId = $(e.currentTarget).data('product')
       popups.showSendToFriendPopup(productId, { analyticsLabel: window.product_analytics_label })
+    )
+
+  enableConciergeServiceButton: (buttons, itemId)->
+    buttons.on('click', (e) ->
+      e.preventDefault()
+      
+      popups.showConciergeServicePopup(itemId)
     )
 
   enableTwinAlertButton: (elements, get_color_func) ->
@@ -101,6 +111,10 @@ window.page = {
       form = window.helpers.createPersonalisationForm(container)
       form.init(window.product_variants, window.product_master_variant, window.incompatibility_map)
       form
+
+  enableProductImagesSlider: (container, input) ->
+    if $(container).length > 0  and !!input
+      window.helpers.createProductImagesSlider(container, input)
 }
 
 #window.processWishListLinks = () ->

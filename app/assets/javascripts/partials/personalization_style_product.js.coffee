@@ -28,3 +28,9 @@ $(".personalization_products.style").ready ->
     else
       return selected.color
   )
+
+  # Show customisation options
+
+  $('.trigger-customisation-selector').on "click", ->
+    $(this).toggleClass "active"
+    $('.customisation-selector').toggle()

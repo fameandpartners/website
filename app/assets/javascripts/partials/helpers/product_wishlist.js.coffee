@@ -32,11 +32,12 @@ window.productWishlist = {
   toggleLinkHandler: (e) ->
     e.preventDefault()
     product_id = $(e.currentTarget).data('product-id')
-    if productWishlist.isInWishlist(product_id)
-      productWishlist.removeProduct(product_id)
+    color_id = $(e.currentTarget).data('color-id')
+    if productWishlist.isInWishlist(product_id, color_id)
+      productWishlist.removeProduct(product_id, color_id)
     else
       variant_id = $(e.currentTarget).data('id')
-      productWishlist.addProduct(product_id, quantity: 1, variant_id: variant_id)
+      productWishlist.addProduct(product_id, quantity: 1, variant_id: variant_id, color_id: color_id)
 
   addProduct: (product_id, options = {}) ->
     options = _.extend({ product_id: product_id, quantity: 1}, options)
@@ -77,7 +78,7 @@ window.productWishlist = {
     else
       element.html(element.data('title-add'))
 
-  isInWishlist: (product_id) ->
+  isInWishlist: (product_id, color_id) ->
     product_id = parseInt(product_id)
     result = _.findWhere(productWishlist.items, { spree_product_id: product_id })
     return !_.isUndefined(result)

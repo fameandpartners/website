@@ -232,7 +232,11 @@
 
 .product-page {
 	margin: 10px 0;
-	
+
+	.product-row {
+		margin-top: 25px;
+	}
+
 	.purchase-instructions{
 		margin: 28px 0 0 0;
 		font-size: 14px;
@@ -272,11 +276,7 @@
       color: #000;
       margin-bottom: 25px;
 		}
-		.size-info{
-			float: right;
-			font-weight: 100;
-		}
-		.hint{
+		.hint {
 			padding: 10px 0;
 		}
 		.btn { 
@@ -812,6 +812,207 @@
 		text-transform: none;
 		color: #666;
 	}
+}
 
 
+.product-page-2 {
+
+	// Alert
+	.product-alert {
+		color: #fff;
+		background-color: #ebbef8;
+		padding: 10px 0;
+		line-height: 1;
+		font-size: 32px;
+		text-align: center;
+		display: block;
+		text-decoration: none;
+		font-family: $shruti;
+		margin-bottom: 25px;
+		> * {
+			padding: 0 2px;
+		}
+		a {
+			text-decoration: none;
+		}
+
+		.old {
+			text-decoration: line-through;
+		}
+
+		.title {
+			padding: 0 20px;
+		}
+	}
+	
+	// Product Slider
+	.product-slider .bx-wrapper {
+		img { 
+			max-width: 100%;
+			display: inline-block;
+		}
+		.bx-pager.bx-default-pager {
+			text-align: left;
+			a {
+				text-indent: 0;
+				background: none;
+				width: auto;
+				height: auto;
+				text-align: center;
+				min-width: 10px;
+				font-family: $fontThree;
+				font-size: 17px;
+				color: #000;
+				text-decoration: none;
+				&.active {
+					color: $pinkColor
+				}
+			}
+		}
+		.bx-controls-direction {
+			a {
+				z-index: 2;
+				background: none;
+				font-size: 40px;
+				text-indent: 0;
+				text-decoration: none;
+				color: #666;
+			}
+		}
+	}
+
+	// Info
+	.product-info {
+		.btn {
+			font-family: $shruti;
+			line-height: 70px;
+			font-size: 18px;
+		}
+	}
+	.product-header {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	.product-title {
+		font: 400 33px $bebas;
+	}
+	.product-price {
+		font-family: Arial, sans-serif;
+		font-size: 20px;
+		margin: 25px 0;
+	}
+	.product-short-description {
+		font-family: $baskerville;
+		text-transform: none;
+		font-size: 18px;
+	}
+
+	.product-row {
+		margin-top: 25px;
+	}
+	.product-icons {
+		text-align: center;
+		display: inline-block;
+		text-decoration: none;
+		.icon-email, .icon-hanger, .icon-mannequin {
+			width: 55px;
+			height: 55px;
+			display: inline-block;
+			overflow: hidden;
+			background-repeat: no-repeat;
+			background-size: cover;
+			margin-bottom: 5px;
+		}
+		.icon-email { background-image: url('_icons/product-email.png');}
+		.icon-hanger { background-image: url('_icons/product-hanger.png');}
+		.icon-mannequin { background-image: url('_icons/product-mannequin.png');}
+	}
+
+	// Description
+	.category-catalog {
+		.title {
+			color: #fff;
+			background-color: #b9b9b9;
+			text-align: center;
+			padding: 8px 8px 5px;
+			font-size: 21px;
+			font-family: $shruti;
+		}
+		.row {
+			margin: 0;
+		}
+		.grid-4 { padding: 0;}
+	}
+	.product-full-description {
+		font-family: $baskerville;
+		text-transform: none;
+		font-size: 18px;
+		padding: 20px 0 0 40px;
+		p { margin-bottom: 20px;}
+	}
+}
+
+.trigger-customisation-selector {
+	letter-spacing: 0;
+	font-size: 14px !important;
+	cursor: pointer;
+	margin-bottom: 6px;
+	position: relative;
+	.arrow {
+		display: block;
+		position: absolute;
+		right: 12px;
+		top: 50%;
+		width: 14px;
+		height: 6px;
+		margin: -3px 0 0 -9px;
+		background: image-url("_chosen/chosen-sprite.png") no-repeat 0px -7px;
+	}
+	&.active {
+		color: #c0c0c0;
+		.arrow {
+			background-position: -18px -7px;
+		}
+	}
+}
+
+.customisation-selector {
+	display: none;
+	border: 1px solid #000;
+	border-top: 0;
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	right: 0;
+	top: 64px;
+	background: #fff;
+	.customisation-value {
+		padding: 18px 50px;
+		font-size: 10px;
+	}
+	.customisation-picture {
+		float: left;
+		width: auto;
+		max-width: 80px;
+	}
+	.customisation-block {
+		margin: 0 0 0 100px;
+		height: 200px;
+	}
+	.price {
+		margin-top: 10px;
+	}
+	.btn {
+		width: 68px;
+		height: 68px;
+		padding: 0 !important;
+		background: #7e7e7e;
+		border-radius: 50%;
+		color: #000;
+		letter-spacing: 0;
+		margin-top: 20px;
+		display: inline-block;
+		text-align: center;
+		line-height: 72px !important;
+	}
 }

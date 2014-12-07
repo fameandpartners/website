@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
@@ -23,6 +22,7 @@ gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
 gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
+#gem 'color_sort'
 
 gem 'geoip', require: false
 gem 'rubyzip', '< 0.9.9', require: false
@@ -62,11 +62,10 @@ group :development do
   gem 'quiet_assets', '1.0.2'
   gem 'thin', '1.5.1'
   gem 'pry'
-  gem 'pry-rails'
   gem 'pry-debugger'
   gem 'debugger'
-  gem "therubyracer"
-  gem 'rails-dev-tweaks', '~> 1.1'
+  gem 'awesome_print'
+  #gem 'rails-dev-tweaks', '~> 1.1'
   gem 'oink'
 end
 

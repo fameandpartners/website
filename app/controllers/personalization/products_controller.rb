@@ -37,7 +37,7 @@ module Personalization
       respond_with(@product)
     end
 
-    def style
+    def old_style
       if params[:product_slug]
         product_id = get_id_from_slug(params[:product_slug])
         @product = Spree::Product.active(Spree::Config.currency).find(product_id)
@@ -53,7 +53,34 @@ module Personalization
 
       @recommended_products = get_recommended_products(@product, limit: 3)
 
-      respond_with(@product)
+      #respond_with(@product) # doesn't matte with respond to :html only
+    end
+
+    def new_style
+      if params[:product_slug]
+        product_id = get_id_from_slug(params[:product_slug])
+        product = Spree::Product.active(Spree::Config.currency).find(product_id)
+      else
+        product = Spree::Product.active(Spree::Config.currency).find_by_permalink!(params[:permalink])
+      end
+
+      @product = Products::ProductPersonalizationStyleResource.new(
+        product: product,
+        site_version: current_site_version
+      ).read
+
+      set_product_show_page_title(@product, "Style your formal dress ")
+      display_marketing_banner
+    end
+
+    def style
+      if params[:show_old] #|| Rails.env.production?
+        old_style
+        render template: 'personalization/products/old_style'
+      else
+        new_style
+        render template: 'personalization/products/style'
+      end
     end
 
     private

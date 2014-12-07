@@ -17,6 +17,10 @@
 
 @include font-face('Austin', 'austin-fatitalic', 700, italic);
 
+@include font-face('bebas_neueregular', 'bebasneue', 400);
+@include font-face('ShrutiRegular', 'shruti', 400);
+@include font-face('BaskervilleMTStdRegular', 'baskervillemtstd-regular', 400);
+
 
 $fontOne: 'Novecento', sans-serif;
 $fontTwo: 'Didot', serif;
@@ -40,3 +44,7 @@ $cinzelBold: 'Cinzel Bold', sans-serif;
 $abrilfatface: 'Abrilfatface', sans-serif;
 $sourceBold: 'source_sans_probold', sans-serif;
 $sourceLight: 'source_sans_prolight', sans-serif;
+
+$baskerville: 'BaskervilleMTStdRegular', sans-serif;
+$shruti: 'ShrutiRegular', sans-serif;
+$bebas: 'bebas_neueregular', sans-serif;

@@ -139,6 +139,38 @@ window.inputs.ChosenSelector = class ChosenSelector extends BaseInput
     , @)
     @container.trigger('chosen:updated')
 
+window.inputs.GroupedOptionsChosenSelector = class GroupedOptionsChosenSelector extends BaseInput
+  constructor: (@container, @valueType = 'string') ->
+    super()
+    _.bindAll(@, 'onValueChanged')
+    @container.on('change', @onValueChanged)
+
+  isCustomOption: () ->
+    # selected option has class 'custom'
+    @container.find("option[value=#{ @container.val() }]").is('.custom')
+
+  getOptionValueId: () ->
+    value = @container.find("option[value=#{ @container.val() }]").data('id')
+    @prepareValue(value)
+
+  onValueChanged: (e) ->
+    @trigger('change')
+
+  getValue: () ->
+    @prepareValue(@container.val())
+
+  setValue: (newValue) ->
+    @container.val(newValue).trigger('chosen:updated')
+    @
+
+  prepareValue: (value) ->
+    if _.isUndefined(value)
+      return null
+    else if @valueType == 'integer'
+      parseInt(value)
+    else
+      value
+
 window.inputs.CustomAndBaseColourSelector = class CustomAndBaseColourSelector extends BaseInput
   # note: all inputs should have unique id to separate them from each other
   constructor: (@baseColourInput, @customColourInput) ->
@@ -182,7 +214,7 @@ window.inputs.CustomisationsSelector = class CustomisationsSelector extends Base
   constructor: (@container, @incompatibility_map) ->
     super()
     _.bindAll(@, 'onAddProductButtonClickHandler')
-    @container.on('click', '.customisation-value .btn.empty.border', @onAddProductButtonClickHandler)
+    @container.on('click', '.customisation-value a.btn', @onAddProductButtonClickHandler)
     @allValuesIds = _.map(@container.find('.customisation-value'), (item) -> $(item).data('customisation-value-id'))
 
   onAddProductButtonClickHandler: (e) ->
@@ -230,7 +262,7 @@ window.inputs.CustomisationsSelector = class CustomisationsSelector extends Base
 
   updateValueContainer: (value_id, new_state) ->
     $valueContainer = @container.find(".customisation-value[data-customisation-value-id=#{ value_id }]")
-    $button = $valueContainer.find('.btn.empty.border')
+    $button = $valueContainer.find('.btn')
     if new_state == 'selected'
       $valueContainer.addClass('selected').removeClass('unavailable')
       $button.html('ADDED')
