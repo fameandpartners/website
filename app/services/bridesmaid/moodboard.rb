@@ -56,7 +56,13 @@ class Bridesmaid::Moodboard
     # we don't show red ( or similar ) dresses in moodboard, if user don't selected red color or unselected it
     # dresses, able to be customised also includes to list 
     def item_suitable?(item)
-      item.color_customizable || color_ids.include?(item.color.try(:id))
+      item.color_customizable || begin
+        if item.color.present?
+          color_ids.include?(item.color.id)
+        else
+          (color_ids & item.product_color_ids).present?
+        end
+      end
     end
 
     def build_item(item)
