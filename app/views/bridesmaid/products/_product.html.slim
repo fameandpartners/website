@@ -6,9 +6,9 @@ h6 = product.name
 .price = product.price.display_price
 .buttons
   .buy-button
-    = link_to "Start Customising", product.path, class: 'btn black small', title: "Buy this dress"
-  .moodboard-button
-    = link_to 'Add to moodboard', product.path, class: 'btn empty border small wishlist-add', data: { 'title-add' => 'Add to bridesmaid moodboard', 'title-remove' => 'Remove from bridesmaid moodboard', 'action' => 'add-to-wishlist', 'color-id' => product.color_id, 'product-id' => product.id, 'id' => product.master_id }
+    = link_to "Start Customising", product.path, class: 'btn small black', title: "Customise this dress"
+  / .moodboard-button
+      = link_to 'Add to moodboard', product.path, class: 'btn empty border small wishlist-add', data: { 'title-add' => 'Add to bridesmaid moodboard', 'title-remove' => 'Remove from bridesmaid moodboard', 'action' => 'add-to-wishlist', 'color-id' => product.color_id, 'product-id' => product.id, 'id' => product.master_id }
 
 
 - if product.fast_delivery

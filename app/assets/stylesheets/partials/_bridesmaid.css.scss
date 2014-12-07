@@ -38,22 +38,6 @@
 		position: relative;		
 	}
 
-	.slidesjs-previous{
-		position: absolute;
-		left: 10px;
-		z-index: 100;
-		top: 210px;
-		cursor: pointer;
-	}
-
-	.slidesjs-next{
-		position: absolute;
-		right: 10px;
-		z-index: 100;
-		top: 210px;
-		cursor: pointer;
-	}
-
 	.text-box {
 		position: absolute;
 		top: 0;
@@ -116,7 +100,7 @@
 	.social {
 		position: absolute;
 		left: 36px;
-		bottom: 175px;
+		bottom: 30px;
 		margin: 0;
 		padding: 0;
 		width: 300px;
@@ -223,6 +207,10 @@
 		font-family: $fontThree;
 		font-size: 30px;
 		line-height: 1;
+	}
+
+	.chosen-container .chosen-results li {
+		font-size: 12px;
 	}
 }
 // @end
@@ -343,8 +331,9 @@
 				margin: 0;
 			}
 		}
-
-		
+	}
+	.buttons{
+		margin-bottom: 40px;
 	}
 }
 
