@@ -147,7 +147,7 @@
 		letter-spacing: -6px;
 	}
 
-    .button-flat, .facebook-button-flat {
+  .button-flat, .facebook-button-flat {
 		margin-top: 20px;
 	}
 }
@@ -372,12 +372,13 @@
 	text-transform: uppercase;
 	margin: 0 0 28px 0;
 	.name{
-		display: inline;
-		font: 400 32px/1 $fontTwo;
+		padding: 26px 0 0 0;
+		display: block;
+		font: 400 34px/1 $fontTwo;
 	}
 	.info{
-		display: inline;
-		font: 400 48px/1 $fontTwo;
+		display: block;
+		font: 400 52px/1 $fontTwo;
 		font-style: italic;
 	}
 }
@@ -395,13 +396,13 @@
 		padding: 0;
 		background: image_url('_bridesmaid/moodboard_banner.jpg');
 		.name{
-			padding: 28px 0 0 0;
+			padding: 26px 0 0 0;
 			display: block;
-			font: 400 38px/1 $fontTwo;
+			font: 400 34px/1 $fontTwo;
 		}
 		.info{
 			display: block;
-			font: 400 28px/1 $fontTwo;
+			font: 400 52px/1 $fontTwo;
 			font-style: italic;
 		}
 	}
