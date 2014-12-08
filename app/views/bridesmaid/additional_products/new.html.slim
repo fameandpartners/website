@@ -7,36 +7,31 @@ javascript:
   })
 
 .bridesmaid-info-header
-  = image_tag "_bridesmaid/pic3.jpg"
-  .text-box
-    .mid Wedding Concierge
-    .small Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+  = image_tag "_bridesmaid/concierge header.jpg"
 .bridesmaid-concierge
   .row
-    .grid-6.text-center
-      h2 
-        ' YOUR PERSONAL WEDDING CONCIERGE 
-      p 
-        ' For 
-        em = @product.display_price
-        '(which comes off your final dress purchase), Fame & Partners will contact your bridesmaids, coordinate sizes, colours, customisations, hem lengths and a cohesive dress story plus assist with styling tips to ensure the perfect bridesmaid look.
-        br
-        'I want the personal wedding concierge
-        br
-        'I would love a Fame & Partners stylist to help my bridal party create the perfect bridesmaid story.
-      = link_to '#', class: 'block-with-triangle', id: 'add_consierge_service' do
-        span.text BOOK NOW
-        span.triangle-bottom style="border-top-color: #e6a49d"
+    .grid-12
+      .container.text-center
+        h2 
+          ' YOUR PERSONAL WEDDING CONCIERGE 
+        p 
+          ' For 
+          em = @product.display_price
+          '(which comes off your final dress purchase), Fame & Partners will contact your bridesmaids, coordinate sizes, colours, customisations, hem lengths and a cohesive dress story plus assist with styling tips to ensure the perfect bridesmaid look.
+          br
+          'I want the personal wedding concierge
+          br
+          'I would love a Fame & Partners stylist to help my bridal party create the perfect bridesmaid story.
+        = link_to '#', class: 'block-with-triangle', id: 'add_consierge_service' do
+          span.text BOOK NOW
+          span.triangle-bottom style="border-top-color: #e6a49d"
+  .row
+    .grid-12
+      .container1.text-center
+        h2 
+          ' I want to explore and build my own bridesmaid dress mood board
 
-    .grid-6.text-center
-      h2 
-        ' I want to explore and build my own
-        br
-        ' bridesmaid dress mood board
-        br
-        br
-        br
-      = link_to bridesmaid_party_colour_path, class: 'block-with-triangle' do
-        span.text EXPLORE NOW
-        span.triangle-bottom style="border-top-color: #e6a49d"
-  .grid-6.text-center
+        = link_to bridesmaid_party_colour_path, class: 'block-with-triangle' do
+          span.text EXPLORE NOW
+          span.triangle-bottom style="border-top-color: #e6a49d"
+

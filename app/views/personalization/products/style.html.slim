@@ -17,7 +17,7 @@ javascript:
   })
 
 // PRODUCT STYLE IT ---->
-.product-page itemscope='' itemtype="http://data-vocabulary.org/Product"
+.product-page-2 itemscope='' itemtype="http://data-vocabulary.org/Product"
   .row
     .grid-8
       .style-it
@@ -58,7 +58,8 @@ javascript:
     .grid-4
       .product-info
         .product-header
-          .product-title = @product.name
+          h1.product-title
+             = link_to @product.name, collection_product_path(@product)
           .product-price = @product.price.display_price
           .product-short-description 
             = truncate(@product.short_description, length: 80, separator: ' ')
@@ -71,19 +72,24 @@ javascript:
           - moodboard_link_data = { 'title-add' => 'add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'product-id' => @product.id, 'id' => @product.master_id, 'color-id' => nil }
           = link_to '+ moodboard', @product.path, class: 'btn large pink wide wish-list-link', data: moodboard_link_data
         .product-row
-          .row
-            .grid-4
-              = link_to '#what-size', class: 'product-icons toggle-sizes' do
-                .icon-hanger
-                br
-                span size guide
+          .grid-4
+            = link_to '#what-size', class: 'product-icons toggle-sizes' do
+              .icon-hanger
+              br
+              span size guide
 
-            .grid-4.text-right
-              - link_data = spree_user_signed_in? ? {} : { guest: true }
-              = link_to '#', data: link_data.merge({ permalink: @product.permalink }), title: 'Send this dress to whoever you want to get a second opinion!', class: 'product-icons send-to-friend' do
-                .icon-email
+          .grid-4.text-center
+            = link_to personalization_style_product_path(permalink: @product.permalink), class: 'product-icons' do
+              .icon-mannequin
+              br
+              span Styling tips
+
+          .grid-4.text-right
+            - link_data = spree_user_signed_in? ? {} : { guest: true }
+            = link_to '#', data: link_data.merge({ permalink: @product.permalink }), title: 'Send this dress to whoever you want to get a second opinion!', class: 'product-icons send-to-friend' do
+              .icon-email
+              br
+              span 
+                ' ask a friend
                 br
-                span 
-                  ' ask a friend
-                  br
-                  ' for opinion
+                ' for opinion

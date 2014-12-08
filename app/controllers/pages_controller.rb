@@ -18,17 +18,13 @@ class PagesController < Spree::StoreController
 
     if @query_string.present?
       query_string = @query_string
-      @products = Tire.search('spree_products', :load => { :include => :master }) do
+      @products = Tire.search(:spree_products, :load => { :include => :master }) do
         size 1000
         query do
           string Tire::Utils.escape(query_string), :default_operator => 'AND' , :use_dis_max => true
         end
-        filter :bool, :must => {
-          :term => {
-            :deleted => false,
-            :hidden  => false
-          }
-        }
+        filter :bool, :must => { :term => { :deleted => false } }
+        filter :bool, :must => { :term => { :hidden => false } }
         filter :exists, :field => :available_on
         filter :bool, :should => {
           :range => {

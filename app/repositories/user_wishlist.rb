@@ -50,6 +50,7 @@ class UserWishlist
         item_id: item.id,
         name: item.product.name,
         product_id: item.product.id,
+        product_color_ids: item.product.color_ids,
         master_id: item.product.master.id,
         variant_id: variant_id,
         variants: [item.spree_variant_id],
@@ -96,9 +97,8 @@ class UserWishlist
         property_id = Spree::Property.where(name: 'color_customization').first.try(:id)
         Spree::ProductProperty.where(
           property_id: property_id,
-          product_id: candidates,
-          value: %w{y yes}
-        ).pluck(:product_id)
+          product_id: candidates
+        ).where('TRIM(LOWER(value)) IN (?)', %w{y yes}).pluck(:product_id)
       end
     end
 end

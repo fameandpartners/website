@@ -10,12 +10,10 @@
             small = I18n.t('product.extra_size_price')
 
     - if product.extra_sizes.present?
-      optgroup label="Plus sizes"
+      optgroup label="Sizes below are additional $20"
         - product.extra_sizes.each do |size|
           option data-id=(size[:id]) class="size" value=(size[:value])
             = size[:title]
-            - if size[:extra_price]
-              small = I18n.t('product.extra_size_price')
 
 .product-row
   select.selectbox.selectbox-large.selectbox-colors.selectbox-text-center id="colour" data-placeholder="Select color"
@@ -46,4 +44,4 @@
               - else
                 .price Additional +#{customisation.display_price}
             = link_to '+ ADD', '#', class: 'btn'
-    .instructions Once you have made your selections, simply choose your size on the right and add to cart!
+

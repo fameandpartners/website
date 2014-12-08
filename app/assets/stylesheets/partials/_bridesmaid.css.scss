@@ -38,22 +38,6 @@
 		position: relative;		
 	}
 
-	.slidesjs-previous{
-		position: absolute;
-		left: 10px;
-		z-index: 100;
-		top: 210px;
-		cursor: pointer;
-	}
-
-	.slidesjs-next{
-		position: absolute;
-		right: 10px;
-		z-index: 100;
-		top: 210px;
-		cursor: pointer;
-	}
-
 	.text-box {
 		position: absolute;
 		top: 0;
@@ -116,7 +100,7 @@
 	.social {
 		position: absolute;
 		left: 36px;
-		bottom: 175px;
+		bottom: 30px;
 		margin: 0;
 		padding: 0;
 		width: 300px;
@@ -163,8 +147,7 @@
 		letter-spacing: -6px;
 	}
 
-    .button-flat,
-	.facebook-button-flat {
+  .button-flat, .facebook-button-flat {
 		margin-top: 20px;
 	}
 }
@@ -173,7 +156,7 @@
 // Info Header
 .bridesmaid-info-header {
 	position: relative;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	.text-box {
 		position: absolute;
 		left: 35px;
@@ -197,6 +180,10 @@
 			font-size: 25px;
 		}
 	}
+}
+
+.bridesmaid-info-footer {
+	margin-top: 30px
 }
 // @end
 
@@ -223,6 +210,10 @@
 		font-family: $fontThree;
 		font-size: 30px;
 		line-height: 1;
+	}
+
+	.chosen-container .chosen-results li {
+		font-size: 12px;
 	}
 }
 // @end
@@ -271,10 +262,13 @@
 		margin: 0 0 12px;
 		cursor: pointer;
 		border: 1px solid #000;
-		font-size: 16px;
+		font-size: 18px;
+		font-family: $fontThree;
+		letter-spacing: 2px;
+		font-weight: 100;
 		padding: 8px 0;
 		&.selected {
-			opacity: .4;
+			border: 3px solid #000;
 		}
 		&.black {
 			background: image-url('_bridesmaid/colors/black.png') center center no-repeat;
@@ -319,11 +313,32 @@
 	font-size: 16px;
 	text-transform: none;
 	h2 {
-		font-size: 25px;
-		font-family: $fontTwo;
+		font-size: 35px;
+		font-family: $fontThree;
+		text-transform: uppercase;
+		letter-spacing: 2.4px;
 	}
 	em {
 		font-family: $fontTwo;
+	}
+	.container, .container1{
+		background: #FCF3E9;
+		padding: 20px 70px 70px;
+		position: relative;
+		margin-bottom: 80px;
+		.block-with-triangle{
+			position: absolute;
+			bottom: -45px;
+			left: 490px;
+		}
+	}
+	.container1{
+		padding: 20px 20px 80px;
+		.block-with-triangle{
+			position: absolute;
+			bottom: -55px;
+			left: 460px;
+		}
 	}
 }
 // @end
@@ -343,8 +358,9 @@
 				margin: 0;
 			}
 		}
-
-		
+	}
+	.buttons{
+		margin-bottom: 40px;
 	}
 }
 
@@ -354,14 +370,15 @@
 	background: #fdf6f0;
 	color: #000;
 	text-transform: uppercase;
-	margin: 0 0 30px 0;
+	margin: 0 0 28px 0;
 	.name{
-		display: inline;
-		font: 400 38px/1 $fontTwo;
+		padding: 26px 0 0 0;
+		display: block;
+		font: 400 34px/1 $fontTwo;
 	}
 	.info{
-		display: inline;
-		font: 400 28px/1 $fontTwo;
+		display: block;
+		font: 400 52px/1 $fontTwo;
 		font-style: italic;
 	}
 }
@@ -379,13 +396,13 @@
 		padding: 0;
 		background: image_url('_bridesmaid/moodboard_banner.jpg');
 		.name{
-			padding: 28px 0 0 0;
+			padding: 26px 0 0 0;
 			display: block;
-			font: 400 38px/1 $fontTwo;
+			font: 400 34px/1 $fontTwo;
 		}
 		.info{
 			display: block;
-			font: 400 28px/1 $fontTwo;
+			font: 400 52px/1 $fontTwo;
 			font-style: italic;
 		}
 	}
@@ -434,6 +451,9 @@
 			display: inline-block;
 			vertical-align: middle;
 			line-height: 98px;
+			a{
+				text-decoration: none;
+			}
 		}
 	}
 }

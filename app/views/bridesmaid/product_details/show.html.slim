@@ -159,9 +159,11 @@ javascript:
       .product-full-description
         =raw @product.description
         - if @product.fabric
-          ' fabric:
-          =raw @product.fabric
-        =raw @product.notes
+          p
+            ' Fabric:
+            =raw @product.fabric
+        p
+          =raw @product.notes
 
   /- if @recommended_products.present?
     .page-title-with-line

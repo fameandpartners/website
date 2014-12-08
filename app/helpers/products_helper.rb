@@ -123,7 +123,14 @@ module ProductsHelper
       end
     end
 
-    options.reverse_merge! :alt => images.first.alt.blank? ? product.name : images.first.alt
+    if images.blank? || images.first.alt.blank?
+      alt = product.name
+    else
+      alt = images.first.alt
+    end
+
+    options.reverse_merge! :alt => alt
+
     sources = images.map{ |image| image.attachment.url(:large) }
 
     hoverable_image_tag(sources, options)
