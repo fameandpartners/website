@@ -115,6 +115,11 @@ Spree::User.class_eval do
     SiteVersion.where(id: self.site_version_id).first || SiteVersion.default
   end
 
+  # this logic should placed in bridesmaid module, without pollution user model
+  def is_bride?
+    bridesmaid_party_events.exists?
+  end
+
   private
 
   def campaign_monitor_sign_up_reason
