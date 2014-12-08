@@ -63,7 +63,8 @@ javascript:
     .grid-4
       .product-info
         .product-header
-          .product-title = @product.name
+          h1.product-title
+            = link_to @product.name, collection_product_path(@product)
           .product-price = @product.price.display_price
           .product-short-description 
             = truncate(@product.short_description, length: 80, separator: ' ')
@@ -138,9 +139,11 @@ javascript:
       .product-full-description
         =raw @product.description
         - if @product.fabric
-          ' fabric:
-          =raw @product.fabric
-        =raw @product.notes
+          p
+            ' Fabric:
+            =raw @product.fabric
+        p
+          =raw @product.notes
 
   - if @recommended_products.present?
     .page-title-with-line

@@ -40,6 +40,9 @@
 	}
 	.product-title {
 		font: 400 32px/1 $fontThree;
+		a {
+			text-decoration: none;
+		}
 	}
 	.form { 
 		margin: 0;
