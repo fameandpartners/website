@@ -113,6 +113,8 @@ javascript:
         - else
           - if current_spree_user.bridesmaid_party_events.present?
             = link_to 'Share with Bridesmaids', '#', data: { action: 'show-share-modal' }, class: 'btn share-moodboard'
+            .intro
+              ' Send this moodboard to your bridesmaids so they can select their dresses.
 
           ul.products-list
             - @moodboard.products.each do |product|
@@ -163,7 +165,7 @@ javascript:
   .overlay
   .modal-container.share-popup
     .close-lightbox.close
-    .modal-title Send this moodboard to your friends
+    .modal-title Send this moodboard to your bridesmaids
     .grid-container.form
       .row.note
         .grid-12
