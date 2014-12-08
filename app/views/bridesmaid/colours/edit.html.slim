@@ -29,10 +29,7 @@ javascript:
   })
 
 .bridesmaid-info-header
-  = image_tag "_bridesmaid/pic3.jpg"
-  .text-box
-    .big Colour Palette
-    .small Select the colours that you would prefer your dresses in.
+  = image_tag "_bridesmaid/color-header.jpg"
 
 = form_for @bridesmaid_event, as: :info, url: bridesmaid_party_colour_path, method: :put, html: { id: 'palette_form' } do |f|
   = f.hidden_field 'colours', { value: @palette.selected.join(','), id: 'info_colours' }
@@ -46,3 +43,5 @@ javascript:
   = link_to '#', class: 'block-with-triangle', id: 'next-button' do
     span.text NEXT STEP
     span.triangle-bottom style="border-top-color: #e6a49d"
+.bridesmaid-info-footer
+  = image_tag "_bridesmaid/color-footer.jpg"
