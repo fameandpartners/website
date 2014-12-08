@@ -147,8 +147,7 @@
 		letter-spacing: -6px;
 	}
 
-    .button-flat,
-	.facebook-button-flat {
+    .button-flat, .facebook-button-flat {
 		margin-top: 20px;
 	}
 }
@@ -314,11 +313,32 @@
 	font-size: 16px;
 	text-transform: none;
 	h2 {
-		font-size: 25px;
-		font-family: $fontTwo;
+		font-size: 35px;
+		font-family: $fontThree;
+		text-transform: uppercase;
+		letter-spacing: 2.4px;
 	}
 	em {
 		font-family: $fontTwo;
+	}
+	.container, .container1{
+		background: #FCF3E9;
+		padding: 20px 70px 70px;
+		position: relative;
+		margin-bottom: 80px;
+		.block-with-triangle{
+			position: absolute;
+			bottom: -45px;
+			left: 490px;
+		}
+	}
+	.container1{
+		padding: 20px 20px 80px;
+		.block-with-triangle{
+			position: absolute;
+			bottom: -55px;
+			left: 460px;
+		}
 	}
 }
 // @end
@@ -350,14 +370,14 @@
 	background: #fdf6f0;
 	color: #000;
 	text-transform: uppercase;
-	margin: 0 0 30px 0;
+	margin: 0 0 28px 0;
 	.name{
 		display: inline;
-		font: 400 38px/1 $fontTwo;
+		font: 400 32px/1 $fontTwo;
 	}
 	.info{
 		display: inline;
-		font: 400 28px/1 $fontTwo;
+		font: 400 48px/1 $fontTwo;
 		font-style: italic;
 	}
 }
@@ -430,6 +450,9 @@
 			display: inline-block;
 			vertical-align: middle;
 			line-height: 98px;
+			a{
+				text-decoration: none;
+			}
 		}
 	}
 }
