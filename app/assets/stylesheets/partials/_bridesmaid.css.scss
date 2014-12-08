@@ -157,7 +157,7 @@
 // Info Header
 .bridesmaid-info-header {
 	position: relative;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	.text-box {
 		position: absolute;
 		left: 35px;
@@ -181,6 +181,10 @@
 			font-size: 25px;
 		}
 	}
+}
+
+.bridesmaid-info-footer {
+	margin-top: 30px
 }
 // @end
 
@@ -259,10 +263,13 @@
 		margin: 0 0 12px;
 		cursor: pointer;
 		border: 1px solid #000;
-		font-size: 16px;
+		font-size: 18px;
+		font-family: $fontThree;
+		letter-spacing: 2px;
+		font-weight: 100;
 		padding: 8px 0;
 		&.selected {
-			opacity: .4;
+			border: 3px solid #000;
 		}
 		&.black {
 			background: image-url('_bridesmaid/colors/black.png') center center no-repeat;
