@@ -119,12 +119,8 @@ module Overrides
 
         def recommended_by_taxon_ids(taxon_ids, limit = 4)
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
-            filter :bool, :must => {
-              :term => {
-                :deleted => false,
-                :hidden  => false
-              }
-            }
+            filter :bool, :must => { :term => { :deleted => false } }
+            filter :bool, :must => { :term => { :hidden => false } }
 
             filter :exists, :field => :available_on
 
@@ -198,12 +194,8 @@ module Overrides
 
         def recommended_for_style_profile(style_profile, limit = 8)
           query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
-            filter :bool, :must => {
-              :term => {
-                :deleted => false,
-                :hidden  => false
-              }
-            }
+            filter :bool, :must => { :term => { :deleted => false } }
+            filter :bool, :must => { :term => { :hidden => false } }
 
             filter :exists, :field => :available_on
 
