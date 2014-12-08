@@ -44,13 +44,8 @@ module Products
       begin
         results = Tire.search(:color_variants, size: 1000) do
           # Get only actual info. Ignore deleted and unavailable
-          filter :bool,
-                 :must => {
-                   :term => {
-                     'product.is_deleted' => false,
-                     'product.is_hidden' => false
-                   }
-                 }
+          filter :bool, :must => { :term => { 'product.is_deleted' => false } }
+          filter :bool, :must => { :term => { 'product.is_hidden' => false } }
           filter :exists,
                  :field => :available_on
           filter :bool,
