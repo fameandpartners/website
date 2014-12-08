@@ -111,7 +111,7 @@ javascript:
         - if @moodboard.products.blank?
           p Sorry, there are no items in your moodboard
         - else
-          - if current_spree_user.bridesmaid_party_events.present?
+          - if @moodboard.bride_moodboard
             = link_to 'Share with Bridesmaids', '#', data: { action: 'show-share-modal' }, class: 'btn share-moodboard'
             .intro
               ' Send this moodboard to your bridesmaids so they can select their dresses.
