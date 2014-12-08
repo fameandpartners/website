@@ -20,6 +20,19 @@ Spree::Order.class_eval do
     go_to_state :complete, :if => lambda { |order| (order.payment_required? && order.has_unprocessed_payments?) || !order.payment_required? }
   end
 
+  state_machine do
+    after_transition :to => :complete, :do => :track_user_bought_dress
+  end
+
+  def track_user_bought_dress
+    # TODO: check this works
+    if self.user.bridesmaid_party_members.present?
+      Bridesmaid::CheckIsDressBoughtByMember.new(order: self).process
+    end
+  rescue Exception => e
+    # do nothing, tracking/notifying shouldn't have any issues
+  end
+
   def cache_key
     "orders/#{id}-#{updated_at.to_s(:number)}"
   end

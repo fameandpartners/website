@@ -1,4 +1,5 @@
 $('#dev_console').ready ->
+  #$('body').ready ->
 
   window.fill = (step) ->
     if step == 'address' || step == 1
