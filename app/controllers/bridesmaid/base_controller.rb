@@ -11,15 +11,15 @@ class Bridesmaid::BaseController < ApplicationController
   class Bridesmaid::Errors::MoodboardNotReady < StandardError; end
   class Bridesmaid::Errors::MoodboardNotAvailable < StandardError; end
 
-  rescue_from Bridesmaid::Errors::SpreeUserNotLoggedIn, with: :redirect_to_landing_page
-  rescue_from Bridesmaid::Errors::SpreeUserLoggedIn, with: :redirect_to_details_page
-  rescue_from Bridesmaid::Errors::NotDevelopedYet, with: :redirect_to_main_app
-  rescue_from Bridesmaid::Errors::ConsiergeServiceNotFound, with: :redirect_to_dresses_page
-  rescue_from Bridesmaid::Errors::ProfileNotCompleted, with: :redirect_to_color_selection_page
-  rescue_from Bridesmaid::Errors::MoodboardOwnerNotFound, with: :redirect_to_main_app
-  rescue_from Bridesmaid::Errors::MoodboardAccessDenied, with: :redirect_to_landing_page
-  rescue_from Bridesmaid::Errors::MoodboardNotReady, with: :redirect_to_landing_page
-  rescue_from Bridesmaid::Errors::MoodboardNotAvailable, with: :redirect_to_bride_moodboard
+  # rescue_from Bridesmaid::Errors::SpreeUserNotLoggedIn, with: :redirect_to_landing_page
+  # rescue_from Bridesmaid::Errors::SpreeUserLoggedIn, with: :redirect_to_details_page
+  # rescue_from Bridesmaid::Errors::NotDevelopedYet, with: :redirect_to_main_app
+  # rescue_from Bridesmaid::Errors::ConsiergeServiceNotFound, with: :redirect_to_dresses_page
+  # rescue_from Bridesmaid::Errors::ProfileNotCompleted, with: :redirect_to_color_selection_page
+  # rescue_from Bridesmaid::Errors::MoodboardOwnerNotFound, with: :redirect_to_main_app
+  # rescue_from Bridesmaid::Errors::MoodboardAccessDenied, with: :redirect_to_landing_page
+  # rescue_from Bridesmaid::Errors::MoodboardNotReady, with: :redirect_to_landing_page
+  # rescue_from Bridesmaid::Errors::MoodboardNotAvailable, with: :redirect_to_bride_moodboard
 
   #before_filter :hide_module
 
