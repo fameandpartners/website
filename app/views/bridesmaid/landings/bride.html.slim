@@ -84,13 +84,85 @@
       span Start Designing Now
 
 .bride-landing-footer
-  .msg1
-    .content
-      = image_tag "_bridesmaid/conciergetile.jpg"
-      .social
-        = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook' do
-          = image_tag('_bridesmaid/fb.png')
-          .link Start designing now
+  javascript:
+      $(function() {
+        $('#slides').slidesjs({
+          navigation: {
+            active: false,
+            effect: "slide"
+          },
+          pagination: {
+            active: false,
+            effect: "slide"
+          },
+          play: {
+            active: false,
+            effect: "slide",
+            interval: 5000,
+            auto: true,
+            swap: false,
+            pauseOnHover: true,
+            restartDelay: 2500
+          },
+          effect: {
+            slide: {
+              speed: 500
+            }
+          },
+          width: 1140,
+          height: 642
+        });
+      });
+  #slides
+    .slidesjs-previous.slidesjs-navigation
+      = image_tag('icon-arrow-left.png')
+    .slidesjs-next.slidesjs-navigation
+      = image_tag('icon-arrow-right.png')
+    .msg1
+      .content
+        = image_tag "_bridesmaid/conciergetile.jpg"
+        .social
+          = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook' do
+            = image_tag('_bridesmaid/fb.png')
+            .link Start designing now
+    .msg2
+      .content
+        = image_tag "_bridesmaid/2.jpg"
+        .text-box
+          .centered
+            ' DRESSES TO BE WORN
+            br
+            ' MORE THAN ONCE
+        .social
+          = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook' do
+            = image_tag('_bridesmaid/fb.png')
+            .link Start designing now
+    .msg2
+      .content
+        = image_tag "_bridesmaid/3.jpg"
+        .text-box
+          .centered
+            ' DRESSES YOUR 
+            br
+            ' BRIDESMAIDS WILL LOVE
+        .social
+          = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook' do
+            = image_tag('_bridesmaid/fb.png')
+            .link Start designing now
+    .msg3
+      .content
+        = image_tag "_bridesmaid/2.jpg"
+        .text-box
+          .centered
+            ' DRESSES TO BE WORN
+            br
+            ' MORE THAN ONCE
+        .social
+          = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook' do
+            = image_tag('_bridesmaid/fb.png')
+            .link Start designing now
+  
+
   
 script type="application/javascript" src="//s.uadx.com/4505c140-79a4-11e4-88aa-22000afe405e.js"
 

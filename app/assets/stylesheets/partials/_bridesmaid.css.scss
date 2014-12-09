@@ -38,6 +38,22 @@
 		position: relative;		
 	}
 
+	.slidesjs-previous{
+		position: absolute;
+		left: 10px;
+		z-index: 100;
+		top: 280px;
+		cursor: pointer;
+	}
+
+	.slidesjs-next{
+		position: absolute;
+		right: 10px;
+		z-index: 100;
+		top: 280px;
+		cursor: pointer;
+	}
+
 	.text-box {
 		position: absolute;
 		top: 0;
@@ -128,7 +144,7 @@
 
 // Landing Steps
 .bride-landing-steps {
-	margin: 30px;
+	margin: 10px 0;
 	padding: 30px;
 	background-color: #fdf5ef;
 	font-family: $fontTwo;
@@ -359,7 +375,7 @@
 			}
 		}
 	}
-	.buttons{
+	.product{
 		margin-bottom: 40px;
 	}
 }
