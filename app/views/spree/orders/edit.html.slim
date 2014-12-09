@@ -33,18 +33,23 @@
                         .name = link_to product.name, collection_product_path(product), target: 'blank'
                         .text = line_item_description(variant)
                       .buttons
-                        - if line_item.personalization.present?
-                          = link_to 'Edit item', personalization_product_path(product), class: 'btn empty small border'
-                        - else
-                          - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
-                          = link_to 'Edit item', '#', class: 'edit-link btn small empty border', data: link_data
-                        = product_move_to_wishlist_link(variant, title: 'Move to wishlist', size:  'small')
+                        - if !product.service?
+                          - if line_item.personalization.present?
+                            = link_to 'Edit item', personalization_product_path(product), class: 'btn empty small border'
+                          - else
+                            - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
+                            = link_to 'Edit item', '#', class: 'edit-link btn small empty border', data: link_data
+                          = product_move_to_wishlist_link(variant, title: 'Move to wishlist', size:  'small')
                         = link_to '#', data: { id: variant.id }, class: 'remove-item-from-cart  btn empty small border lighter' do
                           span.icon-trash
                   td.column-2
                     .details-box
                       .static
-                        - unless line_item.personalization.present?
+                        - if product.service?
+                          /.smaller
+                            /.label Quantity
+                            /.value = line_item.quantity
+                        - elsif line_item.personalization.blank?
                           .smaller
                             .line
                               .label Color
