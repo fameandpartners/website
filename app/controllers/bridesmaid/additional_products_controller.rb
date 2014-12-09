@@ -3,9 +3,10 @@ class Bridesmaid::AdditionalProductsController < Bridesmaid::BaseController
 
   # this page should be not shown. left to support stored elements
   def new
-    redirect_to bridesmaid_party_colour_path
-#    set_page_titles
-#    @product = consierge_service
+    raise Bridesmaid::Errors::ConsiergeServiceStepDisabled
+
+    set_page_titles
+    @product = consierge_service
   end
 
   # add consierge service
