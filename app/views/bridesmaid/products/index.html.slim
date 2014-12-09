@@ -23,7 +23,7 @@ javascript:
       });
 
       var consiergeServiceId = #{ @consierge_service.try(:id).to_json };
-      if (consiergeServiceId) {
+      if (consiergeServiceId && $.cookie('concierge_service_mp') != 'hide') {
         _.delay(popups.showConciergeServicePopup, 10 * 1000, consiergeServiceId);
       }
     })(document)

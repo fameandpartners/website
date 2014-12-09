@@ -17,6 +17,7 @@ window.popups.showConciergeServicePopup = (itemId) ->
 
     hide: () ->
       popup.container.hide()
+      $.cookie('concierge_service_mp', 'hide', { expires: 365, path: '/' })
       popup.container.removeClass('consierge-service')
       popup.container.find('.modal-container').removeClass('form')
 
