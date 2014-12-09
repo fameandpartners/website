@@ -4,17 +4,17 @@ class Bridesmaid::ProductDetailsController < Bridesmaid::BaseController
   def show
     require_user_logged_in!
 
-    set_product_show_page_title(spree_product, selected_color.try(:presentation))
+    @product = product_details_resource.read
+
+    raise @product.inspect
+
+    set_product_show_page_title(spree_product, @product.selected_color.presentation)
     display_marketing_banner
 
     @bridesmaid_user_profile = bridesmaid_user_profile
-    @color_name = selected_color.try(:name)
-
     show_bridesmaid_header unless @bridesmaid_user_profile.owned_by?(current_spree_user)
 
     #@recommended_products = get_recommended_products(spree_product, limit: 4)
-
-    @product = product_details_resource.read
   end
 
   private
@@ -40,18 +40,13 @@ class Bridesmaid::ProductDetailsController < Bridesmaid::BaseController
       end
     end
 
-    def selected_color
-      return nil if params[:color_name].blank?
-      @selected_color ||= Spree::OptionValue.colors.find_by_name!(params[:color_name])
-    end
-
     def product_details_resource
       Bridesmaid::ProductDetailsResource.new(
         site_version: current_site_version,
         product: spree_product,
         accessor: current_spree_user,
         moodboard_owner: moodboard_owner,
-        selected_color: selected_color
+        color_name: params[:color_name]
       )
     end
 end

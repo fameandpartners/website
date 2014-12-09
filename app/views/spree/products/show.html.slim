@@ -21,13 +21,12 @@ javascript:
         window.incompatibility_map
       );
 
-      productPageSelector.colorInput.setValue('#{ @color.try(:name)}');
+      productPageSelector.colorInput.setValue('#{ @product.selected_color.name }');
       productPageSelector.colorInput.onValueChanged();
 
       page.enableProductImagesSlider('.product-slider .dresses-slider', productPageSelector.colorInput);
     })(document)
   })
-
 
 .product-page-2  itemscope='' itemtype="http://data-vocabulary.org/Product"
   .product-details itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"

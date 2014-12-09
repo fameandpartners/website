@@ -150,12 +150,12 @@ Spree::ProductsController.class_eval do
     @product = Products::ProductDetailsResource.new(
       site_version: current_site_version,
       product: @product,
-      selected_color: @color
+      color_name: params[:color_name]
     ).read
 
     @is_bride = current_spree_user && current_spree_user.is_bride?
 
-    set_product_show_page_title(@product, @color.try(:presentation))
+    set_product_show_page_title(@product, @product.selected_color.presentation)
     display_marketing_banner
 
     respond_with(@product)
