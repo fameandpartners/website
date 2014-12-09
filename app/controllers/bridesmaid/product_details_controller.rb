@@ -6,8 +6,6 @@ class Bridesmaid::ProductDetailsController < Bridesmaid::BaseController
 
     @product = product_details_resource.read
 
-    raise @product.inspect
-
     set_product_show_page_title(spree_product, @product.selected_color.presentation)
     display_marketing_banner
 
