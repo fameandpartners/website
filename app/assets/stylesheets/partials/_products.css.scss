@@ -1008,6 +1008,7 @@
 		text-align: center;
 
 		.title {
+			margin: 60px 0 0 0;
 			font-size: 13px;
 			font-weight: 600;
 		}
@@ -1018,9 +1019,9 @@
 		color: #595959;
 	}
 	.btn {
-		line-height: 38px !important;
-		padding: 0 30px;
+		font: 100 14px/32px $fontThree !important;
+		padding: 0 20px;
 		margin-top: 25px;
-		font-family: $fontThree !important;
+		height: 30px;
 	}
 }
