@@ -112,9 +112,10 @@ javascript:
           p Sorry, there are no items in your moodboard
         - else
           - if @moodboard.bride_moodboard
-            = link_to 'Share with Bridesmaids', '#', data: { action: 'show-share-modal' }, class: 'btn share-moodboard'
             .intro
-              ' Send this moodboard to your bridesmaids so they can select their dresses.
+              ' Send this moodboard to your bridesmaids so they can select their size, colour and customisations
+            = link_to 'Share with Bridesmaids', '#', data: { action: 'show-share-modal' }, class: 'btn share-moodboard'
+            
 
           ul.products-list
             - @moodboard.products.each do |product|
@@ -179,8 +180,8 @@ javascript:
           .string
             input type="email" name="email" disabled="disabled" required="required" placeholder="Email address"
     .add-more
-      = link_to '+ Add more friends', '#', data: { action: 'add-friend' }
+      = link_to '+ Add more', '#', data: { action: 'add-friend' }
     .buttons
-      = link_to 'Send to friends', '#', class: 'btn', data: { action: 'send-data' }
+      = link_to 'Share now', '#', class: 'btn', data: { action: 'send-data' }
       .alert.alert-success Invitations have been sent to your bridesmaids.
       .alert.alert-error We've found some errors in the form. Please take a look at the errors.
