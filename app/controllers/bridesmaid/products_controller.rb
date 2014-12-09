@@ -11,6 +11,7 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
     # Display dress variants at the top of the page that match the colours the user selected 
     # when they completed the questionnaire.
     @products           = products_resource.read_all
+    @consierge_service  = Spree::Variant.find_by_sku('ap10001cs')
 
     # In the second section of the page display dresses from the bridesmaid taxon 
     # that are also available in the colours the user selected.

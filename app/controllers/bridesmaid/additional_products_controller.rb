@@ -1,9 +1,11 @@
 class Bridesmaid::AdditionalProductsController < Bridesmaid::BaseController
   before_filter :require_user_logged_in!
 
+  # this page should be not shown. left to support stored elements
   def new
-    set_page_titles
-    @product = consierge_service
+    redirect_to bridesmaid_party_colour_path
+#    set_page_titles
+#    @product = consierge_service
   end
 
   # add consierge service
@@ -36,6 +38,8 @@ class Bridesmaid::AdditionalProductsController < Bridesmaid::BaseController
         end
       end
     end
+
+    #{user_info: {phone: u_phone, email: u_email, suburb_state: u_suburb_state}}
 
     # user, product, currency
     def add_product_to_user_cart(product_variant)

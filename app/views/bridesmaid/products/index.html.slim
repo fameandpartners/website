@@ -20,7 +20,12 @@ javascript:
         }
 
         location.href = path
-      })
+      });
+
+      var consiergeServiceId = #{ @consierge_service.try(:id).to_json };
+      if (consiergeServiceId) {
+        _.delay(popups.showConciergeServicePopup, 10 * 1000, consiergeServiceId);
+      }
     })(document)
   })
 
