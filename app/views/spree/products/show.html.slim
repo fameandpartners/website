@@ -41,7 +41,9 @@ javascript:
   .bride-instructions
     / -- DISPLAY IF USER IS BRIDE
     - if @is_bride
-      = image_tag('_bridesmaid/product_instructions.jpg')
+      .bride-header
+        = image_tag('_bridesmaid/product_instructions.jpg')
+        = render 'bridesmaid/shared/sub_nav'
 
   / .product-alert
     / -- DONT IMPLEMENT THIS FOR NOW

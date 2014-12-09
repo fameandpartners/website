@@ -364,17 +364,6 @@
 		margin: 0 0 10px 0;
 		padding: 0;
 	}
-	.navigation{
-		text-align: right;
-		margin-bottom: 30px;
-
-		.btn{
-			margin: 0 20px 0;
-			&:last-child{
-				margin: 0;
-			}
-		}
-	}
 	.product{
 		margin-bottom: 40px;
 	}
@@ -469,6 +458,27 @@
 			line-height: 98px;
 			a{
 				text-decoration: none;
+			}
+		}
+	}
+}
+.bride-header{
+	.navigation{
+		text-align: center !important;
+		margin: 16px auto 30px auto;
+		width: 340px;
+
+		.title{
+			border-bottom: 1px solid #333;
+			padding: 0 0 2px 0;
+			margin: 0 0 10px 0;
+		}
+
+		.btn.small{
+			margin: 0 10px 0 0;
+			padding: 1px 10px 4px !important;
+			&:last-child{
+				margin: 0;
 			}
 		}
 	}

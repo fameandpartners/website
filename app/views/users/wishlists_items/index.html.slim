@@ -107,6 +107,8 @@ javascript:
             .header
               .name My
               .info moodboard
+          .bride-header
+            = render 'bridesmaid/shared/sub_nav'
 
         - if @moodboard.products.blank?
           p Sorry, there are no items in your moodboard
