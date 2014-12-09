@@ -4,7 +4,7 @@ Spree::User.class_eval do
   SIGN_UP_REASON = %w( custom_dress style_quiz workshop competition campaign_style_call customise_dress bridesmaid_party )
   SIGN_UP_VIA = %w( Email Facebook )
 
-  attr_accessible :avatar, :slug, :description, :newsletter, :dob
+  attr_accessible :avatar, :slug, :description, :newsletter, :dob, :site_version_id
   has_attached_file :avatar, styles: { small: "160x160#"}
 
   #validates :first_name, :last_name, :slug, :description, presence: true, if: :blog_moderator?

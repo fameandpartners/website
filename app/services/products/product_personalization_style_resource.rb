@@ -76,7 +76,7 @@ class Products::ProductPersonalizationStyleResource
     def product_images
       Repositories::ProductImages.new(
         product: product
-      ).read_all.sort_by{|color| color.position.to_i }
+      ).read_all
     end
 
     def product_price

@@ -6,6 +6,12 @@ window.helpers.createProductImagesSlider = (container, input) ->
 
   all_slides = $container.find('li').remove()
 
+  sliderSettings = {
+    controls: true,
+    nextText: '<span class="icon-arrow-right" />',
+    prevText: '<span class="icon-arrow-left" />'
+  }
+
   updateSliderImages = () ->
     # get current slide id 
     currentSlideIndex = bxSlider.getCurrentSlide()
@@ -24,14 +30,10 @@ window.helpers.createProductImagesSlider = (container, input) ->
       startSlide = $container.find("##{ currentSlideId }").index()
     else
       startSlide = 0
-    bxSlider.reloadSlider(startSlide: startSlide)
 
-  bxSlider = $container.bxSlider({
-    #selector: '.visible' # not working controls with this
-    controls: true,
-    nextText: '<span class="icon-arrow-right" />',
-    prevText: '<span class="icon-arrow-left" />'
-  })
+    bxSlider.reloadSlider(_.extend({ startSlide: startSlide }, sliderSettings))
+
+  bxSlider = $container.bxSlider(sliderSettings)
 
   $colorInput.on('change', updateSliderImages)
   updateSliderImages()

@@ -1,5 +1,5 @@
 class Bridesmaid::ProductDetailsResource
-  attr_reader :site_version, :product, :accessor, :moodboard_owner, :selected_color
+  attr_reader :site_version, :product, :accessor, :moodboard_owner, :color_name
 
 
   def initialize(options = {})
@@ -7,7 +7,7 @@ class Bridesmaid::ProductDetailsResource
     @product          = options[:product]
     @accessor         = options[:accessor]
     @moodboard_owner  = options[:moodboard_owner]
-    @selected_color   = options[:selected_color]
+    @color_name       = options[:color_name]
   end
 
   def read
@@ -21,7 +21,7 @@ class Bridesmaid::ProductDetailsResource
         ::Products::ProductDetailsResource.new(
           site_version: site_version,
           product: product,
-          selected_color: selected_color
+          color_name: color_name
         ).read
       end
     end
@@ -36,6 +36,19 @@ class Bridesmaid::ProductDetailsResource
       # filter images, but ensure there are at least some images
       images_with_selected_colors = details.images.select{|image| image.color_id.nil? || color_ids.include?(image.color_id)}
       details.images = images_with_selected_colors if images_with_selected_colors.present?
+
+      # filter selected color
+      if !color_ids.include?(details.selected_color.id)
+        if (image = details.images.first).present?
+          details.selected_color = OpenStruct.new(
+            id: image.color_id,
+            name: image.color,
+            presentation: image.color
+          )
+        else
+          details.selected_color = OpenStruct.new({})
+        end
+      end
 
       details
     end
@@ -54,7 +67,7 @@ class Bridesmaid::ProductDetailsResource
       path_parts.push(
         ['dress', product.name.parameterize, product.id].reject(&:blank?).join('-')
       )
-      path_parts.push(selected_color.name) if selected_color.present?
+      path_parts.push(selected_color.name) if selected_color.name.present?
       "/" + path_parts.join('/')
     end
 end

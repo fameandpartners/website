@@ -1,11 +1,11 @@
 # please, extract not user dependable data receiving to repo
 class Products::ProductDetailsResource
-  attr_reader :site_version, :product, :selected_color
+  attr_reader :site_version, :product, :color_name
 
   def initialize(options = {})
     @site_version     = options[:site_version]
     @product          = options[:product]
-    @selected_color   = options[:selected_color]
+    @color_name       = options[:color_name]
   end
 
   def cache_key
@@ -19,7 +19,7 @@ class Products::ProductDetailsResource
   end
 
   def read
-    Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
+    Rails.cache.fetch(cache_key, expires_in: cache_expiration_time, force: true) do
 
       # load often used associations
       @product = product_with_associations(@product)
@@ -49,7 +49,8 @@ class Products::ProductDetailsResource
         variants: product_variants,
         moodboard: product_moodboard,
         url: product_url,
-        path: product_path
+        path: product_path,
+        selected_color: selected_product_color
       })
     end
   end
@@ -72,7 +73,7 @@ class Products::ProductDetailsResource
     def product_images
       Repositories::ProductImages.new(
         product: product
-      ).read_all.sort_by{|color| color.position.to_i }
+      ).read_all
     end
 
     def product_price
@@ -178,8 +179,17 @@ class Products::ProductDetailsResource
     end
 
     # colors
-    def color_selected?(color_id)
-      color_id.present? && selected_color.try(:id) == color_id
+    def selected_product_color
+      @selected_product_color ||= begin
+        if color_name.present? && (color = Spree::OptionValue.colors.find_by_name(color_name)).present?
+          OpenStruct.new(id: color.id, presentation: color.presentation, name: color.name)
+        elsif product_images.present?
+          image = product_images.first
+          OpenStruct.new(id: image.color_id, presentation: image.color, name: image.color)
+        else
+          OpenStruct.new({})
+        end
+      end
     end
 
     def default_product_colors
@@ -193,7 +203,7 @@ class Products::ProductDetailsResource
             title: variant_info[:color_presentation],
             value: variant_info[:color_value],
             image: variant_info[:image],
-            selected: color_selected?(variant_info[:color_id])
+            selected: selected_product_color.id == variant_info[:color_id]
           }
         end
         all_colors.values.sort_by{|item| item[:value] }
@@ -215,7 +225,7 @@ class Products::ProductDetailsResource
             title: option_value.presentation,
             value: option_value.value,
             image: option_value.image.present? ? option_value.image.url(:small_square) : nil,
-            selected: color_selected?(option_value.id)
+            selected: option_value.id == selected_product_color.id
           }
         end
       end

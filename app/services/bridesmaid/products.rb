@@ -68,6 +68,7 @@ class Bridesmaid::Products
         'can_be_customized?'.to_sym => item.product.can_be_customized,
         fast_delivery: item.product.fast_delivery,
         image_url: product_image(item.images),
+        image_urls: product_images(item.images),
         price: product_price(item.product, item.prices),
         path: product_path(item.product, item.color)
       )
@@ -94,7 +95,11 @@ class Bridesmaid::Products
     end
 
     def product_image(images = [])
-      images.map{|i| i.try(:large) }.compact.first || 'noimage/product.png'
+      product_images(images).first
+    end
+
+    def product_images(images = [])
+      images.map{|i| i.try(:large) }.compact.presence || ['noimage/product.png']
     end
 
     # smt like this.
@@ -125,7 +130,8 @@ class Bridesmaid::Products
       taxons      = @taxon_ids
 
       Tire.search(:color_variants, size: 1000) do
-        filter :bool, :must => { :term => { 'product.is_deleted' => false, 'product.is_hidden' => false } } 
+        filter :bool, :must => { :term => { 'product.is_deleted' => false } }
+        filter :bool, :must => { :term => { 'product.is_hidden' => false } }
         filter :exists, :field => :available_on
         filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } }
 

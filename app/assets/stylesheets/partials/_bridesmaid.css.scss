@@ -399,6 +399,20 @@
 	}
 }
 
+.bridesmaid-landing-header .bridesmaid{
+	.name{
+		font: 400 34px/1 $fontTwo;
+		padding: 26px 10px 0 0;
+		display: inline;
+	}
+	.info{
+		font: 400 28px/1 $fontTwo;
+		display: inline;
+		font-style: italic;
+	}
+
+}
+
 .bridesmaid-moodboard {
 
 	.btn{
@@ -469,6 +483,27 @@
 			line-height: 98px;
 			a{
 				text-decoration: none;
+			}
+		}
+	}
+}
+.bride-header{
+	.navigation{
+		text-align: center !important;
+		margin: 16px auto 30px auto;
+		width: 340px;
+
+		.title{
+			border-bottom: 1px solid #333;
+			padding: 0 0 2px 0;
+			margin: 0 0 10px 0;
+		}
+
+		.btn.small{
+			margin: 0 10px 0 0;
+			padding: 1px 10px 4px !important;
+			&:last-child{
+				margin: 0;
 			}
 		}
 	}

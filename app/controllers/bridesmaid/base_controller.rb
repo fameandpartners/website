@@ -5,6 +5,7 @@ class Bridesmaid::BaseController < ApplicationController
   class Bridesmaid::Errors::SpreeUserLoggedIn < StandardError; end
   class Bridesmaid::Errors::NotDevelopedYet < StandardError; end
   class Bridesmaid::Errors::ConsiergeServiceNotFound < StandardError; end
+  class Bridesmaid::Errors::ConsiergeServiceStepDisabled < StandardError; end
   class Bridesmaid::Errors::ProfileNotCompleted < StandardError; end
   class Bridesmaid::Errors::MoodboardOwnerNotFound < StandardError; end
   class Bridesmaid::Errors::MoodboardAccessDenied < StandardError; end
@@ -15,6 +16,7 @@ class Bridesmaid::BaseController < ApplicationController
   rescue_from Bridesmaid::Errors::SpreeUserLoggedIn, with: :redirect_to_details_page
   rescue_from Bridesmaid::Errors::NotDevelopedYet, with: :redirect_to_main_app
   rescue_from Bridesmaid::Errors::ConsiergeServiceNotFound, with: :redirect_to_dresses_page
+  rescue_from Bridesmaid::Errors::ConsiergeServiceStepDisabled, with: :redirect_to_dresses_page
   rescue_from Bridesmaid::Errors::ProfileNotCompleted, with: :redirect_to_color_selection_page
   rescue_from Bridesmaid::Errors::MoodboardOwnerNotFound, with: :redirect_to_main_app
   rescue_from Bridesmaid::Errors::MoodboardAccessDenied, with: :redirect_to_landing_page
@@ -69,7 +71,7 @@ class Bridesmaid::BaseController < ApplicationController
     end
 
     def redirect_to_dresses_page(exception)
-      redirect_to(bridesmaid_party_dresses_path)
+      redirect_to bridesmaid_party_dresses_path
     end
 
     def redirect_to_color_selection_page(exception)

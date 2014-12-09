@@ -21,13 +21,12 @@ javascript:
         window.incompatibility_map
       );
 
-      productPageSelector.colorInput.setValue('#{ @color.try(:name)}');
+      productPageSelector.colorInput.setValue('#{ @product.selected_color.name }');
       productPageSelector.colorInput.onValueChanged();
 
       page.enableProductImagesSlider('.product-slider .dresses-slider', productPageSelector.colorInput);
     })(document)
   })
-
 
 .product-page-2  itemscope='' itemtype="http://data-vocabulary.org/Product"
   .product-details itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"
@@ -41,7 +40,9 @@ javascript:
   .bride-instructions
     / -- DISPLAY IF USER IS BRIDE
     - if @is_bride
-      = image_tag('_bridesmaid/product_instructions.jpg')
+      .bride-header
+        = image_tag('_bridesmaid/product_instructions.jpg')
+        = render 'bridesmaid/shared/sub_nav'
 
   / .product-alert
     / -- DONT IMPLEMENT THIS FOR NOW
@@ -75,7 +76,8 @@ javascript:
           = link_to 'buy now', '#', class: 'btn large grey wide', data: { action: 'buy' }
         .product-row
           - moodboard_link_data = { 'title-add' => 'add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'product-id' => @product.id, 'id' => @product.master_id, 'color-id' => nil }
-          = link_to '+ moodboard', @product.path, class: 'btn large pink wide wish-list-link', data: moodboard_link_data
+          - moodboard_link_path = spree_user_signed_in? ? @product.path : spree.signup_path
+          = link_to '+ moodboard', moodboard_link_path, class: 'btn large pink wide wish-list-link', data: moodboard_link_data
         .product-row
           .row
             .grid-4

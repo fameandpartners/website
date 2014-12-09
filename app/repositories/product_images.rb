@@ -8,7 +8,7 @@ class ProductImages
 
   def read_all
     Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
-      (images_from_variants + images_from_product_color_values).flatten.compact.sort_by {|image| image.position }
+      (images_from_variants + images_from_product_color_values).flatten.compact.sort_by {|image| image.position.to_i }
     end
   end
   alias_method :read, :read_all

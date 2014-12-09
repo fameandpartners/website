@@ -17,7 +17,7 @@ javascript:
         window.incompatibility_map
       );
 
-      productPageSelector.colorInput.setValue('#{ @color_name }');
+      productPageSelector.colorInput.setValue('#{ @product.selected_color.name }');
       productPageSelector.colorInput.onValueChanged();
 
       page.enableProductImagesSlider('.product-slider .dresses-slider', productPageSelector.colorInput);
@@ -49,7 +49,7 @@ javascript:
     meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
     meta itemprop="identifier" content="sku:#{@product.sku}" /
 
-  - if @bridesmaid_user_profile.owned_by?(current_spree_user)
+  - if @bridesmaid_user_profile && @bridesmaid_user_profile.owned_by?(current_spree_user)
     .bride-instructions
       = image_tag('_bridesmaid/product_instructions.jpg')
 

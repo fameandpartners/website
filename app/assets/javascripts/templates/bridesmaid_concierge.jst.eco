@@ -1,16 +1,24 @@
 <div class="modal-header">
-  <div class="head1">Fame & Partners Personal Wedding</div>  
+  <div class="head1">Need help coordinating the dresses?</div>  
   <div class="head2">Concierge Service</div> 
-  <div class="head3">For $99, you will get a personal stylist to coordinate everything for you!</div>
+  <div class="head3">For $99, we will organise your bridesmaid dresses from start to end</div>
 </div>
 
-<p><em>What you get:</em></p>
+<p><em>what’s included:</em></p>
 <ul>
-    <li>1.A call with one of our stylists, at a time convenient to you</li>
-    <li>2.The stylist will build you a mood board</li>
-    <li>3.When you place the order, the $99 will come off the final cost of your order</li>
+    <li><span class="number">1.</span> A call with one of our stylists, at a time convenient to you</li>
+    <li><span class="number">2.</span> The stylist will then call and/or email all of your bridesmaid to get their size, preferences, colour ideas, silhouette preferences and body shapes</li>
+    <li><span class="number">3.</span> The stylist will build a mood board to share with the bridesmaids</li>
+    <li><span class="number">4.</span> The stylist will coordinate sizes, customisations and any other tweaks to get the mix of dresses perfect!</li>
+    <li><span class="number">5.</span> When you place the order, the $99 will come off the final cost of your dresses</li>
 </ul>
-
+<div class="risk_free">
+  <p><em>Risk Free:</em></p>
+  <ul>
+    <li>If for whatever reason you don't proceed, we will give you this</li>
+    <li>as credit to spend on any dress you like</li>
+  </ul>
+</div>
 
 
 <form action="" class="concierge">
@@ -37,8 +45,5 @@
   <span class="triangle-bottom" style="border-top-color: #e6a49d"></span>
 </a>
 
-<div class="risk_free">
-  <p><em>Risk Free:</em></p>
-  <p>If for whatever reason you don't proceed, we will give you this as credit to spend on any dress you like</p>
-</div>
+
 
