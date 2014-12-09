@@ -41,29 +41,26 @@ javascript:
             - options = options_from_collection_for_select(ProductStyleProfile::BODY_SHAPES, :to_s, :to_s, params[:bodyshape])
             = select_tag :bodyshape, options, class: 'selectbox', prompt: 'Body Shape'
 
-    .category-catalog.products-list
-      /h5.breadcrumb
-        = link_to('Collection', collection_path, data: { action: 'show-collection' })
-        '/
-        = link_to('Bridesmaid Party Dresses', '/edits/bridesmaid-party', data: { action: 'show-collection' })
+  .category-catalog.products-list
+    /h5.breadcrumb
+      = link_to('Collection', collection_path, data: { action: 'show-collection' })
+      '/
+      = link_to('Bridesmaid Party Dresses', '/edits/bridesmaid-party', data: { action: 'show-collection' })
+    .row
+      - if @products.present?
+        - @products.each do |product|
+          .grid-3
+            = render 'product', product: product
+      - else
+        .not-found Sorry, no dresses match your criteria
 
-      
-
+    - if @similar_products.present?
       .row
         - if @products.present?
-          - @products.each do |product|
-            .grid-3
-              = render 'product', product: product
-        - else
-          .not-found Sorry, no dresses match your criteria
-
-      - if @similar_products.present?
-        .row
-          - if @products.present?
-            .page-title
-              h2 These dresses can also be made in your selected colour palette
-          - @similar_products.each do |product|
-            div class="grid-3"
-              = render 'product', product: product
+          .page-title
+            h2 These dresses can also be made in your selected colour palette
+        - @similar_products.each do |product|
+          div class="grid-3"
+            = render 'product', product: product
 
   = render 'shared/footer_browse'
