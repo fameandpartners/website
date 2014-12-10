@@ -67,7 +67,7 @@ class Bridesmaid::ProductDetailsResource
       path_parts.push(
         ['dress', product.name.parameterize, product.id].reject(&:blank?).join('-')
       )
-      path_parts.push(selected_color.name) if selected_color.name.present?
+      path_parts.push(product.selected_color.name) if product.selected_color.name.present?
       "/" + path_parts.join('/')
     end
 end

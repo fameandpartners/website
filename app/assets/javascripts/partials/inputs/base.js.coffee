@@ -265,10 +265,10 @@ window.inputs.CustomisationsSelector = class CustomisationsSelector extends Base
     $button = $valueContainer.find('.btn')
     if new_state == 'selected'
       $valueContainer.addClass('selected').removeClass('unavailable')
-      $button.html('ADDED')
+      $button.html('Selected')
     else if new_state == 'available'
       $valueContainer.removeClass('selected').removeClass('unavailable')
-      $button.html('+ ADD')
+      $button.html('Select')
     else if new_state == 'incompatible'
       $valueContainer.removeClass('selected').addClass('unavailable')
       $button.html('NOT COMPATIBLE')
