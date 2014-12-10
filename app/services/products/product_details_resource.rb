@@ -164,12 +164,16 @@ class Products::ProductDetailsResource
       site_version.size_settings.size_start rescue 4
     end
 
+    def default_size_end
+      site_version.size_settings.size_end rescue 26
+    end
+
     def default_product_sizes
       product_sizes.select{|size| size[:value] >= default_size_start && size[:value] < extra_size_start } 
     end
 
     def extra_product_sizes
-      sizes = product_sizes.select{|size| size[:value] >= extra_size_start } 
+      sizes = product_sizes.select{|size| size[:value] >= extra_size_start && size[:value] <= default_size_end } 
       return sizes if product_has_free_extra_sizes?
       sizes.map {|size| size[:extra_price] = true; size }
     end
