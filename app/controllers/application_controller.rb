@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_site_version
+
     # redirects should work only on non-ajax GET requests from users
     return if (!request.get? || request.xhr? || request_from_bot?)
 
@@ -104,8 +105,19 @@ class ApplicationController < ActionController::Base
   end
 
   # default version. overrided in spree based controllers
+  # ATTENTION!
+  # are you thinking that this method below is called from the check_site_verision (the one somewhere above) ?
+  # well it isn't k? Why? I have no idea.
+  # go to base_controller_decorator for the method that actually gets called and save yourself a couple of hours :)
   def url_with_correct_site_version
-    main_app.url_for(params.merge(site_version: current_site_version.code))
+    #main_app.url_for(params.merge(site_version: current_site_version.code))
+    if request.fullpath.include?("/au/") or request.fullpath.include?("/us/")
+      path = request.fullpath.gsub(/^\/../, '')
+    else
+      path =  request.fullpath
+    end
+
+    '/' + current_site_version.code + path + "?"
   end
 
   def store_current_location

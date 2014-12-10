@@ -136,11 +136,10 @@ javascript:
                   = link_to 'Remove', wishlists_item_path(product.item_id), class: 'btn mid border empty remove fright', method: :delete, remote: true
 
                 - if product.bridesmaides.present?
-                  .row
-                    - product.bridesmaides.each do |bridesmaid|
-                      - name = "Buy #{ bridesmaid.name }'s Dress"
-                      = link_to name, bridesmaid_add_for_bridesmaid_path(id: bridesmaid.id), class: 'btn wide small', data: { action: 'buy-for-bridesmaid', id: bridesmaid.id }
-                      p = "#{ bridesmaid.color} for #{ bridesmaid.full_name }"
+                  - product.bridesmaides.each do |bridesmaid|
+                    - name = "Buy #{ bridesmaid.name }'s Dress"
+                    p = link_to name, bridesmaid_add_for_bridesmaid_path(id: bridesmaid.id), class: 'btn wide small', data: { action: 'buy-for-bridesmaid', id: bridesmaid.id }
+                    p = "#{ bridesmaid.color} for #{ bridesmaid.full_name }"
 
 
 .modal.edit-line-item(style="display: none;")
