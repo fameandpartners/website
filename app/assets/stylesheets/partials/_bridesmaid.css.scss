@@ -29,7 +29,7 @@
 
 // Landing Footer
 .bride-landing-footer {
-	margin-top: 20px; 
+	margin-top: 10px; 
 	position: relative;
 	color: #fff;
 	margin-bottom: 40px;
@@ -367,6 +367,12 @@
 	.product{
 		margin-bottom: 40px;
 	}
+	.buttons {
+		margin-top: 10px;
+		.grid-7, .grid-5 {
+			padding: 5px;
+		}
+	}
 }
 
 .bridesmaid-landing-header, .bridesmaid-moodboard .header{
@@ -486,7 +492,7 @@
 	.navigation{
 		text-align: center !important;
 		margin: 16px auto 30px auto;
-		width: 340px;
+		width: 540px;
 
 		.title{
 			border-bottom: 1px solid #333;

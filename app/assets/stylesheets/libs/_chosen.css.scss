@@ -401,19 +401,33 @@
     color: #000;
     background: transparent;
     position: relative;
-    padding-left: 50px;
-    &:before {
+    &.white {
+      &:hover, &.highlighted {
+        &:after { background-position: left bottom;}
+      }
+      &:after {
+        background: url('_bridesmaid/color-picker-mask-black.png') no-repeat;
+        background-size: cover;
+      }
+    }
+    &:before, &:after {
       content: '';
       width: 30px;
       height: 30px;
       overflow: hidden;
       position: absolute;
       top: 15px;
-      left: 15px;
-      border: 1px solid #000;
+      left: 60px;
+      z-index: 1;
     }
-    &:hover {
+    &:after {
+      z-index: 2;
+      background: url('_bridesmaid/color-picker-mask.png') no-repeat;
+      background-size: cover;
+    }
+    &:hover, &.highlighted {
       background: magenta;
+      &:after { background-position: left bottom;}
     }
     &.default-value {
       padding-left: 15px;

@@ -28,7 +28,7 @@ class Bridesmaid::Products
     end
 
     def taxon_ids
-      collection.map(&:id).compact | Array(@taxon_ids)
+      [collection.map(&:id).compact, Array(@taxon_ids)]
     end
 
     def color_ids
@@ -127,7 +127,7 @@ class Bridesmaid::Products
       # to make them visible inside Tire.search block
       colors      = color_ids
       body_shapes = @body_shapes
-      taxons      = @taxon_ids
+      taxons      = taxon_ids
 
       Tire.search(:color_variants, size: 1000) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
@@ -144,7 +144,11 @@ class Bridesmaid::Products
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
 
         if taxons.present?
-          filter :terms, 'product.taxon_ids' => taxons
+          taxons.each do |ids|
+            if ids.present?
+              filter :terms, 'product.taxon_ids' => ids
+            end
+          end
         end
 
         if body_shapes.present?

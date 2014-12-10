@@ -32,7 +32,7 @@ class Bridesmaid::SimilarProducts
     end
 
     def taxon_ids
-      collection.map(&:id).compact | Array(@taxon_ids)
+      [collection.map(&:id).compact, Array(@taxon_ids)]
     end
 
     def locale
@@ -124,7 +124,13 @@ class Bridesmaid::SimilarProducts
         filter :bool, :must => { :term => { 'product.color_customizable' => true } }
 
         # Filter by taxons
-        filter(:terms, 'product.taxon_ids' => taxons) if taxons.present?
+        if taxons.present?
+          taxons.each do |ids|
+            if ids.present?
+              filter :terms, 'product.taxon_ids' => ids
+            end
+          end
+        end
 
         # exclude already found [ somethere else ]
         if products.present?
