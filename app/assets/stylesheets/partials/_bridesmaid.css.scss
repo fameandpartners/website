@@ -367,6 +367,12 @@
 	.product{
 		margin-bottom: 40px;
 	}
+	.buttons {
+		margin-top: 10px;
+		.grid-7, .grid-5 {
+			padding: 5px;
+		}
+	}
 }
 
 .bridesmaid-landing-header, .bridesmaid-moodboard .header{
