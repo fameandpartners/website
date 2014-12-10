@@ -6,16 +6,6 @@
   h6 = product.name
   .price = product.price.display_price
   
-  .buttons
-    .row
-      .grid-7
-        = link_to 'Move to card', '#', class: 'btn wide'
-      .grid-5
-        = link_to 'Remove', '#', class: 'btn wide empty border'
-
-    = link_to 'Buy Nastalias Dress', '#', class: 'btn wide small'
-  p cherry-red a for nastasia steward
-
   - if product.fast_delivery
     .fast-delivery-icon title="Next day delivery*"
       = I18n.t(:long, scope: [:delivery_time, :fast])

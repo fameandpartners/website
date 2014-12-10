@@ -66,6 +66,8 @@ class Bridesmaid::SelectedProduct
         item.spree_variant_id = product_variant.try(:id)
         item.product_color_id = color.try(:id)
         item.save
+
+        Repositories::UserWishlist.new(owner: moodboard_owner).drop_cache
       end
     end
 
