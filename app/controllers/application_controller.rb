@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
   end
 
   def check_site_version
-
     # redirects should work only on non-ajax GET requests from users
     return if (!request.get? || request.xhr? || request_from_bot?)
 
@@ -124,8 +123,10 @@ class ApplicationController < ActionController::Base
     session[:previous_location] = get_hreflang_link # url_with_correct_site_version
   end
 
-  def previous_location_or_default(default_url)
-    if session[:previous_location].present?
+  def previous_location_or_default(default_url, previous_location = nil)
+    if previous_location
+      previous_location
+    elsif session[:previous_location].present?
       session[:previous_location]
     else
       default_url
