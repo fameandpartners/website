@@ -1,8 +1,12 @@
 javascript:
   $(document).ready(function() {
     (function() {
+      $('.modal.signup .modal-container').center();
+
       if ($('.modal.successful-signup').length > 0) {
         $('.modal.successful-signup').show();
+        $('.modal.successful-signup .modal-container').center();
+
         _.delay(function() {
           $('.modal.successful-signup').hide();
         }, 4 * 1000)
@@ -44,14 +48,15 @@ javascript:
                 = I18n.t(:long, scope: [:delivery_time, :fast])
 
 - if @show_login_popup
-  .modal.signup
+  .modal.signup.popup-placeholder
     .overlay
     .modal-container
-      /.close-lightbox
       .edit-details
         .modal-title
           ' to access #{ @moodboard.owner.first_name }'s 
+          br
           ' dress moodboard
+          br
           ' please signup below
         .item
         .save
@@ -62,7 +67,7 @@ javascript:
 
 
 - if @show_successfull_signup
-  .modal.successful-signup style=("display: none;")
+  .modal.successful-signup.popup-placeholder#successfull-signup style=("display: none;")
     .overlay
     .modal-container
       .close-lightbox
