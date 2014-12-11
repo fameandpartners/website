@@ -74,7 +74,7 @@ class Bridesmaid::AdditionalProductsController < Bridesmaid::BaseController
 
       product_details[:line_item_id] = line_item.id
       product_details[:phone] = args[:phone] if args[:phone].present?
-      product_details[:email] = args[:email] if args[:eamil].present?
+      product_details[:email] = args[:email] if args[:email].present?
       product_details[:suburb_state] = args[:suburb_state] if args[:suburb_state].present?
 
       additional_products.push(product_details)

@@ -13,6 +13,16 @@
 
 <%= t('order_mailer.confirm_email.total', :total => @order.display_total) %>
 
+<% if @additional_products_info.present? %>
+  Additional product info
+  <% @additional_products_info.each do |info| %>
+    <%= info.product %>:
+      email: <%= info.email %>
+      phone: <%= info.phone %>
+      state: <%= info.state %>
+  <% end %>
+<% end %>
+
 
 <% if @order.billing_address.phone.present? %>
 Phone Number: <%= @order.billing_address.phone %>
