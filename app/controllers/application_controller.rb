@@ -104,16 +104,29 @@ class ApplicationController < ActionController::Base
   end
 
   # default version. overrided in spree based controllers
+  # ATTENTION!
+  # are you thinking that this method below is called from the check_site_verision (the one somewhere above) ?
+  # well it isn't k? Why? I have no idea.
+  # go to base_controller_decorator for the method that actually gets called and save yourself a couple of hours :)
   def url_with_correct_site_version
-    main_app.url_for(params.merge(site_version: current_site_version.code))
+    #main_app.url_for(params.merge(site_version: current_site_version.code))
+    if request.fullpath.include?("/au/") or request.fullpath.include?("/us/")
+      path = request.fullpath.gsub(/^\/../, '')
+    else
+      path =  request.fullpath
+    end
+
+    '/' + current_site_version.code + path + "?"
   end
 
   def store_current_location
     session[:previous_location] = get_hreflang_link # url_with_correct_site_version
   end
 
-  def previous_location_or_default(default_url)
-    if session[:previous_location].present?
+  def previous_location_or_default(default_url, previous_location = nil)
+    if previous_location
+      previous_location
+    elsif session[:previous_location].present?
       session[:previous_location]
     else
       default_url

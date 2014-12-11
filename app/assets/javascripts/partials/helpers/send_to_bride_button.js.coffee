@@ -23,6 +23,6 @@ window.helpers.addSendToBrideButton = (button) ->
         dataType: 'json',
         data: data
         success: () ->
-          $button.html('This dress has been sent!')
+          $button.find('.btn-table-text').html('This dress has been sent!')
       )
   )

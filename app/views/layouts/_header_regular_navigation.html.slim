@@ -62,8 +62,8 @@
                 i.icon-dropdown-down
                 .dropdown-menu
                   ul
-                    li = link_to 'Australia', site_version_path('au')
-                    li = link_to 'USA', site_version_path('us')
+                    li = link_to 'Australia', site_version_path('au', backlink: get_hreflang_link)
+                    li = link_to 'USA', site_version_path('us', backlink: get_hreflang_link)
         
         .login
           - unless spree_user_signed_in?

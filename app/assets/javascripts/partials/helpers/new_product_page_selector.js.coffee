@@ -34,7 +34,7 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       @colorInput.val('')
 
       @customisationsInput or= new window.inputs.CustomisationsSelector(
-        @container.find('.customisation-selector'),
+        @container.find('.customisation-selector').parent(),
         @incompatibility_map
       )
 
@@ -43,18 +43,7 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       @customisationsInput.on('change', @update)
       #@customisationsInput.on('change', @trackCustomisationSelected)
 
-      $('.customisation-selector').on 'click', (event) ->
-        event.stopPropagation();
-
       @container.find('.product-info .btn[data-action=buy]').on('click', @onBuyButtonClickHandler)
-      @container.find('.size-selector').on('click', -> $('.sizebox').slideToggle())
-      @container.find('.trigger-customisation-selector').on 'click', (event)->
-        event.stopPropagation()
-        $('.customisation-selector').toggle()
-        $(this).toggleClass "active"
-        $(document).one 'click', =>
-          $(this).toggleClass 'active'
-          $('.customisation-selector').toggle()
       @update()
 
     update: () ->

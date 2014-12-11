@@ -83,7 +83,8 @@ class Wishlist::UserWishlistResource
       bridesmaids_selected.collect do |bridesmaid|
         OpenStruct.new({
           id: bridesmaid.id,
-          name: bridesmaid.spree_user.try(:full_name) || bridesmaid.full_name,
+          name: bridesmaid.spree_user.try(:first_name) || bridesmaid.full_name,
+          full_name: bridesmaid.spree_user.try(:full_name) || bridesmaid.full_name,
           size: Spree::Variant.size_option_type.option_values.where(id: bridesmaid.size).first.try(:name),
           color: Spree::Variant.color_option_type.option_values.where(id: bridesmaid.color_id).first.try(:name)
         })

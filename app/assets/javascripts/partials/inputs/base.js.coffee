@@ -210,12 +210,25 @@ window.inputs.CustomAndBaseColourSelector = class CustomAndBaseColourSelector ex
 # between customisation values
 window.inputs.CustomisationsSelector = class CustomisationsSelector extends BaseInput
   allValuesIds: []
+  defaultText: 'select customisation'
 
   constructor: (@container, @incompatibility_map) ->
     super()
-    _.bindAll(@, 'onAddProductButtonClickHandler')
-    @container.on('click', '.customisation-value a.btn', @onAddProductButtonClickHandler)
+    _.bindAll(@, 'onAddProductButtonClickHandler', 'triggerCustomisationsListClickHandler', 'toggleCustomisationList')
     @allValuesIds = _.map(@container.find('.customisation-value'), (item) -> $(item).data('customisation-value-id'))
+    @defaultText = @container.find('.trigger-customisation-selector span.title').html()
+
+    @container.on('click', '.customisation-value a.btn', @onAddProductButtonClickHandler)
+    @container.find('.trigger-customisation-selector').on 'click', @triggerCustomisationsListClickHandler
+
+  toggleCustomisationList: () ->
+    @container.find('.trigger-customisation-selector').toggleClass('active')
+    @container.find('.customisation-selector').toggle()
+
+  triggerCustomisationsListClickHandler: (e) ->
+    e.stopPropagation()
+    @toggleCustomisationList()
+    $(document).one 'click', @toggleCustomisationList
 
   onAddProductButtonClickHandler: (e) ->
     e.preventDefault()
@@ -229,6 +242,7 @@ window.inputs.CustomisationsSelector = class CustomisationsSelector extends Base
     else
       @updateValuesContainer(value_id, 'available')
     @updateIncompatibility()
+    @updateTriggerText()
     @trigger('change')
     return
 
@@ -253,6 +267,14 @@ window.inputs.CustomisationsSelector = class CustomisationsSelector extends Base
     available_items = _.difference(@allValuesIds, selected_items, incompatible_items)
     @updateValuesContainer(incompatible_items, 'incompatible')
     @updateValuesContainer(available_items, 'available')
+
+  updateTriggerText: () ->
+    if @container.find('.customisation-value.selected').length == 0
+      @container.find('.trigger-customisation-selector span.title').html(@defaultText)
+    else
+      title = @container.find('.customisation-value.selected:first .title').html()
+      @container.find('.trigger-customisation-selector span.title').html(title)
+
 
   updateValuesContainer: (value_ids, new_state) ->
     value_ids = [value_ids] if !_.isArray(value_ids)
