@@ -1,26 +1,17 @@
 javascript:
   $(document).ready(function() {
     (function() {
-      page.enableQuickView('#content', '*[data-action="quick-view"]');
-      page.enableWishlistLinks($("a[data-action='add-to-wishlist']"))
-    })(document);
-
-    (function() {
-      var removeItemFunc = function(e) {
-        e.preventDefault();
-        $link = $(e.currentTarget);
-
-        $.ajax({
-          url: $link.attr('href'),
-          type: 'delete',
-          dataType: "JSON",
-          success: function(data, status, response) {
-            $(".grid-3[data-id='" + data.variant_id + "']").remove();
-          }
-        });
+      if ($('.modal.successful-signup').length > 0) {
+        $('.modal.successful-signup').show();
+        _.delay(function() {
+          $('.modal.successful-signup').hide();
+        }, 4 * 1000)
       };
 
-      $('a[data-action=moodboard-remove]').on('click', removeItemFunc)
+      $('.modal.successful-signup .close-lightbox').on("click", function(e) {
+        e.preventDefault();
+        $(e.currentTarget).closest('.modal').hide();
+      });
     })(document);
   })
 
@@ -48,14 +39,34 @@ javascript:
             .buttons
               = link_to "Start Customising", product.path, class: 'btn small', title: "Customise this dress"
 
-            /- if product.bridesmaides.present?
-              ul
-              - product.bridesmaides.each do |bridesmaid|
-                li.bridesmaid 
-                  = "#{ bridesmaid.name } #{ bridesmaid.color } #{bridesmaid.size }"
-                  = link_to 'Add to cart', '#', class: 'btn small'
-
-
             - if product.fast_delivery
               .fast-delivery-icon title="Next day delivery*"
                 = I18n.t(:long, scope: [:delivery_time, :fast])
+
+- if @show_login_popup
+  .modal.signup
+    .overlay
+    .modal-container
+      /.close-lightbox
+      .edit-details
+        .modal-title
+          ' to access #{ @moodboard.owner.first_name }'s 
+          ' dress moodboard
+          ' please signup below
+        .item
+        .save
+          = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
+            span.icon
+              span.icon-facebook2
+            span Start sign up with facebook
+
+
+- if @show_successfull_signup
+  .modal.successful-signup style=("display: none;")
+    .overlay
+    .modal-container
+      .close-lightbox
+      .edit-details
+        .modal-title = " thanks  #{ current_spree_user.try(:first_name) }"
+        .save
+          check out the dresses here  or browse our shop to add more

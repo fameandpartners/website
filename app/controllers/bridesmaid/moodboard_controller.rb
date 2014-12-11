@@ -1,11 +1,17 @@
 # public_moodboard_path
 # wishlist
 class Bridesmaid::MoodboardController < Bridesmaid::BaseController
-  before_filter :require_user_logged_in!
-
   def show
     load_moodboard_owner!
     check_availability!
+
+    if party_membership_invite.present?
+      store_user_reference(party_membership_invite) 
+      @show_login_popup = true
+    elsif current_spree_user.present? && session[:show_successfull_login_popup].present?
+      session.delete(:show_successfull_login_popup)
+      @show_successfull_signup = true
+    end
 
     @moodboard = moodboard_resource.read
 
@@ -13,17 +19,55 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
     show_bridesmaid_header unless @moodboard.is_owner
   end
 
-  def destroy_item
-    # not moodboard owner, user can delete only own items
-    variant = current_spree_user.wishlist_items.where(spree_variant_id: params[:variant_id]).destroy_all
-    respond_to do |format|
-      format.json do
-        render json: { variant_id: params[:variant_id] }, status: :ok
+  private
+    
+    def event
+      @event ||= moodboard_owner.bridesmaid_party_events.first
+    end
+
+    def token
+      params[:token]
+    end
+
+    def party_membership_invite
+      return @party_membership_invite if instance_variable_defined?("@party_membership_invite")
+
+      if token.present?
+        @party_membership_invite = event.members.where(token: token).first
+      else
+        @party_membership_invite = nil
       end
     end
-  end
 
-  private
+    def check_availability!
+      if event.blank? || !event.completed?
+        raise Bridesmaid::Errors::MoodboardNotReady
+      end
+
+      if !user_can_view?(current_spree_user, event, params[:token])
+        raise Bridesmaid::Errors::MoodboardAccessDenied
+      end
+    end
+
+    def user_membership(event, token)
+      return nil if event.blank? || token.blank?
+      event.members.where(token: token).first
+    end
+
+    def store_user_reference(membership)
+      if membership.present?
+        session[:bridesmaid_party_membership_id] = membership.id
+        session[:bridesmaid_party_event_id]      = membership.event_id
+      end
+    end
+
+    def user_can_view?(user, event, token)
+      if user.blank?
+        user_membership.present?
+      else
+        event.spree_user_id == user.try(:id) || event.members.where(spree_user_id: user.try(:id)).exists? || user_membership.present?
+      end
+    end
 
     def moodboard_resource
       Bridesmaid::Moodboard.new(
@@ -31,23 +75,5 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
         accessor: current_spree_user,
         moodboard_owner: moodboard_owner
       )
-    end
-
-    # bride shouldn't view this page.
-    # instead, we should redirect to own moodboard
-    def check_availability!
-      event = moodboard_owner.bridesmaid_party_events.first
-      if event.blank? || !event.completed?
-        raise Bridesmaid::Errors::MoodboardNotReady
-      end
-      #if moodboard_owner.id == current_spree_user.id
-      #  raise Bridesmaid::Errors::MoodboardNotReady
-      #end
-
-      #if !bridesmaid_party_event.members.where(
-      #  "spree_user_id = ? or email = ?", current_spree_user.id, current_spree_user.email
-      #).exists?
-      #  raise Bridesmaid::Errors::MoodboardAccessDenied
-      #end
     end
 end

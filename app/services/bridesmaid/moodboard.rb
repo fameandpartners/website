@@ -23,7 +23,7 @@ class Bridesmaid::Moodboard
     end
 
     def is_owner
-      accessor == moodboard_owner
+      accessor.present? && accessor == moodboard_owner
     end
 
     def moodboard_owner_moodboard
@@ -67,12 +67,7 @@ class Bridesmaid::Moodboard
 
     def build_item(item)
       item.path = product_path(item)
-      item.is_removable = can_manage?
       item
-    end
-
-    def can_manage?
-      accessor == moodboard_owner
     end
 
     #'/moodboard/:user_slug/dress-:product_slug(/:color_name)'
