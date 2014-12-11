@@ -49,11 +49,6 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
       end
     end
 
-    def user_membership(event, token)
-      return nil if event.blank? || token.blank?
-      event.members.where(token: token).first
-    end
-
     def store_user_reference(membership)
       if membership.present?
         session[:bridesmaid_party_membership_id] = membership.id
@@ -63,9 +58,9 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
 
     def user_can_view?(user, event, token)
       if user.blank?
-        user_membership.present?
+        party_membership_invite.present?
       else
-        event.spree_user_id == user.try(:id) || event.members.where(spree_user_id: user.try(:id)).exists? || user_membership.present?
+        event.spree_user_id == user.try(:id) || event.members.where(spree_user_id: user.try(:id)).exists? || party_membership_invite.present?
       end
     end
 
