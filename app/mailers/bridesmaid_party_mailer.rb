@@ -37,10 +37,9 @@ class BridesmaidPartyMailer < ActionMailer::Base
     @bride = bridesmaid_member.event.spree_user
     @membership = bridesmaid_member
 
-
     mail(
       to: email,
-      subject: 'Welcome to Bridesmaid Party'
+      subject: "WELCOME TO #{ @bride.first_name }'S BRIDESMAID PARTY".upcase
     )
   end
  
