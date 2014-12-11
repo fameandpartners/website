@@ -37,6 +37,7 @@ module Products
     #    footer_text
     #  }
     def get
+      
       info = get_info_by_taxons
 
       info[:page_title] = get_page_title
@@ -57,10 +58,9 @@ module Products
     #    :category_description
     #  }
     def get_info_by_taxons
-      
-      if selected_edits_taxons.count == 1
+      if selected_edits_taxons.count > 0
         from_taxon(selected_edits_taxons.first)
-      elsif selected_collection_taxons.count == 1
+      elsif selected_collection_taxons.count > 0
         from_taxon(selected_collection_taxons.first)
       elsif selected_edits_taxons.count == 0 and selected_collection_taxons.count == 0
         from_taxon(root_range_taxon)
@@ -184,7 +184,7 @@ module Products
 
     def get_banner_text(text)
       
-      if available_formal_dresses_colours.include?(@searcher.seo_colour)
+      if !text && available_formal_dresses_colours.include?(@searcher.seo_colour)
         I18n.t(:subtitle, scope: [:collection, :colors, @searcher.seo_colour.parameterize.underscore], default: text)
       else
         text
@@ -194,9 +194,9 @@ module Products
     def get_banner_image
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
         return
-      elsif selected_edits_taxons.count == 1
+      elsif selected_edits_taxons.count > 0
         taxon_image(selected_edits_taxons.first)
-      elsif selected_collection_taxons.count == 1
+      elsif selected_collection_taxons.count > 0
         taxon_image(selected_collection_taxons.first)
       elsif selected_edits_taxons.count == 0 and selected_collection_taxons.count == 0
         taxon_image(root_range_taxon)
@@ -264,6 +264,7 @@ module Products
     end
 
     def from_taxon(taxon)
+      
       r ={
         banner_image: taxon_image(taxon) || taxon_image(root_range_taxon),
         banner_title: taxon.try(:banner).try(:title) || taxon.name,
