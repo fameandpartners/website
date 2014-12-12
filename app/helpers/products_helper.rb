@@ -64,12 +64,12 @@ module ProductsHelper
 
   def product_short_description(product)
     description_text = product.property('short_description') || product.description
-    description_text.gsub!(/prom(\s)/i, '').gsub!(/formal(\s)/i, '')
+    description_text = description_text.to_s.gsub(/(prom|formal)(\s)/i, '')
 
     escaped_text = ActionView::Base.full_sanitizer.sanitize(description_text)
     truncate(escaped_text, length: 80, separator: ' ')
   rescue
-    t('product_has_no_description')
+    I18n.t('product_has_no_description')
   end
 
   def product_video(product, options = {})
