@@ -31,6 +31,7 @@ FameAndPartners::Application.routes.draw do
     get '/renxfame'   => 'statics#renxfame'
     get '/lilyxfame'  => 'statics#lilyxfame'
     get '/maryxfame'  => 'statics#maryxfame'
+    get '/fashion-it-girl'  => 'statics#fashion_it_girl'
     get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
     get '/girlfriend' => 'statics#girlfriendxfame'
     get '/new-years-eve-dresses' => 'statics#nye', :as => :nye
