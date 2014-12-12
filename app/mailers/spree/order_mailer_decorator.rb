@@ -10,6 +10,8 @@ Spree::OrderMailer.class_eval do
   def team_confirm_email(order)
     find_order(order)
 
+    @additional_products_info = Bridesmaid::BoughtAdditionalProductsResource.new(order: @order).read
+
     to = 'team@fameandpartners.com'
     from = "#{@order.full_name} <#{@order.email}>"
     subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"

@@ -455,8 +455,6 @@ FameAndPartners::Application.routes.draw do
       get '/moodboard(/:user_slug)' => 'moodboard#show', as: :bridesmaid_party_moodboard
       get '/:user_slug/dress-:product_slug(/:color_name)' => 'product_details#show', as: :bridesmaid_party_dress_details
       put '/:user_slug/dress-:product_slug(/:color_name)' => 'selected_products#update', as: :bridesmaid_dress_selection
-      delete '/moodboard/:user_slug/:variant_id' => 'moodboard#destroy_item',
-        as: :bridesmaid_party_delete_moodboard_item
       get '/:user_slug' => 'landings#bridesmaid', as: :bridesmaid_signup
       post 'selected_product/:id/add_to_cart' => 'selected_products#add_to_cart', as: :bridesmaid_add_for_bridesmaid
 

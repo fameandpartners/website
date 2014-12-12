@@ -68,7 +68,10 @@ class PagesController < Spree::StoreController
 
         if session[:bridesmaid_party_event_id]
           event = BridesmaidParty::Event.find(session[:bridesmaid_party_event_id])
-          session[:spree_user_return_to] = main_app.bridesmaid_party_moodboard_path(user_slug: event.spree_user.slug)
+          session[:spree_user_return_to] = main_app.bridesmaid_party_moodboard_path(
+            user_slug: event.spree_user.slug
+          )
+          session[:show_successfull_login_popup] = true
         end
       end
     end

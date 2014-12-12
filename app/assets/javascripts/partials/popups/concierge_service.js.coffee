@@ -21,8 +21,24 @@ window.popups.showConciergeServicePopup = (itemId) ->
       popup.container.removeClass('consierge-service')
       popup.container.find('.modal-container').removeClass('form')
 
+    isFormValid: () ->
+      form = $('form.concierge')[0]
+      if _.isFunction(form.checkValidity) && form.checkValidity()
+        return true
+      else
+        popup.markInputAsInvalid(popup.container.find('input#phone_number'))
+        popup.markInputAsInvalid(popup.container.find('input#user_email'))
+        popup.markInputAsInvalid(popup.container.find('input#suburb_state'))
+        return false
+
+    markInputAsInvalid: (input, msg = "invalid") ->
+      if _.isEmpty(input.val())
+        window.helpers.showErrors(input.closest('.input'), msg)
+
     onButtonClick: (e) ->
-      e.preventDefault();
+      e.preventDefault()
+      return false unless popup.isFormValid()
+
       u_phone = popup.container.find('input#phone_number').val()
       u_email = popup.container.find('input#user_email').val()
       u_suburb_state = popup.container.find('input#suburb_state').val()
