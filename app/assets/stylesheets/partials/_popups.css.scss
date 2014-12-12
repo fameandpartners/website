@@ -753,6 +753,11 @@
 	.buttons {
 		position: relative;
 	}
+	.preloader {
+		position: absolute;
+		top: 6px;
+		right: -40px;
+	}
 	.alert {
 		display: none;
 		position: absolute;
@@ -769,5 +774,42 @@
 	}
 	.alert-error {
 		background: #cc0000;
+	}
+}
+
+.modal-signup {
+	.modal-container {
+		width: 640px;
+		height: 480px;
+		text-align: center;
+		padding: 0;
+		border: 0;
+		background: image-url('_bridesmaid/bg-modal-signup.jpg') center center no-repeat #fff;
+		.modal-title {
+			font: 400 50px/1.4 $fontThree;
+			color: #2e2f56;
+			padding: 110px 70px 40px;
+		}
+	}
+}
+
+.modal-signup-thanks {
+	.modal-container {
+		width: 320px;
+		height: 240px;
+		text-align: center;
+		padding: 0;
+		border: 0;
+		color: #2e2f56;
+		background: image-url('_bridesmaid/bg-modal-signup-thanks.jpg') center center no-repeat #fff;
+		.modal-title {
+			font: 400 26px/1.4 $fontThree;
+			padding: 80px 20px 10px;
+			margin-bottom: 0;
+		}
+		.modal-subtitle {
+			text-transform: none;
+			font: 400 italic 16px/1.4 $fontTwo;
+		}
 	}
 }
