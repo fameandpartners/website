@@ -95,7 +95,7 @@ class Products::ProductPersonalizationStyleResource
 
     def product_short_description
       text = product_properties['short_description'] || product.description
-      text.gsub!(/prom(\s)/i, '').gsub!(/formal(\s)/i, '')
+      text = text.to_s.gsub(/(prom|formal)(\s)/i, '')
       ActionView::Base.full_sanitizer.sanitize(text.to_s)
     rescue
       I18n.t('product_has_no_description')
