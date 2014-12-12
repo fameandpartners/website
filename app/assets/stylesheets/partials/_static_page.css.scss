@@ -1013,4 +1013,64 @@ body.competition_entries {
 	}
 }
 
-
+.static-fashion-it {
+	font-size: 18px;
+	text-transform: none;
+	line-height: 1.4;
+	.header {
+		background: image-url('fashion-it-girl/top.jpg') center center no-repeat;
+		background-size: cover;
+		padding: 130px 34px;
+		margin: 0 0 66px;
+		.title {
+			font: 400 50px/1.2 $fontThree;
+			text-transform: uppercase;
+			display: inline-block;
+			border-top: 5px solid #000;
+			border-bottom: 5px solid #000;
+		}
+	}
+	.subtitle {
+		font-family: $fontThree;
+		font-size: 28px;
+		text-transform: uppercase;
+		margin-top: 70px;
+		&.large {
+			font-size: 36px;
+			margin-top: 0;
+			span {
+				display: inline-block;
+				vertical-align: top;
+				position: relative;
+				&:before {
+					content: '';
+					background: #f8d1e4;
+					position: absolute;
+					top: 0;
+					left: -5%;
+					width: 110%;
+					height: 100%;
+					z-index: -1;
+					@include transform(rotate(-3deg));
+				}
+			}
+		}
+	}
+	.signup-for-event {
+		margin: 70px 0 20px;
+		.btn-pink {
+			color: #000;
+			background: #f8d1e4;
+		}
+		.hint {
+			font-size: 12px;
+			text-transform: uppercase;
+			margin: 10px 0 0;
+		}
+	}
+	.two-columns {
+		-webkit-column-count: 2;
+    -moz-column-count: 2;
+		column-count: 2;
+	}
+}
