@@ -1,16 +1,29 @@
-# public_moodboard_path
-# wishlist
 class Bridesmaid::MoodboardController < Bridesmaid::BaseController
   def show
     load_moodboard_owner!
-    check_availability!
+    check_moodboard_state!
 
-    if party_membership_invite.present?
-      store_user_reference(party_membership_invite) 
-      @show_login_popup = true
-    elsif current_spree_user.present? && session[:show_successfull_login_popup].present?
-      session.delete(:show_successfull_login_popup)
-      @show_successfull_signup = true
+    if current_spree_user.present?
+      apply_stored_user_references(current_spree_user)
+
+      if user_has_access?(current_spree_user)
+        # if user just signed in
+        if session[:show_successfull_login_popup].present?
+          session.delete(:show_successfull_login_popup)
+          @show_successfull_signup = true
+        end
+        # default case
+      else
+        raise Bridesmaid::Errors::MoodboardAccessDenied
+      end
+    else
+      if party_membership_invite.present?
+        # show moodboard with popup
+        store_user_reference(party_membership_invite) 
+        @show_login_popup = true
+      else
+        raise Bridesmaid::Errors::MoodboardAccessDenied
+      end
     end
 
     @moodboard = moodboard_resource.read
@@ -20,13 +33,19 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
   end
 
   private
-    
+
     def event
       @event ||= moodboard_owner.bridesmaid_party_events.first
     end
 
     def token
       params[:token]
+    end
+
+    def check_moodboard_state!
+      if event.blank? || !event.completed?
+        raise Bridesmaid::Errors::MoodboardNotReady
+      end
     end
 
     def party_membership_invite
@@ -39,16 +58,6 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
       end
     end
 
-    def check_availability!
-      if event.blank? || !event.completed?
-        raise Bridesmaid::Errors::MoodboardNotReady
-      end
-
-      if !user_can_view?(current_spree_user, event, params[:token])
-        raise Bridesmaid::Errors::MoodboardAccessDenied
-      end
-    end
-
     def store_user_reference(membership)
       if membership.present?
         session[:bridesmaid_party_membership_id] = membership.id
@@ -56,12 +65,23 @@ class Bridesmaid::MoodboardController < Bridesmaid::BaseController
       end
     end
 
-    def user_can_view?(user, event, token)
-      if user.blank?
-        party_membership_invite.present?
-      else
-        event.spree_user_id == user.try(:id) || event.members.where(spree_user_id: user.try(:id)).exists? || party_membership_invite.present?
+    def apply_stored_user_references(user)
+      event_id  = session[:bridesmaid_party_event_id]
+      member_id = session[:bridesmaid_party_membership_id]
+
+      return if event_id.blank? || member_id.blank?
+
+      membership = BridesmaidParty::Member.where(event_id: event_id, id: member_id).first
+      if membership.present?
+        membership.spree_user_id = user.id
+        membership.save
+        session.delete(:bridesmaid_party_event_id)
+        session.delete(:bridesmaid_party_membership_id)
       end
+    end
+
+    def user_has_access?(user)
+      event.spree_user_id == user.id || event.members.where(spree_user_id: user.id).exists? 
     end
 
     def moodboard_resource
