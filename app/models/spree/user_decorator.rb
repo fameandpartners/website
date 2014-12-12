@@ -120,6 +120,16 @@ Spree::User.class_eval do
     bridesmaid_party_events.exists?
   end
 
+  def can_receive_email_marketing_notification?(notification_code)
+    case notification_code
+    when 'wishlist_item_added', 'wishlist_item_added_reminder'
+      self.is_bride? ? false : true
+    else
+      # may be we should check EmailNotification here
+      true
+    end
+  end
+
   private
 
   def campaign_monitor_sign_up_reason
