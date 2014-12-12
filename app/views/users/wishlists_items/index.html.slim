@@ -189,18 +189,3 @@ javascript:
         /.preloader = image_tag 'ajax-loader.gif', width: 24, height: 24, alt: ''
       .alert.alert-success Invitations have been sent to your bridesmaids.
       .alert.alert-error We've found some errors in the form. Please take a look at the errors.
-
-.modal.modal-signup style="display: none;"
-  .overlay
-  .modal-container
-    .modal-title To access <bride’s name> dress mood board, please sign up below
-    .modal-action
-      = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
-        span.icon.icon-facebook2
-        span Sign up with Facebook
-
-.modal.modal-signup-thanks style="display: none;"
-  .overlay
-  .modal-container
-    .modal-title Thanks bridesmaid name,
-    .modal-subtitle Check out the dresses here<br>or browse our shop to add more

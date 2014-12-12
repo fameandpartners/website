@@ -1,18 +1,18 @@
 javascript:
   $(document).ready(function() {
     (function() {
-      $('.modal.signup .modal-container').center();
+      $('.modal.modal-signup .modal-container').center();
 
-      if ($('.modal.successful-signup').length > 0) {
-        $('.modal.successful-signup').show();
-        $('.modal.successful-signup .modal-container').center();
+      if ($('.modal.modal-signup-thanks').length > 0) {
+        $('.modal.modal-signup-thanks').show();
+        $('.modal.modal-signup-thanks .modal-container').center();
 
         _.delay(function() {
-          $('.modal.successful-signup').hide();
+          $('.modal.modal-signup-thanks').hide();
         }, 4 * 1000)
       };
 
-      $('.modal.successful-signup .close-lightbox').on("click", function(e) {
+      $('.modal.modal-signup-thanks .close-lightbox').on("click", function(e) {
         e.preventDefault();
         $(e.currentTarget).closest('.modal').hide();
       });
@@ -48,30 +48,18 @@ javascript:
                 = I18n.t(:long, scope: [:delivery_time, :fast])
 
 - if @show_login_popup
-  .modal.signup.popup-placeholder
+  .modal.modal-signup.popup-placeholder
     .overlay
     .modal-container
-      .edit-details
-        .modal-title
-          ' to access #{ @moodboard.owner.first_name }'s 
-          br
-          ' dress moodboard
-          br
-          ' please signup below
-        .item
-        .save
-          = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
-            span.icon
-              span.icon-facebook2
-            span Start sign up with facebook
-
+      .modal-title To access #{ @moodboard.owner.first_name } dress mood board, please sign up below
+      .modal-action
+        = link_to fb_auth_path(site_version: current_site_version.code, bridesmaid_party: true), class: 'facebook-button-flat' do
+          span.icon.icon-facebook2
+          span Sign up with Facebook
 
 - if @show_successfull_signup
-  .modal.successful-signup.popup-placeholder#successfull-signup style=("display: none;")
+  .modal.modal-signup-thanks.popup-placeholder style="display: none;"
     .overlay
     .modal-container
-      .close-lightbox
-      .edit-details
-        .modal-title = " thanks  #{ current_spree_user.try(:first_name) }"
-        .save
-          check out the dresses here  or browse our shop to add more
+      .modal-title Thanks #{ current_spree_user.try(:full_name) },
+      .modal-subtitle Check out the dresses here<br>or browse our shop to add more
