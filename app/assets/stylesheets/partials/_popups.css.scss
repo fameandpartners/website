@@ -753,6 +753,11 @@
 	.buttons {
 		position: relative;
 	}
+	.preloader {
+		position: absolute;
+		top: 6px;
+		right: -40px;
+	}
 	.alert {
 		display: none;
 		position: absolute;
