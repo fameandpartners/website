@@ -65,20 +65,50 @@ javascript:
 
       var $modal = $('#share-moodboard');
       var data = collectData();
+      var $button = $(event.currentTarget);
+      var $indicator = $modal.find('.preloader');
 
       if (!_.isEmpty(data['friends'])) {
+        $indicator.show();
+        $button.hide();
+
         $.ajax({
           url: '/bridesmaid-party/share',
           type: 'POST',
           dataType: 'json',
           data: data,
-          complete: function (data) {
+          success: function (data) {
             $modal.find('.row.bridesmaid:not(.template)').remove();
-            $modal.hide();
+            showFormAlert('.alert.alert-success');
+            //_.delay(function() { $modal.hide(); }, 500);
+          },
+          error: function() { 
+            showFormAlert('.alert.alert-error');
+          },
+          complete: function() {
+            $indicator.hide();
+            $button.show();
           }
         });
+      } else {
+        showFormAlert('.alert.alert-error');
       }
     });
+
+    alertTimerId = null;
+    function showFormAlert(element) {
+      $element = $('#share-moodboard').find(element);
+      if ($element.length == 0) {
+        return;
+      } else {
+        $element.siblings('.alert').hide();
+        $element.show();
+        clearTimeout(alertTimerId);
+        alertTimerId = setTimeout(function() { 
+          $(element).hide();
+        }, 5000);
+      };
+    };
 
     (function() {
       $('a[data-action=buy-for-bridesmaid]').on('click', function (e) {
@@ -186,6 +216,7 @@ javascript:
     .buttons
       .inline-block.position-relative
         = link_to 'Share now', '#', class: 'btn', data: { action: 'send-data' }
-        /.preloader = image_tag 'ajax-loader.gif', width: 24, height: 24, alt: ''
+        .preloader style='display: none;'
+          = image_tag 'ajax-loader.gif', width: 24, height: 24, alt: ''
       .alert.alert-success Invitations have been sent to your bridesmaids.
       .alert.alert-error We've found some errors in the form. Please take a look at the errors.
