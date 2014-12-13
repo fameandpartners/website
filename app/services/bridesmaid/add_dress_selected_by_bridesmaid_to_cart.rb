@@ -1,3 +1,9 @@
+# TODO:
+# instead make changes, please, split this service to
+#   - order/add_plain_product_variant_to_cart
+#   - order/add_customized_product_variant_to_cart
+# and this service should just call required
+#
 class Bridesmaid::AddDressSelectedByBridesmaidToCart
   attr_reader :site_version, :accessor, :cart, :membership_id, :promotion
 
