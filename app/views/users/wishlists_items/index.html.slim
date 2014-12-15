@@ -100,40 +100,20 @@ javascript:
       var $rows = $modal.find('.row.bridesmaid:not(.template)');
       var $spinner = $modal.find('.preloader');
       var data = collectData();
-      var $button = $(event.currentTarget);
-      var $indicator = $modal.find('.preloader');
 
       if (!_.isEmpty(data['friends'])) {
-<<<<<<< HEAD
-        $indicator.show();
-        $button.hide();
-=======
         $button.attr('disabled', true).addClass('disabled');
         $spinner.show();
         $modal.find('.alert').hide();
         $modal.find(':input:visible').attr('disabled', true);
 
         window.requestInProcess = true;
->>>>>>> f91413332e7ffcdb25a53851df644bcd61e0155d
 
         $.ajax({
           url: '/bridesmaid-party/share',
           type: 'POST',
           dataType: 'json',
           data: data,
-<<<<<<< HEAD
-          success: function (data) {
-            $modal.find('.row.bridesmaid:not(.template)').remove();
-            showFormAlert('.alert.alert-success');
-            //_.delay(function() { $modal.hide(); }, 500);
-          },
-          error: function() { 
-            showFormAlert('.alert.alert-error');
-          },
-          complete: function() {
-            $indicator.hide();
-            $button.show();
-=======
           success: function () {
             $modal.find('.alert.alert-success').show();
 
@@ -167,28 +147,10 @@ javascript:
           complete: function () {
             $spinner.hide();
             window.requestInProcess = false;
->>>>>>> f91413332e7ffcdb25a53851df644bcd61e0155d
           }
         });
-      } else {
-        showFormAlert('.alert.alert-error');
       }
     });
-
-    alertTimerId = null;
-    function showFormAlert(element) {
-      $element = $('#share-moodboard').find(element);
-      if ($element.length == 0) {
-        return;
-      } else {
-        $element.siblings('.alert').hide();
-        $element.show();
-        clearTimeout(alertTimerId);
-        alertTimerId = setTimeout(function() { 
-          $(element).hide();
-        }, 5000);
-      };
-    };
 
     (function() {
       $('a[data-action=buy-for-bridesmaid]').on('click', function (e) {
@@ -206,6 +168,7 @@ javascript:
       });
     })(document);
   });
+
 
 .wrap
   .account-pages
