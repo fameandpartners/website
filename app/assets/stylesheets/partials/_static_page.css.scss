@@ -1017,6 +1017,10 @@ body.competition_entries {
 	font-size: 18px;
 	text-transform: none;
 	line-height: 1.4;
+	font: 100 18px $fontFive;
+	p{
+		line-height: 1.8em;
+	}
 	.header {
 		background: image-url('fashion-it-girl/top.jpg') center center no-repeat;
 		background-size: cover;
@@ -1029,6 +1033,10 @@ body.competition_entries {
 			border-top: 5px solid #000;
 			border-bottom: 5px solid #000;
 		}
+	}
+	.grid-container{
+		width: 890px;
+		margin: 0 auto;
 	}
 	.subtitle {
 		font-family: $fontThree;
