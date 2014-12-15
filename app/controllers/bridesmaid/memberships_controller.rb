@@ -4,27 +4,52 @@ class Bridesmaid::MembershipsController < Bridesmaid::BaseController
   def create
     event = bridesmaid_user_profile
 
-    note = params[:note]
-    friends = params[:friends].values
+    friends = params[:friends]
+    errors  = {}
 
-    friends.each do |friend|
+    memberships = Hash[*friends.map do |index, friend|
       first_name, last_name = friend[:full_name].split(' ')
       membership = event.members.build
       membership.first_name = first_name
       membership.last_name = last_name
       membership.email = friend[:email]
 
-      if membership.save
-        BridesmaidPartyMailer.delay.invite(membership)
+      [index, membership]
+    end.flatten]
+
+    ActiveRecord::Base.transaction do
+      memberships.each do |index, membership|
+        unless membership.save
+          errors[index] = membership.errors.to_hash.slice(:email, :first_name, :last_name)
+        end
+      end
+
+      unless memberships.values.all?(&:persisted?)
+        raise ActiveRecord::Rollback
       end
     end
 
-    respond_to do |format|
-      format.html do
-        redirect_to wishlist_path
+    if memberships.values.all?(&:persisted?)
+      memberships.values.each do |membership|
+        BridesmaidPartyMailer.delay.invite(membership)
       end
-      format.json do
-        render json: {}, status: :ok
+
+      respond_to do |format|
+        format.html do
+          redirect_to wishlist_path
+        end
+        format.json do
+          render json: {}, status: :ok
+        end
+      end
+    else
+      respond_to do |format|
+        format.html do
+          redirect_to wishlist_path
+        end
+        format.json do
+          render json: { errors: errors }, status: :error
+        end
       end
     end
   end
