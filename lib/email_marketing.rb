@@ -143,12 +143,14 @@ class EmailMarketing
       "code = ? and created_at > ?", code, created_after
     ).map(&:spree_user_id)
 
-    items_scope = WishlistItem.where(["created_at > ? and created_at < ?", created_after, created_before])
+    items_scope = WishlistItem.includes(:user).where(["created_at > ? and created_at < ?", created_after, created_before])
     if already_received.present?
       items_scope = items_scope.where("spree_user_id not in (?)", already_received)
     end
     items_scope.each do |item|
-      WishlistItemAddedEmailWorker.perform_async(item.id)
+      if item.user.can_receive_email_marketing_notification?(code)
+        WishlistItemAddedEmailWorker.perform_async(item.id)
+      end
     end
   end
 
@@ -162,12 +164,14 @@ class EmailMarketing
       "code = ? and created_at > ? and created_at < ?", code, created_after, created_before
     ).map(&:spree_user_id)
 
-    items_scope = WishlistItem.where(["created_at > ? and created_at < ?", created_after, created_before])
+    items_scope = WishlistItem.includes(:user).where(["created_at > ? and created_at < ?", created_after, created_before])
     if already_received.present?
       items_scope = items_scope.where("spree_user_id not in (?)", already_received)
     end
     items_scope.each do |item|
-      WishlistItemAddedReminderEmailWorker.perform_async(item.id)
+      if item.user.can_receive_email_marketing_notification?(code)
+        WishlistItemAddedReminderEmailWorker.perform_async(item.id)
+      end
     end
   end
 

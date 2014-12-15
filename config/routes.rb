@@ -31,10 +31,12 @@ FameAndPartners::Application.routes.draw do
     get '/renxfame'   => 'statics#renxfame'
     get '/lilyxfame'  => 'statics#lilyxfame'
     get '/maryxfame'  => 'statics#maryxfame'
+    get '/fashion-it-girl'  => 'statics#fashion_it_girl'
     get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
     get '/girlfriend' => 'statics#girlfriendxfame'
     get '/new-years-eve-dresses' => 'statics#nye', :as => :nye
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
+    get '/christmas-gift' => 'statics#christmas_gift', :as => :christmas_gift
 
     post '/shared/facebook' => 'competition/events#share'
 

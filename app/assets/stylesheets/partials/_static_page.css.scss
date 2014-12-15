@@ -1013,4 +1013,144 @@ body.competition_entries {
 	}
 }
 
+.static-fashion-it {
+	font-size: 18px;
+	text-transform: none;
+	line-height: 1.4;
+	.header {
+		background: image-url('fashion-it-girl/top.jpg') center center no-repeat;
+		background-size: cover;
+		padding: 130px 34px;
+		margin: 0 0 66px;
+		.title {
+			font: 400 50px/1.2 $fontThree;
+			text-transform: uppercase;
+			display: inline-block;
+			border-top: 5px solid #000;
+			border-bottom: 5px solid #000;
+		}
+	}
+	.subtitle {
+		font-family: $fontThree;
+		font-size: 28px;
+		text-transform: uppercase;
+		margin-top: 70px;
+		&.large {
+			font-size: 36px;
+			margin-top: 0;
+			span {
+				display: inline-block;
+				vertical-align: top;
+				position: relative;
+				&:before {
+					content: '';
+					background: #f8d1e4;
+					position: absolute;
+					top: 0;
+					left: -5%;
+					width: 110%;
+					height: 100%;
+					z-index: -1;
+					@include transform(rotate(-3deg));
+				}
+			}
+		}
+	}
+	.signup-for-event {
+		margin: 70px 0 20px;
+		.btn-pink {
+			color: #000;
+			background: #f8d1e4;
+		}
+		.hint {
+			font-size: 12px;
+			text-transform: uppercase;
+			margin: 10px 0 0;
+		}
+	}
+	.two-columns {
+		-webkit-column-count: 2;
+    -moz-column-count: 2;
+		column-count: 2;
+	}
+}
 
+.christmas-gift-page {
+	.page-intro {
+		background: image-url('statics/bg-christmas-gift.jpg') center center no-repeat;
+		background-size: cover;
+		height: 498px;
+		line-height: 498px;
+		.title-message {
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: 64px;
+			line-height: 1.1;
+			text-transform: none;
+		}
+		.uppercase {
+			text-transform: uppercase;
+		}
+		.font-two {
+			font: 400 italic 58px/1.1 $fontTwo;
+			&.bigger {
+				font-size: 70px;
+			}
+		}
+		.font-three {
+			font: 400 42px/1.1 $fontThree;
+		}
+		.font-one {
+			font: 400 18px/1.1 $fontOne;
+		}
+		.separate {
+			width: 192px;
+			height: 2px;
+			background: #000;
+			margin: 40px auto 40px;
+		}
+	}
+	.separate-line {
+		margin: 42px 0;
+		background: #000;
+		height: 1px;
+	}
+  .catalog {
+    .catalog-item {
+    	display: inline-block;
+    	vertical-align: top;
+      width: 230px;
+      min-width: 230px;
+      margin-right: 36px;
+      text-align: center;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+  }
+	.get-discount {
+		font-size: 20px;
+		text-align: center;
+		padding-top: 60px;
+	}
+	.more-dresses {
+		font: 400 20px/1.3 $fontOne;
+		text-transform: uppercase;
+		position: relative;
+		.inner {
+			position: relative;
+			z-index: 2;
+			background: #fff;
+			padding: 0 24px;
+			display: inline-block;
+		}
+		&:before {
+			content: '';
+			background: #000;
+			position: absolute;
+			top: 52px;
+			left: 0;
+			width: 100%;
+			height: 1px;
+		}
+	}
+}
