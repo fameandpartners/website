@@ -42,6 +42,11 @@ a { color: inherit;}
   position: relative;
 }
 
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
 .inline-block {
   display: inline-block;
   vertical-align: top;

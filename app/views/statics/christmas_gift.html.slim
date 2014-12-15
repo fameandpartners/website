@@ -1,0 +1,80 @@
+.christmas-gift-page
+  .page-intro
+    .title-message
+      .font-two.uppercase spoil yourself
+      .font-three.uppercase this holiday season with a gift
+      .font-two.text-right just for YOU!
+      .separate
+      .font-one.uppercase.text-center + a free, personalised 
+      .font-one.uppercase.text-center styling session with every dress
+
+  .separate-line
+
+  .catalog
+    - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
+    - products[0..1].each do |dress|
+      .catalog-item
+        .picture
+          = link_to collection_product_path(dress) do
+            = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+        .text
+          = link_to dress.name, collection_product_path(dress), class: 'title'
+          .price = price_for_product(dress)
+
+  .grid-container
+    .grid-6
+      = image_tag 'statics/image-christmas-gift-1.jpg', width: 440, height: 639, alt: '', class: 'img-responsive'
+    .grid-6
+      .catalog
+        - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
+        - products[0..1].each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
+      .catalog
+        - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
+        - products[0..1].each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
+
+  .grid-container
+    .grid-6
+      .catalog
+        - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
+        - products[0..1].each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
+    .grid-6
+      = image_tag 'statics/image-christmas-gift-2.jpg', width: 682, height: 293, alt: '', class: 'img-responsive'
+
+  .grid-container
+    .grid-9
+      .catalog
+        - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
+        - products[0..2].each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
+    .grid-3.get-discount
+      ' + 20% off<br>gorgeous<br>jewellery<br>from<br>Peter Lang
+
+  .more-dresses
+    .inner Dazzle in these dresses, whatever the occasion
