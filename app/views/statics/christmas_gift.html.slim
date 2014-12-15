@@ -1,5 +1,5 @@
 ruby:
-  products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
+  products = get_products_from_edit('XMAS', nil, nil, 12)
 
   cache_keys = ['christmas-gift']
   if spree_user_signed_in?
@@ -42,7 +42,7 @@ ruby:
         = image_tag 'statics/image-christmas-gift-1.jpg', width: 440, height: 639, alt: '', class: 'img-responsive'
       .grid-6
         .catalog
-          - products[0..1].each do |dress|
+          - products[2..3].each do |dress|
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
@@ -51,7 +51,7 @@ ruby:
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
         .catalog
-          - products[0..1].each do |dress|
+          - products[4..5].each do |dress|
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
@@ -63,7 +63,7 @@ ruby:
     .grid-container
       .grid-6
         .catalog
-          - products[0..1].each do |dress|
+          - products[6..7].each do |dress|
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
@@ -77,7 +77,7 @@ ruby:
     .grid-container
       .grid-9
         .catalog
-          - products[0..2].each do |dress|
+          - products[8..10].each do |dress|
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
