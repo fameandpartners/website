@@ -4,6 +4,10 @@ class Bridesmaid::DetailsController < Bridesmaid::BaseController
   def edit
     set_page_titles
     @user_details = bridesmaid_user_profile
+
+    if flash[:just_signed_up]
+      @render_conversion_pixel = true
+    end
   end
 
   def update
