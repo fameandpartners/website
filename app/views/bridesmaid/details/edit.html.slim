@@ -1,3 +1,6 @@
+- if @render_conversion_pixel
+  = render 'bridesmaid/shared/fb_signup_conversion_pixel'
+
 javascript:
   $(document).ready(function() {
     // enable link
@@ -9,16 +12,6 @@ javascript:
         $(e.currentTarget).prop('disabled', false);
       });
     })(document);
-
-    // enable special suggestions checkbox
-    //(function() {
-    //  $('.special_suggestions input[type=checkbox]').on('change', function(e) {
-    //    // if current check - uncheck other and vice versa
-    //    $input = $(e.currentTarget)
-    //    $other_inputs = $input.closest('.row').find('input[type=checkbox]').not($input)
-    //    $other_inputs.prop('checked', !$input.is(':checked'))
-    //  });
-    //})(document);
 
     // enable wedding date selector
     (function() {
@@ -41,7 +34,6 @@ javascript:
         }
       });
     }(document));
-
   })
 
 .bridesmaid-info-header

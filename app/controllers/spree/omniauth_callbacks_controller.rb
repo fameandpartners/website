@@ -30,7 +30,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               try_apply_bridesmaid_party_callback(authentication.user)
             end
 
-            redirect_to after_sign_in_path_for(authentication.user)
+            redirect_to after_sign_in_path_for(authentication.user), flash: { just_signed_up: true }
           elsif spree_current_user
             spree_current_user.apply_omniauth(auth_hash)
             spree_current_user.save
@@ -76,7 +76,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
                 try_apply_bridesmaid_party_callback(user)
               end
 
-              redirect_to after_sign_in_path_for(user)
+              redirect_to after_sign_in_path_for(user), flash: { just_signed_up: true }
             else
               session[:omniauth] = auth_hash.except('extra')
               flash[:notice] = t(:one_more_step, :kind => auth_hash['provider'].capitalize)
