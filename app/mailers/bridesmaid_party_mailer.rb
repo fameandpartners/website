@@ -5,8 +5,15 @@ class BridesmaidPartyMailer < ActionMailer::Base
   layout 'mailer'
   default :from => configatron.noreply, :template_path => 'mailers/bridesmaid_party_mailer'
 
-  def bridesmaid_purchase(bridesmaid_purchase)
-    #
+  def bridesmaid_purchase(options = {})
+    @items = options[:items]
+    @bride = options[:bride]
+    @user  = options[:user]
+
+    mail(
+      to: @bride.email,
+      subject: 'Bridesmaid Party'
+    )
   end
 
   def bridesmaid_send(bride, bridesmaid_member, site_version)
