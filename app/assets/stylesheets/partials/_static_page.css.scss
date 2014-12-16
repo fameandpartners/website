@@ -1017,6 +1017,10 @@ body.competition_entries {
 	font-size: 18px;
 	text-transform: none;
 	line-height: 1.4;
+	font: 100 18px $fontFive;
+	p{
+		line-height: 1.8em;
+	}
 	.header {
 		background: image-url('fashion-it-girl/top.jpg') center center no-repeat;
 		background-size: cover;
@@ -1029,6 +1033,10 @@ body.competition_entries {
 			border-top: 5px solid #000;
 			border-bottom: 5px solid #000;
 		}
+	}
+	.grid-container{
+		width: 890px;
+		margin: 0 auto;
 	}
 	.subtitle {
 		font-family: $fontThree;
@@ -1076,6 +1084,45 @@ body.competition_entries {
 }
 
 .christmas-gift-page {
+
+  .inner{
+    width: 920px;
+    margin: 0 auto;
+
+    .separate-line {
+			margin: 42px 0;
+			background: #000;
+			height: 1px;
+		}
+
+    .right{
+      float: right;
+    }
+    .left{
+      float: left;
+    }
+
+    .catalog{
+      .catalog-item{
+        width: 200px;
+        min-width: 200px;
+        margin-right: 40px;
+      }
+    }
+
+    .sb1, .sb2, .sb3 {
+			@include clearfix;
+			margin-bottom: 40px;
+    }
+
+    .more {
+      margin-top: 70px;
+      h2 {
+        width: 470px;
+        margin-bottom: 40px;
+      }
+    }
+  }
 	.page-intro {
 		background: image-url('statics/bg-christmas-gift.jpg') center center no-repeat;
 		background-size: cover;
@@ -1103,45 +1150,25 @@ body.competition_entries {
 		.font-one {
 			font: 400 18px/1.1 $fontOne;
 		}
-		.separate {
-			width: 192px;
-			height: 2px;
-			background: #000;
-			margin: 40px auto 40px;
-		}
 	}
-	.separate-line {
-		margin: 42px 0;
-		background: #000;
-		height: 1px;
-	}
-  .catalog {
-    .catalog-item {
-    	display: inline-block;
-    	vertical-align: top;
-      width: 230px;
-      min-width: 230px;
-      margin-right: 36px;
-      text-align: center;
-      font-size: 16px;
-      margin-bottom: 30px;
-    }
-  }
+	
 	.get-discount {
+		width: 200px;
 		font-size: 20px;
 		text-align: center;
 		padding-top: 60px;
 	}
 	.more-dresses {
-		font: 400 20px/1.3 $fontOne;
-		text-transform: uppercase;
 		position: relative;
-		.inner {
+		h2 {
+			font: 700 20px/1.3 $fontOne;
+			text-transform: uppercase;
 			position: relative;
 			z-index: 2;
 			background: #fff;
 			padding: 0 24px;
 			display: inline-block;
+			letter-spacing: 2px;
 		}
 		&:before {
 			content: '';
@@ -1151,6 +1178,9 @@ body.competition_entries {
 			left: 0;
 			width: 100%;
 			height: 1px;
+		}
+		.catalog{
+			margin-top: 20px;
 		}
 	}
 }

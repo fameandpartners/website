@@ -9,17 +9,18 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="640"
     tr
       td
         table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
-          tr
-            td width="50%" style='padding: 20px; text-align: right;'
-              = link_to moodboard_url do
-                = image_tag @image_url
-            td width="50%" style="font-family: 'Times New Roman', serif; font-size: 18px; color: #000000; font-style: italic; line-height: 34px; text-align: center;"
-              p = @bridesmaid_name
-              p purchased:
-              p = @dress_name
-              p = @price
-              p = @colour
-              p = @size
+          - @items.each do |item|
+            tr
+              td width="50%" style='padding: 20px; text-align: right;'
+                = link_to moodboard_url do
+                  = image_tag item.image_url
+              td width="50%" style="font-family: 'Times New Roman', serif; font-size: 18px; color: #000000; font-style: italic; line-height: 34px; text-align: center;"
+                p = @user.full_name
+                p purchased:
+                p = item.name
+                p = item.price.try(:display_price)
+                p = item.colour
+                p = item.size
     tr
       td
         = link_to moodboard_url do

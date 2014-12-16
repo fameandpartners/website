@@ -121,6 +121,11 @@ class StaticsController < ApplicationController
     @description = "Perfect Christmas Dresses 2014. " + default_meta_description
   end
 
+  def fashion_it_girl
+    @title = "Fashion IT Girl. " + default_seo_title
+    @description = "Fashion IT Girl 2015. " + default_meta_description
+  end
+
   private
 
   def get_products_from_edit (edit, currency, user, count=9)

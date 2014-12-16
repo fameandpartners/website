@@ -1,5 +1,5 @@
 
-.nye, .bridesmaid_lp{
+.nye, .bridesmaid_lp, .christmas-gift-page{
   .catalog {
     width: 100%;
     font-size: 0;
@@ -266,7 +266,7 @@
 }
 
 @media only screen and (max-width: 1000px), only screen and (max-device-width: 1000px) {
-  #nye {
+  #nye, #christmas_gift {
     #content{
       width: 1140px;
       margin: 0 auto 0 auto;
@@ -285,13 +285,18 @@
 
 @media only screen and (max-width: 680px), only screen and (max-device-width: 680px) {
   #content{
-      width: 100% !important;
-      min-width: 320px;
-    }
+    width: 100% !important;
+    min-width: 320px;
+  }
 
-  .s2, .s3, .s5 .part2, .s7 .right, .s8{
+  .s2, .s3, .s5 .part2, .s7 .right, .s8, .get-discount, .separate-line{
     display: none;
   }
+  
+  .page-intro{
+    background: none;
+  }
+
   .s1, .s6{
     .image{
       width: 100%;
