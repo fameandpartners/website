@@ -14,6 +14,9 @@ ruby:
     cache_keys.push(current_promotion.code)
   end
 
+- if marketing_landing_page?
+  = render '/shared/marketing_pop_js'
+
 
 - cache cache_keys, expires_in: configatron.cache.expire.long do
   .christmas-gift-page
