@@ -44,15 +44,6 @@ ruby:
           = image_tag 'statics/image-christmas-gift-1.jpg', width: 440, height: 639, alt: '', class: 'image'
         .right
           .catalog
-            - products[3..4].each do |dress|
-              .catalog-item
-                .picture
-                  = link_to collection_product_path(dress) do
-                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
-                .text
-                  = link_to dress.name, collection_product_path(dress), class: 'title'
-                  .price = price_for_product(dress)
-          .catalog
             - products[4..5].each do |dress|
               .catalog-item
                 .picture
@@ -61,8 +52,17 @@ ruby:
                 .text
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
+          .catalog
+            - products[6..7].each do |dress|
+              .catalog-item
+                .picture
+                  = link_to collection_product_path(dress) do
+                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                .text
+                  = link_to dress.name, collection_product_path(dress), class: 'title'
+                  .price = price_for_product(dress)
       .catalog
-        - products[6..9].each do |dress|
+        - products[8..11].each do |dress|
           .catalog-item
             .picture
               = link_to collection_product_path(dress) do
@@ -71,8 +71,10 @@ ruby:
               = link_to dress.name, collection_product_path(dress), class: 'title'
               .price = price_for_product(dress)
       .sb2
-        .left
-          - dress = products[10]
+        .right
+          = image_tag 'statics/image-christmas-gift-2.jpg', width: 682, height: 293, alt: '', class: 'img-responsive'
+        .catalog
+          - dress = products[12]
           .catalog-item
             .picture
               = link_to collection_product_path(dress) do
@@ -80,22 +82,21 @@ ruby:
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
               .price = price_for_product(dress)
-        .right
-          = image_tag 'statics/image-christmas-gift-2.jpg', width: 682, height: 293, alt: '', class: 'img-responsive'
+        
 
       .sb3
-        .left
-          .catalog
-            - products[11..13].each do |dress|
-              .catalog-item
-                .picture
-                  = link_to collection_product_path(dress) do
-                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
-                .text
-                  = link_to dress.name, collection_product_path(dress), class: 'title'
-                  .price = price_for_product(dress)
         .right.get-discount
           ' + 20% off<br>gorgeous<br>jewellery<br>from<br>Peter Lang
+        .catalog
+          - products[13..15].each do |dress|
+            .catalog-item
+              .picture
+                = link_to collection_product_path(dress) do
+                  = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+              .text
+                = link_to dress.name, collection_product_path(dress), class: 'title'
+                .price = price_for_product(dress)
+        
 
       .more-dresses
         h2 Dazzle in these dresses, whatever the occasion
