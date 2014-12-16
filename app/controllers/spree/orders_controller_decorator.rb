@@ -1,4 +1,10 @@
 Spree::OrdersController.class_eval do
+  # Shows the current incomplete order from the session
+  def edit
+    @order = current_order(true)
+    associate_user
+  end 
+
   def update
     @order = current_order
     unless @order
