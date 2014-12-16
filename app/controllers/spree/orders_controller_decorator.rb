@@ -3,6 +3,15 @@ Spree::OrdersController.class_eval do
   def edit
     @order = current_order(true)
     associate_user
+
+    # only line items. for now
+    @user_cart = Repositories::UserCart.new(
+      accessor: current_spree_user,
+      order: @order,
+      site_version: current_site_version
+    ).read
+
+    title('Your Shopping Cart', default_seo_title)
   end 
 
   def update

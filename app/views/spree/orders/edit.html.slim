@@ -10,7 +10,7 @@
     .row
       .grid-9
         .separator
-        - if @order.line_items.empty?
+        - if @user_cart.items.empty?
         .empty-cart(data-hook="empty_cart")
           p = t(:your_cart_is_empty)
           p = link_to t(:continue_shopping), collection_path, class: 'button continue'
@@ -21,71 +21,60 @@
                 th.column-1 Product description
                 th.column-2 Style / Quantity
             tbody
-              - @order.line_items.each do |line_item|
-                - variant = line_item.variant
-                - product = variant.product
-                tr data-id='#{variant.id}' data-line-item-id='#{line_item.id}'
+              - @user_cart.items.each do |cart_item|
+                tr data-id=(cart_item.variant_id) data-line-item-id=(cart_item.id)
                   td.column-1
                     .product-info
                       .image
-                        = link_to image_tag(line_item_image_url(line_item, :product), itemprop: 'image', width: 136, height: 200, alt: product.name), collection_product_path(product)
+                        - image_url = cart_item.image.present? ? cart_item.image.large : 'images/noimage/product.png'
+                        = link_to image_tag(image_url, itemprop: 'image', width: 136, height: 200, alt: cart_item.name), collection_product_path(cart_item.product)
                       .desc
-                        .name = link_to product.name, collection_product_path(product), target: 'blank'
-                        .text = line_item_description(variant)
+                        .name = link_to cart_item.name, collection_product_path(cart_item.product), target: 'blank'
+                        .text = truncate(strip_tags(cart_item.description.gsub('&nbsp;', ' ')), length: 100)
                       .buttons
-                        - if !product.service?
-                          - if line_item.personalization.present?
-                            = link_to 'Edit item', personalization_product_path(product), class: 'btn empty small border'
-                          - else
-                            - link_data = {id: line_item.id, variant: line_item.variant_id, quantity: line_item.quantity}
-                            = link_to 'Edit item', '#', class: 'edit-link btn small empty border', data: link_data
-                          = product_move_to_wishlist_link(variant, title: 'Move to wishlist', size:  'small')
-                        = link_to '#', data: { id: variant.id }, class: 'remove-item-from-cart  btn empty small border lighter' do
+                        - if cart_item.product_type == :default
+                          - link_data = {id: cart_item.id, variant: cart_item.variant_id, quantity: cart_item.quantity}
+                          = link_to 'Edit item', '#', class: 'edit-link btn small empty border', data: link_data
+                        - elsif cart_item.product_type == :customized
+                          = link_to 'Edit item', personalization_product_path(cart_item.product), class: 'btn empty small border'
+
+                        = link_to '#', data: { id: cart_item.variant_id }, class: 'remove-item-from-cart  btn empty small border lighter' do
                           span.icon-trash
                   td.column-2
                     .details-box
                       .static
-                        - if product.service?
+                        - if cart_item.product_type == :service
                           /.smaller
                             /.label Quantity
-                            /.value = line_item.quantity
-                        - elsif line_item.personalization.blank?
-                          .smaller
-                            .line
-                              .label Color
-                              .value = variant.dress_color.try(:name)
-                            .line
-                              .label Size
-                              .value = variant.dress_size.try(:name)
-                            .line
-                              .label Quantity
-                              .value = line_item.quantity
+                            /.value = cart_item.quantity
                         - else
                           .smaller
                             .line
                               .label Color
-                              .value = line_item.personalization.color.try(:name)
+                              .value = cart_item.color.try(:name)
                             .line
                               .label Size
-                              .value = line_item.personalization.size
+                              .value = cart_item.size.try(:name)
                             .line
                               .label Quantity
-                              .value = line_item.quantity
-                          .separator.light
-                          .line
-                            .label Customizations
-                            .value
-                          - line_item.personalization.customization_values.each do |value|
+                              .value = cart_item.quantity
+                          - if cart_item.customizations.present?
+                            .separator.light
                             .line
-                              .label.strong = value.presentation
-                          .separator.light
-                          .smaller
-                            .line
-                              .label Estimated Delivery
-                              .value 10 - 14 Business Days
+                              .label Customizations
+                              .value
+                            - cart_item.customizations.each do |customization|
+                              .line
+                                .label.strong = customization.presentation
+                          - if cart_item.product_type == :customized
+                            .separator.light
+                            .smaller
+                              .line
+                                .label Estimated Delivery
+                                .value 10 - 14 Business Days
                         .separator.light
                         .pricing
-                          = price_for_line_item(line_item)
+                          = price_for_line_item(cart_item.line_item)
                     
           .row
             .separator
@@ -113,4 +102,3 @@
                     = paypal_button_html
             .ask-parents-block
               = link_to 'Invite someone to pay', '#', class: 'buy-now ask-parents ask-parent-to-pay-button'      
-
