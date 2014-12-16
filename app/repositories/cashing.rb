@@ -10,12 +10,9 @@ module Repositories
 
     module ClassMethods
       def cache_results(method_name, options = {})
-        puts "cache result called #{ options.inspect }"
-
         # note: in without cache we should reset cache!
         define_method "#{ method_name }_with_cache" do |options = {}|
           Rails.cache.fetch(cache_key, cache_fetch_params(options)) do
-            puts "cache block"
             call_method("#{ method_name }_without_cache", options)
           end
         end
@@ -35,7 +32,7 @@ module Repositories
       Rails.cache.delete(cache_key)
     end
 
-    def cache_fetch_params(options)
+    def cache_fetch_params(options = {})
       result = { force: options[:force].present? }
       # process options[:force]
       if Rails.env.development?

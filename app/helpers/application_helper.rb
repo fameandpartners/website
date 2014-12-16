@@ -191,14 +191,11 @@ module ApplicationHelper
     path_parts = [site_version_prefix, 'dresses']
     locale = I18n.locale.to_s.downcase.underscore.to_sym
 
-    
-
     if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
       path_parts << "dress-#{product[:urls][locale]}"
     else
       path_parts << "dress-#{descriptive_url(product, locale)}"
     end
-
 
     path =  "/" + path_parts.compact.join('/')
     path = "#{path}?#{options.to_param}" if options.present?
