@@ -1,5 +1,6 @@
 ruby:
-  products = get_products_from_edit('XMAS', nil, nil, 12)
+  products = get_products_from_edit('XMAS', nil, nil, 16)
+  other_products = get_products_from_edit('XMASOther', nil, nil, 8)
 
   cache_keys = ['christmas-gift']
   if spree_user_signed_in?
@@ -13,6 +14,9 @@ ruby:
     cache_keys.push(current_promotion.code)
   end
 
+- if marketing_landing_page?
+  = render '/shared/marketing_pop_js'
+
 
 - cache cache_keys, expires_in: configatron.cache.expire.long do
   .christmas-gift-page
@@ -25,24 +29,83 @@ ruby:
         .font-one.uppercase.text-center + a free, personalised 
         .font-one.uppercase.text-center styling session with every dress
 
-    .separate-line
+    .inner
+      .separate-line
 
-    .catalog
-      - products[0..1].each do |dress|
-        .catalog-item
-          .picture
-            = link_to collection_product_path(dress) do
-              = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
-          .text
-            = link_to dress.name, collection_product_path(dress), class: 'title'
-            .price = price_for_product(dress)
+      .catalog
+        - products[0..3].each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
 
-    .grid-container
-      .grid-6
-        = image_tag 'statics/image-christmas-gift-1.jpg', width: 440, height: 639, alt: '', class: 'img-responsive'
-      .grid-6
+      .sb1
+        .left
+          = image_tag 'statics/image-christmas-gift-1.jpg', width: 440, height: 639, alt: '', class: 'image'
+        .right
+          .catalog
+            - products[4..5].each do |dress|
+              .catalog-item
+                .picture
+                  = link_to collection_product_path(dress) do
+                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                .text
+                  = link_to dress.name, collection_product_path(dress), class: 'title'
+                  .price = price_for_product(dress)
+          .catalog
+            - products[6..7].each do |dress|
+              .catalog-item
+                .picture
+                  = link_to collection_product_path(dress) do
+                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                .text
+                  = link_to dress.name, collection_product_path(dress), class: 'title'
+                  .price = price_for_product(dress)
+      .catalog
+        - products[8..11].each do |dress|
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
+      .sb2
+        .right
+          = image_tag 'statics/image-christmas-gift-2.jpg', width: 682, height: 293, alt: '', class: 'img-responsive'
         .catalog
-          - products[2..3].each do |dress|
+          - dress = products[12]
+          .catalog-item
+            .picture
+              = link_to collection_product_path(dress) do
+                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+            .text
+              = link_to dress.name, collection_product_path(dress), class: 'title'
+              .price = price_for_product(dress)
+        
+
+      .sb3
+        .right.get-discount
+          ' + 20% off<br>gorgeous<br>jewellery<br>from<br>Peter Lang
+        .catalog
+          - products[13..15].each do |dress|
+            .catalog-item
+              .picture
+                = link_to collection_product_path(dress) do
+                  = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+              .text
+                = link_to dress.name, collection_product_path(dress), class: 'title'
+                .price = price_for_product(dress)
+        
+
+      .more-dresses
+        h2 Dazzle in these dresses, whatever the occasion
+
+        .catalog
+          - other_products[0..3].each do |dress|
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
@@ -51,7 +114,7 @@ ruby:
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
         .catalog
-          - products[4..5].each do |dress|
+          - other_products[0..3].each do |dress|
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
@@ -59,34 +122,3 @@ ruby:
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
-
-    .grid-container
-      .grid-6
-        .catalog
-          - products[6..7].each do |dress|
-            .catalog-item
-              .picture
-                = link_to collection_product_path(dress) do
-                  = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
-              .text
-                = link_to dress.name, collection_product_path(dress), class: 'title'
-                .price = price_for_product(dress)
-      .grid-6
-        = image_tag 'statics/image-christmas-gift-2.jpg', width: 682, height: 293, alt: '', class: 'img-responsive'
-
-    .grid-container
-      .grid-9
-        .catalog
-          - products[8..10].each do |dress|
-            .catalog-item
-              .picture
-                = link_to collection_product_path(dress) do
-                  = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
-              .text
-                = link_to dress.name, collection_product_path(dress), class: 'title'
-                .price = price_for_product(dress)
-      .grid-3.get-discount
-        ' + 20% off<br>gorgeous<br>jewellery<br>from<br>Peter Lang
-
-    .more-dresses
-      .inner Dazzle in these dresses, whatever the occasion
