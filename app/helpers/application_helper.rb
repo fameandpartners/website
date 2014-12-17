@@ -386,13 +386,18 @@ module ApplicationHelper
   # ' $295
   def price_for_product(product)
     price = product.zone_price_for(current_site_version)
+    same_price = false
+    
+    if show_prices_with_applied_promocode? || product.in_sale?
+      same_price = price.display_price == current_promotion.calculate_price_with_discount(price).display_price
+    end
 
-    if show_prices_with_applied_promocode?
+    if show_prices_with_applied_promocode? && !same_price
       [
         content_tag(:span, price.display_price, class: 'price-old'),
         current_promotion.calculate_price_with_discount(price).display_price
       ].join("\n").html_safe
-    elsif product.in_sale?
+    elsif product.in_sale? && !same_price
       [
         content_tag(:span, price.display_price_without_discount, class: 'price-old'),
         price.display_price_with_discount(is_surryhills?(product)).to_s
