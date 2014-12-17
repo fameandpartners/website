@@ -372,7 +372,7 @@
 	}
 	.thanks{
 		.title{
-			margin-top: 5px;
+			margin-top: 5px !important;
 		}
 		a.btn{
 			float: left;
@@ -381,7 +381,7 @@
 			margin-top: 10px;
 		}
 		.promo-code{
-			font: 400 28px/0.9 $fontThree;
+			font: 400 38px/1.2 $fontThree;
 		}
 	}
 	.form-container {
@@ -394,7 +394,6 @@
 		}
 	}
 	.share-this{
-		margin-left: 180px;
 		padding-top: 8px;
 	}
 	.share{
