@@ -26,7 +26,7 @@
                   td.column-1
                     .product-info
                       .image
-                        - image_url = cart_item.image.present? ? cart_item.image.large : 'images/noimage/product.png'
+                        - image_url = cart_item.image.present? ? cart_item.image.large : '/assets/noimage/product.png'
                         = link_to image_tag(image_url, itemprop: 'image', width: 136, height: 200, alt: cart_item.name), collection_product_path(cart_item.product)
                       .desc
                         .name = link_to cart_item.name, collection_product_path(cart_item.product), target: 'blank'

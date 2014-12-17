@@ -1,4 +1,5 @@
-class Repositories::CartItem
+module Repositories
+class CartItem
   attr_reader :line_item, :variant, :product
 
   def initialize(options = {})
@@ -94,4 +95,4 @@ class Repositories::CartItem
       line_item.personalization.customization_values
     end
 end
-
+end
