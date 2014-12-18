@@ -114,3 +114,6 @@ en:
     item_count:
       name: 'Item count'
       description: "Order's items count should be greater then"
+    bridesmaid_party_member:
+      name: 'Bridesmaid Party'
+      description: "User is bride or bridesmaid"
