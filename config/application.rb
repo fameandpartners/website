@@ -101,7 +101,9 @@ module FameAndPartners
       Rails.configuration.spree.payment_methods << Spree::Gateway::Pin
       Rails.application.config.spree.calculators.shipping_methods << Spree::Calculator::PriceSackShipping
       Rails.application.config.spree.calculators.promotion_actions_create_adjustments << Spree::Calculator::FreeItem
+      Rails.application.config.spree.calculators.promotion_actions_create_adjustments << Spree::Calculator::ProgressivePercents
       Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::ItemCount
+      Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::BridesmaidPartyMember
     end
   end
 end
