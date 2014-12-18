@@ -1128,6 +1128,7 @@ body.competition_entries {
 		background-size: cover;
 		height: 498px;
 		line-height: 498px;
+		position: relative;
 		.title-message {
 			display: inline-block;
 			vertical-align: middle;
@@ -1151,6 +1152,20 @@ body.competition_entries {
 			font: 400 18px/1.1 $fontOne;
 		}
 	}
+
+	.promocode{
+  	margin: 0 auto;
+  	padding-top:40px;
+    background: #fff;
+    color: #000;
+    text-align: center;
+    font: 100 20px/1.3 $fontOne;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		strong{
+			font-weight: 700;
+		}
+  }
 	
 	.get-discount {
 		width: 200px;
