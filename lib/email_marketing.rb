@@ -28,9 +28,10 @@ class EmailMarketing
   end
 
   def self.remove_old_notifications
+    codes = %w{style_quiz_completed_reminder wishlist_item_added_reminder wishlist_item_added}
     #sent_before = (configatron.email_marketing.store_information || 1.month).ago
     #EmailNotification.delete_all(["created_at < ?", sent_before])
-    EmailNotification.delete_all(created_at: nil)
+    EmailNotification.delete_all(created_at: nil, code: codes)
   end
 
   # Abandoned Cart: Send email to a user who has added to cart 
