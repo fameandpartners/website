@@ -11,9 +11,12 @@ class Blog::PostsController < BlogBaseController
     if params[:type] == 'red_carpet'
       title 'Red carpet events'
       description 'Red carpet events'
-    elsif params[:category_slug].present?
+    elsif @category.present? #params[:category_slug].present?
       title "Posts in #{@category.name}"
       description "Posts in #{@category.name}"
+    else
+      title "Blog"
+      description "Blog"
     end
 
     respond_to do |format|
@@ -76,7 +79,9 @@ class Blog::PostsController < BlogBaseController
       scope = scope.where(post_type_id: Blog::Post::PostTypes::SIMPLE)
       if params[:category_slug].present?
         @category = Blog::Category.find_by_slug(params[:category_slug])
-        scope = scope.where(category_id: @category.try(:id))
+        if @category.present?
+          scope = scope.where(category_id: @category.try(:id))
+        end
       end
     end
     @post_scope = scope
@@ -93,8 +98,10 @@ class Blog::PostsController < BlogBaseController
   def generate_breadcrumbs_for_index
     if params[:type] == 'red_carpet'
       @breadcrumbs = [[blog_path, 'Home'], [blog_red_carpet_posts_path, 'Red Carpet Events']]
-    else
+    elsif @category.present?
       @breadcrumbs = [[blog_path, 'Home'], [blog_posts_by_category_path(@category.try(:slug)), @category.try(:name)]]
+    else
+      @breadcrumbs = [[blog_path, 'Home']]
     end
   end
 end
