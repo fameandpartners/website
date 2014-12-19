@@ -28,8 +28,7 @@ $('.spree_products.index').ready ->
       window.addSwitcherToAltImage() if window.addSwitcherToAltImage
       productWishlist.addWishlistButtonActions($('a.wish-list-link')) unless _.isUndefined(window.current_user)
       window.initHoverableProductImages()
-
-      $('.selectbox').chosen()
+      $('.selectbox').not('.chosen-container').chosen()
 
     update: () ->
       updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())

@@ -28,7 +28,9 @@ $('.ecommerce').ready(function(){
 
 
 $(function() {
-  $('.selectbox').chosen({
+  // :not selector required to prevent applying chosen on chosen child elements
+  // this will break js code
+  $('.selectbox').not('.chosen-container').chosen({
     width: '100%',
     inherit_select_classes: true,
     disable_search: true
