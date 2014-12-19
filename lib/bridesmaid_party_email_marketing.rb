@@ -1,6 +1,6 @@
 # dev shortcuts to copy-paste
 # BridesmaidPartyEmailMarketing.send_emails
-# BridesmaidPartyEmailMarketing.send_share_completed_bridesmaid_profile
+# BridesmaidPartyEmailMarketing.send_offer_to_bridesmaid_not_purchased_dress_to_wedding
 #
 class BridesmaidPartyEmailMarketing
   def self.send_emails
@@ -12,6 +12,7 @@ class BridesmaidPartyEmailMarketing
     #Brides or bridesmaids who have not purchased
     #Purpose: Remind signed up users to purchase dress + reminding them of offer
     #Timing: 8 weeks before wedding date
+    send_offer_to_bridesmaid_not_purchased_dress_to_wedding
     
     #Brides or bridesmaids who have not purchased
     #Purpose: letting them know about concierge service
@@ -52,9 +53,38 @@ class BridesmaidPartyEmailMarketing
 
     BridesmaidParty::Event.where(id: event_ids).find_in_batches(batch_size: 10) do |group|
       group.each do |event|
-        if event.completed? && !EmailNotification.where(code: code, spree_user_id: event.spree_user_id).exists?
-          # add worker with email sent
-          puts "---- triggered email #{ code } for user #{ event.spree_user_id }"
+        if event.completed?
+          schedule_notification(code, event.spree_user_id)
+        end
+      end
+    end
+  end
+
+  #Brides or bridesmaids who have not purchased
+  #Purpose: Remind signed up users to purchase dress + reminding them of offer
+  #Timing: 8 weeks before wedding date
+  def self.send_offer_to_bridesmaid_not_purchased_dress_to_wedding
+    code = 'bridesmaid_member_not_purchased'
+    wedding_before  = 2.month.from_now
+    wedding_after   = 7.weeks.from_now
+
+    events = BridesmaidParty::Event.includes(:members).
+      where("bridesmaid_party_events.wedding_date IS NOT NULL").
+      where("bridesmaid_party_events.wedding_date > ?", wedding_after).
+      where("bridesmaid_party_events.wedding_date < ?", wedding_before)
+
+    events.find_in_batches(batch_size: 10) do |group|
+      group.each do |event|
+        # check bride only
+        if !user_bought_something?(event.spree_user_id)
+          schedule_notification(code, event.spree_user_id)
+        end
+        if !event.paying_for_bridesmaids?
+          event.members.each do |bridesmaid_membership|
+            if !user_bought_something?(bridesmaid_membership.spree_user_id)
+              schedule_notification(code, bridesmaid_membership.spree_user_id)
+            end
+          end
         end
       end
     end
@@ -62,4 +92,22 @@ class BridesmaidPartyEmailMarketing
 
   private
 
+  class << self
+
+    # strictly, concierge service is not dress, but if user bought service product,
+    # it's already knows about us
+    def user_bought_something?(user_id)
+      Spree::Order.where(user_id: user_id, state: 'complete').exists?
+    end
+
+    def already_sent?(code, user_id)
+      EmailNotification.where(code: code, spree_user_id: user_id).exists?
+    end
+
+    def schedule_notification(code, user_id)
+      return false if already_sent?(code, user_id)
+      puts "---- triggered email #{ code } for user #{ user_id }"
+    end
+
+  end
 end
