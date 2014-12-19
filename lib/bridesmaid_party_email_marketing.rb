@@ -1,28 +1,30 @@
 # dev shortcuts to copy-paste
 # BridesmaidPartyEmailMarketing.send_emails
-# BridesmaidPartyEmailMarketing.send_offer_to_bridesmaid_not_purchased_dress_to_wedding
+#
+# require 'sidekiq/api'
+# Sidekiq::Queue.new.clear
 #
 class BridesmaidPartyEmailMarketing
   def self.send_emails
     #Brides who have completed the process, but did not share to bridesmaid
     #Purpose: to get users to share mood board + bridesmaid to start selecting
     #Timing: 1 week after signing up
-    send_share_completed_bridesmaid_profile
+    with_exceptions_handle { send_share_completed_bridesmaid_profile }
 
     #Brides or bridesmaids who have not purchased
     #Purpose: Remind signed up users to purchase dress + reminding them of offer
     #Timing: 8 weeks before wedding date
-    send_offer_to_bridesmaid_not_purchased_dress_to_wedding
+    with_exceptions_handle { send_offer_to_bridesmaid_not_purchased_dress_to_wedding }
     
     #Brides or bridesmaids who have not purchased
     #Purpose: letting them know about concierge service
     #Timing: 2 weeks after signing up, excluding users that are also 6 weeks prior to wedding 
-    send_concierge_service_offer
+    with_exceptions_handle { send_concierge_service_offer }
 
     #User who selected "I'm the bride" when they signed up
     #Purpose: to get her buying an engagement dress
     #Timing: 2-3 days after signing up
-    send_emails_to_brides
+    with_exceptions_handle { send_emails_to_brides }
   
     #Bride who selected "no. of bridesmaids"
     #Purpose: offering a discount for multiple dresses - 
@@ -31,12 +33,12 @@ class BridesmaidPartyEmailMarketing
     #Up to 3 bridesmaids – take 15% OFF
     #Up to 5 bridesmaids – take 20% OFF
     #More than 5 bridesmaids – take 25% OFF
-    send_emails_to_brides_with_bridesmaids
+    with_exceptions_handle { send_emails_to_brides_with_bridesmaids }
  
     #User who selected "Maid of Honour" and "Who is paying > individual bridesmaids"
     #Purpose: offering a free styling session
     #Timing: 1 week after signup
-    send_emails_to_maid_of_honour
+    with_exceptions_handle { send_emails_to_maid_of_honour }
   end
 
   #Brides who have completed the process, but did not share to bridesmaid
@@ -130,6 +132,9 @@ class BridesmaidPartyEmailMarketing
     end
   end
 
+  #User who selected "I'm the bride" when they signed up
+  #Purpose: to get her buying an engagement dress
+  #Timing: 2-3 days after signing up
   def self.send_emails_to_brides
     code = 'reminder_to_brides'
     registered_before = 3.days.ago
@@ -171,9 +176,10 @@ class BridesmaidPartyEmailMarketing
 
     BridesmaidParty::Event.where(id: event_ids).includes(:members).find_in_batches(batch_size: 10) do |group|
       group.each do |event|
-        schedule_notification(code, event.spree_user_id)
+        bridesmaids_count = event.members.where("spree_user_id is not null").count
+        schedule_notification(code, event.spree_user_id, { bridesmaids_count: bridesmaids_count })
         event.members.each do |event_membership|
-          schedule_notification(code, event_membership.spree_user_id)
+          schedule_notification(code, event_membership.spree_user_id, { bridesmaids_count: bridesmaids_count })
         end
       end
     end
@@ -206,6 +212,13 @@ class BridesmaidPartyEmailMarketing
   private
 
   class << self
+    def with_exceptions_handle
+      yield
+    rescue Exception => error
+      Rails.logger.info('bridesmaid_party_email_marketing error')
+      Rails.logger.info(error.inspect)
+      Rails.logger.info(error.backtrace)
+    end
 
     # strictly, concierge service is not dress, but if user bought service product,
     # it's already knows about us
@@ -217,11 +230,11 @@ class BridesmaidPartyEmailMarketing
       EmailNotification.where(code: code, spree_user_id: user_id).exists?
     end
 
-    # TODO - we should check EmailNotification presence before sent
-    # - we can schedule multiple emails to same user to queue. or clear queue?
+    # TODO - we should also check EmailNotification presence before sent
     def schedule_notification(code, user_id, options = {})
       return false if already_sent?(code, user_id)
       puts "---- triggered email #{ code } for user #{ user_id } ( #{ options.inspect })"
+      BridesmaidPartyEmailMarketingWorker.perform_async(code, user_id, options)
     end
   end
 end
