@@ -16,22 +16,27 @@ class BridesmaidPartyEmailMarketing
     
     #Brides or bridesmaids who have not purchased
     #Purpose: letting them know about concierge service
-    #Timing: 2 weeks after signing up, excluding users that are also 6 weeks prior to wedding and/or have received that email already
+    #Timing: 2 weeks after signing up, excluding users that are also 6 weeks prior to wedding 
+    send_concierge_service_offer
 
     #User who selected "I'm the bride" when they signed up
     #Purpose: to get her buying an engagement dress
     #Timing: 2-3 days after signing up
+    send_emails_to_brides
   
     #Bride who selected "no. of bridesmaids"
-    #Purpose: offering a discount for multiple dresses - depending on how many bridesmaid they have they will receive a different email
+    #Purpose: offering a discount for multiple dresses - 
+    # depending on how many bridesmaid they have they will receive a different email
     #Timing: 4 days after sign up
     #Up to 3 bridesmaids – take 15% OFF
     #Up to 5 bridesmaids – take 20% OFF
     #More than 5 bridesmaids – take 25% OFF
+    send_emails_to_brides_with_bridesmaids
  
     #User who selected "Maid of Honour" and "Who is paying > individual bridesmaids"
     #Purpose: offering a free styling session
     #Timing: 1 week after signup
+    send_emails_to_maid_of_honour
   end
 
   #Brides who have completed the process, but did not share to bridesmaid
@@ -90,6 +95,114 @@ class BridesmaidPartyEmailMarketing
     end
   end
 
+  #Brides or bridesmaids who have not purchased
+  #Purpose: letting them know about concierge service
+  #Timing: 2 weeks after signing up, excluding users that are also 6 weeks prior to wedding 
+  def self.send_concierge_service_offer
+    code = 'concierge_service_offer'
+
+    registered_before = 2.weeks.ago
+    wedding_after = 6.weeks.from_now
+
+    query = <<-query
+      SELECT bridesmaid_party_events.id as event_id
+      FROM bridesmaid_party_events 
+        INNER JOIN spree_users ON bridesmaid_party_events.spree_user_id = spree_users.id
+      WHERE spree_users.created_at < ?
+        AND (bridesmaid_party_events.wedding_date IS NULL or bridesmaid_party_events.wedding_date > ?)
+    query
+    event_ids = BridesmaidParty::Event.find_by_sql([query, registered_before, wedding_after]).map(&:event_id)
+
+    BridesmaidParty::Event.where(id: event_ids).find_in_batches(batch_size: 10) do |group|
+      group.each do |event|
+        # check bride only
+        if !user_bought_something?(event.spree_user_id)
+          schedule_notification(code, event.spree_user_id)
+        end
+        if !event.paying_for_bridesmaids?
+          event.members.each do |bridesmaid_membership|
+            if !user_bought_something?(bridesmaid_membership.spree_user_id)
+              schedule_notification(code, bridesmaid_membership.spree_user_id)
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def self.send_emails_to_brides
+    code = 'reminder_to_brides'
+    registered_before = 3.days.ago
+
+    im_bride_status = 2 # BridesmaidParty::Event::STATUSES
+
+    query = <<-query
+      SELECT spree_users.id as user_id
+      FROM bridesmaid_party_events 
+        INNER JOIN spree_users ON bridesmaid_party_events.spree_user_id = spree_users.id
+      WHERE spree_users.created_at < ? AND bridesmaid_party_events.status = ?
+    query
+    user_ids = BridesmaidParty::Event.find_by_sql([query, registered_before, im_bride_status]).map(&:user_id)
+
+    user_ids.each do |spree_user_id|
+      schedule_notification(code, spree_user_id)
+    end
+  end
+
+  #Bride who selected "no. of bridesmaids"
+  #Purpose: offering a discount for multiple dresses - 
+  # depending on how many bridesmaid they have they will receive a different email
+  #Timing: 4 days after sign up
+  #Up to 3 bridesmaids – take 15% OFF
+  #Up to 5 bridesmaids – take 20% OFF
+  #More than 5 bridesmaids – take 25% OFF
+  def self.send_emails_to_brides_with_bridesmaids
+    code = 'promo_for_bride_with_bridesmaids'
+    registered_before = 4.days.ago
+
+    query = <<-query
+      SELECT bridesmaid_party_events.id as event_id
+      FROM bridesmaid_party_events 
+        INNER JOIN spree_users ON bridesmaid_party_events.spree_user_id = spree_users.id
+      WHERE spree_users.created_at < ? AND bridesmaid_party_events.bridesmaids_count > 0
+    query
+    event_ids = BridesmaidParty::Event.find_by_sql([query, registered_before]).map(&:event_id)
+    events = BridesmaidParty::Event.where(id: event_ids)
+
+    BridesmaidParty::Event.where(id: event_ids).includes(:members).find_in_batches(batch_size: 10) do |group|
+      group.each do |event|
+        schedule_notification(code, event.spree_user_id)
+        event.members.each do |event_membership|
+          schedule_notification(code, event_membership.spree_user_id)
+        end
+      end
+    end
+  end
+
+  #User who selected "Maid of Honour" and "Who is paying > individual bridesmaids"
+  #Purpose: offering a free styling session
+  #Timing: 1 week after signup
+  def self.send_emails_to_maid_of_honour
+    code = 'free_styling_lesson_for_maid_of_honour'
+    registered_before = 1.week.ago
+
+    im_the_maid_of_honour_status = 3 # BridesmaidParty::Event::STATUSES
+
+    query = <<-query
+      SELECT spree_users.id as user_id
+      FROM bridesmaid_party_events 
+        INNER JOIN spree_users ON bridesmaid_party_events.spree_user_id = spree_users.id
+      WHERE spree_users.created_at < ?
+        AND bridesmaid_party_events.status = ?
+        AND not bridesmaid_party_events.paying_for_bridesmaids
+    query
+    user_ids = BridesmaidParty::Event.find_by_sql([query, registered_before, im_the_maid_of_honour_status]).map(&:user_id)
+
+    user_ids.each do |spree_user_id|
+      schedule_notification(code, spree_user_id)
+    end
+  end
+
   private
 
   class << self
@@ -104,10 +217,11 @@ class BridesmaidPartyEmailMarketing
       EmailNotification.where(code: code, spree_user_id: user_id).exists?
     end
 
-    def schedule_notification(code, user_id)
+    # TODO - we should check EmailNotification presence before sent
+    # - we can schedule multiple emails to same user to queue. or clear queue?
+    def schedule_notification(code, user_id, options = {})
       return false if already_sent?(code, user_id)
-      puts "---- triggered email #{ code } for user #{ user_id }"
+      puts "---- triggered email #{ code } for user #{ user_id } ( #{ options.inspect })"
     end
-
   end
 end
