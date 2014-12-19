@@ -113,4 +113,10 @@ en:
   promotion_rule_types:
     item_count:
       name: 'Item count'
-      description: "Order's items count should be greater then"
+      description: "Order's items count should be greater than"
+    bridesmaids_count:
+      name: 'Bridesmaids Count'
+      description: "Registered bridesmaids number should be greater than"
+    bridesmaid_party_member:
+      name: 'Bridesmaid Party'
+      description: "User is bride or bridesmaid"

@@ -1,17 +1,15 @@
 ruby:
-  variant = line_item.variant
-  product = variant.product
-  hide_remove ||= false
-  show_customizations ||= false
+  cart_item = Repositories::CartItem.new(line_item: line_item).read
 
 .item
   .picture
-    = link_to image_tag(line_item_image_url(line_item, :small), itemprop: "image", width: 83, height: 115, alt: product.name), collection_product_path(product)
+    - image_url = cart_item.image.present? ? cart_item.image.small : '/assets/noimage/product.png'
+    = link_to image_tag(image_url, itemprop: "image", width: 83, height: 115, alt: cart_item.name), collection_product_path(cart_item.product)
   .info
-    h6 = link_to product.name, collection_product_path(product), target: '_blank'
+    h6 = link_to cart_item.name, collection_product_path(cart_item.product), target: '_blank'
     .price = price_for_line_item(line_item)
     .description
-      - if product.service?
+      - if cart_item.product_type == :service
         table
           tr
           tr
@@ -21,24 +19,20 @@ ruby:
           tr
             td Color:
             td 
-              - if show_customizations && line_item.personalization.present?
-                .color style="background-color: #{line_item.personalization.color.value};"
-              - else
-                = variant.dress_color.try(:presentation)
-          - if show_customizations && line_item.personalization.present?
-            tr
-              td Size:
-              td = line_item.personalization.size
-            - line_item.personalization.customization_values.each do |value|
+              - if cart_item.color.try(:value).present?
+                .color style="background-color: #{cart_item.color.value};"
+              = cart_item.color.try(:presentation)
+          tr
+            td Size:
+            td = cart_item.size.try(:presentation)
+
+          - if cart_item.customizations.present?
+            - cart_item.customizations.each do |customization|
               tr
                 td colspan="2"
-                  = value.presentation
-          - else
-            tr
-              td Size:
-              td = variant.dress_size.try(:presentation)
+                  = customization.try(:presentation)
           tr
             td Quantity:
-            td = line_item.quantity
+            td = cart_item.quantity
   /= link_to '#', class: 'delete remove-item-from-cart', data: { id: variant.id } do
     span.icon-close

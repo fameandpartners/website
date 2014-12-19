@@ -45,13 +45,11 @@ Spree::LineItem.class_eval do
     end
   end
 
+  def cart_item
+    @cart_item ||= Repositories::CartItem.new(line_item: self).read
+  end
+
   def image
-    @image ||= begin
-      result = product.images_for_variant(variant).first
-      if result.nil? && !variant.is_master?
-        result = product.images_for_variant(product.master).first
-      end
-      result ||= product.images.first
-    end
+    cart_item.image.present? ? Spree::Image.find(cart_item.image.id) : nil
   end
 end

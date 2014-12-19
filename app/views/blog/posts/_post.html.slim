@@ -9,12 +9,13 @@ article.blog-post
     .date= post.occured_at_formatted
     .comments
       = link_to '', url + '#disqus_thread'
-    .author
-      ' by
-      = link_to blog_authors_post_path(post.user.slug) do
-        / .avatar
-          = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
-        span.name= post.user.fullname
+    - if post.user.present?
+      .author
+        ' by
+        = link_to blog_authors_post_path(post.user.slug) do
+          / .avatar
+            = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
+          span.name= post.user.fullname
   - if post.primary_photo.present?
     - if params[:action] == 'show' && params[:controller] != 'blog/celebrities'
     .featured-image
