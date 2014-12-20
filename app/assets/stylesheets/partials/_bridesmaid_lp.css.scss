@@ -22,8 +22,27 @@
 
     .sb2 {
       @include clearfix;
-      .image {
-        padding: 10px 0 80px;
+      .left{
+        .text {
+          display: block;
+          padding: 60px 0;
+          margin: 0 auto;
+        }
+        
+      }
+      .right{
+        position: relative;
+        a{
+          position: absolute;
+          display: block;
+          bottom: 40px;
+          width: 100%;
+          .banner {
+            display: block;
+            padding: 10px 0;
+            margin: 0 auto;
+          }  
+        }
       }
     }
     .sb3 {

@@ -23,7 +23,8 @@ ruby:
     .inner  
       .sb2
         .left
-          = image_tag 'campaigns/bridemaid/text.jpg', width: 496, class: 'image', alt: ''
+          = image_tag 'campaigns/bridemaid/text.jpg', alt: '', class: 'text'
+
           .catalog
             - products[0..1].each do |dress|
               .catalog-item
@@ -34,6 +35,8 @@ ruby:
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
         .right
+          = link_to bridesmaid_party_path(:cf => 'bridesmaid_lp') do
+              = image_tag '_bridesmaid/banner.jpg', class: 'banner'
           = image_tag 'campaigns/bridemaid/image1.jpg', width: 496, class: 'image1', alt: ''
       .catalog
         - products[2..5].each do |dress|
