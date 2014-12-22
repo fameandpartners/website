@@ -2,6 +2,7 @@ Spree::Variant.class_eval do
   delegate_belongs_to :final_price, :price_without_discount if Spree::Price.table_exists?
 
   has_many :zone_prices, :dependent => :destroy
+  has_one :discount, foreign_key: :variant_id
 
   attr_accessible :zone_prices_hash, :product_factory_name
   attr_accessor :zone_prices_hash

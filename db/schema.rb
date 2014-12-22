@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141204221759) do
+ActiveRecord::Schema.define(:version => 20141222134710) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -376,6 +376,25 @@ ActiveRecord::Schema.define(:version => 20141204221759) do
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
   end
+
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "discounts", :force => true do |t|
+    t.integer  "variant_id"
+    t.integer  "color_id"
+    t.integer  "customization_id"
+    t.integer  "amount"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "discounts", ["color_id"], :name => "index_discounts_on_color_id"
+  add_index "discounts", ["customization_id"], :name => "index_discounts_on_customization_id"
+  add_index "discounts", ["variant_id"], :name => "index_discounts_on_variant_id"
 
   create_table "email_notifications", :force => true do |t|
     t.integer  "spree_user_id"
