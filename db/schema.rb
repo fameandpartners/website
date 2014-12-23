@@ -609,12 +609,13 @@ ActiveRecord::Schema.define(:version => 20141222134710) do
     t.string   "event_name"
     t.string   "type"
     t.integer  "usage_limit"
-    t.string   "match_policy", :default => "all"
+    t.string   "match_policy",    :default => "all"
     t.string   "code"
-    t.boolean  "advertise",    :default => false
+    t.boolean  "advertise",       :default => false
     t.string   "path"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "allowed_in_sale", :default => false
   end
 
   create_table "spree_addresses", :force => true do |t|
