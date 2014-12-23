@@ -35,12 +35,17 @@
         </div>
 
         <table>
-          <% Spree::Product.active.each_with_index do |product, index| %>
-            <% discount = @object.discounts.detect{ |discount| discount.discountable.eql?(product) } %>
+          <thead>
             <tr>
-              <td>
-                <%= product.name %>
-              </td>
+              <td>Active</td>
+              <td>Name</td>
+              <td>Discount ( 0..100%)</td>
+            </tr>
+          </thead>
+
+          <% Spree::Product.active.includes(:discounts).each_with_index do |product, index| %>
+            <% discount = product.discounts.find{ |discount| discount.sale_id == @object.id } %>
+            <tr>
               <td>
                 <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_type]" value="<%= product.class.name %>" />
                 <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_id]" value="<%= product.id %>" />
@@ -53,10 +58,14 @@
                 <% end %>
               </td>
               <td>
+                <%= link_to product.name, edit_admin_product_path(product), target: :blank %>
+              </td>
+              <td>
+                <% field_name = "sale[discounts_attributes][#{ index }][amount]" %>
                 <% if discount.present? %>
-                  <input type="number" name="sale[discounts_attributes][<%= index %>][amount]" value="<%= discount.amount %>" />
+                  <input type="number" min="0" max="100" name="<%= field_name %>" value="<%= discount.amount %>" />
                 <% else %>
-                  <input type="number" name="sale[discounts_attributes][<%= index %>][amount]" />
+                  <input type="number" min="0" max="100" name="<%= field_name %>" />
                 <% end %>
               </td>
             </tr>
