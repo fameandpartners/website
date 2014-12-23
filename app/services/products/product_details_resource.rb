@@ -38,6 +38,7 @@ class Products::ProductDetailsResource
         default_image: default_product_image,
         images: product_images,
         price: product_price,
+        discount: product_discount,
         free_customisations: Spree::Config[:free_customisations],
         sizes: default_product_sizes,
         extra_sizes: extra_product_sizes,
@@ -78,6 +79,10 @@ class Products::ProductDetailsResource
 
     def product_price
       @product_price ||= product.zone_price_for(site_version)
+    end
+
+    def product_discount
+      product.discount
     end
 
     def product_properties

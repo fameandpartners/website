@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141204221759) do
+ActiveRecord::Schema.define(:version => 20141223103221) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -364,6 +364,14 @@ ActiveRecord::Schema.define(:version => 20141204221759) do
     t.string   "school_name"
   end
 
+  create_table "customisation_types", :force => true do |t|
+    t.integer  "position"
+    t.string   "name"
+    t.string   "presentation"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "customisation_values", :force => true do |t|
     t.integer  "position"
     t.string   "name"
@@ -376,6 +384,24 @@ ActiveRecord::Schema.define(:version => 20141204221759) do
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
   end
+
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
+  create_table "discounts", :force => true do |t|
+    t.integer  "amount"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "discountable_id"
+    t.string   "discountable_type"
+    t.integer  "sale_id"
+  end
+
+  add_index "discounts", ["discountable_id", "discountable_type"], :name => "index_discounts_on_discountable_id_and_discountable_type"
+  add_index "discounts", ["sale_id"], :name => "index_discounts_on_sale_id"
 
   create_table "email_notifications", :force => true do |t|
     t.integer  "spree_user_id"
@@ -398,6 +424,17 @@ ActiveRecord::Schema.define(:version => 20141204221759) do
 
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.string   "name"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
@@ -463,6 +500,21 @@ ActiveRecord::Schema.define(:version => 20141204221759) do
   create_table "product_color_values", :force => true do |t|
     t.integer "product_id"
     t.integer "option_value_id"
+  end
+
+  create_table "product_customisation_types", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "customisation_type_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  create_table "product_customisation_values", :force => true do |t|
+    t.integer "product_customisation_type_id"
+    t.integer "customisation_value_id"
+    t.string  "image_file_name"
+    t.string  "image_content_type"
+    t.integer "image_file_size"
   end
 
   create_table "product_personalizations", :force => true do |t|
@@ -1060,6 +1112,7 @@ ActiveRecord::Schema.define(:version => 20141204221759) do
     t.integer  "discount_type"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "name"
   end
 
   create_table "spree_shipments", :force => true do |t|

@@ -1,13 +1,13 @@
 class CustomisationValue < ActiveRecord::Base
   belongs_to :product,
              class_name: 'Spree::Product'
-
   has_many :incompatibilities,
            inverse_of: :original,
            foreign_key: :original_id
   has_many :incompatibles,
            through: :incompatibilities,
            dependent: :destroy # without this, 'after_destroy' in Incompatibility wouldn't be called :(
+  has_one :discount, foreign_key: :customization_id
 
   attr_accessible :position,
                   :name,

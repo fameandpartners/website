@@ -1,0 +1,2 @@
+$("#new_sale").html('<%= escape_javascript(render :template => "spree/admin/sales/new", :formats => [:html], :handlers => [:erb]) %>');
+$('#new_sale_link').parent().hide();

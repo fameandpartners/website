@@ -154,6 +154,24 @@
   </div>
 
   <div class="twelve columns alpha omega">
+    <table>
+      <% Spree::Sale.all.each_with_index do |sale, index| %>
+        <% discount = @product.discounts.where(sale_id: sale.id).first_or_initialize %>
+        <% discount_field = "product[discounts_attributes][#{ index }]" %>
+        <tr>
+          <td><%= link_to sale.name, edit_admin_sale_path(sale) %></td>
+          <td>
+            <input type="hidden" name="<%= discount_field %>[sale_id]" value="<%= discount.sale_id %>" />
+            <input type="hidden" name="<%= discount_field %>[discountable_type]" value="<%= discount.discountable_type %>" />
+            <input type="hidden" name="<%= discount_field %>[discountable_id]" value="<%= discount.id %>" />
+            <input type="number" min="0" max="100" name="<%= discount_field %>[amount]" value="<%= discount.amount %>" />
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="twelve columns alpha omega">
     <%= f.field_container :taxons do %>
       <%= f.label :taxon_ids, t(:taxons) %><br />
       <%= f.hidden_field :taxon_ids, :value => @product.taxon_ids.join(',') %>

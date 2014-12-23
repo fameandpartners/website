@@ -1,4 +1,6 @@
 class Spree::Sale < ActiveRecord::Base
+  has_many :discounts
+
   DISCOUNT_TYPES = {
     1 => 'Fixed',
     2 => 'Percentage'
@@ -8,9 +10,13 @@ class Spree::Sale < ActiveRecord::Base
 
   alias_attribute :active, :is_active
 
+  accepts_nested_attributes_for :discounts, allow_destroy: true
+
   attr_accessible :is_active,
+                  :name,
                   :discount_size,
-                  :discount_type
+                  :discount_type,
+                  :discounts_attributes
 
   validates :is_active,
             :inclusion => {
@@ -25,6 +31,10 @@ class Spree::Sale < ActiveRecord::Base
             :numericality => {
               :greater_than_or_equal_to => 0
             }
+
+  scope :active, lambda { where(is_active: true) }
+
+  has_many :discounts
 
   after_save do
     ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).clear
