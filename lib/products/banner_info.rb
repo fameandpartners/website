@@ -165,7 +165,7 @@ module Products
       if t_root == "Event"
         event = taxon.name
       else
-        event = I18n.t('words.prom')
+        event = ""
       end
 
       # ignore body shape for no, too much information in the title.
