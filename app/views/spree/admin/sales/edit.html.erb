@@ -10,6 +10,14 @@
       <% end %>
       <fieldset>
         <div class="clearfix">
+          <div class="twelve columns">
+            <%= f.field_container :name do %>
+              <%= f.label :name, t(:name) %> <span class="required">*</span><br />
+              <%= f.text_field :name, :class => 'fullwidth' %>
+              <%= f.error_message_on :name %>
+            <% end %>
+        </div>
+        <div class="clearfix">
           <div class="four columns">
             <%= f.field_container :is_active, :class => ['checkbox'] do %>
               <label>
@@ -33,6 +41,16 @@
             <% end %>
           </div>
         </div>
+
+        <fieldset>
+          <div class="clearfix">
+            <p class="form-buttons">
+              <div class="form-buttons filter-actions actions" data-hook="buttons">
+                <%= button t(:update), 'icon-refresh' %>
+              </div>
+            </p>
+          </div>
+        </fieldset>
 
         <table>
           <thead>
