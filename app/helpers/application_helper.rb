@@ -379,6 +379,21 @@ module ApplicationHelper
     }
   end
 
+  # price: amount, currency, display_price
+  # discount: amount
+  def product_price_with_discount(price, discount)
+    if discount.blank? || discount.amount.to_i == 0
+      price.display_price.to_s.html_safe
+    else
+      amount_with_discount = price.amount * (100 - discount.amount.to_i) / 100
+      sale_price = Spree::Price.new(amount: amount_with_discount, currency: price.currency)
+      [
+        content_tag(:span, price.display_price, class: 'price-old'),
+        sale_price.display_price.to_s
+      ].join("\n").html_safe
+    end
+  end
+
   # span.price-old $355
   # ' $295
   def price_for_product(product)
