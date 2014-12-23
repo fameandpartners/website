@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141222134710) do
+ActiveRecord::Schema.define(:version => 20141223103221) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -384,17 +384,16 @@ ActiveRecord::Schema.define(:version => 20141222134710) do
   add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
 
   create_table "discounts", :force => true do |t|
-    t.integer  "variant_id"
-    t.integer  "color_id"
-    t.integer  "customization_id"
     t.integer  "amount"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "discountable_id"
+    t.string   "discountable_type"
+    t.integer  "sale_id"
   end
 
-  add_index "discounts", ["color_id"], :name => "index_discounts_on_color_id"
-  add_index "discounts", ["customization_id"], :name => "index_discounts_on_customization_id"
-  add_index "discounts", ["variant_id"], :name => "index_discounts_on_variant_id"
+  add_index "discounts", ["discountable_id", "discountable_type"], :name => "index_discounts_on_discountable_id_and_discountable_type"
+  add_index "discounts", ["sale_id"], :name => "index_discounts_on_sale_id"
 
   create_table "email_notifications", :force => true do |t|
     t.integer  "spree_user_id"
@@ -609,13 +608,12 @@ ActiveRecord::Schema.define(:version => 20141222134710) do
     t.string   "event_name"
     t.string   "type"
     t.integer  "usage_limit"
-    t.string   "match_policy",    :default => "all"
+    t.string   "match_policy", :default => "all"
     t.string   "code"
-    t.boolean  "advertise",       :default => false
+    t.boolean  "advertise",    :default => false
     t.string   "path"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.boolean  "allowed_in_sale", :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "spree_addresses", :force => true do |t|
@@ -1079,6 +1077,7 @@ ActiveRecord::Schema.define(:version => 20141222134710) do
     t.integer  "discount_type"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "name"
   end
 
   create_table "spree_shipments", :force => true do |t|
