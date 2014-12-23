@@ -45,6 +45,7 @@ module Products
       info[:banner_title] = get_banner_title(info[:banner_title])
       info[:banner_text] = get_banner_text(info[:banner_text])
       info[:banner_image] = get_banner_image
+      info[:footer_text] =  get_footer_text
 
       info
     end
@@ -209,6 +210,17 @@ module Products
       else
         return
       end
+    end
+    
+    def get_footer_text
+      taxon = selected_categories.first
+
+      if taxon.present? && taxon.banner.present? && taxon.banner.footer_text.present?
+        return taxon.banner.footer_text
+      else
+        return
+      end
+
     end
 
     
