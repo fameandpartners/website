@@ -130,6 +130,10 @@ module Products
 
       r =  "Shop and customize the best #{color}#{style}#{event}dress trends #{event}at Fame & Partners."
 
+      if taxon.present? && taxon.meta_description.present?
+        r = taxon.meta_description
+      end
+
       return r
     end
 
