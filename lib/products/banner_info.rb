@@ -77,12 +77,16 @@ module Products
         color = "#{seo_colour.titleize } "
       end
 
-      
       taxon = selected_categories.first
 
-      
       t_root = ""
       t_root = taxon.parent.name if taxon.present?
+
+      # if the all dresses page /dresses
+      if !color.present? && !t_root.present?
+        t_root = @root_range_taxon.name
+        taxon = @root_range_taxon
+      end 
 
       if t_root == "Style"
         style = "#{taxon.name.titleize} " || ""
@@ -114,12 +118,16 @@ module Products
         color = " #{seo_colour.titleize} "
       end
 
-      
       taxon = selected_categories.first
 
-      
       t_root = ""
       t_root = taxon.parent.name if taxon.present?
+
+      # if the all dresses page /dresses
+      if !color.present? && !t_root.present?
+        t_root = @root_range_taxon.name
+        taxon = @root_range_taxon
+      end 
 
       if t_root == "Style"
         style = " #{taxon.name.titleize} " || ""
@@ -157,6 +165,12 @@ module Products
       
       t_root = ""
       t_root = taxon.parent.name if taxon.present?
+
+      # if the all dresses page /dresses
+      if !color.present? && !t_root.present?
+        t_root = @root_range_taxon.name
+        taxon = @root_range_taxon
+      end 
 
       # strapless formal dresses // style
       # strapless homecoming dresss // style + event
@@ -214,6 +228,11 @@ module Products
     
     def get_footer_text
       taxon = selected_categories.first
+
+      # if the all dresses page /dresses
+      if !taxon.present?
+        taxon = @root_range_taxon
+      end 
 
       if taxon.present? && taxon.banner.present? && taxon.banner.footer_text.present?
         return taxon.banner.footer_text
