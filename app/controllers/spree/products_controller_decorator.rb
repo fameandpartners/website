@@ -75,8 +75,6 @@ Spree::ProductsController.class_eval do
     display_featured_dresses = params[:dfd]
     display_featured_dresses_edit = params[:dfde]
 
-
-
     @page_info = @searcher.selected_products_info
     @category_title = @page_info[:page_title]
     @category_description = @page_info[:meta_description]
