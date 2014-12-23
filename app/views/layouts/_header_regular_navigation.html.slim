@@ -133,10 +133,8 @@
                             li = link_to 'Short Dresses', build_taxon_path('Short'), title: 'Short Dresses', class: "collection"
                             li = link_to 'Bridesmaid', bridesmaid_lp_path, title: 'Bridesmaid Dresses', class: "collection"
                             li = link_to 'New Years Eve', nye_path, title: 'New Years Eve Dresses', class: "collection"
-                            - if current_site_version.is_australia?
-                              li = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses', class: "collection"
-                            - else 
-                              li = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses', class: "collection"
+                            li = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses', class: "collection"    
+                            li = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses', class: "collection"
                             li = link_to 'Plus Size', plus_size_path, title: 'Plus Size Dresses', class: "collection"
                             li = link_to 'Next Day Delivery', next_day_delivery_path, title: 'Next Day Delivery', class: "collection highlight"
 
