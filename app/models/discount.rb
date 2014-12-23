@@ -5,6 +5,9 @@ class Discount < ActiveRecord::Base
 
   attr_accessible :amount
 
+  belongs_to :discountable, polymorphic: true
+  belongs_to :sale, class_name: 'Spree::Sale'
+
   validates :amount,
             presence: true,
             numericality: {

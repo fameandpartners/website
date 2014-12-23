@@ -55,6 +55,8 @@ Spree::Product.class_eval do
 
   after_initialize :set_default_values
 
+  has_many :discounts, as: :discountable
+
   def cache_key
     "products/#{id}-#{updated_at.to_s(:number)}"
   end
@@ -346,6 +348,12 @@ Spree::Product.class_eval do
     factory_name = property('factory_name').to_s.downcase.strip
     in_stock = property('in_stock').to_s.downcase.strip
     return (factory_name == "surry hills" || factory_name == "iconic") || in_stock == "yes"
+  end
+
+  def discount
+    sales_ids = Spree::Sale.active.pluck(:id)
+    return nil if sales_ids.blank?
+    self.discounts.where(sale_id: sales_ids).first
   end
 
   private

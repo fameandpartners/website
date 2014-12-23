@@ -26,6 +26,10 @@ class Spree::Sale < ActiveRecord::Base
               :greater_than_or_equal_to => 0
             }
 
+  scope :active, lambda { where(is_active: true) }
+
+  has_many :discounts
+
   after_save do
     ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).clear
   end
