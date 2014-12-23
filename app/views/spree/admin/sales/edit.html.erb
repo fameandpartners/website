@@ -4,9 +4,9 @@
 
 <div data-hook="admin_sale_edit_form">
   <div id="sale-form-wrapper">
-    <%= form_for [:admin, @sale], :url => admin_sale_path, :method => :put do |f| %>
-      <% if @sale.try(:errors).present? %>
-        <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @sale } %>
+    <%= form_for [:admin, @object], :method => :put do |f| %>
+      <% if @object.try(:errors).present? %>
+        <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
       <% end %>
       <fieldset>
         <div class="clearfix">
@@ -33,6 +33,36 @@
             <% end %>
           </div>
         </div>
+
+        <table>
+          <% Spree::Product.active.each_with_index do |product, index| %>
+            <% discount = @object.discounts.detect{ |discount| discount.discountable.eql?(product) } %>
+            <tr>
+              <td>
+                <%= product.name %>
+              </td>
+              <td>
+                <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_type]" value="<%= product.class.name %>" />
+                <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_id]" value="<%= product.id %>" />
+                <input type="hidden" name="sale[discounts_attributes][<%= index %>][_destroy]" value="1" />
+                <% if discount.present? %>
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][id]" value="<%= discount.id %>" />
+                  <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" checked />
+                <% else %>
+                  <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" />
+                <% end %>
+              </td>
+              <td>
+                <% if discount.present? %>
+                  <input type="number" name="sale[discounts_attributes][<%= index %>][amount]" value="<%= discount.amount %>" />
+                <% else %>
+                  <input type="number" name="sale[discounts_attributes][<%= index %>][amount]" />
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+
         <p class="form-buttons">
           <div class="form-buttons filter-actions actions" data-hook="buttons">
             <%= button t(:update), 'icon-refresh' %>
@@ -43,20 +73,20 @@
   </div>
 </div>
 
-<div data-hook="free_customisation_price_form">
-  <div id="free-customisation-form-wrapper">
-    <%= form_tag admin_sales_set_free_customisations_path, method: :put, remote: true do %>
-      <fieldset class="customisation_values sale">
-        <div class="field">
-          <%= check_box_tag :free_customisations, true, Spree::Config[:free_customisations] %>
-          <%= label_tag(:free_customisations, 'Free customisations') %>
-        </div>
-      </fieldset>
+<!--<div data-hook="free_customisation_price_form">-->
+  <!--<div id="free-customisation-form-wrapper">-->
+    <!--<%= form_tag admin_sales_set_free_customisations_path, method: :put, remote: true do %>-->
+      <!--<fieldset class="customisation_values sale">-->
+        <!--<div class="field">-->
+          <!--<%= check_box_tag :free_customisations, true, Spree::Config[:free_customisations] %>-->
+          <!--<%= label_tag(:free_customisations, 'Free customisations') %>-->
+        <!--</div>-->
+      <!--</fieldset>-->
 
-      <div class="form-buttons filter-actions actions" data-hook="buttons">
-        <%= button t(:update), 'icon-refresh' %>
-      </div>
-    <% end %>
-  </div>
-</div>
+      <!--<div class="form-buttons filter-actions actions" data-hook="buttons">-->
+        <!--<%= button t(:update), 'icon-refresh' %>-->
+      <!--</div>-->
+    <!--<% end %>-->
+  <!--</div>-->
+<!--</div>-->
 

@@ -1,4 +1,6 @@
 class Spree::Sale < ActiveRecord::Base
+  has_many :discounts
+
   DISCOUNT_TYPES = {
     1 => 'Fixed',
     2 => 'Percentage'
@@ -8,9 +10,12 @@ class Spree::Sale < ActiveRecord::Base
 
   alias_attribute :active, :is_active
 
+  accepts_nested_attributes_for :discounts, allow_destroy: true
+
   attr_accessible :is_active,
                   :discount_size,
-                  :discount_type
+                  :discount_type,
+                  :discounts_attributes
 
   validates :is_active,
             :inclusion => {
