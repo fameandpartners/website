@@ -80,6 +80,7 @@ Spree::ProductsController.class_eval do
     @page_info = @searcher.selected_products_info
     @category_title = @page_info[:page_title]
     @category_description = @page_info[:meta_description]
+    @footer_text = @page_info[:footer_text]
 
     if (!display_featured_dresses.blank? && display_featured_dresses == "1") && !display_featured_dresses_edit.blank?
       @lp_featured_products = get_products_from_edit(display_featured_dresses_edit, currency, user, 4)
