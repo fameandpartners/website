@@ -1,5 +1,5 @@
 .product-row
-  select.selectbox.selectbox-large.selectbox-text-center id="size" data-placeholder="select size"
+  select.selectbox.chosen-inherit.selectbox-large.selectbox-text-center id="size" data-placeholder="select size"
     option.default-value value=""
     - if product.sizes.present?
       optgroup label="Standard sizes"
@@ -16,7 +16,7 @@
             = size[:title]
 
 .product-row
-  select.selectbox.selectbox-large.selectbox-colors.selectbox-text-center id="colour" data-placeholder="Select color"
+  select.selectbox.chosen-inherit.selectbox-large.selectbox-colors.selectbox-text-center id="colour" data-placeholder="Select color"
     option.default-value value=""
     optgroup label="Standard colors"
       - product.colors.each do |color|
