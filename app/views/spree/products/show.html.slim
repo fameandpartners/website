@@ -146,6 +146,8 @@ javascript:
             =raw @product.fabric
         p
           =raw @product.notes
+        .sku
+          ' sku: #{@product.sku}
 
   - if @recommended_products.present?
     .page-title-with-line
