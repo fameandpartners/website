@@ -16,4 +16,9 @@ class Spree::Admin::SalesController < Spree::Admin::ResourceController
       respond_with(@object)
     end
   end
+
+  def reset_cache
+    ClearCacheWorker.perform_async(Time.now)
+    render json: { success: :ok }
+  end
 end
