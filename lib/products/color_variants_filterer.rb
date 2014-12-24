@@ -354,7 +354,7 @@ module Products
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
       @properties[:bodyshape]     = prepare_bodyshape(params[:bodyshape])
-      @properties[:discount]      = prepare_discount(params[:discount])
+      @properties[:discount]      = prepare_discount(params[:sale])
 
       @properties[:search] = params[:search]
 
