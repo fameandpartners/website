@@ -49,6 +49,18 @@ class Bridesmaid::Moodboard
       end.compact
     end
 
+    def product_discounts
+      @product_discounts ||= begin
+        active_sales_ids = Spree::Sale.active.pluck(:id)
+        product_ids = moodboard_owner_moodboard.items.map{|item| item.product_id }
+        Discount.for_products.where(discountable_id: product_ids).to_a
+      end
+    end
+
+    def product_discount(product_id)
+      discount = product_discounts.find{|discount| discount.discountable_id == product_id }
+    end
+
     def color_ids
       @color_ids ||= bridesmaid_party_event.color_ids
     end
@@ -67,6 +79,7 @@ class Bridesmaid::Moodboard
 
     def build_item(item)
       item.path = product_path(item)
+      item.discount = product_discount(item.product_id)
       item
     end
 

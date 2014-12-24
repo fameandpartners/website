@@ -96,7 +96,7 @@ class Bridesmaid::Products
     end
 
     def product_discounts
-      @product_disconts ||= begin
+      @product_discounts ||= begin
         active_sales_ids = Spree::Sale.active.pluck(:id)
         product_ids = search_results.map{|item| item.product.id }
         Discount.for_products.where(discountable_id: product_ids).to_a
