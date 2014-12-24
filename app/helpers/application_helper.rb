@@ -408,7 +408,7 @@ module ApplicationHelper
       ].join("\n").html_safe
     end
   end
-=begin
+
   # span.price-old $355
   # ' $295
   def price_for_product(product)
@@ -416,7 +416,7 @@ module ApplicationHelper
     discount = product_discount(product)
     product_price_with_discount(price, discount)
   end
-=end
+=begin
 
   # span.price-old $355
   # ' $295
@@ -442,6 +442,7 @@ module ApplicationHelper
       price.display_price.to_s.html_safe
     end
   end
+=end
 
   def price_for_line_item(line_item)
     if line_item.in_sale?

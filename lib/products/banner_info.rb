@@ -72,6 +72,14 @@ module Products
     end
 
     def get_page_title
+      if @searcher.discount.present?
+        if @searcher.discount == :all
+          return "All Dresses on Sale | Fame & Partners"
+        else
+          return "Sale #{ @searcher.discount }% Off | Fame & Partners"
+        end
+      end
+
       #mind the spaces in the constructed strings
       if available_formal_dresses_colours.include?(@searcher.seo_colour)
         color = "#{seo_colour.titleize } "
@@ -111,6 +119,14 @@ module Products
     end
 
     def get_page_meta_description
+      if @searcher.discount.present?
+        if @searcher.discount == :all
+          return "View all dresses on sale"
+        else
+          return "View all dresses with #{ @searcher.discount }% off"
+        end
+      end
+
       #mind the spaces in the constructed strings!
       r = nil
 
@@ -147,6 +163,15 @@ module Products
     end
 
     def get_banner_title(title)
+
+      if @searcher.discount.present?
+        if @searcher.discount == :all
+          return "All Dresses on Sale"
+        else
+          return "Sale #{ @searcher.discount }% Off"
+        end
+      end
+
       #mind the spaces in the constructed strings!
       r = nil
 
@@ -205,6 +230,14 @@ module Products
     end
 
     def get_banner_text(text)
+      if @searcher.discount.present?
+        if @searcher.discount == :all
+          return "View all dresses on sale"
+        else
+          return "View all dresses with #{ @searcher.discount }% off"
+        end
+      end
+
       if !text && available_formal_dresses_colours.include?(@searcher.seo_colour)
         I18n.t(:subtitle, scope: [:collection, :colors, @searcher.seo_colour.parameterize.underscore], default: text)
       else
