@@ -7,7 +7,7 @@ class CustomisationValue < ActiveRecord::Base
   has_many :incompatibles,
            through: :incompatibilities,
            dependent: :destroy # without this, 'after_destroy' in Incompatibility wouldn't be called :(
-  has_one :discount, foreign_key: :customization_id
+  has_many :discounts, as: :discountable
 
   attr_accessible :position,
                   :name,
