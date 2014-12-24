@@ -35,6 +35,7 @@ class Wishlist::UserWishlistResource
       moodboard_owner_moodboard.items.map do |item|
         item.path = product_path(item)
         item.bridesmaides = get_bridesmaides_for_item(item.product_id, item.variant_id, item.color.try(:id))
+        item.discount = product_discount(item.product_id)
         item
       end
     end
@@ -49,6 +50,18 @@ class Wishlist::UserWishlistResource
       end
 
       "/" + path_parts.compact.join('/')
+    end
+
+    def product_discounts
+      @product_discounts ||= begin
+        active_sales_ids = Spree::Sale.active.pluck(:id)
+        product_ids = moodboard_owner_moodboard.items.map{|item| item.product_id }
+        Discount.for_products.where(discountable_id: product_ids).to_a
+      end
+    end
+
+    def product_discount(product_id)
+      discount = product_discounts.find{|discount| discount.discountable_id == product_id }
     end
 
     # module-specific code.

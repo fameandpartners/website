@@ -140,15 +140,31 @@
 
                     .grid-7.promos
                       h2 What's hot now
-                      .tile
-                        = link_to '/bridesmaid-party?cf=header', title: 'Bridesmaid Dresses' do
-                          = image_tag "menu/bridesmaid.jpg"
-                        .label
-                          ' Design your perfect bridesmaid dresses
-                      .tile
-                        = link_to '/new-years-eve-dresses?cf=menu', title: 'New Years Eve Dresses' do
-                          = image_tag "menu/nye.jpg"
-                        .label THE PARTY NEVER DIES
+                      .tiles
+                        .tile
+                          = link_to '/bridesmaid-party?cf=header', title: 'Bridesmaid Dresses' do
+                            = image_tag "menu/bridesmaid.jpg"
+                          .label
+                            ' Design your perfect bridesmaid dresses
+                        .tile
+                          = link_to '/new-years-eve-dresses?cf=menu', title: 'New Years Eve Dresses' do
+                            = image_tag "menu/nye.jpg"
+                          .label THE PARTY NEVER DIES
+                      - if sale_active?
+                        .sale-section
+                          .title
+                            h2 Boxing Day Sale
+                            span Up to 80% Off
+                          .links
+                            ul
+                              li = link_to "All on Sale", '/dresses/?sale=all', title: 'All Dresses on Sale'
+                              li = link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
+                              li = link_to "25 Percent Off", '/dresses/?sale=25', title: 'All Dresses 25% off'
+                              li = link_to "30 Percent Off", '/dresses/?sale=30', title: 'All Dresses 30% off'
+                              li = link_to "35 Percent Off", '/dresses/?sale=35', title: 'All Dresses 35% off'
+                              li = link_to "40 Percent Off", '/dresses/?sale=40', title: 'All Dresses 40% off'
+                              li = link_to "50 Percent Off", '/dresses/?sale=50', title: 'All Dresses 50% off'
+                              li = link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
           li.blog = link_to 'Blog', blog_path, class: 'btn'
           li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do
               span.icon-heart

@@ -73,7 +73,8 @@ javascript:
       .product-info
         .product-header
           .product-title = @product.name
-          .product-price = @product.price.display_price
+          /.product-price = @product.price.display_price
+          .product-price = product_price_with_discount(@product.price, @product.discount)
           .product-short-description 
             = truncate(@product.short_description, length: 80, separator: ' ')
 

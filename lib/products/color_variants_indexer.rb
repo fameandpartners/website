@@ -20,6 +20,7 @@ module Products
         end.flatten.uniq
 
         color_customizable = %w(yes y).include?(product.property('color_customization').to_s.downcase.strip)
+        discount = product.discount.try(:amount).to_i
 
         product.product_color_values.each do |product_color_value|
           color = product_color_value.option_value
@@ -41,6 +42,7 @@ module Products
               permalink:    product.permalink,
               master_id:    product.master.id,
               in_stock:     product.has_stock?,
+              discount:     discount,
 
               # added because of... really, it more simple add it here instead
               # of trying to refactor all this code

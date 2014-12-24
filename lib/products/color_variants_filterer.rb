@@ -40,6 +40,7 @@ module Products
       limit      = per_page
       offset     = ((page - 1) * per_page)
       fetched_color_variant_ids = @fetched_color_variant_ids
+      product_discount = discount
 
       begin
         results = Tire.search(:color_variants, size: 1000) do
@@ -93,6 +94,14 @@ module Products
           if keywords.present?
             query :term, 'product.name' => keywords
             query :term, 'product.description' => keywords
+          end
+
+          if product_discount.present?
+            if product_discount == :all
+              filter :bool, :should => { :range => { "product.discount" => { :gt => 0 } } }
+            else
+              filter :bool, :must => { :term => { 'product.discount' => product_discount.to_i } }
+            end
           end
 
           # Show only products from stock
@@ -345,6 +354,7 @@ module Products
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
       @properties[:bodyshape]     = prepare_bodyshape(params[:bodyshape])
+      @properties[:discount]      = prepare_discount(params[:discount])
 
       @properties[:search] = params[:search]
 
@@ -411,6 +421,18 @@ module Products
 
     def prepare_seo_colour(colour_names)
       (Array.wrap(colour_names) || []).first.to_s.downcase.split(/[_-]/).compact.join(' ')
+    end
+
+    # value can be 'all'
+    # '20%'
+    # or etc
+    def prepare_discount(value = nil)
+      return nil if value.blank?
+      if value.to_s == 'all'
+        :all
+      else
+        value.to_s[/^\d+/].to_i
+      end
     end
 
     class << self

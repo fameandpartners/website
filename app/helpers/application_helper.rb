@@ -384,9 +384,10 @@ module ApplicationHelper
   # promocode discount
   # note - fixed 
   def product_discount(product)
-    if product.discount.present?
-      product.discount
-    #elsif show_prices_with_applied_promocode?
+    if product.present? && (discount = product.discount).present?
+      discount
+    # elsif show_prices_with_applied_promocode?
+    #  current_promotion.discount
     #  current_promotion.calculate_price_with_discount(variant.price).display_price
     else
       nil
@@ -399,15 +400,23 @@ module ApplicationHelper
     if discount.blank? || discount.amount.to_i == 0
       price.display_price.to_s.html_safe
     else
-      # add fixed price amount calculations
-      amount_with_discount = price.amount * (100 - discount.amount.to_i) / 100
-      sale_price = Spree::Price.new(amount: amount_with_discount, currency: price.currency)
+      # NOTE - we should add fixed price amount calculations
+      sale_price = price.apply(discount)
       [
         content_tag(:span, price.display_price, class: 'price-old'),
         sale_price.display_price.to_s
       ].join("\n").html_safe
     end
   end
+
+  # span.price-old $355
+  # ' $295
+  def price_for_product(product)
+    price = product.zone_price_for(current_site_version)
+    discount = product_discount(product)
+    product_price_with_discount(price, discount)
+  end
+=begin
 
   # span.price-old $355
   # ' $295
@@ -433,6 +442,7 @@ module ApplicationHelper
       price.display_price.to_s.html_safe
     end
   end
+=end
 
   def price_for_line_item(line_item)
     if line_item.in_sale?

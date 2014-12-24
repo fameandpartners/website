@@ -38,7 +38,8 @@ javascript:
                 = image_tag product.image_url, alt: product.name
 
             h6 = product.name
-            .price = product.price.display_price
+            /.price = product.price.display_price
+            .price = product_price_with_discount(product.price, product.discount)
 
             .buttons
               = link_to "Start Customising", product.path, class: 'btn small', title: "Customise this dress"

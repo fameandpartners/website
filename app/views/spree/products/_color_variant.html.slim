@@ -16,14 +16,15 @@ ruby:
         = cached_add_to_wishlist_link(variant.product, color_id: color_id, class: 'wish-list-link')
   h6 = variant.product.name
   .price
-    /= product_price_with_discount(variant.price, product_discount(variant.product)
-    - if show_prices_with_applied_promocode?
+    - discount = product_discount(Spree::Product.where(id: variant.product.id).first)
+    = product_price_with_discount(variant.price, discount)
+    /- if show_prices_with_applied_promocode?
       span.price-old = variant.price.display_price
       = current_promotion.calculate_price_with_discount(variant.price).display_price
-    - elsif current_sale.is_active?
+    /- elsif current_sale.is_active?
       span.price-old = variant.price.display_price_without_discount
       = variant.price.display_price_with_discount(variant.product.is_surryhills).to_s
-    - else
+    /- else
       = variant.price.display_price.to_s.html_safe
   .buttons
     .buy-button
