@@ -408,12 +408,15 @@ module ApplicationHelper
       ].join("\n").html_safe
     end
   end
-
+=begin
+  # span.price-old $355
+  # ' $295
   def price_for_product(product)
     price = product.zone_price_for(current_site_version)
     discount = product_discount(product)
     product_price_with_discount(price, discount)
   end
+=end
 
   # span.price-old $355
   # ' $295

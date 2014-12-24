@@ -16,4 +16,6 @@ class Discount < ActiveRecord::Base
             }
 
   validates :sale_id, presence: true
+
+  scope :for_products, where(discountable_type: "Spree::Product")
 end

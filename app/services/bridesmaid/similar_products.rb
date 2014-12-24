@@ -56,6 +56,7 @@ class Bridesmaid::SimilarProducts
         image_url: product_image(item.images),
         image_urls: product_images(item.images),
         price: product_price(item.product, item.prices),
+        discount: product_discount(item.product),
         path: product_path(item.product, item.color)
       )
     end
@@ -76,6 +77,18 @@ class Bridesmaid::SimilarProducts
     def product_price(product, product_prices)
       price_id = product_prices[currency] || product_prices.to_hash.values.compact.first
       prices[price_id] || Spree::Price.new(amount: product.price, currency: currency)
+    end
+
+    def product_discounts
+      @product_disconts ||= begin
+        active_sales_ids = Spree::Sale.active.pluck(:id)
+        product_ids = search_results.map{|item| item.product.id }
+        Discount.for_products.where(discountable_id: product_ids).to_a
+      end
+    end
+
+    def product_discount(product)
+      product_discounts.find{|discount| discount.discountable_id == product.id }
     end
 
     def product_image(images = [])
