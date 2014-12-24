@@ -1,4 +1,9 @@
 Spree::Price.class_eval do
+  def apply(discount)
+    amount_with_discount = self.amount * (100 - discount.amount.to_i) / 100
+    Spree::Price.new(amount: amount_with_discount, currency: self.currency)
+  end
+
   def amount_without_discount
     self[:amount]
   end

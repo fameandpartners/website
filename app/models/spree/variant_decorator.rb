@@ -27,8 +27,13 @@ Spree::Variant.class_eval do
     update_zone_prices
   end 
 
+  def discount
+    self.product.try(:discount)
+  end
+
   def in_sale?
-    current_sale.active?
+    #current_sale.active?
+    discount.present?
   end
 
   def options_hash

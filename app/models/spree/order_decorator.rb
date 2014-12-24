@@ -146,15 +146,28 @@ Spree::Order.class_eval do
       current_item.variant = variant
       if currency
         current_item.currency    = currency
-        current_item.price       = price.final_amount(is_surryhills?(variant))
+
         if variant.in_sale?
-          current_item.old_price = price.amount_without_discount
+          current_item.price = price.apply(variant.discount).amount
+          current_item.old_price = price.amount
+        else
+          current_item.price = price.amount
         end
+        #current_item.price       = price.final_amount(is_surryhills?(variant))
+        #if variant.in_sale?
+        #  current_item.old_price = price.amount_without_discount
+        #end
       else
-        current_item.price       = price.final_amount(is_surryhills?(variant))
         if variant.in_sale?
-          current_item.old_price = price.price_without_discount
+          current_item.price = price.apply(variant.discount).amount
+          current_item.old_price = price.amount
+        else
+          current_item.price = price.amount
         end
+        #current_item.price       = price.final_amount(is_surryhills?(variant))
+        #if variant.in_sale?
+        #  current_item.old_price = price.price_without_discount
+        #end
       end
       self.line_items << current_item
     end
@@ -167,13 +180,19 @@ Spree::Order.class_eval do
     price = get_price_for_line_item(variant, @zone_id, currency)
 
     current_item.currency    = currency
-    current_item.price       = price.final_amount
     current_item.variant     = variant
     current_item.quantity    = quantity
 
     if variant.in_sale?
-      current_item.old_price = price.amount_without_discount
+      current_item.price = price.apply(variant.discount).amount
+      current_item.old_price = price.amount
+    else
+      current_item.price = price.amount
     end
+    #current_item.price       = price.final_amount
+    #if variant.in_sale?
+    #  current_item.old_price = price.amount_without_discount
+    #end
 
     current_item.save
     self.reload
