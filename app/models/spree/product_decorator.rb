@@ -56,6 +56,8 @@ Spree::Product.class_eval do
   after_initialize :set_default_values
 
   has_many :discounts, as: :discountable
+  attr_accessible :discounts_attributes
+  accepts_nested_attributes_for :discounts, reject_if: proc {|attrs| attrs[:amount].blank? }, allow_destroy: true
 
   def cache_key
     "products/#{id}-#{updated_at.to_s(:number)}"
@@ -353,7 +355,7 @@ Spree::Product.class_eval do
   def discount
     sales_ids = Spree::Sale.active.pluck(:id)
     return nil if sales_ids.blank?
-    self.discounts.where(sale_id: sales_ids).first
+    self.discounts.where(sale_id: sales_ids).where("amount is not null and amount > 0").first
   end
 
   private

@@ -1,0 +1,51 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @accessory } %>
+
+<%= form_for [:admin, @sale], :html => { :multipart => true } do |f| %>
+
+<fieldset data-hook="new_sale">
+
+  <legend align="center"><%= t(:new_sale) %></legend>
+
+  <fieldset>
+    <div class="clearfix">
+      <div class="twelve columns">
+        <%= f.field_container :name do %>
+          <%= f.label :name, t(:name) %> <span class="required">*</span><br />
+          <%= f.text_field :name, :class => 'fullwidth' %>
+          <%= f.error_message_on :name %>
+        <% end %>
+    </div>
+    <div class="clearfix">
+      <div class="four columns">
+        <%= f.field_container :is_active, :class => ['checkbox'] do %>
+          <label>
+            <%= f.check_box :is_active %>
+            is Active
+            <%= f.error_message_on :is_active %>
+          </label>
+        <% end %>
+      </div>
+      <div class="four columns">
+        <%= f.field_container :discount_size do %>
+          <%= f.label :discount_size, t(:discount_size) %> <span class="required">*</span><br />
+          <%= f.text_field :discount_size, :class => 'fullwidth' %>
+          <%= f.error_message_on :discount_size %>
+        <% end %>
+      </div>
+      <div class="four columns">
+        <%= f.field_container :discount_type do %>
+          <%= f.label :discount_type, t(:discount_type) %> <span class="required">*</span><br />
+          <%= f.select :discount_type, Spree::Sale::DISCOUNT_TYPES.to_a.map(&:reverse), {:include_blank => true}, {:class => 'select2 fullwidth'} %>
+        <% end %>
+      </div>
+    </div>
+  </fieldset>
+
+
+  <div class="form-buttons filter-actions actions" data-hook="buttons">
+    <%= button t('actions.create'), 'icon-ok' %>
+    <span class="or"><%= t(:or) %></span>
+    <%= link_to_with_icon 'icon-remove', t('actions.cancel'), admin_sales_path, :class => 'button' %>
+  </div>
+</fieldset>
+<% end %>

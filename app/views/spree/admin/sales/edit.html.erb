@@ -2,6 +2,16 @@
   Sale Settings
 <% end %>
 
+<script type="text/javascript">
+  $(function(){
+    $('fieldset.toggable:not(:first) .row:first').hide();
+
+    $('fieldset.toggable legend').click(function(event){
+      $(event.target).parents('fieldset:first').find('.row:first').toggle();
+    });
+  });
+</script>
+
 <div data-hook="admin_sale_edit_form">
   <div id="sale-form-wrapper">
     <%= form_for [:admin, @object], :method => :put do |f| %>
@@ -9,8 +19,9 @@
         <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
       <% end %>
       <fieldset>
+        <legend><%= t(:general_settings) %></legend>
         <div class="clearfix">
-          <div class="four columns">
+          <div class="three columns">
             <%= f.field_container :is_active, :class => ['checkbox'] do %>
               <label>
                 <%= f.check_box :is_active %>
@@ -19,6 +30,18 @@
               </label>
             <% end %>
           </div>
+          <div class="twelve columns">
+            <%= f.field_container :name do %>
+              <%= f.label :name, t(:name) %> <span class="required">*</span><br />
+              <%= f.text_field :name, :class => 'fullwidth' %>
+              <%= f.error_message_on :name %>
+            <% end %>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><%= t(:default_discount_settings) %></legend>
+        <div class="clearfix">
           <div class="four columns">
             <%= f.field_container :discount_size do %>
               <%= f.label :discount_size, t(:discount_size) %> <span class="required">*</span><br />
@@ -33,51 +56,99 @@
             <% end %>
           </div>
         </div>
+      </fieldset>
+      <% index = 0 %>
+      <fieldset class="toggable">
+        <legend><%= t(:products) %></legend>
+        <div class="row">
+          <table>
+            <thead>
+              <tr>
+                <td>Active</td>
+                <td>Name</td>
+                <td>Discount ( 0..100%)</td>
+              </tr>
+            </thead>
 
-        <table>
-          <thead>
+            <% Spree::Product.active.includes(:discounts).each do |product| %>
+              <% discount = product.discounts.find{ |discount| discount.sale_id == @object.id } %>
+              <tr>
+                <td>
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_type]" value="<%= product.class.name %>" />
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_id]" value="<%= product.id %>" />
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][_destroy]" value="1" />
+                  <% if discount.present? %>
+                    <input type="hidden" name="sale[discounts_attributes][<%= index %>][id]" value="<%= discount.id %>" />
+                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" checked />
+                  <% else %>
+                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" />
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to product.name, edit_admin_product_path(product), target: :blank %>
+                </td>
+                <td>
+                  <% field_name = "sale[discounts_attributes][#{ index }][amount]" %>
+                  <% if discount.present? %>
+                    <input type="number" min="0" max="100" name="<%= field_name %>" value="<%= discount.amount %>" />
+                  <% else %>
+                    <input type="number" min="0" max="100" name="<%= field_name %>" />
+                  <% end %>
+                </td>
+              </tr>
+              <% index += 1 %>
+            <% end %>
+          </table>
+        </div>
+      </fieldset>
+      <fieldset class="toggable">
+        <legend><%= t(:customizations) %></legend>
+        <div class="row">
+          <table>
+            <thead>
             <tr>
               <td>Active</td>
               <td>Name</td>
               <td>Discount ( 0..100%)</td>
             </tr>
-          </thead>
+            </thead>
 
-          <% Spree::Product.active.includes(:discounts).each_with_index do |product, index| %>
-            <% discount = product.discounts.find{ |discount| discount.sale_id == @object.id } %>
-            <tr>
-              <td>
-                <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_type]" value="<%= product.class.name %>" />
-                <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_id]" value="<%= product.id %>" />
-                <input type="hidden" name="sale[discounts_attributes][<%= index %>][_destroy]" value="1" />
-                <% if discount.present? %>
-                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][id]" value="<%= discount.id %>" />
-                  <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" checked />
-                <% else %>
-                  <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" />
-                <% end %>
-              </td>
-              <td>
-                <%= link_to product.name, edit_admin_product_path(product), target: :blank %>
-              </td>
-              <td>
-                <% field_name = "sale[discounts_attributes][#{ index }][amount]" %>
-                <% if discount.present? %>
-                  <input type="number" min="0" max="100" name="<%= field_name %>" value="<%= discount.amount %>" />
-                <% else %>
-                  <input type="number" min="0" max="100" name="<%= field_name %>" />
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-
-        <p class="form-buttons">
-          <div class="form-buttons filter-actions actions" data-hook="buttons">
-            <%= button t(:update), 'icon-refresh' %>
-          </div>
-        </p>
+            <% CustomisationValue.includes(:discounts).each do |customization| %>
+              <% discount = customization.discounts.find{ |discount| discount.sale_id == @object.id } %>
+              <tr>
+                <td>
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_type]" value="<%= customization.class.name %>" />
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_id]" value="<%= customization.id %>" />
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][_destroy]" value="1" />
+                  <% if discount.present? %>
+                    <input type="hidden" name="sale[discounts_attributes][<%= index %>][id]" value="<%= discount.id %>" />
+                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" checked />
+                  <% else %>
+                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" />
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to customization.presentation, edit_admin_product_customisation_value_path(customization.product, customization), target: :blank %>
+                </td>
+                <td>
+                  <% field_name = "sale[discounts_attributes][#{ index }][amount]" %>
+                  <% if discount.present? %>
+                    <input type="number" min="0" max="100" name="<%= field_name %>" value="<%= discount.amount %>" />
+                  <% else %>
+                    <input type="number" min="0" max="100" name="<%= field_name %>" />
+                  <% end %>
+                </td>
+              </tr>
+              <% index += 1 %>
+            <% end %>
+          </table>
+        </div>
       </fieldset>
+      <p class="form-buttons">
+        <div class="form-buttons filter-actions actions" data-hook="buttons">
+          <%= button t(:update), 'icon-refresh' %>
+        </div>
+      </p>
     <% end %>
   </div>
 </div>
