@@ -421,29 +421,66 @@
 				text-align: center;
 				padding: 20px 20px 20px 30px;
 				h2 {
-					padding-bottom: 30px;
+					padding-bottom: 10px;
 					padding-top: 20px;
 				}
-				.tile {
-					display: block;
-					width: 187px;
-					float: left;
-					margin-right: 30px;
-					a{
-						display: inline-block;
-					}
-					img {
-						width: 187px;
-					}
-					.label{
-						width: 187px;
-						white-space: normal;
+				.tiles{
+					@include clearfix;
+					.tile {
 						display: block;
-						margin: 0 auto;
+						width: 187px;
+						float: left;
+						margin-right: 30px;
+						a{
+							display: inline-block;
+						}
+						img {
+							width: 187px;
+						}
+						.label{
+							width: 187px;
+							white-space: normal;
+							display: block;
+							margin: 0 auto;
+						}
+					}
+					.tile:last-child{
+						margin-right: 0px;
 					}
 				}
-				.tile:last-child{
-					margin-right: 0px;
+				
+				.sale-section{
+					width: 100%;
+					.title{
+						border-bottom: 2px solid #000;
+						font: 400 16px/16px $fontFive;
+						padding-bottom: 3px;
+						margin-bottom: 10px;
+						h2{
+							display: inline-block;
+							padding-right: 6px;
+							padding-bottom: 5px;
+						}
+						span{
+							color: #ff0066;
+							text-decoration: none !important;
+						}	
+					}
+					
+					ul{
+						@include clearfix;
+						margin-left: 20px;
+					}
+
+					li{
+						float: left;
+						width: 90px;
+						margin-bottom: 6px;
+					}
+					li:last-child{
+						margin-right: 0;
+					}
+
 				}
 			}
 		}
