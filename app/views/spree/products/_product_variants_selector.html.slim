@@ -37,10 +37,12 @@
           .customisation-block
             .title = customisation.name
             - if customisation.price > 0
-              - if product.free_customisations
+              - if customisation.discount.present?
                 .price
-                  span.price-old = customisation.display_price
-                  ' Free
+                  del.price-old = customisation.display_price
+                  - price = Spree::Price.new(amount: customisation.price).apply(customisation.discount)
+                  '
+                  = price.price.zero? ? 'FREE' : price.price
               - else
                 .price Additional +#{customisation.display_price}
             = link_to 'SELECT', '#', class: 'btn'

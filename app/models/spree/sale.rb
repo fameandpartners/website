@@ -1,5 +1,5 @@
 class Spree::Sale < ActiveRecord::Base
-  has_many :discounts
+  has_many :discounts, foreign_key: :sale_id, dependent: :delete_all
 
   DISCOUNT_TYPES = {
     1 => 'Fixed',

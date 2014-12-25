@@ -108,20 +108,36 @@ class LineItemPersonalization < ActiveRecord::Base
       result += 20
     end
 
-    return result if Spree::Config[:free_customisations]
+    if product.present? && color.present?
+      unless basic_color?
+        discount = color.discounts.detect do |discount|
+          discount.sale.blank? || discount.sale.active?
+        end
 
-    result += 16.0 if !basic_color?
+        if discount.present?
+          result += Spree::Price.new(amount: 16.0).apply(discount).price
+        else
+          result += 16.0
+        end
+      end
+    end
 
     customization_values.each do |customization_value|
-      result += customization_value.price
+      discount = customization_value.discounts.detect do |discount|
+        discount.sale.blank? || discount.sale.active?
+      end
+
+      if discount.present?
+        result += Spree::Price.new(amount: customization_value.price).apply(discount).price
+      else
+        result += customization_value.price
+      end
     end
 
     result
   end
 
   def basic_color?
-    return false if product.blank? || color.blank?
-
     product.basic_colors.where(id: color_id).exists?
   end
 
@@ -145,6 +161,4 @@ class LineItemPersonalization < ActiveRecord::Base
   def plus_size?
     return true if !product.blank? && product.taxons.where(:name => "Plus Size").count > 0
   end
-
-    
 end

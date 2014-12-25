@@ -4,7 +4,7 @@
 
 <script type="text/javascript">
   $(function(){
-    $('fieldset.toggable:not(:first) .row:first').hide();
+    $('fieldset.toggable:not(:first) .row').hide();
 
     $('fieldset.toggable legend').click(function(event){
       $(event.target).parents('fieldset:first').find('.row:first').toggle();
@@ -146,6 +146,49 @@
           </table>
         </div>
       </fieldset>
+      <fieldset class="toggable">
+        <legend><%= t(:colors) %></legend>
+        <div class="row">
+          <table>
+            <thead>
+            <tr>
+              <td>Active</td>
+              <td>Name</td>
+              <td>Discount ( 0..100%)</td>
+            </tr>
+            </thead>
+
+            <% Spree::OptionValue.colors.includes(:discounts).each do |color| %>
+              <% discount = color.discounts.find{ |discount| discount.sale_id == @object.id } %>
+              <tr>
+                <td>
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_type]" value="<%= color.class.name %>" />
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_id]" value="<%= color.id %>" />
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][_destroy]" value="1" />
+                  <% if discount.present? %>
+                    <input type="hidden" name="sale[discounts_attributes][<%= index %>][id]" value="<%= discount.id %>" />
+                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" checked />
+                  <% else %>
+                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" />
+                  <% end %>
+                </td>
+                <td>
+                  <%= color.presentation %>
+                </td>
+                <td>
+                  <% field_name = "sale[discounts_attributes][#{ index }][amount]" %>
+                  <% if discount.present? %>
+                    <input type="number" min="0" max="100" name="<%= field_name %>" value="<%= discount.amount %>" />
+                  <% else %>
+                    <input type="number" min="0" max="100" name="<%= field_name %>" />
+                  <% end %>
+                </td>
+              </tr>
+              <% index += 1 %>
+            <% end %>
+          </table>
+        </div>
+      </fieldset>
       <p class="form-buttons">
         <div class="form-buttons filter-actions actions" data-hook="buttons">
           <%= button t(:update), 'icon-refresh' %>
@@ -154,21 +197,3 @@
     <% end %>
   </div>
 </div>
-
-<!--<div data-hook="free_customisation_price_form">-->
-  <!--<div id="free-customisation-form-wrapper">-->
-    <!--<%= form_tag admin_sales_set_free_customisations_path, method: :put, remote: true do %>-->
-      <!--<fieldset class="customisation_values sale">-->
-        <!--<div class="field">-->
-          <!--<%= check_box_tag :free_customisations, true, Spree::Config[:free_customisations] %>-->
-          <!--<%= label_tag(:free_customisations, 'Free customisations') %>-->
-        <!--</div>-->
-      <!--</fieldset>-->
-
-      <!--<div class="form-buttons filter-actions actions" data-hook="buttons">-->
-        <!--<%= button t(:update), 'icon-refresh' %>-->
-      <!--</div>-->
-    <!--<% end %>-->
-  <!--</div>-->
-<!--</div>-->
-
