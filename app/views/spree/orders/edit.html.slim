@@ -27,7 +27,8 @@
                     .product-info
                       .image
                         - image_url = cart_item.image.present? ? cart_item.image.large : '/assets/noimage/product.png'
-                        = link_to image_tag(image_url, itemprop: 'image', width: 136, height: 200, alt: cart_item.name), collection_product_path(cart_item.product)
+                        = link_to image_tag(image_url, itemprop: 'image', width: 136, height: 200, alt: cart_item.name), \
+                          collection_product_path(cart_item.product)
                       .desc
                         .name = link_to cart_item.name, collection_product_path(cart_item.product), target: 'blank'
                         .text = truncate(strip_tags(cart_item.description.gsub('&nbsp;', ' ')), length: 100)
@@ -35,6 +36,14 @@
                         - if cart_item.product_type == :default
                           - link_data = {id: cart_item.id, variant: cart_item.variant_id, quantity: cart_item.quantity}
                           = link_to 'Edit item', '#', class: 'edit-link btn small empty border', data: link_data
+
+                          - if spree_user_signed_in?
+                            = link_to '+ move to moodboard', move_to_wishlist_line_item_path(id: cart_item.id), \ 
+                              data: { id: cart_item.id }, class: "move-to-wishlist btn small empty border"
+                          - else
+                            = link_to '+ move to moodboard', spree_signup_path, class: "btn small empty border"
+
+
                         - elsif cart_item.product_type == :customized
                           = link_to 'Edit item', personalization_product_path(cart_item.product), class: 'btn empty small border'
 

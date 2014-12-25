@@ -288,6 +288,7 @@ module ProductsHelper
     end
   end
 
+=begin
   def product_move_to_wishlist_link(variant, options = {})
     size = options[:size] ||= ''
 
@@ -297,6 +298,7 @@ module ProductsHelper
       link_to '+ move to moodboard', spree_signup_path, class: "btn #{size} empty border"
     end
   end
+=end
 
 =begin
   # 'product reservation' link or 'twin alert'

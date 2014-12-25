@@ -92,12 +92,11 @@ class LineItemsController < Spree::StoreController
     render json: { order: CartSerializer.new(current_order).to_json }
   end
 
-  # params[:variant_id]
-  # params[:quantity]
+  # params[:id]
   def move_to_wishlist
     user = try_spree_current_user
-    variant = Spree::Variant.find(params[:variant_id])
-    line_item = current_order.line_items.where(variant_id: variant.id).first
+    line_item = current_order.line_items.where(id: params[:id]).first
+    variant = line_item.variant
 
     status = :bad_request
 
@@ -119,8 +118,9 @@ class LineItemsController < Spree::StoreController
       order: CartSerializer.new(current_order).to_json,
       analytics_label: analytics_label(:product, variant.product)
     }
-
     render json: json_result, status: status
+  rescue
+    render json: {}, status: :bad_request
   end
 
   # order_id

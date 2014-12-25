@@ -90,7 +90,7 @@ window.inputs.ButtonsBoxSelector = class ButtonsBoxSelector extends BaseInput
         $button.data('tooltipsy').destroy()
       $button.removeData('tooltip')
       if _.indexOf(unavailable_values, value) == -1
-        console.log(plus_size)
+        #console.log(plus_size)
         if value >= base_size && plus_size != true
           $button.removeClass('unavailable').attr('title', "This size is an additional $20")
         else
