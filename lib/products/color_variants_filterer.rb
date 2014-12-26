@@ -349,12 +349,15 @@ module Products
       end
 
       
-     
+      sale_param = "" 
+      if params[:sale].present?
+        sale_param = params[:sale].delete('?')
+      end
 
       @properties[:colour]        = prepare_colours(params[:colour])
       @properties[:seo_colour]    = prepare_seo_colour(params[:colour])
       @properties[:bodyshape]     = prepare_bodyshape(params[:bodyshape])
-      @properties[:discount]      = prepare_discount(params[:sale].delete('?'))
+      @properties[:discount]      = prepare_discount(sale_param)
 
       @properties[:search] = params[:search]
 
