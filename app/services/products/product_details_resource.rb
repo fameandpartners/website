@@ -51,7 +51,8 @@ class Products::ProductDetailsResource
         moodboard: product_moodboard,
         url: product_url,
         path: product_path,
-        selected_color: selected_product_color
+        selected_color: selected_product_color,
+        preorder: product_properties['preorder']
       })
     end
   end
