@@ -1,4 +1,4 @@
-.bridesmaid_lp {
+.bridesmaid_lp, .amfam_lp {
   margin-top: -8px;
 
   .inner{
@@ -77,10 +77,16 @@
   }
 }
 
+.amfam_lp{
+  .sb1{
+    margin-bottom: 20px;
+  }
+}
+
 
 
 @media only screen and (max-width: 1000px), only screen and (max-device-width: 1000px) {
-  #bridesmaid_lp {
+  #bridesmaid_lp, #amfam_lp {
     #content{
       width: 1140px;
       margin: 0 auto 0 auto;

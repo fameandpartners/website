@@ -116,6 +116,11 @@ class StaticsController < ApplicationController
     @description = "Perfect Wedding Bridesmaid Dresses 2014. " + default_meta_description
   end
 
+  def amfam_lp
+    @title = "AMFAM Dresses - " + default_seo_title
+    @description = "AMFAM Collaboration. " + default_meta_description
+  end
+
   def christmas_gift
     @title = "Christmas Gift Dresses - " + default_seo_title
     @description = "Perfect Christmas Dresses 2014. " + default_meta_description
