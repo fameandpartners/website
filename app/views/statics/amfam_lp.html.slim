@@ -22,7 +22,7 @@ ruby:
     .inner  
       .sb2
         .left
-          = image_tag 'campaigns/amfam/text.jpg', alt: '', class: 'text'
+          = image_tag 'campaigns/amfam/text.jpg', alt: '', class: 'textimg'
 
           .catalog
             - products[0..1].each do |dress|
@@ -46,7 +46,7 @@ ruby:
               .price = price_for_product(dress) 
       .sb3
         .left
-          = image_tag 'campaigns/amfam/2.jpg', width: 760, class: 'image', alt: ''
+          = image_tag 'campaigns/amfam/2.jpg', width: 764, class: 'image', alt: ''
         .right
           .catalog
             - dress = products[6]
