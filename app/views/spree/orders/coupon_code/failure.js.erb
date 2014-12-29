@@ -1,3 +1,7 @@
-$error = $('<span class="error" style="color: red; display: block;"/>').text('Check code and try again.');
+$error = $('<span class="error" style="margin-top: 10px; color: red; display: block;"/>').text('Promocode not applicable.');
 $('.promo-block form .error').remove();
 $('.promo-block form input[name*="coupon_code"]').after($error);
+
+_.delay(function(){ 
+  $('.promo-block form .error').fadeOut();
+}, 15 * 1000);
