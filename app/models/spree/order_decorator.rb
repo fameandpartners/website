@@ -48,6 +48,7 @@ Spree::Order.class_eval do
   def has_items_on_sale?
     line_items.any?(&:in_sale?)
   end
+  alias :in_sale? :has_items_on_sale?
 
   def update!
     if self.shipping_method.blank?
