@@ -3,3 +3,11 @@ $('.promo-block form .error').remove();
 
 promocode = $('#order_coupon_code').val();
 window.track.AddPromocodeSuccess(promocode);
+
+
+$message = $('<span class="error" style="margin-top: 10px; color: green; display: block;"/>').text('Promocode applied.');
+$('.promo-block form input[name*="coupon_code"]').after($message);
+
+_.delay(function(){ 
+  $('.promo-block form .error').fadeOut();
+}, 5 * 1000);
