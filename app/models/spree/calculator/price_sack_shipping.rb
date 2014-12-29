@@ -27,7 +27,7 @@ module Spree
         base = get_object_base(object)
       end
 
-      if base < self.preferred_minimal_amount || current_sale.active?
+      if base < self.preferred_minimal_amount && has_items_in_sale?(object)
         self.preferred_normal_amount
       else
         self.preferred_discount_amount
@@ -56,6 +56,11 @@ module Spree
       order.amount # items total
     end
 
+    def has_items_in_sale?(object)
+      return false if object.blank? || !object.respond_to?(:in_sale?)
+      object.in_sale?
+    end
+
 =begin
     def get_order_free_shipping_items_cost(order)
       result = 0
@@ -71,9 +76,5 @@ module Spree
       order.line_items.includes(variant: :product).all?{|line_item| line_item.product.free_shipping?}
     end
 =end
-    
-    def current_sale
-      @current_sale ||= Spree::Sale.first_or_initialize
-    end
   end
 end

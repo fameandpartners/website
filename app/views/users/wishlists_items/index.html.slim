@@ -206,7 +206,9 @@ javascript:
                 /.price = product.price.display_price
                 .price = product_price_with_discount(product.price, product.discount)
                 .add-remove.clearfix
-                  = link_to 'Move to cart', move_to_cart_wishlists_item_path(product.item_id), class: 'add-to-cart master btn mid fleft', remote: true
+                  = link_to 'Move to cart', '#', class: 'add-to-cart master btn mid fleft', \
+                    data: { variant: product.variant_id, item: product.item_id }
+                  /= link_to 'Move to cart', move_to_cart_wishlists_item_path(product.item_id), class: 'add-to-cart master btn mid fleft', remote: true
                   = link_to 'Remove', wishlists_item_path(product.item_id), class: 'btn mid border empty remove fright', method: :delete, remote: true
 
                 - if product.bridesmaides.present?

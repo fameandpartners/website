@@ -1,8 +1,10 @@
 Spree::Promotion.class_eval do
-  include ApplicationHelper
-
   def eligible?(order)
-    return false if expired? || usage_limit_exceeded?(order) || !bypass_custom_or_sale_order?(order)
+    return false if expired? || usage_limit_exceeded?(order)
+
+    return false if order.has_personalized_items? && !eligible_to_custom_order?
+    return false if order.has_items_on_sale? && !eligible_to_sale_order?
+
     rules_are_eligible?(order, {})
   end
 
@@ -29,35 +31,21 @@ Spree::Promotion.class_eval do
     price
   end
 
+  protected
+
+    # rude method. possible, it should be thrown away
+    def can_apply_to_any_order?
+      %w(swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25 frenzy5p).include?(self.code.downcase)
+    end
+
   private
 
-  def bypass_custom_or_sale_order?(order)
-    
-    customisation = order.has_personalized_items?
-    codes = %w(swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25 frenzy5p)
-    accepted_codes = codes.include?(self.code.downcase)
-
-    #binding.pry
-    if sale_active? || customisation
-      if accepted_codes
-        # allow promocode usage
-        return true
-      else
-        # don't allow promocode usage
-        return false
-      end
-    else
-      # allow promocode usage
-      return true
+    # note - this methods should be set in db or somewhere else.
+    def eligible_to_custom_order?
+      self.can_apply_to_any_order?
     end
-      
 
-    # if sale || girlfriend || customisation == false
-    #   # allow promocode usage
-    #   return false
-    # else
-    #   # dont allow promocode usage
-    #   return true
-    # end
-  end
+    def eligible_to_sale_order?
+      self.can_apply_to_any_order?
+    end
 end

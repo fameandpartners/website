@@ -5,8 +5,28 @@ class ClearCacheWorker
   sidekiq_options retry: 3
 
   def perform(*args)
-    ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).clear
-    Products::ColorVariantsIndexer.index!
-    Rails.cache.clear
+    update_color_variants_elastic_index
+    update_products_elastic_index
+    reset_cache
   end
+
+  private
+
+    def update_products_elastic_index
+      Tire.index(:spree_products) do
+        delete
+        import ::Spree::Product.all
+      end
+
+      Tire.index(:spree_products).refresh
+    end
+
+    def update_color_variants_elastic_index
+      Products::ColorVariantsIndexer.index!
+    end
+
+    def reset_cache
+      ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).clear
+      Rails.cache.clear
+    end
 end

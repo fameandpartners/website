@@ -51,27 +51,24 @@ window.shopping_cart = _.extend(window.shopping_cart,
       error: window.shopping_cart.buildOnErrorCallback(["item_change_failed"], variantId, options.failure)
 
 
-  moveProductToWishlist: (variantId, options) ->
+  moveLineItemToWishlist: (item_id, options) ->
     options = {}  unless options?
-    unless variantId?
+    unless item_id?
       options.failure.apply window, arguments  if options.failure?
       return false
-    options = _.extend(
-      variant_id: variantId
-    , options)
     $.ajax
-      url: urlWithSitePrefix("/line_items/" + variantId + "/move_to_wishlist")
+      url: urlWithSitePrefix("/line_items/" + item_id + "/move_to_wishlist")
       type: "POST"
       dataType: "json"
-      data: window.shopping_cart.prepareParams(options)
+      data: {}
       success: window.shopping_cart.buildOnSuccessCallback([
         "item_removed"
         "moved_to_wishlist"
-      ], variantId, options.success)
+      ], item_id, options.success)
       error: window.shopping_cart.buildOnErrorCallback([
         "item_remove_failed"
         "moving_to_wishlist_failed"
-      ], variantId, options.failure)
+      ], item_id, options.failure)
 
 
   removeProduct: (variantId, options) ->

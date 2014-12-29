@@ -30,7 +30,7 @@ $(".spree_orders.edit").ready ->
       button = $(e.currentTarget)
       previousText = button.html()
       button.off('click').addClass('moving').html('moving...')
-      window.shopping_cart.moveProductToWishlist(button.data('id'), {
+      window.shopping_cart.moveLineItemToWishlist(button.data('id'), {
         success: (data) ->
           track.addedToWishlist(data.analytics_label) if data.analytics_label?
         failure: () ->
