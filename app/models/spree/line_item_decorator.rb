@@ -19,7 +19,7 @@ Spree::LineItem.class_eval do
   end
 
   def in_sale?
-    old_price.present?
+    old_price.present? && price != old_price
   end
 
   def amount_without_discount

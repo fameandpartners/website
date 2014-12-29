@@ -42,7 +42,11 @@ Spree::Order.class_eval do
   end
 
   def has_personalized_items?
-    line_items.map(&:personalization).any?(&:present?)
+    line_items.includes(:personalization).any?{|line_item| line_item.personalization.present? }
+  end
+
+  def has_items_on_sale?
+    line_items.any?(&:in_sale?)
   end
 
   def update!
