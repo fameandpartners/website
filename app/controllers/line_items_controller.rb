@@ -110,9 +110,8 @@ class LineItemsController < Spree::StoreController
       if wishlist_item.persisted?
         line_item.destroy
         status = :ok
+        Repositories::UserWishlist.new(owner: current_spree_user).drop_cache
       end
-
-      Repositories::UserWishlist.new(owner: current_spree_user).drop_cache
     end
     current_order.reload
 
