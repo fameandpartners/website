@@ -4,7 +4,7 @@ require_dependency 'spree/sale'
 module Spree
   class Calculator::SaleShipping < Calculator
 
-    preference :sale_products_shipping_amount,    :decimal, :default => 0
+    preference :sale_products_shipping_amount,    :decimal, :default => 11.70
     preference :normal_products_shipping_amount,  :decimal, :default => 0
 
     attr_accessible :preferred_sale_products_shipping_amount,
