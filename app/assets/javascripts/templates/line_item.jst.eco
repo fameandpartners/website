@@ -14,7 +14,7 @@
       </div>
       <div class="buttons">
         <a href="#" class="edit-link btn small empty border" data-id="<%= @line_item.id %>" data-quantity="<%= @line_item.quantity %>" data-variant="<%= @line_item.variant_id %>">Edit item</a>
-        <a href="#" class="move-to-wishlist btn small empty border" data-id="<%= @line_item.variant_id %>">+ move to wish list</a>
+        <a href="/line_items/<%= @line_item.id %>/move_to_wishlist" class="move-to-wishlist btn small empty border" data-id="<%= @line_item.id %>">+ move to moodboard</a>
         <a href="#" class="remove-item-from-cart btn small empty border lighter" data-id="<%= @line_item.variant_id %>"><span class="icon-trash"></span></a>
       </div>
     </div>

@@ -176,7 +176,8 @@ class BridesmaidPartyEmailMarketing
 
     BridesmaidParty::Event.where(id: event_ids).includes(:members).find_in_batches(batch_size: 10) do |group|
       group.each do |event|
-        bridesmaids_count = event.members.where("spree_user_id is not null").count
+        #bridesmaids_count = event.members.where("spree_user_id is not null").count
+        bridesmaids_count = event.bridesmaids_count.to_i || 0
         schedule_notification(code, event.spree_user_id, { bridesmaids_count: bridesmaids_count })
         event.members.each do |event_membership|
           schedule_notification(code, event_membership.spree_user_id, { bridesmaids_count: bridesmaids_count })
