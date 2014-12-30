@@ -16,7 +16,9 @@ module Spree
 
           return false if event.blank?
 
-          quantity = event.members.where("spree_user_id is not null").count
+          #quantity = event.members.where("spree_user_id is not null").count
+          quantity = event.bridesmaids_count.to_i
+ 
           quantity > preferred_count
         end
       end
