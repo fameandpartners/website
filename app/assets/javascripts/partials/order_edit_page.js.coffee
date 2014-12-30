@@ -68,7 +68,7 @@ $(".spree_orders.edit").ready ->
         @container.find('.cart-summary').fadeOut('slow', () -> $(this).remove())
         @container.find('.continue-buy').fadeOut('slow', () -> $(this).remove())
       else
-        @container.find("table.cart-table tr[data-id='#{data.id}']").slideToggle('slow')
+        @container.find("table.cart-table tr[data-line-item-id='#{data.id}']").slideToggle('slow')
       @updateOrderSummary(data.cart)
 
     updateOrderSummary: (order) ->
