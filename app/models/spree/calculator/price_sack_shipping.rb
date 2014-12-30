@@ -27,7 +27,7 @@ module Spree
         base = get_object_base(object)
       end
 
-      if base < self.preferred_minimal_amount && has_items_in_sale?(object)
+      if base < self.preferred_minimal_amount || has_items_in_sale?(object)
         self.preferred_normal_amount
       else
         self.preferred_discount_amount
