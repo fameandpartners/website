@@ -111,6 +111,8 @@ class LineItemsController < Spree::StoreController
         line_item.destroy
         status = :ok
       end
+
+      Repositories::UserWishlist.new(owner: current_spree_user).drop_cache
     end
     current_order.reload
 
