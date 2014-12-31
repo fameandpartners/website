@@ -132,8 +132,8 @@ class StaticsController < ApplicationController
   end
 
   def fame2015
-    @title = "Hash tag #fame2015 to win. " + default_seo_title
-    @description = "Hash tag #fame2015 to win. " + default_meta_description
+    @title = "Hashtag #fame2015 to win. " + default_seo_title
+    @description = "Hashtag #fame2015 to win. " + default_meta_description
   end
 
   private
