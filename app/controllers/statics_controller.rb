@@ -131,6 +131,11 @@ class StaticsController < ApplicationController
     @description = "Fashion IT Girl 2015. " + default_meta_description
   end
 
+  def fame2015
+    @title = "Hash tag #fame2015 to win. " + default_seo_title
+    @description = "Hash tag #fame2015 to win. " + default_meta_description
+  end
+
   private
 
   def get_products_from_edit (edit, currency, user, count=9)
