@@ -38,6 +38,7 @@ FameAndPartners::Application.routes.draw do
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
     get '/amfam-dresses' => 'statics#amfam_lp', :as => :amfam_lp
     get '/christmas-gift' => 'statics#christmas_gift', :as => :christmas_gift
+    get '/fame2015' => 'statics#fame2015', :as => :fame2015
 
     post '/shared/facebook' => 'competition/events#share'
 
