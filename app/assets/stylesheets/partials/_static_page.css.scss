@@ -1199,3 +1199,74 @@ body.competition_entries {
 		}
 	}
 }
+
+.static-fame2015 {
+	margin-top: 60px;
+	text-align: center;
+
+	.header{
+		.title{
+			font: 700 68px/1 $fontOne;
+			margin-bottom: 40px;
+		}
+		.subtitle{
+			margin-bottom: 40px;
+			font: 100 38px/1 $fontOne;
+			span{
+				font: 700 38px/1 $fontOne;
+			}
+		}
+	}
+	.intro{
+		width: 60%;
+		margin: 0 auto 40px;
+		font: 100 22px/1 $fontFive;
+	}
+
+	.steps{
+		width: 660px;
+		margin: 0 auto 40px;
+		@include clearfix;
+
+		.title{
+			font: 700 48px/1 $fontThree;
+		}
+		.step{
+			text-transform: none;
+			float: left;
+			margin-right: 30px; 
+			padding: 20px;
+			text-align: left;
+			border: 1px solid #000;
+			background: #FFF3F5;
+			margin-top: 20px;
+			.number{
+				font: 700 48px/1 $fontOne;
+				float: left;
+			}
+			.text{
+				font: 100 28px/1 $fontFive;
+				margin-left: 45px;
+			}
+			.sub{
+				margin-left: 45px;
+				font: 100 22px/1 $fontFive;
+				font-style: italic;
+				strong{
+					font: 700 22px/1 $fontFive;
+				}
+			}
+		}
+		.step:last-child{
+			float: right;
+			margin: 20px 0px 0px;
+		}
+	}
+	.end{
+		font: 100 18px/1.4em $fontFive;
+		font-style: italic;
+		text-transform: none;
+		width: 60%;
+		margin: 0 auto 100px;
+	}
+}
