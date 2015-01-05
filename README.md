@@ -1,11 +1,42 @@
 ## Welcome to FameAndPartners [ ![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
 
+
 ### Getting started
 
 * `$ git clone git@github.com:droidlabs/fame_and_partners.git`
 * `$ cd ./fame_and_partners`
 * `$ cp config/database.yml.example config/database.yml`
 * `$ bin/prepare_app`
+
+
+#### Fig & Docker
+
+The easiest way to setup the local environment is with fig and docker. 
+
+Assuming OSX
+
+- install virtual box
+- install boot2docker `brew install boot2docker`
+- install fig `brew install fig`
+- install postgres `brew install postgres`
+- clone the app `git clone git@github.com:droidlabs/fame_and_partners.git`
+- `cd ./fame_and_partners`
+- set database.yml credentials - host should be the same, but see below
+- `fig up -d db`
+- `fig up -d redis`
+- `fig web run bin/prepare_app`
+
+Notes:
+If the database can't be found, you can find the host ip by logging into the boot2docker vm and determining where you logged in from using the last command
+
+- `boot2docker ssh`
+- `last` 
+- amend database.yml with the correct ip address.
+
+
+
+
+
 
 ### Development information
 
