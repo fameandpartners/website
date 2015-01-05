@@ -3,8 +3,8 @@
 if Rails.env.feature?
   Tire::Model::Search.index_prefix 'fame_feature'
 end
-if Rails.env.production?
-  Tire.configure do
-    url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
-  end
+
+es_host = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
+Tire.configure do
+  url es_host
 end
