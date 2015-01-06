@@ -44,38 +44,7 @@ gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'droidcss'
 
-group :assets do
-  gem 'bourbon'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '1.3.0'
-  gem 'execjs', '1.4.0'
-  gem 'jquery-ui-rails'
-  gem 'jquery-fileupload-rails', '0.4.1'
-  gem 'eco'
-end
 
-group :development do
-  gem 'capistrano', '2.15.4', require: false
-  gem 'capistrano-rbenv', '0.0.10', require: false
-  gem 'launchy', '2.2.0'
-  gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
-  gem 'quiet_assets', '1.0.2'
-  gem 'thin', '1.5.1'
-  gem 'pry'
-  gem 'pry-debugger'
-  gem 'debugger'
-  gem 'awesome_print'
-  #gem 'rails-dev-tweaks', '~> 1.1'
-  gem 'oink'
-end
-
-group :test do
-  gem 'rspec-rails', '~> 2.13.1'
-  gem 'shoulda', '~> 3.4.0'
-  gem 'database_cleaner', '0.9.1'
-  gem 'factory_girl_rails', '4.2.1'
-  gem 'mocha', '~> 0.13.3', require: 'mocha/setup'
-end
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
@@ -98,7 +67,40 @@ gem 'spree_paypal_express',
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
+group :assets do
+  gem 'bourbon'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '1.3.0'
+  gem 'execjs', '1.4.0'
+  gem 'jquery-ui-rails'
+  gem 'jquery-fileupload-rails', '0.4.1'
+  gem 'eco'
+end
+
+group :development, :test do  
+  gem 'awesome_print'
+  gem 'capistrano', '2.15.4', require: false
+  gem 'capistrano-rbenv', '0.0.10', require: false
+  gem 'database_cleaner', '0.9.1'
+  gem 'debugger'
+  gem 'factory_girl_rails', '4.2.1'
+  gem 'launchy', '2.2.0'
+  gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
+  gem 'oink'
+  gem 'pry'
+  gem 'pry-debugger'
+  gem 'quiet_assets', '1.0.2'
+  gem 'rspec-activemodel-mocks'
+  gem 'rspec-rails', '~> 3.1'
+  gem 'shoulda-matchers'
+  gem 'spring'
+  gem 'thin', '1.5.1'
+  # gem 'shoulda', '~> 3.4.0'
+  # gem 'mocha', '~> 0.13.3', require: 'mocha/setup'
+end
+
 group :staging, :development do
+  gem 'libv8', '~> 3.16'
   gem 'therubyracer'
 end
 
