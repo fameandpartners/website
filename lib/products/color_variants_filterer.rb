@@ -12,14 +12,20 @@ module Products
       prepare(params)
     end
 
-    def color_variants
-      
-      @color_variants ||= begin
+    def color_variants      
+      @color_variants ||= search_colour_variants 
+    end
+
+    def search_colour_variants
+      begin 
         if colour.blank?
           search
         else
           search(colour.map(&:id))
-        end
+        end    
+      rescue Errno::ECONNREFUSED => ex
+        Rails.logger.error ex
+        return []
       end
     end
 
