@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe IndexController do
+describe IndexController, :type => :controller do
   describe 'GET :show' do
     before { get :show }
 
