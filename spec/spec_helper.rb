@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 
 require 'rspec/rails'
+require 'capybara/rails'
 require 'shoulda/matchers'
 require 'database_cleaner'
 
@@ -12,6 +13,19 @@ require 'database_cleaner'
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/*.rb")].each {|f| require f}
+
+def create_test_data
+  zone = Spree::Zone.create(name: 'us')
+  args = {
+    permalink: 'us',
+    name: 'us',
+    zone_id: zone.id,
+    currency: 'USD',
+    locale: 'en-US',
+    default: true
+  }
+  SiteVersion.create(args)
+end
 
 RSpec.configure do |config|
   config.include(FactoryGirl::Syntax::Methods)
@@ -32,7 +46,8 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :truncation, {:except => %w[site_versions spree_zones]}
+    create_test_data
   end
 
   config.before(:each) do

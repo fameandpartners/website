@@ -81,6 +81,7 @@ group :development, :test do
   gem 'awesome_print'
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
+  gem 'capybara'
   gem 'database_cleaner', '0.9.1'
   gem 'debugger'
   gem 'factory_girl_rails', '4.2.1'
@@ -95,8 +96,6 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'thin', '1.5.1'
-  # gem 'shoulda', '~> 3.4.0'
-  # gem 'mocha', '~> 0.13.3', require: 'mocha/setup'
 end
 
 group :staging, :development do
