@@ -1,0 +1,11 @@
+local: &local
+  :hosts: localhost
+
+development:
+  :hosts: http://es:9200
+
+test:
+  :hosts: http://localhost:9200
+
+staging:
+  <<: *local

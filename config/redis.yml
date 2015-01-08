@@ -1,0 +1,11 @@
+local: &local
+  :hosts: localhost:6379
+
+development:
+  :hosts: redis
+
+test:
+  <<: *local
+
+staging:
+  <<: *local

@@ -1,0 +1,27 @@
+# db: 
+#   build: db
+#   ports:
+#     - 5432
+#   volumes:
+#     - ./data:/var/lib/postgresql/data/
+es:
+  image: dockerfile/elasticsearch
+  ports:
+    - 9200:9200
+    - 9300:9300
+redis:
+  image: redis
+  ports:
+    - 6379:6379
+web:  
+  build: .
+  command: bundle exec rails server
+  volumes:
+    - .:/usr/src/app/
+  ports:
+    - 3000:3000
+    # - 5432:5432
+  links:
+    # - db
+    - es
+    - redis
