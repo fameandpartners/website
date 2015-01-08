@@ -10,10 +10,18 @@ module ApplicationHelper
       <!--[if IE 9 ]>       <html lang="#{lang}" class="#{lang} #{html_class} ie ie9 no-js"> <![endif]-->
       <!--[if (gte IE 9)|!(IE)]><!--> <html prefix="fb: http://ogp.me/ns/fb#" lang="#{lang}" class="#{lang} #{html_class} no-js"> <!--<![endif]-->
     HTML
-    html += capture( &block ) << "\n</html>".html_safe if block_given?
+    html += unescaped_capture( &block ) << "\n</html>".html_safe if block_given?
     html.html_safe
   end
 
+  # See http://api.rubyonrails.org/classes/ActionView/Helpers/CaptureHelper.html#method-i-capture
+  def unescaped_capture(*args)
+    value = nil
+    buffer = with_output_buffer { value = yield(*args) }
+    if string = buffer.presence || value and string.is_a?(String)
+      string
+    end
+  end
 
   def hreflang_tag
 
