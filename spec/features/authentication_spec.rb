@@ -13,9 +13,10 @@ describe 'authentication process', :type => :feature do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => user.password
         end
-        require 'pry'; pry binding
-        click_button 'Log-in'
-        expect(page).to have_content 'Success'
+        click_button 'Log-in'        
+        expect(page).to_not have_content 'Invalid email or password.'        
+        expect(page).to have_content 'sign out'
+        expect(page).to have_content user.first_name
       end
     end
 
