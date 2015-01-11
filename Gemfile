@@ -56,7 +56,6 @@ end
 
 group :development do
   gem 'capistrano', '2.15.4', require: false
-  gem 'capistrano-rbenv', '0.0.10', require: false
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
   gem 'quiet_assets', '1.0.2'
@@ -67,6 +66,7 @@ group :development do
   gem 'awesome_print'
   #gem 'rails-dev-tweaks', '~> 1.1'
   gem 'oink'
+  gem 'net-ssh', '~> 2.7.0'
 end
 
 group :test do
@@ -79,7 +79,7 @@ end
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
-  
+
 # spree extensions for authentication
 gem 'spree_auth_devise',
   :github => 'spree/spree_auth_devise',
