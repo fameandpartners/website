@@ -18,6 +18,6 @@ class BridesmaidPartyEmailMarketingWorker < BaseEmailMarketingWorker
   end
 
   def send_email(code, user_id, options = {})
-    #BridesmaidPartyEmailMarketingMailer.send(:code, user_id, options).deliver
+    BridesmaidPartyEmailMarketingMailer.send(code, user_id, options).deliver
   end
 end
