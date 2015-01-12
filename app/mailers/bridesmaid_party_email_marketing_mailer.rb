@@ -9,11 +9,11 @@ class BridesmaidPartyEmailMarketingMailer < ActionMailer::Base
   end
 
   def bridesmaid_member_not_purchased(user_id, options = {})
-    mail(to: 'user@example.com', subject: 'Bridesmaid Party Email Marketing')
+    mail(to: 'user@example.com', subject: 'Forgetting something? Tick "Bridesmaids dresses" off your list & purchase with 15% OFF!')
   end
 
   def concierge_service_offer(user_id, options = {})
-    mail(to: 'user@example.com', subject: 'Bridesmaid Party Email Marketing')
+    mail(to: 'user@example.com', subject: 'Help us, help you! For just $99 we can take the stress & organise bridesmaids dresses')
   end
 
   def reminder_to_brides(user_id, options = {})
