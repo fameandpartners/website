@@ -27,6 +27,13 @@ Spree::OptionValue.class_eval do
     @hsv_value ||= (rgb_values.present? ? rgb_values.max : 1)
   end
 
+  # discount
+  def discount
+    sales_ids = Spree::Sale.active.pluck(:id)
+    return nil if sales_ids.blank?
+    self.discounts.where(sale_id: sales_ids).where("amount is not null and amount > 0").order('amount desc').first
+  end
+
   class << self
     def colors
       if (option_type = Spree::OptionType.color).present?
