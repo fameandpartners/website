@@ -2,11 +2,15 @@ require 'spec_helper'
 
 describe 'browse and purchase process', :type => :feature do
 
-  let(:dresses) { create_list(:dress, 5) }
+  let!(:dresses) { create_list(:dress, 5) }
 
-  before do
+  before do    
+    Products::ColorVariantsIndexer.index!
     Spree::Taxonomy.create!(name: 'Range')
-    puts dresses.inspect   
+    dress = dresses.first
+    # dress.product_color_values << create(:product_color_value)
+    # puts dress.class
+    puts dress.product_color_values.inspect
   end
 
   context "authenticated" do
