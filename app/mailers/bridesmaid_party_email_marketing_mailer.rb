@@ -25,6 +25,6 @@ class BridesmaidPartyEmailMarketingMailer < ActionMailer::Base
   end
 
   def free_styling_lesson_for_maid_of_honour(user_id, options = {})
-    mail(to: 'user@example.com', subject: "Bridesmaid Party Email Marketing")
+    mail(to: 'user@example.com', subject: "Maid of Honour duties taking a toll? Here's a FREE styling session to kick start the Bridal Party!")
   end
 end
