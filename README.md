@@ -1,33 +1,42 @@
 ## Welcome to FameAndPartners [ ![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
 
+### Development information
+* We are using Spree Ecommerce as base engine.
+[Guides](http://guides.spreecommerce.com)
+
 ### Getting started
 
 * `$ git clone git@github.com:droidlabs/fame_and_partners.git`
 * `$ cd ./fame_and_partners`
 * `$ cp config/database.yml.example config/database.yml`
-* `$ bin/prepare_app`
-
-### Development information
-
-* We are using Spree Ecommerce as base engine.
-[Guides](http://guides.spreecommerce.com)
 
 ### Populating db with test data
-
-Note: these commands not needed after bin/prepare_app
+Note: This commands can be run manullay or throught `bin/prepare_app`
 
 * `$ bundle exec rake db:populate:dresses`
 * `$ bundle exec rake db:populate:taxonomy`
 * `$ bundle exec rake db:populate:product_options`
 * `$ bundle exec rake db:populate:prototypes`
 
-### Update indexes
-Tire.index(:spree_products) do
-  delete
-  import Spree::Product.all
-end
+Note: it much easier to have working development application with loading database dump from production/preprod site, and restoring them locally. after it, remove valuable data & update settings
+* delete users `Spree::User.delete_all`
+* delete orders `Spree::Order.delete_all` 
+* update shipping settings
+* update payment method settings with test env
+* if needed, update config/initializers/paperclip.rb && config/initializers/spree.rb configuration to use images from production. don't delete images locally it that case
 
-## Manage colous pages
+
+### Update indexes
+* for dresses list pages ( show product with different colours as different )
+  `Products::ColorVariantsIndexer.index!`
+* for search page ( show product only once )
+  Tire.index(:spree_products) do
+    delete
+    import Spree::Product.all
+  end
+  Tire.index(:spree_products).refresh
+
+## Manage colours pages
 1) update "lib/tasks/populate/colors_groups.rake" file
 2) deploy to production
 3) connect to production via ssh
