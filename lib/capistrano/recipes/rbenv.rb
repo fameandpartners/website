@@ -1,4 +1,4 @@
-set(:rbenv_ruby_version, '1.9.3-p448')
+set(:rbenv_ruby_version, '1.9.3-p550')
 
 namespace :rbenv do
   task :create_version_file, roles: :web do

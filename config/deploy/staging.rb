@@ -1,4 +1,4 @@
-set :dns_name, "beta.23stages.com"
+set :dns_name, "host.23stages.com"
 
 set :application, "fame"
 set :repository,  "git@github.com:fameandpartners/website.git"
@@ -13,7 +13,6 @@ set :rails_env, 'staging'
 set :branch, 'master'
 set :use_sudo, false
 
-set :user, 'ninja'
-set :password, 'DC93zpfqgkekHw'
+set :user, 'fame'
+set :password, 'SwN7HagqaymwTYG'
 set :port, 22
-set :db_username, "root"
