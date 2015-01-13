@@ -18,12 +18,21 @@ Note: This commands can be run manullay or throught `bin/prepare_app`
 * `$ bundle exec rake db:populate:product_options`
 * `$ bundle exec rake db:populate:prototypes`
 
-Note: it much easier to have working development application with loading database dump from production/preprod site, and restoring them locally. after it, remove valuable data & update settings
+Note: it much easier to have working development application with loading database dump from production/preprod site, and restoring them locally. 
+* download latest dump from production ( through web interface from engine yard )
+* clean database with `$bundle exec rake db:schema:load`
+* restore data 
+  `pg_restore -d database_name --data-only --clean ./dump_file.dump`
+
+after it, remove valuable data & update settings
 * delete users `Spree::User.delete_all`
 * delete orders `Spree::Order.delete_all` 
 * update shipping settings
+* create user, and assign him admin rights `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
 * update payment method settings with test env
+* update facebook provider settings
 * if needed, update config/initializers/paperclip.rb && config/initializers/spree.rb configuration to use images from production. don't delete images locally it that case
+* refresh all local elastic search indexes
 
 
 ### Update indexes
