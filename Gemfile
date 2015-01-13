@@ -67,6 +67,7 @@ group :development do
   #gem 'rails-dev-tweaks', '~> 1.1'
   gem 'oink'
   gem 'net-ssh', '~> 2.7.0'
+  #gem 'sinatra'
 end
 
 group :test do
