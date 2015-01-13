@@ -5,7 +5,7 @@ class BridesmaidPartyEmailMarketingMailer < ActionMailer::Base
   default :from => configatron.noreply, :template_path => 'mailers/bridesmaid_party_email_marketing_mailer'
 
   def share_completed_bridesmaid_profile(user_id, options = {})
-    mail(to: 'user@example.com', subject: "It’s time to reveal your secret!")
+    mail(to: 'user@example.com', subject: "It's time to reveal your secret!")
   end
 
   def bridesmaid_member_not_purchased(user_id, options = {})
