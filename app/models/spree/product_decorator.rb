@@ -353,7 +353,7 @@ Spree::Product.class_eval do
   end
 
   def discount
-    sales_ids = Spree::Sale.active.pluck(:id)
+    sales_ids = Spree::Sale.active_sales_ids
     return nil if sales_ids.blank?
     self.discounts.where(sale_id: sales_ids).where("amount is not null and amount > 0").order('amount desc').first
   end

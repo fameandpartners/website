@@ -3,8 +3,25 @@
 #
 # require 'sidekiq/api'
 # Sidekiq::Queue.new.clear
-#
+=begin
+ BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
+   BridesmaidPartyEmailMarketingMailer.send(code, user_id = 1, options = {}).deliver
+ end
+=end
+
 class BridesmaidPartyEmailMarketing
+  # for validation/dev/testing purposes
+  def self.enabled_mail_codes
+    [
+      'share_completed_bridesmaid_profile',
+      'bridesmaid_member_not_purchased',
+      'concierge_service_offer',
+      'reminder_to_brides',
+      'promo_for_bride_with_bridesmaids',
+      'free_styling_lesson_for_maid_of_honour',
+    ]
+  end
+
   def self.send_emails
     #Brides who have completed the process, but did not share to bridesmaid
     #Purpose: to get users to share mood board + bridesmaid to start selecting

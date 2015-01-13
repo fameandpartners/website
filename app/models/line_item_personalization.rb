@@ -102,30 +102,22 @@ class LineItemPersonalization < ActiveRecord::Base
 
   def calculate_price
     result = 0.0
-    
-    # Plus Size Pricing
-    if add_plus_size_cost?
-      result += 20
-    end
 
-    return result if Spree::Config[:free_customisations]
-
-    result += 16.0 if !basic_color?
+    result += calculate_size_cost(20.0)
+    result += calculate_color_cost(16.0)
 
     customization_values.each do |customization_value|
-      result += customization_value.price
+      result += calculate_customization_value_cost(customization_value)
     end
 
     result
   end
 
-  def basic_color?
-    return false if product.blank? || color.blank?
-
-    product.basic_colors.where(id: color_id).exists?
+  # Size Pricing
+  def calculate_size_cost(default_extra_size_cost = 20.0)
+    add_plus_size_cost? ? default_extra_size_cost : 0
   end
 
-  #Plus Size Pricing
   def add_plus_size_cost?
     if plus_size? == nil
       if size && size.to_i >= locale_plus_sizes
@@ -135,16 +127,44 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def locale_plus_sizes
-    if line_item.order.get_site_version.permalink == 'au'
-      return 18
-    else
-      return 14
-    end
+    order.get_site_version.size_settings.size_charge_start
+  rescue
+    14
   end
 
   def plus_size?
     return true if !product.blank? && product.taxons.where(:name => "Plus Size").count > 0
   end
+  # eo size pricing
 
-    
+  # Color pricing
+  def calculate_color_cost(default_custom_color_cost = 16.0)
+    if product.present? && color.present?
+      if basic_color?
+        return 0
+      else
+        if color.discount.present?
+          Spree::Price.new(amount: default_custom_color_cost).apply(color.discount).price
+        else
+          default_custom_color_cost
+        end
+      end
+    else
+      0
+    end
+  end
+
+  def basic_color?
+    product.basic_colors.where(id: color_id).exists?
+  end
+
+  # customization value cost
+  def calculate_customization_value_cost(customization_value)
+    discount = customization_value.discount
+    if discount.present?
+      Spree::Price.new(amount: customization_value.price).apply(discount).price
+    else
+      customization_value.price
+    end
+  end
 end

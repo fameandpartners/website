@@ -6,7 +6,7 @@ Spree::OptionValue.class_eval do
   has_many :similars,
            through: :similarities,
            order: 'similarities.coefficient asc'
-  has_one :discount, foreign_key: :color_id
+  has_many :discounts, as: :discountable
 
   has_attached_file :image, styles: {
     mini: '48x48#', small: '100x100>', small_square: '100x100#', medium: '240x240>'
@@ -25,6 +25,13 @@ Spree::OptionValue.class_eval do
   # hsv representation
   def hsv_value
     @hsv_value ||= (rgb_values.present? ? rgb_values.max : 1)
+  end
+
+  # discount
+  def discount
+    sales_ids = Spree::Sale.active.pluck(:id)
+    return nil if sales_ids.blank?
+    self.discounts.where(sale_id: sales_ids).where("amount is not null and amount > 0").order('amount desc').first
   end
 
   class << self

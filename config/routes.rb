@@ -318,8 +318,6 @@ FameAndPartners::Application.routes.draw do
       resource :product_positions, only: [:show, :create, :update]
 
       put 'sales/reset_cache' => 'sales#reset_cache'
-      put 'sales/set_free_customisations' => 'sales#set_free_customisations'
-
       resources :sales, :except => [:show]
 
       #resources :customisation_types do

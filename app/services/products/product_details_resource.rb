@@ -247,7 +247,7 @@ class Products::ProductDetailsResource
     end
 
     def product_customisation_values
-      product.customisation_values.includes(:incompatibilities)
+      product.customisation_values.includes(:incompatibilities, :discounts => :sale)
     end
 
     def available_product_customisations
@@ -257,7 +257,8 @@ class Products::ProductDetailsResource
           name: value.presentation,
           image: value.image.present? ? value.image.url : 'logo_empty.png',
           price: value.price,
-          display_price: value.display_price
+          display_price: value.display_price,
+          discount: value.discounts.detect{ |discount| discount.sale.blank? || discount.sale.active? }
         })
       end
     end

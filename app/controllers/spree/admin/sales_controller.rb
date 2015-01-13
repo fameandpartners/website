@@ -3,8 +3,6 @@ class Spree::Admin::SalesController < Spree::Admin::ResourceController
     invoke_callbacks(:update, :before)
     if @object.update_attributes(params[object_name])
 
-      # @object.discounts_attributes = params[object_name][discounts]
-
       invoke_callbacks(:update, :after)
       flash[:success] = flash_message_for(@object, :successfully_updated)
       respond_with(@object) do |format|
