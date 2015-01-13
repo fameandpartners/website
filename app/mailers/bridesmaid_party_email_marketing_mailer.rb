@@ -21,7 +21,7 @@ class BridesmaidPartyEmailMarketingMailer < ActionMailer::Base
   end
 
   def promo_for_bride_with_bridesmaids(user_id, options = {})
-    mail(to: 'user@example.com', subject: "Help has arrived. Take 15% OFF your bridesmaids’ dresses & take away the stress!")
+    mail(to: 'user@example.com', subject: "Help has arrived. Take 15% OFF your bridesmaids' dresses & take away the stress!")
   end
 
   def free_styling_lesson_for_maid_of_honour(user_id, options = {})
