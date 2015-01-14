@@ -2,27 +2,36 @@ FactoryGirl.define do
 
   factory :dress, :class => Spree::Product do
   
-    sequence(:name) { |n| "#{%w{Two-Piece Split Strapless Lace V-Neck}.sample} #{n}" }
+    sequence(:name) { |n| "#{%w{Empire-Waist Sequins One-Shoulder Two-Piece Split Strapless Lace V-Neck}.sample} #{n}" }
     sequence(:sku)  { |n| "sku-#{n}"}
 
     price         { rand(100) + 99 } 
     featured      false
-    available_on  { Time.now.utc }
-    permalink     { name.downcase.gsub(/\s/, '_') }
+    available_on  { rand(100).days.ago.utc }
+    permalink     { name.downcase }
    
-    after(:create) do |product, evaluator|
-      create_list(:product_color_value, 1, product: product)
-    end
-
+    # after(:create) do |product, evaluator|
+    #   create_list(:product_color_value, 1, product: product)
+    # end
   end
 
-  factory :product_color_value do
-    association :option_value, :factory => :spree_option_value
-  end
+  # factory :product_color_value do
+  #   option_value
+  # end
 
-  factory :spree_option_value, :class => Spree::OptionValue do
-    sequence(:position)
-    sequence(:name)     { |n| "option-#{n}"}
+  # factory :option_value, :class => Spree::OptionValue do
+  #   sequence(:position)
+  #   sequence(:name)     { |n| "option-#{n}"}
+  #   option_type         
+  # end
+
+  # factory :option_type :class => Spree::OptionType do
+  #   sequence(:name)     { |n| "option-type-#{n}"}
+  # end
+
+  factory :taxon, :class => Spree::Taxon do
+    sequence(:position)    
+    permalink           { name.downcase }
   end
 
 end
