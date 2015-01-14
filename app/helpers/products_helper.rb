@@ -154,6 +154,23 @@ module ProductsHelper
     end
   end
 
+  # Used to hack around issues with campaign images and product images for AMFAM
+  def product_last_image_tag(product, size = nil, options = {})
+    no_image = 'noimage/product.png'
+    size = size.present? ? size : 'large'
+
+    options[:title] ||= product.name
+
+    if product.images.empty?
+      image_tag(no_image, options)
+    else
+      image = product.images.last
+      options.reverse_merge! alt: image.alt.blank? ? product.name : image.alt
+
+      image_tag(image.attachment.url(size), options)
+    end
+  end
+
 
   def line_item_image_url(line_item, size = :small)
     image = line_item.image

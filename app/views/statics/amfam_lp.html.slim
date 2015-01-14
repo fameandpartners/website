@@ -29,7 +29,7 @@ ruby:
               .catalog-item
                 .picture
                   = link_to collection_product_path(dress) do
-                    = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                    = product_last_image_tag dress, nil, itemprop: 'image', alt: dress.name
                 .text
                   = link_to dress.name, collection_product_path(dress), class: 'title'
                   .price = price_for_product(dress)
@@ -40,7 +40,7 @@ ruby:
           .catalog-item
             .picture
               = link_to collection_product_path(dress) do
-                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                = product_last_image_tag dress, nil, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
               .price = price_for_product(dress) 
@@ -53,7 +53,7 @@ ruby:
             .catalog-item
               .picture
                 = link_to collection_product_path(dress) do
-                  = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                  = product_last_image_tag dress, nil, itemprop: 'image', alt: dress.name
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
@@ -63,7 +63,7 @@ ruby:
           .catalog-item
             .picture
               = link_to collection_product_path(dress) do
-                = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
+                = product_last_image_tag dress, nil, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
               .price = price_for_product(dress)
