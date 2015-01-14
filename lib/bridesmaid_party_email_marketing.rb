@@ -4,9 +4,18 @@
 # require 'sidekiq/api'
 # Sidekiq::Queue.new.clear
 =begin
+ # to send all emails:
  BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
    BridesmaidPartyEmailMarketingMailer.send(code, user_id = 1, options = {}).deliver
  end
+
+ # to test scheduling all emails [ forces delete notifications ]
+  Sidekiq::Queue.new.clear
+  user = Spree::User.find(21029)
+  user.email_notifications.delete_all
+  BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
+    BridesmaidPartyEmailMarketing.schedule_notification(code, 21029, { bridesmaids_count: 3 })
+  end
 =end
 
 class BridesmaidPartyEmailMarketing
