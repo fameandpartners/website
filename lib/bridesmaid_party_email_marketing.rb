@@ -7,9 +7,10 @@
  def send_all_to(email)
    user = Spree::User.where(email: email).first || Spree::User.new(email: email)
    BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
-     sleep(10)
-     BridesmaidPartyEmailMarketingMailer.send(code, user.id, options = { bridesmaids_count: 3 }).deliver
+     BridesmaidPartyEmailMarketingMailer.send(code, user.id, options = { bridesmaids_count: 2 }).deliver
    end
+   BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 4 }).deliver
+   BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 6 }).deliver
  end
  send_all_to('bydiansky@gmail.com')
 
