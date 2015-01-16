@@ -56,7 +56,7 @@ class Wishlist::UserWishlistResource
       @product_discounts ||= begin
         active_sales_ids = Spree::Sale.active.pluck(:id)
         product_ids = moodboard_owner_moodboard.items.map{|item| item.product_id }
-        Discount.for_products.where(discountable_id: product_ids).to_a
+        Discount.for_products.where(sale_id: active_sales_ids, discountable_id: product_ids).to_a
       end
     end
 
