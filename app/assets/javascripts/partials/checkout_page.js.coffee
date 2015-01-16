@@ -151,6 +151,24 @@ $('.checkout.edit').ready ->
       # if user filled first last email, show other elements
       # otherwise - hide&disable
 
+    updateStatesVisibility: (country_field_id, states_field_id, states_text_field_id) ->
+      country_id = $(country_field_id).val()
+      $(states_field_id).find("option[data-country]").hide()
+      if $(states_field_id).find("option[data-country=#{ country_id }]").length == 0
+        # show input
+        $(states_field_id).addClass('hidden').removeClass('required').prop('disabled', true)
+        $(states_text_field_id).addClass('required').removeClass('hidden').prop('disabled', false)
+      else
+        $(states_text_field_id).addClass('hidden').removeClass('required').prop('disabled', true)
+        # show available states
+        $(states_field_id).addClass('required').removeClass('hidden').prop('disabled', false)
+        $(states_field_id).find("option[data-country=#{ country_id }]").show()
+
+        # if currently select option not available for selected country, reset
+        if !country_id || $(states_field_id).find('option:selected').data('country') != parseInt(country_id)
+          $(states_field_id).val('')
+
+
     openLoginPopup: (e) ->
       e.preventDefault()
       popup = new window.popups.LoginPopup()
