@@ -29,9 +29,8 @@ Spree::OptionValue.class_eval do
 
   # discount
   def discount
-    sales_ids = Spree::Sale.active.pluck(:id)
-    return nil if sales_ids.blank?
-    self.discounts.where(sale_id: sales_ids).where("amount is not null and amount > 0").order('amount desc').first
+    return @discount if instance_variable_defined?('@discount')
+    @discount ||= Repositories::Discount.read(self.class, self.id)
   end
 
   class << self

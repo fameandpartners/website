@@ -53,15 +53,16 @@ class Wishlist::UserWishlistResource
     end
 
     def product_discounts
+      return @product_discounts if instance_variable_defined?('@product_discounts')
+
       @product_discounts ||= begin
-        active_sales_ids = Spree::Sale.active.pluck(:id)
         product_ids = moodboard_owner_moodboard.items.map{|item| item.product_id }
-        Discount.for_products.where(sale_id: active_sales_ids, discountable_id: product_ids).to_a
+        Repositories::Discount.read_all('Spree::Product', product_ids)
       end
     end
 
     def product_discount(product_id)
-      discount = product_discounts.find{|discount| discount.discountable_id == product_id }
+      product_discounts.find{|discount| discount.discountable_id == product_id }
     end
 
     # module-specific code.
