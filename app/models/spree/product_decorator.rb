@@ -354,7 +354,7 @@ Spree::Product.class_eval do
 
   def discount
     return @discount if instance_variable_defined?('@discount')
-    @discount ||= Repositories::Discount.read(self.class, self.id)
+    @discount = Repositories::Discount.read(self.class, self.id)
   end
 
 #  def discount
