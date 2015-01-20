@@ -51,4 +51,13 @@
 <%# fb tracking pixel %>
 <% if flash[:commerce_tracking] %>
   <%= fb_analytics_track('6013645244896', 'AUD', @order.display_item_total) %>
+
+  <script src="//platform.twitter.com/oct.js" type="text/javascript" />
+  <script type="text/javascript">
+    twttr.conversion.trackPid('l5cvl');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l5cvl&p_id=Twitter"/>
+    <img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l5cvl&p_id=Twitter"/>
+  </noscript>
 <% end %>

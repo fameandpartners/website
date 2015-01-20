@@ -48,18 +48,18 @@ class UpdateUsZoneWithCanadaAndUk < ActiveRecord::Migration
       if country_iso_code == 'CA'
         [
           ["AB", "Alberta"],
-          ["BC", "British "],
+          ["BC", "British Columbia"],
           ["MB", "Manitoba"],
-          ["NB", "New "],
-          ["NL", "Newfoundland "],
-          ["NS", "Nova "],
+          ["NB", "New Brunswick"],
+          ["NL", "Newfoundland and Labrador"],
+          ["NS", "Nova Scotia"],
           ["ON", "Ontario"],
-          ["PE", "Prince "],
+          ["PE", "Prince Edward Island"],
           ["QC", "Quebec"],
           ["SK", "Saskatchewan"],
-          ["NT", "Northwest "],
+          ["NT", "Northwest Territories"],
           ["NU", "Nunavut"],
-          ["YT", "Yukon"],
+          ["YT", "Yukon"]
         ]
       else
         []
