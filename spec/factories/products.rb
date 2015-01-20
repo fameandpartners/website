@@ -31,7 +31,7 @@ FactoryGirl.define do
 
   factory :taxon, :class => Spree::Taxon do
     sequence(:position)    
-    permalink           { name.downcase }
+    permalink           { name.downcase.gsub(/\s/, '_')  }
   end
 
 end

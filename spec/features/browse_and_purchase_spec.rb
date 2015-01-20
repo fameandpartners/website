@@ -73,7 +73,6 @@ describe 'browse and purchase process', :type => :feature do
         click_link(p.taxons.first.name)        
         # click_link(p.name)
         visit "dresses/#{p.permalink}/"
-        # require 'pry'; pry binding
       end
 
     end
