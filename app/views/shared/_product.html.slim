@@ -8,7 +8,7 @@
         .quick-view.fleft = quick_view_link(product)
         
   - cache ['shared', 'product', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
-    .name = link_to product.name, collection_product_path(product)
+    .name = link_to product.name, collection_product_path(product), :title => product.name
     /.description = product_short_description(product)
     .price = price_for_product(product)
     .colors
@@ -27,7 +27,7 @@
         
         
   - cache ['shared', 'product', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
-    h6 = link_to product.name, collection_product_path(product)
+    h6 = link_to product.name, collection_product_path(product), :title => product.name
     /.description = product_short_description(product)
     .price = price_for_product(product)
     / .colors

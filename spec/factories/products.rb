@@ -2,13 +2,13 @@ FactoryGirl.define do
 
   factory :dress, :class => Spree::Product do
   
-    sequence(:name) { |n| "#{%w{Empire-Waist Sequins One-Shoulder Two-Piece Split Strapless Lace V-Neck}.sample} #{n}" }
+    sequence(:name) { |n| "#{%w{Two-Piece Split Strapless Lace V-Neck Lace}.sample} #{n}" }
     sequence(:sku)  { |n| "sku-#{n}"}
 
     price         { rand(100) + 99 } 
     featured      false
     available_on  { rand(100).days.ago.utc }
-    permalink     { name.downcase }
+    permalink     { name.downcase.gsub(/\s/, '_') }
    
     # after(:create) do |product, evaluator|
     #   create_list(:product_color_value, 1, product: product)

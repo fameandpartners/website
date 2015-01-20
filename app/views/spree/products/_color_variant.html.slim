@@ -6,8 +6,9 @@ ruby:
 
 = cache cache_name, expires_in: configatron.cache.expire.long do
   .picture
-    = link_to colored_variant_path(variant) do
-      = hoverable_image_tag variant.images.map(&:large), alt: variant.product.name
+    = link_to colored_variant_path(variant), :title => variant.product.name do
+      / variant.images.map(&:large)
+      = hoverable_image_tag '/images/missing.png', alt: variant.product.name
     .popup.striped
       .fleft.quick-view
         = quick_view_link(variant.product)
@@ -28,7 +29,7 @@ ruby:
       = variant.price.display_price.to_s.html_safe
   .buttons
     .buy-button
-      = link_to "Buy", colored_variant_path(variant, :cf => 'collection'), class: 'btn black small', title: "Buy this dress"
+      = link_to "Buy", colored_variant_path(variant, :cf => 'collection'), class: 'btn black small', title: "Buy #{variant.product.name}"
     - if (variant.product.can_be_customized and !current_sale.is_active?)
       .custom-button
         = link_to t('words.customize'), personalization_product_path(permalink: variant.product.permalink, :cf => 'collection'), class: 'btn empty border small', title: "#{t('words.customize').titleize} this dress"

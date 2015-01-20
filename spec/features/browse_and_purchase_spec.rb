@@ -6,26 +6,26 @@ describe 'browse and purchase process', :type => :feature do
   let(:taxonomy)              { Spree::Taxonomy.create!(:name => 'Style') }
   let(:taxon)                 { create(:taxon, :name => 'Style') }
   # let!(:taxons)               { create_list(:taxon, 5, :parent => taxon, :taxonomy => taxonomy) }
-  let(:styles)                { %w{Empire-Waist Sequins One-Shoulder Two-Piece Split Strapless Lace V-Neck} }
+  let(:styles)                { %w{Two-Piece Split Strapless Lace V-Neck Lace} }
 
+  def create_option_value(option_type, values)
+    values.each_with_index.collect do |v, i|
+      option_type.option_values.create(:name => v)
+    end
+  end
 
-  before do    
-    Products::ColorVariantsIndexer.index!
+  def create_data
     Spree::Taxonomy.create!(:name => 'Range')
 
     color_type = Spree::OptionType.create!(:name => 'color', :presentation => 'Color')
+    size_type = Spree::OptionType.create!(:name => 'dress-size', :presentation => 'Size')
 
     taxons = styles.collect do |style|
       create(:taxon, :name => style, :parent => taxon, :taxonomy => taxonomy)
     end
 
-    colour_options = %w{black white green}.each_with_index.collect do |color, i|
-      Spree::OptionValue.new(:name => color).tap do | o |
-        o.option_type = color_type
-        o.position = i
-        o.save!     
-      end
-    end
+    size_options = create_option_value(size_type, %w{1 2 3 5 8 13 21 34})
+    colour_options = create_option_value(color_type, %w{black white green})
     
     # require 'pry'; pry binding
 
@@ -33,6 +33,12 @@ describe 'browse and purchase process', :type => :feature do
       dresses = create_list(:dress, 5, :taxons => [taxon])
       dresses.each do |dress|
         colour_options.each do | colour_option |
+          p = ProductColorValue.new
+          p.option_value = colour_option
+          p.product = dress
+          p.save!
+        end
+        size_options.each do | colour_option |
           p = ProductColorValue.new
           p.option_value = colour_option
           p.product = dress
@@ -48,13 +54,11 @@ describe 'browse and purchase process', :type => :feature do
 
     #   dress.save!
     # end
+    Utility::Reindexer.reindex
+  end
 
-    Tire.index(:spree_products) do
-      delete
-      import Spree::Product.all
-    end
-
-    Products::ColorVariantsIndexer.index!
+  before do    
+    create_data 
   end
 
   context "authenticated" do
@@ -64,6 +68,12 @@ describe 'browse and purchase process', :type => :feature do
   
       it 'should add a product to cart' do
         visit '/us/'     
+        p = Spree::Product.all.shuffle.first                
+
+        click_link(p.taxons.first.name)        
+        # click_link(p.name)
+        visit "dresses/#{p.permalink}/"
+        # require 'pry'; pry binding
       end
 
     end

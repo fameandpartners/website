@@ -47,7 +47,8 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation, {:except => %w[site_versions spree_zones]}
-    create_test_data
+    # DatabaseCleaner.strategy = :truncation, {:only => %w[spree_users]}
+    # create_test_data
   end
 
   config.before(:each) do
