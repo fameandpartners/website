@@ -64,7 +64,7 @@ class Reports::BridesmaidPartyUserSales
         bridesmaids_registered: (users.sum(&:bridesmaids_registered) / users.size.to_f),
         paying_for_bridesmaids: users.count(&:paying_for_bridesmaids) * 100 / users.size.to_f,
         bride_purchased: users.count(&:bride_purchased) * 100 / users.size.to_f,
-        bridesmaids_purchased: users.count(&:bride_purchased) * 100 / users.size.to_f
+        bridesmaids_purchased: users.count(&:bridesmaids_purchased) * 100 / users.size.to_f
       )
     end
 end
