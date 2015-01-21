@@ -45,10 +45,10 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
 
-  config.before(:suite) do
+  config.before(:suite) do    
     DatabaseCleaner.strategy = :truncation, {:except => %w[site_versions spree_zones]}
     # DatabaseCleaner.strategy = :truncation, {:only => %w[spree_users]}
-    # create_test_data
+    create_test_data
   end
 
   config.before(:each) do
