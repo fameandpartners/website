@@ -17,7 +17,7 @@ describe 'browse and purchase process', :type => :feature do
   def create_data
     Spree::Taxonomy.create!(:name => 'Range')
 
-    color_type = Spree::OptionType.create!(:name => 'color', :presentation => 'Color')
+    color_type = Spree::OptionType.create!(:name => 'dress-color', :presentation => 'Color')
     size_type = Spree::OptionType.create!(:name => 'dress-size', :presentation => 'Size')
 
     taxons = styles.collect do |style|
@@ -32,32 +32,41 @@ describe 'browse and purchase process', :type => :feature do
     taxons.each do |taxon|
       dresses = create_list(:dress, 5, :taxons => [taxon])
       dresses.each do |dress|
-        colour_options.each do | colour_option |
-          p = ProductColorValue.new
-          p.option_value = colour_option
-          p.product = dress
-          p.save!
+        colour_options.each do | colour_option |        
+          dress.product_color_values << ProductColorValue.new(:option_value => colour_option)          
         end
-        size_options.each do | colour_option |
-          p = ProductColorValue.new
-          p.option_value = colour_option
-          p.product = dress
-          p.save!
+        # size_options.each do | size_option |
+          # ProductColorValue.create!(:option_value => size_option, :product => dress)
+        # end
+        # dress.variants << variants
+        dress.option_types = [color_type, size_type]
+        dress.save!
+        # dress.reload
+        size_options.each do | size_option |        
+          colour_options.each do | colour_option |        
+            Spree::Variant.create(product_id: dress.id).tap do |variant|
+              variant.option_values = [size_option, colour_option]
+              variant.save!
+            end
+          end
         end
       end
     end
 
-    # dresses = taxons.collect do |
-    # dresses.each_with_index do |dress, |
+    # dresses.each_with_index do |dress, i|
     #   dress.taxons << taxons
-    #   dress.product_color_values << product_color_values
-
     #   dress.save!
-    # end
+    # end    
+
     Utility::Reindexer.reindex
+
   end
 
-  before do    
+  before do      
+    image = double(Spree::Image)
+    allow(image).to receive_message_chain(:attachment, :url).and_return('/images/missing.png')
+    allow_any_instance_of(ProductColorValue).to receive(:images).and_return([image])
+
     create_data 
   end
 
@@ -68,8 +77,7 @@ describe 'browse and purchase process', :type => :feature do
   
       it 'should add a product to cart' do
         visit '/us/'     
-        p = Spree::Product.all.shuffle.first                
-
+        p = Spree::Product.all.shuffle.first                        
         click_link(p.taxons.first.name)        
         # click_link(p.name)
         visit "dresses/#{p.permalink}/"
