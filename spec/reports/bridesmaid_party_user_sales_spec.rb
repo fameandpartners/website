@@ -32,9 +32,9 @@ describe Reports::BridesmaidPartyUserSales do
       row = @report.users.first
       expect(row.bridesmaids_count).to eq(@event.bridesmaids_count)
       expect(row.bridesmaids_registered).to eq(0)
-      expect(row.paying_for_bridesmaids).to be_true
-      expect(row.bride_purchased).to        be_false
-      expect(row.bridesmaids_purchased).to  be_false
+      expect(row.paying_for_bridesmaids).to be true
+      expect(row.bride_purchased).to        be false
+      expect(row.bridesmaids_purchased).to  be false
     end
 
     it "has valid total" do
@@ -75,9 +75,9 @@ describe Reports::BridesmaidPartyUserSales do
       row = @report.users.first
       expect(row.bridesmaids_count).to eq(@event.bridesmaids_count)
       expect(row.bridesmaids_registered).to eq(1)
-      expect(row.paying_for_bridesmaids).to be_true
-      expect(row.bride_purchased).to        be_true
-      expect(row.bridesmaids_purchased).to  be_false
+      expect(row.paying_for_bridesmaids).to be true
+      expect(row.bride_purchased).to        be true
+      expect(row.bridesmaids_purchased).to  be false
     end
 
     it "has valid total" do
