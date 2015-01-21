@@ -38,7 +38,7 @@
           <td class="align-center"><%= site_version.default? ? 'Yes' : 'No' %></td>
           <td><%= site_version.name %></td>
           <td><%= site_version.permalink %></td>
-          <td><%= site_version.zone.name %></td>
+          <td><%= link_to site_version.zone.name, edit_admin_zone_path(site_version.zone.id)  %></td>
           <td><%= site_version.currency %></td>
           <td><%= site_version.locale %></td>
           <td class="exchange_rate">

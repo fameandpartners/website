@@ -364,14 +364,6 @@ ActiveRecord::Schema.define(:version => 20141223103221) do
     t.string   "school_name"
   end
 
-  create_table "customisation_types", :force => true do |t|
-    t.integer  "position"
-    t.string   "name"
-    t.string   "presentation"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "customisation_values", :force => true do |t|
     t.integer  "position"
     t.string   "name"
@@ -424,17 +416,6 @@ ActiveRecord::Schema.define(:version => 20141223103221) do
 
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
-
-  create_table "inspirations", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.string   "name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
 
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
@@ -500,21 +481,6 @@ ActiveRecord::Schema.define(:version => 20141223103221) do
   create_table "product_color_values", :force => true do |t|
     t.integer "product_id"
     t.integer "option_value_id"
-  end
-
-  create_table "product_customisation_types", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "customisation_type_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-  end
-
-  create_table "product_customisation_values", :force => true do |t|
-    t.integer "product_customisation_type_id"
-    t.integer "customisation_value_id"
-    t.string  "image_file_name"
-    t.string  "image_content_type"
-    t.integer "image_file_size"
   end
 
   create_table "product_personalizations", :force => true do |t|
@@ -642,13 +608,12 @@ ActiveRecord::Schema.define(:version => 20141223103221) do
     t.string   "event_name"
     t.string   "type"
     t.integer  "usage_limit"
-    t.string   "match_policy",    :default => "all"
+    t.string   "match_policy", :default => "all"
     t.string   "code"
-    t.boolean  "advertise",       :default => false
+    t.boolean  "advertise",    :default => false
     t.string   "path"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.boolean  "allowed_in_sale", :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "spree_addresses", :force => true do |t|

@@ -132,7 +132,7 @@
                             li = link_to 'Long Dresses', build_taxon_path('Long'), title: 'Long Dresses', class: "collection"
                             li = link_to 'Short Dresses', build_taxon_path('Short'), title: 'Short Dresses', class: "collection"
                             li = link_to 'Bridesmaid', bridesmaid_lp_path, title: 'Bridesmaid Dresses', class: "collection"
-                            li = link_to 'New Years Eve', nye_path, title: 'New Years Eve Dresses', class: "collection"
+                            li = link_to 'Wicked Game', '/amfam-dresses', title: 'The Wicked Game Collection', class: "collection"
                             li = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses', class: "collection"    
                             li = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses', class: "collection"
                             li = link_to 'Plus Size', plus_size_path, title: 'Plus Size Dresses', class: "collection"
@@ -147,9 +147,9 @@
                           .label
                             ' Design your perfect bridesmaid dresses
                         .tile
-                          = link_to '/new-years-eve-dresses?cf=menu', title: 'New Years Eve Dresses' do
-                            = image_tag "menu/nye.jpg"
-                          .label THE PARTY NEVER DIES
+                          = link_to '/amfam-dresses?cf=menu', title: 'The Wicked Game Collection' do
+                            = image_tag "menu/wicked_game_collection.jpg", alt: 'The Wicked Game Collection'
+                          .label The Wicked Game Collection
                       - if sale_active?
                         .sale-section
                           .title

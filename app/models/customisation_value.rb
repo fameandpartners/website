@@ -68,4 +68,9 @@ class CustomisationValue < ActiveRecord::Base
   def is_compatible_with?(customisation_value)
     !incompatible_ids.include?(customisation_value.id)
   end
+
+  def discount
+    return @discount if instance_variable_defined?('@discount')
+    @discount = Repositories::Discount.read(self.class, self.id)
+  end
 end

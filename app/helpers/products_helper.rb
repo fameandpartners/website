@@ -138,6 +138,40 @@ module ProductsHelper
     hoverable_image_tag(sources, options)
   end
 
+  # Used to hack around issues with campaign images and product images for AMFAM
+  def amfam_hoverable_product_image_tag(product, options = {})
+    colors = options.delete(:colors)
+
+    images = if product.images.empty?
+      []
+    else
+      if colors.present?
+        images_for_colors = product.images_for_colors(colors).limit(2).to_a
+
+        if images_for_colors.present?          
+          [images_for_colors.last, images_for_colors.first]
+        else          
+          [product.images.last, product.images.first]
+        end
+      else
+        [product.images.last, product.images.first]
+      end
+    end
+
+    if images.blank? || images.last.alt.blank?
+      alt = product.name
+    else
+      alt = images.last.alt
+    end
+
+    options.reverse_merge! :alt => alt
+
+    sources = images.map{ |image| image.attachment.url(:large) }
+
+    hoverable_image_tag(sources, options)
+  end
+
+
   def product_image_tag(product, size = nil, options = {})
     no_image = 'noimage/product.png'
     size = size.present? ? size : 'large'
@@ -153,6 +187,25 @@ module ProductsHelper
       image_tag(image.attachment.url(size), options)
     end
   end
+
+  # Used to hack around issues with campaign images and product images for AMFAM
+  def product_last_image_tag(product, size = nil, options = {})
+    no_image = 'noimage/product.png'
+    size = size.present? ? size : 'large'
+
+    options[:title] ||= product.name
+
+    if product.images.empty?
+      image_tag(no_image, options)
+    else
+      image = product.images.last
+      options.reverse_merge! alt: image.alt.blank? ? product.name : image.alt
+
+      image_tag(image.attachment.url(size), options)
+    end
+  end
+
+
 
 
   def line_item_image_url(line_item, size = :small)

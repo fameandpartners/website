@@ -57,7 +57,9 @@ javascript:
   });
 
   $(document).ready(function() {
-      $('#fieldqulir').val(window.current_site_version.permalink);
+      if (!!window.current_site_version) {
+        $('#fieldqulir').val(window.current_site_version.permalink);
+      }
 
       if (gf_campaign != 'true'){
         if ((window.current_page == 'index' || window.location.pathname == '/fashionista2014' || window.location.pathname == '/au/fashionista2014') && $.cookie('slide_newsletter') != 'close'){

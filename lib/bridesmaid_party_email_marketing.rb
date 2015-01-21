@@ -3,8 +3,39 @@
 #
 # require 'sidekiq/api'
 # Sidekiq::Queue.new.clear
-#
+=begin
+ def send_all_to(email)
+   user = Spree::User.where(email: email).first || Spree::User.new(email: email)
+   BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
+     BridesmaidPartyEmailMarketingMailer.send(code, user.id, options = { bridesmaids_count: 2 }).deliver
+   end
+   BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 4 }).deliver
+   BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 6 }).deliver
+ end
+ send_all_to('bydiansky@gmail.com')
+
+ # to test scheduling all emails [ forces delete notifications ]
+  Sidekiq::Queue.new.clear
+  user = Spree::User.find(21029)
+  user.email_notifications.delete_all
+  BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
+    BridesmaidPartyEmailMarketing.schedule_notification(code, user.id, { bridesmaids_count: 3 })
+  end
+=end
+
 class BridesmaidPartyEmailMarketing
+  # for validation/dev/testing purposes
+  def self.enabled_mail_codes
+    [
+      'share_completed_bridesmaid_profile',
+      'bridesmaid_member_not_purchased',
+      'concierge_service_offer',
+      'reminder_to_brides',
+      'promo_for_bride_with_bridesmaids',
+      'free_styling_lesson_for_maid_of_honour',
+    ]
+  end
+
   def self.send_emails
     #Brides who have completed the process, but did not share to bridesmaid
     #Purpose: to get users to share mood board + bridesmaid to start selecting

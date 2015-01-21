@@ -1,41 +1,26 @@
-.static-fashion-it
-  .header
-    .title
-      ' 2015
-      br
-      ' Fashion IT Girl Search
+div style="margin-left: 20px"
+	.grid-container
+		.grid-3
+		    p style="background-color:#CEB6CB;margin-top:41px;height:159px"
+		    	= image_tag('fashion-it-girl/fashion_it_girl_logo_banner.jpg', :alt => 'Fame & Partners and ASOS Present', :width => 285, :height => 159)
+		    	
+		    p style="margin-top:40px; min-height:1000px"
+		    	= image_tag('fashion-it-girl/fashion_it_girl_banner.gif', :alt => 'Limited time shop now', :width => 285)
+				    	
+		.grid-9
+			- if current_site_version.is_usa?
+			    javascript:
+			      var wpsc487301 = wpsc487301 || {};
+			      wpsc487301.w = '810'; // Width in pixels or % of containing element.
+	        
+	        	script src="//www.wishpond.com/sc/487301.js" type="text/javascript"
+			- else				
+				= image_tag('https://s3.amazonaws.com/media.wishpond.com/media/003/635/018/original.jpg?1420597537', :alt => "Fashion IT Girl 2015", :style => "background-color:#CEB6CB;margin-top:41px;height:159px")
 
-  .grid-container
-    .grid-12.text-center
-      .subtitle.large
-        span Show us your style & you could win
-      p
-        ' A 2 week paid intensive learning internship with Fame & Partners at our New York City office, 
-        br
-        ' PLUS the opportunity to design your dream formal dress, made just for you!
-      p 1 of 10 Fame Chain positions + a free dress
-      p 1 of 50 Fashion Ambassador positions + extra perks to make your prom the most fab ever!
+				div style="margin-left:50px;margin-top:40px;"  
+					h1
+						' Sorry, but the Fashion IT Girl 2015 competition is only open to US residents.
+					p Australia's Fashionista Search will be launching in April 2015. 
+					p Stay tuned or contact us to register your interest.
 
-      .subtitle How to enter & how judging works:
-
-      p.text-left
-        ' 1. Simply submit an entry by clicking on the 'Register' button and entering your details
-        br
-        ' 2. Get your friends to vote for you, to demonstrate your social status
-        br
-        ' 3. Our judging panel will review each application individually and will select a winner based on a combination of style, cred and the reason the applicant thinks they should be the 2015 Fashion IT Girl.
-
-      .subtitle Why does Fame&Partners run this contest?:
-
-      p.two-columns.text-left
-        ' Fame & Partners was founded in 2013 by an Australian female entrepreneur who is passionate about empowering young women in their careers.
-        br
-        ' The company believes in the convergence of fashion and technology, so we want to support young women who aspire to have a career in these areas. We have created a network of fashion-forward bloggers called The Fame Chain that assist with trend forecasting and spreading our word, in return for cash, cred and clothing.
-        br
-        ' Our 2015 Fashion IT Girl Search sees us accepting young women into this program and selecting one very special young woman to receive an intensive 2-week paid internship inside our company. We will cover the cost of her transportation to get to New York City should she reside in state outside of the tri-state area.
-
-      .signup-for-event
-        a.btn.btn-pink href="mailto:team@fameandpartners.com?subject=Fashion IT Girl 2015" Register
-        .hint We'll remind you when applications open
-
-      .address Applications open: Monday, 12th January // Applications close: Sunday, 22nd February // Winner Drawn: Friday, 6th March
+script type="application/javascript" src="//s.uadx.com/4505c140-79a4-11e4-88aa-22000afe405e.js"

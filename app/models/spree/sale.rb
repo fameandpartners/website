@@ -1,5 +1,5 @@
 class Spree::Sale < ActiveRecord::Base
-  has_many :discounts
+  has_many :discounts, foreign_key: :sale_id, dependent: :delete_all
 
   DISCOUNT_TYPES = {
     1 => 'Fixed',
@@ -46,6 +46,11 @@ class Spree::Sale < ActiveRecord::Base
     end
   end
 
+  # base discount for all child items
+  def discount
+    Discount.new(amount: discount_size.to_i)
+  end
+
   def apply(price, surryhills)
     if fixed?
       discount_size < price ? price - discount_size : BigDecimal.new(0)
@@ -55,6 +60,12 @@ class Spree::Sale < ActiveRecord::Base
       else
         price * (BigDecimal.new(100) - 80) / 100  
       end
+    end
+  end
+
+  class << self
+    def active_sales_ids
+      Spree::Sale.active.pluck(:id)
     end
   end
 end

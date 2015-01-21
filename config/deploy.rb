@@ -1,7 +1,10 @@
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
-require 'capistrano-rbenv'
 require 'sidekiq/capistrano'
+
+set :default_environment, {
+  'PATH' => "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH"
+}
 
 set :stages, %w(staging feature)
 set :default_stage, "staging"
@@ -10,14 +13,8 @@ set :keep_releases, 5
 set :scm, :git
 set :shared_children, shared_children + %w{public/spree}
 
-before  'deploy:setup', 'db:create_config'
-after   'deploy:setup', 'deploy:first'
+before  'bundle:install',  'rbenv:create_version_file'
 
 after   'deploy:update_code', 'db:create_symlink'
 after   'deploy:update_code', 'cron:update'
 after   'deploy:create_symlink', 'deploy:cleanup'
-after   'deploy:finalize_update', 'rbenv:create_version_file'
-
-# resque
-# after   'deploy:restart', 'resque:restart'
-# after   'deploy:restart', 'resque_scheduler:restart'

@@ -175,13 +175,19 @@ class Products::ProductDetailsResource
       site_version.size_settings.size_end rescue 26
     end
 
+    # default sizes - has no additional charge
     def default_product_sizes
-      product_sizes.select{|size| size[:value] >= default_size_start && size[:value] < extra_size_start } 
+      if product_has_free_extra_sizes?
+        product_sizes.select{|size| size[:value] >= default_size_start && size[:value] <= default_size_end }
+      else
+        product_sizes.select{|size| size[:value] >= default_size_start && size[:value] < extra_size_start }
+      end
     end
 
+    # extra sizes - has extra pay
     def extra_product_sizes
+      return [] if product_has_free_extra_sizes?
       sizes = product_sizes.select{|size| size[:value] >= extra_size_start && size[:value] <= default_size_end } 
-      return sizes if product_has_free_extra_sizes?
       sizes.map {|size| size[:extra_price] = true; size }
     end
 
@@ -247,7 +253,7 @@ class Products::ProductDetailsResource
     end
 
     def product_customisation_values
-      product.customisation_values.includes(:incompatibilities)
+      product.customisation_values.includes(:incompatibilities, :discounts => :sale)
     end
 
     def available_product_customisations
@@ -257,7 +263,8 @@ class Products::ProductDetailsResource
           name: value.presentation,
           image: value.image.present? ? value.image.url : 'logo_empty.png',
           price: value.price,
-          display_price: value.display_price
+          display_price: value.display_price,
+          discount: value.discounts.detect{ |discount| discount.sale.blank? || discount.sale.active? }
         })
       end
     end

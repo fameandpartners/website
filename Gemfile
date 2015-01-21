@@ -44,11 +44,9 @@ gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'droidcss'
 
-
-
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
-  
+
 # spree extensions for authentication
 gem 'spree_auth_devise',
   :github => 'spree/spree_auth_devise',

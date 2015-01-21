@@ -1,5 +1,5 @@
 class Discount < ActiveRecord::Base
-  belongs_to :sale, class_name: 'Spree::Sale'
+  belongs_to :sale, class_name: 'Spree::Sale', foreign_key: :sale_id
   belongs_to :discountable, polymorphic: true
 
   attr_accessible :amount,
@@ -18,4 +18,14 @@ class Discount < ActiveRecord::Base
   validates :sale_id, presence: true
 
   scope :for_products, where(discountable_type: "Spree::Product")
+
+  def size
+    if amount.present?
+      amount
+    elsif sale.present?
+      sale.discount_size
+    else
+      0
+    end
+  end
 end
