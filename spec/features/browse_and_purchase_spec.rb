@@ -6,7 +6,7 @@ describe 'browse and purchase process', :type => :feature do
   let(:taxonomy)              { Spree::Taxonomy.create!(:name => 'Style') }
   let(:taxon)                 { create(:taxon, :name => 'Style') }
   # let!(:taxons)               { create_list(:taxon, 5, :parent => taxon, :taxonomy => taxonomy) }
-  let(:styles)                { %w{Two-Piece Split Strapless Lace V-Neck Lace} }
+  let(:styles)                { %w{Two-Piece Split Strapless Lace V-Neck} }
 
   def create_option_value(option_type, values)
     values.each_with_index.collect do |v, i|
@@ -78,7 +78,7 @@ describe 'browse and purchase process', :type => :feature do
       it 'should add a product to cart' do
         visit '/us/'     
         p = Spree::Product.all.shuffle.first                        
-        click_link(p.taxons.first.name)        
+        click_link('Lace')
         # click_link(p.name)
         visit "dresses/#{p.permalink}/"
       end
