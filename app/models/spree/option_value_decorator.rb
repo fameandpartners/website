@@ -32,7 +32,7 @@ Spree::OptionValue.class_eval do
       if (option_type = Spree::OptionType.color).present?
         where(option_type_id: option_type.id)
       else
-        none
+        where(id: nil)
       end
     end
   end
