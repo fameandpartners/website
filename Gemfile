@@ -85,6 +85,7 @@ group :development, :test do
   gem 'factory_girl_rails', '4.2.1'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
+  gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
   gem 'pry'
   gem 'pry-debugger'

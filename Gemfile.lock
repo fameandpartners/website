@@ -552,7 +552,7 @@ GEM
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
-    timers (1.1.0)
+    timers (4.0.0)
     tire (0.6.0)
       activemodel (>= 3.0)
       activesupport
@@ -638,6 +638,7 @@ DEPENDENCIES
   letter_opener (= 0.0.2)!
   libv8 (~> 3.16)
   mail_view!
+  net-ssh (~> 2.7.0)
   newrelic_rpm
   oink
   paperclip
