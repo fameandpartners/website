@@ -16,7 +16,6 @@
       .submit-form.input.clearfix
         .fleft = f.submit 'Log-in', class: ' btn button primary', tabindex: 3
         .fright
-          = link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form')
-          = link_to t(:forgot_password), main_app.new_spree_user_password_path
-
+          #{link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form')}
+          #{link_to t(:forgot_password), main_app.new_spree_user_password_path}
 div data-hook="login_extras"

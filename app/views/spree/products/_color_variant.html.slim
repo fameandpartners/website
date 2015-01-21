@@ -8,7 +8,7 @@ ruby:
   .picture
     = link_to colored_variant_path(variant), :title => variant.product.name do
       / variant.images.map(&:large)
-      = hoverable_image_tag '/images/missing.png', alt: variant.product.name
+      = hoverable_image_tag variant.images.map(&:large), alt: variant.product.name
     .popup.striped
       .fleft.quick-view
         = quick_view_link(variant.product)
