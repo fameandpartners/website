@@ -7,7 +7,7 @@ module Spree
       respond_to :html, :js, :json
 
       def edit
-        @preferences = OpenStruct.new(get_preferences)
+        @preferences = OpenStruct.new(preferences)
       end
 
       def update
@@ -17,37 +17,43 @@ module Spree
           format.js   do
             render nothing: true, status: :ok
           end
+
           format.html do
             redirect_to admin_stock_invent_path
           end
         end
       end
 
-      # remote
       def status
-        preferences = get_preferences
+        access_token  = StockInvent::GoogleAuth.new(preferences).access_token
+        stock_data    = StockInvent::GoogleSpreadsheet.new(
+          access_token: access_token,
+          file_url:     preferences['stock_invent_file_url']
+        ).read
 
-        @status = StockInvent::GoogleSpreadsheet.new(
-          stock_invent_provider_key:  preferences[:stock_invent_provider_key],
-          stock_invent_provider_secret: preferences[:stock_invent_provider_secret],
-          stock_invent_refresh_token: preferences[:stock_invent_refresh_token],
-          stock_invent_file_url:      preferences[:stock_invent_file_url]
-        ).status
+        @status = :valid
+      rescue Exception => e
+        @status = :invalid
       end
 
-      # admin_stock_invent_access_token_request_path
       def google_auth
+        auth = StockInvent::GoogleAuth.new(preferences).auth
+        auth.redirect_uri = admin_stock_invent_google_auth_callback_url
+
         # approval_prompt: auto   # default
-        # approval_prompt: force  # to receive refresh token
+        # approval_prompt: force  # to receive refresh token each time
         redirect_to auth.authorization_uri(approval_prompt: 'force').to_s
       end
 
       def auth_callback
+        auth = StockInvent::GoogleAuth.new(preferences).auth
+        # for case with non-refreshing token this required
+        auth.redirect_uri = admin_stock_invent_google_auth_callback_url
         auth.code = params[:code]
 
         auth.fetch_access_token!
 
-        update_preference('stock_invent_refresh_token', auth.refresh_token)
+        update_preferences(stock_invent_refresh_token: auth.refresh_token)
 
         # update token
         redirect_to admin_stock_invent_path, notice: 'permissions tokens has been successfully updated'
@@ -59,29 +65,6 @@ module Spree
           Spree::Preference
         end
 
-        def client
-          @client ||= begin
-            Google::APIClient.new(
-              application_name: 'Fame&Partners spreadsheet reader',
-              application_version: '0.0.1',
-              auto_refresh_token: true
-            )
-          end
-        end
-
-        def auth
-          @auth ||= begin
-            preferences = get_preferences
-
-            auth = client.authorization
-            auth.client_id = preferences[:stock_invent_provider_key]
-            auth.client_secret = preferences[:stock_invent_provider_secret]
-            auth.scope = "https://www.googleapis.com/auth/drive " + "https://spreadsheets.google.com/feeds/"
-            auth.redirect_uri = admin_stock_invent_google_auth_callback_url
-            auth
-          end
-        end
-
         def preferences_keys
           [
             "stock_invent_provider_key",
@@ -91,41 +74,17 @@ module Spree
           ]
         end
 
+        def preferences
+          @_preferences ||= Repositories::SpreePreference.read_all(preferences_keys)
+        end
+
         def update_preferences(values)
-          preferences_keys.map do |key|
-            value = values[key]
-            update_preference(key, value)
-            value
-          end
-        end
-
-        def update_preference(key, value)
-          preference = Spree::Preference.where(key: key).first_or_initialize
-          preference.value_type ||= 'string'
-          preference.value = value
-          preference.save
-        end
-
-        def get_preferences
-          {}.tap do |preferences|
-            preferences_keys.each do |key|
-              preferences[key.to_sym] = get_preference(key)
+          @_preferences = nil
+          values.keys.each do |key|
+            if preferences_keys.include?(key.to_s)
+              Repositories::SpreePreference.update(key, values[key])
             end
           end
-        end
-
-        def get_preference(key)
-          Spree::Preference.where(key: key.to_s).first.try(:value) || ''
-        end
-
-        def client_id
-          #return '761566927162-dbjpt2if542065lnjsmhvhgf5vcbfvuv.apps.googleusercontent.com'
-          @client_id ||= get_preference('stock_invent_provider_key')
-        end
-
-        def client_secret
-          #return 'WNnu44bDCHMIPUhtE_maOHPa'
-          @client_secret ||= get_preference('stock_invent_provider_secret')
         end
     end
   end
