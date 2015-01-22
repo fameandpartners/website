@@ -8,3 +8,8 @@ if Rails.env.production?
     url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
   end
 end
+if Rails.env.development?
+  Tire.configure do
+    logger STDERR, :level => 'debug'
+  end
+end
