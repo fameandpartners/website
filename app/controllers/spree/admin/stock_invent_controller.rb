@@ -25,9 +25,13 @@ module Spree
 
       # remote
       def status
+        preferences = get_preferences
+
         @status = StockInvent::GoogleSpreadsheet.new(
-          stock_invent_access_token:  get_preference(:stock_invent_access_token),
-          stock_invent_file_url:      get_preference(:stock_invent_file_url)
+          stock_invent_provider_key:  preferences[:stock_invent_provider_key],
+          stock_invent_provider_secret: preferences[:stock_invent_provider_secret],
+          stock_invent_refresh_token: preferences[:stock_invent_refresh_token],
+          stock_invent_file_url:      preferences[:stock_invent_file_url]
         ).status
       end
 
@@ -35,7 +39,7 @@ module Spree
       def google_auth
         # approval_prompt: auto   # default
         # approval_prompt: force  # to receive refresh token
-        redirect_to auth.authorization_uri(approval_prompt: 'auto').to_s
+        redirect_to auth.authorization_uri(approval_prompt: 'force').to_s
       end
 
       def auth_callback
@@ -43,11 +47,10 @@ module Spree
 
         auth.fetch_access_token!
 
-        update_preference('stock_invent_access_token',  auth.access_token)
         update_preference('stock_invent_refresh_token', auth.refresh_token)
 
         # update token
-        redirect_to admin_stock_invent_path, notice: 'access token has been successfully updated'
+        redirect_to admin_stock_invent_path, notice: 'permissions tokens has been successfully updated'
       end
 
       private
@@ -58,7 +61,7 @@ module Spree
 
         def client
           @client ||= begin
-            client ||= Google::APIClient.new(
+            Google::APIClient.new(
               application_name: 'Fame&Partners spreadsheet reader',
               application_version: '0.0.1',
               auto_refresh_token: true
@@ -68,9 +71,11 @@ module Spree
 
         def auth
           @auth ||= begin
+            preferences = get_preferences
+
             auth = client.authorization
-            auth.client_id = client_id
-            auth.client_secret = client_secret
+            auth.client_id = preferences[:stock_invent_provider_key]
+            auth.client_secret = preferences[:stock_invent_provider_secret]
             auth.scope = "https://www.googleapis.com/auth/drive " + "https://spreadsheets.google.com/feeds/"
             auth.redirect_uri = admin_stock_invent_google_auth_callback_url
             auth
@@ -81,7 +86,6 @@ module Spree
           [
             "stock_invent_provider_key",
             "stock_invent_provider_secret",
-            "stock_invent_access_token",
             "stock_invent_refresh_token",
             "stock_invent_file_url"
           ]

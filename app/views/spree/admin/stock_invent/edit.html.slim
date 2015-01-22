@@ -19,11 +19,14 @@ br
   .field
     = t(:provider_secret)
     = text_field_tag 'preferences[stock_invent_provider_secret]', @preferences.stock_invent_provider_secret, class: 'fullwidth'
+    .hint
+      ' See google doc for reference
+      = link_to 'here', 'https://developers.google.com/drive/web/credentials'
 
   .field
-    = t(:access_token)
-    = link_to 'Refresh token / give access to YOUR docs', admin_stock_invent_access_token_request_path
-    = text_field_tag 'preferences[stock_invent_access_token]', @preferences.stock_invent_access_token.present? ? 'token set' : 'access token not specified', class: 'fullwidth', disabled: true
+    = t(:permissions)
+    = link_to 'Update refresh token / give access to YOUR docs', admin_stock_invent_access_token_request_path
+    = text_field_tag 'preferences[stock_invent_access_token]', @preferences.stock_invent_refresh_token.present? ? 'token set' : 'access token not specified', class: 'fullwidth', disabled: true
 
   .field
     = t(:file_url)
