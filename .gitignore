@@ -49,3 +49,6 @@ config/database.yml
 *.orig
 
 ~/Library/Application Support/Sublime Text 3/Packages/
+bin/rails
+bin/rake
+bin/spring
