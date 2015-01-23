@@ -30,6 +30,11 @@ module FameAndPartners
       Dir.glob(File.join(File.dirname(__FILE__), "../app/repositories/**/*.rb")) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+
+      # note: load reports manually
+      #Dir.glob(File.join(File.dirname(__FILE__), "../app/reports/**/*.rb")) do |c|
+      #  Rails.configuration.cache_classes ? require(c) : load(c)
+      #end
     end
 
     # Settings in config/environments/* take precedence over those specified here.

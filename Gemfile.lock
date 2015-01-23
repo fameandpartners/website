@@ -208,8 +208,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    celluloid (0.16.0)
-      timers (~> 4.0.0)
+    celluloid (0.14.1)
+      timers (>= 1.0.0)
     chronic (0.10.2)
     ckeditor (4.0.4)
       mime-types
@@ -552,7 +552,7 @@ GEM
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
-    timers (4.0.0)
+    timers (1.1.0)
     tire (0.6.0)
       activemodel (>= 3.0)
       activesupport
