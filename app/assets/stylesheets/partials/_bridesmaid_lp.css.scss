@@ -1,3 +1,4 @@
+
 .bridesmaid_lp, .amfam_lp {
   margin-top: -8px;
 
@@ -68,13 +69,43 @@
     }
 
     .more {
-      margin-top: 70px;
+      margin-top: 40px;
       h2 {
-        width: 470px;
+        width: 100%;
         margin-bottom: 40px;
+        background-color: #FEF5F0;
+        color:#000000;
       }
     }
   }
+}
+
+.bridesmaid_lp {
+    .sb3 {
+      @include clearfix;
+      .right {
+        .image {
+          float: right;
+          margin: 0px;
+        }
+      }
+      .left {
+        .image {
+          float: left;
+          margin: 0px;
+        }
+      }
+      h2 {
+        font-family: "Novecento", sans-serif;
+        font-size:18pt;
+        margin-top:40px;
+        margin-left:20px;
+        margin-right:20px;
+        text-transform: none;
+        font-style: italic;
+        font-weight:normal;        
+      }
+    }
 }
 
 .amfam_lp{
