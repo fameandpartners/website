@@ -208,6 +208,8 @@ module ProductsHelper
 
 
 
+
+
   def line_item_image_url(line_item, size = :small)
     image = line_item.image
     if image.present? && image.attachment.present?
