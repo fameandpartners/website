@@ -3,25 +3,8 @@
 #
 # require 'sidekiq/api'
 # Sidekiq::Queue.new.clear
-=begin
- def send_all_to(email)
-   user = Spree::User.where(email: email).first || Spree::User.new(email: email)
-   BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
-     BridesmaidPartyEmailMarketingMailer.send(code, user.id, options = { bridesmaids_count: 2 }).deliver
-   end
-   BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 4 }).deliver
-   BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 6 }).deliver
- end
- send_all_to('bydiansky@gmail.com')
-
- # to test scheduling all emails [ forces delete notifications ]
-  Sidekiq::Queue.new.clear
-  user = Spree::User.find(21029)
-  user.email_notifications.delete_all
-  BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
-    BridesmaidPartyEmailMarketing.schedule_notification(code, user.id, { bridesmaids_count: 3 })
-  end
-=end
+#
+# BridesmaidPartyEmailMarketing.test_schedule_all_emails('malleus.petrov@gmail.com')
 
 class BridesmaidPartyEmailMarketing
   # for validation/dev/testing purposes
@@ -35,6 +18,35 @@ class BridesmaidPartyEmailMarketing
       'free_styling_lesson_for_maid_of_honour',
     ]
   end
+
+  # BridesmaidPartyEmailMarketing.test_send_emails('')
+  def self.test_send_emails(email)
+    user = Spree::User.find_by_email(email)
+
+    BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
+      BridesmaidPartyEmailMarketing.send(code, user.id, { bridesmaids_count: 3 }).deliver
+    end
+
+    BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 4 }).deliver
+    BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 6 }).deliver
+  end
+
+  # BridesmaidPartyEmailMarketing.test_schedule_all_emails('')
+  def self.test_schedule_all_emails(email)
+    user = Spree::User.find_by_email(email)
+
+    BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
+      user.email_notifications.where(code: code).delete_all
+      BridesmaidPartyEmailMarketing.schedule_notification(code, user.id, { bridesmaids_count: 2 })
+    end
+    BridesmaidPartyEmailMarketing.schedule_notification(
+      'promo_for_bride_with_bridesmaids', user.id, { bridesmaids_count: 4 }
+    )
+    BridesmaidPartyEmailMarketing.schedule_notification(
+      'promo_for_bride_with_bridesmaids', user.id, { bridesmaids_count: 6 }
+    )
+  end
+
 
   def self.send_emails
     #Brides who have completed the process, but did not share to bridesmaid
