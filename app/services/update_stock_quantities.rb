@@ -7,14 +7,14 @@
 class UpdateStockQuantites
   attr_reader :stock_data
 
-  def initialize(stock_data)
+  def initialize(stock_data = [])
     @stock_data = stock_data
   end
 
   # prepare transactions
   # after run
   def process
-    process_data
+    load_data
 
     Spree::Variant.update_all(count_on_hand: 0, on_demand: true)
     variants_data.each do |variant|
@@ -23,11 +23,11 @@ class UpdateStockQuantites
 
     Spree::Product.update_all(count_on_hand: 0, on_demand: true)
     products_data.each do |product|
-      Spree::Variant.where(id: product.id).update_all(count_on_hand: product.quantity, on_demand: false)
+      Spree::Product.where(id: product.id).update_all(count_on_hand: product.quantity, on_demand: false)
     end
 
     # schedule cache cleaning
-    ClearCacheWorker.perform_async(Time.now) if !Rails.env.development?
+    ClearCacheWorker.perform_async(Time.now) if (Rails.env.staging? || Rails.env.production?)
 
     true
   end
@@ -35,7 +35,7 @@ class UpdateStockQuantites
   private
 
     # ensure all things can be loaded, before reseting anything
-    def process_data
+    def load_data
       variants_data
       products_data
     end
@@ -59,7 +59,7 @@ class UpdateStockQuantites
             colour = stock_data_variant.colour.to_s.downcase
 
             variant = variant_options.find do |option|
-              option[:color_presentation].to_s.downcase == colour && option[:size_presentation] == size
+              option[:color_presentation].to_s.downcase == colour && option[:size_presentation].to_s == size
             end
 
             if variant.present?
