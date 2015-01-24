@@ -62,6 +62,10 @@ gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
 gem 'rollout'
 
+# engines
+
+gem 'landing_page', path: "engines/landing_page"
+
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
 
