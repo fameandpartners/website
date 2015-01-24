@@ -60,7 +60,7 @@ gem 'fog'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
-gem 'pry-rails'
+gem 'rollout'
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
