@@ -346,11 +346,17 @@ Spree::Product.class_eval do
     end
   end
 
+  # at least single size-color can be fast delivered
   def fast_delivery
-    factory_name = property('factory_name').to_s.downcase.strip
-    in_stock = property('in_stock').to_s.downcase.strip
-    return (factory_name == "surry hills" || factory_name == "iconic") || in_stock == "yes"
+    self.variants.any?{|variant| variant.fast_delivery}
   end
+  alias_method :fast_delivery?, :fast_delivery
+
+#  def fast_delivery
+#    factory_name = property('factory_name').to_s.downcase.strip
+#    in_stock = property('in_stock').to_s.downcase.strip
+#    return (factory_name == "surry hills" || factory_name == "iconic") || in_stock == "yes"
+#  end
 
   def discount
     return @discount if instance_variable_defined?('@discount')
