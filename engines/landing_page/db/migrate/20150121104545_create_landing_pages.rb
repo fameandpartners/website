@@ -1,9 +1,11 @@
 class CreateLandingPages < ActiveRecord::Migration
   def change
     create_table :landing_pages do |t|
-      t.string    :path, :null => false
+      t.text      :path, :null => false
+      t.text      :title, :null => false
+      t.boolean   :product
       t.boolean   :filterable
-      t.text      :taxon_ids, :null => false
+      t.text      :taxon_ids, :null => true
       # t.text      :code, :null => false
       # t.text      :banner, :null => false
       # t.text      :content
