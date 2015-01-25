@@ -5,19 +5,12 @@ module LandingPage
       render :layout => 'landing_page/application'
     end
 
-    def page
-      Page.delete_all
-      Page.create!(:path => params[:path], :title => 'BlahVtha')
-      
-      @page ||= Page.where(:path => params[:path]).first
-    end
-
-    def products
-      [] #Products::ColorVariantsFilterer.new(params)
-    end
-
-    def product_page
-      @product_page_view ||= ProductPageView.new(page, product)
+    def product_page      
+      # Page.delete_all
+      # Page.create!(:path => params[:path], :title => 'BlahVtha')
+      page ||= Page.where(:path => params[:path]).first
+      products =  [] #Products::ColorVariantsFilterer.new(params)
+      @product_page_view ||= ProductPageView.new(page, products)
     end
 
     helper_method :product_page
