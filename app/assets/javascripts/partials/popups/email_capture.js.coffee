@@ -48,6 +48,9 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
 
     @container.find('.modal-container').css({width: opts.width}, 'min-height':'300px').center()    
 
+    if @opts.submit
+      @container.find('.modal-container .submitbox').val(@opts.submit) 
+
     window.onresize = (event) =>
       @container.find('.modal-container').center()      
       
