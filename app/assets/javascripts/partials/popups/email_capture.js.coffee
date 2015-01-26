@@ -43,12 +43,11 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
 
   # callbacks
   showModalWindow: (formHtml) ->
-    console.log @opts
     @container.addClass(content+'-popup').fadeIn()
     @container.find('.modal-container .item').addClass('modal-form').html(formHtml)
-    @container.find('.modal-container').css({width: opts.width, 'max-width':'700px'}).center()    
+
+    @container.find('.modal-container').css({width: opts.width}, 'min-height':'300px').center()    
 
     window.onresize = (event) =>
-      @container.find('.modal-container').center()    
-
-
+      @container.find('.modal-container').center()      
+      

@@ -413,9 +413,10 @@
 	.modal-container {
 		width:90%;	
 		padding: 50px;
-
+		text-align: center;
+		
 		.title {
-			font-size:22pt;
+			font-size:24pt;
 			font-weight:bold;
 		}
 		
@@ -427,7 +428,7 @@
 				border: 2px solid #666666;
 				box-shadow: none;
 				width:100%;
-				font-size:22pt;
+				font-size:24pt;
 				text-transform:none;
 			}
 		}
