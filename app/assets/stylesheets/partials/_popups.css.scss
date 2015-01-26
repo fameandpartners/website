@@ -441,11 +441,16 @@
 			width:400px;
 			padding-top:220px;
 			color:#FFFFFF;
-			font-weight:bold;
-			font-size:16pt;
+			font-weight:normal;
+			font-size:1pt;
 
 			.share-this {
 				display:none;
+			}
+
+			.promocode {
+				font-weight:bold;
+				font-size:19pt;
 			}
 		}
 
