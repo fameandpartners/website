@@ -7,9 +7,9 @@ javascript:
   contentparam = '#{params[:dmb]}';
   pop_switch = '#{params[:pop_switch]}';
   pop_title = '#{strip_tags(params[:pop_title])}';
+  opts = {width: '700px'}
 
-
-  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || pop_switch == '1') {
+  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| pop_switch == '1') {
 
     switch(contentparam) {
       case 'birthday.gif':
@@ -27,12 +27,17 @@ javascript:
       case 'bridesmaid_rokt':
         content = 'bridesmaid';
         break;
+      case 'jansale':
+        content = 'jansale';
+        opts.width = '620px'
+        opts.height = '320px'
+        break;        
       default:
         content = 'bday';
     }
     
     $(document).ready(function(){
-      setTimeout(openpop, 5000);
+      setTimeout(openpop, 1);
     });
   };
 
@@ -42,7 +47,7 @@ javascript:
 
   function openpop(){
     popup = new window.popups.EmailCaptureModalPopup();
-    popup.show(content, pop_title)
+    popup.show(content, pop_title, opts)
   }
 
   $(function(){
