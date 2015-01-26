@@ -12,7 +12,8 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
     $(document).bind 'keyup', @keyPressHandler
 
   # external api
-  show: (content, pop_title) ->
+  show: (content, pop_title, opts) ->
+    @opts = opts
     @popupLoadRequest(content, pop_title)
       .done(@showModalWindow)
       .fail(@hide)
@@ -42,6 +43,12 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
 
   # callbacks
   showModalWindow: (formHtml) ->
+    console.log @opts
     @container.addClass(content+'-popup').fadeIn()
     @container.find('.modal-container .item').addClass('modal-form').html(formHtml)
-    @container.find('.modal-container').css({width: '700px'}).center()
+    @container.find('.modal-container').css({width: opts.width, 'max-width':'700px'}).center()    
+
+    window.onresize = (event) =>
+      @container.find('.modal-container').center()    
+
+

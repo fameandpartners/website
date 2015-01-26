@@ -408,6 +408,33 @@
 	background: url('_popups/prom.jpg') no-repeat;
 	padding-left: 200px;
 }
+
+.jansale-popup {
+	.modal-container {
+		width:80%;
+		max-width:700px;
+		padding: 30px;
+
+		.title {
+			font-size:16pt;
+			font-weight:bold;
+		}
+		
+		.string {
+			width:100%;
+			min-width:200px;
+
+			.input {
+				border: 2px solid #666666;
+				box-shadow: none;
+				width:100%;
+				font-size:13pt;
+				text-transform:none;
+			}
+		}
+	}
+}
+
 .bridesmaid-popup .modal-container {
 	background: url('_popups/bridesmaid1.jpg') no-repeat;
 	border-color: #FFDFEA;
