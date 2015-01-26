@@ -443,6 +443,10 @@
 			color:#FFFFFF;
 			font-weight:bold;
 			font-size:16pt;
+
+			.share-this {
+				display:none;
+			}
 		}
 
 		::-webkit-input-placeholder {
