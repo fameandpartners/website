@@ -42,9 +42,9 @@ class BridesmaidPartyEmailMarketingMailer < ActionMailer::Base
     @bridesmaids_count = options[:bridesmaids_count]
     @bridesmaids_count ||= user.bridesmaid_party_events.order('bridesmaids_count desc').first.try(:bridesmaids_count).to_i
 
-    if @bridesmaids_count < 3
+    if @bridesmaids_count <= 3 # 0,1,2,3
       subject = "Help has arrived. Take 15% OFF your bridesmaids' dresses & take away the stress!"
-    elsif @bridesmaids_count < 5
+    elsif @bridesmaids_count <= 5 # 4,5
       subject = "Help has arrived. Take 20% OFF your bridesmaids' dresses & take away the stress!"
     else
       subject = "Help has arrived. Take 25% OFF your bridesmaids' dresses & take away the stress!"
