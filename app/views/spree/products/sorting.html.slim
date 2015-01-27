@@ -16,7 +16,7 @@
   - unless marketing_landing_page?
     .category-header
       - if true #sale_active?
-        = image_tag('banners/jan15-flashsale-banner.jpg')
+        = image_tag('banners/jan15-flashsale-banner.png')
       - else
         h1 = @page_info[:banner_title]
         h2 = raw @page_info[:banner_text]
@@ -24,7 +24,7 @@
 - else
     .category-header
       - if true #sale_active?
-        = image_tag('banners/jan15-flashsale-banner.jpg')
+        = image_tag('banners/jan15-flashsale-banner.png')
       - else
         h1 = @page_info[:banner_title]
         h2 = raw @page_info[:banner_text]
