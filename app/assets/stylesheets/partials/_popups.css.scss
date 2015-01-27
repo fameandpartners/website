@@ -534,9 +534,9 @@
 
 	.string {
 		margin:auto;
-		text-align:center;
-		width:300px;
-		margin-top:220px;
+		text-align:center;		
+		margin-top:240px;
+		width:400px;
 
 		.input {
 			min-width:300px;
@@ -544,22 +544,50 @@
 			border: 1px solid #000000;
 			box-shadow:none;
 			clear:both;
+			font-size:17pt;
+			text-transform:none;		
 		}
 	}
 	.thanks {
 		margin:auto;
 		text-align:center;
 		width:300px;
-		margin-top:220px;	
-		font-size:12pt;
+		margin-top:215px;	
 		font-weight:bold;
-		color: #2C2F5A;
-	}
+		color:#FFFFFF;
+		font-weight:normal;
+		font-size:15pt;
 
+		.share-this {
+			display:none;
+		}
+
+		.promo-code {
+			font-weight:bold;
+			font-size:19pt;
+		}
+	}
 	.btn{
 		background: #2C2F5A;
 		color: #FFFFFF;
 	}
+
+		::-webkit-input-placeholder {
+		   text-align: center;
+		}
+
+		:-moz-placeholder { /* Firefox 18- */
+		   text-align: center;  
+		}
+
+		::-moz-placeholder {  /* Firefox 19+ */
+		   text-align: center;  
+		}
+
+		:-ms-input-placeholder {  
+		   text-align: center; 
+		}
+
 }
 
 .prom-popup .title{
