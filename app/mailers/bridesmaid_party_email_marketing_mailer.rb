@@ -6,35 +6,46 @@ class BridesmaidPartyEmailMarketingMailer < ActionMailer::Base
 
   def share_completed_bridesmaid_profile(user_id, options = {})
     user = Spree::User.find(user_id)
-    mail(
-      to: user.email,
-      subject: "It's time to reveal your secret!"
-    )
+
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: user.email,
+        subject: t('emails.subjects.bridesmaid_marketing.share_completed_bridesmaid_profile')
+      )
+    end
   end
 
   def bridesmaid_member_not_purchased(user_id, options = {})
     user = Spree::User.find(user_id)
-    mail(
-      to: user.email,
-      subject: "Forgetting something? Tick 'Bridesmaids dresses' off your list & purchase with 15% OFF!"
-    )
+
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: user.email,
+        subject: t('emails.subjects.bridesmaid_marketing.bridesmaid_member_not_purchased')
+      )
+    end
   end
 
   def concierge_service_offer(user_id, options = {})
     user = Spree::User.find(user_id)
-    mail(
-      to: user.email,
-      template_name: (user.id.even? ? 'concierge_service_offer_a' : 'concierge_service_offer_b'),
-      subject: 'Help us, help you! For just $99 we can take the stress & organise bridesmaids dresses'
-    )
+
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: user.email,
+        template_name: (user.id.even? ? 'concierge_service_offer_a' : 'concierge_service_offer_b'),
+        subject: t('emails.subjects.bridesmaid_marketing.concierge_service_offer')
+      )
+    end
   end
 
   def reminder_to_brides(user_id, options = {})
     user = Spree::User.find(user_id)
-    mail(
-      to: user.email,
-      subject: "Now you have the ring, it's time for a dress! 15% OFF your engagement dress!"
-    )
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: user.email,
+        subject: t('emails.subjects.bridesmaid_marketing.reminder_to_brides')
+      )
+    end
   end
 
   def promo_for_bride_with_bridesmaids(user_id, options = {})
@@ -43,21 +54,26 @@ class BridesmaidPartyEmailMarketingMailer < ActionMailer::Base
     @bridesmaids_count ||= user.bridesmaid_party_events.order('bridesmaids_count desc').first.try(:bridesmaids_count).to_i
 
     if @bridesmaids_count <= 3 # 0,1,2,3
-      subject = "Help has arrived. Take 15% OFF your bridesmaids' dresses & take away the stress!"
+      discount = 15
     elsif @bridesmaids_count <= 5 # 4,5
-      subject = "Help has arrived. Take 20% OFF your bridesmaids' dresses & take away the stress!"
+      discount = 20
     else
-      subject = "Help has arrived. Take 25% OFF your bridesmaids' dresses & take away the stress!"
+      discount = 25
     end
+    subject = t('emails.subjects.bridesmaid_marketing.promo_for_bride_with_bridesmaids', discount: discount)
 
-    mail(to: user.email, subject: subject)
+    Slim::Engine.with_options(:pretty => true) do
+      mail(to: user.email, subject: subject)
+    end
   end
 
   def free_styling_lesson_for_maid_of_honour(user_id, options = {})
     user = Spree::User.find(user_id)
-    mail(
-      to: user.email,
-      subject: "Maid of Honour duties taking a toll? Here's a FREE styling session to kick start the Bridal Party!"
-    )
+    Slim::Engine.with_options(:pretty => true) do
+      mail(
+        to: user.email,
+        subject: t('emails.subjects.bridesmaid_marketing.free_styling_lesson_for_maid_of_honour')
+      )
+    end
   end
 end
