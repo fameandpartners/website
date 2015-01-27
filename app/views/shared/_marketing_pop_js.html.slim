@@ -9,7 +9,7 @@ javascript:
   pop_title = '#{strip_tags(params[:pop_title])}';
   opts = {width: '700px'}
 
-  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| pop_switch == '1') {
+  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || pop_switch == '1') {
 
     switch(contentparam) {
       case 'birthday.gif':
@@ -32,6 +32,9 @@ javascript:
         opts.width = '620px'
         opts.height = '320px'
         opts.submit = 'GET IT NOW'
+        break;        
+      case 'bride15p':
+        content = 'bride15p';
         break;        
       default:
         content = 'bday';
