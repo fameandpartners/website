@@ -140,24 +140,11 @@ FameAndPartners::Application.routes.draw do
     match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
   end
 
-  #if Rails.env.production?
-  #  match '/blog(/*path)' => redirect(host: configatron.host, path: '/')
-  #end
-
   # Blog routes
-  scope '/blog' do
+  scope "(/:site_version)/blog", constraints: { site_version: /(us|au)/ } do
     get '/' => 'blog#index', as: :blog
     get '/about'   => 'blog#about', as: :about
     get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
-
-    #get '/celebrities' => 'blog/celebrities#index', as: :blog_celebrities
-    #get '/celebrities/photos' => 'blog/celebrities#index', as: :blog_celebrity_photos
-
-    #get '/celebrity/:slug/photos' => 'blog/celebrities#show', as: :blog_celebrity
-    #get '/celebrity/:slug/posts' => 'blog/celebrities#show', defaults: {type: 'posts'}, as: :blog_celebrity_posts
-
-    #post '/celebrity_photo/:id/like' => 'blog/celebrity_photos#like', as: :blog_celebrity_photo_like
-    #post '/celebrity_photo/:id/dislike' => 'blog/celebrity_photos#dislike', as: :blog_celebrity_photo_dislike
 
     get '/stylists' => 'blog/authors#index', as: :blog_authors
     get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
