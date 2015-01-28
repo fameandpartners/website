@@ -310,6 +310,9 @@ body.checkout {
 		font-family: $fontFive;
 		font-size: 13px;
 	}
+	p.hint {
+		color:#999999;
+	}
 	input[type="radio"], input[type="checkbox"] {
 		margin-right: 5px;
 	}
