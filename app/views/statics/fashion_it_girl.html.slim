@@ -8,12 +8,38 @@ div style="margin-left: 20px"
 		    	= image_tag('fashion-it-girl/fashion_it_girl_banner.gif', :alt => 'Limited time shop now', :width => 285)
 				    	
 		.grid-9
+
+			div id="loading-message" 
+				= image_tag('https://s3.amazonaws.com/media.wishpond.com/media/003/635/018/original.jpg?1420597537', :alt => "Fashion IT Girl 2015", :style => "background-color:#CEB6CB;margin-top:41px;height:159px")
+
+				div style="margin-left:50px;margin-top:40px;"  
+					h1 style="font-size:18pt"
+						' Loading the Fashion IT Girl 2015 Competition
+					p We have lots of entires, so it can take a little while				
+
+		    javascript:
+		        
+		        function iframer(){
+		        	var f = $('#wpsc487301');		        	
+		        	if (f.length > 0) {		        		
+		        		clearInterval(handle);
+		        		$('#wpsc487301').on("load", function() {	           		
+							$("#loading-message").hide();
+						});
+		        	}		        	
+		        }
+		        var handle = setInterval(iframer, 100);
+		       
+
 			- if current_site_version.is_usa?
+			 
 			    javascript:
-			      var wpsc487301 = wpsc487301 || {};
-			      wpsc487301.w = '810'; // Width in pixels or % of containing element.
-	        
+            		var wpsc487301 = wpsc487301 || {};
+			      	wpsc487301.w = '810'; // Width in pixels or % of containing element.
+				  	    		           
 	        	script src="//www.wishpond.com/sc/487301.js" type="text/javascript"
+
+	        
 			- else				
 				= image_tag('https://s3.amazonaws.com/media.wishpond.com/media/003/635/018/original.jpg?1420597537', :alt => "Fashion IT Girl 2015", :style => "background-color:#CEB6CB;margin-top:41px;height:159px")
 
