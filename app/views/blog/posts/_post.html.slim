@@ -12,7 +12,7 @@ article.blog-post
     - if post.user.present?
       .author
         ' by
-        = link_to blog_authors_post_path(post.user.slug) do
+        = link_to blog_authors_post_path(stylist: post.user.slug) do
           / .avatar
             = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
           span.name= post.user.fullname

@@ -10,18 +10,18 @@
           article.blog-post
             h2.post-title
               - if post.red_carpet?
-                = link_to post.title, blog_red_carpet_post_path(post.slug)
+                = link_to post.title, blog_red_carpet_post_path(post_slug: post.slug)
               - else
-                = link_to post.title, blog_post_by_category_path(post.category.slug, post.slug)
+                = link_to post.title, blog_post_by_category_path(category_slug: post.category.slug, post_slug: post.slug)
             .post-meta
               .date= post.occured_at_formatted
               .comments
                 - if post.red_carpet?
-                  = link_to '', blog_red_carpet_post_path(post.slug) + '#disqus_thread'
+                  = link_to '', blog_red_carpet_post_path(post_slug: post.slug) + '#disqus_thread'
                 - else
-                  = link_to '', blog_post_by_category_path(post.category.slug, post.user.slug) + '#disqus_thread'
+                  = link_to '', blog_post_by_category_path(category_slug: post.category.slug, post_slug: post.user.slug) + '#disqus_thread'
               .author
-                = link_to blog_authors_post_path(post.user.slug) do
+                = link_to blog_authors_post_path(stylist: post.user.slug) do
                   / .avatar
                     = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
                   span.name= post.user.fullname

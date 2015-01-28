@@ -1,15 +1,15 @@
 - if post.present? && post.slug.present?
   - if post.red_carpet?
-    - url = blog_red_carpet_post_path(post.slug)
+    - url = blog_red_carpet_post_path(post_slug: post.slug)
   - else
-    - url = blog_post_by_category_path(post.category.slug, post.slug)
+    - url = blog_post_by_category_path(category_slug: post.category.slug, post_slug: post.slug)
   article.post.single
     h2= link_to post.title, url
     .post-meta
       .date= post.occured_at_formatted
       .comments= link_to '', url + '#disqus_thread'
       .author
-        = link_to blog_authors_post_path(post.user.slug) do
+        = link_to blog_authors_post_path(stylist: post.user.slug) do
           .avatar
             = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
           .name= post.user.fullname
