@@ -21,7 +21,8 @@ ruby:
     .sb1 style="position:relative;margin-top:20px;margin-bottom:15px;"
       h1 style="position:absolute;top:20px; font-size:50px;color:#FFFFFF;" 
       = image_tag 'campaigns/bridemaid/bridesmaid-dress-banner.jpg', width: 1140, :alt => "Bridesmaid dresses your bridesmaids will love ... and wear again. Bridesmaid in a lavender dress holding a glass of champagne"
-      = image_tag 'campaigns/bridemaid/promocode.jpg', width: 1140, :alt => "Get 15% Off. Use Bride15p at Checkout", :style => "margin-top:-3px;"
+     
+      = image_tag 'campaigns/bridemaid/promocode.jpg', width: 1140, :alt => "Get 15% Off. Use Bride15p at Checkout", :style => "display:none;margin-top:-3px;", :id => "bridemaid-promocode"
       
     .inner  
       .catalog
@@ -35,7 +36,7 @@ ruby:
               .price = price_for_product(dress) 
       .sb3 style="margin-bottom:15px;"
         .left style="height:349px;width:50%;"
-          h2 t(:landing_bridesmaid_one)
+          h2= t('landing.bridesmaid.one')
         .right style="margin-right: 0px;"
           = image_tag 'campaigns/bridemaid/bridesmaid-dress-1.jpg', width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
       .catalog
@@ -51,7 +52,7 @@ ruby:
         .left style="margin-right: 0px;"
           = image_tag 'campaigns/bridemaid/bridesmaid-dress-2.jpg', width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
         .right style="height:349px;width:50%;"
-          h2 t(:landing_bridesmaid_two)
+          h2= t('landing.bridesmaid.two')
       .catalog
         - products[8..11].each do |dress|
           .catalog-item
@@ -63,7 +64,7 @@ ruby:
               .price = price_for_product(dress)
       .sb3 style="margin-bottom:15px;"
         .left style="height:349px;width:50%;"
-          h2 t(:landing_bridesmaid_three)
+          h2= t('landing.bridesmaid.three')
         .right style="margin-right: 0px;"
           = image_tag 'campaigns/bridemaid/bridesmaid-dress-3.jpg', width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
       .catalog
