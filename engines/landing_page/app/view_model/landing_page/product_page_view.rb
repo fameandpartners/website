@@ -1,10 +1,14 @@
 class LandingPage::ProductPageView
-	attr_reader :page, :products
+	attr_reader :page, :filter
 
   delegate :title, :to => :page
   
-  def initialize(page, products)
-    @page, @products = page, products
+  def initialize(page, filter)
+    @page, @filter = page, filter
   end
 
+  def products
+    filter.color_variants
+  end
+  
 end
