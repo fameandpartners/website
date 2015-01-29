@@ -20,11 +20,14 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
     
 
   hide: () ->
+    if @opts.onHide 
+      @opts.onHide()
+
     @container.hide()
     $.cookie('email_capture', 'hide', { expires: 365, path: '/' })
     $(document).unbind 'keyup', @keyPressHandler
     @
-  
+
   # handlers
   closeButtonClickHandler: (e) ->
     e.preventDefault()

@@ -35,6 +35,11 @@ javascript:
         break;        
       case 'bride15p':
         content = 'bride15p';
+        opts.onHide = function() { 
+          if ($('.modal-container .thanks').length > 0) {
+            $("#bridemaid-promocode").show()
+          }
+        }
         break;        
       default:
         content = 'bday';
@@ -47,8 +52,6 @@ javascript:
   };
 
   window.marketing_landing_page = true;
-
-  
 
   function openpop(){
     popup = new window.popups.EmailCaptureModalPopup();
