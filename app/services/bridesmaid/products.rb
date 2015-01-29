@@ -96,10 +96,11 @@ class Bridesmaid::Products
     end
 
     def product_discounts
+      return @product_discounts if instance_variable_defined?('@product_discounts')
+
       @product_discounts ||= begin
-        active_sales_ids = Spree::Sale.active.pluck(:id)
         product_ids = search_results.map{|item| item.product.id }
-        Discount.for_products.where(discountable_id: product_ids).to_a
+        Repositories::Discount.read_all('Spree::Product', product_ids)
       end
     end
 

@@ -80,10 +80,11 @@ class Bridesmaid::SimilarProducts
     end
 
     def product_discounts
-      @product_disconts ||= begin
-        active_sales_ids = Spree::Sale.active.pluck(:id)
+      return @product_discounts if instance_variable_defined?('@product_discounts')
+
+      @product_discounts ||= begin
         product_ids = search_results.map{|item| item.product.id }
-        Discount.for_products.where(discountable_id: product_ids).to_a
+        Repositories::Discount.read_all('Spree::Product', product_ids)
       end
     end
 
