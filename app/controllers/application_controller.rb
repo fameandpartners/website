@@ -9,8 +9,10 @@ class ApplicationController < ActionController::Base
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
-  append_before_filter :get_visitor_info
-  append_before_filter :count_competition_participants, if: proc {|c| params[:cpt].present? }
+  #append_before_filter :get_visitor_info
+  append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
+  append_before_filter :capture_utm_params,                 if: proc {|c| params[:utm_campaign].present? }
+  append_before_filter :associate_user_by_utm_guest_token,  if: proc {|c| cookies[:utm_guest_token].present? }
 
   def count_competition_participants
     cpt = params[:cpt]
@@ -51,10 +53,41 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def get_visitor_info
-    # check referrer
-    
+  def capture_utm_params
+    utm_params = {
+      utm_campaign:   params[:utm_campaign],
+      utm_source:     params[:utm_source],
+      utm_medium:     params[:utm_medium],
+      utm_term:       params[:utm_term],
+      utm_content:    params[:utm_content],
+    }
 
+    service = Marketing::CaptureUtmParams.new(
+      current_spree_user,
+      cookies['utm_guest_token'],
+      utm_params.merge(referrer: request.referrer)
+    )
+    service.record_visit!
+
+    if service.user_token_created?
+      cookies.permanent[:utm_guest_token] = service.user_token
+    end
+  end
+
+  # it's shame to add such method to filter
+  # but we don't have 'after-sign-in' callback or single entry point for user log-in
+  def associate_user_by_utm_guest_token
+    if current_spree_user.present? && cookies[:utm_guest_token].present?
+      Marketing::UserVisits.asssociate_with_user_by_token(
+        user: current_spree_user, token: cookies[:utm_guest_token]
+      )
+      cookies.delete(:utm_guest_token)
+    end
+  end
+
+=begin
+  # NOTE: girlfriends popups seems disabled for now
+  def get_visitor_info
     #if session[:user_info] == nil
       host = request.referrer
       in_referrer = false
@@ -79,11 +112,9 @@ class ApplicationController < ActionController::Base
       session[:user_info] = true
 
       check_if_girlfriend(in_referrer, in_campaign, in_source)
-
     #else
     #  return
     #end
-  
   end 
 
   def check_if_girlfriend(in_referrer, in_campaign, in_source)
@@ -102,6 +133,7 @@ class ApplicationController < ActionController::Base
       return
     end
   end
+=end
 
   # default version. overrided in spree based controllers
   # ATTENTION!
