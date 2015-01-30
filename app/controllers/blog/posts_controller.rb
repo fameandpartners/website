@@ -35,7 +35,7 @@ class Blog::PostsController < BlogBaseController
 
     if @post.blank?
       if params[:category_slug] and (category = Blog::Category.find_by_slug(params[:category_slug]))
-        redirect_to blog_posts_by_category_path(category.slug) and return
+        redirect_to blog_posts_by_category_path(category_slug: category.slug) and return
       else
         redirect_to(blog_path) and return
       end

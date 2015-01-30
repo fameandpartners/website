@@ -408,6 +408,75 @@
 	background: url('_popups/prom.jpg') no-repeat;
 	padding-left: 200px;
 }
+
+.jansale-popup {
+	.modal-container {
+		background: url('_popups/xtra5-modal-bg.png') no-repeat;
+		width:620px;	
+		height:320px;
+		text-align: center;
+		
+		.string {
+			min-width:200px;
+			margin:auto;
+			text-align:center;
+			width:400px;
+			padding-top:235px;
+
+			.input {
+				border: 2px solid #666666;
+				box-shadow: none;
+				font-size:17pt;
+				text-transform:none;
+				color:#8A8A8A;
+				height:46px;
+			}
+			.btn {
+				background-color:#8A8A8A;
+			}
+		}
+
+		.thanks {
+			min-width:200px;
+			margin:auto;
+			text-align:center;
+			width:400px;
+			padding-top:220px;
+			color:#FFFFFF;
+			font-weight:normal;
+			font-size:17pt;
+
+			.share-this {
+				display:none;
+			}
+
+			.promo-code {
+				font-weight:bold;
+				font-size:19pt;
+			}
+		}
+
+		::-webkit-input-placeholder {
+		   text-align: center;
+		}
+
+		:-moz-placeholder { /* Firefox 18- */
+		   text-align: center;  
+		}
+
+		::-moz-placeholder {  /* Firefox 19+ */
+		   text-align: center;  
+		}
+
+		:-ms-input-placeholder {  
+		   text-align: center; 
+		}
+
+	}
+}
+
+
+
 .bridesmaid-popup .modal-container {
 	background: url('_popups/bridesmaid1.jpg') no-repeat;
 	border-color: #FFDFEA;

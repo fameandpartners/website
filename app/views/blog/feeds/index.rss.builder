@@ -12,9 +12,9 @@ xml.rss version: 2.0 do
 
     @posts.each do |post|
       if post.red_carpet?
-        url = blog_red_carpet_post_url(post.slug)
+        url = blog_red_carpet_post_url(post_slug: post.slug)
       elsif post.simple?
-        url = blog_post_by_category_url(post.category.slug, post.slug)
+        url = blog_post_by_category_url(category_slug: post.category.slug, post_slug: post.slug)
       end
 
       xml.item do

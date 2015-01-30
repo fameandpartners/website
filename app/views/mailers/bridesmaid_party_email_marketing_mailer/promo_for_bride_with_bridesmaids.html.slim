@@ -23,7 +23,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="640"
                   table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;"
                     tr
                       td width="248"  valign="top"
-                        - if @bridesmaids_count < 3
+                        - if @bridesmaids_count <= 3
                           div style="background-color: #ffffff; text-align: center;"
                             = image_tag "_email/bridesmaid/promo/promo-text-1.png", alt: "15% OFF for up to 3 bridesmaid dresses", :style => "display: inline-block; vertical-align:bottom; margin: 35px 0 40px;"
                             br
@@ -31,7 +31,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="640"
                             br
                             = link_to 'http://www.fameandpartners.com/bridesmaid-dresses' do
                               = image_tag "_email/bridesmaid/promo/promo-button.jpg", alt: "SHOP NOW", :style => "display: inline-block; vertical-align:bottom; margin-top: 30px;"
-                        - elsif @bridesmaids_count < 5
+                        - elsif @bridesmaids_count <= 5
                           div style="background-color: #ffffff; text-align: center;"
                             = image_tag "_email/bridesmaid/promo/promo-text-2.png", alt: "20% OFF for up to 5 bridesmaid dresses", :style => "display: inline-block; vertical-align:bottom; margin: 35px 0 40px;"
                             br
@@ -41,7 +41,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="640"
                               = image_tag "_email/bridesmaid/promo/promo-button.jpg", alt: "SHOP NOW", :style => "display: inline-block; vertical-align:bottom; margin-top: 30px;"
                         - else
                           div style="background-color: #ffffff; text-align: center;"
-                            = image_tag "_email/bridesmaid/promo/promo-text-3.png", alt: "More than 4 bridesmaids? here's 25 off", :style => "display: inline-block; vertical-align:bottom; margin: 35px 0 40px;"
+                            = image_tag "_email/bridesmaid/promo/promo-text-3.png", alt: "More than 4 bridesmaids? here's 25 off", :style => "display: inline-block; vertical-align:bottom; margin: 15px 0 40px;"
                             br
                             = image_tag "_email/bridesmaid/promo/promo-code-3.png", alt: "Enter BRIDESMAID25P  @checkout!", :style => 'vertical-align:bottom'
                             br

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.21'
 gem 'pg'
 gem 'slim', '~> 1.3.8'
 gem 'slim-rails', '~> 1.1.1'

@@ -24,10 +24,12 @@ class BridesmaidPartyEmailMarketing
     user = Spree::User.find_by_email(email)
 
     BridesmaidPartyEmailMarketing.enabled_mail_codes.each do |code|
-      BridesmaidPartyEmailMarketing.send(code, user.id, { bridesmaids_count: 3 }).deliver
+      BridesmaidPartyEmailMarketingMailer.send(code, user.id, { bridesmaids_count: 3 }).deliver
+      sleep(5)
     end
 
     BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 4 }).deliver
+    sleep(5)
     BridesmaidPartyEmailMarketingMailer.promo_for_bride_with_bridesmaids(user.id, { bridesmaids_count: 6 }).deliver
   end
 

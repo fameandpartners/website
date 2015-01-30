@@ -15,13 +15,20 @@
             .note Shop now this offer expires in 24 hours!
   - unless marketing_landing_page?
     .category-header
-      h1 = @page_info[:banner_title]
-      h2 = raw @page_info[:banner_text]
+      - if true #sale_active?
+        = image_tag('banners/jan15-flashsale-banner.png')
+      - else
+        h1 = @page_info[:banner_title]
+        h2 = raw @page_info[:banner_text]
+
 - else
-  .category-header
-    h1 = @page_info[:banner_title]
-    h2 = raw @page_info[:banner_text]
-    .arrows-line-horizontal
+    .category-header
+      - if true #sale_active?
+        = image_tag('banners/jan15-flashsale-banner.png')
+      - else
+        h1 = @page_info[:banner_title]
+        h2 = raw @page_info[:banner_text]
+      .arrows-line-horizontal
 
 - products_filters_cache_key = [:layout, :products, 'filters']
 - cache products_filters_cache_key, expires_in: configatron.cache.expire.long do

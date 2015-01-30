@@ -24,12 +24,13 @@
             
             .post-meta
               .date = @post.occured_at_formatted
-              .author
-                ' BY
-                = link_to blog_authors_post_path(@post.user.slug) do
-                  / .avatar
-                    = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
-                  span.name = @post.user.fullname
+              - if @post.user.present?
+                .author
+                  ' BY
+                  = link_to blog_authors_post_path(stylist: @post.user.slug) do
+                    / .avatar
+                      = image_tag @post.user.avatar.url, width: 30, height: 30, alt: ''
+                    span.name = @post.user.fullname
 
             - if @post.primary_type == 'video' && @post.primary_photo.present?
               .featured-image = image_tag post_photo_url(@post, :preview), alt: ''
@@ -50,9 +51,9 @@
                       p = link_to post.title, post_path(post)
             .comments
               - if @post.red_carpet?
-                = link_to '', blog_red_carpet_post_path(@post.slug) + '#disqus_thread'
+                = link_to '', blog_red_carpet_post_path(post_slug: @post.slug, anchor: 'disqus_thread')
               - else
-                = link_to '', blog_post_by_category_path(@post.category.slug, @post.slug) + '#disqus_thread'
+                = link_to '', blog_post_by_category_path(category_slug: @post.category.slug, post_slug: @post.slug, anchor: 'disqus_thread')
           .grid-4 
             .share
               .addthis_toolbox.addthis_default_style
