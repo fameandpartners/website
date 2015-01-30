@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141223103221) do
+ActiveRecord::Schema.define(:version => 20150130132838) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -428,6 +428,21 @@ ActiveRecord::Schema.define(:version => 20141223103221) do
     t.integer  "color_id"
     t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
   end
+
+  create_table "marketing_user_visits", :force => true do |t|
+    t.integer "spree_user_id"
+    t.string  "user_token",    :limit => 64
+    t.integer "visits",                      :default => 0
+    t.string  "utm_campaign"
+    t.string  "utm_source"
+    t.string  "utm_medium"
+    t.string  "utm_term"
+    t.string  "utm_content"
+    t.string  "referrer"
+  end
+
+  add_index "marketing_user_visits", ["spree_user_id", "utm_campaign"], :name => "index_marketing_user_visits_on_spree_user_id_and_utm_campaign"
+  add_index "marketing_user_visits", ["user_token", "utm_campaign"], :name => "index_marketing_user_visits_on_user_token_and_utm_campaign"
 
   create_table "moodboard_items", :force => true do |t|
     t.integer  "spree_product_id"
