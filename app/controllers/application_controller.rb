@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
   append_before_filter :get_visitor_info
-  append_before_filter do
-    return if params[:cpt].blank?
+  append_before_filter :count_competition_participants, if: proc {|c| params[:cpt].present? }
 
+  def count_competition_participants
     cpt = params[:cpt]
     session[:cpts] ||= []
 
