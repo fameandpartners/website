@@ -47,7 +47,8 @@ describe Marketing::CaptureUtmParams do
     let(:subject) { Marketing::CaptureUtmParams.new(user, nil, utm_params)  }
 
     it "creates records associated with user" do
-      service = Marketing::CaptureUtmParams.new(:user, nil, utm_params) 
+      result = subject.record_visit!
+      expect(result.spree_user_id).to eq(user.id)
     end
 
     it "don't create token" do
