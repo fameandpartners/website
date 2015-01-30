@@ -1,4 +1,4 @@
-class LandingPage::ProductPageView
+class LandingPage::ProductPagePresenter
 	attr_reader :page, :filter
 
   delegate :title, :to => :page

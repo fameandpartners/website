@@ -17,7 +17,8 @@ Gem::Specification.new do |s|
   # s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.13"
-
+  s.add_dependency "elasticsearch-rails"
+  s.add_dependency "elasticsearch-persistence"
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_girl_rails'
   s.add_development_dependency 'pry'
