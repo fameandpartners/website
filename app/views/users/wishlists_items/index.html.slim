@@ -153,6 +153,25 @@ javascript:
     });
 
     (function() {
+      $('ul.products-list .add-remove a.remove').on('click', function(e) {
+        e.preventDefault();
+        $button = $(e.currentTarget);
+
+        if (! $button.data('processing')) {
+          $button.data('processing', true);
+
+          $.ajax({
+            url: $button.attr('href'),
+            type: 'DELETE',
+            dataType: 'script',
+          }).complete(function() {
+            $button.data('processing', false)
+          });
+         };
+      });
+    })(document);
+
+    (function() {
       $('a[data-action=buy-for-bridesmaid]').on('click', function (e) {
         e.preventDefault();
         $link = $(e.currentTarget);
@@ -208,8 +227,7 @@ javascript:
                 .add-remove.clearfix
                   = link_to 'Move to cart', '#', class: 'add-to-cart master btn mid fleft', \
                     data: { variant: product.variant_id, item: product.item_id }
-                  /= link_to 'Move to cart', move_to_cart_wishlists_item_path(product.item_id), class: 'add-to-cart master btn mid fleft', remote: true
-                  = link_to 'Remove', wishlists_item_path(product.item_id), class: 'btn mid border empty remove fright', method: :delete, remote: true
+                  = link_to 'Remove', wishlists_item_path(product.item_id), class: 'btn mid border empty remove fright'
 
                 - if product.bridesmaides.present?
                   - product.bridesmaides.each do |bridesmaid|
