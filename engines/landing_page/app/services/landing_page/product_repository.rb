@@ -17,13 +17,12 @@ class LandingPage::ProductRepository
   def query
     {
       :query => has_keywords,
-      # :filter => {
-      #   :and => filters
-      # },
+      :filter => {
+        :and => filters
+      },
       :size => options[:size] || 1 
-    }    
+    }.select { |_, v| !v.nil? }
   end
-
 
   def filters
     [is_current, is_visible, is_available, has_taxons].compact.flatten
@@ -57,29 +56,8 @@ class LandingPage::ProductRepository
           :fields =>  ['product.name^2', 'product.description'] 
         }
       }
-      # {
-      #   :common => {
-      #     'product.name' => {
-      #       :query            => options[:keywords],
-      #       :cutoff_frequency => 0.001
-      #     }
-      #   }
-      # }
     end
   end
-
-  # def description_has_keywords
-  #   if options[:keywords]
-  #     {
-  #       :common => {
-  #         'product.description' => {
-  #           :query            => options[:keywords],
-  #           :cutoff_frequency => 0.001
-  #         }
-  #       }
-  #     }
-  #   end    
-  # end
 
   def is_current
    is_false('product.is_deleted')
