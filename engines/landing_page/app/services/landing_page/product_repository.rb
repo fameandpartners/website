@@ -2,8 +2,10 @@ require 'elasticsearch/persistence'
 
 class LandingPage::ProductRepository
   include Elasticsearch::Persistence::Repository
+  attr_accessor :options
 
   def initialize(options={})
+    @options = options
     index(:color_variants)
     client(init_client)
   end
@@ -14,12 +16,14 @@ class LandingPage::ProductRepository
 
   def query
     {
-      filter: {
-        and: filters
-      },
+      :query => has_keywords,
+      # :filter => {
+      #   :and => filters
+      # },
       :size => options[:size] || 1 
     }    
   end
+
 
   def filters
     [is_current, is_visible, is_available, has_taxons].compact.flatten
@@ -34,6 +38,48 @@ class LandingPage::ProductRepository
       }
     end
   end
+
+  def has_colors
+    if options[:color_ids]
+      {
+        'terms' => {
+          'color.id' => option[:color_ids]
+        }
+      }            
+    end
+  end
+
+  def has_keywords
+    if options[:keywords]
+      {
+        :multi_match => {
+          :query  =>  options[:keywords],
+          :fields =>  ['product.name^2', 'product.description'] 
+        }
+      }
+      # {
+      #   :common => {
+      #     'product.name' => {
+      #       :query            => options[:keywords],
+      #       :cutoff_frequency => 0.001
+      #     }
+      #   }
+      # }
+    end
+  end
+
+  # def description_has_keywords
+  #   if options[:keywords]
+  #     {
+  #       :common => {
+  #         'product.description' => {
+  #           :query            => options[:keywords],
+  #           :cutoff_frequency => 0.001
+  #         }
+  #       }
+  #     }
+  #   end    
+  # end
 
   def is_current
    is_false('product.is_deleted')

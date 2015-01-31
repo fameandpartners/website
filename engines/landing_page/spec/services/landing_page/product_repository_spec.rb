@@ -1,7 +1,8 @@
 require "spec_helper"
 
 describe LandingPage::ProductRepository do
-  let(:repo)  { LandingPage::ProductRepository.new }
+  let(:opts)  { {} }
+  let(:repo)  { LandingPage::ProductRepository.new(opts) }
   let(:field) { 'field-blah' }
   
   it 'works' do
@@ -24,7 +25,24 @@ describe LandingPage::ProductRepository do
 
   describe '.filters' do
 
-
   end
+
+  describe '.has_keywords' do
+    
+    context 'with keywords' do
+      let(:opts)  { {:keywords => 'sophistication'} }      
+      it 'builds multi-match query' do
+        q = repo.has_keywords
+        expect(q[:multi_match][:fields]).to include('product.name^2')
+      end
+    end
+
+    context 'without keywords' do
+      it 'is nil' do
+        expect(repo.has_keywords).to be_nil
+      end
+    end
+  end
+
 
 end
