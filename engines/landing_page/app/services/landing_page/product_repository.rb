@@ -15,10 +15,14 @@ class LandingPage::ProductRepository
   def query
     {
       filter: {
-        and: [is_current, is_visible, is_available, has_taxons]
+        and: filters
       },
       :size => options[:size] || 1 
     }    
+  end
+
+  def filters
+    [is_current, is_visible, is_available, has_taxons].compact.flatten
   end
 
   def has_taxons
@@ -31,52 +35,43 @@ class LandingPage::ProductRepository
     end
   end
 
-  # def size
-  #   { :size => options[:size] || 1 }
-  # end
-
   def is_current
-    # {
-    #   :bool => {
-    #     :must => { :term => { 'product.is_deleted' => false }} 
-    #   }
-    # }
-    is_false('product.is_deleted')
+   is_false('product.is_deleted')
   end
 
   def is_visible
-    # {
-    #   :bool => {
-    #     :must => { :term => { 'product.is_hidden' => false }} 
-    #   }
-    # }
     is_false('product.is_hidden')
   end
 
   def is_in_stock
-    # {
-    #   :bool => {
-    #     :must => { :term => { 'product.in_stock' => true }} 
-    #   }
-    # }
     is_true('product.in_stock')
   end
 
+  def is_color_customizable
+    if options[:color_customizable]
+      is_true('product.color_customizable')
+    end
+  end
+
   def is_available
-    {
-      :exists => { 
-        :field => 'product.available_on' 
+    [
+      {
+        :exists => { 
+          :field => 'product.available_on' 
+        }
       },
-      :bool => {
-        :should => {
-          :range => {
-            'product.available_on' => {
-              :lte => Time.zone.now
+      {
+        :bool => {
+          :should => {
+            :range => {
+              'product.available_on' => {
+                :lte => Time.zone.now
+              }
             }
           }
         }
       }
-    }
+    ]
   end
 
   def is_false(field)
