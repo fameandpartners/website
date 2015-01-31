@@ -27,7 +27,6 @@ module ApplicationHelper
   end
 
   def get_hreflang_link
-    
     hreflang_language = get_hreflang_code
     current_language = get_current_language_code
 
@@ -37,7 +36,7 @@ module ApplicationHelper
     else
       # united states is default, so default hreflang should be australian
       hreflang_link = "http://#{request.host}/au#{request.fullpath}"
-      hreflang_link.gsub!('/us', '')
+      hreflang_link.gsub(/\/us\b/, '')
     end
 
     hreflang_link
