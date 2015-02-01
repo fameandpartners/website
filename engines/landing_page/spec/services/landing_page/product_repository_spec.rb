@@ -18,7 +18,7 @@ describe LandingPage::ProductRepository do
 
   describe '.is_false' do
     it 'builds false term bool filter' do
-      q = repo.is_true(field)
+      q = repo.is_false(field)
       expect(q[:bool][:must][:term]).to eq(field => false)
     end
   end
