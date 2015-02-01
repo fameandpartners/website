@@ -4,7 +4,7 @@ Spree::ProductsController.class_eval do
 
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
-  before_filter :load_activities, :only => [:show, :quick_view]
+  #before_filter :load_activities, :only => [:show, :quick_view]
 
   after_filter :log_product_viewed
 
@@ -285,13 +285,14 @@ Spree::ProductsController.class_eval do
     Activity.log_product_viewed(@product, temporary_user_key, try_spree_current_user)
   end
 
-  def load_activities
-    @activities = load_product_activities(@product)
-  end
-
-  def load_product_activities(owner)
-    scope = Activity.where(owner_type: owner.class.to_s, owner_id: owner.id)
-    scope = scope.where("updated_at > ?", 5.days.ago).order('updated_at desc')
-    scope.limit(10)
-  end
+#  # note - we don't show users activity on product details page
+#  def load_activities
+#    @activities = load_product_activities(@product)
+#  end
+#
+#  def load_product_activities(owner)
+#    scope = Activity.where(owner_type: owner.class.to_s, owner_id: owner.id)
+#    scope = scope.where("updated_at > ?", 5.days.ago).order('updated_at desc')
+#    scope.limit(10)
+#  end
 end
