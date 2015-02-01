@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry'
   s.add_development_dependency 'pry-debugger'
   s.add_development_dependency 'rspec-activemodel-mocks'
+  s.add_development_dependency 'rspec-collection_matchers'
   s.add_development_dependency 'rspec-rails', '~> 3.1'
   s.add_development_dependency 'spring'
 end

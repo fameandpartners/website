@@ -6,7 +6,8 @@ class LandingPage::ProductRepository
 
   def initialize(options={})
     @options = options
-    index(:color_variants)
+    # index(:color_variants)
+    index(:color_variants_test)
     client(init_client)
   end
 
