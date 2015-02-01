@@ -59,6 +59,49 @@ class LandingPage::ProductRepository
     end
   end
 
+  def has_discount
+    if options[:discount]
+      if options[:discount] == :all
+        has_any_discount
+      else
+        has_discount_value
+      end
+    end
+   # if product_discount.present?
+   #    if product_discount == :all
+   #      filter :bool, :should => { :range => { "product.discount" => { :gt => 0 } } }
+   #    else
+   #      filter :bool, :must => { :term => { 'product.discount' => product_discount.to_i } }
+   #    end
+   #  end
+  end
+
+  def has_any_discount
+    {
+      :bool => {
+        :should => { 
+          :range => { 
+            'product.discount' => {
+              :gt => 0
+            }
+          }
+        } 
+      }
+    }
+  end
+
+  def has_discount_value
+    {
+      :bool => {
+        :must => { 
+          :term => { 
+            'product.discount' => options[:discount].to_i 
+          }
+        } 
+      }
+    }
+  end
+
   def is_current
    is_false('product.is_deleted')
   end

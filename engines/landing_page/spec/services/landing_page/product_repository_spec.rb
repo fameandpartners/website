@@ -45,4 +45,24 @@ describe LandingPage::ProductRepository do
   end
 
 
+  describe '.has_discount' do
+
+    context 'with discount value' do
+      let(:opts)  { {:discount => 23} }      
+      it 'builds discount query' do
+        q = repo.has_discount
+        expect(q[:bool][:must][:term]).to eq('product.discount' => opts[:discount])
+      end
+    end
+
+    context 'with all discount' do
+      let(:opts)  { {:discount => :all} }      
+      it 'builds discount range query' do
+        q = repo.has_discount
+        expect(q[:bool][:should][:range]).to eq('product.discount' => {:gt => 0 })
+      end
+    end
+
+  end
+
 end
