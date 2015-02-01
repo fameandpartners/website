@@ -55,3 +55,4 @@ config/database.yml
 bin/rails
 bin/rake
 bin/spring
+engines/landing_page/spec/dummy/log/*.*
