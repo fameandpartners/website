@@ -20,7 +20,8 @@ class LandingPage::ProductRepository
       :filter => {
         :and => filters
       },
-      :size => options[:size] || 1 
+      :size => options[:size] || 1,
+      :sort => sort_by
     }.select { |_, v| !v.nil? }
   end
 
@@ -67,13 +68,6 @@ class LandingPage::ProductRepository
         has_discount_value
       end
     end
-   # if product_discount.present?
-   #    if product_discount == :all
-   #      filter :bool, :should => { :range => { "product.discount" => { :gt => 0 } } }
-   #    else
-   #      filter :bool, :must => { :term => { 'product.discount' => product_discount.to_i } }
-   #    end
-   #  end
   end
 
   def has_any_discount
@@ -139,6 +133,16 @@ class LandingPage::ProductRepository
         }
       }
     ]
+  end
+
+  def sort_by  
+    if options[:sort_by]
+    [
+      {
+        options[:sort_by] => options[:sort_dir] || 'desc'
+      }
+    ]
+    end
   end
 
   def is_false(field)

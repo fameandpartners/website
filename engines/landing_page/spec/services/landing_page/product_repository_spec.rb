@@ -44,9 +44,7 @@ describe LandingPage::ProductRepository do
     end
   end
 
-
   describe '.has_discount' do
-
     context 'with discount value' do
       let(:opts)  { {:discount => 23} }      
       it 'builds discount query' do
@@ -62,7 +60,19 @@ describe LandingPage::ProductRepository do
         expect(q[:bool][:should][:range]).to eq('product.discount' => {:gt => 0 })
       end
     end
-
   end
 
+  describe '.sort_by' do
+    let(:opts)  { {:sort_by => 'blah.vtha'} }  
+    it 'builds discount range query' do
+      expect(repo.sort_by).to include({ opts[:sort_by] => 'desc' })
+    end
+
+    context 'with direction' do
+      let(:opts)  { {:sort_by => 'blah.vtha', :sort_dir => 'asc'} }  
+      it 'builds discount range query' do
+        expect(repo.sort_by).to include({ opts[:sort_by] => opts[:sort_dir] })
+      end
+    end
+  end
 end
