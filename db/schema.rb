@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150130132838) do
+ActiveRecord::Schema.define(:version => 20150201140321) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "answer_taxons", ["taxon_id", "answer_id"], :name => "index_answer_taxons_on_taxon_id_and_answer_id"
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -203,6 +205,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.boolean  "paying_for_bridesmaids", :default => false
   end
 
+  add_index "bridesmaid_party_events", ["spree_user_id"], :name => "index_bridesmaid_party_events_on_spree_user_id"
+
   create_table "bridesmaid_party_members", :force => true do |t|
     t.integer "event_id"
     t.string  "first_name"
@@ -217,6 +221,9 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.string  "selected_product_status"
     t.integer "wishlist_item_id"
   end
+
+  add_index "bridesmaid_party_members", ["event_id"], :name => "index_bridesmaid_party_members_on_event_id"
+  add_index "bridesmaid_party_members", ["spree_user_id"], :name => "index_bridesmaid_party_members_on_spree_user_id"
 
   create_table "celebrities", :force => true do |t|
     t.string   "first_name"
@@ -265,6 +272,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.text     "celebrity_description"
   end
 
+  add_index "celebrity_inspirations", ["spree_product_id"], :name => "index_celebrity_inspirations_on_spree_product_id"
+
   create_table "celebrity_moodboard_items", :force => true do |t|
     t.integer  "celebrity_id"
     t.boolean  "active",             :default => true
@@ -278,6 +287,7 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.datetime "updated_at",                           :null => false
   end
 
+  add_index "celebrity_moodboard_items", ["celebrity_id"], :name => "index_celebrity_moodboard_items_on_celebrity_id"
   add_index "celebrity_moodboard_items", ["side"], :name => "index_celebrity_moodboard_items_on_side"
 
   create_table "celebrity_product_accessories", :force => true do |t|
@@ -377,6 +387,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.integer  "product_id"
   end
 
+  add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
+
   create_table "data_migrations", :id => false, :force => true do |t|
     t.string "version", :null => false
   end
@@ -402,12 +414,16 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.datetime "updated_at",    :null => false
   end
 
+  add_index "email_notifications", ["spree_user_id", "code"], :name => "index_email_notifications_on_spree_user_id_and_code"
+
   create_table "facebook_data", :force => true do |t|
     t.integer  "spree_user_id"
     t.text     "value"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  add_index "facebook_data", ["spree_user_id"], :name => "index_facebook_data_on_spree_user_id"
 
   create_table "incompatibilities", :force => true do |t|
     t.integer "original_id"
@@ -428,6 +444,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.integer  "color_id"
     t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
   end
+
+  add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
 
   create_table "marketing_user_visits", :force => true do |t|
     t.integer "spree_user_id"
@@ -460,10 +478,16 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.string   "title"
   end
 
+  add_index "moodboard_items", ["spree_product_id", "active"], :name => "index_moodboard_items_on_spree_product_id_and_active"
+
   create_table "option_values_option_values_groups", :id => false, :force => true do |t|
     t.integer "option_value_id"
     t.integer "option_values_group_id"
   end
+
+  add_index "option_values_option_values_groups", ["option_value_id"], :name => "index_option_values_option_values_groups_on_option_value_id"
+  add_index "option_values_option_values_groups", ["option_value_id"], :name => "opovg_option_value_id"
+  add_index "option_values_option_values_groups", ["option_values_group_id"], :name => "opovg_option_group_id"
 
   create_table "payment_requests", :force => true do |t|
     t.integer  "order_id"
@@ -474,6 +498,9 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
+
+  add_index "payment_requests", ["order_id"], :name => "index_payment_requests_on_order_id"
+  add_index "payment_requests", ["token"], :name => "index_payment_requests_on_token"
 
   create_table "product_accessories", :force => true do |t|
     t.integer  "style_id"
@@ -493,10 +520,15 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.datetime "updated_at",                                                                        :null => false
   end
 
+  add_index "product_accessories", ["spree_product_id"], :name => "index_product_accessories_on_spree_product_id"
+  add_index "product_accessories", ["style_id"], :name => "index_product_accessories_on_style_id"
+
   create_table "product_color_values", :force => true do |t|
     t.integer "product_id"
     t.integer "option_value_id"
   end
+
+  add_index "product_color_values", ["product_id"], :name => "index_product_color_values_on_product_id"
 
   create_table "product_personalizations", :force => true do |t|
     t.integer  "variant_id"
@@ -526,6 +558,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "product_reservations", ["user_id"], :name => "index_product_reservations_on_user_id"
 
   create_table "product_style_profiles", :force => true do |t|
     t.integer  "product_id"
@@ -568,6 +602,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.datetime "created_at",                                              :null => false
     t.datetime "updated_at",                                              :null => false
   end
+
+  add_index "product_videos", ["spree_product_id"], :name => "index_product_videos_on_spree_product_id"
 
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
@@ -842,6 +878,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.boolean  "use_in_customisation", :default => false
   end
 
+  add_index "spree_option_values", ["option_type_id"], :name => "index_spree_option_values_on_option_type_id"
+
   create_table "spree_option_values_groups", :force => true do |t|
     t.integer  "option_type_id"
     t.string   "name"
@@ -849,6 +887,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "spree_option_values_groups", ["option_type_id"], :name => "index_spree_option_values_groups_on_option_type_id"
 
   create_table "spree_option_values_variants", :id => false, :force => true do |t|
     t.integer "variant_id"
@@ -960,6 +1000,9 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "spree_product_option_types", ["option_type_id"], :name => "index_spree_product_option_types_on_option_type_id"
+  add_index "spree_product_option_types", ["product_id"], :name => "index_spree_product_option_types_on_product_id"
 
   create_table "spree_product_properties", :force => true do |t|
     t.string   "value",       :limit => 512
@@ -1190,6 +1233,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.text     "seo_description"
   end
 
+  add_index "spree_taxon_banners", ["spree_taxon_id"], :name => "index_spree_taxon_banners_on_spree_taxon_id"
+
   create_table "spree_taxonomies", :force => true do |t|
     t.string   "name",                      :null => false
     t.datetime "created_at",                :null => false
@@ -1408,5 +1453,8 @@ ActiveRecord::Schema.define(:version => 20150130132838) do
     t.integer  "spree_product_id"
     t.integer  "product_color_id"
   end
+
+  add_index "wishlist_items", ["spree_product_id"], :name => "index_wishlist_items_on_spree_product_id"
+  add_index "wishlist_items", ["spree_user_id"], :name => "index_wishlist_items_on_spree_user_id"
 
 end
