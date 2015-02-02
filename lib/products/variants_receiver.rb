@@ -30,6 +30,7 @@ module Products
 
         # spree has more correct available? method,
         available_option[:available] = variant.available?
+        available_option[:fast_delivery] = variant.fast_delivery
 
         available_options.push(available_option)
       end

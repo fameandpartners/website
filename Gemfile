@@ -31,6 +31,7 @@ gem 'roo', require: false
 
 gem 'twitter'
 gem 'instagram'
+gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
 gem 'sitemap_generator'
 

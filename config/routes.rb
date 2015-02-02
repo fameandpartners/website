@@ -307,6 +307,13 @@ FameAndPartners::Application.routes.draw do
       put 'sales/reset_cache' => 'sales#reset_cache'
       resources :sales, :except => [:show]
 
+      # stock invent settings 
+      get 'stock_invent'                => 'stock_invent#edit',          as: :stock_invent
+      put 'stock_invent'                => 'stock_invent#update'
+      get 'stock_invent/status'         => 'stock_invent#status',        as: :stock_invent_status
+      get 'stock_invent/auth'           => 'stock_invent#google_auth',   as: :stock_invent_access_token_request
+      get 'stock_invent/auth_callback'  => 'stock_invent#auth_callback', as: :stock_invent_google_auth_callback
+
       #resources :customisation_types do
       #  collection do
       #    post :update_positions
