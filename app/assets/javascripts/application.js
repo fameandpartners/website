@@ -8,7 +8,7 @@
 //= require libs/jquery.chosen.min
 //= require libs/jquery.mousewheel
 //= require libs/jquery.waitforimages.min
-//= require libs/jquery.timeago
+//  require libs/jquery.timeago
 //= require libs/jquery.cookie
 //= require libs/jquery.bxslider
 //= require libs/jquery.jscrollpane
