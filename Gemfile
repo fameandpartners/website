@@ -22,8 +22,6 @@ gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
-gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
-#gem 'color_sort'
 
 gem 'geoip', require: false
 gem 'rubyzip', '< 0.9.9', require: false
@@ -67,6 +65,10 @@ gem 'spree_paypal_express',
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
+# utils
+# replacement for standart library.
+gem 'addressable' 
+
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'
@@ -83,10 +85,10 @@ group :development, :test do
   gem 'capistrano-rbenv', '0.0.10', require: false
   gem 'capybara'
   gem 'database_cleaner', '0.9.1'
-  gem 'debugger'
   gem 'factory_girl_rails', '4.2.1'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
+  gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
   gem 'pry'
@@ -97,6 +99,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'thin', '1.5.1'
+  #gem 'debugger' # replaced by binding.pry
 end
 
 group :staging, :development do
