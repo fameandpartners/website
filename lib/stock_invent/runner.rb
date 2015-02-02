@@ -1,6 +1,10 @@
 class StockInvent::Runner
   def self.run
-    load_from_google_spreadsheet
+    if Repositories::SpreePreference.read('stock_invent_enabled')
+      load_from_google_spreadsheet
+    else
+      puts "-- skipped disabled stock invent run"
+    end
   end
 
   def self.load_from_google_spreadsheet

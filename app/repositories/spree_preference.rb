@@ -15,13 +15,18 @@ class Repositories::SpreePreference
   end
 
   def self.read(key)
-    Spree::Preference.where(key: key.to_s).first.try(:value) || ''
+    Spree::Preference.where(key: key.to_s).first.try(:value)
   end
 
   def self.update(key, value, value_type = :string)
     preference = Spree::Preference.where(key: key).first_or_initialize
-    preference.value = value
-    preference.value_type = value_type || get_value_type(value)
+    if value_type.present?
+      preference.value_type = value_type
+      preference.value = convert_value(value, value_type)
+    else
+      preference.value_type = get_value_type(value)
+      preference.value = value
+    end
     preference.save
   end
 
@@ -38,6 +43,17 @@ class Repositories::SpreePreference
         :string
       else
         nil
+      end
+    end
+
+    def self.convert_value(value, value_type)
+      case value_type.downcase.to_sym
+      when :string
+        value.to_s
+      when :boolean
+        value.to_s.match(/^(true|t|yes|y|1)$/i).present?
+      else
+        value.to_s
       end
     end
 end

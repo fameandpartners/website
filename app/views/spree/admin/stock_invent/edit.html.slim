@@ -13,6 +13,10 @@ br
 
 = form_tag admin_stock_invent_path, method: :put, remote: true do
   .field
+    = check_box_tag 'preferences[stock_invent_enabled]', true, @preferences.stock_invent_enabled, class: 'boolean'
+    = label_tag 'preferences_stock_invent_enabled', t(:enabled), :class => 'inline'
+
+  .field
     = t(:provider_key)
     = text_field_tag 'preferences[stock_invent_provider_key]', @preferences.stock_invent_provider_key, class: 'fullwidth'
 

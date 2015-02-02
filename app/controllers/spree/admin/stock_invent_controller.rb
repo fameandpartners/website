@@ -53,7 +53,7 @@ module Spree
 
         auth.fetch_access_token!
 
-        update_preferences(stock_invent_refresh_token: auth.refresh_token)
+        update_preference(:stock_invent_refresh_token, auth.refresh_token)
 
         # update token
         redirect_to admin_stock_invent_path, notice: 'permissions tokens has been successfully updated'
@@ -67,24 +67,29 @@ module Spree
 
         def preferences_keys
           [
-            "stock_invent_provider_key",
-            "stock_invent_provider_secret",
-            "stock_invent_refresh_token",
-            "stock_invent_file_url"
+            ["stock_invent_enabled",        "boolean"],
+            ["stock_invent_provider_key",   "string"],
+            ["stock_invent_provider_secret","string"],
+            ["stock_invent_refresh_token",  "string"],
+            ["stock_invent_file_url",       "string"]
           ]
         end
 
         def preferences
-          @_preferences ||= Repositories::SpreePreference.read_all(preferences_keys)
+          @_preferences ||= Repositories::SpreePreference.read_all(preferences_keys.map(&:first))
         end
 
         def update_preferences(values)
           @_preferences = nil
-          values.keys.each do |key|
-            if preferences_keys.include?(key.to_s)
-              Repositories::SpreePreference.update(key, values[key])
-            end
+          preferences_keys.each do |key, value_type|
+            Repositories::SpreePreference.update(key, values[key], value_type)
           end
+        end
+
+        def update_preference(key, value)
+          @_preferences = nil
+          value_type = preferences_keys.find{|preference| preference.first == key.to_s}.try(:last) || :string
+          Repositories::SpreePreference.update(key, value, value_type.to_sym)
         end
     end
   end
