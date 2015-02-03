@@ -1,5 +1,6 @@
 class BridesmaidPartyMailer < ActionMailer::Base
   include ApplicationHelper
+  include PathBuildersHelper
   include ProductsHelper
 
   layout 'mailer'

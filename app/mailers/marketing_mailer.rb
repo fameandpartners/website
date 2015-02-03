@@ -3,6 +3,7 @@ class MarketingMailer < ActionMailer::Base
 
   include ProductsHelper
   include ApplicationHelper
+  include PathBuildersHelper
 
   layout 'mailer'
   helper :products

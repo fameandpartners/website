@@ -1,5 +1,6 @@
 Spree::ProductsController.class_eval do
   include ApplicationHelper
+  include PathBuildersHelper
   include ProductsHelper
 
   respond_to :html, :json

@@ -1,7 +1,9 @@
 class Spree::ProductMailer < ActionMailer::Base
 
   include ApplicationHelper
+  include PathBuildersHelper
   include ProductsHelper
+
   helper :application
   helper :products
   layout 'mailer'
