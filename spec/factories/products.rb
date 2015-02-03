@@ -35,4 +35,8 @@ FactoryGirl.define do
     permalink           { name.downcase.gsub(/\s/, '_')  }
   end
 
+  factory :taxonomy, :class => Spree::Taxonomy do
+    sequence(:name)    
+  end
+
 end

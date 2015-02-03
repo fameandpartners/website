@@ -43,7 +43,7 @@ module PathBuildersHelper
   # previously was
   #   name - id - translated_short_description(locale)
   # NOTE: don't move it to model - 'item' not always Spree::Product [Tire::Results::Item or just Struct ]
-  def descriptive_url(item)
+  def descriptive_url(item, locale = :en)
     parts = [item.name.parameterize, item.id]
     parts.reject(&:blank?).join('-')
   end
@@ -106,19 +106,12 @@ module PathBuildersHelper
 
   # /dresses/long
   def build_taxon_path(taxon_name, options={})
-    site_version_prefix = self.url_options[:site_version]
-
-    #must downcase because we want case insensitive urls
-    taxon = Spree::Taxon.where('lower(name) =?', taxon_name.downcase).last
-
-    if taxon.nil?
-      #check for non-hyphenated version of the taxon name
-      taxon = Spree::Taxon.where('lower(name) = ?', taxon_name.downcase.gsub('-', ' ')).last
-    end
-
-    taxon_name = taxon.name.parameterize unless taxon.nil?
-
-    path_parts = [site_version_prefix, 'dresses',taxon_name]
+    path_parts = [
+      self.url_options[:site_version],
+      'dresses'
+    ]
+    taxon = Repositories::Taxonomy.get_taxon_by_name(taxon_name)
+    path_parts.push(taxon.name.parameterize) if taxon.present?
 
     build_url(path_parts, options)
   end
@@ -137,7 +130,6 @@ module PathBuildersHelper
   def wishlist_item_product_with_color_path(item)
     color = (item.color || item.variant.dress_color)
     if color.present?
-      url_without_double_slashes("#{ collection_product_path(item.product) }/#{ color.name }")
       path_parts = [collection_product_path(item.product), color.name]
       build_url(path_parts)
     else
