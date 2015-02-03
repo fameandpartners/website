@@ -8,19 +8,7 @@ div style="margin-left: 20px"
 		    	= image_tag('fashion-it-girl/fashion_it_girl_banner.gif', :alt => 'Limited time shop now', :width => 285)
 				    	
 		.grid-9
-			- if current_site_version.is_usa?				 
-				div class="wishpond-campaign" data-wishpond-id="487301" data-wishpond-href="https://www.wishpond.com/lp/487301"
-
-			    javascript:
-
-					(function() {
-					 window.Wishpond = window.Wishpond || {};
-					 Wishpond.merchantId = '514769';
-					})()
-
-				script type="text/javascript" src="//cdn.wishpond.com/master.js"
-			
-			- else				
+			- if current_site_version.is_australia?
 				= image_tag('https://s3.amazonaws.com/media.wishpond.com/media/003/635/018/original.jpg?1420597537', :alt => "Fashion IT Girl 2015", :style => "background-color:#CEB6CB;margin-top:40px;height:159px")
 
 				div style="margin-left:50px;margin-top:40px;"  
@@ -29,3 +17,26 @@ div style="margin-left: 20px"
 					p Australia's Fashionista Search will be launching in April 2015. 
 					p Stay tuned or contact us to register your interest.
 
+			- if current_site_version.is_usa?		
+
+				= image_tag('https://s3.amazonaws.com/media.wishpond.com/media/003/635/018/original.jpg?1420597537', :alt => "Fashion IT Girl 2015", :style => "background-color:#CEB6CB;margin-top:40px;height:164px")
+				
+				div id="redirect" style="margin-left:50px;margin-top:40px;"  
+					h1 style="font-size:12pt;"
+						' Sit tight Fame Babes, you're being redirected to our Fashion IT Girl entry page!
+					p style="text-decoration:none;text-transform:none;font-size:10pt"
+						a href="https://www.facebook.com/FameandPartners/app_181518015386164" style=""
+							' Join the Fashion IT Girl Search
+
+				javascript:
+					$(function() {
+						setTimeout(function() { 
+							if $("#redirect").length > 0 {
+								window.location.href = "https://www.facebook.com/FameandPartners/app_181518015386164";
+							}
+						}, 1500);					
+					})			
+					
+					
+
+				
