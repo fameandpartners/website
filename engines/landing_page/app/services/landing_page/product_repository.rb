@@ -16,18 +16,20 @@ class LandingPage::ProductRepository
   end
 
   def query
-    {
-      :query => has_keywords,
-      :filter => {
-        :and => filters
-      },
-      :size => options[:size] || 1,
-      :sort => sort_by
-    }.select { |_, v| !v.nil? }
+    # require 'pry'; pry binding
+    compact_hash  :query  => has_keywords,
+                  :filter => filters,
+                  :size   => options[:size] || 99,
+                  :sort   => sort_by
   end
 
   def filters
-    [is_current, is_visible, is_available, has_taxons].compact.flatten
+    {
+      :bool => {
+        :must   => [is_current, is_visible, is_in_stock, is_available, has_taxons, has_colors, has_discount].compact.flatten,
+        :should => has_bodyshapes,
+       }
+    }                 
   end
 
   def has_taxons
@@ -44,7 +46,7 @@ class LandingPage::ProductRepository
     if options[:color_ids]
       {
         'terms' => {
-          'color.id' => option[:color_ids]
+          'color.id' => options[:color_ids]
         }
       }            
     end
@@ -95,6 +97,31 @@ class LandingPage::ProductRepository
         } 
       }
     }
+  end
+
+  def has_bodyshapes
+    if options[:bodyshapes]
+      # {
+      #   :filters => bodyshapes
+      # }
+      bodyshapes
+    end
+  end
+
+  def bodyshapes
+    Array.wrap(options[:bodyshapes]).collect do |bodyshape|
+      {
+       :bool => {
+         :should => {
+           :range => {
+             "product.#{bodyshape}" => {
+               :gte => 4
+             }
+           }
+         }
+       }
+      }
+    end
   end
 
   def is_current
@@ -167,4 +194,7 @@ class LandingPage::ProductRepository
     Elasticsearch::Client.new(url: url, log: true)
   end
 
+  def compact_hash(h)
+    h.select { |_, v| !v.nil? }
+  end
 end

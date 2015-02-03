@@ -24,7 +24,9 @@ describe LandingPage::ProductRepository do
   end
 
   describe '.filters' do
-
+    context 'with no params' do
+      it { expect(repo.filters).to have(4).items }
+    end
   end
 
   describe '.has_keywords' do
