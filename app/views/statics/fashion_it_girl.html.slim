@@ -21,7 +21,7 @@ div style="margin-left: 20px"
 
 				= image_tag('https://s3.amazonaws.com/media.wishpond.com/media/003/635/018/original.jpg?1420597537', :alt => "Fashion IT Girl 2015", :style => "background-color:#CEB6CB;margin-top:40px;height:164px")
 				
-				div style="margin-left:50px;margin-top:40px;"  
+				div id="redirect" style="margin-left:50px;margin-top:40px;"  
 					h1 style="font-size:12pt;"
 						' Sit tight Fame Babes, you're being redirected to our Fashion IT Girl entry page!
 					p style="text-decoration:none;text-transform:none;font-size:10pt"
@@ -29,8 +29,14 @@ div style="margin-left: 20px"
 							' Join the Fashion IT Girl Search
 
 				javascript:
-					setTimeout(function() { 
-						window.location.href = "https://www.facebook.com/FameandPartners/app_181518015386164";
-					}, 1500);
+					$(function() {
+						setTimeout(function() { 
+							if $("#redirect").length > 0 {
+								window.location.href = "https://www.facebook.com/FameandPartners/app_181518015386164";
+							}
+						}, 1500);					
+					})			
+					
+					
 
 				
