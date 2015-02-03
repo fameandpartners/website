@@ -13,6 +13,12 @@ div style="margin-left: 20px"
 
 			    javascript:
 
+			    	setTimeout(function() {
+			    		if (typeof _gaq != "undefined") {
+			    			_gaq.push(['_trackEvent', '10_seconds', 'read']);
+			    		}
+			    	},10000);
+
 					(function() {
 					 window.Wishpond = window.Wishpond || {};
 					 Wishpond.merchantId = '514769';
