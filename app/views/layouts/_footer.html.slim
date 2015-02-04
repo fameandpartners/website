@@ -71,10 +71,39 @@ footer.footer-global
         ' ORDER ON THE PHONE CUSTOMER SERVICE 866 527 7797
           
     .copy 
-      - if current_site_version.is_australia?
-        .address Bondi &nbsp;Sydney &nbsp;Australia &nbsp; &nbsp; |  &nbsp; &nbsp; ABN 83 162 501 064
-      - else
-        .address New York &nbsp; &nbsp; | &nbsp; &nbsp; USA
+      - if current_site_version.is_australia?   
+        div.address itemscope="" itemtype="http://schema.org/Organization"
+          span itemprop="name" Fame & Partners
+        
+          div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress"
+            span itemprop="streetAddress" Bondi
+            ',  
+            span itemprop="addressLocality" Sydney
+            ',  
+            span itemprop="addressRegion" NSW
+            ',  
+            span itemprop="postalCode" 2026
+            ',  
+            span itemprop="addressCountry" Australia
+                  
+          span itemprop="taxID" ABN 83 162 501 064
+
+      - else        
+        div.address itemscope="" itemtype="http://schema.org/Organization"
+          span itemprop="name" Fame & Partners
+          
+          div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress"
+            span itemprop="streetAddress" 25 Broadway, Floor 9
+            ',  
+            span itemprop="addressLocality" New York
+            ',  
+            span itemprop="addressRegion" NY
+            ',  
+            span itemprop="postalCode" 10004
+            ',
+            span itemprop="addressCountry" USA
+                  
+
 
 .hide
   #what-size
