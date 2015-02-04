@@ -56,6 +56,7 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
       @updateWishlistButton()
       @updateBuyButton()
       @updateSendToFriendButton()
+      @updateNextDayDeliveryBadge()
       @container.trigger('selection_changed', @selected)
       @container.data('selected', @selected)
       return true
@@ -111,6 +112,14 @@ window.helpers.createNewProductPageSelector = (parentContainer) ->
     updateSendToFriendButton: () ->
       $button = @container.find('.product-info .btn.send-to-bride')
       $button.data(id: @choosenVariantId, error: @errorMessage, selected: @selected)
+
+    updateNextDayDeliveryBadge: () ->
+      return # design not found
+      variant = _.findWhere(@variants, { id: @choosenVariantId })
+      if variant && variant.fast_delivery
+        # mark as next day delivery
+      else
+        # mark as non-fast delivery
 
     trackCustomisationSelected: (e) ->
       if !_.isEmpty(@customisationsInput.val())

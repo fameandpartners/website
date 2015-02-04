@@ -3,4 +3,6 @@ every :hour do
   rake   'feed:export:all'
 
   #runner 'BridesmaidPartyEmailMarketing.send_emails'
+
+  runner 'StockInvent::Runner.run'
 end
