@@ -15,6 +15,9 @@ class ApplicationController < ActionController::Base
   append_before_filter :capture_utm_params,                 if: proc {|c| params[:utm_campaign].present? }
   append_before_filter :associate_user_by_utm_guest_token,  if: proc {|c| cookies[:utm_guest_token].present? }
 
+  before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
+  before_filter :set_locale
+
   def count_competition_participants
     cpt = params[:cpt]
     session[:cpts] ||= []
@@ -192,10 +195,6 @@ class ApplicationController < ActionController::Base
   helper_method :default_seo_title, :default_meta_description
 
   helper_method :analytics_label, :get_user_type
-
-  before_filter :try_reveal_guest_activity
-
-  before_filter :set_locale
 
   def url_options
     version = current_site_version
