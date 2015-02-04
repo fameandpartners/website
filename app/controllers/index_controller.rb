@@ -1,4 +1,16 @@
 class IndexController < Spree::StoreController
+  #layout 'application'
+  layout false
+
+  #include ApplicationHelper
+  #include PathBuildersHelper
+  #include ProductsHelper
+
+  def show
+  end
+end
+=begin
+class IndexController < Spree::StoreController
   layout 'spree/layouts/spree_application'
   helper :all
 
@@ -31,3 +43,4 @@ class IndexController < Spree::StoreController
 
   helper_method :featured_products
 end
+=end
