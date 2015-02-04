@@ -60,9 +60,7 @@ SitemapGenerator::Sitemap.create(options) do
   end
 
   statics_pages = [
-    '/bloggers/racheletnicole', '/dani-stahl', 
-    '/about', '/why-us', '/blake-lively', '/team', '/terms', '/privacy', '/legal', '/faqs',
-    '/how-it-works', '/trendsetter-program', '/compterms', '/blake-lively'
+    '/about', '/why-us', '/team', '/terms', '/privacy', '/legal', '/faqs', '/how-it-works'
   ]
   statics_pages.each do |page_url|
     add page_url, priority: 0.5
