@@ -1,0 +1,113 @@
+/! Footer
+.footer
+  .footer-menu.text-center
+    .container
+      ul
+        li = link_to 'FAQs', '#'
+        li = link_to 'Terms', '#'
+        li = link_to 'The Fame Team', '#'
+        li = link_to 'Why Shop With Us', '#'
+        li = link_to 'Styling Advice', '#'
+        li = link_to 'Fashionista', '#'
+        li = link_to 'Fame Chain', '#'
+        li = link_to 'Contact', '#'
+      br
+      br
+      .row
+        .col-md-3
+          p.text-grey Australia
+        .col-md-6
+          small.text-grey 
+            | © 2015 FAME &amp; PARTNERS. All Rights Reserved, ABN 83 162 501 064, Bondi, Sydney
+        .col-md-3
+          Icons
+
+/! Footer 2
+.footer
+  .container
+    /! Logo
+    .footer-logo
+      = image_tag "images/dark-logo.svg", alt: "Fame & Partners"
+
+    /! Navigation
+    .footer-navigation
+      .row
+        .col-md-3
+          p
+            | Level 1, 140 Cleveland Street
+            br
+            | Chippendale, NSW, 2001,
+            br
+            | Australia
+
+          .btn-group
+            button.btn.btn-dropdown.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button" 
+              = image_tag "images/australian-flag.jpg", alt: "Australia flag"
+              | AUS
+              span.caret
+            ul.dropdown-menu role="menu" 
+              li
+                a href="#" 
+                  = image_tag "images/australian-flag.jpg", alt: "US flag"
+                  | US
+          br/
+          br/
+        .col-md-3
+          ul.footer-nav
+            li.footer-nav--item
+              a href="#"  Help
+            li.footer-nav--item
+              a href="#"  Get styling advice
+            li.footer-nav--item
+              a href="#"  Why shop with us
+            li.footer-nav--item
+              a href="#"  Free shipping
+            li.footer-nav--item
+              a href="#"  Returns & exchanges
+        .col-md-3
+          ul.footer-nav
+            li.footer-nav--item
+              a href="#"  About Us
+            li.footer-nav--item
+              a href="#"  Jobs
+            li.footer-nav--item
+              a href="#"  Affilates
+            li.footer-nav--item
+              a href="#"  Meet the team
+            li.footer-nav--item
+              a href="#"  Contact us
+        .col-md-3
+          ul.footer-nav
+            li.footer-nav--item
+              a href="#"  Fashionista program
+            li.footer-nav--item
+              a href="#"  Fame chain
+          br/
+          ul.footer-social
+            li.footer-social--item
+              a href="" 
+                span.fa.fa-2x.fa-instagram
+            li.footer-social--item
+              a href="" 
+                span.fa.fa-2x.fa-facebook
+            li.footer-social--item
+              a href="" 
+                span.fa.fa-2x.fa-twitter
+            li.footer-social--item
+              a href="" 
+                span.fa.fa-2x.fa-pinterest
+
+    .footer-details
+      .footer-details-text.pull-left
+        p.lighter-text
+          small
+            | © 2015 FAME & PARTNERS. All rights reserved.
+            strong ABN 83 162 501 064
+      .pull-right.no-float-mobile
+        ul.footer-details-nav
+          li.footer-details-nav--item
+            a.lighter-text href="#" 
+              small Privacy Policy
+          li.footer-details-nav--item
+            a.lighter-text href="#" 
+              small Terms of Use

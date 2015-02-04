@@ -1,6 +1,5 @@
 class IndexController < Spree::StoreController
-  #layout 'application'
-  layout false
+  layout 'redesign/application'
 
   #include ApplicationHelper
   #include PathBuildersHelper

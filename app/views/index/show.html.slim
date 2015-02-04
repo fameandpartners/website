@@ -1,335 +1,77 @@
-doctype html
-= conditional_html do
-  head
-    meta charset="utf-8"
-    title Fame & Partners - Mobile Test
-    meta content="width=device-width" name="viewport"
-
-    = stylesheet_link_tag    'application_redesign'
-    = javascript_include_tag 'application_redesign'
-
-  body#top
-    header
-      .nav-menu
-        .container.nav-menu-container
-          .masthead.pull-left
-            = link_to '#' do
-              = image_tag "images/logo-black.svg", alt: "Fame & Partners"
-          ul.primary.pull-left.hidden-xs
-            li.shop.menu-item
-              a.menu-item--link.active-hover href="#" 
-                | Shop
-                span.fa.fa-caret-down.small
-                span.active-link.arrow-up.menu-active-arrow
-              .mega-menu.hidden-sm
-                .container.max-width-100
-                  .row
-                    .col-md-3
-                      button.btn.btn-grey.margin-top-16 View all dresses
-                      br/
-                      p.button-grey-text
-                        span.fa.fa-ship.half-opacity
-                        | Free Shipping
-                        span.fa.fa-refresh.half-opacity
-                        | Free Returns
-                        span.fa.fa-check.half-opacity
-                        | Fit Guarantee
-                    .col-md-3
-                      h4 Events
-                      ul.mega-menu-list
-                        li.mega-menu-list--item
-                          a href="#"  Bridesmaid Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Formal Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Prom Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Graduation Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Homecoming Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Wedding Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Wedding Guest Dresses
-                    .col-md-3
-                      h4 Style
-                      ul.mega-menu-list
-                        li.mega-menu-list--item
-                          a href="#"  Plus Sizes Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Evening Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Sexy Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Long Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Lace Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Maxi Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Ball Gowns
-                    .col-md-3
-                      h4 Colour
-                      ul.mega-menu-list
-                        li.mega-menu-list--item
-                          a href="#"  Black Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Red Dresses
-                        li.mega-menu-list--item
-                          a href="#"  White Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Little Black Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Blue Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Poo Brown Dresses
-                        li.mega-menu-list--item
-                          a href="#"  Yellow Dresses
-            li.menu-item
-              a.menu-item--link href="#"  Style Quiz
-            li.menu-item
-              a.menu-item--link href="#"  Blog
-          ul.secondary.pull-right
-            li.menu-item.hidden-xs.hidden-sm
-              a.menu-item--link href="#" 
-                span.visible-sm
-                  = image_tag "images/Heart.svg"
-                span.hidden-sm.hidden-xs Moodboard (2)
-            li.menu-item
-              a.menu-item--link href="#" 
-                span.visible-sm.visible-xs
-                  = image_tag "images/User.svg"
-                span.hidden-sm.hidden-xs Account
-            li.menu-item
-              a.menu-item--link.search href="#" 
-                span.visible-sm.visible-xs
-                  = image_tag "images/Search.svg"
-                span.hidden-sm.hidden-xs Search
-                span.active-link.arrow-up.menu-active-arrow.search-arrow
-              .search-bar.invis
-                a.close-search href="#" 
-                  = image_tag "images/close.svg"
-                .container.max-width-100.padding-zero-mobile
-                  .row
-                    .col-md-3
-                    .col-md-6.padding-zero-mobile.margin-top-100-mobile
-                      .input-group.margin-bottom-sm
-                        input.form-control.black-form placeholder=("Search here...") type="text" /
-                        span.input-group-addon.no-padding-right
-                          button.invis-fix
-                            = image_tag "images/search-icon.svg"
-                    .col-md-3
-            li.menu-item
-              a.menu-item--link href="#" 
-                span.visible-sm.visible-xs
-                  = image_tag "images/Cart.svg"
-                span.hidden-sm.hidden-xs Cart (0)
-    #container
-      #theTarget style=("height: 800px;") 
-        div style=("background-image: url('assets/images/1.jpg')") 
-          .slider-image-caption.height-100
-            .container.height-100
-              .caption-center
-                p.caption-title Do you feel wicked?
-                br/
-                button.btn.btn-white type="button"  Explore the Collection
-        div style=("background-image: url('assets/images/2.jpg')") 
-          .slider-image-caption.height-100
-            .container.height-100
-              .caption-left
-                p.caption-title Do you feel wicked?
-                br/
-                button.btn.btn-white type="button"  Explore the Collection
-        div style=("background-image: url(assets/images/3.jpg)") 
-          .slider-image-caption.height-100
-            .container.height-100
-              .caption-right
-                p.caption-title Do you feel wicked?
-                br/
-                button.btn.btn-white type="button"  Explore the Collection
-        /!
-          | <div style="background-image: url(images/test4.jpg)"></div
-          | <div style="background-image: url(images/test5.jpg)"></div
-    /! Call to Actions
-    .call-to-actions
-      .row
-        a href="#" 
-        .col-md-4.text-center.homepage-panel.no-padding
-          .homepage-panel--content
-            h3.homepage-panel--title Celebrity Dresses
-            = image_tag "images/arrow2.svg", alt: 'arrow', class: 'arror hidden'
-          = image_tag "images/banner1a.jpg", alt: 'Something here', class: 'img-responsive'
-        a href="#" 
-        .col-md-4.text-center.homepage-panel.no-padding.hidden-xs
-          .homepage-panel--content
-            h3.homepage-panel--title Check out the Amfam collection
-            = image_tag "images/arrow2.svg", alt: 'arrow', class: 'arror hidden'
-          = image_tag "images/banner2.jpg", alt: 'Something here', class: 'img-responsive'
-        a href="#" 
-        .col-md-4.text-center.homepage-panel.no-padding.hidden-xs
-          .homepage-panel--content
-            h3.homepage-panel--title Worried about what to wear to your next event?
-            = image_tag "images/arrow2.svg", alt: 'arrow', class: 'arror hidden'
-          = image_tag "images/banner4.jpg", alt: 'Something here', class: 'img-responsive'
-    /! Email Subscription
-    .email-subscriptions.page-content.bg-grey.text-center
-      .container
-        .row
-          .col-md-12
-            p.text-center.h2-title Become Famous.
-            p.lead Join now to receive fame style tips and  exclusive offers.
-            br/
-            br/
-          .col-md-3
-          .col-md-6
-            .input-group.margin-bottom-sm
-              input.form-control.black-form placeholder=("Enter Email") type="text" /
-              span.input-group-addon.no-padding-right
-                button.invis-fix type="submit" 
-                  = image_tag 'images/line-arrow.svg', alt: 'Submit', class: 'line-arrow'
-          .col-md-3
-    /! Dave's SEO Crap
-    .main-content
-      .container
-        .row
-          .col-md-7
-            h1 H1 Heading goes here
-            p More text goes here to help sell the dresses and benefit on page Search engine optimisation. More text goes here to help sell the dresses.
-            p More text goes here to help sell the dresses and benefit on page Search engine optimisation. More text goes here to help sell the benefit on page Search engine optimisation. More text goes here to help sell the dresses..
-          .col-md-5
-            = image_tag 'images/bridesmaid-image.jpg', alt: 'Bridesmaid image', class: 'img-responsive'
-    /! Footer
+#container
+  #theTarget style=("height: 800px;") 
+    div style=("background-image: url('assets/images/1.jpg')") 
+      .slider-image-caption.height-100
+        .container.height-100
+          .caption-center
+            p.caption-title Do you feel wicked?
+            br
+            button.btn.btn-white type="button"  Explore the Collection
+    div style=("background-image: url('assets/images/2.jpg')") 
+      .slider-image-caption.height-100
+        .container.height-100
+          .caption-left
+            p.caption-title Do you feel wicked?
+            br
+            button.btn.btn-white type="button"  Explore the Collection
+    div style=("background-image: url(assets/images/3.jpg)") 
+      .slider-image-caption.height-100
+        .container.height-100
+          .caption-right
+            p.caption-title Do you feel wicked?
+            br
+            button.btn.btn-white type="button"  Explore the Collection
     /!
-      | <div class="footer"
-      | <div class="footer-menu text-center"
-      | <div class="container"
-      | <ul
-      | <li><a href="#">FAQs</a></li
-      | <li>/</li
-      | <li><a href="#">Terms</a></li
-      | <li>/</li
-      | <li><a href="#">The Fame Team</a></li
-      | <li>/</li
-      | <li><a href="#">Why Shop With Us</a></li
-      | <li>/</li
-      | <li><a href="#">Styling Advice</a></li
-      | <li>/</li
-      | <li><a href="#">Fashionista</a></li
-      | <li>/</li
-      | <li><a href="#">Fame Chain</a></li
-      | <li>/</li
-      | <li><a href="#">Contact</a></li
-      | </ul
-      | <br><br
-      | <div class="row"
-      | <div class="col-md-3"><p class="text-grey">Australia</p></div
-      | <div class="col-md-6"><small class="text-grey">© 2015 FAME &amp; PARTNERS. All Rights Reserved, ABN 83 162 501 064, Bondi, Sydney</small></div
-      | <div class="col-md-3">Icons</div
-      | </div
-      | </div
-      | </div
-      
-      | </div
-    /! Footer 2
-    .footer
-      .container
-        /! Logo
-        .footer-logo
-          = image_tag "images/dark-logo.svg", alt: "Fame & Partners"
-        /! Navigation
-        .footer-navigation
-          .row
-            .col-md-3
-              p
-                | Level 1, 140 Cleveland Street
-                br
-                | Chippendale, NSW, 2001,
-                br
-                | Australia
+      | <div style="background-image: url(images/test4.jpg)"></div
+      | <div style="background-image: url(images/test5.jpg)"></div
 
-              .btn-group
-                button.btn.btn-dropdown.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button" 
-                  = image_tag "images/australian-flag.jpg", alt: "Australia flag"
-                  | AUS
-                  span.caret
-                ul.dropdown-menu role="menu" 
-                  li
-                    a href="#" 
-                      = image_tag "images/australian-flag.jpg", alt: "US flag"
-                      | US
-              br/
-              br/
-            .col-md-3
-              ul.footer-nav
-                li.footer-nav--item
-                  a href="#"  Help
-                li.footer-nav--item
-                  a href="#"  Get styling advice
-                li.footer-nav--item
-                  a href="#"  Why shop with us
-                li.footer-nav--item
-                  a href="#"  Free shipping
-                li.footer-nav--item
-                  a href="#"  Returns & exchanges
-            .col-md-3
-              ul.footer-nav
-                li.footer-nav--item
-                  a href="#"  About Us
-                li.footer-nav--item
-                  a href="#"  Jobs
-                li.footer-nav--item
-                  a href="#"  Affilates
-                li.footer-nav--item
-                  a href="#"  Meet the team
-                li.footer-nav--item
-                  a href="#"  Contact us
-            .col-md-3
-              ul.footer-nav
-                li.footer-nav--item
-                  a href="#"  Fashionista program
-                li.footer-nav--item
-                  a href="#"  Fame chain
-              br/
-              ul.footer-social
-                li.footer-social--item
-                  a href="" 
-                    span.fa.fa-2x.fa-instagram
-                li.footer-social--item
-                  a href="" 
-                    span.fa.fa-2x.fa-facebook
-                li.footer-social--item
-                  a href="" 
-                    span.fa.fa-2x.fa-twitter
-                li.footer-social--item
-                  a href="" 
-                    span.fa.fa-2x.fa-pinterest
-        .footer-details
-          .footer-details-text.pull-left
-            p.lighter-text
-              small
-                | © 2015 FAME & PARTNERS. All rights reserved.
-                strong ABN 83 162 501 064
-          .pull-right.no-float-mobile
-            ul.footer-details-nav
-              li.footer-details-nav--item
-                a.lighter-text href="#" 
-                  small Privacy Policy
-              li.footer-details-nav--item
-                a.lighter-text href="#" 
-                  small Terms of Use
-    /! Mobile Menu
-    .mobile-menu.visible-sm.visible-xs
-      .row
-        .col-xs-3.mobile-menu-icon.mobile-active
-          span.hidden-xxs> View
-          | All
-        .col-xs-3.mobile-menu-icon
-          span.hidden-xs> By
-          | Style
-        .col-xs-3.mobile-menu-icon
-          span.hidden-xs> By
-          | Colour
-        .col-xs-3.mobile-menu-icon
-          span.hidden-xs> By
-          | Event
-    a.cd-top href="#top"  Top
+/! Call to Actions
+.call-to-actions
+  .row
+    a href="#" 
+    .col-md-4.text-center.homepage-panel.no-padding
+      .homepage-panel--content
+        h3.homepage-panel--title Celebrity Dresses
+        = image_tag "images/arrow2.svg", alt: 'arrow', class: 'arror hidden'
+      = image_tag "images/banner1a.jpg", alt: 'Something here', class: 'img-responsive'
+    a href="#" 
+    .col-md-4.text-center.homepage-panel.no-padding.hidden-xs
+      .homepage-panel--content
+        h3.homepage-panel--title Check out the Amfam collection
+        = image_tag "images/arrow2.svg", alt: 'arrow', class: 'arror hidden'
+      = image_tag "images/banner2.jpg", alt: 'Something here', class: 'img-responsive'
+    a href="#" 
+    .col-md-4.text-center.homepage-panel.no-padding.hidden-xs
+      .homepage-panel--content
+        h3.homepage-panel--title Worried about what to wear to your next event?
+        = image_tag "images/arrow2.svg", alt: 'arrow', class: 'arror hidden'
+      = image_tag "images/banner4.jpg", alt: 'Something here', class: 'img-responsive'
+
+/! Email Subscription
+.email-subscriptions.page-content.bg-grey.text-center
+  .container
+    .row
+      .col-md-12
+        p.text-center.h2-title Become Famous.
+        p.lead Join now to receive fame style tips and  exclusive offers.
+        br/
+        br/
+      .col-md-3
+      .col-md-6
+        .input-group.margin-bottom-sm
+          input.form-control.black-form placeholder=("Enter Email") type="text" /
+          span.input-group-addon.no-padding-right
+            button.invis-fix type="submit" 
+              = image_tag 'images/line-arrow.svg', alt: 'Submit', class: 'line-arrow'
+      .col-md-3
+
+/! Dave's SEO Crap
+.main-content
+  .container
+    .row
+      .col-md-7
+        h1 H1 Heading goes here
+        p More text goes here to help sell the dresses and benefit on page Search engine optimisation. More text goes here to help sell the dresses.
+        p More text goes here to help sell the dresses and benefit on page Search engine optimisation. More text goes here to help sell the benefit on page Search engine optimisation. More text goes here to help sell the dresses..
+      .col-md-5
+        = image_tag 'images/bridesmaid-image.jpg', alt: 'Bridesmaid image', class: 'img-responsive'

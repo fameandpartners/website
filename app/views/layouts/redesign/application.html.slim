@@ -1,0 +1,17 @@
+doctype html
+= conditional_html do
+  head
+    meta charset="utf-8"
+    title Fame & Partners - Mobile Test
+    meta content="width=device-width" name="viewport"
+
+    = stylesheet_link_tag    'application_redesign'
+    = javascript_include_tag 'application_redesign'
+
+  body#top
+    = render 'layouts/redesign/header'
+
+    = yield
+
+    = render 'layouts/redesign/footer'
+    = render 'layouts/redesign/mobile_menu'
