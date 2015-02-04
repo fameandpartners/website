@@ -3,13 +3,13 @@
   .footer-menu.text-center
     .container
       ul
-        li = link_to 'FAQs', '#'
-        li = link_to 'Terms', '#'
-        li = link_to 'The Fame Team', '#'
-        li = link_to 'Why Shop With Us', '#'
-        li = link_to 'Styling Advice', '#'
-        li = link_to 'Fashionista', '#'
-        li = link_to 'Fame Chain', '#'
+        li = link_to 'FAQs', faqs_path
+        li = link_to 'Terms', terms_path
+        li = link_to 'The Fame Team', about_us_path
+        li = link_to 'Why Shop With Us', why_us_path
+        li = link_to 'Styling Advice', style_consultation_path
+        li = link_to 'Fashionista', fashionista_winner_path
+        li = link_to 'Fame Chain', fame_chain_path
         li = link_to 'Contact', '#'
       br
       br
@@ -43,23 +43,31 @@
           .btn-group
             button.btn.btn-dropdown.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button" 
               = image_tag "images/australian-flag.jpg", alt: "Australia flag"
-              | AUS
+              = current_site_version.abbr.upcase
               span.caret
             ul.dropdown-menu role="menu" 
-              li
-                a href="#" 
-                  = image_tag "images/australian-flag.jpg", alt: "US flag"
-                  | US
-          br/
-          br/
+              - if !current_site_version.is_australia?
+                li
+                  = link_to site_version_path('au', backlink: get_hreflang_link) do
+                    = image_tag "images/australian-flag.jpg", alt: "US flag"
+                    | AU
+
+              - if !current_site_version.is_usa?
+                li
+                  = link_to site_version_path('us', backlink: get_hreflang_link) do
+                    = image_tag "images/australian-flag.jpg", alt: "US flag"
+                    | US
+
+          br
+          br
         .col-md-3
           ul.footer-nav
             li.footer-nav--item
-              a href="#"  Help
+              = link_to 'Help', '#'
             li.footer-nav--item
-              a href="#"  Get styling advice
+              = link_to 'Get styling advice', style_consultation_path
             li.footer-nav--item
-              a href="#"  Why shop with us
+              = link_to 'Why shop with us', why_us_path
             li.footer-nav--item
               a href="#"  Free shipping
             li.footer-nav--item
@@ -67,7 +75,7 @@
         .col-md-3
           ul.footer-nav
             li.footer-nav--item
-              a href="#"  About Us
+              = link_to 'About Us', about_us_path
             li.footer-nav--item
               a href="#"  Jobs
             li.footer-nav--item
@@ -79,22 +87,23 @@
         .col-md-3
           ul.footer-nav
             li.footer-nav--item
-              a href="#"  Fashionista program
+              = link_to 'Fashionista program', fashionista_winner_path
             li.footer-nav--item
-              a href="#"  Fame chain
-          br/
+              = link_to 'Fame Chain', fame_chain_path
+
+          br
           ul.footer-social
             li.footer-social--item
-              a href="" 
+              = link_to configatron.links.instagram, target: :blank do
                 span.fa.fa-2x.fa-instagram
             li.footer-social--item
-              a href="" 
+              = link_to configatron.links.facebook, target: :blank do
                 span.fa.fa-2x.fa-facebook
             li.footer-social--item
-              a href="" 
+              = link_to configatron.links.twitter, target: :blank do
                 span.fa.fa-2x.fa-twitter
             li.footer-social--item
-              a href="" 
+              = link_to configatron.links.pinterest, target: :blank do
                 span.fa.fa-2x.fa-pinterest
 
     .footer-details
@@ -106,8 +115,8 @@
       .pull-right.no-float-mobile
         ul.footer-details-nav
           li.footer-details-nav--item
-            a.lighter-text href="#" 
+            = link_to privacy_path, class: 'lighter-text' do
               small Privacy Policy
           li.footer-details-nav--item
-            a.lighter-text href="#" 
+            = link_to terms_path, class: 'lighter-text' do
               small Terms of Use

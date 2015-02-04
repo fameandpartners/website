@@ -1,0 +1,13 @@
+<!-- bootstrap -->
+<script type="text/javascript">
+  window.app = {
+    env:    '<%= Rails.env %>',
+    debug:  <%= Rails.env.development? %>,
+    user:   { id: <%= current_spree_user.present? ? current_spree_user.id : 'null' %> },
+    site_version: {  name: '<%= current_site_version.try(:name) %>' }
+  };
+
+  $(document).ready(function() {
+    <%= yield :inline_javascript %>
+  });
+</script>

@@ -27,11 +27,11 @@ header
                   h4 Events
                   ul.mega-menu-list
                     li.mega-menu-list--item
-                      a href="#"  Bridesmaid Dresses
+                      = link_to 'Bridesmaid Dresseses', bridesmaid_lp_path, title: 'Bridesmaid Dresses'
                     li.mega-menu-list--item
-                      a href="#"  Formal Dresses
+                      = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses'
                     li.mega-menu-list--item
-                      a href="#"  Prom Dresses
+                      = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
                     li.mega-menu-list--item
                       a href="#"  Graduation Dresses
                     li.mega-menu-list--item
@@ -44,15 +44,15 @@ header
                   h4 Style
                   ul.mega-menu-list
                     li.mega-menu-list--item
-                      a href="#"  Plus Sizes Dresses
+                      = link_to 'Plus Size Dresses', plus_size_path, title: 'Plus Size Dresses'
                     li.mega-menu-list--item
                       a href="#"  Evening Dresses
                     li.mega-menu-list--item
                       a href="#"  Sexy Dresses
                     li.mega-menu-list--item
-                      a href="#"  Long Dresses
+                      = link_to 'Long Dresses', build_taxon_path('Long'), title: 'Long Dresses'
                     li.mega-menu-list--item
-                      a href="#"  Lace Dresses
+                      = link_to 'Lace', build_taxon_path('Lace'), title: "Lace Dresses"
                     li.mega-menu-list--item
                       a href="#"  Maxi Dresses
                     li.mega-menu-list--item
@@ -61,31 +61,31 @@ header
                   h4 Colour
                   ul.mega-menu-list
                     li.mega-menu-list--item
-                      a href="#"  Black Dresses
+                      = link_to "Black Dresses", colour_path('Black'), title: "Black Dresses"
                     li.mega-menu-list--item
-                      a href="#"  Red Dresses
+                      = link_to "Red Dresses", colour_path('Red'), title: "Red Dresses"
                     li.mega-menu-list--item
-                      a href="#"  White Dresses
+                      = link_to "White Dresses", colour_path('White'), title: "White Dresses"
                     li.mega-menu-list--item
                       a href="#"  Little Black Dresses
                     li.mega-menu-list--item
-                      a href="#"  Blue Dresses
+                      = link_to "Blue Dresses", colour_path('Blue'), title: "Blue Dresses"
                     li.mega-menu-list--item
                       a href="#"  Poo Brown Dresses
                     li.mega-menu-list--item
-                      a href="#"  Yellow Dresses
+                      = link_to "Yellow Dresses", colour_path('Yellow'), title: "Yellow Dresses"
         li.menu-item
-          a.menu-item--link href="#"  Style Quiz
+          = link_to 'Style Quiz', dresses_path, class: 'show-style-quiz menu-item--link'
         li.menu-item
-          a.menu-item--link href="#"  Blog
+          = link_to 'Blog', blog_path, class: 'menu-item--link'
       ul.secondary.pull-right
         li.menu-item.hidden-xs.hidden-sm
-          a.menu-item--link href="#" 
+          = link_to wishlist_path, class: 'menu-item--link' do
             span.visible-sm
               = image_tag "images/Heart.svg"
             span.hidden-sm.hidden-xs Moodboard (2)
         li.menu-item
-          a.menu-item--link href="#" 
+          = link_to profile_path, class: 'menu-item--link' do
             span.visible-sm.visible-xs
               = image_tag "images/User.svg"
             span.hidden-sm.hidden-xs Account
@@ -102,14 +102,15 @@ header
               .row
                 .col-md-3
                 .col-md-6.padding-zero-mobile.margin-top-100-mobile
-                  .input-group.margin-bottom-sm
-                    input.form-control.black-form placeholder=("Search here...") type="text" /
-                    span.input-group-addon.no-padding-right
-                      button.invis-fix
-                        = image_tag "images/search-icon.svg"
+                  = form_tag search_path, method: :get do
+                    .input-group.margin-bottom-sm
+                      input.form-control.black-form name='q' placeholder=("Search here...") type="text"
+                      span.input-group-addon.no-padding-right
+                        button.invis-fix
+                          = image_tag "images/search-icon.svg"
                 .col-md-3
         li.menu-item
-          a.menu-item--link href="#" 
+          = link_to spree.cart_path, class: 'menu-item--link' do
             span.visible-sm.visible-xs
               = image_tag "images/Cart.svg"
             span.hidden-sm.hidden-xs Cart (0)

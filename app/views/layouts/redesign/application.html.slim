@@ -7,6 +7,9 @@ doctype html
 
     = stylesheet_link_tag    'application_redesign'
     = javascript_include_tag 'application_redesign'
+    = csrf_meta_tags
+
+    = yield :head
 
   body#top
     = render 'layouts/redesign/header'
@@ -15,3 +18,5 @@ doctype html
 
     = render 'layouts/redesign/footer'
     = render 'layouts/redesign/mobile_menu'
+
+    = render 'layouts/redesign/javascript'

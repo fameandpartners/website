@@ -1,4 +1,4 @@
-class IndexController < Spree::StoreController
+class IndexController < ApplicationController
   layout 'redesign/application'
 
   #include ApplicationHelper
