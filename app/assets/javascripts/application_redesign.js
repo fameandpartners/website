@@ -1,5 +1,6 @@
 // our code
 //= require jquery
+//= require libs/underscore-min
 
 // styleguide code
 //= require js/snap.svg-min.js
@@ -15,12 +16,12 @@
 //= require js/functions.js
 //= require functions_redesign.js
 
+//= require partials/helpers/site_version
+//= require popups/style_quiz
 
 //require js/sg-scripts.js should be done after page loaded.
 jQuery(document).ready(function($){
-
   var sg_script = document.createElement('script');
   sg_script.setAttribute('src','//assets/js/sg-scripts.js');
   document.head.appendChild(sg_script);
-
 })
