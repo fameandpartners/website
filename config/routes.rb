@@ -33,6 +33,7 @@ FameAndPartners::Application.routes.draw do
     get '/maryxfame'  => 'statics#maryxfame'
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirl2015-terms-and-conditions'  => 'statics#fashion_it_girl_terms_and_conditions'
+    get '/nyfw-comp-terms-and-conditions'  => 'statics#nyfw_comp_terms_and_conditions'    
     get '/fashionitgirl2015-competition'  => 'statics#fashion_it_girl_competition'
     get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
     get '/girlfriend' => 'statics#girlfriendxfame'
