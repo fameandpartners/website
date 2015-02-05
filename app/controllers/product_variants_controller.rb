@@ -1,3 +1,4 @@
+# variants selector popup uses this
 class ProductVariantsController < ApplicationController
   # get product info + variants details[exclude master]
   #   id [product_id]

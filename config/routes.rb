@@ -114,7 +114,7 @@ FameAndPartners::Application.routes.draw do
     get '/quick_view/:id' => 'spree/products#quick_view'
     post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
 
-    post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
+    #post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
 
     get 'my-boutique' => 'boutique#show', :as => :my_boutique
     get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
