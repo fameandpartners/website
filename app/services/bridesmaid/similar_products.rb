@@ -28,7 +28,13 @@ class Bridesmaid::SimilarProducts
   private
 
     def search_results
-      @search_results ||= build_search_query.results
+      @search_results ||= begin
+        Search::ColorVariantsQuery.build(
+          taxon_ids: @taxon_ids,
+          body_shapes: @body_shapes,
+          exclude_products: products_ids
+        ).results
+      end
     end
 
     def taxon_ids
@@ -120,75 +126,5 @@ class Bridesmaid::SimilarProducts
       end
 
       "/" + path_parts.join('/')
-    end
-
-    def build_search_query
-      # to make them visible inside Tire.search block
-      taxons = taxon_ids
-      products = products_ids
-      body_shapes = @body_shapes
-
-      Tire.search(:color_variants, size: 1000) do
-        filter :bool, :must => { :term => { 'product.is_deleted' => false } }
-        filter :bool, :must => { :term => { 'product.is_hidden' => false } }
-        filter :exists, :field => :available_on
-        filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } }
-
-        # Filter by availability of customisation colour
-        filter :bool, :must => { :term => { 'product.color_customizable' => true } }
-
-        # Filter by taxons
-        if taxons.present?
-          taxons.each do |ids|
-            if ids.present?
-              filter :terms, 'product.taxon_ids' => ids
-            end
-          end
-        end
-
-        # exclude already found [ somethere else ]
-        if products.present?
-          filter :bool, :must => {
-            :not => {
-              :terms => {
-                :id => products
-              }
-            }
-          }
-        end
-        if body_shapes.present?
-          if body_shapes.size.eql?(1)
-            filter :bool, :should => {
-                          :range => {
-                            "product.#{body_shapes.first}" => {
-                              :gte => 4
-                            }
-                          }
-                        }
-          else
-            filter :or,
-                   *body_shapes.map do |body_shape|
-                     {
-                       :bool => {
-                         :should => {
-                           :range => {
-                             "product.#{body_shape}" => {
-                               :gte => 4
-                             }
-                           }
-                         }
-                       }
-                     }
-                   end
-          end
-        end
-
-        # only available items
-        filter :bool, :must => { :term => { 'product.in_stock' => true } }
-
-        sort do
-          by 'product.position', 'asc'
-        end
-      end
     end
 end
