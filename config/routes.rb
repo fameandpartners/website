@@ -423,7 +423,7 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
-    get 'search' => 'pages#search'
+    get 'search' => 'products/search_results#show'
 
     # Guest checkout routes
     resources :payment_requests, only: [:new, :create]

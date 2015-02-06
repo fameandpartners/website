@@ -1,0 +1,17 @@
+.wrap.page-static
+  h1.block-title Search Results
+
+- if @query_string.blank?
+  p Search query should not be blank
+- elsif @products.present?
+  .category-catalog.products-list
+    .row
+      - @products.each do |product|
+        .grid-3
+          - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
+            = render 'spree/products/cached_product', product: product
+- else
+  p Sorry, no dresses match your criteria
+
+= content_for :inline_javascript do
+  | track.search('#{{j analytics_label(:search_query, @query_string) }}');
