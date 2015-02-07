@@ -1,63 +1,51 @@
 .page-title
   .container
     .page-title--details
-      h1.no-padding-bottom Prom Dresses
-      p.lead This is a paragraph.
+      h1.no-padding-bottom = @banner.title
+      p.lead = @banner.description
 
 .category.page-content
-  .container
-    /! First Row
+  /! Controls
+  .category-controls.container
     .row
-      .col-md-3.col-sm-6.col-xs-12.category--item
-        a href="#" 
-          img.img-responsive alt="" src="http://d1sd72h9dq237j.cloudfront.net/spree/products/8383/large/4B215-Black-1.jpg?1419659726" /
-        .details
-          span.name Mirrored Sea DressMirrored Sea DressMirrored Sea Dress
-          span.price $228
-      .col-md-3.col-sm-6.col-xs-12.category--item
-        a href="#" 
-          img.img-responsive alt="" src="http://d1sd72h9dq237j.cloudfront.net/spree/products/8383/large/4B215-Black-1.jpg?1419659726" /
-        .details
-          span.name Mirrored Sea Dress
-          span.price $228
-      .clearfix.visible-sm-block
-      .col-md-3.col-sm-6.col-xs-12.category--item
-        a href="#" 
-          img.img-responsive alt="" src="http://d1sd72h9dq237j.cloudfront.net/spree/products/8383/large/4B215-Black-1.jpg?1419659726" /
-        .details
-          span.name Mirrored Sea DressMirrored Sea Dress
-          span.price $228
-      .col-md-3.col-sm-6.col-xs-12.category--item
-        a href="#" 
-          img.img-responsive alt="" src="http://d1sd72h9dq237j.cloudfront.net/spree/products/8383/large/4B215-Black-1.jpg?1419659726" /
-        .details
-          span.name Mirrored Sea Dress
-          span.price $228
-    /! First Row
-    .row
-      .col-md-3.col-sm-6.col-xs-12.category--item
-        a href="#" 
-          img.img-responsive alt="" src="http://d1sd72h9dq237j.cloudfront.net/spree/products/8383/large/4B215-Black-1.jpg?1419659726" /
-        .details
-          span.name Mirrored Sea DressMirrored Sea DressMirrored Sea Dress
-          span.price $228
-      .col-md-3.col-sm-6.col-xs-12.category--item
-        a href="#" 
-          img.img-responsive alt="" src="http://d1sd72h9dq237j.cloudfront.net/spree/products/8383/large/4B215-Black-1.jpg?1419659726" /
-        .details
-          span.name Mirrored Sea Dress
-          span.price $228
-      .clearfix.visible-sm-block
-      .col-md-3.col-sm-6.col-xs-12.category--item
-        a href="#" 
-          img.img-responsive alt="" src="http://d1sd72h9dq237j.cloudfront.net/spree/products/8383/large/4B215-Black-1.jpg?1419659726" /
-        .details
-          span.name Mirrored Sea DressMirrored Sea Dress
-          span.price $228
-      .col-md-3.col-sm-6.col-xs-12.category--item
-        a href="#" 
-          img.img-responsive alt="" src="http://d1sd72h9dq237j.cloudfront.net/spree/products/8383/large/4B215-Black-1.jpg?1419659726" /
-        .details
-          span.name Mirrored Sea Dress
-          span.price $228
+      /! First Row Controls
+      .col-md-8.no-padding.hidden-sm.hidden-xs
+        .row
+          .col-md-3
+            - options = options_from_collection_for_select(@filter.styles, :permalink, :name, params[:collection])
+            = select_tag :style, options, class: 'cs-select cs-skin-border', prompt: 'Styles'
+            br
+          .col-md-3
+            - options = options_from_collection_for_select(@filter.events, :permalink, :name, params[:event])
+            = select_tag :event, options, class: 'cs-select cs-skin-border', prompt: 'Events'
+            br
 
+          .col-md-3
+            - options = options_from_collection_for_select(@filter.shapes, :to_s, :to_s,  params[:bodyshape])
+            = select_tag :bodyshape, options, class: 'cs-select cs-skin-border', prompt: 'Shape'
+            br
+
+          .col-md-3
+            - options = color_options_for_select_from_options_values(@filter.colors, params[:colour])
+            = select_tag :colour, options, class: 'cs-select cs-skin-border', prompt: 'Colour'
+            br
+
+      /! Second Row Controls
+      .col-md-3.col-md-offset-1
+        .row
+          - options = options_from_collection_for_select(@filter.sort_orders, :first, :second, params[:order])
+          = select_tag 'product_order', options, class: 'cs-select cs-skin-border', prompt: 'Sort By...'
+          br
+
+  .container.relative
+    - @products.each_slice(4) do |products|
+      .row
+        - products.each_with_index do |product, index|
+          .col-md-3.col-sm-6.col-xs-12.category--item
+            = link_to collection_product_path(product) do
+              = image_tag product.image, alt: product.name, class: 'img-responsive'
+            .details
+              span.name = product.name
+              span.price = product.price
+          - if index == 1 # i like this markup
+            .clearfix.visible-sm-block
