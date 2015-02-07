@@ -1,5 +1,5 @@
 module ProductsHelper
-
+=begin
   def product_style_and_event(product)
     result = []
     style_taxon = Spree::Taxonomy.where(name: "Style").first.root
@@ -11,6 +11,7 @@ module ProductsHelper
     #binding.pry
     return result
   end
+=end
 
   def range_taxonomy
     @range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first

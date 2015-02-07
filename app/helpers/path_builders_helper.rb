@@ -111,7 +111,7 @@ module PathBuildersHelper
       'dresses'
     ]
     taxon = Repositories::Taxonomy.get_taxon_by_name(taxon_name)
-    path_parts.push(taxon.name.parameterize) if taxon.present?
+    path_parts.push(taxon.permalink.parameterize) if taxon.present?
 
     build_url(path_parts, options)
   end

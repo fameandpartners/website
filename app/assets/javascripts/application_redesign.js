@@ -18,6 +18,8 @@
 
 //= require partials/helpers/site_version
 //= require popups/style_quiz
+//
+//= require partials/helpers/tracker.js.coffee
 
 //require js/sg-scripts.js should be done after page loaded.
 jQuery(document).ready(function($){
