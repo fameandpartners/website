@@ -8,6 +8,7 @@ class ClearCacheWorker
     update_color_variants_elastic_index
     update_products_elastic_index
     reset_cache
+    update_taxonomy_cache
   end
 
   private
@@ -28,5 +29,9 @@ class ClearCacheWorker
     def reset_cache
       ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).clear
       Rails.cache.clear
+    end
+
+    def update_taxonomy_cache
+      Repositories::Taxonomy.read_all(force: true).size
     end
 end
