@@ -1,8 +1,8 @@
 .page-title
   .container
     .page-title--details
-      h1.no-padding-bottom = @banner.title
-      p.lead = @banner.description
+      h1.no-padding-bottom = @collection.banner.title
+      p.lead = @collection.banner.description
 
 .category.page-content
   /! Controls
@@ -38,7 +38,7 @@
           br
 
   .container.relative
-    - @products.each_slice(4) do |products|
+    - @collection.products.each_slice(4) do |products|
       .row
         - products.each_with_index do |product, index|
           .col-md-3.col-sm-6.col-xs-12.category--item

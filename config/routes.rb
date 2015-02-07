@@ -9,7 +9,7 @@ FameAndPartners::Application.routes.draw do
 
   # development only
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-    get 'products' => 'products/categories#show'
+    get 'products' => 'products/collections#show'
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do

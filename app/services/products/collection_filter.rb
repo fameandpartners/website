@@ -1,20 +1,7 @@
-class Products::CategoriesController < Products::BaseController
-  layout 'redesign/application'
-
-  def show
-    category = Products::CategoryResource.new(
-      site_version: current_site_version,
-      limit: 8
-    ).read
-
-    @products = category.products
-    @banner   = category.banner
-    @filter   = filter
-  end
-
-  private
-
-    def filter
+# please, extract not user dependable data receiving to repo
+class Products::CollectionFilter
+  class << self
+    def read
       OpenStruct.new({
         styles: Repositories::Taxonomy.read_styles,
         events: Repositories::Taxonomy.read_events,
@@ -34,4 +21,5 @@ class Products::CategoriesController < Products::BaseController
         ['fast_delivery', 'Next day delivery']
       ]
     end
+  end
 end
