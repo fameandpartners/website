@@ -87,24 +87,32 @@
         .image {
           float: right;
           margin: 0px;
+          border:5px solid #555559;
         }
       }
       .left {
         .image {
           float: left;
           margin: 0px;
+          border:5px solid #555559;
         }
       }
       h2 {
-        font-family: "Novecento", sans-serif;
-        font-size:18pt;
-        margin-top:40px;
+        font-family: "BaskervilleMTStdRegular", sans-serif;
+        font-size:17pt;
+        margin-top:20px;
         margin-left:20px;
-        margin-right:20px;
-        text-transform: none;
+        margin-right:20px;        
         font-style: italic;
-        font-weight:normal;        
+        font-weight:normal; 
+        text-transform: initial;       
       }
+    }
+
+    .title {
+      font-weight: bold;
+      color:#555559;
+      font-size:11pt;
     }
 }
 
