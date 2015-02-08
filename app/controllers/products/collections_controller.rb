@@ -7,6 +7,6 @@ class Products::CollectionsController < Products::BaseController
       limit: 8
     ).read
 
-    @filter   = Products::CollectionFilter.read
+    @filter = @collection.filter
   end
 end

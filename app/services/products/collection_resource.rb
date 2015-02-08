@@ -1,4 +1,6 @@
 # please, extract not user dependable data receiving to repo
+class Products::Collection < OpenStruct; end
+
 class Products::CollectionResource
   attr_reader :site_version, :limit
 
@@ -7,14 +9,25 @@ class Products::CollectionResource
     @limit        = options[:limit]
   end
 
+  # what about ProductCollection class
   def read
-    OpenStruct.new(
+    Products::Collection.new(
+      filter: filter,
       products: products,
-      banner: banner
+      banner: banner,
+      style: 'Gothic',
+      event: 'Wedding',
+      bodyshape: 'apple',
+      colour: 'black',
+      order: 'newest'
     )
   end
 
   private
+
+    def filter
+      @filter   ||= Products::CollectionFilter.read
+    end
 
     def banner
       taxon_banner = Spree::TaxonBanner.first

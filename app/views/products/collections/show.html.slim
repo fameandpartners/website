@@ -12,28 +12,28 @@
       .col-md-8.no-padding.hidden-sm.hidden-xs
         .row
           .col-md-3
-            - options = options_from_collection_for_select(@filter.styles, :permalink, :name, params[:collection])
+            - options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style)
             = select_tag :style, options, class: 'cs-select cs-skin-border', prompt: 'Styles'
             br
           .col-md-3
-            - options = options_from_collection_for_select(@filter.events, :permalink, :name, params[:event])
+            - options = options_from_collection_for_select(@filter.events, :permalink, :name, @collection.event)
             = select_tag :event, options, class: 'cs-select cs-skin-border', prompt: 'Events'
             br
 
           .col-md-3
-            - options = options_from_collection_for_select(@filter.shapes, :to_s, :to_s,  params[:bodyshape])
+            - options = options_from_collection_for_select(@filter.shapes, :to_s, :to_s, @collection.bodyshape)
             = select_tag :bodyshape, options, class: 'cs-select cs-skin-border', prompt: 'Shape'
             br
 
           .col-md-3
-            - options = color_options_for_select_from_options_values(@filter.colors, params[:colour])
-            = select_tag :colour, options, class: 'cs-select cs-skin-border', prompt: 'Colour'
+            - options = color_options_for_select_from_options_values(@filter.colors, @collection.color)
+            = select_tag :color, options, class: 'cs-select cs-skin-border', prompt: 'Colour'
             br
 
       /! Second Row Controls
       .col-md-3.col-md-offset-1
         .row
-          - options = options_from_collection_for_select(@filter.sort_orders, :first, :second, params[:order])
+          - options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order)
           = select_tag 'product_order', options, class: 'cs-select cs-skin-border', prompt: 'Sort By...'
           br
 

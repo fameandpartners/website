@@ -1,4 +1,5 @@
-# please, extract not user dependable data receiving to repo
+# don't think what caching require here
+# possible, it should be done layer up or down from here
 class Products::CollectionFilter
   class << self
     def read
@@ -6,7 +7,7 @@ class Products::CollectionFilter
         styles: Repositories::Taxonomy.read_styles,
         events: Repositories::Taxonomy.read_events,
         shapes: ProductStyleProfile::BODY_SHAPES,
-        colors: Spree::Variant.color_option_type.try(:option_values) || [],
+        colors: Repositories::ProductColor.read_all,
         sort_orders: available_sort_orders
       })
     end
