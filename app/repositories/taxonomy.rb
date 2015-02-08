@@ -1,11 +1,17 @@
 # wrapper to taxon search
-# NOTE - all taxons should be loaded inside each request only once and only if needed
-# TODO - implement caching
+# all taxons should be loaded inside each request only once and only if needed
+# 
+# external api:
+# Repositories::Taxonomy.get_taxon_by_name('code')
+# Repositories::Taxonomy.read_styles
+# Repositories::Taxonomy.read_events
 
 module Repositories; end
 class Repositories::Taxonomy
   class << self
     def get_taxon_by_name(taxon_name)
+      return nil if taxon_name.blank?
+
       taxon_name = taxon_name.downcase
       taxon = taxons.find{|t| t.name.downcase == taxon_name }
 
