@@ -67,7 +67,7 @@ gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :
 
 # utils
 # replacement for standart library.
-gem 'addressable' 
+gem 'addressable', require: false
 
 group :assets do
   gem 'bourbon'
