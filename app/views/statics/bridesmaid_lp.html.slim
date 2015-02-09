@@ -36,7 +36,9 @@ ruby:
               .price = price_for_product(dress) 
       .sb3 style="margin-bottom:15px;"
         .left style="height:349px;width:50%;text-transform:none;"
-          h2 style="text-transform:none;"= t('landing.bridesmaid.one')
+          h2 style="text-transform:none;"= t('landing.bridesmaid.one.heading')
+          p style="text-transform:none;"= t('landing.bridesmaid.one.p1')
+          p style="text-transform:none;"= t('landing.bridesmaid.one.p2')
         .right style="margin-right: 0px;"
           = image_tag 'campaigns/bridemaid/bridesmaid-dress-1.jpg', width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
       .catalog
@@ -52,7 +54,10 @@ ruby:
         .left style="margin-right: 0px;"
           = image_tag 'campaigns/bridemaid/bridesmaid-dress-2.jpg', width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
         .right style="height:349px;width:50%;text-transform:none;"
-          h2 style="text-transform:none;"= t('landing.bridesmaid.two')
+
+          h2 style="text-transform:none;"= t('landing.bridesmaid.two.heading')
+          p style="text-transform:none;"= t('landing.bridesmaid.two.p1')
+          p style="text-transform:none;"= t('landing.bridesmaid.two.p2')
       .catalog
         - products[8..11].each do |dress|
           .catalog-item
@@ -65,7 +70,10 @@ ruby:
               .price = price_for_product(dress)
       .sb3 style="margin-bottom:15px;"
         .left style="height:349px;width:50%;text-transform:none;"
-          h2 style="text-transform:none;"= t('landing.bridesmaid.three')
+          h2 style="text-transform:none;"= t('landing.bridesmaid.three.heading')
+          p style="text-transform:none;"= t('landing.bridesmaid.three.p1')
+          p style="text-transform:none;"= t('landing.bridesmaid.three.p2')
+          p style="text-transform:none;"= t('landing.bridesmaid.three.p3')
         .right style="margin-right: 0px;"
           = image_tag 'campaigns/bridemaid/bridesmaid-dress-3.jpg', width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
       .catalog
