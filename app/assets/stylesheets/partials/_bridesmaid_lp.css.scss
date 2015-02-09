@@ -18,14 +18,16 @@
         width: 25%;
         padding-left:0;
         padding-right: 10px;
+        padding-bottom:15px;
         margin-right:0px;
         margin-bottom:10px;
       }
-
-      .catalog-item:nth-child(4) {
-        padding-right: 0px;
+      img {
+        max-height:395px;
       }
-
+      .catalog-item:nth-child(4) {
+        padding-right:0;        
+      }      
     }
 
     .sb2 {
