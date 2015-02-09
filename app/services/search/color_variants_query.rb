@@ -7,6 +7,8 @@
 #   body_shapes: []   color variant product should have exactly this shape
 #   taxon_ids: []     color variant product should belongs to this taxons
 #   exclude_products: don't search this products
+#   order:            ['price_high', 'price_low', 'newest', 'fast_deliver']
+#   discount:         search products with specific discount ( in percents ) or :all to find all products under sale
 #   limit:            1000 by default
 # )
 module Search
@@ -19,6 +21,8 @@ module Search
       body_shapes         = options[:body_shapes]
       taxons              = options[:taxon_ids]
       exclude_products    = options[:exclude_products]
+      discount            = options[:discount]
+      order               = options[:order]
       limit               = options[:limit].present? ? options[:limit].to_i : 1000
 
       Tire.search(:color_variants, size: limit) do
@@ -38,8 +42,17 @@ module Search
         if taxons.present?
           taxons.each do |ids|
             if ids.present?
-              filter :terms, 'product.taxon_ids' => ids
+              filter :terms, 'product.taxon_ids' => Array.wrap(ids)
             end
+          end
+        end
+
+        # select only products with given discount
+        if discount.present?
+          if discount == :all
+            filter :bool, :should => { :range => { "product.discount" => { :gt => 0 } } }
+          else
+            filter :bool, :must => { :term => { 'product.discount' => discount.to_i } }
           end
         end
 
@@ -98,8 +111,29 @@ module Search
                 order: 'asc'
               }
             })
-          else
-            by 'product.position', 'asc'
+          end
+
+          if body_shapes.present?
+            by ({
+              :_script => {
+                script: body_shapes.map{|bodyshape| "doc['product.#{bodyshape}'].value" }.join(' + '),
+                type:   'number',
+                order:  'desc'
+              }
+            })
+          end
+
+          case order
+            when 'price_high'
+              by 'product.price', 'desc'
+            when 'price_low'
+              by 'product.price', 'asc'
+            when 'newest'
+              by 'product.created_at', 'desc'
+            when 'fast_delivery'
+              by 'product.fast_delivery', 'desc'
+            else
+              by 'product.position', 'asc'
           end
         end
       end

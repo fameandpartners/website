@@ -14,17 +14,24 @@ class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
 
   def show
+    @filter = Products::CollectionFilter.read
+
     @collection = Products::CollectionResource.new(
       site_version: current_site_version,
-      style: params[:style],
-      event: params[:event],
-      color: params[:colour] || params[:color],
-      bodyshape: params[:bodyshape],
-      sale:  params[:sale],
-      order: params[:order],
-      limit: 8
+      style:        params[:style],
+      event:        params[:event],
+      color:        params[:colour] || params[:color],
+      bodyshape:    params[:bodyshape],
+      discount:     params[:sale] || params[:discount],
+      order:        params[:order],
+      limit:        8
     ).read
 
-    @filter = @collection.filter
+    respond_to do |format|
+      format.html { }
+      format.json do
+        render json: @collection.serialize
+      end
+    end
   end
 end

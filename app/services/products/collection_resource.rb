@@ -1,5 +1,15 @@
-# please, extract not user dependable data receiving to repo
-class Products::Collection < OpenStruct; end
+class Products::Collection < OpenStruct
+  def serialize
+    result = self.marshal_dump.clone
+    result[:banner]   = self.banner.marshal_dump
+    result[:products] = self.products.map do |product| 
+      product.marshal_dump.merge(
+        collection_path: ApplicationController.helpers.collection_product_path(product)
+      )
+    end
+    result
+  end
+end
 
 class Products::CollectionResource
   attr_reader :site_version
@@ -8,18 +18,18 @@ class Products::CollectionResource
   attr_reader :event
   attr_reader :bodyshape
   attr_reader :color
-  attr_reader :sale
+  attr_reader :discount
   attr_reader :order
   attr_reader :limit
 
   def initialize(options = {})
-    @site_version = options[:site_version]
+    @site_version = options[:site_version] || SiteVersion.default
     @style        = Repositories::Taxonomy.get_taxon_by_name(options[:style]) 
     @edits        = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
     @event        = Repositories::Taxonomy.get_taxon_by_name(options[:event])
     @bodyshape    = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
     @color        = Repositories::ProductColor.get_by_name(options[:color])
-    @discount     = prepare_discount(options[:sale])
+    @discount     = prepare_discount(options[:discount])
     @order        = options[:order]
     @limit        = options[:limit]
   end
@@ -27,23 +37,18 @@ class Products::CollectionResource
   # what about ProductCollection class
   def read
     Products::Collection.new(
-      filter:     filter,
       products:   products,
       banner:     banner,
-      style:      style.try(:name),
-      event:      event.try(:name),
-      bodyshape:  bodyshape,
-      color:      color.try(:presentation),
-      sale:       sale,
+      style:      style.try(:permalink),
+      event:      event.try(:permalink),
+      bodyshape:  bodyshape.try(:downcase),
+      color:      color.try(:name),
+      sale:       discount,
       order:      order
     )
   end
 
   private
-
-    def filter
-      @filter   ||= Products::CollectionFilter.read
-    end
 
     def banner
       taxon_banner = Spree::TaxonBanner.first
@@ -64,11 +69,24 @@ class Products::CollectionResource
     end
 
     def query
-      @query ||= begin
-        Search::ColorVariantsQuery.build(
-          limit: limit
-        )
-      end
+      @query ||= Search::ColorVariantsQuery.build(query_options)
+    end
+
+    def query_options
+      result = { taxon_ids: [] }
+
+      result[:taxon_ids].push(style.id) if style.present?
+      result[:taxon_ids].push(edits.id) if edits.present?
+      result[:taxon_ids].push(event.id) if event.present?
+
+      result[:body_shapes] = Array.wrap(bodyshape) if bodyshape.present?
+      result[:color_ids] = Array.wrap(color.id) if color.present?
+      result[:discount] = discount if discount.present?
+
+      result[:limit] = limit if limit.present?
+      result[:order] = order if order.present?
+
+      result
     end
 
     def products
@@ -77,7 +95,7 @@ class Products::CollectionResource
           id: color_variant.product.id,
           name: color_variant.product.name,
           image: color_variant.images.first.try(:large),
-          price: Spree::Price.new(amount: color_variant.product.price, currency: current_currency).display_price
+          price: Spree::Price.new(amount: color_variant.product.price, currency: current_currency).display_price.to_s
         )
       end
     end
