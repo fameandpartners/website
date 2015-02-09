@@ -28,7 +28,7 @@ module CommonHelper
 
   def get_canonical_tag
     if @product.present?
-      return "<link href='#{request.host}#{collection_product_path(@product)}' rel='canonical' />".html_safe
+      return "<link href='http://#{request.host}#{collection_product_path(@product)}' rel='canonical' />".html_safe
     end
   end
 
