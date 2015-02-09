@@ -7,11 +7,6 @@ FameAndPartners::Application.routes.draw do
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
 
-  # development only
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-    get 'products' => 'products/collections#show'
-  end
-
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
                :class_name => 'Spree::User',
@@ -58,7 +53,8 @@ FameAndPartners::Application.routes.draw do
 
 
     scope '/dresses' do
-      root to: 'spree/products#index', as: 'dresses'
+      root to: 'products/collections#show', as: :dresses
+
       get '/dress-:product_slug(/:color_name)' => 'spree/products#show'
       #roots categories
       get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
