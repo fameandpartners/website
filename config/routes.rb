@@ -233,25 +233,7 @@ FameAndPartners::Application.routes.draw do
     get '/fb_auth' => 'pages#fb_auth'
 
     root :to => 'index#show'
-
-#    resource :competition, only: [:show, :create] do
-#      post 'enter', on: :member, action: :create
-#      get 'share(/:user_id)', on: :member, action: 'share', as: 'share'
-#      post 'invite', on: :member
-#      get 'stylequiz', on: :member
-#    end
-
-    # competitions page
-    scope "competition/:competition_id" do
-      resource :entry, only: [:new, :create], controller: 'competition/entries'
-    end
-    # shortcat to auto enter logged in user to competition
-    get "/competition/:competition_id/enter" => 'competition/entries#create', as: :enter_competition
-    get "/gregg-sulkin" => "competition/entries#new",
-      defaults: { competition_id: 'gregg-sulkin' }, as: :new_competition_entry
-    post "/gregg-sulkin" => "competition/entries#create",
-      defaults: { competition_id: 'gregg-sulkin' }, as: :competition_entry
-
+  
     resource :quiz, :only => [:show] do
       resources :questions, :only => [:index]
       resources :answers, :only => [:create]
@@ -262,6 +244,20 @@ FameAndPartners::Application.routes.draw do
       get '/style-report-debug' => 'user_style_profiles#debug'
       get '/recomendations' => 'user_style_profiles#recomendations'
     end
+
+    # Redirects for old pages as part of SEO 
+    match '/competition/*all' => redirect('/')
+    match '/competition/*all' => redirect('/')
+  
+    match "/gregg-sulkin" => redirect('/')
+
+    match '/trendsetter-program' => redirect('/')
+
+    match '/bloggers/racheletnicole' => redirect('/bloggers/ren')
+    match '/rachelxnicole' => redirect('/renxfame')
+
+    match '/blog/celebrity/*all' => redirect('/blog')
+
 
     mount Spree::Core::Engine, at: '/'
   end
