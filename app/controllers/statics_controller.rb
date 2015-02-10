@@ -157,7 +157,7 @@ class StaticsController < ApplicationController
     searcher = Products::ProductsFilter.new(:edits => edit)
     searcher.current_user = user
     searcher.current_currency = currency
-    return searcher.products.first(count)
+    searcher.products.first(count)
   end
 
   helper_method :get_products_from_edit
