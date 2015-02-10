@@ -1,8 +1,9 @@
+
 .bridesmaid_lp, .amfam_lp {
   margin-top: -8px;
 
   .inner{
-    width: 1030px;
+    width: 1140px;
     margin: 0 auto;
 
     .right{
@@ -14,10 +15,19 @@
 
     .catalog{
       .catalog-item{
-        width: 230px;
-        min-width: 230px;
-        margin-right: 36px;
+        width: 25%;
+        padding-left:0;
+        padding-right: 10px;
+        padding-bottom:15px;
+        margin-right:0px;
+        margin-bottom:10px;
       }
+      img {
+        max-height:395px;
+      }
+      .catalog-item:nth-child(4) {
+        padding-right:0;        
+      }      
     }
 
     .sb2 {
@@ -62,19 +72,68 @@
         float: right;
         margin-left: 30px;
       }
-      .catalog {
-        width: auto;
-      }
     }
 
     .more {
-      margin-top: 70px;
+      margin-top: 40px;
       h2 {
-        width: 470px;
+        width: 66.666666%;
         margin-bottom: 40px;
+        background-color: #FFFFFF;
+        color:#000000;
+        border-bottom:1px solid #CCCCCC;
+        padding-bottom:20px;
+        font-weight:bold;
+
       }
     }
   }
+}
+
+.bridesmaid_lp {
+    .sb3 {
+      @include clearfix;
+      .right {
+        .image {
+          float: right;
+          margin: 0px;
+        }
+      }
+      .left {
+        .image {
+          float: left;
+          margin: 0px;
+        }
+      }
+      h2 {
+        font-family: "Didot", serif;
+        font-size:30px;
+        margin-top:20px;
+        margin-left:20px;
+        margin-right:20px;        
+        font-style: normal;
+        font-weight:bold;    
+        text-align:center;
+        border-bottom:1px solid #CCCCCC;
+        padding-bottom:11px;
+      }
+      p {
+      text-align:center;
+        font-family: "Didot", serif;
+        font-size:14px;
+        margin-top:20px;
+        margin-left:20px;
+        margin-right:20px;        
+        font-style: italic;
+        font-weight:normal; 
+      }
+    }
+
+    .title {
+      font-weight: bold;
+      color:#555559;
+      font-size:11pt;
+    }
 }
 
 .amfam_lp{

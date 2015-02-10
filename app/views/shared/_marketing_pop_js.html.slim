@@ -9,12 +9,12 @@ javascript:
   pop_title = '#{strip_tags(params[:pop_title])}';
   opts = {width: '700px'}
 
-  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| pop_switch == '1') {
+  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || contentparam == 'bride3plus1' || pop_switch == '1') {
 
     switch(contentparam) {
       case 'birthday.gif':
         content = 'bday';
-        break;
+        break; 
       case 'prom.gif':
         content = 'prom';
         break;
@@ -33,18 +33,22 @@ javascript:
         opts.height = '320px'
         opts.submit = 'GET IT NOW'
         break;        
+      case 'bride15p':
+        content = 'bride15p';
+        break; 
+      case 'bride3plus1':
+        content = 'bride3plus1';        
+        break; 
       default:
         content = 'bday';
     }
     
-    $(document).ready(function(){
-      setTimeout(openpop, 1);
+    $(document).ready(function(){    
+      setTimeout(openpop, 3000);
     });
   };
 
   window.marketing_landing_page = true;
-
-  
 
   function openpop(){
     popup = new window.popups.EmailCaptureModalPopup();
