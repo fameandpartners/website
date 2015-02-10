@@ -9,7 +9,7 @@ javascript:
   pop_title = '#{strip_tags(params[:pop_title])}';
   opts = {width: '700px'}
 
-  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || pop_switch == '1') {
+  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || contentparam == 'bride3plus1' || pop_switch == '1') {
 
     switch(contentparam) {
       case 'birthday.gif':
@@ -35,12 +35,10 @@ javascript:
         break;        
       case 'bride15p':
         content = 'bride15p';
-        opts.onHide = function() { 
-          if ($('.modal-container .thanks').length > 0) {
-            $("#bridemaid-promocode").show()
-          }
-        }
-        break;        
+        break; 
+      case 'bride3plus1':
+        content = 'bride3plus1';        
+        break; 
       default:
         content = 'bday';
     }
