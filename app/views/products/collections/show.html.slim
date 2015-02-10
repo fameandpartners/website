@@ -1,6 +1,13 @@
 = content_for :inline_javascript do
   | filter = new ProductCollectionFilter('.category .category-controls', '.category .container.relative');
 
+ruby:
+  style_options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style.try(:permalink))
+  event_options = options_from_collection_for_select(@filter.events, :permalink, :name, @collection.event.try(:permalink))
+  shape_options = options_from_collection_for_select(@filter.shapes, :to_s, :to_s, @collection.bodyshape.try(:downcase))
+  color_options = color_options_for_select_from_options_values(@filter.colors, @collection.color.try(:name))
+  sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
+
 .page-title
   .container
     .page-title--details
@@ -15,29 +22,24 @@
       .col-md-8.no-padding.hidden-sm.hidden-xs
         .row
           .col-md-3
-            - options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style)
-            = select_tag :style, options, class: 'cs-select cs-skin-border', prompt: 'Styles'
+            = select_tag :style, style_options, class: 'cs-select cs-skin-border', prompt: 'Styles'
             br
           .col-md-3
-            - options = options_from_collection_for_select(@filter.events, :permalink, :name, @collection.event)
-            = select_tag :event, options, class: 'cs-select cs-skin-border', prompt: 'Events'
+            = select_tag :event, event_options, class: 'cs-select cs-skin-border', prompt: 'Events'
             br
 
           .col-md-3
-            - options = options_from_collection_for_select(@filter.shapes, :to_s, :to_s, @collection.bodyshape)
-            = select_tag :bodyshape, options, class: 'cs-select cs-skin-border', prompt: 'Shape'
+            = select_tag :bodyshape, shape_options, class: 'cs-select cs-skin-border', prompt: 'Shape'
             br
 
           .col-md-3
-            - options = color_options_for_select_from_options_values(@filter.colors, @collection.color)
-            = select_tag :color, options, class: 'cs-select cs-skin-border', prompt: 'Colour'
+            = select_tag :color, color_options, class: 'cs-select cs-skin-border', prompt: 'Colour'
             br
 
       /! Second Row Controls
       .col-md-3.col-md-offset-1
         .row
-          - options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order)
-          = select_tag 'product_order', options, class: 'cs-select cs-skin-border', prompt: 'Sort By...'
+          = select_tag 'product_order', sort_options, class: 'cs-select cs-skin-border', prompt: 'Sort By...'
           br
 
   .container.relative

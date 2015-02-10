@@ -27,6 +27,10 @@ class Products::CollectionsController < Products::BaseController
       limit:        8
     ).read
 
+    # set title / meta description for page
+    @title        = @collection.banner.title
+    @description  = @collection.banner.description
+
     respond_to do |format|
       format.html { }
       format.json do

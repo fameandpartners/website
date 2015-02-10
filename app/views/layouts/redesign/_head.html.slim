@@ -1,0 +1,15 @@
+title = get_title
+meta name="description" content=(get_meta_description)
+meta charset="utf-8"
+meta content="width=device-width" name="viewport"
+
+- unless Rails.env.production?
+  meta name="robots" content="noindex, nofollow"
+
+/[if lt IE 9]
+  = javascript_include_tag 'html5.js'
+
+/[if IE]
+  = stylesheet_link_tag 'ie'
+
+= yield :head

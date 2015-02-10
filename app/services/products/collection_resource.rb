@@ -39,10 +39,10 @@ class Products::CollectionResource
     Products::Collection.new(
       products:   products,
       banner:     banner,
-      style:      style.try(:permalink),
-      event:      event.try(:permalink),
-      bodyshape:  bodyshape.try(:downcase),
-      color:      color.try(:name),
+      style:      style,
+      event:      event,
+      bodyshape:  bodyshape,
+      color:      color,
       sale:       discount,
       order:      order
     )
@@ -51,12 +51,15 @@ class Products::CollectionResource
   private
 
     def banner
-      taxon_banner = Spree::TaxonBanner.first
-      OpenStruct.new(
-        title: taxon_banner.title,
-        description: taxon_banner.description
-        #image: taxon_banner.image.present? ? taxon_banner.image.url : ''
-      )
+      @banner ||= begin
+        Products::CollectionBanner.new(
+          style:      style,
+          event:      event,
+          bodyshape:  bodyshape,
+          color:      color,
+          sale:       discount
+        ).read
+      end
     end
 
     def prepare_discount(value = nil)

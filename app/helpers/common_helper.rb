@@ -2,28 +2,11 @@ module CommonHelper
   # override spree method
   # title method 
   def get_title
-    # @title  : Spree::Config[:default_seo_title]
-    # @category_title is set in the products controller decorator#index
-    title_string = @category_title.present? ? @category_title : nil
-    if title_string.present?
-      title_string
-    else
-      #[Spree::Config[:site_name], "Dream Formal Dresses"].join(' - ')
-      #return default
-      @title
-    end 
+    instance_variable_defined?('@title') ? @title : default_seo_title
   end
 
   def get_meta_description
-    
-    if @category_description.present?
-      @category_description
-    elsif @description.present?
-      @description
-    else
-      # default description or hardcoded
-      default_meta_description
-    end
+    instance_variable_defined?("@description") ? @description : default_meta_description
   end
 
   def get_canonical_tag
