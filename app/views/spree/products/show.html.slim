@@ -29,6 +29,11 @@ javascript:
   })
 
 .product-page-2  itemscope='' itemtype="http://data-vocabulary.org/Product"
+  meta itemprop="name" content="#{@product.name}" 
+  meta itemprop="brand" content="Fame & Partners" 
+  meta itemprop="identifier" content="sku:#{@product.sku}" /
+  meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
+  meta itemprop="description" content="sku:#{@product.description}" /
   .product-details itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"
     meta itemprop="priceCurrency" content="#{@product.price.currency}" /
     meta itemprop="condition" content="new" /
