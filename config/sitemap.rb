@@ -60,7 +60,7 @@ SitemapGenerator::Sitemap.create(options) do
   end
 
   statics_pages = [
-    '/about', '/why-us', '/team', '/terms', '/privacy', '/legal', '/faqs', '/how-it-works'
+    '/about', '/why-us', '/team', '/privacy', '/legal', '/how-it-works'
   ]
   statics_pages.each do |page_url|
     add page_url, priority: 0.5

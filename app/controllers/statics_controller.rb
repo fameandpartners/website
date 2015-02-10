@@ -94,6 +94,11 @@ class StaticsController < ApplicationController
     @description = "Fashionista Program. " + default_meta_description
   end
 
+  def nyfw_comp_terms_and_conditions
+    @title = "NYFW Competition 2015." + default_seo_title
+    @description = "NYFW Competition 2015. " + default_meta_description
+  end
+
   def girlfriendxfame
 
     if !spree_user_signed_in?
@@ -152,7 +157,7 @@ class StaticsController < ApplicationController
     searcher = Products::ProductsFilter.new(:edits => edit)
     searcher.current_user = user
     searcher.current_currency = currency
-    return searcher.products.first(count)
+    searcher.products.first(count)
   end
 
   helper_method :get_products_from_edit

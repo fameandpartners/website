@@ -29,12 +29,16 @@ javascript:
   })
 
 .product-page-2  itemscope='' itemtype="http://data-vocabulary.org/Product"
-  .product-details itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"
-    meta itemprop="priceCurrency" content="#{@product.price.currency}" /
+  meta itemprop="name" content="#{@product.name}" 
+  meta itemprop="brand" content="Fame & Partners" 
+  meta itemprop="identifier" content="sku:#{@product.sku}" /
+  meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
+  meta itemprop="description" content="sku:#{@product.description}" /
+  .product-details itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"    
     meta itemprop="condition" content="new" /
     meta itemprop="availability" content="in_stock" /
     meta itemprop="price" content="#{@product.price.amount}" /
-    meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
+    meta itemprop="currency" content="#{@product.price.currency}" /
     meta itemprop="identifier" content="sku:#{@product.sku}" /
 
   .bride-instructions
@@ -101,6 +105,9 @@ javascript:
                   ' ask a friend
                   br
                   ' for opinion
+        .product-row
+          .row
+            p.feb-delivery Please note that delivery timeframes between the 14th and 28th of February 2015 will be 7-21 days
 
   .page-title-with-line
     .title 
