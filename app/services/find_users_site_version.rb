@@ -3,7 +3,7 @@ class FindUsersSiteVersion
 
   def initialize(options = {})
     @user         = options[:user]
-    @url_param    = options[:site_version]
+    @url_param    = options[:url_param]
     @cookie_param = options[:cookie_param]
     @request_ip   = options[:request_ip]
   end
