@@ -7,7 +7,7 @@ class Products::CollectionFilter
         styles: Repositories::Taxonomy.read_styles,
         events: Repositories::Taxonomy.read_events,
         shapes: ProductStyleProfile::BODY_SHAPES,
-        colors: Repositories::ProductColor.read_all,
+        colors: Repositories::ProductColors.read_all,
         sort_orders: available_sort_orders
       })
     end
