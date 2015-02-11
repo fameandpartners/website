@@ -9,40 +9,41 @@ javascript:
   pop_title = '#{strip_tags(params[:pop_title])}';
   opts = {width: '700px'}
 
-  if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || contentparam == 'bride3plus1' || pop_switch == '1') {
+  if (typeof content != 'undefined') {
+    if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || contentparam == 'bride3plus1' || pop_switch == '1') {
 
-    switch(contentparam) {
-      case 'birthday.gif':
-        content = 'bday';
-        break; 
-      case 'prom.gif':
-        content = 'prom';
-        break;
-      case 'welcomeback.jpg':
-        content = 'welcomeback';
-        break;
-      case 'bridesmaid.jpg':
-        content = 'bridesmaid';
-        break;
-      case 'bridesmaid_rokt':
-        content = 'bridesmaid';
-        break;
-      case 'jansale':
-        content = 'jansale';
-        opts.width = '620px'
-        opts.height = '320px'
-        opts.submit = 'GET IT NOW'
-        break;        
-      case 'bride15p':
-        content = 'bride15p';
-        break; 
-      case 'bride3plus1':
-        content = 'bride3plus1';        
-        break; 
-      default:
-        content = 'bday';
+      switch(contentparam) {
+        case 'birthday.gif':
+          content = 'bday';
+          break; 
+        case 'prom.gif':
+          content = 'prom';
+          break;
+        case 'welcomeback.jpg':
+          content = 'welcomeback';
+          break;
+        case 'bridesmaid.jpg':
+          content = 'bridesmaid';
+          break;
+        case 'bridesmaid_rokt':
+          content = 'bridesmaid';
+          break;
+        case 'jansale':
+          content = 'jansale';
+          opts.width = '620px'
+          opts.height = '320px'
+          opts.submit = 'GET IT NOW'
+          break;        
+        case 'bride15p':
+          content = 'bride15p';
+          break; 
+        case 'bride3plus1':
+          content = 'bride3plus1';        
+          break; 
+        default:
+          content = 'bday';
+      }
     }
-    
     $(document).ready(function(){    
       setTimeout(openpop, 3000);
     });
