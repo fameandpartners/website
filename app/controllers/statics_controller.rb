@@ -117,8 +117,8 @@ class StaticsController < ApplicationController
   end
   
   def bridesmaid_lp
-    @title = "Bridesmaid Dresses - " + default_seo_title
-    @description = "Perfect Wedding Bridesmaid Dresses 2014. " + default_meta_description
+    @title = "Bridesmaid Dresses | Beautiful Bridesmaid Gowns Online - Fame & Partners."
+    @description = "Discover beautiful bridesmaid dresses at Fame & Partners. " + default_meta_description
   end
 
   def amfam_lp
