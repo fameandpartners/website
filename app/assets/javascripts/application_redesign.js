@@ -5,17 +5,19 @@
 // styleguide code
 //= require js/snap.svg-min.js
 //= require js/modernizr.custom.js
+//= require js/modernizr.js
 //= require js/scrollspy.js
 //= require js/dropdown.js
+//= require js/sg-plugins.js
 //= require js/svgicons-config.js
 //= require js/svgicons.js
 //= require js/jquery.skippr.min.js
 //= require js/classie.js
 //= require js/selectFx.js
 //= require js/alert.js
-
-//= require js/sg-plugins.js
+//= require js/main.js
 // require js/sg-scripts.js
+
 //= require js/functions.js
 //= require functions_redesign.js
 
@@ -24,9 +26,15 @@
 //= require partials/product_collection
 //= require partials/helpers/tracker.js.coffee
 
-//require js/sg-scripts.js should be done after page loaded.
 jQuery(document).ready(function($){
-  var sg_script = document.createElement('script');
-  sg_script.setAttribute('src','//assets/js/sg-scripts.js');
-  document.head.appendChild(sg_script);
+  function add_script(src) {
+    var script_element = document.createElement('script');
+    script_element.setAttribute('src', src);
+    script_element.setAttribute('type', 'text/javascript')
+    document.head.appendChild(script_element);
+    return true
+  };
+
+  add_script('/assets/js/sg-scripts.js');
+  //add_script('/assets/js/main.js');
 })

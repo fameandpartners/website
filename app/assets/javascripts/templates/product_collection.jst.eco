@@ -1,10 +1,17 @@
 <% rows = Math.ceil(@products.length / 4) %>
 <% for i in [0..rows]: %>
-  <div class="row">
+  <div class="row relative">
     <% for j in [0..3] : %>
       <% product = @products[i * 4 + j] %>
       <% if product : %>
-        <div class="col-md-3 col-sm-6 col-xs-12 category--item">
+        <div class="col-md-3 col-xs-6 col-xxs-12 category--item">
+          <a href='#'>
+            <% if j % 2 == 0 : %>
+              <span class="fa fa-heart add-to-moodboard"></span>
+            <% else :%>
+              <span class="fa fa-heart-0 add-to-moodboard"></span>
+            <% end %>
+          </a>
           <a href='<%= product.collection_path %>'>
             <img class="img-responsive" src='<%= product.image %>' alt='<%= product.name %>'></>
           </a>
@@ -14,11 +21,8 @@
           </div>
         </div>
       <% end %>
-
-      <% if j == 1 : %>
-        <div class="clearfix visible-sm-block"></div>
-      <% end %>
     <% end %>
+    <div class="clearfix visible-sm-block visible-xs-block"></div>
   </div>
 <% end %>
 

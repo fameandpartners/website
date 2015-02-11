@@ -9,10 +9,10 @@ ruby:
   sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
 
 .page-title
-  .container
+  .container.height-100
     .page-title--details
-      h1.no-padding-bottom = @collection.banner.title
-      p.lead = @collection.banner.description
+      h1.no-padding-bottom.text-white = @collection.banner.title
+      p.text-white = @collection.banner.description
 
 .category.page-content
   /! Controls
@@ -27,11 +27,9 @@ ruby:
           .col-md-3
             = select_tag :event, event_options, class: 'cs-select cs-skin-border', prompt: 'Events'
             br
-
           .col-md-3
             = select_tag :bodyshape, shape_options, class: 'cs-select cs-skin-border', prompt: 'Shape'
             br
-
           .col-md-3
             = select_tag :color, color_options, class: 'cs-select cs-skin-border', prompt: 'Colour'
             br
@@ -42,15 +40,21 @@ ruby:
           = select_tag 'product_order', sort_options, class: 'cs-select cs-skin-border', prompt: 'Sort By...'
           br
 
+
   .container.relative
-    - @collection.products.each_slice(4) do |products|
-      .row
-        - products.each_with_index do |product, index|
-          .col-md-3.col-sm-6.col-xs-12.category--item
+    /! First Row
+    = @collection.products.each_slice(4) do |products|
+      .row.relative
+        - products.each do |product|
+          .col-md-3.col-xs-6.col-xxs-12.category--item
+            = link_to '#' do
+              - if rand(2) == 1
+                span.fa.fa-heart.add-to-moodboard
+              - else
+                span.fa.fa-heart-o.add-to-moodboard
             = link_to collection_product_path(product) do
               = image_tag product.image, alt: product.name, class: 'img-responsive'
             .details
               span.name = product.name
               span.price = product.price
-          - if index == 1 # i like this markup
-            .clearfix.visible-sm-block
+        .clearfix.visible-sm-block.visible-xs-block

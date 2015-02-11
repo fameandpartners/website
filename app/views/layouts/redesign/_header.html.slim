@@ -50,6 +50,24 @@ header
                         a href="#"  Wedding Guest Dresses
 
                   .col-md-3.col-lg-2
+                    h4 Events
+                    ul.mega-menu-list
+                      li.mega-menu-list--item
+                        = link_to 'Bridesmaid Dresseses', bridesmaid_lp_path, title: 'Bridesmaid Dresses'
+                      li.mega-menu-list--item
+                        = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses'
+                      li.mega-menu-list--item
+                        = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
+                      li.mega-menu-list--item
+                        a href="#"  Graduation Dresses
+                      li.mega-menu-list--item
+                        a href="#"  Homecoming Dresses
+                      li.mega-menu-list--item
+                        a href="#"  Wedding Dresses
+                      li.mega-menu-list--item
+                        a href="#"  Wedding Guest Dresses
+
+                  .col-md-3.col-lg-2
                     h4 Style
                     ul.mega-menu-list
                       li.mega-menu-list--item
@@ -101,18 +119,14 @@ header
             span.hidden-sm.hidden-xs Moodboard (2)
         li.menu-item
           = link_to profile_path, class: 'menu-item--link' do
-            span.visible-sm.visible-xs
-              = image_tag "images/User.svg"
-            span.hidden-sm.hidden-xs Account
+            = image_tag "images/User.svg"
         li.menu-item
           a.menu-item--link.search href="#" 
-            span.visible-sm.visible-xs
-              = image_tag "images/Search.svg"
-            span.hidden-sm.hidden-xs Search
+            = image_tag "images/Search.svg"
             span.active-link.arrow-up.menu-active-arrow.search-arrow
-          .search-bar.invis
+          .search-bar.invis.padding-60 style=("padding: 60px;") 
             a.close-search href="#" 
-              = image_tag "images/close.svg"
+              = image_tag "images/close.svg", alt: 'Close'
             .container.max-width-100.padding-zero-mobile
               .row
                 .col-md-3
@@ -124,8 +138,10 @@ header
                         button.invis-fix
                           = image_tag "images/search-icon.svg"
                 .col-md-3
-        li.menu-item
-          = link_to spree.cart_path, class: 'menu-item--link' do
-            span.visible-sm.visible-xs
-              = image_tag "images/Cart.svg"
-            span.hidden-sm.hidden-xs Cart (0)
+
+        li#cart-trigger.menu-item
+          /= link_to spree.cart_path, class: 'menu-item--link' do
+          = link_to '#', class: 'menu-item--link' do
+            span.cart
+              = image_tag 'images/Cart.svg', class: 'cart-icon'
+              span.cart-amount 5

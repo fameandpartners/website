@@ -10,7 +10,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   constructor: (filter, content) ->
     @filter = $(filter)
     @content = $(content)
-    @filter.find('#event, #style, #bodyshape, #color, #product_order').on('change', @update)
+
+    # possible, we should wrap to some inputs/base object
+    _.each(@filter.find('#event, #style, #bodyshape, #color, #product_order'), (el) =>
+      new SelectFx(el, onChange: @update)
+    )
 
   update: () =>
     updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())

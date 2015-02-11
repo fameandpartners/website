@@ -24,7 +24,7 @@ class Products::CollectionsController < Products::BaseController
       bodyshape:    params[:bodyshape],
       discount:     params[:sale] || params[:discount],
       order:        params[:order],
-      limit:        8
+      limit:        12
     ).read
 
     # set title / meta description for page

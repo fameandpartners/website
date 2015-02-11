@@ -1,0 +1,34 @@
+#shadow-layer
+#cart
+  .cart--top.text-center
+    .pull-left.close-cart
+      = image_tag "images/line-arrow.svg", class: "line-arrow arrow-bag", alt: 'Submit'
+    .pull-right.close-cart
+      span.cart
+        = image_tag 'images/Cart.svg', class: 'cart-icon'
+        span.cart-amount 5
+    div
+      h2.cart-title Shopping Bag
+
+  ul.cart-items
+    = 3.times do
+      li
+        img.img-responsive.pull-left.cart-item-image alt="" src="http://d1sd72h9dq237j.cloudfront.net/spree/products/8383/large/4B215-Black-1.jpg?1419659726"
+        a.fa.fa-close.pull-right.link-grey href="#0" 
+        span.qty 1x
+        | Mirrored Sea Dress
+        .price $9.99
+  /! cd-cart-items
+  .cart-total
+    p
+      | Total
+      span $39.96
+  /! cd-cart-total
+  .cart--call-to-actions.row
+    .col-lg-6.no-padding-left.close-cart.no-padding-lg
+      button.btn.btn-charcoal.btn-block Shop More
+      br
+    .col-lg-6.no-padding-right.no-padding-lg
+      button.btn.btn-black.btn-block Checkout
+      br
+/! cd-cart
