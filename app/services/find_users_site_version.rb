@@ -22,7 +22,7 @@ class FindUsersSiteVersion
 
   def sv_choosen_by_cookie
     if cookie_param.present?
-      SiteVersion.find_by_permalink(cookies[:site_version])
+      SiteVersion.find_by_permalink(cookie_param)
     end
   end
 
