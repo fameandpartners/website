@@ -1,3 +1,7 @@
+# usage:
+# Repositories::ProductColors.read_all
+# Repositories::ProductColors.get_by_name
+
 module Repositories
   class ProductColors
     class << self

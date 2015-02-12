@@ -13,6 +13,7 @@ end
 
 class Products::CollectionResource
   attr_reader :site_version
+  attr_reader :collection
   attr_reader :style
   attr_reader :edits
   attr_reader :event
@@ -24,6 +25,7 @@ class Products::CollectionResource
 
   def initialize(options = {})
     @site_version = options[:site_version] || SiteVersion.default
+    @collection   = Repositories::Taxonomy.get_taxon_by_name(options[:collection]) 
     @style        = Repositories::Taxonomy.get_taxon_by_name(options[:style]) 
     @edits        = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
     @event        = Repositories::Taxonomy.get_taxon_by_name(options[:event])
@@ -39,6 +41,7 @@ class Products::CollectionResource
     Products::Collection.new(
       products:   products,
       banner:     banner,
+      collection: collection,
       style:      style,
       event:      event,
       bodyshape:  bodyshape,
@@ -53,8 +56,10 @@ class Products::CollectionResource
     def banner
       @banner ||= begin
         Products::CollectionBanner.new(
+          collection: collection,
           style:      style,
           event:      event,
+          edits:      edits,
           bodyshape:  bodyshape,
           color:      color,
           sale:       discount
@@ -78,6 +83,7 @@ class Products::CollectionResource
     def query_options
       result = { taxon_ids: [] }
 
+      result[:taxon_ids].push(collection.id) if collection.present?
       result[:taxon_ids].push(style.id) if style.present?
       result[:taxon_ids].push(edits.id) if edits.present?
       result[:taxon_ids].push(event.id) if event.present?

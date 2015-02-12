@@ -23,6 +23,10 @@ class Repositories::Taxonomy
       taxon
     end
 
+    def collection_root_taxon
+      taxons.select{|taxon| taxon.taxonomy == 'Range' && taxon.root }.first
+    end
+
     def read_styles
       taxons.select{|taxon| taxon.taxonomy == 'Style'}
     end
@@ -58,7 +62,7 @@ class Repositories::Taxonomy
       configatron.cache.expire.quickly
     end
 
-    def expire_cache!(force)
+    def expire_cache!(force = false)
       if force
         @taxons = nil
         Rails.cache.delete(cache_key)
@@ -84,7 +88,8 @@ class Repositories::Taxonomy
             meta_title: taxon.meta_title,
             meta_description: taxon.meta_description,
             meta_keywords: taxon.meta_keywords,
-            banner: OpenStruct.new({})
+            banner: OpenStruct.new({}),
+            root: taxon.root?
           }
         )
         if taxon.banner.present?
@@ -92,10 +97,7 @@ class Repositories::Taxonomy
           result.banner.description = taxon.banner.description
           result.banner.image       = taxon.banner.image(:url)
         end
-
-        if !taxon.root?
-          all_taxons.push(result)
-        end
+        all_taxons.push(result)
       end
 
       all_taxons.sort_by{|i| i.position}

@@ -16,16 +16,7 @@ class Products::CollectionsController < Products::BaseController
   def show
     @filter = Products::CollectionFilter.read
 
-    @collection = Products::CollectionResource.new(
-      site_version: current_site_version,
-      style:        params[:style],
-      event:        params[:event],
-      color:        params[:colour] || params[:color],
-      bodyshape:    params[:bodyshape],
-      discount:     params[:sale] || params[:discount],
-      order:        params[:order],
-      limit:        12
-    ).read
+    @collection = collection_resource.read
 
     # set title / meta description for page
     @title        = @collection.banner.title
@@ -38,4 +29,44 @@ class Products::CollectionsController < Products::BaseController
       end
     end
   end
+
+  private
+
+    def collection_resource
+      resource_args = {
+        site_version: current_site_version,
+        collection:     params[:collection],
+        style:          params[:style],
+        event:          params[:event],
+        color:          params[:colour] || params[:color],
+        bodyshape:      params[:bodyshape],
+        discount:       params[:sale] || params[:discount],
+        order:          params[:order],
+        limit:          12
+      }.merge(parse_permalink(params[:permalink]))
+
+      Products::CollectionResource.new(resource_args)
+    end
+
+    # we have route like /dresses/permalink
+    # where permalink can be
+    #   taxon.permalink
+    #   bodyshape
+    #   color.name
+    #   etc
+    def parse_permalink(permalink)
+      return {} if permalink.blank?
+      taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
+      return {} if taxon.blank?
+
+      # style, edits, events, range, seocollection
+      case taxon.taxonomy.to_s.downcase
+      when 'style', 'edits', 'event'
+        { taxon.taxonomy.to_s.downcase.to_sym => permalink }
+      when 'range'
+        { collection: permalink }
+      else
+        {}
+      end
+    end
 end
