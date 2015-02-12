@@ -40,22 +40,22 @@ class Products::CollectionResource
   def read
     Products::Collection.new(
       products:   products,
-      banner:     banner,
       collection: collection,
       style:      style,
       event:      event,
       bodyshape:  bodyshape,
       color:      color,
       sale:       discount,
-      order:      order
+      order:      order,
+      details:    details
     )
   end
 
   private
 
-    def banner
-      @banner ||= begin
-        Products::CollectionBanner.new(
+    def details
+      @details ||= begin
+        Products::CollectionDetails.new(
           collection: collection,
           style:      style,
           event:      event,

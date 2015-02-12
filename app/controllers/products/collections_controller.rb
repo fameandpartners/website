@@ -19,8 +19,8 @@ class Products::CollectionsController < Products::BaseController
     @collection = collection_resource.read
 
     # set title / meta description for page
-    @title        = @collection.banner.title
-    @description  = @collection.banner.description
+    @title        = @collection.details.title
+    @description  = @collection.details.description
 
     respond_to do |format|
       format.html { }
