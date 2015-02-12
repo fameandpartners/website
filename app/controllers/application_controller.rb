@@ -224,7 +224,7 @@ class ApplicationController < ActionController::Base
     if Spree::Config[:default_seo_title].present? 
       Spree::Config[:default_seo_title]
     else
-      "Fame & Partners - Dream Formal Dresses"
+      "- Fame & Partners"
     end
   end
 
