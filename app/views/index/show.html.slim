@@ -96,6 +96,16 @@
       = link_to fame_chain_path do
         = image_tag 'homepage/famechain.jpg'
 
+  .grid-container
+    .row
+      .home-copy
+        div
+          h1= t('home.find.heading').html_safe 
+          p= t('home.find.body').html_safe 
+        div
+          h1= t('home.shop.heading').html_safe 
+          p= t('home.shop.body').html_safe
+          
   .formal-dresses
     .grid-container
       .row
