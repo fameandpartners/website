@@ -1,6 +1,7 @@
 # usage:
 # Repositories::ProductColors.read_all
 # Repositories::ProductColors.get_by_name
+# Repositories::ProductColors.get_similar(color_ids, [0..100]
 
 module Repositories
   class ProductColors
@@ -14,6 +15,11 @@ module Repositories
         return nil if color_name.blank?
         color_name = color_name.to_s.downcase
         read_all.find{|color| color.name.downcase == color_name || color.presentation.downcase == color_name}
+      end
+
+      def get_similar(color_ids, range = nil)
+        range = Similarity::Range::DEFAULT if range < 0 or range > 100
+        Similarity.where(original_id: color_ids).where('coefficient <= ?', range).pluck(:similar_id)
       end
     end
   end

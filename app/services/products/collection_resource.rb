@@ -89,7 +89,9 @@ class Products::CollectionResource
       result[:taxon_ids].push(event.id) if event.present?
 
       result[:body_shapes] = Array.wrap(bodyshape) if bodyshape.present?
-      result[:color_ids] = Array.wrap(color.id) if color.present?
+      if color.present?
+        result[:color_ids] = Repositories::ProductColors.get_similar(color.id, Similarity::Range::DEFAULT)
+      end
       result[:discount] = discount if discount.present?
 
       result[:limit] = limit if limit.present?
