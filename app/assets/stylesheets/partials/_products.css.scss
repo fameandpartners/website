@@ -47,7 +47,13 @@
 		width: 560px;
 		margin: 0 auto 0 auto;
 	}
-	p { margin: 0;}
+	p { 
+		margin: 14px auto 0 auto;
+		text-transform:none;
+		width:780px;
+		font-family:"Dido", serif;
+		font-size:17px;
+	}
 	.arrows-line-horizontal {
 		margin-top: 30px;
 	}

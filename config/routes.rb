@@ -247,7 +247,7 @@ FameAndPartners::Application.routes.draw do
     end
 
     # Redirects for old pages as part of SEO 
-    match '/competition/*all' => redirect('/')
+    match '/competition/' => redirect('/')
     match '/competition/*all' => redirect('/')
   
     match "/gregg-sulkin" => redirect('/')
@@ -259,6 +259,9 @@ FameAndPartners::Application.routes.draw do
 
     match '/blog/celebrity/*all' => redirect('/blog')
 
+    match '/blog/au/site_versions/au' => redirect('/blog')
+    match '/blog/au/site_versions/us' => redirect('/blog')
+  
 
     mount Spree::Core::Engine, at: '/'
   end

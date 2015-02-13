@@ -19,7 +19,7 @@ ruby:
     - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
     - other_products = get_products_from_edit('BridesmaidOther', nil, nil, 99)
     .sb1 style="position:relative;margin-top:20px;margin-bottom:15px;"
-      h1 style="position:absolute;top:20px; font-size:50px;color:#FFFFFF;" 
+      div style="position:absolute;top:20px; font-size:50px;color:#FFFFFF;" 
       = image_tag 'campaigns/bridemaid/bridesmaid-dress-banner-dark-15-off.jpg', width: 1140, :alt => "Bridesmaid dresses you will love and wear again"
       
     .inner  
@@ -34,7 +34,7 @@ ruby:
               .price = price_for_product(dress) 
       .sb3 style="margin-bottom:15px;"
         .left style="height:349px;width:50%;text-transform:none;"
-          h2 style="text-transform:none;"= t('landing.bridesmaid.one.heading')
+          h1 style="text-transform:none;"= t('landing.bridesmaid.one.heading')
           p style="text-transform:none;"= t('landing.bridesmaid.one.p1')
           p style="text-transform:none;"= t('landing.bridesmaid.one.p2')
         .right style="margin-right: 0px;"
