@@ -6,6 +6,7 @@ class IndexController < ApplicationController
   #include ProductsHelper
 
   def show
+    @big_banner = Spree::BannerBox.big_banner
   end
 end
 =begin

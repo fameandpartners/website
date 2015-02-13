@@ -1,12 +1,17 @@
 #container
   #theTarget style=("height: 800px;") 
-    div style=("background-image: url('/assets/images/1.jpg')") 
+
+    /= link_to @big_banner.first.url, title: @big_banner.first.title do
+    / = image_tag @big_banner.first.attachment(:big)
+
+    div style=("background-image: url('#{@big_banner.first.attachment(:big)}')") 
       .slider-image-caption.height-100
         .container.height-100
           .caption-center
             p.caption-title Do you feel wicked?
             br
-            button.btn.btn-white type="button"  Explore the Collection
+            a.btn.btn-white ahref=@big_banner.first.url  
+              =@big_banner.first.title
     div style=("background-image: url('/assets/images/2.jpg')") 
       .slider-image-caption.height-100
         .container.height-100
