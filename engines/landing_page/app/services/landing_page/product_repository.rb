@@ -173,6 +173,32 @@ class LandingPage::ProductRepository
     end
   end
 
+  def sort_by_color_ids
+    if options[:color_ids]
+      {
+        :_script => {
+          script: color_id_sort_script,
+          params: {
+            color_ids: options[:color_ids]
+          },
+          type: 'number',
+          order: 'asc'
+        }
+      }
+    end
+  end
+
+  def color_id_sort_script
+    %q{
+      for ( int i = 0; i < color_ids.size(); i++ ) {
+        if ( doc['color.id'] == color_ids[i] ) {
+          return i;
+        }
+      }
+      return 99;
+    }.gsub(/[\r\n]|([\s]{2,})/, '')
+  end
+
   def is_false(field)
     field_is_bool(field, false)
   end
