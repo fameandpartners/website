@@ -53,15 +53,30 @@ describe LandingPage::ProductRepository do
 
   context 'with colors' do
     let(:opts)      { { :color => colour } }
-    let(:search)    { { :color_ids => [colour[:id]] } }     
+    let(:search)    { { :color_ids => [colour[:id]] } }    
+
     it 'finds product by colour' do
       expect(repo.products).to have(1).product
+      expect(repo.products.first['color']['id']).to eq colour[:id]
+    end
+
+    context 'sorting colours' do
+      
+      let(:color_ids) { [colour[:id], products.first[:color][:id]]  }
+      let(:search)    { { :color_ids => color_ids } }   
+
+      it 'sorts products by colour' do
+        expect(repo.products).to have(2).products
+        expect(p.first['id']).to eq products.last[:id]
+        expect(p.last['id']).to eq products.first[:id]
+      end  
     end
   end
 
   context 'with discount' do
     let(:opts)      { { :product => { :discount => 42 }} }
     let(:search)    { { :discount => 42 } }     
+
     it 'finds product by discount' do
       expect(repo.products).to have(1).product
     end
@@ -75,6 +90,10 @@ describe LandingPage::ProductRepository do
     end
   end
   
+
+
+
+
   # `size_options = create_option_value(size_type, %w{1 2 3 5 8 13 21 34})
   # colour_options = create_option_value(color_type, %w{black white green})
   # "#{%w{Two-Piece Split Strapless Lace V-Neck Lace}.sample} #{n}" }
@@ -123,7 +142,7 @@ describe LandingPage::ProductRepository do
           :en_us => "/us/#{name}/"
         },
       },
-      :color    => {
+      :color => {
         :id           => rand_id,
         :name         => colour,
         :presentation => colour

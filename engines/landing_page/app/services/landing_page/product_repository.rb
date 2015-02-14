@@ -12,7 +12,7 @@ class LandingPage::ProductRepository
   end
 
   def products
-    search(query)
+    search(query).results
   end
 
   def query
@@ -20,7 +20,8 @@ class LandingPage::ProductRepository
     compact_hash  :query  => has_keywords,
                   :filter => filters,
                   :size   => options[:size] || 99,
-                  :sort   => sort_by
+                  :sort   => sort_by_color_ids
+
   end
 
   def filters
@@ -101,9 +102,6 @@ class LandingPage::ProductRepository
 
   def has_bodyshapes
     if options[:bodyshapes]
-      # {
-      #   :filters => bodyshapes
-      # }
       bodyshapes
     end
   end
@@ -187,16 +185,17 @@ class LandingPage::ProductRepository
       }
     end
   end
-
+        
   def color_id_sort_script
     %q{
-      for ( int i = 0; i < color_ids.size(); i++ ) {
-        if ( doc['color.id'] == color_ids[i] ) {
-          return i;
+      for ( int i = 0; i < color_ids.size(); i++ ) {        
+        if ( color_ids[i] == doc['color.id'].value ) {
+           return i;
         }
-      }
+      }  
       return 99;
-    }.gsub(/[\r\n]|([\s]{2,})/, '')
+
+    } #.gsub(/[\r\n]|([\s]{2,})/, '')
   end
 
   def is_false(field)
@@ -222,5 +221,23 @@ class LandingPage::ProductRepository
 
   def compact_hash(h)
     h.select { |_, v| !v.nil? }
+  end
+
+  def deserialize(document)  
+    document['_source']
+  end
+
+
+  def script_debugger
+    {
+      :script_fields => {
+        :test => {        
+          :script => color_id_sort_script,
+          :params => {
+            :color_ids => options[:color_ids]
+          }
+        }
+      }
+    }
   end
 end
