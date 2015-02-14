@@ -66,9 +66,10 @@ describe LandingPage::ProductRepository do
       let(:search)    { { :color_ids => color_ids } }   
 
       it 'sorts products by colour' do
+        
         expect(repo.products).to have(2).products
-        expect(p.first['id']).to eq products.last[:id]
-        expect(p.last['id']).to eq products.first[:id]
+        expect(repo.products.first['id']).to eq products.last[:id]
+        expect(repo.products.last['id']).to eq products.first[:id]
       end  
     end
   end
@@ -90,9 +91,6 @@ describe LandingPage::ProductRepository do
     end
   end
   
-
-
-
 
   # `size_options = create_option_value(size_type, %w{1 2 3 5 8 13 21 34})
   # colour_options = create_option_value(color_type, %w{black white green})

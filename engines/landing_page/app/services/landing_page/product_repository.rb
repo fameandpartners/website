@@ -12,16 +12,15 @@ class LandingPage::ProductRepository
   end
 
   def products
-    search(query).results
+    @results ||= search(query).results
   end
 
   def query
     # require 'pry'; pry binding
     compact_hash  :query  => has_keywords,
                   :filter => filters,
-                  :size   => options[:size] || 99,
-                  :sort   => sort_by_color_ids
-
+                  :sort   => sorters,
+                  :size   => options[:size] || 99
   end
 
   def filters
@@ -31,6 +30,10 @@ class LandingPage::ProductRepository
         :should => has_bodyshapes,
        }
     }                 
+  end
+
+  def sorters
+    [sort_by, sort_by_color_ids].compact
   end
 
   def has_taxons
@@ -163,11 +166,13 @@ class LandingPage::ProductRepository
 
   def sort_by  
     if options[:sort_by]
-    [
       {
         options[:sort_by] => options[:sort_dir] || 'desc'
       }
-    ]
+    else
+      {
+        'product.position' => 'asc'
+      }
     end
   end
 
@@ -196,6 +201,19 @@ class LandingPage::ProductRepository
       return 99;
 
     } #.gsub(/[\r\n]|([\s]{2,})/, '')
+  end
+
+
+  def sort_by_bodyshapes
+    # if bodyshapes.present?
+    #   by ({
+    #     :_script => {
+    #       script: bodyshapes.map{|bodyshape| "doc['product.#{bodyshape}'].value" }.join(' + '),
+    #       type:   'number',
+    #       order:  'desc'
+    #     }
+    #   })
+    # end
   end
 
   def is_false(field)
