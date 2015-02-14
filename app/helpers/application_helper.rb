@@ -409,6 +409,11 @@ module ApplicationHelper
     end
   end
 
+  def price_for_product_with_discount(product, discount)
+    price = product.zone_price_for(current_site_version)
+    product_price_with_discount(price, discount)
+  end
+
   # span.price-old $355
   # ' $295
   def price_for_product(product)
