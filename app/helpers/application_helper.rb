@@ -409,9 +409,22 @@ module ApplicationHelper
     end
   end
 
-  def price_for_product_with_discount(product, discount)
+  def product_price_with_applied_promocode(price)
+    [
+      content_tag(:span, price.display_price, class: 'price-old'),
+      current_promotion.calculate_price_with_discount(price).display_price
+    ].join("\n").html_safe
+  end
+
+  def price_for_product_with_applied_promocode(product)
     price = product.zone_price_for(current_site_version)
-    product_price_with_discount(price, discount)
+    
+    if current_promotion
+      product_price_with_applied_promocode(price)
+    else
+      discount = product_discount(product)
+      product_price_with_discount(price, discount)
+    end
   end
 
   # span.price-old $355
