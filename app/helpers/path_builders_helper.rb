@@ -49,6 +49,9 @@ module PathBuildersHelper
   end
 
   # /us/dresses/dress-eva-456?params
+  # product should be Tire::Results::Item ( color variant )
+  # or respond to
+  #  name - id
   def collection_product_path(product, options = {})
     site_version_prefix = self.url_options[:site_version]
     path_parts = [site_version_prefix, 'dresses']
