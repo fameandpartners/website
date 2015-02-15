@@ -1,3 +1,6 @@
+# usage
+#   ProductImages.new(product: product).read_all
+#   ProductImages.new(product: product).read
 module Repositories
 class ProductImages
   attr_reader :product
@@ -11,7 +14,11 @@ class ProductImages
       (images_from_variants + images_from_product_color_values).flatten.compact.sort_by {|image| image.position.to_i }
     end
   end
-  alias_method :read, :read_all
+
+  # we can optimize it, if needed
+  def read(options = {})
+    read_all.first
+  end
 
   private
 

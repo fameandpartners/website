@@ -9,7 +9,7 @@ module Repositories
     end
 
     module ClassMethods
-      def cache_results(method_name, options = {})
+      def cache_results(method_name)
         # note: in without cache we should reset cache!
         define_method "#{ method_name }_with_cache" do |options = {}|
           Rails.cache.fetch(cache_key, cache_fetch_params(options)) do
@@ -33,7 +33,8 @@ module Repositories
     end
 
     def cache_fetch_params(options = {})
-      result = { force: options[:force].present? }
+      result = { force: options.delete(:force) }
+
       # process options[:force]
       if Rails.env.development?
         result[:expires_in] = configatron.cache.expire.quickly
