@@ -48,15 +48,17 @@ FameAndPartners::Application.routes.draw do
     # SEO categories routes, we want them in front
 
     scope '/dresses', module: 'personalization' do
-      get '/custom-:product_slug', to: 'products#show'
-      get '/styleit-:product_slug', to: 'products#style'
+      get '/custom-:product_slug', to: 'products/details#show'
+      get '/styleit-:product_slug', to: 'products/details#style'
+      #get '/custom-:product_slug', to: 'products#show'
+      #get '/styleit-:product_slug', to: 'products#style'
     end
 
 
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
 
-      get '/dress-:product_slug(/:color_name)' => 'spree/products#show'
+      get '/dress-:product_slug(/:color_name)' => 'products/details#show'
       #roots categories
       get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
       get '/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}

@@ -19,6 +19,7 @@
 // require js/sg-scripts.js
 
 //= require js/functions.js
+//= require js/superslides.js
 //= require functions_redesign.js
 
 //= require partials/helpers/site_version

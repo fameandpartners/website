@@ -1,0 +1,117 @@
+= content_for :inline_javascript do
+  | $('#slides').superslides({ animation: 'fade', play: 6000, });
+  |
+  | (function() {
+  |  [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
+  |    new SelectFx(el);
+  |  } );
+  | })();
+
+#slides
+  .slides-container
+    // note: we should crop images & update images preloading mechanics - too slow currently
+    - @product.images.each_with_index do |image, index|
+      = image_tag "images/reformation/#{ (index % 3).next }.jpg"
+      /= image_tag image.original, id: "product-image-slide-#{ index }", data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
+
+  nav.slides-navigation
+    a.next href="#" 
+      span.fa.fa-angle-right.fa-4x
+    a.prev href="#" 
+      span.fa.fa-angle-left.fa-4x
+
+/! Product Section
+.product-section
+  .product-section--details
+    h2 = @product.name
+    span.product-section--description = @product.short_description
+    span.product-section--price = product_price_with_discount(@product.price, @product.discount)
+    /! Size and Colour
+    .row.product-section--selection
+      .col-md-6
+        select.cs-select.cs-skin-border
+          option disabled="" selected="" value=""  Size
+          option value="email"  AU 2
+          option value="twitter"  AU 3
+          option value="linkedin"  AU 4
+        br
+      .col-md-6
+        select.cs-select.cs-skin-border
+          option disabled="" selected="" value="" 
+            span.color-box.navy
+            | Color
+          option value="email"  Green
+          option value="twitter"  Red
+          option value="linkedin"  Orange
+        br
+
+    /! Extra Details
+    .row.product-section--extra
+      .col-md-6
+        select.cs-select.cs-skin-border
+          option disabled="" selected="" value="" 
+            span.color-box.navy
+            | Customize
+          option value="email"  Green
+          option value="twitter"  Red
+          option value="linkedin"  Orange
+
+        br
+      .col-md-6
+        br
+        .social-share
+          a href="#" 
+            span.fa.fa-facebook
+          a href="#" 
+            span.fa.fa-twitter
+          a href="#" 
+            span.fa.fa-linkedin
+    /! Quantity
+    .row.product-section--quantity
+      .col-md-12
+        a.link href="#" 
+          span.fa.fa-heart
+          | Add to Moodboard
+    /! Buy Call to Action
+    .row.col-md-12
+      button.btn.btn-block.btn-black Add to bag
+      span.extra-details Free Shipping
+
+
+/! About The Dress
+.dress-about.container.page-content
+  h2.text-center About The Shawl Cardi
+  .divider
+  .row
+    .col-md-6
+      h3.text-center Dress Inspiration
+      br
+      img.img-responsive alt=("Dress Inspiration") src="http://puu.sh/fA7BP/0acdd8884e.png"
+    .col-md-6
+      h3.text-center The Story
+      br
+      p Burn up the dance floor all night in dramatic style.
+      p Chanel is a two piece set featuring a criss-cross bandeau neckline, off-the-shoulder sleeves and a fitted cropped bodice. The skirt features a peplum detail and an asymmetrical pleated hem.
+      p Fabric: Main: Bonded scuba jerseyLining: Stocking jersey
+      p Play up the glamorous Spanish-inspired style with a bold red lip and embellished heels.
+hr
+
+/! More Dresses
+- if @product.recommended_products.present?
+  .dress-more.container.page-content
+    h2.text-center More Cute Dresses
+    .divider
+    br
+    .row.relative
+    - @product.recommended_products.each do |recommended_product|
+      .clearfix.visible-sm-block.visible-xs-block
+      .col-md-3.col-xs-6.col-xxs-12.category--item
+        = link_to collection_product_path(recommended_product) do
+          span.fa.fa-heart.add-to-moodboard
+
+        = link_to collection_product_path(recommended_product) do
+          = image_tag recommended_product.image.try(:large), class: 'img-responsive'
+
+        .details
+          span.name   = recommended_product.name
+          span.price  = recommended_product.price
