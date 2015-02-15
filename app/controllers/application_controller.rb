@@ -422,22 +422,9 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
 
+  # todo: remove this method from global scope
   def get_recommended_products(product, options = {})
-    options[:limit] ||= 3
-    products_required = options[:limit]
-    recommended_dresses = []
-
-    #if try_spree_current_user && try_spree_current_user.style_profile.present?
-    #  recommended_dresses = Spree::Product.recommended_for(try_spree_current_user, options)
-    #end
-    #return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
-    recommended_dresses = Products::SimilarProducts.new(product).fetch(products_required).to_a
-
-    return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
-    recommended_dresses += Spree::Product.active.featured.limit(products_required).to_a
-
-    return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
-    recommended_dresses + Spree::Product.active.limit(products_required).to_a
+    Products::RecommendedProducts.new(product: product, limit: options[:limit]).read
   rescue
     Spree::Product.active.limit(3)
   end
