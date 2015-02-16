@@ -15,7 +15,7 @@ header
               .container-fluid.max-width-100
                 .row
                   .col-md-3
-                    button.btn.btn-grey href="category.html"  View all dresses
+                    button.btn.btn-grey href="/dresses"  View all dresses
                   .col-md-3
                     p.button-grey-text.menu-main-promotions
                       span.fa.fa-ship.push-right-10
@@ -31,79 +31,55 @@ header
             .mega-menu--secondary
               .container-fluid.max-width-100
                 .row
-                  .col-md-3.col-lg-2
+                  .col-md-3.col-lg-3
                     h4 Events
                     ul.mega-menu-list
                       li.mega-menu-list--item
-                        = link_to 'Bridesmaid Dresseses', bridesmaid_lp_path, title: 'Bridesmaid Dresses'
+                        = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
+                      li.mega-menu-list--item
+                        = link_to 'Bridesmaid Dresses', bridesmaid_lp_path, title: 'Bridesmaid Dresses'
                       li.mega-menu-list--item
                         = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses'
                       li.mega-menu-list--item
-                        = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
+                        a href="http://www.fameandpartners.com/dresses/event/wedding" Wedding Dresses
                       li.mega-menu-list--item
-                        a href="#"  Graduation Dresses
+                        a href="http://www.fameandpartners.com/dresses/event/homecoming" Homecoming Dresses
                       li.mega-menu-list--item
-                        a href="#"  Homecoming Dresses
+                        a href="http://www.fameandpartners.com/dresses/event/ball" Ball Dresses
                       li.mega-menu-list--item
-                        a href="#"  Wedding Dresses
+                        a href="http://www.fameandpartners.com/dresses/event/sweet-16" Sweet 16 Dresses
                       li.mega-menu-list--item
-                        a href="#"  Wedding Guest Dresses
+                        a href="http://www.fameandpartners.com/dresses/event/birthday" Birthday Dresses
+                      li.mega-menu-list--item
+                        a href="http://www.fameandpartners.com/dresses/event/debutante" Debutante Dresses
+                      li.mega-menu-list--item
+                        a href="http://www.fameandpartners.com/dresses/event/graduation" Graduation Dresses
+                      li.mega-menu-list--item
+                        a href="http://www.fameandpartners.com/dresses/event/special-events" Special Event Dresses
+              
 
-                  .col-md-3.col-lg-2
-                    h4 Events
-                    ul.mega-menu-list
-                      li.mega-menu-list--item
-                        = link_to 'Bridesmaid Dresseses', bridesmaid_lp_path, title: 'Bridesmaid Dresses'
-                      li.mega-menu-list--item
-                        = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses'
-                      li.mega-menu-list--item
-                        = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
-                      li.mega-menu-list--item
-                        a href="#"  Graduation Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Homecoming Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Wedding Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Wedding Guest Dresses
-
-                  .col-md-3.col-lg-2
+                  .col-md-3.col-lg-3
                     h4 Style
                     ul.mega-menu-list
-                      li.mega-menu-list--item
-                        a href="#"  Plus Sizes Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Evening Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Sexy Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Long Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Lace Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Maxi Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Ball Gowns
+                      li.mega-menu-list--item= link_to 'Two-Piece', build_taxon_path('Two Piece'), title: "Two-Piece Dresses"
+                      li.mega-menu-list--item= link_to 'One Shoulder', build_taxon_path('One-Shoulder'), title: "One Shoulder Dresses"
+                      li.mega-menu-list--item= link_to 'Strapless', build_taxon_path('Strapless'), title: "Strapless Dresses"
+                      li.mega-menu-list--item= link_to 'V-Neck', build_taxon_path('V-Neck'), title: "V-Neck Dresses"
+                      li.mega-menu-list--item= link_to 'Split', build_taxon_path('Split'), title: "Split Dresses"
+                      li.mega-menu-list--item= link_to 'Open Back', build_taxon_path('Open-Back'), title: "Open Back Dresses"
+                      li.mega-menu-list--item= link_to 'Lace', build_taxon_path('Lace'), title: "Lace Dresses"
 
-                  .col-md-3.col-lg-2
-                    h4 Colour
-                    ul.mega-menu-list
-                      li.mega-menu-list--item
-                        a href="#"  Black Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Red Dresses
-                      li.mega-menu-list--item
-                        a href="#"  White Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Little Black Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Blue Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Poo Brown Dresses
-                      li.mega-menu-list--item
-                        a href="#"  Yellow Dresses
+                  .col-md-3.col-lg-3
+                    h4= t('color')
+                    ul.mega-menu-list 
+                      li.mega-menu-list--item= link_to "Black Dresses", colour_path('Black'), title: "Black Dresses"
+                      li.mega-menu-list--item= link_to "White / Ivory Dresses", colour_path('White'), title: "White / Ivory Dresses"
+                      li.mega-menu-list--item= link_to "Blue Dresses", colour_path('Blue'), title: "Blue Dresses"
+                      li.mega-menu-list--item= link_to "Pink Dresses", colour_path('Pink'), title: "Pink Dresses"
+                      li.mega-menu-list--item= link_to "Red Dresses", colour_path('Red'), title: "Red Dresses"
+                      li.mega-menu-list--item= link_to "Pastel Dresses", colour_path('Pastel'), title: "Pastel Dresses"
 
-                  .col-lg-4.hidden-md.hidden-sm.hidden-xs
+                  .col-lg-3.hidden-md.hidden-sm.hidden-xs
                     = image_tag "images/banner4.jpg", style: 'max-height: 250px;'
 
         li.menu-item
