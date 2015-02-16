@@ -6,6 +6,7 @@
 
 ### Prerequisites
 
+* Ruby 1.9.3-p547
 * Postgres
 * ElasticSearch
 * Redis
