@@ -4,21 +4,27 @@
 * We are using Spree Ecommerce as base engine.
 [Guides](http://guides.spreecommerce.com)
 
+### Prerequisites
+
+* Ruby 1.9.3-p547
+* Postgres
+* ElasticSearch
+* Redis
+
 ### Getting started
 
 * `$ git clone git@github.com:droidlabs/fame_and_partners.git`
 * `$ cd ./fame_and_partners`
 * `$ cp config/database.yml.example config/database.yml`
 
-### Populating db with test data
-Note: This commands can be run manullay or throught `bin/prepare_app`
+If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
-* `$ bundle exec rake db:populate:dresses`
-* `$ bundle exec rake db:populate:taxonomy`
-* `$ bundle exec rake db:populate:product_options`
-* `$ bundle exec rake db:populate:prototypes`
+`$ foreman start`
 
-Note: it much easier to have working development application with loading database dump from production/preprod site, and restoring them locally. 
+
+### Database
+
+It is generally easiest to have working development application with loading database dump from production/preprod site, and restoring them locally. 
 * download latest dump from production ( through web interface from engine yard )
 * clean database with `$bundle exec rake db:schema:load`
 * restore data 
@@ -34,8 +40,10 @@ after it, remove valuable data & update settings
 * if needed, update config/initializers/paperclip.rb && config/initializers/spree.rb configuration to use images from production. don't delete images locally it that case
 * refresh all local elastic search indexes
 
-
 ### Update indexes
+
+`Utility::Reindexer.reindex`
+
 * for dresses list pages ( show product with different colours as different )
   `Products::ColorVariantsIndexer.index!`
 * for search page ( show product only once )
@@ -60,6 +68,15 @@ Spree::OptionValuesGroup.where(option_type_id: type.id).destroy_all
 * $ `ey ssh -e production_new`
 * $ `cd /data/fame_and_partners/current`
 * $ `bundle exec rake feed:export:all`
+
+
+#### Populating db with test data
+Note: This commands can be run manullay or throught `bin/prepare_app`
+
+* `$ bundle exec rake db:populate:dresses`
+* `$ bundle exec rake db:populate:taxonomy`
+* `$ bundle exec rake db:populate:product_options`
+* `$ bundle exec rake db:populate:prototypes`
 
 
 ## Deploy
