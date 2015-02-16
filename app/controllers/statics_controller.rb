@@ -14,6 +14,12 @@ class StaticsController < ApplicationController
     render :layout => 'redesign/application'    
   end
 
+  def faqs
+    @title = "FAQs - " + default_seo_title
+    @description = "FAQs. " + default_meta_description
+    render :layout => 'redesign/application'        
+  end
+
 
 
 # =======================================================================
@@ -65,11 +71,6 @@ class StaticsController < ApplicationController
   def legal
     @title = "Legal - " + default_seo_title
     @description = "Legal. " + default_meta_description
-  end
-
-  def faqs
-    @title = "FAQs - " + default_seo_title
-    @description = "FAQs. " + default_meta_description
   end
 
   def how_it_works

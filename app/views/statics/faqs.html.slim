@@ -1,145 +1,153 @@
-.wrap.page-static.tighter
-  h1.block-title FAQs
+.page-title style="background-color:#000000"
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white Frequently Asked Questions
+      / p.text-white Your unique special occasion look, guaranteed.
 
-  h2 ABOUT US
-  h3 Do you have any store locations?
-  p We are an online fashion boutique which means you can shop with us 24/7from Australia and United States but internationally, very soon!
-  p We are currently looking at cities to do pop up stores in, if you would like to see us have one at a location near you, email team@fameandpartners.com with your suggestion.
+.page-content.about
+  .container.relative
 
+    .row.relative
 
-  h2 RETURNS
-  h3 What is your returns policy?
-  p If for any reason you are not happy with your garment, we accept returns under the following circumstances:
-  = render 'returns'
-
-  h3 Can I exchange for a different size or colour?
-  p Of course! It is completely free to return for a different size, up or down one size. It is also completely free to return for a different recommended colour. If you ordered a custom colour, we will charge a restocking fee of 50% of the garment, if you would like to exchange for a different colour.
-  p If you would like to exchange an item, simply email Customer Service on: team@fameandpartners.com to confirm you would like to do so. Then follow the simple steps below.
+      h2 ABOUT US
+      h3 Do you have any store locations?
+      p We are an online fashion boutique which means you can shop with us 24/7from Australia and United States but internationally, very soon!
+      p We are currently looking at cities to do pop up stores in, if you would like to see us have one at a location near you, email team@fameandpartners.com with your suggestion.
 
 
-  h3 What are the steps I follow to return or exchange an item?
+      h2 RETURNS
+      h3 What is your returns policy?
+      p If for any reason you are not happy with your garment, we accept returns under the following circumstances:
+      = render 'returns'
 
-  p In just a few easy steps you can return or exchange as follows, depending where you live!
+      h3 Can I exchange for a different size or colour?
+      p Of course! It is completely free to return for a different size, up or down one size. It is also completely free to return for a different recommended colour. If you ordered a custom colour, we will charge a restocking fee of 50% of the garment, if you would like to exchange for a different colour.
+      p If you would like to exchange an item, simply email Customer Service on: team@fameandpartners.com to confirm you would like to do so. Then follow the simple steps below.
 
-  h4 For Returns:
-  ol
-    li Email team@fameandpartners.com with your order number and the word RETURN in the subject of the email, to confirm you would like to return, including the reason for your return
-    li
-      ' Complete the form that was included in your package or download the form here: 
-      a href="#{image_path('returnform.pdf')}" Returns & Exchanges Authorisation Form
-    li
-      p Enclose the form and package up the dress and the receipt for your postage, sending back to Fame & Partners local office:
+
+      h3 What are the steps I follow to return or exchange an item?
+
+      p In just a few easy steps you can return or exchange as follows, depending where you live!
+
+      h4 For Returns:
+      ol
+        li Email team@fameandpartners.com with your order number and the word RETURN in the subject of the email, to confirm you would like to return, including the reason for your return
+        li
+          ' Complete the form that was included in your package or download the form here: 
+          a href="#{image_path('returnform.pdf')}" Returns & Exchanges Authorisation Form
+        li
+          p Enclose the form and package up the dress and the receipt for your postage, sending back to Fame & Partners local office:
+          p
+            i For United States Customers:
+            br
+            ' Fame & Partners
+            br
+            ' RETURNS
+            br
+            ' 25 Broadway, Floor 9
+            br
+            ' New York, NY 10004
+            br
+            ' UNITED STATES
+
+          p
+            i For Australian Customers:
+            br
+            ' Fame & Partners
+            br
+            ' RETURNS
+            br
+            ' Level 1, Studio 10, 140-144 CLEVELAND STREET 
+            br
+            ' CHIPPENDALE NSW 2008
+            br
+            ' AUSTRALIA
+
+        li We will be in touch once we receive, review and can confirm your refund, which will include the cost of your returns postage.
+
+      h4 For Exchanges:
+      ol
+        li Email team@fameandpartners.com with your order number and the word EXCHANGE in the subject of the email, to confirm you would like to exchange, including the reason for your exchange and what you would like to exchange for
+        li A Customer Service person will be in touch to confirm you can exchange your garment
+        li
+          ' Complete the form that was included in your package or download the form here: 
+          a href="#{image_path('returnform.pdf')}" Returns & Exchanges Authorisation Form
+        li
+          p Enclose the form and package up the dress and the receipt for your postage, sending back to Fame & Partners local office:
+          p
+            i For United States Customers:
+            br
+            ' Fame & Partners
+            br
+            ' RETURNS
+            br
+            ' 25 Broadway, Floor 9
+            br
+            ' New York, NY 10004
+            br
+            ' UNITED STATES
+
+          p
+            i For Australian Customers:
+            br
+            ' Fame & Partners
+            br
+            ' RETURNS
+            br
+            ' Level 1, Studio 10, 140-144 CLEVELAND STREET 
+            br
+            ' CHIPPENDALE NSW 2008
+            br
+            ' AUSTRALIA
+
+        li We will be in touch once we receive, review and can confirm your exchange, which will include the cost of your returns postage.
+        li We will then post you your new garment!
+
+      h3 How long does it take to process my return?
+      p Once we receive your package, your refund will be processed within 7 business days. You will be notified by email once the refund has been processed.
+
+
+      h2 ORDERS
+
+      h3 I’m in love with something that is out of stock in my size/in my favourite #{t('words.color')}. What can I do?
+      p We can make to order! Simply make the purchase online and we will produce any item for you that is out of order. It will just take 7-10 extra days for a made-to-order item as opposed to an item that is currently in stock.
+
+      h3 Can I cancel my order?
+      p If you would like to cancel your order, please email team@fameandpartners.com immediately with your cancellation request and order #.
+
+      h3 How can I track my order?
+      p As soon as your order ships, you will be provided with a tracking number via email. You can also find your order details and tracking information on the My Orders tab within the Account Settings section, which you can access when you are logged in. If you did not create a username/password or sign up when you purchased your dress, you will need to do so, to track your order.
+
+      h2 Deliveries
+
+      h3 When will my order ship?
+      p Shipping times may vary due to availability of merchandise. If your item is in stock and you have not requested any customizations, your order will be dispatched within 2 business days of purchase. If your item is not in stock, or you have requested a customization, we will be making your dress, on demand, just for you! Please allow 2 weeks from the date of your purchase for production before your order is dispatched - a maximum of 10 business days for items out of stock and a maximum of 14 business days for orders with a customization.
+
+      p Please note: Orders are not shipped on the weekends or holidays.
+
+
+      h3 How long will it take for my order to arrive?
+      p.feb-delivery
+        strong
+          ' Please note that delivery timeframes between the 14th and 28th of February 2015 will be 7-21 days
+      p Please refer to the table below to determine your shipping times:
       p
-        i For United States Customers:
-        br
-        ' Fame & Partners
-        br
-        ' RETURNS
-        br
-        ' 25 Broadway, Floor 9
-        br
-        ' New York, NY 10004
-        br
-        ' UNITED STATES
-
+        table.table
+          tr
+            th Order Type
+            th Australia
+            th United States
+          tr
+            td IN STOCK
+            td 4 DAYS Business Days
+            td 5 DAYS Business Days
+          tr
+            td ON DEMAND, STANDARD DRESS
+            td 7 - 10 DAYS Business Days
+            td 7 - 10 DAYS Business Days
+          tr
+            td ON DEMAND, CUSTOMIZED DRESS
+            td 10 - 14 DAYS Business Days
+            td 10 - 14 DAYS Business Days
       p
-        i For Australian Customers:
-        br
-        ' Fame & Partners
-        br
-        ' RETURNS
-        br
-        ' Level 1, Studio 10, 140-144 CLEVELAND STREET 
-        br
-        ' CHIPPENDALE NSW 2008
-        br
-        ' AUSTRALIA
-
-    li We will be in touch once we receive, review and can confirm your refund, which will include the cost of your returns postage.
-
-  h4 For Exchanges:
-  ol
-    li Email team@fameandpartners.com with your order number and the word EXCHANGE in the subject of the email, to confirm you would like to exchange, including the reason for your exchange and what you would like to exchange for
-    li A Customer Service person will be in touch to confirm you can exchange your garment
-    li
-      ' Complete the form that was included in your package or download the form here: 
-      a href="#{image_path('returnform.pdf')}" Returns & Exchanges Authorisation Form
-    li
-      p Enclose the form and package up the dress and the receipt for your postage, sending back to Fame & Partners local office:
       p
-        i For United States Customers:
-        br
-        ' Fame & Partners
-        br
-        ' RETURNS
-        br
-        ' 25 Broadway, Floor 9
-        br
-        ' New York, NY 10004
-        br
-        ' UNITED STATES
-
-      p
-        i For Australian Customers:
-        br
-        ' Fame & Partners
-        br
-        ' RETURNS
-        br
-        ' Level 1, Studio 10, 140-144 CLEVELAND STREET 
-        br
-        ' CHIPPENDALE NSW 2008
-        br
-        ' AUSTRALIA
-
-    li We will be in touch once we receive, review and can confirm your exchange, which will include the cost of your returns postage.
-    li We will then post you your new garment!
-
-  h3 How long does it take to process my return?
-  p Once we receive your package, your refund will be processed within 7 business days. You will be notified by email once the refund has been processed.
-
-
-  h2 ORDERS
-
-  h3 I’m in love with something that is out of stock in my size/in my favourite #{t('words.color')}. What can I do?
-  p We can make to order! Simply make the purchase online and we will produce any item for you that is out of order. It will just take 7-10 extra days for a made-to-order item as opposed to an item that is currently in stock.
-
-  h3 Can I cancel my order?
-  p If you would like to cancel your order, please email team@fameandpartners.com immediately with your cancellation request and order #.
-
-  h3 How can I track my order?
-  p As soon as your order ships, you will be provided with a tracking number via email. You can also find your order details and tracking information on the My Orders tab within the Account Settings section, which you can access when you are logged in. If you did not create a username/password or sign up when you purchased your dress, you will need to do so, to track your order.
-
-  h2 Deliveries
-
-  h3 When will my order ship?
-  p Shipping times may vary due to availability of merchandise. If your item is in stock and you have not requested any customizations, your order will be dispatched within 2 business days of purchase. If your item is not in stock, or you have requested a customization, we will be making your dress, on demand, just for you! Please allow 2 weeks from the date of your purchase for production before your order is dispatched - a maximum of 10 business days for items out of stock and a maximum of 14 business days for orders with a customization.
-
-  p Please note: Orders are not shipped on the weekends or holidays.
-
-
-  h3 How long will it take for my order to arrive?
-  p.feb-delivery
-    strong
-      ' Please note that delivery timeframes between the 14th and 28th of February 2015 will be 7-21 days
-  p Please refer to the table below to determine your shipping times:
-  p
-    table
-      tr
-        th Order Type
-        th Australia
-        th United States
-      tr
-        td IN STOCK
-        td 4 DAYS Business Days
-        td 5 DAYS Business Days
-      tr
-        td ON DEMAND, STANDARD DRESS
-        td 7 - 10 DAYS Business Days
-        td 7 - 10 DAYS Business Days
-      tr
-        td ON DEMAND, CUSTOMIZED DRESS
-        td 10 - 14 DAYS Business Days
-        td 10 - 14 DAYS Business Days
-  p
-  p
