@@ -17,8 +17,10 @@ ruby:
 
 .feb_2015_lp
   - cache cache_keys, expires_in: configatron.cache.expire.long do
-    - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
-    - other_products = get_products_from_edit('BridesmaidOther', nil, nil, 99)
+    - if variant.to_i == 2
+      - discount = Discount.new(:amount => 25)
+    - products = get_products_from_edit('FB2015', nil, nil, 20)
+    - other_products = get_products_from_edit('FB2015OTHER', nil, nil, 99)
     .sb1 style="position:relative;margin-top:20px;margin-bottom:15px;"
       div style="position:absolute;top:20px; font-size:50px;color:#FFFFFF;" 
       = image_tag "campaigns/feb-2015/variant-#{variant}-banner.jpg", width: 1140, :alt => "Find your perfect dress"
@@ -32,8 +34,10 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              / .price = price_for_product_with_discount(dress, discount) 
-              .price = price_for_product_with_applied_promocode(dress)
+              - if variant.to_i == 2              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
+                .price = price_for_product_with_applied_promocode(dress)
       .sb3 style="margin-bottom:15px;"
         .left style="height:349px;width:50%;text-transform:none;"
           h1 style="text-transform:none;"
@@ -52,8 +56,11 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              / .price = price_for_product_with_discount(dress, discount)
-              .price = price_for_product_with_applied_promocode(dress)
+              - if variant.to_i == 2              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
+                .price = price_for_product_with_applied_promocode(dress)
+
       .catalog
         - products[8..11].each do |dress|
           .catalog-item
@@ -63,8 +70,11 @@ ruby:
             .text
               .colour= ''
               .name= link_to dress.name, collection_product_path(dress), class: 'title'
-              / .price = price_for_product_with_discount(dress, discount)
-              .price = price_for_product_with_applied_promocode(dress)
+              - if variant.to_i == 2              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
+                .price = price_for_product_with_applied_promocode(dress)
+
       .catalog
         - products[12..15].each do |dress|
           .catalog-item
@@ -73,8 +83,10 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              / .price = price_for_product_with_discount(dress, discount)
-              .price = price_for_product_with_applied_promocode(dress)
+              - if variant.to_i == 2              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
+                .price = price_for_product_with_applied_promocode(dress)
 
       .more
         h2 More Dresses    
@@ -87,7 +99,9 @@ ruby:
                   = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
-                / .price = price_for_product_with_discount(dress, discount)      
+              - if variant.to_i == 2              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
                 .price = price_for_product_with_applied_promocode(dress)
 
 / script type="application/javascript" src="//s.uadx.com/6ef9a6c0-178d-11e4-80ee-22000afe405e:1a1d5400-480a-11e4-9e3e-22000afe405e.js"
