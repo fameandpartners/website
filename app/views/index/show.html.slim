@@ -70,13 +70,16 @@
               = image_tag 'images/line-arrow.svg', alt: 'Submit', class: 'line-arrow'
       .col-md-3
 
-/! Dave's SEO Crap
+/! SEO Crap
 .main-content
   .container
     .row
       .col-md-7
-        h1 H1 Heading goes here
-        p More text goes here to help sell the dresses and benefit on page Search engine optimisation. More text goes here to help sell the dresses.
-        p More text goes here to help sell the dresses and benefit on page Search engine optimisation. More text goes here to help sell the benefit on page Search engine optimisation. More text goes here to help sell the dresses..
+        h1= t('home.find.heading').html_safe 
+        p= t('home.find.body').html_safe   
+        h2= t('home.find.heading').html_safe 
+        p= t('home.shop.body').html_safe
       .col-md-5
         = image_tag 'images/bridesmaid-image.jpg', alt: 'Bridesmaid image', class: 'img-responsive'
+    
+        
