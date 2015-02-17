@@ -26,7 +26,6 @@ FameAndPartners::Application.routes.draw do
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-    get '/nyemix'     => 'statics#nyemix'
     get '/nylonxfame' => 'statics#nylonxfame'
     get '/renxfame'   => 'statics#renxfame'
     get '/lilyxfame'  => 'statics#lilyxfame'

@@ -6,7 +6,7 @@ $(document).ready ->
     navType: 'block',
     childrenElementType: 'div',
     arrows: false,
-    autoPlay: false,
+    autoPlay: true,
     autoPlayDuration: 7000,
     keyboardOnAlways: true,
     hidePrevious: false

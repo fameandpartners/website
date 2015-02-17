@@ -5,9 +5,9 @@
       ul
         li = link_to 'FAQs', faqs_path
         li = link_to 'Terms', terms_path
+        li = link_to 'Get Styling Advice', style_consultation_path
         li = link_to 'The Fame Team', about_us_path
         li = link_to 'Why Shop With Us', why_us_path
-        li = link_to 'Styling Advice', style_consultation_path
         li = link_to 'Fashionista', fashionista_winner_path
         li = link_to 'Fame Chain', fame_chain_path
         li = link_to 'Contact', '#'
@@ -18,7 +18,7 @@
           p.text-grey Australia
         .col-md-6
           small.text-grey 
-            | © 2015 FAME &amp; PARTNERS. All Rights Reserved, ABN 83 162 501 064, Bondi, Sydney
+            | © 2015 FAME &amp; PARTNERS. All Rights Reserved
         .col-md-3
           Icons
 
@@ -33,57 +33,46 @@
     .footer-navigation
       .row
         .col-md-3
-          p
-            | Level 1, 140 Cleveland Street
-            br
-            | Chippendale, NSW, 2001,
-            br
-            | Australia
+          
+          = render 'layouts/redesign/address'
 
           .btn-group
             button.btn.btn-dropdown.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button" 
-              = image_tag "images/australian-flag.jpg", alt: "Australia flag"
+              = image_tag "images/australian-flag.jpg", alt: "Australian Flag"
               = current_site_version.abbr.upcase
               span.caret
             ul.dropdown-menu role="menu" 
               - if !current_site_version.is_australia?
                 li
                   = link_to site_version_path('au', backlink: get_hreflang_link) do
-                    = image_tag "images/australian-flag.jpg", alt: "US flag"
+                    = image_tag "images/australian-flag.jpg", alt: "Australian flag"
                     | AU
 
               - if !current_site_version.is_usa?
                 li
                   = link_to site_version_path('us', backlink: get_hreflang_link) do
-                    = image_tag "images/australian-flag.jpg", alt: "US flag"
+                    = image_tag "images/us-flag.jpg", alt: "USA flag"
                     | US
 
           br
           br
+
         .col-md-3
           ul.footer-nav
+            li.footer-nav--item 
+              = link_to 'Why Shop With Us', why_us_path
             li.footer-nav--item
-              = link_to 'Help', '#'
-            li.footer-nav--item
-              = link_to 'Get styling advice', style_consultation_path
+              = link_to 'The Fame Team', about_us_path
             li.footer-nav--item
               = link_to 'Why shop with us', why_us_path
-            li.footer-nav--item
-              a href="#"  Free shipping
-            li.footer-nav--item
-              a href="#"  Returns & exchanges
         .col-md-3
           ul.footer-nav
             li.footer-nav--item
-              = link_to 'About Us', about_us_path
+              = link_to 'FAQs', faqs_path
             li.footer-nav--item
-              a href="#"  Jobs
+               = link_to 'Terms', terms_path
             li.footer-nav--item
-              a href="#"  Affilates
-            li.footer-nav--item
-              a href="#"  Meet the team
-            li.footer-nav--item
-              a href="#"  Contact us
+              = link_to 'Get styling advice', style_consultation_path
         .col-md-3
           ul.footer-nav
             li.footer-nav--item
@@ -111,12 +100,12 @@
         p.lighter-text
           small
             | © 2015 FAME & PARTNERS. All rights reserved.
-            strong ABN 83 162 501 064
-      .pull-right.no-float-mobile
-        ul.footer-details-nav
-          li.footer-details-nav--item
-            = link_to privacy_path, class: 'lighter-text' do
-              small Privacy Policy
-          li.footer-details-nav--item
-            = link_to terms_path, class: 'lighter-text' do
-              small Terms of Use
+      
+      / .pull-right.no-float-mobile
+      /   ul.footer-details-nav
+      /     li.footer-details-nav--item
+      /       = link_to privacy_path, class: 'lighter-text' do
+      /         small Privacy Policy
+      /     li.footer-details-nav--item
+      /       = link_to terms_path, class: 'lighter-text' do
+      /         small Terms of Use

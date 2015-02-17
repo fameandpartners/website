@@ -1,165 +1,55 @@
-.about-page  
-  .about-boxes.grid-container
-    .benefits
-      h2 
-        ' Your unique special occasion look, guaranteed.
-      .row
-        .grid-3
-          .text
-            h3 DISCOVER
-            p Your unique style profile and the dresses our stylists will match to you!
-            p= link_to "Take the Quiz Now", "#", class: "btn empty border small show-style-quiz"
-          span.numbers.icon-number-one
-          .arrows-line-horizontal
-        .grid-3
-          .text
-            h3
-              em EXPLORE
-            p Your personalized boutique of dresses and discover music, moodboards and scents that inspired them.
-          span.numbers.icon-number-two
-          .arrows-line-horizontal
-        .grid-3
-          .text
-            h3 CREATE
-            p Make unique customizations to the dress, to make it totally yours.
-          span.numbers.icon-number-three
-          .arrows-line-horizontal
-        .grid-3
-          .text
-            h3
-              em STYLE
-            p Access free stylists to source your accessories for you or receive styling tips that are personalized to you!
-          span.numbers.icon-number-four    
-          .arrows-line-horizontal
-        .hide.grid-3
-          .text
-            h3
-              em TWIN ALERT
-            p Register for our twin alert which guarantees no one attending your event can purchase the same dress.
-          span.numbers.icon-number-five    
-          .arrows-line-horizontal
 
-    .table-row.row
-      
-      .grid-6.with-bg
-        h3 
-          em What 
-          br
-          ' are we?
-        h4 
-          ' THE ONLY DESTINATION WHERE YOU CAN CUSTOMISE THE MOST CURRENT CATWALKS TRENDS INTO A DRESS LOOK THAT IS UNIQUELY YOURS. 
-        .arrows-line-vertical  
-      .grid-6 
-        h3 
-          em Who 
-          br
-          ' are we?
-        h4 
-          ' WE ARE GIRLS THAT LOVE FASHION AND TECHNOLOGY. THE MISH MASH OF THE TWO MEANS THAT MILLIONS OF GIRLS ARE INSPIRING OTHER GIRLS WITH STYLE INSPIRATION, EVERY DAY; WE LOVE THAT THIS SHARING IS SHAPING A CULTURE OF GIRLS THAT WANT AN INDIVIDUAL LOOK.
-      .icon-heart
-    .table-row.row
-      .grid-6
-        h3 
-          em Join
-          br
-          ' THE FAME CHAIN
-        h4 WE HAVE STARTED THE FAME CHAIN TO INSPIRE GIRLS ACROSS THE GLOBE WITH WHAT'S TRENDING RIGHT NOW FOR SPECIAL OCCASIONS. IF YOU CONSIDER YOURSELF A FASHION MAVEN, A BLOGGER OR SOMEONE WHO WOULD LIKE TO CONTRIBUTE, THERE ARE FREE DRESSES, DOLLARS AND PRIVILEGES FOR MEMBERS.
-        p= link_to "Apply Now", fame_chain_path, class: "btn empty border", title: "Apply to be part of the Fame Chain"
-        .arrows-line-vertical  
-      .grid-6.with-bg 
-        h3 
-          em We
-          br
-          ' Believe
-        h4 We believe that fashion is a form of self expression to be celebrated and what better time to do so than at a special occasion. It's why we are utterly dedicated to helping young women craft a look that is totally unique to them
-      .arrows-line-horizontal    
+.page-title style="background-color:#000000"
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white About Fame & Partners
+      p.text-white Your unique special occasion look, guaranteed.
 
-    
+.page-content.about
+  .container.relative
 
-    .team
-      h2 
-        em 
-          ' the TEAM
-        small 
-          ' There are no limits at Fame & Partners;
-          br
-          ' we encourage every team member to find their own talents,
-          br
-          ' their own look, their own inspiration and see  where they land…
-      .row
-        .grid-4
-          .portrait
-            = image_tag '_about/nyree.jpg'
-            .mask
-          .info
-            h6 CEO & Founder
-            h4 NYREE CORBY
-            h6 First formal event
-            p I was rocking metallic back then and spray painted a pair of cheap Payless Shoes with silver spray paint; teeming it with a low back ivory dress and vintage gem stone bangle I sourced at the local St Vincents.
-            h6 How has your style evolved today
-            p My style is boho/glam when dressed up and boho/edgy for every day. I am seriously inspired by the big wide world around me; what we can build, create, manifest I just find awe-inspiring. Crafting daily looks is part of this ritual of self-expression for me. I love helping other girls do the same.
-            h6 Why did you start Fame & Partners
-            p Being a young woman is an exciting time but fraught with complexity. I want to remind every young woman that she is incredibly special, beautiful, amazing. I want young women to find whatever is unique about them, and shout it to the world, sartorially!
+    .row.relative
+      .col-md-3.col-xs-6.col-xxs-12s
+        .benefit-box.well
+          h3 Discover
+          p Your unique style profile and the dresses our stylists will match to you!
+          p 
+            a.show-style-quiz.btn.btn-block.btn-black href="#" Take the Quiz Now
+          span.number 1
 
-          .portrait
-            = image_tag '_about/tania.jpg'
-            .mask
-          .info
-            h6 Head of Customer Service
-            h4 Tania Alwi
-            h6 First formal event
-            p I remember looking through red carpet images and trawling through runway shows for my formal dress inspiration, back-tracking Gossip Girl episodes (because the Upper-East Siders know how to do prom wear!), and then I discovered Elie Saab - I fell in love and tried to replicate it. It was a one-shoulder sky blue chiffon dress with silver embroidery and an impromptu flower on the side.
-            h6 How has your style evolved today
-            p Ever since I could remember my style has been described as "unique". I love mixing boho dresses with a pair of sneakers, or a classic piece with an unexpected twist. You can say my style is always evolving - there's too much variety in fashion for me to stick to one thing.
-            h6 Why did you join Fame & Partners
-            p I was disheartened with the result of my formal dress, it didn't have the WOW factor I expected, and now I want to make sure young girls get this WOW factor!
-            
-        .grid-4.align
-          .portrait
-            = image_tag '_about/tamara.jpg'
-            .mask
-          .info
-            h6 Chief Stylist
-            h4 Tamara Lockwood
-            h6 First formal event
-            p Seventeen and skinny, I wore a sleek white mini with sheer silver panels, patent black platform heels and thrifted black jewellery.
-            h6 How has your style evolved today
-            p I have always believed you don’t have to spend a fortune to get a killer look. My wardrobe is an oversupply of vintage op shop finds mashed in with one-off hot designer pieces; I am handy with the sewing machine and love reworking the pieces I find to keep them current.
-            h6 Why did you join Fame & Partners
-            p Fame & Partners just really resonated with me. It is one of the few companies I have encountered in the fashion industry that actively celebrates and promotes young women’s individuality and self-expression. Additionally, as someone who religiously alters clothing to suit their personal style I was immediately drawn to the idea of customizable and unique garments. 
-          .portrait
-            = image_tag '_about/elton.jpg'
-            .mask
-          .info
-            h6 CTO
-            h4 ELTON STEWART
-            h6 First formal event
-            p Let’s just say it was early 90’s and only now is what I wore totally back. Think black baggy suit and black creepers with greasy undercut hair action.
-            h6 How has your style evolved today
-            p My style uniform is death metal tees with flano shirts and rolled jeans. You won’t see me without my NY baseball cap.
-            h6 Why did you join Fame & Partners
-            p I love building great products and when presented with the idea of Fame & Partners I really saw an opportunity to build something special. I dug the support we could offer young women and joined Nyree to make it a reality. Being the token guy in the team is not so bad.
-            
-          
-        
-        .grid-4
-          .portrait
-            = image_tag '_about/thyra.jpg'
-            .mask
-          .info
-            h6 Head Designer
-            h4 THYRA ELLICOTT
-            h6 First formal event
-            p It was to be a lavish event and for this reason I chose to opt for a classic look. Wearing my faithful fitted knee length dress made by Italian designer, Albertta Ferretti. I added height by wearing black ankle suede heeled boots. Choosing to style my hair up in a loose romantic look, I took inspiration from actress, Monica Bellucci and also added some gold bangles.
-            h6 How has your style evolved today
-            p Even from a very young age, I always loved putting looks together: however it was whilst studying fashion design at Central Saint Martins where I really developed my own unique style. Immersed in creativity and cultural diversity meant that I would create a wide range if looks. Based in the hub of London I had access to designer, high street and vintage. Mixing them all - I love to constantly evolve and re invent my looks.
-            h6 Why did you join Fame & Partners
-            p I was completely inspired by the opportunity to help young women craft amazing, current and catwalk inspired looks… unique to them! Plus I totally love the team here – every day is a buzz and always awash with fashion!
+      .col-md-3.col-xs-6.col-xxs-12s
+        .benefit-box.well
+          h3 Explore
+          p Your personalized boutique of dresses and discover music, moodboards and scents that inspired them.
+          span.number 2
 
-          .jobs
-            h4 Join the Fame Team
-            p We're growing rapidly and are always on the look out for talented individuals.
-            p= link_to "APPLY TO JOIN OUR TEAM", "mailto:team@fameandpartners.com?subject=Job Application", class: "btn empty border"
-          
-            
-   
+      .col-md-3.col-xs-6.col-xxs-12s
+        .benefit-box.well
+          h3 Create
+          p Make unique customizations to the dress, to make it totally yours.
+          span.number 3
+
+      .col-md-3.col-xs-6.col-xxs-12s
+        .benefit-box.well
+          h3 Style
+          p Access free stylists to source your accessories for you or receive styling tips that are personalized to you!
+          span.number 4
+
+    .row.relative        
+      div
+        h3 What are we?
+        p The only destination where you can customise the most current catwalks trends into a dress look that is uniquely yours. 
+
+      div
+        h3 Who are we?
+        p We are girls that love fashion and technology. the mish mash of the two means that millions of girls are inspiring other girls with style inspiration, every day; we love that this sharing is shaping a culture of girls that want an individual look.
+
+      div
+        h3 Join the Fame Chain
+        p We have started the fame chain to inspire girls across the globe with what's trending right now for special occasions. if you consider yourself a fashion maven, a blogger or someone who would like to contribute, there are free dresses, dollars and privileges for members.
+
+      div
+        h3 We Believe
+        p We believe that fashion is a form of self expression to be celebrated and what better time to do so than at a special occasion. It's why we are utterly dedicated to helping young women craft a look that is totally unique to them
+
+
