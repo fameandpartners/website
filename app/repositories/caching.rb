@@ -4,6 +4,21 @@ module Repositories
   module Caching
     extend ActiveSupport::Concern
 
+    # global settings
+    def self.cache_fetch_params(options = {})
+      result = { 
+        force: options.delete(:force)
+      }
+
+      if Rails.env.development?
+        result[:expires_in] = configatron.cache.expire.quickly
+      else
+        result[:expires_in] = configatron.cache.expire.long
+      end
+
+      result
+    end
+
     included do
       # do something here
     end
@@ -33,16 +48,7 @@ module Repositories
     end
 
     def cache_fetch_params(options = {})
-      result = { force: options.delete(:force) }
-
-      # process options[:force]
-      if Rails.env.development?
-        result[:expires_in] = configatron.cache.expire.quickly
-      else
-        result[:expires_in] = configatron.cache.expire.long
-      end
-
-      result
+      Repositories::Caching.cache_fetch_params(options)
     end
   end
 end
