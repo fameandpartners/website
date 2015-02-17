@@ -16,8 +16,11 @@ class Products::DetailsResource
     end
 
     @site_version     = options[:site_version] || SiteVersion.default
-    @color_name       = options[:color_name]
     @product          = find_product!(options[:slug], options[:permalink], options[:product])
+
+    # this should be checked, and it have no influences to product details
+    # other than preselect images/options
+    @color_name       = options[:color_name]
   end
 
   def cache_key
@@ -34,59 +37,24 @@ class Products::DetailsResource
     Rails.cache.fetch(cache_key, expires_in: cache_expiration_time, force: Rails.env.development?) do
       # product details
       OpenStruct.new({
-        id: product.id,
-        master_id: product.master.try(:id),
-        is_active: true, # fake, implement this later
-        sku:  product.sku,
-        name: product.name,
-        short_description: product_short_description,
-        description: product.description,
-        permalink: product.permalink,
-        images: product_images,
-        default_image: default_product_image,
-        price:    product_price,
-        discount: product_discount,
-        recommended_products: recommended_products
+        id:                 product.id,
+        master_id:          product.master.try(:id),
+        sku:                product.sku,
+        name:               product.name,
+        short_description:  product_short_description,
+        description:        product.description,
+        permalink:          product.permalink,
+        is_active:          product.is_active?,
+        images:             product_images.read_all,
+        default_image:      product_images.default,
+        price:              product_price,
+        discount:           product_discount,
+        # page#show specific details
+        recommended_products: recommended_products,
+        available_options:  product_selection_options
       })
     end
   end
-
-=begin
-  def read
-    Rails.cache.fetch(cache_key, expires_in: cache_expiration_time, force: Rails.env.development?) do
-      # product details
-      OpenStruct.new({
-        id: product.id,
-        master_id: product.master.try(:id),
-        sku:  product.sku,
-        name: product.name,
-        permalink: product.permalink,
-        short_description: product_short_description,
-        fabric: product_properties['fabric'],
-        notes: product_properties['style_notes'],
-        description: product_description,
-        default_image: default_product_image,
-        images: product_images,
-        price: product_price,
-        discount: product_discount,
-        free_customisations: Spree::Config[:free_customisations],
-        sizes: default_product_sizes,
-        extra_sizes: extra_product_sizes,
-        colors: default_product_colors,
-        extra_colors: extra_product_colors,
-        extra_color_price: extra_product_color_price,
-        customisations: available_product_customisations,
-        customisations_incompatibility_map: customisations_incompatibility_map,
-        variants: product_variants,
-        moodboard: product_moodboard,
-        url: product_url,
-        path: product_path,
-        selected_color: selected_product_color,
-        preorder: product_properties['preorder']
-      })
-    end
-  end
-=end
 
   private
 
@@ -116,13 +84,7 @@ class Products::DetailsResource
 
     # images
     def product_images
-      Repositories::ProductImages.new(
-        product: product
-      ).read_all
-    end
-
-    def default_product_image
-      product_images.first.try(:large) || 'noimage/product.png'
+      @product_images ||= Repositories::ProductImages.new(product: product)
     end
 
     # properties part
@@ -159,8 +121,12 @@ class Products::DetailsResource
           id: recommended_product.id,
           name: recommended_product.name,
           price: Repositories::ProductPrice.new(site_version: site_version, product: recommended_product).read,
-          image: Repositories::ProductImages.new(product: recommended_product).read
+          image: Repositories::ProductImages.new(product: recommended_product).default
         )
       end
+    end
+
+    def product_selection_options
+      Products::SelectionOptions.new(site_version: site_version, product: product).read
     end
 end

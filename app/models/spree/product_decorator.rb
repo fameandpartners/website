@@ -224,6 +224,11 @@ Spree::Product.class_eval do
     property('short_description') || ''
   end
 
+  # properties have to be managed else where... two database requests for simple string?
+  def color_customization
+    property('color_customization').to_s == 'yes'
+  end
+
   def delete
     self.update_column(:deleted_at, Time.now)
     variants_including_master.update_all(:deleted_at => Time.now)
@@ -301,6 +306,23 @@ Spree::Product.class_eval do
     self.variants.any?{|variant| variant.fast_delivery}
   end
   alias_method :fast_delivery?, :fast_delivery
+
+  # TODO: implement more faster check
+  # not deleted
+  # available - check with date
+  # have prices in default currency
+  # have prices with non-null amount
+  def is_active
+    Spree::Product.is_active?(self.id)
+  end
+  alias_method :is_active?, :is_active
+
+  def self.is_active?(product_id)
+    @active_product_ids ||= begin
+      Set.new(Spree::Product.active.pluck(:id))
+    end
+    @active_product_ids.include?(product_id)
+  end
 
 #  def fast_delivery
 #    factory_name = property('factory_name').to_s.downcase.strip

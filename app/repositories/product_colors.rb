@@ -1,14 +1,35 @@
 # usage:
 # Repositories::ProductColors.read_all
-# Repositories::ProductColors.get_by_name
+# Repositories::ProductColors.read(id)
+# Repositories::ProductColors.get_by_name(name)
 # Repositories::ProductColors.get_similar(color_ids, [0..100]
 
 module Repositories
   class ProductColors
     class << self
+      def colors_map
+        @colors_map ||= begin
+          result = {}
+          Spree::Variant.color_option_type.try(:option_values).each do |option_value|
+            result[option_value.id] = OpenStruct.new(
+              id: option_value.id,
+              name: option_value.name,
+              presentation: option_value.presentation,
+              value: option_value.value,
+              image: option_value.image? ? option_value.image.url(:small_square) : nil
+            )
+          end
+          result
+        end
+      end
+
       # colors guarantee will be reloaded after restart... we can live with that
       def read_all
-        @colors ||= Spree::Variant.color_option_type.try(:option_values) || []
+        colors_map.values
+      end
+
+      def read(id)
+        colors_map[id]
       end
 
       def get_by_name(color_name = nil)
