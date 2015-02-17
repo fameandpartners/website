@@ -10,7 +10,7 @@
         li = link_to 'Why Shop With Us', why_us_path
         li = link_to 'Fashionista', fashionista_winner_path
         li = link_to 'Fame Chain', fame_chain_path
-        li = link_to 'Contact', '#'
+        / li = link_to 'Contact', '#'
       br
       br
       .row
@@ -38,14 +38,14 @@
 
           .btn-group
             button.btn.btn-dropdown.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button" 
-              = image_tag "images/australian-flag.jpg", alt: "Australian Flag"
+              = image_tag "images/#{current_site_version.abbr}-flag.jpg", alt: "Australian Flag"
               = current_site_version.abbr.upcase
               span.caret
             ul.dropdown-menu role="menu" 
               - if !current_site_version.is_australia?
                 li
                   = link_to site_version_path('au', backlink: get_hreflang_link) do
-                    = image_tag "images/australian-flag.jpg", alt: "Australian flag"
+                    = image_tag "images/au-flag.jpg", alt: "Australian flag"
                     | AU
 
               - if !current_site_version.is_usa?
