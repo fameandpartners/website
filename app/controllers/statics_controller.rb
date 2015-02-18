@@ -1,7 +1,7 @@
 class StaticsController < ApplicationController
   include Spree::Core::ControllerHelpers::Auth
   require 'enumerator'
-  
+
   layout 'statics'
 
   # enable showing of display banner
@@ -11,19 +11,24 @@ class StaticsController < ApplicationController
   def about
     @title = "About Us - " + default_seo_title
     @description = "We design beautiful dresses for prom and many other occasions. We are a passionate team of fashionista's based in Sydney and NYC. " + default_meta_description
-    render :layout => 'redesign/application'    
+    render :layout => 'redesign/application'
   end
 
   def faqs
     @title = "FAQs - " + default_seo_title
     @description = "FAQs. " + default_meta_description
-    render :layout => 'redesign/application'        
+    render :layout => 'redesign/application'
+  end
+
+  def ecom_terms
+    @title = "Terms & Conditions - " + default_seo_title
+    @description = "Terms & Conditions. " + default_meta_description
+    render :layout => 'redesign/application'
   end
 
 
-
 # =======================================================================
-# OLD PAGES  
+# OLD PAGES
 # =======================================================================
 
   def fashionistacomp
@@ -58,10 +63,7 @@ class StaticsController < ApplicationController
     @description = "Our great team. " + default_meta_description
   end
 
-  def ecom_terms
-    @title = "Terms & Conditions - " + default_seo_title
-    @description = "Terms & Conditions. " + default_meta_description
-  end
+
 
   def ecom_privacy
     @title = "Privacy - " + default_seo_title
@@ -77,7 +79,7 @@ class StaticsController < ApplicationController
     @title = "How it Works - " + default_seo_title
     @description = "How it works. " + default_meta_description
   end
-  
+
   def renxfame
     @title = "Rachel et Nicole Design Collaboration - " + default_seo_title
     @description = "Rachel et Nicole Design Collaboration. We are so proud of this insanely adorable collaboration between Fame and Rachel et Nicole. " + default_meta_description
@@ -119,7 +121,7 @@ class StaticsController < ApplicationController
     @title = "New Years Eve Dresses - " + default_seo_title
     @description = "Perfect NYE Dresses 2014. " + default_meta_description
   end
-  
+
   def bridesmaid_lp
     @title = "Bridesmaid Dresses | Beautiful Bridesmaid Gowns Online - Fame & Partners."
     @description = "Discover beautiful bridesmaid dresses at Fame & Partners. " + default_meta_description
@@ -165,5 +167,5 @@ class StaticsController < ApplicationController
   end
 
   helper_method :get_products_from_edit
-  
+
 end
