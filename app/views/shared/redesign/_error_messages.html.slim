@@ -1,0 +1,11 @@
+- if target && target.errors.any?
+  #errorExplanation.errorExplanation
+    .alert.alert-warning.alert-dismissible role="alert"
+    
+      button type="button" class="close" data-dismiss="alert" aria-label="Close"
+        span aria-hidden="true" &times;
+
+      h3.alert-warning Everything is terrible      	 
+      / ul.list-group
+      / - target.errors.full_messages.each do |msg|
+      /   li.list-group-item= msg

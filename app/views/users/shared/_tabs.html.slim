@@ -1,5 +1,6 @@
 - active_tab ||= controller_name
-ul.tabs-links
+
+ul.nav.nav-tabs
   li class=( %w{profiles account_settings}.include?(active_tab.to_s) ? 'active' : '')
     = link_to 'Account Settings', profile_path, remote: true
   li class=( %w{wishlist wishlist_items}.include?(active_tab.to_s) ? 'active' : '')

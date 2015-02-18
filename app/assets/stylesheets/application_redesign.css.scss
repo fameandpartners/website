@@ -1,15 +1,47 @@
-@import 'stylesheets/styles.css';
+
 @import 'stylesheets/normalize.css';
-//@import 'stylesheets/demo.css';
 @import 'stylesheets/component.css';
 @import 'stylesheets/jquery.skippr.css';
-//@import 'stylesheets/bootstrap.css';
 @import 'fonts/font-awesome-4.3.0/css/font-awesome.min.css';
 @import 'stylesheets/cs-select.css';
 @import 'stylesheets/cs-skin-border.css';
 @import 'stylesheets/styleguide.css';
+@import 'stylesheets/styles.css';
 
 @import 'redesign/about';
+@import 'redesign/user';
+
+.page-title.default {
+	background-color:#003647;
+}
+
+.standard-form {
+  height: 60px;
+  padding: 0 5px;
+}
+
+
+h3 {
+  font-size:1.111111em;
+}
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+ }
+
+.has-error {
+  .help-inline {
+    color: #f2dede;
+  }
+}
 
 
 /*

@@ -27,6 +27,10 @@
 //= require partials/product_collection
 //= require partials/helpers/tracker.js.coffee
 
+// Profile/Account Settings
+//= require jquery-fileupload/basic
+//= require partials/account_settings_page
+
 jQuery(document).ready(function($){
   function add_script(src) {
     var script_element = document.createElement('script');
