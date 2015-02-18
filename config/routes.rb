@@ -32,7 +32,7 @@ FameAndPartners::Application.routes.draw do
     get '/maryxfame'  => 'statics#maryxfame'
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirl2015-terms-and-conditions'  => 'statics#fashion_it_girl_terms_and_conditions'
-    get '/nyfw-comp-terms-and-conditions'  => 'statics#nyfw_comp_terms_and_conditions'    
+    get '/nyfw-comp-terms-and-conditions'  => 'statics#nyfw_comp_terms_and_conditions'
     get '/fashionitgirl2015-competition'  => 'statics#fashion_it_girl_competition'
     get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
     get '/girlfriend' => 'statics#girlfriendxfame'
@@ -164,7 +164,7 @@ FameAndPartners::Application.routes.draw do
     get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
   end
 
-  
+
   # static pages not needed to be processed unser site_version
   get '/lp/facebook' => 'statics#landing_facebook', :as => :lp_facebook
   get '/lp/prom' => 'statics#landing_prom', :as => :lp_prom
@@ -175,7 +175,7 @@ FameAndPartners::Application.routes.draw do
     get '/bloggers/liz-black' => 'statics#blogger', as: :featured_blogger
     get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
     get '/dani-stahl' => 'statics#danistahl', as: :danistahl
-    
+
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
@@ -226,7 +226,7 @@ FameAndPartners::Application.routes.draw do
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
     get '/workshops', to: redirect('http://www.fameandpartners.com/%{site_version}/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
-    
+
     # Fallen Product URL
     get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
     get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
@@ -235,7 +235,7 @@ FameAndPartners::Application.routes.draw do
     get '/fb_auth' => 'pages#fb_auth'
 
     root :to => 'index#show'
-  
+
     resource :quiz, :only => [:show] do
       resources :questions, :only => [:index]
       resources :answers, :only => [:create]
@@ -247,10 +247,10 @@ FameAndPartners::Application.routes.draw do
       get '/recomendations' => 'user_style_profiles#recomendations'
     end
 
-    # Redirects for old pages as part of SEO 
+    # Redirects for old pages as part of SEO
     match '/competition/' => redirect('/')
     match '/competition/*all' => redirect('/')
-  
+
     match "/gregg-sulkin" => redirect('/')
 
     match '/trendsetter-program' => redirect('/')
@@ -262,7 +262,7 @@ FameAndPartners::Application.routes.draw do
 
     match '/blog/au/site_versions/au' => redirect('/blog')
     match '/blog/au/site_versions/us' => redirect('/blog')
-  
+
 
     mount Spree::Core::Engine, at: '/'
   end
@@ -309,7 +309,7 @@ FameAndPartners::Application.routes.draw do
       put 'sales/reset_cache' => 'sales#reset_cache'
       resources :sales, :except => [:show]
 
-      # stock invent settings 
+      # stock invent settings
       get 'stock_invent'                => 'stock_invent#edit',          as: :stock_invent
       put 'stock_invent'                => 'stock_invent#update'
       get 'stock_invent/status'         => 'stock_invent#status',        as: :stock_invent_status
