@@ -1,62 +1,64 @@
-.why-us-page.page-static
-  h1 Why shop with us?
-  p 
-    ' Fame & Partners is the destination for crafting the most current, coolest and individual look for your prom and special events.
-    br
-    ' When you shop with us, you will get a dress and total look that is uniquely yours. Guaranteed.
-  .row
-    .grid-6.pink
-      a name="twin"
-      .icon.icon-twin
-      h2 Twin Alert
-      p Our Twin Alert feature means that no girl attending the same event can purchase the same dress with the same customizations, in the same colour. This guarantees that no one will be wearing the same dress or look as you.
-      p &nbsp;
-      p= link_to 'Register Now', spree_login_path, class: "btn empty border small"
-      .arrows-line-horizontal
-      .arrows-line-vertical
+.page-title.default
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white Why shop with us?
+      p.text-white Fame & Partners is the destination for crafting the most current, coolest and individual look for your prom and special events. </br>When you shop with us, you will get a dress and total look that is uniquely yours. Guaranteed.
 
-    .grid-6
-      a name="advice"
-      .icon.icon-stylists
-      h2 Free Stylists
-      p If you need some help sourcing your complete look, Fame & Partners Stylists will source the total look for you, for free! When you purchase your dress with us, our Stylists will give you completely free, tailored advice based on your style profile and then actively find the best products that will match your dress, within your budget.
-      .arrows-line-horizontal
+.page-content.why-us
+  .container
+    .row
+      p
+  .container
+    .row
+      .col-md-6.pink
+        a name="twin"
+        .i.fa.fa-user
+        h2 Twin Alert
+        p Our Twin Alert feature means that no girl attending the same event can purchase the same dress with the same customizations, in the same colour. This guarantees that no one will be wearing the same dress or look as you.
+        p &nbsp;
+        p= link_to 'Register Now', spree_login_path, class: "btn btn-black"
 
-    .grid-6
-      a name="customisation"
-      .icon.icon-customize2
-      h2 Customize your Dress
-      p Want to make a dress completely your own? Choose to get one of our styles made in a different #{t('words.color')} or fabric, change the hemline length, select another unique #{t('words.customization')} or get it made in a size not offered on the site.
-      .arrows-line-horizontal
-      .arrows-line-vertical
+      .col-md-6.cream
+        a name="advice"
+        .i.fa.fa-pencil
+        h2 Free Stylists
+        p If you need some help sourcing your complete look, Fame & Partners Stylists will source the total look for you, for free! When you purchase your dress with us, our Stylists will give you completely free, tailored advice based on your style profile and then actively find the best products that will match your dress, within your budget.
 
-    - unless sale_active?
-      .grid-6.pink
+  .container
+    .row
+      .col-md-6.cream
+        a name="customisation"
+        .i.fa.fa-star-o
+        h2 Customize your Dress
+        p Want to make a dress completely your own? Choose to get one of our styles made in a different #{t('words.color')} or fabric, change the hemline length, select another unique #{t('words.customization')} or get it made in a size not offered on the site.
+
+      .col-md-6.pink
         a name="shipping"
-        .icon.icon-shipping
+        .i.fa.fa-usd
         h2 Free Shipping
         p Standard Shipping is FREE within Australia and United States for items over $49. View shipping delivery times #{link_to 'here', terms_path}.
-        .arrows-line-horizontal
 
-    .grid-6.pink
-      a name="returns"
-      .icon.icon-returns
-      h2 Free Returns
-      p You may return any item for free, provided it’s within 30 days of purchase, it is unused and in resalable condition, and the DO NOT REMOVE tag is still attached. For full details on our Returns and Exchanges policy see #{link_to 'here', faqs_path}
-      .arrows-line-horizontal
-      .arrows-line-vertical
+        - if sale_active?
+          p Free shipping does not apply to sale items.
 
-    .grid-6
-      a name="fit"
-      .icon.icon-dress
-      h2 Fit Guarantee
-      p If the size you purchase isn’t right for you, you can exchange it for another size up or down one size, for free.
-      .arrows-line-horizontal
-  
-    .grid-12.pink-light
-      a name="ondemand"
-      .icon.icon-ondemand
-      h2 On Demand
-      p We make all of our dresses on demand which is how we offer #{t('words.customization')}s and multiple #{t('words.color')} options. This means your dress is uniquely yours, made just for you.
+  .container
+    .row
+      .col-md-6.pink
+        a name="returns"
+        .i.fa.fa-reply
+        h2 Free Returns
+        p You may return any item for free, provided it’s within 30 days of purchase, it is unused and in resalable condition, and the DO NOT REMOVE tag is still attached. For full details on our Returns and Exchanges policy see #{link_to 'here', faqs_path}
 
-  
+      .col-md-6.cream
+        a name="fit"
+        .i.fa.fa-check-square-o
+        h2 Fit Guarantee
+        p If the size you purchase isn’t right for you, you can exchange it for another size up or down one size, for free.
+
+  .container
+    .row
+      .col-md-12.pink-light
+        a name="ondemand"
+        .i.fa.fa-pencil-square-o
+        h2 On Demand
+        p We make all of our dresses on demand which is how we offer #{t('words.customization')}s and multiple #{t('words.color')} options. This means your dress is uniquely yours, made just for you.
