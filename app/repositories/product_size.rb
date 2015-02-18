@@ -32,12 +32,14 @@ class Repositories::ProductSize
   end
 
   def read(size_id)
-    size = Repositories::ProductSize.sizes_map[size_id]
+    size = Repositories::ProductSize.sizes_map[size_id].clone
     return nil if !valid_for_site_version?(size)
 
     if size_have_extra_price?(size)
       size.extra_price  = true
     end
+
+    size.presentation = "#{ site_version.size_settings.locale_code.upcase } #{ size.presentation }"
 
     size
   end

@@ -14,7 +14,7 @@ class Products::DetailsController < Products::BaseController
       raise Errors::ProductInactive
     end
 
-    display_marketing_banner # content_for :banner ?
+    #display_marketing_banner # content_for :banner ?
 
     #@title = @product.details.title
     #@title = @product.details.description

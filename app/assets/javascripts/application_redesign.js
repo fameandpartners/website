@@ -24,8 +24,14 @@
 
 //= require partials/helpers/site_version
 //= require popups/style_quiz
-//= require partials/product_collection
+//= require partials/product_collection.js
 //= require partials/helpers/tracker.js.coffee
+
+// product details with related
+//= require partials/product_details.js
+//= require partials/inputs/new.js.coffee
+//= require partials/helpers/product_images_slider.js.coffee
+//= require partials/helpers/product_variants_selector.js.coffee
 
 jQuery(document).ready(function($){
   function add_script(src) {

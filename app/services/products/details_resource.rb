@@ -88,15 +88,8 @@ class Products::DetailsResource
     end
 
     # properties part
-    # maybe move it to repo?
     def product_properties
-      @product_properties ||= begin
-        {}.tap do |properties|
-          product.product_properties.includes(:property).each do |product_property|
-            properties[product_property.property.name] = product_property.value
-          end
-        end
-      end
+      product_properties ||= Repositories::ProductProperties.new(product: product)
     end
 
     def product_short_description

@@ -1,11 +1,24 @@
+ruby: 
+  init_product_details_page = "
+    (function() {
+      page.initProductDetailsPage({
+        slider: {
+          container: '#slides',
+          options: { animation: 'fade', play: 6000 },
+        },
+        selector: {
+          custom_id: #{ @product.master_id },
+          variants: #{raw @product.available_options.variants.serialize.to_json },
+          container: '.row.product-section--selection'
+        },
+        buyButton: '.buy-button',
+        wishlistButton: '.moodboard-button'
+      });
+    })();
+  "
+
 = content_for :inline_javascript do
-  | $('#slides').superslides({ animation: 'fade', play: 6000, });
-  |
-  | (function() {
-  |  [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
-  |    new SelectFx(el);
-  |  } );
-  | })();
+  = raw init_product_details_page
 
 #slides
   .slides-container
@@ -33,22 +46,23 @@
       - sizes = @product.available_options.sizes
       - if sizes.present?
         .col-md-6
-          select.cs-select.cs-skin-border
+          select.cs-select.cs-skin-border#product-size
             option disabled="" selected="" value=""  Size
             - if sizes.default.present?
               optgroup label="Standard sizes"
-                = sizes.default.each do |size|
+                - sizes.default.each do |size|
                   option value=(size.id) = size.presentation
             - if sizes.extra.present?
               optgroup label="Sizes below are additional #{ sizes.default_extra_price.display_price }"
-                = sizes.extra.each do |size|
-                  option value=(size.id) = size.presentation
+                - sizes.extra.each do |size|
+                  option value=(size.id) data-custom="true"
+                    = size.presentation
           br
 
       - colors = @product.available_options.colors
       - if colors.present?
         .col-md-6
-          select.cs-select.cs-skin-border
+          select.cs-select.cs-skin-border#product-color
             option disabled="" selected="" value="" 
               span.color-box.navy
               | Color
@@ -60,7 +74,7 @@
             - if colors.extra.present?
               optgroup label="Custom colors #{ colors.default_extra_price.display_price }"
                 - colors.extra.each do |color|
-                  option value=(color.id) class="custom color #{color.name}"
+                  option value=(color.id) class="custom color #{color.name}" data-custom="true"
                     = color.presentation
           br
 
@@ -69,12 +83,13 @@
           - customizations = @product.available_options.customizations
           - if customizations.present?
             .col-md-6
-              select.cs-select.cs-skin-border
-                option disabled="" selected="" value="" 
+              select.cs-select.cs-skin-border#product-customizations
+                option selected="" value="" 
                   span.color-box.navy
                   | Customize
                 - customizations.all.each do |customization|
-                  option value=(customization.id) = "#{ customization.name } #{ customization.display_price }"
+                  option value=(customization.id) data-custom="true"
+                    = "#{ customization.name } #{ customization.display_price }"
               br
 
           .col-md-6
@@ -90,12 +105,12 @@
         /! Quantity
         .row.product-section--quantity
           .col-md-12
-            a.link href="#" 
+            a.link.moodboard-button href="#" 
               span.fa.fa-heart
               | Add to Moodboard
         /! Buy Call to Action
         .row.col-md-12
-          button.btn.btn-block.btn-black Add to bag
+          button.btn.btn-block.btn-black.buy-button Add to bag
           span.extra-details Free Shipping
 
 /! About The Dress

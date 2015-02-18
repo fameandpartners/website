@@ -8,6 +8,12 @@
 #   quantity [ in stock ]
 # }
 #
+class Products::ProductVariants < Array
+  def serialize
+    map{|variant| variant.marshal_dump}
+  end
+end
+
 module Repositories; end
 class Repositories::ProductVariants
   include Repositories::Caching
@@ -20,10 +26,8 @@ class Repositories::ProductVariants
   end
 
   def read_all
-    @product_variants ||= read_product_variants
+    @product_variants ||= Products::ProductVariants.new(read_product_variants)
   end
-
-  cache_results :read_all
 
   private
 
@@ -46,4 +50,6 @@ class Repositories::ProductVariants
         })
       end
     end
+
+    cache_results :read_product_variants
 end
