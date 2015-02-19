@@ -26,6 +26,7 @@
 //= require popups/style_quiz
 //= require partials/product_collection.js
 //= require partials/helpers/tracker.js.coffee
+//= require partials/helpers/error_messages.js.coffee
 
 // product details with related
 //= require partials/product_details.js

@@ -11,20 +11,18 @@ window.helpers or= {}
 
 window.helpers.ProductVariantsSelector = class ProductVariantsSelector
   constructor: (options = {}) ->
-    options.preselected ||= {}
-
     @$container = $(options.container)
     @custom   = { id: options.custom_id, count_on_hand: 0, fast_delivery: false, available: true }
     @variants = options.variants
-    @selected = {} # cache
+    @selected = options.preselected || {}
 
     @sizeInput            = options.sizeInput
     @colorInput           = options.colorInput
     @customizationsInput  = options.customizationsInput
 
-    @colorInput           ||= new inputs.FxSelector(@$container, '#product-color', @selected.size_id)
-    @sizeInput            ||= new inputs.FxSelector(@$container, '#product-size', @selected.color_id)
-    @customizationsInput  ||= new inputs.MultiFxSelector(@$container, '#product-customizations', @selected.customizations_ids)
+    @colorInput          ||= new inputs.FxSelector(@$container, '#product-color', @selected.size_id)
+    @sizeInput           ||= new inputs.FxSelector(@$container, '#product-size', @selected.color_id)
+    @customizationsInput ||= new inputs.MultiFxSelector(@$container, '#product-customizations', @selected.customizations_ids )
 
     @colorInput.on('change', @onChangeHandler)
     @sizeInput.on('change', @onChangeHandler)
@@ -32,11 +30,11 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
 
   onChangeHandler: (e) =>
     @selected = null
-    @getCurrentSelection()
+    @trigger('change', @getValue())
 
   # returns current value
   getValue: () ->
-    @selected ||= @getCurrentSelection
+    @selected ||= @getCurrentSelection()
 
   getCurrentSelection: () ->
     selected = {
@@ -53,6 +51,37 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       selected.variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
 
     return selected
+
+  # event bus mechanics
+  on: () =>
+    # delegate to container
+    @$container.on.apply(@$container, arguments)
+
+  trigger: (type, data) =>
+    # delegate to container
+    @$container.trigger.apply(@$container, arguments)
+
+  # note: it should return errors statuses
+  validate: () ->
+    selected = @getValue()
+    result = { valid: false }
+
+    if selected.variant
+      if selected.variant.available
+        result.valid = true
+      else
+        result.error = 'Sorry, out of stock'
+    else if _.isEmpty(selected.size_id) && _.isEmpty(selected.color_id)
+      result.error = 'Please, select size and colour'
+    else if _.isEmpty(selected.size_id)
+      result.error = 'Please select a size'
+    else if _.isEmpty(selected.color_id)
+      result.error = 'Please select a colour'
+    else
+      # we have size, color, but variant doesn't found
+      result.error = 'Sorry, this combination unavailable'
+
+    result
 
 #      target_data = { id: null, error: null }
 #

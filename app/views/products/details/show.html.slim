@@ -4,12 +4,13 @@ ruby:
       page.initProductDetailsPage({
         slider: {
           container: '#slides',
-          options: { animation: 'fade', play: 6000 },
+          options: { animation: 'fade', play: 6000, preselected: null },
         },
         selector: {
           custom_id: #{ @product.master_id },
           variants: #{raw @product.available_options.variants.serialize.to_json },
-          container: '.row.product-section--selection'
+          container: '.row.product-section--selection',
+          preselected: { }
         },
         buyButton: '.buy-button',
         wishlistButton: '.moodboard-button'
@@ -24,8 +25,8 @@ ruby:
   .slides-container
     // note: we should crop images & update images preloading mechanics - too slow currently
     - @product.images.each_with_index do |image, index|
-      = image_tag "images/reformation/#{ (index % 3).next }.jpg"
-      /= image_tag image.original, id: "product-image-slide-#{ index }", data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
+      /= image_tag "images/reformation/#{ (index % 3).next }.jpg"
+      = image_tag image.original, id: "product-image-slide-#{ index }", data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
 
   nav.slides-navigation
     a.next href="#" 
