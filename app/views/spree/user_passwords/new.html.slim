@@ -9,16 +9,15 @@
 .page-content.registration.new
   .container.relative
     .row
-      .col-md-8.col-xs-12
-        .row
-          p=t(:instructions_to_reset_password)
-        
+      .col-md-8.col-sm-12
         = form_for Spree::User.new, :as => :spree_user, :url => main_app.spree_user_password_path do |f|
           = render 'shared/redesign/error_messages', :target => @spree_user
 
           .row
-            .col-md-12.form-group
-              = f.email_field :email, :value => params[:email], placeholder: t(:email)
+            .col-md-12
+              p=t(:instructions_to_reset_password)
+              .form-group              
+                = f.email_field :email, :value => params[:email], placeholder: t(:email), :class => 'form-control standard-form'
 
           .row
             .col-md-5.col-xs-12.form-group   

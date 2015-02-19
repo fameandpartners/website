@@ -2,7 +2,9 @@
   - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
   = form_for :spree_user, :url => login_path do |f|
     #password-credentials
-      = flash_messages
+      
+      = render :partial =>'shared/redesign/flash_messages', flash: flash
+
       .row
         .col-md-12.form-group
           = f.label :email

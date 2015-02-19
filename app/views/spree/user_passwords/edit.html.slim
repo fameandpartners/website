@@ -1,18 +1,33 @@
-= render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user }
 
-.wrap.devise-forms
-  .fleft
-    h1 = t(:change_my_password)
-    .default-form
-      .form
+- signup_params = params.slice(:cl).merge(site_version: current_site_version.code)
+
+.page-title.default
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white= t(:change_my_password)
+
+.page-content.registration.new
+  .container.relative
+    .row
+      .col-md-8.col-sm-12
         = form_for @spree_user, :as => :spree_user, :url => main_app.spree_user_password_path, :method => :put do |f|
           = f.hidden_field :reset_password_token
-          .input.string
-            = f.password_field :password, placeholder: t(:password)
-          .input.string
-            = f.password_field :password_confirmation, placeholder: t(:password_confirmation)
-          .submit-form.input.clearfix
-            .fleft
-              = f.submit 'Change Password', class: 'btn button primary'
-  .fright
-    = image_tag 'image-login.jpg', width: 533, height: 562, alt: ''
+          
+          = render 'shared/redesign/error_messages', :target => @spree_user
+
+          .row
+            .form-group
+              = f.label 'Enter a new password'
+              = f.password_field :password, placeholder: t(:password), :class => 'form-control standard-form'
+          .row
+            .form-group
+
+                = f.password_field :password_confirmation, placeholder: t(:password_confirmation), :class => 'form-control standard-form'
+          .row
+            .form-group   
+              = f.submit 'Change Password', class: 'btn btn-black'
+
+      .col-md-4.hidden-xs.hidden-sm
+        = image_tag 'image-login.jpg', :class => 'img-responsive', width: 533, height: 562, alt: 'Forgot Password'
+
+
