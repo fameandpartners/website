@@ -8,9 +8,16 @@
 @import 'stylesheets/styleguide.css';
 @import 'stylesheets/styles.css';
 
+@import 'redesign/mixins';
+
 @import 'redesign/about';
 @import 'redesign/user';
 @import 'redesign/why_us';
+@import 'redesign/facebook';
+@import 'redesign/registration';
+
+
+
 
 .page-title.default {
 	background-color:#003647;

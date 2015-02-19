@@ -42,4 +42,12 @@ jQuery(document).ready(function($){
 
   add_script('/assets/js/sg-scripts.js');
   //add_script('/assets/js/main.js');
+
+
+	$('#forgot-password').on('click', function(e) {
+		e.preventDefault();
+		email = $('#spree_user_email').val()
+		window.location = $(this).attr('href') + '?email=' + email;
+	});
+
 })

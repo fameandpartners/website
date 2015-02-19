@@ -1,20 +1,33 @@
 - signup_params = params.slice(:cl).merge(site_version: current_site_version.code)
-.wrap.devise-forms.row
-  .grid-6
-    h1 Create an Account
-    .description Create an account to save your dress to a Moodboard to discover your Style Profile, share with friends and to manage your profile. Its easy just enter some basic details!
-    = link_to fb_auth_path(signup_params), class: 'facebook-button' do
-      span.icon
-        span.icon-facebook2
-      span Sign up with facebook
-    .or
-      span or
-    .default-form
-      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
-        = f.hidden_field :site_version_id, value: current_site_version.id
-        = render 'shared/error_messages', :target => @spree_user
-        = render :partial => 'spree/shared/user_form', :locals => { :f => f }
-    .terms
-      ' By clicking above you acknowledge and accept our Terms of Service.
-  .picture.grid-6
-    = image_tag '_reg/blonde.jpg', alt: ''
+
+.page-title.default
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white Create an Account
+
+.page-content.registration.new
+  .container.relative
+    .row
+      .col-md-8.col-xs-12
+        .row
+          p Create an account to save your dress to a Moodboard to discover your Style Profile, share with friends and to manage your profile. Its easy just enter some basic details!
+          p= link_to fb_auth_path(signup_params), class: 'facebook-button' do        
+            span.icon
+              span.fa.fa-2x.fa-facebook 
+            span Sign up with facebook
+
+        .row
+          .or
+            span or
+
+        .row
+          = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
+            = f.hidden_field :site_version_id, value: current_site_version.id
+            = render 'shared/redesign/error_messages', :target => @spree_user
+            = render :partial => 'spree/shared/user_form', :locals => { :f => f }
+         
+          .terms.small
+            ' By registering above you acknowledge and accept our Terms of Service.
+
+      .col-md-4.hidden-xs.hidden-sm
+        = image_tag '_reg/blonde.jpg', :class => 'img-responsive', alt: 'Registration'
