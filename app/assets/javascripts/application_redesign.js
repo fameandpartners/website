@@ -1,5 +1,8 @@
 // our code
 //= require jquery
+//= require jquery_ujs
+//= require jquery-fileupload/basic
+
 //= require libs/underscore-min
 
 // styleguide code
@@ -28,7 +31,6 @@
 //= require partials/helpers/tracker.js.coffee
 
 // Profile/Account Settings
-//= require jquery-fileupload/basic
 //= require partials/account_settings_page
 
 jQuery(document).ready(function($){
