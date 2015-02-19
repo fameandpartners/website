@@ -7,22 +7,32 @@
 	.row {
 		margin-top:20px;
 	}
-	
-}
 
-.avatar {
-	width: 100px;
-	height: 100px;
-	border-radius: 100%;
-	margin-right: 20px;
-	margin-left: 110px;
-	overflow: hidden;
-	display:block;
-	&.empty {
-		background: url('_reg/avatar-empty.png') no-repeat center center #e1e1e1;
+
+	.avatar {
+		width: 100px;
+		height: 100px;
+		border-radius: 100%;
+		margin-right: 20px;
+		margin-left: 110px;
+		overflow: hidden;
+		display:block;
+		&.empty {
+			background: url('_reg/avatar-empty.png') no-repeat center center #e1e1e1;
+		}
 	}
-}
+	
+	&.moodboard {
+		.actions {
+			.btn {
+				color:#FFFFFF;
 
-// avatar.empty {
-// 	background: url('_reg/avatar-empty.png') no-repeat center center #e1e1e1;
-// }
+			}
+		}
+	}
+
+	.vex.vex-theme-flat-attack .vex-dialog-button.vex-dialog-button-primary {
+	  background-color:#003647; 
+	}
+
+}

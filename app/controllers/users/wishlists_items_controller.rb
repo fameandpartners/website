@@ -5,6 +5,9 @@ class Users::WishlistsItemsController < Users::BaseController
 
   before_filter :load_user
 
+
+  layout 'redesign/application'
+  
   def index
     @moodboard = Wishlist::UserWishlistResource.new(
       site_version: current_site_version,
