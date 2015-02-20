@@ -44,7 +44,6 @@ doctype html
           - else
             = render 'shared/sale_banner'
         = yield
-      = render 'shared/dolly_campaign_popup'
       #push
     = render 'layouts/footer'
     = render 'shared/remarketing_tag' unless request.path == "/campaigns/stylecall/thankyou"

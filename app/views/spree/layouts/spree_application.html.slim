@@ -6,6 +6,8 @@ doctype html
     = render 'spree/shared/google_analytics'
     = render '/shared/zopim'
 
+    = render '/shared/canonical'
+
     - if content_for?(:payment_gateway)
       = yield :payment_gateway
   body class="ecommerce #{controller_action_class}" id=(controller_action_id)
@@ -46,7 +48,6 @@ doctype html
             = render 'shared/sale_banner'
         = yield
       = render 'shared/payment_request_popup'
-      = render 'shared/dolly_campaign_popup'
       #push
     = render 'layouts/footer'
 

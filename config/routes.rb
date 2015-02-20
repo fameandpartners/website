@@ -163,11 +163,6 @@ FameAndPartners::Application.routes.draw do
     get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
   end
 
-  
-  # static pages not needed to be processed unser site_version
-  get '/lp/facebook' => 'statics#landing_facebook', :as => :lp_facebook
-  get '/lp/prom' => 'statics#landing_prom', :as => :lp_prom
-
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
@@ -178,7 +173,6 @@ FameAndPartners::Application.routes.draw do
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
-    get '/blake-lively'  => 'statics#blake-lively', :as => :blake_lively
     get '/team', to: redirect("http://www.fameandpartners.com/about")
     get '/terms'   => 'statics#ecom_terms'
     get '/privacy' => 'statics#ecom_privacy'
@@ -191,20 +185,13 @@ FameAndPartners::Application.routes.draw do
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size' => 'statics#landingpage_plus_size', :as => :plus_size
 
-    get '/campaigns/stylecall' => 'campaigns#show'
-    post '/campaigns/stylecall' => 'campaigns#create'
-    get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
-    post '/campaigns/dolly' => 'campaigns#dolly', as: :dolly_campaign
-    #post '/campaigns/newsletter' => 'campaigns#newsletter', as: :newsletter_campaign
-
     namespace "campaigns" do
       resource :newsletter, only: [:new, :create], controller: :newsletter
       resource :email_capture, only: [:new, :create], controller: :email_capture
-      resource :girlfriend_pop, only: [:new, :create], controller: :girlfriend_pop
     end
 
-    #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
-    #post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+    get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
+    post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
 
     get '/fame-chain' => 'fame_chains#new'
     resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
@@ -215,9 +202,6 @@ FameAndPartners::Application.routes.draw do
     resource 'style-consultation', as: 'style_consultation', only: [:new, :create] do
       get 'success'
     end
-
-    # testing marketing_email
-    get '/email/comp' => 'competition_mailer#marketing_email'
 
     # return form
     get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
