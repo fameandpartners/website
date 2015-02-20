@@ -203,9 +203,6 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
-    # testing marketing_email
-    get '/email/comp' => 'competition_mailer#marketing_email'
-
     # return form
     get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
 
