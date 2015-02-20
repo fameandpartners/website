@@ -32,6 +32,12 @@ class StaticsController < ApplicationController
     render :layout => 'redesign/application'
   end
 
+  def ecom_privacy
+    @title = "Privacy - " + default_seo_title
+    @description = "Privacy. " + default_meta_description
+    render :layout => 'redesign/application'
+  end
+
 
 # =======================================================================
 # OLD PAGES
@@ -67,11 +73,6 @@ class StaticsController < ApplicationController
   def team
     @title = "Our Team - " + default_seo_title
     @description = "Our great team. " + default_meta_description
-  end
-
-  def ecom_privacy
-    @title = "Privacy - " + default_seo_title
-    @description = "Privacy. " + default_meta_description
   end
 
   def legal
