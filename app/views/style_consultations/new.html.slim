@@ -1,21 +1,26 @@
-.style-consultation-page.page-static
-  h1 Free Personalised Style Consultation
-  h2 Fame & Partners invites you to a personalised style consultation
-  .offer Plus get $20 off when you make a purchase on the day
-  .row
-    .apply-now
-      .arrows-line-horizontal
-      .form-global
-        = form_for @style_consultation, url: style_consultation_path, method: :post, html: {class: 'form'} do |f|
-          .input
-            label Name
-            = f.text_field :name
-          .input
-            label Email
-            = f.text_field :email, type: 'email'
-          .input
-            label Phone
-            = f.text_field :phone
-          .submit
-            = f.submit "Book now", class: 'btn'
-      .arrows-line-horizontal
+.page-title.default
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white Free Personalised Style Consultation
+      p.text-white Fame & Partners invites you to a personalised style consultation
+      p.text-white Plus get $20 off when you make a purchase on the day
+
+.page-content.style-consult
+  .container.relative
+    .form-global
+      = form_for @style_consultation, url: style_consultation_path, method: :post, html: {class: 'form'} do |f|
+
+        .form-group.text-center
+          label Name
+          = f.text_field :name, :class => 'form-control standard-form'
+
+        .form-group.text-center
+          label Email
+          = f.text_field :email, type: 'email', :class => 'form-control standard-form'
+
+        .form-group.text-center
+          label Phone
+          = f.text_field :phone, :class => 'form-control standard-form'
+        .submit
+          = f.submit "Book now", class: 'btn btn-black btn-block'
+
