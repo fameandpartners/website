@@ -57,16 +57,23 @@ class Products::CollectionsController < Products::BaseController
     def parse_permalink(permalink)
       return {} if permalink.blank?
       taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
-      return {} if taxon.blank?
 
-      # style, edits, events, range, seocollection
-      case taxon.taxonomy.to_s.downcase
-      when 'style', 'edits', 'event'
-        { taxon.taxonomy.to_s.downcase.to_sym => permalink }
-      when 'range'
-        { collection: permalink }
-      else
-        {}
+      if taxon.present?
+        # style, edits, events, range, seocollection
+        case taxon.taxonomy.to_s.downcase
+        when 'style', 'edits', 'event'
+          return { taxon.taxonomy.to_s.downcase.to_sym => permalink }
+        when 'range'
+          return { collection: permalink }
+        end
       end
+
+      color = Repositories::ProductColors.get_by_name(permalink)
+      if color.present?
+        return { color: color.name }
+      end
+
+      # default
+      return {}
     end
 end

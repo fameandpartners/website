@@ -69,9 +69,9 @@ FameAndPartners::Application.routes.draw do
       # get '/color/:colour' => 'spree/products#index'
       # get '/body-shape/:bodyshape' => 'spree/products#index'
 
-      get '/sale-(:sale)' => 'spree/products#index', as: "dresses_on_sale"
       get '/:event/:style' => 'spree/products#index'
-      get '/*permalink' => 'spree/products#index', as: 'taxon'
+      get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
+      get '/*permalink' => 'products/collections#show', as: 'taxon'
       get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 

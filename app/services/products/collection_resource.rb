@@ -1,7 +1,7 @@
 class Products::Collection < OpenStruct
   def serialize
     result = self.marshal_dump.clone
-    result[:banner]   = self.banner.marshal_dump
+    result[:details]  = self.details.marshal_dump
     result[:products] = self.products.map do |product| 
       product.marshal_dump.merge(
         collection_path: ApplicationController.helpers.collection_product_path(product)
@@ -62,7 +62,7 @@ class Products::CollectionResource
           edits:      edits,
           bodyshape:  bodyshape,
           color:      color,
-          sale:       discount
+          discount:   discount
         ).read
       end
     end
