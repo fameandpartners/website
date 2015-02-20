@@ -9,10 +9,14 @@ module CommonHelper
     instance_variable_defined?("@description") ? @description : default_meta_description
   end
 
-  def get_canonical_tag
+  def get_canonical_href
     if @product.present?
-      return "<link href='http://#{request.host}#{collection_product_path(@product)}' rel='canonical' />".html_safe
+      return "#{request.host}#{collection_product_path(@product)}"
     end
+    if current_site_version.is_australia? && !request.fullpath.include?('/au')
+      return "http://#{request.host}/au#{request.fullpath}"
+    end
+    "http://#{request.host}#{request.fullpath}"
   end
 
   # social links helper

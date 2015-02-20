@@ -2,7 +2,11 @@ title = get_title
 meta name="description" content=(get_meta_description)
 
 = hreflang_tag
-= get_canonical_tag
+
+link rel="canonical" href=get_canonical_href
+link rel="alternate" hreflang="en-US" href="http://www.fameandpartners.com/"
+link rel="alternate" hreflang="en-AU" href="http://www.fameandpartners.com/au"
+
 = stylesheet_link_tag    'application'
 = javascript_include_tag 'application'
 link rel='shortcut icon' type='image/png' href='/favicon.png'
