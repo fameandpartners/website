@@ -1,8 +1,4 @@
 
-- if current_site_version.is_australia? && !request.fullpath.include?('/au')
-	link rel="canonical" href="http://#{request.host}/au#{request.fullpath}"
-- else
-  link rel="canonical" href="http://#{request.host}#{request.fullpath}"
-
+link rel="canonical" href="#{get_canonical_href}"
 link rel="alternate" hreflang="en-US" href="http://www.fameandpartners.com/"
 link rel="alternate" hreflang="en-AU" href="http://www.fameandpartners.com/au"
