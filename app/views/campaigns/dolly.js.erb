@@ -1,7 +1,0 @@
-$scope = dollyCampaignModal.scope().find('.modal-form');
-
-<% if @participation.valid? %>
-  $scope.html('<%=j render('campaigns/dolly/thanks') %>');
-<% else %>
-  $scope.html('<%=j render('campaigns/dolly/form') %>');
-<% end %>
