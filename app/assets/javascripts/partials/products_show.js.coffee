@@ -1,6 +1,4 @@
-page.initProductDetailsPage = (options = {}) ->
-
-
+#page.initProductDetailsPage = (options = {}) ->
 #$(".spree_products.show").ready ->
 #  # common
 #  page.enableShoppingCart()

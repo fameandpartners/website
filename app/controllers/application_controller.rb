@@ -422,6 +422,11 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
 
+  def current_user_moodboard
+    @user_moodboard ||= UserMoodboard::BaseResource.new(user: current_spree_user).read
+  end
+  helper_method :current_user_moodboard
+
   # todo: remove this method from global scope
   def get_recommended_products(product, options = {})
     Products::RecommendedProducts.new(product: product, limit: options[:limit]).read

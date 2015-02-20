@@ -34,6 +34,11 @@
 //= require partials/helpers/product_images_slider.js.coffee
 //= require partials/helpers/product_variants_selector.js.coffee
 
+// shopping cart & bag & moodboard
+//= require partials/helpers/shopping_cart
+//= require partials/helpers/user_moodboard
+//= require partials/shopping_bag
+
 jQuery(document).ready(function($){
   function add_script(src) {
     var script_element = document.createElement('script');

@@ -107,7 +107,9 @@ header
           = link_to wishlist_path, class: 'menu-item--link' do
             span.visible-sm
               = image_tag "images/Heart.svg"
-            span.hidden-sm.hidden-xs Moodboard (2)
+            span.hidden-sm.hidden-xs
+              | Moodboard
+              span.moodboard-items-count = "(#{ current_user_moodboard.item_count })"
         li.menu-item
           = link_to profile_path, class: 'menu-item--link' do
             = image_tag "images/User.svg"
@@ -131,8 +133,7 @@ header
                 .col-md-3
 
         li#cart-trigger.menu-item
-          /= link_to spree.cart_path, class: 'menu-item--link' do
-          = link_to '#', class: 'menu-item--link' do
+          = link_to spree.cart_path, class: 'menu-item--link' do
             span.cart
               = image_tag 'images/Cart.svg', class: 'cart-icon'
-              span.cart-amount 5
+              span.cart-amount = current_order.item_count

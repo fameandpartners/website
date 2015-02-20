@@ -1,3 +1,15 @@
+ruby: 
+  shopping_bag_init = "
+    window.app.shopping_bag = new ShoppingBag({ 
+      cart: window.shopping_cart,
+      overlay: '#shadow-layer',
+      container: '#cart',
+      toggle_link: '#cart-trigger'
+    });
+  "
+= content_for :javascript do
+  = raw shopping_bag_init
+
 #shadow-layer
 #cart
   .cart--top.text-center

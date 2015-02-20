@@ -1,23 +1,20 @@
 <!-- bootstrap -->
 <script type="text/javascript">
+  order_data      = { item_count: <%= current_order.item_count %> };
+  moodboard_data  = <%= raw current_user_moodboard.serialize.to_json %>;
+  
   window.app = {
     env:    '<%= Rails.env %>',
     debug:  <%= Rails.env.development? %>,
     user:   { id: <%= current_spree_user.present? ? current_spree_user.id : 'null' %> },
-    site_version: {  name: '<%= current_site_version.try(:name) %>' }
+    site_version: {  name: '<%= current_site_version.try(:name) %>' },
+    shopping_cart: new helpers.ShoppingCart(order_data),
+    moodboard: new helpers.UserMoodboard(moodboard_data)
   };
 
   $(document).ready(function() {
     <%= yield :inline_javascript %>
+
     page.enableStyleQuizPopup('.show-style-quiz');
-
-    /*
-      (function() {
-      [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
-        new SelectFx(el);
-      } );
-    })();
-    */
-
   });
 </script>

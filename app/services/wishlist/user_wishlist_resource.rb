@@ -4,7 +4,7 @@ class Wishlist::UserWishlistResource
   attr_reader :site_version, :moodboard_owner
 
   def initialize(options = {})
-    @site_version     = options[:site_version]
+    @site_version     = options[:site_version] || SiteVersion.default
     @moodboard_owner  = options[:owner]
   end
 

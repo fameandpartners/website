@@ -5,6 +5,7 @@ module Repositories
     extend ActiveSupport::Concern
 
     # global settings
+    # Repositories::Caching.cache_fetch_params
     def self.cache_fetch_params(options = {})
       result = { 
         force: options.delete(:force)
