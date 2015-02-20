@@ -1,15 +1,28 @@
-.wrap.devise-forms.row
-  .grid-6
-    h1 Log-in
-    .description Log-in to check your order, save your dress to a Wishlist, to discover your Style Profile, share with friends and to manage your profile.
-    / = link_to 'Log-in with facebook', fb_auth_path, class: 'facebook-signup'
-    = link_to fb_auth_path(site_version: current_site_version.code), class: 'facebook-button' do
-      span.icon
-        span.icon-facebook2
-      span Sign up with facebook
-    .or
-      span or
-    .default-form
-      = render :partial => 'spree/shared/login'
-  .picture.grid-6
-    = image_tag '_reg/brunette.jpg', alt: 'Sign in to Fame & Partners'
+.page-title.default
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white Login
+
+.page-content.login.new
+  .container
+    .row
+      .col-md-8.col-sm-12
+        .row
+          p Log-in to check your order, save your dress to a Wishlist, to discover your Style Profile, share with friends and to manage your profile.
+          
+          p
+            = link_to fb_auth_path(site_version: current_site_version.code), class: 'facebook-button' do        
+              span.icon
+                span.fa.fa-2x.fa-facebook 
+              span Sign up with facebook
+
+        .row
+          .or
+            span or
+
+        .row
+          = render :partial => 'spree/shared/login'
+
+      .col-md-4.hidden-xs.hidden-sm
+        = image_tag '_reg/brunette.jpg', :class => 'img-responsive', alt: 'Sign in to Fame & Partners'
+

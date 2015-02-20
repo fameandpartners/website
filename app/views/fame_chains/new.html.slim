@@ -1,5 +1,125 @@
-- @title = "Fame Chain / Our Exclusive Blogger Community - " + default_seo_title
-- @description = "A network of fashion forward, free thinking bloggers increasing their bling through being linked. Apply for membership."
+.page-title.default
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white The Fame Chain
+      p.text-white.word Noun.
+      .text-center A network of fashion forward, free thinking bloggers
+      i increasing&nbsp;
+      ' their
+      b bling&nbsp;
+      ' through being linked.
+
+.page-content.thefamechain
+  .container.relative
+    .apply
+      h2 Apply for membership
+      h3 Members/Perks
+    .perks
+      = image_tag 'famechain/perks.png', width: 942, height: 147, alt: 'The Fame Chain Perks'
+
+    .circles
+      .row
+        .col-md-12
+          h2.text-center Who Can Apply
+
+      .row.two-columns
+        .col-md-6
+          .circle.pink.img-circle
+            p Have a blog where you actively follow fashion trends?
+
+        .col-md-6
+          .circle.pink.img-circle
+            p Are active on Pinterest, Twitter, Instagram, Vine, Facebook and/or any other social media
+      .row
+        .col-md-4
+          .circle.pink.img-circle
+            p Are below the age of 25
+
+        .col-md-4
+          .circle.pink.img-circle
+            p Want to inspire girls to create their own unique look for their formal occasions
+
+        .col-md-4
+          .circle.pink.img-circle
+            p want to earn an income from you blog
+
+    .benefits.cream
+      h2 What you get
+      ul.benefits-list
+        li Opportunity to be invited to CO-DESIGN A FORMAL DRESS
+        li 15% commission on every dress that one of your followers buys from us
+        li A FREE FORMAL DRESS when 5 of your followers buy from our store
+        li Free blog and content creation training
+        li Opportunity to link to other blogs and INCREASE YOUR OWN BLOG'S VISIBILITY
+        li Public endorsement of your blog as part of The Fame Chain
+        li Opportunity to guest post on The Fame Issue
+        li VIP access to special discounts for you and your followers
+        li Access to a network of like-minded young women and content
+        li JUMPSTART in your blogging, fashion and/or technology career
+        li VIP access to our annual paid internship competition
+
+    .form-border
+      .row
+        .apply-now
+          h2.text-center Apply now
+
+      = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
+        .row
+          .form-group
+            label.text-right name
+            = f.text_field :name
+        .row
+          .form-group
+            label.text-right email
+            = f.text_field :email, type: 'email'
+
+        .row
+          .form-group
+            label.col-md-3.control-label.text-right blog
+            .col-md-3
+              = f.text_field :blog, type: 'url'
+            label.col-md-3.control-label.text-right visitors</br>per month
+            .col-md-3
+              = f.text_field :blog_size, type: 'text'
+
+        .row
+          .form-group
+            label.col-md-3.control-label.text-right pintrest
+            .col-md-3
+              = f.text_field :pinterest, type: 'url'
+            label.col-md-3.control-label.text-right number</br>of followers
+            .col-md-3
+              = f.text_field :pinterest_size, type: 'text'
+
+        .row
+          .form-group
+            label.col-md-3.control-label.text-right twitter
+            .col-md-3
+              = f.text_field :twitter, type: 'url'
+            label.col-md-3.control-label.text-right number</br>of Followers
+            .col-md-3
+              = f.text_field :twitter_size, type: 'text'
+
+        .row
+          .form-group
+            label.text-right facebook
+            = f.text_field :facebook, type: 'url'
+
+        .row
+          .submit
+            = f.submit "Apply now", class: 'btn btn-black'
+
+    .how-it-works.cream
+      .title How does it work?
+      ul.steps
+        li Apply to join The Fame Chain
+        li Applications are assessed within 5 days
+        li If you are accepted, you get all the perks above
+        li
+          ' Receive The Fame Chain Welcome Kit
+          br
+          ' with technical instructions on how to join
+
 javascript:
   var fb_param = {};
   fb_param.pixel_id = '6012298815296';
@@ -14,178 +134,3 @@ javascript:
   })();
 noscript
   img alt="" height="1" src="https://www.facebook.com/offsite_event.php?id=6012298815296&amp;value=0&amp;currency=AUD" style="display:none" width="1"
-  
-.wrap
-  .thefamechain
-    .logo
-      = image_tag 'famechain/logo.png', width: 531, height: 179, alt: 'The Fame Chain'
-    .the-word
-      .word Noun.
-      .text-center
-        ' A network of fashion forward,
-        br
-        ' free thinking bloggers 
-        i increasing 
-        ' their 
-        b bling 
-        br
-        ' through being linked.
-    .apply
-      .big Apply for membership
-      ' /
-      br
-      ' Members
-      br
-      ' Perks
-    .perks
-      = image_tag 'famechain/perks.png', width: 942, height: 147, alt: 'The Fame Chain Perks'
-    .arrows-line-horizontal
-    .circles
-      = image_tag 'famechain/circles.jpg', width: 1040, height: 613, alt: ''
-    .benefits
-      .title What you get
-      ul.benefits-list
-        li 
-          ' • Opportunity to be invited to
-          i.didot.uppercase CO-DESIGN A FORMAL DRESS
-        li • 15% commission on every dress that one of your followers buys from us
-        li 
-          ' • 
-          i.didot.uppercase A FREE FORMAL DRESS 
-          ' when 5 of your followers buy from our store
-        li • Free blog and content creation training
-        li
-          ' • Opportunity to link to other blogs and 
-          i.didot.uppercase INCREASE YOUR OWN BLOG'S VISIBILITY
-        li • Public endorsement of your blog as part of The Fame Chain
-        li • Opportunity to guest post on The Fame Issue
-        li • VIP access to special discounts for you and your followers
-        li • Access to a network of like-minded young women and content
-        li
-        ' •
-        i.didot.uppercase JUMPSTART 
-        ' in your blogging, fashion and/or technology career
-        li • VIP access to our annual paid internship competition
-    .arrows-line-horizontal
-    .apply-now
-      .title Apply now
-      .form-global
-        = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
-          .input
-            label Name
-            = f.text_field :name
-          .input
-            label Email
-            = f.text_field :email, type: 'email'
-          .input.small
-            label Blog
-            = f.text_field :blog, type: 'url'
-          .input.inline
-            label Visitors p/month
-            = f.text_field :blog_size, type: 'text'
-          .clearfix
-          .input.small
-            label Pinterest
-            = f.text_field :pinterest, type: 'url' 
-          .input.inline
-            label Number of Followers
-            = f.text_field :pinterest_size, type: 'text'
-          .clearfix
-          .input.small
-            label Twitter
-            = f.text_field :twitter, type: 'url'
-          .input.inline
-            label Number of Followers
-            = f.text_field :twitter_size, type: 'text'
-          .clearfix
-          .input
-            label Facebook
-            = f.text_field :facebook, type: 'url'
-          .submit
-            = f.submit "Apply now", class: 'btn pink shadow'
-    .arrows-line-horizontal
-    .how-it-works
-      .title How does it work?
-      ul.steps
-        li Apply to join The Fame Chain
-        li Applications are assessed within 5 days
-        li If you are accepted, you get all the perks above
-        li
-          ' Receive The Fame Chain Welcome Kit
-          br
-          ' with technical instructions on how to join
-
-/.famechain
-  .wrap
-    h1 The Fame Chain
-    .chain-desc
-      ' Fame & Partners is excited to be helping teenage girls jumpstart a career in fashion,
-      br
-      ' retail or technology... and help them earn some cash along the way!
-    .grid-container
-      .grid-50
-        .bordered-picture.rotate-1
-          = image_tag 'famechain/picture-1.jpg', width: 432, height: 648, alt: ''
-      .grid-50
-        .works-title How it works
-        ul.features
-          li.feature
-            .number 1.
-            .text Apply to join The Fame Chain
-          li.feature
-            .number 2.
-            .text Upon acceptance, get free social media training
-          li.feature
-            .number 3.
-            .text Receive endorsement from Fame & Partners as an official member of The Fame Chain
-          li.feature
-            .number 4.
-            .text Get the opportunity to guest post on The Fame Issue
-          li.feature
-            .number 5.
-            .text Receive unique content & special discounts to offer the readers of your blog
-          li.feature
-            .number 6.
-            .text Get sneak peek access to our collections before others
-          li.feature
-            .number 7.
-            .text Have a say in our range design
-          li.feature
-            .number 8.
-            .text Send 5 customers to our site and get your formal dress for free!
-          li.feature
-            .number 9.
-            .text Earn cash for every dress sale that comes from any of your social media profiles
-    .get-started Get started now... For free
-    .grid-container
-      .grid-40
-        .form-desc If you would like to apply to become part of The Fame Chain, simply provide your details below. We assess every application on a case-by-case basis and will let you know within 5 business days if your application has been successful.
-        = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
-          .input
-            label Name
-            = f.text_field :name
-          .input
-            label Email
-            = f.text_field :email, type: 'email'
-          .input
-            label Blog
-            = f.text_field :blog, type: 'url'
-          .input
-            label Pinterest
-            = f.text_field :pinterest, type: 'url'
-          .input
-            label Facebook
-            = f.text_field :facebook, type: 'url'
-          .input
-            label Twitter
-            = f.text_field :twitter, type: 'url'
-          .submit
-            = f.submit "Join the Fame Chain Today"
-        .signature
-          .top Yours in Style!
-          ' The Fame Team
-      .grid-60
-        .bordered-picture.rotate-1
-          = image_tag 'famechain/picture-2.jpg', width: 582, height: 388, alt: ''
-        .bordered-picture
-          = image_tag 'famechain/picture-3.jpg', width: 582, height: 388, alt: ''

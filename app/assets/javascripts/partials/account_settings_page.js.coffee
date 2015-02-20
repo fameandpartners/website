@@ -33,11 +33,16 @@ $('.profiles.show').ready ->
     return true
 
   window.initFileuploader = ->
+
+    authenticity_token = $('meta[name="csrf-token"]').attr('content');
+
     $('#fileupload').fileupload({
       url: '/profile/update_image'
       dataType: 'json'
       type: 'PUT'
-      formData: {}
+      formData: [
+        { name: 'authenticity_token', value: authenticity_token }
+      ]
       multipart: true
       paramName: 'image'
       singleFileUploads: true
@@ -54,4 +59,4 @@ $('.profiles.show').ready ->
       $('#fileupload').click()
     )
 
-  window.initFileuploader()
+  window.initFileuploader() 

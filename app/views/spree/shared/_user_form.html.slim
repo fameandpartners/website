@@ -1,36 +1,40 @@
-.form data-hook="signup"
+
+.div data-hook="signup"
   div data-hook="signup_inside_form"
-    .input.two-fields.clearfix
-      .input.string
+    .row
+      .col-md-6.col-xs-12.form-group      
         = f.label :first_name
-        = f.text_field :first_name
-      .input.string
+        = f.text_field :first_name, :class => 'form-control standard-form'
+      .col-md-6.col-xs-12.form-group
         = f.label :last_name
-        = f.text_field :last_name
-    .input.string
-      = f.label :email
-      = f.email_field :email, autocomplete: :off
+        = f.text_field :last_name, :class => 'form-control standard-form'
+    .row
+      .col-md-12.form-group
+        = f.label :email
+        = f.email_field :email, autocomplete: :off, :class => 'form-control standard-form'
     #password-credentials
-      .input.two-fields.clearfix
-        .input.string
+      .row
+        .col-md-12.form-group
           = f.label :password
-          = f.password_field :password, autocomplete: :off
-        .input.string
+          = f.password_field :password, autocomplete: :off, :class => 'form-control standard-form'
+      .row
+        .col-md-12.form-group
           = f.label :password_confirmation
-          = f.password_field :password_confirmation, autocomplete: :off
-    .newsletter-field
-      label.nice-checkbox for="spree_user_newsletter"
-        = f.check_box :newsletter
-        = f.label :newsletter do 
-          span
-          ' Subscribe to our Newsletter
-        / .pitch Stay in touch with the hottest trends and new arrivals direct to your inbox.
-      
-    div data-hook="signup_below_password_fields"
-    .submit-form.input.clearfix
-      .fleft = f.submit 'Create an account', class: 'btn button primary'
-      .fright
-        div Already have an account? 
-        div = link_to 'Sign in', spree.login_path
+          = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control standard-form'
+    .row
+      .col-md-12.form-group
+        .checkbox
+          label for="spree_user_newsletter"
+            = f.check_box :newsletter
+            span
+              ' Subscribe to our Newsletter
+    
+    .row
+      div data-hook="signup_below_password_fields"
+        .col-md-5.col-xs-12.form-group   
+          = f.submit 'Create an account', class: 'btn btn-black'
+        .col-md-7.col-xs-12
+          div Already have an account? 
+          div = link_to 'Sign in', spree.login_path
 
 div data-hook="login_extras"

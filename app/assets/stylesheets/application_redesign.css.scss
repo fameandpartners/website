@@ -1,15 +1,63 @@
-@import 'stylesheets/styles.css';
+
 @import 'stylesheets/normalize.css';
-//@import 'stylesheets/demo.css';
 @import 'stylesheets/component.css';
 @import 'stylesheets/jquery.skippr.css';
-//@import 'stylesheets/bootstrap.css';
 @import 'fonts/font-awesome-4.3.0/css/font-awesome.min.css';
 @import 'stylesheets/cs-select.css';
 @import 'stylesheets/cs-skin-border.css';
 @import 'stylesheets/styleguide.css';
+@import 'stylesheets/styles.css';
+
+@import 'redesign/mixins';
 
 @import 'redesign/about';
+@import 'redesign/user';
+@import 'redesign/why_us';
+@import 'redesign/fame_chain';
+@import 'redesign/facebook';
+@import 'redesign/registration';
+@import 'redesign/style_consult';
+
+.page-title.default {
+	background-color:#003647;
+}
+
+.standard-form {
+  height: 60px;
+  padding: 0 5px;
+}
+
+h3 {
+  font-size:1.111111em;
+}
+
+.alert-warning {
+  background-color:#F2DDD0;
+}
+
+.has-error {
+  .help-inline {
+    color: #f2dede;
+  }
+}
+
+.has-warning {
+  .help-inline {
+    color: #F2DDD0;
+  }
+}
+
+.pink {
+    background-color: #f3dbd5;
+}
+
+.pink-light {
+  background-color: #f8ece9;
+}
+
+.cream {
+  background-color: #fbf5f3
+}
 
 
 /*

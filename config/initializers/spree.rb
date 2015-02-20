@@ -55,6 +55,9 @@ Spree.config do |config|
   end
 end
 
+Devise::RegistrationsController.layout "redesign/application"
+
+
 Spree.user_class = "Spree::User"
 
 Spree::Ability.register_ability(Blog::Ability)

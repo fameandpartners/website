@@ -1,19 +1,33 @@
-= render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user }
 
-.wrap.devise-forms
-  .fleft
-    h1 = t(:forgot_password)
-    .description = t(:instructions_to_reset_password)
-    .default-form
-      .form
+- signup_params = params.slice(:cl).merge(site_version: current_site_version.code)
+
+.page-title.default
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white= t(:forgot_password)
+
+.page-content.registration.new
+  .container.relative
+    .row
+      .col-md-8.col-sm-12
         = form_for Spree::User.new, :as => :spree_user, :url => main_app.spree_user_password_path do |f|
-          .input.string
-            = f.email_field :email, placeholder: t(:email)
-          .submit-form.input.clearfix
-            .fleft
-              = f.submit t(:reset_password), class: 'btn button primary'
-            .fright
-              div = link_to t(:create_a_new_account), spree.signup_path
-              div = link_to 'Sign in', spree.login_path
-  .fright
-    = image_tag 'image-login.jpg', width: 533, height: 562, alt: ''
+          = render 'shared/redesign/error_messages', :target => @spree_user
+
+          .row
+            .col-md-12
+              p=t(:instructions_to_reset_password)
+              .form-group              
+                = f.email_field :email, :value => params[:email], placeholder: t(:email), :class => 'form-control standard-form'
+
+          .row
+            .col-md-5.col-xs-12.form-group   
+              = f.submit t(:reset_password), class: 'btn btn-black'
+            .col-md-7.col-xs-12
+              div= link_to t(:create_a_new_account), spree.signup_path
+              div= link_to 'Sign in', spree.login_path
+
+
+      .col-md-4.hidden-xs.hidden-sm
+        = image_tag 'image-login.jpg', :class => 'img-responsive', width: 533, height: 562, alt: 'Forgot Password'
+
+
