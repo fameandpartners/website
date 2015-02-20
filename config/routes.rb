@@ -164,11 +164,6 @@ FameAndPartners::Application.routes.draw do
     get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
   end
 
-
-  # static pages not needed to be processed unser site_version
-  get '/lp/facebook' => 'statics#landing_facebook', :as => :lp_facebook
-  get '/lp/prom' => 'statics#landing_prom', :as => :lp_prom
-
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
@@ -179,7 +174,6 @@ FameAndPartners::Application.routes.draw do
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
-    get '/blake-lively'  => 'statics#blake-lively', :as => :blake_lively
     get '/team', to: redirect("http://www.fameandpartners.com/about")
     get '/terms'   => 'statics#ecom_terms'
     get '/privacy' => 'statics#ecom_privacy'
