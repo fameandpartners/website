@@ -13,11 +13,9 @@
 @import 'redesign/about';
 @import 'redesign/user';
 @import 'redesign/why_us';
+@import 'redesign/fame_chain';
 @import 'redesign/facebook';
 @import 'redesign/registration';
-
-
-
 
 .page-title.default {
 	background-color:#003647;
@@ -35,6 +33,7 @@ h3 {
 .alert-warning {
   background-color:#F2DDD0;
 }
+
 .has-error {
   .help-inline {
     color: #f2dede;
@@ -47,6 +46,17 @@ h3 {
   }
 }
 
+.pink {
+    background-color: #f3dbd5;
+}
+
+.pink-light {
+  background-color: #f8ece9;
+}
+
+.cream {
+  background-color: #fbf5f3
+}
 
 
 /*
