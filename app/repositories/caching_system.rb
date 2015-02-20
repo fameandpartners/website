@@ -1,11 +1,11 @@
 require 'active_support/concern'
 
 module Repositories
-  module Caching
+  module CachingSystem
     extend ActiveSupport::Concern
 
     # global settings
-    # Repositories::Caching.cache_fetch_params
+    # Repositories::CachingSystem.cache_fetch_params
     def self.cache_fetch_params(options = {})
       result = { 
         force: options.delete(:force)
@@ -49,7 +49,7 @@ module Repositories
     end
 
     def cache_fetch_params(options = {})
-      Repositories::Caching.cache_fetch_params(options)
+      Repositories::CacheSystem.cache_fetch_params(options)
     end
   end
 end

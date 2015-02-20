@@ -1,5 +1,5 @@
 class Repositories::VariantPrice
-  #include Repositories::Caching
+  #include Repositories::CachingSystem
 
   attr_reader :variant
 

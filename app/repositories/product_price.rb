@@ -7,7 +7,7 @@
 #   Repositories::ProductPrice.new(product: product).read
 #
 class Repositories::ProductPrice
-  include Repositories::Caching
+  include Repositories::CachingSystem
 
   attr_reader :site_version, :product
 

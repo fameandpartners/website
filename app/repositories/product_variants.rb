@@ -16,7 +16,7 @@ end
 
 module Repositories; end
 class Repositories::ProductVariants
-  include Repositories::Caching
+  include Repositories::CachingSystem
 
   attr_reader :product_id
 
