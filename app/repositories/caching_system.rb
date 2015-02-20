@@ -49,7 +49,7 @@ module Repositories
     end
 
     def cache_fetch_params(options = {})
-      Repositories::CacheSystem.cache_fetch_params(options)
+      Repositories::CachingSystem.cache_fetch_params(options)
     end
   end
 end
