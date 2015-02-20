@@ -185,20 +185,13 @@ FameAndPartners::Application.routes.draw do
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size' => 'statics#landingpage_plus_size', :as => :plus_size
 
-    get '/campaigns/stylecall' => 'campaigns#show'
-    post '/campaigns/stylecall' => 'campaigns#create'
-    get '/campaigns/stylecall/thankyou' => 'campaigns#thank_you'
-    post '/campaigns/dolly' => 'campaigns#dolly', as: :dolly_campaign
-    #post '/campaigns/newsletter' => 'campaigns#newsletter', as: :newsletter_campaign
-
     namespace "campaigns" do
       resource :newsletter, only: [:new, :create], controller: :newsletter
       resource :email_capture, only: [:new, :create], controller: :email_capture
-      resource :girlfriend_pop, only: [:new, :create], controller: :girlfriend_pop
     end
 
-    #get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
-    #post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+    get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
+    post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
 
     get '/fame-chain' => 'fame_chains#new'
     resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
