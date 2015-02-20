@@ -9,6 +9,8 @@ doctype html
       = render '/shared/zopim'    
     - if @nofollow
       meta name="ROBOTS" content="NOINDEX, FOLLOW"
+   
+    = render '/shared/canonical'
 
   body class=(controller_action_class) id=(restfull_action_name)
     .m-pixel
