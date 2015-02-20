@@ -1,6 +1,8 @@
 class FameChainsController < ApplicationController
   before_filter :set_seo_meta
 
+  layout 'redesign/application'
+
   def new
     @fame_chain = FameChain.new
   end
