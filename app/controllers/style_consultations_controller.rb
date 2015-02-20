@@ -1,5 +1,7 @@
 class StyleConsultationsController < ApplicationController
 
+  layout 'redesign/application'
+
   def new
     @style_consultation = StyleConsultation.new
     @title = "Free Style Consultation - " + default_seo_title
