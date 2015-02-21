@@ -4,7 +4,18 @@
 window.helpers or= {}
 window.helpers.ShoppingCart = class ShoppingCart
   constructor: (options = {}) ->
+    @$eventBus = $({})
     # code
+  
+    @trigger =  delegateTo(@$eventBus, 'trigger')
+    @on      =  delegateTo(@$eventBus, 'on')
+    @one     =  delegateTo(@$eventBus, 'one')
+
+  # request to force data requesting from server
+  # if already loaded, do nothing. it should be done by other methods
+  load: () ->
+    @trigger('loaded')
+
 
 #_base = undefined
 #window.shopping_cart = {}

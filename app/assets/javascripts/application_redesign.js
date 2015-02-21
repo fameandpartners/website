@@ -20,13 +20,14 @@
 //= require js/classie.js
 //= require js/selectFx.js
 //= require js/alert.js
-//= require js/main.js
+// require js/main.js
 // require js/sg-scripts.js
 
 //= require js/functions.js
 //= require js/superslides.js
 //= require functions_redesign.js
 
+//= require helpers
 //= require partials/helpers/site_version
 //= require popups/style_quiz
 //= require partials/product_collection.js

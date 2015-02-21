@@ -1,8 +1,54 @@
 # user products slider in header
 # 'view' element
 window.ShoppingBag = class ShoppingBag
+  transition_end_events = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend'
+
   constructor: (options = {}) ->
-    @cart = options.cart # window.shopping_cart
+    @cart       = options.cart # window.shopping_cart
+
+    @$overlay   = $(options.overlay || '#shadow-layer')
+    @$container = $(options.container || '#cart')
+
+    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render')
+
+    $(options.toggle_link || '#cart-trigger').on('click', @openHandler)
+
+    @$container.on('click', '.close-cart', @closeHandler)
+    @$overlay.on('click', @closeHandler)
+
+    @cart.on('changed', @render)
+    @
+
+  render: () ->
+    #data = cart.data
+    console.log(cart)
+
+  close: () ->
+    @$overlay.removeClass('is-visible')
+    @$container.removeClass('speed-in').one(transition_end_events, () ->
+      $('body').removeClass('overflow-hidden')
+    )
+
+  open: () ->
+    @$container.addClass('speed-in').one(transition_end_events, () ->
+      $('body').addClass('overflow-hidden')
+    )
+    @$overlay.addClass('is-visible')
+
+  openHandler: (e) ->
+    e.preventDefault()
+    @cart.one('loaded', @open)
+    @cart.load()
+
+  closeHandler: (e) ->
+    e.preventDefault()
+    @close()
+
+  removeElementHandler: (e) ->
+    e.preventDefault()
+    console.log('@cart.removeLineItem() not implemented yet')
+    @cart.removeLineItem()
+
 
 #$ ->
 #  return unless window.bootstrap?
