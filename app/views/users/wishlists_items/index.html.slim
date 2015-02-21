@@ -26,11 +26,7 @@ javascript:
 
       link = $(e.currentTarget);
       itemId = link.data('id');
-
-      console.log(link)
-
       removeLink = $('#remove-product-'+itemId);
-      console.log(removeLink)
       remove(removeLink.attr('href'), function() {
         window.location = link.attr('href');
       })
