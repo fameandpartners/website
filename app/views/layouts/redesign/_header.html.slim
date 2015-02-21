@@ -109,7 +109,7 @@ header
               = image_tag "images/Heart.svg"
             span.hidden-sm.hidden-xs
               | Moodboard
-              span.moodboard-items-count = "(#{ current_user_moodboard.item_count })"
+              / span.moodboard-items-count = "(#{ current_user_moodboard.item_count })"
         li.menu-item
           = link_to profile_path, class: 'menu-item--link' do
             = image_tag "images/User.svg"
