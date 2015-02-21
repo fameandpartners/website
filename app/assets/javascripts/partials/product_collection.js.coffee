@@ -12,7 +12,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @content = $(content)
 
     # possible, we should wrap to some inputs/base object
-    _.each(@filter.find('#event, #style, #bodyshape, #color, #product_order'), (el) =>
+    _.each(@filter.find('#style, #bodyshape, #color, #product_order'), (el) =>
       new SelectFx(el, onChange: @update)
     )
 
@@ -46,7 +46,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   getSelectedValues: () ->
     result = {}
-    @addValue(result, 'event', '#event')
     @addValue(result, 'bodyshape', '#bodyshape')
     @addValue(result, 'colour', '#color')
     @addValue(result, 'style', '#style')
