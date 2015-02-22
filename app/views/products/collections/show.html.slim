@@ -20,18 +20,18 @@ ruby:
       /! First Row Controls
       .col-md-8.no-padding.hidden-sm.hidden-xs
         .row
-          .col-md-3
+          .col-md-4
             = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
             br
-          .col-md-3
+          .col-md-4
             = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
             br
-          .col-md-3
+          .col-md-4
             = select_tag :color, color_options, class: '', prompt: 'Colour'
             br
 
       /! Second Row Controls
-      .col-md-3.col-md-offset-1
+      .col-md-3.col-md-offset-1.no-padding.text-right
         .row
           = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
           br
@@ -44,7 +44,7 @@ ruby:
         - products.each do |product|
           .col-md-3.col-xs-6.col-xxs-12.category--item
             = link_to '#' do
-              - if rand(2) == 1
+              - if in_wishlist?(product)
                 span.fa.fa-heart.add-to-moodboard
               - else
                 span.fa.fa-heart-o.add-to-moodboard
