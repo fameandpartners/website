@@ -21,19 +21,19 @@ ruby:
       .col-md-8.no-padding.hidden-sm.hidden-xs
         .row
           .col-md-3
-            = select_tag :style, style_options, class: 'cs-select cs-skin-border', prompt: 'Styles'
+            = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
             br
           .col-md-3
-            = select_tag :bodyshape, shape_options, class: 'cs-select cs-skin-border', prompt: 'Shape'
+            = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
             br
           .col-md-3
-            = select_tag :color, color_options, class: 'cs-select cs-skin-border', prompt: 'Colour'
+            = select_tag :color, color_options, class: '', prompt: 'Colour'
             br
 
       /! Second Row Controls
       .col-md-3.col-md-offset-1
         .row
-          = select_tag 'product_order', sort_options, class: 'cs-select cs-skin-border', prompt: 'Sort By...'
+          = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
           br
 
 
