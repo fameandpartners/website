@@ -38,6 +38,12 @@ class StaticsController < ApplicationController
     render :layout => 'redesign/application'
   end
 
+  def fashionista_winner
+    @title = "Fashionista 2014 Winner"
+    @description = "Fashionista 2014 Winner. " + default_meta_description
+    render :layout => 'redesign/application'
+  end
+
 
 # =======================================================================
 # OLD PAGES
@@ -48,11 +54,6 @@ class StaticsController < ApplicationController
     @searcher = Products::ProductsFilter.new(:edits => "fashionista")
     @searcher.current_user = try_spree_current_user
     @searcher.current_currency = current_currency
-  end
-
-  def fashionista_winner
-    @title = "Fashionista 2014 Winner"
-    @description = "Fashionista 2014 Winner. " + default_meta_description
   end
 
   def landingpage_plus_size
