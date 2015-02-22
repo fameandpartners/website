@@ -53,4 +53,7 @@ ruby:
             .details
               span.name = product.name
               span.price = product.price
+              - if product.fast_delivery
+                span.delivery Express delivery 
+
         .clearfix.visible-sm-block.visible-xs-block
