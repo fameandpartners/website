@@ -6,6 +6,7 @@
 //= require jquery-fileupload/jquery.fileupload
 
 //= require libs/underscore-min
+// spree have this by default
 
 // styleguide code
 //= require js/snap.svg-min.js

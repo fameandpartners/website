@@ -16,17 +16,25 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @variants = options.variants
     @selected = options.preselected || {}
 
-    @sizeInput            = options.sizeInput
-    @colorInput           = options.colorInput
-    @customizationsInput  = options.customizationsInput
+    @sizeInput = options.sizeInput || new inputs.ProductSizeIdSelector(
+      container: @$container.find('#product-size'),
+      value: @selected.size_id
+    )
 
-    @colorInput          ||= new inputs.FxSelector(@$container, '#product-color', @selected.size_id)
-    @sizeInput           ||= new inputs.FxSelector(@$container, '#product-size', @selected.color_id)
-    @customizationsInput ||= new inputs.MultiFxSelector(@$container, '#product-customizations', @selected.customizations_ids )
+    @colorInput = options.colorInput || new inputs.ProductColorIdSelector(
+      container: @$container.find('#product-color'),
+      value: @selected.color_id
+    )
+
+    @customizationsInput  = options.customizationsInput || new inputs.ProductCustomizationsIdsSelector(
+      container: @$container.find('#product-customizations'),
+      value: @selected.customizations_ids
+    )
 
     @colorInput.on('change', @onChangeHandler)
     @sizeInput.on('change', @onChangeHandler)
     @customizationsInput.on('change', @onChangeHandler)
+    @
 
   onChangeHandler: (e) =>
     @selected = null
