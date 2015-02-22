@@ -18,7 +18,6 @@
 //= require js/svgicons.js
 //= require js/jquery.skippr.min.js
 //= require js/classie.js
-//= require js/selectFx.js
 //= require js/alert.js
 // require js/main.js
 // require js/sg-scripts.js

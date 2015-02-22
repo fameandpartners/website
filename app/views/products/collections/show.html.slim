@@ -3,7 +3,6 @@
 
 ruby:
   style_options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style.try(:permalink))
-  event_options = options_from_collection_for_select(@filter.events, :permalink, :name, @collection.event.try(:permalink))
   shape_options = options_from_collection_for_select(@filter.shapes, :to_s, :to_s, @collection.bodyshape.try(:downcase))
   color_options = color_options_for_select_from_options_values(@filter.colors, @collection.color.try(:name))
   sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
@@ -21,23 +20,20 @@ ruby:
       /! First Row Controls
       .col-md-8.no-padding.hidden-sm.hidden-xs
         .row
-          .col-md-3
-            = select_tag :style, style_options, class: 'cs-select cs-skin-border', prompt: 'Styles'
+          .col-md-4
+            = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
             br
-          .col-md-3
-            = select_tag :event, event_options, class: 'cs-select cs-skin-border', prompt: 'Events'
+          .col-md-4
+            = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
             br
-          .col-md-3
-            = select_tag :bodyshape, shape_options, class: 'cs-select cs-skin-border', prompt: 'Shape'
-            br
-          .col-md-3
-            = select_tag :color, color_options, class: 'cs-select cs-skin-border', prompt: 'Colour'
+          .col-md-4
+            = select_tag :color, color_options, class: '', prompt: 'Colour'
             br
 
       /! Second Row Controls
-      .col-md-3.col-md-offset-1
+      .col-md-3.col-md-offset-1.no-padding.text-right
         .row
-          = select_tag 'product_order', sort_options, class: 'cs-select cs-skin-border', prompt: 'Sort By...'
+          = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
           br
 
 
@@ -48,7 +44,7 @@ ruby:
         - products.each do |product|
           .col-md-3.col-xs-6.col-xxs-12.category--item
             = link_to '#' do
-              - if rand(2) == 1
+              - if in_wishlist?(product)
                 span.fa.fa-heart.add-to-moodboard
               - else
                 span.fa.fa-heart-o.add-to-moodboard
@@ -57,4 +53,7 @@ ruby:
             .details
               span.name = product.name
               span.price = product.price
+              - if product.fast_delivery
+                span.delivery Express delivery 
+
         .clearfix.visible-sm-block.visible-xs-block

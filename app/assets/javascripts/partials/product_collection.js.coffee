@@ -12,10 +12,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @content = $(content)
 
     # possible, we should wrap to some inputs/base object
-    _.each(@filter.find('#event, #style, #bodyshape, #color, #product_order'), (el) =>
-      new SelectFx(el, onChange: @update)
+    _.each(@filter.find('#style, #bodyshape, #color, #product_order'), (el) =>    
+      $(el).on('change', @update).select2();
     )
 
+    # $('.disable-input .selectize-input input').prop('disabled', true).css('pointer-events', 'none');
   update: () =>
     updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
     pageUrl = @updatePageLocation(updateRequestParams)
@@ -46,7 +47,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   getSelectedValues: () ->
     result = {}
-    @addValue(result, 'event', '#event')
     @addValue(result, 'bodyshape', '#bodyshape')
     @addValue(result, 'colour', '#color')
     @addValue(result, 'style', '#style')
