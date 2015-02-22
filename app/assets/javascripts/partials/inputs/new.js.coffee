@@ -94,11 +94,6 @@ window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Sele
   customValue: () ->
     @$el.find("option[value=#{ @val() }]").data('custom')
 
-window.inputs.ProductColorNameSelector = class ProductColorNameSelector extends Select2Selector
-  constructor: (options = {}) ->
-    options.valueType = 'string'
-    super(options)
-
 window.inputs.ProductCustomizationsIdsSelector = class ProductCustomizationsIdsSelector extends Select2MultiSelector
   constructor: (options = {}) ->
     options.valueType = 'integer'
@@ -106,6 +101,17 @@ window.inputs.ProductCustomizationsIdsSelector = class ProductCustomizationsIdsS
 
   customValue: () ->
     !_.isEmpty(@val())
+
+
+window.inputs.BaseTextSelector = class BaseTextSelector extends Select2Selector
+  constructor: (options = {}) ->
+    options.valueType = 'string'
+    super(options)
+
+window.inputs.ProductColorNameSelector  = class ProductColorNameSelector extends BaseTextSelector
+window.inputs.ProductBodyShapeSelector  = class ProductBodyShapeSelector extends BaseTextSelector
+window.inputs.ProductStyleNameSelector  = class ProductStyleNameSelector extends BaseTextSelector
+window.inputs.ProductOrderSelector      = class ProductOrderSelector extends BaseTextSelector
 
 #window.inputs.FxSelector = class FxSelector extends BaseInput
 #  constructor: (scope, element, preselected = null) ->

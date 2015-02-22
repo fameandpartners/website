@@ -11,10 +11,15 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @filter = $(filter)
     @content = $(content)
 
-    # possible, we should wrap to some inputs/base object
-    _.each(@filter.find('#style, #bodyshape, #color, #product_order'), (el) =>
-      $(el).on('change', @update).select2()
-    )
+    @styleInput         = new inputs.ProductStyleNameSelector(container: @filter.find('#style'))
+    @bodyShapeInput     = new inputs.ProductBodyShapeSelector(container: @filter.find('#bodyshape'))
+    @colorInput         = new inputs.ProductColorNameSelector(container: @filter.find('#color'))
+    @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
+
+    @styleInput.on('change', @update)
+    @bodyShapeInput.on('change', @update)
+    @colorInput.on('change', @update)
+    @productOrderInput.on('change', @update)
 
     # $('.disable-input .selectize-input input').prop('disabled', true).css('pointer-events', 'none');
   update: () =>
@@ -46,12 +51,12 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     object
 
   getSelectedValues: () ->
-    result = {}
-    @addValue(result, 'bodyshape', '#bodyshape')
-    @addValue(result, 'colour', '#color')
-    @addValue(result, 'style', '#style')
-    @addValue(result, 'order', '#product_order')
-    result
+    {
+      bodyshape: @bodyShapeInput.val(),
+      colour: @colorInput.val(),
+      style: @styleInput.val(),
+      order: @productOrderInput.val()
+    }
 
   updatePageLocation: (filter) ->
     url = '/dresses'

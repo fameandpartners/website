@@ -127,7 +127,7 @@ class Products::CollectionDetails
         color: is_formal_dress_color?(color) ? color.name.titleize : nil,
         style: style.present? ? style.name.titleize : '',
         event: event.present? ? event.name.titleize : 'Any Event',
-        bodyshape: bodyshape.blank? ? '' : ( templates[:title][:bodyshape] % bodyshape )
+        bodyshape: bodyshape.blank? ? '' : ( templates[:title][:bodyshape] % { bodyshape: bodyshape } )
       }
 
       default_title.gsub!(/\s{1,}/, ' ').capitalize # remove double spaces
@@ -147,7 +147,7 @@ class Products::CollectionDetails
         if discount.to_sym == :all
           return templates[:description][:sale_all]
         else
-          return (templates[:description][:sale] % discount.to_i)
+          return (templates[:description][:sale] % { discount: discount.to_i })
         end
       end
 
