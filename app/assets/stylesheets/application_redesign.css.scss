@@ -17,6 +17,7 @@
 @import 'redesign/facebook';
 @import 'redesign/registration';
 @import 'redesign/style_consult';
+@import 'redesign/fashionista_winner';
 
 .page-title.default {
 	background-color:#003647;
@@ -59,6 +60,35 @@ h3 {
   background-color: #fbf5f3
 }
 
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 20%;
+    float: left;
+}
+
+.col-md-5 {
+
+  @media (min-width: 1200px) {
+    width: 20%;
+    float: left;
+  }
+
+  @media (max-width: 992px) {
+    width: 33.33%;
+    float: left;
+  }
+
+  @media (max-width: 768px) {
+      width: 50%;
+      float: left;
+  }
+}
 
 /*
   // added for quick reference only
