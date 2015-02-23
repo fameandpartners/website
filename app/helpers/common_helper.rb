@@ -26,6 +26,17 @@ module CommonHelper
     end
   end
 
+
+  def get_hreflang(lang)
+    href = get_canonical_href
+
+    if lang == :au && !get_canonical_href.include?('/au')
+      return "http://#{request.host}/au#{request.fullpath}"    
+    end
+
+    href
+  end
+
   def get_canonical_href
     if @product.present?
       return "#{request.host}#{collection_product_path(@product)}"
