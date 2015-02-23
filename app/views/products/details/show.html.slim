@@ -3,7 +3,8 @@ ruby:
       page.initProductDetailsPage({
         slider: {
           container: '#slides',
-          options: { animation: 'fade', play: 6000, preselected: null },
+          images: #{ @product.all_images.to_json }, 
+          options: { animation: 'fade', play: 6000, preselected: null }   
         },
         selector: {
           custom_id: #{ @product.master_id },
@@ -21,17 +22,18 @@ ruby:
       new ProductCustomisation({ 
         message: 'Customize Your Dress', 
         customizations: #{ @product.customization_options.to_json } 
-      });"
+      });
+  "
 
 = content_for :inline_javascript do  
   = raw init_product_details_page        
   = raw init_product_customization
-  
+
 #slides
   .slides-container
-    // note: we should crop images & update images preloading mechanics - too slow currently
-    - @product.images.each_with_index do |image, index|
-      = image_tag image.original, id: "product-image-slide-#{ index }", data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
+    // note: we should crop images & update images preloading mechanics - too slow currently    
+    - @product.images.first.tap do |image|      
+      = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
 
   nav.slides-navigation
     a.next href="#" 

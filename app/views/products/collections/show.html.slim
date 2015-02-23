@@ -11,11 +11,13 @@ ruby:
   .container.height-100
     .page-title--details
       h1.no-padding-bottom.text-white = @collection.details.banner.title
-      p.text-white = @collection.details.banner.description
 
 .category.page-content
   /! Controls
   .category-controls.container
+    .row 
+      .col-md-12.hidden-sm.hidden-xs.text-center      
+        p= @collection.details.banner.description
     .row
       /! First Row Controls
       .col-md-8.no-padding.hidden-sm.hidden-xs

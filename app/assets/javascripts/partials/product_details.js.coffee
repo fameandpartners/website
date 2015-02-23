@@ -17,7 +17,7 @@ page.initProductDetailsPage = (options = {}) ->
   selector    = null
 
   # init slider images
-  slider    = new helpers.ProductImagesSlider(options.slider.container, options.slider.options)
+  slider    = new helpers.ProductImagesSlider(options.slider.container, options.slider.images, options.slider.options)
   selector  = new window.helpers.ProductVariantsSelector(options.selector)
     
   # change images colors

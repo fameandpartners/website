@@ -31,7 +31,6 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       value: @selected.customizations_ids
     )
 
-    console.log(@customizationsInput)
     @colorInput.on('change', @onChangeHandler)
     @sizeInput.on('change', @onChangeHandler)
     @customizationsInput.on('change', @onChangeHandler)

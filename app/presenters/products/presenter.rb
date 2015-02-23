@@ -9,6 +9,12 @@ module Products
       end
     end
 
+    def all_images
+      images.collect do |img | 
+        { id: img.id, url: img.original, color_id: img.color_id, alt: name }
+      end
+    end
+
     def is_customizable?
       customizations.present? && customizations.any?
     end
