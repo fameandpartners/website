@@ -13,7 +13,7 @@ window.inputs or= {}
 window.inputs.BaseInput = class BaseInput
   constructor: (options = {}) ->
     @$el = $(options.container)
-    @$valueType = options.valueType || 'string'
+    @valueType = options.valueType || 'string'
     @listeners = {}
     if !!options.value
       @val(options.value)
@@ -60,7 +60,7 @@ window.inputs.Select2Selector = class Select2Selector extends BaseInput
   getValue: () ->
     @prepareValue(@$el.val())
 
-  setValue: (newValue) ->    
+  setValue: (newValue) ->
     @$el.val(@prepareValue(newValue))
     @onValueChanged()
 
@@ -102,7 +102,7 @@ window.inputs.ProductCustomizationsIdsSelector = class ProductCustomizationsIdsS
   getValue: () ->
     @prepareValue(@$el.val())
 
-  setValue: (newValue) ->    
+  setValue: (newValue) ->
     @$el.val(@prepareValue(newValue))
     @onValueChanged()
 
