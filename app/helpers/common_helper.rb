@@ -8,6 +8,17 @@ module CommonHelper
   def get_meta_description
     instance_variable_defined?("@description") ? @description : default_meta_description
   end
+  
+  def get_hreflang(lang)
+    href = get_canonical_href
+    if lang == :au && !get_canonical_href.include?('/au')
+      return "http://#{request.host}/au#{request.fullpath}"
+    end
+    if lang == :us && get_canonical_href.include?('/au')
+      return href.gsub('/au','')
+    end
+    href
+  end
 
   def get_canonical_href
     if @product.present?
