@@ -1,10 +1,101 @@
-
 .list-group-item.customization-option  {
 	.badge {
-		
+
 	}
 	img {
 		height:140px;
 		width:140px;
 	}
+}
+
+#slides {
+	position: relative;
+	z-index: 1;
+
+	img {
+		background-position: cover;
+		height: auto;
+		width: 100%;
+	}
+}
+
+.slides-container {
+
+	img {
+		background-position: cover;
+		height: auto;
+		width: 100%;
+	}
+}
+
+.product-content {
+	position: absolute;
+	z-index: 50;
+	top: 12rem;
+	float:right;
+
+
+	.row {
+		padding-top: 1.45rem;
+	}
+
+	span.form-control {
+		background-color: transparent;
+		padding: 1.5rem;
+	}
+}
+
+.product-details {
+	float: right;
+	margin-right: 8rem;
+}
+
+#product-size, #product-color, #product-customizations {
+	border: 1px solid grey;
+	height: 4.45rem;
+	width: 100%;
+}
+
+#product-customizations {
+	border-style: dotted;
+}
+
+.col-md-4 {
+	height: 60px;
+	padding-top: 2rem;
+}
+
+.fit-guide {
+	background-image: url('./coat-hanger-icon.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 30px 25px;
+}
+
+.share {
+	background-image: url('./share-icon.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 30px 30px;
+}
+
+.love-it {
+	background-image: url('./heart-icon.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 60px 60px;
+}
+
+.icons {
+
+	 h4 {
+		font-size: 1.3rem;
+		font-weight: 200;
+		padding-top: 2.1rem;
+		text-transform: uppercase;
+	}
+}
+
+.on-sale {
+
 }
