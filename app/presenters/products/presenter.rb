@@ -10,7 +10,7 @@ module Products
     end
 
     def is_customizable?
-      customizations.present?
+      customizations.present? && customizations.any?
     end
 
     def customizations

@@ -11,7 +11,6 @@ window.ProductCustomisation = class ProductCustomisation
     @$action = $('#product-customizations-action')
     @$action.on('click', @open)
     @$select = $('#product-customizations')
-    @open()
     
   onClose: (data) =>
     # console.log("onClose")
