@@ -152,11 +152,15 @@ module Products
       if t_root == "Event"
         event = " #{taxon.name.titleize} " || "any event "
       end
-
+      
       r =  "Shop and customize the best #{color}#{style}#{event}dress trends #{event}at Fame & Partners."
 
       if taxon.present? && taxon.meta_description.present?
         r = taxon.meta_description
+      end
+
+      if taxon.present? && taxon.banner.present? && taxon.banner.seo_description.present?
+        r = taxon.banner.seo_description
       end
 
       return r
