@@ -17,14 +17,14 @@ ruby:
 
 .feb_2015_lp
   - cache cache_keys, expires_in: configatron.cache.expire.long do
-    - if variant.to_i == 2
+    - if variant.to_i != 1
       - discount = Discount.new(:amount => 25)
     - products = get_products_from_edit('FB2015', nil, nil, 20)
     - other_products = get_products_from_edit('FB2015OTHER', nil, nil, 99)
     .sb1 style="position:relative;margin-top:20px;margin-bottom:15px;"
       div style="position:absolute;top:20px; font-size:50px;color:#FFFFFF;" 
       = image_tag "campaigns/feb-2015/variant-#{variant}-banner.jpg", width: 1140, :alt => "Find your perfect dress"
-      - if variant.to_i == 2      
+      - if variant.to_i != 1      
         h2 Use promocode 'PREPROM25' for 25% off your Prom Dress
 
     .inner  
@@ -36,7 +36,7 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              - if variant.to_i == 2              
+              - if variant.to_i != 1              
                 .price = price_for_product_with_discount(dress, discount) 
               - else
                 .price = price_for_product_with_applied_promocode(dress)
@@ -58,7 +58,7 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              - if variant.to_i == 2              
+              - if variant.to_i != 1              
                 .price = price_for_product_with_discount(dress, discount) 
               - else
                 .price = price_for_product_with_applied_promocode(dress)
@@ -72,7 +72,7 @@ ruby:
             .text
               .colour= ''
               .name= link_to dress.name, collection_product_path(dress), class: 'title'
-              - if variant.to_i == 2              
+              - if variant.to_i != 1              
                 .price = price_for_product_with_discount(dress, discount) 
               - else
                 .price = price_for_product_with_applied_promocode(dress)
@@ -85,7 +85,7 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              - if variant.to_i == 2              
+              - if variant.to_i != 1              
                 .price = price_for_product_with_discount(dress, discount) 
               - else
                 .price = price_for_product_with_applied_promocode(dress)
@@ -101,7 +101,7 @@ ruby:
                   = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
-              - if variant.to_i == 2              
+              - if variant.to_i != 1              
                 .price = price_for_product_with_discount(dress, discount) 
               - else
                 .price = price_for_product_with_applied_promocode(dress)

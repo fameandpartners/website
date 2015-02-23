@@ -156,7 +156,12 @@
   background: url('campaigns/feb-2015/variant-2-modal.jpg') no-repeat;
 }
 
-.feb2015-v1-popup .modal-container, .feb2015-v2-popup .modal-container {
+.feb2015-v3-popup .modal-container {
+  background: url('campaigns/feb-2015/variant-3-modal.jpg') no-repeat;
+}
+
+
+.feb2015-v1-popup .modal-container, .feb2015-v2-popup .modal-container, .feb2015-v3-popup .modal-container {
   border-color: #011C37;
   height:400px;
   width:620px;
