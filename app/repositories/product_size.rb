@@ -1,6 +1,11 @@
 # usage:
-#   Repositories::ProductSize.new(site_version: site_version, product: product).read(id)
-#   Repositories::ProductSize.new(site_version: site_version, product: product).read_all
+#   standalone:
+#     Repositories::ProductSize.read(size_id)
+#     Repositories::ProductSize.read_all
+#
+#   for product
+#     Repositories::ProductSize.new(site_version: site_version, product: product).read(id)
+#     Repositories::ProductSize.new(site_version: site_version, product: product).read_all
 #
 # - site version : we have different measure systems in us/au/uk
 # - product      : price for extra sizes depends from dress
@@ -32,7 +37,7 @@ class Repositories::ProductSize
   end
 
   def read(size_id)
-    size = Repositories::ProductSize.sizes_map[size_id].clone
+    size = Repositories::ProductSize.read(size_id)
     return nil if !valid_for_site_version?(size)
 
     if size_have_extra_price?(size)
@@ -93,6 +98,14 @@ class Repositories::ProductSize
         end
         result
       end
+    end
+
+    def read_all
+      sizes_map.values
+    end
+
+    def read(size_id)
+      sizes_map[size_id].clone
     end
 
     def size_attributes

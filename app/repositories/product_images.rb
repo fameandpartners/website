@@ -19,7 +19,11 @@ class ProductImages
 
   # we can optimize it, if needed
   def read(options = {})
-    read_all.first || default_image
+    result = nil
+    if options[:color_id]
+      result = read_all.detect{|image| image.color_id == options[:color_id]}
+    end
+    result || read_all.first || default_image
   end
   alias_method :default, :read
 

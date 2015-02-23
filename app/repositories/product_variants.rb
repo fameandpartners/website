@@ -1,6 +1,10 @@
 # usage
-# Repositories::ProductVariants.new(product_id: product_id).read_all
-# returns list of all available variants for product
+#   Repositories::ProductVariants.new(product_id: product_id).read_all
+#     returns list of all available variants for product
+#
+#   Repositories::ProductVariants.new(product_id: product_id).read(variant_id)
+#     returns specific variant
+#
 # ProductVariant {
 #   id
 #   size_id
@@ -27,6 +31,10 @@ class Repositories::ProductVariants
 
   def read_all
     @product_variants ||= Products::ProductVariants.new(read_product_variants)
+  end
+
+  def read(variant_id)
+    read_all.detect{|v| v.id  == variant_id }
   end
 
   private

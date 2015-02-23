@@ -53,6 +53,13 @@ FameAndPartners::Application.routes.draw do
       #get '/styleit-:product_slug', to: 'products#style'
     end
 
+    scope '/user_cart', module: 'user_cart' do
+      root to: 'details#show', as: :user_cart_details
+
+      get '/details'     => 'details#show'
+      put '/details'     => 'details#update'
+      resources :products, only: [:create, :edit, :update, :destroy]
+    end
 
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
@@ -95,9 +102,9 @@ FameAndPartners::Application.routes.draw do
     get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
     get '/featured-bloggers/:id' => 'celebrities#show', as: 'featured_blogger'
 
-    resources :line_items, only: [:create, :edit, :update, :destroy] do
-      post 'move_to_wishlist', on: :member
-    end
+    #resources :line_items, only: [:create, :edit, :update, :destroy] do
+    #  post 'move_to_wishlist', on: :member
+    #end
 
     resource :product_variants, only: [:show]
 
