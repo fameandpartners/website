@@ -26,15 +26,17 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       value: @selected.color_id
     )
 
-    @customizationsInput  = options.customizationsInput || new inputs.ProductCustomizationsIdsSelector(
+    @customizationsInput = options.customizationsInput || new inputs.ProductCustomizationsIdsSelector(
       container: @$container.find('#product-customizations'),
       value: @selected.customizations_ids
     )
 
+    console.log(@customizationsInput)
     @colorInput.on('change', @onChangeHandler)
     @sizeInput.on('change', @onChangeHandler)
     @customizationsInput.on('change', @onChangeHandler)
     @
+
 
   onChangeHandler: (e) =>
     @selected = null
@@ -80,11 +82,11 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       else
         result.error = 'Sorry, out of stock'
     else if _.isEmpty(selected.size_id) && _.isEmpty(selected.color_id)
-      result.error = 'Please, select size and colour'
+      result.error = 'Please, select size and color'
     else if _.isEmpty(selected.size_id)
       result.error = 'Please select a size'
     else if _.isEmpty(selected.color_id)
-      result.error = 'Please select a colour'
+      result.error = 'Please select a color'
     else
       # we have size, color, but variant doesn't found
       result.error = 'Sorry, this combination unavailable'

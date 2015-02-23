@@ -3,13 +3,14 @@
 @import 'stylesheets/component.css';
 @import 'stylesheets/jquery.skippr.css';
 @import 'fonts/font-awesome-4.3.0/css/font-awesome.min.css';
-@import 'stylesheets/cs-select.css';
-@import 'stylesheets/cs-skin-border.css';
 @import 'stylesheets/styleguide.css';
 @import 'stylesheets/styles.css';
 
-@import 'redesign/mixins';
+@import 'libs/vex';
+@import 'libs/vex-theme-flat-attack';
 
+@import 'redesign/mixins';
+@import 'redesign/product';
 @import 'redesign/about';
 @import 'redesign/user';
 @import 'redesign/why_us';

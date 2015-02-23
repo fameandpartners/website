@@ -60,8 +60,8 @@ window.inputs.Select2Selector = class Select2Selector extends BaseInput
   getValue: () ->
     @prepareValue(@$el.val())
 
-  setValue: (newValue) ->
-    @container.val(@prepareValue(newValue))
+  setValue: (newValue) ->    
+    @$el.val(@prepareValue(newValue))
     @onValueChanged()
 
 window.inputs.Select2MultiSelector = class Select2MultiSelector extends Select2Selector
@@ -94,13 +94,20 @@ window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Sele
   customValue: () ->
     @$el.find("option[value=#{ @val() }]").data('custom')
 
-window.inputs.ProductCustomizationsIdsSelector = class ProductCustomizationsIdsSelector extends Select2MultiSelector
+window.inputs.ProductCustomizationsIdsSelector = class ProductCustomizationsIdsSelector extends BaseInput
   constructor: (options = {}) ->
     options.valueType = 'integer'
     super(options)
 
+  getValue: () ->
+    @prepareValue(@$el.val())
+
+  setValue: (newValue) ->    
+    @$el.val(@prepareValue(newValue))
+    @onValueChanged()
+
   customValue: () ->
-    !_.isEmpty(@val())
+    @$el.find("option[value=#{ @val() }]").data('custom')
 
 
 window.inputs.BaseTextSelector = class BaseTextSelector extends Select2Selector

@@ -36,7 +36,7 @@ class Products::DetailsResource
   def read
     Rails.cache.fetch(cache_key, expires_in: cache_expiration_time, force: Rails.env.development?) do
       # product details
-      OpenStruct.new({
+      Products::Presenter.new({
         id:                 product.id,
         master_id:          product.master.try(:id),
         sku:                product.sku,

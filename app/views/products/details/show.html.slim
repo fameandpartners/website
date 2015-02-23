@@ -1,6 +1,5 @@
 ruby: 
   init_product_details_page = "
-    (function() {
       page.initProductDetailsPage({
         slider: {
           container: '#slides',
@@ -15,17 +14,23 @@ ruby:
         buyButton: '.buy-button',
         wishlistButton: '.moodboard-button'
       });
-    })();
+    
   "
 
-= content_for :inline_javascript do
-  = raw init_product_details_page
+  init_product_customization = "
+      new ProductCustomisation({ 
+        message: 'Customize Your Dress', 
+        customizations: #{ @product.customization_options.to_json } 
+      });"
 
+= content_for :inline_javascript do  
+  = raw init_product_details_page        
+  = raw init_product_customization
+  
 #slides
   .slides-container
     // note: we should crop images & update images preloading mechanics - too slow currently
     - @product.images.each_with_index do |image, index|
-      /= image_tag "images/reformation/#{ (index % 3).next }.jpg"
       = image_tag image.original, id: "product-image-slide-#{ index }", data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
 
   nav.slides-navigation
@@ -81,17 +86,16 @@ ruby:
 
         /! Extra Details
         .row.product-section--extra
-          - customizations = @product.available_options.customizations
-          - if customizations.present?
+          - if @product.is_customizable?
             .col-md-6
-              select.cs-select.cs-skin-border#product-customizations
-                option selected="" value="" 
-                  span.color-box.navy
-                  | Customize
-                - customizations.all.each do |customization|
+              a.btn.btn-block.btn-black#product-customizations-action 
+                | Customise
+              br
+              select.customise-options#product-customizations
+                - @product.customizations.all.each do |customization|
                   option value=(customization.id) data-custom="true"
                     = "#{ customization.name } #{ customization.display_price }"
-              br
+
 
           .col-md-6
             br

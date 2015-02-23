@@ -1,0 +1,21 @@
+<ul class="list-group">
+  <% for option in @customizations: %>
+    <a href="#" class="customization-option list-group-item" data-id="<%= option.id %>">
+
+    	<div class="row">
+    		<div class="col-md-4 col-xs-12">
+  		  	<div class="row">	  		
+  		  		<img src="/images/werk/customization.png" width="140" height="140" alt="<%= option.name %>"/>			
+  			</div>
+    		</div>	  			
+    		<div class="col-md-8 col-xs-12">	
+    			<div class="row">
+      			<p><%= option.name %></p>
+      			<p><strong>&plus;<%= option.price %></strong></p>
+  			</div>    		
+    		</div>	  				
+  	</div> 			
+    </a>
+  <% end %>
+</ul>
+
