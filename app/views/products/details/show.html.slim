@@ -1,10 +1,10 @@
-ruby: 
+ruby:
   init_product_details_page = "
       page.initProductDetailsPage({
         slider: {
           container: '#slides',
-          images: #{ @product.all_images.to_json }, 
-          options: { animation: 'fade', play: 6000, preselected: null }   
+          images: #{ @product.all_images.to_json },
+          options: { animation: 'fade', play: 6000, preselected: null }
         },
         selector: {
           custom_id: #{ @product.master_id },
@@ -15,110 +15,101 @@ ruby:
         buyButton: '.buy-button',
         wishlistButton: '.moodboard-button'
       });
-    
+
   "
 
   init_product_customization = "
-      new ProductCustomisation({ 
-        message: 'Customize Your Dress', 
-        customizations: #{ @product.customization_options.to_json } 
+      new ProductCustomisation({
+        message: 'Customize Your Dress',
+        customizations: #{ @product.customization_options.to_json }
       });
   "
 
-= content_for :inline_javascript do  
-  = raw init_product_details_page        
+= content_for :inline_javascript do
+  = raw init_product_details_page
   = raw init_product_customization
 
 #slides
   .slides-container
-    // note: we should crop images & update images preloading mechanics - too slow currently    
-    - @product.images.first.tap do |image|      
-      = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
+    // note: we should crop images & update images preloading mechanics - too slow currently
+    = image_tag "bgimage.jpg"
+    / - @product.images.first.tap do |image|
+    /   = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
 
   nav.slides-navigation
-    a.next href="#" 
+    a.next href="#"
       span.fa.fa-angle-right.fa-4x
-    a.prev href="#" 
+    a.prev href="#"
       span.fa.fa-angle-left.fa-4x
 
 /! Product Section
-.product-section
-  .product-section--details
-    h2 = @product.name
-    span.product-section--description = @product.short_description
-    span.product-section--price = product_price_with_discount(@product.price, @product.discount)
+.container.product-content.text-center
+  .col-md-3.product-details
+    .row
+      h2 = @product.name
+      p.product-section-description = @product.short_description
+      p.product-section-price = product_price_with_discount(@product.price, @product.discount)
 
-    /! size & color & customizations selectors
-    /! Size and Colour
-    .row.product-section--selection
+      /! size & color & customizations selectors
+      /! Size and Colour
+    .row
       - sizes = @product.available_options.sizes
       - if sizes.present?
-        .col-md-6
-          select.cs-select.cs-skin-border#product-size
-            option disabled="" selected="" value=""  Size
-            - if sizes.default.present?
-              optgroup label="Standard sizes"
-                - sizes.default.each do |size|
-                  option value=(size.id) = size.presentation
-            - if sizes.extra.present?
-              optgroup label="Sizes below are additional #{ sizes.default_extra_price.display_price }"
-                - sizes.extra.each do |size|
-                  option value=(size.id) data-custom="true"
-                    = size.presentation
-          br
 
+        span.form-control#product-size
+          option disabled="" selected="" value=""
+          / - if sizes.default.present?
+          /   optgroup label="Standard sizes"
+          /     - sizes.default.each do |size|
+          /       option value=(size.id) = size.presentation
+          / - if sizes.extra.present?
+          /   optgroup label="Sizes below are additional #{ sizes.default_extra_price.display_price }"
+          /     - sizes.extra.each do |size|
+          /       option value=(size.id) data-custom="true"
+          /         = size.presentation
+    .row
       - colors = @product.available_options.colors
       - if colors.present?
-        .col-md-6
-          select.cs-select.cs-skin-border#product-color
-            option disabled="" selected="" value="" 
-              span.color-box.navy
-              | Color
-            - if colors.default.present?
-              optgroup label="Standard colors"
-                - colors.default.each do |color|
-                  option value=(color.id) class="color #{color.name}"
-                    = color.presentation
-            - if colors.extra.present?
-              optgroup label="Custom colors #{ colors.default_extra_price.display_price }"
-                - colors.extra.each do |color|
-                  option value=(color.id) class="custom color #{color.name}" data-custom="true"
-                    = color.presentation
-          br
+        span.form-control#product-color
+          option disabled="" selected="" value=""
+          /   span.color-box.navy
+          /   | Color
+          / - if colors.default.present?
+          /   optgroup label="Standard colors"
+          /     - colors.default.each do |color|
+          /       option value=(color.id) class="color #{color.name}"
+          /         = color.presentation
+          / - if colors.extra.present?
+          /   optgroup label="Custom colors #{ colors.default_extra_price.display_price }"
+          /     - colors.extra.each do |color|
+          /       option value=(color.id) class="custom color #{color.name}" data-custom="true"
+          /         = color.presentation
 
         /! Extra Details
-        .row.product-section--extra
-          - if @product.is_customizable?
-            .col-md-6
-              a.btn.btn-block.btn-black#product-customizations-action 
-                | Customise
-              br
-              select.customise-options#product-customizations
-                - @product.customizations.all.each do |customization|
-                  option value=(customization.id) data-custom="true"
-                    = "#{ customization.name } #{ customization.display_price }"
+
+    .row
+      - customizations = @product.available_options.customizations
+      - if @product.is_customizable?
+        span.form-control#product-customizations
+        br
+        a.btn.btn-block.btn-black#product-customizations-action
+          | Customise
+        br
+        select.customise-options#product-customizations
+          - @product.customizations.all.each do |customization|
+            option value=(customization.id) data-custom="true"
+              = "#{ customization.name } #{ customization.display_price }"
 
 
-          .col-md-6
-            br
-            .social-share
-              a href="#" 
-                span.fa.fa-facebook
-              a href="#" 
-                span.fa.fa-twitter
-              a href="#" 
-                span.fa.fa-linkedin
-
-        /! Quantity
-        .row.product-section--quantity
-          .col-md-12
-            a.link.moodboard-button href="#" 
-              span.fa.fa-heart
-              | Add to Moodboard
-        /! Buy Call to Action
-        .row.col-md-12
-          button.btn.btn-block.btn-black.buy-button Add to bag
-          span.extra-details Free Shipping
+    .row
+      button.btn.btn-block.btn-black.buy-button Add to Cart
+    .row
+      .col-md-4.fit-guide.icons
+        h4 Fit Guide
+      .col-md-4.love-it.icons
+        h4 Love It
+      .col-md-4.share.icons
+        h4 Share
 
 /! About The Dress
 .dress-about.container.page-content
