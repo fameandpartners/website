@@ -50,7 +50,7 @@ ruby:
                 span.fa.fa-heart.add-to-moodboard
               - else
                 span.fa.fa-heart-o.add-to-moodboard
-            = link_to collection_product_path(product) do
+            = link_to collection_product_path(product, color: product.color) do
               = image_tag product.image, alt: product.name, class: 'img-responsive'
             .details
               span.name = product.name

@@ -63,6 +63,11 @@ module PathBuildersHelper
       path_parts << "dress-#{descriptive_url(product)}"
     end
 
+    if options[:color]
+      path_parts << options[:color] 
+      options.delete(:color)
+    end
+
     build_url(path_parts, options)
   end
 

@@ -105,6 +105,7 @@ class Products::CollectionResource
         OpenStruct.new(
           id: color_variant.product.id,
           name: color_variant.product.name,
+          color: color_variant.color.name,
           image: color_variant.images.first.try(:large),
           price: Spree::Price.new(amount: color_variant.product.price, currency: current_currency).display_price.to_s
         )
