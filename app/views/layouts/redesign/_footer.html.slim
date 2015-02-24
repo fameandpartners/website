@@ -37,21 +37,18 @@
           = render 'layouts/redesign/address'
 
           .btn-group
-            button.btn.btn-dropdown.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button" 
-              = image_tag "images/#{current_site_version.abbr}-flag.jpg", alt: "Australian Flag"
+            button.btn.btn-dropdown.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button"             
               = current_site_version.abbr.upcase
               span.caret
             ul.dropdown-menu role="menu" 
               - if !current_site_version.is_australia?
                 li
                   = link_to site_version_path('au', backlink: get_hreflang_link) do
-                    = image_tag "images/au-flag.jpg", alt: "Australian flag"
                     | AU
 
               - if !current_site_version.is_usa?
                 li
                   = link_to site_version_path('us', backlink: get_hreflang_link) do
-                    = image_tag "images/us-flag.jpg", alt: "USA flag"
                     | US
 
           br
