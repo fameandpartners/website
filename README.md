@@ -61,20 +61,46 @@ Spree::OptionValuesGroup.where(option_type_id: type.id).destroy_all
 * $ `cd /data/fame_and_partners/current`
 * $ `bundle exec rake feed:export:all`
 
+### Getting started
+
 
 ## Deploy
 
-### Deploy to staging
+Make sure your engine yard credentials are working
 
-Note: we are using CircleCi for master branch, manual deplyment usually not needed.
+`$ gem install engineyard`
 
-* $ `cap staging deploy`
 
 ### Deploy to production
 
-* `$ gem install engineyard`
-* merge master branch to production branch
+Merge master to production and push 
+
+* `$ git checkout production`
+* `$ git merge master`
+* `$ git git push`
+* `$ ey deploy -e production_new --no-migrate`
+
+To deploy with migrations (will turn maintenance mode on meaning site is down)
 * `$ ey deploy -e production_new`
+
+
+### Deploy to preproduction
+
+Deploy any working branch to preprod
+
+* `$ git checkout {branch}`
+* `$ ey deploy -e preprod  --no-migrate`
+
+To deploy with migrations (will turn maintenance mode on meaning site is down)
+* `$ ey deploy -e preprod `
+
+
+## Useful Pages
+
+Home - IndexController#show
+Category/Collection - Products::CollectionsController#show
+Product - Products::DetailsController#show
+
 
 ### Thanks for using FameAndPartners!
 
