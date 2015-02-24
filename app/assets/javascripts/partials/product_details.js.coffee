@@ -33,7 +33,7 @@ page.initProductDetailsPage = (options = {}) ->
       if !status.valid
         window.helpers.showErrors($(e.currentTarget), status.error)
       else
-        console.log('shopping cart works here')
+        app.shopping_cart.addProduct(selector.getCurrentSelection())
     )
 
   # init moodboard button
@@ -44,5 +44,5 @@ page.initProductDetailsPage = (options = {}) ->
       if !status.valid
         window.helpers.showErrors($(e.currentTarget), status.error)
       else
-        console.log('toggle product wishlist state')
+        console.log('toggle product wishlist state', selector.getCurrentSelection())
     )
