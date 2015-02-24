@@ -22,14 +22,15 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     @updateSlider()
 
     @preload()      
+    # We need to work out a logical value to pause before loading the images
     setTimeout(@append, 100 * @images.length);
 
   append: () =>   
     @updateSlider()
 
-  showImagesWithColor: (color_id) =>
+  showImagesWithColor: (color_id) =>    
     return if @images_color_id == color_id
-    @images_color_id = color_id
+    @images_color_id = parseInt(color_id)
     @updateSlider()
 
   updateSlider: () =>
