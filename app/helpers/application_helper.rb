@@ -244,8 +244,8 @@ module ApplicationHelper
       # NOTE - we should add fixed price amount calculations
       sale_price = price.apply(discount)
       [
-        content_tag(:span, price.display_price, class: 'price-old'),
-        sale_price.display_price.to_s
+        content_tag(:span, price.display_price, class: 'price-original'),        
+        content_tag(:span, sale_price.display_price.to_s, class: 'price-sale'),
       ].join("\n").html_safe
     end
   end
