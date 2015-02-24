@@ -9,13 +9,12 @@ ruby:
         selector: {
           custom_id: #{ @product.master_id },
           variants: #{raw @product.available_options.variants.serialize.to_json },
-          container: '.row.product-section--selection',
+          container: '.product-section--selection',
           preselected: { }
         },
         buyButton: '.buy-button',
         wishlistButton: '.moodboard-button'
       });
-
   "
 
   init_product_customization = "
@@ -44,7 +43,7 @@ ruby:
 
 /! Product Section
 .container.product-content.text-center
-  .col-md-3.product-details
+  .col-md-3.product-details.product-section--selection
     .row
       h2 = @product.name
       p.product-section-description = @product.short_description
@@ -55,51 +54,50 @@ ruby:
     .row
       - sizes = @product.available_options.sizes
       - if sizes.present?
+        .col-md-6
+          select#product-size
+            option disabled="" selected="" value=""  Size
+            - if sizes.default.present?
+              optgroup label="Standard sizes"
+                - sizes.default.each do |size|
+                  option value=(size.id) = size.presentation
+            - if sizes.extra.present?
+              optgroup label="Sizes below are additional #{ sizes.default_extra_price.display_price }"
+                - sizes.extra.each do |size|
+                  option value=(size.id) data-custom="true"
+                    = size.presentation
+          br
 
-        span.form-control#product-size
-          option disabled="" selected="" value=""
-          / - if sizes.default.present?
-          /   optgroup label="Standard sizes"
-          /     - sizes.default.each do |size|
-          /       option value=(size.id) = size.presentation
-          / - if sizes.extra.present?
-          /   optgroup label="Sizes below are additional #{ sizes.default_extra_price.display_price }"
-          /     - sizes.extra.each do |size|
-          /       option value=(size.id) data-custom="true"
-          /         = size.presentation
     .row
       - colors = @product.available_options.colors
       - if colors.present?
-        span.form-control#product-color
-          option disabled="" selected="" value=""
-          /   span.color-box.navy
-          /   | Color
-          / - if colors.default.present?
-          /   optgroup label="Standard colors"
-          /     - colors.default.each do |color|
-          /       option value=(color.id) class="color #{color.name}"
-          /         = color.presentation
-          / - if colors.extra.present?
-          /   optgroup label="Custom colors #{ colors.default_extra_price.display_price }"
-          /     - colors.extra.each do |color|
-          /       option value=(color.id) class="custom color #{color.name}" data-custom="true"
-          /         = color.presentation
-
-        /! Extra Details
+        .col-md-6
+          select.cs-select.cs-skin-border#product-color
+            option disabled="" selected="" value="" 
+              span.color-box.navy
+              | Color
+            - if colors.default.present?
+              optgroup label="Standard colors"
+                - colors.default.each do |color|
+                  option value=(color.id) class="color #{color.name}"
+                    = color.presentation
+            - if colors.extra.present?
+              optgroup label="Custom colors #{ colors.default_extra_price.display_price }"
+                - colors.extra.each do |color|
+                  option value=(color.id) class="custom color #{color.name}" data-custom="true"
+                    = color.presentation
+          br
 
     .row
-      - customizations = @product.available_options.customizations
       - if @product.is_customizable?
-        span.form-control#product-customizations
-        br
-        a.btn.btn-block.btn-black#product-customizations-action
-          | Customise
-        br
-        select.customise-options#product-customizations
-          - @product.customizations.all.each do |customization|
-            option value=(customization.id) data-custom="true"
-              = "#{ customization.name } #{ customization.display_price }"
-
+        .col-md-6
+          a.btn.btn-block.btn-black#product-customizations-action 
+            | Customise
+          br
+          select.customise-options#product-customizations
+            - @product.customizations.all.each do |customization|
+              option value=(customization.id) data-custom="true"
+                = "#{ customization.name } #{ customization.display_price }"
 
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
