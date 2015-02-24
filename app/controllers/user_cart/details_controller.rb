@@ -4,17 +4,14 @@ class UserCart::DetailsController < UserCart::BaseController
   def show
     check_authorization
 
-    @user_cart = UserCart::UserCartResource.new(
-      order: current_order,
-      site_version: current_site_version
-    ).read
+    @user_cart = user_cart_resource.read
 
     #title('Your Shopping Cart', default_seo_title)
 
     respond_with(@user_cart) do |format|
       format.html   {}
       format.json   { 
-        render json: @user_cart.serialize
+        render json: @user_cart.serialize, status: :ok
       }
     end
   end
@@ -23,6 +20,3 @@ class UserCart::DetailsController < UserCart::BaseController
   def update
   end
 end
-
-# 2036515
-    UserCart::UserCartResource.new(order: Spree::Order.find(2036515)).read

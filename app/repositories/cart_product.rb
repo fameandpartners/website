@@ -1,8 +1,13 @@
 # usage
 #   Repositories::CartProduct.new(line_item: line_item).read
-#   
+#
+# 
+require File.join(Rails.root, 'app', 'presenters', 'user_cart', 'cart_product_presenter.rb')
+require File.join(Rails.root, 'app', 'models', 'customisation_value.rb')
+
 module Repositories; end
 class Repositories::CartProduct
+  include Repositories::CachingSystem
   attr_reader :line_item, :product
 
   def initialize(options = {})
@@ -13,7 +18,7 @@ class Repositories::CartProduct
 
   def read
     @cart_product ||= begin
-      result = UserCart::CartProductPresenter.new(
+      result = ::UserCart::CartProductPresenter.new(
         id: product.id,
         name: product.name,
         description: line_item_description,
@@ -34,8 +39,13 @@ class Repositories::CartProduct
       result
     end
   end
+  cache_results :read
 
   private
+
+    def cache_key
+      line_item.cache_key
+    end
     
     def product_type
       return 'service' if product.service?
@@ -82,6 +92,7 @@ class Repositories::CartProduct
 
     def line_item_price
       OpenStruct.new(
+        display_price: Spree::Price.new(amount: line_item.price).display_price.to_s,
         'in_sale?'.to_sym => line_item.in_sale?,
         money: line_item.money,
         money_without_discount: line_item.in_sale? ? line_item.money_without_discount : nil

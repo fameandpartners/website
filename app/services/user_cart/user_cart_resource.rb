@@ -11,7 +11,7 @@ class  UserCart::UserCartResource
     UserCart::CartPresenter.new(
       products: cart_products,
       item_count: cart_products.sum{|product| product.quantity},
-      total: order.total
+      display_total: order.display_total.to_s
     )
   end
 
@@ -19,7 +19,7 @@ class  UserCart::UserCartResource
 
     def cart_products
       @cart_products ||= begin
-        order.line_items.includes(:personalization, :variant => :product).map do |line_item|
+        Spree::LineItem.includes(:personalization, :variant => :product).where(order_id: order.id).map do |line_item|
           Repositories::CartProduct.new(line_item: line_item).read
         end
       end

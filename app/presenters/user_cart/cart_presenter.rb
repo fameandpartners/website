@@ -4,7 +4,7 @@ class UserCart::CartPresenter < OpenStruct
     {
       products: products.map{|product| product.serialize },
       item_count: item_count,
-      total: total
+      display_total: display_total
     }
   end
 end
