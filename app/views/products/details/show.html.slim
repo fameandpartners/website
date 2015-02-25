@@ -56,7 +56,7 @@ ruby:
     .row
       - sizes = @product.available_options.sizes
       - if sizes.present?
-        select#product-size
+        select#product-size data-minimum-results-for-search='Infinity'
           option disabled="" selected="" value=""  Size
           - if sizes.default.present?
             optgroup label="Standard sizes"
