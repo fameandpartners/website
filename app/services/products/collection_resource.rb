@@ -92,12 +92,15 @@ class Products::CollectionResource
 
     def products
       result = query.results.map do |color_variant|
+        price = Repositories::ProductPrice.new(site_version: site_version, product_id: color_variant.product.id).read
+        discount = Repositories::Discount.get_product_discount(color_variant.product.id)
         OpenStruct.new(
           id: color_variant.product.id,
           name: color_variant.product.name,
           color: color_variant.color.name,
           image: color_variant.images.first.try(:large),
-          price: Spree::Price.new(amount: color_variant.product.price, currency: current_currency).display_price.to_s
+          price: price,
+          discount: discount
         )
       end
 

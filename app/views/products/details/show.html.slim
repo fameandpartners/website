@@ -172,7 +172,7 @@ hr
           = image_tag recommended_product.image.try(:large), class: 'img-responsive'
 
         .details
-          span.name   = recommended_product.name
-          span.price  = recommended_product.price.display_price
+          span.name  = recommended_product.name
+          span.price = product_price_with_discount(recommended_product.price, recommended_product.discount)
 
 = render :partial => 'data'

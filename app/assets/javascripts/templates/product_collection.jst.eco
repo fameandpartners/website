@@ -17,7 +17,14 @@
           </a>
           <div class="details">
             <span class="name"><%= product.name %></span>
-            <span class="price"><%= product.price %></span>
+            <span class="price">
+              <% if product.sale_price: %>
+                <span class="price-original"><%= product.price %></span>
+                <span class="price-sale"><%= product.sale_price %></span>
+              <% else: %>
+                <%= product.price %>
+              <% end %>
+            </span>
           </div>
         </div>
       <% end %>

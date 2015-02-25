@@ -9,10 +9,16 @@
 class Repositories::ProductPrice
   include Repositories::CachingSystem
 
-  attr_reader :site_version, :product
+  attr_reader :site_version
 
   def initialize(options = {})
-    @product      = options[:product]
+    if options[:product].present?
+      @product      = options[:product]
+      @product_id   = @product.id
+    else
+      @product_id   = options[:product_id]
+    end
+
     @site_version = options[:site_version] || SiteVersion.default
   end
 
@@ -24,7 +30,15 @@ class Repositories::ProductPrice
 
   private
 
+    def product
+      @product ||= begin
+        if @product_id.present?
+          Spree::Product.find(@product_id)
+        end
+      end
+    end
+
     def cache_key
-      "product-price-#{ site_version.permalink}-#{ product.permalink }"
+      "product-price-#{ site_version.permalink}-#{ @product_id }"
     end
 end

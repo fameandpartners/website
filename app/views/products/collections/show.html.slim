@@ -38,7 +38,7 @@ ruby:
               = image_tag product.image, alt: product.name, class: 'img-responsive'
             .details.text-center
               span.name = product.name
-              span.price = product.price
+              span.price = product_price_with_discount(product.price, product.discount)
               span.moodboard
                 sup +
                 | to my moodboard
