@@ -1,15 +1,5 @@
-class Products::Collection < OpenStruct
-  def serialize
-    result = self.marshal_dump.clone
-    result[:details]  = self.details.marshal_dump
-    result[:products] = self.products.map do |product| 
-      product.marshal_dump.merge(
-        collection_path: ApplicationController.helpers.collection_product_path(product)
-      )
-    end
-    result
-  end
-end
+# should be loaded automatically
+#require File.join(Rails.root, 'app', 'presenters', 'products', 'collection_presenter.rb')
 
 class Products::CollectionResource
   attr_reader :site_version
@@ -38,7 +28,7 @@ class Products::CollectionResource
 
   # what about ProductCollection class
   def read
-    Products::Collection.new(
+    Products::CollectionPresenter.new(
       products:   products,
       collection: collection,
       style:      style,
@@ -101,7 +91,7 @@ class Products::CollectionResource
     end
 
     def products
-      query.results.map do |color_variant|
+      result = query.results.map do |color_variant|
         OpenStruct.new(
           id: color_variant.product.id,
           name: color_variant.product.name,
@@ -110,6 +100,13 @@ class Products::CollectionResource
           price: Spree::Price.new(amount: color_variant.product.price, currency: current_currency).display_price.to_s
         )
       end
+
+      # apply custom order 
+      if order.blank? && color.blank? && style.blank?
+        result = Products::ProductsSorter.new(products: result).sorted_products
+      end
+
+      result
     end
 
     def current_currency
