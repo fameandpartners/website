@@ -7,16 +7,16 @@ ruby:
   color_options = color_options_for_select_from_options_values(@filter.colors, @collection.color.try(:name))
   sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
 
-.page-title
-  .container.height-100
+.page-title.default.pink
+  .container.pink
     .page-title--details
-      h1.no-padding-bottom.text-white = @collection.details.banner.title
+      h1.no-padding-bottom = @collection.details.banner.title
+      p Your unique special occasion look, guaranteed.
 
-.category.page-content
-  /! Controls
-  .category-controls.container
-    .row 
-      .col-md-12.hidden-sm.hidden-xs.text-center      
+.page-content.products-collections
+  .container.relative
+    .row.relative
+      .col-md-12.hidden-sm.hidden-xs.text-center
         p= @collection.details.banner.description
     .row
       /! First Row Controls
@@ -56,6 +56,6 @@ ruby:
               span.name = product.name
               span.price = product.price
               - if product.fast_delivery
-                span.delivery Express delivery 
+                span.delivery Express delivery
 
         .clearfix.visible-sm-block.visible-xs-block

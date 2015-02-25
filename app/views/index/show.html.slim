@@ -1,86 +1,76 @@
-#container
-  #theTarget style=("height: 600px;") 
+.page-content.index
+  .container.relative
+    .row.relative
+  #theTarget style=("height: 600px;")
 
     /= link_to @big_banner.first.url, title: @big_banner.first.title do
     / = image_tag @big_banner.first.attachment(:big)
 
-    / div style=("background-image: url('#{@big_banner.first.attachment(:big)}')") 
-    div style=("background-image: url(/assets/images/1.jpg)") 
-      .slider-image-caption.height-100
-        .container.height-100
-          .caption-center
-            p.caption-title Do you feel wicked?
-            br
-            a.btn.btn-white ahref=@big_banner.first.url  
-              =@big_banner.first.title
-    div style=("background-image: url('/assets/images/2.jpg')") 
+    / div style=("background-image: url('#{@big_banner.first.attachment(:big)}')")
+    / div style=("background-image: url(/assets/images/1.jpg)")
+    /   .slider-image-caption.height-100
+    /     .container.height-100
+    /       .caption-center
+    /         p.caption-title Do you feel wicked?
+    /         br
+    /         a.btn.btn-white ahref=@big_banner.first.url
+    /           =@big_banner.first.title
+    div style=("background-image: url('/assets/images/2.jpg')")
       .slider-image-caption.height-100
         .container.height-100
           .caption-left
-            p.caption-title Do you feel wicked?
-            br
+            h2.caption-title Do you feel wicked?
             button.btn.btn-white type="button"  Explore the Collection
-    div style=("background-image: url(/assets/images/3.jpg)") 
-      .slider-image-caption.height-100
-        .container.height-100
-          .caption-right
-            p.caption-title Do you feel wicked?
-            br
-            button.btn.btn-white type="button"  Explore the Collection
+    / div style=("background-image: url(/assets/images/3.jpg)")
+    /   .slider-image-caption.height-100
+    /     .container.height-100
+    /       .caption-right
+    /         p.caption-title Do you feel wicked?
+    /         button.btn.btn-white type="button"  Explore the Collection
     /!
-      | <div style="background-image: url(images/test4.jpg)"></div
-      | <div style="background-image: url(images/test5.jpg)"></div
+      / | <div style="background-image: url(images/test4.jpg)"></div
+      / | <div style="background-image: url(images/test5.jpg)"></div
 
 /! Call to Actions
 .call-to-actions
   .row
-    a href="#" 
-    .col-md-4.text-center.homepage-panel.no-padding
-      .homepage-panel--content
-        h3.homepage-panel--title Celebrity Dresses
-        = image_tag "images/arrow2.svg", alt: 'arrow', class: 'arrow hidden'
+    a href="#"
+    .col-md-4.text-center.no-padding
+      h3.black Celebrity Dresses
       = image_tag "images/banner1a.jpg", alt: 'Something here', class: 'img-responsive'
-    a href="#" 
-    .col-md-4.text-center.homepage-panel.no-padding
-      .homepage-panel--content
-        h3.homepage-panel--title Check out the Amfam collection
-        = image_tag "images/arrow2.svg", alt: 'arrow', class: 'arrow hidden'
+    a href="#"
+    .col-md-4.text-center.no-padding
+      h3 Check out the Amfam collection
       = image_tag "images/banner2.jpg", alt: 'Something here', class: 'img-responsive'
-    a href="#" 
-    .col-md-4.text-center.homepage-panel.no-padding
-      .homepage-panel--content
-        h3.homepage-panel--title Worried about what to wear to your next event?
-        = image_tag "images/arrow2.svg", alt: 'arrow', class: 'arrow hidden'
+    a href="#"
+    .col-md-4.text-center.no-padding
+      h3.black Worried about what to wear to your next event?
       = image_tag "images/banner4.jpg", alt: 'Something here', class: 'img-responsive'
 
 /! Email Subscription
-.email-subscriptions.page-content.bg-grey.text-center
-  .container
-    .row
-      .col-md-12
-        p.text-center.h2-title Become Famous.
-        p.lead Join now to receive fame style tips and  exclusive offers.
-        br
-        br
-      .col-md-3
-      .col-md-6
-        .input-group.margin-bottom-sm
-          input.form-control.black-form placeholder=("Enter Email") type="text" /
-          span.input-group-addon.no-padding-right
-            button.invis-fix type="submit" 
-              = image_tag 'images/line-arrow.svg', alt: 'Submit', class: 'line-arrow'
-      .col-md-3
+.container.email-sub.text-center
+  .row
+    .col-md-12
+      p.text-center.h2-title Become Famous.
+      p.lead Join now to receive fame style tips and  exclusive offers.
+    .col-md-6
+      .input-group.margin-bottom-sm
+        input.form-control.black-form placeholder=("Enter Email") type="text" /
+        span.input-group-addon.no-padding-right
+          button.invis-fix type="submit"
+            = image_tag 'images/line-arrow.svg', alt: 'Submit', class: 'line-arrow'
+
 
 /! SEO Crap
 .main-content
   .container
     .row
       .col-md-7
-        h1= t('home.find.heading').html_safe 
-        p= t('home.find.body').html_safe   
-        h2= t('home.find.heading').html_safe 
+        h1= t('home.find.heading').html_safe
+        p= t('home.find.body').html_safe
+        h2= t('home.find.heading').html_safe
         p= t('home.shop.body').html_safe
       .col-md-5
         = image_tag 'images/bridesmaid-image.jpg', alt: 'Bridesmaid image', class: 'img-responsive'
-    
-        
+
+
