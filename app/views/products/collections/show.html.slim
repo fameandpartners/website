@@ -7,36 +7,27 @@ ruby:
   color_options = color_options_for_select_from_options_values(@filter.colors, @collection.color.try(:name))
   sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
 
-.page-title.default.pink
-  .container.pink
+.page-title.default.category-header
+  .container
     .page-title--details
       h1.no-padding-bottom = @collection.details.banner.title
-      p Your unique special occasion look, guaranteed.
+      p = @collection.details.banner.description
 
 .page-content.products-collections.category
   .container.relative.category-controls
     .row.relative
-      .col-md-12.hidden-sm.hidden-xs.text-center
-        p= @collection.details.banner.description
-    .row
-      /! First Row Controls
-      .col-md-8.no-padding.hidden-sm.hidden-xs
-        .row
-          .col-md-4
-            = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
-            br
-          .col-md-4
-            = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
-            br
-          .col-md-4
-            = select_tag :color, color_options, class: '', prompt: 'Colour'
-            br
+      .col-md-3
+        = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
 
-      /! Second Row Controls
-      .col-md-3.col-md-offset-1.no-padding
-        .row
-          = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
-          br
+      .col-md-3
+        = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
+
+      .col-md-3
+        = select_tag :color, color_options, class: 'pink-select', prompt: 'Colour'
+
+      .col-md-3.product-order
+        = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
+
 
 
   .container.relative
@@ -45,16 +36,14 @@ ruby:
       .row.relative
         - products.each do |product|
           .col-md-3.col-xs-6.col-xxs-12.category--item
-            = link_to '#' do
-              - if in_wishlist?(product)
-                span.fa.fa-heart.add-to-moodboard
-              - else
-                span.fa.fa-heart-o.add-to-moodboard
             = link_to collection_product_path(product, color: product.color) do
               = image_tag product.image, alt: product.name, class: 'img-responsive'
-            .details
+            .details.text-center
               span.name = product.name
               span.price = product.price
+              span.moodboard
+                sup +
+                | to my moodboard
               - if product.fast_delivery
                 span.delivery Express delivery
 
