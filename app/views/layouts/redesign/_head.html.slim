@@ -16,6 +16,12 @@ link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/sel
 
 - unless Rails.env.production?
   meta name="robots" content="noindex, nofollow"
+  <script src="//use.typekit.net/day0prb.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+
+- if Rails.env.development?
+	<script src="//use.typekit.net/kur6crm.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
 
 /[if lt IE 9]
   = javascript_include_tag 'html5.js'
