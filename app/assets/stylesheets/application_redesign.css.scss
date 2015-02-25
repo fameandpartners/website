@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Forum);
 
 @import 'stylesheets/normalize.css';
 @import 'stylesheets/component.css';
@@ -20,9 +21,11 @@
 @import 'redesign/style_consult';
 @import 'redesign/fashionista_winner';
 @import 'redesign/product';
+@import 'redesign/products_collections';
+@import 'redesign/index';
 
 .page-title.default {
-	background-color:#003647;
+
 }
 
 .standard-form {
@@ -51,7 +54,7 @@ h3 {
 }
 
 .pink {
-    background-color: #f3dbd5;
+    background-color: #f6e1d5;
 }
 
 .pink-light {
