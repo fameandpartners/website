@@ -41,6 +41,23 @@
 		font-weight: 600;
 	}
 
+	.sale-price {
+		color: #eb6ffa;
+		text-transform: uppercase;
+	}
+
+	.discount {
+		text-transform: uppercase;
+	}
+
+	.original-price {
+		text-decoration: line-through;
+	}
+
+	.moodboard {
+		display: block;
+	}
+
 	.product-order {
 		.select2-container--default .select2-selection--single {
 			background-color:#023648;
@@ -53,6 +70,19 @@
 		}
 	}
 }
+
+.on-sale * {
+	display: inline-block;
+}
+
+.delivery {
+	border-style: solid;
+	border-width: 45px;
+	border-color: red;
+	width: 10px;
+
+}
+
 
 .category-header {
 
@@ -67,7 +97,6 @@
 
 .select2-results__option {
 	background-color: #eeddf0;
-
 	font-size: 1.2rem;
     line-height: 45px;
     text-transform: uppercase;
@@ -81,7 +110,7 @@
 
 
 #select2-product_order-results {
-	
+
 	.select2-container--default .select2-results__option[aria-selected="true"] {
 		background-color: #FFFFFF;
 		color:#000000;
