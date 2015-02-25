@@ -31,9 +31,9 @@ ruby:
 #slides
   .slides-container
     // note: we should crop images & update images preloading mechanics - too slow currently
-    = image_tag "bgimage.jpg"
-    / - @product.images.first.tap do |image|
-    /   = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
+    / = image_tag "bgimage.jpg"
+    - @product.images.first.tap do |image|
+      = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
 
   nav.slides-navigation
     a.next href="#"
@@ -168,3 +168,5 @@ hr
         .details
           span.name   = recommended_product.name
           span.price  = recommended_product.price.display_price
+
+= render :partial => 'data'
