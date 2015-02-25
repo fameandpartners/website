@@ -1,3 +1,13 @@
+ruby: 
+  init_items_counter_sync = "
+    $counter = $('#cart-trigger');
+    window.app.shopping_cart.on('changed', function() {
+      $counter.find('span.cart-amount').html(window.app.shopping_cart.data.item_count);
+    });
+  "
+= content_for :inline_javascript do
+  = raw init_items_counter_sync
+
 header
   .nav-menu.nav-alert-top
     .container-fluid.nav-menu-container

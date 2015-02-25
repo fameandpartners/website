@@ -46,6 +46,7 @@
 //= require partials/helpers/shopping_cart
 //= require partials/helpers/user_moodboard
 //= require partials/shopping_bag
+//= require templates/shopping_bag
 
 // Profile/Account Settings
 //= require partials/account_settings_page

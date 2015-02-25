@@ -6,15 +6,72 @@ window.helpers.ShoppingCart = class ShoppingCart
   constructor: (options = {}) ->
     @$eventBus = $({})
     # code
+    @data    = null
+    @loaded   = false
   
     @trigger =  delegateTo(@$eventBus, 'trigger')
     @on      =  delegateTo(@$eventBus, 'on')
     @one     =  delegateTo(@$eventBus, 'one')
 
+  updateData: (data) =>
+    @loaded = true
+    @data = data
+    @trigger('changed')
+
   # request to force data requesting from server
   # if already loaded, do nothing. it should be done by other methods
   load: () ->
-    @trigger('loaded')
+    if @isLoaded()
+      @trigger('loaded')
+    else
+      @loaded = true
+      $.ajax(
+        url: urlWithSitePrefix("/user_cart/details")
+        type: "GET"
+        dataType: "json"
+      ).success((data) =>
+        @updateData(data)
+        @trigger('loaded')
+      ).error( () =>
+        @loaded = false
+      )
+
+  isLoaded: () ->
+    !!@loaded
+
+  data: () ->
+    @data
+
+  # options:
+  #   variant_id
+  #   size_id
+  #   color_id
+  #   customizations_ids
+  addProduct: (product_data = {}) ->
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/products")
+      type: "POST"
+      dataType: "json"
+      data: product_data
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
+  updateProduct: (line_item_id, options = {}) ->
+    console.log('updateProduct', options)
+
+  removeProduct: (line_item_id) ->
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }")
+      type: "DELETE"
+      dataType: "json"
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
 
 
 #_base = undefined

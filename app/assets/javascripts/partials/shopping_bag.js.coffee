@@ -4,24 +4,25 @@ window.ShoppingBag = class ShoppingBag
   transition_end_events = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend'
 
   constructor: (options = {}) ->
+    @template   = JST['templates/shopping_bag']
     @cart       = options.cart # window.shopping_cart
 
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
 
-    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render')
+    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler')
 
     $(options.toggle_link || '#cart-trigger').on('click', @openHandler)
 
     @$container.on('click', '.close-cart', @closeHandler)
     @$overlay.on('click', @closeHandler)
+    @$container.on('click', '.remove-product', @removeProductHandler)
 
     @cart.on('changed', @render)
     @
 
   render: () ->
-    #data = cart.data
-    console.log(cart)
+    @$container.html(@template(cart: @cart.data))
 
   close: () ->
     @$overlay.removeClass('is-visible')
@@ -37,18 +38,20 @@ window.ShoppingBag = class ShoppingBag
 
   openHandler: (e) ->
     e.preventDefault()
-    @cart.one('loaded', @open)
-    @cart.load()
+    if @cart.isLoaded()
+      @open()
+    else
+      @cart.one('loaded', @open)
+      @cart.load()
 
   closeHandler: (e) ->
     e.preventDefault()
     @close()
 
-  removeElementHandler: (e) ->
+  removeProductHandler: (e) ->
     e.preventDefault()
-    console.log('@cart.removeLineItem() not implemented yet')
-    @cart.removeLineItem()
-
+    line_item_id = $(e.currentTarget).data('id')
+    @cart.removeProduct(line_item_id)
 
 #$ ->
 #  return unless window.bootstrap?

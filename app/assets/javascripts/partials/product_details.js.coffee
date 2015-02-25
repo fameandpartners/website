@@ -33,7 +33,14 @@ page.initProductDetailsPage = (options = {}) ->
       if !status.valid
         window.helpers.showErrors($(e.currentTarget), status.error)
       else
-        app.shopping_cart.addProduct(selector.getCurrentSelection())
+        selected = selector.getCurrentSelection()
+        product_data = {
+          size_id: selected.size_id,
+          color_id: selected.color_id,
+          customizations_ids: selected.customizations_ids
+          variant_id: (selected.variant || {})['id']
+        }
+        app.shopping_cart.addProduct(product_data)
     )
 
   # init moodboard button
