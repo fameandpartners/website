@@ -1,5 +1,5 @@
 = content_for :inline_javascript do
-  | filter = new ProductCollectionFilter('.category .category-controls', '.category .container.relative');
+  | filter = new ProductCollectionFilter('.category .category-controls', '.category .products-collection');
 
 ruby:
   style_options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style.try(:permalink))
@@ -28,9 +28,7 @@ ruby:
       .col-md-3.product-order
         = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
 
-
-
-  .container.relative
+  .container.relative.products-collection
     /! First Row
     = @collection.products.each_slice(4) do |products|
       .row.relative

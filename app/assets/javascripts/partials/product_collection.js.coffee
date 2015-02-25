@@ -60,6 +60,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   updatePageLocation: (filter) ->
     url = '/dresses'
+    filter = _.compactObject(filter || {})
     if _.isEmpty(filter)
       url = '/dresses'
     else

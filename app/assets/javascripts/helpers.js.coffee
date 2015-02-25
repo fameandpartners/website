@@ -68,3 +68,15 @@ window.buildDelayedRedirectToPage = () ->
     _.delay ( ->
       window.location.href = urlWithSitePrefix(path)
     ), 1000
+
+# extends underscore
+# function to remove empty properties from object
+# usage: _.compactObject({})
+_.mixin(compactObject: (o) ->
+  clone = _.clone(o)
+  _.each clone, (v, k) ->
+    if !v
+      delete clone[k]
+    return
+  clone
+)
