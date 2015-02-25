@@ -48,10 +48,11 @@ class Products::DetailsResource
         images:             product_images.read_all,
         default_image:      product_images.default,
         price:              product_price,
-        discount:           product_discount,
+        discount:           product_discount,        
         # page#show specific details
         recommended_products: recommended_products,
-        available_options:  product_selection_options
+        available_options:  product_selection_options,
+        moodboard:          product_moodboard
       })
     end
   end
@@ -106,6 +107,10 @@ class Products::DetailsResource
 
     def product_discount
       Repositories::Discount.get_product_discount(product.id)
+    end
+
+    def product_moodboard
+      Repositories::ProductMoodboard.new(product: product).read
     end
 
     def recommended_products

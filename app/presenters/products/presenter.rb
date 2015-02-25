@@ -15,6 +15,24 @@ module Products
       end
     end
 
+    def song
+      moodboard.song_item
+    end
+
+    def celebrity
+      moodboard.celebrity_item
+    end
+
+    # inspiration board has following layout:
+    #  [ song  | item | item ]
+    #  [ celeb | item | item ]
+    def inspiration
+      [ 
+       moodboard.items.slice(0,2),
+       moodboard.items.slice(2,2)
+      ].compact      
+    end
+
     def is_customizable?
       customizations.present? && customizations.all.any?
     end

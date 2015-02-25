@@ -106,14 +106,41 @@ ruby:
 
 /! About The Dress
 .dress-about.container.page-content
-  h2.text-center About The Shawl Cardi
+  h2.text-center About The Dress
   .divider
   .row
-    .col-md-6
+    .col-md-6.col-xs-12
       h3.text-center Dress Inspiration
-      br
-      img.img-responsive alt=("Dress Inspiration") src="http://puu.sh/fA7BP/0acdd8884e.png"
-    .col-md-6
+      .inspiration
+        - first_row = @product.inspiration.first
+        - second_row = @product.inspiration.last
+        .row          
+          .box.song.col-md-4.col-xs-6.no-padding
+            - if @product.song                      
+              / = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
+              = link_to '#', data: { action: 'soundcloud' } do
+                = image_tag @product.song.image_url
+                = image_tag '_audio-icon.png', class: 'icon'
+              span.mask
+              .hidden
+                = link_to '#', data: { action: 'soundcloud' } do
+                  span.icon-play.fa.fa-play
+                  span.icon-pause.fa.fa-play
+
+
+          - first_row.each do |item|
+            .box.col-md-4.col-xs-6.no-padding
+              = image_tag item.image_url
+        .row
+          .box.col-md-4.col-xs-6.no-padding
+            - if @product.celebrity
+              = image_tag @product.celebrity.image_url
+          - second_row.each do |item|
+            .box.col-md-4.no-padding
+              = image_tag item.image_url
+
+
+    .col-md-6.col-xs-12
       h3.text-center The Story
       br
       p Burn up the dance floor all night in dramatic style.
