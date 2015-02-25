@@ -49,7 +49,7 @@ window.inputs.Select2Selector = class Select2Selector extends BaseInput
   constructor: (options = {}) ->
     super(options)
     _.bindAll(@, 'onValueChanged')
-    @$el.select2()
+    @$el.select2(options.select)
     @$el.on('change', @onValueChanged)
 
   onValueChanged: (e) ->
@@ -89,6 +89,18 @@ window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends Select
 window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Select2Selector
   constructor: (options = {}) ->
     options.valueType = 'integer'
+    options.select = 
+      templateResult: (item) ->        
+        price = $(item.element).data('price')
+        color = $(item.element).data('color')
+
+        val = if price 
+          "#{item.text} <span class=\"color-price\">+#{price}</span>"
+        else 
+          item.text
+      
+        "#{val} <span class=\"color-#{color}\"></span>"
+
     super(options)
 
   customValue: () ->

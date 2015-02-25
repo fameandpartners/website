@@ -12,7 +12,6 @@ window.helpers or= {}
 window.helpers.ProductVariantsSelector = class ProductVariantsSelector
   constructor: (options = {}) ->
     @$container = $(options.container)
-    console.log @$container
     @custom   = { id: options.custom_id, count_on_hand: 0, fast_delivery: false, available: true }
     @variants = options.variants
     @selected = options.preselected || {}

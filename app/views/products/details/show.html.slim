@@ -78,11 +78,11 @@ ruby:
             | Color
           - if colors.default.present?
             - colors.default.each do |color|
-              option value=(color.id) class="color #{color.name}"
+              option value=(color.id) class="color #{color.name}" data-color=color.name
                 = color.presentation
           - if colors.extra.present?
             - colors.extra.each do |color|
-              option value=(color.id) class="custom color #{color.name}" data-price="#{ colors.default_extra_price.display_price }" data-custom="true"
+              option value=(color.id) class="custom color #{color.name}" data-price="#{ colors.default_extra_price.display_price }" data-color=color.name data-custom="true"
               = color.presentation
 
           br
