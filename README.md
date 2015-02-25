@@ -18,15 +18,15 @@ Note: This commands can be run manullay or throught `bin/prepare_app`
 * `$ bundle exec rake db:populate:product_options`
 * `$ bundle exec rake db:populate:prototypes`
 
-Note: it much easier to have working development application with loading database dump from production/preprod site, and restoring them locally. 
+Note: it much easier to have working development application with loading database dump from production/preprod site, and restoring them locally.
 * download latest dump from production ( through web interface from engine yard )
 * clean database with `$bundle exec rake db:schema:load`
-* restore data 
+* restore data
   `pg_restore -d database_name --data-only --clean ./dump_file.dump`
 
 after it, remove valuable data & update settings
 * delete users `Spree::User.delete_all`
-* delete orders `Spree::Order.delete_all` 
+* delete orders `Spree::Order.delete_all`
 * update shipping settings
 * create user, and assign him admin rights `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
 * update payment method settings with test env
@@ -44,6 +44,9 @@ after it, remove valuable data & update settings
     import Spree::Product.all
   end
   Tire.index(:spree_products).refresh
+
+### Locating the Index Page
+The index landing page can be found in the views/index/show.html
 
 ## Manage colours pages
 1) update "lib/tasks/populate/colors_groups.rake" file
