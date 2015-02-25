@@ -33,7 +33,7 @@ ruby:
     // note: we should crop images & update images preloading mechanics - too slow currently
     / = image_tag "bgimage.jpg"
     - @product.images.first.tap do |image|
-      = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
+      = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name
 
   nav.slides-navigation
     a.next href="#"
@@ -117,9 +117,9 @@ ruby:
       .inspiration
         - first_row = @product.inspiration.first
         - second_row = @product.inspiration.last
-        .row          
+        .row
           .box.song.col-sm-4.no-padding
-            - if @product.song                      
+            - if @product.song
               / = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
               = link_to '#', data: { action: 'soundcloud' } do
                 = image_tag @product.song.image_url
@@ -149,12 +149,12 @@ ruby:
           strong Pre-order
           | This item will ship within 4 weeks
       div=raw @product.description
-      
+
       - if @product.fabric
         p Fabric: #{raw @product.fabric}
       - if @product.notes
         p= raw @product.notes
-      
+
       p.sku sku: #{@product.sku}
 
 hr
