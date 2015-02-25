@@ -65,3 +65,33 @@
 }
 
 
+.select2-results__option {
+	background-color: #eeddf0;
+
+	font-size: 1.2rem;
+    line-height: 45px;
+    text-transform: uppercase;
+}
+
+.select2-container--default .select2-results__option[aria-selected="true"] {
+	background-color: #FFFFFF;
+	font-weight: 600;
+	color:#000000;
+}
+
+
+#select2-product_order-results {
+	
+	.select2-container--default .select2-results__option[aria-selected="true"] {
+		background-color: #FFFFFF;
+		color:#000000;
+	}
+
+	.select2-results__option[aria-selected="false"] {
+		background-color: #023648;
+		color:#FFFFFF;
+	}
+
+}
+
+
