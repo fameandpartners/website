@@ -13,7 +13,6 @@ window.ProductCustomisation = class ProductCustomisation
     @$select = $('#product-customizations')
     
   onClose: (data) =>
-    # console.log("onClose")
 
   input: () =>
     @customisationTemplate(customizations: @opts.customizations)
@@ -24,15 +23,20 @@ window.ProductCustomisation = class ProductCustomisation
   toggle: (e) =>          
     $el = $(e.currentTarget)
     id = $el.data('id')
-    @selectedId = if id == @selectedId then null else id
+    
+    if id == 'original'
+      @$action.html("Customize")
+      @$select.val("")
+    else 
+      $el.toggleClass('active')    
+      @$select.val(id)
+      data = _.find(@opts.customizations, (o) => 
+        o.id == id
+      );      
+      @$action.html("#{data.name} +#{data.price}") if data
 
-    $el.toggleClass('active')    
-    @$select.val(id)
-  
-    data = _.find(@opts.customizations, (o) => 
-      o.id == @selectedId
-    );
-    @$action.html("#{data.name} +#{data.price}")
+    setTimeout(vex.close, 30)
+    
 
   open: () =>
     vex.defaultOptions.className = 'vex-theme-flat-attack';
@@ -41,6 +45,7 @@ window.ProductCustomisation = class ProductCustomisation
       input:      @input
       afterOpen:  @bind 
       callback:   @onClose
+      className: 'vex vex-theme-flat-attack product-customizations'
 
 
   # defaultOptions:

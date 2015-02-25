@@ -87,12 +87,16 @@ ruby:
 
           br
 
-    .row
-      .btn-customize
-        - if @product.customizable?
-          a#product-customizations-action.customize
-            | Customise
-            span.remove-selection X
+    - if @product.customizable?          
+      .row    
+        a#product-customizations-action.btn-customize
+          | Customize
+        
+        select.customise-options#product-customizations.hidden
+          - @product.customizations.all.each do |customization|
+            option value=(customization.id) data-custom="true"
+              = "#{ customization.name } #{ customization.display_price }"
+
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
     .row

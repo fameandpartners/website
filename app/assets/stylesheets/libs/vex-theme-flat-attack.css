@@ -1,200 +1,33 @@
-@keyframes vex-flipin-horizontal {
-  0% {
-    opacity: 0;
-    transform: rotateY(-90deg);
-    -webkit-transform: rotateY(-90deg);
-    -moz-transform: rotateY(-90deg);
-    -ms-transform: rotateY(-90deg);
-    -o-transform: rotateY(-90deg); }
+@keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    visibility: visible;}
 
   100% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); } }
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
 
-@-webkit-keyframes vex-flipin-horizontal {
-  0% {
-    opacity: 0;
-    transform: rotateY(-90deg);
-    -webkit-transform: rotateY(-90deg);
-    -moz-transform: rotateY(-90deg);
-    -ms-transform: rotateY(-90deg);
-    -o-transform: rotateY(-90deg); }
-
-  100% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); } }
-
-@-moz-keyframes vex-flipin-horizontal {
-  0% {
-    opacity: 0;
-    transform: rotateY(-90deg);
-    -webkit-transform: rotateY(-90deg);
-    -moz-transform: rotateY(-90deg);
-    -ms-transform: rotateY(-90deg);
-    -o-transform: rotateY(-90deg); }
-
-  100% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); } }
-
-@-ms-keyframes vex-flipin-horizontal {
-  0% {
-    opacity: 0;
-    transform: rotateY(-90deg);
-    -webkit-transform: rotateY(-90deg);
-    -moz-transform: rotateY(-90deg);
-    -ms-transform: rotateY(-90deg);
-    -o-transform: rotateY(-90deg); }
-
-  100% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); } }
-
-@-o-keyframes vex-flipin-horizontal {
-  0% {
-    opacity: 0;
-    transform: rotateY(-90deg);
-    -webkit-transform: rotateY(-90deg);
-    -moz-transform: rotateY(-90deg);
-    -ms-transform: rotateY(-90deg);
-    -o-transform: rotateY(-90deg); }
-
-  100% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); } }
-
-@keyframes vex-flipout-horizontal {
-  0% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); }
-
-  100% {
-    opacity: 0;
-    transform: rotateY(90deg);
-    -webkit-transform: rotateY(90deg);
-    -moz-transform: rotateY(90deg);
-    -ms-transform: rotateY(90deg);
-    -o-transform: rotateY(90deg); } }
-
-@-webkit-keyframes vex-flipout-horizontal {
-  0% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); }
-
-  100% {
-    opacity: 0;
-    transform: rotateY(90deg);
-    -webkit-transform: rotateY(90deg);
-    -moz-transform: rotateY(90deg);
-    -ms-transform: rotateY(90deg);
-    -o-transform: rotateY(90deg); } }
-
-@-moz-keyframes vex-flipout-horizontal {
-  0% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); }
-
-  100% {
-    opacity: 0;
-    transform: rotateY(90deg);
-    -webkit-transform: rotateY(90deg);
-    -moz-transform: rotateY(90deg);
-    -ms-transform: rotateY(90deg);
-    -o-transform: rotateY(90deg); } }
-
-@-ms-keyframes vex-flipout-horizontal {
-  0% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); }
-
-  100% {
-    opacity: 0;
-    transform: rotateY(90deg);
-    -webkit-transform: rotateY(90deg);
-    -moz-transform: rotateY(90deg);
-    -ms-transform: rotateY(90deg);
-    -o-transform: rotateY(90deg); } }
-
-@-o-keyframes vex-flipout-horizontal {
-  0% {
-    opacity: 1;
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg); }
-
-  100% {
-    opacity: 0;
-    transform: rotateY(90deg);
-    -webkit-transform: rotateY(90deg);
-    -moz-transform: rotateY(90deg);
-    -ms-transform: rotateY(90deg);
-    -o-transform: rotateY(90deg); } }
-
+/*.slide-right {
+  -webkit-animation-name: slide-right;
+          animation-name: slide-right;
+}*/
 .vex.vex-theme-flat-attack {
-  -moz-perspective: 1300px;
-  -webkit-perspective: 1300px;
-  perspective: 1300px;
-  -moz-perspective-origin: 50% 150px;
-  -webkit-perspective-origin: 50% 150px;
-  perspective-origin: 50% 150px;
   padding-top: 100px;
   padding-bottom: 100px;
   font-size: 1.5em; }
   .vex.vex-theme-flat-attack.vex-closing .vex-content {
-    animation: vex-flipout-horizontal 0.5s;
-    -webkit-animation: vex-flipout-horizontal 0.5s;
-    -moz-animation: vex-flipout-horizontal 0.5s;
-    -ms-animation: vex-flipout-horizontal 0.5s;
-    -o-animation: vex-flipout-horizontal 0.5s;
-    -webkit-backface-visibility: hidden; }
-  .vex.vex-theme-flat-attack .vex-content {
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    animation: vex-flipin-horizontal 0.5s;
-    -webkit-animation: vex-flipin-horizontal 0.5s;
-    -moz-animation: vex-flipin-horizontal 0.5s;
-    -ms-animation: vex-flipin-horizontal 0.5s;
-    -o-animation: vex-flipin-horizontal 0.5s;
-    -webkit-backface-visibility: hidden; }
+    -webkit-animation: slide-right 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide-right 0.5s forwards;
+    animation-delay: 2s;
+  }
+  .vex.vex-theme-flat-attack .vex-content {    
+    -webkit-animation-name: slide-right;
+    animation-name: slide-right;
+  }
   .vex.vex-theme-flat-attack .vex-content {
     font-family: "Open Sans", sans-serif;
     /*font-weight: 200;*/
