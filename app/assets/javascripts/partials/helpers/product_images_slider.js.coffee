@@ -23,7 +23,7 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
 
     @preload()      
     # We need to work out a logical value to pause before loading the images
-    setTimeout(@append, 100 * @images.length);
+    # setTimeout(@append, 100 * @images.length);
 
   append: () =>   
     @updateSlider()
@@ -47,16 +47,23 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     @$container.html(wrapper)
     @$container.superslides(@options)
 
-  preload: () ->
-    @all_images = _.map @images, (image) ->
+  preload: () =>
+    @progress = 0
+    @preloadImages = _.map @images, (image) =>
       s = "<img         
         id='product-image-slide-#{image.id }'         
         class='product-image-slide' 
         alt='#{ image.alt }' 
         data-color-id='#{ image.color_id }' />"
       img = $(s)[0]
+      img.onload = @imageLoaded
       img.src = image.url;
       img 
-      
-   
-# style="height: 1164px; width: 2560px; overflow: hidden; position: absolute; left: 0px; top: 0px; z-index: -1; max-width: none;" >        
+  
+  # bit unsure about managing state like thism, but it works.     
+  imageLoaded: () =>
+    @progress++
+    if @progress == @images.length    
+      @all_images = @preloadImages
+      @updateSlider()
+  
