@@ -30,6 +30,7 @@
 
 //= require helpers
 //= require partials/helpers/site_version
+//= require partials/helpers/alert
 //= require popups/style_quiz
 //= require partials/product_collection.js
 //= require partials/product_customisation.js
