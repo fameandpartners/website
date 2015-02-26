@@ -86,25 +86,22 @@ window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends Select
   customValue: () ->
     @$el.find("option[value=#{ @val() }]").data('custom')
 
-window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Select2Selector
+
+window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends BaseInput
   constructor: (options = {}) ->
     options.valueType = 'integer'
-    options.select = 
-      templateResult: (item) ->        
-        price = $(item.element).data('price')
-        color = $(item.element).data('color')
-
-        val = if price 
-          "#{item.text} <span class=\"color-price\">+#{price}</span>"
-        else 
-          item.text
-      
-        "#{val} <span class=\"color-#{color}\"></span>"
-
     super(options)
+
+  getValue: () ->
+    @prepareValue(@$el.val())
+
+  setValue: (newValue) ->
+    @$el.val(@prepareValue(newValue))
+    @onValueChanged()
 
   customValue: () ->
     @$el.find("option[value=#{ @val() }]").data('custom')
+
 
 window.inputs.ProductCustomizationsIdsSelector = class ProductCustomizationsIdsSelector extends BaseInput
   constructor: (options = {}) ->

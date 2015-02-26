@@ -22,6 +22,13 @@ ruby:
         message: 'Customize Your Dress',
         customizations: #{ @product.customization_options.to_json }
       });
+
+      new ProductColorizer({
+        action:  '#product-colorize-action',
+        select:  '#product-color',
+        colors: #{ @product.default_color_options.to_json },
+        customColors: #{ @product.extra_color_options.to_json }
+      });
   "
 
 = content_for :inline_javascript do
@@ -56,8 +63,7 @@ ruby:
     .row
       - sizes = @product.available_options.sizes
       - if sizes.present?
-        select#product-size data-minimum-results-for-search='Infinity'
-          option disabled="" selected="" value=""  Size
+        select#product-size data-minimum-results-for-search='Infinity' data-prompt="Size"          
           - if sizes.default.present?
             optgroup label="Standard sizes"
               - sizes.default.each do |size|
@@ -72,10 +78,11 @@ ruby:
     .row
       - colors = @product.available_options.colors
       - if colors.present?
-        select.cs-select.cs-skin-border#product-color
-          option disabled="" selected="" value=""
-            span.color-box.navy
-            | Color
+        a#product-colorize-action.btn-customize
+          | Color
+        
+        select#product-color.hidden
+          option value=""
           - if colors.default.present?
             - colors.default.each do |color|
               option value=(color.id) class="color #{color.name}" data-color=color.name
@@ -84,7 +91,6 @@ ruby:
             - colors.extra.each do |color|
               option value=(color.id) class="custom color #{color.name}" data-price="#{ colors.default_extra_price.display_price }" data-color=color.name data-custom="true"
               = color.presentation
-
           br
 
     - if @product.customizable?          
@@ -93,6 +99,7 @@ ruby:
           | Customize
         
         select.customise-options#product-customizations.hidden
+          option value=""
           - @product.customizations.all.each do |customization|
             option value=(customization.id) data-custom="true"
               = "#{ customization.name } #{ customization.display_price }"
