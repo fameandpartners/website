@@ -21,8 +21,11 @@
 //= require js/jquery.skippr.min.js
 //= require js/classie.js
 //= require js/alert.js
+//= require js/affix.js
 // require js/main.js
 // require js/sg-scripts.js
+//
+//= require js/card.js
 
 //= require js/functions.js
 //= require js/superslides.js

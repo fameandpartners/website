@@ -10,7 +10,7 @@ ruby:
 = content_for :inline_javascript do
   = raw shopping_bag_init
 
-/- @cart = UserCart::UserCartResource.new(order: Spree::Order.find(2036515)).read
+/- @cart = UserCart::UserCartResource.new(order: current_order).read
 #shadow-layer
 #cart
   - if @cart.present?
@@ -28,7 +28,7 @@ ruby:
       ul.cart-items
         - @cart.products.each do |product|
           li
-            = image_tag product.image, class: 'img-responsive pull-left cart-item-image'
+            = image_tag product.image.small, class: 'img-responsive pull-left cart-item-image'
             a.fa.fa-close.pull-right.link-grey.remove-product href="#0" 
             span.qty = "#{ product.quantity}x"
             = product.name
@@ -37,7 +37,7 @@ ruby:
     .cart-total
       p
         | Total
-        span = @cart.display_total
+        span = @cart.display_total.to_s
     /! cd-cart-total
     .cart--call-to-actions.row
       .col-lg-6.no-padding-left.close-cart.no-padding-lg
