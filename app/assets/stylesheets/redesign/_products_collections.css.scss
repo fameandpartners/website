@@ -37,8 +37,26 @@
 	.name {
 		text-transform: uppercase;
 	}
+
 	.price {
 		font-weight: 600;
+	}
+
+	.sale-price {
+		color: #eb6ffa;
+		text-transform: uppercase;
+	}
+
+	.discount {
+		text-transform: uppercase;
+	}
+
+	.original-price {
+		text-decoration: line-through;
+	}
+
+	.moodboard {
+		display: block;
 	}
 
 	.product-order {
@@ -54,6 +72,19 @@
 	}
 }
 
+.on-sale * {
+	display: inline-block;
+}
+
+.delivery {
+	border-style: solid;
+	border-width: 45px;
+	border-color: red;
+	width: 10px;
+
+}
+
+
 .category-header {
 
 	.page-title--details {
@@ -67,7 +98,6 @@
 
 .select2-results__option {
 	background-color: #eeddf0;
-
 	font-size: 1.2rem;
     line-height: 45px;
     text-transform: uppercase;
@@ -81,7 +111,7 @@
 
 
 #select2-product_order-results {
-	
+
 	.select2-container--default .select2-results__option[aria-selected="true"] {
 		background-color: #FFFFFF;
 		color:#000000;
@@ -91,7 +121,57 @@
 		background-color: #023648;
 		color:#FFFFFF;
 	}
-
 }
 
+.ribbon {
+  position: absolute;
+  width:    150px;
+  height:   150px;
+  pointer-events: none;
+  right:    0;
+  top:      0;
+  overflow: hidden;
+  margin-left: 5%;
 
+  &, &:hover {
+    text-decoration: none;
+  }
+
+  &:before, &:after {
+    display: block;
+    position: absolute;
+    width: 200%;
+    font-size: 90%;
+    transform: rotate(45deg);
+    transform-origin: top center;
+    top:   33%;
+    left: -33%;
+    color: white;
+    pointer-events: auto;
+  }
+
+  &:before {
+    content: attr(title);
+    background-color: #06344d;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: .2em;
+  }
+
+  &:after {
+    position: absolute;
+    border-left: none;
+    border-right: none;
+    margin: .2em;
+  }
+
+
+  &.left {
+    &:before, &:after {
+      transform: rotate(-45deg);
+      top:   33%;
+      left:  -70%;
+    }
+  }
+}

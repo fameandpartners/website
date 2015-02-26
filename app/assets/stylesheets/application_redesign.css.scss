@@ -9,6 +9,7 @@
 
 @import 'libs/vex';
 @import 'libs/vex-theme-flat-attack';
+@import 'libs/vex-theme-bottom-right-corner';
 
 @import 'redesign/mixins';
 @import 'redesign/product';
@@ -24,6 +25,7 @@
 @import 'redesign/products_collections';
 @import 'redesign/index';
 @import 'redesign/typography';
+@import 'redesign/header';
 
 .standard-form {
   height: 60px;

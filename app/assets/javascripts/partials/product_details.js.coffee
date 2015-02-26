@@ -19,6 +19,7 @@ page.initProductDetailsPage = (options = {}) ->
   # init slider images
   slider    = new helpers.ProductImagesSlider(options.slider.container, options.slider.images, options.slider.options)
   selector  = new window.helpers.ProductVariantsSelector(options.selector)
+  
 
   # change images colors
   selector.on('change', (event, data) ->
@@ -31,7 +32,7 @@ page.initProductDetailsPage = (options = {}) ->
       e.preventDefault()
       status = selector.validate()
       if !status.valid
-        window.helpers.showErrors($(e.currentTarget), status.error)
+        window.helpers.showAlert(message: status.error, className: 'product-select-alert')
       else
         selected = selector.getCurrentSelection()
         product_data = {
