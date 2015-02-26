@@ -12,6 +12,8 @@ window.ProductCustomisation = class ProductCustomisation
     @$select = $('#product-customizations')
     
   onClose: (data) =>
+    $('.vex-content').addClass('no-scroll')
+    $('body').removeClass('no-scroll')
 
   input: () =>
     @template(customizations: @opts.customizations)
@@ -46,6 +48,7 @@ window.ProductCustomisation = class ProductCustomisation
     
 
   open: () =>
+    $('body').addClass('no-scroll')
     vex.defaultOptions.className = 'vex-theme-flat-attack';
     vex.dialog.open
       message:    @opts.message

@@ -12,6 +12,11 @@ window.ProductColorizer = class ProductColorizer
     @$select = $(opts.select)
     @$action.on('click', @open)
     @allColors = @opts.colors.concat(@opts.colors)
+
+    
+  onClose: (data) =>
+    $('.vex-content').addClass('no-scroll')
+    $('body').removeClass('no-scroll')
     
   input: () =>
     @template(colors: @opts.colors, customColors: @opts.colors)
@@ -20,7 +25,7 @@ window.ProductColorizer = class ProductColorizer
     selectedId = @$select.val()
     if selectedId 
       $(".color-option[data-id='#{selectedId}']").toggleClass('active')
-      
+
     $('.color-option').on('click', @toggle)
 
   toggle: (e) =>          
@@ -41,7 +46,8 @@ window.ProductColorizer = class ProductColorizer
     setTimeout(vex.close, 30)
     
   open: () =>
-    vex.defaultOptions.className = 'vex-theme-flat-attack';
+    $('body').addClass('no-scroll')
+    vex.defaultOptions.className = 'vex-theme-flat-attack';    
     vex.dialog.open
       input:      @input
       afterOpen:  @bind 
