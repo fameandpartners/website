@@ -1,4 +1,7 @@
-# variants selector popup uses this
+# note: code obsoleted
+#   this should be overrides
+#     - new design for variants selector
+#     - use product/details
 class ProductVariantsController < ApplicationController
   # get product info + variants details[exclude master]
   #   id [product_id]

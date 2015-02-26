@@ -38,9 +38,9 @@ class UserMoodboard::BaseResource
 
   private
 
-    def cache_key
-      "user-moodboard-base-info-#{ user.id }"
-    end
+    #def cache_key
+    #  "user-moodboard-base-info-#{ user.id }"
+    #end
 
     def wishlist_items
       @wishlist_items ||= begin
