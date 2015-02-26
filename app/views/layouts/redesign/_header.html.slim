@@ -18,14 +18,12 @@ header
         li.shop.menu-item
           a.menu-item--link.active-hover href="#"
             | Shop
-            span.fa.fa-caret-down.small
-            span.active-link.arrow-up.menu-active-arrow.arrow-dark
           .mega-menu.hidden-sm
             .mega-menu--main
               .container-fluid.max-width-100
                 .row
                   .col-md-3
-                    button.btn.btn-grey href="/dresses"  View all dresses
+                    button.btn.btn-black.all-dresses href="/dresses"  View all dresses
                   .col-md-3
                     p.button-grey-text.menu-main-promotions
                       span.fa.fa-ship.push-right-10
@@ -41,8 +39,8 @@ header
             .mega-menu--secondary
               .container-fluid.max-width-100
                 .row
-                  .col-md-3.col-lg-2
-                    h4 Events
+                  .col-md-3.col-lg-2.col-md-offset-3
+                    h4.link-header Events
                     ul.mega-menu-list
                       li.mega-menu-list--item
                         = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
@@ -69,7 +67,7 @@ header
 
 
                   .col-md-3.col-lg-2
-                    h4 Style
+                    h4.link-header Style
                     ul.mega-menu-list
                       li.mega-menu-list--item= link_to 'Two-Piece', build_taxon_path('Two Piece'), title: "Two-Piece Dresses"
                       li.mega-menu-list--item= link_to 'One Shoulder', build_taxon_path('One-Shoulder'), title: "One Shoulder Dresses"
@@ -80,7 +78,7 @@ header
                       li.mega-menu-list--item= link_to 'Lace', build_taxon_path('Lace'), title: "Lace Dresses"
 
                   .col-md-3.col-lg-2
-                    h4= t('color')
+                    h4.link-header= t('color')
                     ul.mega-menu-list
                       li.mega-menu-list--item= link_to "Black Dresses", colour_path('Black'), title: "Black Dresses"
                       li.mega-menu-list--item= link_to "White / Ivory Dresses", colour_path('White'), title: "White / Ivory Dresses"
@@ -90,7 +88,7 @@ header
                       li.mega-menu-list--item= link_to "Pastel Dresses", colour_path('Pastel'), title: "Pastel Dresses"
 
                   .col-md-3.col-lg-2
-                    h4= t('sale')
+                    h4.link-header= t('sale')
                     ul.mega-menu-list
                       li.mega-menu-list--item= link_to 'Next Day Delivery', next_day_delivery_path, title: 'Next Day Delivery'
 
@@ -105,7 +103,7 @@ header
                         li.mega-menu-list--item= link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
 
         li.menu-item
-          = link_to 'Stories', '', class: 'menu-item--link'
+          = link_to 'style quiz', '', class: 'menu-item--link'
 
         li.menu-item
           = link_to 'Blog', blog_path, class: 'menu-item--link'
@@ -116,8 +114,8 @@ header
             span.visible-sm
               = image_tag "images/Heart.svg"
             span.hidden-sm.hidden-xs
-              | Moodboard
-              / span.moodboard-items-count = "(#{ current_user_moodboard.item_count })"
+              | Moodboard:&nbsp;
+              = "#{ current_user_moodboard.item_count }"
         li.menu-item
           = link_to profile_path, class: 'menu-item--link' do
             | my account
@@ -142,6 +140,5 @@ header
 
         li#cart-trigger.menu-item
           = link_to spree.cart_path, class: 'menu-item--link' do
-            span.cart
-              = image_tag 'images/Cart.svg', class: 'cart-icon'
-              span.cart-amount = current_order.item_count
+            |cart:&nbsp;
+            = current_order.item_count
