@@ -81,7 +81,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       else
         result.error = 'Sorry, out of stock'
     else if _.isEmpty(selected.size_id) && _.isEmpty(selected.color_id)
-      result.error = 'Please, select size and color'
+      result.error = 'Please select a size and color'
     else if _.isEmpty(selected.size_id)
       result.error = 'Please select a size'
     else if _.isEmpty(selected.color_id)

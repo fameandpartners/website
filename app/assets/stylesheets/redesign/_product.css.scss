@@ -148,3 +148,46 @@
 		}
 	}
 }
+
+.vex-content {
+	z-index:2001; // display on top of mobile menu
+}
+
+
+.vex.vex-theme-flat-attack.product-customizations {
+	.vex-content {
+		position:fixed;
+		top:0;
+		right:0;
+		width:500px;
+		height:100%;
+		z-index:2001; // display on top of mobile menu
+	}
+	.vex-dialog-buttons {
+		display:none;
+	}
+
+	img.img-responsive {
+		max-width:150;
+	}
+}
+
+
+.vex.vex-theme-bottom-right-corner.product-select-alert {
+
+	.vex-content {
+		text-align:right;
+		width:100%;
+		z-index:2001; // display on top of mobile menu
+	}
+
+
+	.alert {
+		margin-bottom: 0;	
+	}
+	
+
+	.vex-dialog-buttons {
+		display:none;
+	}
+}

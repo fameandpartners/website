@@ -175,24 +175,3 @@
     }
   }
 }
-
-.vex.vex-theme-flat-attack.product-customizations {
-	.vex-content {
-		position:fixed;
-		top:0;
-		right:0;
-		width:500px;
-		height:100%;
-		z-index:2001; // display on top of mobile menu
-	}
-	.vex-dialog-buttons {
-		display:none;
-	}
-
-	img.img-responsive {
-		max-width:150;
-	}
-
-}
-
-

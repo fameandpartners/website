@@ -31,7 +31,15 @@ page.initProductDetailsPage = (options = {}) ->
       e.preventDefault()
       status = selector.validate()
       if !status.valid
-        window.helpers.showErrors($(e.currentTarget), status.error)
+        vex.defaultOptions.className = 'vex-theme-bottom-right-corner';
+        vex.dialog.alert
+          title:    'Oops'
+          message:    status.error        
+          className: 'vex vex-theme-bottom-right-corner product-select-alert'
+          contentClassName: 'alert alert-warning vex-content'
+
+        setTimeout(vex.close, 2222)
+
       else
         selected = selector.getCurrentSelection()
         product_data = {
