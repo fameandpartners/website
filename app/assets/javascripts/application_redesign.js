@@ -1,6 +1,7 @@
 // our code
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require jquery-fileupload/vendor/jquery.ui.widget
 //= require jquery-fileupload/jquery.iframe-transport
 //= require jquery-fileupload/jquery.fileupload
@@ -52,6 +53,8 @@
 //= require partials/helpers/user_moodboard
 //= require partials/shopping_bag
 //= require templates/shopping_bag
+
+//= require partials/checkout_page
 
 // Profile/Account Settings
 //= require partials/account_settings_page

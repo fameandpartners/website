@@ -1,0 +1,53 @@
+- if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
+  - content_for :head do
+    - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
+      = javascript_include_tag 'https://api.pin.net.au/pin.js'
+    - else
+      = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
+
+  - content_for :inline_javascript do
+    | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
+
+h2 3. Payment Details
+br
+.btn-group-radio
+  input#optionsRadios1 name="optionsRadios" type="radio" value="option1" /
+  button.btn
+  label.text-white for="optionsRadios1" 
+    | Pay with Credit Card
+  span.or or
+  input#optionsRadios2 name="optionsRadios" type="radio" value="option2" /
+  button.btn
+  label.text-white for="optionsRadios2" 
+    | Pay with PayPal
+hr
+br
+.row
+  .col-md-12
+    p.small You will be directed to PayPal to make this purchase.
+    button.btn.btn-black.btn-block Continue to PayPal
+br
+hr
+.card-wrapper
+br
+
+form action="" 
+  .row
+    .col-md-12.form-group
+      label for=""  Card number
+      input#number.form-control.standard-form type="text" /
+  .row
+    .col-md-12.form-group
+      label for=""  Name on card
+      input#name.form-control.standard-form type="text" /
+  .row
+    .col-md-6.form-group
+      label for=""  Expiry
+      input#expiry.form-control.standard-form type="text" /
+    .col-md-6.form-group
+      label for=""  CVC
+      input#cvc.form-control.standard-form type="text" /
+  .row
+    .col-md-12.form-group
+      button.btn.btn-black Submit
+

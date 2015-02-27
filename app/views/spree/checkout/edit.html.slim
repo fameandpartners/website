@@ -1,14 +1,3 @@
-- if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
-  - content_for :head do
-    - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
-      = javascript_include_tag 'https://api.pin.net.au/pin.js'
-    - else
-      = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
-
-  - content_for :inline_javascript do
-    | window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
-    | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
-
 .checkout-title
   .checkout-title--content.container.text-center
     /a.pull-left.back-to-shop href="#"
@@ -21,104 +10,10 @@
     .row
       .col-md-8
         .checkout-step data-name="address"
-          h2 1. Shipping Address
-          br
-          .row
-            .col-md-6.form-group
-              label for=""  First Name
-              input.form-control.standard-form type="text" /
-            .col-md-6.form-group
-              label for=""  Last Name
-              input.form-control.standard-form type="text" /
-          .row
-            .col-md-12.form-group
-              label for=""  Address Line 1
-              input.form-control.standard-form type="text" /
-          .row
-            .col-md-12.form-group
-              label for=""  Address Line 2 (Optional)
-              input.form-control.standard-form type="text" /
-
-          .row
-            .col-md-4.form-group
-              label for=""  City
-              input.form-control.standard-form type="text" /
-            .col-md-4.form-group
-              label for=""  State
-              select.form-control.standard-form
-                option QLD
-                option WA
-                option VIC
-                option NSW
-                option etc...
-            .col-md-4.form-group
-              label for=""  Zip Code
-              input.form-control.standard-form type="text" /
-          .row
-            .col-md-12.form-group
-              label for=""  Phone
-              input.form-control.standard-form type="text" /
-
-          .row
-            .col-md-12.form-group
-              button.btn.btn-black Next
-          hr
-
-
-          h2 2. Shipping Options
-          br/
-          .row
-            .col-md-12.form-group
-              select.cs-select.cs-skin-border
-                option selected="" value="free"  Free Shipping
-          .row
-            .col-md-12.form-group
-              button.btn.btn-black Next
+          = render 'address_step', current_step: current_step
 
         .checkout-step data-name="payment"
-          h2 3. Payment Details
-          br/
-          .btn-group-radio
-            input#optionsRadios1 name="optionsRadios" type="radio" value="option1" /
-            button.btn
-            label.text-white for="optionsRadios1" 
-              | Pay with Credit Card
-            span.or or
-            input#optionsRadios2 name="optionsRadios" type="radio" value="option2" /
-            button.btn
-            label.text-white for="optionsRadios2" 
-              | Pay with PayPal
-          hr/
-          br/
-          .row
-            .col-md-12
-              p.small You will be directed to PayPal to make this purchase.
-              button.btn.btn-black.btn-block Continue to PayPal
-          br/
-          hr/
-          .card-wrapper
-          br/
-
-          form action="" 
-            .row
-              .col-md-12.form-group
-                label for=""  Card number
-                input#number.form-control.standard-form type="text" /
-            .row
-              .col-md-12.form-group
-                label for=""  Name on card
-                input#name.form-control.standard-form type="text" /
-            .row
-              .col-md-6.form-group
-                label for=""  Expiry
-                input#expiry.form-control.standard-form type="text" /
-              .col-md-6.form-group
-                label for=""  CVC
-                input#cvc.form-control.standard-form type="text" /
-            .row
-              .col-md-12.form-group
-                button.btn.btn-black Submit
-
+          = render 'payment_step', current_step: current_step
       .col-md-4
         br
         br
