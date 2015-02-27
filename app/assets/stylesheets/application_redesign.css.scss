@@ -90,6 +90,20 @@
   }
 }
 
+
+// Flash Message Panel
+.vex.vex-theme-bottom-right-corner {
+	.alert.vex-content {
+		margin-bottom: 0;	
+		text-align:right;
+		width:100%;
+		z-index:9999; // display on top of mobile menu
+		.vex-dialog-buttons {
+			display:none;
+		}
+	}
+}
+
 /*
   // added for quick reference only
   <link rel="stylesheet" href="stylesheets/styles.css">

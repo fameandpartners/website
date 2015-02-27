@@ -172,19 +172,6 @@
 	}
 }
 
-
-.vex.vex-theme-bottom-right-corner {
-	.alert.alert-warning.vex-content {
-		margin-bottom: 0;	
-		text-align:right;
-		width:100%;
-		z-index:9999; // display on top of mobile menu
-		.vex-dialog-buttons {
-			display:none;
-		}
-	}
-}
-
 .product-colorization {
 	.recomended {
 		background-color:#F6F6F6;
