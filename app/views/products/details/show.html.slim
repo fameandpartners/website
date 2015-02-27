@@ -38,9 +38,9 @@ ruby:
 #slides
   .slides-container
     // note: we should crop images & update images preloading mechanics - too slow currently
-    / = image_tag "bgimage.jpg"
-    - @product.images.first.tap do |image|
-      = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name
+    = image_tag "bgimage.jpg"
+    / - @product.images.first.tap do |image|
+    /   = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
 
   nav.slides-navigation
     a.next href="#"
@@ -114,6 +114,15 @@ ruby:
         	h4 Love It
       .col-md-4.share.icons
         h4 Share
+    .row
+      span class='st_facebook_large' displayText='Facebook'
+        img src="facebook"
+      span class='st_pinterest_large' displayText='Pinterest'
+        img src="pinterest"
+      span class='st_instagram_large' displayText='Instagram Badge' st_username='fameandpartners'
+        img src="instagram"
+      span class='st_twitter_large' st_via="fameandpartners" displayText='Tweet'
+        img src="twitter"
 
 /! About The Dress
 .dress-about.container.page-content
