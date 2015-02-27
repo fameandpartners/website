@@ -54,7 +54,9 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
         id='product-image-slide-#{image.id }'         
         class='product-image-slide' 
         alt='#{ image.alt }' 
-        data-color-id='#{ image.color_id }' />"
+        data-color-id='#{ image.color_id }' 
+        style='height: 1164px; width: 2560px; overflow: hidden; position: absolute; left: 0px; top: 0px; z-index: -1; max-width: none;' 
+        />"
       img = $(s)[0]
       img.onload = @imageLoaded
       img.src = image.url;
