@@ -242,13 +242,16 @@ module ApplicationHelper
       price.display_price.to_s.html_safe
     else
       # NOTE - we should add fixed price amount calculations
-      sale_price = price.apply(discount)
+      sale_price = price.apply(discount)      
       [
         content_tag(:span, price.display_price, class: 'price-original'),        
         content_tag(:span, sale_price.display_price.to_s, class: 'price-sale'),
+        content_tag(:span, "Save #{discount.amount}%", class: 'price-discount'),        
       ].join("\n").html_safe
     end
   end
+
+
 
   # span.price-old $355
   # ' $295
