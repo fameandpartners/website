@@ -1,5 +1,7 @@
 html = '<%=j  render(template: 'users/orders/index.html') %>';
-$('#wrap > #content > .wrap').replaceWith(html)
+
+$('body > .page-title').remove();
+$('body > .page-content').replaceWith(html);
 
 window.setCurrentPath('<%= user_orders_path %>')
 

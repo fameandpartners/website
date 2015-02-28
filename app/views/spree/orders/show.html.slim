@@ -86,5 +86,5 @@ ruby:
           p Or otherwise contact our friendly team if you need any help.
           p = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
           - unless @order.user.blank?
-            .back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn'
+            .back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
           = render 'shared/sales_conversion_pixels', locals: {order: @order}

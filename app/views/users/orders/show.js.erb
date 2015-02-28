@@ -1,5 +1,7 @@
 html = '<%=j  render(template: 'spree/orders/show') %>';
-$('#wrap > #content > .wrap').replaceWith(html);
+
+$('body > .page-title').remove();
+$('body > .page-content').replaceWith(html);
 
 window.setCurrentPath('<%= user_order_path(@order) %>');
 
