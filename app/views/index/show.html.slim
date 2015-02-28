@@ -36,29 +36,32 @@
   .row
     a href="#"
     .col-md-4.text-center.no-padding
-      h3.black Celebrity Dresses
-      = image_tag "images/banner1a.jpg", alt: 'Something here', class: 'img-responsive'
+      .header.black
+        h3 Celebrity Dresses
+      = image_tag "glam_rebel.jpg", alt: 'Something here', class: 'img-responsive'
     a href="#"
     .col-md-4.text-center.no-padding
-      h3 Check out the Amfam collection
-      = image_tag "images/banner2.jpg", alt: 'Something here', class: 'img-responsive'
+      .header.pink
+        h3 Check out the Amfam collection
+      = image_tag "glam_rebel2.jpg", alt: 'Something here', class: 'img-responsive'
     a href="#"
     .col-md-4.text-center.no-padding
-      h3.black Worried about what to wear to your next event?
-      = image_tag "images/banner4.jpg", alt: 'Something here', class: 'img-responsive'
+      .header.black
+        h3 Worried about what to wear to your next event?
+      = image_tag "real_prom.jpg", alt: 'Something here', class: 'img-responsive'
 
 /! Email Subscription
 .container.email-sub.text-center
   .row
     .col-md-12
-      p.text-center.h2-title Become Famous.
+      h2.text-center.h2-title Become Famous.
       p.lead Join now to receive fame style tips and  exclusive offers.
-    .col-md-6
+    .col-md-6.col-md-offset-3
       .input-group.margin-bottom-sm
-        input.form-control.black-form placeholder=("Enter Email") type="text" /
-        span.input-group-addon.no-padding-right
-          button.invis-fix type="submit"
-            = image_tag 'images/line-arrow.svg', alt: 'Submit', class: 'line-arrow'
+        input.form-control placeholder=("Enter Email") type="text" /
+        span.no-padding-right
+          button.invis-fix type="submit" Send
+
 
 
 /! SEO Crap
