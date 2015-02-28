@@ -40,8 +40,9 @@ page.initProductDetailsPage = (options = {}) ->
           color_id: selected.color_id,
           customizations_ids: selected.customizations_ids
           variant_id: (selected.variant || {})['id']
-        }
+        }        
         app.shopping_cart.addProduct(product_data)
+        window.helpers.showAlert(message: 'Added to Cart', type: 'success')
     )
 
   if options.fitguideButton
