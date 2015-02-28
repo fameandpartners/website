@@ -148,7 +148,7 @@ class Products::CollectionDetails
       default_title = templates[:title][:default] % {
         color: is_formal_dress_color?(color) ? color.name.titleize : nil,
         style: style.present? ? style.name.titleize : '',
-        event: event.present? ? event.name.titleize : 'Any Event',
+        event: event.present? ? event.name.titleize : '',
         bodyshape: bodyshape.blank? ? '' : ( templates[:title][:bodyshape] % { bodyshape: bodyshape } )
       }
 
@@ -184,7 +184,7 @@ class Products::CollectionDetails
       default_description = templates[:description][:default] % {
         color: is_formal_dress_color?(color) ? color.name.titleize : nil,
         style: style.present? ? style.name.titleize : '',
-        event: event.present? ? event.name.titleize : 'any event'
+        event: event.present? ? event.name.titleize : ''
       }
 
       default_description.gsub!(/\s{1,}/, ' ').capitalize # remove double spaces
@@ -220,7 +220,7 @@ class Products::CollectionDetails
       default_banner_title = templates[:banner_title][:default] % {
         color: is_formal_dress_color?(color) ? color.name.titleize : nil,
         style: style.present? ? style.name.titleize : '',
-        event: event.present? ? event.name.titleize : 'any event'
+        event: event.present? ? event.name.titleize : ''
       }
 
       default_banner_title.gsub!(/\s{1,}/, ' ').capitalize # remove double spaces
