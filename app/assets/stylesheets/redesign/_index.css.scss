@@ -8,8 +8,65 @@
 }
 
 .call-to-actions {
-	h3.black {
+
+	.header {
+		height: 70px;
+		margin-bottom: 0;
+
+		h3{
+			padding-top: 2.6rem;
+			text-transform: uppercase;
+		}
+	}
+
+	.black {
 		background-color: black;
+
+		h3{
 		color: white;
+		}
+	}
+
+	.pink {
+		color: black;
+		background-color: #eeddf0
 	}
 }
+
+.email-sub {
+	background-color: #f6e2d5;
+	min-height: 312px;
+
+
+	@media (min-width: 1200px){
+		width: 100%;
+	}
+
+	h2 {
+		font-family: 'forum';
+		text-transform: uppercase;
+		font-size: 8rem;
+	}
+
+	.lead {
+		text-transform: uppercase;
+		font-style: normal;
+		font-size: 1.7rem;
+		font-weight: 500;
+		max-width: 335px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.form-control {
+		background-color: transparent;
+		border-bottom:1px solid black;
+		float: left;
+	}
+
+	.input-group-addon {
+		border-bottom: #eeddf0;
+	}
+}
+
+
