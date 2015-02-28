@@ -29,7 +29,7 @@ footer
 
         = render 'layouts/redesign/address'
 
-      .col-md-3.col-md-offset-3
+      .col-md-2.col-md-offset-5
         ul.footer-nav
           li.footer-nav--item
             = link_to 'Why Shop With Us', why_us_path
@@ -41,14 +41,14 @@ footer
              = link_to 'Terms', terms_path
           li.footer-nav--item
             = link_to 'Get styling advice', style_consultation_path
-      .col-md-3
+      .col-md-2
         ul.footer-nav
           li.footer-nav--item
             = link_to 'Fashionista program', fashionista_winner_path
           li.footer-nav--item
             = link_to 'Fame Chain', fame_chain_path
 
-    .row
+    .row.lower-row
       .col-md-3
         .btn-group
           button.btn.btn-dropdown.dropdown-toggle.location aria-expanded="false" data-toggle="dropdown" type="button"
@@ -70,7 +70,7 @@ footer
           = Time.now.year
           | &nbsp;Fame &amp; Partners. All rights reserved.
 
-      .col-md-3
+      .col-md-3.social-links
         ul.footer-social
           li.footer-social--item
             span class='st_facebook_custom' displayText='Facebook'

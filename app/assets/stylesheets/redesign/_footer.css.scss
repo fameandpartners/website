@@ -1,14 +1,30 @@
 footer {
 	background-color: #f5f5f5;
 
-	.footer-navigation{
+	.footer-navigation {
 		margin-top: 30px;
+		font-size: 1.3rem;
 
 	}
 	.col-md-6 {
 		p {
-			padding-top: 24px;
+			padding-top: 30px;
+			font-size: 1.2rem;
 		}
+	}
+
+	.footer-nav--item {
+		margin-bottom: 1px;
+		padding-left: 5rem;
+	}
+
+	.footer-social {
+		float: right;
+		margin-bottom: 0;
+	}
+
+	.footer-social--item {
+		padding-bottom: 0;
 	}
 
 	.footer-logo {
@@ -45,4 +61,16 @@ footer {
 		}
 	}
 
+	.social-links {
+		padding-right: 0;
+		margin-bottom: 8px
+	}
+
+	.col-md-3 {
+		padding: 0;
+	}
+
+	.lower-row {
+		padding-bottom: 1.6rem;
+	}
 }
