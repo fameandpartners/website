@@ -123,9 +123,11 @@
 	}
 }
 
-.category--content {
+.content {
 	border:2px solid black;
-	min-height:300px;
+	min-height:375px;
+	padding:10px 20px 10px 20px;
+	margin-bottom:20px;
 }
 
 .ribbon {

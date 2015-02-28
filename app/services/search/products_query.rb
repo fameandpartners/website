@@ -6,15 +6,16 @@ module Search
   class ProductsQuery
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
-
-      query_string = options[:query]
+      
       limit        = options[:limit].present? ? options[:limit].to_i : 1000
+
+      query_string = Tire::Utils.escape(options[:query])
 
       if query_string.present?
         Tire.search(:spree_products, :load => { :include => :master }) do
           size  limit
           query do
-            string Tire::Utils.escape(query_string), :default_operator => 'AND' , :use_dis_max => true
+            string query_string, :default_operator => 'OR' , :use_dis_max => true
           end
           filter :bool, :must => { :term => { :deleted => false } }
           filter :bool, :must => { :term => { :hidden => false } }
