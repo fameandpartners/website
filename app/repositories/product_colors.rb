@@ -29,7 +29,8 @@ module Repositories
       end
 
       def read(id)
-        colors_map[id]
+        return nil if id.blank?
+        colors_map[id.to_i]
       end
 
       def get_by_name(color_name = nil)

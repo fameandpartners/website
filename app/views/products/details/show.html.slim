@@ -7,6 +7,7 @@ ruby:
           options: { animation: 'fade', play: 6000, preselected: null }
         },
         selector: {
+          product_id: #{ @product.id },
           custom_id: #{ @product.master_id },
           variants: #{raw @product.available_options.variants.serialize.to_json },
           container: '.product-section--selection',

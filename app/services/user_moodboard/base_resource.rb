@@ -3,17 +3,9 @@
 # usage:
 #   UserMoodboard::BaseResource.new(user: user).read
 #
+require File.join(Rails.root, 'app/presenters/user_moodboard/base_presenter.rb')
+
 module UserMoodboard; end
-
-class UserMoodboard::Moodboard < OpenStruct
-  def serialize
-    { 
-      item_count: item_count,
-      items: items.map{|item| item.marshal_dump }
-    }
-  end
-end
-
 class UserMoodboard::BaseResource
   attr_reader :site_version, :user
 
@@ -24,12 +16,12 @@ class UserMoodboard::BaseResource
   def read
     # guest user have no moodboard
     if user.blank?
-      ::UserMoodboard::Moodboard.new(
+      ::UserMoodboard::BasePresenter.new(
         item_count: 0,
         items: []
       )
     else
-      ::UserMoodboard::Moodboard.new(
+      ::UserMoodboard::BasePresenter.new(
         item_count: wishlist_items.size,
         items: wishlist_items
       )

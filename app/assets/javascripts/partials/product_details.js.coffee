@@ -40,7 +40,7 @@ page.initProductDetailsPage = (options = {}) ->
           color_id: selected.color_id,
           customizations_ids: selected.customizations_ids
           variant_id: (selected.variant || {})['id']
-        }        
+        }
         app.shopping_cart.addProduct(product_data)
         window.helpers.showAlert(message: 'Added to Cart', type: 'success')
     )
@@ -53,11 +53,23 @@ page.initProductDetailsPage = (options = {}) ->
     
   # init moodboard button
   if options.wishlistButton
-  	$(options.wishlistButton).on('click', (e) ->
+    $wishlist_button = $(options.wishlistButton)
+  	$wishlist_button.on('click', (e) ->
       e.preventDefault()
       status = selector.validate()
       if !status.valid
         window.helpers.showAlert(message: status.error)
       else
-        window.helpers.showAlert(message: 'Added to Moodboard', type: 'success')
+        selected = selector.getCurrentSelection()
+        wishlist_item_data = {
+          color_id: selected.color_id,
+          variant_id: (selected.variant || {})['id'],
+          product_id: selected.product_id
+        }
+        app.user_moodboard.addItem(wishlist_item_data)
+    )
+
+    selector.on('change', (event, data) ->
+      console.log('selector changed with', event, data)
+      console.log('show/hide moodboard button')
     )
