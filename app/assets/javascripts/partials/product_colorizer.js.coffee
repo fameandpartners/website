@@ -17,6 +17,8 @@ window.ProductColorizer = class ProductColorizer
   onClose: (data) =>
     $('.vex-content').addClass('no-scroll')
     $('body').removeClass('no-scroll')
+
+
     
   input: () =>
     @template(colors: @opts.colors, customColors: @opts.colors)
@@ -40,10 +42,15 @@ window.ProductColorizer = class ProductColorizer
 
     if data.price
       @$action.html("#{data.display} +#{data.price}")
+      @message = "You have selected a custom color, so we don't have a pic of this dress yet"
     else
       @$action.html(data.display)
 
     setTimeout(vex.close, 30)
+    setTimeout(@customColorAlert, 40)
+
+  customColorAlert: () =>
+    window.helpers.showAlert(message: @message) if @message 
     
   open: () =>
     $('body').addClass('no-scroll')
