@@ -16,24 +16,25 @@ ruby:
 .page-content.products-collections.category
   .container.relative.category-controls
     .row.relative
-      .col-md-3
+      .col-md-3.hidden-xs.hidden-xxs
         = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
-
-      .col-md-3
+        br
+      .col-md-3.hidden-xs.hidden-xxs
         = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
-
-      .col-md-3
+        br
+      .col-md-3.hidden-xs.hidden-xxs
         = select_tag :color, color_options, class: 'pink-select', prompt: 'Colour'
-
-      .col-md-3.product-order
+        br
+      .col-md-3.col-xs-12.col-xxs-12.product-order
         = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
+        br
 
   .container.relative.products-collection
     /! First Row - First four products
     =render :partial => 'products_four', :locals => { :products => @collection.products.slice(0, 4) }
 
     /! Second Row - Next two products
-    =render :partial => 'products_two_left', :locals => { :products => @collection.products.slice(3, 2) }
+    =render :partial => 'products_two_left', :locals => { :products => @collection.products.slice(3, 2), :title => 'Title', :content => @collection.details.description}
     
     /! The rest of the products
     - @collection.products.drop(6).each_slice(4) do |products|
