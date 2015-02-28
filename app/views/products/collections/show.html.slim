@@ -37,5 +37,5 @@ ruby:
     
     /! The rest of the products
     - @collection.products.drop(6).each_slice(4) do |products|
-      = render :partial => 'products_four', :locals => { :products => @collection.products.slice(0, 4) }
+      = render :partial => 'products_four', :locals => { :products => products }
 
