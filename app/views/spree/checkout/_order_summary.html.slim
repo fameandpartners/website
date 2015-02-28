@@ -9,14 +9,12 @@
   | console.log('fixme: shopping cart summary still static');
   /= raw shopping_cart_summary_init
 
-- @cart = UserCart::UserCartResource.new(order: current_order).read
-
 .checkout-items
   h3.text-center In The Bag
   br
   /h2 Order
   ul.cart-items
-    - (@cart.products || []).each do |product|
+    - (cart.products || []).each do |product|
       li
         = image_tag product.image.small, class: 'img-responsive pull-left cart-item-image'
         a.fa.fa-close.pull-right.link-grey.remove-product.delete-item href="#0" 
@@ -35,17 +33,17 @@
     hr
     p
       | Sub Total
-      span.pull-right = @cart.display_item_total.to_s
+      span.pull-right = cart.display_item_total.to_s
     p
       | Shipping
-      span.pull-right = @cart.display_shipment_total.present? ? @cart.display_shipment_total.to_s : 'Free Shipping'
+      span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
     p
       | Promotion
-      span.pull-right = @cart.display_promotion_total.to_s
+      span.pull-right = cart.display_promotion_total.to_s
     hr
     p
       strong
         | Total
-        span.pull-right = @cart.display_total.to_s
+        span.pull-right = cart.display_total.to_s
         - if current_site_version.is_australia?
           .taxes Including GST

@@ -17,4 +17,5 @@
       .col-md-4
         br
         br
-        = render 'spree/checkout/order_summary'
+        - cart = UserCart::UserCartResource.new(order: current_order).read
+        = render 'spree/checkout/order_summary', cart: cart

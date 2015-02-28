@@ -1,23 +1,29 @@
-.order-summary
-  .title Summary
-  .line
-    .label Subtotal
-    .value
-      = @order.display_item_total
-  .line
-    .label Shipping
-    .value
-      = show_order_shipment_total(@order)
-  .line
-    .label Promotion
-    .value
-      = show_order_promotion_total(@order)
-  .separator.light
-  .line.totals
-    .label Total
-    .value.pink
-      = @order.display_total
-    - if current_site_version.is_australia?
-      .taxes aus dollars including gst
-    - else
-      .taxes us dollars
+// copied from /spree/checkout/order_summary
+.checkout-items
+  h3.text-center Summary
+  br
+  ul.cart-items
+    - (cart.products || []).each do |product|
+      li
+        = image_tag product.image.small, class: 'img-responsive pull-left cart-item-image'
+        .cart-item--details.pull-left
+          span.qty = "#{ product.quantity}x"
+          = product.name
+          .checkout-price = product.price.display_price
+    hr
+    p
+      | Sub Total
+      span.pull-right = cart.display_item_total.to_s
+    p
+      | Shipping
+      span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
+    p
+      | Promotion
+      span.pull-right = cart.display_promotion_total.to_s
+    hr
+    p
+      strong
+        | Total
+        span.pull-right = cart.display_total.to_s
+        - if current_site_version.is_australia?
+          .taxes Including GST

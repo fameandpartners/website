@@ -1,4 +1,13 @@
 Spree::OrdersController.class_eval do
+  layout 'redesign/application', only: :show
+
+  # todo: merge order & user_cart => completed order resource
+  def show
+    @order = ::Spree::Order.find_by_number!(params[:id])
+    @user_cart = ::UserCart::UserCartResource.new(order: @order).read
+    respond_with(@order)
+  end
+
   # Shows the current incomplete order from the session
   def edit
     @order = current_order(true)
