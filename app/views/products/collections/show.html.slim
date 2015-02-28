@@ -29,20 +29,13 @@ ruby:
         = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
 
   .container.relative.products-collection
-    /! First Row
-    = @collection.products.each_slice(4) do |products|
-      .row.relative
-        - products.each do |product|
-          .col-md-3.col-xs-6.col-xxs-12.category--item
-            = link_to collection_product_path(product, color: product.color) do
-              = image_tag product.image, alt: product.name, class: 'img-responsive'
-            .details.text-center
-              span.name = product.name
-              span.price = product_price_with_discount(product.price, product.discount)
-              span.moodboard
-                sup +
-                | moodboard
-          - if product.fast_delivery
+    /! First Row - First four products
+    =render :partial => 'products_four', :locals => { :products => @collection.products.slice(0, 4) }
 
+    /! Second Row - Next two products
+    =render :partial => 'products_two_left', :locals => { :products => @collection.products.slice(3, 2) }
+    
+    /! The rest of the products
+    - @collection.products.drop(6).each_slice(4) do |products|
+      = render :partial => 'products_four', :locals => { :products => @collection.products.slice(0, 4) }
 
-        .clearfix.visible-sm-block.visible-xs-block
