@@ -38,9 +38,9 @@ ruby:
 #slides
   .slides-container
     // note: we should crop images & update images preloading mechanics - too slow currently
-    / = image_tag "bgimage.jpg"
-    - @product.images.first.tap do |image|
-      = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name
+    = image_tag "bgimage.jpg"
+    / - @product.images.first.tap do |image|
+    /   = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
 
   nav.slides-navigation
     a.next href="#"
@@ -63,7 +63,7 @@ ruby:
     .row
       - sizes = @product.available_options.sizes
       - if sizes.present?
-        select#product-size data-minimum-results-for-search='Infinity' data-prompt="Size"          
+        select#product-size data-minimum-results-for-search='Infinity' data-prompt="Size"
           - if sizes.default.present?
             optgroup label="Standard sizes"
               - sizes.default.each do |size|
@@ -80,7 +80,7 @@ ruby:
       - if colors.present?
         a#product-colorize-action.btn-customize
           | Color
-        
+
         select#product-color.hidden
           option value=""
           - if colors.default.present?
@@ -93,11 +93,11 @@ ruby:
               = color.presentation
           br
 
-    - if @product.customizable?          
-      .row    
+    - if @product.customizable?
+      .row
         a#product-customizations-action.btn-customize
           | Customize
-        
+
         select.customise-options#product-customizations.hidden
           option value=""
           - @product.customizations.all.each do |customization|
@@ -110,9 +110,19 @@ ruby:
       .col-md-4.fit-guide.icons
         h4 Fit Guide
       .col-md-4.love-it.icons
-        h4 Love It
+      	a.moodboard-button href="#"
+        	h4 Love It
       .col-md-4.share.icons
         h4 Share
+    .row
+      span class='st_facebook_custom' displayText='Facebook'
+        img src="facebook"
+      span class='st_pinterest_custom' displayText='Pinterest'
+        img src="pinterest"
+      span class='st_instagram_custom' displayText='Instagram Badge' st_username='fameandpartners'
+        img src="instagram"
+      span class='st_twitter_custom' st_via="fameandpartners" displayText='Tweet'
+        img src="twitter"
 
 /! About The Dress
 .dress-about.container.page-content

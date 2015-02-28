@@ -32,7 +32,7 @@ page.initProductDetailsPage = (options = {}) ->
       e.preventDefault()
       status = selector.validate()
       if !status.valid
-        window.helpers.showAlert(message: status.error, className: 'product-select-alert')
+        window.helpers.showAlert(message: status.error)
       else
         selected = selector.getCurrentSelection()
         product_data = {
@@ -46,11 +46,11 @@ page.initProductDetailsPage = (options = {}) ->
 
   # init moodboard button
   if options.wishlistButton
-    $(options.wishlistButton).on('click', (e) ->
+  	$(options.wishlistButton).on('click', (e) ->
       e.preventDefault()
       status = selector.validate()
       if !status.valid
-        window.helpers.showErrors($(e.currentTarget), status.error)
+        window.helpers.showAlert(message: status.error)
       else
-        console.log('toggle product wishlist state', selector.getCurrentSelection())
+        window.helpers.showAlert(message: 'Added to Moodboard', type: 'success')
     )

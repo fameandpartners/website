@@ -38,12 +38,11 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
 
 
   onChangeHandler: (e) =>
-    @selected = null
     @trigger('change', @getValue())
 
   # returns current value
-  getValue: () ->
-    @selected ||= @getCurrentSelection()
+  getValue: () ->    
+    @selected = @getCurrentSelection()
 
   getCurrentSelection: () ->
     selected = {
@@ -51,6 +50,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       color_id: @colorInput.val(),
       customizations_ids: @customizationsInput.val()
     }
+
     # if user don't selected size & color, then do nothing.
     return selected if (!selected.size_id || !selected.color_id)
 

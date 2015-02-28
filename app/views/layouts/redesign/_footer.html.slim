@@ -1,101 +1,98 @@
-/! Footer
-/.footer
-  .footer-menu.text-center
-    .container
-      ul
-        li = link_to 'FAQs', faqs_path
-        li = link_to 'Terms', terms_path
-        li = link_to 'Get Styling Advice', style_consultation_path
-        li = link_to 'The Fame Team', about_us_path
-        li = link_to 'Why Shop With Us', why_us_path
-        li = link_to 'Fashionista', fashionista_winner_path
-        li = link_to 'Fame Chain', fame_chain_path
-        / li = link_to 'Contact', '#'
-      br
-      br
-      .row
-        .col-md-3
-          p.text-grey Australia
-        .col-md-6
-          small.text-grey 
-            | © 2015 FAME &amp; PARTNERS. All Rights Reserved
-        .col-md-3
-          Icons
+/ footer
+/   .footer-menu.text-center
+/     .container
+/       ul
+/         li = link_to 'Why Shop With Us', why_us_path
+/         li = link_to 'The Fame Team', about_us_path
+/         li = link_to 'FAQs', faqs_path
+/         li = link_to 'Terms', terms_path
+/         li = link_to 'Get Styling Advice', style_consultation_path
+
+/         li = link_to 'Fashionista', fashionista_winner_path
+/         li = link_to 'Fame Chain', fame_chain_path
+/         / li = link_to 'Contact', '#'
+/       .row
+/         .col-md-3
+/           p.text-grey Australia
+/         .col-md-6
+/           small.text-grey
+/             | &copy; 2015 FAME &amp; PARTNERS. All rights reserved.
+/         .col-md-3
+/           Icons
 
 /! Footer 2
-.footer
+footer
   .container
-    /! Logo
-    .footer-logo
-      = image_tag "images/dark-logo.svg", alt: "Fame & Partners"
+    .row.footer-navigation
+      .col-md-3
+        .footer-logo
 
-    /! Navigation
-    .footer-navigation
-      .row
-        .col-md-3
-          
-          = render 'layouts/redesign/address'
+        = render 'layouts/redesign/address'
 
-          .btn-group
-            button.btn.btn-dropdown.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button"             
-              = current_site_version.abbr.upcase
-              span.caret
-            ul.dropdown-menu role="menu" 
-              - if !current_site_version.is_australia?
-                li
-                  = link_to site_version_path('au', backlink: get_hreflang_link) do
-                    | AU
+      .col-md-3.col-md-offset-3
+        ul.footer-nav
+          li.footer-nav--item
+            = link_to 'Why Shop With Us', why_us_path
+          li.footer-nav--item
+            = link_to 'The Fame Team', about_us_path
+          li.footer-nav--item
+            = link_to 'FAQs', faqs_path
+          li.footer-nav--item
+             = link_to 'Terms', terms_path
+          li.footer-nav--item
+            = link_to 'Get styling advice', style_consultation_path
+      .col-md-3
+        ul.footer-nav
+          li.footer-nav--item
+            = link_to 'Fashionista program', fashionista_winner_path
+          li.footer-nav--item
+            = link_to 'Fame Chain', fame_chain_path
+
+    .row
+      .col-md-3
+        .btn-group
+          button.btn.btn-dropdown.dropdown-toggle.location aria-expanded="false" data-toggle="dropdown" type="button"
+            = current_site_version.abbr.upcase
+            span.caret
+          ul.dropdown-menu role="menu"
+            - if !current_site_version.is_australia?
+              li
+                = link_to site_version_path('au') do
+                  | AU
 
               - if !current_site_version.is_usa?
                 li
-                  = link_to site_version_path('us', backlink: get_hreflang_link) do
+                  = link_to site_version_path('us') do
                     | US
+      .col-md-6
+        p
+          | &copy;&nbsp;
+          = Time.now.year
+          | &nbsp;Fame &amp; Partners. All rights reserved.
 
-          br
-          br
+      .col-md-3
+        ul.footer-social
+          li.footer-social--item
+            span class='st_facebook_custom' displayText='Facebook'
+              = image_tag '_icons/facebook.png'
+          li.footer-social--item
+            span class='st_pinterest_custom' displayText='Pinterest'
+              = image_tag '_icons/pinterest.png'
+          li.footer-social--item
+            span class='st_instagram_custom' displayText='Instagram Badge' st_username='fameandpartners'
+              = image_tag '_icons/instagram.png'
+          li.footer-social--item
+            span class='st_twitter_custom' st_via="fameandpartners" displayText='Tweet'
+              = image_tag '_icons/twitter.png'
 
-        .col-md-3
-          ul.footer-nav
-            li.footer-nav--item 
-              = link_to 'Why Shop With Us', why_us_path
-            li.footer-nav--item
-              = link_to 'The Fame Team', about_us_path
-        .col-md-3
-          ul.footer-nav
-            li.footer-nav--item
-              = link_to 'FAQs', faqs_path
-            li.footer-nav--item
-               = link_to 'Terms', terms_path
-            li.footer-nav--item
-              = link_to 'Get styling advice', style_consultation_path
-        .col-md-3
-          ul.footer-nav
-            li.footer-nav--item
-              = link_to 'Fashionista program', fashionista_winner_path
-            li.footer-nav--item
-              = link_to 'Fame Chain', fame_chain_path
 
-          br
-          ul.footer-social
-            li.footer-social--item
-              = link_to configatron.links.instagram, target: :blank do
-                span.fa.fa-2x.fa-instagram
-            li.footer-social--item
-              = link_to configatron.links.facebook, target: :blank do
-                span.fa.fa-2x.fa-facebook
-            li.footer-social--item
-              = link_to configatron.links.twitter, target: :blank do
-                span.fa.fa-2x.fa-twitter
-            li.footer-social--item
-              = link_to configatron.links.pinterest, target: :blank do
-                span.fa.fa-2x.fa-pinterest
 
-    .footer-details.hidden-xs
-      .footer-details-text.pull-left
-        p.lighter-text
-          small
-            | © 2015 FAME & PARTNERS. All rights reserved.
-      
+    / .footer-details.hidden-xs
+    /   .footer-details-text.pull-left
+    /     p.lighter-text
+    /       small
+    /         | &copy; 2015 FAME &amp; PARTNERS. All rights reserved.
+
       / .pull-right.no-float-mobile
       /   ul.footer-details-nav
       /     li.footer-details-nav--item

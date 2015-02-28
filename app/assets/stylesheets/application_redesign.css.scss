@@ -26,6 +26,8 @@
 @import 'redesign/index';
 @import 'redesign/typography';
 @import 'redesign/header';
+@import 'redesign/footer';
+
 
 .standard-form {
   height: 60px;
@@ -88,6 +90,20 @@
       width: 50%;
       float: left;
   }
+}
+
+
+// Flash Message Panel
+.vex.vex-theme-bottom-right-corner {
+	.alert.vex-content {
+		margin-bottom: 0;	
+		text-align:right;
+		width:100%;
+		z-index:9999; // display on top of mobile menu
+		.vex-dialog-buttons {
+			display:none;
+		}
+	}
 }
 
 /*
