@@ -54,6 +54,10 @@
     background-color: #f6e1d5;
 }
 
+.brand-pink {
+  background-color:#eeddf0;
+}
+
 .pink-light {
   background-color: #f8ece9;
 }
@@ -62,38 +66,8 @@
   background-color: #fbf5f3
 }
 
-.col-xs-5,
-.col-sm-5,
-.col-md-5,
-.col-lg-5 {
-    position: relative;
-    min-height: 1px;
-    padding-right: 10px;
-    padding-left: 10px;
-    width: 20%;
-    float: left;
-}
-
-.col-md-5 {
-
-  @media (min-width: 1200px) {
-    width: 20%;
-    float: left;
-  }
-
-  @media (max-width: 992px) {
-    width: 33.33%;
-    float: left;
-  }
-
-  @media (max-width: 768px) {
-      width: 50%;
-      float: left;
-  }
-}
-
-.vex.vex-theme-flat-attack {  
-  .vex-content { 
+.vex.vex-theme-flat-attack {
+  .vex-content {
     border:2px solid black;
     border-top:20px solid black;
   }
@@ -109,7 +83,7 @@
     color:black;
   }
 	.alert.vex-content {
-		margin-bottom: 0;	
+		margin-bottom: 0;
 		text-align:right;
 		width:100%;
 		z-index:9999; // display on top of mobile menu
