@@ -1,6 +1,7 @@
 // our code
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require jquery-fileupload/vendor/jquery.ui.widget
 //= require jquery-fileupload/jquery.iframe-transport
 //= require jquery-fileupload/jquery.fileupload
@@ -21,8 +22,11 @@
 //= require js/jquery.skippr.min.js
 //= require js/classie.js
 //= require js/alert.js
+//= require js/affix.js
 // require js/main.js
 // require js/sg-scripts.js
+//
+//= require js/card.js
 
 //= require js/functions.js
 //= require js/superslides.js
@@ -31,6 +35,7 @@
 //= require helpers
 //= require partials/helpers/site_version
 //= require partials/helpers/alert
+//= require partials/helpers/modal
 //= require popups/style_quiz
 //= require partials/product_collection.js
 //= require partials/product_customisation.js
@@ -49,6 +54,8 @@
 //= require partials/helpers/user_moodboard
 //= require partials/shopping_bag
 //= require templates/shopping_bag
+
+//= require partials/checkout_page
 
 // Profile/Account Settings
 //= require partials/account_settings_page

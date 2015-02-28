@@ -13,7 +13,9 @@ ruby:
           preselected: { }
         },
         buyButton: '.buy-button',
-        wishlistButton: '.moodboard-button'
+        wishlistButton: '#add-to-moodboard',
+        fitguideButton: '#fit-guide',
+        fitguideContainer: '#fit-guide-content'
       });
   "
 
@@ -107,22 +109,24 @@ ruby:
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
     .row
-      .col-md-4.fit-guide.icons
-        h4 Fit Guide
-      .col-md-4.love-it.icons
-      	a.moodboard-button href="#"
-        	h4 Love It
-      .col-md-4.share.icons
-        h4 Share
+      .col-md-6.col-xs-6.col-xxs-12
+        button#fit-guide.btn.btn-block.btn-secondary Fit Guide
+        br
+
+      .col-md-6.col-xs-6.col-xxs-12
+        button#add-to-moodboard.btn.btn-block.btn-secondary +Moodboard
+        br
+
     .row
       span class='st_facebook_custom' displayText='Facebook'
-        img src="facebook"
+        = image_tag '_icons/facebook.png'
       span class='st_pinterest_custom' displayText='Pinterest'
-        img src="pinterest"
+        = image_tag '_icons/pinterest.png'
       span class='st_instagram_custom' displayText='Instagram Badge' st_username='fameandpartners'
-        img src="instagram"
+        = image_tag '_icons/instagram.png'
       span class='st_twitter_custom' st_via="fameandpartners" displayText='Tweet'
-        img src="twitter"
+        = image_tag '_icons/twitter.png'
+
 
 /! About The Dress
 .dress-about.container.page-content
@@ -175,6 +179,9 @@ ruby:
       p.sku sku: #{@product.sku}
 
 hr
+
+#fit-guide-content.hidden
+  | THIS IS THE SIZING GUIDE
 
 /! More Dresses
 - if @product.recommended_products.present?

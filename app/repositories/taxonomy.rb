@@ -95,7 +95,7 @@ class Repositories::Taxonomy
         if taxon.banner.present?
           result.banner.title       = taxon.banner.title
           result.banner.description = taxon.banner.description
-          result.banner.image       = taxon.banner.image(:url)
+          result.banner.image       = taxon.banner.image.present? ? taxon.banner.image(:url) : nil
         end
         all_taxons.push(result)
       end

@@ -20,7 +20,7 @@ class Repositories::ProductMoodboard
   private
 
   def convert_item(item)    
-    OpenStruct.new(image_url: item.image.url, source: item.source)
+    OpenStruct.new(image_url: item.try(:image).try(:url), source: item.try(:source))
   end
 
   def moodboard_items

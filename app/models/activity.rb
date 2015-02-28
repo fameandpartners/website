@@ -88,6 +88,8 @@ class Activity < ActiveRecord::Base
         activity.session_key = session_key
       end
       activity.save
+    rescue Exception => e
+      # do nothing
     end
 
     def log_quiz_started(quiz, user)

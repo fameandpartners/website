@@ -44,6 +44,12 @@ page.initProductDetailsPage = (options = {}) ->
         app.shopping_cart.addProduct(product_data)
     )
 
+  if options.fitguideButton
+    $(options.fitguideButton).on('click', (e) ->
+      e.preventDefault()
+      window.helpers.showModal(title: 'Size Guide', container: options.fitguideContainer)
+    )
+    
   # init moodboard button
   if options.wishlistButton
   	$(options.wishlistButton).on('click', (e) ->

@@ -91,7 +91,7 @@ $('.checkout.edit').ready ->
       page.updateDatepicker()
       page.updatePayButtonAvailability()
       page.updateAddressFormVisibility()
-      $('.selectbox').not('.chosen-container').chosen()
+      #$('.selectbox').not('.chosen-container').chosen()
 
     updateShippingFormVisibility: () ->
       if $('#order_use_billing').is(':checked')
