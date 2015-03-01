@@ -22,9 +22,7 @@ ruby:
 
   init_product_customization = "
       new ProductCustomisation({
-        message: 'Customize Your Dress',
-        customizations: #{ @product.customization_options.to_json }
-      });
+       });
 
       new ProductColorizer({
         action:  '#product-colorize-action',
@@ -66,6 +64,8 @@ ruby:
     .row
       - sizes = @product.available_options.sizes
       - if sizes.present?
+        a#product-size-action.btn-customize Size
+
         select#product-size data-minimum-results-for-search='Infinity' data-prompt="Size"
           - if sizes.default.present?
             optgroup label="Standard sizes"
@@ -185,6 +185,37 @@ hr
 
 #fit-guide-content.hidden
   | THIS IS THE SIZING GUIDE
+
+#product-overlay
+#product-customizations-content
+
+  .row
+    .col-md-12
+      h2 Customize Your Dress
+  .row
+    .col-md-12
+      ul.list-group
+        a.customization-option.list-group-item href="#" data-id="original"
+          .row
+            .col-md-4.col-xs-12
+              .row       
+            .col-md-8.col-xs-12  
+              .row
+                span.option-name Original
+                span.option-price +0
+            br
+        - @product.customization_options.each do |option|
+          a.customization-option.list-group-item href="#" data-id=option.id data-name=option.name data-price=option.display_price
+            .row
+              .col-md-4.col-xs-12
+                .row
+                  = image_tag option.image, :width => 140, :height => 140, :alt => ''
+              .col-md-8.col-xs-12  
+                .row
+                  span.option-namep= option.name
+                  span.option-price= "+#{option.display_price}"
+            br    
+
 
 /! More Dresses
 - if @product.recommended_products.present?

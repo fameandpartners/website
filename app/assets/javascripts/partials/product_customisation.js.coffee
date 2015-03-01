@@ -7,20 +7,18 @@ window.ProductCustomisation = class ProductCustomisation
 
   constructor: (opts = {}) ->        
     @opts = opts
-    @$action = $('#product-customizations-action')
-    @$action.on('click', @open)
+    @$action = $('#product-customizations-action').on('click', @open)
+    @$container = $('#product-customizations-content')
     @$select = $('#product-customizations')
+    @$overlay = $('#product-overlay').on('click', @close)
     
-  onClose: (data) =>
-    $('.vex-content').addClass('no-scroll')
+  close: (data) =>
+    @$container.removeClass('speed-in')
+    @$overlay.removeClass('is-visible')
     $('body').removeClass('no-scroll')
-
-  input: () =>
-    @template(customizations: @opts.customizations)
 
   bind: () => 
     selectedId = @$select.val()
-    console.log selectedId 
     if selectedId 
       $(".customization-option[data-id='#{selectedId}']").toggleClass('active')
     else
@@ -39,23 +37,27 @@ window.ProductCustomisation = class ProductCustomisation
       @$select.find('option:selected').removeAttr('selected');
     else       
       @$select.val(id)
-      data = _.find(@opts.customizations, (o) => 
-        o.id == id
-      );      
-      @$action.html("#{data.name} +#{data.price}") if data
+      name = $el.data('name')
+      price = $el.data('price')
+      @$action.html("#{name} +#{price}")
 
-    setTimeout(vex.close, 30)
+    setTimeout(@close, 50)
     
 
-  open: () =>
-    $('body').addClass('no-scroll')
-    vex.defaultOptions.className = 'vex-theme-flat-attack';
-    vex.dialog.open
-      message:    @opts.message
-      input:      @input
-      afterOpen:  @bind 
-      callback:   @onClose
-      className: 'vex vex-theme-flat-attack product-customizations side-panel'
+  open: () =>  
+    @$container.addClass('speed-in') 
+    @$overlay.addClass('is-visible')
+    
+    @bind()
+
+
+    # vex.defaultOptions.className = 'vex-theme-flat-attack';
+    # vex.dialog.open
+    #   message:    @opts.message
+    #   input:      @input
+    #   afterOpen:  @bind 
+    #   callback:   @onClose
+    #   className: 'vex vex-theme-flat-attack product-customizations side-panel'
 
 
   # defaultOptions:

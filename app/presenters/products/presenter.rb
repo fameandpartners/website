@@ -28,7 +28,8 @@ module Products
 
     def customization_options
       if customizable?
-        customizations.all.collect { |c| {id: c.id, name: c.name, price: c.display_price.to_s} }   
+        customizations.all
+        #.collect { |c| {id: c.id, name: c.name, price: c.display_price.to_s} }   
       else
         []
       end
