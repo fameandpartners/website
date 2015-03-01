@@ -21,7 +21,7 @@ window.ProductColorizer = class ProductColorizer
 
     
   input: () =>
-    @template(colors: @opts.colors, customColors: @opts.colors)
+    @template(colors: @opts.colors, customColors: @opts.customColors)
 
   bind: () => 
     selectedId = @$select.val()
