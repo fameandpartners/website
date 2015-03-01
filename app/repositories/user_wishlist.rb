@@ -1,3 +1,5 @@
+# obsoleted. reason - it caches not wishlist, but wishlist items
+=begin
 module Repositories
 class UserWishlist
   attr_reader :owner, :site_version
@@ -8,30 +10,18 @@ class UserWishlist
   end
 
   def read
-    Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
-      OpenStruct.new({
-        owner_name: owner.full_name,
-        owner_id: owner.id,
-        items: wishlist_items.map{ |item| build_item(item) }
-      })
-    end
+    OpenStruct.new({
+      owner_name: owner.full_name,
+      owner_id: owner.id,
+      items: wishlist_items.map{ |item| build_item(item) }
+    })
   end
 
   def drop_cache
-    Rails.cache.delete(cache_key)
+    #Rails.cache.delete(cache_key)
   end
 
   private
-
-    def cache_key
-      "user-wishlist-#{ owner.id }"
-    end
-
-    def cache_expiration_time
-      return configatron.cache.expire.quickly if Rails.env.development?
-      return configatron.cache.expire.quickly if Rails.env.staging?
-      return configatron.cache.expire.long
-    end
 
     def currency
       site_version.currency.downcase
@@ -55,40 +45,34 @@ class UserWishlist
         variant_id: variant_id,
         variants: [item.spree_variant_id],
         color: color,
-        color_customizable: products_with_color_customisation.include?(item.spree_product_id),
+        #color_customizable: products_with_color_customisation.include?(item.spree_product_id),
         quantity: item.quantity,
         permalink: item.product.permalink,
         fast_delivery: item.product.fast_delivery,
         image_url: product_image(item.product, color),
-        price: product_price(item)
+        price: product_price(item.product)
       )
     end
 
     def product_color(item)
       if item.product_color_id.present?
-        color = Spree::OptionValue.find(item.product_color_id)
-        return OpenStruct.new(id: color.id, name: color.name, presentation: color.presentation)
+        Repositories::ProductColors.read(item.product_color_id)
+      elsif color = item.variant.dress_color
+        Repositories::ProductColors.read(color.id)
       end
-
-      color = item.variant.dress_color
-      if color.present?
-        return OpenStruct.new(id: color.id, name: color.name, presentation: color.presentation)
-      end
-
-      nil
     end
 
     def product_image(product, color)
-      product_images = Repositories::ProductImages.new(product: product).read_all
-      image = nil
-      if color.try(:id).present?
-        image = product_images.find{|image| image.color_id == color.id }.try(:large) 
+      options = {}
+      if color.present?
+        options[:color_id] = color.id
       end
-      image ||= product_images.first.try(:large)
+      image = Repositories::ProductImages.new(product: product).read(options)
+      image.large
     end
 
     def product_price(item)
-      item.product.master.zone_price_for(site_version)
+      Repositories::ProductPrice.new(product: product, site_version: site_version).read
     end
 
     def products_with_color_customisation
@@ -103,3 +87,4 @@ class UserWishlist
     end
 end
 end
+=end

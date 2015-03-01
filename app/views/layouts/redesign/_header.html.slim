@@ -1,13 +1,24 @@
 ruby:
   init_items_counter_sync = "
-    $counter = $('#cart-trigger');
-    window.app.shopping_cart.on('changed', function() {
-      $counter.find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
-    });
+    (function(){
+      $counter = $('#cart-trigger');
+      window.app.shopping_cart.on('changed', function() {
+        $counter.find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
+      });
+    })();
+  "
+  init_moodboard_counter_sync = "
+    (function(){
+      $counter = $('#moodboard-counter');
+      window.app.user_moodboard.on('changed', function() {
+        $counter.html('Moodboard: ' + window.app.user_moodboard.data.item_count);
+      });
+    })();
   "
 
 = content_for :inline_javascript do
   = raw init_items_counter_sync
+  = raw init_moodboard_counter_sync
 
 header
   .nav-menu.nav-alert-top
@@ -103,20 +114,22 @@ header
                         li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=60', title: 'All Dresses 60% off'
                         li.mega-menu-list--item= link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
 
-        li.menu-item.hide
-          = link_to 'style quiz', '', class: 'menu-item--link'
+        - if Features.active?(:style_quiz)                        
+          li.menu-item
+            = link_to 'style quiz', '', class: 'menu-item--link'
 
         li.menu-item
           = link_to 'Blog', blog_path, class: 'menu-item--link'
 
       ul.secondary.pull-right
-        li.menu-item.hidden-xs.hidden-sm
-          = link_to wishlist_path, class: 'menu-item--link' do
-            span.visible-sm
-              = image_tag "images/Heart.svg"
-            span.hidden-sm.hidden-xs
-              | Moodboard:&nbsp;
-              = "#{ current_user_moodboard.item_count }"
+        - if Features.active?(:moodboard) || current_user_moodboard.items.any?
+            li.menu-item.hidden-xs.hidden-sm
+              = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
+                span.visible-sm
+                  = image_tag "images/Heart.svg"
+                span.hidden-sm.hidden-xs#moodboard-counter
+                  | Moodboard:&nbsp;
+                  = "#{ current_user_moodboard.item_count }"
         li.menu-item
           = link_to profile_path, class: 'menu-item--link' do
             | my account

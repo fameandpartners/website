@@ -12,7 +12,8 @@ window.helpers or= {}
 window.helpers.ProductVariantsSelector = class ProductVariantsSelector
   constructor: (options = {}) ->
     @$container = $(options.container)
-    @custom   = { id: options.custom_id, count_on_hand: 0, fast_delivery: false, available: true }
+    @product_id = options.product_id
+    @custom   = { id: options.custom_id, product_id: @product_id, count_on_hand: 0, fast_delivery: false, available: true }
     @variants = options.variants
     @selected = options.preselected || {}
 
@@ -41,14 +42,15 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @trigger('change', @getValue())
 
   # returns current value
-  getValue: () ->    
+  getValue: () ->
     @selected = @getCurrentSelection()
 
   getCurrentSelection: () ->
     selected = {
       size_id: @sizeInput.val(),
       color_id: @colorInput.val(),
-      customizations_ids: @customizationsInput.val()
+      customizations_ids: @customizationsInput.val(),
+      product_id: @product_id
     }
 
     # if user don't selected size & color, then do nothing.

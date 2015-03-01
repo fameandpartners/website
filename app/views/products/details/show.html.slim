@@ -7,6 +7,7 @@ ruby:
           options: { animation: 'fade', play: 6000, preselected: null }
         },
         selector: {
+          product_id: #{ @product.id },
           custom_id: #{ @product.master_id },
           variants: #{raw @product.available_options.variants.serialize.to_json },
           container: '.product-section--selection',
@@ -52,7 +53,7 @@ ruby:
 
 /! Product Section
 .container.product-content.text-center
-  .col-md-3.product-details.product-section--selection
+  .col-md-4.product-details.product-section--selection.no-padding
     .row
       h2 = @product.name
       p.product-section-description = @product.short_description
@@ -108,13 +109,15 @@ ruby:
 
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
-    .row
+    
+    .row.secondary-actions
       .col-md-6.col-xs-6.col-xxs-12
         button#fit-guide.btn.btn-block.btn-secondary Fit Guide
         br
 
       .col-md-6.col-xs-6.col-xxs-12
-        button#add-to-moodboard.btn.btn-block.btn-secondary +Moodboard
+        - if Features.active?(:moodboard)
+          button#add-to-moodboard.btn.btn-block.btn-secondary +Moodboard
         br
 
     .row
@@ -139,7 +142,7 @@ ruby:
         - first_row = @product.inspiration.first
         - second_row = @product.inspiration.last
         .row
-          .box.song.col-sm-4.no-padding
+          .box.song.col-sm-4.no-padding.pink
             - if @product.song
               / = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
               = link_to '#', data: { action: 'soundcloud' } do
@@ -152,14 +155,14 @@ ruby:
                   span.icon-pause.fa.fa-play
 
           - first_row.each do |item|
-            .box.col-sm-4.no-padding
+            .box.col-sm-4.no-padding.cream
               = image_tag item.image_url
         .row
-          .box.col-sm-4.no-padding
+          .box.col-sm-4.no-padding.pink-light
             - if @product.celebrity
               = image_tag @product.celebrity.image_url
           - second_row.each do |item|
-            .box.col-sm-4.no-padding
+            .box.col-sm-4.no-padding.cream
               = image_tag item.image_url
 
     .col-md-6.col-sm-12

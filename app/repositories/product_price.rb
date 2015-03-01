@@ -23,6 +23,7 @@ class Repositories::ProductPrice
   end
 
   def read
+    # product.master.zone_price_for(site_version) ?
     product.zone_price_for(site_version)
   end
 

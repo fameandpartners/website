@@ -14,7 +14,7 @@
     user:   { id: <%= current_spree_user.present? ? current_spree_user.id : 'null' %> },
     site_version: {  name: '<%= current_site_version.try(:name) %>' },
     shopping_cart: new helpers.ShoppingCart({}),
-    moodboard: new helpers.UserMoodboard(moodboard_data)
+    user_moodboard: new helpers.UserMoodboard(moodboard_data)
   };
 
   $(document).ready(function() {
