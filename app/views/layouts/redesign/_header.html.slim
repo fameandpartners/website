@@ -86,7 +86,7 @@ header
                       li.mega-menu-list--item= link_to 'Strapless', build_taxon_path('Strapless'), title: "Strapless Dresses"
                       li.mega-menu-list--item= link_to 'V-Neck', build_taxon_path('V-Neck'), title: "V-Neck Dresses"
                       li.mega-menu-list--item= link_to 'Split', build_taxon_path('Split'), title: "Split Dresses"
-                      li.mega-menu-list--item= link_to 'Open Back', build_taxon_path('Open-Back'), title: "Open Back Dresses"
+                      li.mega-menu-list--item= link_to 'Backless', build_taxon_path('Open-Back'), title: "Open Back Dresses"
                       li.mega-menu-list--item= link_to 'Lace', build_taxon_path('Lace'), title: "Lace Dresses"
 
                   .col-md-3.col-lg-2
@@ -114,7 +114,7 @@ header
                         li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=60', title: 'All Dresses 60% off'
                         li.mega-menu-list--item= link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
 
-        - if Features.active?(:style_quiz)                        
+        - if Features.active?(:style_quiz)
           li.menu-item
             = link_to 'style quiz', '', class: 'menu-item--link'
 
