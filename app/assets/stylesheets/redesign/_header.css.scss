@@ -37,6 +37,7 @@
 .link-header {
 	font-size: 1.5rem;
 }
+
 .mega-menu-list--item a{
 	text-transform: capitalize;
 	font-weight: 500;
@@ -52,6 +53,7 @@
 	padding-right: 0;
 	padding-left: 0;
 }
+
 .mega-menu--main:after, .mega-menu--main:before {
 	bottom: 100%;
 	left: 333px;
@@ -98,4 +100,8 @@
 .box {
 	background-image: url('_icons/box.png');
 	width: 31px;
+}
+
+.nav-menu .primary li.menu-item .menu-item--link:hover, .nav-menu .secondary li.menu-item .menu-item--link:hover {
+	color: black;
 }
