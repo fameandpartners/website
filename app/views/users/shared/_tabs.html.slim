@@ -3,11 +3,14 @@
 ul.nav.nav-tabs
   li class=( %w{profiles account_settings}.include?(active_tab.to_s) ? 'active' : '')
     = link_to 'Account Settings', profile_path, remote: true
-  li class=( %w{wishlist wishlist_items}.include?(active_tab.to_s) ? 'active' : '')
-    = link_to 'My Moodboard', wishlist_path, remote: true
+  
+  - if Features.active?(:moodboard) || current_user_moodboard.items.any?
+    li class=( %w{wishlist wishlist_items}.include?(active_tab.to_s) ? 'active' : '')
+      = link_to 'My Moodboard', wishlist_path, remote: true
   li class=( %w{orders order}.include?(active_tab.to_s) ? 'active' : '')
     = link_to 'My Orders', user_orders_path, remote: true
   /li class=( %w{reviews}.include?(active_tab.to_s) ? 'active' : '')
   /  = link_to 'My Reviews', reviews_path, remote: true
-  li class=( %w{styleprofile styleprofiles}.include?(active_tab.to_s) ? 'active' : '')
-    = link_to 'My Style Profile', styleprofile_path, remote: true
+  - if Features.active?(:style_quiz)
+    li class=( %w{styleprofile styleprofiles}.include?(active_tab.to_s) ? 'active' : '')
+      = link_to 'My Style Profile', styleprofile_path, remote: true

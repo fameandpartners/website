@@ -115,7 +115,8 @@ ruby:
         br
 
       .col-md-6.col-xs-6.col-xxs-12
-        button#add-to-moodboard.btn.btn-block.btn-secondary +Moodboard
+        - if Features.active?(:moodboard)
+          button#add-to-moodboard.btn.btn-block.btn-secondary +Moodboard
         br
 
     .row

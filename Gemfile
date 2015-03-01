@@ -69,6 +69,8 @@ gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :
 # replacement for standart library.
 gem 'addressable', require: false
 
+gem 'rollout'
+
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'
