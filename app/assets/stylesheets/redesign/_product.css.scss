@@ -50,7 +50,7 @@ z.list-group-item.customization-option  {
 
 .product-details {
 	float: right;
-	margin-right: 8rem;	
+	margin-right: 8rem;
 }
 
 #product-size, #product-color, #product-customizations {
@@ -64,7 +64,7 @@ z.list-group-item.customization-option  {
 	height: 4.45rem;
 	color: black;
 	display:block;
-	
+
 	&:hover {
 		color: black;
 	}
@@ -126,7 +126,6 @@ z.list-group-item.customization-option  {
 	height:4.5rem !important ;
 }
 
-
 .remove-selection {
 	float:right;
 	padding-right: 1rem;
@@ -150,7 +149,6 @@ z.list-group-item.customization-option  {
 	z-index:9999; // display on top of mobile menu
 }
 
-
 .vex.vex-theme-flat-attack.side-panel {
 	.vex-content {
 		position:fixed;
@@ -161,7 +159,7 @@ z.list-group-item.customization-option  {
 		z-index:9999; // display on top of mobile menu
 		max-height:100%;
 		overflow-y: auto;
-    
+
     border-top:0px solid #000000;
     border-bottom:0px solid #000000;
     border-right:0 solid #000000;
@@ -191,13 +189,13 @@ z.list-group-item.customization-option  {
 
 	a.color-option {
     display:block;
-		color:#000000;	
+		color:#000000;
     margin-bottom:10px;
 	}
 
   a.color-option {
     display:block;
-    color:#000000;    
+    color:#000000;
   }
 
 	a.color-option.active {
@@ -216,7 +214,7 @@ z.list-group-item.customization-option  {
 			background-color:#CCCCCC;
 			margin:0;
       padding:0;
-		}	
+		}
 
     .color-name {
       display:block;
@@ -254,15 +252,15 @@ z.list-group-item.customization-option  {
 
 .secondary-actions {
 	.col-md-6 {
-		padding:0; 
+		padding:0;
 	}
 
   .col-md-6:first-child {
-    padding-right:10px; 
+    padding-right:10px;
   }
 
   .col-md-6:last-child {
-    padding-left:10px; 
+    padding-left:10px;
   }
 
 }
@@ -295,10 +293,10 @@ z.list-group-item.customization-option  {
   position: fixed;
   top: 0;
   background-color:#FFFFFF;
-  
+
   .option-price {
   	margin-left:0.5em;
-  }	
+  }
 
   a.active {
   	background-color:#000000;
