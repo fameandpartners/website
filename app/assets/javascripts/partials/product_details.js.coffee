@@ -69,7 +69,34 @@ page.initProductDetailsPage = (options = {}) ->
         app.user_moodboard.addItem(wishlist_item_data)
     )
 
-    selector.on('change', (event, data) ->
-      console.log('selector changed with', event, data)
-      console.log('show/hide moodboard button')
+    updateWishlistButtonState = () ->
+      data = selector.getCurrentSelection()
+      if app.user_moodboard.contains({ product_id: data.product_id, color_id: data.color_id })
+        $wishlist_button.attr('disabled', true)
+      else
+        $wishlist_button.removeAttr('disabled')
+
+    selector.on('change', updateWishlistButtonState)
+    app.user_moodboard.on('change', updateWishlistButtonState)
+    updateWishlistButtonState() # set current state
+
+  # recommended dreses - add to moodboard button functionality
+  if options.moodboard_links
+    addProductToMoodboardHandler = (e) ->
+      e.preventDefault()
+      product_id = $(e.currentTarget).closest('div[data-id]').data('id')
+      app.user_moodboard.addItem({ product_id: product_id })
+
+    refreshButtonsState = (e) ->
+      $(options.moodboard_links.container).find(options.moodboard_links.buttons).each((index, item) ->
+        product_id = $(item).closest('div[data-id]').data('id')
+        if app.user_moodboard.contains({ product_id: product_id })
+          $(item).addClass('fa-heart').removeClass('fa-heart-o')
+        else
+          $(item).removeClass('fa-heart').addClass('fa-heart-o')
+      )
+
+    $(options.moodboard_links.container).on(
+      'click', options.moodboard_links.buttons, addProductToMoodboardHandler
     )
+    app.user_moodboard.on('change', refreshButtonsState)

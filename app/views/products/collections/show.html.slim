@@ -1,5 +1,19 @@
+ruby:
+  init_collection_filter = "
+    filter = new ProductCollectionFilter({
+      controls: '.category .category-controls',
+      content: '.category .products-collection'
+    });
+  "
+  init_product_collection_moodboard_links = "
+    initProductCollectionMoodboardLinks({
+      container: '.category .products-collection',
+      buttons:   'span.moodboard'
+    });
+  "
 = content_for :inline_javascript do
-  | filter = new ProductCollectionFilter('.category .category-controls', '.category .products-collection');
+  = raw init_collection_filter
+  = raw init_product_collection_moodboard_links
 
 ruby:
   style_options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style.try(:permalink))

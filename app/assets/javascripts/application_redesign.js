@@ -52,6 +52,7 @@
 // shopping cart & bag & moodboard
 //= require partials/helpers/shopping_cart
 //= require partials/helpers/user_moodboard
+//= require partials/product_collection_moodboard_links
 //= require partials/shopping_bag
 //= require templates/shopping_bag
 

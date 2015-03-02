@@ -16,13 +16,13 @@ window.helpers.ShoppingCart = class ShoppingCart
   updateData: (data) =>
     @loaded = true
     @data = data
-    @trigger('changed')
+    @trigger('change')
 
   # request to force data requesting from server
   # if already loaded, do nothing. it should be done by other methods
   load: () ->
     if @isLoaded()
-      @trigger('loaded')
+      @trigger('load')
     else
       @loaded = true
       $.ajax(
@@ -31,7 +31,7 @@ window.helpers.ShoppingCart = class ShoppingCart
         dataType: "json"
       ).success((data) =>
         @updateData(data)
-        @trigger('loaded')
+        @trigger('load')
       ).error( () =>
         @loaded = false
       )

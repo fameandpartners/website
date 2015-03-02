@@ -1,14 +1,13 @@
-.col-md-3.col-xs-6.col-xxs-12.category--item
-  = link_to collection_product_path(product, color: product.color) do
+.col-md-3.col-xs-6.col-xxs-12.category--item data-id=(product.id) data-color-id=(product.color.try(:id))
+  = link_to collection_product_path(product, color: product.color.try(:name)) do
     = image_tag product.image, alt: product.name, class: 'img-responsive'
   .details.text-center
     span.name = product.name
     span.price = product_price_with_discount(product.price, product.discount)
-    - if Features.active?(:moodboard)
-      span.moodboard
-        sup +
-        | moodboard
+    - if Features.active?(:moodboard) && current_spree_user.present?
+      - if !current_user_moodboard.contains(product_id: product.id, color_id: product.color.try(:id))
+        span.moodboard
+          sup +
+          | moodboard
 - if product.fast_delivery
 	= image_tag src='express_delivery.png', class: 'express-delivery'
-
-

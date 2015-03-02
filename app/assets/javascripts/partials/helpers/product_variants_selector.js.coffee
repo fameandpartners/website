@@ -4,7 +4,7 @@
 #   - customizations
 # output
 #   - currently selected element
-#   - event 'changed'
+#   - event 'change'
 #   - errors
 #
 window.helpers or= {}
