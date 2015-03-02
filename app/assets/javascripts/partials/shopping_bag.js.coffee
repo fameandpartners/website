@@ -18,7 +18,7 @@ window.ShoppingBag = class ShoppingBag
     @$overlay.on('click', @closeHandler)
     @$container.on('click', '.remove-product', @removeProductHandler)
 
-    @cart.on('changed', @render)
+    @cart.on('change', @render)
     @
 
   render: () ->
@@ -41,7 +41,7 @@ window.ShoppingBag = class ShoppingBag
     if @cart.isLoaded()
       @open()
     else
-      @cart.one('loaded', @open)
+      @cart.one('load', @open)
       @cart.load()
 
   closeHandler: (e) ->

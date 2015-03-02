@@ -34,7 +34,7 @@ class Users::WishlistsItemsController < Users::BaseController
     moodboard_populator.populate
 
     render json: current_user_moodboard.serialize.to_json
-  #rescue
+  #rescue Exception => e
   #  render json: {}, status: :error
   end
 

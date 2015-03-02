@@ -7,7 +7,14 @@ class UserMoodboard::BasePresenter < OpenStruct
     }
   end
 
-  def include?(options = {})
+  # { product_id: , color_id: }
+  def contains(options = {})
     return false if options.blank?
+
+    if options[:color_id]
+      items.any?{|item| item.product_id == options[:product_id].to_i && item.color_id == options[:color_id].to_i }
+    else
+      items.any?{|item| item.product_id == options[:product_id].to_i }
+    end
   end
 end

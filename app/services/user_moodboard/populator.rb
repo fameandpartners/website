@@ -19,26 +19,36 @@ class UserMoodboard::Populator
     @color_id   = options[:color_id]
   end
 
+  # cases priority
+  # product + color
+  # variant [ it can be master variant, so no color data ]
+  # product
   def populate
-    if product.present? && color.present?
-      add_color_variant(product.id, color.id)
+    validate!
+
+    if color.present?
+      add_color_variant(product.try(:id) || variant.product_id, color.id)
     elsif variant.present?
-      add_variant
+      add_variant(variant)
     else
-      raise ArgumentError.new("not enough data to identify color variant")
+      add_variant(product.master)
+    end
+  end
+
+  def validate!
+    if product.blank? && variant.blank?
+      raise ArgumentError.new("not enough data to identify product")
     end
   end
 
   private
 
     def product
-      @product ||= begin
-        Spree::Product.find(product_id) || variant.product
-      end
+      @product ||= (product_id.present? ? Spree::Product.where(id: product_id).first : nil)
     end
 
     def variant
-      @variant ||= Spree::Variant.find(variant_id)
+      @variant ||= (variant_id.present? ? Spree::Variant.find(variant_id) : nil)
     end
 
     def color
@@ -57,17 +67,18 @@ class UserMoodboard::Populator
       item
     end
 
-    def add_variant
+    def add_variant(variant)
       product_variant = Repositories::ProductVariants.new(product_id: variant.product_id).read(variant.id)
 
       item = user.wishlist_items.where(
         spree_product_id: variant.product_id,
-        product_color_id: product_variant.color_id
+        product_color_id: product_variant.try(:color_id)
       ).first_or_initialize
 
       item.quantity = 1
-      item.spree_variant_id = variant_id
+      item.spree_variant_id = variant.id
 
+      item.save
       item
     end
 end

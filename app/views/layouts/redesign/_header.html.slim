@@ -2,7 +2,7 @@ ruby:
   init_items_counter_sync = "
     (function(){
       $counter = $('#cart-trigger');
-      window.app.shopping_cart.on('changed', function() {
+      window.app.shopping_cart.on('change', function() {
         $counter.find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
       });
     })();
@@ -10,7 +10,7 @@ ruby:
   init_moodboard_counter_sync = "
     (function(){
       $counter = $('#moodboard-counter');
-      window.app.user_moodboard.on('changed', function() {
+      window.app.user_moodboard.on('change', function() {
         $counter.html('Moodboard: ' + window.app.user_moodboard.data.item_count);
       });
     })();

@@ -11,6 +11,10 @@ window.helpers.UserMoodboard = class UserMoodboard
 
   # data: { color_id, variant_id, product_id }
   addItem: (data = {}) ->
+    if @contains(data)
+      trigger('change')
+      return
+
     $.ajax(
       url: urlWithSitePrefix("/wishlists_items")
       type: "POST"
@@ -18,9 +22,14 @@ window.helpers.UserMoodboard = class UserMoodboard
       dataType: "json"
     ).success(@updateData)
 
-  updateData: (data) =>
+  updateData: (data = {}) =>
     @data = data
-    @trigger('changed')
+    @trigger('change')
 
-  is_included: (data) ->
-    console.log('is item included to wishlist')
+  # { product_id:, color_id: }
+  # - if color id not provided - search any product occurence
+  contains: (data) ->
+    if !data.color_id
+      !!_.findWhere(@data.items, { product_id: data.product_id })
+    else
+      !!_.findWhere(@data.items, { product_id: data.product_id, color_id: data.color_id })
