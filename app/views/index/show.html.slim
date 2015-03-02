@@ -36,24 +36,24 @@
 /! Call to Actions
 .call-to-actions
   .row
-    a href="#"
-    .col-md-4.text-center.no-padding
-      .header.black
-        h3 Will The Real Junior Prom Queen Please Stand Up
-      = image_tag "glam_rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
-    a href="#"
-    .col-md-4.text-center.no-padding
-      .header.pink
-        h3 GET $20 OFF + FREE STYLING
-      = image_tag "glam_rebel2.jpg", alt: 'Newsletter sign up', class: 'img-responsive'
-    a href="#"
-    .col-md-4.text-center.no-padding
-      .header.black
-        h3 Your Very Own Galm Squad. Book A Free Styling Session Now
-      = image_tag "real_prom.jpg", alt: 'Styling session sign up', class: 'img-responsive'
+    a href="/dresses/prom"
+      .col-md-4.text-center.no-padding
+        .header.black
+          h3 Will The Real Junior Prom Queen Please Stand Up
+        = image_tag "glam_rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
+    a href="#email-container"
+      .col-md-4.text-center.no-padding
+        .header.pink
+          h3 GET $20 OFF + FREE STYLING
+        = image_tag "glam_rebel2.jpg", alt: 'Newsletter sign up', class: 'img-responsive'
+    a href="/style-consultation"
+      .col-md-4.text-center.no-padding
+        .header.black
+          h3 Your Very Own Glam Squad. Book A Free Styling Session Now
+        = image_tag "real_prom.jpg", alt: 'Styling session sign up', class: 'img-responsive'
 
 /! Email Subscription
-.container.email-sub.text-center
+#email-container.container.email-sub.text-center
   .row
     = render 'shared/newsletter_signup' 
       
