@@ -254,7 +254,7 @@ z.list-group-item.customization-option  {
   z-index: 9999 !important;
   height: 100%;
   overflow-y: auto;
-  overflow-x: none;  
+  overflow-x: hidden;  
   padding: 0 20px 20px 20px;
   position: fixed;
   top: 0;
@@ -326,22 +326,6 @@ z.list-group-item.customization-option  {
 
 
 #product-customizations-content {
-
-	right:-100%;
-	width:500px;
-	transition: right 0.3s ease 0s;
-  z-index: 9999 !important;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: none;
-  padding-top: 0;
-  position: fixed;
-  top: 0;
-  background-color:#FFFFFF;
-
-  .option-price {
-  	margin-left:0.5em;
-  }
 
   a.active {
   	background-color:#000000;
