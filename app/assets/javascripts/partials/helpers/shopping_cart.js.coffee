@@ -73,6 +73,19 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
+  # apply code
+  applyPromotionCode: (code) ->
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/promotion"),
+      type: 'POST',
+      dataType: "json",
+      data: { promotion_code: code }
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
 
 #_base = undefined
 #window.shopping_cart = {}

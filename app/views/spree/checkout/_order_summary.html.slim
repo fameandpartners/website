@@ -1,13 +1,19 @@
-/ruby: 
+ruby: 
   shopping_cart_summary_init = "
     window.app.shopping_cart_summary = new ShoppingCartSummary({ 
       cart: window.app.shopping_cart,
       container: '.checkout-items'
     });
   "
+  preload_cart_data = "
+    (function(){
+      cart_data  = #{ raw cart.serialize.to_json };
+      window.app.shopping_cart.updateData(cart_data);
+    })();
+  "
 = content_for :inline_javascript do
-  | console.log('fixme: shopping cart summary still static');
-  /= raw shopping_cart_summary_init
+  = raw preload_cart_data
+  = raw shopping_cart_summary_init
 
 .checkout-items
   h3.text-center In The Bag
@@ -17,33 +23,33 @@
     - (cart.products || []).each do |product|
       li
         = image_tag product.image.small, class: 'img-responsive pull-left cart-item-image'
-        a.fa.fa-close.pull-right.link-grey.remove-product.delete-item href="#0" 
+        a.fa.fa-close.pull-right.link-grey.remove-product.delete-item href="#0" data-id=(product.line_item_id)
         .cart-item--details.pull-left
           span.qty = "#{ product.quantity}x"
           = product.name
           .checkout-price = product.price.display_price
-    /! cd-cart-items
-    div
-      label for=""  Promo Code
-      .input-group
-        input.form-control.standard-form type="text" /
-        span.input-group-addon.no-padding-right.checkout-go
-          button.invis-fix
-            span.fa.fa-angle-right.text-white
-    hr
-    p
-      | Sub Total
-      span.pull-right = cart.display_item_total.to_s
-    p
-      | Shipping
-      span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
-    p
-      | Promotion
-      span.pull-right = cart.display_promotion_total.to_s
-    hr
-    p
-      strong
-        | Total
-        span.pull-right = cart.display_total.to_s
-        - if current_site_version.is_australia?
-          .taxes Including GST
+  /! cd-cart-items
+  div
+    label for=""  Promo Code
+    .input-group
+      input.form-control.standard-form#promotion-code type="text"
+      span.input-group-addon.no-padding-right.checkout-go
+        button.invis-fix.promotion-apply
+          span.fa.fa-angle-right.text-white
+  hr
+  p
+    | Sub Total
+    span.pull-right = cart.display_item_total.to_s
+  p
+    | Shipping
+    span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
+  p
+    | Promotion
+    span.pull-right = cart.display_promotion_total.to_s
+  hr
+  p
+    strong
+      | Total
+      span.pull-right = cart.display_total.to_s
+      - if current_site_version.is_australia?
+        .taxes Including GST
