@@ -21,14 +21,21 @@ ruby:
   "
 
   init_product_customization = "
-      new ProductCustomisation({
+      new page.ProductCustomisation({
+        container:  '#product-customizations-content',
+        action:     '#product-customize-action',
+        select:     '#product-customizations'
        });
+      new page.ProductColorizer({
+        container:  '#product-color-content',
+        action:     '#product-colorize-action',
+        select:     '#product-color'
+      });
 
-      new ProductColorizer({
-        action:  '#product-colorize-action',
-        select:  '#product-color',
-        colors: #{ @product.default_color_options.to_json },
-        customColors: #{ @product.extra_color_options.to_json }
+      new page.ProductSizer({
+        container:  '#product-size-content',
+        action:     '#product-size-action',
+        select:     '#product-size'
       });
   "
 
@@ -55,29 +62,28 @@ ruby:
     .row
       h2 = @product.name
       p.product-section-description = @product.short_description
-      p.product-section-price = product_price_with_discount(@product.price, @product.discount)
+      p#product-price
+        = product_price_with_discount(@product.price, @product.discount)
+      p#product-current-price.hidden data-original-price=product_price_with_discount(@product.price, @product.discount)
 
     .product-section--selection
       /! size & color & customizations selectors
       /! Size and Colour
 
     .row
-      - sizes = @product.available_options.sizes
-      - if sizes.present?
+      - if @product.default_sizes?
         a#product-size-action.btn-customize Size
 
-        select#product-size data-minimum-results-for-search='Infinity' data-prompt="Size"
-          - if sizes.default.present?
-            optgroup label="Standard sizes"
-              - sizes.default.each do |size|
-                option value=(size.id) = size.presentation
-          - if sizes.extra.present?
-            optgroup label="Sizes below are additional #{ sizes.default_extra_price.display_price }"
-              - sizes.extra.each do |size|
-                option value=(size.id) data-custom="true"
-                  = size.presentation
-        br
-
+        select#product-size.hidden
+          - if @product.default_sizes?
+            - @product.default_sizes.each do |size|
+              option value=size.id
+                = size.presentation
+          - if @product.custom_sizes?
+            - @product.custom_sizes.each do |size|
+              option value=size.id
+                = size.presentation
+        
     .row
       - colors = @product.available_options.colors
       - if colors.present?
@@ -98,7 +104,7 @@ ruby:
 
     - if @product.customizable?
       .row
-        a#product-customizations-action.btn-customize
+        a#product-customize-action.btn-customize
           | Customize
 
         select.customise-options#product-customizations.hidden
@@ -187,15 +193,70 @@ hr
   | THIS IS THE SIZING GUIDE
 
 #product-overlay
-#product-customizations-content
-
+#product-size-content.product-side-panel
+  
   .row
-    .col-md-12
-      h2 Customize Your Dress
+    .col-md-12.recommended
+      h2 Sizes      
+      - if @product.default_sizes?
+        - @product.default_sizes.each_slice(3) do |sizes|
+          .row.no-padding        
+            - sizes.each do |size|
+              .col-md-4.col-xs-12.col-xxs-12
+                a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation         
+                  span.option-box.size-box= size.presentation
+          
+
+  - if @product.custom_sizes?
+    .row
+      .col-md-12.custom
+        h2=  "Custom Sizes +#{@product.custom_size_price}"
+
+        - @product.custom_sizes.each_slice(3) do |sizes|
+          .row.no-padding        
+            - sizes.each do |size|
+              .col-md-4.col-xs-12.col-xxs-12
+                a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
+                  span.option-box.size-box= size.presentation
+                  span.option-price= "+#{@product.custom_size_price}"
+                
+
+
+#product-color-content.product-side-panel
+  .row
+    .col-md-12.recommended
+      h2 Recommended Colors
+
+      - @product.default_color_options.each_slice(2) do |colors|
+        .row        
+          - colors.each do |color|
+            .col-md-6.col-xs-6.col-xxs-12
+              a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation         
+                span.option-box.color-box class="color-#{color.name}"
+                span.option-name= color.presentation
+            
+
+  - if @product.custom_colors?
+    .row
+      .col-md-12.custom
+        h2=  "Custom Colors +#{@product.custom_color_price}"
+        - @product.custom_color_options.each_slice(2) do |colors|
+          .row
+            - colors.each do |color|
+              .col-md-6.col-xs-6.col-xxs-12
+                a.color-option.product-option href="#" data-id=color.id data-custom="true" data-name=color.presentation data-price=@product.custom_color_price
+                  span.option-box.color-box class="color-#{color.name}"
+                  span.option-name= color.presentation
+                  span.option-price= "+#{@product.custom_color_price}"            
+
+#product-customizations-content.product-side-panel
+  .col-md-12
+    h2 Customize Your Dress
+  
   .row
     .col-md-12
       ul.list-group
-        a.customization-option.list-group-item href="#" data-id="original"
+        a.customization-option.list-group-item.active href="#" data-id="original"
           .row
             .col-md-4.col-xs-12
               .row       
