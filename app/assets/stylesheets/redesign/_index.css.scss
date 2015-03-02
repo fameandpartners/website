@@ -16,6 +16,11 @@
 
 .call-to-actions {
 
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
 	.header {
 		height: 70px;
 		margin-bottom: 0;
@@ -40,8 +45,17 @@
 	}
 }
 
-.middle {
+.shop-with-us.middle {
 	background-color: white;
+
+	p {
+		text-transform: uppercase;
+		font-weight: 500;
+		letter-spacing: 1px;
+		padding-left: 0;
+		padding-right: 0;
+		word-spacing: 1px
+	}
 }
 
 .email-sub {
@@ -115,7 +129,23 @@
 }
 
 .shop-with-us {
-	height: 900px;
+	height: 830px;
+
+	h2 {
+		font-size: 4.5rem;
+		margin-top: 1.2rem
+	}
+
+	h3 {
+		padding-top: 2rem;
+		font-family: forum;
+		font-size: 4.5rem;
+		text-transform: uppercase;
+
+		small{
+			color: black;
+		}
+	}
 
 	.row {
 		padding-left: 2rem;
@@ -123,14 +153,20 @@
 	}
 
 	p {
-		padding-right: 10%;
-		padding-left: 10%;
+		padding-right: 18.5%;
+		padding-left: 18.5%;
+		padding-bottom: 4%
 	}
 
 	h4 {
 		text-transform: uppercase;
 		font-size: 1.5rem;
 		margin-bottom: 0;
+	}
+
+	.img-responsive {
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 
