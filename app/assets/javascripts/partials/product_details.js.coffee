@@ -81,16 +81,14 @@ page.initProductDetailsPage = (options = {}) ->
     updateWishlistButtonState() # set current state
 
   # recommended dreses - add to moodboard button functionality
-  if options.recommended_dresses
-    $wishlist_buttons = $(options.recommended_dresses.container).find(options.recommended_dresses.buttons)
-
+  if options.moodboard_links
     addProductToMoodboardHandler = (e) ->
       e.preventDefault()
       product_id = $(e.currentTarget).closest('div[data-id]').data('id')
       app.user_moodboard.addItem({ product_id: product_id })
 
     refreshButtonsState = (e) ->
-      $(options.recommended_dresses.container).find(options.recommended_dresses.buttons).each((index, item) ->
+      $(options.moodboard_links.container).find(options.moodboard_links.buttons).each((index, item) ->
         product_id = $(item).closest('div[data-id]').data('id')
         if app.user_moodboard.contains({ product_id: product_id })
           $(item).addClass('fa-heart').removeClass('fa-heart-o')
@@ -98,7 +96,7 @@ page.initProductDetailsPage = (options = {}) ->
           $(item).removeClass('fa-heart').addClass('fa-heart-o')
       )
 
-    $(options.recommended_dresses.container).on(
-      'click', options.recommended_dresses.buttons, addProductToMoodboardHandler
+    $(options.moodboard_links.container).on(
+      'click', options.moodboard_links.buttons, addProductToMoodboardHandler
     )
     app.user_moodboard.on('change', refreshButtonsState)

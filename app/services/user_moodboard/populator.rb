@@ -27,7 +27,7 @@ class UserMoodboard::Populator
     validate!
 
     if color.present?
-      add_color_variant(product.try(:id) || variant.product_id, color.id)
+      add_color_variant(product, variant, color)
     elsif variant.present?
       add_variant(variant)
     else
@@ -55,13 +55,13 @@ class UserMoodboard::Populator
       @color ||= (color_id.present? ? Repositories::ProductColors.read(color_id) : nil)
     end
 
-    def add_color_variant(product_id, color_id)
+    def add_color_variant(product, variant, color)
       item = user.wishlist_items.where(
-        spree_product_id: product_id,
+        spree_product_id: product.try(:id) || variant.product_id,
         product_color_id: color_id
       ).first_or_initialize
       item.quantity = 1
-      item.spree_variant_id = variant.try(:id)
+      item.spree_variant_id = variant.try(:id) || product.master.id
       item.save
 
       item

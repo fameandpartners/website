@@ -7,9 +7,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   updateParams: {}
   collectionTemplate: JST['templates/product_collection']
 
-  constructor: (filter, content) ->
-    @filter = $(filter)
-    @content = $(content)
+  constructor: (options) ->
+    @filter = $(options.controls)
+    @content = $(options.content)
 
     @styleInput         = new inputs.ProductStyleNameSelector(container: @filter.find('#style'))
     @bodyShapeInput     = new inputs.ProductBodyShapeSelector(container: @filter.find('#bodyshape'))
