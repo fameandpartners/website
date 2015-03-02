@@ -24,6 +24,7 @@
 @import 'redesign/products_collections';
 @import 'redesign/index';
 @import 'redesign/typography';
+
 @import 'redesign/header';
 @import 'redesign/footer';
 
@@ -70,6 +71,7 @@
     border:2px solid black;
     border-top:20px solid black;
   }
+
   .vex-dialog-button-primary {
     float:right;
   }
@@ -77,28 +79,33 @@
 
 // Flash Message Panel
 .vex.vex-theme-bottom-right-corner {
+
   .alert {
     border-top:1px solid black;
     color:black;
   }
+
 	.alert.vex-content {
 		margin-bottom: 0;
 		text-align:right;
 		width:100%;
 		z-index:9999; // display on top of mobile menu
+
 		.vex-dialog-buttons {
 			display:none;
 		}
 	}
+
   .alert-warning {
     background-color: #FFFFFF;
   }
+
 }
 
 .landing-page {
   .row.content-box {
-    margin:20px 0 20px 0;    
-  
+    margin:20px 0 20px 0;
+
     .content {
       height:381px;
       border:2px solid black;
@@ -110,8 +117,8 @@
        border:2px solid white;
     }
   }
-
 }
+
 .btn-secondary {
   background-color:#033649;
   color:#FFFFFF;
