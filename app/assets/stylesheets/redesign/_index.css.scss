@@ -43,6 +43,11 @@
 		color: black;
 		background-color: #eeddf0
 	}
+
+	.img-responsive {
+		max-width: none;
+		width: 100%;
+	}
 }
 
 .shop-with-us.middle {
@@ -97,6 +102,12 @@
 		margin-left: auto;
 		margin-right: auto;
 		width: 500px;
+
+		@media (max-width: 550px){
+			width: 100%;
+			margin-left: 0;
+			margin-right: 0;
+		}
 	}
 
 	::-webkit-input-placeholder { /* WebKit browsers */
@@ -129,7 +140,11 @@
 }
 
 .shop-with-us {
-	height: 830px;
+	min-height: 830px;
+
+	@media(min-width: 990px){
+		height: 900px;
+	}
 
 	h2 {
 		font-size: 4.5rem;
@@ -275,6 +290,11 @@
 	margin-top: 2rem;
 	width: 100%;
 	margin-top: 6rem;
+}
+
+.prom-queen {
+	background-image: url('glam_rebel.jpg');
+	height:490px;
 }
 
 
