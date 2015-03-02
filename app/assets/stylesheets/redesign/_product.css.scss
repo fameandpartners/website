@@ -68,7 +68,6 @@ z.list-group-item.customization-option  {
 	&:hover {
 		color: black;
 	}
-
 }
 
 .col-md-4 {
@@ -181,14 +180,14 @@ z.list-group-item.customization-option  {
 
 .secondary-actions {
 	.col-md-6 {
-		padding:0; 
+		padding:0;
 	}
   .col-md-6:first-child {
-    padding-right:10px; 
+    padding-right:10px;
   }
 
   .col-md-6:last-child {
-    padding-left:10px; 
+    padding-left:10px;
   }
 
 }
@@ -215,9 +214,9 @@ z.list-group-item.customization-option  {
 		background-color:#F6F6F6;
 
 	}
-	
+
 	.color-option {
-		
+
 		.color-box {
 			background-color:#CCCCCC;
 			margin:0;
@@ -254,7 +253,7 @@ z.list-group-item.customization-option  {
   z-index: 9999 !important;
   height: 100%;
   overflow-y: auto;
-  overflow-x: hidden;  
+  overflow-x: hidden;
   padding: 0 20px 20px 20px;
   position: fixed;
   top: 0;
@@ -267,13 +266,13 @@ z.list-group-item.customization-option  {
 
   a.product-option {
     display:block;
-    color:#000000;  
+    color:#000000;
     margin-bottom:10px;
   }
 
   a.product-option {
     display:block;
-    color:#000000;    
+    color:#000000;
   }
 
   a.product-option.active {
@@ -283,7 +282,7 @@ z.list-group-item.customization-option  {
   .option-box {
     display:block;
     width:100%;
-    height:50px;   
+    height:50px;
     margin:0;
     padding:0;
     text-align: center;
@@ -304,7 +303,7 @@ z.list-group-item.customization-option  {
 
   &.speed-in {
   	right: 0;
-  }  
+  }
 }
 
 #product-size-content {

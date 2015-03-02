@@ -1,64 +1,46 @@
-.page-title.default
+.page-title.default.why-us-header
   .container
     .page-title--details
-      h1.no-padding-bottom.text-white Why shop with us?
-      p.text-white Fame & Partners is the destination for crafting the most current, coolest and individual look for your prom and special events. </br>When you shop with us, you will get a dress and total look that is uniquely yours. Guaranteed.
+      h1.no-padding-bottom.why-us-title Why shop with us?
 
 .page-content.why-us
-  .container
-    .row
-      p
-  .container
-    .row
-      .col-md-6.pink
-        a name="twin"
-        .i.fa.fa-user
+  .row
+    .col-md-4.no-padding.pink
+      .header.black
         h2 Twin Alert
+      span
         p Our Twin Alert feature means that no girl attending the same event can purchase the same dress with the same customizations, in the same colour. This guarantees that no one will be wearing the same dress or look as you.
-        p &nbsp;
-        p= link_to 'Register Now', spree_login_path, class: "btn btn-black"
 
-      .col-md-6.cream
-        a name="advice"
-        .i.fa.fa-pencil
+    .col-md-4.no-padding
+      .header.grey
         h2 Free Stylists
+      span
         p If you need some help sourcing your complete look, Fame & Partners Stylists will source the total look for you, for free! When you purchase your dress with us, our Stylists will give you completely free, tailored advice based on your style profile and then actively find the best products that will match your dress, within your budget.
 
-  .container
-    .row
-      .col-md-6.cream
-        a name="customisation"
-        .i.fa.fa-star-o
+    .col-md-4.no-padding.pink
+      .header.black
         h2 Customize your Dress
+      span
         p Want to make a dress completely your own? Choose to get one of our styles made in a different #{t('words.color')} or fabric, change the hemline length, select another unique #{t('words.customization')} or get it made in a size not offered on the site.
 
-      .col-md-6.pink
-        a name="shipping"
-        .i.fa.fa-usd
-        h2 Free Shipping
-        p Standard Shipping is FREE within Australia and United States for items over $49. View shipping delivery times #{link_to 'here', terms_path}.
-
-        - if sale_active?
-          p Free shipping does not apply to sale items.
-
-  .container
-    .row
-      .col-md-6.pink
-        a name="returns"
-        .i.fa.fa-reply
+  .row
+    .col-md-4.no-padding
+      .header.grey
         h2 Free Returns
+      span
         p You may return any item for free, provided it’s within 30 days of purchase, it is unused and in resalable condition, and the DO NOT REMOVE tag is still attached. For full details on our Returns and Exchanges policy see #{link_to 'here', faqs_path}
 
-      .col-md-6.cream
-        a name="fit"
-        .i.fa.fa-check-square-o
+    .col-md-4.no-padding.pink
+      .header.black
         h2 Fit Guarantee
+      span
         p If the size you purchase isn’t right for you, you can exchange it for another size up or down one size, for free.
 
-  .container
-    .row
-      .col-md-12.pink-light
-        a name="ondemand"
-        .i.fa.fa-pencil-square-o
+    .col-md-4.no-padding
+      .header.grey
         h2 On Demand
+      span
         p We make all of our dresses on demand which is how we offer #{t('words.customization')}s and multiple #{t('words.color')} options. This means your dress is uniquely yours, made just for you.
+
+  .row
+    .col-md-12
