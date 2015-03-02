@@ -45,6 +45,22 @@ window.inputs.BaseInput = class BaseInput
     else
       value
 
+window.inputs.IntegerSelectSelector = class IntegerSelectSelector extends BaseInput
+  constructor: (options = {}) ->
+    options.valueType = 'integer'
+    super(options)
+
+  getValue: () ->
+    @prepareValue(@$el.val())
+
+  setValue: (newValue) ->
+    @$el.val(@prepareValue(newValue))
+    @onValueChanged()
+
+  customValue: () ->
+    @$el.find("option[value=#{ @val() }]").data('custom')
+
+
 window.inputs.Select2Selector = class Select2Selector extends BaseInput
   constructor: (options = {}) ->
     super(options)
@@ -64,6 +80,7 @@ window.inputs.Select2Selector = class Select2Selector extends BaseInput
     @$el.val(@prepareValue(newValue))
     @onValueChanged()
 
+
 window.inputs.Select2MultiSelector = class Select2MultiSelector extends Select2Selector
   constructor: (options = {}) ->
     options.value ||= []
@@ -78,13 +95,7 @@ window.inputs.Select2MultiSelector = class Select2MultiSelector extends Select2S
 # eo of base classes
 
 # generic classes.
-window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends Select2Selector
-  constructor: (options = {}) ->
-    options.valueType = 'integer'
-    super(options)
-
-  customValue: () ->
-    @$el.find("option[value=#{ @val() }]").data('custom')
+window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends IntegerSelectSelector
 
 
 window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends BaseInput

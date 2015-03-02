@@ -1,5 +1,9 @@
 .caption-title {
-	color: black;
+	color: white;
+	text-transform: uppercase;
+	font-family: forum;
+	font-size: 10.6rem;
+	letter-spacing: -1px;
 }
 
 .page-content.index {
@@ -11,6 +15,11 @@
 }
 
 .call-to-actions {
+
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
 
 	.header {
 		height: 70px;
@@ -36,8 +45,17 @@
 	}
 }
 
-.middle {
+.shop-with-us.middle {
 	background-color: white;
+
+	p {
+		text-transform: uppercase;
+		font-weight: 500;
+		letter-spacing: 1px;
+		padding-left: 0;
+		padding-right: 0;
+		word-spacing: 1px
+	}
 }
 
 .email-sub {
@@ -111,7 +129,23 @@
 }
 
 .shop-with-us {
-	height: 900px;
+	height: 830px;
+
+	h2 {
+		font-size: 4.5rem;
+		margin-top: 1.2rem
+	}
+
+	h3 {
+		padding-top: 2rem;
+		font-family: forum;
+		font-size: 4.5rem;
+		text-transform: uppercase;
+
+		small{
+			color: black;
+		}
+	}
 
 	.row {
 		padding-left: 2rem;
@@ -119,8 +153,9 @@
 	}
 
 	p {
-		padding-right: 10%;
-		padding-left: 10%;
+		padding-right: 18.5%;
+		padding-left: 18.5%;
+		padding-bottom: 4%
 	}
 
 	h4 {
@@ -129,6 +164,119 @@
 		margin-bottom: 0;
 	}
 
+	.img-responsive {
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
+
+.taste-of-fame {
+	background-image: url('taste-of-fame.jpg');
+
+	.promotion {
+		text-align: center;
+		height: 50%;
+		margin-top: 30%;
+
+		p {
+			text-transform: uppercase;
+			color: white;
+			font-weight: 600;
+			letter-spacing: 2px;
+			word-spacing: 2px;
+			width: 360px;
+			margin-right: auto;
+			margin-left: auto;
+		}
+	}
+}
+
+.taste-of-fame-btn {
+	background-color: #003647;
+	font-family: "Brandon Grotesque", sans-serif;
+	color: white;
+	margin-top: 11rem;
+	width: 33%;
+}
+
+.break-hearts {
+	background-image: url('break-hearts.jpg');
+
+	.container {
+		width: 100%;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.promotion {
+		width: 60%;
+		float: right;
+
+
+		h2.caption-title {
+			font-family: "Brandon Grotesque", sans-serif;
+			color: black;
+			text-align: center;
+			font-size: 7rem;
+			padding-top: 22rem;
+			width: 90%;
+			margin-right: auto;
+			margin-left: auto;
+		}
+
+		p {
+			text-transform: uppercase;
+			color: black;
+			font-weight: 600;
+			letter-spacing: 2px;
+			word-spacing: 2px;
+			width: 360px;
+			margin-right: auto;
+			margin-left: auto;
+		}
+	}
+}
+
+.prom {
+	background-image: url('prom.jpg');
+
+	.promotion {
+		float: right;
+		padding-right: 5rem;
+
+
+		h2.caption-title {
+			font-family: "Brandon Grotesque", sans-serif;
+			color: black;
+			text-align: center;
+			font-size: 4rem;
+			padding-top: 14rem;
+			margin-right: auto;
+			margin-left: auto;
+			text-transform: none;
+		}
+		font-weight: 400;
+
+		p {
+			font-family: forum;
+			text-transform: uppercase;
+			font-size: 9.5rem;
+			text-align: center;
+			line-height: 7rem;
+		}
+	}
+}
+
+.prom-btn {
+	background-color: #003647;
+	font-family: "Brandon Grotesque", sans-serif;
+	color: white;
+	background-color: #ffc4b5;
+	margin-top: 2rem;
+	width: 100%;
+	margin-top: 6rem;
+}
+
+
 
 

@@ -3,7 +3,7 @@ module Products
 
     def default_color_options
       if colors? && colors.default.any?        
-        colors.default.collect { |c| {id: c.id, name: c.name, display: c.presentation}  }   
+        colors.default
       else
         []
       end
@@ -11,19 +11,50 @@ module Products
 
     def custom_color_options
       if colors? && colors.extra.any?
-        price = colors.default_extra_price.display_price 
-        colors.extra.collect { |c| {id: c.id, name: c.name, display: c.presentation, price: price} }   
+        colors.extra
       else
         []
       end
+    end
+
+    def custom_color_price
+      colors.default_extra_price.display_price 
     end
 
     def colors?
       colors.present?  || colors.extra.any?
     end
 
+    def custom_colors?
+      colors.extra.any?
+    end
+
     def colors
       @colors = available_options.colors
+    end
+
+    def default_sizes
+      sizes.default
+    end
+
+    def default_sizes?
+      default_sizes.any?
+    end
+
+    def custom_sizes
+      sizes.extra
+    end
+
+    def custom_sizes?
+      sizes.extra.any?
+    end
+
+    def custom_size_price
+      sizes.default_extra_price.display_price
+    end
+
+    def sizes
+      @sizes ||= available_options.sizes
     end
 
     def customization_options
