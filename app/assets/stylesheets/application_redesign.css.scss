@@ -81,7 +81,7 @@
 .vex.vex-theme-bottom-right-corner {
 
   .alert {
-    border-top:1px solid black;
+    border-top:3px solid black;
     color:black;
   }
 
@@ -92,7 +92,9 @@
 		z-index:9999; // display on top of mobile menu
 
 		.vex-dialog-buttons {
-			display:none;
+			.btn.btn-black {
+        padding:5px 20px 5px 20px;
+      }
 		}
 	}
 

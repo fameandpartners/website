@@ -9,6 +9,7 @@
 //= require libs/underscore-min
 // spree have this by default
 //= require libs/vex.combined.min.js
+//= require libs/jquery.cookie
 
 // styleguide code
 //= require js/snap.svg-min.js
@@ -40,6 +41,8 @@
 //= require popups/style_quiz
 //= require partials/product_collection.js
 //= require partials/product_customisation.js
+
+//= require partials/email_newsletter_subscriber
 //= require partials/helpers/tracker.js.coffee
 //= require partials/helpers/error_messages.js.coffee
 

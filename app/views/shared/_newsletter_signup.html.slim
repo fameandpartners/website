@@ -1,92 +1,15 @@
-.form style="display:none;"
-  .holder
-    .close
-      i.fa.fa-times
-    .success-holder
-      #sub-success style="display:none;"
-        .heading
-        .msg
-    form action="https://fameandpartners.createsend.com/t/t/s/ekjll/" method="post" id="subForm"
-      .title Get $20 to spend on a killer dress
-      .sub Plus free styling advice and birthday gifts!
-      .fields
-          input id="fieldEmail" name="cm-ekjll-ekjll" type="email" placeholder="enter your email address"
-          input type="hidden" id="fieldurlkl" name="cm-fo-urlkl" value="190873"
-          input type="hidden" id="fieldqulir" name="cm-f-qulir" value=""
-          button.fa.fa-caret-right
-        
+#email-newsletter-signup
+  .col-md-12
+    h2.text-center.h2-title Become Famous.
+    p.lead Get a taste of fame (and all it's perks) with $20 OFF your first purchase, free styling sessions & VIP treatment.
+  .col-md-6.col-md-offset-3
+    .input-group.margin-bottom-sm
+      form action="https://fameandpartners.createsend.com/t/t/s/ekjll/" method="post"     
+        input#fieldEmail.form-control name="cm-ekjll-ekjll" type="email" placeholder="Enter Email" /
+        input type="hidden" id="fieldurlkl" name="cm-fo-urlkl" value="190873"
+        input type="hidden" id="fieldqulir" name="cm-f-qulir" value=""      
+        span.submit.no-padding-right
+        button.invis-fix type="submit" Send
 
-
-javascript:
-  var close = false;
-  var campaign = 'home'
-  var gf_campaign = "#{cookies[:gf_campaign]}"
-
-  if (window.location.pathname == '/fashionista2014' || window.location.pathname == '/au/fashionista2014'){
-    campaign = 'fashionista'
-  }
-
-  $(function () {
-      $('#subForm').submit(function (e) {
-          e.preventDefault();
-          $.getJSON(
-          this.action + "?callback=?",
-          $(this).serialize(),
-          function (data) {
-              if (data.Status === 400) {
-                  msg = data.Message;
-                  $('#sub-success .heading').text("Something went wrong!");
-                  $('.form .holder form').hide();
-                  $('#sub-success .msg').text(msg);
-                  $('#sub-success').show();
-                  $('#sub-success').delay(2000).fadeOut(300);
-                  $('.form .holder form').delay(2000).fadeIn(300);
-                  window.track.event('Newsletter', 'Error', campaign)
-              } else { // 200
-                  msg = "Thanks for signing up. Use this promocode for $20 off your purchase: NEWS20." + data.Message;
-                  $('.form .holder form').hide();
-                  $('#sub-success .heading').text("Thanks for signing up! PROMOCODE: NEWS20");
-                  $('#sub-success .msg').text(msg);
-                  $('#sub-success').show();
-                  $('.form').delay(6000).fadeOut(300);
-                  $.cookie('slide_newsletter', 'close', { expires: 365, path: '/' })
-                  window.track.event('Newsletter', 'Submitted', campaign)
-              }
-          });
-      });
-  });
-
-  $(document).ready(function() {
-      if (!!window.current_site_version) {
-        $('#fieldqulir').val(window.current_site_version.permalink);
-      }
-
-      if (gf_campaign != 'true'){
-        if ((window.current_page == 'index' || window.location.pathname == '/fashionista2014' || window.location.pathname == '/au/fashionista2014') && $.cookie('slide_newsletter') != 'close'){
-          $('.form').addClass('form-fixed');
-          $('.form').delay(2000).slideDown(1000);
-          window.track.event('Newsletter', 'Opened', campaign)
-          
-          $('.form .close').click(function () {
-            $('.form').removeClass('form-fixed');
-            close = true
-            $.cookie('slide_newsletter', 'close', { expires: 365, path: '/' })
-            window.track.event('Newsletter', 'Closed', campaign)
-          });
-
-          var navpos = $('.nav-container').offset();
-          console.log(navpos.top);
-          $(window).bind('scroll', function() {
-            if ($(window).scrollTop() < (navpos.top+300) && close == false){
-              $('.form').addClass('form-fixed');
-            }
-            else {
-              $('.form').removeClass('form-fixed');
-            }
-          });
-        } else {
-          $('.form').removeClass('form-fixed');
-          $('.form').show();
-        }        
-      }
-  });
+= content_for :inline_javascript do  
+  | new window.page.EmailNewsletterSubscriber({form: '#email-newsletter-signup form'});
