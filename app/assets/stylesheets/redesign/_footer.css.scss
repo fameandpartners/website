@@ -1,5 +1,13 @@
 .footer {
 	padding-bottom: 0;
+	width: 100%;
+	padding-left: 35px;
+
+	@media(max-width: 768px){
+		padding-top: 0;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
 
 	.footer-navigation {
 		margin-top: 30px;
@@ -12,6 +20,15 @@
 			font-size: 1.2rem;
 		}
 	}
+	@media(max-width: 768px){
+		.footer-nav {
+			text-align: center;
+
+			li {
+				padding-left: 0;
+			}
+		}
+	}
 
 	.footer-nav--item {
 		margin-bottom: 1px;
@@ -21,6 +38,10 @@
 	.footer-social {
 		float: right;
 		margin-bottom: 0;
+
+		@media(max-width: 768px){
+			float: none;
+		}
 	}
 
 	.footer-social--item {
@@ -32,6 +53,11 @@
 		height: 35px;
 		width: 46px;
 		margin-left: 0;
+
+		@media(max-width: 768px){
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 
 	.location {
@@ -55,10 +81,7 @@
 	.container {
 		padding-left: 0;
 		padding-right: 0;
-
-		@media (min-width: 1200px) {
-			width: 1175px;
-		}
+		max-width: 100%;
 	}
 
 	.social-links {
@@ -71,6 +94,25 @@
 	}
 
 	.lower-row {
-		padding-bottom: 1.6rem;
+		margin-bottom: 8rem;
+		clear: both;
+
+		.btn {
+			font-family: "brandon-grotesque";
+			color: black;
+		}
+	}
+
+	.dropdown-menu {
+
+		li {
+			width: 280px;
+			font-family: "brandon-grotesque";
+
+			a {
+				padding: 3px 12px;
+			}
+		}
+
 	}
 }
