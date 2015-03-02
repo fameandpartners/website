@@ -61,6 +61,10 @@ class UserCart::ProductsController < UserCart::BaseController
         render json: @user_cart.serialize, status: :ok
       }
     end
+  rescue
+    respond_with({}) do |format|
+      format.json  json: {}, status: :error 
+    end
   end
 
   def destroy

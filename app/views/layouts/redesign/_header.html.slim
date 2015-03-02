@@ -1,9 +1,8 @@
 ruby:
   init_items_counter_sync = "
     (function(){
-      $counter = $('#cart-trigger');
       window.app.shopping_cart.on('change', function() {
-        $counter.find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
+        $('#cart-trigger').find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
       });
     })();
   "

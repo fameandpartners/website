@@ -6,7 +6,7 @@ window.helpers.ShoppingCart = class ShoppingCart
   constructor: (options = {}) ->
     @$eventBus = $({})
     # code
-    @data    = null
+    @data    = { item_count: 0, products: [] }
     @loaded   = false
   
     @trigger =  delegateTo(@$eventBus, 'trigger')

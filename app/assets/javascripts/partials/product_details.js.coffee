@@ -41,8 +41,11 @@ page.initProductDetailsPage = (options = {}) ->
           customizations_ids: selected.customizations_ids
           variant_id: (selected.variant || {})['id']
         }
+        app.shopping_cart.one('change', () ->
+          window.helpers.showAlert(message: 'Added to Cart', type: 'success')
+          window.app.shopping_bag.open()
+        )
         app.shopping_cart.addProduct(product_data)
-        window.helpers.showAlert(message: 'Added to Cart', type: 'success')
     )
 
   if options.fitguideButton

@@ -65,7 +65,7 @@ class  UserCart::Populator
       personalization = build_personalization
       if personalization.valid?
         if line_item.blank? # user already have customized dress [ we can't have more than one personalization per dress ]
-          add_product(ignore_stock_level = true)
+          add_product_to_cart(ignore_stock_level = true)
         end
 
         if line_item.present?
@@ -79,12 +79,14 @@ class  UserCart::Populator
     end
 
     def build_personalization
-      LineItemPersonalization.new(
-        size: product_size.name, size_id: product_size.id,
-        color: product_color.name, color_id: product_color.id,
-        customization_value_ids: product_customizations.map(&:id),
-        product_id: product.id
-      )
+      LineItemPersonalization.new.tap do |item|
+        item.size     = product_size.name
+        item.size_id  = product_size.id
+        item['color'] = product_color.name
+        item.color_id = product_color.id
+        item.customization_value_ids = product_customizations.map(&:id)
+        item.product_id = product.id
+      end
     end
 
     def personalized_product?

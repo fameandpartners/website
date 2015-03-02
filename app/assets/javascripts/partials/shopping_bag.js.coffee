@@ -37,7 +37,7 @@ window.ShoppingBag = class ShoppingBag
     @$overlay.addClass('is-visible')
 
   openHandler: (e) ->
-    e.preventDefault()
+    e.preventDefault() if e
     if @cart.isLoaded()
       @open()
     else
@@ -45,7 +45,7 @@ window.ShoppingBag = class ShoppingBag
       @cart.load()
 
   closeHandler: (e) ->
-    e.preventDefault()
+    e.preventDefault() if e
     @close()
 
   removeProductHandler: (e) ->
