@@ -56,8 +56,9 @@ FameAndPartners::Application.routes.draw do
     scope '/user_cart', module: 'user_cart' do
       root to: 'details#show', as: :user_cart_details
 
-      get '/details'     => 'details#show'
-      put '/details'     => 'details#update'
+      get '/details'      => 'details#show'
+      post '/promotion'   => 'promotions#create'
+
       resources :products, only: [:create, :edit, :update, :destroy]
     end
 

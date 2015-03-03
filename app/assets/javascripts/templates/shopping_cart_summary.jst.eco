@@ -27,13 +27,13 @@
 <!-- cd promocode -->
 <hr>
 <p>
-  Sub Total<span class="pull-right">$937.00</span>
+  Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
 </p>
 <p>
-  Shipping<span class="pull-right">Free Shipping</span>
+  Shipping<span class="pull-right"><%= @cart.display_shipment_total %></span>
 </p>
 <p>
-  Promotion<span class="pull-right">$0.00</span>
+  Promotion<span class="pull-right"><%= @cart.display_promotion_total %></span>
 </p>
 <hr>
 <p>
