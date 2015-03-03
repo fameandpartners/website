@@ -6,6 +6,7 @@ window.ShoppingBag = class ShoppingBag
   constructor: (options = {}) ->
     @template   = JST['templates/shopping_bag']
     @cart       = options.cart # window.shopping_cart
+    @rendered   = false
 
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
@@ -23,6 +24,7 @@ window.ShoppingBag = class ShoppingBag
 
   render: () ->
     @$container.html(@template(cart: @cart.data))
+    @rendered = true
 
   close: () ->
     @$overlay.removeClass('is-visible')
@@ -31,6 +33,7 @@ window.ShoppingBag = class ShoppingBag
     )
 
   open: () ->
+    @render() if !@rendered
     @$container.addClass('speed-in').one(transition_end_events, () ->
       $('body').addClass('overflow-hidden')
     )

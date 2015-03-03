@@ -37,17 +37,18 @@
         p.small You will be directed to PayPal to make this purchase.
         button.btn.btn-black.btn-block Continue to PayPal
         = paypal_express_button
+
   - if @credit_card_gateway
     br
     hr
     .card-wrapper
     br
 
-  = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
-    = render 'shared/error_messages', :target => @order, :view => "payment"
+    = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
+      = render 'shared/error_messages', :target => @order, :view => "payment"
 
-    = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
-    = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
+      = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
+      = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
 
     / .row
       .col-md-12.form-group

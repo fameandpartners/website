@@ -14,8 +14,32 @@ ruby:
     cache_keys.push(current_promotion.code)
   end
 
-- if marketing_landing_page?
-  = render '/shared/marketing_pop_js'
+  promocode = decode_promocode
+  content = params[:content] || promocode
+
+  email_capture_modal = "
+    new window.page.EmailCaptureModal({
+      promocode: '#{promocode}', 
+      content:   '#{content}', 
+      className: 'bridesmaid-landing-page',
+      action:    '#{campaigns_email_capture_path}',
+      container: '#email-capture-fields'
+    });
+  "
+- if pop?  
+  = content_for :inline_javascript do  
+    = raw email_capture_modal
+
+  #email-capture-fields.hidden
+    input type="hidden" name="content" value=content
+    .row.no-padding
+      .col-md-12.form-group
+        input.form-control.standard-form type="email" name="email" placeholder='email address'
+    .row.no-padding
+      .col-md-12.form-group.text-center
+        button.btn.btn-black type="submit" value="submit"
+          | Submit
+
 
 .landing-page.bridesmaid_lp
   - cache cache_keys, expires_in: configatron.cache.expire.long do

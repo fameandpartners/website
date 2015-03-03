@@ -1,0 +1,42 @@
+
+.vex-theme-flat-attack.email-capture-modal {
+
+  .vex-content {
+    border:5px solid black;    
+  }
+
+
+  .vex-dialog-form {
+
+    .form-group {
+
+    }
+    .vex-dialog-input {
+      
+    }
+    
+    .vex-dialog-buttons {
+      position:absolute;
+      top:0;
+      right:0;
+      padding:0;
+      margin:0;
+
+      .vex-dialog-button-primary {
+        display:none;
+      }
+
+      .btn {
+        padding:10px 15px;
+      }      
+    }
+  }
+
+}
+
+.email-capture-modal.bridesmaid-landing-page {
+  .vex-content {    
+    background-color:#FFFFFF
+    // background: url('_popups/bridesmaid1.jpg') no-repeat;
+  }
+}

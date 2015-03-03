@@ -11,7 +11,7 @@
       .col-md-6.form-group
         = link_to 'Sign in with Facebook', fb_auth_path(return_to: 'checkout'), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
 
-  = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global'}, remote: false do |form|
+  = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
     = render :partial => 'shared/error_messages', locals: { target: @order }
 
     h2.checkout-section-title  Billing Address

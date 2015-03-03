@@ -1,0 +1,42 @@
+<ul class="cart-items">
+  <% for product in @cart.products: %>
+    <li>
+      <img class="img-responsive pull-left cart-item-image" src="<%= product.image.small %>" />
+      <a class="fa fa-close pull-right link-grey remove-product" data-id="<%= product.line_item_id %>" href="#0"></a>
+      <span class="qty"><%= product.quantity %>x</span>
+      <%= product.name %>
+      <div class="price">
+        <%= product.price.display_price %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+<!--cd-cart-items-->
+<!-- promo code -->
+<div>
+  <label for=""> Promo Code</label>
+  <div class="input-group">
+    <input type="text" class="form-control standard-form" id="promotion-code"></input>
+    <span class="input-group-addon no-padding-right checkout-go">
+      <button class="invis-fix promotion-apply">
+        <span class="fa fa-angle-right text-white"></span>
+      </button>
+    </span>
+  </div>
+</div>
+<!-- cd promocode -->
+<hr>
+<p>
+  Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
+</p>
+<p>
+  Shipping<span class="pull-right"><%= @cart.display_shipment_total %></span>
+</p>
+<p>
+  Promotion<span class="pull-right"><%= @cart.display_promotion_total %></span>
+</p>
+<hr>
+<p>
+  <strong>Total<span class="pull-right"><%= @cart.display_total %></span>
+  </strong>
+</p>

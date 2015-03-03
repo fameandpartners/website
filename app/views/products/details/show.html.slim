@@ -61,8 +61,8 @@ ruby:
       span.fa.fa-angle-left.fa-4x
 
 /! Product Section
-.container.product-content.text-center
-  .col-md-4.product-details.product-section--selection.no-padding
+.container-fluid.product-content.text-center
+  .col-md-4.col-md-offset-8.product-details.product-section--selection.no-padding
     .row
       h2 = @product.name
       p.product-section-description = @product.short_description
@@ -87,7 +87,7 @@ ruby:
             - @product.custom_sizes.each do |size|
               option value=size.id
                 = size.presentation
-        
+
     .row
       - colors = @product.available_options.colors
       - if colors.present?
@@ -119,7 +119,7 @@ ruby:
 
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
-    
+
     .row.secondary-actions
       .col-md-6.col-xs-6.col-xxs-12
         button#fit-guide.btn.btn-block.btn-secondary Fit Guide
@@ -199,18 +199,18 @@ hr
 
 #product-overlay
 #product-size-content.product-side-panel
-  
+
   .row
     .col-md-12.recommended
-      h2 Sizes      
+      h2 Sizes
       - if @product.default_sizes?
         - @product.default_sizes.each_slice(3) do |sizes|
-          .row.no-padding        
+          .row.no-padding
             - sizes.each do |size|
               .col-md-4.col-xs-12.col-xxs-12
-                a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation         
+                a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
                   span.option-box.size-box= size.presentation
-          
+
 
   - if @product.custom_sizes?
     .row
@@ -218,13 +218,13 @@ hr
         h2=  "Custom Sizes +#{@product.custom_size_price}"
 
         - @product.custom_sizes.each_slice(3) do |sizes|
-          .row.no-padding        
+          .row.no-padding
             - sizes.each do |size|
               .col-md-4.col-xs-12.col-xxs-12
                 a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
                   span.option-box.size-box= size.presentation
                   span.option-price= "+#{@product.custom_size_price}"
-                
+
 
 
 #product-color-content.product-side-panel
@@ -233,13 +233,13 @@ hr
       h2 Recommended Colors
 
       - @product.default_color_options.each_slice(2) do |colors|
-        .row        
+        .row
           - colors.each do |color|
             .col-md-6.col-xs-6.col-xxs-12
-              a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation         
+              a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation
                 span.option-box.color-box class="color-#{color.name}"
                 span.option-name= color.presentation
-            
+
 
   - if @product.custom_colors?
     .row
@@ -252,20 +252,20 @@ hr
                 a.color-option.product-option href="#" data-id=color.id data-custom="true" data-name=color.presentation data-price=@product.custom_color_price
                   span.option-box.color-box class="color-#{color.name}"
                   span.option-name= color.presentation
-                  span.option-price= "+#{@product.custom_color_price}"            
+                  span.option-price= "+#{@product.custom_color_price}"
 
 #product-customizations-content.product-side-panel
   .col-md-12
     h2 Customize Your Dress
-  
+
   .row
     .col-md-12
       ul.list-group
         a.customization-option.list-group-item.active href="#" data-id="original"
           .row
             .col-md-4.col-xs-12
-              .row       
-            .col-md-8.col-xs-12  
+              .row
+            .col-md-8.col-xs-12
               .row
                 span.option-name Original
                 span.option-price +0
@@ -276,11 +276,11 @@ hr
               .col-md-4.col-xs-12
                 .row
                   = image_tag option.image, :width => 140, :height => 140, :alt => ''
-              .col-md-8.col-xs-12  
+              .col-md-8.col-xs-12
                 .row
                   span.option-namep= option.name
                   span.option-price= "+#{option.display_price}"
-            br    
+            br
 
 
 /! More Dresses

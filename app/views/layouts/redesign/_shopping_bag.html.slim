@@ -10,10 +10,6 @@ ruby:
 = content_for :inline_javascript do
   = raw shopping_bag_init
 
-.col-lg-6.no-padding-right.no-padding-lg
-  = button_to 'Checkout', spree.checkout_path, class: 'btn btn-black btn-block', method: 'get'
-  br
-
 /- @cart = UserCart::UserCartResource.new(order: current_order).read
 #shadow-layer
 #cart
@@ -48,6 +44,6 @@ ruby:
         button.btn.btn-charcoal.btn-block Shop More
         br
       .col-lg-6.no-padding-right.no-padding-lg
-        = button_to 'Checkout', spree.checkout_path, class: 'btn btn-black btn-block'
+        = button_to 'Checkout', spree.checkout_path, class: 'btn btn-black btn-block', method: :get
         br
   /! cd-cart

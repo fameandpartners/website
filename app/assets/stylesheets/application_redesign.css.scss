@@ -26,6 +26,10 @@
 @import 'redesign/products_collections';
 @import 'redesign/index';
 @import 'redesign/typography';
+@import 'redesign/modal';
+@import 'redesign/flash_slider';
+
+
 
 
 @import 'redesign/header';
@@ -71,42 +75,8 @@
   background-color: #fbf5f3
 }
 
-.vex.vex-theme-flat-attack {
-  .vex-content {
-    border:2px solid black;
-    border-top:20px solid black;
-  }
-
-  .vex-dialog-button-primary {
-    float:right;
-  }
-}
-
-// Flash Message Panel
-.vex.vex-theme-bottom-right-corner {
-
-  .alert {
-    border-top:3px solid black;
-    color:black;
-  }
-
-	.alert.vex-content {
-		margin-bottom: 0;
-		text-align:right;
-		width:100%;
-		z-index:9999; // display on top of mobile menu
-
-		.vex-dialog-buttons {
-			.btn.btn-black {
-        padding:5px 20px 5px 20px;
-      }
-		}
-	}
-
-  .alert-warning {
-    background-color: #FFFFFF;
-  }
-
+.vex-content {
+  z-index:9999 !important; // display on top of mobile menu
 }
 
 .landing-page {

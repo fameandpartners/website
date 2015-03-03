@@ -15,8 +15,4 @@ class UserCart::DetailsController < UserCart::BaseController
       }
     end
   end
-
-  # apply coupon only?
-  def update
-  end
 end
