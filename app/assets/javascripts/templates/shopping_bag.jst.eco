@@ -38,6 +38,10 @@
     <button class="btn btn-charcoal btn-block">Shop More</button><br>
   </div>
   <div class="col-lg-6 no-padding-right no-padding-lg">
-    <button class="btn btn-black btn-block">Checkout</button><br>
+    <form method="get" class="button_to" action="<%= urlWithSitePrefix('/checkout') %>">
+      <div>
+        <input type="submit" value="Checkout" class="btn btn-black btn-block">
+      </div>
+    </form>
   </div>
 </div>

@@ -6,7 +6,7 @@ window.helpers.ShoppingCart = class ShoppingCart
   constructor: (options = {}) ->
     @$eventBus = $({})
     # code
-    @data    = null
+    @data    = { item_count: 0, products: [] }
     @loaded   = false
   
     @trigger =  delegateTo(@$eventBus, 'trigger')
@@ -67,6 +67,19 @@ window.helpers.ShoppingCart = class ShoppingCart
       url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }")
       type: "DELETE"
       dataType: "json"
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
+  # apply code
+  applyPromotionCode: (code) ->
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/promotion"),
+      type: 'POST',
+      dataType: "json",
+      data: { promotion_code: code }
     ).success(
       @updateData
     ).error( () =>

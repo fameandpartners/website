@@ -11,6 +11,9 @@ module Features
   
     private
     def rollout
+      return Rollout.new(kv_store)
+      # code below not thread-safe
+      # unstable work with forks on production. some hook like after(:fork) { reconnect_to_redis } required
       @rollout ||= begin      
         Rollout.new(kv_store)
       end
