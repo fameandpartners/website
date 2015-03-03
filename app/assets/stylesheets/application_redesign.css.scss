@@ -24,6 +24,7 @@
 @import 'redesign/products_collections';
 @import 'redesign/index';
 @import 'redesign/typography';
+@import 'redesign/modal';
 
 @import 'redesign/header';
 @import 'redesign/footer';
@@ -66,15 +67,8 @@
   background-color: #fbf5f3
 }
 
-.vex.vex-theme-flat-attack {
-  .vex-content {
-    border:2px solid black;
-    border-top:20px solid black;
-  }
-
-  .vex-dialog-button-primary {
-    float:right;
-  }
+.vex-content {
+  z-index:9999 !important; // display on top of mobile menu
 }
 
 // Flash Message Panel

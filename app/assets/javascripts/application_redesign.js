@@ -37,12 +37,17 @@
 //= require partials/helpers/site_version
 //= require partials/helpers/alert
 //= require partials/helpers/product_side_selector_panel
-//= require partials/helpers/modal
-//= require popups/style_quiz
+
+
+// THIS IS NOT A THING NOW
+// require popups/style_quiz
+// require partials/helpers/modal
+
 //= require partials/product_collection.js
 //= require partials/product_customisation.js
 
 //= require partials/email_newsletter_subscriber
+//= require partials/email_capture_modal
 //= require partials/helpers/tracker.js.coffee
 //= require partials/helpers/error_messages.js.coffee
 

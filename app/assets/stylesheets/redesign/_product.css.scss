@@ -156,36 +156,6 @@ z.list-group-item.customization-option  {
 	}
 }
 
-.vex-content {
-	z-index:9999; // display on top of mobile menu
-}
-
-.vex.vex-theme-flat-attack.side-panel {
-	.vex-content {
-		position:fixed;
-		top:0;
-		right:0;
-		width:500px;
-		height:100%;
-		z-index:9999; // display on top of mobile menu
-		max-height:100%;
-		overflow-y: auto;
-
-    border-top:0px solid #000000;
-    border-bottom:0px solid #000000;
-    border-right:0 solid #000000;
-	}
-	.vex-dialog-buttons {
-		display:none;
-	}
-
-	img.img-responsive {
-		max-width:150;
-	}
-}
-
-
-
 .no-scroll {
 	overflow: hidden !important;
 }
