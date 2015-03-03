@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150201140321) do
+ActiveRecord::Schema.define(:version => 20150223154334) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -443,6 +443,7 @@ ActiveRecord::Schema.define(:version => 20150201140321) do
     t.string   "color"
     t.integer  "color_id"
     t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "size_id"
   end
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
@@ -485,7 +486,6 @@ ActiveRecord::Schema.define(:version => 20150201140321) do
     t.integer "option_values_group_id"
   end
 
-  add_index "option_values_option_values_groups", ["option_value_id"], :name => "index_option_values_option_values_groups_on_option_value_id"
   add_index "option_values_option_values_groups", ["option_value_id"], :name => "opovg_option_value_id"
   add_index "option_values_option_values_groups", ["option_values_group_id"], :name => "opovg_option_group_id"
 

@@ -10,27 +10,30 @@
   /= raw shopping_cart_summary_init
 
 .checkout-items
-  h3.text-center In The Bag
-  br
-  /h2 Order
+  h3.text-center 
+    ' Cart:
+    = cart.products.length
   ul.cart-items
     - (cart.products || []).each do |product|
       li
-        = image_tag product.image.small, class: 'img-responsive pull-left cart-item-image'
-        a.fa.fa-close.pull-right.link-grey.remove-product.delete-item href="#0" 
-        .cart-item--details.pull-left
-          span.qty = "#{ product.quantity}x"
-          = product.name
-          .checkout-price = product.price.display_price
+        .media
+          .media-left.media-middle
+            = image_tag product.image.small, class: 'cart-item-image'
+          .media-body.media-middle
+            span.qty =' "#{ product.quantity}x"
+            = product.name
+            .checkout-price = product.price.display_price
+          a.remove-product.delete-item href="#0" 
+      
     /! cd-cart-items
-    div
+    .promo-code
       label for=""  Promo Code
       .input-group
-        input.form-control.standard-form type="text" /
-        span.input-group-addon.no-padding-right.checkout-go
-          button.invis-fix
-            span.fa.fa-angle-right.text-white
-    hr
+        input.form-control.form-control-md type="text" /
+        span.input-group-addon
+          button.btn-submit Submit
+            
+    / hr
     p
       | Sub Total
       span.pull-right = cart.display_item_total.to_s
@@ -40,7 +43,7 @@
     p
       | Promotion
       span.pull-right = cart.display_promotion_total.to_s
-    hr
+    / hr
     p
       strong
         | Total

@@ -7,11 +7,13 @@
 @import 'stylesheets/styleguide.css';
 @import 'stylesheets/styles.css';
 
-@import 'libs/vex';
-@import 'libs/vex-theme-flat-attack';
-@import 'libs/vex-theme-bottom-right-corner';
+@import 'libs/vex.css';
+@import 'libs/vex-theme-flat-attack.css';
+@import 'libs/vex-theme-bottom-right-corner.css';
 
+@import 'redesign/vars';
 @import 'redesign/mixins';
+@import 'redesign/forms';
 @import 'redesign/about';
 @import 'redesign/user';
 @import 'redesign/why_us';
@@ -25,8 +27,11 @@
 @import 'redesign/index';
 @import 'redesign/typography';
 
+
 @import 'redesign/header';
 @import 'redesign/footer';
+
+@import 'redesign/checkout';
 
 
 .standard-form {
