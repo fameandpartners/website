@@ -6,23 +6,27 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     timeout = opts.timeout || 0    
     @$container = $(opts.container)
     
-    setTimeout(@open, timeout) #if $.cookie('email_capture') != 'hide'
+    setTimeout(@open, timeout) if @pop
+
+  pop: =>
+    @opts.force || $.cookie('email_capture') != 'hide'
 
   afterClose: () ->
-    # $.cookie('email_capture', 'hide', { expires: 365, path: '/' })
+    $.cookie('email_capture', 'hide', { expires: 365, path: '/' })
 
   callback: (data) =>            
     if data 
       @process(data)
     else
-      # window.track.event('LandingPageModal', 'ClosedNoAction', @opts.content, @opts.promocode)
+      window.track.event('LandingPageModal', 'ClosedNoAction', @opts.content, @opts.promocode)
 
   process: (data) =>
     console.log('process') 
     if !!data.email
       $.post(@opts.action, data).done(@success).fail(@error)    
     else          
-      window.helpers.showAlert(message: 'Did you mean to forget your email address?', timeout:5555)
+      setTimeout(@open, 250) 
+      window.helpers.showAlert(message: 'Did you mean to forget your email address?')
 
   success: (data) =>  
     if data.status == 'ok'
@@ -33,18 +37,18 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       else
         message = "Thanks for joining!"
 
-      window.helpers.showAlert(message: message, title: title, timeout: 55555)
+      window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
   failure: () =>
-    window.helpers.showAlert(message: 'Is your email address correct?', timeout:5555)    
-    # window.track.event('EmailCaptureModal', 'Error', @campaign)
+    window.helpers.showAlert(message: 'Is your email address correct?')    
+    window.track.event('LandingPageModal', 'Error', @opts.content, @opts.promocode)
 
   onOpen: =>
     $('.vex-dialog-buttons button').addClass('btn btn-black') # HACKETRY
     if @opts.submitText
       $('.vex-dialog-form button[type=submit]').val(@opts.submitText) 
 
-    # window.track.event('LandingPageModal', 'Opened', @opts.content, @opts.promocode)
+    window.track.event('LandingPageModal', 'Opened', @opts.content, @opts.promocode)
 
   open: () =>
     vex.dialog.buttons.NO.text = 'X'
