@@ -46,10 +46,30 @@ z.list-group-item.customization-option  {
 	.row {
 		padding-top: 1.45rem;
 	}
+
+	.btn {
+		font-family: "brandon-grotesque";
+		font-size: 1.5rem;
+	}
+
+	.social-media-links {
+		padding-top: 3rem;
+
+		span {
+			float: right;
+			margin-right: 2.4rem;
+			width: 30px;
+			height: 30px;
+		}
+
+		.st_facebook_custom {
+			margin-right: 0;
+		}
+	}
 }
 
 .product-details *{
-	margin-right: 2rem;
+	margin-right: 0;
 }
 
 .product-details {
@@ -75,6 +95,12 @@ z.list-group-item.customization-option  {
 
 	&:hover {
 		color: black;
+	}
+
+	&:after {
+		content: '+';
+		position: absolute;
+		right: 15px;
 	}
 }
 
@@ -117,7 +143,7 @@ z.list-group-item.customization-option  {
 	text-decoration: line-through;
 }
 
-.product-price {
+#product-price{
 	font-weight: 600;
 }
 
@@ -232,14 +258,14 @@ z.list-group-item.customization-option  {
 	right:-100%;
 	width:500px;
 	transition: right 0.3s ease 0s;
-  z-index: 9999 !important;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0 20px 20px 20px;
-  position: fixed;
-  top: 0;
-  background-color:#FFFFFF;
+  	z-index: 9999 !important;
+	height: 100%;
+  	overflow-y: auto;
+  	overflow-x: hidden;
+ 	padding: 0 20px 20px 20px;
+  	position: fixed;
+  	top: 0;
+  	background-color:#FFFFFF;
 
 	h2 {
 		text-align:center;
@@ -311,5 +337,6 @@ z.list-group-item.customization-option  {
 }
 
 .container-fluid.product-content {
-	width: 100%
+	width: 100%;
+	padding-right: 3.5rem;
 }
