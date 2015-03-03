@@ -87,7 +87,6 @@ ruby:
             - @product.custom_sizes.each do |size|
               option value=size.id
                 = size.presentation
-
     .row
       - colors = @product.available_options.colors
       - if colors.present?
@@ -123,15 +122,13 @@ ruby:
     .row.secondary-actions
       .col-md-6.col-xs-6.col-xxs-12
         button#fit-guide.btn.btn-block.btn-secondary Fit Guide
-        br
 
       .col-md-6.col-xs-6.col-xxs-12
         - if Features.active?(:moodboard)
           - if current_spree_user.present?
-            button#add-to-moodboard.btn.btn-block.btn-secondary +Moodboard
-        br
+            button#add-to-moodboard.btn.btn-block.btn-secondary + Moodboard
 
-    .row
+    .row.social-media-links
       span class='st_facebook_custom' displayText='Facebook'
         = image_tag '_icons/facebook.png'
       span class='st_pinterest_custom' displayText='Pinterest'
@@ -281,7 +278,6 @@ hr
                   span.option-namep= option.name
                   span.option-price= "+#{option.display_price}"
             br
-
 
 /! More Dresses
 - if @product.recommended_products.present?
