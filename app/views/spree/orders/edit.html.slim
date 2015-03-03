@@ -37,10 +37,10 @@
                           - link_data = {id: cart_item.id, variant: cart_item.variant_id, quantity: cart_item.quantity}
                           = link_to 'Edit item', '#', class: 'edit-link btn small empty border', data: link_data
 
-                          - if spree_user_signed_in?
+                          /- if spree_user_signed_in?
                             = link_to '+ move to moodboard', move_to_wishlist_line_item_path(id: cart_item.id), \ 
                               data: { id: cart_item.id }, class: "move-to-wishlist btn small empty border"
-                          - else
+                          /- else
                             = link_to '+ move to moodboard', spree_signup_path, class: "btn small empty border"
 
                         - elsif cart_item.product_type == :customized

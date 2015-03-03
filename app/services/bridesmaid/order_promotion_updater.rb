@@ -1,3 +1,5 @@
+# note: obsolted. 
+# use UserCart::PromotionsService instead
 class Bridesmaid::OrderPromotionUpdater
   attr_reader :accessor, :promotion, :order
 
