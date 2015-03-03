@@ -13,7 +13,7 @@
         = link_to 'login', '#', class: 'btn open-login-popup'
         = link_to 'FB login', fb_auth_path(return_to: 'checkout'), class: 'btn fb-login'
 
-  = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global'}, remote: false do |form|
+  = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
     = render :partial => 'shared/error_messages', locals: { target: @order }
 
     h2 Billing Address

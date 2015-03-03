@@ -44,7 +44,7 @@
     .card-wrapper
     br
 
-    = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
+    = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
       = render 'shared/error_messages', :target => @order, :view => "payment"
 
       = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id

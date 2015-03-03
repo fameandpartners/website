@@ -1,10 +1,10 @@
-$('.checkout.edit').ready ->
+page.initCheckoutEditPage = () ->
   page = {
     ajax_callbacks: {}
     init: () ->
       $(document).on('change',  '#order_use_billing', page.updateShippingFormVisibility)
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
-      $(document).on('click',   'form input[type=submit]', page.onAjaxLoadingHandler)
+      $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
       $(document).on('click',   '.place-order button', page.onAjaxLoadingHandler)
       $(document).on('click',   '.place-order button', page.orderProccessHandler)
       $(document).on('submit',  'form.payment_details.credit_card', page.doNothing)
@@ -259,7 +259,6 @@ $('.checkout.edit').ready ->
 
         page.pin_request_in_process = false
   }
-
   page.init()
-
   window.checkout_page = page
+  page
