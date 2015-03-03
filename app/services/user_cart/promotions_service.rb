@@ -1,3 +1,16 @@
+# usage
+#    service = UserCart::PromotionsService.new(
+#      order: current_order,
+#      code: params[:promotion_code]
+#    )
+#
+#    if service.apply { true / false }
+#    service.status   { :ok  / :error }
+#    service.message  { translated text success/notice/error }
+#
+# note: some eligible/not eligible rules placed here
+# app/models/spree/promotion_decorator.rb
+# possible, we should extract logic from there
 module UserCart; end
 class UserCart::PromotionsService
   attr_reader :order, :code     # input
