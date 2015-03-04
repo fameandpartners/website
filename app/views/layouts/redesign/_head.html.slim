@@ -19,14 +19,16 @@ meta property="og:site_name" content="Fame &amp; Partners"
 //meta property="og:image" content="http://sharethis.com/images/logo.jpg"
 
 
-- unless Rails.env.production?
+- if !Rails.env.production?
   meta name="robots" content="noindex, nofollow"
-  <script src="//use.typekit.net/day0prb.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
+  script src="//use.typekit.net/kur6crm.js" type="text/javascript"
 
-- if Rails.env.development?
-	<script src="//use.typekit.net/kur6crm.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
+- if Rails.env.production?
+  script src="//use.typekit.net/day0prb.js" type="text/javascript"
+		
+
+script type="text/javascript"
+  | try{Typekit.load();}catch(e){}
 
 /[if lt IE 9]
   = javascript_include_tag 'html5.js'
