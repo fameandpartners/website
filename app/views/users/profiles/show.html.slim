@@ -36,8 +36,8 @@
             .form-group.text-center
               .avatar-field
                 - if @user.image.present?
-                .avatar
-                  = image_tag @user.image, width: 100
+                  .avatar
+                    = image_tag @user.image, width: 100
                 - else
                  .avatar.empty
 

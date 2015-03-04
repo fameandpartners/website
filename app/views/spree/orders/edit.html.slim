@@ -11,9 +11,9 @@
       .grid-9
         .separator
         - if @user_cart.items.empty?
-        .empty-cart(data-hook="empty_cart")
-          p = t(:your_cart_is_empty)
-          p = link_to t(:continue_shopping), collection_path, class: 'button continue'
+          .empty-cart(data-hook="empty_cart")
+            p = t(:your_cart_is_empty)
+            p = link_to t(:continue_shopping), collection_path, class: 'button continue'
         - else
           table.cart-table
             thead
@@ -99,7 +99,7 @@
       .grid-3
         .cart-summary
           .summary
-            = render 'summary'
+            = render 'summary', cart: @order
             .continue-buy
               .checkout
                 = form_for @order, url: update_cart_path do |f|

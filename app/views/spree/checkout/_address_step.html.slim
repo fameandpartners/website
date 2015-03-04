@@ -34,26 +34,46 @@
                 small 
                   ' (Use billing address)
       .col-md-6
-        .form-group
-          .checkbox-gray-md
-            label
-              input type="checkbox"/
-              span.checkbox-label 
-                ' GET $10 OFF YOUR NEXT PURCHASE
-                br
-                ' create an account
-                small 
-                  ' (Optional)
+        /- if not signed_in?
+          .form-group
+            .checkbox-gray-md
+              label
+                input#create_account type="checkbox"/
+                span.checkbox-label 
+                  ' GET $10 OFF YOUR NEXT PURCHASE
+                  br
+                  ' create an account
+                  small 
+                    ' (Optional)
 
     .form-wrapper data-hook='shipping_inner'
       = form.fields_for :ship_address do |ship_form|
         = render partial: 'spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
 
+    /- if not signed_in?
+      .form-wrapper.checkout-content.line.form-global.passwords data-hook="registration"
+        h2.checkout-section-title  Personal details
+        = form_for @user, :url => spree.update_checkout_registration_path, :remote => false, :method => :put do |reg_form|
+          .row
+            .col-md-12.form-group
+              = reg_form.label :password, with_required_mark(t(:password))
+              = reg_form.password_field :password, class: 'required form-control form-control-md'
+          .row
+            .col-md-12.form-group
+              = reg_form.label :password_confirmation, with_required_mark(t(:password_confirmation))
+              = reg_form.password_field :password_confirmation, class: 'required form-control form-control-md'
+
+    .row
+      .col-md-6.form-group
+        / order submit button
+        = form.submit 'Next', data: { loading: 'Submitting...' }, class: 'btn btn-block btn-md btn-black'
+
+
     / .row
     /   .col-md-12.form-group
     /     = form.submit 'Next', data: { loading: 'Submitting...' }, class: 'btn btn-black'
 
-    - if Rails.env.development? # don't have such functionality yet
+    /- if Rails.env.development? # don't have such functionality yet
       h2.checkout-section-title  Shipping Options
       / br
       .row
@@ -86,58 +106,3 @@
   .row
     .col-md-12
       = link_to 'Edit your Billing or Shipping Details', checkout_state_path('address'), :remote => false, class: 'edit'
-
-/- if false
-  h2 Shipping Address
-  br
-  .row
-    .col-md-6.form-group
-      label for=""  First Name
-      input.form-control.standard-form type="text" /
-    .col-md-6.form-group
-      label for=""  Last Name
-      input.form-control.standard-form type="text" /
-  .row
-    .col-md-12.form-group
-      label for=""  Address Line 1
-      input.form-control.standard-form type="text" /
-  .row
-    .col-md-12.form-group
-      label for=""  Address Line 2 (Optional)
-      input.form-control.standard-form type="text" /
-
-  .row
-    .col-md-4.form-group
-      label for=""  City
-      input.form-control.standard-form type="text" /
-    .col-md-4.form-group
-      label for=""  State
-      select.form-control.standard-form
-        option QLD
-        option WA
-        option VIC
-        option NSW
-        option etc...
-    .col-md-4.form-group
-      label for=""  Zip Code
-      input.form-control.standard-form type="text" /
-  .row
-    .col-md-12.form-group
-      label for=""  Phone
-      input.form-control.standard-form type="text" /
-
-  .row
-    .col-md-12.form-group
-      button.btn.btn-black Next
-  hr
-
-
-  h2 2. Shipping Options
-  br
-  .row
-    .col-md-12.form-group
-      select.cs-select.cs-skin-border
-        option selected="" value="free"  Free Shipping
-  .row
-    .col-md-12.form-group
-      button.btn.btn-black Next

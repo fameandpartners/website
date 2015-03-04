@@ -22,8 +22,6 @@ window.page.BaseProductCustomizer = class BaseProductCustomizer
     setTimeout(@selector.close, 50)
 
   updatePrice: ()=>
-    console.log "price"
-    console.log [@price, price]
 
     originalPrice = @hackPriceToCents(@$currentPrice.data('original-price'))
     sizePrice = @hackPriceToCents(@$currentPrice.data('size-price'))
@@ -63,9 +61,6 @@ window.page.ProductSizer = class ProductSizer extends BaseProductCustomizer
 
     @close(price)
     
-
-
-
 window.page.ProductColorizer = class ProductColorizer extends BaseProductCustomizer
   
   constructor: (opts = {}) ->        

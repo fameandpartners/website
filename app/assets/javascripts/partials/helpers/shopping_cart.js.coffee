@@ -80,11 +80,17 @@ window.helpers.ShoppingCart = class ShoppingCart
       type: 'POST',
       dataType: "json",
       data: { promotion_code: code }
-    ).success(
-      @updateData
+    ).success((data) =>
+      if data.error
+        @trigger('error', data)
+      else
+        @updateData(data)
     ).error( () =>
       @trigger('error')
+    ).complete(
+      () => @trigger('complete')
     )
+
 
 
 #_base = undefined

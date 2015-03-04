@@ -1,7 +1,7 @@
 // our code
 //= require jquery
-//= require jquery-ui
-//= require jquery-ui/datepicker
+//= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require jquery-fileupload/vendor/jquery.ui.widget
 //= require jquery-fileupload/jquery.iframe-transport
 //= require jquery-fileupload/jquery.fileupload
@@ -37,17 +37,17 @@
 //= require partials/helpers/site_version
 //= require partials/helpers/alert
 //= require partials/helpers/product_side_selector_panel
-
+//= require partials/helpers/modal
 
 // THIS IS NOT A THING NOW
 // require popups/style_quiz
-// require partials/helpers/modal
 
 //= require partials/product_collection.js
 //= require partials/product_customisation.js
 
 //= require partials/email_newsletter_subscriber
 //= require partials/email_capture_modal
+//= require partials/mobile_menu
 //= require partials/helpers/tracker.js.coffee
 //= require partials/helpers/error_messages.js.coffee
 
