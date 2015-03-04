@@ -1,5 +1,6 @@
 ruby:
-  cache_keys = ['bridesmaid_lp']
+  variant = params[:variant] || 1
+  cache_keys = ["feb_2015_lp_v#{variant}"]
   if spree_user_signed_in?
     cache_keys << 'authenticated'
   else
@@ -14,14 +15,18 @@ ruby:
 - if marketing_landing_page?
   = render '/shared/marketing_pop_js'
 
-.bridesmaid_lp
+.feb_2015_lp
   - cache cache_keys, expires_in: configatron.cache.expire.long do
-    - products = get_products_from_edit('Bridesmaid14', nil, nil, 20)
-    - other_products = get_products_from_edit('BridesmaidOther', nil, nil, 99)
+    - if variant.to_i != 1
+      - discount = Discount.new(:amount => 25)
+    - products = get_products_from_edit('FB2015', nil, nil, 20)
+    - other_products = get_products_from_edit('FB2015OTHER', nil, nil, 99)
     .sb1 style="position:relative;margin-top:20px;margin-bottom:15px;"
       div style="position:absolute;top:20px; font-size:50px;color:#FFFFFF;" 
-      = image_tag 'campaigns/bridemaid/bridesmaid-dress-banner-upto80off.jpg', width: 1140, :alt => "Bridesmaid dresses you will love and wear again"
-      
+      = image_tag "campaigns/feb-2015/variant-#{variant}-banner.jpg", width: 1140, :alt => "Find your perfect dress"
+      - if variant.to_i != 1      
+        h2 Use promocode 'PREPROM25' for 25% off your Prom Dress
+
     .inner  
       .catalog
         - products[0..3].each do |dress|
@@ -31,14 +36,20 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress) 
+              - if variant.to_i != 1              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
+                .price = price_for_product_with_applied_promocode(dress)
       .sb3 style="margin-bottom:15px;"
         .left style="height:349px;width:50%;text-transform:none;"
-          h1 style="text-transform:none;"= t('landing.bridesmaid.one.heading')
-          p style="text-transform:none;"= t('landing.bridesmaid.one.p1')
-          p style="text-transform:none;"= t('landing.bridesmaid.one.p2')
+          h1 style="text-transform:none;"
+            ' Find your perfect dress
+          p style="text-transform:none;"
+            ' Fame & Partners is your only online dress boutique delivering high quality and uniquely designed dresses, just for you.
+          p style="text-transform:none;"
+            ' Find your uniquely designed dress by choosing your favourite colors, from white to lavender, mint and soft pink with divine fabrics and silhouettes! 
         .right style="margin-right: 0px;"
-          = image_tag 'campaigns/bridemaid/bridesmaid-dress-1.jpg', width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
+          = image_tag "campaigns/feb-2015/variant-#{variant}-editorial.jpg", width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
       .catalog
         - products[4..7].each do |dress|
           .catalog-item
@@ -47,15 +58,11 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
-      .sb3 style="margin-bottom:15px;"        
-        .left style="margin-right: 0px;"
-          = image_tag 'campaigns/bridemaid/bridesmaid-dress-2.jpg', width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
-        .right style="height:349px;width:50%;text-transform:none;"
+              - if variant.to_i != 1              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
+                .price = price_for_product_with_applied_promocode(dress)
 
-          h2 style="text-transform:none;"= t('landing.bridesmaid.two.heading')
-          p style="text-transform:none;"= t('landing.bridesmaid.two.p1')
-          p style="text-transform:none;"= t('landing.bridesmaid.two.p2')
       .catalog
         - products[8..11].each do |dress|
           .catalog-item
@@ -65,15 +72,11 @@ ruby:
             .text
               .colour= ''
               .name= link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
-      .sb3 style="margin-bottom:15px;"
-        .left style="height:349px;width:50%;text-transform:none;"
-          h2 style="text-transform:none;"= t('landing.bridesmaid.three.heading')
-          p style="text-transform:none;"= t('landing.bridesmaid.three.p1')
-          p style="text-transform:none;"= t('landing.bridesmaid.three.p2')
-          p style="text-transform:none;"= t('landing.bridesmaid.three.p3')
-        .right style="margin-right: 0px;"
-          = image_tag 'campaigns/bridemaid/bridesmaid-dress-3.jpg', width: 494, height: 349, class: 'image', alt: 'Bride in white dress with bridesmaid in light pink dress'
+              - if variant.to_i != 1              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
+                .price = price_for_product_with_applied_promocode(dress)
+
       .catalog
         - products[12..15].each do |dress|
           .catalog-item
@@ -82,10 +85,13 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
+              - if variant.to_i != 1              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
+                .price = price_for_product_with_applied_promocode(dress)
 
       .more
-        h2 More Bridesmaid Dresses    
+        h2 More Dresses    
       - other_products.each_slice(4).each do |product_group|
         .catalog
           - product_group.each do |dress|
@@ -95,6 +101,9 @@ ruby:
                   = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
-                .price = price_for_product(dress)      
+              - if variant.to_i != 1              
+                .price = price_for_product_with_discount(dress, discount) 
+              - else
+                .price = price_for_product_with_applied_promocode(dress)
 
-script type="application/javascript" src="//s.uadx.com/6ef9a6c0-178d-11e4-80ee-22000afe405e:1a1d5400-480a-11e4-9e3e-22000afe405e.js"
+/ script type="application/javascript" src="//s.uadx.com/6ef9a6c0-178d-11e4-80ee-22000afe405e:1a1d5400-480a-11e4-9e3e-22000afe405e.js"
