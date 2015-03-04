@@ -20,7 +20,7 @@ module Features
     end
 
     def kv_store
-      Redis.new(:url => configatron.redis_options)
+      Redis.new(configatron.redis_options)
     end
   end
 end 
