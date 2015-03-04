@@ -62,12 +62,10 @@
 	.product-order {
 		.select2-container--default .select2-selection--single {
 			background-color:#023648;
-
 		}
 
 		.select2-container--default .select2-selection--single .select2-selection__rendered {
 			color: white;
-
 		}
 	}
 }
@@ -131,5 +129,9 @@
 	position: absolute;
 	top: 0;
 	left: 15px;
+}
+
+.page-title {
+	background-image: url('category-banners/vneck.jpg')
 }
 
