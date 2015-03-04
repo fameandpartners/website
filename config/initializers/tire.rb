@@ -4,7 +4,7 @@ if Rails.env.feature?
   Tire::Model::Search.index_prefix 'fame_feature'
 end
 if Rails.env.production? || Rails.env.preproduction?
-  redis_url = Rails.application.config.cache_store || YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
+  redis_url = configatron.redis_options || YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
   Tire.configure do
     url redis_url
   end
