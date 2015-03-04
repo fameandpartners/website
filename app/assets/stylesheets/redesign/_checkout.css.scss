@@ -1,0 +1,99 @@
+// Checkout page url: /checkout
+.page-content.checkout {
+  // - Override form styles
+  label { 
+    color: #000;
+  }
+  .form-control {
+    font-weight: 300;
+    font-size: 15px;
+    font-family: $font-family-secondary;
+    text-align: left;
+    text-transform: none;
+    background: none;
+    border-color: #000;
+  }
+
+  // - Override Checkout items styles
+  .checkout-items {
+    background-color: $gray-light-bg;
+    border: 0;
+
+    h3 { 
+      text-transform: uppercase;
+      margin: 25px 0;
+    }
+
+    .cart-items li {
+      background-color: #fff;
+      border-top-color: #000;
+      padding: 0 45px 0 0;
+      font-size: 14px;
+    }
+    .cart-item-image {
+      width: 80px;
+      margin-right: 10px;
+    }
+    .delete-item {
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      right: 15px;
+      top: 50%;
+      margin-top: -10px;
+      overflow: hidden;
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      &:before, &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 40px;
+        left: 50%;
+        top: 50%;
+        margin-left: -1px;
+        margin-top: -20px;
+        background-color: #000;
+      }
+      &:after {
+        height: 1px;
+        width: 40px;
+        margin-left: -20px;
+        margin-top: -1px;
+      }
+    }
+  }
+  .col-md-4 { padding-top: 0;}
+
+  .promo-code {
+    margin: 20px 0;
+    .input-group-addon { 
+      border-bottom: 0 !important;
+      padding: 0;
+      vertical-align: bottom;
+    }
+    .btn-submit {
+      background: none;
+      border: 0;
+    }
+  }
+
+
+}
+// @end
+
+
+// Title
+.checkout-section-title {
+  text-transform: uppercase;
+  background-color: #f6e2d5;
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+// @end
+
+

@@ -24,67 +24,67 @@ ruby:
 .row
   .col-md-6.form-group
     = form.label :firstname, with_required_mark(t(:first_name))
-    = form.text_field :firstname, class: 'required form-control standard-form', value: first_name, required: 'required'
+    = form.text_field :firstname, class: 'required form-control form-control-md', value: first_name, required: 'required'
   .col-md-6.form-group
     = form.label :lastname, with_required_mark(t(:last_name))
-    = form.text_field :lastname, class: 'required form-control standard-form', value: last_name, required: 'required'
+    = form.text_field :lastname, class: 'required form-control form-control-md', value: last_name, required: 'required'
 
 .row
   .col-md-12.form-group
     = form.label :email, with_required_mark(t(:email))
-    = form.text_field :email, class: 'required form-control standard-form', value: form.object.email, required: 'required'
+    = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
 
   - if Spree::Config[:company]
     .col-md-12.form-group
       = form.label :company, t(:company)
-      = form.text_field :company, class: 'form-control standard-form'
+      = form.text_field :company, class: 'form-control form-control-md'
 
 .row
   .col-md-12.form-group
     = form.label :address1, with_required_mark(t(:street_address))
-    = form.text_field :address1, class: 'required form-control standard-form', required: 'required'
+    = form.text_field :address1, class: 'required form-control form-control-md', required: 'required'
     p.hint Must be a physical address, not a P.O. Box
 
 .row
   .col-md-12.form-group
     = form.label :address2, t(:street_address_2)
-    = form.text_field :address2, class: 'required form-control standard-form'
+    = form.text_field :address2, class: 'required form-control form-control-md'
 
 .row
   .col-md-4.form-group
     = form.label :city, with_required_mark(t(:city))
-    = form.text_field :city, class: 'required form-control standard-form', required: 'required'
+    = form.text_field :city, class: 'required form-control form-control-md', required: 'required'
 
   .col-md-4.form-group
     = form.label :country_id, with_required_mark(t(:country))
-    = form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required form-control standard-form'}
+    = form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required form-control form-control-md'}
 
   .col-md-4.form-group
     = form.label :state, with_required_mark(t(:state))
 
-    select id=(field_id) name="#{form.object_name}[state_id]" class="form-control standard-form #{ have_states ? 'required' : 'hidden' }" disabled=(!have_states)
+    select id=(field_id) name="#{form.object_name}[state_id]" class="form-control form-control-md #{ have_states ? 'required' : 'hidden' }" disabled=(!have_states)
       option value='' data-country=''
       - states.each do |state|
         option selected=(address.state_id == state.id) style=(state.country_id == address.country_id ? '' : 'display: none;') value=(state.id) data-country=(state.country_id) = state.name
 
     = form.text_field(:state_name,
-                      :class => !have_states ? 'required standard-form form-control' : 'hidden standard-form form-control',
+                      :class => !have_states ? 'required  form-control form-control-md' : 'hidden  form-control form-control-md',
                       :disabled => have_states)
 
 .row
   .col-md-6.form-group
     = form.label :phone, with_required_mark(t(:phone))
-    = form.phone_field :phone, class: 'required form-control standard-form', required: 'required'
+    = form.phone_field :phone, class: 'required form-control form-control-md', required: 'required'
 
   .col-md-6.form-group
     = form.label :zipcode, with_required_mark(t(:zip))
-    = form.text_field :zipcode, class: 'required form-control standard-form', required: 'required'
+    = form.text_field :zipcode, class: 'required form-control form-control-md', required: 'required'
 
 - if address_type == 'billing'
   .row
     .col-md-4.form-group
       = form.parent_builder.label :required_to, 'When is your dress needed?'
-      = form.parent_builder.text_field :required_to, value: @order.required_to, class: 'form-control standard-form'
+      = form.parent_builder.text_field :required_to, value: @order.required_to, class: 'form-control form-control-md'
 
 
 - if false && Spree::Config[:address_requires_state]
@@ -126,26 +126,26 @@ ruby:
   .row
     .col-md-6.form-group
       label for=""  First Name
-      input.form-control.standard-form type="text" /
+      input.form-control  type="text" /
     .col-md-6.form-group
       label for=""  Last Name
-      input.form-control.standard-form type="text" /
+      input.form-control  type="text" /
   .row
     .col-md-12.form-group
       label for=""  Address Line 1
-      input.form-control.standard-form type="text" /
+      input.form-control  type="text" /
   .row
     .col-md-12.form-group
       label for=""  Address Line 2 (Optional)
-      input.form-control.standard-form type="text" /
+      input.form-control  type="text" /
 
   .row
     .col-md-4.form-group
       label for=""  City
-      input.form-control.standard-form type="text" /
+      input.form-control  type="text" /
     .col-md-4.form-group
       label for=""  State
-      select.form-control.standard-form
+      select.form-control 
         option QLD
         option WA
         option VIC
@@ -153,11 +153,11 @@ ruby:
         option etc...
     .col-md-4.form-group
       label for=""  Zip Code
-      input.form-control.standard-form type="text" /
+      input.form-control  type="text" /
   .row
     .col-md-12.form-group
       label for=""  Phone
-      input.form-control.standard-form type="text" /
+      input.form-control  type="text" /
 
   .row
     .col-md-12.form-group

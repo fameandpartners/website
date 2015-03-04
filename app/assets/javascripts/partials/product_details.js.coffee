@@ -57,7 +57,7 @@ page.initProductDetailsPage = (options = {}) ->
   # init moodboard button
   if options.wishlistButton
     $wishlist_button = $(options.wishlistButton)
-  	$wishlist_button.on('click', (e) ->
+    $wishlist_button.on('click', (e) ->
       e.preventDefault()
       status = selector.validate()
       if !status.valid

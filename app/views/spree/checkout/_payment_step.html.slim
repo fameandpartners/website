@@ -1,6 +1,6 @@
 - if !current_step.eql?('payment')
-  h2 Payment Details
-  br
+  h2.checkout-section-title Payment Details
+  / br
 - else
   - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
     - content_for :head do
@@ -12,8 +12,8 @@
     - content_for :inline_javascript do
       | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
 
-  h2 Payment Details
-  br
+  h2.checkout-section-title Payment Details
+  / br
   .btn-group-radio
     - if @credit_card_gateway
       input#optionsRadios1 name="optionsRadios" type="radio" value="option1"
@@ -50,17 +50,17 @@
       = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
       = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
 
-      .row
-        .col-md-12.form-group
-          p 
-            label
-              input type="checkbox" name='newsletter_subscribe'
-              span Get weekly style tips and special discounts
-          p.last 
-            label
-              input type="checkbox" id='terms_and_conditions' name='terms_and_conditions' checked="true"
-              span
-                'I agree to the 
-                = link_to 'Terms&Conditions', terms_path, target: '_blank'
-          .place-order
-            button.btn.btn-black date-require='terms_and_conditions' data-loading="Placing..." Place My order
+    / .row
+      .col-md-12.form-group
+        p 
+          label
+            input type="checkbox" name='newsletter_subscribe'
+            span Get weekly style tips and special discounts
+        p.last 
+          label
+            input type="checkbox" id='terms_and_conditions' name='terms_and_conditions' checked="true"
+            span
+              'I agree to the 
+              = link_to 'Terms&Conditions', terms_path, target: '_blank'
+        .place-order
+          button.btn.btn-black date-require='terms_and_conditions' data-loading="Placing..." Place My order
