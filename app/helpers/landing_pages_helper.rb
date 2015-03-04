@@ -6,7 +6,11 @@ module LandingPagesHelper
   end 
 
   def decode_promocode
-    Base64.decode64(params[:pc])
+    if params[:pc].present?
+      Base64.decode64(params[:pc])
+    else
+      ''
+    end
   end
 
 end

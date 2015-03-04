@@ -20,5 +20,5 @@
 //= require jquery-fileupload
 //= require admin/spree_social
 //= require admin/spree_paypal_express
-//= require jquery.ui.tabs
+//= require jquery-ui/tabs
 //= require admin/spree_banner
