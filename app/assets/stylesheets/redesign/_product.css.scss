@@ -72,6 +72,12 @@ z.list-group-item.customization-option  {
 	margin-right: 0;
 }
 
+@media(max-width: 768px){
+	.screen-height {
+		height:100vh;
+	}
+}
+
 .product-details {
 
 	h2 {
@@ -258,7 +264,7 @@ z.list-group-item.customization-option  {
 	right:-100%;
 	width:500px;
 	transition: right 0.3s ease 0s;
-  	z-index: 9999 !important;
+  	z-index: 1999 !important;
 	height: 100%;
   	overflow-y: auto;
   	overflow-x: hidden;
@@ -266,6 +272,15 @@ z.list-group-item.customization-option  {
   	position: fixed;
   	top: 0;
   	background-color:#FFFFFF;
+
+  	@media(max-width: 768px){
+  		right:-130%;
+  		max-width: 100%;
+  	}
+
+  	img {
+  		width: 100%;
+  	}
 
 	h2 {
 		text-align:center;
@@ -339,4 +354,16 @@ z.list-group-item.customization-option  {
 .container-fluid.product-content {
 	width: 100%;
 	padding-right: 3.5rem;
+
+		@media(max-width: 768px){
+			padding-right: 3rem;
+			padding-left: 4rem;
+	 	}
+}
+
+.secondary-actions .col-md-6:first-child {
+
+	@media(max-width: 768px){
+			padding-right: 0;
+	 	}
 }

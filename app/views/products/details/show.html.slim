@@ -62,7 +62,8 @@ ruby:
 
 /! Product Section
 .container-fluid.product-content.text-center
-  .col-md-4.col-md-offset-8.product-details.product-section--selection.no-padding
+  .col-sm-12.screen-height
+  .col-md-4.col-md-offset-8.col-sm-12.product-details.product-section--selection.no-padding
     .row
       h2 = @product.name
       p.product-section-description = @product.short_description
@@ -140,6 +141,7 @@ ruby:
 
 
 /! About The Dress
+.col-sm-12.screen-height
 .dress-about.container.page-content
   h2.text-center About The Dress
   .divider
@@ -272,7 +274,8 @@ hr
             .row
               .col-md-4.col-xs-12
                 .row
-                  = image_tag option.image, :width => 140, :height => 140, :alt => ''
+                  .image-box
+                    = image_tag option.image, :height => 140, :alt => ''
               .col-md-8.col-xs-12
                 .row
                   span.option-namep= option.name
