@@ -1,32 +1,51 @@
 a.cd-top href='#top' Top
 
 /! Mobile Menu
-/.mobile-menu-overlay
-  .close-mobile.pull-right
-    = image_tag 'images/close.svg', alt: 'X'
-  .content.text-center
-    h3 Filter
-    ul
-      li Style 1
-  
+/ .mobile-menu-overlay 
+/ .close-mobile.pull-right
+/ = image_tag 'images/close.svg', alt: 'X'
+#mobile-style.mobile-menu-options
+  .text-center
+    h3 Styles
+    ul.list-group
+      a.list-group-item href="#" One
+      a.list-group-item href="#" Two
+
+#mobile-color.mobile-menu-options
+  .text-center
+    h3 Colors
+    ul.list-group
+      a.list-group-item href="#" One
+      a.list-group-item href="#" Two
+
+#mobile-event.mobile-menu-options
+  .text-center
+    h3 Events
+    ul.list-group
+      a.list-group-item href="#" One
+      a.list-group-item href="#" Two
+
 
 /! Mobile Menu
-.mobile-menu.visible-sm.visible-xs
+#mobile-menu.mobile-menu.visible-sm.visible-xs
   .row
     .col-xs-3.mobile-menu-icon.mobile-active
-      a href="/dresses"
+      a href="/dresses" 
         span.hidden-xxs> View 
         | All
     .col-xs-3.mobile-menu-icon.style
-      a href="/dresses/style"
+      a href="/dresses/style" data-menu-options-container='#mobile-style'
         span.hidden-xs> By 
         | Style
-    .col-xs-3.mobile-menu-icon
-      a href="/dresses/color"
+    .col-xs-3.mobile-menu-icon 
+      a href="/dresses/color" data-menu-options-container='#mobile-color'
         span.hidden-xs> By 
-        | Colour
+        | Color
     .col-xs-3.mobile-menu-icon
-      a href="/dresses/event"
+      a href="/dresses/event" data-menu-options-container='#mobile-event'
         span.hidden-xs> By 
         | Event
 
+
+= content_for :inline_javascript do  
+  | new window.page.MobileMenu({container: '#mobile-menu'});

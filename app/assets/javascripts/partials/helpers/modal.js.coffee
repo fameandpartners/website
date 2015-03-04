@@ -1,5 +1,6 @@
 window.helpers or= {}
 
+
 window.helpers.showModal = (opts) ->
   className = opts.className || '' 
   vex.dialog.alert
@@ -9,4 +10,3 @@ window.helpers.showModal = (opts) ->
     afterOpen: ->
       $('.vex-dialog-button-primary').addClass('btn btn-black')
       $('.vex-dialog-button-primary').removeClass('vex-dialog-button')
-

@@ -1,6 +1,5 @@
 window.helpers or= {}
 
-
 window.helpers.ProductSideSelectorPanel = class ProductSideSelectorPanel
   constructor: ($container) ->
     @$container = $container
