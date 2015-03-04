@@ -23,6 +23,7 @@ class UserCart::PromotionsService
 
   def apply
     if apply_coupon_code
+      order.reload
       @status = :ok
       true
     else

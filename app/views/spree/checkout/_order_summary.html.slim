@@ -31,28 +31,28 @@ ruby:
             .checkout-price = product.price.display_price
           a.remove-product.delete-item href="#0" data-id=(product.line_item_id)
       
-    /! cd-cart-items
-    .promo-code
-      label for=""  Promo Code
-      .input-group
-        input.form-control.form-control-md type="text" /
-        span.input-group-addon
-          button.btn-submit Submit
-            
-    / hr
-    p
-      | Sub Total
-      span.pull-right = cart.display_item_total.to_s
-    p
-      | Shipping
-      span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
-    p
-      | Promotion
-      span.pull-right = cart.display_promotion_total.to_s
-    / hr
-    p
-      strong
-        | Total
-        span.pull-right = cart.display_total.to_s
-        - if current_site_version.is_australia?
-          .taxes Including GST
+  /! cd-cart-items
+  form.promo-code action="#"
+    label for=""  Promo Code
+    .input-group
+      input.form-control.form-control-md#promotion-code type="text"
+      span.input-group-addon
+        button.btn-submit Submit
+          
+  / hr
+  p
+    | Sub Total
+    span.pull-right = cart.display_item_total.to_s
+  p
+    | Shipping
+    span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
+  p
+    | Promotion
+    span.pull-right = cart.display_promotion_total.to_s
+  / hr
+  p
+    strong
+      | Total
+      span.pull-right = cart.display_total.to_s
+      - if current_site_version.is_australia?
+        .taxes Including GST

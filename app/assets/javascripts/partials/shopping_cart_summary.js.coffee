@@ -7,7 +7,8 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     _.bindAll(@, 'render', 'removeProductHandler', 'couponFormSubmitHandler')
 
     @$container.on('click', '.remove-product', @removeProductHandler)
-    @$container.on('click', '.promotion-apply', @couponFormSubmitHandler)
+    @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
+    @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
     @cart.on('change', @render)
     @
 
@@ -19,6 +20,8 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     line_item_id = $(e.currentTarget).data('id')
     @cart.removeProduct(line_item_id)
 
-  couponFormSubmitHandler: () ->
-    code = @$container.find('#promotion-code').val()
-    @cart.applyPromotionCode(code)
+  couponFormSubmitHandler: (e) ->
+    e.preventDefault() if e
+    $input = @$container.find('#promotion-code')
+    @cart.applyPromotionCode($input.val())
+    @cart.one('complete', () -> $input.val(''))
