@@ -20,7 +20,7 @@ module Features
     end
 
     def kv_store
-      Redis.new
+      Redis.new(:url => Rails.application.config.cache_store)
     end
   end
 end 
