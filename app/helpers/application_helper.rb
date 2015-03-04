@@ -300,8 +300,7 @@ module ApplicationHelper
   end
 
   def sale_active?
-    false
-    #current_sale.active?
+    current_sale.active?
   end
 
   def dynamic_colors
@@ -349,8 +348,7 @@ module ApplicationHelper
   end
 
   def current_sale
-    #@current_sale ||= Spree::Sale.first_or_initialize
-    nil
+    @current_sale ||= Spree::Sale.first_or_initialize
   end
 
   def is_surryhills?(product)

@@ -133,6 +133,12 @@ class StaticsController < ApplicationController
     @description = "Perfect NYE Dresses 2014. " + default_meta_description
   end
 
+  def us_prom_2015_lp
+    @nofollow = true
+    @title = "Prom Dresses | Beautiful Prom Dresses Online - Fame & Partners."
+    @description = "Discover beautiful prom dresses at Fame & Partners. " + default_meta_description
+  end
+
   def amfam_lp
     @title = "AMFAM Dresses - " + default_seo_title
     @description = "AMFAM Collaboration. " + default_meta_description

@@ -10,7 +10,7 @@ javascript:
   opts = {width: '700px'}
 
   if (typeof content != 'undefined') {
-    if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || contentparam == 'bride3plus1' || pop_switch == '1') {
+    if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || contentparam == 'feb2015v1' || contentparam == 'feb2015v2' || contentparam == 'feb2015v3' || contentparam == 'bride3plus1' || pop_switch == '1') {
 
       switch(contentparam) {
         case 'birthday.gif':
@@ -40,12 +40,28 @@ javascript:
         case 'bride3plus1':
           content = 'bride3plus1';        
           break; 
+        case 'feb2015v1':
+          opts = {width: '710px'}
+          content = 'feb2015-v1';    
+          opts.submit = 'SIGN UP NOW'    
+          break; 
+        case 'feb2015v2':
+          opts = {width: '710px'}
+          content = 'feb2015-v2';   
+          opts.submit = 'SIGN UP NOW'     
+          break; 
+        case 'feb2015v3':
+          opts = {width: '710px'}
+          content = 'feb2015-v3';   
+          opts.submit = 'SIGN UP NOW'     
+          break; 
+
         default:
           content = 'bday';
       }
     }
     $(document).ready(function(){    
-      setTimeout(openpop, 3000);
+      setTimeout(openpop, 300);
     });
   };
 
