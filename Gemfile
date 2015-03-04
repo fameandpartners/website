@@ -74,6 +74,7 @@ gem 'rollout'
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'coffee-script-source', "~> 1.8.0"
   gem 'uglifier', '1.3.0'
   gem 'execjs', '1.4.0'
   gem 'jquery-ui-rails'
