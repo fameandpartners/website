@@ -129,9 +129,10 @@ header
                 span.hidden-sm.hidden-xs#moodboard-counter
                   | Moodboard:&nbsp;
                   = "#{ current_user_moodboard.item_count }"
-        li.menu-item
-          = link_to profile_path, class: 'menu-item--link' do
-            | my account
+        - if signed_in?
+          li.menu-item
+            = link_to profile_path, class: 'menu-item--link' do
+              | my account
         li.menu-item
           a.menu-item--link.search href="#"
             = image_tag "images/Search.svg"
@@ -152,6 +153,6 @@ header
                 .col-md-3
 
         li#cart-trigger.menu-item
-          = link_to spree.cart_path, class: 'menu-item--link' do
+          = link_to spree.checkout_path, class: 'menu-item--link' do
             |cart:&nbsp;
             = current_order.item_count

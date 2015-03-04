@@ -1,4 +1,6 @@
 Spree::UserSessionsController.class_eval do
+  layout 'redesign/application'
+
   def create
     authenticate_spree_user!
 
