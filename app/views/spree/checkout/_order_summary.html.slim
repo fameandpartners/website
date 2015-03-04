@@ -29,7 +29,7 @@ ruby:
             span.qty =' "#{ product.quantity}x"
             = product.name
             .checkout-price = product.price.display_price
-          a.remove-product.delete-item href="#0" 
+          a.remove-product.delete-item href="#0" data-id=(product.line_item_id)
       
     /! cd-cart-items
     .promo-code

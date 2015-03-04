@@ -11,7 +11,7 @@ Spree::OrdersController.class_eval do
   # Shows the current incomplete order from the session
   def edit
     # temporarily? disabled /cart page
-    redirect_to spree.checkout_path and return
+    redirect_to(dresses_path) and return
 
     @order = current_order(true)
     associate_user
