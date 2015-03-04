@@ -37,11 +37,10 @@
 //= require partials/helpers/site_version
 //= require partials/helpers/alert
 //= require partials/helpers/product_side_selector_panel
-
+//= require partials/helpers/modal
 
 // THIS IS NOT A THING NOW
 // require popups/style_quiz
-// require partials/helpers/modal
 
 //= require partials/product_collection.js
 //= require partials/product_customisation.js
