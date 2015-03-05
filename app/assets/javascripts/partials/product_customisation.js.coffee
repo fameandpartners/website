@@ -8,34 +8,9 @@ window.page.BaseProductCustomizer = class BaseProductCustomizer
     @selector = new window.helpers.ProductSideSelectorPanel(@$container)
     @$action = $(opts.action).on('click', @selector.open)    
     @$select = $(opts.select)    
-    @$currentPrice = $('#product-current-price')
-
-  hackPriceToCents: (price) ->
-  
-    if price 
-      parseInt(price.toString().replace(/\D/g, ''))
-    else 
-      0
 
   close: ()=> 
-    # @updatePrice() DONT TURN THIS ON YET
     setTimeout(@selector.close, 50)
-
-  updatePrice: ()=>
-
-    originalPrice = @hackPriceToCents(@$currentPrice.data('original-price'))
-    sizePrice = @hackPriceToCents(@$currentPrice.data('size-price'))
-    colorPrice = @hackPriceToCents(@$currentPrice.data('color-price'))
-    customizationPrice = @hackPriceToCents(@$currentPrice.data('customization-price'))
-
-    price = originalPrice + sizePrice + colorPrice + customizationPrice
-
-    if originalPrice == price     
-      @$currentPrice.addClass('hidden').html('')
-    else
-      f = (price/100).toFixed(2)
-      @$currentPrice.removeClass('hidden').html("$#{f}")
-    
 
 window.page.ProductSizer = class ProductSizer extends BaseProductCustomizer
   constructor: (opts = {}) ->        
@@ -53,7 +28,7 @@ window.page.ProductSizer = class ProductSizer extends BaseProductCustomizer
     @$select.val(id)
 
     if price
-      @$currentPrice.data('size-price', @hackPriceToCents(price))
+      @$currentPrice.data('size-price', price)
       @$action.html("#{name} +#{price}")
     else
       @$currentPrice.data('size-price', 0)
@@ -63,9 +38,12 @@ window.page.ProductSizer = class ProductSizer extends BaseProductCustomizer
     
 window.page.ProductColorizer = class ProductColorizer extends BaseProductCustomizer
   
-  constructor: (opts = {}) ->        
+  constructor: (opts = {}, slider) ->        
     super(opts)  
     @$container.find('.color-option').on('click', @toggle)
+    @slider = slider
+    if opts.color_id
+      @$container.find("[data-id=#{opts.color_id}]").click()
 
   toggle: (e) =>          
     $el = $(e.currentTarget)
@@ -76,13 +54,12 @@ window.page.ProductColorizer = class ProductColorizer extends BaseProductCustomi
     $(@$container).find('.active').removeClass('active')    
     $el.toggleClass('active')    
     @$select.val(id)
+    @slider.showImagesWithColor(id)
 
     if price
-      @$currentPrice.data('color-price', @hackPriceToCents(price))
       @$action.html("#{name} +#{price}")
       @message = "You have selected a custom color, so we don't have a pic of this dress yet"
     else
-      @$currentPrice.data('color-price', 0)
       @$action.html(name)
 
     @close(price)    
@@ -113,7 +90,7 @@ window.page.ProductCustomisation = class ProductCustomisation extends BaseProduc
       @$select.val(id)
       name = $el.data('name')
       price = $el.data('price')
-      @$currentPrice.data('customization-price', @hackPriceToCents(price))
+      @$currentPrice.data('customization-price', price)
       @$action.html("#{name} +#{price}")
 
     @close(price)
