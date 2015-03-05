@@ -1,7 +1,50 @@
 .thefamechain {
+	padding-top: 0;
+
+
+	.apply {
+		background-color: black;
+
+		p {
+			color: white;
+			text-transform: uppercase;
+			margin-bottom: 0;
+		}
+
+		h2 {
+			text-transform: uppercase;
+			color: white;
+			font-family: forum;
+			font-size: 8rem;
+		}
+
+		ul {
+			list-style: none;
+			color: white;
+			text-transform: uppercase;
+
+			li {
+				display: inline-block;
+			}
+		}
+	}
+
+		.form {
+			background-color: #f6e2d5;
+
+			.header {
+				background-color: black;
+
+				h2 {
+					text-transform: uppercase;
+					color: white;
+					font-family: forum;
+					font-size: 5rem;
+				}
+			}
+		}
 
 	.form-border {
-		border: 1px solid grey;
 		width: 70rem;
 		margin-top: 2rem;
 		margin-left: auto;
@@ -30,29 +73,78 @@
 		}
 	}
 
-	.benefits, .how-it-works {
-		margin-top: 2rem;
-		padding: 2rem;
+}
+
+.fame {
+	background-color: #f6e1d5;
+
+	&:after {
+		background-color: #f6e1d5;
 	}
 
-	.two-columns {
-		max-width: 670px;
-		margin-left: auto;
-		margin-right: auto;
+	.page-title--details {
+		padding-top: 20px;
+		padding-bottom: 20px;
 	}
 
-	.circle {
-		width: 26rem;
-		height: 26rem;
-		margin-left: auto;
-		margin-right: auto;
+
+	p {
+		padding-top: 15px;
+		color: black;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+}
+
+.col-md-4.benefits {
+	height: 662px;
+
+	span{
+		text-transform: uppercase;
+	}
+
+	h3 {
+		padding-top: 2rem;
+		font-family: forum;
+		font-size: 4.5rem;
+		text-transform: uppercase;
+	}
+
+	.row {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+
+	p {
+		padding-right: 18.5%;
+		padding-left: 18.5%;
+		padding-bottom: 4%
+	}
+
+	h4 {
+		text-transform: uppercase;
+		font-size: 1.5rem;
 		margin-bottom: 2rem;
-
-		p {
-			padding-top: 9rem;
-			padding-left: 2rem;
-			padding-right: 2rem;
-			text-align: center;
-		}
 	}
+
+	.img-responsive {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	li{
+		padding-bottom: 0.38rem;
+	}
+}
+
+.col-md-4.benefits.middle {
+	background-color: white;
+
+	li{
+		padding-bottom: 0.52rem;
+	}
+}
+
+.last-column {
+	padding-bottom: 5rem;
 }

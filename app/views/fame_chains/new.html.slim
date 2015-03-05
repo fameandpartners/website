@@ -1,67 +1,81 @@
-.page-title.default
+.page-title.default.fame
   .container
     .page-title--details
-      h1.no-padding-bottom.text-white The Fame Chain
-      p.text-white.word Noun.
-      .text-center A network of fashion forward, free thinking bloggers
-      i increasing&nbsp;
-      ' their
-      b bling&nbsp;
-      ' through being linked.
+      = image_tag '_famechain/title.png', width: 432, height: 146, alt: 'The Fame Chain'
+
+      p.text-center Noun.</br>A network of fashion forward,</br>free thinking bloggers increasing their bling</br>through being linked.
 
 .page-content.thefamechain
-  .container.relative
-    .apply
-      h2 Apply for membership
-      h3 Members/Perks
-    .perks
-      = image_tag 'famechain/perks.png', width: 942, height: 147, alt: 'The Fame Chain Perks'
+  .container-fluid
+    .row
+      a href="/dresses/prom"
+        .col-md-4.text-center.no-padding
+          = image_tag "glam_rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
+      a href="#email-container"
+        .col-md-4.text-center.no-padding
+          = image_tag "glam_rebel2.jpg", alt: 'Newsletter sign up', class: 'img-responsive'
+      a href="/style-consultation"
+        .col-md-4.text-center.no-padding
+          = image_tag "real_prom.jpg", alt: 'Styling session sign up', class: 'img-responsive'
 
-    .circles
-      .row
-        .col-md-12
-          h2.text-center Who Can Apply
+  .container-fluid.apply
+    .row.text-center
+      h2 apply for membership
+      p member perks:
+      ul
+        li blogger training +
+        li exclusive fashion network +
+        li free dresses +
+        li earn cash
 
-      .row.two-columns
-        .col-md-6
-          .circle.pink.img-circle
-            p Have a blog where you actively follow fashion trends?
+  .col-md-4.brand-pink.benefits
+    .row
+      h4.text-center who can apply:
+      ul
+        li Have a blog where you actively follow fashion trends.
+        li Have a style of fashion Vlog.
+        li Want to earn an income from your blog.
+        li Want to inspire girls to create their own unique look for their formal occasions.
+        li Are active on either: Instagram, Facebook, Twitter, Pintrest, YouTube and/or other social media.
+      = image_tag "_famechain/glam-rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
 
-        .col-md-6
-          .circle.pink.img-circle
-            p Are active on Pinterest, Twitter, Instagram, Vine, Facebook and/or any other social media
-      .row
-        .col-md-4
-          .circle.pink.img-circle
-            p Are below the age of 25
+  .col-md-4.benefits.middle
+    .row
+      h4.text-center what you get
+      ul
+        li oppertunity to be invited to co-design a formal dress.
+        li 15% comission on every dress that one of your followers buys from our store
+        li
+          |Opportunity to link to other blogs and
+          span increase your own blogs visibility
+        li
+          span a free
+          | dress gifted to you to style for each blogger with over 20k following.
+        li Public endorsement of your blog as part of The Fame Chain.
+        li Oppotunity to feature through our own soial media channel and gain exposure.
+        li VIP acess to special discounts for you and your followers.
+        li Acess to a network of like-minded young women and content.
+        li
+          span jumpstart
+          | in your blogging, fashion and/or technology carer.
+        li VIP access to our annual paid internship competition.
 
-        .col-md-4
-          .circle.pink.img-circle
-            p Want to inspire girls to create their own unique look for their formal occasions
+  .col-md-4.brand-pink.benefits
+    .row
+      h4.text-center how does it work?
+      ul.last-column
+        li Apply to join The Fame Chain
+        li Applications are assessed within 5 days.
+        li If you are accepted, you get all the above perks.
+        li Recive the Fame Chain Welcome kity with technical instructions on how to join.
+      = image_tag "_famechain/glam-rebel5.jpg", alt: 'Something here', class: 'img-responsive portrait-img'
 
-        .col-md-4
-          .circle.pink.img-circle
-            p want to earn an income from you blog
-
-    .benefits.cream
-      h2 What you get
-      ul.benefits-list
-        li Opportunity to be invited to CO-DESIGN A FORMAL DRESS
-        li 15% commission on every dress that one of your followers buys from us
-        li A FREE FORMAL DRESS when 5 of your followers buy from our store
-        li Free blog and content creation training
-        li Opportunity to link to other blogs and INCREASE YOUR OWN BLOG'S VISIBILITY
-        li Public endorsement of your blog as part of The Fame Chain
-        li Opportunity to guest post on The Fame Issue
-        li VIP access to special discounts for you and your followers
-        li Access to a network of like-minded young women and content
-        li JUMPSTART in your blogging, fashion and/or technology career
-        li VIP access to our annual paid internship competition
-
+  .col-md-12.form
+    .row
+      h2.text-center Apply now
     .form-border
       .row
         .apply-now
-          h2.text-center Apply now
 
       = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
         .row
@@ -109,16 +123,6 @@
           .submit
             = f.submit "Apply now", class: 'btn btn-black'
 
-    .how-it-works.cream
-      .title How does it work?
-      ul.steps
-        li Apply to join The Fame Chain
-        li Applications are assessed within 5 days
-        li If you are accepted, you get all the perks above
-        li
-          ' Receive The Fame Chain Welcome Kit
-          br
-          ' with technical instructions on how to join
 
 javascript:
   var fb_param = {};
