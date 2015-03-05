@@ -23,13 +23,16 @@ class UserCart::ProductsController < UserCart::BaseController
         associate_user
       end
 
-      # spree promotion requires call from controller. crude&unclear, needs cleanup
       if current_promotion.present?
-        @order = current_order
-        @order.update_attributes(coupon_code: current_promotion.code)
-        apply_coupon_code
-        fire_event('spree.order.contents_changed')
-        current_order.reload
+        promotion_service = UserCart::PromotionsService.new(
+          order: current_order,
+          code: current_promotion.code
+        )
+
+        if promotion_service.apply
+          fire_event('spree.order.contents_changed')
+          fire_event('spree.checkout.coupon_code_added')
+        end
       end
 
       Activity.log_product_added_to_cart(
