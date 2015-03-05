@@ -43,17 +43,50 @@ ruby:
         = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
         br
 
+  /! somewhat complex rendering logic - also have to copy this in js templates
+  - products = @collection.products.first(6)
   .container.relative.products-collection
+    /! First Row - [][][][] First four products
+    .row.relative
+      = render partial: 'product', collection: products.shift(4), as: :product
+      .clearfix.visible-sm-block.visible-xs-block
+
+    /! Second row - [][][ XX ]
+    .row.relative
+      = render partial: 'product', collection: products.shift(2), as: :product
+      .col-md-6.col-xs-12.col-xxs-12
+        .content
+          p = @collection.details.description
+      .clearfix.visible-sm-block.visible-xs-block
+
+    /! Rest rows 
+    - @collection.products.drop(6).each_slice(4) do |products|
+      - if products.size == 4 
+        /! [][][][]
+        .row.relative
+          = render partial: 'product', collection: products, as: :product
+        .clearfix.visible-sm-block.visible-xs-block
+      - else
+        /! footer - one or two row [ X X ][][]
+        - products.each_slice(2) do |footer_products|
+          .row.relative
+            .col-md-6.col-xs-12.col-xxs-12
+              .content
+                h2 = @collection.details.title
+                p = @collection.details.footer
+            = render partial: 'product', collection: footer_products, as: :product
+            .clearfix.visible-sm-block.visible-xs-block  
+
+  /.container.relative.products-collection
     /! First Row - First four products
     =render :partial => 'products_four', :locals => { :products => @collection.products.slice(0, 4) }
 
     /! Second Row - Next two products
-    =render :partial => 'products_two_left', :locals => { :products => @collection.products.slice(3, 2), :content => @collection.details.description}
+    /=render :partial => 'products_two_left', :locals => { :products => @collection.products.slice(3, 2), :content => @collection.details.description}
     
     /! The rest of the products
-
-    - remaining = @collection.products.drop(6)    
-    - remaining.each_slice(4) do |products|
+    /- remaining = @collection.products.drop(6)    
+    /- remaining.each_slice(4) do |products|
       - if products.length < 4
         = render :partial => 'products_footer', :locals => { :products => products,:content => @collection.details.footer }
       - else    
