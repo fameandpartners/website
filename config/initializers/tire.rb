@@ -5,7 +5,7 @@ if Rails.env.feature?
 end
 if Rails.env.production? || Rails.env.preproduction?
   Tire.configure do
-    url configatron.es_url
+    url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
   end
 end
 if Rails.env.development?
