@@ -4,7 +4,7 @@ a.cd-top href='#top' Top
 / .mobile-menu-overlay 
 / .close-mobile.pull-right
 / = image_tag 'images/close.svg', alt: 'X'
-#mobile-style.mobile-menu-options
+#mobile-style.mobile-menu-options.hidden
   .text-center
     h3 Styles
     ul.list-group
@@ -16,7 +16,7 @@ a.cd-top href='#top' Top
       = link_to 'Backless', build_taxon_path('Open-Back'), class: 'list-group-item', title: "Open Back Dresses"
       = link_to 'Lace', build_taxon_path('Lace'), class: 'list-group-item', title: "Lace Dresses"
 
-#mobile-color.mobile-menu-options
+#mobile-color.mobile-menu-options.hidden
   .text-center
     h3 Colors
     ul.list-group
@@ -27,8 +27,7 @@ a.cd-top href='#top' Top
       = link_to "Red Dresses", colour_path('Red'), class: 'list-group-item', title: "Red Dresses"
       = link_to "Pastel Dresses", colour_path('Pastel'), class: 'list-group-item', title: "Pastel Dresses"
 
-
-#mobile-event.mobile-menu-options
+#mobile-event.mobile-menu-options.hidden
   .text-center
     h3 Events
     ul.list-group
