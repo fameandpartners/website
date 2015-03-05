@@ -18,9 +18,9 @@ class  UserCart::Populator
   attr_reader :site_version, :order, :currency, :product_attributes
 
   def initialize(options = {})
-    @site_version     = options[:site_version]
     @order            = options[:order]
-    @currency         = options[:currency] 
+    @site_version     = options[:site_version] || SiteVersion.default
+    @currency         = options[:currency]  || site_version.try(:currency)
     @product_attributes = HashWithIndifferentAccess.new(options[:product] || {})
   end
 

@@ -25,9 +25,9 @@ ruby:
         label CVC
         = text_field_tag "#{param_prefix}[verification_value]", '', id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5
   
-  .col-md-6.form-group
+  .col-md-6.form-group.place-order
     label &nbsp;
-    button.btn.btn-black.btn-block.btn-md date-require='terms_and_conditions' data-loading="Placing..." submit
+    button.btn.btn-black.btn-block.btn-md data-require='terms_and_conditions' data-loading="Placing..." submit
 
   / .col-md-6.form-group
   /   label Card Verification Number

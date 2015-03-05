@@ -22,6 +22,11 @@ page.initCheckoutEditPage = () ->
       page.updatePayButtonAvailability()
       page.updateAddressFormVisibility()
 
+      # validation
+      if app.debug || app.env == 'development'
+        if $('.place-order button').length == 0
+          console.log('WARRRRRGHNING! - credit card handlers have invalid selectors. cc payment will not work, probably')
+
     onAjaxLoadingHandler: (e) ->
       page.updateAddressFormVisibility()
 
@@ -122,9 +127,10 @@ page.initCheckoutEditPage = () ->
       false
 
     updatePayButtonAvailability: (event) ->
-      buttons = $("*[date-require='terms_and_conditions']")
+      buttons = $("*[data-require='terms_and_conditions']")
       links = $('#paypal_button')
-      if $('#terms_and_conditions').is(':checked')
+
+      if true || $('#terms_and_conditions').is(':checked')
         buttons.prop('disabled', false)
         links.prop('disabled', false)
         links.off('click', page.doNothing)
@@ -212,6 +218,8 @@ page.initCheckoutEditPage = () ->
 
     pinResponseHandler: (response) ->
       $form = $('form.payment_details.credit_card.pin')
+
+      console.log(response.response)
 
       if response.response
         return if page.payment_request_in_process
