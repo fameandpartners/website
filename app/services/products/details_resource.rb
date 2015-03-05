@@ -52,7 +52,9 @@ class Products::DetailsResource
         # page#show specific details
         recommended_products: recommended_products,
         available_options:  product_selection_options,
-        moodboard:          product_moodboard
+        moodboard:          product_moodboard,
+        color_id:           color_id,
+        color_name:         color_name
       })
     end
   end
@@ -83,6 +85,9 @@ class Products::DetailsResource
       raise ArgumentError.new('invalid product slug')
     end
 
+    def color_id
+      Spree::OptionValue.colors.find_by_name(color_name).try(:id)
+    end
     # images
     def product_images
       @product_images ||= Repositories::ProductImages.new(product: product)

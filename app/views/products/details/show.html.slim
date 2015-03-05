@@ -4,18 +4,34 @@ ruby:
         slider: {
           container: '#slides',
           images: #{ @product.all_images.to_json },
-          options: { animation: 'fade', play: 6000, preselected: null }
+          options: { animation: 'fade', play: 6000, preselected: '#{raw @product.color_id}' }
         },
         selector: {
           product_id: #{ @product.id },
           custom_id: #{ @product.master_id },
           variants: #{raw @product.available_options.variants.serialize.to_json },
           container: '.product-section--selection',
-          preselected: { }
         },
         moodboard_links: {
           container: '.dress-more.container.page-content',
           buttons: '.add-to-moodboard'
+        },
+
+        customize: {
+          container:  '#product-customizations-content',
+          action:     '#product-customize-action',
+          select:     '#product-customizations'
+        },
+        colorize: {
+          container:  '#product-color-content',
+          action:     '#product-colorize-action',
+          select:     '#product-color',
+          color_id:   '#{raw @product.color_id}'
+        },
+        size: {
+          container:  '#product-size-content',
+          action:     '#product-size-action',
+          select:     '#product-size'
         },
         buyButton: '.buy-button',
         wishlistButton: '#add-to-moodboard',
@@ -24,36 +40,15 @@ ruby:
       });
   "
 
-  init_product_customization = "
-      new page.ProductCustomisation({
-        container:  '#product-customizations-content',
-        action:     '#product-customize-action',
-        select:     '#product-customizations'
-       });
-      new page.ProductColorizer({
-        container:  '#product-color-content',
-        action:     '#product-colorize-action',
-        select:     '#product-color'
-      });
-
-      new page.ProductSizer({
-        container:  '#product-size-content',
-        action:     '#product-size-action',
-        select:     '#product-size'
-      });
-  "
-
 = content_for :inline_javascript do
   = raw init_product_details_page
-  = raw init_product_customization
 
 #slides
   .slides-container
     // note: we should crop images & update images preloading mechanics - too slow currently
-    = image_tag "bgimage.jpg"
-    / - @product.images.first.tap do |image|
-    /   = image_tag image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
-
+    / = image_tag "bgimage.jpg"
+    = image_tag @product.featured_image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: @product.featured_image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
+    
   nav.slides-navigation
     a.next href="#"
       span.fa.fa-angle-right.fa-4x
@@ -89,19 +84,17 @@ ruby:
               option value=size.id
                 = size.presentation
     .row
-      - colors = @product.available_options.colors
-      - if colors.present?
-        a#product-colorize-action.btn-customize
+      - if @product.colors?
+        a#product-colorize-action.btn-customize        
           | Color
 
         select#product-color.hidden
-          option value=""
-          - if colors.default.present?
-            - colors.default.each do |color|
-              option value=(color.id) class="color #{color.name}" data-color=color.name
-                = color.presentation
-          - if colors.extra.present?
-            - colors.extra.each do |color|
+          option value=""      
+          - @product.default_color_options.each do |color|
+            option value=(color.id) class="color #{color.name}" data-color=color.name
+              = color.presentation
+          - if @product.custom_colors?
+            - @product.custom_color_options.each do |color|
               option value=(color.id) class="custom color #{color.name}" data-price="#{ colors.default_extra_price.display_price }" data-color=color.name data-custom="true"
               = color.presentation
           br
@@ -126,8 +119,9 @@ ruby:
 
       .col-md-6.col-xs-6.col-xxs-12
         - if Features.active?(:moodboard)
-          - if current_spree_user.present?
-            button#add-to-moodboard.btn.btn-block.btn-secondary + Moodboard
+          - if current_spree_user.present? # lets redirect to login rather than hide
+            button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
+              |+ Moodboard
 
     .row.social-media-links
       span class='st_facebook_custom' displayText='Facebook'

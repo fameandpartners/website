@@ -25,6 +25,10 @@ module Products
       colors.present?  || colors.extra.any?
     end
 
+    def one_color?
+      default_color_options.length == 1
+    end
+
     def custom_colors?
       colors.extra.any?
     end
@@ -67,9 +71,23 @@ module Products
     end
 
     def all_images
-      images.collect do |img | 
+      featured_images.collect do |img | 
         { id: img.id, url: img.original, color_id: img.color_id, alt: name }
       end
+    end
+
+    def featured_image
+      @featured_image ||= featured_image_for_selected_color
+    end
+
+    def featured_image_for_selected_color
+      color_image = images.select{ |i| i.color_id.to_i == color_id.to_i }.first
+      color_image || featured_images.first      
+    end
+
+    # featured images are not cropped
+    def featured_images
+      @featured_images ||= images.select{ |i| ! i.original.to_s.downcase.include?('crop') }
     end
 
     def song

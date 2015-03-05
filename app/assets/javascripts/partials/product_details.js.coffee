@@ -17,9 +17,11 @@ page.initProductDetailsPage = (options = {}) ->
   selector    = null
 
   # init slider images
-  slider    = new helpers.ProductImagesSlider(options.slider.container, options.slider.images, options.slider.options)
-  selector  = new window.helpers.ProductVariantsSelector(options.selector)
-  
+  slider     = new helpers.ProductImagesSlider(options.slider.container, options.slider.images, options.slider.options)
+  selector   = new window.helpers.ProductVariantsSelector(options.selector)
+  customizer = new page.ProductCustomisation(options.customize)
+  colorizer  = new page.ProductColorizer(options.colorize, slider)
+  sizer      = new page.ProductSizer(options.size)
 
   # change images colors
   selector.on('change', (event, data) ->
@@ -59,6 +61,10 @@ page.initProductDetailsPage = (options = {}) ->
     $wishlist_button = $(options.wishlistButton)
     $wishlist_button.on('click', (e) ->
       e.preventDefault()
+      
+      # unless $(this).data('user-present')
+      # redirect to login 
+
       status = selector.validate()
       if !status.valid
         window.helpers.showAlert(message: status.error)

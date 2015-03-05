@@ -168,11 +168,14 @@ page.initCheckoutEditPage = () ->
         if !country_id || $(states_field_id).find('option:selected').data('country') != parseInt(country_id)
           $(states_field_id).val('')
 
-
     openLoginPopup: (e) ->
-      e.preventDefault()
-      popup = new window.popups.LoginPopup()
-      popup.show()
+      if window.popups && window.popups.LoginPopup()
+        e.preventDefault()
+        popup = new window.popups.LoginPopup()
+        popup.show()
+      else
+        # redirecting instead login popup
+        console.log('redirecting to login')
 
     toggleCVVCodePopup: (e) ->
       e.preventDefault()
