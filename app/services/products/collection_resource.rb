@@ -99,7 +99,7 @@ class Products::CollectionResource
           id: color_variant.product.id,
           name: color_variant.product.name,
           color: color_variant.color,
-          image: color_variant.images.first.try(:large),
+          image: cropped_image(color_variant),
           price: price,
           discount: discount
         )
@@ -111,6 +111,10 @@ class Products::CollectionResource
       end
 
       result
+    end
+
+    def cropped_image(color_variant)
+      color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }.first.try(:large)
     end
 
     def current_currency
