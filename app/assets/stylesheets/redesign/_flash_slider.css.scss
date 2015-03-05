@@ -46,7 +46,11 @@
         outline: none;
       }      
     }
+  }
 
-
+  @media screen and (max-width: 991px){ 
+    .vex-content {
+      margin-bottom:62px;    
+    }
   }
 }

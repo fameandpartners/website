@@ -1,8 +1,8 @@
 window.page or= {}
 
 window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
-  constructor: (opts = {}) ->            
-    $('#email_newsletter_signup').hide() if $.cookie('email_newsletter') == 'close'
+  constructor: (opts = {}) ->                
+    $('#email-newsletter-signup').hide() if $.cookie('email_newsletter') == 'close'
       
     @campaign = opts.campaign || 'home'
 
@@ -16,7 +16,7 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
     @$form.attr('action') + "?callback=?"    
   
   submit: (e) => 
-    e.preventDefault()
+    e.preventDefault()    
     $.getJSON(@url(), @$form.serialize(), @handler)
 
   handler: (data) =>
@@ -33,7 +33,7 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
     title = '#hashtag #hooray'
     message = 'Thanks for signing up. Use this promocode for $20 off your purchase: NEWS20.'
     window.helpers.showAlert(message: message, title: title, timeout: 55555)
-    $.cookie('email_newsletter', 'close', { expires: 365, path: '/' })
+    # $.cookie('email_newsletter', 'close', { expires: 365, path: '/' })
     window.track.event('Newsletter', 'Submitted', @campaign)
 
 
