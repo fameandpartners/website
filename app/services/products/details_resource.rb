@@ -8,7 +8,7 @@
 #   
 #
 class Products::DetailsResource
-  attr_reader :site_version, :product, :color_name
+  attr_reader :site_version, :product, :color
 
   def initialize(options = {})
     if options[:slug].blank? && options[:permalink].blank? && options[:product].blank? 
@@ -18,9 +18,9 @@ class Products::DetailsResource
     @site_version     = options[:site_version] || SiteVersion.default
     @product          = find_product!(options[:slug], options[:permalink], options[:product])
 
-    # this should be checked, and it have no influences to product details
+    # NOTE: this should be checked, and it have no influences to product details
     # other than preselect images/options
-    @color_name       = options[:color_name]
+    @color = Repositories::ProductColors.get_by_name(options[:color_name]) if options[:color_name]
   end
 
   def cache_key
@@ -53,8 +53,8 @@ class Products::DetailsResource
         recommended_products: recommended_products,
         available_options:  product_selection_options,
         moodboard:          product_moodboard,
-        color_id:           color_id,
-        color_name:         color_name
+        color_id:           color.try(:id),
+        color_name:         color.try(:name)
       })
     end
   end
@@ -85,9 +85,6 @@ class Products::DetailsResource
       raise ArgumentError.new('invalid product slug')
     end
 
-    def color_id
-      Spree::OptionValue.colors.find_by_name(color_name).try(:id)
-    end
     # images
     def product_images
       @product_images ||= Repositories::ProductImages.new(product: product)
