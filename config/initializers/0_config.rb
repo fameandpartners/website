@@ -70,6 +70,8 @@ when :preproduction
 
   redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
+
+  configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
 when :production
   configatron.host = 'www.fameandpartners.com'
   configatron.blog_host = 'blog.fameandpartners.com'
@@ -90,5 +92,7 @@ when :production
 
   redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
+
+  configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
 when :test
 end
