@@ -28,10 +28,8 @@ window.page.ProductSizer = class ProductSizer extends BaseProductCustomizer
     @$select.val(id)
 
     if price
-      @$currentPrice.data('size-price', price)
       @$action.html("#{name} +#{price}")
     else
-      @$currentPrice.data('size-price', 0)
       @$action.html(name)
 
     @close(price)
@@ -85,12 +83,10 @@ window.page.ProductCustomisation = class ProductCustomisation extends BaseProduc
     if id == 'original'
       @$action.html("Customize")
       @$select.find('option:selected').removeAttr('selected');
-      @$currentPrice.data('customization-price', 0)
     else       
       @$select.val(id)
       name = $el.data('name')
-      price = $el.data('price')
-      @$currentPrice.data('customization-price', price)
+      price = $el.data('price')      
       @$action.html("#{name} +#{price}")
 
     @close(price)
