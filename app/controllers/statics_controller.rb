@@ -52,8 +52,14 @@ class StaticsController < ApplicationController
 
   def break_hearts_not_banks
     @title = "Break Hearts not Banks | Beautiful Dresses - Fame & Partners."
-    @description = "Discover beautiful bridesmaid dresses at Fame & Partners. " + default_meta_description
+    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners. " + default_meta_description
     render :template => 'landing_pages/break-hearts-not-banks', :layout => 'redesign/application'
+  end
+
+  def amfam
+    @title = "AMFAM | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/amfam', :layout => 'redesign/application'
   end
 
 # =======================================================================
