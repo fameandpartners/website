@@ -1,5 +1,17 @@
 # should be loaded automatically
 #require File.join(Rails.root, 'app', 'presenters', 'products', 'collection_presenter.rb')
+# Usage:
+#  Products::CollectionResource.new
+#    site_version: current_site_version,
+#    collection:     params[:collection], # range!
+#    style:          params[:style],
+#    event:          params[:event],
+#    color:          # exact color, will be searched with similarities
+#    color_group:    # color group, will be search by its members
+#    bodyshape:      params[:bodyshape],
+#    discount:       params[:sale] || params[:discount],
+#    order:          params[:order]
+#    limit:
 
 class Products::CollectionResource
   attr_reader :site_version
@@ -8,7 +20,7 @@ class Products::CollectionResource
   attr_reader :edits
   attr_reader :event
   attr_reader :bodyshape
-  attr_reader :color
+  attr_reader :color, :color_group
   attr_reader :discount
   attr_reader :order
   attr_reader :limit
@@ -20,6 +32,7 @@ class Products::CollectionResource
     @edits        = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
     @event        = Repositories::Taxonomy.get_taxon_by_name(options[:event])
     @bodyshape    = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
+    @color_group  = Repositories::ProductColors.get_group_by_name(options[:color_group])
     @color        = Repositories::ProductColors.get_by_name(options[:color])
     @discount     = prepare_discount(options[:discount])
     @order        = options[:order]
@@ -34,7 +47,7 @@ class Products::CollectionResource
       style:      style,
       event:      event,
       bodyshape:  bodyshape,
-      color:      color,
+      color:      color || color_group.try(:representative),
       sale:       discount,
       order:      order,
       details:    details
@@ -51,7 +64,7 @@ class Products::CollectionResource
           event:      event,
           edits:      edits,
           bodyshape:  bodyshape,
-          color:      color,
+          color:      color || color_group.try(:representative),
           discount:   discount
         ).read
       end
@@ -79,9 +92,15 @@ class Products::CollectionResource
       result[:taxon_ids].push(event.id) if event.present?
 
       result[:body_shapes] = Array.wrap(bodyshape) if bodyshape.present?
+
+      result[:color_ids] = []
       if color.present?
-        result[:color_ids] = Repositories::ProductColors.get_similar(color.id, Similarity::Range::DEFAULT)
+        result[:color_ids] += Repositories::ProductColors.get_similar(color.id, Similarity::Range::DEFAULT)
       end
+      if color_group.present?
+        result[:color_ids] += color_group.color_ids
+      end
+
       result[:discount] = discount if discount.present?
 
       result[:limit] = limit if limit.present?

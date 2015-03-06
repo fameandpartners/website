@@ -8,6 +8,9 @@ Spree::OptionValue.class_eval do
            order: 'similarities.coefficient asc'
   has_many :discounts, as: :discountable
 
+  has_and_belongs_to_many :option_values_groups,
+                          class_name: 'Spree::OptionValuesGroup'
+
   has_attached_file :image, styles: {
     mini: '48x48#', small: '100x100>', small_square: '100x100#', medium: '240x240>'
   }

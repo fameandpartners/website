@@ -3,6 +3,9 @@
 # Repositories::ProductColors.read(id)
 # Repositories::ProductColors.get_by_name(name)
 # Repositories::ProductColors.get_similar(color_ids, [0..100]
+#
+# Repositories::ProductColors.color_groups
+# Repositories::ProductColors.get_group_by_name(name)
 
 module Repositories
   class ProductColors
@@ -10,7 +13,7 @@ module Repositories
       def colors_map
         @colors_map ||= begin
           result = {}
-          Spree::Variant.color_option_type.try(:option_values).each do |option_value|
+          Spree::OptionType.color.option_values.each do |option_value|
             result[option_value.id] = OpenStruct.new(
               id: option_value.id,
               name: option_value.name,
@@ -20,6 +23,27 @@ module Repositories
             )
           end
           result
+        end
+      end
+
+      def color_groups
+        @color_groups ||= begin
+          Spree::OptionType.color.option_values_groups.includes(:option_values).map do |group|
+            color_ids = group.option_values.map(&:id)
+            if color_ids.size == 1
+              representative = Repositories::ProductColors.read(color_ids.first)
+            else
+              representative = OpenStruct.new(name: group.name, presentation: group.name)
+            end
+
+            OpenStruct.new(
+              id: group.id,
+              name: group.name.to_s.downcase, 
+              presentation: group.presentation,
+              color_ids: color_ids,
+              representative: representative
+            )
+          end
         end
       end
 
@@ -42,6 +66,13 @@ module Repositories
       def get_similar(color_ids, range = nil)
         range = Similarity::Range::DEFAULT if range < 0 or range > 100
         Similarity.where(original_id: color_ids).where('coefficient <= ?', range).pluck(:similar_id)
+      end
+
+      # groups
+      def get_group_by_name(name)
+        nil if name.blank?
+        group_name = name.to_s.downcase
+        color_groups.find{|group| group.name == group_name }
       end
     end
   end
