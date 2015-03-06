@@ -277,10 +277,14 @@ z.list-group-item.customization-option  {
   		right:-130%;
   		max-width: 100%;
   	}
+  
+  @media screen and (max-width: 991px){     
+    margin-bottom:70px;    
+  }
 
-  	img {
-  		width: 100%;
-  	}
+	img {
+		width: 100%;
+	}
 
 	h2 {
 		text-align:center;
@@ -351,6 +355,11 @@ z.list-group-item.customization-option  {
   }
   a.active {
   	background-color:#000000;
+  }
+
+  .image-box {
+    img {
+    }
   }
 }
 
