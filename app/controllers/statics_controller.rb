@@ -50,6 +50,12 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/bridesmaids', :layout => 'redesign/application'
   end
 
+  def break_hearts_not_banks
+    @title = "Break Hearts not Banks | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful bridesmaid dresses at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/break-hearts-not-banks', :layout => 'redesign/application'
+  end
+
 # =======================================================================
 # OLD PAGES
 # =======================================================================
