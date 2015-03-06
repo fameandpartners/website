@@ -21,7 +21,7 @@ ruby:
   color_options = color_options_for_select_from_options_values(@filter.colors, @collection.color.try(:name))
   sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
 
-.page-title.default.category-header
+.page-title.default.category-header style="background-image: url('#{@collection.details.banner.image}')"
   .container
     .page-title--details
       h1.no-padding-bottom = @collection.details.banner.title

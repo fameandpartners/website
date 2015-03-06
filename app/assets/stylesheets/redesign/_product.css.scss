@@ -220,7 +220,6 @@ z.list-group-item.customization-option  {
   width: 100%;
   min-height: 100%;
   z-index: 999 !important;
-
 }
 
 #product-color-content {
@@ -346,6 +345,9 @@ z.list-group-item.customization-option  {
 
 #product-customizations-content {
 
+  a:first-child {
+    height:150px
+  }
   a.active {
   	background-color:#000000;
   }

@@ -14,13 +14,15 @@ ruby:
     cache_keys.push(current_promotion.code)
   end
 
-  promocode = decode_promocode
-  content = params[:content] || promocode
+  promocode = decode(params[:pc])
+  content = params[:c] || promocode
+  message = decode(params[:m])
 
   email_capture_modal = "
     new window.page.EmailCaptureModal({
       promocode: '#{promocode}', 
       content:   '#{content}', 
+      message:   '#{message}',
       className: 'bridesmaid-landing-page',
       action:    '#{campaigns_email_capture_path}',
       container: '#email-capture-fields'
