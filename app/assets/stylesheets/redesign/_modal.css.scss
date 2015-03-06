@@ -1,6 +1,12 @@
 
 .vex-theme-flat-attack.email-capture-modal {
 
+  padding-top:13%;
+
+  @media screen and (max-width: 991px){ 
+    padding-top:9%;
+  }
+
   .vex-content {
     border:5px solid black;    
   }
