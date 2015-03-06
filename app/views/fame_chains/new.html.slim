@@ -71,55 +71,57 @@
       = image_tag "_famechain/glam-rebel5.jpg", alt: 'Something here', class: 'img-responsive portrait-img'
 
   .col-md-12.form
-    .row
+    .row.apply
       h2.text-center Apply now
-    .form-border
+    .apply-now
+
+    = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
       .row
-        .apply-now
-
-      = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
-        .row
-          .form-group
-            label.text-right name
-            = f.text_field :name
-        .row
-          .form-group
-            label.text-right email
-            = f.text_field :email, type: 'email'
-
-        .row
-          .form-group
-            label.col-md-3.control-label.text-right blog
-            .col-md-3
+        .col-md-5.col-md-offset-2
+          .row
+            .form-group
+              label.text-right name
+              = f.text_field :name
+          .row
+            .form-group
+              label.text-right email
+              = f.text_field :email, type: 'email'
+          .row
+            .form-group
+              label blog
               = f.text_field :blog, type: 'url'
-            label.col-md-3.control-label.text-right visitors</br>per month
-            .col-md-3
+
+      .row
+        .col-md-5.col-md-offset-2.no-padding
+          .form-group
+            label Instagram
+            = f.text_field :blog, type: 'url'
+        .col-md-3
+            .form-group
+              label number of</br>Followers
               = f.text_field :blog_size, type: 'text'
 
-        .row
+      .row
+        .col-md-5.col-md-offset-2.no-padding
           .form-group
-            label.col-md-3.control-label.text-right pintrest
-            .col-md-3
-              = f.text_field :pinterest, type: 'url'
-            label.col-md-3.control-label.text-right number</br>of followers
-            .col-md-3
-              = f.text_field :pinterest_size, type: 'text'
-
-        .row
-          .form-group
-            label.col-md-3.control-label.text-right twitter
-            .col-md-3
-              = f.text_field :twitter, type: 'url'
-            label.col-md-3.control-label.text-right number</br>of Followers
-            .col-md-3
+            label facebook
+            = f.text_field :facebook, type: 'url'
+        .col-md-3
+            .form-group
+              label number of</br>followers
               = f.text_field :twitter_size, type: 'text'
 
-        .row
+      .row
+        .col-md-5.col-md-offset-2.no-padding
           .form-group
-            label.text-right facebook
-            = f.text_field :facebook, type: 'url'
-
-        .row
+            label pintrest
+            = f.text_field :pinterest, type: 'url'
+        .col-md-3
+            .form-group
+              label.control-label number of</br>followers
+              = f.text_field :pinterest_size, type: 'text'
+      .row
+        .col-md-3.col-md-offset-4
           .submit
             = f.submit "Apply now", class: 'btn btn-black'
 

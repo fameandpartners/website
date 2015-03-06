@@ -29,50 +29,51 @@
 		}
 	}
 
-		.form {
-			background-color: #f6e2d5;
+	form {
+		padding-top: 4rem;
+	}
 
-			.header {
-				background-color: black;
+	.form {
+		background-color: #f6e2d5;
 
-				h2 {
-					text-transform: uppercase;
-					color: white;
-					font-family: forum;
-					font-size: 5rem;
-				}
+		.col-md-5{
+			label {
+				width: 125px;
+				text-align: right;
+				font-size: 2rem;
+				font-weight: 500;
+				color: black;
+				padding-right: 1rem;
+			}
+
+			input {
+				width: 70%;
 			}
 		}
 
-	.form-border {
-		width: 70rem;
-		margin-top: 2rem;
-		margin-left: auto;
-		margin-right: auto;
-	}
+		.col-md-3{
+			padding-top: 0;
 
-	form {
-		margin: 2rem;
+			label {
+				font-size: 1rem;
+				line-height: 1rem;
+				font-weight: 500;
+				color: black;
+				padding-right: 1rem;
+			}
 
-		label {
-			padding-right: 1rem;
+			input {
+				width: 200px;
+			}
 		}
-
-		input {
-			width: 60%;
-		}
-
-		.control-label {
-			width: 17%;
-		}
-
-		.btn {
-			margin: 0;
-			margin-left: auto;
-			margin-right: auto;
+		.submit .btn {
+			width: 85%;
+			font-family: "brandon-grotesque";
+			font-size: 2.5rem;
+			padding: 0 15px;
+			margin-bottom: 5rem;
 		}
 	}
-
 }
 
 .fame {
