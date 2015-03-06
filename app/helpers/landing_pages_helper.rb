@@ -5,9 +5,9 @@ module LandingPagesHelper
     params[:pop].present? && params[:pop] == 'true'
   end 
 
-  def decode_promocode
-    if params[:pc].present?
-      Base64.decode64(params[:pc])
+  def decode(p)
+    if p.present?
+      Base64.decode64(p)
     else
       ''
     end
