@@ -38,7 +38,7 @@ class Products::CollectionDetails
     OpenStruct.new(
       title: title,
       description: description,
-      #footer: title,
+      footer: footer,
       banner: OpenStruct.new(
         title: banner_title,
         description: banner_description,
@@ -51,24 +51,24 @@ class Products::CollectionDetails
     {
       title: {
         sale_all:   "All Dresses on Sale | Fame & Partners",
-        sale:       "Sale %{ discount }% Off | Fame & Partners",
+        sale:       "Sale %{discount}%% Off | Fame & Partners",
         default:    "Shop the latest %{color} %{style} %{event} Dresses %{bodyshape} | Fame & Partners",
         bodyshape:  " for %{bodyshape} body shapes"
       },
       description: {
         sale_all:   "View all dresses on sale",
-        sale:       "View all dresses with %{ discount }% off",
+        sale:       "View all dresses with %{discount}%% off",
         default:    "Shop and customize the best %{color} %{style} %{event} dress trends %{event} at Fame & Partners."
       },
       banner_title: {
         #default:    "Fame & Partners Formal Dresses",
         sale_all:   "All Dresses on Sale",
-        sale:       "Sale %{ discount }% Off",
+        sale:       "Sale %{discount}%% Off",
         default:    "%{color} %{style} %{event} dresses"
       },
       banner_description: {
         sale_all:   'View all dresses on sale',
-        sale:       "View all dresses with %{ discount }% off",
+        sale:       "View all dresses with %{discount}%% off",
         default:    "High fashion dresses."
       }
     }
@@ -82,6 +82,10 @@ class Products::CollectionDetails
 
     def description
       @description ||= get_description
+    end
+
+    def footer
+      @footer ||= get_footer
     end
 
     def banner_title
@@ -117,6 +121,10 @@ class Products::CollectionDetails
       return [empty_collection] if taxons.blank? && color.blank? && bodyshape.blank?
     end
 
+    def taxon_banner
+      @taxon_banner ||= collection_taxons.find{|t| t.banner.present? }.try(:banner)
+    end
+
     # briefly:
     #   - if sales, then sale [all or 10%]
     #   - if collection have taxons
@@ -127,10 +135,10 @@ class Products::CollectionDetails
     #   - generate title based on params
     def get_title
       if discount.present?
-        if discount.to_sym == :all
+        if discount.to_s == 'all'
           return templates[:title][:sale_all]
         else
-          return (templates[:title][:sale] % discount.to_i)
+          return (templates[:title][:sale] % { discount: discount.to_i })
         end
       end
 
@@ -166,7 +174,7 @@ class Products::CollectionDetails
     # NOTE: we don't use bodyshape here
     def get_description
       if discount.present?
-        if discount.to_sym == :all
+        if discount.to_s == 'all'
           return templates[:description][:sale_all]
         else
           return (templates[:description][:sale] % { discount: discount.to_i })
@@ -201,10 +209,10 @@ class Products::CollectionDetails
     #
     def get_banner_title
       if discount.present?
-        if discount.to_sym == :all
+        if discount.to_s == 'all'
           return templates[:banner_title][:sale_all]
         else
-          return (templates[:banner_title][:sale] % discount.to_i)
+          return (templates[:banner_title][:sale] % { discount: discount.to_i })
         end
       end
 
@@ -228,10 +236,10 @@ class Products::CollectionDetails
 
     def get_banner_description
       if discount.present?
-        if discount.to_sym == :all
+        if discount.to_s == 'all'
           return templates[:banner_description][:sale_all]
         else
-          return (templates[:banner_description][:sale] % discount.to_i)
+          return (templates[:banner_description][:sale] % { discount: discount.to_i })
         end
       end
 
@@ -251,6 +259,10 @@ class Products::CollectionDetails
       else
         templates[:banner_description][:default]
       end
+    end
+
+    def get_footer
+      title
     end
 
     def get_banner_image
