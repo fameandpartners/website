@@ -1,3 +1,4 @@
+#= require 'templates/_product'
 #= require 'templates/product_collection'
 
 window.page or= {}
@@ -30,8 +31,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       type: "GET",
       dataType: 'json',
       data: $.param(updateRequestParams)
-      success: (data) =>
-        content_html = @collectionTemplate(products: data.products)
+      success: (collection) =>
+        content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
 
         track.pageView(pageUrl, updateRequestParams)
