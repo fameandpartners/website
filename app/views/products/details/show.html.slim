@@ -124,14 +124,14 @@ ruby:
               |+ Moodboard
 
     .row.social-media-links
-      span class='st_facebook_custom' displayText='Facebook'
+      span class='st_facebook_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
         = image_tag '_icons/facebook.png'
-      span class='st_pinterest_custom' displayText='Pinterest'
+      span class='st_pinterest_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
         = image_tag '_icons/pinterest.png'
-      span class='st_instagram_custom' displayText='Instagram Badge' st_username='fameandpartners'
+      span class='st_instagram_custom' st_username='fameandpartners' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
         = image_tag '_icons/instagram.png'
-      span class='st_twitter_custom' st_via="fameandpartners" displayText='Tweet'
-        = image_tag '_icons/twitter.png'
+      span class='st_twitter_custom' st_via="fameandpartners" st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
+        = image_tag '_icons/twitter.png' 
 
 
 /! About The Dress
