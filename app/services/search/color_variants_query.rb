@@ -10,6 +10,7 @@
 #   order:            ['price_high', 'price_low', 'newest', 'fast_deliver']
 #   discount:         search products with specific discount ( in percents ) or :all to find all products under sale
 #   limit:            1000 by default
+#   offset:           0 by default
 # )
 module Search
   class ColorVariantsQuery
@@ -24,8 +25,9 @@ module Search
       discount            = options[:discount]
       order               = options[:order]
       limit               = options[:limit].present? ? options[:limit].to_i : 1000
+      offset              = options[:offset].present? ? options[:offset].to_i : 0
 
-      Tire.search(:color_variants, size: limit) do
+      Tire.search(:color_variants, size: limit, from: offset) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
         filter :bool, :must => { :term => { 'product.is_hidden' => false } }
         filter :exists, :field => :available_on
