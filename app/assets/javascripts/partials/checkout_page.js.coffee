@@ -1,3 +1,5 @@
+window.page ||= {}
+
 page.initCheckoutEditPage = () ->
   page = {
     ajax_callbacks: {}

@@ -60,6 +60,7 @@ z.list-group-item.customization-option  {
 			margin-right: 2.4rem;
 			width: 30px;
 			height: 30px;
+      cursor: pointer;
 		}
 
 		.st_facebook_custom {
@@ -276,10 +277,14 @@ z.list-group-item.customization-option  {
   		right:-130%;
   		max-width: 100%;
   	}
+  
+  @media screen and (max-width: 991px){     
+    margin-bottom:70px;    
+  }
 
-  	img {
-  		width: 100%;
-  	}
+	img {
+		width: 100%;
+	}
 
 	h2 {
 		text-align:center;
@@ -351,6 +356,11 @@ z.list-group-item.customization-option  {
   a.active {
   	background-color:#000000;
   }
+
+  .image-box {
+    img {
+    }
+  }
 }
 
 .container-fluid.product-content {
@@ -373,3 +383,63 @@ z.list-group-item.customization-option  {
 #slides .slides-container {
   display:block;
 }
+
+
+.vex-theme-flat-attack.fit-guide {
+  padding:0;
+
+  .vex-content {
+    width:95%;
+    height:95%;
+    overflow-y:auto;
+    z-index:9999 !important;
+    border:5px solid black; 
+
+    h6 {
+      font-size:1em;
+      font-weight:600;
+    }
+    p, td{
+      font-size:0.666666em;
+      font-weight:300;
+    }
+    
+    thead {
+      td {
+        font-size:1em;
+        font-weight:600;
+      }
+    }
+
+    td.sub-heading {
+      font-size:0.666666em;
+      font-weight:600;
+    }
+
+
+    .vex-dialog-buttons {
+      position:fixed;
+      top:0;
+      right:0;
+      padding:0;
+      margin:0;
+
+      .btn {
+        padding:10px 15px;
+        outline: none;
+      }      
+    }
+  }
+
+  @media screen and (max-width: 991px){ 
+    .vex-content {      
+      height:90%;
+      margin-bottom: 62px;
+    }
+  }
+
+
+}
+
+
+

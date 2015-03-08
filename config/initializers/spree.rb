@@ -47,14 +47,6 @@ Spree.config do |config|
 
     config.attachment_url = ":s3_alias_url"
     config.attachment_path = '/spree/products/:id/:style/:basename.:extension'
-  elsif Rails.env.preproduction?
-    config.use_s3 = true
-    config.s3_bucket = configatron.aws.s3.bucket
-    config.s3_access_key = configatron.aws.s3.access_key_id
-    config.s3_secret = configatron.aws.s3.secret_access_key
-
-    config.attachment_url = ":s3_alias_url"
-    config.attachment_path = '/spree/products/:id/:style/:basename.:extension'    
   else
     config.use_s3 = false
 

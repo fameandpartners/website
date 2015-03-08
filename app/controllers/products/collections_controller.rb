@@ -5,7 +5,7 @@
 #   :permalink - taxon [ any ], condition
 #   :event [events taxon] : with applied other args
 #   :collection
-#   :colour 
+#   :color
 #   :style
 #   :bodyshape
 #   :lp - landing page?
@@ -59,8 +59,14 @@ class Products::CollectionsController < Products::BaseController
     #   etc
     def parse_permalink(permalink)
       return {} if permalink.blank?
-      taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
 
+      # is should have lower priority... but we have collection='pastel' and we have colors group pastel
+      color_group = Repositories::ProductColors.get_group_by_name(permalink)
+      if color_group.present?
+        return { color_group: color_group.name }
+      end
+
+      taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
       if taxon.present?
         # style, edits, events, range, seocollection
         case taxon.taxonomy.to_s.downcase
