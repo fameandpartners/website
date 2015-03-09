@@ -37,7 +37,7 @@ module ApplicationHelper
       # united states is default, so default hreflang should be australian
       hreflang_link = "http://#{request.host}/au#{request.fullpath}"
       hreflang_link.gsub!('/us', '')
-    end    
+    end
     hreflang_link
   end
 
@@ -223,7 +223,7 @@ module ApplicationHelper
   # individual product discount
   # sale discount
   # promocode discount
-  # note - fixed 
+  # note - fixed
   def product_discount(product)
     if product.present? && (discount = product.discount).present?
       discount
@@ -242,11 +242,11 @@ module ApplicationHelper
       price.display_price.to_s.html_safe
     else
       # NOTE - we should add fixed price amount calculations
-      sale_price = price.apply(discount)      
+      sale_price = price.apply(discount)
       [
-        content_tag(:span, price.display_price, class: 'price-original'),        
+        content_tag(:span, price.display_price, class: 'price-original'),
         content_tag(:span, sale_price.display_price.to_s, class: 'price-sale'),
-        content_tag(:span, "Save #{discount.amount}%", class: 'price-discount'),        
+        content_tag(:span, "Save #{discount.amount}%", class: 'price-discount'),
       ].join("\n").html_safe
     end
   end
@@ -267,7 +267,7 @@ module ApplicationHelper
   def price_for_product(product)
     price = product.zone_price_for(current_site_version)
     same_price = false
-    
+
     if show_prices_with_applied_promocode? || product.in_sale?
       same_price = price.display_price == current_promotion.calculate_price_with_discount(price).display_price
     end
@@ -300,7 +300,7 @@ module ApplicationHelper
   end
 
   def sale_active?
-    current_sale.active?
+    current_sale.present? && current_sale.active?
   end
 
   def dynamic_colors
@@ -348,12 +348,12 @@ module ApplicationHelper
   end
 
   def current_sale
-    @current_sale ||= Spree::Sale.first_or_initialize
+    @current_sale ||= Spree::Sale.where(sitewide: true).first
   end
 
   def is_surryhills?(product)
     if product.property('factory_name').present? && (product.property('factory_name').downcase == "surryhills" || product.property('factory_name').downcase == "iconic")
-      return true 
+      return true
     else
       return false
     end
@@ -361,6 +361,6 @@ module ApplicationHelper
 
   def bootstrap_class_for(flash_type)
     { success: "alert-success", error: "alert-danger", alert: "alert-warning", notice: "alert-info" }[flash_type] || flash_type.to_s
-  end 
+  end
 
 end
