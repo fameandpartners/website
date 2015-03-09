@@ -20,7 +20,7 @@
       ]);
       <% @order.line_items.each do |line_item| %>
         <%
-          # _addItem(transactionId, sku, name, category, price, quantity) 
+          # _addItem(transactionId, sku, name, category, price, quantity)
           range_taxon   = range_taxon_for(line_item.variant.product)
           category_name = range_taxon.present? ? range_taxon.name : ''
           sku = line_item.variant.sku
@@ -34,6 +34,8 @@
           "<%= line_item.price %>",
           "<%= line_item.quantity %>"
         ]);
+
+        <%= render :partial => 'rakuten' %>
       <% end %>
       _gaq.push(['_trackTrans']);
 
@@ -46,10 +48,10 @@
         qlist     = @order.line_items.collect{ |i| i.quantity }.join('|')
         amtlist   = @order.line_items.collect{ |i| i.price }.join('|')
         cur       = 'USD'
-        namelist  = @order.line_items.collect{ |i| i.variant.product.name }.join('|')        
+        namelist  = @order.line_items.collect{ |i| i.variant.product.name }.join('|')
         linkshare_url = "http://track.linksynergy.com/ep?mid=#{mid}&ord=#{ord}&skulist=#{skulist}&qlist=#{qlist}&amtlist=#{amtlist}&cur=#{cur}&img=1&namelist=#{namelist}"
-      %>  
-      
+      %>
+
       <img src="<%= linkshare_url %>">
     <% end %>
 
