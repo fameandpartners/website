@@ -22,6 +22,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @colorInput.on('change', @update)
     @productOrderInput.on('change', @update)
 
+    @hoverize()
+
     # $('.disable-input .selectize-input input').prop('disabled', true).css('pointer-events', 'none');
   update: () =>
     updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
@@ -35,6 +37,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
 
+        @hoverize();
         track.pageView(pageUrl, updateRequestParams)
 
         #productsFilter.$el.find('.category-catalog.products-list').replaceWith(data.products_html)
@@ -45,7 +48,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     )
 
   # private methods
-  
+
   addValue: (object, propertyName, elementSelector) ->
     propertyValue = @filter.find(elementSelector).val()
     object[propertyName] = propertyValue unless _.isEmpty(propertyValue)
@@ -70,3 +73,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     url = urlWithSitePrefix(url)
     window.history.pushState({ path: url }, '', url)
     url
+
+  hoverize: ->
+    initProductCollectionImageHover(
+      selector: '.category--item'
+      delegate: '.img-product'
+    )
