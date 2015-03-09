@@ -225,7 +225,6 @@ z.list-group-item.customization-option  {
 
 #product-color-content {
 	.recommended {
-		background-color:#F6F6F6;
 
 	}
 
@@ -243,7 +242,7 @@ z.list-group-item.customization-option  {
 
     .color-white, .color-optic-white {
       background-color:#FFFFFF;
-      border:1px dashed #EEEEEE;
+      border:1px dashed #CCCCCC;
     }
 
     .color-red {
@@ -264,22 +263,22 @@ z.list-group-item.customization-option  {
 	right:-100%;
 	width:500px;
 	transition: right 0.3s ease 0s;
-  	z-index: 1999 !important;
+  z-index: 1999 !important;
 	height: 100%;
-  	overflow-y: auto;
-  	overflow-x: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
  	padding: 0 20px 20px 20px;
-  	position: fixed;
-  	top: 0;
-  	background-color:#FFFFFF;
+	position: fixed;
+	top: 0;
+	background-color:#FFFFFF;
 
   	@media(max-width: 768px){
   		right:-130%;
   		max-width: 100%;
   	}
-  
-  @media screen and (max-width: 991px){     
-    margin-bottom:70px;    
+
+  @media screen and (max-width: 991px){
+    margin-bottom:70px;
   }
 
 	img {
@@ -288,7 +287,7 @@ z.list-group-item.customization-option  {
 
 	h2 {
 		text-align:center;
-		font-size:1em;
+		font-size:1.222222em;
 	}
 
   a.product-option {
@@ -303,7 +302,7 @@ z.list-group-item.customization-option  {
   }
 
   a.product-option.active {
-    color:#eeddf0;
+    color:#FB5F4F;
   }
 
   .option-box {
@@ -336,9 +335,13 @@ z.list-group-item.customization-option  {
 #product-size-content {
 
   .size-box {
-    border:1px solid black;
+    // border:1px solid #F6F6F6;
+		border:1px dashed #CCCCCC;
     text-align:center;
     padding:5px;
+		line-height: 2.33333;
+		font-weight:600;
+		color:#333333;
   }
 
   .active .size-box {
@@ -346,6 +349,15 @@ z.list-group-item.customization-option  {
     border:1px solid #000000;
     color:#FFFFFF;
   }
+
+	.option-price {
+		font-size:0.666666em;
+		color:#999999;
+	}
+
+	p.size-region {
+		color:#999999;
+	}
 }
 
 #product-customizations-content {
@@ -393,7 +405,7 @@ z.list-group-item.customization-option  {
     height:95%;
     overflow-y:auto;
     z-index:9999 !important;
-    border:5px solid black; 
+    border:5px solid black;
 
     h6 {
       font-size:1em;
@@ -403,7 +415,7 @@ z.list-group-item.customization-option  {
       font-size:0.666666em;
       font-weight:300;
     }
-    
+
     thead {
       td {
         font-size:1em;
@@ -427,12 +439,12 @@ z.list-group-item.customization-option  {
       .btn {
         padding:10px 15px;
         outline: none;
-      }      
+      }
     }
   }
 
-  @media screen and (max-width: 991px){ 
-    .vex-content {      
+  @media screen and (max-width: 991px){
+    .vex-content {
       height:90%;
       margin-bottom: 62px;
     }
@@ -440,6 +452,3 @@ z.list-group-item.customization-option  {
 
 
 }
-
-
-
