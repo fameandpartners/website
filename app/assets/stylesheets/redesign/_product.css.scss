@@ -228,36 +228,6 @@ z.list-group-item.customization-option  {
 		background-color:#F6F6F6;
 
 	}
-
-	.color-option {
-
-		.color-box {
-			background-color:#CCCCCC;
-			margin:0;
-      padding:0;
-		}
-
-		.color-black {
-			background-color:#000000;
-		}
-
-    .color-white, .color-optic-white {
-      background-color:#FFFFFF;
-      border:1px dashed #EEEEEE;
-    }
-
-    .color-red {
-      background-color:#FF0000;
-    }
-
-    .color-green {
-      background-color:#00FF00;
-    }
-
-    .color-blue {
-      background-color:#0000FF;
-    }
-	}
 }
 
 .product-side-panel {
@@ -277,9 +247,9 @@ z.list-group-item.customization-option  {
   		right:-130%;
   		max-width: 100%;
   	}
-  
-  @media screen and (max-width: 991px){     
-    margin-bottom:70px;    
+
+  @media screen and (max-width: 991px){
+    margin-bottom:70px;
   }
 
 	img {
@@ -393,7 +363,7 @@ z.list-group-item.customization-option  {
     height:95%;
     overflow-y:auto;
     z-index:9999 !important;
-    border:5px solid black; 
+    border:5px solid black;
 
     h6 {
       font-size:1em;
@@ -403,7 +373,7 @@ z.list-group-item.customization-option  {
       font-size:0.666666em;
       font-weight:300;
     }
-    
+
     thead {
       td {
         font-size:1em;
@@ -427,12 +397,12 @@ z.list-group-item.customization-option  {
       .btn {
         padding:10px 15px;
         outline: none;
-      }      
+      }
     }
   }
 
-  @media screen and (max-width: 991px){ 
-    .vex-content {      
+  @media screen and (max-width: 991px){
+    .vex-content {
       height:90%;
       margin-bottom: 62px;
     }
