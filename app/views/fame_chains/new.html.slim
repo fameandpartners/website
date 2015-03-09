@@ -36,7 +36,7 @@
         li Have a style of fashion Vlog.
         li Want to earn an income from your blog.
         li Want to inspire girls to create their own unique look for their formal occasions.
-        li Are active on either: Instagram, Facebook, Twitter, Pintrest, YouTube and/or other social media.
+        li Are active on either: Instagram, Facebook, Twitter, Pinterest, YouTube and/or other social media.
       = image_tag "_famechain/glam-rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
 
   .col-md-4.benefits.middle
@@ -88,18 +88,18 @@
               = f.text_field :email, type: 'email'
           .row
             .form-group
-              label blog
+              label blog/vlog
               = f.text_field :blog, type: 'url'
 
       .row
         .col-md-5.col-md-offset-2.no-padding
           .form-group
             label Instagram
-            = f.text_field :blog, type: 'url'  #TODO change symbol to instagram
+            = f.text_field :instagram, type: 'url'
         .col-md-3
             .form-group
               label number of</br>Followers
-              = f.text_field :blog_size, type: 'text'
+              = f.text_field :instagram_size, type: 'text'
 
       .row
         .col-md-5.col-md-offset-2.no-padding
@@ -109,7 +109,7 @@
         .col-md-3
             .form-group
               label number of</br>followers
-              = f.text_field :twitter_size, type: 'text' #TODO change symbol to facebook
+              = f.text_field :facebook_size, type: 'text'
 
       .row
         .col-md-5.col-md-offset-2.no-padding
@@ -120,6 +120,14 @@
             .form-group
               label.control-label number of</br>followers
               = f.text_field :pinterest_size, type: 'text'
+
+      .row
+        .col-md-5.col-md-offset-2
+          .row
+            .form-group
+              label other
+              = f.text_field :other, type: 'text'
+
       .row
         .col-md-3.col-md-offset-4
           .submit
