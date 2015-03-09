@@ -27,8 +27,8 @@ class Products::CollectionResource
 
   def initialize(options = {})
     @site_version = options[:site_version] || SiteVersion.default
-    @collection   = Repositories::Taxonomy.get_taxon_by_name(options[:collection]) 
-    @style        = Repositories::Taxonomy.get_taxon_by_name(options[:style]) 
+    @collection   = Repositories::Taxonomy.get_taxon_by_name(options[:collection])
+    @style        = Repositories::Taxonomy.get_taxon_by_name(options[:style])
     @edits        = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
     @event        = Repositories::Taxonomy.get_taxon_by_name(options[:event])
     @bodyshape    = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
@@ -118,13 +118,13 @@ class Products::CollectionResource
           id: color_variant.product.id,
           name: color_variant.product.name,
           color: color_variant.color,
-          image: cropped_image(color_variant),
+          images: cropped_images(color_variant),
           price: price,
           discount: discount
         )
       end
 
-      # apply custom order 
+      # apply custom order
       if order.blank? && color.blank? && style.blank?
         result = Products::ProductsSorter.new(products: result).sorted_products
       end
@@ -132,8 +132,9 @@ class Products::CollectionResource
       result
     end
 
-    def cropped_image(color_variant)
-      color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }.first.try(:large)
+    def cropped_images(color_variant)
+      cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
+      cropped_images.collect{ |i| i.try(:large) }.sort.reverse
     end
 
     def current_currency
