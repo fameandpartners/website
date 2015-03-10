@@ -1,45 +1,3 @@
-- content_for :head do
-  meta name="robots" content="noindex, nofollow"
-
-ruby:
-  cache_keys = ['bridesmaid_lp']
-  if spree_user_signed_in?
-    cache_keys << 'authenticated'
-  else
-    cache_keys << 'not-authenticated'
-  end
-  cache_keys << 'products'
-
-  if show_prices_with_applied_promocode? && current_promotion.present?
-    cache_keys.push(current_promotion.code)
-  end
-
-  promocode = decode_promocode
-  content = params[:content] || promocode
-
-  email_capture_modal = "
-    new window.page.EmailCaptureModal({
-      promocode: '#{promocode}',
-      content:   '#{content}',
-      className: 'bridesmaid-landing-page',
-      action:    '#{campaigns_email_capture_path}',
-      container: '#email-capture-fields'
-    });
-  "
-- if pop?
-  = content_for :inline_javascript do
-    = raw email_capture_modal
-
-  #email-capture-fields.hidden
-    input type="hidden" name="content" value=content
-    .row.no-padding
-      .col-md-12.form-group
-        input.form-control.standard-form type="email" name="email" placeholder='email address'
-    .row.no-padding
-      .col-md-12.form-group.text-center
-        button.btn.btn-black type="submit" value="submit"
-          | Submit
-
 .page-content.index
   .container.relative
     .row.relative
@@ -81,9 +39,8 @@ ruby:
 
       .row.relative.content-box
         .col-md-6.col-xs-12.col-xxs-12.content
-          h2 Against society ultimate law fearful.
-          p Gains hatred chaos value ocean intentions faithful inexpedient. Pious ubermensch right sexuality chaos battle reason intentions horror christianity ultimate. Dead oneself decrepit grandeur morality ultimate decieve noble free passion hope dead. Faith against decieve pinnacle pinnacle hope ultimate faith. Chaos sexuality sexuality ideal revaluation against will madness.
-          p Gains hatred chaos value ocean intentions faithful inexpedient. Pious ubermensch right sexuality chaos battle reason intentions horror christianity ultimate. Dead oneself decrepit grandeur morality ultimate decieve noble free passion hope dead. Faith against decieve pinnacle pinnacle hope ultimate faith. Chaos sexuality sexuality ideal revaluation against will madness.
+          h2 Team Glam
+          p Your very own glam squad is here to make your red carpet moment come alive, at the fraction of the price.
 
         .col-md-6.col-xs-12.col-xxs-12
           = image_tag 'campaigns/bridemaid/bridesmaid-dress-1.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
@@ -95,9 +52,8 @@ ruby:
         .col-md-6.col-xs-12.col-xxs-12
           = image_tag 'campaigns/bridemaid/bridesmaid-dress-2.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
         .col-md-6.col-xs-12.col-xxs-12.content
-          h2 Against society ultimate law fearful.
-          p Gains hatred chaos value ocean intentions faithful inexpedient. Pious ubermensch right sexuality chaos battle reason intentions horror christianity ultimate. Dead oneself decrepit grandeur morality ultimate decieve noble free passion hope dead. Faith against decieve pinnacle pinnacle hope ultimate faith. Chaos sexuality sexuality ideal revaluation against will madness.
-          p Gains hatred chaos value ocean intentions faithful inexpedient. Pious ubermensch right sexuality chaos battle reason intentions horror christianity ultimate. Dead oneself decrepit grandeur morality ultimate decieve noble free passion hope dead. Faith against decieve pinnacle pinnacle hope ultimate faith. Chaos sexuality sexuality ideal revaluation against will madness.
+          h2 Road to being a #FAMEBABE
+          p Free stylists, high quality, luxe fabrics to make you feel every bit the #famebabe.
         .clearfix.visible-sm-block.visible-xs-block
 
       =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(9, 4) }

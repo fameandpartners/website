@@ -21,7 +21,16 @@
       <fieldset>
         <legend><%= t(:general_settings) %></legend>
         <div class="clearfix">
-          <div class="three columns">
+          <div class="twelve columns">
+            <%= f.field_container :name do %>
+              <%= f.label :name, t(:name) %> <span class="required">*</span><br />
+              <%= f.text_field :name, :class => 'fullwidth' %>
+              <%= f.error_message_on :name %>
+            <% end %>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="four columns">
             <%= f.field_container :is_active, :class => ['checkbox'] do %>
               <label>
                 <%= f.check_box :is_active %>
@@ -30,11 +39,13 @@
               </label>
             <% end %>
           </div>
-          <div class="twelve columns">
-            <%= f.field_container :name do %>
-              <%= f.label :name, t(:name) %> <span class="required">*</span><br />
-              <%= f.text_field :name, :class => 'fullwidth' %>
-              <%= f.error_message_on :name %>
+          <div class="four columns">
+            <%= f.field_container :sitewide, :class => ['checkbox'] do %>
+              <label>
+                <%= f.check_box :sitewide %>
+                is sitewide
+                <%= f.error_message_on :sitewide %>
+              </label>
             <% end %>
           </div>
         </div>

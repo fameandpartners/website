@@ -62,6 +62,12 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/amfam', :layout => 'redesign/application'
   end
 
+  def prom
+    @title = "Prom | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/prom', :layout => 'redesign/application'
+  end
+
 # =======================================================================
 # OLD PAGES
 # =======================================================================

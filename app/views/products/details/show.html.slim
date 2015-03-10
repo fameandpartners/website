@@ -48,7 +48,7 @@ ruby:
     // note: we should crop images & update images preloading mechanics - too slow currently
     / = image_tag "bgimage.jpg"
     = image_tag @product.featured_image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: @product.featured_image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
-    
+
   nav.slides-navigation
     a.next href="#"
       span.fa.fa-angle-right.fa-4x
@@ -85,11 +85,11 @@ ruby:
                 = size.presentation
     .row
       - if @product.colors?
-        a#product-colorize-action.btn-customize        
+        a#product-colorize-action.btn-customize
           | Color
 
         select#product-color.hidden
-          option value=""      
+          option value=""
           - @product.default_color_options.each do |color|
             option value=(color.id) class="color #{color.name}" data-color=color.name
               = color.presentation
@@ -131,7 +131,7 @@ ruby:
       span class='st_instagram_custom' st_username='fameandpartners' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
         = image_tag '_icons/instagram.png'
       span class='st_twitter_custom' st_via="fameandpartners" st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
-        = image_tag '_icons/twitter.png' 
+        = image_tag '_icons/twitter.png'
 
 
 /! About The Dress
@@ -197,12 +197,10 @@ hr
     .col-md-12.recommended
       h2 Sizes
       - if @product.default_sizes?
-        - @product.default_sizes.each_slice(3) do |sizes|
-          .row.no-padding
-            - sizes.each do |size|
-              .col-md-4.col-xs-12.col-xxs-12
-                a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
-                  span.option-box.size-box= size.presentation
+        - @product.default_sizes.each do |size|
+          .col-md-3.col-xs-3.col-xxs-6
+            a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
+              span.option-box.size-box= size.presentation.gsub(/\D/, '')
 
 
   - if @product.custom_sizes?
@@ -210,28 +208,26 @@ hr
       .col-md-12.custom
         h2=  "Custom Sizes +#{@product.custom_size_price}"
 
-        - @product.custom_sizes.each_slice(3) do |sizes|
-          .row.no-padding
-            - sizes.each do |size|
-              .col-md-4.col-xs-12.col-xxs-12
-                a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
-                  span.option-box.size-box= size.presentation
-                  span.option-price= "+#{@product.custom_size_price}"
+        - @product.custom_sizes.each do |size|
+          .col-md-3.col-xs-3.col-xxs-6
+            a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
+              span.option-box.size-box= size.presentation.gsub(/\D/, '')
+              span.option-price= "+#{@product.custom_size_price}"
 
-
+  .row
+    .col-md-12.text-center
+      p.size-region=  t('views.pages.products.show.size_region')
 
 #product-color-content.product-side-panel
   .row
     .col-md-12.recommended
       h2 Recommended Colors
 
-      - @product.default_color_options.each_slice(2) do |colors|
-        .row
-          - colors.each do |color|
-            .col-md-6.col-xs-6.col-xxs-12
-              a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation
-                span.option-box.color-box class="color-#{color.name}"
-                span.option-name= color.presentation
+      - @product.default_color_options.each do |color|
+        .col-md-3.col-xs-4.col-xxs-6
+          a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation
+            span.option-box.color-box class="color-#{color.name}"
+            span.option-name= color.presentation
 
 
   - if @product.custom_colors?

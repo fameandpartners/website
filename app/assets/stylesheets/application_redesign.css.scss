@@ -29,7 +29,8 @@
 @import 'redesign/modal';
 @import 'redesign/flash_slider';
 @import 'redesign/mobile_menu';
-
+@import 'redesign/faqs';
+@import 'redesign/terms';
 
 
 @import 'redesign/header';
@@ -37,6 +38,9 @@
 
 @import 'redesign/checkout';
 
+.mobile-logo {
+  margin-top:-3px;
+}
 
 .standard-form {
   height: 60px;
@@ -100,6 +104,19 @@
   background-color:#033649;
   color:#FFFFFF;
 }
+
+.user-account-page-title {
+  background-color: #FFFFFF;
+  margin-top: 70px;
+}
+
+h1.user-account-title {
+  font-family: forum;
+  font-size: 6.7rem;
+  text-transform: uppercase;
+  color:#000000;
+}
+
 
 /*
   // added for quick reference only

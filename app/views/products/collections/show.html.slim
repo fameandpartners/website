@@ -9,8 +9,8 @@ ruby:
     initProductCollectionMoodboardLinks({
       container: '.category .products-collection',
       buttons:   'span.moodboard'
-    });
-  "
+    });"
+
 = content_for :inline_javascript do
   = raw init_collection_filter
   = raw init_product_collection_moodboard_links
@@ -30,13 +30,13 @@ ruby:
 .page-content.products-collections.category
   .container.relative.category-controls
     .row.relative
-      .col-md-3.hidden-xs.hidden-xxs
+      .col-md-3.hidden-sm.hidden-xs.hidden-xxs
         = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
         br
-      .col-md-3.hidden-xs.hidden-xxs
+      .col-md-3.hidden-sm.hidden-xs.hidden-xxs
         = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
         br
-      .col-md-3.hidden-xs.hidden-xxs
+      .col-md-3.hidden-sm.hidden-xs.hidden-xxs
         = select_tag :color, color_options, class: 'pink-select', prompt: 'Colour'
         br
       .col-md-3.col-xs-12.col-xxs-12.product-order
@@ -59,9 +59,9 @@ ruby:
           p = @collection.details.description
       .clearfix.visible-sm-block.visible-xs-block
 
-    /! Rest rows 
+    /! Rest rows
     - @collection.products.drop(6).each_slice(4) do |products|
-      - if products.size == 4 
+      - if products.size == 4
         /! [][][][]
         .row.relative
           = render partial: 'product', collection: products, as: :product
@@ -75,7 +75,7 @@ ruby:
                 h2 = @collection.details.title
                 p = @collection.details.footer
             = render partial: 'product', collection: footer_products, as: :product
-            .clearfix.visible-sm-block.visible-xs-block  
+            .clearfix.visible-sm-block.visible-xs-block
 
   /.container.relative.products-collection
     /! First Row - First four products
@@ -83,12 +83,11 @@ ruby:
 
     /! Second Row - Next two products
     /=render :partial => 'products_two_left', :locals => { :products => @collection.products.slice(3, 2), :content => @collection.details.description}
-    
+
     /! The rest of the products
-    /- remaining = @collection.products.drop(6)    
+    /- remaining = @collection.products.drop(6)
     /- remaining.each_slice(4) do |products|
       - if products.length < 4
         = render :partial => 'products_footer', :locals => { :products => products,:content => @collection.details.footer }
-      - else    
+      - else
         = render :partial => 'products_four', :locals => { :products => products }
-

@@ -22,9 +22,14 @@ ruby:
 header
   .nav-menu.nav-alert-top
     .container-fluid.nav-menu-container
-      .masthead.pull-left
+      .masthead.pull-left.hidden-xs
         = link_to '/' do
           = image_tag src='images/new-logo.svg', :class => 'nav-logo', :alt => 'Fame &amp; Partners'
+
+      .masthead.pull-left.visible-xs
+        = link_to '/' do
+          = image_tag src='images/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame &amp; Partners'
+
       ul.primary.pull-left.hidden-xs
         li.shop.menu-item
           a.menu-item--link.active-hover href="#"
@@ -133,7 +138,7 @@ header
           li.menu-item
             = link_to profile_path, class: 'menu-item--link' do
               | my account
-        li.menu-item
+        li.menu-item.hidden-xxs
           a.menu-item--link.search href="#"
             = image_tag "images/Search.svg"
             span.active-link.arrow-up.menu-active-arrow.search-arrow

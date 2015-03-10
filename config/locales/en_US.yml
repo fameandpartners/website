@@ -78,6 +78,7 @@ en-US:
             question: 'Want a different color?'
             email:
               subject: 'I would like this dress (%{sku}) in a different color.'
+          size_region: 'All sizes are US' 
           labels:
             color: 'Choose a color:'
           notices:
@@ -109,15 +110,15 @@ en-US:
         color_images: 'Images of other colors <br/> are on their way'
   landing:
     bridesmaid:
-      one: 
+      one:
         heading: '~ Unique bridesmaid dress designs ~'
         p1: 'Fame & Partners is your only online dress boutique delivering high quality and uniquely designed bridesmaids dresses, just for you.'
         p2: 'Find your uniquely designed bridesmaid dress by choosing your favourite colors, from white to lavender, mint and soft pink with divine fabrics and silhouettes your best friends will thank your for!'
-      two: 
+      two:
         heading: '~ Free customization and delivery ~'
         p1: 'Fame & Partners offers free customization, to save you on alteration costs and free delivery anywhere in the USA.'
         p2: 'Find your perfect dress for the modern bridesmaid, encapsulating the essence of timeless elegance and effortless beauty in soft hues from pink and white.'
-      three: 
+      three:
         heading: '~ Latest trends, made to order ~'
         p1: 'Shop sophisticated and cute bridesmaid dresses only at Fame & Partners, in a range of sizes, including plus sizes.'
         p2: 'Share all of your ideas on your iPhone when you plan your wedding and wedding ideas including bespoke bridesmaids gowns and unique dresses for the most glamourous and formal occasion.'
@@ -125,7 +126,7 @@ en-US:
   home:
     find:
       heading: '~ &nbsp; Find Your Perfect Dress &nbsp; ~'
-      body: 'At Fame and Partners, you’ll find the perfect dress for any formal occasion! From bridesmaids, black tie and debutants, to graduation, <a href="/dresses/prom">prom dresses</a>, formals, or even a sweet 16, you can find your perfect, dream dress for any occasion. Our red-carpet inspired formal dresses, and celebrity collaborations will bring you the perfect styles from knee length, mini and long formal dresses ranging from pastels, metallic and decked in sequins ... or even just the simple little black dress.'            
+      body: 'At Fame and Partners, you’ll find the perfect dress for any formal occasion! From bridesmaids, black tie and debutants, to graduation, <a href="/dresses/prom">prom dresses</a>, formals, or even a sweet 16, you can find your perfect, dream dress for any occasion. Our red-carpet inspired formal dresses, and celebrity collaborations will bring you the perfect styles from knee length, mini and long formal dresses ranging from pastels, metallic and decked in sequins ... or even just the simple little black dress.'
     shop:
       heading: '~  &nbsp; Shop The Latest Trends  &nbsp;  ~'
       body: 'Whether you prefer traditional over trendy, or trendy over traditional, we have something for you all. Your self-designed dress can offer two-pieces, sexy cut outs, flowing chiffon, peplum detailing, asymmetrical hems, innocent lace and much more. Between the unique styles and the modern, classic silhouettes, you will never go wrong when picking a dress from Fame and Partners.'

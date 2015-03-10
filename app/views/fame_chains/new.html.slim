@@ -6,7 +6,7 @@
       p.text-center A network of fashion forward,</br>free thinking bloggers increasing their cred</br>through being linked.
 
 .page-content.thefamechain
-  .container-fluid
+  .container-fluid.call-to-actions
     .row
       a href="/dresses/prom"
         .col-md-4.text-center.no-padding
@@ -36,7 +36,7 @@
         li Have a style of fashion Vlog.
         li Want to earn an income from your blog.
         li Want to inspire girls to create their own unique look for their formal occasions.
-        li Are active on either: Instagram, Facebook, Twitter, Pintrest, YouTube and/or other social media.
+        li Are active on either: Instagram, Facebook, Twitter, Pinterest, YouTube and/or other social media.
       = image_tag "_famechain/glam-rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
 
   .col-md-4.benefits.middle
@@ -70,7 +70,7 @@
         li Recive the Fame Chain Welcome kity with technical instructions on how to join.
       = image_tag "_famechain/glam-rebel5.jpg", alt: 'Something here', class: 'img-responsive portrait-img'
 
-  .col-md-12.form
+  .form
     .row.apply
       h2.text-center Apply now
     .apply-now
@@ -88,18 +88,18 @@
               = f.text_field :email, type: 'email'
           .row
             .form-group
-              label blog
+              label blog/vlog
               = f.text_field :blog, type: 'url'
 
       .row
         .col-md-5.col-md-offset-2.no-padding
           .form-group
             label Instagram
-            = f.text_field :blog, type: 'url'
+            = f.text_field :instagram, type: 'url'
         .col-md-3
             .form-group
               label number of</br>Followers
-              = f.text_field :blog_size, type: 'text'
+              = f.text_field :instagram_size, type: 'text'
 
       .row
         .col-md-5.col-md-offset-2.no-padding
@@ -109,19 +109,27 @@
         .col-md-3
             .form-group
               label number of</br>followers
-              = f.text_field :twitter_size, type: 'text'
+              = f.text_field :facebook_size, type: 'text'
 
       .row
         .col-md-5.col-md-offset-2.no-padding
           .form-group
-            label pintrest
+            label pinterest
             = f.text_field :pinterest, type: 'url'
         .col-md-3
             .form-group
               label.control-label number of</br>followers
               = f.text_field :pinterest_size, type: 'text'
+
       .row
-        .col-md-3.col-md-offset-4
+        .col-md-5.col-md-offset-2
+          .row
+            .form-group
+              label other
+              = f.text_field :other, type: 'text'
+
+      .row
+        .col-md-3.col-md-offset-4.submit-button
           .submit
             = f.submit "Apply now", class: 'btn btn-black'
 
@@ -140,6 +148,3 @@ javascript:
   })();
 noscript
   img alt="" height="1" src="https://www.facebook.com/offsite_event.php?id=6012298815296&amp;value=0&amp;currency=AUD" style="display:none" width="1"
-
-
-  LOCATION=../data/Test-Existing bundle exec rake import:product:images

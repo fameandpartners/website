@@ -42,8 +42,9 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses' => 'statics#amfam_lp', :as => :amfam_lp
     get '/christmas-gift' => 'statics#christmas_gift', :as => :christmas_gift
     get '/fame2015' => 'statics#fame2015', :as => :fame2015
-    get '/break-hearts-not-banks' => 'statics#break_hearts_not_banks', :as => :amfam
-    get '/amfam' => 'statics#amfam', :as => :break_hearts_not_banks
+    get '/break-hearts-not-banks' => 'statics#break_hearts_not_banks', :as => :break_hearts_not_banks
+    get '/amfam' => 'statics#amfam', :as => :amfam
+    get '/prom' => 'statics#prom', :as => :prom
 
     post '/shared/facebook' => 'competition/events#share'
 

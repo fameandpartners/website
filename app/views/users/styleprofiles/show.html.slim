@@ -1,16 +1,16 @@
-.page-title.default
+.user-account-page-title
   .container
     .page-title--details
-      h1.no-padding-bottom.text-white My style profile
+      h1.user-account-title.no-padding-bottom.text-white My style profile
 
 .page-content.user.style-quiz.show
   .container.relative
-    
+
     = render 'users/shared/tabs', active_tab: 'styleprofile'
     .row
       .col-md-12
         #report.tab-content
-          - if @style_profile.blank?            
+          - if @style_profile.blank?
             p = link_to 'Start the style quiz', '#', class: 'btn btn-black show-style-quiz'
             p To create your style proﬁle just run the style quiz.
           - else

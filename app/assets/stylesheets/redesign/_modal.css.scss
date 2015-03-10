@@ -1,26 +1,25 @@
-
 .vex-theme-flat-attack.email-capture-modal {
 
   padding-top:13%;
 
-  @media screen and (max-width: 991px){ 
+  @media screen and (max-width: 991px){
     padding-top:9%;
   }
 
   .vex-content {
-    border:5px solid black;    
+    border:5px solid black;
     width: 700px;
   }
 
   .vex-dialog-form {
-    
+
     .form-group {
 
     }
     .vex-dialog-input {
-      margin-top:100px;    
+
     }
-    
+
     .vex-dialog-buttons {
       position:absolute;
       top:0;
@@ -34,15 +33,63 @@
 
       .btn {
         padding:10px 15px;
-      }      
+      }
     }
   }
 
 }
 
-.email-capture-modal.bridesmaid-landing-page {
-  .vex-content {    
-    background-color:#FFFFFF
-    // background: url('_popups/bridesmaid1.jpg') no-repeat;
+.vex-theme-flat-attack.email-capture-modal.bridesmaid-landing-page {
+  .vex-content {
+    background-color:#959BB9;
+    background: url("campaigns/bridemaid/bridesmaid_modal_4_for_3_bg.jpg") no-repeat;
+  }
+  .vex-dialog-form {
+    .vex-dialog-input {
+      margin-top:220px;
+    }
+  }
+}
+
+// Is this size-guide related?
+.vex.vex-theme-flat-attack .vex-content {
+  padding: 1rem 1rem 2rem 1rem;
+
+  h2 {
+    font-size: 2.3rem;
+    line-height: 2.3;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: Forum;
+    color: white;
+    background-color: black;
+    margin-top: 0;
+  }
+
+  h6 {
+    font-size: 2rem;
+    line-height: 2rem;
+
+  }
+
+  p {
+    font-size: 2rem;
+    line-height: 2.2rem
+  }
+
+  img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  table {
+    th {
+      font-size: 1.5rem;
+    }
+
+    tbody {
+      font-size: 1.5rem;
+      line-height: 1.6rem;
+    }
   }
 }
