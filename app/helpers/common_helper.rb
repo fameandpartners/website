@@ -1,6 +1,6 @@
 module CommonHelper
   # override spree method
-  # title method 
+  # title method
   def get_title
     instance_variable_defined?('@title') ? @title : default_seo_title
   end
@@ -8,7 +8,7 @@ module CommonHelper
   def get_meta_description
     instance_variable_defined?("@description") ? @description : default_meta_description
   end
-  
+
   def get_hreflang(lang)
     href = get_canonical_href
     if lang == :au && !get_canonical_href.include?('/au')
@@ -20,14 +20,14 @@ module CommonHelper
     href
   end
 
- def get_hreflang(lang)
-    href = get_canonical_href
+  def get_hreflang(lang)
+    href = get_base_href
 
-    if lang == :au && !get_canonical_href.include?('/au')
-      return "http://#{request.host}/au#{request.fullpath}"    
+    if lang == :au && !href.include?('/au')
+      return "http://#{request.host}/au#{request.fullpath}"
     end
 
-    if lang == :us && get_canonical_href.include?('/au')
+    if lang == :us && href.include?('/au')
       return href.gsub('/au','')
     end
 
@@ -35,6 +35,10 @@ module CommonHelper
   end
 
   def get_canonical_href
+    get_base_href.gsub(/\?.*/,'')
+  end
+
+  def get_base_href
     if @product.present?
       return "#{request.host}#{collection_product_path(@product)}"
     end
@@ -84,4 +88,3 @@ module CommonHelper
     }
   end
 end
-
