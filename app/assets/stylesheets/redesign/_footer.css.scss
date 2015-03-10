@@ -98,6 +98,10 @@
 		margin-bottom: 8rem;
 		clear: both;
 
+		@media(max-width: 768px){
+			max-width: 100%;
+		}
+
 		.btn {
 			font-family: "brandon-grotesque";
 			color: black;
