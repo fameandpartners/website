@@ -151,7 +151,7 @@
 		margin-top: 1.2rem
 	}
 
-	h3 {
+	h1 {
 		padding-top: 2rem;
 		font-family: forum;
 		font-size: 4.5rem;
@@ -160,6 +160,15 @@
 		small{
 			color: black;
 		}
+	}
+
+	a {
+		text-decoration:none;
+		color:black;
+	}
+
+	a:after {
+		content: ', '
 	}
 
 	.row {
@@ -341,7 +350,3 @@
 	background-image: url('glam_rebel.jpg');
 	height:490px;
 }
-
-
-
-
