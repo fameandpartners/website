@@ -1,9 +1,18 @@
 .thefamechain {
 	padding-top: 0;
 
+	.container-fluid {
+		padding-left: 0;
+		padding-right: 0;
+	}
 
 	.apply {
 		background-color: black;
+
+		@media screen and (max-width: 768px) {
+			margin-left: 0;
+			margin-right: 0;
+		}
 
 		p {
 			color: white;
@@ -16,12 +25,22 @@
 			color: white;
 			font-family: forum;
 			font-size: 8rem;
+
+			@media screen and (max-width: 768px) {
+				font-size: 5rem;
+				line-height: 5.5rem
+ 			}
 		}
 
 		ul {
 			list-style: none;
 			color: white;
 			text-transform: uppercase;
+
+			@media screen and (max-width: 768px) {
+				padding-left: 1rem;
+				padding-right: 1rem;
+			}
 
 			li {
 				display: inline-block;
@@ -31,10 +50,23 @@
 
 	form {
 		padding-top: 4rem;
+
+		@media screen and (max-width: 768px) {
+			input {
+
+			}
+ 		}
 	}
 
 	.form {
 		background-color: #f6e2d5;
+
+		@media screen and (max-width: 768px) {
+
+			.row {
+				margin-right: 0;
+			}
+		}
 
 		.col-md-5{
 			label {
@@ -44,10 +76,24 @@
 				font-weight: 500;
 				color: black;
 				padding-right: 1rem;
+
+				@media screen and (max-width: 768px) {
+					font-size: 1.4rem;
+				}
 			}
 
 			input {
 				width: 70%;
+
+				@media screen and (max-width: 768px) {
+					width: auto;
+				}
+			}
+		}
+
+		.submit-button{
+			@media screen and (max-width: 768px) {
+				padding-right:0;
 			}
 		}
 
@@ -60,10 +106,19 @@
 				font-weight: 500;
 				color: black;
 				padding-right: 1rem;
+
+				@media screen and (max-width: 768px) {
+					width: 110px;
+					text-align: right;
+				}
 			}
 
 			input {
 				width: 200px;
+
+				@media screen and (max-width: 768px) {
+					width: auto;
+				}
 			}
 		}
 		.submit .btn {
@@ -72,6 +127,10 @@
 			font-size: 2.5rem;
 			padding: 0 15px;
 			margin-bottom: 5rem;
+
+			@media screen and (max-width: 768px) {
+				width: 100%;
+			}
 		}
 	}
 }
@@ -86,8 +145,14 @@
 	.page-title--details {
 		padding-top: 20px;
 		padding-bottom: 20px;
-	}
 
+		@media screen and (max-width: 768px) {
+			img {
+				width: 70%;
+				height: auto;
+			}
+ 		}
+	}
 
 	p {
 		padding-top: 15px;

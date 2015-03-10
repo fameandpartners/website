@@ -6,7 +6,7 @@
       p.text-center A network of fashion forward,</br>free thinking bloggers increasing their cred</br>through being linked.
 
 .page-content.thefamechain
-  .container-fluid
+  .container-fluid.call-to-actions
     .row
       a href="/dresses/prom"
         .col-md-4.text-center.no-padding
@@ -70,7 +70,7 @@
         li Recive the Fame Chain Welcome kity with technical instructions on how to join.
       = image_tag "_famechain/glam-rebel5.jpg", alt: 'Something here', class: 'img-responsive portrait-img'
 
-  .col-md-12.form
+  .form
     .row.apply
       h2.text-center Apply now
     .apply-now
@@ -129,7 +129,7 @@
               = f.text_field :other, type: 'text'
 
       .row
-        .col-md-3.col-md-offset-4
+        .col-md-3.col-md-offset-4.submit-button
           .submit
             = f.submit "Apply now", class: 'btn btn-black'
 
