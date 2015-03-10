@@ -8,7 +8,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   updateParams: {}
   collectionTemplate: JST['templates/product_collection']
 
-  constructor: (options) ->
+  constructor: (options = {}) ->
+    @details_elements = options.details_elements || {}
     @filter = $(options.controls)
     @content = $(options.content)
 
@@ -37,14 +38,12 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
 
-        @hoverize();
-        track.pageView(pageUrl, updateRequestParams)
+        @hoverize()
 
-        #productsFilter.$el.find('.category-catalog.products-list').replaceWith(data.products_html)
-        #header = productsFilter.$el.find('.category-header')
-        #header.find('h1').html(data.page_info.banner_title)
-        #header.find('h2').html(data.page_info.banner_text)
-        #productsFilter.updateContentHandlers()
+        if collection && collection.details
+          @updateCollectionDetails(collection.details)
+
+        track.pageView(pageUrl, updateRequestParams)
     )
 
   # private methods
@@ -79,3 +78,20 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       selector: '.category--item'
       delegate: '.img-product'
     )
+
+  updateCollectionDetails: (details) =>
+    return if !@details_elements
+    return if !details
+
+    $('title').html(details.title) if details.title
+    $('meta[name=description]').attr('content', details.description) if details.description
+
+    if @details_elements.banner && details.banner
+      $(@details_elements.banner.title).html(details.banner.title) if details.banner.title
+      $(@details_elements.banner.description).html(details.banner.description) if details.banner.description
+
+      if details.banner.image
+        $banner_img = $(@details_elements.banner.image)
+        image = new Image()
+        image.onload = () -> $banner_img.css('background-image', "url('#{ details.banner.image }')")
+        image.src = details.banner.image

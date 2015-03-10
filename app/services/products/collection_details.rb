@@ -50,9 +50,9 @@ class Products::CollectionDetails
   def templates
     {
       title: {
-        sale_all:   "All Dresses on Sale | Fame & Partners",
-        sale:       "Sale %{discount}%% Off | Fame & Partners",
-        default:    "Shop the latest %{color} %{style} %{event} Dresses %{bodyshape} | Fame & Partners",
+        sale_all:   "All Dresses on Sale",
+        sale:       "Sale %{discount}%% Off",
+        default:    "Shop the latest %{color} %{style} %{event} Dresses %{bodyshape}",
         bodyshape:  " for %{bodyshape} body shapes"
       },
       description: {
@@ -89,7 +89,7 @@ class Products::CollectionDetails
     end
 
     def banner_title
-      @banner_title ||= get_banner_title
+      @banner_title ||= get_title
     end
 
     def banner_description
@@ -115,23 +115,25 @@ class Products::CollectionDetails
     # define 'root' taxon for collection
     def collection_taxons
       # manage order to set priority
-      taxons = [collection, edits, style, event].compact
+      taxons = [edits, collection, style, event].compact
 
-      # if no data, then plain collection
-      return [empty_collection] if taxons.blank? && color.blank? && bodyshape.blank?
+      # add root collection taxon, for no-data case
+      if color.blank? && bodyshape.blank?
+        taxons.push(empty_collection)
+      end
+
+      taxons
     end
 
-    def taxon_banner
-      @taxon_banner ||= collection_taxons.find{|t| t.banner.present? }.try(:banner)
+    def parent_taxon
+      @parent_taxon ||= collection_taxons.first
     end
 
+    # Page heading
     # briefly:
-    #   - if sales, then sale [all or 10%]
-    #   - if collection have taxons
-    #     - trying to extract title from banner
-    #     - trying to extract title directly
-    #   - if collection have no taxons & colors & anything
-    #     - trying to use default collection data [ title / banner ]
+    #   - if sale collection, then title for sale [all or 10%]
+    #   - if parent_taxon present?
+    #     - try to extract from it
     #   - generate title based on params
     def get_title
       if discount.present?
@@ -142,15 +144,9 @@ class Products::CollectionDetails
         end
       end
 
-      # trying to extract custom title from 
-      #   collection, event, edit, style taxon, or collection_base
-      if collection_taxons.present?
-        taxon = collection_taxons.find{|t| t.banner.present? && t.banner.title.present? }
-        return taxon.banner.title if taxon.present?
-
-        taxon  = collection_taxons.find{|t| t.meta_title.present? }
-        return taxon.meta_title if taxon.present?
-      end
+      custom_title = parent_taxon.try(:banner).try(:title)
+      custom_title ||= parent_taxon.try(:meta_title)
+      return custom_title if custom_title.present?
 
       # if no specific titles, then compile from existing
       default_title = templates[:title][:default] % {
@@ -163,12 +159,10 @@ class Products::CollectionDetails
       default_title.gsub!(/\s{1,}/, ' ').capitalize # remove double spaces
     end
 
+    # Page meta description
     # briefly:
     #   - if sales, then sale [all or 10%]
-    #   - if collection have taxons
-    #     - trying to extract meta descriptiondirectly
-    #   - if collection have no taxons & colors & anything
-    #     - trying to use default collection data [ description ]
+    #   - if parent taxon - get data from it
     #   - generate title based on params
     #
     # NOTE: we don't use bodyshape here
@@ -181,12 +175,9 @@ class Products::CollectionDetails
         end
       end
 
-      # trying to extract custom title from 
-      #   collection, event, edit, style taxon, or collection_base
-      if collection_taxons.present?
-        taxon  = collection_taxons.find{|t| t.meta_description.present? }
-        return taxon.meta_description if taxon.present?
-      end
+      custom_description = parent_taxon.try(:banner).try(:seo_description)
+      custom_description ||= parent_taxon.try(:meta_description)
+      return custom_description if custom_description.present?
 
       # if no specific titles, then compile from existing
       default_description = templates[:description][:default] % {
@@ -198,40 +189,11 @@ class Products::CollectionDetails
       default_description.gsub!(/\s{1,}/, ' ').capitalize # remove double spaces
     end
 
+    def get_footer
+      return nil if discount.present?
+      footer_text = parent_taxon.try(:banner).try(:footer_text)
 
-    # shortly
-    #   - if sales : show sale-specific
-    #
-    #   The way titles should work:
-    #     Black prom dresses //colour
-    #     Black strapless formal dresses //colour + style
-    #     Black strapless homecoming dresses // colour + style + event
-    #
-    def get_banner_title
-      if discount.present?
-        if discount.to_s == 'all'
-          return templates[:banner_title][:sale_all]
-        else
-          return (templates[:banner_title][:sale] % { discount: discount.to_i })
-        end
-      end
-
-      if edits.present?
-        return edits.name.capitalize
-      end
-
-      if collection_taxons.present?
-        taxon = collection_taxons.find{|t| t.banner.present? && t.banner.title.present? }
-        return taxon.banner.title if taxon.present?
-      end
-
-      default_banner_title = templates[:banner_title][:default] % {
-        color: is_formal_dress_color?(color) ? color.name.titleize : nil,
-        style: style.present? ? style.name.titleize : '',
-        event: event.present? ? event.name.titleize : ''
-      }
-
-      default_banner_title.gsub!(/\s{1,}/, ' ').capitalize # remove double spaces
+      nil
     end
 
     def get_banner_description
@@ -243,15 +205,8 @@ class Products::CollectionDetails
         end
       end
 
-      text = if edits.present?
-        edits.banner.try(:description)
-      elsif collection.present?
-        collection.banner.try(:description)
-      else
-        empty_collection.banner.try(:description)
-      end
-
-      # todo: find text
+      text = parent_taxon.try(:banner).try(:description)
+      text ||= parent_taxon.try(:description)
       return text if text.present?
 
       if is_formal_dress_color?(color)
@@ -261,19 +216,14 @@ class Products::CollectionDetails
       end
     end
 
-    def get_footer
-      title
-    end
-
     def get_banner_image
+      return nil if discount.present?
+
       return nil if is_formal_dress_color?(color)
 
-      if edits.present?
-        edits.banner.image
-      elsif collection.present?
-        collection.banner.image
-      else
-        empty_collection.banner.image
-      end
+      image = parent_taxon.try(:banner).try(:image)
+      return image if image
+
+      nil
     end
 end

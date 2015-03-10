@@ -2,7 +2,14 @@ ruby:
   init_collection_filter = "
     filter = new ProductCollectionFilter({
       controls: '.category .category-controls',
-      content: '.category .products-collection'
+      content: '.category .products-collection',
+      details_elements: {
+        banner: {
+          title: '.page-title.category-header .page-title--details h1',
+          description: '.page-title.category-header .page-title--details p',
+          image: '.page-title.category-header'
+        }
+      }
     });
   "
   init_product_collection_moodboard_links = "
