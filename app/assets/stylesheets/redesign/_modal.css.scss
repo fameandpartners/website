@@ -1,4 +1,3 @@
-
 .vex-theme-flat-attack.email-capture-modal {
 
   padding-top:13%;
@@ -18,7 +17,7 @@
 
     }
     .vex-dialog-input {
-      margin-top:100px;
+
     }
 
     .vex-dialog-buttons {
@@ -40,13 +39,19 @@
 
 }
 
-.email-capture-modal.bridesmaid-landing-page {
+.vex-theme-flat-attack.email-capture-modal.bridesmaid-landing-page {
   .vex-content {
-    background-color:#FFFFFF
-    // background: url('_popups/bridesmaid1.jpg') no-repeat;
+    background-color:#959BB9;
+    background: url("campaigns/bridemaid/bridesmaid_modal_4_for_3_bg.jpg") no-repeat;
+  }
+  .vex-dialog-form {
+    .vex-dialog-input {
+      margin-top:220px;
+    }
   }
 }
 
+// Is this size-guide related?
 .vex.vex-theme-flat-attack .vex-content {
   padding: 1rem 1rem 2rem 1rem;
 

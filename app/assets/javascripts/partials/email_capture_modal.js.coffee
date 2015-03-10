@@ -1,11 +1,11 @@
 window.page or= {}
 
 window.page.EmailCaptureModal = class EmailCaptureModal
-  constructor: (opts = {}) ->            
+  constructor: (opts = {}) ->
     @opts = opts
-    timeout = opts.timeout || 0    
+    timeout = (opts.timeout*1000) || 3000    
     @$container = $(opts.container)
-    
+
     setTimeout(@open, timeout) if @pop
 
   pop: =>
@@ -14,21 +14,21 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   afterClose: () ->
     $.cookie('email_capture', 'hide', { expires: 365, path: '/' })
 
-  callback: (data) =>            
-    if data 
+  callback: (data) =>
+    if data
       @process(data)
     else
       window.track.event('LandingPageModal', 'ClosedNoAction', @opts.content, @opts.promocode)
 
   process: (data) =>
-    console.log('process') 
+    console.log('process')
     if !!data.email
-      $.post(@opts.action, data).done(@success).fail(@error)    
-    else          
-      setTimeout(@open, 250) 
+      $.post(@opts.action, data).done(@success).fail(@error)
+    else
+      setTimeout(@open, 250)
       window.helpers.showAlert(message: 'Did you mean to forget your email address?')
 
-  success: (data) =>  
+  success: (data) =>
     if data.status == 'ok'
       title = '#hashtag #hooray'
 
@@ -40,25 +40,22 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
   failure: () =>
-    window.helpers.showAlert(message: 'Is your email address correct?')    
+    window.helpers.showAlert(message: 'Is your email address correct?')
     window.track.event('LandingPageModal', 'Error', @opts.content, @opts.promocode)
 
   onOpen: =>
     $('.vex-dialog-buttons button').addClass('btn btn-black') # HACKETRY
     if @opts.submitText
-      $('.vex-dialog-form button[type=submit]').val(@opts.submitText) 
+      $('.vex-dialog-form button[type=submit]').val(@opts.submitText)
 
     window.track.event('LandingPageModal', 'Opened', @opts.content, @opts.promocode)
 
   open: () =>
     vex.dialog.buttons.NO.text = 'X'
-    vex.dialog.open      
-      className: "vex vex-theme-flat-attack email-capture-modal #{@opts.className || ''}" 
+    vex.dialog.open
+      className: "vex vex-theme-flat-attack email-capture-modal #{@opts.className || ''}"
       input: @$container.html()
       message: @opts.message || ''
-      afterOpen: @onOpen    
+      afterOpen: @onOpen
       afterClose: @onClose
       callback: @callback
-
-
-    

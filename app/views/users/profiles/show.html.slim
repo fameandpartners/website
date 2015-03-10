@@ -1,21 +1,21 @@
-.page-title.default
+.user-account-page-title
   .container
     .page-title--details
-      h1.no-padding-bottom.text-white Account Settings  
+      h1.user-account-title.no-padding-bottom.text-white Account Settings
 
 .page-content.user.profiles.show
   .container.relative
-    
+
     = render 'users/shared/tabs', active_tab: 'account_settings'
 
     .panel.panel-default
-      .panel-body      
+      .panel-body
         = form_for @user, :as => :profile, :url => profile_path, :method => :put, :html => { :class => 'devise-forms' } do |f|
-         
+
          .row
           .col-md-6.col-xs-12
             = render 'shared/redesign/error_messages', target: @user
-            
+
             .form-group
               = f.label :first_name
               = f.text_field :first_name, :class => 'form-control standard-form'
@@ -42,8 +42,8 @@
                  .avatar.empty
 
             .form-group
-              input id="fileupload" type="file" style="display: none;"            
-            .form-group              
+              input id="fileupload" type="file" style="display: none;"
+            .form-group
               p
                 small
                   ' Available file formats are:
@@ -52,9 +52,9 @@
                   br
                   ' Maximum size is:
                   = number_to_human_size(Spree::User::ALLOWED_AVATAR_FILE_SIZE.max)
-                  | .            
+                  | .
               input.btn.btn-upload type="button" value="Upload profile photo"
-            
+
           .col-md-12
             .form-group
-              = f.submit 'Save changes', class: 'btn button primary' 
+              = f.submit 'Save changes', class: 'btn button primary'

@@ -30,13 +30,13 @@ ruby:
 .page-content.products-collections.category
   .container.relative.category-controls
     .row.relative
-      .col-md-3.hidden-xs.hidden-xxs
+      .col-md-3.hidden-sm.hidden-xs.hidden-xxs
         = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
         br
-      .col-md-3.hidden-xs.hidden-xxs
+      .col-md-3.hidden-sm.hidden-xs.hidden-xxs
         = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
         br
-      .col-md-3.hidden-xs.hidden-xxs
+      .col-md-3.hidden-sm.hidden-xs.hidden-xxs
         = select_tag :color, color_options, class: 'pink-select', prompt: 'Colour'
         br
       .col-md-3.col-xs-12.col-xxs-12.product-order
