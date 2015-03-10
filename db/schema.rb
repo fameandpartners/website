@@ -1133,10 +1133,10 @@ ActiveRecord::Schema.define(:version => 20150309104816) do
     t.boolean  "is_active"
     t.decimal  "discount_size"
     t.integer  "discount_type"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "name"
-    t.boolean  "sitewide"
+    t.boolean  "sitewide",      :default => false
   end
 
   create_table "spree_shipments", :force => true do |t|
