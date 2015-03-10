@@ -17,20 +17,9 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @variants = options.variants
     @selected = options.preselected || {}
 
-    @sizeInput = options.sizeInput || new inputs.ProductSizeIdSelector(
-      container: @$container.find('#product-size'),
-      value: @selected.size_id
-    )
-
-    @colorInput = options.colorInput || new inputs.ProductColorIdSelector(
-      container: @$container.find('#product-color'),
-      value: @selected.color_id
-    )
-
-    @customizationsInput = options.customizationsInput || new inputs.ProductCustomizationsIdsSelector(
-      container: @$container.find('#product-customizations'),
-      value: @selected.customizations_ids
-    )
+    @sizeInput = new window.inputs.ProductSizeIdSelector(options.size_input)
+    @colorInput = new window.inputs.ProductColorIdSelector(options.color_input)
+    @customizationsInput = new window.inputs.ProductCustomizationIdsSelector(options.customization_input)
 
     @colorInput.on('change', @onChangeHandler)
     @sizeInput.on('change', @onChangeHandler)

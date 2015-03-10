@@ -19,7 +19,7 @@ class Products::CollectionsController < Products::BaseController
     @collection = collection_resource.read
 
     # set title / meta description for page
-    @title        = @collection.details.title
+    title(@collection.details.title, default_seo_title)
     @description  = @collection.details.description
 
     respond_to do |format|
