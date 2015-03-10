@@ -1,28 +1,28 @@
 javascript:
   $(document).ready(function() {
 
-    function remove(url, onCompleteHandler) {   
-      $.ajax({ 
+    function remove(url, onCompleteHandler) {
+      $.ajax({
         url: url,
         type: 'DELETE',
         dataType: 'script',
-      }).complete(onCompleteHandler);      
+      }).complete(onCompleteHandler);
     }
 
     function removeHandler(e) {
       e.preventDefault();
       link = $(e.currentTarget);
       if (! link.data('processing')) {
-        link.data('processing', true);           
+        link.data('processing', true);
         remove(link.attr('href'), function() {
-          link.data('processing', false); 
+          link.data('processing', false);
         })
       }
     }
 
 
     function remove_and_link_to_product_page(e) {
-      e.preventDefault(); 
+      e.preventDefault();
 
       link = $(e.currentTarget);
       itemId = link.data('id');
@@ -38,22 +38,21 @@ javascript:
 
 
 
-
-.page-title.default
+.user-account-page-title
   .container
     .page-title--details
-      h1.no-padding-bottom.text-white My style profile
+      h1.user-account-title.no-padding-bottom.text-white My style profile
 
 .page-content.user.moodboard.index
   .container.relative
-    
+
     = render 'users/shared/tabs', active_tab: 'wishlist'
     .row
       .col-md-12
         - if @moodboard.products.empty?
           p Sorry, there are no items in your moodboard
 
-        - if @moodboard.products.any?    
+        - if @moodboard.products.any?
           .container.relative
 
             - @moodboard.products.each_slice(4).each do |row|
