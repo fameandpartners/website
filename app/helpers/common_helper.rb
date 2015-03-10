@@ -1,6 +1,6 @@
 module CommonHelper
   # override spree method
-  # title method 
+  # title method
   def get_title
     # @title  : Spree::Config[:default_seo_title]
     # @category_title is set in the products controller decorator#index
@@ -11,11 +11,11 @@ module CommonHelper
       #[Spree::Config[:site_name], "Dream Formal Dresses"].join(' - ')
       #return default
       @title
-    end 
+    end
   end
 
   def get_meta_description
-    
+
     if @category_description.present?
       @category_description
     elsif @description.present?
@@ -28,13 +28,13 @@ module CommonHelper
 
 
   def get_hreflang(lang)
-    href = get_canonical_href
+    href = get_base_href
 
-    if lang == :au && !get_canonical_href.include?('/au')
-      return "http://#{request.host}/au#{request.fullpath}"    
+    if lang == :au && !href.include?('/au')
+      return "http://#{request.host}/au#{request.fullpath}"
     end
 
-    if lang == :us && get_canonical_href.include?('/au')
+    if lang == :us && href.include?('/au')
       return href.gsub('/au','')
     end
 
@@ -42,6 +42,10 @@ module CommonHelper
   end
 
   def get_canonical_href
+    get_base_href.gsub(/\?.*/,'')
+  end
+
+  def get_base_href
     if @product.present?
       return "#{request.host}#{collection_product_path(@product)}"
     end
@@ -91,4 +95,3 @@ module CommonHelper
     }
   end
 end
-
