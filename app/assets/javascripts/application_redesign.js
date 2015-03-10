@@ -43,7 +43,7 @@
 // require popups/style_quiz
 
 //= require partials/product_collection.js
-//= require partials/product_customisation.js
+//require partials/product_customisation.js
 
 //= require partials/email_newsletter_subscriber
 //= require partials/email_capture_modal
@@ -54,6 +54,7 @@
 // product details with related
 //= require partials/product_details.js
 //= require partials/inputs/new.js.coffee
+//= require partials/inputs/product_option_selectors.js.coffee
 //= require partials/helpers/product_images_slider.js.coffee
 //= require partials/helpers/product_variants_selector.js.coffee
 
