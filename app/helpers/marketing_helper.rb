@@ -32,7 +32,7 @@ module MarketingHelper
   end
 
   def marketing_landing_page?
-    params[:lp].present?
+    params[:lp].present? || pop?
   end
 
   def show_small_product_images?
@@ -42,4 +42,20 @@ module MarketingHelper
   def show_prices_with_applied_promocode?
     marketing_landing_page? && current_promotion.present?
   end
+
+  # TODO remove this after redesign merge
+  require "base64"
+
+  def pop?
+    params[:pop].present? && params[:pop] == 'true'
+  end
+
+  def decode(p)
+    if p.present?
+      Base64.decode64(p)
+    else
+      ''
+    end
+  end
+
 end
