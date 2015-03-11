@@ -33,11 +33,12 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
 
   onChangeHandler: (e) =>
     e.stopPropagation()
+    @selected = null
     @trigger('change', @getValue())
 
   # returns current value
   getValue: () ->
-    @selected = @getCurrentSelection()
+    @selected ||= @getCurrentSelection()
 
   getCurrentSelection: () ->
     selected = {

@@ -71,18 +71,13 @@ page.initProductDetailsPage = (options = {}) ->
       
       # unless $(this).data('user-present')
       # redirect to login 
-
-      status = selector.validate()
-      if !status.valid
-        window.helpers.showAlert(message: status.error)
-      else
-        selected = selector.getCurrentSelection()
-        wishlist_item_data = {
-          color_id: selected.color_id,
-          variant_id: (selected.variant || {})['id'],
-          product_id: selected.product_id
-        }
-        app.user_moodboard.addItem(wishlist_item_data)
+      selected = selector.getCurrentSelection()
+      wishlist_item_data = {
+        color_id: selected.color_id,
+        variant_id: (selected.variant || {})['id'],
+        product_id: selected.product_id
+      }
+      app.user_moodboard.addItem(wishlist_item_data)
     )
 
     updateWishlistButtonState = () ->
