@@ -34,6 +34,8 @@
 		border-width: 0 8px 10px 8px;
 	}
 
+
+
 	.name {
 		text-transform: uppercase;
 	}
@@ -104,7 +106,6 @@
 	color:#000000;
 }
 
-
 #select2-product_order-results {
 
 	.select2-container--default .select2-results__option[aria-selected="true"] {
@@ -131,7 +132,8 @@
 	left: 15px;
 }
 
-.page-title {
-	// background-image: url('category-banners/vneck.jpg')
+li.select2-results__option {
+	background-color: #f5f5f5 ;
+	font-weight: 600;
 }
 
