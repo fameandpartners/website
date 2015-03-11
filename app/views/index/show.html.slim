@@ -27,7 +27,7 @@
     div.break-hearts
       .slider-image-caption.height-100
         .container.height-100
-          .promotion
+          .promotion.col-sm-12
              h2.caption-title Break hearts. not bank account$
 
       / | <div style="background-image: url(images/test4.jpg)"></div
@@ -78,10 +78,19 @@
   .row
     = image_tag "bride.jpg", alt: 'Something here', class: 'img-responsive'
   .row.no-padding
-    h3
+    h1
       small formal dresses</br>
       | for every event
-    p new years, prom, formals, weddings, bridesmaids, cocktails, balls
+    p
+      a href="/new-years-eve-dresses" new years
+      a href="/dresses/prom" prom
+      a href="/dresses/formal" formals
+      | weddings,&nbsp;
+      a href="/bridesmaid-dresses" bridesmaids
+      a href="/dresses/cocktail" cocktails
+      | balls
+
+
 .col-md-4.brand-pink.text-center.shop-with-us
   .row
     h4 Dedicated, specialist sample</br>rooms &amp; dress makers
@@ -111,5 +120,3 @@
 /         p= t('home.shop.body').html_safe
 /       .col-md-5
 /         = image_tag 'images/bridesmaid-image.jpg', alt: 'Bridesmaid image', class: 'img-responsive'
-
-

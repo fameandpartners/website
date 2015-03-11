@@ -1,5 +1,6 @@
 ruby:
   promocode = decode(params[:pc])
+  heading = decode(params[:h])
   message = decode(params[:m])
   content = decode(params[:c]) || promocode
   class_name = decode(params[:s]) || class_name
@@ -9,6 +10,7 @@ ruby:
     new window.page.EmailCaptureModal({
       promocode: '#{promocode}',
       content:   '#{content}',
+      heading:   '#{heading}',
       message:   '#{message}',
       className: '#{class_name}',
       action:    '#{campaigns_email_capture_path}',

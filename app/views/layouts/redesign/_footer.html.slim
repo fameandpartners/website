@@ -1,34 +1,11 @@
-/ footer
-/   .footer-menu.text-center
-/     .container
-/       ul
-/         li = link_to 'Why Shop With Us', why_us_path
-/         li = link_to 'The Fame Team', about_us_path
-/         li = link_to 'FAQs', faqs_path
-/         li = link_to 'Terms', terms_path
-/         li = link_to 'Get Styling Advice', style_consultation_path
-
-/         li = link_to 'Fashionista', fashionista_winner_path
-/         li = link_to 'Fame Chain', fame_chain_path
-/         / li = link_to 'Contact', '#'
-/       .row
-/         .col-md-3
-/           p.text-grey Australia
-/         .col-md-6
-/           small.text-grey
-/             | &copy; 2015 FAME &amp; PARTNERS. All rights reserved.
-/         .col-md-3
-/           Icons
-
-/! Footer 2
 .footer.container
   .footer-navigation
-    .col-md-3
+    .col-md-3.col-sm-6
       .footer-logo
 
       = render 'layouts/redesign/address'
 
-    .col-md-2.col-md-offset-5
+    .col-md-2.col-md-offset-5.col-sm-3
       ul.footer-nav
         li.footer-nav--item
           = link_to 'Why Shop With Us', why_us_path
@@ -40,7 +17,7 @@
            = link_to 'Terms', terms_path
         li.footer-nav--item
           = link_to 'Get styling advice', style_consultation_path
-    .col-md-2
+    .col-md-2.col-sm-3
       ul.footer-nav
         li.footer-nav--item
           = link_to 'Fashionista program', fashionista_winner_path
@@ -48,7 +25,7 @@
           = link_to 'Fame Chain', fame_chain_path
 
   .row.lower-row
-    .col-md-3
+    .col-md-3.col-sm-8
       .btn-group
         button.btn.btn-dropdown.dropdown-toggle.location aria-expanded="false" data-toggle="dropdown" type="button"
           = current_site_version.abbr.upcase
@@ -63,13 +40,13 @@
             li
               = link_to site_version_path('us') do
                 | US
-    .col-md-6
+    .col-md-6.col-sm-4.copyright
       p
         | &copy;&nbsp;
         = Time.now.year
         | &nbsp;Fame &amp; Partners. All rights reserved.
 
-    .col-md-3.social-links
+    .col-md-3.social-links.col-sm-12
       ul.footer-social
         li.footer-social--item
           span class='st_facebook_custom' displayText='Facebook'
@@ -83,20 +60,3 @@
         li.footer-social--item
           span class='st_twitter_custom' st_via="fameandpartners" displayText='Tweet'
             = image_tag '_icons/twitter.png'
-
-
-
-    / .footer-details.hidden-xs
-    /   .footer-details-text.pull-left
-    /     p.lighter-text
-    /       small
-    /         | &copy; 2015 FAME &amp; PARTNERS. All rights reserved.
-
-      / .pull-right.no-float-mobile
-      /   ul.footer-details-nav
-      /     li.footer-details-nav--item
-      /       = link_to privacy_path, class: 'lighter-text' do
-      /         small Privacy Policy
-      /     li.footer-details-nav--item
-      /       = link_to terms_path, class: 'lighter-text' do
-      /         small Terms of Use

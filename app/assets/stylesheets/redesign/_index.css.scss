@@ -142,8 +142,8 @@
 .shop-with-us {
 	min-height: 830px;
 
-	@media(min-width: 990px){
-		height: 900px;
+	@media(min-width: 990px)and(max-width: 1020px){
+		height: 970px;
 	}
 
 	h2 {
@@ -151,7 +151,7 @@
 		margin-top: 1.2rem
 	}
 
-	h3 {
+	h1 {
 		padding-top: 2rem;
 		font-family: forum;
 		font-size: 4.5rem;
@@ -160,6 +160,15 @@
 		small{
 			color: black;
 		}
+	}
+
+	a {
+		text-decoration:none;
+		color:black;
+	}
+
+	a:after {
+		content: ', '
 	}
 
 	.row {
@@ -188,6 +197,17 @@
 .taste-of-fame {
 	background-image: url('taste-of-fame.jpg');
 
+	@media(max-width: 768px){
+		background-image: url('taste-of-fame-mobile.jpg');
+	}
+
+	.caption-title{
+		@media(max-width: 768px){
+		font-size: 8rem;
+		padding-top: 6rem;
+		}
+	}
+
 	.promotion {
 		text-align: center;
 		height: 50%;
@@ -212,10 +232,18 @@
 	color: white;
 	margin-top: 3rem;
 	width: 33%;
+
+	@media(max-width: 768px){
+		width: 281px;
+	}
 }
 
 .break-hearts {
 	background-image: url('break-hearts.jpg');
+
+	@media(max-width: 768px){
+		background-image: url('break-hearts-mobile.jpg');
+	}
 
 	.container {
 		width: 100%;
@@ -227,6 +255,10 @@
 		width: 60%;
 		float: right;
 
+	@media(max-width: 768px){
+		width: 100%;
+	}
+
 
 		h2.caption-title {
 			font-family: "Brandon Grotesque", sans-serif;
@@ -237,6 +269,11 @@
 			width: 90%;
 			margin-right: auto;
 			margin-left: auto;
+
+			@media(max-width: 768px){
+				font-size: 5rem;
+				padding-top: 2rem;
+			}
 		}
 
 		p {
@@ -255,10 +292,14 @@
 .prom {
 	background-image: url('prom.jpg');
 
+	@media(max-width: 768px){
+		background-image: url('prom-mobile.jpg');
+	}
+
 	.promotion {
 		float: right;
 		padding-right: 5rem;
-
+		font-weight: 400;
 
 		h2.caption-title {
 			font-family: "Brandon Grotesque", sans-serif;
@@ -269,8 +310,12 @@
 			margin-right: auto;
 			margin-left: auto;
 			text-transform: none;
+
+			@media(max-width: 768px){
+				font-size: 3rem;
+				padding-top: 17rem;
+			}
 		}
-		font-weight: 400;
 
 		p {
 			font-family: forum;
@@ -278,6 +323,11 @@
 			font-size: 9.5rem;
 			text-align: center;
 			line-height: 7rem;
+
+			@media(max-width: 768px){
+				font-size: 7rem;
+				line-height: 6rem;
+			}
 		}
 	}
 }
@@ -290,13 +340,13 @@
 	margin-top: 2rem;
 	width: 100%;
 	margin-top: 6rem;
+
+	@media(max-width: 768px){
+		width: 100%;
+	}
 }
 
 .prom-queen {
 	background-image: url('glam_rebel.jpg');
 	height:490px;
 }
-
-
-
-

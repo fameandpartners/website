@@ -120,6 +120,19 @@
 				padding: 3px 12px;
 			}
 		}
+	}
+}
 
+.copyright {
+	@media(min-width: 768px)and(max-width:990px){
+		p {
+			float:right;
+		}
+	}
+
+	@media(min-width: 990px)and(max-width:1100px){
+		p {
+			padding-left:4rem;
+		}
 	}
 }

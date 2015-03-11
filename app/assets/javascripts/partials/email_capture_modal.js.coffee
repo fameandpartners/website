@@ -3,7 +3,7 @@ window.page or= {}
 window.page.EmailCaptureModal = class EmailCaptureModal
   constructor: (opts = {}) ->
     @opts = opts
-    timeout = (opts.timeout*1000) || 3000    
+    timeout = (opts.timeout*1000) || 3000
     @$container = $(opts.container)
 
     setTimeout(@open, timeout) if @pop
@@ -50,12 +50,16 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
     window.track.event('LandingPageModal', 'Opened', @opts.content, @opts.promocode)
 
+  message: =>
+    h = if @opts.heading then "<h2>#{@opts.heading}</h2>" else ''
+    "#{h}<p>#{@opts.message}</p>"
+    
   open: () =>
     vex.dialog.buttons.NO.text = 'X'
     vex.dialog.open
       className: "vex vex-theme-flat-attack email-capture-modal #{@opts.className || ''}"
       input: @$container.html()
-      message: @opts.message || ''
+      message: @message()
       afterOpen: @onOpen
       afterClose: @onClose
       callback: @callback
