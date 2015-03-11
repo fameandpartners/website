@@ -1,6 +1,6 @@
 html = '<%=j  render(template: 'users/profiles/show.html') %>';
 
-$('body > .page-title').remove();
+$('body > .user-account-page-title').remove();
 $('body > .page-content').replaceWith(html);
 
 <% if @title.present? %>

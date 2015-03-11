@@ -1,6 +1,6 @@
 html = '<%=j  render(template: 'users/wishlists_items/index.html') %>';
 
-$('body > .page-title').remove();
+$('body > .user-account-page-title').remove();
 $('body > .page-content').replaceWith(html);
 
 window.setCurrentPath('<%= wishlist_path %>')
