@@ -35,7 +35,6 @@
           "<%= line_item.quantity %>"
         ]);
 
-        <%= render :partial => 'spree/shared/rakuten' %>
       <% end %>
       _gaq.push(['_trackTrans']);
 
@@ -49,6 +48,11 @@
     })();
   <% end %>
 <% end %>
+
+<% if flash[:commerce_tracking] && @order.present? %>
+  <%= render :partial => 'spree/shared/rakuten' %>
+<% end %>
+
 
 <%# fb tracking pixel %>
 <% if flash[:commerce_tracking] %>
