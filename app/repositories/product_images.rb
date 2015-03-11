@@ -1,6 +1,6 @@
 # usage
-#   ProductImages.new(product: product).read_all
-#   ProductImages.new(product: product).read
+#   Repositories::ProductImages.new(product: product).read_all
+#   Repositories::ProductImages.new(product: product).read
 module Repositories
 class ProductImages
   attr_reader :product

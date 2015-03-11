@@ -20,6 +20,9 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     @options.preselected = null
     @updateSlider()
 
+    lazy_slider_update = _.debounce(@updateSlider, 300)
+    $(window).on('resize', lazy_slider_update)
+
     @preload()
 
   showImagesWithColor: (color_id) =>
@@ -65,4 +68,5 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     deferrers = _.map @images, (image) =>
       @getLoadImageDeferred(image)
 
+    @all_images = _.sortBy(@all_images, (i) -> i.position)
     $.when.apply(this, deferrers).then(@updateSlider)
