@@ -11,6 +11,11 @@ window.helpers or= {}
 
 window.helpers.ProductVariantsSelector = class ProductVariantsSelector
   constructor: (options = {}) ->
+    # event bus mechanics
+    @$eventBus  = $({})
+    @trigger    =  delegateTo(@$eventBus, 'trigger')
+    @on         =  delegateTo(@$eventBus, 'on')
+
     @$container = $(options.container)
     @product_id = options.product_id
     @custom   = { id: options.custom_id, product_id: @product_id, count_on_hand: 0, fast_delivery: false, available: true }
@@ -26,8 +31,8 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @customizationsInput.on('change', @onChangeHandler)
     @
 
-
   onChangeHandler: (e) =>
+    e.stopPropagation()
     @trigger('change', @getValue())
 
   # returns current value
@@ -51,15 +56,6 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       selected.variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
 
     return selected
-
-  # event bus mechanics
-  on: () =>
-    # delegate to container
-    @$container.on.apply(@$container, arguments)
-
-  trigger: (type, data) =>
-    # delegate to container
-    @$container.trigger.apply(@$container, arguments)
 
   # note: it should return errors statuses
   validate: () ->

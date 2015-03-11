@@ -16,7 +16,7 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     @$container = $(container || '#slides')
     @images = images
     @all_images = @$container.find('.slides-container').find('img').remove()
-    @images_color_id = @options.preselected
+    @images_color_id = parseInt(@options.preselected) if @options.preselected
     @options.preselected = null
     @updateSlider()
 
@@ -40,25 +40,29 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     @$container.html(wrapper)
     @$container.superslides(@options)
 
+  getLoadImageDeferred: (product_image) =>
+    defer = new $.Deferred()
+
+    image = new Image()
+    image.onerror = defer.reject
+    image.onload = () =>
+      @all_images.push($("<img 
+      id='product-image-slide-#{product_image.id }'
+      class='product-image-slide' 
+      alt='#{ product_image.alt }'
+      data-color-id='#{ product_image.color_id }'
+      style='height: 1164px; width: 2560px; overflow: hidden;'
+      src='#{ product_image.url }'
+      />"))
+      defer.resolve(product_image)
+
+    image.src = product_image.url
+
+    defer
+
   preload: () =>
-    @progress = 0
-    @preloadImages = _.map @images, (image) =>
-      s = "<img         
-        id='product-image-slide-#{image.id }'         
-        class='product-image-slide' 
-        alt='#{ image.alt }' 
-        data-color-id='#{ image.color_id }' 
-        style='height: 1164px; width: 2560px; overflow: hidden;'
-        />"
-      img = $(s)[0]
-      img.onload = @imageLoaded
-      img.src = image.url
-      img
-  
-  # bit unsure about managing state like this, but it works.     
-  imageLoaded: () =>
-    @progress++
-    if @progress == @images.length
-      @all_images = @preloadImages
-      @updateSlider()
-  
+    @all_images = []
+    deferrers = _.map @images, (image) =>
+      @getLoadImageDeferred(image)
+
+    $.when.apply(this, deferrers).then(@updateSlider)

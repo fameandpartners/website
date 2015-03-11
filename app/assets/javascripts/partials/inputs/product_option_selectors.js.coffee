@@ -62,6 +62,7 @@ window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends BasePr
     @setValueFrom($el)
 
   selectValueHandler: (e) =>
+    e.preventDefault() if e
     @setValueFrom($(e.currentTarget))
 
   setValueFrom: ($el) ->
@@ -95,6 +96,7 @@ window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Base
     @setValueFrom($el)
 
   selectValueHandler: (e) =>
+    e.preventDefault() if e
     @setValueFrom($(e.currentTarget))
 
   setValueFrom: ($el) ->
@@ -136,6 +138,7 @@ window.inputs.ProductCustomizationIdsSelector = class ProductCustomizationIdsSel
     @setValueFrom($el)
 
   selectValueHandler: (e) =>
+    e.preventDefault() if e
     @setValueFrom($(e.currentTarget))
 
   setValueFrom: ($el) ->
