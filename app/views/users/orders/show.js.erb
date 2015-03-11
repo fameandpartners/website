@@ -4,6 +4,9 @@ $('body > .user-account-page-title').remove();
 $('body > .page-content').replaceWith(html);
 
 window.setCurrentPath('<%= user_order_path(@order) %>');
+$(window).off('popstate').one('popstate', function() {
+  $.getScript(window.location)
+})
 
 <% if @title.present? %>
   document.title = '<%=  @title %>';
