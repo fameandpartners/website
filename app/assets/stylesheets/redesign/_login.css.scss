@@ -1,0 +1,59 @@
+.login-header {
+
+  h1 {
+    text-transform: uppercase;
+    font-family: forum;
+    font-size: 7rem;
+  }
+}
+
+.login-header.page-title:after {
+  background-color: white;
+}
+
+.facebook-button {
+  margin-top: 3rem;
+}
+
+.or {
+  color: black;
+}
+
+.or span::after {
+  background-color: black;
+}
+
+.login.new {
+
+  .or span::after {
+      display: none;
+    }
+
+  @media(max-width: 768px){
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  label {
+    color: black;
+  }
+
+  .btn {
+    font-family: "Brandon Grotesque", sans-serif;
+  }
+
+  .account-links {
+
+    a {
+      color: #003647;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}

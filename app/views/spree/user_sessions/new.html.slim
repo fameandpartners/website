@@ -1,22 +1,22 @@
-.page-title.default
+.page-title.default.login-header
   .container
     .page-title--details
-      h1.no-padding-bottom.text-white Login
+      h1.no-padding-bottom Login
 
-.page-content.login.new
+.page-content.login.new.brand-pink
   .container
     .row
       .col-md-8.col-sm-12
         .row
           p Log-in to check your order, save your dress to a Wishlist, to discover your Style Profile, share with friends and to manage your profile.
-          
+
           p
-            = link_to fb_auth_path(site_version: current_site_version.code), class: 'facebook-button' do        
+            = link_to fb_auth_path(site_version: current_site_version.code), class: 'facebook-button' do
               span.icon
-                span.fa.fa-2x.fa-facebook 
+                span.fa.fa-2x.fa-facebook
               span Sign up with facebook
 
-        .row
+        .row.text-center
           .or
             span or
 
@@ -24,5 +24,6 @@
           = render :partial => 'spree/shared/login'
 
       .col-md-4.hidden-xs.hidden-sm
-        = image_tag '_reg/brunette.jpg', :class => 'img-responsive', alt: 'Sign in to Fame & Partners'
+        = image_tag 'new-years-login.jpg', :class => 'img-responsive', alt: 'Sign in to Fame & Partners'
+
 

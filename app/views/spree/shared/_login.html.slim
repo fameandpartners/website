@@ -2,7 +2,7 @@
   - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
   = form_for :spree_user, :url => login_path do |f|
     #password-credentials
-      
+
       = render :partial =>'shared/redesign/flash_messages', flash: flash
 
       .row
@@ -12,19 +12,22 @@
       .row
         .col-md-12.form-group
           = f.label :password
-          = f.password_field :password, class: 'title', tabindex: 2, placeholder: t(:password), :class => 'form-control standard-form'          
+          = f.password_field :password, class: 'title', tabindex: 2, placeholder: t(:password), :class => 'form-control standard-form'
       .row
         .col-md-12.form-group
           .checkbox
             label for="spree_user_remember_me"
               = f.check_box :remember_me
               span= t(:remember_me)
-    
+
       .row
-        .col-md-5.col-xs-12.form-group   
+        .col-md-5.col-xs-12.form-group
           = f.submit 'Login', class: 'btn btn-black', tabindex: 3
-        .col-md-7.col-xs-12
+
+      .row.account-links
+        .col-md-3.col-xs-12
           div= link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form')
+        .col-md-3.col-xs-12
           div= link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
 
 div data-hook="login_extras"
