@@ -71,6 +71,7 @@ class  UserCart::Populator
         if line_item.present?
           line_item.personalization.try(:destroy)
           personalization.line_item = line_item
+          line_item.personalization = personalization
           personalization.save
         end
       end
