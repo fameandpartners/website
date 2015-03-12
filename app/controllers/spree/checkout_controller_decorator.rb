@@ -219,7 +219,9 @@ Spree::CheckoutController.class_eval do
 
   def find_payment_methods
     @credit_card_gateway = @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
-    @pay_pal_method = @order.available_payment_methods.detect{ |method| method.method_type.eql?('paypalexpress') }
+    @pay_pal_method = @order.available_payment_methods.detect do |method|
+      method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
+    end
   end
 
   helper_method :completion_route
