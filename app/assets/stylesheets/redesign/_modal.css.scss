@@ -36,24 +36,98 @@
       }
     }
   }
+}
 
+.vex-theme-flat-attack.email-capture-modal.bridesmaid-lp .vex-dialog-form .vex-dialog-input {
+    margin-top: 2rem !important;
+}
+
+.vex.vex-theme-flat-attack.bridesmaid-lp  .vex-content h2 {
+  background-color: transparent;
+  text-align: center;
+  font-size: 8rem;
+  margin-bottom: 0;
 }
 
 .vex-theme-flat-attack.email-capture-modal.bridesmaid-lp {
   .vex-content {
-    background-color:#959BB9;
-    background: url("campaigns/bridemaid/bridesmaid_modal_4_for_3_bg.jpg") no-repeat;
+    background: url("modals/modal_onlyimage_brides.jpg") no-repeat;
+    border: none;
+    height: 407px
   }
+
   .vex-dialog-form {
     .vex-dialog-input {
-      margin-top:220px;
+      margin-top: 220px;
     }
+  }
+
+  .submit {
+    height: 40px;
+    padding: 10px 40px;
+    line-height: 14px;
+    margin-top: 2rem;
+    color: black;
+  }
+
+  p {
+    color: white;
+    text-align: center;
+  }
+
+  button.vex-dialog-button-secondary.vex-dialog-button.vex-last.btn.btn-black{
+    background-color: white;
+    color: black;
+    line-height: 16px;
+    vertical-align: middle;
+  }
+
+  button {
+    font-family: "Brandon Grotesque", sans-serif;
+  }
+
+  ::-webkit-input-placeholder {
+     font-size: 15px;
+     text-transform: uppercase;
+     text-align: center;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+     font-size: 15px;
+     text-transform: uppercase;
+     text-align: center;
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+     font-size: 15px;
+     text-transform: uppercase;
+     text-align: center;
+  }
+
+  :-ms-input-placeholder {
+     font-size: 15px;
+     text-transform: uppercase;
+     text-align: center;
+  }
+
+  .standard-form  {
+    height: 35px
   }
 }
 
+.vex-theme-flat-attack.email-capture-modal.bridesmaid-lp .vex-dialog-form .vex-dialog-buttons .btn {
+    padding: 5px 8px;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
 
+.vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type="email"] {
+  min-height: 25px;
+  border-radius: 0;
+  border: none;
+}
 
-// Is this size-guide related?
+// size-guide
 .vex.vex-theme-flat-attack .vex-content {
   padding: 1rem 1rem 2rem 1rem;
 
