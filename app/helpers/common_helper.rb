@@ -10,17 +10,6 @@ module CommonHelper
   end
 
   def get_hreflang(lang)
-    href = get_canonical_href
-    if lang == :au && !get_canonical_href.include?('/au')
-      return "http://#{request.host}/au#{request.fullpath}"
-    end
-    if lang == :us && get_canonical_href.include?('/au')
-      return href.gsub('/au','')
-    end
-    href
-  end
-
-  def get_hreflang(lang)
     href = get_base_href
 
     if lang == :au && !href.include?('/au')

@@ -44,7 +44,7 @@
 			text-decoration: none;
 		}
 	}
-	.form { 
+	.form {
 		margin: 0;
 		@extend .devise-forms;
 		.input { margin-bottom: 20px;}
@@ -145,15 +145,15 @@
 		.tabs-links li + li { margin-left: 2px;}
 		.price-delivery {
 			color: $pinkColor;
-			span { 
+			span {
 				vertical-align: middle;
 				display: inline-block;
 			}
-			.price { 
+			.price {
 				font-size: 12px;
         color: $pinkColor;
 			}
-			.price-old { 
+			.price-old {
         text-decoration: line-through;
         padding: 0 4px;
         color: #000;
@@ -178,13 +178,13 @@
 		}
 		.label { line-height: 1.3;}
 		.colors-choser, .size-select { margin-bottom: 15px;}
-		.buy-wishlist { 
+		.buy-wishlist {
 			margin: 0;
 			padding: 0 0 10px;
 			border-top: solid 1px #ebebeb;
 			border-bottom: solid 1px #ebebeb;
 		}
-		.btn { 
+		.btn {
 			display: inline-block;
 			+ .btn { margin-left: 5px;}
 		}
@@ -213,7 +213,7 @@
 			.icon-holder {
 				position: relative;
 				font-size: 22px;
-				.icon-erase, .icon-scissors { 
+				.icon-erase, .icon-scissors {
 					position: absolute;
 					left: 0;
 					top: 0;
@@ -273,7 +273,7 @@
 	.big-photo {
 		overflow: hidden;
 		position: relative;
-		img { 
+		img {
 			display: block;
 			width: 100%;
 		}
@@ -387,7 +387,7 @@
 	.form-container {
 		width: 345px;
 		label { display: block;}
-		.input { 
+		.input {
 			max-width: 235px;
 			vertical-align: top;
 			margin-right: 10px;
@@ -412,10 +412,10 @@
 .jansale-popup {
 	.modal-container {
 		background: url('_popups/xtra5-modal-bg.png') no-repeat;
-		width:620px;	
+		width:620px;
 		height:320px;
 		text-align: center;
-		
+
 		.string {
 			min-width:200px;
 			margin:auto;
@@ -461,15 +461,15 @@
 		}
 
 		:-moz-placeholder { /* Firefox 18- */
-		   text-align: center;  
+		   text-align: center;
 		}
 
 		::-moz-placeholder {  /* Firefox 19+ */
-		   text-align: center;  
+		   text-align: center;
 		}
 
-		:-ms-input-placeholder {  
-		   text-align: center; 
+		:-ms-input-placeholder {
+		   text-align: center;
 		}
 
 	}
@@ -525,7 +525,7 @@
 	height:400px;
 	width:620px;
 	@include box-sizing(border-box);
-	
+
 	.close-lightbox{
 		background: #2C2F5A;
 		color: #FFFFFF;
@@ -534,7 +534,7 @@
 
 	.string {
 		margin:auto;
-		text-align:center;		
+		text-align:center;
 		margin-top:240px;
 		width:400px;
 
@@ -545,14 +545,14 @@
 			box-shadow:none;
 			clear:both;
 			font-size:17pt;
-			text-transform:none;		
+			text-transform:none;
 		}
 	}
 	.thanks {
 		margin:auto;
 		text-align:center;
 		width:300px;
-		margin-top:215px;	
+		margin-top:215px;
 		font-weight:bold;
 		color:#FFFFFF;
 		font-weight:normal;
@@ -577,15 +577,15 @@
 		}
 
 		:-moz-placeholder { /* Firefox 18- */
-		   text-align: center;  
+		   text-align: center;
 		}
 
 		::-moz-placeholder {  /* Firefox 19+ */
-		   text-align: center;  
+		   text-align: center;
 		}
 
-		:-ms-input-placeholder {  
-		   text-align: center; 
+		:-ms-input-placeholder {
+		   text-align: center;
 		}
 
 }
@@ -596,17 +596,17 @@
 	height:400px;
 	width:620px;
 	@include box-sizing(border-box);
-	
+
 	.close-lightbox{
 		background: #2C2F5A;
 		color: #FFFFFF;
 		font-size: 12px;
-	
+
 	}
 
 	.string {
 		margin:auto;
-		text-align:center;		
+		text-align:center;
 		margin-top:240px;
 		width:400px;
 
@@ -617,14 +617,14 @@
 			box-shadow:none;
 			clear:both;
 			font-size:17pt;
-			text-transform:none;		
+			text-transform:none;
 		}
 	}
 	.thanks {
 		margin:auto;
 		text-align:center;
 		width:300px;
-		margin-top:215px;	
+		margin-top:215px;
 		font-weight:bold;
 		color:#FFFFFF;
 		font-weight:normal;
@@ -649,15 +649,87 @@
 		}
 
 		:-moz-placeholder { /* Firefox 18- */
-		   text-align: center;  
+		   text-align: center;
 		}
 
 		::-moz-placeholder {  /* Firefox 19+ */
-		   text-align: center;  
+		   text-align: center;
 		}
 
-		:-ms-input-placeholder {  
-		   text-align: center; 
+		:-ms-input-placeholder {
+		   text-align: center;
+		}
+
+}
+
+
+.style30-popup .modal-container {
+	background: url('campaigns/teenvogue/style30.png') no-repeat;
+	border: 0px solid #000000;
+	height:400px;
+	width:620px;
+	@include box-sizing(border-box);
+
+	.close-lightbox{
+		background: #000000;
+		color: #FFFFFF;
+		font-size: 12px;
+	}
+
+	.string {
+		margin:auto;
+		text-align:center;
+		margin-top:240px;
+		width:400px;
+
+		.input {
+			min-width:300px;
+			font-size:12pt;
+			border: 1px solid #000000;
+			box-shadow:none;
+			clear:both;
+			font-size:17pt;
+			text-transform:none;
+		}
+	}
+	.thanks {
+		margin:auto;
+		text-align:center;
+		width:300px;
+		margin-top:215px;
+		font-weight:bold;
+		color:#000000;
+		font-weight:normal;
+		font-size:15pt;
+
+		.share-this {
+			display:none;
+		}
+
+		.promo-code {
+			font-weight:bold;
+			font-size:19pt;
+		}
+	}
+	.btn{
+		background: #000000;
+		color: #FFFFFF;
+	}
+
+		::-webkit-input-placeholder {
+		   text-align: center;
+		}
+
+		:-moz-placeholder { /* Firefox 18- */
+		   text-align: center;
+		}
+
+		::-moz-placeholder {  /* Firefox 19+ */
+		   text-align: center;
+		}
+
+		:-ms-input-placeholder {
+		   text-align: center;
 		}
 
 }
@@ -760,12 +832,12 @@
 	}
 	.form {
 		text-align: center;
-		label { 
+		label {
 			display: block;
 			font: 300 15px/0.9 $fontOne;
 			margin-bottom: 5px;
 		}
-		.inputbox { 
+		.inputbox {
 			display: block;
 			width: 335px !important;
 			margin: 0 auto 5px auto;
@@ -773,7 +845,7 @@
 			color: #666 !important;
 			box-shadow: none !important;
 		}
-	}	
+	}
 }
 
 
@@ -803,7 +875,7 @@
 
 // bridesmaid concierge
 .consierge-service{
-	
+
 	.modal-container{
 		width: 711px;
 		background: url("_popups/concierge.jpg") no-repeat;
@@ -920,13 +992,13 @@
 		.risk_free {
 			margin: 40px 0;
 			word-wrap: normal;
-			
+
 			p{
 				font-size: 14px;
 				margin: 0;
 				em{
 					font-size: 22px;
-					margin: 22px 0 0 0; 
+					margin: 22px 0 0 0;
 				}
 			}
 		}

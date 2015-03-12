@@ -2,13 +2,13 @@
   header.brand
       = link_to root_path, class: 'logo' do
         span.icon-logo
-        
+
   .navs
     .nav-site
       - icon_links_cache_key = [:layout, :header, 'icon-top-links']
       - cache icon_links_cache_key, expires_in: configatron.cache.expire.long do
         nav.fleft
-          ul 
+          ul
             - unless sale_active?
               li
                 = link_to why_us_path(anchor: 'shipping') do
@@ -64,12 +64,12 @@
                   ul
                     li = link_to 'Australia', site_version_path('au', backlink: get_hreflang_link)
                     li = link_to 'USA', site_version_path('us', backlink: get_hreflang_link)
-        
+
         .login
           - unless spree_user_signed_in?
             .no-loggedin
               =' link_to 'login', spree_login_path, class: 'link-login'
-              span 
+              span
                 ' /
               =' link_to 'register', spree.signup_path(cl: 'top_nav'), class: 'top-icon link-signup'
           - else
@@ -93,7 +93,7 @@
     .nav-user
       nav
         ul
-          li 
+          li
             = link_to dresses_path, class: 'btn show-style-quiz' do
               span Style Quiz
           li.discover
@@ -125,7 +125,7 @@
                             li = link_to "Pink Dresses", colour_path('Pink'), title: "Pink Dresses"
                             li = link_to "Red Dresses", colour_path('Red'), title: "Red Dresses"
                             li = link_to "Pastel Dresses", colour_path('Pastel'), title: "Pastel Dresses"
-                            
+
                         .grid-6.menu.list-right
                           ul
                             li = link_to 'All Dresses', dresses_path, title: 'All Dresses', class: "collection"
@@ -133,7 +133,7 @@
                             li = link_to 'Short Dresses', build_taxon_path('Short'), title: 'Short Dresses', class: "collection"
                             li = link_to 'Bridesmaid Dresses', bridesmaid_lp_path, title: 'Bridesmaid Dresses', class: "collection"
                             li = link_to 'Wicked Game', '/amfam-dresses', title: 'The Wicked Game Collection', class: "collection"
-                            li = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses', class: "collection"    
+                            li = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses', class: "collection"
                             li = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses', class: "collection"
                             li = link_to 'Plus Size', plus_size_path, title: 'Plus Size Dresses', class: "collection"
                             li = link_to 'Next Day Delivery', next_day_delivery_path, title: 'Next Day Delivery', class: "collection highlight"
@@ -160,10 +160,10 @@
                               li = link_to "All on Sale", dresses_on_sale_path(:sale => 'all'), title: 'All Dresses on Sale'
                               li = link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
                               li = link_to "25 Percent Off", '/dresses/?sale=25', title: 'All Dresses 25% off'
-                              li = link_to "30 Percent Off", '/dresses/?sale=30', title: 'All Dresses 30% off'            
+                              li = link_to "30 Percent Off", '/dresses/?sale=30', title: 'All Dresses 30% off'
                               li = link_to "40 Percent Off", '/dresses/?sale=40', title: 'All Dresses 40% off'
                               li = link_to "50 Percent Off", '/dresses/?sale=50', title: 'All Dresses 50% off'
-                              li = link_to "50 Percent Off", '/dresses/?sale=60', title: 'All Dresses 60% off'
+                              li = link_to "60 Percent Off", '/dresses/?sale=60', title: 'All Dresses 60% off'
                               li = link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
           li.blog = link_to 'Blog', blog_path, class: 'btn'
           li.wishlist = link_to wishlist_path, class: ' btn wishlist-link' do

@@ -5,6 +5,9 @@
 css:
   .sc-player { display: none; }
 
+- if marketing_landing_page?
+  = render '/shared/marketing_pop_js'
+    
 javascript:
   window.product_analytics_label  = '#{{j analytics_label(:product, @product) }}';
   window.product_variants         = #{{ @product.variants.to_json }};
@@ -29,12 +32,12 @@ javascript:
   })
 
 .product-page-2  itemscope='' itemtype="http://data-vocabulary.org/Product"
-  meta itemprop="name" content="#{@product.name}" 
-  meta itemprop="brand" content="Fame & Partners" 
+  meta itemprop="name" content="#{@product.name}"
+  meta itemprop="brand" content="Fame & Partners"
   meta itemprop="identifier" content="sku:#{@product.sku}" /
   meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses" /
   meta itemprop="description" content="sku:#{@product.description}" /
-  .product-details itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"    
+  .product-details itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"
     meta itemprop="condition" content="new" /
     meta itemprop="availability" content="in_stock" /
     meta itemprop="price" content="#{@product.price.amount}" /
@@ -71,7 +74,7 @@ javascript:
           h1.product-title
             = link_to @product.name, collection_product_path(@product)
           .product-price = product_price_with_discount(@product.price, @product.discount)
-          .product-short-description             
+          .product-short-description
             = truncate(@product.stylist_quote, length: 80, separator: ' ')
 
         = render 'spree/products/product_variants_selector', product: @product
@@ -101,7 +104,7 @@ javascript:
               = link_to '#', data: link_data.merge({ permalink: @product.permalink }), title: 'Send this dress to whoever you want to get a second opinion!', class: 'product-icons send-to-friend' do
                 .icon-email
                 br
-                span 
+                span
                   ' ask a friend
                   br
                   ' for opinion
@@ -110,7 +113,7 @@ javascript:
             p.feb-delivery Please note that delivery timeframes between the 14th and 28th of February 2015 will be 7-21 days
 
   .page-title-with-line
-    .title 
+    .title
       ' about the dress
       .arrows-line-horizontal.left
       .arrows-line-horizontal.right
@@ -128,7 +131,7 @@ javascript:
                   = image_tag '_audio-icon.png', class: 'icon'
                   span.mask
                 .popup
-                  .fleft 
+                  .fleft
                     = link_to '#', data: { action: 'soundcloud' } do
                       span.icon-play
                       span.icon-pause
@@ -162,7 +165,7 @@ javascript:
 
   - if @recommended_products.present?
     .page-title-with-line
-      .title 
+      .title
         ' More cute dresses
         .arrows-line-horizontal.left
         .arrows-line-horizontal.right
