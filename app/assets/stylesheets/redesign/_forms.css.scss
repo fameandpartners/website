@@ -1,4 +1,10 @@
 // Form controls
+// - dirty fix for that -> http://note.io/1EfCAKk
+.form-control { 
+  height: 61px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
 // - field with height 45px
 .form-control-md {
   padding: 10px;
