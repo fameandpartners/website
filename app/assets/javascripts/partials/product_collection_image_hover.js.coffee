@@ -4,10 +4,9 @@
 # )
 window.initProductCollectionImageHover = (options = {}) ->
 
-  $(options.selector).each ->
+  $(options.selector).find(options.delegate).each ->
     $(this).data('original', $(this).attr('src'))
     $('<img/>')[0].src = $(this).data('hover') if $(this).data('hover')
-    #(new Image()).src = hoverImageURL if hoverImageURL
 
   $(options.selector).on 'mouseenter', options.delegate, (e) ->
     if $(this).data('hover')
