@@ -13,29 +13,41 @@ module BatchUpload
             puts "  [INFO] Process \"#{file_name}\" file"
             puts "  [INFO] Parse file name"
 
-            matches = /(^\S+[\-_]+(?<color_name>[^-]+)[\-_]+(?<position>\S+)\.(?<extension>\S+))|(\S+[\-_]+(?<position>\S+)\.(?<extension>\S+))$/i.match(file_name)
+            parts = file_name.split(/[\-\.]/)
+            puts parts
+            sku_idx = 0
+            color_idx = 1
+            position_idx = 2
+            extension_idx = 3
 
-            if matches.blank?
+            # 4B190-BURGUNDY-CROP.jpg
+            # 4B190-BURGUNDY-FRONT-CROP.jpg
+            # 4B190-NAVY-FRONT.jpg
+            # 4B190-Black-4.jpg
+            color_name = parts[color_idx].strip.underscore.downcase.dasherize.gsub(' ', '-')
+            position = parts[position_idx]
+            extension = parts[extension_idx]
+
+            if position.to_s.downcase == 'crop'
+              position = "6"
+            end
+
+            if position.downcase == 'front'
+              position = "0"
+              if extension.downcase == 'crop'
+                position = "5" # FRONT CROP
+              end
+            end
+
+            if parts.empty?
               puts "  [ERROR] File name is invalid"
               next
             else
               puts "  [INFO] File name successfully parsed"
-              puts "    POSITION: #{matches[:position]}"
-              puts "    COLOR:    #{matches[:color_name]}"
-            end
-
-            puts "  [INFO] Process parsed data"
-
-            position = matches[:position].downcase.include?('front') ? 0 : matches[:position].to_s.to_i
-
-            puts "    POSITION: #{position}"
-
-            if matches[:color_name].present?
-              color_name = matches[:color_name].strip.underscore.downcase.dasherize.gsub(' ', '-')
-              puts "    COLOR:   #{color_name}"
-            else
-              color_name = nil
-              puts "    COLOR:   NONE"
+              puts "    POSITION: #{position}"
+              puts "    COLOR:    #{color_name}"
+              puts "  [INFO] Process parsed data"
+              puts "    POSITION: #{position}"
             end
 
             if color_name.present?

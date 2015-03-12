@@ -25,13 +25,12 @@ ruby:
       .col-md-4
         .row
           p SHARE YOUR PURCHASE WITH YOUR FRIENDS SO NO ONE BUYS THE SAME DRESS FOR YOUR EVENT!
-          .share
-            .social.addthis_toolbox.addthis_default_style *addthis_config
-              a.addthis_button_facebook_like fb:like:layout="button_count"
-              a.addthis_button_pinterest_pinit
-              a.addthis_button_tweet
-              a.addthis_counter.addthis_pill_style
-            script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
+          .social.addthis_toolbox.addthis_default_style *addthis_config
+            a.addthis_button_facebook_like fb:like:layout="button_count"
+            a.addthis_button_pinterest_pinit
+            a.addthis_button_tweet
+            a.addthis_counter.addthis_pill_style
+          script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
 
         .row
           = render 'spree/orders/summary', cart: @user_cart

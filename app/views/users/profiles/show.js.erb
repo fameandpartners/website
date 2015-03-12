@@ -8,4 +8,8 @@ $('body > .page-content').replaceWith(html);
 <% end %>
 
 window.setCurrentPath('<%= profile_path %>')
+$(window).off('popstate').one('popstate', function() {
+  $.getScript(window.location)
+})
+
 window.initFileuploader()

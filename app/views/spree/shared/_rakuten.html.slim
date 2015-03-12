@@ -1,5 +1,5 @@
 ruby:
-  if current_site.is_usa?
+  if current_site_version.is_usa?
     mid = '40178'
     cur = 'USD'
   else
@@ -10,7 +10,7 @@ ruby:
   ord       = @order.number
   skulist   = @order.line_items.collect{ |i| i.variant.sku || i.variant.product.sku }.join('|')
   qlist     = @order.line_items.collect{ |i| i.quantity }.join('|')
-  amtlist   = @order.line_items.collect{ |i| i.price }.join('|')
+  amtlist   = @order.line_items.collect{ |i| (i.price * 100).to_i }.join('|')
   namelist  = @order.line_items.collect{ |i| i.variant.product.name }.join('|')
 
   linkshare_url = "http://track.linksynergy.com/ep?mid=#{mid}&ord=#{ord}&skulist=#{skulist}&qlist=#{qlist}&amtlist=#{amtlist}&cur=#{cur}&img=1&namelist=#{namelist}"

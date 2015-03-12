@@ -10,6 +10,8 @@
 @import 'libs/vex.css';
 @import 'libs/vex-theme-flat-attack.css';
 @import 'libs/vex-theme-bottom-right-corner.css';
+@import 'redesign/libs/chosen';
+@import 'redesign/extras/chosen_override';
 
 @import 'redesign/vars';
 @import 'redesign/mixins';
@@ -34,7 +36,7 @@
 @import 'redesign/product_colours';
 @import 'redesign/stories-images';
 @import 'redesign/login';
-
+@import 'redesign/sale_lp';
 
 @import 'redesign/header';
 @import 'redesign/footer';

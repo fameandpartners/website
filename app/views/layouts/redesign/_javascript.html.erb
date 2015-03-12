@@ -15,6 +15,7 @@
     env:    '<%= Rails.env %>',
     debug:  <%= Rails.env.development? %>,
     user:   { id: <%= current_spree_user.present? ? current_spree_user.id : 'null' %> },
+    user_signed_in: <%= signed_in? %>,
     site_version: {  name: '<%= current_site_version.try(:name) %>' },
     shopping_cart: new helpers.ShoppingCart({}),
     user_moodboard: new helpers.UserMoodboard(moodboard_data)
