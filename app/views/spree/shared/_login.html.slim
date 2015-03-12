@@ -25,9 +25,9 @@
           = f.submit 'Login', class: 'btn btn-black', tabindex: 3
 
       .row.account-links
-        .col-md-3.col-xs-12
+        .col-md-4.col-xs-12
           div= link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form')
-        .col-md-3.col-xs-12
+        .col-md-4.col-xs-12
           div= link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
 
 div data-hook="login_extras"
