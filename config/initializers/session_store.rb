@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file.
 
 FameAndPartners::Application.config.session_store :cookie_store, {
-  key: '_fame_and_partners_pre_production_session',
+  key: "_fame_and_partners_#{ Rails.env.to_s }_session",
   domain: :all
 }
 
