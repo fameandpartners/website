@@ -89,7 +89,7 @@
   .row
     .col-md-6
       - if (address = @order.bill_address).present?
-        .text-title Billing Address
+        h3 Billing Address
         p = address.full_name 
         p = address.address1
         p = address.address2
@@ -97,7 +97,7 @@
         p = address.country
     .col-md-6
       - if (address = @order.ship_address).present?
-        .text-title Shipping Address
+        h3 Shipping Address
         p = address.full_name 
         p = address.address1
         p = address.address2

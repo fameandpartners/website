@@ -1,6 +1,7 @@
 ruby:
   param_prefix = "payment_source[#{payment_method.id}]"
   options_hash = { class: 'form-control form-control-md' }
+  options_hash_select = { class: 'form-control form-control-md selectbox' }
   options_hash[:autocomplete] = 'off' if Rails.env.production?
 
 .row
@@ -17,10 +18,10 @@ ruby:
     .row
       .col-md-4.form-group
         label for=""  Expiry
-        = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, options_hash)
+        = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, options_hash_select)
       .col-md-4.form-group
         label &nbsp;
-        = select_year(Date.today, { :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 10, :prompt => 'Year' }, options_hash)
+        = select_year(Date.today, { :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 10, :prompt => 'Year' }, options_hash_select)
       .col-md-4.form-group
         label CVC
         = text_field_tag "#{param_prefix}[verification_value]", '', id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5

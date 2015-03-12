@@ -43,7 +43,7 @@ ruby:
   .col-md-12.form-group
     = form.label :address1, with_required_mark(t(:street_address))
     = form.text_field :address1, class: 'required form-control form-control-md', required: 'required'
-    p.hint Must be a physical address, not a P.O. Box
+    p.help-block Must be a physical address, not a P.O. Box
 
 .row
   .col-md-12.form-group
@@ -57,12 +57,11 @@ ruby:
 
   .col-md-4.form-group
     = form.label :country_id, with_required_mark(t(:country))
-    = form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required form-control form-control-md'}
+    = form.collection_select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required form-control form-control-md selectbox'}
 
   .col-md-4.form-group
     = form.label :state, with_required_mark(t(:state))
-
-    select id=(field_id) name="#{form.object_name}[state_id]" class="form-control form-control-md #{ have_states ? 'required' : 'hidden' }" disabled=(!have_states)
+    select id=(field_id) name="#{form.object_name}[state_id]" class="form-control form-control-md selectbox #{ have_states ? 'required' : 'hidden' }" disabled=(!have_states)
       option value='' data-country=''
       - states.each do |state|
         option selected=(address.state_id == state.id) style=(state.country_id == address.country_id ? '' : 'display: none;') value=(state.id) data-country=(state.country_id) = state.name

@@ -12,6 +12,10 @@ $(document).ready ->
     hidePrevious: false
   })
 
+  $('.selectbox').chosen
+    inherit_select_classes: true
+    disable_search: true
+
 $(window).resize( () ->
   $('#theTarget').css("z-index", 1)
 )

@@ -10,6 +10,7 @@
 // spree have this by default
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
+//= require libs/jquery.chosen.min
 
 // styleguide code
 //= require js/snap.svg-min.js
