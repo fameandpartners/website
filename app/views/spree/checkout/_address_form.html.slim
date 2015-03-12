@@ -43,7 +43,7 @@ ruby:
   .col-md-12.form-group
     = form.label :address1, with_required_mark(t(:street_address))
     = form.text_field :address1, class: 'required form-control form-control-md', required: 'required'
-    p.hint Must be a physical address, not a P.O. Box
+    p.help-block Must be a physical address, not a P.O. Box
 
 .row
   .col-md-12.form-group

@@ -21,6 +21,13 @@
 // ------------------
 
 // Buttons
+// - text
+.btn-text {
+  cursor: default;
+  color: inherit;
+  &:hover { color: inherit;}
+  &:active { box-shadow: none;}
+}
 // - button with height 45px
 .btn-md {
   padding-top: 9px;
@@ -129,3 +136,7 @@
 }
 // @end checkbox
 // ------------------
+
+// btn-group-radio extras
+.btn-group-radio input[type=radio]:checked + .btn label { color: #fff;}
+// @end
