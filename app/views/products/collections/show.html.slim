@@ -83,18 +83,3 @@ ruby:
                 p = @collection.details.footer
             = render partial: 'product', collection: footer_products, as: :product
             .clearfix.visible-sm-block.visible-xs-block
-
-  /.container.relative.products-collection
-    /! First Row - First four products
-    =render :partial => 'products_four', :locals => { :products => @collection.products.slice(0, 4) }
-
-    /! Second Row - Next two products
-    /=render :partial => 'products_two_left', :locals => { :products => @collection.products.slice(3, 2), :content => @collection.details.description}
-
-    /! The rest of the products
-    /- remaining = @collection.products.drop(6)
-    /- remaining.each_slice(4) do |products|
-      - if products.length < 4
-        = render :partial => 'products_footer', :locals => { :products => products,:content => @collection.details.footer }
-      - else
-        = render :partial => 'products_four', :locals => { :products => products }

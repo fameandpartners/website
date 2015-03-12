@@ -2,20 +2,28 @@ ruby:
   current_time = Time.now
   dmb_time ||= cookies[:dmb_time]
   countdown_time = dmb_time.to_i-current_time.to_i
-  
+
+  promocode = decode(params[:pc])
+  if promocode.present?
+    cookies[:promocode] = { value: promocode, expires: 1.day.from_now }
+  end
+
+  class_name = decode(params[:s])
+
 javascript:
-  contentparam = '#{params[:dmb]}';
+  contentparam = '#{params[:dmb] || promocode}';
   pop_switch = '#{params[:pop_switch]}';
+  pop = '#{params[:pop]}';
   pop_title = '#{strip_tags(params[:pop_title])}';
-  opts = {width: '700px'}
+  opts = {width: '700px', className: '#{class_name}'}
 
   if (typeof content != 'undefined') {
-    if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || contentparam == 'feb2015v1' || contentparam == 'feb2015v2' || contentparam == 'feb2015v3' || contentparam == 'bride3plus1' || pop_switch == '1') {
+    if (contentparam == 'birthday.gif' || contentparam == 'prom.gif' || contentparam == 'welcomeback.jpg' || contentparam == 'jansale'|| contentparam == 'bride15p' || contentparam == 'feb2015v1' || contentparam == 'feb2015v2' || contentparam == 'feb2015v3' || contentparam == 'bride3plus1' || pop_switch == '1' || pop == 'true') {
 
       switch(contentparam) {
         case 'birthday.gif':
           content = 'bday';
-          break; 
+          break;
         case 'prom.gif':
           content = 'prom';
           break;
@@ -33,34 +41,38 @@ javascript:
           opts.width = '620px'
           opts.height = '320px'
           opts.submit = 'GET IT NOW'
-          break;        
+          break;
         case 'bride15p':
           content = 'bride15p';
-          break; 
+          break;
         case 'bride3plus1':
-          content = 'bride3plus1';        
-          break; 
+          content = 'bride3plus1';
+          break;
+        case 'STYLE30':
+          opts.submit = 'SIGN UP NOW';
+          content = 'style30';
+          break;
         case 'feb2015v1':
           opts = {width: '710px'}
-          content = 'feb2015-v1';    
-          opts.submit = 'SIGN UP NOW'    
-          break; 
+          content = 'feb2015-v1';
+          opts.submit = 'SIGN UP NOW'
+          break;
         case 'feb2015v2':
           opts = {width: '710px'}
-          content = 'feb2015-v2';   
-          opts.submit = 'SIGN UP NOW'     
-          break; 
+          content = 'feb2015-v2';
+          opts.submit = 'SIGN UP NOW'
+          break;
         case 'feb2015v3':
           opts = {width: '710px'}
-          content = 'feb2015-v3';   
-          opts.submit = 'SIGN UP NOW'     
-          break; 
+          content = 'feb2015-v3';
+          opts.submit = 'SIGN UP NOW'
+          break;
 
         default:
           content = 'bday';
       }
     }
-    $(document).ready(function(){    
+    $(document).ready(function(){
       setTimeout(openpop, 300);
     });
   };
@@ -75,6 +87,5 @@ javascript:
   $(function(){
     $('#countdown').countdown({
       timestamp : (new Date()).getTime() + 24*60*60*1000
-    });    
+    });
   });
-
