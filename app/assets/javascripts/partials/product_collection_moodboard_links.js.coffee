@@ -7,8 +7,13 @@ window.initProductCollectionMoodboardLinks = (options = {}) ->
   $container = $(options.container)
   buttons_selector = options.buttons
 
-  addProductToMoodboardHandler = (e) ->
+  addProductToMoodboardClickHandler = (e) ->
     e.preventDefault()
+
+    if !app.user_signed_in
+      window.redirectToLoginAndBack()
+      return
+
     item = $(e.currentTarget).closest('div[data-id]')
     moodboard_item_options = { product_id: item.data('id'), color_id: item.data('color-id') }
 
@@ -18,4 +23,4 @@ window.initProductCollectionMoodboardLinks = (options = {}) ->
     )
     app.user_moodboard.addItem(moodboard_item_options)
 
-  $container.on('click', buttons_selector, addProductToMoodboardHandler)
+  $container.on('click', buttons_selector, addProductToMoodboardClickHandler)

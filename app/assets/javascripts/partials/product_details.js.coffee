@@ -68,6 +68,10 @@ page.initProductDetailsPage = (options = {}) ->
     $wishlist_button = $(options.wishlistButton)
     $wishlist_button.on('click', (e) ->
       e.preventDefault()
+
+      if !app.user_signed_in
+        window.redirectToLoginAndBack()
+        return
       
       # unless $(this).data('user-present')
       # redirect to login 
@@ -95,6 +99,11 @@ page.initProductDetailsPage = (options = {}) ->
   if options.moodboard_links
     addProductToMoodboardHandler = (e) ->
       e.preventDefault()
+
+      if !app.user_signed_in
+        window.redirectToLoginAndBack()
+        return
+
       product_id = $(e.currentTarget).closest('div[data-id]').data('id')
       app.user_moodboard.addItem({ product_id: product_id })
 

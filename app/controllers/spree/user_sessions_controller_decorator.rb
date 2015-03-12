@@ -1,6 +1,8 @@
 Spree::UserSessionsController.class_eval do
   layout 'redesign/application'
 
+  before_filter :store_path_to_return, only: :new
+
   def create
     authenticate_spree_user!
 
@@ -31,4 +33,12 @@ Spree::UserSessionsController.class_eval do
       end 
     end 
   end
+
+  private
+
+    def store_path_to_return
+      session[:spree_user_return_to] = nil
+      session[:spree_user_return_to] ||= params[:return_to] if params[:return_to]
+      session[:spree_user_return_to] ||= params[:spree_user_return_to] if params[:spree_user_return_to]
+    end
 end
