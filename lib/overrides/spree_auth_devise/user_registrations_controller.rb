@@ -1,7 +1,11 @@
 Spree::UserRegistrationsController.class_eval do
 
   layout 'redesign/application'
-  
+
+  def get_layout
+   'redesign/application'
+  end
+
   def new
     if params[:prom]
       session[:spree_user_return_to] = main_app.step1_custom_dresses_path

@@ -1,4 +1,4 @@
-.login-header {
+.login-header, .sign-up-header, .password-new-header {
 
   h1 {
     text-transform: uppercase;
@@ -7,7 +7,7 @@
   }
 }
 
-.login-header.page-title:after, .login-header {
+.login-header.page-title:after, .login-header, .sign-up-header.page-title:after, .sign-up-header, .password-new-header.page-title:after, .password-new-header {
   background-color: #eeddf0;
 }
 
@@ -15,12 +15,7 @@
   margin-top: 3rem;
 }
 
-.login.new {
-
-//   @media(max-width: 768px){
-//     padding-left: 2rem;
-//     padding-right: 2rem;
-//   }
+.login.new, .sign-up.new, .password-new {
 
   .low-btn {
     font-size: 1rem;

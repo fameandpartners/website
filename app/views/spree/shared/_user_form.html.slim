@@ -2,25 +2,25 @@
 .div data-hook="signup"
   div data-hook="signup_inside_form"
     .row
-      .col-md-6.col-xs-12.form-group      
+      .col-md-6.col-xs-12.form-group
         = f.label :first_name
-        = f.text_field :first_name, :class => 'form-control standard-form'
+        = f.text_field :first_name, :class => 'form-control form-control-md'
       .col-md-6.col-xs-12.form-group
         = f.label :last_name
-        = f.text_field :last_name, :class => 'form-control standard-form'
+        = f.text_field :last_name, :class => 'form-control form-control-md'
     .row
       .col-md-12.form-group
         = f.label :email
-        = f.email_field :email, autocomplete: :off, :class => 'form-control standard-form'
+        = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md'
     #password-credentials
       .row
         .col-md-12.form-group
           = f.label :password
-          = f.password_field :password, autocomplete: :off, :class => 'form-control standard-form'
+          = f.password_field :password, autocomplete: :off, :class => 'form-control form-control-md'
       .row
         .col-md-12.form-group
           = f.label :password_confirmation
-          = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control standard-form'
+          = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control form-control-md'
     .row
       .col-md-12.form-group
         .checkbox
@@ -28,13 +28,13 @@
             = f.check_box :newsletter
             span
               ' Subscribe to our Newsletter
-    
+
+    .row data-hook="signup_below_password_fields"
+      .col-md-5.col-xs-12.form-group
+        = f.submit 'Create an account', class: 'btn btn-black'
     .row
-      div data-hook="signup_below_password_fields"
-        .col-md-5.col-xs-12.form-group   
-          = f.submit 'Create an account', class: 'btn btn-black'
-        .col-md-7.col-xs-12
-          div Already have an account? 
-          div = link_to 'Sign in', spree.login_path
+      .col-md-5.col-xs-12
+        p.text-center Already have an account?
+        = link_to 'Sign in', spree.login_path, class: 'btn btn-block btn-black btn-md low-btn'
 
 div data-hook="login_extras"
