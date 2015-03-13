@@ -3,6 +3,9 @@ ruby:
     filter = new ProductCollectionFilter({
       controls: '.category .category-controls',
       content: '.category .products-collection',
+      page_size: 20,
+      size: #{ @collection.products.size.to_i },
+      total_products: #{ @collection.total_products.to_i },
       details_elements: {
         banner: {
           title: '.page-title.category-header .page-title--details h1',
@@ -83,3 +86,7 @@ ruby:
                 p = @collection.details.footer
             = render partial: 'product', collection: footer_products, as: :product
             .clearfix.visible-sm-block.visible-xs-block
+
+    - if @collection.total_products > @collection.products.size
+      .row.relative
+        = link_to 'Show more...', '#', data: { action: 'show-more-collection-products' }

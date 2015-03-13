@@ -6,12 +6,13 @@
 #    collection:     params[:collection], # range!
 #    style:          params[:style],
 #    event:          params[:event],
-#    color:          # exact color, will be searched with similarities
 #    color_group:    # color group, will be search by its members
+#    color:          # exact color, will be searched with similarities
 #    bodyshape:      params[:bodyshape],
 #    discount:       params[:sale] || params[:discount],
 #    order:          params[:order]
-#    limit:
+#    limit:          # number of records
+#    offset:         # number of records to skip
 
 class Products::CollectionResource
   attr_reader :site_version
@@ -24,6 +25,7 @@ class Products::CollectionResource
   attr_reader :discount
   attr_reader :order
   attr_reader :limit
+  attr_reader :offset
 
   def initialize(options = {})
     @site_version = options[:site_version] || SiteVersion.default
@@ -37,17 +39,19 @@ class Products::CollectionResource
     @discount     = prepare_discount(options[:discount])
     @order        = options[:order]
     @limit        = options[:limit]
+    @offset       = options[:offset]
   end
 
   # what about ProductCollection class
   def read
     Products::CollectionPresenter.new(
       products:   products,
+      total_products: total_products,
       collection: collection,
       style:      style,
       event:      event,
       bodyshape:  bodyshape,
-      color:      color || color_group.try(:representative),
+      color:      color_group.try(:representative) || color,
       sale:       discount,
       order:      order,
       details:    details
@@ -64,7 +68,7 @@ class Products::CollectionResource
           event:      event,
           edits:      edits,
           bodyshape:  bodyshape,
-          color:      color || color_group.try(:representative),
+          color:      color_group.try(:representative) || color,
           discount:   discount
         ).read
       end
@@ -93,20 +97,29 @@ class Products::CollectionResource
 
       result[:body_shapes] = Array.wrap(bodyshape) if bodyshape.present?
 
+      # if we have shown group ( through group.representative, it will be sent back )
+      # ignore this case.
+      # also, having ability to query group=black&color=white seems useless
       result[:color_ids] = []
-      if color.present?
-        result[:color_ids] += Repositories::ProductColors.get_similar(color.id, Similarity::Range::DEFAULT)
-      end
       if color_group.present?
         result[:color_ids] += color_group.color_ids
+      elsif color.present?
+        result[:color_ids] += Repositories::ProductColors.get_similar(color.id, Similarity::Range::DEFAULT)
       end
 
       result[:discount] = discount if discount.present?
 
-      result[:limit] = limit if limit.present?
       result[:order] = order if order.present?
+      result[:limit] = limit if limit.present?
+      result[:offset] = offset if offset.present?
+
+      Rails.logger.info "query_options: #{ result.inspect }"
 
       result
+    end
+
+    def total_products
+      query.json["hits"]["total"]
     end
 
     def products

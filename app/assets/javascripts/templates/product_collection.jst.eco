@@ -60,3 +60,9 @@
     <% end %>
   </div>
 <% end %>
+
+<% if @collection.total_products > @collection.products.size:  %>
+  <div class="row relative">
+    <a href="#" data-action='show-more-collection-products'>Show more..<a>
+  </div>
+<% end %>
