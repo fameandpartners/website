@@ -3,22 +3,21 @@
     .page-title--details
       h1.no-padding-bottom Login
 
-.page-content.login.new.brand-pink
+.page-content.login.new
   .container
     .row
       .col-md-8.col-sm-12
         .row
-          p Log-in to check your order, save your dress to a Wishlist, to discover your Style Profile, share with friends and to manage your profile.
+          h2.checkout-section-title Log-in to check your order, save your dress to a Wishlist, to discover your Style Profile, share with friends and to manage your profile.
 
-          p
-            = link_to fb_auth_path(site_version: current_site_version.code), class: 'facebook-button' do
+        .row
+          = link_to fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-block btn-black btn-md fb-login' do
               span.icon
                 span.fa.fa-2x.fa-facebook
               span Sign up with facebook
 
-        .row.text-center
-          .or
-            span or
+        .row.text-center.extra-margin
+          h2.checkout-section-title or
 
         .row
           = render :partial => 'spree/shared/login'

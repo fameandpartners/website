@@ -1,6 +1,6 @@
 // Form controls
 // - dirty fix for that -> http://note.io/1EfCAKk
-.form-control { 
+.form-control {
   height: 61px;
   padding-top: 18px;
   padding-bottom: 18px;
@@ -20,7 +20,7 @@
     border-radius: 0;
   }
 }
-.chosen-container-single.form-control-md .chosen-single { 
+.chosen-container-single.form-control-md .chosen-single {
   @extend .form-control-md;
 }
 // @end Form controls
@@ -56,7 +56,7 @@
     bottom: 0;
     text-align: center;
   }
-  
+
   &.btn-md {
     padding-left: $form-control-height-md;
     &:before {
@@ -100,7 +100,7 @@
     opacity: 0;
   }
 
-  small { 
+  small {
     font-weight: 300;
     text-transform: none;
   }
@@ -144,5 +144,7 @@
 // ------------------
 
 // btn-group-radio extras
-.btn-group-radio input[type=radio]:checked + .btn label { color: #fff;}
+.btn-group-radio input[type=radio]:checked + .btn label {
+  color: #fff;
+}
 // @end

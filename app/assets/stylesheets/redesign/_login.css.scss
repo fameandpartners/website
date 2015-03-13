@@ -7,53 +7,53 @@
   }
 }
 
-.login-header.page-title:after {
-  background-color: white;
+.login-header.page-title:after, .login-header {
+  background-color: #eeddf0;
 }
 
 .facebook-button {
   margin-top: 3rem;
 }
 
-.or {
-  color: black;
-}
-
-.or span::after {
-  background-color: black;
-}
-
 .login.new {
 
-  .or span::after {
-      display: none;
-    }
+//   @media(max-width: 768px){
+//     padding-left: 2rem;
+//     padding-right: 2rem;
+//   }
 
-  @media(max-width: 768px){
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
-  p {
-    text-align: center;
+  .low-btn {
+    font-size: 1rem;
+    line-height: 1rem;
+    padding: 0;
+    background-color: white;
+    color: black;
   }
 
   label {
     color: black;
   }
 
+  .form-control {
+    border-color: black;
+  }
+
+  .extra-margin {
+    margin-top: 6px;
+  }
+
   .btn {
     font-family: "Brandon Grotesque", sans-serif;
   }
 
-  .account-links {
+//   .account-links {
 
-    a {
-      color: #003647;
+//     a {
+//       color: #003647;
 
-      &:hover {
-        color: white;
-      }
-    }
-  }
+//       &:hover {
+//         color: white;
+//       }
+//     }
+//   }
 }
