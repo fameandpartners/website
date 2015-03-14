@@ -41,15 +41,18 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
     @total            = total_records
-    if @products_on_page <= @total
+    if @products_on_page < @total
       @content.find(@showMoreSelector).show()
     else
       @content.find(@showMoreSelector).hide()
 
   updatePagination: (items_added, total_records) ->
-    @products_on_page += items_added
+    if items_added == 0
+      @products_on_page = total_records
+    else
+      @products_on_page += items_added
     @total            = total_records
-    if @products_on_page <= @total
+    if @products_on_page < @total
       @content.find(@showMoreSelector).show()
     else
       @content.find(@showMoreSelector).hide()
