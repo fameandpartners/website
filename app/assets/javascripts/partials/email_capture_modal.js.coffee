@@ -21,7 +21,6 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       window.track.event('LandingPageModal', 'ClosedNoAction', @opts.content, @opts.promocode)
 
   process: (data) =>
-    console.log('process')
     if !!data.email
       $.post(@opts.action, data).done(@success).fail(@error)
     else
@@ -53,7 +52,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   message: =>
     h = if @opts.heading then "<h2>#{@opts.heading}</h2>" else ''
     "#{h}<p>#{@opts.message}</p>"
-    
+
   open: () =>
     vex.dialog.buttons.NO.text = 'X'
     vex.dialog.open
