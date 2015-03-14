@@ -1,5 +1,6 @@
 #= require 'templates/_product'
 #= require 'templates/product_collection'
+#= require 'templates/product_collection_append'
 
 window.page or= {}
 window.ProductCollectionFilter = class ProductCollectionFilter
@@ -7,11 +8,23 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   content: null
   updateParams: {}
   collectionTemplate: JST['templates/product_collection']
+  collectionMoreTemplate: JST['templates/product_collection_append']
 
   constructor: (options = {}) ->
     @details_elements = options.details_elements || {}
     @filter = $(options.controls)
     @content = $(options.content)
+
+    # base
+    # if users comes by url with specific params, like /dresses/for/very/special/case
+    # then use this path until user selects another collection 
+    @source_path = window.location.pathname || '/dresses'
+    
+    # pagination
+    @page_size = options.page_size || 20
+    @resetPagination(options.size, options.total_products)
+    @showMoreSelector = "*[data-action=show-more-collection-products]"
+    @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
 
     @styleInput         = new inputs.ProductStyleNameSelector(container: @filter.find('#style'))
     @bodyShapeInput     = new inputs.ProductBodyShapeSelector(container: @filter.find('#bodyshape'))
@@ -25,18 +38,36 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     @hoverize()
 
-    # $('.disable-input .selectize-input input').prop('disabled', true).css('pointer-events', 'none');
+  resetPagination: (items_on_page, total_records) ->
+    @products_on_page = items_on_page
+    @total            = total_records
+    if @products_on_page <= @total
+      @content.find(@showMoreSelector).show()
+    else
+      @content.find(@showMoreSelector).hide()
+
+  updatePagination: (items_added, total_records) ->
+    @products_on_page += items_added
+    @total            = total_records
+    if @products_on_page <= @total
+      @content.find(@showMoreSelector).show()
+    else
+      @content.find(@showMoreSelector).hide()
+
   update: () =>
+    @source_path = '/dresses'
     updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
     pageUrl = @updatePageLocation(updateRequestParams)
 
-    $.ajax(urlWithSitePrefix('/dresses'),
+    $.ajax(urlWithSitePrefix(@source_path),
       type: "GET",
       dataType: 'json',
-      data: $.param(updateRequestParams)
+      data: $.param(_.extend(updateRequestParams, { limit: @page_size })),
       success: (collection) =>
         content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
+
+        @resetPagination(collection.products.length, collection.total_products)
 
         @hoverize()
 
@@ -44,6 +75,26 @@ window.ProductCollectionFilter = class ProductCollectionFilter
           @updateCollectionDetails(collection.details)
 
         track.pageView(pageUrl, updateRequestParams)
+    )
+
+  showMoreProductsClickHandler: (e) =>
+    e.preventDefault()
+
+    updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+
+    $.ajax(urlWithSitePrefix(@source_path),
+      type: "GET",
+      dataType: 'json',
+      data: $.param(_.extend(updateRequestParams, { limit: @page_size, offset: @products_on_page })),
+      success: (collection) =>
+        content_html = @collectionMoreTemplate(collection: collection)
+        @content.find(@showMoreSelector).before(content_html)
+        @updatePagination(collection.products.length, collection.total_products)
+
+        @hoverize()
+
+        if collection && collection.details
+          @updateCollectionDetails(collection.details)
     )
 
   # private methods

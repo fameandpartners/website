@@ -41,12 +41,10 @@ class Products::CollectionsController < Products::BaseController
         color:          params[:colour] || params[:color],
         bodyshape:      params[:bodyshape],
         discount:       params[:sale] || params[:discount],
-        order:          params[:order]
+        order:          params[:order],
+        limit:          params[:limit] || 20, # page size
+        offset:         params[:offset] || 0
       }.merge(parse_permalink(params[:permalink]))
-
-      if Rails.env.development?
-        resource_args[:limit] = 12
-      end
 
       Products::CollectionResource.new(resource_args)
     end

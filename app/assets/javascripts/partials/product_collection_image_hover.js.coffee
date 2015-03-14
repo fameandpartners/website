@@ -1,7 +1,10 @@
 # usage
 # initProductCollectionImageHover(
 #   selector: '.category .category--item',
+#   delegate: '.img-product'
 # )
+#
+# note: don't call it twice
 window.initProductCollectionImageHover = (options = {}) ->
 
   $(options.selector).find(options.delegate).each ->
@@ -12,10 +15,10 @@ window.initProductCollectionImageHover = (options = {}) ->
     $this = $(this)
     if $this.data('hover')
       src = $this.data('hover')
-      $this.fadeTo(200, 0.40, -> $this.attr('src', src)).fadeTo(300, 1);
+      $this.fadeTo(200, 0.40, -> $this.attr('src', src)).fadeTo(300, 1)
 
   $(options.selector).on 'mouseleave', options.delegate, (e) ->
     $this = $(this)
     if $this.data('original')
       src = $this.data('original')
-      $this.fadeTo(200, 0.40, -> $this.attr('src', src)).fadeTo(300, 1);
+      $this.fadeTo(200, 0.40, -> $this.attr('src', src)).fadeTo(300, 1)
