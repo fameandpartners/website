@@ -38,7 +38,8 @@ FameAndPartners::Application.routes.draw do
     get '/girlfriend' => 'statics#girlfriendxfame'
     get '/new-years-eve-dresses' => 'statics#nye', :as => :nye
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
-    get '/feb_2015_lp' => 'statics#feb_2015_lp', :as => :feb_2015_lp
+    get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
+    get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/sale-dresses' => 'statics#sale', :as => :sale
     get '/amfam-dresses' => 'statics#amfam_lp', :as => :amfam_lp
     get '/christmas-gift' => 'statics#christmas_gift', :as => :christmas_gift

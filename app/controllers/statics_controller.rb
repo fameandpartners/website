@@ -74,6 +74,11 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/sale', :layout => 'redesign/application'
   end
 
+  def facebook_lp
+    @title = "Facebook | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/facebook_lp', :layout => 'redesign/application'
+  end
 
 # =======================================================================
 # OLD PAGES
