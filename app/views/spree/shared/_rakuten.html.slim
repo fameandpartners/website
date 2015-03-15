@@ -13,6 +13,16 @@ ruby:
   amtlist   = @order.line_items.collect{ |i| (i.price * 100).to_i }.join('|')
   namelist  = @order.line_items.collect{ |i| i.variant.product.name }.join('|')
 
+  promo_total = @order.adjustments.where("originator_type = 'Spree::PromotionAction'").sum(:amount)
+
+  # promo_total is negative
+  if promo_total < 0
+    skulist  << "|Discount"
+    namelist << "|Discount"
+    qlist    << "|0"
+    amtlist  << "|#{(promo_total * 100).to_i}"
+  end
+
   linkshare_url = "http://track.linksynergy.com/ep?mid=#{mid}&ord=#{ord}&skulist=#{skulist}&qlist=#{qlist}&amtlist=#{amtlist}&cur=#{cur}&img=1&namelist=#{namelist}"
 
 img src=linkshare_url
