@@ -83,15 +83,14 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   showMoreProductsClickHandler: (e) =>
     e.preventDefault()
-    unless @loading
-      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+    if @loading != true
       @loading = true
+      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
       $.ajax(urlWithSitePrefix(@source_path),
         type: "GET",
         dataType: 'json',
         data: $.param(_.extend(updateRequestParams, { limit: @page_size, offset: @products_on_page })),
         success: (collection) =>
-          @loading = false
           content_html = @collectionMoreTemplate(collection: collection)
           @content.find(@showMoreSelector).before(content_html)
           @updatePagination(collection.products.length, collection.total_products)
@@ -100,6 +99,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
           if collection && collection.details
             @updateCollectionDetails(collection.details)
+      ).always( ->
+        @loading = false
       )
 
   # private methods
@@ -139,11 +140,10 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     $el = $(@showMoreSelector)
     if $el.is(':visible')
       $window = $(window)
-
       top = $window.scrollTop()
       bottom = top + $window.height()
 
-      elTop = $el.offset().top - 100 #load a bit early
+      elTop = $el.offset().top - 120 #load a bit early
       elBottom = elTop + $el.height();
 
       if ((elBottom <= bottom) && (elTop >= top))

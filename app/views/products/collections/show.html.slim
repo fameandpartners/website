@@ -55,10 +55,10 @@ ruby:
 
 
   .container.relative.products-collection
-  - if Features.active?(:collection_content)
-    = render partial: 'products_with_content'
-  - else
-    = render partial: 'products_without_content'
+    - if Features.active?(:collection_content)
+      = render partial: 'products_with_content'
+    - else
+      = render partial: 'products_without_content'
 
     - if @collection.total_products > @collection.products.size
       .row.relative.more-products
