@@ -107,8 +107,9 @@ header
                     h4.link-header= t('sale')
                     ul.mega-menu-list
                       li.mega-menu-list--item= link_to 'Next Day Delivery', next_day_delivery_path, title: 'Next Day Delivery'
-
-                      - if sale_active?
+                      - if !sale_active?
+                        li.mega-menu-list--item= link_to 'On Sale', '/sale-dresses', title: 'Dresses On Sale'
+                      - else
                         li.mega-menu-list--item= link_to "All on Sale", dresses_on_sale_path(:sale => 'all'), title: 'All Dresses on Sale'
                         li.mega-menu-list--item= link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
                         li.mega-menu-list--item= link_to "25 Percent Off", '/dresses/?sale=25', title: 'All Dresses 25% off'
