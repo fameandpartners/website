@@ -17,14 +17,15 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     # base
     # if users comes by url with specific params, like /dresses/for/very/special/case
-    # then use this path until user selects another collection 
+    # then use this path until user selects another collection
     @source_path = window.location.pathname || '/dresses'
-    
+
     # pagination
     @page_size = options.page_size || 20
     @resetPagination(options.size, options.total_products)
     @showMoreSelector = "*[data-action=show-more-collection-products]"
     @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
+    $(window).on('scroll', @scrollHandler)
 
     @styleInput         = new inputs.ProductStyleNameSelector(container: @filter.find('#style'))
     @bodyShapeInput     = new inputs.ProductBodyShapeSelector(container: @filter.find('#bodyshape'))
@@ -82,23 +83,25 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   showMoreProductsClickHandler: (e) =>
     e.preventDefault()
+    if @loading != true
+      @loading = true
+      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+      $.ajax(urlWithSitePrefix(@source_path),
+        type: "GET",
+        dataType: 'json',
+        data: $.param(_.extend(updateRequestParams, { limit: @page_size, offset: @products_on_page })),
+        success: (collection) =>
+          content_html = @collectionMoreTemplate(collection: collection)
+          @content.find(@showMoreSelector).before(content_html)
+          @updatePagination(collection.products.length, collection.total_products)
 
-    updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+          @hoverize()
 
-    $.ajax(urlWithSitePrefix(@source_path),
-      type: "GET",
-      dataType: 'json',
-      data: $.param(_.extend(updateRequestParams, { limit: @page_size, offset: @products_on_page })),
-      success: (collection) =>
-        content_html = @collectionMoreTemplate(collection: collection)
-        @content.find(@showMoreSelector).before(content_html)
-        @updatePagination(collection.products.length, collection.total_products)
-
-        @hoverize()
-
-        if collection && collection.details
-          @updateCollectionDetails(collection.details)
-    )
+          if collection && collection.details
+            @updateCollectionDetails(collection.details)
+      ).always( =>
+        @loading = false
+      )
 
   # private methods
 
@@ -132,6 +135,21 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       selector: '.category--item'
       delegate: '.img-product'
     )
+
+  scrollHandler: (e) =>
+    $el = $(@showMoreSelector)
+    if $el.is(':visible')
+      $window = $(window)
+      top = $window.scrollTop()
+      bottom = top + $window.height()
+
+      elTop = $el.offset().top - 120 #load a bit early
+      elBottom = elTop + $el.height();
+
+      if ((elBottom <= bottom) && (elTop >= top))
+        $el.click()
+
+
 
   updateCollectionDetails: (details) =>
     return if !@details_elements

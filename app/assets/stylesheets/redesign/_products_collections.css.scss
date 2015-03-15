@@ -68,6 +68,13 @@
 			color: white;
 		}
 	}
+
+	.more-products {
+		margin-bottom:100px;
+		text-align:center;
+	}
+
+
 }
 
 .on-sale * {
@@ -82,7 +89,7 @@
 }
 
 .category-header {
-
+	height:437px;
 	.page-title--details {
 		width: 370px;
 		margin-left: auto;
@@ -139,4 +146,3 @@ li.select2-results__option {
 		background-color: white;
 		color: black;
 	}
-
