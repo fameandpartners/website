@@ -1,5 +1,5 @@
 # NOTE: current version of spree/products supports following params in url
-#   
+#
 #   :root_taxon [events taxon] shows random dresses from this taxon / no other args applied
 #   :sale - dresses for this sale
 #   :permalink - taxon [ any ], condition
@@ -9,7 +9,23 @@
 #   :style
 #   :bodyshape
 #   :lp - landing page?
-# 
+#
+# Date is from the parent taxon
+# Banner text over the image in the collection header:
+#
+#     heading should be from the Parent Taxon Banner title
+#     subheading should be from the Parent Taxon Banner description
+#
+# Content blocks in the page:
+#
+#     description should come from the Taxon description
+#     footer should come from Banner footer text
+#
+# In the meta tags:
+#
+#     meta description should come from Banner Seo Description
+#
+
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
 
@@ -20,7 +36,7 @@ class Products::CollectionsController < Products::BaseController
 
     # set title / meta description for page
     title(@collection.details.title, default_seo_title)
-    @description  = @collection.details.description
+    @description  = @collection.details.seo_description
 
     respond_to do |format|
       format.html { }

@@ -35,7 +35,7 @@ ruby:
   .container
     .page-title--details
       h1.no-padding-bottom = @collection.details.banner.title
-      p = @collection.details.banner.description
+      p= raw @collection.details.banner.subtitle
 
 .page-content.products-collections.category
   .container.relative.category-controls
@@ -52,6 +52,7 @@ ruby:
       .col-md-3.col-xs-12.col-xxs-12.product-order
         = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
         br
+
 
   .container.relative.products-collection
   - if Features.active?(:collection_content)

@@ -12,7 +12,9 @@
   = render partial: 'product', collection: products.shift(2), as: :product
   .col-md-6.col-xs-12.col-xxs-12
     .content
-      p = @collection.details.description
+      p= raw @collection.details.description
+
+
   .clearfix.visible-sm-block.visible-xs-block
 
 /! Rest rows
@@ -28,7 +30,6 @@
       .row.relative
         .col-md-6.col-xs-12.col-xxs-12
           .content
-            h2 = @collection.details.title
-            p = @collection.details.footer
+            p= raw @collection.details.footer
         = render partial: 'product', collection: footer_products, as: :product
         .clearfix.visible-sm-block.visible-xs-block

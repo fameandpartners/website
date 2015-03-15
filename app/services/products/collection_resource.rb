@@ -15,6 +15,8 @@
 #    offset:         # number of records to skip
 
 class Products::CollectionResource
+  # include Repositories::CachingSystem
+
   attr_reader :site_version
   attr_reader :collection
   attr_reader :style
@@ -58,18 +60,22 @@ class Products::CollectionResource
     )
   end
 
+  # cache_results :read
+
+
   private
 
     def details
       @details ||= begin
         Products::CollectionDetails.new(
-          collection: collection,
-          style:      style,
-          event:      event,
-          edits:      edits,
-          bodyshape:  bodyshape,
-          color:      color_group.try(:representative) || color,
-          discount:   discount
+          collection:   collection,
+          style:        style,
+          event:        event,
+          edits:        edits,
+          bodyshape:    bodyshape,
+          color:        color_group.try(:representative) || color,
+          discount:     discount,
+          site_version: site_version
         ).read
       end
     end
@@ -160,4 +166,8 @@ class Products::CollectionResource
       price_id = (prices[current_currency] || prices['aud'] || prices['usd'])
       Spree::Price.find(price_id)
     end
+
+    # def cache_key
+    #   "collection-#{ site_version.permalink}-#{ taxon.permalink }"
+    # end
 end
