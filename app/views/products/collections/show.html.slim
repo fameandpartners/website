@@ -87,6 +87,6 @@ ruby:
             = render partial: 'product', collection: footer_products, as: :product
             .clearfix.visible-sm-block.visible-xs-block
 
-    - if @collection.total_products > @collection.products.size
-      .row.relative
-        = link_to 'Show more...', '#', data: { action: 'show-more-collection-products' }
+    / - if @collection.total_products > @collection.products.size
+    .row.relative.text-center
+      = link_to 'More dresses', '#', class: 'btn btn-black', data: { action: 'show-more-collection-products' }
