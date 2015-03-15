@@ -99,7 +99,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
           if collection && collection.details
             @updateCollectionDetails(collection.details)
-      ).always( ->
+      ).always( =>
         @loading = false
       )
 
