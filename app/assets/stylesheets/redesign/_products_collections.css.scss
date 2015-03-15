@@ -96,6 +96,13 @@
 		margin-right: auto;
 		padding-top: 12rem;
 	}
+	&.dark-bg {
+
+		h1, p {
+			color:#FFFFFF;
+		}
+		
+	}
 }
 
 .select2-results__option {
