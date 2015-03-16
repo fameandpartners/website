@@ -37,6 +37,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @colorInput.on('change', @update)
     @productOrderInput.on('change', @update)
 
+    @$banner = $(options.banner)
+    @setBannerTextClass()
     @hoverize()
 
   resetPagination: (items_on_page, total_records) ->
@@ -149,8 +151,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       if ((elBottom <= bottom) && (elTop >= top))
         $el.click()
 
-
-
   updateCollectionDetails: (details) =>
     return if !@details_elements
     return if !details
@@ -167,3 +167,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         image = new Image()
         image.onload = () -> $banner_img.css('background-image', "url('#{ details.banner.image }')")
         image.src = details.banner.image
+
+  setBannerTextClass: () =>
+    bgImg = @$banner.css('background-image')
+    if bgImg.indexOf('dark-bg.jpg') != -1
+      @$banner.addClass('dark-bg')
