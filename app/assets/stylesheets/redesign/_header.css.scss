@@ -105,3 +105,28 @@
 .nav-menu .primary li.menu-item .menu-item--link:hover, .nav-menu .secondary li.menu-item .menu-item--link:hover {
 	color: #023648;
 }
+
+li.stories {
+
+	.dropdown-menu {
+		left: -10px;
+	}
+
+	&:hover > ul.dropdown-menu {
+    display: block;
+	}
+
+	button.btn.btn-dropdown.dropdown-toggle{
+		background-color: white;
+		color: black;
+		font-family: "brandon-grotesque";
+		font-weight: 400;
+		font-size: 14px;
+		letter-spacing: 0;
+		border: none;
+	}
+}
+
+li.stories.menu-item.dropdown {
+	height: 40px
+}

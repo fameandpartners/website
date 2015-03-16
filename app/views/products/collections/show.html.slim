@@ -3,6 +3,7 @@ ruby:
     filter = new ProductCollectionFilter({
       controls: '.category .category-controls',
       content: '.category .products-collection',
+      banner:  '.category-header',
       page_size: 20,
       size: #{ @collection.products.size.to_i },
       total_products: #{ @collection.total_products.to_i },
