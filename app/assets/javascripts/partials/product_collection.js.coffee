@@ -113,7 +113,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         success: (collection) =>
           content_html = @collectionMoreTemplate(collection: collection)
           @content.find(@showMoreSelector).closest('.row.relative').before(content_html)
+<<<<<<< HEAD
           @content.find('.img-product').hoverable()
+=======
+          @updatePagination(collection.products.length, collection.total_products)
+>>>>>>> e097210... [feat][collection] added statuses to pagination
 
           @updatePagination(collection.products.length, collection.total_products)
 
