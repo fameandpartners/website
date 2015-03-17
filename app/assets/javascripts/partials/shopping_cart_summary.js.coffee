@@ -24,4 +24,16 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     e.preventDefault() if e
     $input = @$container.find('#promotion-code')
     @cart.applyPromotionCode($input.val())
-    @cart.one('complete', () -> $input.val(''))
+    @cart.one('complete', (event, result) ->
+      $input.val('')
+      if result.error
+        window.helpers.showAlert(
+          type: 'error',
+          title: result.error
+        )
+      else if result
+        window.helpers.showAlert(
+          type: 'success',
+          title: 'The coupon code was successfully applied to your order.'
+        )
+    )

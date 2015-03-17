@@ -83,12 +83,13 @@ window.helpers.ShoppingCart = class ShoppingCart
     ).success((data) =>
       if data.error
         @trigger('error', data)
+        @trigger('complete', data)
       else
         @updateData(data)
+        @trigger('success', data)
+        @trigger('complete', data)
     ).error( () =>
       @trigger('error')
-    ).complete(
-      () => @trigger('complete')
     )
 
 
