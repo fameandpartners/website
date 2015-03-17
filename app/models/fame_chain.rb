@@ -1,7 +1,7 @@
 class FameChain
   include ActiveModel::Validations
 
-  attr_accessor :name, :email, :blog, :blog_size, :pinterest, :pinterest_size, :facebook, :twitter, :twitter_size, :to_key
+  attr_accessor :name, :email, :blog, :facebook, :facebook_size, :instagram, :instagram_size, :pinterest, :pinterest_size, :other, :to_key
 
   validates :name, presence: true
   validates :email, format: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, presence: true

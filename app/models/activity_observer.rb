@@ -25,7 +25,8 @@ class ActivityObserver < ActiveRecord::Observer
         owner_id: product.id, owner_type: product.class.to_s,
         item_id: order.id, item_type: order.class.to_s
       ).first
-      if activity.number.to_i > 0
+      return if activity.nil?
+      if activity.try(:number).to_i > 0
         Activity.where(id: activity.id).update_all(number: (activity.number.to_i - 1))
       else
         activity.destroy

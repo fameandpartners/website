@@ -10,7 +10,7 @@
     <% taxons.each do |taxon| %>
       <tr id="<%= spree_dom_id(taxon) %>" data-hook="taxons_row" class="<%= cycle('odd', 'even')%>">
         <td><%= taxon.name %></td>
-        <td><%= taxon_path taxon %></td>
+        <td><%= link_to taxon.name, build_taxon_path(taxon.permalink) %></td>
         <td class="actions">
           <%= link_to_delete taxon, :url => remove_admin_product_taxon_url(@product, taxon), :name => icon('delete') + ' ' + t(:remove) %>
         </td>

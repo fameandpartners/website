@@ -1,75 +1,108 @@
+- content_for :inline_javascript do
+  | window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
+
 - if current_step.eql?('address')
-  .checkout-title.black.active data-step="address"
-    h3 Billing and shipping Address
-  - unless signed_in?  
-    .checkout-content.line.active data-step="address"
-      .clearfix
-        .grid-7
-          .text-title Fame &amp; Partners Customer
-          p Login now if you are already a customer, or you can order as a guest and choose to register as you checkout.
-        .grid-5.text-center
-          = link_to 'login', '#', class: 'btn open-login-popup'
-          = link_to 'FB login', fb_auth_path(return_to: 'checkout'), class: 'btn fb-login'
+  - if not signed_in?  
+    h2.checkout-section-title EXISTING CUSTOMERS LOG IN
+    / br
+    .row
+      .col-md-6.form-group
+        = link_to 'log in', login_path, class: 'btn btn-block btn-black btn-md open-login-popup'
+      .col-md-6.form-group
+        = link_to 'Sign in with Facebook', fb_auth_path(return_to: 'checkout'), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
 
-  = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global'}, remote: false do |form|
-    .checkout-content.line
-      = render :partial => 'shared/error_messages', locals: { target: @order }
+  = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
+    = render :partial => 'shared/error_messages', locals: { target: @order }
 
+    h2.checkout-section-title  Billing Address
+    / br
+    .form-wrapper data-hook='billing_inner'
       = form.fields_for :bill_address do |bill_form|
         = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
 
+    h2.checkout-section-title  Shipping Address
+    / br
+    .row
+      .col-md-6
+        .form-group
+          .checkbox-gray-md
+            = label_tag :order_use_billing, :id => 'use_billing' do
+              = check_box_tag 'order[use_billing]', '1', ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
+              span.checkbox-label 
+                =' t(:use_billing_address)
+                br
+                small 
+                  ' (Use billing address)
+      .col-md-6
+        /- if not signed_in?
+          .form-group
+            .checkbox-gray-md
+              label
+                input#create_account type="checkbox"/
+                span.checkbox-label 
+                  ' GET $10 OFF YOUR NEXT PURCHASE
+                  br
+                  ' create an account
+                  small 
+                    ' (Optional)
+
+    .form-wrapper data-hook='shipping_inner'
       = form.fields_for :ship_address do |ship_form|
         = render partial: 'spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
 
-      - unless signed_in?
-        .checkout-title data-step="personal"
-          .fleft 
-            h3 
-              ' GET $25 TO SPEND
-              em optional
-          .fright.use-same-address-block
-            label.nice-checkbox.without-shadow
-              = check_box_tag :create_account, true, params[:create_account].present?
-              = label_tag :create_account, id: :create_account do
-                span
-                | Create an Account
-                
-        .checkout-content.line.form-global.passwords data-step="personal"
-          .input
-            .text-title Why you should join
-            p Add a password to sign up if you want a $25 voucher for your next purchase, plus other offers in the future!
-          .input.clearfix
-            .grid-3 = form.label :password, with_required_mark(t(:password))
-            .grid-9 = form.password_field :password, class: 'required without-shadow'
-          .input.clearfix
-            .grid-3 = form.label :password_confirmation, with_required_mark(t(:password_confirmation))
-            .grid-9 = form.password_field :password_confirmation, class: 'required without-shadow'
+    /- if not signed_in?
+      .form-wrapper.checkout-content.line.form-global.passwords data-hook="registration"
+        h2.checkout-section-title  Personal details
+        = form_for @user, :url => spree.update_checkout_registration_path, :remote => false, :method => :put do |reg_form|
+          .row
+            .col-md-12.form-group
+              = reg_form.label :password, with_required_mark(t(:password))
+              = reg_form.password_field :password, class: 'required form-control form-control-md'
+          .row
+            .col-md-12.form-group
+              = reg_form.label :password_confirmation, with_required_mark(t(:password_confirmation))
+              = reg_form.password_field :password_confirmation, class: 'required form-control form-control-md'
 
-    .submit-button.text-right
-      = form.submit 'Next Step', data: { loading: 'Submitting...' }, class: 'btn pink'
+    .row
+      .col-md-6.form-group
+        / order submit button
+        = form.submit 'Next', data: { loading: 'Submitting...' }, class: 'btn btn-block btn-md btn-black'
+
+
+    / .row
+    /   .col-md-12.form-group
+    /     = form.submit 'Next', data: { loading: 'Submitting...' }, class: 'btn btn-black'
+
+    /- if Rails.env.development? # don't have such functionality yet
+      h2.checkout-section-title  Shipping Options
+      / br
+      .row
+        .col-md-6.form-group
+          select.cs-select.cs-skin-border.form-control.form-control-md
+            option selected="" value="free"  Free Shipping
+        .col-md-6.form-group
+          = form.submit 'Next', data: { loading: 'Submitting...' }, class: 'btn btn-block btn-md btn-black'
 
 - else
-  .checkout-title.grey data-step="address"
-    h3 Billing and shipping Address
-    
-  .checkout-content
-    .grid-container
+  h2.checkout-section-title  Billing and shipping Address
+  / br
+  .row
+    .col-md-6
       - if (address = @order.bill_address).present?
-        .grid-6
-          .text-title Billing Address
-          p = address.full_name 
-          p = address.address1
-          p = address.address2
-          p = address.city
-          p = address.country
+        h3 Billing Address
+        p = address.full_name 
+        p = address.address1
+        p = address.address2
+        p = address.city
+        p = address.country
+    .col-md-6
       - if (address = @order.ship_address).present?
-        .grid-6
-          .text-title Shipping Address
-          p = address.full_name 
-          p = address.address1
-          p = address.address2
-          p = address.city
-          p = address.country
-      .grid-12
-        .check-edit
-          = link_to 'Edit your Billing or Shipping Details', checkout_state_path('address'), :remote => false, class: 'edit'
+        h3 Shipping Address
+        p = address.full_name 
+        p = address.address1
+        p = address.address2
+        p = address.city
+        p = address.country
+  .row
+    .col-md-12
+      = link_to 'Edit your Billing or Shipping Details', checkout_state_path('address'), :remote => false, class: 'edit'

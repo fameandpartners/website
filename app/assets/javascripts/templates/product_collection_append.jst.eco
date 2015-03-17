@@ -1,0 +1,12 @@
+<% products = @collection.products %>
+<% rows = Math.ceil(products.length / 4) %>
+<% for i in [0...rows]: %>
+  <% products_for_row = _.first(products, 4) %>
+  <div class="row relative">
+    <% for product in _.first(products, 4): %>
+      <%- JST['templates/_product'](product: product) %>
+    <% end %>
+    <% products = _.rest(products, 4) %>
+    <div class="clearfix visible-sm-block visible-xs-block"></div>
+  </div>
+<% end %>

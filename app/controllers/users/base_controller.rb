@@ -1,7 +1,7 @@
 class Users::BaseController < ApplicationController
   before_filter :authenticate_spree_user!
 
-  layout 'spree/layouts/spree_application'
+  layout 'redesign/application'
 
   respond_to :js, :html
 

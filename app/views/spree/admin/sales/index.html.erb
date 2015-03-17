@@ -20,16 +20,18 @@
 <% if @collection.any? %>
   <table class="index">
     <colgroup>
-      <col style="width: 25%;">
-      <col style="width: 25%;">
-      <col style="width: 25%;">
-      <col style="width: 25%;">
+      <col style="width: 20%;">
+      <col style="width: 20%;">
+      <col style="width: 20%;">
+      <col style="width: 20%;">
+      <col style="width: 20%;">
     </colgroup>
     <thead>
     <tr>
       <th><%= t(:id) %></th>
       <th><%= t(:name) %></th>
       <th><%= t(:state) %></th>
+      <th><%= t(:sitewide) %></th>
       <th class="actions"></th>
     </tr>
     </thead>
@@ -39,6 +41,7 @@
         <td class="align-center"><%= sale.id %></td>
         <td class="align-center"><%= sale.name %></td>
         <td class="align-center"><%= sale.active? ? t(:active) : t(:inactive) %></td>
+        <td class="align-center"><%= sale.sitewide? ? 'Yes' : '-' %></td>
         <td class="actions">
           <%= link_to_edit sale, :no_text => true, :class => 'edit'%>
           &nbsp;

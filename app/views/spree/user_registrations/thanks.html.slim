@@ -1,5 +1,11 @@
-.wrap.success-page
-  h1.block-title Thanks for signing up!
-  h2.aligncenter We have sent you a welcome message. Please check your email and confirm your address, don’t forget to check spam if you don’t see the email from Fame & Partners.
+.page-title.default
+  .container
+    .page-title--details
+      h1.no-padding-bottom.text-white Thanks for signing up
 
-  = render 'shared/gad'
+.page-content.registration.new
+  .container.relative
+    .row
+  	  p We have sent you a welcome message. Please check your email and confirm your address, don’t forget to check spam if you don’t see the email from Fame & Partners.
+
+= render 'shared/gad'

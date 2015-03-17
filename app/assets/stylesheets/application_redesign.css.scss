@@ -1,0 +1,137 @@
+@import url(http://fonts.googleapis.com/css?family=Forum);
+
+@import 'stylesheets/normalize.css';
+@import 'stylesheets/component.css';
+@import 'stylesheets/jquery.skippr.css';
+@import 'fonts/font-awesome-4.3.0/css/font-awesome.min.css';
+@import 'stylesheets/styleguide.css';
+@import 'stylesheets/styles.css';
+
+@import 'libs/vex.css';
+@import 'libs/vex-theme-flat-attack.css';
+@import 'libs/vex-theme-bottom-right-corner.css';
+@import 'redesign/libs/chosen';
+@import 'redesign/extras/chosen_override';
+
+@import 'redesign/vars';
+@import 'redesign/mixins';
+@import 'redesign/forms';
+@import 'redesign/about';
+@import 'redesign/user';
+@import 'redesign/why_us';
+@import 'redesign/fame_chain';
+@import 'redesign/facebook';
+@import 'redesign/registration';
+@import 'redesign/style_consult';
+@import 'redesign/fashionista_winner';
+@import 'redesign/product';
+@import 'redesign/products_collections';
+@import 'redesign/index';
+@import 'redesign/typography';
+@import 'redesign/modal';
+@import 'redesign/flash_slider';
+@import 'redesign/mobile_menu';
+@import 'redesign/faqs';
+@import 'redesign/terms';
+@import 'redesign/product_colours';
+@import 'redesign/stories-images';
+@import 'redesign/login';
+@import 'redesign/sale_lp';
+
+@import 'redesign/header';
+@import 'redesign/footer';
+
+@import 'redesign/checkout';
+@import 'redesign/cart';
+
+.mobile-logo {
+  margin-top:-3px;
+}
+
+.standard-form {
+  height: 60px;
+  padding: 0 5px;
+}
+
+.alert-warning {
+  background-color:#F2DDD0;
+}
+
+.has-error {
+  .help-inline {
+    color: #f2dede;
+  }
+}
+
+.has-warning {
+  .help-inline {
+    color: #F2DDD0;
+  }
+}
+
+.pink {
+    background-color: #f6e1d5;
+}
+
+.brand-pink {
+  background-color:#eeddf0;
+}
+
+.pink-light {
+  background-color: #f8ece9;
+}
+
+.cream {
+  background-color: #fbf5f3
+}
+
+.vex-content {
+  z-index:9999 !important; // display on top of mobile menu
+}
+
+.landing-page {
+  .row.content-box {
+    margin:20px 0 20px 0;
+
+    .content {
+      height:381px;
+      border:2px solid black;
+    }
+
+    img {
+       width:100%;
+       margin-right:20px;
+       border:2px solid white;
+    }
+  }
+}
+
+.btn-secondary {
+  background-color:#033649;
+  color:#FFFFFF;
+}
+
+.user-account-page-title {
+  background-color: #FFFFFF;
+  margin-top: 70px;
+}
+
+h1.user-account-title {
+  font-family: forum;
+  font-size: 6.7rem;
+  text-transform: uppercase;
+  color:#000000;
+}
+
+
+/*
+  // added for quick reference only
+  <link rel="stylesheet" href="stylesheets/styles.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/demo.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/component.css" />
+  <link rel="stylesheet" href="stylesheets/jquery.skippr.css">
+  <link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="stylesheets/cs-select.css">
+  <link rel="stylesheet" href="stylesheets/cs-skin-border.css">
+*/

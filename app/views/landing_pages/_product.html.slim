@@ -1,0 +1,10 @@
+
+.col-md-3.col-xs-6.col-xxs-12.category--item.no-padding
+  = link_to collection_product_path(product) do
+    - if product.images.any?
+      = image_tag product.images.first.attachment.url, alt: product.name, class: 'img-responsive'
+  .details.text-center
+    span.name = product.name
+    span.price = price_for_product(product)
+  - if product.fast_delivery
+    ''

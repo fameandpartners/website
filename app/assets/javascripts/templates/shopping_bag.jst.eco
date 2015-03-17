@@ -1,0 +1,47 @@
+<div class="cart--top text-center">
+  <div class="pull-left close-cart">
+    <img alt="Submit" class="line-arrow arrow-bag" src="/assets/images/line-arrow.svg">
+  </div>
+  <div class="pull-right close-cart">
+    <span class="cart"><img alt="Cart" class="cart-icon" src="/assets/images/Cart.svg">
+      <span class="cart-amount"><%= @cart.item_count %></span>
+    </span>
+  </div>
+  <div>
+    <h2 class="cart-title">
+      Shopping Bag
+    </h2>
+  </div>
+</div>
+<ul class="cart-items">
+  <% for product in @cart.products: %>
+    <li>
+      <img class="img-responsive pull-left cart-item-image" src="<%= product.image.small %>" />
+      <a class="fa fa-close pull-right link-grey remove-product" data-id="<%= product.line_item_id %>" href="#0"></a>
+      <span class="qty"><%= product.quantity %>x</span>
+      <%= product.name %>
+      <div class="price">
+        <%= product.price.display_price %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+<!--cd-cart-items-->
+<div class="cart-total">
+  <p>
+    Total<span><%= @cart.display_total %></span>
+  </p>
+</div>
+<!--cd-cart-total-->
+<div class="cart--call-to-actions row">
+  <div class="col-lg-6 no-padding-left close-cart no-padding-lg">
+    <button class="btn btn-charcoal btn-block">Shop More</button><br>
+  </div>
+  <div class="col-lg-6 no-padding-right no-padding-lg">
+    <form method="get" class="button_to" action="<%= urlWithSitePrefix('/checkout') %>">
+      <div>
+        <input type="submit" value="Checkout" class="btn btn-black btn-block">
+      </div>
+    </form>
+  </div>
+</div>

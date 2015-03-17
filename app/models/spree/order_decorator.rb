@@ -24,6 +24,7 @@ Spree::Order.class_eval do
     after_transition :to => :complete, :do => :track_user_bought_dress
   end
 
+  # todo: this should be done in some service, order has no relation to this func
   def track_user_bought_dress
     # TODO: check this works
     if self.user.bridesmaid_party_members.present?

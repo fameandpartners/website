@@ -4,7 +4,7 @@ class Wishlist::UserWishlistResource
   attr_reader :site_version, :moodboard_owner
 
   def initialize(options = {})
-    @site_version     = options[:site_version]
+    @site_version     = options[:site_version] || SiteVersion.default
     @moodboard_owner  = options[:owner]
   end
 
@@ -22,10 +22,15 @@ class Wishlist::UserWishlistResource
 
     def moodboard_owner_moodboard
       @moodboard_owner_moodboard ||= begin
-        Repositories::UserWishlist.new(
-          owner: moodboard_owner,
-          site_version: site_version
-        ).read
+        items = moodboard_owner.wishlist_items.includes(:variant, :color, product: {master: :zone_prices}).map do |item|
+          Repositories::UserMoodboardItem.new(item: item).read
+        end
+
+        ::UserMoodboard::DetailsPresenter.new(
+          owner_name: moodboard_owner.full_name,
+          owner_id: moodboard_owner.id,
+          items: items
+        )
       end
     end
 

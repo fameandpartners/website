@@ -20,20 +20,17 @@ class RedirectsController < ApplicationController
     product = Spree::Product.active.find_by_permalink(product_id)
     collection = get_collection_taxon(params[:collection])
 
-    
-
     if product.present?
       # /collection/taxon/product_id
-      if params[:custom_dress]
-        redirect_to view_context.personalize_path(product), status: 301
-      elsif params[:style_dress]
+      # /au/dresses/custom-dress-eva-456?params => /dresses/styleit-eva-456 
+      if params[:custom_dress] || params[:style_dress]
         redirect_to view_context.style_it_path(product), status: 301
       else
         redirect_to view_context.collection_product_path(product, params.slice(:cpt)), status: 301
       end
     elsif collection.present?
-      # /collection/taxon
-      redirect_to view_context.collection_taxon_path(collection), status: 301
+      # /collection/taxon => /dresses/taxon
+      redirect_to view_content.build_taxon_path(collection), status: 301
     else
       # /collection/taxon or /collection
       redirect_to generate_collection_path(params[:product_id], params), status: 301
@@ -50,12 +47,10 @@ class RedirectsController < ApplicationController
 
     collection = get_collection_taxon(collection_name)
     if collection.present?
-      result ||= view_context.collection_taxon_path(collection)
+      result ||= view_context.build_taxon_path(collection)
     end
 
-    #binding.pry
-
-    result || view_context.collection_path(args)
+    result ||= view_contenxt.build_taxon_path(collection)
   end
 
   def get_collection_taxon(collection_name)

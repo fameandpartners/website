@@ -1,100 +1,242 @@
+# element to manage product selection
+#   - size
+#   - color
+#   - customizations
+# output
+#   - currently selected element
+#   - event 'change'
+#   - errors
+#
 window.helpers or= {}
 
-window.helpers.createProductVariantsSelector = (root) ->
-  rootElement = root
-  variantsSelector = {
-    selected:   { color: null, size: null }
-    variants:   null
-    container:  root
-    target:     null
-    sizeInput:  null
-    colorInput: null
+window.helpers.ProductVariantsSelector = class ProductVariantsSelector
+  constructor: (options = {}) ->
+    # event bus mechanics
+    @$eventBus  = $({})
+    @trigger    =  delegateTo(@$eventBus, 'trigger')
+    @on         =  delegateTo(@$eventBus, 'on')
 
-    init: () ->
-      variantsSelector.__init.apply(variantsSelector, arguments)
-      return variantsSelector
+    @$container = $(options.container)
+    @product_id = options.product_id
+    @custom   = { id: options.custom_id, product_id: @product_id, count_on_hand: 0, fast_delivery: false, available: true }
+    @variants = options.variants
+    @selected = options.preselected || {}
 
-    __init: (variants, preselected) ->
-      _.bindAll(@, 'onVariantsChanged')
-      @variants = variants
-      @target or= rootElement.find('.section .btn.buy-now')
+    @sizeInput = new window.inputs.ProductSizeIdSelector(options.size_input)
+    @colorInput = new window.inputs.ProductColorIdSelector(options.color_input)
+    @customizationsInput = new window.inputs.ProductCustomizationIdsSelector(options.customization_input)
 
-      @sizeInput  or= new inputs.ButtonsBoxSelector(@container.find('.section .sizebox'), '.button')
-      @colorInput or= new inputs.ChosenSelector(@container.find('select#colour'))
+    @colorInput.on('change', @onChangeHandler)
+    @sizeInput.on('change', @onChangeHandler)
+    @customizationsInput.on('change', @onChangeHandler)
+    @
 
-      @sizeInput.on('change',  @onVariantsChanged)
-      @colorInput.on('change', @onVariantsChanged)
-      window.sizeInput = @sizeInput
+  onChangeHandler: (e) =>
+    e.stopPropagation()
+    @selected = null
+    @trigger('change', @getValue())
 
-      if window.shopping_cart
-        window.shopping_cart.on('item_added',   @onVariantsChanged)
-        window.shopping_cart.on('item_removed', @onVariantsChanged)
+  # returns current value
+  getValue: () ->
+    @selected ||= @getCurrentSelection()
 
-      if preselected
-        @setPreselectedValues(preselected)
+  getCurrentSelection: () ->
+    selected = {
+      size_id: @sizeInput.val(),
+      color_id: @colorInput.val(),
+      customizations_ids: @customizationsInput.val(),
+      product_id: @product_id
+    }
+
+    # if user don't selected size & color, then do nothing.
+    return selected if (!selected.size_id || !selected.color_id)
+
+    if @sizeInput.customValue() || @colorInput.customValue() || @customizationsInput.customValue()
+      selected.variant = @custom
+    else
+      selected.variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
+
+    return selected
+
+  # note: it should return errors statuses
+  validate: () ->
+    selected = @getValue()
+    result = { valid: false }
+
+    if selected.variant
+      if selected.variant.available
+        result.valid = true
       else
-        if @colorInput.val() || @sizeInput.val()
-          @onVariantsChanged()
+        result.error = 'Sorry, out of stock'
+    else if _.isEmpty(selected.size_id) && _.isEmpty(selected.color_id)
+      result.error = 'Please select a size and color'
+    else if _.isEmpty(selected.size_id)
+      result.error = 'Please select a size'
+    else if _.isEmpty(selected.color_id)
+      result.error = 'Please select a color'
+    else
+      # we have size, color, but variant doesn't found
+      result.error = 'Sorry, this combination unavailable'
 
-      return @
+    result
 
-    exportSelectedVariant: (variant) ->
-      target_data = { id: null, error: null }
+#      target_data = { id: null, error: null }
+#
+#      if ! _.isEmpty(variant)
+#        if variant.available
+#          target_data.id = variant.id
+#        else
+#          window.helpers.showErrors(@target.parent(), 'Sorry, out of stock')
+#          target_data.error = 'Sorry, out of stock'
+#      else if _.isNull(variantsSelector.selected.size)
+#        target_data.error = 'Please select a size'
+#      else if _.isEmpty(variantsSelector.selected.color)
+#        target_data.error = 'Please select a colour'
+#      else if !_.isEmpty(variantsSelector.selected.color) && ! _.isNull(variantsSelector.selected.size)
+#        target_data.error = 'Sorry, this combination unavailable'
+#      else
+#        target_data.error = 'Please, select size and colour'
 
-      if ! _.isEmpty(variant)
-        if variant.available
-          target_data.id = variant.id
-        else
-          window.helpers.showErrors(@target.parent(), 'Sorry, out of stock')
-          target_data.error = 'Sorry, out of stock'
-      else if _.isNull(variantsSelector.selected.size)
-        target_data.error = 'Please select a size'
-      else if _.isEmpty(variantsSelector.selected.color)
-        target_data.error = 'Please select a colour'
-      else if !_.isEmpty(variantsSelector.selected.color) && ! _.isNull(variantsSelector.selected.size)
-        target_data.error = 'Sorry, this combination unavailable'
-      else
-        target_data.error = 'Please, select size and colour'
 
-      @target.data(target_data)
-      variant
+#window.helpers.createProductVariantsSelector = (root, variants, preselected {}) ->
+#  variantsSelector = {
+#    selected:   {
+#      color_id: null,
+#      size_id:  null,
+#      customizations_ids: []
+#    }
+#    variants:   null
+#    container:  $(root)
+#    target:     null
+#    sizeInput:  null
+#    colorInput: null
+#    customizationsInput: null
+#
+#    init: () ->
+#      variantsSelector.__init.apply(variantsSelector, arguments)
+#      return variantsSelector
+#
+#    __init: (variants, preselected) ->
+#      _.bindAll(@, 'onVariantsChanged')
+#
+#      @variants = variants
+#
+#      @sizeInput  or= new inputs.ButtonsBoxSelector(@container.find('.section .sizebox'), '.button')
+#      @colorInput or= new inputs.ChosenSelector(@container.find('select#colour'))
+#
+#      @sizeInput.on('change',  @onVariantsChanged)
+#      @colorInput.on('change', @onVariantsChanged)
+#
+#      window.sizeInput = @sizeInput
+#
+#      if window.shopping_cart
+#        window.shopping_cart.on('item_added',   @onVariantsChanged)
+#        window.shopping_cart.on('item_removed', @onVariantsChanged)
+#
+#        if preselected
+#          @setPreselectedValues(preselected)
+#        else
+#          if @colorInput.val() || @sizeInput.val()
+#            @onVariantsChanged()
+#
+#            return @
+#
 
-    updateSizeInputStockAvailability: (selected) ->
-      return unless _.isFunction(@sizeInput.disableSelectionOptions)
-      unavailable_options = []
-      if !_.isEmpty(selected) and !_.isNull(selected.color)
-        unavailable_variants = _.where(@variants, { color: selected.color, available: false })
-        unavailable_options = _.pluck(unavailable_variants, 'size')
-      @sizeInput.disableSelectionOptions(unavailable_options, 'SOLD OUT')
-
-    setPreselectedValues: (preselected) ->
-      variant = _.findWhere(@variants, preselected)
-      if variant
-        @colorInput.val(variant.color)
-        @sizeInput.val(variant.size)
-        @onVariantsChanged()
-
-    onVariantsChanged: () ->
-      @selected = {
-        color: @colorInput.val(),
-        size: @sizeInput.val()
-      }
-      @container.trigger('selection_changed', @selected)
-      @container.data('selected', @selected)
-      @updateSizeInputStockAvailability(@selected)
-      @exportSelectedVariant(@getSelectedVariant())
-
-    getSelectedVariant: () ->
-      variant = _.findWhere(@variants, @selected)
-      #if variant and window.shopping_cart
-      #  line_item = _.find(window.shopping_cart.line_items, (line_item) -> line_item.variant_id == variant.id)
-      #  variant.purchased = !!line_item
-      #  variant
-      #else
-      #  {}
-      return variant
-  }
-
+#window.helpers.createProductVariantsSelector = (root) ->
+#  rootElement = root
+#  variantsSelector = {
+#    selected:   { color: null, size: null }
+#    variants:   null
+#    container:  root
+#    target:     null
+#    sizeInput:  null
+#    colorInput: null
+#
+#    init: () ->
+#      variantsSelector.__init.apply(variantsSelector, arguments)
+#      return variantsSelector
+#
+#    __init: (variants, preselected) ->
+#      _.bindAll(@, 'onVariantsChanged')
+#      @variants = variants
+#      @target or= rootElement.find('.section .btn.buy-now')
+#
+#      @sizeInput  or= new inputs.ButtonsBoxSelector(@container.find('.section .sizebox'), '.button')
+#      @colorInput or= new inputs.ChosenSelector(@container.find('select#colour'))
+#
+#      @sizeInput.on('change',  @onVariantsChanged)
+#      @colorInput.on('change', @onVariantsChanged)
+#      window.sizeInput = @sizeInput
+#
+#      if window.shopping_cart
+#        window.shopping_cart.on('item_added',   @onVariantsChanged)
+#        window.shopping_cart.on('item_removed', @onVariantsChanged)
+#
+#      if preselected
+#        @setPreselectedValues(preselected)
+#      else
+#        if @colorInput.val() || @sizeInput.val()
+#          @onVariantsChanged()
+#
+#      return @
+#
+#    exportSelectedVariant: (variant) ->
+#      target_data = { id: null, error: null }
+#
+#      if ! _.isEmpty(variant)
+#        if variant.available
+#          target_data.id = variant.id
+#        else
+#          window.helpers.showErrors(@target.parent(), 'Sorry, out of stock')
+#          target_data.error = 'Sorry, out of stock'
+#      else if _.isNull(variantsSelector.selected.size)
+#        target_data.error = 'Please select a size'
+#      else if _.isEmpty(variantsSelector.selected.color)
+#        target_data.error = 'Please select a colour'
+#      else if !_.isEmpty(variantsSelector.selected.color) && ! _.isNull(variantsSelector.selected.size)
+#        target_data.error = 'Sorry, this combination unavailable'
+#      else
+#        target_data.error = 'Please, select size and colour'
+#
+#      @target.data(target_data)
+#      variant
+#
+#    updateSizeInputStockAvailability: (selected) ->
+#      return unless _.isFunction(@sizeInput.disableSelectionOptions)
+#      unavailable_options = []
+#      if !_.isEmpty(selected) and !_.isNull(selected.color)
+#        unavailable_variants = _.where(@variants, { color: selected.color, available: false })
+#        unavailable_options = _.pluck(unavailable_variants, 'size')
+#      @sizeInput.disableSelectionOptions(unavailable_options, 'SOLD OUT')
+#
+#    setPreselectedValues: (preselected) ->
+#      variant = _.findWhere(@variants, preselected)
+#      if variant
+#        @colorInput.val(variant.color)
+#        @sizeInput.val(variant.size)
+#        @onVariantsChanged()
+#
+#    onVariantsChanged: () ->
+#      @selected = {
+#        color: @colorInput.val(),
+#        size: @sizeInput.val()
+#      }
+#      @container.trigger('selection_changed', @selected)
+#      @container.data('selected', @selected)
+#      @updateSizeInputStockAvailability(@selected)
+#      @exportSelectedVariant(@getSelectedVariant())
+#
+#    getSelectedVariant: () ->
+#      variant = _.findWhere(@variants, @selected)
+#      #if variant and window.shopping_cart
+#      #  line_item = _.find(window.shopping_cart.line_items, (line_item) -> line_item.variant_id == variant.id)
+#      #  variant.purchased = !!line_item
+#      #  variant
+#      #else
+#      #  {}
+#      return variant
+#  }
+#
 #window.helpers.createProductVariantsSelector = (root) ->
 #  rootElement = root
 #

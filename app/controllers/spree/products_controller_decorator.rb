@@ -1,5 +1,6 @@
 Spree::ProductsController.class_eval do
   include ApplicationHelper
+  include PathBuildersHelper
   include ProductsHelper
 
   respond_to :html, :json
@@ -76,9 +77,9 @@ Spree::ProductsController.class_eval do
     display_featured_dresses_edit = params[:dfde]
 
     @page_info = @searcher.selected_products_info
-    @category_title = @page_info[:page_title]
-    @category_description = @page_info[:meta_description]
-    @footer_text = @page_info[:footer_text]
+    @title        = @page_info[:page_title]
+    @description  = @page_info[:meta_description]
+    @footer_text  = @page_info[:footer_text]
 
     if (!display_featured_dresses.blank? && display_featured_dresses == "1") && !display_featured_dresses_edit.blank?
       @lp_featured_products = get_products_from_edit(display_featured_dresses_edit, currency, user, 4)

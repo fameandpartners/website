@@ -10,4 +10,12 @@ FactoryGirl.define do
   sequence :last_name do |n|
     "last_name_#{ n }"
   end
+
+  sequence :name do |n|
+    "some_name_#{ n }"
+  end
+
+  sequence :permalink do |n|
+    "some_permalink_#{ n }"
+  end
 end

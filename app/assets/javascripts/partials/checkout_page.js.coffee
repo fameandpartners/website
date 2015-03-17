@@ -1,10 +1,12 @@
-$('.checkout.edit').ready ->
+window.page ||= {}
+
+page.initCheckoutEditPage = () ->
   page = {
     ajax_callbacks: {}
     init: () ->
       $(document).on('change',  '#order_use_billing', page.updateShippingFormVisibility)
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
-      $(document).on('click',   'form input[type=submit]', page.onAjaxLoadingHandler)
+      $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
       $(document).on('click',   '.place-order button', page.onAjaxLoadingHandler)
       $(document).on('click',   '.place-order button', page.orderProccessHandler)
       $(document).on('submit',  'form.payment_details.credit_card', page.doNothing)
@@ -21,6 +23,11 @@ $('.checkout.edit').ready ->
       page.updateDatepicker()
       page.updatePayButtonAvailability()
       page.updateAddressFormVisibility()
+
+      # validation
+      if app.debug || app.env == 'development'
+        if $('.place-order button').length == 0
+          console.log('WARRRRRGHNING! - credit card handlers have invalid selectors. cc payment will not work, probably')
 
     onAjaxLoadingHandler: (e) ->
       page.updateAddressFormVisibility()
@@ -91,7 +98,7 @@ $('.checkout.edit').ready ->
       page.updateDatepicker()
       page.updatePayButtonAvailability()
       page.updateAddressFormVisibility()
-      $('.selectbox').not('.chosen-container').chosen()
+      #$('.selectbox').not('.chosen-container').chosen()
 
     updateShippingFormVisibility: () ->
       if $('#order_use_billing').is(':checked')
@@ -122,9 +129,10 @@ $('.checkout.edit').ready ->
       false
 
     updatePayButtonAvailability: (event) ->
-      buttons = $("*[date-require='terms_and_conditions']")
+      buttons = $("*[data-require='terms_and_conditions']")
       links = $('#paypal_button')
-      if $('#terms_and_conditions').is(':checked')
+
+      if true || $('#terms_and_conditions').is(':checked')
         buttons.prop('disabled', false)
         links.prop('disabled', false)
         links.off('click', page.doNothing)
@@ -168,11 +176,14 @@ $('.checkout.edit').ready ->
         if !country_id || $(states_field_id).find('option:selected').data('country') != parseInt(country_id)
           $(states_field_id).val('')
 
-
     openLoginPopup: (e) ->
-      e.preventDefault()
-      popup = new window.popups.LoginPopup()
-      popup.show()
+      if window.popups && window.popups.LoginPopup()
+        e.preventDefault()
+        popup = new window.popups.LoginPopup()
+        popup.show()
+      else
+        # redirecting instead login popup
+        console.log('redirecting to login')
 
     toggleCVVCodePopup: (e) ->
       e.preventDefault()
@@ -209,6 +220,8 @@ $('.checkout.edit').ready ->
 
     pinResponseHandler: (response) ->
       $form = $('form.payment_details.credit_card.pin')
+
+      console.log(response.response)
 
       if response.response
         return if page.payment_request_in_process
@@ -259,7 +272,6 @@ $('.checkout.edit').ready ->
 
         page.pin_request_in_process = false
   }
-
   page.init()
-
   window.checkout_page = page
+  page

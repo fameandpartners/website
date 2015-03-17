@@ -1,3 +1,5 @@
+# usage:
+# Utility::Reindexer.reindex
 module Utility
   class Reindexer
 
@@ -8,7 +10,5 @@ module Utility
       end
       Products::ColorVariantsIndexer.index!
     end
-
-
   end
 end

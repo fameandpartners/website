@@ -2,6 +2,9 @@ Spree::CheckoutController.class_eval do
   before_filter :prepare_order, only: :edit
   before_filter :find_payment_methods, only: [:edit, :update]
   skip_before_filter :check_registration
+
+  layout 'redesign/application'
+
 =begin
   def update_registration
     fire_event("spree.user.signup", :order => current_order)
@@ -147,6 +150,30 @@ Spree::CheckoutController.class_eval do
     true
   end
 
+  def raise_insufficient_quantity
+    flash[:error] = t(:spree_inventory_error_flash_for_insufficient_quantity)
+    redirect_to main_app.dresses_path
+  end 
+
+  def load_order
+    @order = current_order
+    redirect_to main_app.dresses_path and return unless @order and @order.checkout_allowed?
+    raise_insufficient_quantity and return if @order.insufficient_stock_lines.present?
+    redirect_to main_app.dresses_path and return if @order.completed?
+
+    if params[:state]
+      redirect_to checkout_state_path(@order.state) if @order.can_go_to_state?(params[:state]) && !skip_state_validation?
+      @order.state = params[:state]
+    end
+    state_callback(:before)
+  end
+
+  # current_ability.authorize!(*args)
+  # Spree::Ability.new(user).authorize!(:edit, order, token)
+  def check_authorization
+    authorize!(:edit, current_order, session[:access_token])
+  end
+
   def edit
     unless signed_in?
       @user = Spree::User.new(
@@ -216,7 +243,9 @@ Spree::CheckoutController.class_eval do
 
   def find_payment_methods
     @credit_card_gateway = @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
-    @pay_pal_method = @order.available_payment_methods.detect{ |method| method.method_type.eql?('paypalexpress') }
+    @pay_pal_method = @order.available_payment_methods.detect do |method|
+      method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
+    end
   end
 
   helper_method :completion_route

@@ -1,0 +1,56 @@
+
+// Flash Message Panel
+.vex-theme-bottom-right-corner.alert {
+
+  &.alert-warning {
+    color:#FFDAD1;
+
+    .vex-content {
+      border-top:5px solid #FFDAD1; 
+
+      .btn {
+        color:#FFDAD1;
+      }
+    }
+
+  }
+
+  &.alert-success {
+    color:#FFFFFF;
+
+    .vex-content {
+      border-top:5px solid #FFFFFF; 
+    }
+  }
+  
+  .vex-content {
+    margin-bottom: 0;
+    text-align:right;
+    width:100%;
+    z-index:9999 !important; // display on top of mobile menu
+    background-color:#000000;    
+    text-align:center;
+     
+    padding:0;
+    font-weight:600;
+
+    .vex-dialog-buttons {
+      position:absolute;
+      top:0;
+      right:0;
+      padding:0;
+      margin:0;
+
+      .btn {
+        padding:10px 15px;
+        outline: none;
+      }      
+    }
+  }
+
+  @media screen and (max-width: 991px){ 
+    .vex-content {
+      margin-bottom:62px;    
+    }
+  }
+}

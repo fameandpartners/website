@@ -1,6 +1,11 @@
-$item = $("ul.products-list li.product-item[data-id=<%= @item.id %>]")
+$item = $(".product-item[data-id=<%= @item.id %>]")
 $item.remove()
 
 <% if @item.present? && (label = analytics_label(:product, @item.try(:product))).present? %>
   track.removedFromWishlist('<%= label %>');
 <% end %>
+
+if (window.app.user_moodboard) {
+  moodboard_data  = <%= raw current_user_moodboard.serialize.to_json %>;
+  window.app.user_moodboard.updateData(moodboard_data);
+}

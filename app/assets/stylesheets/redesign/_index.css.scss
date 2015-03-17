@@ -1,0 +1,351 @@
+.caption-title {
+	color: white;
+	text-transform: uppercase;
+	font-family: forum;
+	font-size: 10.6rem;
+	letter-spacing: -1px;
+}
+
+.page-content.index {
+	padding-bottom: 3rem;
+}
+
+.col-md-4{
+	height: 100%;
+}
+
+.call-to-actions {
+
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.header {
+		height: 70px;
+		margin-bottom: 0;
+
+		h3 {
+			padding-top: 2.6rem;
+			text-transform: uppercase;
+		}
+	}
+
+	.black {
+		background-color: black;
+
+		h3 {
+		color: white;
+		}
+	}
+
+	.pink {
+		color: black;
+		background-color: #eeddf0
+	}
+
+	.img-responsive {
+		max-width: none;
+		width: 100%;
+	}
+}
+
+.shop-with-us.middle {
+	background-color: white;
+
+	p {
+		text-transform: uppercase;
+		font-weight: 500;
+		letter-spacing: 1px;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		word-spacing: 1px
+	}
+}
+
+.email-sub {
+	background-color: #f6e2d5;
+	min-height: 312px;
+	margin-bottom: 4.5rem;
+
+
+	@media (min-width: 1200px){
+		width: 100%;
+	}
+
+	h2 {
+		font-family: 'forum';
+		text-transform: uppercase;
+		font-size: 8rem;
+	}
+
+	.lead {
+		text-transform: uppercase;
+		font-style: normal;
+		font-size: 1.7rem;
+		font-weight: 500;
+		max-width: 460px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.form-control {
+		background-color: transparent;
+		border-bottom:1px solid black;
+		display: inline-block;
+		width: 90%;
+		padding: 0;
+		margin-top: 14px;
+	}
+
+	.input-group {
+		margin-left: auto;
+		margin-right: auto;
+		width: 500px;
+
+		@media (max-width: 550px){
+			width: 100%;
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	::-webkit-input-placeholder { /* WebKit browsers */
+	    text-transform: none;
+	    padding-bottom: 0;
+	    margin-bottom: 0;
+	    bottom: 0;
+	}
+
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	   text-transform: none;
+	   opacity:  1;
+	}
+
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	   text-transform: none;
+	   opacity:  1;
+	}
+
+	:-ms-input-placeholder { /* Internet Explorer 10+ */
+	   text-transform: none;
+	}
+
+	.submit {
+		display: inline-block;
+		width: 10%;
+		padding-top: 3rem;
+		font-size: 2rem;
+	}
+}
+
+.shop-with-us {
+	min-height: 830px;
+
+	@media(min-width: 990px)and(max-width: 1020px){
+		height: 970px;
+	}
+
+	h2 {
+		font-size: 4.5rem;
+		margin-top: 1.2rem
+	}
+
+	h1 {
+		padding-top: 2rem;
+		font-family: forum;
+		font-size: 4.5rem;
+		text-transform: uppercase;
+
+		small{
+			color: black;
+		}
+	}
+
+	a {
+		text-decoration:none;
+		color:black;
+	}
+
+	a:after {
+		content: ', '
+	}
+
+	.row {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+
+	p {
+		padding-right: 18.5%;
+		padding-left: 18.5%;
+		padding-bottom: 4%
+	}
+
+	h4 {
+		text-transform: uppercase;
+		font-size: 1.5rem;
+		margin-bottom: 0;
+	}
+
+	.img-responsive {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.taste-of-fame {
+	background-image: url('taste-of-fame.jpg');
+
+	@media(max-width: 768px){
+		background-image: url('taste-of-fame-mobile.jpg');
+	}
+
+	.caption-title{
+		@media(max-width: 768px){
+		font-size: 8rem;
+		padding-top: 6rem;
+		}
+	}
+
+	.promotion {
+		text-align: center;
+		height: 50%;
+		margin-top: 30%;
+
+		p {
+			text-transform: uppercase;
+			color: white;
+			font-weight: 600;
+			letter-spacing: 2px;
+			word-spacing: 2px;
+			width: 360px;
+			margin-right: auto;
+			margin-left: auto;
+		}
+	}
+}
+
+.taste-of-fame-btn {
+	background-color: #003647;
+	font-family: "Brandon Grotesque", sans-serif;
+	color: white;
+	margin-top: 3rem;
+	width: 33%;
+
+	@media(max-width: 768px){
+		width: 281px;
+	}
+}
+
+.break-hearts {
+	background-image: url('break-hearts.jpg');
+
+	@media(max-width: 768px){
+		background-image: url('break-hearts-mobile.jpg');
+	}
+
+	.container {
+		width: 100%;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.promotion {
+		width: 60%;
+		float: right;
+
+	@media(max-width: 768px){
+		width: 100%;
+	}
+
+		h2.caption-title {
+			font-family: "Brandon Grotesque", sans-serif;
+			color: black;
+			text-align: center;
+			font-size: 7rem;
+			padding-top: 22rem;
+			width: 90%;
+			margin-right: auto;
+			margin-left: auto;
+
+			@media(max-width: 768px){
+				font-size: 5rem;
+				padding-top: 2rem;
+			}
+		}
+
+		p {
+			text-transform: uppercase;
+			color: black;
+			font-weight: 600;
+			letter-spacing: 2px;
+			word-spacing: 2px;
+			width: 360px;
+			margin-right: auto;
+			margin-left: auto;
+		}
+	}
+}
+
+.prom {
+	background-image: url('prom.jpg');
+
+	@media(max-width: 768px){
+		background-image: url('prom-mobile.jpg');
+	}
+
+	.promotion {
+		float: right;
+		padding-right: 5rem;
+		font-weight: 400;
+
+		h2.caption-title {
+			font-family: "Brandon Grotesque", sans-serif;
+			color: black;
+			text-align: center;
+			font-size: 4rem;
+			padding-top: 14rem;
+			margin-right: auto;
+			margin-left: auto;
+			text-transform: none;
+
+			@media(max-width: 768px){
+				font-size: 3rem;
+				padding-top: 17rem;
+			}
+		}
+
+		p {
+			font-family: forum;
+			text-transform: uppercase;
+			font-size: 9.5rem;
+			text-align: center;
+			line-height: 7rem;
+
+			@media(max-width: 768px){
+				font-size: 7rem;
+				line-height: 6rem;
+			}
+		}
+	}
+}
+
+.prom-btn {
+	background-color: #003647;
+	font-family: "Brandon Grotesque", sans-serif;
+	color: white;
+	background-color: #ffc4b5;
+	margin-top: 2rem;
+	width: 100%;
+	margin-top: 6rem;
+
+	@media(max-width: 768px){
+		width: 100%;
+	}
+}
+
+.prom-queen {
+	background-image: url('glam_rebel.jpg');
+	height:490px;
+}

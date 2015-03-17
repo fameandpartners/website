@@ -1,0 +1,60 @@
+.footer.container
+  .footer-navigation
+    .col-md-3.col-sm-6
+      .footer-logo
+
+      = render 'layouts/redesign/address'
+
+    .col-md-2.col-md-offset-5.col-sm-3
+      ul.footer-nav
+        li.footer-nav--item
+          = link_to 'Why Shop With Us', why_us_path
+        li.footer-nav--item
+          = link_to 'The Fame Team', about_us_path
+        li.footer-nav--item
+          = link_to 'FAQs', faqs_path
+        li.footer-nav--item
+           = link_to 'Terms', terms_path
+        li.footer-nav--item
+          = link_to 'Get styling advice', style_consultation_path
+    .col-md-2.col-sm-3
+      ul.footer-nav
+        li.footer-nav--item
+          = link_to 'Fame Chain', fame_chain_path
+
+  .row.lower-row
+    .col-md-3.col-sm-8
+      .btn-group
+        button.btn.btn-dropdown.dropdown-toggle.location aria-expanded="false" data-toggle="dropdown" type="button"
+          = current_site_version.abbr.upcase
+          span.caret
+        ul.dropdown-menu role="menu"
+          - if !current_site_version.is_australia?
+            li
+              = link_to site_version_path('au') do
+                | AU
+
+          - if !current_site_version.is_usa?
+            li
+              = link_to site_version_path('us') do
+                | US
+    .col-md-6.col-sm-4.copyright
+      p
+        | &copy;&nbsp;
+        = Time.now.year
+        | &nbsp;Fame &amp; Partners. All rights reserved.
+
+    .col-md-3.social-links.col-sm-12
+      ul.footer-social
+        li.footer-social--item
+          span class='st_facebook_custom' displayText='Facebook'
+            = image_tag '_icons/facebook.png'
+        li.footer-social--item
+          span class='st_pinterest_custom' displayText='Pinterest'
+            = image_tag '_icons/pinterest.png'
+        li.footer-social--item
+          span class='st_instagram_custom' displayText='Instagram Badge' st_username='fameandpartners'
+            = image_tag '_icons/instagram.png'
+        li.footer-social--item
+          span class='st_twitter_custom' st_via="fameandpartners" displayText='Tweet'
+            = image_tag '_icons/twitter.png'

@@ -1,7 +1,12 @@
 html = '<%=j  render(template: 'users/wishlists_items/index.html') %>';
-$('#wrap > #content > .wrap').replaceWith(html)
+
+$('body > .user-account-page-title').remove();
+$('body > .page-content').replaceWith(html);
 
 window.setCurrentPath('<%= wishlist_path %>')
+$(window).off('popstate').one('popstate', function() {
+  $.getScript(window.location)
+})
 
 window.helpers.quickViewer.init()
 

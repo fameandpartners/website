@@ -1,0 +1,8 @@
+- if sale_active?
+  .alert.alert-info.alert-fixed-top role="alert" 
+    .container-fluid
+      span.close.text-white data-dismiss="alert" type="button" 
+        = image_tag 'images/close-white.svg'
+        / strong UP TO 80% OFF
+        / | - Flash Sale. 4 days only -
+        / = link_to 'Shop now!','#', class: 'text-highlight'

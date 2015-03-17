@@ -50,6 +50,28 @@ when :staging
 
   configatron.mandrill.smtp.username = 'eltons@fameandpartners.com'
   configatron.mandrill.smtp.password = '189aQIbDBG2pBeKxqoth5A'
+when :preproduction
+  configatron.host = 'preprod.fameandpartners.com'
+  configatron.blog_host = 'blog.fameandpartners.com'
+
+  configatron.mailgun.mailbox.domain = 'fameandpartners.com.mailgun.org'
+  configatron.mailgun.mailbox.username = 'postmaster@fameandpartners.com.mailgun.org'
+  configatron.mailgun.mailbox.password = '0mqgbkbz34n1'
+
+  configatron.campaign_monitor.api_key = '3f7e4ac86b143e32a5c7b46b83641143'
+  configatron.campaign_monitor.list_id = 'cc9be877f40c64cf389f6e3ea95daa0a'
+
+  configatron.mandrill.smtp.username = 'eltons@fameandpartners.com'
+  configatron.mandrill.smtp.password = '189aQIbDBG2pBeKxqoth5A'
+
+  # configatron.aws.s3.bucket = 'preprod-fameandpartners'
+  # configatron.aws.s3.access_key_id = 'AKIAJ7U3MBOEHSMUAOHQ'
+  # configatron.aws.s3.secret_access_key = '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'
+
+  redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
+  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
+
+  configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
 when :production
   configatron.host = 'www.fameandpartners.com'
   configatron.blog_host = 'blog.fameandpartners.com'
@@ -70,5 +92,7 @@ when :production
 
   redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
+
+  configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
 when :test
 end

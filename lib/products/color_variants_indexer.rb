@@ -2,6 +2,7 @@ module Products
   class ColorVariantsIndexer
     class Helpers
       include ApplicationHelper
+      include PathBuildersHelper
     end
 
     def self.index!

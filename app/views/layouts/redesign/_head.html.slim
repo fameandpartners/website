@@ -1,0 +1,37 @@
+title = get_title
+meta name="description" content=(get_meta_description)
+meta charset="utf-8"
+meta name="viewport" content="width=device-width"
+
+link rel="canonical" href=get_canonical_href
+
+link rel="alternate" hreflang="en-US" href=get_hreflang(:us)
+link rel="alternate" hreflang="en-AU" href=get_hreflang(:au)
+link rel="alternate" hreflang="x-default" href=get_hreflang(:us)
+
+meta property="og:title" content=get_title
+meta property="og:type" content="Fashion Dresses"
+meta property="og:url" content=get_canonical_href
+meta property="og:description" content=get_meta_description
+meta property="og:site_name" content="Fame &amp; Partners"
+
+- if !Rails.env.production?
+  meta name="robots" content="noindex, nofollow"
+  script src="//use.typekit.net/kur6crm.js" type="text/javascript"
+
+- if Rails.env.production?
+  script src="//use.typekit.net/day0prb.js" type="text/javascript"
+
+  = render '/spree/shared/google_analytics'
+  = render '/shared/zopim'
+
+script type="text/javascript"
+  | try{Typekit.load();}catch(e){}
+
+/[if lt IE 9]
+  = javascript_include_tag 'html5.js'
+
+/[if IE]
+  = stylesheet_link_tag 'ie'
+
+= yield :head

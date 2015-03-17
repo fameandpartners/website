@@ -1,5 +1,5 @@
-module Repositories
-class UserCart
+module Repositories; end
+class Repositories::UserCart
   attr_reader :accessor, :order, :site_version
 
   def initialize(options = {})
@@ -21,5 +21,4 @@ class UserCart
         Repositories::CartItem.new(line_item: line_item).read
       end
     end
-end
 end

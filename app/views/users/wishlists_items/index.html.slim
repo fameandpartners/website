@@ -1,286 +1,84 @@
 javascript:
   $(document).ready(function() {
-    function addBridesmaidRow(){
-      var $form = $('#share-moodboard .form');
-      var $tpl  = $form.find('.row.template');
 
-      var $row = $tpl.clone();
-      $row.css({display: 'block'});
-      $row.find(':input').attr('disabled', false);
-      $row.removeClass('template');
-
-      var $last = $form.find('.row.note, .row.bridesmaid:not(.template)').last();
-      $last.after($row);
+    function remove(url, onCompleteHandler) {
+      $.ajax({
+        url: url,
+        type: 'DELETE',
+        dataType: 'script',
+      }).complete(onCompleteHandler);
     }
 
-    function collectData(){
-      var $form = $('#share-moodboard .form');
-      var $rows = $form.find('.row.bridesmaid:not(.template)');
-      var data = {};
-
-      data['note'] = $form.find(':input[name="note"]').val();
-      data['friends'] = {};
-
-      _.each($rows, function (element, index) {
-        var $element = $(element);
-        var name  = $element.find(':input[name="name"]').val();
-        var email = $element.find(':input[name="email"]').val();
-
-        if (!!email && !!name) {
-          data['friends'][index] ={
-            full_name: name,
-            email: email
-          };
-        }
-      });
-
-      return data;
-    }
-
-    function deleteErrors(){
-      var $form = $('#share-moodboard .form');
-      _.each($form.find(':input'), function(item){
-        var $input = $(item);
-        $input.next('.error-message').remove();
-        $input.parent().removeClass('error');
-      });
-    }
-
-    function addError($input, text) {
-      $input.parent().addClass('error');
-      var $message = $input.next('.error-message');
-
-      if (!$message.length) {
-        $input.after('<div class="error-message"/>');
-        $message = $input.next('.error-message');
+    function removeHandler(e) {
+      e.preventDefault();
+      link = $(e.currentTarget);
+      if (! link.data('processing')) {
+        link.data('processing', true);
+        remove(link.attr('href'), function() {
+          link.data('processing', false);
+        })
       }
-
-      $message.text(text);
     }
 
-    $('a[data-action=show-share-modal]').on('click', function(event){
-      event.preventDefault();
 
-      var $modal = $('#share-moodboard');
+    function remove_and_link_to_product_page(e) {
+      e.preventDefault();
 
-      _.times(4, addBridesmaidRow);
-
-      $modal.find('.alert').hide();
-      $modal.find('.preloader').hide();
-
-      $modal.show();
-
-      $modal.find('.close').one('click', function (event) {
-        event.preventDefault();
-
-        $modal.find('.row.bridesmaid:not(.template)').remove();
-        $modal.hide();
+      link = $(e.currentTarget);
+      itemId = link.data('id');
+      removeLink = $('#remove-product-'+itemId);
+      remove(removeLink.attr('href'), function() {
+        window.location = link.attr('href');
       })
-    });
+    }
 
-    $('a[data-action=add-friend]').on('click', function(event){
-      event.preventDefault();
-
-      addBridesmaidRow();
-    });
-
-    window.requestInProcess = false;
-
-    $('a[data-action=send-data]').on('click', function (event) {
-      event.preventDefault();
-
-      if (window.requestInProcess) {
-        return false;
-      }
-
-      deleteErrors();
-
-      var $button = $(event.target);
-      var $modal = $('#share-moodboard');
-      var $rows = $modal.find('.row.bridesmaid:not(.template)');
-      var $spinner = $modal.find('.preloader');
-      var data = collectData();
-
-      if (!_.isEmpty(data['friends'])) {
-        $button.attr('disabled', true).addClass('disabled');
-        $spinner.show();
-        $modal.find('.alert').hide();
-        $modal.find(':input:visible').attr('disabled', true);
-
-        window.requestInProcess = true;
-
-        $.ajax({
-          url: '/bridesmaid-party/share',
-          type: 'POST',
-          dataType: 'json',
-          data: data,
-          success: function () {
-            $modal.find('.alert.alert-success').show();
-
-            setTimeout(function(){
-              $modal.hide();
-              $modal.find('.row.bridesmaid:not(.template)').remove();
-              $modal.find('.close').unbind('click');
-            }, 3000)
-          },
-          error: function (xhr, text) {
-            var data = JSON.parse(xhr.responseText);
-            $modal.find('.alert.alert-error').show();
-            $modal.find(':input:visible').attr('disabled', false);
-
-            _.each(data.errors, function(item, index){
-              var $row = $($rows[index]);
-
-              if (!_.isEmpty(item.email)) {
-                var $input = $row.find('[name="email"]');
-                var errors = item.email;
-                addError($input, errors.join(', '));
-              }
-
-              if (!_.isEmpty(item.first_name) || !_.isEmpty(item.last_name)) {
-                var $input = $row.find('[name="full_name"]');
-                var errors = _.union(item.first_name, item.last_name);
-                addError($input, errors.join(', '));
-              }
-            })
-          },
-          complete: function () {
-            $spinner.hide();
-            window.requestInProcess = false;
-          }
-        });
-      }
-    });
-
-    (function() {
-      $('ul.products-list .add-remove a.remove').on('click', function(e) {
-        e.preventDefault();
-        $button = $(e.currentTarget);
-
-        if (! $button.data('processing')) {
-          $button.data('processing', true);
-
-          $.ajax({
-            url: $button.attr('href'),
-            type: 'DELETE',
-            dataType: 'script',
-          }).complete(function() {
-            $button.data('processing', false)
-          });
-         };
-      });
-    })(document);
-
-    (function() {
-      $('a[data-action=buy-for-bridesmaid]').on('click', function (e) {
-        e.preventDefault();
-        $link = $(e.currentTarget);
-        item_id = $link.data('id');
-
-        $.ajax({
-          url: $link.attr('href'),
-          type: 'POST',
-          dataType: 'json',
-          data: {},
-          success: window.shopping_cart.buildOnSuccessCallback(['item_changed'], item_id)
-        });
-      });
-    })(document);
+    $('a.remove').on('click', removeHandler);
+    $('a.buy').on('click', remove_and_link_to_product_page);
   });
 
 
-.wrap
-  .account-pages
-    .tabs
-      = render 'users/shared/tabs', active_tab: 'wishlist'
-      #wishlist.tab-content
-        - if @moodboard.bride_moodboard
-          .bridesmaid-moodboard
-            .header
-              .name My
-              .info moodboard
-          .bride-header
-            = render 'bridesmaid/shared/sub_nav'
 
-        - if @moodboard.products.blank?
+.user-account-page-title
+  .container
+    .page-title--details
+      h1.user-account-title.no-padding-bottom.text-white My style profile
+
+.page-content.user.moodboard.index
+  .container.relative
+
+    = render 'users/shared/tabs', active_tab: 'wishlist'
+    .row
+      .col-md-12
+        - if @moodboard.products.empty?
           p Sorry, there are no items in your moodboard
-        - else
-          - if @moodboard.bride_moodboard
-            .intro
-              ' Send this moodboard to your bridesmaids so they can select their size, colour and customisations
-            = link_to 'Share with Bridesmaids', '#', data: { action: 'show-share-modal' }, class: 'btn share-moodboard'
-            
 
-          ul.products-list
-            - @moodboard.products.each do |product|
-              li.product-item data-id=(product.id)
-                .thumbnail
-                  .actions.clearfix
-                    .quick-view.fleft
-                      = link_to 'Quick view', product.path, data: { action: 'quick-view', id: product.permalink }
-                  = link_to product.path do
-                    = image_tag product.image_url, itemprop: "image", width: 243, height: 352, alt: product.name
+        - if @moodboard.products.any?
+          .container.relative
 
-                .name = link_to product.name, product.path
-                /.price = product.price.display_price
-                .price = product_price_with_discount(product.price, product.discount)
-                .add-remove.clearfix
-                  = link_to 'Move to cart', '#', class: 'add-to-cart master btn mid fleft', \
-                    data: { variant: product.variant_id, item: product.item_id }
-                  = link_to 'Remove', wishlists_item_path(product.item_id), class: 'btn mid border empty remove fright'
+            - @moodboard.products.each_slice(4).each do |row|
+              .row.relative
+                - row.each do |product|
+                  .col-md-3.col-xs-6.col-xxs-12.category--item.product-item data-id=(product.id)
+                    = link_to product.path do
+                      = image_tag product.image_url, :class => "img-responsive", alt: product.name
+                      .details
+                        .name= product.name
+                        .price= product_price_with_discount(product.price, product.discount)
 
-                - if product.bridesmaides.present?
-                  - product.bridesmaides.each do |bridesmaid|
-                    - name = "Buy #{ bridesmaid.name }'s Dress"
-                    p = link_to name, bridesmaid_add_for_bridesmaid_path(id: bridesmaid.id), class: 'btn wide small', data: { action: 'buy-for-bridesmaid', id: bridesmaid.id }
-                    p = "#{ bridesmaid.color} for #{ bridesmaid.full_name }"
+                    .actions
+                      .col-md-12.text-center
+                        = link_to 'Buy this Dress', product.path, class: 'buy btn btn-black', data: { variant: product.variant_id, id: product.item_id }
+                        br
+                        = link_to 'Remove', wishlists_item_path(product.item_id), id: "remove-product-#{product.item_id}", data: { id: product.item_id }, class: 'remove small'
 
 
-.modal.edit-line-item(style="display: none;")
-  .overlay
-  .modal-container
-    .close-lightbox
-    .edit-details
-      .modal-title Specify product options
-      .item
-      .save
-        span.error.message(style="display: none;") Please, select size and color
-        input.btn.black type="submit" value="Move to cart & close"
-
-.modal.share-moodboard(style="display: none;")
-  .overlay
-  .modal-container
-    .close-lightbox
-    .edit-details
-      .modal-title Share With Friends
-      .item
-      .save
-        span.error.message(style="display: none;") Please, select size and color
-        input.btn.black type="submit" value="Share"
-
-.popup-placeholder#share-moodboard style="display: none;"
-  .overlay
-  .modal-container.share-popup
-    .close-lightbox.close
-    .modal-title Send this moodboard to your bridesmaids
-    .grid-container.form
-      .row.note
-        .grid-12
-          .string
-            textarea name="note" placeholder="Enter a note, if you like."
-      .row.bridesmaid.template style="display: none;"
-        .grid-6
-          .string
-            input type="text" name="name" disabled="disabled" required="required" placeholder="Name"
-        .grid-6
-          .string
-            input type="email" name="email" disabled="disabled" required="required" placeholder="Email address"
-    .add-more
-      = link_to '+ Add more', '#', data: { action: 'add-friend' }
-    .buttons
-      .inline-block.position-relative
-        = link_to 'Share now', '#', class: 'btn', data: { action: 'send-data' }
-        .preloader style="display: none;"
-          = image_tag 'ajax-loader.gif', width: 24, height: 24, alt: ''
-      .alert.alert-success Invitations have been sent to your bridesmaids.
-      .alert.alert-error We've found some errors in the form. Please take a look at the errors.
+/ .modal.edit-line-item(style="display: none;")
+/   .overlay
+/   .modal-container
+/     .close-lightbox
+/     .edit-details
+/       .modal-title Specify product options
+/       .item
+/       .save
+/         span.error.message(style="display: none;") Please, select size and color
+/         input.btn.black type="submit" value="Move to cart & close"

@@ -18,6 +18,7 @@ SitemapGenerator::Sitemap.default_host = "http://#{configatron.host}"
 
 SitemapGenerator::Interpreter.send :include, ApplicationHelper
 SitemapGenerator::Interpreter.send :include, ProductsHelper
+SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
   def collection_product_path(product, options = {})
