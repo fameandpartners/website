@@ -8,7 +8,9 @@ class IndexController < ApplicationController
   def show
     @title = "Formal Dresses | Prom Dresses | Bridesmaid Dresses | Evening Gowns #{default_seo_title}"
     @description = default_meta_description
-    @big_banner = Spree::BannerBox.big_banner
+    if Features.active?(:maintenance)
+      render :action => 'maintenance', :layout => 'redesign/maintenance'
+    end
   end
 end
 =begin
