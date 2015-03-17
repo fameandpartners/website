@@ -5,25 +5,28 @@
 #   - autoscroll: ready
 #
 
-# display slider for first image. 
+# display slider for first image.
 # load all the images
 # update slider
 
 window.helpers or= {}
 window.helpers.ProductImagesSlider = class ProductImagesSlider
   constructor: (container, images, options = {}) ->
-    @options    = options || {}
+    @options    = options || { }
     @$container = $(container || '#slides')
     @images = images
     @all_images = @$container.find('.slides-container').find('img').remove()
     @images_color_id = parseInt(@options.preselected) if @options.preselected
     @options.preselected = null
+    # @options.play = false
+
     @updateSlider()
 
     lazy_slider_update = _.debounce(@updateSlider, 300)
     $(window).on('resize', lazy_slider_update)
-
     @preload()
+
+
 
   showImagesWithColor: (color_id) =>
     return if @images_color_id == color_id
@@ -31,11 +34,15 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     @updateSlider()
 
   updateSlider: () =>
+
+    console.log("Slider is updated")
+
+
     selected_images = _.filter(@all_images, (image) ->
       $(image).data('color-id') == @images_color_id
     , @)
     selected_images = @all_images if selected_images.length == 0
-    # #note - this row don't work, so we use remove/html/paste instead
+    #note - this row don't work, so we use remove/html/paste instead
     # @$container.find('.slides-container').html(selected_images)
     @$container.superslides('destroy')
     wrapper = @$container.find('.slides-container').remove()
@@ -49,12 +56,11 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     image = new Image()
     image.onerror = defer.reject
     image.onload = () =>
-      @all_images.push($("<img 
+      @all_images.push($("<img
       id='product-image-slide-#{product_image.id }'
-      class='product-image-slide' 
+      class='product-image-slide'
       alt='#{ product_image.alt }'
       data-color-id='#{ product_image.color_id }'
-      style='height: 1164px; width: 2560px; overflow: hidden;'
       src='#{ product_image.url }'
       />"))
       defer.resolve(product_image)
@@ -70,3 +76,4 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
 
     @all_images = _.sortBy(@all_images, (i) -> i.position)
     $.when.apply(this, deferrers).then(@updateSlider)
+
