@@ -44,10 +44,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
     @total            = total_records
-    if @products_on_page < @total
-      @content.find(@showMoreSelector).show()
-    else
-      @content.find(@showMoreSelector).hide()
+    @updatePaginationLink('active')
 
   updatePagination: (items_added, total_records) ->
     if items_added == 0
@@ -55,16 +52,28 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     else
       @products_on_page += items_added
     @total            = total_records
-    if @products_on_page < @total
-      @content.find(@showMoreSelector).show()
-    else
-      @content.find(@showMoreSelector).hide()
+    @updatePaginationLink('active')
+
+  updatePaginationLink: (state = 'active') ->
+    row = @content.find(@showMoreSelector).closest('.row.more-products')
+    console.log(row)
+    row.find('.status').hide()
+    if state == 'loading'
+      row.find('.loading').show()
+    else if state == 'inactive'
+      row.find('.inactive').show()
+    else # active
+      if @products_on_page < @total
+        row.find('.active').show()
+      else
+        row.find('.inactive').show()
 
   update: () =>
     @source_path = '/dresses'
     updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
     pageUrl = @updatePageLocation(updateRequestParams)
 
+    @updatePaginationLink('inactive')
     $.ajax(urlWithSitePrefix(@source_path),
       type: "GET",
       dataType: 'json',
@@ -88,13 +97,14 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     if @loading != true
       @loading = true
       updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+      @updatePaginationLink('loading')
       $.ajax(urlWithSitePrefix(@source_path),
         type: "GET",
         dataType: 'json',
         data: $.param(_.extend(updateRequestParams, { limit: @page_size, offset: @products_on_page })),
         success: (collection) =>
           content_html = @collectionMoreTemplate(collection: collection)
-          @content.find(@showMoreSelector).before(content_html)
+          @content.find(@showMoreSelector).closest('.row.relative').before(content_html)
           @updatePagination(collection.products.length, collection.total_products)
 
           @hoverize()
