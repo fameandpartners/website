@@ -6,6 +6,8 @@ class IndexController < ApplicationController
   #include ProductsHelper
 
   def show
+    @title = "Formal Dresses | Prom Dresses | Bridesmaid Dresses | Evening Gowns #{default_seo_title}"
+    @description = default_meta_description
     @big_banner = Spree::BannerBox.big_banner
   end
 end
@@ -14,7 +16,7 @@ class IndexController < Spree::StoreController
   layout 'spree/layouts/spree_application'
   helper :all
 
-  respond_to :html 
+  respond_to :html
 
   def show
     @title = "Formal Dresses | Prom Dresses | Bridesmaid Dresses | Evening Gowns #{default_seo_title}"
