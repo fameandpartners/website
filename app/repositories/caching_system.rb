@@ -7,7 +7,7 @@ module Repositories
     # global settings
     # Repositories::CachingSystem.cache_fetch_params
     def self.cache_fetch_params(options = {})
-      result = { 
+      result = {
         force: options.delete(:force)
       }
 
