@@ -122,19 +122,23 @@ header
         - if Features.active?(:style_quiz)
           li.menu-item
             = link_to 'style quiz', '', class: 'menu-item--link'
-
-        li.stories.menu-item.dropdown
-          button.btn.btn-dropdown.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button"
+        li.shop.menu-item
+          a.menu-item--link.active-hover href="#"
             | Stories
-          ul.dropdown-menu role="menu"
-            li
-              a href="/prom" Prom
-            li
-              a href="/bridesmaid-dresses" Bridesmaids
-            li
-              a href="/amfam" AMFAM
-            li
-              a href="/break-hearts-not-banks" Break Hearts
+          .mega-menu.hidden-sm.story-list
+            .stories
+              .container-fluid
+                .row
+                  .col-md-3
+                    ul.story-links
+                      li
+                        a href="/prom" Prom
+                      li
+                        a href="/bridesmaid-dresses" Bridesmaids
+                      li
+                        a href="/amfam" AMFAM
+                      li
+                        a href="/break-hearts-not-banks" Break&nbsp;Hearts
 
         li.menu-item
           = link_to 'Blog', blog_path, class: 'menu-item--link'
