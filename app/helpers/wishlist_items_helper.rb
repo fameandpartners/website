@@ -15,13 +15,4 @@ module WishlistItemsHelper
   rescue
     'noimage/product.png'
   end
-
-  def wishlist_item_product_with_color_path(item)
-    color = (item.color || item.variant.dress_color)
-    if color.present?
-      url_without_double_slashes("#{ collection_product_path(item.product) }/#{ color.name }")
-    else
-      collection_product_path(item.product)
-    end
-  end
 end

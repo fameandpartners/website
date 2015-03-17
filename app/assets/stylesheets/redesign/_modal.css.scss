@@ -1,0 +1,171 @@
+.vex-theme-flat-attack.email-capture-modal {
+
+  padding-top:13%;
+
+  @media screen and (max-width: 991px){
+    padding-top:9%;
+  }
+
+  .vex-content {
+    border:5px solid black;
+    width: 700px;
+  }
+
+  .vex-dialog-form {
+
+    .form-group {
+
+    }
+    .vex-dialog-input {
+
+    }
+
+    .vex-dialog-buttons {
+      position:absolute;
+      top:0;
+      right:0;
+      padding:0;
+      margin:0;
+
+      .vex-dialog-button-primary {
+        display:none;
+      }
+
+      .btn {
+        padding:10px 15px;
+      }
+    }
+  }
+}
+
+.vex-theme-flat-attack.email-capture-modal.bridesmaid-lp .vex-dialog-form .vex-dialog-input {
+    margin-top: 2rem !important;
+}
+
+.vex.vex-theme-flat-attack.bridesmaid-lp  .vex-content h2 {
+  background-color: transparent;
+  text-align: center;
+  font-size: 8rem;
+  margin-bottom: 0;
+}
+
+.vex-theme-flat-attack.email-capture-modal.bridesmaid-lp {
+  .vex-content {
+    background: url("modals/modal_onlyimage_brides.jpg") no-repeat;
+    border: none;
+    height: 407px
+  }
+
+  .vex-dialog-form {
+    .vex-dialog-input {
+      margin-top: 220px;
+    }
+  }
+
+  .submit {
+    height: 40px;
+    padding: 10px 40px;
+    line-height: 14px;
+    margin-top: 2rem;
+    color: black;
+  }
+
+  p {
+    color: white;
+    text-align: center;
+  }
+
+  button.vex-dialog-button-secondary.vex-dialog-button.vex-last.btn.btn-black{
+    background-color: white;
+    color: black;
+    line-height: 16px;
+    vertical-align: middle;
+  }
+
+  button {
+    font-family: "Brandon Grotesque", sans-serif;
+  }
+
+  ::-webkit-input-placeholder {
+     font-size: 15px;
+     text-transform: uppercase;
+     text-align: center;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+     font-size: 15px;
+     text-transform: uppercase;
+     text-align: center;
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+     font-size: 15px;
+     text-transform: uppercase;
+     text-align: center;
+  }
+
+  :-ms-input-placeholder {
+     font-size: 15px;
+     text-transform: uppercase;
+     text-align: center;
+  }
+
+  .standard-form  {
+    height: 35px
+  }
+}
+
+.vex-theme-flat-attack.email-capture-modal.bridesmaid-lp .vex-dialog-form .vex-dialog-buttons .btn {
+    padding: 5px 8px;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+
+.vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type="email"] {
+  min-height: 25px;
+  border-radius: 0;
+  border: none;
+}
+
+// size-guide
+.vex.vex-theme-flat-attack .vex-content {
+  padding: 1rem 1rem 2rem 1rem;
+
+  h2 {
+    font-size: 2.3rem;
+    line-height: 2.3;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: Forum;
+    color: white;
+    background-color: black;
+    margin-top: 0;
+  }
+
+  h6 {
+    font-size: 2rem;
+    line-height: 2rem;
+
+  }
+
+  p {
+    font-size: 2rem;
+    line-height: 2.2rem
+  }
+
+  img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  table {
+    th {
+      font-size: 1.5rem;
+    }
+
+    tbody {
+      font-size: 1.5rem;
+      line-height: 1.6rem;
+    }
+  }
+}

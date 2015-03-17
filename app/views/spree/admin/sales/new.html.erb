@@ -26,6 +26,15 @@
         <% end %>
       </div>
       <div class="four columns">
+        <%= f.field_container :sitewide, :class => ['checkbox'] do %>
+          <label>
+            <%= f.check_box :sitewide %>
+            is site wide
+            <%= f.error_message_on :sitewide %>
+          </label>
+        <% end %>
+      </div>
+      <div class="four columns">
         <%= f.field_container :discount_size do %>
           <%= f.label :discount_size, t(:discount_size) %> <span class="required">*</span><br />
           <%= f.text_field :discount_size, :class => 'fullwidth' %>

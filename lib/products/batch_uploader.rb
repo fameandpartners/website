@@ -12,6 +12,7 @@ module Products
     def initialize
       @@titles_row_numbers = [8, 10, 11, 12]
       @@first_content_row_number = 13
+      @available_on = 1.days.ago
     end
 
     def parse_file(file_path)
@@ -452,6 +453,9 @@ module Products
           product
         rescue Exception => message
           Rails.logger.warn(message)
+          puts "======== Exception ========"
+          puts message
+          puts "==========================="
           nil
         end
       end.compact
@@ -469,14 +473,15 @@ module Products
       product = master.try(:product)
 
       if product.blank?
-        product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: DateTime.now+2)
+        product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: @available_on)
       end
 
       attributes = {
         name: args[:name],
         price: args[:price_in_aud],
         description: args[:description],
-        taxon_ids: args[:taxon_ids] || []
+        taxon_ids: args[:taxon_ids] || [],
+        available_on: product.available_on || @available_on
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
@@ -500,6 +505,7 @@ module Products
         end
       end
 
+      puts "Saving: #{product.id} - #{product.name}"
       product.save!
 
       if args[:price_in_aud].present? && args[:price_in_usd].present?

@@ -1,133 +1,122 @@
-- if spree_user_signed_in? and (params[:ci] == 'signup' or params[:cf] == 'signup')
-  javascript:
-    $(function(){
-      track.conversion('sign_up')
-    })
+.page-content.index
+  .container.relative
+    .row.relative
+  #theTarget style=("height: 720px;")
 
-- homepage_cache_key = [:layout, :homepage]
-- cache homepage_cache_key, expires_in: configatron.cache.expire.long do
+    /= link_to @big_banner.first.url, title: @big_banner.first.title do
+    / = image_tag @big_banner.first.attachment(:big)
 
-  - content_for :head do
-    meta property="og:url" content="#{ root_url }"
-    meta property="og:site_name" content="Fame & Partners - Formal dresses for fashion mavens"
-    meta property="og:image" content="#{absolute_image_url(image_path('homepage.jpeg'), 'http')}"
-    meta property="og:locale" content="en_US"
-    meta property="og:title" content="Fame & Partners - Formal dresses for fashion mavens"
-    meta property="og:type" content="website"
-    meta property="og:description" content="Formal dresses for fashion mavens. Discover what your style profile is."
-    meta name="twitter:card" content="Fame & Partners - Formal dresses for fashion mavens"
-    meta name="twitter:title" content="Fame & Partners - Formal dresses for fashion mavens"
-    meta name="twitter:description" content="I want to go shopping for my formal dress with you. Discover what your style profile is."
+    / div style=("background-image: url('#{@big_banner.first.attachment(:big)}')")
 
-  .grid-container
-    .home-promo
-      -if @big_banner.present?
-        - if @big_banner.count > 1
-          javascript:
-            $(function() {
-              $('#slides').slidesjs({
-                navigation: {
-                  active: false,
-                  effect: "slide"
-                },
-                pagination: {
-                  active: false,
-                  effect: "slide"
-                },
-                play: {
-                  active: false,
-                  effect: "slide",
-                  interval: 5000,
-                  auto: true,
-                  swap: false,
-                  pauseOnHover: true,
-                  restartDelay: 2500
-                },
-                effect: {
-                  slide: {
-                    speed: 500
-                  }
-                },
-                width: 1140,
-                height: 500
-              });
-            });
-          #slides
-            .slidesjs-previous.slidesjs-navigation
-              = image_tag('icon-arrow-left.png')
-            .slidesjs-next.slidesjs-navigation
-              = image_tag('icon-arrow-right.png')
-            
-            - @big_banner.limit(10).each do |banner|
-              = link_to banner.url, title: banner.title do
-                = image_tag banner.attachment(:big)
-        - else
-          = link_to @big_banner.first.url, title: @big_banner.first.title do
-            = image_tag @big_banner.first.attachment(:big)
-      -else
-        = link_to dresses_path(:cf => 'home'), title: 'New Collection'  do
-          = image_tag "homepage/new/august2014.jpg"
+    div.taste-of-fame
+      .slider-image-caption.height-100
+        .container.height-100
+          .promotion
+            h2.caption-title have a taste of fame.
+            p dresses made and styled for you by fame &amp; partners
+            button.btn.taste-of-fame-btn type="button"  shop now
+
+    div.prom
+      .slider-image-caption.height-100
+        .container.height-100
+          .promotion.col-md-5
+            h2.caption-title Our official</br>prom collection</br>dresses that
+            p keep it</br>real!
+            button.btn.prom-btn type="button"  shop now
+
+    div.break-hearts
+      .slider-image-caption.height-100
+        .container.height-100
+          .promotion.col-sm-12
+             h2.caption-title Break hearts. not bank account$
+
+      / | <div style="background-image: url(images/test4.jpg)"></div
+      / | <div style="background-image: url(images/test5.jpg)"></div
+
+/! Call to Actions
+.call-to-actions
+  .row
+    a href="/dresses/prom"
+      .col-md-4.text-center.no-padding
+        .header.black
+          h3 Will The Real Junior Prom Queen Please Stand Up
+        = image_tag "glam_rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
+    a href="#email-container"
+      .col-md-4.text-center.no-padding
+        .header.pink
+          h3 GET $20 OFF + FREE STYLING
+        = image_tag "glam_rebel2.jpg", alt: 'Newsletter sign up', class: 'img-responsive'
+    a href="/style-consultation"
+      .col-md-4.text-center.no-padding
+        .header.black
+          h3 Your Very Own Glam Squad. Book A Free Styling Session Now
+        = image_tag "real_prom.jpg", alt: 'Styling session sign up', class: 'img-responsive'
+
+/! Email Subscription
+#email-container.container-fluid.email-sub.text-center
+  .row
+    = render 'shared/newsletter_signup'
+
+.col-md-4.brand-pink.text-center.shop-with-us
+  .row
+    h4 no middle-men
+    p Our sample room direct to you model means no middle men, higher quality formal dresses &amp; lower costs.
+  .row
+    h4 Internal sourcing &amp; design
+    p Dedicated sourcing &amp; design team to discover the best fabrics and create the most beautiful dress designs based on what's trending right now.
+  .row
+    = image_tag "glam-rebel.jpg", alt: 'Something here', class: 'img-responsive'
+  .row
+    h4 Hem lengths that suit you
+    p Long formal dresses, short prom dresses, midi, knee-length; we can change your dress length to whatever suits you.
+  .row
+    h4 All online
+    p We deliver you beautiful dresses, customised for you, at the prices we do because we keep it all online.
+.col-md-4.text-center.shop-with-us.middle
+  .row
+    h2 Fame &amp; Partners delivers a high quality, bespoke dress making  service without the  traditional cost
+  .row
+    = image_tag "bride.jpg", alt: 'Something here', class: 'img-responsive'
+  .row.no-padding
+    h1
+      small formal dresses</br>
+      | for every event
+    p.links-list
+      a href="/new-years-eve-dresses" new years dresses
+      a href="/dresses/prom" prom dresses
+      a href="/dresses/formal" formal dresses
+      a href="/bridesmaid-dresses" bridesmaids dresses
+      a href="/dresses/cocktail" cocktail dresses
+      a href="/dresses" ball gowns
 
 
-  .promo-tiles
-    .grid-container
-      .rowsmall-stylequiz
-        -if @small_banner.count > 2
-          -@small_banner.each do |small_banner|
-            .tile
-              = link_to small_banner.url, class: small_banner.css_class do
-                = image_tag small_banner.attachment(:small), title: small_banner.title
-        -else
-          .tile
-            = link_to "", class: 'show-style-quiz' do
-              = image_tag 'homepage/new/small-stylequiz.jpg'
-          .tile
-            = link_to plus_size_path(:cf => 'home') do
-              = image_tag 'homepage/new/plussize.jpg'
-          .tile
-            = link_to '/Black-Dresses?cf=home' do
-              = image_tag 'homepage/new/small-black-dresses.jpg'
+
+.col-md-4.brand-pink.text-center.shop-with-us
+  .row
+    h4 Dedicated, specialist sample</br>rooms &amp; dress makers
+    p Our workers are highly skilled; each individual formal dress is crafted by one artisan seamstress.
+  .row
+    = image_tag "new-years-eve.jpg", alt: 'Something here', class: 'img-responsive portrait-img'
+  .row
+    h4 Dresses customised for you
+    p Customise to your perfect colour and change design features to make your formal dress uniquely yours.
+  .row
+    h4 Free stylists
+    p Special events like prom are so important so we offer free stylists to complete the full look, free of charge.
+  .row
+    h4 beautiful, luxe finish dress fabrics
+    p Metallics, sequins, taffeta, satin, chiffon, lace all available in extensive colour palettes you can choose.
 
 
-  = render "shared/featured_in", :locals => {:small => ""}
 
-  .grid-container
-    .fame-chain
-      = link_to fame_chain_path do
-        = image_tag 'homepage/famechain.jpg'
-
-  .grid-container
-    .row
-      .home-copy
-        div
-          h1= t('home.find.heading').html_safe 
-          p= t('home.find.body').html_safe 
-        div
-          h1= t('home.shop.heading').html_safe 
-          p= t('home.shop.body').html_safe
-          
-  .formal-dresses
-    .grid-container
-      .row
-        = image_tag 'homepage/new/bird_left.gif', :class => "bird"
-        h2 <span>FORMAL</span> DRESSES
-        = image_tag 'homepage/new/bird_right.gif', :class => "bird"
-      .row
-        p FOR EVERY EVENT
-        .formal-types
-          ul
-            li= link_to "New Years", nye_path
-            li
-              ' /
-            li= link_to "Prom", "/dresses/prom"
-            li
-              ' /
-            li= link_to "Formals", "/dresses/formal"
-            li
-              ' /
-            li= link_to "Bridesmaid", bridesmaid_lp_path
-            li
-              ' /
-            li= link_to "Cocktail", "/dresses/cocktail"
-
-  
+/! SEO Crap
+/ .main-content
+/   .container
+/     .row
+/       .col-md-7
+/         h1= t('home.find.heading').html_safe
+/         p= t('home.find.body').html_safe
+/         h2= t('home.find.heading').html_safe
+/         p= t('home.shop.body').html_safe
+/       .col-md-5
+/         = image_tag 'images/bridesmaid-image.jpg', alt: 'Bridesmaid image', class: 'img-responsive'

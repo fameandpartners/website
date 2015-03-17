@@ -1,39 +1,72 @@
+# notes:
+# functions for this object:
+#   - preloading images
+#   - switching between colors: ready
+#   - autoscroll: ready
+#
+
+# display slider for first image. 
+# load all the images
+# update slider
+
 window.helpers or= {}
-window.helpers.createProductImagesSlider = (container, input) ->
-  bxSlider = null
-  $container = $(container)
-  $colorInput = input
+window.helpers.ProductImagesSlider = class ProductImagesSlider
+  constructor: (container, images, options = {}) ->
+    @options    = options || {}
+    @$container = $(container || '#slides')
+    @images = images
+    @all_images = @$container.find('.slides-container').find('img').remove()
+    @images_color_id = parseInt(@options.preselected) if @options.preselected
+    @options.preselected = null
+    @updateSlider()
 
-  all_slides = $container.find('li').remove()
+    lazy_slider_update = _.debounce(@updateSlider, 300)
+    $(window).on('resize', lazy_slider_update)
 
-  sliderSettings = {
-    controls: true,
-    nextText: '<span class="icon-arrow-right" />',
-    prevText: '<span class="icon-arrow-left" />'
-  }
+    @preload()
 
-  updateSliderImages = () ->
-    # get current slide id 
-    currentSlideIndex = bxSlider.getCurrentSlide()
-    currentSlideId = $($container.find('li')[currentSlideIndex]).attr('id')
+  showImagesWithColor: (color_id) =>
+    return if @images_color_id == color_id
+    @images_color_id = parseInt(color_id)
+    @updateSlider()
 
-    # get new slides set
-    colorId = $colorInput.getOptionValueId()
-    selected_slides = _.filter(all_slides, (slide) ->
-      $(slide).data('color-id') == colorId
-    )
-    selected_slides = all_slides if selected_slides.length == 0
-    $container.html(selected_slides)
+  updateSlider: () =>
+    selected_images = _.filter(@all_images, (image) ->
+      $(image).data('color-id') == @images_color_id
+    , @)
+    selected_images = @all_images if selected_images.length == 0
+    # #note - this row don't work, so we use remove/html/paste instead
+    # @$container.find('.slides-container').html(selected_images)
+    @$container.superslides('destroy')
+    wrapper = @$container.find('.slides-container').remove()
+    wrapper.html(selected_images)
+    @$container.html(wrapper)
+    @$container.superslides(@options)
 
-    # reload slider and set to previous slide
-    if !!currentSlideId && $container.find("##{ currentSlideId }").length > 0
-      startSlide = $container.find("##{ currentSlideId }").index()
-    else
-      startSlide = 0
+  getLoadImageDeferred: (product_image) =>
+    defer = new $.Deferred()
 
-    bxSlider.reloadSlider(_.extend({ startSlide: startSlide }, sliderSettings))
+    image = new Image()
+    image.onerror = defer.reject
+    image.onload = () =>
+      @all_images.push($("<img 
+      id='product-image-slide-#{product_image.id }'
+      class='product-image-slide' 
+      alt='#{ product_image.alt }'
+      data-color-id='#{ product_image.color_id }'
+      style='height: 1164px; width: 2560px; overflow: hidden;'
+      src='#{ product_image.url }'
+      />"))
+      defer.resolve(product_image)
 
-  bxSlider = $container.bxSlider(sliderSettings)
+    image.src = product_image.url
 
-  $colorInput.on('change', updateSliderImages)
-  updateSliderImages()
+    defer
+
+  preload: () =>
+    @all_images = []
+    deferrers = _.map @images, (image) =>
+      @getLoadImageDeferred(image)
+
+    @all_images = _.sortBy(@all_images, (i) -> i.position)
+    $.when.apply(this, deferrers).then(@updateSlider)

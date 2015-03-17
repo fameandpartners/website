@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
   include ApplicationHelper
+  include PathBuildersHelper
 
   append_before_filter :check_site_version
   append_before_filter :check_cart
@@ -13,6 +14,9 @@ class ApplicationController < ActionController::Base
   append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
   append_before_filter :capture_utm_params,                 if: proc {|c| params[:utm_campaign].present? }
   append_before_filter :associate_user_by_utm_guest_token,  if: proc {|c| cookies[:utm_guest_token].present? }
+
+  before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
+  before_filter :set_locale
 
   def count_competition_participants
     cpt = params[:cpt]
@@ -192,10 +196,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :analytics_label, :get_user_type
 
-  before_filter :try_reveal_guest_activity
-
-  before_filter :set_locale
-
   def url_options
     version = current_site_version
 
@@ -295,8 +295,11 @@ class ApplicationController < ActionController::Base
     Spree::User.campaign_monitor_sign_up_reason(session['sign_up_reason'])
   end
 
+#  def current_spree_user
+#    @current_spree_user ||= super && Spree::User.includes(:wishlist_items).find(@current_spree_user.id)
+#  end
   def current_spree_user
-    @current_spree_user ||= super && Spree::User.includes(:wishlist_items).find(@current_spree_user.id)
+    super
   end
 
   def current_wished_product_ids
@@ -380,42 +383,25 @@ class ApplicationController < ActionController::Base
   end
 
   def current_site_version
-    @current_site_version ||= get_users_site_version
-  end
-
-  def get_users_site_version
-    sv_choosen_by_user || sv_choosen_by_cookie || sv_choosen_by_location || sv_choosen_by_param || SiteVersion.default
-  end
-
-  def sv_choosen_by_user
-    if user = try_spree_current_user
-      if user.site_version_id.present? && site_version = SiteVersion.find_by_id(user.site_version_id)
-        cookies[:site_version] = site_version.code # user site version with cookies version
-        return site_version
+    @current_site_version ||= begin
+      service = FindUsersSiteVersion.new(
+        user: current_spree_user,
+        url_param: params[:site_version],
+        cookie_param: cookies[:site_version],
+        request_ip: request.remote_ip
+      )
+      service.get().tap do |site_version|
+        cookies[:site_version]  ||= site_version.code
+        cookies[:ip_address]    ||= request.remote_ip
+        if current_spree_user && current_spree_user.site_version_id != site_version.id
+          current_spree_user.update_column(:site_version_id, site_version.id)
+        end
       end
     end
   end
 
-  def sv_choosen_by_cookie
-    if cookies[:site_version].present?
-      SiteVersion.find_by_permalink(cookies[:site_version])
-    end
-  end
-
-  def sv_choosen_by_location
-    version_permalink = fetch_user_country_code
-    site_version = SiteVersion.find_by_permalink(version_permalink)
-    if site_version.present?
-      cookies[:site_version]  = site_version.code
-      cookies[:ip_address]    = request.remote_ip
-      return site_version
-    else
-      nil
-    end
-  end
-
-  def sv_choosen_by_param
-    SiteVersion.find_by_permalink(params[:site_version]) if params[:site_version].present?
+  def current_site_version=(site_version)
+    @current_site_version = site_version
   end
 
   def request_from_bot?
@@ -424,30 +410,8 @@ class ApplicationController < ActionController::Base
     user_agent =~ /(Baidu|bot|Google|Facebook|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)/i
   end
 
-  def current_site_version=(site_version)
-    @current_site_version = site_version
-  end
-
   def current_currency
     current_site_version.try(:currency) || Spree::Config[:currency]
-  end
-
-  def fetch_user_country_code
-    begin
-      require 'geoip'
-      geoip = GeoIP.new(File.join(Rails.root, 'db', 'GeoIP.dat'))
-      remote_ip = request.remote_ip
-      country_code = 'us'
-      if remote_ip != "127.0.0.1"
-        country_code = geoip.country(request.remote_ip).try(:country_code2)
-      end
-
-      country_code.downcase
-    rescue Exception => exception
-      Rails.logger.warn(exception.message)
-
-      'us'
-    end
   end
 
   def default_locale
@@ -458,22 +422,14 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
 
+  def current_user_moodboard
+    @user_moodboard ||= UserMoodboard::BaseResource.new(user: current_spree_user).read
+  end
+  helper_method :current_user_moodboard
+
+  # todo: remove this method from global scope
   def get_recommended_products(product, options = {})
-    options[:limit] ||= 3
-    products_required = options[:limit]
-    recommended_dresses = []
-
-    #if try_spree_current_user && try_spree_current_user.style_profile.present?
-    #  recommended_dresses = Spree::Product.recommended_for(try_spree_current_user, options)
-    #end
-    #return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
-    recommended_dresses = Products::SimilarProducts.new(product).fetch(products_required).to_a
-
-    return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
-    recommended_dresses += Spree::Product.active.featured.limit(products_required).to_a
-
-    return recommended_dresses if (products_required = options[:limit] - recommended_dresses.to_a.length) <= 0
-    recommended_dresses + Spree::Product.active.limit(products_required).to_a
+    Products::RecommendedProducts.new(product: product, limit: options[:limit]).read
   rescue
     Spree::Product.active.limit(3)
   end

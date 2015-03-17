@@ -1,9 +1,11 @@
 html = '<%=j  render(template: 'users/styleprofiles/show.html') %>';
-$('#wrap > #content > .wrap').replaceWith(html)
+
+$('body > .page-title').remove();
+$('body > .page-content').replaceWith(html);
 
 window.setCurrentPath('<%= styleprofile_path %>')
 
-$('#wrap > #content > .wrap a.show-style-quiz').on("click", function(event){
+$('body > .page-content .show-style-quiz').on("click", function(event){
   event.preventDefault();
   event.stopPropagation();
   Quiz.show();

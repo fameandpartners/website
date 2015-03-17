@@ -14,6 +14,7 @@ class Users::OrdersController < Users::BaseController
   def show
     user = try_spree_current_user
     @order = user.orders.where(number: params[:id]).first
+    @user_cart = ::UserCart::UserCartResource.new(order: @order).read
 
     @title = "Order ##{ @order.number }"
 

@@ -26,6 +26,14 @@ class SiteVersion < ActiveRecord::Base
     end
   end
 
+  def title
+    code.capitalize
+  end
+
+  def abbr
+    is_australia? ? 'aus' : 'usa'
+  end
+
   def is_australia?
     code == 'au'
   end

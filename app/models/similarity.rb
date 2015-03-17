@@ -33,11 +33,4 @@ class Similarity < ActiveRecord::Base
       reverse.coefficient = coefficient
     end
   end
-
-  class << self
-    def get_similar_color_ids(color_ids, range = Similarity::Range::DEFAULT)
-      range = Similarity::Range::DEFAULT if range < 0 or range > 100
-      Similarity.where(original_id: color_ids).where('coefficient <= ?', range).pluck(:similar_id)
-    end
-  end
 end

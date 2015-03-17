@@ -1,0 +1,40 @@
+<h3 class="text-center">
+  Cart: <%= @cart.item_count %>
+</h3>
+<ul class="cart-items">
+  <% for product in @cart.products: %>
+    <li>
+      <div class="media">
+        <div class="media-left media-middle">
+          <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.small %>">
+        </div>
+        <div class="media-body media-middle">
+          <span class="qty"><%= product.quantity %>x</span><%= product.name %>
+          <div class="checkout-price">
+            <%= product.price.display_price %>
+          </div>
+        </div>
+        <a class="remove-product delete-item" href="#0" data-id="<%= product.line_item_id %>"></a>
+      </div>
+    </li>
+  <% end %>
+</ul>
+<!--cd-cart-items-->
+<form class="promo-code" action="#">
+  <label for=""> Promo Code</label>
+  <div class="input-group">
+    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit">Submit</button></span>
+  </div>
+</form>
+<p>
+  Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
+</p>
+<p>
+  Shipping<span class="pull-right"><%= @cart.display_shipment_total %></span>
+</p>
+<p>
+  Promotion<span class="pull-right"><%= @cart.display_promotion_total %></span>
+</p>
+<p>
+  <strong>Total<span class="pull-right"><%= @cart.display_total %></span></strong>
+</p>

@@ -1,0 +1,48 @@
+.login-header, .sign-up-header, .password-new-header {
+
+  h1 {
+    text-transform: uppercase;
+    font-family: forum;
+    font-size: 7rem;
+  }
+}
+
+.login-header.page-title:after, .login-header, .sign-up-header.page-title:after, .sign-up-header, .password-new-header.page-title:after, .password-new-header {
+  background-color: #eeddf0;
+}
+
+.facebook-button {
+  margin-top: 3rem;
+}
+
+.login.new, .sign-up.new, .password-new {
+
+  @media(max-width: 768px){
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .low-btn {
+    font-size: 1rem;
+    line-height: 1rem;
+    padding: 0;
+    background-color: white;
+    color: black;
+  }
+
+  label {
+    color: black;
+  }
+
+  .form-control {
+    border-color: black;
+  }
+
+  .extra-margin {
+    margin-top: 6px;
+  }
+
+  .btn {
+    font-family: "Brandon Grotesque", sans-serif;
+  }
+}

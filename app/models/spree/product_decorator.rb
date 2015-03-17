@@ -224,46 +224,9 @@ Spree::Product.class_eval do
     property('short_description') || ''
   end
 
-  def translated_short_description(locale = :"en-US")
-    #load translations
-    root = Rails.root.to_s
-
-    aus_yml = YAML.load_file("#{root}/config/locales/en_AU.yml")["en-AU"]
-    
-    usa_yml = YAML.load_file("#{root}/config/locales/en_US.yml")["en-US"]
-
-    if locale == :"en-AU" then
-      result = translate_string(string: short_description, from_hash: usa_yml, to_hash: aus_yml)
-    else
-      # its usa locale
-      result = translate_string(string: short_description, from_hash: aus_yml, to_hash: usa_yml)
-    end
-
-    return result
-  end
-
-  def translate_string(args = {})
-    whole_string = args[:string] || ''
-    words = whole_string.split(/\W+/)
-
-    words.each do |word|
-      # gets the first result of hash.find
-      w_key = args[:from_hash].find do |key, val|
-        val == word
-      end
-
-      if w_key.present?
-        # it's a two member array when it returns from find,
-        # we need the first member
-        w_key = w_key[0]
-
-        if args[:to_hash][w_key].present?
-          whole_string.gsub! word, args[:to_hash][w_key]
-        end
-      end
-    end
-
-    return whole_string
+  # properties have to be managed else where... two database requests for simple string?
+  def color_customization
+    property('color_customization').to_s == 'yes'
   end
 
   def delete
@@ -344,6 +307,23 @@ Spree::Product.class_eval do
   end
   alias_method :fast_delivery?, :fast_delivery
 
+  # TODO: implement more faster check
+  # not deleted
+  # available - check with date
+  # have prices in default currency
+  # have prices with non-null amount
+  def is_active
+    Spree::Product.is_active?(self.id)
+  end
+  alias_method :is_active?, :is_active
+
+  def self.is_active?(product_id)
+    @active_product_ids ||= begin
+      Set.new(Spree::Product.active.pluck(:id))
+    end
+    @active_product_ids.include?(product_id)
+  end
+
 #  def fast_delivery
 #    factory_name = property('factory_name').to_s.downcase.strip
 #    in_stock = property('in_stock').to_s.downcase.strip
@@ -382,6 +362,23 @@ Spree::Product.class_eval do
     end
   end
 
+  def update_zone_prices
+    self.variants_including_master.each do |variant|
+      variant.update_zone_prices(self.zone_prices_hash)
+    end
+  end
+
+  def set_default_values
+    if self.new_record?
+      self.on_demand = true
+    end
+  end
+
+  # override spree core method
+  def self.active(currency = nil)
+    not_hidden.not_deleted.available(nil, currency)
+  end 
+
 #  def build_customisations_from_values_hash
 #    customisation_values_hash.each do |type_id, value_ids|
 #      next unless type = CustomisationType.find_by_id(type_id)
@@ -411,20 +408,49 @@ Spree::Product.class_eval do
   end
 =end
 
-  def update_zone_prices
-    self.variants_including_master.each do |variant|
-      variant.update_zone_prices(self.zone_prices_hash)
+=begin
+  # translated_short_description & translate_string - don't used anywhere.
+  # also, I18n utils methods should not be in model
+  #
+  def translated_short_description(locale = :"en-US")
+    #load translations
+    root = Rails.root.to_s
+    aus_yml = YAML.load_file("#{root}/config/locales/en_AU.yml")["en-AU"]
+    usa_yml = YAML.load_file("#{root}/config/locales/en_US.yml")["en-US"]
+
+    if locale == :"en-AU" then
+      result = translate_string(string: short_description, from_hash: usa_yml, to_hash: aus_yml)
+    else
+      # its usa locale
+      result = translate_string(string: short_description, from_hash: aus_yml, to_hash: usa_yml)
     end
+
+    return result
   end
 
-  def set_default_values
-    if self.new_record?
-      self.on_demand = true
-    end
-  end
+  def translate_string(args = {})
+    whole_string = args[:string] || ''
+    words = whole_string.split(/\W+/)
 
-  # override spree core method
-  def self.active(currency = nil)
-    not_hidden.not_deleted.available(nil, currency)
-  end 
+    words.each do |word|
+      # gets the first result of hash.find
+      w_key = args[:from_hash].find do |key, val|
+        val == word
+      end
+
+      if w_key.present?
+        # it's a two member array when it returns from find,
+        # we need the first member
+        w_key = w_key[0]
+
+        if args[:to_hash][w_key].present?
+          whole_string.gsub! word, args[:to_hash][w_key]
+        end
+      end
+    end
+
+    return whole_string
+  end
+=end
+
 end

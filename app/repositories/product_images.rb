@@ -1,3 +1,6 @@
+# usage
+#   Repositories::ProductImages.new(product: product).read_all
+#   Repositories::ProductImages.new(product: product).read
 module Repositories
 class ProductImages
   attr_reader :product
@@ -7,11 +10,22 @@ class ProductImages
   end
 
   def read_all
-    Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
-      (images_from_variants + images_from_product_color_values).flatten.compact.sort_by {|image| image.position.to_i }
+    @product_images ||= begin
+      Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
+        (images_from_variants + images_from_product_color_values).flatten.compact.sort_by {|image| image.position.to_i }
+      end
     end
   end
-  alias_method :read, :read_all
+
+  # we can optimize it, if needed
+  def read(options = {})
+    result = nil
+    if options[:color_id]
+      result = read_all.detect{|image| image.color_id == options[:color_id]}
+    end
+    result || read_all.first || default_image
+  end
+  alias_method :default, :read
 
   private
 
@@ -71,6 +85,17 @@ class ProductImages
         xlarge: image.attachment.url(:xlarge),
         small: image.attachment.url(:small)
       }
+    end
+
+    def default_image(url = 'noimage/product.png')
+      OpenStruct.new({
+        id: nil,
+        position: 0,
+        original: url,
+        large: url,
+        xlarge: url,
+        small: url
+      })
     end
 end
 end

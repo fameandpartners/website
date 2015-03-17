@@ -1,3 +1,5 @@
+# obsolted. use app/services/products/products_sorter.rb instead
+#
 module Products
   class ColorVariantsSorter
     def initialize(objects)

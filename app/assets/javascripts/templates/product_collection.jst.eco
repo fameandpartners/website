@@ -1,0 +1,12 @@
+<div class="row relative">
+  <% for product in @collection.products: %>
+    <%- JST['templates/_product'](product: product) %>
+  <% end %>
+  <div class="clearfix visible-sm-block visible-xs-block"></div>
+</div>
+
+<% if @collection.total_products > @collection.products.length:  %>
+  <div class="row relative more-products">
+    <a href="#" class="btn btn-black" data-action='show-more-collection-products'>More Dresses<a>
+  </div>
+<% end %>

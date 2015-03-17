@@ -1,22 +1,94 @@
 class StaticsController < ApplicationController
   include Spree::Core::ControllerHelpers::Auth
   require 'enumerator'
-  
+
   layout 'statics'
 
   # enable showing of display banner
   before_filter :display_marketing_banner
+
+
+  def about
+    @title = "About Us - " + default_seo_title
+    @description = "We design beautiful dresses for prom and many other occasions. We are a passionate team of fashionista's based in Sydney and NYC. " + default_meta_description
+    render :layout => 'redesign/application'
+  end
+
+  def faqs
+    @title = "FAQs - " + default_seo_title
+    @description = "FAQs. " + default_meta_description
+    render :layout => 'redesign/application'
+  end
+
+  def ecom_terms
+    @title = "Terms & Conditions - " + default_seo_title
+    @description = "Terms & Conditions. " + default_meta_description
+    render :layout => 'redesign/application'
+  end
+
+  def why_us
+    @title = "Why Us - " + default_seo_title
+    @description = "Why Us. " + default_meta_description
+    render :layout => 'redesign/application'
+  end
+
+  def ecom_privacy
+    @title = "Privacy - " + default_seo_title
+    @description = "Privacy. " + default_meta_description
+    render :layout => 'redesign/application'
+  end
+
+  def fashionista_winner
+    @title = "Fashionista 2014 Winner"
+    @description = "Fashionista 2014 Winner. " + default_meta_description
+    render :layout => 'redesign/application'
+  end
+
+  def bridesmaid_lp
+    @title = "Bridesmaid Dresses | Beautiful Bridesmaid Gowns Online - Fame & Partners."
+    @description = "Discover beautiful bridesmaid dresses at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/bridesmaids', :layout => 'redesign/application'
+  end
+
+  def break_hearts_not_banks
+    @title = "Break Hearts not Banks | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/break-hearts-not-banks', :layout => 'redesign/application'
+  end
+
+  def amfam
+    @title = "AMFAM | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/amfam', :layout => 'redesign/application'
+  end
+
+  def prom
+    @title = "Prom | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/prom', :layout => 'redesign/application'
+  end
+
+  def sale
+    @title = "Sale Items | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/sale', :layout => 'redesign/application'
+  end
+
+  def facebook_lp
+    @title = "Facebook | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners. " + default_meta_description
+    render :template => 'landing_pages/facebook_lp', :layout => 'redesign/application'
+  end
+
+# =======================================================================
+# OLD PAGES
+# =======================================================================
 
   def fashionistacomp
     @title = "Fashionista 2014 Competition"
     @searcher = Products::ProductsFilter.new(:edits => "fashionista")
     @searcher.current_user = try_spree_current_user
     @searcher.current_currency = current_currency
-  end
-
-  def fashionista_winner
-    @title = "Fashionista 2014 Winner"
-    @description = "Fashionista 2014 Winner. " + default_meta_description
   end
 
   def landingpage_plus_size
@@ -34,24 +106,9 @@ class StaticsController < ApplicationController
     @title = "About Fame & Partners"
   end
 
-  def about
-    @title = "About Us - " + default_seo_title
-    @description = "We design beautiful dresses for prom and many other occasions. We are a passionate team of fashionista's based in Sydney and NYC. " + default_meta_description
-  end
-
   def team
     @title = "Our Team - " + default_seo_title
     @description = "Our great team. " + default_meta_description
-  end
-
-  def ecom_terms
-    @title = "Terms & Conditions - " + default_seo_title
-    @description = "Terms & Conditions. " + default_meta_description
-  end
-
-  def ecom_privacy
-    @title = "Privacy - " + default_seo_title
-    @description = "Privacy. " + default_meta_description
   end
 
   def legal
@@ -59,19 +116,9 @@ class StaticsController < ApplicationController
     @description = "Legal. " + default_meta_description
   end
 
-  def faqs
-    @title = "FAQs - " + default_seo_title
-    @description = "FAQs. " + default_meta_description
-  end
-
   def how_it_works
     @title = "How it Works - " + default_seo_title
     @description = "How it works. " + default_meta_description
-  end
-  
-  def nyemix
-    @title = "MUSIC MIX / I LIKE MY MUSIC LOUD - " + default_seo_title
-    @description = "Music Mix - Do the songs match the dress? Get a discount off dresses. " + default_meta_description
   end
 
   def renxfame
@@ -114,11 +161,6 @@ class StaticsController < ApplicationController
   def nye
     @title = "New Years Eve Dresses - " + default_seo_title
     @description = "Perfect NYE Dresses 2014. " + default_meta_description
-  end
-  
-  def bridesmaid_lp
-    @title = "Bridesmaid Dresses | Beautiful Bridesmaid Gowns Online - Fame & Partners."
-    @description = "Discover beautiful bridesmaid dresses at Fame & Partners. " + default_meta_description
   end
 
   def us_prom_2015_lp
@@ -167,5 +209,5 @@ class StaticsController < ApplicationController
   end
 
   helper_method :get_products_from_edit
-  
+
 end

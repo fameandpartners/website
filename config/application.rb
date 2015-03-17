@@ -89,8 +89,12 @@ module FameAndPartners
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
 
+    # redesign
+    config.assets.paths << Rails.root.join("styleguide")
+    config.assets.paths << Rails.root.join("styleguide", "images")
+
     redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-    if Rails.env.production?
+    if Rails.env.production? || Rails.env.preproduction?
       redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
     else
       redis_host = 'localhost:6379'

@@ -26,37 +26,52 @@ FameAndPartners::Application.routes.draw do
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-    get '/nyemix'     => 'statics#nyemix'
     get '/nylonxfame' => 'statics#nylonxfame'
     get '/renxfame'   => 'statics#renxfame'
     get '/lilyxfame'  => 'statics#lilyxfame'
     get '/maryxfame'  => 'statics#maryxfame'
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirl2015-terms-and-conditions'  => 'statics#fashion_it_girl_terms_and_conditions'
-    get '/nyfw-comp-terms-and-conditions'  => 'statics#nyfw_comp_terms_and_conditions'    
+    get '/nyfw-comp-terms-and-conditions'  => 'statics#nyfw_comp_terms_and_conditions'
     get '/fashionitgirl2015-competition'  => 'statics#fashion_it_girl_competition'
     get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
     get '/girlfriend' => 'statics#girlfriendxfame'
     get '/new-years-eve-dresses' => 'statics#nye', :as => :nye
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
-    get '/feb_2015_lp' => 'statics#feb_2015_lp', :as => :feb_2015_lp
+    get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
+    get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
+    get '/sale-dresses' => 'statics#sale', :as => :sale
     get '/amfam-dresses' => 'statics#amfam_lp', :as => :amfam_lp
     get '/christmas-gift' => 'statics#christmas_gift', :as => :christmas_gift
     get '/fame2015' => 'statics#fame2015', :as => :fame2015
+    get '/break-hearts-not-banks' => 'statics#break_hearts_not_banks', :as => :break_hearts_not_banks
+    get '/amfam' => 'statics#amfam', :as => :amfam
+    get '/prom' => 'statics#prom', :as => :prom
 
     post '/shared/facebook' => 'competition/events#share'
 
     # SEO categories routes, we want them in front
 
     scope '/dresses', module: 'personalization' do
-      get '/custom-:product_slug', to: 'products#show'
-      get '/styleit-:product_slug', to: 'products#style'
+      get '/custom-:product_slug', to: 'products/details#show'
+      get '/styleit-:product_slug', to: 'products/details#style'
+      #get '/custom-:product_slug', to: 'products#show'
+      #get '/styleit-:product_slug', to: 'products#style'
     end
 
+    scope '/user_cart', module: 'user_cart' do
+      root to: 'details#show', as: :user_cart_details
+
+      get '/details'      => 'details#show'
+      post '/promotion'   => 'promotions#create'
+
+      resources :products, only: [:create, :edit, :update, :destroy]
+    end
 
     scope '/dresses' do
-      root to: 'spree/products#index', as: 'dresses'
-      get '/dress-:product_slug(/:color_name)' => 'spree/products#show'
+      root to: 'products/collections#show', as: :dresses
+
+      get '/dress-:product_slug(/:color_name)' => 'products/details#show'
       #roots categories
       get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
       get '/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
@@ -68,9 +83,9 @@ FameAndPartners::Application.routes.draw do
       # get '/color/:colour' => 'spree/products#index'
       # get '/body-shape/:bodyshape' => 'spree/products#index'
 
-      get '/sale-(:sale)' => 'spree/products#index', as: "dresses_on_sale"
       get '/:event/:style' => 'spree/products#index'
-      get '/*permalink' => 'spree/products#index', as: 'taxon'
+      get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
+      get '/*permalink' => 'products/collections#show', as: 'taxon'
       get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
@@ -94,9 +109,9 @@ FameAndPartners::Application.routes.draw do
     get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
     get '/featured-bloggers/:id' => 'celebrities#show', as: 'featured_blogger'
 
-    resources :line_items, only: [:create, :edit, :update, :destroy] do
-      post 'move_to_wishlist', on: :member
-    end
+    #resources :line_items, only: [:create, :edit, :update, :destroy] do
+    #  post 'move_to_wishlist', on: :member
+    #end
 
     resource :product_variants, only: [:show]
 
@@ -111,7 +126,7 @@ FameAndPartners::Application.routes.draw do
     get '/quick_view/:id' => 'spree/products#quick_view'
     post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
 
-    post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
+    #post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
 
     get 'my-boutique' => 'boutique#show', :as => :my_boutique
     get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
@@ -169,7 +184,7 @@ FameAndPartners::Application.routes.draw do
     get '/bloggers/liz-black' => 'statics#blogger', as: :featured_blogger
     get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
     get '/dani-stahl' => 'statics#danistahl', as: :danistahl
-    
+
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
@@ -209,7 +224,7 @@ FameAndPartners::Application.routes.draw do
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
     get '/workshops', to: redirect('http://www.fameandpartners.com/%{site_version}/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
-    
+
     # Fallen Product URL
     get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
     get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
@@ -218,7 +233,7 @@ FameAndPartners::Application.routes.draw do
     get '/fb_auth' => 'pages#fb_auth'
 
     root :to => 'index#show'
-  
+
     resource :quiz, :only => [:show] do
       resources :questions, :only => [:index]
       resources :answers, :only => [:create]
@@ -230,10 +245,10 @@ FameAndPartners::Application.routes.draw do
       get '/recomendations' => 'user_style_profiles#recomendations'
     end
 
-    # Redirects for old pages as part of SEO 
+    # Redirects for old pages as part of SEO
     match '/competition/' => redirect('/')
     match '/competition/*all' => redirect('/')
-  
+
     match "/gregg-sulkin" => redirect('/')
 
     match '/trendsetter-program' => redirect('/')
@@ -245,7 +260,7 @@ FameAndPartners::Application.routes.draw do
 
     match '/blog/au/site_versions/au' => redirect('/blog')
     match '/blog/au/site_versions/us' => redirect('/blog')
-  
+
 
     mount Spree::Core::Engine, at: '/'
   end
@@ -292,7 +307,7 @@ FameAndPartners::Application.routes.draw do
       put 'sales/reset_cache' => 'sales#reset_cache'
       resources :sales, :except => [:show]
 
-      # stock invent settings 
+      # stock invent settings
       get 'stock_invent'                => 'stock_invent#edit',          as: :stock_invent
       put 'stock_invent'                => 'stock_invent#update'
       get 'stock_invent/status'         => 'stock_invent#status',        as: :stock_invent_status
@@ -403,7 +418,7 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
-    get 'search' => 'pages#search'
+    get 'search' => 'products/search_results#show'
 
     # Guest checkout routes
     resources :payment_requests, only: [:new, :create]
@@ -427,7 +442,7 @@ FameAndPartners::Application.routes.draw do
     #get "lp/(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses, defaults: { lp: true }
     get "new-collection" => 'spree/products#index', as: :new_collection
 
-    get '/next-day-delivery' => 'spree/products#index', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
+    get '/next-day-delivery' => 'products/collections#show', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
 
     scope '/bridesmaid-party', module: 'bridesmaid' do
       root to: 'landings#bride', as: :bridesmaid_party

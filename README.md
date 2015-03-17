@@ -21,18 +21,17 @@ If you are using homebrew and it's default settings, the supplied Procfile may w
 
 `$ foreman start`
 
-
 ### Database
 
-It is generally easiest to have working development application with loading database dump from production/preprod site, and restoring them locally. 
+It is generally easiest to have working development application with loading database dump from production/preprod site, and restoring them locally.
 * download latest dump from production ( through web interface from engine yard )
 * clean database with `$bundle exec rake db:schema:load`
-* restore data 
+* restore data
   `pg_restore -d database_name --data-only --clean ./dump_file.dump`
 
 after it, remove valuable data & update settings
 * delete users `Spree::User.delete_all`
-* delete orders `Spree::Order.delete_all` 
+* delete orders `Spree::Order.delete_all`
 * update shipping settings
 * create user, and assign him admin rights `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
 * update payment method settings with test env
@@ -53,6 +52,9 @@ after it, remove valuable data & update settings
   end
   Tire.index(:spree_products).refresh
 
+### Locating the Index Page
+The index landing page can be found in the views/index/show.html
+
 ## Manage colours pages
 1) update "lib/tasks/populate/colors_groups.rake" file
 2) deploy to production
@@ -69,6 +71,8 @@ Spree::OptionValuesGroup.where(option_type_id: type.id).destroy_all
 * $ `cd /data/fame_and_partners/current`
 * $ `bundle exec rake feed:export:all`
 
+### Getting started
+
 
 #### Populating db with test data
 Note: This commands can be run manullay or throught `bin/prepare_app`
@@ -81,17 +85,41 @@ Note: This commands can be run manullay or throught `bin/prepare_app`
 
 ## Deploy
 
-### Deploy to staging
+Make sure your engine yard credentials are working
 
-Note: we are using CircleCi for master branch, manual deplyment usually not needed.
+`$ gem install engineyard`
 
-* $ `cap staging deploy`
 
 ### Deploy to production
 
-* `$ gem install engineyard`
-* merge master branch to production branch
+Merge master to production and push
+
+* `$ git checkout production`
+* `$ git merge master`
+* `$ git git push`
+* `$ ey deploy -e production_new --no-migrate`
+
+To deploy with migrations (will turn maintenance mode on meaning site is down)
 * `$ ey deploy -e production_new`
+
+
+### Deploy to preproduction
+
+Deploy any working branch to preprod
+
+* `$ git checkout {branch}`
+* `$ ey deploy -e preprod  --no-migrate`
+
+To deploy with migrations (will turn maintenance mode on meaning site is down)
+* `$ ey deploy -e preprod `
+
+
+## Useful Pages
+
+Home - IndexController#show
+Category/Collection - Products::CollectionsController#show
+Product - Products::DetailsController#show
+
 
 ### Thanks for using FameAndPartners!
 

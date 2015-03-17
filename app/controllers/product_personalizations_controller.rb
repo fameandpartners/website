@@ -1,3 +1,5 @@
+=begin
+# note: last create product personalization dated by 2013 
 class ProductPersonalizationsController < ApplicationController
   respond_to :js
 
@@ -23,3 +25,4 @@ class ProductPersonalizationsController < ApplicationController
     end
   end
 end
+=end

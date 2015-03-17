@@ -10,7 +10,8 @@ $(function(){
 
   window.initHoverableProductImages();
 
-  $("abbr.timeago").timeago();
+  // have disabled this plugin - we don't have abbr.timeago on pages
+  //$("abbr.timeago").timeago();
 });
 /*
 $('body.blog').ready(function(){

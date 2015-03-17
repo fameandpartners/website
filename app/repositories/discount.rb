@@ -1,9 +1,20 @@
 # Usage:
 #   @discount ||= Repositories::Discount.read(self.class, self.id)
 #   @discounts ||= Repositories::Discount.read_all(self.class, [])
+#
+# shortcuts
+#   @discount ||= Repositories::Discount.get_product_discount(product.id)
 
 module Repositories; end
 class Repositories::Discount
+  # available discountable_type
+  #   Spree::Product
+  #   ..
+
+  def self.get_product_discount(product_id)
+    read("Spree::Product", product_id)
+  end
+
   def self.read(discountable_class, discountable_id)
     read_all(discountable_class, discountable_id).first
   end

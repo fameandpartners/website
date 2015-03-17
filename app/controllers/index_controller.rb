@@ -1,3 +1,15 @@
+class IndexController < ApplicationController
+  layout 'redesign/application'
+
+  #include ApplicationHelper
+  #include PathBuildersHelper
+  #include ProductsHelper
+
+  def show
+    @big_banner = Spree::BannerBox.big_banner
+  end
+end
+=begin
 class IndexController < Spree::StoreController
   layout 'spree/layouts/spree_application'
   helper :all
@@ -31,3 +43,4 @@ class IndexController < Spree::StoreController
 
   helper_method :featured_products
 end
+=end

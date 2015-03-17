@@ -68,3 +68,19 @@ window.buildDelayedRedirectToPage = () ->
     _.delay ( ->
       window.location.href = urlWithSitePrefix(path)
     ), 1000
+
+window.redirectToLoginAndBack = () ->
+  data = { return_to: window.location.href }
+  window.location.href = urlWithSitePrefix("/spree_user/sign_in?#{ $.param(data) }")
+
+# extends underscore
+# function to remove empty properties from object
+# usage: _.compactObject({})
+_.mixin(compactObject: (o) ->
+  clone = _.clone(o)
+  _.each clone, (v, k) ->
+    if !v
+      delete clone[k]
+    return
+  clone
+)

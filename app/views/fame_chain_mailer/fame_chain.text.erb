@@ -5,14 +5,14 @@ user email address: <%= @fame_chain.email %>
 
 
 ::URLS::
-<% %w[blog pinterest facebook twitter].each do |url_type| %>
+<% %w[blog pinterest facebook instagram].each do |url_type| %>
   <%= url_type.humanize %>: <%= @fame_chain.send(url_type) %>
 <% end %>
 
+
+Other Info: <%= @fame_chain.other %>
+
 ::STATS::
-  blog visitors p/month: <%= @fame_chain.blog_size %>
   pinterest followers: <%= @fame_chain.pinterest_size %>
-  twitter followers: <%= @fame_chain.twitter_size %>
-
-
-
+  facebook followers: <%= @fame_chain.facebook_size %>
+  instagram followers: <%= @fame_chain.instagram_size %>
