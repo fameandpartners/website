@@ -81,6 +81,7 @@ page.initProductDetailsPage = (options = {}) ->
         variant_id: (selected.variant || {})['id'],
         product_id: selected.product_id
       }
+
       app.user_moodboard.addItem(wishlist_item_data)
     )
 
@@ -99,16 +100,26 @@ page.initProductDetailsPage = (options = {}) ->
   if options.moodboard_links
     addProductToMoodboardHandler = (e) ->
       e.preventDefault()
+      return if $(e.currentTarget).data('loading')
+      $(e.currentTarget).data('loading', true)
+
+      product_id = $(e.currentTarget).closest('div[data-id]').data('id')
 
       if !app.user_signed_in
         window.redirectToLoginAndBack()
         return
 
-      product_id = $(e.currentTarget).closest('div[data-id]').data('id')
+      if app.user_moodboard.contains({product_id: product_id })
+        url = urlWithSitePrefix('/wishlist')
+        window.history.pushState({ path: url }, '', url)
+        widnow.location.href = url
+        return
+
       app.user_moodboard.addItem({ product_id: product_id })
 
     refreshButtonsState = (e) ->
       $(options.moodboard_links.container).find(options.moodboard_links.buttons).each((index, item) ->
+        $(item).data('loading', false)
         product_id = $(item).closest('div[data-id]').data('id')
         if app.user_moodboard.contains({ product_id: product_id })
           $(item).addClass('fa-heart').removeClass('fa-heart-o')
