@@ -10,10 +10,13 @@
 * Postgres
 * ElasticSearch
 * Redis
+* `imagemagick`
 * [foreman](https://github.com/ddollar/foreman) - Development
 
+#### Quick installation
+
 ```shell
-$ brew install redis elasticsearch
+$ brew install redis elasticsearch imagemagick postgresql
 ```
 
 ### Getting started
