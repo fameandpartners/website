@@ -74,6 +74,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     )
 
   # apply code
+  # note - error messages placed here, if something changed - move this upper in logic
   applyPromotionCode: (code) ->
     $.ajax(
       url: urlWithSitePrefix("/user_cart/promotion"),
@@ -84,15 +85,15 @@ window.helpers.ShoppingCart = class ShoppingCart
       if data.error
         @trigger('error', data)
         @trigger('complete', data)
+        window.helpers.showAlert(type: 'error', title: data.error)
       else
         @updateData(data)
         @trigger('success', data)
         @trigger('complete', data)
+        window.helpers.showAlert( type: 'success', title: 'The coupon code was successfully applied to your order.')
     ).error( () =>
       @trigger('error')
     )
-
-
 
 #_base = undefined
 #window.shopping_cart = {}

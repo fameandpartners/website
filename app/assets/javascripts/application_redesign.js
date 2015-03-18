@@ -65,9 +65,7 @@
 //= require partials/product_collection_moodboard_links
 //= require partials/product_collection_image_hover
 //= require partials/shopping_bag
-//= require templates/shopping_bag
 //= require partials/shopping_cart_summary
-//= require templates/shopping_cart_summary
 
 //= require partials/checkout_page
 
