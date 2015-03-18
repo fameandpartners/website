@@ -1,21 +1,6 @@
-- content_for :head do
-  meta name="robots" content="noindex, nofollow"
+= render :partial => 'landing_pages/common'
 
-ruby:
-  cache_keys = ['bridesmaid_lp']
-  if spree_user_signed_in?
-    cache_keys << 'authenticated'
-  else
-    cache_keys << 'not-authenticated'
-  end
-  cache_keys << 'products'
-
-  if show_prices_with_applied_promocode? && current_promotion.present?
-    cache_keys.push(current_promotion.code)
-  end
-
-
-.index.bridesmaids
+.page-content.index.bridesmaids
   .container.relative
     .row.relative
   #theTarget style=("height: 720px;")
