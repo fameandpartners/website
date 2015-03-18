@@ -54,15 +54,19 @@ module BatchUpload
     end
 
     def get_list_of_files(location)
-      Dir.glob(File.join(location, '*')).select do |path|
+      paths_for(location).select do |path|
         File.file?(path)
       end
     end
 
     def get_list_of_directories(location)
-      Dir.glob(File.join(location, '*')).select do |path|
+      paths_for(location).select do |path|
         File.directory?(path)
       end
+    end
+
+    def paths_for(location)
+      Dir.glob(File.join(location, '*'))
     end
   end
 end
