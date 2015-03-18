@@ -53,7 +53,7 @@ after it, remove valuable data & update settings
 * if needed, update config/initializers/paperclip.rb && config/initializers/spree.rb configuration to use images from production. don't delete images locally it that case
 * refresh all local elastic search indexes
 
-### Update indexes
+#### Update indexes
 
 ```ruby
 Utility::Reindexer.reindex
