@@ -27,6 +27,11 @@
 // ------------------
 
 // Buttons
+// - reset default buttons styles
+.btn-reset {
+  border: 0;
+  background: none;
+}
 // - text
 .btn-text {
   cursor: default;
