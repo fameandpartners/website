@@ -11,6 +11,7 @@
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
 //= require libs/jquery.chosen.min
+//= require libs/soundcloud/sc-player
 
 // styleguide code
 //= require js/snap.svg-min.js

@@ -1,3 +1,6 @@
+css:
+  .sc-player { display: none; }
+
 ruby:
   product_paths = { default: collection_product_path(@product) }
   @product.default_color_options.each do |color|
@@ -42,8 +45,19 @@ ruby:
       });
   "
 
+  init_song_player = "
+    (function(){
+      $('a[data-action=soundcloud]').on('click', function(e){
+        e.preventDefault();
+        var player = $(e.currentTarget).closest('.box.song').find('.sc-player');
+        player.find('.sc-controls a.sc-pause').click();
+      });
+    })();
+  "
+
 = content_for :inline_javascript do
   = raw init_product_details_page
+  = raw init_song_player
 
 #slides
   .slides-container
@@ -123,12 +137,12 @@ ruby:
         .row
           .box.song.col-sm-4.no-padding.pink
             - if @product.song
-              / = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
+              = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
               = link_to '#', data: { action: 'soundcloud' } do
                 = image_tag @product.song.image_url
                 = image_tag '_audio-icon.png', class: 'icon'
               span.mask
-              .hidden
+              .popup
                 = link_to '#', data: { action: 'soundcloud' } do
                   span.icon-play.fa.fa-play
                   span.icon-pause.fa.fa-play
