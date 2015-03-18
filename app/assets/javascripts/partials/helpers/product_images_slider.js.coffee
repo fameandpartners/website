@@ -18,8 +18,6 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     @all_images = @$container.find('.slides-container').find('img').remove()
     @images_color_id = parseInt(@options.preselected) if @options.preselected
     @options.preselected = null
-    # @options.play = false
-
     @updateSlider()
 
     lazy_slider_update = _.debounce(@updateSlider, 300)
@@ -34,16 +32,10 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     @updateSlider()
 
   updateSlider: () =>
-
-    console.log("Slider is updated")
-
-
     selected_images = _.filter(@all_images, (image) ->
       $(image).data('color-id') == @images_color_id
     , @)
     selected_images = @all_images if selected_images.length == 0
-    #note - this row don't work, so we use remove/html/paste instead
-    # @$container.find('.slides-container').html(selected_images)
     @$container.superslides('destroy')
     wrapper = @$container.find('.slides-container').remove()
     wrapper.html(selected_images)

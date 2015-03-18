@@ -6,28 +6,6 @@ z.list-group-item.customization-option  {
 	}
 }
 
-// #slides {
-// 	position: relative;
-// 	z-index: 1;
-
-// 	.slides-container {
-// 		display: block;
-// 	}
-// }
-
-// #slides {
-//   overflow: visible;
-// }
-
-// .slides-container {
-//   overflow: visible;
-
-//   div {
-//     overflow: visible;
-//     left: 50%;
-//   }
-// }
-
 .product-content {
 	position: absolute;
 	z-index: 50;
@@ -297,7 +275,6 @@ z.list-group-item.customization-option  {
 #product-size-content {
 
   .size-box {
-    // border:1px solid #F6F6F6;
 		border:1px dashed #CCCCCC;
     text-align:center;
     padding:5px;
