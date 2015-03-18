@@ -49,7 +49,8 @@ ruby:
     (function(){
       $('a[data-action=soundcloud]').on('click', function(e){
         e.preventDefault();
-        var player = $(e.currentTarget).closest('.box.song').find('.sc-player');
+        var playerBox = $(e.currentTarget).closest('.box.song').toggleClass('song-playing');
+        var player = playerBox.find('.sc-player');
         player.find('.sc-controls a.sc-pause').click();
       });
     })();
@@ -140,12 +141,13 @@ ruby:
               = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
               = link_to '#', data: { action: 'soundcloud' } do
                 = image_tag @product.song.image_url
-                = image_tag '_audio-icon.png', class: 'icon'
+                .fa.fa-volume-up
+                / = image_tag '_audio-icon.png', class: 'icon'
               span.mask
-              .popup
+              .player-controls
                 = link_to '#', data: { action: 'soundcloud' } do
-                  span.icon-play.fa.fa-play
-                  span.icon-pause.fa.fa-play
+                  span.fa.fa-play
+                  span.fa.fa-pause
 
           - first_row.each do |item|
             .box.col-sm-4.no-padding.cream

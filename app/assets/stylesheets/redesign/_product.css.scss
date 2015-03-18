@@ -178,11 +178,40 @@ z.list-group-item.customization-option  {
 		.box {
 			width:190px;
 			height:243px;
+      position: relative;
+
+      &:hover .player-controls { opacity: 1;}
+      &.song-playing {
+        .fa-pause { display: inline-block;}
+        .fa-play { display: none;}
+      }
 
 			img {
 				max-width:190px;
 				max-height:243px;
 			}
+
+      .player-controls {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        opacity: 0;
+        transition: 0.2s;
+        padding: 10px;
+        a { color: #000;}
+      }
+
+      // Icons
+      .fa-volume-up {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        font-size: 24px;
+        color: #fff;
+      }
+      .fa-pause { display: none;}
 		}
 	}
 }
