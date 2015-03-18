@@ -70,18 +70,25 @@ module BatchUpload
               viewable.images.where('attachment_updated_at < ?', @_expiration.ago).destroy_all
             end
 
-            info "Create image"
-            puts "    ATTACHMENT:    #{file_path}"
-            puts "    VIEWABLE_TYPE: #{viewable.class.name}"
-            puts "    VIEWABLE_ID:   #{viewable.id}"
-            puts "    POSITION:      #{position}"
-
-            image = Spree::Image.create(
-              :attachment    => File.open(file_path),
-              :viewable_type => viewable.class.name,
-              :viewable_id   => viewable.id,
-              :position      => position
-            )
+            if ENV['USE_SPREE_IMAGE_CLASS']
+              image = Spree::Image.create(
+                  :attachment    => File.open(file_path),
+                  :viewable_type => viewable.class.name,
+                  :viewable_id   => viewable.id,
+                  :position      => position
+              )
+            else
+                geometry = geometry(file_path)
+                image = FastImage.create(
+                    :attachment        => File.open(file_path),
+                    :attachment_width  => geometry.width,
+                    :attachment_height => geometry.height,
+                    :viewable_type     => viewable.class.name,
+                    :viewable_id       => viewable.id,
+                    :position          => position,
+                    :type              => 'Spree::Image'
+                )
+            end
 
             if image.persisted?
               info "Image: id: #{image.id}"
@@ -97,6 +104,10 @@ module BatchUpload
           end
         end
       end
+    end
+
+    def geometry(file_path)
+      Paperclip::Geometry.from_file(file_path)
     end
 
     def color_for_name(color_name)
