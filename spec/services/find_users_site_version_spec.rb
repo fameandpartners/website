@@ -32,6 +32,8 @@ describe FindUsersSiteVersion do
 
     it "returns default site version" do
       sv = create(:site_version, default: true)
+      allow(SiteVersion).to receive(:default).and_return(sv)
+
       service = FindUsersSiteVersion.new({})
       allow(service).to receive(:sv_choosen_by_location).and_return(nil)
 

@@ -20,20 +20,21 @@ describe Features do
   let(:kv_store) { KV.new }
 
   before do
-    allow(Features).to receive(:kv_store).and_return(kv_store)
+    #allow(Features).to receive(:kv_store).and_return(kv_store)
+    allow(Features).to receive(:rollout).and_return(Rollout.new(kv_store))
   end
 
   describe 'activation' do
     it 'activates' do
       Features.activate(:blah)
-      expect(Features.active?(:blah)).to be
+      expect(Features.active?(:blah)).to be true
     end
     it 'deactivates' do
       Features.activate(:blah)
-      expect(Features.active?(:blah)).to be
+      expect(Features.active?(:blah)).to be true
 
       Features.deactivate(:blah)
-      expect(Features.active?(:blah)).to be_false
+      expect(Features.active?(:blah)).to be false
     end
   end
 end
