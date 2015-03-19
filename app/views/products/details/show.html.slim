@@ -210,6 +210,7 @@ hr
 
 #product-overlay
 
+/! PRODUCT SIZES PANEL
 #product-size-content.product-side-panel
   .row
     .col-md-12.recommended
@@ -219,7 +220,6 @@ hr
           .col-md-3.col-xs-3.col-xxs-6
             a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
               span.option-box.size-box= size.presentation.gsub(/\D/, '')
-
 
   - if @product.custom_sizes?
     .row
@@ -235,6 +235,11 @@ hr
   .row
     .col-md-12.text-center
       p.size-region=  t('views.pages.products.show.size_region')
+
+  .row
+    .col-md-4
+      button.btn-fit-guide.btn.btn-block.btn-secondary Fit Guide
+
 
 #product-color-content.product-side-panel
   .row
