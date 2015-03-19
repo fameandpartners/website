@@ -6,15 +6,11 @@ module BatchUpload
       each_product do |product, path|
         get_list_of_files(path).each do |file_path|
           begin
-            puts ""
-            puts ""
             file_name = file_path.rpartition('/').last.strip
 
-            puts "  [INFO] Process \"#{file_name}\" file"
-            puts "  [INFO] Parse file name"
+            info "File: \"#{file_name}\""
 
             parts = file_name.split(/[\-\.]/)
-            puts parts
             sku_idx = 0
             color_idx = 1
             position_idx = 2
@@ -40,27 +36,17 @@ module BatchUpload
             end
 
             if parts.empty?
-              puts "  [ERROR] File name is invalid"
+              error "File name is invalid"
               next
-            else
-              puts "  [INFO] File name successfully parsed"
-              puts "    POSITION: #{position}"
-              puts "    COLOR:    #{color_name}"
-              puts "  [INFO] Process parsed data"
-              puts "    POSITION: #{position}"
             end
 
             if color_name.present?
-              puts "  [INFO] Search color by name"
-              color = Spree::OptionValue.colors.where('LOWER(name) = ?', color_name).first
+              debug "Search color by name"
+              color = color_for_name(color_name)
 
               if color.blank?
-                puts "  [ERROR] Color not found"
+                error "Color not found"
                 next
-              else
-                puts "  [INFO] Color successfully found"
-                puts "    ID:           #{color.id}"
-                puts "    PRESENTATION: #{color.presentation}"
               end
             end
 
@@ -74,41 +60,58 @@ module BatchUpload
 
             if @_strategy.eql?(:delete)
               if viewable.is_a?(ProductColorValue)
-                puts "  [INFO] Process existing images for color"
+                debug "Process existing images for color"
               elsif viewable.is_a?(Spree::Variant)
-                puts "  [INFO] Process existing images for product"
+                debug "Process existing images for product"
               end
 
-              puts "  [INFO] Delete images which was created more then #{@_expiration / 3600} hours ago"
+              info "Delete images which was created more then #{@_expiration / 3600} hours ago"
 
               viewable.images.where('attachment_updated_at < ?', @_expiration.ago).destroy_all
             end
 
-            puts "  [INFO] Create image"
-            puts "    ATTACHMENT:    #{file_path}"
-            puts "    VIEWABLE_TYPE: #{viewable.class.name}"
-            puts "    VIEWABLE_ID:   #{viewable.id}"
-            puts "    POSITION:      #{position}"
-
-            image = Spree::Image.create(
-              :attachment    => File.open(file_path),
-              :viewable_type => viewable.class.name,
-              :viewable_id   => viewable.id,
-              :position      => position
-            )
-
-            if image.persisted?
-              puts "  [INFO] Image successfully created"
+            if ENV['USE_SPREE_IMAGE_CLASS']
+              image = Spree::Image.create(
+                  :attachment    => File.open(file_path),
+                  :viewable_type => viewable.class.name,
+                  :viewable_id   => viewable.id,
+                  :position      => position
+              )
             else
-              puts "  [ERROR] Image can not created"
-              puts "    MESSAGES: #{image.errors.full_messages.map(&:downcase).to_sentence}"
+                geometry = geometry(file_path)
+                image = FastImage.create(
+                    :attachment        => File.open(file_path),
+                    :attachment_width  => geometry.width,
+                    :attachment_height => geometry.height,
+                    :viewable_type     => viewable.class.name,
+                    :viewable_id       => viewable.id,
+                    :position          => position,
+                    :type              => 'Spree::Image'
+                )
             end
 
-          rescue Exception => message
-            puts "  [ERROR] #{message.inspect}"
+            if image.persisted?
+              info "Image: id: #{image.id}"
+            else
+              error "Image can not created #{image.errors.full_messages.map(&:downcase).to_sentence}"
+            end
+
+          rescue Interrupt
+            error "Operation aborted by user..."
+            abort("SIGINT")
+          rescue StandardError => message
+            error "#{message.inspect}"
           end
         end
       end
+    end
+
+    def geometry(file_path)
+      Paperclip::Geometry.from_file(file_path)
+    end
+
+    def color_for_name(color_name)
+      Spree::OptionValue.colors.where('LOWER(name) = ?', color_name).first
     end
   end
 end
