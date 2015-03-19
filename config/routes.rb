@@ -229,8 +229,8 @@ FameAndPartners::Application.routes.draw do
     get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
     get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
 
-    # MonkeyPatch for redirecting to Custom Dress page
-    get '/fb_auth' => 'pages#fb_auth'
+    # MonkeyPatch for store params & redirect to custom page
+    get '/fb_auth' => 'omniauth_facebook_authorizations#process'
 
     root :to => 'index#show'
 
