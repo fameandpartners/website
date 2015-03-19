@@ -3,18 +3,13 @@
     .row.relative
   #theTarget style=("height: 720px;")
 
-    /= link_to @big_banner.first.url, title: @big_banner.first.title do
-    / = image_tag @big_banner.first.attachment(:big)
-
-    / div style=("background-image: url('#{@big_banner.first.attachment(:big)}')")
-
-    / div.taste-of-fame
-    /   .slider-image-caption.height-100
-    /     .container.height-100
-    /       .promotion
-    /         h2.caption-title have a taste of fame.
-    /         p dresses made and styled for you by fame &amp; partners
-    /         button.btn.taste-of-fame-btn type="button"  shop now
+    div.taste-of-fame
+      .slider-image-caption.height-100
+        .container.height-100
+          .promotion
+            h2.caption-title have a taste of fame.
+            p dresses made and styled for you by fame &amp; partners
+            button.btn.taste-of-fame-btn type="button"  shop now
 
     div.prom
       .slider-image-caption.height-100
@@ -24,11 +19,11 @@
             p Dresses that</br>keep it real.
             button.btn.prom-btn type="button"  shop now
 
-    / div.break-hearts
-    /   .slider-image-caption.height-100
-    /     .container.height-100
-    /       .promotion.col-sm-12
-    /          h2.caption-title Break hearts. not bank account$
+    div.break-hearts
+      .slider-image-caption.height-100
+        .container.height-100
+          .promotion.col-sm-12
+             h2.caption-title Break hearts. not bank account$
 
 /! Call to Actions
 .call-to-actions.hide
