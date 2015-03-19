@@ -168,12 +168,13 @@ ruby:
           | This item will ship within 4 weeks
       div=raw @product.description
 
-      - if @product.fabric
-        h4 Fabric
-        p= raw @product.fabric.gsub('\n', '<br/><br/>')
-
       - if @product.style_notes
+        h4 Style it with
         p= raw @product.style_notes
+
+      - if @product.fabric
+        h4 What's it made of
+        p= raw @product.fabric.gsub("\n", '<br/>')
 
       p.sku sku: #{@product.sku}
 

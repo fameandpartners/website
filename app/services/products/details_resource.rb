@@ -105,7 +105,7 @@ class Products::DetailsResource
       I18n.t('product_has_no_description')
     end
 
-    def product_fabric
+    def product_fabric      
       product_properties['fabric']
     end
 
