@@ -23,6 +23,9 @@ FameAndPartners::Application.routes.draw do
       get '/spree_user/thanks' => 'spree/user_registrations#thanks'
       get '/account_settings' => 'spree/user_registrations#edit'
     end
+
+    # MonkeyPatch for store params & redirect to custom page
+    get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
@@ -228,9 +231,6 @@ FameAndPartners::Application.routes.draw do
     # Fallen Product URL
     get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
     get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
-
-    # MonkeyPatch for store params & redirect to custom page
-    get '/fb_auth' => 'omniauth_facebook_authorizations#process'
 
     root :to => 'index#show'
 

@@ -1,9 +1,9 @@
-class OmniauthFacebookAuthorizationsController < Spree::StoreController
+class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
   #layout 'spree/layouts/spree_application'
   respond_to :html
 
   # store params in session and redirects through omniauth_callbacks#through
-  def process
+  def fb_auth
     if params[:prom]
       session[:spree_user_return_to] = main_app.step1_custom_dresses_path
     elsif params[:quiz]
