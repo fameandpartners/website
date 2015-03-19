@@ -102,7 +102,7 @@
 		h1, p {
 			color:#FFFFFF;
 		}
-		
+
 	}
 }
 
@@ -151,6 +151,10 @@ li.select2-results__option {
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-		background-color: white;
-		color: black;
-	}
+	background-color: white;
+	color: black;
+}
+
+.category-header, .category-header:after {
+	background-color: #eeddf0;
+}
