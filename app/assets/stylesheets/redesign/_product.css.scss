@@ -61,11 +61,21 @@ z.list-group-item.customization-option  {
 		font-size: 2rem;
     margin-top: 0;
 	}
+
 }
 
 #product-size, #product-color, #product-customizations {
 	border: 1px solid grey;
 	width: 100%;
+}
+
+.dress-about {
+		h4 {
+			font-family: "brandon-grotesque";
+			font-size: 1em;
+			font-weight:600;
+			margin-top:1.333333em;
+		}
 }
 
 .btn-customize {

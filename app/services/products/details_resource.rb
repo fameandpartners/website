@@ -5,13 +5,13 @@
 #   permalink - 'naomi' or 'sweetheart_hi_low'
 #   product   - obsoleted! support legacy only
 #   color_name - 'dress-naomi-459/red' - red part
-#   
+#
 #
 class Products::DetailsResource
   attr_reader :site_version, :product, :color
 
   def initialize(options = {})
-    if options[:slug].blank? && options[:permalink].blank? && options[:product].blank? 
+    if options[:slug].blank? && options[:permalink].blank? && options[:product].blank?
       raise ArgumentError.new('have no product identificators')
     end
 
@@ -48,13 +48,15 @@ class Products::DetailsResource
         images:             product_images.read_all,
         default_image:      product_images.default,
         price:              product_price,
-        discount:           product_discount,        
+        discount:           product_discount,
         # page#show specific details
         recommended_products: recommended_products,
         available_options:  product_selection_options,
         moodboard:          product_moodboard,
         color_id:           color.try(:id),
-        color_name:         color.try(:name)
+        color_name:         color.try(:name),
+        fabric:             product_fabric,
+        style_notes:        product_style_notes
       })
     end
   end
@@ -101,6 +103,14 @@ class Products::DetailsResource
       ActionView::Base.full_sanitizer.sanitize(text.to_s)
     rescue
       I18n.t('product_has_no_description')
+    end
+
+    def product_fabric
+      product_properties['fabric']
+    end
+
+    def product_style_notes
+      product_properties['style_notes']
     end
 
     def product_price
