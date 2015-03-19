@@ -1,3 +1,4 @@
+#= require templates/shopping_cart_summary
 window.ShoppingCartSummary = class ShoppingCartSummary
   constructor: (options = {}) ->
     @template   = JST['templates/shopping_cart_summary']
@@ -23,5 +24,5 @@ window.ShoppingCartSummary = class ShoppingCartSummary
   couponFormSubmitHandler: (e) ->
     e.preventDefault() if e
     $input = @$container.find('#promotion-code')
+    @cart.one('complete', (event, result) -> $input.val(''))
     @cart.applyPromotionCode($input.val())
-    @cart.one('complete', () -> $input.val(''))

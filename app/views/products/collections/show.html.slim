@@ -63,4 +63,11 @@ ruby:
 
     - if @collection.total_products > @collection.products.size
       .row.relative.more-products
-        = link_to 'More dresses', '#', class: 'btn btn-black', data: { action: 'show-more-collection-products' }
+        .status.active 
+          = link_to 'More dresses', '#', class: 'btn btn-black', data: { action: 'show-more-collection-products' }
+        .status.loading style="display: none;"
+          = link_to '#', class: 'btn btn-black', disabled: true do
+            | Loading dresses... please wait
+            = image_tag('add-spinner.gif')
+        .status.inactive style="display: none;"
+          // nothing

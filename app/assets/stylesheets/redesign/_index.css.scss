@@ -7,7 +7,7 @@
 }
 
 .page-content.index {
-	padding-bottom: 3rem;
+	padding-bottom: 0;
 }
 
 .col-md-4{
@@ -28,6 +28,7 @@
 		h3 {
 			padding-top: 2.6rem;
 			text-transform: uppercase;
+			margin-top: 0;
 		}
 	}
 
@@ -247,6 +248,69 @@
 	}
 }
 
+.maintenance-page {
+	background-color: #f6e2d5;
+	background-image: url('green-corner.png');
+	background-repeat: no-repeat;
+	background-size: 90px 90px;
+	background-position: right bottom;
+	height: 100vh;
+
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.col-md-8 {
+		overflow: hidden;
+		margin-left: -15px;
+
+		img {
+		height: 100vh;
+		overflow: hidden;
+		}
+	}
+
+	.text-content {
+		margin-left: 4%;
+		max-width: 35rem;
+	}
+
+	h1 {
+		text-transform: uppercase;
+		font-family: forum;
+		font-size: 6.5rem;
+		margin-top: 40%;
+		margin-bottom: 0;
+		letter-spacing: 1px;
+		line-height: 5.5rem;
+
+		span {
+			font-size: 4rem;
+			line-height: 3rem;
+		}
+	}
+
+	.logo img{
+		height: 80px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	h2 {
+		text-transform: uppercase;
+		font-family: forum;
+		margin-top: 0;
+		padding-bottom: 4rem;
+		font-size: 2.5rem;
+	}
+
+	p {
+		text-transform: uppercase;
+		margin: 0;
+	}
+
+}
 .break-hearts {
 	background-image: url('break-hearts.jpg');
 

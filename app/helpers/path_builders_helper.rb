@@ -66,6 +66,8 @@ module PathBuildersHelper
     if options[:color]
       path_parts << options[:color] 
       options.delete(:color)
+    elsif product.respond_to?(:color) && product.color.try(:name)
+      path_parts << product.color.name
     end
 
     build_url(path_parts, options)

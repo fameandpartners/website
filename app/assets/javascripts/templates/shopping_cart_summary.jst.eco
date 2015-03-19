@@ -6,10 +6,13 @@
     <li>
       <div class="media">
         <div class="media-left media-middle">
-          <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.small %>">
+          <a href="<%= product.path %>">
+            <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.small %>">
+          </a>
         </div>
         <div class="media-body media-middle">
-          <span class="qty"><%= product.quantity %>x</span><%= product.name %>
+          <span class="qty"><%= product.quantity %>x</span>
+          <a href="<%= product.path %>"><%= product.name %></a>
           <div class="checkout-price">
             <%= product.price.display_price %>
           </div>
@@ -23,7 +26,7 @@
 <form class="promo-code" action="#">
   <label for=""> Promo Code</label>
   <div class="input-group">
-    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit">Submit</button></span>
+    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit btn-reset">Submit</button></span>
   </div>
 </form>
 <p>

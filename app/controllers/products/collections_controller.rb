@@ -35,7 +35,7 @@ class Products::CollectionsController < Products::BaseController
     @collection = collection_resource.read
 
     # set title / meta description for page
-    title(@collection.details.title, default_seo_title)
+    title(@collection.meta_title, default_seo_title)
     @description  = @collection.details.seo_description
 
     respond_to do |format|

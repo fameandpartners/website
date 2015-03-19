@@ -21,6 +21,7 @@ class Repositories::CartProduct
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
         name: product.name,
+        permalink: product.permalink,
         description: line_item_description,
         variant_id: line_item.variant_id,
         line_item_id: line_item.id,
