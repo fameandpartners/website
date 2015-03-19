@@ -2,6 +2,13 @@ require 'roo'
 
 namespace :import do
   namespace :product do
+
+    desc 'Reindex all products'
+    task :reindex => :environment do
+      Utility::Reindexer.reindex
+    end
+
+    desc 'prices'
     task :prices => :environment do
       raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
 
