@@ -36,7 +36,7 @@ module Products
 
       book.default_sheet = book.sheets.first
 
-      #rows = [rows.first] if Rails.env.development?
+      # rows = [rows.first] if Rails.env.development?
       rows.to_a.each do |row_num|
         raw = {}
 
@@ -88,7 +88,7 @@ module Products
         raw[:perfume_brand]       = book.cell(row_num, columns[:perfume_brand])
         raw[:song_link]           = book.cell(row_num, columns[:song_link])
         raw[:song_name]           = book.cell(row_num, columns[:song_name])
-        
+
 
 
         raw[:recommendations]     = {}
@@ -226,6 +226,7 @@ module Products
           sku:                  processed[:sku] || raw[:sku],
           name:                 processed[:name] || raw[:name],
           price_in_aud:         raw[:price_in_aud],
+          price_in_usd:         raw[:price_in_usd],
           description:          processed[:description] || raw[:description],
           colors:               processed[:colors],
           taxon_ids:            processed[:taxon_ids],
@@ -409,11 +410,11 @@ module Products
         start += 16
       end
 
-      
+
       @codes[:revenue]        = 135
       @codes[:cogs]           = 136
       @codes[:product_coding] = 137
-      @codes[:video_id]       = 139 # 138 139 with 
+      @codes[:video_id]       = 139 # 138 139 with
       @codes[:short_description] = 140
 
 
@@ -442,7 +443,7 @@ module Products
           ))
 
           add_product_properties(product, args[:properties].symbolize_keys)
-          add_product_variants(product, args[:sizes], args[:colors] || [])
+          add_product_variants(product, args[:sizes], args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
           add_product_accessories(product, args[:recommendations] || {})
@@ -507,8 +508,7 @@ module Products
 
       puts "Saving: #{product.id} - #{product.name}"
       product.save!
-
-      if args[:price_in_aud].present? && args[:price_in_usd].present?
+      if args[:price_in_aud].present? || args[:price_in_usd].present?
         add_product_prices(product, args[:price_in_aud], args[:price_in_usd])
       end
 
@@ -543,7 +543,7 @@ module Products
       product
     end
 
-    def add_product_variants(product, sizes, colors)
+    def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
       variants = []
       size_option = Spree::OptionType.where(name: 'dress-size').first
       color_option = Spree::OptionType.where(name: 'dress-color').first
@@ -572,7 +572,15 @@ module Products
           end
 
           variant.on_demand = true
-          variant.price = product.price
+          # variant.price = product.price
+
+          aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
+          aud.amount = price_in_aud
+          aud.save!
+
+          usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
+          usd.amount = price_in_usd
+          usd.save!
 
           variant.save
 
@@ -729,9 +737,6 @@ module Products
 
     def add_product_prices(product, price, us_price = nil)
       product.price = price
-      #us_price ||= price
-      #product.us_price = us_price
-
       product.save
     end
 
