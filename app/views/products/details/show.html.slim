@@ -150,14 +150,14 @@ ruby:
 
           - first_row.each do |item|
             .box.col-sm-4.no-padding.cream
-              = image_tag item.image_url
+              = image_tag(item.image_url) if item
         .row
           .box.col-sm-4.no-padding.pink-light
             - if @product.celebrity
               = image_tag @product.celebrity.image_url
           - second_row.each do |item|
             .box.col-sm-4.no-padding.cream
-              = image_tag item.image_url
+              = image_tag(item.image_url) if item
 
     .col-md-6.col-sm-12
       h3.text-center The Story
