@@ -153,6 +153,8 @@ class Products::CollectionResource
 
     def cropped_images(color_variant)
       cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
+      cropped_images = color_variant.images if cropped_images.blank? && Rails.env.development?
+
       cropped_images.collect{ |i| i.try(:large) }.sort.reverse
     end
 

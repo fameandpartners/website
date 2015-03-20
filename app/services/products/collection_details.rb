@@ -49,13 +49,12 @@ class Products::CollectionDetails
   end
 
   def colorize_taxon
-    name = color.presentation
-    taxon.meta_title        = "Shope the latest #{name} dresses"
-    taxon.title             = "Shop and customize the best #{name} dress trends at Fame & Partners"
+    taxon.meta_title        = "Shope the latest #{color.presentation} dresses"
+    taxon.title             = "Shop and customize the best #{color.presentation} dress trends at Fame & Partners"
     taxon.description       = ''
     taxon.footer            = ''
-    taxon.banner.title      = color_data[name][:title]
-    taxon.banner.subtitle   = color_data[name][:description]
+    taxon.banner.title      = color_data[color.name][:title]
+    taxon.banner.subtitle   = color_data[color.name][:description]
   end
 
   def color_data
