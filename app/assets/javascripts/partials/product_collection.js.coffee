@@ -39,7 +39,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     @$banner = $(options.banner)
     @setBannerTextClass()
-    @hoverize()
+    @content.find('.img-product').hoverable()
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -56,7 +56,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   updatePaginationLink: (state = 'active') ->
     row = @content.find(@showMoreSelector).closest('.row.more-products')
-    console.log(row)
     row.find('.status').hide()
     if state == 'loading'
       row.find('.loading').show()
@@ -81,10 +80,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       success: (collection) =>
         content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
+        @content.find('.img-product').hoverable()
 
         @resetPagination(collection.products.length, collection.total_products)
-
-        @hoverize()
 
         if collection && collection.details
           @updateCollectionDetails(collection.details)
@@ -105,9 +103,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         success: (collection) =>
           content_html = @collectionMoreTemplate(collection: collection)
           @content.find(@showMoreSelector).closest('.row.relative').before(content_html)
-          @updatePagination(collection.products.length, collection.total_products)
+          @content.find('.img-product').hoverable()
 
-          @hoverize()
+          @updatePagination(collection.products.length, collection.total_products)
 
           if collection && collection.details
             @updateCollectionDetails(collection.details)
@@ -141,12 +139,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     url = urlWithSitePrefix(url)
     window.history.pushState({ path: url }, '', url)
     url
-
-  hoverize: ->
-    initProductCollectionImageHover(
-      selector: '.category--item'
-      delegate: '.img-product'
-    )
 
   scrollHandler: (e) =>
     $el = $(@showMoreSelector)

@@ -1,3 +1,6 @@
+# deprecated; all logic moved to libs/jquery.hoverable.js
+#   it's easier to call $('').hoverable() without params
+#
 # usage
 # initProductCollectionImageHover(
 #   selector: '.category .category--item',
@@ -24,3 +27,5 @@ window.initProductCollectionImageHover = (options = {}) ->
     if $this.data('original')
       src = $this.data('original')
       $this.fadeTo(200, 0.40, -> $this.attr('src', src)).fadeTo(300, 1)
+
+
