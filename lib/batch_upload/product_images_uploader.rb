@@ -91,7 +91,7 @@ module BatchUpload
             end
 
             if image.persisted?
-              info "Image: id: #{image.id}"
+              info "Image: id: #{image.id} #{color_name} @ #{position}"
             else
               error "Image can not created #{image.errors.full_messages.map(&:downcase).to_sentence}"
             end
@@ -104,6 +104,8 @@ module BatchUpload
           end
         end
       end
+
+      info "Please run rake import:product:reindex now!"
     end
 
     def geometry(file_path)
