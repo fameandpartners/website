@@ -20,7 +20,7 @@ module BatchUpload
             # 4B190-BURGUNDY-FRONT-CROP.jpg
             # 4B190-NAVY-FRONT.jpg
             # 4B190-Black-4.jpg
-            color_name = parts[color_idx].strip.underscore.downcase.dasherize.gsub(' ', '-')
+            color_name = parts[color_idx].strip.downcase.underscore.dasherize.gsub(' ', '-')
             position = parts[position_idx]
             extension = parts[extension_idx]
 
@@ -45,7 +45,7 @@ module BatchUpload
               color = color_for_name(color_name)
 
               if color.blank?
-                error "Color not found"
+                error "Color not found (#{color_name})"
                 next
               end
             end
@@ -91,7 +91,7 @@ module BatchUpload
             end
 
             if image.persisted?
-              info "Image: id: #{image.id}"
+              info "Image: id: #{image.id} #{color_name} @ #{position}"
             else
               error "Image can not created #{image.errors.full_messages.map(&:downcase).to_sentence}"
             end
@@ -103,7 +103,11 @@ module BatchUpload
             error "#{message.inspect}"
           end
         end
+        info "Updating Product Index"
+        product.update_index
       end
+
+      info "Please run rake import:product:reindex now!"
     end
 
     def geometry(file_path)
