@@ -36,6 +36,7 @@ class Products::CollectionDetails
   end
 
   def read
+    colorize_taxon if color.present?
     taxon
   end
 
@@ -46,6 +47,70 @@ class Products::CollectionDetails
   def taxon
     @taxon ||= [edits, collection, style, event, root_taxon].compact.first
   end
+
+  def colorize_taxon
+    name = color.presentation
+    taxon.meta_title        = "Shope the latest #{name} dresses"
+    taxon.title             = "Shop and customize the best #{name} dress trends at Fame & Partners"
+    taxon.description       = ''
+    taxon.footer            = ''
+    taxon.banner.title      = color_data[name][:title]
+    taxon.banner.subtitle   = color_data[name][:description]
+  end
+
+  def color_data
+    {
+      "black" => {
+        :title        => "Black Dresses",
+        :description  => "There's nothing basic about these chic black dresses."
+      },
+      "white" => {
+        :title        => "White and Ivory Dresses",
+        :description  => "Refresh your look with a pristine clean slate."
+      },
+      "blue" => {
+        :title        => "Blue Dresses",
+        :description  => "Get the blues (in a good way) with sky-shaded styles."
+      },
+      "pink" => {
+        :title        => "Pink Dresses",
+        :description  => "From girly to glam, these pink confections satisfy any sweet tooth."
+      },
+      "red" => {
+        :title        => "Red Dresses",
+        :description  => "Look red haute in statement-making shades."
+      },
+      "Pastel" => {
+        :title        => "Pastel Dresses",
+        :description  => "Treat yourself to sweet styles in the prettiest shades of pale."
+      },
+    }
+  end
+
+#   {
+#     id: taxon.id,
+#     taxonomy: taxon.taxonomy.name,
+#     name: taxon.name,
+#     permalink: taxon.base_permalink,
+#     position: taxon.position,
+#     meta_title: taxon.meta_title,
+#     title: taxon.meta_title,
+#     meta_description: taxon.meta_description,
+#     meta_keywords: taxon.meta_keywords,
+#     description: taxon.description,
+#     banner: OpenStruct.new({}),
+#     root: taxon.root?
+#   }
+# )
+#
+# if taxon.banner.present?
+#   result.banner.title       = taxon.banner.title
+#   result.banner.subtitle    = taxon.banner.description
+#   result.banner.image       = taxon.banner.image.present? ? taxon.banner.image(:banner) : nil
+#   result.title              = taxon.banner.title
+#   result.footer             = taxon.banner.footer_text
+#   result.seo_description    = taxon.banner.seo_description
+# end
 
   # def cache_key
   #   "collection-details-#{ site_version.permalink}-#{ taxon.permalink }"
