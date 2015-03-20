@@ -132,7 +132,7 @@ class Products::DetailsResource
           name: recommended_product.name,
           price: Repositories::ProductPrice.new(site_version: site_version, product: recommended_product).read,
           discount: Repositories::Discount.get_product_discount(recommended_product.id),
-          image: Repositories::ProductImages.new(product: recommended_product).default
+          image: Repositories::ProductImages.new(product: recommended_product).read(cropped: true)
         )
       end
     end

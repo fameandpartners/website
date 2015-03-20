@@ -17,13 +17,26 @@ class ProductImages
     end
   end
 
+  # filter read_all by
+  #   color_id
+  #   cropped
+  #   not_cropped
+  def filter(options = {})
+    scope = read_all
+    if options[:color_id]
+      scope = scope.select{|image| image.color_id == options[:color_id]}
+    end
+    if options[:cropped]
+      scope = scope.select{|image| image.large.to_s.downcase.include?('crop') }
+    elsif options[:not_cropped]
+      scope = scope.select{|image| !image.large.to_s.downcase.include?('crop') }
+    end
+    scope
+  end
+
   # we can optimize it, if needed
   def read(options = {})
-    result = nil
-    if options[:color_id]
-      result = read_all.detect{|image| image.color_id == options[:color_id]}
-    end
-    result || read_all.first || default_image
+    filter(options).first || read_all.first || default_image
   end
   alias_method :default, :read
 

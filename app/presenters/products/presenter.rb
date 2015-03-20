@@ -103,8 +103,8 @@ module Products
     #  [ celeb | item | item ]
     def inspiration
       [ 
-       moodboard.items.slice(0,2),
-       moodboard.items.slice(2,2)
+       moodboard.items.slice(0,2) || [],
+       moodboard.items.slice(2,2) || []
       ].compact      
     end
 
