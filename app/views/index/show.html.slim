@@ -1,7 +1,8 @@
+
 .page-content.index
   #theTarget style=("height: 720px;")
 
-    div.taste-of-fame
+    div.taste-of-fame.slider-action data-href="/dresses"
       .slider-image-caption.height-100
         .container.height-100
           .promotion
@@ -9,7 +10,7 @@
             p dresses made and styled for you by fame &amp; partners
             button.btn.taste-of-fame-btn type="button"  shop now
 
-    div.prom
+    div.prom.slider-action data-href="/prom"
       .slider-image-caption.height-100
         .container.height-100
           .promotion.col-md-4
@@ -17,7 +18,7 @@
             p Dresses that</br>keep it real.
             button.btn.prom-btn type="button"  shop now
 
-    div.break-hearts
+    div.break-hearts.slider-action data-href="/break-hearts-not-accounts"
       .slider-image-caption.height-100
         .container.height-100
           .promotion.col-sm-12
@@ -52,7 +53,7 @@
         small formal dresses</br>
         | for every event
       ul.list-inline
-        li : a href="/new-years-eve-dresses" new years dresses
+        li : a href="/new-years-eve-dresses" new years dresses        
         li : a href="/dresses/prom" prom dresses
         li : a href="/dresses/formal" formal dresses
         li : a href="/bridesmaid-dresses" bridesmaids dresses
@@ -73,17 +74,3 @@
 
       h4 beautiful, luxe finish dress fabrics
       p Metallics, sequins, taffeta, satin, chiffon, lace all available in extensive colour palettes you can choose.
-
-
-
-/! SEO Crap
-/ .main-content
-/   .container
-/     .row
-/       .col-md-7
-/         h1= t('home.find.heading').html_safe
-/         p= t('home.find.body').html_safe
-/         h2= t('home.find.heading').html_safe
-/         p= t('home.shop.body').html_safe
-/       .col-md-5
-/         = image_tag 'images/bridesmaid-image.jpg', alt: 'Bridesmaid image', class: 'img-responsive'
