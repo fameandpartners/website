@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# Will enter the directory of each submodule,
+# in our case `styleguide` and update the submodule to latest master.
+#
+# Source: http://scribu.net/blog/git-alias-for-updating-submodules.html
+
+git submodule foreach 'git fetch origin --tags; git checkout master; git pull' && git pull && git submodule update --init --recursive
