@@ -2,9 +2,17 @@
 .col-md-3.col-xs-6.col-xxs-12.category--item.no-padding
   = link_to collection_product_path(product) do
     - if product.images.any?
-      = image_tag product.images.first.attachment.url, alt: product.name, class: 'img-responsive'
+      - cropped_images =  product.images.select{ |i| i.attachment_file_name.to_s.downcase.include?('crop.jpg') }
+      - front_cropped = cropped_images.select{ |i| i.attachment_file_name.to_s.downcase.include?('front-crop.jpg') }
+      - cropped = cropped_images - front_cropped
+      - front = front_cropped.first
+      - hover =  cropped.first || front
+      - if front && hover
+        = image_tag front.attachment.url, :alt => product.name, :class => "img-product img-responsive", 'data-hover' => hover.attachment.url
+
   .details.text-center
     span.name = product.name
     span.price = price_for_product(product)
-  - if product.fast_delivery
-    ''
+
+  - if product.fast_delivery == true
+	 = image_tag src='express_delivery.png', class: 'express-delivery'
