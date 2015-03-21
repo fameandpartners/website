@@ -135,12 +135,13 @@ class Products::CollectionResource
         discount = Repositories::Discount.get_product_discount(color_variant.product.id)
         color = Repositories::ProductColors.read(color_variant.color.id)
         OpenStruct.new(
-          id: color_variant.product.id,
-          name: color_variant.product.name,
-          color: color_variant.color,
-          images: cropped_images(color_variant),
-          price: price,
-          discount: discount
+          id:             color_variant.product.id,
+          name:           color_variant.product.name,
+          color:          color_variant.color,
+          images:         cropped_images(color_variant),
+          price:          price,
+          discount:       discount,
+          fast_delivery:  color_variant.product.fast_delivery
         )
       end
 
