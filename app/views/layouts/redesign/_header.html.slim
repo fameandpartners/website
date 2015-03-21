@@ -170,22 +170,18 @@ header
               | my account
         li.menu-item.hidden-xxs
           a.menu-item--link.search href="#"
-            = image_tag "images/Search.svg"
-            span.active-link.arrow-up.menu-active-arrow.search-arrow
-          .search-bar.invis.padding-60 style=("padding: 60px;")
+            = image_tag "search.png"
+          .search-bar
             a.close-search href="#"
               = image_tag "images/close.svg", alt: 'Close'
-            .container.max-width-100.padding-zero-mobile
-              .row
-                .col-md-3
-                .col-md-6.padding-zero-mobile.margin-top-100-mobile
-                  = form_tag search_path, method: :get do
-                    .input-group.margin-bottom-sm
-                      input.form-control.black-form name='q' placeholder=("Search here...") type="text"
-                      span.input-group-addon.no-padding-right
-                        button.invis-fix
-                          = image_tag "images/search.png"
-                .col-md-3
+            .container-fluid.search-form
+              .col-md-6.col-md-offset-3
+                .col-md-10
+                  .input-group.margin-bottom-sm
+                    = form_tag search_path, method: :get do
+                      input.form-control name='q' placeholder=("Search here...") type="text"
+                      span
+                        button.invis-fix Enter
 
         li#cart-trigger.menu-item
           = link_to spree.checkout_path, class: 'menu-item--link' do
