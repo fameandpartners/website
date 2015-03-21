@@ -30,7 +30,7 @@ header
         = link_to '/' do
           = image_tag src='images/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame &amp; Partners'
 
-      ul.primary.pull-left.hidden-xs
+      ul.primary.pull-left.hidden-sm
         li.shop.menu-item
           a.menu-item--link.active-hover href="#"
             | Shop
@@ -42,15 +42,15 @@ header
                     = button_to 'View all dresses', dresses_path, class: 'btn btn-black', method: :get
                   .col-md-3
                     p.button-grey-text.menu-main-promotions
-                      span.packing-box.menu-icon.push-right-10
+                      span.packing-box.menu-icon
                       | Free Shipping
                   .col-md-3
                     p.button-grey-text.menu-main-promotions
-                      span.arrows.menu-icon.push-right-10
+                      span.arrows.menu-icon
                       | Free Returns
                   .col-md-3
                     p.button-grey-text.menu-main-promotions
-                      span.fit-guarantee.menu-icon.push-right-10
+                      span.fit-guarantee.menu-icon
                       | Fit Guarantee
             .mega-menu--secondary
               .container-fluid.max-width-100
@@ -106,7 +106,7 @@ header
                   .col-md-3.col-lg-2
                     h4.link-header= t('sale')
                     ul.mega-menu-list
-                      li.mega-menu-list--item= link_to 'Next Day Delivery', next_day_delivery_path, title: 'Next Day Delivery'
+                      li.mega-menu-list--item= link_to 'Express Delivery', express_delivery_path, title: 'Express Delivery'
                       - if !sale_active?
                         li.mega-menu-list--item= link_to 'On Sale', '/sale-dresses', title: 'Dresses On Sale'
                       - else
@@ -170,22 +170,18 @@ header
               | my account
         li.menu-item.hidden-xxs
           a.menu-item--link.search href="#"
-            = image_tag "images/Search.svg"
-            span.active-link.arrow-up.menu-active-arrow.search-arrow
-          .search-bar.invis.padding-60 style=("padding: 60px;")
+            = image_tag "search.png"
+          .search-bar.invis
             a.close-search href="#"
               = image_tag "images/close.svg", alt: 'Close'
-            .container.max-width-100.padding-zero-mobile
-              .row
-                .col-md-3
-                .col-md-6.padding-zero-mobile.margin-top-100-mobile
-                  = form_tag search_path, method: :get do
-                    .input-group.margin-bottom-sm
-                      input.form-control.black-form name='q' placeholder=("Search here...") type="text"
-                      span.input-group-addon.no-padding-right
-                        button.invis-fix
-                          = image_tag "images/search-icon.svg"
-                .col-md-3
+            .container-fluid.search-form
+              .col-md-6.col-md-offset-3
+                .col-md-10
+                  .input-group.margin-bottom-sm
+                    = form_tag search_path, method: :get do
+                      input.form-control name='q' placeholder=("Search here...") type="text"
+                      span
+                        button.invis-fix Enter
 
         li#cart-trigger.menu-item
           = link_to spree.checkout_path, class: 'menu-item--link' do

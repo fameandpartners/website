@@ -1,0 +1,4 @@
+--ignore-directory=is:log
+--ignore-directory=is:.idea
+--ignore-directory=is:tmp/
+--ignore-directory=is:styleguide/.sass-cache/

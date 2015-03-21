@@ -52,17 +52,20 @@
 }
 
 .shop-with-us.middle {
-	background-color: white;
+  background-color: white;
 
-	p {
-		text-transform: uppercase;
-		font-weight: 500;
-		letter-spacing: 1px;
-		padding-left: 2rem;
-		padding-right: 2rem;
-		word-spacing: 1px;
-		font-size: 12px;
-	}
+  p {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  p, li, a {
+    font-family: 'brandon-grotesque';
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    font-size: 12px;
+  }
 }
 
 .email-sub {
@@ -70,6 +73,17 @@
 	min-height: 312px;
 	margin-bottom: 4.5rem;
 
+		button {
+			margin-top: 9px;
+		  margin-left: 12px;
+	}
+
+	input {
+		text-transform: none;
+	}
+}
+
+.email-sub, .search-bar {
 
 	@media (min-width: 1200px){
 		width: 100%;
@@ -79,6 +93,7 @@
 		font-family: 'forum';
 		text-transform: uppercase;
 		font-size: 8rem;
+		margin-top: 45px;
 	}
 
 	.lead {
@@ -97,7 +112,7 @@
 		display: inline-block;
 		width: 90%;
 		padding: 0;
-		margin-top: 14px;
+		height: 30px;
 	}
 
 	.input-group {
@@ -133,11 +148,15 @@
 	   text-transform: none;
 	}
 
-	.submit {
-		display: inline-block;
-		width: 10%;
-		padding-top: 3rem;
-		font-size: 2rem;
+	button {
+		float:left;
+	}
+
+	.col-md-2 {
+		padding-left: 0;
+	}
+	.col-md-10 {
+		padding-right: 0;
 	}
 }
 
@@ -177,9 +196,15 @@
 		color:black;
 	}
 
-	a:after {
-		content: ', '
-	}
+    ul.list-inline {
+      li { padding-left: 0px; padding-right: 0px;}
+      li a:after {
+        content: ', '
+      }
+      li:last-of-type a:after {
+        content: ''
+      }
+    }
 
 	.row {
 		padding-left: 2rem;
@@ -422,5 +447,13 @@
 .prom-queen {
 	background-image: url('glam_rebel.jpg');
 	height:490px;
+}
+
+.skippr-nav-element {
+	background-color: #D3D3D3;
+}
+
+.skippr-nav-element:hover, .skippr-nav-element-active {
+	background-color:	#A9A9A9;
 }
 
