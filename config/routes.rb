@@ -442,7 +442,8 @@ FameAndPartners::Application.routes.draw do
     #get "lp/(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses, defaults: { lp: true }
     get "new-collection" => 'spree/products#index', as: :new_collection
 
-    get '/next-day-delivery' => 'products/collections#show', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
+    get '/next-day-delivery' => redirect('/express-delivery')
+    get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
 
     scope '/bridesmaid-party', module: 'bridesmaid' do
       root to: 'landings#bride', as: :bridesmaid_party

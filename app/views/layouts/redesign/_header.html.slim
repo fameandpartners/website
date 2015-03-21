@@ -106,7 +106,7 @@ header
                   .col-md-3.col-lg-2
                     h4.link-header= t('sale')
                     ul.mega-menu-list
-                      li.mega-menu-list--item= link_to 'Next Day Delivery', next_day_delivery_path, title: 'Next Day Delivery'
+                      li.mega-menu-list--item= link_to 'Express Delivery', express_delivery_path, title: 'Express Delivery'
                       - if !sale_active?
                         li.mega-menu-list--item= link_to 'On Sale', '/sale-dresses', title: 'Dresses On Sale'
                       - else

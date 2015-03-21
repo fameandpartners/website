@@ -50,7 +50,7 @@ class Products::CollectionsController < Products::BaseController
 
     def collection_resource
       resource_args = {
-        site_version: current_site_version,
+        site_version:   current_site_version,
         collection:     params[:collection],
         style:          params[:style],
         event:          params[:event],

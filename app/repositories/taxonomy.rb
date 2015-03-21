@@ -14,7 +14,6 @@ class Repositories::Taxonomy
 
       taxon_name = taxon_name.downcase
       taxon = taxons.find{|t| t.name.downcase == taxon_name }
-
       if taxon.nil? && taxon_name.match(/-/)
         taxon_name = taxon_name.gsub('-', ' ')
         taxon = taxons.find{|t| t.name.downcase == taxon_name }
@@ -101,7 +100,7 @@ class Repositories::Taxonomy
           result.banner.image       = taxon.banner.image.present? ? taxon.banner.image(:banner) : nil
           result.title              = taxon.banner.title
           result.footer             = taxon.banner.footer_text
-          result.seo_description    = taxon.banner.seo_description          
+          result.seo_description    = taxon.banner.seo_description
         end
         all_taxons.push(result)
       end

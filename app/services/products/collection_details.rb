@@ -21,22 +21,24 @@
 class Products::CollectionDetails
   # include Repositories::CachingSystem
 
-  attr_reader :collection, :style, :event, :edits, :bodyshape, :color, :discount, :site_version, :root_taxon
+  attr_reader :collection, :style, :event, :edits, :bodyshape, :color, :discount, :site_version, :fast_delivery, :root_taxon
 
   def initialize(options = {})
-    @collection = options[:collection]
-    @style      = options[:style]
-    @event      = options[:event]
-    @edits      = options[:edits]
-    @bodyshape  = options[:bodyshape]
-    @color      = options[:color]
-    @discount   = options[:discount]
-    @site_version = options[:site_version]
-    @root_taxon ||= Repositories::Taxonomy.collection_root_taxon
+    @collection     = options[:collection]
+    @style          = options[:style]
+    @event          = options[:event]
+    @edits          = options[:edits]
+    @bodyshape      = options[:bodyshape]
+    @color          = options[:color]
+    @discount       = options[:discount]
+    @site_version   = options[:site_version]
+    @fast_delivery  = options[:fast_delivery]
+    @root_taxon     ||= Repositories::Taxonomy.collection_root_taxon
   end
 
   def read
     colorize_taxon if color.present?
+    deliverize_taxon if fast_delivery?
     taxon
   end
 
@@ -49,12 +51,22 @@ class Products::CollectionDetails
   end
 
   def colorize_taxon
-    taxon.meta_title        = "Shope the latest #{color.presentation} dresses"
+    taxon.meta_title        = "Shop the latest #{color.presentation} dresses"
     taxon.title             = "Shop and customize the best #{color.presentation} dress trends at Fame & Partners"
     taxon.description       = ''
     taxon.footer            = ''
     taxon.banner.title      = color_data[color.name][:title]
     taxon.banner.subtitle   = color_data[color.name][:description]
+  end
+
+
+  def deliverize_taxon
+    taxon.meta_title        = "Shop the latest express delivery dresses"
+    taxon.title             = "Shop and customize express delivery dresses at Fame & Partners"
+    taxon.description       = ''
+    taxon.footer            = ''
+    taxon.banner.title      = 'Express Delivery Dresses'
+    taxon.banner.subtitle   = 'High-fashion styles for fast-paced social butterflies.'
   end
 
   def color_data
@@ -84,6 +96,10 @@ class Products::CollectionDetails
         :description  => "Treat yourself to sweet styles in the prettiest shades of pale."
       },
     }
+  end
+
+  def fast_delivery?
+    fast_delivery == true
   end
 
 #   {
