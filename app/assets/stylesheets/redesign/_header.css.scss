@@ -160,7 +160,6 @@ li.shop {
 
 	.story-list {
 		width: 100%;
-		// margin-left: 28%;
 
 		a{
 			color: black;
@@ -170,4 +169,12 @@ li.shop {
 			}
 		}
 	}
+}
+
+.masthead {
+	padding-top: 26px;
+}
+
+.nav-menu .primary li.menu-item .menu-item--link, .nav-menu .secondary li.menu-item .menu-item--link {
+	padding-top: 24px;
 }
