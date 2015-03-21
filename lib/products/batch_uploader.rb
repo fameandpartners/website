@@ -5,14 +5,20 @@ require 'ostruct'
 
 module Products
   class BatchUploader
-    attr_reader :parsed_data
+    attr_reader :parsed_data, :available_on
 
     include ActionView::Helpers::TextHelper # for truncate
 
     def initialize
-      @@titles_row_numbers = [8, 10, 11, 12]
-      @@first_content_row_number = 13
       @available_on = 1.days.ago
+    end
+
+    def first_content_row_number
+      13
+    end
+
+    def titles_row_numbers
+      [8, 10, 11, 12]
     end
 
     def parse_file(file_path)
@@ -337,7 +343,7 @@ module Products
       conformities.each do |key, regex|
         indexes = []
 
-        book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        book.row(titles_row_numbers.second).each_with_index do |title, index|
           next unless title.present?
 
           if title.strip =~ regex
@@ -422,14 +428,14 @@ module Products
     end
 
     def get_rows_indexes(book, columns)
-      first_empty_row_num = @@first_content_row_number
+      first_empty_row_num = first_content_row_number
 
       total_rows = book.last_row(book.sheets.first)
       while first_empty_row_num < total_rows and book.cell(first_empty_row_num, columns[:sku]).present?
         first_empty_row_num += 1
       end
 
-      (@@first_content_row_number...first_empty_row_num)
+      (first_content_row_number...first_empty_row_num)
     end
 
     # create product with restored data
@@ -474,7 +480,7 @@ module Products
       product = master.try(:product)
 
       if product.blank?
-        product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: @available_on)
+        product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: available_on)
       end
 
       attributes = {
@@ -482,7 +488,7 @@ module Products
         price: args[:price_in_aud],
         description: args[:description],
         taxon_ids: args[:taxon_ids] || [],
-        available_on: product.available_on || @available_on
+        available_on: product.available_on || available_on
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
