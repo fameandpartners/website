@@ -1,7 +1,7 @@
 a.cd-top href='#top' Top
 
 /! Mobile Menu
-/ .mobile-menu-overlay 
+/ .mobile-menu-overlay
 / .close-mobile.pull-right
 / = image_tag 'images/close.svg', alt: 'X'
 #mobile-style.mobile-menu-options.hidden
@@ -42,28 +42,28 @@ a.cd-top href='#top' Top
       a.list-group-item href="/dresses/debutante" Debutante Dresses
       a.list-group-item href="/dresses/graduation" Graduation Dresses
       a.list-group-item href="/dresses/special-events" Special Event Dresses
-      
+
 
 /! Mobile Menu
 #mobile-menu.mobile-menu.visible-sm.visible-xs
   .row
     .col-xs-3.mobile-menu-icon.mobile-active
-      a href="/dresses" 
-        span.hidden-xxs> View 
+      a href="/dresses"
+        span.hidden-xxs> View&nbsp;
         | All
     .col-xs-3.mobile-menu-icon.style
-      a href="/dresses/style" data-menu-options-container='#mobile-style'
-        span.hidden-xs> By 
+      a href="#" data-menu-options-container='#mobile-style'
+        span.hidden-xs> By&nbsp;
         | Style
-    .col-xs-3.mobile-menu-icon 
-      a href="/dresses/color" data-menu-options-container='#mobile-color'
-        span.hidden-xs> By 
+    .col-xs-3.mobile-menu-icon
+      a href="#" data-menu-options-container='#mobile-color'
+        span.hidden-xs> By&nbsp;
         | Color
     .col-xs-3.mobile-menu-icon
-      a href="/dresses/event" data-menu-options-container='#mobile-event'
-        span.hidden-xs> By 
+      a href="#" data-menu-options-container='#mobile-event'
+        span.hidden-xs> By&nbsp;
         | Event
 
 
-= content_for :inline_javascript do  
+= content_for :inline_javascript do
   | new window.page.MobileMenu({container: '#mobile-menu'});
