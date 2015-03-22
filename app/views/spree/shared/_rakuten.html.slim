@@ -10,7 +10,14 @@ ruby:
   ord       = @order.number
   skulist   = @order.line_items.collect{ |i| i.variant.sku || i.variant.product.sku }.join('|')
   qlist     = @order.line_items.collect{ |i| i.quantity }.join('|')
-  amtlist   = @order.line_items.collect{ |i| (i.price * 100).to_i }.join('|')
+
+  # AU needs to account for gst
+  if current_site_version.is_australia?
+    amtlist   = @order.line_items.collect{ |i| ((i.price / 1.1) * 100).round.to_i }.join('|')
+  else
+    amtlist   = @order.line_items.collect{ |i| (i.price * 100).to_i }.join('|')
+  end
+
   namelist  = @order.line_items.collect{ |i| i.variant.product.name }.join('|')
 
   promo_total = @order.adjustments.where("originator_type = 'Spree::PromotionAction'").sum(:amount)
