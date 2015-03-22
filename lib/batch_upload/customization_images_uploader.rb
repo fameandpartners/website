@@ -32,7 +32,7 @@ module BatchUpload
               customization.image = File.open(file_path)
 
               if customization.save
-                success "Customisation", name: customization.name, position: position, file: file_name
+                success "Customisation", name: customization.name, pos: position, file: file_name
               else
                 error "Customization can not updated: #{customization.errors.full_messages.map(&:downcase).to_sentence}"
               end

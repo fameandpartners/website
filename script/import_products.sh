@@ -57,6 +57,7 @@ function main
 {
   import_spreadsheets
   import_images
+  bundle exec rake import:product:reindex
   info "See log for details: $logfile"
 }
 

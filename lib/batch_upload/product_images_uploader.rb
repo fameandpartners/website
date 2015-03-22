@@ -8,8 +8,6 @@ module BatchUpload
           begin
             file_name = file_path.rpartition('/').last.strip
 
-            info "File: \"#{file_name}\""
-
             parts = file_name.split(/[\-\.]/)
             sku_idx = 0
             color_idx = 1
@@ -91,7 +89,7 @@ module BatchUpload
             end
 
             if image.persisted?
-              info "Image: id: #{image.id} #{color_name} @ #{position}"
+              success "ProductImage", id: image.id, color: color_name, position: position, file: file_name
             else
               error "Image can not created #{image.errors.full_messages.map(&:downcase).to_sentence}"
             end
@@ -103,8 +101,9 @@ module BatchUpload
             error "#{message.inspect}"
           end
         end
-        info "Updating Product Index SKU: #{product.sku}, NAME: #{product.name} ID: #{product.id}"
-        product.update_index
+        # TODO - GB 2015.03.22 - Find out if this is needed here, or if we can push it off until the very end.
+        # info "Updating Product Index SKU: #{product.sku}, NAME: #{product.name} ID: #{product.id}"
+        # product.update_index
       end
 
       info "Please run rake import:product:reindex now!"

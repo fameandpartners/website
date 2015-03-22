@@ -81,7 +81,7 @@ module BatchUpload
     end
 
     def success(type, attributes = {})
-      attrs = attributes.collect { |k,v| "#{k}=#{v}" }.join(' ')
+      attrs = attributes.collect { |k,v| "#{k}=#{bright_white(v.to_s)}" }.join(' ')
       info "#{type} #{ok}: #{attrs}"
     end
   end

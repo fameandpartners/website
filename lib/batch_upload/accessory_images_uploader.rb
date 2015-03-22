@@ -43,7 +43,7 @@ module BatchUpload
               accessory.image = File.open(file_path)
 
               if accessory.save
-                success "Accessory", id: accessory.id, title: accessory.title, style: style_name, position: position, file: file_name
+                success "Accessory", id: accessory.id, title: accessory.title, style: style_name, pos: position, file: file_name
               else
                 error "Accessory (#{accessory.title} id=#{accessory.id}) can not updated: #{accessory.errors.full_messages.map(&:downcase).to_sentence}"
               end
