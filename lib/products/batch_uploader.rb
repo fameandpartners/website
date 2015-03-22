@@ -506,8 +506,11 @@ module Products
         end
       end
 
-      puts "Saving: #{product.id} - #{product.name}"
+      new_product = product.persisted? ? 'New' : 'Updated'
+
       product.save!
+      puts "Saving: #{new_product} - #{product.sku} - #{product.id} - #{product.name}"
+
       if args[:price_in_aud].present? || args[:price_in_usd].present?
         add_product_prices(product, args[:price_in_aud], args[:price_in_usd])
       end
@@ -582,8 +585,7 @@ module Products
           usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
           usd.amount = price_in_usd
           usd.save!
-
-
+          
           variants.push(variant) if variant.persisted?
         end
       end
@@ -619,19 +621,6 @@ module Products
 
         customizations.push(customization)
       end
-
-      #array_of_attributes.each do |attrs|
-      #  next unless attrs.values.any?(&:present?)
-      #
-      #  customization = product.customisation_values.where(position: attrs[:position]).first
-      #
-      #  if attrs[:incompatibles].present?
-      #    customization.incompatible_ids = product.customisation_values.where(position: attrs[:incompatibles]).map(&:id)
-      #  else
-      #    customization.incompatible_ids = []
-      #  end
-      #  customization.save(validate: false)
-      #end
 
       customizations
     end

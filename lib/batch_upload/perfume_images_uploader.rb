@@ -11,33 +11,24 @@ module BatchUpload
 
           get_list_of_files(directory_path).each do |file_path|
             begin
-              puts ""
-              puts ""
               file_name = file_path.rpartition('/').last.strip
-
-              puts "  [INFO] Process \"#{file_name}\" file"
-
-              puts "  [INFO] Search perfume"
 
               perfume = product.moodboard_items.parfume.first
 
               if perfume.blank?
-                puts "  [ERROR] Perfume not found"
+                error "Perfume image found for SKU: #{product.sku} but missing perfume item. (#{file_name})"
                 next
-              else
-                puts "  [INFO] Perfume successfully found"
               end
 
               perfume.image = File.open(file_path)
 
               if perfume.save
-                puts "  [INFO] Perfume successfully updated"
+                success "Perfume", file: file_name
               else
-                puts "  [ERROR] Perfume can not updated"
-                puts "    MESSAGES: #{perfume.errors.full_messages.map(&:downcase).to_sentence}"
+                error "Perfume can not updated: #{perfume.errors.full_messages.map(&:downcase).to_sentence}"
               end
             rescue Exception => message
-              puts "  [ERROR] #{message.inspect}"
+              error "#{message.inspect}"
             end
           end
         end
