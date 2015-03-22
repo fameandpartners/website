@@ -16,7 +16,7 @@
 # 3. Removed all spreadsheets which where obviously not real e.g. "$~MasterContent_SalesPage.xlsx"
 # 4. Renamed any directories or files with single quotes (') - There were only one or two.
 
-# TODO
+# TODO Before running
 # 1. Shrink the images using Toby's cool script.case
 # 2. Catch errors a bit better, at the moment we need to trawl the entire log file!
 # 3. Lots
@@ -32,6 +32,7 @@ fi
 # Init
 import_start_time=$(date '+%Y-%m-%d_%H.%M.%S')
 logfile="log/product_import_${import_start_time}.log"
+log_date_format='%Y-%m-%d %H:%M:%S'
 
 content_directory='/home/deploy/content-upload/'
 
@@ -56,6 +57,7 @@ function main
 {
   import_spreadsheets
   import_images
+  info "See log for details: $logfile"
 }
 
 function import_spreadsheets
@@ -103,9 +105,9 @@ function import_product_spreadsheet()
   bundle exec rake import:data || error "FAILED!"
 }
 
-function error() { echo $(red)[$(date)][E]  $*$(normal); }
-function info() { echo $(yellow)[$(date)][I]  $*$(normal); }
-function success() { echo $(green)[$(date)][I]  $*$(normal); }
+function error() { echo $(red)[$(date +"$log_date_format")][E]  $*$(normal); }
+function info() { echo $(yellow)[$(date +"$log_date_format")][I]  $*$(normal); }
+function success() { echo $(green)[$(date +"$log_date_format")][S]  $*$(normal); }
 function hl() { $(tput rev)$*$(tput rev); }
 
 function normal  { tput sgr0;    }
@@ -116,4 +118,3 @@ function blue    { tput setaf 4; }
 
 
 time main | tee $logfile
-info "See log for details: $logfile"
