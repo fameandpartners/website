@@ -103,7 +103,7 @@ module BatchUpload
             error "#{message.inspect}"
           end
         end
-        info "Updating Product Index"
+        info "Updating Product Index SKU: #{product.sku}, NAME: #{product.name} ID: #{product.id}"
         product.update_index
       end
 
