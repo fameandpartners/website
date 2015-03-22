@@ -6,7 +6,7 @@ module BatchUpload
       each_product do |product, path|
         get_list_of_files(path).each do |file_path|
           begin
-            file_name = file_path.rpartition('/').last.strip
+            file_name = File.basename file_path
 
             parts = file_name.split(/[\-\.]/)
             sku_idx = 0
