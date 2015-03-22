@@ -619,19 +619,6 @@ module Products
         customizations.push(customization)
       end
 
-      #array_of_attributes.each do |attrs|
-      #  next unless attrs.values.any?(&:present?)
-      #
-      #  customization = product.customisation_values.where(position: attrs[:position]).first
-      #
-      #  if attrs[:incompatibles].present?
-      #    customization.incompatible_ids = product.customisation_values.where(position: attrs[:incompatibles]).map(&:id)
-      #  else
-      #    customization.incompatible_ids = []
-      #  end
-      #  customization.save(validate: false)
-      #end
-
       customizations
     end
 
