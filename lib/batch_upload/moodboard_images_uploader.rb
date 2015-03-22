@@ -5,8 +5,12 @@ module BatchUpload
     def process!
       each_product do |product, path|
 
-        info "Delete product.moodboards where(age > #{@_expiration / 3600} hrs)"
-        product.moodboard_items.moodboard.where('created_at < ?', @_expiration.ago).destroy_all
+        ## Garrow - 2015.03.22 -
+        ## I think this code is causing issues for other types of
+        ## moodboard items, like songs, So I am disabling it.
+        ## TODO - Either remove or re-enable.
+        # info "Delete product.moodboards where(age > #{@_expiration / 3600} hrs)"
+        # product.moodboard_items.moodboard.where('created_at < ?', @_expiration.ago).destroy_all
 
         get_list_of_directories(path).each do |directory_path|
           directory_name = directory_path.rpartition('/').last.strip
