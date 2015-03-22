@@ -34,7 +34,7 @@ module BatchUpload
             end
 
             if parts.empty?
-              error "File name is invalid"
+              error "File name is invalid: #{file_name}"
               next
             end
 
@@ -43,7 +43,7 @@ module BatchUpload
               color = color_for_name(color_name)
 
               if color.blank?
-                error "Color not found (#{color_name})"
+                error "Color not found (#{color_name}) #{file_name}"
                 next
               end
             end
