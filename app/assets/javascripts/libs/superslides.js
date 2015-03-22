@@ -381,16 +381,27 @@ var pagination = {
       'text': href
     });
 
+    if (that.size() > 1){
+      that.$pagination.css({display: 'block'});
+    } else {
+      that.$pagination.css({display: 'none'});
+    };
+
     $item.appendTo(that.$pagination);
   },
   _setup: function() {
-    if (!that.options.pagination || that.size() === 1) { return; }
+    if (!that.options.pagination) { return; }
 
-    var $pagination = $("<nav>", {
-      'class': that.options.elements.pagination.replace(/^\./, '')
-    });
+    if (that.$pagination){
+      that.$pagination.empty();
+    } else {
+      var $pagination = $("<nav>", {
+        'class': that.options.elements.pagination.replace(/^\./, '')
+      });
+      that.$pagination = $pagination.appendTo(that.$el);
+    }
 
-    that.$pagination = $pagination.appendTo(that.$el);
+    if (that.size() <= 1){ that.$pagination.css({ display: 'none' }); };
 
     for (var i = 0; i < that.size(); i++) {
       that.pagination._addItem(i);
@@ -445,8 +456,13 @@ Superslides.prototype = {
   },
 
   _upcomingSlide: function(direction, from_hash_change) {
-    if (from_hash_change && !isNaN(direction)) {
-      direction = direction - 1;
+    if (from_hash_change && (!!direction)) {
+      var index = this._findSlideById(direction);
+      if (index >= 0) {
+        return index;
+      } else {
+        return 0;
+      }
     }
 
     if ((/next/).test(direction)) {
@@ -531,7 +547,10 @@ Superslides.prototype = {
     this.css.containers();
     this.css.images();
 
-    this.pagination._addItem(this.size())
+    // we count elements from 0, but size - from 1
+    //this.pagination._addItem(this.size() - 1)
+    this.pagination._setup();
+    this.start()
 
     this._findPositions(this.current);
     this.$el.trigger('updated.slides');
@@ -609,10 +628,12 @@ Superslides.prototype = {
         window.location.hash = hash;
       }
     }
+    // just stop, no reason to reset all things
+    // bad idea to override settings anyway
     if (that.size() === 1) {
       that.stop();
-      that.options.play = 0;
-      that.options.animation_speed = 0;
+      //that.options.play = 0;
+      //that.options.animation_speed = 0;
       orientation.upcoming_slide    = 0;
       orientation.outgoing_slide    = -1;
     }
