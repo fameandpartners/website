@@ -34,7 +34,7 @@ import_start_time=$(date '+%Y-%m-%d_%H.%M.%S')
 logfile="log/product_import_${import_start_time}.log"
 log_date_format='%Y-%m-%d %H:%M:%S'
 
-content_directory='/home/deploy/content-upload/'
+content_directory='/home/deploy/IMAGES/'
 
 # For easier local testing
 if [ $(whoami) = "garrow" ] ; then 
@@ -48,7 +48,6 @@ image_types=(accessory customization moodboard product song)
 # rake import:accessory:images                      # Import images for accessories (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:customization:images                  # Import images for customizations (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:moodboard:images                      # Import images for moodboards (specify directory location w/ LOCATION=/path/to/directory)
-# rake import:perfume:images                        # Import images for perfume (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:product:images                        # Import images for products (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:song:images
 
@@ -116,6 +115,5 @@ function red     { tput setaf 1; }
 function green   { tput setaf 2; }
 function yellow  { tput setaf 3; }
 function blue    { tput setaf 4; }
-
 
 time main | tee $logfile
