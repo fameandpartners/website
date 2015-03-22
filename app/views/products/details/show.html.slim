@@ -78,7 +78,7 @@ ruby:
 /! Product Section
 .container-fluid.product-content.text-center
   .col-sm-12.screen-height
-  .col-md-4.col-md-offset-8.col-sm-12.product-details.product-section--selection.no-padding
+  .col-md-4.col-md-offset-8.col-sm-6.col-sm-offset-6.product-details.product-section--selection.no-padding
     .row
       h2 = @product.name
       p.product-section-description
@@ -116,16 +116,22 @@ ruby:
           button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
             |+ Moodboard
 
-    .row.social-media-links
-      span class='st_facebook_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
-        = image_tag '_icons/facebook.png'
-      span class='st_pinterest_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
-        = image_tag '_icons/pinterest.png'
-      span class='st_instagram_custom' st_username='fameandpartners' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
-        = image_tag '_icons/instagram.png'
-      span class='st_twitter_custom' st_via="fameandpartners" st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
-        = image_tag '_icons/twitter.png'
+        .row.social-media-links
+          .col-md-3.col-sm-3.col-xs-3
+            span class='st_facebook_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
+              = image_tag '_icons/facebook.png'
 
+          .col-md-3.col-sm-3.col-xs-3
+            span class='st_pinterest_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
+              = image_tag '_icons/pinterest.png'
+
+          .col-md-3.col-sm-3.col-xs-3
+            span class='st_instagram_custom' st_username='fameandpartners' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
+              = image_tag '_icons/instagram.png'
+
+          .col-md-3.col-sm-3.col-xs-3
+            span class='st_twitter_custom' st_via="fameandpartners" st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
+              = image_tag '_icons/twitter.png'
 
 /! About The Dress
 .col-sm-12.screen-height

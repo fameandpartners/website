@@ -1,7 +1,8 @@
+
 .page-content.index
   #theTarget style=("height: 720px;")
 
-    div.taste-of-fame
+    div.taste-of-fame.slider-action data-href="/dresses"
       .slider-image-caption.height-100
         .container.height-100
           .promotion
@@ -9,7 +10,7 @@
             p dresses made and styled for you by fame &amp; partners
             button.btn.taste-of-fame-btn type="button"  shop now
 
-    div.prom
+    div.prom.slider-action data-href="/prom"
       .slider-image-caption.height-100
         .container.height-100
           .promotion.col-md-4
@@ -17,7 +18,7 @@
             p Dresses that</br>keep it real.
             button.btn.prom-btn type="button"  shop now
 
-    div.break-hearts
+    div.break-hearts.slider-action data-href="/break-hearts-not-accounts"
       .slider-image-caption.height-100
         .container.height-100
           .promotion.col-sm-12
@@ -29,61 +30,47 @@
   .row
     = render 'shared/newsletter_signup'
 
-.container-fluid
-  .row
-    .col-md-4.brand-pink.text-center.shop-with-us
-      h4 No middle-men
-      p Our sample room direct to you model means no middle men, higher quality formal dresses &amp; lower costs.
+.row-same-height
+  .col-md-4.brand-pink.text-center.shop-with-us
+    h4 No middle-men
+    p Our sample room direct to you model means no middle men, higher quality formal dresses &amp; lower costs.
 
-      h4 Internal sourcing &amp; design
-      p Dedicated sourcing &amp; design team to discover the best fabrics and create the most beautiful dress designs based on what's trending right now.
+    h4 Internal sourcing &amp; design
+    p Dedicated sourcing &amp; design team to discover the best fabrics and create the most beautiful dress designs based on what's trending right now.
 
-      = image_tag "glam-rebel.jpg", alt: 'Something here', class: 'img-responsive'
+    = image_tag "glam-rebel.jpg", alt: 'Something here', class: 'img-responsive'
 
-      h4 Hem lengths that suit you
-      p Long formal dresses, short prom dresses, midi, knee-length; we can change your dress length to whatever suits you.
+    h4 Hem lengths that suit you
+    p Long formal dresses, short prom dresses, midi, knee-length; we can change your dress length to whatever suits you.
 
-      h4 All online
-      p We deliver you beautiful dresses, customised for you, at the prices we do because we keep it all online.
-    .col-md-4.text-center.shop-with-us.middle
-      h2 Fame &amp; Partners delivers a high quality, bespoke dress making  service without the  traditional cost
-      = image_tag "bride.jpg", alt: 'Something here', class: 'img-responsive'
-      h1
-        small formal dresses</br>
-        | for every event
-      ul.list-inline
-        li : a href="/new-years-eve-dresses" new years dresses
-        li : a href="/dresses/prom" prom dresses
-        li : a href="/dresses/formal" formal dresses
-        li : a href="/bridesmaid-dresses" bridesmaids dresses
-        li : a href="/dresses/cocktail" cocktail dresses
-        li : a href="/dresses" ball gowns
+    h4 All online
+    p We deliver you beautiful dresses, customised for you, at the prices we do because we keep it all online.
+  .col-md-4.text-center.shop-with-us.middle
+    h2 Fame &amp; Partners delivers a high quality, bespoke dress making  service without the  traditional cost
+    = image_tag "bride.jpg", alt: 'Something here', class: 'img-responsive'
+    h1
+      small formal dresses</br>
+      | for every event
+    ul.list-inline
+      li : a href="/dresses/graduation" grad dresses
+      li : a href="/dresses/prom" prom dresses
+      li : a href="/dresses/formal" formal dresses
+      li : a href="/bridesmaid-dresses" bridesmaids dresses
+      li : a href="/dresses/cocktail" cocktail dresses
+      li : a href="/dresses" ball gowns
 
-    .col-md-4.brand-pink.text-center.shop-with-us
-      h4 Dedicated, specialist sample</br>rooms &amp; dress makers
-      p Our workers are highly skilled; each individual formal dress is crafted by one artisan seamstress.
+  .col-md-4.brand-pink.text-center.shop-with-us
+    h4 Dedicated, specialist sample</br>rooms &amp; dress makers
+    p Our workers are highly skilled; each individual formal dress is crafted by one artisan seamstress.
 
-      = image_tag "new-years-eve.jpg", alt: 'Something here', class: 'img-responsive portrait-img'
+    = image_tag "new-years-eve.jpg", alt: 'Something here', class: 'img-responsive portrait-img'
 
-      h4 Dresses customised for you
-      p Customise to your perfect colour and change design features to make your formal dress uniquely yours.
+    h4 Dresses customised for you
+    p Customise to your perfect colour and change design features to make your formal dress uniquely yours.
 
-      h4 Free stylists
-      p Special events like prom are so important so we offer free stylists to complete the full look, free of charge.
+    h4 Free stylists
+    p Special events like prom are so important so we offer free stylists to complete the full look, free of charge.
 
-      h4 beautiful, luxe finish dress fabrics
-      p Metallics, sequins, taffeta, satin, chiffon, lace all available in extensive colour palettes you can choose.
+    h4 beautiful, luxe finish dress fabrics
+    p Metallics, sequins, taffeta, satin, chiffon, lace all available in extensive colour palettes you can choose.
 
-
-
-/! SEO Crap
-/ .main-content
-/   .container
-/     .row
-/       .col-md-7
-/         h1= t('home.find.heading').html_safe
-/         p= t('home.find.body').html_safe
-/         h2= t('home.find.heading').html_safe
-/         p= t('home.shop.body').html_safe
-/       .col-md-5
-/         = image_tag 'images/bridesmaid-image.jpg', alt: 'Bridesmaid image', class: 'img-responsive'

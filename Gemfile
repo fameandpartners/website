@@ -71,6 +71,8 @@ gem 'addressable', require: false
 
 gem 'rollout'
 
+gem 'term-ansicolor'
+
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'

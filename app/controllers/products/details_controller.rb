@@ -14,16 +14,13 @@ class Products::DetailsController < Products::BaseController
       raise Errors::ProductInactive
     end
 
-    # set page title. 
-    prefix = [@product.short_description, @product.color.try(:presentation), @product.name].compact.join(' ')
-    title( [prefix, default_seo_title].compact.join(' - '))
-    description([prefix, default_meta_description].compact.join(' - '))
-
-    #display_marketing_banner # content_for :banner ?
-
-    #@title = @product.details.title
-    #@title = @product.details.description
-    #set_product_show_page_title(@product, @product.selected_color.presentation)
+    # set page title.
+    # Drop anything after the first period(.) and newline
+    short_description = @product.short_description.gsub(/\.\W+.*\z/, ' - ')
+    prefix = [short_description, @product.color.try(:presentation), @product.name].compact.join(' ')
+    binding.pry
+    title( [prefix, default_seo_title].compact.join(' '))
+    description([@product.short_description, default_meta_description].compact.join(' '))
   end
 
 =begin
