@@ -34,11 +34,14 @@ module BatchUpload
     private
 
     def each_product &block
-      get_list_of_directories(@_location).each do |path|
+      directories = get_list_of_directories(@_location)
+      total_directories = directories.size
+      parent = File.basename @_location
+      directories.each_with_index do |path, idx|
         info '-' * 25
-        name = path.rpartition('/').last.strip
+        name = File.basename path
 
-        info "Process directory \"#{name}\" "
+        info "Directory (#{idx + 1}/#{total_directories}): #{parent}/ #{bold(name)}"
 
         matches = Regexp.new('(?<sku>[[:alnum:]]+)[\-_]?', true).match(name)
 
@@ -54,7 +57,7 @@ module BatchUpload
           order('id DESC').first.try(:product)
 
         if product.blank?
-          error "Product not found for SKU: #{sku}"
+          error "Product not found for SKU: #{sku} DIR: #{name}"
           next
         else
           info "Product: SKU: #{sku}, NAME: #{product.name} ID: #{product.id}"
