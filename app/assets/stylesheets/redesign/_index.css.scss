@@ -68,6 +68,12 @@
   }
 }
 
+.shop-with-us.brand-pink {
+	img {
+		margin-bottom: 1.8rem;
+	}
+}
+
 .email-sub {
 	background-color: #f6e2d5;
 	min-height: 312px;
@@ -160,21 +166,19 @@
 	}
 }
 
+@media (min-width: 990px){
+	.row-same-height {
+	    display: table;
+	    width: 100%;
+	}
+}
+
 .shop-with-us {
-	min-height: 845px;
 
-	@media(min-width: 990px)and(max-width: 1020px){
-		height: 970px;
+	@media (min-width: 990px){
+		display: table-cell;
+	  float: none !important;
 	}
-
-	@media(min-width: 1020px)and(max-width: 1155px){
-		height: 970px;
-	}
-
-	@media(min-width: 1155px)and(max-width: 1220px){
-		height: 970px;
-	}
-
 	h2 {
 		font-size: 4.5rem;
 		margin-top: 1.2rem
@@ -185,6 +189,7 @@
 		font-family: forum;
 		font-size: 4.5rem;
 		text-transform: uppercase;
+		line-height: 3rem;
 
 		small{
 			color: black;
@@ -227,6 +232,10 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+}
+
+.slider-action {
+		cursor:pointer;
 }
 
 .taste-of-fame {
@@ -456,4 +465,3 @@
 .skippr-nav-element:hover, .skippr-nav-element-active {
 	background-color:	#A9A9A9;
 }
-

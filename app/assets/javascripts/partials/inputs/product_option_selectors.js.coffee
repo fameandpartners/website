@@ -105,8 +105,8 @@ window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Base
     @setValueFrom($(e.currentTarget))
 
   setValueFrom: ($el) ->
+    return if $el.length == 0
     data = $el.data()
-
     @$container.find('.color-option.active').not($el).removeClass('active')
     $el.addClass('active')
 

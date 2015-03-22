@@ -1,10 +1,15 @@
 require 'forwardable'
+require 'term/ansicolor'
 
 module BatchUpload
   class ImagesUploader
 
+    include Term::ANSIColor
+
     extend Forwardable
     def_delegators :@logger, :info, :debug, :warn, :error, :fatal
+
+    attr_reader :ok
 
     def initialize(location, strategy = :update)
       @_strategies = [:update, :delete]
@@ -17,21 +22,26 @@ module BatchUpload
         @_strategy = strategy
       end
 
+      @ok = green("OK").freeze
       @logger = Logger.new(STDOUT)
       @logger.level = Logger::INFO unless ENV['debug']
       @logger.formatter = proc do |severity, datetime, _progname, msg|
-        "[%s] [%-5s] %s\n" % [datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg ]
+        color = severity == 'ERROR' ? red : ''
+        "%s[%s] [%-5s] %s%s\n" % [color, datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg, reset]
       end
     end
 
     private
 
     def each_product &block
-      get_list_of_directories(@_location).each do |path|
+      directories = get_list_of_directories(@_location)
+      total_directories = directories.size
+      parent = File.basename @_location
+      directories.each_with_index do |path, idx|
         info '-' * 25
-        name = path.rpartition('/').last.strip
+        name = File.basename path
 
-        info "Process directory \"#{name}\" "
+        info "Directory (#{idx + 1}/#{total_directories}): #{parent}/ #{bold(name)}"
 
         matches = Regexp.new('(?<sku>[[:alnum:]]+)[\-_]?', true).match(name)
 
@@ -47,7 +57,7 @@ module BatchUpload
           order('id DESC').first.try(:product)
 
         if product.blank?
-          error "Product not found for SKU: #{sku}"
+          error "Product not found for SKU: #{sku} DIR: #{name}"
           next
         else
           info "Product: SKU: #{sku}, NAME: #{product.name} ID: #{product.id}"
@@ -71,6 +81,11 @@ module BatchUpload
 
     def paths_for(location)
       Dir.glob(File.join(location, '*'))
+    end
+
+    def success(type, attributes = {})
+      attrs = attributes.collect { |k,v| "#{k}=#{bright_white(v.to_s)}" }.join(' ')
+      info "#{type} #{ok}: #{attrs}"
     end
   end
 end

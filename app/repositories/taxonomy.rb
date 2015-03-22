@@ -98,7 +98,6 @@ class Repositories::Taxonomy
           result.banner.title       = taxon.banner.title
           result.banner.subtitle    = taxon.banner.description
           result.banner.image       = taxon.banner.image.present? ? taxon.banner.image(:banner) : nil
-          result.title              = taxon.banner.title
           result.footer             = taxon.banner.footer_text
           result.seo_description    = taxon.banner.seo_description
         end

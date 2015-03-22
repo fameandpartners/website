@@ -30,7 +30,7 @@ header
         = link_to '/' do
           = image_tag src='images/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame &amp; Partners'
 
-      ul.primary.pull-left.hidden-sm
+      ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
         li.shop.menu-item
           a.menu-item--link.active-hover href="#"
             | Shop
@@ -164,10 +164,9 @@ header
                 span.hidden-sm.hidden-xs#moodboard-counter
                   | Moodboard:&nbsp;
                   = "#{ current_user_moodboard.item_count }"
-        - if signed_in?
-          li.menu-item
-            = link_to profile_path, class: 'menu-item--link' do
-              | my account
+        li.menu-item
+          = link_to profile_path, class: 'menu-item--link' do
+            | my account
         li.menu-item.hidden-xxs
           a.menu-item--link.search href="#"
             = image_tag "search.png"

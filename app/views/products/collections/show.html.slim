@@ -48,7 +48,7 @@ ruby:
         = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
         br
       .col-md-3.hidden-sm.hidden-xs.hidden-xxs
-        = select_tag :color, color_options, class: 'pink-select', prompt: 'Colour'
+        = select_tag :color, color_options, class: 'pink-select', prompt: t(:color)
         br
       .col-md-3.col-xs-12.col-xxs-12.product-order
         = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
