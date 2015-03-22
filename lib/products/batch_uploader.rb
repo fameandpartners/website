@@ -573,6 +573,7 @@ module Products
 
           variant.on_demand = true
           # variant.price = product.price
+          variant.save
 
           aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
           aud.amount = price_in_aud
@@ -582,7 +583,6 @@ module Products
           usd.amount = price_in_usd
           usd.save!
 
-          variant.save
 
           variants.push(variant) if variant.persisted?
         end
