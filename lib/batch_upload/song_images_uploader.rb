@@ -13,8 +13,6 @@ module BatchUpload
             begin
               file_name = file_path.rpartition('/').last.strip
 
-              info "Song image: #{file_name}"
-
               song = product.moodboard_items.song.first
 
               if song.blank?
@@ -25,7 +23,7 @@ module BatchUpload
               song.image = File.open(file_path)
 
               if song.save
-                info "Song OK: #{file_name}"
+                success "Song", song_id: song.id, file_name: file_name
               else
                 error "Song for #{product.sku} not saved: #{song.errors.full_messages.map(&:downcase).to_sentence}"
               end

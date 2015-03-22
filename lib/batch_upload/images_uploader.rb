@@ -5,8 +5,11 @@ module BatchUpload
   class ImagesUploader
 
     include Term::ANSIColor
+
     extend Forwardable
     def_delegators :@logger, :info, :debug, :warn, :error, :fatal
+
+    attr_reader :ok
 
     def initialize(location, strategy = :update)
       @_strategies = [:update, :delete]
@@ -19,6 +22,7 @@ module BatchUpload
         @_strategy = strategy
       end
 
+      @ok = green("OK").freeze
       @logger = Logger.new(STDOUT)
       @logger.level = Logger::INFO unless ENV['debug']
       @logger.formatter = proc do |severity, datetime, _progname, msg|
@@ -74,6 +78,11 @@ module BatchUpload
 
     def paths_for(location)
       Dir.glob(File.join(location, '*'))
+    end
+
+    def success(type, attributes = {})
+      attrs = attributes.collect { |k,v| "#{k}=#{v}" }.join(' ')
+      info "#{type} #{ok}: #{attrs}"
     end
   end
 end

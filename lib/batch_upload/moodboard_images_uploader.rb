@@ -26,7 +26,7 @@ module BatchUpload
               end
 
               if moodboard.save
-                info "Moodboard OK: position=#{ position || 'NONE' } file=#{file_name}"
+                success "Moodboard", position: position, file: file_name
               else
                 error "Moodboard can not created #{moodboard.errors.full_messages.map(&:downcase).to_sentence}"
               end
