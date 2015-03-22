@@ -25,7 +25,7 @@ module BatchUpload
               song.image = File.open(file_path)
 
               if song.save
-                info "Song OK:  #{file_name}"
+                info "Song OK: #{file_name}"
               else
                 error "Song for #{product.sku} not saved: #{song.errors.full_messages.map(&:downcase).to_sentence}"
               end

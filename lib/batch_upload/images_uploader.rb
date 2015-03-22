@@ -1,8 +1,10 @@
 require 'forwardable'
+require 'term/ansicolor'
 
 module BatchUpload
   class ImagesUploader
 
+    include Term::ANSIColor
     extend Forwardable
     def_delegators :@logger, :info, :debug, :warn, :error, :fatal
 
@@ -20,7 +22,8 @@ module BatchUpload
       @logger = Logger.new(STDOUT)
       @logger.level = Logger::INFO unless ENV['debug']
       @logger.formatter = proc do |severity, datetime, _progname, msg|
-        "[%s] [%-5s] %s\n" % [datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg ]
+        color = severity == 'ERROR' ? red : ''
+        "%s[%s] [%-5s] %s%s\n" % [color, datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg, reset]
       end
     end
 
