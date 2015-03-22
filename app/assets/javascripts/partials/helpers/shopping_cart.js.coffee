@@ -8,7 +8,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     # code
     @data    = { item_count: 0, products: [] }
     @loaded   = false
-  
+
     @trigger =  delegateTo(@$eventBus, 'trigger')
     @on      =  delegateTo(@$eventBus, 'on')
     @one     =  delegateTo(@$eventBus, 'one')
@@ -85,12 +85,12 @@ window.helpers.ShoppingCart = class ShoppingCart
       if data.error
         @trigger('error', data)
         @trigger('complete', data)
-        window.helpers.showAlert(type: 'error', title: data.error)
+        window.helpers.showAlert(message: data.error)
       else
         @updateData(data)
         @trigger('success', data)
         @trigger('complete', data)
-        window.helpers.showAlert( type: 'success', title: 'The coupon code was successfully applied to your order.')
+        window.helpers.showAlert( type: 'success', title: '#hashtag #hooray', message: 'The coupon code was successfully applied to your order.')
     ).error( () =>
       @trigger('error')
     )
@@ -196,7 +196,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 #
 ##  buildOnSuccess: ->
 ##    console.log("Cart: Added to Cart.")
-##    
+##
 ##    _.delay ( ->
 ##      window.location.href = "/cart?cf=buybtn"
 ##      return
