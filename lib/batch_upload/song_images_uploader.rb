@@ -11,33 +11,26 @@ module BatchUpload
 
           get_list_of_files(directory_path).each do |file_path|
             begin
-              puts ""
-              puts ""
               file_name = file_path.rpartition('/').last.strip
 
-              puts "  [INFO] Process \"#{file_name}\" file"
-
-              puts "  [INFO] Search song"
+              info "Song image: #{file_name}"
 
               song = product.moodboard_items.song.first
 
               if song.blank?
-                puts "  [ERROR] Song not found"
+                error "Song image found for SKU: #{product.sku} but missing moodboard item. (#{file_name})"
                 next
-              else
-                puts "  [INFO] Song successfully found"
               end
 
               song.image = File.open(file_path)
 
               if song.save
-                puts "  [INFO] Song successfully updated"
+                info "Song OK:  #{file_name}"
               else
-                puts "  [ERROR] Song can not updated"
-                puts "    MESSAGES: #{song.errors.full_messages.map(&:downcase).to_sentence}"
+                error "Song for #{product.sku} not saved: #{song.errors.full_messages.map(&:downcase).to_sentence}"
               end
             rescue Exception => message
-              puts "  [ERROR] #{message.inspect}"
+              error "#{message.inspect}"
             end
           end
         end
