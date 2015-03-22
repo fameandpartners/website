@@ -582,8 +582,7 @@ module Products
           usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
           usd.amount = price_in_usd
           usd.save!
-
-
+          
           variants.push(variant) if variant.persisted?
         end
       end
