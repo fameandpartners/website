@@ -32,7 +32,7 @@ class Repositories::ProductMoodboard
   end
 
   def celebrity_item
-    @celebrity_item ||= moodboard_items.detect{ |item| item.image_file_name.downcase.include?('celeb') }
+    @celebrity_item ||= moodboard_items.detect{ |item| item.image_file_name.downcase.include?('celeb') if item.image_file_name }
   end
 
   def other_items
