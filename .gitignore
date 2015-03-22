@@ -46,6 +46,8 @@ config/database.yml
 /public/au
 /public/us
 
+# Backup Files
+*.swp
 *.orig
 
 ~/Library/Application Support/Sublime Text 3/Packages/

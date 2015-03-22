@@ -12,6 +12,10 @@ $(document).ready ->
     hidePrevious: false
   })
 
+  $('.slider-action').on 'click', (e) ->
+    e.preventDefault()
+    window.location = $(this).data('href')
+
   $('.selectbox').chosen
     inherit_select_classes: true
     disable_search: true
