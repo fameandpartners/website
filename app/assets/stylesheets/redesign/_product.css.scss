@@ -476,7 +476,7 @@ z.list-group-item.customization-option  {
     }
 
     .vex-dialog-buttons {
-      position:fixed;
+      position:absolute;
       top:0;
       right:0;
       padding:0;
@@ -485,14 +485,28 @@ z.list-group-item.customization-option  {
       .btn {
         padding: 6px 15px;
         outline: none;
+        font-family: 'brandon-grotesque';
       }
     }
   }
 
   @media screen and (max-width: 991px){
     .vex-content {
+      width:90%;
       height:90%;
       margin-bottom: 62px;
+    }
+  }
+  @media screen and (max-width: 480px){
+    .vex-content {
+      width:100%;
+      height:100%;
+      margin-bottom: 62px;
+
+      h2 {
+        padding-right: 50px;
+        padding-left: 50px;
+      }
     }
   }
 }
