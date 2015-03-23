@@ -29,5 +29,3 @@ ruby:
         - all_products = get_products_from_edit('SALE', nil, nil, 4)
         - all_products.each_slice(4) do |products|
           =render :partial => '/landing_pages/products_four', :locals => { :products => products }
-
-= render :partial => 'shared/email_capture_modal'
