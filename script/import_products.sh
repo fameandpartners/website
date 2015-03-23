@@ -60,6 +60,7 @@ image_types=(accessory customization moodboard product song)
 # Executed at EOF
 function main
 {
+  fix_image_directories
   import_spreadsheets
   import_images
   reindex_products
