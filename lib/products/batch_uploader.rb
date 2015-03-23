@@ -429,7 +429,7 @@ module Products
         first_empty_row_num += 1
       end
 
-      (@@first_content_row_number...first_empty_row_num)
+      (@@first_content_row_number..first_empty_row_num)
     end
 
     # create product with restored data
