@@ -47,6 +47,10 @@ FameAndPartners::Application.routes.draw do
     get '/christmas-gift' => 'statics#christmas_gift', :as => :christmas_gift
     get '/fame2015' => 'statics#fame2015', :as => :fame2015
 
+
+    # Monday March 23 2015 TTL: 6 months
+    get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
+
     #edits
     get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
     get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
@@ -55,7 +59,7 @@ FameAndPartners::Application.routes.draw do
     get '/prom' => redirect('/prom-collection')
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
-    
+
     post '/shared/facebook' => 'competition/events#share'
 
     # SEO categories routes, we want them in front

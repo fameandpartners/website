@@ -80,6 +80,16 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/facebook_lp', :layout => 'redesign/application'
   end
 
+  # Monday March 23 2015 TTL: 6 months
+  def unidays_lp
+    @title = "Unidays | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners. " + default_meta_description
+    render :template => 'statics/unidays_lp', :layout => 'redesign/application'
+  end
+
+
+
+
 # =======================================================================
 # OLD PAGES
 # =======================================================================
