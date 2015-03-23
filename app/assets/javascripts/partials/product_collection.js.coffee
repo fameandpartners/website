@@ -11,6 +11,12 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   collectionMoreTemplate: JST['templates/product_collection_append']
 
   constructor: (options = {}) ->
+    options = $.extend({
+      reset_source: true,
+      page_size: 20,
+      showMoreSelector: "*[data-action=show-more-collection-products]"
+		}, options)
+
     @details_elements = options.details_elements || {}
     @filter = $(options.controls)
     @content = $(options.content)
@@ -20,10 +26,14 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     # then use this path until user selects another collection
     @source_path = window.location.pathname || '/dresses'
 
+    # allow user to leave /dresses/for/very/special/case collection
+    # or navigate only in it
+    @reset_source = options.reset_source
+
     # pagination
-    @page_size = options.page_size || 20
+    @page_size = options.page_size
     @resetPagination(options.size, options.total_products)
-    @showMoreSelector = "*[data-action=show-more-collection-products]"
+    @showMoreSelector = options.showMoreSelector
     @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
     $(window).on('scroll', @scrollHandler)
 
@@ -68,7 +78,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         row.find('.inactive').show()
 
   update: () =>
-    @source_path = '/dresses'
+    @source_path = '/dresses' if @reset_source
     updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
     pageUrl = @updatePageLocation(updateRequestParams)
 
@@ -129,12 +139,12 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     }
 
   updatePageLocation: (filter) ->
-    url = '/dresses'
+    source = _.clone(@source_path)
     filter = _.compactObject(filter || {})
     if _.isEmpty(filter)
-      url = '/dresses'
+      url = source
     else
-      url = "/dresses?#{ $.param(filter) }"
+      url = "#{ source }?#{ $.param(filter) }"
 
     url = urlWithSitePrefix(url)
     window.history.pushState({ path: url }, '', url)
