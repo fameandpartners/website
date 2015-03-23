@@ -50,7 +50,7 @@ fi
 
 spreadsheets=$(find ${content_directory} -name '*.xls*' |grep -v "~")
 image_directories=$(find "${content_directory}"  -maxdepth 1  -mindepth 1 -type d)
-image_types=(accessory customization moodboard product song)
+image_types=(customization moodboard product song)
 # rake import:accessory:images                      # Import images for accessories (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:customization:images                  # Import images for customizations (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:moodboard:images                      # Import images for moodboards (specify directory location w/ LOCATION=/path/to/directory)
