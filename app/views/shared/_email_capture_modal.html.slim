@@ -9,14 +9,15 @@
 
     email_capture_modal = "
       new window.page.EmailCaptureModal({
-        promocode: '#{promocode}',
-        content:   '#{content}',
-        heading:   '#{heading}',
-        message:   '#{message}',
-        className: '#{class_name}',
-        action:    '#{campaigns_email_capture_path}',
-        container: '#email-capture-fields',
-        timeout:    #{timeout}
+        promocode: \"#{promocode}\",
+        content:   \"#{content}\",
+        heading:   \"#{heading}\",
+        message:   \"#{message}\",
+        className: \"#{class_name}\",
+        action:    \"#{campaigns_email_capture_path}\",
+        container: \"#email-capture-fields\",
+        timeout:    #{timeout},
+        force:      true
       });
     "
 
