@@ -120,8 +120,6 @@ class Products::CollectionResource
       result[:limit] = limit if limit.present?
       result[:offset] = offset if offset.present?
 
-      Rails.logger.info "query_options: #{ result.inspect }"
-
       result
     end
 

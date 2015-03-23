@@ -32,7 +32,7 @@
 
               .details.text-center
                 span.name = product.name
-                span.price =  price_for_product(product)
+                span.price = price_for_product(product)
 
               - if product.fast_delivery == true
             	 = image_tag src='express_delivery.png', class: 'express-delivery'
