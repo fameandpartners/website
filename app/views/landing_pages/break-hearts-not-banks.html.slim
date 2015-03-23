@@ -46,4 +46,5 @@
     .container.relative.products-collection
       - all_products = get_products_from_edit('breakhearts', nil, nil, 20)
 
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(0, 4) }
+      - all_products.each_slice(4) do |products|
+        = render :partial => '/landing_pages/products_four', :locals => { :products => products }
