@@ -48,7 +48,7 @@
 // - facebook
 .btn-facebook {
   background-color: #3b5998;
-  font-size: 12px;
+
   position: relative;
   color: #fff;
   padding-right: 0;
@@ -61,6 +61,10 @@
     top: 0;
     bottom: 0;
     text-align: center;
+  }
+
+  span {
+    font-size: 12px;
   }
 
   &.btn-md {
