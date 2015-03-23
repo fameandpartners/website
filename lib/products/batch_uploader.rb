@@ -727,6 +727,12 @@ module Products
     def add_product_prices(product, price, us_price = nil)
       product.price = price
       product.save
+
+      master_variant = product.master
+
+      usd = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'USD')
+      usd.amount = us_price
+      usd.save!
     end
 
     def add_product_videos(product, videos_attrs = {})
