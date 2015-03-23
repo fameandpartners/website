@@ -30,7 +30,7 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
     window.track.event('Newsletter', 'Error', @campaign)
 
   success: =>
-    title = '#hashtag #hooray'
+    title = 'thanks babe'
     message = 'Thanks for signing up. Use this promocode for $20 off your purchase: NEWS20.'
     window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 55555)
     $.cookie('email_newsletter', 'close', { expires: 365, path: '/' })
