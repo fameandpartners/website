@@ -15,6 +15,9 @@
 # 2. Removed all the ARCHIVE or Archive directories.
 # 3. Removed all spreadsheets which where obviously not real e.g. "$~MasterContent_SalesPage.xlsx"
 # 4. Renamed any directories or files with single quotes (') - There were only one or two.
+# 5. Renamed missing product SKU directories (Append "B")
+#     - 'Drop1-USProm/4B290-Emma Kate' => "Drop1-USProm/4B290B-Emma Kate"
+#     - 'Drop2-GlamorousRebel/4B283-Glam Lace' => 'Drop2-GlamorousRebel/4B283B-Glam Lace'
 
 # TODO Before running
 # 1. Shrink the images using Toby's cool script.case
@@ -120,5 +123,8 @@ function red     { tput setaf 1; }
 function green   { tput setaf 2; }
 function yellow  { tput setaf 3; }
 function blue    { tput setaf 4; }
+
+head -n 25 $0
+read -p "Enter to continue, or Ctrl-C to cancel!"
 
 time main | tee $logfile

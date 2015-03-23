@@ -11,20 +11,14 @@ module BatchUpload
 
           get_list_of_files(directory_path).each do |file_path|
             begin
-              file_name = file_path.rpartition('/').last.strip
+              file_name = File.basename file_path
 
-              # info "Accessory image: #{file_name}"
-
-              matches = /^(?<style_name>\S+)(?<position>\d+)\.\S+/.match(file_name)
-
-              if matches.blank? || matches[:style_name].blank? || matches[:position].blank?
-                error "File name requires style and position: #{file_name}"
+              begin
+                position, style_name = split_filename(file_name)
+              rescue InvalidArgumentException => e
+                error e.message
                 next
               end
-
-              position = matches[:position].to_s.to_i
-              style_name = matches[:style_name].downcase
-              style_name.gsub!('boho', 'bohemian')
 
               style = Style.find_by_name(style_name)
 
@@ -53,6 +47,19 @@ module BatchUpload
           end
         end
       end
+    end
+
+    def split_filename(file_name)
+      matches = /^(?<style_name>\S+)\s*(?<position>\d+)\s*\.\S+/.match(file_name)
+
+      if matches.blank? || matches[:style_name].blank? || matches[:position].blank?
+        raise ArgumentError.new("File name requires style and position: #{file_name}")
+      end
+
+      position = matches[:position].to_s.to_i
+      style_name = matches[:style_name].downcase
+      style_name.gsub!('boho', 'bohemian')
+      [position, style_name]
     end
   end
 end

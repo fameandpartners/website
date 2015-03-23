@@ -11,7 +11,7 @@ module BatchUpload
 
           get_list_of_files(directory_path).each do |file_path|
             begin
-              file_name = file_path.rpartition('/').last.strip
+              file_name = File.basename file_path
 
               perfume = product.moodboard_items.parfume.first
 
