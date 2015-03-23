@@ -26,11 +26,15 @@
 
 # Skip execution of the actual rake tasks, pass 'dryrun' as the first argument.
 # $ scripts/import_products.sh dryrun
-if [ "$1" = "dryrun" ] ; then
-  dryrun=$1
-else
-  dryrun=''
-fi
+
+# Fail on missing variables.
+set -u
+# Fail on any error condition
+set -e
+# Fail on failures in pipes
+set -o pipefail
+
+dryrun=${1:-}
 
 # Init
 import_start_time=$(date '+%Y-%m-%d_%H.%M.%S')
@@ -40,7 +44,7 @@ log_date_format='%Y-%m-%d %H:%M:%S'
 content_directory='/home/deploy/IMAGES/'
 
 # For easier local testing
-if [ $(whoami) = "garrow" ] ; then 
+if [ $(whoami) = "garrow" ] ; then
   content_directory='/Users/garrow/fame/content/ProductUpload'
 fi
 
@@ -65,12 +69,35 @@ function main
 function reindex_products
 {
   info "Reindexing Products"
+  if [ "$dryrun" = "dryrun"  ]; then return; fi
   bundle exec rake import:product:reindex
 }
 
 function import_spreadsheets
 {
   for xls in ${spreadsheets[@]}; do import_product_spreadsheet ${xls} ; done
+}
+
+function fix_image_directories
+{
+  info "Fixing known bad image directories"
+
+  fix_image_directory "Drop1-USProm/4B290-Emma Kate"         "Drop1-USProm/4B290B-Emma Kate"
+  fix_image_directory "Drop2-GlamorousRebel/4B283-Glam Lace" "Drop2-GlamorousRebel/4B283B-Glam Lace"
+}
+
+function fix_image_directory()
+{
+  bad_dir="${content_directory}/$1"
+  fix_dir="${content_directory}/$2"
+  if [ -d "$bad_dir" ]; then
+    info "Moving $bad_dir -> $fix_dir"
+
+    if [ "$dryrun" = "dryrun" ]; then return; fi
+    mv "$bad_dir" "$fix_dir"
+  elif [ -d "$fix_dir" ]; then
+    info "Directory already fixed ${fix_dir}"
+  fi
 }
 
 function import_images
@@ -82,7 +109,7 @@ function import_images_for_drop()
 {
   directory=$1
   info "Importing from $directory"
-  if [ ! -d "$directory" ]; then 
+  if [ ! -d "$directory" ]; then
     error "$directory Images Directory not readable, skipping"
     return
   fi
@@ -98,7 +125,7 @@ function import_images_type()
 
   if [ "$dryrun" = "dryrun"  ]; then return; fi
   bundle exec rake import:${images_type}:images || error "FAILED!"
-} 
+}
 
 function import_product_spreadsheet()
 {
@@ -124,7 +151,7 @@ function green   { tput setaf 2; }
 function yellow  { tput setaf 3; }
 function blue    { tput setaf 4; }
 
-head -n 25 $0
+head -n 28 $0
 read -p "Enter to continue, or Ctrl-C to cancel!"
 
 time main | tee $logfile
