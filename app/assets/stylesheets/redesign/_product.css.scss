@@ -398,40 +398,84 @@ z.list-group-item.customization-option  {
   display:block;
 }
 
+.vex.vex-theme-flat-attack .vex-content {
+  padding: 0 !important;
+}
+
+.vex.vex-theme-flat-attack .vex-content h2 {
+    font-family: "brandon-grotesque"!important;
+  }
+
+.vex.vex-theme-flat-attack .vex-content h6, span {
+  text-transform: uppercase;
+  font-weight: 500 !important;
+  margin-bottom: 0;
+}
 
 .vex-theme-flat-attack.fit-guide {
-  padding:0;
 
   .vex-content {
-    width:95%;
+    width:50%;
     height:95%;
     overflow-y:auto;
     z-index:9999 !important;
-    border:5px solid black;
+    border: 2px solid black;
+
+  table {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    .table > thead > tr > th {
+      border-bottom: none;
+    }
+
+    img {
+      width: 217px;
+      display: block;
+    }
 
     h6 {
       font-size:1em;
-      font-weight:600;
     }
-    p, td{
+
+    p {
       font-size:0.666666em;
-      font-weight:300;
+      font-weight: 400;
+      padding-top: 14px;
+    }
+
+    th {
+      padding-left: 10px
     }
 
     thead {
-      td {
-        font-size:1em;
-        font-weight:600;
-      }
+      text-transform: uppercase;
+      background-color:#f5f5f5;
+
     }
 
     td.sub-heading {
       font-size:0.666666em;
-      font-weight:600;
+      font-weight:400;
+      font-size: 15px;
+    }
+
+    td
+     {
+      border-top: none;
+      font-size:14px;
+      font-weight:400;
+      text-align: center;
+    }
+
+    tr:nth-child(even) {
+      background-color:#f5f5f5;
     }
 
     .vex-dialog-buttons {
-      position:fixed;
+      position:absolute;
       top:0;
       right:0;
       padding:0;
@@ -440,14 +484,28 @@ z.list-group-item.customization-option  {
       .btn {
         padding: 6px 15px;
         outline: none;
+        font-family: 'brandon-grotesque';
       }
     }
   }
 
   @media screen and (max-width: 991px){
     .vex-content {
+      width:90%;
       height:90%;
       margin-bottom: 62px;
+    }
+  }
+  @media screen and (max-width: 480px){
+    .vex-content {
+      width:100%;
+      height:100%;
+      margin-bottom: 62px;
+
+      h2 {
+        padding-right: 50px;
+        padding-left: 50px;
+      }
     }
   }
 }
