@@ -323,7 +323,6 @@ z.list-group-item.customization-option  {
   .grey {
     background-color: #f5f5f5;
     min-height: 270px;
-
   }
 
   .active .size-box {
@@ -463,4 +462,27 @@ z.list-group-item.customization-option  {
   height: 45px;
   line-height: 45px;
   line-height: 9px;
+}
+
+#product-color-content {
+
+  h2 {
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    font-size: 16px;
+  }
+
+  .option-name {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+  }
+
+  .grey {
+    background-color: #f5f5f5;
+    min-height: 270px;
+  }
 }
