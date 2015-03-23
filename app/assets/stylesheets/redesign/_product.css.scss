@@ -420,7 +420,7 @@ z.list-group-item.customization-option  {
     height:95%;
     overflow-y:auto;
     z-index:9999 !important;
-    border:5px solid black;
+    border: 2px solid black;
 
   table {
     width: 95%;
@@ -441,9 +441,10 @@ z.list-group-item.customization-option  {
       font-size:1em;
     }
 
-    p{
+    p {
       font-size:0.666666em;
-      font-weight:400;
+      font-weight: 400;
+      padding-top: 14px;
     }
 
     th {
