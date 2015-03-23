@@ -219,32 +219,29 @@ hr
 
 /! PRODUCT SIZES PANEL
 #product-size-content.product-side-panel
-  .row
-    .col-md-12.recommended
-      h2 Sizes
-      - if @product.default_sizes?
-        - @product.default_sizes.each do |size|
-          .col-md-3.col-xs-3.col-xxs-6
-            a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
-              span.option-box.size-box= size.presentation.gsub(/\D/, '')
-
-  - if @product.custom_sizes?
+  .sizes-container.grey
     .row
-      .col-md-12.custom
-        h2=  "Custom Sizes +#{@product.custom_size_price}"
+      .col-md-12.recommended
+        h2 Sizes
+        - if @product.default_sizes?
+          - @product.default_sizes.each do |size|
+            .col-md-3.col-xs-3.col-xxs-6
+              a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
+                span.option-box.size-box= size.presentation.gsub(/\D/, '')
 
-        - @product.custom_sizes.each do |size|
-          .col-md-3.col-xs-3.col-xxs-6
-            a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
-              span.option-box.size-box= size.presentation.gsub(/\D/, '')
-              span.option-price= "+#{@product.custom_size_price}"
+  .sizes-container
+    - if @product.custom_sizes?
+      .row
+        .col-md-12.custom
+          h2=  "Custom Sizes +#{@product.custom_size_price}"
+
+          - @product.custom_sizes.each do |size|
+            .col-md-3.col-xs-3.col-xxs-6
+              a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
+                span.option-box.size-box= size.presentation.gsub(/\D/, '')
 
   .row
-    .col-md-12.text-center
-      p.size-region=  t('views.pages.products.show.size_region')
-
-  .row
-    .col-md-4
+    .col-md-10.col-md-offset-1
       button.btn-fit-guide.btn.btn-block.btn-secondary Fit Guide
 
 
