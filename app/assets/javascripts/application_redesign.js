@@ -13,6 +13,7 @@
 //= require libs/jquery.chosen.min
 //= require libs/soundcloud/sc-player
 //= require libs/jquery.hoverable.js
+//= require libs/superslides.js
 
 // styleguide code
 //= require js/snap.svg-min.js
@@ -33,7 +34,7 @@
 //= require js/card.js
 
 //= require js/functions.js
-//= require js/superslides.js
+//  require js/superslides.js # copied to libs/superslides for easier monkey-patching
 //= require functions_redesign.js
 
 //= require helpers
