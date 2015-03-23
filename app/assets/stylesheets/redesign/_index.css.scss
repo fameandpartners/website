@@ -79,13 +79,54 @@
 	min-height: 312px;
 	margin-bottom: 4.5rem;
 
-		button {
-			margin-top: 9px;
-		  margin-left: 12px;
+	button {
+		margin-top: 22px;
+	  margin-left: 12px;
+	  padding: 0;
+	  font-family: forum;
+	  color: black;
+	  text-transform: none;
+
+	  &:hover {
+	  	background-color: transparent;
+	  }
 	}
 
 	input {
 		text-transform: none;
+	}
+
+	.submit {
+		display: inline-block;
+	}
+
+	.form-control {
+		width: 100%;
+	}
+
+	.form-group {
+		width: 40%;
+
+		@media (max-width: 990px){
+			width: 100%
+		}
+	}
+
+	.submit {
+		@media (max-width: 990px){
+		display: block;
+		}
+	}
+}
+
+.search-bar {
+
+	.input-group {
+		width: 500px;
+	}
+
+		button {
+		float:left;
 	}
 }
 
@@ -116,7 +157,6 @@
 		background-color: transparent;
 		border-bottom:1px solid black;
 		display: inline-block;
-		width: 90%;
 		padding: 0;
 		height: 30px;
 	}
@@ -124,7 +164,6 @@
 	.input-group {
 		margin-left: auto;
 		margin-right: auto;
-		width: 500px;
 
 		@media (max-width: 550px){
 			width: 100%;
@@ -154,9 +193,7 @@
 	   text-transform: none;
 	}
 
-	button {
-		float:left;
-	}
+
 
 	.col-md-2 {
 		padding-left: 0;
@@ -464,4 +501,18 @@
 
 .skippr-nav-element:hover, .skippr-nav-element-active {
 	background-color:	#A9A9A9;
+}
+
+.search-form {
+	.form-control {
+		@media (max-width: 990px){
+			width: 100% !important;
+		}
+	}
+
+	button {
+		@media (max-width: 990px){
+			width: 100%;
+		}
+	}
 }
