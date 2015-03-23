@@ -5,6 +5,7 @@
 # Repositories::Taxonomy.get_taxon_by_name('code')
 # Repositories::Taxonomy.read_styles
 # Repositories::Taxonomy.read_events
+# Repositories::Taxonomy.read_all
 
 module Repositories; end
 class Repositories::Taxonomy
@@ -35,7 +36,7 @@ class Repositories::Taxonomy
     end
 
     def taxons
-      read_all
+      read_all.clone
     end
 
     # utils methods

@@ -8,7 +8,6 @@
 # tools
 #    Repositories::Discount.expire_cache!(true) # reset cache
 #    Repositories::Discount.discounts(force: true) # reset & load
-
 module Repositories; end
 class Repositories::Discount
   # available discountable_type
@@ -23,7 +22,7 @@ class Repositories::Discount
     def read(discountable_class, discountable_id)
       key = type_to_key(discountable_class)
       discounts[key] ||= {}
-      discounts[key][discountable_id] rescue nil
+      discounts[key][discountable_id].try(:clone)
     end
 
     def read_all
@@ -72,12 +71,12 @@ class Repositories::Discount
 
           discounts.each do |discount|
             existing_discount = all_discounts[key][discount.discountable_id]
-            if existing_discount.present? && existing_discount.amount > discount.amount
+            if existing_discount.present? && (existing_discount.amount > discount.amount)
               # we already have saved better discount
             else
               all_discounts[key][discount.discountable_id] = OpenStruct.new(
                 amount: discount.amount,
-                size:   discount.size
+                size: discount.size
               )
             end
           end
