@@ -15,8 +15,8 @@
 # 2. Removed all the ARCHIVE or Archive directories.
 # 3. Removed all spreadsheets which where obviously not real e.g. "$~MasterContent_SalesPage.xlsx"
 # 4. Renamed any directories or files with single quotes (') - There were only one or two.
-# 5. Renamed missing product SKU directories (Append "B")
-#     - 'Drop1-USProm/4B290-Emma Kate' => "Drop1-USProm/4B290B-Emma Kate"
+# 5. Renamed missing product SKU directories
+#     - 'Drop1-USProm/4B290B-Emma Kate' => "Drop1-USProm/4B290-Emma Kate"
 #     - 'Drop2-GlamorousRebel/4B283-Glam Lace' => 'Drop2-GlamorousRebel/4B283B-Glam Lace'
 
 # TODO Before running
@@ -83,7 +83,7 @@ function fix_image_directories
 {
   info "Fixing known bad image directories"
 
-  fix_image_directory "Drop1-USProm/4B290-Emma Kate"         "Drop1-USProm/4B290B-Emma Kate"
+  fix_image_directory "Drop1-USProm/4B290B-Emma Kate"        "Drop1-USProm/4B290-Emma Kate"
   fix_image_directory "Drop2-GlamorousRebel/4B283-Glam Lace" "Drop2-GlamorousRebel/4B283B-Glam Lace"
 }
 
