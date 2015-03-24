@@ -379,12 +379,16 @@ module Products
 
       #scent_start = @codes[:customization_exclusions].present? ? (@codes[:customization_exclusions].first.to_i + 1) : 28
       scent_start = 32 #28 + (usd + customisation exclusions = 5 columns) = 32
+      #
+      # @codes[:perfume_link]   = scent_start
+      # @codes[:perfume_name]   = scent_start + 1
+      # @codes[:perfume_brand]  = scent_start + 2
 
-      @codes[:perfume_link]   = scent_start
-      @codes[:perfume_name]   = scent_start + 1
-      @codes[:perfume_brand]  = scent_start + 2
-      @codes[:song_link]      = scent_start + 3
-      @codes[:song_name]      = scent_start + 4
+      book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        next unless title =~ /Music Track Link/i
+        @codes[:song_link]      = index + 1
+        @codes[:song_name]      = index + 2
+      end
 
       @codes[:recommendations] = {}
       @codes[:recommendations][:edgy] = []
