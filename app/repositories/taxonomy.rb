@@ -5,6 +5,7 @@
 # Repositories::Taxonomy.get_taxon_by_name('code')
 # Repositories::Taxonomy.read_styles
 # Repositories::Taxonomy.read_events
+# Repositories::Taxonomy.read_collections
 # Repositories::Taxonomy.read_all
 
 module Repositories; end
@@ -28,11 +29,15 @@ class Repositories::Taxonomy
     end
 
     def read_styles
-      taxons.select{|taxon| taxon.taxonomy == 'Style'}
+      taxons.select{|taxon| taxon.taxonomy == 'Style' && !taxon.root }
     end
 
     def read_events
-      taxons.select{|taxon| taxon.taxonomy == 'Event'}
+      taxons.select{|taxon| taxon.taxonomy == 'Event' && !taxon.root }
+    end
+
+    def read_collections
+      taxons.select{|taxon| taxon.taxonomy == 'Range' && !taxon.root }
     end
 
     def taxons
