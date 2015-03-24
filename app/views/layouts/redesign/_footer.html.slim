@@ -23,7 +23,7 @@
         li.footer-nav--item
           = link_to 'Fame Chain', fame_chain_path
 
-  .row.lower-row
+  .lower-row
     .col-md-3.col-sm-8
       - locale_options = options_for_select({'AU' => site_version_path('au'), 'US' => site_version_path('us')}, site_version_path(current_site_version.code))
       = select_tag :locale_select, locale_options, 'data-backlink' => get_hreflang_link, 'data-minimum-results-for-search' => 'Infinity'

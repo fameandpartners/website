@@ -1,32 +1,36 @@
 
 div.address itemscope="" itemtype="http://schema.org/Organization"
-    meta itemprop="url" content="http://www.fameandpartners.com/" 
-    meta itemprop="logo" content="http://www.fameandpartners.com/images/logo-new.png" 
+    meta itemprop="url" content="http://www.fameandpartners.com/"
+    meta itemprop="logo" content="http://www.fameandpartners.com/images/logo-new.png"
     span itemprop="name" Fame & Partners
-    
-    - if current_site_version.is_australia?   
+
+    - if current_site_version.is_australia?
       p itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress"
         span itemprop="streetAddress" Bondi
         ',
         span itemprop="addressLocality" Sydney
-        br 
+        br
         span itemprop="addressRegion" NSW
-        ',  
+        ',
         span itemprop="postalCode" 2026
-        ',  
+        ',
         span itemprop="addressCountry" Australia
-      
+        br
+        span itemprop="telephone" Phone 1300 924 860
+
       p.abn itemprop="taxID" ABN 83 162 501 064
 
-    - else        
-    
+    - else
+
       p itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress"
         span itemprop="streetAddress" 25 Broadway, Floor 9
-        br  
+        br
         span itemprop="addressLocality" New York
-        ',  
+        ',
         span itemprop="addressRegion" NY
-        ', 
+        ',
         span itemprop="postalCode" 10004
         ',
         span itemprop="addressCountry" USA
+        br
+        span itemprop="telephone" Phone 866 527 7797
