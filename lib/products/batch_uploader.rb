@@ -356,19 +356,17 @@ module Products
         end
       end
 
-      @codes[:customizations] = []
-
       @codes[:price_in_aud] = 4
       @codes[:price_in_usd] = 5
       @codes[:description] = 6
 
-      start = 23 # ?
-      3.times do |time|
-        @codes[:customizations] << {
-          name: start,
-          price: start + 1
-        }
-        start += 2
+      @codes[:customizations] = []
+      book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        next unless title =~ /customisation \#\d/i
+          @codes[:customizations] << {
+            name: index,
+            price: index + 1
+          }
       end
 
       #@codes[:customization_exclusions] = []
