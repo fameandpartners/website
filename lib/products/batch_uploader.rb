@@ -364,8 +364,8 @@ module Products
       book.row(@@titles_row_numbers.second).each_with_index do |title, index|
         next unless title =~ /customisation \#\d/i
           @codes[:customizations] << {
-            name: index,
-            price: index + 1
+            name: index + 1, #honestly wtf
+            price: index + 2
           }
       end
 
@@ -504,7 +504,7 @@ module Products
         end
       end
 
-      new_product = product.persisted? ? 'New' : 'Updated'
+      new_product = product.persisted? ? 'Updated' : 'New'
 
       product.save!
       puts "Saving: #{new_product} - #{product.sku} - #{product.id} - #{product.name}"
