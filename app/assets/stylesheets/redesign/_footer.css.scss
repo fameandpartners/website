@@ -59,6 +59,10 @@
 	.footer-social--item {
 		padding-bottom: 0;
 		cursor:pointer;
+
+		@media (max-width: 990px){
+			padding-bottom: 55px;
+		}
 	}
 
 	.footer-logo {
@@ -95,7 +99,6 @@
 	.container {
 		padding-left: 0;
 		padding-right: 0;
-		max-width: 100%;
 	}
 
 	.social-links {
@@ -110,6 +113,7 @@
 	.lower-row {
 		margin-bottom: 2rem;
 		clear: both;
+		min-height: 100px;
 
 		@media(max-width: 768px){
 			max-width: 100%;
@@ -136,6 +140,7 @@
 
 	.select2-container {
 		width: 100% !important;
+		max-width: 300px !important;
 	}
 
 	.select2-container--default .select2-selection--single {

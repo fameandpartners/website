@@ -39,6 +39,10 @@
 
 #mobile-menu {
   height: 45px;
+
+  @media(max-width: 440px){
+    height: 70px;
+  }
   .row {
     margin-left: 0;
     margin-right: 0;
