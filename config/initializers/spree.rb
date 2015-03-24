@@ -50,8 +50,8 @@ Spree.config do |config|
   else
     config.use_s3 = false
 
-    config.attachment_path = ':rails_root/public/spree/products/:id/:style/:basename.:extension'
     config.attachment_url = '/spree/products/:id/:style/:basename.:extension'
+    config.attachment_path = ':rails_root/public/spree/products/:id/:style/:basename.:extension'    
   end
 end
 
