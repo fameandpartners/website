@@ -281,27 +281,14 @@ hr
   .col-md-12
     h2 Customize Your Dress
 
-  .row
-    .col-md-12
-      ul.list-group
-        a.customization-option.list-group-item.active href="#" data-id="original"
-          .row
-            .col-md-4.col-xs-4.col-xxs-12
-              .row &nbsp;
-            .col-md-8.col-xs-8.col-xxs-12
-              .row
-                span.option-name Original
-                span.option-price +0
-            br
-        - @product.customization_options.each do |option|
+    - @product.customization_options.each do |option|
+      .col-md-10.col-md-offset-1
+        .row
+          .image-box
+            = image_tag option.image, :alt => option.name
+        .row
+          p.option-name= option.name
+
           a.customization-option.list-group-item href="#" data-id=option.id data-name=option.name data-price=option.display_price
-            .row
-              .col-md-4.col-xs-4.col-xxs-12
-                .row
-                  .image-box
-                    = image_tag option.image, :class => 'img-responsive', :alt => option.name
-              .col-md-8.col-xs-8.col-xxs-12
-                .row
-                  span.option-name= option.name
-                  span.option-price= "+#{option.display_price}"
-            br
+            span.option-price= "+#{option.display_price}"
+
