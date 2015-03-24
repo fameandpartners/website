@@ -115,6 +115,21 @@ To deploy with migrations (will turn maintenance mode on meaning site is down)
 * `$ ey deploy -e preprod `
 
 
+### Testing Payments
+
+Access `/admin/payment_methods/1/edit`
+
+ * `Active => Yes`
+ * `Environment => Development`
+ * `Test Mode => Checked`
+ * `Server => test`
+
+Test CC is `5520000000000000`
+
+You can use any other details. 
+
+
+
 ## Useful Pages
 
  - **Home** - `IndexController#show`
@@ -125,5 +140,3 @@ To deploy with migrations (will turn maintenance mode on meaning site is down)
 ### Thanks for using FameAndPartners!
 
 Cheers, [Droid Labs](http://droidlabs.pro).
-
-
