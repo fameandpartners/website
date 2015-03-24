@@ -48,6 +48,11 @@ if [ $(whoami) = "garrow" ] ; then
   content_directory='/Users/garrow/fame/content/ProductUpload'
 fi
 
+# For easier local testing
+if [ $(whoami) = "tobyhede" ] ; then
+  content_directory='/Users/tobyhede/documents/fame/ProductUpload'
+fi
+
 spreadsheets=$(find ${content_directory} -name '*.xls*' |grep -v "~")
 image_directories=$(find "${content_directory}"  -maxdepth 1  -mindepth 1 -type d | grep -vi spreadsheet)
 image_types=(customization moodboard product song)
