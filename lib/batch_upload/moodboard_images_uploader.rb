@@ -24,12 +24,13 @@ module BatchUpload
               matches = /^(?<position>\d+)\.\S+/.match(file_name)
               position = matches.present? ? matches[:position] : nil
 
+              next if test_run?
+
               moodboard = product.moodboard_items.moodboard.build do |object|
                 object.image = File.open(file_path)
                 object.position = position
               end
 
-              next if test_run?
 
               if moodboard.save
                 success "Moodboard", position: position, file: file_name
