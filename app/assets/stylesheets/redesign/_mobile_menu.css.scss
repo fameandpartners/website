@@ -38,8 +38,32 @@
 }
 
 #mobile-menu {
+  height: 45px;
   .row {
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .event {
+    background-color: #f5e2d4;
+    a {
+      color: black;
+    }
+  }
+
+  .style {
+    background-color: #013648;
+  }
+
+  .color {
+    background-color: #eeddf0;
+    a {
+      color: black;
+    }
+  }
+
+  .mobile-menu-icon {
+    border: none;
+    padding: 14px 20px 20px 20px;
   }
 }
