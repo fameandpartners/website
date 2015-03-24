@@ -79,36 +79,11 @@ module Products
         raw[:revenue]             = book.cell(row_num, columns[:revenue])
         raw[:cogs]                = book.cell(row_num, columns[:cogs])
         raw[:color_customization] = book.cell(row_num, columns[:color_customization])
-        raw[:video_id]            = book.cell(row_num, columns[:video_id])
         raw[:short_description]   = book.cell(row_num, columns[:short_description])
 
         # Additional
-        raw[:perfume_link]        = book.cell(row_num, columns[:perfume_link])
-        raw[:perfume_name]        = book.cell(row_num, columns[:perfume_name])
-        raw[:perfume_brand]       = book.cell(row_num, columns[:perfume_brand])
         raw[:song_link]           = book.cell(row_num, columns[:song_link])
         raw[:song_name]           = book.cell(row_num, columns[:song_name])
-
-
-
-        raw[:recommendations]     = {}
-        columns[:recommendations].each do |style, recommendations|
-          raw[:recommendations][style] ||= []
-          recommendations.each_with_index do |recommendation, index|
-            price = book.cell(row_num, recommendation[:price])
-            if price.is_a?(String)
-              price = price.match(/\d+.?\d*/)[0].to_f
-            end
-
-            raw[:recommendations][style] << {
-              name: book.cell(row_num, recommendation[:name]).to_s.gsub("_x000D_", '').strip,
-              description: book.cell(row_num, recommendation[:description]).to_s.gsub("_x000D_", '').strip,
-              price: price,
-              link: book.cell(row_num, recommendation[:link]),
-              position: index + 1
-            }
-          end
-        end
 
         raw[:customizations]      = []
         columns[:customizations].each_with_index do |customization, index|
@@ -119,28 +94,7 @@ module Products
           }
         end
 
-        #columns[:customization_exclusions].each do |column_num|
-        #  title = book.cell(row_num, column_num).to_s.strip
-        #  if title.present?
-        #    mutally_exclusive = title.split('|').map(&:to_i)
-        #    mutally_exclusive.each do |item_position|
-        #      item = raw[:customizations].find{|x| x[:position] == item_position}
-        #      if item
-        #        item[:incompatibles] = mutally_exclusive.select{|i| i != item_position}
-        #      end
-        #    end
-        #  end
-        #end
-
         processed = {}
-
-        if raw[:video_id].present?
-          if raw[:video_id].is_a?(String) || raw[:video_id].is_a?(Integer)
-            processed[:video_id] = raw[:video_id].to_s
-          elsif raw[:video_id].is_a?(Float)
-            processed[:video_id] = raw[:video_id].to_i.to_s
-          end
-        end
 
         if raw[:sku].present?
           if raw[:sku].is_a?(String) || raw[:sku].is_a?(Integer)
@@ -210,16 +164,6 @@ module Products
           end
         end
 
-        processed[:recommendations] = {}
-        raw[:recommendations].each do |style, recommendations|
-          processed[:recommendations][style] = []
-
-          recommendations.each do |recommendation|
-            if recommendation[:name].present? || recommendation[:link].present?
-              processed[:recommendations][style] << recommendation
-            end
-          end
-        end
 
         item = {
           # Basic
@@ -265,20 +209,11 @@ module Products
             color_customization:  raw[:color_customization],
             short_description:    raw[:short_description]
           },
-          perfume: {
-            link:         raw[:perfume_link],
-            name:         raw[:perfume_name],
-            brand:        raw[:perfume_brand]
-          },
           song: {
             link:            raw[:song_link],
             name:            raw[:song_name],
           },
-          video: {
-            default: processed[:video_id]
-          },
           customizations:       processed[:customizations],
-          recommendations:      processed[:recommendations]
         }
 
         @parsed_data.push(item)
@@ -369,47 +304,10 @@ module Products
           }
       end
 
-      #@codes[:customization_exclusions] = []
-      #exclusion_regexp = /customisation.*exclusion/i
-      #book.row(@@titles_row_numbers.second).each_with_index do |title, index|
-      #  if title.present? and title.strip.to_s =~ exclusion_regexp
-      #    @codes[:customization_exclusions].push(index.next)
-      #  end
-      #end
-
-      #scent_start = @codes[:customization_exclusions].present? ? (@codes[:customization_exclusions].first.to_i + 1) : 28
-      scent_start = 32 #28 + (usd + customisation exclusions = 5 columns) = 32
-      #
-      # @codes[:perfume_link]   = scent_start
-      # @codes[:perfume_name]   = scent_start + 1
-      # @codes[:perfume_brand]  = scent_start + 2
-
       book.row(@@titles_row_numbers.second).each_with_index do |title, index|
         next unless title =~ /Music Track Link/i
         @codes[:song_link]      = index + 1
         @codes[:song_name]      = index + 2
-      end
-
-      @codes[:recommendations] = {}
-      @codes[:recommendations][:edgy] = []
-      @codes[:recommendations][:bohemian] = []
-      @codes[:recommendations][:glam] = []
-      @codes[:recommendations][:girly] = []
-      @codes[:recommendations][:classic] = []
-
-      start = scent_start + 4 + 3
-
-      [:edgy, :bohemian, :glam, :girly, :classic].each_with_index do |style, index|
-        4.times do |time|
-          @codes[:recommendations][style] << {
-            name: start + (time * 4),
-            description: start + 1 + (time * 4),
-            price: start + 2 + (time * 4),
-            link: start + 3 + (time * 4)
-          }
-        end
-
-        start += 16
       end
 
 
@@ -418,7 +316,6 @@ module Products
       @codes[:product_coding] = 137
       @codes[:video_id]       = 139 # 138 139 with
       @codes[:short_description] = 140
-
 
       @codes
     end
@@ -448,10 +345,7 @@ module Products
           add_product_variants(product, args[:sizes], args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
-          add_product_accessories(product, args[:recommendations] || {})
           add_product_song(product, args[:song].symbolize_keys || {})
-          add_product_perfume(product, args[:perfume].symbolize_keys || {})
-          add_product_videos(product, args[:video].symbolize_keys || {})
 
           product
         rescue Exception => message
@@ -577,7 +471,6 @@ module Products
           end
 
           variant.on_demand = true
-          # variant.price = product.price
           variant.save
 
           aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
@@ -625,35 +518,6 @@ module Products
       end
 
       customizations
-    end
-
-    def add_product_accessories(product, accessories_by_style)
-      allowed = [:name, :description, :price, :link, :position]
-
-      accessories_by_style.each do |style_name, accessories|
-        style = Style.where('LOWER(name) = ?', style_name.to_s.downcase).first
-
-        next unless style.present?
-
-        accessories.each do |attrs|
-          next unless attrs.values_at(:name, :link).any?(&:present?)
-
-          accessory = product.accessories.where(style_id: style.id, position: attrs[:position]).first
-
-          if accessory.blank?
-            accessory = product.accessories.build
-          end
-
-          accessory.style = style
-          accessory.name = attrs[:name]
-          accessory.title = attrs[:description]
-          accessory.price = attrs[:price]
-          accessory.source = attrs[:link]
-          accessory.position = attrs[:position]
-
-          accessory.save
-        end
-      end
     end
 
     def add_product_style_profile(product, args)
@@ -708,24 +572,6 @@ module Products
       end
     end
 
-    def add_product_perfume(product, raw_attrs)
-      allowed = [:name,
-                 :brand,
-                 :link]
-
-      attrs = raw_attrs.slice(*allowed).select{ |name, value| value.present? }
-
-      if attrs.any?
-        parfume = product.moodboard_items.parfume.first || product.moodboard_items.parfume.build
-
-        parfume.name = attrs[:name]
-        parfume.title = attrs[:brand]
-        parfume.content = attrs[:link]
-
-        parfume.save
-      end
-    end
-
     def add_product_prices(product, price, us_price = nil)
       product.price = price
       product.save
@@ -735,16 +581,6 @@ module Products
       usd = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'USD')
       usd.amount = us_price
       usd.save!
-    end
-
-    def add_product_videos(product, videos_attrs = {})
-      video_id = videos_attrs[:default]
-      return if video_id.blank?
-
-      default_video = product.videos.master.first_or_initialize
-      default_video.video_id = video_id
-      default_video.position = 0
-      default_video.save(validate: false)
     end
   end
 end
