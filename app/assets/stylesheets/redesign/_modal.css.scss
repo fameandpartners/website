@@ -176,6 +176,7 @@
 .vex-theme-flat-attack.email-capture-modal.teen-vogue-2015 {
   .vex-content {
     background-color:#EEDDF0;
+    background: url('campaigns/teenvogue/teen_vogue_modal_bg.png') no-repeat;
     border: none;
     height: 407px;
     text-transform:uppercase;
@@ -184,7 +185,7 @@
 
   .vex-dialog-form {
     .vex-dialog-input {
-      margin-top: 85px;
+      margin-top: 80px;
 
       .standard-form  {
         height: 35px;
@@ -194,13 +195,13 @@
   }
 
   h2 {
-    background-color:#EEDDF0;
+    background:none;;
     color:black;
     text-align:center;
     font-size:1.222222em;
     font-family:"brandon-grotesque";
     font-weight:400;
-    padding-top:60px
+    margin-top:85px
   }
 
   p {
