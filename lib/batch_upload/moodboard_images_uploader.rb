@@ -13,7 +13,7 @@ module BatchUpload
         # product.moodboard_items.moodboard.where('created_at < ?', @_expiration.ago).destroy_all
 
         get_list_of_directories(path).each do |directory_path|
-          directory_name = directory_path.rpartition('/').last.strip
+          directory_name = File.basename directory_path
 
           next unless directory_name =~ /moodboards?/i
 
@@ -28,6 +28,8 @@ module BatchUpload
                 object.image = File.open(file_path)
                 object.position = position
               end
+
+              next if test_run?
 
               if moodboard.save
                 success "Moodboard", position: position, file: file_name

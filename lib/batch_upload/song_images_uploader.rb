@@ -5,7 +5,7 @@ module BatchUpload
     def process!
       each_product do |product, path|
         get_list_of_directories(path).each do |directory_path|
-          directory_name = directory_path.rpartition('/').last.strip
+          directory_name = File.basename directory_path
 
           next unless directory_name =~ /song/i
 
@@ -19,6 +19,8 @@ module BatchUpload
                 error "Song image found for SKU: #{product.sku} but missing moodboard item. (#{file_name})"
                 next
               end
+
+              next if test_run?
 
               song.image = File.open(file_path)
 

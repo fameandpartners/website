@@ -5,7 +5,7 @@ module BatchUpload
     def process!
       each_product do |product, path|
         get_list_of_directories(path).each do |directory_path|
-          directory_name = directory_path.rpartition('/').last.strip
+          directory_name = File.basename directory_path
 
           next unless directory_name =~ /customisations?|customizations?/i
 
@@ -28,6 +28,8 @@ module BatchUpload
                 error "Customisation image found for SKU: #{product.sku} position:(#{position}) but missing customization item. (#{file_name})"
                 next
               end
+
+              next if test_run?
 
               customization.image = File.open(file_path)
 
