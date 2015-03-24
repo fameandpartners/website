@@ -30,7 +30,7 @@
 
       = content_for :inline_javascript do
         | $('#locale_select').select2().on('change', function (e) {
-        |   window.location = $(this).val() + '?' + 'backlink' + $(this).data('backlink');
+        |   window.location = $(this).val() + '?' + 'backlink=' + $(this).data('backlink');
         | });
 
     .col-md-6.col-sm-4.copyright
