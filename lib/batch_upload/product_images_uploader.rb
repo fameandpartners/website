@@ -2,6 +2,13 @@ require 'batch_upload/images_uploader'
 
 module BatchUpload
   class ProductImagesUploader < ImagesUploader
+    FIFTY_SHADES_OF_SHIT = {
+        'hot-pink-and-red' => 'pink-red',
+        'blue-azalea-front' => 'blue-azalea-floral',
+        'palepink' => 'pale-pink',
+        'paleblue' => 'pale-blue'
+    }
+
     def process!
       each_product do |product, path|
         get_list_of_files(path).each do |file_path|
@@ -39,6 +46,7 @@ module BatchUpload
             end
 
             if color_name.present?
+              color_name = munge_color_name(color_name)
               debug "Search color by name"
               color = color_for_name(color_name)
 
@@ -117,6 +125,15 @@ module BatchUpload
 
     def color_for_name(color_name)
       Spree::OptionValue.colors.where('LOWER(name) = ?', color_name).first
+    end
+
+    def munge_color_name(color_name)
+      new_color_name = FIFTY_SHADES_OF_SHIT.fetch(color_name) { color_name }
+
+      if color_name != new_color_name
+        warn "Color name (#{color_name}) converted to (#{new_color_name})"
+      end
+      new_color_name
     end
   end
 end
