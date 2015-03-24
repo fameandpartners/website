@@ -26,7 +26,7 @@ module BatchUpload
       @logger = Logger.new(STDOUT)
       @logger.level = Logger::INFO unless ENV['debug']
       @logger.formatter = proc do |severity, datetime, _progname, msg|
-        color = severity == 'ERROR' ? red : ''
+        color = {'ERROR' => red, 'WARN' => magenta}.fetch(severity) { '' }
         "%s[%s] [%-5s] %s%s\n" % [color, datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg, reset]
       end
     end
@@ -86,6 +86,10 @@ module BatchUpload
     def success(type, attributes = {})
       attrs = attributes.collect { |k,v| "#{k}=#{bright_white(v.to_s)}" }.join(' ')
       info "#{type} #{ok}: #{attrs}"
+    end
+
+    def test_run?
+      false
     end
   end
 end

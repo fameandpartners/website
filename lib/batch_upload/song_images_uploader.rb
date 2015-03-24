@@ -20,6 +20,8 @@ module BatchUpload
                 next
               end
 
+              next if test_run?
+
               song.image = File.open(file_path)
 
               if song.save

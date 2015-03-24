@@ -29,6 +29,8 @@ module BatchUpload
                 object.position = position
               end
 
+              next if test_run?
+
               if moodboard.save
                 success "Moodboard", position: position, file: file_name
               else

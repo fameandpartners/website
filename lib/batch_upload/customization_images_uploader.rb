@@ -29,6 +29,8 @@ module BatchUpload
                 next
               end
 
+              next if test_run?
+
               customization.image = File.open(file_path)
 
               if customization.save

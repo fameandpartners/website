@@ -56,6 +56,8 @@ module BatchUpload
               viewable = product.master
             end
 
+            next if test_run?
+
             if @_strategy.eql?(:delete)
               if viewable.is_a?(ProductColorValue)
                 debug "Process existing images for color"
