@@ -470,7 +470,10 @@ module Products
             variant.option_values = [size_value, color_value]
           end
 
-          variant.on_demand = true
+          # Avoids errors with Spree hooks updating lots and lots of orders.
+          # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
+          variant.send :write_attribute, :on_demand, true
+
           variant.save
 
           aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
