@@ -1,5 +1,5 @@
 namespace :import do
-  desc 'Clear the rails cache'
+  desc 'delete known gone products'
   task :march_2015_deletions => :environment do
 
     deleteables = %w{

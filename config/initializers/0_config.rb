@@ -91,8 +91,8 @@ when :production
   configatron.mandrill.smtp.username = 'eltons@fameandpartners.com'
   configatron.mandrill.smtp.password = '189aQIbDBG2pBeKxqoth5A'
 
-  # configatron.aws.s3.bucket = 'fameandpartners'
-  configatron.aws.s3.bucket = 'products-fameandpartners'
+  configatron.aws.s3.bucket = 'fameandpartners'
+  # configatron.aws.s3.bucket = 'products-fameandpartners'
   configatron.aws.s3.access_key_id = 'AKIAJ7U3MBOEHSMUAOHQ'
   configatron.aws.s3.secret_access_key = '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'
 
