@@ -89,7 +89,7 @@ module Products
         columns[:customizations].each_with_index do |customization, index|
           raw[:customizations] << {
             name: book.cell(row_num, customization[:name]).to_s.gsub("_x000D_", '').strip,
-            price: book.cell(row_num, customization[:price]),
+            price: book.cell(row_num, customization[:price]).to_s.gsub(/[^\d\.]/, '').to_f,
             position: index + 1
           }
         end

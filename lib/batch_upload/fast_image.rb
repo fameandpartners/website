@@ -1,3 +1,4 @@
+
 module BatchUpload
   class FastImage < ActiveRecord::Base
     self.table_name = 'spree_assets'
@@ -13,7 +14,15 @@ module BatchUpload
     has_attached_file :attachment,
                       :styles => { :product => '240x240>', :large => '600x600>' },
                       :default_style => :product,
-                      :url => '/spree/products/:id/:style/:basename.:extension',
-                      :path => ':rails_root/public/spree/products/:id/:style/:basename.:extension'
+                      :url => Spree::Config.attachment_url,
+                      :path => Spree::Config.attachment_path
+
+    include Spree::Core::S3Support
+    supports_s3 :attachment
+
+    Spree::Image.attachment_definitions[:attachment][:path] = Spree::Config[:attachment_path]
+    Spree::Image.attachment_definitions[:attachment][:url] = Spree::Config[:attachment_url]
+    Spree::Image.attachment_definitions[:attachment][:default_url] = Spree::Config[:attachment_default_url]
+    Spree::Image.attachment_definitions[:attachment][:default_style] = Spree::Config[:attachment_default_style]
   end
 end

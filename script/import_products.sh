@@ -29,8 +29,6 @@
 
 # Fail on missing variables.
 set -u
-# Fail on any error condition
-set -e
 # Fail on failures in pipes
 set -o pipefail
 
@@ -48,9 +46,14 @@ if [ $(whoami) = "garrow" ] ; then
   content_directory='/Users/garrow/fame/content/ProductUpload'
 fi
 
+# For easier local testing
+if [ $(whoami) = "tobyhede" ] ; then
+  content_directory='/Users/tobyhede/documents/fame/ProductUpload'
+fi
+
 spreadsheets=$(find ${content_directory} -name '*.xls*' |grep -v "~")
 image_directories=$(find "${content_directory}"  -maxdepth 1  -mindepth 1 -type d | grep -vi spreadsheet)
-image_types=(customization moodboard product song)
+image_types=(product customization moodboard song)
 # rake import:accessory:images                      # Import images for accessories (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:customization:images                  # Import images for customizations (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:moodboard:images                      # Import images for moodboards (specify directory location w/ LOCATION=/path/to/directory)
@@ -64,6 +67,7 @@ function main
   import_spreadsheets
   import_images
   reindex_products
+  expire_caches
   info "See log for details: $logfile"
 }
 
@@ -72,6 +76,13 @@ function reindex_products
   info "Reindexing Products"
   if [ "$dryrun" = "dryrun"  ]; then return; fi
   bundle exec rake import:product:reindex
+}
+
+function expire_caches
+{
+  info "EXPIRING ALL CACHES"
+  if [ "$dryrun" = "dryrun"  ]; then return; fi
+  bundle exec rake cache:expire
 }
 
 function import_spreadsheets

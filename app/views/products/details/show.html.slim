@@ -170,7 +170,7 @@ ruby:
               = image_tag(item.image_url) if item
 
     .col-md-6.col-sm-12
-      h3.text-center The Story
+      h3 The Story
       br
       - if @product.preorder?
         .pre-order
@@ -258,11 +258,11 @@ hr
         - @product.default_color_options.each do |color|
           .col-md-6
             a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation
+              span.option-box.color-box class="color-#{color.name}"
               - if color.value
-                span.option-box.color-box class="color-#{color.name}"
-                /# style="background-color: #{ color.value }"
+                /! style="background-color: #{ color.value }"
               - elsif color.image
-                span.option-box.color-box class="color-#{color.name}" style="background-image: url('#{ color.image }')"
+                /! span.option-box.color-box class="color-#{color.name}" style="background-image: url('#{ color.image }')"
               span.option-name= color.presentation
 
   - if @product.custom_colors?
@@ -293,3 +293,7 @@ hr
           a.customization-option.list-group-item href="#" data-id=option.id data-name=option.name data-price=option.display_price
             span.option-price= "+#{option.display_price}"
 
+    .row
+      .col-md-10.col-md-offset-1
+        button.btn-clear-customizations.btn.btn-block.btn-black.customization-option data-id="original" data-name="original" data-price=""
+          | Clear Selection

@@ -108,7 +108,7 @@ header
                     ul.mega-menu-list
                       li.mega-menu-list--item= link_to 'Express Delivery', express_delivery_path, title: 'Express Delivery'
                       - if !sale_active?
-                        li.mega-menu-list--item= link_to 'On Sale', '/sale-dresses', title: 'Dresses On Sale'
+                        li.mega-menu-list--item= link_to 'Sale - Up to 80% Off', '/sale-dresses', title: 'Dresses On Sale'
                       - else
                         li.mega-menu-list--item= link_to "All on Sale", dresses_on_sale_path(:sale => 'all'), title: 'All Dresses on Sale'
                         li.mega-menu-list--item= link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
@@ -141,16 +141,16 @@ header
                   p.text-center Our Beautiful Bridesmaids Collection
 
               .col-md-3
-                = link_to amfam_collection_path do
+                = link_to wicked_game_collection_path do
                   .image-container
                      = image_tag src='edits/AMFAM/1_141223_01_F&PAMFAM_1831.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
-                  p.text-center The AMFAM Collaboration Collection
+                  p.text-center The Wicked Game Collection
 
               .col-md-3
                 = link_to break_hearts_collection_path do
                   .image-container
                     = image_tag src='edits/BREAK-HEARTS/1_141119_F&P_NYE_01_0044.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
-                  p.text-center Break Hearts not Bank Accounts Collection
+                  p.text-center Break Hearts not Bank Accounts
 
         li.menu-item
           = link_to 'Blog', blog_path, class: 'menu-item--link'

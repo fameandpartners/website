@@ -39,7 +39,7 @@ Spree.config do |config|
 
   config.emails_sent_from = 'Fame And Partners<noreply@fameandpartners.com>'
 
-  if Rails.env.production?
+  if Rails.application.config.use_s3
     config.use_s3 = true
     config.s3_bucket = configatron.aws.s3.bucket
     config.s3_access_key = configatron.aws.s3.access_key_id
@@ -50,8 +50,8 @@ Spree.config do |config|
   else
     config.use_s3 = false
 
-    config.attachment_path = ':rails_root/public/spree/products/:id/:style/:basename.:extension'
     config.attachment_url = '/spree/products/:id/:style/:basename.:extension'
+    config.attachment_path = ':rails_root/public/spree/products/:id/:style/:basename.:extension'    
   end
 end
 

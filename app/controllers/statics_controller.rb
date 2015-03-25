@@ -56,10 +56,10 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/break-hearts-not-banks', :layout => 'redesign/application'
   end
 
-  def amfam
-    @title = "AMFAM | Beautiful Dresses - Fame & Partners."
+  def wicked_game
+    @title = "The Wicked Game | Beautiful Dresses - Fame & Partners."
     @description = "Discover beautiful dresses at Fame & Partners. " + default_meta_description
-    render :template => 'landing_pages/amfam', :layout => 'redesign/application'
+    render :template => 'landing_pages/wicked_game', :layout => 'redesign/application'
   end
 
   def prom

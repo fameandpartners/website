@@ -2,6 +2,13 @@ require 'batch_upload/images_uploader'
 
 module BatchUpload
   class ProductImagesUploader < ImagesUploader
+    FIFTY_SHADES_OF_SHIT = {
+        'hot-pink-and-red' => 'pink-red',
+        'blue-azalea-front' => 'blue-azalea-floral',
+        'palepink' => 'pale-pink',
+        'paleblue' => 'pale-blue'
+    }
+
     def process!
       each_product do |product, path|
         get_list_of_files(path).each do |file_path|
@@ -39,6 +46,7 @@ module BatchUpload
             end
 
             if color_name.present?
+              color_name = munge_color_name(color_name)
               debug "Search color by name"
               color = color_for_name(color_name)
 
@@ -56,6 +64,8 @@ module BatchUpload
               viewable = product.master
             end
 
+            next if test_run?
+
             if @_strategy.eql?(:delete)
               if viewable.is_a?(ProductColorValue)
                 debug "Process existing images for color"
@@ -63,9 +73,10 @@ module BatchUpload
                 debug "Process existing images for product"
               end
 
-              info "Delete images which was created more then #{@_expiration / 3600} hours ago"
+              old_images = viewable.images.where('attachment_updated_at < ?', @_expiration.ago)
+              warn "Delete SKU: #{product.sku} images which was created more than #{@_expiration / 3600} hours ago - total (#{old_images.count})"
 
-              viewable.images.where('attachment_updated_at < ?', @_expiration.ago).destroy_all
+              old_images.delete_all
             end
 
             if ENV['USE_SPREE_IMAGE_CLASS']
@@ -115,6 +126,15 @@ module BatchUpload
 
     def color_for_name(color_name)
       Spree::OptionValue.colors.where('LOWER(name) = ?', color_name).first
+    end
+
+    def munge_color_name(color_name)
+      new_color_name = FIFTY_SHADES_OF_SHIT.fetch(color_name) { color_name }
+
+      if color_name != new_color_name
+        warn "Color name (#{color_name}) converted to (#{new_color_name})"
+      end
+      new_color_name
     end
   end
 end
