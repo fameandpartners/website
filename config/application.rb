@@ -103,6 +103,9 @@ module FameAndPartners
 
     config.cache_store = :redis_store, "redis://#{redis_host}/0/#{redis_namespace}"
 
+    # Use S3 for storing attachments
+    config.use_s3 = false
+
     config.generators do |generator|
       generator.test_framework :rspec
     end
