@@ -108,7 +108,7 @@ header
                     ul.mega-menu-list
                       li.mega-menu-list--item= link_to 'Express Delivery', express_delivery_path, title: 'Express Delivery'
                       - if !sale_active?
-                        li.mega-menu-list--item= link_to 'On Sale', '/sale-dresses', title: 'Dresses On Sale'
+                        li.mega-menu-list--item= link_to 'Sale - Up to 80% Off', '/sale-dresses', title: 'Dresses On Sale'
                       - else
                         li.mega-menu-list--item= link_to "All on Sale", dresses_on_sale_path(:sale => 'all'), title: 'All Dresses on Sale'
                         li.mega-menu-list--item= link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
