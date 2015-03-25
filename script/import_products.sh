@@ -29,8 +29,6 @@
 
 # Fail on missing variables.
 set -u
-# Fail on any error condition
-set -e
 # Fail on failures in pipes
 set -o pipefail
 
@@ -69,6 +67,7 @@ function main
   import_spreadsheets
   import_images
   reindex_products
+  expire_caches
   info "See log for details: $logfile"
 }
 
@@ -77,6 +76,13 @@ function reindex_products
   info "Reindexing Products"
   if [ "$dryrun" = "dryrun"  ]; then return; fi
   bundle exec rake import:product:reindex
+}
+
+function expire_caches
+{
+  info "EXPIRING ALL CACHES"
+  if [ "$dryrun" = "dryrun"  ]; then return; fi
+  bundle exec rake cache:expire
 }
 
 function import_spreadsheets
