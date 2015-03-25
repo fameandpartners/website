@@ -1,4 +1,4 @@
-<%== javascript_include_tag 'application_redesign' %>
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="//w.sharethis.com/button/buttons.js"></script>
@@ -10,7 +10,7 @@
   //order_data      = { item_count: <%= current_order.item_count %> };
   order_data      = {};
   moodboard_data  = <%= raw current_user_moodboard.serialize.to_json %>;
-
+  
   window.app = {
     env:    '<%= Rails.env %>',
     debug:  <%= Rails.env.development? %>,
@@ -24,7 +24,7 @@
   $(document).ready(function() {
     (function() {
       <%= yield :inline_javascript %>
-    })();
+    })();    
     //page.enableStyleQuizPopup('.show-style-quiz');
   });
 </script>
