@@ -53,7 +53,7 @@ class Repositories::UserMoodboardItem
     end
 
     def product_image
-      Repositories::ProductImages.new(product: product).read({ color_id: color.try(:id)})
+      Repositories::ProductImages.new(product: product).read({ color_id: color.try(:id), cropped: true })
     end
 
     def product_price
