@@ -1,0 +1,22 @@
+#!/bin/sh
+
+
+PRODUCTION_RED_DB="deploy@ec2-54-145-238-90.compute-1.amazonaws.com"
+PRODUCTION_BLUE_DB="deploy@ec2-54-224-247-243.compute-1.amazonaws.com"
+
+echo "COPY MIGRATION SUBSET OF RED DB TO BLUE DB"
+echo ""
+echo "PRODUCTION_RED_DB = ${PRODUCTION_RED_DB}"
+echo "PRODUCTION_BLUE_DB = ${PRODUCTION_BLUE_DB}"
+echo
+read -p "Enter to continue, or Ctrl-C to cancel!"
+
+set -x
+
+ssh ${PRODUCTION_RED_DB} 'pg_dump -U postgres -t customisation_values -t moodboard_items -t product_color_values -t product_style_profiles -t spree_assets -t spree_prices -t spree_product_option_types -t spree_product_properties -t spree_products -t spree_products_taxons -t spree_option_values -t spree_option_values_variants -t spree_taxons -t spree_variants --format=custom fame_and_partners > products.pgdump'
+
+scp ${PRODUCTION_RED_DB}:~/products.pgdump .
+
+scp products.pgdump ${PRODUCTION_BLUE_DB}:~/
+
+ssh ${PRODUCTION_BLUE_DB} 'pg_restore -d fame_and_partners products.pgdump --clean -U postgres'
