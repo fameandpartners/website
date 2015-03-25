@@ -35,7 +35,7 @@ class  UserCart::Populator
     order.reload
 
     return OpenStruct.new({
-      success: false,
+      success: true,
       product: product,
       cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
@@ -140,8 +140,8 @@ class  UserCart::Populator
 
     def product_customizations
       @product_customizations ||= begin
-        (product_attributes[:customizations] || []).collect do |id|
-          product_options.customizations.all.detect{|item| item.id == id}
+        (Array.wrap(product_attributes[:customizations_ids]) || []).collect do |id|
+          product_options.customizations.all.detect{|item| item.id == id.to_i}
         end.compact
       end
     end
