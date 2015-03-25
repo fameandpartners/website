@@ -9,12 +9,8 @@
       .col-md-8.col-sm-12
         .row
           h2.checkout-section-title Log-in to check your order, save your dress to a Wishlist, to discover your Style Profile, share with friends and to manage your profile.
-
-        .col-md-4.col-md-offset-4
-          .row
-            = link_to fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-block btn-black btn-md ' do
-                span.icon
-                span Sign in with facebook
+        .text-center
+          = link_to 'Sign in with Facebook', fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-black btn-md'
 
         .col-md-12
           .row.text-center.extra-margin

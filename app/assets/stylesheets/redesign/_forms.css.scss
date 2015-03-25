@@ -27,6 +27,9 @@
 // ------------------
 
 // Buttons
+.btn {
+  font-family: $font-family-secondary;
+}
 // - reset default buttons styles
 .btn-reset {
   border: 0;
@@ -51,7 +54,6 @@
 
   position: relative;
   color: #fff;
-  padding-right: 0;
   &:before {
     content: '\f09a';
     font: normal normal normal 24px 'FontAwesome';
@@ -68,11 +70,18 @@
   }
 
   &.btn-md {
-    padding-left: $form-control-height-md;
+    padding-left: (2 * $form-control-height-md);
     &:before {
       width: $form-control-height-md;
       line-height: $form-control-height-md;
     }
+    &.btn-block {
+      padding-left: $form-control-height-md;
+    }
+  }
+
+  &.btn-block {
+    padding-right: 0;
   }
 }
 // @end Buttons
