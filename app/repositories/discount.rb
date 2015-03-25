@@ -74,7 +74,7 @@ class Repositories::Discount
             else
               all_discounts[key][discount.discountable_id] = OpenStruct.new(
                 amount: discount.amount,
-                size: discount.size
+                size:   discount.size
               )
             end
           end
