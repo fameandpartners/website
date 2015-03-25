@@ -59,6 +59,7 @@ class Products::CollectionDetails
     if selected_color_data
       taxon.banner.title      = selected_color_data[:title]
       taxon.banner.subtitle   = selected_color_data[:description]
+      taxon.banner.image      = selected_color_data[:image]
     end
   end
 
@@ -76,27 +77,33 @@ class Products::CollectionDetails
     {
       "black" => {
         :title        => "Black Dresses",
-        :description  => "There's nothing basic about these chic black dresses."
+        :description  => "There's nothing basic about these chic black dresses.",
+        :image        => "/assets/category-banners/black-dresses-dark-bg.jpg"
       },
       "white" => {
         :title        => "White and Ivory Dresses",
-        :description  => "Refresh your look with a pristine clean slate."
+        :description  => "Refresh your look with a pristine clean slate.",
+        :image        => "/assets/category-banners/white-dresses-bg.jpg"
       },
       "blue" => {
         :title        => "Blue Dresses",
-        :description  => "Get the blues (in a good way) with sky-shaded styles."
+        :description  => "Get the blues (in a good way) with sky-shaded styles.",
+        :image        => "/assets/category-banners/blue-dresses-bg.jpg"
       },
       "pink" => {
         :title        => "Pink Dresses",
-        :description  => "From girly to glam, these pink confections satisfy any sweet tooth."
+        :description  => "From girly to glam, these pink confections satisfy any sweet tooth.",
+        :image        => "/assets/category-banners/pink-dresses-bg.jpg"
       },
       "red" => {
         :title        => "Red Dresses",
-        :description  => "Look red haute in statement-making shades."
+        :description  => "Look red haute in statement-making shades.",
+        :image        => "/assets/category-banners/red-dresses-dark-bg.jpg"
       },
       "pastel" => {
         :title        => "Pastel Dresses",
-        :description  => "Treat yourself to sweet styles in the prettiest shades of pale."
+        :description  => "Treat yourself to sweet styles in the prettiest shades of pale.",
+        :image        => "/assets/category-banners/pastel-dresses-bg.jpg"
       },
     }
   end
