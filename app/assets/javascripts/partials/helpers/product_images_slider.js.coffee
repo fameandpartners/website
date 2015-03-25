@@ -42,7 +42,7 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     defer = new $.Deferred()
 
     image = new Image()
-    image.onerror = defer.reject
+    image.onerror = defer.resolve
     image.onload = () =>
       @loaded_images.push($("<img
       id='product-image-slide-#{product_image.id }'
