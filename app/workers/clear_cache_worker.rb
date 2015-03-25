@@ -8,7 +8,7 @@ class ClearCacheWorker
     update_color_variants_elastic_index
     update_products_elastic_index
     reset_cache
-    update_taxonomy_cache
+    update_repositories
   end
 
   private
@@ -31,7 +31,8 @@ class ClearCacheWorker
       Rails.cache.clear
     end
 
-    def update_taxonomy_cache
+    def update_repositories
       Repositories::Taxonomy.read_all(force: true).size
+      Repositories::Discount.discounts(force: true).size
     end
 end
