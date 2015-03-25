@@ -20,7 +20,7 @@ class Repositories::ProductProperties
         Rails.cache.fetch(cache_key, Repositories::CachingSystem.cache_fetch_params({})) do
           properties = {}
           product.product_properties.includes(:property).each do |product_property|
-            if product.property.present?
+            if product_property.property.present?
               properties[product_property.property.name] = product_property.value
             end
           end
