@@ -1,27 +1,27 @@
 # notes:
 # functions for this object:
 #   - preloading images
-#   - switching between colors: ready
-#   - autoscroll: ready
-#
+#   - switching between colors
+#   - autoscroll
 
-# display slider for first image. 
+# display slider for first image.
 # load all the images
 # update slider
 
 window.helpers or= {}
 window.helpers.ProductImagesSlider = class ProductImagesSlider
-  constructor: (container, images, options = {}) ->
-    @options    = options || {}
-    @$container = $(container || '#slides')
-    @images = images
-    @all_images = @$container.find('.slides-container').find('img').remove()
-    @images_color_id = parseInt(@options.preselected) if @options.preselected
-    @options.preselected = null
-    @updateSlider()
+  constructor: (container, @images, options = {}) ->
+    @options = $.extend({
+      animation: 'fade'
+		}, options)
 
-    lazy_slider_update = _.debounce(@updateSlider, 300)
-    $(window).on('resize', lazy_slider_update)
+    @$container = $(container || '#slides')
+    @$container.superslides(@options)
+    @all_images = @$container.find('.slides-container').find('img').clone()
+
+    if @options.preselected
+      @images_color_id = parseInt(@options.preselected)
+      @options.preselected = null
 
     @preload()
 
@@ -35,26 +35,20 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
       $(image).data('color-id') == @images_color_id
     , @)
     selected_images = @all_images if selected_images.length == 0
-    # #note - this row don't work, so we use remove/html/paste instead
-    # @$container.find('.slides-container').html(selected_images)
-    @$container.superslides('destroy')
-    wrapper = @$container.find('.slides-container').remove()
-    wrapper.html(selected_images)
-    @$container.html(wrapper)
-    @$container.superslides(@options)
+    @$container.find('.slides-container').html(selected_images)
+    @$container.superslides('update')
 
   getLoadImageDeferred: (product_image) =>
     defer = new $.Deferred()
 
     image = new Image()
-    image.onerror = defer.reject
+    image.onerror = defer.resolve
     image.onload = () =>
-      @all_images.push($("<img 
+      @loaded_images.push($("<img
       id='product-image-slide-#{product_image.id }'
-      class='product-image-slide' 
+      class='product-image-slide'
       alt='#{ product_image.alt }'
       data-color-id='#{ product_image.color_id }'
-      style='height: 1164px; width: 2560px; overflow: hidden;'
       src='#{ product_image.url }'
       />"))
       defer.resolve(product_image)
@@ -64,9 +58,12 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
     defer
 
   preload: () =>
-    @all_images = []
+    @loaded_images = []
     deferrers = _.map @images, (image) =>
       @getLoadImageDeferred(image)
 
-    @all_images = _.sortBy(@all_images, (i) -> i.position)
-    $.when.apply(this, deferrers).then(@updateSlider)
+    $.when.apply(this, deferrers).then( () =>
+      @all_images = _.sortBy(@loaded_images, (i) -> i.position)
+      @updateSlider()
+    )
+

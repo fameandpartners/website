@@ -27,6 +27,14 @@
 // ------------------
 
 // Buttons
+.btn {
+  font-family: $font-family-secondary;
+}
+// - reset default buttons styles
+.btn-reset {
+  border: 0;
+  background: none;
+}
 // - text
 .btn-text {
   cursor: default;
@@ -43,9 +51,9 @@
 // - facebook
 .btn-facebook {
   background-color: #3b5998;
+
   position: relative;
   color: #fff;
-  padding-right: 0;
   &:before {
     content: '\f09a';
     font: normal normal normal 24px 'FontAwesome';
@@ -57,12 +65,23 @@
     text-align: center;
   }
 
+  span {
+    font-size: 12px;
+  }
+
   &.btn-md {
-    padding-left: $form-control-height-md;
+    padding-left: (2 * $form-control-height-md);
     &:before {
       width: $form-control-height-md;
       line-height: $form-control-height-md;
     }
+    &.btn-block {
+      padding-left: $form-control-height-md;
+    }
+  }
+
+  &.btn-block {
+    padding-right: 0;
   }
 }
 // @end Buttons
@@ -148,3 +167,26 @@
   color: #fff;
 }
 // @end
+
+.decorated{
+     overflow: hidden;
+     text-align: center;
+ }
+.decorated > span{
+    position: relative;
+    display: inline-block;
+}
+.decorated > span:before, .decorated > span:after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    border-bottom: 2px solid;
+    width: 591px; /* half of limiter*/
+    margin: 0 20px;
+}
+.decorated > span:before{
+    right: 100%;
+}
+.decorated > span:after{
+    left: 100%;
+}

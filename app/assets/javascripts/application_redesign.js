@@ -11,6 +11,9 @@
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
 //= require libs/jquery.chosen.min
+//= require libs/soundcloud/sc-player
+//= require libs/jquery.hoverable.js
+//= require libs/superslides.js
 
 // styleguide code
 //= require js/snap.svg-min.js
@@ -31,7 +34,7 @@
 //= require js/card.js
 
 //= require js/functions.js
-//= require js/superslides.js
+//  require js/superslides.js # copied to libs/superslides for easier monkey-patching
 //= require functions_redesign.js
 
 //= require helpers
@@ -63,11 +66,8 @@
 //= require partials/helpers/shopping_cart
 //= require partials/helpers/user_moodboard
 //= require partials/product_collection_moodboard_links
-//= require partials/product_collection_image_hover
 //= require partials/shopping_bag
-//= require templates/shopping_bag
 //= require partials/shopping_cart_summary
-//= require templates/shopping_cart_summary
 
 //= require partials/checkout_page
 

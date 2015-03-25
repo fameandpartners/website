@@ -68,14 +68,15 @@ class Products::CollectionResource
     def details
       @details ||= begin
         Products::CollectionDetails.new(
-          collection:   collection,
-          style:        style,
-          event:        event,
-          edits:        edits,
-          bodyshape:    bodyshape,
-          color:        color_group.try(:representative) || color,
-          discount:     discount,
-          site_version: site_version
+          collection:     collection,
+          style:          style,
+          event:          event,
+          edits:          edits,
+          bodyshape:      bodyshape,
+          color:          color_group.try(:representative) || color,
+          discount:       discount,
+          site_version:   site_version,
+          fast_delivery:  fast_delivery?
         ).read
       end
     end
@@ -119,8 +120,6 @@ class Products::CollectionResource
       result[:limit] = limit if limit.present?
       result[:offset] = offset if offset.present?
 
-      Rails.logger.info "query_options: #{ result.inspect }"
-
       result
     end
 
@@ -134,12 +133,13 @@ class Products::CollectionResource
         discount = Repositories::Discount.get_product_discount(color_variant.product.id)
         color = Repositories::ProductColors.read(color_variant.color.id)
         OpenStruct.new(
-          id: color_variant.product.id,
-          name: color_variant.product.name,
-          color: color_variant.color,
-          images: cropped_images(color_variant),
-          price: price,
-          discount: discount
+          id:             color_variant.product.id,
+          name:           color_variant.product.name,
+          color:          color_variant.color,
+          images:         cropped_images(color_variant),
+          price:          price,
+          discount:       discount,
+          fast_delivery:  color_variant.product.fast_delivery
         )
       end
 
@@ -153,7 +153,9 @@ class Products::CollectionResource
 
     def cropped_images(color_variant)
       cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
-      cropped_images.collect{ |i| i.try(:large) }.sort.reverse
+      cropped_images = color_variant.images if cropped_images.blank? && Rails.env.development?
+      cropped_images.sort_by!{ |i| i.position }
+      cropped_images.collect{ |i| i.try(:large) }
     end
 
     def current_currency
@@ -165,6 +167,10 @@ class Products::CollectionResource
     def get_zone_price(prices = {})
       price_id = (prices[current_currency] || prices['aud'] || prices['usd'])
       Spree::Price.find(price_id)
+    end
+
+    def fast_delivery?
+      order == 'fast_delivery'
     end
 
     # def cache_key

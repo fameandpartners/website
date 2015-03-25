@@ -9,7 +9,11 @@ configatron.aws.enabled = false
 configatron.aws.bucket = ""
 configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
-configatron.aws.host = "d1sd72h9dq237j.cloudfront.net"
+configatron.aws.host = "d1sd72h9dq237j.cloudfront.net"  # bucket: fameandpartners
+# configatron.aws.host = "daoiay428tmxk.cloudfront.net"   # bucket: products-fameandpartners
+# configatron.aws.host = "images.fameandpartners.com"
+# configatron.aws.host = "product-images.fameandpartners.com"
+# configatron.aws.host = "demk2115tqgou.cloudfront.net" #bucket: fameandpartners-backup
 
 configatron.links.twitter = 'https://twitter.com/fameandpartners'
 configatron.links.facebook = 'http://www.facebook.com/FameandPartners'
@@ -64,9 +68,11 @@ when :preproduction
   configatron.mandrill.smtp.username = 'eltons@fameandpartners.com'
   configatron.mandrill.smtp.password = '189aQIbDBG2pBeKxqoth5A'
 
-  # configatron.aws.s3.bucket = 'preprod-fameandpartners'
-  # configatron.aws.s3.access_key_id = 'AKIAJ7U3MBOEHSMUAOHQ'
-  # configatron.aws.s3.secret_access_key = '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'
+  configatron.aws.s3.bucket = 'preprod-fameandpartners'
+  configatron.aws.s3.access_key_id = 'AKIAJ7U3MBOEHSMUAOHQ'
+  configatron.aws.s3.secret_access_key = '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'
+
+  configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
 
   redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
@@ -86,7 +92,9 @@ when :production
   configatron.mandrill.smtp.username = 'eltons@fameandpartners.com'
   configatron.mandrill.smtp.password = '189aQIbDBG2pBeKxqoth5A'
 
+  # configatron.aws.s3.bucket = 'products-fameandpartners'
   configatron.aws.s3.bucket = 'fameandpartners'
+  # configatron.aws.s3.bucket = 'fameandpartners-backup'
   configatron.aws.s3.access_key_id = 'AKIAJ7U3MBOEHSMUAOHQ'
   configatron.aws.s3.secret_access_key = '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'
 

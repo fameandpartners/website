@@ -311,7 +311,7 @@ window.page.enableStyleQuizPopup = (selector, options) ->
     showPopup()
   )
 
-  if options.authShow
+  if options.autoShow
     showPopup()
   else if options.delayShow
     _.delay(showPopup, 20000)

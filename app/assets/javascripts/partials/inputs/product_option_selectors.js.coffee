@@ -2,7 +2,7 @@ window.inputs or= {}
 
 # slighty different inputs, but with same interface
 #
-# opts: 
+# opts:
 #   container: #element with selections
 #   action:    #toggle element
 
@@ -49,6 +49,11 @@ window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends BasePr
   constructor: (opts = {}) ->
     super(opts)
     @$container.find('.product-option').on('click', @selectValueHandler)
+    @$container.find('.btn-fit-guide').on('click', @showFitGuide)
+
+  showFitGuide: =>
+    @selector.close()
+    window.helpers.showModal(title: 'Size Guide', className: 'fit-guide', container: '#fit-guide-content')
 
   getValue: () ->
     @$container.find('.active').data('id')
@@ -100,8 +105,8 @@ window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Base
     @setValueFrom($(e.currentTarget))
 
   setValueFrom: ($el) ->
+    return if $el.length == 0
     data = $el.data()
-
     @$container.find('.color-option.active').not($el).removeClass('active')
     $el.addClass('active')
 

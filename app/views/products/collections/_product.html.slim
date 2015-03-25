@@ -5,9 +5,11 @@
     span.name = product.name
     span.price = product_price_with_discount(product.price, product.discount)
     - if Features.active?(:moodboard)
-      - if !current_user_moodboard.contains(product_id: product.id, color_id: product.color.try(:id))
+      - if current_user_moodboard.contains(product_id: product.id, color_id: product.color.try(:id))
+        = link_to 'Added to Moodboard', wishlist_path
+      - else
         span.moodboard
           sup +
           | moodboard
-- if product.fast_delivery
-	= image_tag src='express_delivery.png', class: 'express-delivery'
+  - if product.fast_delivery == true
+	 = image_tag src='express_delivery.png', class: 'express-delivery'

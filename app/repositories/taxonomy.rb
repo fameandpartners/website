@@ -5,6 +5,8 @@
 # Repositories::Taxonomy.get_taxon_by_name('code')
 # Repositories::Taxonomy.read_styles
 # Repositories::Taxonomy.read_events
+# Repositories::Taxonomy.read_collections
+# Repositories::Taxonomy.read_all
 
 module Repositories; end
 class Repositories::Taxonomy
@@ -14,7 +16,6 @@ class Repositories::Taxonomy
 
       taxon_name = taxon_name.downcase
       taxon = taxons.find{|t| t.name.downcase == taxon_name }
-
       if taxon.nil? && taxon_name.match(/-/)
         taxon_name = taxon_name.gsub('-', ' ')
         taxon = taxons.find{|t| t.name.downcase == taxon_name }
@@ -28,15 +29,19 @@ class Repositories::Taxonomy
     end
 
     def read_styles
-      taxons.select{|taxon| taxon.taxonomy == 'Style'}
+      taxons.select{|taxon| taxon.taxonomy == 'Style' && !taxon.root }
     end
 
     def read_events
-      taxons.select{|taxon| taxon.taxonomy == 'Event'}
+      taxons.select{|taxon| taxon.taxonomy == 'Event' && !taxon.root }
+    end
+
+    def read_collections
+      taxons.select{|taxon| taxon.taxonomy == 'Range' && !taxon.root }
     end
 
     def taxons
-      read_all
+      read_all.clone
     end
 
     # utils methods
@@ -99,9 +104,8 @@ class Repositories::Taxonomy
           result.banner.title       = taxon.banner.title
           result.banner.subtitle    = taxon.banner.description
           result.banner.image       = taxon.banner.image.present? ? taxon.banner.image(:banner) : nil
-          result.title              = taxon.banner.title
           result.footer             = taxon.banner.footer_text
-          result.seo_description    = taxon.banner.seo_description          
+          result.seo_description    = taxon.banner.seo_description
         end
         all_taxons.push(result)
       end

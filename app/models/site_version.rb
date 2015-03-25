@@ -19,7 +19,7 @@ class SiteVersion < ActiveRecord::Base
   def set_default_values
     if self.new_record?
       self.name ||= 'Australia'
-      self.locale ||= 'en_AU'
+      self.locale ||= 'en-AU'
       self.currency ||= Spree::Config.currency
       self.exchange_rate ||= 1
       self.permalink ||= ''

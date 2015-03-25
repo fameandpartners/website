@@ -102,10 +102,14 @@ module Products
     #  [ song  | item | item ]
     #  [ celeb | item | item ]
     def inspiration
-      [ 
-       moodboard.items.slice(0,2),
-       moodboard.items.slice(2,2)
-      ].compact      
+      result = [ 
+       moodboard.items.slice(0,2) || [],
+       moodboard.items.slice(2,2) || []
+      ].compact
+      # fill to have exactly two items in row
+      result[0] += Array.new(2 - result[0].size)
+      result[1] += Array.new(2 - result[1].size)
+      result
     end
 
     def preorder?

@@ -1,15 +1,16 @@
 #email-newsletter-signup
-  .col-md-12
-    h2.text-center.h2-title Become Famous.
-    p.lead Get a taste of fame (and all its perks) with $20 OFF your first purchase, free styling sessions & VIP treatment.
-  .col-md-6.col-md-offset-3
-    .input-group.margin-bottom-sm
-      form action="https://fameandpartners.createsend.com/t/t/s/ekjll/" method="post"
-        input#fieldEmail.form-control name="cm-ekjll-ekjll" type="email" placeholder="Enter Email" /
+  .container-fluid
+    .row
+      h2.text-center.h2-title Become Famous.
+      p.lead Get a taste of fame (and all its perks) with $20 OFF your first purchase, free styling sessions & VIP treatment.
+  .container-fluid
+    form action="https://fameandpartners.createsend.com/t/t/s/ekjll/" method="post" class="form-inline"
+      .form-group
+        input#fieldEmail.form-control name="cm-ekjll-ekjll" type="email" placeholder="Enter email" /
         input type="hidden" id="fieldurlkl" name="cm-fo-urlkl" value="190873"
         input type="hidden" id="fieldqulir" name="cm-f-qulir" value=""
-        span.submit.no-padding-right
-        button.invis-fix type="submit" Send
+      span.submit.no-padding-right
+        button.invis-fix.btn.btn-default type="submit" Send
 
 = content_for :inline_javascript do
   | new window.page.EmailNewsletterSubscriber({form: '#email-newsletter-signup form'});

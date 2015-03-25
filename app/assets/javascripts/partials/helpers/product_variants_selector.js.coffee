@@ -67,7 +67,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       if selected.variant.available
         result.valid = true
       else
-        result.error = 'Sorry, out of stock'
+        result.error = 'Sorry babe, we\'re out of stock'
     else if _.isEmpty(selected.size_id) && _.isEmpty(selected.color_id)
       result.error = 'Please select a size and color'
     else if _.isEmpty(selected.size_id)
@@ -76,7 +76,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       result.error = 'Please select a color'
     else
       # we have size, color, but variant doesn't found
-      result.error = 'Sorry, this combination unavailable'
+      result.error = 'Sorry babe, this combination is unavailable'
 
     result
 

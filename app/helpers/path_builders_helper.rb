@@ -53,7 +53,7 @@ module PathBuildersHelper
   # or respond to
   #  name - id
   def collection_product_path(product, options = {})
-    site_version_prefix = self.url_options[:site_version]
+    site_version_prefix = options.delete(:site_version) || self.url_options[:site_version]
     path_parts = [site_version_prefix, 'dresses']
     locale = I18n.locale.to_s.downcase.underscore.to_sym
 
@@ -66,6 +66,8 @@ module PathBuildersHelper
     if options[:color]
       path_parts << options[:color] 
       options.delete(:color)
+    elsif product.respond_to?(:color) && product.color.try(:name)
+      path_parts << product.color.name
     end
 
     build_url(path_parts, options)
@@ -115,7 +117,7 @@ module PathBuildersHelper
   # /dresses/long
   def build_taxon_path(taxon_name, options={})
     path_parts = [
-      self.url_options[:site_version],
+      options.delete(:site_version) || self.url_options[:site_version],
       'dresses'
     ]
     taxon = Repositories::Taxonomy.get_taxon_by_name(taxon_name)

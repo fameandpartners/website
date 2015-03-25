@@ -1,24 +1,26 @@
-ruby:
-  promocode = decode(params[:pc])
-  heading = decode(params[:h])
-  message = decode(params[:m])
-  content = decode(params[:c]) || promocode
-  class_name = decode(params[:s]) || class_name
-  timeout = params[:t]
-
-  email_capture_modal = "
-    new window.page.EmailCaptureModal({
-      promocode: '#{promocode}',
-      content:   '#{content}',
-      heading:   '#{heading}',
-      message:   '#{message}',
-      className: '#{class_name}',
-      action:    '#{campaigns_email_capture_path}',
-      container: '#email-capture-fields',
-      timeout:    #{timeout}
-    });
-  "
 - if pop?
+  ruby:
+    promocode = decode(params[:pc])
+    heading = decode(params[:h])
+    message = decode(params[:m])
+    content = decode(params[:c]) || promocode
+    class_name = decode(params[:s]) || class_name
+    timeout = params[:t]
+
+    email_capture_modal = "
+      new window.page.EmailCaptureModal({
+        promocode: \"#{promocode}\",
+        content:   \"#{content}\",
+        heading:   \"#{heading}\",
+        message:   \"#{message}\",
+        className: \"#{class_name}\",
+        action:    \"#{campaigns_email_capture_path}\",
+        container: \"#email-capture-fields\",
+        timeout:    #{timeout},
+        force:      true
+      });
+    "
+
   = content_for :inline_javascript do
     = raw email_capture_modal
 

@@ -10,34 +10,29 @@
         li.footer-nav--item
           = link_to 'Why Shop With Us', why_us_path
         li.footer-nav--item
-          = link_to 'The Fame Team', about_us_path
+          = link_to 'About Us', about_us_path
         li.footer-nav--item
           = link_to 'FAQs', faqs_path
+
+    .col-md-2.col-sm-3
+      ul.footer-nav
         li.footer-nav--item
            = link_to 'Terms', terms_path
         li.footer-nav--item
           = link_to 'Get styling advice', style_consultation_path
-    .col-md-2.col-sm-3
-      ul.footer-nav
         li.footer-nav--item
           = link_to 'Fame Chain', fame_chain_path
 
-  .row.lower-row
+  .lower-row
     .col-md-3.col-sm-8
-      .btn-group
-        button.btn.btn-dropdown.dropdown-toggle.location aria-expanded="false" data-toggle="dropdown" type="button"
-          = current_site_version.abbr.upcase
-          span.caret
-        ul.dropdown-menu role="menu"
-          - if !current_site_version.is_australia?
-            li
-              = link_to site_version_path('au') do
-                | AU
+      - locale_options = options_for_select({'AU' => site_version_path('au'), 'US' => site_version_path('us')}, site_version_path(current_site_version.code))
+      = select_tag :locale_select, locale_options, 'data-backlink' => get_hreflang_link, 'data-minimum-results-for-search' => 'Infinity'
 
-          - if !current_site_version.is_usa?
-            li
-              = link_to site_version_path('us') do
-                | US
+      = content_for :inline_javascript do
+        | $('#locale_select').select2().on('change', function (e) {
+        |   window.location = $(this).val() + '?' + 'backlink=' + $(this).data('backlink');
+        | });
+
     .col-md-6.col-sm-4.copyright
       p
         | &copy;&nbsp;

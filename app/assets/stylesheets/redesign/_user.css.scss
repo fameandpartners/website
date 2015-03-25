@@ -1,13 +1,23 @@
-.user {
-	.nav > li > a:hover, .nav > li > a:focus {
-	  text-decoration: none;
-	  background-color: #003647;
-	}
+// Page header
+.user-account-page-title {
+  background-color: $peach-bg;
+  margin-top: 70px; // $fp-menu-height
+}
 
+.user-account-title {
+  color: #000000;
+  text-transform: none;
+}
+// @end Page header
+// ---------------
+
+// Account
+.page-content.user {
+	padding-top: 0;
+	
 	.row {
 		margin-top:20px;
 	}
-
 
 	.avatar {
 		width: 100px;
@@ -21,13 +31,18 @@
 			background: url('_reg/avatar-empty.png') no-repeat center center #e1e1e1;
 		}
 	}
-	
-	&.moodboard {
-		.actions {
-			.btn {
-				color:#FFFFFF;
-
-			}
-		}
-	}
 }
+// @end Account
+// ---------------
+
+// Moodboard
+.page-content.moodboard {
+  .category--item {
+    .details { text-transform: uppercase;}
+    
+    // - Override style.css
+    .btn-black { color: #fff;}
+  } 
+}
+// @end Moodboard
+// ---------------

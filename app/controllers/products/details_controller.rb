@@ -5,8 +5,7 @@ class Products::DetailsController < Products::BaseController
     @product = Products::DetailsResource.new(
       site_version: current_site_version,
       slug:         params[:product_slug],
-      permalink:    params[:id],
-      color_name:   params[:color_name]
+      permalink:    params[:id]
     ).read
 
     # only admins can view inactive/hidden products
@@ -14,16 +13,22 @@ class Products::DetailsController < Products::BaseController
       raise Errors::ProductInactive
     end
 
-    # set page title. 
-    prefix = [@product.short_description, @product.color.try(:presentation), @product.name].compact.join(' ')
-    title( [prefix, default_seo_title].compact.join(' - '))
-    description([prefix, default_meta_description].compact.join(' - '))
+    # set preselected images colors
+    if params[:color_name] && color = Repositories::ProductColors.get_by_name(params[:color_name])
+      @product.color_id   = color.id
+      @product.color_name = color.name
+    else
+      # we can get it from @product.available_options.colors.default.first, if needed
+      @product.color_id   = nil
+      @product.color_name = nil
+    end
 
-    #display_marketing_banner # content_for :banner ?
-
-    #@title = @product.details.title
-    #@title = @product.details.description
-    #set_product_show_page_title(@product, @product.selected_color.presentation)
+    # set page title.
+    # Drop anything after the first period(.) and newline
+    short_description = @product.short_description.gsub(/\.\W+.*\z/, ' - ')
+    prefix = [short_description, @product.color.try(:presentation), @product.name].compact.join(' ')
+    title( [prefix, default_seo_title].compact.join(' '))
+    description([@product.short_description, default_meta_description].compact.join(' '))
   end
 
 =begin

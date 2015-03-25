@@ -22,7 +22,7 @@
 #     footer should come from Banner footer text
 #
 # In the meta tags:
-#
+#     title == taxon.meta_title
 #     meta description should come from Banner Seo Description
 #
 
@@ -35,7 +35,7 @@ class Products::CollectionsController < Products::BaseController
     @collection = collection_resource.read
 
     # set title / meta description for page
-    title(@collection.meta_title, default_seo_title)
+    title(@collection.details.meta_title, default_seo_title)
     @description  = @collection.details.seo_description
 
     respond_to do |format|
@@ -50,7 +50,7 @@ class Products::CollectionsController < Products::BaseController
 
     def collection_resource
       resource_args = {
-        site_version: current_site_version,
+        site_version:   current_site_version,
         collection:     params[:collection],
         style:          params[:style],
         event:          params[:event],

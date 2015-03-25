@@ -5,14 +5,15 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     @opts = opts
     timeout = (opts.timeout*1000) || 3000
     @$container = $(opts.container)
+    @cookie = "email_capture_#{@opts.content}"
 
     setTimeout(@open, timeout) if @pop
 
   pop: =>
-    @opts.force || $.cookie('email_capture') != 'hide'
+    @opts.force || $.cookie(@cookie) != 'hide'
 
   afterClose: () ->
-    $.cookie('email_capture', 'hide', { expires: 365, path: '/' })
+    $.cookie(@cookie, 'hide', { expires: 365, path: '/' })
 
   callback: (data) =>
     if data
@@ -29,10 +30,10 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
   success: (data) =>
     if data.status == 'ok'
-      title = '#hashtag #hooray'
+      title = 'thanks babe'
 
       if @opts.promocode
-        message = "Thanks for joining! Use this promocode for your next killer dress: #{@opts.promocode}."
+        message = "Use this promocode for your next killer dress: #{@opts.promocode}."
       else
         message = "Thanks for joining!"
 

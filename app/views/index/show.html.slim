@@ -1,14 +1,8 @@
+
 .page-content.index
-  .container.relative
-    .row.relative
   #theTarget style=("height: 720px;")
 
-    /= link_to @big_banner.first.url, title: @big_banner.first.title do
-    / = image_tag @big_banner.first.attachment(:big)
-
-    / div style=("background-image: url('#{@big_banner.first.attachment(:big)}')")
-
-    div.taste-of-fame
+    div.taste-of-fame.slider-action data-href="/dresses"
       .slider-image-caption.height-100
         .container.height-100
           .promotion
@@ -16,107 +10,67 @@
             p dresses made and styled for you by fame &amp; partners
             button.btn.taste-of-fame-btn type="button"  shop now
 
-    div.prom
+    div.prom.slider-action data-href="/prom"
       .slider-image-caption.height-100
         .container.height-100
-          .promotion.col-md-5
-            h2.caption-title Our official</br>prom collection</br>dresses that
-            p keep it</br>real!
+          .promotion.col-md-4
+            h2.caption-title Our official</br>prom collection.
+            p Dresses that</br>keep it real.
             button.btn.prom-btn type="button"  shop now
 
-    div.break-hearts
+    div.break-hearts.slider-action data-href="/break-hearts-not-accounts"
       .slider-image-caption.height-100
         .container.height-100
           .promotion.col-sm-12
              h2.caption-title Break hearts. not bank account$
 
-      / | <div style="background-image: url(images/test4.jpg)"></div
-      / | <div style="background-image: url(images/test5.jpg)"></div
-
-/! Call to Actions
-.call-to-actions.hidden
-  .row
-    a href="/dresses/prom"
-      .col-md-4.text-center.no-padding
-        .header.black
-          h3 Will The Real Junior Prom Queen Please Stand Up
-        = image_tag "glam_rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
-    a href="#email-container"
-      .col-md-4.text-center.no-padding
-        .header.pink
-          h3 GET $20 OFF + FREE STYLING
-        = image_tag "glam_rebel2.jpg", alt: 'Newsletter sign up', class: 'img-responsive'
-    a href="/style-consultation"
-      .col-md-4.text-center.no-padding
-        .header.black
-          h3 Your Very Own Glam Squad. Book A Free Styling Session Now
-        = image_tag "real_prom.jpg", alt: 'Styling session sign up', class: 'img-responsive'
 
 /! Email Subscription
 #email-container.container-fluid.email-sub.text-center
   .row
     = render 'shared/newsletter_signup'
 
-.col-md-4.brand-pink.text-center.shop-with-us
-  .row
-    h4 no middle-men
+.row-same-height
+  .col-md-4.brand-pink.text-center.shop-with-us
+    h4 No middle-men
     p Our sample room direct to you model means no middle men, higher quality formal dresses &amp; lower costs.
-  .row
+
     h4 Internal sourcing &amp; design
     p Dedicated sourcing &amp; design team to discover the best fabrics and create the most beautiful dress designs based on what's trending right now.
-  .row
+
     = image_tag "glam-rebel.jpg", alt: 'Something here', class: 'img-responsive'
-  .row
+
     h4 Hem lengths that suit you
     p Long formal dresses, short prom dresses, midi, knee-length; we can change your dress length to whatever suits you.
-  .row
+
     h4 All online
     p We deliver you beautiful dresses, customised for you, at the prices we do because we keep it all online.
-.col-md-4.text-center.shop-with-us.middle
-  .row
+  .col-md-4.text-center.shop-with-us.middle
     h2 Fame &amp; Partners delivers a high quality, bespoke dress making  service without the  traditional cost
-  .row
     = image_tag "bride.jpg", alt: 'Something here', class: 'img-responsive'
-  .row.no-padding
     h1
       small formal dresses</br>
       | for every event
-    p.links-list
-      a href="/new-years-eve-dresses" new years dresses
-      a href="/dresses/prom" prom dresses
-      a href="/dresses/formal" formal dresses
-      a href="/bridesmaid-dresses" bridesmaids dresses
-      a href="/dresses/cocktail" cocktail dresses
-      a href="/dresses" ball gowns
+    ul.list-inline
+      li : a href="/dresses/graduation" grad dresses
+      li : a href="/dresses/prom" prom dresses
+      li : a href="/dresses/formal" formal dresses
+      li : a href="/bridesmaid-dresses" bridesmaids dresses
+      li : a href="/dresses/cocktail" cocktail dresses
+      li : a href="/dresses" ball gowns
 
-
-
-.col-md-4.brand-pink.text-center.shop-with-us
-  .row
+  .col-md-4.brand-pink.text-center.shop-with-us
     h4 Dedicated, specialist sample</br>rooms &amp; dress makers
     p Our workers are highly skilled; each individual formal dress is crafted by one artisan seamstress.
-  .row
+
     = image_tag "new-years-eve.jpg", alt: 'Something here', class: 'img-responsive portrait-img'
-  .row
+
     h4 Dresses customised for you
     p Customise to your perfect colour and change design features to make your formal dress uniquely yours.
-  .row
+
     h4 Free stylists
     p Special events like prom are so important so we offer free stylists to complete the full look, free of charge.
-  .row
+
     h4 beautiful, luxe finish dress fabrics
     p Metallics, sequins, taffeta, satin, chiffon, lace all available in extensive colour palettes you can choose.
 
-
-
-/! SEO Crap
-/ .main-content
-/   .container
-/     .row
-/       .col-md-7
-/         h1= t('home.find.heading').html_safe
-/         p= t('home.find.body').html_safe
-/         h2= t('home.find.heading').html_safe
-/         p= t('home.shop.body').html_safe
-/       .col-md-5
-/         = image_tag 'images/bridesmaid-image.jpg', alt: 'Bridesmaid image', class: 'img-responsive'

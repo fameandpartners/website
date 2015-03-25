@@ -24,10 +24,11 @@ ruby:
       li
         .media
           .media-left.media-middle
-            = image_tag product.image.small, class: 'cart-item-image'
+            = link_to collection_product_path(product) do
+              = image_tag product.image.small, class: 'cart-item-image'
           .media-body.media-middle
             span.qty =' "#{ product.quantity}x"
-            = product.name
+            = link_to product.name, collection_product_path(product)
             .checkout-price = product.price.display_price
           a.remove-product.delete-item href="#0" data-id=(product.line_item_id)
       
@@ -37,7 +38,7 @@ ruby:
     .input-group
       input.form-control.form-control-md#promotion-code type="text"
       span.input-group-addon
-        button.btn-submit Submit
+        button.btn-submit.btn-reset Submit
           
   / hr
   p

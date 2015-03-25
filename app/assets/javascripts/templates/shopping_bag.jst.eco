@@ -16,16 +16,24 @@
 <ul class="cart-items">
   <% for product in @cart.products: %>
     <li>
-      <img class="img-responsive pull-left cart-item-image" src="<%= product.image.small %>" />
+      <a href="<%= product.path %>">
+        <img class="img-responsive pull-left cart-item-image" src="<%= product.image.small %>" />
+      </a>
       <a class="fa fa-close pull-right link-grey remove-product" data-id="<%= product.line_item_id %>" href="#0"></a>
       <span class="qty"><%= product.quantity %>x</span>
-      <%= product.name %>
+      <a href="<%= product.path %>"><%= product.name %></a>
       <div class="price">
         <%= product.price.display_price %>
       </div>
     </li>
   <% end %>
 </ul>
+<form class="promo-code" action="#">
+  <label for=""> Promo Code</label>
+  <div class="input-group">
+    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit btn-reset">Submit</button></span>
+  </div>
+</form>
 <!--cd-cart-items-->
 <div class="cart-total">
   <p>

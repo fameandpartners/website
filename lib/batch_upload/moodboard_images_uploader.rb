@@ -4,55 +4,38 @@ module BatchUpload
   class MoodboardImagesUploader < ImagesUploader
     def process!
       each_product do |product, path|
+
+        moodboard_items = product.moodboard_items.moodboard.where('created_at < ?', @_expiration.ago)
+        info "Deleting SKU: #{product.sku} moodboards where(age > #{@_expiration / 3600} hrs) - total #{moodboard_items.count}"
+        moodboard_items.destroy_all
+
         get_list_of_directories(path).each do |directory_path|
-          directory_name = directory_path.rpartition('/').last.strip
+          directory_name = File.basename directory_path
 
           next unless directory_name =~ /moodboards?/i
 
           get_list_of_files(directory_path).each do |file_path|
             begin
-              puts ""
-              puts ""
-              file_name = file_path.rpartition('/').last.strip
-
-              puts "  [INFO] Process \"#{file_name}\" file"
-              puts "  [INFO] Parse file name"
+              file_name = File.basename file_path
 
               matches = /^(?<position>\d+)\.\S+/.match(file_name)
-
-              puts "  [INFO] File name successfully parsed"
-
-              if matches.present? && matches[:position].present?
-                puts "    POSITION:   #{matches[:position]}"
-              end
-
-              puts "  [INFO] Process parsed data"
-
               position = matches.present? ? matches[:position] : nil
 
-              puts "    POSITION:   #{position}"
-
-              puts "  [INFO] Delete moodboards which was created more then #{@_expiration / 3600} hours ago"
-
-              product.moodboard_items.moodboard.where('created_at < ?', @_expiration.ago).destroy_all
-
-              puts "  [INFO] Create moodboard"
-              puts "    ATTACHMENT:    #{file_path}"
-              puts "    POSITION:      #{ position || 'NONE' }"
+              next if test_run?
 
               moodboard = product.moodboard_items.moodboard.build do |object|
                 object.image = File.open(file_path)
                 object.position = position
               end
 
+
               if moodboard.save
-                puts "  [INFO] Moodboard successfully created"
+                success "Moodboard", position: position, file: file_name
               else
-                puts "  [ERROR] Moodboard can not created"
-                puts "    MESSAGES: #{moodboard.errors.full_messages.map(&:downcase).to_sentence}"
+                error "Moodboard can not created #{moodboard.errors.full_messages.map(&:downcase).to_sentence}"
               end
             rescue Exception => message
-              puts "  [ERROR] #{message.inspect}"
+              error "#{message.inspect}"
             end
           end
         end

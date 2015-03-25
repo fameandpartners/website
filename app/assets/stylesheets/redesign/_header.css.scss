@@ -1,11 +1,11 @@
 .nav-menu {
 	text-transform: uppercase;
 	font-size: 1.4rem;
-}
 
-.search img {
-	width: 18px;
-	height:18px;
+  a.search img {
+    width: 18px;
+    height:18px;
+  }
 }
 
 .all-dresses {
@@ -21,11 +21,14 @@
 
 .menu-main-promotions {
 	font-size: 1.6rem;
+	margin-top: 10px;
 }
 
 .mega-menu-list {
 	padding-top: 10px;
 	padding-bottom: 5px;
+	font-family: "brandon-grotesque";
+	font-size: 1.6rem;
 }
 
 .mega-menu--secondary {
@@ -38,12 +41,24 @@
 	font-size: 1.5rem;
 }
 
-.mega-menu-list--item a{
+.mega-menu-list--item a {
 	text-transform: capitalize;
-	font-weight: 500;
+	font-weight: 400;
 }
 
-.mega-menu--main{
+.mega-menu--main {
+	position: relative;
+	border: 1px solid #040505;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	background-color: #f5f5f5;
+	padding-right: 0;
+	padding-left: 0;
+	height: 100px;
+}
+
+.stories {
 	position: relative;
 	border: 1px solid #040505;
 	border-bottom: none;
@@ -54,9 +69,16 @@
 	padding-left: 0;
 }
 
+.search-bar {
+	border: 1px solid #040505;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+}
+
 .mega-menu--main:after, .mega-menu--main:before {
 	bottom: 100%;
-	left: 333px;
+	left: 338px;
 	border: solid transparent;
 	content: " ";
 	height: 0;
@@ -65,18 +87,72 @@
 	pointer-events: none;
 }
 
+.stories:after, .stories:before {
+	bottom: 100%;
+	left: 418px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.search-bar:after, .search-bar:before {
+	bottom: 100%;
+	right: 132px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.image-container {
+	margin-top: 4rem;
+}
+
 .mega-menu--main:after {
 	border-color: rgba(213, 209, 209, 0);
 	border-bottom-color: #f5f5f5;
-	border-width: 16px;
-	margin-left: -16px;
+	border-width: 6px;
+	margin-left: -10px;
+}
+
+.stories:after {
+	border-color: rgba(213, 209, 209, 0);
+	border-bottom-color: #f5f5f5;
+	border-width: 6px;
+	margin-left: -10px;
+}
+
+.search-bar:after {
+	border-color: rgba(213, 209, 209, 0);
+	border-bottom-color: #f5f5f5;
+	border-width: 6px;
+	margin-right: -10px;
 }
 
 .mega-menu--main:before {
 	border-color: rgba(4, 5, 5, 0);
 	border-bottom-color: #040505;
-	border-width: 17px;
-	margin-left: -17px;
+	border-width: 7px;
+	margin-left: -11px;
+}
+
+.stories:before {
+	border-color: rgba(4, 5, 5, 0);
+	border-bottom-color: #040505;
+	border-width: 7px;
+	margin-left: -11px;
+}
+
+.search-bar:before {
+	border-color: rgba(4, 5, 5, 0);
+	border-bottom-color: #040505;
+	border-width: 7px;
+	margin-right: -11px;
 }
 
 .menu-icon {
@@ -85,6 +161,7 @@
 	display: inline-block;
 	position: relative;
 	top: 5px;
+	margin-right: 10%
 }
 
 .fit-guarantee {
@@ -106,27 +183,102 @@
 	color: #023648;
 }
 
-li.edits {
+li.shop {
 
-	.dropdown-menu {
-		left: -10px;
+	ul.story-links {
+		list-style: none;
+		padding: 2rem 1rem 2rem 2rem;
+
+		li {
+			margin-top: 0.5rem;
+		}
 	}
 
-	&:hover > ul.dropdown-menu {
-    display: block;
-	}
+	.story-list {
+		width: 100%;
 
-	button.btn.btn-dropdown.dropdown-toggle{
-		background-color: white;
-		color: black;
-		font-family: "brandon-grotesque";
-		font-weight: 400;
-		font-size: 14px;
-		letter-spacing: 0;
-		border: none;
+		a{
+			color: black;
+
+			&:hover {
+				color: black;
+			}
+		}
 	}
 }
 
-li.edits.menu-item.dropdown {
-	height: 40px
+.masthead {
+	padding-top: 26px;
+}
+
+.nav-menu .primary li.menu-item .menu-item--link, .nav-menu .secondary li.menu-item .menu-item--link {
+	padding-top: 24px;
+}
+
+.arrow-up {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #f4f4f4;
+ }
+
+.nav-menu {
+	 .search-btn {
+	 	text-transform: none;
+	}
+}
+
+.search-form {
+	height: 240px;
+
+	.input-group{
+		margin-top: 90px;
+	}
+}
+
+.search-bar button {
+	margin-top: 6px;
+	font-family: forum;
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+.search-form .form-control {
+	width: 85%;
+}
+
+.close-search {
+	padding: 30px 37px 0 0;
+}
+
+.search-form {
+
+	::-webkit-input-placeholder { /* WebKit browsers */
+    text-transform: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    bottom: 0;
+    font-size: 1.5rem;
+	}
+
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  	text-transform: none;
+  	opacity:  1;
+  	font-size: 1.5rem;
+	}
+
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	  text-transform: none;
+	  opacity:  1;
+	  font-size: 1.5rem;
+	}
+
+	:-ms-input-placeholder { /* Internet Explorer 10+ */
+	  text-transform: none;
+	  font-size: 1.5rem;
+	  vertical-align: baseline
+	}
+
+	input {
+		text-transform: none;
+	}
 }

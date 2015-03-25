@@ -8,7 +8,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     # code
     @data    = { item_count: 0, products: [] }
     @loaded   = false
-  
+
     @trigger =  delegateTo(@$eventBus, 'trigger')
     @on      =  delegateTo(@$eventBus, 'on')
     @one     =  delegateTo(@$eventBus, 'one')
@@ -74,6 +74,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     )
 
   # apply code
+  # note - error messages placed here, if something changed - move this upper in logic
   applyPromotionCode: (code) ->
     $.ajax(
       url: urlWithSitePrefix("/user_cart/promotion"),
@@ -83,15 +84,16 @@ window.helpers.ShoppingCart = class ShoppingCart
     ).success((data) =>
       if data.error
         @trigger('error', data)
+        @trigger('complete', data)
+        window.helpers.showAlert(message: data.error)
       else
         @updateData(data)
+        @trigger('success', data)
+        @trigger('complete', data)
+        window.helpers.showAlert( type: 'success', title: 'hooray babe', message: 'The coupon code was successfully applied to your order.')
     ).error( () =>
       @trigger('error')
-    ).complete(
-      () => @trigger('complete')
     )
-
-
 
 #_base = undefined
 #window.shopping_cart = {}
@@ -194,7 +196,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 #
 ##  buildOnSuccess: ->
 ##    console.log("Cart: Added to Cart.")
-##    
+##
 ##    _.delay ( ->
 ##      window.location.href = "/cart?cf=buybtn"
 ##      return

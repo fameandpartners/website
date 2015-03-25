@@ -1,6 +1,11 @@
 module OmniAuth
   module Strategies
     class Facebook
+      option :client_options, {
+         site: 'https://graph.facebook.com/v2.0',
+         authorize_url: "https://www.facebook.com/v2.0/dialog/oauth"
+      }
+
       def on_request_path?
         !!(current_path =~ /^\/?(au|us)?\/user\/auth\/facebook$/i)
       end

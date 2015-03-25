@@ -1,3 +1,6 @@
+css:
+  .sc-player { display: none; }
+
 ruby:
   product_paths = { default: collection_product_path(@product) }
   @product.default_color_options.each do |color|
@@ -10,7 +13,11 @@ ruby:
         slider: {
           container: '#slides',
           images: #{ @product.all_images.to_json },
-          options: { animation: 'fade', play: 6000, preselected: '#{raw @product.color_id}' }
+          options: {
+            animation: 'fade',
+            play: 6000,
+            preselected: '#{raw @product.color_id}'
+          }
         },
         selector: {
           product_id: #{ @product.id },
@@ -42,14 +49,25 @@ ruby:
       });
   "
 
+  init_song_player = "
+    (function(){
+      $('a[data-action=soundcloud]').on('click', function(e){
+        e.preventDefault();
+        var playerBox = $(e.currentTarget).closest('.box.song').toggleClass('song-playing');
+        var player = playerBox.find('.sc-player');
+        player.find('.sc-controls a.sc-pause').click();
+      });
+    })();
+  "
+
 = content_for :inline_javascript do
   = raw init_product_details_page
+  = raw init_song_player
 
 #slides
   .slides-container
     // note: we should crop images & update images preloading mechanics - too slow currently
-    / = image_tag "bgimage.jpg"
-    = image_tag @product.featured_image.original, id: 'product-image-slide-0', class: 'product-image-slide', data: { color_id: @product.featured_image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
+    = image_tag @product.featured_image.original, id: "product-image-slide-#{ @product.featured_image.id }", class: 'product-image-slide', data: { color_id: @product.featured_image.color_id }, alt: @product.name, style: 'height: 1164px; width: 2560px; overflow: hidden;'
 
   nav.slides-navigation
     a.next href="#"
@@ -60,10 +78,10 @@ ruby:
 /! Product Section
 .container-fluid.product-content.text-center
   .col-sm-12.screen-height
-  .col-md-4.col-md-offset-8.col-sm-12.product-details.product-section--selection.no-padding
+  .col-md-4.col-md-offset-8.col-sm-6.col-sm-offset-6.product-details.product-section--selection.no-padding
     .row
       h2 = @product.name
-      p.product-section-description = @product.short_description
+      p.product-section-description
       p#product-price
         = product_price_with_discount(@product.price, @product.discount)
       p#product-current-price.hidden data-original-price=product_price_with_discount(@product.price, @product.discount)
@@ -76,41 +94,15 @@ ruby:
       - if @product.default_sizes?
         a#product-size-action.btn-customize Size
 
-        /select#product-size.hidden
-          - if @product.default_sizes?
-            - @product.default_sizes.each do |size|
-              option value=size.id
-                = size.presentation
-          - if @product.custom_sizes?
-            - @product.custom_sizes.each do |size|
-              option value=size.id
-                = size.presentation
     .row
       - if @product.colors?
         a#product-colorize-action.btn-customize
           | Color
 
-        /select#product-color.hidden
-          option value=""
-          - @product.default_color_options.each do |color|
-            option value=(color.id) class="color #{color.name}" data-color=color.name
-              = color.presentation
-          - if @product.custom_colors?
-            - @product.custom_color_options.each do |color|
-              option value=(color.id) class="custom color #{color.name}" data-price="#{ colors.default_extra_price.display_price }" data-color=color.name data-custom="true"
-              = color.presentation
-          br
-
     - if @product.customizable?
       .row
         a#product-customize-action.btn-customize
           | Customize
-
-        /select.customise-options#product-customizations.hidden
-          option value=""
-          - @product.customizations.all.each do |customization|
-            option value=(customization.id) data-custom="true"
-              = "#{ customization.name } #{ customization.display_price }"
 
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
@@ -124,16 +116,22 @@ ruby:
           button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
             |+ Moodboard
 
-    .row.social-media-links
-      span class='st_facebook_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
-        = image_tag '_icons/facebook.png'
-      span class='st_pinterest_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
-        = image_tag '_icons/pinterest.png'
-      span class='st_instagram_custom' st_username='fameandpartners' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
-        = image_tag '_icons/instagram.png'
-      span class='st_twitter_custom' st_via="fameandpartners" st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
-        = image_tag '_icons/twitter.png'
+        .row.social-media-links
+          .col-md-3.col-sm-3.col-xs-3
+            span class='st_facebook_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
+              = image_tag '_icons/facebook.png'
 
+          .col-md-3.col-sm-3.col-xs-3
+            span class='st_pinterest_custom' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
+              = image_tag '_icons/pinterest.png'
+
+          .col-md-3.col-sm-3.col-xs-3
+            span class='st_instagram_custom' st_username='fameandpartners' st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
+              = image_tag '_icons/instagram.png'
+
+          .col-md-3.col-sm-3.col-xs-3
+            span class='st_twitter_custom' st_via="fameandpartners" st_title=@product.name st_summary=@product.short_description st_image=@product.featured_image.large
+              = image_tag '_icons/twitter.png'
 
 /! About The Dress
 .col-sm-12.screen-height
@@ -149,29 +147,30 @@ ruby:
         .row
           .box.song.col-sm-4.no-padding.pink
             - if @product.song
-              / = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
+              = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
               = link_to '#', data: { action: 'soundcloud' } do
                 = image_tag @product.song.image_url
-                = image_tag '_audio-icon.png', class: 'icon'
+                .fa.fa-volume-up
+                / = image_tag '_audio-icon.png', class: 'icon'
               span.mask
-              .hidden
+              .player-controls
                 = link_to '#', data: { action: 'soundcloud' } do
-                  span.icon-play.fa.fa-play
-                  span.icon-pause.fa.fa-play
+                  span.fa.fa-play
+                  span.fa.fa-pause
 
           - first_row.each do |item|
             .box.col-sm-4.no-padding.cream
-              = image_tag item.image_url
+              = image_tag(item.image_url) if item
         .row
           .box.col-sm-4.no-padding.pink-light
             - if @product.celebrity
               = image_tag @product.celebrity.image_url
           - second_row.each do |item|
             .box.col-sm-4.no-padding.cream
-              = image_tag item.image_url
+              = image_tag(item.image_url) if item
 
     .col-md-6.col-sm-12
-      h3.text-center The Story
+      h3 The Story
       br
       - if @product.preorder?
         .pre-order
@@ -179,10 +178,13 @@ ruby:
           | This item will ship within 4 weeks
       div=raw @product.description
 
+      - if @product.style_notes
+        h4 Style it with
+        p= raw @product.style_notes
+
       - if @product.fabric
-        p Fabric: #{raw @product.fabric}
-      - if @product.notes
-        p= raw @product.notes
+        h4 What's it made of
+        p= raw @product.fabric.gsub("\n", '<br/>')
 
       p.sku sku: #{@product.sku}
 
@@ -219,45 +221,49 @@ hr
 
 #product-overlay
 
+/! PRODUCT SIZES PANEL
 #product-size-content.product-side-panel
-  .row
-    .col-md-12.recommended
-      h2 Sizes
-      - if @product.default_sizes?
-        - @product.default_sizes.each do |size|
-          .col-md-3.col-xs-3.col-xxs-6
-            a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
-              span.option-box.size-box= size.presentation.gsub(/\D/, '')
-
-
-  - if @product.custom_sizes?
+  .sizes-container.grey
     .row
-      .col-md-12.custom
-        h2=  "Custom Sizes +#{@product.custom_size_price}"
+      .col-md-12.recommended
+        h2 Sizes
+        - if @product.default_sizes?
+          - @product.default_sizes.each do |size|
+            .col-md-3.col-xs-3.col-xxs-6
+              a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
+                span.option-box.size-box= size.presentation.gsub(/\D/, '')
 
-        - @product.custom_sizes.each do |size|
-          .col-md-3.col-xs-3.col-xxs-6
-            a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
-              span.option-box.size-box= size.presentation.gsub(/\D/, '')
-              span.option-price= "+#{@product.custom_size_price}"
+  .sizes-container
+    - if @product.custom_sizes?
+      .row
+        .col-md-12.custom
+          h2=  "Custom Sizes +#{@product.custom_size_price}"
+
+          - @product.custom_sizes.each do |size|
+            .col-md-3.col-xs-3.col-xxs-6
+              a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
+                span.option-box.size-box= size.presentation.gsub(/\D/, '')
 
   .row
-    .col-md-12.text-center
-      p.size-region=  t('views.pages.products.show.size_region')
+    .col-md-10.col-md-offset-1
+      button.btn-fit-guide.btn.btn-block.btn-secondary Fit Guide
+
 
 #product-color-content.product-side-panel
-  .row
-    .col-md-12.recommended
-      h2 Recommended Colors
+  .sizes-container.grey
+    .row
+      .col-md-12.recommended
+        h2 Recommended Colors
 
-      - @product.default_color_options.each do |color|
-        .col-md-3.col-xs-4.col-xxs-6
-          a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation
-            - if color.value
-              span.option-box.color-box class="color-#{color.name}" style="background-color: #{ color.value }"
-            - elsif color.image
-              span.option-box.color-box class="color-#{color.name}" style="background-image: url('#{ color.image }')"
-            span.option-name= color.presentation
+        - @product.default_color_options.each do |color|
+          .col-md-6
+            a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation
+              span.option-box.color-box class="color-#{color.name}"
+              - if color.value
+                /! style="background-color: #{ color.value }"
+              - elsif color.image
+                /! span.option-box.color-box class="color-#{color.name}" style="background-image: url('#{ color.image }')"
+              span.option-name= color.presentation
 
   - if @product.custom_colors?
     .row
@@ -276,27 +282,18 @@ hr
   .col-md-12
     h2 Customize Your Dress
 
-  .row
-    .col-md-12
-      ul.list-group
-        a.customization-option.list-group-item.active href="#" data-id="original"
-          .row
-            .col-md-4.col-xs-4.col-xxs-12
-              .row &nbsp;
-            .col-md-8.col-xs-8.col-xxs-12
-              .row
-                span.option-name Original
-                span.option-price +0
-            br
-        - @product.customization_options.each do |option|
+    - @product.customization_options.each do |option|
+      .col-md-10.col-md-offset-1
+        .row
+          .image-box
+            = image_tag option.image, :alt => option.name
+        .row
+          p.option-name= option.name
+
           a.customization-option.list-group-item href="#" data-id=option.id data-name=option.name data-price=option.display_price
-            .row
-              .col-md-4.col-xs-4.col-xxs-12
-                .row
-                  .image-box
-                    = image_tag option.image, :class => 'img-responsive', :alt => option.name
-              .col-md-8.col-xs-8.col-xxs-12
-                .row
-                  span.option-name= option.name
-                  span.option-price= "+#{option.display_price}"
-            br
+            span.option-price= "+#{option.display_price}"
+
+    .row
+      .col-md-10.col-md-offset-1
+        button.btn-clear-customizations.btn.btn-block.btn-black.customization-option data-id="original" data-name="original" data-price=""
+          | Clear Selection

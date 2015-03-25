@@ -7,7 +7,7 @@
 }
 
 .page-content.index {
-	padding-bottom: 3rem;
+	padding-bottom: 0;
 }
 
 .col-md-4{
@@ -28,6 +28,7 @@
 		h3 {
 			padding-top: 2.6rem;
 			text-transform: uppercase;
+			margin-top: 0;
 		}
 	}
 
@@ -51,15 +52,25 @@
 }
 
 .shop-with-us.middle {
-	background-color: white;
+  background-color: white;
 
-	p {
-		text-transform: uppercase;
-		font-weight: 500;
-		letter-spacing: 1px;
-		padding-left: 2rem;
-		padding-right: 2rem;
-		word-spacing: 1px
+  p {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  p, li, a {
+    font-family: 'brandon-grotesque';
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    font-size: 12px;
+  }
+}
+
+.shop-with-us.brand-pink {
+	img {
+		margin-bottom: 1.8rem;
 	}
 }
 
@@ -68,6 +79,58 @@
 	min-height: 312px;
 	margin-bottom: 4.5rem;
 
+	button {
+		margin-top: 22px;
+	  margin-left: 12px;
+	  padding: 0;
+	  font-family: forum;
+	  color: black;
+	  text-transform: none;
+
+	  &:hover {
+	  	background-color: transparent;
+	  }
+	}
+
+	input {
+		text-transform: none;
+	}
+
+	.submit {
+		display: inline-block;
+	}
+
+	.form-control {
+		width: 100%;
+	}
+
+	.form-group {
+		width: 40%;
+
+		@media (max-width: 990px){
+			width: 100%
+		}
+	}
+
+	.submit {
+		@media (max-width: 990px){
+		display: block;
+		}
+	}
+}
+
+.search-bar {
+
+	.input-group {
+		width: 500px;
+	}
+
+		button {
+		float:left;
+	}
+}
+
+.email-sub, .search-bar {
 
 	@media (min-width: 1200px){
 		width: 100%;
@@ -77,6 +140,7 @@
 		font-family: 'forum';
 		text-transform: uppercase;
 		font-size: 8rem;
+		margin-top: 45px;
 	}
 
 	.lead {
@@ -93,15 +157,13 @@
 		background-color: transparent;
 		border-bottom:1px solid black;
 		display: inline-block;
-		width: 90%;
 		padding: 0;
-		margin-top: 14px;
+		height: 30px;
 	}
 
 	.input-group {
 		margin-left: auto;
 		margin-right: auto;
-		width: 500px;
 
 		@media (max-width: 550px){
 			width: 100%;
@@ -131,21 +193,29 @@
 	   text-transform: none;
 	}
 
-	.submit {
-		display: inline-block;
-		width: 10%;
-		padding-top: 3rem;
-		font-size: 2rem;
+
+
+	.col-md-2 {
+		padding-left: 0;
+	}
+	.col-md-10 {
+		padding-right: 0;
+	}
+}
+
+@media (min-width: 990px){
+	.row-same-height {
+	    display: table;
+	    width: 100%;
 	}
 }
 
 .shop-with-us {
-	min-height: 830px;
 
-	@media(min-width: 990px)and(max-width: 1020px){
-		height: 970px;
+	@media (min-width: 990px){
+		display: table-cell;
+	  float: none !important;
 	}
-
 	h2 {
 		font-size: 4.5rem;
 		margin-top: 1.2rem
@@ -156,6 +226,7 @@
 		font-family: forum;
 		font-size: 4.5rem;
 		text-transform: uppercase;
+		line-height: 3rem;
 
 		small{
 			color: black;
@@ -167,9 +238,15 @@
 		color:black;
 	}
 
-	a:after {
-		content: ', '
-	}
+    ul.list-inline {
+      li { padding-left: 0px; padding-right: 0px;}
+      li a:after {
+        content: ', '
+      }
+      li:last-of-type a:after {
+        content: ''
+      }
+    }
 
 	.row {
 		padding-left: 2rem;
@@ -192,6 +269,10 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+}
+
+.slider-action {
+		cursor:pointer;
 }
 
 .taste-of-fame {
@@ -228,7 +309,7 @@
 
 .taste-of-fame-btn {
 	background-color: #003647;
-	font-family: "Brandon Grotesque", sans-serif;
+	font-family: "brandon-grotesque", sans-serif;
 	color: white;
 	margin-top: 3rem;
 	width: 33%;
@@ -239,12 +320,68 @@
 }
 
 .maintenance-page {
-	.page-content {
-		padding:0;
+	background-color: #f6e2d5;
+	background-image: url('green-corner.png');
+	background-repeat: no-repeat;
+	background-size: 90px 90px;
+	background-position: right bottom;
+	height: 100vh;
+
+	.row {
+		margin-left: 0;
+		margin-right: 0;
 	}
+
+	.col-md-8 {
+		overflow: hidden;
+		margin-left: -15px;
+
+		img {
+		height: 100vh;
+		overflow: hidden;
+		}
+	}
+
+	.text-content {
+		margin-left: 4%;
+		max-width: 35rem;
+	}
+
+	h1 {
+		text-transform: uppercase;
+		font-family: forum;
+		font-size: 6.5rem;
+		margin-top: 40%;
+		margin-bottom: 0;
+		letter-spacing: 1px;
+		line-height: 5.5rem;
+
+		span {
+			font-size: 4rem;
+			line-height: 3rem;
+		}
+	}
+
+	.logo img{
+		height: 80px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	h2 {
+		text-transform: uppercase;
+		font-family: forum;
+		margin-top: 0;
+		padding-bottom: 4rem;
+		font-size: 2.5rem;
+	}
+
+	p {
+		text-transform: uppercase;
+		margin: 0;
+	}
+
 }
-
-
 .break-hearts {
 	background-image: url('break-hearts.jpg');
 
@@ -267,7 +404,7 @@
 	}
 
 		h2.caption-title {
-			font-family: "Brandon Grotesque", sans-serif;
+			font-family: "brandon-grotesque", sans-serif;
 			color: black;
 			text-align: center;
 			font-size: 7rem;
@@ -302,16 +439,19 @@
 		background-image: url('prom-mobile.jpg');
 	}
 
+	.slider-image-caption {
+		margin-top: 16rem;
+	}
+
 	.promotion {
 		float: right;
-		padding-right: 5rem;
 		font-weight: 400;
 
 		h2.caption-title {
-			font-family: "Brandon Grotesque", sans-serif;
-			color: black;
+			font-family: "brandon-grotesque", sans-serif;
+			color: white;
 			text-align: center;
-			font-size: 4rem;
+			font-size: 3rem;
 			padding-top: 14rem;
 			margin-right: auto;
 			margin-left: auto;
@@ -324,11 +464,11 @@
 		}
 
 		p {
-			font-family: forum;
-			text-transform: uppercase;
-			font-size: 9.5rem;
+			font-family: "brandon-grotesque", sans-serif;
+			color: white;
+			font-size: 5rem;
 			text-align: center;
-			line-height: 7rem;
+			line-height: 5.5rem;
 
 			@media(max-width: 768px){
 				font-size: 7rem;
@@ -339,13 +479,11 @@
 }
 
 .prom-btn {
-	background-color: #003647;
-	font-family: "Brandon Grotesque", sans-serif;
-	color: white;
-	background-color: #ffc4b5;
-	margin-top: 2rem;
+	background-color: #d5eff0;
+	font-family: "brandon-grotesque", sans-serif;
+	color: black;
 	width: 100%;
-	margin-top: 6rem;
+	margin-top: 5rem;
 
 	@media(max-width: 768px){
 		width: 100%;
@@ -355,4 +493,26 @@
 .prom-queen {
 	background-image: url('glam_rebel.jpg');
 	height:490px;
+}
+
+.skippr-nav-element {
+	background-color: #D3D3D3;
+}
+
+.skippr-nav-element:hover, .skippr-nav-element-active {
+	background-color:	#A9A9A9;
+}
+
+.search-form {
+	.form-control {
+		@media (max-width: 990px){
+			width: 100% !important;
+		}
+	}
+
+	button {
+		@media (max-width: 990px){
+			width: 100%;
+		}
+	}
 }

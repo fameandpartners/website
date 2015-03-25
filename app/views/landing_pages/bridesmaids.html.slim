@@ -1,21 +1,6 @@
-- content_for :head do
-  meta name="robots" content="noindex, nofollow"
+= render :partial => 'landing_pages/common'
 
-ruby:
-  cache_keys = ['bridesmaid_lp']
-  if spree_user_signed_in?
-    cache_keys << 'authenticated'
-  else
-    cache_keys << 'not-authenticated'
-  end
-  cache_keys << 'products'
-
-  if show_prices_with_applied_promocode? && current_promotion.present?
-    cache_keys.push(current_promotion.code)
-  end
-
-
-.index.bridesmaids
+.page-content.index.bridesmaids
   .container.relative
     .row.relative
   #theTarget style=("height: 720px;")
@@ -23,6 +8,7 @@ ruby:
     div.i
       .slider-image-caption.height-100
         .container.height-100
+          h1.text-center.edit-title.text-white our beautiful</br>bridesmaids collection
 
     div.ii
       .slider-image-caption.height-100
@@ -60,20 +46,20 @@ ruby:
       =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(0, 4) }
 
       .row.relative.content-box
-        .col-md-6.col-xs-12.col-xxs-12.content
+        .col-md-6.col-xs-12.col-xxs-12.content style="min-height: 355px;"
           h2 Unique bridesmaid dress designs
           p Fame & Partners is your only online dress boutique delivering high quality and uniquely designed bridesmaids dresses, just for you.
           p Find your uniquely designed bridesmaid dress by choosing your favourite colours, from white to lavender, mint and soft pink with divine fabrics and silhouettes your best friends will thank your for!
         .col-md-6.col-xs-12.col-xxs-12
-          = image_tag 'campaigns/bridemaid/bridesmaid-dress-1.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
+          = image_tag 'campaigns/bridemaid/bridesm-1.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
         .clearfix.visible-sm-block.visible-xs-block
 
       =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(5, 4) }
 
       .row.relative.content-box
         .col-md-6.col-xs-12.col-xxs-12
-          = image_tag 'campaigns/bridemaid/bridesmaid-dress-2.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
-        .col-md-6.col-xs-12.col-xxs-12.content
+          = image_tag 'campaigns/bridemaid/bridesm-2.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
+        .col-md-6.col-xs-12.col-xxs-12.content style="min-height: 355px;"
           h2 Free customisation and delivery
           p Fame & Partners offers free customisation, to save you on alteration costs and free delivery Australia wide.
           p Find your perfect dress for the modern bridesmaid, encapsulating the essence of timeless elegance and effortless beauty in soft hues from pink and white.
@@ -88,6 +74,3 @@ ruby:
         h2 More Bridesmaid Dresses
       - other_products.each_slice(4) do |products|
         =render :partial => '/landing_pages/products_four', :locals => { :products => products }
-
-
-= render :partial => 'shared/email_capture_modal'

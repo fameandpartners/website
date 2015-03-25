@@ -1,7 +1,8 @@
-class PagesController < Spree::StoreController
-  layout 'spree/layouts/spree_application'
+class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
+  #layout 'spree/layouts/spree_application'
   respond_to :html
 
+  # store params in session and redirects through omniauth_callbacks#through
   def fb_auth
     if params[:prom]
       session[:spree_user_return_to] = main_app.step1_custom_dresses_path
@@ -41,9 +42,10 @@ class PagesController < Spree::StoreController
       end
     end
 
-    redirect_to spree.spree_user_omniauth_authorize_url(:provider => :facebook)
+    redirect_to spree.spree_user_omniauth_authorize_url(provider: :facebook, scope: 'email,public_profile,user_friends')
   end
 
+  # can be used by application_controller filters to set proper redirects
   def url_with_correct_site_version
     main_app.url_for(params.merge(site_version: current_site_version.code))
   end

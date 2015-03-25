@@ -23,6 +23,9 @@ FameAndPartners::Application.routes.draw do
       get '/spree_user/thanks' => 'spree/user_registrations#thanks'
       get '/account_settings' => 'spree/user_registrations#edit'
     end
+
+    # MonkeyPatch for store params & redirect to custom page
+    get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
@@ -36,17 +39,29 @@ FameAndPartners::Application.routes.draw do
     get '/fashionitgirl2015-competition'  => 'statics#fashion_it_girl_competition'
     get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
     get '/girlfriend' => 'statics#girlfriendxfame'
-    get '/new-years-eve-dresses' => 'statics#nye', :as => :nye
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/sale-dresses' => 'statics#sale', :as => :sale
-    get '/amfam-dresses' => 'statics#amfam_lp', :as => :amfam_lp
+
     get '/christmas-gift' => 'statics#christmas_gift', :as => :christmas_gift
     get '/fame2015' => 'statics#fame2015', :as => :fame2015
-    get '/break-hearts-not-banks' => 'statics#break_hearts_not_banks', :as => :break_hearts_not_banks
-    get '/amfam' => 'statics#amfam', :as => :amfam
-    get '/prom' => 'statics#prom', :as => :prom
+
+
+    # Monday March 23 2015 TTL: 6 months
+    get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
+
+    #edits
+    get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
+    get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
+
+    get '/amfam' => redirect('/amfam-collection')
+    get '/amfam-dresses'  => redirect('/amfam-collection')
+    get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
+
+    get '/prom' => redirect('/prom-collection')
+    get '/prom-collection' => 'statics#prom', :as => :prom_collection
+    get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
     post '/shared/facebook' => 'competition/events#share'
 
@@ -228,9 +243,6 @@ FameAndPartners::Application.routes.draw do
     # Fallen Product URL
     get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
     get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
-
-    # MonkeyPatch for redirecting to Custom Dress page
-    get '/fb_auth' => 'pages#fb_auth'
 
     root :to => 'index#show'
 
@@ -442,7 +454,8 @@ FameAndPartners::Application.routes.draw do
     #get "lp/(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses, defaults: { lp: true }
     get "new-collection" => 'spree/products#index', as: :new_collection
 
-    get '/next-day-delivery' => 'products/collections#show', as: 'next_day_delivery', defaults: { order: 'fast_delivery' }
+    get '/next-day-delivery' => redirect('/express-delivery')
+    get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
 
     scope '/bridesmaid-party', module: 'bridesmaid' do
       root to: 'landings#bride', as: :bridesmaid_party

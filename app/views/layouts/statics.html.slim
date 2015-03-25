@@ -24,6 +24,7 @@ doctype html
         window.fbAsyncInit = function () {
           FB.init({
             appId: '#{facebook_application.api_key}',
+            version: 'v2.0',
             status: true,
             xfbml: true
           });
@@ -34,7 +35,7 @@ doctype html
           if (d.getElementById(id)) return;
           js = d.createElement(s);
           js.id = id;
-          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{facebook_application.api_key}";
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=#{facebook_application.api_key}";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 

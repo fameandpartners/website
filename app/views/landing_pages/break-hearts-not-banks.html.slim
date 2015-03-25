@@ -1,16 +1,14 @@
+= render :partial => 'landing_pages/common'
+
 .page-content.index.break-hearts-not-banks
   .container.relative
     .row.relative
   #theTarget style=("height: 720px;")
 
-    /= link_to @big_banner.first.url, title: @big_banner.first.title do
-    / = image_tag @big_banner.first.attachment(:big)
-
-    / div style=("background-image: url('#{@big_banner.first.attachment(:big)}')")
-
     div.i
       .slider-image-caption.height-100
         .container.height-100
+          h1.text-center.edit-title.text-white break hearts not<br>bank accounts collection
 
     div.ii
       .slider-image-caption.height-100
@@ -48,25 +46,5 @@
     .container.relative.products-collection
       - all_products = get_products_from_edit('breakhearts', nil, nil, 20)
 
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(0, 4) }
-
-      .row.relative.content-box
-        .col-md-6.col-xs-12.col-xxs-12.content
-          h2 Team Glam
-          p Your very own glam squad is here to make your red carpet moment come alive, at the fraction of the price.
-
-        .col-md-6.col-xs-12.col-xxs-12
-          = image_tag 'campaigns/bridemaid/bridesmaid-dress-1.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
-        .clearfix.visible-sm-block.visible-xs-block
-
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(5, 4) }
-
-      .row.relative.content-box
-        .col-md-6.col-xs-12.col-xxs-12
-          = image_tag 'campaigns/bridemaid/bridesmaid-dress-2.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
-        .col-md-6.col-xs-12.col-xxs-12.content
-          h2 Road to being a #FAMEBABE
-          p Free stylists, high quality, luxe fabrics to make you feel every bit the #famebabe.
-        .clearfix.visible-sm-block.visible-xs-block
-
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(9, 4) }
+      - all_products.each_slice(4) do |products|
+        = render :partial => '/landing_pages/products_four', :locals => { :products => products }

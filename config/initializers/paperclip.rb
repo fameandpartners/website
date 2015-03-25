@@ -1,7 +1,7 @@
 require 'paperclip/protocol_relative_url_support'
 Paperclip::Attachment.send :include, Paperclip::ProtocolRelativeURLSupport
 
-if Rails.env.production?
+if Rails.application.config.use_s3
   Paperclip::Attachment.default_options.merge!(
     :storage => :s3,
     :path => "/system/:attachment/:id/:style/:basename.:extension",

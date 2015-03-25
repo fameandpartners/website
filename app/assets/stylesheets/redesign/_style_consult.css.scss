@@ -5,9 +5,27 @@
 		margin: auto;
 	}
 
-	.standard-form {
-		height: 39px;
-	}
+  .form-control {
+    border-bottom: 1px solid black;
+  }
+
+  label {
+    color: black;
+  }
+
+  .submit input{
+    font-family: "brandon-grotesque", sans-serif;
+  }
+}
+
+.style-consult-header {
+  background-color: #eeddf0;
+
+  h1 {
+    text-transform: uppercase;
+    font-family: forum;
+    font-size: 7rem;
+  }
 }
 
 

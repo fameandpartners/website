@@ -5,39 +5,32 @@ module BatchUpload
     def process!
       each_product do |product, path|
         get_list_of_directories(path).each do |directory_path|
-          directory_name = directory_path.rpartition('/').last.strip
+          directory_name = File.basename directory_path
 
           next unless directory_name =~ /song/i
 
           get_list_of_files(directory_path).each do |file_path|
             begin
-              puts ""
-              puts ""
-              file_name = file_path.rpartition('/').last.strip
-
-              puts "  [INFO] Process \"#{file_name}\" file"
-
-              puts "  [INFO] Search song"
+              file_name = File.basename file_path
 
               song = product.moodboard_items.song.first
 
               if song.blank?
-                puts "  [ERROR] Song not found"
+                error "Song image found for SKU: #{product.sku} but missing moodboard item. (#{file_name})"
                 next
-              else
-                puts "  [INFO] Song successfully found"
               end
+
+              next if test_run?
 
               song.image = File.open(file_path)
 
               if song.save
-                puts "  [INFO] Song successfully updated"
+                success "Song", song_id: song.id, file_name: file_name
               else
-                puts "  [ERROR] Song can not updated"
-                puts "    MESSAGES: #{song.errors.full_messages.map(&:downcase).to_sentence}"
+                error "Song for #{product.sku} not saved: #{song.errors.full_messages.map(&:downcase).to_sentence}"
               end
             rescue Exception => message
-              puts "  [ERROR] #{message.inspect}"
+              error "#{message.inspect}"
             end
           end
         end

@@ -7,7 +7,7 @@ namespace :import do
     task :images => :environment do
       validate_location!
 
-      uploader = BatchUpload::ProductImagesUploader.new(location)
+      uploader = BatchUpload::ProductImagesUploader.new(location, :delete)
       uploader.process!
     end
   end

@@ -16,6 +16,7 @@
 * `$ git clone git@github.com:droidlabs/fame_and_partners.git`
 * `$ cd ./fame_and_partners`
 * `$ cp config/database.yml.example config/database.yml`
+* `$ bin/update_submodules` - For the common `styleguide` repository.
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
@@ -114,15 +115,28 @@ To deploy with migrations (will turn maintenance mode on meaning site is down)
 * `$ ey deploy -e preprod `
 
 
+### Testing Payments
+
+Access `/admin/payment_methods/1/edit`
+
+ * `Active => Yes`
+ * `Environment => Development`
+ * `Test Mode => Checked`
+ * `Server => test`
+
+Test CC is `5520000000000000`
+
+You can use any other details. 
+
+
+
 ## Useful Pages
 
-Home - IndexController#show
-Category/Collection - Products::CollectionsController#show
-Product - Products::DetailsController#show
+ - **Home** - `IndexController#show`
+ - **Category/Collection** - `Products::CollectionsController#show`
+ - **Product** - `Products::DetailsController#show`
 
 
 ### Thanks for using FameAndPartners!
 
 Cheers, [Droid Labs](http://droidlabs.pro).
-
-

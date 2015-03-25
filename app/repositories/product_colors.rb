@@ -49,12 +49,12 @@ module Repositories
 
       # colors guarantee will be reloaded after restart... we can live with that
       def read_all
-        colors_map.values
+        colors_map.values.clone
       end
 
       def read(id)
         return nil if id.blank?
-        colors_map[id.to_i]
+        colors_map[id.to_i].try(:clone)
       end
 
       def get_by_name(color_name = nil)
@@ -72,7 +72,7 @@ module Repositories
       def get_group_by_name(name)
         nil if name.blank?
         group_name = name.to_s.downcase
-        color_groups.find{|group| group.name == group_name }
+        color_groups.find{|group| group.name == group_name }.try(:clone)
       end
     end
   end

@@ -1,9 +1,9 @@
 window.page or= {}
 
 window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
-  constructor: (opts = {}) ->                
-    $('#email-newsletter-signup').hide() if $.cookie('email_newsletter') == 'close'
-      
+  constructor: (opts = {}) ->
+    # $('#email-newsletter-signup').hide() if $.cookie('email_newsletter') == 'close'
+
     @campaign = opts.campaign || 'home'
 
     @$form = $(opts.form)
@@ -13,28 +13,25 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
       $('#fieldqulir').val(window.current_site_version.permalink)
 
   url: =>
-    @$form.attr('action') + "?callback=?"    
-  
-  submit: (e) => 
-    e.preventDefault()    
+    @$form.attr('action') + "?callback=?"
+
+  submit: (e) =>
+    e.preventDefault()
     $.getJSON(@url(), @$form.serialize(), @handler)
 
   handler: (data) =>
-    if (data.Status == 400) 
+    if (data.Status == 400)
       @failure(data)
     else
       @success(data)
 
-  failure: (data) =>    
+  failure: (data) =>
     window.helpers.showAlert(message: data.Message, timeout:5555)
     window.track.event('Newsletter', 'Error', @campaign)
 
   success: =>
-    title = '#hashtag #hooray'
+    title = 'thanks babe'
     message = 'Thanks for signing up. Use this promocode for $20 off your purchase: NEWS20.'
-    window.helpers.showAlert(message: message, title: title, timeout: 55555)
-    # $.cookie('email_newsletter', 'close', { expires: 365, path: '/' })
+    window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 55555)
+    $.cookie('email_newsletter', 'close', { expires: 365, path: '/' })
     window.track.event('Newsletter', 'Submitted', @campaign)
-
-
-

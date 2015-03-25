@@ -1,5 +1,16 @@
+require 'forwardable'
+require 'term/ansicolor'
+
 module BatchUpload
   class ImagesUploader
+
+    include Term::ANSIColor
+
+    extend Forwardable
+    def_delegators :@logger, :info, :debug, :warn, :error, :fatal
+
+    attr_reader :ok
+
     def initialize(location, strategy = :update)
       @_strategies = [:update, :delete]
       @_expiration = 6.hours
@@ -10,43 +21,46 @@ module BatchUpload
       else
         @_strategy = strategy
       end
+
+      @ok = green("OK").freeze
+      @logger = Logger.new(STDOUT)
+      @logger.level = Logger::INFO unless ENV['debug']
+      @logger.formatter = proc do |severity, datetime, _progname, msg|
+        color = {'ERROR' => red, 'WARN' => magenta}.fetch(severity) { '' }
+        "%s[%s] [%-5s] %s%s\n" % [color, datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg, reset]
+      end
     end
 
     private
 
     def each_product &block
-      get_list_of_directories(@_location).each do |path|
-        puts ""
-        name = path.rpartition('/').last.strip
+      directories = get_list_of_directories(@_location)
+      total_directories = directories.size
+      parent = File.basename @_location
+      directories.each_with_index do |path, idx|
+        info '-' * 25
+        name = File.basename path
 
-        puts "[INFO] Process \"#{name}\" directory"
-        puts "[INFO] Parse directory name"
+        info "Directory (#{idx + 1}/#{total_directories}): #{parent}/ #{bold(name)}"
 
         matches = Regexp.new('(?<sku>[[:alnum:]]+)[\-_]?', true).match(name)
 
         if matches.blank?
-          puts "[ERROR] Directory name is invalid"
+          error "Directory name is invalid"
           next
-        else
-          puts "[INFO] Directory name successfully parsed"
-          sku = matches[:sku].downcase.strip
-          puts "  SKU: #{sku}"
         end
 
-        puts "[INFO] Search product by SKU"
-
+        sku = matches[:sku].downcase.strip
         product = Spree::Variant.
           where(deleted_at: nil, is_master: true).
           where('LOWER(TRIM(sku)) = ?', sku).
           order('id DESC').first.try(:product)
 
         if product.blank?
-          puts "[ERROR] Product not found"
+          error "Product not found for SKU: #{sku} DIR: #{name}"
           next
         else
-          puts "[INFO] Product successfully found"
-          puts "  ID:   #{product.id}"
-          puts "  NAME: #{product.name}"
+          info "Product: SKU: #{sku}, NAME: #{product.name} ID: #{product.id}"
         end
 
         block.call(product, path)
@@ -54,15 +68,28 @@ module BatchUpload
     end
 
     def get_list_of_files(location)
-      Dir.glob(File.join(location, '*')).select do |path|
+      paths_for(location).select do |path|
         File.file?(path)
       end
     end
 
     def get_list_of_directories(location)
-      Dir.glob(File.join(location, '*')).select do |path|
+      paths_for(location).select do |path|
         File.directory?(path)
       end
+    end
+
+    def paths_for(location)
+      Dir.glob(File.join(location, '*'))
+    end
+
+    def success(type, attributes = {})
+      attrs = attributes.collect { |k,v| "#{k}=#{bright_white(v.to_s)}" }.join(' ')
+      info "#{type} #{ok}: #{attrs}"
+    end
+
+    def test_run?
+      false
     end
   end
 end

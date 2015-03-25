@@ -14,12 +14,15 @@ window.initProductCollectionMoodboardLinks = (options = {}) ->
       window.redirectToLoginAndBack()
       return
 
+    return if $(e.currentTarget).data('loading')
+    $(e.currentTarget).data('loading', true)
+
     item = $(e.currentTarget).closest('div[data-id]')
     moodboard_item_options = { product_id: item.data('id'), color_id: item.data('color-id') }
 
     app.user_moodboard.one('change', (e) ->
       if app.user_moodboard.contains(moodboard_item_options)
-        item.find(buttons_selector).remove()
+        item.find(buttons_selector).replaceWith($('<a>', href: urlWithSitePrefix('/wishlist'), html: 'Added to Moodboard'))
     )
     app.user_moodboard.addItem(moodboard_item_options)
 

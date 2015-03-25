@@ -1,5 +1,6 @@
 # user products slider in header
 # 'view' element
+#= require templates/shopping_bag
 window.ShoppingBag = class ShoppingBag
   transition_end_events = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend'
 
@@ -11,13 +12,15 @@ window.ShoppingBag = class ShoppingBag
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
 
-    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler')
+    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler')
 
     $(options.toggle_link || '#cart-trigger').on('click', @openHandler)
 
     @$container.on('click', '.close-cart', @closeHandler)
     @$overlay.on('click', @closeHandler)
     @$container.on('click', '.remove-product', @removeProductHandler)
+    @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
+    @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
 
     @cart.on('change', @render)
     @
@@ -55,6 +58,12 @@ window.ShoppingBag = class ShoppingBag
     e.preventDefault()
     line_item_id = $(e.currentTarget).data('id')
     @cart.removeProduct(line_item_id)
+
+  couponFormSubmitHandler: (e) ->
+    e.preventDefault() if e
+    $input = @$container.find('#promotion-code')
+    @cart.one('complete', (event, result) -> $input.val(''))
+    @cart.applyPromotionCode($input.val())
 
 #$ ->
 #  return unless window.bootstrap?

@@ -5,6 +5,7 @@ ruby:
       content: '.category .products-collection',
       banner:  '.category-header',
       page_size: 20,
+      reset_source: true,
       size: #{ @collection.products.size.to_i },
       total_products: #{ @collection.total_products.to_i },
       details_elements: {
@@ -48,7 +49,7 @@ ruby:
         = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
         br
       .col-md-3.hidden-sm.hidden-xs.hidden-xxs
-        = select_tag :color, color_options, class: 'pink-select', prompt: 'Colour'
+        = select_tag :color, color_options, class: 'pink-select', prompt: t(:color)
         br
       .col-md-3.col-xs-12.col-xxs-12.product-order
         = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
@@ -63,4 +64,10 @@ ruby:
 
     - if @collection.total_products > @collection.products.size
       .row.relative.more-products
-        = link_to 'More dresses', '#', class: 'btn btn-black', data: { action: 'show-more-collection-products' }
+        .status.active
+          = link_to 'More dresses', '#', class: 'btn btn-black', data: { action: 'show-more-collection-products' }
+        .status.loading style="display: none;"
+          = link_to '#', class: 'btn btn-black', disabled: true do
+            = image_tag('add-spinner.gif')
+        .status.inactive style="display: none;"
+          // nothing

@@ -6,3 +6,7 @@ every :hour do
 
   runner 'StockInvent::Runner.run'
 end
+
+every 1.day, :at => '5:00 am' do
+  rake "sitemap:refresh"
+end

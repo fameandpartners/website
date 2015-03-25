@@ -21,6 +21,7 @@ class Repositories::CartProduct
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
         name: product.name,
+        permalink: product.permalink,
         description: line_item_description,
         variant_id: line_item.variant_id,
         line_item_id: line_item.id,
@@ -73,7 +74,7 @@ class Repositories::CartProduct
     end
 
     def product_image
-      Repositories::ProductImages.new(product: product).read(color_id: color_id)
+      Repositories::ProductImages.new(product: product).read(color_id: color_id, cropped: true)
     end
 
     def product_customizations
