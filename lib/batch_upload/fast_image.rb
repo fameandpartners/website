@@ -11,18 +11,10 @@ module BatchUpload
                     :attachment_width,
                     :attachment_height
 
-    ATTACHMENT_URL  = '/spree/products/:id/:style/:basename.:extension',
-
-    if Rails.env.production?
-      ATTACHMENT_PATH = '/spree/products/:id/:style/:basename.:extension'
-    else
-      ATTACHMENT_PATH = ':rails_root/public/spree/products/:id/:style/:basename.:extension'
-    end
-
     has_attached_file :attachment,
                       :styles => { :product => '240x240>', :large => '600x600>' },
                       :default_style => :product,
-                      :url => ATTACHMENT_URL,
-                      :path => ATTACHMENT_PATH
+                      :url => Spree::Config.attachment_url,
+                      :path => Spree::Config.attachment_path
   end
 end
