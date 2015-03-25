@@ -48,6 +48,10 @@
 
   .page-content.products-collections.category
     .container.relative.products-collection
-      - all_products = get_products_from_edit('PROM2015', nil, nil, 20)
+      - all_products = get_products_from_edit('PROM2015', nil, nil, 100)
       - all_products.each_slice(4) do |products|
         = render :partial => '/landing_pages/products_four', :locals => { :products => products }
+
+
+    .row.relative.more-products
+        = link_to 'All Prom Dresses', build_taxon_path('Prom'), class: 'btn btn-black'
