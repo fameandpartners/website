@@ -9,11 +9,11 @@ configatron.aws.enabled = false
 configatron.aws.bucket = ""
 configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
-# configatron.aws.host = "d1sd72h9dq237j.cloudfront.net"  # bucket: fameandpartners
+configatron.aws.host = "d1sd72h9dq237j.cloudfront.net"  # bucket: fameandpartners
 # configatron.aws.host = "daoiay428tmxk.cloudfront.net"   # bucket: products-fameandpartners
 # configatron.aws.host = "images.fameandpartners.com"
 # configatron.aws.host = "product-images.fameandpartners.com"
-configatron.aws.host = "fameandpartners-backup.s3-website-us-west-2.amazonaws.com"
+# configatron.aws.host = "demk2115tqgou.cloudfront.net" #bucket: fameandpartners-backup
 
 configatron.links.twitter = 'https://twitter.com/fameandpartners'
 configatron.links.facebook = 'http://www.facebook.com/FameandPartners'
@@ -93,8 +93,8 @@ when :production
   configatron.mandrill.smtp.password = '189aQIbDBG2pBeKxqoth5A'
 
   # configatron.aws.s3.bucket = 'products-fameandpartners'
-  # configatron.aws.s3.bucket = 'fameandpartners'
-  configatron.aws.s3.bucket = 'fameandpartners-backup'
+  configatron.aws.s3.bucket = 'fameandpartners'
+  # configatron.aws.s3.bucket = 'fameandpartners-backup'
   configatron.aws.s3.access_key_id = 'AKIAJ7U3MBOEHSMUAOHQ'
   configatron.aws.s3.secret_access_key = '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'
 
