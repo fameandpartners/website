@@ -43,7 +43,7 @@ FameAndPartners::Application.routes.draw do
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/sale-dresses' => 'statics#sale', :as => :sale
-    get '/amfam-dresses' => 'statics#amfam_lp', :as => :amfam_lp
+
     get '/christmas-gift' => 'statics#christmas_gift', :as => :christmas_gift
     get '/fame2015' => 'statics#fame2015', :as => :fame2015
 
@@ -54,8 +54,11 @@ FameAndPartners::Application.routes.draw do
     #edits
     get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
     get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
+
     get '/amfam' => redirect('/amfam-collection')
-    get '/amfam-collection' => 'statics#amfam', :as => :amfam_collection
+    get '/amfam-dresses'  => redirect('/amfam-collection')
+    get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
+
     get '/prom' => redirect('/prom-collection')
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
