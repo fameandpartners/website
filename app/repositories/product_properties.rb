@@ -17,14 +17,19 @@ class Repositories::ProductProperties
 
     def product_properties
       @all_properties ||= begin
-        cache_key = "product-properties-#{ product.id }"
         Rails.cache.fetch(cache_key, Repositories::CachingSystem.cache_fetch_params({})) do
           properties = {}
           product.product_properties.includes(:property).each do |product_property|
-            properties[product_property.property.name] = product_property.value
+            if product.property.present?
+              properties[product_property.property.name] = product_property.value
+            end
           end
           properties
         end
       end
+    end
+
+    def cache_key
+      cache_key = "product-properties-#{ product.id }"
     end
 end
