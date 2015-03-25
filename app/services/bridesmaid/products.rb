@@ -88,17 +88,8 @@ class Bridesmaid::Products
       prices[price_id] || Spree::Price.new(amount: product.price, currency: currency)
     end
 
-    def product_discounts
-      return @product_discounts if instance_variable_defined?('@product_discounts')
-
-      @product_discounts ||= begin
-        product_ids = search_results.map{|item| item.product.id }
-        Repositories::Discount.read_all('Spree::Product', product_ids)
-      end
-    end
-
     def product_discount(product)
-      product_discounts.find{|discount| discount.discountable_id == product.id }
+      Repositories::Discount.get_product_discount(product.id)
     end
 
     def product_image(images = [])

@@ -40,7 +40,7 @@ class Wishlist::UserWishlistResource
       moodboard_owner_moodboard.items.map do |item|
         item.path = product_path(item)
         item.bridesmaides = get_bridesmaides_for_item(item.product_id, item.variant_id, item.color.try(:id))
-        item.discount = product_discount(item.product_id)
+        item.discount = Repositories::Discount.get_product_discount(item.product_id)
         item
       end
     end
@@ -55,19 +55,6 @@ class Wishlist::UserWishlistResource
       end
 
       "/" + path_parts.compact.join('/')
-    end
-
-    def product_discounts
-      return @product_discounts if instance_variable_defined?('@product_discounts')
-
-      @product_discounts ||= begin
-        product_ids = moodboard_owner_moodboard.items.map{|item| item.product_id }
-        Repositories::Discount.read_all('Spree::Product', product_ids)
-      end
-    end
-
-    def product_discount(product_id)
-      product_discounts.find{|discount| discount.discountable_id == product_id }
     end
 
     # module-specific code.

@@ -1,8 +1,6 @@
 # Usage:
 #   @discount ||= Repositories::Discount.read(self.class, self.id)
-#   @discounts ||= Repositories::Discount.read_all(self.class, [])
-#
-# shortcuts
+#   @discount ||= Repositories::Discount.read_all(klass, ids)
 #   @discount ||= Repositories::Discount.get_product_discount(product.id)
 #
 # tools
@@ -25,18 +23,18 @@ class Repositories::Discount
       discounts[key][discountable_id].try(:clone)
     end
 
-    def read_all
+    def read_all(discountable_class, discountable_ids)
       key = type_to_key(discountable_class)
       Array.wrap(discountable_ids).map do |discountable_id|
         discount = read(discountable_class, discountable_id)
         if discount
           discount.discountable_id = discountable_id
-          discount.discountable_class = discountable_class
+          discount.discountable_class = discountable_class.to_s
           discount
         else
           nil
         end
-      end
+      end.compact
     end
 
     def discounts(options = {})
