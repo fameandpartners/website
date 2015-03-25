@@ -55,8 +55,11 @@ class Products::CollectionDetails
     taxon.title             = "Shop and customize the best #{color.presentation} dress trends at Fame & Partners"
     taxon.description       = ''
     taxon.footer            = ''
-    taxon.banner.title      = color_data[color.name][:title]
-    taxon.banner.subtitle   = color_data[color.name][:description]
+    selected_color_data      = color_data[color.name.to_s.downcase]
+    if selected_color_data
+      taxon.banner.title      = selected_color_data[:title]
+      taxon.banner.subtitle   = selected_color_data[:description]
+    end
   end
 
 
@@ -91,7 +94,7 @@ class Products::CollectionDetails
         :title        => "Red Dresses",
         :description  => "Look red haute in statement-making shades."
       },
-      "Pastel" => {
+      "pastel" => {
         :title        => "Pastel Dresses",
         :description  => "Treat yourself to sweet styles in the prettiest shades of pale."
       },
