@@ -22,7 +22,7 @@ module BatchUpload
     has_attached_file :attachment,
                       :styles => { :product => '240x240>', :large => '600x600>' },
                       :default_style => :product,
-                      :url => ATTACHMENT_URL
+                      :url => ATTACHMENT_URL,
                       :path => ATTACHMENT_PATH
   end
 end
