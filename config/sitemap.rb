@@ -11,7 +11,7 @@ require File.expand_path("../application", __FILE__)
 # generated using gem 'sitemap_generator'
 # how to run locally
 # - this will put code in readable format
-# bundle exec rake sitemap:refresh:no_ping && cat public/sitemap.xml | xmllint --format -
+# bundle exec rake sitemap:refresh:no_ping && xmllint --format public/sitemap.xml
 #
 # on production
 #   RAILS_ENV=production bundle exec ruby config/sitemap.rb 
@@ -23,6 +23,13 @@ SitemapGenerator::Sitemap.default_host = "http://#{configatron.host}"
 SitemapGenerator::Interpreter.send :include, ApplicationHelper
 SitemapGenerator::Interpreter.send :include, ProductsHelper
 SitemapGenerator::Interpreter.send :include, PathBuildersHelper
+
+SitemapGenerator::Interpreter.class_eval do
+  def absolute_url(path = '/')
+    path = ('/' + path).gsub(/\w+(\/\/)/){|a| a.sub('//', '/')}
+    url = "#{ SitemapGenerator::Sitemap.default_host }#{ path }"
+  end
+end
 
 # we create sitemap in xml, /public/sitemap.xml should be only symlink
 options = {
@@ -42,48 +49,48 @@ SitemapGenerator::Sitemap.create(options) do
   default_site_version = SiteVersion.default
   site_versions = SiteVersion.where(default: false).to_a
 
-  add root_path(site_version: default_site_version), alternates: site_versions.map{|site_version|
+  add root_path, alternates: site_versions.map{|site_version|
     { href: root_path(site_version: site_version.permalink), lang: site_version.locale, nofollow: true  }
   }
 
   # products page
-  Spree::Product.active.limit(1).each do |product|
+  Spree::Product.active.each do |product|
     images = Repositories::ProductImages.new(product: product).read_all
-    add(collection_product_path(product, site_version: default_site_version.permalink), {
+    add(collection_product_path(product), {
       priority: 0.8,
       images: images.map{|data| { loc: data.large, title: product.name }},
       alternates: site_versions.map{|site_version|
-        { href: collection_product_path(product, site_version: site_version.permalink), lang: site_version.locale, nofollow: true }
+        { href: absolute_url(collection_product_path(product, site_version: site_version.permalink)), lang: site_version.locale, nofollow: true }
       }
     })
   end
 
   # events
   Repositories::Taxonomy.read_events.each do |taxon|
-    add(build_taxon_path(taxon.name, site_version: default_site_version.permalink), {
+    add(build_taxon_path(taxon.name), {
       priority: 0.7,
       alternates: site_versions.map{|site_version|
-        { href: build_taxon_path(taxon.name, site_version: site_version.permalink), lang: site_version.locale, nofollow: true }
+        { href: absolute_url(build_taxon_path(taxon.name, site_version: site_version.permalink)), lang: site_version.locale, nofollow: true }
       }
     })
   end
 
   # collections
   Repositories::Taxonomy.read_collections.each do |taxon|
-    add(build_taxon_path(taxon.name, site_version: default_site_version.permalink), {
+    add(build_taxon_path(taxon.name), {
       priority: 0.7,
       alternates: site_versions.map{|site_version|
-        { href: build_taxon_path(taxon.name, site_version: site_version.permalink), lang: site_version.locale, nofollow: true }
+        { href: absolute_url(build_taxon_path(taxon.name, site_version: site_version.permalink)), lang: site_version.locale, nofollow: true }
       }
     })
   end
 
   # styles
   Repositories::Taxonomy.read_styles.each do |taxon|
-    add(build_taxon_path(taxon.name, site_version: default_site_version.permalink), {
+    add(build_taxon_path(taxon.name), {
       priority: 0.7,
       alternates: site_versions.map{|site_version|
-        { href: build_taxon_path(taxon.name, site_version: site_version.permalink), lang: site_version.locale, nofollow: true }
+        { href: absolute_url(build_taxon_path(taxon.name, site_version: site_version.permalink)), lang: site_version.locale, nofollow: true }
       }
     })
   end
@@ -93,14 +100,14 @@ SitemapGenerator::Sitemap.create(options) do
   ]
   statics_pages.each do |page_url|
     add page_url, priority: 0.5, alternates: site_versions.map{|site_version|
-      { href: "/#{ site_version.permalink}#{ page_url }", lang: site_version.locale, nofollow: true }
+      { href: absolute_url("#{ site_version.permalink}#{ page_url }"), lang: site_version.locale, nofollow: true }
     }
   end
 
   # celebrities
   Celebrity.published.each do |celebrity|
     add "/celebrities/#{celebrity.slug}", priority: 0.3, alternates: site_versions.map{|site_version|
-      { href: "/#{ site_version.permalink }/celebrities/#{ celebrity.slug }", lang: site_version.locale, nofollow: true }
+      { href: absolute_url("#{ site_version.permalink }/celebrities/#{ celebrity.slug }"), lang: site_version.locale, nofollow: true }
     }
   end
 end
