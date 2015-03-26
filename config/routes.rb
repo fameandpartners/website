@@ -479,6 +479,8 @@ FameAndPartners::Application.routes.draw do
     resources :site_versions, only: [:show]
   end
 
+  get 'stylesheets/product_colors' => 'stylesheets#product_colors'
+
   if Rails.env.development?
     mount MailPreview => 'mail_view'
 
