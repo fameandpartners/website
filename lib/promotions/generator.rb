@@ -30,7 +30,7 @@ module Promotions
         promotion.promotion_rules   = build_promotion_rules
 
         if promotion.save!
-          promotions.push(promotion)
+          promotions.push(promotion.code)
         end
       end
 
