@@ -2,11 +2,14 @@ class Products::SearchResultsController < Products::BaseController
   layout 'redesign/application'
 
   def show
-    @query_string = params[:q]
     title('Search', default_seo_title)
 
-    @products = Search::ProductsQuery.build(
-      query: @query_string
-    ).results.results
+    if params[:q].present?
+      @search_collection = Products::CollectionResource.new({
+        site_version: current_site_version,
+        query_string: params[:q],
+        limit:        50
+      }).read
+    end
   end
 end
