@@ -190,6 +190,8 @@ GEM
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    bootstrap-sass (3.3.1.0)
+      sass (~> 3.2)
     bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
@@ -213,6 +215,7 @@ GEM
     celluloid (0.14.1)
       timers (>= 1.0.0)
     chronic (0.10.2)
+    chunky_png (1.3.4)
     ckeditor (4.0.4)
       mime-types
       orm_adapter
@@ -229,6 +232,10 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     columnize (0.8.9)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
     configatron (2.13.0)
       yamler (>= 0.1.0)
     connection_pool (2.1.1)
@@ -282,6 +289,7 @@ GEM
     ffaker (1.15.0)
     font-awesome-sass (4.0.3)
       sass (~> 3.2)
+    fssm (0.2.10)
     geoip (1.3.3)
     google-api-client (0.7.1)
       addressable (>= 2.3.2)
@@ -635,6 +643,7 @@ DEPENDENCIES
   addressable
   awesome_print
   aws-sdk
+  bootstrap-sass
   bourbon
   canonical-rails!
   capistrano (= 2.15.4)
@@ -643,6 +652,7 @@ DEPENDENCIES
   ckeditor
   coffee-rails (~> 3.2.1)
   coffee-script-source (~> 1.8.0)
+  compass
   configatron
   createsend (~> 2.5.0)
   data_migrate!
