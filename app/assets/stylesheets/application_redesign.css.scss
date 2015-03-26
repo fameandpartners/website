@@ -124,6 +124,11 @@ h1.edit-title {
   background: rgba(0, 0, 0, 0.8) url(top.png) no-repeat center 50%;
 }
 
+.zopim {
+  @media(max-width: 768px){
+    display:none;
+  }
+}
 
 /*
   // added for quick reference only
