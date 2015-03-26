@@ -106,18 +106,20 @@ header
                   .col-md-3.col-lg-2
                     h4.link-header= t('sale')
                     ul.mega-menu-list
-                      li.mega-menu-list--item= link_to 'Express Delivery', express_delivery_path, title: 'Express Delivery'
-                      - if !sale_active?
-                        li.mega-menu-list--item= link_to 'Sale - Up to 80% Off', '/sale-dresses', title: 'Dresses On Sale'
-                      - else
-                        li.mega-menu-list--item= link_to "All on Sale", dresses_on_sale_path(:sale => 'all'), title: 'All Dresses on Sale'
-                        li.mega-menu-list--item= link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
-                        li.mega-menu-list--item= link_to "25 Percent Off", '/dresses/?sale=25', title: 'All Dresses 25% off'
-                        li.mega-menu-list--item= link_to "30 Percent Off", '/dresses/?sale=30', title: 'All Dresses 30% off'
-                        li.mega-menu-list--item= link_to "40 Percent Off", '/dresses/?sale=40', title: 'All Dresses 40% off'
-                        li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=50', title: 'All Dresses 50% off'
-                        li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=60', title: 'All Dresses 60% off'
-                        li.mega-menu-list--item= link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
+                      - if Features.active?(:express_deliveries)
+                        li.mega-menu-list--item= link_to 'Express Delivery', express_delivery_path, title: 'Express Delivery'
+                      - if Features.active?(:sales)
+                        - if !sale_active?
+                          li.mega-menu-list--item= link_to 'Sale - Up to 80% Off', '/sale-dresses', title: 'Dresses On Sale'
+                        - else
+                          li.mega-menu-list--item= link_to "All on Sale", dresses_on_sale_path(:sale => 'all'), title: 'All Dresses on Sale'
+                          li.mega-menu-list--item= link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
+                          li.mega-menu-list--item= link_to "25 Percent Off", '/dresses/?sale=25', title: 'All Dresses 25% off'
+                          li.mega-menu-list--item= link_to "30 Percent Off", '/dresses/?sale=30', title: 'All Dresses 30% off'
+                          li.mega-menu-list--item= link_to "40 Percent Off", '/dresses/?sale=40', title: 'All Dresses 40% off'
+                          li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=50', title: 'All Dresses 50% off'
+                          li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=60', title: 'All Dresses 60% off'
+                          li.mega-menu-list--item= link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
 
         - if Features.active?(:style_quiz)
           li.menu-item
