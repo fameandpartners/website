@@ -9,6 +9,7 @@
 #   exclude_products: don't search this products
 #   order:            ['price_high', 'price_low', 'newest', 'fast_deliver']
 #   discount:         search products with specific discount ( in percents ) or :all to find all products under sale
+#   query_string:     search products by this text
 #   limit:            1000 by default
 #   offset:           0 by default
 # )
@@ -23,6 +24,7 @@ module Search
       taxons              = options[:taxon_ids]
       exclude_products    = options[:exclude_products]
       discount            = options[:discount]
+      query_string        = options[:query_string]
       order               = options[:order]
       limit               = options[:limit].present? ? options[:limit].to_i : 1000
       offset              = options[:offset].present? ? options[:offset].to_i : 0
@@ -55,6 +57,12 @@ module Search
             filter :bool, :should => { :range => { "product.discount" => { :gt => 0 } } }
           else
             filter :bool, :must => { :term => { 'product.discount' => discount.to_i } }
+          end
+        end
+
+        if query_string.present?
+          query do
+            string query_string, :default_operator => 'OR' , :use_dis_max => true
           end
         end
 
