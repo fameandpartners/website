@@ -49,6 +49,7 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
       class='product-image-slide'
       alt='#{ product_image.alt }'
       data-color-id='#{ product_image.color_id }'
+      data-position='#{ product_image.position }'
       src='#{ product_image.url }'
       />"))
       defer.resolve(product_image)
@@ -63,7 +64,8 @@ window.helpers.ProductImagesSlider = class ProductImagesSlider
       @getLoadImageDeferred(image)
 
     $.when.apply(this, deferrers).then( () =>
-      @all_images = _.sortBy(@loaded_images, (i) -> i.position)
+      @all_images = _.sortBy(@loaded_images, (i) ->
+        i.data('position')
+      )
       @updateSlider()
     )
-
