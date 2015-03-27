@@ -14,6 +14,11 @@
 #    limit:          # number of records
 #    offset:         # number of records to skip
 
+# NOTE:
+# collection, contained 'some query' - not very correct semantically,
+# so possible we should create base collection and inherit from it
+# search collection & products collection
+#
 class Products::CollectionResource
   # include Repositories::CachingSystem
 
@@ -25,6 +30,7 @@ class Products::CollectionResource
   attr_reader :bodyshape
   attr_reader :color, :color_group
   attr_reader :discount
+  attr_reader :query_string
   attr_reader :order
   attr_reader :limit
   attr_reader :offset
@@ -39,6 +45,7 @@ class Products::CollectionResource
     @color_group  = Repositories::ProductColors.get_group_by_name(options[:color_group])
     @color        = Repositories::ProductColors.get_by_name(options[:color])
     @discount     = prepare_discount(options[:discount])
+    @query_string = options[:query_string]
     @order        = options[:order]
     @limit        = options[:limit]
     @offset       = options[:offset]
@@ -55,6 +62,7 @@ class Products::CollectionResource
       bodyshape:  bodyshape,
       color:      color_group.try(:representative) || color,
       sale:       discount,
+      query_string: query_string,
       order:      order,
       details:    details
     )
@@ -115,7 +123,7 @@ class Products::CollectionResource
       end
 
       result[:discount] = discount if discount.present?
-
+      result[:query_string] = query_string if query_string.present?
       result[:order] = order if order.present?
       result[:limit] = limit if limit.present?
       result[:offset] = offset if offset.present?

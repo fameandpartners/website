@@ -1,6 +1,8 @@
 # usage
 #   Repositories::ProductImages.new(product: product).read_all
 #   Repositories::ProductImages.new(product: product).read
+#   Repositories::ProductImages.new(product: product).filter(cropped: true/false)
+#   Repositories::ProductImages.new(product: product).filter(color_id: color_id)
 module Repositories
 class ProductImages
   attr_reader :product
@@ -20,16 +22,17 @@ class ProductImages
   # filter read_all by
   #   color_id
   #   cropped
-  #   not_cropped
   def filter(options = {})
     scope = read_all
     if options[:color_id]
       scope = scope.select{|image| image.color_id == options[:color_id]}
     end
-    if options[:cropped]
-      scope = scope.select{|image| image.large.to_s.downcase.include?('crop') }
-    elsif options[:not_cropped]
-      scope = scope.select{|image| !image.large.to_s.downcase.include?('crop') }
+    if options.has_key?(:cropped)
+      if options[:cropped]
+        scope.select{|image| image.large.to_s.downcase.include?('crop') }
+      else # options[:cropped] => false
+        scope.select{|image| !image.large.to_s.downcase.include?('crop') }
+      end
     end
     scope
   end

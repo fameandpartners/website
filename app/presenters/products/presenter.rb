@@ -30,7 +30,7 @@ module Products
     end
 
     def custom_colors?
-      colors.extra.any?
+      customizations_allowed? && colors.extra.any?
     end
 
     def colors
@@ -43,6 +43,10 @@ module Products
 
     def default_sizes?
       default_sizes.any?
+    end
+
+    def customizations_allowed?
+      ! discount.present?
     end
 
     def custom_sizes
@@ -117,7 +121,7 @@ module Products
     end
 
     def customizable?
-      customizations.present? && customizations.all.any?
+      customizations_allowed? && customizations.present? && customizations.all.any?
     end
 
     def customizations
