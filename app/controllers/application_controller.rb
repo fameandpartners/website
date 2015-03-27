@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   append_before_filter :capture_utm_params,                 if: proc {|c| params[:utm_campaign].present? }
   append_before_filter :associate_user_by_utm_guest_token,  if: proc {|c| cookies[:utm_guest_token].present? }
 
+  before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
 
@@ -87,6 +88,15 @@ class ApplicationController < ActionController::Base
       )
       cookies.delete(:utm_guest_token)
     end
+  end
+
+  def add_debugging_infomation
+    ::NewRelic::Agent.add_custom_parameters({
+      user_id: current_spree_user.try(:id),
+      order_id: current_order.try(:id)
+    })
+  rescue Exception => e
+    true
   end
 
 =begin
