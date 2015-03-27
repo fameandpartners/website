@@ -119,12 +119,16 @@ class Products::DetailsResource
 
     def recommended_products
       Products::RecommendedProducts.new(product: product, limit: 4).read.map do |recommended_product|
+        image = Repositories::ProductImages.new(product: recommended_product).read(cropped: true)
+        color = Repositories::ProductColors.read(image.try(:color_id))
+
         OpenStruct.new(
           id: recommended_product.id,
           name: recommended_product.name,
           price: Repositories::ProductPrice.new(site_version: site_version, product: recommended_product).read,
           discount: Repositories::Discount.get_product_discount(recommended_product.id),
-          image: Repositories::ProductImages.new(product: recommended_product).read(cropped: true)
+          image: image,
+          color: color
         )
       end
     end
