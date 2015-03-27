@@ -93,8 +93,8 @@ ruby:
       - if @product.default_sizes?
         a#product-size-action.btn-customize Size
 
-    .row
-      - if @product.colors?
+    - if @product.colors?
+      .row
         a#product-colorize-action.btn-customize
           | Color
 
@@ -277,22 +277,23 @@ hr
                   span.option-name= color.presentation
                   span.option-price= "+#{@product.custom_color_price}"
 
-#product-customizations-content.product-side-panel
-  .col-md-12
-    h2 Customize Your Dress
+- if @product.customizable?
+  #product-customizations-content.product-side-panel
+    .col-md-12
+      h2 Customize Your Dress
 
-    - @product.customization_options.each do |option|
-      .col-md-10.col-md-offset-1
-        .row
-          .image-box
-            = image_tag option.image, :alt => option.name
-        .row
-          p.option-name= option.name
+      - @product.customization_options.each do |option|
+        .col-md-10.col-md-offset-1
+          .row
+            .image-box
+              = image_tag option.image, :alt => option.name
+          .row
+            p.option-name= option.name
 
-          a.customization-option.list-group-item href="#" data-id=option.id data-name=option.name data-price=option.display_price
-            span.option-price= "+#{option.display_price}"
+            a.customization-option.list-group-item href="#" data-id=option.id data-name=option.name data-price=option.display_price
+              span.option-price= "+#{option.display_price}"
 
-    .row
-      .col-md-10.col-md-offset-1
-        button.btn-clear-customizations.btn.btn-block.btn-black.customization-option data-id="original" data-name="original" data-price=""
-          | Clear Selection
+      .row
+        .col-md-10.col-md-offset-1
+          button.btn-clear-customizations.btn.btn-block.btn-black.customization-option data-id="original" data-name="original" data-price=""
+            | Clear Selection
