@@ -87,6 +87,12 @@ class StaticsController < ApplicationController
     render :template => 'statics/unidays_lp', :layout => 'redesign/application'
   end
 
+  # New style quiz
+  def style_quiz
+    @title = "Style Quiz | Beautiful Dresses - Fame & Partners."
+    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners. " + default_meta_description
+    render :layout => 'redesign/style_quiz'
+  end
 
 
 

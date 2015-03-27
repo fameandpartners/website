@@ -1,0 +1,106 @@
+// Question 1 
+.quiz-user-info {
+  padding: $quiz-grid-gutter 0;
+  position: relative;
+  @include background-image(linear-gradient(90deg, $peach-bg 0, $peach-bg 50%, $blue-bg 50%, $blue-bg 100%));
+  
+  // - or
+  &:before, &:after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: $quiz-form-control-height;
+    height: $quiz-form-control-height;
+    margin: ($quiz-form-control-height / -2) 0 0 ($quiz-form-control-height / -2);
+  }
+  &:before {
+    content: '';
+    background-color: #fff;
+    @include transform(rotate(45deg));
+  }
+  &:after {
+    content: 'OR';
+    font-weight: 500;
+    letter-spacing: 0.125em;
+    text-align: center;
+    line-height: $quiz-form-control-height;
+  }
+
+  // - facebook
+  .facebook-box {
+    color: #fff;
+    .btn {
+      padding: 0;
+      width: $quiz-form-control-height;
+      background-color: #fff;
+      color: $blue-bg;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+  }
+}
+// @end Question 1
+// -----------------
+
+// Question 4
+.size-picker {
+  margin: 20px 0;
+  font-size: 0;
+  text-align: center;
+  .size {
+    display: inline-block;
+    vertical-align: top;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    line-height: 70px;
+    text-align: center;
+    font-family: $font-family-secondary;
+    font-size: 50px;
+    margin: 0 15px;
+    cursor: pointer;
+
+    &.selected {
+      background-color: $pink-bg;
+    }
+  }
+}
+// @end Question 4
+// -----------------
+
+// Question 10 
+.event-tag {
+  position: relative;
+  display: inline-block;
+  padding: $quiz-grid-gutter ($quiz-grid-gutter + 23px) $quiz-grid-gutter ($quiz-grid-gutter / 2);
+  text-transform: uppercase;
+  width: 100%;
+  background-color: $peach-bg;
+  .icon-cross {
+    position: absolute;
+    right: ($quiz-grid-gutter / 2);
+    top: 50%;
+    margin-top: -12px;
+  }
+}
+// @end Question 10
+// -----------------
+
+// Question 11
+.prevent-someone-box {
+  margin-top: ($quiz-grid-gutter / -2);
+  background-color: $peach-bg;
+  img { display: block;}
+  .twin-dress {
+    margin-bottom: 20px;
+    width: 177px;
+    height: 51px;
+    display: inline-block;
+    background: url('_style_quiz/quiz-twin.png') no-repeat;
+    background-size: cover;
+  }
+  .col-compact { padding: 0;}
+} 
+// @end Question 11
+// -----------------
