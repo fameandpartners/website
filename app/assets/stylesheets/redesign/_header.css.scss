@@ -282,3 +282,14 @@ li.shop {
 		text-transform: none;
 	}
 }
+
+.edit-title {
+	padding-top: 5px;
+}
+
+.masthead {
+	@media(max-width: 480px) {
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
