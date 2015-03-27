@@ -8,6 +8,7 @@
 
 //= require libs/underscore-min
 // spree have this by default
+//= require libs/snap.svg-min.js
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
 //= require libs/jquery.chosen.min
@@ -16,7 +17,6 @@
 //= require libs/superslides.js
 
 // styleguide code
-//= require js/snap.svg-min.js
 //= require js/modernizr.custom.js
 //= require js/modernizr.js
 //= require js/scrollspy.js
