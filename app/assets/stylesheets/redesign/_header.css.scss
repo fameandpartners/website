@@ -44,6 +44,10 @@
 .mega-menu-list--item a {
 	text-transform: capitalize;
 	font-weight: 400;
+
+	&:hover {
+		color: #355e6d !important;
+	}
 }
 
 .mega-menu--main {
@@ -180,7 +184,7 @@
 }
 
 .nav-menu .primary li.menu-item .menu-item--link:hover, .nav-menu .secondary li.menu-item .menu-item--link:hover {
-	color: #023648;
+	color: #355e6d;
 }
 
 li.shop {
@@ -201,7 +205,7 @@ li.shop {
 			color: black;
 
 			&:hover {
-				color: black;
+				color: #355e6d;
 			}
 		}
 	}
@@ -280,5 +284,20 @@ li.shop {
 
 	input {
 		text-transform: none;
+	}
+}
+
+.edit-title a{
+	padding-top: 5px;
+
+	&:hover{
+		color: #355e6d;
+	}
+}
+
+.masthead {
+	@media(max-width: 480px) {
+		padding-right: 0;
+		padding-left: 0;
 	}
 }

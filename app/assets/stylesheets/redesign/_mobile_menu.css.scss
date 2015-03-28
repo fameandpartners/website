@@ -39,6 +39,7 @@
 
 #mobile-menu {
   height: 45px;
+  min-height: 45px;
 
   @media(max-width: 440px){
     height: 70px;
@@ -52,6 +53,10 @@
     background-color: #f5e2d4;
     a {
       color: black;
+
+      &:hover{
+        color: #355e6d;
+      }
     }
   }
 

@@ -74,8 +74,6 @@
 		margin-bottom:100px;
 		text-align:center;
 	}
-
-
 }
 
 .on-sale * {
@@ -94,6 +92,7 @@
 
 	h1 {
 		text-transform: lowercase;
+		font-family: "brandon-grotesque", sans-serif;
 
 		&:first-letter {
 			text-transform: uppercase;
@@ -101,10 +100,10 @@
 	}
 
 	.page-title--details {
-		width: 370px;
 		margin-left: auto;
 		margin-right: auto;
 		padding-top: 160px;
+		font-family: "brandon-grotesque", sans-serif;
 	}
 
 	&.dark-bg {
