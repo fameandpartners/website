@@ -385,6 +385,27 @@
     h2 How important is fashion to you?
     h4.font-family-secondary.text-uppercase - CLICK ON THE SCALE, FROM LEAST IMPORTANT TO VERY IMPORTANT
   .grid-container
+    .rank-fasion.rank-box
+      .rank-cell
+        .rank-item.rank-fasion-item-9
+      .rank-cell
+        .rank-item.rank-fasion-item-8
+      .rank-cell
+        .rank-item.rank-fasion-item-7
+      .rank-cell
+        .rank-item.rank-fasion-item-6
+      .rank-cell
+        .rank-item.rank-fasion-item-5
+      .rank-cell
+        .rank-item.rank-fasion-item-4
+      .rank-cell
+        .rank-item.rank-fasion-item-3
+      .rank-cell
+        .rank-item.rank-fasion-item-2
+      .rank-cell
+        .rank-item.rank-fasion-item-1
+      .rank-cell
+        .rank-item.rank-fasion-item-0
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block'
       .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block'
@@ -399,6 +420,27 @@
     h3.font-family-secondary.text-uppercase RANK HOW SEXY YOU LIKE TO LOOK.
     h4.font-family-secondary.text-uppercase - CLICK ON THE SCALE, FROM LEAST IMPORTANT TO VERY IMPORTANT
   .grid-container
+    .rank-sexy.rank-box
+      .rank-cell
+        .rank-item.rank-sexy-item-9
+      .rank-cell
+        .rank-item.rank-sexy-item-8
+      .rank-cell
+        .rank-item.rank-sexy-item-7
+      .rank-cell
+        .rank-item.rank-sexy-item-6
+      .rank-cell
+        .rank-item.rank-sexy-item-5
+      .rank-cell
+        .rank-item.rank-sexy-item-4
+      .rank-cell
+        .rank-item.rank-sexy-item-3
+      .rank-cell
+        .rank-item.rank-sexy-item-2
+      .rank-cell
+        .rank-item.rank-sexy-item-1
+      .rank-cell
+        .rank-item.rank-sexy-item-0
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block'
       .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block'
@@ -471,3 +513,7 @@
         = image_tag '_style_quiz/quiz-girls.jpg'
 / @end Question 11/11
 / ------------------
+
+coffee:
+  $('.rank-cell').on 'click', ->
+    $(this).addClass('active').siblings().removeClass('active')
