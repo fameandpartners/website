@@ -26,6 +26,9 @@ class LineItemPersonalization < ActiveRecord::Base
   validates :color,
             presence: true
 
+  DEFAULT_CUSTOM_SIZE_PRICE   = 20.0
+  DEFAULT_CUSTOM_COLOR_PRICE  = 16.0
+
   attr_accessor :color_name
   before_validation :set_color_by_name
   before_save :recalculate_price
@@ -52,27 +55,9 @@ class LineItemPersonalization < ActiveRecord::Base
     end
   end
 
-#  def color
-#    if attributes['color'].present?
-#      attributes['color']
-#    elsif super.present?
-#      super.presentation
-#    else
-#      nil
-#    end
-#  end
-
-#  def color_picker?
-#    color.present? && !COLORS.include?(color)
-#  end
-
   def customization_values
     @customization_values ||= CustomisationValue.where(id: customization_value_ids)
   end
-
-  #def customization_value_ids=(hash)
-  #  super(hash.values.flatten.map(&:to_i)) if hash.is_a?(Hash)
-  #end
 
   def options_hash
     values = {}
@@ -95,7 +80,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   # calculate additional cost
-  # custom color costs addional $16 in current currency
+  # for custom color, price, and personalizations itself
   def recalculate_price
     self.price = calculate_price
   end
@@ -103,8 +88,8 @@ class LineItemPersonalization < ActiveRecord::Base
   def calculate_price
     result = 0.0
 
-    result += calculate_size_cost(20.0)
-    result += calculate_color_cost(16.0)
+    result += calculate_size_cost(LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE)
+    result += calculate_color_cost(LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE)
 
     customization_values.each do |customization_value|
       result += calculate_customization_value_cost(customization_value)
@@ -114,7 +99,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   # Size Pricing
-  def calculate_size_cost(default_extra_size_cost = 20.0)
+  def calculate_size_cost(default_extra_size_cost = LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE)
     add_plus_size_cost? ? default_extra_size_cost : 0
   end
 
@@ -138,7 +123,7 @@ class LineItemPersonalization < ActiveRecord::Base
   # eo size pricing
 
   # Color pricing
-  def calculate_color_cost(default_custom_color_cost = 16.0)
+  def calculate_color_cost(default_custom_color_cost = LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE)
     if product.present? && color.present?
       if basic_color?
         return 0
