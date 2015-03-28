@@ -1,0 +1,31 @@
+#product-color-content .recommended .color-option .color-box {
+  background-color:#CCCCCC;
+  margin:0;
+  padding:0;
+}
+<% Repositories::ProductColors.read_all.each do |color| %>
+  <%- color_style = nil -%>
+  <%- color_style = "background-color: #{ color.value };" if color.value.present? -%>
+  <%- color_style = "background-image: url(#{ color.image });" if color.image.present? -%>
+  <%- if color_style.present? %>
+#product-color-content .recommended .color-option .color-box.color-<%= color.name %> { <%= color_style -%> }
+  <%- end -%>
+<%- end -%>
+
+#product-color-content .recommended .color-option .color-box.color-white,
+#product-color-content .recommended .color-option .color-box.color-optic-white {
+  background-color:#FFFFFF;
+  border:1px dashed #EEEEEE;
+}
+
+#product-color-content .recommended .color-option .color-box.color-blue-azalea-floral {
+  background-image:url('/product-color-images/blue_floral.jpg');
+}
+
+#product-color-content .recommended .color-option .color-box.color-midnight-floral {
+  background-image:url('/product-color-images/midnightfloral.jpg');
+}
+
+#product-color-content .recommended .color-option .color-box.color-pink-azalea-floral {
+  background-image:url('/product-color-images/pinkazalea_floral.jpg');
+}

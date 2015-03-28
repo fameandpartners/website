@@ -76,4 +76,10 @@ module CommonHelper
       product_image_url: product_image_url
     }
   end
+
+  def dynamic_product_colors_stylesheet_link_tag
+    key = Rails.root.to_s.hash
+    key = Time.now.to_i.to_s if Rails.env.development? # force stylesheets reloading
+    "<link rel='stylesheet' type='text/css' href='/stylesheets/product_colors.css?v=#{ key }'></link>".html_safe
+  end
 end
