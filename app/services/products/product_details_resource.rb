@@ -1,3 +1,4 @@
+# DEPRECATION WARINING! use Products::DetailsResource instead
 # please, extract not user dependable data receiving to repo
 class Products::ProductDetailsResource
   attr_reader :site_version, :product, :color_name

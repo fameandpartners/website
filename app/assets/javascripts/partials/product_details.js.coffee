@@ -20,19 +20,26 @@ page.initProductDetailsPage = (options = {}) ->
   slider     = new helpers.ProductImagesSlider(options.slider.container, options.slider.images, options.slider.options)
   selector   = new window.helpers.ProductVariantsSelector(options.selector)
 
+  # if user selects 'red' color, then change path to /dresses/slug/red
+  # don't do this for products without color
   product_paths = options.product_paths
-
-  # change images colors
-  selector.on('change', (event, data) ->
-    slider.showImagesWithColor(data.color_id)
-
+  changeUrlToSelectedColor = (color_id) ->
     if product_paths
-      if product_paths[data.color_id]
-        url = product_paths[data.color_id]
+      if product_paths[color_id]
+        url = product_paths[color_id]
       else
         url = product_paths.default
 
       window.history.pushState({ path: url }, '', url)
+
+  # ensure location color according to preselected color
+  selected = selector.getValue()
+  changeUrlToSelectedColor(selected.color_id) if selected.color_id
+
+  # change images colors
+  selector.on('change', (event, data) ->
+    slider.showImagesWithColor(data.color_id)
+    changeUrlToSelectedColor(data.color_id)
   )
 
   # init buy button

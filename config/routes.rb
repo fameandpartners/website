@@ -450,9 +450,9 @@ FameAndPartners::Application.routes.draw do
     match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
     # seo routes like *COLOR*-Dress
-    get "(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses
-    #get "lp/(:colour)-Dresses" => 'spree/products#index', as: :colour_formal_dresses, defaults: { lp: true }
-    get "new-collection" => 'spree/products#index', as: :new_collection
+    get "(:colour)-Dresses" => 'products/collections#show', as: :colour_formal_dresses
+    # seo route
+    get "new-collection" => "products/collections#show", as: :new_collection
 
     get '/next-day-delivery' => redirect('/express-delivery')
     get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }

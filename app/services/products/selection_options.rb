@@ -18,13 +18,13 @@ class Products::SelectionOptions
       sizes: OpenStruct.new({
         default: default_product_sizes,
         extra: extra_product_sizes,
-        default_extra_price: Spree::Price.new(amount: 16, currency: site_version.currency)
+        default_extra_price: Spree::Price.new(amount: 20, currency: site_version.currency)
       }),
 
       colors: OpenStruct.new({
         default: default_product_colors,
         extra: extra_product_colors,
-        default_extra_price: Spree::Price.new(amount: 20, currency: site_version.currency)
+        default_extra_price: Spree::Price.new(amount: 16, currency: site_version.currency)
       }),
 
       customizations: OpenStruct.new({

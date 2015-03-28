@@ -14,14 +14,14 @@ class Products::DetailsController < Products::BaseController
     end
 
     # set preselected images colors
-    if params[:color_name] && color = Repositories::ProductColors.get_by_name(params[:color_name])
-      @product.color_id   = color.id
-      @product.color_name = color.name
+    if params[:color_name]
+      color = Repositories::ProductColors.get_by_name(params[:color_name])
     else
-      # we can get it from @product.available_options.colors.default.first, if needed
-      @product.color_id   = nil
-      @product.color_name = nil
+      # select images of one/default color
+      color = @product.available_options.colors.default.first
     end
+    @product.color_id   = color.try(:id)
+    @product.color_name = color.try(:name)
 
     # set page title.
     # Drop anything after the first period(.) and newline
