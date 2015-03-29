@@ -86,21 +86,28 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def calculate_price
+    size_cost + color_cost + customizations_cost
+  end
+
+  def size_cost
+    calculate_size_cost(LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE)
+  end
+
+  def color_cost
+    calculate_color_cost(LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE)
+  end
+
+  def customizations_cost
     result = 0.0
-
-    result += calculate_size_cost(LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE)
-    result += calculate_color_cost(LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE)
-
     customization_values.each do |customization_value|
       result += calculate_customization_value_cost(customization_value)
     end
-
     result
   end
 
   # Size Pricing
   def calculate_size_cost(default_extra_size_cost = LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE)
-    add_plus_size_cost? ? default_extra_size_cost : 0
+    add_plus_size_cost? ? default_extra_size_cost : 0.0
   end
 
   def add_plus_size_cost?
@@ -126,7 +133,7 @@ class LineItemPersonalization < ActiveRecord::Base
   def calculate_color_cost(default_custom_color_cost = LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE)
     if product.present? && color.present?
       if basic_color?
-        return 0
+        return 0.0
       else
         if color.discount.present?
           Spree::Price.new(amount: default_custom_color_cost).apply(color.discount).price
@@ -135,7 +142,7 @@ class LineItemPersonalization < ActiveRecord::Base
         end
       end
     else
-      0
+      0.0
     end
   end
 
