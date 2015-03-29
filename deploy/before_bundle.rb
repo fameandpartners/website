@@ -26,7 +26,7 @@ class DeploymentMessage
   end
 
   def username
-    ["HERP DERP-LOY" 'DeployBot', '∞ Monkeys & ∞ Keyboards'].sample
+    ['HERP DERP-LOY', 'DeployBot', '∞ Monkeys & ∞ Keyboards'].sample
   end
 
   # Use any channel or user name
