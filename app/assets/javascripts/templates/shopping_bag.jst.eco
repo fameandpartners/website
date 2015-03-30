@@ -17,7 +17,7 @@
   <% for product in @cart.products: %>
     <li>
       <a href="<%= product.path %>">
-        <img class="img-responsive pull-left cart-item-image" src="<%= product.image.small %>" />
+        <img class="img-responsive pull-left cart-item-image" src="<%= product.image.large %>" />
       </a>
       <a class="fa fa-close pull-right link-grey remove-product" data-id="<%= product.line_item_id %>" href="#0"></a>
       <span class="qty"><%= product.quantity %>x</span>
