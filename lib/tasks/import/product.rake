@@ -4,9 +4,7 @@ namespace :import do
   namespace :product do
 
     desc 'Reindex all products'
-    task :reindex => :environment do
-      Utility::Reindexer.reindex
-    end
+    task :reindex => 'elasticsearch:reindex'
 
     desc 'prices'
     task :prices => :environment do
