@@ -61,7 +61,7 @@ class Products::CollectionsController < Products::BaseController
         limit:          params[:limit] || 20, # page size
         offset:         params[:offset] || 0
       }.merge(parse_permalink(params[:permalink]))
-      binding.pry
+
       Products::CollectionResource.new(resource_args)
     end
 

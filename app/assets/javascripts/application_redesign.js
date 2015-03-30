@@ -6,8 +6,8 @@
 //= require jquery-fileupload/jquery.iframe-transport
 //= require jquery-fileupload/jquery.fileupload
 
-//= require libs/select2.js
 //= require libs/underscore-min
+// spree have this by default
 //= require libs/snap.svg-min.js
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
@@ -84,4 +84,13 @@ jQuery(document).ready(function($){
   };
 
   add_script('/assets/js/sg-scripts.js');
+  //add_script('/assets/js/main.js');
+
+
+	$('#forgot-password').on('click', function(e) {
+		e.preventDefault();
+		email = $('#spree_user_email').val()
+		window.location = $(this).attr('href') + '?email=' + email;
+	});
+
 })
