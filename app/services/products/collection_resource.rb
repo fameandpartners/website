@@ -159,9 +159,14 @@ class Products::CollectionResource
       result
     end
 
+    # TODO - Consolidate with behaviour on app/helpers/landing_pages_helper.rb:24 #cropped_product_hoverable_images
     def cropped_images(color_variant)
       cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
-      cropped_images = color_variant.images if cropped_images.blank? && Rails.env.development?
+
+      if cropped_images.blank?
+        cropped_images = color_variant.images.select { |i| i.large.to_s.downcase.include?('front') }
+      end
+
       cropped_images.sort_by!{ |i| i.position }
       cropped_images.collect{ |i| i.try(:large) }
     end
