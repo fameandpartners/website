@@ -370,11 +370,24 @@
 
         };
 
+        Skippr.prototype.lastCalledAt = (new Date()).getTime();
         Skippr.prototype.autoPlay = function() {
 
             var _ = this;
 
             timer = setInterval(function(){
+                // crude version of throttle from underscorejs
+                // prevent the same timer to call change several times during _.settings.autoPlayDuration
+                var thisMoment = (new Date()).getTime();
+                var timePassed = thisMoment - Skippr.prototype.lastCalledAt;
+                if ( timePassed < _.settings.autoPlayDuration ) {
+                  _.logs('skipped change call, passed only: ' + timePassed, timer)
+                  return false;
+                } else {
+                  _.logs("calling change by timer after: " + timePassed, timer);
+                  Skippr.prototype.lastCalledAt = thisMoment;
+                };
+
                 var activeElement =  _.$element.find(".skippr-nav-element-active"),
                     activeSlide = activeElement.attr('data-slider');
 
