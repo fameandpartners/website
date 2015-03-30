@@ -1,16 +1,13 @@
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
+<%= javascript_include_tag 'application_redesign' %>
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="//w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "0babd5ea-dd86-4553-b8f6-ab4a6126df47", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-
-
 <!-- bootstrap -->
 <script type="text/javascript">
   //order_data      = { item_count: <%= current_order.item_count %> };
   order_data      = {};
   moodboard_data  = <%= raw current_user_moodboard.serialize.to_json %>;
-  
+
   window.app = {
     env:    '<%= Rails.env %>',
     debug:  <%= Rails.env.development? %>,
@@ -24,7 +21,13 @@
   $(document).ready(function() {
     (function() {
       <%= yield :inline_javascript %>
-    })();    
-    //page.enableStyleQuizPopup('.show-style-quiz');
+    })();
+
+	$('#forgot-password').on('click', function(e) {
+		e.preventDefault();
+		email = $('#spree_user_email').val()
+		window.location = $(this).attr('href') + '?email=' + email;
+	});
+
   });
 </script>
