@@ -229,6 +229,7 @@ z.list-group-item.customization-option  {
 	position: fixed;
 	top: 0;
 	background-color:#FFFFFF;
+	margin-bottom:20px;
 
   	@media(max-width: 768px){
   		right:-130%;
@@ -236,7 +237,7 @@ z.list-group-item.customization-option  {
   	}
 
   @media screen and (max-width: 991px){
-    margin-bottom:70px;
+    margin-bottom:100px;
   }
 
 	img {

@@ -2,132 +2,185 @@
 
   .custom {
 
-    .color-burgundy{
-      background-color: #690f0f;
-    }
+    .color-option {
 
-    .color-cherry-red {
-      background-color: #ba0e0e;
-    }
+      .color-box {
+        background-color:#CCCCCC;
+        margin:0;
+        padding:0;
+      }
 
-    .color-navy{
-      background-color: #00004c;
-    }
+      .color-burgundy{
+        background-color: #690f0f;
+      }
 
-    .color-cobalt-blue{
-      background-color: #0000e5;
-    }
+      .color-cherry-red {
+        background-color: #ba0e0e;
+      }
 
-    .color-black{
-      background-color: #000000;
-    }
+      .color-navy{
+        background-color: #00004c;
+      }
 
-    .color-white {
-      background-color: #ffffff;
-    }
+      .color-cobalt-blue{
+        background-color: #0000e5;
+      }
 
-    .color-ivory {
-      background-color: #FFFFF0;
-    }
+      .color-black{
+        background-color: #000000;
+      }
 
-    .color-pale-pink {
-      background-color: #fff2f4;
-    }
+      .color-white {
+        background-color: #ffffff;
+      }
 
-    .color-light-pink {
-      background-color: #ffecef;
-    }
+      .color-ivory {
+        background-color: #FFFFF0;
+      }
 
-    .color-red {
-      background-color: #dd0000;
-    }
+      .color-pale-pink {
+        background-color: #fff2f4;
+      }
 
-    .color-pale-grey {
-      background-color: #e1dfdf;
-    }
+      .color-light-pink {
+        background-color: #ffecef;
+      }
 
-    .color-charcoal{
-      background-color: #3c3c3c;
-    }
+      .color-red {
+        background-color: #dd0000;
+      }
 
-    .color-marine-blue {
-      background-color: #055281;
-    }
+      .color-pale-grey {
+        background-color: #e1dfdf;
+      }
 
-    .color-pale-yellow {
-      background-color: #e3e7ba;
-    }
+      .color-charcoal{
+        background-color: #3c3c3c;
+      }
 
-    .color-burnt-orange {
-      background-color: #f07532;
-    }
+      .color-marine-blue {
+        background-color: #055281;
+      }
 
-    .color-pine {
-      background-color: #128755;
-    }
+      .color-pale-yellow {
+        background-color: #e3e7ba;
+      }
 
-    .color-pale-blue {
-      background-color: #cdf1f4;
-    }
+      .color-burnt-orange {
+        background-color: #f07532;
+      }
 
-    .color-ice-blue {
-      background-color: #abfdff;
-    }
+      .color-pine {
+        background-color: #128755;
+      }
 
-    .color-mint {
-      background-color: #91ffdb;
-    }
+      .color-pale-blue {
+        background-color: #cdf1f4;
+      }
 
-    .color-champagne {
-      background-color: #f0debb;
-    }
+      .color-ice-blue {
+        background-color: #abfdff;
+      }
 
-    .color-moss-green {
-      background-color: #8ea578;
-    }
+      .color-mint {
+        background-color: #91ffdb;
+      }
 
-    .color-lavender {
-      background-color: #d9c0e7;
-    }
+      .color-champagne {
+        background-color: #f0debb;
+      }
 
-    .color-lilac {
-      background-color: #ecddf4;
-    }
+      .color-moss-green {
+        background-color: #8ea578;
+      }
 
-    .color-coral {
-      background-color: #ff6262;
-    }
+      .color-lavender {
+        background-color: #d9c0e7;
+      }
 
-    .color-magenta {
-      background-color: #e137b7;
-    }
+      .color-lilac {
+        background-color: #ecddf4;
+      }
 
-    .color-off-white {
-      background-color: #fffef6;
-    }
+      .color-coral {
+        background-color: #ff6262;
+      }
 
-    .color-teal {
-      background-color: #41a9ab;
-    }
+      .color-magenta {
+        background-color: #e137b7;
+      }
 
-    .color-purple {
-      background-color: #8e54cc;
-    }
+      .color-off-white {
+        background-color: #fffef6;
+      }
 
-    .color-blush {
-      background-color: #eec6c6;
-    }
+      .color-teal {
+        background-color: #41a9ab;
+      }
 
-    .color-taupe {
-      background-color: #c9bba4;
-    }
+      .color-purple {
+        background-color: #8e54cc;
+      }
 
-    .color-royal-blue {
-      background-color: #3f34b2;
-    }
+      .color-blush {
+        background-color: #eec6c6;
+      }
 
-    .color-pale-green {
-      background-color: #d1f6d7;
+      .color-taupe {
+        background-color: #c9bba4;
+      }
+
+      .color-royal-blue {
+        background-color: #3f34b2;
+      }
+
+      .color-pale-green {
+        background-color: #d1f6d7;
+      }
+
+      .color-emerald-green {
+        background-color:#1B9975;
+      }
+
+      .color-hot-pink {
+        background-color:#ff3399;
+      }
+
+      .color-lemon {
+        background-color:#FFFACD;
+      }
+
+      .color-peach {
+        background-color:#FDE4D8;
+      }
+
+      .color-plum {
+        background-color:#8D4585;
+      }
+
+      .color-seafoam {
+        background-color:#41cbb5;
+      }
+
+      .color-watermelon {
+        background-color: #FF3366;
+      }
+
+      .color-fluoro-orange {
+        background-color: #FF9933
+      }
+
+      .color-cream {
+        background-color: #FCFBE3;
+      }
+
+      .color-orange {
+        background-color: #ffae19;
+      }
+
+      .color-turquoise {
+        background-color: #34DDDD;
+      }
     }
   }
 
@@ -234,7 +287,7 @@
         background-color:#3C1362;
       }
 
-      .color-emerald {
+      .color-emerald-green {
         background-color:#1B9975;
       }
 
@@ -391,15 +444,18 @@
       }
 
       .color-blue-azalea-floral {
-        background-image:url('/product-color-images/blue_floral.jpg');
+        background-image:url('product-color-images/blue_floral.jpg');
+        background-size: cover;
       }
 
       .color-midnight-floral {
-        background-image:url('/product-color-images/midnightfloral.jpg');
+        background-image:url('product-color-images/midnightfloral.jpg');
+        background-size: cover;
       }
 
       .color-pink-azalea-floral {
-        background-image:url('/product-color-images/pinkazalea_floral.jpg');
+        background-image:url('product-color-images/pinkazalea_floral.jpg');
+        background-size: cover;
       }
     }
   }

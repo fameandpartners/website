@@ -42,6 +42,10 @@ case Rails.env.to_sym
 when :development
   configatron.host = 'localhost.localdomain'
   configatron.blog_host = 'blog.localdomain'
+
+  configatron.cache.expire.quickly = 1.second
+  configatron.cache.expire.normally = 30.seconds
+  configatron.cache.expire.long = 60.seconds
 when :staging
   #configatron.host = 'fame.23stages.com'
   #configatron.blog_host = 'blog.fame.23stages.com'

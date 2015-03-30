@@ -7,7 +7,7 @@
       <div class="media">
         <div class="media-left media-middle">
           <a href="<%= product.path %>">
-            <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.small %>">
+            <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.large %>">
           </a>
         </div>
         <div class="media-body media-middle">

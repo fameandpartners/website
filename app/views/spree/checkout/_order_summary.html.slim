@@ -25,7 +25,7 @@ ruby:
         .media
           .media-left.media-middle
             = link_to collection_product_path(product) do
-              = image_tag product.image.product, class: 'cart-item-image'
+              = image_tag product.image.large, class: 'cart-item-image'
           .media-body.media-middle
             span.qty =' "#{ product.quantity}x"
             = link_to product.name, collection_product_path(product)

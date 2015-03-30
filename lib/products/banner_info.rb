@@ -296,7 +296,6 @@ module Products
         if seo_collection.present?
           collection_ids << seo_collection
         end
-        #binding.pry
         selected_taxons(collection_ids, false)
       end
     end
@@ -346,7 +345,6 @@ module Products
         footer_text: taxon.try(:banner).try(:footer_text),
         category_description: taxon.try(:banner).try(:seo_description)
       }
-      #binding.pry
       return r
     end
   end
