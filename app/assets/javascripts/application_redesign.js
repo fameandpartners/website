@@ -34,7 +34,8 @@
 //
 //= require js/card.js
 
-//= require js/functions.js
+// Seriously, WTF.
+//= require libs/redesign_functions.js
 //  require js/superslides.js # copied to libs/superslides for easier monkey-patching
 //= require functions_redesign.js
 
