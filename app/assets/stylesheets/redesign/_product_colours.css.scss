@@ -137,6 +137,47 @@
       .color-pale-green {
         background-color: #d1f6d7;
       }
+
+      .color-emerald-green {
+        background-color:#1B9975;
+      }
+
+      .color-hot-pink {
+        background-color:#ff3399;
+      }
+
+      .color-lemon {
+        background-color:#FFFACD;
+      }
+
+      .color-peach {
+        background-color:#FDE4D8;
+      }
+
+      .color-plum {
+        background-color:#8D4585;
+      }
+
+      .color-seafoam {
+        background-color:#41cbb5;
+      }
+
+      .color-watermelon {
+        background-color: #FF3366;
+      }
+
+      .color-fluoro-orange {
+        background-color: #FF9933
+      }
+
+      .color-cream {
+        background-color: #FCFBE3;
+      }
+
+      .color-orange {
+        background-color: #ffae19;
+      }
+
     }
   }
 
@@ -243,7 +284,7 @@
         background-color:#3C1362;
       }
 
-      .color-emerald {
+      .color-emerald-green {
         background-color:#1B9975;
       }
 
@@ -400,15 +441,18 @@
       }
 
       .color-blue-azalea-floral {
-        background-image:url('/product-color-images/blue_floral.jpg');
+        background-image:url('product-color-images/blue_floral.jpg');
+        background-size: cover;
       }
 
       .color-midnight-floral {
-        background-image:url('/product-color-images/midnightfloral.jpg');
+        background-image:url('product-color-images/midnightfloral.jpg');
+        background-size: cover;
       }
 
       .color-pink-azalea-floral {
-        background-image:url('/product-color-images/pinkazalea_floral.jpg');
+        background-image:url('product-color-images/pinkazalea_floral.jpg');
+        background-size: cover;
       }
     }
   }
