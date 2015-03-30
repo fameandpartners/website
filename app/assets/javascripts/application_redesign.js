@@ -6,7 +6,7 @@
 //= require jquery-fileupload/jquery.iframe-transport
 //= require jquery-fileupload/jquery.fileupload
 
-//= require libs/select2.js
+
 //= require libs/underscore-min
 //= require libs/snap.svg-min.js
 //= require libs/vex.combined.min.js
@@ -15,6 +15,7 @@
 //= require libs/soundcloud/sc-player
 //= require libs/jquery.hoverable.js
 //= require libs/superslides.js
+//= require libs/select2.js
 
 // styleguide code
 //= require js/modernizr.custom.js

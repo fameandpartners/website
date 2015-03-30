@@ -10,12 +10,12 @@
 @import 'stylesheets/styleguide.css';
 @import 'stylesheets/styles.css';
 
-@import 'libs/select2.min.css';
-@import 'libs/vex.css';
-@import 'libs/vex-theme-flat-attack.css';
-@import 'libs/vex-theme-bottom-right-corner.css';
+@import 'libs/vex';
+@import 'libs/vex-theme-flat-attack';
+@import 'libs/vex-theme-bottom-right-corner';
 @import 'redesign/libs/chosen';
 @import 'redesign/extras/chosen_override';
+@import 'libs/select2';
 
 @import 'redesign/extras/tabs';
 
@@ -130,15 +130,3 @@ h1.edit-title {
     display:none;
   }
 }
-
-/*
-  // added for quick reference only
-  <link rel="stylesheet" href="stylesheets/styles.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/demo.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/component.css" />
-  <link rel="stylesheet" href="stylesheets/jquery.skippr.css">
-  <link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="stylesheets/cs-select.css">
-  <link rel="stylesheet" href="stylesheets/cs-skin-border.css">
-*/
