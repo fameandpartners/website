@@ -74,9 +74,10 @@ module BatchUpload
               end
 
               old_images = viewable.images.where('attachment_updated_at < ?', @_expiration.ago)
-              warn "Delete SKU: #{product.sku} images which was created more than #{@_expiration / 3600} hours ago - total (#{old_images.count})"
-
-              old_images.delete_all
+              if old_images.count > 0
+                warn "Delete SKU: #{product.sku} images which was created more than #{@_expiration / 3600} hours ago - total (#{old_images.count})"
+                old_images.delete_all
+              end
             end
 
             if ENV['USE_SPREE_IMAGE_CLASS']
