@@ -28,10 +28,10 @@ class ProductImages
       scope = scope.select{|image| image.color_id == options[:color_id]}
     end
     if options.has_key?(:cropped)
-      scope = if options[:cropped]
-        scope.select{|image| image.large.to_s.downcase.include?('crop') }
+      if options[:cropped]
+        scope = scope.select{|image| image.large.to_s.downcase.include?('crop') }
       else # options[:cropped] => false
-        scope.select{|image| !image.large.to_s.downcase.include?('crop') }
+        scope = scope.select{|image| !image.large.to_s.downcase.include?('crop') }
       end
     end
     scope
