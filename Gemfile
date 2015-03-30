@@ -104,7 +104,6 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'thin', '1.5.1'
-  #gem 'debugger' # replaced by binding.pry
   gem 'compass'
   gem 'bootstrap-sass'
 end
