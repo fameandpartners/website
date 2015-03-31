@@ -39,6 +39,8 @@ module Overrides
           unless skip_welcome_email
             ::Spree::UserMailer.welcome(self).deliver
           end
+          # don't roll back if we can't send email
+          true
         end
       end
     end
