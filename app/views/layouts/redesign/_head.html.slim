@@ -18,10 +18,10 @@ meta property="og:site_name" content="Fame &amp; Partners"
 - if !Rails.env.production?
   meta name="robots" content="noindex, nofollow"
   script src="//use.typekit.net/kur6crm.js" type="text/javascript"
-
-- if Rails.env.production?
+- else
   script src="//use.typekit.net/day0prb.js" type="text/javascript"
 
+- if Rails.env.production? || Features.active?(:test_analytics)
   = render '/spree/shared/google_analytics'
   = render '/shared/zopim'
 
