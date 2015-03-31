@@ -43,17 +43,17 @@ class Bridesmaid::AdditionalProductsController < Bridesmaid::BaseController
     # user, product, currency
     def add_product_to_user_cart(product_variant)
       cart = current_order(true)
-      currency = current_currency || cart.currency
-
-      price = product_variant.price_in(currency)
 
       line_item = current_order.line_items.where(variant_id: product_variant.id).first_or_initialize
-      line_item.quantity     = 1
-      line_item.currency     = current_currency
-      line_item.price        = price.final_amount(is_surryhills = false)
-
+      line_item.quantity = 1
+      line_item.currency = current_currency || cart.currency
+      
+      price = product_variant.zone_price_for(current_site_version.zone)
       if product_variant.in_sale?
-        line_item.old_price = price.amount_without_discount
+        line_item.price = price.apply(variant.discount).amount
+        line_item.old_price = price.amount
+      else
+        line_item.price = price.amount
       end
 
       line_item.save!

@@ -308,25 +308,23 @@ Spree::Order.class_eval do
 
   def use_prices_from(site_version)
     return if self.currency == site_version.currency
+    return if self.completed?
 
-    self.zone_id = site_version.zone_id
-    
     # update line items
     # update currency
     self.currency = site_version.currency
 
     self.line_items.each do |current_item|
       variant = current_item.variant
-      price = variant.zone_price_for(Spree::Zone.find(@zone_id))
+      price = variant.zone_price_for(site_version.zone)
 
-      # if price or currency has been changed
-      if current_item.price.to_i != price.final_amount.to_i && current_item.currency != price.currency
-        current_item.currency = price.currency
-        current_item.price = price.final_amount
-        if variant.in_sale?
-          current_item.old_price = price.amount_without_discount
-        end
-        current_item.save
+      current_item.currency = price.currency
+
+      if variant.in_sale?
+        current_item.price = price.apply(variant.discount).amount
+        current_item.old_price = price.amount
+      else
+        current_item.price = price.amount
       end
     end
     self.save

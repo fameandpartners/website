@@ -43,6 +43,23 @@ class Products::SelectionOptions
 
   private
 
+    def product_on_sale?
+      return @_product_on_sale if instance_variable_defined?('@_product_on_sale')
+      @_product_on_sale = product.discount.present?
+    end
+
+    def extra_sizes_available?
+      !product_on_sale?
+    end
+
+    def extra_colors_available?
+      !product.on_sale? && product.color_customization
+    end
+
+    def customizations_available?
+      !product_on_sale?
+    end
+
     def product_variants
       @product_variants ||= Repositories::ProductVariants.new(product_id: product.id).read_all
     end
@@ -59,11 +76,12 @@ class Products::SelectionOptions
     end
 
     def default_product_sizes
-      product_sizes.select{|size| size.extra_price.blank? } || []
+      product_sizes.select{|size| size.extra_price.blank? }
     end
 
     def extra_product_sizes
-      product_sizes.select{|size| size.extra_price.present? } || []
+      return [] if !extra_sizes_available?
+      product_sizes.select{|size| size.extra_price.present? }
     end
     # end
 
@@ -79,7 +97,7 @@ class Products::SelectionOptions
     end
 
     def extra_product_colors
-      return [] if !product.color_customization
+      return [] if !extra_colors_available?
       Repositories::ProductColors.read_all.select do |color|
         color.use_in_customisation && !basic_product_color_ids.include?(color.id)
       end.compact.sort_by{|color| color.presentation }
@@ -88,6 +106,7 @@ class Products::SelectionOptions
 
     # customizations
     def product_customisation_values
+      return [] if !customizations_available?
       @product_customisation_values ||= product.customisation_values.includes(:incompatibilities)
     end
 
