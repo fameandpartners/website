@@ -38,14 +38,20 @@ class UserCart::ProductsController < UserCart::BaseController
       Activity.log_product_added_to_cart(
         result.product, temporary_user_key, try_spree_current_user, current_order
       )
-    end
 
-    @user_cart = user_cart_resource.read
+      @user_cart = user_cart_resource.read
 
-    respond_with(@user_cart) do |format|
-      format.json   { 
-        render json: @user_cart.serialize, status: :ok
-      }
+      respond_with(@user_cart) do |format|
+        format.json   { 
+          render json: @user_cart.serialize, status: :ok
+        }
+      end
+    else # not success
+      respond_with({}) do |format|
+        format.json   { 
+          render json: { error: true, message: result.message }, status: :error
+        }
+      end
     end
   end
 
