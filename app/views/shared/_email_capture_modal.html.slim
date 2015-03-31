@@ -5,7 +5,7 @@
     message = decode(params[:m])
     content = decode(params[:c]) || promocode
     class_name = decode(params[:s]) || class_name
-    timeout = params[:t]
+    timeout = params[:t] || 3
 
     email_capture_modal = "
       new window.page.EmailCaptureModal({

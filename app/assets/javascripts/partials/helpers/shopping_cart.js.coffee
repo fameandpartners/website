@@ -90,7 +90,7 @@ window.helpers.ShoppingCart = class ShoppingCart
         @updateData(data)
         @trigger('success', data)
         @trigger('complete', data)
-        window.helpers.showAlert( type: 'success', title: 'hooray babe', message: 'The coupon code was successfully applied to your order.')
+        window.helpers.showAlert( type: 'success', title: 'Success!', message: 'You are one step closer to being a fame babe')
     ).error( () =>
       @trigger('error')
     )
