@@ -167,21 +167,7 @@ header
                   | Moodboard:&nbsp;
                   = "#{ current_user_moodboard.item_count }"
         li.shop.menu-item.account-dropdown
-          a.menu-item--link.active-hover href="#"
-            | my account
-          .account-menu.mega-menu.hidden-sm.account-list
-            .account.container-fluid
-              ul
-                li
-                  = link_to account_settings_path, 'Account Details'
-                li
-                  = link_to user_orders_path, 'My Orders'
-                / li
-                  / = link_to user_returns_path, 'My Returns'
-                / li
-                /   = link_to user_style_profile_path, 'Style Profile'
-                li
-                  = link_to destroy_user_session_path, 'LOG OUT'
+          = render "layouts/redesign/header/my_account_dropdown"
 
         li.menu-item.hidden-xxs
           a.menu-item--link.search href="#"
