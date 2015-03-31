@@ -73,6 +73,15 @@
 	padding-left: 0;
 }
 
+.account {
+	position: absolute;
+	top: 0;
+	border: 1px solid #040505;
+	background-color: white;
+	padding-right: 0;
+	padding-left: 0;
+}
+
 .search-bar {
 	border: 1px solid #040505;
 	border-bottom: none;
@@ -94,6 +103,17 @@
 .stories:after, .stories:before {
 	bottom: 100%;
 	left: 418px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.account:after, .account:before {
+	bottom: 100%;
+	left: 75px;
 	border: solid transparent;
 	content: " ";
 	height: 0;
@@ -131,6 +151,13 @@
 	margin-left: -10px;
 }
 
+.account:after {
+	border-color: rgba(213, 209, 209, 0);
+	border-bottom-color: white;
+	border-width: 6px;
+	margin-left: -10px;
+}
+
 .search-bar:after {
 	border-color: rgba(213, 209, 209, 0);
 	border-bottom-color: #f5f5f5;
@@ -146,6 +173,13 @@
 }
 
 .stories:before {
+	border-color: rgba(4, 5, 5, 0);
+	border-bottom-color: #040505;
+	border-width: 7px;
+	margin-left: -11px;
+}
+
+.account:before {
 	border-color: rgba(4, 5, 5, 0);
 	border-bottom-color: #040505;
 	border-width: 7px;
@@ -287,7 +321,7 @@ li.shop {
 	}
 }
 
-.edit-title a{
+.edit-title a {
 	padding-top: 5px;
 
 	&:hover{
@@ -299,5 +333,45 @@ li.shop {
 	@media(max-width: 480px) {
 		padding-right: 0;
 		padding-left: 0;
+	}
+}
+
+.account-menu {
+	width: 150px !important;
+}
+
+.account-dropdown {
+	position: relative;
+}
+
+.account {
+	background-color: white;
+
+	ul {
+		list-style: none;
+		padding: 20px 0 0 0;
+
+		li {
+			padding-bottom: 2px;
+			text-transform: none;
+			padding-left: 20px;
+			padding-right: 40px;
+
+			&:last-child {
+				background-color: #f5f5f5;
+				background-image: url('_icons/login-icon.png');
+				background-repeat: no-repeat;
+				background-position: 130px center ;
+				background-size: 16px 16px;
+			}
+
+			a {
+				color: black;
+
+				&:hover {
+					color: #355e6d;
+				}
+			}
+		}
 	}
 }
