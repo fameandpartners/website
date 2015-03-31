@@ -14,7 +14,7 @@ require 'database_cleaner'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-def create_test_data
+def seed_site_zone
   zone = Spree::Zone.create(name: 'us')
   args = {
     permalink: 'us',
@@ -39,19 +39,21 @@ RSpec.configure do |config|
   # config.mock_with :rr
   # config.mock_with :mocha
 
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
 
+  # Use DatabaseCleaner instead of ActiveRecord transactional
+  config.use_transactional_fixtures = false
+
   config.before(:suite) do    
-    DatabaseCleaner.strategy = :truncation, {:except => %w[site_versions spree_zones]}
-    # DatabaseCleaner.strategy = :truncation, {:only => %w[spree_users]}
-    create_test_data
+    DatabaseCleaner.strategy = :transaction
+    seed_site_zone
   end
 
   config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
     DatabaseCleaner.clean
   end
 end

@@ -1,5 +1,6 @@
 $(document).ready ->
   $("#theTarget").skippr({
+    logs: false,
     transition: 'fade',
     speed: 1000,
     easing: 'easeOutQuart',
