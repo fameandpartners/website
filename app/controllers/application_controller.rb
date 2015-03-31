@@ -193,15 +193,6 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  def convert_current_order_prices
-    if session[:order_id]
-      order = Spree::Order.where(id: session[:order_id]).first
-      if order.present? && !order.completed?
-        order.use_prices_from(current_site_version)
-      end
-    end
-  end
-
   helper_method :default_seo_title, :default_meta_description
 
   helper_method :analytics_label, :get_user_type
