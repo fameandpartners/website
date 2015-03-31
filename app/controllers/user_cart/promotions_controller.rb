@@ -1,4 +1,7 @@
 class UserCart::PromotionsController < UserCart::BaseController
+  include SslRequirement
+  ssl_allowed
+
   respond_to :json
 
   def create
