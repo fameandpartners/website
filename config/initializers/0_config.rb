@@ -62,9 +62,9 @@ when :preproduction
   configatron.host = 'preprod.fameandpartners.com'
   configatron.blog_host = 'blog.fameandpartners.com'
 
-  configatron.mailgun.mailbox.domain = 'fameandpartners.com.mailgun.org'
-  configatron.mailgun.mailbox.username = 'postmaster@fameandpartners.com.mailgun.org'
-  configatron.mailgun.mailbox.password = '0mqgbkbz34n1'
+  # configatron.mailgun.mailbox.domain = 'fameandpartners.com.mailgun.org'
+  # configatron.mailgun.mailbox.username = 'postmaster@fameandpartners.com.mailgun.org'
+  # configatron.mailgun.mailbox.password = '0mqgbkbz34n1'
 
   configatron.campaign_monitor.api_key = '3f7e4ac86b143e32a5c7b46b83641143'
   configatron.campaign_monitor.list_id = 'cc9be877f40c64cf389f6e3ea95daa0a'
