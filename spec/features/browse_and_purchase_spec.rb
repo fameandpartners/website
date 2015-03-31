@@ -71,15 +71,16 @@ describe 'browse and purchase process', :type => :feature do
     include_context 'authenticated_user'
     
     describe 'browse' do
-  
-      it 'should add a product to cart' do
+
+      # TODO - Actually make this a test. :)
+      xit 'should add a product to cart' do
         visit '/us/'     
         p = Spree::Product.all.shuffle.first
         find('.nav-menu').click_link("Lace")
 
-        visit "dresses/#{p.permalink}/"
+        # visit "dresses/#{p.permalink}/"
       end
-      # TODO - Actually make this a test. :)
+
 
     end
   end
