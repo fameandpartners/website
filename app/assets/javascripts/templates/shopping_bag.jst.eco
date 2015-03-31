@@ -31,7 +31,7 @@
 <form class="promo-code" action="#">
   <label for=""> Promo Code</label>
   <div class="input-group">
-    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit btn-reset">Submit</button></span>
+    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit btn-reset">Apply</button></span>
   </div>
 </form>
 <!--cd-cart-items-->
