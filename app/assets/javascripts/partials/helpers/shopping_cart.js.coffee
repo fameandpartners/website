@@ -13,6 +13,11 @@ window.helpers.ShoppingCart = class ShoppingCart
     @on      =  delegateTo(@$eventBus, 'on')
     @one     =  delegateTo(@$eventBus, 'one')
 
+  setItemCount: (item_count) =>
+    return if @loaded
+    @data.item_count = item_count
+    @trigger('change')
+
   updateData: (data) =>
     @loaded = true
     @data = data

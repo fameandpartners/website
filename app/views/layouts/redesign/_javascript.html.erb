@@ -7,8 +7,6 @@
 
 <!-- bootstrap -->
 <script type="text/javascript">
-  //order_data      = { item_count: <%= current_order.item_count %> };
-  order_data      = {};
   moodboard_data  = <%= raw current_user_moodboard.serialize.to_json %>;
   
   window.app = {
@@ -18,12 +16,16 @@
     user_signed_in: <%= signed_in? %>,
     site_version: {  name: '<%= current_site_version.try(:name) %>' },
     shopping_cart: new helpers.ShoppingCart({}),
-    user_moodboard: new helpers.UserMoodboard(moodboard_data)
+    user_moodboard: new helpers.UserMoodboard({})
   };
 
   $(document).ready(function() {
     (function() {
       <%= yield :inline_javascript %>
+
+      // init here allows assigned listeners to update data
+      window.app.user_moodboard.updateData(moodboard_data);
+      window.app.shopping_cart.setItemCount(<%= current_order.item_count %>);
     })();    
     //page.enableStyleQuizPopup('.show-style-quiz');
   });
