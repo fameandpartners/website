@@ -14,7 +14,7 @@ $(document).ready ->
   })
 
   $('.slider-action').on 'click', (e) ->
-    e.preventDefault()
+    # e.preventDefault()
     window.location = $(this).data('href')
 
   $('.selectbox').chosen
