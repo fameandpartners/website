@@ -15,6 +15,17 @@
   margin-top: 3rem;
 }
 
+.btn-facebook.btn-md {
+  @media(max-width: 768px) {
+    font-size: 12px !important;
+    padding-left: 50px;
+  }
+
+  &:hover {
+    background-color: #627AAD;
+  }
+}
+
 .login.new, .sign-up.new, .password-new {
 
   .low-btn {

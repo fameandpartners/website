@@ -46,7 +46,7 @@ module FameAndPartners
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir[ Rails.root.join('app', 'models') ]
     config.autoload_paths += Dir[ Rails.root.join('app', 'repositories') ]
-    
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -105,6 +105,8 @@ module FameAndPartners
 
     # Use S3 for storing attachments
     config.use_s3 = false
+
+    config.skip_mail_delivery = false
 
     config.generators do |generator|
       generator.test_framework :rspec
