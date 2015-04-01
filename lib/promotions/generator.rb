@@ -17,27 +17,41 @@ module Promotions
     def initialize(options = {})
     end
 
-    def create(number = 1)
-      promotions = []
+    def create_numeric(number = 1, start = 999, prefix)
       number = number.to_i.abs
+      start = start.to_i.abs
       return promotions if number == 0
-
-      codes = generate_unique_codes(number)
-      codes.each do |code|
-        promotion = build_promotion(code)
-
-        promotion.promotion_actions = build_promotion_actions
-        promotion.promotion_rules   = build_promotion_rules
-
-        if promotion.save!
-          promotions.push(promotion.code)
-        end
-      end
-
-      promotions
+      finish = (start + number) - 1
+      codes = (start..finish).to_a.collect{ |i| "#{prefix}#{i}" }
+      generate_promotion(codes)
     end
 
+    def create(number = 1, prefix)
+      number = number.to_i.abs
+      return promotions if number == 0
+      codes = generate_unique_codes(number)
+      generate_promotion(codes)
+    end
+
+
     private
+
+      def generate_promotion(codes)
+        promotions = []
+
+        codes.each do |code|
+          promotion = build_promotion(code)
+
+          promotion.promotion_actions = build_promotion_actions
+          promotion.promotion_rules   = build_promotion_rules
+
+          if promotion.save!
+            promotions.push(promotion.code)
+          end
+        end
+
+        promotions
+      end
 
       #{ :promotion_actions, :promotion_rules }
       def build_promotion(code)
@@ -86,7 +100,7 @@ module Promotions
       end
 
       def generate_code
-        "fame" + available_characters.sample(5).join
+        prefix + available_characters.sample(5).join
       end
 
       # random string should be generated and 4-5 alpha characters
