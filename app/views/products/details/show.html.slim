@@ -222,6 +222,8 @@ hr
 
 /! PRODUCT SIZES PANEL
 #product-size-content.product-side-panel
+  button.close-btn
+    = image_tag "cross.png", alt: 'close button'
   .sizes-container.grey
     .row
       .col-md-12.recommended
@@ -249,6 +251,8 @@ hr
 
 
 #product-color-content.product-side-panel
+  button.close-btn
+    = image_tag "cross.png", alt: 'close button'
   .sizes-container.grey
     .row
       .col-md-12.recommended
@@ -264,7 +268,7 @@ hr
     .row
       .col-md-12.custom
         h2=  "Custom Colors +#{@product.custom_color_price}"
-        
+
         - @product.custom_color_options.each_slice(2) do |colors|
             - colors.each do |color|
               .col-md-6
@@ -275,6 +279,8 @@ hr
 
 - if @product.customizable?
   #product-customizations-content.product-side-panel
+    button.close-btn
+      = image_tag "cross.png", alt: 'close button'
     .col-md-12
       h2 Customize Your Dress
 
