@@ -123,5 +123,15 @@ module FameAndPartners
       Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::BridesmaidsCount
       Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::BridesmaidPartyMember
     end
+
+    config.allow_cors = true
+    if config.allow_cors
+      config.middleware.insert_before 0, "Rack::Cors" do
+        allow do
+          origins '*'
+          resource '*', :headers => :any, :methods => [:get, :post, :options]
+        end
+      end
+    end
   end
 end
