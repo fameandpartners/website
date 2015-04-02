@@ -44,7 +44,7 @@ z.list-group-item.customization-option  {
 
 @media(max-width: 768px){
 	.screen-height {
-		height:100vh;
+		height:80vh;
 	}
 }
 
@@ -70,6 +70,20 @@ z.list-group-item.customization-option  {
 			font-weight:600;
 			margin-top:1.333333em;
 		}
+
+  @media(max-width: 490px){
+
+    h2 {
+      padding-top: 30px
+    }
+  }
+}
+
+.divider {
+  @media(max-width: 768px){
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 }
 
 .btn-customize {
