@@ -340,16 +340,18 @@ li.shop {
 	width: 150px !important;
 }
 
+
 .account-dropdown {
 	position: relative;
 }
 
 .account {
 	background-color: white;
+	width: 150px;
 
 	ul {
 		list-style: none;
-		padding: 20px 0 0 0;
+		padding: 10px 0 0 0;
 
 		li {
 			padding-bottom: 2px;
