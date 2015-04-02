@@ -13,6 +13,7 @@ gem 'whenever'
 gem 'psych', '~> 1.3.4'
 gem 'active_model_serializers'
 gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
+gem 'rack-cors'
 
 gem 'acts-as-taggable-on'
 gem 'rmagick'
