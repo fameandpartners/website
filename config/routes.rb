@@ -52,7 +52,7 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses'  => redirect('/amfam-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
-    get '/prom' => redirect('/prom-collection')
+    get '/prom' => 'statics#prom_lp', :as => :prom_lp
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
