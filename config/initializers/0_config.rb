@@ -25,7 +25,7 @@ configatron.links do |links|
   links.rss       = ''
 end
 
-configatron.cache.expire do
+configatron.cache.expire do |expire|
   expire.quickly  = 15.minutes
   expire.normally = 1.hour
   expire.long     = 1.day
