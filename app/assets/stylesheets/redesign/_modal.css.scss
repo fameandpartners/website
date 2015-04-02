@@ -258,9 +258,10 @@
 .vex-theme-flat-attack .vex-content .vex-dialog-buttons .btn {
   background-image: url('modal-close.png');
   background-repeat: no-repeat;
-  color: black;
+  color: transparent;
   background-size: cover;
   height: 40px;
   margin-right: 10px;
   margin-top: 5px;
+  padding: 10px 24px 10px 15px !important;
 }

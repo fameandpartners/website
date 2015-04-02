@@ -240,10 +240,6 @@ z.list-group-item.customization-option  {
     margin-bottom:100px;
   }
 
-	img {
-		width: 100%;
-	}
-
 	h2 {
 		text-align:center;
 		font-size:1.222222em;
@@ -362,9 +358,8 @@ z.list-group-item.customization-option  {
   	background-color:#000000;
   }
 
-  .image-box {
-    img {
-    }
+  img {
+    width: 100%;
   }
 }
 
@@ -573,7 +568,7 @@ z.list-group-item.customization-option  {
     img {
       height: 250px;
       width: 245px;
-       display: block;
+      display: block;
       margin-right: auto;
       margin-left: auto;
     }
@@ -603,4 +598,20 @@ z.list-group-item.customization-option  {
 
 .btn-clear-customizations:hover {
   background-color: #333333 !important;
+}
+
+.close-btn {
+  border: none;
+  background-color: transparent;
+  float: right;
+  margin-top: -2px;
+
+  img {
+    width: 20px !important;
+    height: 20px;
+  }
+}
+
+.recommended {
+  float: none;
 }
