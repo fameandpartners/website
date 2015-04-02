@@ -19,7 +19,7 @@ ruby:
   = raw init_items_counter_sync
   = raw init_moodboard_counter_sync
 
-- cache [:layout, :header], expires_in: configatron.cache.expire.long do
+- cache [:layout, :header, spree_user_signed_in?], expires_in: configatron.cache.expire.long do
   header
     .nav-menu.nav-alert-top
       .container-fluid.nav-menu-container
@@ -189,5 +189,3 @@ ruby:
           li#cart-trigger.menu-item
             = link_to spree.checkout_path, class: 'menu-item--link' do
               | cart&nbsp;
-              /|cart:&nbsp;
-              /= current_order.item_count

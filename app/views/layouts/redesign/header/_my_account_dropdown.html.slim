@@ -1,4 +1,4 @@
-- if spree_current_user
+- if spree_user_signed_in?
   a.menu-item--link.active-hover href=profile_path
     | my account
   .account-menu.mega-menu.hidden-sm.account-list
@@ -9,7 +9,7 @@
         li
           = link_to 'My Orders', user_orders_path
         / li
-          / = link_to 'Style Profile', user_style_profile_path(:site_version => current_site_version.code, :user_id => spree_current_user.id)
+          / = link_to 'Style Profile', user_style_profile_path(:site_version => current_site_version.code)
         li
           a href="/logout" LOGOUT
 - else
