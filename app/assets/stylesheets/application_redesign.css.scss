@@ -122,12 +122,17 @@ h1.edit-title {
 
 .cd-top {
   background: rgba(0, 0, 0, 0.8) url(top.png) no-repeat center 50%;
+  display: none;
 }
 
 .zopim {
   @media(max-width: 990px){
     display:none;
   }
+}
+
+.page-title {
+  background-color: #eeddf0;
 }
 
 /*

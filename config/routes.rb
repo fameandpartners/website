@@ -29,22 +29,15 @@ FameAndPartners::Application.routes.draw do
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-    get '/nylonxfame' => 'statics#nylonxfame'
-    get '/renxfame'   => 'statics#renxfame'
-    get '/lilyxfame'  => 'statics#lilyxfame'
-    get '/maryxfame'  => 'statics#maryxfame'
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirl2015-terms-and-conditions'  => 'statics#fashion_it_girl_terms_and_conditions'
     get '/nyfw-comp-terms-and-conditions'  => 'statics#nyfw_comp_terms_and_conditions'
     get '/fashionitgirl2015-competition'  => 'statics#fashion_it_girl_competition'
-    get '/girlfriend-formal-dresses' => 'statics#girlfriendxfame', :as => :girlfriendxfame
-    get '/girlfriend' => 'statics#girlfriendxfame'
+
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/sale-dresses' => 'statics#sale', :as => :sale
-
-    get '/christmas-gift' => 'statics#christmas_gift', :as => :christmas_gift
     get '/fame2015' => 'statics#fame2015', :as => :fame2015
 
 
@@ -59,7 +52,7 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses'  => redirect('/amfam-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
-    get '/prom' => redirect('/prom-collection')
+    get '/prom' => 'statics#prom_lp', :as => :prom_lp
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
@@ -70,8 +63,6 @@ FameAndPartners::Application.routes.draw do
     scope '/dresses', module: 'personalization' do
       get '/custom-:product_slug', to: 'products/details#show'
       get '/styleit-:product_slug', to: 'products/details#style'
-      #get '/custom-:product_slug', to: 'products#show'
-      #get '/styleit-:product_slug', to: 'products#style'
     end
 
     scope '/user_cart', module: 'user_cart' do
@@ -93,10 +84,6 @@ FameAndPartners::Application.routes.draw do
       get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
       get '/colour' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
       get '/color' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
-
-      # get '/colour/:colour' => 'spree/products#index'
-      # get '/color/:colour' => 'spree/products#index'
-      # get '/body-shape/:bodyshape' => 'spree/products#index'
 
       get '/:event/:style' => 'spree/products#index'
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
@@ -124,10 +111,6 @@ FameAndPartners::Application.routes.draw do
     get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
     get '/featured-bloggers/:id' => 'celebrities#show', as: 'featured_blogger'
 
-    #resources :line_items, only: [:create, :edit, :update, :destroy] do
-    #  post 'move_to_wishlist', on: :member
-    #end
-
     resource :product_variants, only: [:show]
 
     scope '/collection' do
@@ -140,8 +123,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/quick_view/:id' => 'spree/products#quick_view'
     post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
-
-    #post '/product_personalizations' => 'product_personalizations#create', constraints: proc{ |request| request.format.js? }
 
     get 'my-boutique' => 'boutique#show', :as => :my_boutique
     get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
@@ -326,25 +307,9 @@ FameAndPartners::Application.routes.draw do
       get 'stock_invent/auth'           => 'stock_invent#google_auth',   as: :stock_invent_access_token_request
       get 'stock_invent/auth_callback'  => 'stock_invent#auth_callback', as: :stock_invent_google_auth_callback
 
-      #resources :customisation_types do
-      #  collection do
-      #    post :update_positions
-      #    post :update_values_positions
-      #  end
-      #end
-      #delete '/customisation_values/:id', :to => "customisation_values#destroy", :as => :customisation_value
-
-      #resources :products do
-      #  resources :product_customisations
-      #  resources :product_customisation_types, only: :destroy
-      #  resources :product_customisation_values, only: :destroy
-      #end
       resources :products do
         resources :customisation_values
       end
-      #resources :customisation_values do
-      #  post :update_positions, on: :collection
-      #end
 
       resources :products do
         resources :moodboard_items do
@@ -359,18 +324,11 @@ FameAndPartners::Application.routes.draw do
       end
 
       resource :styles, only: [:show, :update]
-      #resources :styles, only: [:index, :update] do
-      #  resources :style_images, only: [:update]
-      #end
-      #delete '/styles/:style_name/style_images/:position', to: "style_images#destroy", as: :delete_style_image
 
       namespace :blog do
         resources :promo_banners
         resources :categories
         resources :events
-
-        #resources :red_carpet_events, only: [:index] do
-        #end
 
         resources :assets, only: [:create, :destroy, :index]
 
@@ -417,7 +375,7 @@ FameAndPartners::Application.routes.draw do
           resources :accessories, controller: 'product_accessories' do
             post :update_positions, on: :collection
           end
-          #resource :style_profile, only: [:edit, :update]
+
           resources :images, only: [:index, :new, :create, :edit, :update, :destroy] do
             collection do
               post :update_positions

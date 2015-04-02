@@ -1,0 +1,16 @@
+- if spree_current_user
+  a.menu-item--link.active-hover href=profile_path
+    | my account
+  .account-menu.mega-menu.hidden-sm.account-list
+    .account.container-fluid
+      ul
+        li
+          = link_to 'My Details', profile_path
+        li
+          = link_to 'My Orders', user_orders_path
+        / li
+          / = link_to 'Style Profile', user_style_profile_path(:site_version => current_site_version.code, :user_id => spree_current_user.id)
+        li
+          a href="/logout" LOGOUT
+- else
+  = link_to 'my account', profile_path, :class =>"menu-item--link active-hover"

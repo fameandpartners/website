@@ -21,7 +21,7 @@
           .btn-group-radio
             input#optionsRadios1 name="optionsRadios" type="radio" value="option1"
             button.btn.btn-block.btn-md
-              label for="optionsRadios1" 
+              label.credit for="optionsRadios1"
                 | Credit Card
 
       - if @credit_card_gateway && @pay_pal_method
@@ -30,42 +30,11 @@
 
       - if @pay_pal_method
         .col-sm-4.text-center = paypal_express_button
-      / input#optionsRadios2 name="optionsRadios" type="radio" value="option2"
-      / button.btn
-      /   label.text-white for="optionsRadios2" 
-      /     | Pay with PayPal
-  / - if @pay_pal_method
-  /   hr
-  /   br
-  /   .row
-  /     .col-md-12
-  /       p.small You will be directed to PayPal to make this purchase.
-  /       button.btn.btn-black.btn-block Continue to PayPal
-  /       = paypal_express_button
 
   - if @credit_card_gateway
-    / br
-    / hr
-    / .card-wrapper
-    / br
 
     = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
       = render 'shared/error_messages', :target => @order, :view => "payment"
 
       = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
       = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
-
-    / .row
-      / .col-md-12.form-group
-      /   p 
-      /     label
-      /       input type="checkbox" name='newsletter_subscribe'
-      /       span Get weekly style tips and special discounts
-      /   p.last 
-      /     label
-      /       input type="checkbox" id='terms_and_conditions' name='terms_and_conditions' checked="true"
-      /       span
-      /         'I agree to the 
-      /         = link_to 'Terms&Conditions', terms_path, target: '_blank'
-      /   .place-order
-      /     button.btn.btn-black data-require='terms_and_conditions' data-loading="Placing..." Place My order
