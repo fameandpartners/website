@@ -33,47 +33,14 @@
 
       .grid-container
         .place-order.text-right
-          p 
+          p
             label
               input type="checkbox" name='newsletter_subscribe'
               span Get weekly style tips and special discounts
-          p.last 
+          p.last
             label
               input type="checkbox" id='terms_and_conditions' name='terms_and_conditions' checked="true"
               span
-                'I agree to the 
+                'I agree to the
                 = link_to 'Terms&Conditions', terms_path, target: '_blank'
           button.btn.pink data-require='terms_and_conditions' data-loading="Placing..." Place My order
-
-/.style-tips.border
-/  .grid-container
-/    .grid-50
-/      .style-tip-block
-/        .image = image_tag 'http://placehold.it/56x70', width: 56, height: 70, alt: ''
-/        .input
-/          input type="checkbox" name="style"
-/          label
-/            ' Add Style Notes
-/            span $4.95
-/    .grid-50
-/      .style-tip-block
-/        .image = image_tag 'http://placehold.it/56x70', width: 56, height: 70, alt: ''
-/        .input
-/          input type="checkbox" name="style"
-/          label
-/            ' Add Style Notes
-/            span $4.95
-/.newsletters.border
-/  .grid-container
-/    .grid-50
-/      .newsletter-block
-/        .input
-/          input type="checkbox" name="style"
-/          label Subscribe to our newsletter
-/    .grid-50
-/      .newsletter-block
-/        .input
-/          input type="checkbox" name="style"
-/          label
-/            ' Accept the
-/            = link_to 'Terms and Conditions', '#'

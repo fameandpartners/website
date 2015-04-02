@@ -1,11 +1,8 @@
 = content_for :inline_javascript do
   | page.initCheckoutEditPage();
 
-.checkout-title
+.checkout-title.page-title
   .checkout-title--content.container.text-center
-    /a.pull-left.back-to-shop href="#"
-      span.fa.fa-angle-left.margin-right-10
-        Return to Store
     h1.checkout-h1 Checkout
 
 .checkout.page-content
@@ -17,7 +14,7 @@
 
         .checkout-step data-name="payment"
           = render 'payment_step', current_step: current_step
-      
+
       .col-md-4
         - cart = UserCart::UserCartResource.new(order: current_order).read
         = render 'spree/checkout/order_summary', cart: cart
