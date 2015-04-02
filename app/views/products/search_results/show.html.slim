@@ -33,12 +33,13 @@ ruby:
     - if @search_collection.blank?
       .row.relative
         .col.col-md-12
-          | You need to search for something
+          | Um, you need to actually search for something
 
     - else
       - if @search_collection.none?
         .row.relative
-          .col.col-md-12= "We couldn't find any dresses like '#{ @search_collection.query_string }'"
+          .col.col-md-12
+            p Don't sweat it. <a href="/dresses">Browse our dresses</a>.          
 
       - @search_collection.products.each_slice(4) do |products|
         .row.relative
