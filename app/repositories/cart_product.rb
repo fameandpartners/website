@@ -39,6 +39,8 @@ class Repositories::CartProduct
 
       result
     end
+  rescue
+    OpenStruct.new({})
   end
   cache_results :read
 
@@ -62,7 +64,7 @@ class Repositories::CartProduct
     end
 
     def variant
-      @variant ||= Repositories::ProductVariants.new(product_id: @product.id).read(@line_item.variant_id)
+      @variant ||= Repositories::ProductVariants.read(@line_item.variant_id)
     end
 
     def color_id

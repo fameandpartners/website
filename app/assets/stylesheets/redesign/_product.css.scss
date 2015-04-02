@@ -28,6 +28,10 @@ z.list-group-item.customization-option  {
   .btn-secondary {
     height: 45px;
     padding: 0;
+
+    &:hover {
+      background-color: #355e6d;
+    }
   }
 
   .secondary-actions .col-md-6:last-child {
@@ -40,7 +44,7 @@ z.list-group-item.customization-option  {
 
 @media(max-width: 768px){
 	.screen-height {
-		height:100vh;
+		height:80vh;
 	}
 }
 
@@ -66,6 +70,20 @@ z.list-group-item.customization-option  {
 			font-weight:600;
 			margin-top:1.333333em;
 		}
+
+  @media(max-width: 490px){
+
+    h2 {
+      padding-top: 30px
+    }
+  }
+}
+
+.divider {
+  @media(max-width: 768px){
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 }
 
 .btn-customize {
@@ -123,7 +141,7 @@ z.list-group-item.customization-option  {
 	background-color: transparent;
 }
 
-.select2, .select2-container, .select2-container--default, .selection, .select2-selection, .select2-selection--single ,.select2-selection__rendered, .select2-selection__arrow, .select2-selection__rendered, .select2-search__field{
+.select2, .select2-container, .select2-container--default, .selection, .select2-selection, .select2-selection--single ,.select2-selection__rendered, .select2-selection__arrow, .select2-selection__rendered, .select2-search__field, button, .btn{
   &:focus {
     outline:none;
   }
@@ -225,6 +243,7 @@ z.list-group-item.customization-option  {
 	position: fixed;
 	top: 0;
 	background-color:#FFFFFF;
+	margin-bottom:20px;
 
   	@media(max-width: 768px){
   		right:-130%;
@@ -232,12 +251,8 @@ z.list-group-item.customization-option  {
   	}
 
   @media screen and (max-width: 991px){
-    margin-bottom:70px;
+    margin-bottom:100px;
   }
-
-	img {
-		width: 100%;
-	}
 
 	h2 {
 		text-align:center;
@@ -357,9 +372,8 @@ z.list-group-item.customization-option  {
   	background-color:#000000;
   }
 
-  .image-box {
-    img {
-    }
+  img {
+    width: 100%;
   }
 }
 
@@ -545,8 +559,11 @@ z.list-group-item.customization-option  {
     padding-top: 10px;
   }
 
-  .col-md-10 {
+  .col-md-10.white-background {
     background-color: white;
+  }
+
+  .col-md-10 {
     margin-bottom: 40px;
   }
 
@@ -565,7 +582,7 @@ z.list-group-item.customization-option  {
     img {
       height: 250px;
       width: 245px;
-       display: block;
+      display: block;
       margin-right: auto;
       margin-left: auto;
     }
@@ -579,5 +596,36 @@ z.list-group-item.customization-option  {
 	.btn-black.customization-option {
 		background-color: #000000;
 	}
+}
 
+.btn-black:hover {
+  background-color: #333333;
+}
+
+.btn-fit-guide:hover {
+  background-color: #355e6d;
+}
+
+.customization-option:hover {
+  background-color: #355e6d !important;
+}
+
+.btn-clear-customizations:hover {
+  background-color: #333333 !important;
+}
+
+.close-btn {
+  border: none;
+  background-color: transparent;
+  float: right;
+  margin-top: -2px;
+
+  img {
+    width: 20px !important;
+    height: 20px;
+  }
+}
+
+.recommended {
+  float: none;
 }

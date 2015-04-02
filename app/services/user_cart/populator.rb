@@ -35,12 +35,14 @@ class  UserCart::Populator
     order.reload
 
     return OpenStruct.new({
-      success: false,
+      success: true,
       product: product,
       cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
-  #rescue
-  #  return OpenStruct.new({ success: false })
+  rescue Errors::ProductOptionNotAvailable => e
+    OpenStruct.new({ success: false, message: e.message })
+  rescue Exception => e
+    OpenStruct.new({ success: false, message: e.message })
   end
 
   private
@@ -112,12 +114,13 @@ class  UserCart::Populator
 
     def product_size
       @product_size ||= begin
-        size = product_options.sizes.default.detect{|size| size.id == product_attributes[:size_id].to_i}
-        if size.present?
+        product_size_id = product_attributes[:size_id].to_i
+        if (size = product_options.sizes.default.detect{|size| size.id == product_size_id}).present?
           size.custom = false
-        else
-          size = product_options.sizes.extra.detect{|size| size.id == product_attributes[:size_id].to_i}
+        elsif (size = product_options.sizes.extra.detect{|size| size.id == product_size_id}).present?
           size.custom = true
+        else
+          raise Errors::ProductOptionNotAvailable.new("product size ##{ product_size_id } not available")
         end
 
         size
@@ -126,12 +129,13 @@ class  UserCart::Populator
 
     def product_color
       @product_color ||= begin
-        color = product_options.colors.default.detect{|color| color.id == product_attributes[:color_id].to_i}
-        if color.present?
+        product_color_id = product_attributes[:color_id].to_i
+        if (color = product_options.colors.default.detect{|color| color.id == product_color_id }).present?
           color.custom = false
-        else
-          color = product_options.colors.extra.detect{|color| color.id == product_attributes[:color_id].to_i}
+        elsif (color = product_options.colors.extra.detect{|color| color.id == product_color_id }).present?
           color.custom = true
+        else
+          raise Errors::ProductOptionNotAvailable.new("product color ##{ product_color_id } not available")
         end
 
         color
@@ -140,9 +144,18 @@ class  UserCart::Populator
 
     def product_customizations
       @product_customizations ||= begin
-        (product_attributes[:customizations] || []).collect do |id|
-          product_options.customizations.all.detect{|item| item.id == id}
-        end.compact
+        customizations = []
+        Array.wrap(product_attributes[:customizations_ids]).compact.each do |id|
+          next if id.blank?
+          customization = product_options.customizations.all.detect{|item| item.id == id.to_i}
+          if customization.blank?
+            raise Errors::ProductOptionNotAvailable.new("product customization ##{ id } not available")
+          else
+            customizations.push(customization)
+          end
+        end
+
+        customizations
       end
     end
 

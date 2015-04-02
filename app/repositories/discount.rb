@@ -71,7 +71,7 @@ class Repositories::Discount
             existing_discount = all_discounts[key][discount.discountable_id]
             if existing_discount.present? && (existing_discount.amount > discount.amount)
               # we already have saved better discount
-            else
+            elsif discount.amount.to_i > 0
               all_discounts[key][discount.discountable_id] = OpenStruct.new(
                 amount: discount.amount,
                 size:   discount.size

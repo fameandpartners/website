@@ -3,6 +3,7 @@ Spree::Promotion.class_eval do
     return false if expired? || usage_limit_exceeded?(order)
 
     return false if order.has_personalized_items? && !eligible_to_custom_order?
+
     return false if order.has_items_on_sale? && !eligible_to_sale_order?
 
     rules_are_eligible?(order, {})
@@ -41,7 +42,14 @@ Spree::Promotion.class_eval do
   private
 
     # note - this methods should be set in db or somewhere else.
+    #
+    # Spree::Calculator::PersonalizationDiscount designed to hack orders with personalizations,
+    # so it can pass
     def eligible_to_custom_order?
+      calculators = self.actions.map{|action| action.calculator.try(:type) }.compact.uniq
+
+      return true if calculators.include?('Spree::Calculator::PersonalizationDiscount')
+
       self.can_apply_to_any_order?
     end
 

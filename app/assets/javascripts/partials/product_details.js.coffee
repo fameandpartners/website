@@ -20,19 +20,26 @@ page.initProductDetailsPage = (options = {}) ->
   slider     = new helpers.ProductImagesSlider(options.slider.container, options.slider.images, options.slider.options)
   selector   = new window.helpers.ProductVariantsSelector(options.selector)
 
+  # if user selects 'red' color, then change path to /dresses/slug/red
+  # don't do this for products without color
   product_paths = options.product_paths
-
-  # change images colors
-  selector.on('change', (event, data) ->
-    slider.showImagesWithColor(data.color_id)
-
+  changeUrlToSelectedColor = (color_id) ->
     if product_paths
-      if product_paths[data.color_id]
-        url = product_paths[data.color_id]
+      if product_paths[color_id]
+        url = product_paths[color_id]
       else
         url = product_paths.default
 
       window.history.pushState({ path: url }, '', url)
+
+  # ensure location color according to preselected color
+  selected = selector.getValue()
+  changeUrlToSelectedColor(selected.color_id) if selected.color_id
+
+  # change images colors
+  selector.on('change', (event, data) ->
+    slider.showImagesWithColor(data.color_id)
+    changeUrlToSelectedColor(data.color_id)
   )
 
   # init buy button
@@ -51,7 +58,7 @@ page.initProductDetailsPage = (options = {}) ->
           variant_id: (selected.variant || {})['id']
         }
         app.shopping_cart.one('change', () ->
-          window.helpers.showAlert(message: 'Added to Cart', type: 'success')
+          window.helpers.showAlert(title: 'We\'ve got you!', message: 'Added to Cart', type: 'success')
           window.app.shopping_bag.open()
         )
         app.shopping_cart.addProduct(product_data)
@@ -62,7 +69,7 @@ page.initProductDetailsPage = (options = {}) ->
       e.preventDefault()
       window.helpers.showModal(title: 'Size Guide', className: 'fit-guide', container: options.fitguideContainer)
     )
-    
+
   # init moodboard button
   if options.wishlistButton
     $wishlist_button = $(options.wishlistButton)
@@ -72,9 +79,9 @@ page.initProductDetailsPage = (options = {}) ->
       if !app.user_signed_in
         window.redirectToLoginAndBack()
         return
-      
+
       # unless $(this).data('user-present')
-      # redirect to login 
+      # redirect to login
       selected = selector.getCurrentSelection()
       wishlist_item_data = {
         color_id: selected.color_id,

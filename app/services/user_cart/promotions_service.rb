@@ -54,7 +54,10 @@ class UserCart::PromotionsService
         return false
       end
 
-      order.update_attributes(coupon_code: promotion.code)
+      # NOTE: coupon_code - virtual attribute, calling update attributes for it useless
+      # unless we have some tricky filters/callbacks
+      #order.update_attributes(coupon_code: promotion.code)
+      order.coupon_code = promotion.code # its working
 
       # check if coupon code is already applied
       if order.adjustments.promotion.eligible.detect { |p| p.originator.promotion.code == promotion.code }.present?

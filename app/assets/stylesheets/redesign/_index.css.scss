@@ -141,6 +141,10 @@
 		text-transform: uppercase;
 		font-size: 8rem;
 		margin-top: 45px;
+
+		@media(max-width: 480px){
+			font-size: 6rem;
+		}
 	}
 
 	.lead {
@@ -516,3 +520,7 @@
 		}
 	}
 }
+
+.list-inline li a:hover {
+		color: #355e6d;
+	}

@@ -7,7 +7,7 @@
       <div class="media">
         <div class="media-left media-middle">
           <a href="<%= product.path %>">
-            <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.small %>">
+            <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.large %>">
           </a>
         </div>
         <div class="media-body media-middle">
@@ -26,7 +26,7 @@
 <form class="promo-code" action="#">
   <label for=""> Promo Code</label>
   <div class="input-group">
-    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit btn-reset">Submit</button></span>
+    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit btn-reset">Apply</button></span>
   </div>
 </form>
 <p>

@@ -15,8 +15,6 @@ describe 'authentication process', :type => :feature do
         end
         click_button 'Login'
         expect(page).to_not have_content 'Invalid email or password.'
-        # expect(page).to have_content 'sign out'
-        # expect(page).to have_content user.first_name        
       end
     end
 

@@ -226,7 +226,7 @@ Spree::Product.class_eval do
 
   # properties have to be managed else where... two database requests for simple string?
   def color_customization
-    property('color_customization').to_s == 'yes'
+    property('color_customization').to_s.downcase == 'yes'
   end
 
   def delete
@@ -332,7 +332,7 @@ Spree::Product.class_eval do
 
   def discount
     return @discount if instance_variable_defined?('@discount')
-    @discount = Repositories::Discount.read(self.class, self.id)
+    @discount = Repositories::Discount.get_product_discount(self.id)
   end
 
 #  def discount

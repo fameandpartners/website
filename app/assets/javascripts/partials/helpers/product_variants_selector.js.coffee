@@ -20,7 +20,6 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @product_id = options.product_id
     @custom   = { id: options.custom_id, product_id: @product_id, count_on_hand: 0, fast_delivery: false, available: true }
     @variants = options.variants
-    @selected = options.preselected || {}
 
     @sizeInput = new window.inputs.ProductSizeIdSelector(options.size_input)
     @colorInput = new window.inputs.ProductColorIdSelector(options.color_input)

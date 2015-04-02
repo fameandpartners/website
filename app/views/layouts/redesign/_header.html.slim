@@ -19,172 +19,173 @@ ruby:
   = raw init_items_counter_sync
   = raw init_moodboard_counter_sync
 
-header
-  .nav-menu.nav-alert-top
-    .container-fluid.nav-menu-container
-      .masthead.pull-left.hidden-xs
-        = link_to '/' do
-          = image_tag src='images/new-logo.svg', :class => 'nav-logo', :alt => 'Fame &amp; Partners'
+- cache [:layout, :header, spree_user_signed_in?], expires_in: configatron.cache.expire.long do
+  header
+    .nav-menu.nav-alert-top
+      .container-fluid.nav-menu-container
+        .masthead.pull-left.hidden-xs
+          = link_to '/' do
+            = image_tag src='images/new-logo.svg', :class => 'nav-logo', :alt => 'Fame &amp; Partners'
 
-      .masthead.pull-left.visible-xs
-        = link_to '/' do
-          = image_tag src='images/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame &amp; Partners'
+        .masthead.pull-left.visible-xs
+          = link_to '/' do
+            = image_tag src='images/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame &amp; Partners'
 
-      ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
-        li.shop.menu-item
-          a.menu-item--link.active-hover href="#"
-            | Shop
-          .mega-menu.hidden-sm
-            .mega-menu--main
-              .container-fluid.max-width-100
-                .row
-                  .col-md-3.all-dresses
-                    = button_to 'View all dresses', dresses_path, class: 'btn btn-black', method: :get
-                  .col-md-3
-                    p.button-grey-text.menu-main-promotions
-                      span.packing-box.menu-icon
-                      | Free Shipping
-                  .col-md-3
-                    p.button-grey-text.menu-main-promotions
-                      span.arrows.menu-icon
-                      | Free Returns
-                  .col-md-3
-                    p.button-grey-text.menu-main-promotions
-                      span.fit-guarantee.menu-icon
-                      | Fit Guarantee
-            .mega-menu--secondary
-              .container-fluid.max-width-100
-                .row
-                  .col-md-3.col-lg-2.col-md-offset-3
-                    h4.link-header Events
-                    ul.mega-menu-list
-                      li.mega-menu-list--item
-                        = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
-                      li.mega-menu-list--item
-                        = link_to 'Bridesmaid Dresses', bridesmaid_lp_path, title: 'Bridesmaid Dresses'
-                      li.mega-menu-list--item
-                        = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses'
-                      li.mega-menu-list--item
-                        a href="/dresses/wedding" Wedding Dresses
-                      li.mega-menu-list--item
-                        a href="/dresses/homecoming" Homecoming Dresses
-                      li.mega-menu-list--item
-                        a href="/dresses/ball" Ball Dresses
-                      li.mega-menu-list--item
-                        a href="/dresses/sweet-16" Sweet 16 Dresses
-                      li.mega-menu-list--item
-                        a href="/dresses/birthday" Birthday Dresses
-                      li.mega-menu-list--item
-                        a href="/dresses/debutante" Debutante Dresses
-                      li.mega-menu-list--item
-                        a href="/dresses/graduation" Graduation Dresses
-                      li.mega-menu-list--item
-                        a href="/dresses/special-events" Special Event Dresses
+        ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
+          li.shop.menu-item
+            a.menu-item--link.active-hover href="#"
+              | Shop
+            .mega-menu.hidden-sm
+              .mega-menu--main
+                .container-fluid.max-width-100
+                  .row
+                    .col-md-3.all-dresses
+                      = button_to 'View all dresses', dresses_path, class: 'btn btn-black', method: :get
+                    .col-md-3
+                      p.button-grey-text.menu-main-promotions
+                        span.packing-box.menu-icon
+                        | Free Shipping
+                    .col-md-3
+                      p.button-grey-text.menu-main-promotions
+                        span.arrows.menu-icon
+                        | Free Returns
+                    .col-md-3
+                      p.button-grey-text.menu-main-promotions
+                        span.fit-guarantee.menu-icon
+                        | Fit Guarantee
+              .mega-menu--secondary
+                .container-fluid.max-width-100
+                  .row
+                    .col-md-3.col-lg-2.col-md-offset-3
+                      h4.link-header Events
+                      ul.mega-menu-list
+                        li.mega-menu-list--item
+                          = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
+                        li.mega-menu-list--item
+                          = link_to 'Bridesmaid Dresses', bridesmaid_lp_path, title: 'Bridesmaid Dresses'
+                        li.mega-menu-list--item
+                          = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses'
+                        li.mega-menu-list--item
+                          a href="/dresses/wedding" Wedding Dresses
+                        li.mega-menu-list--item
+                          a href="/dresses/homecoming" Homecoming Dresses
+                        li.mega-menu-list--item
+                          a href="/dresses/ball" Ball Dresses
+                        li.mega-menu-list--item
+                          a href="/dresses/sweet-16" Sweet 16 Dresses
+                        li.mega-menu-list--item
+                          a href="/dresses/birthday" Birthday Dresses
+                        li.mega-menu-list--item
+                          a href="/dresses/debutante" Debutante Dresses
+                        li.mega-menu-list--item
+                          a href="/dresses/graduation" Graduation Dresses
+                        li.mega-menu-list--item
+                          a href="/dresses/special-events" Special Event Dresses
 
 
-                  .col-md-3.col-lg-2
-                    h4.link-header Style
-                    ul.mega-menu-list
-                      li.mega-menu-list--item= link_to 'Two-Piece', build_taxon_path('Two Piece'), title: "Two-Piece Dresses"
-                      li.mega-menu-list--item= link_to 'One Shoulder', build_taxon_path('One-Shoulder'), title: "One Shoulder Dresses"
-                      li.mega-menu-list--item= link_to 'Strapless', build_taxon_path('Strapless'), title: "Strapless Dresses"
-                      li.mega-menu-list--item= link_to 'V-Neck', build_taxon_path('V-Neck'), title: "V-Neck Dresses"
-                      li.mega-menu-list--item= link_to 'Split', build_taxon_path('Split'), title: "Split Dresses"
-                      li.mega-menu-list--item= link_to 'Backless', build_taxon_path('Open-Back'), title: "Open Back Dresses"
-                      li.mega-menu-list--item= link_to 'Lace', build_taxon_path('Lace'), title: "Lace Dresses"
+                    .col-md-3.col-lg-2
+                      h4.link-header Style
+                      ul.mega-menu-list
+                        li.mega-menu-list--item= link_to 'Two-Piece', build_taxon_path('Two Piece'), title: "Two-Piece Dresses"
+                        li.mega-menu-list--item= link_to 'One Shoulder', build_taxon_path('One-Shoulder'), title: "One Shoulder Dresses"
+                        li.mega-menu-list--item= link_to 'Strapless', build_taxon_path('Strapless'), title: "Strapless Dresses"
+                        li.mega-menu-list--item= link_to 'V-Neck', build_taxon_path('V-Neck'), title: "V-Neck Dresses"
+                        li.mega-menu-list--item= link_to 'Split', build_taxon_path('Split'), title: "Split Dresses"
+                        li.mega-menu-list--item= link_to 'Backless', build_taxon_path('Open-Back'), title: "Open Back Dresses"
+                        li.mega-menu-list--item= link_to 'Lace', build_taxon_path('Lace'), title: "Lace Dresses"
 
-                  .col-md-3.col-lg-2
-                    h4.link-header= t('color')
-                    ul.mega-menu-list
-                      li.mega-menu-list--item= link_to "Black Dresses", colour_path('Black'), title: "Black Dresses"
-                      li.mega-menu-list--item= link_to "White / Ivory Dresses", colour_path('White'), title: "White / Ivory Dresses"
-                      li.mega-menu-list--item= link_to "Blue Dresses", colour_path('Blue'), title: "Blue Dresses"
-                      li.mega-menu-list--item= link_to "Pink Dresses", colour_path('Pink'), title: "Pink Dresses"
-                      li.mega-menu-list--item= link_to "Red Dresses", colour_path('Red'), title: "Red Dresses"
-                      li.mega-menu-list--item= link_to "Pastel Dresses", colour_path('Pastel'), title: "Pastel Dresses"
+                    .col-md-3.col-lg-2
+                      h4.link-header= t('color')
+                      ul.mega-menu-list
+                        li.mega-menu-list--item= link_to "Black Dresses", colour_path('Black'), title: "Black Dresses"
+                        li.mega-menu-list--item= link_to "White / Ivory Dresses", colour_path('White'), title: "White / Ivory Dresses"
+                        li.mega-menu-list--item= link_to "Blue Dresses", colour_path('Blue'), title: "Blue Dresses"
+                        li.mega-menu-list--item= link_to "Pink Dresses", colour_path('Pink'), title: "Pink Dresses"
+                        li.mega-menu-list--item= link_to "Red Dresses", colour_path('Red'), title: "Red Dresses"
+                        li.mega-menu-list--item= link_to "Pastel Dresses", colour_path('Pastel'), title: "Pastel Dresses"
 
-                  .col-md-3.col-lg-2
-                    h4.link-header= t('sale')
-                    ul.mega-menu-list
-                      - if Features.active?(:express_deliveries)
-                        li.mega-menu-list--item= link_to 'Express Delivery', express_delivery_path, title: 'Express Delivery'
-                      - if Features.active?(:sales)
-                        - if !sale_active?
-                          li.mega-menu-list--item= link_to 'Sale - Up to 80% Off', '/sale-dresses', title: 'Dresses On Sale'
-                        - else
-                          li.mega-menu-list--item= link_to "All on Sale", dresses_on_sale_path(:sale => 'all'), title: 'All Dresses on Sale'
-                          li.mega-menu-list--item= link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
-                          li.mega-menu-list--item= link_to "25 Percent Off", '/dresses/?sale=25', title: 'All Dresses 25% off'
-                          li.mega-menu-list--item= link_to "30 Percent Off", '/dresses/?sale=30', title: 'All Dresses 30% off'
-                          li.mega-menu-list--item= link_to "40 Percent Off", '/dresses/?sale=40', title: 'All Dresses 40% off'
-                          li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=50', title: 'All Dresses 50% off'
-                          li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=60', title: 'All Dresses 60% off'
-                          li.mega-menu-list--item= link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
+                    .col-md-3.col-lg-2
+                      h4.link-header= t('sale')
+                      ul.mega-menu-list
+                        - if Features.active?(:express_deliveries)
+                          li.mega-menu-list--item= link_to 'Express Delivery', express_delivery_path, title: 'Express Delivery'
+                        - if Features.active?(:sales)
+                          - if !sale_active?
+                            li.mega-menu-list--item= link_to 'Sale - Up to 80% Off', '/sale-dresses', title: 'Dresses On Sale'
+                          - else
+                            li.mega-menu-list--item= link_to "All on Sale", dresses_on_sale_path(:sale => 'all'), title: 'All Dresses on Sale'
+                            li.mega-menu-list--item= link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
+                            li.mega-menu-list--item= link_to "25 Percent Off", '/dresses/?sale=25', title: 'All Dresses 25% off'
+                            li.mega-menu-list--item= link_to "30 Percent Off", '/dresses/?sale=30', title: 'All Dresses 30% off'
+                            li.mega-menu-list--item= link_to "40 Percent Off", '/dresses/?sale=40', title: 'All Dresses 40% off'
+                            li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=50', title: 'All Dresses 50% off'
+                            li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=60', title: 'All Dresses 60% off'
+                            li.mega-menu-list--item= link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
 
-        - if Features.active?(:style_quiz)
+          - if Features.active?(:style_quiz)
+            li.menu-item
+              = link_to 'style quiz', '', class: 'menu-item--link'
+          li.shop.menu-item
+            a.menu-item--link.active-hover href="#"
+              | Edits
+            .mega-menu.hidden-sm.story-list
+              .stories.container-fluid
+
+                .col-md-3
+                  = link_to prom_collection_path do
+                    .image-container.real-prom
+                      = image_tag src='edits/real_prom/1_REALPROM-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
+                    p.text-center.edit-title Our Official Prom Collection
+
+                .col-md-3
+                  = link_to bridesmaid_collection_path do
+                    .image-container.bridesmaids
+                      = image_tag src='edits/BRIDESMAIDS/1_171114_F&P_-BRIDESMAIDS-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
+                    p.text-center.edit-title Our Beautiful Bridesmaids Collection
+
+                .col-md-3
+                  = link_to wicked_game_collection_path do
+                    .image-container
+                       = image_tag src='edits/AMFAM/1_141223_01_F&PAMFAM-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
+                    p.text-center.edit-title The Wicked Game Collection
+
+                .col-md-3
+                  = link_to break_hearts_collection_path do
+                    .image-container
+                      = image_tag src='edits/BREAK-HEARTS/1_141119_F&P_NYE-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
+                    p.text-center.edit-title Break Hearts not Bank Accounts
+
           li.menu-item
-            = link_to 'style quiz', '', class: 'menu-item--link'
-        li.shop.menu-item
-          a.menu-item--link.active-hover href="#"
-            | Edits
-          .mega-menu.hidden-sm.story-list
-            .stories.container-fluid
+            = link_to 'Blog', blog_path, class: 'menu-item--link'
 
-              .col-md-3
-                = link_to prom_collection_path do
-                  .image-container.real-prom
-                    = image_tag src='edits/real_prom/1_REALPROM-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
-                  p.text-center Our Official Prom Collection
+        ul.secondary.pull-right
+          - if Features.active?(:moodboard)
+              li.menu-item.hidden-xs.hidden-sm
+                = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
+                  span.visible-sm
+                    = image_tag "images/Heart.svg"
+                  span.hidden-sm.hidden-xs#moodboard-counter
+                    | Moodboard &nbsp;
+                    /| Moodboard: 0 &nbsp;
+                    /= "#{ current_user_moodboard.item_count }"
+          li.shop.menu-item.account-dropdown
+            = render "layouts/redesign/header/my_account_dropdown"
 
-              .col-md-3
-                = link_to bridesmaid_collection_path do
-                  .image-container.bridesmaids
-                    = image_tag src='edits/BRIDESMAIDS/1_171114_F&P_-BRIDESMAIDS-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
-                  p.text-center Our Beautiful Bridesmaids Collection
+          li.menu-item.hidden-xxs
+            a.menu-item--link.search href="#"
+              = image_tag "search.png"
+            .search-bar.invis
+              a.close-search href="#"
+                = image_tag "images/close.svg", alt: 'Close'
+              .container-fluid.search-form
+                .col-md-6.col-md-offset-3
+                  .col-md-10
+                    .input-group.margin-bottom-sm
+                      = form_tag search_path, method: :get do
+                        input.form-control name='q' placeholder=("Search here...") type="text"
+                        span
+                          button.invis-fix Enter
 
-              .col-md-3
-                = link_to wicked_game_collection_path do
-                  .image-container
-                     = image_tag src='edits/AMFAM/1_141223_01_F&PAMFAM-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
-                  p.text-center The Wicked Game Collection
-
-              .col-md-3
-                = link_to break_hearts_collection_path do
-                  .image-container
-                    = image_tag src='edits/BREAK-HEARTS/1_141119_F&P_NYE-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
-                  p.text-center Break Hearts not Bank Accounts
-
-        li.menu-item
-          = link_to 'Blog', blog_path, class: 'menu-item--link'
-
-      ul.secondary.pull-right
-        - if Features.active?(:moodboard) || current_user_moodboard.items.any?
-            li.menu-item.hidden-xs.hidden-sm
-              = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
-                span.visible-sm
-                  = image_tag "images/Heart.svg"
-                span.hidden-sm.hidden-xs#moodboard-counter
-                  | Moodboard:&nbsp;
-                  = "#{ current_user_moodboard.item_count }"
-        li.menu-item
-          = link_to profile_path, class: 'menu-item--link' do
-            | my account
-        li.menu-item.hidden-xxs
-          a.menu-item--link.search href="#"
-            = image_tag "search.png"
-          .search-bar.invis
-            a.close-search href="#"
-              = image_tag "images/close.svg", alt: 'Close'
-            .container-fluid.search-form
-              .col-md-6.col-md-offset-3
-                .col-md-10
-                  .input-group.margin-bottom-sm
-                    = form_tag search_path, method: :get do
-                      input.form-control name='q' placeholder=("Search here...") type="text"
-                      span
-                        button.invis-fix Enter
-
-        li#cart-trigger.menu-item
-          = link_to spree.checkout_path, class: 'menu-item--link' do
-            |cart:&nbsp;
-            = current_order.item_count
+          li#cart-trigger.menu-item
+            = link_to spree.checkout_path, class: 'menu-item--link' do
+              | cart&nbsp;

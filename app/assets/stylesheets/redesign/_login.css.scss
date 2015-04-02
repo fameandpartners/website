@@ -15,12 +15,18 @@
   margin-top: 3rem;
 }
 
-.login.new, .sign-up.new, .password-new {
-
-  @media(max-width: 768px){
-    margin-left: 2rem;
-    margin-right: 2rem;
+.btn-facebook.btn-md {
+  @media(max-width: 768px) {
+    font-size: 12px !important;
+    padding-left: 50px;
   }
+
+  &:hover {
+    background-color: #627AAD;
+  }
+}
+
+.login.new, .sign-up.new, .password-new {
 
   .low-btn {
     font-size: 1rem;
@@ -42,4 +48,7 @@
     margin-top: 6px;
   }
 
+  .col-md-12.form-group {
+    padding-right: 0;
+  }
 }

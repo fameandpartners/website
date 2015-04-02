@@ -36,7 +36,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         message = "Use this promocode for your next killer dress: #{@opts.promocode}."
       else
         message = "Thanks for joining!"
-
+      window.track.event('LandingPageModal', 'Submitted',  @opts.content, @opts.promocode)
       window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
   failure: () =>

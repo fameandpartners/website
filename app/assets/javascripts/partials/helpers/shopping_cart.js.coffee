@@ -13,6 +13,11 @@ window.helpers.ShoppingCart = class ShoppingCart
     @on      =  delegateTo(@$eventBus, 'on')
     @one     =  delegateTo(@$eventBus, 'one')
 
+  setItemCount: (item_count) =>
+    return if @loaded
+    @data.item_count = item_count
+    @trigger('change')
+
   updateData: (data) =>
     @loaded = true
     @data = data
@@ -90,7 +95,7 @@ window.helpers.ShoppingCart = class ShoppingCart
         @updateData(data)
         @trigger('success', data)
         @trigger('complete', data)
-        window.helpers.showAlert( type: 'success', title: 'hooray babe', message: 'The coupon code was successfully applied to your order.')
+        window.helpers.showAlert( type: 'success', title: 'Success!', message: 'You are one step closer to being a fame babe')
     ).error( () =>
       @trigger('error')
     )

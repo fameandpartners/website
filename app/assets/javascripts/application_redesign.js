@@ -8,15 +8,16 @@
 
 //= require libs/underscore-min
 // spree have this by default
+//= require libs/snap.svg-min.js
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
 //= require libs/jquery.chosen.min
 //= require libs/soundcloud/sc-player
 //= require libs/jquery.hoverable.js
 //= require libs/superslides.js
+//= require libs/jquery.skippr.js
 
 // styleguide code
-//= require js/snap.svg-min.js
 //= require js/modernizr.custom.js
 //= require js/modernizr.js
 //= require js/scrollspy.js
@@ -24,7 +25,7 @@
 //= require js/sg-plugins.js
 //= require js/svgicons-config.js
 //= require js/svgicons.js
-//= require js/jquery.skippr.min.js
+//  require js/jquery.skippr.min.js # copied non-min version, to debug&patch
 //= require js/classie.js
 //= require js/alert.js
 //= require js/affix.js

@@ -67,7 +67,7 @@ ruby:
         .status.active
           = link_to 'More dresses', '#', class: 'btn btn-black', data: { action: 'show-more-collection-products' }
         .status.loading style="display: none;"
-          = link_to '#', class: 'btn btn-black', disabled: true do
-            = image_tag('add-spinner.gif')
+          = link_to '#', class: 'btn', disabled: true do
+            = image_tag('fame-spinner.gif')
         .status.inactive style="display: none;"
           // nothing

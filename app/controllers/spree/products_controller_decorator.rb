@@ -208,7 +208,7 @@ Spree::ProductsController.class_eval do
   end
 
   def build_page_title(params)
-    #binding.pry
+
   end
 
   def load_product

@@ -1,6 +1,6 @@
-ruby: 
+ruby:
   shopping_cart_summary_init = "
-    window.app.shopping_cart_summary = new ShoppingCartSummary({ 
+    window.app.shopping_cart_summary = new ShoppingCartSummary({
       cart: window.app.shopping_cart,
       container: '.checkout-items'
     });
@@ -16,7 +16,7 @@ ruby:
   = raw shopping_cart_summary_init
 
 .checkout-items
-  h3.text-center 
+  h3.text-center
     ' Cart:
     = cart.products.length
   ul.cart-items
@@ -25,21 +25,21 @@ ruby:
         .media
           .media-left.media-middle
             = link_to collection_product_path(product) do
-              = image_tag product.image.product, class: 'cart-item-image'
+              = image_tag product.image.large, class: 'cart-item-image'
           .media-body.media-middle
             span.qty =' "#{ product.quantity}x"
             = link_to product.name, collection_product_path(product)
             .checkout-price = product.price.display_price
           a.remove-product.delete-item href="#0" data-id=(product.line_item_id)
-      
+
   /! cd-cart-items
   form.promo-code action="#"
     label for=""  Promo Code
     .input-group
       input.form-control.form-control-md#promotion-code type="text"
       span.input-group-addon
-        button.btn-submit.btn-reset Submit
-          
+        button.btn-submit.btn-reset Apply
+
   / hr
   p
     | Sub Total

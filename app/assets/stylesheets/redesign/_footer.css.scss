@@ -45,6 +45,12 @@
 	.footer-nav--item {
 		margin-bottom: 1px;
 		padding-left: 5rem;
+
+		a {
+			&:hover {
+				color:#355e6d;
+			}
+		}
 	}
 
 	.footer-social {
@@ -90,10 +96,17 @@
 		}
 	}
 
-	.address span{
+	.address span {
 		font-size: 1.3rem;
 		text-transform: capitalize;
+	}
 
+	.address {
+		p {
+			span a{
+				color: black;
+			}
+		}
 	}
 
 	.container {

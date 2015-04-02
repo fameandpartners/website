@@ -11,6 +11,9 @@ class SiteVersionsController < ApplicationController
       user.update_site_version(site_version)
     end
 
+    # note. after this method we should transfer directly to new page, otherwize current order will be lost
+    current_order.use_prices_from(site_version)
+
     redirect_to previous_location_or_default(root_url(site_version: site_version.permalink), params[:backlink])
   end
 end

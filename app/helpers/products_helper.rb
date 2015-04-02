@@ -8,7 +8,6 @@ module ProductsHelper
     result << product.taxons.where(parent_id: event_taxon.id).last
     result << product.taxons.where(parent_id: style_taxon.id).last if result.empty?
 
-    #binding.pry
     return result
   end
 =end

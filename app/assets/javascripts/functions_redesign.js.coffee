@@ -1,5 +1,6 @@
 $(document).ready ->
   $("#theTarget").skippr({
+    logs: false,
     transition: 'fade',
     speed: 1000,
     easing: 'easeOutQuart',
@@ -13,7 +14,7 @@ $(document).ready ->
   })
 
   $('.slider-action').on 'click', (e) ->
-    e.preventDefault()
+    # e.preventDefault()
     window.location = $(this).data('href')
 
   $('.selectbox').chosen
