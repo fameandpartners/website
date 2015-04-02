@@ -105,6 +105,11 @@
 		margin-right: auto;
 		padding-top: 160px;
 		font-family: "brandon-grotesque", sans-serif;
+
+		@media(max-width: 490px){
+			max-width: 100%;
+			padding-top: 100px;
+		}
 	}
 
 	&.dark-bg {
