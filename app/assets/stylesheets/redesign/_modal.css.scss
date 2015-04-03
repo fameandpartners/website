@@ -33,15 +33,15 @@
 
 
       .btn {
-        background-image: url('modal-close.png');
+        background-image:  url('modal-close.png');
         background-repeat: no-repeat;
-        color: transparent;
-        background-size: cover;
-        height: 28px;
-        width:28px;
-        margin:0;
-        padding:0;
-        margin-right: 7px;
+        color:             transparent;
+        background-size:   cover;
+        height:            28px;
+        width:             28px;
+        margin:            0;
+        padding:           0;
+        margin-right:      7px;
       }
     }
   }
@@ -182,7 +182,7 @@
 
 .vex-theme-flat-attack.email-capture-modal.teen-vogue-2015 {
   .vex-content {
-    background-color: #EEDDF0;
+    background-color: $pink-bg;
     background:       url('campaigns/teenvogue/teen_vogue_modal_bg.png') no-repeat;
     border:           none;
     height:           407px;
@@ -194,9 +194,9 @@
     .vex-dialog-input {
       margin-top: 35px;
 
-      .standard-form {
-        height:        35px;
-        margin-bottom: 15px;
+      .standard-form  {
+        height: 35px;
+        margin-bottom:15px;
       }
     }
   }
@@ -206,7 +206,7 @@
     color:       black;
     text-align:  center;
     font-size:   1.222222em;
-    font-family: "brandon-grotesque";
+    font-family: $font-family-secondary;
     font-weight: 400;
     margin-top:  85px;
     line-height: 1.5;
@@ -227,7 +227,7 @@
   }
 
   button {
-    font-family: "brandon-grotesque", sans-serif;
+    font-family: $font-family-secondary
   }
 
   ::-webkit-input-placeholder {
