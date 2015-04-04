@@ -58,19 +58,20 @@
   var ParametersTable = React.createClass({
     render: function () {
       var inputHandler = this.props.onUserInput;
+      var knownPromoCodes = this.props.knownPromoCodes;
 
       return (
         <table>
           <thead>
             <tr>
               <th>Name</th>
-              <th>Value</th>
+              <th colSpan="2">Value</th>
             </tr>
           </thead>
           <tbody>
             {
               this.props.parameters.map(function (parameter){
-                return <ParameterRow {...parameter}  onUserInput={inputHandler}/>
+                return <ParameterRow {...parameter} knownPromoCodes={knownPromoCodes} onUserInput={inputHandler}/>
 
               })
             }
@@ -91,22 +92,48 @@
     render: function() {
       var placeholder = this.props.required ? 'Required' : 'Optional';
 
+
+      var extraInput = null;
+
+
+      if (this.props.label == 'promocode') {
+       extraInput = <td>
+         <select
+          type="text"
+          name={this.props.param}
+          defaultValue={this.props.defaultValue}
+          onChange={this.handleChange}>
+          {
+            this.props.knownPromoCodes.map(function(pc) {
+              return <option value={pc[0]}>{pc[1]}</option>
+            })
+          }
+        </select>
+       </td>;
+      }
+
+      var colSpan = extraInput ? 1 : 2;
+
+      var textInput = <td colSpan={colSpan}>
+          <input
+              type="text"
+              name={this.props.param}
+              placeholder={placeholder}
+              defaultValue={this.props.defaultValue}
+              onChange={this.handleChange} />
+        </td>;
+
       return (
-        <tr>
-          <td><label>{this.props.label}</label></td>
-          <td>
-            <input
-                    type="text"
-                    name={this.props.param}
-                    placeholder={placeholder}
-                    defaultValue={this.props.defaultValue}
-                    onChange={this.handleChange} />
-          </td>
-        </tr>
+              <tr>
+                <td>
+                  <label>{this.props.label}</label>
+                </td>
+                {textInput}
+                {extraInput}
+              </tr>
       )
     }
   });
-
 
   var ModalGenerator = React.createClass({
     getInitialState: function () {
@@ -129,7 +156,7 @@
     render: function() {
       return (
         <div className="clearfix">
-            <ParametersTable parameters={this.state.data} onUserInput={this.handleUserInput}/>
+            <ParametersTable parameters={this.state.data} onUserInput={this.handleUserInput} knownPromoCodes={this.props.knownPromoCodes} />
             <PreviewBar parameters={this.state.data} keys={this.state} baseUrl={this.props.baseUrl}/>
         </div>
       );
@@ -146,9 +173,11 @@
     { label: "raw",        param: "raw", required: false, encoded: false, type: 'boolean'}
   ];
 
+  var knownPromoCodes = <%= promo_codes.to_json.html_safe %>;
+
   var baseUrl = '<%= root_url %>';
 
-React.render(<ModalGenerator parameters={PARAMS} baseUrl={baseUrl} />, document.getElementById('modal_generator'));
+React.render(<ModalGenerator parameters={PARAMS} baseUrl={baseUrl} knownPromoCodes={knownPromoCodes} />, document.getElementById('modal_generator'));
 </script>
 
 <div id="modal_generator"></div>
