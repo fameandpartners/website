@@ -16,7 +16,7 @@ z.list-group-item.customization-option  {
 	}
 
 	.btn {
-		font-family: "brandon-grotesque";
+		font-family: $font-family-secondary;
 		font-size: 1.5rem;
 	}
 
@@ -65,7 +65,7 @@ z.list-group-item.customization-option  {
 
 .dress-about {
 		h4 {
-			font-family: "brandon-grotesque";
+			font-family: $font-family-secondary;
 			font-size: 1em;
 			font-weight:600;
 			margin-top:1.333333em;
@@ -349,7 +349,7 @@ z.list-group-item.customization-option  {
   }
 
   .btn {
-      font-family: "brandon-grotesque", sans-serif;
+      font-family: $font-family-secondary;
       padding: 0;
       height: 45px;
       line-height: 45px;
@@ -403,7 +403,7 @@ z.list-group-item.customization-option  {
 }
 
 .vex.vex-theme-flat-attack .vex-content h2 {
-    font-family: "brandon-grotesque"!important;
+    font-family: $font-family-secondary !important;
   }
 
 .vex.vex-theme-flat-attack .vex-content h6, span {
@@ -484,7 +484,7 @@ z.list-group-item.customization-option  {
       .btn {
         padding: 6px 15px;
         outline: none;
-        font-family: 'brandon-grotesque';
+        font-family: $font-family-secondary;
       }
     }
   }

@@ -92,7 +92,7 @@
 
 	h1 {
 		text-transform: lowercase;
-		font-family: "brandon-grotesque", sans-serif;
+		font-family: $font-family-secondary;
 
 		&:first-letter {
 			text-transform: uppercase;
@@ -139,7 +139,7 @@
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
 	color: black;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: $font-family-secondary;
 }
 
 #select2-product_order-results {
@@ -171,7 +171,7 @@
 li.select2-results__option {
 	background-color: #f5f5f5 ;
 	font-weight: 600;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: $font-family-secondary;
 	height: 45px;
 }
 
