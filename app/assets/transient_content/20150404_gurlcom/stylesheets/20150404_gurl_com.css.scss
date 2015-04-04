@@ -13,7 +13,6 @@
       margin:    0 auto;
 
       .vex-dialog-message {
-
         padding:    90px 20px 0px 20px;
         text-align: center;
 
@@ -33,9 +32,7 @@
           font-weight: 500;
           line-height: 5rem;
           text-align:  center;
-
         }
-
       }
 
       .vex-dialog-input {
@@ -58,12 +55,11 @@
         }
 
         .standard-form {
-          height:        35px;
+          height:        40px;
           margin-bottom: 15px;
         }
 
         ::-webkit-input-placeholder {
-          font-size:      15px;
           text-align:     center;
           text-transform: uppercase;
 
@@ -72,7 +68,6 @@
         :-moz-placeholder {
           /* Firefox 18- */
           color:          #D3D3D3;
-          font-size:      15px;
           text-align:     center;
           text-transform: uppercase;
         }
@@ -80,14 +75,12 @@
         ::-moz-placeholder {
           /* Firefox 19+ */
           color:          #D3D3D3;
-          font-size:      15px;
           text-align:     center;
           text-transform: uppercase;
         }
 
         :-ms-input-placeholder {
           color:          #D3D3D3;
-          font-size:      15px;
           text-align:     center;
           text-transform: uppercase;
         }
