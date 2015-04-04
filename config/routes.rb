@@ -326,7 +326,6 @@ FameAndPartners::Application.routes.draw do
       resource :styles, only: [:show, :update]
 
       get 'modals' => 'modals#index'
-      get 'modals/template' => 'modals#template'
 
       namespace :blog do
         resources :promo_banners
