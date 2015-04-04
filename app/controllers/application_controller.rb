@@ -150,7 +150,7 @@ class ApplicationController < ActionController::Base
 =end
 
   def url_with_correct_site_version
-    request.fullpath.gsub(/\A(\/(au|us))/, '/' + current_site_version.code)
+     '/' + current_site_version.code + request.fullpath.gsub(/\A(\/(au|us))/, '/')
   end
 
   def store_current_location
