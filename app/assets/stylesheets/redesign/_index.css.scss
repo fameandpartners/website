@@ -59,7 +59,7 @@
     padding-right: 2rem;
   }
   p, li, a {
-    font-family: 'brandon-grotesque';
+    font-family: $font-family-secondary;
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 1px;
@@ -313,7 +313,7 @@
 
 .taste-of-fame-btn {
 	background-color: #003647;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: $font-family-secondary;
 	color: white;
 	margin-top: 3rem;
 	width: 33%;
@@ -408,7 +408,7 @@
 	}
 
 		h2.caption-title {
-			font-family: "brandon-grotesque", sans-serif;
+			font-family: $font-family-secondary;
 			color: black;
 			text-align: center;
 			font-size: 7rem;
@@ -452,7 +452,7 @@
 		font-weight: 400;
 
 		h2.caption-title {
-			font-family: "brandon-grotesque", sans-serif;
+			font-family: $font-family-secondary;
 			color: white;
 			text-align: center;
 			font-size: 3rem;
@@ -468,7 +468,7 @@
 		}
 
 		p {
-			font-family: "brandon-grotesque", sans-serif;
+			font-family: $font-family-secondary;
 			color: white;
 			font-size: 5rem;
 			text-align: center;
@@ -484,7 +484,7 @@
 
 .prom-btn {
 	background-color: #d5eff0;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: $font-family-secondary;
 	color: black;
 	width: 100%;
 	margin-top: 5rem;

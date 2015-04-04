@@ -93,6 +93,8 @@ module FameAndPartners
     # redesign
     config.assets.paths << Rails.root.join("styleguide")
     config.assets.paths << Rails.root.join("styleguide", "images")
+    # Component Style Modal Content
+    config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
 
     redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
     if Rails.env.production? || Rails.env.preproduction?
