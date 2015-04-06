@@ -55,14 +55,27 @@ SitemapGenerator::Sitemap.create(options) do
 
   # products page
   Spree::Product.active.each do |product|
-    images = Repositories::ProductImages.new(product: product).read_all
-    add(collection_product_path(product), {
-      priority: 0.8,
-      images: images.map{|data| { loc: data.large, title: product.name }},
-      alternates: site_versions.map{|site_version|
-        { href: absolute_url(collection_product_path(product, site_version: site_version.permalink)), lang: site_version.locale, nofollow: true }
-      }
-    })
+    color_ids = product.variants.active.map do |variant|
+      variant.option_values.colors.map(&:id)
+    end.flatten.uniq
+
+    images_repo = Repositories::ProductImages.new(product: product)
+
+    product.product_color_values.each do |product_color_value|
+      color = product_color_value.option_value
+      color_images = images_repo.filter(color_id: color.id)
+
+      next unless color_ids.include?(color.id)
+      next unless color_images.present?
+
+      add(collection_product_path(product, color: color.name), {
+        priority: 0.8,
+        images: color_images.map{|data| { loc: data.large, title: product.name }},
+        alternates: site_versions.map{|site_version|
+          { href: absolute_url(collection_product_path(product, site_version: site_version.permalink, color: color.name)), lang: site_version.locale, nofollow: true }
+        }
+      })
+    end
   end
 
   # events
