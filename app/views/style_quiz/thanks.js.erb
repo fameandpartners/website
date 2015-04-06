@@ -1,1 +1,5 @@
 $('.quiz-box-inner').html('<%=j render(:template => 'style_quiz/thanks.html.slim') %>');
+
+if (window.parent && window.parent.onQuizCompleted) {
+  window.parent.onQuizCompleted({});
+}

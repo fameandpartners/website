@@ -12,4 +12,12 @@ window.showQuizPopup = () ->
   vex.open({
     content: content,
     className: 'vex-dialog-default vex-dialog-pink vex-dialog-signup'
+    afterOpen: ($vexContent) ->
+      "after open placeholer"
+    afterClose: ($vexContent) ->
+      "after close placeholer"
   })
+
+window.onQuizCompleted = () ->
+  # attach redirects to style profile?
+  #console.log('onQuizCompleted - parent')
