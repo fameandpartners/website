@@ -1,0 +1,33 @@
+// Cross icon
+.icon-cross {
+  display: inline-block;
+  overflow: hidden;
+  height: 24px;
+  width: 24px;
+  position: relative;
+  cursor: pointer;
+  &:before, &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #000;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  &:before {
+    width: 200%;
+    height: 1px;
+    margin-top: -1px;
+    margin-left: -100%;
+  }
+  &:after {
+    height: 200%;
+    width: 1px;
+    margin-top: -100%;
+  }
+}
+// @end Cross icon
+// -----------------

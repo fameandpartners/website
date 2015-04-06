@@ -228,10 +228,12 @@ FameAndPartners::Application.routes.draw do
 
     root :to => 'index#show'
 
-    resource :quiz, :only => [:show] do
-      resources :questions, :only => [:index]
-      resources :answers, :only => [:create]
-    end
+    # style quiz
+    #resource :quiz, :only => [:show] do
+    #  resources :questions, :only => [:index]
+    #  resources :answers, :only => [:create]
+    #end
+    resource :style_quiz, only: [:show, :update], controller: 'style_quiz'
 
     scope '/users/:user_id', :as => :user do
       get '/style-report' => 'user_style_profiles#show', :as => :style_profile
