@@ -1,7 +1,8 @@
 class StyleQuizController < ActionController::Base
   include SslRequirement
-
   ssl_allowed
+  protect_from_forgery
+
   layout 'iframe'
 
   caches_page :show

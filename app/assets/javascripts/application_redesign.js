@@ -45,7 +45,7 @@
 //= require partials/helpers/modal
 
 // show old quiz in popup with iframe
-//= require partials/style/popup
+// require partials/style/popup
 
 //= require partials/product_collection.js
 //require partials/product_customisation.js

@@ -20,7 +20,22 @@ ruby:
       (function(){
         $('#style-quiz-trigger').on('click', function(e) {
           e.preventDefault();
-          showQuizPopup();
+          $iframe = $('<iframe />', {
+            src: urlWithSitePrefix('/style_quiz'),
+            frameBorder: '0',
+            width: '1102px',
+            height: '680px'
+          });
+
+          if ($('#quiz_popup').length > 0) {
+            $('#quiz_popup').find('iframe').replaceWith($iframe);
+          } else {
+            $content = $('<div />', { id: 'quiz_popup' }).html($iframe);
+            vex.open({
+              content: $content,
+              className: 'vex-dialog-default vex-dialog-quiz'
+            });
+          };
         });
       })();
     "
