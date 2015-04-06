@@ -1,0 +1,5 @@
+---
+development:
+  :hosts: localhost:6379
+production:
+  :hosts: <%= ENV['REDIS_URL_INT'] %>
