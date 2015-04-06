@@ -30,6 +30,10 @@ class UserStyleProfile < ActiveRecord::Base
              :class_name => 'Spree::User'
   has_many   :user_style_profile_taxons
 
+  has_one :tokenized_permission, :as => :permissable, class_name: 'Spree::TokenizedPermission'
+  delegate :token, :to => :tokenized_permission, :allow_nil => true
+  after_create :create_token
+
   validate do
     unless brands.all?{ |brand| BRANDS.include?(brand) }
       errors.add(:brands, :inclusion)
@@ -138,6 +142,13 @@ class UserStyleProfile < ActiveRecord::Base
   def empty_basic_styles?
     attributes.slice(*BASIC_STYLES).values.all?(&:zero?)
   end
+
+  def create_token
+    permission = build_tokenized_permission
+    permission.token = token = ::SecureRandom::hex(8)
+    permission.save!
+    token
+  end 
 
   class << self
     def calculate_match(profile_a, profile_b)

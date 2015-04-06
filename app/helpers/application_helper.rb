@@ -134,7 +134,9 @@ module ApplicationHelper
   end
 
   def facebook_application
-    Spree::AuthenticationMethod.where(environment: ::Rails.env, provider: :facebook, active: true).first
+    @facebook_application ||= begin
+      Spree::AuthenticationMethod.where(environment: ::Rails.env, provider: :facebook, active: true).first
+    end
   end
 
   def total_cart_items

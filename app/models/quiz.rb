@@ -7,4 +7,10 @@ class Quiz < ActiveRecord::Base
 
   validates :name,
             :presence => true
+
+  class << self
+    def active
+      Quiz.last
+    end
+  end
 end
