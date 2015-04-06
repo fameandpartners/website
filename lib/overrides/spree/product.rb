@@ -105,9 +105,15 @@ module Overrides
           }.gsub(/[\r\n]|([\s]{2,})/, '')
         end
 
-        def recommended_for(user, options = {})
+        def recommended_for(target, options = {})
           limit = options[:limit] || 12
-          style_profile = UserStyleProfile.find_by_user_id(user.id)
+
+          if target.is_a?(UserStyleProfile)
+            style_profile = target
+          else
+            user = target
+            style_profile = UserStyleProfile.find_by_user_id(user.id)
+          end
 
           if style_profile.user_style_profile_taxons.present?
             recommended_for_style_profile(style_profile, (limit * 0.7).round) +

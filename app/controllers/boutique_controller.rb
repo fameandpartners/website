@@ -95,6 +95,19 @@ class BoutiqueController < Spree::StoreController
     end
 
     def get_user_style_profile
+      # trying to associate user
+      if session[:style_profile_id]
+        profile = UserStyleProfile.where(id: session[:style_profile_id])
+        if profile.token == session[:style_profile_access_token]
+          if user.present? && profile.user_id.blank?
+            profile.update_column(:user_id, user.id)
+            session[:style_profile_id] = nil
+            session[:style_profile_access_token] = nil
+          end
+          return profile
+        end
+      end
+
       if user.style_profile.present? 
         return user.style_profile
       else
@@ -103,7 +116,7 @@ class BoutiqueController < Spree::StoreController
     end
 
     def sorted_dresses
-      @sorted_dresses ||= Spree::Product.recommended_for(user, :limit => 28)
+      @sorted_dresses ||= Spree::Product.recommended_for(style_profile, :limit => 28)
     end
   end
 end
