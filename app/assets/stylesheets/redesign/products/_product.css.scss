@@ -1,0 +1,288 @@
+.product-content {
+	position: absolute;
+	z-index: 50;
+	top: 8rem;
+
+	.row {
+		padding-top: 1.45rem;
+	}
+
+	.btn {
+		font-family: $font-family-secondary;
+		font-size: 1.5rem;
+	}
+
+  .btn-customize {
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .btn-secondary {
+    height: 45px;
+    padding: 0;
+
+    &:hover {
+      background-color: #355e6d;
+    }
+  }
+
+  .secondary-actions .col-md-6:last-child {
+    @media(max-width: 480px){
+      padding-left: 0;
+      margin-top: 15px;
+    }
+  }
+}
+
+@media(max-width: 768px){
+	.screen-height {
+		height:80vh;
+	}
+}
+
+.product-details {
+  max-width: 420px;
+
+	h2 {
+		text-transform: uppercase;
+		font-size: 2rem;
+    margin-top: 0;
+	}
+}
+
+#product-size, #product-color, #product-customizations {
+	border: 1px solid grey;
+	width: 100%;
+}
+
+.dress-about {
+		h4 {
+			font-family: $font-family-secondary;
+			font-size: 1em;
+			font-weight:600;
+			margin-top:1.333333em;
+		}
+
+  @media(max-width: 490px){
+
+    h2 {
+      padding-top: 30px;
+    }
+  }
+}
+
+.divider {
+  @media(max-width: 768px){
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+.btn-customize {
+  border: 1px solid black;
+  width: 100%;
+  height: 45px;
+  color: black;
+  display:block;
+  padding-top: 1.5rem;
+  font-size: 12px;
+  line-height: 14px;
+
+	&:hover {
+		color: black;
+	}
+
+	&:after {
+		content: '+';
+		position: absolute;
+		right: 5px;
+	}
+}
+
+.col-md-4 {
+	height: 60px;
+	padding-top: 2rem;
+}
+
+.icons {
+	 h4 {
+		font-size: 1.3rem;
+		font-weight: 200;
+		padding-top: 2.1rem;
+		text-transform: uppercase;
+	}
+}
+
+.price-original {
+	text-decoration: line-through;
+}
+
+#product-price {
+	font-weight: 600;
+}
+
+.price-sale {
+	font-weight:bold;
+	color:red;
+}
+
+.select2-container--default .select2-selection--single {
+	border-radius: 0 !important ;
+	width: 100%;
+	height: 4.45rem;
+	background-color: transparent;
+}
+
+.select2-container .select2-selection--single {
+	height:4.5rem !important ;
+}
+
+.remove-selection {
+	float:right;
+	padding-right: 1rem;
+}
+
+.inspiration {
+	.row {
+		.box {
+			width:190px;
+			height:243px;
+      position: relative;
+
+      &:hover .player-controls {
+        opacity: 1;
+      }
+      &.song-playing {
+        .fa-pause {
+          display: inline-block;
+        }
+        .fa-play {
+          display: none;
+        }
+      }
+
+			img {
+				max-width:190px;
+				max-height:243px;
+			}
+
+      .player-controls {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        opacity: 0;
+        transition: 0.2s;
+        padding: 10px;
+
+        a {
+          color: #000;
+        }
+      }
+
+      // Icons
+      .fa-volume-up {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        font-size: 24px;
+        color: #fff;
+      }
+      .fa-pause {
+        display: none;
+      }
+		}
+	}
+}
+
+.no-scroll {
+	overflow: hidden !important;
+}
+
+.secondary-actions {
+	.col-md-6 {
+		padding:0;
+	}
+  .col-md-6:first-child {
+    padding-right:10px;
+  }
+
+  .col-md-6:last-child {
+    padding-left:10px;
+  }
+}
+
+#product-overlay {
+  background-color:rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: 999 !important;
+
+	&.is-visible {
+    animation: 0.3s ease 0s normal none 1 running cd-fade-in;
+    display: block;
+  }
+}
+
+.container-fluid.product-content {
+	width: 100%;
+	padding-right: 3.5rem;
+
+	@media(max-width: 768px){
+		padding-right: 3rem;
+		padding-left: 4rem;
+ 	}
+}
+
+.secondary-actions .col-md-6:first-child {
+
+	@media(max-width: 768px){
+		padding-right: 0;
+ 	}
+}
+
+#slides .slides-container {
+  display:block;
+}
+
+@media (max-width: 768px) {
+  #slides img.product-image-slide {
+    left: -35% !important;
+  }
+}
+
+.buy-button {
+  height: 45px;
+  line-height: 45px;
+  line-height: 9px;
+}
+
+.btn-black:hover {
+  background-color: #333333;
+}
+
+.btn-fit-guide:hover {
+  background-color: #355e6d;
+}
+
+.close-btn {
+  border: none;
+  background-color: transparent;
+  float: right;
+  margin-top: -2px;
+
+  img {
+    width: 20px !important;
+    height: 20px;
+  }
+}
+
+.recommended {
+  float: none;
+}
