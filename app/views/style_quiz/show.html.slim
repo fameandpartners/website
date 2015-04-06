@@ -6,6 +6,14 @@
 - if facebook_application.present?
   #fb-root
   javascript:
+    $(document).ready(function() {
+      window.quiz = new window.style.Quiz();
+    });
+
+    window.onQuizCompleted = function() { 
+      //console.log('quiz completed')
+    };
+
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '#{facebook_application.api_key}',
@@ -23,11 +31,6 @@
       js.src = "//connect.facebook.net/en_US/sdk.js#version=v2.0&xfbml=1&appId=#{ facebook_application.api_key }";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
-javascript:
-  $(document).ready(function() {
-    window.quiz = new window.style.Quiz();
-  });
 
 css:
   .quiz-box .steps-box .scrollable { width: 100%; height: 100%; overflow-x: hidden; overflow-y: scroll;}

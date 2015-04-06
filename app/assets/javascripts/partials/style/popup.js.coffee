@@ -10,6 +10,14 @@ window.showQuizPopup = () ->
   content = $("<div />", id: 'quiz_popup').html(iframe)
 
   vex.open({
-    content: content,
+    content: content
     className: 'vex-dialog-default vex-dialog-quiz'
+    afterOpen: ($vexContent) ->
+      "after open placeholer"
+    afterClose: ($vexContent) ->
+      "after close placeholer"
   })
+
+window.onQuizCompleted = () ->
+  # attach redirects to style profile?
+  #console.log('onQuizCompleted - parent')
