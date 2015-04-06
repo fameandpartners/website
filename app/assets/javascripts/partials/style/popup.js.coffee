@@ -6,12 +6,8 @@ window.page or= {}
 # - should handle open/close/iframe reload
 
 window.showQuizPopup = () ->
-  iframe = $('<iframe />',
-    src: urlWithSitePrefix('/style_quiz'),
-    width: '500px',
-    height: '600px'
-  )
-  content = $("<div  />", id: 'quiz_popup').html(iframe)
+  iframe = $('<iframe />', src: urlWithSitePrefix('/style_quiz'))
+  content = $("<div />", id: 'quiz_popup').html(iframe)
 
   vex.open({
     content: content,
