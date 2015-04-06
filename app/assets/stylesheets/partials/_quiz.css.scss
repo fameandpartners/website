@@ -1,3 +1,4 @@
+@import url(//fonts.googleapis.com/css?family=Forum);
 .quiz-box .quiz-overlay {
   background: #000;
   background: rgba(0, 0, 0, .7);
@@ -856,16 +857,27 @@
     }
   }
   .finish-slide {
-    background-color: #fce5de;
+    background-color: #eeddf0;
     width: 1100px;
-    height: 720px;
-    margin: -42px -20px -130px;
+    height: 680px;
+    margin: -24px -22px -130px;
     text-align: center;
-    h1 {
-      padding: 50px 0;
+    .header {
+      padding: 40px 0 200px;
+      img { 
+        margin: 0 20px;
+        vertical-align: middle;
+      }
     }
-    .secondary { letter-spacing: 0.125em;}
+    h1 {
+      font-family: Forum;
+      font-size: 95px;
+    }
+    .secondary { 
+      font-size: 40px;
+    }
     .pink { color: $pinkColor;}
+
     .arrows-line-vertical {
       height: 100px;
       display: inline-block;
