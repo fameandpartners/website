@@ -14,10 +14,22 @@ ruby:
       });
     })();
   "
+  init_style_quiz = ""
+  if Features.active?(:style_quiz)
+    init_style_quiz = "
+      (function(){
+        $('#style-quiz-trigger').on('click', function(e) {
+          e.preventDefault();
+          showQuizPopup();
+        });
+      })();
+    "
+  end
 
 = content_for :inline_javascript do
   = raw init_items_counter_sync
   = raw init_moodboard_counter_sync
+  = raw init_style_quiz
 
 - cache [:layout, :header, spree_user_signed_in?], expires_in: configatron.cache.expire.long do
   header
@@ -124,7 +136,7 @@ ruby:
 
           - if Features.active?(:style_quiz)
             li.menu-item
-              = link_to 'style quiz', '', class: 'menu-item--link'
+              = link_to 'style quiz', '', class: 'menu-item--link', id: 'style-quiz-trigger'
           li.shop.menu-item
             a.menu-item--link.active-hover href="#"
               | Edits

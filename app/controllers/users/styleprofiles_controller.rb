@@ -4,7 +4,7 @@ class Users::StyleprofilesController < Users::BaseController
   respond_to :html, :js
 
   def show
-    @style_profile = UserStyleProfile.find_by_user_id(@user.id)
+    @style_profile = get_user_style_profile(current_spree_user)
 
     @title = 'My Style Profile'
 
@@ -13,4 +13,24 @@ class Users::StyleprofilesController < Users::BaseController
       format.js   {}
     end
   end
+
+  private
+
+    def get_user_style_profile(user)
+      # trying to associate user
+      if session[:style_profile_id]
+        profile = UserStyleProfile.where(id: session[:style_profile_id]).first
+        if profile.token == session[:style_profile_access_token]
+          if profile.user_id.blank?
+            profile.update_column(:user_id, current_spree_user.id)
+            #session[:style_profile_id] = nil
+            #session[:style_profile_access_token] = nil
+          end
+          return profile
+        end
+      end
+
+      # else, try to find profile by user id
+      UserStyleProfile.find_by_user_id(@user.id)
+    end
 end
