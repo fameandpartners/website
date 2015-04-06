@@ -1,7 +1,7 @@
 class StyleQuizController < ActionController::Base
   layout 'iframe' # or application/redesign
 
-  #caches_pages :show
+  caches_page :show
 
   # questions#index
   def show
