@@ -5,7 +5,7 @@ class StyleQuizController < ActionController::Base
 
   layout 'iframe'
 
-  caches_page :show
+  #caches_page :show, # don't work with protection & ssl
 
   # questions#index
   def show
