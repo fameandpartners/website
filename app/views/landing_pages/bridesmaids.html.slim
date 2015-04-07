@@ -1,4 +1,5 @@
-= render :partial => 'landing_pages/common'
+= content_for :inline_javascript do
+  = raw "$('.img-product').hoverable();"
 
 .page-content.index.bridesmaids
   .container.relative
