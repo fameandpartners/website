@@ -50,7 +50,6 @@ SitemapGenerator::Interpreter.class_eval do
 
   def post_path(post)
     return '#' if post.nil?
-    #return blog_red_carpet_post_path(post.slug) if post.red_carpet?
     if (category = post.category).present?
       blog_post_by_category_path(category_slug: category.slug, post_slug: post.slug) 
     else
@@ -141,7 +140,7 @@ SitemapGenerator::Sitemap.create(options) do
 
   # blog posts
   Blog::Post.includes(:author, :category).published.each do |post|
-    add post_path(post), priority: 0.5, alternates: build_alternates(post_path(post))
+    add post_path(post), priority: 0.3, alternates: build_alternates(post_path(post))
   end
 end
 
