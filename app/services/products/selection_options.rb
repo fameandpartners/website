@@ -3,14 +3,14 @@
 # usage
 #   Products::SelectionOptions.new(product: product).read
 class Products::SelectionOptions
-  attr_reader :site_version, :product
+  attr_reader :site_version, :product, :policy
 
   def initialize(options = {})
     @product      = options[:product]
+    @policy       = Policy::Product.new(product)
     @site_version = options[:site_version] || SiteVersion.default
   end
 
-  # 
   def read
     OpenStruct.new({
       variants: product_variants,
@@ -43,21 +43,16 @@ class Products::SelectionOptions
 
   private
 
-    def product_on_sale?
-      return @_product_on_sale if instance_variable_defined?('@_product_on_sale')
-      @_product_on_sale = product.discount.present?
+    def customisations_available?
+      policy.customisation_allowed?
     end
 
     def extra_sizes_available?
-      !product_on_sale?
+      policy.customisation_allowed?
     end
 
     def extra_colors_available?
-      !product.on_sale? && product.color_customization
-    end
-
-    def customizations_available?
-      !product_on_sale?
+      policy.customisation_allowed? && product.color_customization
     end
 
     def product_variants
@@ -80,7 +75,7 @@ class Products::SelectionOptions
     end
 
     def extra_product_sizes
-      return [] if !extra_sizes_available?
+      return [] unless extra_sizes_available?
       product_sizes.select{|size| size.extra_price.present? }
     end
     # end
@@ -97,7 +92,7 @@ class Products::SelectionOptions
     end
 
     def extra_product_colors
-      return [] if !extra_colors_available?
+      return [] unless extra_colors_available?
       Repositories::ProductColors.read_all.select do |color|
         color.use_in_customisation && !basic_product_color_ids.include?(color.id)
       end.compact.sort_by{|color| color.presentation }
@@ -106,7 +101,7 @@ class Products::SelectionOptions
 
     # customizations
     def product_customisation_values
-      return [] if !customizations_available?
+      return [] unless customisations_available?
       @product_customisation_values ||= product.customisation_values.includes(:incompatibilities)
     end
 
@@ -128,6 +123,5 @@ class Products::SelectionOptions
         result[value.id] = value.incompatibilities.map(&:incompatible_id)
       end
       result
-    end 
-    # eo customisations
+    end
 end

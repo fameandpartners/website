@@ -78,7 +78,7 @@ en-US:
             question: 'Want a different color?'
             email:
               subject: 'I would like this dress (%{sku}) in a different color.'
-          size_region: 'All sizes are US' 
+          size_region: 'All sizes are US'
           labels:
             color: 'Choose a color:'
           notices:
@@ -130,3 +130,17 @@ en-US:
     shop:
       heading: '~  &nbsp; Shop The Latest Trends  &nbsp;  ~'
       body: 'Whether you prefer traditional over trendy, or trendy over traditional, we have something for you all. Your self-designed dress can offer two-pieces, sexy cut outs, flowing chiffon, peplum detailing, asymmetrical hems, innocent lace and much more. Between the unique styles and the modern, classic silhouettes, you will never go wrong when picking a dress from Fame and Partners.'
+  order_states:
+    complete: complete
+    returned: returned
+    awaiting_return: awaiting return
+    payment: payment
+    address: address
+    canceled: cancelled
+    cart: cart
+  shipment_states:
+    pending: Your dress is in making
+    ready: Your dress is in quality control
+    shipped: Your dress has been shipped
+    backorder: Your dress is on backorder
+    partial: Your dress is in making

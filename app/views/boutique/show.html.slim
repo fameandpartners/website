@@ -1,8 +1,15 @@
+ruby:
+  if current_spree_user
+    user  = current_spree_user
+  else
+    user = OpenStruct.new(first_name: 'Your')
+  end
+
 .personal-boutique
   .wrap
     .boutique-header
-      .title #{current_spree_user.first_name}'s style profile is:
-      = image_tag '_boutique/boutique-header.gif'
+      .title #{user.first_name}'s style profile is:
+      = image_tag 'old_quiz/boutique-header.gif'
       - if @style_profile.present?
         .style-report-block
           - @style_profile.percentage.each_with_index do |style, index|
@@ -11,7 +18,7 @@
               .percent #{style.last}%
     .page-title
       .arrows-line-horizontal
-      h1 #{current_spree_user.first_name}'s Personalised Boutique
+      h1 #{user.first_name}'s Personalised Boutique
       .arrows-line-horizontal
       h2
         ' The most killer dresses 
@@ -51,8 +58,8 @@
         - if @recommended_dresses.present?
           - @recommended_dresses.each do |product|
             .grid-4
-              - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
-                = render 'spree/products/cached_product', product: product
+              - cache [:shared, :product, :landing, product.id], :expires_in => configatron.cache.expire.long do
+                = render :partial => '/landing_pages/product', :locals => { :product => product }
         - else
           .not-found Sorry, no dresses match your criteria
 
@@ -70,8 +77,8 @@
       .row
         - @dresses.each do |product|
           .grid-3
-            - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
-              = render 'spree/products/cached_product', product: product
+            - cache [:shared, :product, :landing, product.id], :expires_in => configatron.cache.expire.long do
+              = render :partial => '/landing_pages/product', :locals => { :product => product }
   
     .view-more-separate
     .view-more-dresses

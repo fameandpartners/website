@@ -1,0 +1,12 @@
+= conditional_html do
+  head
+    = csrf_meta_tags
+    = render 'spree/shared/google_analytics'
+
+    title Style Quiz - Fame&Partners
+    /meta name="description" content=(get_meta_description)
+
+    = yield :head
+
+  body
+    = yield

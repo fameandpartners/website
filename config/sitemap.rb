@@ -26,14 +26,42 @@ SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
   def absolute_url(path = '/')
-    path = ('/' + path).gsub(/\w+(\/\/)/){|a| a.sub('//', '/')}
+    path = ('/' + path).gsub(/\/+/, '/')
     url = "#{ SitemapGenerator::Sitemap.default_host }#{ path }"
+  end
+
+  def site_versions
+    @_site_version ||= SiteVersion.where(default: false).to_a
+  end
+
+  # make links for all site versions
+  # version for default - without prefix
+  # <xhtml:link rel="alternate" hreflang="en" href="http://example.com" />
+  # <xhtml:link rel="alternate" hreflang="en-AU" href="http://example.com/au" />
+  def build_alternates(path)
+    alternates = [{ href: absolute_url(path), lang: 'en', nofollow: false }]
+
+    alternates + site_versions.map do |site_version|
+      {
+        href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale, nofollow: false  
+      }
+    end
+  end
+
+  def post_path(post)
+    return '#' if post.nil?
+    if (category = post.category).present?
+      blog_post_by_category_path(category_slug: category.slug, post_slug: post.slug) 
+    else
+      blog_post_path(post_slug: post.slug)
+    end
   end
 end
 
 # we create sitemap in xml, /public/sitemap.xml should be only symlink
 options = {
   compress: true,
+  include_root: false,
   sitemaps_path: 'system' # folder not in repository
 }
 
@@ -49,29 +77,35 @@ SitemapGenerator::Sitemap.create(options) do
   default_site_version = SiteVersion.default
   site_versions = SiteVersion.where(default: false).to_a
 
-  add root_path, alternates: site_versions.map{|site_version|
-    { href: root_path(site_version: site_version.permalink), lang: site_version.locale, nofollow: true  }
-  }
+  add root_path, alternates: build_alternates(root_path), priority: 1.0
 
   # products page
   Spree::Product.active.each do |product|
-    images = Repositories::ProductImages.new(product: product).read_all
-    add(collection_product_path(product), {
-      priority: 0.8,
-      images: images.map{|data| { loc: data.large, title: product.name }},
-      alternates: site_versions.map{|site_version|
-        { href: absolute_url(collection_product_path(product, site_version: site_version.permalink)), lang: site_version.locale, nofollow: true }
-      }
-    })
-  end
+    color_ids = product.variants.active.map do |variant|
+      variant.option_values.colors.map(&:id)
+    end.flatten.uniq
 
+    images_repo = Repositories::ProductImages.new(product: product)
+
+    product.product_color_values.each do |product_color_value|
+      color = product_color_value.option_value
+      color_images = images_repo.filter(color_id: color.id)
+
+      next unless color_ids.include?(color.id)
+      next unless color_images.present?
+
+      add(collection_product_path(product, color: color.name), {
+        priority: 0.8,
+        images: color_images.map{|data| { loc: data.large, title: product.name }},
+        alternates: build_alternates(collection_product_path(product, color: color.name))
+      })
+    end
+  end
   # events
   Repositories::Taxonomy.read_events.each do |taxon|
     add(build_taxon_path(taxon.name), {
       priority: 0.7,
-      alternates: site_versions.map{|site_version|
-        { href: absolute_url(build_taxon_path(taxon.name, site_version: site_version.permalink)), lang: site_version.locale, nofollow: true }
-      }
+      alternates: build_alternates(build_taxon_path(taxon.name))
     })
   end
 
@@ -79,9 +113,7 @@ SitemapGenerator::Sitemap.create(options) do
   Repositories::Taxonomy.read_collections.each do |taxon|
     add(build_taxon_path(taxon.name), {
       priority: 0.7,
-      alternates: site_versions.map{|site_version|
-        { href: absolute_url(build_taxon_path(taxon.name, site_version: site_version.permalink)), lang: site_version.locale, nofollow: true }
-      }
+      alternates: build_alternates(build_taxon_path(taxon.name))
     })
   end
 
@@ -89,26 +121,26 @@ SitemapGenerator::Sitemap.create(options) do
   Repositories::Taxonomy.read_styles.each do |taxon|
     add(build_taxon_path(taxon.name), {
       priority: 0.7,
-      alternates: site_versions.map{|site_version|
-        { href: absolute_url(build_taxon_path(taxon.name, site_version: site_version.permalink)), lang: site_version.locale, nofollow: true }
-      }
+      alternates: build_alternates(build_taxon_path(taxon.name))
     })
   end
 
   statics_pages = [
     '/about', '/why-us', '/team', '/privacy', '/legal', '/how-it-works'
   ]
-  statics_pages.each do |page_url|
-    add page_url, priority: 0.5, alternates: site_versions.map{|site_version|
-      { href: absolute_url("#{ site_version.permalink}#{ page_url }"), lang: site_version.locale, nofollow: true }
-    }
+  statics_pages.each do |page_path|
+    add page_path, priority: 0.5, alternates: build_alternates(page_path)
   end
 
   # celebrities
   Celebrity.published.each do |celebrity|
-    add "/celebrities/#{celebrity.slug}", priority: 0.3, alternates: site_versions.map{|site_version|
-      { href: absolute_url("#{ site_version.permalink }/celebrities/#{ celebrity.slug }"), lang: site_version.locale, nofollow: true }
-    }
+    path = "/celebrities/#{celebrity.slug}"
+    add path, { priority: 0.3, alternates: build_alternates(path) }
+  end
+
+  # blog posts
+  Blog::Post.includes(:author, :category).published.each do |post|
+    add post_path(post), priority: 0.3, alternates: build_alternates(post_path(post))
   end
 end
 

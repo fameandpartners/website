@@ -1,0 +1,14 @@
+defaults: &defaults
+  adapter: postgresql
+  username: postgres
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *defaults
+  database: fame_website_development
+
+test:
+  <<: *defaults
+  database: fame_website_test
+

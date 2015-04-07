@@ -1,6 +1,3 @@
-/ .m-pixel
-/   img src="http://tags.rtbidder.net/track?sid=525646ee8bc06f1060d9f3a7" width="0" height="0" border="0" alt=""
-
 .custom-dress-landing
   .arrows-line-horizontal
   .signup-block.grid-container
@@ -20,7 +17,7 @@
     .grid-5
       .side-right
         .image = image_tag 'custom-dresses/image-girl.jpg', width: 422, height: 652, alt: ''
-  
+
   .how-it-works
     .arrows-line-horizontal
     h2.section-title How it WORKS
@@ -33,8 +30,8 @@
               ' FIND
               br
               ' YOUR STYLE
-            .line-top  
-            .line-bottom  
+            .line-top
+            .line-bottom
         .grid-4
           .step
             = image_tag '_front/step-2.jpg'
@@ -42,8 +39,8 @@
               ' DISCOVER
               br
               ' YOUR DRESS
-            .line-top  
-            .line-bottom    
+            .line-top
+            .line-bottom
         .grid-4
           .step
             = image_tag '_front/step-3.jpg'
@@ -51,7 +48,7 @@
               ' CREATE YOUR
               br
               ' UNIQUE LOOK
-            .line-top  
+            .line-top
             .line-bottom
     .start-now
       = link_to 'Start now!', spree.signup_path(personalization: 'true'), class: 'label regular-signup'
@@ -60,7 +57,7 @@
           span.icon-facebook2
         span Signup with facebook
     .form.hide
-      = render 'form'              
+      = render 'form'
 
   / .how-it-works
     .wrap

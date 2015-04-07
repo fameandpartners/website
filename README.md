@@ -10,27 +10,40 @@
 * Postgres
 * ElasticSearch
 * Redis
+* `imagemagick`
+* [foreman](https://github.com/ddollar/foreman) - Development
+
+#### Quick installation
+
+```shell
+$ brew install redis elasticsearch imagemagick postgresql
+```
 
 ### Getting started
 
-* `$ git clone git@github.com:droidlabs/fame_and_partners.git`
-* `$ cd ./fame_and_partners`
+* `$ git clone git@github.com:fameandpartners/website.git`
+* `$ cd ./website`
+* `$ git submodule init && git submodule update` - to get the [styleguide](https://github.com/fameandpartners/styleguide)
 * `$ cp config/database.yml.example config/database.yml`
 * `$ bin/update_submodules` - For the common `styleguide` repository.
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
-`$ foreman start`
+```shell
+$ foreman start
+```
 
 ### Database
 
 It is generally easiest to have working development application with loading database dump from production/preprod site, and restoring them locally.
+
 * download latest dump from production ( through web interface from engine yard )
 * clean database with `$bundle exec rake db:schema:load`
 * restore data
   `pg_restore -d database_name --data-only --clean ./dump_file.dump`
 
 after it, remove valuable data & update settings
+
 * delete users `Spree::User.delete_all`
 * delete orders `Spree::Order.delete_all`
 * update shipping settings
@@ -40,32 +53,42 @@ after it, remove valuable data & update settings
 * if needed, update config/initializers/paperclip.rb && config/initializers/spree.rb configuration to use images from production. don't delete images locally it that case
 * refresh all local elastic search indexes
 
-### Update indexes
+#### Update indexes
 
-`Utility::Reindexer.reindex`
+```ruby
+Utility::Reindexer.reindex
+```
 
-* for dresses list pages ( show product with different colours as different )
-  `Products::ColorVariantsIndexer.index!`
-* for search page ( show product only once )
-  Tire.index(:spree_products) do
-    delete
-    import Spree::Product.all
-  end
-  Tire.index(:spree_products).refresh
+For dresses list pages ( show product with different colours as different )
+
+```ruby
+Products::ColorVariantsIndexer.index!
+```
+
+For search page ( show product only once )
+
+```ruby
+Tire.index(:spree_products) do
+  delete
+  import Spree::Product.all
+end
+Tire.index(:spree_products).refresh
+```
 
 ### Locating the Index Page
 The index landing page can be found in the views/index/show.html
 
 ## Manage colours pages
-1) update "lib/tasks/populate/colors_groups.rake" file
-2) deploy to production
-3) connect to production via ssh
-4) run rails console and delete existing option value groups using:
-ruby
-type = Spree::OptionType.find_by_name('dress-color')
-Spree::OptionValuesGroup.where(option_type_id: type.id).destroy_all
 
-5) exit from console end run Rake task "db:populate:colors_groups"
+1. update `lib/tasks/populate/colors_groups.rake` file
+2. deploy to production
+3. connect to production via ssh
+4. run rails console and delete existing option value groups using:
+    ```ruby
+    type = Spree::OptionType.find_by_name('dress-color')
+    Spree::OptionValuesGroup.where(option_type_id: type.id).destroy_all
+    ```
+5. exit from console end run Rake task "db:populate:colors_groups"
 
 ## Generate Shopping Feeds
 * $ `ey ssh -e production_new`

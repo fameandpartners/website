@@ -1,11 +1,12 @@
 class BoutiqueController < Spree::StoreController
-  layout 'spree/layouts/spree_application'
+  #layout 'spree/layouts/spree_application'
+  layout 'layouts/statics_fullscreen'
   respond_to :html
 
   # load user or use current
   # check user style profile
   def show
-    boutique = BoutiqueView.new(try_spree_current_user, params.extract!(:user_id, :competition_id))
+    boutique = BoutiqueView.new(try_spree_current_user, session, params.extract!(:user_id, :competition_id))
 
     @style_profile = boutique.style_profile
     @recommended_dresses = boutique.recommended_dresses
@@ -36,9 +37,12 @@ class BoutiqueController < Spree::StoreController
   private
 
   class BoutiqueView
-    def initialize(actor, options = {})
+    attr_reader :session
+
+    def initialize(actor, session, options = {})
       @actor = actor
       @options = options
+      @session = session
     end
 
     def style_profile
@@ -95,6 +99,19 @@ class BoutiqueController < Spree::StoreController
     end
 
     def get_user_style_profile
+      # trying to associate user
+      if session[:style_profile_id]
+        profile = UserStyleProfile.where(id: session[:style_profile_id]).first
+        if profile.token == session[:style_profile_access_token]
+          if user.present? && profile.user_id.blank?
+            profile.update_column(:user_id, user.id)
+            session[:style_profile_id] = nil
+            session[:style_profile_access_token] = nil
+          end
+          return profile
+        end
+      end
+
       if user.style_profile.present? 
         return user.style_profile
       else
@@ -103,7 +120,7 @@ class BoutiqueController < Spree::StoreController
     end
 
     def sorted_dresses
-      @sorted_dresses ||= Spree::Product.recommended_for(user, :limit => 28)
+      @sorted_dresses ||= Spree::Product.recommended_for(style_profile, :limit => 28)
     end
   end
 end

@@ -44,8 +44,8 @@
 //= require partials/helpers/product_side_selector_panel
 //= require partials/helpers/modal
 
-// THIS IS NOT A THING NOW
-// require popups/style_quiz
+// show old quiz in popup with iframe
+// require partials/style/popup
 
 //= require partials/product_collection.js
 //require partials/product_customisation.js

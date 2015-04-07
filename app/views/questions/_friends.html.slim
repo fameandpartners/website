@@ -1,42 +1,44 @@
 javascript:
-  try {
-    FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-        FB.api('/me/friends', 'get', { limit: 30 }, function(response){
-          _.each(response.data, function(item, index){
-            $block = $('.img-' + (index + 1), $('.invite-friends'));
-            $block.css('background-image', 'url(https://graph.facebook.com/' + item.id + '/picture?type=large)');
-            $block.fadeIn('slow');
-           });
-         });
-      }
-    });
-    $('a.choose-friends-link').click(function(event){
-      event.preventDefault();
-      window.track.event('Style Quiz', 'Share', '');
+  $(document).ready(function() {
+    try {
       FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
-          FB.ui(
-            {
-              method: 'send',
-              display: 'iframe',
-              link: 'http://www.fameandpartners.com/?utm_campaign=stylequiz&utm_source=fame&utm_medium=www'
-            },
-            Quiz.goToNextStep
-          );
-        } else {
-          FB.ui({
-            method: 'send',
-            display: 'popup',
-            link: 'http://www.fameandpartners.com/?utm_campaign=stylequiz&utm_source=fame&utm_medium=www'
-          }
-          );
+          FB.api('/me/taggable_friends', 'get', { limit: 30 }, function(response){
+            _.each(response.data, function(item, index){
+              $block = $('.img-' + (index + 1), $('.invite-friends'));
+              $block.css('background-image', 'url(' + item.picture.data.url + ')');
+              $block.fadeIn('slow');
+            });
+          });
         }
       });
-    });
-  } catch (exception) {
-    console.log(exception)
-  }
+      $('a.choose-friends-link').click(function(event){
+        event.preventDefault();
+        window.track.event('Style Quiz', 'Share', '');
+        FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+            FB.ui(
+              {
+                method: 'send',
+                display: 'iframe',
+                link: 'http://www.fameandpartners.com/?utm_campaign=stylequiz&utm_source=fame&utm_medium=www'
+              },
+              Quiz.goToNextStep
+            );
+          } else {
+            FB.ui({
+              method: 'send',
+              display: 'popup',
+              link: 'http://www.fameandpartners.com/?utm_campaign=stylequiz&utm_source=fame&utm_medium=www'
+            }
+            );
+          }
+        });
+      });
+    } catch (exception) {
+      console.log(exception)
+    }
+  });
 
 h1
   em Who do you go shopping with

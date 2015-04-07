@@ -18,6 +18,8 @@
 
 @import 'redesign/extras/tabs';
 
+@import 'redesign/icons';
+
 @import 'redesign/layout';
 @import 'redesign/header';
 @import 'redesign/footer';
@@ -31,8 +33,6 @@
 @import 'redesign/registration';
 @import 'redesign/style_consult';
 @import 'redesign/fashionista_winner';
-@import 'redesign/product';
-@import 'redesign/products_collections';
 @import 'redesign/index';
 @import 'redesign/typography';
 @import 'redesign/modal';
@@ -40,7 +40,8 @@
 @import 'redesign/mobile_menu';
 @import 'redesign/faqs';
 @import 'redesign/terms';
-@import 'redesign/product_colours';
+@import "redesign/products/*";
+
 @import 'redesign/stories-images';
 @import 'redesign/login';
 @import 'redesign/sale_lp';
@@ -138,14 +139,9 @@ h1.edit-title {
   background-color: #eeddf0;
 }
 
-/*
-  // added for quick reference only
-  <link rel="stylesheet" href="stylesheets/styles.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/demo.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/component.css" />
-  <link rel="stylesheet" href="stylesheets/jquery.skippr.css">
-  <link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="stylesheets/cs-select.css">
-  <link rel="stylesheet" href="stylesheets/cs-skin-border.css">
-*/
+.select2, .select2-container, .select2-container--default, .selection, .select2-selection, .select2-selection--single ,.select2-selection__rendered, .select2-selection__arrow, .select2-selection__rendered, .select2-search__field, button, .btn{
+  &:focus {
+    outline:none;
+  }
+}
+
