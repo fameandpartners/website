@@ -30,7 +30,7 @@ module Products
     end
 
     def custom_colors?
-      customizations_allowed? && colors.extra.any?
+      customisation_allowed? && colors.extra.any?
     end
 
     def colors
@@ -43,10 +43,6 @@ module Products
 
     def default_sizes?
       default_sizes.any?
-    end
-
-    def customizations_allowed?
-      ! discount.present?
     end
 
     def custom_sizes
@@ -66,12 +62,7 @@ module Products
     end
 
     def customization_options
-      if customizable?
-        customizations.all
-        #.collect { |c| {id: c.id, name: c.name, price: c.display_price.to_s} }   
-      else
-        []
-      end
+      customizable? ? customizations.all : []
     end
 
     def all_images
@@ -121,12 +112,21 @@ module Products
     end
 
     def customizable?
-      customizations_allowed? && customizations.present? && customizations.all.any?
+      customisation_allowed? && customizations.present? && customizations.all.any?
     end
 
     def customizations
       @customizations ||= available_options.customizations
     end
 
+    private
+
+    def customisation_allowed?
+      policy.customisation_allowed?
+    end
+
+    def policy
+      @policy ||= Policy::Product.new(self)
+    end
   end
 end
