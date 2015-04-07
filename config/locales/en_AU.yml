@@ -73,7 +73,7 @@ en-AU:
             question: 'Want a different colour?'
             email:
               subject: 'I would like this dress (%{sku}) in a different colour.'
-          size_region: 'All sizes are AU' 
+          size_region: 'All sizes are AU'
           labels:
             color: 'Choose a colour:'
           notices:
@@ -125,3 +125,17 @@ en-AU:
     shop:
       heading: 'Shop The Latest Trends'
       body: 'Whether you prefer traditional over trendy, or trendy over traditional, we have something for you all. Your self-designed dress can offer two-pieces, sexy cut outs, flowing chiffon, peplum detailing, asymmetrical hems, innocent lace and much more. Between the unique styles and the modern, classic silhouettes, you will never go wrong when picking a dress from Fame and Partners.'
+  order_states:
+    complete: complete
+    returned: returned
+    awaiting_return: awaiting return
+    payment: payment
+    address: address
+    canceled: cancelled
+    cart: cart
+  shipment_states:
+    pending: Your dress is in making
+    ready: Your dress is in quality control
+    shipped: Your dress has been shipped
+    backorder: Your dress is on backorder
+    partial: Your dress is in making
