@@ -1,6 +1,3 @@
-.m-pixel
-  img src="http://tags.rtbidder.net/track?sid=525646ee8bc06f1060d9f3a7" width="0" height="0" border="0" alt=""
-
 .personal-boutique
   .wrap
     h1.gothic.black.small = t('views.pages.personalization.products.index.title')
@@ -11,12 +8,12 @@
         = render 'personalization/products/product', product: product
 
 - if params[:cf] == 'custom-dresses-signup'
-  
+
   javascript:
     $(function(){
       track.conversion('customisation_sign_up')
     })
-    
+
     var fb_param = {};
     fb_param.pixel_id = '6010550195096';
     fb_param.value = '0.00';

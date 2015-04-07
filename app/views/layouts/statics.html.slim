@@ -2,22 +2,18 @@ doctype html
 = conditional_html do
   head
     script src="//cdn.optimizely.com/js/2450680664.js"
-    = render 'layouts/head'    
+    = render 'layouts/head'
     = csrf_meta_tags
 
     - unless Rails.env.development?
       = render 'spree/shared/google_analytics'
-      = render '/shared/zopim'    
+      = render '/shared/zopim'
     - if @nofollow
       meta name="ROBOTS" content="NOINDEX, FOLLOW"
-   
+
     = render '/shared/canonical'
 
   body class=(controller_action_class) id=(restfull_action_name)
-    .m-pixel
-      img src="http://tags.rtbidder.net/track?sid=525645858bc06f1060d9e531" width="0" height="0" border="0" alt=""
-      - if session.delete(:signed_up_just_now)
-        img src="http://tags.rtbidder.net/convert?sid=52564c5b8bc06f1060da28a2" width="0" height="0" border="0" alt=""
     #fb-root
     - if facebook_application.present?
       javascript:

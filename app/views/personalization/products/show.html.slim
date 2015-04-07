@@ -6,7 +6,7 @@ ruby:
   if @product.property('color_customization').present? && @product.property('color_customization').downcase == "yes"
     show_custom_colors = true
   end
-  
+
   if current_site_version.is_australia?
     site_version = 'aus'
   else
@@ -29,20 +29,20 @@ javascript:
         .row
           .grid-12
             .heading
-              h1 
+              h1
                 em Make it yours
-                br 
+                br
                 span.pink by #{t('words.customizing')} this dress
-              p 
+              p
                 em
                   ' Select from the options below to
                   span #{t('words.customize')} your dress!
               .delivery DELIVERY TIME IS ONLY 10 - 14 Business DAYS
               .arrows-line-horizontal
             #personalization
-              
+
               = render 'form', product: @product, personalization: @personalization, show_custom_colors: show_custom_colors
-              
+
             / .style
               .row
                 .grid-6
@@ -58,7 +58,7 @@ javascript:
                 .grid-6
                   .button
                     .btn.striped-disable
-                      ' this combination 
+                      ' this combination
                       br
                       ' is unavailable
                     p.cross A BOW
@@ -72,9 +72,6 @@ javascript:
                     p SHORT VERSION
     .grid-4
       = render 'spree/products/product_info', { product: @product, sizes: sizes, colors: colors, products: @recommended_products, site_version: site_version }
-
-.m-pixel
-  img src="http://tags.rtbidder.net/track?sid=525646ee8bc06f1060d9f3a7" width="0" height="0" border="0" alt=""
 
 /.wrap
   .product-page.grid-container

@@ -88,7 +88,6 @@ Spree::ProductsController.class_eval do
     respond_to do |format|
       format.html do
         set_collection_title(@page_info)
-        set_marketing_pixels(@searcher)
 
         render action: 'sorting', layout: true
       end
@@ -193,7 +192,7 @@ Spree::ProductsController.class_eval do
   end
 
   def product_filtering
-    
+
   end
 
   private
@@ -202,7 +201,7 @@ Spree::ProductsController.class_eval do
     root_taxon = args[:taxon]
     amount = args[:amount]
 
-    
+
 
     return Spree::Product.active.all.shuffle[1..amount]
   end
@@ -240,32 +239,6 @@ Spree::ProductsController.class_eval do
     else
       self.title = @page_info[:banner_title] + " - " + default_seo_title
       description = ActionController::Base.helpers.strip_tags(@page_info[:banner_text]) + ". " + default_meta_description
-    end
-  end
-
-  def set_marketing_pixels(searcher)
-    taxons = Spree::Taxon.where(id: searcher.collection || [])
-
-    @marketing_pixels = ''
-
-    return if taxons.empty?
-
-    taxon_names = taxons.map(&:name).map(&:downcase).uniq
-
-    if taxon_names.include?('long dresses')
-      @marketing_pixels += '<img src="http://tags.rtbidder.net/track?sid=525646058bc06f1060d9edfa" width="0" height="0" border="0" alt="" />'
-    end
-
-    if taxon_names.include?('short dresses')
-      @marketing_pixels += '<img src="http://tags.rtbidder.net/track?sid=525646288bc06f1060d9eed9" width="0" height="0" border="0" alt="" />'
-    end
-
-    if taxon_names.include?('skirts')
-      @marketing_pixels += '<img src="http://tags.rtbidder.net/track?sid=5256465f8bc06f1060d9f036" width="0" height="0" border="0" alt="" />'
-    end
-
-    if taxon_names.include?('tops')
-      @marketing_pixels += '<img src="http://tags.rtbidder.net/track?sid=5256468c8bc06f1060d9f0bf" width="0" height="0" border="0" alt="" />'
     end
   end
 

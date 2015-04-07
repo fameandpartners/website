@@ -3,7 +3,7 @@
 
 - if marketing_landing_page?
   = render '/shared/marketing_pop_js'
-    
+
 - if (image_url = marketing_banner_image_url).present? && !sale_active?
   .row
     .grid-12
@@ -15,7 +15,7 @@
     .category-header
       h1 = @page_info[:banner_title]
       h2 = raw @page_info[:banner_text]
-- else  
+- else
   .category-header
     h1 = @page_info[:banner_title]
     h2 = raw @page_info[:banner_text]
@@ -31,7 +31,7 @@
 - products_filters_cache_key = [:layout, :products, 'filters']
 - cache products_filters_cache_key, expires_in: configatron.cache.expire.long do
   .category-filter
-    .fleft 
+    .fleft
       .filter-section
         - options = options_from_collection_for_select(available_product_styles, :base_permalink, :name, params[:collection])
         = select_tag :style, options, class: 'selectbox', prompt: 'Styles'
@@ -56,8 +56,3 @@
 = render 'products'
 .m-pixel
   = raw @marketing_pixels
-script type="text/javascript" id="adacadoPixel" src="//pixel.adacado.com/1000668?segment=category&category=#{@page_info[:banner_title]}"
-
-// OLD HTML ---->
-/ .m-pixel
-  img src="http://tags.rtbidder.net/track?sid=525645e58bc06f1060d9eb38" width="0" height="0" border="0" alt=""

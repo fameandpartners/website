@@ -2,8 +2,6 @@ ruby:
   total_amount = @order.display_item_total
   total_amount = total_amount.to_s.delete('$')
 
-.m-pixel
-  img src="http://tags.rtbidder.net/convert?sid=52564c0e8bc06f1060da24f8" width="0" height="0" border="0" alt=""
 script src="https://secure.adnxs.com/px?id=154031&seg=1436880&order_id=#{ @order.number }&value=#{ @order.display_item_total }&t=1" type="text/javascript"
 // -- Facebook Conversion Code for Sales
 javascript:

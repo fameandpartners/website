@@ -19,7 +19,7 @@ doctype html
 
     /meta property="fb:app_id" content="591959187490267"
     /- if restfull_action_name == 'girlfriendxfame' || restfull_action_name == 'nye'
-      meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" 
+      meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
 
     /- unless Rails.env.production?
       meta name="robots" content="noindex, nofollow"
@@ -32,9 +32,6 @@ doctype html
 
     = yield :head
   body
-    /.m-pixel
-      img src="http://tags.rtbidder.net/track?sid=525645858bc06f1060d9e531" width="0" height="0" border="0" alt=""
-      img src="http://tags.rtbidder.net/convert?sid=52564c2b8bc06f1060da2599" width="0" height="0" border="0" alt=""
     #wrap
       #content
         = yield
