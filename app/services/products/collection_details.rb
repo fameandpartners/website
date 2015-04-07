@@ -111,34 +111,4 @@ class Products::CollectionDetails
   def fast_delivery?
     fast_delivery == true
   end
-
-#   {
-#     id: taxon.id,
-#     taxonomy: taxon.taxonomy.name,
-#     name: taxon.name,
-#     permalink: taxon.base_permalink,
-#     position: taxon.position,
-#     meta_title: taxon.meta_title,
-#     title: taxon.meta_title,
-#     meta_description: taxon.meta_description,
-#     meta_keywords: taxon.meta_keywords,
-#     description: taxon.description,
-#     banner: OpenStruct.new({}),
-#     root: taxon.root?
-#   }
-# )
-#
-# if taxon.banner.present?
-#   result.banner.title       = taxon.banner.title
-#   result.banner.subtitle    = taxon.banner.description
-#   result.banner.image       = taxon.banner.image.present? ? taxon.banner.image(:banner) : nil
-#   result.title              = taxon.banner.title
-#   result.footer             = taxon.banner.footer_text
-#   result.seo_description    = taxon.banner.seo_description
-# end
-
-  # def cache_key
-  #   "collection-details-#{ site_version.permalink}-#{ taxon.permalink }"
-  # end
-
 end

@@ -92,14 +92,3 @@ class UpdateStockQuantites
       variant.try(:product)
     end
 end
-
-=begin
-result = []
-result = Spree::Variant.where('count_on_hand > ?', 0).map do |variant|
-  row =   "#{ variant.sku } #{ variant.id } ";
-  row <<  "#{ variant.dress_size.try(:name) } #{ variant.dress_color.try(:name) } ";
-  row <<  " - #{ variant.count_on_hand }";
-  row
-end
-puts result.sort
-=end
