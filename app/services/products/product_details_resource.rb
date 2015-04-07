@@ -26,7 +26,7 @@ class Products::ProductDetailsResource
       @product = product_with_associations(@product)
 
       # product details
-      OpenStruct.new({
+      FastOpenStruct.new({
         id: product.id,
         master_id: product.master.try(:id),
         sku:  product.sku,
@@ -200,12 +200,12 @@ class Products::ProductDetailsResource
     def selected_product_color
       @selected_product_color ||= begin
         if color_name.present? && (color = Spree::OptionValue.colors.find_by_name(color_name)).present?
-          OpenStruct.new(id: color.id, presentation: color.presentation, name: color.name)
+          FastOpenStruct.new(id: color.id, presentation: color.presentation, name: color.name)
         elsif product_images.present?
           image = product_images.first
-          OpenStruct.new(id: image.color_id, presentation: image.color, name: image.color)
+          FastOpenStruct.new(id: image.color_id, presentation: image.color, name: image.color)
         else
-          OpenStruct.new({})
+          FastOpenStruct.new({})
         end
       end
     end
@@ -259,7 +259,7 @@ class Products::ProductDetailsResource
 
     def available_product_customisations
       product_customisation_values.map do |value|
-        OpenStruct.new({
+        FastOpenStruct.new({
           id: value.id,
           name: value.presentation,
           image: value.image.present? ? value.image.url : 'logo_empty.png',

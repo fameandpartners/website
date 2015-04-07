@@ -40,7 +40,7 @@ class Repositories::CartProduct
       result
     end
   rescue
-    OpenStruct.new({})
+    FastOpenStruct.new({})
   end
   cache_results :read
 
@@ -94,7 +94,7 @@ class Repositories::CartProduct
     end
 
     def line_item_price
-      OpenStruct.new(
+      FastOpenStruct.new(
         display_price: Spree::Price.new(amount: line_item.price).display_price.to_s,
         'in_sale?'.to_sym => line_item.in_sale?,
         money: line_item.money,

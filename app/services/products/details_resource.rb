@@ -122,7 +122,7 @@ class Products::DetailsResource
         image = Repositories::ProductImages.new(product: recommended_product).read(cropped: true)
         color = Repositories::ProductColors.read(image.try(:color_id))
 
-        OpenStruct.new(
+        FastOpenStruct.new(
           id: recommended_product.id,
           name: recommended_product.name,
           price: Repositories::ProductPrice.new(site_version: site_version, product: recommended_product).read,

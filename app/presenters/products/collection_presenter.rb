@@ -1,4 +1,4 @@
-class Products::CollectionPresenter < OpenStruct
+class Products::CollectionPresenter < FastOpenStruct
 
   def any?
     !none?

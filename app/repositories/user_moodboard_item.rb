@@ -9,7 +9,7 @@ class Repositories::UserMoodboardItem
   end
 
   def read
-    OpenStruct.new(
+    FastOpenStruct.new(
       id: item.id,
       item_id: item.id,
       name: product.name,

@@ -37,7 +37,7 @@ describe UpdateStockQuantites do
     }
 
     it 'updates quantity for given variants' do
-      stock_variant_details = OpenStruct.new(sku: variant.sku, colour: 'black', size: 15, quantity: 10)
+      stock_variant_details = FastOpenStruct.new(sku: variant.sku, colour: 'black', size: 15, quantity: 10)
       subject = UpdateStockQuantites.new([stock_variant_details])
 
       allow_any_instance_of(Products::VariantsReceiver).to receive(:available_options).and_return([{
@@ -62,7 +62,7 @@ describe UpdateStockQuantites do
       product.update_attributes(on_demand: false)
 
       # incoming data doen't contain any info about this products
-      stock_variant_details = OpenStruct.new(sku: variant.sku, colour: 'black', size: 15, quantity: 10)
+      stock_variant_details = FastOpenStruct.new(sku: variant.sku, colour: 'black', size: 15, quantity: 10)
       subject = UpdateStockQuantites.new([stock_variant_details])
 
       allow_any_instance_of(Products::VariantsReceiver).to receive(:available_options).and_return([])

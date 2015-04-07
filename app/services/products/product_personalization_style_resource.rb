@@ -23,7 +23,7 @@ class Products::ProductPersonalizationStyleResource
       @product = product_with_associations(@product)
 
       # product details
-      OpenStruct.new({
+      FastOpenStruct.new({
         id: product.id,
         master_id: product.master.try(:id),
         sku:  product.sku,
@@ -210,7 +210,7 @@ class Products::ProductPersonalizationStyleResource
 
     def available_product_customisations
       product_customisation_values.map do |value|
-        OpenStruct.new({
+        FastOpenStruct.new({
           id: value.id,
           name: value.presentation,
           image: value.image.present? ? value.image.url : 'logo_empty.png',

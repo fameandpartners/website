@@ -1,5 +1,5 @@
 module Products
-  class Presenter < OpenStruct
+  class Presenter < FastOpenStruct
 
     def default_color_options
       if colors? && colors.default.any?        

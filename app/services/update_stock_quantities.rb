@@ -63,7 +63,7 @@ class UpdateStockQuantites
             end
 
             if variant.present?
-              result.push(OpenStruct.new(id: variant[:id], product_id: product.id, quantity: stock_data_variant.quantity))
+              result.push(FastOpenStruct.new(id: variant[:id], product_id: product.id, quantity: stock_data_variant.quantity))
             end
           end
         end
@@ -78,7 +78,7 @@ class UpdateStockQuantites
         variants_data.group_by {|data| data.product_id }.each do |product_id, variants|
           product_on_hand = variants.sum{|variant| variant.quantity.to_i }
           if product_on_hand > 0
-            result.push(OpenStruct.new(id: product_id, quantity: product_on_hand))
+            result.push(FastOpenStruct.new(id: product_id, quantity: product_on_hand))
           end
         end
         result

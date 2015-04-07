@@ -34,7 +34,7 @@ class Bridesmaid::BoughtAdditionalProductsResource
       additional_products.map do |item|
         if item[:line_item_id].present? && line_items_ids.include?(item[:line_item_id])
           # {:name=>:consierge_service, email: email, :line_item_id=>10467, :phone=>"123123123", :suburb_state=>"state"}]
-          OpenStruct.new({
+          FastOpenStruct.new({
             product: line_item_details(item[:line_item_id], item[:name]),
             email: item[:email],
             phone: item[:phone],

@@ -27,7 +27,7 @@ class Bridesmaid::AddDressSelectedByBridesmaidToCart
     cart.update!
     cart.reload
 
-    OpenStruct.new({
+    FastOpenStruct.new({
       name: product.name,
       sku: product.sku,
       price: product.price

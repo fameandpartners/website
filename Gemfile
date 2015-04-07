@@ -69,6 +69,9 @@ gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :
 # utils
 # replacement for standart library.
 gem 'addressable', require: false
+# TODO - Remove this, and all uses of OpenStruct. Due Date: 2015.05.01
+# This is a TEMPORARY drop in replacement for the OpenStructs
+gem 'fast_open_struct'
 
 gem 'rollout'
 

@@ -45,7 +45,7 @@ class Bridesmaid::ProductsController < Bridesmaid::BaseController
     end
 
     def banner
-      OpenStruct.new(
+      FastOpenStruct.new(
         title: 'Bridesmaid Dress Selection',
         text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor'
       )

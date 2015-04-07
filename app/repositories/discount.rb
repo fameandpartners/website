@@ -56,7 +56,7 @@ class Repositories::Discount
       # structure like this:
       # {
       #   spree_products: {
-      #     id: OpenStruct.new(amount: amount)
+      #     id: FastOpenStruct.new(amount: amount)
       #   }
       #
       # }
@@ -72,7 +72,7 @@ class Repositories::Discount
             if existing_discount.present? && (existing_discount.amount > discount.amount)
               # we already have saved better discount
             elsif discount.amount.to_i > 0
-              all_discounts[key][discount.discountable_id] = OpenStruct.new(
+              all_discounts[key][discount.discountable_id] = FastOpenStruct.new(
                 amount: discount.amount,
                 size:   discount.size
               )

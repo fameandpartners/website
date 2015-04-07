@@ -51,7 +51,7 @@ class Bridesmaid::SimilarProducts
 
     def build_product(search_result)
       item = search_result
-      OpenStruct.new(
+      FastOpenStruct.new(
         id: item.product.id,
         master_id: item.product.master_id,
         #variant_id: item.id,

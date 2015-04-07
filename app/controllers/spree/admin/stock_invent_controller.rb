@@ -7,7 +7,7 @@ module Spree
       respond_to :html, :js, :json
 
       def edit
-        @preferences = OpenStruct.new(preferences)
+        @preferences = FastOpenStruct.new(preferences)
       end
 
       def update

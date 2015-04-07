@@ -40,13 +40,13 @@ class Bridesmaid::ProductDetailsResource
       # filter selected color
       if !color_ids.include?(details.selected_color.id)
         if (image = details.images.first).present?
-          details.selected_color = OpenStruct.new(
+          details.selected_color = FastOpenStruct.new(
             id: image.color_id,
             name: image.color,
             presentation: image.color
           )
         else
-          details.selected_color = OpenStruct.new({})
+          details.selected_color = FastOpenStruct.new({})
         end
       end
 

@@ -8,7 +8,7 @@ class Repositories::ProductMoodboard
   end
 
   def read
-    OpenStruct.new({
+    FastOpenStruct.new({
       song_item:        convert_item(song_item),
       celebrity_item:   convert_item(celebrity_item),
       items:            other_items
@@ -20,7 +20,7 @@ class Repositories::ProductMoodboard
   private
 
   def convert_item(item)
-    OpenStruct.new(image_url: item.try(:image).try(:url), source: item.try(:source))
+    FastOpenStruct.new(image_url: item.try(:image).try(:url), source: item.try(:source))
   end
 
   def moodboard_items

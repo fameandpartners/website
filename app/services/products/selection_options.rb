@@ -12,10 +12,10 @@ class Products::SelectionOptions
   end
 
   def read
-    OpenStruct.new({
+    FastOpenStruct.new({
       variants: product_variants,
 
-      sizes: OpenStruct.new({
+      sizes: FastOpenStruct.new({
         default: default_product_sizes,
         extra: extra_product_sizes,
         default_extra_price: Spree::Price.new(
@@ -24,7 +24,7 @@ class Products::SelectionOptions
         )
       }),
 
-      colors: OpenStruct.new({
+      colors: FastOpenStruct.new({
         default: default_product_colors,
         extra: extra_product_colors,
         default_extra_price: Spree::Price.new(
@@ -33,7 +33,7 @@ class Products::SelectionOptions
         )
       }),
 
-      customizations: OpenStruct.new({
+      customizations: FastOpenStruct.new({
         all: available_product_customisations,
         incompatibilities: customisations_incompatibility_map,
         is_free: Spree::Config[:free_customisations]
@@ -107,7 +107,7 @@ class Products::SelectionOptions
 
     def available_product_customisations
       product_customisation_values.map do |value|
-        OpenStruct.new({
+        FastOpenStruct.new({
           id: value.id,
           name: value.presentation,
           image: value.image.present? ? value.image.url : 'logo_empty.png',

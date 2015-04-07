@@ -6,7 +6,7 @@ module Blog
   end
 
   def self.config
-    result = OpenStruct.new
+    result = FastOpenStruct.new
     Blog::Preference.all.each do |preference|
       if preference.value.present?
         result.send("#{preference.key}=", preference.value)

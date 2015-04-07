@@ -14,7 +14,7 @@ module Repositories
         @colors_map ||= begin
           result = {}
           Spree::OptionType.color.option_values.each do |option_value|
-            result[option_value.id] = OpenStruct.new(
+            result[option_value.id] = FastOpenStruct.new(
               id: option_value.id,
               name: option_value.name,
               presentation: option_value.presentation,
@@ -34,10 +34,10 @@ module Repositories
             if color_ids.size == 1
               representative = Repositories::ProductColors.read(color_ids.first)
             else
-              representative = OpenStruct.new(name: group.name, presentation: group.name)
+              representative = FastOpenStruct.new(name: group.name, presentation: group.name)
             end
 
-            OpenStruct.new(
+            FastOpenStruct.new(
               id: group.id,
               name: group.name.to_s.downcase, 
               presentation: group.presentation,

@@ -1,5 +1,5 @@
 module UserCart; end
-class UserCart::CartProductPresenter < OpenStruct
+class UserCart::CartProductPresenter < FastOpenStruct
   def serialize
     result = self.marshal_dump.clone
 

@@ -1,3 +1,3 @@
 module UserMoodboard; end
-class UserMoodboard::DetailsPresenter < OpenStruct
+class UserMoodboard::DetailsPresenter < FastOpenStruct
 end

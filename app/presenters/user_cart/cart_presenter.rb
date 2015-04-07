@@ -1,5 +1,5 @@
 module UserCart; end
-class UserCart::CartPresenter < OpenStruct
+class UserCart::CartPresenter < FastOpenStruct
   def serialize
     {
       products: products.map do |product|

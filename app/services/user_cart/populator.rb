@@ -34,15 +34,15 @@ class  UserCart::Populator
     order.update!
     order.reload
 
-    return OpenStruct.new({
+    return FastOpenStruct.new({
       success: true,
       product: product,
       cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
   rescue Errors::ProductOptionNotAvailable => e
-    OpenStruct.new({ success: false, message: e.message })
+    FastOpenStruct.new({ success: false, message: e.message })
   rescue Exception => e
-    OpenStruct.new({ success: false, message: e.message })
+    FastOpenStruct.new({ success: false, message: e.message })
   end
 
   private

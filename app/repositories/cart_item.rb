@@ -9,7 +9,7 @@ class CartItem
   end
 
   def read
-    OpenStruct.new(
+    FastOpenStruct.new(
       id: line_item.id,
       name: product.name,
       variant_id: variant.id,
@@ -21,9 +21,9 @@ class CartItem
       quantity: line_item.quantity,
       customizations: product_customizations,
       # collection product path support
-      product: OpenStruct.new(id: product.id, name: product.name),
+      product: FastOpenStruct.new(id: product.id, name: product.name),
       # price_for_line_item price support
-      line_item: OpenStruct.new(
+      line_item: FastOpenStruct.new(
         'in_sale?'.to_sym => line_item.in_sale?,
         money: line_item.money,
         money_without_discount: line_item.in_sale? ? line_item.money_without_discount : nil

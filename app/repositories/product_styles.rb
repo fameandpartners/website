@@ -10,12 +10,12 @@ class ProductStyles
   def read
     grouped_styles_data.collect do |style, accessories|
       accessories ||= []
-      OpenStruct.new({
+      FastOpenStruct.new({
         name: style.try(:name),
         title: style.try(:title),
         images: accessories.map{|item| item.image.present? ? item.image.url(:product) : nil }.compact,
         accessories: accessories.map do |item|
-          OpenStruct.new(
+          FastOpenStruct.new(
             name: item.name,
             title: item.title,
             source: item.source,

@@ -140,7 +140,7 @@ class Products::CollectionResource
         price = Repositories::ProductPrice.new(site_version: site_version, product_id: color_variant.product.id).read
         discount = Repositories::Discount.get_product_discount(color_variant.product.id)
         color = Repositories::ProductColors.read(color_variant.color.id)
-        OpenStruct.new(
+        FastOpenStruct.new(
           id:             color_variant.product.id,
           name:           color_variant.product.name,
           color:          color_variant.color,

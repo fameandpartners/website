@@ -36,7 +36,7 @@ class BlogController < BlogBaseController
     def load(options = {})
       posts = load_posts(options)
       posts.collect do |post_data|
-        OpenStruct.new({
+        FastOpenStruct.new({
           image_url: extract_image_url(post_data['images']),
           url: post_data['link']
         })

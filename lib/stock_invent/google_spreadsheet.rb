@@ -30,7 +30,7 @@ class StockInvent::GoogleSpreadsheet
           # quantity not specified - this doesn't mean what we have 0
           next if quantity.blank?
 
-          result.push(OpenStruct.new({
+          result.push(FastOpenStruct.new({
             sku: sku,
             colour: colour,
             size: size_name,

@@ -49,7 +49,7 @@ class SiteVersion < ActiveRecord::Base
   def size_settings
     @size_settings ||= begin
       if is_australia?
-        OpenStruct.new({
+        FastOpenStruct.new({
           size_info_label: 'AUS Sizes Displayed',
           size_start: 4,
           size_charge_start: 18,
@@ -60,7 +60,7 @@ class SiteVersion < ActiveRecord::Base
           currency_code: 'AUD'
         }) 
       else
-        OpenStruct.new({
+        FastOpenStruct.new({
           size_info_label: 'US Sizes Displayed',
           size_start: 0,
           size_charge_start: 14,

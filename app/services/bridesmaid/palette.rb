@@ -1,7 +1,7 @@
 class Bridesmaid::Palette
   class << self
     def get
-      palette = OpenStruct.new(
+      palette = FastOpenStruct.new(
         color_groups: color_groups
       )
     end
@@ -9,11 +9,11 @@ class Bridesmaid::Palette
     def color_groups
       @color_groups ||= begin
         Spree::OptionValuesGroup.includes(:option_values).all.map do |option_value_group|
-          OpenStruct.new(
+          FastOpenStruct.new(
             name: option_value_group.name,
             presentation: option_value_group.presentation,
             colors: option_value_group.option_values.map do |option_value|
-              OpenStruct.new(
+              FastOpenStruct.new(
                 id: option_value.id, 
                 name: option_value.name,
                 presentation: option_value.presentation,

@@ -12,7 +12,7 @@ class Reports::BridesmaidPartyUserSales
   end
 
   def report
-    @report ||= OpenStruct.new(
+    @report ||= FastOpenStruct.new(
       fields: report_fields,
       users:  bridesmaid_party_registered_users,
       average: calculate_averages(bridesmaid_party_registered_users)
@@ -36,7 +36,7 @@ class Reports::BridesmaidPartyUserSales
         BridesmaidParty::Event.includes(:spree_user, members: :spree_user).map do |event|
           registered_members = event.members.map{|m| m.spree_user }.compact
 
-          OpenStruct.new(
+          FastOpenStruct.new(
             bridesmaids_count: event.bridesmaids_count,
             bridesmaids_registered: registered_members.size,
             paying_for_bridesmaids: event.paying_for_bridesmaids,
@@ -56,10 +56,10 @@ class Reports::BridesmaidPartyUserSales
 
     def calculate_averages(users)
       if users.blank?
-        return OpenStruct.new()
+        return FastOpenStruct.new()
       end
 
-      OpenStruct.new(
+      FastOpenStruct.new(
         bridesmaids_count: (users.sum(&:bridesmaids_count) / users.size.to_f),
         bridesmaids_registered: (users.sum(&:bridesmaids_registered) / users.size.to_f),
         paying_for_bridesmaids: users.count(&:paying_for_bridesmaids) * 100 / users.size.to_f,

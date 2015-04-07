@@ -3,7 +3,7 @@
 class Products::CollectionFilter
   class << self
     def read
-      OpenStruct.new({
+      FastOpenStruct.new({
         styles: Repositories::Taxonomy.read_styles,
         events: Repositories::Taxonomy.read_events,
         shapes: ProductStyleProfile::BODY_SHAPES,

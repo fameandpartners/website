@@ -96,7 +96,7 @@ class Bridesmaid::CheckIsDressBoughtByMember
       end
 
       line_item.variant.dress_size
-        OpenStruct.new({
+        FastOpenStruct.new({
           image_url: moodboard_item.image_url,
           name: moodboard_item.name,
           price: moodboard_item.price,

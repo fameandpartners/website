@@ -89,7 +89,7 @@ class Repositories::ProductSize
         Spree::Variant.size_option_type.try(:option_values).each do |option_value|
           value = Integer(option_value.name) rescue option_value.name
 
-          result[option_value.id] = OpenStruct.new(
+          result[option_value.id] = FastOpenStruct.new(
             id: option_value.id,
             name: option_value.name,
             presentation: option_value.presentation,

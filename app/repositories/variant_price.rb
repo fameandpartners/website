@@ -9,7 +9,7 @@ class Repositories::VariantPrice
   end
 
   def read
-    result = OpenStruct.new(
+    result = FastOpenStruct.new(
       id: variant.id,
       product_id: variant.product_id,
     )
@@ -18,7 +18,7 @@ class Repositories::VariantPrice
   # variant_price = Repositories::VariantPrice.new(variant: variant).read
   # variant_price[site_verson.permalink]
   def read
-    OpenStruct.new(
+    FastOpenStruct.new(
       id: variant.id,
       product_id: variant.product_id,
       aud: { currency: 'aud', amount: 150 },

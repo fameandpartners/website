@@ -27,7 +27,7 @@ module Search
           }
         end
       else
-        OpenStruct.new(results: OpenStruct.new(results: []))
+        FastOpenStruct.new(results: FastOpenStruct.new(results: []))
       end
     end
   end

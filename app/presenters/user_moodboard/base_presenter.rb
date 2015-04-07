@@ -1,5 +1,5 @@
 module UserMoodboard; end
-class UserMoodboard::BasePresenter < OpenStruct
+class UserMoodboard::BasePresenter < FastOpenStruct
   def serialize
     { 
       item_count: item_count,

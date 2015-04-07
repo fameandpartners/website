@@ -9,7 +9,7 @@ class Repositories::UserCart
   end
 
   def read
-    OpenStruct.new(
+    FastOpenStruct.new(
       items: order_items
     )
   end

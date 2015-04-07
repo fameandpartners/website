@@ -2,7 +2,7 @@ ruby:
   if current_spree_user
     user  = current_spree_user
   else
-    user = OpenStruct.new(first_name: 'Your')
+    user = FastOpenStruct.new(first_name: 'Your')
   end
 
 .personal-boutique

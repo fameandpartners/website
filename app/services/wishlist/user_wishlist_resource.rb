@@ -9,7 +9,7 @@ class Wishlist::UserWishlistResource
   end
 
   def read
-    OpenStruct.new({
+    FastOpenStruct.new({
       title:    'My Moodboard',
       owner:    moodboard_owner,
       is_owner: true,
@@ -87,7 +87,7 @@ class Wishlist::UserWishlistResource
       end
 
       bridesmaids_selected.collect do |bridesmaid|
-        OpenStruct.new({
+        FastOpenStruct.new({
           id: bridesmaid.id,
           name: bridesmaid.spree_user.try(:first_name) || bridesmaid.full_name,
           full_name: bridesmaid.spree_user.try(:full_name) || bridesmaid.full_name,

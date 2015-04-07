@@ -44,14 +44,14 @@ class Repositories::ProductVariants
   def self.read(variant_id)
     Rails.cache.fetch("product-variant-#{ variant_id}",  Repositories::CachingSystem.cache_fetch_params) do
       variant = Spree::Variant.where(id: variant_id).first
-      variant.blank? ? OpenStruct.new({}) : format_variant(variant)
+      variant.blank? ? FastOpenStruct.new({}) : format_variant(variant)
     end
   end
 
   private
 
     def self.format_variant(variant)
-      OpenStruct.new({
+      FastOpenStruct.new({
         id: variant.id,
         size_id: variant.option_values.find{|ov| ov.option_type_id == Spree::Variant.size_option_type.id }.try(:id),
         color_id: variant.option_values.find{|ov| ov.option_type_id == Spree::Variant.color_option_type.id }.try(:id),

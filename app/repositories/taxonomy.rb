@@ -83,7 +83,7 @@ class Repositories::Taxonomy
       all_taxons = []
 
       Spree::Taxon.includes(:taxonomy, :banner).each do |taxon|
-        result = OpenStruct.new(
+        result = FastOpenStruct.new(
           {
             id: taxon.id,
             taxonomy: taxon.taxonomy.name,
@@ -95,7 +95,7 @@ class Repositories::Taxonomy
             meta_description: taxon.meta_description,
             meta_keywords: taxon.meta_keywords,
             description: taxon.description,
-            banner: OpenStruct.new({}),
+            banner: FastOpenStruct.new({}),
             root: taxon.root?
           }
         )

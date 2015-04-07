@@ -59,7 +59,7 @@ class ProductImages
       results = []
       product.variants_including_master.includes(:images, :option_values).each do |variant|
         variant.images.each do |image|
-          result = OpenStruct.new(
+          result = FastOpenStruct.new(
             image_data(image).merge({
               color: variant.dress_color.try(:name),
               color_id: variant.dress_color.try(:id),
@@ -77,7 +77,7 @@ class ProductImages
 
       product.product_color_values.includes(:images, :option_value).each do |product_color_value|
         product_color_value.images.each do |image|
-          result = OpenStruct.new(
+          result = FastOpenStruct.new(
             image_data(image).merge({
               color:    product_color_value.option_value.try(:name),
               color_id: product_color_value.option_value.try(:id),
@@ -104,7 +104,7 @@ class ProductImages
     end
 
     def default_image(url = 'noimage/product.png')
-      OpenStruct.new({
+      FastOpenStruct.new({
         id: nil,
         position: 0,
         original: url,

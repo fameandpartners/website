@@ -37,7 +37,7 @@ class UserMoodboard::BaseResource
     def wishlist_items
       @wishlist_items ||= begin
         user.wishlist_items.map do |item|
-          OpenStruct.new(
+          FastOpenStruct.new(
             variant_id: item.spree_variant_id,
             product_id: item.spree_product_id,
             color_id: item.product_color_id

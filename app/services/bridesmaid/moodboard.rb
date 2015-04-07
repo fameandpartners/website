@@ -8,7 +8,7 @@ class Bridesmaid::Moodboard
   end
 
   def read
-    OpenStruct.new({
+    FastOpenStruct.new({
       title:    title,
       owner:    moodboard_owner,
       is_owner: is_owner,
