@@ -10,11 +10,12 @@ describe 'NABTransact' do
     # This just lets us track test transactions a bit easier in the NAB interface.
     let(:whodunnit) { "#{ENV['USER']}@#{Socket.gethostname}-#{Process.pid}" }
 
-    let(:one_dollar)      { 100 }
+    let(:purchase_amount) { 100 }
     let(:order_reference) { "#{gateway_slug}-#{whodunnit}" }
     let(:test_username)   { 'G9C0010'  }
     let(:test_password)   { '3kbn8AO1' }
     let(:test_mode)       { true }
+    let(:currency)        { 'AUD' }
 
     let(:visa_test_card) {
       ActiveMerchant::Billing::CreditCard.new(
@@ -28,7 +29,7 @@ describe 'NABTransact' do
     }
 
     subject(:response) do
-      gateway.purchase(one_dollar, valid_test_card, order_id: order_reference)
+      gateway.purchase(purchase_amount, visa_test_card, order_id: order_reference, currency: currency)
     end
 
     shared_examples :processes_test_transactions do
@@ -36,7 +37,8 @@ describe 'NABTransact' do
         expect(response.params['response_code']).to     eq '00'
         expect(response.params['response_text']).to     eq 'Approved'
         expect(response.params['merchant_id']).to       eq test_username
-        expect(response.params['amount']).to            eq one_dollar.to_s
+        expect(response.params['amount']).to            eq purchase_amount.to_s
+        expect(response.params['currency']).to          eq currency
         expect(response.params['purchase_order_no']).to eq order_reference
         expect( Date.strptime(response.params['settlement_date'], "%Y%m%d")).to be_within(1.day).of(Date.today)
       end
@@ -53,10 +55,18 @@ describe 'NABTransact' do
         )
       }
 
-      include_examples :processes_test_transactions
+      context 'AUD' do
+        let(:currency) { 'AUD' }
+        include_examples :processes_test_transactions
+      end
+
+      context 'USD' do
+        let(:currency) { 'USD' }
+        include_examples :processes_test_transactions
+      end
     end
 
-    context 'Spree::Gateway::NabTransactGateway' do
+    context Spree::Gateway::NabTransactGateway do
       let(:gateway_slug) { "S:G:NTGW" }
 
       let(:gateway) {
@@ -67,7 +77,15 @@ describe 'NABTransact' do
         )
       }
 
-      include_examples :processes_test_transactions
+      context 'AUD' do
+        let(:currency) { 'AUD' }
+        include_examples :processes_test_transactions
+      end
+
+      context 'USD' do
+        let(:currency) { 'USD' }
+        include_examples :processes_test_transactions
+      end
     end
   end
 end
