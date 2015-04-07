@@ -141,36 +141,30 @@ ruby:
     .col-md-6.col-sm-12.hidden-xs
       h3 Dress Inspiration
       .inspiration
-        - first_row = @product.inspiration.first
-        - second_row = @product.inspiration.last
         .row
-          .box.song.col-sm-4.no-padding.pink
+          .box.col-sm-4.no-padding
             - if @product.song
               = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
               = link_to '#', data: { action: 'soundcloud' } do
-                = image_tag @product.song.image_url
+                = image_tag @product.song.image_url, class: 'img-responsive'
                 .fa.fa-volume-up
-                / = image_tag '_audio-icon.png', class: 'icon'
               span.mask
               .player-controls
                 = link_to '#', data: { action: 'soundcloud' } do
                   span.fa.fa-play
                   span.fa.fa-pause
 
-          - first_row.each do |item|
-            .box.col-sm-4.no-padding.cream
-              = image_tag(item.image_url) if item
-        .row
-          .box.col-sm-4.no-padding.pink-light
+          .box.col-sm-4.no-padding
             - if @product.celebrity
-              = image_tag @product.celebrity.image_url
-          - second_row.each do |item|
-            .box.col-sm-4.no-padding.cream
-              = image_tag(item.image_url) if item
+              = image_tag @product.celebrity.image_url, class: 'img-responsive'
+
+          - @product.inspiration.each do |item|
+            .box.col-sm-4.no-padding
+              = image_tag(item.image_url, :class => 'img-responsive')
 
     .col-md-6.col-sm-12
       h3 The Story
-      br
+
       - if @product.preorder?
         .pre-order
           strong Pre-order
