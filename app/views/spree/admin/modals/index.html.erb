@@ -158,6 +158,8 @@
         <div className="clearfix">
             <ParametersTable parameters={this.state.data} onUserInput={this.handleUserInput} knownPromoCodes={this.props.knownPromoCodes} />
             <PreviewBar parameters={this.state.data} keys={this.state} baseUrl={this.props.baseUrl}/>
+            <h3>Notes:</h3>
+            <p>To use HTML in the message or heading, you need to escape the closing tag &gt; with a <code>/</code> e.g. </p><p><code>Use &lt;span&gt;CODE&lt;/span/&gt; at checkout</code></p>
         </div>
       );
     }

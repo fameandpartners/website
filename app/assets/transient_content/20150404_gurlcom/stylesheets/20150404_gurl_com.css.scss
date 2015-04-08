@@ -1,7 +1,7 @@
 .gurl_com_modal.email-capture-modal {
   .vex-content {
     background-color:      $pink-bg;
-    background-image:      url('20150404_gurlcom/images/gurl-modal-background.png');
+    background-image:      url('modals/basic-pink-modal.png');
     background-position-y: 0;
     background-repeat:     no-repeat;
     border:                3px solid black;
@@ -9,98 +9,41 @@
     text-transform:        uppercase;
 
     .vex-dialog-form {
-      max-width: 480px;
       margin:    0 auto;
 
       .vex-dialog-message {
-        padding:    90px 20px 0px 20px;
+        padding:    110px 20px 0px 20px;
         text-align: center;
 
         h2 {
           background-color: transparent;
           color:            #000;
-          font-family:      $font-family-secondary;
-          font-size:        2.6rem;
+          font-family:      $font-brand-serif!important;
+          font-size:        6rem;
           font-weight:      200;
-          line-height:      2.8rem;
+          line-height:      4.8rem;
           max-width:        28em;
         }
         p {
           color:       black;
-          font-family: $font-brand-serif;
-          font-size:   5rem;
-          font-weight: 500;
-          line-height: 5rem;
+          font-family: $font-family-secondary;
+          font-size:   3.5rem;
+          font-weight: 400;
+          line-height: 3.5rem;
           text-align:  center;
+          padding-top: 3rem;
         }
+
       }
 
       .vex-dialog-input {
-        margin-top: 35px;
-
-        input[type="email"] {
-          border: 1px solid black;
-        }
-
-        .btn.submit {
-          background-color: black;
-          color:            white;
-        }
-
-        button {
-          font-family: $font-family-secondary;
-          font-size:   1.1em;
-          font-weight: 200;
-          padding:     10px 30px;
-        }
-
-        .standard-form {
-          height:        40px;
-          margin-bottom: 15px;
-        }
-
-        ::-webkit-input-placeholder {
-          text-align:     center;
-          text-transform: uppercase;
-
-        }
-
-        :-moz-placeholder {
-          /* Firefox 18- */
-          color:          #D3D3D3;
-          text-align:     center;
-          text-transform: uppercase;
-        }
-
-        ::-moz-placeholder {
-          /* Firefox 19+ */
-          color:          #D3D3D3;
-          text-align:     center;
-          text-transform: uppercase;
-        }
-
-        :-ms-input-placeholder {
-          color:          #D3D3D3;
-          text-align:     center;
-          text-transform: uppercase;
-        }
+        display: none;
       }
     }
   }
 }
-
-// content
-
-// heading
-// Hey, you now can make a dress just the way you want it &hellip;
-// SGV5LCB5b3Ugbm93IGNhbiBtYWtlIGEgZHJlc3MganVzdCB0aGUgd2F5IHlvdSB3YW50IGl0ICZoZWxsaXA7
-
-// message
-// and get $20 off
-// YW5kIGdldCAkMjAgb2Zm
-
-// style
-// gurl_com_modal
-// Z3VybF9jb21fbW9kYWw=
-
-//?pop=true&pc=Z3VybF9jb21fbW9kYWw=&s=Z3VybF9jb21fbW9kYWw=&h=SGV5LCB5b3Ugbm93IGNhbiBtYWtlIGEgZHJlc3MganVzdCB0aGUgd2F5IHlvdSB3YW50IGl0ICZoZWxsaXA7&m=YW5kIGdldCAkMjAgb2Zm&
+// PROMOCODE GURL20
+// HEADING: Hey gurl,<br/>here's $20 off <br/>just for you!
+// MESSAGE: USE: <span>GURL20</span/> at Checkout
+// CLASS_NAME: gurl_com_modal
+// ?pc=R1VSTDIw&h=SGV5IGd1cmwsPGJyLz5oZXJlJ3MgJDIwIG9mZiA8YnIvPmp1c3QgZm9yIHlvdSE=&m=VVNFOiA8c3Bhbj5HVVJMMjA8L3NwYW4vPiBhdCBDaGVja291dA==&t=2&s=Z3VybF9jb21fbW9kYWw=&pop=true
