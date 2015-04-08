@@ -14,12 +14,12 @@ class ClearCacheWorker
   private
 
     def update_products_elastic_index
-      Tire.index(:spree_products) do
+      Tire.index(configatron.elasticsearch.indices.spree_products) do
         delete
         import ::Spree::Product.all
       end
 
-      Tire.index(:spree_products).refresh
+      Tire.index(configatron.elasticsearch.indices.spree_products).refresh
     end
 
     def update_color_variants_elastic_index

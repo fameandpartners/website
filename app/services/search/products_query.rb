@@ -12,7 +12,7 @@ module Search
       query_string = Tire::Utils.escape(options[:query])
 
       if query_string.present?
-        Tire.search(:spree_products, :load => { :include => :master }) do
+        Tire.search(configatron.elasticsearch.indices.spree_products, :load => { :include => :master }) do
           size  limit
           query do
             string query_string, :default_operator => 'OR' , :use_dis_max => true

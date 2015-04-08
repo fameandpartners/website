@@ -58,7 +58,7 @@ module Products
       only_viewable_colors = options[:only_viewable_colors]
 
       begin
-        Tire.search(:spree_products, load: { include: { master: :prices } }) do
+        Tire.search(configatron.elasticsearch.indices.spree_products, load: { include: { master: :prices } }) do
           # Filter only undeleted & available products
           filter :bool, :must => { :term => { :deleted => false } }
           filter :bool, :must => { :term => { :hidden => false } }
@@ -218,12 +218,12 @@ module Products
           size limit
         end.results.results
       rescue ActiveRecord::RecordNotFound
-        Tire.index(:spree_products) do
+        Tire.index(configatron.elasticsearch.indices.spree_products) do
           delete
           import ::Spree::Product.all
         end
 
-        Tire.index(:spree_products).refresh
+        Tire.index(configatron.elasticsearch.indices.spree_products).refresh
 
         search
       end
