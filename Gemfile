@@ -89,9 +89,6 @@ group :development, :test do
   gem 'awesome_print'
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
-  gem 'capybara'
-  gem 'database_cleaner', '0.9.1'
-  gem 'factory_girl_rails', '4.2.1'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
   gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
@@ -100,13 +97,25 @@ group :development, :test do
   gem 'pry'
   gem 'pry-debugger'
   gem 'quiet_assets', '1.0.2'
-  gem 'rspec-activemodel-mocks'
-  gem 'rspec-rails', '~> 3.1'
-  gem 'shoulda-matchers'
   gem 'spring'
   gem 'thin', '1.5.1'
   gem 'compass'
   gem 'bootstrap-sass'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'database_cleaner', '0.9.1'
+  gem 'ffaker'
+  gem 'turnip'#,                    '~> 1.2.2'
+  # gem 'selenium-webdriver'
+  gem 'poltergeist'
+  gem 'rspec-activemodel-mocks'
+  gem 'rspec-rails', '~> 3.1'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails', '4.2.1'
+  # gem 'ffaker'
 end
 
 group :staging, :development do

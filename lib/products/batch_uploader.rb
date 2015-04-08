@@ -336,6 +336,10 @@ module Products
       products_attrs.map do |attrs|
         args = attrs.symbolize_keys
 
+
+        # puts args.inspect
+        # next
+
         begin
           product = create_or_update_product(args.merge!(
             sizes: %W{0 2 4 6 8 10 12 14 16 18 20 22 24 26}
@@ -349,6 +353,7 @@ module Products
 
           product
         rescue Exception => message
+          binding.pry
           Rails.logger.warn(message)
           puts "======== Exception ========"
           puts message

@@ -3,7 +3,9 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 
 require 'rspec/rails'
+require 'turnip/capybara'
 require 'capybara/rails'
+require 'capybara/poltergeist'
 require 'shoulda/matchers'
 require 'database_cleaner'
 
@@ -41,19 +43,17 @@ RSpec.configure do |config|
 
   config.infer_base_class_for_anonymous_controllers = false
 
-  # Use DatabaseCleaner instead of ActiveRecord transactional
-  config.use_transactional_fixtures = false
-
-  config.before(:suite) do    
-    DatabaseCleaner.strategy = :transaction
-    seed_site_zone
+  Capybara.register_driver :poltergeist do |app|
+    driver = Capybara::Poltergeist::Driver.new(app, js_errors: false)
+    driver.resize(1280, 720)
+    driver
   end
 
-  config.before(:each) do
-    DatabaseCleaner.start
+  Capybara.javascript_driver = :poltergeist
+
+  Capybara.configure do |config|
+    config.match = :prefer_exact
   end
 
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
+
 end

@@ -10,6 +10,15 @@ FactoryGirl.define do
     available_on  { rand(100).days.ago.utc }
     permalink     { name.downcase.gsub(/\s/, '_') }
 
+    ignore do
+      colours     { %w{Red Black White Blue}  }
+    end
+
+    taxons        { build_list :taxon, 1 }
+
+
+
+
     # sequence(:position)   
     # after(:create) do |product, evaluator|
     #   create_list(:product_color_value, 1, product: product)
@@ -31,7 +40,8 @@ FactoryGirl.define do
   # end
 
   factory :taxon, :class => Spree::Taxon do
-    sequence(:position)    
+    sequence(:position)
+    name                { 'Range' }
     permalink           { name.downcase.gsub(/\s/, '_')  }
   end
 

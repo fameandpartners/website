@@ -33,7 +33,7 @@ class Products::CollectionsController < Products::BaseController
     @filter = Products::CollectionFilter.read
 
     @collection = collection_resource.read
-
+    binding.pry unless @collection.details.present?
     # set title / meta description for page
     title(@collection.details.meta_title, default_seo_title)
     @description  = @collection.details.seo_description

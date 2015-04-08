@@ -10,6 +10,16 @@ if Rails.env.production? || Rails.env.preproduction?
 end
 if Rails.env.development?
   Tire.configure do
+
     logger STDERR, :level => 'debug'
   end
+end
+
+if Rails.env.test?
+  Tire.configure do |c|
+    c.url "http://localhost:9200"
+  end
+  Tire::Model::Search.index_prefix 'test'
+
+  # Tire::Model::Search.index_prefix Rails.env.to_s
 end
