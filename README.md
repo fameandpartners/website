@@ -68,11 +68,12 @@ Products::ColorVariantsIndexer.index!
 For search page ( show product only once )
 
 ```ruby
-Tire.index(:spree_products) do
+
+Tire.index(configatron.elasticsearch.indices.spree_products) do
   delete
   import Spree::Product.all
 end
-Tire.index(:spree_products).refresh
+Tire.index(configatron.elasticsearch.indices.spree_products).refresh
 ```
 
 ### Locating the Index Page
