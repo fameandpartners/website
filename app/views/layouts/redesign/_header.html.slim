@@ -209,9 +209,9 @@ ruby:
                   .col-md-10
                     .input-group.margin-bottom-sm
                       = form_tag search_path, method: :get do
-                        input.form-control name='q' placeholder=("Search here...") type="text"
+                        input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
                         span
-                          button.invis-fix Enter
+                          button.invis-fix Enter  
 
           li#cart-trigger.menu-item
             = link_to spree.checkout_path, class: 'menu-item--link' do
