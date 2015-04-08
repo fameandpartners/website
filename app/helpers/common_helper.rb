@@ -13,7 +13,7 @@ module CommonHelper
     href = get_base_href
 
     if lang == :au && !href.include?('/au')
-      return "http://#{request.host}/au#{request.fullpath}"
+      return "http://#{get_host}/au#{request.fullpath}"
     end
 
     if lang == :us && href.include?('/au')
@@ -27,16 +27,20 @@ module CommonHelper
     get_base_href.gsub(/\?.*/,'')
   end
 
+  def get_host
+    configatron.host
+  end
+
   def get_base_href
     if @product.present?
-      return "#{request.host}#{collection_product_path(@product)}"
+      return "http://#{get_host}#{collection_product_path(@product)}"
     end
 
     if current_site_version.is_australia? && !request.fullpath.include?('/au')
-      return "http://#{request.host}/au#{request.fullpath}"
+      return "http://#{get_host}/au#{request.fullpath}"
     end
 
-    "http://#{request.host}#{request.fullpath}"
+    "http://#{get_host}#{request.fullpath}"
   end
 
   # social links helper

@@ -2,7 +2,6 @@ FameAndPartners::Application.routes.draw do
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
   match '/us/*whatevs' => redirect("/%{whatevs}")
-
   match '/us' => redirect("/")
 
   match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
