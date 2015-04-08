@@ -8,7 +8,7 @@ describe 'authentication process', :type => :feature do
 
     context 'with valid credentials' do
       it 'should authenticate' do
-        visit '/us/login'
+        visit '/login'
         within('#password-credentials') do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => user.password
@@ -20,7 +20,7 @@ describe 'authentication process', :type => :feature do
 
     context 'with invalid credentials' do
       it 'should authenticate' do
-        visit '/us/login'
+        visit '/login'
         within('#password-credentials') do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => 'adaljshdljhefih'
