@@ -11,7 +11,7 @@ module Products
       us_site_version = SiteVersion.find_by_permalink('us')
       color_variant_id = 1
 
-      index = Tire.index(:color_variants)
+      index = Tire.index(configatron.elasticsearch.indices.color_variants)
       index.delete
       index.create
 

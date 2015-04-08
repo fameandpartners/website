@@ -60,6 +60,11 @@ end
 
 configatron.redis_options = { :namespace => 'fame_and_partners' }
 
+configatron.elasticsearch.indices do |index|
+  index.spree_products = :spree_products
+  index.color_variants = :color_variants
+end
+
 case Rails.env.to_sym
 when :development
   configatron.host = 'localhost.localdomain'
@@ -85,6 +90,11 @@ when :development
   configatron.campaign_monitor do |campaign_monitor|
     campaign_monitor.api_key = ''
     campaign_monitor.list_id = ''
+  end
+
+  configatron.elasticsearch.indices do |index|
+    index.spree_products = :spree_products_development
+    index.color_variants = :color_variants_development
   end
 
 when :staging
@@ -127,5 +137,10 @@ when :production
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
 
   configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
+
 when :test
+  configatron.elasticsearch.indices do |index|
+    index.spree_products = :spree_products_test
+    index.color_variants = :color_variants_test
+  end
 end
