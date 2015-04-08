@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include PathBuildersHelper
 
+  if Rails.env.preproduction?
+    http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
+  end
+
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
@@ -117,7 +121,7 @@ class ApplicationController < ActionController::Base
         in_campaign = params[:utm_campaign]
         cookies[:utm_campaign] = params[:utm_campaign]
       end
-      
+
       if params[:utm_source].present?
         in_source = cookies[:utm_source]
         cookies[:utm_source] = params[:utm_source]
@@ -129,7 +133,7 @@ class ApplicationController < ActionController::Base
     #else
     #  return
     #end
-  end 
+  end
 
   def check_if_girlfriend(in_referrer, in_campaign, in_source)
     return if cookies[:gf_pop].present?
@@ -137,7 +141,7 @@ class ApplicationController < ActionController::Base
     referrer = in_referrer.match(/girlfriend|girlfriendmagazine/) unless in_referrer.blank?
     campaign = in_campaign.match(/girlfriend|gfxfp/) unless in_campaign.blank?
     source = in_source.match(/gf/) unless in_source.blank?
-  
+
     if referrer || campaign || source
       cookies[:gf_campaign] = 'true'
       unless cookies[:gf_pop] == 'hide'
@@ -210,7 +214,7 @@ class ApplicationController < ActionController::Base
   end
 
   def default_seo_title
-    if Spree::Config[:default_seo_title].present? 
+    if Spree::Config[:default_seo_title].present?
       Spree::Config[:default_seo_title]
     else
       "- Fame & Partners"

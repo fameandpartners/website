@@ -1,7 +1,10 @@
 FameAndPartners::Application.routes.draw do
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
-  match '/:site_version', to: 'index#show', constraints: { site_version: /(us|au)/ }
+  match '/us/*whatevs' => redirect("/%{whatevs}")
+  match '/us' => redirect("/")
+
+  match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
 
   get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
