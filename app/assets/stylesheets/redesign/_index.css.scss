@@ -8,6 +8,7 @@
 
 .page-content.index {
 	padding-bottom: 0;
+	margin-bottom: -80px;
 }
 
 .col-md-4{
@@ -279,50 +280,6 @@
 		cursor:pointer;
 }
 
-.taste-of-fame {
-	background-image: url('taste-of-fame.jpg');
-
-	@media(max-width: 768px){
-		background-image: url('taste-of-fame-mobile.jpg');
-	}
-
-	.caption-title{
-		@media(max-width: 768px){
-		font-size: 8rem;
-		padding-top: 6rem;
-		}
-	}
-
-	.promotion {
-		text-align: center;
-		height: 50%;
-		margin-top: 30%;
-
-		p {
-			text-transform: uppercase;
-			color: white;
-			font-weight: 600;
-			letter-spacing: 2px;
-			word-spacing: 2px;
-			width: 360px;
-			margin-right: auto;
-			margin-left: auto;
-		}
-	}
-}
-
-.taste-of-fame-btn {
-	background-color: #003647;
-	font-family: $font-family-secondary;
-	color: white;
-	margin-top: 3rem;
-	width: 33%;
-
-	@media(max-width: 768px){
-		width: 281px;
-	}
-}
-
 .maintenance-page {
 	background-color: #f6e2d5;
 	background-image: url('green-corner.png');
@@ -384,114 +341,6 @@
 		text-transform: uppercase;
 		margin: 0;
 	}
-
-}
-.break-hearts {
-	background-image: url('break-hearts.jpg');
-
-	@media(max-width: 768px){
-		background-image: url('break-hearts-mobile.jpg');
-	}
-
-	.container {
-		width: 100%;
-		padding-left: 0;
-		padding-right: 0;
-	}
-
-	.promotion {
-		width: 60%;
-		float: right;
-
-	@media(max-width: 768px){
-		width: 100%;
-	}
-
-		h2.caption-title {
-			font-family: $font-family-secondary;
-			color: black;
-			text-align: center;
-			font-size: 7rem;
-			padding-top: 22rem;
-			width: 90%;
-			margin-right: auto;
-			margin-left: auto;
-
-			@media(max-width: 768px){
-				font-size: 5rem;
-				padding-top: 2rem;
-			}
-		}
-
-		p {
-			text-transform: uppercase;
-			color: black;
-			font-weight: 600;
-			letter-spacing: 2px;
-			word-spacing: 2px;
-			width: 360px;
-			margin-right: auto;
-			margin-left: auto;
-		}
-	}
-}
-
-.prom {
-	background-image: url('prom.jpg');
-
-	@media(max-width: 768px){
-		background-image: url('prom-mobile.jpg');
-	}
-
-	.slider-image-caption {
-		margin-top: 16rem;
-	}
-
-	.promotion {
-		float: right;
-		font-weight: 400;
-
-		h2.caption-title {
-			font-family: $font-family-secondary;
-			color: white;
-			text-align: center;
-			font-size: 3rem;
-			padding-top: 14rem;
-			margin-right: auto;
-			margin-left: auto;
-			text-transform: none;
-
-			@media(max-width: 768px){
-				font-size: 3rem;
-				padding-top: 17rem;
-			}
-		}
-
-		p {
-			font-family: $font-family-secondary;
-			color: white;
-			font-size: 5rem;
-			text-align: center;
-			line-height: 5.5rem;
-
-			@media(max-width: 768px){
-				font-size: 7rem;
-				line-height: 6rem;
-			}
-		}
-	}
-}
-
-.prom-btn {
-	background-color: #d5eff0;
-	font-family: $font-family-secondary;
-	color: black;
-	width: 100%;
-	margin-top: 5rem;
-
-	@media(max-width: 768px){
-		width: 100%;
-	}
 }
 
 .prom-queen {
@@ -523,4 +372,86 @@
 
 .list-inline li a:hover {
 		color: #355e6d;
-	}
+}
+
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+}
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+}
+
+.rslides_tabs {
+	position: relative;
+	z-index: 3;
+  list-style: none;
+  padding: 0;
+  top: -70px;
+  font-size: 50px;
+  list-style: none;
+  margin: 0 auto 50px;
+  max-width: 340px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0px;
+
+  @media(max-width: 768px){
+  	font-size: 20px;
+  	top: -30px;
+  }
+}
+
+.rslides_tabs li {
+  display: inline;
+  float: none;
+  margin-right: 1px;
+}
+
+.rslides_tabs a {
+  width: auto;
+  line-height: 20px;
+  padding: 9px 3px;
+  height: auto;
+  background: transparent;
+  display: inline;
+}
+
+.rslides_tabs li:first-child {
+  margin-left: 0;
+}
+
+.rslides_tabs .rslides_here a {
+  color: grey;
+  font-weight: bold;
+}
+
+a {
+  color: grey;
+  text-decoration: none;
+}
+
