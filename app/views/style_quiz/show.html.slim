@@ -11,7 +11,7 @@
     });
 
     window.onQuizCompleted = function() { 
-      //console.log('quiz completed')
+      window.parent.location = "#{ after_quiz_redirect_url }";
     };
 
     window.fbAsyncInit = function() {
