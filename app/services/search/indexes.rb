@@ -1,7 +1,7 @@
 module Search
   class Indexes
     def self.build
-      Tire.index(:spree_products) do
+      Tire.index(configatron.elasticsearch.indices.spree_products) do
         delete
         import Spree::Product.all
       end

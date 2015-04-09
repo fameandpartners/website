@@ -124,7 +124,7 @@ module Overrides
         end
 
         def recommended_by_taxon_ids(taxon_ids, limit = 4)
-          query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
+          query = Tire.search(configatron.elasticsearch.indices.spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => { :term => { :deleted => false } }
             filter :bool, :must => { :term => { :hidden => false } }
 
@@ -187,19 +187,19 @@ module Overrides
           begin
             query.results.results
           rescue ActiveRecord::RecordNotFound
-            Tire.index(:spree_products) do
+            Tire.index(configatron.elasticsearch.indices.spree_products) do
               delete
               import ::Spree::Product.all
             end
 
-            Tire.index(:spree_products).refresh
+            Tire.index(configatron.elasticsearch.indices.spree_products).refresh
 
             recommended_by_taxon_ids(taxon_ids, limit)
           end
         end
 
         def recommended_for_style_profile(style_profile, limit = 8)
-          query = Tire.search(:spree_products, :page => 1, :load => { :include => :master }) do
+          query = Tire.search(configatron.elasticsearch.indices.spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => { :term => { :deleted => false } }
             filter :bool, :must => { :term => { :hidden => false } }
 
@@ -267,12 +267,12 @@ module Overrides
           begin
             query.results.results
           rescue ActiveRecord::RecordNotFound
-            Tire.index(:spree_products) do
+            Tire.index(configatron.elasticsearch.indices.spree_products) do
               delete
               import ::Spree::Product.all
             end
 
-            Tire.index(:spree_products).refresh
+            Tire.index(configatron.elasticsearch.indices.spree_products).refresh
 
             recommended_for_style_profile(style_profile, limit)
           end

@@ -1,5 +1,9 @@
-$('.quiz-box-inner').html('<%=j render(:template => 'style_quiz/thanks.html.slim') %>');
+<% if false %>
+  $('.quiz-box-inner').html('<%=j render(:template => 'style_quiz/thanks.html.slim') %>');
+<% end %>
 
 if (window.parent && window.parent.onQuizCompleted) {
   window.parent.onQuizCompleted({});
-}
+} else {
+  window.parent.location = "#{ after_quiz_redirect_url }";
+};
