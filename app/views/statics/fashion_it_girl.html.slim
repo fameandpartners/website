@@ -3,13 +3,13 @@ div style="margin-left: 20px"
 		.grid-3
 		    p style="background-color:#CEB6CB;margin-top:40px;height:159px"
 		    	= image_tag('fashion-it-girl/fashion_it_girl_logo_banner.jpg', :alt => 'Fame & Partners and ASOS Present', :height => 164)
-		    	
+
 		    p style="margin-top:40px; min-height:1000px"
 		    	/ = image_tag('fashion-it-girl/fashion_it_girl_banner.gif', :alt => 'Limited time shop now', :width => 285)
-		    	= image_tag('fashion-it-girl/fashion_it_girl_sale_banner.gif', :alt => 'Limited time shop now', :width => 285)
-				    	
+		    	/ = image_tag('fashion-it-girl/fashion_it_girl_sale_banner.gif', :alt => 'Limited time shop now', :width => 285)
+
 		.grid-9
-			- if current_site_version.is_usa?				 
+			- if current_site_version.is_usa?
 				div class="wishpond-campaign" data-wishpond-id="487301" data-wishpond-href="https://www.wishpond.com/lp/487301"
 
 			    javascript:
@@ -26,12 +26,12 @@ div style="margin-left: 20px"
 					})()
 
 				script type="text/javascript" src="//cdn.wishpond.com/master.js"
-			
-			- else				
+
+			- else
 				= image_tag('https://s3.amazonaws.com/media.wishpond.com/media/003/635/018/original.jpg?1420597537', :alt => "Fashion IT Girl 2015", :style => "background-color:#CEB6CB;margin-top:40px;height:159px")
 
-				div style="margin-left:50px;margin-top:40px;"  
+				div style="margin-left:50px;margin-top:40px;"
 					h1
 						' Sorry, but the Fashion IT Girl 2015 competition is only open to US residents.
-					p Australia's Fashionista Search will be launching in April 2015. 
+					p Australia's Fashionista Search will be launching in April 2015.
 					p Stay tuned or contact us to register your interest.
