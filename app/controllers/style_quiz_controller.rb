@@ -124,7 +124,7 @@ class StyleQuizController < ActionController::Base
   end
 
   def after_quiz_redirect_url
-    style_profile_url
+    "#{ style_profile_url }?pc=Zm9ybWFsMjU=&amp;h=SEVZLCBIRVJFJ1MgJDIwIEZPUiBZT1UgVE8gU1BFTkQgT04gVEhFIFBFUkZFQ1QgRFJFU1Mh&amp;m=IFVTRTogPHN0cm9uZz5HVVJMUVVJWjwvc3Ryb25nPiBBVCBDSEVDS09VVA==&amp;t=5&amp;s=Z3VybF9jb21fbW9kYWw=&amp;pop=true"
   end
   helper_method :after_quiz_redirect_url
 
