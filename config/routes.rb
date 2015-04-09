@@ -1,8 +1,8 @@
 FameAndPartners::Application.routes.draw do
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
-  match '/us/*whatevs' => redirect("/%{whatevs}")
-  match '/us' => redirect("/")
+  # match '/us/*whatevs' => redirect(path: "/%{whatevs}")
+  # match '/us' => redirect("/")
 
   match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
 
@@ -237,6 +237,7 @@ FameAndPartners::Application.routes.draw do
     #  resources :answers, :only => [:create]
     #end
     resource :style_quiz, only: [:show, :update], controller: 'style_quiz'
+    resource :style_profile, only: [:show], controller: 'style_profiles'
 
     scope '/users/:user_id', :as => :user do
       get '/style-report' => 'user_style_profiles#show', :as => :style_profile
