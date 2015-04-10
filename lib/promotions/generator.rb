@@ -26,10 +26,10 @@ module Promotions
       generate_promotion(codes)
     end
 
-    def create(number = 1, prefix)
+    def create(number = 1, prefix = 'fame')
       number = number.to_i.abs
       return promotions if number == 0
-      codes = generate_unique_codes(number)
+      codes = generate_unique_codes(number, prefix)
       generate_promotion(codes)
     end
 
@@ -83,13 +83,13 @@ module Promotions
         end
       end
 
-      def generate_unique_codes(number)
+      def generate_unique_codes(number, prefix = 'fame')
         existing_codes = Spree::Promotion.pluck(:code)
         unique_codes = []
         iteration = 0
         while (unique_codes.size < number) && (iteration < 1000)  do
           iteration += 1
-          code = generate_code
+          code = generate_code(prefix)
           if not existing_codes.include?(code)
             existing_codes.push(code)
             unique_codes.push(code)
@@ -99,8 +99,8 @@ module Promotions
         unique_codes
       end
 
-      def generate_code
-        prefix + available_characters.sample(5).join
+      def generate_code(prefix = 'fame')
+        prefix.to_s + available_characters.sample(5).join
       end
 
       # random string should be generated and 4-5 alpha characters
