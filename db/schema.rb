@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150410004828) do
+ActiveRecord::Schema.define(:version => 20150410044711) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -921,6 +921,7 @@ ActiveRecord::Schema.define(:version => 20150410004828) do
     t.string   "user_first_name"
     t.string   "user_last_name"
     t.date     "required_to"
+    t.text     "customer_notes"
   end
 
   add_index "spree_orders", ["created_at"], :name => "index_spree_orders_on_created_at"
