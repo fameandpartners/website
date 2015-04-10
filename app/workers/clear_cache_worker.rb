@@ -29,6 +29,7 @@ class ClearCacheWorker
     def reset_cache
       ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).clear
       Rails.cache.clear
+      Redis.new(configatron.redis_options).flushdb
     end
 
     def update_repositories
