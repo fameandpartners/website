@@ -139,7 +139,7 @@ To deploy with migrations (will turn maintenance mode on meaning site is down)
 * `$ ey deploy -e preprod `
 
 
-### Testing Payments
+### Testing Orders & Payments
 
 Access `/admin/payment_methods/1/edit`
 
@@ -150,7 +150,7 @@ Access `/admin/payment_methods/1/edit`
 
 Test CC is `5520000000000000`
 
-You can use any other details. 
+You can use any other details.
 
 
 
