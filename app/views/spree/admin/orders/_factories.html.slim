@@ -1,0 +1,9 @@
+dl
+  dt Factories
+  dd
+    ul.clean
+      - @order.line_items.map do |i|
+        li
+          = link_to i.product.sku, admin_product_product_properties_path(i.product)
+          '  -
+          = i.factory
