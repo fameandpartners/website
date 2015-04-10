@@ -1,5 +1,5 @@
 Spree::Order.class_eval do
-  attr_accessible :required_to, :email
+  attr_accessible :required_to, :email, :customer_notes
   self.include_root_in_json = false
 
   attr_accessor :zone_id
@@ -131,7 +131,7 @@ Spree::Order.class_eval do
       currency ||= self.currency
       price = variant.price_in(currency)
     end
-    
+
     # Plus Size Pricing
     if add_plus_size_cost?(variant)
       price.amount += 20
@@ -300,7 +300,7 @@ Spree::Order.class_eval do
 
   def is_surryhills?(item)
     if item.product_factory_name == "surryhills"
-      return true 
+      return true
     else
       return false
     end
