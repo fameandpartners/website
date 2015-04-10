@@ -52,4 +52,8 @@ Spree::LineItem.class_eval do
   def image
     cart_item.image.present? ? Spree::Image.find(cart_item.image.id) : nil
   end
+
+  def factory
+    Factory.for_product(product)
+  end
 end
