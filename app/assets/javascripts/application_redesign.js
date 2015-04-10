@@ -15,6 +15,7 @@
 //= require libs/soundcloud/sc-player
 //= require libs/jquery.hoverable.js
 //= require libs/superslides.js
+//= require libs/responsiveslides.min.js
 //= require libs/jquery.skippr.js
 
 // styleguide code
@@ -94,4 +95,16 @@ jQuery(document).ready(function($){
 		window.location = $(this).attr('href') + '?email=' + email;
 	});
 
+  $(function() {
+    $(".rslides").responsiveSlides({
+    auto: true,             // Boolean: Animate automatically, true or false
+    pager: true,           // Boolean: Show pager, true or false
+    speed: 3000,            // Integer: Speed of the transition, in milliseconds
+    timeout: 6000,          // Integer: Time between slide transitions, in milliseconds
+    });
+  });
 })
+
+
+
+
