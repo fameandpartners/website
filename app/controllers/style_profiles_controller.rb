@@ -3,7 +3,8 @@ class StyleProfilesController < ApplicationController
   ssl_allowed
   protect_from_forgery
 
-  layout 'redesign/application'
+  #layout 'redesign/application'
+  layout 'iframe'
 
   def show
     @style_profile = get_user_style_profile(current_spree_user)
