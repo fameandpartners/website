@@ -9,7 +9,7 @@ Spree::Promotion.class_eval do
     rules_are_eligible?(order, {})
   end
 
-  # use it to raw 
+  # use it to raw
   def calculate_price_with_discount(price)
     discount = 0.0
     self.actions.each do |action|
@@ -21,7 +21,7 @@ Spree::Promotion.class_eval do
       when "Spree::Calculator::FlatPercentItemTotal"
         # this calcultor requires an order
         value = price.amount * BigDecimal(action.calculator.preferred_flat_percent.to_s) / 100.0
-        discount += (value * 100).round.to_f / 100 
+        discount += (value * 100).round.to_f / 100
       else
         # do nothing
       end
@@ -36,7 +36,7 @@ Spree::Promotion.class_eval do
 
     # rude method. possible, it should be thrown away
     def can_apply_to_any_order?
-      %w(xtra10 swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25 frenzy5p).include?(self.code.downcase)
+      %w(xtra10 swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25 frenzy5p crafted4u).include?(self.code.downcase)
     end
 
   private
