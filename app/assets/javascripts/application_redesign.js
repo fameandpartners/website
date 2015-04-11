@@ -19,6 +19,7 @@
 //= require libs/jquery.skippr.js
 
 // styleguide code
+//= require "/js*"
 //= require js/modernizr.custom.js
 //= require js/modernizr.js
 //= require js/scrollspy.js
