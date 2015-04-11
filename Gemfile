@@ -14,7 +14,7 @@ gem 'psych', '~> 1.3.4'
 gem 'active_model_serializers'
 gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
 gem 'rack-cors'
-
+gem 'business_time'
 gem 'acts-as-taggable-on'
 gem 'rmagick'
 gem 'ckeditor'
@@ -85,7 +85,7 @@ group :assets do
   gem 'eco'
 end
 
-group :development, :test do  
+group :development, :test do
   gem 'awesome_print'
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
