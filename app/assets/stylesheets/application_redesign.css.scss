@@ -24,6 +24,8 @@
 @import 'redesign/header';
 @import 'redesign/footer';
 
+@import "redesign/product/*";
+
 @import 'redesign/forms';
 @import 'redesign/about';
 @import 'redesign/user';
@@ -33,8 +35,6 @@
 @import 'redesign/registration';
 @import 'redesign/style_consult';
 @import 'redesign/fashionista_winner';
-@import 'redesign/product';
-@import 'redesign/products_collections';
 @import 'redesign/index';
 @import 'redesign/typography';
 @import 'redesign/modal';
@@ -42,7 +42,6 @@
 @import 'redesign/mobile_menu';
 @import 'redesign/faqs';
 @import 'redesign/terms';
-@import 'redesign/product_colours';
 @import 'redesign/stories-images';
 @import 'redesign/login';
 @import 'redesign/sale_lp';
