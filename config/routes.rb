@@ -57,6 +57,8 @@ FameAndPartners::Application.routes.draw do
 
     # get '/prom' => 'statics#prom_lp', :as => :prom_lp
     get '/prom' => redirect('http://prom.fameandpartners.com')
+    get '/prom/thanksbabe' => redirect('http://prom.fameandpartners.com?snapchat=true')
+
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
