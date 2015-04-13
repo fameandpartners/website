@@ -1,8 +1,8 @@
 require 'business_time'
 
-module Services; end
+module Policies; end
 
-class Services::OrderProjectedDeliveryDateService
+class Policies::OrderProjectedDeliveryDatePolicy
 
   DELIVERY_DAYS = 7
 
@@ -10,10 +10,6 @@ class Services::OrderProjectedDeliveryDateService
 
   def initialize(order)
     @order = order
-  end
-
-  def project_date
-    order.update_attributes!(:projected_delivery_date => delivery_date)
   end
 
   def delivery_date
