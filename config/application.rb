@@ -91,9 +91,6 @@ module FameAndPartners
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
 
-    # redesign
-    config.assets.paths << Rails.root.join("styleguide")
-    config.assets.paths << Rails.root.join("styleguide", "images")
     # Component Style Modal Content
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
 
