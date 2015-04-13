@@ -78,66 +78,66 @@ css:
             a href="#" Next
   
 
-/ Result
-  .quiz-results-wrapper
-    .quiz-results
-      .title your style profile is:
-      .quiz-row
-        .quiz-col.quiz-col-6
-          = image_tag 'custom-dresses/image-girl.jpg'
-          .result.lg.centered 
-            .text
-              ' rebel 
-              br
-              ' 34%
-        .quiz-col.quiz-col-6
-          .quiz-row
-            .quiz-col.quiz-col-6.quiz-results-boho
-              = image_tag 'custom-dresses/image-girl.jpg'
-              .result: .text boho 24%
-            .quiz-col.quiz-col-6.quiz-results-girly
-              = image_tag 'custom-dresses/image-girl.jpg'
-              .result: .text girly 24%
-            .quiz-col.quiz-col-6.quiz-results-edgy
-              = image_tag 'custom-dresses/image-girl.jpg'
-              .result: .text edgy 24%
-            .quiz-col.quiz-col-6.quiz-results-glam
-              = image_tag 'custom-dresses/image-girl.jpg'
-              .result: .text glam 24%
-    .quiz-results-grey-block
-      h2 
-        | Everyone has a bit of each profile in them, but you are mostly &lt;style profile&gt;.
-        small 
-          | Here's a bit about being the &lt;style profile&gt; gal:
-      p 
-        | &lt;Style Profile Overview text&gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi  et dolores quin ipsum loren tempor fugit lorem ipsum e ut
-    .quiz-results-black-block
-      h2 YOUR PERSONAL ONLINE CLOSET
-      p based on your style profile we think you will love these killer dresses
-    .dress-catalog
-      .quiz-row
-        .quiz-col.quiz-col-4
-          = image_tag 'custom-dresses/image-girl.jpg'
-          p CLARISSA TWO PIECE
-          p $229.00
-        .quiz-col.quiz-col-4
-          = image_tag 'custom-dresses/image-girl.jpg'
-          p CLARISSA TWO PIECE
-          p $229.00
-        .quiz-col.quiz-col-4
-          = image_tag 'custom-dresses/image-girl.jpg'
-          p CLARISSA TWO PIECE
-          p $229.00
-        .quiz-col.quiz-col-4
-          = image_tag 'custom-dresses/image-girl.jpg'
-          p CLARISSA TWO PIECE
-          p $229.00
-        .quiz-col.quiz-col-4
-          = image_tag 'custom-dresses/image-girl.jpg'
-          p CLARISSA TWO PIECE
-          p $229.00
-    
-    .quiz-results-black-block
-      h2 Don’t fret!
-      p We have more dresses that we know you will love
-      = link_to 'MORE STYLES HERE', '#', class: 'btn pink-pale'
+  / Result
+    .quiz-results-wrapper
+      .quiz-results
+        .title your style profile is:
+        .quiz-row
+          .quiz-col.quiz-col-6.quiz-result-1
+            = image_tag 'custom-dresses/image-girl.jpg'
+            .result.lg.centered 
+              .text
+                ' rebel 
+                br
+                ' 34%
+          .quiz-col.quiz-col-6
+            .quiz-row
+              .quiz-col.quiz-col-6.quiz-result-2
+                = image_tag 'custom-dresses/image-girl.jpg'
+                .result: .text boho 24%
+              .quiz-col.quiz-col-6.quiz-result-3
+                = image_tag 'custom-dresses/image-girl.jpg'
+                .result: .text girly 24%
+              .quiz-col.quiz-col-6.quiz-result-4
+                = image_tag 'custom-dresses/image-girl.jpg'
+                .result: .text edgy 24%
+              .quiz-col.quiz-col-6.quiz-result-5
+                = image_tag 'custom-dresses/image-girl.jpg'
+                .result: .text glam 24%
+      .quiz-results-grey-block
+        h2 
+          | Everyone has a bit of each profile in them, but you are mostly &lt;style profile&gt;.
+          small 
+            | Here's a bit about being the &lt;style profile&gt; gal:
+        p 
+          | &lt;Style Profile Overview text&gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi  et dolores quin ipsum loren tempor fugit lorem ipsum e ut
+      .quiz-results-black-block
+        h2 YOUR PERSONAL ONLINE CLOSET
+        p based on your style profile we think you will love these killer dresses
+      .dress-catalog
+        .quiz-row
+          .quiz-col.quiz-col-4
+            = image_tag 'custom-dresses/image-girl.jpg'
+            p CLARISSA TWO PIECE
+            p $229.00
+          .quiz-col.quiz-col-4
+            = image_tag 'custom-dresses/image-girl.jpg'
+            p CLARISSA TWO PIECE
+            p $229.00
+          .quiz-col.quiz-col-4
+            = image_tag 'custom-dresses/image-girl.jpg'
+            p CLARISSA TWO PIECE
+            p $229.00
+          .quiz-col.quiz-col-4
+            = image_tag 'custom-dresses/image-girl.jpg'
+            p CLARISSA TWO PIECE
+            p $229.00
+          .quiz-col.quiz-col-4
+            = image_tag 'custom-dresses/image-girl.jpg'
+            p CLARISSA TWO PIECE
+            p $229.00
+      
+      .quiz-results-black-block
+        h2 Don’t fret!
+        p We have more dresses that we know you will love
+        = link_to 'MORE STYLES HERE', '#', class: 'btn pink-pale'
