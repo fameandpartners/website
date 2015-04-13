@@ -1,29 +1,19 @@
-
 .page-content.index
-  #theTarget style=("height: 720px;")
+  ul.rslides
+    - if request.original_url == 'http://localhost:3000/us'
+      li
+        a href="http://prom.fameandpartners.com" rel="nofollow"
+          = image_tag "prom-competition.jpg", alt: 'Prom Competition', class: 'img-responsive portrait-img'
+    li
+      a href="/dresses/graduation"
+        = image_tag "taste-of-fame.jpg", alt: 'Taste of Fame', class: 'img-responsive portrait-img'
 
-    div.taste-of-fame.slider-action data-href="/dresses"
-      .slider-image-caption.height-100
-        .container.height-100
-          .promotion
-            h2.caption-title have a taste of fame.
-            p dresses made and styled for you
-            button.btn.taste-of-fame-btn type="button"  shop now
-
-    div.prom.slider-action data-href="/prom"
-      .slider-image-caption.height-100
-        .container.height-100
-          .promotion.col-md-4
-            h2.caption-title Our official</br>prom collection.
-            p Dresses that</br>keep it real.
-            button.btn.prom-btn type="button"  shop now
-
-    div.break-hearts.slider-action data-href="/break-hearts-collection"
-      .slider-image-caption.height-100
-        .container.height-100
-          .promotion.col-sm-12
-             h2.caption-title Break hearts. not bank account$
-
+    li
+      a href="/prom-collection"
+        = image_tag "prom.jpg", alt: 'Prom Collection', class: 'img-responsive portrait-img'
+    li
+      a href="/break-hearts-collection"
+        = image_tag "break-hearts.jpg", alt: 'Break Hearts not Bank Accounts collection', class: 'img-responsive portrait-img'
 
 /! Email Subscription
 #email-container.container-fluid.email-sub.text-center

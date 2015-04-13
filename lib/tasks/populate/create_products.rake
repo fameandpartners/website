@@ -18,7 +18,7 @@ def disable_tire_indexes
 end
 
 def update_tire_indexes
-  Tire.index(:spree_products) do
+  Tire.index(configatron.elasticsearch.indices.spree_products) do
     delete
     import Spree::Product.all
   end

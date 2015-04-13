@@ -125,23 +125,34 @@ SitemapGenerator::Sitemap.create(options) do
     })
   end
 
-  statics_pages = [
-    '/about', '/why-us', '/team', '/privacy', '/legal', '/how-it-works'
+  # color groups
+  Repositories::ProductColors.color_groups.each do |color_group|
+    path = colour_path(color_group.name)
+    add(path, priority: 0.7, alternates: build_alternates(path))
+  end
+
+  statics_pages = [ 
+    '/about', '/why-us', '/team', '/terms', '/privacy', '/legal', '/faqs', '/how-it-works',
+    '/fashionista2014', '/fashionista2014/info', '/fashionista2014-winners', '/compterms', '/plus-size',
+    '/style-consultation', '/fame-chain', '/returnsform',
+    '/fashionitgirl2015', '/fashionitgirl2015-terms-and-conditions', '/fashionitgirl2015-competition',
+    '/nyfw-comp-terms-and-conditions', '/bridesmaid-dresses', '/feb_2015_lp', '/facebook-lp', '/sale-dresses', '/fame2015',
+    '/unidays'
   ]
   statics_pages.each do |page_path|
     add page_path, priority: 0.5, alternates: build_alternates(page_path)
   end
 
-  # celebrities
-  Celebrity.published.each do |celebrity|
-    path = "/celebrities/#{celebrity.slug}"
-    add path, { priority: 0.3, alternates: build_alternates(path) }
-  end
-
-  # blog posts
-  Blog::Post.includes(:author, :category).published.each do |post|
-    add post_path(post), priority: 0.3, alternates: build_alternates(post_path(post))
-  end
+#  # celebrities
+#  Celebrity.published.each do |celebrity|
+#    path = "/celebrities/#{celebrity.slug}"
+#    add path, { priority: 0.3, alternates: build_alternates(path) }
+#  end
+#
+#  # blog posts
+#  Blog::Post.includes(:author, :category).published.each do |post|
+#    add post_path(post), priority: 0.3, alternates: build_alternates(post_path(post))
+#  end
 end
 
 file_name = options[:compress] ? 'sitemap.xml.gz' : 'sitemap.xml'

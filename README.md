@@ -23,9 +23,7 @@ $ brew install redis elasticsearch imagemagick postgresql
 
 * `$ git clone git@github.com:fameandpartners/website.git`
 * `$ cd ./website`
-* `$ git submodule init && git submodule update` - to get the [styleguide](https://github.com/fameandpartners/styleguide)
 * `$ cp config/database.yml.example config/database.yml`
-* `$ bin/update_submodules` - For the common `styleguide` repository.
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
@@ -68,11 +66,12 @@ Products::ColorVariantsIndexer.index!
 For search page ( show product only once )
 
 ```ruby
-Tire.index(:spree_products) do
+
+Tire.index(configatron.elasticsearch.indices.spree_products) do
   delete
   import Spree::Product.all
 end
-Tire.index(:spree_products).refresh
+Tire.index(configatron.elasticsearch.indices.spree_products).refresh
 ```
 
 ### Locating the Index Page
@@ -138,7 +137,7 @@ To deploy with migrations (will turn maintenance mode on meaning site is down)
 * `$ ey deploy -e preprod `
 
 
-### Testing Payments
+### Testing Orders & Payments
 
 Access `/admin/payment_methods/1/edit`
 
@@ -149,7 +148,7 @@ Access `/admin/payment_methods/1/edit`
 
 Test CC is `5520000000000000`
 
-You can use any other details. 
+You can use any other details.
 
 
 

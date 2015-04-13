@@ -29,7 +29,7 @@ module Search
       limit               = options[:limit].present? ? options[:limit].to_i : 1000
       offset              = options[:offset].present? ? options[:offset].to_i : 0
 
-      Tire.search(:color_variants, size: limit, from: offset) do
+      Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
         filter :bool, :must => { :term => { 'product.is_hidden' => false } }
         filter :exists, :field => :available_on

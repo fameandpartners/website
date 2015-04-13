@@ -43,7 +43,7 @@ module Products
       product_discount = discount
 
       begin
-        results = Tire.search(:color_variants, size: 1000) do
+        results = Tire.search(configatron.elasticsearch.indices.color_variants, size: 1000) do
           # Get only actual info. Ignore deleted and unavailable
           filter :bool, :must => { :term => { 'product.is_deleted' => false } }
           filter :bool, :must => { :term => { 'product.is_hidden' => false } }

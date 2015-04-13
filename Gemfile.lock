@@ -197,6 +197,9 @@ GEM
       thor
     buftok (0.2.0)
     builder (3.0.4)
+    business_time (0.7.3)
+      activesupport (>= 3.1.0)
+      tzinfo
     cancan (1.6.8)
     capistrano (2.15.4)
       highline
@@ -646,6 +649,7 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass
   bourbon
+  business_time
   canonical-rails!
   capistrano (= 2.15.4)
   capistrano-rbenv (= 0.0.10)

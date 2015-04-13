@@ -1,5 +1,7 @@
+require "#{Rails.root}/app/policies/order_projected_delivery_date_policy"
+
 Spree::Order.class_eval do
-  attr_accessible :required_to, :email
+  attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date
   self.include_root_in_json = false
 
   attr_accessor :zone_id
@@ -22,6 +24,35 @@ Spree::Order.class_eval do
 
   state_machine do
     after_transition :to => :complete, :do => :track_user_bought_dress
+    after_transition :to => :complete, :do => :project_delivery_date
+  end
+
+  def project_delivery_date
+    if complete?
+      delivery_date = Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
+      update_attribute(:projected_delivery_date, delivery_date)
+    end
+  end
+
+  def delivery_state
+    return 'incomplete' unless complete?
+    project_delivery_date unless projected_delivery_date
+    days = (Time.zone.now.to_date - projected_delivery_date.to_date).to_i
+    # binding.pry
+    case days
+    when 11..999
+      'critical'
+    when 7..10
+      'urgent'
+    when 1..6
+      'overdue'
+    when -2..0
+      'due'
+    when -10..-3
+      'ok'
+    else
+      'unknown'
+    end
   end
 
   # todo: this should be done in some service, order has no relation to this func
@@ -32,6 +63,20 @@ Spree::Order.class_eval do
     end
   rescue Exception => e
     # do nothing, tracking/notifying shouldn't have any issues
+  end
+
+  def create_shipment!
+    shipping_method(true)
+    if shipment.present?
+      # reset instance variable cache, calling shipment again will get it from last shipments ( updated ones )
+      @shipment = nil
+      shipment.update_attributes!({:shipping_method => shipping_method, :inventory_units => self.inventory_units}, :without_protection => true)
+    else
+      self.shipments << ::Spree::Shipment.create!({ :order => self,
+                                        :shipping_method => shipping_method,
+                                        :address => self.ship_address,
+                                        :inventory_units => self.inventory_units}, :without_protection => true)
+    end
   end
 
   def cache_key
@@ -131,7 +176,7 @@ Spree::Order.class_eval do
       currency ||= self.currency
       price = variant.price_in(currency)
     end
-    
+
     # Plus Size Pricing
     if add_plus_size_cost?(variant)
       price.amount += 20
@@ -300,7 +345,7 @@ Spree::Order.class_eval do
 
   def is_surryhills?(item)
     if item.product_factory_name == "surryhills"
-      return true 
+      return true
     else
       return false
     end

@@ -5,7 +5,7 @@ class StyleQuizController < ActionController::Base
 
   layout 'iframe'
 
-  #caches_page :show, # don't work with protection & ssl
+  respond_to :html, :js
 
   # questions#index
   def show
@@ -117,8 +117,16 @@ class StyleQuizController < ActionController::Base
       session[:style_profile_id]            = style_profile.id
     end
 
-    render 'style_quiz/thanks'
+    respond_with({}) do |format|
+      format.html { redirect_to(after_quiz_redirect_url) }
+      format.js   { render 'style_quiz/thanks' }
+    end
   end
+
+  def after_quiz_redirect_url
+    "#{ style_profile_url }?pc=Zm9ybWFsMjU=&amp;h=SEVZLCBIRVJFJ1MgJDIwIEZPUiBZT1UgVE8gU1BFTkQgT04gVEhFIFBFUkZFQ1QgRFJFU1Mh&amp;m=IFVTRTogPHN0cm9uZz5HVVJMUVVJWjwvc3Ryb25nPiBBVCBDSEVDS09VVA==&amp;t=5&amp;s=Z3VybF9jb21fbW9kYWw=&amp;pop=true"
+  end
+  helper_method :after_quiz_redirect_url
 
   private
 
@@ -140,6 +148,3 @@ class StyleQuizController < ActionController::Base
       end
     end
 end
-
-#  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4Nm633GOdpK5RRozEroOpZgKYKys87BcywRKdrQHV+A=", "quiz"=>{"questions"=>{"49"=>{"answer"=>{"codes"=>["girly2", "girly7"]}}, "50"=>{"answer"=>{"codes"=>["classic5"]}}, "51"=>{"answer"=>{"codes"=>["classic", "bold", "feminine"]}}, "52"=>{"answer"=>{"codes"=>["natural7", "romantic7", "dramatic1"]}}, "53"=>{"answer"=>{"codes"=>["girly4", "girly2", "boho1", "edgy2"]}}, "54"=>{"answer"=>{"codes"=>["classic1", "glam5", "boho4"]}}, "55"=>{"answer"=>{"code"=>"fsh8"}}, "56"=>{"answer"=>{"code"=>"sxs8"}}, "57"=>{"answer"=>{"code"=>"platinum_blonde"}}, "58"=>{"answer"=>{"code"=>"dark"}}, "59"=>{"answer"=>{"code"=>"hour_glass"}}}}}
-
