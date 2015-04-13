@@ -1705,3 +1705,127 @@
     }
   }
 }
+
+
+
+// Quiz result 
+.quiz-results-wrapper {
+  .quiz-row {
+    margin-left: -20px;
+    margin-right: -20px;
+    box-sizing: border-box;
+    &:after {
+      content: ' ';
+      display: table;
+      clear: both;
+    }
+    img { width: 100%;}
+  }
+  .quiz-col {
+    padding: 20px;
+    position: relative;
+    float: left;
+    box-sizing: border-box;
+  }
+  .quiz-col-6 { width: (100% / 2);}
+  .quiz-col-4 { width: (100% / 3);}
+
+  .dress-catalog {
+    text-align: center;
+  }
+}
+
+
+.quiz-results {
+  font-family: $fontThree;
+  font-style: italic;
+  position: relative;
+  text-transform: uppercase;
+  .title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 40px;
+    z-index: 2;
+    background-color: #fff;
+    padding: 8px;
+  }
+  .result {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 30px;
+    &.lg { 
+      font-size: 54px;
+      .text { padding: 25px;}
+    }
+    &.centered {
+      right: 0;
+      text-align: center;
+    }
+    .text {
+      background-color: #fff;
+      padding: 10px;
+      display: inline-block;
+      line-height: 1;
+    }
+  }
+  .quiz-results-boho {
+    padding-top: 0;
+    padding-bottom: 30px;
+  }
+  .quiz-results-girly {
+    padding-top: 0;
+    padding-bottom: 30px;
+  }
+  .quiz-results-edgy {
+    padding-top: 30px;
+    padding-bottom: 0;
+  }
+  .quiz-results-glam {
+    padding-top: 30px;
+    padding-bottom: 0;
+  }
+}
+
+
+.quiz-results-grey-block, .quiz-results-black-block {
+  text-align: center;
+  background-color: #f1f1f2;
+  text-align: center;
+  padding: 50px;
+  h2 { 
+    font-size: 38px;
+    text-transform: uppercase;
+    font-style: italic;
+    font-family: $fontThree;
+    small {
+      display: block;
+      margin-top: 15px;
+    }
+  }
+  p {
+    font-size: 22px;
+    text-align: justify;
+    font-family: $fontTwo;
+  }
+  .btn {
+    height: 52px;
+    line-height: 52px;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+  .pink-pale {
+    background-color: #eeddf0;
+    color: #000;
+  }
+}
+.quiz-results-black-block {
+  background-color: #000;
+  color: #fff;
+  p {
+    text-align: center;
+  }
+}
+// @end Quiz result
+// -----------------
