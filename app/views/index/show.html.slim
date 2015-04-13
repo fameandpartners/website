@@ -1,6 +1,6 @@
 .page-content.index
   ul.rslides
-    - if request.original_url == 'http://localhost:3000/us'
+    - if current_site_version.is_usa?
       li
         a href="http://prom.fameandpartners.com" rel="nofollow"
           = image_tag "prom-competition.jpg", alt: 'Prom Competition', class: 'img-responsive portrait-img'
