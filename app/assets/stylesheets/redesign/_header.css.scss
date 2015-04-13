@@ -377,3 +377,8 @@ li.shop {
 		}
 	}
 }
+
+//fix for additional nav item
+.nav-menu .primary li.menu-item .menu-item--link, .nav-menu .secondary li.menu-item .menu-item--link {
+	height: auto;
+}
