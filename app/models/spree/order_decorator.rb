@@ -1,5 +1,5 @@
 Spree::Order.class_eval do
-  attr_accessible :required_to, :email
+  attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date
   self.include_root_in_json = false
 
   attr_accessor :zone_id
@@ -22,6 +22,12 @@ Spree::Order.class_eval do
 
   state_machine do
     after_transition :to => :complete, :do => :track_user_bought_dress
+    after_transition :to => :complete, :do => :project_delivery_date
+  end
+
+  def project_delivery_date
+    delivery_date = Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
+    update_attributes!(:projected_delivery_date => delivery_date)
   end
 
   # todo: this should be done in some service, order has no relation to this func
@@ -131,7 +137,7 @@ Spree::Order.class_eval do
       currency ||= self.currency
       price = variant.price_in(currency)
     end
-    
+
     # Plus Size Pricing
     if add_plus_size_cost?(variant)
       price.amount += 20
@@ -300,7 +306,7 @@ Spree::Order.class_eval do
 
   def is_surryhills?(item)
     if item.product_factory_name == "surryhills"
-      return true 
+      return true
     else
       return false
     end
