@@ -52,11 +52,11 @@ ruby:
       .container-fluid.nav-menu-container
         .masthead.pull-left.hidden-xs
           = link_to '/' do
-            = image_tag src='images/new-logo.svg', :class => 'nav-logo', :alt => 'Fame &amp; Partners'
+            = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
         .masthead.pull-left.visible-xs
           = link_to '/' do
-            = image_tag src='images/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame &amp; Partners'
+            = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
         ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
           li.shop.menu-item
@@ -190,11 +190,10 @@ ruby:
               li.menu-item.hidden-xs.hidden-sm
                 = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
                   span.visible-sm
-                    = image_tag "images/Heart.svg"
+                    = image_tag "Heart.svg"
                   span.hidden-sm.hidden-xs#moodboard-counter
                     | Moodboard &nbsp;
-                    /| Moodboard: 0 &nbsp;
-                    /= "#{ current_user_moodboard.item_count }"
+
           li.shop.menu-item.account-dropdown
             = render "layouts/redesign/header/my_account_dropdown"
 
@@ -203,7 +202,7 @@ ruby:
               = image_tag "search.png"
             .search-bar.invis
               a.close-search href="#"
-                = image_tag "images/close.svg", alt: 'Close'
+                = image_tag "close.svg", alt: 'Close'
               .container-fluid.search-form
                 .col-md-6.col-md-offset-3
                   .col-md-10
@@ -211,7 +210,7 @@ ruby:
                       = form_tag search_path, method: :get do
                         input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
                         span
-                          button.invis-fix Enter  
+                          button.invis-fix Enter
 
           li#cart-trigger.menu-item
             = link_to spree.checkout_path, class: 'menu-item--link' do

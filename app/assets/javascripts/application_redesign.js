@@ -19,23 +19,11 @@
 //= require libs/jquery.skippr.js
 
 // styleguide code
-//= require js/modernizr.custom.js
-//= require js/modernizr.js
-//= require js/scrollspy.js
-//= require js/dropdown.js
-//= require js/sg-plugins.js
-//= require js/svgicons-config.js
-//= require js/svgicons.js
+//= require "/styleguide/js*"
 //  require js/jquery.skippr.min.js # copied non-min version, to debug&patch
-//= require js/classie.js
-//= require js/alert.js
-//= require js/affix.js
 // require js/main.js
 // require js/sg-scripts.js
-//
-//= require js/card.js
 
-//= require js/functions.js
 //  require js/superslides.js # copied to libs/superslides for easier monkey-patching
 //= require functions_redesign.js
 

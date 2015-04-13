@@ -2,4 +2,4 @@
 --ignore-directory=is:.idea
 --ignore-directory=is:tmp/
 --ignore-directory=is:public/
---ignore-directory=is:styleguide/.sass-cache/
+

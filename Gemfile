@@ -83,6 +83,7 @@ group :assets do
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
+  gem 'bootstrap-sass'
 end
 
 group :development, :test do
@@ -106,7 +107,7 @@ group :development, :test do
   gem 'spring'
   gem 'thin', '1.5.1'
   gem 'compass'
-  gem 'bootstrap-sass'
+
 end
 
 group :staging, :development do
