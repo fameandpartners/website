@@ -57,17 +57,12 @@ FameAndPartners::Application.routes.draw do
 
     # get '/prom' => 'statics#prom_lp', :as => :prom_lp
     get '/prom' => redirect('http://prom.fameandpartners.com')
+    get '/prom/thanksbabe' => redirect('http://prom.fameandpartners.com?snapchat=true')
+
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
     post '/shared/facebook' => 'competition/events#share'
-
-    # SEO categories routes, we want them in front
-
-    scope '/dresses', module: 'personalization' do
-      get '/custom-:product_slug', to: 'products/details#show'
-      get '/styleit-:product_slug', to: 'products/details#style'
-    end
 
     scope '/user_cart', module: 'user_cart' do
       root to: 'details#show', as: :user_cart_details
@@ -80,6 +75,12 @@ FameAndPartners::Application.routes.draw do
 
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
+
+      # TODO - Remove? - 2015.04.11 - Redirecting old accessory and customisation style URLS to main product page.
+      product_style_custom_redirect = -> path_params, _rq { ["/#{path_params[:site_version]}/dresses/dress-#{path_params[:product_slug]}", path_params[:color_name].presence].join('/') }
+      get '/custom-:product_slug(/:color_name)',  to: redirect(product_style_custom_redirect)
+      get '/styleit-:product_slug(/:color_name)', to: redirect(product_style_custom_redirect)
+
 
       get '/dress-:product_slug(/:color_name)' => 'products/details#show'
       #roots categories
