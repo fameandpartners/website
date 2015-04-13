@@ -26,8 +26,8 @@ Spree::Order.class_eval do
   end
 
   def project_delivery_date
-    delivery_date = Services::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
-    order.update_attributes!(:projected_delivery_date => delivery_date)
+    delivery_date = Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
+    update_attributes!(:projected_delivery_date => delivery_date)
   end
 
   # todo: this should be done in some service, order has no relation to this func
