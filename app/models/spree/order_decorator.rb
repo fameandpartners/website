@@ -1,3 +1,5 @@
+require "#{Rails.root}/app/policies/order_projected_delivery_date_policy"
+
 Spree::Order.class_eval do
   attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date
   self.include_root_in_json = false
@@ -26,8 +28,31 @@ Spree::Order.class_eval do
   end
 
   def project_delivery_date
-    delivery_date = Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
-    update_attributes!(:projected_delivery_date => delivery_date)
+    if complete?
+      delivery_date = Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
+      update_attribute(:projected_delivery_date, delivery_date)
+    end
+  end
+
+  def delivery_state
+    return 'incomplete' unless complete?
+    project_delivery_date unless projected_delivery_date
+    days = (Time.zone.now.to_date - projected_delivery_date.to_date).to_i
+    # binding.pry
+    case days
+    when 11..999
+      'critical'
+    when 7..10
+      'urgent'
+    when 1..6
+      'overdue'
+    when -2..0
+      'due'
+    when -10..-3
+      'ok'
+    else
+      'unknown'
+    end
   end
 
   # todo: this should be done in some service, order has no relation to this func
