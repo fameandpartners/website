@@ -7,7 +7,7 @@
  *= require admin/spree_core
  *= require admin/spree_promo
  *= require store/spree_banner
- 
+
 *= require_tree ../spree
 *= require_self
 *= require_tree .
@@ -16,3 +16,34 @@
 *= require admin/spree_paypal_express
 *= require jquery.ui.tabs
 */
+
+
+ /*#  Overdue >1 week - pale red
+ # Overdue 1 week - pale pink
+ # Overdue <1 week - pale orange
+ # Due / <10 days since order date - pale yellow
+ # 2 days out from due date - cream
+ # < 2 days out from due date - pale green
+ # Delivered - pale blue (edited)*/
+
+.state-critical {
+  background-color:red;
+}
+
+.state-urgent {
+  background-color:orange;
+}
+
+.state-overdue {
+  background-color:yellow;
+}
+.state-due {
+
+}
+
+.state-ok {
+
+}
+.state-unknown {
+
+}
