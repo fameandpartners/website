@@ -24,13 +24,18 @@ describe 'Product Redirection', type: :request do
     expect(response).to redirect_to("/au/dresses/dress-first-in-line-467/white")
   end
 
-  it 'redirects old colour pages to main dresses' do
+  it 'redirects old dresses/colour pages to main dresses' do
     get "dresses/color"
     expect(response).to redirect_to("/dresses")
   end
 
-  it 'redirects old events page to all dresses' do
+  it 'redirects old dresses/events page to all dresses' do
     get "dresses/event"
+    expect(response).to redirect_to("/dresses")
+  end
+
+  it 'redirects old dresses/style page to all dresses' do
+    get "dresses/style"
     expect(response).to redirect_to("/dresses")
   end
 end
