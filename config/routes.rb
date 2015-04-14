@@ -420,6 +420,7 @@ FameAndPartners::Application.routes.draw do
 
     # seo routes like *COLOR*-Dress
     get "(:colour)-Dresses" => 'products/collections#show', as: :colour_formal_dresses
+
     # seo route
     get "new-collection" => "products/collections#show", as: :new_collection
 

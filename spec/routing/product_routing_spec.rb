@@ -25,7 +25,7 @@ describe 'Product Redirection', type: :request do
   end
 
   it 'redirects old colour pages to main dresses' do
-    get "/au/dresses/color"
-    expect(response).to redirect_to("/au/dresses")
+    get "dresses/color"
+    expect(response).to redirect_to("/dresses")
   end
 end
