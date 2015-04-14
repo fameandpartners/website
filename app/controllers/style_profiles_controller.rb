@@ -8,10 +8,17 @@ class StyleProfilesController < ApplicationController
 
   def show
     @style_profile = get_user_style_profile(current_spree_user)
-    @recommended_products = Spree::Product.recommended_for(@style_profile, limit: 20)
+    @recommended_products = get_recommended_dresses(@style_profile)
+    @user_styles = get_user_styles(@style_profile)
   end
 
   private
+
+    def get_recommended_dresses(profile)
+      Spree::Product.recommended_for(profile, limit: 12)
+    rescue Exception => e
+      Spree::Product.last(12)
+    end
 
     def get_user_style_profile(user)
       # trying to associate user
@@ -32,5 +39,17 @@ class StyleProfilesController < ApplicationController
       else
         raise CanCan::AccessDenied
       end
+    end
+
+    def get_user_styles(style_profile)
+      styles = style_profile.percentage.map do |name, rate|
+        OpenStruct.new(
+          name: name.to_s,
+          presentation: name.to_s,
+          percentage: "#{ rate.to_i }%".html_safe,
+          rate: rate.to_i
+        )
+      end
+      styles.sort_by(&:rate).reverse
     end
 end
