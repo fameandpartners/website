@@ -9,7 +9,16 @@
   | $('.img-product').hoverable();
 
 css:
-  .quiz-results-wrapper * { overflow-y: auto; }
+  /* .quiz-results-wrapper * { overflow-y: auto; }*/
+  .gurl_com_modal.email-capture-modal .vex-content .vex-dialog-form .vex-dialog-message h2 {
+    font-size: 2.4em; 
+    line-height: 1.1;
+  }
+  .gurl_com_modal.email-capture-modal .vex-content .vex-dialog-form .vex-dialog-message p {
+    font-size: 1.5em;
+    line-height: 1.1;
+    padding-top: 0;
+  }
 
 = render '/style_profiles/javascript'
 
@@ -22,8 +31,8 @@ css:
         .quiz-row
           .quiz-col.quiz-col-6.quiz-result-1
             - style = @user_styles.first
-            = image_tag 'custom-dresses/image-girl.jpg'
-            /= image_tag "style_profile/styles/image-#{ style.name }.jpg"
+            / = image_tag 'custom-dresses/image-girl.jpg'
+            = image_tag "_style_profile/styles/#{ style.name }.jpg"
             .result.lg.centered 
               .text
                 = style.presentation
@@ -33,8 +42,8 @@ css:
             .quiz-row
               - @user_styles[1..-1].each_with_index do |style, index|
                 .quiz-col.quiz-col-6 class="quiz-result-#{ index + 2}"
-                  = image_tag 'custom-dresses/image-girl.jpg'
-                  /= image_tag "style_profile/styels/image-#{ style.name }.jpg"
+                  / = image_tag 'custom-dresses/image-girl.jpg'
+                  = image_tag "_style_profile/styles/#{ style.name }.jpg"
                   .result: .text = "#{ style.presentation } #{ style.percentage }"
 
       .quiz-results-grey-block
