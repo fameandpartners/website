@@ -22,7 +22,7 @@
 //= require "/styleguide/js*"
 //  require js/jquery.skippr.min.js # copied non-min version, to debug&patch
 // require js/main.js
-// require js/sg-scripts.js
+
 
 //  require js/superslides.js # copied to libs/superslides for easier monkey-patching
 //= require functions_redesign.js
@@ -73,8 +73,7 @@ jQuery(document).ready(function($){
     return true
   };
 
-  add_script('/assets/js/sg-scripts.js');
-  //add_script('/assets/js/main.js');
+  add_script('/assets/javascripts/styleguide/js/sg-scripts.js');
 
 
 	$('#forgot-password').on('click', function(e) {
@@ -83,6 +82,7 @@ jQuery(document).ready(function($){
 		window.location = $(this).attr('href') + '?email=' + email;
 	});
 
+  //home page slider
   $(function() {
     $(".rslides").responsiveSlides({
     auto: true,             // Boolean: Animate automatically, true or false
