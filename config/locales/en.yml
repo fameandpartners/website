@@ -133,3 +133,19 @@ en:
     shipped: Your dress has been shipped
     backorder: Your dress is on backorder
     partial: Your dress is in making
+  style:
+    glam: 
+      title: "glam"
+      description: "Our glamour girl is a 1940s Hollywood film starlet with red lips, winged eyes and diamonds sparkling from a moisturized décolletage. She conjures this image because she is permanently starring in her own fabulous film. Sometimes sexy, sometimes sassy and always sophisticated, she is romantic, captivating and a little bit mysterious. The glamorous girl exudes natural savor-faire but behind the scenes this can take some serious work! This is a girl that takes personal maintenance seriously - from her luscious locks to an exercise regime that maintains a glow, she is always up to date with the latest trends. Part of what makes the glamorous girl is her un-requiting elegance and individual style. Classic glamour girls include Blake Lively and Gigi Hadid."
+    classic:
+      title: "classic"
+      description: "The classic girl loves the feeling of being feminine, sophisticated and timeless in her style. Tradition is important to the classic girl. The classic girl has timeless pieces in her wardrobe because whatever she buys it never goes out of style. She has panache, flair and a flawless style. She finishes her looks with dainty jewelry and a string of pearls. Emma Stone and Olivia Palermo are the perfect fit for the classic look."
+    girly:
+      title: "girly"
+      description: "Think Taylor Swift or Chloe Moretz – sorbet hues, lace, short baby-doll dresses, romantic silhouettes make her wardrobe. She handles the world with grace and sensibility. She doesn't live for fashion but still feels most at home in soft and luxurious fabrics. She feels best with some mascara, a touch of pink lipstick and a wash of blush. She will wear delicate heels and add a floral headband, pearls and cute little heart shaped studs. Tying in her look with soft curls."
+    edgy:
+      title: "edgy"
+      description: "The edgy girl makes her own rules. The world is simply an opportunity to flaunt her creativity, her visual eye and her desire to deviate from the norm. She is eclectic and an individual. She is free spirited, confident and doesn’t succumb to society’s norms. Edgy girls will often opt for classic black or monochrome colors despite their desire to be different. The edgy girl is broody; she has mastered the mysterious, intellectual look and tends to wear clothes that enhance that. Her personal maintenance mantra is to keep it simple unless she opts for Kylie Jenner’s hair. Celebrities include Cara Delevingne and Rita Ora."
+    bohemian:
+      title: "boho"
+      description: "Being a bohemian is really a state of mind when it comes to fashion. The bohemian girl is an individual, free-spirited, animal-loving peace-maker with a care-free and easy-breezy look. Celebrities who hold down the bohemian flag are Vanessa Hudgens, Elle Fanning, and the Olsen twins. The bohemian can be a fuss-free or an ultra fashionista. Boho chic girls create their look with stacked bangles, flower crowns, wedges and cross body fringed bags. It's all about her free-thinking spirit."

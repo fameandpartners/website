@@ -45,8 +45,9 @@ class StyleProfilesController < ApplicationController
       styles = style_profile.percentage.map do |name, rate|
         OpenStruct.new(
           name: name.to_s,
-          presentation: name.to_s,
+          presentation: I18n.t("style.#{ name.to_s }.title", default: name),
           percentage: "#{ rate.to_i }%".html_safe,
+          description: I18n.t("style.#{ name.to_s }.description", default: name),
           rate: rate.to_i
         )
       end
