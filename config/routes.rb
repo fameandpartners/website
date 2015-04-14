@@ -113,7 +113,7 @@ FameAndPartners::Application.routes.draw do
       get '/:permalink/style', to: 'redirects#products_show', as: :personalization_style_product, defaults: {style_dress: true}
     end
 
-    get '/celebrities' => 'celebrities#index', as: 'celebrities'
+    get '/celebrities',  to: redirect('/dresses')
     get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
     get '/featured-bloggers/:id' => 'celebrities#show', as: 'featured_blogger'
 
@@ -200,7 +200,7 @@ FameAndPartners::Application.routes.draw do
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
     get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
-    get '/plus-size' => 'statics#landingpage_plus_size', :as => :plus_size
+    get '/plus-size',  to: redirect('/dresses')
 
     namespace "campaigns" do
       resource :newsletter, only: [:new, :create], controller: :newsletter

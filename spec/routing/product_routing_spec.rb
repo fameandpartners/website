@@ -38,4 +38,14 @@ describe 'Product Redirection', type: :request do
     get "dresses/style"
     expect(response).to redirect_to("/dresses")
   end
+
+  it 'redirects old /celebrities page to all dresses' do
+    get "/celebrities "
+    expect(response).to redirect_to("/dresses")
+  end
+
+  it 'redirects old /plus-size page to all dresses' do
+    get "/plus-size "
+    expect(response).to redirect_to("/dresses")
+  end
 end
