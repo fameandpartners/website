@@ -1,6 +1,6 @@
 <div class="cart--top text-center">
   <div class="pull-left close-cart">
-    <img alt="Submit" class="line-arrow arrow-bag" src="line-arrow.svg">
+    <img alt="Submit" class="line-arrow arrow-bag" src="/assets/line-arrow.svg">
   </div>
   <div class="pull-right close-cart">
     <span class="cart"><img alt="Cart" class="cart-icon" src="cart.svg">
