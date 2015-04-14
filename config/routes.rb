@@ -185,7 +185,7 @@ FameAndPartners::Application.routes.draw do
     # Blogger static page
     get '/bloggers/liz-black' => 'statics#blogger', as: :featured_blogger
     get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
-    get '/dani-stahl' => 'statics#danistahl', as: :danistahl
+    get '/dani-stahl', to: redirect("/")
 
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us

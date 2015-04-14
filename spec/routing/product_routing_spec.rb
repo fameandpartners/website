@@ -58,4 +58,9 @@ describe 'Product Redirection', type: :request do
     get "/fashionista2014"
     expect(response).to redirect_to("/")
   end
+
+  it 'redirects old /dani-stahl page to root' do
+    get "/dani-stahl"
+    expect(response).to redirect_to("/")
+  end
 end
