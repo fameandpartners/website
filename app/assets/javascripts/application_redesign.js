@@ -65,15 +65,15 @@
 //= require partials/account_settings_page
 
 jQuery(document).ready(function($){
-  function add_script(src) {
-    var script_element = document.createElement('script');
-    script_element.setAttribute('src', src);
-    script_element.setAttribute('type', 'text/javascript')
-    document.head.appendChild(script_element);
-    return true
-  };
-
-  add_script('/assets/javascripts/styleguide/js/sg-scripts.js');
+  // function add_script(src) {
+  //   var script_element = document.createElement('script');
+  //   script_element.setAttribute('src', src);
+  //   script_element.setAttribute('type', 'text/javascript')
+  //   document.head.appendChild(script_element);
+  //   return true
+  // };
+  //
+  // add_script('/assets/javascripts/styleguide/js/sg-scripts.js');
 
 
 	$('#forgot-password').on('click', function(e) {
@@ -92,7 +92,3 @@ jQuery(document).ready(function($){
     });
   });
 })
-
-
-
-
