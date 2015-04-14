@@ -196,7 +196,7 @@ FameAndPartners::Application.routes.draw do
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/how-it-works', to: redirect("/why-us")
-    get '/fashionista2014'   => 'statics#fashionistacomp', :as => :fashionista
+    get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
     get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
