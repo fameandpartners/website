@@ -88,8 +88,8 @@ FameAndPartners::Application.routes.draw do
       get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
       get '/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
       get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
-      get '/colour' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
-      get '/color' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
+      get '/colour',  to: redirect('/dresses')
+      get '/color',  to: redirect('/dresses')
 
       get '/:event/:style' => 'spree/products#index'
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
