@@ -48,4 +48,9 @@ describe 'Product Redirection', type: :request do
     get "/plus-size "
     expect(response).to redirect_to("/dresses")
   end
+
+  it 'redirects old /how-it-works page to all /why-us' do
+    get "/how-it-works"
+    expect(response).to redirect_to("/why-us")
+  end
 end
