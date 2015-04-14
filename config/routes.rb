@@ -86,7 +86,7 @@ FameAndPartners::Application.routes.draw do
       get '/dress-:product_slug(/:color_name)' => 'products/details#show'
       #roots categories
       get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
-      get '/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
+      get '/event',  to: redirect('/dresses')
       get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
       get '/colour',  to: redirect('/dresses')
       get '/color',  to: redirect('/dresses')

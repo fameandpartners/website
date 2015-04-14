@@ -28,4 +28,9 @@ describe 'Product Redirection', type: :request do
     get "dresses/color"
     expect(response).to redirect_to("/dresses")
   end
+
+  it 'redirects old events page to all dresses' do
+    get "dresses/event"
+    expect(response).to redirect_to("/dresses")
+  end
 end
