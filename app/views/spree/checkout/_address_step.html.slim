@@ -1,5 +1,12 @@
+ruby:
+  init_checkout_address_form = "
+    checkout.address_step.init({
+      option_name: 'option_value'
+    });
+  "
+
 - content_for :inline_javascript do
-  | window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
+  = raw init_checkout_address_form
 
 - if current_step.eql?('address')
   - if not signed_in?  

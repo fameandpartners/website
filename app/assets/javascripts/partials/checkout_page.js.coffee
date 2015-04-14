@@ -24,11 +24,6 @@ page.initCheckoutEditPage = () ->
       page.updatePayButtonAvailability()
       page.updateAddressFormVisibility()
 
-      # validation
-      if app.debug || app.env == 'development'
-        if $('.place-order button').length == 0
-          console.log('WARRRRRGHNING! - credit card handlers have invalid selectors. cc payment will not work, probably')
-
     onAjaxLoadingHandler: (e) ->
       page.updateAddressFormVisibility()
 
