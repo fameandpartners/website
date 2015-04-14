@@ -2,6 +2,7 @@
 
 @import 'redesign/vars';
 @import 'redesign/mixins';
+@import "font-awesome";
 
 @import 'libs/vex.css';
 @import 'libs/vex-theme-flat-attack.css';
@@ -41,6 +42,8 @@
 
 @import 'redesign/checkout';
 @import 'redesign/cart';
+
+
 
 // Time specific content
 @import 'transient_content';

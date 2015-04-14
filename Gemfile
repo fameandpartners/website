@@ -34,8 +34,6 @@ gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
 gem 'sitemap_generator'
 
-gem 'font-awesome-sass'
-
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
 gem 'pry-rails'
@@ -84,6 +82,7 @@ group :assets do
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
   gem 'bootstrap-sass'
+  gem 'font-awesome-sass'
 end
 
 group :development, :test do
