@@ -10,6 +10,6 @@ class Factory
   end
 
   def self.for_product(product)
-    new(product.property(:factory_name) || 'Unknown')
+    new(product.property(:factory_name).presence || 'Unknown')
   end
 end
