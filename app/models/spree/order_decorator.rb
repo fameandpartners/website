@@ -36,7 +36,7 @@ Spree::Order.class_eval do
 
   def delivery_state
     return 'incomplete' unless complete?
-    project_delivery_date unless projected_delivery_date
+    projected_delivery_date ||= Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
     days = (Time.zone.now.to_date - projected_delivery_date.to_date).to_i
     # binding.pry
     case days
