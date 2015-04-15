@@ -1,0 +1,13 @@
+- order.line_items.each_with_index do |order_line_item, idx|
+  tr class=current_row_class
+
+    td class="align-center" = l (@show_only_completed ? order.completed_at : order.created_at).to_date
+    td = l(Date.parse(order.projected_delivery_date)) || '-'
+    td = order.number
+    td = ('A'..'Z').to_a[idx]
+    td = order_line_item.variant.sku
+    td = render 'spree/admin/orders/index/update_fabrication_state_form', order_line_item: order_line_item
+    td = order.shipments.select { |ship| ship.line_items.include?(order_line_item) }.first.try(:state)
+    td
+    td
+    td

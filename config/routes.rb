@@ -271,6 +271,11 @@ FameAndPartners::Application.routes.draw do
     mount Spree::Core::Engine, at: '/'
   end
 
+
+  namespace :admin do
+    resources :line_items, :only => :update, controller: 'fabrication'
+  end
+
   Spree::Core::Engine.routes.append do
     namespace :admin do
       resources :competition_participations, only: [:index], format: :csv
