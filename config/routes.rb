@@ -1,14 +1,15 @@
 FameAndPartners::Application.routes.draw do
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
-  # match '/us/*whatevs' => redirect(path: "/%{whatevs}")
-  # match '/us' => redirect("/")
-
   match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
 
   get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
+
+  get '/us/*whatevs' => redirect(path: "/%{whatevs}")
+  get '/us' => redirect("/")
+
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,

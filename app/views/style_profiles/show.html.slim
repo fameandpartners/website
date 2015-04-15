@@ -1,36 +1,76 @@
 - content_for :head do
-  = stylesheet_link_tag     'application_redesign'
-  = javascript_include_tag  'application_redesign'
+  = stylesheet_link_tag    'quiz'
+  = javascript_include_tag 'quiz'
 
 - content_for :footer do
   = render '/shared/marketing'
-  = render 'layouts/redesign/javascript'
-  = render '/shared/remarketing_tag'
 
-javascript:
-  $(document).ready(function(){
-    $('.img-product').hoverable();
-  });
+- content_for :inline_javascript do
+  | $('.img-product').hoverable();
 
-.user-style-profile-page-title
-  .container
-    .page-title--details
-      h1.user-account-title.no-padding-bottom.text-white 
-        | My Style Profile
+css:
+  /* .quiz-results-wrapper * { overflow-y: auto; }*/
+  .gurl_com_modal.email-capture-modal .vex-content .vex-dialog-form .vex-dialog-message h2 {
+    font-size: 2.4em; 
+    line-height: 1.1;
+  }
+  .gurl_com_modal.email-capture-modal .vex-content .vex-dialog-form .vex-dialog-message p {
+    font-size: 1.5em;
+    line-height: 1.1;
+    padding-top: 0;
+  }
 
-.page-content.user.style-profile.show
-  .container.relative.products-collection
-    - @recommended_products.each_slice(4) do |products|
-      .row.relative
-        - products.each do |product|
-          .col-md-3.col-xs-6.col-xxs-12.category--item
-            = link_to collection_product_path(product), target: '_blank' do  
-              - if product.images.any?
-                = cropped_product_hoverable_image_tag(product)
-            .details.text-center
-              span.name = product.name
-              span.price = price_for_product(product)
+= render '/style_profiles/javascript'
 
-            - if product.fast_delivery == true
-             = image_tag src='express_delivery.png', class: 'express-delivery'
-      .clearfix.visible-sm-block.visible-xs-block
+ruby:
+  main_style = @user_styles.first
+  other_styles = @user_styles[1..-1]
+
+.quiz-box#style_quiz
+  .quiz-wrapper-box
+    / Result
+    .quiz-results-wrapper
+      .quiz-results
+        .title your style profile is:
+        .quiz-row
+          .quiz-col.quiz-col-6.quiz-result-1
+            / = image_tag 'custom-dresses/image-girl.jpg'
+            = image_tag "_style_profile/styles/#{ main_style.name }.jpg"
+            .result.lg.centered 
+              .text
+                = main_style.presentation
+                br
+                = main_style.percentage
+          .quiz-col.quiz-col-6
+            .quiz-row
+              - other_styles.each_with_index do |style, index|
+                .quiz-col.quiz-col-6 class="quiz-result-#{ index + 2}"
+                  / = image_tag 'custom-dresses/image-girl.jpg'
+                  = image_tag "_style_profile/styles/#{ style.name }.jpg"
+                  .result: .text = "#{ style.presentation } #{ style.percentage }"
+
+      .quiz-results-grey-block
+        h2 
+          | Everyone has a bit of each profile in them, but you are mostly #{main_style.presentation}.
+          small 
+            | Here's a bit about being the #{ main_style.presentation } gal:
+        p = main_style.description
+      .quiz-results-black-block
+        h2 YOUR PERSONAL ONLINE CLOSET
+        p based on your style profile we think you will love these killer dresses
+      .dress-catalog
+        .quiz-row
+          - @recommended_products.each do |product|
+            .quiz-col.quiz-col-4
+              = link_to collection_product_path(product), target: '_blank' do  
+                - if product.images.any?
+                  = cropped_product_hoverable_image_tag(product)
+                - else
+                  = product.name
+              p = product.name
+              p.price = price_for_product(product)
+      
+      .quiz-results-black-block
+        h2 Don’t fret!
+        p We have more dresses that we know you will love
+        = link_to 'MORE STYLES HERE', collection_path, class: 'btn pink-pale', target: '_blank'

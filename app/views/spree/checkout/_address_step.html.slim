@@ -20,6 +20,12 @@
       = form.fields_for :bill_address do |bill_form|
         = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
 
+
+    .row
+      .col-md-12.form-group
+        = form.label :customer_notes
+        = form.text_field :customer_notes, class: 'required form-control form-control-md'
+    
     h2.checkout-section-title  Shipping Address
     / br
     .row
@@ -33,6 +39,7 @@
                 br
                 small 
                   ' (Use billing address)
+
       .col-md-6
         /- if not signed_in?
           .form-group

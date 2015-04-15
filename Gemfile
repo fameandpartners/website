@@ -14,7 +14,7 @@ gem 'psych', '~> 1.3.4'
 gem 'active_model_serializers'
 gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
 gem 'rack-cors'
-
+gem 'business_time'
 gem 'acts-as-taggable-on'
 gem 'rmagick'
 gem 'ckeditor'
@@ -33,8 +33,6 @@ gem 'instagram'
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
 gem 'sitemap_generator'
-
-gem 'font-awesome-sass'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
@@ -83,9 +81,11 @@ group :assets do
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
+  gem 'bootstrap-sass'
+  gem 'font-awesome-sass'
 end
 
-group :development, :test do  
+group :development, :test do
   gem 'awesome_print'
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
@@ -106,7 +106,7 @@ group :development, :test do
   gem 'spring'
   gem 'thin', '1.5.1'
   gem 'compass'
-  gem 'bootstrap-sass'
+
 end
 
 group :staging, :development do

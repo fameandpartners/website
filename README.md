@@ -23,9 +23,7 @@ $ brew install redis elasticsearch imagemagick postgresql
 
 * `$ git clone git@github.com:fameandpartners/website.git`
 * `$ cd ./website`
-* `$ git submodule init && git submodule update` - to get the [styleguide](https://github.com/fameandpartners/styleguide)
 * `$ cp config/database.yml.example config/database.yml`
-* `$ bin/update_submodules` - For the common `styleguide` repository.
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 

@@ -3,16 +3,16 @@ class EmailMarketing
     send_abandoned_cart_emails
     send_style_quiz_not_completed_emails
 
-    # Added to Wishlist: Send email to a user who added something 
-    # to their wishlist 12 hours after the last addition. 
+    # Added to Wishlist: Send email to a user who added something
+    # to their wishlist 12 hours after the last addition.
     # Only send the email once to user. Display contents of wishlist, link to home page.
     #send_added_to_wishlist_emails # updated
-    
+
     # Business Rule: Goes out 2 days after added to wishlist
-    send_wishlist_item_added
+    # send_wishlist_item_added
 
     # Business rule: Goes out 2 weeks after added to wishlist, if they have not purchased
-    send_wishlist_item_added_reminder
+    # send_wishlist_item_added_reminder
 
     #Email: Goes out 1 week after style profile complete
     send_style_quiz_completed_reminder_emails
@@ -34,8 +34,8 @@ class EmailMarketing
     EmailNotification.delete_all(created_at: nil, code: codes)
   end
 
-  # Abandoned Cart: Send email to a user who has added to cart 
-  # but not purchased within 60min. Only send the email once to user. 
+  # Abandoned Cart: Send email to a user who has added to cart
+  # but not purchased within 60min. Only send the email once to user.
   # Display contents of cart with link back to shopping cart page.
   def self.send_abandoned_cart_emails
     # Initiate date time variables
@@ -62,8 +62,8 @@ class EmailMarketing
     end
   end
 
-  # Added to Wishlist: Send email to a user who added something 
-  # to their wishlist 12 hours after the last addition. 
+  # Added to Wishlist: Send email to a user who added something
+  # to their wishlist 12 hours after the last addition.
   # Only send the email once to user. Display contents of wishlist, link to home page.
   def self.send_added_to_wishlist_emails
     # Initiate date time variables
@@ -115,7 +115,7 @@ class EmailMarketing
   end
 
   # Email: Goes out 1 week after style profile complete
-  # note - about 500 profiles created per week.  
+  # note - about 500 profiles created per week.
   def self.send_style_quiz_completed_reminder_emails
     code = 'style_quiz_completed_reminder'
     created_before  = (configatron.email_marketing.delay_time.style_profile_completed_reminder || 1.week).ago

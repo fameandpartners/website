@@ -1,9 +1,9 @@
 <div class="cart--top text-center">
   <div class="pull-left close-cart">
-    <img alt="Submit" class="line-arrow arrow-bag" src="/assets/images/line-arrow.svg">
+    <img alt="Submit" class="line-arrow arrow-bag" src="/assets/line-arrow.svg">
   </div>
   <div class="pull-right close-cart">
-    <span class="cart"><img alt="Cart" class="cart-icon" src="/assets/images/Cart.svg">
+    <span class="cart"><img alt="Cart" class="cart-icon" src="/assets/Cart.svg">
       <span class="cart-amount"><%= @cart.item_count %></span>
     </span>
   </div>
@@ -46,7 +46,7 @@
     <button class="btn btn-charcoal btn-block">Shop More</button><br>
   </div>
   <div class="col-lg-6 no-padding-right no-padding-lg">
-    <form method="get" class="button_to" action="<%= urlWithSitePrefix('/checkout') %>">
+    <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
       <div>
         <input type="submit" value="Checkout" class="btn btn-black btn-block">
       </div>
