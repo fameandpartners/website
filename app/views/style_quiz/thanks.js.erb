@@ -5,5 +5,5 @@
 if (window.parent && window.parent.onQuizCompleted) {
   window.parent.onQuizCompleted({});
 } else {
-  window.parent.location = "#{ after_quiz_redirect_url }";
+  window.location = "<%= after_quiz_redirect_url %>";
 };
