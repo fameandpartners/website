@@ -27,8 +27,10 @@ ruby:
   other_styles = @user_styles[1..-1]
 
 .quiz-box#style_quiz
+  .quiz-result-header
+    = link_to '/' do
+      = image_tag 'new-logo-white.svg', class: 'logo', :alt => 'Fame & Partners'
   .quiz-wrapper-box
-    / Result
     .quiz-results-wrapper
       .quiz-results
         .title your style profile is:

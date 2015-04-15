@@ -1709,6 +1709,17 @@
 
 
 // Quiz result 
+.quiz-result-header {
+  background-color: #000;
+  height: 70px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+  .logo {
+    width: 320px;
+    margin-top: 22px;
+  }
+}
 .quiz-results-wrapper {
   .quiz-row {
     margin-left: -20px;
