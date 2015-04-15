@@ -19,8 +19,13 @@ describe Marketing::RakutenTracker do
     allow(order).to receive_message_chain(:adjustments, :where, :sum).and_return(promo_total)
   end
 
+
   context 'us' do
     let(:site_version)  { double(:is_usa? => true, :is_australia? => false) }
+
+    it '#ord' do
+      expect(tracker.ord).to eq order.number
+    end
 
     it '#qlist' do
       expect(tracker.qlist).to eq '1|1|2'
@@ -32,6 +37,9 @@ describe Marketing::RakutenTracker do
 
     it '#url' do
       expect(tracker.url).to be_present
+      expect(tracker.url).to include(order.number)
+      expect(tracker.url).to include('1|1|2')
+      expect(tracker.url).to include('10000|10000|22000')
     end
 
     context 'with discount' do
@@ -55,6 +63,10 @@ describe Marketing::RakutenTracker do
   context 'au' do
     let(:site_version)  { double(:is_usa? => false, :is_australia? => true) }
 
+    it '#ord' do
+      expect(tracker.ord).to eq order.number
+    end
+
     it '#qlist' do
       expect(tracker.qlist).to eq '1|1|2'
     end
@@ -65,6 +77,13 @@ describe Marketing::RakutenTracker do
 
     it '#url' do
       expect(tracker.url).to be_present
+    end
+
+    it '#url' do
+      expect(tracker.url).to be_present
+      expect(tracker.url).to include(order.number)
+      expect(tracker.url).to include('1|1|2')
+      expect(tracker.url).to include('9091|9091|20000')
     end
 
     context 'with discount' do

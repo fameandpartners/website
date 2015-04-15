@@ -39,7 +39,7 @@ class Marketing::RakutenTracker
       @cur = 'AUD'
     end
 
-    ord = @order.number
+    @ord = @order.number
   end
 
   def skulist
