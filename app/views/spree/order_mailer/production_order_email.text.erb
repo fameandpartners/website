@@ -1,42 +1,40 @@
 Order Summary（订单信息）
+Order Number: <%= order.number %>
+Items:        <%= order.total_items %>
+
 ============================================================
 
-<% @order.line_items.each do |item| %>
-Style No (款号)：<%= item.variant.product.sku %>
-<% if item.personalization.present? %>
-Size (码数:  <%= @order.shipping_address.country.iso %> <%= item.personalization.size %>
-<% else %>
-Size (码数:  <%= @order.shipping_address.country.iso %> <%= item.variant.dress_size.name %>
-<% end %>
-<% if item.personalization.present? %>
-Color（颜色) : <%= item.personalization.color.name %>
-<% else %>
-Color（颜色) : <%= item.variant.dress_color.name %>
-<% end %>
-Quantity: <%=item.quantity%>
-Factory: <%= Factory.for_product(item.variant.product) %>
-Delivery Date: <%= @order.projected_delivery_date.to_date %>
+<% order.line_items.each do |item| %>
+Style No (款号)：<%= item.style_number %>
+Size (码数):     <%= order.country_code %>-<%= item.size %>
+Color（颜色):    <%= item.colour_name %>
+Quantity:       <%= item.quantity%>
+Factory:        <%= item.factory %>
+Delivery Date:  <%= order.projected_delivery_date %>
 
-<% if item.personalization.present? %>
 Customizations:
-  <% item.personalization.customization_values.each do |v| %>
-    - <%= v.presentation %>
+<% item.customisations.each do |name, image_url| %>
+  - <%= name %>
+  <% if image_url.present? %>
+  - <%= image_url %>
   <% end %>
 <% end %>
 
-<% if img = item.variant.product.images_for_variant(item.variant).select { |i| i.attachment.url(:large).downcase.include?('front-crop') }.first %>
-<%= img.attachment.url(:large) %>
+<% if item.image? %>
+Product Image:
+<%= item.image_url %>
 <% end %>
 ------------------------------------------------------------
 <% end %>
 
-<% if @order.customer_notes.present? %>
-Customer Notes : <%= @order.customer_notes %>
+<% if order.customer_notes? %>
+Customer Notes: <%= order.customer_notes %>
 <% end %>
 
 Customer Details (客人信息)
 ------------------------------------------------------------
-Customer（客人名字）: <%= @order.name %>
-Phone Number（电话）: <%= @order.billing_address.phone %>
-Shipping Address（地址）: <%= @order.shipping_address.to_string %>
+Customer（客人名字): <%= order.name %>
+Phone Number（电话): <%= order.phone_number %>
+Shipping Address（地址): <%= order.shipping_address %>
 ============================================================
+

@@ -10,6 +10,9 @@ Spree::OrderMailer.class_eval do
   helper 'spree/base'
   helper :orders
 
+  attr_reader   :order
+  helper_method :order
+
   def team_confirm_email(order)
     find_order(order)
 
@@ -28,6 +31,8 @@ Spree::OrderMailer.class_eval do
     to = configatron.order_production_emails
     from = configatron.noreply
     subject = "Order Confirmation (订单号码）##{@order.number}"
+
+    @order = ProductionEmailPresenter.new(@order)
 
     mail(to: to, from: from, subject: subject)
   end

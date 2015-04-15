@@ -1,69 +1,91 @@
-h2 Order Summary（订单信息）
-hr
+table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable"
+  tr
+    td align="center" valign="top"
+      table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailContainer"
+        tr
+          td align="center" valign="top"
+            h2 Order Summary（订单信息）
 
-- @order.line_items.each do |item|
-  p
-    strong Style No (款号)：
-    = item.variant.product.sku
+            table border="0" cellpadding="5" cellspacing="0" width="100%" id="orderSummary"
+              tbody
+                tr
+                  th Order Number:
+                  td = order.number
+                tr
+                  th Items:
+                  td = order.total_items
 
-  p
-    strong Size (码数):
-    = @order.shipping_address.country.iso
-    - if item.personalization.present?
-      = item.personalization.size
-    - else
-      = item.variant.dress_size.name
+            table border="0" cellpadding="5" cellspacing="0" width="100%" id="lineItems"
+              - order.line_items.each do |item|
+                tbody
+                  tr
+                    td colspan=2
+                      hr
+                  tr
+                    th Style No (款号)：
+                    td = item.style_number
 
-  p
-    strong Color（颜色):
-    - if item.personalization.present?
-      = item.personalization.color.name
-    - else
-      = item.variant.dress_color.name
+                  tr
+                    th Size (码数):
+                    td
+                      = order.country_code
+                      ' -
+                      = item.size
 
-  p
-    strong Quantity:
-    =item.quantity
+                  tr
+                    th Color（颜色):
+                    td = item.colour_name
 
-  p
-    strong Factory:
-    = Factory.for_product(item.variant.product)
+                  tr
+                    th Quantity:
+                    td = item.quantity
 
-  p
-    strong Delivery Date:
-    = @order.projected_delivery_date.to_date
+                  tr
+                    th Factory:
+                    td = item.factory
 
-  - if item.personalization.present?
-    p
-      strong Customizations:
-      ul
-      - item.personalization.customization_values.each do |v|
-        li= v.presentation
+                  tr
+                    th Delivery Date:
+                    td = order.projected_delivery_date
 
-  p
-    - img = item.variant.product.images_for_variant(item.variant).select { |i| i.attachment.url(:large).downcase.include?('front-crop') }.first
-    - if img
-      = image_tag img.attachment.url(:large)
+                  tr
+                    th Customizations:
+                    td
+                      table
+                        tbody
+                          - item.customisations.each do |name, image_url|
+                            tr
+                              th = name
+                            - if image_url.present?
+                              tr
+                                td = image_tag image_url
 
-- if @order.customer_notes.present?
-  p
-    strong Customer Notes:
-    = @order.customer_notes
+                  tr
+                    th Product Image
+                    td
+                      - if item.image?
+                        = image_tag item.image_url
 
-p
-  br
+            hr
+            - if order.customer_notes?
+              p
+                h3 Customer Notes:
+                = order.customer_notes
 
-h3 Customer Details (客人信息)
-hr
+            h3 Customer Details (客人信息)
+            hr
 
-p
-  strong Customer（客人名字:
-  = @order.name
+            p
+              h3
+                ' Customer（客人名字):
+              = order.name
 
-p
-  strong Phone Number（电话:
-  = @order.billing_address.phone
+            p
+              h3
+                ' Phone Number（电话):
+              = order.phone_number
 
-p
-  strong Shipping Address（地址:
-  = @order.shipping_address.to_string
+            p
+              h3
+                ' Shipping Address（地址):
+              = order.shipping_address
