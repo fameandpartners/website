@@ -1,5 +1,8 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 Spree::OrderMailer.class_eval do
-  layout 'mailer', :except => [:team_confirm_email]
+  layout 'mailer', :except => [:team_confirm_email, :production_order_email]
 
   include Spree::BaseHelper
   include OrdersHelper
@@ -18,6 +21,17 @@ Spree::OrderMailer.class_eval do
 
     mail(to: to, from: from, subject: subject)
   end
+
+  def production_order_email(order)
+    find_order(order)
+
+    to = configatron.order_production_emails
+    from = configatron.noreply
+    subject = "Order Confirmation (订单号码）##{@order.number}"
+
+    mail(to: to, from: from, subject: subject)
+  end
+
 
   def guest_payment_request(payment_request, resubmission = false)
     @payment_request = payment_request

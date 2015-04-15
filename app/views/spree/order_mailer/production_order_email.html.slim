@@ -1,0 +1,69 @@
+h2 Order Summary（订单信息）
+hr
+
+- @order.line_items.each do |item|
+  p
+    strong Style No (款号)：
+    = item.variant.product.sku
+
+  p
+    strong Size (码数):
+    = @order.shipping_address.country.iso
+    - if item.personalization.present?
+      = item.personalization.size
+    - else
+      = item.variant.dress_size.name
+
+  p
+    strong Color（颜色):
+    - if item.personalization.present?
+      = item.personalization.color.name
+    - else
+      = item.variant.dress_color.name
+
+  p
+    strong Quantity:
+    =item.quantity
+
+  p
+    strong Factory:
+    = Factory.for_product(item.variant.product)
+
+  p
+    strong Delivery Date:
+    = @order.projected_delivery_date.to_date
+
+  - if item.personalization.present?
+    p
+      strong Customizations:
+      ul
+      - item.personalization.customization_values.each do |v|
+        li= v.presentation
+
+  p
+    - img = item.variant.product.images_for_variant(item.variant).select { |i| i.attachment.url(:large).downcase.include?('front-crop') }.first
+    - if img
+      = image_tag img.attachment.url(:large)
+
+- if @order.customer_notes.present?
+  p
+    strong Customer Notes:
+    = @order.customer_notes
+
+p
+  br
+
+h3 Customer Details (客人信息)
+hr
+
+p
+  strong Customer（客人名字:
+  = @order.name
+
+p
+  strong Phone Number（电话:
+  = @order.billing_address.phone
+
+p
+  strong Shipping Address（地址:
+  = @order.shipping_address.to_string
