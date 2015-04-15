@@ -1,12 +1,13 @@
 .page-content.index
   ul.rslides
+    li
+      a href="/dresses/graduation"
+        = image_tag "taste-of-fame.jpg", alt: 'Taste of Fame', class: 'img-responsive portrait-img'
+
     - if current_site_version.is_usa?
       li
         a href="http://prom.fameandpartners.com" rel="nofollow"
           = image_tag "prom-competition.jpg", alt: 'Prom Competition', class: 'img-responsive portrait-img'
-    li
-      a href="/dresses/graduation"
-        = image_tag "taste-of-fame.jpg", alt: 'Taste of Fame', class: 'img-responsive portrait-img'
 
     li
       a href="/prom-collection"
