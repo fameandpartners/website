@@ -159,6 +159,8 @@ GEM
       activesupport (= 3.2.21)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
+    activerecord-immutable (0.0.3)
+      activerecord (>= 3.2)
     activeresource (3.2.21)
       activemodel (= 3.2.21)
       activesupport (= 3.2.21)
@@ -276,6 +278,9 @@ GEM
     eco-source (1.1.0.rc.1)
     equalizer (0.0.9)
     erubis (2.7.0)
+    event_sourced_record (0.2.2)
+      activemodel
+      activerecord-immutable (~> 0.0.3)
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -665,6 +670,7 @@ DEPENDENCIES
   default_value_for
   droidcss
   eco
+  event_sourced_record
   execjs (= 1.4.0)
   factory_girl_rails (= 4.2.1)
   font-awesome-sass
