@@ -10,6 +10,14 @@ FameAndPartners::Application.routes.draw do
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
+  get '/prom/thanksbabe' => redirect('http://prom.fameandpartners.com?snapchat=true')
+  get '/prom', :to => redirect { |params, request|
+    if request.params.any?
+      "http://prom.fameandpartners.com?#{request.params.to_query}"
+    else
+      "http://prom.fameandpartners.com"
+    end
+  }
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
@@ -55,10 +63,6 @@ FameAndPartners::Application.routes.draw do
     get '/amfam' => redirect('/amfam-collection')
     get '/amfam-dresses'  => redirect('/amfam-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
-
-    # get '/prom' => 'statics#prom_lp', :as => :prom_lp
-    get '/prom' => redirect('http://prom.fameandpartners.com')
-    get '/prom/thanksbabe' => redirect('http://prom.fameandpartners.com?snapchat=true')
 
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
