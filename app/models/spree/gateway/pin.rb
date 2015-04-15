@@ -5,6 +5,8 @@ class Spree::Gateway::Pin < Spree::Gateway
   attr_accessible :preferred_api_key
   attr_accessible :preferred_publishable_key
 
+  USD_GATEWAYS = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
+
   def purchase(money, creditcard, gateway_options)
     if token = creditcard.gateway_payment_profile_id
       # The Balanced ActiveMerchant gateway supports passing the token directly as the creditcard parameter
@@ -14,7 +16,7 @@ class Spree::Gateway::Pin < Spree::Gateway
   end
 
   def currency
-    if preferred_publishable_key == 'pk_FJWiUA3rQW1uXZIg3LwMKQ'
+    if USD_GATEWAYS.include?(preferred_publishable_key)
       'USD'
     else
       'AUD'
