@@ -36,6 +36,9 @@ css:
   .quiz-box .steps-box .scrollable { width: 100%; height: 100%; overflow-x: hidden; overflow-y: scroll;}
 
 .quiz-box#style_quiz
+  .quiz-header
+    = link_to '/' do
+      = image_tag 'new-logo-white.svg', class: 'logo', :alt => 'Fame & Partners'
   .quiz-wrapper-box
     .quiz-box-inner
       /uncomment this to show thanks
