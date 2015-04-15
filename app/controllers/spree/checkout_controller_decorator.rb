@@ -8,7 +8,7 @@ Spree::CheckoutController.class_eval do
 =begin
   def update_registration
     fire_event("spree.user.signup", :order => current_order)
-    
+
     if params[:create_account]
       @user = Spree::User.new(params[:user])
       if @user.save
@@ -153,7 +153,7 @@ Spree::CheckoutController.class_eval do
   def raise_insufficient_quantity
     flash[:error] = t(:spree_inventory_error_flash_for_insufficient_quantity)
     redirect_to main_app.dresses_path
-  end 
+  end
 
   def load_order
     @order = current_order
@@ -193,7 +193,7 @@ Spree::CheckoutController.class_eval do
   def before_address
     @order.bill_address ||= build_default_address
     @order.ship_address ||= build_default_address
-  end 
+  end
 
   private
 
@@ -202,11 +202,11 @@ Spree::CheckoutController.class_eval do
     if @order.has_checkout_step?("payment") && @order.payment?
       if params[:payment_source].present? && source_params = params.delete(:payment_source)[params[:order][:payments_attributes].first[:payment_method_id].underscore]
         params[:order][:payments_attributes].first[:source_attributes] = source_params
-      end 
+      end
       if (params[:order][:payments_attributes])
         params[:order][:payments_attributes].first[:amount] = @order.total
-      end 
-    end 
+      end
+    end
     params[:order].except(:password, :password_confirmation)
   end
 
@@ -242,7 +242,8 @@ Spree::CheckoutController.class_eval do
   end
 
   def find_payment_methods
-    @credit_card_gateway = @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
+    @credit_card_gateway = @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') && method.currency == current_site_version.currency }
+
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
     end

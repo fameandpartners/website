@@ -13,6 +13,14 @@ class Spree::Gateway::Pin < Spree::Gateway
     provider.purchase(money, creditcard, gateway_options)
   end
 
+  def currency
+    if preferred_publishable_key == 'pk_FJWiUA3rQW1uXZIg3LwMKQ'
+      'USD'
+    else
+      'AUD'
+    end
+  end
+
   def auto_capture?
     true
   end
