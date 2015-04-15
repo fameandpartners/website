@@ -67,6 +67,10 @@ configatron.elasticsearch.indices do |index|
   index.color_variants = :color_variants
 end
 
+
+configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
+
+
 case Rails.env.to_sym
 when :development
   configatron.host = 'localhost.localdomain'
