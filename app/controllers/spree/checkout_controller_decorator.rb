@@ -242,18 +242,10 @@ Spree::CheckoutController.class_eval do
   end
 
   def find_payment_methods
-    @credit_card_gateway = find_credit_card_gateway
+    @credit_card_gateway = CreditCardGatewayService.gateway(@order, try_spree_current_user)
 
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
-    end
-  end
-
-  def find_credit_card_gateway
-    if Features.active?(:usd_payment_gateway, try_spree_current_user)
-      @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') && method.currency == current_site_version.currency }
-    else
-      @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
     end
   end
 
