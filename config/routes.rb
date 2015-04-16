@@ -34,15 +34,15 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
-    get '/fashionitgirl2015-terms-and-conditions'  => 'statics#fashion_it_girl_terms_and_conditions'
-    get '/nyfw-comp-terms-and-conditions'  => 'statics#nyfw_comp_terms_and_conditions'
-    get '/fashionitgirl2015-competition'  => 'statics#fashion_it_girl_competition'
+    get '/fashionitgirl2015-terms-and-conditions',  to: redirect('/')
+    get '/nyfw-comp-terms-and-conditions',  to: redirect('/')
+    get '/fashionitgirl2015-competition',  to: redirect('/')
 
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/sale-dresses' => 'statics#sale', :as => :sale
-    get '/fame2015' => 'statics#fame2015', :as => :fame2015
+    get '/fame2015',  to: redirect('/')
 
 
     # Monday March 23 2015 TTL: 6 months
@@ -183,7 +183,7 @@ FameAndPartners::Application.routes.draw do
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
-    get '/bloggers/liz-black' => 'statics#blogger', as: :featured_blogger
+    get '/bloggers/liz-black', to: redirect("/")
     get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
     get '/dani-stahl', to: redirect("/")
 
