@@ -3,8 +3,6 @@
   <%= javascript_tag do %>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
-    _gaq.push(['_setDomainName', 'prom.fameandpartners.com']);
-    _gaq.push(['_setAllowLinker', true]);
     _gaq.push(['_trackPageview']);
 
     <% if flash[:commerce_tracking] && @order.present? %>
@@ -85,6 +83,6 @@
   window._fbq.push(['track', '6016695263696', {'value':'0.00','currency':'AUD'}]);
   </script>
   <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6021815151134&amp;cd[value]=0.00&amp;cd[currency]=AUD&amp;noscript=1" /></noscript>
-  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6016695263696&amp;cd[value]=0.00&amp;cd[currency]=AUD&amp;noscript=1" /></noscript>
+  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6016695263696&amp;cd[value]=0.00&amp;cd[currency]=AUD&amp;noscript=1" /></noscript>  
 
 <% end %>
