@@ -2,6 +2,8 @@ Spree::LineItem.class_eval do
   has_one :personalization,
           class_name: 'LineItemPersonalization'
 
+  has_one :fabrication
+
   after_save do
     order.clean_cache!
   end

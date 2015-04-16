@@ -31,6 +31,8 @@ configatron.cache.expire do |expire|
   expire.long     = 1.day
 end
 
+configatron.order_production_emails = ['production@fameandpartners.dev']
+
 configatron.email_marketing.delay_time do |delay_time|
   delay_time.abandoned_cart                   = 1.hour
   delay_time.quiz_unfinished                  = 12.hours
@@ -64,6 +66,10 @@ configatron.elasticsearch.indices do |index|
   index.spree_products = :spree_products
   index.color_variants = :color_variants
 end
+
+
+configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
+
 
 case Rails.env.to_sym
 when :development
@@ -126,6 +132,8 @@ when :preproduction
 when :production
   configatron.host      = 'www.fameandpartners.com'
   configatron.blog_host = 'blog.fameandpartners.com'
+
+  configatron.order_production_emails = ['fameandpartners@hotmail.com']
 
   configatron.aws.s3 do |s3|
     s3.bucket            = 'fameandpartners'
