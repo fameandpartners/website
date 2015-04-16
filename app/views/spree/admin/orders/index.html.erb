@@ -140,7 +140,7 @@
     <tr data-hook="admin_orders_index_rows" class="state-<%= order.state.downcase %> <%= current_row_class %>">
       <td class="align-center"><%= l (@show_only_completed ? order.completed_at : order.created_at).to_date %></td>
       <td class="align-center">
-        <% if order.projected_delivery_date %>
+        <% if order.projected_delivery_date.present? %>
           <%= l order.projected_delivery_date.to_date %>
         <% else %>
           -
