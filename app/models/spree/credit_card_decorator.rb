@@ -3,6 +3,8 @@ Spree::CreditCard.class_eval do
   attr_accessible :full_name
   attr_accessible :cc_type
 
+  before_validation :ensure_cc_type_set
+
   def full_name=(value)
     self.first_name, self.last_name = value.split(' ')
   end
@@ -20,6 +22,13 @@ Spree::CreditCard.class_eval do
 
   # don't store expiration data to db
   attr_accessor :month, :year
+
+  # not all payment gateways send it
+  def ensure_cc_type_set
+    if number.present?
+      set_card_type
+    end
+  end
 
   def has_payment_profile?
     gateway_payment_profile_id.present?
