@@ -1,5 +1,6 @@
 class UserCart::BaseController < ApplicationController
-  #rescue_from Errors::Cart::
+  include SslRequirement
+  ssl_allowed
   
   private
 
