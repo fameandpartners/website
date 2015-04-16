@@ -10,6 +10,10 @@ module Spree
       provider.purchase(money, creditcard, gateway_options)
     end
 
+    def auto_capture?
+      true
+    end
+
     def provider_class
       ActiveMerchant::Billing::NabTransactGateway
     end

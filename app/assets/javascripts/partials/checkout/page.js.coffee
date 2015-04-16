@@ -59,11 +59,9 @@ window.checkout.page ||= {
     return true
 
   onAjaxSuccessHandler: (e) ->
-    checkout.page.refreshFormView()
     checkout.page.callAjaxCallbacks('success', 'all')
 
   onAjaxFailureHandler: (e) ->
-    checkout.page.refreshFormView()
     scrollScreenTo($("#errorExplanation"))
     checkout.page.callAjaxCallbacks('failure', 'all')
 
