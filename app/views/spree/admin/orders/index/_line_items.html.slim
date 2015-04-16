@@ -2,7 +2,7 @@
   tr class=current_row_class
 
     td class="align-center" = l (@show_only_completed ? order.completed_at : order.created_at).to_date
-    td = l ( order.projected_delivery_date.present? ? order.projected_delivery_date.to_date : '-')
+    td = order.projected_delivery_date.present? ? l(order.projected_delivery_date.to_date) : '-'
     td = order.number
     td = ('A'..'Z').to_a[idx]
     td = order_line_item.variant.sku
