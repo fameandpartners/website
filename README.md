@@ -48,7 +48,7 @@ after it, remove valuable data & update settings
 * create user, and assign him admin rights `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
 * update payment method settings with test env
 * update facebook provider settings
-* if needed, update config/initializers/paperclip.rb && config/initializers/spree.rb configuration to use images from production. don't delete images locally it that case
+* To view S3 images, set config.use_s3 = true` in the `development.rb` file, without changing the `0_config.rb` file. Image uploads wont work, but for just viewing prod images, it’s perfect.
 * refresh all local elastic search indexes
 
 #### Update indexes
