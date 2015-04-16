@@ -89,13 +89,11 @@ FameAndPartners::Application.routes.draw do
 
       get '/dress-:product_slug(/:color_name)' => 'products/details#show'
       #roots categories
-      get '/style',  to: redirect('/dresses')
-      get '/event',  to: redirect('/dresses')
+      get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
+      get '/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
       get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
-      get '/colour',  to: redirect('/dresses')
-      get '/color',  to: redirect('/dresses')
-      get '/colour/:colour_name', to: redirect( path: '/dresses?colour=%{colour_name}')
-      get '/color/:colour_name',  to: redirect( path: '/dresses?color=%{colour_name}')
+      get '/colour' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
+      get '/color' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
 
       get '/:event/:style' => 'spree/products#index'
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
@@ -109,11 +107,16 @@ FameAndPartners::Application.routes.draw do
     get "/products/:product_id" => 'redirects#products_show'
     get "/products/:collection/:product_id" => 'redirects#products_show'
 
-    # Custom Dresses
-    get '/custom-dresses(/*whatever)',  to: redirect('/dresses')
+    # Custom Dresses part II
+    scope '/custom-dresses' do
+      get '/', to: 'registrations#new', as: :personalization
+      post '/', to: 'registrations#create'
 
-    get '/celebrities',  to: redirect('/dresses')
-    get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
+      get '/browse', to: 'products#index', as: :personalization_products
+      get '/:permalink', to: 'redirects#products_show', as: :personalization_product, defaults: {custom_dress: true}
+      get '/:permalink/style', to: 'redirects#products_show', as: :personalization_style_product, defaults: {style_dress: true}
+    end
+
     get '/featured-bloggers/:id' => 'celebrities#show', as: 'featured_blogger'
 
     resource :product_variants, only: [:show]
@@ -206,6 +209,9 @@ FameAndPartners::Application.routes.draw do
       resource :email_capture, only: [:new, :create], controller: :email_capture
     end
 
+    get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
+    post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
+
     get '/fame-chain' => 'fame_chains#new'
     resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
       get 'success'
@@ -254,7 +260,6 @@ FameAndPartners::Application.routes.draw do
     match '/bloggers/racheletnicole' => redirect('/bloggers/ren')
     match '/rachelxnicole' => redirect('/renxfame')
 
-    match '/blog/celebrity/*all' => redirect('/blog')
 
     match '/blog/au/site_versions/au' => redirect('/blog')
     match '/blog/au/site_versions/us' => redirect('/blog')
@@ -348,14 +353,6 @@ FameAndPartners::Application.routes.draw do
           put :make_primary, on: :member
         end
 
-        resources :celebrity_photos do
-          member do
-            put :assign_celebrity
-            put :assign_post
-            put :make_primary
-          end
-        end
-
         resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
           member do
             put :toggle_publish
@@ -369,31 +366,7 @@ FameAndPartners::Application.routes.draw do
           end
         end
 
-        resources :celebrities do
-          member do
-            put :toggle_featured
-          end
-        end
-
         resource :configuration, only: [:show, :update]
-      end
-
-      resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
-        scope module: :celebrity do
-          resource :products, only: [:edit, :update]
-          resources :moodboard_items do
-            post :update_positions, as: :update_positions, on: :collection
-          end
-          resources :accessories, controller: 'product_accessories' do
-            post :update_positions, on: :collection
-          end
-
-          resources :images, only: [:index, :new, :create, :edit, :update, :destroy] do
-            collection do
-              post :update_positions
-            end
-          end
-        end
       end
     end
   end
