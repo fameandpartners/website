@@ -54,6 +54,10 @@ after it, remove valuable data & update settings
 #### Update indexes
 
 ```ruby
+rake elasticsearch:reindex
+```
+```ruby
+$ rails console
 Utility::Reindexer.reindex
 ```
 
