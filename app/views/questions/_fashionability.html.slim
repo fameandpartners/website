@@ -3,7 +3,7 @@ h1
   ' IS FASHION TO YOU?
 .subtitle 
   span Click on the scale - from least important to very important
-.stars.items-box
+.chart.stars.items-box
   - question.answers.order('fashionability ASC').each_with_index do |answer, index|
     .item class="step-#{index}"
       label

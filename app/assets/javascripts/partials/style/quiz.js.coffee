@@ -6,14 +6,20 @@ window.style.Quiz = class StyleQuiz
 
   constructor: (options = {}) ->
     @options = options
+    
+    @masonryGutter = 10
+    @masonryItemsInLine = if $(window).width() > 767 then 7 else 4
+
     @container = $('.quiz-box')
+    @containerInner = @container.find('.quiz-box-inner')
+    @stepsBox = @container.find('.steps-box')
 
     $(window).on('resize', _.throttle(@windowResizeHandler, 100))
 
     @container.on('click', (e) -> e.stopPropagation())
     @container.find('.next a').click _.bind(@nextStepEventHandler, @)
     @container.find('.prev a').click _.bind(@previousStepEventHandler, @)
-
+    
     @init()
 
   windowResizeHandler: (e) =>
@@ -28,10 +34,21 @@ window.style.Quiz = class StyleQuiz
     _.each @container.find('.randomize'), (scope) ->
       $(scope).randomize()
     $frames = @container.find('.film-frame')
+    $chart = @container.find('.chart')
     $frame = $frames.first()
     $frame.addClass('current')
     @container.find('.film').css('width', $frame.width() * $frames.size())
 
+    @steps().width(@stepsBox.width())
+    @steps().find('.photos').find('.item').width((@stepsBox.width() / @masonryItemsInLine) - @masonryGutter)
+    scale = @stepsBox.width() / $chart.width()
+    $chart.css
+      '-webkit-transform': 'scale('+scale+')'
+      '-ms-transform': 'scale('+scale+')'
+      '-o-transform': 'scale('+scale+')'
+      'transform': 'scale('+scale+')'
+    
+    
     @bindCheckboxesAndRadios()
 
     @processImagesForStepsInSeries()
@@ -49,7 +66,11 @@ window.style.Quiz = class StyleQuiz
 
       if $scrollable.data('jsp')
         $scrollable.data('jsp').scrollByY(100)
-
+    # containerInner = @containerInner
+    # setTimeout () ->
+    #   @containerInner.height($frame.height())
+    # , 1000
+    
 
   nextStepEventHandler: (event) ->
     event.preventDefault()
@@ -79,7 +100,7 @@ window.style.Quiz = class StyleQuiz
       left: '-' + $step.position().left
     @steps().removeClass('current')
     $step.addClass('current')
-
+    @containerInner.height($step.height())
     if $step.find('.scrollable')
       if $step.find('.scrollable').data('jsp')
         $step.find('.scrollable').data('jsp').reinitialise()
@@ -177,7 +198,7 @@ window.style.Quiz = class StyleQuiz
     $quizPhotos = $step.find('.photos')
 
     $quizPhotos.masonry
-      gutter: 10
+      gutter: @masonryGutter
       columnWidth: '.item'
       itemSelector: '.item.loaded'
 

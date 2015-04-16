@@ -1,6 +1,7 @@
 - content_for :head do
   = stylesheet_link_tag    'quiz'
   = javascript_include_tag 'quiz'
+  meta name="viewport" content="width=device-width, initial-scale=1"
 
 - facebook_application = Spree::AuthenticationMethod.where(environment: ::Rails.env, provider: :facebook, active: true).first
 - if facebook_application.present?
@@ -53,19 +54,19 @@ css:
         .film style="position: relative;"
           = form_for :quiz, url: style_quiz_path, remote: true, method: :put do |f|
             - @questions_by_steps.to_a.to(1).each do |step, questions|
-              .step.film-frame id="step-#{step}" style="float: left; width: 1054px;"
+              .step.film-frame id="step-#{step}"
                 - questions.each do |question|
                   .question id="question-#{question.id}"
                     = f.fields_for "questions][#{question.id}" do |ff|
                       = ff.fields_for :answer do |fff|
                         = render "questions/#{ question.partial}", form: fff, question: question
 
-            .step.film-frame id="step-#{0}" style="float: left; width: 1054px;"
+            .step.film-frame id="step-#{0}"
               .question id="question-0"
                 = render 'questions/friends'
 
             - @questions_by_steps.to_a.from(2).each do |step, questions|
-              .step.film-frame id="step-#{step}" style="float: left; width: 1054px;"
+              .step.film-frame id="step-#{step}"
                 - questions.each do |question|
                   .question id="question-#{question.id}"
                     = f.fields_for "questions][#{question.id}" do |ff|
