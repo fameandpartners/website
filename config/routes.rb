@@ -42,15 +42,15 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
-    get '/fashionitgirl2015-terms-and-conditions'  => 'statics#fashion_it_girl_terms_and_conditions'
-    get '/nyfw-comp-terms-and-conditions'  => 'statics#nyfw_comp_terms_and_conditions'
-    get '/fashionitgirl2015-competition'  => 'statics#fashion_it_girl_competition'
+    get '/fashionitgirl2015-terms-and-conditions',  to: redirect('/')
+    get '/nyfw-comp-terms-and-conditions',  to: redirect('/')
+    get '/fashionitgirl2015-competition',  to: redirect('/')
 
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/sale-dresses' => 'statics#sale', :as => :sale
-    get '/fame2015' => 'statics#fame2015', :as => :fame2015
+    get '/fame2015',  to: redirect('/')
 
 
     # Monday March 23 2015 TTL: 6 months
@@ -89,11 +89,11 @@ FameAndPartners::Application.routes.draw do
 
       get '/dress-:product_slug(/:color_name)' => 'products/details#show'
       #roots categories
-      get '/style' => 'spree/products#root_taxon', defaults: {taxon_root: 'style'}
-      get '/event' => 'spree/products#root_taxon', defaults: {taxon_root: 'event'}
+      get '/style',  to: redirect('/dresses')
+      get '/event',  to: redirect('/dresses')
       get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
-      get '/colour' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
-      get '/color' => 'spree/products#root_taxon', defaults: {taxon_root: 'colour'}
+      get '/colour',  to: redirect('/dresses')
+      get '/color',  to: redirect('/dresses')
 
       get '/:event/:style' => 'spree/products#index'
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
@@ -117,7 +117,7 @@ FameAndPartners::Application.routes.draw do
       get '/:permalink/style', to: 'redirects#products_show', as: :personalization_style_product, defaults: {style_dress: true}
     end
 
-    get '/celebrities' => 'celebrities#index', as: 'celebrities'
+    get '/celebrities',  to: redirect('/dresses')
     get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
     get '/featured-bloggers/:id' => 'celebrities#show', as: 'featured_blogger'
 
@@ -187,9 +187,9 @@ FameAndPartners::Application.routes.draw do
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
-    get '/bloggers/liz-black' => 'statics#blogger', as: :featured_blogger
+    get '/bloggers/liz-black', to: redirect("/")
     get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
-    get '/dani-stahl' => 'statics#danistahl', as: :danistahl
+    get '/dani-stahl', to: redirect("/")
 
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
@@ -199,12 +199,12 @@ FameAndPartners::Application.routes.draw do
     get '/privacy' => 'statics#ecom_privacy'
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
-    get '/how-it-works'   => 'statics#how_it_works', :as => :how_it_works
-    get '/fashionista2014'   => 'statics#fashionistacomp', :as => :fashionista
+    get '/how-it-works', to: redirect("/why-us")
+    get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
     get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
-    get '/plus-size' => 'statics#landingpage_plus_size', :as => :plus_size
+    get '/plus-size',  to: redirect('/dresses')
 
     namespace "campaigns" do
       resource :newsletter, only: [:new, :create], controller: :newsletter
@@ -429,6 +429,7 @@ FameAndPartners::Application.routes.draw do
 
     # seo routes like *COLOR*-Dress
     get "(:colour)-Dresses" => 'products/collections#show', as: :colour_formal_dresses
+
     # seo route
     get "new-collection" => "products/collections#show", as: :new_collection
 
