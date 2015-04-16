@@ -10,7 +10,7 @@ describe 'NABTransact' do
     # This just lets us track test transactions a bit easier in the NAB interface.
     let(:whodunnit) { "#{ENV['USER']}@#{Socket.gethostname}-#{Process.pid}" }
 
-    let(:purchase_amount) { 100 }
+    let(:purchase_amount) { 101 }
     let(:order_reference) { "#{gateway_slug}-#{whodunnit}" }
     let(:test_username)   { 'G9C0010'  }
     let(:test_password)   { '3kbn8AO1' }
@@ -24,7 +24,8 @@ describe 'NABTransact' do
           :month      => '9',
           :year       => 3.years.from_now.year.to_s,
           :brand      => 'visa',
-          :number     => '4444333322221111'
+          :number     => '4444333322221111',
+          :verification_value => '123'
       )
     }
 
