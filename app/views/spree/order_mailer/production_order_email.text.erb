@@ -6,7 +6,7 @@ Items:        <%= order.total_items %>
 
 <% order.line_items.each do |item| %>
 Style No (款号)：<%= item.style_number %>
-Size (码数):     <%= order.country_code %>-<%= item.size %>
+Size (码数):     <%= item.country_size %>
 Color（颜色):    <%= item.colour_name %>
 Quantity:       <%= item.quantity%>
 Factory:        <%= item.factory %>
