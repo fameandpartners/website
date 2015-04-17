@@ -129,12 +129,12 @@ en:
       description: "User is bride or bridesmaid"
   shipment_states:
     pending: Your dress is in making
-    ready: Your dress is in quality control
+    ready: Your dress is in making
     shipped: Your dress has been shipped
     backorder: Your dress is on backorder
     partial: Your dress is in making
   style:
-    glam: 
+    glam:
       title: "glam"
       description: "Our glamour girl is a 1940s Hollywood film starlet with red lips, winged eyes and diamonds sparkling from a moisturized décolletage. She conjures this image because she is permanently starring in her own fabulous film. Sometimes sexy, sometimes sassy and always sophisticated, she is romantic, captivating and a little bit mysterious. The glamorous girl exudes natural savor-faire but behind the scenes this can take some serious work! This is a girl that takes personal maintenance seriously - from her luscious locks to an exercise regime that maintains a glow, she is always up to date with the latest trends. Part of what makes the glamorous girl is her un-requiting elegance and individual style. Classic glamour girls include Blake Lively and Gigi Hadid."
     classic:
