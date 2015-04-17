@@ -1,8 +1,19 @@
 module Products
-  class Presenter < OpenStruct
+
+  class Presenter
+    attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
+                  :permalink, :is_active, :images, :default_image, :price,
+                  :discount, :recommended_products, :available_options, :preorder,
+                  :moodboard, :fabric, :style_notes, :color_id, :color_name, :color
+
+    def initialize(opts)
+      opts.each do |k, v|
+        instance_variable_set("@#{k}", v) unless v.nil?
+      end
+    end
 
     def default_color_options
-      if colors? && colors.default.any?        
+      if colors? && colors.default.any?
         colors.default
       else
         []
@@ -18,7 +29,7 @@ module Products
     end
 
     def custom_color_price
-      colors.default_extra_price.display_price 
+      colors.default_extra_price.display_price
     end
 
     def colors?
@@ -66,7 +77,7 @@ module Products
     end
 
     def all_images
-      featured_images.collect do |img | 
+      featured_images.collect do |img |
         { id: img.id, url: img.original, color_id: img.color_id, alt: name }
       end
     end
@@ -77,7 +88,7 @@ module Products
 
     def featured_image_for_selected_color
       color_image = images.select{ |i| i.color_id.to_i == color_id.to_i }.first
-      color_image || featured_images.first      
+      color_image || featured_images.first
     end
 
     # featured images are not cropped
@@ -109,6 +120,12 @@ module Products
       @customizations ||= available_options.customizations
     end
 
+    def default_color
+      if color = available_options.colors.default.first
+        color.name
+      end
+    end
+
     private
 
     def customisation_allowed?
@@ -118,5 +135,7 @@ module Products
     def policy
       @policy ||= Policy::Product.new(self)
     end
+
+
   end
 end
