@@ -14,8 +14,13 @@ h1
             img src="" alt="" data-src="#{image_path("style_quiz/makeup/#{answer.code}.jpg")}"
             span.selected selected
   .photos-nav
-    .instructions Use your mouse/trackpad or click the arrows to scroll through the photos
-    .up
-      .arrows-line-vertical
-    .down
-      .arrows-line-vertical
+    .hidden-on-phone
+      .instructions Use your mouse/trackpad or click the arrows to scroll through the photos
+      .up
+        .arrows-line-vertical
+      .down
+        .arrows-line-vertical
+    .visible-on-phone
+      .instructions 
+        ' Drag across to scroll through photos
+        span.icon.icon-hr-right

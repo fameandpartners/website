@@ -3,12 +3,10 @@
 
 @import 'partials/setup';
 @import 'partials/fonts';
+@import 'partials/icons';
 @import 'partials/global_elements';
 
 @import 'libs/jquery.jscrollpane';
-
-@import 'partials/quiz';
-@import 'partials/quiz_iframe';
 
 @import 'redesign/vars';
 @import 'libs/vex.css';
@@ -18,6 +16,5 @@
 
 @import 'transient_content';
 
-.hidden {
-  display: none;
-}
+@import 'partials/quiz';
+@import 'partials/quiz_iframe';

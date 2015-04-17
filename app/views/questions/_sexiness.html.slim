@@ -2,9 +2,14 @@ h1
   em Do you prefer to show some skin or cover up?
   | RANK HOW SEXY YOU LIKE TO LOOK
 .subtitle
-  span Click on the scale - from least important to very important
-.chart.lips.items-box
-  - question.answers.order('sexiness ASC').each_with_index do |answer, index|
-    .item class="step-#{index}"
-      label
-        = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
+  span 
+    ' Click 
+    em.visible-on-phone 
+      ' and drag
+    ' on the scale - from least important to very important
+.chart-wrapper
+  .chart.lips.items-box
+    - question.answers.order('sexiness ASC').each_with_index do |answer, index|
+      .item class="step-#{index}"
+        label
+          = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
