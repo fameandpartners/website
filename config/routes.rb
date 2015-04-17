@@ -94,6 +94,8 @@ FameAndPartners::Application.routes.draw do
       get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
       get '/colour',  to: redirect('/dresses')
       get '/color',  to: redirect('/dresses')
+      get '/colour/:colour_name', to: redirect( path: '/dresses?colour=%{colour_name}')
+      get '/color/:colour_name',  to: redirect( path: '/dresses?color=%{colour_name}')
 
       get '/:event/:style' => 'spree/products#index'
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
@@ -107,15 +109,8 @@ FameAndPartners::Application.routes.draw do
     get "/products/:product_id" => 'redirects#products_show'
     get "/products/:collection/:product_id" => 'redirects#products_show'
 
-    # Custom Dresses part II
-    scope '/custom-dresses' do
-      get '/', to: 'registrations#new', as: :personalization
-      post '/', to: 'registrations#create'
-
-      get '/browse', to: 'products#index', as: :personalization_products
-      get '/:permalink', to: 'redirects#products_show', as: :personalization_product, defaults: {custom_dress: true}
-      get '/:permalink/style', to: 'redirects#products_show', as: :personalization_style_product, defaults: {style_dress: true}
-    end
+    # Custom Dresses
+    get '/custom-dresses(/*whatever)',  to: redirect('/dresses')
 
     get '/celebrities',  to: redirect('/dresses')
     get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
@@ -210,9 +205,6 @@ FameAndPartners::Application.routes.draw do
       resource :newsletter, only: [:new, :create], controller: :newsletter
       resource :email_capture, only: [:new, :create], controller: :email_capture
     end
-
-    get '/custom-dresses'   => 'custom_dress_requests#new',     :as => :custom_dresses
-    post '/custom-dresses'   => 'custom_dress_requests#create', :as => :custom_dresses_request
 
     get '/fame-chain' => 'fame_chains#new'
     resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
