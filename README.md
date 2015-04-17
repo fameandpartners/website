@@ -38,7 +38,7 @@ It is generally easiest to have working development application with loading dat
 * download latest dump from production ( through web interface from engine yard )
 * clean database with `$bundle exec rake db:schema:load`
 * restore data
-  `pg_restore -d database_name --data-only --clean ./dump_file.dump`
+  `pg_restore -d fame_website_development --clean --if-exists --verbose --jobs 8 --no-acl -U postgres`
 
 after it, remove valuable data & update settings
 
@@ -51,11 +51,63 @@ after it, remove valuable data & update settings
 * if needed, update config/initializers/paperclip.rb && config/initializers/spree.rb configuration to use images from production. don't delete images locally it that case
 * refresh all local elastic search indexes
 
+#### Sanitised Database
+
+To remove almost everything **except** products and a few test users, you can instead run the following SQL,
+this gets you a working site, with no customer data loaded.
+
+```
+delete from spree_users where email not like '%fameandpartners.com%';
+
+truncate table activities;
+truncate table blog_posts;
+truncate table bridesmaid_party_events;
+truncate table competition_entries;
+truncate table competition_invitations;
+truncate table email_notifications;
+truncate table facebook_data;
+truncate table line_item_personalizations;
+truncate table marketing_user_visits;
+truncate table product_accessories;
+truncate table spree_addresses;
+truncate table spree_adjustments;
+truncate table spree_credit_cards;
+truncate table spree_line_items;
+truncate table spree_log_entries;
+truncate table spree_orders;
+truncate table spree_payments;
+truncate table spree_paypal_express_checkouts;
+truncate table spree_shipments;
+truncate table spree_state_changes;
+truncate table spree_state_changes;
+truncate table spree_tokenized_permissions;
+truncate table spree_user_authentications;
+truncate table user_style_profile_taxons;
+truncate table user_style_profiles;
+truncate table wishlist_items;
+```
+
+After Running this SQL you can capture the clean dump with a command like;
+
+```
+pg_dump --format=custom fame_website_development > ~/tmp/fame_website_development_clean.pgdump
+```
+
+After which you can restore it using;
+
+```
+pg_restore -d fame_website_development --clean --if-exists --verbose --jobs 8 --no-acl -U postgres ~/tmp/fame_website_development_clean.pgdump`
+```
+
+
 #### Update indexes
+
+Re-index everything!
 
 ```ruby
 rake elasticsearch:reindex
 ```
+
 ```ruby
 $ rails console
 Utility::Reindexer.reindex
@@ -76,6 +128,38 @@ Tire.index(configatron.elasticsearch.indices.spree_products) do
   import Spree::Product.all
 end
 Tire.index(configatron.elasticsearch.indices.spree_products).refresh
+```
+
+#### Caches
+
+You can wipe local redis caches by running
+
+```
+rake cache:expire
+```
+
+#### Images & Assets
+
+Images & assets by default in dev mode are served to you from the production S3 bucket.
+
+If you wish to test or do image uploading, you will need to either switch to local mode, or switch to another S3 bucket.
+By default the AWS access credentials are not loaded in dev mode, so these features will fail.
+
+`config/environments/development.rb`
+
+```
+# Use S3 for storing attachments
+config.use_s3 = true # Change to false for local
+```
+
+Or set new AWS credentials in for `:development` mode in `config/initializers/0_config.rb`
+
+#### BIG RED BUTTON
+
+The nuclear approach can get your environment (elasticsearch, redis, assets) to a clean slate by running the command;
+
+```
+rake dev:clean_slate
 ```
 
 ### Locating the Index Page
