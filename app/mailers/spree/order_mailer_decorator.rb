@@ -32,7 +32,7 @@ Spree::OrderMailer.class_eval do
     from = configatron.noreply
     subject = "Order Confirmation (订单号码）##{@order.number}"
 
-    @order = ProductionEmailPresenter.new(@order)
+    @order = Orders::OrderPresenter.new(@order)
 
     mail(to: to, from: from, subject: subject)
   end
