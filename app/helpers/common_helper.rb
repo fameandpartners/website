@@ -24,7 +24,11 @@ module CommonHelper
   end
 
   def get_canonical_href
-    get_base_href.gsub(/\?.*/,'')
+    href = get_base_href
+    if @product.present?
+      href = "http://#{get_host}#{collection_product_path(@product)}/#{@product.default_color}"
+    end
+    href.gsub(/\?.*/,'')
   end
 
   def get_host
@@ -32,10 +36,6 @@ module CommonHelper
   end
 
   def get_base_href
-    if @product.present?
-      return "http://#{get_host}#{collection_product_path(@product)}"
-    end
-
     if current_site_version.is_australia? && !request.fullpath.include?('/au')
       return "http://#{get_host}/au#{request.fullpath}"
     end
