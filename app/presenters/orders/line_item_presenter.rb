@@ -1,56 +1,16 @@
 require 'forwardable'
 
-class ProductionEmailPresenter
 
-  extend Forwardable
-
-  def_delegators :@order, :customer_notes, :number
-
-  attr_reader :order
-
-  def initialize(order)
-    @order = order
-  end
-
-  alias_method :customer_notes?, :customer_notes
-
-  def line_items
-    order.line_items.map { |i| OrderItemPresenter.new(i) }
-  end
-
-  def total_items
-    order.line_items.sum &:quantity
-  end
-
-  def country_code
-    order.shipping_address.country.iso
-  end
-
-  def projected_delivery_date
-    order.projected_delivery_date.try(:to_date) || 'Unknown'
-  end
-
-  def name
-    order.name
-  end
-
-  def phone_number
-    order.billing_address.phone
-  end
-
-  def shipping_address
-    order.shipping_address.to_string
-  end
-
-  class OrderItemPresenter
-
+module Orders
+  class LineItemPresenter
     extend Forwardable
     def_delegators :@item, :quantity
 
-    attr_reader :item
+    attr_reader :item, :order
 
-    def initialize(item)
+    def initialize(item, order)
       @item = item
+      @order = order
     end
 
     def style_number
@@ -59,18 +19,14 @@ class ProductionEmailPresenter
 
     def colour_name
       if item.personalization.present?
-        item.personalization.color.try :name || 'Unknown Color'
+        item.personalization.color
       else
-        item.variant.dress_color.name
-      end
+        item.variant.dress_color
+      end.try(:name) || 'Unknown Color'
     end
 
-    def size
-      if item.personalization.present?
-        item.personalization.size
-      else
-        item.variant.dress_size.name
-      end
+    def country_size
+      "#{order.country_code}-#{size}"
     end
 
     def factory
@@ -86,12 +42,12 @@ class ProductionEmailPresenter
         )
 
         unless standard_variant_for_custom_color.present?
-          customs << ["Custom Color: #{item.personalization.color.name}"]
+          customs << ["Custom Color: #{colour_name}"]
         end
 
         customs
       else
-        ['N/A']
+        [['N/A']]
       end
     end
 
@@ -107,7 +63,33 @@ class ProductionEmailPresenter
       image.attachment.url(:large)
     end
 
+    def as_report
+      {
+        :order_number            => order.number,
+        :total_items             => order.total_items,
+        :completed_at            => order.completed_at.to_date,
+        :projected_delivery_date => order.projected_delivery_date,
+        :style                   => style_number,
+        :factory                 => factory,
+        :color                   => colour_name,
+        :size                    => country_size,
+        :customisations          => customisations.collect(&:first).join('|'),
+        :promo_codes             => order.promo_codes.join('|'),
+        :customer_name           => order.name,
+        :customer_phone_number   => order.phone_number.to_s,
+        :shipping_address        => order.shipping_address
+      }
+    end
+
     private
+
+    def size
+      if item.personalization.present?
+        item.personalization.size
+      else
+        item.variant.dress_size.name
+      end
+    end
 
     # Seriously, wtf are custom dresses so hard?
     def image
@@ -116,7 +98,7 @@ class ProductionEmailPresenter
 
         # Customised dresses use the master variant, find the closest
         # matching standard variant, use those images
-        if personalizations? && ! image.present? && standard_variant_for_custom_color
+        if personalizations? && !image.present? && standard_variant_for_custom_color
           image = variant_image(standard_variant_for_custom_color)
         end
 
@@ -149,4 +131,3 @@ class ProductionEmailPresenter
     end
   end
 end
-
