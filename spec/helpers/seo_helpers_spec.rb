@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'Seo Helpers' do
- include CommonHelper
-
+  include Rails.application.routes.url_helpers
+  include CommonHelper
   let(:au)                    { false }
   let(:current_site_version)  { double(SiteVersion, :is_australia? => au) }
   let(:request)               { double('Request', :fullpath => '/blah/vtha') }
@@ -50,10 +50,10 @@ describe 'Seo Helpers' do
     end
 
     context 'product canonical' do
-      let(:product) { double(Spree::Product, :name => 'fancy-dress', :default_color => 'mauve') }
+      let(:product) { double(Products::Presenter, :name => 'fancy-dress', :default_color => 'mauve') }
       before do
         @product = product
-        allow(self).to receive(:collection_product_path).with(product).and_return("/#{product.name}")
+        allow(self).to receive(:collection_product_path).with(product, :color => @product.default_color).and_return("/#{product.name}/#{@product.default_color}")
       end
 
       it 'should generate canonical product path' do

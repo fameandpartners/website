@@ -20,8 +20,10 @@ class Products::DetailsController < Products::BaseController
       # select images of one/default color
       color = @product.available_options.colors.default.first
     end
+
     @product.color_id   = color.try(:id)
     @product.color_name = color.try(:name)
+    # @product.color = color
 
     # set page title.
     # Drop anything after the first period(.) and newline

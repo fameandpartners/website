@@ -1,4 +1,6 @@
 module CommonHelper
+  include Rails.application.routes.url_helpers
+
   # override spree method
   # title method
   def get_title
@@ -25,8 +27,10 @@ module CommonHelper
 
   def get_canonical_href
     href = get_base_href
+
     if @product.present?
-      href = "http://#{get_host}#{collection_product_path(@product)}/#{@product.default_color}"
+      product_path = collection_product_path(@product, :color => @product.default_color)
+      href = "http://#{get_host}#{product_path}"
     end
     href.gsub(/\?.*/,'')
   end

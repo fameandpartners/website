@@ -379,10 +379,6 @@ Spree::Product.class_eval do
     not_hidden.not_deleted.available(nil, currency)
   end
 
-  def default_color    
-    @product.available_options.colors.default.first
-  end
-
 #  def build_customisations_from_values_hash
 #    customisation_values_hash.each do |type_id, value_ids|
 #      next unless type = CustomisationType.find_by_id(type_id)
