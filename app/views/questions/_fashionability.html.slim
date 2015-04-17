@@ -1,10 +1,15 @@
 h1
   em How important
   ' IS FASHION TO YOU?
-.subtitle 
-  span Click on the scale - from least important to very important
-.chart.stars.items-box
-  - question.answers.order('fashionability ASC').each_with_index do |answer, index|
-    .item class="step-#{index}"
-      label
-        = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
+.subtitle
+  span 
+    ' Click 
+    em.visible-on-phone 
+      ' and drag
+    ' on the scale - from least important to very important
+.chart-wrapper
+  .chart.stars.items-box
+    - question.answers.order('fashionability ASC').each_with_index do |answer, index|
+      .item class="step-#{index}"
+        label
+          = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code

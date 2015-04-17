@@ -3,12 +3,17 @@ window.style or= {}
 window.style.Quiz = class StyleQuiz
   container: null
   options: {}
+  $tabletScreen = 768
+  $phoneScreen = 500
 
   constructor: (options = {}) ->
     @options = options
     
     @masonryGutter = 10
-    @masonryItemsInLine = if $(window).width() > 767 then 7 else 4
+    @masonryItemsInLine = switch
+      when $(window).width() <= $tabletScreen && $(window).width() > $phoneScreen then 4
+      when $(window).width() <= $phoneScreen then 2
+      else 7
 
     @container = $('.quiz-box')
     @containerInner = @container.find('.quiz-box-inner')
@@ -41,8 +46,9 @@ window.style.Quiz = class StyleQuiz
 
     @steps().width(@stepsBox.width())
     @steps().find('.photos').find('.item').width((@stepsBox.width() / @masonryItemsInLine) - @masonryGutter)
-    scale = @stepsBox.width() / $chart.width()
+    scale = Math.max(0.51, (@stepsBox.width() / $chart.width()))
     $chart.css
+      height: $chart.height() * scale
       '-webkit-transform': 'scale('+scale+')'
       '-ms-transform': 'scale('+scale+')'
       '-o-transform': 'scale('+scale+')'
@@ -101,7 +107,7 @@ window.style.Quiz = class StyleQuiz
     @steps().removeClass('current')
     $step.addClass('current')
     @containerInner.height($step.height())
-    if $step.find('.scrollable')
+    if $step.find('.scrollable') && $(window).width() > $phoneScreen
       if $step.find('.scrollable').data('jsp')
         $step.find('.scrollable').data('jsp').reinitialise()
       else
@@ -199,8 +205,8 @@ window.style.Quiz = class StyleQuiz
 
     $quizPhotos.masonry
       gutter: @masonryGutter
-      columnWidth: '.item'
       itemSelector: '.item.loaded'
+      columnWidth: '.item'
 
     _quiz = @
     $step.find('.photos img').on 'load', () ->
@@ -226,8 +232,8 @@ window.style.Quiz = class StyleQuiz
 
     if $scrollable.data('jsp')
       $scrollable.data('jsp').reinitialise()
-    else
-      $scrollable.jScrollPane
+    else if $(window).width() > $phoneScreen
+      $scrollable.jScrollPane 
         contentWidth: $(step).width() + 'px'
 
   processImagesForStepsInSeries: () ->

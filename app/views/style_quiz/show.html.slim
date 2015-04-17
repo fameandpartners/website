@@ -34,7 +34,7 @@
     }(document, 'script', 'facebook-jssdk'));
 
 css:
-  .quiz-box .steps-box .scrollable { width: 100%; height: 100%; overflow-x: hidden; overflow-y: scroll;}
+  /* .quiz-box .steps-box .scrollable { width: 100%; height: 100%; overflow-x: hidden; overflow-y: scroll;}*/
 
 .quiz-box#style_quiz
   .quiz-header
@@ -78,5 +78,10 @@ css:
           .progress-bar
             .filler style="width: 0%;"
               .tooltip 0%
+          .questions-count
+            ' Q
+            span.current 1
+            | /
+            span.total = @quiz.questions.map(&:step).uniq.count + 1
           .next
             a href="#" Next
