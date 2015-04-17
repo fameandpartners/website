@@ -11,6 +11,31 @@ describe 'Seo Helpers' do
     allow(self).to receive(:get_host).and_return('fameandpartners.test')
   end
 
+  describe '#get_href_lang' do
+    let(:lang)     { :us }
+    subject(:href) { get_hreflang(lang) }
+    it 'generates default path' do
+      expect(href).to eq 'http://fameandpartners.test/blah/vtha'
+    end
+
+    context 'austrlian site' do
+      let(:au)   { true }
+
+      context 'us lang' do
+        it 'generates default path' do
+          expect(href).to eq 'http://fameandpartners.test/blah/vtha'
+        end
+      end
+
+      context 'au lang' do
+        let(:lang) { :au }
+        it 'generates au path' do
+          expect(href).to eq 'http://fameandpartners.test/au/blah/vtha'
+        end
+      end
+    end
+  end
+
   describe '#get_canonical_href' do
 
     it 'should generate path' do
@@ -37,9 +62,7 @@ describe 'Seo Helpers' do
 
     end
 
- end
+  end
 
-  #  get_hreflang
-  #  get_canonical_href
 
  end
