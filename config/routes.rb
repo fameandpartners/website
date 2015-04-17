@@ -109,7 +109,15 @@ FameAndPartners::Application.routes.draw do
     get "/products/:product_id" => 'redirects#products_show'
     get "/products/:collection/:product_id" => 'redirects#products_show'
 
-    get '/custom-dresses(/*whatever)',  to: redirect('/dresses')
+    # Custom Dresses part II
+    scope '/custom-dresses' do
+      get '/', to: 'registrations#new', as: :personalization
+      post '/', to: 'registrations#create'
+
+      get '/browse', to: 'products#index', as: :personalization_products
+      get '/:permalink', to: 'redirects#products_show', as: :personalization_product, defaults: {custom_dress: true}
+      get '/:permalink/style', to: 'redirects#products_show', as: :personalization_style_product, defaults: {style_dress: true}
+    end
 
     get '/celebrities',  to: redirect('/dresses')
     get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
