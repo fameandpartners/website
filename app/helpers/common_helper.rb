@@ -26,8 +26,7 @@ module CommonHelper
   def get_canonical_href
     href = get_base_href
     if @product.present?
-      color = @product.available_options.colors.default.first
-      href = "http://#{get_host}#{collection_product_path(@product)}/#{color.name}"
+      href = "http://#{get_host}#{collection_product_path(@product)}/#{@product.default_color}"
     end
     href.gsub(/\?.*/,'')
   end
