@@ -1,6 +1,4 @@
 module CommonHelper
-  include Rails.application.routes.url_helpers
-
   # override spree method
   # title method
   def get_title
