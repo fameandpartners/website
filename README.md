@@ -44,6 +44,13 @@ If you are using homebrew and it's default settings, the supplied Procfile may w
 $ foreman start
 ```
 
+It's also important to configure your Elasticsearch to enable dynamic scripting
+
+```yaml
+# Procfile assumes that this file is under /usr/local/opt/elasticsearch/config/elasticsearch.yml
+script.disable_dynamic: false
+```
+
 ### Database
 
 It is generally easiest to have working development application with loading database dump from production/preprod site, and restoring them locally.
@@ -120,6 +127,8 @@ Re-index everything!
 ```ruby
 rake elasticsearch:reindex
 ```
+
+Or reindex using Rails console
 
 ```ruby
 $ rails console
