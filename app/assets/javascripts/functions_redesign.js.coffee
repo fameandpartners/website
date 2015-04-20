@@ -17,9 +17,9 @@ $(document).ready ->
     # e.preventDefault()
     window.location = $(this).data('href')
 
-  $('.selectbox').chosen
-    inherit_select_classes: true
-    disable_search: true
+#  $('.selectbox').chosen
+#    inherit_select_classes: true
+#    disable_search: true
 
 $(window).resize( () ->
   $('#theTarget').css("z-index", 1)

@@ -13,6 +13,11 @@ javascript:
       });
     })(document);
 
+    // enable chosen
+    (function() {
+      $('.selectbox').chosen({ inherit_select_classes: true, disable_search: true})
+    })(document);
+
     // enable wedding date selector
     (function() {
       $('#wedding_date_info').prop('disabled', false);
@@ -44,8 +49,6 @@ javascript:
 
 .bridesmaid-info-form
   = form_for @user_details, as: :info, url: bridesmaid_party_info_path, method: :put, html: { id: 'bridesmaid_form' } do |f|
-
-
     .row
       .grid-5
         = f.label :wedding_date, { class: 'label' } do

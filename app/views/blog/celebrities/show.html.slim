@@ -2,6 +2,11 @@
 = render partial: 'blog/shared/celebrity_popup'
 = render 'shared/breadcrumbs'
 
+javascript:
+  (function() {
+    $('.selectbox').chosen({ inherit_select_classes: true, disable_search: true})
+  })(document);
+
 .wrap.no-overflow
 
   .page-title.celebrity-title

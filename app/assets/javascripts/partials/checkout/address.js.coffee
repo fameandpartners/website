@@ -1,5 +1,7 @@
 window.checkout ||= {}
 
+#$("#form_field").trigger("chosen:updated");
+
 window.checkout.address_step  = {
   init: (options = {}) ->
     checkout.address_step.initStatesChange()
@@ -13,11 +15,16 @@ window.checkout.address_step  = {
     $(document).on('click',   'form.checkout-form input[type=submit]', checkout.page.onAjaxLoadingHandler)
 
   initStatesChange: (options = {}) ->
+    $(options.country_field_id).chosen(inherit_select_classes: true, disable_search: true)
+    $(options.field_id).chosen(inherit_select_classes: true, disable_search: true)
+
     $(options.field_id).val(options.field_value)
     update_state_func = () =>
       window.checkout.address_step.updateStatesVisibility(
         options.country_field_id, options.field_id, options.states_text_field_id
       )
+      $(options.field_id).trigger('chosen:updated')
+
     update_state_func()
     $(options.country_field_id).on('change', update_state_func)
 
@@ -26,12 +33,12 @@ window.checkout.address_step  = {
     $(states_field_id).find("option[data-country]").hide()
     if $(states_field_id).find("option[data-country=#{ country_id }]").length == 0
       # show input
-      $(states_field_id).addClass('hidden').removeClass('required').prop('disabled', true)
+      $(states_field_id).removeClass('required').prop('disabled', true).closest('span').addClass('hidden')
       $(states_text_field_id).addClass('required').removeClass('hidden').prop('disabled', false)
     else
       $(states_text_field_id).addClass('hidden').removeClass('required').prop('disabled', true)
       # show available states
-      $(states_field_id).addClass('required').removeClass('hidden').prop('disabled', false)
+      $(states_field_id).addClass('required').prop('disabled', false).closest('span').removeClass('hidden')
       $(states_field_id).find("option[data-country=#{ country_id }]").show()
 
       # if currently select option not available for selected country, reset
