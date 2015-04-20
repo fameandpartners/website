@@ -29,17 +29,13 @@
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
 
+  before_filter :set_collection_resource, :set_collection_seo_meta_data
+
   def show
     @filter = Products::CollectionFilter.read
 
-    @collection = collection_resource.read
-
-    # set title / meta description for page
-    title(@collection.details.meta_title, default_seo_title)
-    @description  = @collection.details.seo_description
-
     respond_to do |format|
-      format.html { }
+      format.html { render :show, status: @status }
       format.json do
         render json: @collection.serialize
       end
@@ -47,8 +43,20 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private
+    def set_collection_resource
+      @collection_options = parse_permalink(params[:permalink])
+      @collection = collection_resource(@collection_options)
+    end
 
-    def collection_resource
+    def set_collection_seo_meta_data
+      # set title / meta description / HTTP status / canonical for the page
+      title(@collection.details.meta_title, default_seo_title)
+      @description = @collection.details.seo_description
+      @status = @collection_options ? :ok : :not_found
+      @canonical = dresses_path if @status == :not_found
+    end
+
+    def collection_resource(collection_options)
       resource_args = {
         site_version:   current_site_version,
         collection:     params[:collection],
@@ -60,9 +68,9 @@ class Products::CollectionsController < Products::BaseController
         order:          params[:order],
         limit:          params[:limit] || 20, # page size
         offset:         params[:offset] || 0
-      }.merge(parse_permalink(params[:permalink]))
+      }.merge(collection_options || {})
 
-      Products::CollectionResource.new(resource_args)
+      Products::CollectionResource.new(resource_args).read
     end
 
     # we have route like /dresses/permalink
@@ -72,7 +80,7 @@ class Products::CollectionsController < Products::BaseController
     #   color.name
     #   etc
     def parse_permalink(permalink)
-      return {} if permalink.blank?
+      return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
       # is should have lower priority... but we have collection='pastel' and we have colors group pastel
       color_group = Repositories::ProductColors.get_group_by_name(permalink)
@@ -97,6 +105,6 @@ class Products::CollectionsController < Products::BaseController
       end
 
       # default
-      return {}
+      return nil
     end
 end
