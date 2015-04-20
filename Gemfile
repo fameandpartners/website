@@ -101,14 +101,16 @@ group :development, :test do
   gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
-  gem 'pry'
-  gem 'pry-debugger'
-  gem 'quiet_assets', '1.0.2'
+  # gem 'pry'
+  # gem 'pry-debugger'
+  gem 'pry-byebug'
+  gem 'quiet_assets'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails', '~> 3.1'
   gem 'shoulda-matchers'
   gem 'spring'
-  gem 'thin', '1.5.1'
+  gem 'thin'
+  gem 'compass'
 end
 
 group :staging, :development do
