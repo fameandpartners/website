@@ -124,7 +124,7 @@ FameAndPartners::Application.routes.draw do
       get '/:collection' => 'redirects#products_index'
     end
 
-    get '/lp/collection(/:collection)' => 'spree/products#index', defaults: { lp: 'lp' }
+    get '/lp/collection(/:collection)', to: redirect('/dresses')
 
     get '/quick_view/:id' => 'spree/products#quick_view'
     post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
