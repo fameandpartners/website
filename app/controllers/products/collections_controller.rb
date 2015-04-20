@@ -34,14 +34,13 @@ class Products::CollectionsController < Products::BaseController
   def show
     @filter = Products::CollectionFilter.read
 
-    @collection = @collection_resource.read
-
-    # set title / meta description for page
+    # set title / meta description / HTTP status for the page
     title(@collection.details.meta_title, default_seo_title)
-    @description  = @collection.details.seo_description
+    @description = @collection.details.seo_description
+    status = @collection_options ? :ok : :not_found
 
     respond_to do |format|
-      format.html { render :show, status: @status }
+      format.html { render :show, status: status }
       format.json do
         render json: @collection.serialize
       end
@@ -50,9 +49,8 @@ class Products::CollectionsController < Products::BaseController
 
   private
     def set_collection_resource
-      collection_options = parse_permalink(params[:permalink])
-      @status = collection_options[:nothing] ? :not_found : :ok
-      @collection_resource = collection_resource(collection_options)
+      @collection_options = parse_permalink(params[:permalink])
+      @collection = collection_resource(@collection_options)
     end
 
     def collection_resource(collection_options)
@@ -67,9 +65,9 @@ class Products::CollectionsController < Products::BaseController
         order:          params[:order],
         limit:          params[:limit] || 20, # page size
         offset:         params[:offset] || 0
-      }.merge(collection_options)
+      }.merge(collection_options || {})
 
-      Products::CollectionResource.new(resource_args)
+      Products::CollectionResource.new(resource_args).read
     end
 
     # we have route like /dresses/permalink
@@ -104,6 +102,6 @@ class Products::CollectionsController < Products::BaseController
       end
 
       # default
-      return { nothing: true }
+      return nil
     end
 end
