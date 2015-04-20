@@ -1,6 +1,7 @@
 - content_for :head do
   = stylesheet_link_tag    'quiz'
   = javascript_include_tag 'quiz'
+  meta name="viewport" content="width=device-width, initial-scale=1"
 
 - facebook_application = Spree::AuthenticationMethod.where(environment: ::Rails.env, provider: :facebook, active: true).first
 - if facebook_application.present?
@@ -11,7 +12,7 @@
     });
 
     window.onQuizCompleted = function() { 
-      window.parent.location = "#{ after_quiz_redirect_url }";
+      window.location = "#{ after_quiz_redirect_url }";
     };
 
     window.fbAsyncInit = function() {
@@ -33,9 +34,12 @@
     }(document, 'script', 'facebook-jssdk'));
 
 css:
-  .quiz-box .steps-box .scrollable { width: 100%; height: 100%; overflow-x: hidden; overflow-y: scroll;}
+  /* .quiz-box .steps-box .scrollable { width: 100%; height: 100%; overflow-x: hidden; overflow-y: scroll;}*/
 
 .quiz-box#style_quiz
+  .quiz-header
+    = link_to '/' do
+      = image_tag 'new-logo-white.svg', class: 'logo', :alt => 'Fame & Partners'
   .quiz-wrapper-box
     .quiz-box-inner
       /uncomment this to show thanks
@@ -50,19 +54,19 @@ css:
         .film style="position: relative;"
           = form_for :quiz, url: style_quiz_path, remote: true, method: :put do |f|
             - @questions_by_steps.to_a.to(1).each do |step, questions|
-              .step.film-frame id="step-#{step}" style="float: left; width: 1054px;"
+              .step.film-frame id="step-#{step}"
                 - questions.each do |question|
                   .question id="question-#{question.id}"
                     = f.fields_for "questions][#{question.id}" do |ff|
                       = ff.fields_for :answer do |fff|
                         = render "questions/#{ question.partial}", form: fff, question: question
 
-            .step.film-frame id="step-#{0}" style="float: left; width: 1054px;"
+            .step.film-frame id="step-#{0}"
               .question id="question-0"
                 = render 'questions/friends'
 
             - @questions_by_steps.to_a.from(2).each do |step, questions|
-              .step.film-frame id="step-#{step}" style="float: left; width: 1054px;"
+              .step.film-frame id="step-#{step}"
                 - questions.each do |question|
                   .question id="question-#{question.id}"
                     = f.fields_for "questions][#{question.id}" do |ff|
@@ -74,5 +78,10 @@ css:
           .progress-bar
             .filler style="width: 0%;"
               .tooltip 0%
+          .questions-count
+            ' Q
+            span.current 1
+            | /
+            span.total = @quiz.questions.map(&:step).uniq.count + 1
           .next
             a href="#" Next

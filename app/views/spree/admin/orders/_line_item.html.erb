@@ -1,5 +1,6 @@
 <tr id="<%= spree_dom_id(f.object) %>" data-hook="admin_order_form_line_item_row" class="<%= cycle('odd', 'even')%>">
   <td><%=f.object.variant.product.name%> <%= "(#{f.object.options_text})" unless f.object.options_text.blank? %></td>
+  <td><%= Fabrication::STATES[f.object.fabrication.try(:state)] %></td>
   <td class="price align-center"><%= f.object.variant.display_amount %></td>
   <td class="qty"><%= f.number_field :quantity, :min => 0, :class => "qty" %></td>
   <td class="total align-center"><%= f.object.display_amount %></td>

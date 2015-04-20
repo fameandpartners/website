@@ -6,6 +6,7 @@
       <th class="price"><%= t(:price) %></th>
       <th class="qty"><%= t(:qty) %></th>
       <th class="total"><span><%= t(:total) %></span></th>
+      <th class="status"><span><%= t(:make_status) %></span></th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,9 @@
         <td class="price"><%= item.variant.display_amount %></td>
         <td class="qty"><%= item.quantity %></td>
         <td class="total"><span><%= item.display_amount %></span></td>
+        <td class="status">
+          <%= render 'spree/admin/orders/index/update_fabrication_state_form', order_line_item: item %>
+         </td>
       </tr>
     <% end %>
   </tbody>
@@ -23,6 +27,7 @@
     <tr class="total" id="subtotal-row">
       <td colspan="4"><b><%= t(:subtotal) %>:</b></td>
       <td class="total"><span><%= @order.display_item_total %></span></td>
+      <td></td>
     </tr>
   </tbody>
   <tbody id="order-charges" data-hook="order_details_adjustments"  class="with-border">
@@ -31,6 +36,7 @@
       <tr class="total">
         <td colspan="4"><strong><%= adjustment.label %>:</strong></td>
         <td class="total"><span><%= adjustment.display_amount %></span></td>
+        <td></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,6 +44,7 @@
     <tr>
       <td colspan="4" ><%= t(:order_total) %>:</td>
       <td class="total" id="order-total"><span id="order_total"><%= @order.display_total %></span></td>
+      <td></td>
     </tr>
   </tbody>
   <% if order.price_adjustment_totals.present? %>
@@ -46,6 +53,7 @@
         <tr>
           <td colspan="4"><strong><%= label %></strong></td>
           <td class="total"><span><%= total %></span></td>
+          <td></td>
         </tr>
       <% end %>
     </tbody>

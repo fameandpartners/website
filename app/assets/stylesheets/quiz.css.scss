@@ -3,9 +3,18 @@
 
 @import 'partials/setup';
 @import 'partials/fonts';
+@import 'partials/icons';
 @import 'partials/global_elements';
 
 @import 'libs/jquery.jscrollpane';
+
+@import 'redesign/vars';
+@import 'libs/vex.css';
+@import 'libs/vex-theme-flat-attack.css';
+@import 'libs/vex-theme-bottom-right-corner.css';
+@import 'redesign/modal';
+
+@import 'transient_content';
 
 @import 'partials/quiz';
 @import 'partials/quiz_iframe';

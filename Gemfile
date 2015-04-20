@@ -24,6 +24,9 @@ gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
 
+# Data
+gem 'event_sourced_record'
+
 gem 'geoip', require: false
 gem 'rubyzip', '< 0.9.9', require: false
 gem 'roo', require: false
@@ -33,8 +36,6 @@ gem 'instagram'
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
 gem 'sitemap_generator'
-
-gem 'font-awesome-sass'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
@@ -84,6 +85,7 @@ group :assets do
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
   gem 'bootstrap-sass'
+  gem 'font-awesome-sass'
 end
 
 group :development, :test do

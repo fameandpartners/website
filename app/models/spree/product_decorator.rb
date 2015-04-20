@@ -377,7 +377,7 @@ Spree::Product.class_eval do
   # override spree core method
   def self.active(currency = nil)
     not_hidden.not_deleted.available(nil, currency)
-  end 
+  end
 
 #  def build_customisations_from_values_hash
 #    customisation_values_hash.each do |type_id, value_ids|

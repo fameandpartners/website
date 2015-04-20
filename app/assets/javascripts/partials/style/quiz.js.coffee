@@ -3,17 +3,28 @@ window.style or= {}
 window.style.Quiz = class StyleQuiz
   container: null
   options: {}
+  $tabletScreen = 768
+  $phoneScreen = 500
 
   constructor: (options = {}) ->
     @options = options
+    
+    @masonryGutter = 10
+    @masonryItemsInLine = switch
+      when $(window).width() <= $tabletScreen && $(window).width() > $phoneScreen then 4
+      when $(window).width() <= $phoneScreen then 2
+      else 7
+
     @container = $('.quiz-box')
+    @containerInner = @container.find('.quiz-box-inner')
+    @stepsBox = @container.find('.steps-box')
 
     $(window).on('resize', _.throttle(@windowResizeHandler, 100))
 
     @container.on('click', (e) -> e.stopPropagation())
     @container.find('.next a').click _.bind(@nextStepEventHandler, @)
     @container.find('.prev a').click _.bind(@previousStepEventHandler, @)
-
+    
     @init()
 
   windowResizeHandler: (e) =>
@@ -28,10 +39,22 @@ window.style.Quiz = class StyleQuiz
     _.each @container.find('.randomize'), (scope) ->
       $(scope).randomize()
     $frames = @container.find('.film-frame')
+    $chart = @container.find('.chart')
     $frame = $frames.first()
     $frame.addClass('current')
     @container.find('.film').css('width', $frame.width() * $frames.size())
 
+    @steps().width(@stepsBox.width())
+    @steps().find('.photos').find('.item').width((@stepsBox.width() / @masonryItemsInLine) - @masonryGutter)
+    scale = Math.max(0.51, (@stepsBox.width() / $chart.width()))
+    $chart.css
+      height: $chart.height() * scale
+      '-webkit-transform': 'scale('+scale+')'
+      '-ms-transform': 'scale('+scale+')'
+      '-o-transform': 'scale('+scale+')'
+      'transform': 'scale('+scale+')'
+    
+    
     @bindCheckboxesAndRadios()
 
     @processImagesForStepsInSeries()
@@ -49,7 +72,11 @@ window.style.Quiz = class StyleQuiz
 
       if $scrollable.data('jsp')
         $scrollable.data('jsp').scrollByY(100)
-
+    # containerInner = @containerInner
+    # setTimeout () ->
+    #   @containerInner.height($frame.height())
+    # , 1000
+    
 
   nextStepEventHandler: (event) ->
     event.preventDefault()
@@ -79,8 +106,8 @@ window.style.Quiz = class StyleQuiz
       left: '-' + $step.position().left
     @steps().removeClass('current')
     $step.addClass('current')
-
-    if $step.find('.scrollable')
+    @containerInner.height($step.height())
+    if $step.find('.scrollable') && $(window).width() > $phoneScreen
       if $step.find('.scrollable').data('jsp')
         $step.find('.scrollable').data('jsp').reinitialise()
       else
@@ -177,9 +204,9 @@ window.style.Quiz = class StyleQuiz
     $quizPhotos = $step.find('.photos')
 
     $quizPhotos.masonry
-      gutter: 10
-      columnWidth: '.item'
+      gutter: @masonryGutter
       itemSelector: '.item.loaded'
+      columnWidth: '.item'
 
     _quiz = @
     $step.find('.photos img').on 'load', () ->
@@ -205,8 +232,8 @@ window.style.Quiz = class StyleQuiz
 
     if $scrollable.data('jsp')
       $scrollable.data('jsp').reinitialise()
-    else
-      $scrollable.jScrollPane
+    else if $(window).width() > $phoneScreen
+      $scrollable.jScrollPane 
         contentWidth: $(step).width() + 'px'
 
   processImagesForStepsInSeries: () ->

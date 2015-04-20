@@ -5,12 +5,22 @@ class Spree::Gateway::Pin < Spree::Gateway
   attr_accessible :preferred_api_key
   attr_accessible :preferred_publishable_key
 
+  USD_GATEWAYS = configatron.pin_payments.usd_gateways
+
   def purchase(money, creditcard, gateway_options)
     if token = creditcard.gateway_payment_profile_id
       # The Balanced ActiveMerchant gateway supports passing the token directly as the creditcard parameter
       creditcard = token
     end
     provider.purchase(money, creditcard, gateway_options)
+  end
+
+  def currency
+    if USD_GATEWAYS.include?(preferred_publishable_key)
+      'USD'
+    else
+      'AUD'
+    end
   end
 
   def auto_capture?

@@ -140,7 +140,7 @@ en-US:
     cart: cart
   shipment_states:
     pending: Your dress is in making
-    ready: Your dress is in quality control
+    ready: Your dress is in making
     shipped: Your dress has been shipped
     backorder: Your dress is on backorder
     partial: Your dress is in making

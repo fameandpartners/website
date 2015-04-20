@@ -1,0 +1,40 @@
+Order Summary（订单信息）
+Order Number: <%= order.number %>
+Items:        <%= order.total_items %>
+
+============================================================
+
+<% order.line_items.each do |item| %>
+Style No (款号)：<%= item.style_number %>
+Size (码数):     <%= item.country_size %>
+Color（颜色):    <%= item.colour_name %>
+Quantity:       <%= item.quantity%>
+Factory:        <%= item.factory %>
+Delivery Date:  <%= order.projected_delivery_date %>
+
+Customizations:
+<% item.customisations.each do |name, image_url| %>
+  - <%= name %>
+  <% if image_url.present? %>
+  - <%= image_url %>
+  <% end %>
+<% end %>
+
+<% if item.image? %>
+Product Image:
+<%= item.image_url %>
+<% end %>
+------------------------------------------------------------
+<% end %>
+
+<% if order.customer_notes? %>
+Customer Notes: <%= order.customer_notes %>
+<% end %>
+
+Customer Details (客人信息)
+------------------------------------------------------------
+Customer（客人名字): <%= order.name %>
+Phone Number（电话): <%= order.phone_number %>
+Shipping Address（地址): <%= order.shipping_address %>
+============================================================
+

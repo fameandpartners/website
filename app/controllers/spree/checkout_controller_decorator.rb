@@ -5,60 +5,6 @@ Spree::CheckoutController.class_eval do
 
   layout 'redesign/application'
 
-=begin
-  def update_registration
-    fire_event("spree.user.signup", :order => current_order)
-    
-    if params[:create_account]
-      @user = Spree::User.new(params[:user])
-      if @user.save
-        sign_in :spree_user, @user
-
-        # hack - temporarily change the state to something other than cart so we can validate the order email address
-        current_order.state = current_order.checkout_steps.first
-
-        current_order.user = @user
-        current_order.email = @user.email
-        current_order.user_first_name = @user.first_name
-        current_order.user_last_name = @user.last_name
-        current_order.save
-
-        before_address
-
-        render 'spree/checkout/registration/success'
-      else
-        render 'spree/checkout/registration/failed'
-      end
-    else
-      @order = current_order
-      @user = Spree::User.new(params[:user])
-      @user.valid?
-
-      if @user.errors
-        @user.errors.delete(:password)
-        @user.errors.delete(:password_confirmation)
-      end
-
-      if @user.errors.blank?
-        @order.email = @user.email
-        @order.user_first_name = @user.first_name
-        @order.user_last_name = @user.last_name
-        @order.state = current_order.checkout_steps.first
-        @order.save
-
-        @order.errors.clear
-        @order.user = @user
-
-        before_address
-
-        render 'spree/checkout/registration/success'
-      else
-        render 'spree/checkout/registration/failed'
-      end
-    end
-  end
-=end
-
   # update - address/payment
   def update
     move_order_from_cart_state(@order)
@@ -153,7 +99,7 @@ Spree::CheckoutController.class_eval do
   def raise_insufficient_quantity
     flash[:error] = t(:spree_inventory_error_flash_for_insufficient_quantity)
     redirect_to main_app.dresses_path
-  end 
+  end
 
   def load_order
     @order = current_order
@@ -193,7 +139,7 @@ Spree::CheckoutController.class_eval do
   def before_address
     @order.bill_address ||= build_default_address
     @order.ship_address ||= build_default_address
-  end 
+  end
 
   private
 
@@ -202,11 +148,11 @@ Spree::CheckoutController.class_eval do
     if @order.has_checkout_step?("payment") && @order.payment?
       if params[:payment_source].present? && source_params = params.delete(:payment_source)[params[:order][:payments_attributes].first[:payment_method_id].underscore]
         params[:order][:payments_attributes].first[:source_attributes] = source_params
-      end 
+      end
       if (params[:order][:payments_attributes])
         params[:order][:payments_attributes].first[:amount] = @order.total
-      end 
-    end 
+      end
+    end
     params[:order].except(:password, :password_confirmation)
   end
 
@@ -242,7 +188,12 @@ Spree::CheckoutController.class_eval do
   end
 
   def find_payment_methods
-    @credit_card_gateway = @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
+    if Features.active?(:usd_payment_gateway, try_spree_current_user)
+      @credit_card_gateway = CreditCardGatewayService.new(@order, current_site_version.currency).gateway
+    else
+      @credit_card_gateway = @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
+    end
+
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
     end

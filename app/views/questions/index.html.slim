@@ -9,7 +9,7 @@
     = form_for :quiz, :url => quiz_answers_path,:remote => true do |f|
       - @questions_by_steps.to_a.to(1).each do |step, questions|
         = render 'step', step: step, questions: questions, f: f
-      .step.film-frame id="step-#{0}" style="float: left; width: 1054px;"
+      .step.film-frame id="step-#{0}"
         .question id="question-0"
           = render 'friends'
       - @questions_by_steps.to_a.from(2).each do |step, questions|
@@ -20,5 +20,10 @@
     .progress-bar
       .filler style="width: 0%;"
         .tooltip 0%
+    .questions-count
+      ' Q
+      span.current 1
+      | /
+      span.total = @quiz.questions.map(&:step).uniq.count + 1
     .next
       a href="#" Next

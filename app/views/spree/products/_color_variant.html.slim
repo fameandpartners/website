@@ -29,7 +29,7 @@ ruby:
   .buttons
     .buy-button
       = link_to "Buy", colored_variant_path(variant, :cf => 'collection'), class: 'btn black small', title: "Buy this dress"
-    - if (variant.product.can_be_customized and !current_sale.is_active?)
+    - if (variant.product.can_be_customized and ! sale_active?)
       .custom-button
         = link_to t('words.customize'), personalization_product_path(permalink: variant.product.permalink, :cf => 'collection'), class: 'btn empty border small', title: "#{t('words.customize').titleize} this dress"
   - if variant.product.fast_delivery

@@ -1,4 +1,29 @@
+// Setup 
+$tablet: "(max-width: 768px)";
+$tablet-mini: "(max-width: 600px)";
+$phone: "(max-width: 500px)";
 @import url(//fonts.googleapis.com/css?family=Forum);
+body { margin: 0;}
+
+.hidden {
+  display: none;
+}
+
+.hidden-on-phone {
+  @media #{$phone} { display: none;}
+}
+.visible-on-phone {
+  display: none;
+  @media #{$phone} { 
+    display: block;
+  }
+}
+span.visible-on-phone, em.visible-on-phone {
+  @media #{$phone} { display: inline;}
+}
+// @end Setup
+// -----------------
+
 .quiz-box .quiz-overlay {
   background: #000;
   background: rgba(0, 0, 0, .7);
@@ -20,18 +45,16 @@
 }
 
 .quiz-wrapper-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1100px;
-  height: 680px;
-  z-index: 2000;
-  margin: -360px 0 0 -550px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 680px;
   background: #fff;
   z-index: 31;
-
-  top: 30px;
-  margin-top: 0;
+  @media #{$phone} {
+    min-height: 0;
+  }
+  
   .close-quiz {
     position: absolute;
     top: 19px;
@@ -58,9 +81,18 @@
   }
   .quiz-box-inner {
     height: 680px;
-    padding: 22px 20px 130px;
+    padding: 22px 20px 85px;
     position: relative;
     @include box-sizing(border-box);
+    @media #{$tablet-mini} {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    @media #{$phone} {
+      height: 417px;
+      padding-top: 0;
+      padding-bottom: 40px;
+    }
   }
   .signup-box-wrapper {
     width: 1100px;
@@ -68,8 +100,11 @@
     overflow: hidden;
     background: image-url('_quiz/signin-bg.png') center center no-repeat;
     background-size: cover;
-    margin: -42px -20px -130px;
+    margin: -42px -20px -85px;
     position: relative;
+    @media #{$phone} {
+      padding-bottom: -40px;
+    }
     .facebook-button {
       display: block;
       text-align: center;
@@ -284,7 +319,9 @@
     }
   }
   .steps-box {
-    width: 1054px;
+    width: 100%;
+    overflow: hidden;
+    .step { float: left;}
     .questions-count {
       position: absolute;
       top: 19px;
@@ -297,16 +334,24 @@
       line-height: 35px;
       white-space: nowrap;
       text-align: center;
+      @media #{$phone} {
+        display: none;
+      }
     }
     h1 {
       font: 400 47px/0.8 $fontThree;
       text-align: center;
-      padding-top: 4px;
+      padding: 4px 85px 0;
       margin: 0px;
       em { 
         text-transform: none;
         display: block;
         font-family: $fontTwo;
+      }
+      @media #{$phone} {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 25px;
       }
     }
     .subtitle {
@@ -320,6 +365,12 @@
         padding: 5px 20px;
         color: #fff;
         background-color: #000;
+        @media #{$phone} {
+          margin-top: 10px;
+          padding-left: 10px;
+          padding-right: 10px;
+          font-size: 18px;
+        }
       }
     }
     .photos-wrapper {
@@ -327,13 +378,16 @@
       height: 425px;
       overflow: hidden;
       position: relative;
+      @media #{$phone} {
+        height: 270px;
+      }
       .loader {
         position: absolute;
         left: 0;
         top: 0;
         right: 0;
-        height: 425px;
-        background: url('_quiz/loader.gif') no-repeat center 150px rgba(255, 255, 255, 0.8);
+        bottom: 0;
+        background: url('_quiz/loader.gif') no-repeat center center rgba(255, 255, 255, 0.8);
         display: none;
       }
       .photos-nav {
@@ -348,6 +402,7 @@
           text-align: center;
           padding-top: 15px;
           font: 100 italic 14px/1 $fontThree; 
+          @media #{$phone} { text-align: right;}
         }
         &:before, &:after {
           content: '';
@@ -384,6 +439,22 @@
           height: 20px;
           margin-left: 10px;
         }
+        .icon-hr-right {
+          padding-left: 8px;
+          margin-left: 5px;
+          position: relative;
+          &:after {
+            content: '';
+            background-color: #000;
+            display: block;
+            height: 1px;
+            position: absolute;
+            left: 0;
+            right: 4px;
+            top: 50%;
+            // margin-top: -1px;
+          }
+        }
       }
     }
     .scrollable {
@@ -391,13 +462,33 @@
       height: 100%;
       overflow-x: hidden;
       overflow-y: scroll;
+      @media #{$phone} {
+        height: auto !important;
+        overflow-x: scroll !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+      }
     }
     .photos {
       padding-bottom: 42px;
+      @media #{$phone} {
+        white-space: nowrap;
+        width: 100%;
+        height: auto !important;
+        padding-bottom: 0;
+      }
       .item {
-        width: 13.4333%;
         margin-bottom: 10px;
-        height: auto;
+        height: auto;        
+        width: 13.4333%;
+        @media #{$phone} {
+          margin-right: 10px;
+          display: inline-block;
+          vertical-align: top;
+          position: relative !important;
+          top: auto !important;
+          left: auto !important;
+        }
         &.active {
           .selected { display: block;}
         }
@@ -414,11 +505,11 @@
         }
         .selected {
           position: absolute;
-          left: 50%;
+          left: 5px;
+          right: 5px;
           top: 50%;
-          margin: -27px 0 0 -60px;
+          margin-top: -27px;
           height: 55px;
-          width: 120px;
           background-color: rgba(255, 255, 255, 0.75);
           border: solid 1px #000;
           line-height: 55px;
@@ -429,36 +520,10 @@
           display: none;
         }
       }
-      // li {
-      //   list-style: none;
-      //   float: left;
-      //   margin: 0 0 0 37px;
-      //   box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-      //   width: 176px;
-      //   position: relative;
-      //   .label {
-      //     bottom: 30px;
-      //     left: 30px;
-      //     right: 30px;
-      //     position: absolute;
-      //     background: #e8e8e8;
-      //     text-transform: uppercase;
-      //     font-size: 12px;
-      //     padding: 4px 0 0;
-      //     text-align: center;
-      //   }
-      //   &:first-child {
-      //     margin: 0;
-      //   }
-      //   &.active {
-      //     label {
-      //       border-color: #b7f0e5;
-      //     }
-      //   }
-      // }
     }
     .choices {
       font-size: 0;
+      @media #{$phone} { text-align: center;}
       .item {
         display: inline-block;
         vertical-align: top;
@@ -468,13 +533,28 @@
         margin-top: 70px;
         font-size: 30px;
         font-family: $fontThree;
+        @media #{$tablet-mini} {
+          font-size: 25px;
+        }
+        @media #{$phone} {
+          margin-top: 20px;
+          width: auto;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
         input[type=checkbox], input[type=radio] { display: none;}
-        &.active:after {
-          display: block;
-        } 
+        label {
+          position: relative;
+          z-index: 1;
+        }
+        &.active {
+          &:after {
+            display: block;
+          } 
+        }
         &:after {
           content: '';
-          z-index: -1;
+          z-index: 0;
           position: absolute;
           left: 0;
           right: 0;
@@ -506,49 +586,6 @@
         }
       }
     }
-    // .choices {
-    //   margin: 10px 7px 20px;
-    //   overflow: hidden;
-    //   li {
-    //     margin: 0 0 20px;
-    //     width: 208px;
-    //     float: left;
-    //     text-align: center;
-    //     text-transform: uppercase;
-    //     font: 400 16px/1 $fontOne;
-    //     label {
-    //       text-decoration: none;
-    //       display: inline-block;
-    //       padding: 4px;
-    //       border: 5px solid transparent;
-    //       position: relative;
-    //       overflow: hidden;
-    //       width: 154px;
-    //       height: 40px;
-    //       line-height: 40px;
-    //       input {
-    //         position: absolute;
-    //         top: 0;
-    //         left: 0;
-    //         width: 200px;
-    //         height: 200px;
-    //         opacity: 0;
-    //         filter: alpha(opacity=0);
-    //       }
-    //     }
-    //     &.active {
-    //       label {
-    //         border-color: #b7f0e5;
-    //       }
-    //     }
-    //   }
-    //   &.brands{
-    //     margin-left: 100px;
-    //     li{
-    //       width: 280px;
-    //     }
-    //   }
-    // }
     .nails {
       width: 956px;
       margin: 30px auto;
@@ -587,15 +624,26 @@
         }
       }
     }
-    .stars, .lips {
-      margin: 20px 0 0;
+    .chart-wrapper {
+      @media #{$phone} {
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+    .chart {
       font-size: 0;
-      white-space: nowrap;      
+      margin-top: 80px;
+      white-space: nowrap;  
+      width: 1060px;
+      -webkit-transform-origin: 0 0;
+         -moz-transform-origin: 0 0;
+          -ms-transform-origin: 0 0;
+              transform-origin: 0 0;
       .item {
         cursor: pointer;
         display: inline-block;
         vertical-align: bottom;
-        width: 105px;
+        width: 10%;
         position: relative;
         label {
           display: block;
@@ -606,134 +654,102 @@
           right: 0;
           input[type=radio] { display: none;}
         }
-        // &.active {
-        //   background-position: 0 0;
-        // }
       }
     }
     .stars {
+      margin: 20px 0;
       .item {
         &.step-0 {
           height: 67px;
           position: relative;
           bottom: -37px;
-          width: 103px;
-          background: url('_quiz/steps/0.png') no-repeat;
-          &.active { background-position: 0 -67px;}
+          background: url('_quiz/steps/0.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -67px;}
         }
         &.step-1 {
           height: 58px;
-          background: url('_quiz/steps/1.png') no-repeat;
-          &.active { background-position: 0 -58px;}
+          background: url('_quiz/steps/1.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -58px;}
         }
         &.step-2 {
           height: 86px;
-          background: url('_quiz/steps/2.png') no-repeat;
-          &.active { background-position: 0 -86px;}
+          background: url('_quiz/steps/2.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -86px;}
         }
         &.step-3 {
           height: 114px;
-          background: url('_quiz/steps/3.png') no-repeat;
-          &.active { background-position: 0 -114px;}
+          background: url('_quiz/steps/3.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -114px;}
         }
         &.step-4 {
           height: 142px;
-          background: url('_quiz/steps/4.png') no-repeat;
-          &.active { background-position: 0 -142px;}
+          background: url('_quiz/steps/4.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -142px;}
         }
         &.step-5 {
           height: 171px;
-          background: url('_quiz/steps/5.png') no-repeat;
-          &.active { background-position: 0 -171px;}
+          background: url('_quiz/steps/5.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -171px;}
         }
         &.step-6 {
           height: 199px;
-          background: url('_quiz/steps/6.png') no-repeat;
-          &.active { background-position: 0 -199px;}
+          background: url('_quiz/steps/6.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -199px;}
         }
         &.step-7 {
           height: 227px;
-          background: url('_quiz/steps/7.png') no-repeat;
-          &.active { background-position: 0 -227px;}
+          background: url('_quiz/steps/7.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -227px;}
         }
         &.step-8 {
           height: 255px;
-          background: url('_quiz/steps/8.png') no-repeat;
-          &.active { background-position: 0 -255px;}
+          background: url('_quiz/steps/8.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -255px;}
         }
         &.step-9 {
           height: 363px;
-          width: 109px;
-          background: url('_quiz/steps/9.png') no-repeat;
-          &.active { background-position: 0 -363px;}
+          // width: 109px;
+          background: url('_quiz/steps/9.png') 50% 0 no-repeat;
+          &.active { background-position: 50% -363px;}
         }
       }
     }
     .lips {
       margin-top: 80px;
       .item {
-        width: 104px;
-        background-color: #000;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        &.active { background-position: 0 100%;}
+        
+        // - size
         &.step-0, &.step-1 { height: 57px;}
         &.step-2, &.step-3 { height: 113px;}
         &.step-4, &.step-5 { height: 170px;}
         &.step-6, &.step-7 { height: 226px;}
         &.step-8, &.step-9 { height: 282px;}
-        &.step-0 { 
-          background: url('_quiz/lips/0.png') no-repeat;
-          &.active { background-position: 0 -57px;}
-        }
-        &.step-1 { 
-          background: url('_quiz/lips/1.png') no-repeat;
-          &.active { background-position: 0 -57px;}
-        }
-        &.step-2 { 
-          background: url('_quiz/lips/2.png') no-repeat;
-          &.active { background-position: 0 -113px;}
-        }
-        &.step-3 { 
-          background: url('_quiz/lips/3.png') no-repeat;
-          &.active { background-position: 0 -113px;}
-        }
-        &.step-4 { 
-          background: url('_quiz/lips/4.png') no-repeat;
-          &.active { background-position: 0 -170px;}
-        }
-        &.step-5 { 
-          background: url('_quiz/lips/5.png') no-repeat;
-          width: 107px;
-          &.active { background-position: 0 -170px;}
-        }
-        &.step-6 { 
-          background: url('_quiz/lips/6.png') no-repeat;
-          width: 108px;
-          &.active { background-position: 0 -226px;}
-        }
-        &.step-7 { 
-          background: url('_quiz/lips/7.png') no-repeat;
-          width: 107px;
-          &.active { background-position: 0 -226px;}
-        }
-        &.step-8 { 
-          background: url('_quiz/lips/8.png') no-repeat;
-          &.active { background-position: 0 -282px;}
-        }
-        &.step-9 { 
-          background: url('_quiz/lips/9.png') no-repeat;
-          &.active { background-position: 0 -282px;}
+        
+        // - bg
+        @for $i from 0 through 9 {
+          &.step-#{$i} { background-image: url('_quiz/lips/#{$i}.png');}
         }
       }
     }
     .progress-next {
       position: absolute;
       margin: 0 84px;
-      bottom: 25px;
+      bottom: 20px;
       left: 20px;
       right: 20px;
+      @media #{$phone} {
+        left: 0;
+        right: 0;
+      }
+
       .progress-bar {
         border: solid 1px #000;
         background-color: #fff;
         height: 34px;
+        @media #{$phone} { display: none;}
         .filler {
           position: relative;
           text-align: right;
@@ -744,6 +760,13 @@
             font: 400 23px/34px $fontThree;
           }
         }
+      }
+      .questions-count {
+        display: none;
+        top: 0;
+        left: 50%;
+        margin-left: -42px;
+        @media #{$phone} { display: block;}
       }
       .prev, .next {
         text-align: center;
@@ -897,28 +920,42 @@
     }
   }
   .invite-friends {
-    width: 670px;
+    width: 100%;
     height: 430px;
     position: relative;
     margin: 45px auto 0;
+    @media #{$phone} {
+      height: 230px;
+      margin-top: 25px;
+    }
     .choose-friends {
       width: 338px;
       height: 138px;
       position: absolute;
-      left: 160px;
-      top: 130px;
+      left: 50%;
+      top: 50%;
+      margin: -70px 0 0 -170px;
       border: solid 1px #d7d7d7;
       text-align: center;
+      @media #{$phone} {
+        left: 10px;
+        margin-left: 0;
+        right: 10px;
+        width: auto;
+      }
       .choose-friends-link{
         margin-top: 55px;
       }
     }
-    .skip{
+    .skip {
       position: absolute;
       width: 100%;
       top: 330px;
       text-align: center;
       z-index: 1000;
+      @media #{$phone} {
+        top: 200px;
+      }
       a{
         font-size: 14px;
       }
@@ -1488,14 +1525,22 @@
   text-align: center;
   margin: -25px 0 0;
   padding: 0;
+  @media #{$phone} {
+    margin-top: -10px;
+  }
   &.heir {
     .selected {
       background: url('_quiz/choice-type-3.png') no-repeat 115% center;
+      background-size: cover;
+      @media #{$phone} {
+        background-position: 0% center;
+      }
     }
   }
   &.body-colour {
     .selected {
       background: url('_quiz/choice-type-2.png') no-repeat center center;
+      background-size: cover;
     }
   }
   li {
@@ -1505,6 +1550,15 @@
     height: 101px;
     margin: 0 12px;
     position: relative;
+    @media #{$phone} {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+    }
+    img { 
+      width: 100%;
+      height: auto;
+    }
     &.active {
       .selected {
         display: block;
@@ -1524,7 +1578,7 @@
     left: 0;
     top: 0;
     right: 0;
-    height: 101px;
+    bottom: 0;
   }
 }
 
@@ -1539,6 +1593,11 @@
     display: inline-block;
     vertical-align: top;
     position: relative;
+    @media #{$phone} {
+      margin-left: 4px;
+      margin-right: 4px;
+      min-width: 70px;
+    }
     &.active {
       .selected { display: block;}
     }
@@ -1705,3 +1764,203 @@
     }
   }
 }
+
+
+
+// Quiz result 
+// - vars
+$quiz-result-gutter: 20px;
+$quiz-result-gutter-sm: 10px;
+.quiz-header {
+  background-color: #000;
+  height: 70px;
+  text-align: center;
+  margin-bottom: $quiz-result-gutter;
+  color: #fff;
+  @media #{$tablet} {
+    margin-bottom: $quiz-result-gutter-sm;
+  }
+  @media #{$tablet} {
+    height: 50px;
+  }
+  .logo {
+    width: 320px;
+    margin-top: 22px;
+    @media #{$phone} { 
+      width: 250px;
+      margin-top: 16px;
+    }
+  }
+}
+.quiz-results-wrapper {
+  .quiz-row {
+    margin-left: -$quiz-result-gutter;
+    margin-right: -$quiz-result-gutter;
+    box-sizing: border-box;
+    @media #{$tablet} {
+      margin-left: -$quiz-result-gutter-sm;
+      margin-right: -$quiz-result-gutter-sm;
+    }
+    @media #{$phone} {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    &:after {
+      content: ' ';
+      display: table;
+      clear: both;
+    }
+    img { width: 100%;}
+  }
+  .quiz-col {
+    padding: $quiz-result-gutter;
+    position: relative;
+    float: left;
+    box-sizing: border-box;
+    @media #{$tablet} {
+      padding: $quiz-result-gutter-sm;
+    }
+  }
+  .quiz-col-6 { 
+    width: (100% / 2);
+    @media #{$phone} { width: 100%;}
+  }
+  .quiz-col-4 { 
+    width: (100% / 3);
+    @media #{$phone} { width: 100%;}
+  }
+
+  .dress-catalog {
+    text-align: center;
+  }
+}
+
+
+.quiz-results {
+  font-family: $fontThree;
+  font-style: italic;
+  position: relative;
+  text-transform: uppercase;
+  .title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 40px;
+    z-index: 2;
+    background-color: #fff;
+    padding: 8px;
+  }
+  .result {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 30px;
+    &.lg { 
+      font-size: 54px;
+      .text { padding: 25px;}
+    }
+    &.centered {
+      right: 0;
+      text-align: center;
+    }
+    .text {
+      background-color: #fff;
+      padding: 10px;
+      display: inline-block;
+      line-height: 1;
+    }
+  }
+  .quiz-result-1 {}
+  .quiz-result-2 {
+    padding-top: 0;
+    padding-bottom: ($quiz-result-gutter * 3/2);
+    @media #{$tablet} {
+      padding-bottom: ($quiz-result-gutter-sm * 3/2);
+    }
+  }
+  .quiz-result-3 {
+    padding-top: 0;
+    padding-bottom: ($quiz-result-gutter * 3/2);
+    @media #{$tablet} {
+      padding-bottom: ($quiz-result-gutter-sm * 3/2);
+    }
+  }
+  .quiz-result-4 {
+    padding-top: ($quiz-result-gutter * 3/2);
+    padding-bottom: 0;
+    @media #{$tablet} {
+      padding-top: ($quiz-result-gutter-sm * 3/2);
+    }
+  }
+  .quiz-result-5 {
+    padding-top: ($quiz-result-gutter * 3/2);
+    padding-bottom: 0;
+    @media #{$tablet} {
+      padding-top: ($quiz-result-gutter-sm * 3/2);
+    }
+  }
+}
+
+
+.quiz-results-grey-block, .quiz-results-black-block {
+  text-align: center;
+  background-color: #f1f1f2;
+  text-align: center;
+  padding: 50px;
+  @media #{$phone} {
+    padding: 10px;
+  }
+  h2 { 
+    font-size: 38px;
+    text-transform: uppercase;
+    font-style: italic;
+    font-family: $fontThree;
+    @media #{$phone} { font-size: 30px;}
+    small {
+      display: block;
+      margin-top: 15px;
+    }
+  }
+  p {
+    font-size: 22px;
+    text-align: justify;
+    font-family: $fontTwo;
+    @media #{$phone} { font-size: 20px;}
+  }
+  .btn {
+    height: 52px;
+    line-height: 52px;
+    padding-left: 80px;
+    padding-right: 80px;
+    @media #{$phone} {
+      display: block;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  .pink-pale {
+    background-color: #eeddf0;
+    color: #000;
+  }
+}
+.quiz-results-black-block {
+  background-color: #000;
+  color: #fff;
+  p {
+    text-align: center;
+  }
+}
+// @end Quiz result
+// -----------------
+
+
+
+// vex 
+@media #{$phone} {
+  .gurl_com_modal.email-capture-modal .vex-content { background-position: top center;}
+  .gurl_com_modal.email-capture-modal .vex-content .vex-dialog-form .vex-dialog-message { padding-top: 60px;}
+  .gurl_com_modal.email-capture-modal .vex-content .vex-dialog-form .vex-dialog-message h2 { font-size: 1.4em !important;}
+  .gurl_com_modal.email-capture-modal .vex-content .vex-dialog-form .vex-dialog-message p { font-size: 1em !important;}
+}
+// @end vex
+// -----------------

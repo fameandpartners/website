@@ -86,7 +86,7 @@ class Repositories::ProductSize
     def sizes_map
       @sizes_map ||= begin
         result = {}
-        Spree::Variant.size_option_type.try(:option_values).each do |option_value|
+        Array.wrap(Spree::Variant.size_option_type.try(:option_values)).each do |option_value|
           value = Integer(option_value.name) rescue option_value.name
 
           result[option_value.id] = OpenStruct.new(

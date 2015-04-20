@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150410080424) do
+ActiveRecord::Schema.define(:version => 20150413090131) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -389,12 +389,6 @@ ActiveRecord::Schema.define(:version => 20150410080424) do
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
 
-  create_table "data_migrations", :id => false, :force => true do |t|
-    t.string "version", :null => false
-  end
-
-  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
-
   create_table "discounts", :force => true do |t|
     t.integer  "amount"
     t.datetime "created_at",        :null => false
@@ -415,6 +409,31 @@ ActiveRecord::Schema.define(:version => 20150410080424) do
   end
 
   add_index "email_notifications", ["spree_user_id", "code"], :name => "index_email_notifications_on_spree_user_id_and_code"
+
+  create_table "fabrication_events", :force => true do |t|
+    t.string   "fabrication_uuid"
+    t.string   "event_type"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "occurred_at"
+  end
+
+  add_index "fabrication_events", ["fabrication_uuid"], :name => "index_fabrication_events_on_fabrication_uuid"
+
+  create_table "fabrications", :force => true do |t|
+    t.integer  "line_item_id"
+    t.string   "purchase_order_number"
+    t.string   "state"
+    t.string   "factory_name"
+    t.date     "sla_date"
+    t.string   "uuid"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "fabrications", ["line_item_id"], :name => "index_fabrications_on_line_item_id", :unique => true
+  add_index "fabrications", ["purchase_order_number"], :name => "index_fabrications_on_purchase_order_number"
+  add_index "fabrications", ["uuid"], :name => "index_fabrications_on_uuid", :unique => true
 
   create_table "facebook_data", :force => true do |t|
     t.integer  "spree_user_id"
@@ -922,7 +941,7 @@ ActiveRecord::Schema.define(:version => 20150410080424) do
     t.string   "user_last_name"
     t.date     "required_to"
     t.text     "customer_notes"
-    t.text     "projected_delivery_date"
+    t.datetime "projected_delivery_date"
   end
 
   add_index "spree_orders", ["created_at"], :name => "index_spree_orders_on_created_at"

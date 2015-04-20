@@ -1,0 +1,89 @@
+table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable"
+  tr
+    td align="center" valign="top"
+      table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailContainer"
+        tr
+          td align="center" valign="top"
+            h2 Order Summary（订单信息）
+
+            table border="0" cellpadding="5" cellspacing="0" width="100%" id="orderSummary"
+              tbody
+                tr
+                  th Order Number:
+                  td = order.number
+                tr
+                  th Items:
+                  td = order.total_items
+
+            table border="0" cellpadding="5" cellspacing="0" width="100%" id="lineItems"
+              - order.line_items.each do |item|
+                tbody
+                  tr
+                    td colspan=2
+                      hr
+                  tr
+                    th Style No (款号)：
+                    td = item.style_number
+
+                  tr
+                    th Size (码数):
+                    td
+                      = item.country_size
+
+                  tr
+                    th Color（颜色):
+                    td = item.colour_name
+
+                  tr
+                    th Quantity:
+                    td = item.quantity
+
+                  tr
+                    th Factory:
+                    td = item.factory
+
+                  tr
+                    th Delivery Date:
+                    td = order.projected_delivery_date
+
+                  tr
+                    th Customizations:
+                    td
+                      table
+                        tbody
+                          - item.customisations.each do |name, image_url|
+                            tr
+                              th = name
+                            - if image_url.present?
+                              tr
+                                td = image_tag image_url
+
+                  tr
+                    th Product Image
+                    td
+                      - if item.image?
+                        = image_tag item.image_url
+
+            hr
+            - if order.customer_notes?
+              p
+                h3 Customer Notes:
+                = order.customer_notes
+
+            h3 Customer Details (客人信息)
+            hr
+
+            p
+              h3
+                ' Customer（客人名字):
+              = order.name
+
+            p
+              h3
+                ' Phone Number（电话):
+              = order.phone_number
+
+            p
+              h3
+                ' Shipping Address（地址):
+              = order.shipping_address

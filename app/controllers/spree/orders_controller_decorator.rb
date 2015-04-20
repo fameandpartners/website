@@ -1,6 +1,11 @@
 Spree::OrdersController.class_eval do
   layout 'redesign/application', only: :show
 
+  # Ensure that we get people to login instead of giving them $20 off by 404ing.
+  rescue_from CanCan::AccessDenied do
+    redirect_to spree.login_path
+  end
+
   # todo: merge order & user_cart => completed order resource
   def show
     @order = ::Spree::Order.find_by_number!(params[:id])

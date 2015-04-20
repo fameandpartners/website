@@ -29,7 +29,6 @@ class Products::DetailsResource
 
   def read
     Rails.cache.fetch(cache_key, expires_in: cache_expiration_time, force: Rails.env.development?) do
-      # product details
       Products::Presenter.new({
         id:                 product.id,
         master_id:          product.master.try(:id),
@@ -97,7 +96,7 @@ class Products::DetailsResource
       I18n.t('product_has_no_description')
     end
 
-    def product_fabric      
+    def product_fabric
       product_properties['fabric']
     end
 

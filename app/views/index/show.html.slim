@@ -1,13 +1,8 @@
 .page-content.index
   ul.rslides
-    - if request.original_url == 'http://localhost:3000/us'
-      li
-        a href="http://prom.fameandpartners.com" rel="nofollow"
-          = image_tag "prom-competition.jpg", alt: 'Prom Competition', class: 'img-responsive portrait-img'
     li
       a href="/dresses/graduation"
-        = image_tag "taste-of-fame.jpg", alt: 'Taste of Fame', class: 'img-responsive portrait-img'
-
+        = image_tag "taste-of-fame.jpg", alt: 'Taste of Fame', class: 'img-responsive portrait-img'        
     li
       a href="/prom-collection"
         = image_tag "prom.jpg", alt: 'Prom Collection', class: 'img-responsive portrait-img'
