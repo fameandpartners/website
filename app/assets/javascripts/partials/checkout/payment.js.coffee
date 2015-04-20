@@ -1,9 +1,14 @@
 window.checkout ||= {}
 
-window.fill = () ->
-  $('input#number').val('4444333322221111')
-  $('input#name').val('john smith')
-  $('input#card_code').val('123')
+#window.fill = () ->
+#  $('input#number').val('4444333322221111')
+#  $('input#name').val('john smith')
+#  $('input#card_code').val('123')
+#
+#window.fill = () ->
+#  $('input#number').val('5520000000000000')
+#  $('input#name').val('john smith')
+#  $('input#card_code').val('123')
 
 window.checkout.payment_step = {
   pin_request_in_process: false
@@ -107,6 +112,7 @@ window.checkout.payment_step = {
 
   pinResponseHandler: (response) ->
     $form = $('form.payment_details.credit_card.pin')
+    payment_method_id = $form.find('[name$="[payment_method_id]"]:first').val()
 
     if response.response
       return if checkout.payment_step.payment_request_in_process
