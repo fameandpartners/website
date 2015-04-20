@@ -1,7 +1,10 @@
 module Spree
   module Admin
-   OrdersController.class_eval do
+    OrdersController.class_eval do
       respond_to :csv, only: :index
+
+      attr_reader :hide_line_items
+      helper_method :per_page, :hide_line_items
 
       def index
         ##################### Original Spree ##############################
@@ -34,7 +37,7 @@ module Spree
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
         @orders = @search.result.includes([:user, :shipments, :payments]).
             page(params[:page]).
-            per(params[:per_page] || Spree::Config[:orders_per_page])
+            per(per_page)
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
@@ -49,6 +52,16 @@ module Spree
             render :text => presenter.to_csv
           }
         end
+      end
+
+      private
+
+      def hide_line_items
+        params[:q][:hide_line_items].present?
+      end
+
+      def per_page
+        params[:per_page] || Spree::Config[:orders_per_page]
       end
     end
   end
