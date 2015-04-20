@@ -62,6 +62,14 @@ describe 'Seo Helpers' do
 
     end
 
+    context 'has @canonical set' do
+      before(:each) { @canonical = '/my-address?with_query=string' }
+
+      it 'generates canonical based on the @canonical instance variable' do
+        expect(get_canonical_href).to eq 'http://fameandpartners.test/my-address'
+      end
+    end
+
   end
 
 
