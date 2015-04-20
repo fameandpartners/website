@@ -48,4 +48,23 @@ describe 'Old Pages Redirection', type: :request do
       expect(response).to redirect_to("/")
     end
   end
+
+  context 'celebrities' do
+    describe 'redirects to /dresses' do
+      it "/celebrities" do
+        get "/celebrities"
+        expect(response).to redirect_to('/dresses')
+      end
+
+      it "/celebrities/blake-lively" do
+        get "/celebrities/blake-lively"
+        expect(response).to redirect_to('/dresses')
+      end
+
+      it "/featured-bloggers/cool-blogger" do
+        get "/featured-bloggers/cool-blogger"
+        expect(response).to redirect_to('/dresses')
+      end
+    end
+  end
 end

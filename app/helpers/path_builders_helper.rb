@@ -89,6 +89,7 @@ module PathBuildersHelper
     build_url(parts, options)
   end
 
+  # TODO - Remove legacy URL
   # /dresses/styleit-eva-456
   def style_it_path(product, options={})
     path_parts = [
@@ -146,51 +147,4 @@ module PathBuildersHelper
       collection_product_path(item.product)
     end
   end
-
-=begin
-  # methods below not used. candidates to comment/throw away
-  def make_url prefix, text
-    "/#{prefix.join('/')}/#{text.downcase.gsub(/\s/, "_")}"
-  end
-
-  # /au/collection/taxon
-  def collection_taxon_path(taxon)
-    if range_taxonomy && range_taxonomy.taxons.where(id: taxon.id).exists?
-      permalink = taxon.permalink.split('/').last
-      site_version_prefix = self.url_options[:site_version]
-      if site_version_prefix.present?
-        "/#{site_version_prefix}/collection/#{permalink}".gsub(/\/+/, '/')
-      else
-        "/collection/#{permalink}"
-      end
-    else
-      collection_path
-    end
-  end
-
-  # /au/dresses/custom-dress-eva-456?params
-  def personalize_path(product, options={})
-    site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses', "custom-#{descriptive_url(product)}" ]
-    path =  "/" + path_parts.compact.join('/')
-    path = "#{path}?#{options.to_param}" if options.present?    
-    
-    url_without_double_slashes(path)
-  end
-
-  def build_collection_taxon_path(collection, options = {})
-    build_collection_product_path(collection, nil, options)
-  end
-
-  def taxon_path(taxon)
-    site_version_prefix = self.url_options[:site_version]
-
-    if site_version_prefix.present?
-      result = "/#{site_version_prefix}/#{taxon.permalink}"
-    else
-      result = "/#{taxon.permalink}"
-    end
-    result.gsub(/\/+/, '/')
-  end
-=end
 end
