@@ -30,6 +30,11 @@ module CommonHelper
       product_path = collection_product_path(@product, :color => @product.default_color)
       href = "http://#{get_host}#{product_path}"
     end
+
+    if @canonical
+      href = "http://#{get_host}#{@canonical}"
+    end
+
     href.gsub(/\?.*/,'')
   end
 
