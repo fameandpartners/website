@@ -27,7 +27,7 @@ module Orders
         orders.map do |order|
           order.line_items.map do |line_item|
 
-            csv << line_item.as_report.keys unless headers_added
+            csv << line_item.headers unless headers_added
             headers_added = true
 
             begin
