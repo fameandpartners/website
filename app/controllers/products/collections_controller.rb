@@ -29,17 +29,19 @@
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
 
+  before_filter :set_collection_resource
+
   def show
     @filter = Products::CollectionFilter.read
 
-    @collection = collection_resource.read
+    @collection = @collection_resource.read
 
     # set title / meta description for page
     title(@collection.details.meta_title, default_seo_title)
     @description  = @collection.details.seo_description
 
     respond_to do |format|
-      format.html { }
+      format.html { render :show, status: @status }
       format.json do
         render json: @collection.serialize
       end
@@ -47,8 +49,13 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private
+    def set_collection_resource
+      collection_options = parse_permalink(params[:permalink])
+      @status = collection_options[:nothing] ? :not_found : :ok
+      @collection_resource = collection_resource(collection_options)
+    end
 
-    def collection_resource
+    def collection_resource(collection_options)
       resource_args = {
         site_version:   current_site_version,
         collection:     params[:collection],
@@ -60,7 +67,7 @@ class Products::CollectionsController < Products::BaseController
         order:          params[:order],
         limit:          params[:limit] || 20, # page size
         offset:         params[:offset] || 0
-      }.merge(parse_permalink(params[:permalink]))
+      }.merge(collection_options)
 
       Products::CollectionResource.new(resource_args)
     end
@@ -72,7 +79,7 @@ class Products::CollectionsController < Products::BaseController
     #   color.name
     #   etc
     def parse_permalink(permalink)
-      return {} if permalink.blank?
+      return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
       # is should have lower priority... but we have collection='pastel' and we have colors group pastel
       color_group = Repositories::ProductColors.get_group_by_name(permalink)
@@ -97,6 +104,6 @@ class Products::CollectionsController < Products::BaseController
       end
 
       # default
-      return {}
+      return { nothing: true }
     end
 end
