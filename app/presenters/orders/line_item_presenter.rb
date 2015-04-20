@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'forwardable'
 
 
@@ -80,6 +81,26 @@ module Orders
         :shipping_address        => order.shipping_address
       }
     end
+
+    def headers
+
+      cn_headers = {
+        order_number:            '(订单号码)',
+        completed_at:            '(订单日期)',
+        projected_delivery_date: '(要求出厂日期)',
+        style:                   '(款号)',
+        factory:                 '(工厂)',
+        color:                   '(颜色)',
+        size:                    '(尺寸)',
+        customisations:          '(特殊要求)',
+        customer_name:           '(客人名字)',
+        customer_phone_number:   '(客人电话)',
+        shipping_address:        '(客人地址)'
+      }
+
+      as_report.keys.collect { |k| "#{k} #{cn_headers[k]}" }
+    end
+
 
     private
 
