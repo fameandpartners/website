@@ -6,7 +6,7 @@ module CommonHelper
   end
 
   def get_meta_description
-    instance_variable_defined?("@description") ? @description : default_meta_description
+    @description
   end
 
   def get_hreflang(lang)

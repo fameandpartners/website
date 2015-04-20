@@ -34,6 +34,11 @@ class Products::CollectionsController < Products::BaseController
   def show
     @filter = Products::CollectionFilter.read
 
+    @collection = collection_resource.read
+
+    @title = "#{@collection.details.meta_title} #{default_seo_title}"
+    @description  = @collection.details.seo_description
+
     respond_to do |format|
       format.html { render :show, status: @status }
       format.json do
