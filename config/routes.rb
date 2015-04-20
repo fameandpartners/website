@@ -117,7 +117,13 @@ FameAndPartners::Application.routes.draw do
       get '/:permalink/style', to: 'redirects#products_show', as: :personalization_style_product, defaults: {style_dress: true}
     end
 
+
     get '/featured-bloggers/:id' => 'celebrities#show', as: 'featured_blogger'
+
+    get '/celebrities',           to: redirect('/dresses')
+    get '/celebrities/(:id)',     to: redirect('/dresses')
+    get '/featured-bloggers/:id', to: redirect('/dresses')
+
 
     resource :product_variants, only: [:show]
 
