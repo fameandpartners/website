@@ -29,18 +29,13 @@
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
 
-  before_filter :set_collection_resource
+  before_filter :set_collection_resource, :set_collection_seo_meta_data
 
   def show
     @filter = Products::CollectionFilter.read
 
-    # set title / meta description / HTTP status for the page
-    title(@collection.details.meta_title, default_seo_title)
-    @description = @collection.details.seo_description
-    status = @collection_options ? :ok : :not_found
-
     respond_to do |format|
-      format.html { render :show, status: status }
+      format.html { render :show, status: @status }
       format.json do
         render json: @collection.serialize
       end
@@ -51,6 +46,14 @@ class Products::CollectionsController < Products::BaseController
     def set_collection_resource
       @collection_options = parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
+    end
+
+    def set_collection_seo_meta_data
+      # set title / meta description / HTTP status / canonical for the page
+      title(@collection.details.meta_title, default_seo_title)
+      @description = @collection.details.seo_description
+      @status = @collection_options ? :ok : :not_found
+      @canonical = dresses_path if @status == :not_found
     end
 
     def collection_resource(collection_options)
