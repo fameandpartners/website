@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.21'
+gem 'rails', :github => 'rails/rails', :branch => '3-2-stable'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
@@ -10,7 +10,7 @@ gem 'createsend', '~> 2.5.0'
 gem 'sidekiq', '2.13.0'
 gem 'timers', '1.1.0'
 gem 'whenever'
-gem 'psych', '~> 1.3.4'
+gem 'psych', '~> 2.0.13'
 gem 'active_model_serializers'
 gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
 gem 'rack-cors'
@@ -94,6 +94,7 @@ group :development, :test do
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
   gem 'capybara'
+  gem 'compass'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
   gem 'launchy', '2.2.0'
@@ -109,8 +110,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.1'
   gem 'shoulda-matchers'
   gem 'spring'
+  gem 'test-unit'
   gem 'thin'
-  gem 'compass'
 end
 
 group :staging, :development do

@@ -39,6 +39,54 @@ GIT
       rails (>= 3.1, < 5.0)
 
 GIT
+  remote: git://github.com/rails/rails.git
+  revision: b344986bc3d94ca7821fc5e0eef1874882ac6cbb
+  branch: 3-2-stable
+  specs:
+    actionmailer (3.2.21)
+      actionpack (= 3.2.21)
+      mail (~> 2.5.4)
+    actionpack (3.2.21)
+      activemodel (= 3.2.21)
+      activesupport (= 3.2.21)
+      builder (~> 3.0.0)
+      erubis (~> 2.7.0)
+      journey (~> 1.0.4)
+      rack (~> 1.4.5)
+      rack-cache (~> 1.2)
+      rack-test (~> 0.6.1)
+      sprockets (~> 2.2.1)
+    activemodel (3.2.21)
+      activesupport (= 3.2.21)
+      builder (~> 3.0.0)
+    activerecord (3.2.21)
+      activemodel (= 3.2.21)
+      activesupport (= 3.2.21)
+      arel (~> 3.0.2)
+      tzinfo (~> 0.3.29)
+    activeresource (3.2.21)
+      activemodel (= 3.2.21)
+      activesupport (= 3.2.21)
+    activesupport (3.2.21)
+      i18n (~> 0.6, >= 0.6.4)
+      multi_json (~> 1.0)
+    rails (3.2.21)
+      actionmailer (= 3.2.21)
+      actionpack (= 3.2.21)
+      activerecord (= 3.2.21)
+      activeresource (= 3.2.21)
+      activesupport (= 3.2.21)
+      bundler (~> 1.0)
+      railties (= 3.2.21)
+    railties (3.2.21)
+      actionpack (= 3.2.21)
+      activesupport (= 3.2.21)
+      rack-ssl (~> 1.3.2)
+      rake (>= 0.8.7)
+      rdoc (~> 3.4)
+      thor (>= 0.14.6, < 2.0)
+
+GIT
   remote: git://github.com/spree/spree.git
   revision: 7d19c8933042cec667634c8cffedcbe6084abf1d
   branch: 1-3-stable
@@ -125,19 +173,6 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (3.2.21)
-      actionpack (= 3.2.21)
-      mail (~> 2.5.4)
-    actionpack (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-      builder (~> 3.0.0)
-      erubis (~> 2.7.0)
-      journey (~> 1.0.4)
-      rack (~> 1.4.5)
-      rack-cache (~> 1.2)
-      rack-test (~> 0.6.1)
-      sprockets (~> 2.2.1)
     active_model_serializers (0.9.3)
       activemodel (>= 3.2)
     activemerchant (1.48.0)
@@ -145,22 +180,8 @@ GEM
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
       nokogiri (~> 1.4)
-    activemodel (3.2.21)
-      activesupport (= 3.2.21)
-      builder (~> 3.0.0)
-    activerecord (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-      arel (~> 3.0.2)
-      tzinfo (~> 0.3.29)
     activerecord-immutable (0.0.3)
       activerecord (>= 3.2)
-    activeresource (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-    activesupport (3.2.21)
-      i18n (~> 0.6, >= 0.6.4)
-      multi_json (~> 1.0)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
     acts_as_list (0.1.4)
@@ -434,6 +455,7 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.5)
+    power_assert (0.2.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -443,7 +465,7 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    psych (1.3.4)
+    psych (2.0.13)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rabl (0.7.2)
@@ -457,21 +479,6 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (3.2.21)
-      actionmailer (= 3.2.21)
-      actionpack (= 3.2.21)
-      activerecord (= 3.2.21)
-      activeresource (= 3.2.21)
-      activesupport (= 3.2.21)
-      bundler (~> 1.0)
-      railties (= 3.2.21)
-    railties (3.2.21)
-      actionpack (= 3.2.21)
-      activesupport (= 3.2.21)
-      rack-ssl (~> 1.3.2)
-      rake (>= 0.8.7)
-      rdoc (~> 3.4)
-      thor (>= 0.14.6, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
     ransack (0.7.2)
@@ -597,6 +604,8 @@ GEM
     temple (0.7.5)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
+    test-unit (3.0.8)
+      power_assert
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -708,10 +717,10 @@ DEPENDENCIES
   pg
   pry-byebug
   pry-rails
-  psych (~> 1.3.4)
+  psych (~> 2.0.13)
   quiet_assets
   rack-cors
-  rails (= 3.2.21)
+  rails!
   redis-rails
   rmagick
   rollout
@@ -734,6 +743,7 @@ DEPENDENCIES
   spree_social!
   spring
   term-ansicolor
+  test-unit
   therubyracer
   thin
   timers (= 1.1.0)
