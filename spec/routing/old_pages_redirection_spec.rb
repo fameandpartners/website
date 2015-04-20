@@ -27,4 +27,10 @@ describe 'Old Pages Redirection', type: :request do
     it_will :redirect, '/celebrities/blake-lively',       '/dresses'
     it_will :redirect, '/featured-bloggers/cool-blogger', '/dresses'
   end
+
+  context 'old collection landing pages' do
+    it_will :redirect, '/lp/collection/random_dresses', '/dresses'
+    it_will :redirect, '/lp/collection/',               '/dresses'
+    it_will :redirect, '/lp/collection',                '/dresses'
+  end
 end
