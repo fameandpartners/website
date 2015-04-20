@@ -1,0 +1,76 @@
+.orders-filter[data-hook="admin_orders_index_search"]
+  = search_form_for [:admin, @search] do |f|
+    .field-block.alpha.four.columns
+      .field.date-range-filter
+        = label_tag nil, t(:date_range)
+        .date-range-fields
+          = f.text_field :created_at_gt, :class => 'datepicker datepicker-from', :value => params[:q][:created_at_gt], :placeholder => t(:start)
+          span.range-divider
+            i.icon-arrow-right
+          = f.text_field :created_at_lt, :class => 'datepicker datepicker-to', :value => params[:q][:created_at_lt], :placeholder => t(:stop)
+
+
+    .six.columns
+      .field
+        = label_tag nil, t(:email)
+        = f.email_field :email_cont
+      .field
+        = label_tag nil, t(:order_number)
+        = f.text_field :number_cont
+
+    .omega.six.columns
+      .field
+        = label_tag nil, t(:first_name_begins_with)
+        = f.text_field :bill_address_firstname_start, :size => 25
+      .field
+        = label_tag nil, t(:last_name_begins_with)
+        = f.text_field :bill_address_lastname_start, :size => 25
+
+    .alpha.four.columns
+      .field
+        = label_tag nil, t(:order_status)
+        = f.select :state_eq, Spree::Order.state_machines[:state].states.collect { |s| [t("order_state.#{s.name}"), s.value] }, {:include_blank => true}, :class => 'select2'
+    .four.columns
+      .field
+        = label_tag nil, t(:payment_status)
+        = f.select :payment_state_eq, %w[failed balance_due credit_owed paid], {:include_blank => true}, :class => 'select2'
+    .four.columns
+      .field
+        - sorry = "HUH? The Order and it's Shipments can each be in a DIFFERENT STATE! Sorry"
+        = label_tag nil, t(:order_shipment_state)
+        abbr title="#{sorry}" ?
+        = f.select :shipment_state_eq, Spree::Order.select(:shipment_state).uniq.pluck(:shipment_state).compact.collect { |s| [t("shipment_states.#{s}"), s] }, {:include_blank => true}, :class => 'select2'
+    .omega.four.columns
+      .field
+        = label_tag nil, t(:shipments_status)
+        abbr title="#{sorry}" ?
+        = f.select :shipments_state_eq, Spree::Shipment.state_machines[:state].states.collect { |s| [t("shipment_states.#{s.name}"), s.value] }, {:include_blank => true}, :class => 'select2'
+
+    .alpha.four.columns
+      .field.checkbox
+        label
+          = f.check_box :inventory_units_shipment_id_null, {}, '1', '0'
+          '
+          = t(:show_only_unfulfilled_orders)
+    .four.columns
+      .field.checkbox
+        label
+          = f.check_box :completed_at_not_null, {:checked => @show_only_completed}, '1', ''
+          '
+          = t(:show_only_complete_orders)
+    .four.columns
+      .field.checkbox
+        label
+          = f.check_box :hide_line_items, {:checked => hide_line_items }, 'true', ''
+          '
+          = t(:hide_line_items)
+    .omega.four.columns
+      .field
+        = label_tag nil, t(:orders_per_page)
+        = select_tag :per_page, options_for_select(%w(15 50 100 300), per_page), :class => 'select2'
+
+    .clearfix
+    .actions.filter-actions
+      div[data-hook="admin_orders_index_search_buttons"]
+        = button t(:filter_results), 'icon-search'
+        = button t(:export_as_csv), 'export-as-csv'

@@ -112,9 +112,9 @@ FameAndPartners::Application.routes.draw do
     # Custom Dresses
     get '/custom-dresses(/*whatever)',  to: redirect('/dresses')
 
-    get '/celebrities',  to: redirect('/dresses')
-    get '/celebrities/:id' => 'celebrities#show', as: 'celebrity', defaults: { lp: 'celebrity' }
-    get '/featured-bloggers/:id' => 'celebrities#show', as: 'featured_blogger'
+    get '/celebrities',           to: redirect('/dresses')
+    get '/celebrities/(:id)',     to: redirect('/dresses')
+    get '/featured-bloggers/:id', to: redirect('/dresses')
 
     resource :product_variants, only: [:show]
 

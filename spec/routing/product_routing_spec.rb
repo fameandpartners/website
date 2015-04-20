@@ -11,6 +11,15 @@ describe 'Product Routes', type: :routing do
   }
 
   it { expect(:get => "/au/dresses/dress-first-in-line-467/white").to route_to(product_show_routing) }
+
+    it 'permalink based colleciton routing' do
+    expect(:get => "/au/dresses/evening").to route_to("controller"   => "products/collections",
+                                                      "action"       => "show",
+                                                      "site_version" => "au",
+                                                      "permalink"    => "evening")
+
+  end
+
 end
 
 describe 'Product Redirection', type: :request do
@@ -47,45 +56,5 @@ describe 'Product Redirection', type: :request do
   it 'redirects old /plus-size page to all dresses' do
     get "/plus-size "
     expect(response).to redirect_to("/dresses")
-  end
-
-  it 'redirects old /how-it-works page to all /why-us' do
-    get "/how-it-works"
-    expect(response).to redirect_to("/why-us")
-  end
-
-  it 'redirects old fashionista2014 page to root' do
-    get "/fashionista2014"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /dani-stahl page to root' do
-    get "/dani-stahl"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /fashionitgirl2015-terms-and-conditions page to root' do
-    get "/fashionitgirl2015-terms-and-conditions"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /nyfw-comp-terms-and-conditions page to root' do
-    get "/nyfw-comp-terms-and-conditions"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /fashionitgirl2015-competition page to root' do
-    get "/fashionitgirl2015-competition"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /fame2015 page to root' do
-    get "/fame2015"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /bloggers/liz-black page to root' do
-    get "/bloggers/liz-black"
-    expect(response).to redirect_to("/")
   end
 end
