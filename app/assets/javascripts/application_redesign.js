@@ -59,9 +59,7 @@
 //= require partials/shopping_bag
 //= require partials/shopping_cart_summary
 
-//= require partials/checkout/page
-//= require partials/checkout/address
-//= require partials/checkout/payment
+//= require partials/checkout_page
 
 // Profile/Account Settings
 //= require partials/account_settings_page

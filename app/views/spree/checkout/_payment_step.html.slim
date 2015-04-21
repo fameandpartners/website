@@ -9,28 +9,8 @@
       - else
         = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
 
-  - if @credit_card_gateway.present?
-    ruby:
-      gateway_options = {}
-      if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
-        gateway_type = 'pin'
-        gateway_options = { key: @credit_card_gateway.options[:publishable_key] }
-      elsif @credit_card_gateway.is_a?(Spree::Gateway::NabTransactGateway)
-        gateway_type = 'nab'
-      else
-        gateway_type = null
-      end
-      gateway_options ||= {}
-      init_checkout_payment_form = "
-        checkout.payment_step.init({
-          bill_address: bill_address,
-          gateway_type: '#{ gateway_type }',
-          gateway_options: #{raw gateway_options.to_json}
-        });
-      "
     - content_for :inline_javascript do
-      | var bill_address = #{raw ::AddressSerializer.new(current_order.bill_address).to_json };
-      = raw init_checkout_payment_form
+      | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
 
   h2.checkout-section-title Payment Details
   / br
