@@ -42,7 +42,11 @@ window.style.Quiz = class StyleQuiz
     $chart = @container.find('.chart')
     $frame = $frames.first()
     $frame.addClass('current')
-    @container.find('.film').css('width', $frame.width() * $frames.size())
+    console.log $frames.size()
+    console.log $frame.outerWidth()
+    console.log @stepsBox.width()
+    console.log $frame.width() * $frames.size()
+    @container.find('.film').css('width', @stepsBox.width() * $frames.size())
 
     @steps().width(@stepsBox.width())
     @steps().find('.photos').find('.item').width((@stepsBox.width() / @masonryItemsInLine) - @masonryGutter)
