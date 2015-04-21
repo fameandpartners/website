@@ -20,6 +20,9 @@ module Overrides
           indexes :description, :analyzer => :snowball
           indexes :price, :type => :float, :as => 'price_for_search'
 
+          indexes :discount, :type => :integer, as: 'discount.try(:amount).to_i'
+          indexes :on_sale,  :type => :boolean, as: 'discount.try(:amount).to_i > 0'
+
           indexes :available_on, :type => :date, :include_in_all => false
           indexes :deleted, :index => :not_analyzed, :as => 'deleted_at.present?'
           indexes :in_stock, :type => :boolean, :as => 'has_stock?'
@@ -127,6 +130,7 @@ module Overrides
           query = Tire.search(configatron.elasticsearch.indices.spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => { :term => { :deleted => false } }
             filter :bool, :must => { :term => { :hidden => false } }
+            filter :bool, :must => { :term => { :on_sale => false } }
 
             filter :exists, :field => :available_on
 
@@ -202,6 +206,7 @@ module Overrides
           query = Tire.search(configatron.elasticsearch.indices.spree_products, :page => 1, :load => { :include => :master }) do
             filter :bool, :must => { :term => { :deleted => false } }
             filter :bool, :must => { :term => { :hidden => false } }
+            filter :bool, :must => { :term => { :on_sale => false } }
 
             filter :exists, :field => :available_on
 
