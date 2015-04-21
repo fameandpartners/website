@@ -7,7 +7,6 @@ module Spree
     attr_accessible :preferred_login, :preferred_password, :preferred_currency
 
     def purchase(money, creditcard, gateway_options)
-      money = money.round(-2) if Rails.env.development?
       provider.purchase(money, creditcard, gateway_options)
     end
 
