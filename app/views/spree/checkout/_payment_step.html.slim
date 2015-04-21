@@ -1,7 +1,5 @@
-- if !current_step.eql?('payment')
-  h2.checkout-section-title Payment Details
-  / br
-- else
+h2.checkout-section-title Payment Details
+- if current_step.eql?('payment')
   - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
     - content_for :head do
       - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
@@ -12,8 +10,6 @@
     - content_for :inline_javascript do
       | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
 
-  h2.checkout-section-title Payment Details
-  / br
   .form-group
     .row
       - if @credit_card_gateway
