@@ -161,20 +161,30 @@ page.initCheckoutEditPage = () ->
 
     updateStatesVisibility: (country_field_id, states_field_id, states_text_field_id) ->
       country_id = $(country_field_id).val()
-      $(states_field_id).find("option[data-country]").hide()
-      if $(states_field_id).find("option[data-country=#{ country_id }]").length == 0
-        # show input
-        $(states_field_id).addClass('hidden').removeClass('required').prop('disabled', true)
+      states_required = $(country_field_id).find("option[value=#{country_id}]").data('states-required')
+
+      if !states_required
+        $(states_field_id).removeClass('required').prop('disabled', true)
+        $(states_text_field_id).removeClass('required').prop('disabled', true)
+        $(states_field_id).closest('.form-group').addClass('hidden')
+      else if $(states_field_id).find("option[data-country=#{ country_id }]").length == 0
+        $(states_field_id).closest('.form-group').removeClass('hidden')
+        # show text input
+        $(states_field_id).removeClass('required').prop('disabled', true).closest('span').addClass('hidden')
         $(states_text_field_id).addClass('required').removeClass('hidden').prop('disabled', false)
       else
-        $(states_text_field_id).addClass('hidden').removeClass('required').prop('disabled', true)
+        $(states_field_id).closest('.form-group').removeClass('hidden')
+        $(states_text_field_id).removeClass('required').addClass('hidden').prop('disabled', true)
         # show available states
-        $(states_field_id).addClass('required').removeClass('hidden').prop('disabled', false)
+        $(states_field_id).find("option[data-country]").hide()
         $(states_field_id).find("option[data-country=#{ country_id }]").show()
+        $(states_field_id).addClass('required').prop('disabled', false).closest('span').removeClass('hidden')
 
         # if currently select option not available for selected country, reset
         if !country_id || $(states_field_id).find('option:selected').data('country') != parseInt(country_id)
           $(states_field_id).val('')
+
+        $(states_field_id).trigger('chosen:updated')
 
     openLoginPopup: (e) ->
       if window.popups && window.popups.LoginPopup()
