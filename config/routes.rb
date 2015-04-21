@@ -420,7 +420,7 @@ FameAndPartners::Application.routes.draw do
     match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
     # seo routes like *COLOR*-Dress
-    get "(:colour)-Dresses" => 'products/collections#show', as: :colour_formal_dresses
+    get "(:colour)-Dresses" => redirect('/dresses/%{colour}')
 
     # seo route
     get "new-collection" => "products/collections#show", as: :new_collection
