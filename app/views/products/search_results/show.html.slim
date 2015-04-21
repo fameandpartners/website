@@ -22,8 +22,7 @@ ruby:
   .container
     .page-title--details
       - if results.any?
-        h1.no-padding-bottom Hey!
-        p We found the stuff you were looking for.
+        h1.no-padding-bottom Results for "#{params[:q]}"
       - else
         h1.no-padding-bottom Sorry
         p We couldn't find the stuff you were looking for.
