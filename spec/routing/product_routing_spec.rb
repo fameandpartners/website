@@ -11,81 +11,43 @@ describe 'Product Routes', type: :routing do
   }
 
   it { expect(:get => "/au/dresses/dress-first-in-line-467/white").to route_to(product_show_routing) }
+
+    it 'permalink based colleciton routing' do
+    expect(:get => "/au/dresses/evening").to route_to("controller"   => "products/collections",
+                                                      "action"       => "show",
+                                                      "site_version" => "au",
+                                                      "permalink"    => "evening")
+
+  end
+
 end
 
 describe 'Product Redirection', type: :request do
-  it 'redirects old customisation pages to main product page' do
-    get "/au/dresses/custom-first-in-line-467/white"
-    expect(response).to redirect_to("/au/dresses/dress-first-in-line-467/white")
+
+  context 'customisation pages' do
+    it_will :redirect,
+            "/au/dresses/custom-first-in-line-467/white",
+            "/au/dresses/dress-first-in-line-467/white"
   end
 
-  it 'redirects old accessory pages to main product page' do
-    get "/au/dresses/styleit-first-in-line-467/white"
-    expect(response).to redirect_to("/au/dresses/dress-first-in-line-467/white")
+  context 'accessory pages' do
+    it_will :redirect,
+            "/au/dresses/styleit-first-in-line-467/white",
+            "/au/dresses/dress-first-in-line-467/white"
   end
 
-  it 'redirects old dresses/colour pages to main dresses' do
-    get "dresses/color"
-    expect(response).to redirect_to("/dresses")
+  context 'old taxon urls' do
+    it_will :redirect, "dresses/color", "/dresses"
+    it_will :redirect, "dresses/event", "/dresses"
+    it_will :redirect, "dresses/style", "/dresses"
   end
 
-  it 'redirects old dresses/events page to all dresses' do
-    get "dresses/event"
-    expect(response).to redirect_to("/dresses")
+  context 'colour pages' do
+    it_will :redirect, '/dresses/colour/footpath_grey', '/dresses?colour=footpath_grey'
+    it_will :redirect, '/dresses/color/sidewalk_gray',  '/dresses?color=sidewalk_gray'
   end
 
-  it 'redirects old dresses/style page to all dresses' do
-    get "dresses/style"
-    expect(response).to redirect_to("/dresses")
-  end
-
-  it 'redirects old /celebrities page to all dresses' do
-    get "/celebrities "
-    expect(response).to redirect_to("/dresses")
-  end
-
-  it 'redirects old /plus-size page to all dresses' do
-    get "/plus-size "
-    expect(response).to redirect_to("/dresses")
-  end
-
-  it 'redirects old /how-it-works page to all /why-us' do
-    get "/how-it-works"
-    expect(response).to redirect_to("/why-us")
-  end
-
-  it 'redirects old fashionista2014 page to root' do
-    get "/fashionista2014"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /dani-stahl page to root' do
-    get "/dani-stahl"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /fashionitgirl2015-terms-and-conditions page to root' do
-    get "/fashionitgirl2015-terms-and-conditions"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /nyfw-comp-terms-and-conditions page to root' do
-    get "/nyfw-comp-terms-and-conditions"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /fashionitgirl2015-competition page to root' do
-    get "/fashionitgirl2015-competition"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /fame2015 page to root' do
-    get "/fame2015"
-    expect(response).to redirect_to("/")
-  end
-
-  it 'redirects old /bloggers/liz-black page to root' do
-    get "/bloggers/liz-black"
-    expect(response).to redirect_to("/")
+  context 'plus-size' do
+    it_will :redirect, "/plus-size", '/dresses'
   end
 end

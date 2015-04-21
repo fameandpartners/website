@@ -12,8 +12,6 @@ class UpdateFabrication
   private
 
   def self.find_or_create_fabrication(line_item_id)
-    (
-      Spree::LineItem.find(line_item_id) || FabricationEvent.creation.create!(line_item_id: line_item_id)
-    ).fabrication
+    Spree::LineItem.find(line_item_id).fabrication || FabricationEvent.creation.create!(line_item_id: line_item_id).fabrication
   end
 end

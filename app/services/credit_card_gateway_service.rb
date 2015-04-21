@@ -1,19 +1,14 @@
 class CreditCardGatewayService
 
-  attr_reader :order, :currency, :user
+  attr_reader :order, :currency
 
-  def initialize(order, currency, user = nil)
+  def initialize(order, currency)
     @order = order
     @currency = currency
-    @user = user
   end
 
   def gateway
-    if Features.active?(:usd_payment_gateway, user)
-      @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') && method.currency == currency }
-    else
-      @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') && method.currency == 'AUD'}
-    end
+    @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') && method.currency == currency }
   end
 
 end

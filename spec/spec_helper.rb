@@ -30,6 +30,9 @@ end
 RSpec.configure do |config|
   config.include(FactoryGirl::Syntax::Methods)
   config.include(Rails.application.routes.url_helpers)
+
+  config.alias_it_should_behave_like_to :it_will, 'it will'
+
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
