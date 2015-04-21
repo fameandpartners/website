@@ -36,9 +36,6 @@ class Products::CollectionsController < Products::BaseController
 
     @collection = collection_resource.read
 
-    @title = "#{@collection.details.meta_title} #{default_seo_title}"
-    @description  = @collection.details.seo_description
-
     respond_to do |format|
       format.html { render :show, status: @status }
       format.json do
@@ -55,8 +52,8 @@ class Products::CollectionsController < Products::BaseController
 
     def set_collection_seo_meta_data
       # set title / meta description / HTTP status / canonical for the page
-      title(@collection.details.meta_title, default_seo_title)
-      @description = @collection.details.seo_description
+      @title = "#{@collection.details.meta_title} #{default_seo_title}"
+      @description  = @collection.details.seo_description
       @status = @collection_options ? :ok : :not_found
       @canonical = dresses_path if @status == :not_found
     end
