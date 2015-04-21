@@ -80,11 +80,12 @@ span.visible-on-phone, em.visible-on-phone {
     filter: alpha(opacity=0);
   }
   .quiz-box-inner {
-    height: 680px;
-    padding: 22px 20px 85px;
+    height: 690px;
+    padding: 22px 20px 65px;
     position: relative;
     @include box-sizing(border-box);
     @media #{$tablet-mini} {
+      padding-top: 10px;
       padding-left: 10px;
       padding-right: 10px;
     }
@@ -334,6 +335,10 @@ span.visible-on-phone, em.visible-on-phone {
       line-height: 35px;
       white-space: nowrap;
       text-align: center;
+      @media #{$tablet-mini} {
+        left: 10px;
+        width: 70px;
+      }
       @media #{$phone} {
         display: none;
       }
@@ -343,15 +348,19 @@ span.visible-on-phone, em.visible-on-phone {
       text-align: center;
       padding: 4px 85px 0;
       margin: 0px;
-      em { 
-        text-transform: none;
-        display: block;
-        font-family: $fontTwo;
+      @media #{$tablet-mini} {
+        padding-left: 70px;
+        padding-right: 70px;
       }
       @media #{$phone} {
         padding-left: 0;
         padding-right: 0;
         font-size: 25px;
+      }
+      em { 
+        text-transform: none;
+        display: block;
+        font-family: $fontTwo;
       }
     }
     .subtitle {
@@ -523,6 +532,7 @@ span.visible-on-phone, em.visible-on-phone {
     }
     .choices {
       font-size: 0;
+      padding-bottom: 20px;
       @media #{$phone} { text-align: center;}
       .item {
         display: inline-block;
@@ -740,7 +750,7 @@ span.visible-on-phone, em.visible-on-phone {
       bottom: 20px;
       left: 20px;
       right: 20px;
-      @media #{$phone} {
+      @media #{$tablet-mini} {
         left: 0;
         right: 0;
       }
@@ -1780,7 +1790,7 @@ $quiz-result-gutter-sm: 10px;
   @media #{$tablet} {
     margin-bottom: $quiz-result-gutter-sm;
   }
-  @media #{$tablet} {
+  @media #{$phone} {
     height: 50px;
   }
   .logo {
