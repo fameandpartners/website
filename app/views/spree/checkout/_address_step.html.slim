@@ -1,12 +1,5 @@
-ruby:
-  init_checkout_address_form = "
-    checkout.address_step.init({
-      option_name: 'option_value'
-    });
-  "
-
 - content_for :inline_javascript do
-  = raw init_checkout_address_form
+  | window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
 
 - if current_step.eql?('address')
   - if not signed_in?  
@@ -14,7 +7,7 @@ ruby:
     / br
     .row
       .col-md-6.form-group
-        = link_to 'log in', login_path(return_to: spree.checkout_path), class: 'btn btn-block btn-black btn-md open-login-popup'
+        = link_to 'log in', login_path, class: 'btn btn-block btn-black btn-md open-login-popup'
       .col-md-6.form-group
         = link_to 'Sign in with Facebook', fb_auth_path(return_to: 'checkout'), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
 
