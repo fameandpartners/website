@@ -49,7 +49,7 @@ describe Products::CollectionsController, :type => :controller do
         it 'has the @title and @description' do
           controller.send(:set_collection_seo_meta_data)
 
-          expect(controller.instance_variable_get(:@title)).to eq('My Title | - Fame & Partners')
+          expect(controller.instance_variable_get(:@title)).to include('My Title')
           expect(controller.instance_variable_get(:@description)).to eq('My Description')
         end
 
