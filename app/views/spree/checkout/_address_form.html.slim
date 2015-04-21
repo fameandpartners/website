@@ -10,18 +10,16 @@ ruby:
     # copied from instance_tag#tag_id helper method
     sanitized_object_name = form.object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")
     field_id = "#{ sanitized_object_name }_state_id"
+    state_text_field_id = "#{ sanitized_object_name }_state_name"
+    country_field_id = "#{ sanitized_object_name }_country_id"
 
-    initStatesChange = "
-      checkout.address_step.initStatesChange({
-        field_id:     '##{ field_id }',
-        field_value:  '#{ address.state_id }',
-        country_field_id: '##{ sanitized_object_name}_country_id',
-        states_text_field_id: '##{ sanitized_object_name }_state_name'
-      });
-    "
+  = content_for :inline_javascript do
+    | $('##{ field_id }').val('#{ address.state_id }');
+    | checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
 
-  - content_for :inline_javascript do
-    = raw initStatesChange
+    | $('##{ country_field_id }').on('change', function() {
+    |   checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
+    | });
 
 .row
   .col-md-6.form-group
@@ -69,9 +67,8 @@ ruby:
         option selected=(address.state_id == state.id) style=(state.country_id == address.country_id ? '' : 'display: none;') value=(state.id) data-country=(state.country_id) = state.name
 
     = form.text_field(:state_name,
-      :class => (!have_states ? 'required  form-control form-control-md' : 'hidden  form-control form-control-md'),
-      :disabled => have_states,
-      :placeholder => 'state name')
+                      :class => !have_states ? 'required  form-control form-control-md' : 'hidden  form-control form-control-md',
+                      :disabled => have_states)
 
 .row
   .col-md-6.form-group
