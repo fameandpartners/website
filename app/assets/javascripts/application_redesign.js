@@ -11,7 +11,7 @@
 //= require libs/snap.svg-min.js
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
-//= require libs/jquery.chosen.min
+//= require libs/jquery.chosen
 //= require libs/soundcloud/sc-player
 //= require libs/jquery.hoverable.js
 //= require libs/superslides.js
