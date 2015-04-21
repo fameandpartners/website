@@ -635,8 +635,10 @@ span.visible-on-phone, em.visible-on-phone {
       }
     }
     .chart-wrapper {
-      @media #{$phone} {
-        overflow-y: scroll; 
+      overflow-y: hidden;
+      width: 100%;
+      @media #{$tablet-mini} {
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }
     }
@@ -1541,8 +1543,8 @@ span.visible-on-phone, em.visible-on-phone {
   &.heir {
     .selected {
       background: url('_quiz/choice-type-3.png') no-repeat 115% center;
-      background-size: cover;
       @media #{$phone} {
+        background-size: cover;
         background-position: 0% center;
       }
     }
@@ -1550,7 +1552,9 @@ span.visible-on-phone, em.visible-on-phone {
   &.body-colour {
     .selected {
       background: url('_quiz/choice-type-2.png') no-repeat center center;
-      background-size: cover;
+      @media #{$phone} {
+        background-size: cover;
+      }
     }
   }
   li {
