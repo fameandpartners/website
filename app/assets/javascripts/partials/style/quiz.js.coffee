@@ -42,10 +42,6 @@ window.style.Quiz = class StyleQuiz
     $chart = @container.find('.chart')
     $frame = $frames.first()
     $frame.addClass('current')
-    console.log $frames.size()
-    console.log $frame.outerWidth()
-    console.log @stepsBox.width()
-    console.log $frame.width() * $frames.size()
     @container.find('.film').css('width', @stepsBox.width() * $frames.size())
 
     @steps().width(@stepsBox.width())
