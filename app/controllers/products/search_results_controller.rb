@@ -6,7 +6,7 @@ class Products::SearchResultsController < Products::BaseController
 
 
   def show
-    title('Search', default_seo_title)
+    title("Search results for \"#{params[:q]}\"", default_seo_title)
 
     @results = if search_performed?
        Products::CollectionResource.new({
