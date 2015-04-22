@@ -1,42 +1,31 @@
-class Policies::CustomerServiceAbility
-
+class CustomerServiceAbility
   include CanCan::Ability
-
-  # can [:admin, :manage, :edit, :index, :show, :destroy, :create, :update, :new], Spree::Order
-  # can [:admin, :manage, :edit, :index, :show, :destroy, :create, :update, :new], Spree::Shipment
 
   def initialize(user)
     user ||= Spree::User.new
-    if user.has_spree_role?('Customer Service')
+    if user.has_spree_role?('customer_service')
       can :admin, Spree::Order
       can :manage, Spree::Order
       can :index, Spree::Order
       can :read, Spree::Order
       can :show, Spree::Order
-      can :new, Spree::Order
-      can :create, Spree::Order
-      can :edit, Spree::Order
-      can :update, Spree::Order
-      can :destroy, Spree::Order
+      cannot :new, Spree::Order
+      cannot :create, Spree::Order
+      cannot :edit, Spree::Order
+      cannot :update, Spree::Order
+      cannot :destroy, Spree::Order
 
       can :admin, Spree::Shipment
       can :manage, Spree::Shipment
       can :index, Spree::Shipment
       can :read, Spree::Shipment
       can :show, Spree::Shipment
-      can :new, Spree::Shipment
-      can :create, Spree::Shipment
-      can :edit, Spree::Shipment
-      can :update, Spree::Shipment
-      can :destroy, Spree::Shipment
+      cannot :new, Spree::Shipment
+      cannot :create, Spree::Shipment
+      cannot :edit, Spree::Shipment
+      cannot :update, Spree::Shipment
+      cannot :destroy, Spree::Shipment
 
-      can :admin, Spree::LineItem
-      can :update, Spree::LineItem
-
-      can :index, Spree::User
-      can :read, Spree::User
-      can :show, Spree::User
     end
   end
-
 end
