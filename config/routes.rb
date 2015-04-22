@@ -7,6 +7,12 @@ FameAndPartners::Application.routes.draw do
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
 
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+    devise_for :user, class_name: Spree::User, skip: [:unlocks, :registrations, :passwords, :sessions, :omniauth_callbacks] do
+      get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
+    end
+  end
+
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
