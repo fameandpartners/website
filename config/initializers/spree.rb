@@ -55,6 +55,7 @@ Spree.config do |config|
   end
 end
 
+Spree::Ability.register_ability(OrderProcessingAbility)
 Spree::Ability.register_ability(CustomerServiceAbility)
 Spree::Ability.register_ability(Blog::Ability)
 
