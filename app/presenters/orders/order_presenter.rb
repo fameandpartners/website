@@ -7,20 +7,21 @@ module Orders
 
     def_delegators :@order, :customer_notes, :number, :completed_at
 
-    attr_reader :order
+    attr_reader :order, :items
 
-    def initialize(order)
+    def initialize(order, items)
       @order = order
+      @items = items
     end
 
     alias_method :customer_notes?, :customer_notes
 
     def line_items
-      order.line_items.collect { |i| LineItemPresenter.new(i, self) }
+      items.collect { |i| LineItemPresenter.new(i, self) }
     end
 
     def total_items
-      order.line_items.sum &:quantity
+      items.sum &:quantity
     end
 
     def country_code
