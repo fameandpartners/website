@@ -1,10 +1,12 @@
-class CustomerServiceAbility
+class Policies::CustomerServiceAbility
+
   include CanCan::Ability
 
   # can [:admin, :manage, :edit, :index, :show, :destroy, :create, :update, :new], Spree::Order
   # can [:admin, :manage, :edit, :index, :show, :destroy, :create, :update, :new], Spree::Shipment
 
   def initialize(user)
+    user ||= Spree::User.new
     if user.has_spree_role?('Customer Service')
       can :admin, Spree::Order
       can :manage, Spree::Order
