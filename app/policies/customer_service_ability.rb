@@ -28,9 +28,12 @@ class CustomerServiceAbility
       can :update, Spree::Shipment
       can :destroy, Spree::Shipment
 
-      can :index, Spree.user_class
-      can :read, Spree.user_class
-      can :show, Spree.user_class
+      can :admin, Spree::LineItem
+      can :update, Spree::LineItem
+
+      can :index, Spree::User
+      can :read, Spree::User
+      can :show, Spree::User
     end
   end
 
