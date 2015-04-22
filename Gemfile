@@ -85,7 +85,7 @@ group :assets do
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
   gem 'bootstrap-sass'
-  gem 'font-awesome-sass'
+  gem 'font-awesome-sass', '~> 4.3.0'
 end
 
 group :development, :test do
@@ -108,8 +108,6 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'thin', '1.5.1'
-  gem 'compass'
-
 end
 
 group :staging, :development do
