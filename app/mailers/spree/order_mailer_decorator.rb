@@ -25,14 +25,14 @@ Spree::OrderMailer.class_eval do
     mail(to: to, from: from, subject: subject)
   end
 
-  def production_order_email(order)
+  def production_order_email(order, factory, items)
     find_order(order)
 
     to = configatron.order_production_emails
     from = configatron.noreply
-    subject = "Order Confirmation (订单号码）##{@order.number}"
+    subject = "Order Confirmation (订单号码）(#{factory}) ##{@order.number}"
 
-    @order = Orders::OrderPresenter.new(@order)
+    @order = Orders::OrderPresenter.new(@order, items)
 
     mail(to: to, from: from, subject: subject)
   end
