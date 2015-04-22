@@ -51,16 +51,16 @@ Spree.config do |config|
     config.use_s3 = false
 
     config.attachment_url = '/spree/products/:id/:style/:basename.:extension'
-    config.attachment_path = ':rails_root/public/spree/products/:id/:style/:basename.:extension'    
+    config.attachment_path = ':rails_root/public/spree/products/:id/:style/:basename.:extension'
   end
 end
 
+Spree::Ability.register_ability(CustomerServiceAbility)
+Spree::Ability.register_ability(Blog::Ability)
+
 Devise::RegistrationsController.layout "redesign/application"
 
-
 Spree.user_class = "Spree::User"
-
-Spree::Ability.register_ability(Blog::Ability)
 
 Spree::SocialConfig[:path_prefix] = 'user'
 
