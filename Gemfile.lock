@@ -666,7 +666,7 @@ DEPENDENCIES
   event_sourced_record
   execjs (= 1.4.0)
   factory_girl_rails (= 4.2.1)
-  font-awesome-sass
+  font-awesome-sass (~> 4.3.0)
   geoip
   google_drive (= 1.0.0)
   instagram

@@ -28,9 +28,9 @@ h2.checkout-section-title Payment Details
         .col-sm-4.text-center = paypal_express_button
 
   - if @credit_card_gateway
-
     = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
       = render 'shared/error_messages', :target => @order, :view => "payment"
 
       = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
       = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
+    = image_tag 'checkout/payment_options_logos.png'
