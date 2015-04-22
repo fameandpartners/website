@@ -9,9 +9,9 @@ module Orders
 
     attr_reader :order, :items
 
-    def initialize(order, items)
+    def initialize(order, items = nil)
       @order = order
-      @items = items
+      @items = items || order.line_items
     end
 
     alias_method :customer_notes?, :customer_notes
