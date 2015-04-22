@@ -37,5 +37,7 @@ describe 'Old Pages Redirection', type: :request do
   context 'dresses' do
     it_will :redirect, '/black-Dresses', '/dresses/black'
     it_will :redirect, '/anything-Dresses', '/dresses/anything'
+
+    it_will :redirect, '/dresses/dress-my-dress-slug/blank', '/dresses/dress-my-dress-slug?color=blank'
   end
 end

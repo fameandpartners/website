@@ -14,8 +14,8 @@ class Products::DetailsController < Products::BaseController
     end
 
     # set preselected images colors
-    if params[:color_name]
-      color = Repositories::ProductColors.get_by_name(params[:color_name])
+    if params[:color]
+      color = Repositories::ProductColors.get_by_name(params[:color])
     else
       # select images of one/default color
       color = @product.available_options.colors.default.first

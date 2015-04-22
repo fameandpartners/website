@@ -86,8 +86,10 @@ FameAndPartners::Application.routes.draw do
       get '/custom-:product_slug(/:color_name)',  to: redirect(product_style_custom_redirect)
       get '/styleit-:product_slug(/:color_name)', to: redirect(product_style_custom_redirect)
 
+      # Colors should behave like query strings, and not paths
+      get '/dress-:product_slug/:color_name' => redirect('/dresses/dress-%{product_slug}?color=%{color_name}')
+      get '/dress-:product_slug' => 'products/details#show'
 
-      get '/dress-:product_slug(/:color_name)' => 'products/details#show'
       #roots categories
       get '/style',  to: redirect('/dresses')
       get '/event',  to: redirect('/dresses')
