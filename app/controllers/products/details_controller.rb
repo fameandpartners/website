@@ -28,9 +28,8 @@ class Products::DetailsController < Products::BaseController
     # set page title.
     # Drop anything after the first period(.) and newline
     short_description = @product.short_description.gsub(/\.\W+.*\z/, ' - ')
-    prefix = [short_description, @product.color.try(:presentation), @product.name].compact.join(' ')
-    title( [prefix, default_seo_title].compact.join(' '))
-    description([@product.short_description, default_meta_description].compact.join(' '))
+    @title = "#{@product.name} #{default_seo_title}"
+    @description = @product.short_description
   end
 
 end

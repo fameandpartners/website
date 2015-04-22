@@ -7,9 +7,7 @@ page.initCheckoutEditPage = () ->
       $(document).on('change',  '#order_use_billing', page.updateShippingFormVisibility)
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
       $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
-      $(document).on('click',   '.place-order button', page.onAjaxLoadingHandler)
-      $(document).on('click',   '.place-order button', page.orderProccessHandler)
-      $(document).on('submit',  'form.payment_details.credit_card', page.doNothing)
+
       $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
       $(document).on('click',   '.open-login-popup', page.openLoginPopup)
       
@@ -17,6 +15,15 @@ page.initCheckoutEditPage = () ->
 
       $(document).on('keyup',   'input', page.updateAddressFormVisibility)
       $(document).on('change',  'input', page.updateAddressFormVisibility)
+
+      if $('form.payment_details').is('.credit_card.pin')
+        console.log('Assume AJAX payment') if app.debug || app.env == 'development'
+        $(document).on('click',   '.place-order button', page.onAjaxLoadingHandler)
+        $(document).on('click',   '.place-order button', page.orderProccessHandler)
+        $(document).on('submit',  'form.payment_details.credit_card', page.doNothing)
+      else
+        console.log('Assume POST Payment') if app.debug || app.env == 'development'
+        $(document).on('click',   '.place-order button', page.onFormSubmissionHandler)
 
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
@@ -29,6 +36,41 @@ page.initCheckoutEditPage = () ->
         if $('.place-order button').length == 0
           console.log('WARRRRRGHNING! - credit card handlers have invalid selectors. cc payment will not work, probably')
 
+    # Disable the button and set a helpful message
+    safeSubmitButton: (button) ->
+      if button.is('input')
+        originalMessage = button.val()
+      else if button.is('button')
+        originalMessage = button.text()
+
+      loadingMessage = button.data('loading') || 'Updating...'
+
+      set: (message) ->
+        if button.is('input')
+          button.val(message)
+        else if button.is('button')
+          button.text(message)
+
+      disableButton: ->
+        this.set(loadingMessage)
+        button.addClass('updating')
+        # Delay disabling to allow for form submission, apparently.
+        setTimeout(
+          () ->
+            button.attr('disabled', true)
+        , 100
+        )
+
+      restoreButton: ->
+        button.removeAttr('disabled').removeClass('updating')
+        this.set(originalMessage)
+
+    # Just disable the button, and place a nice message on it
+    onFormSubmissionHandler: (e) ->
+      $buttonManager = page.safeSubmitButton($(e.currentTarget))
+      $buttonManager.disableButton()
+#      setTimeout(100, $buttonManager.restoreButton)
+
     onAjaxLoadingHandler: (e) ->
       page.updateAddressFormVisibility()
 
@@ -39,33 +81,11 @@ page.initCheckoutEditPage = () ->
         # without messages updates & etc
         return true
 
-      $button = $(e.currentTarget)
-      if $button.is('input')
-        previous_message = $button.val()
-      else if $button.is('button')
-        previous_message = $button.text()
+      $buttonManager = page.safeSubmitButton($(e.currentTarget))
+      $buttonManager.disableButton()
 
-      loading_message = $button.data('loading') || 'Updating...'
-
-      if $button.is('input')
-        $button.val(loading_message)
-      else if $button.is('button')
-        $button.text(loading_message)
-
-      $button.addClass('updating')
-      # disable button only after form submitting! Otherwise, the form will not be sent!
-      setTimeout(
-        () ->
-          $button.attr('disabled', true)
-        , 100
-      )
       page.addAjaxCallback('all', () ->
-        $button.removeAttr('disabled').removeClass('updating')
-
-        if $button.is('input')
-          $button.val(previous_message)
-        else if $button.is('button')
-          $button.text(previous_message)
+        $buttonManager.restoreButton()
       )
 
     addAjaxCallback: (state, callback) ->
@@ -161,20 +181,30 @@ page.initCheckoutEditPage = () ->
 
     updateStatesVisibility: (country_field_id, states_field_id, states_text_field_id) ->
       country_id = $(country_field_id).val()
-      $(states_field_id).find("option[data-country]").hide()
-      if $(states_field_id).find("option[data-country=#{ country_id }]").length == 0
-        # show input
-        $(states_field_id).addClass('hidden').removeClass('required').prop('disabled', true)
+      states_required = $(country_field_id).find("option[value=#{country_id}]").data('states-required')
+
+      if !states_required
+        $(states_field_id).removeClass('required').prop('disabled', true)
+        $(states_text_field_id).removeClass('required').prop('disabled', true)
+        $(states_field_id).closest('.form-group').addClass('hidden')
+      else if $(states_field_id).find("option[data-country=#{ country_id }]").length == 0
+        $(states_field_id).closest('.form-group').removeClass('hidden')
+        # show text input
+        $(states_field_id).removeClass('required').prop('disabled', true).closest('span').addClass('hidden')
         $(states_text_field_id).addClass('required').removeClass('hidden').prop('disabled', false)
       else
-        $(states_text_field_id).addClass('hidden').removeClass('required').prop('disabled', true)
+        $(states_field_id).closest('.form-group').removeClass('hidden')
+        $(states_text_field_id).removeClass('required').addClass('hidden').prop('disabled', true)
         # show available states
-        $(states_field_id).addClass('required').removeClass('hidden').prop('disabled', false)
+        $(states_field_id).find("option[data-country]").hide()
         $(states_field_id).find("option[data-country=#{ country_id }]").show()
+        $(states_field_id).addClass('required').prop('disabled', false).closest('span').removeClass('hidden')
 
         # if currently select option not available for selected country, reset
         if !country_id || $(states_field_id).find('option:selected').data('country') != parseInt(country_id)
           $(states_field_id).val('')
+
+        $(states_field_id).trigger('chosen:updated')
 
     openLoginPopup: (e) ->
       if window.popups && window.popups.LoginPopup()

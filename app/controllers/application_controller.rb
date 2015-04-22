@@ -214,19 +214,11 @@ class ApplicationController < ActionController::Base
   end
 
   def default_seo_title
-    if Spree::Config[:default_seo_title].present?
-      Spree::Config[:default_seo_title]
-    else
-      "- Fame & Partners"
-    end
+    Spree::Config[:default_seo_title]
   end
 
   def default_meta_description
-    if Spree::Config[:default_meta_description].present?
-      Spree::Config[:default_meta_description]
-    else
-      "Fame & Partners is committed to bringing the world of celebrity fashion to you. We offer our customers the opportunity to create a look that they love, that is unique to them and will ensure they feel like a celebrity on their special night."
-    end
+    Spree::Config[:default_meta_description]
   end
 
   def get_user_type

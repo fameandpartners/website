@@ -60,8 +60,8 @@ FameAndPartners::Application.routes.draw do
     get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
     get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
 
-    get '/amfam' => redirect('/amfam-collection')
-    get '/amfam-dresses'  => redirect('/amfam-collection')
+    get '/amfam'                  => redirect('/wicked-game-collection')
+    get '/amfam-dresses'          => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
@@ -124,7 +124,7 @@ FameAndPartners::Application.routes.draw do
       get '/:collection' => 'redirects#products_index'
     end
 
-    get '/lp/collection(/:collection)' => 'spree/products#index', defaults: { lp: 'lp' }
+    get '/lp/collection(/:collection)', to: redirect('/dresses')
 
     get '/quick_view/:id' => 'spree/products#quick_view'
     post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
@@ -420,7 +420,7 @@ FameAndPartners::Application.routes.draw do
     match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
     # seo routes like *COLOR*-Dress
-    get "(:colour)-Dresses" => 'products/collections#show', as: :colour_formal_dresses
+    get "(:colour)-Dresses" => redirect('/dresses/%{colour}')
 
     # seo route
     get "new-collection" => "products/collections#show", as: :new_collection

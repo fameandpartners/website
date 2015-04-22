@@ -8,7 +8,6 @@ ruby:
   .col-md-12.form-group
     label for="number"  Card number
     = text_field_tag "#{param_prefix}[number]", '', options_hash.merge(id: 'number')
-    / .hint = image_tag 'icons-cards.png', alt: 'Visa, MasterCard', width: '170'
 .row
   .col-md-12.form-group
     label for="name"  Name on card
@@ -28,18 +27,4 @@ ruby:
   
   .col-md-6.form-group.place-order
     label &nbsp;
-    button.btn.btn-black.btn-block.btn-md data-require='terms_and_conditions' data-loading="Placing..." submit
-
-  / .col-md-6.form-group
-  /   label Card Verification Number
-  /   .row
-  /     .col-md-12 = text_field_tag "#{param_prefix}[verification_value]", '', id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5
-  /     .col-md-12
-  /       = link_to "What's this?", "#", class: 'what-this cvv-popup-toggle'
-  /       #cvv-popup
-  /         .modal-container.small.popover-left.hide
-  /           .close-lightbox.cvv-popup-toggle
-  /           = image_tag 'icons-cvv.png', width: 133, height: 37, alt: 'CVV Code'
-  /           .hint The last 3 digits displayed on the back of your credit card. Or in the in the front of your American Express card.
-  
-  
+    button.btn.btn-black.btn-block.btn-md data-loading="Placing..." Place My Order

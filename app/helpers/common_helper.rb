@@ -6,7 +6,7 @@ module CommonHelper
   end
 
   def get_meta_description
-    instance_variable_defined?("@description") ? @description : default_meta_description
+    @description
   end
 
   def get_hreflang(lang)
@@ -30,6 +30,11 @@ module CommonHelper
       product_path = collection_product_path(@product, :color => @product.default_color)
       href = "http://#{get_host}#{product_path}"
     end
+
+    if @canonical
+      href = "http://#{get_host}#{@canonical}"
+    end
+
     href.gsub(/\?.*/,'')
   end
 
