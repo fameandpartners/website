@@ -24,6 +24,7 @@ meta property="og:site_name" content="Fame &amp; Partners"
 - if Rails.env.production? || Features.active?(:test_analytics)
   = render '/spree/shared/google_analytics'
   = render '/shared/zopim'
+  = render '/shared/hotjar'
 
 script type="text/javascript"
   | try{Typekit.load();}catch(e){}
