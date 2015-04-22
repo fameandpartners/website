@@ -3,7 +3,9 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 
 require 'rspec/rails'
+require 'turnip/capybara'
 require 'capybara/rails'
+require 'capybara/poltergeist'
 require 'shoulda/matchers'
 require 'database_cleaner'
 require 'ffaker'
@@ -43,6 +45,26 @@ RSpec.configure do |config|
   # config.mock_with :mocha
 
   config.infer_base_class_for_anonymous_controllers = false
+
+  Capybara.register_driver :poltergeist do |app|
+    #, js_errors: false
+
+    phantomjs_extensions = Dir[Rails.root.join("spec/support/phantomjs_extensions/*.js")]
+    driver               = Capybara::Poltergeist::Driver.new(app,
+                                                             js_errors:  true,
+                                                             debug:      true,
+                                                             extensions: phantomjs_extensions
+    )
+    driver.resize(1280, 720)
+    driver
+
+  end
+
+  Capybara.javascript_driver = :poltergeist
+
+  Capybara.configure do |config|
+    config.match = :prefer_exact
+  end
 
   # Use DatabaseCleaner instead of ActiveRecord transactional
   config.use_transactional_fixtures = false
