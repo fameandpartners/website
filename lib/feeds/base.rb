@@ -6,6 +6,8 @@ require_relative './exporter/shopping'
 
 module Feeds
   class Base
+    FEEDS =  %w( Google Getprice Myshopping Shopping )
+
     def initialize(version)
       @current_site_version = SiteVersion.find_by_permalink(version.to_s.downcase)
       @config = {
@@ -19,7 +21,7 @@ module Feeds
       @items = get_items
       @properties = get_properties
 
-      %w( Getprice Google Myshopping Shopping ).each do |name|
+      FEEDS.each do |name|
         klass = Feeds::Exporter.const_get(name)
         exporter = klass.new
         exporter.items      = @items
@@ -79,7 +81,8 @@ module Feeds
             if item['image'].present?
               items.push(item)
             end
-          rescue
+          rescue Exception => ex
+            puts ex
           end
         end
       end
@@ -91,10 +94,11 @@ module Feeds
       size  = variant.dress_size.try(:presentation)
       color = variant.dress_color.try(:presentation)
       price = variant.zone_price_for(current_site_version)
-      
-      original_price = price.display_price_without_discount
-      sale_price = price.display_price_with_discount
-      
+
+      # are we ever on sale?
+      original_price = price.display_price #.display_price_without_discount
+      sale_price = price.display_price #.display_price_with_discount
+
       original_price = original_price.to_s.delete('$').to_f
       sale_price = sale_price.to_s.delete('$').to_f
 
@@ -102,11 +106,12 @@ module Feeds
         sale_price = 0
       end
 
+
       item = HashWithIndifferentAccess.new(
         variant: variant,
         variant_sku: product.sku+variant.id.to_s,
         product: product,
-        availability: variant.in_stock? ? 'in stock' : 'out of stock',
+        availability: availability,
         title: "#{product.name} - Size #{size} - Colour #{color}",
         description: product.description,
         price: original_price,
@@ -118,7 +123,14 @@ module Feeds
         size: size,
         weight: get_weight(product, variant)
       )
+
       item.update(get_images(product, variant))
+    end
+
+    # TH: on-demand means never having to say you're out-of-stock
+    # variant.in_stock? ? 'in stock' : 'out of stock',
+    def availability
+      'in stock'
     end
 
     # return image, additional images
@@ -126,9 +138,15 @@ module Feeds
       images = product.images_for_variant(variant).to_a
 
       if images.present?
+        images.sort_by!{ |i| i.position }
+        cropped_images = images.select{ |i| i.attachment(:large).to_s.downcase.include?('crop') }
+        cropped_images.sort_by!{ |i| i.position }
+
+        front_crop = cropped_images.shift # pull the front image
+        other_images = (cropped_images + images).uniq #prepend the crop to remainder of images
         {
-          image: absolute_image_url(images.first.attachment(:large)),
-          images: images.from(1).map{|i| absolute_image_url(i.attachment(:large)) }
+          image: cropped_images.shift,
+          images: other_images
         }
       else
         {

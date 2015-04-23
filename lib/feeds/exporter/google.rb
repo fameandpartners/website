@@ -42,11 +42,11 @@ module Feeds
 
                 xml.tag! "g:item_group_id", item[:group_id]
 
-                # xml.tag! "g:gtin", 
+                # xml.tag! "g:gtin",
                 xml.tag! "g:mpn", item[:variant_sku]
 
                 xml.tag! "g:brand", "Fame&Partners"
-                xml.tag! "g:product_type"                
+                xml.tag! "g:product_type"
                 item[:images].to(9).each do |image|
                   xml.tag! "g:additional_image_link", image
                 end
@@ -54,6 +54,9 @@ module Feeds
             end
           end
         end
+
+        require 'fileutils'
+        FileUtils::mkdir_p(File.dirname(export_file_path))
 
         file = File.open(export_file_path, 'w')
         file.write(output.to_s)

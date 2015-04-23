@@ -13,6 +13,9 @@ module Feeds
           end
         end
 
+        require 'fileutils'
+        FileUtils::mkdir_p(File.dirname(export_file_path))
+
         file = File.open(export_file_path, 'w')
         file.write(output.to_s)
         file.close
