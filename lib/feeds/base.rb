@@ -74,7 +74,7 @@ module Feeds
 
     def get_items
       items = []
-      Spree::Product.active.limit(1).includes(:variants).each do |product|
+      Spree::Product.active.includes(:variants).each do |product|
         product.variants.each do |variant|
           begin
             item = get_item_properties(product, variant)
