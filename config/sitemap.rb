@@ -45,15 +45,6 @@ SitemapGenerator::Interpreter.class_eval do
       }
     end
   end
-
-  def post_path(post)
-    return '#' if post.nil?
-    if (category = post.category).present?
-      blog_post_by_category_path(category_slug: category.slug, post_slug: post.slug) 
-    else
-      blog_post_path(post_slug: post.slug)
-    end
-  end
 end
 
 # we create sitemap in xml, /public/sitemap.xml should be only symlink
