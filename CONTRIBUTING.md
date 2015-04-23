@@ -1,0 +1,1 @@
+Before opening a pull request, consider reading the [The Rules](https://github.com/fameandpartners/website/wiki/The-Rules) and the [Commit Style Guide](https://github.com/fameandpartners/website/wiki/Commit-Style-Guide) on the [project wiki](https://github.com/fameandpartners/website/wiki)
