@@ -11,7 +11,7 @@ class Blog::PostsController < BlogBaseController
     if params[:type] == 'red_carpet'
       title 'Red carpet events'
       description 'Red carpet events'
-    elsif @category.present? #params[:category_slug].present?
+    elsif @category.present?
       title "Posts in #{@category.name}"
       description "Posts in #{@category.name}"
     else
@@ -44,7 +44,7 @@ class Blog::PostsController < BlogBaseController
     if params[:type] == 'red_carpet'
       title "#{@post.title} in Events"
       description "#{@post.title}. #{view_context.truncate(@post.body, :length => 200)}"
-    elsif params[:category_slug].present?
+    elsif @category.present?
       title "#{@post.title} in #{@category.name}"
       description "#{@post.title}. #{view_context.truncate(@post.body, :length => 200)}"
     end
@@ -54,13 +54,6 @@ class Blog::PostsController < BlogBaseController
       @recommended_posts = @post.category.posts.published.simple_posts.limit(3).where("id != ?", @post.id).includes(:post_photos, :category)
     end
     @recommended_dresses = Spree::Product.featured.limit(4)
-=begin
-    if current_spree_user.present?
-      @photo_votes = Blog::CelebrityPhotoVote.where(
-        user_id: current_spree_user.id, celebrity_photo_id: @post.celebrity_photos.map(&:id)
-      )
-    end
-=end
     generate_breadcrumbs_for_show
   end
 
