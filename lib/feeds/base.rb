@@ -143,9 +143,11 @@ module Feeds
         cropped_images.sort_by!{ |i| i.position }
 
         front_crop = cropped_images.shift # pull the front image
+
         other_images = (cropped_images + images).uniq #prepend the crop to remainder of images
+        other_images = other_images.map{|i| i.attachment(:large).to_s }
         {
-          image: cropped_images.shift,
+          image: front_crop.attachment(:large),
           images: other_images
         }
       else
