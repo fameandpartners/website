@@ -89,7 +89,7 @@ module Orders
         order_number:            '(订单号码)',
         completed_at:            '(订单日期)',
         projected_delivery_date: '(要求出厂日期)',
-        tracking_number:         '()',
+        tracking_number:         '(速递单号)',
         style:                   '(款号)',
         factory:                 '(工厂)',
         color:                   '(颜色)',
