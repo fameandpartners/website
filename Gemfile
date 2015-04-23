@@ -41,11 +41,6 @@ gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
 gem 'pry-rails'
 
-# assets
-gem 'jquery-rails'
-gem 'sass-rails',   '~> 3.2.3'
-gem 'droidcss'
-
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
 
@@ -85,7 +80,9 @@ group :assets do
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
   gem 'bootstrap-sass'
-  gem 'font-awesome-sass', '~> 4.3.0'
+  gem 'jquery-rails'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'droidcss'
 end
 
 group :development, :test do

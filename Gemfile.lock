@@ -290,8 +290,6 @@ GEM
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
     ffaker (1.15.0)
-    font-awesome-sass (4.3.2.1)
-      sass (~> 3.2)
     geoip (1.3.3)
     google-api-client (0.7.1)
       addressable (>= 2.3.2)
@@ -666,7 +664,6 @@ DEPENDENCIES
   event_sourced_record
   execjs (= 1.4.0)
   factory_girl_rails (= 4.2.1)
-  font-awesome-sass (~> 4.3.0)
   geoip
   google_drive (= 1.0.0)
   instagram
