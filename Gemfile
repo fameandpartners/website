@@ -24,6 +24,8 @@ gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
 
+gem 'droidcss'
+
 # Data
 gem 'event_sourced_record'
 
@@ -82,7 +84,6 @@ group :assets do
   gem 'bootstrap-sass'
   gem 'jquery-rails'
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'droidcss'
 end
 
 group :development, :test do
