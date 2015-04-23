@@ -110,6 +110,13 @@ Spree::Order.class_eval do
     updater.update
   end
 
+  # originally, spree allows only one action adjustment from promotion for for order
+  def promotion_action_credit_exists?(promotion_action)
+    !! adjustments.promotion.reload.detect do |credit|
+      credit.originator_id == promotion_action.id && credit.originator.promotion.id == promotion_action.promotion.id
+    end
+  end
+
   def promotion_total
     if self.shipment.blank?
       self.adjustment_total
