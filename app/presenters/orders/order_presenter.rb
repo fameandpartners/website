@@ -29,7 +29,7 @@ module Orders
     end
 
     def projected_delivery_date
-      order.projected_delivery_date.try(:to_date) || 'Unknown Delivery Date'
+      order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date) 
     end
 
     def promo_codes
@@ -48,6 +48,12 @@ module Orders
 
     def shipping_address
       order.shipping_address.to_string
+    end
+
+    def tracking_number
+      if order.shipments.any?
+        order.shipments.first.tracking
+      end
     end
   end
 end
