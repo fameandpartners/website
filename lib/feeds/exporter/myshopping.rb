@@ -1,4 +1,4 @@
-vmodule Feeds
+module Feeds
   module Exporter
     class Myshopping < Base
       def export_file_name
