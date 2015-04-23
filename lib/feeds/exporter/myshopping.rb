@@ -1,4 +1,4 @@
-module Feeds
+vmodule Feeds
   module Exporter
     class Myshopping < Base
       def export_file_name
@@ -25,6 +25,9 @@ module Feeds
             end
           end
         end
+
+        require 'fileutils'
+        FileUtils::mkdir_p(File.dirname(export_file_path))
 
         file = File.open(export_file_path, 'w')
         file.write(output.to_s)
