@@ -138,11 +138,11 @@ SitemapGenerator::Sitemap.create(options) do
   end
 
   statics_pages = [ 
-    '/about', '/why-us', '/team', '/terms', '/privacy', '/legal', '/faqs', '/how-it-works',
-    '/fashionista2014', '/fashionista2014/info', '/fashionista2014-winners', '/compterms', '/plus-size',
-    '/style-consultation', '/fame-chain', '/returnsform',
-    '/fashionitgirl2015', '/fashionitgirl2015-terms-and-conditions', '/fashionitgirl2015-competition',
-    '/nyfw-comp-terms-and-conditions', '/bridesmaid-dresses', '/feb_2015_lp', '/facebook-lp', '/sale-dresses', '/fame2015',
+    '/about', '/why-us', '/terms', '/privacy', '/legal', '/assets/returnform.pdf',
+    '/compterms',
+    '/style-consultation', '/fame-chain',
+    '/fashionitgirl2015',
+    '/bridesmaid-dresses', '/feb_2015_lp', '/facebook-lp', '/sale-dresses',
     '/unidays'
   ]
   statics_pages.each do |page_path|
