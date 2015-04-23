@@ -58,7 +58,7 @@
   @include box-sizing(border-box);
   @include longBoxShadowRight(#000, 5);
 }
-// Pink 
+// Pink
 .selectbox-pink.chosen-container-single .chosen-single {
   background-color: #fdf5ef;
   box-shadow: none;
@@ -198,7 +198,7 @@
   font-size: 14px;
   line-height: 15px;
 }
-// Pink 
+// Pink
 .selectbox-pink.chosen-container .chosen-results li {
   line-height: 25px;
 }
@@ -531,7 +531,7 @@
   .chosen-container-multi .chosen-choices .search-choice .search-choice-close,
   .chosen-container .chosen-results-scroll-down span,
   .chosen-container .chosen-results-scroll-up span {
-    background-image: url('_chosen/chosen-sprite@2x.png') !important;
+    // background-image: url('_chosen/chosen-sprite@2x.png') !important;
     background-size: 52px 37px !important;
     background-repeat: no-repeat !important;
   }
