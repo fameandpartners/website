@@ -160,7 +160,7 @@ Spree::Order.class_eval do
     begin
       Spree::OrderMailer.confirm_email(self.id).deliver
       Spree::OrderMailer.team_confirm_email(self.id).deliver
-      Spree::OrderMailer.production_order_email(self.id).deliver
+      ProductionOrderEmailService.new(self.id).deliver
       log_products_purchased
       update_campaign_monitor
     rescue Exception => e
