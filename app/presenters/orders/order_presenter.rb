@@ -5,7 +5,7 @@ module Orders
 
     extend Forwardable
 
-    def_delegators :@order, :customer_notes, :number, :completed_at
+    def_delegators :@order, :customer_notes, :number, :completed_at, :name, :first_name
 
     attr_reader :order, :items
 
@@ -36,10 +36,6 @@ module Orders
       order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
         adj.originator.promotion.code
       }
-    end
-
-    def name
-      order.name
     end
 
     def phone_number
