@@ -1,28 +1,40 @@
-<%= t('shipment_mailer.shipped_email.dear_customer') %>
+<% order = Orders::OrderPresenter.new(@shipment.order, @shipment.line_items) %>
+Hey <%= order.first_name.rstrip %>,
 
-<%= t('shipment_mailer.shipped_email.instructions') %>
-
-============================================================
-<%= t('shipment_mailer.shipped_email.shipment_summary') %>
-============================================================
-<% @shipment.manifest.each do |item| %>
-  <%= item.variant.sku %> <%= item.variant.product.name %> <%= item.variant.options_text %>
-<% end %>
-============================================================
-
-<%= t('shipment_mailer.shipped_email.track_information', :tracking => @shipment.tracking) if @shipment.tracking %>
+We have some great news. Your dress has now been
+shipped and is on it's way to you.
 
 <% if @shipment.tracking %>
-  <% if @shipment.is_dhl? %>
-    Track your order with DHL: <%= shipment_tracking_url(@shipment) %>
-  <% elsif @shipment.is_auspost? %>
-    Track your order with Australia Post: <%= shipment_tracking_url(@shipment) %>
-  <% elsif @shipment.is_tnt? %>
-    Track your order with TNT: <%= shipment_tracking_url(@shipment) %>
-  <% else %>
-    <%= t('shipment_mailer.shipped_email.track_information', :tracking => @shipment.tracking) %>
-  <% end %>
+Here's your tracking number:
+=============================================
+<%= @shipment.shipping_method.name %>: <%= @shipment.tracking %>
+=============================================
 <% end %>
 
-<%= t('shipment_mailer.shipped_email.thanks') %>
+And here's your order summary
+=============================================
+<% order.line_items.each do |item| %>
+<%= [item.style_name,
+     item.style_number,
+     item.colour.presentation,
+     item.country_size
+    ].join(' - ') %>
+<% end %>
+=============================================
 
+To track your dress' journey, simply go to:
+  <%= shipment_tracking_url(@shipment) %>
+
+If you can't find your package there we may have
+used an alternative shipping option, in which case
+simply email: team@fameandpartners.com to find out
+how to track your dress.
+
+We know you will be a total #famebabe in your new
+dress, so feel free to tag us when you wear it in
+your social channels - @fameandpartners - we love
+to see how our customers style their total look.
+
+Team Fame xx
+
+<%= Date.today.to_formatted_s(:long) %>

@@ -18,12 +18,20 @@ module Orders
       item.variant.product.sku
     end
 
-    def colour_name
+    def style_name
+      item.variant.product.name
+    end
+
+    def colour
       if item.personalization.present?
         item.personalization.color
       else
         item.variant.dress_color
-      end.try(:name) || 'Unknown Color'
+      end
+    end
+
+    def colour_name
+      colour.try(:name) || 'Unknown Color'
     end
 
     def country_size
