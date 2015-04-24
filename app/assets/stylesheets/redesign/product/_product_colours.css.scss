@@ -25,6 +25,11 @@
         background-color: #000;
       }
 
+      .color-black-and-peacock {
+        background: linear-gradient(-12.5deg, rgba(5,5,5,1) 0%, rgba(3,3,3,1) 50%, rgba(19,75,125,1) 51%, rgba(19,75,125,1) 71%, rgba(19,75,125,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#050505', endColorstr='#134b7d', GradientType=1 );
+      }
+
       .color-blue {
         background-color: #00F;
       }
@@ -136,6 +141,11 @@
 
       .color-ivory {
         background-color: #FFFFF0;
+      }
+
+      .color-ivory-and-hot-pink {
+        background: linear-gradient(-12.5deg, rgba(255,51,153,1) 0%, rgba(255,51,153,1) 50%, rgba(255,255,240,1) 51%, rgba(255,255,240,1) 71%, rgba(255,255,240,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f39', endColorstr='#f39', GradientType=1 );
       }
 
       .color-lavender {
@@ -252,6 +262,11 @@
         background-size: cover;
       }
 
+      .color-pink-red {
+        background: linear-gradient(-12.5deg, rgba(221,0,0,1) 0%, rgba(221,0,0,1) 50%, rgba(255,51,153,1) 51%, rgba(255,51,153,1) 71%, rgba(255,51,153,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb0000', endColorstr='#d00', GradientType=1 );
+      }
+
       .color-plum {
         background-color: #8D4585;
       }
@@ -315,6 +330,12 @@
       .color-white,.color-optic-white {
         background-color: #FFF;
         border: 1px dashed #EEE;
+      }
+
+      .color-white-and-black,.color-monochrome {
+        background: linear-gradient(-12.5deg, rgba(5,5,5,1) 0%, rgba(3,3,3,1) 50%, rgba(252,248,247,1) 51%, rgba(252,249,249,1) 71%, rgba(252,249,249,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#050505', endColorstr='#fcf9f9', GradientType=1 );
+        border: 1px dashed #EEE
       }
 
       .color-wine {
