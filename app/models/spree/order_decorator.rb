@@ -162,7 +162,7 @@ Spree::Order.class_eval do
       Spree::OrderMailer.team_confirm_email(self.id).deliver
       ProductionOrderEmailService.new(self.id).deliver
       log_products_purchased
-      update_campaign_monitor
+      Marketing::Subscriber.new(user: user).set_purchase_date(Date.today)
     rescue Exception => e
       log_confirm_email_error(e)
       logger.error("#{e.class.name}: #{e.message}")
@@ -376,11 +376,5 @@ Spree::Order.class_eval do
     self.save
 
     self.reload
-  end
-
-  def update_campaign_monitor
-    if user.present?
-      CampaignMonitor.delay.set_purchase_date(user, Date.today)
-    end
   end
 end
