@@ -4,6 +4,7 @@
     td class="align-center" = l (@show_only_completed ? order.completed_at : order.created_at).to_date
     td class="align-center" = order.projected_delivery_date.present? ? l(order.projected_delivery_date.to_date) : '-'
     td class="align-center" = order.number
+    td class="align-center" = order.shipments.first.tracking if order.shipments.any?
     td class="align-center" = ('A'..'Z').to_a[idx]
     td class="align-center" = order_line_item.variant.sku
     td class="align-center" = render 'spree/admin/orders/index/update_fabrication_state_form', order_line_item: order_line_item
