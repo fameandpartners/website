@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::Order do
+describe Spree::Order, :type => :model do
   let(:order)         { Spree::Order.new }
   let(:completed_at)  { DateTime.parse('Wed April 1 2015') }
 
