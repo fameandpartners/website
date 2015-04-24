@@ -26,6 +26,9 @@ class Marketing::UserVisits
       end
     end
 
+    # sync subscription data
+    Marketing::Subscriber.new(user: user).create
+
     true
   end
 end
