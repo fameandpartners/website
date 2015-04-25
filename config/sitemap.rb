@@ -70,7 +70,6 @@ if Rails.env.development?
   options[:compress] = false
 end
 
-SitemapGenerator::Sitemap.create_index = false
 SitemapGenerator::Sitemap.create(options) do
   # add '/' - added by default
   # have to add /en & /au
