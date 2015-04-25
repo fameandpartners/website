@@ -84,52 +84,52 @@ ruby:
                 .container-fluid.max-width-100
                   .row
                     .col-md-3.col-lg-2.col-md-offset-3
-                      h4.link-header Event Dresses
+                      h4.link-header Events
                       ul.mega-menu-list
                         li.mega-menu-list--item
-                          = link_to 'Prom', build_taxon_path('Prom'), title: 'Prom'
+                          = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
                         li.mega-menu-list--item
-                          = link_to 'Bridesmaid', bridesmaid_lp_path, title: 'Bridesmaid'
+                          = link_to 'Bridesmaid Dresses', bridesmaid_lp_path, title: 'Bridesmaid Dresses'
                         li.mega-menu-list--item
-                          = link_to 'Formal', build_taxon_path('Formal'), title: 'Formal'
+                          = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses'
                         li.mega-menu-list--item
-                          a href="/dresses/wedding" Wedding
+                          a href="/dresses/wedding" Wedding Dresses
                         li.mega-menu-list--item
-                          a href="/dresses/homecoming" Homecoming
+                          a href="/dresses/homecoming" Homecoming Dresses
                         li.mega-menu-list--item
-                          a href="/dresses/ball" Ball
+                          a href="/dresses/ball" Ball Dresses
                         li.mega-menu-list--item
-                          a href="/dresses/sweet-16" Sweet 16
+                          a href="/dresses/sweet-16" Sweet 16 Dresses
                         li.mega-menu-list--item
-                          a href="/dresses/birthday" Birthday
+                          a href="/dresses/birthday" Birthday Dresses
                         li.mega-menu-list--item
-                          a href="/dresses/debutante" Debutante
+                          a href="/dresses/debutante" Debutante Dresses
                         li.mega-menu-list--item
-                          a href="/dresses/graduation" Graduation
+                          a href="/dresses/graduation" Graduation Dresses
                         li.mega-menu-list--item
-                          a href="/dresses/special-events" Special Event
+                          a href="/dresses/special-events" Special Event Dresses
 
 
                     .col-md-3.col-lg-2
                       h4.link-header Style
                       ul.mega-menu-list
-                        li.mega-menu-list--item= link_to 'Two-Piece', build_taxon_path('Two Piece'), title: "Two-Piece"
-                        li.mega-menu-list--item= link_to 'One Shoulder', build_taxon_path('One-Shoulder'), title: "One Shoulder"
-                        li.mega-menu-list--item= link_to 'Strapless', build_taxon_path('Strapless'), title: "Strapless"
-                        li.mega-menu-list--item= link_to 'V-Neck', build_taxon_path('V-Neck'), title: "V-Neck"
-                        li.mega-menu-list--item= link_to 'Split', build_taxon_path('Split'), title: "Split"
-                        li.mega-menu-list--item= link_to 'Backless', build_taxon_path('Open-Back'), title: "Backless"
-                        li.mega-menu-list--item= link_to 'Lace', build_taxon_path('Lace'), title: "Lace"
+                        li.mega-menu-list--item= link_to 'Two-Piece', build_taxon_path('Two Piece'), title: "Two-Piece Dresses"
+                        li.mega-menu-list--item= link_to 'One Shoulder', build_taxon_path('One-Shoulder'), title: "One Shoulder Dresses"
+                        li.mega-menu-list--item= link_to 'Strapless', build_taxon_path('Strapless'), title: "Strapless Dresses"
+                        li.mega-menu-list--item= link_to 'V-Neck', build_taxon_path('V-Neck'), title: "V-Neck Dresses"
+                        li.mega-menu-list--item= link_to 'Split', build_taxon_path('Split'), title: "Split Dresses"
+                        li.mega-menu-list--item= link_to 'Backless', build_taxon_path('Open-Back'), title: "Open Back Dresses"
+                        li.mega-menu-list--item= link_to 'Lace', build_taxon_path('Lace'), title: "Lace Dresses"
 
                     .col-md-3.col-lg-2
                       h4.link-header= t('color')
                       ul.mega-menu-list
-                        li.mega-menu-list--item= link_to "Black", colour_path('Black'), title: "Black"
-                        li.mega-menu-list--item= link_to "White / Ivory", colour_path('White'), title: "White / Ivory"
-                        li.mega-menu-list--item= link_to "Blue", colour_path('Blue'), title: "Blue"
-                        li.mega-menu-list--item= link_to "Pink", colour_path('Pink'), title: "Pink"
-                        li.mega-menu-list--item= link_to "Red", colour_path('Red'), title: "Red"
-                        li.mega-menu-list--item= link_to "Pastel", colour_path('Pastel'), title: "Pastel"
+                        li.mega-menu-list--item= link_to "Black Dresses", colour_path('Black'), title: "Black Dresses"
+                        li.mega-menu-list--item= link_to "White / Ivory Dresses", colour_path('White'), title: "White / Ivory Dresses"
+                        li.mega-menu-list--item= link_to "Blue Dresses", colour_path('Blue'), title: "Blue Dresses"
+                        li.mega-menu-list--item= link_to "Pink Dresses", colour_path('Pink'), title: "Pink Dresses"
+                        li.mega-menu-list--item= link_to "Red Dresses", colour_path('Red'), title: "Red Dresses"
+                        li.mega-menu-list--item= link_to "Pastel Dresses", colour_path('Pastel'), title: "Pastel Dresses"
 
                     .col-md-3.col-lg-2
                       h4.link-header= t('sale')
@@ -141,13 +141,13 @@ ruby:
                             li.mega-menu-list--item= link_to 'Sale - Up to 80% Off', '/sale-dresses', title: 'Dresses On Sale'
                           - else
                             li.mega-menu-list--item= link_to "All on Sale", dresses_on_sale_path(:sale => 'all'), title: 'All Dresses on Sale'
-                            li.mega-menu-list--item= link_to "20 Percent Off", '/dresses/?sale=20', title: '20% off'
-                            li.mega-menu-list--item= link_to "25 Percent Off", '/dresses/?sale=25', title: '25% off'
-                            li.mega-menu-list--item= link_to "30 Percent Off", '/dresses/?sale=30', title: '30% off'
-                            li.mega-menu-list--item= link_to "40 Percent Off", '/dresses/?sale=40', title: '40% off'
-                            li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=50', title: '50% off'
-                            li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=60', title: '60% off'
-                            li.mega-menu-list--item= link_to "80 Percent Off", '/dresses/?sale=80', title: '80% off'
+                            li.mega-menu-list--item= link_to "20 Percent Off", '/dresses/?sale=20', title: 'All Dresses 20% off'
+                            li.mega-menu-list--item= link_to "25 Percent Off", '/dresses/?sale=25', title: 'All Dresses 25% off'
+                            li.mega-menu-list--item= link_to "30 Percent Off", '/dresses/?sale=30', title: 'All Dresses 30% off'
+                            li.mega-menu-list--item= link_to "40 Percent Off", '/dresses/?sale=40', title: 'All Dresses 40% off'
+                            li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=50', title: 'All Dresses 50% off'
+                            li.mega-menu-list--item= link_to "50 Percent Off", '/dresses/?sale=60', title: 'All Dresses 60% off'
+                            li.mega-menu-list--item= link_to "80 Percent Off", '/dresses/?sale=80', title: 'All Dresses 80% off'
 
           - if Features.active?(:style_quiz)
             li.menu-item
