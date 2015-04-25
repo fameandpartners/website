@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::Variant do
+describe Spree::Variant, :type => :model do
   context "new product" do
     let(:subject) { Spree::Variant.new }
 

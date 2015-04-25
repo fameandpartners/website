@@ -29,14 +29,4 @@ FactoryGirl.define do
   # factory :option_type :class => Spree::OptionType do
   #   sequence(:name)     { |n| "option-type-#{n}"}
   # end
-
-  factory :taxon, :class => Spree::Taxon do
-    sequence(:position)    
-    permalink           { name.downcase.gsub(/\s/, '_')  }
-  end
-
-  factory :taxonomy, :class => Spree::Taxonomy do
-    sequence(:name)    
-  end
-
 end
