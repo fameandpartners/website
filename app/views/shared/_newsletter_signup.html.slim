@@ -20,7 +20,7 @@ ruby:
         input type="hidden" id="fieldqulir"   name="cm-f-qulir" value=(details[:site_version])
         input type="hidden" id="fieldjiktly"  name="cm-f-jiktly" value=(details[:country])
         input type="hidden" id="fielddydhij"  name="cm-f-dydhij" value=(details[:promocode])
-        input type="hidden" id="fielddhhykd"  name="cm-f-dhhykd" value=(details[:referrer])
+        input type="hidden" id="fielddhhykd"  name="cm-f-dhhykd" value=(details[:referrer] || cookies[:referrer])
         input type="hidden" id="fielddhhykh"  name="cm-f-dhhykh" value=(details[:campaign])
         input type="hidden" id="fielddhhykk"  name="cm-f-dhhykk" value=(details[:ip_address])
         input type="hidden" id="fieldurlkl"   name="cm-fo-urlkl" value="190873"

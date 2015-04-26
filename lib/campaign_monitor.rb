@@ -5,6 +5,19 @@ class CampaignMonitor
     '24.04.2015'
   end
 
+  # correctly, we should check sidekiq workers availability too
+  def self.execute_immediately?
+    Rails.env.development? || Rails.env.test?
+  end
+
+  def self.schedule(method, *args)
+    if execute_immediately?
+      CampaignMonitor.send(*args.unshift(method))
+    else
+      CampaignMonitor.delay.send(*args.unshift(method))
+    end
+  end
+
   def self.synchronize(email, user = nil, custom_fields = {})
     attributes = {}
 

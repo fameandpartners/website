@@ -21,12 +21,7 @@ class Marketing::Subscriber
 
   def create
     validate!
-
-    if Rails.env.development? || Rails.env.test?
-      CampaignMonitor.synchronize(email, user, custom_fields)
-    else
-      CampaignMonitor.delay.synchronize(email, user, custom_fields)
-    end
+    CampaignMonitor.schedule(:synchronize, email, user, custom_fields)
   end
 
   def update
@@ -36,19 +31,15 @@ class Marketing::Subscriber
   end
 
   def set_purchase_date(date = Date.today)
-    if user.present?
-      if Rails.env.development? || Rails.env.test?
-        CampaignMonitor.set_purchase_date(user, date)
-      else
-        CampaignMonitor.delay.set_purchase_date(user, date)
-      end
-    end
+    CampaignMonitor.schedule(:set_purchase_date, user, date) if user.present?
   end
 
   def details
-    custom_fields.merge({
-      email: email
-    })
+    HashWithIndifferentAccess.new(
+      custom_fields.merge({
+        email: email
+      })
+    )
   end
 
   private
@@ -90,8 +81,6 @@ class Marketing::Subscriber
     end
 
     def ip_address
-      return '46.191.225.134' if Rails.env.development?
-      # return '70.209.137.95' if Rails.env.development?
       @ip_address ||= user.present? ? user.last_sign_in_ip : nil
     end
 
