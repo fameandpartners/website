@@ -21,6 +21,7 @@ RSpec.describe FabricationEvent, :type => :model do
         make
         qc
         shipped
+        customer_feedback_required
       ) }
 
     it do
