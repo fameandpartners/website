@@ -44,7 +44,7 @@
       .field
         = label_tag nil, t(:shipments_status)
         abbr title="#{sorry}" ?
-        = f.select :shipments_state_eq, Spree::Shipment.state_machines[:state].states.collect { |s| [t("shipment_states.#{s.name}"), s.value] }, {:include_blank => true}, :class => 'select2'
+        = f.select :shipments_state_eq, Spree::Shipment.state_machines[:state].states.collect { |s| [s.name, s.value] }, {:include_blank => true}, :class => 'select2'
 
     .alpha.four.columns
       .field.checkbox

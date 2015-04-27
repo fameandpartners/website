@@ -35,7 +35,7 @@ module Orders
     end
 
     def country_size
-      "#{order.country_code}-#{size}"
+      "#{order.site_version}-#{size}"
     end
 
     def factory

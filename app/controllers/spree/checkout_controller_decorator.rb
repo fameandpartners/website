@@ -1,5 +1,6 @@
 Spree::CheckoutController.class_eval do
   before_filter :prepare_order, only: :edit
+  before_filter :set_order_site_version, :only => :update
   before_filter :find_payment_methods, only: [:edit, :update]
   skip_before_filter :check_registration
 
@@ -200,6 +201,10 @@ Spree::CheckoutController.class_eval do
   end
 
   helper_method :completion_route
+
+  def set_order_site_version
+    @order.site_version = current_site_version.code
+  end
 
   def current_step
     return nil if @order.blank?
