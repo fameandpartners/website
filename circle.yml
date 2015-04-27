@@ -1,27 +1,18 @@
 machine:
   ruby:
-    version: 1.9.3-p547
+    version: 2.1.5
   services:
     - elasticsearch
 
-dependencies:
-  override:
-    - 'rvm-exec 2.1.5 bundle install'
-    - 'rvm-exec 2.2.2 bundle install'
-
-test:
-  override:
-    - 'rvm-exec 2.1.5 bundle exec rake'
-    - 'rvm-exec 2.2.2 bundle exec rake'
-
-deployment:
-  staging:
-    branch: master
-    commands:
-      - bundle exec cap staging deploy:migrations:
-          timeout: 480
-  feature:
-    branch: redesign
-    commands:
-      - bundle exec cap feature deploy:migrations:
-          timeout: 480
+# database:
+#  pre:
+#    - bundle exec rake db:create db:schema:load
+# # dependencies:
+#   override:
+#     # - 'rvm-exec 2.1.5 bundle install'
+#     # - 'rvm-exec 2.2.2 bundle install'
+#
+# test:
+#   override:
+#     - 'rvm-exec 2.1.5 bundle exec rake'
+#     # - 'rvm-exec 2.2.2 bundle exec rake'

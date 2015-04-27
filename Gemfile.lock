@@ -175,7 +175,7 @@ GEM
   specs:
     active_model_serializers (0.9.3)
       activemodel (>= 3.2)
-    activemerchant (1.48.0)
+    activemerchant (1.49.0)
       activesupport (>= 3.2.14, < 5.0.0)
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
@@ -195,15 +195,15 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
-    autoprefixer-rails (5.1.10)
+    autoprefixer-rails (5.1.11)
       execjs
       json
     awesome_nested_set (2.1.5)
       activerecord (>= 3.0.0)
     awesome_print (1.6.1)
-    aws-sdk (1.11.1)
+    aws-sdk (1.11.2)
       json (~> 1.4)
-      nokogiri (>= 1.4.4)
+      nokogiri (< 1.6.0)
       uuidtools (~> 2.1)
     bcrypt (3.1.10)
     bcrypt-ruby (3.1.5)
@@ -255,7 +255,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    colorize (0.7.7)
     columnize (0.9.0)
     compass (1.0.3)
       chunky_png (~> 1.2)
@@ -277,11 +276,9 @@ GEM
       json
     daemons (1.2.2)
     database_cleaner (0.9.1)
-    deface (1.0.1)
-      colorize (>= 0.5.8)
-      nokogiri (~> 1.6.0)
-      polyglot
-      rails (>= 3.1)
+    deface (0.9.1)
+      nokogiri (~> 1.5.0)
+      rails (~> 3.1)
     default_value_for (3.0.1)
       activerecord (>= 3.2.0, < 5.0)
     devise (2.2.8)
@@ -321,8 +318,6 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     ffaker (1.15.0)
     ffi (1.9.8)
-    font-awesome-sass (4.3.2.1)
-      sass (~> 3.2)
     geoip (1.5.0)
     google-api-client (0.7.1)
       addressable (>= 2.3.2)
@@ -388,7 +383,6 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (1.25.1)
-    mini_portile (0.6.2)
     money (5.1.1)
       i18n (~> 0.6.0)
     multi_json (1.11.0)
@@ -404,8 +398,7 @@ GEM
       net-ssh (>= 2.6.5)
     netrc (0.10.3)
     newrelic_rpm (3.11.2.286)
-    nokogiri (1.6.6.2)
-      mini_portile (~> 0.6.0)
+    nokogiri (1.5.11)
     nori (1.1.5)
     oa-core (0.3.2)
     oauth (0.4.7)
@@ -429,17 +422,15 @@ GEM
     omniauth-google-oauth2 (0.2.6)
       omniauth (> 1.0)
       omniauth-oauth2 (~> 1.1)
-    omniauth-oauth (1.0.1)
+    omniauth-oauth (1.1.0)
       oauth
       omniauth (~> 1.0)
-    omniauth-oauth2 (1.2.0)
-      faraday (>= 0.8, < 0.10)
-      multi_json (~> 1.3)
+    omniauth-oauth2 (1.3.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    omniauth-twitter (1.1.0)
-      multi_json (~> 1.3)
-      omniauth-oauth (~> 1.0)
+    omniauth-twitter (1.2.0)
+      json (~> 1.3)
+      omniauth-oauth (~> 1.1)
     orm_adapter (0.5.0)
     paperclip (2.8.0)
       activerecord (>= 2.3.0)
@@ -455,7 +446,6 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.5)
-    power_assert (0.2.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -516,7 +506,7 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     retriable (2.0.2)
-    rmagick (2.14.0)
+    rmagick (2.15.0)
     rollout (2.1.0)
     roo (1.13.2)
       nokogiri
@@ -593,7 +583,7 @@ GEM
       aws-sdk
       paperclip
       spree_core (>= 1.3.0)
-    spring (1.3.4)
+    spring (1.3.5)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -604,8 +594,6 @@ GEM
     temple (0.7.5)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
-    test-unit (3.0.8)
-      power_assert
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -617,7 +605,7 @@ GEM
     thread_safe (0.3.5)
     tilt (1.4.1)
     timers (1.1.0)
-    tins (1.3.5)
+    tins (1.5.1)
     tire (0.6.2)
       activemodel (>= 3.0)
       activesupport
@@ -642,14 +630,14 @@ GEM
       memoizable (~> 0.4.0)
       naught (~> 1.0)
       simple_oauth (~> 0.3.0)
-    tzinfo (0.3.43)
+    tzinfo (0.3.44)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    unicorn (4.8.3)
+    unicorn (4.9.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -699,7 +687,6 @@ DEPENDENCIES
   event_sourced_record
   execjs (= 1.4.0)
   factory_girl_rails (= 4.2.1)
-  font-awesome-sass
   geoip
   google_drive (= 1.0.0)
   instagram
@@ -743,7 +730,6 @@ DEPENDENCIES
   spree_social!
   spring
   term-ansicolor
-  test-unit
   therubyracer
   thin
   timers (= 1.1.0)
