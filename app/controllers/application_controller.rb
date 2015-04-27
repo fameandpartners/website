@@ -447,4 +447,20 @@ class ApplicationController < ActionController::Base
   def display_marketing_banner
     @display_marketing_banner = true
   end
+
+  # this logic should be placed in separate module
+  # somewhere in app/controllers/concerns/returnable 
+  def is_user_came_from_current_app
+    return false if request.referrer.blank?
+    URI.parse(request.referrer).host == request.host
+  rescue Exception => e
+    # built-in ruby uri known for parse/generate issues.
+    false
+  end
+
+  def set_after_sign_in_location(location, options = {})
+    return if location && location.match(/\b(login|logout|fb_auth|session|sign_in|sign_out)\b/)
+    session[:user_return_to] = location
+    session[:spree_user_return_to] = location
+  end
 end

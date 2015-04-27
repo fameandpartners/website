@@ -9,7 +9,7 @@
       .col-md-6.form-group
         = link_to 'log in', login_path, class: 'btn btn-block btn-black btn-md open-login-popup'
       .col-md-6.form-group
-        = link_to 'Sign in with Facebook', fb_auth_path(return_to: 'checkout'), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+        = link_to 'Sign in with Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
 
   = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
     = render :partial => 'shared/error_messages', locals: { target: @order }
@@ -19,7 +19,6 @@
     .form-wrapper data-hook='billing_inner'
       = form.fields_for :bill_address do |bill_form|
         = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
-
 
     .row
       .col-md-12.form-group
