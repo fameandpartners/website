@@ -141,17 +141,6 @@ SitemapGenerator::Sitemap.create(options) do
   statics_pages.each do |page_path|
     add page_path, priority: 0.5, alternates: build_alternates(page_path)
   end
-
-#  # celebrities
-#  Celebrity.published.each do |celebrity|
-#    path = "/celebrities/#{celebrity.slug}"
-#    add path, { priority: 0.3, alternates: build_alternates(path) }
-#  end
-#
-#  # blog posts
-#  Blog::Post.includes(:author, :category).published.each do |post|
-#    add post_path(post), priority: 0.3, alternates: build_alternates(post_path(post))
-#  end
 end
 
 file_name = options[:compress] ? 'sitemap.xml.gz' : 'sitemap.xml'
