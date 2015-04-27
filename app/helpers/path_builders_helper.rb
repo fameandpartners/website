@@ -63,11 +63,8 @@ module PathBuildersHelper
       path_parts << "dress-#{descriptive_url(product)}"
     end
 
-    if options[:color]
-      path_parts << options[:color] 
-      options.delete(:color)
-    elsif product.respond_to?(:color) && product.color.try(:name)
-      path_parts << product.color.name
+    if options[:color].nil? && product.respond_to?(:color) && product.color.try(:name)
+      options.merge!({ color: product.color.name })
     end
 
     build_url(path_parts, options)
