@@ -67,7 +67,6 @@ options = {
 
 if Rails.env.development?
   SitemapGenerator::Sitemap.default_host = "http://localhost:3600"
-  options[:compress] = false
 end
 
 SitemapGenerator::Sitemap.create(options) do
