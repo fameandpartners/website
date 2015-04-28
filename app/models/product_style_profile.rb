@@ -2,7 +2,7 @@ class ProductStyleProfile < ActiveRecord::Base
   BODY_SHAPES = %W{apple pear athletic strawberry hour_glass column petite}
   BASIC_STYLES = %w(glam girly classic edgy bohemian)
   BRA_SIZES = %w(bra_aaa bra_aa bra_a bra_b bra_c bra_d bra_e bra_fpp)
-  
+
   default_values Hash[ *BASIC_STYLES.collect{|t| [t, 0]}.flatten]
   default_values Hash[ *BODY_SHAPES.collect{|t| [t, 0]}.flatten]
   default_values Hash[ *BRA_SIZES.collect{|t| [t, 0]}.flatten]
@@ -14,7 +14,7 @@ class ProductStyleProfile < ActiveRecord::Base
   attr_accessible *BRA_SIZES
   attr_accessible :sexiness, :fashionability
 
-  numericality = { 
+  numericality = {
     :allow_blank => true,
     :only_integer => true,
     :greater_than_or_equal_to => 0,
