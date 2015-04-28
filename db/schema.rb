@@ -389,6 +389,12 @@ ActiveRecord::Schema.define(:version => 20150427031122) do
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
 
+  create_table "data_migrations", :id => false, :force => true do |t|
+    t.string "version", :null => false
+  end
+
+  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
+
   create_table "discounts", :force => true do |t|
     t.integer  "amount"
     t.datetime "created_at",        :null => false
