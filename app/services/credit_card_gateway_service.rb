@@ -8,7 +8,10 @@ class CreditCardGatewayService
   end
 
   def gateway
-    @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') && method.currency == currency }
+    @gateway ||= find_gateway
   end
 
+  def find_gateway
+    @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') && method.currency == currency } || @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
+  end
 end
