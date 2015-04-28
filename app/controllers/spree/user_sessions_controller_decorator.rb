@@ -1,7 +1,7 @@
 Spree::UserSessionsController.class_eval do
   layout 'redesign/application'
 
-  before_filter :store_path_to_return, only: :new
+  before_filter :store_path_to_return, only: [:new, :destroy]
 
   def create
     authenticate_spree_user!
@@ -36,11 +36,17 @@ Spree::UserSessionsController.class_eval do
 
   private
 
+    def after_sign_out_path_for(resource_or_scope)
+      session[:spree_user_return_to].present? ? session[:spree_user_return_to] : super(resource_or_scope)
+    end
+
     def store_path_to_return
       if params[:return_to]
-        session[:spree_user_return_to] = params[:return_to]
+        set_after_sign_in_location(params[:return_to])
       elsif params[:spree_user_return_to]
-        session[:spree_user_return_to] = params[:spree_user_return_to]
+        set_after_sign_in_location(params[:spree_user_return_to])
+      elsif is_user_came_from_current_app
+        set_after_sign_in_location(request.referrer)
       end
     end
 end

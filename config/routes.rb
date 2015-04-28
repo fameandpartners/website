@@ -427,7 +427,7 @@ FameAndPartners::Application.routes.draw do
     match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
     # seo routes like *COLOR*-Dress
-    get "(:colour)-Dresses" => redirect('/dresses/%{colour}')
+    get "(:colour)-Dresses" => redirect { |params| "/dresses/#{params[:colour].downcase}" }
 
     # seo route
     get "new-collection" => "products/collections#show", as: :new_collection
