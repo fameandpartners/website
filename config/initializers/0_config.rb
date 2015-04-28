@@ -120,6 +120,7 @@ when :preproduction
 
   configatron.aws.s3 do |s3|
     s3.bucket            = 'preprod-fameandpartners'
+    s3.region            = 'us-west-2'
     s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
     s3.secret_access_key = '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'
   end
@@ -138,6 +139,7 @@ when :production
 
   configatron.aws.s3 do |s3|
     s3.bucket            = 'fameandpartners'
+    s3.region            = 'us-west-2'
     s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
     s3.secret_access_key = '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'
   end

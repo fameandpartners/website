@@ -62,15 +62,23 @@ end
 options = {
   compress: true,
   include_root: false,
-  sitemaps_path: 'system' # folder not in repository
+  sitemaps_path: 'sitemap' # folder not in repository
 }
 
 if Rails.env.development?
   SitemapGenerator::Sitemap.default_host = "http://localhost:3600"
-  options[:compress] = false
 end
 
-SitemapGenerator::Sitemap.create_index = false
+unless Rails.env.development?
+  SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
+    :aws_access_key_id => configatron.aws.s3.access_key_id,
+    :aws_secret_access_key => configatron.aws.s3.secret_access_key,
+    :fog_provider => 'AWS',
+    :fog_directory => configatron.aws.s3.bucket,
+    :fog_region => configatron.aws.s3.region
+  )
+end
+
 SitemapGenerator::Sitemap.create(options) do
   # add '/' - added by default
   # have to add /en & /au
@@ -142,28 +150,8 @@ SitemapGenerator::Sitemap.create(options) do
   statics_pages.each do |page_path|
     add page_path, priority: 0.5, alternates: build_alternates(page_path)
   end
-
-#  # celebrities
-#  Celebrity.published.each do |celebrity|
-#    path = "/celebrities/#{celebrity.slug}"
-#    add path, { priority: 0.3, alternates: build_alternates(path) }
-#  end
-#
-#  # blog posts
-#  Blog::Post.includes(:author, :category).published.each do |post|
-#    add post_path(post), priority: 0.3, alternates: build_alternates(post_path(post))
-#  end
-end
-
-file_name = options[:compress] ? 'sitemap.xml.gz' : 'sitemap.xml'
-target_file_path = File.join(Rails.root, 'public', file_name)
-source_file_path = File.join(Rails.root, 'public', 'system', file_name)
-
-# create symlink
-if !FileTest.exists?(target_file_path) #&& FileTest.exists?(source_file_path)
-  system("ln -s #{source_file_path} #{target_file_path}")
 end
 
 unless Rails.env.development?
-  SitemapGenerator::Sitemap.ping_search_engines("http://#{configatron.host}/#{ file_name }")
+  SitemapGenerator::Sitemap.ping_search_engines
 end
