@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Marketing::Subscriber do
-  let(:user) { Spree::User.new(email: 'some.text@gmail.com') }
-  let(:user_visit) { Marketing::UserVisit.new(referrer: 'my_test_referrer', utm_campaign: 'store_utm_campaign') }
+  let(:user)        { build(:spree_user) }
+  let(:user_visit)  { build(:marketing_user_visit) }
 
   context "#create" do
     it "raises exception if not email available" do
@@ -62,7 +62,7 @@ describe Marketing::Subscriber do
       ip = 'test_ip_address'
 
       # by user last_sign_in_ip
-      user = Spree::User.new({last_sign_in_ip: ip}, { without_protection: true })
+      user.last_sign_in_ip = ip
       expect( Marketing::Subscriber.new(ip_address: ip ).details['ip_address']).to eq(ip)
 
       # by provided
