@@ -24,4 +24,13 @@ describe CreditCardGatewayService do
     end
   end
 
+  context 'with only AUD gateway and USD currency' do
+    let(:order)   { double(Spree::Order, :available_payment_methods => [aud]) }
+    let(:currency) { 'USD' }
+
+    it 'should return the correct gateway' do
+      expect(service.gateway).to eq aud
+    end
+  end
+
 end
