@@ -1,18 +1,21 @@
 # don't think what caching require here
 # possible, it should be done layer up or down from here
 class Products::CollectionFilter
+
+  Collection = Struct.new(:styles, :events, :shapes, :colors, :sort_orders)
+
   class << self
     def read
-      OpenStruct.new({
-        styles: Repositories::Taxonomy.read_styles,
-        events: Repositories::Taxonomy.read_events,
-        shapes: ProductStyleProfile::BODY_SHAPES,
-        colors: Repositories::ProductColors.read_all,
-        sort_orders: available_sort_orders
-      })
+      Collection.new(
+        Repositories::Taxonomy.read_styles,
+        Repositories::Taxonomy.read_events,
+        ProductStyleProfile::BODY_SHAPES.sort,
+        Repositories::ProductColors.read_all,
+        available_sort_orders
+      )
     end
 
-    # copy-paste from Spree::Variant.color_option_type.try(:option_values) 
+    # copy-paste from Spree::Variant.color_option_type.try(:option_values)
     # Products::ProductsFilter.available_sort_orders,
     def available_sort_orders
       [
