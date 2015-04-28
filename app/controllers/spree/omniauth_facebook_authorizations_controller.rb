@@ -4,42 +4,28 @@ class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
 
   # store params in session and redirects through omniauth_callbacks#through
   def fb_auth
-    if params[:prom]
-      session[:spree_user_return_to] = main_app.step1_custom_dresses_path
-    elsif params[:quiz]
-      session[:show_quiz] = true
-    elsif params[:competition]
-      session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
-      session[:invite] = params[:invite]
-      session[:competition] = params[:competition]
-    elsif params[:personalization]
-      session[:spree_user_return_to] = main_app.personalization_products_path(cf: 'custom-dresses-signup')
-    elsif params[:return_to] && params[:return_to] == 'checkout'
-      session[:spree_user_return_to] = spree.checkout_path
-    elsif params[:bridesmaid_party]
-      session[:spree_user_return_to] = main_app.bridesmaid_party_info_path
-    end
+    session[:sign_up_reason] = nil
 
-    if session[:sign_up_reason].blank?
-      if params[:prom]
-        session[:sign_up_reason] = 'custom_dress'
-      elsif params[:quiz]
-        session[:sign_up_reason] = 'style_quiz'
-      elsif params[:competition]
-        session[:sign_up_reason] = 'competition'
-      elsif params[:personalization]
-        session[:sign_up_reason] = 'customise_dress'
-      elsif params[:bridesmaid_party]
-        session[:sign_up_reason] = 'bridesmaid_party'
+    # code for bridesmaid party should be managed with bridesmaid-party module,
+    # and don't pollute main app
+    if params[:bridesmaid_party]
+      session[:sign_up_reason] = 'bridesmaid_party'
 
-        if session[:bridesmaid_party_event_id]
-          event = BridesmaidParty::Event.find(session[:bridesmaid_party_event_id])
-          session[:spree_user_return_to] = main_app.bridesmaid_party_moodboard_path(
-            user_slug: event.spree_user.slug
-          )
-          session[:show_successfull_login_popup] = true
-        end
+      if session[:bridesmaid_party_event_id]
+        event = BridesmaidParty::Event.find(session[:bridesmaid_party_event_id])
+        set_after_sign_in_location(
+          main_app.bridesmaid_party_moodboard_path( user_slug: event.spree_user.slug)
+        )
+        session[:show_successfull_login_popup] = true
+      else
+        set_after_sign_in_location(main_app.bridesmaid_party_info_path)
       end
+    elsif params[:return_to]
+      set_after_sign_in_location(params[:return_to])
+    elsif params[:spree_user_return_to]
+      set_after_sign_in_location(params[:spree_user_return_to])
+    elsif is_user_came_from_current_app
+      set_after_sign_in_location(request.referrer)
     end
 
     redirect_to spree.spree_user_omniauth_authorize_url(provider: :facebook, scope: 'email,public_profile,user_friends')

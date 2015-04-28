@@ -3,6 +3,11 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Auth
 
+#  # this provides default providers details.
+#  SpreeSocial::OAUTH_PROVIDERS.each do |provider|
+#    provides_callback_for provider[1].to_sym
+#  end
+
   def facebook
     if request.env["omniauth.error"].present?
       flash[:error] = t("devise.omniauth_callbacks.failure", :kind => auth_hash['provider'], :reason => t(:user_was_not_valid))
@@ -18,16 +23,11 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       FacebookDataFetchWorker.perform_async(authentication.user.id, auth_hash['uid'], auth_hash['credentials']['token'])
 
-      sign_up_reason = session.delete(:sign_up_reason)
-      if sign_up_reason.eql?('custom_dress')
-        session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
-      elsif sign_up_reason.eql?('competition')
-        session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
-      elsif sign_up_reason.eql?('bridesmaid_party')
+      if session[:sign_up_reason].eql?('bridesmaid_party')
         try_apply_bridesmaid_party_callback(authentication.user)
       end
-
       redirect_to after_sign_in_path_for(authentication.user), flash: { just_signed_up: true }
+
     elsif spree_current_user
       spree_current_user.apply_omniauth(auth_hash)
       spree_current_user.save
@@ -47,12 +47,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if user.new_record?
         user.sign_up_via = Spree::User::SIGN_UP_VIA.index('Facebook')
         user.sign_up_reason = session[:sign_up_reason]
-
-        if session[:sign_up_reason].eql?('competition')
-          session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
-        else
-          session[:spree_user_return_to] = main_app.root_path(:cf => :signup)
-        end
       end
 
       if user.save
@@ -63,13 +57,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         sign_in :spree_user, user
 
         sign_up_reason = session.delete(:sign_up_reason)
-        if sign_up_reason.eql?('custom_dress')
-          session[:spree_user_return_to] = main_app.step1_custom_dresses_path(user_addition_params)
-        elsif sign_up_reason.eql?('competition')
-          session[:spree_user_return_to] = main_app.enter_competition_path(competition_id: Competition.current)
-        elsif sign_up_reason.eql?('customise_dress')
-          session[:spree_user_return_to] = main_app.personalization_products_path(cf: 'custom-dresses-signup')
-        elsif sign_up_reason.eql?('bridesmaid_party')
+        if sign_up_reason.eql?('bridesmaid_party')
           try_apply_bridesmaid_party_callback(user)
         end
 
@@ -87,10 +75,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session[:guest_token] = nil
     end
   end
-
-  #SpreeSocial::OAUTH_PROVIDERS.each do |provider|
-  #   provides_callback_for provider[1].to_sym
-  #end
 
   def failure
     set_flash_message :alert, :failure, :kind => failed_strategy.name.to_s.humanize, :reason => failure_message
