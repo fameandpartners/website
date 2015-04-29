@@ -152,9 +152,13 @@ class ApplicationController < ActionController::Base
     end
   end
 =end
-
+  
+  # TODO: This method will have to change when multiple locales support comes
+  # It'll need to have something like SiteVersion.pluck(:permalink)
+  # It'll also need to be out of here. It should be in a service, like many method on this fat controller
   def url_with_correct_site_version
-     '/' + current_site_version.code + request.fullpath.gsub(/\A(\/(au|us))/, '/')
+    site_code = current_site_version.default? ? '' : "#{current_site_version.code}/"
+    '/' + site_code + request.fullpath.gsub(/\A(\/(au|us))/, '')[1..-1]
   end
 
   def store_current_location
