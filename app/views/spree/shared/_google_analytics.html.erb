@@ -52,7 +52,6 @@
 <% if flash[:commerce_tracking] && @order.present? %>
   <!-- img src="<%= Marketing::RakutenTracker.new(@order, current_site_version).url %>" /-->
   <%= render :partial => 'spree/shared/rakuten' %>
-  <%= render :partial => 'spree/shared/customerio' %>
 <% end %>
 
 <%# fb tracking pixel %>

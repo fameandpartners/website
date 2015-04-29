@@ -1,3 +1,0 @@
-<script type="text/javascript">
-  _cio.track('purchased', <%= raw Marketing::CustomerIOTracker.new(@order, current_site_version).order_data.to_json %>);
-</script>
