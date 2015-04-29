@@ -6,6 +6,7 @@ ruby:
     promocode: decode(params[:pc]),
     ip_address: request.remote_ip
   ).details
+  details[:campaign] = 'home' if details[:campaign].blank?
 
 #email-newsletter-signup
   .container-fluid

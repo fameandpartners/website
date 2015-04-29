@@ -11,7 +11,7 @@ class Campaigns::EmailCaptureController < ApplicationController
       email: params[:email],
       campaign: params[:content],
       promocode: params[:promocode],
-      sign_up_reason: "email_capture_#{params[:email]}"
+      sign_up_reason: "email_capture_#{params[:content]}"
     ).create
 
     render :json => { status: 'ok' }, status: :ok
