@@ -157,9 +157,8 @@ class ApplicationController < ActionController::Base
   # It'll need to have something like SiteVersion.pluck(:permalink)
   # It'll also need to be out of here. It should be in a service, like many method on this fat controller
   def url_with_correct_site_version
-    site_code = current_site_version.default? ? '' : current_site_version.code
     url_without_site_code = request.fullpath.gsub(/\A(\/(au|us))/, '')
-    URI.join(request.base_url, site_code + url_without_site_code).to_s
+    URI.join(request.base_url, current_site_version.to_param + url_without_site_code).to_s
   end
 
   def store_current_location

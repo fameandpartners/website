@@ -3,11 +3,11 @@ require 'spec_helper'
 describe ApplicationController, :type => :controller do
   describe '#url_with_correct_site_version' do
     before(:each) do
-      allow(controller).to receive(:current_site_version).and_return(current_site_version_double)
+      allow(controller).to receive(:current_site_version).and_return(current_site_version)
     end
 
     context 'current site code is the default' do
-      let(:current_site_version_double) { double('Current Site Version', code: 'us', default?: true) }
+      let(:current_site_version) { build_stubbed(:site_version, permalink: 'us', default: true) }
 
       before(:each) { controller.request.path_info = '/my-awesome-request' }
 
@@ -18,7 +18,7 @@ describe ApplicationController, :type => :controller do
     end
 
     describe 'current site code is anything else' do
-      let(:current_site_version_double) { double('Current Site Version', code: 'au', default?: false) }
+      let(:current_site_version) { build_stubbed(:site_version, permalink: 'au', default: false) }
 
       context 'request is made with a specific code on its URL' do
         before(:each) { controller.request.path_info = '/us/my-awesome-request' }
