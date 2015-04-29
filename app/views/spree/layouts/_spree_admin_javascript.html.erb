@@ -1,0 +1,12 @@
+<%= javascript_include_tag 'admin/all', debug: false %>
+<%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false' %>
+
+<%= render "spree/admin/shared/translations" %>
+<%= render "spree/admin/shared/routes" %>
+
+<%= javascript_tag do -%>
+  jQuery.alerts.dialogClass = 'spree';
+  <%== "var AUTH_TOKEN = #{form_authenticity_token.inspect};" %>
+<% end -%>
+
+<%= javascript_include_tag 'admin/all', debug: false %>
