@@ -29,7 +29,7 @@ class Marketing::CaptureUtmParams
   private
 
     def allowed_utm_params
-      utm_params_keys = [:utm_campaign, :utm_source, :utm_medium, :utm_term, :utm_content]
+      utm_params_keys = [:utm_campaign, :utm_source, :utm_medium, :utm_term, :utm_content, :referrer]
       utm_params.extract!(*utm_params_keys)
     end
 

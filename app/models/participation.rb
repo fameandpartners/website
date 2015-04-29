@@ -1,3 +1,4 @@
+# seems be old code...
 class Participation
   include ActiveModel::Validations
 

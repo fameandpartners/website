@@ -18,4 +18,8 @@ FactoryGirl.define do
   sequence :permalink do |n|
     "some_permalink_#{ n }"
   end
+
+  sequence :utm_campaign do |n|
+    "utm_campaign_#{ n }"
+  end
 end
