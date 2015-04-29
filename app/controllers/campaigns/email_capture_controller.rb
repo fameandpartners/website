@@ -1,10 +1,4 @@
 class Campaigns::EmailCaptureController < ApplicationController
-  def new
-    respond_to do |format|
-      format.js { render partial: 'form', layout: false, status: :ok }
-    end
-  end
-
   def create
     Marketing::Subscriber.new(
       token: cookies['utm_guest_token'],
