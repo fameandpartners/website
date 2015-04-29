@@ -9,14 +9,11 @@
         s = document.getElementsByTagName('script')[0];
     t.async = true;
     t.id    = 'cio-tracker';
-    t.setAttribute('data-site-id', 'YOUR_SITE_ID');
+    t.setAttribute('data-site-id', '<%= configatron.customerio.site_id %>');
     t.src = 'https://assets.customer.io/assets/track.js';
     s.parentNode.insertBefore(t, s);
   })();
-
 </script>
-
-
 
 <% if current_spree_user %>
 <script type="text/javascript">
