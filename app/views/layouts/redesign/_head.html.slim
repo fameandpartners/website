@@ -20,8 +20,7 @@ meta property="og:site_name" content="Fame &amp; Partners"
 - else
   script src="//use.typekit.net/day0prb.js" type="text/javascript"
 
-- if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)  
-  = render '/shared/customerio'
+- if Rails.env.production? || Features.active?(:test_analytics)
   = render '/spree/shared/google_analytics'
   = render '/shared/zopim'
   = render '/shared/hotjar'
