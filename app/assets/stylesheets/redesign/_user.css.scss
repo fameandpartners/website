@@ -14,7 +14,7 @@
 // Account
 .page-content.user {
 	padding-top: 0;
-	
+
 	.row {
 		margin-top:20px;
 	}
@@ -67,10 +67,29 @@ h2.order-number {
   thead tr th, .details td{
     background-color: #f9f9f9;
   }
+
+  tbody tr.address td p, tbody tr.total td p {
+    text-align: left;
+  }
+}
+
+.table.orders-table {
+  margin-top: 4rem;
+
+  thead tr th {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 12px;
+    background-color: #f9f9f9;
+  }
 }
 
 .table > tbody > tr > td {
   border: 1px solid #f9f9f9;
   vertical-align: middle;
   text-align: center;
+
+  a:hover {
+    color: #355e6d
+  }
 }
