@@ -39,10 +39,38 @@
 .page-content.moodboard {
   .category--item {
     .details { text-transform: uppercase;}
-    
+
     // - Override style.css
     .btn-black { color: #fff;}
-  } 
+  }
 }
 // @end Moodboard
 // ---------------
+
+.ordered-item-image {
+  width: 120px;
+  margin: auto;
+}
+
+h2.order-number {
+  font-size: 15px;
+}
+
+.table.order-items {
+
+  thead tr th {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  thead tr th, .details td{
+    background-color: #f9f9f9;
+  }
+}
+
+.table > tbody > tr > td {
+  border: 1px solid #f9f9f9;
+  vertical-align: middle;
+  text-align: center;
+}
