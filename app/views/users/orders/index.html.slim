@@ -7,6 +7,53 @@
   .container.relative
 
     = render 'users/shared/tabs', active_tab: 'orders'
+
+    .row
+      .col-md-12
+        - if @orders.empty?
+          p You have no orders
+        - else
+          table.table.table-striped.table-hover.table-responsive.orders-table
+            thead
+              tr
+                th Order
+                th Order date
+                th Payment state
+                th Order status
+                th Shipping state
+                th Total
+            tbody
+              - @orders.each do |order|
+                tr
+                  td = link_to order.number, user_order_path(order), remote: true
+                  td = l(order.updated_at.to_date)
+                  td = order_payment_state(order)
+                  td = order_shipment_state(order)
+                  td
+                    - unless order_shipment_state(@order) == "ready"
+                      h3 Delivery Status
+                      p.labeled = order_shipment_state(@order)
+                      - if @order.shipment
+                        - if @order.shipment.is_dhl?
+                          p
+                            ' Track your order with DHL:
+                            = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
+                              DHL [#{ @order.shipment.tracking }]
+                        - elsif @order.shipment.is_auspost?
+                          p
+                            ' Track your order with Australia Post:
+                            = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
+                              AUSPOST [#{ @order.shipment.tracking }]
+                        - elsif @order.shipment.is_tnt?
+                          p
+                            ' Track your order with TNT:
+                            = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
+                              TNT [#{ @order.shipment.tracking }]
+                        - else
+                          h3 Tracking Number
+                          p.labeled = @order.shipment.number
+                    
+                  td = order.display_total
     .row
       .col-md-12
         p
@@ -15,26 +62,3 @@
           a href="mailto:team@fameandpartners.com" team@fameandpartners.com
           | &nbsp;
           | for your order tracking number.
-    .row
-      .col-md-12
-        - if @orders.empty?
-          p You have no orders
-        - else
-          table.table.table-striped.table-hover.table-responsive
-            thead
-              tr
-                th Order
-                th Order date
-                th Status
-                th Payment state
-                th Delivery state
-                th Total
-            tbody
-              - @orders.each do |order|
-                tr
-                  td = link_to order.number, user_order_path(order), remote: true
-                  td = l(order.updated_at.to_date)
-                  td = order_state(order)
-                  td = order_payment_state(order)
-                  td = order_shipment_state(order)
-                  td = order.display_total
