@@ -30,29 +30,11 @@
                   td = order_payment_state(order)
                   td = order_shipment_state(order)
                   td
-                    - unless order_shipment_state(@order) == "ready"
-                      h3 Delivery Status
-                      p.labeled = order_shipment_state(@order)
-                      - if @order.shipment
-                        - if @order.shipment.is_dhl?
-                          p
-                            ' Track your order with DHL:
-                            = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
-                              DHL [#{ @order.shipment.tracking }]
-                        - elsif @order.shipment.is_auspost?
-                          p
-                            ' Track your order with Australia Post:
-                            = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
-                              AUSPOST [#{ @order.shipment.tracking }]
-                        - elsif @order.shipment.is_tnt?
-                          p
-                            ' Track your order with TNT:
-                            = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
-                              TNT [#{ @order.shipment.tracking }]
-                        - else
-                          h3 Tracking Number
-                          p.labeled = @order.shipment.number
-                    
+                     -if @orders.shipped?
+                      = link_to shipment_tracking_url(@order.shipment), target:'_blank'
+                     -else
+                       Not shipped
+
                   td = order.display_total
     .row
       .col-md-12
