@@ -31,7 +31,8 @@ $ ->
     $('.blog-posts-list').hide()
     $("#blog_list_#{@.id}").show()
 
-  google.maps.event.addDomListener(window, 'load', bindGoogleMapEvents);
+  if google?
+    google.maps.event.addDomListener(window, 'load', bindGoogleMapEvents);
   $('#blog_list_celebrity_photos').show()
 
   $('.add_fields').off('click')
