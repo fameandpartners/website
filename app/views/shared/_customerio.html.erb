@@ -14,14 +14,19 @@
     s.parentNode.insertBefore(t, s);
   })();
 
-  <% if current_spree_user %>
-    _cio.identify({
-      id: <%= current_spree_user.id %>,
-      email: '<%= current_spree_user.email %>',
-      created_at: <%= current_spree_user.created_at.to_i %>,
-      first_name: '<%= current_spree_user.first_name %>',
-      last_name: '<%= current_spree_user.last_name %>',
-      site_version: '<%= current_site_version.code %>',
-    });
-  <% end %>
 </script>
+
+
+
+<% if current_spree_user %>
+<script type="text/javascript">
+  _cio.identify({
+    id: <%= current_spree_user.id %>,
+    email: '<%= current_spree_user.email %>',
+    created_at: <%= current_spree_user.created_at.to_i %>,
+    first_name: '<%= current_spree_user.first_name %>',
+    last_name: '<%= current_spree_user.last_name %>',
+    site_version: '<%= current_site_version.code %>',
+  });
+</script>
+<% end %>
