@@ -29,15 +29,15 @@ class Repositories::Taxonomy
     end
 
     def read_styles
-      taxons.select{|taxon| taxon.taxonomy == 'Style' && !taxon.root }
+      taxons.select{|taxon| taxon.taxonomy == 'Style' && !taxon.root }.sort_by{ |t| t.name }
     end
 
     def read_events
-      taxons.select{|taxon| taxon.taxonomy == 'Event' && !taxon.root }
+      taxons.select{|taxon| taxon.taxonomy == 'Event' && !taxon.root }.sort_by{ |t| t.name }
     end
 
     def read_collections
-      taxons.select{|taxon| taxon.taxonomy == 'Range' && !taxon.root }
+      taxons.select{|taxon| taxon.taxonomy == 'Range' && !taxon.root }.sort_by{ |t| t.name }
     end
 
     def taxons

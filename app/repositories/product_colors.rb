@@ -39,7 +39,7 @@ module Repositories
 
             OpenStruct.new(
               id: group.id,
-              name: group.name.to_s.downcase, 
+              name: group.name.to_s.downcase,
               presentation: group.presentation,
               color_ids: color_ids,
               representative: representative
@@ -50,7 +50,7 @@ module Repositories
 
       # colors guarantee will be reloaded after restart... we can live with that
       def read_all
-        colors_map.values.clone
+        colors_map.values.clone.sort_by{ |s| s.name }
       end
 
       def read(id)

@@ -41,6 +41,7 @@ gem 'instagram'
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
 gem 'sitemap_generator'
+gem 'fog'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
