@@ -7,6 +7,12 @@ FameAndPartners::Application.routes.draw do
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
 
+  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+    devise_for :user, class_name: Spree::User, skip: [:unlocks, :registrations, :passwords, :sessions, :omniauth_callbacks] do
+      get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
+    end
+  end
+
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
@@ -86,8 +92,10 @@ FameAndPartners::Application.routes.draw do
       get '/custom-:product_slug(/:color_name)',  to: redirect(product_style_custom_redirect)
       get '/styleit-:product_slug(/:color_name)', to: redirect(product_style_custom_redirect)
 
+      # Colors should behave like query strings, and not paths
+      get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug).to_query}" }
+      get '/dress-:product_slug' => 'products/details#show'
 
-      get '/dress-:product_slug(/:color_name)' => 'products/details#show'
       #roots categories
       get '/style',  to: redirect('/dresses')
       get '/event',  to: redirect('/dresses')
@@ -221,8 +229,7 @@ FameAndPartners::Application.routes.draw do
 
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
-    get '/workshops', to: redirect('http://www.fameandpartners.com/%{site_version}/signup?workshop=true&utm_source=direct&utm_medium=direct&utm_term=workshop1&utm_campaign=workshops')
-
+    
     # Fallen Product URL
     get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
     get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
@@ -420,7 +427,7 @@ FameAndPartners::Application.routes.draw do
     match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
     # seo routes like *COLOR*-Dress
-    get "(:colour)-Dresses" => redirect('/dresses/%{colour}')
+    get "(:colour)-Dresses" => redirect { |params| "/dresses/#{params[:colour].downcase}" }
 
     # seo route
     get "new-collection" => "products/collections#show", as: :new_collection

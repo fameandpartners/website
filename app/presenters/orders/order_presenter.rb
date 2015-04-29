@@ -5,7 +5,7 @@ module Orders
 
     extend Forwardable
 
-    def_delegators :@order, :customer_notes, :number, :completed_at, :name, :first_name
+    def_delegators :@order, :customer_notes, :number, :completed_at, :name, :first_name, :site_version
 
     attr_reader :order, :items
 
@@ -29,7 +29,7 @@ module Orders
     end
 
     def projected_delivery_date
-      order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date) 
+      order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date)
     end
 
     def promo_codes

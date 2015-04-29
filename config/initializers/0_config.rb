@@ -32,6 +32,8 @@ configatron.cache.expire do |expire|
   expire.long     = 1.day
 end
 
+configatron.customerio.site_id = '14c8952c36a16f4c20c6'
+
 configatron.order_production_emails = ['production@fameandpartners.dev']
 
 configatron.email_marketing.delay_time do |delay_time|
@@ -120,6 +122,7 @@ when :preproduction
 
   configatron.aws.s3 do |s3|
     s3.bucket            = 'preprod-fameandpartners'
+    s3.region            = 'us-west-2'
     s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
     s3.secret_access_key = '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'
   end
@@ -138,6 +141,7 @@ when :production
 
   configatron.aws.s3 do |s3|
     s3.bucket            = 'fameandpartners'
+    s3.region            = 'us-west-2'
     s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
     s3.secret_access_key = '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'
   end
@@ -146,6 +150,8 @@ when :production
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
 
   configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
+
+  configatron.customerio.site_id = 'a416731201185e0c6f5f'
 
 when :test
   configatron.elasticsearch.indices do |index|

@@ -1,5 +1,6 @@
 Spree::CheckoutController.class_eval do
   before_filter :prepare_order, only: :edit
+  before_filter :set_order_site_version, :only => :update
   before_filter :find_payment_methods, only: [:edit, :update]
   skip_before_filter :check_registration
 
@@ -188,11 +189,7 @@ Spree::CheckoutController.class_eval do
   end
 
   def find_payment_methods
-    if Features.active?(:usd_payment_gateway, try_spree_current_user)
-      @credit_card_gateway = CreditCardGatewayService.new(@order, current_site_version.currency).gateway
-    else
-      @credit_card_gateway = @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
-    end
+    @credit_card_gateway = CreditCardGatewayService.new(@order, current_site_version.currency).gateway
 
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
@@ -200,6 +197,10 @@ Spree::CheckoutController.class_eval do
   end
 
   helper_method :completion_route
+
+  def set_order_site_version
+    @order.site_version = current_site_version.code
+  end
 
   def current_step
     return nil if @order.blank?

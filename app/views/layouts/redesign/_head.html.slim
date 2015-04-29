@@ -7,7 +7,6 @@ link rel="canonical" href=get_canonical_href
 
 link rel="alternate" hreflang="en-US" href=get_hreflang(:us)
 link rel="alternate" hreflang="en-AU" href=get_hreflang(:au)
-link rel="alternate" hreflang="x-default" href=get_hreflang(:us)
 
 meta property="og:title" content=get_title
 meta property="og:url" content=get_canonical_href
@@ -21,7 +20,8 @@ meta property="og:site_name" content="Fame &amp; Partners"
 - else
   script src="//use.typekit.net/day0prb.js" type="text/javascript"
 
-- if Rails.env.production? || Features.active?(:test_analytics)
+- if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
+  = render '/shared/customerio'
   = render '/spree/shared/google_analytics'
   = render '/shared/zopim'
   = render '/shared/hotjar'

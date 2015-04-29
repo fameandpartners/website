@@ -5,13 +5,14 @@ class Fabrication < ActiveRecord::Base
     primary_key: 'uuid'
 
   STATES = {
-      purchase_order_placed:    'PO Placed',
-      purchase_order_confirmed: 'PO Confirmed',
-      fabric_assigned:          'Fabric Assigned',
-      style_cut:                'Style Cut',
-      make:                     'Make',
-      qc:                       'QC',
-      shipped:                  'Shipped'
+      purchase_order_placed:      'PO Placed',
+      purchase_order_confirmed:   'PO Confirmed',
+      fabric_assigned:            'Fabric Assigned',
+      style_cut:                  'Style Cut',
+      make:                       'Make',
+      qc:                         'QC',
+      shipped:                    'Shipped',
+      customer_feedback_required: 'Customer Feedback Required'
   }.stringify_keys.freeze
 
   STATES_OPTIONS = STATES.invert.freeze
