@@ -1,8 +1,0 @@
-.title-join Join for free styling advice
-.campaign-desc Free member styling sessions, weekly glamour inspiration, flash sales & $20 to spend at our store!
-
-.form
-  = form_for (@participation || Participation.new), as: :participation, url: campaigns_newsletter_path, remote: true do |f|
-    .string
-      = f.email_field :email, class: 'inputbox', placeholder: 'Enter your email'
-      input.btn.submitbox type="submit" value="Join"
