@@ -133,6 +133,8 @@ en:
     shipped: Your dress has been shipped
     backorder: Your dress is on backorder
     partial: Your dress is with a seamstress
+  payment_states:
+    paid: Paid
   style:
     glam:
       title: "glam"

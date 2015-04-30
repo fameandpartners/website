@@ -38,6 +38,12 @@ Spree::Order.class_eval do
     shipment_state.present? && shipment_state == 'shipped'
   end
 
+  def fabrication_status
+    fabrication_states = line_items.collect {|i| i.fabrication.state if i.fabrication }.uniq
+    return :processing if fabrication_states.include?(nil)
+    fabrication_states.sort_by {|i| Fabrication::STATE_ORDER.index(i) }.first
+  end
+
   # todo: this should be done in some service, order has no relation to this func
   def track_user_bought_dress
     # TODO: check this works

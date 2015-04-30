@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Spree::Order, :type => :model do
-  let(:order)         { Spree::Order.new }
+  subject(:order)         { Spree::Order.new }
   let(:completed_at)  { DateTime.parse('Wed April 1 2015') }
 
   before do
@@ -14,4 +14,20 @@ describe Spree::Order, :type => :model do
     expect(order).to receive(:update_attribute).with(:projected_delivery_date, expected_date)
     order.project_delivery_date
   end
+
+  describe 'shipped' do
+    context 'shipped' do
+      before do
+        allow(order).to receive(:shipment_state).and_return('shipped')
+      end
+      it{ expect(order).to be_shipped }
+    end
+    context 'not shipped' do
+      before do
+        allow(order).to receive(:shipment_state).and_return('pending')
+      end
+      it{ expect(order).to_not be_shipped }
+    end
+  end
+  
 end

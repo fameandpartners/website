@@ -134,8 +134,20 @@ en-AU:
     canceled: cancelled
     cart: cart
   shipment_states:
-    pending: Your dress is with a seamstress
-    ready: Your dress is with a seamstress
-    shipped: Your dress has been shipped
-    backorder: Your dress is on backorder
-    partial: Your dress is with a seamstress
+    pending: pending
+    ready: ready
+    shipped: shipped
+    backorder: backorder
+    partial: partial
+  order_fabrication_states:
+    processing:                 'Your order is being processed'
+    purchase_order_placed:      'Your order has been received'
+    purchase_order_confirmed:   'Your order has been placed'
+    fabric_assigned:            'Your fabric is being assigned'
+    style_cut:                  'Your dress is in cutting'
+    make:                       'Your dress is with a seamstress'
+    qc:                         'Your dress is in quality control'
+    shipped:                    'Your order has been shipped'
+    customer_feedback_required: 'We need some more information'
+  payment_states:
+    paid: Paid
