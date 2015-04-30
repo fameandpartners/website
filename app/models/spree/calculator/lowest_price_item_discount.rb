@@ -29,15 +29,15 @@ module Spree
           [item.price] * item.quantity
         end.flatten
         items_count = normalized_items_count(items_prices.size)
-        items_prices.sort.first(items_count).sum.to_i
+        items_prices.sort.first(items_count).sum
       end
 
       def normalized_discount
         value = preferred_discount
         if value >= 0 && value <= 100
-          value.to_i / 100.0
+          value / 100
         else
-          0
+          BigDecimal.new(0)
         end
       end
 
