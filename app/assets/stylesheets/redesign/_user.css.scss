@@ -64,11 +64,8 @@ h2.order-number {
     font-size: 12px;
   }
 
-  thead tr th, .details td{
-    background-color: #f9f9f9;
-  }
 
-  tbody tr.address td p, tbody tr.total td p {
+  tbody tr.address td p {
     text-align: left;
   }
 }
@@ -92,4 +89,35 @@ h2.order-number {
   a:hover {
     color: #355e6d
   }
+}
+
+.support > a:hover {
+  color: #355e6d
+}
+
+.back-to-orders {
+  height: 45px;
+  background-color: #033649;
+  color: #FFFFFF;
+  padding: 0 !important;
+  line-height: 45px;
+  width: 200px;
+
+  &:hover {
+    background-color: #355e6d;
+  }
+
+  a {
+    color: #FFFFFF;
+    padding: 0 !important;
+
+  }
+}
+
+tbody tr.total td p  {
+  text-align: right;
+}
+
+h3.phone span {
+  text-transform: none;
 }
