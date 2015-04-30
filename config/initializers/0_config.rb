@@ -3,6 +3,7 @@ configatron.host = 'fameandpartners.com'
 configatron.noreply = 'Fame & Partners<noreply@fameandpartners.com>'
 configatron.admin = 'team@fameandpartners.com'
 configatron.app_name = 'Fame And Partners'
+configatron.sitemap_url = 'http://images.fameandpartners.com/sitemap/sitemap.xml.gz'
 
 # assets
 configatron.aws.enabled = false
