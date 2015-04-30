@@ -24,9 +24,8 @@ Spree::User.class_eval do
               if: :validate_presence_of_phone
             }
 
-  after_create :synchronize_with_campaign_monitor!
-  after_update :synchronize_with_campaign_monitor!,
-               if: :campaign_monitor_should_be_updated?
+  after_create {|user| Marketing::Subscriber.new(user: user).create }
+  after_update {|user| Marketing::Subscriber.new(user: user).update }
 
   def update_profile(args = {})
     if args[:password].blank?
@@ -100,10 +99,6 @@ Spree::User.class_eval do
     end
   end
 
-  def synchronize_with_campaign_monitor!
-    CampaignMonitor.delay.synchronize(email_was || email, self, campaign_monitor_custom_fields)
-  end
-
   def update_site_version(site_version)
     return false  if site_version.blank?
     return true   if self.site_version_id == site_version.id
@@ -127,53 +122,6 @@ Spree::User.class_eval do
     else
       # may be we should check EmailNotification here
       true
-    end
-  end
-
-  private
-
-  def campaign_monitor_sign_up_reason
-    self.class.campaign_monitor_sign_up_reason(sign_up_reason)
-  end
-
-  def self.campaign_monitor_sign_up_reason(code)
-    case code
-      when 'custom_dress' then
-        'Custom dress'
-      when 'style_quiz' then
-        'Style quiz'
-      when 'workshop' then
-        'Workshop'
-      when 'competition' then
-        'Competition'
-      when 'campaign_style_call' then
-        'Campaign Style Call'
-      when 'customise_dress' then
-        'Customise dress'
-      when 'customise_dress' then
-        'Customise dress'
-      when 'customise_dress' then
-        'Customise dress'
-      else
-        nil
-    end
-  end
-
-  def campaign_monitor_custom_fields
-    custom_fields = {
-      :Signupdate => created_at.to_date.to_s
-    }
-
-    if campaign_monitor_sign_up_reason.present?
-      custom_fields[:Signupreason] = campaign_monitor_sign_up_reason
-    end
-
-    custom_fields
-  end
-
-  def campaign_monitor_should_be_updated?
-    %w(email first_name last_name).any? do |attribute_name|
-      changes.keys.include?(attribute_name)
     end
   end
 end

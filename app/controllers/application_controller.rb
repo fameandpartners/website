@@ -14,10 +14,8 @@ class ApplicationController < ActionController::Base
   append_before_filter :check_site_version
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
-  #append_before_filter :get_visitor_info
   append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
-  append_before_filter :capture_utm_params,                 if: proc {|c| params[:utm_campaign].present? }
-  append_before_filter :associate_user_by_utm_guest_token,  if: proc {|c| cookies[:utm_guest_token].present? }
+  append_before_filter :handle_marketing_campaigns
 
   before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
@@ -62,6 +60,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def handle_marketing_campaigns
+    cookies[:referrer] = request.referrer if cookies[:referrer].blank?
+
+    if params[:utm_campaign].present?
+      capture_utm_params
+    end
+
+    if cookies[:utm_guest_token].present? && current_spree_user.present?
+      associate_user_by_utm_guest_token
+    end
+  end
+
   def capture_utm_params
     utm_params = {
       utm_campaign:   params[:utm_campaign],
@@ -102,56 +112,6 @@ class ApplicationController < ActionController::Base
   rescue Exception => e
     true
   end
-
-=begin
-  # NOTE: girlfriends popups seems disabled for now
-  def get_visitor_info
-    #if session[:user_info] == nil
-      host = request.referrer
-      in_referrer = false
-      in_campaign = false
-      in_source = false
-
-      if !host.blank?
-        in_referrer = host
-        cookies[:referrer] = host
-      end
-
-      if params[:utm_campaign].present?
-        in_campaign = params[:utm_campaign]
-        cookies[:utm_campaign] = params[:utm_campaign]
-      end
-
-      if params[:utm_source].present?
-        in_source = cookies[:utm_source]
-        cookies[:utm_source] = params[:utm_source]
-      end
-
-      session[:user_info] = true
-
-      check_if_girlfriend(in_referrer, in_campaign, in_source)
-    #else
-    #  return
-    #end
-  end
-
-  def check_if_girlfriend(in_referrer, in_campaign, in_source)
-    return if cookies[:gf_pop].present?
-
-    referrer = in_referrer.match(/girlfriend|girlfriendmagazine/) unless in_referrer.blank?
-    campaign = in_campaign.match(/girlfriend|gfxfp/) unless in_campaign.blank?
-    source = in_source.match(/gf/) unless in_source.blank?
-
-    if referrer || campaign || source
-      cookies[:gf_campaign] = 'true'
-      unless cookies[:gf_pop] == 'hide'
-        cookies[:gf_pop] = 'show'
-      end
-    else
-      return
-    end
-  end
-=end
 
   def url_with_correct_site_version
      '/' + current_site_version.code + request.fullpath.gsub(/\A(\/(au|us))/, '/')
