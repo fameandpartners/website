@@ -18,7 +18,6 @@ ruby:
       - if successfully_ordered
         h1.no-padding-bottom Order Confirmation
 
-
 .page-content.user.order.show
   .container.relative
     .row
@@ -29,52 +28,40 @@ ruby:
         table.table.order-items
           thead
             tr
-              th colspan="2" details
+              th colspan="2" Item
+              th colspan="1" SKU
               th colspan="1" quantity
-              th colspan="1" size
               th colspan="1" price
-              th colspan="2" customisation
           tbody
             - (cart.products || []).each do |product|
-              tr
+              tr.item
                 td colspan="2"
                   = image_tag product.image.large, class: 'img-responsive ordered-item-image'
 
-                td colspan="1"
-                  = "#{ product.quantity}"
+                  strong Name &nbsp;
+                  = product.name
+                  <br>
+                  strong Size &nbsp;
+                  = product.size.name
+
+                  strong &nbsp;&nbsp;Color &nbsp;
+                  = product.color.presentation
 
                 td colspan="1"
-                  = product.size.name
+                  = product.sku
+
+                td colspan="1"
+                  = "#{ product.quantity }"
 
                 td colspan="1"
                   = product.price.display_price
 
-                td colspan="2"
-                  // TODO add customisation image here
-                td colspan="1"
-              tr.details
-                td colspan="1"
-                  | Name &nbsp;
-                  = product.name
-                td colspan="1"
-                  | Color &nbsp;
-                  = product.color.presentation
-                td colspan="3"
-                td colspan="1"
-                  - product.customizations.each do |customisation|
-                      = customisation.presentation
-                td colspan="1"
-                  - product.customizations.each do |customisation|
-                      = customisation.price.to_s
-
             tr.total
-              td colspan="5"
+              td colspan="3"
               td colspan="3"
                 p.title
                   | Order total &nbsp;
                   = @order.display_total
-
-
 
         - if successfully_ordered
           - if current_site_version.is_australia?
