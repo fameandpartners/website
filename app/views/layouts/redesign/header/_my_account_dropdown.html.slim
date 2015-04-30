@@ -5,6 +5,8 @@
     .account.container-fluid
       ul
         li
+          = link_to 'My Moodboard', id: 'moodboard-trigger'
+        li
           = link_to 'My Details', profile_path
         li
           = link_to 'My Orders', user_orders_path
