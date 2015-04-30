@@ -32,7 +32,7 @@
                   td
                     - if order.shipped?
                       - order.shipments.each do | shipment|
-                        = link_to shipment_tracking_url(shipment), target:'_blank'
+                        = link_to shipment.tracking, shipment_tracking_url(shipment), target:'_blank'
                     - else
                       | Not shipped
 
