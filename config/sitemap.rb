@@ -153,5 +153,8 @@ SitemapGenerator::Sitemap.create(options) do
 end
 
 unless Rails.env.development?
-  SitemapGenerator::Sitemap.ping_search_engines
+  SitemapGenerator::Sitemap.ping_search_engines('http://images.fameandpartners.com/sitemap/sitemap.xml.gz')
+
+  # Delete local Sitemap files. They all were uploaded to S3
+  FileUtils.rm_rf File.join(SitemapGenerator::Sitemap.public_path, SitemapGenerator::Sitemap.sitemaps_path)
 end

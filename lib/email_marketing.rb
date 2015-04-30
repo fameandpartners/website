@@ -1,6 +1,6 @@
 class EmailMarketing
   def self.send_emails
-    send_abandoned_cart_emails
+    # send_abandoned_cart_emails
     send_style_quiz_not_completed_emails
 
     # Added to Wishlist: Send email to a user who added something

@@ -8,5 +8,5 @@ every :hour do
 end
 
 every 1.day, :at => '5:00 am' do
-  rake "sitemap:refresh"
+  rake "sitemap:create", :output => { :error => 'log/sitemap_error.log', :standard => 'log/sitemap.log' }
 end
