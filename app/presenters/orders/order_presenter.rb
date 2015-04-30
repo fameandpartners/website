@@ -1,23 +1,18 @@
-require 'forwardable'
-
 module Orders
-  class OrderPresenter
+  class OrderPresenter < DelegateClass(Spree::Order)
+    delegate :id, :to => :__getobj__
 
-    extend Forwardable
+    attr_reader :items
 
-    def_delegators :@order, :customer_notes, :number, :completed_at, :name, :first_name, :site_version
-
-    attr_reader :order, :items
-
-    def initialize(order, items = nil)
-      @order = order
-      @items = items || order.line_items
+    def initialize(order, items_subset = nil)
+      super(order)
+      @items = items_subset || __getobj__.line_items
     end
 
     alias_method :customer_notes?, :customer_notes
 
     def line_items
-      items.collect { |i| LineItemPresenter.new(i, self) }
+      items.collect { |i| Orders::LineItemPresenter.new(i, __getobj__) }
     end
 
     def total_items
@@ -25,30 +20,31 @@ module Orders
     end
 
     def country_code
-      order.shipping_address.country.iso
+      shipping_address.country.iso
     end
 
     def projected_delivery_date
-      order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date)
+      return unless completed_at.present?
+      __getobj__.projected_delivery_date || Policies::OrderProjectedDeliveryDatePolicy.new(__getobj__).delivery_date
     end
 
     def promo_codes
-      order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
+      adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
         adj.originator.promotion.code
       }
     end
 
     def phone_number
-      order.billing_address.phone
+      billing_address.phone
     end
 
     def shipping_address
-      order.shipping_address.to_string
+      shipping_address.to_string
     end
 
     def tracking_number
-      if order.shipments.any?
-        order.shipments.first.tracking
+      if shipments.any?
+        shipments.first.tracking
       end
     end
   end

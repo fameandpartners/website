@@ -1,0 +1,24 @@
+ /*#  Overdue >1 week - pale red
+ # Overdue 1 week - pale pink
+ # Overdue <1 week - pale orange
+ # Due / <10 days since order date - pale yellow
+ # 2 days out from due date - cream
+ # < 2 days out from due date - pale green
+ # Delivered - pale blue (edited)*/
+
+span.state-critical,
+span.state-urgent,
+span.state-overdue,
+span.state-due,
+span.state-ok,
+span.state-unknown {
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.state-critical { background-color:red;    }
+.state-urgent   { background-color:pink; }
+.state-overdue  { background-color:orange; }
+.state-due      { background-color:yellow; }
+.state-ok       { background-color:palegreen; }
+.state-unknown  { background-color:lightyellow; }

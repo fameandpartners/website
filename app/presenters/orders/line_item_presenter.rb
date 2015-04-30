@@ -3,30 +3,41 @@ require 'forwardable'
 
 
 module Orders
-  class LineItemPresenter
-    extend Forwardable
-    def_delegators :@item, :quantity
+  class LineItemPresenter < DelegateClass(Spree::LineItem)
 
-    attr_reader :item, :order
+    delegate :id, :to => :__getobj__
+
+    extend Forwardable
+    def_delegators :@shipment, :shipped?, :shipped_at
+    def_delegators :@order,
+                   :projected_delivery_date,
+                   :tracking_number,
+                   :number,
+                   :total_items,
+                   :shipping_address
+
+    attr_reader :order, :shipment
 
     def initialize(item, order)
-      @item = item
       @order = order
+      @shipment ||= @order.shipments.detect { |ship| ship.line_items.include?(item) }
+
+      super(item)
     end
 
     def style_number
-      item.variant.product.sku
+      variant.product.sku
     end
 
     def style_name
-      item.variant.product.name
+      variant.product.name
     end
 
     def colour
-      if item.personalization.present?
-        item.personalization.color
+      if personalization.present?
+        personalization.color
       else
-        item.variant.dress_color
+        variant.dress_color
       end
     end
 
@@ -39,13 +50,13 @@ module Orders
     end
 
     def factory
-      Factory.for_product(item.variant.product)
+      Factory.for_product(variant.product)
     end
 
     def customisations
       if personalizations?
         customs = Array.wrap(
-            item.personalization.customization_values.collect { |custom|
+            personalization.customization_values.collect { |custom|
               [custom.presentation, custom.image]
             }
         )
@@ -61,7 +72,7 @@ module Orders
     end
 
     def personalizations?
-      item.personalization.present?
+      personalization.present?
     end
 
     def image?
@@ -74,11 +85,11 @@ module Orders
 
     def as_report
       {
-        :order_number            => order.number,
-        :total_items             => order.total_items,
+        :order_number            => number,
+        :total_items             => total_items,
         :completed_at            => order.completed_at.to_date,
-        :projected_delivery_date => order.projected_delivery_date,
-        :tracking_number         => order.tracking_number,
+        :projected_delivery_date => projected_delivery_date,
+        :tracking_number         => tracking_number,
         :style                   => style_number,
         :factory                 => factory,
         :color                   => colour_name,
@@ -115,17 +126,17 @@ module Orders
     private
 
     def size
-      if item.personalization.present?
-        item.personalization.size
+      if personalization.present?
+        personalization.size
       else
-        item.variant.dress_size.name
+        variant.dress_size.name
       end
     end
 
     # Seriously, wtf are custom dresses so hard?
     def image
       @image ||= begin
-        image = variant_image(item.variant)
+        image = variant_image(variant)
 
         # Customised dresses use the master variant, find the closest
         # matching standard variant, use those images
@@ -136,25 +147,25 @@ module Orders
         # We won't find a colour variant for custom colours, so
         # fallback to whatever product image.
         unless image.present?
-          image = cropped_images_for(item.variant.product.images)
+          image = cropped_images_for(variant.product.images)
         end
 
         image
       rescue NoMethodError
-        Rails.logger.warn("Failed to find image for order email. #{item.order.to_s}")
+        Rails.logger.warn("Failed to find image for order email. #{order.to_s}")
       end
     end
 
     def standard_variant_for_custom_color
       return unless personalizations?
 
-      @standard_variant_for_custom_color ||= item.variant.product.variants.detect { |v|
-        v.option_values.include?(item.personalization.color)
+      @standard_variant_for_custom_color ||= variant.product.variants.detect { |v|
+        v.option_values.include?(personalization.color)
       }
     end
 
     def variant_image(variant)
-      cropped_images_for(item.variant.product.images_for_variant(variant))
+      cropped_images_for(variant.product.images_for_variant(variant))
     end
 
     def cropped_images_for(image_set)

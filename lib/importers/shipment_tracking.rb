@@ -56,16 +56,13 @@ module Importers
       shippable_orders.each_with_index do |order, index|
         prefix = "#{index}/#{total}"
 
-        unless order.can_ship?
-          warn "#{prefix} - Cannot update unshippable order #{order.number}"
-          next
-        end
-
         shipment = order.shipments.first
+        tracking_number = shipment_info_for_order(order).tracking_number
 
-        if shipment.state_transitions.empty? or shipment.state == 'shipped'
-          warn "#{prefix} - Cannot ship already shipped shipment for order #{order.number}"
-          next
+        shipper = Admin::ReallyShipTheShipment.new(shipment, tracking_number)
+
+        unless shipper.valid?
+          warn "#{prefix} #{shipper.errors.full_messages.to_sentence}"
         end
 
         #MONKEY PUNCH!
@@ -74,22 +71,7 @@ module Importers
           nil
         end
 
-        begin  # Sigh.
-          shipment.tracking = shipment_info_for_order(order).tracking_number
-          # Trigger the shipment state machine from `pending` -> `ready`
-          shipment.save!
-          shipment.reload
-          # Trigger the shipment state `ship`
-          shipment.ship!
-
-          order.reload
-          order.save!
-
-          info "#{prefix} - Marked order shipped: #{order.number}"
-        rescue StateMachine::InvalidTransition => e
-          # binding.pry
-          raise e
-        end
+        shipper.ship!
       end
     end
 

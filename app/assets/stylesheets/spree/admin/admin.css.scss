@@ -168,3 +168,10 @@ ul.clean {
     list-style-type: none;
   }
 }
+
+// Force the admin container to max-width.
+// If you don't use the spree admin numbered columns classes, you get a full width view.
+.container {
+    width: inherit!important;
+    padding: 0 0.5rem;
+}

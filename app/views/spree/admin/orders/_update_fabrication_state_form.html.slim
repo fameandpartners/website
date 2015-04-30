@@ -1,2 +1,3 @@
-= form_tag  "/admin/line_items/#{order_line_item.id}", remote: true, method: :put, class: 'fabrication_state_form' do |f|
+= form_tag  "/admin/fabrications/#{order_line_item.id}", remote: true, method: :put, class: 'fabrication_state_form' do |f|
   = select_tag 'fabrication_state', options_for_select(Fabrication::STATES_OPTIONS, selected: order_line_item.fabrication.try(:state)), include_blank: true, class: 'fabrication_state_select'
+  button type='submit' formtarget='_blank' class='icon-share'

@@ -1,0 +1,45 @@
+
+style table.line_items tbody:nth-child(odd) { background-color: #eff5fc; }
+
+
+table.line_items
+  thead
+    tr
+      th Order Date
+      th Delivery Due
+      th SLA
+      th Order Number
+      th Line ID
+      th SKU
+      th Style Name
+      th Customisations
+      th Factory
+      th Customer
+      th Make State
+      th Shipping
+      th Actions
+  - orders.each do |raw_order|
+    - order = Orders::OrderPresenter.new(raw_order)
+    tbody
+      - order.line_items.each do |line_item|
+
+        tr class="state-#{order.state.to_s.downcase}"
+          td = maybe_date(order.completed_at)
+          td = maybe_date(order.projected_delivery_date)
+          td
+            - ship_state = ShippingStatePresenter.new(line_item)
+            span class="state-#{ship_state.delivery_state}"
+              = ship_state.present
+          td = link_to order.number, edit_admin_order_path(order)
+          td = line_item.id
+          td = line_item.variant.sku
+          td = line_item.style_name
+          td = line_item.customisations.collect(&:first).join(', ')
+          td = line_item.factory
+          td = line_item.shipping_address
+          td
+            - if line_item.fabrication.try(:state) == 'shipped'
+              = Fabrication::STATES[line_item.fabrication.state]
+            - else
+              = render partial: 'update_fabrication_state_form', locals: { order_line_item: line_item }
+          = render partial: 'shipment_tracking_number_form', locals: { line_item: line_item }
