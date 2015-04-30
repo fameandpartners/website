@@ -16,15 +16,13 @@ ruby:
   .container
     .page-title--details
       - if successfully_ordered
-        h1.no-padding-bottom Thanks
-      .subtitle We've received your order
+        h1.no-padding-bottom Order Confirmation
+
 
 .page-content.user.order.show
   .container.relative
     .row
       .col-md-8.col-md-offset-2
-        .row
-          h2 YOUR ORDER DETAILS
         .row
           h2.order-number Your Order Number is: #{ @order.number }
 
@@ -36,7 +34,6 @@ ruby:
               th colspan="1" size
               th colspan="1" price
               th colspan="2" customisation
-              th colspan="1" total
           tbody
             - (cart.products || []).each do |product|
               tr
@@ -57,8 +54,10 @@ ruby:
                 td colspan="1"
               tr.details
                 td colspan="1"
+                  | Name &nbsp;
                   = product.name
                 td colspan="1"
+                  | Color &nbsp;
                   = product.color.presentation
                 td colspan="3"
                 td colspan="1"
@@ -67,22 +66,33 @@ ruby:
                 td colspan="1"
                   - product.customizations.each do |customisation|
                       = customisation.price.to_s
-                td colspan="1"
-                  // TODO add total of dress plus any additional charges for size colour or customisation
+
             tr.total
               td colspan="5"
               td colspan="3"
-                p.title Order total
-                // TODO add order total
-            tr.address
-              td colspan="5"
-              td colspan="3"
-                p.title Your order will be delivered to
-                - address = @order.shipping_address
-                p = address.full_name
-                p = address.address1
-                p = "#{ address.city } #{ address.state_text }"
-                p = address.country.to_s
+                p.title
+                  | Order total &nbsp;
+                  = @order.display_total
+
+
+
+        - if successfully_ordered
+          - if current_site_version.is_australia?
+            h3.phone itemprop="telephone" Customer Support: 1300 924 860
+          - else
+            h3.phone itemprop="telephone" Customer Support: 866 527 7797
+          p.support
+            ' Check out our
+            =' link_to 'Support Site', 'http://support.fameandpartners.com', target: '_blank'
+            ' or read our
+            =' link_to 'FAQs.', 'http://fameandpartners.com/faqs', target: '_blank'
+          p Or otherwise contact our friendly team if you need any help.
+          p.support = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
+          - unless @order.user.blank?
+            button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
+          .hide
+            = render 'shared/sales_conversion_pixels', locals: {order: @order}
+
         .row
           p SHARE YOUR PURCHASE WITH YOUR FRIENDS SO NO ONE BUYS THE SAME DRESS FOR YOUR EVENT!
           .social.addthis_toolbox.addthis_default_style *addthis_config
@@ -91,16 +101,3 @@ ruby:
             a.addthis_button_tweet
             a.addthis_counter.addthis_pill_style
           script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
-
-        - if successfully_ordered
-          h3 Customer Support
-          p
-            ' Check out our
-            =' link_to 'Support Site', 'http://support.fameandpartners.com', target: '_blank'
-            ' or read our
-            =' link_to 'FAQs.', 'http://fameandpartners.com/faqs', target: '_blank'
-          p Or otherwise contact our friendly team if you need any help.
-          p = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
-          - unless @order.user.blank?
-            button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
-          = render 'shared/sales_conversion_pixels', locals: {order: @order}
