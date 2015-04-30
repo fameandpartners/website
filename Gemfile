@@ -75,6 +75,7 @@ gem 'addressable', require: false
 gem 'rollout'
 
 gem 'term-ansicolor'
+gem 'ruby-progressbar'
 
 group :assets do
   gem 'bourbon'
