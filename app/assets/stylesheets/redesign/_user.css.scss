@@ -58,15 +58,18 @@ h2.order-number {
 
 .table.order-items {
 
-  thead tr th {
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 12px;
+  thead {
+    border-top: 2px solid #ddd;
+
+    tr th {
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 12px;
+    }
   }
 
-
-  tbody tr.address td p {
-    text-align: left;
+  tbody tr.item  {
+    border-bottom: 2px solid #ddd;
   }
 }
 
@@ -82,7 +85,7 @@ h2.order-number {
 }
 
 .table > tbody > tr > td {
-  border: 1px solid #f9f9f9;
+  border: none;
   vertical-align: middle;
   text-align: center;
 
