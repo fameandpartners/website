@@ -1,5 +1,6 @@
 FameAndPartners::Application.routes.draw do
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
+  get '/sitemap', to: redirect(configatron.sitemap_url), constraints: { format: /xml|xml.gz/ }
 
   match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
 
