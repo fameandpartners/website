@@ -34,6 +34,10 @@ Spree::Order.class_eval do
     end
   end
 
+  def shipped?
+    shipment_state.present? && shipment_state == 'shipped'
+  end
+
   # todo: this should be done in some service, order has no relation to this func
   def track_user_bought_dress
     # TODO: check this works
