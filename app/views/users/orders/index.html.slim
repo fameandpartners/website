@@ -30,17 +30,10 @@
                   td = order_payment_state(order)
                   td = order_shipment_state(order)
                   td
-                     -if @orders.shipped?
-                      = link_to shipment_tracking_url(@order.shipment), target:'_blank'
-                     -else
-                       Not shipped
+                    - if order.shipped?
+                      - order.shipments.each do | shipment|
+                        = link_to shipment_tracking_url(shipment), target:'_blank'
+                    - else
+                      | Not shipped
 
                   td = order.display_total
-    .row
-      .col-md-12
-        p
-          | Please contact
-          | &nbsp;
-          a href="mailto:team@fameandpartners.com" team@fameandpartners.com
-          | &nbsp;
-          | for your order tracking number.
