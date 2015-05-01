@@ -27,8 +27,8 @@
 <% if @order.billing_address.phone.present? %>
 Phone Number: <%= @order.billing_address.phone %>
 <% end %>
-Billing Address: <%= @order.billing_address.to_string %>
-Shipping Address: <%= @order.shipping_address.to_string %>
+Billing Address: <%= @order.billing_address.to_s %>
+Shipping Address: <%= @order.shipping_address.to_s %>
 
 <% if @order.required_to.present? %>
 <%= t(:required_to) %> <%= @order.required_to %>

@@ -5,7 +5,7 @@ module Spree
       respond_to :csv, only: :index
 
       attr_reader :hide_line_items
-      helper_method :hide_line_items
+      helper_method :hide_line_items, :order_shipment_states
 
       def index
         ##################### Original Spree ##############################
@@ -56,6 +56,10 @@ module Spree
       end
 
       private
+
+      def order_shipment_states
+        Spree::Order.uniq.pluck(:shipment_state)
+      end
 
       def hide_line_items
         params[:q][:hide_line_items].present?

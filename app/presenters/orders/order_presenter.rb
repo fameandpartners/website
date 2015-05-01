@@ -49,11 +49,11 @@ module Orders
     end
 
     def phone_number
-      order.billing_address.phone
+      order.try(:billing_address).try(:phone) || 'No Phone'
     end
 
     def shipping_address
-      order.shipping_address.to_string
+      order.try(:shipping_address) || 'No Shipping Address'
     end
 
     def tracking_number
