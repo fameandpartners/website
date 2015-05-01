@@ -1,9 +1,9 @@
 - addthis_config = {}
-/ - if product = @order.products.first
-/   = render 'spree/products/product_meta', product: product
-/   - addthis_config['addthis:url'] = spree.product_url(product)
-/   - addthis_config['addthis:title'] = product.name
-/   - addthis_config['addthis:description'] = product.description
+- if product = order.product
+  = render 'spree/products/product_meta', product: product
+  - addthis_config['addthis:url'] = spree.product_url(product)
+  - addthis_config['addthis:title'] = product.name
+  - addthis_config['addthis:description'] = product.description
 
 javascript:
   var addthis_config = {"data_track_addressbar":true};
