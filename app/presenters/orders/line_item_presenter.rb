@@ -1,6 +1,4 @@
 # encoding: utf-8
-require 'forwardable'
-
 
 module Orders
   class LineItemPresenter < DelegateClass(Spree::LineItem)
@@ -9,20 +7,22 @@ module Orders
 
     extend Forwardable
     def_delegators :@shipment, :shipped?, :shipped_at
-    def_delegators :@order,
+    def_delegators :@wrapped_order,
                    :projected_delivery_date,
                    :tracking_number,
                    :number,
                    :total_items,
-                   :shipping_address
+                   :shipping_address,
+                   :promo_codes
 
-    attr_reader :order, :shipment
+    attr_reader :shipment, :wrapped_order
 
-    def initialize(item, order)
-      @order = order
-      @shipment ||= @order.shipments.detect { |ship| ship.line_items.include?(item) }
+    def initialize(item, wrapped_order)
+      @wrapped_order = wrapped_order
+      @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(item) }
 
       super(item)
+
     end
 
     def style_number
@@ -95,10 +95,11 @@ module Orders
         :color                   => colour_name,
         :size                    => country_size,
         :customisations          => customisations.collect(&:first).join('|'),
-        :promo_codes             => order.promo_codes.join('|'),
+        :promo_codes             => promo_codes.join('|'),
+        :customer_notes          => order.customer_notes,
         :customer_name           => order.name,
-        :customer_phone_number   => order.phone_number.to_s,
-        :shipping_address        => order.shipping_address
+        :customer_phone_number   => wrapped_order.phone_number.to_s,
+        :shipping_address        => wrapped_order.shipping_address
       }
     end
 
@@ -152,7 +153,7 @@ module Orders
 
         image
       rescue NoMethodError
-        Rails.logger.warn("Failed to find image for order email. #{order.to_s}")
+        Rails.logger.warn("Failed to find image for order email. #{wrapped_order.to_s}")
       end
     end
 

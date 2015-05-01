@@ -1,18 +1,33 @@
+require 'forwardable'
+
 module Orders
-  class OrderPresenter < DelegateClass(Spree::Order)
-    delegate :id, :to => :__getobj__
+  class OrderPresenter
 
-    attr_reader :items
+    extend Forwardable
 
-    def initialize(order, items_subset = nil)
-      super(order)
-      @items = items_subset || __getobj__.line_items
+    def_delegators :@order,
+                   :customer_notes,
+                   :id,
+                   :number,
+                   :completed_at,
+                   :name,
+                   :first_name,
+                   :shipments,
+                   :site_version,
+                   :state,
+                   :to_param
+
+    attr_reader :order, :items
+
+    def initialize(order, items = nil)
+      @order = order
+      @items = items || order.line_items
     end
 
     alias_method :customer_notes?, :customer_notes
 
     def line_items
-      items.collect { |i| Orders::LineItemPresenter.new(i, __getobj__) }
+      items.collect { |i| LineItemPresenter.new(i, self) }
     end
 
     def total_items
@@ -20,31 +35,30 @@ module Orders
     end
 
     def country_code
-      shipping_address.country.iso
+      order.shipping_address.country.iso
     end
 
     def projected_delivery_date
-      return unless completed_at.present?
-      __getobj__.projected_delivery_date || Policies::OrderProjectedDeliveryDatePolicy.new(__getobj__).delivery_date
+      order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date)
     end
 
     def promo_codes
-      adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
+      order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
         adj.originator.promotion.code
       }
     end
 
     def phone_number
-      billing_address.phone
+      order.billing_address.phone
     end
 
     def shipping_address
-      shipping_address.to_string
+      order.shipping_address.to_string
     end
 
     def tracking_number
-      if shipments.any?
-        shipments.first.tracking
+      if order.shipments.any?
+        order.shipments.first.tracking
       end
     end
   end
