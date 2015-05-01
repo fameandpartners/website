@@ -4,7 +4,7 @@
   - addthis_config['addthis:url'] = spree.product_url(product)
   - addthis_config['addthis:title'] = product.name
   - addthis_config['addthis:description'] = product.description
-
+- cart = @user_cart
 javascript:
   var addthis_config = {"data_track_addressbar":true};
 
@@ -16,13 +16,70 @@ ruby:
   .container
     .page-title--details
       - if successfully_ordered
-        h1.no-padding-bottom.text-white Thanks
-      .subtitle We've received your order
+        h1.no-padding-bottom Order Confirmation
 
 .page-content.user.order.show
   .container.relative
     .row
-      .col-md-4
+      .col-md-8.col-md-offset-2
+        .row
+          h2.order-number Your Order Number is: #{ @order.number }
+
+        table.table.order-items
+          thead
+            tr
+              th colspan="2" Item
+              th colspan="1" SKU
+              th colspan="1" quantity
+              th colspan="1" price
+          tbody
+            - (cart.products || []).each do |product|
+              tr.item
+                td colspan="2"
+                  = image_tag product.image.large, class: 'img-responsive ordered-item-image'
+
+                  strong Name &nbsp;
+                  = product.name
+                  <br>
+                  strong Size &nbsp;
+                  = product.size.name
+
+                  strong &nbsp;&nbsp;Color &nbsp;
+                  = product.color.presentation
+
+                td colspan="1"
+                  = product.sku
+
+                td colspan="1"
+                  = "#{ product.quantity }"
+
+                td colspan="1"
+                  = product.price.display_price
+
+            tr.total
+              td colspan="3"
+              td colspan="3"
+                p.title
+                  | Order total &nbsp;
+                  = @order.display_total
+
+        - if successfully_ordered
+          - if current_site_version.is_australia?
+            h3.phone itemprop="telephone" Customer Support: 1300 924 860
+          - else
+            h3.phone itemprop="telephone" Customer Support: 866 527 7797
+          p.support
+            ' Check out our
+            =' link_to 'Support Site', 'http://support.fameandpartners.com', target: '_blank'
+            ' or read our
+            =' link_to 'FAQs.', 'http://fameandpartners.com/faqs', target: '_blank'
+          p Or otherwise contact our friendly team if you need any help.
+          p.support = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
+          - unless @order.user.blank?
+            button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
+          .hide
+            = render 'shared/sales_conversion_pixels', locals: {order: @order}
+
         .row
           p SHARE YOUR PURCHASE WITH YOUR FRIENDS SO NO ONE BUYS THE SAME DRESS FOR YOUR EVENT!
           .social.addthis_toolbox.addthis_default_style *addthis_config
@@ -31,59 +88,3 @@ ruby:
             a.addthis_button_tweet
             a.addthis_counter.addthis_pill_style
           script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
-
-        .row
-          = render 'spree/orders/summary', cart: @user_cart
-
-      .col-md-8
-        h2 Order Number: #{ @order.number }
-        p Order Date: #{ l(@order.updated_at.to_date) }
-        h3 Shipping Address
-        - if address = @order.shipping_address
-          p = address.full_name
-          p = address.address1
-          p = "#{ address.city } #{ address.state_text }"
-          p = address.country.to_s
-        - else
-          p no shipping address
-
-        h3 Order Status
-        p.labeled = order_state(@order)
-        h3 Payment Status
-        p.labeled = order_payment_state(@order)
-        
-        - unless order_shipment_state(@order) == "ready"
-          h3 Delivery Status
-          p.labeled = order_shipment_state(@order)
-          - if @order.shipment
-            - if @order.shipment.is_dhl?
-              p
-                ' Track your order with DHL:
-                = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
-                  DHL [#{ @order.shipment.tracking }]
-            - elsif @order.shipment.is_auspost?
-              p
-                ' Track your order with Australia Post:
-                = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
-                  AUSPOST [#{ @order.shipment.tracking }]
-            - elsif @order.shipment.is_tnt?
-              p
-                ' Track your order with TNT:
-                = link_to shipment_tracking_url(@order.shipment), target: '_blank' do
-                  TNT [#{ @order.shipment.tracking }]
-            - else
-              h3 Tracking Number
-              p.labeled = @order.shipment.number
-
-        - if successfully_ordered
-          h3 Customer Support
-          p 
-            ' Check out our 
-            =' link_to 'Support Site', 'http://support.fameandpartners.com', target: '_blank'
-            ' or read our 
-            =' link_to 'FAQs.', 'http://fameandpartners.com/faqs', target: '_blank'
-          p Or otherwise contact our friendly team if you need any help.
-          p = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
-          - unless @order.user.blank?
-            .back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
-          = render 'shared/sales_conversion_pixels', locals: {order: @order}

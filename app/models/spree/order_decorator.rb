@@ -34,6 +34,10 @@ Spree::Order.class_eval do
     end
   end
 
+  def shipped?
+    shipment_state.present? && shipment_state == 'shipped'
+  end
+
   def delivery_state
     return 'incomplete' unless complete?
     project_delivery_date unless projected_delivery_date

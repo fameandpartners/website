@@ -139,8 +139,8 @@ en-US:
     canceled: cancelled
     cart: cart
   shipment_states:
-    pending: Your dress is in making
-    ready: Your dress is in making
+    pending: Your dress is with a seamstress
+    ready: Your dress is with a seamstress
     shipped: Your dress has been shipped
     backorder: Your dress is on backorder
-    partial: Your dress is in making
+    partial: Your dress is with a seamstress

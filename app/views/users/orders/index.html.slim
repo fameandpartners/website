@@ -7,34 +7,33 @@
   .container.relative
 
     = render 'users/shared/tabs', active_tab: 'orders'
-    .row
-      .col-md-12
-        p
-          | Please contact
-          | &nbsp;
-          a href="mailto:team@fameandpartners.com" team@fameandpartners.com
-          | &nbsp;
-          | for your order tracking number.
+
     .row
       .col-md-12
         - if @orders.empty?
           p You have no orders
         - else
-          table.table.table-striped.table-hover.table-responsive
+          table.table.table-striped.table-hover.table-responsive.orders-table
             thead
               tr
                 th Order
                 th Order date
-                th Status
                 th Payment state
-                th Delivery state
+                th Order status
+                th Shipping state
                 th Total
             tbody
               - @orders.each do |order|
                 tr
                   td = link_to order.number, user_order_path(order), remote: true
                   td = l(order.updated_at.to_date)
-                  td = order_state(order)
                   td = order_payment_state(order)
                   td = order_shipment_state(order)
+                  td
+                    - if order.shipped?
+                      - order.shipments.each do | shipment|
+                        = link_to shipment_tracking_url(shipment), target:'_blank'
+                    - else
+                      | Not shipped
+
                   td = order.display_total

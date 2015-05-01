@@ -5,12 +5,12 @@ class Fabrication < ActiveRecord::Base
     primary_key: 'uuid'
 
   STATES = {
-      purchase_order_placed:      'PO Placed',
-      purchase_order_confirmed:   'PO Confirmed',
-      fabric_assigned:            'Fabric Assigned',
-      style_cut:                  'Style Cut',
-      make:                       'Make',
-      qc:                         'QC',
+      purchase_order_placed:      'Your order has been received',
+      purchase_order_confirmed:   'Your oder has been placed',
+      fabric_assigned:            'Your fabric is being assigned',
+      style_cut:                  'Your dress is in cutting',
+      make:                       'Your dress is with a seamstress',
+      qc:                         'Your dress is in quality control',
       shipped:                    'Shipped',
       customer_feedback_required: 'Customer Feedback Required'
   }.stringify_keys.freeze
@@ -24,4 +24,3 @@ class Fabrication < ActiveRecord::Base
 
   attr_accessible :uuid
 end
-
