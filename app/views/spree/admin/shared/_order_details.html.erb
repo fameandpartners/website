@@ -18,7 +18,7 @@
         <td class="qty"><%= item.quantity %></td>
         <td class="total"><span><%= item.display_amount %></span></td>
         <td class="status">
-          <%= render 'spree/admin/orders/index/update_fabrication_state_form', order_line_item: item %>
+          <%= render 'spree/admin/orders/update_fabrication_state_form', order_line_item: item %>
          </td>
       </tr>
     <% end %>

@@ -1,15 +1,28 @@
-require 'ostruct'
-
 Spree::Shipment.class_eval do
   def is_dhl?
-    self.shipping_method.name.match(/dhl/i).present?
+    shipping_method? /dhl/i
   end
 
   def is_auspost?
-    self.shipping_method.name.match(/auspost/i).present?
+    shipping_method? /auspost/i
   end
 
   def is_tnt?
-    self.shipping_method.name.match(/tnt/i).present?
+    shipping_method? /tnt/i
+  end
+
+  def tracking_url
+    if is_dhl?
+      "http://www.dhl.com/content/g0/en/express/tracking.shtml?brand=DHL&AWB=#{ tracking }"
+    elsif is_auspost?
+      "http://auspost.com.au/track/track.html?id=#{ tracking }"
+    elsif is_tnt?
+      "http://www.tnt.com/webtracker/tracking.do?respCountry=us&respLang=en&navigation=1&page=1&sourceID=1&sourceCountry=ww&plazaKey=&refs=&requesttype=GEN&searchType=CON&cons=#{ tracking }"
+    end
+  end
+
+  private
+  def shipping_method?(matcher)
+    !! (shipping_method.name =~ matcher)
   end
 end

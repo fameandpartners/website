@@ -32,13 +32,6 @@ module OrdersHelper
 
   def shipment_tracking_url(shipment)
     return '#' if shipment.blank?
-    if shipment.is_dhl?
-      link = "http://www.dhl.com/content/g0/en/express/tracking.shtml?brand=DHL&AWB=#{ shipment.tracking }"
-    elsif shipment.is_auspost?
-      link = "http://auspost.com.au/track/track.html?id=#{ shipment.tracking }"
-    elsif shipment.is_tnt?
-      link = "http://www.tnt.com/webtracker/tracking.do?respCountry=us&respLang=en&navigation=1&page=1&sourceID=1&sourceCountry=ww&plazaKey=&refs=&requesttype=GEN&searchType=CON&cons=#{ shipment.tracking }"
-    end
-    return raw (link)
+    raw shipment.tracking_url
   end
 end

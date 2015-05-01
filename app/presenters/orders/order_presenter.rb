@@ -5,7 +5,17 @@ module Orders
 
     extend Forwardable
 
-    def_delegators :@order, :customer_notes, :number, :completed_at, :name, :first_name, :site_version
+    def_delegators :@order,
+                   :customer_notes,
+                   :id,
+                   :number,
+                   :completed_at,
+                   :name,
+                   :first_name,
+                   :shipments,
+                   :site_version,
+                   :state,
+                   :to_param
 
     attr_reader :order, :items
 

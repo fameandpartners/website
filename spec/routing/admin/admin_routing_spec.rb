@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe 'Fabrication Routes', type: :routing do
-  it do
-    expect(:put => "/admin/line_items/333").to route_to(
-                                                   controller: 'admin/fabrication',
+describe '/admin/', type: :routing do
+  it 'routes fabrication updates' do
+    expect(:put => "/admin/fabrications/333").to route_to(
+                                                   controller: 'admin/fabrications',
                                                    action:     'update',
                                                    id:         '333'
                                                )

@@ -13,4 +13,7 @@ $(document).ready(function(){
         console.dir(xhr);
     });
 
+    // Only need to remove the manual submit button if JS loads, otherwise,
+    // the China team can fallback to regular old form submits. yay firewalls
+    $('form.fabrication_state_form button').remove();
 });

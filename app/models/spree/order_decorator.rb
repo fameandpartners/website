@@ -34,27 +34,6 @@ Spree::Order.class_eval do
     end
   end
 
-  def delivery_state
-    return 'incomplete' unless complete?
-    project_delivery_date unless projected_delivery_date
-    days = (Time.zone.now.to_date - projected_delivery_date.to_date).to_i
-    # binding.pry
-    case days
-    when 11..999
-      'critical'
-    when 7..10
-      'urgent'
-    when 1..6
-      'overdue'
-    when -2..0
-      'due'
-    when -10..-3
-      'ok'
-    else
-      'unknown'
-    end
-  end
-
   # todo: this should be done in some service, order has no relation to this func
   def track_user_bought_dress
     # TODO: check this works

@@ -1,10 +1,11 @@
 module Spree
   module Admin
     OrdersController.class_eval do
+      include Concerns::Paginated
       respond_to :csv, only: :index
 
       attr_reader :hide_line_items
-      helper_method :per_page, :hide_line_items
+      helper_method :hide_line_items
 
       def index
         ##################### Original Spree ##############################
@@ -35,8 +36,8 @@ module Spree
         end
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
-        @orders = @search.result.includes([:user, :shipments, :payments]).
-            page(params[:page]).
+        @orders = @search.result(distinct: true).includes([:user, :shipments, :payments]).
+            page(page).
             per(per_page)
 
         # Restore dates
@@ -60,8 +61,8 @@ module Spree
         params[:q][:hide_line_items].present?
       end
 
-      def per_page
-        params[:per_page] || Spree::Config[:orders_per_page]
+      def default_per_page
+        Spree::Config[:orders_per_page]
       end
     end
   end

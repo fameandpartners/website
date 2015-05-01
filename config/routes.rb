@@ -273,7 +273,7 @@ FameAndPartners::Application.routes.draw do
 
 
   namespace :admin do
-    resources :line_items, :only => :update, controller: 'fabrication'
+    resources :fabrications, :only => :update
   end
 
   Spree::Core::Engine.routes.append do
