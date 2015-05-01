@@ -22,15 +22,14 @@ module Orders
       @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(item) }
 
       super(item)
-
     end
 
     def style_number
-      variant.product.sku
+      variant.try(:product).try(:sku) || 'Missing Product'
     end
 
     def style_name
-      variant.product.name
+      variant.try(:product).try(:name) || 'Missing Variant'
     end
 
     def colour
@@ -85,11 +84,13 @@ module Orders
 
     def as_report
       {
+        :order_state             => order.state,
         :order_number            => number,
         :total_items             => total_items,
         :completed_at            => order.completed_at.to_date,
         :projected_delivery_date => projected_delivery_date,
         :tracking_number         => tracking_number,
+        :shipment_date           => shipped_at.try(:to_date),
         :style                   => style_number,
         :factory                 => factory,
         :color                   => colour_name,
