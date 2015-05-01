@@ -6,6 +6,7 @@ module Orders
     extend Forwardable
 
     def_delegators :@order,
+                   :display_total,
                    :customer_notes,
                    :id,
                    :number,
@@ -28,6 +29,10 @@ module Orders
 
     def line_items
       items.collect { |i| LineItemPresenter.new(i, self) }
+    end
+    
+    def one_item?
+      line_items.count == 1
     end
 
     def total_items

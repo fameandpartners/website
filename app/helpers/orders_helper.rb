@@ -3,6 +3,10 @@ module OrdersHelper
   def order_status(order)
     t("order_fabrication_states.#{order.fabrication_status}")
   end
+
+  def line_item_status(line_item)
+    t("order_fabrication_states.#{line_item.fabrication_status}")
+  end
   
   # Order state is a spree setting that conveys no useful information
   def order_state(order)

@@ -1,10 +1,10 @@
 - addthis_config = {}
-- if product = @order.products.first
-  = render 'spree/products/product_meta', product: product
-  - addthis_config['addthis:url'] = spree.product_url(product)
-  - addthis_config['addthis:title'] = product.name
-  - addthis_config['addthis:description'] = product.description
-- cart = @user_cart
+/ - if product = @order.products.first
+/   = render 'spree/products/product_meta', product: product
+/   - addthis_config['addthis:url'] = spree.product_url(product)
+/   - addthis_config['addthis:title'] = product.name
+/   - addthis_config['addthis:description'] = product.description
+
 javascript:
   var addthis_config = {"data_track_addressbar":true};
 
@@ -15,54 +15,55 @@ ruby:
 .page-title.default
   .container
     .page-title--details
-      - if successfully_ordered
-        h1.no-padding-bottom Order Confirmation
+        h1.no-padding-bottom
+        - if successfully_ordered
+          | Order Confirmation
+        - else
+          | Order
+      
 
 .page-content.user.order.show
   .container.relative
     .row
       .col-md-8.col-md-offset-2
         .row
-          h2.order-number Your Order Number is: #{ @order.number }
+          h2.order-number Your Order Number is: #{ order.number }
+          
+          h2.order-number Ordered On: #{ l(order.completed_at.to_date) }
 
         table.table.order-items
           thead
             tr
-              th colspan="2" Item
-              th colspan="1" SKU
-              th colspan="1" quantity
-              th colspan="1" price
+              th Item
+              th Status
+              th SKU
+              th quantity
+              th price
           tbody
-            - (cart.products || []).each do |product|
+            - order.line_items.each do |line_item|
               tr.item
-                td colspan="2"
-                  = image_tag product.image.large, class: 'img-responsive ordered-item-image'
-
-                  strong Name &nbsp;
-                  = product.name
-                  <br>
-                  strong Size &nbsp;
-                  = product.size.name
-
-                  strong &nbsp;&nbsp;Color &nbsp;
-                  = product.color.presentation
-
-                td colspan="1"
-                  = product.sku
-
-                td colspan="1"
-                  = "#{ product.quantity }"
-
-                td colspan="1"
-                  = product.price.display_price
-
+                td
+                  = image_tag line_item.image_url, class: 'img-responsive ordered-item-image'
+                  p
+                    strong
+                      = line_item.style_name
+                    br
+                    ="Size:#{line_item.country_size.to_i}, Color: #{line_item.colour_name}"
+                    
+                td= line_item_status(line_item)
+                td= line_item.style_number
+                td= line_item.quantity
+                td= line_item.display_price.to_s
+              
             tr.total
-              td colspan="3"
-              td colspan="3"
+              td colspan="4"
+              td
                 p.title
-                  | Order total &nbsp;
-                  = @order.display_total
-
+                  | Order Total &nbsp;
+                  = order.display_total
+                - if current_site_version.is_australia?
+                  p Including GST.
+                  
         - if successfully_ordered
           - if current_site_version.is_australia?
             h3.phone itemprop="telephone" Customer Support: 1300 924 860
@@ -75,13 +76,17 @@ ruby:
             =' link_to 'FAQs.', 'http://fameandpartners.com/faqs', target: '_blank'
           p Or otherwise contact our friendly team if you need any help.
           p.support = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
-          - unless @order.user.blank?
-            button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
-          .hide
-            = render 'shared/sales_conversion_pixels', locals: {order: @order}
+          
+          - unless current_spree_user.blank?
+            p
+              button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
+          
+          - if successfully_ordered
+            .hide
+              = render 'shared/sales_conversion_pixels', locals: {order: @order}
 
         .row
-          p SHARE YOUR PURCHASE WITH YOUR FRIENDS SO NO ONE BUYS THE SAME DRESS FOR YOUR EVENT!
+          p Share your purchase with your friends so no one buys the same dress for your event!
           .social.addthis_toolbox.addthis_default_style *addthis_config
             a.addthis_button_facebook_like fb:like:layout="button_count"
             a.addthis_button_pinterest_pinit
