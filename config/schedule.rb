@@ -1,3 +1,5 @@
+set :environment, ENV['RAILS_ENV']
+
 every :hour do
   runner 'EmailMarketing.send_emails'
   rake   'feed:export:all'
