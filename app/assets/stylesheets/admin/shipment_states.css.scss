@@ -6,19 +6,21 @@
  # < 2 days out from due date - pale green
  # Delivered - pale blue (edited)*/
 
-span.state-critical,
-span.state-urgent,
-span.state-overdue,
-span.state-due,
-span.state-ok,
-span.state-unknown {
-  padding: 3px;
-  border-radius: 3px;
+.state-critical,
+.state-urgent,
+.state-overdue,
+.state-due,
+.state-ok,
+.state-unknown {
+  padding: 5px;
+  border-radius: 5px;
+  color:black;
+  display: inline-block;
 }
 
-.state-critical { background-color:red;    }
+.state-critical { background-color:salmon;    }
 .state-urgent   { background-color:pink; }
 .state-overdue  { background-color:orange; }
-.state-due      { background-color:yellow; }
-.state-ok       { background-color:palegreen; }
-.state-unknown  { background-color:lightyellow; }
+.state-due      { background-color:palegoldenrod; }
+.state-ok       { background-color:lightgreen; }
+.state-unknown  { background-color:dimgray; }
