@@ -33,12 +33,14 @@ class DeploymentMessage
   # "#channel"
   # "@user"
   def channel
-    "#development"
+    "#dev-robots"
   end
 
   # Use any slack emoji name
   def icon
-    ":shipit:"
+    {
+      'production_new' => ':godmode:',
+    }.fetch(environment_name) { ":shipit:" }
   end
 
   def branch
@@ -101,4 +103,6 @@ end
 #   config
 # end
 
-run Slack.post(DeploymentMessage.new config)
+on_app_master do
+  run Slack.post(DeploymentMessage.new config)
+end
