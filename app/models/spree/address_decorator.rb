@@ -10,7 +10,7 @@ Spree::Address.class_eval do
     new({:country => country}, :without_protection => true)
   end
 
-  def to_string
+  def to_s
     [
       [address1, address2].reject(&:blank?).join(' '),
       city,
