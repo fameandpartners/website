@@ -85,7 +85,7 @@ class Products::DetailsResource
 
     # properties part
     def product_properties
-      product_properties ||= Repositories::ProductProperties.new(product: product)
+      @product_properties ||= Repositories::ProductProperties.new(product: product)
     end
 
     def product_short_description
