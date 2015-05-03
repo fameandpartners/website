@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-fileupload/basic
-//= require jquery.ui.datepicker
+//= require jquery-ui/datepicker
 //= require libs/jquery.caroufredsel-6.2.1-packed
 //= require libs/jquery.minicolors
 //= require libs/jquery.readyselector
