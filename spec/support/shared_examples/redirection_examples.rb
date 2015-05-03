@@ -20,6 +20,13 @@ RSpec.shared_examples :redirect do |inbound, target|
   end
 end
 
+RSpec.shared_examples :not_redirect do |inbound, target|
+  it "from '#{inbound}' to '#{target}'" do
+    get inbound
+    expect(response).not_to redirect_to(target)
+  end
+end
+
 # Convenience example.
 RSpec.shared_examples "redirect to root" do |url|
   it "'#{url}' to '/'" do
