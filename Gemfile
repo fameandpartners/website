@@ -98,7 +98,7 @@ group :development, :test do
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
   gem 'mail_view'
   gem 'minitest'
-  # gem 'oink'
+  gem 'oink'
   # gem 'pry'
   gem 'quiet_assets', '1.0.2'
   gem 'rspec-activemodel-mocks'
