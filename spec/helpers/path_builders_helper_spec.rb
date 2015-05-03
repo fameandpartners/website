@@ -31,6 +31,18 @@ describe PathBuildersHelper, :type => :helper do
   end
 
   describe '#build_url' do
+    context 'given an array of strings as parts of a path' do
+      it 'builds a path without a query string' do
+        result = helper.build_url(['something', 'nice'])
+        expect(result).to eq('/something/nice')
+      end
+
+      it 'builds root path' do
+        result = helper.build_url([])
+        expect(result).to eq('/')
+      end
+    end
+
     context 'given an array of strings as parts of a path and options for query strings' do
       it 'builds a complete path' do
         result = helper.build_url(['my', 'url', 'parts'], { :super => 'gigantic', :query => 'string' })
