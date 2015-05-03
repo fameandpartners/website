@@ -69,35 +69,19 @@ unless Rails.env.development?
 end
 
 SitemapGenerator::Sitemap.create(options) do
-  # add '/' - added by default
-  # have to add /en & /au
-  default_site_version = SiteVersion.default
-  site_versions = SiteVersion.where(default: false).to_a
-
   add root_path, alternates: build_alternates(root_path), priority: 1.0
 
   # products page
   Spree::Product.active.each do |product|
-    color_ids = product.variants.active.map do |variant|
-      variant.option_values.colors.map(&:id)
-    end.flatten.uniq
-
     images_repo = Repositories::ProductImages.new(product: product)
 
-    product.product_color_values.each do |product_color_value|
-      color = product_color_value.option_value
-      color_images = images_repo.filter(color_id: color.id)
-
-      next unless color_ids.include?(color.id)
-      next unless color_images.present?
-
-      add(collection_product_path(product, color: color.name), {
-        priority: 0.8,
-        images: color_images.map{|data| { loc: data.large, title: product.name }},
-        alternates: build_alternates(collection_product_path(product, color: color.name))
-      })
-    end
+    add(collection_product_path(product), {
+      priority: 0.8,
+      images: images_repo.filter(cropped: false).map { |img| { loc: img.large, title: product.name } },
+      alternates: build_alternates(collection_product_path(product))
+    })
   end
+
   # events
   Repositories::Taxonomy.read_events.each do |taxon|
     add(build_taxon_path(taxon.name), {
