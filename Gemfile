@@ -88,6 +88,7 @@ end
 
 group :development, :test do
   gem 'awesome_print'
+  gem 'byebug'
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
   gem 'capybara'
@@ -95,9 +96,10 @@ group :development, :test do
   gem 'factory_girl_rails', '4.2.1'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
+  gem 'mail_view'
   gem 'minitest'
-  gem 'oink'
-  gem 'pry'
+  # gem 'oink'
+  # gem 'pry'
   gem 'quiet_assets', '1.0.2'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails', '~> 3.1'
