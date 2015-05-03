@@ -225,6 +225,11 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
+    get '/contact' => 'contacts#new'
+    resource 'contact', as: 'contact', only: [:new, :create] do
+      get 'success'
+    end
+
     # return form
     get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
 

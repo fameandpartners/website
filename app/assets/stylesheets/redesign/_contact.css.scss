@@ -1,0 +1,25 @@
+.contact {
+		
+		textarea {
+			border: 1px solid #CCCCCC;
+			border-bottom: 1px solid black;
+			height:280px;
+			text-align:left;
+			text-decoration:none;
+		}
+		
+		.chosen-container-single .chosen-single {
+			// height: 32px;
+			// line-height: 32px;
+			border: 1px solid black;
+			box-shadow: none !important;
+			background:#FFFFFF;
+		}
+		
+		.hint {
+			font-size:0.8em;
+			color:#999999;
+			font-weight:normal;
+		}
+		
+}
