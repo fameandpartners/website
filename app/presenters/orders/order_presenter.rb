@@ -6,6 +6,7 @@ module Orders
     extend Forwardable
 
     def_delegators :@order,
+                   :display_total,
                    :customer_notes,
                    :id,
                    :number,
@@ -29,7 +30,15 @@ module Orders
     def line_items
       items.collect { |i| LineItemPresenter.new(i, self) }
     end
+    
+    def one_item?
+      line_items.count == 1
+    end
 
+    def product
+      products.first
+    end
+    
     def total_items
       items.sum &:quantity
     end
@@ -37,7 +46,7 @@ module Orders
     def country_code
       order.shipping_address.country.iso
     end
-
+  
     def projected_delivery_date
       order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date)
     end
