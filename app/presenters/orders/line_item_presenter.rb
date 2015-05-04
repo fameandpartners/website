@@ -34,8 +34,8 @@ module Orders
     end
 
     def fabrication_status
-      if item.fabrication
-        item.fabrication.state
+      if fabrication
+        fabrication.state
       else
         :processing
       end

@@ -6,6 +6,7 @@ module Orders
     extend Forwardable
 
     def_delegators :@order,
+                   :products,
                    :display_total,
                    :customer_notes,
                    :id,
