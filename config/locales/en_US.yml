@@ -145,7 +145,7 @@ en-US:
     backorder: backorder
     partial: partial
   order_fabrication_states:
-    processing:                 'Your dress is being processed'
+    processing:                 'Your order is being processed'
     purchase_order_placed:      'Your dress has been received'
     purchase_order_confirmed:   'Your dress has been placed'
     fabric_assigned:            'Your fabric is being assigned'
