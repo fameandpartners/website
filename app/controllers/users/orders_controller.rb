@@ -16,7 +16,7 @@ class Users::OrdersController < Users::BaseController
 
   def show
     user = try_spree_current_user
-    order = user.orders.where(number: params[:id]).first
+    order = user.orders.find_by_number(params[:id])
     @order = Orders::OrderPresenter.new(order)
     
     @title = "Order ##{ @order.number }"

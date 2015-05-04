@@ -1,6 +1,8 @@
 Spree::OrdersController.class_eval do
   layout 'redesign/application', only: :show
-
+  attr_reader :order
+  helper_method :order
+  
   # Ensure that we get people to login instead of giving them $20 off by 404ing.
   rescue_from CanCan::AccessDenied do
     redirect_to spree.login_path
@@ -8,8 +10,15 @@ Spree::OrdersController.class_eval do
 
   # todo: merge order & user_cart => completed order resource
   def show
-    @order = ::Spree::Order.find_by_number!(params[:id])
-    @user_cart = ::UserCart::UserCartResource.new(order: @order).read
+    user = try_spree_current_user
+    
+    if user.has_spree_role?('admin')
+      order = ::Spree::Order.find_by_number!(params[:id])
+    else
+      order = user.orders.find_by_number(params[:id])
+    end
+    
+    @order = Orders::OrderPresenter.new(order)
     respond_with(@order)
   end
 
@@ -29,7 +38,7 @@ Spree::OrdersController.class_eval do
     ).read
 
     title('Your Shopping Cart', default_seo_title)
-  end 
+  end
 
   def update
     @order = current_order
