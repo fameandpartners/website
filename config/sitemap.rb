@@ -114,10 +114,9 @@ SitemapGenerator::Sitemap.create(options) do
 
   statics_pages = [ 
     '/about', '/why-us', '/terms', '/privacy', '/legal', '/assets/returnform.pdf',
-    '/compterms',
     '/style-consultation', '/fame-chain',
     '/fashionitgirl2015',
-    '/bridesmaid-dresses', '/feb_2015_lp', '/facebook-lp', '/sale-dresses',
+    '/bridesmaid-dresses', '/sale-dresses',
     '/unidays'
   ]
   statics_pages.each do |page_path|
