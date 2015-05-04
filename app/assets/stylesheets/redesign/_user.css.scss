@@ -14,7 +14,7 @@
 // Account
 .page-content.user {
 	padding-top: 0;
-	
+
 	.row {
 		margin-top:20px;
 	}
@@ -39,10 +39,92 @@
 .page-content.moodboard {
   .category--item {
     .details { text-transform: uppercase;}
-    
+
     // - Override style.css
     .btn-black { color: #fff;}
-  } 
+  }
 }
 // @end Moodboard
 // ---------------
+
+.ordered-item-image {
+  width: 120px;
+  margin: auto;
+}
+
+h2.order-number {
+  font-size: 15px;
+}
+
+.table.order-items {
+
+  thead {
+    border-top: 2px solid #ddd;
+
+    tr th {
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+
+  tbody tr.item  {
+    border-bottom: 2px solid #ddd;
+
+    td {
+      vertical-align: top;
+    }
+  }
+}
+
+.table.orders-table {
+  margin-top: 4rem;
+
+  thead tr th {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 12px;
+    background-color: #f9f9f9;
+  }
+}
+
+.table > tbody > tr > td {
+  border: none;
+  vertical-align: middle;
+  text-align: center;
+
+  a:hover {
+    color: #355e6d
+  }
+}
+
+.support > a:hover {
+  color: #355e6d
+}
+
+.back-to-orders {
+  height: 45px;
+  background-color: #033649;
+  color: #FFFFFF;
+  padding: 0 !important;
+  line-height: 45px;
+  width: 200px;
+
+  &:hover {
+    background-color: #355e6d;
+  }
+
+  a {
+    color: #FFFFFF;
+    padding: 0 !important;
+
+  }
+}
+
+tbody tr.total td p  {
+  text-align: right;
+}
+
+h3.phone span {
+  text-transform: none;
+}

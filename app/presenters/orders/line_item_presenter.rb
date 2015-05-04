@@ -6,6 +6,7 @@ module Orders
     delegate :id, :to => :__getobj__
 
     extend Forwardable
+
     def_delegators :@shipment, :shipped?, :shipped_at
     def_delegators :@wrapped_order,
                    :projected_delivery_date,
@@ -16,7 +17,7 @@ module Orders
                    :promo_codes
 
     attr_reader :shipment, :wrapped_order
-
+    
     def initialize(item, wrapped_order)
       @wrapped_order = wrapped_order
       @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(item) }
@@ -32,6 +33,14 @@ module Orders
       variant.try(:product).try(:name) || 'Missing Variant'
     end
 
+    def fabrication_status
+      if fabrication
+        fabrication.state
+      else
+        :processing
+      end
+    end
+    
     def colour
       if personalization.present?
         personalization.color
@@ -48,6 +57,10 @@ module Orders
       "#{order.site_version}-#{size}"
     end
 
+    def display_price
+      Spree::Price.new(amount: price).display_price.to_s
+    end
+    
     def factory
       Factory.for_product(variant.product)
     end

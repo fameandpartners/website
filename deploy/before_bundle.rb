@@ -26,21 +26,19 @@ class DeploymentMessage
   end
 
   def username
-    ['HERP DERP-LOY', 'DeployBot', '∞ Monkeys & ∞ Keyboards'].sample
+    theme[:username]
   end
 
   # Use any channel or user name
   # "#channel"
   # "@user"
   def channel
-    "#dev-robots"
+    theme[:channel]
   end
 
   # Use any slack emoji name
   def icon
-    {
-      'production_new' => ':godmode:',
-    }.fetch(environment_name) { ":shipit:" }
+    ":#{theme[:icon]}:"
   end
 
   def branch
@@ -53,6 +51,23 @@ class DeploymentMessage
 
   def short_sha
     sha.slice(0,7)
+  end
+
+  def theme
+    {
+      'production_new' =>
+        {
+          username: 'FameBot',
+          icon: %w(lipstick dancer star).sample,
+          channel: '#development'
+        }
+    }.fetch(environment_name) do
+      {
+        username: 'FameBot',
+        icon: %w(godmode shipit rocket).sample,
+        channel: "#dev-robots"
+      }
+    end
   end
 end
 

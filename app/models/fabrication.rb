@@ -6,15 +6,26 @@ class Fabrication < ActiveRecord::Base
 
   STATES = {
       purchase_order_placed:      'PO Placed',
-      purchase_order_confirmed:   'PO Confirmed',
+      purchase_order_confirmed:   'PO Assigned',
       fabric_assigned:            'Fabric Assigned',
-      style_cut:                  'Style Cut',
-      make:                       'Make',
+      style_cut:                  'Style Cutting',
+      make:                       'Making',
       qc:                         'QC',
       shipped:                    'Shipped',
-      customer_feedback_required: 'Customer Feedback Required'
+      customer_feedback_required: 'Customer Feedback'
   }.stringify_keys.freeze
 
+  STATE_ORDER = [
+      :customer_feedback_required,
+      :purchase_order_placed,
+      :purchase_order_confirmed,
+      :fabric_assigned,
+      :style_cut,
+      :make,
+      :qc,
+      :shipped
+  ]
+  
   STATES_OPTIONS = STATES.invert.freeze
 
   belongs_to :line_item,  class_name: 'Spree::LineItem'
@@ -24,4 +35,3 @@ class Fabrication < ActiveRecord::Base
 
   attr_accessible :uuid
 end
-
