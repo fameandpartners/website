@@ -32,6 +32,8 @@ environments:
   preprod:
     precompile_assets: true
     maintenance_on_migrate: false
+  staging1:
+    precompile_assets: true
     migrate: true
     migration_command: rake db:migrate
 defaults:

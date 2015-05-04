@@ -1,1 +1,3 @@
-YAML::ENGINE.yamler = 'psych'
+require 'yaml'
+# YAML::ENGINE.yamler = 'psych'
+# YAML::ENGINE.yamler = 'syck'
