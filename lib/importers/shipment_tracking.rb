@@ -4,8 +4,7 @@ module Importers
     attr_accessor :shipment_infos, :shippable_orders, :styles, :matching_orders
 
     def import
-      info "Start Tracking Numbers Import"
-      info "File: #{csv_file}"
+      preface
 
       parse_file
       #print_validation_errors

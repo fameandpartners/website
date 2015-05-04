@@ -26,5 +26,10 @@ module Importers
     def import
       error "Not Implemented"
     end
+
+    def preface
+      info "#{self.class.name} Start"
+      info "File: #{csv_file}"
+    end
   end
 end
