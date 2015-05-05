@@ -220,6 +220,8 @@ GEM
     business_time (0.7.4)
       activesupport (>= 3.1.0)
       tzinfo
+    byebug (4.0.5)
+      columnize (= 0.9.0)
     cancan (1.6.8)
     capistrano (2.15.4)
       highline
@@ -254,6 +256,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    columnize (0.9.0)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -543,6 +546,9 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.1.0)
+      byebug (~> 4.0)
+      pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     psych (2.0.13)
@@ -794,6 +800,7 @@ DEPENDENCIES
   oink
   paperclip
   pg
+  pry-byebug
   pry-rails
   psych (~> 2.0.13)
   quiet_assets
@@ -831,3 +838,6 @@ DEPENDENCIES
   uglifier (= 1.3.0)
   unicorn
   whenever
+
+BUNDLED WITH
+  1.10.0.pre
