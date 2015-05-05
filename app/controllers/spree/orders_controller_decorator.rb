@@ -18,6 +18,7 @@ Spree::OrdersController.class_eval do
       order = user.orders.find_by_number(params[:id])
     end
     
+    @spree_order = order
     @order = Orders::OrderPresenter.new(order)
     respond_with(@order)
   end
