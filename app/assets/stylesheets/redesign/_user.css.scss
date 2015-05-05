@@ -162,18 +162,31 @@ h3.phone span {
     border-top: black solid 1px;
   }
 
+  .chosen-container-single.form-control {
+    width: 200px !important ;
+    min-width: 0;
+    text-align: left;
+    float: right;
+  }
+
+  p.option {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
   table {
     background-color: white;
     text-align: left;
 
-    td.image {
+    td {
       padding: 0;
       img {
         float: left;
       }
 
       p {
-        padding-left: 10rem;
+        padding-left: 15rem;
+        padding-top: 3rem;
       }
     }
   }
