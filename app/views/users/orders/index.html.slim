@@ -22,23 +22,26 @@
                 th Order status
                 th Shipping state
                 th Total
+                th.returns-column Return or exchange
             tbody
               - @orders.each do |order|
                 tr
-                  td = link_to order.number, user_order_path(order), remote: true
+                  td = link_to order.number, user_order_path(order), remote: true, class: "order-details"
                   td = l(order.updated_at.to_date)
                   td = order_payment_state(order)
                   td
                     - if order.line_items.one?
                       = order_status(order)
                     - else
-                      = link_to 'Click for details', user_order_path(order)
-                     
-                  td
+                      = link_to 'Click for details', user_order_path(order), class: "order-details"
+                  td colspan='1'
                     - if order.shipped?
                       - order.shipments.each do | shipment|
-                        = link_to shipment.tracking || 'Track', shipment_tracking_url(shipment), target:'_blank'
+                        = link_to shipment.tracking || 'Track', shipment_tracking_url(shipment), target:'_blank', class: "order-details"
                     - else
                       | Not yet shipped
 
-                  td = order.display_total
+                  td  = order.display_total
+                  td.returns-column
+                    button.btn.return
+                      = link_to 'return or exchange', new_user_returns_path()

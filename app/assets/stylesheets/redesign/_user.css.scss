@@ -82,18 +82,28 @@ h2.order-number {
 
   thead tr th {
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
     font-size: 12px;
     background-color: #f9f9f9;
   }
+
+  thead tr th.returns-column, > tbody > tr > td.returns-column, {
+    background-color: white !important;
+    border-bottom: none;
+    padding-left: 6rem;
+    padding-right: 0;
+  }
+}
+
+.table.order-items, .table.orders-table > tbody > tr > td {
+  border: none;
+  vertical-align: middle;
+  text-align: left;
 }
 
 .table > tbody > tr > td {
-  border: none;
-  vertical-align: middle;
-  text-align: center;
 
-  a:hover {
+  a.order-details:hover {
     color: #355e6d
   }
 }
@@ -117,7 +127,6 @@ h2.order-number {
   a {
     color: #FFFFFF;
     padding: 0 !important;
-
   }
 }
 
@@ -127,4 +136,108 @@ tbody tr.total td p  {
 
 h3.phone span {
   text-transform: none;
+}
+
+.page-title.returns-title {
+  background-color: #f7e0d3;
+
+  h1 {
+    text-transform: none;
+  }
+
+  h2 {
+    font-family: forum;
+    text-transform: uppercase;
+    font-size: 40px;
+    margin-top: 0;
+  }
+}
+
+.returns {
+  .background-grey {
+    background-color: #f5f5f5;
+  }
+
+  .table > tbody > tr > td {
+    border-top: black solid 1px;
+  }
+
+  table {
+    background-color: white;
+    text-align: left;
+
+    td.image {
+      padding: 0;
+      img {
+        float: left;
+      }
+
+      p {
+        padding-left: 10rem;
+      }
+    }
+  }
+
+  .btn {
+    padding: 0;
+  }
+
+  .btn.cancel {
+    height: 45px;
+    padding: 0 !important;
+    width: 100%;
+    margin-bottom: 4rem;
+
+    a {
+      color: white;
+    }
+  }
+
+  .btn.submit {
+    height: 45px;
+    width: 100%;
+    margin-bottom: 4rem;
+    background-color: black;
+
+    a {
+      color: white;
+    }
+  }
+
+  .row.header {
+    h2 {
+      text-align: center;
+    }
+
+    h2.order-number {
+      margin-bottom: 0.5rem;
+    }
+
+    h2.order-date {
+      margin-top: 0;
+      font-size: 15px;
+    }
+  }
+}
+
+.btn.return {
+  height: 45px;
+  padding: 0 !important;
+  color: #FFFFFF;
+  width: 92%;
+  background-color: black;
+
+  a {
+    color: #FFFFFF;
+    font-size: 12px;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  &:hover {
+    background-color: #eeddf0;
+    color: black !important;
+  }
 }
