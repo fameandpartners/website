@@ -32,7 +32,8 @@ module PathBuildersHelper
   # utils method - don't use anywhere else
   # [dresses, blue, { code: mode }] => /dresses/blue?code=mode
   def build_url(path_parts, options = {})
-    path =  "/" + path_parts.compact.join('/')
+    path_parts.reject! { |el| el.blank? }
+    path =  "/" + path_parts.join('/')
     path = "#{path}?#{options.to_param}" if options.present?
     
     url_without_double_slashes(path)
