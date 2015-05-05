@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   append_before_filter :check_site_version
+  append_before_filter :store_marketing_params
+  append_before_filter :check_marketing_traffic
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
   append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
@@ -39,9 +41,6 @@ class ApplicationController < ActionController::Base
   def check_site_version
     # redirects should work only on non-ajax GET requests from users
     return if (!request.get? || request.xhr? || request_from_bot?)
-
-    store_marketing_params
-    check_marketing_traffic
 
     if params[:site_version].blank?
       if current_site_version.default?
