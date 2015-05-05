@@ -1,0 +1,35 @@
+.page-title.default.returns-title
+  .container
+    .page-title--details
+        h1.no-padding-bottom You have good dress days and bad dress days. We get it.
+        h2 Help us help you.
+
+.page-content.returns
+  .container.relative
+    .row
+      .col-md-8.col-md-offset-2.background-grey
+        .row.header
+          h2.order-number Order no: xxxxxxxxx
+          h2.order-date Order date: 21/01/2015, 2:30pm
+
+        table.table
+          thead.hide
+            tr
+              th colspan="4" Image QTY Name
+              th colspan="2" Options
+          tbody
+            tr
+              td.image colspan="4"
+                = image_tag "test.jpg"
+                p 1 X Melody<br> $169.00
+              td colspan="2" I want to
+            tr
+              td.image colspan="4"
+                = image_tag "test.jpg"
+                p 1 X Melody<br> $169.00
+              td colspan="2" I want to
+        .row
+          .col-md-5
+            button.btn.cancel = link_to 'cancel', user_orders_path, remote: true
+          .col-md-5.col-md-offset-2
+            button.btn.submit = link_to 'submit', user_orders_path, remote: true
