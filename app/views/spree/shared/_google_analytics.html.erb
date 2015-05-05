@@ -1,5 +1,5 @@
 <% if tracker = Spree::Tracker.current %>
-  
+
   <%= javascript_tag do %>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
