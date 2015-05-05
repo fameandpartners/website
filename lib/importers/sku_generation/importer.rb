@@ -1,9 +1,7 @@
 require 'ruby-progressbar'
 
-
 module Importers
   module SkuGeneration
-
     class Importer < FileImporter
 
       attr_accessor :product_templates
@@ -23,24 +21,13 @@ module Importers
                        header_converters: ->(h){ h.strip }
         )
 
-        product_colour_rows = csv.chunk({ current_style_number: :unknown }) do |row, state|
-          if row.to_hash.values.compact.empty?
-            :_separator
-          elsif row["STYLE NUMBER"] && row["STYLE NUMBER"] != state[:current_style_number]
-            state[:current_style_number] = row["STYLE NUMBER"]
-          else
-            state[:current_style_number]
-          end
-        end
-
-        @product_templates = product_colour_rows.collect do |style_number, rows|
-          main_row = rows.first
+        @product_templates = product_style_rows(csv).collect do |style_number, rows|
+          main_row   = rows.first
           style_name = main_row["STYLE NAME"]
           fabric_sku_component = main_row["SKU CODE"].gsub(style_number, '').gsub(/\s+/, '')
 
-
           sku_template = TemplateProduct.new(style_number, style_name)
-          sku_template.base_sizes = BaseSize.size_set
+          sku_template.base_sizes  = BaseSize.size_set
           sku_template.fabric_card = FabricCard.new(main_row['FABRIC'], fabric_sku_component)
 
           sku_template.fabric_card.colours = rows.collect do |row|
@@ -52,6 +39,16 @@ module Importers
           end.compact
 
           sku_template
+        end
+      end
+
+      def product_style_rows(csv)
+        csv.chunk({current_style_number: :unknown}) do |row, state|
+          if row["STYLE NUMBER"] && row["STYLE NUMBER"] != state[:current_style_number]
+            state[:current_style_number] = row["STYLE NUMBER"]
+          else
+            state[:current_style_number]
+          end
         end
       end
 
