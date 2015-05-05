@@ -376,5 +376,8 @@
   .vex-dialog-message, .vex-dialog-form {
     display: inline-block;
     vertical-align: middle;
+    .vex-dialog-input {
+      display: none;
+    }
   }
 }
