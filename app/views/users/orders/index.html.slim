@@ -44,4 +44,4 @@
                   td  = order.display_total
                   td.returns-column
                     button.btn.return
-                      = link_to 'return or exchange', new_user_returns_path()
+                      = link_to 'return or exchange', new_user_returns_path(:order_id => order.number)
