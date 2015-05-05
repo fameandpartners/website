@@ -154,6 +154,8 @@ FameAndPartners::Application.routes.draw do
     get 'user_orders' => 'users/orders#index', as: 'user_orders'
     get 'user_orders/:id' => 'users/orders#show', as: 'user_order'
 
+    resource 'users/returns', as: 'user_returns', only: [:new, :create]
+
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
 
     resources :wishlists_items, only: [:index, :create, :destroy], controller: 'users/wishlists_items' do
