@@ -59,7 +59,6 @@ module Importers
           csv << ['STYLE NUMBER', 'STYLE NAME', 'FABRIC', 'SKU CODE', 'COLOUR #', 'COLOUR','SIZE (AU)','FINAL SKU']
 
           product_templates.each do |product|
-            # binding.pry
             product.variants.each do |variant|
               csv << [
                 variant.product.style_number,
