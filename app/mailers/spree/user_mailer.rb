@@ -48,13 +48,4 @@ class Spree::UserMailer < ActionMailer::Base
     mail(:to => @user.email,
          :subject => Spree::Config[:site_name] + ' ' + t('emails.subjects.users.style_profile'))
   end
-     
-   def style_call_welcome(user)
-    @user = user
-    mail(:to => @user.email,
-         :subject => t('emails.subjects.users.style_call'),
-         :from => "team@fameandpartners.com")
-  end
-  
-    
 end

@@ -1,8 +1,0 @@
-<% if @participation.valid? %>
-  $.cookie('email_capture', 'hide', { expires: 365, path: '/' });
-  $scope = $('.modal.popup-placeholder.<%=@participation.content%>-popup .modal-form');
-  $scope.html('<%=j render('campaigns/email_capture/thanks', content: @participation.content) %>');
-<% else %>
-  $scope = $('.modal.popup-placeholder.<%=@participation.content%>-popup .modal-form');
-  $scope.html('<%=j render('campaigns/email_capture/form', content: @participation.content) %>');
-<% end %>
