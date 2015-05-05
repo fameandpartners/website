@@ -1,10 +1,8 @@
 # load File.join(Rails.root, 'lib', 'campaign_monitor', 'subscribers_migrator.rb')
-# SubscribersMigrator.new.process
-#
-#   how to do it:
-#     migrator = SubscribersMigrator.new.
-#     migrator.load_subscribers(start_from = 0)
-#     migrator.export
+# how to do it:
+#   migrator = SubscribersMigrator.new.
+#   migrator.load_subscribers(start_from = 0)
+#   migrator.export
 
 class CreateSend::List
   def each_subscriber(&original_block)
@@ -35,9 +33,18 @@ class SubscribersMigrator
 
   def export
     subscribers = redis.keys("createsend_subscriber_*").map do |key|
-      JSON.parse(redis.get(key)) rescue nil
+      raw_data = redis.get(key)
+      if raw_data.present?
+        subscriber = JSON.parse(raw_data)
+        subscriber['lists'] = (subscriber['lists'] ||[]).map{|i| "[#{ i }]"}.join
+        subscriber
+      else
+        nil
+      end
     end.compact
-    CreateSend::Subscriber.import(target_list_id, subscribers, false, false, false)
+    subscribers.in_groups_of(1000).each do |subscribers_group|
+      CreateSend::Subscriber.import(target_list_id, subscribers_group.compact, false, false, false)
+    end
   end
 
   def clean
