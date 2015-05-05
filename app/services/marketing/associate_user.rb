@@ -2,7 +2,7 @@ module Marketing; end
 
 class Marketing::UserVisits
   # user can already have visits, in previous session
-  def self.asssociate_with_user_by_token(options = {})
+  def self.associate_with_user_by_token(options = {})
     user  = options[:user]
     token = options[:token]
 
