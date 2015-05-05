@@ -1,5 +1,5 @@
 ruby:
-  product_paths = { default: collection_product_path(@product) }
+  product_paths = { default: collection_product_path(@product, site_version: current_site_version.to_param) }
   @product.default_color_options.each do |color|
     product_paths[color.id] = "#{product_paths[:default]}?color=#{color.name}"
   end

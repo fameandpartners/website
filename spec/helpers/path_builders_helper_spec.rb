@@ -37,6 +37,11 @@ describe PathBuildersHelper, :type => :helper do
         expect(result).to eq('/something/nice')
       end
 
+      it 'builds path correctly even with empty elements' do
+        result = helper.build_url(['', 'my-path'])
+        expect(result).to eq('/my-path')
+      end
+
       it 'builds root path' do
         result = helper.build_url([])
         expect(result).to eq('/')
