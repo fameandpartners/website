@@ -189,14 +189,14 @@ module Importers
         spree_product = Spree::Product
                           .where(deleted_at: nil)
                           .includes(:variants)
-                          .where(Spree::Variant.arel_table[:sku].matches(style_number)
-                          ).first
+                          .where("spree_variants.sku ILIKE '#{style_number}%'")
+                          .first
 
         if spree_product
           spree_product.variants.reject(&:is_master).collect do |v|
             {
-              color: v.dress_color.try(:presentation) || :spree_missing_color,
-              size:  v.dress_size.try(:presentation) || :spree_missing_size,
+              color: v.dress_color.try(:presentation).presence || 'spree_missing_color',
+              size:  v.dress_size.try(:presentation).presence || 'spree_missing_size',
               sku:   v.sku
             }
           end
