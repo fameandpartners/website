@@ -22,9 +22,6 @@
       <th><%= sort_link @search, :tracking,       'Tracking ' %></th>
       <th><%= sort_link @search, :state,          t(:state, :scope => 'activerecord.attributes.spree/order') %></th>
       <th><%= sort_link @search, :payment_state,  t(:payment_state, :scope => 'activerecord.attributes.spree/order') %></th>
-      <% unless hide_line_items %>
-        <th>Make State</th>
-      <% end %>
       <th><%= sort_link @search, :shipment_state, t(:shipment_state, :scope => 'activerecord.attributes.spree/order') %></th>
       <th><%= sort_link @search, :email,          t(:email, :scope => 'activerecord.attributes.spree/order') %></th>
       <th style="min-width:100px;"><%= sort_link @search, :customer_notes, 'Notes' %></th>
@@ -49,9 +46,6 @@
       <td><%= order.shipments.first.tracking if order.shipments.any? %></td>
       <td class="align-center"><span class="state <%= order.state.downcase %>"><%= t("order_state.#{order.state.downcase}") %></span></td>
       <td class="align-center"><span class="state <%= order.payment_state %>"><%= link_to t("payment_states.#{order.payment_state}"), admin_order_payments_path(order) if order.payment_state %></span></td>
-      <% unless hide_line_items %>
-          <td></td>
-      <% end %>
       <td class="align-center"><span class="state <%= order.shipment_state %>"><abbr title="<%=t("shipment_states.#{order.shipment_state}")%>"><%= link_to order.shipment_state, admin_order_shipments_path(order) if order.shipment_state %></abbr></span></td>
       <td><%= mail_to order.email %></td>
       <td><%= order.customer_notes %></td>

@@ -22,7 +22,7 @@ table.line_items
   - orders.each do |raw_order|
     - order = Orders::OrderPresenter.new(raw_order)
     tbody
-      - order.line_items.each do |line_item|
+      - order.line_items.each_with_index do |line_item, idx|
 
         tr class="state-#{order.state.to_s.downcase}"
           td = maybe_date(order.completed_at)
@@ -46,4 +46,4 @@ table.line_items
               = Fabrication::STATES[line_item.fabrication.state]
             - else
               = render partial: 'update_fabrication_state_form', locals: { order_line_item: line_item }
-          = render partial: 'shipment_tracking_number_form', locals: { line_item: line_item }
+          = render partial: 'squished_shipment_tracking_form', locals: { line_item: line_item, position: idx + 1, total_items_in_order: order.line_items.count }
