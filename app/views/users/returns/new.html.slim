@@ -9,25 +9,31 @@
     .row
       .col-md-8.col-md-offset-2.background-grey
         .row.header
-          h2.order-number Order no: xxxxxxxxx
-          h2.order-date Order date: 21/01/2015, 2:30pm
+          h2.order-number Order no: #{ order.number }
+          h2.order-date Order date: #{ l(order.completed_at.to_date) }
 
-        table.table
+        table.table.table-responsive
           thead.hide
             tr
               th colspan="4" Image QTY Name
               th colspan="2" Options
           tbody
+          - order.line_items.each do |line_item|
             tr
-              td.image colspan="4"
-                = image_tag "test.jpg"
-                p 1 X Melody<br> $169.00
-              td colspan="2" I want to
-            tr
-              td.image colspan="4"
-                = image_tag "test.jpg"
-                p 1 X Melody<br> $169.00
-              td colspan="2" I want to
+              td colspan="4"
+                = image_tag line_item.image_url, class: 'img-responsive ordered-item-image'
+                p.title
+                  = line_item.quantity
+                  | &nbsp;X&nbsp;
+                  = line_item.style_name
+                  <br>
+                  = line_item.display_price.to_s
+
+              td.options colspan="2"
+                p.option I want to
+                = form_for order_return, url: new_user_returns_path, method: :post, html: {class: 'form'} do |f|
+                  = f.select :reason, options_for_select(["jgugg"]), {}, :class => 'form-control form-control-md selectbox'
+
         .row
           .col-md-5
             button.btn.cancel = link_to 'cancel', user_orders_path, remote: true
