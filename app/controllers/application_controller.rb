@@ -124,16 +124,6 @@ class ApplicationController < ActionController::Base
     session[:previous_location] = get_hreflang_link # url_with_correct_site_version
   end
 
-  def previous_location_or_default(default_url, previous_location = nil)
-    if previous_location
-      previous_location
-    elsif session[:previous_location].present?
-      session[:previous_location]
-    else
-      default_url
-    end
-  end
-
   def check_cart
     # if can't find order, create it ( true )
     # current order calls current currency which calls current site version
