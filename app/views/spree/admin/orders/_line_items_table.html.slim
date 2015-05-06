@@ -22,7 +22,8 @@ table.line_items
   - orders.each do |raw_order|
     - order = Orders::OrderPresenter.new(raw_order)
     tbody
-      - order.line_items.each_with_index do |line_item, idx|
+      - order.line_items.each_with_index do |line_item, position|
+        - total_items = order.line_items.count
 
         tr class="state-#{order.state.to_s.downcase}"
           td = maybe_date(order.completed_at)
@@ -37,13 +38,18 @@ table.line_items
           td = line_item.style_name
           td = line_item.customisations.collect(&:first).join(', ')
           td = line_item.factory
-          td = line_item.shipping_address
-          td
-            abbr title=order.customer_notes
-              = truncate(order.customer_notes)
+          - if position.zero?
+            td rowspan=total_items
+              = order.name
+              br
+              = line_item.shipping_address
+          - if position.zero?
+            td rowspan=total_items
+              abbr title=order.customer_notes
+                = truncate(order.customer_notes)
           td
             - if line_item.fabrication.try(:state) == 'shipped'
               = Fabrication::STATES[line_item.fabrication.state]
             - else
               = render partial: 'update_fabrication_state_form', locals: { order_line_item: line_item }
-          = render partial: 'squished_shipment_tracking_form', locals: { line_item: line_item, position: idx + 1, total_items_in_order: order.line_items.count }
+          = render partial: 'squished_shipment_tracking_form', locals: { line_item: line_item, position: position, total_items_in_order: total_items }

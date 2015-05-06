@@ -3,6 +3,6 @@
   = render partial: 'shipment_tracking_number_form', locals: { line_item: line_item }
 - elsif shipment.shipped?
     = render partial: 'shipped_shipment_cells', locals: { shipment: shipment }
-- elsif total_items_in_order > 1 && position == 1
+- elsif total_items_in_order > 1 && position.zero?
   td colspan=2 rowspan=total_items_in_order
     = link_to 'Multiple Items In Order', admin_order_shipments_path(shipment.order), target: '_blank'
