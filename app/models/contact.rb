@@ -13,6 +13,14 @@ class Contact
         'Tracking Number','Lost Package','Missing Item','Wrong Item/Order Received',
         'Damaged/Defective Item','Return','Refund','Site Issues'
       ]
+    ],
+    [
+      'Something else',
+      [
+        'Book a Style Consultation',
+        'Feedback on the website',        
+        'None of these apply to me'
+      ]
     ]
   ]
   
