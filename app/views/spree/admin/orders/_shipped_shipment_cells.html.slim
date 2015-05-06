@@ -1,0 +1,6 @@
+- if shipment.tracking
+  td = link_to(shipment.tracking || '???', shipment.tracking_url, target: '_blank')
+- else
+  td No Number
+td
+  abbr title=shipment.shipped_at = l(shipment.shipped_at.to_date)

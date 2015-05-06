@@ -45,7 +45,7 @@ FameAndPartners::Application.configure do
   # Use S3 for storing attachments
   config.use_s3 = true
 
-  Slim::Engine.set_default_options :pretty => true, :sort_attrs => false
+  Slim::Engine.set_options :pretty => true, :sort_attrs => false
 
   # reloading
   config.to_prepare do
