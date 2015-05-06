@@ -1,0 +1,16 @@
+SUBJECT: <%= @contact.subject %>
+
+<% if @contact.order_number.present? %>
+  Order Number: <%= @contact.order_number %>
+<% end %>
+
+Site: <%= @contact.site_version.upcase %>
+--------------------------------------------
+
+First Name: <%= @contact.first_name %>
+Last Name: <%= @contact.last_name %>
+Email: <%= @contact.email %>
+Phone: <%= @contact.phone %>
+
+--------------------------------------------
+<%= @contact.message %>

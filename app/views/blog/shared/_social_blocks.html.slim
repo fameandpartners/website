@@ -4,7 +4,7 @@
   .icon-logo
   p Free styling sessions, VIP member sales and heaps of event fashion advice
 
-= form_for (Participation.new), as: :participation, url: campaigns_newsletter_path(from: 'blog'), remote: true, html: { class: 'sign-in', id: 'newsletter-sign-up' } do |f|
+/= form_for (Participation.new), as: :participation, url: campaigns_newsletter_path(from: 'blog'), remote: true, html: { class: 'sign-in', id: 'newsletter-sign-up' } do |f|
   h2 25% off your next purchase
   = f.text_field :email, class: 'inputbox', placeholder: 'Enter email here'
   input.btn.green.shadow.border type="submit" value="SIGN UP"

@@ -1,24 +1,24 @@
 <% if tracker = Spree::Tracker.current %>
-
+  <% @order = order.order %>
   <%= javascript_tag do %>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
     _gaq.push(['_trackPageview']);
 
-    <% if flash[:commerce_tracking] && @order.present? %>
+    <% if flash[:commerce_tracking] && @spree_order.present? %>
       <%# more info: https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEcommerce %>
       <%# _addTrans(transactionId, affiliation, total, tax, shipping, city, state, country) %>
       _gaq.push(['_addTrans',
-        "<%= j @order.number %>",
+        "<%= j @spree_order.number %>",
         "Fame & Partners",
-        "<%= @order.total %>",
-        "<%= @order.adjustments.tax.sum(:amount) %>",
-        "<%= @order.adjustments.shipping.sum(:amount) %>",
-        "<%= j @order.bill_address.city %>",
-        "<%= j @order.bill_address.state_text %>",
-        "<%= j @order.bill_address.country.name %>"
+        "<%= @spree_order.total %>",
+        "<%= @spree_order.adjustments.tax.sum(:amount) %>",
+        "<%= @spree_order.adjustments.shipping.sum(:amount) %>",
+        "<%= j @spree_order.bill_address.city %>",
+        "<%= j @spree_order.bill_address.state_text %>",
+        "<%= j @spree_order.bill_address.country.name %>"
       ]);
-      <% @order.line_items.each do |line_item| %>
+      <% @spree_order.line_items.each do |line_item| %>
         <%
           # _addItem(transactionId, sku, name, category, price, quantity)
           range_taxon   = range_taxon_for(line_item.variant.product)
@@ -27,7 +27,7 @@
           sku = line_item.variant.product.sku if sku.blank?
         %>
         _gaq.push(['_addItem',
-          "<%= j @order.number %>",
+          "<%= j @spree_order.number %>",
           "<%= j sku %>",
           "<%= j line_item.variant.product.name %>",
           "<%= j category_name %>",
@@ -49,15 +49,15 @@
   <% end %>
 <% end %>
 
-<% if flash[:commerce_tracking] && @order.present? %>
-  <!-- img src="<%= Marketing::RakutenTracker.new(@order, current_site_version).url %>" /-->
+<% if flash[:commerce_tracking] && @spree_order.present? %>
+  <!-- img src="<%= Marketing::RakutenTracker.new(@spree_order, current_site_version).url %>" /-->
   <%= render :partial => 'spree/shared/rakuten' %>
   <%= render :partial => 'spree/shared/customerio' %>
 <% end %>
 
 <%# fb tracking pixel %>
 <% if flash[:commerce_tracking] %>
-  <%= fb_analytics_track('6013645244896', 'AUD', @order.display_item_total) %>
+  <%= fb_analytics_track('6013645244896', 'AUD', @spree_order.display_item_total) %>
 
   <script src="//platform.twitter.com/oct.js" type="text/javascript" />
   <script type="text/javascript">
@@ -84,6 +84,6 @@
   window._fbq.push(['track', '6016695263696', {'value':'0.00','currency':'AUD'}]);
   </script>
   <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6021815151134&amp;cd[value]=0.00&amp;cd[currency]=AUD&amp;noscript=1" /></noscript>
-  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6016695263696&amp;cd[value]=0.00&amp;cd[currency]=AUD&amp;noscript=1" /></noscript>  
+  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6016695263696&amp;cd[value]=0.00&amp;cd[currency]=AUD&amp;noscript=1" /></noscript>
 
 <% end %>

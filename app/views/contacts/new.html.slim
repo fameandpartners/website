@@ -1,0 +1,46 @@
+.page-title.default.contact-header
+  .container
+    .page-title--details
+      h1.no-padding-bottom Contact Fame & Partners
+
+.page-content.contact
+  .container.relative
+    .form-global
+      = form_for @contact, url: contact_path, method: :post, html: {class: 'form'} do |f|
+        = f.hidden_field :site_version
+        .row
+          .col-md-12.form-group
+            label First name
+            = f.text_field :first_name, :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label Last name
+            = f.text_field :last_name, :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label Email
+            = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label Phone
+            = f.text_field :phone, :class => 'form-control form-control-md'
+            p.hint
+              | (include country code)
+        .row
+          .col-md-12.form-group
+            label How can we help?
+            = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, nil), {}, :class => 'form-control form-control-md selectbox'
+        .row
+          .col-md-12.form-group
+            label Order Number
+            = f.text_field :order_number, :class => 'form-control form-control-md'
+            p.hint
+              | (if you have one)
+        .row
+          .col-md-12.form-group
+            label Your Message
+            = f.text_area :message, :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            .submit
+              = f.submit "Send", class: 'btn btn-black btn-block'

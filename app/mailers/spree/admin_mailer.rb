@@ -20,14 +20,4 @@ class Spree::AdminMailer  < ActionMailer::Base
 
     mail(to: to, from: from, subject: subject)
   end
-
-  def stylist_consultation_requested(user)
-    @user = user
-
-    to = 'team@fameandpartners.com'
-    subject = 'Stylist consultation requested'
-    from = "#{@user.full_name}<#{@user.email}>"
-
-    mail(to: to, from: from, subject: subject)
-  end
 end

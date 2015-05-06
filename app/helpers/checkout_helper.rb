@@ -7,17 +7,16 @@ module CheckoutHelper
       countries = checkout_zone.country_list
     else
       countries = Spree::Country.all
-    end 
+    end
 
     countries.collect do |country|
       country.name = I18n.t(country.iso, :scope => 'country_names', :default => country.name)
       country
     end.sort { |a, b| a.name <=> b.name }
-  end 
+  end
 
   def available_states_for_current_zone
-    checkout_zone = current_site_version.try(:zone) || Zone.find_by_name(Spree::Config[:checkout_zone])
-
+    checkout_zone = current_site_version.try(:zone) || Zone.find_by_name(Spree::Config[:checkout_zone])    
     if checkout_zone && checkout_zone.kind == 'country'
       countries = checkout_zone.country_list.map(&:id)
       states = Spree::State.where(country_id: countries).sort_by{|state| state.name }

@@ -20,8 +20,6 @@ require File.expand_path("../application", __FILE__)
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "http://#{configatron.host}"
 
-SitemapGenerator::Interpreter.send :include, ApplicationHelper
-SitemapGenerator::Interpreter.send :include, ProductsHelper
 SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
@@ -45,15 +43,6 @@ SitemapGenerator::Interpreter.class_eval do
       {
         href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale, nofollow: false  
       }
-    end
-  end
-
-  def post_path(post)
-    return '#' if post.nil?
-    if (category = post.category).present?
-      blog_post_by_category_path(category_slug: category.slug, post_slug: post.slug) 
-    else
-      blog_post_path(post_slug: post.slug)
     end
   end
 end
@@ -80,35 +69,19 @@ unless Rails.env.development?
 end
 
 SitemapGenerator::Sitemap.create(options) do
-  # add '/' - added by default
-  # have to add /en & /au
-  default_site_version = SiteVersion.default
-  site_versions = SiteVersion.where(default: false).to_a
-
   add root_path, alternates: build_alternates(root_path), priority: 1.0
 
   # products page
   Spree::Product.active.each do |product|
-    color_ids = product.variants.active.map do |variant|
-      variant.option_values.colors.map(&:id)
-    end.flatten.uniq
-
     images_repo = Repositories::ProductImages.new(product: product)
 
-    product.product_color_values.each do |product_color_value|
-      color = product_color_value.option_value
-      color_images = images_repo.filter(color_id: color.id)
-
-      next unless color_ids.include?(color.id)
-      next unless color_images.present?
-
-      add(collection_product_path(product, color: color.name), {
-        priority: 0.8,
-        images: color_images.map{|data| { loc: data.large, title: product.name }},
-        alternates: build_alternates(collection_product_path(product, color: color.name))
-      })
-    end
+    add(collection_product_path(product), {
+      priority: 0.8,
+      images: images_repo.filter(cropped: false).map { |img| { loc: img.large, title: product.name } },
+      alternates: build_alternates(collection_product_path(product))
+    })
   end
+
   # events
   Repositories::Taxonomy.read_events.each do |taxon|
     add(build_taxon_path(taxon.name), {
@@ -140,11 +113,10 @@ SitemapGenerator::Sitemap.create(options) do
   end
 
   statics_pages = [ 
-    '/about', '/why-us', '/team', '/terms', '/privacy', '/legal', '/faqs', '/how-it-works',
-    '/fashionista2014', '/fashionista2014/info', '/fashionista2014-winners', '/compterms', '/plus-size',
-    '/style-consultation', '/fame-chain', '/returnsform',
-    '/fashionitgirl2015', '/fashionitgirl2015-terms-and-conditions', '/fashionitgirl2015-competition',
-    '/nyfw-comp-terms-and-conditions', '/bridesmaid-dresses', '/feb_2015_lp', '/facebook-lp', '/sale-dresses', '/fame2015',
+    '/about', '/why-us', '/terms', '/privacy', '/legal', '/assets/returnform.pdf',
+    '/style-consultation', '/fame-chain',
+    '/fashionitgirl2015',
+    '/bridesmaid-dresses', '/sale-dresses',
     '/unidays'
   ]
   statics_pages.each do |page_path|

@@ -87,28 +87,27 @@ ruby:
                       h4.link-header Events
                       ul.mega-menu-list
                         li.mega-menu-list--item
-                          = link_to 'Prom Dresses', build_taxon_path('Prom'), title: 'Prom Dresses'
+                          = link_to 'Graduation', build_taxon_path('Graduation'), title: 'Graduation'
                         li.mega-menu-list--item
-                          = link_to 'Bridesmaid Dresses', bridesmaid_lp_path, title: 'Bridesmaid Dresses'
+                          = link_to 'Prom', build_taxon_path('Prom'), title: 'Prom'
                         li.mega-menu-list--item
-                          = link_to 'Formal Dresses', build_taxon_path('Formal'), title: 'Formal Dresses'
+                          = link_to 'Wedding', build_taxon_path('Wedding'), title: 'Wedding'
                         li.mega-menu-list--item
-                          a href="/dresses/wedding" Wedding Dresses
+                          = link_to 'Bridesmaid', bridesmaid_lp_path, title: 'Bridesmaid'
                         li.mega-menu-list--item
-                          a href="/dresses/homecoming" Homecoming Dresses
+                          = link_to 'Formal', build_taxon_path('Formal'), title: 'Formal'
                         li.mega-menu-list--item
-                          a href="/dresses/ball-gowns" Ball Dresses
+                          = link_to 'Homecoming', build_taxon_path('Homecoming'), title: 'Homecoming'
                         li.mega-menu-list--item
-                          a href="/dresses/sweet-16" Sweet 16 Dresses
+                          = link_to 'Ball', build_taxon_path('Ball'), title: 'Ball'
                         li.mega-menu-list--item
-                          a href="/dresses/birthday" Birthday Dresses
+                          = link_to 'Sweet 16', build_taxon_path('Sweet 16'), title: 'Sweet 16'
                         li.mega-menu-list--item
-                          a href="/dresses/debutante" Debutante Dresses
+                          = link_to 'Birthday', build_taxon_path('Birthday'), title: 'Birthday'
                         li.mega-menu-list--item
-                          a href="/dresses/graduation" Graduation Dresses
+                          = link_to 'Debutante', build_taxon_path('Debutante'), title: 'Debutante'
                         li.mega-menu-list--item
-                          a href="/dresses/special-event" Special Event Dresses
-
+                          = link_to 'Special Event', build_taxon_path('Special Event'), title: 'Special Event'
 
                     .col-md-3.col-lg-2
                       h4.link-header Style
@@ -124,12 +123,12 @@ ruby:
                     .col-md-3.col-lg-2
                       h4.link-header= t('color')
                       ul.mega-menu-list
-                        li.mega-menu-list--item= link_to "Black Dresses", colour_path('Black'), title: "Black Dresses"
-                        li.mega-menu-list--item= link_to "White / Ivory Dresses", colour_path('White'), title: "White / Ivory Dresses"
-                        li.mega-menu-list--item= link_to "Blue Dresses", colour_path('Blue'), title: "Blue Dresses"
-                        li.mega-menu-list--item= link_to "Pink Dresses", colour_path('Pink'), title: "Pink Dresses"
-                        li.mega-menu-list--item= link_to "Red Dresses", colour_path('Red'), title: "Red Dresses"
-                        li.mega-menu-list--item= link_to "Pastel Dresses", colour_path('Pastel'), title: "Pastel Dresses"
+                        li.mega-menu-list--item= link_to "Black", colour_path('Black'), title: "Black"
+                        li.mega-menu-list--item= link_to "White / Ivory", colour_path('White'), title: "White / Ivory"
+                        li.mega-menu-list--item= link_to "Blue", colour_path('Blue'), title: "Blue"
+                        li.mega-menu-list--item= link_to "Pink", colour_path('Pink'), title: "Pink"
+                        li.mega-menu-list--item= link_to "Red", colour_path('Red'), title: "Red"
+                        li.mega-menu-list--item= link_to "Pastel", colour_path('Pastel'), title: "Pastel"
 
                     .col-md-3.col-lg-2
                       h4.link-header= t('sale')
@@ -161,7 +160,7 @@ ruby:
                 .col-md-3
                   = link_to prom_collection_path do
                     .image-container.real-prom
-                      = image_tag src='edits/real_prom/1_REALPROM-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
+                      = image_tag src='edits/real_prom/1-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
                     p.text-center.edit-title Our Official Prom Collection
 
                 .col-md-3

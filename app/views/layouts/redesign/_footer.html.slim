@@ -22,6 +22,8 @@
           = link_to 'Get styling advice', style_consultation_path
         li.footer-nav--item
           = link_to 'Fame Chain', fame_chain_path
+        li.footer-nav--item
+          = link_to 'Contact Us', new_contact_path
 
   .lower-row
     .col-md-3.col-sm-8
@@ -57,19 +59,3 @@
           / span class='st_twitter_custom' st_via="fameandpartners" displayText='Tweet'
           = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
             = image_tag '_icons/twitter.png'
-
-/ .hide
-/   #vex-popup
-/     h1 Discover your style profile and get $20 to spend on a dress.
-/     p TAKE OUR STYLE QUIZ TO GET ACCESS TO YOUR OWN PERSONALISED STYLE BOUTIQUE.
-/     p = link_to 'SIGN UP WITH YOUR EMAIL ADDRESS', '#', class: 'btn btn-block btn-white btn-md'
-/     p or
-/     p = link_to 'Sign UP USING Facebook', '#', class: 'btn btn-block btn-facebook btn-md'
-/     p
-/       ' ALREADY A MEMBER?
-/       = link_to 'LOG IN HERE', '#'
-/ coffee:
-/   $ ->
-/     vex.open
-/       className: 'vex-dialog-default vex-dialog-pink vex-dialog-signup'
-/       content: $('#vex-popup')

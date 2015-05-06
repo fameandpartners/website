@@ -7,7 +7,7 @@ However, any deployments requiring migration (see below) or that have any chance
 
 The current deployment window is 18:00-20:00 AEST which is currently 04:00-06:00 EST and 01:00-03:00 PST.
 
-As a general rule, feature flags should be used to control and test changes in the production environment before being flipped for general use. 
+As a general rule, feature flags should be used to control and test changes in the production environment before being flipped for general use.
 
 Migrations that have been designed for zero-downtime deployment are excepted and can be deployed freely.
 
@@ -19,7 +19,7 @@ Migrations that have been designed for zero-downtime deployment are excepted and
 
 ### Prerequisites
 
-* Ruby 1.9.3-p547
+* Ruby 2.1.5 (2.2.0 also works)
 * Postgres
 * ElasticSearch
 * Redis

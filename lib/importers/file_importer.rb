@@ -12,10 +12,10 @@ module Importers
 
     attr_reader :csv_file
 
-    def initialize(csv_file)
+    def initialize(csv_file, logdev = STDOUT)
       @csv_file = csv_file
 
-      @logger = Logger.new(STDOUT)
+      @logger = Logger.new(logdev)
       @logger.level = Logger::INFO unless ENV['debug']
       @logger.formatter = proc do |severity, datetime, _progname, msg|
         color = {'ERROR' => red, 'WARN' => magenta}.fetch(severity) { '' }
@@ -25,6 +25,11 @@ module Importers
 
     def import
       error "Not Implemented"
+    end
+
+    def preface
+      info "#{self.class.name} Start"
+      info "File: #{csv_file}"
     end
   end
 end

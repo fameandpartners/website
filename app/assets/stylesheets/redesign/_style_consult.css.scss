@@ -1,4 +1,4 @@
-.style-consult {
+.style-consult, .contact {
 
 	form {
 		width: 350px;
@@ -6,6 +6,7 @@
 	}
 
   .form-control {
+		text-align:left;
     border-bottom: 1px solid black;
   }
 
@@ -18,7 +19,7 @@
   }
 }
 
-.style-consult-header {
+.style-consult-header, .contact-header {
   background-color: #eeddf0;
 
   h1 {
@@ -28,4 +29,12 @@
   }
 }
 
-
+.contact {
+		
+		textarea {
+			border: 1px solid #CCCCCC;
+			border-bottom: 1px solid black;
+			height:280px;
+			text-align:left;
+		}
+}

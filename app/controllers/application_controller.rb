@@ -97,7 +97,7 @@ class ApplicationController < ActionController::Base
   # but we don't have 'after-sign-in' callback or single entry point for user log-in
   def associate_user_by_utm_guest_token
     if current_spree_user.present? && cookies[:utm_guest_token].present?
-      Marketing::UserVisits.asssociate_with_user_by_token(
+      Marketing::UserVisits.associate_with_user_by_token(
         user: current_spree_user, token: cookies[:utm_guest_token]
       )
       cookies.delete(:utm_guest_token)

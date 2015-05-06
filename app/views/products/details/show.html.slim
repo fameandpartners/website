@@ -1,5 +1,5 @@
 ruby:
-  product_paths = { default: collection_product_path(@product) }
+  product_paths = { default: collection_product_path(@product, site_version: current_site_version.to_param) }
   @product.default_color_options.each do |color|
     product_paths[color.id] = "#{product_paths[:default]}?color=#{color.name}"
   end
@@ -268,7 +268,6 @@ hr
                 a.color-option.product-option href="#" data-id=color.id data-custom="true" data-name=color.presentation data-price=@product.custom_color_price
                   span.option-box.color-box class="color-#{color.name}"
                   span.option-name= color.presentation
-                  span.option-price= "+#{@product.custom_color_price}"
 
 - if @product.customizable?
   #product-customizations-content.product-side-panel

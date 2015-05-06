@@ -1,9 +1,0 @@
-.title 
-  ' GET $$$ TOWARDS YOUR PROM DRESS!
-.form-container
-  .form
-    = form_for (@participation || Participation.new), as: :participation, url: campaigns_email_capture_path, remote: true do |f|
-      hidden value="#{params['content']}" name="content"
-      .string
-        = f.email_field :email, class: 'inputbox', placeholder: 'Enter your email address'
-        input.btn.submitbox type="submit" value="Submit"

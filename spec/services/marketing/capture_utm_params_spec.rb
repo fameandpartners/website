@@ -7,7 +7,8 @@ describe Marketing::CaptureUtmParams do
       utm_source:     'utm_source',
       utm_medium:     'utm_medium',
       utm_term:       'utm_term',
-      utm_content:    'utm_content'
+      utm_content:    'utm_content',
+      referrer:       'http://example.com/partners'
     }
   }
 
@@ -39,6 +40,17 @@ describe Marketing::CaptureUtmParams do
       service.record_visit!
 
       expect(Marketing::UserVisit.where(user_token: subject.user_token).count).to eq(2)
+    end
+
+    it "truncate possible available very long string" do
+      long_utm_params = {}
+      utm_params.each do |key, value|
+        long_utm_params[key] = value.to_s * 100
+      end
+      service = Marketing::CaptureUtmParams.new(nil, nil, long_utm_params)
+      service.record_visit!
+
+      expect(Marketing::UserVisit.where(user_token: service.user_token).count).to eq(1)
     end
   end
 

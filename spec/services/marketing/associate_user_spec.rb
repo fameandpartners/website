@@ -12,13 +12,13 @@ describe Marketing::UserVisits do
   }
   let(:user) { create(:spree_user) }
 
-  context "asssociate_with_user_by_token" do
+  context "associate_with_user_by_token" do
     it "update ownership and resets token" do
       service = Marketing::CaptureUtmParams.new(nil, nil, utm_params)
       result = service.record_visit!
 
       expect(
-        Marketing::UserVisits.asssociate_with_user_by_token(
+        Marketing::UserVisits.associate_with_user_by_token(
           user: user, token: service.user_token
         )
       ).to be true
@@ -34,7 +34,7 @@ describe Marketing::UserVisits do
       result = Marketing::CaptureUtmParams.new(nil, nil, utm_params).record_visit!
 
       expect(
-        Marketing::UserVisits.asssociate_with_user_by_token(
+        Marketing::UserVisits.associate_with_user_by_token(
           user: user, token: result.user_token
         )
       ).to be true
