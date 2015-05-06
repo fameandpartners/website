@@ -24,15 +24,18 @@
           .col-md-12.form-group
             label Phone
             = f.text_field :phone, :class => 'form-control form-control-md'
-            p.hint (include country code)
+            p.hint
+              | (include country code)
         .row
           .col-md-12.form-group
             label How can we help?
-            = f.select :subject, grouped_options_for_select(Contact::SUBJECTS), {}, :class => 'form-control form-control-md selectbox'
+            = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, nil), {}, :class => 'form-control form-control-md selectbox'
         .row
           .col-md-12.form-group
-            label Order Number (if you have one)
+            label Order Number
             = f.text_field :order_number, :class => 'form-control form-control-md'
+            p.hint
+              | (if you have one)
         .row
           .col-md-12.form-group
             label Your Message
