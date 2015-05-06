@@ -8,7 +8,7 @@
         = f.text_field :tracking, placeholder: shipment.state, required: true
       td
         button type='submit' onClick="return confirm('This will email the customer! Are you sure?');"
-          ' Ship!
+          = shipment.try(:shipping_method).try(:name) || 'Ship'
           i.fa.fa-ship
   - else
     td = shipment.state.capitalize
