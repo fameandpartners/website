@@ -278,6 +278,7 @@ FameAndPartners::Application.routes.draw do
 
   namespace :admin do
     resources :fabrications, :only => :update
+    resource :sku_generation, :only => [:show, :create]
   end
 
   Spree::Core::Engine.routes.append do

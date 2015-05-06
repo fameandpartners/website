@@ -10,13 +10,9 @@ Spree::OrdersController.class_eval do
 
   # todo: merge order & user_cart => completed order resource
   def show
-    user = try_spree_current_user
     
-    if user.has_spree_role?('admin')
-      order = ::Spree::Order.find_by_number!(params[:id])
-    else
-      order = user.orders.find_by_number(params[:id])
-    end
+    # this is a security hole
+    order = ::Spree::Order.find_by_number!(params[:id])
     
     @spree_order = order
     @order = Orders::OrderPresenter.new(order)
