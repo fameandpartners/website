@@ -32,18 +32,23 @@ class SubscribersMigrator
   end
 
   def export
-    subscribers = redis.keys("createsend_subscriber_*").map do |key|
-      raw_data = redis.get(key)
-      if raw_data.present?
-        subscriber = JSON.parse(raw_data)
-        subscriber['lists'] = (subscriber['lists'] ||[]).map{|i| "[#{ i }]"}.join
-        subscriber
-      else
-        nil
-      end
-    end.compact
     subscribers.in_groups_of(1000).each do |subscribers_group|
       CreateSend::Subscriber.import(target_list_id, subscribers_group.compact, false, false, false)
+    end
+  end
+
+  def subscribers
+    @subscribers ||= begin
+      redis.keys("createsend_subscriber_*").map do |key|
+        raw_data = redis.get(key)
+        if raw_data.present?
+          subscriber = JSON.parse(raw_data)
+          subscriber['lists'] = (subscriber['lists'] ||[]).map{|i| "[#{ i }]"}.join
+          formatted_subscriber(subscriber)
+        else
+          nil
+        end
+      end.compact
     end
   end
 
@@ -56,6 +61,13 @@ class SubscribersMigrator
   end
 
   private
+
+    def formatted_subscriber(data)
+      custom_fields = data.except('EmailAddress', 'Name').map do |key, value|
+        { 'Key' => key, 'Value' => value }
+      end
+      data.slice('EmailAddress', 'Name').merge('CustomFields' => custom_fields)
+    end
 
     def redis
       @redis ||= Redis.new(configatron.redis_options)
