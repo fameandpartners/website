@@ -14,15 +14,15 @@ module ApplicationHelper
     html.html_safe
   end
 
+  # TODO: This method will have to change when multiple locales support comes
   def get_hreflang_link
     if request.fullpath.include? "/au"
-      hreflang_link = "http://#{request.host}#{request.fullpath}"
-      hreflang_link.gsub!('/au', '')
+      hreflang_link = request.fullpath.gsub('/au', '')
     else
       # united states is default, so default hreflang should be australian
-      hreflang_link = "http://#{request.host}/au#{request.fullpath}"
-      hreflang_link.gsub!('/us', '')
+      hreflang_link = request.fullpath.gsub('/us', '')
     end
+
     hreflang_link
   end
 
