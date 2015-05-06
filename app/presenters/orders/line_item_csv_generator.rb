@@ -16,7 +16,8 @@ module Orders
       parts << Date.parse(query_params[:created_at_gt]).strftime('from_%Y-%m-%d') if query_params[:created_at_gt].present?
       parts << Date.parse(query_params[:created_at_lt]).strftime('to_%Y-%m-%d')   if query_params[:created_at_lt].present?
       parts << (query_params.fetch(:completed_at_not_null) { false } == '1' ? 'only_complete' : 'all_states')
-      parts << DateTime.now.strftime('generated_at_%Y-%m-%d.%H%M')
+      parts << 'generated_at'
+      parts << DateTime.now.to_s(:file_timestamp)
       parts.join('_') << '.csv'
     end
 
