@@ -31,18 +31,17 @@
     .text-center
       h3 Events
       .list-group
-        = link_to 'Prom Dresses', build_taxon_path('Prom'), class: 'list-group-item', title: 'Prom Dresses'
-        = link_to 'Bridesmaid Dresses', bridesmaid_lp_path, class: 'list-group-item', title: 'Bridesmaid Dresses'
-        = link_to 'Formal Dresses', build_taxon_path('Formal'), class: 'list-group-item', title: 'Formal Dresses'
-        a.list-group-item href="/dresses/wedding" Wedding Dresses
-        a.list-group-item href="/dresses/homecoming" Homecoming Dresses
-        a.list-group-item href="/dresses/ball" Ball Dresses
-        a.list-group-item href="/dresses/sweet-16" Sweet 16 Dresses
-        a.list-group-item href="/dresses/birthday" Birthday Dresses
-        a.list-group-item href="/dresses/debutante" Debutante Dresses
-        a.list-group-item href="/dresses/graduation" Graduation Dresses
-        a.list-group-item href="/dresses/special-events" Special Event Dresses
-
+        = link_to 'Prom', build_taxon_path('Prom'), class: 'list-group-item', title: 'Prom'
+        = link_to 'Bridesmaid', bridesmaid_lp_path, class: 'list-group-item', title: 'Bridesmaid'
+        = link_to 'Formal', build_taxon_path('Formal'), class: 'list-group-item', title: 'Formal'
+        = link_to 'Wedding', build_taxon_path('Wedding'), class: 'list-group-item', title: 'Wedding'
+        = link_to 'Homecoming', build_taxon_path('Homecoming'), class: 'list-group-item', title: 'Homecoming'
+        = link_to 'Ball Gowns', build_taxon_path('Ball Gowns'), class: 'list-group-item', title: 'Ball Gowns'
+        = link_to 'Sweet 16', build_taxon_path('Sweet 16'), class: 'list-group-item', title: 'Sweet 16'
+        = link_to 'Birthday', build_taxon_path('Birthday'), class: 'list-group-item', title: 'Birthday'
+        = link_to 'Debutante', build_taxon_path('Debutante'), class: 'list-group-item', title: 'Debutante'
+        = link_to 'Graduation', build_taxon_path('Graduation'), class: 'list-group-item', title: 'Graduation'
+        = link_to 'Special Event', build_taxon_path('Special Event'), class: 'list-group-item', title: 'Special Event'
 
   /! Mobile Menu
   #mobile-menu.mobile-menu.visible-sm.visible-xs
