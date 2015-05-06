@@ -55,10 +55,8 @@
   <%= render :partial => 'spree/shared/customerio' %>
 <% end %>
 
-<%# fb tracking pixel %>
+<%# twitter tracking pixel %>
 <% if flash[:commerce_tracking] %>
-  <%= fb_analytics_track('6013645244896', 'AUD', @spree_order.display_item_total) %>
-
   <script src="//platform.twitter.com/oct.js" type="text/javascript" />
   <script type="text/javascript">
     twttr.conversion.trackPid('l5cvl');
@@ -67,6 +65,13 @@
     <img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l5cvl&p_id=Twitter"/>
     <img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l5cvl&p_id=Twitter"/>
   </noscript>
+<% end %>
+
+<%# fb tracking pixel %>
+<% if flash[:commerce_tracking] %>
+  <% if @spree_order.present? %>
+    <%= fb_analytics_track('6013645244896', 'AUD', @spree_order.display_item_total) %>
+  <% end %>
 
   <script>(function() {
    var _fbq = window._fbq || (window._fbq = []);
