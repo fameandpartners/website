@@ -13,7 +13,7 @@
         - if @orders.empty?
           p You have no orders
         - else
-          table.table.table-striped.table-hover.table-responsive.orders-table
+          table.table.table-striped.table-hover.orders-table
             thead
               tr
                 th Order
@@ -26,22 +26,22 @@
             tbody
               - @orders.each do |order|
                 tr
-                  td = link_to order.number, user_order_path(order), remote: true, class: "order-details"
-                  td = l(order.updated_at.to_date)
-                  td = order_payment_state(order)
-                  td
+                  td data-title="Order" = link_to order.number, user_order_path(order), remote: true, class: "order-details"
+                  td data-title="Order date" = l(order.updated_at.to_date)
+                  td data-title="Payment State" = order_payment_state(order)
+                  td data-title="Order status"
                     - if order.line_items.one?
                       = order_status(order)
                     - else
                       = link_to 'Click for details', user_order_path(order), class: "order-details"
-                  td colspan='1'
+                  td data-title="Shipping state" colspan='1'
                     - if order.shipped?
                       - order.shipments.each do | shipment|
                         = link_to shipment.tracking || 'Track', shipment_tracking_url(shipment), target:'_blank', class: "order-details"
                     - else
                       | Not yet shipped
 
-                  td  = order.display_total
+                  td data-title="total" = order.display_total
                   td.returns-column
                     button.btn.return
                       = link_to 'return or exchange', new_user_returns_path(:order_id => order.number)
