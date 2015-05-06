@@ -1,0 +1,73 @@
+@media only screen and (max-width: 800px) {
+
+	.table table,
+	.table thead,
+	.table tbody,
+	.table th,
+	.table td,
+	.table tr {
+		display: block;
+	}
+
+  .table > tbody > tr > td {
+    // border-top: none;
+    clear: left;
+  }
+
+	.table thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	.table tr {
+    // border: 1px solid #ccc;
+  }
+
+	.table td {
+		border: none;
+		// border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+		white-space: normal;
+		text-align:left;
+	}
+
+	.table td:before {
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+		text-align:left;
+		font-weight: bold;
+	}
+
+	.table td:before {
+    content: attr(data-title);
+  }
+
+  .table.shipping {
+
+    td {
+      padding-left: 40%;
+    }
+
+    tbody > tr > td {
+      border-top: 1px solid #ddd;
+    }
+  }
+
+  .table.orders-table {
+    td {
+      padding-left: 40%;
+    }
+  }
+
+  .table.order-items {
+    tbody > tr > td {
+      padding-left: 40%;
+    }
+  }
+}
