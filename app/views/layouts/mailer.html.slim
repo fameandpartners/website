@@ -23,12 +23,12 @@ html style="background: #fff none repeat scroll 0% 0%;"
                   table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                     tr
                       td
-                        img src="http://localhost:3000/assets/_email/header-left.jpg" width="113" height="167" alt="" style="border: 0;"
+                        = image_tag "_email/header-left.jpg", width: '113', height: '167', style: 'border: 0;'
                       td.logo style="text-align: center;"
-                        a href="#{ main_app.root_url }"
-                          img src="http://www.fameandpartners.com/assets/new-logo.svg" width="330" alt="Fame&Partners" style="border: 0;"
+                        = link_to main_app.root_url do
+                          = image_tag "new-logo.svg", width: '330', alt: "Fame&Partners", style: 'border: 0;'
                       td
-                        img src="http://localhost:3000/assets/_email/header-right.jpg" width="168" height="167" alt="" style="border: 0;"
+                        = image_tag "_email/header-right.jpg", width: '168', height: '167', style: 'border: 0;'
                 tr
                   td height="21"
                 tr
@@ -46,8 +46,8 @@ html style="background: #fff none repeat scroll 0% 0%;"
                   td height="21"
                 tr
                   td.logo style="text-align: center;"
-                    a href="http://fameandpartners.com"
-                      img src="http://localhost:3000/assets/_email/footer-logo.jpg" width="199" alt="Fame&Partners" style="border: 0;"
+                    = link_to main_app.root_url do
+                      = image_tag "_email/footer-logo.jpg", width: '199', alt: "Fame&Partners", style: "border: 0;"
                 tr
                   td height="21"
                 tr
@@ -59,43 +59,44 @@ html style="background: #fff none repeat scroll 0% 0%;"
                         td width="15"
                         / Twitter
                         td style="text-align: center;"
-                          a href="http://twitter.com/fameandpartners" style="color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none"
-                            img src="http://localhost:3000/assets/_email/twitter.png" width="30" height="30" style="border: 2px solid #000; border-radius: 100%; margin-bottom: 5px;" alt="Fame&Partners on Twitter"
+                          = link_to configatron.links.twitter, style: "color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none" do
+                            = image_tag "_email/twitter.png", width: "30", height: "30", style: "border: 2px solid #000; border-radius: 100%; margin-bottom: 5px;", alt: "Fame&Partners on Twitter"
                             br
                             span 
                               | @famepartners
 
                         / Facebook
                         td style="text-align: center;"
-                          a href="http://facebook.com/fameandpartners" style="color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none"
-                            img src="http://localhost:3000/assets/_email/facebook.png" width="30" height="30" style="border: 2px solid #000; border-radius: 100%; margin-bottom: 5px;" alt="Fame&Partners on Facebook"
+                          = link_to configatron.links.facebook, style: "color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none" do
+                            = image_tag "_email/facebook.png", width:"30", height: "30", style: "border: 2px solid #000; border-radius: 100%; margin-bottom: 5px;", alt: "Fame&Partners on Facebook"
                             br
                             span 
                               | /famepartners
                         
                         / Instagram
                         td style="text-align: center;"
-                          a href="http://instagram.com/fameandpartners" style="color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none"
-                            img src="http://localhost:3000/assets/_email/instagram.png" width="30" height="30" style="border: 2px solid #000; border-radius: 100%; margin-bottom: 5px;" alt="Fame&Partners on Instagram"
+                          = link_to configatron.links.instagram, style: "color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none"
+                            = image_tag "_email/instagram.png", width: "30", height: "30", style: "border: 2px solid #000; border-radius: 100%; margin-bottom: 5px;", alt: "Fame&Partners on Instagram"
                             br
                             span 
                               | @famepartners
 
                         / Google
-                        / td style="text-align: center;"
-                        /   a href="https://plus.google.com/b/117433562249244184743/117433562249244184743/about/p/pub" style="color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none"
-                        /     img src="http://fameandpartners.com/images/email/google.png" width="30" height="30" style="border: 0;" alt="Fame&Partners on Google+"
-                        /     br
-                        /     span 
-                        /       | @famepartners
-
-                        / Pinterest
-                        td style="text-align: center;"
-                          a href="http://pinterest.com/fameandpartners/" style="color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none"
-                            img src="http://localhost:3000/assets/_email/pinterest.png" width="30" height="30" style="border: 2px solid #000; border-radius: 100%; margin-bottom: 5px;" alt="Fame&Partners on Pinterest"
+                        /td style="text-align: center;"
+                          = link_to configatron.links.google, style: "color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none"
+                            = image_tag "_email/google.png", width: "30", height: "30", style: "border: 2px solid #000; border-radius: 100%; margin-bottom: 5px;", alt: "Fame&Partners on Instagram"
                             br
                             span 
                               | @famepartners
+
+                        / Pinterest
+                        td style="text-align: center;"
+                          = link_to configatron.links.pinterest, style: "color: #fff; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif; text-decoration: none"
+                            = image_tag "_email/pinterest.png", width: "30", height: "30", style: "border: 2px solid #000; border-radius: 100%; margin-bottom: 5px;", alt: "Fame&Partners on Instagram"
+                            br
+                            span 
+                              | @famepartners
+
                         td width="15"
                       tr
                         td colspan="10" height="15"
