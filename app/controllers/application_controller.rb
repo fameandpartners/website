@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   append_before_filter :check_site_version
+  append_before_filter :store_marketing_params
+  append_before_filter :check_marketing_traffic
   append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
   append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
@@ -38,10 +40,7 @@ class ApplicationController < ActionController::Base
 
   def check_site_version
     # redirects should work only on non-ajax GET requests from users
-    return if (!request.get? || request.xhr? || request_from_bot?)
-
-    store_marketing_params
-    check_marketing_traffic
+    return if (!request.get? || request.xhr?)
 
     if params[:site_version].blank?
       if current_site_version.default?
@@ -123,16 +122,6 @@ class ApplicationController < ActionController::Base
 
   def store_current_location
     session[:previous_location] = get_hreflang_link # url_with_correct_site_version
-  end
-
-  def previous_location_or_default(default_url, previous_location = nil)
-    if previous_location
-      previous_location
-    elsif session[:previous_location].present?
-      session[:previous_location]
-    else
-      default_url
-    end
   end
 
   def check_cart
@@ -351,12 +340,6 @@ class ApplicationController < ActionController::Base
 
   def current_site_version=(site_version)
     @current_site_version = site_version
-  end
-
-  def request_from_bot?
-    user_agent = request.env["HTTP_USER_AGENT"]
-    #user_agent =~ /(bot|Google|Slurp)/i
-    user_agent =~ /(Baidu|bot|Google|Facebook|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)/i
   end
 
   def current_currency
