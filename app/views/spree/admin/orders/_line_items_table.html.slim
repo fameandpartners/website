@@ -12,6 +12,7 @@ table.line_items
       th Line ID
       th SKU
       th Style Name
+      th Size
       th Customisations
       th Factory
       th Customer
@@ -32,10 +33,11 @@ table.line_items
             - ship_state = ShippingStatePresenter.new(line_item)
             abbr title=ship_state.delivery_state class="state-#{ship_state.delivery_state}"
               = ship_state.overdue_by
-          td = link_to order.number, edit_admin_order_path(order)
+          td = link_to order.number, admin_order_path(order)
           td = line_item.id
           td = line_item.style_number
           td = line_item.style_name
+          td = line_item.country_size
           td = line_item.customisations.collect(&:first).join(', ')
           td = line_item.factory
           - if position.zero?
