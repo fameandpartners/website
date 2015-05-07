@@ -62,7 +62,7 @@ module Orders
     end
     
     def factory
-      Factory.for_product(variant.product)
+      variant.try(:product).try(:factory) || 'Unknown'
     end
 
     def customisations

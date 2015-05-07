@@ -18,6 +18,9 @@ Spree::Product.class_eval do
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
   has_many :videos, class_name: 'ProductVideo', foreign_key: :spree_product_id
 
+  belongs_to :factory
+  attr_accessible :factory_id
+
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
       "spree_option_values.id" => value_ids,

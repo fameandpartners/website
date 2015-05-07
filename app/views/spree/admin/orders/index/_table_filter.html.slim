@@ -44,44 +44,47 @@
     .sixteen.columns
       /! Bash in a spacer row, sigh
 
-    .alpha.three.columns
+    .alpha.four.columns
       .field
         = label_tag nil, t(:order_status)
         = f.select :state_eq, Spree::Order.state_machines[:state].states.collect { |s| [t("order_state.#{s.name}"), s.value] }, {:include_blank => true}, :class => 'select2'
-    .two.columns
+    .four.columns
       .field
         = label_tag nil, t(:payment_status)
         = f.select :payment_state_eq, %w[failed balance_due credit_owed paid], {:include_blank => true}, :class => 'select2'
-    .three.columns
+
+    .four.columns
       .field
-        = label_tag nil, 'Make State'
-        = f.select :line_items_fabrication_state_eq, Fabrication::STATES_OPTIONS, {:include_blank => true}, :class => 'select2'
-    .three.columns
-      .field
-        = label_tag nil, 'Ship State'
+        = label_tag nil, 'Include Ship State'
         = f.select :shipment_state_eq, options_for_select(order_shipment_states, params[:q][:shipment_state_eq] ), {:include_blank => false} , :class => 'select2'
-    .three.columns
+    .omega.four.columns
       .field
-        = label_tag nil, 'EXCLUDE Ship State'
+        = label_tag nil, 'Exclude Ship State'
         = f.select :shipment_state_not_eq, options_for_select(order_shipment_states, params[:q][:shipment_state_not_eq] ), {:include_blank => false} , :class => 'select2'
-    .omega.two.columns
+
+    .four.columns.alpha
+      .field
+        label = t(:line_item_factory)
+        = f.select :line_items_variant_product_factory_id_eq, options_from_collection_for_select(Factory.all, :id, :name, params[:q][:line_items_variant_product_factory_id_eq]), {:include_blank => true}, :class => 'select2'
+    .four.columns
+      .field
+        = label_tag nil, t(:line_item_make_state)
+        = f.select :line_items_fabrication_state_eq, Fabrication::STATES_OPTIONS, {:include_blank => true}, :class => 'select2'
+    .four.columns
       .field
         = label_tag nil, t(:orders_per_page)
         = select_tag :per_page, options_for_select(%w(15 50 100 300 500), per_page), :class => 'select2'
-
-    .alpha.four.columns
+    .omega.four.columns
       .checkbox
         label
           = f.check_box :inventory_units_shipment_id_null, {}, '1', '0'
           '
           = t(:show_only_unfulfilled_orders)
-    .four.columns
       .checkbox
         label
           = f.check_box :completed_at_not_null, {:checked => @show_only_completed}, '1', ''
           '
           = t(:show_only_complete_orders)
-    .omega.four.columns
       .checkbox
         label
           = f.check_box :hide_line_items, {:checked => hide_line_items }, 'true', ''

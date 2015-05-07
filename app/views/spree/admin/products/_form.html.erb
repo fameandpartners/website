@@ -123,6 +123,12 @@
       </ul>
     <% end %>
 
+    <%= f.field_container :factory do %>
+      <%= f.label :factory_id, t(:factory) %>
+      <%= f.collection_select :factory_id, Factory.all, :id, :name, { :include_blank => 'None' }, { :class => 'select2' } %>
+      <%= f.error_message_on :factory %>
+    <% end %>
+
     <%= f.field_container :shipping_categories do %>
       <%= f.label :shipping_category_id, t(:shipping_categories) %>
       <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, { :include_blank => 'None' }, { :class => 'select2' }) %>
