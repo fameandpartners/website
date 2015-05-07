@@ -6,17 +6,15 @@
 require 'geoip'
 
 class Marketing::Subscriber
-  attr_reader :site_version, :user, :token, :email, :promocode, :campaign
+  attr_reader :user, :token, :email, :promocode, :campaign
 
   def initialize(options = {})
     @user       = options[:user]
     @token      = options[:token]
-    @promocode  = options[:promocode]
-    @ip_address = options[:ip_address]
     @email      = options[:email] || @user.try(:email) || @user.try(:email_was)
-    @site_version = options[:site_version]
-    @campaign  = options[:campaign]
-    @sign_up_reason = options[:sign_up_reason]
+    @promocode  = options[:promocode]
+    @campaign   = options[:campaign]
+    @ipaddress  = options[:ipaddress]
   end
 
   def create
@@ -58,12 +56,9 @@ class Marketing::Subscriber
     def custom_fields
       {
         campaign: campaign || marketing_user_visit.utm_campaign,
-        referrer: marketing_user_visit.referrer,
+        source: marketing_user_visit.referrer,
         promocode: promocode,
-        Signupdate: user.try(:created_at),
-        Signupreason: sign_up_reason,
-        site_version: preferred_site_version,
-        ip_address: ip_address,
+        ipaddress: ipaddress,
         country: country_name
       }
     end
@@ -80,40 +75,17 @@ class Marketing::Subscriber
       end
     end
 
-    def ip_address
-      @ip_address ||= user.present? ? user.last_sign_in_ip : nil
+    def ipaddress
+      @ipaddress ||= user.present? ? user.last_sign_in_ip : nil
     end
 
     def country_name
-      self.class.get_country(ip_address).try(:country_name)
-    end
-
-    def sign_up_reason
-      @sign_up_reason ||= begin
-        code = user.try(:sign_up_reason)
-        self.class.sign_up_reasons[code.to_s] || code
-      end
-    end
-
-    def preferred_site_version
-      return site_version.code if site_version.present?
-      user.present? ? user.recent_site_version.try(:name) : nil
+      self.class.get_country(ipaddress).try(:country_name)
     end
 
   public
 
   class << self
-    def sign_up_reasons
-      { 
-        'custom_dress' => 'Custom dress',
-        'style_quiz' => 'Style quiz',
-        'workshop' => 'Workshop',
-        'competition' => 'Competition',
-        'campaign_style_call' => 'Campaign Style Call',
-        'customise_dress' => 'Customise dress'
-      }
-    end
-
     def geoip
       @geoip ||= GeoIP.new(File.join(Rails.root, 'db', 'GeoIP.dat'))
     end

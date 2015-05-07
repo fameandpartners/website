@@ -1,10 +1,6 @@
 CreateSend.api_key configatron.campaign_monitor.api_key
 
 class CampaignMonitor
-  def self.current_version
-    '24.04.2015'
-  end
-
   # correctly, we should check sidekiq workers availability too
   def self.execute_immediately?
     Rails.env.development? || Rails.env.test?
@@ -29,8 +25,6 @@ class CampaignMonitor
       attributes[:full_name] = ''
     end
 
-    custom_fields[:version] = current_version
-
     formatted_custom_fields = []
 
     custom_fields.each do |key, value|
@@ -52,11 +46,8 @@ class CampaignMonitor
     subscriber = CreateSend::Subscriber.new(list_id, user.email)
 
     formatted_custom_fields = [{
-      'Key'   => 'Purchasedate',
-      'Value' => purchase_date.to_date.to_s
-    }, {
-      'Key'   => 'version',
-      'Value' => current_version.to_s
+      'Key'   => 'note',
+      'Value' => "Purchase_date: #{ purchase_date.to_date.to_s }"
     }]
 
     subscriber.update(user.email, user.full_name, formatted_custom_fields, false)
@@ -65,5 +56,4 @@ class CampaignMonitor
 
     CampaignMonitor.delay.set_purchase_date(user, purchase_date)
   end
-
 end
