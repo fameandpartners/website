@@ -113,7 +113,7 @@ SitemapGenerator::Sitemap.create(options) do
   end
 
   statics_pages = [ 
-    '/about', '/why-us', '/terms', '/privacy', '/legal', '/assets/returnform.pdf',
+    '/about', '/why-us', '/privacy', '/legal', '/assets/returnform.pdf',
     '/style-consultation', '/fame-chain',
     '/fashionitgirl2015',
     '/bridesmaid-dresses', '/sale-dresses',
