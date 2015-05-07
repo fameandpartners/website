@@ -49,6 +49,7 @@ module Orders
     end
   
     def projected_delivery_date
+      return unless order.completed?
       order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date)
     end
 
