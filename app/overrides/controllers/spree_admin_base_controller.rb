@@ -8,4 +8,6 @@ Spree::Admin::BaseController.class_eval do
       end
     end
   end
+
+  skip_before_filter :check_site_version
 end
