@@ -9,11 +9,12 @@ class ProductMakingOption < ActiveRecord::Base
   validates :option_type, inclusion: OPTION_TYPES, presence: true
 
   scope :fast_making, -> { where(option_type: 'fast_making') }
+  scope :active, -> { where(active: true) }
 
-  before_validation do
-    option_type ||= 'fast_making'
-    variant_id  ||= (product.present? ? product.master.id : nil)
-    price       ||= DEFAULT_OPTION_PRICE
-    currency    ||= SiteVersion.default.currency
+  def assign_default_attributes
+    self.variant_id  ||= (product.present? ? product.master.id : nil)
+    self.price       ||= DEFAULT_OPTION_PRICE
+    self.currency    ||= SiteVersion.default.currency
+    self
   end
 end
