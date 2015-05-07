@@ -154,12 +154,19 @@ h3.phone span {
 }
 
 .returns {
+
   .background-grey {
     background-color: #f5f5f5;
   }
 
-  .table > tbody > tr > td {
-    border-top: black solid 1px;
+  @media only screen and (min-width: 801px) {
+    .table > tbody > tr > td {
+      border-top: black solid 1px;
+    }
+
+    .table > tbody + tbody {
+      border-top: none;
+    }
   }
 
   .chosen-container-single.form-control {
@@ -182,11 +189,17 @@ h3.phone span {
       padding: 0;
       img {
         float: left;
+
+        @media only screen and (max-width: 800px) {
+          clear: both
+        }
       }
 
       p {
         padding-left: 15rem;
-        padding-top: 3rem;
+        @media only screen and (min-width: 801px) {
+          padding-top: 3rem;
+        }
       }
     }
   }
@@ -220,6 +233,7 @@ h3.phone span {
   .row.header {
     h2 {
       text-align: center;
+      padding-left: 2rem;
     }
 
     h2.order-number {
@@ -252,5 +266,38 @@ h3.phone span {
   &:hover {
     background-color: #eeddf0;
     color: black !important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+
+  .table > tbody > tr > td {
+    border-top: none;
+    clear: none;
+  }
+
+  .returns .chosen-container-single.form-control {
+    margin-bottom: 2.7rem;
+  }
+}
+
+.order {
+  .page-title--details.order {
+    color: black;
+    h1 {
+      color: black;
+    }
+  }
+}
+
+h1.order {
+  color: black;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .page-content.order {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
