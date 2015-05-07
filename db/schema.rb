@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150507051538) do
+ActiveRecord::Schema.define(:version => 20150507113549) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -464,6 +464,19 @@ ActiveRecord::Schema.define(:version => 20150507051538) do
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
 
+  create_table "line_item_making_options", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "variant_id"
+    t.integer  "line_item_id"
+    t.integer  "making_option_id"
+    t.decimal  "price",                          :precision => 10, :scale => 2
+    t.string   "currency",         :limit => 10
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
+  end
+
+  add_index "line_item_making_options", ["line_item_id"], :name => "index_line_item_making_options_on_line_item"
+
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
     t.integer  "product_id"
@@ -560,6 +573,17 @@ ActiveRecord::Schema.define(:version => 20150507051538) do
   end
 
   add_index "product_color_values", ["product_id"], :name => "index_product_color_values_on_product_id"
+
+  create_table "product_making_options", :force => true do |t|
+    t.integer "product_id"
+    t.integer "variant_id"
+    t.boolean "active",                                                   :default => false
+    t.string  "option_type"
+    t.decimal "price",                     :precision => 10, :scale => 2
+    t.string  "currency",    :limit => 10
+  end
+
+  add_index "product_making_options", ["product_id", "active", "option_type"], :name => "index_product_making_options_on_product_id"
 
   create_table "product_personalizations", :force => true do |t|
     t.integer  "variant_id"

@@ -4,6 +4,8 @@ Spree::LineItem.class_eval do
 
   has_one :fabrication
 
+  has_many :making_options, foreign_key: :product_id, class_name: 'LineMakingOption'
+
   after_save do
     order.clean_cache!
   end

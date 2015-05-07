@@ -18,6 +18,8 @@ Spree::Product.class_eval do
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
   has_many :videos, class_name: 'ProductVideo', foreign_key: :spree_product_id
 
+  has_many :making_options, foreign_key: :product_id, class_name: 'ProductMakingOption'
+
   belongs_to :factory
   attr_accessible :factory_id
 
