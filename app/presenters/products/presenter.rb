@@ -120,6 +120,10 @@ module Products
       @customizations ||= available_options.customizations
     end
 
+    def making_options
+       available_options.making_options
+    end
+
     def default_color
       if color = available_options.colors.default.first
         color.name

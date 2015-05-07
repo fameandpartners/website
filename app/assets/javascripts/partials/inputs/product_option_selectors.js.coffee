@@ -159,3 +159,42 @@ window.inputs.ProductCustomizationIdsSelector = class ProductCustomizationIdsSel
 
     @trigger('change')
     @close()
+
+window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelector extends BaseProductOptionSelector
+  constructor: (opts = {}) ->
+    super(opts)
+    @$container.find('.making-option').on('click', @selectValueHandler)
+
+  getValue: () ->
+    id = @$container.find('.active').data('id')
+    if id == 'original'
+      null
+    else
+      @prepareValue(id)
+
+  # no value can create dress custom
+  customValue: () ->
+    false
+
+  setValue: (newValue) =>
+    $el = @$container.find(".making-option[data-id=#{ newValue }]")
+    return if !$el
+    @setValueFrom($el)
+
+  selectValueHandler: (e) =>
+    e.preventDefault() if e
+    @setValueFrom($(e.currentTarget))
+
+  setValueFrom: ($el) ->
+    data = $el.data()
+
+    @$container.find('.making-option.active').not($el).removeClass('active')
+    $el.addClass('active')
+
+    if data.id == 'original'
+      @$action.html("Standard Making")
+    else
+      @$action.html("#{data.name} +#{data.price}")
+
+    @trigger('change')
+    @close()

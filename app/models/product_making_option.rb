@@ -17,4 +17,8 @@ class ProductMakingOption < ActiveRecord::Base
     self.currency    ||= SiteVersion.default.currency
     self
   end
+
+  def display_price
+    Spree::Money.new(price, currency: currency)
+  end
 end

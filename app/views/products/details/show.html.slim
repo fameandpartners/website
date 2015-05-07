@@ -33,6 +33,10 @@ ruby:
           customization_input: {
             container:  '#product-customizations-content',
             action:     '#product-customize-action'
+          },
+          making_options_input: {
+            container:  '#product-making-options-content',
+            action:     '#product-making-options-action'
           }
         },
         moodboard_links: {
@@ -99,6 +103,11 @@ ruby:
       .row
         a#product-customize-action.btn-customize
           | Customize
+
+    - if @product.making_options.present?
+      .row
+        a#product-making-options-action.btn-customize
+          | Standard Making
 
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
@@ -242,7 +251,7 @@ hr
     .col-md-10.col-md-offset-1
       button.btn-fit-guide.btn.btn-block.btn-secondary Fit Guide
 
-
+// product colors panel
 #product-color-content.product-side-panel
   button.close-btn
     = image_tag "cross.png", alt: 'close button'
@@ -269,6 +278,7 @@ hr
                   span.option-box.color-box class="color-#{color.name}"
                   span.option-name= color.presentation
 
+// product customizations panel
 - if @product.customizable?
   #product-customizations-content.product-side-panel
     button.close-btn
@@ -291,3 +301,21 @@ hr
         .col-md-10.col-md-offset-1
           button.btn-clear-customizations.btn.btn-block.btn-black.customization-option data-id="original" data-name="original" data-price=""
             | Clear Selection
+
+// product making options panel
+- if @product.making_options.present?
+  #product-making-options-content.product-side-panel
+    button.close-btn
+      = image_tag "cross.png", alt: 'close button'
+    .col-md-12
+      - @product.making_options.each do |option|
+        .col-md-10.col-md-offset-1.white-background
+          .row
+            p.option-name= option.name
+            a.making-option.list-group-item href="#" data-id=option.id data-name=option.name data-price=option.display_price
+              span.option-price= "+#{option.display_price}"
+
+      .row
+        .col-md-10.col-md-offset-1
+          button.btn-clear-making-options.btn.btn-block.btn-black.making-option data-id="original" data-name="original" data-price=""
+            | Standard Making

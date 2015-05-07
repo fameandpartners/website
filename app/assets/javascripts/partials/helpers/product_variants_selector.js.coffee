@@ -24,10 +24,12 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @sizeInput = new window.inputs.ProductSizeIdSelector(options.size_input)
     @colorInput = new window.inputs.ProductColorIdSelector(options.color_input)
     @customizationsInput = new window.inputs.ProductCustomizationIdsSelector(options.customization_input)
+    @makingOptionsInput = new window.inputs.ProductMakingOptionIdSelector(options.making_options_input)
 
     @colorInput.on('change', @onChangeHandler)
     @sizeInput.on('change', @onChangeHandler)
     @customizationsInput.on('change', @onChangeHandler)
+    @makingOptionsInput.on('change', @onChangeHandler)
     @
 
   onChangeHandler: (e) =>
@@ -44,6 +46,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       size_id: @sizeInput.val(),
       color_id: @colorInput.val(),
       customizations_ids: @customizationsInput.val(),
+      making_options_ids: @makingOptionsInput.val(),
       product_id: @product_id
     }
 

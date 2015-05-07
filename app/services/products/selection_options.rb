@@ -37,7 +37,9 @@ class Products::SelectionOptions
         all: available_product_customisations,
         incompatibilities: customisations_incompatibility_map,
         is_free: Spree::Config[:free_customisations]
-      })
+      }),
+
+      making_options: product_making_options
     })
   end
 
@@ -123,5 +125,18 @@ class Products::SelectionOptions
         result[value.id] = value.incompatibilities.map(&:incompatible_id)
       end
       result
+    end
+
+    # making options
+    def product_making_options
+      option = product.making_options.fast_making.first
+      return [] if option.blank?
+      [
+        OpenStruct.new(
+          id: option.id,
+          name: 'Express Making',
+          display_price: option.display_price
+        )
+      ]
     end
 end
