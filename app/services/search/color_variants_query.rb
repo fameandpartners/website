@@ -26,6 +26,7 @@ module Search
       discount            = options[:discount]
       query_string        = options[:query_string]
       order               = options[:order]
+      fast_making         = options[:fast_making]
       limit               = options[:limit].present? ? options[:limit].to_i : 1000
       offset              = options[:offset].present? ? options[:offset].to_i : 0
 
@@ -42,6 +43,11 @@ module Search
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
+
+        # not defined /  only false / only true
+        unless fast_making.nil?
+          filter :bool, :must => { :term => { 'product.fast_making' => fast_making } }
+        end
 
         if taxons.present?
           taxons.each do |ids|

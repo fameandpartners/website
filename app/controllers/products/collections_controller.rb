@@ -65,6 +65,7 @@ class Products::CollectionsController < Products::BaseController
         color:          params[:colour] || params[:color],
         bodyshape:      params[:bodyshape],
         discount:       params[:sale] || params[:discount],
+        fast_making:    params[:fast_making],
         order:          params[:order],
         limit:          params[:limit] || 20, # page size
         offset:         params[:offset] || 0
