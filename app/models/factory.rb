@@ -11,6 +11,5 @@ class Factory < ActiveRecord::Base
 
   def self.for_product(product)
     product.factory || new(name: 'Unknown')
-    # new(name: product.property(:factory_name).presence || 'Unknown')
   end
 end
