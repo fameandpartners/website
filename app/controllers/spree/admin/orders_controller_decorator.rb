@@ -36,7 +36,12 @@ module Spree
         end
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
-        @orders = @search.result(distinct: true).includes([:user, :shipments, :payments]).
+        @orders = @search.result(distinct: true).includes(
+          :user => [],
+          :shipments => [:inventory_units],
+          :payments => [],
+          :line_items => {:variant => :product}
+        ).
             page(page).
             per(per_page)
 
