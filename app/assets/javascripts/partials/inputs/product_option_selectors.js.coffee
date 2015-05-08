@@ -192,7 +192,7 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
     $el.addClass('active')
 
     if data.id == 'original'
-      @$action.html("Standard Making")
+      @$action.html("Production Time")
     else
       @$action.html("#{data.name} +#{data.price}")
 
