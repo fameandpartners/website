@@ -68,7 +68,7 @@ after it, remove valuable data & update settings
 * create user, and assign him admin rights `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
 * update payment method settings with test env
 * update facebook provider settings
-* To view S3 images, set config.use_s3 = true` in the `development.rb` file, without changing the `0_config.rb` file. Image uploads wont work, but for just viewing prod images, it’s perfect.
+* To view S3 images, set `config.use_s3 = true` in the `development.rb` file, without changing the `0_config.rb` file. Image uploads wont work, but for just viewing prod images, it’s perfect.
 * refresh all local elastic search indexes
 
 #### Sanitised Database
@@ -119,6 +119,16 @@ After which you can restore it using;
 pg_restore -d fame_website_development --clean --if-exists --verbose --jobs 8 --no-acl -U postgres ~/tmp/fame_website_development_clean.pgdump`
 ```
 
+
+### Elasticsearch
+
+#### Debugging requests
+
+Set the `DEBUG_TIRE_REQUESTS` environment variable to enable verbose logging in development mode.
+
+ ```shell
+ $ export DEBUG_TIRE_REQUESTS=true
+ ```
 
 #### Update indexes
 
