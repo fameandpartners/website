@@ -55,6 +55,8 @@ class  UserCart::Populator
       end
 
       if spree_populator.populate(variants: { product_variant.id => product_quantity })
+        add_making_options
+
         fire_event('spree.cart.add')
         fire_event('spree.order.contents_changed')
         true
@@ -79,6 +81,14 @@ class  UserCart::Populator
       end
 
       true
+    end
+
+    def add_making_options
+      return if line_item.blank? || product_making_options.blank?
+      line_item.making_options = product_making_options.collect do |making_option|
+        LineItemMakeOption.build_option(making_option)
+      end
+      line_item
     end
 
     def build_personalization
@@ -156,6 +166,14 @@ class  UserCart::Populator
         end
 
         customizations
+      end
+    end
+
+    def product_making_options
+      @product_making_options ||= begin
+        Array.wrap(product_attributes[:making_options_ids]).compact.each do |id|
+          product_options.making_options.detect{|item| item.id == id.to_i }
+        end.compact
       end
     end
 
