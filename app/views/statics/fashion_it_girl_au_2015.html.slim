@@ -65,3 +65,16 @@
   .container-fluid.no-padding.application
     .col-md-12
       h3 let us remind you when applications open:
+      form#fashion-it-girl-reminder action="/campaigns/email_capture"
+        input type="hidden" name="content" value="content"
+        input type="hidden" name="promocode" value="promocode"
+        .row.no-padding
+          .col-md-8.col-md-offset-2.text-center
+            input.form-control.standard-form type="email" name="email" placeholder='email address'
+        .row.no-padding
+          .col-md-12.text-center
+            button.btn.submit type="submit" value="submit"
+              | Submit
+
+= content_for :inline_javascript do
+  | new window.page.FashionITGirlReminder({form: "#fashion-it-girl-reminder"});
