@@ -34,7 +34,7 @@ module Orders
             begin
               csv << line_item.as_report.values
             rescue NoMethodError => e
-              binding.pry if Rails.env.development?
+              csv << [e.message]
               next
             end
           end

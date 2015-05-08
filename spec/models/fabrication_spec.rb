@@ -15,7 +15,5 @@ RSpec.describe Fabrication, :type => :model do
       })
   end
 
-  it do
-    expect(described_class.new).to validate_presence_of :line_item_id
-  end
+  it { is_expected.to validate_presence_of :line_item_id }
 end
