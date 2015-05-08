@@ -5,9 +5,7 @@ RSpec.describe FabricationEvent, :type => :model do
   describe 'creation' do
     subject(:event) { FabricationEvent.creation.new }
 
-    it do
-      expect(event).to validate_presence_of :line_item_id
-    end
+    it { is_expected.to validate_presence_of :line_item_id }
   end
 
   describe 'state_change' do
@@ -24,11 +22,9 @@ RSpec.describe FabricationEvent, :type => :model do
         customer_feedback_required
       ) }
 
-    it do
-      expect(event).to validate_presence_of :user_id
-      expect(event).to validate_presence_of :user_name
-      expect(event).to validate_presence_of :state
-      expect(event).to validate_inclusion_of(:state).in_array(known_states)
-    end
+    it { is_expected.to validate_presence_of :user_id   }
+    it { is_expected.to validate_presence_of :user_name }
+    it { is_expected.to validate_presence_of :state     }
+    it { is_expected.to validate_inclusion_of(:state).in_array(known_states) }
   end
 end

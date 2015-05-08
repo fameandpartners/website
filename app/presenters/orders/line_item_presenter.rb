@@ -61,10 +61,6 @@ module Orders
       Spree::Price.new(amount: price).display_price.to_s
     end
     
-    def factory
-      Factory.for_product(variant.product)
-    end
-
     def customisations
       if personalizations?
         customs = Array.wrap(

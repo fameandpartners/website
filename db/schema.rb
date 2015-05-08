@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150427031122) do
+ActiveRecord::Schema.define(:version => 20150507051538) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -449,6 +449,12 @@ ActiveRecord::Schema.define(:version => 20150427031122) do
   end
 
   add_index "facebook_data", ["spree_user_id"], :name => "index_facebook_data_on_spree_user_id"
+
+  create_table "factories", :force => true do |t|
+    t.text     "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "incompatibilities", :force => true do |t|
     t.integer "original_id"
@@ -1064,6 +1070,7 @@ ActiveRecord::Schema.define(:version => 20150427031122) do
     t.integer  "position",             :default => 0
     t.boolean  "hidden",               :default => false
     t.boolean  "is_service",           :default => false
+    t.integer  "factory_id"
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"

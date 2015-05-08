@@ -5,6 +5,6 @@ namespace :import do
 
     file_path = ENV['FILE_PATH']
 
-    Products::FactoryImporter.new(file_path).import
+    Importers::FactoryImporter.new(file_path).import
   end
 end
