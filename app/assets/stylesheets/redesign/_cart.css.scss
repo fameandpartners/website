@@ -5,3 +5,19 @@
     font-family: $font-family-secondary;
   }
 }
+
+.price-express-making {
+  font-size: 0.9em;
+  text-transform: none;
+  .price-express-making-remove {
+    text-transform: none;
+    cursor: pointer;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: dotted 1px currentColor;
+    &:hover {
+      border-bottom-style: solid;
+    }
+  }
+}

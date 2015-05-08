@@ -23,7 +23,10 @@
       <span class="qty"><%= product.quantity %>x</span>
       <a href="<%= product.path %>"><%= product.name %></a>
       <div class="price">
-        <%= product.price.display_price %>
+        <span class="price-regular"><%= product.price.display_price %></span>
+        <span class="price-express-making">
+          + $29 Express making (<a href="#" class="price-express-making-remove">remove</a>)
+        </span>
       </div>
     </li>
   <% end %>
