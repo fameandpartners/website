@@ -1,10 +1,9 @@
 # encoding: utf-8
 
+require 'forwardable'
+
 module Orders
-  class LineItemPresenter < DelegateClass(Spree::LineItem)
-
-    delegate :id, :to => :__getobj__
-
+  class LineItemPresenter
     extend Forwardable
 
     def_delegators :@shipment, :shipped?, :shipped_at
@@ -16,14 +15,27 @@ module Orders
                    :shipping_address,
                    :promo_codes
 
+    def_delegators :@item,
+                   :id,
+                   :variant,
+                   :personalization,
+                   :factory,
+                   :fabrication
+
+
+
+
+
     attr_reader :shipment, :wrapped_order
     
     def initialize(item, wrapped_order)
       @wrapped_order = wrapped_order
       @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(item) }
 
-      super(item)
+      @item = item
     end
+
+    alias_method :order, :wrapped_order
 
     def style_number
       variant.try(:product).try(:sku) || 'Missing Product'
@@ -95,6 +107,7 @@ module Orders
       {
         :order_state             => order.state,
         :order_number            => number,
+        :line_item               => id,
         :total_items             => total_items,
         :completed_at            => order.completed_at.to_date,
         :projected_delivery_date => projected_delivery_date,
@@ -170,7 +183,7 @@ module Orders
     def standard_variant_for_custom_color
       return unless personalizations?
 
-      @standard_variant_for_custom_color ||= variant.product.variants.detect { |v|
+      @standard_variant_for_custom_color ||= variant.product.variants.includes(:option_values).detect { |v|
         v.option_values.include?(personalization.color)
       }
     end
