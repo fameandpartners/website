@@ -348,3 +348,171 @@ h2 span {
     height: 173px;
   }
 }
+
+////////////////////
+
+.competition {
+  background-color: #013648;
+  color: white !important;
+  text-align: center;
+  padding-top:8rem;
+  padding-bottom: 3rem;
+
+  h3 {
+    font-size: 3.6rem;
+    color: white !important;
+    margin-top: 0;
+  }
+
+  h4 {
+    color: white !important;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  h3.aus {
+    font-family: forum;
+    color: white !important;
+    text-transform: uppercase;
+  }
+}
+
+.prizes {
+  background-color: #eeddf0;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+  .popsugar {
+    width: 200px;
+  }
+
+  .fame-logo {
+    width: 300px;
+  }
+
+  p {
+    font-size: 4rem;
+  }
+
+  .runner-up {
+    text-transform: uppercase;
+  }
+}
+
+.quote {
+  background-color: #f6e0d3;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  text-trasform: uppercase;
+  font-size: 3rem;
+  text-align: center;
+  clear: both;
+
+  cite {
+    display: block;
+    text-align: right;
+    text-transform: uppercase;
+    padding-top: 1.5rem;
+  }
+}
+
+.squares {
+  height: 16px;
+  background-image: url('fashion-it-girl/square.png');
+  background-repeat: repeat-x;
+  margin-bottom: 3rem;
+}
+
+.fashion-it-girl-au {
+
+  .application-dates {
+    text-align: center;
+
+    h5 {
+      text-transform: uppercase;
+      font-size: 2.6rem;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 2.8rem;
+      font-weight: 300;
+    }
+  }
+
+  q:before,q:after{content:''}
+
+  .application {
+    background-color: #013648;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    h3 {
+      color: white;
+      text-align: center;
+      font-size: 3rem;
+    }
+  }
+
+  .open-quote {
+    background-image: url('fashion-it-girl/open-quote.png');
+    height: 108px;
+    width: 150px;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .close-quote {
+    background-image: url('fashion-it-girl/close-quote.png');
+    height: 63px;
+    width: 80px;
+    background-repeat: no-repeat;
+    float: right;
+  }
+
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .banner {
+    background-image: url('fashion-it-girl/fashion-it-girl-winner-us2015.jpg');
+    height: 540px;
+  }
+
+  .ribbon {
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    height: 460px;
+
+    .popsugar {
+      width: 250px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .fame-logo {
+      width: 300px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 4rem;
+    }
+
+    h1 {
+      padding-left: 4rem;
+    }
+
+    h2 {
+      padding-left: 4rem;
+    }
+  }
+}
