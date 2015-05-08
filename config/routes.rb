@@ -75,6 +75,8 @@ FameAndPartners::Application.routes.draw do
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
+    get '/getitfirst' => 'products/collections#show', defaults: { fast_making: true }, as: 'fast_making_dresses'
+
     post '/shared/facebook' => 'competition/events#share'
 
     scope '/user_cart', module: 'user_cart' do
