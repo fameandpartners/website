@@ -22,19 +22,36 @@ ruby:
   ul.cart-items
     - (cart.products || []).each do |product|
       li
-        .media
-          .media-left.media-middle
-            = link_to collection_product_path(product) do
-              = image_tag product.image.large, class: 'cart-item-image'
-          .media-body.media-middle
-            span.qty =' "#{ product.quantity}x"
-            = link_to product.name, collection_product_path(product)
-            .checkout-price = product.price.display_price
-            .price-express-making
-              | $29 Express making (
-              = link_to 'remove', '#', class: 'price-express-making-remove'
-              | )
-          a.remove-product.delete-item href="#0" data-id=(product.line_item_id)
+        .clearfix
+          = link_to product.name, collection_product_path(product), class: 'cart-item-title'
+          a.remove-product.fa.fa-close.pull-right.link-grey href="#0" data-id=(product.line_item_id)
+        .cart-item-image-holder.pull-left
+          = link_to collection_product_path(product) do
+            = image_tag product.image.large, class: 'cart-item-image'
+        .cart-item-info
+          .heading
+            span.qty 
+              ' Qty:
+              =' "#{product.quantity}"
+            span 
+              ' /
+            span 
+              ' Size: 12
+            span 
+              ' /
+            span 
+              ' Color:
+              span.color style="background-color: pink"
+          .cart-prices
+            div = product.price.display_price
+            .small 
+              ' + $29 Express making
+              = link_to '', '#', class: 'fa fa-close price-remove'
+            .small 
+              ' + $9.99 Make Inside Dress a Mini
+              = link_to '', '#', class: 'fa fa-close price-remove'
+            .total 
+              ' = $999.99
 
   /! cd-cart-items
   form.promo-code action="#"

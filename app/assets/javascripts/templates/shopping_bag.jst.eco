@@ -16,17 +16,29 @@
 <ul class="cart-items">
   <% for product in @cart.products: %>
     <li>
-      <a href="<%= product.path %>">
-        <img class="img-responsive pull-left cart-item-image" src="<%= product.image.large %>" />
-      </a>
-      <a class="fa fa-close pull-right link-grey remove-product" data-id="<%= product.line_item_id %>" href="#0"></a>
-      <span class="qty"><%= product.quantity %>x</span>
-      <a href="<%= product.path %>"><%= product.name %></a>
-      <div class="price">
-        <span class="price-regular"><%= product.price.display_price %></span>
-        <span class="price-express-making">
-          + $29 Express making (<a href="#" class="price-express-making-remove">remove</a>)
-        </span>
+      <div class="clearfix">
+        <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
+        <a class="fa fa-close pull-right link-grey remove-product" data-id="<%= product.line_item_id %>" href="#0"></a>
+      </div>
+      <div class="cart-item-image-holder pull-left">
+        <a href="<%= product.path %>">
+          <img class="img-responsive pull-left cart-item-image" src="<%= product.image.large %>" />
+        </a>
+      </div>
+      <div class="cart-item-info">
+        <div class="heading">
+          <span class="qty">Qty: <%= product.quantity %></span>
+          <span>/</span>
+          <span>Size: 12</span>
+          <span>/</span>
+          <span>Color: <span class="color" style="background-color: pink"></span></span>
+        </div>
+        <div class="cart-prices">
+          <div><%= product.price.display_price %></div>
+          <div class="small">+ $29.00 Express making <a href="#" class="fa fa-close price-remove"></a></div>
+          <div class="small">+ $9.99 Make Inside Dress a Mini <a href="#" class="fa fa-close price-remove"></a></div>
+          <div class="total">= $999.99</div>
+        </div>
       </div>
     </li>
   <% end %>
