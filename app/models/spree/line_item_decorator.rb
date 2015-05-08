@@ -4,7 +4,7 @@ Spree::LineItem.class_eval do
 
   has_one :fabrication
 
-  has_many :making_options, foreign_key: :product_id, class_name: 'LineMakingOption'
+  has_many :making_options, foreign_key: :product_id, class_name: '::LineItemMakingOption', dependent: :destroy
 
   after_save do
     order.clean_cache!

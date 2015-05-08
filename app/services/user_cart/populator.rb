@@ -10,6 +10,7 @@
 #        size_id: params[:size_id],
 #        color_id: params[:color_id],
 #        customizations_ids: params[:customizations_ids],
+#        making_options_ids: params[:making_options_ids],
 #        quantity: 1
 #      }
 #    )
@@ -86,7 +87,7 @@ class  UserCart::Populator
     def add_making_options
       return if line_item.blank? || product_making_options.blank?
       line_item.making_options = product_making_options.collect do |making_option|
-        LineItemMakeOption.build_option(making_option)
+        LineItemMakingOption.build_option(making_option)
       end
       line_item
     end
@@ -171,7 +172,7 @@ class  UserCart::Populator
 
     def product_making_options
       @product_making_options ||= begin
-        Array.wrap(product_attributes[:making_options_ids]).compact.each do |id|
+        Array.wrap(product_attributes[:making_options_ids]).compact.collect do |id|
           product_options.making_options.detect{|item| item.id == id.to_i }
         end.compact
       end
