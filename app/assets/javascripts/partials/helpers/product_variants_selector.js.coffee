@@ -25,7 +25,6 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @colorInput = new window.inputs.ProductColorIdSelector(options.color_input)
     @customizationsInput = new window.inputs.ProductCustomizationIdsSelector(options.customization_input)
     @makingOptionsInput = new window.inputs.ProductMakingOptionIdSelector(options.making_options_input)
-    @productionTimeInput = new window.inputs.ProductProductionTimeIdSelector(options.production_time_input)
 
     @colorInput.on('change', @onChangeHandler)
     @sizeInput.on('change', @onChangeHandler)

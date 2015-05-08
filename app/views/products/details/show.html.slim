@@ -34,10 +34,6 @@ ruby:
             container:  '#product-customizations-content',
             action:     '#product-customize-action'
           },
-          production_time_input: {
-            container:  '#product-production-time-content',
-            action:     '#product-production-time-action'
-          },
           making_options_input: {
             container:  '#product-making-options-content',
             action:     '#product-making-options-action'
@@ -108,14 +104,10 @@ ruby:
         a#product-customize-action.btn-customize
           | Customize
 
-    .row
-      a#product-production-time-action.btn-customize
-        | Production time
-
     - if @product.making_options.present?
       .row
         a#product-making-options-action.btn-customize
-          | Standard Making
+          | Production time
 
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
@@ -331,15 +323,18 @@ hr
   #product-making-options-content.product-side-panel
     button.close-btn
       = image_tag "cross.png", alt: 'close button'
+
     .col-md-12
       - @product.making_options.each do |option|
-        .col-md-10.col-md-offset-1.white-background
-          .row
-            p.option-name= option.name
-            a.making-option.list-group-item href="#" data-id=option.id data-name=option.name data-price=option.display_price
-              span.option-price= "+#{option.display_price}"
-
+        h2 = option.name
+        .row
+          .col-md-6.col-md-offset-3
+            a.btn.btn-block.btn-secondary.making-option href="#" data-id=option.id data-name=option.name data-price=option.display_price
+              = "+#{ option.display_price }"
+        br
+      br
+      h2 Standard making
       .row
-        .col-md-10.col-md-offset-1
-          button.btn-clear-making-options.btn.btn-block.btn-black.making-option data-id="original" data-name="original" data-price=""
-            | Production Time
+        .col-md-6.col-md-offset-3
+          a.btn.btn-block.btn-secondary.making-option data-id="original" data-name="original" data-price=""
+            | +$0

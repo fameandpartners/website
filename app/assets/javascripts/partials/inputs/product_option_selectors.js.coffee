@@ -198,6 +198,3 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
 
     @trigger('change')
     @close()
-
-
-window.inputs.ProductProductionTimeIdSelector = class ProductProductionTimeIdSelector extends BaseProductOptionSelector
