@@ -30,6 +30,10 @@ ruby:
             span.qty =' "#{ product.quantity}x"
             = link_to product.name, collection_product_path(product)
             .checkout-price = product.price.display_price
+            .price-express-making
+              | $29 Express making (
+              = link_to 'remove', '#', class: 'price-express-making-remove'
+              | )
           a.remove-product.delete-item href="#0" data-id=(product.line_item_id)
 
   /! cd-cart-items
@@ -47,6 +51,9 @@ ruby:
   p
     | Shipping
     span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
+  p
+    | Total Express Making
+    span.pull-right $+58.00
   p
     | Promotion
     span.pull-right = cart.display_promotion_total.to_s

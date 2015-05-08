@@ -34,6 +34,10 @@ ruby:
             container:  '#product-customizations-content',
             action:     '#product-customize-action'
           },
+          production_time_input: {
+            container:  '#product-production-time-content',
+            action:     '#product-production-time-action'
+          },
           making_options_input: {
             container:  '#product-making-options-content',
             action:     '#product-making-options-action'
@@ -103,6 +107,10 @@ ruby:
       .row
         a#product-customize-action.btn-customize
           | Customize
+
+    .row
+      a#product-production-time-action.btn-customize
+        | Production time
 
     - if @product.making_options.present?
       .row
@@ -301,6 +309,22 @@ hr
         .col-md-10.col-md-offset-1
           button.btn-clear-customizations.btn.btn-block.btn-black.customization-option data-id="original" data-name="original" data-price=""
             | Clear Selection
+
+// product production time options panel
+#product-production-time-content.product-side-panel
+  button.close-btn
+    = image_tag "cross.png", alt: 'close button'
+  .col-md-12
+    h2 Express making
+    .row
+      .col-md-6.col-md-offset-3
+        button.btn.btn-block.btn-secondary +$29
+    br
+    br
+    h2 Standard making
+    .row
+      .col-md-6.col-md-offset-3
+        button.btn.btn-block.btn-secondary +$0
 
 // product making options panel
 - if @product.making_options.present?
