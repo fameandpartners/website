@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150427031122) do
+ActiveRecord::Schema.define(:version => 20150508044557) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -449,6 +449,12 @@ ActiveRecord::Schema.define(:version => 20150427031122) do
   end
 
   add_index "facebook_data", ["spree_user_id"], :name => "index_facebook_data_on_spree_user_id"
+
+  create_table "factories", :force => true do |t|
+    t.text     "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "incompatibilities", :force => true do |t|
     t.integer "original_id"
@@ -951,9 +957,11 @@ ActiveRecord::Schema.define(:version => 20150427031122) do
     t.text     "site_version"
   end
 
+  add_index "spree_orders", ["completed_at"], :name => "index_spree_orders_on_completed_at"
   add_index "spree_orders", ["created_at"], :name => "index_spree_orders_on_created_at"
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
   add_index "spree_orders", ["shipment_state"], :name => "index_spree_orders_on_shipment_state"
+  add_index "spree_orders", ["state"], :name => "index_spree_orders_on_state"
   add_index "spree_orders", ["user_id"], :name => "index_spree_orders_on_user_id"
 
   create_table "spree_payment_methods", :force => true do |t|
@@ -1064,6 +1072,7 @@ ActiveRecord::Schema.define(:version => 20150427031122) do
     t.integer  "position",             :default => 0
     t.boolean  "hidden",               :default => false
     t.boolean  "is_service",           :default => false
+    t.integer  "factory_id"
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"

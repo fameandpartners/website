@@ -16,4 +16,16 @@ class SiteVersionsController < ApplicationController
 
     redirect_to previous_location_or_default(root_url(site_version: site_version.permalink), params[:backlink])
   end
+
+  private
+
+  def previous_location_or_default(default_url, previous_location = nil)
+    if previous_location
+      previous_location
+    elsif session[:previous_location].present?
+      session[:previous_location]
+    else
+      default_url
+    end
+  end
 end

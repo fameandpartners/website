@@ -100,13 +100,14 @@ FameAndPartners::Application.routes.draw do
 
       #roots categories
       get '/style',  to: redirect('/dresses')
+      get '/style/:taxon', to: redirect('/dresses/%{taxon}')
       get '/event',  to: redirect('/dresses')
+      get '/event/:taxon', to: redirect('/dresses/%{taxon}')
       get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
       get '/colour',  to: redirect('/dresses')
       get '/color',  to: redirect('/dresses')
       get '/colour/:colour_name', to: redirect( path: '/dresses?colour=%{colour_name}')
       get '/color/:colour_name',  to: redirect( path: '/dresses?color=%{colour_name}')
-
       get '/:event/:style' => 'spree/products#index'
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
       get '/*permalink' => 'products/collections#show', as: 'taxon'

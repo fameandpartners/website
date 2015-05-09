@@ -45,6 +45,30 @@ SitemapGenerator::Interpreter.class_eval do
       }
     end
   end
+
+  def map_taxon_products_images(taxon_id)
+    taxon_products = Spree::Taxon.find(taxon_id).products.active
+    cropped_products_images_for_sitemap(taxon_products)
+  end
+
+  # A color group is a Spree::OptionValue
+  def map_color_group_products_images(color_id)
+    products_with_color = Spree::Product.active.includes(option_types: :option_values).where('spree_option_values.id' => color_id)
+    cropped_products_images_for_sitemap(products_with_color)
+  end
+
+  private
+
+  def cropped_products_images_for_sitemap(product_array)
+    images = []
+
+    product_array.each do |product|
+      image = Repositories::ProductImages.new(product: product).read(cropped: true)
+      images.push({ loc: image.large, title: product.name }) if image
+    end
+
+    images
+  end
 end
 
 # we create sitemap in xml, /public/sitemap.xml should be only symlink
@@ -86,6 +110,7 @@ SitemapGenerator::Sitemap.create(options) do
   Repositories::Taxonomy.read_events.each do |taxon|
     add(build_taxon_path(taxon.name), {
       priority: 0.7,
+      images: map_taxon_products_images(taxon.id),
       alternates: build_alternates(build_taxon_path(taxon.name))
     })
   end
@@ -94,6 +119,7 @@ SitemapGenerator::Sitemap.create(options) do
   Repositories::Taxonomy.read_collections.each do |taxon|
     add(build_taxon_path(taxon.name), {
       priority: 0.7,
+      images: map_taxon_products_images(taxon.id),
       alternates: build_alternates(build_taxon_path(taxon.name))
     })
   end
@@ -102,6 +128,7 @@ SitemapGenerator::Sitemap.create(options) do
   Repositories::Taxonomy.read_styles.each do |taxon|
     add(build_taxon_path(taxon.name), {
       priority: 0.7,
+      images: map_taxon_products_images(taxon.id),
       alternates: build_alternates(build_taxon_path(taxon.name))
     })
   end
@@ -109,11 +136,15 @@ SitemapGenerator::Sitemap.create(options) do
   # color groups
   Repositories::ProductColors.color_groups.each do |color_group|
     path = colour_path(color_group.name)
-    add(path, priority: 0.7, alternates: build_alternates(path))
+    add(path, {
+      priority: 0.7,
+      images: map_color_group_products_images(color_group.id),
+      alternates: build_alternates(path)
+    })
   end
 
   statics_pages = [ 
-    '/about', '/why-us', '/terms', '/privacy', '/legal', '/assets/returnform.pdf',
+    '/about', '/why-us', '/privacy', '/legal', '/assets/returnform.pdf',
     '/style-consultation', '/fame-chain',
     '/fashionitgirl2015',
     '/bridesmaid-dresses', '/sale-dresses',

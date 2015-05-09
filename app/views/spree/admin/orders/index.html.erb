@@ -11,18 +11,15 @@
   </li>
 <% end %>
 
-<% content_for :table_filter_title do %>
-
-<% end %>
-
 <% content_for :table_filter do %>
     <%= render partial: 'spree/admin/orders/index/table_filter' %>
 <% end %>
 
 </div>
 <!-- Close our friendly spree whacky container div-->
-
-<div class="container-fullwide">
+<div class="clearfix">
+</div>
+<div class="container-fullwide" >
 <% if hide_line_items %>
 <%= render 'orders_table' %>
 <% else %>
