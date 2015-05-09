@@ -36,21 +36,25 @@ ruby:
             span 
               ' /
             span 
-              ' Size: 12
+              ' Size: #{ product.size.presentation }
             span 
               ' /
             span 
               ' Color:
-              span.color style="background-color: pink"
+              span.color style="background-color: #{ product.color.value}; border: 1px solid gray;"
           .cart-prices
             div = product.price.display_price
-            .small 
-              ' + $29 Express making
-              = link_to '', '#', class: 'fa fa-close price-remove'
-            .small 
-              ' + $9.99 Make Inside Dress a Mini
-              = link_to '', '#', class: 'fa fa-close price-remove'
-            .total 
+            - if product.making_options.present?
+              - product.making_options.each do |option|
+                .small 
+                  = "+ #{ option.display_price.to_s } #{ option.name }"
+                  = link_to '', '#', class: 'fa fa-close making-option-remove', data: { id: option.id }
+            - if product.customizations.present?
+              - product.customizations.each do |customization|
+                .small 
+                  = "+ #{ customization.display_price.to_s } #{ customization.name }"
+                  = link_to '', '#', class: 'fa fa-close customization-remove'
+            /.total 
               ' = $999.99
 
   /! cd-cart-items
@@ -68,9 +72,6 @@ ruby:
   p
     | Shipping
     span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
-  p
-    | Total Express Making
-    span.pull-right $+58.00
   p
     | Promotion
     span.pull-right = cart.display_promotion_total.to_s
