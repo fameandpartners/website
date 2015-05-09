@@ -1,10 +1,9 @@
 ruby:
   details = Marketing::Subscriber.new(
-    site_version: current_site_version,
     user: current_spree_user,
     token: cookies['utm_guest_token'],
     promocode: decode(params[:pc]),
-    ip_address: request.remote_ip
+    ipaddress: request.remote_ip
   ).details
   details[:campaign] = 'home' if details[:campaign].blank?
 
@@ -14,18 +13,15 @@ ruby:
       h2.text-center.h2-title Become Famous.
       p.lead Get a taste of fame (and all its perks) with $20 OFF your first purchase, free styling sessions & VIP treatment.
   .container-fluid
-    form action="https://fameandpartners.createsend.com/t/t/s/ekjll/" method="post" class="form-inline"
+    form action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post" class="form-inline"
       .form-group
-        input#fieldEmail.form-control name="cm-ekjll-ekjll" type="email" placeholder="Enter email" /
+        input#fieldEmail.form-control name="cm-urikx-urikx" type="email" placeholder="Enter email" /
         input type="hidden" id="fieldName"    name="cm-name" value=(current_spree_user.try(:full_name))
-        input type="hidden" id="fieldqulir"   name="cm-f-qulir" value=(details[:site_version])
-        input type="hidden" id="fieldjiktly"  name="cm-f-jiktly" value=(details[:country])
-        input type="hidden" id="fielddydhij"  name="cm-f-dydhij" value=(details[:promocode])
-        input type="hidden" id="fielddhhykd"  name="cm-f-dhhykd" value=(details[:referrer] || cookies[:referrer])
-        input type="hidden" id="fielddhhykh"  name="cm-f-dhhykh" value=(details[:campaign])
-        input type="hidden" id="fielddhhykk"  name="cm-f-dhhykk" value=(details[:ip_address])
-        input type="hidden" id="fieldurlkl"   name="cm-fo-urlkl" value="190873"
-        input type="hidden" id="fielddhhyuy"  name="cm-f-dhhyuy" value=(CampaignMonitor.current_version)
+        input type="hidden" id="fielddkjudk"  name="cm-f-dkjudk" value=(details[:country])
+        input type="hidden" id="fielddkjuhy"  name="cm-f-dkjuhy" value=(details[:promocode])
+        input type="hidden" id="fielddkjuhr"  name="cm-f-dkjuhr" value=(details[:source] || cookies[:referrer])
+        input type="hidden" id="fielddkjuhj"  name="cm-f-dkjuhj" value=(details[:campaign])
+        input type="hidden" id="fielddkjuht"  name="cm-f-dkjuht" value=(details[:ipaddress])
       span.submit.no-padding-right
         button.invis-fix.btn.btn-default type="submit" Send
 
