@@ -441,6 +441,55 @@ h2 span {
       font-size: 2.8rem;
       font-weight: 300;
     }
+
+    .col-md-4 {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
+
+  #fashion-it-girl-reminder {
+    input {
+      background-color: transparent;
+      color: white;
+    }
+
+    .form-control {
+      border-bottom: 1px solid white;
+    }
+
+    .btn.submit {
+      background-color: transparent;
+      color: white;
+    }
+
+    ::-webkit-input-placeholder {
+      color: white;
+      font-family: forum;
+      font-size: 3rem;
+      line-height: 3.3rem;
+    }
+
+    :-moz-placeholder { /* Firefox 18- */
+       color: white;
+       font-family: forum;
+       font-size: 3rem;
+       line-height: 3.3rem;
+    }
+
+    ::-moz-placeholder {  /* Firefox 19+ */
+       color: white;
+       font-family: forum;
+       font-size: 3rem;
+       line-height: 3.3rem;
+    }
+
+    :-ms-input-placeholder {
+       color: white;
+       font-family: forum;
+       font-size: 3rem;
+       line-height: 3.3rem;
+    }
   }
 
   q:before,q:after{content:''}
@@ -454,6 +503,7 @@ h2 span {
       color: white;
       text-align: center;
       font-size: 3rem;
+      padding-top: 2rem;
     }
   }
 

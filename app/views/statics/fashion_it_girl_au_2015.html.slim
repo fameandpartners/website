@@ -56,22 +56,21 @@
         h5 applications open:
         p 18th May 2015
       .col-md-4
-        h5 applications closed:
+        h5 applications close:
         p 29th June 2015
       .col-md-4
         h5 winners announced:
         p 15th July 2015
 
   .container-fluid.no-padding.application
-    .col-md-12
-      h3 let us remind you when applications open:
-      form#fashion-it-girl-reminder action="/campaigns/email_capture"
+    .col-md-8.col-md-offset-2
+      h3 Let us remind you when applications open:
+      form.form#fashion-it-girl-reminder action="/campaigns/email_capture"
         input type="hidden" name="content" value="content"
         input type="hidden" name="promocode" value="promocode"
-        .row.no-padding
-          .col-md-8.col-md-offset-2.text-center
-            input.form-control.standard-form type="email" name="email" placeholder='email address'
-        .row.no-padding
+        .form-group
+          input.form-control.form-control-md type="email" name="email" placeholder='Your email here'
+        .row
           .col-md-12.text-center
             button.btn.submit type="submit" value="submit"
               | Submit
