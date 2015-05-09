@@ -20,19 +20,19 @@ module Orders
                    :variant,
                    :personalization,
                    :factory,
-                   :fabrication
-
-
-
-
+                   :fabrication,
+                   :price,
+                   :quantity
 
     attr_reader :shipment, :wrapped_order
     
     def initialize(item, wrapped_order)
-      @wrapped_order = wrapped_order
-      @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(item) }
-
       @item = item
+      @wrapped_order = wrapped_order
+    end
+
+    def shipment
+      @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(@item) }
     end
 
     alias_method :order, :wrapped_order
