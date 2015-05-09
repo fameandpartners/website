@@ -87,7 +87,7 @@ class  UserCart::Populator
     def add_making_options
       return if line_item.blank? || product_making_options.blank?
       line_item.making_options = product_making_options.collect do |making_option|
-        LineItemMakingOption.build_option(making_option)
+        LineItemMakingOption.build_option(ProductMakingOption.find(making_option.id))
       end
       line_item
     end
@@ -172,9 +172,7 @@ class  UserCart::Populator
 
     def product_making_options
       @product_making_options ||= begin
-        Array.wrap(product_attributes[:making_options_ids]).compact.collect do |id|
-          product_options.making_options.detect{|item| item.id == id.to_i }
-        end.compact
+        product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
       end
     end
 

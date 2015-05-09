@@ -29,15 +29,29 @@
         <div class="heading">
           <span class="qty">Qty: <%= product.quantity %></span>
           <span>/</span>
-          <span>Size: 12</span>
+          <span>Size: <%= product.size.presentation %></span>
           <span>/</span>
-          <span>Color: <span class="color" style="background-color: pink"></span></span>
+          <span>Color: <span class="color" style="border: 1px solid gray; background-color: <%= product.color.value %>"></span></span>
         </div>
         <div class="cart-prices">
           <div><%= product.price.display_price %></div>
+          <% for making_option in product.making_options: %>
+            <div class="small">
+              + <%= making_option.display_price %><%= making_option.name %>
+              <a href="#" class="fa fa-close price-remove"></a>
+            </div>
+          <% end %>
+          <% for customization in product.customizations: %>
+            <div class="small">
+              + <%= customization.display_price %> <%= customization.name %>
+              <a href="#" class="fa fa-close price-remove"></a>
+            </div>
+          <% end %>
+          <!--
           <div class="small">+ $29.00 Express making <a href="#" class="fa fa-close price-remove"></a></div>
           <div class="small">+ $9.99 Make Inside Dress a Mini <a href="#" class="fa fa-close price-remove"></a></div>
-          <div class="total">= $999.99</div>
+          <div class="total"><%#= product.price.display_price %></div>
+          -->
         </div>
       </div>
     </li>

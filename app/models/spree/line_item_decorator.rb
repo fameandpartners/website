@@ -15,11 +15,19 @@ Spree::LineItem.class_eval do
   end
 
   def price
+    total_price = super
+
+    total_price += making_options_price
+
     if personalization.present?
-      super + personalization.price
-    else
-      super
+      total_price += personalization.price
     end
+
+    total_price
+  end
+
+  def making_options_price
+    making_options.sum(&:price)
   end
 
   def in_sale?

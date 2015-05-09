@@ -21,4 +21,8 @@ class ProductMakingOption < ActiveRecord::Base
   def display_price
     Spree::Money.new(price, currency: currency)
   end
+
+  def name
+    'Express Making'
+  end
 end

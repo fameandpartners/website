@@ -30,7 +30,7 @@ class  UserCart::UserCartResource
 
     def cart_products
       @cart_products ||= begin
-        Spree::LineItem.includes(:personalization, :variant => :product).where(order_id: order.id).map do |line_item|
+        Spree::LineItem.includes(:personalization, :making_options, :variant => :product).where(order_id: order.id).map do |line_item|
           Repositories::CartProduct.new(line_item: line_item).read
         end
       end

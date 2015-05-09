@@ -129,14 +129,6 @@ class Products::SelectionOptions
 
     # making options
     def product_making_options
-      option = product.making_options.fast_making.first
-      return [] if option.blank?
-      [
-        OpenStruct.new(
-          id: option.id,
-          name: 'Express Making',
-          display_price: option.display_price
-        )
-      ]
+      Repositories::ProductMakingOptions.new(product: product).read_all
     end
 end
