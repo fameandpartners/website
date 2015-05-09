@@ -3,6 +3,8 @@
 #   migrator = SubscribersMigrator.new.
 #   migrator.load_subscribers(start_from = 0)
 #   migrator.export
+#   or
+#   SubscribersMigrator.new.backup_to_file('subscribers.xml')
 
 class CreateSend::List
   def each_subscriber(&original_block)
@@ -34,6 +36,32 @@ class SubscribersMigrator
   def export
     subscribers.in_groups_of(1000).each do |subscribers_group|
       CreateSend::Subscriber.import(target_list_id, subscribers_group.compact, false, false, false)
+    end
+  end
+
+  def backup_to_file(file_path)
+    File.open(file_path, 'w+') do |file|
+      file.puts('<?xml version="1.0" encoding="UTF-8"?>')
+      file.puts('<subscribers>')
+      lists.each_with_index do |list, index|
+        list_details = list.details
+
+        list.each_subscriber do |subscriber, index|
+          data = subscriber.to_hash
+          data.merge!({
+            'EmailAddress' => subscriber.EmailAddress,
+            'Name' => subscriber.Name,
+            'Joindate' => subscriber.Date
+          })
+          file.puts(data.to_xml(skip_instruct: true))
+        end
+        puts "backuping list ##{ index } [ #{ list.list_id } ]"
+        file.flush
+      end
+      file.puts('</subscribers>')
+
+      # xml = Nokogiri::XML(File.open(file_path)) ?
+      true
     end
   end
 
