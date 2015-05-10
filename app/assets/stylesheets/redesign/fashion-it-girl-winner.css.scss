@@ -362,18 +362,22 @@ h2 span {
     font-size: 3.6rem;
     color: white !important;
     margin-top: 0;
+    line-height: 2.8rem;
   }
 
   h4 {
     color: white !important;
     text-transform: uppercase;
     font-weight: 300;
+    margin-top: 16px;
+    margin-bottom: 16px;
   }
 
   h3.aus {
     font-family: forum;
     color: white !important;
     text-transform: uppercase;
+    line-height: 6rem;
   }
 }
 
@@ -415,7 +419,12 @@ h2 span {
     display: block;
     text-align: right;
     text-transform: uppercase;
-    padding-top: 1.5rem;
+    padding-top: 5rem;
+    line-height: 3rem;
+
+    span {
+      font-size: 2rem;
+    }
   }
 }
 
