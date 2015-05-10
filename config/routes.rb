@@ -68,6 +68,8 @@ FameAndPartners::Application.routes.draw do
     get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
     get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
 
+    get '/seventies-summer-collection' => 'statics#seventies_summer', :as => :seventites_summer_collection
+
     get '/amfam'                  => redirect('/wicked-game-collection')
     get '/amfam-dresses'          => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
