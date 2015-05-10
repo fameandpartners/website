@@ -13,8 +13,6 @@ article.blog-post
       .author
         ' by
         = link_to blog_authors_post_path(stylist: post.user.slug) do
-          / .avatar
-            = image_tag post.user.avatar.url, width: 30, height: 30, alt: ''
           span.name= post.user.fullname
   - if post.primary_photo.present?
     - if params[:action] == 'show' && params[:controller] != 'blog/celebrities'
@@ -32,9 +30,3 @@ article.blog-post
         = raw(short_post_body(post))
       .read-more
         = link_to "Read More", url, class: 'btn border empty'
-  / - if post.tag_list.present?
-    .share-tags
-      .tag-list
-        .tag Tags:
-        - post.tag_list.each do |tag|
-          .tag= link_to tag, blog_search_by_tag_path(tag.downcase)
