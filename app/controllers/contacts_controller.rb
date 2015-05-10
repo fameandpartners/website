@@ -20,5 +20,6 @@ class ContactsController < ApplicationController
   end
   
   def success
+    title('Thank You', default_seo_title)
   end
 end
