@@ -6,9 +6,11 @@ namespace :import do
     raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
 
     file_path = ENV['FILE_PATH']
+    available = ENV['AVAILABLE'] || 1.days.ago
     puts "#{DateTime.now} START XLS IMPORTER"
 
-    uploader = Products::BatchUploader.new()
+  
+    uploader = Products::BatchUploader.new(available)
     uploader.parse_file(file_path)
 
     @parsed_data = uploader.parsed_data
