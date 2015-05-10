@@ -37,7 +37,7 @@ SitemapGenerator::Interpreter.class_eval do
   # <xhtml:link rel="alternate" hreflang="en" href="http://example.com" />
   # <xhtml:link rel="alternate" hreflang="en-AU" href="http://example.com/au" />
   def build_alternates(path)
-    alternates = [{ href: absolute_url(path), lang: 'en', nofollow: false }]
+    alternates = [{ href: absolute_url(path), lang: 'en-US', nofollow: false }]
 
     alternates + site_versions.map do |site_version|
       {

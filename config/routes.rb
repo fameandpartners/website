@@ -9,7 +9,7 @@ FameAndPartners::Application.routes.draw do
   get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-    devise_for :user, class_name: Spree::User, skip: [:unlocks, :registrations, :passwords, :sessions, :omniauth_callbacks] 
+    devise_for :user, class_name: Spree::User, skip: [:unlocks, :registrations, :passwords, :sessions, :omniauth_callbacks]
     devise_scope :user do
       get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
     end
@@ -67,6 +67,8 @@ FameAndPartners::Application.routes.draw do
     #edits
     get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
     get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
+
+    get '/here-comes-the-sun-collection' => 'statics#here_comes_the_sun', :as => :here_comes_the_sun_collection
 
     get '/amfam'                  => redirect('/wicked-game-collection')
     get '/amfam-dresses'          => redirect('/wicked-game-collection')
