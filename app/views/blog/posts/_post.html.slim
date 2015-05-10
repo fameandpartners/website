@@ -18,8 +18,8 @@ article.blog-post
           span.name= post.user.fullname
   - if post.primary_photo.present?
     - if params[:action] == 'show' && params[:controller] != 'blog/celebrities'
-    .featured-image
-      = image_tag post.primary_photo.photo.url(:preview), alt: ''
+      .featured-image
+        = image_tag post.primary_photo.photo.url(:preview), alt: ''
     - else
       .featured-image
         = link_to url do
