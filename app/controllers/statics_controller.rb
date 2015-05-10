@@ -56,10 +56,10 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/break-hearts-not-banks', :layout => 'redesign/application'
   end
   
-  def seventies_summer
-    @title = "70s Summer | Beautiful Dresses - Fame & Partners"
+  def here_comes_the_sun
+    @title = "Here comes the sun | Beautiful Dresses - Fame & Partners"
     @description = "Discover beautiful summer dresses here at Fame & Partners"
-    render :template => 'landing_pages/seventies_summer', :layout => 'redesign/application'
+    render :template => 'landing_pages/here_comes_the_sun', :layout => 'redesign/application'
   end
 
   def wicked_game
