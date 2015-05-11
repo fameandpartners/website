@@ -58,7 +58,7 @@ It is generally easiest to have working development application with loading dat
 * download latest dump from production ( through web interface from engine yard )
 * clean database with `$bundle exec rake db:schema:load`
 * restore data
-  `pg_restore -d fame_website_development --clean --if-exists --verbose --jobs 8 --no-acl -U postgres`
+  `pg_restore -d fame_website_development --clean --if-exists --verbose --jobs 8 --no-acl --no-owner -U postgres`
 
 after it, remove valuable data & update settings
 
