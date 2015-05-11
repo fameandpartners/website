@@ -206,6 +206,11 @@ class StaticsController < ApplicationController
     @description = "Fashion IT Girl 2015"
   end
 
+  def fashion_it_girl_au_2015
+    @title = "Fashion IT Girl Australia" + default_seo_title
+    @description = "Fashion IT Girl Australia 2015"
+  end
+
   def fashion_it_girl_competition
     @title = "Fashion IT Girl" + default_seo_title
     @description = "Fashion IT Girl 2015"

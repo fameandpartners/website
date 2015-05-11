@@ -50,6 +50,7 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
+    get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
     get '/fashionitgirl2015-terms-and-conditions',  to: redirect('/')
     get '/nyfw-comp-terms-and-conditions',  to: redirect('/')
     get '/fashionitgirl2015-competition',  to: redirect('/')
@@ -238,7 +239,7 @@ FameAndPartners::Application.routes.draw do
 
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
-    
+
     # Fallen Product URL
     get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
     get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
