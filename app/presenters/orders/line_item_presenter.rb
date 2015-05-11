@@ -6,7 +6,7 @@ module Orders
   class LineItemPresenter
     extend Forwardable
 
-    def_delegators :@shipment, :shipped?, :shipped_at
+    def_delegators :shipment, :shipped?, :shipped_at
     def_delegators :@wrapped_order,
                    :projected_delivery_date,
                    :tracking_number,
@@ -24,7 +24,7 @@ module Orders
                    :price,
                    :quantity
 
-    attr_reader :shipment, :wrapped_order
+    attr_reader :wrapped_order
     
     def initialize(item, wrapped_order)
       @item = item
