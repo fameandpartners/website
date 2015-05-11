@@ -26,7 +26,8 @@
   .container-fluid
     .col-md-12
       .row.prizes
-        p
+        .top-arrow
+        p.padding-top
           strong A two-week paid internship with &nbsp;
           span = image_tag src='new-logo.svg', :class => 'fame-logo', :alt => 'Fame & Partners'
           br
@@ -34,6 +35,7 @@
           span = image_tag src='fashion-it-girl/popsugar.png', :class => 'popsugar', :alt => 'Popsugar logo'
           | &nbsp;+ your dream formal outfit ($1000 value)
         p.runner-up Runner up prizes: 1 of 5 Fashion Maven positions 1 of 50 Fashion Ambassador positions
+        .bottom-arrow
 
   .container-fluid.quote
     .col-md-10.col-md-offset-1
@@ -62,18 +64,9 @@
         h5 winners announced:
         p 15th July 2015
 
-  .container-fluid.no-padding.application
-    .col-md-8.col-md-offset-2
-      h3 Let us remind you when applications open:
-      form.form#fashion-it-girl-reminder action="/campaigns/email_capture"
-        input type="hidden" name="content" value="content"
-        input type="hidden" name="promocode" value="promocode"
-        .form-group
-          input.form-control.form-control-md type="email" name="email" placeholder='Your email here'
-        .row
-          .col-md-12.text-center
-            button.btn.submit type="submit" value="submit"
-              | Submit
+  .application
+    = link_to('Let us remind you when applications open', new_contact_path)
+
 
 = content_for :inline_javascript do
   | new window.page.FashionITGirlReminder({form: "#fashion-it-girl-reminder"});

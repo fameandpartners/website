@@ -18,12 +18,13 @@ class Contact
       'Something else',
       [
         'Book a Style Consultation',
-        'Feedback on the website',        
-        'None of these apply to me'
+        'Feedback on the website',
+        'None of these apply to me',
+        'Fashion It Girl'
       ]
     ]
   ]
-  
+
   attr_accessor :first_name, :last_name, :email, :subject, :site_version, :message, :phone, :order_number
 
   validates :email, format: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, presence: true
