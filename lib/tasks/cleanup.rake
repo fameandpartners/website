@@ -9,7 +9,7 @@ namespace :data do
     sql = [
       "DELETE FROM spree_orders WHERE completed_at IS NULL AND state = 'cart' AND created_at < '#{14.days.ago}'",
       "DELETE FROM spree_orders WHERE completed_at IS NULL AND state = 'address' AND created_at < '#{60.days.ago}'",
-      "DELETE FROM activities WHERE created_at < '#{1.year.ago}'",
+      "DELETE FROM activities WHERE created_at < '#{6.months.ago}'",
       "DELETE FROM spree_tokenized_permissions WHERE created_at < '#{7.days.ago}'",
     ]
     
