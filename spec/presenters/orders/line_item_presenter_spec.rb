@@ -35,5 +35,14 @@ module Orders
         expect(presenter.shipped?).to   eq shipped
       end
     end
+
+    describe '#size' do
+      it 'reverts to unknown for missing dress sizes' do
+        item      = double 'item', personalization: nil, variant: double(dress_size: nil)
+        order     = double 'order', site_version: 'SITE'
+        presenter = described_class.new(item, order)
+        expect(presenter.country_size).to eq 'SITE-Unknown Size'
+      end
+    end
   end
 end
