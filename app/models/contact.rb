@@ -20,7 +20,7 @@ class Contact
         'Book a Style Consultation',
         'Feedback on the website',
         'None of these apply to me',
-        'Fashion It Girl'
+        'Fashion IT Girl'
       ]
     ]
   ]
