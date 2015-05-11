@@ -20,5 +20,20 @@ module Orders
       it('#display_price') { expect(subject.price).to eq 999  }
       it('#quantity')      { expect(subject.quantity).to eq 3 }
     end
+
+    describe '#shipment' do
+      it 'exposes properties of @shipment' do
+        item       = double 'item'
+        shipped    = double 'shipped?'
+        shipped_at = double 'shipped_at'
+        shipment   = double 'shipment', :line_items => [item], :shipped? => shipped, :shipped_at => shipped_at
+        order      = double 'order', :shipments => [shipment]
+
+        presenter  = described_class.new(item, order)
+
+        expect(presenter.shipped_at).to eq shipped_at
+        expect(presenter.shipped?).to   eq shipped
+      end
+    end
   end
 end
