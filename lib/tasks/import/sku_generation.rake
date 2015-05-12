@@ -3,10 +3,71 @@ namespace :import do
   task :sku_generation_template => :environment do
     raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
 
-    file_path = ENV['FILE_PATH']
-
-    Importers::SkuGeneration::Importer.new(file_path).import
+    Importers::SkuGeneration::Importer.new(ENV['FILE_PATH']).import
   end
+
+  desc :fabric_colour_cards
+  task :fabric_colour_cards => :environment do
+    raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
+    Importers::SkuGeneration::FabricCardImporter.new(ENV['FILE_PATH']).import
+  end
+
+  desc 'spike fabric colours'
+  task :spike_fabric_colours => :environment do
+
+    yiwan8012 = FabricCardTemplate.new 'yiwan8012', 'YI12'
+    colours   = {
+      'Blush'         => 83,
+      'Burgundy'      => 91,
+      'Burnt Orange'  => 97,
+      'Champagne'     => 8,
+      'Charcoal'      => 49,
+      'Cherry Red'    => 4,
+      'Cobalt Blue'   => 24,
+      'Coral'         => 81,
+      'Cream'         => 29,
+      'Emerald Green' => 77,
+      'Fluoro Orange' => 116,
+      'Ivory'         => 72,
+      'Lavender'      => 106,
+      'Lemon'         => 32,
+      'Light Blue'    => 21,
+      'Light Pink'    => 25,
+      'Lilac'         => 52,
+      'Magenta'       => '9/108',
+      'Marine Blue'   => 101,
+      'Mint'          => 115,
+      'Moss Green'    => 33,
+      'Navy'          => 46,
+      'Off White'     => 12,
+      'Orange'        => 59,
+      'Pale Blue'     => 21,
+      'Pale Green'    => 78,
+      'Pale Grey'     => 43,
+      'Pale Pink'     => 25,
+      'Pale Yellow'   => 124,
+      'Peach'         => 44,
+      'Pine'          => 104,
+      'Plum'          => 57,
+      'Purple'        => 71,
+      'Red'           => 36,
+      'Taupe'         => 92,
+      'Teal'          => 48,
+      'Turqoise'      => 120,
+      'Watermelon'    => 47
+    }
+
+
+    yiwan8012.colours  = colours.collect do |name, number|
+      FabricCardColourTemplate.new(number, name)
+    end
+    imogen             = ProductTemplate.new '13053', 'Imogen'
+    imogen.fabric_card = yiwan8012
+
+    imogen
+    binding.pry
+  end
+
 
   desc :existing_spree_variants
   task :existing_spree_variants => :environment do
