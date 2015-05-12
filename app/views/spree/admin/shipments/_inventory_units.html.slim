@@ -1,0 +1,18 @@
+tr
+- if shipment.inventory_units.empty?
+  td colspan=6
+    ' No Units in Shipment
+- else
+  td colspan=6 style='padding:0;'
+    table.admin-table-condensed
+      thead : tr
+        th Name
+        th SKU
+        th Factory
+      tbody
+        - shipment.inventory_units.each do |unit|
+          tr
+            td = unit.variant.name
+            td = unit.variant.sku
+            td = unit.variant.product.factory || '-'
+
