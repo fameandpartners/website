@@ -21,10 +21,10 @@ ruby:
     = cart.products.length
   ul.cart-items
     - (cart.products || []).each do |product|
-      li
+      li.cart-item data-id=(product.line_item_id)
         .clearfix
           = link_to product.name, collection_product_path(product), class: 'cart-item-title'
-          a.remove-product.fa.fa-close.pull-right.link-grey href="#0" data-id=(product.line_item_id)
+          a.remove-product.fa.fa-close.pull-right.link-grey href="#0"
         .cart-item-image-holder.pull-left
           = link_to collection_product_path(product) do
             = image_tag product.image.large, class: 'cart-item-image'

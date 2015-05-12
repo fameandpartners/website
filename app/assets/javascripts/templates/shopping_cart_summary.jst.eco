@@ -3,10 +3,10 @@
 </h3>
 <ul class="cart-items">
   <% for product in @cart.products: %>
-    <li>
+    <li class="cart-item" data-id="<%= product.line_item_id %>">
       <div class="clearfix">
         <a href="<%= product.path %>" class="cart-item-title"><%= product.name %></a>
-        <a class="remove-product fa fa-close pull-right link-grey" href="#0" data-id="<%= product.line_item_id %>"></a>
+        <a class="remove-product fa fa-close pull-right link-grey" href="#0"></a>
       </div>
       <div class="cart-item-image-holder pull-left">
         <a href="<%= product.path %>">
