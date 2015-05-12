@@ -2,7 +2,7 @@ require 'active_model'
 
 module Importers
   module SkuGeneration
-    class TemplateVariant
+    class VariantTemplate
       attr_accessor :product, :fabric_card, :size, :colour
 
       def initialize(product, fabric_card, colour, size)

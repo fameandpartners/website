@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150508044557) do
+ActiveRecord::Schema.define(:version => 20150511074411) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -415,6 +415,30 @@ ActiveRecord::Schema.define(:version => 20150508044557) do
   end
 
   add_index "email_notifications", ["spree_user_id", "code"], :name => "index_email_notifications_on_spree_user_id_and_code"
+
+  create_table "fabric_card_colours", :force => true do |t|
+    t.text     "position"
+    t.integer  "fabric_colour_id"
+    t.integer  "fabric_card_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "fabric_card_colours", ["fabric_card_id"], :name => "index_fabric_card_colours_on_fabric_card_id"
+  add_index "fabric_card_colours", ["fabric_colour_id"], :name => "index_fabric_card_colours_on_fabric_colour_id"
+
+  create_table "fabric_cards", :force => true do |t|
+    t.text     "name",          :null => false
+    t.text     "sku_component"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "fabric_colours", :force => true do |t|
+    t.text     "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "fabrication_events", :force => true do |t|
     t.string   "fabrication_uuid"

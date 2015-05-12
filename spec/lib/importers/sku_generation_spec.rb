@@ -36,7 +36,7 @@ module Importers
       end
     end
 
-    RSpec.describe FabricCardColour do
+    RSpec.describe FabricCardColourTemplate do
       describe '#sku_compenent pads to 3 digits' do
         it 'single digits' do
           expect(described_class.new(4, '_').sku_component).to eq "004"
@@ -52,7 +52,7 @@ module Importers
       end
     end
 
-    RSpec.describe TemplateProduct do
+    RSpec.describe ProductTemplate do
       it 'can generate a single sku' do
         fabric_card = FabricCard.new('FabricCardName', 'FabricCardAbbrev')
         colour1 = FabricCardColour.new(99, 'ColourName')
@@ -60,7 +60,7 @@ module Importers
         size_four = BaseSize.new(4)
         sizes = [size_four]
 
-        sku_template = TemplateProduct.new('StyleNumber', "StyleName")
+        sku_template = ProductTemplate.new('StyleNumber', "StyleName")
         sku_template.fabric_card = fabric_card
         sku_template.base_sizes = sizes
 
@@ -77,7 +77,7 @@ module Importers
         size_twentysix = BaseSize.new(26)
         sizes = [size_four, size_twentysix]
 
-        sku_template = TemplateProduct.new('SD888', "SlinkyDress")
+        sku_template = ProductTemplate.new('SD888', "SlinkyDress")
         sku_template.fabric_card = fabric_card
         sku_template.base_sizes = sizes
 

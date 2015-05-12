@@ -2,7 +2,7 @@ require 'active_model'
 
 module Importers
   module SkuGeneration
-    class FabricCard
+    class FabricCardTemplate
       include ActiveModel::Validations
       attr_accessor :name, :sku_component, :colours
 
