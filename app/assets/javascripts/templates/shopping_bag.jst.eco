@@ -15,10 +15,10 @@
 </div>
 <ul class="cart-items">
   <% for product in @cart.products: %>
-    <li>
+    <li class="cart-item" data-id="<%= product.line_item_id %>">
       <div class="clearfix">
         <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
-        <a class="fa fa-close pull-right link-grey remove-product" data-id="<%= product.line_item_id %>" href="#0"></a>
+        <a class="fa fa-close pull-right link-grey remove-product" href="#0"></a>
       </div>
       <div class="cart-item-image-holder pull-left">
         <a href="<%= product.path %>">

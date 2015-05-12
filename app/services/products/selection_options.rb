@@ -129,6 +129,6 @@ class Products::SelectionOptions
 
     # making options
     def product_making_options
-      Repositories::ProductMakingOptions.new(product: product).read_all
+      product.making_options
     end
 end

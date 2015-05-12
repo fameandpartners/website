@@ -25,8 +25,8 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   # request to force data requesting from server
   # if already loaded, do nothing. it should be done by other methods
-  load: () ->
-    if @isLoaded()
+  load: (force = false) ->
+    if @isLoaded() && !force
       @trigger('load')
     else
       @loaded = true
@@ -70,6 +70,28 @@ window.helpers.ShoppingCart = class ShoppingCart
   removeProduct: (line_item_id) ->
     $.ajax(
       url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }")
+      type: "DELETE"
+      dataType: "json"
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
+  removeProductCustomization: (line_item_id, customization_id) ->
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }/customizations/#{ customization_id }")
+      type: "DELETE"
+      dataType: "json"
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
+  removeProductMakingOption: (line_item_id, making_option_id) ->
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }/making_options/#{ making_option_id }")
       type: "DELETE"
       dataType: "json"
     ).success(
