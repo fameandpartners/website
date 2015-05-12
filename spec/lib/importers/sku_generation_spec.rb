@@ -54,8 +54,8 @@ module Importers
 
     RSpec.describe ProductTemplate do
       it 'can generate a single sku' do
-        fabric_card = FabricCard.new('FabricCardName', 'FabricCardAbbrev')
-        colour1 = FabricCardColour.new(99, 'ColourName')
+        fabric_card = FabricCardTemplate.new('FabricCardName', 'FabricCardAbbrev')
+        colour1 = FabricCardColourTemplate.new(99, 'ColourName')
         fabric_card.colours = [colour1]
         size_four = BaseSize.new(4)
         sizes = [size_four]
@@ -68,10 +68,10 @@ module Importers
       end
 
       it 'uses all the bits' do
-        fabric_card = FabricCard.new('CoolFabric', 'CFAB')
-        colour1 = FabricCardColour.new(7, '7Up')
-        colour2 = FabricCardColour.new(42, 'Meaning')
-        colour3 = FabricCardColour.new(350, 'TreeFiddy')
+        fabric_card = FabricCardTemplate.new('CoolFabric', 'CFAB')
+        colour1 = FabricCardColourTemplate.new(7, '7Up')
+        colour2 = FabricCardColourTemplate.new(42, 'Meaning')
+        colour3 = FabricCardColourTemplate.new(350, 'TreeFiddy')
         fabric_card.colours = [colour1, colour2, colour3]
         size_four = BaseSize.new(4)
         size_twentysix = BaseSize.new(26)
