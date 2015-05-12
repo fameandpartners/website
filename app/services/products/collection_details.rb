@@ -21,7 +21,7 @@
 class Products::CollectionDetails
   # include Repositories::CachingSystem
 
-  attr_reader :collection, :style, :event, :edits, :bodyshape, :color, :discount, :site_version, :fast_delivery, :root_taxon
+  attr_reader :collection, :style, :event, :edits, :bodyshape, :color, :discount, :site_version, :fast_delivery, :root_taxon, :fast_making
 
   def initialize(options = {})
     @collection     = options[:collection]
@@ -33,6 +33,7 @@ class Products::CollectionDetails
     @discount       = options[:discount]
     @site_version   = options[:site_version]
     @fast_delivery  = options[:fast_delivery]
+    @fast_making    = options[:fast_making]
     @root_taxon     ||= Repositories::Taxonomy.collection_root_taxon
   end
 

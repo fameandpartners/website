@@ -87,7 +87,8 @@ class Products::CollectionResource
           color:          color_group.try(:representative) || color,
           discount:       discount,
           site_version:   site_version,
-          fast_delivery:  fast_delivery?
+          fast_delivery:  fast_delivery?,
+          fast_making:    fast_making
         ).read
       end
     end
@@ -151,7 +152,8 @@ class Products::CollectionResource
           images:         cropped_images(color_variant),
           price:          price,
           discount:       discount,
-          fast_delivery:  color_variant.product.fast_delivery
+          fast_delivery:  color_variant.product.fast_delivery,
+          fast_making:    color_variant.product.fast_making
         )
       end
 

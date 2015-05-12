@@ -25,4 +25,8 @@ class ProductMakingOption < ActiveRecord::Base
   def name
     'Express Making'
   end
+
+  def fast_making?
+    option_type == 'fast_making'
+  end
 end
