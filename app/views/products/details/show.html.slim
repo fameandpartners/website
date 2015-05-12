@@ -1,7 +1,10 @@
 ruby:
-  product_paths = { default: collection_product_path(@product, site_version: current_site_version.to_param) }
+  url_params = params.except(:controller, :action, :product_slug)
+  url_params.merge!(site_version: current_site_version.to_param)
+  product_paths = { default: collection_product_path(@product, url_params) }
+
   @product.default_color_options.each do |color|
-    product_paths[color.id] = "#{product_paths[:default]}?color=#{color.name}"
+    product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
   end
 
   init_product_details_page = "
