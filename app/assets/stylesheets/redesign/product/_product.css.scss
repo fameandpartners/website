@@ -51,10 +51,11 @@
 .product-details {
   max-width: 420px;
 
-	h2 {
+	h1 {
 		text-transform: uppercase;
-		font-size: 2rem;
+		font-size: 2rem !important; // TODO: Remove important
     margin-top: 0;
+    padding-bottom: 0;
 	}
 }
 

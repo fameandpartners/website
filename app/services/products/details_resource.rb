@@ -6,6 +6,8 @@
 #   product   - obsoleted! support legacy only
 #
 class Products::DetailsResource
+  META_DESCRIPTION_MAX_SIZE = 160
+
   attr_reader :site_version, :product
 
   def initialize(options = {})
@@ -89,11 +91,12 @@ class Products::DetailsResource
     end
 
     def product_short_description
-      text = product_properties['short_description'] || product.description
-      text = text.to_s.gsub(/(prom|formal)(\s)/i, '')
-      ActionView::Base.full_sanitizer.sanitize(text.to_s)
-    rescue
-      I18n.t('product_has_no_description')
+      if !product.meta_description.blank?
+        product.meta_description
+      else
+        sanitized_description = ActionView::Base.full_sanitizer.sanitize(product.description)
+        sanitized_description.truncate(META_DESCRIPTION_MAX_SIZE)
+      end
     end
 
     def product_fabric

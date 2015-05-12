@@ -4,21 +4,38 @@
 <ul class="cart-items">
   <% for product in @cart.products: %>
     <li>
-      <div class="media">
-        <div class="media-left media-middle">
-          <a href="<%= product.path %>">
-            <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.large %>">
-          </a>
-        </div>
-        <div class="media-body media-middle">
-          <span class="qty"><%= product.quantity %>x</span>
-          <a href="<%= product.path %>"><%= product.name %></a>
-          <div class="checkout-price">
-            <%= product.price.display_price %>
-          </div>
-        </div>
-        <a class="remove-product delete-item" href="#0" data-id="<%= product.line_item_id %>"></a>
+      <div class="clearfix">
+        <a href="<%= product.path %>" class="cart-item-title"><%= product.name %></a>
+        <a class="remove-product fa fa-close pull-right link-grey" href="#0" data-id="<%= product.line_item_id %>"></a>
       </div>
+      <div class="cart-item-image-holder pull-left">
+        <a href="<%= product.path %>">
+          <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.large %>">
+        </a>
+      </div>
+      <div class="cart-item-info">
+        <div class="heading">
+          <span class="qty"> Qty: <%= product.quantity %></span>
+          <span>/</span>
+          <span>Size: <%= product.size.presentation %></span>
+          <span>/</span>
+          <span>Color: <span class="color" style="border: 1px solid gray; background-color: <%= product.color.value %>"></span></span>
+        </div>
+      </div>
+      <div class="cart-prices">
+        <div><%= product.price.display_price %></div>
+        <% for making_option in product.making_options: %>
+          <div class="small">
+            + <%= making_option.display_price %><%= making_option.name %>
+            <a href="#" class="fa fa-close making-option-remove" data-id="<%= making_option.id %>"></a>
+          </div>
+        <% end %>
+        <% for customization in product.customizations: %>
+          <div class="small">
+            + <%= customization.display_price %> <%= customization.name %>
+            <a href="#" class="fa fa-close customization-remove" data-id="<%= customization.id %>"></a>
+          </div>
+        <% end %>
     </li>
   <% end %>
 </ul>

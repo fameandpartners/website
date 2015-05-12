@@ -12,6 +12,7 @@ class UserCart::ProductsController < UserCart::BaseController
         size_id: params[:size_id],
         color_id: params[:color_id],
         customizations_ids: params[:customizations_ids],
+        making_options_ids: params[:making_options_ids],
         quantity: 1
       }
     )

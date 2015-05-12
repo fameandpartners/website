@@ -63,26 +63,26 @@ describe Marketing::Subscriber do
 
       # by user last_sign_in_ip
       user.last_sign_in_ip = ip
-      expect( Marketing::Subscriber.new(ip_address: ip ).details['ip_address']).to eq(ip)
+      expect( Marketing::Subscriber.new(ipaddress: ip ).details['ipaddress']).to eq(ip)
 
       # by provided
-      expect( Marketing::Subscriber.new(ip_address: ip ).details['ip_address']).to eq(ip)
+      expect( Marketing::Subscriber.new(ipaddress: ip ).details['ipaddress']).to eq(ip)
 
       # nil
-      expect( Marketing::Subscriber.new(email: user.email).details['ip_address']).to be_nil
+      expect( Marketing::Subscriber.new(email: user.email).details['ipaddress']).to be_nil
     end
 
     it "returns valid country name" do
       expect(
-        Marketing::Subscriber.new(ip_address: '46.191.225.134').details['country']
+        Marketing::Subscriber.new(ipaddress: '46.191.225.134').details['country']
       ).to eq('Russian Federation')
 
       expect(
-        Marketing::Subscriber.new(ip_address: '70.209.137.95').details['country']
+        Marketing::Subscriber.new(ipaddress: '70.209.137.95').details['country']
       ).to eq('United States')
 
       expect(
-        Marketing::Subscriber.new(ip_address: 'invalid ip').details['country']
+        Marketing::Subscriber.new(ipaddress: 'invalid ip').details['country']
       ).to be_nil
     end
 
@@ -92,7 +92,7 @@ describe Marketing::Subscriber do
       subject = Marketing::Subscriber.new
       subject.stub(:marketing_user_visit){ user_visit }
 
-      expect(subject.details['referrer']).to eq(user_visit.referrer)
+      expect(subject.details['source']).to eq(user_visit.referrer)
     end
 
     it "returns valid campaign" do
@@ -102,6 +102,21 @@ describe Marketing::Subscriber do
       subject = Marketing::Subscriber.new
       subject.stub(:marketing_user_visit){ user_visit }
       expect(subject.details['campaign']).to eq(user_visit.utm_campaign)
+    end
+  end
+
+  context "#set purchase date" do
+    it "works only for existing user" do
+      expect(CampaignMonitor).not_to receive(:schedule)
+      Marketing::Subscriber.new.set_purchase_date
+    end
+
+    it "schedules CampaignMonitor#set_purchase_date" do
+      subsriber = Marketing::Subscriber.new(user: user)
+      date = double('date')
+
+      expect(CampaignMonitor).to receive(:schedule).with(:set_purchase_date, user, date)
+      subsriber.set_purchase_date(date)
     end
   end
 end

@@ -4,7 +4,7 @@ Spree::LineItem.class_eval do
 
   has_one :fabrication
 
-  has_many :making_options, foreign_key: :product_id, class_name: 'LineMakingOption'
+  has_many :making_options, foreign_key: :product_id, class_name: '::LineItemMakingOption', dependent: :destroy
 
   after_save do
     order.clean_cache!
@@ -15,11 +15,19 @@ Spree::LineItem.class_eval do
   end
 
   def price
+    total_price = super
+
+    total_price += making_options_price
+
     if personalization.present?
-      super + personalization.price
-    else
-      super
+      total_price += personalization.price
     end
+
+    total_price
+  end
+
+  def making_options_price
+    making_options.sum(&:price)
   end
 
   def in_sale?
