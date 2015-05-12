@@ -38,6 +38,7 @@ class Products::CollectionDetails
   end
 
   def read
+    fast_making_taxon if fast_making.present?
     colorize_taxon if color.present?
     deliverize_taxon if fast_delivery?
     taxon
@@ -72,6 +73,16 @@ class Products::CollectionDetails
     taxon.footer            = ''
     taxon.banner.title      = 'Express Delivery Dresses'
     taxon.banner.subtitle   = 'High-fashion styles for fast-paced social butterflies.'
+  end
+
+  def fast_making_taxon
+    taxon.meta_title        = "Shop the latest express delivery dresses"
+    taxon.title             = "Shop and customize express delivery dresses at Fame & Partners"
+    taxon.description       = ''
+    taxon.footer            = ''
+    taxon.banner.title      = 'GET IT FIRST!'
+    taxon.banner.subtitle   = 'Dresses delivered to you in 2-5 business days for as little as $29 express making fee'
+    taxon.banner.image      = '/assets/category-banners/express-making.jpg'
   end
 
   def color_data
