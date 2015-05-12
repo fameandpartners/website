@@ -320,21 +320,21 @@ hr
 
 // product making options panel
 - if @product.making_options.present?
-  #product-making-options-content.product-side-panel
-    button.close-btn
-      = image_tag "cross.png", alt: 'close button'
-
-    .col-md-12
-      - @product.making_options.each do |option|
+  #product-making-options-content.product-side-panel.production-time-panel
+    button.close-btn = image_tag "cross.png", alt: 'close button'
+    h2 Production time
+    p You now have the option to receive your dress within 2-5 business days for as little as $29 express making fee
+    
+    - @product.making_options.each do |option|
+      .production-time-box
+        .icon.icon-delivery-express
         h2 = option.name
-        .row
-          .col-md-6.col-md-offset-3
-            a.btn.btn-block.btn-secondary.making-option href="#" data-id=option.id data-name=option.name data-price=option.display_price
-              = "+#{ option.display_price }"
-        br
-      br
+        p Get your order within 2-5 working days
+        a.btn.btn-block.btn-secondary.making-option href="#" data-id=option.id data-name=option.name data-price=option.display_price
+          = "+#{ option.display_price }"
+    .production-time-box
+      .icon.icon-delivery
       h2 Standard making
-      .row
-        .col-md-6.col-md-offset-3
-          a.btn.btn-block.btn-secondary.making-option data-id="original" data-name="original" data-price=""
-            | +$0
+      p Your order will arrive in 7-10 working days
+      a.btn.btn-block.btn-secondary.making-option data-id="original" data-name="original" data-price=""
+        | +$0
