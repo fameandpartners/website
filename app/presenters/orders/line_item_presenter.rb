@@ -6,7 +6,7 @@ module Orders
   class LineItemPresenter
     extend Forwardable
 
-    def_delegators :@shipment, :shipped?, :shipped_at
+    def_delegators :shipment, :shipped?, :shipped_at
     def_delegators :@wrapped_order,
                    :projected_delivery_date,
                    :tracking_number,
@@ -20,19 +20,19 @@ module Orders
                    :variant,
                    :personalization,
                    :factory,
-                   :fabrication
+                   :fabrication,
+                   :price,
+                   :quantity
 
-
-
-
-
-    attr_reader :shipment, :wrapped_order
+    attr_reader :wrapped_order
     
     def initialize(item, wrapped_order)
-      @wrapped_order = wrapped_order
-      @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(item) }
-
       @item = item
+      @wrapped_order = wrapped_order
+    end
+
+    def shipment
+      @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(@item) }
     end
 
     alias_method :order, :wrapped_order
@@ -153,7 +153,7 @@ module Orders
       if personalization.present?
         personalization.size
       else
-        variant.dress_size.name
+        variant.dress_size.try(:name) || 'Unknown Size'
       end
     end
 

@@ -1,7 +1,10 @@
 ruby:
-  product_paths = { default: collection_product_path(@product, site_version: current_site_version.to_param) }
+  url_params = params.except(:controller, :action, :product_slug)
+  url_params.merge!(site_version: current_site_version.to_param)
+  product_paths = { default: collection_product_path(@product, url_params) }
+
   @product.default_color_options.each do |color|
-    product_paths[color.id] = "#{product_paths[:default]}?color=#{color.name}"
+    product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
   end
 
   init_product_details_page = "
@@ -81,7 +84,7 @@ ruby:
   .col-sm-12.screen-height
   .col-md-4.col-md-offset-8.col-sm-6.col-sm-offset-6.product-details.product-section--selection.no-padding
     .row
-      h2 = @product.name
+      h1 = @product.name
       p.product-section-description
       p#product-price
         = product_price_with_discount(@product.price, @product.discount)

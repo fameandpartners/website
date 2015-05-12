@@ -64,6 +64,11 @@
 // Profile/Account Settings
 //= require partials/account_settings_page
 
+// campaigns
+//= require partials/fitgau_reminder
+
+
+
 jQuery(document).ready(function($){
   // function add_script(src) {
   //   var script_element = document.createElement('script');
@@ -76,11 +81,11 @@ jQuery(document).ready(function($){
   // add_script('/assets/javascripts/styleguide/js/sg-scripts.js');
 
 
-	$('#forgot-password').on('click', function(e) {
-		e.preventDefault();
-		email = $('#spree_user_email').val()
-		window.location = $(this).attr('href') + '?email=' + email;
-	});
+  $('#forgot-password').on('click', function(e) {
+    e.preventDefault();
+    email = $('#spree_user_email').val()
+    window.location = $(this).attr('href') + '?email=' + email;
+  });
 
   //home page slider
   $(function() {

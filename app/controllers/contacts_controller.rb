@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
 
   def new
     @contact = Contact.new(:site_version => current_site_version.code)
-    @title = "Contact - " + default_seo_title
+    title('Contact', default_seo_title)
     @description = ""
   end
 
@@ -20,5 +20,6 @@ class ContactsController < ApplicationController
   end
   
   def success
+    title('Thank You', default_seo_title)
   end
 end

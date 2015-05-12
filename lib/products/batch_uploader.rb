@@ -9,10 +9,10 @@ module Products
 
     include ActionView::Helpers::TextHelper # for truncate
 
-    def initialize
+    def initialize(available_on)
       @@titles_row_numbers = [8, 10, 11, 12]
       @@first_content_row_number = 13
-      @available_on = 1.days.ago
+      @available_on = available_on
     end
 
     def parse_file(file_path)
@@ -378,7 +378,7 @@ module Products
         price: args[:price_in_aud],
         description: args[:description],
         taxon_ids: args[:taxon_ids] || [],
-        available_on: product.available_on || @available_on
+        available_on: @available_on || product.available_on
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)

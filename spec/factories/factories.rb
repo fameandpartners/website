@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :factory do
-    name { Faker::Company.name  }
+    name { %w[Southside Westside Eastside Northton].sample  }
   end
 end
