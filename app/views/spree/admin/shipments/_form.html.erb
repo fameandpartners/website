@@ -7,6 +7,7 @@
           <th><%= t(:sku) %></th>
           <th><%= t(:item_description) %></th>
           <th><%= t(:status) %></th>
+          <th><%= t(:factory) %></th>
           <th><%= t(:note) %></th>
         </tr>  
       </thead>
@@ -26,6 +27,7 @@
               <%= '(' + variant_options(inventory_unit.variant) + ')' unless inventory_unit.variant.option_values.empty? %>
             </td>
             <td><%= t(inventory_unit.state) %></td>
+            <td><%= inventory_unit.variant.product.factory %></td>
             <td>
               <% if inventory_unit.shipment == @shipment %>
                 <%= t(:included_in_this_shipment) %>

@@ -9,12 +9,6 @@
   float: right;
 }
 
-#gmap {
-  width: 500px;
-  height: 600px;
-  float: right;
-}
-
 .blog-posts-list {
   display: none;
 }
@@ -174,4 +168,12 @@ ul.clean {
 .container {
     width: inherit!important;
     padding: 0 0.5rem;
+}
+
+// Missing bootstrap :(
+table.admin-table-condensed {
+  margin:0;
+  td, th {
+    padding: 5px;
+  }
 }
