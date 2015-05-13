@@ -1,19 +1,19 @@
 x.page-content.index
   ul.rslides
     li
-      a href="/here-comes-the-sun-collection"
+      = link_to here_comes_the_sun_collection_path
         = image_tag "home-page-tiles/here-comes-the-sun-#{current_site_version.code}.jpg", alt: 'Here comes the Sun', class: 'img-responsive portrait-img'
     li
-      a href="/dresses"
+      = link_to dresses_path
         = image_tag "home-page-tiles/taste-of-fame.jpg", alt: 'Taste of Fame', class: 'img-responsive portrait-img'
     li
-      a href="/dresses/graduation"
+      = link_to build_taxon_path('Graduation')
         = image_tag "home-page-tiles/graduation-#{current_site_version.code}.jpg", alt: 'Graduation Dresses', class: 'img-responsive portrait-img'
     li
-      a href="/prom-collection"
+      = link_to prom_collection_path
         = image_tag "home-page-tiles/prom.jpg", alt: 'Prom Collection', class: 'img-responsive portrait-img'
     li
-      a href="/bridesmaid-dresses"
+      = link_to bridesmaid_collection_path
         = image_tag "home-page-tiles/bridesmaids.jpg", alt: 'Bridesmaid Dresses', class: 'img-responsive portrait-img'
 
 
@@ -44,12 +44,18 @@ x.page-content.index
       small formal dresses<br>
       | for every event
     ul.list-inline
-      li : a href="/dresses/graduation" grad dresses
-      li : a href="/dresses/prom" prom dresses
-      li : a href="/dresses/formal" formal dresses
-      li : a href="/bridesmaid-dresses" bridesmaids dresses
-      li : a href="/dresses/cocktail" cocktail dresses
-      li : a href="/dresses" ball gowns
+      li
+        = link_to 'grad dresses', build_taxon_path('Graduation')
+      li
+        = link_to 'prom dresses', build_taxon_path('Prom')
+      li
+        = link_to 'formal dresses', build_taxon_path('Formal')
+      li
+        = link_to 'bridesmaids dresses', bridesmaid_collection_path
+      li
+        = link_to 'cocktail dresses', build_taxon_path('Cocktail')
+      li
+        = link_to 'ball gowns', build_taxon_path('Ball Gowns')
 
   .col-md-4.brand-pink.text-center.shop-with-us
     h4 Dedicated, specialist sample<br>rooms &amp; dress makers

@@ -4,6 +4,6 @@ dl
     ul.clean
       - @order.line_items.map do |i|
         li
-          = link_to i.product.sku, admin_product_product_properties_path(i.product)
+          = link_to i.product.sku, edit_admin_product_path(i.product)
           '  -
           = i.factory
