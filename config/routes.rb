@@ -229,6 +229,11 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
+    get '/styling-session' => 'style_sessions#new'
+    resource 'style-session', as: 'style_session', only: [:new, :create] do
+      get 'success'
+    end
+
     get '/contact' => 'contacts#new'
     resource 'contact', as: 'contact', only: [:new, :create] do
       get 'success'

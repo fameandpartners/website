@@ -6,7 +6,7 @@
         .col-md-12.col-sm-12.ribbon-column
           .ribbon
             = image_tag src='new-logo.svg', :class => 'fame-logo', :alt => 'Fame & Partners'
-            = image_tag src='fashion-it-girl/popsugar.png', :class => 'popsugar', :alt => 'Fame & Partners'
+            = image_tag src='fashion-it-girl/popsugar_au_stacked_pink.png', :class => 'popsugar', :alt => 'Popsugar Logo'
 
             .squares
             h1
@@ -32,7 +32,7 @@
           span = image_tag src='new-logo.svg', :class => 'fame-logo', :alt => 'Fame & Partners'
           br
           |and &nbsp;
-          span = image_tag src='fashion-it-girl/popsugar.png', :class => 'popsugar', :alt => 'Popsugar logo'
+          span = image_tag src='fashion-it-girl/popsugar_au_stacked_pink.png', :class => 'popsugar', :alt => 'Popsugar logo'
           | &nbsp;+ your dream formal outfit ($1000 value)
         p.runner-up Runner up prizes: 1 of 5 Fashion Maven positions 1 of 50 Fashion Ambassador positions
         .bottom-arrow
@@ -66,7 +66,3 @@
 
   .application
     h4 Remember to come back here on Monday 18th of May when applications are open!
-
-
-= content_for :inline_javascript do
-  | new window.page.FashionITGirlReminder({form: "#fashion-it-girl-reminder"});

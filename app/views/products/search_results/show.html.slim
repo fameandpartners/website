@@ -37,7 +37,8 @@ ruby:
     - if results.none?
       .row.relative
         .col.col-md-12
-          p Don't sweat it. <a href="/dresses">Browse our dresses</a>.
+          p
+          | Don't sweat it. #{link_to('Browse our dresses', dresses_path)}
 
     - else
       - results.products.each_slice(4) do |products|
