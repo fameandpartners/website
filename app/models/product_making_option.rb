@@ -6,12 +6,16 @@ class ProductMakingOption < ActiveRecord::Base
   DEFAULT_OPTION_TYPE = 'fast_making'
   DEFAULT_OPTION_PRICE = BigDecimal.new(29)
 
+  attr_accessible :option_type, :currency, :price, :active
+
   validates :option_type, inclusion: OPTION_TYPES, presence: true
+  validates :option_type, uniqueness: { scope: :product_id }
 
   scope :fast_making, -> { where(option_type: 'fast_making') }
   scope :active, -> { where(active: true) }
 
   def assign_default_attributes
+    self.active      = true
     self.variant_id  ||= (product.present? ? product.master.id : nil)
     self.price       ||= DEFAULT_OPTION_PRICE
     self.currency    ||= SiteVersion.default.currency

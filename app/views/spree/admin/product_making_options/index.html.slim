@@ -1,0 +1,42 @@
+- content_for :page_title do
+  = t(:listing_product_making_options)
+
+- content_for :page_actions do
+  .toolbar data-hook="toolbar"
+    ul.toolbar.inline-menu
+      li#new_product_making_option_link
+        = link_to 'Add Making Option', new_admin_product_making_option_path(@product), remote: true, class: 'icon-plus button', id: 'admin_new_product_making_option'
+
+= render 'spree/admin/shared/product_sub_menu'
+
+= render 'spree/admin/shared/product_tabs', current: 'Accessories'
+
+#new_product_making_option data-hook="new-product-making-option"
+
+
+- if @making_options.blank?
+  .no-objects-found = t(:no_results) 
+- else
+  table.index.sortable#product_making_options
+    colgroup
+      col style="width: 10%;"
+      col style="width: 40%;"
+      col style="width: 30%;"
+      col style="width: 20%;"
+
+    thead
+      tr
+        th
+        th Name
+        th Price
+        th Tools
+
+    tbody
+      - @making_options.each do |making_option|
+        tr data-id="#{making_option.id}" id=( spree_dom_id making_option )
+          td
+            span.handle 
+          td = making_option.name
+          td = making_option.display_price
+          td
+            = link_to 'Delete', admin_product_making_option_path(@product, making_option), remote: true, method: 'delete'

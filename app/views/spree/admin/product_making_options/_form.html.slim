@@ -1,0 +1,25 @@
+.new-product-step
+  = f.field_container :option_type do 
+    = f.label :option_type, t(:option_type)
+      span.required *
+      br
+    = f.select :option_type, options_from_collection_for_select(ProductMakingOption::OPTION_TYPES, :to_s, :humanize)
+    = f.error_message_on :option_type
+
+  = f.field_container :price do 
+    = f.label :price do
+      = t(:price)
+      span.required *
+      br
+    = f.text_field :price, class: 'price'
+    = f.error_message_on :price
+
+  = f.field_container :currency do 
+    = f.label :currency do
+      = t(:currency)
+      span.required *
+      br
+    = f.text_field :currency, class: 'currency'
+    = f.error_message_on :currency
+
+
