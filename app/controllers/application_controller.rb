@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
 
   def check_site_version
     # redirects should work only on non-ajax GET requests from users
-    return if (!request.get? || request.xhr?)
+    return if (!request.get? || request.xhr? || request_from_bot?)
 
     if params[:site_version].blank?
       if current_site_version.default?
@@ -57,6 +57,12 @@ class ApplicationController < ActionController::Base
         redirect_to url_with_correct_site_version
       end
     end
+  end
+
+  def request_from_bot?
+    user_agent = request.env["HTTP_USER_AGENT"]
+    #user_agent =~ /(bot|Google|Slurp)/i
+    user_agent =~ /(Baidu|bot|Google|Facebook|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)/i
   end
 
   def handle_marketing_campaigns
