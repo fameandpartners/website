@@ -1,4 +1,4 @@
-class ContactMailer < ActionMailer::Base
+class StyleSessionMailer < ActionMailer::Base
 
   default :from => configatron.noreply
 

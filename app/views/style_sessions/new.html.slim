@@ -1,0 +1,68 @@
+.page-title.default.style-session
+
+  = image_tag src='contact/fame-white-logo.png', :class => '', :alt => 'Fame & Partners'
+
+.style-session-header
+
+.register-for-session
+  .top-arrow
+  h1
+    | Register for
+    br
+    span your styling session
+  .bottom-arrow 
+
+.page-content.contact
+  .container.relative
+    .form-global
+      = form_for @style_session, url: style_session_path, method: :post, html: {class: 'form'} do |f|
+        .row
+          .col-md-12.form-group
+            label Full name
+            = f.text_field :full_name, :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label Email
+            = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label Phone
+            = f.text_field :phone, :class => 'form-control form-control-md'
+            p.hint
+              | (include country code)
+        .row
+          .col-md-12.form-group
+            label date of birth
+            = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label where do you live (e.g. Sydney, Australia or New York, United States)
+            = f.text_field :location, :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label Skype ID (so we can do a video chat session)
+            = f.text_field :skype_id, :class => 'form-control form-control-md'
+            p.hint
+              | (optional)
+        .row
+          .col-md-12.form-group
+            label 1st preferred time or the session
+            = f.select :preference1, options_for_select(["9am-11am", "11am-1pm", "1pm-3pm", "3pm-5pm", "5pm-7pm", "7pm-9pm"]), {}, :class => 'form-control form-control-md selectbox'
+        .row
+          .col-md-12.form-group
+            label 2nd preferred time or the session
+            = f.select :preference2, options_for_select(["9am-11am", "11am-1pm", "1pm-3pm", "3pm-5pm", "5pm-7pm", "7pm-9pm"]), {}, :class => 'form-control form-control-md selectbox'
+        .row
+          .col-md-12.form-group
+            label 3rd preferred time or the session
+            = f.select :preference3, options_for_select(["9am-11am", "11am-1pm", "1pm-3pm", "3pm-5pm", "5pm-7pm", "7pm-9pm"]), {}, :class => 'form-control form-control-md selectbox'
+        .row
+          .col-md-12.form-group
+            label timezone
+            = f.select :timezone, options_for_select(["UTC   Universal Coordinated Time  GMT", "ECT   European Central Time   GMT+1:00", "EET   Eastern European Time   GMT+2:00", "ART   (Arabic) Egypt Standard Time  GMT+2:00", "EAT   Eastern African Time  GMT+3:00", "MET   Middle East Time  GMT+3:30", "NET   Near East Time  GMT+4:00", "PLT   Pakistan Lahore Time  GMT+5:00", "IST   India Standard Time   GMT+5:30", "BST   Bangladesh Standard Time  GMT+6:00", "VST   Vietnam Standard Time   GMT+7:00", "CTT   China Taiwan Time   GMT+8:00", "JST   Japan Standard Time   GMT+9:00", "ACT   Australia Central Time  GMT+9:30"]), {}, :class => 'form-control form-control-md selectbox'
+
+
+        .row
+          .col-md-12.form-group
+            .submit
+              = f.submit "Apply now", class: 'btn btn-black btn-block'
