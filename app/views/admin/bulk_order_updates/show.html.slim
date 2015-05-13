@@ -1,0 +1,96 @@
+= render :partial => 'sub_menu'
+
+table
+  tr
+    th Created On
+    td colspan=3 = bulk_update.created_at
+  tr
+    th Created By
+    td colspan=3 = bulk_update.user
+  tr
+    th Filename
+    td colspan=3 = bulk_update.filename
+  tr
+    th Total Items
+    td colspan=3 = bulk_update.line_item_updates.count
+  tr
+    th id
+    td colspan=3 = bulk_update.id
+  tr
+    th Actions
+    td
+      = form_for bulk_update do |f|
+        = f.hidden_field :find_spree_matches, value: 'true'
+        = f.button '1. Match Up with Spree'
+    td
+      = form_for bulk_update do |f|
+        = f.hidden_field :setup_shipments, value: 'true'
+        = f.button '2. Setup Shipments'
+    td
+      = form_for bulk_update do |f|
+        = f.hidden_field :mark_valid_shipped, value: 'true'
+        = f.button '3. Ship Now!', confirm: 'Cannot be undone! Are you sure?'
+table
+  thead
+    tr
+      th colspan=9 CSV
+      th Matching
+      th colspan=10 Spree
+    tr
+      th #
+      th order_date
+      th order_number
+      th style_name
+      th size
+      th quantity
+      th colour
+      th tracking_number
+      th dispatch_date
+      /th delivery_method
+      th match_errors
+      th order
+      th line_item
+      th make state
+      th shipment
+      th shipped?
+      th tracking
+      th state
+      th why
+
+      th shipment_errors
+      th processed_at
+      /th updated_at
+
+  - bulk_update.line_item_updates.each do |lit|
+    tr
+      td = lit.row_number
+      td = lit.order_date
+      td = lit.order_number
+      td = lit.style_name
+      td = lit.size
+      td = lit.quantity
+      td = lit.colour
+      td = lit.tracking_number
+      td = lit.dispatch_date
+      /td = lit.delivery_method
+      td = lit.match_errors.to_sentence
+      td = link_to(lit.order_number, admin_order_path(lit.order_number)) if lit.order_id
+      td = lit.line_item.variant.sku if lit.line_item
+      td = lit.line_item.fabrication.try(:state) if lit.line_item
+      td
+        - if lit.shipment
+          = lit.shipment.number
+      td
+        - if lit.shipment
+          = maybe_date(lit.shipment.shipped_at, '-')
+      td
+        - if lit.shipment
+          - cssclass = lit.shipment_tracking_state
+          span style=cssclass = lit.shipment.tracking if lit.shipment
+      td = lit.state
+      td = lit.process_reason
+
+      td = lit.shipment_errors.to_sentence
+      td = lit.processed_at
+      /td = lit.updated_at
+

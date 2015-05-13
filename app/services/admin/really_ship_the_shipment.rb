@@ -6,6 +6,7 @@ module Admin
 
     validates_presence_of :tracking_number, :order, :shipment
     validate :shippable_order?, :not_already_shipped?
+    validate :shippable_order?, :shippable_shipment?, :not_already_shipped?
 
     def initialize(shipment, tracking_number)
       @shipment        = shipment
@@ -22,6 +23,12 @@ module Admin
     end
 
     private
+
+    def shippable_shipment?
+      unless shipment.can_ship?
+        errors.add :shipment, "#{shipment.number} is not shippable."
+      end
+    end
 
     def shippable_order?
       unless order.can_ship?

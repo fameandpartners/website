@@ -1,0 +1,8 @@
+= render :partial => 'sub_menu'
+
+h2 Bulk Order Update
+
+= form_tag admin_bulk_order_updates_path, :method => 'post', :multipart => true do
+  = file_field_tag :bulk_order_update_file, required: true
+  button type='submit' Upload
+
