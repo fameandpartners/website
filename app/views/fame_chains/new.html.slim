@@ -3,18 +3,23 @@
     .page-title--details
       = image_tag '_famechain/title.png', width: 432, height: 146, alt: 'The Fame Chain'
 
-      p.text-center A network of fashion forward,<br>free thinking bloggers increasing their cred<br>through being linked.
+      p.text-center
+        | A network of fashion forward
+        br
+        | free thinking bloggers increasing their cred
+        br
+        | through being linked.
 
 .page-content.thefamechain
   .container-fluid.call-to-actions
     .row
-      a href="/dresses/prom"
+      = link_to build_taxon_path('Prom')
         .col-md-4.text-center.no-padding
           = image_tag "_famechain/glam_rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
       a href="#email-container"
         .col-md-4.text-center.no-padding
           = image_tag "_famechain/glam_rebel2.jpg", alt: 'Newsletter sign up', class: 'img-responsive'
-      a href="/style-consultation"
+      = link_to style_consultation_path
         .col-md-4.text-center.no-padding
           = image_tag "_famechain/real_prom.jpg", alt: 'Styling session sign up', class: 'img-responsive'
 

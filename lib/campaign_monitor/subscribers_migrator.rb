@@ -45,13 +45,15 @@ class SubscribersMigrator
       file.puts('<subscribers>')
       lists.each_with_index do |list, index|
         list_details = list.details
+        list_title   = list_details['Title']
 
         list.each_subscriber do |subscriber, index|
           data = subscriber.to_hash
           data.merge!({
             'EmailAddress' => subscriber.EmailAddress,
             'Name' => subscriber.Name,
-            'Joindate' => subscriber.Date
+            'Joindate' => subscriber.Date,
+            'List' => list_title
           })
           file.puts(data.to_xml(skip_instruct: true))
         end

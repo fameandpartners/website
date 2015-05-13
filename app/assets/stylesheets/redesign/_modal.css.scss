@@ -11,7 +11,7 @@
     width: 1px;
     margin-left: -1px;
   }
-  .vex-overlay { 
+  .vex-overlay {
     background-color: rgba(255, 255, 255, 0.4);
   }
   .vex-content {
@@ -37,7 +37,7 @@
 // @end Default layout
 // -----------------
 
-// Sign Up dialog 
+// Sign Up dialog
 .vex-dialog-signup {
   .vex-content {
     max-width: 570px;
@@ -267,7 +267,8 @@
 
       .standard-form  {
         height: 35px;
-        margin-bottom:15px;
+        margin-bottom: 15px;
+        line-height: 35px;
       }
     }
   }
@@ -347,7 +348,7 @@
     height: 400px;
     width: 700px;
     color: #fff;
-    
+
     &:before {
       content: '';
       display: inline-block;

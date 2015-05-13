@@ -37,6 +37,7 @@
           <%= link_to_delete shipment, :url => admin_order_shipment_url(@order, shipment), :no_text => true %>
         </td>
       </tr>
+      <%= render partial: 'inventory_units', locals: { shipment: shipment } %>
     <% end %>
   </tbody>
 </table>

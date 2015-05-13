@@ -56,16 +56,8 @@ Spree::Order.class_eval do
 
   def create_shipment!
     shipping_method(true)
-    if shipment.present?
-      # reset instance variable cache, calling shipment again will get it from last shipments ( updated ones )
-      @shipment = nil
-      shipment.update_attributes!({:shipping_method => shipping_method, :inventory_units => self.inventory_units}, :without_protection => true)
-    else
-      self.shipments << ::Spree::Shipment.create!({ :order => self,
-                                        :shipping_method => shipping_method,
-                                        :address => self.ship_address,
-                                        :inventory_units => self.inventory_units}, :without_protection => true)
-    end
+    return unless shipments.empty?
+    self.shipments = Shipping::AssignByFactory.new(self).create_shipments!
   end
 
   def cache_key
