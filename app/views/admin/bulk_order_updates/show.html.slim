@@ -61,36 +61,36 @@ table
       th processed_at
       /th updated_at
 
-  - bulk_update.line_item_updates.each do |lit|
+  - bulk_update.line_item_updates.each do |liu|
     tr
-      td = lit.row_number
-      td = lit.order_date
-      td = lit.order_number
-      td = lit.style_name
-      td = lit.size
-      td = lit.quantity
-      td = lit.colour
-      td = lit.tracking_number
-      td = lit.dispatch_date
-      /td = lit.delivery_method
-      td = lit.match_errors.to_sentence
-      td = link_to(lit.order_number, admin_order_path(lit.order_number)) if lit.order_id
-      td = lit.line_item.variant.sku if lit.line_item
-      td = lit.line_item.fabrication.try(:state) if lit.line_item
+      td = liu.row_number
+      td = liu.order_date
+      td = liu.order_number
+      td = liu.style_name
+      td = liu.size
+      td = liu.quantity
+      td = liu.colour
+      td = liu.tracking_number
+      td = liu.dispatch_date
+      /td = liu.delivery_method
+      td = liu.match_errors.to_sentence
+      td = link_to(liu.order_number, admin_order_path(liu.order_number)) if liu.order_id
+      td = liu.line_item.variant.sku if liu.line_item
+      td = liu.line_item.fabrication.try(:state) if liu.line_item
       td
-        - if lit.shipment
-          = lit.shipment.number
+        - if liu.shipment
+          = liu.shipment.number
       td
-        - if lit.shipment
-          = maybe_date(lit.shipment.shipped_at, '-')
+        - if liu.shipment
+          = maybe_date(liu.shipment.shipped_at, '-')
       td
-        - if lit.shipment
-          - cssclass = lit.shipment_tracking_state
-          span style=cssclass = lit.shipment.tracking if lit.shipment
-      td = lit.state
-      td = lit.process_reason
+        - if liu.shipment
+          - cssclass = liu.shipment_tracking_state
+          span style=cssclass = liu.shipment.tracking
+      td = liu.state
+      td = liu.process_reason
 
-      td = lit.shipment_errors.to_sentence
-      td = lit.processed_at
-      /td = lit.updated_at
+      td = liu.shipment_errors.to_sentence
+      td = liu.processed_at
+      /td = liu.updated_at
 
