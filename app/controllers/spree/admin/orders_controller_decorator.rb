@@ -71,7 +71,7 @@ module Spree
       end
 
       def default_per_page
-        Spree::Config[:orders_per_page]
+        15 # Spree::Config[:orders_per_page]
       end
     end
   end

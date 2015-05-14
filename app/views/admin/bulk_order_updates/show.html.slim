@@ -1,0 +1,96 @@
+= render :partial => 'sub_menu'
+
+table
+  tr
+    th Created On
+    td colspan=3 = bulk_update.created_at
+  tr
+    th Created By
+    td colspan=3 = bulk_update.user
+  tr
+    th Filename
+    td colspan=3 = bulk_update.filename
+  tr
+    th Total Items
+    td colspan=3 = bulk_update.line_item_updates.count
+  tr
+    th id
+    td colspan=3 = bulk_update.id
+  tr
+    th Actions
+    td
+      = form_for bulk_update do |f|
+        = f.hidden_field :find_spree_matches, value: 'true'
+        = f.button '1. Match Up with Spree'
+    td
+      = form_for bulk_update do |f|
+        = f.hidden_field :setup_shipments, value: 'true'
+        = f.button '2. Setup Shipments'
+    td
+      = form_for bulk_update do |f|
+        = f.hidden_field :mark_valid_shipped, value: 'true'
+        = f.button '3. Ship Now!', confirm: 'Cannot be undone! Are you sure?'
+table
+  thead
+    tr
+      th colspan=9 CSV
+      th Matching
+      th colspan=10 Spree
+    tr
+      th #
+      th order_date
+      th order_number
+      th style_name
+      th size
+      th quantity
+      th colour
+      th tracking_number
+      th dispatch_date
+      /th delivery_method
+      th match_errors
+      th order
+      th line_item
+      th make state
+      th shipment
+      th shipped?
+      th tracking
+      th state
+      th why
+
+      th shipment_errors
+      th processed_at
+      /th updated_at
+
+  - bulk_update.line_item_updates.each do |liu|
+    tr
+      td = liu.row_number
+      td = liu.order_date
+      td = liu.order_number
+      td = liu.style_name
+      td = liu.size
+      td = liu.quantity
+      td = liu.colour
+      td = liu.tracking_number
+      td = liu.dispatch_date
+      /td = liu.delivery_method
+      td = liu.match_errors.to_sentence
+      td = link_to(liu.order_number, admin_order_path(liu.order_number)) if liu.order_id
+      td = liu.line_item.variant.sku if liu.line_item
+      td = liu.line_item.fabrication.try(:state) if liu.line_item
+      td
+        - if liu.shipment
+          = liu.shipment.number
+      td
+        - if liu.shipment
+          = maybe_date(liu.shipment.shipped_at, '-')
+      td
+        - if liu.shipment
+          - cssclass = liu.shipment_tracking_state
+          span style=cssclass = liu.shipment.tracking
+      td = liu.state
+      td = liu.process_reason
+
+      td = liu.shipment_errors.to_sentence
+      td = liu.processed_at
+      /td = liu.updated_at
+

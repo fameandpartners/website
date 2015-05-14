@@ -24,7 +24,7 @@ module Orders
                    :price,
                    :quantity
 
-    attr_reader :wrapped_order
+    attr_reader :wrapped_order, :item
 
     def initialize(item, wrapped_order)
       @item = item
