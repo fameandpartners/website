@@ -1,12 +1,10 @@
 table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
   tbody
     tr
-      td width="38"
+      td width="15"
       td
         table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
           tbody
-            tr
-              td height="27"
             tr
               td.date style="color: #999; font: 400 12px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
                 = Date.today.to_formatted_s(:long)
@@ -20,7 +18,8 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
             tr
               td style="color: #666; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
                 p style="margin: 0 0 20px;" Hi #{@order.full_name},
-                p style="margin: 0;" Thanks for shopping with Fame & Partners. Your order is being processed, and we'll send you another email to confirm when it has been shipped.
+                p style="margin: 0;" 
+                  | Thanks for shopping with Fame & Partners. Your order is being processed, and we'll send you another email to confirm when it has been shipped.
             tr
               td height="30"
             tr
@@ -38,11 +37,11 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                     - @order.line_items.each do |item|
                       tr
                         td style="color: #000; font-size: 13px; text-align: left; font-weight: 400; padding: 7px 6px; vertical-align: top;"
-                          div style="font-weight: 700" =' raw(item.variant.product.name)
-                          div =' raw(item.options_text)
-                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 400; padding: 7px 6px; vertical-align: top;" =' item.variant.sku
-                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 400; padding: 7px 6px; vertical-align: top;" =' item.quantity
-                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 700; padding: 7px 6px; vertical-align: top;" =' item.display_amount
+                          div style="font-weight: 700" => raw(item.variant.product.name)
+                          div => raw(item.options_text)
+                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 400; padding: 7px 6px; vertical-align: top;" => item.variant.sku
+                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 400; padding: 7px 6px; vertical-align: top;" => item.quantity
+                        td style="color: #000; font-size: 13px; text-align: left; font-weight: 700; padding: 7px 6px; vertical-align: top;" => item.display_amount
                   tr
                     td style="border-top: 1px solid #d6d6d6; padding: 4px 6px;"
                     td style="border-top: 1px solid #d6d6d6; padding: 4px 6px;"
@@ -52,7 +51,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                     tr
                       td style="padding: 4px 6px;"
                       td style="padding: 4px 6px;"
-                      td style="text-align: right; font-size: 13px; font-weight: 400; padding: 4px 6px;" =' raw(adjustment.label)
+                      td style="text-align: right; font-size: 13px; font-weight: 400; padding: 4px 6px;" => raw(adjustment.label)
                       td style="font-size: 13px; font-weight: 700; padding: 4px 6px;" = adjustment.display_amount
                   tr
                     td style="padding: 4px 6px;"
@@ -69,4 +68,4 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                 span style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" 1300 924 860
             tr
               td height="27"
-      td width="38"
+      td width="15"

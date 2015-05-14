@@ -108,6 +108,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'quiet_assets'
   gem 'rspec-activemodel-mocks'
+  gem 'rspec-collection_matchers'
   gem 'rspec-rails', '~> 3.1'
   gem 'shoulda-matchers'
   gem 'spring'
