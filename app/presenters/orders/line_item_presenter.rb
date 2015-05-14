@@ -8,7 +8,6 @@ module Orders
 
     def_delegators :shipment, :shipped?, :shipped_at
     def_delegators :@wrapped_order,
-                   :projected_delivery_date,
                    :tracking_number,
                    :number,
                    :total_items,
@@ -43,6 +42,10 @@ module Orders
 
     def style_name
       variant.try(:product).try(:name) || 'Missing Variant'
+    end
+
+    def projected_delivery_date
+      @_projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(@item, wrapped_order).delivery_date
     end
 
     def fabrication_status

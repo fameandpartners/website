@@ -26,6 +26,10 @@ Spree::LineItem.class_eval do
     total_price
   end
 
+  def fast_making?
+    making_options.any? {|option| option.product_making_option.fast_making? }
+  end
+
   def making_options_price
     making_options.sum(&:price)
   end
