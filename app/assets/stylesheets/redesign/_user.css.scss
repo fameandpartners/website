@@ -153,122 +153,6 @@ h3.phone span {
   }
 }
 
-.returns {
-
-  .background-grey {
-    background-color: #f5f5f5;
-  }
-
-  @media only screen and (min-width: 801px) {
-    .table > tbody > tr > td {
-      border-top: black solid 1px;
-    }
-
-    .table > tbody + tbody {
-      border-top: none;
-    }
-  }
-
-  .chosen-container-single.form-control {
-    width: 200px !important ;
-    min-width: 0;
-    text-align: left;
-    float: right;
-  }
-
-  p.option {
-    text-transform: uppercase;
-    font-size: 12px;
-  }
-
-  table {
-    background-color: white;
-    text-align: left;
-
-    td {
-      padding: 0;
-      img {
-        float: left;
-
-        @media only screen and (max-width: 800px) {
-          clear: both
-        }
-      }
-
-      p {
-        padding-left: 15rem;
-        @media only screen and (min-width: 801px) {
-          padding-top: 3rem;
-        }
-      }
-    }
-  }
-
-  .btn {
-    padding: 0;
-  }
-
-  .btn.cancel {
-    height: 45px;
-    padding: 0 !important;
-    width: 100%;
-    margin-bottom: 4rem;
-
-    a {
-      color: white;
-    }
-  }
-
-  .btn.submit {
-    height: 45px;
-    width: 100%;
-    margin-bottom: 4rem;
-    background-color: black;
-
-    a {
-      color: white;
-    }
-  }
-
-  .row.header {
-    h2 {
-      text-align: center;
-      padding-left: 2rem;
-    }
-
-    h2.order-number {
-      margin-bottom: 0.5rem;
-    }
-
-    h2.order-date {
-      margin-top: 0;
-      font-size: 15px;
-    }
-  }
-}
-
-.btn.return {
-  height: 45px;
-  padding: 0 !important;
-  color: #FFFFFF;
-  width: 92%;
-  background-color: black;
-
-  a {
-    color: #FFFFFF;
-    font-size: 12px;
-
-    &:hover {
-      color: black;
-    }
-  }
-
-  &:hover {
-    background-color: #eeddf0;
-    color: black !important;
-  }
-}
-
 @media only screen and (max-width: 800px) {
 
   .table > tbody > tr > td {
@@ -299,5 +183,17 @@ h1.order {
   .page-content.order {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+
+a.btn.return {
+  color: #FFFFFF;
+  width: 92%;
+  background-color: black;
+  font-size: 12px;
+
+  &:hover {
+    background-color: #eeddf0;
+    color: black !important;
   }
 }

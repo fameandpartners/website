@@ -22,7 +22,8 @@
                 th Order status
                 th Shipping state
                 th Total
-                th.returns-column Return or exchange
+                - if Features.active?(:order_returns, current_spree_user)
+                  th.returns-column Return or exchange
             tbody
               - @orders.each do |order|
                 tr
@@ -42,6 +43,6 @@
                       | Not yet shipped
 
                   td data-title="total" = order.display_total
-                  td.returns-column
-                    button.btn.return
-                      = link_to 'return or exchange', new_user_returns_path(:order_id => order.number)
+                  - if Features.active?(:order_returns, current_spree_user)
+                    td.returns-column
+                      = link_to 'return or exchange', new_user_returns_path(:order_id => order.number), :class => 'btn return'
