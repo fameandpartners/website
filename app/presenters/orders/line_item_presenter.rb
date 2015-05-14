@@ -25,7 +25,7 @@ module Orders
                    :quantity
 
     attr_reader :wrapped_order
-    
+
     def initialize(item, wrapped_order)
       @item = item
       @wrapped_order = wrapped_order
@@ -52,7 +52,7 @@ module Orders
         :processing
       end
     end
-    
+
     def colour
       if personalization.present?
         personalization.color
@@ -72,7 +72,7 @@ module Orders
     def display_price
       Spree::Price.new(amount: price).display_price.to_s
     end
-    
+
     def customisations
       if personalizations?
         customs = Array.wrap(
@@ -146,9 +146,6 @@ module Orders
       as_report.keys.collect { |k| "#{k} #{cn_headers[k]}" }
     end
 
-
-    private
-
     def size
       if personalization.present?
         personalization.size
@@ -157,6 +154,8 @@ module Orders
       end
     end
 
+    private
+    
     # Seriously, wtf are custom dresses so hard?
     def image
       @image ||= begin
