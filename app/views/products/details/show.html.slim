@@ -273,6 +273,7 @@ hr
     .row
       .col-md-12.custom
         h2=  "Custom Colors +#{@product.custom_color_price}"
+        p.explanation.hidden Express making is only available on our recommended colours
 
         - @product.custom_color_options.each_slice(2) do |colors|
             - colors.each do |color|

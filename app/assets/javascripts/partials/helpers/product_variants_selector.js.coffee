@@ -30,6 +30,10 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @sizeInput.on('change', @onChangeHandler)
     @customizationsInput.on('change', @onChangeHandler)
     @makingOptionsInput.on('change', @onChangeHandler)
+
+    # don't allow to select custom color & express making at the same time
+    @colorInput.on('change', @updateMakingOptionsAvailablity)
+    @makingOptionsInput.on('change', @updateCustomColorsAvailability)
     @
 
   onChangeHandler: (e) =>
@@ -59,6 +63,20 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       selected.variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
 
     return selected
+
+  updateCustomColorsAvailability: (e) =>
+    e.preventDefault()
+    if @makingOptionsInput.val()
+      @colorInput.disableCustomColors()
+    else
+      @colorInput.enableCustomColors()
+
+  updateMakingOptionsAvailablity: (e) =>
+    e.preventDefault()
+    if @colorInput.customValue()
+      @makingOptionsInput.disable()
+    else
+      @makingOptionsInput.enable()
 
   # note: it should return errors statuses
   validate: () ->
