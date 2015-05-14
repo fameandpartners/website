@@ -74,6 +74,9 @@ FameAndPartners::Application.routes.draw do
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
+    # New style qiuz
+    get '/style-quiz' => 'statics#style_quiz'
+
     #edits
     get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
     get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
