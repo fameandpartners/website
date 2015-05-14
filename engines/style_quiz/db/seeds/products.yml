@@ -1,0 +1,972 @@
+---
+- :sku: 4B012SL
+  :name: VIOLETTA
+  :tags:
+  - Georgette
+- :sku: 4B14SL
+  :name: RUFFLE DREAM
+  :tags:
+  - Georgette
+- :sku: 4B016DL
+  :name: STARRY SKY
+  :tags:
+  - Sequin
+- :sku: 4B032
+  :name: ALICE TWO PIECE
+  :tags:
+  - Satin
+  - Chiffon
+- :sku: 4B054
+  :name: LACED HEARTLINE
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B064
+  :name: ROSEMARY
+  :tags:
+  - Taffeta
+  - Satin
+- :sku: 4B067
+  :name: WILLOW
+  :tags:
+  - Lace
+  - Velvet
+- :sku: 4B086
+  :name: VELVET PARADISE
+  :tags:
+  - Velvet
+- :sku: 4B088
+  :name: ROSEBUD
+  :tags:
+  - Lace
+- :sku: 4B093
+  :name: FULL SHADOW
+  :tags:
+  - Taffeta
+- :sku: 4B094
+  :name: IN DREAMS
+  :tags:
+  - Georgette
+  - Satin
+- :sku: 4B096
+  :name: RIVERSIDE
+  :tags:
+  - Stretch
+  - Satin
+- :sku: 4B097
+  :name: CROSS TIDE
+  :tags:
+  - Georgette
+- :sku: 4B099
+  :name: VINTAGE QUEEN
+  :tags:
+  - Lace
+- :sku: 4B100
+  :name: TAYLA
+  :tags:
+  - Lace
+  - Velvet
+- :sku: 4B102
+  :name: MYSTIC TWO PIECE
+  :tags:
+  - Mesh
+  - Satin
+- :sku: 4B107
+  :name: WIRED HEART
+  :tags:
+  - Georgette
+- :sku: 4B108
+  :name: ISOLA
+  :tags:
+  - Georgette
+- :sku: 4B113
+  :name: GLACIER
+  :tags:
+  - Georgette
+- :sku: 4B118
+  :name: MONIQUE
+  :tags:
+  - Lace
+  - Mesh
+- :sku: 4B123
+  :name: POPPY
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B130
+  :name: ASTRID
+  :tags:
+  - Taffeta
+  - Satin
+- :sku: 4B132
+  :name: WICKED FLARE
+  :tags:
+  - Neoprene
+  - Scuba
+- :sku: 4B139
+  :name: LACED FLORAL
+  :tags:
+  - Lace
+- :sku: 4B141
+  :name: BACKLESS DREAMER
+  :tags:
+  - Georgette
+- :sku: 4B152
+  :name: VOYAGE
+  :tags:
+  - Lace
+- :sku: 4B156
+  :name: VIOLA TWO PIECE
+  :tags:
+  - Crepe
+  - Stretch
+- :sku: 4B157
+  :name: ANABELLA TWO PIECE
+  :tags:
+  - Duchess Satin
+  - Satin
+- :sku: 4B159
+  :name: MELISSA
+  :tags:
+  - Chiffon
+- :sku: 4B160
+  :name: BLAKE
+  :tags:
+  - Taffeta
+- :sku: 4B161
+  :name: HAYLEY TWO PIECE
+  :tags:
+  - Silk
+  - Crepe
+- :sku: 4B162
+  :name: MOLLY
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B164
+  :name: PARADISE DREAM
+  :tags:
+  - Georgette
+- :sku: 4B166
+  :name: ADRIANA
+  :tags:
+  - Chiffon
+  - Georgette
+- :sku: 4B169
+  :name: TEEGAN
+  :tags:
+  - Taffeta
+  - Satin
+- :sku: 4B321
+  :name: EMPIRE
+  :tags:
+  - Chiffon
+  - Mesh
+- :sku: 4B322
+  :name: OFF DUTY TWO PIECE
+  :tags:
+  - Tulle
+  - Jersey
+- :sku: 4B323
+  :name: FIFI TWO PIECE
+  :tags:
+  - Lace
+  - Satin
+- :sku: 4B324
+  :name: CHARLI TWO PIECE
+  :tags:
+  - Sequin
+- :sku: 4B325
+  :name: ZIGGY TWO PIECE
+  :tags:
+  - Lace
+- :sku: 4B335
+  :name: DECO GLAMOUR
+  :tags:
+  - Georgette
+- :sku: 4B364
+  :name: DECADENT DREAM
+  :tags:
+  - Georgette
+- :sku: 4B365
+  :name: JEWEL DOLL TWO PIECE
+  :tags:
+  - Tulle
+  - Sequin
+- :sku: 4B366
+  :name: MOONLIGHT
+  :tags:
+  - Mesh
+  - Chiffon
+- :sku: 4B367
+  :name: DELICATE QUEEN
+  :tags:
+  - Chiffon
+- :sku: 1310023CL
+  :name: ODESSA
+  :tags:
+  - Chiffon
+- :sku: 1310029CL
+  :name: TEMPTEST
+  :tags:
+  - Jersey
+  - Stretch
+- :sku: 1310029W
+  :name: RHODES
+  :tags:
+  - Georgette
+  - Jersey
+- :sku: FPSS13053
+  :name: IMOGEN
+  :tags:
+  - Chiffon
+- :sku: FPSS13054
+  :name: GRAPHIC DOLL
+  :tags:
+  - Georgette
+- :sku: FPSS13062
+  :name: AFTER LIGHT
+  :tags:
+  - Georgette
+- :sku: 4B200
+  :name: GINA
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B201
+  :name: GEMMA
+  :tags:
+  - Duchess Satin
+  - Organza
+- :sku: 4B202
+  :name: CARISSA
+  :tags:
+  - Duchess Satin
+  - Satin
+- :sku: 4B203
+  :name: ARIA
+  :tags:
+  - Georgette
+- :sku: 4B204
+  :name: ELIZA
+  :tags:
+  - Georgette
+- :sku: 4B205
+  :name: CAMILA TWO PIECE
+  :tags:
+  - Duchess Satin
+- :sku: 4B206
+  :name: JAMIE
+  :tags:
+  - Duchess Satin
+- :sku: 4B207
+  :name: IZZIE
+  :tags:
+  - Georgette
+- :sku: 4B208
+  :name: ELLERY
+  :tags:
+  - Chiffon
+  - Satin
+- :sku: 4B209
+  :name: JENNA
+  :tags:
+  - Mesh
+  - Georgette
+- :sku: 4B211
+  :name: PIPPA
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B212
+  :name: RYLIE
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B181
+  :name: ELENA
+  :tags:
+  - Power Mesh
+  - Mesh
+- :sku: 4B182
+  :name: FRINGE LINE
+  :tags:
+  - Ponti
+  - Jersey
+- :sku: 4B183
+  :name: MIDNIGHT MOON
+  :tags:
+  - Mesh
+  - Ponti
+- :sku: 4B184
+  :name: STARS GAZE
+  :tags:
+  - Crepe
+- :sku: 4B185
+  :name: ZOE TWO PIECE
+  :tags:
+  - Satin
+  - Duchess Satin
+- :sku: 4B186
+  :name: TIA
+  :tags:
+  - Satin
+  - Duchess Satin
+- :sku: 4B187
+  :name: SKYLER
+  :tags:
+  - Georgette
+- :sku: 4B188
+  :name: SCARLET TWO PIECE
+  :tags:
+  - Ponti
+  - Jersey
+- :sku: 4B189
+  :name: LUNAR
+  :tags:
+  - Crepe
+  - Mesh
+- :sku: 4B190
+  :name: KRISTA
+  :tags:
+  - Jersey
+  - Stretch
+- :sku: 4B192
+  :name: JAYNE TWO PIECE
+  :tags:
+  - Lace
+- :sku: 4B193
+  :name: JORDAN
+  :tags:
+  - Lace
+  - Satin
+- :sku: 4B194
+  :name: TIMELESS
+  :tags:
+  - Ponti
+  - Jersey
+- :sku: 4B195
+  :name: ROYALE
+  :tags:
+  - Power Mesh
+  - Mesh
+- :sku: 4B196
+  :name: VALERIE
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B197
+  :name: WISH UPON
+  :tags:
+  - Chiffon
+- :sku: 4B215
+  :name: CHANEL
+  :tags:
+  - Scuba
+  - Neoprene
+- :sku: 4B216
+  :name: ELLE
+  :tags:
+  - Scuba
+  - Neoprene
+- :sku: 4B217
+  :name: HEIDI
+  :tags:
+  - Lurex
+  - Jersey
+- :sku: 4B218
+  :name: KATE
+  :tags:
+  - Lurex
+- :sku: 4B219
+  :name: NAOMI
+  :tags:
+  - Power Mesh
+  - Ponti
+- :sku: 4B220
+  :name: GISELE
+  :tags:
+  - Power Mesh
+  - Ponti
+- :sku: 4B221
+  :name: CINDY
+  :tags:
+  - Satin
+- :sku: 4B222
+  :name: TARA
+  :tags:
+  - Sequin
+- :sku: 4B223
+  :name: DARIA
+  :tags:
+  - Lace
+- :sku: 4B224
+  :name: COCO
+  :tags:
+  - Lace
+- :sku: 4B226
+  :name: EVA
+  :tags:
+  - Scuba
+  - Neoprene
+- :sku: 4B253B
+  :name: ETHEREAL FLORAL
+  :tags:
+  - Georgette
+- :sku: 4B253C
+  :name: AZALEA FLORAL
+  :tags:
+  - Georgette
+- :sku: 4B255
+  :name: MODERN MESH
+  :tags:
+  - Georgette
+  - Power Mesh
+- :sku: 4B257
+  :name: SHEER GENIE
+  :tags:
+  - Mesh
+  - Georgette
+- :sku: 4B261
+  :name: CHLOE
+  :tags:
+  - Organza
+- :sku: 4B263
+  :name: KARLIE
+  :tags:
+  - Stretch
+  - Polyester
+- :sku: 4B267
+  :name: LAUREN
+  :tags:
+  - Jacquard
+- :sku: 4B272
+  :name: TRACY
+  :tags:
+  - Satin
+  - Duchess Satin
+- :sku: 4B275
+  :name: MADELINE
+  :tags:
+  - Polyester
+  - Crepe
+- :sku: 4B276
+  :name: HELENA
+  :tags:
+  - Duchess Satin
+  - Satin
+- :sku: 4B277
+  :name: ANASTASIA
+  :tags:
+  - Duchess Satin
+  - Satin
+- :sku: 4B280
+  :name: LACE DEBUTANTE
+  :tags:
+  - Lace
+- :sku: 4B284
+  :name: TULLE BELLE
+  :tags:
+  - Tulle
+  - Mesh
+- :sku: 4B284B
+  :name: TULLE DREAM
+  :tags:
+  - Tulle
+  - Mesh
+- :sku: 4B285
+  :name: GEO LACE SIREN
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B286
+  :name: DELICATE DOLL
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B288
+  :name: LACE MELODIE
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B289
+  :name: MIDNIGHT LACE
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B290
+  :name: EMMA KATE
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B294
+  :name: GLAM ANGEL
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B296
+  :name: FLORAL DREAMER
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B297
+  :name: DAISY
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B297B
+  :name: ROSE FLORAL TWO PIECE
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B297C
+  :name: AZALEA FLORAL TWO PIECE
+  :tags:
+  - Georgette
+- :sku: 4B299B
+  :name: BACKLESS FLORAL
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B300
+  :name: FIRST IN LINE
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B302
+  :name: CYNTHIA
+  :tags:
+  - Georgette
+- :sku: 4B303
+  :name: ALYSSA
+  :tags:
+  - Georgette
+- :sku: 4B316
+  :name: LUCY TWO PIECE
+  :tags:
+  - Organza
+  - Sequin
+- :sku: 4B251
+  :name: GLAM CAPRI
+  :tags:
+  - Georgette
+- :sku: 4B254
+  :name: BOHO SPIRIT
+  :tags:
+  - Georgette
+- :sku: 4B256
+  :name: ELEGANT ANGEL
+  :tags:
+  - Georgette
+- :sku: 4B265
+  :name: SOPHIA
+  :tags:
+  - Stretch
+  - Polyester
+- :sku: 4B269
+  :name: ISABELLE
+  :tags:
+  - Crepe
+- :sku: 4B270
+  :name: OLIVIA
+  :tags:
+  - Crepe
+- :sku: 4B271
+  :name: CATHERINE
+  :tags:
+  - Taffeta
+  - Satin
+- :sku: 4B283
+  :name: GLAM LACE
+  :tags:
+  - Lace
+- :sku: 4B287
+  :name: CUT OUT QUEEN
+  :tags:
+  - Stretch
+  - Power Mesh
+- :sku: 4B291
+  :name: JULIETTE
+  :tags:
+  - Georgette
+  - Mesh
+- :sku: 4B292
+  :name: ALEXA
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B304
+  :name: EVELYN
+  :tags:
+  - Ponti
+  - Lace
+- :sku: 4B305
+  :name: SWEET REBEL
+  :tags:
+  - Georgette
+- :sku: 4B310
+  :name: IRENE
+  :tags:
+  - Sequin
+- :sku: 4B314
+  :name: STARS DREAM
+  :tags:
+  - Georgette
+  - Mesh
+- :sku: 4B250
+  :name: FROM ABOVE
+  :tags:
+  - Georgette
+- :sku: 4B252
+  :name: VINTAGE VALOUR
+  :tags:
+  - Georgette
+- :sku: 4B253
+  :name: ETHEREAL CROSS
+  :tags:
+  - Georgette
+- :sku: 4B260
+  :name: GEM TWO PIECE
+  :tags:
+  - Sequin
+  - Satin
+- :sku: 4B264
+  :name: BACKSTREET BABE
+  :tags:
+  - Stretch
+  - Polyester
+- :sku: 4B266
+  :name: BAILEY
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B268
+  :name: HEAD OVER HEELS
+  :tags:
+  - Satin
+  - Taffeta
+- :sku: 4B274
+  :name: METAL MUSE
+  :tags:
+  - Georgette
+- :sku: 4B278
+  :name: CLARISSA TWO PIECE
+  :tags:
+  - Duchess Satin
+- :sku: 4B279
+  :name: MESH DEBUTANTE
+  :tags:
+  - Mesh
+  - Duchess Satin
+- :sku: 4B281
+  :name: SOLACE
+  :tags:
+  - Satin
+  - Stretch
+- :sku: 4B282
+  :name: LACE REBEL
+  :tags:
+  - Lace
+- :sku: 4B299
+  :name: BACKLESS BOHO
+  :tags:
+  - Stretch
+  - Polyester
+- :sku: 4B307
+  :name: MESH BELLE
+  :tags:
+  - Mesh
+  - Duchess Satin
+- :sku: 4B308
+  :name: DELICATE DANCER
+  :tags:
+  - Duchess Satin
+  - Satin
+- :sku: 4B309
+  :name: ESSIE
+  :tags:
+  - Lace
+- :sku: 4B311
+  :name: PENELOPE
+  :tags:
+  - Sequin
+- :sku: 4B315
+  :name: SADIE
+  :tags:
+  - Georgette
+- :sku: 4B327
+  :name: RADIANT GYPSY
+  :tags:
+  - Georgette
+- :sku: 4B371
+  :name: FRINGED DREAMER
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B379
+  :name: PERRT
+  :tags:
+  - Georgette
+- :sku: 4B382
+  :name: JOYA
+  :tags:
+  - Georgette
+- :sku: 4B86
+  :name: IRIS
+  :tags:
+  - Sequin
+- :sku: 4B387
+  :name: FROM AFAR
+  :tags:
+  - Georgette
+- :sku: 4B388
+  :name: KARINNA
+  :tags:
+  - Stretch
+  - Polyester
+- :sku: 4B201
+  :name: HOLLY
+  :tags:
+  - Georgette
+  - Chiffon
+- :sku: 4B337
+  :name: CHEVRON TWO PIECE
+  :tags:
+  - Chiffon
+  - Crepe
+- :sku: 4B380
+  :name: AGGY TWO PIECE
+  :tags:
+  - Georgette
+- :sku: 4B383
+  :name: VEE
+  :tags:
+  - Duchess Satin
+  - Satin
+- :sku: 4B343
+  :name: SHIMMER GENIE
+  :tags:
+  - Sequin
+  - Chiffon
+- :sku: 4B390
+  :name: BETTY TWO PIECE
+  :tags:
+  - Lace
+- :sku: 4B409
+  :name: SWEET DREAMER
+  :tags:
+  - Chiffon
+- :sku: 4B320
+  :name: DECADENT FLORAL TWO PIECE
+  :tags:
+  - Satin
+  - Chiffon
+- :sku: 4B326
+  :name: JULI TWO PIECE
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B328
+  :name: ANGELIC TRANCE
+  :tags:
+  - Georgette
+  - Power Mesh
+- :sku: 4B368
+  :name: LACE DANCER
+  :tags:
+  - Lace
+- :sku: 4B381
+  :name: OPHELIA
+  :tags:
+  - Georgette
+- :sku: 4B385
+  :name: CUT OUT MAVEN
+  :tags:
+  - Stretch
+  - Power Mesh
+- :sku: 4B389
+  :name: DESSI
+  :tags:
+  - Chiffon
+  - Lace
+- :sku: 4B391
+  :name: PRIAH TWO PIECE
+  :tags:
+  - Georgette
+- :sku: 4B395
+  :name: LACE PETAL
+  :tags:
+  - Lace
+- :sku: 4B396
+  :name: SUMMER ANGEL
+  :tags:
+  - Chiffon
+- :sku: 4B397
+  :name: PARK AVENUE TWO PIECE
+  :tags:
+  - Lace
+  - Chiffon
+- :sku: 4B398
+  :name: MIRABELLA
+  :tags:
+  - Georgette
+- :sku: 4B399
+  :name: JEMIMA
+  :tags:
+  - Georgette
+- :sku: 4B400
+  :name: IVY
+  :tags:
+  - Georgette
+- :sku: 4B401
+  :name: ORLANDRIA
+  :tags:
+  - Chiffon
+- :sku: 4B402
+  :name: 'MIRA TWO PIECE '
+  :tags:
+  - Georgette
+  - Tulle
+- :sku: 4B403
+  :name: MELANIE TWO PIECE
+  :tags:
+  - Lace
+- :sku: 4B404
+  :name: CARRERA
+  :tags:
+  - Georgette
+- :sku: 4B405
+  :name: RITA TWO PIECE
+  :tags:
+  - Duchess Satin
+  - Satin
+- :sku: 4B406
+  :name: ROLA TWO PIECE
+  :tags:
+  - Duchess Satin
+  - Satin
+- :sku: 4B407
+  :name: GRETA TWO PIECE
+  :tags:
+  - Duchess Satin
+  - Georgette
+- :sku: 4B08
+  :name: HIGH PLACES
+  :tags:
+  - Georgette
+- :sku: 4B110
+  :name: DECADENT FRINGE
+  :tags:
+  - Chiffon
+- :sku: 4B411
+  :name: ANGENT OF LOVE
+  :tags:
+  - Georgette
+- :sku: 4B412
+  :name: TRIBE OF LOVE
+  :tags:
+  - Georgette
+- :sku: 4B413
+  :name: SECOND SIGHT
+  :tags:
+  - Georgette
+- :sku: 4B414
+  :name: LACED SIGHT
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B415
+  :name: WINGED HERO
+  :tags:
+  - Chiffon
+- :sku: 4B416
+  :name: MONOCHROME MOON
+  :tags:
+  - Georgette
+- :sku: 4B417
+  :name: FLORAL MOON
+  :tags:
+  - Georgette
+  - Power Mesh
+- :sku: 4B418
+  :name: VINTAGE MOON
+  :tags:
+  - Georgette
+- :sku: 4B419
+  :name: BOHO BREEZE
+  :tags:
+  - Georgette
+- :sku: 4B421
+  :name: FLORAL SWAN
+  :tags:
+  - Satin
+  - Duchess Satin
+- :sku: 4B422
+  :name: FLORAL PRINCESS
+  :tags:
+  - Satin
+  - Duchess Satin
+- :sku: 4B341
+  :name: DELICATE DAME
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B342
+  :name: TULLE BETTIE
+  :tags:
+  - Tulle
+  - Mesh
+- :sku: 4B343
+  :name: ANALYNNE
+  :tags:
+  - Duchess Satin
+- :sku: 4B344
+  :name: GEO LACE VIXEN
+  :tags:
+  - Georgette
+  - Lace
+- :sku: 4B346
+  :name: HARPER
+  :tags:
+  - Georgette
+- :sku: 4B349
+  :name: PENNY
+  :tags:
+  - Sequin
+- :sku: 4B350
+  :name: GATHERED ANGEL
+  :tags:
+  - Georgette
+- :sku: 4B351
+  :name: LYNETTE
+  :tags:
+  - Ponti
+  - Lace
+- :sku: 4B352
+  :name: ALINA
+  :tags:
+  - Duchess Satin
+  - Satin
+- :sku: 4B356
+  :name: GARDEN GIRL
+  :tags:
+  - Lace
+- :sku: 4B363
+  :name: CHER
+  :tags:
+  - Duchess Satin
+  - Chiffon
+- :sku: 4B376
+  :name: FIONA TWO PIECE
+  :tags:
+  - Lace
+  - Jersey
+- :sku: 4B377
+  :name: DEDE TWO PIECE
+  :tags:
+  - Lace
+  - Cotton
+- :sku: 4B378
+  :name: MARTA
+  :tags:
+  - Chiffon

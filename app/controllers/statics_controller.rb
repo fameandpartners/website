@@ -118,9 +118,6 @@ class StaticsController < ApplicationController
     render :template => 'statics/unidays_lp', :layout => 'redesign/application'
   end
 
-
-
-
 # =======================================================================
 # OLD PAGES
 # =======================================================================

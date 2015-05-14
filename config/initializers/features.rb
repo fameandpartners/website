@@ -5,7 +5,12 @@ if Rails.env.development?
   Features.activate(:content_revolution)
 end
 
-Features.deactivate(:style_quiz)
+if Rails.env.production?
+  Features.deactivate(:style_quiz)
+else
+  Features.activate(:style_quiz)
+end
+
 Features.deactivate(:collection_content)
 Features.deactivate(:maintenance)
 Features.activate(:sales)

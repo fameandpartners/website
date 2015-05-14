@@ -1,0 +1,4 @@
+en-US:
+  date_format:
+    backend:  '%m/%d/%Y'
+    frontend: 'mm/dd/yy'

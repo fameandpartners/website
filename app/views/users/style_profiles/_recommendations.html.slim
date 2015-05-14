@@ -1,0 +1,24 @@
+ruby:
+  init_product_collection_moodboard_links = "
+    initProductCollectionMoodboardLinks({
+      container: '#recommendations .container',
+      buttons:   'span.moodboard'
+    });"
+
+= content_for :inline_javascript do
+  = raw init_product_collection_moodboard_links
+
+#recommendations.style-profile-tab-panel.tab-pane.text-center.active
+  .style-profile-tabs-title
+    span.tab-pane-close.visible-xs-inline-block: span.fa.fa-arrow-left
+    span Style recommendations
+  h4.font-forum EVERYONE HAS A BIT OF EACH PROFILE IN THEM, BUT YOU ARE MOSTLY #{ @style_profile.primary_user_style.title.upcase }.
+  p = @style_profile.primary_user_style.description
+
+  - if @products.any?
+    .style-recommendations-container
+      .row.row-inline.text-left
+        - @products.each_slice(4).each do |products_row|
+          - products_row.each do |product|
+            = render 'products/collections/product', product: product
+    = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get

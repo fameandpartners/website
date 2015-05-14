@@ -1,0 +1,47 @@
+- style_attributes = @style_profile.style_attributes
+
+#attributes.style-profile-tab-panel.tab-pane
+  .style-profile-tabs-title
+    span.tab-pane-close.visible-xs-inline-block: span.fa.fa-arrow-left
+    span Style attributes
+
+  .style-profile-attributes
+    .row
+      .col-sm-9
+        .form-control.form-control-md.disabled.text-left
+          .pull-left What is your hair colour?
+          .pull-right = style_attributes[:hair_color][:values].map(&:capitalize).join(',')
+      .col-sm-3
+        = link_to 'Edit', style_quiz_path(question_id: style_attributes[:hair_color][:question_id]), class: 'btn btn-md btn-block btn-black'
+
+    .row
+      .col-sm-9
+        .form-control.form-control-md.disabled.text-left
+          .pull-left What is your eye colour?
+          .pull-right = style_attributes[:eyes_color][:values].map(&:capitalize).join(',')
+      .col-sm-3
+        = link_to 'Edit', style_quiz_path(question_id: style_attributes[:eyes_color][:question_id]), class: 'btn btn-md btn-block btn-black'
+
+    .row
+      .col-sm-9
+        .form-control.form-control-md.disabled.text-left
+          .pull-left What colour dresses do you like to wear?
+          .pull-right = style_attributes[:dresses_color][:values].map(&:capitalize).join(',')
+      .col-sm-3
+        = link_to 'Edit', style_quiz_path(question_id: style_attributes[:dresses_color][:question_id]), class: 'btn btn-md btn-block btn-black'
+
+    .row
+      .col-sm-9
+        .form-control.form-control-md.disabled.text-left
+          .pull-left What is your body size?
+          .pull-right = style_attributes[:size][:values].map(&:capitalize).join(',')
+      .col-sm-3
+        = link_to 'Edit', style_quiz_path(question_id: style_attributes[:size][:question_id]), class: 'btn btn-md btn-block btn-black'
+
+    .row
+      .col-sm-9
+        .form-control.form-control-md.disabled.text-left
+          .pull-left What is your body shape?
+          .pull-right = style_attributes[:shape][:values].map(&:capitalize).join(',')
+      .col-sm-3
+        = link_to 'Edit', style_quiz_path(question_id: style_attributes[:shape][:question_id]), class: 'btn btn-md btn-block btn-black'

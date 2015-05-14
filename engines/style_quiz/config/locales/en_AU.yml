@@ -1,0 +1,4 @@
+en-AU:
+  date_format:
+    backend:  '%d/%m/%Y'
+    frontend: 'dd/mm/yy'

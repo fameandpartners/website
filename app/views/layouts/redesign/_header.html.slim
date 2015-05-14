@@ -26,7 +26,7 @@ ruby:
         $('#style-quiz-trigger').on('click', function(e) {
           e.preventDefault();
           $iframe = $('<iframe />', {
-            src: urlWithSitePrefix('/style_quiz'),
+            src: urlWithSitePrefix('#{ style_quiz_path }'),
             frameBorder: '0',
             width: '1102px',
             height: '680px'

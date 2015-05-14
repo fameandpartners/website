@@ -1,0 +1,334 @@
+---
+- :name: 1
+  :value: 1
+  :image: style_quiz/questions/dream_style/41.jpg
+  :tags:
+  - Burgundy
+  - Red
+  - Paisley
+  - Organza
+  - Sequin
+- :name: 2
+  :value: 2
+  :image: style_quiz/questions/dream_style/42.jpg
+  :tags:
+  - Sage
+  - Gold
+  - Tulle
+  - Sequin
+- :name: 3
+  :value: 3
+  :image: style_quiz/questions/dream_style/43.jpg
+  :tags:
+  - Marine Blue
+  - Navy
+  - Victorian
+  - Chiffon
+  - Silk
+- :name: 4
+  :value: 4
+  :image: style_quiz/questions/dream_style/44.jpg
+  :tags:
+  - Burgundy
+  - Orange
+  - Georgette
+- :name: 5
+  :value: 5
+  :image: style_quiz/questions/dream_style/45.jpg
+  :tags:
+  - Off White
+  - Stretch
+  - Jersey
+- :name: 6
+  :value: 6
+  :image: style_quiz/questions/dream_style/46.jpg
+  :tags:
+  - Green
+  - Metallic
+  - Stripes
+  - Georgette
+  - Sequin
+- :name: 7
+  :value: 7
+  :image: style_quiz/questions/dream_style/47.jpg
+  :tags:
+  - Grey
+  - Chiffon
+  - Lace
+- :name: 8
+  :value: 8
+  :image: style_quiz/questions/dream_style/48.jpg
+  :tags:
+  - Black
+  - Velvet
+- :name: 9
+  :value: 9
+  :image: style_quiz/questions/dream_style/49.jpg
+  :tags:
+  - Pale Pink
+  - Black
+  - Floral
+  - Tulle
+- :name: 10
+  :value: 10
+  :image: style_quiz/questions/dream_style/50.jpg
+  :tags:
+  - Yellow
+  - Ivory
+  - Floral
+  - Digital
+  - Silk
+  - Satin
+- :name: 11
+  :value: 11
+  :image: style_quiz/questions/dream_style/51.jpg
+  :tags:
+  - Gold
+  - Sequin
+- :name: 12
+  :value: 12
+  :image: style_quiz/questions/dream_style/52.jpg
+  :tags:
+  - Pink
+  - Tulle
+  - Sequin
+- :name: 13
+  :value: 13
+  :image: style_quiz/questions/dream_style/53.jpg
+  :tags:
+  - Blue
+  - Silver
+  - Sequin
+  - Organza
+- :name: 14
+  :value: 14
+  :image: style_quiz/questions/dream_style/54.jpg
+  :tags:
+  - Black
+  - Tulle
+- :name: 15
+  :value: 15
+  :image: style_quiz/questions/dream_style/55.jpg
+  :tags:
+  - Black
+  - Multi
+  - Floral
+  - Georgette
+  - Satin
+- :name: 16
+  :value: 16
+  :image: style_quiz/questions/dream_style/56.jpg
+  :tags:
+  - Lavender
+  - Lilac
+  - Chiffon
+- :name: 17
+  :value: 17
+  :image: style_quiz/questions/dream_style/57.jpg
+  :tags:
+  - Cherry Red
+  - Satin
+  - Silk
+- :name: 18
+  :value: 18
+  :image: style_quiz/questions/dream_style/58.jpg
+  :tags:
+  - Gold
+  - Pale Blue
+  - Victorian
+  - Baroque
+  - Organza
+  - Jacquard
+- :name: 19
+  :value: 19
+  :image: style_quiz/questions/dream_style/59.jpg
+  :tags:
+  - Light Blue
+  - Floral
+  - Silk
+  - Chiffon
+- :name: 20
+  :value: 20
+  :image: style_quiz/questions/dream_style/60.jpg
+  :tags:
+  - Honey
+  - Tulle
+  - Satin
+- :name: 21
+  :value: 21
+  :image: style_quiz/questions/dream_style/61.jpg
+  :tags:
+  - White
+  - Ponti
+- :name: 22
+  :value: 22
+  :image: style_quiz/questions/dream_style/62.jpg
+  :tags:
+  - Green
+  - Metallic
+  - Lurex
+- :name: 23
+  :value: 23
+  :image: style_quiz/questions/dream_style/63.jpg
+  :tags:
+  - Sky Blue
+  - Jersey
+  - Stretch
+- :name: 24
+  :value: 24
+  :image: style_quiz/questions/dream_style/64.jpg
+  :tags:
+  - Mauve
+  - Pink
+  - Ombre
+  - Floral
+  - Chiffon
+  - Satin
+- :name: 25
+  :value: 25
+  :image: style_quiz/questions/dream_style/65.jpg
+  :tags:
+  - Black
+  - Mesh
+  - Stretch
+- :name: 26
+  :value: 26
+  :image: style_quiz/questions/dream_style/66.jpg
+  :tags:
+  - Black
+  - White
+  - Monochrome
+  - Floral
+  - Organza
+  - Satin
+- :name: 27
+  :value: 27
+  :image: style_quiz/questions/dream_style/67.jpg
+  :tags:
+  - Grey
+  - Multi
+  - Floral
+  - Mesh
+  - Georgette
+- :name: 28
+  :value: 28
+  :image: style_quiz/questions/dream_style/68.jpg
+  :tags:
+  - Black
+  - Blue
+  - Satin
+- :name: 29
+  :value: 29
+  :image: style_quiz/questions/dream_style/69.jpg
+  :tags:
+  - White
+  - Black
+  - Watercolour
+  - Tie Dye
+  - Leather
+  - Silk
+- :name: 30
+  :value: 30
+  :image: style_quiz/questions/dream_style/70.jpg
+  :tags:
+  - Baby Pink
+  - Geometric
+  - Duchess Satin
+  - Jacquard
+- :name: 31
+  :value: 31
+  :image: style_quiz/questions/dream_style/71.jpg
+  :tags:
+  - Blush
+  - Pink
+  - Taffeta
+  - Duchess Satin
+- :name: 32
+  :value: 32
+  :image: style_quiz/questions/dream_style/72.jpg
+  :tags:
+  - White
+  - Georgette
+  - Crepe
+- :name: 33
+  :value: 33
+  :image: style_quiz/questions/dream_style/73.jpg
+  :tags:
+  - Pink
+  - Baby Pink
+  - Geometric
+  - Duchess Satin
+  - Jacquard
+- :name: 34
+  :value: 34
+  :image: style_quiz/questions/dream_style/74.jpg
+  :tags:
+  - Blood Red
+  - Lace
+  - Chiffon
+- :name: 35
+  :value: 35
+  :image: style_quiz/questions/dream_style/75.jpg
+  :tags:
+  - Fuschia
+  - Satin
+  - Silk
+- :name: 36
+  :value: 36
+  :image: style_quiz/questions/dream_style/76.jpg
+  :tags:
+  - Off White
+  - Paisley
+  - Victorian
+  - Organza
+  - Jacquard
+- :name: 37
+  :value: 37
+  :image: style_quiz/questions/dream_style/77.jpg
+  :tags:
+  - Grey
+  - Silver
+  - Watercolour
+  - Patchwork
+  - Organza
+  - Satin
+- :name: 38
+  :value: 38
+  :image: style_quiz/questions/dream_style/78.jpg
+  :tags:
+  - Navy
+  - Multi
+  - Floral
+  - Organza
+- :name: 39
+  :value: 39
+  :image: style_quiz/questions/dream_style/79.jpg
+  :tags:
+  - Nude
+  - Maroon
+  - Sequin
+  - Organza
+- :name: 40
+  :value: 40
+  :image: style_quiz/questions/dream_style/80.jpg
+  :tags:
+  - Silver
+  - Off White
+  - Organza
+  - Sequin
+- :name: 41
+  :value: 41
+  :image: style_quiz/questions/dream_style/123.jpg
+  :tags:
+  - Silver
+  - Off White
+  - Organza
+  - Sequin
+- :name: 42
+  :value: 42
+  :image: style_quiz/questions/dream_style/124.jpg
+  :tags:
+  - Silver
+  - Off White
+  - Organza
+  - Sequin

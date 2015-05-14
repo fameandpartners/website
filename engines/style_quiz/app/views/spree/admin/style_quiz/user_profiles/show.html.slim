@@ -1,0 +1,76 @@
+= render partial: 'spree/admin/style_quiz/shared/sub_menu'
+
+- content_for :page_title do
+  = t(:user_style_profile_details)
+
+fieldset.alpha.twelve.columns.no-border-bottom
+  legend User Details
+  - if @user_profile.user.present?
+    p
+      strong User:
+      = link_to @user_profile.user.fullname, admin_user_path(@user_profile.user)
+  p
+    strong Full name:
+    = @user_profile.fullname
+  p
+    strong Birthday:
+    = @user_profile.birthday.present? ?  @user_profile.birthday.to_s(:db) : 'none'
+  p
+    strong Email:
+    = @user_profile.email
+
+br
+.clearfix
+.row
+  h2 Answers
+
+table.index.compact#style-quiz-user-profile-answers
+  colgroup
+    col style="width: 20%;"
+    col style="width: 10%;"
+    col style="width: 30%;"
+
+  - @user_profile.answers.group_by(&:question_id).each do |question_id, answers|
+    - answers.each do |answer|
+      tr
+        td = link_to answer.question.code, admin_style_quiz_question_answers_path(answer.question)
+        td = link_to edit_admin_style_quiz_question_answer_path(answer.question, answer.id) do
+            - if answer.image
+              = image_tag answer.image, height: 50, style: 'overflow-x: hidden;'
+            - else
+              = answer.name
+        td = StyleQuiz::Tag.where(id: answer.tags).map{|tag| link_to tag.name, admin_style_quiz_tag_path(tag.id)}.join(', ').html_safe
+
+h2 Tags
+
+table.index.compact#style-quiz-user-profile-tags
+  colgroup
+    col style="width: 20%;"
+    col style="width: 30%;"
+  - @user_profile.tags.sort_by(&:last).reverse.each do |tag_id, relevance|
+    tr
+      td = StyleQuiz::Tag.find(tag_id).name
+      td = relevance
+
+- products = StyleQuiz::ProductsRecommendations.new(style_profile: @user_profile).read_all(limit: 12)
+- products = products.map{|product| [product, @user_profile.calculate_relevance_with(product)]}
+- if products.present?
+  h3 Recommendations
+  table.index.compact#style-quiz-user-profile-recommendations
+    colgroup
+      col style="width: 10%;"
+      col style="width: 20%;"
+      col style="width: 20%;"
+      col style="width: 30%;"
+    thead
+      th score
+      th name
+      th image
+      th tags
+    - products.sort_by(&:last).reverse.each do |product, relevance|
+      tr
+        td = relevance
+        td = link_to product.name, edit_admin_product_path(product)
+        td = image_tag Repositories::ProductImages.new(product: product).read.small
+        td
+          = StyleQuiz::Tag.where(id: product.tags).map{|tag| link_to tag.name, admin_style_quiz_tag_path(tag.id)}.join(', ').html_safe

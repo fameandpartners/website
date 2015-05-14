@@ -1,0 +1,31 @@
+/ Question 2/11
+.quiz-section id="#{ question.name }-question"
+  .quiz-section-title
+    h4.quiz-section-number Question #{ question_position }/#{ question_total }
+    h2 Build your colour palette.
+  .grid-container
+    / Hair
+    .quiz-catalog.text-center.hair
+      - question.answers.where(group: 'hair').each do |answer|
+        .quiz-catalog-item class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
+          .quiz-catalog-picture
+            .hair-box class=(answer.value.parameterize)
+          .quiz-catalog-title
+            => answer.name
+            .checkmark
+
+    .quiz-catalog.text-center.eyes
+      - question.answers.where(group: 'eyes').each do |answer|
+        .quiz-catalog-item class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
+          .quiz-catalog-picture
+            .eyes-box class=(answer.value.parameterize)
+          .quiz-catalog-title
+            = answer.name
+            .checkmark
+    
+    .row
+      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
+      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+    /.col-12.text-center = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+/ @end Question 2/11
+/ ------------------
