@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150508044557) do
+ActiveRecord::Schema.define(:version => 20150513043101) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -224,6 +224,14 @@ ActiveRecord::Schema.define(:version => 20150508044557) do
 
   add_index "bridesmaid_party_members", ["event_id"], :name => "index_bridesmaid_party_members_on_event_id"
   add_index "bridesmaid_party_members", ["spree_user_id"], :name => "index_bridesmaid_party_members_on_spree_user_id"
+
+  create_table "bulk_order_updates", :force => true do |t|
+    t.text     "user"
+    t.text     "filename"
+    t.datetime "processed_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "celebrities", :force => true do |t|
     t.string   "first_name"
@@ -479,6 +487,32 @@ ActiveRecord::Schema.define(:version => 20150508044557) do
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
 
+  create_table "line_item_updates", :force => true do |t|
+    t.integer  "row_number"
+    t.text     "order_date"
+    t.text     "order_number"
+    t.text     "style_name"
+    t.text     "size"
+    t.text     "quantity"
+    t.text     "colour"
+    t.text     "tracking_number"
+    t.text     "dispatch_date"
+    t.text     "delivery_method"
+    t.integer  "bulk_order_update_id"
+    t.integer  "order_id"
+    t.integer  "line_item_id"
+    t.integer  "shipment_id"
+    t.text     "state"
+    t.text     "process_reason"
+    t.text     "match_errors"
+    t.text     "shipment_errors"
+    t.datetime "processed_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "line_item_updates", ["bulk_order_update_id"], :name => "index_line_item_updates_on_bulk_order_update_id"
+
   create_table "marketing_user_visits", :force => true do |t|
     t.integer "spree_user_id"
     t.string  "user_token",    :limit => 64
@@ -519,6 +553,12 @@ ActiveRecord::Schema.define(:version => 20150508044557) do
 
   add_index "option_values_option_values_groups", ["option_value_id"], :name => "opovg_option_value_id"
   add_index "option_values_option_values_groups", ["option_values_group_id"], :name => "opovg_option_group_id"
+
+  create_table "order_return_requests", :force => true do |t|
+    t.integer  "order_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "payment_requests", :force => true do |t|
     t.integer  "order_id"
@@ -655,6 +695,17 @@ ActiveRecord::Schema.define(:version => 20150508044557) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "return_request_items", :force => true do |t|
+    t.integer  "order_return_request_id"
+    t.integer  "line_item_id"
+    t.integer  "quantity"
+    t.text     "action"
+    t.text     "reason_category"
+    t.text     "reason"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "similarities", :force => true do |t|

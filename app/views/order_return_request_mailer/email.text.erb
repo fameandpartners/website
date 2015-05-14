@@ -1,0 +1,17 @@
+
+Order Number: <%= @order_return_request.number %>
+Order Completed: <%= @order_return_request.completed_at.to_date %>
+
+<% @order_return_request.return_request_items.each do |item| %>
+--------------------------------------------
+<% if item.return_or_exchange? %>
+<%= item.action.upcase %>
+<% end %>
+Action: <%= item.action.titleize %>
+Reason: <%= item.reason_category %> <%= item.reason %>
+
+Item: <%= item.style_name %>
+Details: <%= "Size:#{item.country_size.to_i}, Color: #{item.colour_name}" %>
+Quantity: <%= item.order_quantity %>
+--------------------------------------------
+<% end %>

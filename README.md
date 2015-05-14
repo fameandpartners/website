@@ -99,7 +99,6 @@ truncate table spree_payments;
 truncate table spree_paypal_express_checkouts;
 truncate table spree_shipments;
 truncate table spree_state_changes;
-truncate table spree_state_changes;
 truncate table spree_tokenized_permissions;
 truncate table spree_user_authentications;
 truncate table user_style_profile_taxons;
