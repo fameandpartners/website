@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150508044557) do
+ActiveRecord::Schema.define(:version => 20150512022516) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -520,6 +520,12 @@ ActiveRecord::Schema.define(:version => 20150508044557) do
   add_index "option_values_option_values_groups", ["option_value_id"], :name => "opovg_option_value_id"
   add_index "option_values_option_values_groups", ["option_values_group_id"], :name => "opovg_option_group_id"
 
+  create_table "order_return_requests", :force => true do |t|
+    t.integer  "order_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "payment_requests", :force => true do |t|
     t.integer  "order_id"
     t.string   "recipient_full_name"
@@ -655,6 +661,17 @@ ActiveRecord::Schema.define(:version => 20150508044557) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "return_request_items", :force => true do |t|
+    t.integer  "order_return_request_id"
+    t.integer  "line_item_id"
+    t.integer  "quantity"
+    t.text     "action"
+    t.text     "reason_category"
+    t.text     "reason"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "similarities", :force => true do |t|
