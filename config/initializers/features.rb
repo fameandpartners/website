@@ -1,7 +1,7 @@
 # Turns on global features
 require 'redis'
 if Rails.env.production?
-  Features.deactivate(:style_quiz)
+  Features.deactivate(:order_returns)
 else
   Features.activate(:order_returns)
 end
