@@ -26,6 +26,8 @@ class  UserCart::Populator
   end
 
   def populate
+    validate!
+
     if personalized_product?
       add_personalized_product
     else
@@ -40,6 +42,8 @@ class  UserCart::Populator
       product: product,
       cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
+  rescue Errors::ProductOptionsNotCompatible => e
+    OpenStruct.new({ success: false, message: e.message })
   rescue Errors::ProductOptionNotAvailable => e
     OpenStruct.new({ success: false, message: e.message })
   rescue Exception => e
@@ -47,6 +51,12 @@ class  UserCart::Populator
   end
 
   private
+
+    def validate!
+      if product_color.custom && product_making_options.present?
+        raise Errors::ProductOptionsNotCompatible.new("Custom colors and fast delivery can't be selected at the same time")
+      end
+    end
 
     def add_product_to_cart(ignore_stock_level = false)
       spree_populator = Spree::OrderPopulator.new(order, currency)

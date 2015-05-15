@@ -82,18 +82,28 @@ h2.order-number {
 
   thead tr th {
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
     font-size: 12px;
     background-color: #f9f9f9;
   }
+
+  thead tr th.returns-column, > tbody > tr > td.returns-column, {
+    background-color: white !important;
+    border-bottom: none;
+    padding-left: 6rem;
+    padding-right: 0;
+  }
+}
+
+.table.order-items, .table.orders-table > tbody > tr > td {
+  border: none;
+  vertical-align: middle;
+  text-align: left;
 }
 
 .table > tbody > tr > td {
-  border: none;
-  vertical-align: middle;
-  text-align: center;
 
-  a:hover {
+  a.order-details:hover {
     color: #355e6d
   }
 }
@@ -117,7 +127,6 @@ h2.order-number {
   a {
     color: #FFFFFF;
     padding: 0 !important;
-
   }
 }
 
@@ -127,4 +136,64 @@ tbody tr.total td p  {
 
 h3.phone span {
   text-transform: none;
+}
+
+.page-title.returns-title {
+  background-color: #f7e0d3;
+
+  h1 {
+    text-transform: none;
+  }
+
+  h2 {
+    font-family: forum;
+    text-transform: uppercase;
+    font-size: 40px;
+    margin-top: 0;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+
+  .table > tbody > tr > td {
+    border-top: none;
+    clear: none;
+  }
+
+  .returns .chosen-container-single.form-control {
+    margin-bottom: 2.7rem;
+  }
+}
+
+.order {
+  .page-title--details.order {
+    color: black;
+    h1 {
+      color: black;
+    }
+  }
+}
+
+h1.order {
+  color: black;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .page-content.order {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+a.btn.return {
+  color: #FFFFFF;
+  width: 92%;
+  background-color: black;
+  font-size: 12px;
+
+  &:hover {
+    background-color: #eeddf0;
+    color: black !important;
+  }
 }

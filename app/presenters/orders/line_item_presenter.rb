@@ -8,7 +8,6 @@ module Orders
 
     def_delegators :shipment, :shipped?, :shipped_at
     def_delegators :@wrapped_order,
-                   :projected_delivery_date,
                    :tracking_number,
                    :number,
                    :total_items,
@@ -25,7 +24,7 @@ module Orders
                    :quantity
 
     attr_reader :wrapped_order
-    
+
     def initialize(item, wrapped_order)
       @item = item
       @wrapped_order = wrapped_order
@@ -45,6 +44,10 @@ module Orders
       variant.try(:product).try(:name) || 'Missing Variant'
     end
 
+    def projected_delivery_date
+      @_projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(@item, wrapped_order).delivery_date
+    end
+
     def fabrication_status
       if fabrication
         fabrication.state
@@ -52,7 +55,7 @@ module Orders
         :processing
       end
     end
-    
+
     def colour
       if personalization.present?
         personalization.color
@@ -72,7 +75,7 @@ module Orders
     def display_price
       Spree::Price.new(amount: price).display_price.to_s
     end
-    
+
     def customisations
       if personalizations?
         customs = Array.wrap(
@@ -146,9 +149,6 @@ module Orders
       as_report.keys.collect { |k| "#{k} #{cn_headers[k]}" }
     end
 
-
-    private
-
     def size
       if personalization.present?
         personalization.size
@@ -157,6 +157,8 @@ module Orders
       end
     end
 
+    private
+    
     # Seriously, wtf are custom dresses so hard?
     def image
       @image ||= begin

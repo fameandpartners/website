@@ -78,9 +78,7 @@ Spree::Order.class_eval do
   alias :in_sale? :has_items_on_sale?
 
   def has_fast_making_items?
-    line_items.includes(making_options: :product_making_option ).any? do |line_item|
-      line_item.making_options.any? {|option| option.product_making_option.fast_making? }
-    end
+    line_items.includes(making_options: :product_making_option).any?{|item| item.fast_making? }
   end
 
   def update!

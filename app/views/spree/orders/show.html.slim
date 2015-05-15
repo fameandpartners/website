@@ -11,15 +11,15 @@ javascript:
 ruby:
   successfully_ordered = session.delete(:successfully_ordered)
 
-.page-title.default
+.page-title.default.order
   .container
     .page-title--details
-        h1.no-padding-bottom
-        - if successfully_ordered
-          | Order Confirmation
-        - else
-          | Order
-      
+        h1.no-padding-bottom.order
+          - if successfully_ordered
+            | Order Confirmation
+          - else
+            | Order
+
 
 .page-content.user.order.show
   .container.relative
@@ -27,7 +27,7 @@ ruby:
       .col-md-8.col-md-offset-2
         .row
           h2.order-number Your Order Number is: #{ order.number }
-          
+
           h2.order-number Ordered On: #{ l(order.completed_at.to_date) }
 
         table.table.order-items
@@ -41,28 +41,28 @@ ruby:
           tbody
             - order.line_items.each do |line_item|
               tr.item
-                td
+                td data-title="Item"
                   = image_tag line_item.image_url, class: 'img-responsive ordered-item-image'
                   p
                     strong
                       = line_item.style_name
                     br
-                    ="Size:#{line_item.country_size.to_i}, Color: #{line_item.colour_name}"
-                    
-                td= line_item_status(line_item)
-                td= line_item.style_number
-                td= line_item.quantity
-                td= line_item.display_price.to_s
-              
+                    ="Size:#{line_item.size}, Color: #{line_item.colour_name}"
+
+                td data-title="status" = line_item_status(line_item)
+                td data-title="sku" = line_item.style_number
+                td data-title="quantity" = line_item.quantity
+                td data-title="price" = line_item.display_price.to_s
+
             tr.total
               td colspan="4"
-              td
+              td data-title="total"
                 p.title
                   | Order Total &nbsp;
                   = order.display_total
                 - if current_site_version.is_australia?
                   p Including GST.
-                  
+
         - if successfully_ordered
           - if current_site_version.is_australia?
             h3.phone itemprop="telephone" Customer Support: 1300 924 860
@@ -79,11 +79,11 @@ ruby:
             =' link_to 'FAQs.', 'http://fameandpartners.com/faqs', target: '_blank'
           p Or otherwise contact our friendly team if you need any help.
           p.support = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
-          
+
           - unless current_spree_user.blank?
             p
               button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
-          
+
           - if successfully_ordered
             .hide
               = render 'shared/sales_conversion_pixels', locals: {order: @order}
