@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150513043101) do
+ActiveRecord::Schema.define(:version => 20150515024100) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1106,7 +1106,7 @@ ActiveRecord::Schema.define(:version => 20150513043101) do
   add_index "spree_product_properties", ["product_id"], :name => "index_product_properties_on_product_id"
 
   create_table "spree_products", :force => true do |t|
-    t.string   "name",                 :default => "",    :null => false
+    t.string   "name",                 :default => "",     :null => false
     t.text     "description"
     t.datetime "available_on"
     t.datetime "deleted_at"
@@ -1116,14 +1116,15 @@ ActiveRecord::Schema.define(:version => 20150513043101) do
     t.integer  "tax_category_id"
     t.integer  "shipping_category_id"
     t.integer  "count_on_hand",        :default => 0
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.boolean  "on_demand",            :default => false
     t.boolean  "featured",             :default => false
     t.integer  "position",             :default => 0
     t.boolean  "hidden",               :default => false
     t.boolean  "is_service",           :default => false
     t.integer  "factory_id"
+    t.string   "size_chart",           :default => "2014", :null => false
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
