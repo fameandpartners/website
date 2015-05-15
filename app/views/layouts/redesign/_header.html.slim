@@ -1,10 +1,12 @@
 ruby:
   init_items_counter_sync = "
-    (function(){
-      window.app.shopping_cart.on('change', function() {
-        $('#cart-trigger').find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
-      });
-    })();
+    if ($(window).width() > 990) {
+      (function(){
+        window.app.shopping_cart.on('change', function() {
+          $('#cart-trigger').find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
+        });
+      })();
+    }
   "
   init_moodboard_counter_sync = "
     (function(){
@@ -199,12 +201,15 @@ ruby:
                   span.hidden-sm.hidden-xs#moodboard-counter
                     | Moodboard &nbsp;
 
-          li.shop.menu-item.account-dropdown
+          li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
             = render "layouts/redesign/header/my_account_dropdown"
 
-          li.menu-item.hidden-xxs
+          li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs
+            = render "layouts/redesign/header/my_account_dropdown_mobile"
+
+          li.menu-item
             a.menu-item--link.search href="#"
-              = image_tag "search.png"
+              = image_tag "_icons/search.svg", class: "nav-mobile-logo"
             .search-bar.invis
               a.close-search href="#"
                 = image_tag "close.svg", alt: 'Close'
@@ -219,4 +224,4 @@ ruby:
 
           li#cart-trigger.menu-item
             = link_to spree.checkout_path, class: 'menu-item--link' do
-              | cart&nbsp;
+                = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'

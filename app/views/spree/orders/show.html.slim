@@ -20,7 +20,6 @@ ruby:
           - else
             | Order
 
-
 .page-content.user.order.show
   .container.relative
     .row
@@ -40,6 +39,7 @@ ruby:
               th price
           tbody
             - order.line_items.each do |line_item|
+              - binding.pry
               tr.item
                 td data-title="Item"
                   = image_tag line_item.image_url, class: 'img-responsive ordered-item-image'
@@ -47,6 +47,7 @@ ruby:
                     strong
                       = line_item.style_name
                     br
+
                     ="Size:#{line_item.size}, Color: #{line_item.colour_name}"
 
                 td data-title="status" = line_item_status(line_item)
