@@ -31,7 +31,7 @@ module Orders
     def line_items
       items.collect { |i| LineItemPresenter.new(i, self) }
     end
-    
+
     def one_item?
       line_items.count == 1
     end
@@ -39,7 +39,7 @@ module Orders
     def product
       products.first
     end
-    
+
     def total_items
       items.sum &:quantity
     end
@@ -47,7 +47,7 @@ module Orders
     def country_code
       order.shipping_address.country.iso
     end
-  
+
     def projected_delivery_date
       return unless order.completed?
       order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date)
@@ -72,5 +72,6 @@ module Orders
         order.shipments.first.tracking
       end
     end
+    
   end
 end
