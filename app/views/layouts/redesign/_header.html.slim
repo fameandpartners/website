@@ -1,13 +1,11 @@
 ruby:
   init_items_counter_sync = "
-    if ($(window).width() > 990) {
-      (function(){
-        window.app.shopping_cart.on('change', function() {
-          $('#cart-trigger').find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
-        });
-      })();
-    }
-  "
+    (function(){
+      window.app.shopping_cart.on('change', function() {
+        $('#cart-trigger').find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
+      });
+    })();
+"
   init_moodboard_counter_sync = "
     (function(){
       $counter = $('#moodboard-counter');
