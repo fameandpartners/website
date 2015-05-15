@@ -1,13 +1,21 @@
 .page-title.default.contact-header
   .container
     .page-title--details
-      h1.no-padding-bottom Contact Fame & Partners
+      h1.no-padding-bottom Let's have a chat      
 
 .page-content.contact
   .container.relative
     .form-global
       = form_for @contact, url: contact_path, method: :post, html: {class: 'form'} do |f|
         = f.hidden_field :site_version
+        .row
+          .col-md-12.form-group
+            label How can we help?
+            = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, nil), {}, :class => 'form-control form-control-md selectbox'
+            p.hint
+              | Having a bad dress day?
+              = link_to 'Return or exchange an order', user_orders_path
+
         .row
           .col-md-12.form-group
             label First name
@@ -26,10 +34,6 @@
             = f.text_field :phone, :class => 'form-control form-control-md'
             p.hint
               | (include country code)
-        .row
-          .col-md-12.form-group
-            label How can we help?
-            = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, nil), {}, :class => 'form-control form-control-md selectbox'
         .row
           .col-md-12.form-group
             label Order Number

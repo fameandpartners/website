@@ -36,11 +36,11 @@
                     div.action id="actions-#{item_form.object.line_item_id}"
 
                       = item_form.label 'I want to'
-                      = item_form.select :action, options_for_select(["keep", "return", "exchange"], 'keep'), {}, :class => 'form-control form-control-md return-select return-action'
+                      = item_form.select :action, options_for_select(["Keep", "Return", "Exchange"], 'keep'), {}, :class => 'form-control form-control-md return-select return-action'
 
                       .return-reason-category-container
                         = item_form.label 'Because'
-                        = item_form.select :reason_category, options_for_select(["looks different to image on site", "ordered multiple styles or sizes", "delivery issues", "poor quality or faulty", "size and fit"]), {include_blank: true}, :class => 'form-control form-control-md return-select return-reason-category'
+                        = item_form.select :reason_category, options_for_select(["Looks different to image on site", "Ordered multiple styles or sizes", "Delivery issues", "Poor quality or faulty", "Size and fit"]), {include_blank: true}, :class => 'form-control form-control-md return-select return-reason-category'
 
                         .return-reason-container
                           = item_form.label 'And'
