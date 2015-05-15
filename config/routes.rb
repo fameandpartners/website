@@ -70,7 +70,7 @@ FameAndPartners::Application.routes.draw do
     get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
 
     get '/here-comes-the-sun-collection' => 'statics#here_comes_the_sun', :as => :here_comes_the_sun_collection
-    get '/all-sizes' => 'statics#all_sizes', :as => :all_sizes_collection
+    get '/all-size' => 'statics#all_size', :as => :all_size_collection
 
     get '/amfam'                  => redirect('/wicked-game-collection')
     get '/amfam-dresses'          => redirect('/wicked-game-collection')

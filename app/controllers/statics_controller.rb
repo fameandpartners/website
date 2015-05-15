@@ -62,10 +62,10 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/here_comes_the_sun', :layout => 'redesign/application'
   end
 
-  def all_sizes
-    @title = "All Sizes | Beautiful Dresses - Fame & Partners"
+  def all_size
+    @title = "All Size | Beautiful Dresses - Fame & Partners"
     @description = "Discover beautiful dresses for every body here at Fame & Partners"
-    render :template => 'landing_pages/all_sizes', :layout => 'redesign/application'
+    render :template => 'landing_pages/all_size', :layout => 'redesign/application'
   end
 
   def wicked_game
