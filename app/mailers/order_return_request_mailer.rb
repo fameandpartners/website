@@ -4,7 +4,7 @@ class OrderReturnRequestMailer < ActionMailer::Base
 
   def email(order_return_request, user)
     @order_return_request = order_return_request
-
+    @email = user.email
     mail(
       to: 'team@fameandpartners.com',
       from: user.email,
