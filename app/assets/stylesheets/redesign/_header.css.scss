@@ -74,19 +74,24 @@
 	color: #fff;
 	.mega-menu-banner-container {
 		margin: 20px 10px 10px 48%;
+		display: block;
+		color: #fff;
 	}
 	.title {
 		font-family: Forum;
 		text-transform: uppercase;
 		font-size: 80px;
 		line-height: 0.8;
+		display: block;
 		span:first-child { font-size: 0.8em;}
 	}
-	p { 
+	.p { 
+		display: block;
 		color: #fff;
 		line-height: 1.1;
 		font-size: 1.2em;
 		margin-top: 10px;
+		margin-bottom: 12px;
 	}
 	.btn {
 		background-color: #f6e0d3;

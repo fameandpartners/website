@@ -30,16 +30,12 @@
     display:block;
     color:#000000;
     margin-bottom:10px;
+    &.active {
+      color:#003647;
+    }
+    &.disabled { @extend %disabled-blur;}
   }
 
-  a.product-option {
-    display:block;
-    color:#000000;
-  }
-
-  a.product-option.active {
-    color:#003647;
-  }
 
   .option-box {
     display:block;
@@ -85,6 +81,7 @@
 .production-time-box {
   background-color: #fff;
   padding-top: 20px;
+  &.disabled { @extend %disabled-blur;}
   h2 {
     margin-top: 0;
     margin-bottom: 5px;
