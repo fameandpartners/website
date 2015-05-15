@@ -55,11 +55,17 @@ class StaticsController < ApplicationController
     @description = "Discover beautiful dresses that don't break the bank at Fame & Partners"
     render :template => 'landing_pages/break-hearts-not-banks', :layout => 'redesign/application'
   end
-  
+
   def here_comes_the_sun
     @title = "Here comes the sun | Beautiful Dresses - Fame & Partners"
     @description = "Discover beautiful summer dresses here at Fame & Partners"
     render :template => 'landing_pages/here_comes_the_sun', :layout => 'redesign/application'
+  end
+
+  def all_sizes
+    @title = "All Sizes | Beautiful Dresses - Fame & Partners"
+    @description = "Discover beautiful dresses for every body here at Fame & Partners"
+    render :template => 'landing_pages/all_sizes', :layout => 'redesign/application'
   end
 
   def wicked_game
