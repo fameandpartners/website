@@ -36,4 +36,22 @@ describe SiteVersion, :type => :model do
       end
     end
   end
+
+  describe '#to_param' do
+    context 'default site version' do
+      let(:site_version) { build_stubbed(:site_version, default: true, permalink: 'us') }
+
+      it 'returns an empty string' do
+        expect(site_version.to_param).to eq('')
+      end
+    end
+
+    context 'not default site version' do
+      let(:site_version) { build_stubbed(:site_version, permalink: 'au') }
+
+      it 'returns the code of the site version' do
+        expect(site_version.to_param).to eq('au')
+      end
+    end
+  end
 end
