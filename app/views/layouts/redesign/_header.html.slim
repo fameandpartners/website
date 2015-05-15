@@ -155,31 +155,37 @@ ruby:
             a.menu-item--link.active-hover href="#"
               | Edits
             .mega-menu.hidden-sm.story-list
-              .stories.container-fluid
+              .stories.container-fluid.center
 
-                .col-md-3
-                  = link_to prom_collection_path do
-                    .image-container.real-prom
-                      = image_tag src='edits/real_prom/1-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
-                    p.text-center.edit-title Our Official Prom Collection
-
-                .col-md-3
-                  = link_to bridesmaid_collection_path do
-                    .image-container.bridesmaids
-                      = image_tag src='edits/BRIDESMAIDS/1_171114_F&P_-BRIDESMAIDS-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
-                    p.text-center.edit-title Our Beautiful Bridesmaids Collection
-
-                .col-md-3
+                .col-md-2
                   = link_to here_comes_the_sun_collection_path do
                     .image-container
-                       = image_tag src='edits/here-comes-the-sun/nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
+                       = image_tag src='edits/here-comes-the-sun/nav.jpg', :class => 'img-responsive', :alt => 'Here Comes the Sun'
                     p.text-center.edit-title Here Comes The Sun
 
-                .col-md-3
+                .col-md-2
+                  = link_to prom_collection_path do
+                    .image-container.real-prom
+                      = image_tag src='edits/real_prom/1-edits-nav.jpg', :class => 'img-responsive', :alt => 'Our Official Prom Collection'
+                    p.text-center.edit-title Our Official Prom Collection
+
+                .col-md-2
+                  = link_to bridesmaid_collection_path do
+                    .image-container.bridesmaids
+                      = image_tag src='edits/BRIDESMAIDS/1_171114_F&P_-BRIDESMAIDS-edits-nav.jpg', :class => 'img-responsive', :alt => 'Our Beautiful Bridesmaids Collection'
+                    p.text-center.edit-title Our Beautiful Bridesmaids Collection
+
+                .col-md-2
                   = link_to break_hearts_collection_path do
                     .image-container
-                      = image_tag src='edits/BREAK-HEARTS/1_141119_F&P_NYE-edits-nav.jpg', :class => 'img-responsive', :alt => 'Fame &amp; Partners'
+                      = image_tag src='edits/BREAK-HEARTS/1_141119_F&P_NYE-edits-nav.jpg', :class => 'img-responsive', :alt => 'Break Hearts not Bank Accounts'
                     p.text-center.edit-title Break Hearts not Bank Accounts
+
+                .col-md-2
+                  = link_to all_size_collection_path do
+                    .image-container
+                      = image_tag src='edits/all-size/nav.jpg', :class => 'img-responsive', :alt => 'All Sizes'
+                    p.text-center.edit-title I'll Have What She's Having
 
           li.menu-item
             = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
