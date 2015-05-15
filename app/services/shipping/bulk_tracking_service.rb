@@ -75,14 +75,18 @@ module Shipping
       bulk_update.line_item_updates.each do |lit|
         next :invalid unless lit.order && lit.line_item
 
-        if lit.shipment.shipped? && lit.shipment.tracking == lit.tracking_number
-          next :ok
-        end
+        if lit.shipment
+          if lit.shipment.shipped? && lit.shipment.tracking == lit.tracking_number
+            next :ok
+          end
 
-        if lit.shipment.shipped? && lit.shipment.tracking != lit.tracking_number
-          next :error
+          if lit.shipment.shipped? && lit.shipment.tracking != lit.tracking_number
+            next :error
+          end
+        else
+          # Handle not in a shipment
+          next :no_shipment
         end
-
 
         # editable_shipments = lit.order.shipments.select { |s| s.tracking.nil? && s.editable_by?(:anyone) }
 
