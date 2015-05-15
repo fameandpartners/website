@@ -19,7 +19,15 @@ Spree::Product.class_eval do
   has_many :videos, class_name: 'ProductVideo', foreign_key: :spree_product_id
 
   belongs_to :factory
-  attr_accessible :factory_id
+  attr_accessible :customisation_value_ids,
+                  :discounts_attributes,
+                  :factory_id,
+                  :featured,
+                  :hidden,
+                  :is_service,
+                  :size_chart,
+                  :zone_prices_hash
+
 
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
@@ -32,10 +40,6 @@ Spree::Product.class_eval do
 
   has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 
-  attr_accessible :featured, :hidden, :is_service
-  attr_accessible :customisation_value_ids
-
-  attr_accessible :zone_prices_hash
   attr_accessor :zone_prices_hash
 
   scope :featured, lambda { where(featured: true) }
@@ -53,7 +57,7 @@ Spree::Product.class_eval do
   after_initialize :set_default_values
 
   has_many :discounts, as: :discountable
-  attr_accessible :discounts_attributes, :size_chart
+
   accepts_nested_attributes_for :discounts, reject_if: proc {|attrs| attrs[:amount].blank? }, allow_destroy: true
 
   SIZE_CHARTS = %w(2014 2015)
