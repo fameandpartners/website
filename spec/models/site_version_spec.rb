@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe SiteVersion, :type => :model do
+  describe '.permalinks' do
+    it 'returns all site versions permalinks' do
+      create(:site_version, permalink: 'au')
+
+      # Notice that 'us' version was seeded in the spec_helper
+      result = described_class.permalinks
+      expect(result).to match(['us', 'au'])
+    end
+  end
+
   describe '.by_permalink_or_default' do
     let!(:default_site_version) { SiteVersion.default }
     let!(:au_site_version) { create(:site_version, permalink: 'au') }
