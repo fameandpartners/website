@@ -14,7 +14,7 @@ module Shipping
       csv = CSV.read(source_file,
                      headers:           true,
                      skip_blanks:       true,
-                     header_converters: ->(h) { h.strip }
+                     header_converters: ->(h) { h.to_s.strip }
       )
 
       new_bulk_update = Admin::BulkOrderUpdate.new(user: username, filename: original_filename)
@@ -50,7 +50,7 @@ module Shipping
 
       csv.each_with_index do |row, idx|
         attributes = mapped_headers.each_with_object({}) { |(name, header), attrs|
-          attrs[name] = row[header]
+          attrs[name] = row[header].to_s.strip
         }
 
         attributes.merge!(row_number: idx + 1)
