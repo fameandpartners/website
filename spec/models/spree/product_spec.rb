@@ -32,4 +32,22 @@ describe Spree::Product, :type => :model do
       expect(subject.fast_delivery).to be true
     end
   end
+
+  describe '#size_chart' do
+    it do
+      is_expected.to validate_inclusion_of(:size_chart).in_array(%w(2014 2015))
+    end
+
+    describe '#new_size_chart?' do
+      it 'not by default' do
+        product = described_class.new
+        expect(product.new_size_chart?).to be_falsey
+      end
+
+      it 'when latest' do
+        product = described_class.new :size_chart => described_class::SIZE_CHARTS.last
+        expect(product.new_size_chart?).to be_truthy
+      end
+    end
+  end
 end

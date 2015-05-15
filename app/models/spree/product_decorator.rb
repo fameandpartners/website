@@ -53,8 +53,15 @@ Spree::Product.class_eval do
   after_initialize :set_default_values
 
   has_many :discounts, as: :discountable
-  attr_accessible :discounts_attributes
+  attr_accessible :discounts_attributes, :size_chart
   accepts_nested_attributes_for :discounts, reject_if: proc {|attrs| attrs[:amount].blank? }, allow_destroy: true
+
+  SIZE_CHARTS = %w(2014 2015)
+  validates_inclusion_of :size_chart, in: SIZE_CHARTS
+
+  def new_size_chart?
+    size_chart == SIZE_CHARTS.last
+  end
 
   def cache_key
     "products/#{id}-#{updated_at.to_s(:number)}"
