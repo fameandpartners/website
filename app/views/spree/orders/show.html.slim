@@ -39,7 +39,6 @@ ruby:
               th price
           tbody
             - order.line_items.each do |line_item|
-              - binding.pry
               tr.item
                 td data-title="Item"
                   = image_tag line_item.image_url, class: 'img-responsive ordered-item-image'

@@ -2,10 +2,12 @@ ruby:
   init_items_counter_sync = "
     (function(){
       window.app.shopping_cart.on('change', function() {
-        $('#cart-trigger').find('a').html('cart: ' + window.app.shopping_cart.data.item_count);
+        $('#cart-item-count').html(window.app.shopping_cart.data.item_count);
       });
+
     })();
-"
+  "
+
   init_moodboard_counter_sync = "
     (function(){
       $counter = $('#moodboard-counter');
@@ -222,4 +224,6 @@ ruby:
 
           li#cart-trigger.menu-item
             = link_to spree.checkout_path, class: 'menu-item--link' do
-                = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
+              span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
+              span.hidden-sm.hidden-xs.hidden-xxs cart:
+              span#cart-item-count 0
