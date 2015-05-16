@@ -13,6 +13,13 @@
 <%= render :partial => 'spree/admin/shared/order_tabs', :locals => { :current => 'Order Details' } %>
 
 <div data-hook="admin_order_show_addresses" class="row">
+  <fieldset class="alpha twelve columns no-border-bottom">
+    <legend align="center">Details</legend>
+    <div class="align-center">
+      <p><strong>Email:</strong> <%= @order.email %></p>
+      <p><strong>Phone:</strong> <%= @order.billing_address.phone %></p>
+    </div>
+  </fieldset>
   <% if @order.bill_address %>
     <fieldset class="alpha six columns no-border-bottom">
       <legend align="center"><%= t(:bill_address) %></legend>
