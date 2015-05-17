@@ -1,72 +1,87 @@
-.fashion-it-girl-au
-  .top-bar
-  .container-fluid.no-padding
-    .row
-      .col-md-4.col-sm-12.no-padding-top
-        .col-md-12.col-sm-12.ribbon-column
-          .ribbon
-            = image_tag src='new-logo.svg', :class => 'fame-logo', :alt => 'Fame & Partners'
-            = image_tag src='fashion-it-girl/popsugar_au_stacked_pink.png', :class => 'popsugar', :alt => 'Popsugar Logo'
+- if !Rails.env.production? || Features.active?(:wishpond_fashion_it_girl_au)
+  .wishpond-campaign data-wishpond-id="723653" data-wishpond-href="https://www.wishpond.com/lp/723653/"
 
-            .squares
-            h1
-              | Fashion<br>
-              span it girl
-            h2 2015 search
+  javascript:
+    (function(d, s, id) {
+      window.Wishpond = window.Wishpond || {};
+      Wishpond.merchantId = '514769';
+      Wishpond.writeKey = '03e274b92588';
+      var js, wpjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//cdn.wishpond.net/connect.js";
+      wpjs.parentNode.insertBefore(js, wpjs);
+    }(document, 'script', 'wishpond-connect'));
 
-      .col-md-8.banner.hidden-sm.hidden-xs
+- else
+  .fashion-it-girl-au
+    .top-bar
+    .container-fluid.no-padding
+      .row
+        .col-md-4.col-sm-12.no-padding-top
+          .col-md-12.col-sm-12.ribbon-column
+            .ribbon
+              = image_tag src='new-logo.svg', :class => 'fame-logo', :alt => 'Fame & Partners'
+              = image_tag src='fashion-it-girl/popsugar_au_stacked_pink.png', :class => 'popsugar', :alt => 'Popsugar Logo'
 
-  .container-fluid.competition
-    .col-md-12
-      h3 Are you tech savvy with a love for fashion?
-      h3 Do your friends always come to you for sartorial smarts?
-      h3.aus We’re looking for Australia’s next fashion IT Girl!
-      h4 Show us why you are Australia’s Fashion IT Girl & you could win:
+              .squares
+              h1
+                | Fashion<br>
+                span it girl
+              h2 2015 search
 
-  .container-fluid
-    .col-md-12
-      .row.prizes
-        .top-arrow
-        p.padding-top
-          strong A two-week paid internship with &nbsp;
-          span = image_tag src='new-logo.svg', :class => 'fame-logo', :alt => 'Fame & Partners'
+        .col-md-8.banner.hidden-sm.hidden-xs
+
+    .container-fluid.competition
+      .col-md-12
+        h3 Are you tech savvy with a love for fashion?
+        h3 Do your friends always come to you for sartorial smarts?
+        h3.aus We’re looking for Australia’s next fashion IT Girl!
+        h4 Show us why you are Australia’s Fashion IT Girl & you could win:
+
+    .container-fluid
+      .col-md-12
+        .row.prizes
+          .top-arrow
+          p.padding-top
+            strong A two-week paid internship with &nbsp;
+            span = image_tag src='new-logo.svg', :class => 'fame-logo', :alt => 'Fame & Partners'
+            br
+            |and &nbsp;
+            span = image_tag src='fashion-it-girl/popsugar_au_stacked_pink.png', :class => 'popsugar', :alt => 'Popsugar logo'
+            | &nbsp;+ your dream formal outfit ($1000 value)
+          p.runner-up Runner up prizes: 1 of 5 Fashion Maven positions 1 of 50 Fashion Ambassador positions
+          .bottom-arrow
+
+    .container-fluid.quote
+      .col-md-10.col-md-offset-1
+        .open-quote
+        q
+          | FAME AND PARTNERS BELIEVES IN THE CONVERGENCE OF FASHION AND TECHNOLOGY,&nbsp;
+          strong SO WE WANT TO SUPPORT YOUNG STUDENTS &nbsp;
+          | WHO ASPIRE TO HAVE A CAREER IN THESE FIELDS.
+        .close-quote
+        cite
+          |-Nyree Corby
           br
-          |and &nbsp;
-          span = image_tag src='fashion-it-girl/popsugar_au_stacked_pink.png', :class => 'popsugar', :alt => 'Popsugar logo'
-          | &nbsp;+ your dream formal outfit ($1000 value)
-        p.runner-up Runner up prizes: 1 of 5 Fashion Maven positions 1 of 50 Fashion Ambassador positions
-        .bottom-arrow
+          span CEO &amp; Founder
+          br
+          strong Fame &amp; Partners
 
-  .container-fluid.quote
-    .col-md-10.col-md-offset-1
-      .open-quote
-      q
-        | FAME AND PARTNERS BELIEVES IN THE CONVERGENCE OF FASHION AND TECHNOLOGY,&nbsp;
-        strong SO WE WANT TO SUPPORT YOUNG STUDENTS &nbsp;
-        | WHO ASPIRE TO HAVE A CAREER IN THESE FIELDS.
-      .close-quote
-      cite
-        |-Nyree Corby
-        br
-        span CEO &amp; Founder
-        br
-        strong Fame &amp; Partners
+    .container-fluid
+      .row.application-dates
+        .col-md-4
+          h5 applications open:
+          p 18th May 2015
+        .col-md-4
+          h5 applications close:
+          p 29th June 2015
+        .col-md-4
+          h5 winners announced:
+          p 15th July 2015
 
-  .container-fluid
-    .row.application-dates
-      .col-md-4
-        h5 applications open:
-        p 18th May 2015
-      .col-md-4
-        h5 applications close:
-        p 29th June 2015
-      .col-md-4
-        h5 winners announced:
-        p 15th July 2015
+    .application
+      h3 Remember to come back here on Monday 18th of May when applications are open!
 
-  .application
-    h3 Remember to come back here on Monday 18th of May when applications are open!
-
-
-= content_for :inline_javascript do
-  | new window.page.FashionITGirlReminder({form: "#fashion-it-girl-reminder"});
+  = content_for :inline_javascript do
+    | new window.page.FashionITGirlReminder({form: "#fashion-it-girl-reminder"});
