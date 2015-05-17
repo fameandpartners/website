@@ -5,6 +5,10 @@ describe ApplicationController, :type => :controller do
     def index
       render :text => 'ok'
     end
+
+    def create
+      render :text => 'ok'
+    end
   end
 
   describe 'before filters' do
@@ -14,6 +18,16 @@ describe ApplicationController, :type => :controller do
 
       before(:each) do
         controller.instance_variable_set(:@current_site_version, australian_site_version)
+      end
+
+      context 'request is a ajax or a non GET' do
+        it 'does not changes the site version' do
+          post :create, { site_version: 'pt' }
+          expect(controller.instance_variable_get(:@current_site_version)).to eq(australian_site_version)
+
+          xhr :get, :index, { site_version: 'pt' }
+          expect(controller.instance_variable_get(:@current_site_version)).to eq(australian_site_version)
+        end
       end
 
       context 'user request a different site version' do

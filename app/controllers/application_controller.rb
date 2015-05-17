@@ -39,6 +39,9 @@ class ApplicationController < ActionController::Base
   end
 
   def check_site_version
+    # Add to cart and submitting forms should not change site version
+    return if (!request.get? || request.xhr?)
+
     param_site_version = params[:site_version] || SiteVersion.default.code
 
     if param_site_version != cookies[:site_version]
@@ -99,10 +102,6 @@ class ApplicationController < ActionController::Base
     })
   rescue Exception => e
     true
-  end
-
-  def store_current_location
-    session[:previous_location] = get_hreflang_link
   end
 
   def check_cart
