@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe SiteVersion, :type => :model do
   describe '.permalinks' do
+    # Invalidating memoization
+    before(:each) { SiteVersion.instance_variable_set(:@permalinks, nil) }
+
     it 'returns all site versions permalinks' do
       create(:site_version, permalink: 'au')
 

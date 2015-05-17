@@ -2,7 +2,10 @@ require 'spec_helper'
 
 describe LocalizeUrlService do
   describe '.localize_url' do
-    before(:each) { create(:site_version, permalink: 'pt') }
+    before(:each) do
+      SiteVersion.instance_variable_set(:@permalinks, nil) # Invalidating memoization
+      create(:site_version, permalink: 'pt')
+    end
 
     describe 'given a URL and a site version' do
       context 'URL does not have a locale in it' do
