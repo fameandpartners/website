@@ -20,7 +20,6 @@ ruby:
           - else
             | Order
 
-
 .page-content.user.order.show
   .container.relative
     .row
@@ -47,6 +46,7 @@ ruby:
                     strong
                       = line_item.style_name
                     br
+
                     ="Size:#{line_item.size}, Color: #{line_item.colour_name}"
 
                 td data-title="status" = line_item_status(line_item)

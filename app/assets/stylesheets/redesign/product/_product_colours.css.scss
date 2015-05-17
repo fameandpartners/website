@@ -103,6 +103,10 @@
         background-color: #3C1362;
       }
 
+      .color-dusty-pink {
+        background-color: #dd83b9;
+      }
+
       .color-emerald-green {
         background-color: #1B9975;
       }
@@ -148,6 +152,16 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f39', endColorstr='#f39', GradientType=1 );
       }
 
+      .color-ivory-and-navy {
+        background: linear-gradient(-12.5deg, rgba(0,0,76,1) 0%, rgba(0,0,76,1) 50%, rgba(255,255,240,1) 51%, rgba(255,255,240,1) 71%, rgba(255,255,240,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f39', endColorstr='#f39', GradientType=1 );
+      };
+
+      .color-ivory-and-pink {
+        background: linear-gradient(-12.5deg, rgba(255,51,153,1) 0%, rgba(255,51,153,1) 50%, rgba(255,255,240,1) 51%, rgba(255,255,240,1) 71%, rgba(255,255,240,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f39', endColorstr='#f39', GradientType=1 );
+      }
+
       .color-lavender {
         background-color: #d9c0e7;
       }
@@ -170,6 +184,11 @@
 
       .color-light-pink {
         background-color: #ffecef;
+      }
+
+      .color-light-pink-and-charcoal {
+        background: linear-gradient(-12.5deg, rgba(60,60,60,1) 0%, rgba(60,60,60,1) 50%, rgba(255,236,239,1) 51%, rgba(255,236,239,1) 71%, rgba(255,236,239,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#050505', endColorstr='#fcf9f9', GradientType=1 );
       }
 
       .color-lilac {
@@ -291,6 +310,10 @@
         background-color: #826a77;
       }
 
+      .color-sage-green {
+        background-color: #95c7bc;
+      }
+
       .color-salmon {
         background-color: #FF8C69;
       }
@@ -325,6 +348,10 @@
 
       .color-turquoise {
         background-color: #7deee5;
+      }
+
+      .color-vibrant-purple {
+        background-color: #9f6ba9;
       }
 
       .color-watermelon {
