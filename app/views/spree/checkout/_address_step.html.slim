@@ -2,9 +2,13 @@
   | window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
 
 - if current_step.eql?('address')
-  - if not signed_in?  
-    h2.checkout-section-title EXISTING CUSTOMERS LOG IN
-    / br
+
+  - if not signed_in?
+    h2.checkout-section-title Log In or Create an Account
+    .row
+      .col-md-12.form-group
+        p Create an account to Track Your Order.
+        p = link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form'), class: 'btn btn-block btn-black btn-md low-btn'
     .row
       .col-md-6.form-group
         = link_to 'log in', login_path, class: 'btn btn-block btn-black btn-md open-login-popup'
@@ -13,6 +17,8 @@
 
   = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
     = render :partial => 'shared/error_messages', locals: { target: @order }
+
+    = hidden_field_tag :create_account, :value => true
 
     h2.checkout-section-title  Billing Address
     / br
@@ -24,7 +30,7 @@
       .col-md-12.form-group
         = form.label :customer_notes
         = form.text_field :customer_notes, class: 'required form-control form-control-md'
-    
+
     h2.checkout-section-title  Shipping Address
     .row
       .col-md-6
@@ -32,10 +38,10 @@
           .checkbox-gray-md
             = label_tag :order_use_billing, :id => 'use_billing' do
               = check_box_tag 'order[use_billing]', '1', ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
-              span.checkbox-label 
+              span.checkbox-label
                 =' t(:use_billing_address)
                 br
-                small 
+                small
                   ' (Use billing address)
 
     .form-wrapper data-hook='shipping_inner'
@@ -53,7 +59,7 @@
     .col-md-6
       - if (address = @order.bill_address).present?
         h3 Billing Address
-        p = address.full_name 
+        p = address.full_name
         p = address.address1
         p = address.address2
         p = address.city
@@ -61,7 +67,7 @@
     .col-md-6
       - if (address = @order.ship_address).present?
         h3 Shipping Address
-        p = address.full_name 
+        p = address.full_name
         p = address.address1
         p = address.address2
         p = address.city
