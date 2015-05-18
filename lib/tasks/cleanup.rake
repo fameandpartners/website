@@ -28,5 +28,7 @@ namespace :data do
         puts result.cmd_status if action == :delete
       end
     end
+    puts 'VACUUM ANALYZE'
+    ActiveRecord::Base.connection.execute('VACUUM ANALYZE')
   end
 end
