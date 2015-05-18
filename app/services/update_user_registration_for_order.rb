@@ -1,7 +1,7 @@
 # update order users registrations
 # - create user and assign it to order
-# - or just assign users attributes to order 
-#   [ first_name, last_name, 
+# - or just assign users attributes to order
+#   [ first_name, last_name,
 #    #update
 #    #successfull?
 #    #new_user_created?
@@ -40,7 +40,7 @@ class Services::UpdateUserRegistrationForOrder
   private
 
   def create_user?
-    @user.blank? && @params[:create_account]
+    @user.blank? && @params[:create_account] && !Spree::User.where(:email => order_params[:email]).exists?
   end
 
   def create_user
@@ -90,20 +90,22 @@ class Services::UpdateUserRegistrationForOrder
       first_name: order_params[:user_first_name],
       last_name: order_params[:user_last_name],
       email: order_params[:email],
-      password: @params[:order][:password],
-      password_confirmation: @params[:order][:password_confirmation]
+      password: @params[:order][:password] || @order.number,
+      password_confirmation: @params[:order][:password_confirmation] || @order.number,
+      skip_welcome_email: true,
+      automagically_registered: true
     }
   end
 
   def get_order_params
     if (address_params = @params[:order][:bill_address_attributes]).present?
-      { 
+      {
         user_first_name: address_params[:firstname],
         user_last_name: address_params[:lastname],
         email: address_params[:email]
       }
     elsif (address_params = @params[:order][:ship_address_attributes]).present?
-      { 
+      {
         user_first_name: address_params[:firstname],
         user_last_name: address_params[:lastname],
         email: address_params[:email]
