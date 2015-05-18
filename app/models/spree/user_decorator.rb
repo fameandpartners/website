@@ -17,15 +17,20 @@ Spree::User.class_eval do
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
 
-  attr_accessible :phone, :dob
+  attr_accessible :phone, :dob, :skip_welcome_email, :automagically_registered
 
   validates :phone,
             presence: {
               if: :validate_presence_of_phone
             }
 
-  after_create {|user| Marketing::Subscriber.new(user: user).create }
+  after_create :create_marketing_subscriber, if: Proc.new { |u| u.newsletter? }
   after_update {|user| Marketing::Subscriber.new(user: user).update }
+
+
+  def create_marketing_subscriber
+    Marketing::Subscriber.new(user: self).create
+  end
 
   def update_profile(args = {})
     if args[:password].blank?

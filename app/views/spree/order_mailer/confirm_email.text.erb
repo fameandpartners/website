@@ -18,3 +18,14 @@
 <%= t('order_mailer.confirm_email.total', :total => @order.display_total) %>
 
 <%= t('order_mailer.confirm_email.thanks') %>
+
+To track your order or manage your personal details, log in to your account here: <%= login_url %>
+
+<% if @order.user && @order.user.automagically_registered?  %>
+We have automatically created an account for your convenience where you can track your order and manage your personal details.
+
+Your username is: <%= @order.email %>
+Your temporary password is: <%= @order.number %>
+
+Please change this password once you have logged in.
+<% end %>
