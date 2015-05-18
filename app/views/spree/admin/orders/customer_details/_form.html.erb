@@ -1,8 +1,8 @@
 <fieldset data-hook="admin_customer_detail_form_fields" class="no-border-top">
-  
+
   <fieldset class="index no-border-bottom" data-hook="customer_guest">
     <legend align="center"><%= t(:account) %></legend>
-      
+
     <div data-hook="customer_fields" class="row">
       <div class="alpha eight columns">
         <div class="field">
@@ -18,6 +18,16 @@
               <li>
                 <%= @order.user.nil? ? t(:yes) : t(:no) %>
               </li>
+
+              <% if @order.user.blank? %>
+              <div class="field">
+                <%= f.label :user_id, 'User :' %>
+                <% opts = options_from_collection_for_select(Spree::User.where(:email => @order.email), :id, :to_s) %>
+                <%= f.select :user_id, opts, {:include_blank => true } %>
+
+              </div>
+              <% end %>
+
             <% else %>
               <% guest = @order.user.nil? || @order.user.anonymous? %>
               <li>
@@ -26,9 +36,10 @@
               </li>
               <li>
                 <%= radio_button_tag :guest_checkout, false, !guest, :disabled => @order.cart? %>
-                <%= t(:no) %>  
-              </li>              
+                <%= t(:no) %>
+              </li>
               <%= hidden_field_tag :user_id, @order.user_id %>
+
             <% end %>
           </ul>
         </div>
@@ -44,13 +55,13 @@
       <% end %>
     </fieldset>
   </div>
-  
+
   <div class="omega six columns" data-hook="ship_address_wrapper">
     <fieldset class="no-border-bottom">
       <legend align="center"><%= t(:shipping_address) %></legend>
       <%= f.fields_for :ship_address do |sa_form| %>
         <%= render :partial => 'spree/admin/shared/address_form', :locals => { :f => sa_form, :name => t(:shipping_address), :use_billing => true } %>
-      <% end %>    
+      <% end %>
     </fieldset>
   </div>
 

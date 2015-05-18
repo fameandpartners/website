@@ -129,4 +129,8 @@ Spree::User.class_eval do
       true
     end
   end
+
+  def to_s
+    "#{full_name} - #{email}"
+  end
 end
