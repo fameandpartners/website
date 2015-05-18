@@ -19,7 +19,15 @@ Spree::Product.class_eval do
   has_many :videos, class_name: 'ProductVideo', foreign_key: :spree_product_id
 
   belongs_to :factory
-  attr_accessible :factory_id
+  attr_accessible :customisation_value_ids,
+                  :discounts_attributes,
+                  :factory_id,
+                  :featured,
+                  :hidden,
+                  :is_service,
+                  :size_chart,
+                  :zone_prices_hash
+
 
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
@@ -32,14 +40,6 @@ Spree::Product.class_eval do
 
   has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 
-  #accepts_nested_attributes_for :product_customisation_types,
-  #  reject_if: lambda { |ct| ct[:customisation_type_id].blank? && ct[:id].blank? },
-  #  allow_destroy: true
-  #attr_accessor :customisation_values_array
-  attr_accessible :featured, :hidden, :is_service#, :customisation_values_array#, :product_customisation_types_attributes
-  attr_accessible :customisation_value_ids
-
-  attr_accessible :zone_prices_hash
   attr_accessor :zone_prices_hash
 
   scope :featured, lambda { where(featured: true) }
@@ -50,8 +50,6 @@ Spree::Product.class_eval do
   delegate_belongs_to :master, :in_sale?, :original_price, :price_without_discount
 
   before_create :set_default_prototype
-  #after_create :build_customisations_from_values_hash, :if => :customisation_values_hash
-  #after_create :build_customisations_from_values_array, :if => :customisation_values_array
 
   before_save :update_price_conversions
   after_save :update_zone_prices, if: :zone_prices_hash
@@ -59,8 +57,15 @@ Spree::Product.class_eval do
   after_initialize :set_default_values
 
   has_many :discounts, as: :discountable
-  attr_accessible :discounts_attributes
+
   accepts_nested_attributes_for :discounts, reject_if: proc {|attrs| attrs[:amount].blank? }, allow_destroy: true
+
+  SIZE_CHARTS = %w(2014 2015)
+  validates_inclusion_of :size_chart, in: SIZE_CHARTS
+
+  def new_size_chart?
+    size_chart == SIZE_CHARTS.last
+  end
 
   def cache_key
     "products/#{id}-#{updated_at.to_s(:number)}"
@@ -327,22 +332,10 @@ Spree::Product.class_eval do
     @active_product_ids.include?(product_id)
   end
 
-#  def fast_delivery
-#    factory_name = property('factory_name').to_s.downcase.strip
-#    in_stock = property('in_stock').to_s.downcase.strip
-#    return (factory_name == "surry hills" || factory_name == "iconic") || in_stock == "yes"
-#  end
-
   def discount
     return @discount if instance_variable_defined?('@discount')
     @discount = Repositories::Discount.get_product_discount(self.id)
   end
-
-#  def discount
-#    sales_ids = Spree::Sale.active_sales_ids
-#    return nil if sales_ids.blank?
-#    self.discounts.where(sale_id: sales_ids).where("amount is not null and amount > 0").order('amount desc').first
-#  end
 
   private
 
@@ -381,79 +374,4 @@ Spree::Product.class_eval do
   def self.active(currency = nil)
     not_hidden.not_deleted.available(nil, currency)
   end
-
-#  def build_customisations_from_values_hash
-#    customisation_values_hash.each do |type_id, value_ids|
-#      next unless type = CustomisationType.find_by_id(type_id)
-#      values = type.customisation_values.where(id: value_ids).map(&:id)
-#      next if values.empty?
-#      product_type = self.product_customisation_types.new
-#      product_type.customisation_type = type
-#      product_type.customisation_value_ids = values
-#    end
-#    save
-#  end
-=begin
-  def build_customisations_from_values_array
-    self.customisation_value_ids
-    existings_ids = self.customisation_values.map{|i| i.id.to_s}
-
-    new_values_ids = [customisation_values_array - existings_ids]
-    if new_values_ids.present?
-      new_values = CustomisationValue.where(id: new_values_ids)
-      new_values.each do |value|
-        #self.customisation_values.create()
-      end
-    end
-
-    obsoleted_ids = [existings_ids - customisation_values_array]
-    self.customisation_values.where(id: obsoleted_ids).destroy_all
-  end
-=end
-
-=begin
-  # translated_short_description & translate_string - don't used anywhere.
-  # also, I18n utils methods should not be in model
-  #
-  def translated_short_description(locale = :"en-US")
-    #load translations
-    root = Rails.root.to_s
-    aus_yml = YAML.load_file("#{root}/config/locales/en_AU.yml")["en-AU"]
-    usa_yml = YAML.load_file("#{root}/config/locales/en_US.yml")["en-US"]
-
-    if locale == :"en-AU" then
-      result = translate_string(string: short_description, from_hash: usa_yml, to_hash: aus_yml)
-    else
-      # its usa locale
-      result = translate_string(string: short_description, from_hash: aus_yml, to_hash: usa_yml)
-    end
-
-    return result
-  end
-
-  def translate_string(args = {})
-    whole_string = args[:string] || ''
-    words = whole_string.split(/\W+/)
-
-    words.each do |word|
-      # gets the first result of hash.find
-      w_key = args[:from_hash].find do |key, val|
-        val == word
-      end
-
-      if w_key.present?
-        # it's a two member array when it returns from find,
-        # we need the first member
-        w_key = w_key[0]
-
-        if args[:to_hash][w_key].present?
-          whole_string.gsub! word, args[:to_hash][w_key]
-        end
-      end
-    end
-
-    return whole_string
-  end
-=end
-
 end

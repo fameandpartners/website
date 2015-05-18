@@ -123,11 +123,7 @@
       </ul>
     <% end %>
 
-    <%= f.field_container :factory do %>
-      <%= f.label :factory_id, t(:factory) %>
-      <%= f.collection_select :factory_id, Factory.all, :id, :name, { :include_blank => 'None' }, { :class => 'select2' } %>
-      <%= f.error_message_on :factory %>
-    <% end %>
+
 
     <%= f.field_container :shipping_categories do %>
       <%= f.label :shipping_category_id, t(:shipping_categories) %>
@@ -188,6 +184,18 @@
       <%= f.select :option_type_ids, option_types_options_for(@product), {}, :class => "select2", :multiple => true %>
     <% end %>
   </div>
+
+  <%= f.field_container :factory do %>
+      <%= f.label :factory_id, t(:factory) %>
+      <%= f.collection_select :factory_id, Factory.all, :id, :name, {:include_blank => 'None'}, {:class => 'select2'} %>
+      <%= f.error_message_on :factory %>
+  <% end %>
+
+  <%= f.field_container :size_chart do %>
+      <%= f.label :size_chart, t(:size_chart) %>
+      <%= f.select :size_chart, options_for_select(Spree::Product::SIZE_CHARTS), {:include_blank => false}, {:class => 'select2'} %>
+      <%= f.error_message_on :factory %>
+  <% end %>
 
   <!-- <h2><%= t(:metadata) %></h2> -->
   <div data-hook="admin_product_form_meta" class="alpha omega twelve columns">
