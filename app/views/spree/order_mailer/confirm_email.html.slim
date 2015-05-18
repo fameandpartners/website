@@ -62,30 +62,31 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
             tr
               td height="40"
             tr
-              td
+              td style="color: #666; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
 
-                p
-                  |You can log in to track your order and manage your account:
+                p style="margin: 0;"
+                  | To track your order or manage your personal details, log in to your account here:
                   = login_url
 
                 - if @order.user && @order.user.automagically_registered?
-                  p If you're a new customer, we've set up an account for you.
+                  p style="margin: 0;"
+                    | We have automatically created an account for your convenience where you can track your order and manage your personal details.
 
-                  p
-                    | Your username is:
-                    = @order.email
+                  p style="margin: 0;"
+                    | Your username is:&nbsp;
+                    strong= @order.email
 
-                  p
-                    | Your temporary password is:
-                    = @order.number
+                  p style="margin: 0;"
+                    | Your temporary password is:&nbsp;
+                    strong= @order.number
 
-                  p We suggest you change this password once you've logged in
-
+                  p style="margin: 0;"
+                    | Please change this password once you have logged in.
+            tr
+              td height="40"
             tr
               td style="color: #666; text-transform: uppercase; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
                 a href="http://fameandpartners.com/faqs" style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" FAQ
-                '  |
-                span style="color: #666; text-transform: uppercase; text-decoration: none; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;" 1300 924 860
             tr
               td height="27"
       td width="15"
