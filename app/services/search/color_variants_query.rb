@@ -10,6 +10,7 @@
 #   order:            ['price_high', 'price_low', 'newest', 'fast_deliver']
 #   discount:         search products with specific discount ( in percents ) or :all to find all products under sale
 #   query_string:     search products by this text
+#   fast_making:      search by express delivery [ available or not ]
 #   limit:            1000 by default
 #   offset:           0 by default
 # )

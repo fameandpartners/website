@@ -9,6 +9,7 @@
 #   :style
 #   :bodyshape
 #   :lp - landing page?
+#   :fast_making - only items with available express making
 #
 # Date is from the parent taxon
 # Banner text over the image in the collection header:

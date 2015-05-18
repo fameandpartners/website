@@ -10,6 +10,7 @@
 #    color:          # exact color, will be searched with similarities
 #    bodyshape:      params[:bodyshape],
 #    discount:       params[:sale] || params[:discount],
+#    fast_making:    params[:fast_making],
 #    order:          params[:order]
 #    limit:          # number of records
 #    offset:         # number of records to skip
