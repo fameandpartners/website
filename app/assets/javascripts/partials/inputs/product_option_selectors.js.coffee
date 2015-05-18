@@ -188,7 +188,7 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
 
   getValue: () ->
     id = @$container.find('.active').data('id')
-    if id == 'original'
+    if id == 'original' || @disabled
       null
     else
       @prepareValue(id)
@@ -212,10 +212,7 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
     @$container.find('.making-option.active').not($el).removeClass('active')
     $el.addClass('active')
 
-    if data.id == 'original'
-      @$action.html("Production Time")
-    else
-      @$action.html("#{data.name} +#{data.price}")
+    @setTitlesForCurrentValue(data)
 
     @trigger('change')
     @close()
@@ -227,5 +224,17 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
     @close()
 
   enable: () ->
-    @$action.html('Production Time').removeClass('disabled')
+    @$action.html('Standard Making').removeClass('disabled')
     @disabled = false
+
+  setTitlesForCurrentValue: (data) ->
+    data ||= @$container.find('.active').data()
+
+    if @disabled
+      @$action.html("Free Shipping")
+    else if data.id == 'original'
+      @$action.html("Standard Making")
+    else if data.name
+      @$action.html("#{data.name} +#{data.price}")
+    else
+      @$action.html("Production Time")
