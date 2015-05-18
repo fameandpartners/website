@@ -24,21 +24,22 @@ module Shipping
           match_errors << :no_style_in_order
 
         elsif style_matches.count == 1
-          lit.line_item = style_matches.first
+          lit.line_item = style_matches.first.item
 
         elsif style_matches.count > 1
           match_errors << :multiple_of_style
           colour_matches = style_matches.select { |item|
-            lit.colour.starts_with? item.variant.dress_color.name
+            lit.colour.starts_with? item.colour_name.downcase
           }
 
           if colour_matches.count == 1
-            lit.line_item = colour_matches.first
+            lit.line_item = colour_matches.first.item
           elsif colour_matches.count > 1
             match_errors << :multiple_of_colour
 
-            wrapped      = colour_matches.collect { |m| ::Orders::LineItemPresenter.new(m, order) }
-            size_matches = wrapped.select { |item| item.country_size.downcase == lit.size }
+            size_matches = colour_matches.select { |item|
+              item.country_size.downcase == lit.size
+            }
 
             if size_matches.empty?
               match_errors << :no_size_matches
@@ -52,8 +53,6 @@ module Shipping
 
         if lit.line_item
           lit.shipment = order.shipments.detect { |ship| ship.line_items.include?(lit.line_item) }
-        elsif order.shipments.count == 1
-          lit.shipment = order.shipments.last
         end
 
         if lit.shipped? && lit.tracking_mismatch?
@@ -140,17 +139,26 @@ module Shipping
       shipments_with_items.each do |shipment, tracking_items|
         unless shipment
           tracking_items.map do |ti|
-            ti.skip(:no_shipment)
+            ti.invalid(:no_shipment)
           end
           next :no_shipment
         end
+
+        unless tracking_items.all?(&:valid_tracking?)
+          tracking_items.map do |ti|
+            ti.invalid(:invalid_tracking)
+          end
+          next :invalid_tracking
+        end
+
+        possible_to_ship = !shipment.shipped? && tracking_items.all?(&:valid_tracking?)
 
         if shipment.shipped?
           tracking_items.map do |ti|
             next if ti.state.present?
 
             if ti.tracking_mismatch?
-              ti.skip(:bad_previous_shipment)
+              ti.fail(:bad_previous_shipment)
             else
               ti.skip(:already_shipped)
             end
@@ -158,7 +166,7 @@ module Shipping
           next :already_shipped
         end
 
-        if shipment.line_items.count == 1 && !shipment.shipped?
+        if shipment.line_items.count == 1 && possible_to_ship
           shipper = Admin::ReallyShipTheShipment.new(shipment, shipment.tracking)
 
           if shipper.valid? && shipper.ship!
@@ -179,7 +187,7 @@ module Shipping
 
         if shipment.line_items.count > 1 && !shipment.shipped?
           tracking_items.map do |ti|
-            ti.skip(:multiple_items)
+            ti.pending(:multiple_items)
           end
         end
 
@@ -192,7 +200,9 @@ module Shipping
     def items_matching_style(order, style)
       order.line_items.select do |i|
         i.variant.sku.to_s.start_with? style
-      end
+      end.collect { |item|
+        ::Orders::LineItemPresenter.new(item, order)
+      }
     end
   end
 end

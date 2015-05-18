@@ -14,5 +14,11 @@ module Admin
           }
       )
     end
+
+    def item_states
+      line_item_updates.group_by(&:state).collect { |key, items|
+        [key || 'new', items.count]
+      }.to_h.tap { |h| h.default = 0 }
+    end
   end
 end
