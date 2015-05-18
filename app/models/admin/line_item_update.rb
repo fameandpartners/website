@@ -12,9 +12,13 @@ module Admin
                     :tracking_number,
                     :delivery_method,
                     :match_errors,
-                    :shipment_errors
+                    :setup_ship_errors,
+                    :shipment_errors,
+                    :make_state,
+                    :raw_line_item
 
     serialize :match_errors, Array
+    serialize :setup_ship_errors, Array
     serialize :shipment_errors, Array
 
     belongs_to :order, :class_name => 'Spree::Order'

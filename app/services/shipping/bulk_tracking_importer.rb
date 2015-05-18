@@ -31,17 +31,6 @@ module Shipping
       #  "地址",
       #  "电话"]
       #
-      header_detectors = {
-        :order_date      => /order release date/i,
-        :order_number    => /order no/i,
-        :style_name      => /style/i,
-        :size            => /size/i,
-        :quantity        => /quantity/i,
-        :colour          => /colour|color/i,
-        :dispatch_date   => /parcel sent date/i,
-        :tracking_number => /tracking/i
-      }
-
       mapped_headers = {}
       header_detectors.map do |name, detector|
         next unless header = csv.headers.detect { |h| h[detector] }
@@ -59,6 +48,21 @@ module Shipping
       end
 
       new_bulk_update
+    end
+
+    def header_detectors
+      {
+        order_date:      /order release date/i,
+        order_number:    /order no/i,
+        style_name:      /style/i,
+        size:            /size/i,
+        quantity:        /quantity/i,
+        colour:          /colour|color/i,
+        dispatch_date:   /parcel sent date|shipment date/i,
+        tracking_number: /tracking/i,
+        make_state:      /make stat/i,
+        raw_line_item:   /line item/i,
+      }
     end
   end
 end
