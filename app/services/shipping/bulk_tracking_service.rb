@@ -24,21 +24,22 @@ module Shipping
           match_errors << :no_style_in_order
 
         elsif style_matches.count == 1
-          lit.line_item = style_matches.first
+          lit.line_item = style_matches.first.item
 
         elsif style_matches.count > 1
           match_errors << :multiple_of_style
           colour_matches = style_matches.select { |item|
-            lit.colour.starts_with? item.variant.dress_color.name
+            lit.colour.starts_with? item.colour_name.downcase
           }
 
           if colour_matches.count == 1
-            lit.line_item = colour_matches.first
+            lit.line_item = colour_matches.first.item
           elsif colour_matches.count > 1
             match_errors << :multiple_of_colour
 
-            wrapped      = colour_matches.collect { |m| ::Orders::LineItemPresenter.new(m, order) }
-            size_matches = wrapped.select { |item| item.country_size.downcase == lit.size }
+            size_matches = colour_matches.select { |item|
+              item.country_size.downcase == lit.size
+            }
 
             if size_matches.empty?
               match_errors << :no_size_matches
@@ -192,7 +193,9 @@ module Shipping
     def items_matching_style(order, style)
       order.line_items.select do |i|
         i.variant.sku.to_s.start_with? style
-      end
+      end.collect { |item|
+        ::Orders::LineItemPresenter.new(item, order)
+      }
     end
   end
 end
