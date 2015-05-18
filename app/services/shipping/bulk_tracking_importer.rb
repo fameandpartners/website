@@ -9,9 +9,11 @@ module Shipping
       @original_filename = original_filename
     end
 
-
     def import
-      csv = CSV.read(source_file,
+      raw_csv = File.read(source_file)
+      u8_csv = raw_csv.encode(Encoding::UTF_8, invalid: :replace, undef: :replace, replace: '')
+
+      csv = CSV.parse(u8_csv,
                      headers:           true,
                      skip_blanks:       true,
                      header_converters: ->(h) { h.to_s.gsub('_', ' ').strip }
