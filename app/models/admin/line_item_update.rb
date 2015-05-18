@@ -30,7 +30,7 @@ module Admin
     end
 
     def tracking_mismatch?
-      shipment && shipment.tracking != tracking_number
+      shipment && shipment.tracking.present? && shipment.tracking != tracking_number
     end
 
     def tracking_matches?

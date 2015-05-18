@@ -146,6 +146,15 @@ module Shipping
           next :no_shipment
         end
 
+        unless tracking_items.all?(&:valid_tracking?)
+          tracking_items.map do |ti|
+            ti.skip(:invalid_tracking)
+          end
+          next :invalid_tracking
+        end
+
+        possible_to_ship = !shipment.shipped? && tracking_items.all?(&:valid_tracking?)
+
         if shipment.shipped?
           tracking_items.map do |ti|
             next if ti.state.present?
@@ -159,7 +168,7 @@ module Shipping
           next :already_shipped
         end
 
-        if shipment.line_items.count == 1 && !shipment.shipped?
+        if shipment.line_items.count == 1 && possible_to_ship
           shipper = Admin::ReallyShipTheShipment.new(shipment, shipment.tracking)
 
           if shipper.valid? && shipper.ship!
