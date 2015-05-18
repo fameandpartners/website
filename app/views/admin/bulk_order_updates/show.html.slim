@@ -1,22 +1,26 @@
 = render :partial => 'sub_menu'
+table
+  thead : tr
+    th Created On
+    th Created By
+    th Filename
+    th Total Items
+    th New
+    th Skipped
+    th Failed
+    th Processed
+  tbody : tr
+    td = bulk_update.user
+    td = bulk_update.created_at
+    td = bulk_update.filename
+    td = bulk_update.line_item_updates.count
+    td = bulk_update.item_states['new']
+    td = bulk_update.item_states['skip']
+    td = bulk_update.item_states['fail']
+    td = bulk_update.item_states['process']
 
 table
-  tr
-    th Created On
-    td colspan=3 = bulk_update.created_at
-  tr
-    th Created By
-    td colspan=3 = bulk_update.user
-  tr
-    th Filename
-    td colspan=3 = bulk_update.filename
-  tr
-    th Total Items
-    td colspan=3 = bulk_update.line_item_updates.count
-  tr
-    th id
-    td colspan=3 = bulk_update.id
-  tr
+  tbody
     th Actions
     td
       = form_for bulk_update do |f|
