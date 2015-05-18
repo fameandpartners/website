@@ -1,40 +1,48 @@
 require 'spec_helper'
 
 describe ApplicationController, :type => :controller do
-  describe '#url_with_correct_site_version' do
-    before(:each) do
-      allow(controller).to receive(:current_site_version).and_return(current_site_version)
+  controller do
+    def index
+      render :text => 'ok'
     end
 
-    context 'current site code is the default' do
-      let(:current_site_version) { build_stubbed(:site_version, permalink: 'us', default: true) }
+    def create
+      render :text => 'ok'
+    end
+  end
 
-      before(:each) { controller.request.path_info = '/my-awesome-request' }
+  describe 'before filters' do
+    describe '#check_site_version' do
+      let!(:australian_site_version) { create(:site_version, permalink: 'au') }
+      let!(:portuguese_site_version) { create(:site_version, permalink: 'pt') }
 
-      it 'removes any site version code from the beginning of the URL' do
-        result = controller.url_with_correct_site_version
-        expect(result).to eq('http://test.host/my-awesome-request')
+      before(:each) do
+        controller.instance_variable_set(:@current_site_version, australian_site_version)
       end
-    end
 
-    describe 'current site code is anything else' do
-      let(:current_site_version) { build_stubbed(:site_version, permalink: 'au', default: false) }
+      context 'request is a ajax or a non GET' do
+        it 'does not changes the site version' do
+          post :create, { site_version: 'pt' }
+          expect(controller.instance_variable_get(:@current_site_version)).to eq(australian_site_version)
 
-      context 'request is made with a specific code on its URL' do
-        before(:each) { controller.request.path_info = '/us/my-awesome-request' }
-
-        it 'returns the URL with the current site code' do
-          result = controller.url_with_correct_site_version
-          expect(result).to eq('http://test.host/au/my-awesome-request')
+          xhr :get, :index, { site_version: 'pt' }
+          expect(controller.instance_variable_get(:@current_site_version)).to eq(australian_site_version)
         end
       end
 
-      context 'request is made to the default country' do
-        before(:each) { controller.request.path_info = '/my-awesome-request' }
+      context 'user request a different site version' do
+        it 'updates the current site version with the requested' do
+          get :index, { site_version: 'pt' }
+          expect(controller.instance_variable_get(:@current_site_version)).to eq(portuguese_site_version)
+          expect(cookies[:site_version]).to eq(portuguese_site_version.code)
+        end
+      end
 
-        it 'adds the site code to the beginning of the URL' do
-          result = controller.url_with_correct_site_version
-          expect(result).to eq('http://test.host/au/my-awesome-request')
+      context 'user requests the same site version' do
+        it 'keep the current site version' do
+          get :index, { site_version: 'au' }
+          expect(controller.instance_variable_get(:@current_site_version)).to eq(australian_site_version)
+          expect(cookies[:site_version]).to eq(australian_site_version.code)
         end
       end
     end
