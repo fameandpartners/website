@@ -1,19 +1,31 @@
-- if !Rails.env.production? || Features.active?(:wishpond_fashion_it_girl_au)
-  .wishpond-campaign data-wishpond-id="723653" data-wishpond-href="https://www.wishpond.com/lp/723653/"
+- if current_site_version.is_australia?
+  div
+    .grid-container
+      .grid-3 style="background-color:#CEB6CB;margin-top:40px;height:159px"
+      .grid-9
+        div class="wishpond-campaign" data-wishpond-id="723653" data-wishpond-href="https://www.wishpond.com/lp/723653/"
 
   javascript:
-    (function(d, s, id) {
+    (function() {
       window.Wishpond = window.Wishpond || {};
       Wishpond.merchantId = '514769';
-      Wishpond.writeKey = '03e274b92588';
-      var js, wpjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//cdn.wishpond.net/connect.js";
-      wpjs.parentNode.insertBefore(js, wpjs);
-    }(document, 'script', 'wishpond-connect'));
+    })()
+
+  script type="text/javascript" src="//cdn.wishpond.com/master.js"
 
 - else
+  .fashion-it-girl-au
+    .top-bar
+    .container-fluid.no-padding
+      .row
+        .col-md-4.col-sm-12.no-padding-top
+          .squares
+          div style="margin-left:50px;margin-top:40px;"
+            h1 Sorry, but the Fashion IT Girl 2015 competition is only open to AU residents.
+            h2 Stay tuned or #{ link_to 'contact us', contact_path }  to register your interest.
+        .col-md-8.banner.hidden-sm.hidden-xs
+
+/- if !Features.active(:fashion_it_girl_au_2015_campaign)
   .fashion-it-girl-au
     .top-bar
     .container-fluid.no-padding
@@ -83,5 +95,5 @@
     .application
       h3 Remember to come back here on Monday 18th of May when applications are open!
 
-  = content_for :inline_javascript do
+  /= content_for :inline_javascript do
     | new window.page.FashionITGirlReminder({form: "#fashion-it-girl-reminder"});
