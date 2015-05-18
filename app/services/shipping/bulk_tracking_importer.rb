@@ -14,7 +14,7 @@ module Shipping
       csv = CSV.read(source_file,
                      headers:           true,
                      skip_blanks:       true,
-                     header_converters: ->(h) { h.to_s.strip }
+                     header_converters: ->(h) { h.to_s.gsub('_', ' ').strip }
       )
 
       new_bulk_update = Admin::BulkOrderUpdate.new(user: username, filename: original_filename)
