@@ -60,7 +60,7 @@
         .row
           .col-md-12.form-group
             label timezone
-            = f.select :timezone, options_for_select(["UTC   Universal Coordinated Time  GMT", "ECT   European Central Time   GMT+1:00", "EET   Eastern European Time   GMT+2:00", "ART   (Arabic) Egypt Standard Time  GMT+2:00", "EAT   Eastern African Time  GMT+3:00", "MET   Middle East Time  GMT+3:30", "NET   Near East Time  GMT+4:00", "PLT   Pakistan Lahore Time  GMT+5:00", "IST   India Standard Time   GMT+5:30", "BST   Bangladesh Standard Time  GMT+6:00", "VST   Vietnam Standard Time   GMT+7:00", "CTT   China Taiwan Time   GMT+8:00", "JST   Japan Standard Time   GMT+9:00", "ACT   Australia Central Time  GMT+9:30"]), {}, :class => 'form-control form-control-md selectbox'
+            = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox'
 
         .row
           .col-md-12.form-group
