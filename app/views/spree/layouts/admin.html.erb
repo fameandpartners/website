@@ -6,6 +6,8 @@
 <!--[if gt IE 9]><!--><html lang="en"><!--<![endif]-->
   <head data-hook="admin_inside_head">
     <%= render :partial => 'spree/admin/shared/head' %>
+
+    <%= render :partial => '/spree/layouts/spree_admin_javascript' %>
   </head>
 
   <body class='admin' data-ajax-root-path="<%= spree.root_path %>">
@@ -126,8 +128,6 @@
     </div>
 
     <div data-hook="admin_footer_scripts"></div>
-
-    <%= render partial: '/spree/layouts/spree_admin_javascript' %>
 
   </body>
 </html>
