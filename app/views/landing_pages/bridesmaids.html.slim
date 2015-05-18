@@ -3,23 +3,9 @@
 
 .page-content.bridesmaids
   ul.rslides
-
-    li
-      = image_tag "edits/BRIDESMAIDS/1_171114_F&P_-BRIDESMAIDS_Shot_2_129.jpg", alt: ' Carissa', class: 'img-responsive portrait-img'
-    li
-      = image_tag "edits/BRIDESMAIDS/2_171114_F&P_-BRIDESMAIDS_Shot_1_006.jpg", alt: 'Glacier', class: 'img-responsive portrait-img'
-    li
-      = image_tag "edits/BRIDESMAIDS/3_171114_F&P_-BRIDESMAIDS_Shot_3_211.jpg", alt: 'Izzie and Jamie', class: 'img-responsive portrait-img'
-    li
-      = image_tag "edits/BRIDESMAIDS/4_171114_F&P_-BRIDESMAIDS_Shot_3_230-1.jpg", alt: 'Gemma Two Piece and Camila Two Piece', class: 'img-responsive portrait-img'
-    li
-      = image_tag "edits/BRIDESMAIDS/5_171114_F&P_-BRIDESMAIDS_Shot_4_299.jpg", alt: 'Rylie', class: 'img-responsive portrait-img'
-    li
-      = image_tag "edits/BRIDESMAIDS/6_171114_F&P_-BRIDESMAIDS_Shot_5_378.jpg", alt: 'Hayley Two Piece and Pippa', class: 'img-responsive portrait-img'
-    li
-      = image_tag "edits/BRIDESMAIDS/7_171114_F&P_-BRIDESMAIDS_Shot_8_635.jpg", alt: 'Anabelle Two Piece', class: 'img-responsive portrait-img'
-    li
-      = image_tag "edits/BRIDESMAIDS/8_171114_F&P_-BRIDESMAIDS_Shot_6_472.jpg", alt: '', class: 'img-responsive portrait-img'
+    - (1..8).each do |n|
+      li
+        = image_tag "edits/bridesmaids/#{n}.jpg", alt: "The best is yet to come #{n}", class: 'img-responsive portrait-img'
 
   .page-content.products-collections.category
     .container.relative.products-collection
@@ -34,14 +20,14 @@
           p Fame & Partners is your only online dress boutique delivering high quality and uniquely designed bridesmaids dresses, just for you.
           p Find your uniquely designed bridesmaid dress by choosing your favourite colours, from white to lavender, mint and soft pink with divine fabrics and silhouettes your best friends will thank your for!
         .col-md-6.col-xs-12.col-xxs-12
-          = image_tag 'campaigns/bridemaid/bridesm-1.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
+          = image_tag 'edits/bridesmaids/editorial-1.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
         .clearfix.visible-sm-block.visible-xs-block
 
       =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(5, 4) }
 
       .row.relative.content-box
         .col-md-6.col-xs-12.col-xxs-12
-          = image_tag 'campaigns/bridemaid/bridesm-2.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
+          = image_tag 'edits/bridesmaids/editorial-2.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
         .col-md-6.col-xs-12.col-xxs-12.content style="min-height: 355px;"
           h2 Free customisation and delivery
           p Fame & Partners offers free customisation, to save you on alteration costs and free delivery Australia wide.

@@ -3,7 +3,7 @@ class OrderReturnRequest < ActiveRecord::Base
 
   belongs_to :order, :class_name => 'Spree::Order'
 
-  delegate :number, :completed_at, :to => :order_presenter
+  delegate :number, :completed_at, :name, :phone_number, :shipping_address, :to => :order_presenter
 
   has_many :return_request_items
   accepts_nested_attributes_for :return_request_items
@@ -19,7 +19,7 @@ class OrderReturnRequest < ActiveRecord::Base
   def order_presenter
     @order_presenter = Orders::OrderPresenter.new(order)
   end
-  
+
   def load_order
     if order_id && !order
       @order = Order.find(order_id)

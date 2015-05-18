@@ -34,6 +34,14 @@ Spree::Order.class_eval do
     end
   end
 
+  def returnable?
+    shipped? && !order_return_requested? && completed_at <= 50.days.ago
+  end
+
+  def order_return_requested?
+    OrderReturnRequest.exists?(:order_id => id)
+  end
+
   def shipped?
     shipment_state.present? && shipment_state == 'shipped'
   end

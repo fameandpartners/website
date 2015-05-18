@@ -1,0 +1,11 @@
+= render :partial => '/spree/admin/orders/sub_menu'
+
+- content_for :page_title do
+  ' Bulk Order Tracking Updates
+
+- content_for :page_actions do
+  div.toolbar data-hook="toolbar"
+    ul.actions.header-action-links.inline-menu
+      li = link_to 'New Batch Upload', new_admin_bulk_order_update_path
+
+

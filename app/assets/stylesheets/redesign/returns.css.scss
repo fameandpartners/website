@@ -6,10 +6,18 @@
     background:#FFFFFF;
     float: none;
   }
-  
+
   label {
     display:block;
     width:100%;
+    margin-bottom:0px;
+  }
+
+  .return-reason-category-container {
+    label {
+      margin-top:7px;
+      margin-bottom:0px;
+    }
   }
 
   .background-grey {
