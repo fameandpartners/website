@@ -129,6 +129,6 @@ class Products::SelectionOptions
 
     # making options
     def product_making_options
-      product.making_options
+      product.making_options.to_a
     end
 end
