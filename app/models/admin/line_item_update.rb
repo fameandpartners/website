@@ -25,6 +25,15 @@ module Admin
     belongs_to :line_item, :class_name => 'Spree::LineItem'
     belongs_to :shipment, :class_name => 'Spree::Shipment'
 
+    PROCESS_STATES = [:invalid, :fail, :skip, :pending, :process]
+
+    PROCESS_STATES.each do |m|
+      define_method m do |reason, at = DateTime.now|
+        mark_state(m, reason, at)
+      end
+    end
+
+
     def valid_tracking?
       tracking_number =~ /\d{10}/
     end
@@ -57,21 +66,9 @@ module Admin
       end
     end
 
-    def skip(reason, at = DateTime.now)
-      mark_state(:skip, reason, at)
-    end
-
-    def process(reason, at = DateTime.now)
-      mark_state(:process, reason, at)
-    end
-
-    def fail(reason, at = DateTime.now)
-      mark_state(:fail, reason, at)
-    end
-
     private
 
-    def mark_state(state, reason, at)
+    def mark_state(state, reason, at = DateTime.now)
       self.state          = state
       self.process_reason = reason
       self.processed_at   = at

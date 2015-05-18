@@ -141,14 +141,14 @@ module Shipping
       shipments_with_items.each do |shipment, tracking_items|
         unless shipment
           tracking_items.map do |ti|
-            ti.skip(:no_shipment)
+            ti.invalid(:no_shipment)
           end
           next :no_shipment
         end
 
         unless tracking_items.all?(&:valid_tracking?)
           tracking_items.map do |ti|
-            ti.skip(:invalid_tracking)
+            ti.invalid(:invalid_tracking)
           end
           next :invalid_tracking
         end
@@ -160,7 +160,7 @@ module Shipping
             next if ti.state.present?
 
             if ti.tracking_mismatch?
-              ti.skip(:bad_previous_shipment)
+              ti.fail(:bad_previous_shipment)
             else
               ti.skip(:already_shipped)
             end
@@ -189,7 +189,7 @@ module Shipping
 
         if shipment.line_items.count > 1 && !shipment.shipped?
           tracking_items.map do |ti|
-            ti.skip(:multiple_items)
+            ti.pending(:multiple_items)
           end
         end
 

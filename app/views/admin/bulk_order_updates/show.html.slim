@@ -6,18 +6,16 @@ table
     th Filename
     th Total Items
     th New
-    th Skipped
-    th Failed
-    th Processed
+    - Admin::LineItemUpdate::PROCESS_STATES.each do |state_name|
+      th = state_name.capitalize
   tbody : tr
     td = bulk_update.user
     td = bulk_update.created_at
     td = bulk_update.filename
     td = bulk_update.line_item_updates.count
     td = bulk_update.item_states['new']
-    td = bulk_update.item_states['skip']
-    td = bulk_update.item_states['fail']
-    td = bulk_update.item_states['process']
+    - Admin::LineItemUpdate::PROCESS_STATES.each do |state_name|
+      td class="bulk_update #{state_name}" = bulk_update.item_states[state_name.to_s]
 
 table
   tbody
@@ -39,7 +37,8 @@ table
     tr
       th colspan=10 CSV
       th Matching
-      th colspan=10 Spree
+      th colspan=6 Spree
+      th colspan=10 Update Process
     tr
       th #
       th order_date
@@ -93,7 +92,7 @@ table
         - if liu.shipment
           - cssclass = liu.shipment_tracking_state
           span style=cssclass = liu.shipment.tracking
-      td = liu.state
+      td class="bulk_update #{liu.state}" = liu.state
       td = liu.process_reason
 
       td = liu.shipment_errors.to_sentence
