@@ -53,8 +53,6 @@ module Shipping
 
         if lit.line_item
           lit.shipment = order.shipments.detect { |ship| ship.line_items.include?(lit.line_item) }
-        elsif order.shipments.count == 1
-          lit.shipment = order.shipments.last
         end
 
         if lit.shipped? && lit.tracking_mismatch?
