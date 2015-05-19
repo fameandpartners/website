@@ -1,9 +1,13 @@
-<%= t('order_mailer.confirm_email.dear_customer') %>
+Good news, your order <%= @order.number %> has been placed.
 
-<%= t('order_mailer.confirm_email.instructions') %>
+Thank you for shopping at Fame & Partners. We are so excited to send your order.
+You will receive another email with your tracking number once your order has been shipped.
+How long will your order take to arrive:
+  Standard orders will be shipped within 7-10 Business days from order placement.
+  If you have ordered a customized dress you will receive this within 10-14 business days.
 
 ============================================================
-<%= t('order_mailer.confirm_email.order_summary') %>
+You ordered [<%= @order.number %>]:
 ============================================================
 <% @order.line_items.each do |item| %>
   <%= item.variant.sku %> <%= raw(item.variant.product.name) %> <%= raw(item.options_text) -%> (<%=item.quantity%>) @ <%= item.variant.display_amount %> = <%= item.display_amount %>
@@ -29,3 +33,9 @@ Your temporary password is: <%= @order.number %>
 
 Please change this password once you have logged in.
 <% end %>
+
+When your order arrives: 
+Try it on! Here are some Handy tips:
+Keep all packaging in case you need to make a return, exchange or refund.
+Please make sure the dress is unworn and all tags are still attached.
+Please contact team@fameandpartners.com for a RMA number within 30 days of receiving your order.
