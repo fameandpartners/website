@@ -20,6 +20,12 @@ class StaticsController < ApplicationController
     render :layout => 'redesign/application'
   end
 
+  def size_guides_lp
+    @title = "new size gude - " + default_seo_title
+    @description = "size guides"
+    render :layout => 'redesign/application'
+  end
+
   def ecom_terms
     @title = "Terms & Conditions " + default_seo_title
     @description = "Terms & Conditions"
