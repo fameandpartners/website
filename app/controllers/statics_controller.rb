@@ -15,13 +15,13 @@ class StaticsController < ApplicationController
   end
 
   def faqs
-    @title = "FAQs - " + default_seo_title
+    @title = "FAQs " + default_seo_title
     @description = "FAQs"
     render :layout => 'redesign/application'
   end
 
   def size_guides_lp
-    @title = "New Size Guide - " + default_seo_title
+    @title = "New Size Guide " + default_seo_title
     @description = "Size Guides"
     render :layout => 'redesign/application'
   end
