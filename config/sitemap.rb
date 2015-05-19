@@ -143,15 +143,25 @@ SitemapGenerator::Sitemap.create(options) do
     })
   end
 
-  statics_pages = [ 
-    '/about', '/why-us', '/privacy', '/legal', '/assets/returnform.pdf',
+  # Static pages
+  localizable_statics_pages = [
+    '/about', '/why-us', '/privacy',
     '/style-consultation', '/fame-chain',
     '/fashionitgirl2015',
     '/bridesmaid-dresses', '/sale-dresses',
     '/unidays'
   ]
-  statics_pages.each do |page_path|
+
+  static_pages = [
+    '/assets/returnform.pdf'
+  ]
+
+  localizable_statics_pages.each do |page_path|
     add page_path, priority: 0.5, alternates: build_alternates(page_path)
+  end
+
+  static_pages.each do |page_path|
+    add page_path, priority: 0.5
   end
 end
 
