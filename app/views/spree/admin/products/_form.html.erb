@@ -193,7 +193,7 @@
 
   <%= f.field_container :size_chart do %>
       <%= f.label :size_chart, t(:size_chart) %>
-      <%= f.select :size_chart, options_for_select(Spree::Product::SIZE_CHARTS), {:include_blank => false}, {:class => 'select2'} %>
+      <%= f.select :size_chart, options_for_select(Spree::Product::SIZE_CHARTS, f.object.size_chart), {:include_blank => false}, {:class => 'select2'} %>
       <%= f.error_message_on :factory %>
   <% end %>
 

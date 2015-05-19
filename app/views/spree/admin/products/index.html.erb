@@ -30,7 +30,7 @@
         <%- locals = {:f => f} %>
 
         <div data-hook="admin_products_index_search">
-          <div class="alpha nine columns">
+          <div class="alpha four columns">
             <div class="field">
               <%= f.label :name_cont, t(:name) %>
               <%= f.text_field :name_cont, :size => 15 %>
@@ -42,7 +42,15 @@
               <%= f.text_field :variants_including_master_sku_cont, :size => 15 %>
             </div>
           </div>
-          <div class="three columns omega">
+
+          <div class="four columns">
+            <div class="field">
+              <%= f.label :size_chart_eq, t(:size_chart) %>
+              <%= f.select :size_chart_eq, SizeChart::CHARTS.keys, {:include_blank => true} , :class => 'select2' %>
+            </div>
+          </div>
+
+          <div class="three four omega">
             <div class="field checkbox">
               <label>
                 <%= f.check_box :deleted_at_null, {:checked => params[:q][:deleted_at_null].blank?}, '', '1' %>
