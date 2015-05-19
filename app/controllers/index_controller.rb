@@ -5,6 +5,7 @@ class IndexController < ApplicationController
   before_filter :force_redirection_to_current_site_version
 
   def show
+    @banner = Spree::BannerBox.big_banner.where('css_class IS NULL OR css_class = ?' => current_site_version.code).limit(10)
     @title = "Formal dresses online | Prom, Bridesmaids and Evening Gowns #{default_seo_title}"
     @description = default_meta_description
     if Features.active?(:maintenance)
