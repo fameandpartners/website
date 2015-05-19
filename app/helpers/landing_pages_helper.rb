@@ -16,7 +16,7 @@ module LandingPagesHelper
    def cropped_product_hoverable_image_tag(product)
      image_urls = cropped_product_hoverable_images(product)
 
-     image_tag image_urls.first, :alt => product.name, :class => "img-product img-responsive", 'data-hover' => image_urls.first
+     image_tag image_urls.first, :alt => product.name, :class => "img-product img-responsive", 'data-hover' => image_urls.last
    end
 
   # Attempts to load "CROP" style images, falls back to

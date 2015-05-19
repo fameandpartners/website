@@ -1,7 +1,5 @@
 - if shipment = line_item.shipment
-  - if shipment.shipped?
-    = render partial: 'shipped_shipment_cells', locals: { shipment: shipment }
-  - elsif shipment.order.can_ship?
+  - if shipment.order.can_ship?
     = form_for shipment, url: "/admin/fabrications/#{line_item.id}", remote: true, class: 'shipment_tracking_number_form' do |f|
       td
         = f.hidden_field :id
@@ -13,6 +11,3 @@
   - else
     td = shipment.state.capitalize
     td = shipment.order.shipment_state.capitalize
-- else
-  td colspan=2
-    ' No Shipment defined
