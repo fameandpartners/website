@@ -47,9 +47,4 @@ describe 'Old Pages Redirection', type: :request do
       it_will :redirect, '/au/dresses/dress-my-dress-slug/blank', '/dresses/dress-my-dress-slug?color=blank'
     end
   end
-
-  context 'bridesmaid party' do
-    it_will :redirect, '/bridesmaid-party', '/bridesmaid-dresses'
-    it_will :redirect, '/bridesmaid-party/anything/else/really', '/bridesmaid-dresses'
-  end
 end
