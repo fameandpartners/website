@@ -23,13 +23,11 @@ module Spree
         order = object
       end 
 
-      result = 0.0
-      order.line_items.includes(:personalization).each do |line_item|
-        next if line_item.personalization.blank?
-
-        result += line_item.personalization.size_cost * size_discount
-        result += line_item.personalization.color_cost * color_discount
-        result += line_item.personalization.customizations_cost * customizations_discount
+      result = BigDecimal.new(0)
+      order_personalizations(order).each do |personalization|
+        result += personalization.size_cost * size_discount
+        result += personalization.color_cost * color_discount
+        result += personalization.customizations_cost * customizations_discount
       end
 
       # return negative value - we decreasing order price
@@ -37,6 +35,12 @@ module Spree
     end 
 
     private
+
+      def order_personalizations(order)
+        order.line_items.includes(:personalization).map do |line_item|
+          line_item.personalization
+        end.compact
+      end
 
       def size_discount
         @size_discount ||= convert_percents_to_float(preferred_custom_size_discount)
