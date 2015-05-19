@@ -39,5 +39,12 @@ module Products
         end
       end
     end
+
+    describe '#size_chart' do
+      let(:size_chart)  { double('TEENYTINY') }
+      subject(:product) { Presenter.new size_chart: size_chart }
+
+      it { expect(product.size_chart).to eq(size_chart) }
+    end
   end
 end

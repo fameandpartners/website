@@ -1,5 +1,11 @@
 module SizeChart
   module_function
+
+  def chart(chart_name)
+    CHARTS.fetch(chart_name) { DEFAULT_CHART }
+  end
+
+
   def size_chart_2015
     size_set = [
       [4,  32,  0, 78,   31,  60,   24,   84,   35],
@@ -56,7 +62,13 @@ module SizeChart
     size_set.collect { |size_values| size_headings.zip(size_values).to_h }
   end
 
-  SIZE_CHART_2015 = self.size_chart_2015.freeze
   SIZE_CHART_2014 = self.size_chart_2014.freeze
+  SIZE_CHART_2015 = self.size_chart_2015.freeze
+  DEFAULT_CHART   = SIZE_CHART_2014
+
+  CHARTS = {
+    '2014' => SIZE_CHART_2014,
+    '2015' => SIZE_CHART_2015
+  }
 end
 

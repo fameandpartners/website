@@ -4,7 +4,8 @@ module Products
     attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
                   :permalink, :is_active, :images, :default_image, :price,
                   :discount, :recommended_products, :available_options, :preorder,
-                  :moodboard, :fabric, :style_notes, :color_id, :color_name, :color
+                  :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
+                  :size_chart
 
     def initialize(opts)
       opts.each do |k, v|
