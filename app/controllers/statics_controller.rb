@@ -21,8 +21,8 @@ class StaticsController < ApplicationController
   end
 
   def size_guides_lp
-    @title = "new size gude - " + default_seo_title
-    @description = "size guides"
+    @title = "New Size Guide - " + default_seo_title
+    @description = "Size Guides"
     render :layout => 'redesign/application'
   end
 
