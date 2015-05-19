@@ -57,6 +57,7 @@ class Products::CollectionDetails
     taxon.footer            = ''
     selected_color_data      = color_data[color.name.to_s.downcase]
     if selected_color_data
+      taxon.seo_description   = selected_color_data[:description]
       taxon.banner.title      = selected_color_data[:title]
       taxon.banner.subtitle   = selected_color_data[:description]
       taxon.banner.image      = selected_color_data[:image]
