@@ -13,4 +13,14 @@ h2.text-center Easy Size &amp; Measurement Guide
 
       p SKIRT LENGTH Stand with your heels together,<br>keep the tape straight and perpendicular to the floor. Measure from your natural waistline.
 
-  = image_tag 'where-to-measure.png'
+      = image_tag 'where-to-measure.png'
+
+  .row
+    .col-md-12.col-xs-12.col-xxs-12
+      h6 Sizing
+      p
+        strong => explanation
+        ' Please check the size chart below.
+
+  .row
+    = render partial: 'size_chart_table', locals: { data: data }
