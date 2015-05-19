@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
   end
 
-  append_before_filter :check_site_version
   append_before_filter :store_marketing_params
   append_before_filter :check_marketing_traffic
   append_before_filter :check_cart
@@ -19,6 +18,7 @@ class ApplicationController < ActionController::Base
   append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
   append_before_filter :handle_marketing_campaigns
 
+  before_filter :check_site_version
   before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
@@ -39,30 +39,15 @@ class ApplicationController < ActionController::Base
   end
 
   def check_site_version
-    # redirects should work only on non-ajax GET requests from users
-    return if (!request.get? || request.xhr? || request_from_bot?)
+    # Add to cart and submitting forms should not change site version
+    return if (!request.get? || request.xhr?)
 
-    if params[:site_version].blank?
-      if current_site_version.default?
-        # do nothing
-        store_current_location
-      else
-        redirect_to url_with_correct_site_version
-      end
-    else
-      if params[:site_version] == current_site_version.code
-        # do nothing
-        store_current_location
-      else params[:site_version] != current_site_version.code
-        redirect_to url_with_correct_site_version
-      end
+    param_site_version = params[:site_version] || SiteVersion.default.code
+
+    if param_site_version != cookies[:site_version]
+      @current_site_version = SiteVersion.by_permalink_or_default(param_site_version)
+      cookies[:site_version] = @current_site_version.code
     end
-  end
-
-  def request_from_bot?
-    user_agent = request.env["HTTP_USER_AGENT"]
-    #user_agent =~ /(bot|Google|Slurp)/i
-    user_agent =~ /(Baidu|bot|Google|Facebook|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)/i
   end
 
   def handle_marketing_campaigns
@@ -117,18 +102,6 @@ class ApplicationController < ActionController::Base
     })
   rescue Exception => e
     true
-  end
-
-  # TODO: This method will have to change when multiple locales support comes
-  # It'll need to have something like SiteVersion.pluck(:permalink)
-  # It'll also need to be out of here. It should be in a service, like many method on this fat controller
-  def url_with_correct_site_version
-    url_without_site_code = request.fullpath.gsub(/\A(\/(au|us))/, '')
-    URI.join(request.base_url, current_site_version.to_param + url_without_site_code).to_s
-  end
-
-  def store_current_location
-    session[:previous_location] = get_hreflang_link # url_with_correct_site_version
   end
 
   def check_cart

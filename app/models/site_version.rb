@@ -155,6 +155,10 @@ class SiteVersion < ActiveRecord::Base
       @default ||= self.where(default: true).first_or_initialize
     end
 
+    def permalinks
+      @permalinks ||= self.pluck(:permalink)
+    end
+
     # NOTE  exchange rate 0.8 means 1 default currency == 0.8 site version currency
     # 0.8 =>  1AUD == 0.8USD
     #   get_exchange_rate(EUR, USD) => is EUR -> AUD -> USD

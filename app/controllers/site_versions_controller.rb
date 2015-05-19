@@ -4,6 +4,7 @@ class SiteVersionsController < ApplicationController
   def show
     site_version = SiteVersion.by_permalink_or_default(params[:id])
 
+    @current_site_version   = site_version
     cookies[:site_version]  = site_version.permalink
     cookies[:ip_address]    = request.remote_ip
 
@@ -11,21 +12,19 @@ class SiteVersionsController < ApplicationController
       user.update_site_version(site_version)
     end
 
-    # note. after this method we should transfer directly to new page, otherwize current order will be lost
+    # note. after this method we should transfer directly to new page, otherwise current order will be lost
     current_order.use_prices_from(site_version)
 
-    redirect_to previous_location_or_default(root_url(site_version: site_version.permalink), params[:backlink])
+    redirect_to previous_or_root_url(site_version)
   end
 
   private
 
-  def previous_location_or_default(default_url, previous_location = nil)
-    if previous_location
-      previous_location
-    elsif session[:previous_location].present?
-      session[:previous_location]
+  def previous_or_root_url(site_version)
+    if request.referrer.present?
+      LocalizeUrlService.localize_url(request.referrer, site_version)
     else
-      default_url
+      root_url(site_version: site_version.permalink)
     end
   end
 end

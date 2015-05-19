@@ -1,68 +1,26 @@
-.fashion-it-girl-au
-  .top-bar
-  .container-fluid.no-padding
-    .row
-      .col-md-4.col-sm-12.no-padding-top
-        .col-md-12.col-sm-12.ribbon-column
-          .ribbon
-            = image_tag src='new-logo.svg', :class => 'fame-logo', :alt => 'Fame & Partners'
-            = image_tag src='fashion-it-girl/popsugar_au_stacked_pink.png', :class => 'popsugar', :alt => 'Popsugar Logo'
+- if current_site_version.is_australia?
+  div
+    .grid-container
+      .grid-3 style="background-color:#CEB6CB;margin-top:40px;height:159px"
+      .grid-9
+        div class="wishpond-campaign" data-wishpond-id="723653" data-wishpond-href="https://www.wishpond.com/lp/723653/"
 
-            .squares
-            h1
-              | Fashion<br>
-              span it girl
-            h2 2015 search
+  javascript:
+    (function() {
+      window.Wishpond = window.Wishpond || {};
+      Wishpond.merchantId = '514769';
+    })()
 
-      .col-md-8.banner.hidden-sm.hidden-xs
+  script type="text/javascript" src="//cdn.wishpond.com/master.js"
 
-  .container-fluid.competition
-    .col-md-12
-      h3 Are you tech savvy with a love for fashion?
-      h3 Do your friends always come to you for sartorial smarts?
-      h3.aus We’re looking for Australia’s next fashion IT Girl!
-      h4 Show us why you are Australia’s Fashion IT Girl & you could win:
-
-  .container-fluid
-    .col-md-12
-      .row.prizes
-        .top-arrow
-        p.padding-top
-          strong A two-week paid internship with &nbsp;
-          span = image_tag src='new-logo.svg', :class => 'fame-logo', :alt => 'Fame & Partners'
-          br
-          |and &nbsp;
-          span = image_tag src='fashion-it-girl/popsugar_au_stacked_pink.png', :class => 'popsugar', :alt => 'Popsugar logo'
-          | &nbsp;+ your dream formal outfit ($1000 value)
-        p.runner-up Runner up prizes: 1 of 5 Fashion Maven positions 1 of 50 Fashion Ambassador positions
-        .bottom-arrow
-
-  .container-fluid.quote
-    .col-md-10.col-md-offset-1
-      .open-quote
-      q
-        | FAME AND PARTNERS BELIEVES IN THE CONVERGENCE OF FASHION AND TECHNOLOGY,&nbsp;
-        strong SO WE WANT TO SUPPORT YOUNG STUDENTS &nbsp;
-        | WHO ASPIRE TO HAVE A CAREER IN THESE FIELDS.
-      .close-quote
-      cite
-        |-Nyree Corby
-        br
-        span CEO &amp; Founder
-        br
-        strong Fame &amp; Partners
-
-  .container-fluid
-    .row.application-dates
-      .col-md-4
-        h5 applications open:
-        p 18th May 2015
-      .col-md-4
-        h5 applications close:
-        p 29th June 2015
-      .col-md-4
-        h5 winners announced:
-        p 15th July 2015
-
-  .application
-    h4 Remember to come back here on Monday 18th of May when applications are open!
+- else
+  .fashion-it-girl-au
+    .top-bar
+    .container-fluid.no-padding
+      .row
+        .col-md-4.col-sm-12.no-padding-top
+          .squares
+          div style="margin-left:50px;margin-top:40px;"
+            h1 Sorry, but the Fashion IT Girl 2015 competition is only open to AU residents.
+            h2 Stay tuned or #{ link_to 'contact us', contact_path }  to register your interest.
+        .col-md-8.banner.hidden-sm.hidden-xs

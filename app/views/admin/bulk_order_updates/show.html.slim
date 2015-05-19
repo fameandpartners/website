@@ -1,22 +1,24 @@
 = render :partial => 'sub_menu'
+table
+  thead : tr
+    th Created On
+    th Created By
+    th Filename
+    th Total Items
+    th New
+    - Admin::LineItemUpdate::PROCESS_STATES.each do |state_name|
+      th = state_name.capitalize
+  tbody : tr
+    td = bulk_update.user
+    td = bulk_update.created_at
+    td = bulk_update.filename
+    td = bulk_update.line_item_updates.count
+    td = bulk_update.item_states['new']
+    - Admin::LineItemUpdate::PROCESS_STATES.each do |state_name|
+      td class="bulk_update #{state_name}" = bulk_update.item_states[state_name.to_s]
 
 table
-  tr
-    th Created On
-    td colspan=3 = bulk_update.created_at
-  tr
-    th Created By
-    td colspan=3 = bulk_update.user
-  tr
-    th Filename
-    td colspan=3 = bulk_update.filename
-  tr
-    th Total Items
-    td colspan=3 = bulk_update.line_item_updates.count
-  tr
-    th id
-    td colspan=3 = bulk_update.id
-  tr
+  tbody
     th Actions
     td
       = form_for bulk_update do |f|
@@ -33,13 +35,15 @@ table
 table
   thead
     tr
-      th colspan=9 CSV
+      th colspan=10 CSV
       th Matching
-      th colspan=10 Spree
+      th colspan=6 Spree
+      th colspan=10 Update Process
     tr
       th #
       th order_date
       th order_number
+      th line_item
       th style_name
       th size
       th quantity
@@ -66,6 +70,7 @@ table
       td = liu.row_number
       td = liu.order_date
       td = liu.order_number
+      td = liu.raw_line_item
       td = liu.style_name
       td = liu.size
       td = liu.quantity
@@ -87,7 +92,7 @@ table
         - if liu.shipment
           - cssclass = liu.shipment_tracking_state
           span style=cssclass = liu.shipment.tracking
-      td = liu.state
+      td class="bulk_update #{liu.state}" = liu.state
       td = liu.process_reason
 
       td = liu.shipment_errors.to_sentence
