@@ -58,7 +58,7 @@ class CustomisationValue < ActiveRecord::Base
   end
 
   def price
-    read_attribute('price').to_f
+    read_attribute('price')
   end
 
   def display_price
