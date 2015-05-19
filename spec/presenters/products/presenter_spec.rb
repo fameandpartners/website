@@ -40,11 +40,34 @@ module Products
       end
     end
 
-    describe '#size_chart' do
-      let(:size_chart)  { double('TEENYTINY') }
-      subject(:product) { Presenter.new size_chart: size_chart }
+    describe 'sizing chart' do
+      let(:product) { Presenter.new size_chart: size_chart }
 
-      it { expect(product.size_chart).to eq(size_chart) }
+      describe '#size_chart' do
+        let(:size_chart)  { 'TEENYTINY' }
+
+        it { expect(product.size_chart).to eq(size_chart) }
+      end
+
+      describe '#size_chart_explanation' do
+
+        subject { product.size_chart_explanation }
+
+        describe 'old (2014) chart' do
+          let(:size_chart) { '2014' }
+          it { is_expected.to eq 'This dress follows our old measurements.' }
+        end
+
+        describe 'new (2015) chart' do
+          let(:size_chart) { '2015' }
+          it { is_expected.to eq 'We have updated our sizing! This dress follows our new size chart.' }
+        end
+
+        describe 'unknown' do
+          let(:size_chart) { '2016' }
+          it { is_expected.to eq '' }
+        end
+      end
     end
   end
 end

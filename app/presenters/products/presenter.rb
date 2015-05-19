@@ -73,6 +73,17 @@ module Products
       @sizes ||= available_options.sizes
     end
 
+    def size_chart_explanation
+      case size_chart
+        when '2014'
+          'This dress follows our old measurements.'
+        when '2015'
+          'We have updated our sizing! This dress follows our new size chart.'
+        else
+          ''
+      end
+    end
+
     def customization_options
       customizable? ? customizations.all : []
     end
