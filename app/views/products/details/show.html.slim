@@ -155,7 +155,7 @@ ruby:
                   span.fa.fa-pause
 
           .box.col-sm-4.no-padding
-            - if @product.celebrity
+            - if @product.celebrity && @product.celebrity.image_url
               = image_tag @product.celebrity.image_url, class: 'img-responsive'
 
           - @product.inspiration.each do |item|
