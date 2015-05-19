@@ -15,6 +15,10 @@ module Admin
       )
     end
 
+    def total_items
+      line_item_updates.count
+    end
+
     def item_states
       line_item_updates.group_by(&:state).collect { |key, items|
         [key || 'new', items.count]
