@@ -5,7 +5,6 @@ module SizeChart
     CHARTS.fetch(chart_name) { DEFAULT_CHART }
   end
 
-
   def size_chart_2015
     size_set = [
       [4,  32,  0, 78,   31,  60,   24,   84,   35],
