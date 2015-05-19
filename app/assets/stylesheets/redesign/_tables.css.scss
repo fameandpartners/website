@@ -1,51 +1,66 @@
 @media only screen and (max-width: 800px) {
 
-	.table table,
-	.table thead,
-	.table tbody,
-	.table th,
-	.table td,
-	.table tr {
-		display: block;
-	}
+  .table table,
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td,
+  .table tr {
+    display: block;
+  }
 
-	@media only screen and (min-width: 801px) {
-	  .table > tbody > tr > td {
-	    clear: left;
-	  }
-	}
+  @media only screen and (min-width: 801px) {
+    .table > tbody > tr > td {
+      clear: left;
+    }
+  }
 
-	.table thead tr {
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
+  .table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
 
-	.table td {
-		border: none;
-		position: relative;
-		padding-left: 50%;
-		white-space: normal;
-		text-align:left;
-	}
+  .table td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    white-space: normal;
+    text-align:left;
+  }
 
-	.table td:before {
-		position: absolute;
-		top: 6px;
-		left: 6px;
-		width: 45%;
-		padding-right: 10px;
-		white-space: nowrap;
-		text-align:left;
-		font-weight: bold;
-	}
+  .table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align:left;
+    font-weight: bold;
+  }
 
-	.table td:before {
+  .table td:before {
     content: attr(data-title);
   }
 
-  .table.shipping {
+  .table.plus-size-size-guide, .table.new-size-guide, .table.old-size-guide {
+    td {
+      padding-left: 40%;
+    }
 
+    tr {
+      border-top: 1px solid grey;
+    }
+  }
+
+  .table {
+    tr.subheading-row {
+      display: none;
+    }
+  }
+
+  .table.shipping {
     td {
       padding-left: 40%;
     }
