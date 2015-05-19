@@ -212,7 +212,7 @@ hr
 = render :partial => 'data'
 
 #fit-guide-content.hidden
-  = render :partial => 'size_guide'
+  = render :partial => 'size_guide', :locals => { data: @product.size_chart_data, explanation: @product.size_chart_explanation }
 
 #product-overlay
 

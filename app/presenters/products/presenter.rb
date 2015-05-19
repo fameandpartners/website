@@ -84,6 +84,10 @@ module Products
       end
     end
 
+    def size_chart_data
+      SizeChart.chart(size_chart)
+    end
+
     def customization_options
       customizable? ? customizations.all : []
     end
