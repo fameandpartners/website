@@ -2,18 +2,25 @@
 
 table
   thead : tr
+    th id
     th Created On
     th Created By
     th Filename
     th Total Items
-    th id
-    th action
+    - Admin::LineItemUpdate::PROCESS_STATES.each do |state_name|
+      th class="bulk_update #{state_name}" = state_name.capitalize
+    th colspan=2 actions
   tbody
     - collection.each do |bulk|
       tr
+        td = bulk.id
         td = bulk.created_at
         td = bulk.user
         td = bulk.filename
-        td = bulk.line_item_updates.count
-        td = bulk.id
+        td = bulk.total_items
+        - Admin::LineItemUpdate::PROCESS_STATES.each do |state_name|
+          - total_for_state = bulk.item_states[state_name.to_s]
+          - cssClass = total_for_state > 0 ? "bulk_update #{state_name}" : ''
+          td class=cssClass
+            = total_for_state
         td = link_to('View', bulk)

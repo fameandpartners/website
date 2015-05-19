@@ -1,7 +1,7 @@
 require "#{Rails.root}/app/policies/order_projected_delivery_date_policy"
 
 Spree::Order.class_eval do
-  attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date
+  attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date, :user_id
   self.include_root_in_json = false
 
   attr_accessor :zone_id

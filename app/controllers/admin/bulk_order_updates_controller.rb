@@ -12,8 +12,11 @@ class Admin::BulkOrderUpdatesController < Spree::Admin::BaseController
     ).import
 
     new_bulk_update.save
-
     redirect_to main_app.admin_bulk_order_update_path(new_bulk_update)
+
+  rescue CSV::MalformedCSVError => e
+    NewRelic::Agent.agent.error_collector.notice_error( e )
+    @error = e
   end
 
   def update

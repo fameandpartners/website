@@ -217,7 +217,7 @@ The index landing page can be found in the views/index/show.html
 
 
 #### Populating db with test data
-Note: This commands can be run manullay or throught `bin/prepare_app`
+Note: This commands can be run manually or throught `bin/prepare_app`
 
 * `$ bundle exec rake db:populate:dresses`
 * `$ bundle exec rake db:populate:taxonomy`

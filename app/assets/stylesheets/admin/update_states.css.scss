@@ -1,0 +1,15 @@
+.bulk_update {
+  color :#fff;
+}
+tr:hover {
+  .bulk_update {
+    color :inherit;
+  }
+}
+
+// Bootstrap style colours
+.bulk_update.invalid  { background-color: #d9534f; }
+.bulk_update.fail     { background-color: #f0ad4e; }
+.bulk_update.skip     { background-color: #5bc0de; }
+.bulk_update.process  { background-color: #5cb85c; }
+.bulk_update.pending  { background-color: #337ab7; }
