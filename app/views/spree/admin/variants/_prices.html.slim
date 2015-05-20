@@ -1,0 +1,4 @@
+= f.fields_for :prices do |ff|
+  .field
+    = ff.label :price, "Price (#{ff.object.currency})"
+    = ff.text_field :price
