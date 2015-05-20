@@ -20,7 +20,11 @@
     render: function() {
 
       var utf8_to_b64 = function utf8_to_b64( str ) {
-        return window.btoa(unescape(encodeURIComponent( str )));
+        result = window.btoa(unescape(encodeURIComponent( str )))
+        result = result.replace(/\+/g, '%2B')
+        result = result.replace(/\=/g, '%3D')
+        result = result.replace(/\//g, '%5C')
+        return result
       };
 
       var knownValues = this.props.keys;
