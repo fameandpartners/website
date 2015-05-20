@@ -56,7 +56,6 @@ FameAndPartners::Application.routes.draw do
     get '/fashionitgirl2015-terms-and-conditions',  to: redirect('/')
     get '/nyfw-comp-terms-and-conditions',  to: redirect('/')
     get '/fashionitgirl2015-competition',  to: redirect('/')
-    get '/new-sizing'  => 'statics#size_guides_lp'
 
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
@@ -215,6 +214,8 @@ FameAndPartners::Application.routes.draw do
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/how-it-works', to: redirect("/why-us")
+    get '/size-guide'  => 'statics#size_guide', :as => :size_guide
+
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
     get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner

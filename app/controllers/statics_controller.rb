@@ -18,7 +18,7 @@ class StaticsController < ApplicationController
     @description = "FAQs"
   end
 
-  def size_guides_lp
+  def size_guide
     @title = "New Size Guide " + default_seo_title
     @description = "Size Guides"
   end
