@@ -1,0 +1,37 @@
+/! PRODUCT SIZES PANEL
+#product-size-content.product-side-panel
+  button.close-btn
+    = image_tag "cross.png", alt: 'close button'
+
+  .size-alert
+    .row
+      .col-md-10.col-md-offset-1
+        h3
+          => @product.size_chart_explanation
+          ' Please check the fit guide for the perfect size.
+
+    .row
+      .col-md-10.col-md-offset-1
+        button.btn-fit-guide.btn.btn-block.btn-secondary Fit Guide
+
+
+  .sizes-container.grey
+    .row
+      .col-md-12.recommended
+        h2 Sizes
+        - if @product.default_sizes?
+          - @product.default_sizes.each do |size|
+            .col-md-3.col-xs-3.col-xxs-6
+              a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
+                span.option-box.size-box= size.presentation.gsub(/\D/, '')
+
+  .sizes-container
+    - if @product.custom_sizes?
+      .row
+        .col-md-12.custom
+          h2=  "Custom Sizes +#{@product.custom_size_price}"
+
+          - @product.custom_sizes.each do |size|
+            .col-md-3.col-xs-3.col-xxs-6
+              a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
+                span.option-box.size-box= size.presentation.gsub(/\D/, '')

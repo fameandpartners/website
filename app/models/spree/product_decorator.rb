@@ -60,7 +60,10 @@ Spree::Product.class_eval do
 
   accepts_nested_attributes_for :discounts, reject_if: proc {|attrs| attrs[:amount].blank? }, allow_destroy: true
 
-  SIZE_CHARTS = %w(2014 2015)
+  accepts_nested_attributes_for :master
+  attr_accessible :master_attributes
+
+  SIZE_CHARTS = SizeChart::CHARTS.keys
   validates_inclusion_of :size_chart, in: SIZE_CHARTS
 
   def new_size_chart?

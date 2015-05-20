@@ -36,7 +36,7 @@ Spree::Promotion.class_eval do
 
     # rude method. possible, it should be thrown away
     def can_apply_to_any_order?
-      %w(xtra10 swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25 frenzy5p crafted4u).include?(self.code.downcase)
+      %w(xtra10 swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25 frenzy5p crafted4u vosn2015).include?(self.code.downcase)
     end
 
   private
