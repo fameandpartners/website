@@ -83,6 +83,7 @@
       <%= f.text_field field, :value => value, :class => 'fullwidth' %>
     </div>
   <% end %>
+  <%= render partial: 'prices', locals: {f: f, variant: @variant } %>
 </div>
 
 <div class="clear"></div>

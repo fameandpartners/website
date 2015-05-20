@@ -4,7 +4,9 @@ Spree::Variant.class_eval do
   has_many :zone_prices, :dependent => :destroy
   has_one :discount, foreign_key: :variant_id
 
-  attr_accessible :zone_prices_hash, :product_factory_name
+  accepts_nested_attributes_for :prices
+
+  attr_accessible :zone_prices_hash, :product_factory_name, :prices_attributes
   attr_accessor :zone_prices_hash
 
   #after_save :update_zone_prices
