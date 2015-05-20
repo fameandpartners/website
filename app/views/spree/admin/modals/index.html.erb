@@ -41,6 +41,9 @@
       var param_string = "?" + paramValues.join('&');
       var previewUrl = this.props.baseUrl + param_string;
 
+      var editUrl = '/admin/modals' + param_string;
+      window.history.pushState({ path: editUrl }, '', editUrl);
+
       return (
         <div>
           <h2>Preview </h2>
