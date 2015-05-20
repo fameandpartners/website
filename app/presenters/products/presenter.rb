@@ -4,7 +4,8 @@ module Products
     attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
                   :permalink, :is_active, :images, :default_image, :price,
                   :discount, :recommended_products, :available_options, :preorder,
-                  :moodboard, :fabric, :style_notes, :color_id, :color_name, :color
+                  :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
+                  :size_chart
 
     def initialize(opts)
       opts.each do |k, v|
@@ -70,6 +71,21 @@ module Products
 
     def sizes
       @sizes ||= available_options.sizes
+    end
+
+    def size_chart_explanation
+      case size_chart
+        when '2014'
+          'This dress follows our old measurements.'
+        when '2015'
+          'We have updated our sizing! This dress follows our new size chart.'
+        else
+          ''
+      end
+    end
+
+    def size_chart_data
+      SizeChart.chart(size_chart)
     end
 
     def customization_options

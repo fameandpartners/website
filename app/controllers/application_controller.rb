@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
 
   def check_site_version
     # Add to cart and submitting forms should not change site version
-    return if (!request.get? || request.xhr?)
+    return if (!request.get? || request.xhr? || request.path == '/checkout')
 
     param_site_version = params[:site_version] || SiteVersion.default.code
 
@@ -376,7 +376,7 @@ class ApplicationController < ActionController::Base
   end
 
   # this logic should be placed in separate module
-  # somewhere in app/controllers/concerns/returnable 
+  # somewhere in app/controllers/concerns/returnable
   def is_user_came_from_current_app
     return false if request.referrer.blank?
     URI.parse(request.referrer).host == request.host

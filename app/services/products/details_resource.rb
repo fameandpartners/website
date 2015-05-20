@@ -49,7 +49,8 @@ class Products::DetailsResource
         available_options:  product_selection_options,
         moodboard:          product_moodboard,
         fabric:             product_fabric,
-        style_notes:        product_style_notes
+        style_notes:        product_style_notes,
+        size_chart:         product.size_chart
       })
     end
   end
