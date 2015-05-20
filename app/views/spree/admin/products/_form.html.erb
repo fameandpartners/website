@@ -44,31 +44,8 @@
 
     <div class="clear"></div>
 
-    <% SiteVersion.all.each do |site_version| %>
-      <div class="field">
-        <%
-          zone_price = @product.master.zone_prices.where(zone_id: site_version.zone_id).first
-          price = @product.price_in(site_version.currency)
-          display_price = @product.zone_price_for(site_version)
-          disabled = site_version.currency == Spree::Config.currency
-        %>
+    <%= render partial: 'master_prices', locals: {f: f} %>
 
-        <p>
-          <%= site_version.name %> price:
-          <small>Will be shown <%= "#{display_price.amount} #{display_price.currency}" %></small>
-        </p>
-        <div class="alpha two columns">
-          <%= label_tag t(:cost_price) %>
-          <%= f.text_field "zone_prices_hash[#{site_version.zone.id}][amount]",
-                placeholder: '0.00', value: zone_price.try(:amount), disabled: disabled %>
-        </div>
-        <div class="omega two columns">
-          <%= label_tag t(:cost_currency) %>
-          <%= f.text_field "zone_prices_hash[#{site_version.zone.id}][currency]", 
-                placeholder: site_version.currency, value: zone_price.try(:currency), disabled: true %>
-        </div>
-      </div>
-    <% end %>
 
     <div class="clear"></div>
 

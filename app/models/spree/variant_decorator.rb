@@ -14,6 +14,8 @@ Spree::Variant.class_eval do
 
   before_validation :set_default_sku
 
+  before_save :push_changed_prices_to_variants
+
   after_save do
     product.update_index
   end
@@ -207,5 +209,25 @@ Spree::Variant.class_eval do
     def color_option_type
       @color_option_type ||= Spree::OptionType.includes(:option_values).where(name: 'dress-color').first
     end
+  end
+
+  def push_changed_prices_to_variants
+    return true unless is_master
+    return true if prices.none? &:changed?
+
+    changed_prices = prices.select &:changed?
+
+    product.variants.reject(&:is_master).map do |v|
+      v.prices.map do |price|
+        new_price = changed_prices.detect { |cp| cp.currency == price.currency}
+        next unless new_price
+
+        if price.amount == new_price.amount_was
+          price.amount = new_price.amount
+          price.save
+        end
+      end
+    end
+    true
   end
 end
