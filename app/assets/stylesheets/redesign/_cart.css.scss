@@ -22,24 +22,19 @@
   margin-right: 1em;
   .cart-item-image { 
     margin-right: 0;
-    @media (min-width: 1200px) {
-      width: 80px;
-    }
+    @media (min-width: 1200px) { width: 80px;}
   }
 }
 .cart-item-info {
   overflow: hidden;
-  color: #777;
+  text-transform: none;
+  span { text-transform: none;}
+  .heading {
+    color: #000;
+    font-size: 1.25em;
+  }
   .color {
-    display: inline-block;
-    vertical-align: -15%;
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    .checkout-items & {
-      width: 16px;
-      height: 16px;
-    }
+    text-transform: capitalize;
   }
 }
 
