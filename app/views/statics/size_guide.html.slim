@@ -1,0 +1,29 @@
+.page-title.default
+  .container
+    .page-title--details
+      h1.no-padding-bottom FameBabes, be advised: We have changed our sizing!
+
+.page-content.size-guide-lp
+  .container
+    .row
+      p We have recently changed our sizing and selected styles are now following new measurements. It is important for you to note that some styles will still come in our old sizing, whereas other styles will come in our new sizing.
+
+      p The two tables below outline the differences between our old and new size chart:
+
+      h2 Old Size Guide
+
+      .container
+        .row
+          = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2014 }
+
+      h2 New Size Guide
+
+      .container
+        .row
+          = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2015 }
+
+      p As you will see, our sizing has become a bit smaller, so for our new styles, you might want to order your dress in a bigger size than you used to.
+
+      p To make shopping easy for you, you can see what measurements apply to each dress by checking the Fit Guide feature on the product page.
+
+      p We are working on transitioning all of our styles to the new size chart so that very soon you can rely on the same sizing to apply for all dresses.
