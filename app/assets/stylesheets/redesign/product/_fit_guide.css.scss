@@ -7,6 +7,16 @@
     z-index:9999 !important;
     border: 2px solid black;
 
+     h2 {
+       margin-bottom:0;
+     }
+
+    .size-alert {
+      background-color: #eeddf0;
+      padding:1.5em;
+      margin-bottom:1em;;
+    }
+
   table {
     width: 95%;
     margin-left: auto;
