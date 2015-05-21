@@ -44,5 +44,25 @@ module Orders
         expect(presenter.country_size).to eq 'SITE-Unknown Size'
       end
     end
+
+    describe 'returns' do
+      let(:item)          { double(Spree::LineItem) }
+      let(:order)         { double(Spree::Order, :return_requested? => true) }
+      let(:return_item)   { ReturnRequestItem.new(:action => 'return', :reason_category => 'blah', :reason => 'vtha') }
+      subject(:presenter) { described_class.new(item, order) }
+
+      before do
+        allow(presenter).to receive(:return_item).and_return(return_item)
+      end
+
+      it 'has correct action' do
+        expect(presenter.return_action).to eq return_item.action
+      end
+
+      it 'has correct action' do
+        expect(presenter.return_details).to eq '1 x blah - vtha'
+      end
+
+    end
   end
 end

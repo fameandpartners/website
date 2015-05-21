@@ -45,5 +45,7 @@
                   td data-title="total" = order.display_total
                   - if Features.active?(:order_returns, current_spree_user)
                     td.returns-column
+                      - if order.order_return_requested?
+                        | Return Requested
                       - if order.returnable?
                         = link_to 'return or exchange', new_user_returns_path(:order_id => order.number), :class => 'btn return'
