@@ -6,6 +6,8 @@ class LocalizeUrlService
       url_without_locale = url.gsub(locales_regex, '')
       uri = URI.parse(url_without_locale)
       URI.join("#{uri.scheme}://#{uri.host}:#{uri.port}", "./#{site_version.to_param}/", "./#{uri.path}").to_s
+    rescue
+      url
     end
   end
 end

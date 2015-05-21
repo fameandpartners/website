@@ -5,7 +5,7 @@ require 'spec_helper'
 # -    Test Transaction Password: 3kbn8AO1
 # nab test card = 4444333322221111
 
-describe 'NABTransact' do
+xdescribe 'NABTransact' do
   context 'Fame Test Credentials' do
     # This just lets us track test transactions a bit easier in the NAB interface.
     let(:whodunnit) { "#{ENV['USER']}@#{Socket.gethostname}-#{Process.pid}" }

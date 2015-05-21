@@ -23,6 +23,10 @@ class ReturnRequestItem < ActiveRecord::Base
     end
   end
 
+  def action=(new_action)
+    write_attribute(:action, new_action.to_s.downcase)
+  end
+
   def line_item_presenter
     @line_item_presenter ||= Orders::LineItemPresenter.new(line_item, order)
   end
@@ -40,7 +44,7 @@ class ReturnRequestItem < ActiveRecord::Base
   end
 
   def keep?
-    action == 'keep'
+    action.downcase == 'keep'
   end
 
   def return_or_exchange?

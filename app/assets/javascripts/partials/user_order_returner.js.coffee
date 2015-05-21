@@ -36,11 +36,10 @@ window.page.UserOrderReturner = class UserOrderReturner
         $p.find('.return-reason-category-container').show()
 
     $('.return-reason-category').chosen(selectOpts).change ->
-      v = $(this).val();
+      v = $(this).val().toLowerCase();
       $p = $(this).parent()
 
       $select = $p.find('select.return-reason-select')
-
       opts = switch v
         when "looks different to image on site"
           data.different
