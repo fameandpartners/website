@@ -36,8 +36,8 @@ class UpdateFabrication
 
   private
 
-  def self.line_item(line_item_id)
-    Spree::LineItem.find(line_item_id)
+  def self.line_item(line_item)
+    line_item.is_a?(Spree::LineItem) ? line_item : Spree::LineItem.find(line_item)
   end
 
   def self.find_or_create_fabrication(line_item)
