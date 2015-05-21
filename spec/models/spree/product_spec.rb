@@ -1,17 +1,15 @@
 require 'spec_helper'
 
 describe Spree::Product, :type => :model do
-  context "new product" do
-    let(:subject) { Spree::Product.new }
+  subject(:product) { FactoryGirl.build :dress }
 
+  context "new product" do
     it "should be on demand" do
       expect(subject.on_demand).to be true
     end
   end
 
   context "fast_delivery" do
-    let(:subject) { Spree::Product.new }
-
     it "false if item has no variants" do
       allow(subject).to receive(:variants) { Array.new }
       expect(subject.fast_delivery).to be false
@@ -45,7 +43,7 @@ describe Spree::Product, :type => :model do
       end
 
       it 'when latest' do
-        product = described_class.new :size_chart => described_class::SIZE_CHARTS.last
+        product = described_class.new :size_chart => '2015'
         expect(product.new_size_chart?).to be_truthy
       end
     end
