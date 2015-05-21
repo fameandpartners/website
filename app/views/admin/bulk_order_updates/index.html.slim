@@ -1,5 +1,7 @@
 = render :partial => 'sub_menu'
 
+</div> /! lol spree
+
 table
   thead : tr
     th id
@@ -25,5 +27,6 @@ table
             = total_for_state
         td
           => link_to('View', bulk)
+        td
           - if bulk.deletable?
             = link_to('Delete', bulk, method: :delete, confirm: 'Are your sure you wish to delete?')
