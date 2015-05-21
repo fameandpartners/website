@@ -57,10 +57,11 @@ class Products::CollectionDetails
     taxon.footer            = ''
     selected_color_data      = color_data[color.name.to_s.downcase]
     if selected_color_data
-      taxon.seo_description   = selected_color_data[:description]
-      taxon.banner.title      = selected_color_data[:title]
-      taxon.banner.subtitle   = selected_color_data[:description]
-      taxon.banner.image      = selected_color_data[:image]
+      taxon.meta_title        = selected_color_data[:meta_title]
+      taxon.seo_description   = selected_color_data[:meta_description]
+      taxon.banner.title      = selected_color_data[:banner][:title]
+      taxon.banner.subtitle   = selected_color_data[:banner][:subtitle]
+      taxon.banner.image      = selected_color_data[:banner][:image]
     end
   end
 
@@ -77,34 +78,58 @@ class Products::CollectionDetails
   def color_data
     {
       "black" => {
-        :title        => "Black Dresses",
-        :description  => "There's nothing basic about these chic black dresses.",
-        :image        => "/assets/category-banners/black-dresses-dark-bg.jpg"
+        :banner => {
+          :title => 'Black Dresses',
+          :subtitle => 'The black dress has taken a new turn. A timeless item in your wardrobe perfect for every occasion. Any style, we’ve got you covered.',
+          :image => "/assets/category-banners/black-dresses-dark-bg.jpg"
+        },
+        :meta_title        => 'Black dresses and gowns',
+        :meta_description  => "There's nothing basic about these chic black dresses.",
       },
       "white" => {
-        :title        => "White and Ivory Dresses",
-        :description  => "Refresh your look with a pristine clean slate.",
-        :image        => "/assets/category-banners/white-dresses-bg.jpg"
+        :banner => {
+          :title => 'White/ivory Dresses',
+          :subtitle => 'Clean cuts and pristine whites make for a refreshing look.Achieve effortless style in sleek white dresses, with a modern twist.',
+          :image => "/assets/category-banners/white-dresses-bg.jpg"
+        },
+        :meta_title        => 'White dresses',
+        :meta_description  => "FREE & fast delivery on all white dresses. Perfect for every occasion. FREE & easy returns PLUS FREE personal stylists",
       },
       "blue" => {
-        :title        => "Blue Dresses",
-        :description  => "Get the blues (in a good way) with sky-shaded styles.",
-        :image        => "/assets/category-banners/blue-dresses-bg.jpg"
+        :banner => {
+          :title => 'Blue Dresses',
+          :subtitle => 'Feeling blue? Change it up in bold & daring shades of teal, turquoise or navy dresses and add an unexpected turn to your wardrobe.',
+          :image => "/assets/category-banners/blue-dresses-bg.jpg"
+        },
+        :meta_title        => 'Blue dresses | Shop our trending range',
+        :meta_description  => "Fame & Partners offers a wide variety of blue dresses. From Icy to baby blue, we have it all. FREE shipping. FREE & easy returns. FREE personal stylists.",
       },
       "pink" => {
-        :title        => "Pink Dresses",
-        :description  => "From girly to glam, these pink confections satisfy any sweet tooth.",
-        :image        => "/assets/category-banners/pink-dresses-bg.jpg"
+        :banner => {
+          :title => 'Pink Dresses',
+          :subtitle => 'Candy and lolly pops? Only pink frocks! meh! Only pink dresses. Whether you’re tuning into your feminine or fierce side, pink will deliver.',
+          :image => "/assets/category-banners/pink-dresses-bg.jpg"
+        },
+        :meta_title        => 'Pink dresses | Fast delivery',
+        :meta_description  => "Shop our range of pink dresses custom made just for you! All new season, inspired from the latest trends.",
       },
       "red" => {
-        :title        => "Red Dresses",
-        :description  => "Look red haute in statement-making shades.",
-        :image        => "/assets/category-banners/red-dresses-dark-bg.jpg"
+        :banner => {
+          :title => 'Red Dresses',
+          :subtitle => 'Turn up the heat & turn heads in statement shades of red dresses. Ready to wear for any occasion. From wicked wine to crisp crimson hues, you are bound to make temperatures rise. Customise these killer styles into the dress of your dreams.',
+          :image => "/assets/category-banners/red-dresses-dark-bg.jpg"
+        },
+        :meta_title        => 'Elegant red dresses',
+        :meta_description  => "Shop the biggest collection of red dresses at your fingertips. Customise cut & style to the dress you want! FREE & fast delivery. FREE & easy returns",
       },
       "pastel" => {
-        :title        => "Pastel Dresses",
-        :description  => "Treat yourself to sweet styles in the prettiest shades of pale.",
-        :image        => "/assets/category-banners/pastel-dresses-bg.jpg"
+        :banner => {
+          :title => 'Pastel Dresses',
+          :subtitle => 'Indulge in sweet treats, in the prettiest way possible. A Pastel dress will take you from girly to glam and across all seasons in a click of a button.',
+          :image => "/assets/category-banners/pastel-dresses-bg.jpg"
+        },
+        :meta_title        => 'Beautiful pastel dresses',
+        :meta_description  => "Change it up in pastel hues and take on a fresh look inspired straight from the latest runway trends. Find your own dress style & add  these treats to your wardrobe.",
       },
     }
   end
