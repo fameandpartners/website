@@ -34,11 +34,11 @@ ruby:
           .clearfix
             .pull-left.small
               ' Size: 
-                span
-                  ' #{ product.size.presentation },
+              span
+                ' #{ product.size.presentation },
               ' Color: 
-                span.color
-                  ' #{ product.color.name}
+              span.color
+                ' #{ product.color.presentation}
             .pull-right.text-muted = product.price.display_price
           .cart-prices
             

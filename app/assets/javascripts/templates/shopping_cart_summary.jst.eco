@@ -19,7 +19,7 @@
       <div class="clearfi">
         <div class="pull-left small">
           Size: <span><%= product.size.presentation %>,</span> 
-          Color: <span class="color"><%= product.color %></span>
+          Color: <span class="color"><%= product.color.presentation %></span>
         </div>
         <div class="pull-right text-muted"><%= product.price.display_price %></div>
       </div>
