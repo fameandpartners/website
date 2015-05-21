@@ -20,7 +20,11 @@
     render: function() {
 
       var utf8_to_b64 = function utf8_to_b64( str ) {
-        return window.btoa(unescape(encodeURIComponent( str )));
+        result = window.btoa(unescape(encodeURIComponent( str )))
+        result = result.replace(/\+/g, '%2B')
+        result = result.replace(/\=/g, '%3D')
+        result = result.replace(/\//g, '%5C')
+        return result
       };
 
       var knownValues = this.props.keys;
@@ -36,6 +40,9 @@
 
       var param_string = "?" + paramValues.join('&');
       var previewUrl = this.props.baseUrl + param_string;
+
+      var editUrl = '/admin/modals' + param_string;
+      window.history.pushState({ path: editUrl }, '', editUrl);
 
       return (
         <div>
@@ -166,13 +173,27 @@
   });
 
   var PARAMS = [
-    { label: "promocode",  param: "pc",  required: true,  encoded: true,  type: 'string' },
-    { label: "heading",    param: "h",   required: false, encoded: true,  type: 'string' },
-    { label: "message",    param: "m",   required: false, encoded: true,  type: 'string' },
-    { label: "timeout",    param: "t",   required: false, encoded: false, type: 'integer', defaultValue: 2 },
-    { label: "class_name", param: "s",   required: false, encoded: true,  type: 'string' },
-    { label: "pop",        param: "pop", required: true,  encoded: false, type: 'boolean', defaultValue: 'true'},
-    { label: "raw",        param: "raw", required: false, encoded: false, type: 'boolean'}
+    {
+      label: "promocode",  param: "pc",  required: true,  encoded: true,  type: 'string',
+      defaultValue: '<%= decode(params[:pc]).html_safe %>'
+    }, {
+      label: "heading",    param: "h",   required: false, encoded: true,  type: 'string',
+      defaultValue: '<%= decode(params[:h]).html_safe %>'
+    }, {
+      label: "message",    param: "m",   required: false, encoded: true,  type: 'string',
+      defaultValue: '<%= decode(params[:m]).html_safe %>'
+    }, {
+      label: "timeout",    param: "t",   required: false, encoded: false, type: 'integer',
+      defaultValue: 2
+    }, {
+      label: "class_name", param: "s",   required: false, encoded: true,  type: 'string',
+      defaultValue: '<%= decode(params[:s]).html_safe %>'
+    }, {
+      label: "pop",        param: "pop", required: true,  encoded: false, type: 'boolean',
+      defaultValue: 'true'
+    }, {
+      label: "raw",        param: "raw", required: false, encoded: false, type: 'boolean'
+    }
   ];
 
   var knownPromoCodes = <%= promo_codes.to_json.html_safe %>;
