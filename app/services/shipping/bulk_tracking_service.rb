@@ -1,10 +1,11 @@
 module Shipping
   class BulkTrackingService
 
-    attr_reader :bulk_update
+    attr_reader :bulk_update, :user
 
-    def initialize(bulk_update)
+    def initialize(bulk_update, user)
       @bulk_update = bulk_update
+      @user = user
     end
 
     def detect_spree_matches
@@ -12,6 +13,17 @@ module Shipping
       bulk_update.save
     end
 
+    def update_make_states
+      bulk_update.line_item_updates.each do |liu|
+        next unless liu.line_item && liu.make_state.present?
+
+        valid_new_state = Fabrication::STATES.fetch(liu.make_state) { |state| Fabrication::STATES.key(state) }
+
+        if valid_new_state && liu.line_item.fabrication.state != valid_new_state
+          UpdateFabrication.state_change(liu.line_item, user, valid_new_state)
+        end
+      end
+    end
 
     def group_shipments
       bulk_update.line_item_updates.each do |lit|
@@ -76,7 +88,7 @@ module Shipping
     end
 
 
-    def fire_valid_shipments(user)
+    def fire_valid_shipments
       shipments_with_items = bulk_update.line_item_updates.group_by { |lit| lit.shipment }
 
       shipments_with_items.each do |shipment, tracking_items|

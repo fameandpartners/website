@@ -20,14 +20,16 @@ class Admin::BulkOrderUpdatesController < Spree::Admin::BaseController
   end
 
   def update
-    service = Shipping::BulkTrackingService.new(bulk_update)
+    service = Shipping::BulkTrackingService.new(bulk_update, current_spree_user)
 
     if params[:admin_bulk_order_update][:find_spree_matches]
       service.detect_spree_matches
+    elsif params[:admin_bulk_order_update][:update_make_states]
+      service.update_make_states
     elsif params[:admin_bulk_order_update][:setup_shipments]
       service.group_shipments
     elsif params[:admin_bulk_order_update][:mark_valid_shipped]
-      service.fire_valid_shipments(current_spree_user)
+      service.fire_valid_shipments
     end
 
     redirect_to main_app.admin_bulk_order_update_path(bulk_update)
