@@ -23,7 +23,7 @@ class Admin::BulkOrderUpdatesController < Spree::Admin::BaseController
     service = Shipping::BulkTrackingService.new(bulk_update)
 
     if params[:admin_bulk_order_update][:find_spree_matches]
-      service.find_spree_matches
+      service.detect_spree_matches
     elsif params[:admin_bulk_order_update][:setup_shipments]
       service.group_shipments
     elsif params[:admin_bulk_order_update][:mark_valid_shipped]
