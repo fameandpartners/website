@@ -66,26 +66,10 @@
     padding: 0;
   }
 
-  .btn.cancel {
-    height: 45px;
-    padding: 0 !important;
-    width: 100%;
-    margin-bottom: 4rem;
-
-    a {
-      color: white;
-    }
-  }
-
   .btn.submit {
     height: 45px;
     width: 100%;
-    margin-bottom: 4rem;
-    background-color: black;
-
-    a {
-      color: white;
-    }
+    margin-bottom: 1rem;  
   }
 
   .row.header {
