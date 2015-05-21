@@ -9,12 +9,12 @@ describe LocalizeUrlService do
 
     describe 'given a URL and a site version' do
       context 'URL does not have a locale in it' do
-        let(:url) { 'http://example.com/something' }
+        let(:url) { 'http://example.com/something?color=red&everything=else' }
         let(:site_version) { build_stubbed(:site_version, permalink: 'fr') }
 
         it 'prepends the site version permalink into the URL' do
           result = described_class.localize_url(url, site_version)
-          expect(result).to eq('http://example.com/fr/something')
+          expect(result).to eq('http://example.com/fr/something?color=red&everything=else')
         end
       end
 
@@ -29,12 +29,12 @@ describe LocalizeUrlService do
       end
 
       context 'site version is the default' do
-        let(:url) { 'http://example.com/something' }
+        let(:url) { 'http://example.com/something?color=pastel' }
         let(:site_version) { build_stubbed(:site_version, default: true) }
 
         it 'only uses the request fullpath' do
           result = described_class.localize_url(url, site_version)
-          expect(result).to eq('http://example.com/something')
+          expect(result).to eq('http://example.com/something?color=pastel')
         end
       end
     end
