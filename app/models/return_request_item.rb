@@ -16,6 +16,7 @@ class ReturnRequestItem < ActiveRecord::Base
 
   def set_defaults
     self.action = 'keep' unless self.action
+    self.action = self.action.downcase
     self.quantity = 1
     if keep?
       self.reason_category = nil
@@ -40,7 +41,7 @@ class ReturnRequestItem < ActiveRecord::Base
   end
 
   def keep?
-    action == 'keep'
+    action.downcase == 'keep'
   end
 
   def return_or_exchange?
