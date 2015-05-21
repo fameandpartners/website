@@ -78,35 +78,39 @@ module Admin
 
       lit.order = order
 
-      style_matches = items_matching_style(order, lit.style_name)
+      if id_match = order.line_items.detect {|i| i.id.to_s == raw_line_item }
+        lit.line_item = id_match
+      else
+        style_matches = items_matching_style(order, lit.style_name)
 
-      if style_matches.empty?
-        match_errors << :no_style_in_order
+        if style_matches.empty?
+          match_errors << :no_style_in_order
 
-      elsif style_matches.count == 1
-        lit.line_item = style_matches.first.item
+        elsif style_matches.count == 1
+          lit.line_item = style_matches.first.item
 
-      elsif style_matches.count > 1
-        match_errors << :multiple_of_style
-        colour_matches = style_matches.select { |item|
-          lit.colour.starts_with? item.colour_name.downcase
-        }
-
-        if colour_matches.count == 1
-          lit.line_item = colour_matches.first.item
-        elsif colour_matches.count > 1
-          match_errors << :multiple_of_colour
-
-          size_matches = colour_matches.select { |item|
-            item.country_size.downcase == lit.size
+        elsif style_matches.count > 1
+          match_errors << :multiple_of_style
+          colour_matches = style_matches.select { |item|
+            lit.colour.starts_with? item.colour_name.downcase
           }
 
-          if size_matches.empty?
-            match_errors << :no_size_matches
-          elsif size_matches.count == 1
-            lit.line_item = size_matches.first.item
-          else
-            errors << :multiple_of_size
+          if colour_matches.count == 1
+            lit.line_item = colour_matches.first.item
+          elsif colour_matches.count > 1
+            match_errors << :multiple_of_colour
+
+            size_matches = colour_matches.select { |item|
+              item.country_size.downcase == lit.size
+            }
+
+            if size_matches.empty?
+              match_errors << :no_size_matches
+            elsif size_matches.count == 1
+              lit.line_item = size_matches.first.item
+            else
+              errors << :multiple_of_size
+            end
           end
         end
       end
