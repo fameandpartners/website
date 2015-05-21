@@ -123,7 +123,7 @@ module Admin
         match_errors << :tracking_number_mismatch
       end
 
-      unless lit.valid_tracking?
+      if lit.tracking_number.present? && tracking_mismatch?
         match_errors << :invalid_tracking_number
       end
 
