@@ -37,7 +37,7 @@
                       = link_to 'Click for details', user_order_path(order), class: "order-details"
                   td data-title="Shipping state" colspan='1'
                     - if order.shipped?
-                      - order.shipments.each do | shipment|
+                      - order.shipments.each do |shipment|
                         = link_to shipment.tracking || 'Track', shipment_tracking_url(shipment), target:'_blank', class: "order-details"
                     - else
                       | Not yet shipped
