@@ -2,7 +2,7 @@ x.page-content.index
   ul.rslides
     - @banner.each do |banner|
       li
-        = link_to LocalizeUrlService.localize_path(banner.url, current_site_version), title: banner.title do
+        = link_to LocalizeUrlService.localize_url(banner.url, current_site_version), title: banner.title do
           = image_tag banner.attachment(:original), alt: banner.presentation, class: "img-responsive portrait-img #{banner.css_class}"
 
 /! Email Subscription
