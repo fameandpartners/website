@@ -16,12 +16,15 @@ class ReturnRequestItem < ActiveRecord::Base
 
   def set_defaults
     self.action = 'keep' unless self.action
-    self.action = self.action.downcase
     self.quantity = 1
     if keep?
       self.reason_category = nil
       self.reason = nil
     end
+  end
+
+  def action=(new_action)
+    write_attribute(:action, new_action.to_s.downcase)
   end
 
   def line_item_presenter
