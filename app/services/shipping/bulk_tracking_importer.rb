@@ -51,7 +51,7 @@ module Shipping
     def header_detectors
       {
         order_date:      /order release date/i,
-        order_number:    /order no/i,
+        order_number:    /order no|order number/i,
         style_name:      /style/i,
         size:            /size/i,
         quantity:        /quantity/i,
