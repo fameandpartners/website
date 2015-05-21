@@ -23,4 +23,7 @@ table
           - cssClass = total_for_state > 0 ? "bulk_update #{state_name}" : ''
           td class=cssClass
             = total_for_state
-        td = link_to('View', bulk)
+        td
+          => link_to('View', bulk)
+          - if bulk.deletable?
+            = link_to('Delete', bulk, method: :delete, confirm: 'Are your sure you wish to delete?')
