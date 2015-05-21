@@ -8,6 +8,16 @@ describe LocalizeUrlService do
     end
 
     describe 'given a URL and a site version' do
+      context 'URL is invalid' do
+        let(:url) { 'not a url' }
+        let(:site_version) { build_stubbed(:site_version, permalink: 'fr') }
+
+        it 'returns the same input URL' do
+          result = described_class.localize_url(url, site_version)
+          expect(result).to eq('not a url')
+        end
+      end
+
       context 'URL does not have a locale in it' do
         let(:url) { 'http://example.com/something?color=red&everything=else' }
         let(:site_version) { build_stubbed(:site_version, permalink: 'fr') }
