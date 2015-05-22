@@ -20,7 +20,6 @@
 # search collection & products collection
 #
 class Products::CollectionResource
-  # include Repositories::CachingSystem
 
   attr_reader :site_version
   attr_reader :collection
@@ -67,9 +66,6 @@ class Products::CollectionResource
       details:    details
     )
   end
-
-  # cache_results :read
-
 
   private
 
@@ -193,11 +189,8 @@ class Products::CollectionResource
       order == 'fast_delivery'
     end
 
-    # def cache_key
-    #   "collection-#{ site_version.permalink}-#{ taxon.permalink }"
-    # end
-
     private
+
     def prices_for_results(results)
       price_ids = results.collect {|r| r.prices[current_currency] }
       Spree::Price.find(price_ids).collect { |p| [p.id, p] }.to_h
