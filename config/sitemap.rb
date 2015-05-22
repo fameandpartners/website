@@ -1,15 +1,8 @@
-# run locally: 
-# bundle exec ruby config/sitemap.rb && xmllint --format public/sitemap.xm
+# run locally:
+# bundle exec rake sitemap:create
 # bundle exec rake sitemap:refresh - works too, but ping google/bing
-
-# generated using gem 'sitemap_generator'
-# how to run locally
-# - this will put code in readable format
-# bundle exec rake sitemap:refresh:no_ping && xmllint --format public/sitemap.xml
-#
-# on production
-#   RAILS_ENV=production bundle exec ruby config/sitemap.rb 
-#   RAILS_ENV=production bundle exec rake sitemap:refresh:no_ping
+# - if you wish to format the XML into something more human readable, you can use the command `xmllint --format sitemap.xml`
+# => Note: on production, if you run the sitemap:create rake task, it'll automatically ping search engines
 #
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "http://#{configatron.host}"
