@@ -57,7 +57,7 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def collection_resource(collection_options)
-      resource_args = {
+      @resource_args = {
         site_version:   current_site_version,
         collection:     params[:collection],
         style:          params[:style],
@@ -70,7 +70,7 @@ class Products::CollectionsController < Products::BaseController
         offset:         params[:offset] || 0
       }.merge(collection_options || {})
 
-      Products::CollectionResource.new(resource_args).read
+      Products::CollectionResource.new(@resource_args).read
     end
 
     # we have route like /dresses/permalink

@@ -340,16 +340,16 @@
 }
 
 
-.vex-theme-flat-attack.email-capture-modal.fame-in-future-popup {
+// Text popups 
+// - placeholder
+%vex-text-popup {
   .vex-content {
     text-align: center;
     border: 0;
-    background: image-url('_popups/fame-in-future.jpg') center center no-repeat;
-    background-size: cover;
     height: 400px;
     width: 700px;
     color: #fff;
-
+    background-color: darken(#eeddf0, 5%);
     &:before {
       content: '';
       display: inline-block;
@@ -386,3 +386,19 @@
     }
   }
 }
+
+// - simple text popup
+.vex-theme-flat-attack.email-capture-modal.vex-text-popup {
+  @extend %vex-text-popup;
+}
+
+// - fame in future 
+.vex-theme-flat-attack.email-capture-modal.fame-in-future-popup {
+  @extend %vex-text-popup;
+  .vex-content {
+    background: image-url('_popups/fame-in-future.jpg') center center no-repeat;
+    background-size: cover;
+  }
+}
+// @end Text popups
+// -----------------

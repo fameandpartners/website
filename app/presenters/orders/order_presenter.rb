@@ -72,6 +72,13 @@ module Orders
         order.shipments.first.tracking
       end
     end
-    
+
+    def return_requested?
+      return_request.present?
+    end
+        
+    def return_request
+      @return_request ||= OrderReturnRequest.where(:order_id => order.id).first
+    end
   end
 end

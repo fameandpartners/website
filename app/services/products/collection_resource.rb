@@ -20,7 +20,6 @@
 # search collection & products collection
 #
 class Products::CollectionResource
-  # include Repositories::CachingSystem
 
   attr_reader :site_version
   attr_reader :collection
@@ -53,7 +52,7 @@ class Products::CollectionResource
 
   # what about ProductCollection class
   def read
-    Products::CollectionPresenter.new(
+    Products::CollectionPresenter.from_hash(
       products:   products,
       total_products: total_products,
       collection: collection,
@@ -67,9 +66,6 @@ class Products::CollectionResource
       details:    details
     )
   end
-
-  # cache_results :read
-
 
   private
 
@@ -136,16 +132,19 @@ class Products::CollectionResource
     end
 
     def products
+      results = query.results
+      prices  = prices_for_results(results)
+
       result = query.results.map do |color_variant|
-        price = Repositories::ProductPrice.new(site_version: site_version, product_id: color_variant.product.id).read
         discount = Repositories::Discount.get_product_discount(color_variant.product.id)
-        color = Repositories::ProductColors.read(color_variant.color.id)
-        OpenStruct.new(
+        color    = Repositories::ProductColors.read(color_variant.color.id)
+
+        Products::Collection::Dress.from_hash(
           id:             color_variant.product.id,
           name:           color_variant.product.name,
           color:          color_variant.color,
           images:         cropped_images(color_variant),
-          price:          price,
+          price:          prices[color_variant.prices[current_currency]],
           discount:       discount,
           fast_delivery:  color_variant.product.fast_delivery
         )
@@ -161,14 +160,18 @@ class Products::CollectionResource
 
     # TODO - Consolidate with behaviour on app/helpers/landing_pages_helper.rb:24 #cropped_product_hoverable_images
     def cropped_images(color_variant)
-      cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
+      color_variant.cropped_images.presence || begin
+        # TODO Remove this block once indexes are live on production - 20150522
+        Rails.logger.warn 'Building Product Cropped images on render'
+        cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
 
-      if cropped_images.blank?
-        cropped_images = color_variant.images.select { |i| i.large.to_s.downcase.include?('front') }
+        if cropped_images.blank?
+          cropped_images = color_variant.images.select { |i| i.large.to_s.downcase.include?('front') }
+        end
+
+        cropped_images.sort_by!{ |i| i.position }
+        cropped_images.collect{ |i| i.try(:large) }
       end
-
-      cropped_images.sort_by!{ |i| i.position }
-      cropped_images.collect{ |i| i.try(:large) }
     end
 
     def current_currency
@@ -186,7 +189,10 @@ class Products::CollectionResource
       order == 'fast_delivery'
     end
 
-    # def cache_key
-    #   "collection-#{ site_version.permalink}-#{ taxon.permalink }"
-    # end
+    private
+
+    def prices_for_results(results)
+      price_ids = results.collect {|r| r.prices[current_currency] }
+      Spree::Price.find(price_ids).collect { |p| [p.id, p] }.to_h
+    end
 end

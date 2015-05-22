@@ -35,7 +35,7 @@ Spree::Order.class_eval do
   end
 
   def returnable?
-    shipped? && !order_return_requested? && completed_at <= 50.days.ago
+    shipped? && !order_return_requested?
   end
 
   def order_return_requested?

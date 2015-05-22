@@ -116,7 +116,7 @@ module Feeds
         description: product.description,
         price: original_price,
         sale_price: sale_price,
-        google_product_category: "Apparel & Accessories > Clothing > Dresses",
+        google_product_category: "Apparel & Accessories > Clothing > Dresses > Formal Gowns",
         id: "#{product.id.to_s}-#{variant.id.to_s}",
         group_id: product.id.to_s,
         color: color,
