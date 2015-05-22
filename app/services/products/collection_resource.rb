@@ -53,7 +53,7 @@ class Products::CollectionResource
 
   # what about ProductCollection class
   def read
-    Products::CollectionPresenter.new(
+    Products::CollectionPresenter.from_hash(
       products:   products,
       total_products: total_products,
       collection: collection,
@@ -141,8 +141,9 @@ class Products::CollectionResource
 
       result = query.results.map do |color_variant|
         discount = Repositories::Discount.get_product_discount(color_variant.product.id)
-        color = Repositories::ProductColors.read(color_variant.color.id)
-        OpenStruct.new(
+        color    = Repositories::ProductColors.read(color_variant.color.id)
+
+        Products::Collection::Dress.from_hash(
           id:             color_variant.product.id,
           name:           color_variant.product.name,
           color:          color_variant.color,
