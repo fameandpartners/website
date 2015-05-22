@@ -77,6 +77,7 @@ module Products
                 large: image.attachment.url(:large)
               }
             end,
+            cropped_images: cropped_images_for(product_color_value),
             prices: {
               aud: product.zone_price_for(au_site_version).id,
               usd: product.zone_price_for(us_site_version).id
@@ -88,6 +89,13 @@ module Products
       end
 
       index.refresh
+    end
+
+    def self.cropped_images_for(color_variant)
+      color_variant.images
+        .select { |i| i.attachment_file_name.downcase.include? 'crop' }
+        .sort_by(&:position)
+        .collect { |i| i.attachment.url(:large) }
     end
   end
 end

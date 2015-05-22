@@ -164,14 +164,18 @@ class Products::CollectionResource
 
     # TODO - Consolidate with behaviour on app/helpers/landing_pages_helper.rb:24 #cropped_product_hoverable_images
     def cropped_images(color_variant)
-      cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
+      color_variant.cropped_images.presence || begin
+        # TODO Remove this block once indexes are live on production - 20150522
+        Rails.logger.warn 'Building Product Cropped images on render'
+        cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
 
-      if cropped_images.blank?
-        cropped_images = color_variant.images.select { |i| i.large.to_s.downcase.include?('front') }
+        if cropped_images.blank?
+          cropped_images = color_variant.images.select { |i| i.large.to_s.downcase.include?('front') }
+        end
+
+        cropped_images.sort_by!{ |i| i.position }
+        cropped_images.collect{ |i| i.try(:large) }
       end
-
-      cropped_images.sort_by!{ |i| i.position }
-      cropped_images.collect{ |i| i.try(:large) }
     end
 
     def current_currency
