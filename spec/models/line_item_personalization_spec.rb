@@ -4,7 +4,7 @@ describe LineItemPersonalization, type: :model do
   context "price" do
     let(:personalization) { build(:personalization) }
     let(:line_item)       { build(:spree_line_item, price: 9.99) }
-    let(:discount)        { OpenStruct.new(amount: 50, size: 50) }
+    let(:discount)        { double('Discount price', amount: 50, size: 50) }
 
     context "#size_cost" do
       it "returns 0 for default sizes" do
@@ -39,10 +39,10 @@ describe LineItemPersonalization, type: :model do
         expect(personalization.color_cost).to eql(BigDecimal.new('16.0'))
       end
 
-      it "retuds discounted price for custom colour" do
+      it "returns discounted price for custom colour" do
         personalization.product = Spree::Product.new
         expect(personalization).to receive(:color).at_least(:once).and_return(
-          double('Spree::OptionValue', discount: OpenStruct.new(amount: 50, size: 50))
+          double('Spree::OptionValue', discount: discount)
         )
         expect(personalization).to receive(:basic_color?).and_return(false)
 
@@ -57,7 +57,7 @@ describe LineItemPersonalization, type: :model do
 
       it "returns sum of prices" do
         expect(personalization).to receive(:customization_values).at_least(:once).and_return(
-          Array.new(2) { build(:customisation_value, price: 15.0) }
+          build_list(:customisation_value, 2, price: 15.0)
         )
         expect(personalization.customizations_cost).to eql(BigDecimal.new('30.0'))
       end
