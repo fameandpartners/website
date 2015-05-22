@@ -4,8 +4,16 @@
 # - if you wish to format the XML into something more human readable, you can use the command `xmllint --format sitemap.xml`
 # => Note: on production, if you run the sitemap:create rake task, it'll automatically ping search engines
 #
-# Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://#{configatron.host}"
+
+unless Rails.env.development?
+  SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
+    :aws_access_key_id => configatron.aws.s3.access_key_id,
+    :aws_secret_access_key => configatron.aws.s3.secret_access_key,
+    :fog_provider => 'AWS',
+    :fog_directory => configatron.aws.s3.bucket,
+    :fog_region => configatron.aws.s3.region
+  )
+end
 
 SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
@@ -58,26 +66,13 @@ SitemapGenerator::Interpreter.class_eval do
   end
 end
 
-# we create sitemap in xml, /public/sitemap.xml should be only symlink
-options = {
-  compress: true,
+sitemap_options = {
+  compress: Rails.env.production?,
+  default_host: "http://#{configatron.host}",
+  sitemaps_host: "http://#{configatron.aws.host}",
   include_root: false,
-  sitemaps_path: 'sitemap' # folder not in repository
+  sitemaps_path: 'sitemap'
 }
-
-if Rails.env.development?
-  SitemapGenerator::Sitemap.default_host = "http://localhost:3600"
-end
-
-unless Rails.env.development?
-  SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
-    :aws_access_key_id => configatron.aws.s3.access_key_id,
-    :aws_secret_access_key => configatron.aws.s3.secret_access_key,
-    :fog_provider => 'AWS',
-    :fog_directory => configatron.aws.s3.bucket,
-    :fog_region => configatron.aws.s3.region
-  )
-end
 
 SitemapGenerator::Sitemap.create(options) do
   add root_path, alternates: build_alternates(root_path), priority: 1.0
@@ -153,7 +148,7 @@ SitemapGenerator::Sitemap.create(options) do
 end
 
 unless Rails.env.development?
-  SitemapGenerator::Sitemap.ping_search_engines('http://images.fameandpartners.com/sitemap/sitemap.xml.gz')
+  SitemapGenerator::Sitemap.ping_search_engines("#{sitemap_options[:sitemaps_host]}/#{sitemap_options[:sitemaps_path]}/sitemap.xml.gz")
 
   # Delete local Sitemap files. They all were uploaded to S3
   FileUtils.rm_rf File.join(SitemapGenerator::Sitemap.public_path, SitemapGenerator::Sitemap.sitemaps_path)
