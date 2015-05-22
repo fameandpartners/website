@@ -132,19 +132,17 @@ class Products::CollectionResource
     end
 
     def products
-      results = query.results
-      prices  = prices_for_results(results)
-
       result = query.results.map do |color_variant|
         discount = Repositories::Discount.get_product_discount(color_variant.product.id)
         color    = Repositories::ProductColors.read(color_variant.color.id)
+        price    = Spree::Price.new(amount: color_variant.prices[current_currency], currency: current_currency)
 
         Products::Collection::Dress.from_hash(
           id:             color_variant.product.id,
           name:           color_variant.product.name,
           color:          color_variant.color,
           images:         cropped_images(color_variant),
-          price:          prices[color_variant.prices[current_currency]],
+          price:          price,
           discount:       discount,
           fast_delivery:  color_variant.product.fast_delivery
         )
@@ -178,21 +176,7 @@ class Products::CollectionResource
       @current_currency ||= (site_version.try(:currency).to_s.downcase || 'usd')
     end
 
-    # color variant stores price#id, not amount
-    # possible, update index on price change will be easier&faster solution
-    def get_zone_price(prices = {})
-      price_id = (prices[current_currency] || prices['aud'] || prices['usd'])
-      Spree::Price.find(price_id)
-    end
-
     def fast_delivery?
       order == 'fast_delivery'
-    end
-
-    private
-
-    def prices_for_results(results)
-      price_ids = results.collect {|r| r.prices[current_currency] }
-      Spree::Price.find(price_ids).collect { |p| [p.id, p] }.to_h
     end
 end
