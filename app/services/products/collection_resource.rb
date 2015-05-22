@@ -136,8 +136,10 @@ class Products::CollectionResource
     end
 
     def products
+      results = query.results
+      prices  = prices_for_results(results)
+
       result = query.results.map do |color_variant|
-        price = Repositories::ProductPrice.new(site_version: site_version, product_id: color_variant.product.id).read
         discount = Repositories::Discount.get_product_discount(color_variant.product.id)
         color = Repositories::ProductColors.read(color_variant.color.id)
         OpenStruct.new(
@@ -145,7 +147,7 @@ class Products::CollectionResource
           name:           color_variant.product.name,
           color:          color_variant.color,
           images:         cropped_images(color_variant),
-          price:          price,
+          price:          prices[color_variant.prices[current_currency]],
           discount:       discount,
           fast_delivery:  color_variant.product.fast_delivery
         )
@@ -189,4 +191,10 @@ class Products::CollectionResource
     # def cache_key
     #   "collection-#{ site_version.permalink}-#{ taxon.permalink }"
     # end
+
+    private
+    def prices_for_results(results)
+      price_ids = results.collect {|r| r.prices[current_currency] }
+      Spree::Price.find(price_ids).collect { |p| [p.id, p] }.to_h
+    end
 end
