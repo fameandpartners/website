@@ -84,16 +84,16 @@ class Products::CollectionDetails
           :image => "/assets/category-banners/black-dresses-dark-bg.jpg"
         },
         :meta_title        => 'Black dresses and gowns',
-        :meta_description  => "There's nothing basic about these chic black dresses.",
+        :meta_description  => "Find a black dress for any occasion and style from prom to maxi’s. Transform and customize your look from day-time office to night-time chic.",
       },
       "white" => {
         :banner => {
           :title => 'White/ivory Dresses',
-          :subtitle => 'Clean cuts and pristine whites make for a refreshing look.Achieve effortless style in sleek white dresses, with a modern twist.',
+          :subtitle => 'Clean cuts and pristine whites make for a refreshing look. Achieve effortless style in sleek white dresses, with a modern twist.',
           :image => "/assets/category-banners/white-dresses-bg.jpg"
         },
-        :meta_title        => 'White dresses',
-        :meta_description  => "FREE & fast delivery on all white dresses. Perfect for every occasion. FREE & easy returns PLUS FREE personal stylists",
+        :meta_title        => 'White dresses online',
+        :meta_description  => "Made to order white dresses. Perfect for every occasion .Whether a bride or a fashion diva, white is a class and a wardrobe must.",
       },
       "blue" => {
         :banner => {
@@ -102,7 +102,7 @@ class Products::CollectionDetails
           :image => "/assets/category-banners/blue-dresses-bg.jpg"
         },
         :meta_title        => 'Blue dresses | Shop our trending range',
-        :meta_description  => "Fame & Partners offers a wide variety of blue dresses. From Icy to baby blue, we have it all. FREE shipping. FREE & easy returns. FREE personal stylists.",
+        :meta_description  => "Fame & Partners offers a wide variety of blue dresses. From Icy to baby blue, we have it all.",
       },
       "pink" => {
         :banner => {
@@ -110,8 +110,8 @@ class Products::CollectionDetails
           :subtitle => 'Candy and lolly pops? Only pink frocks! meh! Only pink dresses. Whether you’re tuning into your feminine or fierce side, pink will deliver.',
           :image => "/assets/category-banners/pink-dresses-bg.jpg"
         },
-        :meta_title        => 'Pink dresses | Fast delivery',
-        :meta_description  => "Shop our range of pink dresses custom made just for you! All new season, inspired from the latest trends.",
+        :meta_title        => 'Pink dresses',
+        :meta_description  => "Embrace girl power in every shade of pink. We’ve got you covered girl. Customise these killer dresses into the style you always wished for!",
       },
       "red" => {
         :banner => {
