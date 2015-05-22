@@ -459,24 +459,8 @@ FameAndPartners::Application.routes.draw do
     get '/next-day-delivery' => redirect('/express-delivery')
     get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
 
-    scope '/bridesmaid-party', module: 'bridesmaid' do
-      root to: 'landings#bride', as: :bridesmaid_party
-      get '/info'     => 'details#edit',   as: :bridesmaid_party_info
-      put '/info'     => 'details#update'
-      get '/colour'   => 'colours#edit',   as: :bridesmaid_party_colour
-      put '/colour'   => 'colours#update'
-      get '/concierge_service'  => 'additional_products#new',  as: :bridesmaid_party_consierge_service
-      post '/additional_products(/:product)' => 'additional_products#create'
-      get '/dresses'  => 'products#index', as: :bridesmaid_party_dresses
-      get '/dresses/dress-:product_slug(/:color_name)' => 'products#show', as: :bridesmaid_party_dress
-      get '/moodboard(/:user_slug)' => 'moodboard#show', as: :bridesmaid_party_moodboard
-      get '/:user_slug/dress-:product_slug(/:color_name)' => 'product_details#show', as: :bridesmaid_party_dress_details
-      put '/:user_slug/dress-:product_slug(/:color_name)' => 'selected_products#update', as: :bridesmaid_dress_selection
-      get '/:user_slug' => 'landings#bridesmaid', as: :bridesmaid_signup
-      post 'selected_product/:id/add_to_cart' => 'selected_products#add_to_cart', as: :bridesmaid_add_for_bridesmaid
-
-      post '/share' => 'memberships#create'
-    end
+    # Redirecting all bridesmaid party URLs
+    get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
 
     resources :site_versions, only: [:show]
   end
