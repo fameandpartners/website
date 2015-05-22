@@ -15,7 +15,8 @@ table
     td = bulk_update.line_item_updates.count
     td = bulk_update.item_states['new']
     - Admin::LineItemUpdate::PROCESS_STATES.each do |state_name|
-      td class="bulk_update #{state_name}" = bulk_update.item_states[state_name.to_s]
+      td
+        span class="bulk_update #{state_name}" = bulk_update.item_states[state_name.to_s]
 
 table
   tbody
@@ -98,7 +99,8 @@ table
         - if liu.shipment
           - cssclass = liu.shipment_tracking_state
           span style=cssclass = liu.shipment.tracking
-      td class="bulk_update #{liu.state}" = liu.state
+      td
+        span class="bulk_update #{liu.state}" = liu.state
       td = liu.process_reason
 
       td = liu.shipment_errors.to_sentence
