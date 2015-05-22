@@ -1,9 +1,3 @@
-ENV["RAILS_ENV"] ||= 'development'
-require File.expand_path("../environment", __FILE__)
-require 'rubygems'
-require 'sitemap_generator'
-require File.expand_path("../application", __FILE__)
-
 # run locally: 
 # bundle exec ruby config/sitemap.rb && xmllint --format public/sitemap.xm
 # bundle exec rake sitemap:refresh - works too, but ping google/bing
