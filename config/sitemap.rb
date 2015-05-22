@@ -74,76 +74,77 @@ sitemap_options = {
   sitemaps_path: 'sitemap'
 }
 
-SitemapGenerator::Sitemap.create(options) do
-  add root_path, alternates: build_alternates(root_path), priority: 1.0
+SitemapGenerator::Sitemap.create(sitemap_options) do
+  # Common pages
+  add '/assets/returnform.pdf', priority: 0.5
 
-  # products page
-  Spree::Product.active.each do |product|
-    images_repo = Repositories::ProductImages.new(product: product)
+  # Creating sitemaps for each site version
+  SiteVersion.find_each do |site_version|
 
-    add(collection_product_path(product), {
-      priority: 0.8,
-      images: images_repo.filter(cropped: false).map { |img| { loc: img.large, title: product.name } },
-      alternates: build_alternates(collection_product_path(product))
-    })
-  end
+    sitemap_group_options = {
+      include_root: true,
+      default_host: "http://#{configatron.host}/#{site_version.to_param}",
+      filename: site_version.permalink
+    }
 
-  # events
-  Repositories::Taxonomy.read_events.each do |taxon|
-    add(build_taxon_path(taxon.name), {
-      priority: 0.7,
-      images: map_taxon_products_images(taxon.id),
-      alternates: build_alternates(build_taxon_path(taxon.name))
-    })
-  end
+    statics_pages = [
+      '/about', '/why-us', '/privacy',
+      '/style-consultation', '/fame-chain',
+      '/fashionitgirl2015',
+      '/bridesmaid-dresses', '/sale-dresses',
+      '/unidays'
+    ]
 
-  # collections
-  Repositories::Taxonomy.read_collections.each do |taxon|
-    add(build_taxon_path(taxon.name), {
-      priority: 0.7,
-      images: map_taxon_products_images(taxon.id),
-      alternates: build_alternates(build_taxon_path(taxon.name))
-    })
-  end
+    group(sitemap_group_options) do
 
-  # styles
-  Repositories::Taxonomy.read_styles.each do |taxon|
-    add(build_taxon_path(taxon.name), {
-      priority: 0.7,
-      images: map_taxon_products_images(taxon.id),
-      alternates: build_alternates(build_taxon_path(taxon.name))
-    })
-  end
+      # Products pages
+      Spree::Product.active.each do |product|
+        images_repo = Repositories::ProductImages.new(product: product)
 
-  # color groups
-  Repositories::ProductColors.color_groups.each do |color_group|
-    path = colour_path(color_group.name)
-    add(path, {
-      priority: 0.7,
-      images: map_color_group_products_images(color_group.id),
-      alternates: build_alternates(path)
-    })
-  end
+        add(collection_product_path(product), {
+          priority: 0.8,
+          images: images_repo.filter(cropped: false).map { |img| { loc: img.large, title: product.name } }
+        })
+      end
 
-  # Static pages
-  localizable_statics_pages = [
-    '/about', '/why-us', '/privacy',
-    '/style-consultation', '/fame-chain',
-    '/fashionitgirl2015',
-    '/bridesmaid-dresses', '/sale-dresses',
-    '/unidays'
-  ]
+      # Events
+      Repositories::Taxonomy.read_events.each do |taxon|
+        add(build_taxon_path(taxon.name), {
+          priority: 0.7,
+          images: map_taxon_products_images(taxon.id)
+        })
+      end
 
-  static_pages = [
-    '/assets/returnform.pdf'
-  ]
+      # Collections
+      Repositories::Taxonomy.read_collections.each do |taxon|
+        add(build_taxon_path(taxon.name), {
+          priority: 0.7,
+          images: map_taxon_products_images(taxon.id)
+        })
+      end
 
-  localizable_statics_pages.each do |page_path|
-    add page_path, priority: 0.5, alternates: build_alternates(page_path)
-  end
+      # Styles
+      Repositories::Taxonomy.read_styles.each do |taxon|
+        add(build_taxon_path(taxon.name), {
+          priority: 0.7,
+          images: map_taxon_products_images(taxon.id)
+        })
+      end
 
-  static_pages.each do |page_path|
-    add page_path, priority: 0.5
+      # Color Groups
+      Repositories::ProductColors.color_groups.each do |color_group|
+        path = colour_path(color_group.name)
+        add(path, {
+          priority: 0.7,
+          images: map_color_group_products_images(color_group.id)
+        })
+      end
+
+      # Static pages
+      statics_pages.each do |page_path|
+        add page_path, priority: 0.5
+      end
+    end
   end
 end
 
