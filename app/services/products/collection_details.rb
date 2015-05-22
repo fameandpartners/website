@@ -116,11 +116,11 @@ class Products::CollectionDetails
       "red" => {
         :banner => {
           :title => 'Red Dresses',
-          :subtitle => 'Turn up the heat & turn heads in statement shades of red dresses. Ready to wear for any occasion. From wicked wine to crisp crimson hues, you are bound to make temperatures rise. Customise these killer styles into the dress of your dreams.',
+          :subtitle => 'Look red haute in statement-making shades.',
           :image => "/assets/category-banners/red-dresses-dark-bg.jpg"
         },
-        :meta_title        => 'Elegant red dresses',
-        :meta_description  => "Shop the biggest collection of red dresses at your fingertips. Customise cut & style to the dress you want! FREE & fast delivery. FREE & easy returns",
+        :meta_title        => 'Red Dresses',
+        :meta_description  => "Look red haute in statement-making shades.",
       },
       "pastel" => {
         :banner => {
