@@ -77,6 +77,8 @@ gem 'rollout'
 gem 'term-ansicolor'
 gem 'ruby-progressbar'
 
+gem 'style_quiz', path: "./style_quiz"
+
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'

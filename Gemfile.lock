@@ -170,6 +170,13 @@ GIT
     mail_view (2.0.4)
       tilt
 
+PATH
+  remote: ./style_quiz
+  specs:
+    style_quiz (0.0.1)
+      jquery-rails
+      rails (~> 3.2.21)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -831,6 +838,7 @@ DEPENDENCIES
   spree_paypal_express!
   spree_social!
   spring
+  style_quiz!
   term-ansicolor
   therubyracer
   thin
@@ -841,3 +849,6 @@ DEPENDENCIES
   uglifier (= 1.3.0)
   unicorn
   whenever
+
+BUNDLED WITH
+  1.10.0.pre

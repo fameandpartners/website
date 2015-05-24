@@ -1,4 +1,6 @@
 FameAndPartners::Application.routes.draw do
+  mount StyleQuiz::Engine => "/style-quiz"
+
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
   scope '(:site_version)' do
@@ -75,7 +77,7 @@ FameAndPartners::Application.routes.draw do
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
     # New style qiuz
-    get '/style-quiz' => 'statics#style_quiz'
+    #get '/style-quiz' => 'statics#style_quiz'
 
     #edits
     get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
