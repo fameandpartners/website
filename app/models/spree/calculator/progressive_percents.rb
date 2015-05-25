@@ -14,7 +14,7 @@ module Spree
 
     def compute(object)
       if object.is_a?(Spree::Order)
-        quantity = object.line_items.sum(:quantity)
+        quantity = order_items_num(object)
 
         available_discounts = []
         discount_ranges.each do |num, discount|
@@ -24,13 +24,17 @@ module Spree
         discount = available_discounts.max
         object.amount * discount / 100
       else
-        0
+        BigDecimal.new(0)
       end
     end
 
     private
 
-    # returns [0, 10], [3, 15], [5, 25]
+    def order_items_num(order)
+      order.line_items.sum(:quantity)
+    end
+
+    # returns [0, 15], [3, 20], [5, 25]
     def discount_ranges
       dresses_nums.zip(discount_amounts)
     end
