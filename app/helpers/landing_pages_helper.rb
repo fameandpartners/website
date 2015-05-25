@@ -35,7 +35,7 @@ module LandingPagesHelper
     elsif fail_over_image.present?
       [fail_over_image.attachment.url(:large), fail_over_image.attachment.url(:large)]
     else
-      Rails.logger.info("Missing images for product id=#{product.id} name=#{product.name}")
+      Rails.logger.info("Missing images for product id=#{product.id} name=#{product.name} colour=#{product_color_value.option_value.name}")
       ['blank-product.png']
     end
   end
