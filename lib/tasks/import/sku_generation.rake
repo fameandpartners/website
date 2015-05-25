@@ -6,7 +6,7 @@ namespace :import do
     Importers::SkuGeneration::Importer.new(ENV['FILE_PATH']).import
   end
 
-  desc :fabric_colour_cards
+  desc 'fabric_colour_cards'
   task :fabric_colour_cards => :environment do
     raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
     Importers::SkuGeneration::FabricCardImporter.new(ENV['FILE_PATH']).import
@@ -69,7 +69,7 @@ namespace :import do
   end
 
 
-  desc :existing_spree_variants
+  desc 'existing_spree_variants as skus in CSV format'
   task :existing_spree_variants => :environment do
 
     csv_string = CSV.generate(headers: true) do |csv|
