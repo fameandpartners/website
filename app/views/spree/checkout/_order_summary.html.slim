@@ -7,7 +7,7 @@ ruby:
   "
   preload_cart_data = "
     (function(){
-      cart_data  = #{ raw cart.serialize.to_json };
+      var cart_data  = #{ raw cart.serialize.to_json };
       window.app.shopping_cart.updateData(cart_data);
     })();
   "
