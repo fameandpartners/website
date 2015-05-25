@@ -27,6 +27,13 @@ Spree::Order.class_eval do
     after_transition :to => :complete, :do => :project_delivery_date
   end
 
+  def save_permalink(permalink_value=nil)
+    # noop
+    # :number is already unique, and already the permalink value
+    # The default spree implementation here does a LIKE '?%',
+    # which on order number, is very very slow.
+  end
+
   def project_delivery_date
     if complete?
       delivery_date = Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
