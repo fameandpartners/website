@@ -48,4 +48,30 @@ describe Spree::Product, :type => :model do
       end
     end
   end
+
+  describe '#active?' do
+    subject(:product) do
+      build :dress,
+            deleted_at:   nil,
+            hidden:       false,
+            available_on: Date.yesterday
+    end
+
+    it { is_expected.to be_active }
+
+    context 'deleted' do
+      before { product.deleted_at = Time.now }
+      it     { is_expected.to_not be_active }
+    end
+
+    describe 'future items' do
+      before { product.available_on = 2.days.from_now }
+      it     { is_expected.to_not be_active }
+    end
+
+    describe 'hidden' do
+      before { product.hidden = true }
+      it     { is_expected.to_not be_active }
+    end
+  end
 end
