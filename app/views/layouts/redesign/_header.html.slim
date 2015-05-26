@@ -1,19 +1,22 @@
 ruby:
   init_items_counter_sync = "
     (function(){
-      window.app.shopping_cart.on('change', function() {
+      var updateShoppingBagCounter = function() { 
         $('#cart-item-count').html(window.app.shopping_cart.data.item_count);
-      });
-
+      };
+      window.app.shopping_cart.on('change', updateShoppingBagCounter);
+      updateShoppingBagCounter();
     })();
   "
 
   init_moodboard_counter_sync = "
     (function(){
-      $counter = $('#moodboard-counter');
-      window.app.user_moodboard.on('change', function() {
+      var updateMoodboardCounter = function() {
+        var $counter = $('#moodboard-counter');
         $counter.html('Moodboard: ' + window.app.user_moodboard.data.item_count);
-      });
+      };
+      window.app.user_moodboard.on('change', updateMoodboardCounter);
+      updateMoodboardCounter();
     })();
   "
   init_style_quiz = ""

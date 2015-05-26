@@ -327,22 +327,12 @@ Spree::Product.class_eval do
   end
   alias_method :fast_making?, :fast_making
 
-  # TODO: implement more faster check
-  # not deleted
-  # available - check with date
-  # have prices in default currency
-  # have prices with non-null amount
-  def is_active
-    Spree::Product.is_active?(self.id)
+  def active?
+    ! deleted? && ! hidden? && available?
   end
-  alias_method :is_active?, :is_active
 
-  def self.is_active?(product_id)
-    @active_product_ids ||= begin
-      Set.new(Spree::Product.active.pluck(:id))
-    end
-    @active_product_ids.include?(product_id)
-  end
+  alias_method :is_active,  :active?
+  alias_method :is_active?, :active?
 
   def discount
     return @discount if instance_variable_defined?('@discount')
