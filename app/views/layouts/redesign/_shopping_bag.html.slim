@@ -2,9 +2,10 @@ ruby:
   shopping_bag_init = "
     window.app.shopping_bag = new ShoppingBag({
       cart: window.app.shopping_cart,
-      overlay: '#shadow-layer',
-      container: '#cart',
-      toggle_link: '#cart-trigger'
+      overlay:     '#shadow-layer',
+      container:   '#cart',
+      toggle_link: '#cart-trigger',
+      auto_open:   /open_cart=true/.test(window.location.search)
     });
   "
 = content_for :inline_javascript do
