@@ -1,8 +1,7 @@
 ruby:
-  total_amount = @order.display_total
+  total_amount = order.display_total
   total_amount = total_amount.to_s.delete('$')
 
-script src="https://secure.adnxs.com/px?id=154031&seg=1436880&order_id=#{ @order.number }&value=#{ @order.display_total }&t=1" type="text/javascript"
 // -- Facebook Conversion Code for Sales
 javascript:
   (function() {
@@ -17,16 +16,19 @@ javascript:
   }
   })();
   window._fbq = window._fbq || [];
-  window._fbq.push(['track', '6018317903734', {'value':'0.01','currency':'AUD'}]);
+  window._fbq.push(['track', '6018317903734', {'value':#{total_amount},'currency': '#{current_site_version.currency}' }]);
 
 noscript
-  img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6018317903734&amp;cd[value]=0.01&amp;cd[currency]=AUD&amp;noscript=1"
+  img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6018317903734&cd[value]=#{total_amount}&cd[currency]=#{current_site_version.currency}&noscript=1"
+
+
+script src="https://secure.adnxs.com/px?id=154031&seg=1436880&order_id=#{ order.number }&value=#{ total_amount }&t=1" type="text/javascript"
 
 // -- Getprice.com.au sales tracking system
-img height="1" width="1" border="0" src="https://secure.getprice.com.au/affsale.asp?shopid=4440&price=#{ @order.display_total }&sid=#{ @order.number }"
+img height="1" width="1" border="0" src="https://secure.getprice.com.au/affsale.asp?shopid=4440&price=#{ total_amount }&sid=#{ order.number }"
 
 // -- Myshopping.com.au
-img height="1" width="1"  src="https://www.myshopping.com.au/sale.asp?mid=22282507&amount=#{ @order.display_total }&order=#{ @order.number }"
+img height="1" width="1"  src="https://www.myshopping.com.au/sale.asp?mid=22282507&amount=#{ total_amount }&order=#{ order.number }"
 
 // -- Saleshare
-img src="https://shareasale.com/sale.cfm?amount=#{ total_amount }&tracking=#{ @order.number }&transtype=SALE&merchantID=56651" width="1" height="1"
+img src="https://shareasale.com/sale.cfm?amount=#{ total_amount }&tracking=#{ order.number }&transtype=SALE&merchantID=56651" width="1" height="1"

@@ -177,7 +177,7 @@ module ApplicationHelper
 
   # competition share - 6009830748096
   # order purchased   - 6013645244896
-  def fb_analytics_track(pixel_id, currency = 'AUD', value = '0.00')
+  def fb_analytics_track(pixel_id, currency, value = '0.00')
     render 'spree/shared/facebook_analytics', {
       pixel_id: pixel_id,
       currency: currency,

@@ -24,9 +24,7 @@ class Products::DetailsResource
   end
 
   def cache_expiration_time
-    return configatron.cache.expire.quickly if Rails.env.development?
-    return configatron.cache.expire.quickly if Rails.env.staging?
-    return configatron.cache.expire.long
+    configatron.cache.expire.long
   end
 
   def read
