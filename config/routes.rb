@@ -48,6 +48,10 @@ FameAndPartners::Application.routes.draw do
     get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
   end
 
+  namespace :widgets do
+    get 'main_nav' => 'site_navigations#main_nav'
+  end
+
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'

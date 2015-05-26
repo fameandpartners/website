@@ -1,0 +1,72 @@
+doctype html
+= conditional_html do
+  head
+    link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/css/select2.min.css"
+
+    = stylesheet_link_tag '//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700'
+    = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
+    = stylesheet_link_tag 'application_redesign'
+    = javascript_include_tag 'application_redesign'
+    = csrf_meta_tags
+
+
+  body#top
+    header
+      .nav-menu.nav-alert-top
+        .container-fluid.nav-menu-container
+          .masthead.pull-left.hidden-xs
+            = link_to '/' do
+              = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
+
+          .masthead.pull-left.visible-xs
+            = link_to '/' do
+              = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
+
+          ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
+            li.shop.menu-item
+              a.menu-item--link.active-hover href="#"
+                | Shop
+            - if Features.active?(:style_quiz)
+              li.menu-item
+                = link_to 'style quiz', '', class: 'menu-item--link', id: 'style-quiz-trigger'
+            li.shop.menu-item
+              a.menu-item--link.active-hover href="#"
+                | Lookbook
+            li.menu-item
+              = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
+
+          ul.secondary.pull-right
+            - if Features.active?(:moodboard)
+                li.menu-item.hidden-xs.hidden-sm
+                  = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
+                    span.visible-sm
+                      = image_tag "Heart.svg"
+                    span.hidden-sm.hidden-xs#moodboard-counter
+                      | Moodboard &nbsp;
+
+            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
+              = render "layouts/redesign/header/my_account_dropdown"
+
+            li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs
+              = render "layouts/redesign/header/my_account_dropdown_mobile"
+
+            li.menu-item
+              a.menu-item--link.search href="#"
+                = image_tag "_icons/search.svg", class: "nav-mobile-logo"
+              .search-bar.invis
+                a.close-search href="#"
+                  = image_tag "close.svg", alt: 'Close'
+                .container-fluid.search-form
+                  .col-md-6.col-md-offset-3
+                    .col-md-10
+                      .input-group.margin-bottom-sm
+                        = form_tag search_path, method: :get do
+                          input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
+                          span
+                            button.invis-fix Enter
+
+            li#cart-trigger.menu-item
+              = link_to spree.checkout_path, class: 'menu-item--link' do
+                span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
+                span.hidden-sm.hidden-xs.hidden-xxs cart:
+                span#cart-item-count 0
