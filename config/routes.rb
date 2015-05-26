@@ -27,6 +27,9 @@ FameAndPartners::Application.routes.draw do
     end
   }
 
+  get '/undefined',    to: 'mysterious_route#undefined'
+  get '/au/undefined', to: 'mysterious_route#undefined'
+
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
                :class_name => 'Spree::User',
