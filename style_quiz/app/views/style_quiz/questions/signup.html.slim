@@ -1,0 +1,30 @@
+= content_for :inline_javascript do
+  | console.log('signup question init');
+
+/ Question 1/11
+.quiz-section id="#{ question.name }-question"
+  .quiz-section-title
+    h4.quiz-section-number Question #{ question_position }/#{ question_total }
+    h2 Tell us a bit about yourself.
+  .quiz-user-info
+    .grid-container
+      .row.row-compact
+        .col-6.col-middle.col-compact.text-center
+          .form-centered.text-left
+            .form-group
+              label Full NAME
+              input.form-control type="text"
+            .form-group
+              label date of birth
+              input.form-control type="text"
+            .form-group
+              label email address
+              input.form-control type="text"
+            input.btn.btn-block.btn-primary type="submit" value="Next"
+        .col-6.col-middle.col-compact.text-center
+          .form-centered.facebook-box
+            h2 Import my details from Facebook.
+            = link_to '#', class: 'btn' do
+              span.fa.fa-facebook
+/ @end Question 1/11
+/ ------------------

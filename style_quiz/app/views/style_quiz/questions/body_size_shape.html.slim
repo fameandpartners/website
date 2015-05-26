@@ -1,0 +1,72 @@
+/ Question 4/11
+.quiz-section id="#{ question.name }-question"
+  .quiz-section-title.quiz-section-title-pink
+    h4.quiz-section-number Question 4/11
+    h2 
+      | Select your body shape
+      br
+      | and dress size.
+  .grid-container
+    .quiz-catalog.text-center
+      .quiz-catalog-item
+        .quiz-catalog-picture
+          .body-box.apple
+        .quiz-catalog-title
+          | apple
+          .checkmark
+      .quiz-catalog-item
+        .quiz-catalog-picture
+          .body-box.pear
+        .quiz-catalog-title
+          | pear
+          .checkmark
+      .quiz-catalog-item
+        .quiz-catalog-picture
+          .body-box.athletic
+        .quiz-catalog-title
+          | athletic
+          .checkmark
+      .quiz-catalog-item
+        .quiz-catalog-picture
+          .body-box.strawberry
+        .quiz-catalog-title
+          | strawberry
+          .checkmark
+      .quiz-catalog-item
+        .quiz-catalog-picture
+          .body-box.hour-glass
+        .quiz-catalog-title
+          | hour glass
+          .checkmark
+      .quiz-catalog-item.selected
+        .quiz-catalog-picture
+          .body-box.column
+        .quiz-catalog-title
+          | column
+          .checkmark
+      .quiz-catalog-item
+        .quiz-catalog-picture
+          .body-box.petite
+        .quiz-catalog-title
+          | petite
+          .checkmark
+    h2.text-center Select your size.
+    .size-picker
+      .size 4
+      .size.selected 6
+      .size 8
+      .size 10
+      .size 12
+      .size 14
+      .size 16
+      .size 18
+      .size 20
+      .size 22
+      .size 24
+      .size 26
+    .row
+      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block'
+      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block'
+/ @end Question 4/11
+/ ------------------
+

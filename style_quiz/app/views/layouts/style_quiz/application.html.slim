@@ -6,9 +6,7 @@ doctype html
     = csrf_meta_tags
     
     = javascript_include_tag 'style_quiz/application'
-    script src="//use.typekit.net/kur6crm.js" type="text/javascript"
-    script type="text/javascript"
-      | try{Typekit.load();}catch(e){}
       
   body
     = yield
+    = render 'layouts/style_quiz/javascript'
