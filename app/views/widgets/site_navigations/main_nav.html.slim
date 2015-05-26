@@ -9,7 +9,6 @@ doctype html
     = javascript_include_tag 'application_redesign'
     = csrf_meta_tags
 
-
   body#top
     header
       .nav-menu.nav-alert-top
@@ -24,14 +23,44 @@ doctype html
 
           ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
             li.shop.menu-item
-              a.menu-item--link.active-hover href="#"
+              = link_to dresses_path(site_version: current_site_version.code), class: 'menu-item--link active-hover' do
                 | Shop
-            - if Features.active?(:style_quiz)
-              li.menu-item
-                = link_to 'style quiz', '', class: 'menu-item--link', id: 'style-quiz-trigger'
             li.shop.menu-item
               a.menu-item--link.active-hover href="#"
                 | Lookbook
+              .mega-menu.hidden-sm.story-list
+                .stories.container-fluid.center
+
+                  .col-md-2
+                    = link_to here_comes_the_sun_collection_path do
+                      .image-container
+                         = image_tag src='edits/here-comes-the-sun/nav.jpg', :class => 'img-responsive', :alt => 'Here Comes the Sun'
+                      p.text-center.edit-title Here Comes The Sun
+
+                  .col-md-2
+                    = link_to bridesmaid_collection_path do
+                      .image-container.bridesmaids
+                        = image_tag src='edits/bridesmaids/nav.jpg', :class => 'img-responsive', :alt => 'Our Beautiful Bridesmaids Collection'
+                      p.text-center.edit-title Besties and Bridesmaids Collection
+
+                  .col-md-2
+                    = link_to all_size_collection_path do
+                      .image-container
+                        = image_tag src='edits/all-size/nav.jpg', :class => 'img-responsive', :alt => 'All Sizes'
+                      p.text-center.edit-title I'll Have What She's Having
+
+                  .col-md-2
+                    = link_to prom_collection_path do
+                      .image-container.real-prom
+                        = image_tag src='edits/real_prom/1-edits-nav.jpg', :class => 'img-responsive', :alt => 'Our Official Prom Collection'
+                      p.text-center.edit-title Our Official Prom Collection
+
+                  .col-md-2
+                    = link_to break_hearts_collection_path do
+                      .image-container
+                        = image_tag src='edits/BREAK-HEARTS/1_141119_F&P_NYE-edits-nav.jpg', :class => 'img-responsive', :alt => 'Break Hearts not Bank Accounts'
+                      p.text-center.edit-title Break Hearts not Bank Accounts
+
             li.menu-item
               = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
 
