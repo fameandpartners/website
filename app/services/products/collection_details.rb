@@ -82,8 +82,8 @@ class Products::CollectionDetails
     taxon.title             = "Shop and customize express delivery dresses at Fame & Partners"
     taxon.description       = ''
     taxon.footer            = ''
-    taxon.banner.title      = 'GET IT FIRST!'
-    taxon.banner.subtitle   = 'Dresses delivered to you in 2-5 business days for as little as $29 express making fee'
+    taxon.banner.title      = 'GET IT QUICK!'
+    taxon.banner.subtitle   = 'Introducing express making: Dresses made for you in 48 hours'
     taxon.banner.image      = '/assets/category-banners/express-making.jpg'
   end
 
