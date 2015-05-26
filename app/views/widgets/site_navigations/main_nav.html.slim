@@ -40,25 +40,53 @@ doctype html
 
           ul.secondary.pull-right
             - if Features.active?(:moodboard)
-                li.menu-item.hidden-xs.hidden-sm
+                li.menu-item.hidden-xs.hidden-sm.hide-item
                   = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
                     span.visible-sm
                       = image_tag "Heart.svg"
                     span.hidden-sm.hidden-xs#moodboard-counter
                       | Moodboard &nbsp;
 
-            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
+            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs.hide-item
               = render "layouts/redesign/header/my_account_dropdown"
 
-            li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs
+            li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs.hide-item
               = render "layouts/redesign/header/my_account_dropdown_mobile"
 
             li.menu-item
-              a.menu-item--link.search href="#"
+              a.menu-item--link.search href="#" id="search"
                 = image_tag "_icons/search.svg", class: "nav-mobile-logo"
 
-            li#cart-trigger.menu-item
+              .search-input.hidden
+                form accept-charset="UTF-8" action="/search" method="get"
+                  input type="text" placeholder="type here..."
+                #close-search X
+
+            li#cart-trigger.menu-item.hide-item
               = link_to root_path(open_cart: true), class: 'menu-item--link' do
                 span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
                 span.hidden-sm.hidden-xs.hidden-xxs cart
+
+coffee:
+  window.document.ready = ->
+    searchLink = document.getElementById('search')
+    searchInput = document.getElementsByClassName('search-input')[0]
+    hideItems = document.getElementsByClassName('hide-item')
+
+    searchLink.onclick = ->
+      searchInput.classList.remove('hidden')
+      searchLink.classList.add('hidden')
+      for e in hideItems
+        e.classList.add('hidden')
+      false
+
+    closeSearch = document.getElementById('close-search')
+
+    closeSearch.onclick = ->
+      searchInput.classList.add('hidden')
+      searchLink.classList.remove('hidden')
+      for e in hideItems
+        e.classList.remove('hidden')
+      false
+
 
