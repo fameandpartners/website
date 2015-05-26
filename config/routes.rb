@@ -120,7 +120,7 @@ FameAndPartners::Application.routes.draw do
 
       # Colors should behave like query strings, and not paths
       get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug, :site_version).to_query}" }
-      get '/dress-:product_slug' => 'products/details#show'
+      get '/dress-:name-:id' => 'products/details#show'
 
       #roots categories
       get '/style',  to: redirect('/dresses')

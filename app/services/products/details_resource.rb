@@ -8,15 +8,15 @@
 class Products::DetailsResource
   META_DESCRIPTION_MAX_SIZE = 160
 
-  attr_reader :site_version, :product
+  attr_reader :site_version
 
   def initialize(options = {})
-    if options[:slug].blank? && options[:permalink].blank? && options[:product].blank?
-      raise ArgumentError.new('have no product identificators')
-    end
+    @site_version = options[:site_version] || SiteVersion.default
+    @id, @name    = options[:id], options[:name]
+  end
 
-    @site_version     = options[:site_version] || SiteVersion.default
-    @product          = find_product!(options[:slug], options[:permalink], options[:product])
+  def product
+    @product ||= find_product!(@id, @name)
   end
 
   def cache_key
@@ -55,28 +55,13 @@ class Products::DetailsResource
 
   private
 
-    # options[:product_slug], options[:product_id], options[:product])
-    # slug      - dress-naomi-459
-    # permalink - sweetheart_hi_low
-    def find_product!(slug, permalink, candidate)
+    # Given the product permalink: dress-naomi-459
+    # its id: 459
+    # its name: naomi
+    def find_product!(id, name)
       scope = Spree::Product.includes(:variants_including_master, :taxons)
-
-      result = if candidate.present?
-        scope.where(id: candidate.id).first
-      elsif slug.present?
-        slug_id = get_product_id_from_slug(slug)
-        scope.where(id: slug_id).first
-      elsif permalink
-        scope.where(permalink: permalink).first
-      end
-
+      result = scope.where('name ILIKE :name AND id = :id', name: name.titleize, id: id).first
       result.present? ? result : raise(Errors::ProductNotFound)
-    end
-
-    def get_product_id_from_slug(slug)
-      result = slug.to_s.match(/(\d)+$/)
-      return result[0] if result.present?
-      raise ArgumentError.new('invalid product slug')
     end
 
     # images

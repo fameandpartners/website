@@ -4,8 +4,8 @@ class Products::DetailsController < Products::BaseController
   def show
     @product = Products::DetailsResource.new(
       site_version: current_site_version,
-      slug:         params[:product_slug],
-      permalink:    params[:id]
+      name: params[:name],
+      id: params[:id]
     ).read
 
     # only admins can view inactive/hidden products
