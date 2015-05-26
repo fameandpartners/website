@@ -65,7 +65,7 @@
 	width: 410px;
 	height: 270px;
 	display: block;
-	background: url('getitfirst-small.jpg') no-repeat;
+	background: url('getitquick-small.jpg') no-repeat;
 	color: #fff;
 	.mega-menu-banner-container {
 		margin: 20px 10px 10px 48%;
@@ -75,23 +75,27 @@
 	.title {
 		font-family: Forum;
 		text-transform: uppercase;
-		font-size: 80px;
+		font-size: 70px;
 		line-height: 0.8;
 		display: block;
+    padding-top: 20px;
 		span:first-child { font-size: 0.8em;}
 	}
 	.p { 
 		display: block;
 		color: #fff;
 		line-height: 1.1;
-		font-size: 1.2em;
-		margin-top: 10px;
+		font-size: 1.4em;
+		margin-top: 15px;
 		margin-bottom: 12px;
+    text-align: center;
 	}
 	.btn {
 		background-color: #f6e0d3;
 		color: #000;
 		font-weight: 300;
+    padding-top: 5px;
+    padding-bottom: 5px;
 	}
 } 
 // @end Mega menu banner

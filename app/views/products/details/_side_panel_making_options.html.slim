@@ -1,19 +1,25 @@
 // product making options panel
 #product-making-options-content.product-side-panel.production-time-panel
   button.close-btn = image_tag "cross.png", alt: 'close button'
-  h2 Production time
-  p You now have the option to receive your dress within 2-5 business days for as little as $29 express making fee
+  h2 Get it quick
+  p 
+    ' Introducing Express Making
+    br
+    ' Dresses made for you in 48 hours
   
   - making_options.each do |option|
     .production-time-box
-      .icon.icon-delivery-express
+      .icon.icon-sewing-machine
       h2 = option.name
-      p Get your order within 2-5 working days
+      p 
+        ' We make your dress in 48h 
+        br
+        ' for as little as $29 express making fee
       a.btn.btn-block.btn-secondary.making-option href="#" data-id=option.id data-name=option.name data-price=option.display_price
         = "+#{ option.display_price }"
   .production-time-box
-    .icon.icon-delivery
-    h2 Standard making
-    p Your order will arrive in 7-10 working days
+    .icon.icon-thread
+    h2 Standard
+    p Your dress is made within 2-5 business days
     a.btn.btn-block.btn-secondary.making-option data-id="original" data-name="original" data-price=""
       | +$0
