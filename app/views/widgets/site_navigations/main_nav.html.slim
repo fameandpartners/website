@@ -48,10 +48,11 @@ doctype html
                       | Moodboard &nbsp;
 
             li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs.hide-item
-              = render "layouts/redesign/header/my_account_dropdown"
+              = link_to 'my account', profile_path, :class =>"menu-item--link active-hover"
 
             li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs.hide-item
-              = render "layouts/redesign/header/my_account_dropdown_mobile"
+              = link_to profile_path, :class =>"menu-item--link active-hover" do
+                = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
 
             li.menu-item
               a.menu-item--link.search href="#" id="search"
