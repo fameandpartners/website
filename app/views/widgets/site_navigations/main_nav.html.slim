@@ -13,7 +13,7 @@ doctype html
       | try{Typekit.load();}catch(e){}
 
     = stylesheet_link_tag 'widgets/site_navigations'
-    = javascript_include_tag 'application_redesign'
+    = javascript_include_tag 'widgets/site_navigations'
     = csrf_meta_tags
 
   body#top
@@ -60,10 +60,11 @@ doctype html
 
               .search-input.hidden
                 form accept-charset="UTF-8" action="/search" method="get"
-                  input type="text" placeholder="type here..."
-                #close-search X
+                  input.form-control type="text" placeholder="type here..."
+                #close-search.close-search-btn
+                  = image_tag 'close.svg', width: 12, height: 12, alt: ''
 
-            li#cart-trigger.menu-item.hide-item
+            li#cart-trigger.menu-item
               = link_to root_path(open_cart: true), class: 'menu-item--link' do
                 span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
                 span.hidden-sm.hidden-xs.hidden-xxs cart
