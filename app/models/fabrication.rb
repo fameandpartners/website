@@ -34,4 +34,8 @@ class Fabrication < ActiveRecord::Base
   validates :line_item_id, presence: true
 
   attr_accessible :uuid
+
+  def self.for(line_item)
+    line_item.fabrication || FabricationEvent.creation.create!(line_item_id: line_item.id).fabrication
+  end
 end
