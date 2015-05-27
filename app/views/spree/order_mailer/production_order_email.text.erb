@@ -13,7 +13,7 @@ Quantity:       <%= item.quantity%>
 Factory:        <%= item.factory %>
 Delivery Date:  <%= order.projected_delivery_date %>
 <% if item.making_options.present? %>
-Making Options: <%= item.making_options.map{|option| option.name.upcase }.join(', ') %>
+Express Making ( 快速决策 ): <%= item.making_options.map{|option| option.name.upcase }.join(', ') %>
 <% end %>
 
 Customizations:
