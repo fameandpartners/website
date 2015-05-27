@@ -18,6 +18,7 @@ module Orders
                    :id,
                    :variant,
                    :personalization,
+                   :making_options,
                    :factory,
                    :fabrication,
                    :price,

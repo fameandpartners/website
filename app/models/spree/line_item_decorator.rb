@@ -61,6 +61,11 @@ Spree::LineItem.class_eval do
     end
   end
 
+  def making_options_text
+    return '' if making_options.blank?
+    making_options.map{|option| option.name.upcase }.join(', ')
+  end
+
   def cart_item
     @cart_item ||= Repositories::CartItem.new(line_item: self).read
   end

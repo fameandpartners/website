@@ -27,7 +27,7 @@ class ProductMakingOption < ActiveRecord::Base
   end
 
   def name
-    'Express'
+    'Express Making'
   end
 
   def fast_making?

@@ -4,6 +4,8 @@ class LineItemMakingOption < ActiveRecord::Base
   belongs_to :line_item,  class_name: 'Spree::Variant'
   belongs_to :product_making_option, class_name: 'ProductMakingOption', foreign_key: :making_option_id
 
+  delegate :name, to: :product_making_option, allow_nil: true
+
   def display_price
     Spree::Money.new(price, currency: currency)
   end
