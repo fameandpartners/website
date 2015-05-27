@@ -1,3 +1,9 @@
+ruby:
+  quiz_init_code = "
+    var question_data  = #{ raw questions.map(&:marshal_dump).to_json };
+    window.quiz = new StyleQuiz.Quiz(questions: questions_data)
+  "
+
 - total_questions = @questions.size
 - @questions.each_with_index do |question, index|
   = render template: question.template, locals: { question: question, question_position: index + 1, question_total: total_questions}
