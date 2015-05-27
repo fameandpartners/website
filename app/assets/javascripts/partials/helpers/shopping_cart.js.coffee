@@ -58,8 +58,12 @@ window.helpers.ShoppingCart = class ShoppingCart
       type: "POST"
       dataType: "json"
       data: product_data
-    ).success(
-      @updateData
+    ).success((data) =>
+      @updateData(data)
+      added_product = _.find((data.products || []), (product) ->
+        product.variant_id == product_data.variant_id
+      )
+      @trackAddToCart(added_product)
     ).error( () =>
       @trigger('error')
     )
@@ -122,3 +126,13 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
+  # analytics
+  trackAddToCart: (product) ->
+    try
+      window._fbq ||= []
+      window._fbq.push(['track', '6021815151134', {
+        'value': product.price.amount,
+        'currency':product.price.currency
+      }])
+    catch
+      # do nothing

@@ -63,7 +63,6 @@
 <% if flash[:commerce_tracking] || params[:force_tracking] %>
   <% if @spree_order.present? %>
     <%= fb_analytics_track('6013645244896', current_site_version.currency, @spree_order.display_item_total) %>
-    <%= fb_analytics_track('6021815151134', current_site_version.currency, @spree_order.display_item_total) %>
 
     <%= render :partial => 'spree/shared/rakuten' %>
     <%= render :partial => 'spree/shared/customerio' %>
@@ -81,11 +80,9 @@
    }
   })();
   window._fbq = window._fbq || [];
-  window._fbq.push(['track', '6021815151134', {value: '0.01', currency: '<%= current_site_version.currency %>' }]);
-  window._fbq.push(['track', '6016695263696', {value: '0.01', currency: '<%= current_site_version.currency %>' }]);
+  window._fbq.push(['track', '6016695263696', {value: '0.01', currency: '#{current_site_version.currency}' }]);
 
   </script>
-  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6021815151134&amp;cd[value]=0.00&amp;cd[currency]=AUD&amp;noscript=1" /></noscript>
   <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6016695263696&amp;cd[value]=0.00&amp;cd[currency]=AUD&amp;noscript=1" /></noscript>
 
 <% end %>

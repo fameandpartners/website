@@ -27,6 +27,9 @@ FameAndPartners::Application.routes.draw do
     end
   }
 
+  get '/undefined',    to: 'mysterious_route#undefined'
+  get '/au/undefined', to: 'mysterious_route#undefined'
+
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
                :class_name => 'Spree::User',
@@ -297,10 +300,10 @@ FameAndPartners::Application.routes.draw do
     mount Spree::Core::Engine, at: '/'
   end
 
-
   namespace :admin do
-    resources :fabrications, :only => :update
-    resource :sku_generation, :only => [:show, :create]
+    resources :fabrications,       :only => :update
+    resources :shipments,          :only => :update
+    resource  :sku_generation,     :only => [:show, :create]
     resources :bulk_order_updates, :except => [:edit]
   end
 

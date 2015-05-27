@@ -108,6 +108,8 @@ class Repositories::CartProduct
     def line_item_price
       OpenStruct.new(
         display_price: Spree::Price.new(amount: line_item.price).display_price.to_s,
+        amount: line_item.price,
+        currency: line_item.currency,
         'in_sale?'.to_sym => line_item.in_sale?,
         money: line_item.money,
         money_without_discount: line_item.in_sale? ? line_item.money_without_discount : nil

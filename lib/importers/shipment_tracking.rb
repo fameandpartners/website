@@ -58,7 +58,7 @@ module Importers
         shipment = order.shipments.first
         tracking_number = shipment_info_for_order(order).tracking_number
 
-        shipper = Admin::ReallyShipTheShipment.new(shipment, tracking_number)
+        shipper = Admin::ReallyShipTheShipment.new(shipment, tracking_number, re_raise: true)
 
         unless shipper.valid?
           warn "#{prefix} Order:#{order.number} #{shipper.errors.full_messages.to_sentence}"
