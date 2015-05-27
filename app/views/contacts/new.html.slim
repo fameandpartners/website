@@ -10,7 +10,7 @@
         = f.hidden_field :site_version
         .row
           .col-md-12.form-group
-            label How can we help?
+            = f.label :subject, 'How can we help?'
             = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, nil), {}, :class => 'form-control form-control-md selectbox'
             p.hint
               | Having a bad dress day?
@@ -18,31 +18,31 @@
 
         .row
           .col-md-12.form-group
-            label First name
+            = f.label :first_name
             = f.text_field :first_name, :class => 'form-control form-control-md'
         .row
           .col-md-12.form-group
-            label Last name
+            = f.label :last_name
             = f.text_field :last_name, :class => 'form-control form-control-md'
         .row
           .col-md-12.form-group
-            label Email
+            = f.label :email
             = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
         .row
           .col-md-12.form-group
-            label Phone
+            = f.label :phone
             = f.text_field :phone, :class => 'form-control form-control-md'
             p.hint
               | (include country code)
         .row
           .col-md-12.form-group
-            label Order Number
+            = f.label :order_number
             = f.text_field :order_number, :class => 'form-control form-control-md'
             p.hint
               | (if you have one)
         .row
           .col-md-12.form-group
-            label Your Message
+            = f.label :message, 'Your Message'
             = f.text_area :message, :class => 'form-control form-control-md'
         .row
           .col-md-12.form-group
