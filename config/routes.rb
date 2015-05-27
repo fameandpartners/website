@@ -529,4 +529,8 @@ FameAndPartners::Application.routes.draw do
   if Features.active?(:content_revolution)
     mount Revolution::Engine => "/"
   end
+
+  if Features.active?(:landing_pages)
+    mount LandingPage::Engine => "/"
+  end  
 end
