@@ -124,7 +124,7 @@ module Shipping
         if shipment.line_items.count == 1 && possible_to_ship
           shipper = Admin::ReallyShipTheShipment.new(shipment, shipment.tracking)
 
-          if shipper.valid? && shipper.ship!
+          if shipper.valid? && shipper.ship! && ! shipper.error?
             shipment.line_items.map do |li|
               UpdateFabrication.state_change(li, user, 'shipped')
             end
