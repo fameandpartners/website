@@ -217,24 +217,25 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
     @trigger('change')
     @close()
 
-  disable: (message) ->
+  disable: () ->
     @disabled = true
-    message ||= 'Free shipping'
-    @$action.html(message).addClass('disabled')
+    @$action.addClass('disabled')
     @close()
+    @setTitlesForCurrentValue()
 
   enable: () ->
-    @$action.html('Standard Making').removeClass('disabled')
     @disabled = false
+    @$action.removeClass('disabled')
+    @setTitlesForCurrentValue()
 
   setTitlesForCurrentValue: (data) ->
     data ||= @$container.find('.active').data()
 
     if @disabled
-      @$action.html("Free Shipping")
+      @$action.html("Standard making 2-5 days")
     else if data.id == 'original'
-      @$action.html("Standard Making")
+      @$action.html("Standard Making 2-5 days")
     else if data.name
       @$action.html("#{data.name} +#{data.price}")
     else
-      @$action.html("Production Time")
+      @$action.html("Express Making")
