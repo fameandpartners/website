@@ -74,9 +74,14 @@ sitemap_options = {
   sitemaps_path: 'sitemap'
 }
 
+# XML Priorities:
+# => 1.0 for root (generator's `#include_root` default)
+# => 0.9 for categories
+# => 0.8 for products
+# => 0.7 for pages
 SitemapGenerator::Sitemap.create(sitemap_options) do
   # Common pages
-  add '/assets/returnform.pdf', priority: 0.5
+  add '/assets/returnform.pdf', priority: 0.7
 
   # Creating sitemaps for each site version
   SiteVersion.find_each do |site_version|
@@ -110,7 +115,7 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
       # Events
       Repositories::Taxonomy.read_events.each do |taxon|
         add(build_taxon_path(taxon.name), {
-          priority: 0.7,
+          priority: 0.9,
           images: map_taxon_products_images(taxon.id)
         })
       end
@@ -118,7 +123,7 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
       # Collections
       Repositories::Taxonomy.read_collections.each do |taxon|
         add(build_taxon_path(taxon.name), {
-          priority: 0.7,
+          priority: 0.9,
           images: map_taxon_products_images(taxon.id)
         })
       end
@@ -126,7 +131,7 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
       # Styles
       Repositories::Taxonomy.read_styles.each do |taxon|
         add(build_taxon_path(taxon.name), {
-          priority: 0.7,
+          priority: 0.9,
           images: map_taxon_products_images(taxon.id)
         })
       end
@@ -135,14 +140,14 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
       Repositories::ProductColors.color_groups.each do |color_group|
         path = colour_path(color_group.name)
         add(path, {
-          priority: 0.7,
+          priority: 0.9,
           images: map_color_group_products_images(color_group.id)
         })
       end
 
       # Static pages
       statics_pages.each do |page_path|
-        add page_path, priority: 0.5
+        add page_path, priority: 0.7
       end
     end
   end
