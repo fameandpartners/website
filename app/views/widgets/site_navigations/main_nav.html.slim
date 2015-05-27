@@ -13,10 +13,9 @@ doctype html
       | try{Typekit.load();}catch(e){}
 
     = stylesheet_link_tag 'widgets/site_navigations'
-    = javascript_include_tag 'widgets/site_navigations'
     = csrf_meta_tags
 
-  body#top
+  body#top[onload="initPage()"]
     header
       .nav-menu.nav-alert-top
         .container-fluid.nav-menu-container
@@ -70,10 +69,10 @@ doctype html
                 span.hidden-sm.hidden-xs.hidden-xxs cart
 
 coffee:
-  window.document.ready = ->
-    searchLink = document.getElementById('search')
+  window.initPage = ->
+    searchLink  = document.getElementById('search')
     searchInput = document.getElementsByClassName('search-input')[0]
-    hideItems = document.getElementsByClassName('hide-item')
+    hideItems   = document.getElementsByClassName('hide-item')
 
     searchLink.onclick = ->
       searchInput.classList.remove('hidden')
