@@ -1,7 +1,7 @@
 ruby:
   init_items_counter_sync = "
     (function(){
-      var updateShoppingBagCounter = function() { 
+      var updateShoppingBagCounter = function() {
         $('#cart-item-count').html(window.app.shopping_cart.data.item_count);
       };
       window.app.shopping_cart.on('change', updateShoppingBagCounter);
@@ -87,16 +87,7 @@ ruby:
                         | Fit Guarantee
               .mega-menu--secondary
                 a.mega-menu-banner href="/getitfirst"
-                  .mega-menu-banner-container
-                    span.title 
-                      span Get it
-                      br
-                      span first.
-                    span.p 
-                      ' Dresses delivered 
-                      br
-                      ' in 2-5 business days
-                    span.btn.btn-sm.btn-block Shop now
+                  = image_tag 'mega-menu/express-making.jpg', alt: 'Get it Quick - Dress made for you in 48 hours'
                 .container-fluid.max-width-100
                   .row
                     .col-md-3.col-lg-2.col-md-offset-4

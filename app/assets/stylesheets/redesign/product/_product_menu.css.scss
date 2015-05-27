@@ -65,7 +65,7 @@
 }
 
 
-// Production time panel 
+// Production time panel
 .production-time-panel {
   background-color: #f5f5f5;
   padding-left: 55px;
@@ -75,6 +75,11 @@
     position: absolute;
     top: 0;
     right: 0;
+  }
+
+  .header {
+    padding-top: 30px;
+    margin-bottom: 30px;
   }
 }
 
@@ -91,7 +96,7 @@
   }
   .icon {
     font-size: 2.5em;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     color: #043646;
   }
   .icon-delivery-express {
