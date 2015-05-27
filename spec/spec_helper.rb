@@ -6,6 +6,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'shoulda/matchers'
 require 'database_cleaner'
+require 'ffaker'
 
 
 # Rails.application.railties.all { |r| r.eager_load! }
