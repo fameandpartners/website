@@ -88,6 +88,8 @@ FameAndPartners::Application.routes.draw do
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
+    get '/getitquick' => 'products/collections#show', defaults: { fast_making: true }, as: 'fast_making_dresses'
+
     post '/shared/facebook' => 'competition/events#share'
 
     scope '/user_cart', module: 'user_cart' do
@@ -96,7 +98,10 @@ FameAndPartners::Application.routes.draw do
       get '/details'      => 'details#show'
       post '/promotion'   => 'promotions#create'
 
-      resources :products, only: [:create, :edit, :update, :destroy]
+      post 'products' => 'products#create'
+      delete 'products/:line_item_id' => 'products#destroy'
+      delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
+      delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
     scope '/dresses' do
@@ -365,6 +370,8 @@ FameAndPartners::Application.routes.draw do
             post :update_positions, as: :update_positions
           end
         end
+
+        resources :making_options, controller: 'product_making_options'
 
         resources :accessories, controller: 'product_accessories' do
           post :update_positions, on: :collection

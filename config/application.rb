@@ -13,28 +13,20 @@ module FameAndPartners
   class Application < Rails::Application
 
     config.to_prepare do
-      # Load application's model / class decorators
-      Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
+      # manually load some paths
+      [
+        "../app/**/*_decorator*.rb",
+        "../app/overrides/*.rb",
+        "../app/services/**/*.rb",
+        "../app/repositories/**/*.rb",
+        "../app/policies/**/*.rb"
+      ].each do |path|
+        if Rails.configuration.cache_classes
+          Dir.glob(File.join(File.dirname(__FILE__), path)){|c| require(c) }
+        else
+          Dir.glob(File.join(File.dirname(__FILE__), path)){|c| load(c) }
+        end
       end
-
-      # Load application's view overrides
-      Dir.glob(File.join(File.dirname(__FILE__), "../app/overrides/*.rb")) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
-      end
-
-      Dir.glob(File.join(File.dirname(__FILE__), "../app/services/**/*.rb")) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
-      end
-
-      Dir.glob(File.join(File.dirname(__FILE__), "../app/repositories/**/*.rb")) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
-      end
-
-      # note: load reports manually
-      #Dir.glob(File.join(File.dirname(__FILE__), "../app/reports/**/*.rb")) do |c|
-      #  Rails.configuration.cache_classes ? require(c) : load(c)
-      #end
     end
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -44,9 +36,9 @@ module FameAndPartners
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib)
-    config.autoload_paths += Dir[ Rails.root.join('app', 'models') ]
-    config.autoload_paths += Dir[ Rails.root.join('app', 'repositories') ]
-    config.autoload_paths += Dir[ Rails.root.join('app', 'policies') ]
+    #config.autoload_paths += Dir[ Rails.root.join('app', 'models') ]
+    #config.autoload_paths += Dir[ Rails.root.join('app', 'repositories') ]
+    #config.autoload_paths += Dir[ Rails.root.join('app', 'policies') ]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

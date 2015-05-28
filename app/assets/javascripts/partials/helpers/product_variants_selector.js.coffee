@@ -24,10 +24,16 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @sizeInput = new window.inputs.ProductSizeIdSelector(options.size_input)
     @colorInput = new window.inputs.ProductColorIdSelector(options.color_input)
     @customizationsInput = new window.inputs.ProductCustomizationIdsSelector(options.customization_input)
+    @makingOptionsInput = new window.inputs.ProductMakingOptionIdSelector(options.making_options_input)
 
     @colorInput.on('change', @onChangeHandler)
     @sizeInput.on('change', @onChangeHandler)
     @customizationsInput.on('change', @onChangeHandler)
+    @makingOptionsInput.on('change', @onChangeHandler)
+
+    # don't allow to select custom color & express making at the same time
+    @colorInput.on('change', @updateMakingOptionsAvailablity)
+    @makingOptionsInput.on('change', @updateCustomColorsAvailability)
     @
 
   onChangeHandler: (e) =>
@@ -44,6 +50,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       size_id: @sizeInput.val(),
       color_id: @colorInput.val(),
       customizations_ids: @customizationsInput.val(),
+      making_options_ids: @makingOptionsInput.val(),
       product_id: @product_id
     }
 
@@ -56,6 +63,20 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       selected.variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
 
     return selected
+
+  updateCustomColorsAvailability: (e) =>
+    e.preventDefault()
+    if @makingOptionsInput.val()
+      @colorInput.disableCustomColors()
+    else
+      @colorInput.enableCustomColors()
+
+  updateMakingOptionsAvailablity: (e) =>
+    e.preventDefault()
+    if @colorInput.customValue()
+      @makingOptionsInput.disable()
+    else
+      @makingOptionsInput.enable()
 
   # note: it should return errors statuses
   validate: () ->

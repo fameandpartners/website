@@ -25,6 +25,9 @@ class Products::DetailsController < Products::BaseController
     @product.color_name = color.try(:name)
     # @product.color = color
 
+    # make express delivery as default option
+    @product.making_option_id = @product.making_options.first.try(:id)
+
     # set page title.
     # Drop anything after the first period(.) and newline
     @title = "#{@product.name} #{default_seo_title}"
