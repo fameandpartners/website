@@ -55,6 +55,11 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/break-hearts-not-banks', :layout => 'redesign/application'
   end
 
+  def lookbook
+    # index page for lookbok does not exists yet so we use redirect for now
+    redirect_to here_comes_the_sun_collection_path
+  end
+
   def here_comes_the_sun
     @title = "Here comes the sun | Beautiful Dresses - Fame & Partners"
     @description = "Discover beautiful summer dresses here at Fame & Partners"

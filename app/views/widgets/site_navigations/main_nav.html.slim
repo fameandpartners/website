@@ -20,37 +20,37 @@ doctype html
       .nav-menu.nav-alert-top
         .container-fluid.nav-menu-container
           .masthead.pull-left.hidden-xs
-            = link_to '/' do
+            = link_to '/', rel: 'nofollow' do
               = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
           .masthead.pull-left.visible-xs
-            = link_to '/' do
+            = link_to '/', rel: 'nofollow' do
               = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
           ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
             li.shop.menu-item
-              = link_to dresses_path(site_version: current_site_version.code), class: 'menu-item--link active-hover' do
+              = link_to dresses_path(site_version: current_site_version.code), class: 'menu-item--link active-hover', rel: 'nofollow' do
                 | Shop
             li.shop.menu-item
-              = link_to here_comes_the_sun_collection_path, class: "menu-item--link active-hover" do
+              = link_to lookbook_path, class: "menu-item--link active-hover", rel: 'nofollow' do
                 | Lookbook
             li.menu-item
-              = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
+              = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link', rel: 'nofollow'
 
           ul.secondary.pull-right
             - if Features.active?(:moodboard)
                 li.menu-item.hidden-xs.hidden-sm.hide-item
-                  = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
+                  = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger', rel: 'nofollow' do
                     span.visible-sm
                       = image_tag "Heart.svg"
                     span.hidden-sm.hidden-xs#moodboard-counter
                       | Moodboard &nbsp;
 
             li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs.hide-item
-              = link_to 'my account', profile_path, :class =>"menu-item--link active-hover"
+              = link_to 'my account', profile_path, class: "menu-item--link active-hover", rel: 'nofollow'
 
             li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs.hide-item
-              = link_to profile_path, :class =>"menu-item--link active-hover" do
+              = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
                 = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
 
             li.menu-item
@@ -64,7 +64,7 @@ doctype html
                   = image_tag 'close.svg', width: 12, height: 12, alt: ''
 
             li#cart-trigger.menu-item
-              = link_to root_path(open_cart: true), class: 'menu-item--link' do
+              = link_to root_path(open_cart: true), class: 'menu-item--link', rel: 'nofollow' do
                 span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
                 span.hidden-sm.hidden-xs.hidden-xxs cart
 
