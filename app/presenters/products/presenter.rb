@@ -5,7 +5,7 @@ module Products
                   :permalink, :is_active, :images, :default_image, :price,
                   :discount, :recommended_products, :available_options, :preorder,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart
+                  :size_chart, :making_option_id
 
     def initialize(opts)
       opts.each do |k, v|
