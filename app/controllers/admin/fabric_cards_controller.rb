@@ -11,7 +11,7 @@ module Admin
     end
 
     def show
-
+      # NOOP
     end
 
     private
@@ -23,7 +23,6 @@ module Admin
     def fabric_card
       @fabric_card ||= model_class.find(params[:id])
     end
-
 
     # Spree compatibility
     def model_class

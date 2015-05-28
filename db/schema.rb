@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150519111622) do
+ActiveRecord::Schema.define(:version => 20150528043420) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1176,6 +1176,7 @@ ActiveRecord::Schema.define(:version => 20150519111622) do
     t.boolean  "is_service",           :default => false
     t.integer  "factory_id"
     t.string   "size_chart",           :default => "2014", :null => false
+    t.integer  "fabric_card_id"
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"

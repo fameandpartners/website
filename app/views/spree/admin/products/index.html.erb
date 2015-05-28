@@ -46,11 +46,16 @@
           <div class="four columns">
             <div class="field">
               <%= f.label :size_chart_eq, t(:size_chart) %>
-              <%= f.select :size_chart_eq, SizeChart::CHARTS.keys, {:include_blank => true} , :class => 'select2' %>
+              <%= f.select :size_chart_eq, SizeChart::CHARTS.keys, {:include_blank => true} %>
+            </div>
+
+            <div class="field">
+              <%= f.label :fabric_card, t(:fabric_card) %>
+              <%= f.select :fabric_card_id_eq, options_from_collection_for_select(FabricCard.all, :id, :name, params[:q][:fabric_card_id_eq]), {:include_blank => true}%>
             </div>
           </div>
 
-          <div class="three four omega">
+          <div class="omega four columns">
             <div class="field checkbox">
               <label>
                 <%= f.check_box :deleted_at_null, {:checked => params[:q][:deleted_at_null].blank?}, '', '1' %>

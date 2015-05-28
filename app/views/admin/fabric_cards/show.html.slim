@@ -24,3 +24,12 @@ table
       tr
         td = colour.name
         td = colour.position
+
+h3 Products
+table
+  thead : tr
+    th Name
+  tbody
+    - fabric_card.spree_products.each do |product|
+      tr
+        td = link_to product.name, admin_product_path(product)

@@ -5,4 +5,5 @@ class FabricCard < ActiveRecord::Base
 
   has_many :fabric_card_colours
   has_many :fabric_colours, through: :fabric_card_colours
+  has_many :spree_products, inverse_of: :fabric_card, class_name: 'Spree::Product'
 end
