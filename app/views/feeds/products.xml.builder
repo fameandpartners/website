@@ -4,14 +4,14 @@ xml.rss "version" => "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
   xml.channel do
     xml.title @config[:title]
     xml.description @config[:description]
-    
+
     production_domain = @config[:domain]
     xml.link production_domain
 
     @items.each do |item|
       xml.item do
         xml.title item[:title]
-        xml.link "http://#{production_domain}#{collection_product_path(item[:product])}"
+        xml.link "http://#{production_domain}#{collection_product_path(item[:product])}?color=#{item[:color]}"
         xml.description CGI.escapeHTML(item[:description])
 
         xml.tag! "g:id", item[:id]
