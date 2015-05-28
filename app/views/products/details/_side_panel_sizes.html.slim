@@ -19,6 +19,8 @@
     .row
       .col-md-12.recommended
         h2 Sizes
+        - if current_site_version.is_australia?
+          p style="text-align:center" All sizes are AU sizes
         - if @product.default_sizes?
           - @product.default_sizes.each do |size|
             .col-md-3.col-xs-3.col-xxs-6
