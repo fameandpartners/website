@@ -4,4 +4,6 @@ class FabricCardColour < ActiveRecord::Base
   attr_accessible :position
 
   validates_presence_of :position
+
+  delegate :name, to: :fabric_colour
 end

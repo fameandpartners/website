@@ -8,6 +8,9 @@ namespace :import do
 
   desc 'fabric_colour_cards'
   task :fabric_colour_cards => :environment do
+
+    ENV['FILE_PATH'] ||= File.join(Rails.root, 'contentspreadsheets', 'fabric_cards_colours.csv')
+
     raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
     Importers::SkuGeneration::FabricCardImporter.new(ENV['FILE_PATH']).import
   end
