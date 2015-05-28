@@ -10,6 +10,7 @@
 #        size_id: params[:size_id],
 #        color_id: params[:color_id],
 #        customizations_ids: params[:customizations_ids],
+#        making_options_ids: params[:making_options_ids],
 #        quantity: 1
 #      }
 #    )
@@ -25,6 +26,8 @@ class  UserCart::Populator
   end
 
   def populate
+    validate!
+
     if personalized_product?
       add_personalized_product
     else
@@ -39,6 +42,8 @@ class  UserCart::Populator
       product: product,
       cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
+  rescue Errors::ProductOptionsNotCompatible => e
+    OpenStruct.new({ success: false, message: e.message })
   rescue Errors::ProductOptionNotAvailable => e
     OpenStruct.new({ success: false, message: e.message })
   rescue Exception => e
@@ -46,6 +51,12 @@ class  UserCart::Populator
   end
 
   private
+
+    def validate!
+      if product_color.custom && product_making_options.present?
+        raise Errors::ProductOptionsNotCompatible.new("Custom colors and fast delivery can't be selected at the same time")
+      end
+    end
 
     def add_product_to_cart(ignore_stock_level = false)
       spree_populator = Spree::OrderPopulator.new(order, currency)
@@ -55,6 +66,8 @@ class  UserCart::Populator
       end
 
       if spree_populator.populate(variants: { product_variant.id => product_quantity })
+        add_making_options
+
         fire_event('spree.cart.add')
         fire_event('spree.order.contents_changed')
         true
@@ -79,6 +92,14 @@ class  UserCart::Populator
       end
 
       true
+    end
+
+    def add_making_options
+      return if line_item.blank? || product_making_options.blank?
+      line_item.making_options = product_making_options.collect do |making_option|
+        LineItemMakingOption.build_option(ProductMakingOption.find(making_option.id))
+      end
+      line_item
     end
 
     def build_personalization
@@ -156,6 +177,12 @@ class  UserCart::Populator
         end
 
         customizations
+      end
+    end
+
+    def product_making_options
+      @product_making_options ||= begin
+        product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
       end
     end
 

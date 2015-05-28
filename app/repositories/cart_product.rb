@@ -35,12 +35,13 @@ class Repositories::CartProduct
         result.size   = Repositories::ProductSize.read(size_id)
         result.color  = Repositories::ProductColors.read(color_id)
         result.customizations = product_customizations.to_a
+        result.making_options = product_making_options
       end
 
       result
     end
-  rescue
-    OpenStruct.new({})
+  #rescue
+  #  OpenStruct.new({})
   end
   cache_results :read
 
@@ -82,6 +83,17 @@ class Repositories::CartProduct
     def product_customizations
       return [] if !customized_product?
       line_item.personalization.customization_values.to_a
+    end
+
+    def product_making_options
+      line_item.making_options.includes(:product_making_option).map do |option|
+        OpenStruct.new(
+          id: option.id,
+          option_type: option.product_making_option.option_type,
+          name: option.product_making_option.name,
+          display_price: option.display_price
+        )
+      end
     end
 
     def line_item_description

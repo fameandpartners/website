@@ -10,6 +10,7 @@ module Products
     :sale,
     :query_string,
     :order,
+    :fast_making,
     :details) do
 
     def self.from_hash(hash)

@@ -7,6 +7,7 @@ table.line_items
     tr
       th Order Date
       th Delivery Due
+      th Fast Making
       th Due In
       th Order Number
       th Line ID
@@ -27,7 +28,10 @@ table.line_items
 
         tr class="state-#{order.state.to_s.downcase}"
           td = maybe_date(order.completed_at)
-          td = maybe_date(order.projected_delivery_date)
+          td = maybe_date(line_item.projected_delivery_date)
+          td style="text-align: center"
+            - if line_item.fast_making? 
+              h3 style="color: red;" = '!'
           td
             - ship_state = ShippingStatePresenter.new(line_item)
             abbr title=ship_state.delivery_state class="state-#{ship_state.delivery_state}"

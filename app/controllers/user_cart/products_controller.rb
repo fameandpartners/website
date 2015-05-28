@@ -12,6 +12,7 @@ class UserCart::ProductsController < UserCart::BaseController
         size_id: params[:size_id],
         color_id: params[:color_id],
         customizations_ids: params[:customizations_ids],
+        making_options_ids: params[:making_options_ids],
         quantity: 1
       }
     )
@@ -55,32 +56,27 @@ class UserCart::ProductsController < UserCart::BaseController
     end
   end
 
-  def update
-    line_item = current_order.line_items.find(params[:id])
-    quantity = params[:quantity].to_i > 0 ? params[:quantity].to_i : 1
-    variant = Spree::Variant.find(params[:variant_id])
-
-    current_order.update_line_item(line_item, variant, quantity, currency = nil)
-    current_order.reload!
-
-    @user_cart = user_cart_resource.read
-
-    respond_with(@user_cart) do |format|
-      format.json   { 
-        render json: @user_cart.serialize, status: :ok
-      }
-    end
-  rescue
-    respond_with({}) do |format|
-      format.json  json: {}, status: :error 
-    end
-  end
-
   def destroy
-    line_item = current_order.line_items.where(id: params[:id]).first
-    line_item.try(:destroy)
-    current_order.reload
-
+    cart_product_service.destroy
     render json: user_cart_resource.read.serialize, status: :ok
   end
+
+  def destroy_customization
+    cart_product_service.destroy_customization(params[:customization_id])
+    render json: user_cart_resource.read.serialize, status: :ok
+  end
+
+  def destroy_making_option
+    cart_product_service.destroy_making_option(params[:making_option_id])
+    render json: user_cart_resource.read.serialize, status: :ok
+  end
+
+  private
+
+    def cart_product_service
+      @cart_product_service ||= UserCart::CartProduct.new(
+        order: current_order(true),
+        line_item_id: params[:line_item_id]
+      )
+    end
 end

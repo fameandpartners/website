@@ -21,7 +21,7 @@
 class Products::CollectionDetails
   # include Repositories::CachingSystem
 
-  attr_reader :collection, :style, :event, :edits, :bodyshape, :color, :discount, :site_version, :fast_delivery, :root_taxon
+  attr_reader :collection, :style, :event, :edits, :bodyshape, :color, :discount, :site_version, :fast_delivery, :root_taxon, :fast_making
 
   def initialize(options = {})
     @collection     = options[:collection]
@@ -33,10 +33,12 @@ class Products::CollectionDetails
     @discount       = options[:discount]
     @site_version   = options[:site_version]
     @fast_delivery  = options[:fast_delivery]
+    @fast_making    = options[:fast_making]
     @root_taxon     ||= Repositories::Taxonomy.collection_root_taxon
   end
 
   def read
+    fast_making_taxon if fast_making.present?
     colorize_taxon if color.present?
     deliverize_taxon if fast_delivery?
     taxon
@@ -73,6 +75,16 @@ class Products::CollectionDetails
     taxon.footer            = ''
     taxon.banner.title      = 'Express Delivery Dresses'
     taxon.banner.subtitle   = 'High-fashion styles for fast-paced social butterflies.'
+  end
+
+  def fast_making_taxon
+    taxon.meta_title        = "Shop the latest express delivery dresses"
+    taxon.title             = "Shop and customize express delivery dresses at Fame & Partners"
+    taxon.description       = ''
+    taxon.footer            = ''
+    taxon.banner.title      = 'GET IT QUICK!'
+    taxon.banner.subtitle   = 'Introducing express making: Dresses made for you in 48 hours'
+    taxon.banner.image      = '/assets/category-banners/express-making.jpg'
   end
 
   def color_data

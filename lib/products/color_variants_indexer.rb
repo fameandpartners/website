@@ -53,6 +53,7 @@ module Products
               },
               can_be_customized: product.can_be_customized?,
               fast_delivery: product.fast_delivery,
+              fast_making: product.fast_making,
               is_surryhills: helpers.is_surryhills?(product),
               taxon_ids: product.taxons.map(&:id),
               price: product.price.to_f,

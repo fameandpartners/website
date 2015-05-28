@@ -28,6 +28,7 @@ module Overrides
           indexes :in_stock, :type => :boolean, :as => 'has_stock?'
           indexes :position, :type => :integer, :index => :not_analyzed
           indexes :fast_delivery, :type => :boolean, :as => 'fast_delivery'
+          indexes :fast_making, :type => :boolean, :as => 'fast_making'
 
           indexes :taxons, :as => 'taxons.map(&:name)'
           indexes :taxon_ids, :as => 'taxons.map(&:id)'

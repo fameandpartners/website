@@ -54,7 +54,8 @@ page.initProductDetailsPage = (options = {}) ->
         product_data = {
           size_id: selected.size_id,
           color_id: selected.color_id,
-          customizations_ids: selected.customizations_ids
+          customizations_ids: selected.customizations_ids,
+          making_options_ids: selected.making_options_ids
           variant_id: (selected.variant || {})['id']
         }
         app.shopping_cart.one('change', () ->

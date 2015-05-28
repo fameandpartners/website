@@ -36,6 +36,11 @@ ruby:
           customization_input: {
             container:  '#product-customizations-content',
             action:     '#product-customize-action'
+          },
+          making_options_input: {
+            container:  '#product-making-options-content',
+            action:     '#product-making-options-action',
+            value:      '#{ raw @product.making_option_id }'
           }
         },
         moodboard_links: {
@@ -102,6 +107,11 @@ ruby:
       .row
         a#product-customize-action.btn-customize
           | Customize
+
+    - if @product.making_options.present?
+      .row
+        a#product-making-options-action.btn-customize
+          | Express Making
 
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
@@ -221,3 +231,6 @@ hr
 = render partial: 'side_panel_colours'
 
 = render partial: 'side_panel_customisation'
+
+- if @product.making_options.present?
+  = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }
