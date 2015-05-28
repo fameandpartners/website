@@ -7,7 +7,7 @@ module Admin
     helper_method :collection, :fabric_card
 
     def index
-      @table = FabricCardGrid.new
+      @table = FabricCardGrid.new cards: collection, colours: FabricColour.all
     end
 
     def show
@@ -16,9 +16,8 @@ module Admin
 
     private
 
-
     def collection
-      @collection ||= model_class.all
+      @collection ||= model_class.includes(:fabric_card_colours => :fabric_colour).all
     end
 
     def fabric_card
