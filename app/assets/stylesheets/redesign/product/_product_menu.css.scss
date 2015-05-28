@@ -33,7 +33,6 @@
     &.active {
       color:#003647;
     }
-    &.disabled { @extend %disabled-blur;}
   }
 
 
@@ -86,7 +85,6 @@
 .production-time-box {
   background-color: #fff;
   padding-top: 20px;
-  &.disabled { @extend %disabled-blur;}
   h2 {
     margin-top: 0;
     margin-bottom: 5px;
