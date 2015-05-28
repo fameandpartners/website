@@ -12,7 +12,7 @@ window.ShoppingBag = class ShoppingBag
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
 
-    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler')
+    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler')
 
     $(options.toggle_link || '#cart-trigger').on('click', @openHandler)
 
@@ -20,6 +20,8 @@ window.ShoppingBag = class ShoppingBag
     @$overlay.on('click', @closeHandler)
     @$container.on('click', '.remove-product', @removeProductHandler)
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
+    @$container.on('click', '.customization-remove', @removeProductCustomizationHandler)
+    @$container.on('click', '.making-option-remove', @removeProductMakingOptionHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
 
     @cart.on('change', @render)
@@ -56,8 +58,20 @@ window.ShoppingBag = class ShoppingBag
 
   removeProductHandler: (e) ->
     e.preventDefault()
-    line_item_id = $(e.currentTarget).data('id')
+    line_item_id = $(e.currentTarget).closest('.cart-item').data('id')
     @cart.removeProduct(line_item_id)
+
+  removeProductCustomizationHandler: (e) ->
+    e.preventDefault()
+    line_item_id = $(e.currentTarget).closest('.cart-item').data('id')
+    customization_id = $(e.currentTarget).data('id')
+    @cart.removeProductCustomization(line_item_id, customization_id)
+
+  removeProductMakingOptionHandler: (e) ->
+    e.preventDefault()
+    line_item_id = $(e.currentTarget).closest('.cart-item').data('id')
+    making_option_id = $(e.currentTarget).data('id')
+    @cart.removeProductMakingOption(line_item_id, making_option_id)
 
   couponFormSubmitHandler: (e) ->
     e.preventDefault() if e

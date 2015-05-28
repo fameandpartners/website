@@ -17,7 +17,8 @@ module Orders
                    :shipments,
                    :site_version,
                    :state,
-                   :to_param
+                   :to_param,
+                   :has_fast_making_items?
 
     attr_reader :order, :items
 

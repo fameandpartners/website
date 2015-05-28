@@ -1,5 +1,3 @@
-require "#{Rails.root}/app/policies/order_projected_delivery_date_policy"
-
 Spree::Order.class_eval do
   attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date, :user_id
   self.include_root_in_json = false
@@ -91,6 +89,10 @@ Spree::Order.class_eval do
     line_items.any?(&:in_sale?)
   end
   alias :in_sale? :has_items_on_sale?
+
+  def has_fast_making_items?
+    line_items.includes(making_options: :product_making_option).any?{|item| item.fast_making? }
+  end
 
   def update!
     if self.shipping_method.blank?

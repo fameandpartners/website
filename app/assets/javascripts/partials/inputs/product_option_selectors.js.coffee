@@ -10,7 +10,7 @@ window.inputs.BaseProductOptionSelector = class BaseProductOptionSelector
   constructor: (@opts = {}) ->
     @$container = $(opts.container)
     @selector = new window.helpers.ProductSideSelectorPanel(@$container)
-    @$action = $(opts.action).on('click', @selector.open)
+    @$action = $(opts.action).on('click', @open)
 
 
     @$eventBus = $({})
@@ -19,6 +19,9 @@ window.inputs.BaseProductOptionSelector = class BaseProductOptionSelector
     @once     = delegateTo(@$eventBus, 'once')
 
     @setValue(opts.value) if opts.value
+
+  open: () =>
+    @selector.open()
 
   close: () =>
     setTimeout(@selector.close, 50)
@@ -40,6 +43,9 @@ window.inputs.BaseProductOptionSelector = class BaseProductOptionSelector
       parseInt(value)
     else
       value
+
+  customValue: () ->
+    return undefined
 
 #  sizeInput = new inputs.ProductSizeIdSelector(
 #   action: '#product-size-action',
@@ -87,7 +93,7 @@ window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends BasePr
 window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends BaseProductOptionSelector
   constructor: (@opts = {}) ->
     super(opts)
-    @$container.find('.color-option').on('click', @selectValueHandler)
+    @$container.on('click', '.color-option:not(.disabled)', @selectValueHandler)
 
   getValue: () ->
     @$container.find('.active').data('id')
@@ -96,7 +102,7 @@ window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Base
     !!@$container.find('.active').data('price')
 
   setValue: (newValue) =>
-    $el = @$container.find(".color-option[data-id=#{ newValue }]")
+    $el = @$container.find(".color-option:not(.disabled)[data-id=#{ newValue }]")
     return if !$el
     @setValueFrom($el)
 
@@ -120,6 +126,15 @@ window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Base
 
     @trigger('change')
     @close()
+
+  enableCustomColors: () ->
+    @$container.find('p.explanation').hide()
+    @$container.find('.color-option.disabled').removeClass('disabled')
+
+  disableCustomColors: (message) ->
+    message ||= 'Express making is only available on our recommended colours'
+    @$container.find('p.explanation').html(message).show()
+    @$container.find('.color-option[data-custom=true]').addClass('disabled')
 
 window.inputs.ProductCustomizationIdsSelector = class ProductCustomizationIdsSelector extends BaseProductOptionSelector
   constructor: (opts = {}) ->
@@ -159,3 +174,68 @@ window.inputs.ProductCustomizationIdsSelector = class ProductCustomizationIdsSel
 
     @trigger('change')
     @close()
+
+window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelector extends BaseProductOptionSelector
+  constructor: (opts = {}) ->
+    super(opts)
+    @$container.find('.making-option').on('click', @selectValueHandler)
+
+  open: () ->
+    if @$action.hasClass('disabled')
+      console.log("making options don't available for custom colors")
+    else
+      @selector.open()
+
+  getValue: () ->
+    id = @$container.find('.active').data('id')
+    if id == 'original' || @disabled
+      null
+    else
+      @prepareValue(id)
+
+  # no value can create dress custom
+  customValue: () ->
+    false
+
+  setValue: (newValue) =>
+    $el = @$container.find(".making-option[data-id=#{ newValue }]")
+    return if !$el
+    @setValueFrom($el)
+
+  selectValueHandler: (e) =>
+    e.preventDefault() if e
+    @setValueFrom($(e.currentTarget))
+
+  setValueFrom: ($el) ->
+    data = $el.data()
+
+    @$container.find('.making-option.active').not($el).removeClass('active')
+    $el.addClass('active')
+
+    @setTitlesForCurrentValue(data)
+
+    @trigger('change')
+    @close()
+
+  disable: () ->
+    @disabled = true
+    @$action.addClass('disabled')
+    @close()
+    @setTitlesForCurrentValue()
+
+  enable: () ->
+    @disabled = false
+    @$action.removeClass('disabled')
+    @setTitlesForCurrentValue()
+
+  setTitlesForCurrentValue: (data) ->
+    data ||= @$container.find('.active').data()
+
+    if @disabled
+      @$action.html("Standard making 2-5 days")
+    else if data.id == 'original'
+      @$action.html("Standard Making 2-5 days")
+    else if data.name
+      @$action.html("#{data.name} +#{data.price}")
+    else
+      @$action.html("Express Making")

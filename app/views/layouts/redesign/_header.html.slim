@@ -1,7 +1,7 @@
 ruby:
   init_items_counter_sync = "
     (function(){
-      var updateShoppingBagCounter = function() { 
+      var updateShoppingBagCounter = function() {
         $('#cart-item-count').html(window.app.shopping_cart.data.item_count);
       };
       window.app.shopping_cart.on('change', updateShoppingBagCounter);
@@ -86,9 +86,11 @@ ruby:
                         span.fit-guarantee.menu-icon
                         | Fit Guarantee
               .mega-menu--secondary
+                = link_to fast_making_dresses_path, class: 'mega-menu-banner' do
+                  = image_tag 'mega-menu/express-making.jpg', alt: 'Get it Quick - Dress made for you in 48 hours'
                 .container-fluid.max-width-100
                   .row
-                    .col-md-3.col-lg-2.col-md-offset-3
+                    .col-md-3.col-lg-2.col-md-offset-4
                       h4.link-header Events
                       ul.mega-menu-list
                         li.mega-menu-list--item
