@@ -2,7 +2,15 @@ module StyleQuiz
   class ProfilesController < ::StyleQuiz::ApplicationController
     def new
       @questions = [
-        OpenStruct.new(name: 'signup',              template: 'style_quiz/questions/signup'),
+        OpenStruct.new(
+          name: 'signup',
+          template: 'style_quiz/questions/signup',
+          values: OpenStruct.new({
+            fullname: current_spree_user.fullname,
+            email: current_spree_user.try(:email),
+            birthdate: 20.year.ago.to_date.to_s(:db)
+          })
+        ),
         OpenStruct.new(name: 'color-palette',       template: 'style_quiz/questions/color_palette'),
         OpenStruct.new(name: 'color-dresses',       template: 'style_quiz/questions/color_dresses'),
         OpenStruct.new(name: 'body-size-shape',     template: 'style_quiz/questions/body_size_shape'),

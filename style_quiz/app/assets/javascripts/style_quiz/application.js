@@ -13,3 +13,8 @@
 //= require jquery
 // require jquery_ujs
 // require_tree .
+//
+//= require 'style_quiz/libs/underscore.min.js'
+//= require 'style_quiz/libs/underscore.string.min.js'
+//= require 'style_quiz/questions/base'
+//= require 'style_quiz/quiz'

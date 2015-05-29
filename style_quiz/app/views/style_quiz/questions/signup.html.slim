@@ -1,6 +1,3 @@
-= content_for :inline_javascript do
-  | console.log('signup question init');
-
 / Question 1/11
 .quiz-section id="#{ question.name }-question"
   .quiz-section-title
@@ -13,14 +10,14 @@
           .form-centered.text-left
             .form-group
               label Full NAME
-              input.form-control type="text"
+              input.form-control type="text" name="fullname" value=question.values.fullname
             .form-group
               label date of birth
-              input.form-control type="text"
+              input.form-control type="text" name="birthdate" value=question.values.birthdate
             .form-group
               label email address
-              input.form-control type="text"
-            input.btn.btn-block.btn-primary type="submit" value="Next"
+              input.form-control type="text" name="email" value=question.values.email
+            input.btn.btn-block.btn-primary type="submit" value="Next" data-action="next"
         .col-6.col-middle.col-compact.text-center
           .form-centered.facebook-box
             h2 Import my details from Facebook.

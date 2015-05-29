@@ -1,8 +1,16 @@
+css:
+  .quiz-section { display: none; }
+
 ruby:
   quiz_init_code = "
-    var question_data  = #{ raw questions.map(&:marshal_dump).to_json };
-    window.quiz = new StyleQuiz.Quiz(questions: questions_data)
+    var questions_data  = #{ raw @questions.map(&:marshal_dump).to_json };
+    window.quiz = new StyleQuiz.Quiz({questions_data: questions_data})
   "
+
+= content_for :inline_javascript do
+  = raw quiz_init_code
+
+// don't forget to add some placeholder / loading indicator
 
 - total_questions = @questions.size
 - @questions.each_with_index do |question, index|
