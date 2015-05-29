@@ -5,7 +5,7 @@
     h2 Build your colour palette.
   .grid-container
     / Hair
-    .quiz-catalog.text-center
+    .quiz-catalog.text-center.hair
       .quiz-catalog-item.selected
         .quiz-catalog-picture
           .hair-box.black
@@ -58,7 +58,7 @@
           .checkmark
     
     / Eyes
-    .quiz-catalog.text-center
+    .quiz-catalog.text-center.eyes
       .quiz-catalog-item
         .quiz-catalog-picture
           .eyes-box.brown
@@ -96,6 +96,6 @@
           | amber
           .checkmark
     
-    .col-12.text-center = link_to 'Next', '#', class: 'btn btn-primary btn-block'
+    .col-12.text-center = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
 / @end Question 2/11
 / ------------------
