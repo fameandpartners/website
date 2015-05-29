@@ -35,8 +35,10 @@ class Products::CollectionsController < Products::BaseController
   def show
     @filter = Products::CollectionFilter.read
 
+    page = Revolution::Page.find_for(request.path, '/dresses/*')
+
     respond_to do |format|
-      format.html { render :show, status: @status }
+      format.html { render page.template_path, status: @status }
       format.json do
         render json: @collection.serialize
       end

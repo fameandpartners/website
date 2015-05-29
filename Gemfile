@@ -24,6 +24,10 @@ gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
 
+# engines
+gem 'revolution', path: 'engines/revolution'
+
+
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
