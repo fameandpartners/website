@@ -34,7 +34,7 @@
                     - if order.line_items.one?
                       = order_status(order)
                     - else
-                      = link_to 'Click for details', user_order_path(order), class: "order-details"
+                      = link_to 'Click for details', user_order_path(order), remote: true, class: "order-details"
                   td data-title="Shipping state" colspan='1'
                     - if order.shipped?
                       - order.shipments.each do |shipment|

@@ -10,7 +10,7 @@ class Wishlist::UserWishlistResource
 
   def read
     OpenStruct.new({
-      title:    'My Moodboard',
+      title:    'My Style Profile',
       owner:    moodboard_owner,
       is_owner: true,
       bride_moodboard: is_bride?,

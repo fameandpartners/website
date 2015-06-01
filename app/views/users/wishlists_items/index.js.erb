@@ -8,11 +8,6 @@ $(window).off('popstate').one('popstate', function() {
   $.getScript(window.location)
 })
 
-window.helpers.quickViewer.init()
-
 <% if @title.present? %>
   document.title = '<%=  @title %>';
 <% end %>
-
-$(".quick-view a[data-action='quick-view']").on('click', window.helpers.quickViewer.onShowButtonHandler)
-$("a[data-action='add-to-wishlist']").on('click', window.productWishlist.onClickHandler)

@@ -12,7 +12,17 @@
   <tbody>
     <% @order.line_items.each do |item| %>
       <tr data-hook="order_details_line_item_row" class="<%= cycle('odd', 'even')%>">
-        <td width="300"><%= item.variant.product.name %> <%= "(" + item.options_text + ")" unless item.options_text.blank? %></td>
+        <td width="300">
+          <%= item.variant.product.name %>
+          <% if item.options_text.present? %>
+            <br />
+            ( <%= item.options_text %> )
+          <% end %>
+          <% if item.making_options_text.present? %>
+            <br />
+            ( <%= item.making_options_text %> )
+          <% end %>
+        </td>
         <td class="sku"><%= item.variant.sku || item.variant.product.sku %></td>
         <td class="price"><%= item.variant.display_amount %></td>
         <td class="qty"><%= item.quantity %></td>

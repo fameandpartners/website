@@ -72,4 +72,5 @@ end
 
 Spree::AppConfiguration.class_eval do
   preference :free_customisations, :boolean, :default => false
+  preference :homepage_title, :string, :default => ''
 end
