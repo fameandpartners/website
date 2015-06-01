@@ -139,11 +139,11 @@ ruby:
                         li.mega-menu-list--item= link_to "Pastel", colour_path('Pastel'), title: "Pastel"
 
                     .col-md-3.col-lg-2
-                      - if Features.active?(:sales) || Features.active?(:express_deliveries)
-                        h4.link-header= t('sale')
+                      - if Features.active?(:sales) || Features.active?(:express_making)
+                        h4.link-header Express Making
                         ul.mega-menu-list
-                          - if Features.active?(:express_deliveries)
-                            li.mega-menu-list--item= link_to 'Express Delivery', express_delivery_path, title: 'Express Delivery'
+                          - if Features.active?(:express_making)
+                            li.mega-menu-list--item= link_to 'Dresses made in 48 hours', fast_making_dresses_path, title: 'Express Making'
                           - if Features.active?(:sales)
                             - if !sale_active?
                               li.mega-menu-list--item= link_to 'Sale - Up to 80% Off', sale_path, title: 'Dresses On Sale'
