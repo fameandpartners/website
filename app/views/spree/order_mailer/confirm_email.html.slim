@@ -21,7 +21,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                   | Good news, your order #{ @order.number } has been placed.
                 p style="margin: 0;"
                   | Thank you for shopping at Fame & Partners. We are so excited to send your order. You will receive another email with your tracking number once your order has been shipped.
-                p style="margin: 0;"
+                p style="margin: 10px 0 0; font-weight: 700;"
                   | How long will your order take to arrive:
                 p style="margin: 0;"
                   | Standard orders will be shipped within 7-10 Business days from order placement. If you have ordered a customized dress you will receive this within 10-14 business days.
@@ -71,8 +71,8 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
               td style="color: #666; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
 
                 p style="margin: 0;"
-                  | To track your order or manage your personal details, log in to your account here:
-                  = login_url
+                  ' If you want to check the progress of your order, please log in to your personal account here: 
+                  =' login_url
 
                 - if @order.user && @order.user.automagically_registered?
                   p style="margin: 0;"
@@ -90,10 +90,8 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                     | Please change this password once you have logged in.
             tr
               td style="color: #666; font: 400 13px/1.5 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;"
-                p style="margin: 0;"
+                p style="margin: 10px 0 0; font-weight: 700;"
                   | When your order arrives: 
-                p style="margin: 0;"
-                  | Try it on! Here are some Handy tips:
                 p style="margin: 0;"
                   | Keep all packaging in case you need to make a return, exchange or refund.
                 p style="margin: 0;"
