@@ -1,4 +1,7 @@
 class ReturnRequestItem < ActiveRecord::Base
+
+  ACTIONS = %w{keep exchange return}
+
   attr_accessible :order_return_request, :line_item,  :line_item_id, :quantity, :action, :reason_category, :reason
 
   belongs_to :order_return_request
@@ -7,20 +10,24 @@ class ReturnRequestItem < ActiveRecord::Base
   delegate :image_url, :style_name, :country_size, :colour_name, :display_price, :to => :line_item_presenter
 
   validates :line_item, :action, :presence => true
+  validates :action, :inclusion => { :in => ACTIONS }
 
   validates :reason_category, :reason, :presence => true, :unless => Proc.new { |o| o.keep? }
 
   after_initialize :set_defaults
 
-  ACTIONS = %w{keep exchange return}
 
   def set_defaults
-    self.action = 'keep' unless self.action
+    self.action = self.action.presence || 'keep'
     self.quantity = 1
     if keep?
       self.reason_category = nil
       self.reason = nil
     end
+  end
+
+  def action=(new_action)
+    write_attribute(:action, new_action.to_s.downcase)
   end
 
   def line_item_presenter
@@ -40,7 +47,7 @@ class ReturnRequestItem < ActiveRecord::Base
   end
 
   def keep?
-    action == 'keep'
+    action.downcase == 'keep'
   end
 
   def return_or_exchange?

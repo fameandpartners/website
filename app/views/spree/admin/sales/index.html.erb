@@ -9,7 +9,7 @@
         <%= button_link_to t(:new_sale), new_object_url, { :remote => true, :icon => 'icon-plus', :id => 'admin_new_sale' } %>
       </li>
       <li>
-        <%= button_link_to t(:refresh), '/admin/sales/reset_cache.json', { :remote => true, method: :put, :icon => 'icon-refresh', :id => 'reset_cache_link', confirm: 'Are you sure?' } %>
+        <%= button_link_to t(:reset_cache), '/admin/sales/reset_cache.json', { :remote => true, method: :put, :icon => 'icon-refresh', :id => 'reset_cache_link', confirm: 'This will reset rails cache and can slow application. Are you really sure?' } %>
       </li>
     </ul>
   </div>

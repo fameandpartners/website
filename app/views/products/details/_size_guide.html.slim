@@ -1,4 +1,10 @@
 h2.text-center Easy Size &amp; Measurement Guide
+.size-alert
+  .row
+    .col-md-12.col-xs-12.col-xxs-12
+      h6= explanation
+      p Please check the size chart below.
+
 .container-fluid
   .row
     .col-md-12.col-xs-12.col-xxs-12
@@ -13,144 +19,7 @@ h2.text-center Easy Size &amp; Measurement Guide
 
       p SKIRT LENGTH Stand with your heels together,<br>keep the tape straight and perpendicular to the floor. Measure from your natural waistline.
 
-
       = image_tag 'where-to-measure.png'
+
   .row
-    table.table
-      thead
-        tr
-          th colspan='3' Sizes
-          th colspan="2" Bust
-          th colspan="2" Waist
-          th colspan="2" Hip
-      tbody
-        tr
-          td.sub-heading Aus/UK
-          td.sub-heading US
-          td.sub-heading DE
-          td.sub-heading cm
-          td.sub-heading Inches
-          td.sub-heading cm
-          td.sub-heading Inches
-          td.sub-heading cm
-          td.sub-heading Inches
-        tr
-          td 4
-          td 0
-          td 32
-          td 81
-          td 32
-          td 60
-          td 24
-          td 91
-          td 36
-        tr
-          td 6
-          td 2
-          td 34
-          td 84
-          td 33
-          td 63
-          td 25
-          td 92
-          td 36
-        tr
-          td 8
-          td 4
-          td 36
-          td 87
-          td 34
-          td 66
-          td 26
-          td 95
-          td 37
-        tr
-          td 10
-          td 6
-          td 38
-          td 92
-          td 36
-          td 71
-          td 28
-          td 100
-          td 39
-        tr
-          td 12
-          td 8
-          td 40
-          td 97
-          td 38
-          td 78
-          td 31
-          td 105
-          td 41
-        tr
-          td 14
-          td 10
-          td 42
-          td 102
-          td 40
-          td 85
-          td 33
-          td 110
-          td 43
-        tr
-          td 16
-          td 12
-          td 44
-          td 107
-          td 42
-          td 92
-          td 36
-          td 115
-          td 45
-        tr
-          td 18
-          td 14
-          td 46
-          td 112
-          td 44
-          td 99
-          td 39
-          td 120
-          td 47
-        tr
-          td 20
-          td 16
-          td 48
-          td 117
-          td 46
-          td 106
-          td 42
-          td 125
-          td 49
-        tr
-          td 22
-          td 18
-          td 50
-          td 122
-          td 48
-          td 113
-          td 44
-          td 130
-          td 51
-        tr
-          td 24
-          td 20
-          td 52
-          td 128
-          td 50
-          td 120
-          td 47
-          td 136
-          td 54
-        tr
-          td 26
-          td 22
-          td 54
-          td 134
-          td 53
-          td 127
-          td 50
-          td 142
-          td 56
+    = render partial: 'size_chart_table', locals: { data: data }

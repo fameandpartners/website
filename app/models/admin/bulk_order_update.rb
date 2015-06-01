@@ -24,5 +24,10 @@ module Admin
         [key || 'new', items.count]
       }.to_h.tap { |h| h.default = 0 }
     end
+
+    def deletable?
+      ! line_item_updates.any?(&:state)
+    end
+
   end
 end

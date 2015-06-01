@@ -47,7 +47,7 @@
 		width: 560px;
 		margin: 0 auto 0 auto;
 	}
-	p { 
+	p {
 		margin: 14px auto 0 auto;
 		text-transform:none;
 		width:780px;
@@ -59,7 +59,7 @@
 	}
 	.category-banner{
 		img{
-			
+
 		}
 	}
 }
@@ -89,7 +89,7 @@
 	.row {
 		margin: 0 -5px;
 		font-size: 0;
-		.row { 
+		.row {
 			margin-top: -5px;
 			text-align: left;
 		}
@@ -123,7 +123,7 @@
 			.popup {
 				opacity: 1;
 				filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-			}		
+			}
 		}
 		&.audio-cover {
 			.icon {
@@ -218,7 +218,7 @@
 		}
 		.icon-pause { display: none;}
 	}
-	h6 { 
+	h6 {
 		font-weight: 600;
 		margin-top: 12px;
 	}
@@ -230,7 +230,7 @@
       color: #000;
     }
   }
-  .price-old { 
+  .price-old {
     text-decoration: line-through;
     color: #000;
   }
@@ -252,7 +252,7 @@
 		font-style: italic;
 		width: 80%;
 	}
-	.product-info { 
+	.product-info {
 		position: relative;
 		padding: 18px 0 0 10px;
 		.product-title {
@@ -276,7 +276,7 @@
 			display: block;
 			font-size: 12px;
 			font-weight: 400;
-    	color: $pinkColor;  
+    	color: $pinkColor;
     	margin-bottom: 25px;
 		}
 		.price-old {
@@ -288,7 +288,7 @@
 		.hint {
 			padding: 10px 0;
 		}
-		.btn { 
+		.btn {
 			display: block;
 		}
 
@@ -330,7 +330,7 @@
 					display: block;
 					padding-bottom: 18px;
 					text-transform: none;
-					font-size: 12px;	
+					font-size: 12px;
 				}
 			}
 			.opened {
@@ -383,7 +383,7 @@
 		//   -webkit-font-smoothing: antialiased;
 		//   -moz-osx-font-smoothing: grayscale;
 		//   > * {
-		//   	// opacity: 0; 
+		//   	// opacity: 0;
 		//   	position: absolute;
 		//   	left: 0;
 		//   	top: 0;
@@ -407,7 +407,7 @@
 		}
 		.delivery{
 			font-weight: 100;
-			font-size: 12px;	
+			font-size: 12px;
 			font-family: $fontOne;
 			font-style: normal;
 		}
@@ -424,7 +424,7 @@
 					margin-bottom: 20px;
 				}
 			}
-			.grid-6 { 
+			.grid-6 {
 				padding: 0 5px;
 			}
 		}
@@ -512,7 +512,7 @@
 					display: block;
 					font-size: 18px;
 				}
-        .price { 
+        .price {
           font-size: 12px;
           color: $pinkColor;
         }
@@ -555,7 +555,7 @@
 	.grid-3, .grid-4{
 		position: relative;
 	}
-	
+
 	.lp_featured_dresses{
 		padding: 20px 0;
 
@@ -643,13 +643,13 @@
 	}
 }
 .reserved.btn{
-	
+
 }
 
 
 .footer-text{
 	width: 70%;
-	margin: 60px auto; 
+	margin: 60px auto;
 	font: 400 18px/1.3em $fontTwo;
 	font-style: italic;
 	text-transform: none;
@@ -690,10 +690,10 @@
 			padding: 0 20px;
 		}
 	}
-	
+
 	// Product Slider
 	.product-slider .bx-wrapper {
-		img { 
+		img {
 			max-width: 100%;
 			display: inline-block;
 		}
@@ -821,7 +821,7 @@
 				text-transform: uppercase;
 				font-size: 12px;
 			}
-		}	
+		}
 	}
 
 	.style-it {
@@ -863,7 +863,7 @@
 				font-style: italic;
 				letter-spacing: 0.08em;
 			}
-			.category-catalog { 
+			.category-catalog {
 				margin: 0;
 				.row { margin-top: -5px;}
 			}
@@ -883,7 +883,7 @@
 			.text {
 				padding: 8px 8px 38px 0px;
 				p { margin: 0;}
-				a { 
+				a {
 					color: $pinkColor;
 					text-decoration: none;
 				}

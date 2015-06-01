@@ -25,10 +25,10 @@ module Spree
 
           amounts.sum
         else
-          0
+          BigDecimal.new(0)
         end
       else
-        0
+        BigDecimal.new(0)
       end
     end
   end

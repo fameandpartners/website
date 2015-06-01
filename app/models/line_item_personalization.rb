@@ -26,8 +26,8 @@ class LineItemPersonalization < ActiveRecord::Base
   validates :color,
             presence: true
 
-  DEFAULT_CUSTOM_SIZE_PRICE   = 20.0
-  DEFAULT_CUSTOM_COLOR_PRICE  = 16.0
+  DEFAULT_CUSTOM_SIZE_PRICE   = BigDecimal.new('20.0')
+  DEFAULT_CUSTOM_COLOR_PRICE  = BigDecimal.new('16.0')
 
   attr_accessor :color_name
   before_validation :set_color_by_name
@@ -98,7 +98,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def customizations_cost
-    result = 0.0
+    result = BigDecimal.new(0)
     customization_values.each do |customization_value|
       result += calculate_customization_value_cost(customization_value)
     end
@@ -107,7 +107,7 @@ class LineItemPersonalization < ActiveRecord::Base
 
   # Size Pricing
   def calculate_size_cost(default_extra_size_cost = LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE)
-    add_plus_size_cost? ? default_extra_size_cost : 0.0
+    add_plus_size_cost? ? default_extra_size_cost : BigDecimal.new(0)
   end
 
   def add_plus_size_cost?
@@ -133,7 +133,7 @@ class LineItemPersonalization < ActiveRecord::Base
   def calculate_color_cost(default_custom_color_cost = LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE)
     if product.present? && color.present?
       if basic_color?
-        return 0.0
+        return BigDecimal.new(0)
       else
         if color.discount.present?
           Spree::Price.new(amount: default_custom_color_cost).apply(color.discount).price
@@ -142,7 +142,7 @@ class LineItemPersonalization < ActiveRecord::Base
         end
       end
     else
-      0.0
+      BigDecimal.new(0)
     end
   end
 

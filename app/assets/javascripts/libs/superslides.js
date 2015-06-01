@@ -458,7 +458,7 @@ Superslides.prototype = {
   _upcomingSlide: function(direction, from_hash_change) {
     if (from_hash_change && (!!direction)) {
       var index = this._findSlideById(direction);
-      if (index >= 0) {
+      if (index >= 0 && index < that.size()) {
         return index;
       } else {
         return 0;
@@ -506,7 +506,7 @@ Superslides.prototype = {
   _nextInDom: function() {
     var index = this.current + 1;
 
-    if (index === this.size()) {
+    if (index === this.size() || index >= this.size()) {
       index = 0;
     }
 
@@ -543,6 +543,11 @@ Superslides.prototype = {
   },
 
   update: function() {
+    // if we have less elements than before, there will be problem
+    if (this.current && this.current < this.size()) {
+      this.current = -1 // slider will get next element
+    }
+
     this.css.children();
     this.css.containers();
     this.css.images();

@@ -10,6 +10,7 @@
 #    color:          # exact color, will be searched with similarities
 #    bodyshape:      params[:bodyshape],
 #    discount:       params[:sale] || params[:discount],
+#    fast_making:    params[:fast_making],
 #    order:          params[:order]
 #    limit:          # number of records
 #    offset:         # number of records to skip
@@ -20,7 +21,6 @@
 # search collection & products collection
 #
 class Products::CollectionResource
-  # include Repositories::CachingSystem
 
   attr_reader :site_version
   attr_reader :collection
@@ -30,6 +30,7 @@ class Products::CollectionResource
   attr_reader :bodyshape
   attr_reader :color, :color_group
   attr_reader :discount
+  attr_reader :fast_making
   attr_reader :query_string
   attr_reader :order
   attr_reader :limit
@@ -45,6 +46,7 @@ class Products::CollectionResource
     @color_group  = Repositories::ProductColors.get_group_by_name(options[:color_group])
     @color        = Repositories::ProductColors.get_by_name(options[:color])
     @discount     = prepare_discount(options[:discount])
+    @fast_making  = options[:fast_making]
     @query_string = options[:query_string]
     @order        = options[:order]
     @limit        = options[:limit]
@@ -53,7 +55,7 @@ class Products::CollectionResource
 
   # what about ProductCollection class
   def read
-    Products::CollectionPresenter.new(
+    Products::CollectionPresenter.from_hash(
       products:   products,
       total_products: total_products,
       collection: collection,
@@ -62,14 +64,12 @@ class Products::CollectionResource
       bodyshape:  bodyshape,
       color:      color_group.try(:representative) || color,
       sale:       discount,
+      fast_making: fast_making,
       query_string: query_string,
       order:      order,
       details:    details
     )
   end
-
-  # cache_results :read
-
 
   private
 
@@ -84,7 +84,8 @@ class Products::CollectionResource
           color:          color_group.try(:representative) || color,
           discount:       discount,
           site_version:   site_version,
-          fast_delivery:  fast_delivery?
+          fast_delivery:  fast_delivery?,
+          fast_making:    fast_making
         ).read
       end
     end
@@ -123,6 +124,7 @@ class Products::CollectionResource
       end
 
       result[:discount] = discount if discount.present?
+      result[:fast_making] = fast_making if !fast_making.nil?
       result[:query_string] = query_string if query_string.present?
       result[:order] = order if order.present?
       result[:limit] = limit if limit.present?
@@ -137,17 +139,19 @@ class Products::CollectionResource
 
     def products
       result = query.results.map do |color_variant|
-        price = Repositories::ProductPrice.new(site_version: site_version, product_id: color_variant.product.id).read
         discount = Repositories::Discount.get_product_discount(color_variant.product.id)
-        color = Repositories::ProductColors.read(color_variant.color.id)
-        OpenStruct.new(
+        color    = Repositories::ProductColors.read(color_variant.color.id)
+        price    = Spree::Price.new(amount: color_variant.prices[current_currency], currency: current_currency)
+
+        Products::Collection::Dress.from_hash(
           id:             color_variant.product.id,
           name:           color_variant.product.name,
           color:          color_variant.color,
           images:         cropped_images(color_variant),
           price:          price,
           discount:       discount,
-          fast_delivery:  color_variant.product.fast_delivery
+          fast_delivery:  color_variant.product.fast_delivery,
+          fast_making:    color_variant.product.fast_making
         )
       end
 
@@ -161,32 +165,25 @@ class Products::CollectionResource
 
     # TODO - Consolidate with behaviour on app/helpers/landing_pages_helper.rb:24 #cropped_product_hoverable_images
     def cropped_images(color_variant)
-      cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
+      color_variant.cropped_images.presence || begin
+        # TODO Remove this block once indexes are live on production - 20150522
+        Rails.logger.warn 'Building Product Cropped images on render'
+        cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
 
-      if cropped_images.blank?
-        cropped_images = color_variant.images.select { |i| i.large.to_s.downcase.include?('front') }
+        if cropped_images.blank?
+          cropped_images = color_variant.images.select { |i| i.large.to_s.downcase.include?('front') }
+        end
+
+        cropped_images.sort_by!{ |i| i.position }
+        cropped_images.collect{ |i| i.try(:large) }
       end
-
-      cropped_images.sort_by!{ |i| i.position }
-      cropped_images.collect{ |i| i.try(:large) }
     end
 
     def current_currency
       @current_currency ||= (site_version.try(:currency).to_s.downcase || 'usd')
     end
 
-    # color variant stores price#id, not amount
-    # possible, update index on price change will be easier&faster solution
-    def get_zone_price(prices = {})
-      price_id = (prices[current_currency] || prices['aud'] || prices['usd'])
-      Spree::Price.find(price_id)
-    end
-
     def fast_delivery?
       order == 'fast_delivery'
     end
-
-    # def cache_key
-    #   "collection-#{ site_version.permalink}-#{ taxon.permalink }"
-    # end
 end

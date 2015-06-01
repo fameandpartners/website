@@ -74,15 +74,17 @@ module Feeds
 
     def get_items
       items = []
-      Spree::Product.active.includes(:variants).each do |product|
-        product.variants.each do |variant|
-          begin
-            item = get_item_properties(product, variant)
-            if item['image'].present?
-              items.push(item)
+      Spree::Product.active.includes(:variants).find_in_batches(batch_size: 10) do |group|
+        group.each do |product|
+          product.variants.each do |variant|
+            begin
+              item = get_item_properties(product, variant)
+              if item['image'].present?
+                items.push(item)
+              end
+            rescue Exception => ex
+              puts ex
             end
-          rescue Exception => ex
-            puts ex
           end
         end
       end
@@ -116,7 +118,8 @@ module Feeds
         description: product.description,
         price: original_price,
         sale_price: sale_price,
-        google_product_category: "Apparel & Accessories > Clothing > Dresses",
+        google_product_category: "Apparel & Accessories > Clothing > Dresses > Formal Gowns",
+        google_product_types: google_product_types(product),
         id: "#{product.id.to_s}-#{variant.id.to_s}",
         group_id: product.id.to_s,
         color: color,
@@ -173,6 +176,13 @@ module Feeds
         path
       else
         "http://#{@config[:domain]}#{path}"
+      end
+    end
+
+    def google_product_types(product)
+      taxons = product.taxons.includes(:taxonomy).sort_by{|t| [t.taxonomy.position, t.position]}
+      taxons.map do |taxon|
+        "Clothing & Accessories > Clothing > Dresses > #{ taxon.name }"
       end
     end
   end

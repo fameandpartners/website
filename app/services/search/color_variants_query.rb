@@ -10,6 +10,7 @@
 #   order:            ['price_high', 'price_low', 'newest', 'fast_deliver']
 #   discount:         search products with specific discount ( in percents ) or :all to find all products under sale
 #   query_string:     search products by this text
+#   fast_making:      search by express delivery [ available or not ]
 #   limit:            1000 by default
 #   offset:           0 by default
 # )
@@ -26,6 +27,7 @@ module Search
       discount            = options[:discount]
       query_string        = options[:query_string]
       order               = options[:order]
+      fast_making         = options[:fast_making]
       limit               = options[:limit].present? ? options[:limit].to_i : 1000
       offset              = options[:offset].present? ? options[:offset].to_i : 0
 
@@ -42,6 +44,11 @@ module Search
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
+
+        # not defined /  only false / only true
+        unless fast_making.nil?
+          filter :bool, :must => { :term => { 'product.fast_making' => fast_making } }
+        end
 
         if taxons.present?
           taxons.each do |ids|

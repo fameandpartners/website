@@ -35,12 +35,13 @@ class Repositories::CartProduct
         result.size   = Repositories::ProductSize.read(size_id)
         result.color  = Repositories::ProductColors.read(color_id)
         result.customizations = product_customizations.to_a
+        result.making_options = product_making_options
       end
 
       result
     end
-  rescue
-    OpenStruct.new({})
+  #rescue
+  #  OpenStruct.new({})
   end
   cache_results :read
 
@@ -84,6 +85,17 @@ class Repositories::CartProduct
       line_item.personalization.customization_values.to_a
     end
 
+    def product_making_options
+      line_item.making_options.includes(:product_making_option).map do |option|
+        OpenStruct.new(
+          id: option.id,
+          option_type: option.product_making_option.option_type,
+          name: option.product_making_option.name,
+          display_price: option.display_price
+        )
+      end
+    end
+
     def line_item_description
       description = product.description
       if description.present?
@@ -96,6 +108,8 @@ class Repositories::CartProduct
     def line_item_price
       OpenStruct.new(
         display_price: Spree::Price.new(amount: line_item.price).display_price.to_s,
+        amount: line_item.price,
+        currency: line_item.currency,
         'in_sale?'.to_sym => line_item.in_sale?,
         money: line_item.money,
         money_without_discount: line_item.in_sale? ? line_item.money_without_discount : nil

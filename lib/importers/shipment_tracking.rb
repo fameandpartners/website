@@ -1,13 +1,13 @@
 module Importers
   class ShipmentTracking < FileImporter
 
-    attr_accessor :shipment_infos, :shippable_orders, :styles, :matching_orders
+    attr_accessor :shipment_infos, :shippable_orders, :styles, :matching_orders, :shipped_orders
 
     def import
       preface
 
       parse_file
-      #print_validation_errors
+      print_validation_errors
       find_orders
       update_orders
       print_summary
@@ -36,7 +36,7 @@ module Importers
     end
 
     def print_validation_errors
-      shipment_infos.map { |i| warn(i) unless i.valid? }
+      shipment_infos.reject(&:valid?).map { |i| warn(i.messages) }
     end
 
     def find_orders
@@ -58,10 +58,11 @@ module Importers
         shipment = order.shipments.first
         tracking_number = shipment_info_for_order(order).tracking_number
 
-        shipper = Admin::ReallyShipTheShipment.new(shipment, tracking_number)
+        shipper = Admin::ReallyShipTheShipment.new(shipment, tracking_number, re_raise: true)
 
         unless shipper.valid?
-          warn "#{prefix} #{shipper.errors.full_messages.to_sentence}"
+          warn "#{prefix} Order:#{order.number} #{shipper.errors.full_messages.to_sentence}"
+          unshippable_shipments << shipment
         end
 
         #MONKEY PUNCH!
@@ -70,17 +71,35 @@ module Importers
           nil
         end
 
-        shipper.ship!
+        begin
+          shipper.ship!
+          shipped_shipments << shipment
+        rescue StateMachine::InvalidTransition => e
+          error "#{prefix} Order:#{order.number} #{e.message}"
+          unshippable_shipments << shipment
+        end
       end
+    end
+
+    def shipped_shipments
+      @shipped_shipments ||= []
+    end
+
+    def unshippable_shipments
+      @unshippable_shipments ||= []
     end
 
     def print_summary
       info "Parsed: rows=#{shipment_infos.count}"
       info "Valid: shipment_infos=#{valid_shipment_infos.count}"
 
+
       info "Unique Order #: #{order_numbers.uniq.count}"
       info "Matching Orders: #{matching_orders.count}"
       info "Shippable Orders: #{shippable_orders.count}"
+
+      info "Shipped Shipments: #{shipped_shipments.count}"
+      error "Unshippable Shipments: #{unshippable_shipments.count}"
       info "Missing Orders: #{missing_orders.count}"
       info missing_orders.join ', '
     end

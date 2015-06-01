@@ -25,8 +25,8 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   # request to force data requesting from server
   # if already loaded, do nothing. it should be done by other methods
-  load: () ->
-    if @isLoaded()
+  load: (force = false) ->
+    if @isLoaded() && !force
       @trigger('load')
     else
       @loaded = true
@@ -58,8 +58,12 @@ window.helpers.ShoppingCart = class ShoppingCart
       type: "POST"
       dataType: "json"
       data: product_data
-    ).success(
-      @updateData
+    ).success((data) =>
+      @updateData(data)
+      added_product = _.find((data.products || []), (product) ->
+        product.variant_id == product_data.variant_id
+      )
+      @trackAddToCart(added_product)
     ).error( () =>
       @trigger('error')
     )
@@ -70,6 +74,28 @@ window.helpers.ShoppingCart = class ShoppingCart
   removeProduct: (line_item_id) ->
     $.ajax(
       url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }")
+      type: "DELETE"
+      dataType: "json"
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
+  removeProductCustomization: (line_item_id, customization_id) ->
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }/customizations/#{ customization_id }")
+      type: "DELETE"
+      dataType: "json"
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
+  removeProductMakingOption: (line_item_id, making_option_id) ->
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }/making_options/#{ making_option_id }")
       type: "DELETE"
       dataType: "json"
     ).success(
@@ -100,3 +126,13 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
+  # analytics
+  trackAddToCart: (product) ->
+    try
+      window._fbq ||= []
+      window._fbq.push(['track', '6021815151134', {
+        'value': product.price.amount,
+        'currency':product.price.currency
+      }])
+    catch
+      # do nothing

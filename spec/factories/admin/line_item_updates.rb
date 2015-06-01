@@ -1,6 +1,6 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :admin_line_item_tracking, :class => 'Admin::LineItemUpdate' do
+  factory :line_item_update, :class => 'Admin::LineItemUpdate' do
   end
 end

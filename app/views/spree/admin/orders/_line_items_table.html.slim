@@ -7,6 +7,7 @@ table.line_items
     tr
       th Order Date
       th Delivery Due
+      th Fast Making
       th Due In
       th Order Number
       th Line ID
@@ -19,7 +20,6 @@ table.line_items
       th Customer Notes
       th Make State
       th Shipping
-      th Actions
   - orders.each do |raw_order|
     - order = Orders::OrderPresenter.new(raw_order)
     tbody
@@ -28,7 +28,10 @@ table.line_items
 
         tr class="state-#{order.state.to_s.downcase}"
           td = maybe_date(order.completed_at)
-          td = maybe_date(order.projected_delivery_date)
+          td = maybe_date(line_item.projected_delivery_date)
+          td style="text-align: center"
+            - if line_item.fast_making? 
+              h3 style="color: red;" = '!'
           td
             - ship_state = ShippingStatePresenter.new(line_item)
             abbr title=ship_state.delivery_state class="state-#{ship_state.delivery_state}"
@@ -54,4 +57,16 @@ table.line_items
               = Fabrication::STATES[line_item.fabrication.state]
             - else
               = render partial: 'update_fabrication_state_form', locals: { order_line_item: line_item }
-          = render partial: 'squished_shipment_tracking_form', locals: { line_item: line_item, position: position, total_items_in_order: total_items }
+          - if shipment = line_item.shipment
+            - if shipment.shipped?
+              td
+                = render partial: 'admin/shipments/shipped_shipment_tracking', locals: { shipment: shipment }
+            - elsif total_items == 1
+              td
+                = render partial: 'admin/shipments/tracking_number_update_form', locals: { shipment: shipment }
+            - elsif total_items > 1 && position.zero?
+              td rowspan=total_items
+                = link_to 'Multiple Items In Order', admin_order_shipments_path(shipment.order), target: '_blank'
+          - else
+            td
+              ' No Shipment defined
