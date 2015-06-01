@@ -11,7 +11,8 @@ describe Spree::Admin::GeneralSettingsController, :type => :controller do
   end
 
   describe 'GET /admin/general_settings/edit' do
-    it 'adds homepage_title to @preferences_general' do
+    # TODO: PR #322: 01/05/2015 alias_method broke production with a stack_level too deep. Check alternative
+    xit 'adds homepage_title to @preferences_general' do
       get :edit
       expect(assigns(:preferences_general)).not_to be_nil
       expect(assigns[:preferences_general]).to include(:homepage_title)
