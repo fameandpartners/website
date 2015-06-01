@@ -1,0 +1,32 @@
+#collection-resource.hidden
+  =@resource_args.inspect
+
+ruby:
+  init_product_collection_moodboard_links = "
+    initProductCollectionMoodboardLinks({
+      container: '.category .products-collection',
+      buttons:   'span.moodboard'
+    });"
+
+= content_for :inline_javascript do
+  = raw init_product_collection_moodboard_links
+
+.page-title.default.category-header style="background-image: url('#{@collection.details.banner.image}')"
+  .container
+    .page-title--details
+      h1.no-padding-bottom = @collection.details.banner.title
+      p= raw @collection.details.banner.subtitle
+
+.page-content.products-collections.category
+
+  .container.relative.products-collection
+    = render partial: 'products_without_content'
+
+    - if @collection.total_products > @collection.products.size
+      .row.relative.more-products
+        .status.active
+          = link_to 'More dresses', '#', class: 'btn btn-black', data: { action: 'show-more-collection-products' }
+        .status.loading style="display: none;"
+          = image_tag('fame-spinner.gif')
+        .status.inactive style="display: none;"
+          // nothing

@@ -24,21 +24,32 @@ describe Revolution::Page do
   end
 
   describe 'find_for' do
-
-    it 'find for multiple paths' do
+    it 'should handle multiple paths' do
       found = Revolution::Page.find_for('/aguirre','/blah/vtha')
+      expect(found).to eq page
+    end
+
+    it 'short-circuit if page found' do
+      page #apparently this does not exist
+      binding.pry
+      expect(Revolution::Page).to_not receive(:find_by_path).with('/aguirre')
+      found = Revolution::Page.find_for('/blah/vtha','/aguirre')
       expect(found).to eq page
     end
   end
 
-
-  describe 'hierarchy' do
+  describe 'Parent/Childs' do
 
     let(:child_page)  { Revolution::Page.create!(:parent => page, :path => "#{path}/vtha") }
 
-    it 'create a page with a parent' do
-      expect(child_page.parent).to eq page
+    before do
+      page.reload
     end
+
+    it { expect(child_page.parent).to eq page }
+    it { expect(page.children_count).to eq 1 }
+    it { expect(child_page.depth).to eq 1 }
+
   end
 
   describe 'translations' do

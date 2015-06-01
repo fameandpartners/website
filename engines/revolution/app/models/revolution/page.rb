@@ -1,6 +1,13 @@
+# /dresses/summer
+#   -> us translation
+#   -> au translation
+#
+# /dresses/summer/red
+#   parent -> /dresses/summer
+
 module Revolution
   class Page < ActiveRecord::Base
-    attr_accessible :path, :canonical, :parent, :parent_id, :template, :published
+    attr_accessible :path, :canonical, :redirect, :parent, :parent_id, :template, :published
 
     validates :path, :presence => true
     validate :path_has_not_changed, :on => :update
@@ -16,10 +23,19 @@ module Revolution
 
     def self.find_for(*paths)
       paths.each do |path|
+        # binding.pry
         if page = published.find_by_path(path)
           return page
         end
       end
+    end
+
+    def redirect?
+      redirect.present?
+    end
+
+    def canonical_path
+      canonical || path
     end
 
     def template_path
@@ -33,10 +49,3 @@ module Revolution
     end
   end
 end
-
-# /dresses/summer
-#   -> us translation
-#   -> au translation
-#
-# /dresses/summer/red
-#   parent -> /dresses/summer
