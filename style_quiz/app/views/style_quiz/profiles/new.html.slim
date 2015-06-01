@@ -4,7 +4,11 @@ css:
 ruby:
   quiz_init_code = "
     var questions_data  = #{ raw @questions.map(&:marshal_dump).to_json };
-    window.quiz = new StyleQuiz.Quiz({questions_data: questions_data})
+    window.quiz = new StyleQuiz.Quiz({
+      questions_data: questions_data,
+      current: #{ params[:current].to_i },
+      action: '#{ style_quiz.profiles_path }'
+    })
   "
 
 = content_for :inline_javascript do

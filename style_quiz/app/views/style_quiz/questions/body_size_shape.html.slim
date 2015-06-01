@@ -1,7 +1,7 @@
 / Question 4/11
 .quiz-section id="#{ question.name }-question"
   .quiz-section-title.quiz-section-title-pink
-    h4.quiz-section-number Question 4/11
+    h4.quiz-section-number Question #{ question_position }/#{ question_total }
     h2 
       | Select your body shape
       br
@@ -65,8 +65,8 @@
       .size 24
       .size 26
     .row
-      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block'
-      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block'
+      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
+      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
 / @end Question 4/11
 / ------------------
 

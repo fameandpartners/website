@@ -1,24 +1,24 @@
 / Question 7/11
 .quiz-section id="#{ question.name }-question"
   .quiz-section-title.quiz-section-title-blue
-    h4.quiz-section-number Question 7/11
+    h4.quiz-section-number Question #{ question_position }/#{ question_total }
     h2 You’re walking the red carpet!
     h3.font-family-secondary.text-uppercase WHICH DRESS WOULD YOU WEAR?
     h4.font-family-secondary.text-uppercase - SELECT AS MANY AS YOU LIKE
   .grid-container
     .quiz-catalog
       .row
-        .col-2.selected
+        .col-2.dress-style.selected
           .quiz-catalog-picture 
             = image_tag 'http://fashiongum.com/wp-content/uploads/2015/01/20-Fancy-Wedding-Guest-Looks-For-Summer-1.jpg'
             .checkmark.checkmark-lg
         - (1..11).each do
-          .col-2
+          .col-2.dress-style
             .quiz-catalog-picture 
               = image_tag 'http://fashiongum.com/wp-content/uploads/2015/01/20-Fancy-Wedding-Guest-Looks-For-Summer-1.jpg'
               .checkmark.checkmark-lg
     .row
-      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block'
-      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block'
+      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
+      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
 / @end Question 7/11
 / ------------------
