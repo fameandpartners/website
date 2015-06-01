@@ -1,10 +1,11 @@
 ruby:
+  page_size ||= 20
   init_collection_filter = "
     filter = new ProductCollectionFilter({
       controls: '.category .category-controls',
       content: '.category .products-collection',
       banner:  '.category-header',
-      page_size: 20,
+      page_size: #{page_size},
       reset_source: true,
       size: #{ @collection.products.size.to_i },
       total_products: #{ @collection.total_products.to_i },

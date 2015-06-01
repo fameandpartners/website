@@ -1,7 +1,7 @@
 = content_for :head do
   meta name="robots" content="noindex, follow"
 
-= render :partial => '/products/collections/javascript'
+= render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
 .page-content.here-comes-the-sun
   ul.rslides
@@ -16,3 +16,6 @@
       = render partial: 'products_without_content'
 
       = render partial: 'pagination'
+
+    .row.relative.more-products
+      = link_to 'More Dresses', dresses_path, class: 'btn btn-black'
