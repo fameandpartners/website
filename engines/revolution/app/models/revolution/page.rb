@@ -7,27 +7,37 @@
 
 module Revolution
   class Page < ActiveRecord::Base
-    attr_accessible :path, :canonical, :redirect, :parent, :parent_id, :template, :published
+    attr_accessible :path, :template_path, :canonical, :redirect, :parent, :parent_id, :publish_from, :publish_to
 
     validates :path, :presence => true
-    validate :path_has_not_changed, :on => :update
+    validate :path_has_not_changed, :on => :update #read only attributes
 
-    belongs_to :template
     has_many :translations
 
     acts_as_nested_set :counter_cache => :children_count
 
-    def self.published
-      where(:published => true)
-    end
-
     def self.find_for(*paths)
       paths.each do |path|
-        # binding.pry
         if page = published.find_by_path(path)
           return page
         end
       end
+      nil
+    end
+
+    def self.published(n = nil)
+      n ||= Time.now.utc
+      where("? BETWEEN publish_from AND COALESCE(publish_to, ?)", n, n)
+    end
+
+    def published?(n = nil)
+      n ||= Time.now.utc
+      (publish_from.present? && n >= publish_from) && (publish_to.blank? || n < publish_to)
+    end
+
+    def publish!(publish_date = nil)
+      publish_date ||= Time.now.utc
+      update_attributes!(:publish_from => publish_date)
     end
 
     def redirect?
@@ -36,10 +46,6 @@ module Revolution
 
     def canonical_path
       canonical || path
-    end
-
-    def template_path
-      template.path
     end
 
     def path_has_not_changed

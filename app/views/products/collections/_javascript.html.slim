@@ -1,0 +1,28 @@
+ruby:
+  init_collection_filter = "
+    filter = new ProductCollectionFilter({
+      controls: '.category .category-controls',
+      content: '.category .products-collection',
+      banner:  '.category-header',
+      page_size: 20,
+      reset_source: true,
+      size: #{ @collection.products.size.to_i },
+      total_products: #{ @collection.total_products.to_i },
+      details_elements: {
+        banner: {
+          title: '.page-title.category-header .page-title--details h1',
+          description: '.page-title.category-header .page-title--details p',
+          image: '.page-title.category-header'
+        }
+      }
+    });
+  "
+  init_product_collection_moodboard_links = "
+    initProductCollectionMoodboardLinks({
+      container: '.category .products-collection',
+      buttons:   'span.moodboard'
+    });"
+
+= content_for :inline_javascript do
+  = raw init_collection_filter
+  = raw init_product_collection_moodboard_links

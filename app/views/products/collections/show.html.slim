@@ -1,40 +1,4 @@
-#collection-resource.hidden
-  =@resource_args.inspect
-  
-ruby:
-  init_collection_filter = "
-    filter = new ProductCollectionFilter({
-      controls: '.category .category-controls',
-      content: '.category .products-collection',
-      banner:  '.category-header',
-      page_size: 20,
-      reset_source: true,
-      size: #{ @collection.products.size.to_i },
-      total_products: #{ @collection.total_products.to_i },
-      details_elements: {
-        banner: {
-          title: '.page-title.category-header .page-title--details h1',
-          description: '.page-title.category-header .page-title--details p',
-          image: '.page-title.category-header'
-        }
-      }
-    });
-  "
-  init_product_collection_moodboard_links = "
-    initProductCollectionMoodboardLinks({
-      container: '.category .products-collection',
-      buttons:   'span.moodboard'
-    });"
-
-= content_for :inline_javascript do
-  = raw init_collection_filter
-  = raw init_product_collection_moodboard_links
-
-ruby:
-  style_options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style.try(:permalink))
-  shape_options = options_from_collection_for_select(@filter.shapes, :to_s, :humanize, @collection.bodyshape.try(:downcase))
-  color_options = color_options_for_select_from_options_values(@filter.colors, @collection.color.try(:name))
-  sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
+= render :partial => 'javascript'
 
 .page-title.default.category-header style="background-image: url('#{@collection.details.banner.image}')"
   .container
@@ -43,21 +7,7 @@ ruby:
       p= raw @collection.details.banner.subtitle
 
 .page-content.products-collections.category
-  .container.relative.category-controls
-    .row.relative
-      .col-md-3.hidden-sm.hidden-xs.hidden-xxs
-        = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
-        br
-      .col-md-3.hidden-sm.hidden-xs.hidden-xxs
-        = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
-        br
-      .col-md-3.hidden-sm.hidden-xs.hidden-xxs
-        = select_tag :color, color_options, class: 'pink-select', prompt: t(:color)
-        br
-      .col-md-3.col-xs-12.col-xxs-12.product-order
-        = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
-        br
-
+  = render :partial => 'filters'
 
   .container.relative.products-collection
     - if Features.active?(:collection_content)
@@ -65,11 +15,4 @@ ruby:
     - else
       = render partial: 'products_without_content'
 
-    - if @collection.total_products > @collection.products.size
-      .row.relative.more-products
-        .status.active
-          = link_to 'More dresses', '#', class: 'btn btn-black', data: { action: 'show-more-collection-products' }
-        .status.loading style="display: none;"
-          = image_tag('fame-spinner.gif')
-        .status.inactive style="display: none;"
-          // nothing
+    = render partial: 'pagination'

@@ -6,8 +6,8 @@ class CreateRevolutionTranslations < ActiveRecord::Migration
       t.text    :title, :nil => false
       t.text    :meta_description, :nil => false
       t.text    :heading, :nil => false
-      t.text    :sub_heading, :nil => false
-      t.text    :description, :nil => false
+      t.text    :sub_heading, :nil => true
+      t.text    :description, :nil => true
       t.timestamps
     end
 
