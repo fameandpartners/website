@@ -96,6 +96,9 @@
           | amber
           .checkmark
     
-    .col-12.text-center = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+    .row
+      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
+      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+    /.col-12.text-center = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
 / @end Question 2/11
 / ------------------

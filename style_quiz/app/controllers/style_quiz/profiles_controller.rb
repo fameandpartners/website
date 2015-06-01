@@ -19,8 +19,23 @@ module StyleQuiz
         OpenStruct.new(name: 'red-carpet-style',    template: 'style_quiz/questions/red_carpet_style'),
         OpenStruct.new(name: 'fashion-importance',  template: 'style_quiz/questions/fashion_importance'),
         OpenStruct.new(name: 'sexyness-importance', template: 'style_quiz/questions/sexyness_importance'),
-        OpenStruct.new(name: 'events-form',         template: 'style_quiz/questions/events_form')
+        OpenStruct.new(
+          name: 'events-form',
+          template: 'style_quiz/questions/events_form',
+          values: [
+            OpenStruct.new(name: 'high school formal', type: 'event', date: 10.days.from_now.to_date),
+            OpenStruct.new(name: 'red cross event dinner', type: 'event', date: 20.days.from_now.to_date),
+            OpenStruct.new(name: 'christmas party', type: 'event', date: 30.days.from_now.to_date)
+          ]
+        )
       ]
+    end
+
+    def create
+      raise params.inspect
+    end
+
+    def show
     end
   end
 end

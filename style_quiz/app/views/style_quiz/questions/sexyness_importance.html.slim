@@ -1,11 +1,7 @@
-coffee:
-  $('.rank-cell').on 'click', ->
-    $(this).addClass('active').siblings().removeClass('active')
-
 / Question 9/11
 .quiz-section id="#{ question.name }-question"
   .quiz-section-title.quiz-section-title-grey
-    h4.quiz-section-number Question 9/11
+    h4.quiz-section-number Question #{ question_position }/#{ question_total }
     h2 Do you prefer to show some skin or cover up?
     h3.font-family-secondary.text-uppercase RANK HOW SEXY YOU LIKE TO LOOK.
     h4.font-family-secondary.text-uppercase - CLICK ON THE SCALE, FROM LEAST IMPORTANT TO VERY IMPORTANT
@@ -32,7 +28,7 @@ coffee:
       .rank-cell
         .rank-item.rank-sexy-item-0
     .row
-      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block'
-      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block'
+      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
+      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
 / @end Question 9/11
 / ------------------
