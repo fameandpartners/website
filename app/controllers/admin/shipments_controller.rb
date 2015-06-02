@@ -1,7 +1,7 @@
 module Admin
   class ShipmentsController < Spree::Admin::BaseController
 
-    skip_before_filter :check_site_version
+    include Concerns::GlobalController
 
     respond_to :json
 

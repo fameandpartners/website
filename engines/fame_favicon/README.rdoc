@@ -1,0 +1,9 @@
+= FameFavicon
+
+This project rocks.
+
+http://realfavicongenerator.net/
+
+A lot of the impetus for this gem came from this post.
+
+http://rakeroutes.com/blog/write-a-gem-for-the-rails-asset-pipeline/

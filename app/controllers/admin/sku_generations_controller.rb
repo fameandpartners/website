@@ -2,7 +2,7 @@ require 'importers/sku_generation'
 
 module Admin
   class SkuGenerationsController < Spree::Admin::BaseController
-    skip_before_filter :check_site_version
+    include Concerns::GlobalController
 
     def create
       import_file = params[:sku_template_csv].tempfile
