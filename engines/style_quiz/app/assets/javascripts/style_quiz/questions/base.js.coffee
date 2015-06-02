@@ -91,7 +91,7 @@ window.StyleQuiz.ColorDressesQuestion = class ColorDressesQuestion extends windo
 
   value: () ->
     {
-      dressesColor: @$container.find('.quiz-catalog .quiz-catalog-item.selected')
+      dressesColor: @$container.find('.quiz-catalog .quiz-catalog-item.selected').data('value')
     }
 
 window.StyleQuiz.BodySizeShapeQuestion = class BodySizeShapeQuestion extends window.StyleQuiz.BaseQuestion
@@ -114,8 +114,8 @@ window.StyleQuiz.BodySizeShapeQuestion = class BodySizeShapeQuestion extends win
 
   value: () ->
     {
-      bodyShape: @$container.find('.quiz-catalog .quiz-catalog-item.selected'),
-      bodySize: @$container.find('.size-picker .size')
+      bodyShape: @$container.find('.quiz-catalog .quiz-catalog-item.selected').data('value'),
+      bodySize: @$container.find('.size-picker .size.selected').data('value')
     }
 
 window.StyleQuiz.EverydayStyleQuestion = class EverydayStyleQuestion extends window.StyleQuiz.BaseQuestion
@@ -125,17 +125,30 @@ window.StyleQuiz.EverydayStyleQuestion = class EverydayStyleQuestion extends win
 
   toggleItemSelection: (e) ->
     e.preventDefault()
-    item = $(e.currentTarget)
-    $(e.currentTarget).closest('.quiz-catalog').find('.dress-style').not(item).removeClass('selected')
-    item.addClass('selected')
+    $(e.currentTarget).toggleClass('selected')
 
   value: () ->
     {
-      everyDayStyle: @$container.find('.quiz-catalog .dress-style.selected')
+      everyDayStyle: _.map(@$container.find('.quiz-catalog .dress-style.selected'), (item) ->
+        $(item).data('value')
+      , @)
     }
 
 window.StyleQuiz.DreamStyleQuestion = class DreamStyleQuestion extends window.StyleQuiz.EverydayStyleQuestion
+  value: () ->
+    {
+      dreamStyle: _.map(@$container.find('.quiz-catalog .dress-style.selected'), (item) ->
+        $(item).data('value')
+      , @)
+    }
+
 window.StyleQuiz.RedCarpetStyleQuestion = class RedCarpetStyleQuestion extends window.StyleQuiz.EverydayStyleQuestion
+  value: () ->
+    {
+      redCarpetStyle: _.map(@$container.find('.quiz-catalog .dress-style.selected'), (item) ->
+        $(item).data('value')
+      , @)
+    }
 
 window.StyleQuiz.FashionImportanceQuestion = class FashionImportanceQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->
@@ -147,9 +160,11 @@ window.StyleQuiz.FashionImportanceQuestion = class FashionImportanceQuestion ext
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
 
   value: (e) ->
-    @$container.find('.rank-cell.active')
+    { FashionImportance: @$container.find('.rank-cell.active').data('value') }
 
 window.StyleQuiz.SexynessImportanceQuestion = class SexynessImportanceQuestion extends window.StyleQuiz.FashionImportanceQuestion
+  value: (e) ->
+    { SexynessImportance: @$container.find('.rank-cell.active').data('value') }
 
 window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->

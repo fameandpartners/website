@@ -22,6 +22,9 @@ window.StyleQuiz.Quiz = class Quiz
       @questions.push(question)
     , @)
 
+    if @current > (@questions.length - 1)
+      @current = @questions.length - 1
+
     @showCurrentQuestion()
 
   showCurrentQuestion: () ->

@@ -8,65 +8,20 @@
       | and dress size.
   .grid-container
     .quiz-catalog.text-center
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .body-box.apple
-        .quiz-catalog-title
-          | apple
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .body-box.pear
-        .quiz-catalog-title
-          | pear
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .body-box.athletic
-        .quiz-catalog-title
-          | athletic
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .body-box.strawberry
-        .quiz-catalog-title
-          | strawberry
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .body-box.hour-glass
-        .quiz-catalog-title
-          | hour glass
-          .checkmark
-      .quiz-catalog-item.selected
-        .quiz-catalog-picture
-          .body-box.column
-        .quiz-catalog-title
-          | column
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .body-box.petite
-        .quiz-catalog-title
-          | petite
-          .checkmark
+      - question.answers.shapes.each_with_index do |body_shape, index|
+        .quiz-catalog-item data-value=(body_shape) class=(index == 0 ? 'selected' : 0)
+          .quiz-catalog-picture
+            .body-box class=(body_shape.parameterize)
+          .quiz-catalog-title
+            => body_shape
+            .checkmark
     h2.text-center Select your size.
     .size-picker
-      .size 4
-      .size.selected 6
-      .size 8
-      .size 10
-      .size 12
-      .size 14
-      .size 16
-      .size 18
-      .size 20
-      .size 22
-      .size 24
-      .size 26
+      - question.answers.sizes.each_with_index do |size, index|
+        .size class=(index == 0 ? 'selected' : 0) data-value=(size)
+          = size
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
       .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
 / @end Question 4/11
 / ------------------
-
