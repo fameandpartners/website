@@ -74,8 +74,8 @@ window.StyleQuiz.ColorPaletteQuestion = class ColorPaletteQuestion extends windo
 
   value: () ->
     {
-      hairColor: @$container.find('.hair.quiz-catalog .quiz-catalog-item.selected'),
-      eyesColor: @$container.find('.hair.quiz-catalog .quiz-catalog-item.selected')
+      hairColor: @$container.find('.hair.quiz-catalog .quiz-catalog-item.selected').data('value'),
+      eyesColor: @$container.find('.eyes.quiz-catalog .quiz-catalog-item.selected').data('value')
     }
 
 window.StyleQuiz.ColorDressesQuestion = class ColorDressesQuestion extends window.StyleQuiz.BaseQuestion

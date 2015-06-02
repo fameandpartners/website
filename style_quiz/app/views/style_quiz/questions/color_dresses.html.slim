@@ -8,96 +8,15 @@
       | like to wear?
   .grid-container
     .quiz-catalog.text-center
-      .quiz-catalog-item.selected
-        .quiz-catalog-picture
-          .model-mask style="background-color: #000;"
-        .quiz-catalog-title
-          | Black
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #f00;"
-        .quiz-catalog-title
-          | Red
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #fff;"
-        .quiz-catalog-title
-          | White
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #992b5f;"
-        .quiz-catalog-title
-          | plum
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #006028;"
-        .quiz-catalog-title
-          | green
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #ffe800;"
-        .quiz-catalog-title
-          | yellow
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #be8fbd;"
-        .quiz-catalog-title
-          | mauve
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #2f3f89;"
-        .quiz-catalog-title
-          | blue
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #000;"
-        .quiz-catalog-title
-          | Black
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #f00;"
-        .quiz-catalog-title
-          | Red
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #f5f5f5;"
-        .quiz-catalog-title
-          | grey
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #992b5f;"
-        .quiz-catalog-title
-          | plum
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #006028;"
-        .quiz-catalog-title
-          | green
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #ffe800;"
-        .quiz-catalog-title
-          | yellow
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .model-mask style="background-color: #be8fbd;"
-        .quiz-catalog-title
-          | mauve
-          .checkmark
+      - question.answers.each_with_index do |answer, index|
+        - color_name = answer.first
+        - color_code = answer.last
+        .quiz-catalog-item class="#{ index == 0 ? 'selected' : '' }" data-value=(color_name)
+          .quiz-catalog-picture
+            .model-mask style="background-color: #{ color_code}"
+          .quiz-catalog-title
+            => color_name.capitalize
+            .checkmark
 
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
