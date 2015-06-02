@@ -50,6 +50,6 @@ describe 'Product Redirection', type: :request do
   end
 
   context 'plus-size' do
-    it_will :redirect, "/plus-size", '/dresses'
+    it_will :redirect, "/plus-size", '/dresses/plus-size'
   end
 end
