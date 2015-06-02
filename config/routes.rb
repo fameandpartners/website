@@ -305,10 +305,11 @@ FameAndPartners::Application.routes.draw do
   end
 
   namespace :admin do
+    resources :bulk_order_updates, :except => [:edit]
     resources :fabrications,       :only => :update
+    resource  :payments_report,    :only => [:show, :create]
     resources :shipments,          :only => :update
     resource  :sku_generation,     :only => [:show, :create]
-    resources :bulk_order_updates, :except => [:edit]
   end
 
   Spree::Core::Engine.routes.append do
