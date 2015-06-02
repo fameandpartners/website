@@ -1,5 +1,7 @@
 class Admin::BulkOrderUpdatesController < Spree::Admin::BaseController
 
+  include Concerns::GlobalController
+
   helper_method :collection, :bulk_update
 
   def create
@@ -20,14 +22,16 @@ class Admin::BulkOrderUpdatesController < Spree::Admin::BaseController
   end
 
   def update
-    service = Shipping::BulkTrackingService.new(bulk_update)
+    service = Shipping::BulkTrackingService.new(bulk_update, current_spree_user)
 
     if params[:admin_bulk_order_update][:find_spree_matches]
-      service.find_spree_matches
+      service.detect_spree_matches
+    elsif params[:admin_bulk_order_update][:update_make_states]
+      service.update_make_states
     elsif params[:admin_bulk_order_update][:setup_shipments]
       service.group_shipments
     elsif params[:admin_bulk_order_update][:mark_valid_shipped]
-      service.fire_valid_shipments(current_spree_user)
+      service.fire_valid_shipments
     end
 
     redirect_to main_app.admin_bulk_order_update_path(bulk_update)
@@ -45,12 +49,24 @@ class Admin::BulkOrderUpdatesController < Spree::Admin::BaseController
   def index
   end
 
+  def destroy
+    bulk_update
+
+    status = if bulk_update.deletable?
+       bulk_update.destroy ? {notice: "Deleted #{bulk_update.filename}"} : { error: "Error deleting #{bulk_update.filename}" }
+    else
+      {error: "Cannot delete! #{bulk_update.filename} - Has processed items"}
+    end
+
+    redirect_to main_app.admin_bulk_order_updates_path, flash: status
+  end
+
   def bulk_update
     @bulk_update ||= model_class.hydrated.order('line_item_updates.row_number').find(params[:id])
   end
 
   def collection
-    @collection ||= model_class.order('created_at DESC')
+    @collection ||= model_class.includes(:line_item_updates).order('created_at DESC')
   end
 
 

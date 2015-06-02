@@ -2,7 +2,7 @@ class StaticsController < ApplicationController
   include Spree::Core::ControllerHelpers::Auth
   require 'enumerator'
 
-  layout 'statics'
+  layout 'redesign/application'
 
   # enable showing of display banner
   before_filter :display_marketing_banner
@@ -11,37 +11,36 @@ class StaticsController < ApplicationController
   def about
     @title = "About Us " + default_seo_title
     @description = "We design beautiful dresses for prom and many other occasions. We are a passionate team of fashionista's based in Sydney and NYC"
-    render :layout => 'redesign/application'
   end
 
   def faqs
-    @title = "FAQs - " + default_seo_title
+    @title = "FAQs " + default_seo_title
     @description = "FAQs"
-    render :layout => 'redesign/application'
+  end
+
+  def size_guide
+    @title = "New Size Guide " + default_seo_title
+    @description = "Size Guides"
   end
 
   def ecom_terms
     @title = "Terms & Conditions " + default_seo_title
     @description = "Terms & Conditions"
-    render :layout => 'redesign/application'
   end
 
   def why_us
     @title = "Why Us " + default_seo_title
     @description = "Why Us"
-    render :layout => 'redesign/application'
   end
 
   def ecom_privacy
     @title = "Privacy " + default_seo_title
     @description = "Privacy"
-    render :layout => 'redesign/application'
   end
 
   def fashionista_winner
     @title = "Fashionista 2014 Winner"
     @description = "Fashionista 2014 Winner"
-    render :layout => 'redesign/application'
   end
 
   def bridesmaid_lp
@@ -54,6 +53,11 @@ class StaticsController < ApplicationController
     @title = "Break Hearts not Banks | Beautiful Dresses - Fame & Partners"
     @description = "Discover beautiful dresses that don't break the bank at Fame & Partners"
     render :template => 'landing_pages/break-hearts-not-banks', :layout => 'redesign/application'
+  end
+
+  def lookbook
+    # index page for lookbok does not exists yet so we use redirect for now
+    redirect_to here_comes_the_sun_collection_path
   end
 
   def here_comes_the_sun

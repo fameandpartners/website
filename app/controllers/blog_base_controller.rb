@@ -4,6 +4,8 @@ class BlogBaseController < ApplicationController
   before_filter :load_categories
   before_filter :load_featured_celebrities
 
+  skip_before_filter :check_cart
+
   private
 
   def title(*args)

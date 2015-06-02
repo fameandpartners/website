@@ -1,5 +1,8 @@
 # call it to schedule cache clearing & index updatin & etc
 # ClearCacheWorker.perform_async
+
+require 'products/color_variants_indexer'
+
 class ClearCacheWorker
   include Sidekiq::Worker
   sidekiq_options retry: 3
@@ -23,7 +26,7 @@ class ClearCacheWorker
     end
 
     def update_color_variants_elastic_index
-      Products::ColorVariantsIndexer.index!
+      ::Products::ColorVariantsIndexer.index!
     end
 
     def reset_cache

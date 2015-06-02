@@ -1,6 +1,6 @@
-require "#{Rails.root}/app/policies/order_projected_delivery_date_policy"
-
 Spree::Order.class_eval do
+
+  extend Spree::Order::Scopes
   attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date, :user_id
   self.include_root_in_json = false
 
@@ -27,6 +27,13 @@ Spree::Order.class_eval do
     after_transition :to => :complete, :do => :project_delivery_date
   end
 
+  def save_permalink(permalink_value=nil)
+    # noop
+    # :number is already unique, and already the permalink value
+    # The default spree implementation here does a LIKE '?%',
+    # which on order number, is very very slow.
+  end
+
   def project_delivery_date
     if complete?
       delivery_date = Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
@@ -35,7 +42,7 @@ Spree::Order.class_eval do
   end
 
   def returnable?
-    shipped? && !order_return_requested? && completed_at <= 50.days.ago
+    shipped? && !order_return_requested?
   end
 
   def order_return_requested?
@@ -84,6 +91,10 @@ Spree::Order.class_eval do
     line_items.any?(&:in_sale?)
   end
   alias :in_sale? :has_items_on_sale?
+
+  def has_fast_making_items?
+    line_items.includes(making_options: :product_making_option).any?{|item| item.fast_making? }
+  end
 
   def update!
     if self.shipping_method.blank?

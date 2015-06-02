@@ -170,6 +170,12 @@ GIT
     mail_view (2.0.4)
       tilt
 
+PATH
+  remote: engines/fame_favicon
+  specs:
+    fame_favicon (0.0.1)
+      rails (~> 3.2.21)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -786,6 +792,7 @@ DEPENDENCIES
   event_sourced_record
   execjs (= 1.4.0)
   factory_girl_rails (= 4.2.1)
+  fame_favicon!
   fog
   geoip
   google_drive (= 1.0.0)

@@ -12,6 +12,9 @@ Color（颜色):    <%= item.colour_name %>
 Quantity:       <%= item.quantity%>
 Factory:        <%= item.factory %>
 Delivery Date:  <%= order.projected_delivery_date %>
+<% if item.making_options.present? %>
+Express Making ( 快速决策 ): <%= item.making_options.map{|option| option.name.upcase }.join(', ') %>
+<% end %>
 
 Customizations:
 <% item.customisations.each do |name, image_url| %>

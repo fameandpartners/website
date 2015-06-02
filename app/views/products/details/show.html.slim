@@ -36,6 +36,11 @@ ruby:
           customization_input: {
             container:  '#product-customizations-content',
             action:     '#product-customize-action'
+          },
+          making_options_input: {
+            container:  '#product-making-options-content',
+            action:     '#product-making-options-action',
+            value:      '#{ raw @product.making_option_id }'
           }
         },
         moodboard_links: {
@@ -103,6 +108,11 @@ ruby:
         a#product-customize-action.btn-customize
           | Customize
 
+    - if @product.making_options.present?
+      .row
+        a#product-making-options-action.btn-customize
+          | Express Making
+
     .row
       button.btn.btn-block.btn-black.buy-button Add to Cart
 
@@ -155,7 +165,7 @@ ruby:
                   span.fa.fa-pause
 
           .box.col-sm-4.no-padding
-            - if @product.celebrity
+            - if @product.celebrity && @product.celebrity.image_url
               = image_tag @product.celebrity.image_url, class: 'img-responsive'
 
           - @product.inspiration.each do |item|
@@ -212,85 +222,15 @@ hr
 = render :partial => 'data'
 
 #fit-guide-content.hidden
-  = render :partial => 'size_guide'
+  = render :partial => 'size_guide', :locals => { data: @product.size_chart_data, explanation: @product.size_chart_explanation }
 
 #product-overlay
 
-/! PRODUCT SIZES PANEL
-#product-size-content.product-side-panel
-  button.close-btn
-    = image_tag "cross.png", alt: 'close button'
-  .sizes-container.grey
-    .row
-      .col-md-12.recommended
-        h2 Sizes
-        - if @product.default_sizes?
-          - @product.default_sizes.each do |size|
-            .col-md-3.col-xs-3.col-xxs-6
-              a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
-                span.option-box.size-box= size.presentation.gsub(/\D/, '')
+= render partial: 'side_panel_sizes'
 
-  .sizes-container
-    - if @product.custom_sizes?
-      .row
-        .col-md-12.custom
-          h2=  "Custom Sizes +#{@product.custom_size_price}"
+= render partial: 'side_panel_colours'
 
-          - @product.custom_sizes.each do |size|
-            .col-md-3.col-xs-3.col-xxs-6
-              a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
-                span.option-box.size-box= size.presentation.gsub(/\D/, '')
+= render partial: 'side_panel_customisation'
 
-  .row
-    .col-md-10.col-md-offset-1
-      button.btn-fit-guide.btn.btn-block.btn-secondary Fit Guide
-
-
-#product-color-content.product-side-panel
-  button.close-btn
-    = image_tag "cross.png", alt: 'close button'
-  .sizes-container.grey
-    .row
-      .col-md-12.recommended
-        h2 Recommended Colors
-
-        - @product.default_color_options.each do |color|
-          .col-md-6
-            a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation
-              span.option-box.color-box class="color-#{color.name}"
-              span.option-name= color.presentation
-
-  - if @product.custom_colors?
-    .row
-      .col-md-12.custom
-        h2=  "Custom Colors +#{@product.custom_color_price}"
-
-        - @product.custom_color_options.each_slice(2) do |colors|
-            - colors.each do |color|
-              .col-md-6
-                a.color-option.product-option href="#" data-id=color.id data-custom="true" data-name=color.presentation data-price=@product.custom_color_price
-                  span.option-box.color-box class="color-#{color.name}"
-                  span.option-name= color.presentation
-
-- if @product.customizable?
-  #product-customizations-content.product-side-panel
-    button.close-btn
-      = image_tag "cross.png", alt: 'close button'
-    .col-md-12
-      h2 Customize Your Dress
-
-      - @product.customization_options.each do |option|
-        .col-md-10.col-md-offset-1.white-background
-          .row
-            .image-box
-              = image_tag option.image, :alt => option.name
-          .row
-            p.option-name= option.name
-
-            a.customization-option.list-group-item href="#" data-id=option.id data-name=option.name data-price=option.display_price
-              span.option-price= "+#{option.display_price}"
-
-      .row
-        .col-md-10.col-md-offset-1
-          button.btn-clear-customizations.btn.btn-block.btn-black.customization-option data-id="original" data-name="original" data-price=""
-            | Clear Selection
+- if @product.making_options.present?
+  = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }

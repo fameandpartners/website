@@ -1,0 +1,25 @@
+table.table.size-guide
+  thead
+    tr
+      th colspan='3' Sizes
+      th colspan="2" Bust
+      th colspan="2" Waist
+      th colspan="2" Hip
+  tbody
+    tr.subheading-row
+      td.sub-heading Aus/UK
+      td.sub-heading US
+      td.sub-heading DE
+      td.sub-heading cm
+      td.sub-heading Inches
+      td.sub-heading cm
+      td.sub-heading Inches
+      td.sub-heading cm
+      td.sub-heading Inches
+    - data.map do |size|
+      tr
+        - size.map do |key, value|
+          td data-title=key = value
+
+- if current_site_version.is_australia?
+  p style="text-align:center" All of our garments are in AU sizes for Australian customers

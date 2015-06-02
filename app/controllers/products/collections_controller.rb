@@ -9,6 +9,7 @@
 #   :style
 #   :bodyshape
 #   :lp - landing page?
+#   :fast_making - only items with available express making
 #
 # Date is from the parent taxon
 # Banner text over the image in the collection header:
@@ -57,7 +58,7 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def collection_resource(collection_options)
-      resource_args = {
+      @resource_args = {
         site_version:   current_site_version,
         collection:     params[:collection],
         style:          params[:style],
@@ -65,12 +66,13 @@ class Products::CollectionsController < Products::BaseController
         color:          params[:colour] || params[:color],
         bodyshape:      params[:bodyshape],
         discount:       params[:sale] || params[:discount],
+        fast_making:    params[:fast_making],
         order:          params[:order],
         limit:          params[:limit] || 20, # page size
         offset:         params[:offset] || 0
       }.merge(collection_options || {})
 
-      Products::CollectionResource.new(resource_args).read
+      Products::CollectionResource.new(@resource_args).read
     end
 
     # we have route like /dresses/permalink

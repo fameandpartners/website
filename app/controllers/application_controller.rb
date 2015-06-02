@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Common
   include ApplicationHelper
   include PathBuildersHelper
+  include Concerns::SiteVersion
 
   if Rails.env.preproduction?
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
@@ -40,7 +41,7 @@ class ApplicationController < ActionController::Base
 
   def check_site_version
     # Add to cart and submitting forms should not change site version
-    return if (!request.get? || request.xhr?)
+    return if (!request.get? || request.xhr? || request.path == '/checkout')
 
     param_site_version = params[:site_version] || SiteVersion.default.code
 
@@ -294,34 +295,6 @@ class ApplicationController < ActionController::Base
 #    end
   end
 
-  helper_method :current_site_version, :site_versions_enabled?
-
-  def site_versions_enabled?
-    @site_versions_enabled ||= (SiteVersion.count > 1)
-  end
-
-  def current_site_version
-    @current_site_version ||= begin
-      service = FindUsersSiteVersion.new(
-        user: current_spree_user,
-        url_param: params[:site_version],
-        cookie_param: cookies[:site_version],
-        request_ip: request.remote_ip
-      )
-      service.get().tap do |site_version|
-        cookies[:site_version]  ||= site_version.code
-        cookies[:ip_address]    ||= request.remote_ip
-        if current_spree_user && current_spree_user.site_version_id != site_version.id
-          current_spree_user.update_column(:site_version_id, site_version.id)
-        end
-      end
-    end
-  end
-
-  def current_site_version=(site_version)
-    @current_site_version = site_version
-  end
-
   def current_currency
     current_site_version.try(:currency) || Spree::Config[:currency]
   end
@@ -376,7 +349,7 @@ class ApplicationController < ActionController::Base
   end
 
   # this logic should be placed in separate module
-  # somewhere in app/controllers/concerns/returnable 
+  # somewhere in app/controllers/concerns/returnable
   def is_user_came_from_current_app
     return false if request.referrer.blank?
     URI.parse(request.referrer).host == request.host

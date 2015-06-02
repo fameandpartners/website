@@ -1,24 +1,19 @@
-ENV["RAILS_ENV"] ||= 'development'
-require File.expand_path("../environment", __FILE__)
-require 'rubygems'
-require 'sitemap_generator'
-require File.expand_path("../application", __FILE__)
-
-# run locally: 
-# bundle exec ruby config/sitemap.rb && xmllint --format public/sitemap.xm
+# run locally:
+# bundle exec rake sitemap:create
 # bundle exec rake sitemap:refresh - works too, but ping google/bing
+# - if you wish to format the XML into something more human readable, you can use the command `xmllint --format sitemap.xml`
+# => Note: on production, if you run the sitemap:create rake task, it'll automatically ping search engines
+#
 
-# generated using gem 'sitemap_generator'
-# how to run locally
-# - this will put code in readable format
-# bundle exec rake sitemap:refresh:no_ping && xmllint --format public/sitemap.xml
-#
-# on production
-#   RAILS_ENV=production bundle exec ruby config/sitemap.rb 
-#   RAILS_ENV=production bundle exec rake sitemap:refresh:no_ping
-#
-# Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://#{configatron.host}"
+unless Rails.env.development?
+  SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
+    :aws_access_key_id => configatron.aws.s3.access_key_id,
+    :aws_secret_access_key => configatron.aws.s3.secret_access_key,
+    :fog_provider => 'AWS',
+    :fog_directory => configatron.aws.s3.bucket,
+    :fog_region => configatron.aws.s3.region
+  )
+end
 
 SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
@@ -41,110 +36,34 @@ SitemapGenerator::Interpreter.class_eval do
 
     alternates + site_versions.map do |site_version|
       {
-        href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale, nofollow: false  
+        href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale, nofollow: false
       }
     end
   end
-
-  def map_taxon_products_images(taxon_id)
-    taxon_products = Spree::Taxon.find(taxon_id).products.active
-    cropped_products_images_for_sitemap(taxon_products)
-  end
-
-  # A color group is a Spree::OptionValue
-  def map_color_group_products_images(color_id)
-    products_with_color = Spree::Product.active.includes(option_types: :option_values).where('spree_option_values.id' => color_id)
-    cropped_products_images_for_sitemap(products_with_color)
-  end
-
-  private
-
-  def cropped_products_images_for_sitemap(product_array)
-    images = []
-
-    product_array.each do |product|
-      image = Repositories::ProductImages.new(product: product).read(cropped: true)
-      images.push({ loc: image.large, title: product.name }) if image
-    end
-
-    images
-  end
 end
 
-# we create sitemap in xml, /public/sitemap.xml should be only symlink
-options = {
-  compress: true,
+sitemap_options = {
+  compress: Rails.env.production?,
+  default_host: "http://#{configatron.host}",
+  sitemaps_host: "http://#{configatron.aws.host}",
   include_root: false,
-  sitemaps_path: 'sitemap' # folder not in repository
+  sitemaps_path: 'sitemap'
 }
 
-if Rails.env.development?
-  SitemapGenerator::Sitemap.default_host = "http://localhost:3600"
-end
-
-unless Rails.env.development?
-  SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
-    :aws_access_key_id => configatron.aws.s3.access_key_id,
-    :aws_secret_access_key => configatron.aws.s3.secret_access_key,
-    :fog_provider => 'AWS',
-    :fog_directory => configatron.aws.s3.bucket,
-    :fog_region => configatron.aws.s3.region
-  )
-end
-
-SitemapGenerator::Sitemap.create(options) do
-  add root_path, alternates: build_alternates(root_path), priority: 1.0
-
-  # products page
-  Spree::Product.active.each do |product|
-    images_repo = Repositories::ProductImages.new(product: product)
-
-    add(collection_product_path(product), {
-      priority: 0.8,
-      images: images_repo.filter(cropped: false).map { |img| { loc: img.large, title: product.name } },
-      alternates: build_alternates(collection_product_path(product))
-    })
-  end
-
-  # events
-  Repositories::Taxonomy.read_events.each do |taxon|
-    add(build_taxon_path(taxon.name), {
-      priority: 0.7,
-      images: map_taxon_products_images(taxon.id),
-      alternates: build_alternates(build_taxon_path(taxon.name))
-    })
-  end
-
-  # collections
-  Repositories::Taxonomy.read_collections.each do |taxon|
-    add(build_taxon_path(taxon.name), {
-      priority: 0.7,
-      images: map_taxon_products_images(taxon.id),
-      alternates: build_alternates(build_taxon_path(taxon.name))
-    })
-  end
-
-  # styles
-  Repositories::Taxonomy.read_styles.each do |taxon|
-    add(build_taxon_path(taxon.name), {
-      priority: 0.7,
-      images: map_taxon_products_images(taxon.id),
-      alternates: build_alternates(build_taxon_path(taxon.name))
-    })
-  end
-
-  # color groups
-  Repositories::ProductColors.color_groups.each do |color_group|
-    path = colour_path(color_group.name)
-    add(path, {
-      priority: 0.7,
-      images: map_color_group_products_images(color_group.id),
-      alternates: build_alternates(path)
-    })
-  end
-
-  # Static pages
-  localizable_statics_pages = [
+# XML Priorities:
+# => 1.0 for root (generator's `#include_root` default)
+# => 0.9 for categories
+# => 0.8 for products
+# => 0.8 for products' images
+# => 0.7 for pages
+SitemapGenerator::Sitemap.create(sitemap_options) do
+  # Records scopes
+  active_products    = Spree::Product.active
+  events_taxons      = Repositories::Taxonomy.read_events
+  collections_taxons = Repositories::Taxonomy.read_collections
+  styles_taxons      = Repositories::Taxonomy.read_styles
+  colors_taxons      = Repositories::ProductColors.color_groups
+  statics_pages = [
     '/about', '/why-us', '/privacy',
     '/style-consultation', '/fame-chain',
     '/fashionitgirl2015',
@@ -152,21 +71,64 @@ SitemapGenerator::Sitemap.create(options) do
     '/unidays'
   ]
 
-  static_pages = [
-    '/assets/returnform.pdf'
-  ]
+  # Common pages
+  add '/assets/returnform.pdf', priority: 0.7
 
-  localizable_statics_pages.each do |page_path|
-    add page_path, priority: 0.5, alternates: build_alternates(page_path)
+  # Products' images
+  group(filename: 'images') do
+    active_products.find_each do |product|
+      proudct_images = Repositories::ProductImages.new(product: product).read_all
+      proudct_images.each do |image|
+        image_url = URI.parse(image.original)
+        add image_url.path, priority: 0.8, host: "http://#{image_url.host}"
+      end
+    end
   end
 
-  static_pages.each do |page_path|
-    add page_path, priority: 0.5
+  # Creating sitemaps for each site version
+  SiteVersion.find_each do |site_version|
+    sitemap_group_options = {
+      include_root: true,
+      default_host: "http://#{configatron.host}/#{site_version.to_param}",
+      filename: site_version.permalink
+    }
+
+    group(sitemap_group_options) do
+      # Products pages
+      active_products.each do |product|
+        add collection_product_path(product), priority: 0.8
+      end
+
+      # Events
+      events_taxons.each do |taxon|
+        add build_taxon_path(taxon.name), priority: 0.9
+      end
+
+      # Collections
+      collections_taxons.each do |taxon|
+        add build_taxon_path(taxon.name), priority: 0.9
+      end
+
+      # Styles
+      styles_taxons.each do |taxon|
+        add build_taxon_path(taxon.name), priority: 0.9
+      end
+
+      # Color Groups
+      colors_taxons.each do |color_group|
+        add colour_path(color_group.name), priority: 0.9
+      end
+
+      # Static pages
+      statics_pages.each do |page_path|
+        add page_path, priority: 0.7
+      end
+    end
   end
 end
 
 unless Rails.env.development?
-  SitemapGenerator::Sitemap.ping_search_engines('http://images.fameandpartners.com/sitemap/sitemap.xml.gz')
+  SitemapGenerator::Sitemap.ping_search_engines("#{sitemap_options[:sitemaps_host]}/#{sitemap_options[:sitemaps_path]}/sitemap.xml.gz")
 
   # Delete local Sitemap files. They all were uploaded to S3
   FileUtils.rm_rf File.join(SitemapGenerator::Sitemap.public_path, SitemapGenerator::Sitemap.sitemaps_path)

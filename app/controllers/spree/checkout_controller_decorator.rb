@@ -17,7 +17,7 @@ Spree::CheckoutController.class_eval do
       if registration.new_user_created?
         fire_event("spree.user.signup", order: current_order)
         sign_in :spree_user, registration.user
-      end      
+      end
       if !registration.successfull?
         respond_with(@order) do |format|
           format.html { redirect_to checkout_state_path(@order.state) }
@@ -190,7 +190,6 @@ Spree::CheckoutController.class_eval do
 
   def find_payment_methods
     @credit_card_gateway = CreditCardGatewayService.new(@order, current_site_version.currency).gateway
-
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
     end

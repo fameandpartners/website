@@ -26,3 +26,6 @@
 
       - all_products.each_slice(4) do |products|
         = render :partial => '/landing_pages/products_four', :locals => { :products => products }
+
+    .row.relative.more-products
+          = link_to 'More Dresses', dresses_path, class: 'btn btn-black'

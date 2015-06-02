@@ -17,6 +17,7 @@
       <% else %>
         <th><%= sort_link @search, :created_at,   t(:created_at, :scope => 'activerecord.attributes.spree/order') %></th>
       <% end %>
+      <th>Express making</th>
       <th><%= sort_link @search, :projected_delivery_date, 'Projected Delivery' %> </th>
       <th><%= sort_link @search, :number,         t(:number, :scope => 'activerecord.attributes.spree/order') %></th>
       <th><%= sort_link @search, :tracking,       'Tracking ' %></th>
@@ -35,6 +36,11 @@
     <% current_row_class = cycle('odd', 'even') %>
     <tr data-hook="admin_orders_index_rows" class="state-<%= order.state.downcase %> <%= current_row_class %>">
       <td class="align-center"><%= l (@show_only_completed ? order.completed_at : order.created_at).to_date %></td>
+      <td class="align-center">
+        <% if order.has_fast_making_items? %>
+          <h3 style="color: red;">!</h3>
+        <% end %>
+      </td>
       <td class="align-center">
         <% if order.projected_delivery_date.present? %>
           <%= l order.projected_delivery_date.to_date %>

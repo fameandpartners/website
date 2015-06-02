@@ -34,7 +34,9 @@ module Feeds
                 xml.tag! "g:shipping_weight", item[:weight]
 
                 xml.tag! "g:google_product_category", CGI.escapeHTML(item[:google_product_category])
-                xml.tag! "g:product_type", CGI.escapeHTML(item[:google_product_category])
+                item[:google_product_types].each do |product_type|
+                  xml.tag! "g:product_type", CGI.escapeHTML(product_type)
+                end
                 xml.tag! "g:gender", "Female"
                 xml.tag! "g:age_group", "Adult"
                 xml.tag! "g:color", item[:color]

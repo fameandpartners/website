@@ -53,6 +53,7 @@ module Products
               },
               can_be_customized: product.can_be_customized?,
               fast_delivery: product.fast_delivery,
+              fast_making: product.fast_making,
               is_surryhills: helpers.is_surryhills?(product),
               taxon_ids: product.taxons.map(&:id),
               price: product.price.to_f,
@@ -77,9 +78,10 @@ module Products
                 large: image.attachment.url(:large)
               }
             end,
+            cropped_images: cropped_images_for(product_color_value),
             prices: {
-              aud: product.zone_price_for(au_site_version).id,
-              usd: product.zone_price_for(us_site_version).id
+              aud: product.zone_price_for(au_site_version).amount,
+              usd: product.zone_price_for(us_site_version).amount
             }
           )
 
@@ -88,6 +90,22 @@ module Products
       end
 
       index.refresh
+    end
+
+    def self.cropped_images_for(color_variant)
+      find_images = ->(matcher, item) do
+        item.images
+          .select { |i| i.attachment_file_name.downcase.include? matcher }
+          .sort_by(&:position)
+          .collect { |i| i.attachment.url(:large) }
+      end
+
+      cropped_images = find_images.call('crop', color_variant)
+
+      if cropped_images.blank?
+        cropped_images = find_images.call('front', color_variant)
+      end
+      cropped_images
     end
   end
 end

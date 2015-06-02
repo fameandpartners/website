@@ -1,0 +1,27 @@
+#product-color-content.product-side-panel
+  button.close-btn
+    = image_tag "cross.png", alt: 'close button'
+  .sizes-container.grey
+    .row
+      .col-md-12.recommended
+        h2 Recommended Colors
+
+        - @product.default_color_options.each do |color|
+          .col-md-6
+            a.color-option.product-option href="#" data-id=color.id  data-name=color.presentation
+              span.option-box.color-box class="color-#{color.name}"
+              span.option-name= color.presentation
+
+  - if @product.custom_colors?
+    .row
+      .col-md-12.custom
+        h2=  "Custom Colors +#{@product.custom_color_price}"
+        p.explanation
+          | Express making is only available on our recommended colours
+
+        - @product.custom_color_options.each_slice(2) do |colors|
+            - colors.each do |color|
+              .col-md-6
+                a.color-option.product-option href="#" data-id=color.id data-custom="true" data-name=color.presentation data-price=@product.custom_color_price
+                  span.option-box.color-box class="color-#{color.name}"
+                  span.option-name= color.presentation

@@ -49,9 +49,10 @@
 
           .row
             .col-md-5
-              button.btn.cancel = link_to 'cancel', user_orders_path, remote: true
+
             .col-md-5.col-md-offset-2
-              button.btn.submit = link_to 'submit', user_orders_path
+              button.btn.btn-black.submit Submit
+              = link_to 'Back to orders', user_orders_path, :class => 'cancel'
 
 
 = content_for :inline_javascript do

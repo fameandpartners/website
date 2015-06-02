@@ -1,0 +1,10 @@
+- if shipment
+  - if shipment.order.can_ship?
+    = form_for shipment, url: main_app.admin_shipment_path(shipment.id), remote: true, html: { class: 'shipment_tracking_number_form' } do |f|
+      = f.hidden_field :id
+      = f.text_field :tracking, placeholder: shipment.state, required: true
+      button type='submit' onClick="return confirm('This will email the customer! Are you sure?');"
+        = shipment.try(:shipping_method).try(:name) || 'Ship'
+  - else
+    span => shipment.state.capitalize
+    span => shipment.order.shipment_state.capitalize

@@ -17,7 +17,8 @@ module Orders
                    :shipments,
                    :site_version,
                    :state,
-                   :to_param
+                   :to_param,
+                   :has_fast_making_items?
 
     attr_reader :order, :items
 
@@ -72,6 +73,13 @@ module Orders
         order.shipments.first.tracking
       end
     end
-    
+
+    def return_requested?
+      return_request.present?
+    end
+        
+    def return_request
+      @return_request ||= OrderReturnRequest.where(:order_id => order.id).first
+    end
   end
 end

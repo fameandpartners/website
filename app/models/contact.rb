@@ -4,14 +4,16 @@ class Contact
   SUBJECTS = [
     [
       'Help making a purchase',
-      ['Delivery', 'Fabrics','Product', 'Styling tips', 'Customization', 'Size']
+      [
+        'Delivery', 'Fabrics', 'Product', 'Styling tips', 'Customization', 'Size'
+      ]
     ],
     [
       'Help with an existing purchase',
       [
-        'Order Status', 'Order Cancellation','Address Change Request',
-        'Tracking Number','Lost Package','Missing Item','Wrong Item/Order Received',
-        'Damaged/Defective Item','Return','Refund','Site Issues'
+        'Order Status', 'Order Cancellation', 'Address Change Request',
+        'Tracking Number', 'Lost Package', 'Missing Item', 'Wrong Item/Order Received',
+        'Damaged/Defective Item', 'Return', 'Refund', 'Site Issues'
       ]
     ],
     [

@@ -68,6 +68,10 @@ ruby:
             h3.phone itemprop="telephone" Customer Support: 1300 924 860
           - else
             h3.phone itemprop="telephone" Customer Support: 866 527 7797
+
+          - if order.has_fast_making_items?
+            p.support If you want to find out the exact delivery date of your order, please get in touch with our customer service via email: #{ mail_to('team@fameandpartners.com') } or phone: 1300 924 860
+
           p.support
             ' Check out our
             =' link_to 'Support Site', 'http://support.fameandpartners.com', target: '_blank'
@@ -79,11 +83,6 @@ ruby:
           - unless current_spree_user.blank?
             p
               button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
-
-          - if successfully_ordered
-            .hide
-              = render 'shared/sales_conversion_pixels', locals: {order: @order}
-
         .row
           p Share your purchase with your friends so no one buys the same dress for your event!
           .social.addthis_toolbox.addthis_default_style *addthis_config
@@ -92,3 +91,6 @@ ruby:
             a.addthis_button_tweet
             a.addthis_counter.addthis_pill_style
           script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
+
+- if successfully_ordered || params[:force_tracking]
+  = render 'shared/sales_conversion_pixels', locals: { order: @order }
