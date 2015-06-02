@@ -8,6 +8,7 @@ window.ShoppingBag = class ShoppingBag
     @template   = JST['templates/shopping_bag']
     @cart       = options.cart # window.shopping_cart
     @rendered   = false
+    @auto_open  = options.auto_open
 
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
@@ -25,6 +26,9 @@ window.ShoppingBag = class ShoppingBag
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
 
     @cart.on('change', @render)
+
+    if @auto_open
+      @open()
     @
 
   render: () ->

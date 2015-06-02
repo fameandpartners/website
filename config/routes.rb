@@ -56,6 +56,10 @@ FameAndPartners::Application.routes.draw do
     get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
   end
 
+  namespace :widgets do
+    get 'main_nav' => 'site_navigations#main_nav'
+  end
+
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
@@ -79,6 +83,7 @@ FameAndPartners::Application.routes.draw do
     get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
     get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
 
+    get '/lookbook' => 'statics#lookbook', :as => :lookbook
     get '/here-comes-the-sun-collection' => 'statics#here_comes_the_sun', :as => :here_comes_the_sun_collection
     get '/all-size' => 'statics#all_size', :as => :all_size_collection
 
