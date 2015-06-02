@@ -171,16 +171,16 @@ GIT
       tilt
 
 PATH
-  remote: ./style_quiz
-  specs:
-    style_quiz (0.0.1)
-      jquery-rails
-      rails (~> 3.2.21)
-
-PATH
   remote: engines/fame_favicon
   specs:
     fame_favicon (0.0.1)
+      rails (~> 3.2.21)
+
+PATH
+  remote: engines/style_quiz
+  specs:
+    style_quiz (0.0.1)
+      jquery-rails
       rails (~> 3.2.21)
 
 GEM
