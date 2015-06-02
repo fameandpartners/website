@@ -7,26 +7,9 @@
     h4.font-family-secondary.text-uppercase - CLICK ON THE SCALE, FROM LEAST IMPORTANT TO VERY IMPORTANT
   .grid-container
     .rank-sexy.rank-box
-      .rank-cell
-        .rank-item.rank-sexy-item-9
-      .rank-cell
-        .rank-item.rank-sexy-item-8
-      .rank-cell
-        .rank-item.rank-sexy-item-7
-      .rank-cell
-        .rank-item.rank-sexy-item-6
-      .rank-cell
-        .rank-item.rank-sexy-item-5
-      .rank-cell
-        .rank-item.rank-sexy-item-4
-      .rank-cell
-        .rank-item.rank-sexy-item-3
-      .rank-cell
-        .rank-item.rank-sexy-item-2
-      .rank-cell
-        .rank-item.rank-sexy-item-1
-      .rank-cell
-        .rank-item.rank-sexy-item-0
+      - question.answers.reverse.each do |answer|
+        .rank-cell data-value=(answer)
+          .rank-item class="rank-sexy-item-#{ answer }"
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
       .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }

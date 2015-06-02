@@ -8,14 +8,10 @@
   .grid-container
     .quiz-catalog
       .row
-        .col-2.dress-style.selected
-          .quiz-catalog-picture 
-            = image_tag 'http://fashiongum.com/wp-content/uploads/2015/01/20-Fancy-Wedding-Guest-Looks-For-Summer-1.jpg'
-            .checkmark.checkmark-lg
-        - (1..11).each do
-          .col-2.dress-style
+        - question.answers.each_with_index do |image, index|
+          .col-2.dress-style class=(index == 0 ? 'selected' : 0) data-value=(image.value)
             .quiz-catalog-picture 
-              = image_tag 'http://fashiongum.com/wp-content/uploads/2015/01/20-Fancy-Wedding-Guest-Looks-For-Summer-1.jpg'
+              = image_tag image.src
               .checkmark.checkmark-lg
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
