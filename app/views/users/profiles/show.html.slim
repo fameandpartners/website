@@ -1,7 +1,67 @@
 .user-account-page-title
   .container
-    .page-title--details
-      h1.user-account-title.no-padding-bottom.text-white Account Settings
+    .style-profile-header
+      .row
+        .col-sm-4
+          .style-box.style-box-primary
+            = image_tag '_style_profile/header/glam.jpg', class: 'img-responsive'
+            .style-title: .style-title-text glam
+            .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 50%
+        .col-sm-4.text-center
+          .row
+            .col-xs-6
+              .style-box
+                = image_tag '_style_profile/header/edgy.jpg', class: 'img-responsive'
+                .style-title: .style-title-text edgy
+                .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 20%
+            .col-xs-6
+              .style-box
+                = image_tag '_style_profile/header/girly.jpg', class: 'img-responsive'
+                .style-title: .style-title-text girly
+                .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 20%
+          .style-profile-actions
+            = link_to 'Redo the style quiz', '#', class: 'btn btn-md btn-block btn-black'
+            .or-share: .rhombus.rhombus-empty: .rhombus-text-holder: .rhombus-text OR 
+            p SHARE THE QUIZ
+            ul.footer-social
+              li.footer-social--item
+                = link_to configatron.links.facebook, target: :blank, class: 'facebook' do
+                  = image_tag '_icons/facebook.png'
+              li.footer-social--item
+                = link_to configatron.links.pinterest, target: :blank, class: 'pinterest' do
+                  = image_tag '_icons/pinterest.png'
+              li.footer-social--item
+                = link_to configatron.links.instagram, target: :blank, class: 'instagram' do
+                  = image_tag '_icons/instagram.png'
+              li.footer-social--item
+                = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
+                  = image_tag '_icons/twitter.png'
+
+        .col-sm-4
+          .row
+            .col-xs-6
+              .style-box
+                = image_tag '_style_profile/header/classic.jpg', class: 'img-responsive'
+                .style-title: .style-title-text classic
+                .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 20%
+            .col-xs-6
+              .style-box
+                = image_tag '_style_profile/header/bohemian.jpg', class: 'img-responsive'
+                .style-title: .style-title-text boho
+                .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 20%
+          = link_to '#', class: 'book-free'
+            ' Book a free
+            br
+            ' styling
+            br
+            ' consultation.
+            br
+            span.icon.icon-hr-right
+
+
+    / .page-title--details
+    /   h1.user-account-title.no-padding-bottom.text-white Account Settings
+
 
 .page-content.user.profiles.show
   .container.relative

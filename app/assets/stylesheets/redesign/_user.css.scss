@@ -1,3 +1,100 @@
+// Profile header 
+.style-profile-header {
+  
+  .style-box {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20%;
+    font-family: Forum;
+    &.style-box-primary {
+      .style-title-text { font-size: 4em;}
+      .rhombus { font-size: 2em;}
+    }
+    .style-title {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      text-align: center;
+      &:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: 1px;
+        height: 100%;
+        margin-left: -2px;
+      }
+    }
+    .style-title-text {
+      color: #fff;
+      font-size: 2.5em;
+      text-transform: uppercase;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    .style-result {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .rhombus {
+      margin-bottom: -49%;
+      font-size: 1.2em;
+    }
+  }
+
+  .or-share {
+    display: inline-block;
+    margin: 25px 0 20px;
+    width: 64px;
+  }
+
+  .rhombus-container {
+    display: inline-block;
+    width: 38%;
+    max-width: 106px;
+    line-height: 0;
+  }
+
+  .style-profile-actions {
+    margin-top: 15px;
+  }
+
+  .book-free {
+    background-color: #eeddf0;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 15px;
+    padding: 15px;
+    display: block;
+    font-weight: 600;
+    line-height: 1.1;
+    color: #000;
+    &:hover { color: #000;}
+    .icon {
+      position: relative;
+      font-size: 30px;
+      &:after {
+        content: '';
+        height: 2px;
+        width: 30px;
+        position: absolute;
+        top: 50%;
+        margin-top: -1px;
+        right: 50%;
+        background-color: #000;
+      }
+    }
+  }
+}
+// @end Profile header
+// -----------------
+
 // Page header
 .user-account-page-title {
   background-color: $peach-bg;
