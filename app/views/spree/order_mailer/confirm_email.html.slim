@@ -72,7 +72,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
 
                 p style="margin: 0;"
                   ' If you want to check the progress of your order, please log in to your personal account here: 
-                  =' login_url
+                  => login_url
 
                 - if @order.user && @order.user.automagically_registered?
                   p style="margin: 0;"
