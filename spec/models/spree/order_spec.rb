@@ -29,5 +29,4 @@ describe Spree::Order, :type => :model do
       it{ expect(order).to_not be_shipped }
     end
   end
-  
 end

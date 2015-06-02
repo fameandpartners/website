@@ -36,33 +36,9 @@ SitemapGenerator::Interpreter.class_eval do
 
     alternates + site_versions.map do |site_version|
       {
-        href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale, nofollow: false  
+        href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale, nofollow: false
       }
     end
-  end
-
-  def map_taxon_products_images(taxon_id)
-    taxon_products = Spree::Taxon.find(taxon_id).products.active
-    cropped_products_images_for_sitemap(taxon_products)
-  end
-
-  # A color group is a Spree::OptionValue
-  def map_color_group_products_images(color_id)
-    products_with_color = Spree::Product.active.includes(option_types: :option_values).where('spree_option_values.id' => color_id)
-    cropped_products_images_for_sitemap(products_with_color)
-  end
-
-  private
-
-  def cropped_products_images_for_sitemap(product_array)
-    images = []
-
-    product_array.each do |product|
-      image = Repositories::ProductImages.new(product: product).read(cropped: true)
-      images.push({ loc: image.large, title: product.name }) if image
-    end
-
-    images
   end
 end
 
@@ -78,71 +54,69 @@ sitemap_options = {
 # => 1.0 for root (generator's `#include_root` default)
 # => 0.9 for categories
 # => 0.8 for products
+# => 0.8 for products' images
 # => 0.7 for pages
 SitemapGenerator::Sitemap.create(sitemap_options) do
+  # Records scopes
+  active_products    = Spree::Product.active
+  events_taxons      = Repositories::Taxonomy.read_events
+  collections_taxons = Repositories::Taxonomy.read_collections
+  styles_taxons      = Repositories::Taxonomy.read_styles
+  colors_taxons      = Repositories::ProductColors.color_groups
+  statics_pages = [
+    '/about', '/why-us', '/privacy',
+    '/style-consultation', '/fame-chain',
+    '/fashionitgirl2015',
+    '/bridesmaid-dresses', '/sale-dresses',
+    '/unidays'
+  ]
+
   # Common pages
   add '/assets/returnform.pdf', priority: 0.7
 
+  # Products' images
+  group(filename: 'images') do
+    active_products.find_each do |product|
+      proudct_images = Repositories::ProductImages.new(product: product).read_all
+      proudct_images.each do |image|
+        image_url = URI.parse(image.original)
+        add image_url.path, priority: 0.8, host: "http://#{image_url.host}"
+      end
+    end
+  end
+
   # Creating sitemaps for each site version
   SiteVersion.find_each do |site_version|
-
     sitemap_group_options = {
       include_root: true,
       default_host: "http://#{configatron.host}/#{site_version.to_param}",
       filename: site_version.permalink
     }
 
-    statics_pages = [
-      '/about', '/why-us', '/privacy',
-      '/style-consultation', '/fame-chain',
-      '/fashionitgirl2015',
-      '/bridesmaid-dresses', '/sale-dresses',
-      '/unidays'
-    ]
-
     group(sitemap_group_options) do
-
       # Products pages
-      Spree::Product.active.each do |product|
-        images_repo = Repositories::ProductImages.new(product: product)
-
-        add(collection_product_path(product), {
-          priority: 0.8,
-          images: images_repo.filter(cropped: false).map { |img| { loc: img.large, title: product.name } }
-        })
+      active_products.each do |product|
+        add collection_product_path(product), priority: 0.8
       end
 
       # Events
-      Repositories::Taxonomy.read_events.each do |taxon|
-        add(build_taxon_path(taxon.name), {
-          priority: 0.9,
-          images: map_taxon_products_images(taxon.id)
-        })
+      events_taxons.each do |taxon|
+        add build_taxon_path(taxon.name), priority: 0.9
       end
 
       # Collections
-      Repositories::Taxonomy.read_collections.each do |taxon|
-        add(build_taxon_path(taxon.name), {
-          priority: 0.9,
-          images: map_taxon_products_images(taxon.id)
-        })
+      collections_taxons.each do |taxon|
+        add build_taxon_path(taxon.name), priority: 0.9
       end
 
       # Styles
-      Repositories::Taxonomy.read_styles.each do |taxon|
-        add(build_taxon_path(taxon.name), {
-          priority: 0.9,
-          images: map_taxon_products_images(taxon.id)
-        })
+      styles_taxons.each do |taxon|
+        add build_taxon_path(taxon.name), priority: 0.9
       end
 
       # Color Groups
-      Repositories::ProductColors.color_groups.each do |color_group|
-        path = colour_path(color_group.name)
-        add(path, {
-          priority: 0.9,
-          images: map_color_group_products_images(color_group.id)
-        })
+      colors_taxons.each do |color_group|
+        add colour_path(color_group.name), priority: 0.9
       end
 
       # Static pages

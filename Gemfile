@@ -50,6 +50,9 @@ gem 'pry-rails'
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
 
+
+gem 'fame_favicon', path: 'engines/fame_favicon'
+
 # spree extensions for authentication
 gem 'spree_auth_devise',
   :github => 'spree/spree_auth_devise',

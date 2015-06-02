@@ -1,0 +1,33 @@
+@import 'redesign/vars';
+
+@import 'redesign/header';
+
+@import 'redesign/stylesheets/bootstrap';
+@import 'redesign/stylesheets/styles';
+
+.nav-menu-container {
+  font-family: $font-family-secondary;
+}
+
+.nav-menu-container .menu-item span {
+	font-weight: 500;
+}
+
+.mobile-logo {
+  margin-top: -3px;
+}
+
+.search-input {
+  position: relative;
+  .close-search-btn {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    cursor: pointer;
+  }
+}
+
+.form-control {
+  padding: 10px 16px;
+  font-size: 14px;
+}

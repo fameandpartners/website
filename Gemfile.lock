@@ -175,6 +175,9 @@ PATH
   specs:
     style_quiz (0.0.1)
       jquery-rails
+  remote: engines/fame_favicon
+  specs:
+    fame_favicon (0.0.1)
       rails (~> 3.2.21)
 
 GEM
@@ -793,6 +796,7 @@ DEPENDENCIES
   event_sourced_record
   execjs (= 1.4.0)
   factory_girl_rails (= 4.2.1)
+  fame_favicon!
   fog
   geoip
   google_drive (= 1.0.0)
