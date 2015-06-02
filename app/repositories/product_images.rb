@@ -5,6 +5,9 @@
 #   Repositories::ProductImages.new(product: product).filter(color_id: color_id)
 module Repositories
 class ProductImages
+  PRODUCT_COLOR_VALUE     = 'ProductColorValue'
+  SPREE_VARIANT           = 'Spree::Variant'
+
   attr_reader :product
 
   def initialize(options = {})
@@ -17,6 +20,44 @@ class ProductImages
         (images_from_variants + images_from_product_color_values).flatten.compact.sort_by {|image| image.position.to_i }
       end
     end
+  end
+
+  def get_product_images(products)
+    # load images for all products and split them by products
+    table_name = Spree::Image.quoted_table_name
+
+    variants_including_master_ids_by_product = products.inject({}) do |result, product|
+      result[product.id] = product.variants.select {|v| v.deleted_at.nil?}.map(&:id)
+      result
+    end
+
+    variants_including_master_ids = variants_including_master_ids_by_product.values.flatten.uniq
+
+    product_images = Spree::Image.includes(:viewable).where(
+      "(#{table_name}.viewable_type = '#{PRODUCT_COLOR_VALUE}' AND #{table_name}.viewable_id IN (?))
+        OR
+      (#{table_name}.viewable_type = '#{SPREE_VARIANT}' AND #{table_name}.viewable_id IN (?))",
+      products.map(&:product_color_value_ids).flatten.uniq, variants_including_master_ids
+    ).inject({}) do |result, image|
+      if image.viewable_type == PRODUCT_COLOR_VALUE
+        products.select {|product| product.product_color_value_ids.include?(image.viewable_id)}.each do |product|
+          result[product.id] ||= []
+          result[product.id] << image
+        end
+      elsif image.viewable_type == SPREE_VARIANT
+        products.select {|product| variants_including_master_ids_by_product[product.id].include?(image.viewable_id)}.each do |product|
+          result[product.id] ||= []
+          result[product.id] << image
+        end
+      end
+      result
+    end
+
+    product_images.each do |product_id, images|
+      images.sort_by!(&:position)
+    end
+
+    product_images
   end
 
   # filter read_all by
