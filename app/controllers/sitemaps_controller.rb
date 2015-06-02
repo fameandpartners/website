@@ -4,7 +4,14 @@ class SitemapsController < ActionController::Base
   # GET /sitemap_index.xml
   # GET /sitemap_index.xml.gz
   def index
-    redirect_to configatron.sitemap_url
+    redirect_to configatron.sitemap_url, status: :moved_permanently
+  end
+
+  # GET /images_sitemap.xml.gz
+  # GET /images_sitemap.xml
+  def images
+    images_sitemap_url = URI.join(SITEMAP_BASE_URL, 'images.xml.gz').to_s
+    redirect_to images_sitemap_url, status: :moved_permanently
   end
 
   # GET /sitemap.xml
