@@ -42,8 +42,7 @@ module Spree
           :payments => [],
           :line_items => {:variant => :product, :fabrication => [], :making_options => []},
           :bill_address => [:state, :country],
-          :ship_address => [:state, :country],
-          :order_return_requests => []
+          :ship_address => [:state, :country]
         ).
             page(page).
             per(per_page)
@@ -66,7 +65,7 @@ module Spree
       private
 
       def order_shipment_states
-        Spree::Order.uniq.pluck(:shipment_state)
+        @order_shipment_states ||= Spree::Order.shipment_states
       end
 
       def hide_line_items
