@@ -6,95 +6,22 @@
   .grid-container
     / Hair
     .quiz-catalog.text-center.hair
-      .quiz-catalog-item.selected
-        .quiz-catalog-picture
-          .hair-box.black
-        .quiz-catalog-title
-          | black
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .hair-box.brunette
-        .quiz-catalog-title
-          | brunette
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .hair-box.auburn
-        .quiz-catalog-title
-          | auburn
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .hair-box.red
-        .quiz-catalog-title
-          | red
-          .checkmark
-      .quiz-catalog-item.selected
-        .quiz-catalog-picture
-          .hair-box.blonde-strawberry
-        .quiz-catalog-title
-          | strawberry 
-          br
-          | blonde
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .hair-box.blonde
-        .quiz-catalog-title
-          | blonde
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .hair-box.platinum
-        .quiz-catalog-title
-          | platinum
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .hair-box.coloured
-        .quiz-catalog-title
-          | coloured
-          .checkmark
-    
-    / Eyes
+      - question.answers.hair.each_with_index do |color_name, index|
+        .quiz-catalog-item class="#{ index == 0 ? 'selected' : '' }" data-value=(color_name)
+          .quiz-catalog-picture
+            .hair-box class=(color_name.parameterize)
+          .quiz-catalog-title
+            => color_name
+            .checkmark
+
     .quiz-catalog.text-center.eyes
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .eyes-box.brown
-        .quiz-catalog-title
-          | brown
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .eyes-box.hazel
-        .quiz-catalog-title
-          | hazel
-          .checkmark
-      .quiz-catalog-item.selected
-        .quiz-catalog-picture
-          .eyes-box.green
-        .quiz-catalog-title
-          | green
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .eyes-box.blue
-        .quiz-catalog-title
-          | blue
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .eyes-box.grey
-        .quiz-catalog-title
-          | grey
-          .checkmark
-      .quiz-catalog-item
-        .quiz-catalog-picture
-          .eyes-box.amber
-        .quiz-catalog-title
-          | amber
-          .checkmark
+      - question.answers.eyes.each_with_index do |color_name, index|
+        .quiz-catalog-item class="#{ index == 0 ? 'selected' : '' }" data-value=(color_name)
+          .quiz-catalog-picture
+            .eyes-box class=(color_name.parameterize)
+          .quiz-catalog-title
+            = color_name
+            .checkmark
     
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }

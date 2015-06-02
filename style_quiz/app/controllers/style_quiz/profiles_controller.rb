@@ -11,8 +11,35 @@ module StyleQuiz
             birthdate: 20.year.ago.to_date.to_s(:db)
           })
         ),
-        OpenStruct.new(name: 'color-palette',       template: 'style_quiz/questions/color_palette'),
-        OpenStruct.new(name: 'color-dresses',       template: 'style_quiz/questions/color_dresses'),
+        OpenStruct.new(
+          name: 'color-palette',
+          template: 'style_quiz/questions/color_palette',
+          answers: OpenStruct.new({
+            hair: ['black', 'brunette', 'auburn', 'red', 'strawberry blonde', 'blonde', 'platinum', 'coloured'],
+            eyes: ['brown', 'hazel', 'green', 'blue', 'grey', 'amber']
+          })
+        ),
+        OpenStruct.new(
+          name: 'color-dresses',
+          template: 'style_quiz/questions/color_dresses',
+          answers: [
+            ['Black', '#000'],
+            ['Red',   '#F00'],
+            ['White', '#FFF'],
+            ['Plum',  '#992b5f'],
+            ['Green', '#006028'],
+            ['Yellow','#ffe800'],
+            ['Mauve', '#be8fbd'],
+            ['Blue',  '#2f3f89'],
+            ['Black', '#000'],
+            ['Red',   '#F00'],
+            ['Grey',  '#F5F5F5'],
+            ['Plum',  '#992b5f'],
+            ['Green', '#006028'],
+            ['Yellow','#ffe800'],
+            ['Mauve', '#be8fbd']
+          ]
+        ),
         OpenStruct.new(name: 'body-size-shape',     template: 'style_quiz/questions/body_size_shape'),
         OpenStruct.new(name: 'everyday-style',      template: 'style_quiz/questions/everyday_style'),
         OpenStruct.new(name: 'dream-style',         template: 'style_quiz/questions/dream_style'),
