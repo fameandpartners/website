@@ -4,6 +4,8 @@ Spree::LineItem.class_eval do
 
   has_one :fabrication
 
+  has_many :making_options, foreign_key: :product_id, class_name: '::LineItemMakingOption', dependent: :destroy
+
   after_save do
     order.clean_cache!
   end
@@ -13,11 +15,23 @@ Spree::LineItem.class_eval do
   end
 
   def price
+    total_price = super
+
+    total_price += making_options_price
+
     if personalization.present?
-      super + personalization.price
-    else
-      super
+      total_price += personalization.price
     end
+
+    total_price
+  end
+
+  def fast_making?
+    making_options.any? {|option| option.product_making_option.fast_making? }
+  end
+
+  def making_options_price
+    making_options.sum(&:price)
   end
 
   def in_sale?
@@ -45,6 +59,11 @@ Spree::LineItem.class_eval do
 
       array.to_sentence({ :words_connector => ", ", :two_words_connector => ", " })
     end
+  end
+
+  def making_options_text
+    return '' if making_options.blank?
+    making_options.map{|option| option.name.upcase }.join(', ')
   end
 
   def cart_item

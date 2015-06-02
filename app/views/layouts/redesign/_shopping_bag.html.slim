@@ -2,48 +2,14 @@ ruby:
   shopping_bag_init = "
     window.app.shopping_bag = new ShoppingBag({
       cart: window.app.shopping_cart,
-      overlay: '#shadow-layer',
-      container: '#cart',
-      toggle_link: '#cart-trigger'
+      overlay:     '#shadow-layer',
+      container:   '#cart',
+      toggle_link: '#cart-trigger',
+      auto_open:   /open_cart=true/.test(window.location.search)
     });
   "
 = content_for :inline_javascript do
   = raw shopping_bag_init
 
-/- @cart = UserCart::UserCartResource.new(order: current_order).read
 #shadow-layer
 #cart
-  - if @cart.present?
-    .cart--top.text-center
-      .pull-left.close-cart
-        = image_tag "line-arrow.svg", class: "line-arrow arrow-bag", alt: 'Submit'
-      .pull-right.close-cart
-        span.cart
-          = image_tag 'Cart.svg', class: 'cart-icon'
-          span.cart-amount = @cart.item_count
-      div
-        h2.cart-title Shopping Bag
-
-    - if @cart.products.present?
-      ul.cart-items
-        - @cart.products.each do |product|
-          li
-            = image_tag product.image.large, class: 'img-responsive pull-left cart-item-image'
-            a.fa.fa-close.pull-right.link-grey.remove-product href="#0"
-            span.qty = "#{ product.quantity}x"
-            = product.name
-            .price = product.price.display_price
-      /! cd-cart-items
-    .cart-total
-      p
-        | Total
-        span = @cart.display_total.to_s
-    /! cd-cart-total
-    .cart--call-to-actions.row
-      .col-lg-6.no-padding-left.close-cart.no-padding-lg
-        button.btn.btn-charcoal.btn-block Shop More
-        br
-      .col-lg-6.no-padding-right.no-padding-lg
-        = button_to 'Checkout', spree.checkout_path, class: 'btn btn-black btn-block', method: :get
-        br
-  /! cd-cart

@@ -4,6 +4,7 @@ FameAndPartners::Application.routes.draw do
   scope '(:site_version)' do
     get 'sitemap_index', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
     get 'sitemap', to: 'sitemaps#show', format: true, constraints: { format: /xml|xml.gz/ }
+    get 'images_sitemap', to: 'sitemaps#images', format: true, constraints: { format: /xml|xml.gz/ }
   end
 
   match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
@@ -55,6 +56,10 @@ FameAndPartners::Application.routes.draw do
     get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
   end
 
+  namespace :widgets do
+    get 'main_nav' => 'site_navigations#main_nav'
+  end
+
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
@@ -78,6 +83,7 @@ FameAndPartners::Application.routes.draw do
     get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
     get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
 
+    get '/lookbook' => 'statics#lookbook', :as => :lookbook
     get '/here-comes-the-sun-collection' => 'statics#here_comes_the_sun', :as => :here_comes_the_sun_collection
     get '/all-size' => 'statics#all_size', :as => :all_size_collection
 
@@ -88,6 +94,8 @@ FameAndPartners::Application.routes.draw do
     get '/prom-collection' => 'statics#prom', :as => :prom_collection
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
+    get '/getitquick' => 'products/collections#show', defaults: { fast_making: true }, as: 'fast_making_dresses'
+
     post '/shared/facebook' => 'competition/events#share'
 
     scope '/user_cart', module: 'user_cart' do
@@ -96,7 +104,10 @@ FameAndPartners::Application.routes.draw do
       get '/details'      => 'details#show'
       post '/promotion'   => 'promotions#create'
 
-      resources :products, only: [:create, :edit, :update, :destroy]
+      post 'products' => 'products#create'
+      delete 'products/:line_item_id' => 'products#destroy'
+      delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
+      delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
     scope '/dresses' do
@@ -365,6 +376,8 @@ FameAndPartners::Application.routes.draw do
             post :update_positions, as: :update_positions
           end
         end
+
+        resources :making_options, controller: 'product_making_options'
 
         resources :accessories, controller: 'product_accessories' do
           post :update_positions, on: :collection

@@ -68,6 +68,10 @@ ruby:
             h3.phone itemprop="telephone" Customer Support: 1300 924 860
           - else
             h3.phone itemprop="telephone" Customer Support: 866 527 7797
+
+          - if order.has_fast_making_items?
+            p.support If you want to find out the exact delivery date of your order, please get in touch with our customer service via email: #{ mail_to('team@fameandpartners.com') } or phone: 1300 924 860
+
           p.support
             ' Check out our
             =' link_to 'Support Site', 'http://support.fameandpartners.com', target: '_blank'

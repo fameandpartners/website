@@ -2,6 +2,7 @@
 <table class="index sortable" id="listing_banner_boxes" data-sortable-link="<%= update_positions_admin_banner_boxes_url() %>">
 	<colgroup>
 	<col style="width: 5%">
+	<col style="width: 5%">
 	<col style="width: 15%;">
 	<col style="width: 10%;">
 	<col style="width: 10%;">
@@ -10,6 +11,7 @@
 <thead>
 	<tr data-hook="admin_products_index_headers">
 		<th colspan="2"><%= t(:thumbnail) %></th>
+		<th><%= t(:published) %></th>
 		<th><%= t(:category) %></th>
 		<th><%= t(:url) %></th>
 		<th data-hook="admin_products_index_header_actions" class="actions"></th>
@@ -22,6 +24,7 @@
 			<span class="handle"></span>
 		</td>
 		<td class="align-center"><%= image_tag(banner_box.attachment(:mini)) %></td>
+    <td class="align-center"><%= banner_box.enabled? ? 'published' : '' %></td>
 		<td class="align-center"><%= banner_box.category rescue '' %></td>
 		<td class="align-center"><%= banner_box.url rescue '' %></td>
 		<td class="actions" data-hook="admin_products_index_row_actions">

@@ -8,7 +8,6 @@ module Orders
 
     def_delegators :shipment, :shipped?, :shipped_at
     def_delegators :@wrapped_order,
-                   :projected_delivery_date,
                    :tracking_number,
                    :number,
                    :total_items,
@@ -19,6 +18,8 @@ module Orders
                    :id,
                    :variant,
                    :personalization,
+                   :making_options,
+                   :fast_making?,
                    :factory,
                    :fabrication,
                    :price,
@@ -43,6 +44,11 @@ module Orders
 
     def style_name
       variant.try(:product).try(:name) || 'Missing Variant'
+    end
+
+    def projected_delivery_date
+      return unless wrapped_order.order.completed?
+      @projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(@item, @wrapped_order).delivery_date.try(:to_date)
     end
 
     def fabrication_status
@@ -110,6 +116,7 @@ module Orders
         :line_item               => id,
         :total_items             => total_items,
         :completed_at            => order.completed_at.to_date,
+        :express_making          => fast_making? ? "TRUE" : '',
         :projected_delivery_date => projected_delivery_date,
         :tracking_number         => tracking_number,
         :shipment_date           => shipped_at.try(:to_date),
@@ -152,6 +159,7 @@ module Orders
       cn_headers = {
         order_number:            '(订单号码)',
         completed_at:            '(订单日期)',
+        express_making:          '(快速决策)',
         projected_delivery_date: '(要求出厂日期)',
         tracking_number:         '(速递单号)',
         style:                   '(款号)',

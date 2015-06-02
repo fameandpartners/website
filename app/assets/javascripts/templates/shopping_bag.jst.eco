@@ -15,15 +15,44 @@
 </div>
 <ul class="cart-items">
   <% for product in @cart.products: %>
-    <li>
-      <a href="<%= product.path %>">
-        <img class="img-responsive pull-left cart-item-image" src="<%= product.image.large %>" />
-      </a>
-      <a class="fa fa-close pull-right link-grey remove-product" data-id="<%= product.line_item_id %>" href="#0"></a>
-      <span class="qty"><%= product.quantity %>x</span>
-      <a href="<%= product.path %>"><%= product.name %></a>
-      <div class="price">
-        <%= product.price.display_price %>
+    <li class="cart-item" data-id="<%= product.line_item_id %>">
+      <a class="fa fa-close pull-right link-grey remove-product" href="#0"></a>
+      <div class="cart-item-image-holder pull-left">
+        <a href="<%= product.path %>">
+          <img class="img-responsive pull-left cart-item-image" src="<%= product.image.large %>" />
+        </a>
+      </div>
+      <div class="cart-item-info">
+        <div class="heading">
+          <span class="qty"><%= product.quantity %> x </span>
+          <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
+        </div>
+        <div class="clearfix">
+          <div class="pull-left small">
+            Size: <span><%= product.size.presentation %>, </span>
+            Color: <span class="color"><%= product.color.name %></span> 
+          </div>
+          <div class="text-muted pull-right"><%= product.price.display_price %></div>
+        </div>
+        <div class="cart-prices">
+          <% for making_option in product.making_options: %>
+            <div class="small">
+              <%= making_option.name %> + <%= making_option.display_price %>
+              <!-- <a href="#" class="fa fa-close making-option-remove" data-id="<%= making_option.id %>"></a> -->
+            </div>
+          <% end %>
+          <% for customization in product.customizations: %>
+            <div class="small text-pink">
+              <%= customization.name %> + <%= customization.display_price %>
+              <!-- <a href="#" class="fa fa-close customization-remove" data-id="<%= customization.id %>"></a> -->
+            </div>
+          <% end %>
+          <!--
+          <div class="small">+ $29.00 Express making <a href="#" class="fa fa-close price-remove"></a></div>
+          <div class="small">+ $9.99 Make Inside Dress a Mini <a href="#" class="fa fa-close price-remove"></a></div>
+          <div class="total"><%#= product.price.display_price %></div>
+          -->
+        </div>
       </div>
     </li>
   <% end %>
