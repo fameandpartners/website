@@ -30,7 +30,7 @@ page.initProductDetailsPage = (options = {}) ->
       else
         url = product_paths.default
 
-      window.history.pushState({ path: url }, '', url)
+      window.history.replaceState({ path: url }, '', url)
 
   # ensure location color according to preselected color
   selected = selector.getValue()
@@ -118,7 +118,7 @@ page.initProductDetailsPage = (options = {}) ->
 
       if app.user_moodboard.contains({product_id: product_id })
         url = urlWithSitePrefix('/wishlist')
-        window.history.pushState({ path: url }, '', url)
+        window.history.replaceState({ path: url }, '', url)
         widnow.location.href = url
         return
 
