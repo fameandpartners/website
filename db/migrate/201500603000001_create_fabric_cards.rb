@@ -3,6 +3,8 @@ class CreateFabricCards < ActiveRecord::Migration
     create_table :fabric_cards do |t|
       t.text :name, null: false
       t.text :sku_component, index: { unique: true }
+      t.text :name_zh
+      t.text :description
 
       t.timestamps
     end

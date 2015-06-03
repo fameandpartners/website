@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150528043420) do
+ActiveRecord::Schema.define(:version => 201500603000002) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -438,6 +438,8 @@ ActiveRecord::Schema.define(:version => 20150528043420) do
   create_table "fabric_cards", :force => true do |t|
     t.text     "name",          :null => false
     t.text     "sku_component"
+    t.text     "name_zh"
+    t.text     "description"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
