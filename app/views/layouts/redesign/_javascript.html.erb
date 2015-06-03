@@ -14,14 +14,11 @@
     user_moodboard: new helpers.UserMoodboard({})
   };
 
-  $(document).ready(function() {
-    (function() {
-      <%= yield :inline_javascript %>
+  $(document).ready(function(){
+    <%= yield :inline_javascript %>
 
-      // init here allows assigned listeners to update data
-      window.app.user_moodboard.updateData(moodboard_data);
-      window.app.shopping_cart.setItemCount(<%= current_order.item_count %>);
-    })();    
-    //page.enableStyleQuizPopup('.show-style-quiz');
+    // init here allows assigned listeners to update data
+    window.app.user_moodboard.updateData(moodboard_data);
+    window.app.shopping_cart.setItemCount(<%= current_order.item_count %>);
   });
 </script>
