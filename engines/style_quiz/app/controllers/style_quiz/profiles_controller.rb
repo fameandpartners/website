@@ -98,11 +98,12 @@ module StyleQuiz
           ]
         )
       ]
+      @questions
     end
 
     def create
       params[:answers].each do |question|
-        question_id,
+        question.id
       end
     end
 
