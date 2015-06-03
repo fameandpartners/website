@@ -34,7 +34,6 @@ page.initProductDetailsPage = (options = {}) ->
 
   # ensure location color according to preselected color
   selected = selector.getValue()
-  changeUrlToSelectedColor(selected.color_id) if selected.color_id
 
   # change images colors
   selector.on('change', (event, data) ->
