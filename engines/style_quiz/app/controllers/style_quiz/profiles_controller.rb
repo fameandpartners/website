@@ -101,7 +101,9 @@ module StyleQuiz
     end
 
     def create
-      raise params.inspect
+      params[:answers].each do |question|
+        question_id,
+      end
     end
 
     def show

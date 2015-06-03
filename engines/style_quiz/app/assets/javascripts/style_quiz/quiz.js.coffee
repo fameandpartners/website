@@ -64,7 +64,7 @@ window.StyleQuiz.Quiz = class Quiz
       url: @action,
       type: 'POST',
       dataType: 'json',
-      data: @answers()
+      data: { answers: @answers() }
     ).success(() =>
       console.log('success', arguments)
     ).error(() =>
