@@ -16,6 +16,8 @@ meta property="og:description" content=truncate(get_meta_description, length:140
 
 meta property="og:site_name" content="Fame &amp; Partners"
 
+= render :partial => 'shared/sharethis'
+
 - if !Rails.env.production?
   meta name="robots" content="noindex, nofollow"
   = render :partial => 'shared/typekit', locals: { kit_id: 'kur6crm' }
