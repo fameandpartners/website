@@ -18,18 +18,15 @@ meta property="og:site_name" content="Fame &amp; Partners"
 
 - if !Rails.env.production?
   meta name="robots" content="noindex, nofollow"
-  script src="//use.typekit.net/kur6crm.js" type="text/javascript"
+  = render :partial => 'shared/typekit', locals: { kit_id: 'kur6crm' }
 - else
-  script src="//use.typekit.net/day0prb.js" type="text/javascript"
+  = render :partial => 'shared/typekit', locals: { kit_id: 'day0prb' }
 
 - if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
   = render '/shared/customerio'
   = render '/spree/shared/google_analytics'
   = render '/shared/zopim'
   = render '/shared/hotjar'
-
-script type="text/javascript"
-  | try{Typekit.load();}catch(e){}
 
 /[if lt IE 9]
   = javascript_include_tag 'html5.js'
