@@ -28,7 +28,7 @@
           - @product.default_sizes.each do |size|
             .col-md-3.col-xs-3.col-xxs-6
               a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
-                span.option-box.size-box= size.presentation.gsub(/\D/, '')
+                span.option-box.size-box= size.presentation
 
   .sizes-container
     - if @product.custom_sizes?
@@ -39,4 +39,4 @@
           - @product.custom_sizes.each do |size|
             .col-md-3.col-xs-3.col-xxs-6
               a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
-                span.option-box.size-box= size.presentation.gsub(/\D/, '')
+                span.option-box.size-box= size.presentation
