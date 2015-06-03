@@ -17,11 +17,11 @@ module Admin
     private
 
     def collection
-      @collection ||= model_class.includes(:fabric_card_colours => :fabric_colour).all
+      @collection ||= model_class.hydrated.all
     end
 
     def fabric_card
-      @fabric_card ||= model_class.find(params[:id])
+      @fabric_card ||= model_class.hydrated.find(params[:id])
     end
 
     # Spree compatibility
