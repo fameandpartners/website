@@ -56,7 +56,7 @@ module Orders
 
     def promo_codes
       @promo_codes ||= order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
-        adj.originator.promotion.code
+        "[#{adj.originator.promotion.code}] #{adj.originator.promotion.name}"
       }
     end
 
