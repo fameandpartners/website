@@ -15,8 +15,9 @@ module Orders
       end
 
       context 'fast making promo' do
+        let(:completed) { true }
         before do
-          allow(presenter).to receive(promo_codes).and_return(['[birthdaygirl] Birthday Promotion'])
+          allow(presenter).to receive(:promo_codes).and_return(['[birthdaygirl] Birthday Promotion'])
         end
         it 'is a fast making promo' do
           expect(presenter).to be_fast_making_promo
