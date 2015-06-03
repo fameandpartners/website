@@ -60,6 +60,10 @@ module Orders
       }
     end
 
+    def fast_making_promo?
+      promo_codes.any?{ |code| code.downcase.include?('birthdaygirl') }
+    end
+
     def promotion?
       promo_codes.any?
     end
