@@ -126,7 +126,7 @@ ruby:
             |+ Moodboard
 
         .row.social-media-links
-          = render :partial => 'share_buttons'
+          = render :partial => 'share_buttons', :locals => { product: @product }
 
 /! About The Dress
 .col-sm-12.screen-height
