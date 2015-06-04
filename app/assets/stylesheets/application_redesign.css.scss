@@ -1,5 +1,3 @@
-@import url(//fonts.googleapis.com/css?family=Forum);
-
 @import 'redesign/vars';
 @import 'redesign/mixins';
 @import 'redesign/extras/helpers';
@@ -148,15 +146,3 @@ input.form-control {
     outline:none;
   }
 }
-
-/*
-  // added for quick reference only
-  <link rel="stylesheet" href="stylesheets/styles.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/demo.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/component.css" />
-  <link rel="stylesheet" href="stylesheets/jquery.skippr.css">
-  <link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="stylesheets/cs-select.css">
-  <link rel="stylesheet" href="stylesheets/cs-skin-border.css">
-*/
