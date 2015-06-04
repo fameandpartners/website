@@ -50,14 +50,12 @@ module Products
       end
     end
 
-    def product_options
-      @product_options ||= Products::VariantsReceiver.new(product).available_options
+    def product_option_ids
+      @product_options ||= Products::VariantsReceiver.new(product).available_options.collect { |o| o.slice(:size_id, :color_id) }
     end
 
-    def product_have_size_and_color?(size_option_value, color_option_value)
-      size  = size_option_value.name
-      color = color_option_value.name
-      product_options.any? { |option| option[:size] == size && option[:color] == color }
+    def product_have_size_and_color?(size, color)
+      product_option_ids.include?(:size_id => size.id, :color_id => color.id)
     end
   end
 end
