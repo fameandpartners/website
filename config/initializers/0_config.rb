@@ -161,3 +161,13 @@ when :test
     index.color_variants = :color_variants_test
   end
 end
+
+# promo actions
+
+# 48h only! Save 15% off your killer prom dress
+configatron.promo_48h_15_percent_off.enabled             = true
+configatron.promo_48h_15_percent_off.param_name          = 'promo_48h_15_percent_off'
+configatron.promo_48h_15_percent_off.duration            = 48.hours
+configatron.promo_48h_15_percent_off.ends_at_param_name  = 'promo_48h_15_percent_off_ends_at'
+configatron.promo_48h_15_percent_off.discount_in_percent = 15
+configatron.promo_48h_15_percent_off.promo_code          = "FP48h15%off"

@@ -9,3 +9,25 @@
     filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='1');
   }
 }
+
+
+// Timer
+.timer-box {
+  text-align: center;
+  > span {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    + span {
+      padding-left: 1em;
+      &:before {
+        content: ':';
+        position: absolute;
+        left: 0.35em;
+        top: -0.125em;
+      }
+    }
+  }
+}
+// @end Timer
+// -----------------

@@ -30,6 +30,17 @@
   }
 }
 
+// Bottom  
+.vex-dialog-bottom {
+  .vex-content {
+    vertical-align: bottom;
+    margin-bottom: 50px;
+  }
+}
+// @end Bottom 
+// -----------------
+
+
 // - colors
 .vex-dialog-pink .vex-content {
   background-color: $pink-bg;
