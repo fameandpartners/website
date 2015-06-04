@@ -32,15 +32,21 @@ module Spree
         master_variant = @product.master
         excluded_attributes = %w{id created_at deleted_at sku is_master count_on_hand}
 
-        price = get_product_default_price(@product)
-
         size_option_values.each do |size_option_value|
           color_option_values.each do |color_option_value|
             unless product_have_size_and_color?(size_option_value, color_option_value)
               variant = @product.variants.build(master_variant.attributes.except(*excluded_attributes))
-              # price.clone  have strrrange issues
-              variant.default_price = Spree::Price.new(amount: price.amount, currency: price.currency)
 
+              variant.default_price = Spree::Price.new(
+                amount: master_variant.default_price.amount,
+                currency: master_variant.default_price.currency
+              )
+              other_prices = master_variant.prices - Array(master_variant.default_price)
+              other_prices.each do |price|
+                variant.prices << Spree::Price.new(amount: price.amount, currency: price.currency).tap do |new_price|
+                  new_price.variant = variant
+                end
+              end
               variant.save
 
               variant.option_values = [size_option_value, color_option_value]
