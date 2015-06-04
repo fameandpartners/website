@@ -1,13 +1,19 @@
 class FabricCard < ActiveRecord::Base
-  attr_accessible :name, :sku_component
+  INVALID_SKU_CODE = '----'
+
+  attr_accessible :name, :code
 
   validates_presence_of :name
 
-  has_many :fabric_card_colours
-  has_many :fabric_colours, through: :fabric_card_colours
+  has_many :colours, class_name: 'FabricCardColour'
+  has_many :fabric_colours, through: :colours
   has_many :spree_products, inverse_of: :fabric_card, class_name: 'Spree::Product'
 
   def self.hydrated
-    includes(:fabric_card_colours => :fabric_colour)
+    includes(:colours => :fabric_colour)
+  end
+
+  def sku_component
+    code.presence || INVALID_SKU_CODE
   end
 end

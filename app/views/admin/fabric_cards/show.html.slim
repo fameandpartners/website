@@ -9,7 +9,9 @@ h3 Details
 table : tbody
   tr
     th Name:
-    td = fabric_card.name
+    td
+      => fabric_card.name
+      => fabric_card.name_zh
   tr
     th SKU Component
     td code = fabric_card.sku_component
@@ -20,7 +22,7 @@ table
     th Colour
     th Position
   tbody
-    - fabric_card.fabric_card_colours.each do |colour|
+    - fabric_card.colours.each do |colour|
       tr
         td = colour.name
         td = colour.position

@@ -30,7 +30,7 @@ module Admin
 
     private
     def colour_on_card(colour, card)
-     card.fabric_card_colours.detect { |fcc| fcc.fabric_colour == colour }
+      card.colours.detect { |fcc| fcc.fabric_colour == colour }
     end
   end
 end

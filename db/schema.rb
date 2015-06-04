@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 201500603000002) do
+ActiveRecord::Schema.define(:version => 20150603000030) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -426,6 +426,7 @@ ActiveRecord::Schema.define(:version => 201500603000002) do
 
   create_table "fabric_card_colours", :force => true do |t|
     t.text     "position"
+    t.text     "code"
     t.integer  "fabric_colour_id"
     t.integer  "fabric_card_id"
     t.datetime "created_at",       :null => false
@@ -436,18 +437,19 @@ ActiveRecord::Schema.define(:version => 201500603000002) do
   add_index "fabric_card_colours", ["fabric_colour_id"], :name => "index_fabric_card_colours_on_fabric_colour_id"
 
   create_table "fabric_cards", :force => true do |t|
-    t.text     "name",          :null => false
-    t.text     "sku_component"
+    t.text     "name",        :null => false
+    t.text     "code"
     t.text     "name_zh"
     t.text     "description"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "fabric_colours", :force => true do |t|
     t.text     "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "dress_colour_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "fabrication_events", :force => true do |t|
@@ -986,7 +988,8 @@ ActiveRecord::Schema.define(:version => 201500603000002) do
     t.datetime "updated_at",                    :null => false
   end
 
-  create_table "spree_option_types", :force => true do |t|
+  create_table "spree_option_types", :id => false, :force => true do |t|
+    t.integer  "id",                                         :null => false
     t.string   "name",         :limit => 100
     t.string   "presentation", :limit => 100
     t.integer  "position",                    :default => 0, :null => false
@@ -999,7 +1002,8 @@ ActiveRecord::Schema.define(:version => 201500603000002) do
     t.integer "option_type_id"
   end
 
-  create_table "spree_option_values", :force => true do |t|
+  create_table "spree_option_values", :id => false, :force => true do |t|
+    t.integer  "id",                                      :null => false
     t.integer  "position"
     t.string   "name"
     t.string   "presentation"

@@ -13,15 +13,20 @@ module Importers
       end
 
       def sku
-        [product, fabric_card, colour, size].collect(&:sku_component).join('')
+        sku_components.join('')
       end
 
       def valid?
-        [fabric_card, colour, size].all?(&:valid?)
+        [fabric_card, colour, size].all?(&:valid?) && sku_components.all?(&:present?)
       end
 
       def errors
         [fabric_card, colour, size].collect(&:errors)
+      end
+
+      private
+      def sku_components
+        [product, fabric_card, colour, size].collect(&:sku_component)
       end
     end
   end

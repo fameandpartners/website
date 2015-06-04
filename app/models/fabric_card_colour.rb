@@ -6,4 +6,8 @@ class FabricCardColour < ActiveRecord::Base
   validates_presence_of :position
 
   delegate :name, to: :fabric_colour
+
+  def sku_component
+    position
+  end
 end
