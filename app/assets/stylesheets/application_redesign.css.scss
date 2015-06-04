@@ -1,10 +1,8 @@
+//= require_tree ./libs/vex
 @import 'redesign/vars';
 @import 'redesign/mixins';
 @import 'redesign/extras/helpers';
 
-@import 'libs/vex.css';
-@import 'libs/vex-theme-flat-attack.css';
-@import 'libs/vex-theme-bottom-right-corner.css';
 @import 'redesign/libs/chosen';
 @import 'redesign/extras/chosen_override';
 
