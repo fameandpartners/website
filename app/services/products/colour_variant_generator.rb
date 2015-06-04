@@ -9,63 +9,68 @@ module Products
       @size_option  = Spree::OptionType.size
     end
 
-    def create_variants(size_ids, color_ids)
-      sizes  = @size_option.option_values.where(id: size_ids)
-      colours = @color_option.option_values.where(id: color_ids)
+    def master
+      product.master
+    end
 
-      master = product.master
+    def create_variants(size_ids, color_ids)
+      sizes   = @size_option.option_values.where(id: size_ids)
+      colours = @color_option.option_values.where(id: color_ids)
 
       sizes.each do |size|
         colours.each do |color|
-          next if product_have_size_and_color?(size, color)
-
-          variant = product.variants.build(filtered_attributes)
-
-          variant.default_price = clone_price(master.default_price)
-
-          other_prices = (master.prices - Array(master.default_price))
-          other_prices.each do |price|
-            variant.prices << clone_price(price).tap do |new_price|
-              new_price.variant = variant
-            end
-          end
-          variant.save
-
-          variant.option_values = [size, color]
-
+          create_variant size, color
         end
       end
     end
 
-    private
-    def clone_price(price)
-      Spree::Price.new(amount: price.amount, currency: price.currency)
+    def create_variant(size, color)
+      return if existing_size_and_color?(size, color)
+
+      variant = product.variants.build(master_attributes)
+
+      variant.default_price = clone_price(master.default_price, into: variant)
+
+      other_prices.each do |price|
+        variant.prices << clone_price(price, into: variant)
+      end
+
+      variant.option_values = [size, color]
+      variant.save
     end
 
-    def filtered_attributes
+    private
+
+    def existing_size_and_color?(size, color)
+      existing_option_ids.include?(:size_id => size.id, :color_id => color.id)
+    end
+
+    def master_attributes
       @filtered_attributes ||= begin
         excluded_attributes = %w{id created_at deleted_at sku is_master count_on_hand}
         product.master.attributes.except(*excluded_attributes)
       end
     end
 
-    # TODO - Remove
-    def get_product_default_price(product)
-      if product.price
-        product.prices.first
-      elsif product.master.default_price
-        product.master.default_price
-      else
-        product.variants.map(&:price).compact.first
+    def clone_price(source, into:)
+      Spree::Price.new(
+        amount:   source.amount,
+        currency: source.currency
+      ).tap do |new_price|
+        # Spree doesn't do this for us, yet throws validation errors without it.
+        new_price.variant = into
       end
     end
 
-    def product_option_ids
-      @product_options ||= Products::VariantsReceiver.new(product).available_options.collect { |o| o.slice(:size_id, :color_id) }
+    def other_prices
+      @other_prices ||= (master.prices - Array(master.default_price))
     end
 
-    def product_have_size_and_color?(size, color)
-      product_option_ids.include?(:size_id => size.id, :color_id => color.id)
+    def existing_option_ids
+      @existing_option_ids ||= Products::VariantsReceiver
+                                 .new(product)
+                                 .available_options
+                                 .collect { |o| o.slice(:size_id, :color_id) }
     end
   end
 end
