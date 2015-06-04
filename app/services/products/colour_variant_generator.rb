@@ -9,21 +9,21 @@ module Products
       @size_option  = Spree::OptionType.size
     end
 
-    def create_variants(sizes_ids, colors_ids)
-      size_option_values  = @size_option.option_values.where(id: sizes_ids)
-      color_option_values = @color_option.option_values.where(id: colors_ids)
+    def create_variants(size_ids, color_ids)
+      sizes  = @size_option.option_values.where(id: size_ids)
+      colours = @color_option.option_values.where(id: color_ids)
 
       master = product.master
 
-      size_option_values.each do |size_option_value|
-        color_option_values.each do |color_option_value|
-          unless product_have_size_and_color?(size_option_value, color_option_value)
+      sizes.each do |size|
+        colours.each do |color|
+          unless product_have_size_and_color?(size, color)
 
             variant = product.variants.build(filtered_attributes)
 
             variant.default_price = clone_price(master.default_price)
 
-            other_prices          = master.prices - Array(master.default_price)
+            other_prices = (master.prices - Array(master.default_price))
             other_prices.each do |price|
               variant.prices << clone_price(price).tap do |new_price|
                 new_price.variant = variant
@@ -31,7 +31,7 @@ module Products
             end
             variant.save
 
-            variant.option_values = [size_option_value, color_option_value]
+            variant.option_values = [size, color]
           end
         end
       end
