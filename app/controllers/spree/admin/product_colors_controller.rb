@@ -7,7 +7,7 @@ module Spree
       end
 
       def create
-        @variants = ColourVariantGenerator.new(product: @product).create_variants(params[:sizes], params[:colors])
+        ColourVariantGenerator.new(product: @product).create_variants(params[:sizes], params[:colors])
 
         flash.notice  = 'Variants successfully added'
         redirect_to admin_product_variants_path(@product)
@@ -32,7 +32,6 @@ module Spree
         end
 
         def create_variants(sizes_ids, colors_ids)
-          variants = []
           size_option_values = @size_option.option_values.where(id: sizes_ids)
           color_option_values = @color_option.option_values.where(id: colors_ids)
 
@@ -57,13 +56,9 @@ module Spree
                 variant.save
 
                 variant.option_values = [size_option_value, color_option_value]
-
-                variants.push(variant)
               end
             end
           end
-
-          return variants
         end
 
         def get_product_default_price(product)
