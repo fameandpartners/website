@@ -176,6 +176,13 @@ PATH
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
 
+PATH
+  remote: engines/revolution
+  specs:
+    revolution (0.0.1)
+      awesome_nested_set
+      rails (~> 3.2.21)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -688,7 +695,7 @@ GEM
       aws-sdk
       paperclip
       spree_core (>= 1.3.0)
-    spring (1.3.5)
+    spring (1.3.6)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -817,6 +824,7 @@ DEPENDENCIES
   rack-cors
   rails!
   redis-rails
+  revolution!
   rmagick
   rollout
   roo

@@ -7,7 +7,7 @@
 
 module Revolution
   class Page < ActiveRecord::Base
-    attr_accessible :path, :template_path, :canonical, :redirect, :parent, :parent_id, :publish_from, :publish_to
+    attr_accessible :path, :template_path, :canonical, :redirect, :parent, :parent_id, :publish_from, :publish_to, :variables
 
     validates :path, :presence => true
     validate :path_has_not_changed, :on => :update #read only attributes
@@ -15,6 +15,20 @@ module Revolution
     has_many :translations
 
     acts_as_nested_set :counter_cache => :children_count
+
+    serialize :variables
+
+    delegate :title, :meta_description, :heading, :sub_heading, :description, :to => :translation
+
+    attr_accessor :locale
+
+    def translation
+      @translation ||= translations.find_for_locale(locale)
+    end
+
+    def get(key)
+      variables[key]
+    end
 
     def self.find_for(*paths)
       paths.each do |path|

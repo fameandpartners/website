@@ -29,13 +29,14 @@
 
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
+  attr_reader :page
+  helper_method :page
 
-  before_filter :set_collection_resource, :set_collection_seo_meta_data
+  before_filter :load_page, :set_collection_resource, :set_collection_seo_meta_data
 
   def show
-    @filter = Products::CollectionFilter.read
 
-    page = Revolution::Page.find_for(request.path, '/dresses/*')
+    @filter = Products::CollectionFilter.read
 
     respond_to do |format|
       format.html { render page.template_path, status: @status }
@@ -46,6 +47,11 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private
+
+    def load_page
+      @page = Revolution::Page.find_for(request.path, '/dresses/*')
+    end
+
     def set_collection_resource
       @collection_options = parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
@@ -53,8 +59,13 @@ class Products::CollectionsController < Products::BaseController
 
     def set_collection_seo_meta_data
       # set title / meta description / HTTP status / canonical for the page
-      @title = "#{@collection.details.meta_title} #{default_seo_title}"
-      @description  = @collection.details.seo_description
+      if page.get(:lookbook)
+        @title = "#{page.title} #{default_seo_title}"
+        @description  = page.meta_description
+      else
+        @title = "#{@collection.details.meta_title} #{default_seo_title}"
+        @description  = @collection.details.seo_description
+      end
       @status = @collection_options ? :ok : :not_found
       @canonical = dresses_path if @status == :not_found
     end

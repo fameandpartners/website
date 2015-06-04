@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.21"
+  s.add_dependency 'rails', '~> 3.2.21'
   s.add_dependency  'awesome_nested_set'
-
-  s.add_development_dependency "rspec-rails"
+  
+  s.add_development_dependency 'rspec-rails'
 end

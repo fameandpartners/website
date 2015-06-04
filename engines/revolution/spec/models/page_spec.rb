@@ -21,6 +21,15 @@ describe Revolution::Page do
       end
     end
 
+    context 'variables' do
+      before do
+        page.variables = {:blah => 'vtha'}
+      end
+      it 'is published' do
+        expect(page.get(:blah)).to eq 'vtha'
+      end
+    end
+
     context 'when not published' do
       it 'is not published' do
         expect(page).to_not be_published
@@ -104,6 +113,11 @@ describe Revolution::Page do
 
       it 'should have a translation' do
         expect(page.translations.find_for_locale(locale)).to eq translation
+      end
+
+      it 'should delegate to translation' do
+        page.locale = locale
+        expect(page.title).to eq translation.title
       end
     end
 

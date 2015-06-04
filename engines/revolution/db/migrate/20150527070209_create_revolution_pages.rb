@@ -6,6 +6,7 @@ class CreateRevolutionPages < ActiveRecord::Migration
       t.text     :template_path, :nil => false
       t.text     :canonical, :nil => true
       t.text     :redirect, :nil => true
+      t.text     :variables, :nil => true
       t.datetime :publish_from, :nil => true
       t.datetime :publish_to, :nil => true
 
@@ -24,5 +25,6 @@ class CreateRevolutionPages < ActiveRecord::Migration
 
     add_index :revolution_pages, :parent_id
     add_index :revolution_pages, :rgt
+
   end
 end
