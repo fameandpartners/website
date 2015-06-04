@@ -13,19 +13,19 @@ module Products
       size_option_values  = @size_option.option_values.where(id: sizes_ids)
       color_option_values = @color_option.option_values.where(id: colors_ids)
 
-      master_variant      = product.master
-      excluded_attributes = %w{id created_at deleted_at sku is_master count_on_hand}
+      master = product.master
 
       size_option_values.each do |size_option_value|
         color_option_values.each do |color_option_value|
           unless product_have_size_and_color?(size_option_value, color_option_value)
-            variant = product.variants.build(master_variant.attributes.except(*excluded_attributes))
+
+            variant = product.variants.build(filtered_attributes)
 
             variant.default_price = Spree::Price.new(
-              amount:   master_variant.default_price.amount,
-              currency: master_variant.default_price.currency
+              amount:   master.default_price.amount,
+              currency: master.default_price.currency
             )
-            other_prices          = master_variant.prices - Array(master_variant.default_price)
+            other_prices          = master.prices - Array(master.default_price)
             other_prices.each do |price|
               variant.prices << Spree::Price.new(amount: price.amount, currency: price.currency).tap do |new_price|
                 new_price.variant = variant
@@ -36,6 +36,15 @@ module Products
             variant.option_values = [size_option_value, color_option_value]
           end
         end
+      end
+    end
+
+    private
+
+    def filtered_attributes
+      @filtered_attributes ||= begin
+        excluded_attributes = %w{id created_at deleted_at sku is_master count_on_hand}
+        product.master.attributes.except(*excluded_attributes)
       end
     end
 
