@@ -5,4 +5,7 @@ class StyleQuiz::Tag < ActiveRecord::Base
   validates :group, presence: true, inclusion: ::StyleQuiz::Tag::GROUPS
   validates :name,  presence: true, uniqueness: {  scope: :group, case_sensitive: false }
 
+  def weight
+    ::StyleQuiz::Tag::WEIGHTS[self.group] || 1
+  end
 end
