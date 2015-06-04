@@ -16,12 +16,16 @@ class DefineStyleQuizSchema < ActiveRecord::Migration
       t.string  :value
       t.string  :image
       t.integer :position
-      t.text    :tags
+      t.string  :tags
     end
 
     create_table :style_quiz_tags, force: true do |t|
       t.string :group
       t.string :name
+    end
+
+    change_table :spree_products do |t|
+      t.string :tags
     end
   end
 end
