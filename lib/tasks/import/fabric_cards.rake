@@ -8,6 +8,31 @@ namespace :import do
     Importers::SkuGeneration::FabricCardImporter.new(ENV['FILE_PATH']).import
   end
 
+  desc 'fabric_cards'
+  task :fabric_cards => :environment do
+
+    ENV['FILE_PATH'] ||= File.join(Rails.root, 'contentspreadsheets', 'fabric_cards.csv')
+
+    raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
+
+    csv = CSV.read(ENV['FILE_PATH'],
+                   headers:           true,
+                   skip_blanks:       true,
+                   header_converters: ->(h) { h.to_s.strip }
+    )
+
+    csv.each do |row|
+
+      name    = row["name"]
+      code    = row["code"]
+      # name_zh = row["name_zh"]
+      fc = FabricCard.find_or_create_by_name_and_code(name, code)
+      puts fc.inspect
+    end
+  end
+
+
+
   desc 'products with fabric_cards'
   task :fabric_cards_products => :environment do
 

@@ -17,6 +17,28 @@ module Admin
       )
     end
 
-    def show; end
+    def show
+      templates = []
+
+      dummy_size = ::Importers::SkuGeneration::BaseSize.new(99)
+
+      Spree::Product
+        .where(deleted_at: nil)
+        .includes(:variants => [], :master => [], :fabric_card => { :colours => :fabric_colour } )
+        .find_each do |product|
+
+
+        product_template = ::Importers::SkuGeneration::ProductTemplate.new(
+          product.sku,
+          product.name
+        )
+        product_template.fabric_card = product.fabric_card
+        product_template.base_sizes = [dummy_size]
+
+        templates << product_template
+      end
+
+      @product_templates = templates
+    end
   end
 end

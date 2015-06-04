@@ -988,8 +988,7 @@ ActiveRecord::Schema.define(:version => 20150603000030) do
     t.datetime "updated_at",                    :null => false
   end
 
-  create_table "spree_option_types", :id => false, :force => true do |t|
-    t.integer  "id",                                         :null => false
+  create_table "spree_option_types", :force => true do |t|
     t.string   "name",         :limit => 100
     t.string   "presentation", :limit => 100
     t.integer  "position",                    :default => 0, :null => false
@@ -1002,8 +1001,7 @@ ActiveRecord::Schema.define(:version => 20150603000030) do
     t.integer "option_type_id"
   end
 
-  create_table "spree_option_values", :id => false, :force => true do |t|
-    t.integer  "id",                                      :null => false
+  create_table "spree_option_values", :force => true do |t|
     t.integer  "position"
     t.string   "name"
     t.string   "presentation"

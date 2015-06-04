@@ -31,7 +31,9 @@ h3 Products
 table
   thead : tr
     th Name
+    th SKUs
   tbody
     - fabric_card.spree_products.each do |product|
       tr
         td = link_to product.name, admin_product_path(product)
+        td = link_to "#{product.name} SKUs", admin_fabric_card_product_path(fabric_card, product)
