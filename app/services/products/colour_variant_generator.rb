@@ -2,8 +2,8 @@ module Products
   class ColourVariantGenerator
     def initialize(product: product)
       @product      = product
-      @color_option = Spree::OptionType.where(name: 'dress-color').first
-      @size_option  = Spree::OptionType.where(name: 'dress-size').first
+      @color_option = Spree::OptionType.color
+      @size_option  = Spree::OptionType.size
     end
 
     def create_variants(sizes_ids, colors_ids)

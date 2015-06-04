@@ -138,7 +138,7 @@ module Products
           processed[:taxon_ids] << taxon.id
         end
 
-        color_option = Spree::OptionType.where(name: 'dress-color').first
+        color_option = Spree::OptionType.color
 
 
         processed[:colors] = []
@@ -444,8 +444,8 @@ module Products
 
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
       variants = []
-      size_option = Spree::OptionType.where(name: 'dress-size').first
-      color_option = Spree::OptionType.where(name: 'dress-color').first
+      size_option = Spree::OptionType.size
+      color_option = Spree::OptionType.color
 
       product.option_types = [size_option, color_option]
       product.save

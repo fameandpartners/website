@@ -28,7 +28,7 @@ module Products
     private
 
     def color_option_type
-      @color_option_type ||= Spree::OptionType.where(name: 'dress-color').first
+      @color_option_type ||= Spree::OptionType.color
     end
   end
 end

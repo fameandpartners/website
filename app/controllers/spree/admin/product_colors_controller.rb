@@ -20,8 +20,8 @@ module Spree
       end
 
       def load_option_types
-        @color_option = Spree::OptionType.where(name: 'dress-color').first
-        @size_option  = Spree::OptionType.where(name: 'dress-size').first
+        @color_option = Spree::OptionType.color
+        @size_option  = Spree::OptionType.size
       end
     end
   end

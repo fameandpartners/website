@@ -7,8 +7,8 @@ module Products
 
     # returns [{ variant_id: 123, color: 'black', color_code: '#000000', image: '', size: 12, available: true} ]
     def available_options
-      color_option  = Spree::OptionType.where(name: 'dress-color').first
-      size_option   = Spree::OptionType.where(name: 'dress-size').first
+      color_option  = Spree::OptionType.color
+      size_option   = Spree::OptionType.size
 
       available_options = []
       Spree::Variant.active.where(is_master: false, product_id: @product_id).includes(:option_values).each do |variant|
