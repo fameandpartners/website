@@ -21,13 +21,11 @@ module Products
 
             variant = product.variants.build(filtered_attributes)
 
-            variant.default_price = Spree::Price.new(
-              amount:   master.default_price.amount,
-              currency: master.default_price.currency
-            )
+            variant.default_price = clone_price(master.default_price)
+
             other_prices          = master.prices - Array(master.default_price)
             other_prices.each do |price|
-              variant.prices << Spree::Price.new(amount: price.amount, currency: price.currency).tap do |new_price|
+              variant.prices << clone_price(price).tap do |new_price|
                 new_price.variant = variant
               end
             end
@@ -40,6 +38,9 @@ module Products
     end
 
     private
+    def clone_price(price)
+      Spree::Price.new(amount: price.amount, currency: price.currency)
+    end
 
     def filtered_attributes
       @filtered_attributes ||= begin
