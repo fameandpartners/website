@@ -10,13 +10,13 @@
           .form-centered.text-left
             .form-group
               label Full NAME
-              input.form-control type="text" name="fullname" value=question.values.fullname
+              input.form-control type="text" name="fullname" value=(current_spree_user.try(:fullname))
             .form-group
               label date of birth
-              input.form-control type="text" name="birthdate" value=question.values.birthdate
+              input.form-control type="text" name="birthdate" value=(current_spree_user.try(:email))
             .form-group
               label email address
-              input.form-control type="text" name="email" value=question.values.email
+              input.form-control type="text" name="email" value=(20.year.ago.to_date.to_s(:db))
             input.btn.btn-block.btn-primary type="submit" value="Next" data-action="next"
         .col-6.col-middle.col-compact.text-center
           .form-centered.facebook-box

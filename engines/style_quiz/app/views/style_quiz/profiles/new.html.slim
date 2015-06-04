@@ -3,7 +3,7 @@ css:
 
 ruby:
   quiz_init_code = "
-    var questions_data  = #{ raw @questions.map(&:marshal_dump).to_json(root: false) };
+    var questions_data  = #{ raw @questions.to_json(root: false) };
     window.quiz = new StyleQuiz.Quiz({
       questions_data: questions_data,
       current: #{ params[:current].to_i },

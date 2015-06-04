@@ -8,10 +8,10 @@
   .grid-container
     .quiz-catalog
       .row
-        - question.answers.each_with_index do |image, index|
-          .col-2.dress-style class=(index == 0 ? 'selected' : 0) data-value=(image.value)
+        - question.answers.each do |answer|
+          .col-2.dress-style class=(answer.selected ? 'selected' : '') data-value=(answer.id)
             .quiz-catalog-picture 
-              = image_tag image.src
+              = image_tag answer.image
               .checkmark.checkmark-lg
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }

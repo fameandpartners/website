@@ -8,18 +8,18 @@
       | and dress size.
   .grid-container
     .quiz-catalog.text-center
-      - question.answers.shapes.each_with_index do |body_shape, index|
-        .quiz-catalog-item data-value=(body_shape) class=(index == 0 ? 'selected' : 0)
+      - question.answers.where(group: 'shape').each do |answer|
+        .quiz-catalog-item data-value=(answer.id) class=(answer.selected ? 'selected' : '')
           .quiz-catalog-picture
-            .body-box class=(body_shape.parameterize)
+            .body-box class=(answer.value.parameterize)
           .quiz-catalog-title
-            => body_shape
+            => answer.name
             .checkmark
     h2.text-center Select your size.
     .size-picker
-      - question.answers.sizes.each_with_index do |size, index|
-        .size class=(index == 0 ? 'selected' : 0) data-value=(size)
-          = size
+      - question.answers.where(group: 'size').each do |answer|
+        .size class=(answer.selected ? 'selected' : '') data-value=(answer.id)
+          = answer.name
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
       .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
