@@ -17,22 +17,22 @@ module Products
 
       sizes.each do |size|
         colours.each do |color|
-          unless product_have_size_and_color?(size, color)
+          next if product_have_size_and_color?(size, color)
 
-            variant = product.variants.build(filtered_attributes)
+          variant = product.variants.build(filtered_attributes)
 
-            variant.default_price = clone_price(master.default_price)
+          variant.default_price = clone_price(master.default_price)
 
-            other_prices = (master.prices - Array(master.default_price))
-            other_prices.each do |price|
-              variant.prices << clone_price(price).tap do |new_price|
-                new_price.variant = variant
-              end
+          other_prices = (master.prices - Array(master.default_price))
+          other_prices.each do |price|
+            variant.prices << clone_price(price).tap do |new_price|
+              new_price.variant = variant
             end
-            variant.save
-
-            variant.option_values = [size, color]
           end
+          variant.save
+
+          variant.option_values = [size, color]
+
         end
       end
     end
