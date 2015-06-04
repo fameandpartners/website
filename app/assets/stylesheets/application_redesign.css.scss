@@ -1,4 +1,6 @@
 //= require_tree ./libs/vex
+//= require_tree ./redesign/stylesheets
+
 @import 'redesign/vars';
 @import 'redesign/mixins';
 @import 'redesign/extras/helpers';
@@ -14,8 +16,8 @@
 @import 'redesign/header';
 @import 'redesign/footer';
 
-@import "redesign/product/*";
-@import "redesign/stylesheets/*";
+@import 'redesign/product/*';
+
 @import 'redesign/forms';
 @import 'redesign/about';
 @import 'redesign/user';
