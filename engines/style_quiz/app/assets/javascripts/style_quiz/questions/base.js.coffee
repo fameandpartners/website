@@ -37,6 +37,11 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
   value: () ->
     {}
 
+  getSelectedAnswers: (scope) ->
+    _.map(scope, (item, i) ->
+      $(item).data('value')
+    )
+
   on: () -> @$container.on.apply(@$container, arguments)
   off: () -> @$container.off.apply(@$container, arguments)
   trigger: () -> @$container.trigger.apply(@$container, arguments)
@@ -74,8 +79,7 @@ window.StyleQuiz.ColorPaletteQuestion = class ColorPaletteQuestion extends windo
 
   value: () ->
     {
-      hairColor: @$container.find('.hair.quiz-catalog .quiz-catalog-item.selected').data('value'),
-      eyesColor: @$container.find('.eyes.quiz-catalog .quiz-catalog-item.selected').data('value')
+      ids: @getSelectedAnswers(@$container.find('.quiz-catalog .quiz-catalog-item.selected'))
     }
 
 window.StyleQuiz.ColorDressesQuestion = class ColorDressesQuestion extends window.StyleQuiz.BaseQuestion
@@ -91,7 +95,7 @@ window.StyleQuiz.ColorDressesQuestion = class ColorDressesQuestion extends windo
 
   value: () ->
     {
-      dressesColor: @$container.find('.quiz-catalog .quiz-catalog-item.selected').data('value')
+      ids: @getSelectedAnswers(@$container.find('.quiz-catalog .quiz-catalog-item.selected'))
     }
 
 window.StyleQuiz.BodySizeShapeQuestion = class BodySizeShapeQuestion extends window.StyleQuiz.BaseQuestion
@@ -113,9 +117,10 @@ window.StyleQuiz.BodySizeShapeQuestion = class BodySizeShapeQuestion extends win
     item.addClass('selected')
 
   value: () ->
+    shapes = @getSelectedAnswers(@$container.find('.quiz-catalog .quiz-catalog-item.selected'))
+    sizes = @getSelectedAnswers(@$container.find('.size-picker .size.selected'))
     {
-      bodyShape: @$container.find('.quiz-catalog .quiz-catalog-item.selected').data('value'),
-      bodySize: @$container.find('.size-picker .size.selected').data('value')
+      ids: shapes.concat(sizes)
     }
 
 window.StyleQuiz.EverydayStyleQuestion = class EverydayStyleQuestion extends window.StyleQuiz.BaseQuestion
@@ -129,26 +134,11 @@ window.StyleQuiz.EverydayStyleQuestion = class EverydayStyleQuestion extends win
 
   value: () ->
     {
-      everyDayStyle: _.map(@$container.find('.quiz-catalog .dress-style.selected'), (item) ->
-        $(item).data('value')
-      , @)
+      ids: @getSelectedAnswers(@$container.find('.quiz-catalog .dress-style.selected'))
     }
 
 window.StyleQuiz.DreamStyleQuestion = class DreamStyleQuestion extends window.StyleQuiz.EverydayStyleQuestion
-  value: () ->
-    {
-      dreamStyle: _.map(@$container.find('.quiz-catalog .dress-style.selected'), (item) ->
-        $(item).data('value')
-      , @)
-    }
-
 window.StyleQuiz.RedCarpetStyleQuestion = class RedCarpetStyleQuestion extends window.StyleQuiz.EverydayStyleQuestion
-  value: () ->
-    {
-      redCarpetStyle: _.map(@$container.find('.quiz-catalog .dress-style.selected'), (item) ->
-        $(item).data('value')
-      , @)
-    }
 
 window.StyleQuiz.FashionImportanceQuestion = class FashionImportanceQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->
@@ -160,11 +150,9 @@ window.StyleQuiz.FashionImportanceQuestion = class FashionImportanceQuestion ext
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
 
   value: (e) ->
-    { FashionImportance: @$container.find('.rank-cell.active').data('value') }
+    { ids: @getSelectedAnswers(@$container.find('.rank-cell.active')) }
 
 window.StyleQuiz.SexynessImportanceQuestion = class SexynessImportanceQuestion extends window.StyleQuiz.FashionImportanceQuestion
-  value: (e) ->
-    { SexynessImportance: @$container.find('.rank-cell.active').data('value') }
 
 window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->
@@ -192,4 +180,4 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
     item.remove()
 
   value: () ->
-    @events
+    { events: @events }

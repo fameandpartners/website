@@ -51,15 +51,17 @@ window.StyleQuiz.Quiz = class Quiz
       @showCurrentQuestion()
 
   answers: () =>
-    result = _.map(@questions, (question) ->
-      question.value()
-    , @)
+    ids = []
+    result = {}
+    _.each(@questions, (question) ->
+      value = question.value()
+      ids = _.union(ids, value.ids)
+      result = _.extend(result, value)
+    )
+    result.ids = ids
     result
 
   finish: () =>
-    # validate
-    # send data
-    # redirect?
     $.ajax(
       url: @action,
       type: 'POST',

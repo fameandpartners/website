@@ -7,9 +7,9 @@
     h4.font-family-secondary.text-uppercase - CLICK ON THE SCALE, FROM LEAST IMPORTANT TO VERY IMPORTANT
   .grid-container
     .rank-sexy.rank-box
-      - question.answers.reverse.each do |answer|
-        .rank-cell data-value=(answer)
-          .rank-item class="rank-sexy-item-#{ answer }"
+      - question.answers.each do |answer|
+        .rank-cell data-value=(answer.id)
+          .rank-item class="rank-sexy-item-#{ answer.value }"
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
       .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }

@@ -28,14 +28,19 @@
             = link_to 'import from facebook', '#', class: 'btn btn-facebook btn-block'
     
     .row.events-list
-      = question.values.each do |event|
+      /= question.values.each do |event|
         .col-4
           .event-tag
             span = "#{ event.date.to_s(:db) } - #{ event.name }"
             .icon-cross data-action='delete-event'
 
     .row
-      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
-      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+      .col-6.text-right
+        = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
+      .col-6 
+        - if question_position < question_total
+          = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+        - else
+          = link_to 'Finish', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
 / @end Question 10/11
 / ------------------
