@@ -4,11 +4,12 @@ module StyleQuiz
       puts "StyleQuiz::Seed. populate"
       #populate_tags
       #populate_questions
-      populate_answers
+      #populate_answers
+      populate_products
     end
 
     def populate_tags
-      ['color.yml', 'pattern.yml', 'fabric.yml', 'style.yml', 'feature.yml', 'trends.yml'].each do |tags_file|
+      ['color.yml', 'pattern.yml', 'fabric.yml', 'style.yml', 'feature.yml', 'trend.yml'].each do |tags_file|
         path = File.join(::StyleQuiz::Engine.root, 'db', 'seeds', tags_file)
         YAML.load(File.read(path)).each do |tag_data|
           ::StyleQuiz::Tag.where(tag_data).first_or_create
@@ -45,8 +46,40 @@ module StyleQuiz
       end
     end
 
+    def populate_products
+      serializer = ActiveRecord::Coders::YAMLColumn.new(Array)
+      path = File.join(::StyleQuiz::Engine.root, 'db', 'seeds', 'products.yml')
+      YAML.load(File.read(path)).each do |product_data|
+        product = get_product(product_data[:sku], product_data[:name])
+        next if product.blank?
+
+        tags = get_tag_ids(product_data[:tags])
+
+        product.update_column(:tags, serializer.dump(tags))
+      end
+    end
+
+    def get_product(sku, name)
+      name = name.downcase
+      sku = sku.downcase
+      variant = Spree::Variant.where('LOWER(TRIM(sku)) = ?', sku).first
+      return variant.product if variant.present?
+
+      product = Spree::Product.where('LOWER(TRIM(name)) = ?', name).first 
+      return product if product.present?
+
+      short_sku = sku.split('-').first.to_s
+      variant = Spree::Variant.includes(:product).where("LOWER(TRIM(sku)) like '#{ short_sku }%'").first
+      if variant && variant.product.name.match(/#{ name }/i)
+        variant.product
+      else
+        nil 
+      end 
+    end
+
     def convert_tag_name_to_key(name)
-      name.downcase.parameterize
+      return 'some-default-key' if name.blank?
+      name.to_s.downcase.parameterize
     end
 
     def tags_map
@@ -55,6 +88,7 @@ module StyleQuiz
         StyleQuiz::Tag.all.each do |tag|
           result[convert_tag_name_to_key(tag.name)] = tag.id
         end
+        result
       end
     end
 
@@ -62,8 +96,14 @@ module StyleQuiz
       return [] if tag_names.blank?
 
       tag_names.map do |name|
-        tags_map[convert_tag_name_to_key(name)]
-      end
+        tag = tags_map[convert_tag_name_to_key(name)]
+        if tag.present?
+          tag
+        else
+          puts "tag was not found #{ name }"
+          nil
+        end
+      end.compact
     end
   end
 end

@@ -2,6 +2,7 @@
 - :name: 1
   :value: 1
   :image: style_quiz/questions/everyday_style/1.jpg
+  :tags:
 - :name: 2
   :value: 2
   :image: style_quiz/questions/everyday_style/2.jpg
