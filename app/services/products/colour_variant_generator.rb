@@ -9,10 +9,6 @@ module Products
       @size_option  = Spree::OptionType.size
     end
 
-    def master
-      product.master
-    end
-
     def create_variants(size_ids, color_ids)
       sizes   = @size_option.option_values.where(id: size_ids)
       colours = @color_option.option_values.where(id: color_ids)
@@ -46,10 +42,14 @@ module Products
     end
 
     def master_attributes
-      @filtered_attributes ||= begin
+      @master_attributes ||= begin
         excluded_attributes = %w{id created_at deleted_at sku is_master count_on_hand}
         product.master.attributes.except(*excluded_attributes)
       end
+    end
+
+    def master
+      product.master
     end
 
     def clone_price(source, into:)
