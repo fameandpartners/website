@@ -269,7 +269,7 @@ module ApplicationHelper
   end
 
   def dynamic_colors
-    type = Spree::OptionType.where(name: 'dress-color').first
+    type = Spree::OptionType.color
     return [] unless type
     values_table = Arel::Table.new(:spree_option_values)
     type.option_values.

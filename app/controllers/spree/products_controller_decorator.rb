@@ -100,45 +100,6 @@ Spree::ProductsController.class_eval do
     end
   end
 
-#  # NOTE: original method check case when user comes from page
-#  # with t= params and load corresponding taxon
-#  def old_show
-#    return unless @product
-#
-#    if params[:color_name]
-#      @color = Spree::OptionValue.colors.find_by_name!(params[:color_name])
-#    end
-#
-#    set_product_show_page_title(@product, @color.try(:presentation))
-#    display_marketing_banner
-#
-#    @product_properties = @product.product_properties.includes(:property)
-#
-#    @product_variants = Products::VariantsReceiver.new(@product).available_options
-#    @recommended_products = get_recommended_products(@product, limit: 3)
-#
-#    #respond_with(@product)
-#  end
-#
-#  def show
-#    @is_bride = false;
-#    if current_spree_user.present?
-#      if current_spree_user.bridesmaid_party_events.first.present?
-#        if current_spree_user.bridesmaid_party_events.first.status == 2
-#          @is_bride = true;
-#        end
-#      end
-#    end
-#
-#    #Deface::Override.all[:"spree/products/show"].delete('promo_product_properties')
-#    if params[:show_old] #|| Rails.env.production?
-#      old_show
-#      render template: 'spree/products/old_show'
-#    else
-#      new_show
-#    end
-#  end
-
   def show
     @recommended_products = get_recommended_products(@product, limit: 4)
 
@@ -258,15 +219,4 @@ Spree::ProductsController.class_eval do
     return unless @product
     Activity.log_product_viewed(@product, temporary_user_key, try_spree_current_user)
   end
-
-#  # note - we don't show users activity on product details page
-#  def load_activities
-#    @activities = load_product_activities(@product)
-#  end
-#
-#  def load_product_activities(owner)
-#    scope = Activity.where(owner_type: owner.class.to_s, owner_id: owner.id)
-#    scope = scope.where("updated_at > ?", 5.days.ago).order('updated_at desc')
-#    scope.limit(10)
-#  end
 end
