@@ -18,3 +18,34 @@ hr
 = form_tag admin_sku_generation_path, :method => 'post', :multipart => true do
   = file_field_tag :sku_template_csv
   button type='submit' Upload
+
+
+
+
+h2 Version 2 - Spike
+table
+  thead : tr
+    th style
+    th name
+    th valid?
+    th colour
+    th card
+    th size
+    th sku
+  tbody
+    - @product_templates.each do |product_template|
+      - if product_template.fabric_card
+        - product_template.variants.each do |variant|
+          tr
+            td = product_template.style_number
+            td = product_template.style_name
+            td = variant.valid? ? 'OK' : '!'
+            td = variant.colour.name
+            td = variant.fabric_card.sku_component
+            td = variant.size.sku_component
+            td = variant.sku
+      - else
+        tr
+          td = product_template.style_number
+          td = product_template.style_name
+          td MISSING FABRIC CARD

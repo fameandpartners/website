@@ -23,9 +23,12 @@ Spree::Product.class_eval do
   has_many :making_options, foreign_key: :product_id, class_name: 'ProductMakingOption'
 
   belongs_to :factory
+  belongs_to :fabric_card, inverse_of: :spree_products
+
   attr_accessible :customisation_value_ids,
                   :discounts_attributes,
                   :factory_id,
+                  :fabric_card_id,
                   :featured,
                   :hidden,
                   :is_service,

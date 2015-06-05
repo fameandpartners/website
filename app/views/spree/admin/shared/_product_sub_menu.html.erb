@@ -6,6 +6,7 @@
     <%= tab :prototypes %>
     <%= tab :product_positions %>
     <%= tab :styles %>
-    <%= tab :sku_generation, :url => '/admin/sku_generation' %>
+    <%= tab :sku_generation, :url => main_app.admin_sku_generation_path %>
+    <%= tab :fabric, :url => main_app.admin_fabric_cards_path  %>
   </ul>
 <% end %>

@@ -312,6 +312,9 @@ FameAndPartners::Application.routes.draw do
 
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
+    resources :fabric_cards, :only => [:index, :show] do
+      resources :products, :only => [:show], controller: 'fabric_cards/products'
+    end
     resources :fabrications,       :only => :update
     resource  :payments_report,    :only => [:show, :create]
     resources :shipments,          :only => :update
