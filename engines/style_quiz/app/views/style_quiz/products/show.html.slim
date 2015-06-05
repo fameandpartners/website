@@ -1,0 +1,8 @@
+h1 recommended products
+
+.wrap.container
+  - @products.in_groups_of(4) do |group|
+    .row
+      - group.each do |product|
+        .grid-3
+          h2 = product.name

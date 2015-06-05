@@ -8,10 +8,19 @@ module StyleQuiz
       end
 
       service = StyleQuiz::ProductsRecommendations.new(style_profile: style_profile)
-      products = service.read_all
+      @products = service.read_all
     end
 
+    private
+
     def style_profile
+      if session[:user_style_profile_token]
+        profile = StyleQuiz::UserProfile.find_by_token(session[:user_style_profile_token])
+        return profile if profile.present?
+      end
+      if current_spree_user.present?
+        return current_spree_user.style_profiles.last
+      end
     end
   end
 end
