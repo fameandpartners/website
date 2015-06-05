@@ -240,16 +240,4 @@ class StaticsController < ApplicationController
     @title = "Hashtag #fame2015 to win" + default_seo_title
     @description = "Hashtag #fame2015 to win"
   end
-
-  private
-
-  def get_products_from_edit (edit, currency, user, count=9)
-    searcher = Products::ProductsFilter.new(:edits => edit)
-    searcher.current_user = user
-    searcher.current_currency = currency
-    searcher.products.first(count)
-  end
-
-  helper_method :get_products_from_edit
-
 end
