@@ -351,6 +351,8 @@ module Products
         rescue Exception => message
           Rails.logger.warn(message)
           puts "======== Exception ========"
+          puts args[:sku]
+          puts args[:style_name]
           puts message
           puts "==========================="
           nil
@@ -439,6 +441,10 @@ module Products
         product.set_property(name, value)
       end
 
+      if factory = Factory.find_by_name(args[:factory_name].capitalize)
+        product.factory = factory
+      end
+
       product
     end
 
@@ -483,7 +489,7 @@ module Products
           usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
           usd.amount = price_in_usd
           usd.save!
-          
+
           variants.push(variant) if variant.persisted?
         end
       end
