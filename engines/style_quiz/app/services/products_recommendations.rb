@@ -12,7 +12,7 @@ class StyleQuiz::ProductsRecommendations
     @style_profile = style_profile
   end
 
-  def read_all(limit: 20)
+  def read_all(limit: 8)
     product_ids = product_ids_query(limit: limit).results.results.map(&:id)
     products_order = Hash[*product_ids.map.with_index{|x,i| [x, i]}.flatten]
 

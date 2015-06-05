@@ -1,8 +1,21 @@
 h1 recommended products
 
-.wrap.container
-  - @products.in_groups_of(4) do |group|
-    .row
-      - group.each do |product|
-        .grid-3
-          h2 = product.name
+.page-title.default.category-header
+  .container
+    .page-title--details
+      h1.no-padding-bottom Recommended Dresses
+      /p descrption
+
+.page-content.products-collections.category
+  .container.relative.products-collection
+    - @products.each do |product|
+      .col-md-3.col-xs-6.col-xxs-12.category--item data-id=(product.id)
+        - image = Repositories::ProductImages.new(product: product).filter(cropped: true).first
+        = link_to collection_product_path(product) do
+          = image_tag image.large, alt: product.name, class: "img-product img-responsive"
+        .details.text-center
+          span.name = product.name
+          span.price 
+            ' Relevance:
+            = style_profile.calculate_relevance_with(product)
+          /span.price = product_price_with_discount(product.price, product.discount)
