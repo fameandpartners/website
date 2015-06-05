@@ -1,5 +1,5 @@
 module LandingPagesHelper
- require "base64"
+  require "base64"
 
   def pop?
     params[:pop].present? && params[:pop] == 'true'
@@ -13,11 +13,14 @@ module LandingPagesHelper
     end
   end
 
-   def cropped_product_hoverable_image_tag(product)
-     image_urls = cropped_product_hoverable_images(product)
+  def cropped_product_hoverable_image_tag(product)
+    front, hover = cropped_product_hoverable_images(product)
 
-     image_tag image_urls.first, :alt => product.name, :class => "img-product img-responsive", 'data-hover' => image_urls.last
-   end
+    image_tag front,
+              :alt         => product.name,
+              :class       => "img-product img-responsive",
+              'data-hover' => hover
+  end
 
   # Attempts to load "CROP" style images, falls back to
   # just "FRONT" images for old products which weren't re-shot in the Early 2015 style.
