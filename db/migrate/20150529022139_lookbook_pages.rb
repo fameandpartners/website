@@ -5,15 +5,22 @@ class LookbookPages < ActiveRecord::Migration
     # '/landing_pages/here_comes_the_sun.html.slim'
     # '/lookbook/show.html.slim'
     lookbook_template = '/lookbook/show.html.slim'
+
     page = Revolution::Page.create!(
       :path => '/lookbook/here-comes-the-sun',
       :template_path => lookbook_template,
       :variables => {:image_count => 10, :lookbook => true}
     )
-
     page.publish!
-
     page.translations.create!(:locale => 'en-US', :title => 'Here Comes the Sun', :meta_description => 'Here Comes the Sun')
+
+    page = Revolution::Page.create!(
+      :path => '/lookbook/break-hearts',
+      :template_path => lookbook_template,
+      :variables => {:image_count => 9, :lookbook => true}
+    )
+    page.publish!
+    page.translations.create!(:locale => 'en-US', :title => 'Break Hearts Not Bank Accounts', :meta_description => 'Break Hearts Not Bank Accounts')
   end
 
   def down

@@ -80,11 +80,14 @@ FameAndPartners::Application.routes.draw do
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
     #edits
-    get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
-    get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
-
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
     get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
+
+    # get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
+    get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
+    get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
+    get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
+
 
     get '/all-size' => 'statics#all_size', :as => :all_size_collection
 
