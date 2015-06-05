@@ -16,8 +16,6 @@ module Spree
                FROM t WHERE t.shipment_state IS NOT NULL
                )
             SELECT shipment_state FROM t WHERE shipment_state IS NOT NULL
-            UNION ALL
-            SELECT NULL WHERE EXISTS(SELECT 1 FROM spree_orders WHERE shipment_state IS NULL)
         SQL
         find_by_sql(qry).collect(&:shipment_state)
       end
