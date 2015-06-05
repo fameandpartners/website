@@ -1,9 +1,4 @@
-
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="//w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "0babd5ea-dd86-4553-b8f6-ab4a6126df47", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-
 
 <!-- bootstrap -->
 <script type="text/javascript">
@@ -19,14 +14,11 @@
     user_moodboard: new helpers.UserMoodboard({})
   };
 
-  $(document).ready(function() {
-    (function() {
-      <%= yield :inline_javascript %>
+  $(document).ready(function(){
+    <%= yield :inline_javascript %>
 
-      // init here allows assigned listeners to update data
-      window.app.user_moodboard.updateData(moodboard_data);
-      window.app.shopping_cart.setItemCount(<%= current_order.item_count %>);
-    })();    
-    //page.enableStyleQuizPopup('.show-style-quiz');
+    // init here allows assigned listeners to update data
+    window.app.user_moodboard.updateData(moodboard_data);
+    window.app.shopping_cart.setItemCount(<%= current_order.item_count %>);
   });
 </script>

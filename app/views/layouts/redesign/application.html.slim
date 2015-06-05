@@ -20,7 +20,6 @@ doctype html
     = stylesheet_link_tag '//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700|Forum'
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
     = stylesheet_link_tag 'application_redesign'
-    = javascript_include_tag 'application_redesign'
     = csrf_meta_tags
 
     = render 'layouts/redesign/head'
@@ -37,5 +36,7 @@ doctype html
     = render 'layouts/redesign/shopping_bag'
 
     = render '/shared/marketing'
-    = render 'layouts/redesign/javascript'
     = render '/shared/remarketing_tag'
+
+    = javascript_include_tag 'application_redesign'
+    = render 'layouts/redesign/javascript'
