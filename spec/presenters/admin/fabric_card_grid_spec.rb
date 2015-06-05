@@ -5,20 +5,20 @@ module Admin
 
     subject(:grid) do
       colours = [
-        _red  = double('red',   name: 'red'),
-        green = double('green', name: 'green'),
-        blue  = double('blue',  name: 'blue')
+        _red  = instance_spy('FabricColour', name: 'red'),
+        green = instance_spy('FabricColour', name: 'green'),
+        blue  = instance_spy('FabricColour', name: 'blue')
       ]
 
       cards = [
         instance_spy('FabricCard',
           name: 'canvas',
-          fabric_card_colours:
+          colours:
             [ instance_spy('FabricCardColour', position: 'blue99', fabric_colour: blue) ]
         ),
         instance_spy('FabricCard',
            name: 'burlap',
-           fabric_card_colours:
+           colours:
             [ instance_spy('FabricCardColour', position: 'green88', fabric_colour: green) ]
         )
       ]
