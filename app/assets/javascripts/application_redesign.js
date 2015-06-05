@@ -1,5 +1,4 @@
 // our code
-// jQuery needs to be loaded before every inline JS or library, so it's declared at the top of the body.
 //= require jquery_ujs
 //= require jquery-ui/datepicker
 //= require jquery-fileupload/vendor/jquery.ui.widget
