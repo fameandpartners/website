@@ -5,6 +5,8 @@ module Products
       include PathBuildersHelper
     end
 
+    extend ColorVariantImageDetector
+
     def self.index!
       helpers = Helpers.new
       au_site_version = SiteVersion.find_by_permalink('au')
@@ -90,22 +92,6 @@ module Products
       end
 
       index.refresh
-    end
-
-    def self.cropped_images_for(color_variant)
-      find_images = ->(matcher, item) do
-        item.images
-          .select { |i| i.attachment_file_name.downcase.include? matcher }
-          .sort_by(&:position)
-          .collect { |i| i.attachment.url(:large) }
-      end
-
-      cropped_images = find_images.call('crop', color_variant)
-
-      if cropped_images.blank?
-        cropped_images = find_images.call('front', color_variant)
-      end
-      cropped_images
     end
   end
 end

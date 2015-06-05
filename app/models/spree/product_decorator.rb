@@ -1,4 +1,6 @@
 Spree::Product.class_eval do
+  extend Spree::Product::CustomScopes
+
   has_one :celebrity_inspiration,
     dependent: :destroy,
     class_name: 'Spree::CelebrityInspiration',
