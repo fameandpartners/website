@@ -18,4 +18,11 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
     end
     relevance
   end
+
+  def generate_token
+    if self.token.blank?
+      update_column(:token, SecureRandom.hex(32))
+    end
+    self.token
+  end
 end

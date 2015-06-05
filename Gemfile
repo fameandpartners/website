@@ -52,7 +52,6 @@ gem 'spree_banner', '~> 1.3.0'
 
 
 gem 'fame_favicon', path: 'engines/fame_favicon'
-gem 'style_quiz',   path: "engines/style_quiz"
 
 # spree extensions for authentication
 gem 'spree_auth_devise',
