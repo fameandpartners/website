@@ -46,7 +46,7 @@ class  UserCart::Populator
     OpenStruct.new({ success: false, message: e.message })
   rescue Errors::ProductOptionNotAvailable => e
     OpenStruct.new({ success: false, message: e.message })
-  rescue Exception => e
+  rescue StandardError => e
     OpenStruct.new({ success: false, message: e.message })
   end
 
