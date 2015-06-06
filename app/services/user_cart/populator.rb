@@ -42,11 +42,16 @@ class  UserCart::Populator
       product: product,
       cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
-  rescue Errors::ProductOptionsNotCompatible => e
-    OpenStruct.new({ success: false, message: e.message })
-  rescue Errors::ProductOptionNotAvailable => e
-    OpenStruct.new({ success: false, message: e.message })
-  rescue StandardError => e
+  rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable, StandardError => e
+    begin
+      NewRelic::Agent.notice_error(e, {
+                                    :order              => @order,
+                                    :site_version       => @site_version,
+                                    :product_attributes => @product_attributes
+                                  })
+    rescue StandardError
+      #turtles
+    end
     OpenStruct.new({ success: false, message: e.message })
   end
 
