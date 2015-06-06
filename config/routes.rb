@@ -87,6 +87,8 @@ FameAndPartners::Application.routes.draw do
     get '/here-comes-the-sun-collection' => 'statics#here_comes_the_sun', :as => :here_comes_the_sun_collection
     get '/all-size' => 'statics#all_size', :as => :all_size_collection
 
+    get '/lookbook/bohemian-summer' => 'statics#bohemian_summer', :as => :bohemian_summer_collection
+
     get '/amfam'                  => redirect('/wicked-game-collection')
     get '/amfam-dresses'          => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
