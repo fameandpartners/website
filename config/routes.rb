@@ -1,5 +1,5 @@
 FameAndPartners::Application.routes.draw do
-  #mount StyleQuiz::Engine => "/style-quiz"
+  mount StyleQuiz::Engine => "/style-quiz"
 
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
