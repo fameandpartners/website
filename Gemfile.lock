@@ -176,6 +176,13 @@ PATH
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
 
+PATH
+  remote: engines/style_quiz
+  specs:
+    style_quiz (0.0.1)
+      jquery-rails
+      rails (~> 3.2.21)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -843,6 +850,7 @@ DEPENDENCIES
   spree_paypal_express!
   spree_social!
   spring
+  style_quiz!
   term-ansicolor
   therubyracer
   thin
@@ -855,4 +863,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-  1.10.0.pre
+   1.10.3
