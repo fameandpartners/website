@@ -67,7 +67,11 @@ window.StyleQuiz.Quiz = class Quiz
       type: 'POST',
       dataType: 'json',
       data: { answers: @answers() }
-    ).success(() =>
+    ).success((data, status, xhr) =>
+      if data.redirect_to
+        window.location = data.redirect_to
+      else
+        window.location = '/style-quiz/products'
       console.log('success', arguments)
     ).error(() =>
       console.log('error', arguments)

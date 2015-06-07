@@ -3,12 +3,19 @@ namespace :import do
   task :sku_generation_template => :environment do
     raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
 
-    file_path = ENV['FILE_PATH']
-
-    Importers::SkuGeneration::Importer.new(file_path).import
+    Importers::SkuGeneration::Importer.new(ENV['FILE_PATH']).import
   end
 
-  desc :existing_spree_variants
+  desc 'fabric_colour_cards'
+  task :fabric_colour_cards => :environment do
+
+    ENV['FILE_PATH'] ||= File.join(Rails.root, 'contentspreadsheets', 'fabric_cards_colours.csv')
+
+    raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
+    Importers::SkuGeneration::FabricCardImporter.new(ENV['FILE_PATH']).import
+  end
+
+  desc 'existing_spree_variants as skus in CSV format'
   task :existing_spree_variants => :environment do
 
     csv_string = CSV.generate(headers: true) do |csv|

@@ -17,6 +17,8 @@ configatron.aws.host = "images.fameandpartners.com"       # bucket: fameandpartn
 # configatron.aws.host = "product-images.fameandpartners.com"
 # configatron.aws.host = "demk2115tqgou.cloudfront.net" #bucket: fameandpartners-backup
 
+configatron.typekit_id = 'kur6crm'
+
 configatron.links do |links|
   links.twitter   = 'https://twitter.com/fameandpartners'
   links.facebook  = 'http://www.facebook.com/FameandPartners'
@@ -154,6 +156,7 @@ when :production
   configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
 
   configatron.customerio.site_id = 'a416731201185e0c6f5f'
+  configatron.typekit_id = 'day0prb'
 
 when :test
   configatron.elasticsearch.indices do |index|

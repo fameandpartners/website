@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150519111622) do
+ActiveRecord::Schema.define(:version => 20150603160139) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -423,6 +423,34 @@ ActiveRecord::Schema.define(:version => 20150519111622) do
   end
 
   add_index "email_notifications", ["spree_user_id", "code"], :name => "index_email_notifications_on_spree_user_id_and_code"
+
+  create_table "fabric_card_colours", :force => true do |t|
+    t.text     "position"
+    t.text     "code"
+    t.integer  "fabric_colour_id"
+    t.integer  "fabric_card_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "fabric_card_colours", ["fabric_card_id"], :name => "index_fabric_card_colours_on_fabric_card_id"
+  add_index "fabric_card_colours", ["fabric_colour_id"], :name => "index_fabric_card_colours_on_fabric_colour_id"
+
+  create_table "fabric_cards", :force => true do |t|
+    t.text     "name",        :null => false
+    t.text     "code"
+    t.text     "name_zh"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "fabric_colours", :force => true do |t|
+    t.text     "name"
+    t.integer  "dress_colour_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "fabrication_events", :force => true do |t|
     t.string   "fabrication_uuid"
@@ -1152,6 +1180,8 @@ ActiveRecord::Schema.define(:version => 20150519111622) do
     t.boolean  "is_service",           :default => false
     t.integer  "factory_id"
     t.string   "size_chart",           :default => "2014", :null => false
+    t.integer  "fabric_card_id"
+    t.string   "tags"
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
@@ -1508,6 +1538,40 @@ ActiveRecord::Schema.define(:version => 20150519111622) do
     t.integer  "zone_members_count", :default => 0
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+  end
+
+  create_table "style_quiz_answers", :force => true do |t|
+    t.integer "question_id"
+    t.boolean "active",      :default => true
+    t.string  "group"
+    t.string  "name"
+    t.string  "value"
+    t.string  "image"
+    t.integer "position"
+    t.string  "tags"
+  end
+
+  create_table "style_quiz_questions", :force => true do |t|
+    t.boolean "active",   :default => true
+    t.string  "code"
+    t.string  "name"
+    t.string  "template"
+    t.integer "position"
+  end
+
+  create_table "style_quiz_tags", :force => true do |t|
+    t.string "group"
+    t.string "name"
+  end
+
+  create_table "style_quiz_user_profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.string   "tags"
+    t.text     "answers"
+    t.text     "recommendated_products"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "styles", :force => true do |t|

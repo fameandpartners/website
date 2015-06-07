@@ -38,9 +38,11 @@ module Spree
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
         @orders = @search.result(distinct: true).includes(
           :user => [],
-          :shipments => [:inventory_units],
+          :shipments => {:inventory_units => :variant},
           :payments => [],
-          :line_items => {:variant => :product}
+          :line_items => {:variant => :product, :fabrication => [], :making_options => []},
+          :bill_address => [:state, :country],
+          :ship_address => [:state, :country]
         ).
             page(page).
             per(per_page)
@@ -63,7 +65,7 @@ module Spree
       private
 
       def order_shipment_states
-        Spree::Order.uniq.pluck(:shipment_state)
+        @order_shipment_states ||= Spree::Order.shipment_states
       end
 
       def hide_line_items

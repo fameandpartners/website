@@ -269,7 +269,7 @@ module ApplicationHelper
   end
 
   def dynamic_colors
-    type = Spree::OptionType.where(name: 'dress-color').first
+    type = Spree::OptionType.color
     return [] unless type
     values_table = Arel::Table.new(:spree_option_values)
     type.option_values.
@@ -305,11 +305,13 @@ module ApplicationHelper
     content_tag(:iframe, '', iframe_options.merge(src: media_player_url))
   end
 
-  def get_products_from_edit (edit, currency, user, count=9)
-    searcher = Products::ProductsFilter.new(:edits => edit)
+  def get_products_from_edit(edit, currency, user, count=9)
+    searcher = Products::ProductsFilter.new(:edits => edit, per_page: count)
     searcher.current_user = user
     searcher.current_currency = currency
-    return searcher.products.first(count)
+
+    # This is faster than doing all the N+1 query stuff that happens in the views.
+    Spree::Product.hydrated_from_ids(searcher.products.collect(&:id))
   end
 
   def current_sale

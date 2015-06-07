@@ -68,15 +68,3 @@ javascript:
                     .actions.text-center
                       = link_to 'Buy this Dress', product.path, class: 'buy btn btn-md btn-black', data: { variant: product.variant_id, id: product.item_id }
                       = link_to 'Remove', wishlists_item_path(product.item_id), id: "remove-product-#{product.item_id}", data: { id: product.item_id }, class: 'remove small'
-
-
-/ .modal.edit-line-item(style="display: none;")
-/   .overlay
-/   .modal-container
-/     .close-lightbox
-/     .edit-details
-/       .modal-title Specify product options
-/       .item
-/       .save
-/         span.error.message(style="display: none;") Please, select size and color
-/         input.btn.black type="submit" value="Move to cart & close"

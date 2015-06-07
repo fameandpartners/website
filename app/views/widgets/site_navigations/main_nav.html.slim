@@ -2,12 +2,10 @@ doctype html
 = conditional_html do
   head
 
-
     - if !Rails.env.production?
       meta name="robots" content="noindex, nofollow"
-      script src="//use.typekit.net/kur6crm.js" type="text/javascript"
-    - else
-      script src="//use.typekit.net/day0prb.js" type="text/javascript"
+
+    = render :partial => 'shared/typekit'
 
     script type="text/javascript"
       | try{Typekit.load();}catch(e){}

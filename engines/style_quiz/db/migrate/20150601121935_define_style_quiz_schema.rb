@@ -29,6 +29,7 @@ class DefineStyleQuizSchema < ActiveRecord::Migration
       t.string      :token
       t.string      :tags
       t.text        :answers
+      t.text        :recommendated_products
       t.timestamps
     end
 

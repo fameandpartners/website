@@ -78,6 +78,10 @@ class PaymentsReport
       order.shipped?
     end
 
+    def order_email
+      order.email
+    end
+
     def order_created
       order.created_at.try(:to_date).to_s
     end
@@ -99,6 +103,7 @@ class PaymentsReport
         currency:                  currency,
         order_number:              order_number,
         order_created:             order_created,
+        order_email:               order_email,
         order_state:               order_state,
         order_shipped:             order_shipped?,
         shipment_tracking_numbers: shipment_tracking_numbers

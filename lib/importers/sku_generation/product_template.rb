@@ -2,7 +2,7 @@ require 'active_model'
 
 module Importers
   module SkuGeneration
-    class TemplateProduct
+    class ProductTemplate
       attr_accessor :style_number, :style_name, :fabric_card, :base_sku_code, :base_sizes
 
       def initialize(style_number, style_name)
@@ -14,10 +14,14 @@ module Importers
         style_number
       end
 
+      def base_sizes
+        @base_sizes ||= BaseSize.size_set
+      end
+
       def variants
         @variants ||= fabric_card.colours.flat_map do |colour|
           base_sizes.collect do |size|
-            TemplateVariant.new(
+            VariantTemplate.new(
               self,
               fabric_card,
               colour,

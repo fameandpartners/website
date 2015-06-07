@@ -7,11 +7,11 @@ require "style_quiz/version"
 Gem::Specification.new do |s|
   s.name        = "style_quiz"
   s.version     = StyleQuiz::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of StyleQuiz."
-  s.description = "TODO: Description of StyleQuiz."
+  s.authors     = ["Evgeniy Petrov"]
+  s.email       = ["malleus.petrov@gmail.com"]
+  s.homepage    = "http://fameandpartners.com"
+  s.summary     = "Summary of StyleQuiz."
+  s.description = "Description of StyleQuiz."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]

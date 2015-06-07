@@ -2,9 +2,9 @@ module StyleQuiz
   class Seed
     def populate(options = {})
       puts "StyleQuiz::Seed. populate"
-      #populate_tags
-      #populate_questions
-      #populate_answers
+      populate_tags
+      populate_questions
+      populate_answers
       populate_products
     end
 

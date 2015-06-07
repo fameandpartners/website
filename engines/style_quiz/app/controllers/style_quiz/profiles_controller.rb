@@ -1,5 +1,7 @@
 module StyleQuiz
   class ProfilesController < ::StyleQuiz::ApplicationController
+    respond_to :html, :json
+
     def new
       @questions = StyleQuiz::UserQuestions.new(
         user: current_spree_user
@@ -19,11 +21,12 @@ module StyleQuiz
         answers_values: params[:answers].except(:ids)
       ).create
 
-      binding.pry
-
       store_profile(current_spree_user, profile)
 
-      redirect_to product_result
+      respond_to do |format|
+        format.html { redirect_to style_quiz.products_path }
+        format.json { render json: { redirect_to: style_quiz.products_path }}
+      end
     # rescue StyleQuiz::Errors::SomethingWrong
     end
 
@@ -41,7 +44,6 @@ module StyleQuiz
           profile.generate_token
           session[:user_style_profile_token] = profile.token
         end
-
       #rescue
       end
   end

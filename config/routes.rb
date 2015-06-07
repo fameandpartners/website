@@ -92,6 +92,8 @@ FameAndPartners::Application.routes.draw do
     get '/here-comes-the-sun-collection' => 'statics#here_comes_the_sun', :as => :here_comes_the_sun_collection
     get '/all-size' => 'statics#all_size', :as => :all_size_collection
 
+    get '/lookbook/bohemian-summer' => 'statics#bohemian_summer', :as => :bohemian_summer_collection
+
     get '/amfam'                  => redirect('/wicked-game-collection')
     get '/amfam-dresses'          => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
@@ -243,7 +245,7 @@ FameAndPartners::Application.routes.draw do
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
     get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
-    get '/plus-size',  to: redirect('/dresses')
+    get '/plus-size',  to: redirect('/dresses/plus-size')
 
     namespace "campaigns" do
       resource :email_capture, only: [:create], controller: :email_capture
@@ -317,6 +319,9 @@ FameAndPartners::Application.routes.draw do
 
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
+    resources :fabric_cards, :only => [:index, :show] do
+      resources :products, :only => [:show], controller: 'fabric_cards/products'
+    end
     resources :fabrications,       :only => :update
     resource  :payments_report,    :only => [:show, :create]
     resources :shipments,          :only => :update
@@ -457,7 +462,7 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
-    get 'search' => 'products/search_results#show'
+    get 'search' => 'products/base#search'
 
     # Guest checkout routes
     resources :payment_requests, only: [:new, :create]
