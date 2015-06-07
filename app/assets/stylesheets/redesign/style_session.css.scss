@@ -1,15 +1,20 @@
-.style-session-header {
+.style-session-header, .wedding-session-header {
   background-image: url('contact/style-session-header.jpg');
   height: 428px;
   background-size: cover;
   background-repeat: no-repeat;
   &.prom { background-image: url('contact/style-session-header2.jpg');}
 }
-
-.style-session .form {
-  width: 450px;
+.wedding-session-header {
+  background-image: url('contact/wedding-session-header.jpg');
 }
-.page-title.style-session {
+
+.style-session, .wedding-session {
+  .form { 
+    width: 450px;
+  }
+}
+.page-title.style-session, .page-title.wedding-session {
   background-color: black;
   text-align: center;
   height: 76px;
