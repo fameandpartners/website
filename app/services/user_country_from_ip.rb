@@ -8,22 +8,15 @@ class UserCountryFromIP
   end
 
   def country_code
-    begin
-      if valid_ip?
-        @country_code ||= geoip.country(ip).try(:country_code2)
-      end
-    rescue Exception => exception
-      Rails.logger.warn(exception.message)
+    if valid_ip?
+      @country_code ||= geoip.country(ip).try(:country_code2)
     end
+
   end
 
-  def country_name
-    begin
-      if valid_ip?
-        @country_code ||= geoip.country(ip).try(:country_name)
-      end
-    rescue Exception => exception
-      Rails.logger.warn(exception.message)
+  def country_name    
+    if valid_ip?
+      @country_name ||= geoip.country(ip).try(:country_name)
     end
   end
 
