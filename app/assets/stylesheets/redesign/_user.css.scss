@@ -1,12 +1,14 @@
 // Profile header 
 .style-profile-header {
-  
+  padding-top: 20px;
+  padding-bottom: 30px;
   .style-box {
     position: relative;
     text-align: center;
     margin-bottom: 20%;
     font-family: Forum;
     &.style-box-primary {
+      margin-bottom: 15%;
       .style-title-text { font-size: 4em;}
       .rhombus { font-size: 2em;}
     }
@@ -75,6 +77,10 @@
     font-weight: 600;
     line-height: 1.1;
     color: #000;
+    &.book-free-sm {
+      font-size: 35px;
+      margin-top: 0;
+    }
     &:hover { color: #000;}
     .icon {
       position: relative;
@@ -90,6 +96,18 @@
         background-color: #000;
       }
     }
+  }
+
+  .no-quiz {
+    background-color: #000;
+    padding: 32px;
+    color: #fff;
+    text-align: center;
+    font-size: 34px;
+    line-height: 1.2;
+    display: block;
+    &:hover { color: #fff;}
+    strong { display: block;}
   }
 }
 // @end Profile header
@@ -117,17 +135,22 @@
 	}
 
 	.avatar {
-		width: 100px;
-		height: 100px;
+		width: 175px;
+		height: 175px;
 		border-radius: 100%;
-		margin-right: 20px;
-		margin-left: 110px;
 		overflow: hidden;
-		display:block;
+		display: inline-block;
 		&.empty {
 			background: url('_reg/avatar-empty.png') no-repeat center center #e1e1e1;
 		}
 	}
+
+  .devise-forms {
+    .col-md-8 {
+      label { margin-bottom: 0;}
+      .form-group { margin-bottom: 14px;}
+    }
+  }
 }
 // @end Account
 // ---------------

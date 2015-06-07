@@ -1,6 +1,8 @@
 .user-account-page-title
   .container
+    h1.text-center.user-account-title.no-padding-bottom.text-white Style profile.
     .style-profile-header
+      / HAS QUIZ
       .row
         .col-sm-4
           .style-box.style-box-primary
@@ -57,7 +59,21 @@
             ' consultation.
             br
             span.icon.icon-hr-right
-
+      
+      / NO QUIZ
+      / .row
+        .col-sm-8
+          = link_to '#', class: 'no-quiz'
+            strong 
+              ' Call to action to take the quiz
+            ' (To be designed)
+        .col-sm-4
+          = link_to '#', class: 'book-free book-free-sm'
+            ' Book a free styling
+            br
+            ' consultation.
+            br
+            span.icon.icon-hr-right
 
     / .page-title--details
     /   h1.user-account-title.no-padding-bottom.text-white Account Settings
@@ -68,53 +84,59 @@
 
     = render 'users/shared/tabs', active_tab: 'account_settings'
 
-    .panel.panel-default
-      .panel-body
-        = form_for @user, :as => :profile, :url => profile_path, :method => :put, :html => { :class => 'devise-forms' } do |f|
-
-         .row
-          .col-md-6.col-xs-12
+    .panel-body
+      = form_for @user, :as => :profile, :url => profile_path, :method => :put, :html => { :class => 'devise-forms' } do |f|
+        h2.font-forum.text-center EDIT YOUR ACCOUNT SETTINGS
+        .row
+          .col-md-8.col-xs-12
             = render 'shared/redesign/error_messages', target: @user
-
+            .row
+              .col-md-6.col-xs-12
+                .form-group
+                  = f.label :first_name
+                  = f.text_field :first_name, :class => 'form-control form-control-md text-left'
+              .col-md-6.col-xs-12
+                .form-group
+                  = f.label :last_name
+                  = f.text_field :last_name, :class => 'form-control form-control-md text-left'
+            .row
+              .col-md-6.col-xs-12
+                .form-group
+                  label Date of birth
+                  input.form-control.form-control-md.text-left type="text"/
+              .col-md-6.col-xs-12
+                .form-group
+                  = f.label :email
+                  = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md text-left'
+            .row
+              .col-md-6.col-xs-12
+                .form-group
+                  = f.label :password
+                  = f.password_field :password, autocomplete: 'off', value: '', :class => 'form-control form-control-md text-left'
+              .col-md-6.col-xs-12
+                .form-group
+                  = f.label :password_confirmation
+                  = f.password_field :password_confirmation, autocomplete: 'off', value: '', :class => 'form-control form-control-md text-left'
+            = f.submit 'Save changes', class: 'btn btn-black btn-block'
+          .col-md-4.col-xs-12.text-center
             .form-group
-              = f.label :first_name
-              = f.text_field :first_name, :class => 'form-control standard-form'
-            .form-group
-              = f.label :last_name
-              = f.text_field :last_name, :class => 'form-control standard-form'
-            .form-group
-              = f.label :email
-              = f.email_field :email, autocomplete: :off, :class => 'form-control standard-form'
-            .form-group
-              = f.label :password
-              = f.password_field :password, autocomplete: 'off', value: '', :class => 'form-control standard-form'
-            .form-group
-              = f.label :password_confirmation
-              = f.password_field :password_confirmation, autocomplete: 'off', value: '', :class => 'form-control standard-form'
-
-          .col-md-6.col-xs-12
-            .form-group.text-center
-              .avatar-field
-                - if @user.image.present?
-                  .avatar
-                    = image_tag @user.image, width: 100
-                - else
-                 .avatar.empty
-
+              - if @user.image.present?
+                .avatar = image_tag @user.image, width: '100%'
+              - else
+               .avatar.empty
             .form-group
               input id="fileupload" type="file" style="display: none;"
+              small
+                ' Available file formats are:
+                = Spree::User::ALLOWED_AVATAR_FILE_TYPES.map{|type| %Q(".#{type.partition('/').last}") }.join(', ')
+                ' .
+                br
+                ' Maximum size is:
+                = number_to_human_size(Spree::User::ALLOWED_AVATAR_FILE_SIZE.max)
+                | .
             .form-group
-              p
-                small
-                  ' Available file formats are:
-                  = Spree::User::ALLOWED_AVATAR_FILE_TYPES.map{|type| %Q(".#{type.partition('/').last}") }.join(', ')
-                  ' .
-                  br
-                  ' Maximum size is:
-                  = number_to_human_size(Spree::User::ALLOWED_AVATAR_FILE_SIZE.max)
-                  | .
-              input.btn.btn-upload type="button" value="Upload profile photo"
+              input.btn.btn-black.btn-upload type="button" value="Upload profile photo"
 
-          .col-md-12
-            .form-group
-              = f.submit 'Save changes', class: 'btn button primary'
+        / .col-md-12
+        /   .form-group
+        /     = f.submit 'Save changes', class: 'btn button primary'
