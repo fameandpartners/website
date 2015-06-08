@@ -80,21 +80,7 @@ class Marketing::Subscriber
     end
 
     def country_name
-      self.class.get_country(ipaddress).try(:country_name)
+      UserCountryFromIP.new(ipaddress).country_name
     end
 
-  public
-
-  class << self
-    def geoip
-      @geoip ||= GeoIP.new(File.join(Rails.root, 'db', 'GeoIP.dat'))
-    end
-
-    def get_country(remote_ip)
-      return nil if remote_ip.blank? || remote_ip == '127.0.0.1'
-      geoip.country(remote_ip)
-    rescue Exception => e
-      nil
-    end
-  end
 end

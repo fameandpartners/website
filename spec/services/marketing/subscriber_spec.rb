@@ -61,6 +61,8 @@ describe Marketing::Subscriber do
     it "returns valid ip address" do
       ip = 'test_ip_address'
 
+      allow(UserCountryFromIP).to receive(:new).and_return(double('Country', :country_name => 'blah'))
+
       # by user last_sign_in_ip
       user.last_sign_in_ip = ip
       expect( Marketing::Subscriber.new(ipaddress: ip ).details['ipaddress']).to eq(ip)
@@ -73,6 +75,7 @@ describe Marketing::Subscriber do
     end
 
     it "returns valid country name" do
+
       expect(
         Marketing::Subscriber.new(ipaddress: '46.191.225.134').details['country']
       ).to eq('Russian Federation')

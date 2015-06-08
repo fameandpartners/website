@@ -1,9 +1,15 @@
 Spree::Address.class_eval do
   attr_accessible :email
 
-  def self.default(site_version = nil)
+  def self.default(site_version = nil, country_code = nil)
+
     if site_version.present?
-      country = site_version.default_country || site_version.countries.first
+      #use country code from session?
+      if country_code.present? && country_code.downcase != site_version.code
+        country = Spree::Country.find_by_iso(country_code)
+      else
+        country = site_version.default_country || site_version.countries.first
+      end
     end
 
     country ||= Spree::Country.find(Spree::Config[:default_country_id]) rescue Spree::Country.first
