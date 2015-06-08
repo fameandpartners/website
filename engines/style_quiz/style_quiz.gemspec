@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2.21"
   s.add_dependency "jquery-rails"
-
-  #s.add_development_dependency "sqlite3"
+  s.add_dependency "spree", github: 'spree/spree', branch: '1-3-stable'
+  s.add_dependency "pg", "~> 0.18"
+  s.add_dependency "slim", "~> 3.0"
+  s.add_dependency "slim-rails", "~> 3.0.1"
 end
