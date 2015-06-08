@@ -88,7 +88,7 @@ module Feeds
             end
           end
         end
-      # end
+      end
 
       items
     end
