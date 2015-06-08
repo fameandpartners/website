@@ -69,9 +69,6 @@
 // campaigns
 //= require partials/fitgau_reminder
 
-// promos
-//= require_tree ./promos
-
 
 jQuery(document).ready(function($){
   // function add_script(src) {

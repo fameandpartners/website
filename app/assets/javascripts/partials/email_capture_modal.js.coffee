@@ -1,11 +1,33 @@
 window.page or= {}
 
 window.page.EmailCaptureModal = class EmailCaptureModal
+  # @opts[Object]
+  #   action - submit url
+  #   className - additional classname for container
+  #   container - markup container
+  #   content: - ?
+  #   force: force showing modal
+  #   heading - heading text
+  #   promocode - promo code
+  #   timeout - timeout to show modal
+  #   timer - countdown timer value in hours
   constructor: (opts = {}) ->
     @opts = opts
-    timeout = (opts.timeout*1000) || 3000
+    timeout = (opts.timeout * 1000) || 3000
     @$container = $(opts.container)
     @cookie = "email_capture_#{@opts.content}"
+
+    promo_cookie = "promos_#{@opts.promocode}_started_at"
+
+    if @opts.timer
+      # timer value is in hours
+      @promoStartedAt = $.cookie(promo_cookie)
+      if !@promoStartedAt
+        today = +new Date()
+        $.cookie(promo_cookie, today, {expires: Math.floor(@opts.timer / 24) + 1})
+        @promoStartedAt = today
+      else
+        @promoStartedAt = +@promoStartedAt
 
     setTimeout(@open, timeout) if @pop
 
@@ -43,16 +65,60 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     window.helpers.showAlert(message: 'Is your email address correct?')
     window.track.event('LandingPageModal', 'Error', @opts.content, @opts.promocode)
 
-  onOpen: =>
+  onOpen: (modal) =>
     $('.vex-dialog-buttons button').addClass('btn btn-black') # HACKETRY
     if @opts.submitText
       $('.vex-dialog-form button[type=submit]').val(@opts.submitText)
 
     window.track.event('LandingPageModal', 'Opened', @opts.content, @opts.promocode)
 
+    $modal = $(modal)
+    @$timerHours   = $modal.find('.hh')
+    @$timerMinutes = $modal.find('.mm')
+    @$timerSeconds = $modal.find('.ss')
+
+    if @opts.timer && @promoStartedAt
+      @updateTimer(@promoStartedAt, @opts.timer)
+      @initTimer(@promoStartedAt, @opts.timer)
+
   message: =>
     h = if @opts.heading then "<h2>#{@opts.heading}</h2>" else ''
-    "#{h}<p>#{@opts.message}</p>"
+    str = "#{h}<p>#{@opts.message}</p>"
+
+    if @opts.timer
+      str += '<div class="h1 timer-box"><span class="hh">48</span><span class="mm">00</span><span class="ss">00</span></div>'
+
+    str
+
+  formatTime: (time) =>
+    if time < 10
+      "0#{time}"
+    else
+      "#{time}"
+
+  updateTimer: (startTime, durationInHours) =>
+    currentTime = +new Date()
+    diffInSeconds = Math.floor((currentTime - startTime) / 1000)
+    diffInSeconds = durationInHours * 3600 - diffInSeconds
+
+    if diffInSeconds > 0
+      hours   = Math.floor(diffInSeconds / 3600)
+      minutes = Math.floor((diffInSeconds - hours * 3600) / 60)
+      seconds = Math.floor(diffInSeconds - hours * 3600 - minutes * 60)
+
+      @$timerHours.html(@formatTime(hours))
+      @$timerMinutes.html(@formatTime(minutes))
+      @$timerSeconds.html(@formatTime(seconds))
+      true
+    else
+     false
+
+  initTimer: (startTime, timer)=>
+    setTimeout =>
+      console.log('test')
+      if @updateTimer(startTime, timer)
+        @initTimer(startTime, timer)
+    , 1000
 
   open: () =>
     vex.dialog.buttons.NO.text = 'X'

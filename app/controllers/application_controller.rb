@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
   before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
-  before_filter :set_promotion_cookies
 
   def count_competition_participants
     cpt = params[:cpt]
@@ -138,18 +137,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def set_promotion_cookies
-    # 48h only! Save 15% off your killer prom dress
-    return unless configatron.promo_48h_15_percent_off.enabled
-
-    param_name         = configatron.promo_48h_15_percent_off.param_name
-    ends_at_param_name = configatron.promo_48h_15_percent_off.ends_at_param_name
-
-    if params[param_name] && !cookies[ends_at_param_name]
-      cookies[ends_at_param_name] = (Time.now + configatron.promo_48h_15_percent_off.duration).strftime("%d %B %Y %H:%M:%S")
-    end
-  end
 
   def title(*args)
     @title = args.flatten.join(' | ')
@@ -379,17 +366,7 @@ class ApplicationController < ActionController::Base
   def current_promotion
     @current_promotion ||= begin
       code = params[:promocode] || cookies[:promocode]
-      promotion = code.present? ? Spree::Promotion.find_by_code(code) : nil
-
-      # auto promotions
-      if !promotion && configatron.promo_48h_15_percent_off.enabled
-        ends_at_param_name = configatron.promo_48h_15_percent_off.ends_at_param_name
-        ends_at = cookies[ends_at_param_name] ? Time.parse(cookies[ends_at_param_name]) : nil
-        if cookies[ends_at_param_name] && ends_at && ends_at > Time.now
-          promotion = Spree::Promotion.find_by_code(configatron.promo_48h_15_percent_off.promo_code)
-        end
-      end
-      promotion
+      code.present? ? Spree::Promotion.find_by_code(code) : nil
     end
   end
   helper_method :current_promotion
