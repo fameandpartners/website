@@ -366,7 +366,11 @@ class ApplicationController < ActionController::Base
   def current_promotion
     @current_promotion ||= begin
       code = params[:promocode] || cookies[:promocode]
-      code.present? ? Spree::Promotion.find_by_code(code) : nil
+      promotion = code.present? ? Spree::Promotion.find_by_code(code) : nil
+
+      if
+
+      promotion
     end
   end
   helper_method :current_promotion

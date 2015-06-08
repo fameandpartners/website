@@ -31,6 +31,8 @@ FameAndPartners::Application.routes.draw do
     end
   }
 
+  post '/promos/enable_auto_apply' => 'user_cart/promotions#enable_auto_apply'
+
   get '/undefined',    to: 'mysterious_route#undefined'
   get '/au/undefined', to: 'mysterious_route#undefined'
 

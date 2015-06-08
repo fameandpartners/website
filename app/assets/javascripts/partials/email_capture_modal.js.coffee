@@ -11,6 +11,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   #   promocode - promo code
   #   timeout - timeout to show modal
   #   timer - countdown timer value in hours
+  #   auto_apply_promo - automatically apply promo code for cart
   constructor: (opts = {}) ->
     @opts = opts
     timeout = (opts.timeout * 1000) || 3000
@@ -51,6 +52,9 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       window.helpers.showAlert(message: 'Did you mean to forget your email address?')
 
   success: (data) =>
+    if @opts.auto_apply_promo && @promoStartedAt
+      $.post('/promos/enable_auto_apply', {promocode: @opts.promocode, promo_started_at: @promoStartedAt, duration: @opts.timer})
+
     if data.status == 'ok'
       title = 'thanks babe'
 
@@ -115,7 +119,6 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
   initTimer: (startTime, timer)=>
     setTimeout =>
-      console.log('test')
       if @updateTimer(startTime, timer)
         @initTimer(startTime, timer)
     , 1000
