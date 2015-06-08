@@ -32,6 +32,7 @@ gem 'droidcss'
 # Data
 gem 'event_sourced_record'
 
+gem 'ipaddress'
 gem 'geoip', require: false
 gem 'rubyzip', '< 0.9.9', require: false
 gem 'roo', require: false
