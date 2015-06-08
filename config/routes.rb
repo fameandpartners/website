@@ -88,17 +88,21 @@ FameAndPartners::Application.routes.draw do
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
 
+    get '/bridesmaid-dresses' => redirect('/lookbook/bridesmaids')
+    get '/lookbook/bridesmaids' => 'products/collections#show', :permalink => 'Bridesmaid14', :as => :bridesmaid_collection
 
-    get '/all-size' => 'statics#all_size', :as => :all_size_collection
+    get '/all-size' => redirect('/lookbook/all-size')
+    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'plus-size', :as => :all_size_collection
 
-    get '/lookbook/bohemian-summer' => 'statics#bohemian_summer', :as => :bohemian_summer_collection
+    get '/prom-collection' => redirect('/lookbook/prom')
+    get '/lookbook/prom' => 'products/collections#show', :permalink => 'PROM2015', :as => :prom_collection
+
+    get '/lookbook/bohemian-summer' => 'products/collections#show', :permalink => 'bohemian-summer', :as => :bohemian_summer_collection
 
     get '/amfam'                  => redirect('/wicked-game-collection')
     get '/amfam-dresses'          => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
-    get '/prom-collection' => 'statics#prom', :as => :prom_collection
-    get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
     get '/getitquick' => 'products/collections#show', defaults: { fast_making: true }, as: 'fast_making_dresses'
 

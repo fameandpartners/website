@@ -25,8 +25,11 @@ describe Revolution::Page do
       before do
         page.variables = {:blah => 'vtha'}
       end
-      it 'is published' do
+      it 'returns var' do
         expect(page.get(:blah)).to eq 'vtha'
+      end
+      it 'returns var' do
+        expect(page.get(:vtha)).to eq nil
       end
     end
 
