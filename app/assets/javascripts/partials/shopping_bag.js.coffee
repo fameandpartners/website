@@ -9,6 +9,7 @@ window.ShoppingBag = class ShoppingBag
     @cart       = options.cart # window.shopping_cart
     @rendered   = false
     @auto_open  = options.auto_open
+    @country_code = options.country_code
 
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
@@ -32,7 +33,7 @@ window.ShoppingBag = class ShoppingBag
     @
 
   render: () ->
-    @$container.html(@template(cart: @cart.data))
+    @$container.html(@template(cart: @cart.data, country_code: @country_code))
     @rendered = true
 
   close: () ->

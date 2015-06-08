@@ -40,18 +40,6 @@ class FindUsersSiteVersion
   end
 
   def fetch_user_country_code
-    begin
-      require 'geoip'
-      geoip = GeoIP.new(File.join(Rails.root, 'db', 'GeoIP.dat'))
-      remote_ip = request_ip
-      country_code = 'us'
-      if remote_ip != "127.0.0.1"
-        country_code = geoip.country(request_ip).try(:country_code2)
-      end
-      country_code.downcase
-    rescue Exception => exception
-      Rails.logger.warn(exception.message)
-      'us'
-    end
+    UserCountryFromIP.new(request_ip).country_code || 'us'
   end
 end

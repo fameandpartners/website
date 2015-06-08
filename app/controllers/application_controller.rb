@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   append_before_filter :handle_marketing_campaigns
 
   before_filter :check_site_version
+  before_filter :set_session_country
   before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
@@ -363,4 +364,9 @@ class ApplicationController < ActionController::Base
     session[:user_return_to] = location
     session[:spree_user_return_to] = location
   end
+
+  def set_session_country
+    session[:country_code] ||= UserCountryFromIP.new(request.remote_ip).country_code
+  end
+
 end

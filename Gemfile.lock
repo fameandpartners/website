@@ -804,6 +804,7 @@ DEPENDENCIES
   geoip
   google_drive (= 1.0.0)
   instagram
+  ipaddress
   jquery-fileupload-rails (= 0.4.1)
   jquery-rails
   jquery-ui-rails
