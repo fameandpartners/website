@@ -70,6 +70,11 @@ class Products::CollectionsController < Products::BaseController
       @canonical = dresses_path if @status == :not_found
     end
 
+    def limit
+      default = page.get(:lookbook) ? 99 : 20
+      params[:limit] || default
+    end
+
     def collection_resource(collection_options)
       @resource_args = {
         site_version:   current_site_version,
@@ -81,7 +86,7 @@ class Products::CollectionsController < Products::BaseController
         discount:       params[:sale] || params[:discount],
         fast_making:    params[:fast_making],
         order:          params[:order],
-        limit:          params[:limit] || 20, # page size
+        limit:          limit, # page size
         offset:         params[:offset] || 0
       }.merge(collection_options || {})
 
