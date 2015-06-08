@@ -7,6 +7,7 @@
 # events:
 #   on: 'question:completed'
 #   on: 'question:back'
+#   on: 'question:changed'
 #
 window.StyleQuiz ||= {}
 window.StyleQuiz.BaseQuestion = class BaseQuestion
@@ -23,11 +24,24 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
     @$container.show()
 
   isValid: () ->
-    # show error
     true
+
+  onValueChanged: (e) =>
+    @updateButtonsState()
+    @trigger('question:changed', {})
+
+  updateButtonsState: () =>
+    if @isValid()
+      @$container.find('*[data-action=next]').removeAttr('disabled').removeClass('disabled')
+    else
+      @$container.find('*[data-action=next]').attr('disabled', true).addClass('disabled')
 
   submitQuestion: (e) =>
     e.preventDefault()
+    if !@isValid()
+      @showValidationError()
+      return
+
     @trigger('question:completed', @value())
 
   previousQuestion: (e) =>
@@ -42,6 +56,9 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
       $(item).data('value')
     )
 
+  showValidationError: () ->
+    console.log('[placeholder][showValidationError]: question data is invalid')
+
   on: () -> @$container.on.apply(@$container, arguments)
   off: () -> @$container.off.apply(@$container, arguments)
   trigger: () -> @$container.trigger.apply(@$container, arguments)
@@ -49,6 +66,7 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
 window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->
     super(opts)
+    @$container.find('input').on('keyup', _.debounce(@onValueChanged, 100))
 
   value: () ->
     {
@@ -62,7 +80,6 @@ window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.
     if currentValue.fullname && currentValue.birthdate && currentValue.email
       return true
     else
-      # show validation messages?
       return false
 
 window.StyleQuiz.ColorPaletteQuestion = class ColorPaletteQuestion extends window.StyleQuiz.BaseQuestion
@@ -71,11 +88,16 @@ window.StyleQuiz.ColorPaletteQuestion = class ColorPaletteQuestion extends windo
 
     @$container.on('click', '.quiz-catalog .quiz-catalog-item', @toggleItemSelection)
 
-  toggleItemSelection: (e) ->
+  toggleItemSelection: (e) =>
     e.preventDefault()
     item = $(e.currentTarget)
     $(e.currentTarget).closest('.quiz-catalog').find('.quiz-catalog-item').not(item).removeClass('selected')
     item.addClass('selected')
+    @onValueChanged()
+
+  isValid: () ->
+    @$container.find('.quiz-catalog.hair .quiz-catalog-item.selected').length > 0 &&
+      @$container.find('.quiz-catalog.eyes .quiz-catalog-item.selected').length > 0
 
   value: () ->
     {
@@ -87,11 +109,15 @@ window.StyleQuiz.ColorDressesQuestion = class ColorDressesQuestion extends windo
     super(opts)
     @$container.on('click', '.quiz-catalog .quiz-catalog-item', @toggleItemSelection)
 
-  toggleItemSelection: (e) ->
+  toggleItemSelection: (e) =>
     e.preventDefault()
     item = $(e.currentTarget)
-    $(e.currentTarget).closest('.quiz-catalog').find('.quiz-catalog-item').not(item).removeClass('selected')
-    item.addClass('selected')
+    item.toggleClass('selected')
+    @onValueChanged()
+
+  isValid: () ->
+    current_value = @value()
+    current_value.ids && current_value.ids.length > 0
 
   value: () ->
     {
@@ -104,23 +130,32 @@ window.StyleQuiz.BodySizeShapeQuestion = class BodySizeShapeQuestion extends win
     @$container.on('click', '.quiz-catalog .quiz-catalog-item', @toggleItemSelection)
     @$container.on('click', '.size-picker .size', @toggleSizeSelection)
 
-  toggleItemSelection: (e) ->
+  toggleItemSelection: (e) =>
     e.preventDefault()
     item = $(e.currentTarget)
     $(e.currentTarget).closest('.quiz-catalog').find('.quiz-catalog-item').not(item).removeClass('selected')
     item.addClass('selected')
+    @onValueChanged()
 
-  toggleSizeSelection: (e) ->
+  toggleSizeSelection: (e) =>
     e.preventDefault()
     item = $(e.currentTarget)
     $(e.currentTarget).closest('.size-picker').find('.size').not(item).removeClass('selected')
     item.addClass('selected')
+    @onValueChanged()
+
+  selectedShapes: () ->
+    @getSelectedAnswers(@$container.find('.quiz-catalog .quiz-catalog-item.selected'))
+
+  selectedSizes: () ->
+    @getSelectedAnswers(@$container.find('.size-picker .size.selected'))
+
+  isValid: () ->
+    @selectedShapes().length > 0 && @selectedSizes() > 0
 
   value: () ->
-    shapes = @getSelectedAnswers(@$container.find('.quiz-catalog .quiz-catalog-item.selected'))
-    sizes = @getSelectedAnswers(@$container.find('.size-picker .size.selected'))
     {
-      ids: shapes.concat(sizes)
+      ids: @selectedShapes().concat(@selectedSizes())
     }
 
 window.StyleQuiz.EverydayStyleQuestion = class EverydayStyleQuestion extends window.StyleQuiz.BaseQuestion
@@ -128,9 +163,14 @@ window.StyleQuiz.EverydayStyleQuestion = class EverydayStyleQuestion extends win
     super(opts)
     @$container.on('click', '.quiz-catalog .dress-style', @toggleItemSelection)
 
-  toggleItemSelection: (e) ->
+  toggleItemSelection: (e) =>
     e.preventDefault()
     $(e.currentTarget).toggleClass('selected')
+    @onValueChanged()
+
+  isValid: () ->
+    current_value = @value()
+    current_value.ids && current_value.ids.length > 0
 
   value: () ->
     {
@@ -145,12 +185,17 @@ window.StyleQuiz.FashionImportanceQuestion = class FashionImportanceQuestion ext
     super(opts)
     @$container.on('click', '.rank-cell', @setRankingHandler)
 
-  setRankingHandler: (e) ->
+  setRankingHandler: (e) =>
     e.preventDefault()
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
+    @onValueChanged()
 
   value: (e) ->
     { ids: @getSelectedAnswers(@$container.find('.rank-cell.active')) }
+
+  isValid: () ->
+    current_value = @value()
+    current_value.ids && current_value.ids.length > 0
 
 window.StyleQuiz.SexynessImportanceQuestion = class SexynessImportanceQuestion extends window.StyleQuiz.FashionImportanceQuestion
 
@@ -171,6 +216,7 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
     }
     @events.push(event)
     @$container.find('.events-list').append($("<div class='col-4'><div class='event-tag'><span>#{ event.date } - #{ event.name }</span><div class='icon-cross' data-action='delete-event'></div></div></div>"))
+    @onValueChanged()
 
   deleteEvent: (e) =>
     e.preventDefault()
@@ -178,6 +224,10 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
     index = @$container.find('.events-list .col-4').index(item)
     @events.splice(index, 1)
     item.remove()
+    @onValueChanged()
 
   value: () ->
     { events: @events }
+
+  isValid: () ->
+    return true
