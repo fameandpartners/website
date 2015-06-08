@@ -69,7 +69,6 @@ FameAndPartners::Application.routes.draw do
     get '/nyfw-comp-terms-and-conditions',  to: redirect('/')
     get '/fashionitgirl2015-competition',  to: redirect('/')
 
-    get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/sale-dresses' => 'statics#sale', :as => :sale
@@ -88,8 +87,9 @@ FameAndPartners::Application.routes.draw do
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
 
-    get '/bridesmaid-dresses' => redirect('/lookbook/bridesmaids')
-    get '/lookbook/bridesmaids' => 'products/collections#show', :permalink => 'Bridesmaid14', :as => :bridesmaid_collection
+    get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
+    # get '/bridesmaid-dresses' => redirect('/lookbook/bridesmaids')
+    # get '/lookbook/bridesmaids' => 'products/collections#show', :permalink => 'Bridesmaid14', :as => :bridesmaid_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'plus-size', :as => :all_size_collection
