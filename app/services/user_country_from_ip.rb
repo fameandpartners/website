@@ -16,11 +16,11 @@ class UserCountryFromIP
   end
 
   def country
-    @country ||= geoip.country(ip) if valid_ip?    
+    @country ||= geoip.country(ip) if valid_ip?
   end
 
   def valid_ip?
-    ip.present? && ip != "127.0.0.1"
+    ip.present? && ip != "127.0.0.1" && IPAddress.valid?(ip)
   end
 
   private

@@ -24,7 +24,12 @@ describe UserCountryFromIP do
 
     context 'bad' do
       let(:ip) { '666.666.666.666' }
-      it { expect(service.country_code).to eq '--' }
+      it { expect(service.country_code).to eq nil }
+    end
+
+    context 'worse' do
+      let(:ip) { 'blah vtha' }
+      it { expect(service.country_code).to eq nil }
     end
 
     context 'nil' do
