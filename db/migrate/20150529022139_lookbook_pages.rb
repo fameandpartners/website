@@ -1,7 +1,7 @@
 class LookbookPages < ActiveRecord::Migration
   def up
 
-    Revolution::Page.create!(:path => '/dresses/*', :template_path => '/product/collections/show.html.slim').publish!
+    Revolution::Page.create!(:path => '/dresses/*', :template_path => '/products/collections/show.html.slim').publish!
     # '/landing_pages/here_comes_the_sun.html.slim'
     # '/lookbook/show.html.slim'
     lookbook_template = '/lookbook/show.html.slim'
@@ -22,13 +22,13 @@ class LookbookPages < ActiveRecord::Migration
     page.publish!
     page.translations.create!(:locale => 'en-US', :title => 'Break Hearts Not Bank Accounts', :meta_description => 'Break Hearts Not Bank Accounts')
 
-    page = Revolution::Page.create!(
-      :path => '/lookbook/bridesmaids',
-      :template_path => lookbook_template,
-      :variables => {:image_count => 10, :lookbook => true}
-    )
-    page.publish!
-    page.translations.create!(:locale => 'en-US', :title => 'Bridesmaids and Besties', :meta_description => 'Bridesmaids & Besties')
+    # page = Revolution::Page.create!(
+    #   :path => '/lookbook/bridesmaids',
+    #   :template_path => lookbook_template,
+    #   :variables => {:image_count => 10, :lookbook => true}
+    # )
+    # page.publish!
+    # page.translations.create!(:locale => 'en-US', :title => 'Bridesmaids and Besties', :meta_description => 'Bridesmaids & Besties')
 
     page = Revolution::Page.create!(
       :path => '/lookbook/all-size',
