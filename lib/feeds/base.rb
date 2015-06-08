@@ -75,8 +75,7 @@ module Feeds
 
     def get_items
       items = []
-      group = Spree::Product.active.includes(:variants).limit(10).all
-      # Spree::Product.active.includes(:variants).find_in_batches(batch_size: 10) do |group|
+      Spree::Product.active.includes(:variants).find_in_batches(batch_size: 10) do |group|
         group.each do |product|
           product.variants.each do |variant|
             begin
