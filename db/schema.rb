@@ -763,6 +763,44 @@ ActiveRecord::Schema.define(:version => 20150603000030) do
     t.datetime "updated_at",              :null => false
   end
 
+  create_table "revolution_pages", :force => true do |t|
+    t.integer  "template_id"
+    t.text     "path"
+    t.text     "template_path"
+    t.text     "canonical"
+    t.text     "redirect"
+    t.text     "variables"
+    t.datetime "publish_from"
+    t.datetime "publish_to"
+    t.integer  "parent_id"
+    t.integer  "lft",                           :null => false
+    t.integer  "rgt",                           :null => false
+    t.integer  "depth",          :default => 0, :null => false
+    t.integer  "children_count", :default => 0, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "revolution_pages", ["parent_id"], :name => "index_revolution_pages_on_parent_id"
+  add_index "revolution_pages", ["path"], :name => "index_revolution_pages_on_path", :unique => true
+  add_index "revolution_pages", ["publish_from", "publish_to"], :name => "index_revolution_pages_on_publish_from_and_publish_to"
+  add_index "revolution_pages", ["rgt"], :name => "index_revolution_pages_on_rgt"
+
+  create_table "revolution_translations", :force => true do |t|
+    t.integer  "page_id"
+    t.text     "locale"
+    t.text     "title"
+    t.text     "meta_description"
+    t.text     "heading"
+    t.text     "sub_heading"
+    t.text     "description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "revolution_translations", ["locale"], :name => "index_revolution_translations_on_locale"
+  add_index "revolution_translations", ["page_id"], :name => "index_revolution_translations_on_page_id"
+
   create_table "similarities", :force => true do |t|
     t.integer "original_id"
     t.integer "similar_id"

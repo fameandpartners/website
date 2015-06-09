@@ -12,6 +12,7 @@ configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
 # configatron.aws.host = "d1sd72h9dq237j.cloudfront.net"  # bucket: fameandpartners
 configatron.aws.host = "images.fameandpartners.com"       # bucket: fameandpartners
+configatron.asset_host = "assets.fameandpartners.com"
 # configatron.aws.host = "daoiay428tmxk.cloudfront.net"   # bucket: products-fameandpartners
 # configatron.aws.host = "images.fameandpartners.com"
 # configatron.aws.host = "product-images.fameandpartners.com"
@@ -74,7 +75,6 @@ configatron.elasticsearch.indices do |index|
   index.color_variants = :color_variants
 end
 
-
 configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
 
 
@@ -136,6 +136,8 @@ when :preproduction
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
 
   configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
+
+  configatron.asset_host = "assets.fameandpartners.com/preprod"
 
 when :production
   configatron.host      = 'www.fameandpartners.com'
