@@ -9,13 +9,14 @@
   h1
     | Register for
     br
-    span your styling session
+    span = @banner_text || 'your styling session'
   .bottom-arrow
 
 .page-content.contact.style-session
   .container.relative
     .form-global
       = form_for @style_session, url: style_session_path, method: :post, html: {class: 'form'} do |f|
+        = f.hidden_field :session_type
         .row
           .col-md-12.form-group
             label Full name

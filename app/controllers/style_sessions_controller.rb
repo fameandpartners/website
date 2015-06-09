@@ -3,8 +3,21 @@ class StyleSessionsController < ApplicationController
   layout 'redesign/application'
 
   def new
-    @style_session = StyleSession.new
-    title('Style Session', default_seo_title)
+    @style_session ||= StyleSession.new(
+      session_type: params[:session_type] || 'default'
+    )
+    case @style_session.session_type
+    when 'birthday'
+      title('Prom Birthday Style Session', default_seo_title)
+      @banner_text = 'your birthday styling session'
+    when 'prom'
+      title('Prom Style Session', default_seo_title)
+      @banner_text = 'your prom styling session'
+    else # default
+      title('Style Session', default_seo_title)
+      @banner_text = 'your styling session'
+    end
+
     @description = ""
   end
 
@@ -15,6 +28,7 @@ class StyleSessionsController < ApplicationController
       flash[:notice] = "We're on it!"
       redirect_to success_style_session_path
     else
+      new()
       render action: :new
     end
   end
