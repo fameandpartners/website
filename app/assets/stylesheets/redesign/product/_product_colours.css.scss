@@ -23,28 +23,9 @@
         padding: 0;
       }
 
-      .color-baby-pink {
-        background-color: #fde2f0;
-      }
-
-      .color-beige {
-        background-color: #efdecd;
-      }
-
-      .color-berry {
-        background-color: #873c44;
-      }
-
-      .color-black {
-        background-color: #000;
-      }
-
-      .color-black-and-peacock {
-        @include split-color-selector(#050505, #134b7d);
-      }
-
-      .color-blue {
-        background-color: #00F;
+      .color-pink-azalea-floral {
+        background-image: url(product-color-images/pinkazalea_floral.jpg);
+        background-size: cover;
       }
 
       .color-blue-azalea-floral {
@@ -52,341 +33,104 @@
         background-size: cover;
       }
 
-      .color-blush {
-        background-color: #eec6c6;
-      }
-
-      .color-brick {
-        background-color: #933;
-      }
-
-      .color-bright-red {
-        background-color: #f33;
-      }
-
-      .color-bronze {
-        background-color: #cd7f32;
-      }
-
-      .color-burgundy {
-        background-color: #690f0f;
-      }
-
-      .color-burnt-orange {
-        background-color: #f07532;
-      }
-
-      .color-candy-pink {
-        background-color: #f9f;
-      }
-
-      .color-champagne {
-        background-color: #f0debb;
-      }
-
-      .color-charcoal {
-        background-color: #3c3c3c;
-      }
-
-      .color-cherry-red {
-        background-color: #ba0e0e;
-      }
-
-      .color-cobalt-blue {
-        background-color: #0000e5;
-      }
-
-      .color-coral {
-        background-color: #ff6262;
-      }
-
-      .color-cotton-candy {
-        background-color: #fbbfe9;
-      }
-
-      .color-cream {
-        background-color: #FCFBE3;
-      }
-
-      .color-dark-purple {
-        background-color: #306;
-      }
-
-      .color-deep-purple {
-        background-color: #3C1362;
-      }
-
-      .color-dusty-pink {
-        background-color: #dd83b9;
-      }
-
-      .color-emerald-green {
-        background-color: #1B9975;
-      }
-
-      .color-fluoro-orange {
-        background-color: #F93;
-      }
-
-      .color-fuschia {
-        background-color: #FF77E8;
-      }
-
-      .color-gold {
-        background-color: #BF9541;
-      }
-
-      .color-green {
-        background-color: #0F0;
-      }
-
-      .color-grey {
-        background-color: #BCBEBB;
-      }
-
-      .color-hot-pink {
-        background-color: #f39;
-      }
-
-      .color-ice-blue {
-        background-color: #abfdff;
-      }
-
-      .color-indigo {
-        background-color: #36c;
-      }
-
-      .color-ivory {
-        background-color: #FFFFF0;
-      }
-
-      .color-red-and-white {
-        @include split-color-selector(#FF0000, #FFFFF0);
-      }
-
-      .color-ivory-and-hot-pink {
-        @include split-color-selector(#FFFFF0, #FF3399);
-      }
-
-      .color-ivory-and-navy {
-        @include split-color-selector(#FFFFF0, #00004C);
-      };
-
-      .color-ivory-and-pink {
-        @include split-color-selector(#FFFFF0, #FF3399);
-      }
-
-      .color-lavender {
-        background-color: #d9c0e7;
-      }
-
-      .color-lavender-grey {
-        background-color: #99c;
-      }
-
-      .color-lemon {
-        background-color: #FFFACD;
-      }
-
-      .color-lemon-sorbet {
-        background-color: #ff9;
-      }
-
-      .color-light-blue {
-        background-color: #6cf;
-      }
-
-      .color-light-pink {
-        background-color: #ffecef;
-      }
-
-      .color-light-pink-and-charcoal {
-        @include split-color-selector(#FFECEF, #3C3C3C);
-      }
-
-      .color-lilac {
-        background-color: #ecddf4;
-      }
-
-      .color-magenta {
-        background-color: #e137b7;
-      }
-
-      .color-marine-blue {
-        background-color: #055281;
-      }
-
-      .color-mauve {
-        background-color: #d4a8cc;
-      }
-
       .color-midnight-floral {
         background-image:url(product-color-images/midnightfloral.jpg);
         background-size:cover;
       }
 
-      .color-mint {
-        background-color: #91ffdb;
-      }
-
-      .color-moss-green {
-        background-color: #8ea578;
-      }
-
-      .color-navy {
-        background-color: #00004c;
-      }
-
-      .color-mushroom {
-        background-color: #d2bec4
-      }
-
-      .color-neon-mint {
-        background-color: #33ffc6;
-      }
-
-      .color-nude {
-        background-color:#fdd5b1;
-      }
-
-      .color-off-white {
-        background-color: #fffef6;
-      }
-
-      .color-orange {
-        background-color: #ffae19;
-      }
-
-      .color-pale-blue {
-        background-color: #cdf1f4;
-      }
-
-      .color-pale-green {
-        background-color: #d1f6d7;
-      }
-
-      .color-pale-grey {
-        background-color:#e0e1e1;
-      }
-
-      .color-pale-pink {
-        background-color: #fff2f4;
-      }
-
-      .color-pale-yellow {
-        background-color: #f0f0ca;
-      }
-
-      .color-peach {
-        background-color:#FDE4D8;
-      }
-
-      .color-persian-green {
-        background-color: #00A693;
-      }
-
-      .color-pine {
-        background-color: #128755;
-      }
-
-      .color-pink {
-        background-color: #FF93CA;
-      }
-
-      .color-pink-azalea-floral {
-        background-image: url(product-color-images/pinkazalea_floral.jpg);
-        background-size: cover;
-      }
-
-      .color-pink-red {
-        @include split-color-selector(#FF3399, #d00);
-      }
-
-      .color-plum {
-        background-color: #8D4585;
-      }
-
-      .color-purple {
-        background-color: #622b6f;
-      }
-
-      .color-red {
-        background-color: #d00;
-      }
-
-      .color-royal-blue {
-        background-color: #3f34b2;
-      }
-
-      .color-sage {
-        background-color: #826a77;
-      }
-
-      .color-sage-green {
-        background-color: #95c7bc;
-      }
-
-      .color-salmon {
-        background-color: #FF8C69;
-      }
-
-      .color-sand {
-        background-color:#efeadd;
-      }
-
-      .color-seafoam {
-        background-color: #52d2c8;
-      }
-
-      .color-seashell {
-        background-color: #FFFAEF;
-      }
-
-      .color-silver {
-        background-color: #A4A5A7;
-      }
-
-      .color-sky-blue {
-        background-color: #c2e4f4;
-      }
-
-      .color-taupe {
-        background-color: #c9bba4;
-      }
-
-      .color-teal {
-        background-color: #41a9ab;
-      }
-
-      .color-turquoise {
-        background-color: #7deee5;
-      }
-
-      .color-vibrant-purple {
-        background-color: #9f6ba9;
-      }
-
-      .color-watermelon {
-        background-color: #F36;
-      }
-
-      .color-white {
-        background-color: #fff;
-      }
+      .color-baby-pink               { background-color: #fde2f0; }
+      .color-beige                   { background-color: #efdecd; }
+      .color-berry                   { background-color: #873c44; }
+      .color-black                   { background-color: #000; }
+      .color-black-and-peacock       { @include split-color-selector(#050505, #134b7d); }
+      .color-blue                    { background-color: #00F; }
+      .color-blush                   { background-color: #eec6c6; }
+      .color-brick                   { background-color: #933; }
+      .color-bright-red              { background-color: #f33; }
+      .color-bronze                  { background-color: #cd7f32; }
+      .color-burgundy                { background-color: #690f0f; }
+      .color-burnt-orange            { background-color: #f07532; }
+      .color-candy-pink              { background-color: #f9f; }
+      .color-champagne               { background-color: #f0debb; }
+      .color-charcoal                { background-color: #3c3c3c; }
+      .color-cherry-red              { background-color: #ba0e0e; }
+      .color-cobalt-blue             { background-color: #0000e5; }
+      .color-coral                   { background-color: #ff6262; }
+      .color-cotton-candy            { background-color: #fbbfe9; }
+      .color-cream                   { background-color: #FCFBE3; }
+      .color-dark-purple             { background-color: #306; }
+      .color-deep-purple             { background-color: #3C1362; }
+      .color-dusty-pink              { background-color: #dd83b9; }
+      .color-emerald-green           { background-color: #1B9975; }
+      .color-fluoro-orange           { background-color: #F93; }
+      .color-fuschia                 { background-color: #FF77E8; }
+      .color-gold                    { background-color: #BF9541; }
+      .color-green                   { background-color: #0F0; }
+      .color-grey                    { background-color: #BCBEBB; }
+      .color-hot-pink                { background-color: #f39; }
+      .color-ice-blue                { background-color: #abfdff; }
+      .color-indigo                  { background-color: #36c; }
+      .color-ivory                   { background-color: #FFFFF0; }
+      .color-red-and-white           { @include split-color-selector(#FF0000, #FFFFF0); }
+      .color-ivory-and-hot-pink      { @include split-color-selector(#FFFFF0, #FF3399); }
+      .color-ivory-and-navy          { @include split-color-selector(#FFFFF0, #00004C); }
+      .color-ivory-and-pink          { @include split-color-selector(#FFFFF0, #FF3399); }
+      .color-lavender                { background-color: #d9c0e7; }
+      .color-lavender-grey           { background-color: #99c; }
+      .color-lemon                   { background-color: #FFFACD; }
+      .color-lemon-sorbet            { background-color: #ff9; }
+      .color-light-blue              { background-color: #6cf; }
+      .color-light-pink              { background-color: #ffecef; }
+      .color-light-pink-and-charcoal { @include split-color-selector(#FFECEF, #3C3C3C); }
+      .color-lilac                   { background-color: #ecddf4; }
+      .color-magenta                 { background-color: #e137b7; }
+      .color-marine-blue             { background-color: #055281; }
+      .color-mauve                   { background-color: #d4a8cc; }
+      .color-mint                    { background-color: #91ffdb; }
+      .color-moss-green              { background-color: #8ea578; }
+      .color-navy                    { background-color: #00004c; }
+      .color-mushroom                { background-color: #d2bec4 }
+      .color-neon-mint               { background-color: #33ffc6; }
+      .color-nude                    { background-color: #fdd5b1; }
+      .color-off-white               { background-color: #fffef6; }
+      .color-orange                  { background-color: #ffae19; }
+      .color-pale-blue               { background-color: #cdf1f4; }
+      .color-pale-green              { background-color: #d1f6d7; }
+      .color-pale-grey               { background-color: #e0e1e1; }
+      .color-pale-pink               { background-color: #fff2f4; }
+      .color-pale-yellow             { background-color: #f0f0ca; }
+      .color-peach                   { background-color: #FDE4D8; }
+      .color-persian-green           { background-color: #00A693; }
+      .color-pine                    { background-color: #128755; }
+      .color-pink                    { background-color: #FF93CA; }
+      .color-pink-red                { @include split-color-selector(#FF3399, #d00); }
+      .color-plum                    { background-color: #8D4585; }
+      .color-purple                  { background-color: #622b6f; }
+      .color-red                     { background-color: #d00; }
+      .color-royal-blue              { background-color: #3f34b2; }
+      .color-sage                    { background-color: #826a77; }
+      .color-sage-green              { background-color: #95c7bc; }
+      .color-salmon                  { background-color: #FF8C69; }
+      .color-sand                    { background-color: #efeadd; }
+      .color-seafoam                 { background-color: #52d2c8; }
+      .color-seashell                { background-color: #FFFAEF; }
+      .color-silver                  { background-color: #A4A5A7; }
+      .color-sky-blue                { background-color: #c2e4f4; }
+      .color-taupe                   { background-color: #c9bba4; }
+      .color-teal                    { background-color: #41a9ab; }
+      .color-turquoise               { background-color: #7deee5; }
+      .color-vibrant-purple          { background-color: #9f6ba9; }
+      .color-watermelon              { background-color: #F36; }
 
       .color-white, .color-optic-white {
         background-color: #FFF;
-        border: 1px dashed #EEE;
+        border: 1px dashed #eee;
       }
-
       .color-white-and-black, .color-monochrome {
         @include split-color-selector(#FCF8F7, #050505);
-        border: 1px dashed #EEE
-      }
+        border: 1px dashed #eee; }
 
-      .color-wine {
-        background-color: #831C2E;
-      }
+      .color-wine                    { background-color: #831C2E; }
     }
   }
 }
