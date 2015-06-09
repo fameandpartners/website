@@ -129,6 +129,21 @@ Spree::Order.class_eval do
     Spree::Money.new(promotion_total, { :currency => currency })
   end
 
+  def promotions
+    self.adjustments.promotion.map do |credit|
+      credit.originator.promotion
+    end
+  end
+
+  def promocode
+    promo = promotions.find{|promo| promo.event_name == "spree.checkout.coupon_code_added" }
+    if promo
+      promo.code.to_s.upcase
+    else
+      nil
+    end
+  end
+
   def confirmation_required?
     false
   end

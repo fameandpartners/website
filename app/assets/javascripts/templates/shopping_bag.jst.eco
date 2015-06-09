@@ -74,6 +74,16 @@
 <!--cd-cart-items-->
 <div class="cart-total">
   <p>
+    Shipping<span><%= @cart.display_shipment_total %></span>
+  </p>
+  <p>
+    <% if @cart.promocode: %>
+      Promotion (<%= @cart.promocode %>)<span><%= @cart.display_promotion_total %></span>
+    <% else: %>
+      Promotion<span><%= @cart.display_promotion_total %></span>
+    <% end %>
+  </p>
+  <p>
     Total<span><%= @cart.display_total %></span>
   </p>
 </div>
