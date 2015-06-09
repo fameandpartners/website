@@ -368,8 +368,6 @@ class ApplicationController < ActionController::Base
       code = params[:promocode] || cookies[:promocode]
       promotion = code.present? ? Spree::Promotion.find_by_code(code) : nil
 
-      if
-
       promotion
     end
   end
