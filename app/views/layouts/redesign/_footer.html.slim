@@ -67,10 +67,36 @@
           = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
             = image_tag '_icons/twitter.png'
 
-
+#popup_with_timer.hide
+  h1 $25 OFF, JUST FOR YOU.
+  h2 48 HOURS ONLY
+  .timer-box
+    span 
+      span 0
+      span 0
+    span
+      span 0
+      span 0
+    span
+      span 0
+      span 2
+  form.form
+    .row
+      .col-sm-5 
+        .form-group
+          = link_to 'Get using Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
+      .col-sm-2
+        .form-group
+          .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
+      .col-sm-5 
+        .form-group
+          .input-group
+            input.form-control.form-control-md type="text" placeholder="Enter your email address"
+            span.input-group-addon
+              input.btn-submit type="submit" value="Send"
 coffee:
   $ ->
     vex.open({
-      content: '<div class="h1">48h only! Save 15% off your killer prom dress</div><div class="h1 timer-box"><span class="hh">hh</span><span class="mm">mm</span><span class="ss">ss</span></div>',
-      className: 'vex-dialog-default vex-dialog-bottom vex-dialog-pink'
+      content: $('#popup_with_timer').html(),
+      className: 'vex-dialog-default vex-dialog-bottom vex-dialog-timer'
     })
