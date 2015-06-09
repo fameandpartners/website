@@ -342,6 +342,13 @@ class ApplicationController < ActionController::Base
       code = params[:promocode] || cookies[:promocode]
       promotion = code.present? ? Spree::Promotion.find_by_code(code) : nil
 
+      if !promotion && cookies[:auto_apply_promo_code] && true
+        time = Time.at(params[:promo_started_at].to_i) + params[:duration].to_i.hours
+        if time >= Time.now
+          promotion = Spree::Promotion.find_by_code(cookies[:auto_apply_promo_code])
+        end
+      end
+
       promotion
     end
   end
