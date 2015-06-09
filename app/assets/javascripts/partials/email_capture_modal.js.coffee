@@ -90,7 +90,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     str = "#{h}<p>#{@opts.message}</p>"
 
     if @opts.timer
-      str += '<div class="h1 timer-box"><span class="hh">48</span><span class="mm">00</span><span class="ss">00</span></div>'
+      str += '<div class="timer-box"><span><span class="hh">48</span></span><span><span class="mm">00</span></span><span><span class="ss">00</span></span></div>'
 
     str
 

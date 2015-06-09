@@ -78,22 +78,38 @@
 .timer-box {
   text-align: center;
   font-size: 0;
-  span {
+  > span {
     display: inline-block;
     vertical-align: middle;
-  }
-  > span {
-    + span { margin-left: 16px;}
-    > span {
-      width: 47px;
-      height: 50px;
-      line-height: 50px;
-      color: #fff;
-      font-size: 38px;
+    position: relative;
+    line-height: 1;
+    &:before, &:after {
+      content: '';
+      display: block;
+      width: 26px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
       background-color: #000;
-      + span { margin-left: 4px;}
+      z-index: 0;
     }
+    &:before { left: 0;}
+    &:after { right: 0;}
+    > span {
+      position: relative;
+      z-index: 1;
+      width: 54px;
+      height: 30px;
+      line-height: 30px;
+      color: #fff;
+      font-size: 18px;
+      letter-spacing: 17px;
+      text-indent: 9px;
+      display: inline-block;
+    }
+    + span { margin-left: 10px;}
   }
+  
 }
 // @end Timer
 // -----------------
