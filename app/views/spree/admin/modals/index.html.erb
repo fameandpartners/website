@@ -173,6 +173,9 @@
       label: "promocode",  param: "pc",  required: true,  encoded: true,  type: 'string',
       defaultValue: '<%= decode(params[:pc]).html_safe %>'
     }, {
+      label: "template name",param: "tn", required: false, encoded: true,  type: 'string',
+      defaultValue: '<%= decode(params[:tn]).html_safe %>'
+    }, {
       label: "heading",    param: "h",   required: false, encoded: true,  type: 'string',
       defaultValue: '<%= decode(params[:h]).html_safe %>'
     }, {

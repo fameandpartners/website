@@ -1,6 +1,7 @@
 - if pop?
   ruby:
     promocode = decode(params[:pc])
+    template_name = params[:tn].present? ? decode(params[:tn]) : 'default'
     heading = decode(params[:h])
     message = decode(params[:m])
     content = decode(params[:c]) || promocode
@@ -16,10 +17,10 @@
         message:   \"#{message}\",
         className: \"#{class_name}\",
         action:    \"#{campaigns_email_capture_path}\",
-        container: \"#email-capture-fields\",
+        container: \"#modal-popup-content-template\",
         timeout:    #{timeout},
         timer:      #{timer || 0},
-        auto_apply_promo: #{params[:aap]},
+        auto_apply_promo: #{params[:aap].present? && params[:aap].to_s == 'true'},
         force:      true
       });
     "
@@ -27,13 +28,32 @@
   = content_for :inline_javascript do
     = raw email_capture_modal
 
-  #email-capture-fields.hidden
+  #modal-popup-content-template.hidden
     input type="hidden" name="content" value=content
     input type="hidden" name="promocode" value=promocode
-    .row.no-padding
-      .col-md-8.col-md-offset-2.text-center
-        input.form-control.standard-form type="email" name="email" placeholder='email address'
-    .row.no-padding
-      .col-md-12.text-center
-        button.btn.submit type="submit" value="submit"
-          | Submit
+
+    - if template_name == 'blank'
+      / no content, avoid hiding all with css
+
+    - elsif template_name == 'signup'
+      .vex-footer
+        form
+          .row
+            .col-sm-5
+              = link_to 'Get using Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
+            .col-sm-2
+              .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
+            .col-sm-5
+              .input-group
+                input.form-control.form-control-md.form-control-transparent type="text" placeholder="Enter your email address"
+                span.input-group-addon
+                  input.btn-reset type="submit" value="Send"
+
+    - else # default, support legacy
+      .row.no-padding
+        .col-md-8.col-md-offset-2.text-center
+          input.form-control.standard-form type="email" name="email" placeholder='email address'
+      .row.no-padding
+        .col-md-12.text-center
+          button.btn.submit type="submit" value="submit"
+            | Submit
