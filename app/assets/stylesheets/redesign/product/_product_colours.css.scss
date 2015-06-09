@@ -71,7 +71,6 @@
       .color-ice-blue                { background-color: #abfdff; }
       .color-indigo                  { background-color: #36c; }
       .color-ivory                   { background-color: #FFFFF0; }
-      .color-red-and-white           { @include split-color-selector(#FF0000, #FFFFF0); }
       .color-ivory-and-hot-pink      { @include split-color-selector(#FFFFF0, #FF3399); }
       .color-ivory-and-navy          { @include split-color-selector(#FFFFF0, #00004C); }
       .color-ivory-and-pink          { @include split-color-selector(#FFFFF0, #FF3399); }
@@ -88,8 +87,8 @@
       .color-mauve                   { background-color: #d4a8cc; }
       .color-mint                    { background-color: #91ffdb; }
       .color-moss-green              { background-color: #8ea578; }
-      .color-navy                    { background-color: #00004c; }
       .color-mushroom                { background-color: #d2bec4 }
+      .color-navy                    { background-color: #00004c; }
       .color-neon-mint               { background-color: #33ffc6; }
       .color-nude                    { background-color: #fdd5b1; }
       .color-off-white               { background-color: #fffef6; }
@@ -107,6 +106,7 @@
       .color-plum                    { background-color: #8D4585; }
       .color-purple                  { background-color: #622b6f; }
       .color-red                     { background-color: #d00; }
+      .color-red-and-white           { @include split-color-selector(#FF0000, #FFFFF0); }
       .color-royal-blue              { background-color: #3f34b2; }
       .color-sage                    { background-color: #826a77; }
       .color-sage-green              { background-color: #95c7bc; }
@@ -121,6 +121,7 @@
       .color-turquoise               { background-color: #7deee5; }
       .color-vibrant-purple          { background-color: #9f6ba9; }
       .color-watermelon              { background-color: #F36; }
+      .color-wine                    { background-color: #831C2E; }
 
       .color-white, .color-optic-white {
         background-color: #FFF;
@@ -130,7 +131,6 @@
         @include split-color-selector(#FCF8F7, #050505);
         border: 1px dashed #eee; }
 
-      .color-wine                    { background-color: #831C2E; }
     }
   }
 }
