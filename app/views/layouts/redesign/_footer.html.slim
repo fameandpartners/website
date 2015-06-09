@@ -63,9 +63,31 @@
           = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
             = image_tag '_icons/twitter.png'
 
+#no_prom.hide
+  h1 Hey babe, looking for your dream birthday dress?
+  h2.text-uppercase.font-forum Let our stylists help you find it. 
+  .vex-footer
+    h4.text-light 
+      ' Sign up for a free styling session
+      strong =' link_to 'here', '/birthday-styling'
+#birthday_popup.hide
+  h1.text-uppercase Hey birthday babe
+  h2.text-uppercase Want 15% off your killer party dress?
+  .vex-footer
+    form
+      .row
+        .col-sm-5 
+          = link_to 'Get using Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
+        .col-sm-2
+          .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
+        .col-sm-5 
+          .input-group
+            input.form-control.form-control-md.form-control-transparent type="text" placeholder="Enter your email address"
+            span.input-group-addon
+              input.btn-reset type="submit" value="Send"
 #popup_with_timer.hide
-  h1 $25 OFF, JUST FOR YOU.
-  h2 48 HOURS ONLY
+  h1.text-uppercase $25 OFF, JUST FOR YOU.
+  h2.text-uppercase 48 HOURS ONLY
   .timer-box
     span 
       span 0
@@ -76,23 +98,31 @@
     span
       span 0
       span 2
-  form.form
-    .row
-      .col-sm-5 
-        .form-group
+  .vex-footer
+    form
+      .row
+        .col-sm-5 
           = link_to 'Get using Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
-      .col-sm-2
-        .form-group
+        .col-sm-2
           .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
-      .col-sm-5 
-        .form-group
+        .col-sm-5 
           .input-group
-            input.form-control.form-control-md type="text" placeholder="Enter your email address"
+            input.form-control.form-control-md.form-control-transparent type="text" placeholder="Enter your email address"
             span.input-group-addon
-              input.btn-submit type="submit" value="Send"
+              input.btn-reset type="submit" value="Send"
 coffee:
   $ ->
     vex.open({
       content: $('#popup_with_timer').html(),
-      className: 'vex-dialog-default vex-dialog-bottom vex-dialog-timer'
-    })
+      className: 'vex-dialog-default vex-dialog-bottom vex-dialog-pink'
+    });
+
+    vex.open({
+      content: $('#birthday_popup').html(),
+      className: 'vex-dialog-default vex-dialog-bottom vex-dialog-pink'
+    });
+
+    vex.open({
+      content: $('#no_prom').html(),
+      className: 'vex-dialog-default vex-dialog-bottom vex-dialog-pink'
+    });
