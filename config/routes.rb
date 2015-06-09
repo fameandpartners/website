@@ -264,7 +264,10 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
-    get '/styling-session' => 'style_sessions#new'
+    get '/styling-session'  => 'style_sessions#new', defaults: { session_type: 'default'  }
+    get '/birthday-styling' => 'style_sessions#new', defaults: { session_type: 'birthday' }
+    get '/prom-styling'     => 'style_sessions#new', defaults: { session_type: 'prom' }
+
     resource 'style-session', as: 'style_session', only: [:new, :create] do
       get 'success'
     end
