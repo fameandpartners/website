@@ -35,18 +35,6 @@ $product-color-hot-pink: #ff3399;
         padding: 0;
       }
 
-      .color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
-      .color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
-      .color-floral-dreamer          { @include image-color-selector('FloralDreamer.png'); }
-      .color-garden-floral           { @include image-color-selector('GardenFloral.png'); }
-      .color-geo-sage                { @include image-color-selector('GeoSage.png'); }
-      .color-monochrome              { @include image-color-selector('Monochrome.png'); }
-      .color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
-      .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
-      .color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }
-      .color-tribal-love             { @include image-color-selector('TribalLove.png'); }
-      .color-tropical-floral         { @include image-color-selector('TropicalFloral.png'); }
-      .color-watercolour             { @include image-color-selector('Watercolour.png'); }
       .color-aqua                    { background-color: #21cddb; }
       .color-baby-pink               { background-color: #fde2f0; }
       .color-beige                   { background-color: #efdecd; }
@@ -55,6 +43,7 @@ $product-color-hot-pink: #ff3399;
       .color-black-and-peacock       { @include split-color-selector($product-color-black, #134b7d); }
       .color-black-and-vintage-gold  { @include split-color-selector($product-color-black, #d8ba00); }
       .color-blue                    { background-color: #0000ff; }
+      .color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
       .color-blush                   { background-color: #eec6c6; }
       .color-brick                   { background-color: #993333; }
       .color-bright-red              { background-color: #ff3333; }
@@ -73,8 +62,11 @@ $product-color-hot-pink: #ff3399;
       .color-deep-purple             { background-color: #370840; }
       .color-dusty-pink              { background-color: #dd83b9; }
       .color-emerald-green           { background-color: #1b9975; }
+      .color-floral-dreamer          { @include image-color-selector('FloralDreamer.png'); }
       .color-fluoro-orange           { background-color: #ff9933; }
       .color-fuschia                 { background-color: #ff77e8; }
+      .color-garden-floral           { @include image-color-selector('GardenFloral.png'); }
+      .color-geo-sage                { @include image-color-selector('GeoSage.png'); }
       .color-gold                    { background-color: #bf9541; }
       .color-green                   { background-color: #00ff00; }
       .color-grey                    { background-color: #bcbebb; }
@@ -83,9 +75,9 @@ $product-color-hot-pink: #ff3399;
       .color-indigo                  { background-color: #3366cc; }
       .color-ivory                   { background-color: $product-color-ivory; }
       .color-ivory-and-hot-pink      { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
+      .color-ivory-and-ice-blue      { @include split-color-selector($product-color-ivory, $product-color-ice-blue); }
       .color-ivory-and-navy          { @include split-color-selector($product-color-ivory, #00004C); }
       .color-ivory-and-pink          { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
-      .color-ivory-and-ice-blue      { @include split-color-selector($product-color-ivory, $product-color-ice-blue); }
       .color-ivory-and-tan           { @include split-color-selector($product-color-ivory, #c3b58b); }
       .color-lavender                { background-color: #d9c0e7; }
       .color-lavender-grey           { background-color: #9999cc; }
@@ -94,6 +86,14 @@ $product-color-hot-pink: #ff3399;
       .color-light-blue              { background-color: #66ccff; }
       .color-light-pink              { background-color: #ffecef; }
       .color-light-pink-and-charcoal { @include split-color-selector(#ffecef, #3c3c3c); }
+      .color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
+      .color-monochrome              { @include image-color-selector('Monochrome.png'); }
+      .color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
+      .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
+      .color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }
+      .color-tribal-love             { @include image-color-selector('TribalLove.png'); }
+      .color-tropical-floral         { @include image-color-selector('TropicalFloral.png'); }
+      .color-watercolour             { @include image-color-selector('Watercolour.png'); }
       .color-lilac                   { background-color: #ecddf4; }
       .color-magenta                 { background-color: #e137b7; }
       .color-marine-blue             { background-color: #055281; }
