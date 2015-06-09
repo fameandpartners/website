@@ -1,0 +1,9 @@
+= stylesheet_link_tag 'application_redesign'
+
+h2 Colours Preview Tool
+#product-color-content style='text-align:center;color:#000;'
+  .recommended.grey style='display:flex; flex-wrap: wrap;'
+    - dress_colours.each do |color|
+        .color-option.product-option href="#" data-id=color.id  data-name=color.presentation
+          .option-box.color-box style='margin: 10px; width:220px;height:50px;' class="color-#{color.name}"
+          .option-name  = color.presentation
