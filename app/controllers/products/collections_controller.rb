@@ -59,7 +59,7 @@ class Products::CollectionsController < Products::BaseController
 
     def set_collection_seo_meta_data
       # set title / meta description / HTTP status / canonical for the page
-      if page.get(:lookbook)
+      if page && page.get(:lookbook)
         @title = "#{page.title} #{default_seo_title}"
         @description  = page.meta_description
       else
