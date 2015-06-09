@@ -1,3 +1,13 @@
+@mixin split-color-selector($start, $end) {
+  background: linear-gradient(-12.5deg,
+          $end 0%,
+          $end 50%,
+          $start 51%,
+          $start 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$start, endColorstr=$end, GradientType=1 );
+}
+
+
 #product-color-content {
 
   .explanation {
@@ -30,8 +40,7 @@
       }
 
       .color-black-and-peacock {
-        background: linear-gradient(-12.5deg, rgba(5,5,5,1) 0%, rgba(3,3,3,1) 50%, rgba(19,75,125,1) 51%, rgba(19,75,125,1) 71%, rgba(19,75,125,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#050505', endColorstr='#134b7d', GradientType=1 );
+        @include split-color-selector(#050505, #134b7d);
       }
 
       .color-blue {
@@ -151,19 +160,20 @@
         background-color: #FFFFF0;
       }
 
+      .color-red-and-white {
+        @include split-color-selector(#FF0000, #FFFFF0);
+      }
+
       .color-ivory-and-hot-pink {
-        background: linear-gradient(-12.5deg, rgba(255,51,153,1) 0%, rgba(255,51,153,1) 50%, rgba(255,255,240,1) 51%, rgba(255,255,240,1) 71%, rgba(255,255,240,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f39', endColorstr='#f39', GradientType=1 );
+        @include split-color-selector(#FFFFF0, #FF3399);
       }
 
       .color-ivory-and-navy {
-        background: linear-gradient(-12.5deg, rgba(0,0,76,1) 0%, rgba(0,0,76,1) 50%, rgba(255,255,240,1) 51%, rgba(255,255,240,1) 71%, rgba(255,255,240,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f39', endColorstr='#f39', GradientType=1 );
+        @include split-color-selector(#FFFFF0, #00004C);
       };
 
       .color-ivory-and-pink {
-        background: linear-gradient(-12.5deg, rgba(255,51,153,1) 0%, rgba(255,51,153,1) 50%, rgba(255,255,240,1) 51%, rgba(255,255,240,1) 71%, rgba(255,255,240,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f39', endColorstr='#f39', GradientType=1 );
+        @include split-color-selector(#FFFFF0, #FF3399);
       }
 
       .color-lavender {
@@ -191,8 +201,7 @@
       }
 
       .color-light-pink-and-charcoal {
-        background: linear-gradient(-12.5deg, rgba(60,60,60,1) 0%, rgba(60,60,60,1) 50%, rgba(255,236,239,1) 51%, rgba(255,236,239,1) 71%, rgba(255,236,239,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#050505', endColorstr='#fcf9f9', GradientType=1 );
+        @include split-color-selector(#FFECEF, #3C3C3C);
       }
 
       .color-lilac {
@@ -290,8 +299,7 @@
       }
 
       .color-pink-red {
-        background: linear-gradient(-12.5deg, rgba(221,0,0,1) 0%, rgba(221,0,0,1) 50%, rgba(255,51,153,1) 51%, rgba(255,51,153,1) 71%, rgba(255,51,153,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb0000', endColorstr='#d00', GradientType=1 );
+        @include split-color-selector(#FF3399, #d00);
       }
 
       .color-plum {
@@ -366,14 +374,13 @@
         background-color: #fff;
       }
 
-      .color-white,.color-optic-white {
+      .color-white, .color-optic-white {
         background-color: #FFF;
         border: 1px dashed #EEE;
       }
 
-      .color-white-and-black,.color-monochrome {
-        background: linear-gradient(-12.5deg, rgba(5,5,5,1) 0%, rgba(3,3,3,1) 50%, rgba(252,248,247,1) 51%, rgba(252,249,249,1) 71%, rgba(252,249,249,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#050505', endColorstr='#fcf9f9', GradientType=1 );
+      .color-white-and-black, .color-monochrome {
+        @include split-color-selector(#FCF8F7, #050505);
         border: 1px dashed #EEE
       }
 
