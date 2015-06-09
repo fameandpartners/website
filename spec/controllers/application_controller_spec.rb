@@ -12,6 +12,35 @@ describe ApplicationController, :type => :controller do
   end
 
   describe 'before filters' do
+    describe 'set_session_country' do
+
+      before do
+        ActionDispatch::Request.any_instance.stub(:remote_ip).and_return(ip)
+        get :index
+      end
+
+      context 'UK/GB' do
+        let(:ip)   { '217.27.250.160' }
+        it 'sets GB' do
+          expect(session[:country_code]).to eq 'GB'
+        end
+      end
+
+      context 'US' do
+        let(:ip)   { '74.86.15.72' }
+        it 'sets US' do
+          expect(session[:country_code]).to eq 'US'
+        end
+      end
+
+      context 'AU' do
+        let(:ip)   { '54.252.112.140' }
+        it 'sets AU' do
+          expect(session[:country_code]).to eq 'AU'
+        end
+      end
+    end
+
     describe '#check_site_version' do
       let!(:australian_site_version) { create(:site_version, permalink: 'au') }
       let!(:portuguese_site_version) { create(:site_version, permalink: 'pt') }

@@ -1,0 +1,16 @@
+javascript:
+  var switchTo5x=true;
+  (function() {
+  var stscr = document.createElement('script'); stscr.type = 'text/javascript'; stscr.async = true;
+    stscr.src ="http://w.sharethis.com/button/buttons.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(stscr, s);
+  stscr.onload=stCB;
+  stscr.onreadystatechange=function(){if(stscr.readyState=='loaded'){stCB();}};})();
+  function stCB(){
+    stLight.options({
+      publisher: "0babd5ea-dd86-4553-b8f6-ab4a6126df47",
+      doNotHash: false,
+      doNotCopy: false,
+      hashAddressBar: false
+    });
+  }

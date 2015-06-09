@@ -1,5 +1,7 @@
 class Admin::BulkOrderUpdatesController < Spree::Admin::BaseController
 
+  include Concerns::GlobalController
+
   helper_method :collection, :bulk_update
 
   def create

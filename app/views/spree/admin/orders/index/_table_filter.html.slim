@@ -56,11 +56,11 @@
     .four.columns
       .field
         = label_tag nil, 'Include Ship State'
-        = f.select :shipment_state_eq, options_for_select(order_shipment_states, params[:q][:shipment_state_eq] ), {:include_blank => false} , :class => 'select2'
+        = f.select :shipment_state_eq, options_for_select(order_shipment_states, params[:q][:shipment_state_eq] ), {:include_blank => true} , :class => 'select2'
     .omega.four.columns
       .field
         = label_tag nil, 'Exclude Ship State'
-        = f.select :shipment_state_not_eq, options_for_select(order_shipment_states, params[:q][:shipment_state_not_eq] ), {:include_blank => false} , :class => 'select2'
+        = f.select :shipment_state_not_eq, options_for_select(order_shipment_states, params[:q][:shipment_state_not_eq] ), {:include_blank => true} , :class => 'select2'
 
     .four.columns.alpha
       .field

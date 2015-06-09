@@ -163,7 +163,8 @@ Spree::CheckoutController.class_eval do
   end
 
   def build_default_address
-    address = Spree::Address.default(current_site_version)
+    address = Spree::Address.default(current_site_version, session[:country_code])
+
     if (user = try_spree_current_user).present?
       address.firstname ||= user.first_name
       address.lastname ||= user.last_name
@@ -190,7 +191,6 @@ Spree::CheckoutController.class_eval do
 
   def find_payment_methods
     @credit_card_gateway = CreditCardGatewayService.new(@order, current_site_version.currency).gateway
-
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
     end

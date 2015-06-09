@@ -138,7 +138,7 @@ module Products
           processed[:taxon_ids] << taxon.id
         end
 
-        color_option = Spree::OptionType.where(name: 'dress-color').first
+        color_option = Spree::OptionType.color
 
 
         processed[:colors] = []
@@ -351,6 +351,8 @@ module Products
         rescue Exception => message
           Rails.logger.warn(message)
           puts "======== Exception ========"
+          puts args[:sku]
+          puts args[:style_name]
           puts message
           puts "==========================="
           nil
@@ -439,13 +441,17 @@ module Products
         product.set_property(name, value)
       end
 
+      if factory = Factory.find_by_name(args[:factory_name].capitalize)
+        product.factory = factory
+      end
+
       product
     end
 
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
       variants = []
-      size_option = Spree::OptionType.where(name: 'dress-size').first
-      color_option = Spree::OptionType.where(name: 'dress-color').first
+      size_option = Spree::OptionType.size
+      color_option = Spree::OptionType.color
 
       product.option_types = [size_option, color_option]
       product.save
@@ -483,7 +489,7 @@ module Products
           usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
           usd.amount = price_in_usd
           usd.save!
-          
+
           variants.push(variant) if variant.persisted?
         end
       end

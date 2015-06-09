@@ -12,10 +12,13 @@ configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
 # configatron.aws.host = "d1sd72h9dq237j.cloudfront.net"  # bucket: fameandpartners
 configatron.aws.host = "images.fameandpartners.com"       # bucket: fameandpartners
+configatron.asset_host = "assets.fameandpartners.com"
 # configatron.aws.host = "daoiay428tmxk.cloudfront.net"   # bucket: products-fameandpartners
 # configatron.aws.host = "images.fameandpartners.com"
 # configatron.aws.host = "product-images.fameandpartners.com"
 # configatron.aws.host = "demk2115tqgou.cloudfront.net" #bucket: fameandpartners-backup
+
+configatron.typekit_id = 'kur6crm'
 
 configatron.links do |links|
   links.twitter   = 'https://twitter.com/fameandpartners'
@@ -71,7 +74,6 @@ configatron.elasticsearch.indices do |index|
   index.spree_products = :spree_products
   index.color_variants = :color_variants
 end
-
 
 configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
 
@@ -135,6 +137,8 @@ when :preproduction
 
   configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
 
+  configatron.asset_host = "assets.fameandpartners.com/preprod"
+
 when :production
   configatron.host      = 'www.fameandpartners.com'
   configatron.blog_host = 'blog.fameandpartners.com'
@@ -154,6 +158,7 @@ when :production
   configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
 
   configatron.customerio.site_id = 'a416731201185e0c6f5f'
+  configatron.typekit_id = 'day0prb'
 
 when :test
   configatron.elasticsearch.indices do |index|

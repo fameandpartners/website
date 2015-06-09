@@ -1,6 +1,6 @@
 namespace :colors do
   task :import_from_file => :environment do
-    option_type = Spree::OptionType.where(name: 'dress-color').first
+    option_type = Spree::OptionType.color
     option_values = YAML.load(File.open(File.join(Rails.root, 'lib', 'color', 'map.yml'))) rescue []
 
     option_values.each do |option_value|
@@ -12,7 +12,7 @@ namespace :colors do
   end
 
   task :export_to_file => :environment do
-    option_type = Spree::OptionType.where(name: 'dress-color').first
+    option_type = Spree::OptionType.color
     stored_values = YAML.load(File.open(File.join(Rails.root, 'lib', 'color', 'map.yml'))) rescue []
     if stored_values.present?
       new_values = stored_values
@@ -35,7 +35,7 @@ namespace :colors do
 
 
   task :import => :environment do
-    option_type = Spree::OptionType.where(name: 'dress-color').first
+    option_type = Spree::OptionType.color
     option_values = [
       {
         name: 'black',
@@ -275,7 +275,7 @@ namespace :colors do
   task :similarities => :environment do
     Similarity.delete_all
 
-    option_type = Spree::OptionType.where(name: 'dress-color').first
+    option_type = Spree::OptionType.color
     option_values = option_type.option_values.where(%q[value IS NOT NULL AND value != '']).to_a
 
     option_values.each_with_index do |original_option_value, index|

@@ -26,13 +26,13 @@ module Importers
           style_name = main_row["STYLE NAME"]
           fabric_sku_component = main_row["SKU CODE"].gsub(style_number, '').gsub(/\s+/, '')
 
-          sku_template = TemplateProduct.new(style_number, style_name)
+          sku_template = ProductTemplate.new(style_number, style_name)
           sku_template.base_sizes  = BaseSize.size_set
-          sku_template.fabric_card = FabricCard.new(main_row['FABRIC'], fabric_sku_component)
+          sku_template.fabric_card = FabricCardTemplate.new(main_row['FABRIC'], fabric_sku_component)
 
           sku_template.fabric_card.colours = rows.collect do |row|
             next if row["COLOUR #"].nil? && row['COLOUR'].nil?
-            colour = FabricCardColour.new(row["COLOUR #"], row['COLOUR'])
+            colour = FabricCardColourTemplate.new(row["COLOUR #"], row['COLOUR'])
 
             error "Invalid Colour for #{style_number} #{style_name}  number='#{colour.number}' name='#{colour.name}' " unless colour.valid?
             colour

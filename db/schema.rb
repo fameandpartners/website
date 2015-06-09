@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150519111622) do
+ActiveRecord::Schema.define(:version => 20150603000030) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -424,6 +424,34 @@ ActiveRecord::Schema.define(:version => 20150519111622) do
 
   add_index "email_notifications", ["spree_user_id", "code"], :name => "index_email_notifications_on_spree_user_id_and_code"
 
+  create_table "fabric_card_colours", :force => true do |t|
+    t.text     "position"
+    t.text     "code"
+    t.integer  "fabric_colour_id"
+    t.integer  "fabric_card_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "fabric_card_colours", ["fabric_card_id"], :name => "index_fabric_card_colours_on_fabric_card_id"
+  add_index "fabric_card_colours", ["fabric_colour_id"], :name => "index_fabric_card_colours_on_fabric_colour_id"
+
+  create_table "fabric_cards", :force => true do |t|
+    t.text     "name",        :null => false
+    t.text     "code"
+    t.text     "name_zh"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "fabric_colours", :force => true do |t|
+    t.text     "name"
+    t.integer  "dress_colour_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "fabrication_events", :force => true do |t|
     t.string   "fabrication_uuid"
     t.string   "event_type"
@@ -734,6 +762,44 @@ ActiveRecord::Schema.define(:version => 20150519111622) do
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
+
+  create_table "revolution_pages", :force => true do |t|
+    t.integer  "template_id"
+    t.text     "path"
+    t.text     "template_path"
+    t.text     "canonical"
+    t.text     "redirect"
+    t.text     "variables"
+    t.datetime "publish_from"
+    t.datetime "publish_to"
+    t.integer  "parent_id"
+    t.integer  "lft",                           :null => false
+    t.integer  "rgt",                           :null => false
+    t.integer  "depth",          :default => 0, :null => false
+    t.integer  "children_count", :default => 0, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "revolution_pages", ["parent_id"], :name => "index_revolution_pages_on_parent_id"
+  add_index "revolution_pages", ["path"], :name => "index_revolution_pages_on_path", :unique => true
+  add_index "revolution_pages", ["publish_from", "publish_to"], :name => "index_revolution_pages_on_publish_from_and_publish_to"
+  add_index "revolution_pages", ["rgt"], :name => "index_revolution_pages_on_rgt"
+
+  create_table "revolution_translations", :force => true do |t|
+    t.integer  "page_id"
+    t.text     "locale"
+    t.text     "title"
+    t.text     "meta_description"
+    t.text     "heading"
+    t.text     "sub_heading"
+    t.text     "description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "revolution_translations", ["locale"], :name => "index_revolution_translations_on_locale"
+  add_index "revolution_translations", ["page_id"], :name => "index_revolution_translations_on_page_id"
 
   create_table "similarities", :force => true do |t|
     t.integer "original_id"
@@ -1152,6 +1218,7 @@ ActiveRecord::Schema.define(:version => 20150519111622) do
     t.boolean  "is_service",           :default => false
     t.integer  "factory_id"
     t.string   "size_chart",           :default => "2014", :null => false
+    t.integer  "fabric_card_id"
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
