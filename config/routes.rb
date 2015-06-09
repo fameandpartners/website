@@ -329,6 +329,7 @@ FameAndPartners::Application.routes.draw do
     resource  :payments_report,    :only => [:show, :create]
     resources :shipments,          :only => :update
     resource  :sku_generation,     :only => [:show, :create]
+    resources :dress_colours,      :only => :index
   end
 
   Spree::Core::Engine.routes.append do
