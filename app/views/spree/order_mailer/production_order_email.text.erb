@@ -2,7 +2,9 @@ Order Summary（订单信息）
 Order Number: <%= order.number %>
 Order Site:   <%= order.site_version %>
 Items:        <%= order.total_items %>
-
+<% if order.promotion? %>
+Promotion:    <%= order.promo_codes.join(', ') %>
+<% end %>
 ============================================================
 
 <% order.line_items.each do |item| %>

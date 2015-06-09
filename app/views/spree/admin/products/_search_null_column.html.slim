@@ -1,0 +1,5 @@
+- search_param = :"#{column_name}_null"
+label
+  => f.check_box search_param, { :checked => params[:q][search_param].present? }, 'true', ''
+  => "#{column_name.to_s.humanize} Empty"
+

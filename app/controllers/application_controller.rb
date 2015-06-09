@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Common
   include ApplicationHelper
   include PathBuildersHelper
+  include Concerns::SiteVersion
 
   if Rails.env.preproduction?
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
@@ -19,6 +20,7 @@ class ApplicationController < ActionController::Base
   append_before_filter :handle_marketing_campaigns
 
   before_filter :check_site_version
+  before_filter :set_session_country
   before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
@@ -294,34 +296,6 @@ class ApplicationController < ActionController::Base
 #    end
   end
 
-  helper_method :current_site_version, :site_versions_enabled?
-
-  def site_versions_enabled?
-    @site_versions_enabled ||= (SiteVersion.count > 1)
-  end
-
-  def current_site_version
-    @current_site_version ||= begin
-      service = FindUsersSiteVersion.new(
-        user: current_spree_user,
-        url_param: params[:site_version],
-        cookie_param: cookies[:site_version],
-        request_ip: request.remote_ip
-      )
-      service.get().tap do |site_version|
-        cookies[:site_version]  ||= site_version.code
-        cookies[:ip_address]    ||= request.remote_ip
-        if current_spree_user && current_spree_user.site_version_id != site_version.id
-          current_spree_user.update_column(:site_version_id, site_version.id)
-        end
-      end
-    end
-  end
-
-  def current_site_version=(site_version)
-    @current_site_version = site_version
-  end
-
   def current_currency
     current_site_version.try(:currency) || Spree::Config[:currency]
   end
@@ -392,4 +366,9 @@ class ApplicationController < ActionController::Base
     session[:user_return_to] = location
     session[:spree_user_return_to] = location
   end
+
+  def set_session_country
+    session[:country_code] ||= UserCountryFromIP.new(request.remote_ip).country_code
+  end
+
 end

@@ -51,18 +51,80 @@
     .col-md-3.social-links.col-sm-12
       ul.footer-social
         li.footer-social--item
-          / span class='st_facebook_custom' displayText='Facebook'
           = link_to configatron.links.facebook, target: :blank, class: 'facebook' do
             = image_tag '_icons/facebook.png'
         li.footer-social--item
-          / span class='st_pinterest_custom' displayText='Pinterest'
           = link_to configatron.links.pinterest, target: :blank, class: 'pinterest' do
             = image_tag '_icons/pinterest.png'
         li.footer-social--item
-          / span class='st_instagram_custom' displayText='Instagram Badge' st_username='fameandpartners'
           = link_to configatron.links.instagram, target: :blank, class: 'instagram' do
             = image_tag '_icons/instagram.png'
         li.footer-social--item
-          / span class='st_twitter_custom' st_via="fameandpartners" displayText='Tweet'
           = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
             = image_tag '_icons/twitter.png'
+<<<<<<< HEAD
+=======
+
+#no_prom.hide
+  h1 Hey babe, looking for your dream birthday dress?
+  h2.text-uppercase.font-forum Let our stylists help you find it.
+  .vex-footer
+    h4.text-light
+      ' Sign up for a free styling session
+      strong =' link_to 'here', '/birthday-styling'
+#birthday_popup.hide
+  h1.text-uppercase Hey birthday babe
+  h2.text-uppercase Want 15% off your killer party dress?
+  .vex-footer
+    form
+      .row
+        .col-sm-5
+          = link_to 'Get using Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
+        .col-sm-2
+          .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
+        .col-sm-5
+          .input-group
+            input.form-control.form-control-md.form-control-transparent type="text" placeholder="Enter your email address"
+            span.input-group-addon
+              input.btn-reset type="submit" value="Send"
+#popup_with_timer.hide
+  h1.text-uppercase $25 OFF, JUST FOR YOU.
+  h2.text-uppercase 48 HOURS ONLY
+  .timer-box
+    span
+      span 0
+      span 0
+    span
+      span 0
+      span 0
+    span
+      span 0
+      span 2
+  .vex-footer
+    form
+      .row
+        .col-sm-5
+          = link_to 'Get using Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
+        .col-sm-2
+          .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
+        .col-sm-5
+          .input-group
+            input.form-control.form-control-md.form-control-transparent type="text" placeholder="Enter your email address"
+            span.input-group-addon
+              input.btn-reset type="submit" value="Send"
+coffee:
+  $ ->
+    vex.open({
+      content: $('#popup_with_timer').html(),
+      className: 'vex-dialog-default vex-dialog-bottom vex-dialog-pink'
+    });
+
+    vex.open({
+      content: $('#birthday_popup').html(),
+      className: 'vex-dialog-default vex-dialog-bottom vex-dialog-pink'
+    });
+
+    vex.open({
+      content: $('#no_prom').html(),
+      className: 'vex-dialog-default vex-dialog-bottom vex-dialog-pink'
+    });

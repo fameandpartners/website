@@ -24,6 +24,10 @@ gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
 
+# engines
+gem 'revolution', path: 'engines/revolution'
+
+
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
@@ -32,6 +36,7 @@ gem 'droidcss'
 # Data
 gem 'event_sourced_record'
 
+gem 'ipaddress'
 gem 'geoip', require: false
 gem 'rubyzip', '< 0.9.9', require: false
 gem 'roo', require: false
@@ -49,6 +54,9 @@ gem 'pry-rails'
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
+
+
+gem 'fame_favicon', path: 'engines/fame_favicon'
 
 # spree extensions for authentication
 gem 'spree_auth_devise',

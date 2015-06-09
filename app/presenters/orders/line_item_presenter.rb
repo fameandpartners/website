@@ -47,7 +47,8 @@ module Orders
     end
 
     def projected_delivery_date
-      @_projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(@item, wrapped_order).delivery_date
+      return unless wrapped_order.order.completed?
+      @projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(@item, @wrapped_order).delivery_date.try(:to_date)
     end
 
     def fabrication_status

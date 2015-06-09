@@ -17,7 +17,7 @@
     <legend align="center">Details</legend>
     <div class="align-center">
       <p><strong>Email:</strong> <%= @order.email %></p>
-      <p><strong>Phone:</strong> <%= @order.billing_address.phone %></p>
+      <p><strong>Phone:</strong> <%= @order.billing_address.try(:phone) %></p>
     </div>
   </fieldset>
   <% if @order.bill_address %>

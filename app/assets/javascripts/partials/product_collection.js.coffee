@@ -182,7 +182,5 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   setBannerTextClass: () =>
     bgImg = @$banner.css('background-image')
-    if bgImg.indexOf('dark-bg.jpg') != -1
+    if bgImg && bgImg.indexOf('dark-bg.jpg') != -1
       @$banner.addClass('dark-bg')
-    else if bgImg.indexOf('express-making.jpg') != -1
-      @$banner.addClass('express-making dark-bg')

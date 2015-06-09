@@ -1,5 +1,4 @@
 // our code
-//= require jquery
 //= require jquery_ujs
 //= require jquery-ui/datepicker
 //= require jquery-fileupload/vendor/jquery.ui.widget
@@ -69,19 +68,7 @@
 // campaigns
 //= require partials/fitgau_reminder
 
-
 jQuery(document).ready(function($){
-  // function add_script(src) {
-  //   var script_element = document.createElement('script');
-  //   script_element.setAttribute('src', src);
-  //   script_element.setAttribute('type', 'text/javascript')
-  //   document.head.appendChild(script_element);
-  //   return true
-  // };
-  //
-  // add_script('/assets/javascripts/styleguide/js/sg-scripts.js');
-
-
   $('#forgot-password').on('click', function(e) {
     e.preventDefault();
     email = $('#spree_user_email').val()
