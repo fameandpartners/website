@@ -49,6 +49,12 @@
     window.track.conversion('purchase');
   <% end %>
 <% end %>
+
+<%# Google Shopping verification code %>
+<% content_for :head do %>
+  <meta name="google-site-verification" content="ASqjutBTF0pN4o6WbzPc3jV09WW2hkokCPqmVHWp1uo" />
+<% end %>
+
 <%# twitter tracking pixel %>
 <% if flash[:commerce_tracking] || params[:force_tracking] %>
   <script src="//platform.twitter.com/oct.js" type="text/javascript" />
