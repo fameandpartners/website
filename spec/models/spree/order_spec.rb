@@ -15,13 +15,15 @@ describe Spree::Order, :type => :model do
     order.project_delivery_date
   end
 
-  describe 'promo' do
+  describe '#promotions' do
     # order.adjustments.promotions.originator.promotion
-    it 'returns empty promotions array' do
+    it 'new order doesnt have any promotions' do
       expect(order.promotions).to be_blank
     end
+  end
 
-    it 'returns applied promocode' do
+  describe "#promocode" do
+    it 'returns code only from coupon_code type promotions' do
       expect(order).to receive(:promotions).and_return([
         double('promo', code: 'IMFAME', event_name: "spree.checkout.another_code"),
         double('promo', code: 'FAME', event_name: "spree.checkout.coupon_code_added")

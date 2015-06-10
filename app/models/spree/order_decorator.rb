@@ -136,11 +136,8 @@ Spree::Order.class_eval do
   end
 
   def promocode
-    promo = promotions.find{|promo| promo.event_name == "spree.checkout.coupon_code_added" }
-    if promo
+    if promo = promotions.find{|promo| promo.event_name == "spree.checkout.coupon_code_added" }
       promo.code.to_s.upcase
-    else
-      nil
     end
   end
 
