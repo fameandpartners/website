@@ -242,9 +242,8 @@ Spree::Product.class_eval do
     property('short_description') || ''
   end
 
-  # properties have to be managed else where... two database requests for simple string?
   def color_customization
-    property('color_customization').to_s.downcase == 'yes'
+    DataCoercion.string_to_boolean(property('color_customization'))
   end
 
   def delete

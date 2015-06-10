@@ -35,6 +35,7 @@ gem 'droidcss'
 
 # Data
 gem 'event_sourced_record'
+gem 'coercible'
 
 gem 'ipaddress'
 gem 'geoip', require: false
