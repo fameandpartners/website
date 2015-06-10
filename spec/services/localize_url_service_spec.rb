@@ -61,12 +61,14 @@ describe LocalizeUrlService do
       end
     end
 
-    context 'given an URL without a site version (or unknown locale)' do
-      it 'does nothing' do
+    context 'given an URL/path without a site version' do
+      it 'does nothing on URLs' do
         given_url = 'http://example.com/pt/something?query=cool'
         result = described_class.remove_version_from_url(given_url)
         expect(result).to eq(given_url)
+      end
 
+      it 'does nothing on paths' do
         given_path = '/something?query=cool'
         result = described_class.remove_version_from_url(given_path)
         expect(result).to eq(given_path)
