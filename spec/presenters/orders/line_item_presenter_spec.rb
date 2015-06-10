@@ -64,5 +64,26 @@ module Orders
       end
 
     end
+
+    describe '#fabrication_status' do
+      let(:item)  { FactoryGirl.build(:line_item, fabrication: fabrication) }
+      let(:order) { FactoryGirl.build(:complete_order) }
+      subject     { described_class.new(item, order).fabrication_status }
+
+      context 'delegates state to fabrication' do
+        let(:fabrication) { Fabrication.new.tap { |f| f.state = :some_state } }
+
+        it do
+          is_expected.to eq :some_state
+        end
+      end
+
+      context 'fallback' do
+        let(:fabrication) { nil }
+        it do
+          is_expected.to eq :processing
+        end
+      end
+    end
   end
 end

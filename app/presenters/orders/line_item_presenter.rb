@@ -120,6 +120,7 @@ module Orders
         :projected_delivery_date => projected_delivery_date,
         :tracking_number         => tracking_number,
         :shipment_date           => shipped_at.try(:to_date),
+        :fabrication_state       => fabrication_status,
         :style                   => style_number,
         :factory                 => factory,
         :color                   => colour_name,
