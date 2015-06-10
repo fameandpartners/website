@@ -4,7 +4,6 @@ FameAndPartners::Application.routes.draw do
   scope '(:site_version)' do
     get 'sitemap_index', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
     get 'sitemap', to: 'sitemaps#show', format: true, constraints: { format: /xml|xml.gz/ }
-    get 'images_sitemap', to: 'sitemaps#images', format: true, constraints: { format: /xml|xml.gz/ }
   end
 
   match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
