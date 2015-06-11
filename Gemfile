@@ -26,8 +26,15 @@ gem 'titleize'
 gem 'autoprefixer-rails'
 
 # engines
-gem 'revolution', path: 'engines/revolution'
+path 'engines' do
+  gem 'revolution'
+  gem 'admin_ui'
+  gem 'fame_favicon'
+  gem 'inspinia-rails'
+end
 
+# TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it, but it wont be available as a helper method unless it's included in the main app for some reason.
+gem 'active_link_to'
 
 # assets
 gem 'jquery-rails'
@@ -57,8 +64,6 @@ gem 'pry-rails'
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
 
-
-gem 'fame_favicon', path: 'engines/fame_favicon'
 
 # spree extensions for authentication
 gem 'spree_auth_devise',
