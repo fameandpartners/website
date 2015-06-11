@@ -8,22 +8,19 @@
 .page-content.registration.new.sign-up
   .container.relative
     .row
-      .col-md-8.col-sm-12
-        .row
-          h2.checkout-section-title Create an account to save your dress to a Moodboard to discover your Style Profile, share with friends and to manage your profile. Its easy just enter some basic details!
-          = link_to fb_auth_path(signup_params), class: 'btn btn-facebook btn-block btn-black btn-md fb-login' do
+      .col-md-8
+        h2.checkout-section-title Create an account to save your dress to a Moodboard to discover your Style Profile, share with friends and to manage your profile. Its easy just enter some basic details!
+        = link_to fb_auth_path(signup_params), class: 'btn btn-facebook btn-block btn-black btn-md fb-login' do
 
-            span Sign up with facebook
+          span Sign up with facebook
 
-        .row.text-center
-          h2.decorated
-            span or
+        h2.decorated.text-center
+          span or
 
-        .row
-          = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
-            = f.hidden_field :site_version_id, value: current_site_version.id
-            = render 'shared/redesign/error_messages', :target => @spree_user
-            = render :partial => 'spree/shared/user_form', :locals => { :f => f }
+        = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
+          = f.hidden_field :site_version_id, value: current_site_version.id
+          = render 'shared/redesign/error_messages', :target => @spree_user
+          = render :partial => 'spree/shared/user_form', :locals => { :f => f }
 
           .terms.small
             ' By registering above you acknowledge and accept our Terms of Service.
