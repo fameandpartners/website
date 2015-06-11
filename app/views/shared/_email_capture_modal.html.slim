@@ -44,7 +44,6 @@
   = content_for :inline_javascript do
     = raw email_capture_modal
 
-
   - if template_name == 'blank'
     #modal-popup-content-template.hidden
       input type="hidden" name="content" value=content
@@ -77,10 +76,9 @@
     #modal-popup-content-template.hidden
       input type="hidden" name="content" value=content
       input type="hidden" name="promocode" value=promocode
-      .row.no-padding
-        .col-md-8.col-md-offset-2.text-center
+      .row
+        .col-md-8.col-md-offset-2.text-center.wrap-email
           input.form-control.standard-form type="email" name="email" placeholder='email address'
-      .row.no-padding
-        .col-md-12.text-center
+        .col-xs-12.text-center.wrap-button
           button.btn.submit type="submit" value="submit"
             | Submit
