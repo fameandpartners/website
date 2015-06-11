@@ -8,5 +8,10 @@ namespace :feed do
         puts 'feed:export:all disabled for non-production env'
       end
     end
+
+    task :test => :environment do
+      Feeds::Base.export!('au')
+      Feeds::Base.export!('us')
+    end
   end
 end
