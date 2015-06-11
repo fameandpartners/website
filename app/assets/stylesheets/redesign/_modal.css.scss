@@ -487,6 +487,46 @@
     font-size: 0.65em;
   }
 
+  .vex-footer-email {
+    background: transparent !important;
+    padding-bottom: 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    .wrap-email {
+      float: none;
+      width: 50%;
+      margin-left: 0;
+      display: inline-block;
+      vertical-align: top;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .wrap-button {
+      width: auto;
+      float: none;
+      display: inline-block;
+      vertical-align: top;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .form-control {
+      font-size: 24px !important;
+      padding-top: 30px !important;
+      background: transparent !important;
+      border-bottom: 2px solid #322f31 !important;
+      box-shadow: none !important;
+    }
+    .btn-plain {
+      padding-left: 0;
+      padding-right: 0;
+      text-transform: none;
+      height: 60px;
+      line-height: 60px;
+      background: transparent;
+      font-size: 18px;
+    }
+  }
 
   // Timer
   &.vex-timer {
@@ -509,13 +549,16 @@
   &.vex-text {
     .vex-dialog-message {
       margin: 0;
-      h3 {
+      h2, h3 {
         text-transform: uppercase;
         font-size: 28px;
         font-weight: 300;
-        margin-bottom: 30px;
         color: #000;
         font-family: forum;
+        background: #f9ebf7;
+        line-height: 1.5;
+        padding: 28px 0 18px;
+        margin-bottom: 0;
         strong {
           display: block;
           font-family: "brandon-grotesque", sans-serif;
@@ -525,9 +568,15 @@
           font-weight: 400;
         }
       }
+      p {
+        display: none;
+      }
       div {
         background-color: #f9ebf7;
         padding: 30px;
+      }
+      .timer-box {
+        padding-top: 0;
       }
       p:last-child {display: none;}
     }
@@ -535,63 +584,3 @@
 }
 // @end Modal generator templates
 // -----------------
-
-.vex.vex-send-mom {
-  .vex-content {
-    border: 0;
-    h2 {
-      color: #000;
-      background: #f5e0f2;
-      text-align: center;
-      font-size: 33px;
-      text-transform: none;
-      line-height: 1.5;
-      padding: 28px 0 18px;
-      .subtitle {
-        font-size: 28px;
-        font-family: Forum, serif;
-        text-transform: uppercase;
-      }
-    }
-    .vex-dialog-form {
-      background: #f9ebf7;
-    }
-  }
-  .vex-dialog-input {
-    padding-bottom: 30px;
-    margin-bottom: 0;
-    text-align: center;
-    .wrap-email {
-      float: none;
-      width: 50%;
-      margin-left: 0;
-      display: inline-block;
-      vertical-align: top;
-      padding-left: 0;
-      padding-right: 0;
-    }
-    .wrap-button {
-      width: auto;
-      float: none;
-      display: inline-block;
-      vertical-align: top;
-      padding-left: 0;
-      padding-right: 0;
-    }
-    .form-control {
-      padding-top: 30px !important;
-      background: transparent !important;
-      border-bottom: 2px solid #322f31 !important;
-      box-shadow: none !important;
-    }
-    .btn {
-      padding-left: 0;
-      padding-right: 0;
-      text-transform: none;
-      height: 60px;
-      line-height: 60px;
-      background: transparent;
-      font-size: 18px;
-    }
-  }
-}
