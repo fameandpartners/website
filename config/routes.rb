@@ -1,4 +1,6 @@
 FameAndPartners::Application.routes.draw do
+  SITE_VERSIONS = /(us|au)/
+
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
   scope '(:site_version)' do
@@ -12,7 +14,7 @@ FameAndPartners::Application.routes.draw do
   get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
   get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
 
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+  scope "(:site_version)", constraints: { site_version: SITE_VERSIONS } do
     devise_for :user, class_name: Spree::User, skip: [:unlocks, :registrations, :passwords, :sessions, :omniauth_callbacks]
     devise_scope :user do
       get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
@@ -34,7 +36,7 @@ FameAndPartners::Application.routes.draw do
   get '/undefined',    to: 'mysterious_route#undefined'
   get '/au/undefined', to: 'mysterious_route#undefined'
 
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+  scope "(:site_version)", constraints: { site_version: SITE_VERSIONS } do
     devise_for :spree_user,
                :class_name => 'Spree::User',
                :controllers => { :sessions => 'spree/user_sessions',
@@ -59,7 +61,7 @@ FameAndPartners::Application.routes.draw do
     get 'main_nav' => 'site_navigations#main_nav'
   end
 
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+  scope "(:site_version)", constraints: { site_version: SITE_VERSIONS } do
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
     get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
@@ -205,7 +207,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Blog routes
-  scope "(/:site_version)/blog", constraints: { site_version: /(us|au)/ } do
+  scope "(/:site_version)/blog", constraints: { site_version: SITE_VERSIONS } do
     get '/' => 'blog#index', as: :blog
     get '/about'   => 'blog#about', as: :about
     get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
@@ -225,7 +227,7 @@ FameAndPartners::Application.routes.draw do
     get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
   end
 
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+  scope "(:site_version)", constraints: { site_version: SITE_VERSIONS } do
 
     # Blogger static page
     get '/bloggers/liz-black', to: redirect("/")
@@ -465,7 +467,7 @@ FameAndPartners::Application.routes.draw do
     end
   end
 
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+  scope "(:site_version)", constraints: { site_version: SITE_VERSIONS } do
 
     get 'search' => 'products/base#search'
 
