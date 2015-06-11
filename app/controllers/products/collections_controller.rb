@@ -110,12 +110,11 @@ class Products::CollectionsController < Products::BaseController
         return { color_group: color_group.name }
       end
 
-      taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
-      if taxon.present?
+      if taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
         # style, edits, events, range, seocollection
-        case taxon.taxonomy.to_s.downcase
+        case taxonomy = taxon.taxonomy.downcase
         when 'style', 'edits', 'event'
-          return { taxon.taxonomy.to_s.downcase.to_sym => permalink }
+          return { taxonomy.to_sym => permalink }
         when 'range'
           return { collection: permalink }
         end
