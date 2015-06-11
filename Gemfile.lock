@@ -780,6 +780,7 @@ DEPENDENCIES
   active_model_serializers
   acts-as-taggable-on
   addressable
+  autoprefixer-rails
   awesome_print
   aws-sdk
   bootstrap-sass
