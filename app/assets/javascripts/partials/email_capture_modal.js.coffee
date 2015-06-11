@@ -64,6 +64,9 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       # show next popup in chain
       if @opts.promocode && @opts.promocode.toLowerCase() == 'birthdaybabe'
         new window.page.PromocodeModal(promocode: @opts.promocode)
+      else if @opts.auto_apply_promo && @promo_started_at
+        # do nothing - we should show banner instead message
+        #
       else
         # show default system 
         if @opts.promocode
