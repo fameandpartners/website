@@ -121,11 +121,6 @@ class Products::CollectionsController < Products::BaseController
         end
       end
 
-      color = Repositories::ProductColors.get_by_name(permalink)
-      if color.present?
-        return { color: color.name }
-      end
-
       # default
       return nil
     end
