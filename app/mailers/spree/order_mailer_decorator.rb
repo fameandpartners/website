@@ -63,4 +63,10 @@ Spree::OrderMailer.class_eval do
 
     mail(to: to, from: from, subject: subject)
   end
+
+  def send_to_friend(order, email)
+    find_order(order)
+    subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')}"
+    mail(:to => email, :from => order.email, :subject => subject)
+  end
 end
