@@ -445,6 +445,11 @@
     .vex-content { background-color: $pink-bg;}
     .vex-footer { background-color: #f9ebf7;}
   }
+  &.vex-dialog-pink-reverse {
+    .vex-content { background-color: #f5e0f2; }
+    .vex-dialog-message, .timer-box { background: transparent !important; }
+    .vex-footer { background-color: #f9ebf7 !important;}
+  }
   .vex-content { border: 0; }
   
   .vex-dialog-input {
@@ -555,9 +560,9 @@
         font-weight: 300;
         color: #000;
         font-family: forum;
-        background: #f9ebf7;
+        background: transparent;
         line-height: 1.5;
-        padding: 28px 0 18px;
+        padding: 28px 0 8px;
         margin-bottom: 0;
         strong {
           display: block;
@@ -568,15 +573,13 @@
           font-weight: 400;
         }
       }
-      p {
-        display: none;
-      }
       div {
         background-color: #f9ebf7;
         padding: 30px;
       }
       .timer-box {
         padding-top: 0;
+        padding-bottom: 20px;
       }
       p:last-child {display: none;}
     }
