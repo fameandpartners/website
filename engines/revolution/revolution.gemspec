@@ -18,6 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '~> 3.2.21'
   s.add_dependency  'awesome_nested_set'
-  
+
   s.add_development_dependency 'rspec-rails'
 end
