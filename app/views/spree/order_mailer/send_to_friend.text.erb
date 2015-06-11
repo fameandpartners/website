@@ -1,31 +1,11 @@
-<%= t('order_mailer.confirm_email.dear_customer') %>
+Quinceanera coming up soon? Let us help you finding the perfect dress
 
-<%= t('order_mailer.confirm_email.instructions') %>
+Your daughter has been browsing our website for her Quinceanera dress and has sent you her favourite styles to check out. Do you like them as much as she does?
 
-============================================================
-<%= t('order_mailer.confirm_email.order_summary') %>
-============================================================
-<% @order.line_items.each do |item| %>
-<%= item.variant.sku %> <%= raw(item.variant.product.name) %> <%= item.making_options_text %> <%= raw(item.options_text) -%> (<%=item.quantity%>) @ <%= item.variant.display_amount %> = <%= item.display_amount %>
-<% end %>
-============================================================
-<%= t('order_mailer.confirm_email.subtotal', :subtotal => @order.display_item_total) %>
+[Dress name]: [dress url]
 
-<% @order.adjustments.eligible.each do |adjustment| %>
-  <%= raw(adjustment.label) %> <%= adjustment.display_amount %>
-<% end %>
+[Dress description]
 
-<%= t('order_mailer.confirm_email.total', :total => @order.display_total) %>
+[Dress price]
 
-<%= t('order_mailer.confirm_email.thanks') %>
-
-To track your order or manage your personal details, log in to your account here: <%= login_url %>
-
-<% if @order.user && @order.user.automagically_registered?  %>
-We have automatically created an account for your convenience where you can track your order and manage your personal details.
-
-Your username is: <%= @order.email %>
-Your temporary password is: <%= @order.number %>
-
-Please change this password once you have logged in.
-<% end %>
+Our customer service stylists are here to help! If you would like some assistance in finding the perfect dress, you can book a free styling session for you and your daughter here [links to http://fameandpartners.com/styling-session]
