@@ -319,6 +319,8 @@ FameAndPartners::Application.routes.draw do
     mount Spree::Core::Engine, at: '/'
   end
 
+  mount AdminUi::Engine, at: '/admin2'
+
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
     resources :fabric_cards, :only => [:index, :show] do

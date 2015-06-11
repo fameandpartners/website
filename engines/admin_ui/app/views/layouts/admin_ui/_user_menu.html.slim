@@ -1,0 +1,13 @@
+.dropdown.profile-element
+  a.dropdown-toggle data-toggle="dropdown" href="#"
+    span.clear
+      span.block.m-t-xs
+        strong.font-bold = current_admin_user.first_name.titleize
+      span.text-muted.text-xs.block
+        = current_admin_user.last_name.titleize
+        b.caret
+  ul.dropdown-menu.animated.fadeInRight.m-t-xs
+    li
+      a href="#" Profile
+    li
+      a href="#" Logout
