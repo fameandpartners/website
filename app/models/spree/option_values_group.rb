@@ -5,6 +5,7 @@ class Spree::OptionValuesGroup < ActiveRecord::Base
                           class_name: 'Spree::OptionValue'
 
   scope :for_colors, -> { where(option_type_id: Spree::OptionType.color) }
+  scope :available_as_taxon, -> { where(available_as_taxon: true) }
 
   validates :name, :presentation, :option_type, presence: true
 end

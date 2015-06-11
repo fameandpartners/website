@@ -22,5 +22,15 @@ describe Spree::OptionValuesGroup, type: :model do
         expect(result).to match_array([red, blue])
       end
     end
+
+    describe '.available_as_taxon' do
+      it 'return only groups that are available as taxon' do
+        available_group   = create(:option_values_group, available_as_taxon: true)
+        unavailable_group = create(:option_values_group, available_as_taxon: false)
+
+        result = described_class.available_as_taxon
+        expect(result).to match_array([available_group])
+      end
+    end
   end
 end
