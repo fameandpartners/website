@@ -4,12 +4,7 @@ class Spree::OptionValuesGroup < ActiveRecord::Base
   has_and_belongs_to_many :option_values,
                           class_name: 'Spree::OptionValue'
 
-  validates :name,
-            presence: true
+  scope :for_colors, -> { where(option_type_id: Spree::OptionType.color) }
 
-  validates :presentation,
-            presence: true
-
-  validates :option_type,
-            presence: true
+  validates :name, :presentation, :option_type, presence: true
 end
