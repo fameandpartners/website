@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = FameFavicon::VERSION
   s.authors     = ["Garrow Bedrossian"]
   s.email       = ["garrowb@fameandpartners.com"]
-  s.homepage    = "fameandpartners.com"
+  s.homepage    = "http://fameandpartners.com"
   s.summary     = "Static contents for the favicon"
   s.description = "Fame Favicon in all it's glory, possibly reusable on other rails apps."
 
