@@ -146,6 +146,10 @@ module Products
       end
     end
 
+    def use_auto_discount!(auto_discount)
+      self.discount = [self.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
+    end
+
     private
 
     def customisation_allowed?
@@ -155,7 +159,5 @@ module Products
     def policy
       @policy ||= Policy::Product.new(self)
     end
-
-
   end
 end
