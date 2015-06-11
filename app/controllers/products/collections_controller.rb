@@ -97,16 +97,12 @@ class Products::CollectionsController < Products::BaseController
 
     # we have route like /dresses/permalink
     # where permalink can be
-    #   taxon.permalink
-    #   bodyshape
-    #   color.name
-    #   etc
+    #   - taxon.permalink
+    #   - color_group.name
     def parse_permalink(permalink)
       return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
-      # is should have lower priority... but we have collection='pastel' and we have colors group pastel
-      color_group = Repositories::ProductColors.get_group_by_name(permalink)
-      if color_group.present?
+      if color_group = Repositories::ProductColors.get_group_by_name(permalink)
         return { color_group: color_group.name }
       end
 

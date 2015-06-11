@@ -19,14 +19,4 @@ FactoryGirl.define do
   # factory :product_color_value do
   #   option_value
   # end
-
-  # factory :option_value, :class => Spree::OptionValue do
-  #   sequence(:position)
-  #   sequence(:name)     { |n| "option-#{n}"}
-  #   option_type         
-  # end
-
-  # factory :option_type :class => Spree::OptionType do
-  #   sequence(:name)     { |n| "option-type-#{n}"}
-  # end
 end
