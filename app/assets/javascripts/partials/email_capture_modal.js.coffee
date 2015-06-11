@@ -14,7 +14,10 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   #   auto_apply_promo - automatically apply promo code for cart
   constructor: (opts = {}) ->
     @opts = opts
-    timeout = (opts.timeout * 1000) || 3000
+    if ('timeout' of opts) # this allow us to set 0 as value
+      timeout = opts.timeout * 1000
+    else
+      timeout = 3000
     @$container = $(opts.container)
     @cookie = "email_capture_#{@opts.content}"
 
@@ -53,17 +56,23 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
   success: (data) =>
     if @opts.auto_apply_promo && @promoStartedAt
-      $.post('/promos/enable_auto_apply', {promocode: @opts.promocode, promo_started_at: @promoStartedAt, duration: @opts.timer})
+      @enableAutoApply()
 
     if data.status == 'ok'
       title = 'thanks babe'
 
-      if @opts.promocode
-        message = "Use this promocode for your next killer dress: #{@opts.promocode}."
+      # show next popup in chain
+      if @opts.promocode && @opts.promocode.toLowerCase() == 'birthdaybabe'
+        new window.page.PromocodeModal(promocode: @opts.promocode)
       else
-        message = "Thanks for joining!"
+        # show default system 
+        if @opts.promocode
+          message = "Use this promocode for your next killer dress: #{@opts.promocode}."
+        else
+          message = "Thanks for joining!"
+        window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
+
       window.track.event('LandingPageModal', 'Submitted',  @opts.content, @opts.promocode)
-      window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
   failure: () =>
     window.helpers.showAlert(message: 'Is your email address correct?')
@@ -123,6 +132,13 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         @initTimer(startTime, timer)
     , 1000
 
+  enableAutoApply: () =>
+    $.post('/promos/enable_auto_apply', {
+      promocode: @opts.promocode,
+      promo_started_at: @promoStartedAt,
+      duration: @opts.timer
+    })
+
   open: () =>
     vex.dialog.buttons.NO.text = 'X'
     vex.dialog.open
@@ -132,3 +148,15 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       afterOpen: @onOpen
       afterClose: @onClose
       callback: @callback
+
+window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
+  constructor: (opts = {}) ->
+    opts = _.extend({
+      promocode: 'birthdaybabe',
+      heading: '<h3><strong>Thanks babe,</strong/> enjoy 15% off <br> your entire order now</h3>',
+      message: "<h3>use code birthdaybabe @ checkout</h3>",
+      className: 'vex-dialog-bottom vex-dialog-pink vex-text',
+      popup: true,
+      timeout: 0
+    }, opts)
+    super(opts)

@@ -321,10 +321,11 @@ class ApplicationController < ActionController::Base
   end
 
   def store_marketing_params
-    if params[:dmb].present?
-      cookies[:dmb] = { value: params[:dmb], expires: 1.day.from_now }
-      cookies[:dmb_time] = { value: Time.now.to_s, expires: 1.day.from_now }
-    end
+    # seems parameter not using anywhere else
+    #if params[:dmb].present?
+    #  cookies[:dmb] = { value: params[:dmb], expires: 1.day.from_now }
+    #  cookies[:dmb_time] = { value: Time.now.to_s, expires: 1.day.from_now }
+    #end
     if params[:promocode].present?
       cookies[:promocode] = { value: params[:promocode], expires: 1.day.from_now }
     end
@@ -342,7 +343,7 @@ class ApplicationController < ActionController::Base
       code = params[:promocode] || cookies[:promocode]
       promotion = code.present? ? Spree::Promotion.find_by_code(code) : nil
 
-      if !promotion && cookies[:auto_apply_promo_code] && true
+      if !promotion && cookies[:auto_apply_promo_code]
         time = Time.at(params[:promo_started_at].to_i) + params[:duration].to_i.hours
         if time >= Time.now
           promotion = Spree::Promotion.find_by_code(cookies[:auto_apply_promo_code])

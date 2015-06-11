@@ -9,6 +9,14 @@ class Campaigns::EmailCaptureController < ApplicationController
     ).create
 
     render :json => { status: 'ok' }, status: :ok
+
+  rescue CreateSend::Unauthorized => e
+    if Rails.env.development?
+      render :json => { status: 'ok' }, status: :ok
+    else
+      render :json => { status: 'invalid' }, status: :error
+    end
+
   rescue Exception => e
     render :json => { status: 'invalid' }, status: :error
   end

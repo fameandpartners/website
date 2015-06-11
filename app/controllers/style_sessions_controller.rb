@@ -6,18 +6,8 @@ class StyleSessionsController < ApplicationController
     @style_session ||= StyleSession.new(
       session_type: params[:session_type] || 'default'
     )
-    case @style_session.session_type
-    when 'birthday'
-      title('Prom Birthday Style Session', default_seo_title)
-      @banner_text = 'your birthday styling session'
-    when 'prom'
-      title('Prom Style Session', default_seo_title)
-      @banner_text = 'your prom styling session'
-    else # default
-      title('Style Session', default_seo_title)
-      @banner_text = 'your styling session'
-    end
-
+    title("#{ @style_session.name.capitalize } Style Session", default_seo_title)
+    @banner_text = "your #{ @style_session.name.downcase } styling session"
     @description = ""
   end
 

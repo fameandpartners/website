@@ -32,4 +32,15 @@ class StyleSession
   def to_key
     nil
   end
+
+  def name
+    case self.session_type
+    when 'birthday'
+      'Birthday'
+    when 'prom'
+      'Prom'
+    else # default
+      ''
+    end
+  end
 end

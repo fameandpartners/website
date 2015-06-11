@@ -183,9 +183,10 @@
       defaultValue: '<%= decode(params[:m]).html_safe %>'
     }, {
       label: "timeout",    param: "t",   required: false, encoded: false, type: 'integer',
-      defaultValue: 2
+      defaultValue: '<%= params[:t] || 2 %>'
     }, {
-      label: "timer",      param: "ti",  required: false, encoded: true, type: 'integer'
+      label: "timer",      param: "ti",  required: false, encoded: true, type: 'integer',
+      defaultValue: '<%= decode(params[:ti]).html_safe %>'
     }, {
       label: "class_name", param: "s",   required: false, encoded: true,  type: 'string',
       defaultValue: '<%= decode(params[:s]).html_safe %>'
@@ -195,7 +196,8 @@
     }, {
       label: "raw",        param: "raw", required: false, encoded: false, type: 'boolean'
     }, {
-      label: "auto_apply_promo", param: "aap", required: true, encoded: false, type: 'boolean', defaultValue: false
+      label: "auto_apply_promo", param: "aap", required: true, encoded: false, type: 'boolean',
+      defaultValue: '<%= params[:aap] %>'
     }
   ];
 

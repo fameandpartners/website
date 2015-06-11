@@ -28,6 +28,14 @@ class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
       set_after_sign_in_location(request.referrer)
     end
 
+    if params[:show_promocode_modal]
+      session[:show_promocode_modal] = params[:show_promocode_modal]
+      # reset current modal popup
+      set_after_sign_in_location(root_path)
+    end
+
+    session[:auto_apply] = params[:auto_apply]
+
     redirect_to spree.spree_user_omniauth_authorize_url(provider: :facebook, scope: 'email,public_profile,user_friends')
   end
 
