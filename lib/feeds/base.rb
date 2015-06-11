@@ -1,32 +1,33 @@
 require_relative './exporter/base'
 require_relative './exporter/getprice'
 require_relative './exporter/google'
+require_relative './exporter/google_flat_images'
 require_relative './exporter/myshopping'
 require_relative './exporter/shopping'
 
 module Feeds
   class Base
-    FEEDS =  %w( Google Getprice Myshopping Shopping )
+    FEEDS =  %w(GoogleFlatImages Google Getprice Myshopping Shopping)
 
     def initialize(version)
       @current_site_version = SiteVersion.find_by_permalink(version.to_s.downcase)
       @config = {
-        title: "Fame & Partners",
+        title:       "Fame & Partners",
         description: "Fame & Partners our formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.",
-        domain: ActionMailer::Base.default_url_options[:host]+site_version || 'www.fameandpartners.com'
+        domain:      ActionMailer::Base.default_url_options[:host] + site_version || 'www.fameandpartners.com'
       }
     end
 
     def export
-      @items = get_items
+      @items      = get_items
       @properties = get_properties
 
       FEEDS.each do |name|
-        klass = Feeds::Exporter.const_get(name)
-        exporter = klass.new
-        exporter.items      = @items
-        exporter.properties = @properties
-        exporter.config     = @config
+        klass                         = Feeds::Exporter.const_get(name)
+        exporter                      = klass.new
+        exporter.items                = @items
+        exporter.properties           = @properties
+        exporter.config               = @config
         exporter.current_site_version = @current_site_version
         exporter.export
       end
@@ -99,10 +100,10 @@ module Feeds
 
       # are we ever on sale?
       original_price = price.display_price #.display_price_without_discount
-      sale_price = price.display_price #.display_price_with_discount
+      sale_price     = price.display_price #.display_price_with_discount
 
       original_price = original_price.to_s.delete('$').to_f
-      sale_price = sale_price.to_s.delete('$').to_f
+      sale_price     = sale_price.to_s.delete('$').to_f
 
       if sale_price == original_price
         sale_price = 0
@@ -110,21 +111,21 @@ module Feeds
 
 
       item = HashWithIndifferentAccess.new(
-        variant: variant,
-        variant_sku: product.sku+variant.id.to_s,
-        product: product,
-        availability: availability,
-        title: "#{product.name} - Size #{size} - Colour #{color}",
-        description: product.description,
-        price: original_price,
-        sale_price: sale_price,
+        variant:                 variant,
+        variant_sku:             product.sku + variant.id.to_s,
+        product:                 product,
+        availability:            availability,
+        title:                   "#{product.name} - Size #{size} - Colour #{color}",
+        description:             product.description,
+        price:                   original_price,
+        sale_price:              sale_price,
         google_product_category: "Apparel & Accessories > Clothing > Dresses > Formal Gowns",
-        google_product_types: google_product_types(product),
-        id: "#{product.id.to_s}-#{variant.id.to_s}",
-        group_id: product.id.to_s,
-        color: color,
-        size: size,
-        weight: get_weight(product, variant)
+        google_product_types:    google_product_types(product),
+        id:                      "#{product.id.to_s}-#{variant.id.to_s}",
+        group_id:                product.id.to_s,
+        color:                   color,
+        size:                    size,
+        weight:                  get_weight(product, variant)
       )
 
       item.update(get_images(product, variant))

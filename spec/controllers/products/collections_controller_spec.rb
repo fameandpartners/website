@@ -4,11 +4,11 @@ describe Products::CollectionsController, :type => :controller do
   describe 'GET show' do
     let(:collection_details) { double('Collection Details', meta_title: 'My Title', seo_description: 'My Description') }
     let(:collection_double)  { double('Collection', details: collection_details) }
-    let(:page)               { double(Revolution::Page, :get => false, :template_path => '/products/collections/show.html.slim')}
+    let(:page)               { double(Revolution::Page, :get => false, :template_path => '/products/collections/show.html.slim', :locale= => true)}
 
     before(:each) do
-      allow(Revolution::Page).to receive(:find_for).and_return(page)
       # Repositories and Resources should be tested elsewhere
+      allow(Revolution::Page).to receive(:find_for).and_return(page)
       allow(Products::CollectionFilter).to receive(:read)
       allow(controller).to receive(:collection_resource).and_return(collection_double)
     end
