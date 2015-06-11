@@ -9,27 +9,22 @@
 .page-content.registration.new.password-new
   .container.relative
     .row
-      .col-md-8.col-sm-12
+      .col-md-8
         = form_for Spree::User.new, :as => :spree_user, :url => main_app.spree_user_password_path do |f|
           = render 'shared/redesign/error_messages', :target => @spree_user
 
-          .row
-            .col-md-12
-              h2.checkout-section-title=t(:instructions_to_reset_password)
-              .form-group
-                = f.email_field :email, :value => params[:email], placeholder: t(:email), :class => 'form-control form-control-md'
+          h2.checkout-section-title=t(:instructions_to_reset_password)
+          .form-group
+            = f.email_field :email, :value => params[:email], placeholder: t(:email), :class => 'form-control form-control-md'
+
+          .form-group
+            = f.submit t(:reset_password), class: 'btn btn-black'
 
           .row
-            .col-md-6.col-xs-12.form-group
-              = f.submit t(:reset_password), class: 'btn btn-black'
-          .row
-            .col-md-3.col-xs-12
+            .col-md-3
               = link_to t(:create_a_new_account), spree.signup_path, class: 'btn btn-block btn-black btn-md low-btn'
-            .col-md-3.col-xs-12
+            .col-md-3
               = link_to 'Sign in', spree.login_path, class: 'btn btn-block btn-black btn-md low-btn'
-
 
       .col-md-4.hidden-xs.hidden-sm
         = image_tag 'breidesmaid-forgot-password.jpg', :class => 'img-responsive', width: 533, height: 562, alt: 'Forgot Password'
-
-
