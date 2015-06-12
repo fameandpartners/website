@@ -9,12 +9,14 @@ module Feeds
   class Base
     FEEDS =  %w(GoogleFlatImages Google Getprice Myshopping Shopping)
 
-    def initialize(version)
-      @current_site_version = SiteVersion.find_by_permalink(version.to_s.downcase)
+    attr_reader :config, :current_site_version
+
+    def initialize(version_permalink)
+      @current_site_version = SiteVersion.by_permalink_or_default(version_permalink)
       @config = {
-        title:       "Fame & Partners",
-        description: "Fame & Partners our formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.",
-        domain:      ActionMailer::Base.default_url_options[:host] + site_version || 'www.fameandpartners.com'
+        title:       'Fame & Partners',
+        description: 'Fame & Partners our formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.',
+        domain:       URI.join("http://#{ActionMailer::Base.default_url_options[:host]}", @current_site_version.to_param).to_s
       }
     end
 
@@ -40,17 +42,8 @@ module Feeds
 
     private
 
-    def site_version
-      return "" if current_site_version.permalink == "us"
-      "/au"
-    end
-
     def current_currency
       current_site_version.currency
-    end
-
-    def current_site_version
-      @current_site_version
     end
 
     def get_properties
