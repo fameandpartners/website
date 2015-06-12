@@ -5,7 +5,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   #   action - submit url
   #   className - additional classname for container
   #   container - markup container
-  #   content: - ?
+  #   content: - DOM element containing content to be displayed in modal
   #   force: force showing modal
   #   heading - heading text
   #   promocode - promo code
@@ -68,7 +68,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         # do nothing - we should show banner instead message
         #
       else
-        # show default system 
+        # show default system
         if @opts.promocode
           message = "Use this promocode for your next killer dress: #{@opts.promocode}."
         else

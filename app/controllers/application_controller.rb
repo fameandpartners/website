@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
+  before_filter :clear_auto_promo_codes
 
   def count_competition_participants
     cpt = params[:cpt]
@@ -377,6 +378,23 @@ class ApplicationController < ActionController::Base
 
   def set_session_country
     session[:country_code] ||= UserCountryFromIP.new(request.remote_ip).country_code
+  end
+
+  # clears out automatic promocodes with timers
+  # clears out cookies and removes promotion adjustments current order
+  def clear_auto_promo_codes
+    return unless cookies[:auto_apply_promo_code]
+    return unless current_order
+    return unless current_spree_user
+
+    time = Time.at(params[:promo_started_at].to_i) + params[:duration].to_i.hours
+    return if time >= Time.now # promotion is still active
+
+    current_order.adjustments.where(originator_type: 'Spree::PromotionAction').destroy_all
+
+    cookies.delete(:auto_apply_promo_code)
+    cookies.delete(:auto_apply_promo_code_duration)
+    cookies.delete(:auto_apply_promo_code_started_at)
   end
 
 end
