@@ -62,6 +62,10 @@
     padding: 20px;
     > *:only-child {margin: 0;}
   }
+
+  h2:empty, p:empty {
+    display: none;
+  }
 }
 // @end Bottom 
 // -----------------
@@ -576,6 +580,9 @@
           font-size: 33px;
           font-weight: 400;
         }
+      }
+      h3 {
+        margin-top: 0;
       }
       .font-forum {
         font-family: forum, serif !important;
