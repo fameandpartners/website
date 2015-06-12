@@ -125,12 +125,7 @@ class SiteVersion < ActiveRecord::Base
 
   class << self
     def by_permalink_or_default(permalink)
-      version = nil
-      if permalink.present?
-        permalink.to_s.gsub!(/\W/, '')
-        version = SiteVersion.where(permalink: permalink).first
-      end
-      version || SiteVersion.default
+      find_by_permalink(permalink) || default
     end
 
     def by_country_code_or_default(country_code)
