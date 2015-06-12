@@ -68,17 +68,15 @@ module Feeds
 
     def get_items
       items = []
-      Spree::Product.active.includes(:variants).find_in_batches(batch_size: 10) do |group|
-        group.each do |product|
-          product.variants.each do |variant|
-            begin
-              item = get_item_properties(product, variant)
-              if item['image'].present?
-                items.push(item)
-              end
-            rescue Exception => ex
-              puts ex
+      Spree::Product.active.includes(:variants).find_each(batch_size: 10) do |product|
+        product.variants.each do |variant|
+          begin
+            item = get_item_properties(product, variant)
+            if item['image'].present?
+              items.push(item)
             end
+          rescue Exception => ex
+            puts ex
           end
         end
       end
