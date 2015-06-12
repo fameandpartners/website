@@ -109,6 +109,19 @@
     }
     + span { margin-left: 10px;}
   }
+
+  &.timer-box-small {
+    > span {
+      &:before, &:after {
+        width: 24px;
+      }
+      > span {
+        font-size: 14px;
+        width: 51px;
+        height: 28px;
+      }
+    }
+  }
   
 }
 // @end Timer
