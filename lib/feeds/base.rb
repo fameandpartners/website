@@ -139,10 +139,11 @@ module Feeds
 
         front_crop = cropped_images.shift # pull the front image
 
-        other_images = (cropped_images + images).uniq #prepend the crop to remainder of images
+        other_images = (cropped_images + images).uniq # prepend the crop to remainder of images
         other_images = other_images.map{|i| i.attachment(:large).to_s }
+
         {
-          image: front_crop.attachment(:large),
+          image: front_crop.present? ? front_crop.attachment(:large) : nil,
           images: other_images
         }
       else
