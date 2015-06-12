@@ -450,6 +450,10 @@
     .vex-dialog-message, .timer-box { background: transparent !important; }
     .vex-footer { background-color: #f9ebf7 !important;}
   }
+  .pink-light {
+    background-color: #f9ebf7 !important;
+  }
+
   .vex-content { border: 0; }
   
   .vex-dialog-input {
@@ -572,6 +576,13 @@
           font-size: 33px;
           font-weight: 400;
         }
+      }
+      .font-forum {
+        font-family: forum, serif !important;
+      }
+      .single {
+        padding-bottom: 28px;
+        text-transform: none;
       }
       div {
         background-color: #f9ebf7;

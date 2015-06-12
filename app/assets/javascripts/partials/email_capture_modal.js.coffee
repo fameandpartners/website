@@ -124,8 +124,8 @@ window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
   constructor: (opts = {}) ->
     opts = _.extend({
       promocode: 'birthdaybabe',
-      heading: '<h3><strong>Thanks babe,</strong/> enjoy 15% off <br> your entire order now</h3>',
-      message: "<h3>use code birthdaybabe @ checkout</h3>",
+      heading: '<h2 class="font-forum"><strong>Thanks babe,</strong/> enjoy 15% off <br> your entire order now</h2>',
+      message: '<h3 class="pink-light single">Use code BIRTHDAYBABE @ checkout</h3>',
       className: 'vex-dialog-bottom vex-dialog-pink vex-text',
       popup: true,
       timeout: 0
