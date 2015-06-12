@@ -105,7 +105,9 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     $.post('/promos/enable_auto_apply', {
       promocode:        @opts.promocode,
       promo_started_at: @promoStartedAt,
-      duration:         @opts.timer
+      duration:         @opts.timer,
+      title:            @opts.heading,
+      message:          @opts.message
     })
 
   open: () =>
@@ -157,6 +159,9 @@ window.page.CountdownBanner = class CountdownBanner
 
   hide: ->
     @$container.addClass('hidden')
+
+window.page.showCountdownTimer = (title, message, promoStartedAt, durationInHours) ->
+  new window.page.CountdownBanner($('#countdown-banner'), title, message, promoStartedAt, durationInHours)
 
 window.page.CountdownTimer = class CountdownTimer
   constructor: ($container, startTime, durationInHours, closeCallback) ->

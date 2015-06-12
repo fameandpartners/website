@@ -387,7 +387,7 @@ class ApplicationController < ActionController::Base
     return unless current_order
     return unless current_spree_user
 
-    time = Time.at(params[:promo_started_at].to_i) + params[:duration].to_i.hours
+    time = Time.at(cookies[:auto_apply_promo_code_started_at].to_i) + cookies[:auto_apply_promo_code_duration].to_i.hours
     return if time >= Time.now # promotion is still active
 
     current_order.adjustments.where(originator_type: 'Spree::PromotionAction').destroy_all
@@ -395,6 +395,8 @@ class ApplicationController < ActionController::Base
     cookies.delete(:auto_apply_promo_code)
     cookies.delete(:auto_apply_promo_code_duration)
     cookies.delete(:auto_apply_promo_code_started_at)
+    cookies.delete(:auto_apply_promo_code_message)
+    cookies.delete(:auto_apply_promo_code_title)
   end
 
 end
