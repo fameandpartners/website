@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SiteVersion, :type => :model do
   describe '.permalinks' do
     # Invalidating memoization
-    before(:each) { SiteVersion.instance_variable_set(:@permalinks, nil) }
+    before(:each) { described_class.instance_variable_set(:@permalinks, nil) }
 
     it 'returns all site versions permalinks' do
       create(:site_version, permalink: 'au')
@@ -15,7 +15,7 @@ describe SiteVersion, :type => :model do
   end
 
   describe '.by_permalink_or_default' do
-    let!(:default_site_version) { SiteVersion.default }
+    let!(:default_site_version) { described_class.default }
     let!(:au_site_version) { create(:site_version, permalink: 'au') }
 
     context 'given an existent locale permalink' do
