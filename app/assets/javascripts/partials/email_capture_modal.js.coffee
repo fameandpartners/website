@@ -122,15 +122,20 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
 window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
   constructor: (opts = {}) ->
-    opts = _.extend({
+    vex.dialog.buttons.NO.text = 'X'
+    promocode = opts.promocode || 'BIRTHDAYBABE'
+    vex.dialog.open _.extend({
       promocode: 'birthdaybabe',
-      heading: '<h2 class="font-forum"><strong>Thanks babe,</strong/> enjoy 15% off <br> your entire order now</h2>',
-      message: '<h3 class="pink-light single">Use code BIRTHDAYBABE @ checkout</h3>',
-      className: 'vex-dialog-bottom vex-dialog-pink vex-text',
+      message: '<h2 class="font-forum"><strong>Thanks babe!</strong/> enjoy 15% off <br> your entire order now.</h2>' +
+        "<h3 class=\"pink-light single\">Use code #{ promocode } @ checkout</h3>",
+      className: 'vex vex-theme-flat-attack email-capture-modal vex-dialog-bottom vex-dialog-pink vex-text',
       popup: true,
+      afterOpen: @updateHtml,
       timeout: 0
     }, opts)
-    super(opts)
+
+  updateHtml: (modal) ->
+    modal.find('.vex-dialog-buttons button').addClass('btn btn-black')
 
 window.page.CountdownBanner = class CountdownBanner
   constructor: ($container, title, message, startTime, durationInHours) ->

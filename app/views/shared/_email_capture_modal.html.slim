@@ -35,7 +35,7 @@
         action:    \"#{campaigns_email_capture_path}\",
         container: \"#modal-popup-content-template\",
         timeout:    #{auto_apply ? 100000 : timeout},
-        timer:      #{timer || 0},
+        timer:      #{timer.present? ? timer : 0},
         auto_apply_promo: #{params[:aap].present? && params[:aap].to_s == 'true'},
         force:      true,
         uuid:      \"#{campaign_uuid}\"
