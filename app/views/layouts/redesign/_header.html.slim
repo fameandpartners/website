@@ -85,7 +85,7 @@ ruby:
                       p.button-grey-text.menu-main-promotions
                         span.fit-guarantee.menu-icon
                         | Fit Guarantee
-              .mega-menu--secondary                
+              .mega-menu--secondary
                 .container-fluid.max-width-100
                   .row
                     .col-md-3.col-lg-2.col-md-offset-4
@@ -235,10 +235,11 @@ ruby:
               span.hidden-sm.hidden-xs.hidden-xxs cart:
               span#cart-item-count 0
 
-/.alert-sale role="alert"
+#countdown-banner.alert-sale.hidden role="alert"
   a.close href="#"
-  span.medium $25 Off, just for you.
+  span.medium.banner-title
   span.spacer
-  ' For 48 hours only
+  '
+  span.banner-message
   span.timer-box.timer-box-small
     ' <span><span class="hh">48</span></span><span><span class="mm">00</span></span><span><span class="ss">00</span></span>

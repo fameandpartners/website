@@ -10,7 +10,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   #   heading - heading text
   #   promocode - promo code
   #   timeout - timeout to show modal
-  #   timer - countdown timer value in hours
+  #   timer - countdown timer value in hours (ex. 48h)
   #   auto_apply_promo - automatically apply promo code for cart
   constructor: (opts = {}) ->
     @opts = opts
@@ -64,9 +64,8 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       # show next popup in chain
       if @opts.promocode && @opts.promocode.toLowerCase() == 'birthdaybabe'
         new window.page.PromocodeModal(promocode: @opts.promocode)
-      else if @opts.auto_apply_promo && @promo_started_at
-        # do nothing - we should show banner instead message
-        #
+      else if @opts.auto_apply_promo && @promoStartedAt
+        new window.page.CountdownBanner($('#countdown-banner'), @opts.heading, @opts.message, @promoStartedAt, @opts.timer)
       else
         # show default system
         if @opts.promocode && !@opts.auto_apply_promo
@@ -88,14 +87,10 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
     window.track.event('LandingPageModal', 'Opened', @opts.content, @opts.promocode)
 
-    $modal = $(modal)
-    @$timerHours   = $modal.find('.hh')
-    @$timerMinutes = $modal.find('.mm')
-    @$timerSeconds = $modal.find('.ss')
-
     if @opts.timer && @promoStartedAt
-      @updateTimer(@promoStartedAt, @opts.timer)
-      @initTimer(@promoStartedAt, @opts.timer)
+      $modal = $(modal)
+      @countdownTimer = new window.page.CountdownTimer($modal, @promoStartedAt, @opts.timer)
+      @countdownTimer.start()
 
   message: =>
     h = if @opts.heading then "<h2>#{@opts.heading}</h2>" else ''
@@ -106,40 +101,11 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
     str
 
-  formatTime: (time) =>
-    if time < 10
-      "0#{time}"
-    else
-      "#{time}"
-
-  updateTimer: (startTime, durationInHours) =>
-    currentTime = +new Date()
-    diffInSeconds = Math.floor((currentTime - startTime) / 1000)
-    diffInSeconds = durationInHours * 3600 - diffInSeconds
-
-    if diffInSeconds > 0
-      hours   = Math.floor(diffInSeconds / 3600)
-      minutes = Math.floor((diffInSeconds - hours * 3600) / 60)
-      seconds = Math.floor(diffInSeconds - hours * 3600 - minutes * 60)
-
-      @$timerHours.html(@formatTime(hours))
-      @$timerMinutes.html(@formatTime(minutes))
-      @$timerSeconds.html(@formatTime(seconds))
-      true
-    else
-     false
-
-  initTimer: (startTime, timer)=>
-    setTimeout =>
-      if @updateTimer(startTime, timer)
-        @initTimer(startTime, timer)
-    , 1000
-
   enableAutoApply: () =>
     $.post('/promos/enable_auto_apply', {
-      promocode: @opts.promocode,
+      promocode:        @opts.promocode,
       promo_started_at: @promoStartedAt,
-      duration: @opts.timer
+      duration:         @opts.timer
     })
 
   open: () =>
@@ -163,3 +129,72 @@ window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
       timeout: 0
     }, opts)
     super(opts)
+
+window.page.CountdownBanner = class CountdownBanner
+  constructor: ($container, title, message, startTime, durationInHours) ->
+    @$container     = $container
+    @title          = title
+    @message        = message
+    @countdownTimer = new window.page.CountdownTimer($container, startTime, durationInHours)
+
+    @show(title, message)
+    @countdownTimer.start()
+
+    @initCallbacks()
+
+  initCallbacks: ->
+    @$container.find('a.close').on 'click', =>
+      @hide()
+      false
+
+  show: (title, message) ->
+    if title
+      @$container.find('.banner-title').html(title)
+
+    if message
+      @$container.find('.banner-message').html(message)
+    @$container.removeClass('hidden')
+
+  hide: ->
+    @$container.addClass('hidden')
+
+window.page.CountdownTimer = class CountdownTimer
+  constructor: ($container, startTime, durationInHours) ->
+    @startTime     = startTime
+    @duration      = durationInHours
+
+    @$timerHours   = $container.find('.hh')
+    @$timerMinutes = $container.find('.mm')
+    @$timerSeconds = $container.find('.ss')
+
+    @updateTimer(@startTime, @duration)
+
+  formatTime: (time) ->
+    if time < 10
+      "0#{time}"
+    else
+      "#{time}"
+
+  updateTimer: (startTime, durationInHours) ->
+    currentTime = +new Date()
+    diffInSeconds = Math.floor((currentTime - startTime) / 1000)
+    diffInSeconds = durationInHours * 3600 - diffInSeconds
+
+    if diffInSeconds > 0
+      hours   = Math.floor(diffInSeconds / 3600)
+      minutes = Math.floor((diffInSeconds - hours * 3600) / 60)
+      seconds = Math.floor(diffInSeconds - hours * 3600 - minutes * 60)
+
+      @$timerHours.html(@formatTime(hours))
+      @$timerMinutes.html(@formatTime(minutes))
+      @$timerSeconds.html(@formatTime(seconds))
+      true
+    else
+     false
+
+  start: () ->
+    setTimeout =>
+      if @updateTimer(@startTime, @duration)
+        @start()
+    , 1000
+
