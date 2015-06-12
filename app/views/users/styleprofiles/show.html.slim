@@ -1,13 +1,155 @@
+coffee:
+  $ ->
+    $(document).on 'click.bs.tab.data-api', '.style-profile-tabs [data-toggle="tab"]', ->
+      $('.style-profile-tabs').addClass('hidden-xs')
+
+    $(document).on 'click', '.tab-pane-close', ->
+      $('.style-profile-tabs').removeClass('hidden-xs').find('.active').removeClass('active')
+      $(this).closest('.tab-pane').removeClass('active')
+
 .user-account-page-title
   .container
-    .page-title--details
-      h1.user-account-title.no-padding-bottom.text-white My style profile
+    h1.text-center.user-account-title.no-padding-bottom.text-white.hidden-xs Style profile.
+    .style-profile-header
+      / HAS QUIZ
+      .row
+        .col-md-4
+          .style-box.style-box-primary
+            = image_tag '_style_profile/header/glam.jpg', class: 'img-responsive'
+            .style-title 
+              .style-title-text 
+                ' glam 
+                .visible-xs 50%
+            .style-result.hidden-xs: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 50%
+        .col-md-4.text-center.hidden-xs
+          .row
+            .col-xs-6
+              .style-box
+                = image_tag '_style_profile/header/edgy.jpg', class: 'img-responsive'
+                .style-title: .style-title-text edgy
+                .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 20%
+            .col-xs-6
+              .style-box
+                = image_tag '_style_profile/header/girly.jpg', class: 'img-responsive'
+                .style-title: .style-title-text girly
+                .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 20%
+          .style-profile-actions
+            = link_to 'Redo the style quiz', '#', class: 'btn btn-md btn-block btn-black'
+            .or-share: .rhombus.rhombus-empty: .rhombus-text-holder: .rhombus-text OR 
+            p SHARE THE QUIZ
+            ul.footer-social
+              li.footer-social--item
+                = link_to configatron.links.facebook, target: :blank, class: 'facebook' do
+                  = image_tag '_icons/facebook.png'
+              li.footer-social--item
+                = link_to configatron.links.pinterest, target: :blank, class: 'pinterest' do
+                  = image_tag '_icons/pinterest.png'
+              li.footer-social--item
+                = link_to configatron.links.instagram, target: :blank, class: 'instagram' do
+                  = image_tag '_icons/instagram.png'
+              li.footer-social--item
+                = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
+                  = image_tag '_icons/twitter.png'
+
+        .col-md-4.hidden-xs
+          .row
+            .col-xs-6
+              .style-box
+                = image_tag '_style_profile/header/classic.jpg', class: 'img-responsive'
+                .style-title: .style-title-text classic
+                .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 20%
+            .col-xs-6
+              .style-box
+                = image_tag '_style_profile/header/bohemian.jpg', class: 'img-responsive'
+                .style-title: .style-title-text boho
+                .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 20%
+          = link_to '#', class: 'book-free'
+            ' Book a free
+            br
+            ' styling
+            br
+            ' consultation.
+            br
+            span.icon.icon-hr-right
+      
+      / NO QUIZ
+      / .row
+        .col-sm-8
+          = link_to '#', class: 'no-quiz'
+            strong 
+              ' Call to action to take the quiz
+            ' (To be designed)
+        .col-sm-4
+          = link_to '#', class: 'book-free book-free-sm'
+            ' Book a free styling
+            br
+            ' consultation.
+            br
+            span.icon.icon-hr-right
+    / .page-title--details
+    /   h1.user-account-title.no-padding-bottom.text-white My style profile
 
 .page-content.user.style-quiz.show
+  = render 'users/shared/tabs', active_tab: 'styleprofile'
   .container.relative
-
-    = render 'users/shared/tabs', active_tab: 'styleprofile'
     .row
+      .col-sm-4
+        ul.style-profile-tabs.hidden-xs
+          li.active: a href="#style_profile_tab_1" data-toggle="tab" Style recommendations
+          li: a href="#style_profile_tab_2" data-toggle="tab" Manage events
+          li: a href="#style_profile_tab_3" data-toggle="tab" Style attributes
+      .col-sm-8
+        .style-profile-tabs-content.tab-content
+          #style_profile_tab_1.style-profile-tab-panel.tab-pane.text-center.active
+            .style-profile-tabs-title
+              span.tab-pane-close.visible-xs-inline-block: span.fa.fa-arrow-left
+              span Style recommendations
+            h4.font-forum EVERYONE HAS A BIT OF EACH PROFILE IN THEM, BUT YOU ARE MOSTLY GLAM.
+            p Our glamour girl is a 1940s Hollywood film starlet with red lips, winged eyes and diamonds sparkling from a moisturized décolletage. She conjures this image because she is permanently starring in her own fabulous film…
+          #style_profile_tab_2.style-profile-tab-panel.tab-pane
+            .style-profile-tabs-title
+              span.tab-pane-close.visible-xs-inline-block: span.fa.fa-arrow-left
+              span Manage events
+            .form-group
+              .row
+                .col-sm-4
+                  label event name
+                  input.form-control.form-control-md type="text"
+                .col-sm-4
+                  label event type
+                  input.form-control.form-control-md type="text"
+                .col-sm-4
+                  label event date
+                  input.form-control.form-control-md type="text"
+                
+            .row
+              .col-sm-3
+                = link_to 'Add', '#', class: 'btn btn-md btn-black btn-block'
+              .col-sm-2.text-center
+                .btn.btn-md.btn-text or
+              .col-sm-7
+                = link_to 'import from facebook', '#', class: 'btn btn-md btn-facebook btn-block'
+            .row
+              .col-sm-4
+                .form-tag
+                  span 11/11/15 - high school formal
+                  .icon-cross
+              .col-sm-4
+                .form-tag
+                  span 11/11/15 - red cross event dinner
+                  .icon-cross
+              .col-sm-4
+                .form-tag
+                  span 11/11/15 - christmas party
+                  .icon-cross
+
+          #style_profile_tab_3.style-profile-tab-panel.tab-pane
+            .style-profile-tabs-title
+              span.tab-pane-close.visible-xs-inline-block: span.fa.fa-arrow-left
+              span Style attributes
+
+    
+    / .row
       .col-md-12
         #report.tab-content
           - if @style_profile.blank?

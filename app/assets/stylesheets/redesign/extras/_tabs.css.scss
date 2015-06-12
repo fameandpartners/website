@@ -37,6 +37,9 @@
       color: #000;
       height: 90px;
       text-align: center;
+      @media (max-width: 480px) {
+        height: 60px;
+      }
       
       &:hover {
         background-color: $gray-light-bg;

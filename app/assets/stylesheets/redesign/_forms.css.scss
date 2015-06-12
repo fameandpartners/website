@@ -26,6 +26,36 @@
 // @end Form controls
 // ------------------
 
+// From tag
+.form-tag {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  width: 100%;
+  background-color: $gray-light-bg;
+  height: $form-control-height-md;
+  line-height: $form-control-height-md;
+  padding-left: 10px;
+  padding-right: 40px;
+  margin: 5px 0;
+  span {
+    width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+    text-overflow: ellipsis;
+  }
+  .icon-cross {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    margin-top: -12px;
+  }
+} 
+// @end From tag
+// -----------------
+
 // Buttons
 .btn {
   font-family: $font-family-secondary;
