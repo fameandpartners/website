@@ -69,7 +69,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         #
       else
         # show default system
-        if @opts.promocode
+        if @opts.promocode && !@opts.auto_apply_promo
           message = "Use this promocode for your next killer dress: #{@opts.promocode}."
         else
           message = "Thanks for joining!"
