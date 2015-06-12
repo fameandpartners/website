@@ -127,7 +127,7 @@ window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
     vex.dialog.open _.extend({
       promocode: 'birthdaybabe',
       message: '<h2 class="font-forum"><strong>Thanks babe!</strong/> enjoy 15% off <br> your entire order now.</h2>' +
-        "<h3 class=\"pink-light single\">Use code #{ promocode } @ checkout</h3>",
+        "<div class=\"pink-light single\">Use code #{ promocode } @ checkout</div>",
       className: 'vex vex-theme-flat-attack email-capture-modal vex-dialog-bottom vex-dialog-pink vex-text',
       popup: true,
       afterOpen: @updateHtml,
