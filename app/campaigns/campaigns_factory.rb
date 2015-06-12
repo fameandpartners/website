@@ -15,5 +15,11 @@ class CampaignsFactory
     def getExpirableCampaignClasses
       [AutoApplyPromoCampaign]
     end
+
+    def getAllCampaignClasses
+      [
+        AutoApplyPromoCampaign
+      ]
+    end
   end
 end

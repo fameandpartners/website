@@ -104,10 +104,11 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   enableAutoApply: () =>
     $.post('/user_campaigns', {
       promocode:        @opts.promocode,
-      promo_started_at: @promoStartedAt,
+      promo_started_at: (@promoStartedAt / 1000),
       duration:         @opts.timer,
       title:            @opts.heading,
-      message:          @opts.message
+      message:          @opts.message,
+      uuid:             @opts.uuid
     })
 
   open: () =>

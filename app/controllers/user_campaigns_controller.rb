@@ -7,9 +7,9 @@ class UserCampaignsController  < ActionController::Base
   #  :cu - capmaign uuid
   # other attributes based on campaign itself
   def create
-    campaign_class = CampaignsFactory.getCampaignClass(params[:cu])
+    campaign_class = CampaignsFactory.getCampaignClass(params[:uuid])
 
-    if capmaign_class
+    if campaign_class
       campaign = campaign_class.new(
         storage:              cookies,
         campaign_attrs:       params,

@@ -1,4 +1,12 @@
 class AutoApplyPromoCampaign < CampaignManager
+  def can_activate?
+    # check already active or activated campaigns
+    return false if storage[:auto_apply_promo_code]
+
+    time = Time.at(campaign_attrs[:promo_started_at].to_i) + campaign_attrs[:duration].to_i.hours
+    time >= Time.now
+  end
+
   def is_active?
     if storage[:auto_apply_promo_code]
       time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
@@ -15,7 +23,7 @@ class AutoApplyPromoCampaign < CampaignManager
 
   def promotion
     return unless is_active?
-    Spree::Promotion.find_by_code(storage[:auto_apply_promo_code])
+    @promotion ||= Spree::Promotion.find_by_code(storage[:auto_apply_promo_code])
   end
 
   def activate!

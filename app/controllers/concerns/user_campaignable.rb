@@ -7,6 +7,7 @@ module Concerns::UserCampaignable
 
   def current_promotion
     @current_promotion ||= begin
+      active_promotion = nil
       CampaignsFactory.getAllCampaignClasses.each do |campaign_class|
         campaign = campaign_class.new(
           storage:              cookies,
@@ -14,14 +15,11 @@ module Concerns::UserCampaignable
           current_order:        current_order(true),
           current_site_version: current_site_version
         )
-
         if campaign.is_active? && promotion = campaign.promotion
-          @current_promotion = promotion
-          break
+          active_promotion = promotion
         end
       end
-
-      promotion
+      active_promotion
     end
   end
 
