@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Revolution::VERSION
   s.authors     = ["Toby Hede"]
   s.email       = ["tobyh@fameandpartners.com"]
-  s.homepage    = "famenandpartners.com"
+  s.homepage    = "http://famenandpartners.com"
   s.summary     = ""
   s.description = ""
 
