@@ -135,7 +135,7 @@ window.page.CountdownBanner = class CountdownBanner
     @$container     = $container
     @title          = title
     @message        = message
-    @countdownTimer = new window.page.CountdownTimer($container, startTime, durationInHours)
+    @countdownTimer = new window.page.CountdownTimer($container, startTime, durationInHours, => @hide())
 
     @show(title, message)
     @countdownTimer.start()
@@ -159,9 +159,10 @@ window.page.CountdownBanner = class CountdownBanner
     @$container.addClass('hidden')
 
 window.page.CountdownTimer = class CountdownTimer
-  constructor: ($container, startTime, durationInHours) ->
+  constructor: ($container, startTime, durationInHours, closeCallback) ->
     @startTime     = startTime
     @duration      = durationInHours
+    @closeCallback = closeCallback
 
     @$timerHours   = $container.find('.hh')
     @$timerMinutes = $container.find('.mm')
@@ -196,5 +197,7 @@ window.page.CountdownTimer = class CountdownTimer
     setTimeout =>
       if @updateTimer(@startTime, @duration)
         @start()
+      else if @closeCallback
+        @closeCallback()
     , 1000
 
