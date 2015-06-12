@@ -22,10 +22,6 @@ module Feeds
         current_site_version.currency
       end
 
-      def current_site_version
-        @current_site_version
-      end
-
       def helpers
         @helpers ||= Feeds::Helpers.new
       end
