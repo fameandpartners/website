@@ -25,14 +25,4 @@ class UserCart::PromotionsController < UserCart::BaseController
       end
     end
   end
-
-  # enable auto apply promo code
-  def enable_auto_apply
-    cookies[:auto_apply_promo_code]            = params[:promocode]
-    cookies[:auto_apply_promo_code_duration]   = params[:duration]
-    cookies[:auto_apply_promo_code_started_at] = params[:promo_started_at]
-    cookies[:auto_apply_promo_code_title]      = params[:title]
-    cookies[:auto_apply_promo_code_message]    = params[:message]
-    head :ok
-  end
 end

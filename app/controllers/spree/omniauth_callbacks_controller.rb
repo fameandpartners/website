@@ -106,4 +106,5 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session[:spree_user_return_to] = main_app.bridesmaid_party_info_path
     end
   end
+
 end

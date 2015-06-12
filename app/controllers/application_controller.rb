@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include PathBuildersHelper
   include Concerns::SiteVersion
+  include Concerns::UserCampaignable
 
   if Rails.env.preproduction?
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
@@ -24,7 +25,6 @@ class ApplicationController < ActionController::Base
   before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
-  before_filter :clear_auto_promo_codes
 
   def count_competition_participants
     cpt = params[:cpt]
@@ -339,23 +339,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_promotion
-    @current_promotion ||= begin
-      code = params[:promocode] || cookies[:promocode]
-      promotion = code.present? ? Spree::Promotion.find_by_code(code) : nil
-
-      if !promotion && cookies[:auto_apply_promo_code]
-        time = Time.at(params[:promo_started_at].to_i) + params[:duration].to_i.hours
-        if time >= Time.now
-          promotion = Spree::Promotion.find_by_code(cookies[:auto_apply_promo_code])
-        end
-      end
-
-      promotion
-    end
-  end
-  helper_method :current_promotion
-
   def display_marketing_banner
     @display_marketing_banner = true
   end
@@ -378,25 +361,6 @@ class ApplicationController < ActionController::Base
 
   def set_session_country
     session[:country_code] ||= UserCountryFromIP.new(request.remote_ip).country_code
-  end
-
-  # clears out automatic promocodes with timers
-  # clears out cookies and removes promotion adjustments current order
-  def clear_auto_promo_codes
-    return unless cookies[:auto_apply_promo_code]
-    return unless current_order
-    return unless current_spree_user
-
-    time = Time.at(cookies[:auto_apply_promo_code_started_at].to_i) + cookies[:auto_apply_promo_code_duration].to_i.hours
-    return if time >= Time.now # promotion is still active
-
-    current_order.adjustments.where(originator_type: 'Spree::PromotionAction').destroy_all
-
-    cookies.delete(:auto_apply_promo_code)
-    cookies.delete(:auto_apply_promo_code_duration)
-    cookies.delete(:auto_apply_promo_code_started_at)
-    cookies.delete(:auto_apply_promo_code_message)
-    cookies.delete(:auto_apply_promo_code_title)
   end
 
 end

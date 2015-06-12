@@ -4,7 +4,7 @@
     session.delete(:show_promocode_modal)
     show_promocode_modal = "
       new window.page.PromocodeModal({
-        promocode: \"#{ promocode_to_show }\" 
+        promocode: \"#{ promocode_to_show }\"
       });
     "
   = content_for :inline_javascript do
@@ -19,7 +19,8 @@
     content = decode(params[:c]) || promocode
     class_name = decode(params[:s]) || class_name
     timeout = params[:t] || 3
-    timer   = params[:ti] ? decode(params[:ti]) : nil
+    timer   = decode(params[:ti])
+    campaign_uuid = decode(params[:cu])
 
     auto_apply = session[:auto_apply]
     session.delete(:auto_apply)
@@ -36,7 +37,8 @@
         timeout:    #{auto_apply ? 100000 : timeout},
         timer:      #{timer || 0},
         auto_apply_promo: #{params[:aap].present? && params[:aap].to_s == 'true'},
-        force:      true
+        force:      true,
+        uuid:      \"#{campaign_uuid}\"
       });
     "
     email_capture_modal += "modal_popup.enableAutoApply();" if auto_apply
@@ -56,7 +58,7 @@
       input type="hidden" name="promocode" value=promocode
       .vex-footer.clearfix
         .col-sm-5
-          - if promocode == 'birthdaybabe' 
+          - if promocode == 'birthdaybabe'
             = link_to 'Redeem via Facebook', fb_auth_path(show_promocode_modal: encode(promocode)), class: 'btn btn-facebook btn-block btn-md'
           - elsif params[:aap].to_s == 'true'
             = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true), class: 'btn btn-facebook btn-block btn-md'

@@ -18,6 +18,6 @@ class Campaigns::EmailCaptureController < ApplicationController
     end
 
   rescue Exception => e
-    render :json => { status: 'invalid' }, status: :error
+    render :json => { status: 'invalid' }, status: :ok
   end
 end

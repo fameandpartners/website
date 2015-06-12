@@ -11,7 +11,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   #   promocode - promo code
   #   timeout - timeout to show modal
   #   timer - countdown timer value in hours (ex. 48h)
-  #   auto_apply_promo - automatically apply promo code for cart
+  #   uuid - campaign uuid (optional parameter)
   constructor: (opts = {}) ->
     @opts = opts
     if ('timeout' of opts) # this allow us to set 0 as value
@@ -102,7 +102,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     str
 
   enableAutoApply: () =>
-    $.post('/promos/enable_auto_apply', {
+    $.post('/user_campaigns', {
       promocode:        @opts.promocode,
       promo_started_at: @promoStartedAt,
       duration:         @opts.timer,
