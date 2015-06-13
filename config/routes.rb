@@ -1,5 +1,4 @@
 FameAndPartners::Application.routes.draw do
-  SITE_VERSIONS = /(us|au)/
 
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 

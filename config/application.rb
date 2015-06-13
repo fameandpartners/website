@@ -11,6 +11,7 @@ end
 
 module FameAndPartners
   class Application < Rails::Application
+    SITE_VERSIONS = /(us|au)/
 
     config.to_prepare do
       # manually load some paths
