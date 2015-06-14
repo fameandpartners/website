@@ -1,3 +1,12 @@
+# AutoApplyPromoCampaign is used for campaigns where promotion with limited time interval
+# should be automatically applied whenever product is added to cart
+# This promotion stores information about itself in cookies
+#   @auto_apply_promo_code [String]             - promotion code to be applied
+#   @auto_apply_promo_code_duration [Integer]   - promotion duration in hours
+#   @auto_apply_promo_code_started_at [Integer] - Time converted to integer
+#   @auto_apply_promo_code_title [String]       - promotion title
+#   @auto_apply_promo_code_message [String]     - promotion message
+
 class AutoApplyPromoCampaign < CampaignManager
   def can_activate?
     # check already active or activated campaigns
