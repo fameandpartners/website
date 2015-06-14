@@ -7,7 +7,7 @@ class UserCampaignsController  < ActionController::Base
   #   :uuid [String] - capmaign uuid
   #   other attributes based on campaign itself
   def create
-    campaign_class = CampaignsFactory.getCampaignClass(params.delete[:uuid])
+    campaign_class = CampaignsFactory.getCampaignClass(params.delete(:uuid))
 
     if campaign_class
       campaign = campaign_class.new(

@@ -1,0 +1,14 @@
+#countdown-banner.alert-sale.hidden role="alert"
+  a.close href="#"
+  span.medium.banner-title
+  span.spacer
+  '
+  span.banner-message
+  span.timer-box.timer-box-small
+    ' <span><span class="hh">48</span></span><span><span class="mm">00</span></span><span><span class="ss">00</span></span>
+
+- if auto_apply_promo_campaign.is_active?
+  javascript:
+    $(function() {
+      window.page.showCountdownTimer("#{auto_apply_promo_campaign.title}", "#{auto_apply_promo_campaign.message}", #{auto_apply_promo_campaign.started_at.to_i * 1000}, #{auto_apply_promo_campaign.duration});
+    })

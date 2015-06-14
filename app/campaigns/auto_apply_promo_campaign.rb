@@ -6,9 +6,11 @@
 #   @auto_apply_promo_code_started_at [Integer] - Time converted to integer
 #   @auto_apply_promo_code_title [String]       - promotion title
 #   @auto_apply_promo_code_message [String]     - promotion message
-# In Modals generator one should additionally specify auto_apply_promo=true & campaign_uuid=auto_apply_promo
+# In Modals generator one should additionally specify campaign_uuid=auto_apply_promo
 
 class AutoApplyPromoCampaign < CampaignManager
+  UUID = 'auto_apply_promo'
+
   def can_activate?
     # check already active or activated campaigns
     return false if storage[:auto_apply_promo_code]
@@ -59,5 +61,21 @@ class AutoApplyPromoCampaign < CampaignManager
     storage.delete(:auto_apply_promo_code_started_at)
     storage.delete(:auto_apply_promo_code_message)
     storage.delete(:auto_apply_promo_code_title)
+  end
+
+  def title
+    storage[:auto_apply_promo_code_title]
+  end
+
+  def message
+    storage[:auto_apply_promo_code_message]
+  end
+
+  def started_at
+    storage[:auto_apply_promo_code_started_at]
+  end
+
+  def duration
+    storage[:auto_apply_promo_code_duration]
   end
 end

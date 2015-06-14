@@ -1,23 +1,23 @@
-# class TellMomCampaign < CampaignInterface
+class TellMomCampaign < CampaignManager
+  UUID = 'tell_mom'
 
-#   def initialize(storage_factory, params)
-#     @storage_factory = storage_factory
-#     @storage = @storage_factory.get_cookie_storage
-#   end
+  def can_activate?
+  end
 
-#   def is_active?
-#   end
+  def is_active?
+  end
 
-#   def expired?
-#   end
+  def expired?
+  end
 
-#   def can_activate?
-#   end
+  # this type of campaign does not have any promotion
+  def promotion
+    nil
+  end
 
-#   def activate!
-#     @storage[:tell_mom_campaign_started_at] = Time.now.to_i
-#   end
+  def activate!
+  end
 
-#   def deactivate!
-#   end
-# end
+  def deactivate!
+  end
+end

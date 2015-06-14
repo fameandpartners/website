@@ -2,16 +2,16 @@ window.page or= {}
 
 window.page.EmailCaptureModal = class EmailCaptureModal
   # @opts[Object]
-  #   action - submit url
+  #   action    - submit url
   #   className - additional classname for container
   #   container - markup container
-  #   content: - DOM element containing content to be displayed in modal
-  #   force: force showing modal
-  #   heading - heading text
+  #   content   - DOM element containing content to be displayed in modal
+  #   force     - force showing modal
+  #   heading   - heading text
   #   promocode - promo code
-  #   timeout - timeout to show modal
-  #   timer - countdown timer value in hours (ex. 48h)
-  #   uuid - campaign uuid (optional parameter)
+  #   timeout   - timeout to show modal
+  #   timer     - countdown timer value in hours (ex. 48h)
+  #   uuid      - campaign uuid (optional parameter)
   constructor: (opts = {}) ->
     @opts = opts
     if ('timeout' of opts) # this allow us to set 0 as value
@@ -21,17 +21,15 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     @$container = $(opts.container)
     @cookie = "email_capture_#{@opts.content}"
 
-    promo_cookie = "promos_#{@opts.promocode}_started_at"
-
+    debugger
     if @opts.timer
       # timer value is in hours
-      @promoStartedAt = $.cookie(promo_cookie)
+      @promoStartedAt = $.cookie("auto_apply_promo_code_started_at")
       if !@promoStartedAt
         today = +new Date()
-        $.cookie(promo_cookie, today, {expires: Math.floor(@opts.timer / 24) + 1})
         @promoStartedAt = today
       else
-        @promoStartedAt = +@promoStartedAt
+        @promoStartedAt = +@promoStartedAt * 1000
 
     setTimeout(@open, timeout) if @pop
 
@@ -55,8 +53,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       window.helpers.showAlert(message: 'Did you mean to forget your email address?')
 
   success: (data) =>
-    if @opts.auto_apply_promo && @promoStartedAt
-      @enableAutoApply()
+    @enableAutoApply()
 
     if data.status == 'ok'
       title = 'thanks babe'

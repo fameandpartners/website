@@ -235,17 +235,4 @@ ruby:
               span.hidden-sm.hidden-xs.hidden-xxs cart:
               span#cart-item-count 0
 
-#countdown-banner.alert-sale.hidden role="alert"
-  a.close href="#"
-  span.medium.banner-title
-  span.spacer
-  '
-  span.banner-message
-  span.timer-box.timer-box-small
-    ' <span><span class="hh">48</span></span><span><span class="mm">00</span></span><span><span class="ss">00</span></span>
-
-- if cookies[:auto_apply_promo_code]
-  javascript:
-    $(function() {
-      window.page.showCountdownTimer("#{cookies[:auto_apply_promo_code_title]}", "#{cookies[:auto_apply_promo_code_message]}", #{cookies[:auto_apply_promo_code_started_at]}, #{cookies[:auto_apply_promo_code_duration]});
-    })
+= render 'layouts/redesign/campaigns/auto_apply_promo_code'
