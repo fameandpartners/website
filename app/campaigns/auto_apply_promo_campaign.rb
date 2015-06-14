@@ -2,23 +2,22 @@ class AutoApplyPromoCampaign < CampaignManager
   def can_activate?
     # check already active or activated campaigns
     return false if storage[:auto_apply_promo_code]
+    return false if campaign_attrs[:promo_started_at].blank? || campaign_attrs[:duration].blank?
 
     time = Time.at(campaign_attrs[:promo_started_at].to_i) + campaign_attrs[:duration].to_i.hours
     time >= Time.now
   end
 
   def is_active?
-    if storage[:auto_apply_promo_code]
-      time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
-      time >= Time.now
-    end
+    return false if storage[:auto_apply_promo_code].blank?
+    time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
+    time >= Time.now
   end
 
   def expired?
-    if storage[:auto_apply_promo_code]
-      time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
-      time <= Time.now
-    end
+    return false if storage[:auto_apply_promo_code].blank?
+    time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
+    time <= Time.now
   end
 
   def promotion
