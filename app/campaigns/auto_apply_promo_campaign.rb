@@ -6,6 +6,7 @@
 #   @auto_apply_promo_code_started_at [Integer] - Time converted to integer
 #   @auto_apply_promo_code_title [String]       - promotion title
 #   @auto_apply_promo_code_message [String]     - promotion message
+# In Modals generator one should additionally specify auto_apply_promo=true & campaign_uuid=auto_apply_promo
 
 class AutoApplyPromoCampaign < CampaignManager
   def can_activate?
