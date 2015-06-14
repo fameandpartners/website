@@ -8,6 +8,10 @@ class CampaignManager
     @current_site_version = current_site_version
   end
 
+  def can_activate?
+    raise NotImplementedError, "you should implement this methond in derived class"
+  end
+
   def is_active?
     raise NotImplementedError, "you should implement this methond in derived class"
   end
