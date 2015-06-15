@@ -21,7 +21,6 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     @$container = $(opts.container)
     @cookie = "email_capture_#{@opts.content}"
 
-    debugger
     if @opts.timer
       # timer value is in hours
       @promoStartedAt = $.cookie("auto_apply_promo_code_started_at")
@@ -208,4 +207,3 @@ window.page.CountdownTimer = class CountdownTimer
       else if @closeCallback
         @closeCallback()
     , 1000
-
