@@ -325,7 +325,11 @@
     background-color: #f9ebf7 !important;
   }
 
-  .vex-content { border: 0; }
+  .vex-content { 
+    border: 0; 
+    animation-duration: 0.3s, 0.5s;
+    animation-name: vex-slideup, vex-fadein;
+  }
   
   .vex-dialog-input {
     margin: 0;
