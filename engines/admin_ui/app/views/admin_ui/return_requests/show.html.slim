@@ -1,0 +1,23 @@
+
+= return_request.order.number
+
+= render return_request.order.user
+
+
+
+.ibox
+  .ibox-content
+    table.table
+      thead : tr
+        th id
+        th item
+        th action
+        th category
+        th reason
+      tbody
+        = render partial: 'item', collection:  return_request.return_request_items
+
+
+
+
+

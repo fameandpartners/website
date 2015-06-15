@@ -33,7 +33,8 @@ path 'engines' do
   gem 'inspinia-rails'
 end
 
-# TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it, but it wont be available as a helper method unless it's included in the main app for some reason.
+# TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
+# but it wont be available as a helper method unless it's included in the main app.
 gem 'active_link_to'
 
 # assets

@@ -1,0 +1,16 @@
+- content_for :page_title do
+  ' Return Requests
+
+
+table.table
+  thead : tr
+    th date
+    th order
+
+  tbody
+    - collection.each do |rr|
+      tr
+        td = rr.created_at
+        td = rr.order.number
+        td = link_to rr.id, return_request_path(rr)
+    /li = return_request.inspect
