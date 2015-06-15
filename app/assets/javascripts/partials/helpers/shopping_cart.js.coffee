@@ -132,7 +132,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     try
       if @track
         window._fbq ||= []
-        ids = ['6021815151134','6026191677496','6027615548326']
+        ids = ['6021815151134','6026191677496','6027615548326','6027496563226']
         _.each(ids, (id) ->
           window._fbq.push(['track', id, {
             'value': product.price.amount,
