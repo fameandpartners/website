@@ -60,11 +60,11 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       # show next popup in chain
       if @opts.promocode && @opts.promocode.toLowerCase() == 'birthdaybabe'
         new window.page.PromocodeModal(promocode: @opts.promocode)
-      else if @opts.auto_apply_promo && @promoStartedAt
+      else if @opts.uuid == 'auto_apply_promo' && @promoStartedAt
         new window.page.CountdownBanner($('#countdown-banner'), @opts.heading, @opts.message, @promoStartedAt, @opts.timer)
       else
         # show default system
-        if @opts.promocode && !@opts.auto_apply_promo
+        if @opts.promocode && @opts.uuid != 'auto_apply_promo'
           message = "Use this promocode for your next killer dress: #{@opts.promocode}."
         else
           message = "Thanks for joining!"
