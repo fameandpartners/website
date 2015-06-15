@@ -28,15 +28,12 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                     tr
                       td
                         .product-images style="margin: 0 -10px;"
-                          = link_to image_tag('http://placehold.it/254x400', width: 254, style: "border: 0;", alt: "", style: 'width: 100%; height: auto;'), '#', style: 'width: 33%; display: inline-block; vertical-align: top; padding: 0 10px 20px; box-sizing: border-box;'
-                          = link_to image_tag('http://placehold.it/254x400', width: 254, style: "border: 0;", alt: "", style: 'width: 100%; height: auto;'), '#', style: 'width: 33%; display: inline-block; vertical-align: top; padding: 0 10px 20px; box-sizing: border-box;'
-                          = link_to image_tag('http://placehold.it/254x400', width: 254, style: "border: 0;", alt: "", style: 'width: 100%; height: auto;'), '#', style: 'width: 33%; display: inline-block; vertical-align: top; padding: 0 10px 20px; box-sizing: border-box;'
-                          = link_to image_tag('http://placehold.it/254x400', width: 254, style: "border: 0;", alt: "", style: 'width: 100%; height: auto;'), '#', style: 'width: 33%; display: inline-block; vertical-align: top; padding: 0 10px 20px; box-sizing: border-box;'
-                          = link_to image_tag('http://placehold.it/254x400', width: 254, style: "border: 0;", alt: "", style: 'width: 100%; height: auto;'), '#', style: 'width: 33%; display: inline-block; vertical-align: top; padding: 0 10px 20px; box-sizing: border-box;'
-                        .product-name style="margin: 20px 0 4px; color: #000;"
-                          a href="#" style="text-decoration: none; color: #000; text-transform: uppercase; font-size: 18px; text-decoration: underline;" Name
-                        .product-description style="margin: 0 0 16px;" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et vehicula tortor, nec pharetra risus. Cras sollicitudin tellus turpis, non molestie sapien hendrerit sit amet. Quisque viverra sodales nulla, ut blandit diam lobortis quis. Fusce vehicula erat tellus, et vestibulum orci venenatis ac. Morbi eu fermentum risus. Duis sodales luctus enim, at convallis nulla. Nunc aliquet diam non odio mollis, non vehicula urna rutrum. Nunc finibus dictum justo, sed cursus neque pretium vel.
-                        .price style="color: #363636; font-size: 14px; font-weight: 700;" $99
+                          - @products.each do |product|
+                            = link_to product.path do
+                              = image_tag product.image_url, width: 254, style: 'width: 33%; display: inline-block; vertical-align: top; padding: 0 10px 20px; box-sizing: border-box;', alt: product.name
+                              .details
+                                .name= product.name
+                                span.price = product_price_with_discount(product.price, product.discount)
                         table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                           tbody
                             tr

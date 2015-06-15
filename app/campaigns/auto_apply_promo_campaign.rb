@@ -9,7 +9,8 @@
 # In Modals generator one should additionally specify campaign_uuid=auto_apply_promo
 
 class AutoApplyPromoCampaign < CampaignManager
-  UUID = 'auto_apply_promo'
+  UUID         = 'auto_apply_promo'
+  ENCODED_UUID = 'YXV0b19hcHBseV9wcm9tbw=='
 
   def can_activate?
     # check already active or activated campaigns

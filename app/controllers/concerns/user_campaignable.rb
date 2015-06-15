@@ -24,6 +24,9 @@ module Concerns::UserCampaignable
   end
 
   def manage_campaigns
+    # only for GET requests
+    return unless request.get?
+
     # deactivate expirable campaigns if needed
     campaign_classes = CampaignsFactory.getExpirableCampaignClasses
 

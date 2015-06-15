@@ -32,6 +32,7 @@ FameAndPartners::Application.routes.draw do
   }
 
   post '/user_campaigns' => 'user_campaigns#create'
+  post '/user_campaigns/tell_mom' => 'user_campaigns#tell_mom'
 
   get '/undefined',    to: 'mysterious_route#undefined'
   get '/au/undefined', to: 'mysterious_route#undefined'

@@ -68,3 +68,7 @@ javascript:
                     .actions.text-center
                       = link_to 'Buy this Dress', product.path, class: 'buy btn btn-md btn-black', data: { variant: product.variant_id, id: product.item_id }
                       = link_to 'Remove', wishlists_item_path(product.item_id), id: "remove-product-#{product.item_id}", data: { id: product.item_id }, class: 'remove small'
+
+
+- if tell_mom_campaign.is_active?
+  = render 'layouts/redesign/campaigns/tell_mom'

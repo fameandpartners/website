@@ -6,9 +6,11 @@ Spree::OrderMailer.class_eval do
 
   include Spree::BaseHelper
   include OrdersHelper
+  include ApplicationHelper
 
   helper 'spree/base'
   helper :orders
+  helper :application
 
   attr_reader   :order
   helper_method :order
@@ -64,9 +66,11 @@ Spree::OrderMailer.class_eval do
     mail(to: to, from: from, subject: subject)
   end
 
-  def send_to_friend(order, email)
-    find_order(order)
-    subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')}"
-    mail(:to => email, :from => order.email, :subject => subject)
+  def send_to_friend(products, email)
+    @products = products
+    subject = "Your daughter sent you her favourite Quinceanera dresses"
+    mail to:      email,
+         from:    configatron.noreply,
+         subject: subject
   end
 end

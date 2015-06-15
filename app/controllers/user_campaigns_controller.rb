@@ -2,6 +2,7 @@ class UserCampaignsController  < ActionController::Base
   include Concerns::SiteVersion
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Auth
+  include Concerns::UserCampaignable
 
   # @params
   #   :uuid [String] - capmaign uuid
@@ -18,6 +19,27 @@ class UserCampaignsController  < ActionController::Base
       )
 
       campaign.activate! if campaign.can_activate?
+    end
+
+    head :ok
+  end
+
+  # @params
+  #  :email [String]
+  def tell_mom
+    if Devise.email_regexp =~ params[:email]
+      moodboard = Wishlist::UserWishlistResource.new(
+        site_version: current_site_version,
+        owner:        current_spree_user
+      ).read
+
+      if current_promotion && (auto_discount = current_promotion.discount)
+        moodboard.products.each do |product|
+          product.discount = [product.discount, auto_discount].compact.max_by{|i| i.amount}
+        end
+      end
+
+      Spree::OrderMailer.send_to_friend(moodboard.products, params[:email]).deliver
     end
 
     head :ok

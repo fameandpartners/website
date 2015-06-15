@@ -12,17 +12,17 @@
 
 - if pop?
   ruby:
-    promocode = decode(params[:pc])
+    promocode     = decode(params[:pc])
     template_name = params[:tn].present? ? decode(params[:tn]) : 'default'
-    heading = decode(params[:h])
-    message = decode(params[:m])
-    content = decode(params[:c]) || promocode
-    class_name = decode(params[:s]) || class_name
-    timeout = params[:t] || 3
-    timer   = decode(params[:ti])
+    heading       = decode(params[:h])
+    message       = decode(params[:m])
+    content       = decode(params[:c]) || promocode
+    class_name    = decode(params[:s]) || class_name
+    timeout       = params[:t] || 3
+    timer         = decode(params[:ti])
     campaign_uuid = decode(params[:cu])
 
-    auto_apply = session[:auto_apply]
+    auto_apply    = session[:auto_apply]
     session.delete(:auto_apply)
 
     email_capture_modal = "
@@ -36,7 +36,6 @@
         container: \"#modal-popup-content-template\",
         timeout:    #{auto_apply ? 100000 : timeout},
         timer:      #{timer.present? ? timer : 0},
-        auto_apply_promo: #{params[:aap].present? && params[:aap].to_s == 'true'},
         force:      true,
         uuid:      \"#{campaign_uuid}\"
       });

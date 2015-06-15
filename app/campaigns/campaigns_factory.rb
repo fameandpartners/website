@@ -2,9 +2,9 @@ class CampaignsFactory
   class << self
     def getCampaignClass(campaign_uuid)
       case campaign_uuid
-      when TellMomCampaign::UUID
+      when TellMomCampaign::UUID, TellMomCampaign::ENCODED_UUID
         TellMomCampaign
-      when AutoApplyPromoCampaign::UUID
+      when AutoApplyPromoCampaign::UUID, AutoApplyPromoCampaign::ENCODED_UUID
         AutoApplyPromoCampaign
       end
     end
@@ -15,7 +15,7 @@ class CampaignsFactory
 
     def getAllCampaignClasses
       [
-        AutoApplyPromoCampaign
+        AutoApplyPromoCampaign, TellMomCampaign
       ]
     end
   end

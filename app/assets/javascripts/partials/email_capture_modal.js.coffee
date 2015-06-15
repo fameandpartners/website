@@ -4,7 +4,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   # @opts[Object]
   #   action    - submit url
   #   className - additional classname for container
-  #   container - markup container
+  #   container - ID of html container that should be used as content for modal
   #   content   - DOM element containing content to be displayed in modal
   #   force     - force showing modal
   #   heading   - heading text
@@ -207,3 +207,18 @@ window.page.CountdownTimer = class CountdownTimer
       else if @closeCallback
         @closeCallback()
     , 1000
+
+
+window.page.showTellMomModal = ->
+  vex.dialog.buttons.NO.text = 'X'
+
+  updateHtml = (modal) ->
+    modal.find('.vex-dialog-buttons button').addClass('btn btn-black')
+
+  vex.dialog.open
+    message: '<h2>Nice picks! How would mom say no?</h2><p>SEND HER YOUR SELECTION NOW:</p>',
+    className: 'vex-dialog-bottom vex-dialog-pink vex-text vex-dialog-pink-reverse',
+    popup: true,
+    input: $('#tell-mom-popup-content-template').html()
+    timeout: 0,
+    afterOpen: updateHtml
