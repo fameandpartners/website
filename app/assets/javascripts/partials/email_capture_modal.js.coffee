@@ -214,6 +214,16 @@ window.page.showTellMomModal = ->
 
   updateHtml = (modal) ->
     modal.find('.vex-dialog-buttons button').addClass('btn btn-black')
+    $form = modal.find('form')
+    $email = $form.find('input[name=email]')
+
+    $form.on 'submit', (e) ->
+      $.post('/user_campaigns/tell_mom', {email: $email.val()}).done ->
+        vex.close()
+      e.preventDefault()
+      e.stopPropagation()
+      false
+
 
   vex.dialog.open
     message: '<h2>Nice picks! How would mom say no?</h2><p>SEND HER YOUR SELECTION NOW:</p>',
