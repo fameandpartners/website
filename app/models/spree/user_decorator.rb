@@ -14,23 +14,27 @@ Spree::User.class_eval do
 
   has_many :email_notifications, foreign_key: :spree_user_id
 
+  has_attached_file :avatar
+  has_one :style_profile,
+          :class_name => '::UserStyleProfile',
+          :foreign_key => :user_id
+
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
 
-  attr_accessible :phone, :dob, :skip_welcome_email, :automagically_registered
+  attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered
+
+  validates :first_name, :last_name, :presence => true
 
   validates :phone,
             presence: {
               if: :validate_presence_of_phone
             }
 
-  after_create :create_marketing_subscriber, if: Proc.new { |u| u.newsletter? }
+  after_create :send_welcome_email, unless: Proc.new { |a| a.skip_welcome_email }
+
+  after_create {|user| Marketing::Subscriber.new(user: user).create if user.newsletter? }
   after_update {|user| Marketing::Subscriber.new(user: user).update }
-
-
-  def create_marketing_subscriber
-    Marketing::Subscriber.new(user: self).create
-  end
 
   def update_profile(args = {})
     if args[:password].blank?
@@ -130,7 +134,18 @@ Spree::User.class_eval do
     end
   end
 
+  def full_name
+    [first_name, last_name].reject(&:blank?).join(' ')
+  end
+
   def to_s
     "#{full_name} - #{email}"
+  end
+
+  def send_welcome_email
+    return true if Rails.application.config.skip_mail_delivery
+    unless skip_welcome_email
+      ::Spree::UserMailer.welcome(self).deliver
+    end
   end
 end
