@@ -11,6 +11,7 @@ class  UserCart::UserCartResource
     UserCart::CartPresenter.new(
       products: cart_products,
       item_count: cart_products.sum{|product| product.quantity},
+      promocode: order.promocode,
       display_item_total: order.display_item_total,
       display_shipment_total: order_display_shipment_total,
       display_promotion_total: order.display_promotion_total,
