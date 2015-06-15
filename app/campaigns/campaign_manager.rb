@@ -1,5 +1,5 @@
 class CampaignManager
-  attr_reader :storage, :campaign_attrs
+  attr_reader :storage, :campaign_attrs, :current_order, :current_site_version
 
   def initialize(storage:, campaign_attrs:, current_order:, current_site_version:)
     @storage              = storage
