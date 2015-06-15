@@ -50,7 +50,7 @@ class AutoApplyPromoCampaign < CampaignManager
   # clears out cookies and removes promotion adjustments current order
   def deactivate!
     return unless storage[:auto_apply_promo_code]
-    return unless @current_order
+    return unless current_order
 
     time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
     return if time >= Time.now # promotion is still active
