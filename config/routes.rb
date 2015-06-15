@@ -113,6 +113,7 @@ FameAndPartners::Application.routes.draw do
       root to: 'details#show', as: :user_cart_details
 
       get '/details'      => 'details#show'
+      post '/promotion'   => 'promotions#create'
 
       post 'products' => 'products#create'
       delete 'products/:line_item_id' => 'products#destroy'
