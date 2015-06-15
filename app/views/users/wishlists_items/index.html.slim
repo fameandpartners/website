@@ -70,5 +70,5 @@ javascript:
                       = link_to 'Remove', wishlists_item_path(product.item_id), id: "remove-product-#{product.item_id}", data: { id: product.item_id }, class: 'remove small'
 
 
-- if tell_mom_campaign.is_active?
+- if tell_mom_campaign.is_active? && @moodboard.products.size > 0
   = render 'layouts/redesign/campaigns/tell_mom'
