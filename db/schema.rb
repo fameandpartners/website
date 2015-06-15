@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150603000030) do
+ActiveRecord::Schema.define(:version => 20150611024152) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1059,8 +1059,9 @@ ActiveRecord::Schema.define(:version => 20150603000030) do
     t.integer  "option_type_id"
     t.string   "name"
     t.string   "presentation"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.boolean  "available_as_taxon", :default => false
   end
 
   add_index "spree_option_values_groups", ["option_type_id"], :name => "index_spree_option_values_groups_on_option_type_id"
