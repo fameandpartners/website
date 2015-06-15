@@ -1,8 +1,9 @@
 .style-session-header {
-  background-image: url('contact/style-session-header2.jpg');
+  background-image: url('contact/style-session-header.jpg');
   height: 428px;
   background-size: cover;
   background-repeat: no-repeat;
+  &.prom { background-image: url('contact/style-session-header2.jpg');}
 }
 
 .style-session .form {
