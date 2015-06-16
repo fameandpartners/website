@@ -75,7 +75,7 @@ module Feeds
             if item['image'].present?
               items.push(item)
             end
-          rescue Exception => ex
+          rescue StandartError => ex
             puts ex
           end
         end
