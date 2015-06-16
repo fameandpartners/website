@@ -6,6 +6,11 @@ module Feeds
       attr_accessor :properties
       attr_accessor :current_site_version
 
+      attr_reader :logger
+      def initialize(logger: )
+        @logger = logger || Logger.new($stdout)
+      end
+
       private
 
       def export_file_path

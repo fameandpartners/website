@@ -9,10 +9,13 @@ module Feeds
   class Base
     FEEDS =  %w(GoogleFlatImages Google Getprice Myshopping Shopping)
 
-    attr_reader :config, :current_site_version
+    attr_reader :config, :current_site_version, :logger
 
-    def initialize(version_permalink)
+    def initialize(version_permalink, logger: default_logger)
       @current_site_version = SiteVersion.by_permalink_or_default(version_permalink)
+      @logger = logger
+      @logger.info "Starting Feeds Export SITE (#{version_permalink})"
+
       @config = {
         title:       'Fame & Partners',
         description: 'Fame & Partners our formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.',
@@ -20,18 +23,29 @@ module Feeds
       }
     end
 
+    def default_logger
+      logger = Logger.new($stdout)
+
+      logger.formatter = proc do |severity, datetime, _progname, msg|
+        "[%s] [%-5s] %s\n" %  [datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg]
+      end
+      logger
+    end
+
     def export
       @items      = get_items
       @properties = get_properties
 
       FEEDS.each do |name|
+        logger.info("START Feed #{name}")
         klass                         = Feeds::Exporter.const_get(name)
-        exporter                      = klass.new
+        exporter                      = klass.new(logger: @logger)
         exporter.items                = @items
         exporter.properties           = @properties
         exporter.config               = @config
         exporter.current_site_version = @current_site_version
         exporter.export
+        logger.info("END Feed #{name}")
       end
     end
 
@@ -47,6 +61,7 @@ module Feeds
     end
 
     def get_properties
+      logger.info 'Fetching Properties'
       properties = Hash[*
         Spree::Property.where(name: ['fabric', 'short_description']).map do |property|
           [property.id, property]
@@ -67,15 +82,17 @@ module Feeds
     end
 
     def get_items
+      logger.info 'Fetching Items'
       items = []
       Spree::Product.active.includes(:variants).find_each(batch_size: 10) do |product|
+        logger.info "Product: #{product.name}"
         product.variants.each do |variant|
           begin
             item = get_item_properties(product, variant)
             if item['image'].present?
               items.push(item)
             end
-          rescue StandartError => ex
+          rescue StandardError => ex
             puts ex
           end
         end
@@ -105,6 +122,8 @@ module Feeds
         variant:                 variant,
         variant_sku:             product.sku + variant.id.to_s,
         product:                 product,
+        product_name:            product.name,
+        product_sku:             product.sku,
         availability:            availability,
         title:                   "#{product.name} - Size #{size} - Colour #{color}",
         description:             product.description,
