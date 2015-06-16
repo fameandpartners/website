@@ -54,7 +54,6 @@ sitemap_options = {
 # => 1.0 for root (generator's `#include_root` default)
 # => 0.9 for categories
 # => 0.8 for products
-# => 0.8 for products' images
 # => 0.7 for pages
 SitemapGenerator::Sitemap.create(sitemap_options) do
   # Records scopes
@@ -62,7 +61,7 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
   events_taxons      = Repositories::Taxonomy.read_events
   collections_taxons = Repositories::Taxonomy.read_collections
   styles_taxons      = Repositories::Taxonomy.read_styles
-  colors_taxons      = Repositories::ProductColors.color_groups
+  colors_taxons      = Spree::OptionValuesGroup.for_colors.available_as_taxon
   statics_pages = [
     '/about', '/why-us', '/privacy',
     '/style-consultation', '/fame-chain',
@@ -73,17 +72,6 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
 
   # Common pages
   add '/assets/returnform.pdf', priority: 0.7
-
-  # Products' images
-  group(filename: 'images') do
-    active_products.find_each do |product|
-      proudct_images = Repositories::ProductImages.new(product: product).read_all
-      proudct_images.each do |image|
-        image_url = URI.parse(image.original)
-        add image_url.path, priority: 0.8, host: "http://#{image_url.host}"
-      end
-    end
-  end
 
   # Creating sitemaps for each site version
   SiteVersion.find_each do |site_version|
@@ -96,7 +84,10 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
     group(sitemap_group_options) do
       # Products pages
       active_products.each do |product|
-        add collection_product_path(product), priority: 0.8
+        product_images = Repositories::ProductImages.new(product: product).read_all
+        product_images = product_images.map { |image| { loc: image.original, title: [product.name, image.color].join(' ') } }
+
+        add collection_product_path(product), images: product_images, priority: 0.8
       end
 
       # Events

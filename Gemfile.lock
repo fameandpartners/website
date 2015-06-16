@@ -177,11 +177,21 @@ PATH
       rails (~> 3.2.21)
 
 PATH
+  remote: engines/revolution
+  specs:
+    revolution (0.0.1)
+      awesome_nested_set
+      rails (~> 3.2.21)
+
+PATH
   remote: engines/style_quiz
   specs:
     style_quiz (0.0.1)
       jquery-rails
+      pg (~> 0.18)
       rails (~> 3.2.21)
+      slim (~> 3.0)
+      slim-rails (~> 3.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -262,6 +272,8 @@ GEM
     cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -295,6 +307,8 @@ GEM
       rails (~> 3.1)
     default_value_for (3.0.1)
       activerecord (>= 3.2.0, < 5.0)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (2.2.8)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -776,6 +790,7 @@ DEPENDENCIES
   active_model_serializers
   acts-as-taggable-on
   addressable
+  autoprefixer-rails
   awesome_print
   aws-sdk
   bootstrap-sass
@@ -786,6 +801,7 @@ DEPENDENCIES
   capistrano-rbenv (= 0.0.10)
   capybara
   ckeditor
+  coercible
   coffee-rails (~> 3.2.1)
   coffee-script-source (~> 1.8.0)
   compass
@@ -824,6 +840,7 @@ DEPENDENCIES
   rack-cors
   rails!
   redis-rails
+  revolution!
   rmagick
   rollout
   roo
@@ -857,3 +874,6 @@ DEPENDENCIES
   uglifier (= 1.3.0)
   unicorn
   whenever
+
+BUNDLED WITH
+   1.10.3

@@ -85,9 +85,7 @@ ruby:
                       p.button-grey-text.menu-main-promotions
                         span.fit-guarantee.menu-icon
                         | Fit Guarantee
-              .mega-menu--secondary
-                = link_to fast_making_dresses_path, class: 'mega-menu-banner' do
-                  = image_tag 'mega-menu/express-making.jpg', alt: 'Get it Quick - Dress made for you in 48 hours', class: 'img-responsive'
+              .mega-menu--secondary                
                 .container-fluid.max-width-100
                   .row
                     .col-md-3.col-lg-2.col-md-offset-4
@@ -104,7 +102,7 @@ ruby:
                         li.mega-menu-list--item
                           = link_to 'Ball Gowns', build_taxon_path('Ball Gowns'), title: 'Ball Gowns'
                         li.mega-menu-list--item
-                          = link_to 'Bridesmaid', bridesmaid_lp_path, title: 'Bridesmaid'
+                          = link_to 'Bridesmaid', bridesmaid_collection_path, title: 'Bridesmaid'
                         li.mega-menu-list--item
                           = link_to 'Graduation', build_taxon_path('Graduation'), title: 'Graduation'
                         li.mega-menu-list--item
@@ -171,31 +169,31 @@ ruby:
                 .col-md-2
                   = link_to bohemian_summer_collection_path do
                     .image-container
-                       = image_tag src='http://assets.fameandpartners.com/lookbook/bohemian-summer/nav.jpg', :class => 'img-responsive', :alt => 'Here Comes the Sun'
+                       = image_tag src="//#{configatron.asset_host}/lookbook/bohemian-summer/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
                     p.text-center.edit-title Bohemian Summer
 
                 .col-md-2
                   = link_to bridesmaid_collection_path do
                     .image-container.bridesmaids
-                      = image_tag src='edits/bridesmaids/nav.jpg', :class => 'img-responsive', :alt => 'Our Beautiful Bridesmaids Collection'
+                      = image_tag src="//#{configatron.asset_host}/lookbook/bridesmaids/nav.jpg", :class => 'img-responsive', :alt => 'Our Beautiful Bridesmaids Collection'
                     p.text-center.edit-title Besties and Bridesmaids Collection
 
                 .col-md-2
                   = link_to all_size_collection_path do
                     .image-container
-                      = image_tag src='edits/all-size/nav.jpg', :class => 'img-responsive', :alt => 'All Sizes'
+                      = image_tag src="//#{configatron.asset_host}/lookbook/all-size/nav.jpg", :class => 'img-responsive', :alt => 'All Sizes'
                     p.text-center.edit-title I'll Have What She's Having
 
                 .col-md-2
                   = link_to here_comes_the_sun_collection_path do
                     .image-container
-                       = image_tag src='edits/here-comes-the-sun/nav.jpg', :class => 'img-responsive', :alt => 'Here Comes the Sun'
+                       = image_tag src="//#{configatron.asset_host}/lookbook/here-comes-the-sun/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
                     p.text-center.edit-title Here Comes The Sun
 
                 .col-md-2
                   = link_to prom_collection_path do
                     .image-container.real-prom
-                      = image_tag src='edits/real_prom/1-edits-nav.jpg', :class => 'img-responsive', :alt => 'Our Official Prom Collection'
+                      = image_tag src="//#{configatron.asset_host}/lookbook/prom/nav.jpg", :class => 'img-responsive', :alt => 'Our Official Prom Collection'
                     p.text-center.edit-title Our Official Prom Collection
 
           li.menu-item

@@ -53,7 +53,11 @@
   Shipping<span class="pull-right"><%= @cart.display_shipment_total %></span>
 </p>
 <p>
-  Promotion<span class="pull-right"><%= @cart.display_promotion_total %></span>
+  <% if @cart.promocode: %>
+    Promotion (<%= @cart.promocode %>)<span class="pull-right"><%= @cart.display_promotion_total %></span>
+  <% else: %>
+    Promotion<span class="pull-right"><%= @cart.display_promotion_total %></span>
+  <% end %>
 </p>
 <p>
   <strong>Total<span class="pull-right"><%= @cart.display_total %></span></strong>

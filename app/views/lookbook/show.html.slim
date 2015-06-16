@@ -1,0 +1,21 @@
+= content_for :head do
+  meta name="robots" content="noindex, follow"
+
+= render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
+
+.page-content
+  ul.rslides
+    - (1..page.get(:image_count)).each do |n|
+      li
+        = image_tag "//#{configatron.asset_host}#{page.path}/#{n}.jpg", alt: "#{page.title} #{n}", class: 'img-responsive portrait-img'
+
+  .page-content.products-collections.category
+    = render :partial => 'filters', :locals => { :hidden => true }
+
+    .container.relative.products-collection
+      = render partial: 'products_without_content'
+
+    / = render partial: 'pagination'
+
+    .row.relative.more-products
+      = link_to 'More Dresses', dresses_path, class: 'btn btn-black'

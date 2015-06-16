@@ -4,9 +4,10 @@
     <%= tab :option_types, :match_path => '/option_types' %>
     <%= tab :properties %>
     <%= tab :prototypes %>
-    <%= tab :product_positions %>
+    <%= tab :positions, url: admin_product_positions_path %>
     <%= tab :styles %>
-    <%= tab :sku_generation, :url => main_app.admin_sku_generation_path %>
+    <%= tab :skus, :url => main_app.admin_sku_generation_path %>
     <%= tab :fabric, :url => main_app.admin_fabric_cards_path  %>
+    <%= tab :colours, :url => main_app.admin_dress_colours_path  %>
   </ul>
 <% end %>

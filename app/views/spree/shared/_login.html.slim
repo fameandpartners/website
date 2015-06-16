@@ -5,23 +5,19 @@
 
       = render :partial =>'shared/redesign/flash_messages', flash: flash
 
-      .row
-        .col-md-12.col-sm-12.form-group
-          = f.label :email
-          = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md'
-      .row
-        .col-md-12.col-sm-12.form-group
-          = f.label :password
-          = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md'
-      .row
-        .col-md-12.col-sm-12.form-group
-          .checkbox
-            label for="spree_user_remember_me"
-              = f.check_box :remember_me
-              span= t(:remember_me)
-      .row
-        .col-md-6.col-xs-12.form-group
-          = f.submit 'Login', class: 'btn btn-block btn-black btn-md', tabindex: 3
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md'
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md'
+      .form-group
+        .checkbox
+          label for="spree_user_remember_me"
+            = f.check_box :remember_me
+            span= t(:remember_me)
+      .form-group
+        = f.submit 'Login', class: 'btn btn-block btn-black btn-md', tabindex: 3
 
       .row
         .col-md-3.col-sm-3.col-xs-12

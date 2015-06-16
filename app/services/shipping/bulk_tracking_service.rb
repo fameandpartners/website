@@ -19,7 +19,7 @@ module Shipping
 
         valid_new_state = Fabrication::STATES.fetch(liu.make_state) { |state| Fabrication::STATES.key(state) }
 
-        if valid_new_state && liu.line_item.fabrication.state != valid_new_state
+        if valid_new_state
           UpdateFabrication.state_change(liu.line_item, user, valid_new_state)
         end
       end

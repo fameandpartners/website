@@ -6,7 +6,6 @@ FameAndPartners::Application.routes.draw do
   scope '(:site_version)' do
     get 'sitemap_index', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
     get 'sitemap', to: 'sitemaps#show', format: true, constraints: { format: /xml|xml.gz/ }
-    get 'images_sitemap', to: 'sitemaps#images', format: true, constraints: { format: /xml|xml.gz/ }
   end
 
   match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
@@ -71,7 +70,6 @@ FameAndPartners::Application.routes.draw do
     get '/nyfw-comp-terms-and-conditions',  to: redirect('/')
     get '/fashionitgirl2015-competition',  to: redirect('/')
 
-    get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_lp
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/sale-dresses' => 'statics#sale', :as => :sale
@@ -82,21 +80,30 @@ FameAndPartners::Application.routes.draw do
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
     #edits
-    get '/new-years-eve-dresses' => redirect('/break-hearts-collection')
-    get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
+    get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
+    get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
 
-    get '/lookbook' => 'statics#lookbook', :as => :lookbook
-    get '/here-comes-the-sun-collection' => 'statics#here_comes_the_sun', :as => :here_comes_the_sun_collection
-    get '/all-size' => 'statics#all_size', :as => :all_size_collection
+    # get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
+    get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
+    get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
+    get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
 
-    get '/lookbook/bohemian-summer' => 'statics#bohemian_summer', :as => :bohemian_summer_collection
+    get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
+    # get '/bridesmaid-dresses' => redirect('/lookbook/bridesmaids')
+    # get '/lookbook/bridesmaids' => 'products/collections#show', :permalink => 'Bridesmaid14', :as => :bridesmaid_collection
+
+    get '/all-size' => redirect('/lookbook/all-size')
+    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'plus-size', :as => :all_size_collection
+
+    get '/prom-collection' => redirect('/lookbook/prom')
+    get '/lookbook/prom' => 'products/collections#show', :permalink => 'PROM2015', :as => :prom_collection
+
+    get '/lookbook/bohemian-summer' => 'products/collections#show', :permalink => 'bohemian-summer', :as => :bohemian_summer_collection
 
     get '/amfam'                  => redirect('/wicked-game-collection')
     get '/amfam-dresses'          => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
-    get '/prom-collection' => 'statics#prom', :as => :prom_collection
-    get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
     get '/getitquick' => 'products/collections#show', defaults: { fast_making: true }, as: 'fast_making_dresses'
 
@@ -323,6 +330,7 @@ FameAndPartners::Application.routes.draw do
     resource  :payments_report,    :only => [:show, :create]
     resources :shipments,          :only => :update
     resource  :sku_generation,     :only => [:show, :create]
+    resources :dress_colours,      :only => :index
   end
 
   Spree::Core::Engine.routes.append do
@@ -498,5 +506,9 @@ FameAndPartners::Application.routes.draw do
 
     #require 'sidekiq/web'
     #mount Sidekiq::Web => '/sidekiq'
+  end
+
+  if Features.active?(:content_revolution)
+    mount Revolution::Engine => "/"
   end
 end

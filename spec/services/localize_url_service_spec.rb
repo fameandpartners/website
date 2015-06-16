@@ -1,11 +1,12 @@
 require 'spec_helper'
 
 describe LocalizeUrlService do
+  before(:each) do
+    SiteVersion.instance_variable_set(:@permalinks, nil) # Invalidating memoization
+  end
+
   describe '.localize_url' do
-    before(:each) do
-      SiteVersion.instance_variable_set(:@permalinks, nil) # Invalidating memoization
-      create(:site_version, permalink: 'pt')
-    end
+    before(:each) { create(:site_version, permalink: 'pt') }
 
     describe 'given a URL and a site version' do
       context 'URL is invalid' do
@@ -46,6 +47,31 @@ describe LocalizeUrlService do
           result = described_class.localize_url(url, site_version)
           expect(result).to eq('http://example.com/something?color=pastel')
         end
+      end
+    end
+  end
+
+  describe '.remove_version_from_url' do
+    context 'given an URL with a site version' do
+      before(:each) { create(:site_version, permalink: 'pt') }
+
+      it 'remove any known site version from it' do
+        result = described_class.remove_version_from_url('/pt/something?query=cool')
+        expect(result).to eq('/something?query=cool')
+      end
+    end
+
+    context 'given an URL/path without a site version' do
+      it 'does nothing on URLs' do
+        given_url = 'http://example.com/pt/something?query=cool'
+        result = described_class.remove_version_from_url(given_url)
+        expect(result).to eq(given_url)
+      end
+
+      it 'does nothing on paths' do
+        given_path = '/something?query=cool'
+        result = described_class.remove_version_from_url(given_path)
+        expect(result).to eq(given_path)
       end
     end
   end

@@ -23,6 +23,11 @@ gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
+gem 'autoprefixer-rails'
+
+# engines
+gem 'revolution', path: 'engines/revolution'
+
 
 # assets
 gem 'jquery-rails'
@@ -31,6 +36,7 @@ gem 'droidcss'
 
 # Data
 gem 'event_sourced_record'
+gem 'coercible'
 
 gem 'ipaddress'
 gem 'geoip', require: false
