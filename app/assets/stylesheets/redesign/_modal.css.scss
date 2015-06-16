@@ -63,7 +63,7 @@
     > *:only-child {margin: 0;}
   }
 
-  h2:empty, p:empty {
+  h2:empty, h3:empty, p:empty {
     display: none;
   }
 }
@@ -327,8 +327,23 @@
 
   .vex-content { 
     border: 0; 
+    padding-top: 40px;
     animation-duration: 0.3s, 0.5s;
     animation-name: vex-slideup, vex-fadein;
+  }
+  .vex-dialog-message {
+    padding-top: 40px;
+    h3, h2 {
+      padding-top: 0 !important;
+      margin-top: 0;
+      line-height: 1.2 !important;
+      color: #000;
+    }
+    h2 { 
+      font-size: 32px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
   }
   
   .vex-dialog-input {
@@ -423,6 +438,16 @@
       width: 780px;
     }
     .vex-dialog-message {
+      p { 
+        font-weight: 300;
+        font-size: 28px;
+      }
+      h2 {
+        margin-bottom: 10px;
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 32px;
+      }
       h3 {
         font-size: 28px;
         font-weight: 300;
@@ -430,7 +455,7 @@
         strong {
           display: block;
           margin-bottom: 10px;
-          font-size: 33px;
+          font-size: 32px;
           font-weight: 400;
           text-transform: uppercase;
         }
@@ -442,7 +467,7 @@
   &.vex-text {
     .vex-dialog-message {
       margin: 0;
-      h2, h3 {
+      h3 {
         text-transform: uppercase;
         font-size: 28px;
         font-weight: 300;
@@ -452,6 +477,7 @@
         line-height: 1.5;
         padding: 28px 0 8px;
         margin-bottom: 0;
+        &:last-child {padding-bottom: 0;}
         strong {
           display: block;
           font-family: "brandon-grotesque", sans-serif;
@@ -460,9 +486,22 @@
           font-size: 33px;
           font-weight: 400;
         }
+        div {
+          background-color: #f9ebf7;
+          padding: 30px;
+          text-transform: none;
+          color: #333;
+          font-size: 24px;
+          a {
+            text-decoration: underline;
+            color: #000;
+          }
+        }
       }
-      h3 {
-        margin-top: 0;
+      p { 
+        font-weight: 300;
+        font-size: 28px;
+        color: #000;
       }
       .font-forum {
         font-family: forum, serif !important;
@@ -474,12 +513,16 @@
       div {
         background-color: #f9ebf7;
         padding: 30px;
+        margin-top: 20px;
+        a {
+          text-decoration: underline;
+          color: #000;
+        }
       }
       .timer-box {
         padding-top: 0;
         padding-bottom: 20px;
       }
-      p:last-child {display: none;}
     }
   }
 }
