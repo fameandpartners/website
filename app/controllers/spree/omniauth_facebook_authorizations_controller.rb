@@ -34,7 +34,7 @@ class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
       set_after_sign_in_location(root_path)
     end
 
-    session[:auto_apply] = params[:auto_apply]
+    session[:auto_apply] = params[:auto_apply] if params.key?(:auto_apply)
 
     redirect_to spree.spree_user_omniauth_authorize_url(provider: :facebook, scope: 'email,public_profile,user_friends')
   end
