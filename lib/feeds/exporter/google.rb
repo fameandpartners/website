@@ -22,7 +22,7 @@ module Feeds
             @items.each do |item|
               xml.item do
                 xml.title item[:title]
-                xml.link "http://#{production_domain}#{collection_product_path(item[:product])}"
+                xml.link "http://#{production_domain}#{collection_product_path(item[:product], color: item[:color].parameterize)}"
                 xml.description CGI.escapeHTML(item[:description])
 
                 xml.tag! "g:id", item[:id]
