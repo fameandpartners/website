@@ -6,21 +6,23 @@ module AdminUi
     end
 
     def show
-
-
     end
 
     private
-    helper_method :collection, :return_request
+    helper_method :collection, :return_request, :wrap_line_item
 
     def return_request
-      @return_request ||= OrderReturnRequest.find(params[:id])
+      @return_request ||= OrderReturnRequest.includes(:order => [:line_items]).find(params[:id])
     end
 
     def collection
-      page =1
-      per_page = 50
-      @collection ||= ::OrderReturnRequest.includes(:order).page(page).per(per_page)
+      page = (params[:page] || 1).to_i
+      per_page = (params[:per_page] || 50).to_i
+      @collection ||= ::OrderReturnRequest.includes(:order).order('created_at DESC').page(page).per(per_page)
+    end
+
+    def wrap_line_item(item)
+      Orders::LineItemPresenter.new(item, Orders::OrderPresenter.new(item.order))
     end
   end
 end

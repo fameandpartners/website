@@ -8,8 +8,6 @@ class OrderReturnRequest < ActiveRecord::Base
   has_many :return_request_items
   accepts_nested_attributes_for :return_request_items
 
-  after_initialize :load_order
-
   def build_items
     order.line_items.each do |line_item|
       return_request_items.build(:order_return_request => self, :line_item => line_item)
@@ -20,9 +18,7 @@ class OrderReturnRequest < ActiveRecord::Base
     @order_presenter = Orders::OrderPresenter.new(order)
   end
 
-  def load_order
-    if order_id && !order
-      @order = Order.find(order_id)
-    end
+  def sorted_return_request_items
+    return_request_items.sort_by { |i| ReturnRequestItem::ACTIONS.index(i.action) }.reverse
   end
 end

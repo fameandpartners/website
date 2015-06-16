@@ -10,7 +10,11 @@ module AdminUi
 
     layout 'admin_ui'
 
-    helper_method :current_admin_user
+    helper_method :current_admin_user, :page_title
+
+    def page_title
+      @page_title ||= controller_name.titleize
+    end
 
     # Prefer this method to exposing Spree to the rest of the admin app
     def current_admin_user
@@ -32,8 +36,9 @@ module AdminUi
       else
         # store_location
         # url = respond_to?(:spree_login_path) ? spree_login_path : root_path
-        url = '/'
-        redirect_to url
+
+        # redirect_to main_app.login_path
+        redirect_to '/login'
       end
     end
   end
