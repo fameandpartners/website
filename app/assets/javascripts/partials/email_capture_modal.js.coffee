@@ -52,8 +52,6 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       window.helpers.showAlert(message: 'Did you mean to forget your email address?')
 
   success: (data) =>
-    @enableAutoApply()
-
     if data.status == 'ok'
       title = 'thanks babe'
 
@@ -61,7 +59,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       if @opts.promocode && @opts.promocode.toLowerCase() == 'birthdaybabe'
         new window.page.PromocodeModal(promocode: @opts.promocode)
       else if @opts.uuid == 'auto_apply_promo' && @promoStartedAt
-        new window.page.CountdownBanner($('#countdown-banner'), @opts.heading, @opts.message, @promoStartedAt, @opts.timer)
+        @enableAutoApplyPromoCampaign()
       else
         # show default system
         if @opts.promocode && @opts.uuid != 'auto_apply_promo'
@@ -97,14 +95,18 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
     str
 
-  enableAutoApply: () =>
+  enableAutoApplyPromoCampaign: () =>
     $.post('/user_campaigns', {
       promocode:        @opts.promocode,
       promo_started_at: (@promoStartedAt / 1000),
       duration:         @opts.timer,
       title:            @opts.heading,
       message:          @opts.message,
-      uuid:             @opts.uuid
+      uuid:             @opts.uuid,
+      success: (result) =>
+        new window.page.CountdownBanner(
+          $('#countdown-banner'), @opts.heading, @opts.message, @promoStartedAt, @opts.timer
+        )
     })
 
   open: () =>

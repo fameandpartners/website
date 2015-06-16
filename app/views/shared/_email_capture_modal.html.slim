@@ -40,7 +40,7 @@
         uuid:      \"#{campaign_uuid}\"
       });
     "
-    email_capture_modal += "modal_popup.enableAutoApply();" if auto_apply
+    email_capture_modal += "modal_popup.enableAutoApplyPromoCampaign();" if auto_apply
 
   = content_for :inline_javascript do
     = raw email_capture_modal
