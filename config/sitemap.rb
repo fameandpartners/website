@@ -61,7 +61,7 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
   events_taxons      = Repositories::Taxonomy.read_events
   collections_taxons = Repositories::Taxonomy.read_collections
   styles_taxons      = Repositories::Taxonomy.read_styles
-  colors_taxons      = Repositories::ProductColors.color_groups
+  colors_taxons      = Spree::OptionValuesGroup.for_colors.available_as_taxon
   statics_pages = [
     '/about', '/why-us', '/privacy',
     '/style-consultation', '/fame-chain',

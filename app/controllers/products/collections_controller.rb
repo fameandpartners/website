@@ -99,33 +99,24 @@ class Products::CollectionsController < Products::BaseController
 
     # we have route like /dresses/permalink
     # where permalink can be
-    #   taxon.permalink
-    #   bodyshape
-    #   color.name
-    #   etc
+    #   - taxon.permalink
+    #   - color_group.name
     def parse_permalink(permalink)
       return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
-      # is should have lower priority... but we have collection='pastel' and we have colors group pastel
-      color_group = Repositories::ProductColors.get_group_by_name(permalink)
-      if color_group.present?
+      available_color_groups = Spree::OptionValuesGroup.for_colors.available_as_taxon
+      if color_group = available_color_groups.find_by_name(permalink.downcase)
         return { color_group: color_group.name }
       end
 
-      taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
-      if taxon.present?
+      if taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
         # style, edits, events, range, seocollection
-        case taxon.taxonomy.to_s.downcase
+        case taxonomy = taxon.taxonomy.downcase
         when 'style', 'edits', 'event'
-          return { taxon.taxonomy.to_s.downcase.to_sym => permalink }
+          return { taxonomy.to_sym => permalink }
         when 'range'
           return { collection: permalink }
         end
-      end
-
-      color = Repositories::ProductColors.get_by_name(permalink)
-      if color.present?
-        return { color: color.name }
       end
 
       # default
