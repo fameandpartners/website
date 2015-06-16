@@ -126,3 +126,19 @@
 }
 // @end Timer
 // -----------------
+
+// Bootstrap inline grid 
+.row-inline {
+  font-size: 0;
+}
+.col-inline {
+  display: inline-block;
+  vertical-align: top;
+  float: none;
+  font-size: 16px; // $font-size-base
+  .vex & {
+    font-size: 24px; // 1.5em
+  }
+}
+// @end Bootstrap inline grid
+// -----------------

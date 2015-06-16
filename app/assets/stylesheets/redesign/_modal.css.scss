@@ -411,6 +411,11 @@
       font-size: 18px;
     }
   }
+  
+  // Signup Short
+  &.vex-signup-short {
+    .full-form { display: none !important;}
+  }
 
   // Timer
   &.vex-timer {

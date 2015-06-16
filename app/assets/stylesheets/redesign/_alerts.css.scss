@@ -3,7 +3,7 @@
   top: 70px;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 4;
   background: #fbe1f2;
   text-align: center;
   text-transform: uppercase;
@@ -28,6 +28,21 @@
   .timer-box {
     margin-left: 36px;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
+    font-size: 17px;
+  }
+
+  .banner-message {
+    display: inline-block;
+    vertical-align: -20%;
+    
+    h3 { 
+      font-weight: 300;
+      margin: 0;
+    }
+    strong { 
+      font-weight: 500;
+      padding-right: 5px;
+    }
   }
 }
