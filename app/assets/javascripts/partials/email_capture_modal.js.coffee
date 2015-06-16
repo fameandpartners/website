@@ -30,8 +30,16 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       else
         @promoStartedAt = +@promoStartedAt * 1000
 
-    setTimeout(@open, timeout) if @pop
+    @checkState @opts.uuid, =>
+      setTimeout(@open, timeout) if @pop
 
+  checkState: (uuid, callback) =>
+    if uuid
+      $.get('/user_campaigns/check_state', {uuid: uuid}).success (response) =>
+        if response.status == 'none'
+          callback.call()
+    else
+      callback.call()
   pop: =>
     @opts.force || $.cookie(@cookie) != 'hide'
 

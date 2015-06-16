@@ -24,6 +24,35 @@ class UserCampaignsController  < ActionController::Base
     head :ok
   end
 
+  def check_state
+    respond_to do |format|
+      format.json do
+        if params[:uuid]
+          campaign_class = CampaignsFactory.getCampaignClass(params[:uuid])
+
+          if campaign_class
+            campaign = campaign_class.new(
+              storage:              cookies,
+              campaign_attrs:       params,
+              current_order:        current_order(true),
+              current_site_version: current_site_version
+            )
+
+            if campaign.is_active?
+              render json: {status: 'active'}
+            else
+              render json: {status: 'none'}
+            end
+          else
+            render json: {status: 'none'}
+          end
+        else
+          render json: {status: 'none'}
+        end
+      end
+    end
+  end
+
   # @params
   #  :email [String]
   def tell_mom
