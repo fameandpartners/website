@@ -143,7 +143,7 @@ module Feeds
         other_images = other_images.map{|i| i.attachment(:large).to_s }
 
         {
-          image: front_crop.present? ? front_crop.attachment(:large) : nil,
+          image: front_crop ? front_crop.attachment(:large) : nil,
           images: other_images
         }
       else
