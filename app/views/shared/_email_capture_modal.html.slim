@@ -22,8 +22,12 @@
     timer         = decode(params[:ti])
     campaign_uuid = decode(params[:cu])
 
-    auto_apply    = session[:auto_apply]
-    session.delete(:auto_apply)
+    if spree_user_signed_in?
+      auto_apply    = session[:auto_apply]
+      session.delete(:auto_apply)
+    else
+      auto_apply    = false
+    end
 
     email_capture_modal = "
       var modal_popup = new window.page.EmailCaptureModal({
