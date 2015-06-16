@@ -17,6 +17,11 @@
     width: 20px;
     height: 20px;
   }
+  .banner-title {
+    display: inline-block;
+    vertical-align: -20%;
+    font-size: 20px;
+  }
   .medium {
     font-weight: 600;
   }
@@ -35,10 +40,13 @@
   .banner-message {
     display: inline-block;
     vertical-align: -20%;
+    font-size: 20px;
+    font-weight: 300 !important;
     
     h3 { 
       font-weight: 300;
       margin: 0;
+      font-size: 20px;
     }
     strong { 
       font-weight: 500;
