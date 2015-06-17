@@ -51,7 +51,7 @@
         .row
           .col-md-12.form-group
             label Tell us a bit about the wedding
-            textarea.form-control.form-control-md
+            = f.text_area :info, class: 'form-control form-control-md', placeholder: "What is your relationship with the bride and groom? Is there a wedding theme or dress code? Have you got an idea of what you want your dress to look like? Where is the wedding happening? Etc."
         .row
           .col-md-12.form-group
             label timezone
@@ -60,3 +60,13 @@
           .col-md-12.form-group
             .submit
               = f.submit "Apply now", class: 'btn btn-black btn-block'
+
+coffee:
+  $ ->
+    placeholder = $('#wedding_consultation_info').attr('placeholder')
+    $('#wedding_consultation_info').on 'focus', ->
+      $(this).attr('placeholder', "")
+
+    $('#wedding_consultation_info').on 'blur', ->
+      $(this).attr('placeholder', placeholder)
+

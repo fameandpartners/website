@@ -1,4 +1,4 @@
-class WeddgingConsultationMailer < ActionMailer::Base
+class WeddingConsultationMailer < ActionMailer::Base
 
   default :from => configatron.noreply
 
