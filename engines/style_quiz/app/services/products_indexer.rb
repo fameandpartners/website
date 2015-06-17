@@ -1,5 +1,7 @@
+## create elastic search index for search relevant products ids
 # usage
 #   StyleQuiz::ProductsIndexer.new.index!
+#
 module StyleQuiz; end
 
 class StyleQuiz::ProductsIndexer
