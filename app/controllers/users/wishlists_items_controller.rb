@@ -16,6 +16,12 @@ class Users::WishlistsItemsController < Users::BaseController
 
     @title = @moodboard.title
 
+    if current_promotion && (auto_discount = current_promotion.discount)
+      @moodboard.products.each do |product|
+        product.discount = [product.discount, auto_discount].compact.max_by{|i| i.amount}
+      end
+    end
+
     respond_with(@moodboard) do |format|
       format.html {}
       format.js   {}

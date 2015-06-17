@@ -85,7 +85,7 @@ ruby:
                       p.button-grey-text.menu-main-promotions
                         span.fit-guarantee.menu-icon
                         | Fit Guarantee
-              .mega-menu--secondary                
+              .mega-menu--secondary
                 .container-fluid.max-width-100
                   .row
                     .col-md-3.col-lg-2.col-md-offset-4
@@ -234,3 +234,5 @@ ruby:
               span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
               span.hidden-sm.hidden-xs.hidden-xxs cart:
               span#cart-item-count 0
+
+= render 'layouts/redesign/campaigns/auto_apply_promo_code'

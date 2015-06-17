@@ -38,6 +38,8 @@ class Products::CollectionsController < Products::BaseController
 
     @filter = Products::CollectionFilter.read
 
+    @collection.use_auto_discount!(current_promotion.discount) if current_promotion
+
     respond_to do |format|
       format.html { render page.template_path, status: @status }
       format.json do

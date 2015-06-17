@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include PathBuildersHelper
   include Concerns::SiteVersion
+  include Concerns::UserCampaignable
 
   if Rails.env.preproduction?
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
@@ -321,10 +322,11 @@ class ApplicationController < ActionController::Base
   end
 
   def store_marketing_params
-    if params[:dmb].present?
-      cookies[:dmb] = { value: params[:dmb], expires: 1.day.from_now }
-      cookies[:dmb_time] = { value: Time.now.to_s, expires: 1.day.from_now }
-    end
+    # seems parameter not using anywhere else
+    #if params[:dmb].present?
+    #  cookies[:dmb] = { value: params[:dmb], expires: 1.day.from_now }
+    #  cookies[:dmb_time] = { value: Time.now.to_s, expires: 1.day.from_now }
+    #end
     if params[:promocode].present?
       cookies[:promocode] = { value: params[:promocode], expires: 1.day.from_now }
     end
@@ -336,14 +338,6 @@ class ApplicationController < ActionController::Base
       cookies[:quiz_shown] = true
     end
   end
-
-  def current_promotion
-    @current_promotion ||= begin
-      code = params[:promocode] || cookies[:promocode]
-      code.present? ? Spree::Promotion.find_by_code(code) : nil
-    end
-  end
-  helper_method :current_promotion
 
   def display_marketing_banner
     @display_marketing_banner = true

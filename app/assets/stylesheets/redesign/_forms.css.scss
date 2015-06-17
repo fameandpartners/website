@@ -10,6 +10,9 @@
   padding: 10px;
   height: $form-control-height-md;
 }
+.form-control-transparent {
+  background: none;
+}
 // - chosen select
 .chosen-container-single.form-control {
   border: 0;

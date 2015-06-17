@@ -173,6 +173,9 @@
       label: "promocode",  param: "pc",  required: true,  encoded: true,  type: 'string',
       defaultValue: '<%= escape_javascript decode(params[:pc]).html_safe %>'
     }, {
+      label: "template name",param: "tn", required: false, encoded: true,  type: 'string',
+      defaultValue: '<%= decode(params[:tn]).html_safe %>'
+    }, {
       label: "heading",    param: "h",   required: false, encoded: true,  type: 'string',
       defaultValue: '<%= escape_javascript decode(params[:h]).html_safe %>'
     }, {
@@ -180,7 +183,10 @@
       defaultValue: '<%= escape_javascript decode(params[:m]).html_safe %>'
     }, {
       label: "timeout",    param: "t",   required: false, encoded: false, type: 'integer',
-      defaultValue: 2
+      defaultValue: '<%= params[:t] || 2 %>'
+    }, {
+      label: "timer",      param: "ti",  required: false, encoded: true, type: 'integer',
+      defaultValue: '<%= decode(params[:ti]).html_safe %>'
     }, {
       label: "class_name", param: "s",   required: false, encoded: true,  type: 'string',
       defaultValue: '<%= escape_javascript decode(params[:s]).html_safe %>'
@@ -189,6 +195,10 @@
       defaultValue: 'true'
     }, {
       label: "raw",        param: "raw", required: false, encoded: false, type: 'boolean'
+    },
+    {
+      label: "campaign_uuid", param: "cu", required: false, encoded: true, type: 'string',
+      defaultValue: '<%= params[:cu] %>'
     }
   ];
 
