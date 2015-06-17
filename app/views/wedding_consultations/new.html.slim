@@ -1,0 +1,62 @@
+.page-title.default.wedding-session
+  = image_tag src='contact/fame-white-logo.png', :class => '', :alt => 'Fame & Partners'
+
+.wedding-session-header
+
+.register-for-session
+  .top-arrow
+  h1
+    | Wedding styling
+    br
+    span consultation form
+  .bottom-arrow
+
+.page-content.contact.style-session
+  .container.relative
+    .form-global
+      = form_for @wedding_consultation, url: wedding_consultation_path, method: :post, html: {class: 'form'} do |f|
+        .row
+          .col-md-12.form-group
+            label Full name
+            = f.text_field :full_name, :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label Email
+            = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label Phone
+            = f.text_field :phone, :class => 'form-control form-control-md'
+            p.hint
+              | (include country code)
+        .row
+          .col-md-12.form-group
+            label date of birth
+            = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label where do you live
+            = f.text_field :location, :class => 'form-control form-control-md'
+            p.hint (e.g. Sydney, Australia or New York, United States)
+        .row
+          .col-md-12.form-group
+            label Skype ID
+            = f.text_field :skype_id, :class => 'form-control form-control-md'
+            p.hint
+              | (optional - so we can do a video chat session)
+        .row
+          .col-md-12.form-group
+            label Wedding date
+            = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
+        .row
+          .col-md-12.form-group
+            label Tell us a bit about the wedding
+            textarea.form-control.form-control-md
+        .row
+          .col-md-12.form-group
+            label timezone
+            = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox'
+        .row
+          .col-md-12.form-group
+            .submit
+              = f.submit "Apply now", class: 'btn btn-black btn-block'

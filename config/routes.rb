@@ -278,6 +278,11 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
+    get '/wedding-consultation' => 'wedding_consultations#new'
+    resource 'wedding-consultation', as: 'wedding_consultation', only: [:new, :create] do
+      get 'success'
+    end
+
     get '/contact' => 'contacts#new'
     resource 'contact', as: 'contact', only: [:new, :create] do
       get 'success'
