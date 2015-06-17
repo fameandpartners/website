@@ -7,6 +7,7 @@
 #   @auto_apply_promo_code_title [String]       - promotion title
 #   @auto_apply_promo_code_message [String]     - promotion message
 # In Modals generator one should additionally specify campaign_uuid=auto_apply_promo
+# ClASS_NAME=vex-dialog-bottom vex-dialog-pink vex-text vex-dialog-pink-reverse
 
 class AutoApplyPromoCampaign < CampaignManager
   UUID         = 'auto_apply_promo'

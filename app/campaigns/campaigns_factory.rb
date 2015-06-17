@@ -6,6 +6,8 @@ class CampaignsFactory
         TellMomCampaign
       when AutoApplyPromoCampaign::UUID, AutoApplyPromoCampaign::ENCODED_UUID
         AutoApplyPromoCampaign
+      when BridesmaidsConsultationFormCampaign::UUID, BridesmaidsConsultationFormCampaign::ENCODED_UUID
+        BridesmaidsConsultationFormCampaign
       end
     end
 
@@ -15,7 +17,7 @@ class CampaignsFactory
 
     def getAllCampaignClasses
       [
-        AutoApplyPromoCampaign, TellMomCampaign
+        AutoApplyPromoCampaign, TellMomCampaign, BridesmaidsConsultationFormCampaign
       ]
     end
   end

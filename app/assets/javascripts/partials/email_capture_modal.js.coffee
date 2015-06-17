@@ -54,6 +54,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
   process: (data) =>
     if !!data.email
+      @opts.email = data.email
       $.post(@opts.action, data).done(@success).fail(@error)
     else
       setTimeout(@open, 250)
@@ -68,6 +69,8 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         new window.page.PromocodeModal(promocode: @opts.promocode)
       else if @opts.uuid == 'auto_apply_promo' && @promoStartedAt
         @enableAutoApplyPromoCampaign()
+      else if @opts.uuid == 'bridesmaids_consultation_form'
+        @registerBcfCampaign(@opts.email)
       else
         # show default system
         if @opts.promocode && @opts.uuid != 'auto_apply_promo'
@@ -103,10 +106,19 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
     str
 
+  registerBcfCampaign: (email) =>
+    $.post('/user_campaigns', {
+      promo_started_at: Math.floor(+new Date() / 1000),
+      email:            email,
+      uuid:             @opts.uuid,
+      success: (result) =>
+        vex.close()
+    })
+
   enableAutoApplyPromoCampaign: () =>
     $.post('/user_campaigns', {
       promocode:        @opts.promocode,
-      promo_started_at: (@promoStartedAt / 1000),
+      promo_started_at: Math.floor((@promoStartedAt / 1000)),
       duration:         @opts.timer,
       title:            @opts.heading,
       message:          @opts.message,

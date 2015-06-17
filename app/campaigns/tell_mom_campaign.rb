@@ -2,6 +2,7 @@
 # This promotion stores information about itself in cookies
 #   @tell_mom_started_at [String]               - promotion code to be applied
 # In Modals generator one should only specify campaign_uuid=tell_mom (?cu=dGVsbF9tb20%3D)
+# ClASS_NAME=vex-dialog-bottom vex-dialog-pink vex-text vex-dialog-pink-reverse
 
 class TellMomCampaign < CampaignManager
   UUID         = 'tell_mom'
