@@ -9,6 +9,9 @@
   text-transform: uppercase;
   font-size: 18px;
   padding: 10px 0;
+  &.alert-relative {
+    position: relative;
+  }
   .close {
     @extend .icon-cross;
     position: absolute;
