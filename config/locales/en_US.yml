@@ -146,12 +146,12 @@ en-US:
     partial: partial
   order_fabrication_states:
     processing:                 'Your order is being processed'
-    purchase_order_placed:      'Your dress has been received'
-    purchase_order_confirmed:   'Your dress has been placed'
-    fabric_assigned:            'Your fabric is being assigned'
-    style_cut:                  'Your dress is in cutting'
+    purchase_order_placed:      'Your order is being processed'
+    purchase_order_confirmed:   'Your order is being processed'
+    fabric_assigned:            'Your dress is with a seamstress'
+    style_cut:                  'Your dress is with a seamstress'
     make:                       'Your dress is with a seamstress'
-    qc:                         'Your dress is in quality control'
+    qc:                         'Your dress is with a seamstress'
     shipped:                    'Your dress has been shipped'
     customer_feedback_required: 'We need some more information'
   payment_states:
