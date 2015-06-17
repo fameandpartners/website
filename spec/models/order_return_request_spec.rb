@@ -16,4 +16,18 @@ describe OrderReturnRequest do
     expect(return_request).to have(1).return_request_items
   end
 
+  describe '#sorted_return_request_items' do
+    let(:line_items)      { [stub_model(Spree::LineItem), stub_model(Spree::LineItem), stub_model(Spree::LineItem)] }
+
+    it 'puts return and exchange before keep' do
+      return_request.build_items
+
+      return_request.return_request_items.each_with_index do |rri, idx|
+        rri.action = ReturnRequestItem::ACTIONS[idx]
+      end
+      expect(return_request.return_request_items.collect(&:action)).to        eq %w(keep exchange return)
+
+      expect(return_request.sorted_return_request_items.collect(&:action)).to eq %w(return exchange keep)
+    end
+  end
 end

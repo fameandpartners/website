@@ -1,0 +1,22 @@
+= content_for :page_title do
+  ' Payments Report
+
+h2 Report
+
+= form_tag admin_ui.payments_report_path, method: 'post' do
+  button type='submit' Generate
+
+h2 Sample
+
+div.pre-scrollable style='max-height:100%;'
+  table.table.table-condensed
+    thead
+      tr
+        - head = @rows.first
+        - head.keys.each do |k|
+          th = k
+    tbody
+      - @rows.each do |row|
+        tr
+          - row.values.each do |v|
+            td = v

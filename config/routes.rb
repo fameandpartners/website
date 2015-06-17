@@ -319,13 +319,14 @@ FameAndPartners::Application.routes.draw do
     mount Spree::Core::Engine, at: '/'
   end
 
+  mount AdminUi::Engine, at: '/admin2'
+
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
     resources :fabric_cards, :only => [:index, :show] do
       resources :products, :only => [:show], controller: 'fabric_cards/products'
     end
     resources :fabrications,       :only => :update
-    resource  :payments_report,    :only => [:show, :create]
     resources :shipments,          :only => :update
     resource  :sku_generation,     :only => [:show, :create]
     resources :dress_colours,      :only => :index
