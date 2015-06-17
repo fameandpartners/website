@@ -88,14 +88,7 @@ module FameAndPartners
     # Component Style Modal Content
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
 
-    redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-    if Rails.env.production? || Rails.env.preproduction?
-      redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
-    else
-      redis_host = 'localhost:6379'
-    end
 
-    config.cache_store = :redis_store, "redis://#{redis_host}/0/#{redis_namespace}"
 
     # Use S3 for storing attachments
     config.use_s3 = false
@@ -119,6 +112,9 @@ module FameAndPartners
       Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::ItemCount
       Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::BridesmaidsCount
       Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::BridesmaidPartyMember
+
+      config.cache_store = :redis_store, "redis://#{configatron.redis_options[:url]}/0/#{configatron.redis_options[:namespace]}"
+
     end
 
     config.allow_cors = true
