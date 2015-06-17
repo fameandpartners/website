@@ -97,6 +97,10 @@ module Orders
       end
     end
 
+    def customisations_without_images
+      customisations.collect &:first
+    end
+
     def personalizations?
       personalization.present?
     end
@@ -184,7 +188,6 @@ module Orders
       end
     end
 
-    private
 
     # Seriously, wtf are custom dresses so hard?
     def image
@@ -208,6 +211,9 @@ module Orders
         Rails.logger.warn("Failed to find image for order email. #{wrapped_order.to_s}")
       end
     end
+
+    private
+
 
     def standard_variant_for_custom_color
       return unless personalizations?

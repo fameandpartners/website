@@ -171,14 +171,22 @@ GIT
       tilt
 
 PATH
-  remote: engines/fame_favicon
+  remote: engines
   specs:
+    admin_ui (0.0.1)
+      active_link_to
+      cancan
+      font-awesome-rails
+      inspinia-rails
+      kaminari
+      rails (~> 3.2.21)
+      slim
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
-
-PATH
-  remote: engines/revolution
-  specs:
+    inspinia-rails (2.1.0)
+      bootstrap-sass
+      font-awesome-rails
+      rails (~> 3.2.21)
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
@@ -187,6 +195,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.1)
+    active_link_to (1.0.3)
+      actionpack
     active_model_serializers (0.9.3)
       activemodel (>= 3.2)
     activemerchant (1.49.0)
@@ -428,6 +438,8 @@ GEM
     fog-xml (0.1.2)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
+    font-awesome-rails (4.3.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     geoip (1.5.0)
     google-api-client (0.7.1)
@@ -777,9 +789,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to
   active_model_serializers
   acts-as-taggable-on
   addressable
+  admin_ui!
   autoprefixer-rails
   awesome_print
   aws-sdk
@@ -809,6 +823,7 @@ DEPENDENCIES
   fog
   geoip
   google_drive (= 1.0.0)
+  inspinia-rails!
   instagram
   ipaddress
   jquery-fileupload-rails (= 0.4.1)
