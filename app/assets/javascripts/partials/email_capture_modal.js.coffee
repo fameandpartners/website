@@ -65,7 +65,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       title = 'thanks babe'
 
       # show next popup in chain
-      if @opts.promocode && @opts.promocode.toLowerCase() == 'birthdaybabe'
+      if @opts.promocode && @opts.promocode.toLowerCase().indexOf('birthdaybabe') > -1
         new window.page.PromocodeModal(promocode: @opts.promocode)
       else if @opts.uuid == 'auto_apply_promo' && @promoStartedAt
         @enableAutoApplyPromoCampaign()
