@@ -42,9 +42,11 @@ class UserCart::ProductsController < UserCart::BaseController
 
       @user_cart = user_cart_resource.read
 
+      data = add_analytics_labels(@user_cart.serialize)
+
       respond_with(@user_cart) do |format|
         format.json   {
-          render json: @user_cart.serialize, status: :ok
+          render json: data, status: :ok
         }
       end
     else # not success
@@ -78,5 +80,15 @@ class UserCart::ProductsController < UserCart::BaseController
         order: current_order(true),
         line_item_id: params[:line_item_id]
       )
+    end
+
+    def add_analytics_labels(data)
+      data = @user_cart.serialize
+
+      data[:products].each do |product|
+        product[:analytics_label] = analytics_label(:user_cart_product, product)
+      end
+
+      data
     end
 end
