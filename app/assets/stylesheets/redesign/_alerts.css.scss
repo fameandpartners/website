@@ -56,4 +56,9 @@
       padding-right: 5px;
     }
   }
+
+  // Fix for product page
+  &:not(.hidden) ~ .product-content {
+    top: 13rem;
+  }
 }
