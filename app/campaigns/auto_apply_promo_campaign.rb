@@ -36,7 +36,7 @@ class AutoApplyPromoCampaign < CampaignManager
 
   def promotion
     return unless is_active?
-    @promotion ||= Spree::Promotion.find_by_code(storage[:auto_apply_promo_code])
+    @promotion ||= Spree::Promotion.where("lower(code) = ?", storage[:auto_apply_promo_code].to_s.dowcase).first
   end
 
   def activate!
