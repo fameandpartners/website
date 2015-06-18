@@ -30,7 +30,7 @@ module Feeds
                 xml.tag! "g:price", helpers.number_to_currency(item[:price], format: '%n %u', unit: current_currency)
                 xml.tag! "g:sale_price", helpers.number_to_currency(item[:sale_price], format: '%n %u', unit: current_currency)
                 xml.tag! "g:availability", item[:availability]
-                xml.tag! "g:image_link", get_image_link(item)
+                xml.tag! "g:image_link", item[:image]
                 xml.tag! "g:shipping_weight", item[:weight]
 
                 xml.tag! "g:google_product_category", CGI.escapeHTML(item[:google_product_category])
@@ -63,12 +63,6 @@ module Feeds
         file = File.open(export_file_path, 'w')
         file.write(output.to_s)
         file.close
-      end
-
-      private
-
-      def get_image_link(item)
-        item[:image]
       end
     end
   end
