@@ -1,4 +1,4 @@
-/ Style session 
+/ Style session
 .page-title.default.style-session
 
   = image_tag src='contact/fame-white-logo.png', :class => '', :alt => 'Fame & Partners'
@@ -8,9 +8,12 @@
 .register-for-session
   .top-arrow
   h1
-    | Register for
+    | REGISTER FOR A FREE SESSION
     br
-    span = @banner_text || 'your styling session'
+    / span = @banner_text || 'your styling session'
+    | WITH A PROFESSIONAL STYLIST
+    br
+    span style="font-size:0.6666666em" (Plus $20 to spend on your dress)
   .bottom-arrow
 
 .page-content.contact.style-session
@@ -69,7 +72,7 @@
             .submit
               = f.submit "Apply now", class: 'btn btn-black btn-block'
 
-/ @end Style session 
+/ @end Style session
 
 
 
@@ -83,7 +86,7 @@
 / .register-for-session
 /   .top-arrow
 /   h1
-/     | Wedding styling 
+/     | Wedding styling
 /     br
 /     span consultation form
 /   .bottom-arrow
