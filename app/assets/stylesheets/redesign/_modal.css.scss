@@ -19,7 +19,7 @@
   }
 }
 
-// Bottom  
+// Bottom
 .vex-dialog-bottom {
   text-align: center;
   &:before {
@@ -67,7 +67,7 @@
     display: none;
   }
 }
-// @end Bottom 
+// @end Bottom
 // -----------------
 
 
@@ -299,7 +299,7 @@
   @extend %vex-text-popup;
 }
 
-// - fame in future 
+// - fame in future
 .vex-theme-flat-attack.email-capture-modal.fame-in-future-popup {
   @extend %vex-text-popup;
   .vex-content {
@@ -325,8 +325,8 @@
     background-color: #f9ebf7 !important;
   }
 
-  .vex-content { 
-    border: 0; 
+  .vex-content {
+    border: 0;
     padding-top: 40px;
     animation-duration: 0.3s, 0.5s;
     animation-name: vex-slideup, vex-fadein;
@@ -339,13 +339,13 @@
       line-height: 1.2 !important;
       color: #000;
     }
-    h2 { 
+    h2 {
       font-size: 32px;
       font-weight: 500;
       margin-bottom: 10px;
     }
   }
-  
+
   .vex-dialog-input {
     margin: 0;
   }
@@ -364,7 +364,7 @@
       line-height: 25px;
     }
     input {
-      &.form-control { 
+      &.form-control {
         border-radius: 0;
         border: 0;
         border-bottom: solid 1px #000;
@@ -426,7 +426,7 @@
       font-size: 18px;
     }
   }
-  
+
   // Signup Short
   &.vex-signup-short {
     .full-form { display: none !important;}
@@ -438,7 +438,7 @@
       width: 780px;
     }
     .vex-dialog-message {
-      p { 
+      p {
         font-weight: 300;
         font-size: 28px;
       }
@@ -496,9 +496,13 @@
             text-decoration: underline;
             color: #000;
           }
+          a.btn {
+            text-decoration: none;
+            color: #FFFFFF;
+          }
         }
       }
-      p { 
+      p {
         font-weight: 300;
         font-size: 28px;
         color: #000;
