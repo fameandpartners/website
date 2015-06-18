@@ -14,6 +14,31 @@
   }
 </style>
 
+<script type="text/javascript">
+  // shamelessly stolen from
+  // https://css-tricks.com/snippets/jquery/get-query-params-object/
+  function getQueryParameters(str) {
+    return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+    }
+  var defaultParams = getQueryParameters();
+
+  function b64_to_utf8(str) {
+    return decodeURIComponent(escape(window.atob(decodeURIComponent(str))));
+  }
+
+  function decodedDefaultParam(key){
+    var paramValue = defaultParams[key];
+    if ( paramValue != undefined) {
+      try {
+        return b64_to_utf8(paramValue);
+      } catch (err) {
+        return err.message;
+      }
+
+    }
+  };
+</script>
+
 <script type="text/jsx">
 
   var PreviewBar = React.createClass({
@@ -38,7 +63,7 @@
       var previewUrl = this.props.baseUrl + param_string;
 
       var editUrl = '/admin/modals' + param_string;
-      window.history.pushState({ path: editUrl }, '', editUrl);
+      window.history.replaceState({ path: editUrl }, '', editUrl);
 
       return (
         <div>
@@ -171,25 +196,25 @@
   var PARAMS = [
     {
       label: "promocode",  param: "pc",  required: true,  encoded: true,  type: 'string',
-      defaultValue: '<%= escape_javascript decode(params[:pc]).html_safe %>'
+      defaultValue: decodedDefaultParam('pc')
     }, {
       label: "template name",param: "tn", required: false, encoded: true,  type: 'string',
-      defaultValue: '<%= decode(params[:tn]).html_safe %>'
+      defaultValue: decodedDefaultParam('tn')
     }, {
       label: "heading",    param: "h",   required: false, encoded: true,  type: 'string',
-      defaultValue: '<%= escape_javascript decode(params[:h]).html_safe %>'
+      defaultValue: decodedDefaultParam('h')
     }, {
       label: "message",    param: "m",   required: false, encoded: true,  type: 'string',
-      defaultValue: '<%= escape_javascript decode(params[:m]).html_safe %>'
+      defaultValue: decodedDefaultParam('m')
     }, {
       label: "timeout",    param: "t",   required: false, encoded: false, type: 'integer',
-      defaultValue: '<%= params[:t] || 2 %>'
+      defaultValue: defaultParams['t']
     }, {
       label: "timer",      param: "ti",  required: false, encoded: true, type: 'integer',
-      defaultValue: '<%= decode(params[:ti]).html_safe %>'
+      defaultValue: decodedDefaultParam('ti')
     }, {
       label: "class_name", param: "s",   required: false, encoded: true,  type: 'string',
-      defaultValue: '<%= escape_javascript decode(params[:s]).html_safe %>'
+      defaultValue: decodedDefaultParam('s')
     }, {
       label: "pop",        param: "pop", required: true,  encoded: false, type: 'boolean',
       defaultValue: 'true'
@@ -198,7 +223,7 @@
     },
     {
       label: "campaign_uuid", param: "cu", required: false, encoded: true, type: 'string',
-      defaultValue: '<%= params[:cu] %>'
+      defaultValue: decodedDefaultParam('cu')
     }
   ];
 
