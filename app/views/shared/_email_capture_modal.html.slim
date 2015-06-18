@@ -64,7 +64,7 @@
           .col-sm-5.col-inline.full-form
             - if promocode == 'birthdaybabe'
               = link_to 'Redeem via Facebook', fb_auth_path(show_promocode_modal: encode(promocode)), class: 'btn btn-facebook btn-block btn-md'
-            - elsif params[:aap].to_s == 'true'
+            - elsif campaign_uuid == 'auto_apply_promo'
               = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true), class: 'btn btn-facebook btn-block btn-md'
             - else
               = link_to 'Redeem via Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
