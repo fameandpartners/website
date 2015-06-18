@@ -21,14 +21,17 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     @$container = $(opts.container)
     @cookie = "email_capture_#{@opts.content}"
 
+    @promoStartedAt = $.cookie("auto_apply_promo_code_started_at")
     if @opts.timer
       # timer value is in hours
-      @promoStartedAt = $.cookie("auto_apply_promo_code_started_at")
       if !@promoStartedAt
         today = +new Date()
         @promoStartedAt = today
       else
         @promoStartedAt = +@promoStartedAt * 1000
+    else
+      today = +new Date()
+      @promoStartedAt = today
 
     @checkState @opts.uuid, =>
       setTimeout(@open, timeout) if @pop
@@ -64,11 +67,12 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     if data.status == 'ok'
       title = 'thanks babe'
 
+      if @opts.uuid == 'auto_apply_promo' && @promoStartedAt
+        @enableAutoApplyPromoCampaign()
+
       # show next popup in chain
       if @opts.promocode && @opts.promocode.toLowerCase().indexOf('birthdaybabe') > -1
         new window.page.PromocodeModal(promocode: @opts.promocode)
-      else if @opts.uuid == 'auto_apply_promo' && @promoStartedAt
-        @enableAutoApplyPromoCampaign()
       else if @opts.uuid == 'bridesmaids_consultation_form'
         @registerBcfCampaign(@opts.email)
       else

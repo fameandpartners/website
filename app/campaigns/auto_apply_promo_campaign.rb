@@ -15,28 +15,42 @@ class AutoApplyPromoCampaign < CampaignManager
 
   def can_activate?
     # check already active or activated campaigns
-    return false if storage[:auto_apply_promo_code]
-    return false if campaign_attrs[:promo_started_at].blank? || campaign_attrs[:duration].blank?
+    return false if campaign_attrs[:promo_started_at].blank? || campaign_attrs[:promocode].blank?
+    return false if storage[:auto_apply_promo_code] && campaign_attrs[:promocode] == storage[:auto_apply_promo_code]
 
-    time = Time.at(campaign_attrs[:promo_started_at].to_i) + campaign_attrs[:duration].to_i.hours
-    time >= Time.now
+    if campaign_attrs[:duration].present?
+      time = Time.at(campaign_attrs[:promo_started_at].to_i) + campaign_attrs[:duration].to_i.hours
+      time >= Time.now
+    else
+      true
+    end
   end
 
   def is_active?
     return false if storage[:auto_apply_promo_code].blank?
-    time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
-    time >= Time.now
+
+    if storage[:auto_apply_promo_code_duration].present?
+      time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
+      time >= Time.now
+    else
+      true
+    end
   end
 
   def expired?
     return false if storage[:auto_apply_promo_code].blank?
-    time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
-    time <= Time.now
+
+    if storage[:auto_apply_promo_code_duration].present?
+      time = Time.at(storage[:auto_apply_promo_code_started_at].to_i) + storage[:auto_apply_promo_code_duration].to_i.hours
+      time <= Time.now
+    else
+      false
+    end
   end
 
   def promotion
     return unless is_active?
-    @promotion ||= Spree::Promotion.where("lower(code) = ?", storage[:auto_apply_promo_code].to_s.downcase).first
+    @promotion ||= Spree::Promotion.find_by_code(storage[:auto_apply_promo_code])
   end
 
   def activate!
@@ -79,5 +93,14 @@ class AutoApplyPromoCampaign < CampaignManager
 
   def duration
     storage[:auto_apply_promo_code_duration]
+  end
+
+  private
+
+  # check valid value for duration
+  def clear_attributes
+    if campaign_attrs[:duration].present? && campaign_attrs[:duration].to_s.to_i <= 0
+      campaign_attrs.delete(:duration)
+    end
   end
 end

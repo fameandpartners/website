@@ -27,7 +27,7 @@ class UserCart::ProductsController < UserCart::BaseController
       if current_promotion.present?
         promotion_service = UserCart::PromotionsService.new(
           order: current_order,
-          code: current_promotion.code
+          code:  current_promotion.code
         )
 
         if promotion_service.apply
@@ -43,13 +43,13 @@ class UserCart::ProductsController < UserCart::BaseController
       @user_cart = user_cart_resource.read
 
       respond_with(@user_cart) do |format|
-        format.json   { 
+        format.json   {
           render json: @user_cart.serialize, status: :ok
         }
       end
     else # not success
       respond_with({}) do |format|
-        format.json   { 
+        format.json   {
           render json: { error: true, message: result.message }, status: :error
         }
       end
