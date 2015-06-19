@@ -1,4 +1,4 @@
-- cache [:side_panel_colours, @product.id, current_site_version.code],  configatron.cache.expire.long  do
+- cache [:side_panel_colours, @product.id, current_site_version.code], expires_in:  configatron.cache.expire.long  do
   #product-color-content.product-side-panel
     button.close-btn
       = image_tag "cross.png", alt: 'close button'
