@@ -205,6 +205,32 @@
 // @end Moodboard
 // ---------------
 
+// Style attributes
+.style-profile-attributes {
+  .form-control {
+    background-color: $gray-light-bg;
+    border-bottom: 0;
+    font-size: 13px;
+    height: auto;
+    min-height: 45px;
+    overflow: hidden;
+    .pull-left { max-width: 70%;}
+    .pull-right {
+      text-transform: none;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 30%;
+      overflow: hidden;
+    }
+  }
+  .btn {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+// @end Style attributes
+// -----------------
+
 .ordered-item-image {
   width: 120px;
   margin: auto;
