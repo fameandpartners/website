@@ -878,3 +878,6 @@ DEPENDENCIES
   uglifier (= 1.3.0)
   unicorn
   whenever
+
+BUNDLED WITH
+   1.10.3
