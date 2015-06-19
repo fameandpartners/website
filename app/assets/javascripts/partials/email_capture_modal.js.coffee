@@ -83,7 +83,13 @@ window.page.EmailCaptureModal = class EmailCaptureModal
           message = "Thanks for joining!"
         window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
+      @fbPushTracking()
       window.track.event('LandingPageModal', 'Submitted',  @opts.content, @opts.promocode)
+
+  fbPushTracking: =>
+    if @opts.fb
+      window._fbq = window._fbq || []
+      window._fbq.push(['track', @opts.fb, {'value':'0.00','currency':'USD'}]);
 
   failure: () =>
     window.helpers.showAlert(message: 'Is your email address correct?')
