@@ -6,6 +6,7 @@ class CampaignManager
     @campaign_attrs       = campaign_attrs
     @current_order        = current_order
     @current_site_version = current_site_version
+    clear_attributes
   end
 
   def can_activate?
@@ -22,5 +23,11 @@ class CampaignManager
 
   def deactivate!
     raise NotImplementedError, "you should implement this methond in derived class"
+  end
+
+  private
+
+  def clear_attributes
+    # override in derived class if needed
   end
 end

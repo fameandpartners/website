@@ -18,6 +18,7 @@
     message       = decode(params[:m])
     content       = decode(params[:c]) || promocode
     class_name    = decode(params[:s]) || class_name
+    fb_id         = decode(params[:fb])
     timeout       = params[:t] || 3
     timer         = decode(params[:ti])
     campaign_uuid = decode(params[:cu])
@@ -36,6 +37,7 @@
         heading:   \"#{heading}\",
         message:   \"#{message}\",
         className: \"#{class_name}\",
+        fb:        \"#{fb_id}\",
         action:    \"#{campaigns_email_capture_path}\",
         container: \"#modal-popup-content-template\",
         timeout:    #{auto_apply ? 100000 : timeout},
@@ -64,7 +66,7 @@
           .col-sm-5.col-inline.full-form
             - if promocode == 'birthdaybabe'
               = link_to 'Redeem via Facebook', fb_auth_path(show_promocode_modal: encode(promocode)), class: 'btn btn-facebook btn-block btn-md'
-            - elsif params[:aap].to_s == 'true'
+            - elsif campaign_uuid == 'auto_apply_promo'
               = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true), class: 'btn btn-facebook btn-block btn-md'
             - else
               = link_to 'Redeem via Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'

@@ -1,4 +1,10 @@
 Spree::Promotion.class_eval do
+  class << self
+    def find_by_code(code)
+      self.where("lower(code) = ?", code.to_s.downcase).first
+    end
+  end
+
   def eligible?(order)
     return false if expired? || usage_limit_exceeded?(order)
 

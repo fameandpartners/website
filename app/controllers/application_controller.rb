@@ -166,6 +166,9 @@ class ApplicationController < ActionController::Base
     when :product
       product = args.first
       "#{product.name} - #{product.sku} - #{product.price.to_s} - #{get_user_type}"
+    when :user_cart_product
+      product = args.first
+      "#{product[:name]} - #{product[:sku]} - #{product[:price][:display_price]} - #{get_user_type}"
     when :question
       question = args.first
       number = args.second

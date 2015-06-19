@@ -19,6 +19,10 @@ module Concerns::UserCampaignable
           active_promotion = promotion
         end
       end
+
+      if !active_promotion
+        active_promotion = current_order.coupon_code_added_promotion
+      end
       active_promotion
     end
   end
