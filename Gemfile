@@ -103,6 +103,9 @@ group :assets do
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
   gem 'bootstrap-sass'
+end
+
+group :assets, :development, :test do
   gem 'test-unit'  
 end
 
@@ -129,7 +132,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.2'
   gem 'shoulda-matchers'
   gem 'spring'
-  gem 'test-unit'
   gem 'thin'
 end
 
