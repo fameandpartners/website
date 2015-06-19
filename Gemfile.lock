@@ -187,6 +187,7 @@ PATH
       bootstrap-sass
       font-awesome-rails
       rails (~> 3.2.21)
+      sass-rails
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
@@ -857,7 +858,7 @@ DEPENDENCIES
   rspec-rails (~> 3.2)
   ruby-progressbar
   rubyzip (< 0.9.9)
-  sass-rails (~> 3.2.3)
+  sass-rails
   shoulda-matchers
   sidekiq (= 2.13.0)
   sitemap_generator
