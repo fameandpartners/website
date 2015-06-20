@@ -12,15 +12,18 @@ class StyleQuiz::ProductsRecommendations
     @style_profile = style_profile
   end
 
-  def product_ids(limit: 8)
-    product_ids_query(limit: limit).results.results.map(&:id)
-  end
-
   def read_all(limit: 8)
-    product_ids = product_ids(limit: 8)
+    product_ids = product_ids(limit: limit)
     products_order = Hash[*product_ids.map.with_index{|x,i| [x.to_i, i]}.flatten]
     Spree::Product.where(id: product_ids).sort_by{|product| products_order[product.id]}
   end
+
+  def product_ids(limit: 8)
+    product_ids_query(limit: limit).results.results.map(&:id)
+  rescue Tire::Search::SearchRequestFailed
+    return []
+  end
+
 
   private
 

@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "Description of StyleQuiz."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 3.2.21"
   s.add_dependency "jquery-rails"
@@ -22,4 +22,12 @@ Gem::Specification.new do |s|
   s.add_dependency "pg", "~> 0.18"
   s.add_dependency "slim", "~> 3.0"
   s.add_dependency "slim-rails", "~> 3.0.1"
+
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'rspec-activemodel-mocks'
+  s.add_development_dependency 'rspec-collection_matchers'
+  s.add_development_dependency 'shoulda-matchers'
+  s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency 'database_cleaner'
 end

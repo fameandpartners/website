@@ -9,7 +9,7 @@
   .grid-container
     .quiz-catalog.text-center
       - question.answers.each do |answer|
-        .quiz-catalog-item class="#{ answer.selected ? 'selected' : '' }" data-value=(answer.id)
+        .quiz-catalog-item class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
           .quiz-catalog-picture
             .model-mask style="background-color: #{ answer.value }"
           .quiz-catalog-title

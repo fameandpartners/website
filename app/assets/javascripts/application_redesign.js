@@ -70,6 +70,10 @@
 // campaigns
 //= require partials/fitgau_reminder
 
+// style profile
+//= require partials/style_profile/base.js.coffee
+//= require partials/style_profile/events_form.js.coffee
+
 jQuery(document).ready(function($){
   $('#forgot-password').on('click', function(e) {
     e.preventDefault();

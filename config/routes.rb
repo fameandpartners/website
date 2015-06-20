@@ -1,6 +1,4 @@
 FameAndPartners::Application.routes.draw do
-  mount StyleQuiz::Engine => "/style-quiz"
-
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
   scope '(:site_version)' do
@@ -195,7 +193,7 @@ FameAndPartners::Application.routes.draw do
 
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
-    get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
+    get 'user_style_profile' => 'users/style_profiles#show', as: 'user_style_profile'
 
     resources :wishlists_items, only: [:index, :create, :destroy], controller: 'users/wishlists_items' do
       get 'move_to_cart', on: :member
@@ -307,14 +305,8 @@ FameAndPartners::Application.routes.draw do
     #  resources :questions, :only => [:index]
     #  resources :answers, :only => [:create]
     #end
-    resource :style_quiz, only: [:show, :update], controller: 'style_quiz'
-    resource :style_profile, only: [:show], controller: 'style_profiles'
-
-    scope '/users/:user_id', :as => :user do
-      get '/style-report' => 'user_style_profiles#show', :as => :style_profile
-      get '/style-report-debug' => 'user_style_profiles#debug'
-      get '/recomendations' => 'user_style_profiles#recomendations'
-    end
+    #resource :style_quiz, only: [:show, :update], controller: 'style_quiz'
+    #resource :style_profile, only: [:show], controller: 'style_profiles'
 
     # Redirects for old pages as part of SEO
     match '/competition/' => redirect('/')
@@ -352,9 +344,9 @@ FameAndPartners::Application.routes.draw do
   Spree::Core::Engine.routes.append do
     namespace :admin do
       resources :competition_participations, only: [:index], format: :csv
-      scope 'products/:product_id', :as => 'product' do
-        resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
-      end
+      #scope 'products/:product_id', :as => 'product' do
+      #  resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
+      #end
 
       scope 'taxonomies/:taxonomy_id/taxons/:id' do
         resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
@@ -382,7 +374,7 @@ FameAndPartners::Application.routes.draw do
       match '/blog' => redirect('/admin/blog/posts')
 
       get '/wishlist_items/download' => 'wishlist_items#download', as: 'wishlist_export'
-      get '/user_style_profiles/download' => 'user_style_profiles#download', as: 'user_style_profiles_export'
+      #get '/user_style_profiles/download' => 'user_style_profiles#download', as: 'user_style_profiles_export'
 
       resources :competition_entries, only: [:index, :show]
 
@@ -526,5 +518,9 @@ FameAndPartners::Application.routes.draw do
 
   if Features.active?(:content_revolution)
     mount Revolution::Engine => "/"
+  end
+
+  if Features.active?(:style_quiz)
+    mount StyleQuiz::Engine => "/style-quiz"
   end
 end

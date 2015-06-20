@@ -30,7 +30,15 @@ class DefineStyleQuizSchema < ActiveRecord::Migration
       t.string      :tags
       t.text        :answers
       t.text        :recommendated_products
+      t.datetime    :completed_at
       t.timestamps
+    end
+
+    create_table :style_quiz_user_profile_events, force: true do |t|
+      t.references :user_profile
+      t.string     :name
+      t.string     :event_type
+      t.date       :date
     end
 
     change_table :spree_products do |t|

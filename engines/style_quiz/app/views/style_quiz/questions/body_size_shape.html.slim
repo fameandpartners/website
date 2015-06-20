@@ -9,7 +9,7 @@
   .grid-container
     .quiz-catalog.text-center
       - question.answers.where(group: 'shape').each do |answer|
-        .quiz-catalog-item data-value=(answer.id) class=(answer.selected ? 'selected' : '')
+        .quiz-catalog-item data-value=(answer.id) class=( @user_style_profile.selected?(answer) ? 'selected' : '')
           .quiz-catalog-picture
             .body-box class=(answer.value.parameterize)
           .quiz-catalog-title
@@ -18,7 +18,7 @@
     h2.text-center Select your size.
     .size-picker
       - question.answers.where(group: 'size').each do |answer|
-        .size class=(answer.selected ? 'selected' : '') data-value=(answer.id)
+        .size class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
           = answer.name
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }

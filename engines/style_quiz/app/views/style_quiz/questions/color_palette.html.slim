@@ -7,7 +7,7 @@
     / Hair
     .quiz-catalog.text-center.hair
       - question.answers.where(group: 'hair').each do |answer|
-        .quiz-catalog-item class="#{ answer.selected ? 'selected' : '' }" data-value=(answer.id)
+        .quiz-catalog-item class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
           .quiz-catalog-picture
             .hair-box class=(answer.value.parameterize)
           .quiz-catalog-title
@@ -16,7 +16,7 @@
 
     .quiz-catalog.text-center.eyes
       - question.answers.where(group: 'eyes').each do |answer|
-        .quiz-catalog-item class="#{ answer.selected ? 'selected' : '' }" data-value=(answer.id)
+        .quiz-catalog-item class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
           .quiz-catalog-picture
             .eyes-box class=(answer.value.parameterize)
           .quiz-catalog-title

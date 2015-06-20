@@ -12,13 +12,16 @@ ul.nav.nav-tabs-lg
     = link_to user_orders_path, remote: true do
       span
         ' Orders
+
   - if Features.active?(:style_quiz)
-    li.col-xs-3 class=( %w{styleprofile styleprofiles}.include?(active_tab.to_s) ? 'active' : '')
-      = link_to styleprofile_path, remote: true do
-        span
-          ' Style 
-          br.visible-xs
-          ' Profile
+    - if current_spree_user.style_profile.present?
+      li.col-xs-3 class=( %w{styleprofile styleprofiles}.include?(active_tab.to_s) ? 'active' : '')
+        = link_to user_style_profile_path, remote: true do
+          span
+            ' Style 
+            br.visible-xs
+            ' Profile
+
   - if Features.active?(:moodboard) || current_user_moodboard.items.any?
     li.col-xs-3 class=( %w{wishlist wishlist_items}.include?(active_tab.to_s) ? 'active' : '')
       = link_to wishlist_path, remote: true do

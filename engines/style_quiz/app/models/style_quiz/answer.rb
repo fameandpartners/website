@@ -3,7 +3,15 @@ class StyleQuiz::Answer < ActiveRecord::Base
 
   serialize :tags, Array
 
-  def selected
-    position <= 0
+  class << self
+    def get_weighted_tags(ids:)
+      tags = Hash.new(0)
+      StyleQuiz::Answer.where(id: ids).each do |answer|
+        answer.tags.each do |tag_id|
+          tags[tag_id] += 1
+        end
+      end
+      tags
+    end
   end
 end

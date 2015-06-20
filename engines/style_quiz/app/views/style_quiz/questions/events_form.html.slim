@@ -13,7 +13,7 @@
         input.form-control type="text" name='name'
       .col-2
         label event type
-        input.form-control type="text" name='type'
+        input.form-control type="text" name='event_type'
       .col-2
         label event date
         input.form-control type="text" name='date'
@@ -28,8 +28,8 @@
             = link_to 'import from facebook', '#', class: 'btn btn-facebook btn-block'
     
     .row.events-list
-      /= question.values.each do |event|
-        .col-4
+      = @user_style_profile.events.each do |event|
+        .event.col-4 data-id=(event.id) data-date=(event.date.to_s(:db)) data-name=(event.name)
           .event-tag
             span = "#{ event.date.to_s(:db) } - #{ event.name }"
             .icon-cross data-action='delete-event'

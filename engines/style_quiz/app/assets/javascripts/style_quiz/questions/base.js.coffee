@@ -202,17 +202,27 @@ window.StyleQuiz.SexynessImportanceQuestion = class SexynessImportanceQuestion e
 window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->
     super(opts)
-    @events = (opts.values || [])
+
+    @events = []
+    @$container.find('.event').each((index, item) =>
+      @events.push($(item).data())
+    )
 
     @$container.on("click", '*[data-action=add-event]', @addEvent)
     @$container.on("click", '*[data-action=delete-event]', @deleteEvent)
 
+    @$container.find('input[name=date]').datepicker({
+      minDate: '+1D',
+      showButtonPanel: true,
+      dateFormat: 'yy-mm-dd'
+    })
+
   addEvent: (e) =>
     e.preventDefault()
     event = {
-      name: @$container.find('input[name=name]').val(),
-      type: @$container.find('input[name=type]').val(),
-      date: @$container.find('input[name=date]').val()
+      name:       @$container.find('input[name=name]').val(),
+      event_type: @$container.find('input[name=event_type]').val(),
+      date:       @$container.find('input[name=date]').val()
     }
     @events.push(event)
     @$container.find('.events-list').append($("<div class='col-4'><div class='event-tag'><span>#{ event.date } - #{ event.name }</span><div class='icon-cross' data-action='delete-event'></div></div></div>"))

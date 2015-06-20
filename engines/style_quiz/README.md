@@ -11,3 +11,5 @@ run migrations
 
 populate with default questions
 `rake style_quiz:populate`
+
+update products indexes

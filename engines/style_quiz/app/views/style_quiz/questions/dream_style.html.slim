@@ -9,7 +9,7 @@
     .quiz-catalog
       .row
         - question.answers.each do |answer|
-          .col-2.dress-style class=(answer.selected ? 'selected' : '') data-value=(answer.id)
+          .col-2.dress-style class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
             .quiz-catalog-picture 
               = image_tag answer.image
               .checkmark.checkmark-lg

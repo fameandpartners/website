@@ -64,7 +64,7 @@ window.StyleQuiz.Quiz = class Quiz
   finish: () =>
     $.ajax(
       url: @action,
-      type: 'POST',
+      type: 'PUT',
       dataType: 'json',
       data: { answers: @answers() }
     ).success((data, status, xhr) =>

@@ -8,7 +8,7 @@
     .rank-fasion.rank-box
       - question.answers.each do |answer|
         .rank-cell data-value=(answer.id)
-          .rank-item class="rank-fasion-item-#{ answer.value }"
+          .rank-item class="rank-fasion-item-#{ answer.value } #{ @user_style_profile.selected?(answer) ? 'active' : ''}"
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
       .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }

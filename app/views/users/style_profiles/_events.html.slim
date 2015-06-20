@@ -1,0 +1,36 @@
+ruby:
+  style_profile_events_form_init = "
+    var form = new window.style_profile.EventsForm({ container: '#events.style-profile-tab-panel.tab-pane' });
+  "
+= content_for :inline_javascript do
+  = raw style_profile_events_form_init
+
+#events.style-profile-tab-panel.tab-pane
+  .style-profile-tabs-title
+    span.tab-pane-close.visible-xs-inline-block: span.fa.fa-arrow-left
+    span Manage events
+  .form-group
+    .row
+      .col-sm-4
+        label event name
+        input.form-control.form-control-md type="text" name="name"
+      .col-sm-4
+        label event type
+        input.form-control.form-control-md type="text" name='event_type'
+      .col-sm-4
+        label event date
+        input.form-control.form-control-md type="text" name='date'
+      
+  .row
+    .col-sm-3
+      = link_to 'Add', '#', class: 'btn btn-primary btn-block', data: { action: 'add-event' }
+    .col-sm-2.text-center
+      .btn.btn-md.btn-text or
+    .col-sm-7
+      = link_to 'import from facebook', '#', class: 'btn btn-md btn-facebook btn-block'
+  .row.events-list
+    - @style_profile.events.each do |event|
+      .col-sm-4.event data-id=(event.id)
+        .form-tag
+          span = "#{ event.date.to_s(:db) } - #{ event.name }"
+          .icon-cross data-action='delete-event'

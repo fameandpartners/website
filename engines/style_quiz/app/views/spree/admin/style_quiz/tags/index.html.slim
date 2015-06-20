@@ -1,0 +1,36 @@
+- content_for :page_title do
+  = t(:listing_style_quiz_tags)
+
+- content_for :page_actions do
+  .toolbar data-hook="toolbar"
+    ul.actions.header-action-links.inline-menu
+      li id="new_tag_link"
+        = button_link_to t(:new_tag), new_admin_style_quiz_tag_path, { :remote => true, :icon => 'icon-plus', :id => 'admin_new_tag' }
+
+#new_product_making_option data-hook="new-tag"
+
+- if @tags.blank?
+  .no-objects-found = t(:no_results) 
+- else
+  table.index.sortable#style_quiz_tags
+    colgroup
+      col style="width: 10%;"
+      col style="width: 20%;"
+      col style="width: 30%;"
+      col style="width: 10%;"
+
+    thead
+      tr
+        th Weight
+        th Group
+        th Name
+        th Tools
+
+    tbody
+      - @tags.each do |tag|
+        tr data-id="#{tag.id}" id=( spree_dom_id tag )
+          td = tag.weight
+          td = tag.group
+          td = tag.name
+          td
+            = link_to 'Edit', edit_admin_style_quiz_tag_path(tag)

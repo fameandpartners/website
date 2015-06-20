@@ -1603,12 +1603,20 @@ ActiveRecord::Schema.define(:version => 20150611024152) do
     t.string "name"
   end
 
+  create_table "style_quiz_user_profile_events", :force => true do |t|
+    t.integer "user_profile_id"
+    t.string  "name"
+    t.string  "event_type"
+    t.date    "date"
+  end
+
   create_table "style_quiz_user_profiles", :force => true do |t|
     t.integer  "user_id"
     t.string   "token"
     t.string   "tags"
     t.text     "answers"
     t.text     "recommendated_products"
+    t.datetime "completed_at"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
   end
