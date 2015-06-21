@@ -14,7 +14,6 @@ module Feeds
     def initialize(version_permalink, logger: default_logger)
       @current_site_version = SiteVersion.by_permalink_or_default(version_permalink)
       @logger = logger
-      @logger.info "Starting Feeds Export SITE (#{version_permalink})"
 
       @config = {
         title:       'Fame & Partners',
@@ -33,6 +32,7 @@ module Feeds
     end
 
     def export
+      @logger.info "Starting Feeds Export SITE (#{version_permalink})"
       @items      = get_items
       @properties = get_properties
 
