@@ -2,6 +2,11 @@
 .style-profile-header {
   padding-top: 20px;
   padding-bottom: 30px;
+  @media (max-width: 480px) {
+    padding-top: 0;
+    padding-bottom: 0;
+    .col-md-4 { padding-top: 0;}
+  }
   .style-box {
     position: relative;
     text-align: center;
@@ -9,7 +14,15 @@
     font-family: Forum;
     &.style-box-primary {
       margin-bottom: 15%;
-      .style-title-text { font-size: 4em;}
+      @media (max-width: 480px) { margin-bottom: 0;}
+      img {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .style-title-text { 
+        font-size: 4em;
+        line-height: 1;
+      }
       .rhombus { font-size: 2em;}
     }
     .style-title {
@@ -47,6 +60,14 @@
     .rhombus {
       margin-bottom: -49%;
       font-size: 1.2em;
+    }
+  }
+
+  .social-mobile {
+    text-align: center;
+    .footer-social--item {
+      padding-left: 5px;
+      padding-right: 5px;
     }
   }
 
@@ -117,6 +138,12 @@
 .user-account-page-title {
   background-color: $peach-bg;
   margin-top: 70px; // $fp-menu-height
+  .container {
+    @media (max-width: 480px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 }
 
 .user-account-title {
@@ -151,6 +178,17 @@
       .form-group { margin-bottom: 14px;}
     }
   }
+
+  .nav-tabs-lg {
+    font-size: 14px;
+    @media (max-width: 480px) {
+      font-size: 11px;
+    }
+    > li > a {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 }
 // @end Account
 // ---------------
@@ -166,6 +204,32 @@
 }
 // @end Moodboard
 // ---------------
+
+// Style attributes
+.style-profile-attributes {
+  .form-control {
+    background-color: $gray-light-bg;
+    border-bottom: 0;
+    font-size: 13px;
+    height: auto;
+    min-height: 45px;
+    overflow: hidden;
+    .pull-left { max-width: 70%;}
+    .pull-right {
+      text-transform: none;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 30%;
+      overflow: hidden;
+    }
+  }
+  .btn {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+// @end Style attributes
+// -----------------
 
 .ordered-item-image {
   width: 120px;
@@ -198,7 +262,7 @@ h2.order-number {
 }
 
 .table.orders-table {
-  margin-top: 4rem;
+  // margin-top: 4rem;
 
   thead tr th {
     text-transform: uppercase;
@@ -298,13 +362,13 @@ h1.order {
   color: black;
 }
 
-@media only screen and (max-width: 800px) {
+// @media only screen and (max-width: 800px) {
 
-  .page-content.order {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
+//   .page-content.order {
+//     padding-left: 1rem;
+//     padding-right: 1rem;
+//   }
+// }
 
 a.btn.return {
   color: #FFFFFF;
@@ -317,3 +381,64 @@ a.btn.return {
     color: black !important;
   }
 }
+
+
+
+// Style Profile tabs 
+.style-profile-tabs {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  background-color: $gray-light-bg;
+
+  @media (max-width: 767px) {
+    padding: 0;
+    background-color: transparent;
+  }
+
+  a {
+    display: block;
+    text-transform: uppercase;
+    background-color: $gray-light-bg;
+    font-size: 14px;
+    padding: 10px 30px;
+    @media (max-width: 767px) {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+  }
+
+  .active a {
+    color: #000;
+    font-weight: 700;
+  }
+}
+
+.style-profile-tabs-content {
+  .tab-pane-close {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 25px;
+    background-color: #000;
+    color: #fff;
+    font-size: 0.85em;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+}
+.style-profile-tabs-title {
+  text-align: center;
+  font-size: 38px;
+  @media (max-width: 767px) {
+    font-size: 25px;
+  }
+  span { 
+    vertical-align: middle;
+    display: inline-block;
+    text-transform: none;
+  }
+}
+// @end Style Profile tabs
+// -----------------

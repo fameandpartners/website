@@ -1,15 +1,18 @@
 .user-account-page-title
   .container
-    h1.text-center.user-account-title.no-padding-bottom.text-white Style profile.
+    h1.text-center.user-account-title.no-padding-bottom.text-white.hidden-xs Style profile.
     .style-profile-header
       / HAS QUIZ
       .row
-        .col-sm-4
+        .col-md-4
           .style-box.style-box-primary
             = image_tag '_style_profile/header/glam.jpg', class: 'img-responsive'
-            .style-title: .style-title-text glam
-            .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 50%
-        .col-sm-4.text-center
+            .style-title 
+              .style-title-text 
+                ' glam 
+                .visible-xs 50%
+            .style-result.hidden-xs: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 50%
+        .col-md-4.text-center.hidden-xs
           .row
             .col-xs-6
               .style-box
@@ -39,7 +42,7 @@
                 = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
                   = image_tag '_icons/twitter.png'
 
-        .col-sm-4
+        .col-md-4.hidden-xs
           .row
             .col-xs-6
               .style-box
@@ -80,62 +83,59 @@
 
 
 .page-content.user.profiles.show
+  = render 'users/shared/tabs', active_tab: 'account_settings'
   .container.relative
-
-    = render 'users/shared/tabs', active_tab: 'account_settings'
-
-    .panel-body
-      = form_for @user, :as => :profile, :url => profile_path, :method => :put, :html => { :class => 'devise-forms' } do |f|
-        h2.font-forum.text-center EDIT YOUR ACCOUNT SETTINGS
-        .row
-          .col-md-8.col-xs-12
-            = render 'shared/redesign/error_messages', target: @user
-            .row
-              .col-md-6.col-xs-12
-                .form-group
-                  = f.label :first_name
-                  = f.text_field :first_name, :class => 'form-control form-control-md text-left'
-              .col-md-6.col-xs-12
-                .form-group
-                  = f.label :last_name
-                  = f.text_field :last_name, :class => 'form-control form-control-md text-left'
-            .row
-              .col-md-6.col-xs-12
-                .form-group
-                  label Date of birth
-                  input.form-control.form-control-md.text-left type="text"/
-              .col-md-6.col-xs-12
-                .form-group
-                  = f.label :email
-                  = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md text-left'
-            .row
-              .col-md-6.col-xs-12
-                .form-group
-                  = f.label :password
-                  = f.password_field :password, autocomplete: 'off', value: '', :class => 'form-control form-control-md text-left'
-              .col-md-6.col-xs-12
-                .form-group
-                  = f.label :password_confirmation
-                  = f.password_field :password_confirmation, autocomplete: 'off', value: '', :class => 'form-control form-control-md text-left'
-            = f.submit 'Save changes', class: 'btn btn-black btn-block'
-          .col-md-4.col-xs-12.text-center
-            .form-group
-              - if @user.image.present?
-                .avatar = image_tag @user.image, width: '100%'
-              - else
-               .avatar.empty
-            .form-group
-              input id="fileupload" type="file" style="display: none;"
-              small
-                ' Available file formats are:
-                = Spree::User::ALLOWED_AVATAR_FILE_TYPES.map{|type| %Q(".#{type.partition('/').last}") }.join(', ')
-                ' .
-                br
-                ' Maximum size is:
-                = number_to_human_size(Spree::User::ALLOWED_AVATAR_FILE_SIZE.max)
-                | .
-            .form-group
-              input.btn.btn-black.btn-upload type="button" value="Upload profile photo"
+    = form_for @user, :as => :profile, :url => profile_path, :method => :put, :html => { :class => 'devise-forms' } do |f|
+      h2.font-forum.text-center.hidden-xs EDIT YOUR ACCOUNT SETTINGS
+      .row
+        .col-md-8.col-xs-12
+          = render 'shared/redesign/error_messages', target: @user
+          .row
+            .col-md-6.col-xs-12
+              .form-group
+                = f.label :first_name
+                = f.text_field :first_name, :class => 'form-control form-control-md text-left'
+            .col-md-6.col-xs-12
+              .form-group
+                = f.label :last_name
+                = f.text_field :last_name, :class => 'form-control form-control-md text-left'
+          .row
+            .col-md-6.col-xs-12
+              .form-group
+                label Date of birth
+                input.form-control.form-control-md.text-left type="text"/
+            .col-md-6.col-xs-12
+              .form-group
+                = f.label :email
+                = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md text-left'
+          .row
+            .col-md-6.col-xs-12
+              .form-group
+                = f.label :password
+                = f.password_field :password, autocomplete: 'off', value: '', :class => 'form-control form-control-md text-left'
+            .col-md-6.col-xs-12
+              .form-group
+                = f.label :password_confirmation
+                = f.password_field :password_confirmation, autocomplete: 'off', value: '', :class => 'form-control form-control-md text-left'
+          = f.submit 'Save changes', class: 'btn btn-black btn-block'
+        .col-md-4.col-xs-12.text-center
+          .form-group
+            - if @user.image.present?
+              .avatar = image_tag @user.image, width: '100%'
+            - else
+             .avatar.empty
+          .form-group
+            input id="fileupload" type="file" style="display: none;"
+            small
+              ' Available file formats are:
+              = Spree::User::ALLOWED_AVATAR_FILE_TYPES.map{|type| %Q(".#{type.partition('/').last}") }.join(', ')
+              ' .
+              br
+              ' Maximum size is:
+              = number_to_human_size(Spree::User::ALLOWED_AVATAR_FILE_SIZE.max)
+              | .
+          .form-group
+            input.btn.btn-black.btn-upload type="button" value="Upload profile photo"
 
         / .col-md-12
         /   .form-group

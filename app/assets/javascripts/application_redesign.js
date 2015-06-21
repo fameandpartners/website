@@ -19,6 +19,7 @@
 
 // styleguide code
 //= require "styleguide/js/functions.js"
+//= require "styleguide/js/tab.js"
 //  require js/jquery.skippr.min.js # copied non-min version, to debug&patch
 // require js/main.js
 
