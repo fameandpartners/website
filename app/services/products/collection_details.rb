@@ -84,7 +84,7 @@ class Products::CollectionDetails
     taxon.footer            = ''
     taxon.banner.title      = 'GET IT QUICK!'
     taxon.banner.subtitle   = 'Introducing express making: Dresses made for you in 48 hours'
-    taxon.banner.image      = '/assets/category-banners/express-making.jpg'
+    taxon.banner.image      = '/assets/category-banners/express-making-dark-bg.jpg'
   end
 
   def color_data
