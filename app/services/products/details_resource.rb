@@ -47,6 +47,8 @@ class Products::DetailsResource
         available_options:  product_selection_options,
         moodboard:          product_moodboard,
         fabric:             product_fabric,
+        size_and_fit:       product_size_and_fit,
+        dress_length:       product_dress_length,
         style_notes:        product_style_notes,
         size_chart:         product.size_chart
       })
@@ -100,6 +102,14 @@ class Products::DetailsResource
 
     def product_fabric
       product_properties['fabric']
+    end
+
+    def product_size_and_fit
+      product_properties['fit']
+    end
+
+    def product_dress_length
+      product_properties['dress_length']
     end
 
     def product_style_notes
