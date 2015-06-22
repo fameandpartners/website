@@ -1,4 +1,6 @@
 Spree::Taxon.class_eval do
+  attr_accessible :published_at
+
   has_one :banner,
     dependent: :destroy,
     class_name: 'Spree::TaxonBanner',
