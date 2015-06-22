@@ -39,8 +39,9 @@ gem 'active_link_to'
 
 # assets
 gem 'jquery-rails'
-gem 'sass-rails',   '~> 3.2.3'
+gem 'sass-rails'
 gem 'droidcss'
+gem 'bootstrap-sass'
 
 # Data
 gem 'event_sourced_record'
@@ -102,7 +103,6 @@ group :assets do
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
-  gem 'bootstrap-sass'
 end
 
 group :assets, :development, :test do
