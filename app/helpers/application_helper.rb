@@ -203,11 +203,14 @@ module ApplicationHelper
   # price: amount, currency, display_price
   # discount: amount
   def product_price_with_discount(price, discount)
-    if discount.blank? || discount.amount.to_i == 0
+    if (discount.blank? || discount.amount.to_i == 0)
       price.display_price.to_s.html_safe
     else
       # NOTE - we should add fixed price amount calculations
-      sale_price = price.apply(discount)
+      if discount.present?
+        sale_price = price.apply(discount)
+      end
+
       [
         content_tag(:span, price.display_price, class: 'price-original'),
         content_tag(:span, sale_price.display_price.to_s, class: 'price-sale'),
@@ -215,8 +218,6 @@ module ApplicationHelper
       ].join("\n").html_safe
     end
   end
-
-
 
   # span.price-old $355
   # ' $295

@@ -38,8 +38,10 @@ class Products::CollectionsController < Products::BaseController
 
     @filter = Products::CollectionFilter.read
 
+    @collection.use_auto_discount!(current_promotion.discount) if current_promotion
+
     respond_to do |format|
-      format.html { render page.template_path, status: @status }
+      format.html { render_collection_template }
       format.json do
         render json: @collection.serialize
       end
@@ -55,12 +57,12 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def set_collection_resource
-      @collection_options = parse_permalink(params[:permalink])
+      @collection_options = cache_parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
     end
 
     def set_collection_seo_meta_data
-      # set title / meta description / HTTP status / canonical for the page
+      # set title / meta description for the page
       if page && page.get(:lookbook)
         @title = "#{page.title} #{default_seo_title}"
         @description  = page.meta_description
@@ -68,8 +70,14 @@ class Products::CollectionsController < Products::BaseController
         @title = "#{@collection.details.meta_title} #{default_seo_title}"
         @description  = @collection.details.seo_description
       end
-      @status = @collection_options ? :ok : :not_found
-      @canonical = dresses_path if @status == :not_found
+    end
+
+    def render_collection_template
+      if @collection_options
+        render page.template_path
+      else
+        render 'public/404', layout: false, status: :not_found
+      end
     end
 
     def limit
@@ -91,14 +99,25 @@ class Products::CollectionsController < Products::BaseController
         limit:          limit, # page size
         offset:         params[:offset] || 0
       }.merge(collection_options || {})
+      cache_read_resource(@resource_args)
+    end
 
-      Products::CollectionResource.new(@resource_args).read
+    def cache_read_resource(resource_args)
+      Rails.cache.fetch("/collections/#{resource_args.hash}", expires_in: configatron.cache.expire.long) do
+        Products::CollectionResource.new(resource_args).read
+      end
     end
 
     # we have route like /dresses/permalink
     # where permalink can be
     #   - taxon.permalink
     #   - color_group.name
+    def cache_parse_permalink(permalink)
+      Rails.cache.fetch("/collections/permalink/#{permalink}", expires_in: configatron.cache.expire.long) do
+        parse_permalink(permalink)
+      end
+    end
+
     def parse_permalink(permalink)
       return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
@@ -119,5 +138,6 @@ class Products::CollectionsController < Products::BaseController
 
       # default
       return nil
+
     end
 end

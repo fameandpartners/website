@@ -136,9 +136,13 @@ Spree::Order.class_eval do
   end
 
   def promocode
-    if promo = promotions.find{|promo| promo.event_name == "spree.checkout.coupon_code_added" }
+    if promo = coupon_code_added_promotion
       promo.code.to_s.upcase
     end
+  end
+
+  def coupon_code_added_promotion
+    promotions.find {|promo| promo.event_name == "spree.checkout.coupon_code_added" }
   end
 
   def confirmation_required?

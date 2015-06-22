@@ -22,7 +22,7 @@ class MarketingMailer < ActionMailer::Base
 
     # fill data required for template
     @product = @order.line_items.first.product
-    @images = (@product.images * 5).first(5) 
+    @images = (@product.images * 5).first(5)
     @product_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ collection_product_path(@product) }"
     @personalisation_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ personalization_product_path(permalink: @product.permalink) }"
     @recommended_dresses = Products::SimilarProducts.new(@product).fetch(6).to_a
@@ -74,7 +74,7 @@ class MarketingMailer < ActionMailer::Base
       mail(
         to: @user.email,
         subject: t('emails.subjects.marketing.style_quiz_completed_reminder')
-      ) 
+      )
     end
   end
 
@@ -95,7 +95,7 @@ class MarketingMailer < ActionMailer::Base
     @product = item.product
     @site_version = site_version || @user.recent_site_version
     @site_version_code = @site_version.default? ? '' : @site_version.code
-    @images = (@product.images * 5).first(5) 
+    @images = (@product.images * 5).first(5)
     @personalisation_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ personalization_product_path(permalink: @product.permalink) }"
 
     @recommended_dresses = Products::SimilarProducts.new(@product).fetch(6).to_a
@@ -116,7 +116,7 @@ class MarketingMailer < ActionMailer::Base
     @product = item.product
     @site_version = site_version || @user.recent_site_version
     @site_version_code = @site_version.default? ? '' : @site_version.code
-    @images = (@product.images * 5).first(5) 
+    @images = (@product.images * 5).first(5)
     @personalisation_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ personalization_product_path(permalink: @product.permalink) }"
     @recommended_dresses = Products::SimilarProducts.new(@product).fetch(6).to_a
 
@@ -126,5 +126,10 @@ class MarketingMailer < ActionMailer::Base
         subject: t('emails.subjects.marketing.wishlist_item_added_reminder')
       )
     end
+  end
+
+  def bridesmaids_consultation_form(email)
+    mail to: email,
+         subject: "Wedding consultation"
   end
 end

@@ -6,14 +6,18 @@
 require 'geoip'
 
 class Marketing::Subscriber
-  attr_reader :user, :token, :email, :promocode, :campaign
+  attr_reader :user, :token, :email, :promocode, :campaign, :medium
 
+  # @options [Hash]
+  #  campaign - utm_campaign
+  #  medium   - utm_medium
   def initialize(options = {})
     @user       = options[:user]
     @token      = options[:token]
     @email      = options[:email] || @user.try(:email) || @user.try(:email_was)
     @promocode  = options[:promocode]
     @campaign   = options[:campaign]
+    @medium     = options[:medium]
     @ipaddress  = options[:ipaddress]
   end
 
@@ -55,11 +59,12 @@ class Marketing::Subscriber
 
     def custom_fields
       {
-        campaign: campaign || marketing_user_visit.utm_campaign,
-        source: marketing_user_visit.referrer,
+        campaign:  campaign || marketing_user_visit.utm_campaign,
+        medium:    medium || marketing_user_visit.utm_medium,
+        source:    marketing_user_visit.referrer,
         promocode: promocode,
         ipaddress: ipaddress,
-        country: country_name
+        country:   country_name
       }
     end
 

@@ -32,6 +32,7 @@
 //= require partials/helpers/alert
 //= require partials/helpers/product_side_selector_panel
 //= require partials/helpers/modal
+//= require partials/helpers/facebook_tracking_hook
 
 // show old quiz in popup with iframe
 // require partials/style/popup

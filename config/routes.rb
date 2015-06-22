@@ -33,6 +33,13 @@ FameAndPartners::Application.routes.draw do
     end
   }
 
+  resources :user_campaigns, only: [:create] do
+    collection do
+      post :tell_mom
+      get  :check_state
+    end
+  end
+
   get '/undefined',    to: 'mysterious_route#undefined'
   get '/au/undefined', to: 'mysterious_route#undefined'
 
@@ -265,8 +272,16 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
-    get '/styling-session' => 'style_sessions#new'
+    get '/styling-session'  => 'style_sessions#new', defaults: { session_type: 'default'  }
+    get '/birthday-styling' => 'style_sessions#new', defaults: { session_type: 'birthday' }
+    get '/prom-styling'     => 'style_sessions#new', defaults: { session_type: 'prom' }
+
     resource 'style-session', as: 'style_session', only: [:new, :create] do
+      get 'success'
+    end
+
+    get '/wedding-consultation' => 'wedding_consultations#new'
+    resource 'wedding-consultation', as: 'wedding_consultation', only: [:new, :create] do
       get 'success'
     end
 
@@ -321,13 +336,14 @@ FameAndPartners::Application.routes.draw do
     mount Spree::Core::Engine, at: '/'
   end
 
+  mount AdminUi::Engine, at: '/admin2'
+
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
     resources :fabric_cards, :only => [:index, :show] do
       resources :products, :only => [:show], controller: 'fabric_cards/products'
     end
     resources :fabrications,       :only => :update
-    resource  :payments_report,    :only => [:show, :create]
     resources :shipments,          :only => :update
     resource  :sku_generation,     :only => [:show, :create]
     resources :dress_colours,      :only => :index

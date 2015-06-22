@@ -8,6 +8,8 @@ require 'shoulda/matchers'
 require 'database_cleaner'
 require 'ffaker'
 
+# See https://github.com/grosser/parallel_tests/issues/189
+Test::Unit::AutoRunner.need_auto_run = false if defined?(Test::Unit::AutoRunner)
 
 # Rails.application.railties.all { |r| r.eager_load! }
 
@@ -48,7 +50,7 @@ RSpec.configure do |config|
   # Use DatabaseCleaner instead of ActiveRecord transactional
   config.use_transactional_fixtures = false
 
-  config.before(:suite) do    
+  config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     seed_site_zone
   end

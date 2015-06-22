@@ -1,35 +1,92 @@
+- if session[:show_promocode_modal].present?
+  ruby:
+    promocode_to_show = decode(session[:show_promocode_modal])
+    session.delete(:show_promocode_modal)
+    show_promocode_modal = "
+      new window.page.PromocodeModal({
+        promocode: \"#{ promocode_to_show }\"
+      });
+    "
+  = content_for :inline_javascript do
+    = raw show_promocode_modal
+
 - if pop?
   ruby:
-    promocode = decode(params[:pc])
-    heading = decode(params[:h])
-    message = decode(params[:m])
-    content = decode(params[:c]) || promocode
-    class_name = decode(params[:s]) || class_name
-    timeout = params[:t] || 3
+    promocode     = decode(params[:pc])
+    template_name = params[:tn].present? ? decode(params[:tn]) : 'default'
+    heading       = decode(params[:h])
+    message       = decode(params[:m])
+    content       = decode(params[:c]) || promocode
+    class_name    = decode(params[:s]) || class_name
+    fb_id         = decode(params[:fb])
+    timeout       = params[:t] || 3
+    timer         = decode(params[:ti])
+    campaign_uuid = decode(params[:cu])
+
+    if spree_user_signed_in?
+      auto_apply    = session[:auto_apply]
+      session.delete(:auto_apply)
+    else
+      auto_apply    = false
+    end
 
     email_capture_modal = "
-      new window.page.EmailCaptureModal({
+      var modal_popup = new window.page.EmailCaptureModal({
         promocode: \"#{promocode}\",
         content:   \"#{content}\",
         heading:   \"#{heading}\",
         message:   \"#{message}\",
         className: \"#{class_name}\",
+        fb:        \"#{fb_id}\",
         action:    \"#{campaigns_email_capture_path}\",
-        container: \"#email-capture-fields\",
-        timeout:    #{timeout},
-        force:      true
+        container: \"#modal-popup-content-template\",
+        timeout:    #{auto_apply ? 100000 : timeout},
+        timer:      #{timer.present? ? timer : 0},
+        force:      true,
+        uuid:      \"#{campaign_uuid}\"
       });
     "
+    email_capture_modal += "modal_popup.enableAutoApplyPromoCampaign();" if auto_apply
 
   = content_for :inline_javascript do
     = raw email_capture_modal
 
-  #email-capture-fields.hidden
-    input type="hidden" name="content" value=content
-    input type="hidden" name="promocode" value=promocode
-    .row
-      .col-md-8.col-md-offset-2.text-center.wrap-email
-        input.form-control.standard-form type="email" name="email" placeholder='email address'
-      .col-xs-12.text-center.wrap-button
-        button.btn.submit type="submit" value="submit"
-          | Submit
+  - if template_name == 'blank'
+    #modal-popup-content-template.hidden
+      input type="hidden" name="content" value=content
+      input type="hidden" name="promocode" value=promocode
+        / no content, avoid hiding all with css
+
+  - elsif template_name == 'signup'
+    #modal-popup-content-template.hidden
+      input type="hidden" name="content" value=content
+      input type="hidden" name="promocode" value=promocode
+      .vex-footer
+        .row.row-inline.text-center
+          .col-sm-5.col-inline.full-form
+            - if promocode == 'birthdaybabe'
+              = link_to 'Redeem via Facebook', fb_auth_path(show_promocode_modal: encode(promocode)), class: 'btn btn-facebook btn-block btn-md'
+            - elsif campaign_uuid == 'auto_apply_promo'
+              = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true), class: 'btn btn-facebook btn-block btn-md'
+            - else
+              = link_to 'Redeem via Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
+
+          .col-sm-2.col-inline.full-form
+            .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
+          .col-sm-5.col-inline
+            .input-group
+              input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="Redeem via e-mail"
+              span.input-group-addon
+                input.btn-plain.btn-reset type="submit" value="Send"
+
+  - else # default, support legacy
+    #modal-popup-content-template.hidden
+      .vex-footer.vex-footer-email
+        input type="hidden" name="content" value=content
+        input type="hidden" name="promocode" value=promocode
+        .row
+          .col-md-8.col-md-offset-2.text-center.wrap-email
+            input.form-control.standard-form type="email" name="email" placeholder='email address'
+          .col-xs-12.text-center.wrap-button
+            button.btn-plain.btn.submit type="submit" value="submit"
+              | Submit

@@ -14,9 +14,10 @@
 .font-forum {
  font-family: $font-brand-serif;
 } 
-// @end Text helpers
-// -----------------
 
+.text-light {
+  font-weight: 300;
+}
 
 // Rhombus
 .rhombus {
@@ -69,4 +70,71 @@
   }
 } 
 // @end Rhombus
+
+// Timer
+.timer-box {
+  text-align: center;
+  font-size: 0;
+  > span {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    line-height: 1;
+    &:before, &:after {
+      content: '';
+      display: block;
+      width: 26px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background-color: #000;
+      z-index: 0;
+    }
+    &:before { left: 0;}
+    &:after { right: 0;}
+    > span {
+      position: relative;
+      z-index: 1;
+      width: 54px;
+      height: 30px;
+      line-height: 30px;
+      color: #fff;
+      font-size: 18px;
+      letter-spacing: 17px;
+      text-indent: 9px;
+      display: inline-block;
+    }
+    + span { margin-left: 10px;}
+  }
+
+  &.timer-box-small {
+    > span {
+      &:before, &:after {
+        width: 24px;
+      }
+      > span {
+        font-size: 14px;
+        width: 51px;
+        height: 28px;
+      }
+    }
+  }
+  
+}
+// @end Timer
 // -----------------
+
+// Bootstrap inline grid 
+.row-inline {
+  font-size: 0;
+}
+.col-inline {
+  display: inline-block;
+  vertical-align: top;
+  float: none;
+  font-size: 16px; // $font-size-base
+  .vex & {
+    font-size: 24px; // 1.5em
+  }
+}
+// @end Bootstrap inline grid

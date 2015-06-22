@@ -88,7 +88,7 @@ ruby:
       h1 = @product.name
       p.product-section-description
       p#product-price
-        = product_price_with_discount(@product.price, @product.discount)
+        span.price = product_price_with_discount(@product.price, @product.discount)
 
     .product-section--selection
       /! size & color & customizations selectors
@@ -212,11 +212,12 @@ hr
 
 #product-overlay
 
-= render partial: 'side_panel_sizes'
+- cache [:side_panels, @product.id, current_site_version.code], expires_in:  configatron.cache.expire.long  do
+  = render partial: 'side_panel_sizes'
 
-= render partial: 'side_panel_colours'
+  = render partial: 'side_panel_colours'
 
-= render partial: 'side_panel_customisation'
+  = render partial: 'side_panel_customisation'
 
-- if @product.making_options.present?
-  = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }
+  - if @product.making_options.present?
+    = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }

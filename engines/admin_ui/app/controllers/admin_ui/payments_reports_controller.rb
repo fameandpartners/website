@@ -1,7 +1,5 @@
-module Admin
-  class PaymentsReportsController < Spree::Admin::BaseController
-
-    include Concerns::GlobalController
+module AdminUi
+  class PaymentsReportsController < AdminUi::ApplicationController
 
     def show
       @rows = model_class.new.streaming.take(10).map &:to_h

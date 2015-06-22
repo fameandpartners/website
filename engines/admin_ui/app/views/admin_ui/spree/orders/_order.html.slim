@@ -1,0 +1,19 @@
+.widget
+  h2
+    ' Order
+    => order.number
+  ul.list-unstyled
+    li
+      i.fa.fa-dollar>
+      =>  link_to('Spree', spree.admin_order_path(order.number))
+
+    li
+      i.fa.fa-envelope>
+      label> Email:
+      = order.email
+    - order.attributes.each do |key,val|
+      li
+        label => key.to_s.capitalize
+        ' :
+        => val
+
