@@ -8,9 +8,6 @@ require 'shoulda/matchers'
 require 'database_cleaner'
 require 'ffaker'
 
-# See https://github.com/grosser/parallel_tests/issues/189
-Test::Unit::AutoRunner.need_auto_run = false if defined?(Test::Unit::AutoRunner)
-
 # Rails.application.railties.all { |r| r.eager_load! }
 
 # Requires supporting ruby files with custom matchers and macros, etc,
