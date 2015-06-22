@@ -47,6 +47,8 @@ class Products::DetailsResource
         available_options:  product_selection_options,
         moodboard:          product_moodboard,
         fabric:             product_fabric,
+        fit:                product_fit,
+        size:               product_size,
         style_notes:        product_style_notes,
         size_chart:         product.size_chart
       })
@@ -100,6 +102,14 @@ class Products::DetailsResource
 
     def product_fabric
       product_properties['fabric']
+    end
+
+    def product_fit
+      product_properties['fit']
+    end
+
+    def product_size
+      product_properties['size']
     end
 
     def product_style_notes

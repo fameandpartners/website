@@ -5,7 +5,7 @@ module Products
                   :permalink, :is_active, :images, :default_image, :price,
                   :discount, :recommended_products, :available_options, :preorder,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart, :making_option_id
+                  :size_chart, :making_option_id, :fit, :size
 
     def initialize(opts)
       opts.each do |k, v|
@@ -150,6 +150,21 @@ module Products
       self.discount = [self.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
     end
 
+    def style_notes?
+      style_notes.present?
+    end
+
+    def fabric?
+      fabric.present?
+    end
+
+    def fit?
+      fit.present?
+    end
+
+    def size?
+      size.present?
+    end
     private
 
     def customisation_allowed?
