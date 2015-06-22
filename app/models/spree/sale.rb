@@ -13,6 +13,7 @@ class Spree::Sale < ActiveRecord::Base
   accepts_nested_attributes_for :discounts, allow_destroy: true
 
   attr_accessible :is_active,
+                  :sitewide,
                   :name,
                   :discount_size,
                   :discount_type,

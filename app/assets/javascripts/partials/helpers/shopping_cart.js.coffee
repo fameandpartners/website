@@ -12,6 +12,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     @trigger =  delegateTo(@$eventBus, 'trigger')
     @on      =  delegateTo(@$eventBus, 'on')
     @one     =  delegateTo(@$eventBus, 'one')
+    @track    = options.track || false
 
   setItemCount: (item_count) =>
     return if @loaded
@@ -129,10 +130,19 @@ window.helpers.ShoppingCart = class ShoppingCart
   # analytics
   trackAddToCart: (product) ->
     try
-      window._fbq ||= []
-      window._fbq.push(['track', '6021815151134', {
-        'value': product.price.amount,
-        'currency':product.price.currency
-      }])
+      window.track.addedToCart(product.analytics_label)
+    catch
+      # do nothing
+
+    try
+      if @track
+        window._fbq ||= []
+        ids = ['6021815151134','6026191677496','6027615548326','6027496563226']
+        _.each(ids, (id) ->
+          window._fbq.push(['track', id, {
+            'value': product.price.amount,
+            'currency':product.price.currency
+          }])
+        )
     catch
       # do nothing

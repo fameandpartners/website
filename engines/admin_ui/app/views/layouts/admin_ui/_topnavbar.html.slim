@@ -1,0 +1,16 @@
+.row.border-bottom
+  nav.navbar.navbar-static-top.white-bg role="navigation" style=("margin-bottom: 0")
+    .navbar-header
+      a.navbar-minimalize.minimalize-styl-2.btn.btn-primary href="#"
+        i.fa.fa-bars
+      .navbar-brand
+        = yield :page_title
+
+    /form.navbar-form-custom action="/" method="post" role="search"
+        .form-group
+          input#top-search.form-control name="top-search" placeholder=("Search for something...") type="text" /
+    /ul.nav.navbar-top-links.navbar-right
+      li
+        a href="#"
+          i.fa.fa-sign-out
+          | Log out

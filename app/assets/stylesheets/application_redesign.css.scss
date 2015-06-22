@@ -1,15 +1,12 @@
-@import url(//fonts.googleapis.com/css?family=Forum);
+//= require_tree ./libs/vex
+//= require_tree ./redesign/stylesheets
 
 @import 'redesign/vars';
 @import 'redesign/mixins';
 @import 'redesign/extras/helpers';
 
-@import 'libs/vex.css';
-@import 'libs/vex-theme-flat-attack.css';
-@import 'libs/vex-theme-bottom-right-corner.css';
 @import 'redesign/libs/chosen';
 @import 'redesign/extras/chosen_override';
-
 @import 'redesign/extras/tabs';
 
 @import 'redesign/icons';
@@ -18,10 +15,11 @@
 @import 'redesign/header';
 @import 'redesign/footer';
 
-@import "redesign/product/*";
-@import "redesign/stylesheets/*";
+@import 'redesign/product/*';
+
 @import 'redesign/forms';
 @import 'redesign/about';
+@import 'redesign/alerts';
 @import 'redesign/user';
 @import 'redesign/returns';
 @import 'redesign/why_us';
@@ -148,15 +146,3 @@ input.form-control {
     outline:none;
   }
 }
-
-/*
-  // added for quick reference only
-  <link rel="stylesheet" href="stylesheets/styles.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/demo.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/component.css" />
-  <link rel="stylesheet" href="stylesheets/jquery.skippr.css">
-  <link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="stylesheets/cs-select.css">
-  <link rel="stylesheet" href="stylesheets/cs-skin-border.css">
-*/

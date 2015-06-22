@@ -7,7 +7,7 @@ ruby:
   "
   preload_cart_data = "
     (function(){
-      var cart_data  = #{ raw cart.serialize.to_json };
+      cart_data  = #{ raw cart.serialize.to_json };
       window.app.shopping_cart.updateData(cart_data);
     })();
   "
@@ -71,8 +71,12 @@ ruby:
     | Shipping
     span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
   p
-    | Promotion
-    span.pull-right = cart.display_promotion_total.to_s
+    - if cart.promocode.present?
+      => "Promotion (#{ cart.promocode })"
+      span.pull-right = cart.display_promotion_total.to_s
+    - else
+      | Promotion
+      span.pull-right = cart.display_promotion_total.to_s
   / hr
   p
     strong

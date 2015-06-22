@@ -88,7 +88,7 @@ ruby:
       h1 = @product.name
       p.product-section-description
       p#product-price
-        = product_price_with_discount(@product.price, @product.discount)
+        span.price = product_price_with_discount(@product.price, @product.discount)
 
     .product-section--selection
       /! size & color & customizations selectors
@@ -126,21 +126,7 @@ ruby:
             |+ Moodboard
 
         .row.social-media-links
-          .col-md-3.col-sm-3.col-xs-3
-            span class='st_facebook_custom' data-st_title=@product.name data-st_summary=@product.short_description data-st_image=@product.featured_image.large
-              = image_tag '_icons/facebook.png'
-
-          .col-md-3.col-sm-3.col-xs-3
-            span class='st_pinterest_custom' data-st_title=@product.name data-st_summary=@product.short_description data-st_image=@product.featured_image.large
-              = image_tag '_icons/pinterest.png'
-
-          .col-md-3.col-sm-3.col-xs-3
-            span class='st_instagram_custom' data-st_username='fameandpartners' data-st_title=@product.name data-st_summary=@product.short_description data-st_image=@product.featured_image.large
-              = image_tag '_icons/instagram.png'
-
-          .col-md-3.col-sm-3.col-xs-3
-            span class='st_twitter_custom' data-st_via="fameandpartners" data-st_title=@product.name data-st_summary=@product.short_description data-st_image=@product.featured_image.large
-              = image_tag '_icons/twitter.png'
+          = render :partial => 'share_buttons', :locals => { product: @product }
 
 /! About The Dress
 .col-sm-12.screen-height
@@ -226,11 +212,12 @@ hr
 
 #product-overlay
 
-= render partial: 'side_panel_sizes'
+- cache [:side_panels, @product.id, current_site_version.code], expires_in:  configatron.cache.expire.long  do
+  = render partial: 'side_panel_sizes'
 
-= render partial: 'side_panel_colours'
+  = render partial: 'side_panel_colours'
 
-= render partial: 'side_panel_customisation'
+  = render partial: 'side_panel_customisation'
 
-- if @product.making_options.present?
-  = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }
+  - if @product.making_options.present?
+    = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }

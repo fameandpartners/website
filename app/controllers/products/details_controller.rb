@@ -28,6 +28,8 @@ class Products::DetailsController < Products::BaseController
     # make express delivery as default option
     @product.making_option_id = @product.making_options.first.try(:id)
 
+    @product.use_auto_discount!(current_promotion.discount) if current_promotion
+
     # set page title.
     # Drop anything after the first period(.) and newline
     @title = "#{@product.name} #{default_seo_title}"

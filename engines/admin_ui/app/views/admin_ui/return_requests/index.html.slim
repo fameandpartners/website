@@ -1,0 +1,35 @@
+- content_for :page_title do
+  = page_title
+
+= paginate collection, theme: 'admin_ui'
+
+table.table
+  thead : tr
+    th Return Requested
+    th Order Number
+    th Order Date
+    th Ship Date
+    th
+      i> class=action_icon_class(:return)
+      ' Return
+    th
+      i> class=action_icon_class(:exchange)
+      ' Exchange
+    th
+      i> class=action_icon_class(:keep)
+      ' Keep
+
+  tbody
+    - collection.each do |rr|
+      - items = rr.return_request_items.group_by(&:action).map { |action, items| [action.to_sym, items.count] }.to_h
+      tr
+        td = link_to rr.created_at.to_date, return_request_path(rr)
+        td = link_to rr.order.number, spree.admin_order_path(rr.order)
+        td = rr.order.completed_at.to_date
+        td = rr.order.shipments.detect(&:shipped?).try(:shipped_at).try(:to_date)
+        td = items[:return]
+        td = items[:exchange]
+        td = items[:keep]
+
+
+    /li = return_request.inspect

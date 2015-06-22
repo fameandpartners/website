@@ -49,12 +49,10 @@ FameAndPartners::Application.configure do
 
   # reloading
   config.to_prepare do
-    Spree::User.send(:include, Overrides::SpreeAuthDevise::User)
     Spree::Product.send(:include, Overrides::Spree::Product)
   end
 
   # enable sourcemaps for easier css debugging in chrome
-  config.assets.debug = true
   config.sass.debug_info = true
   config.sass.line_comments = false # source maps don't get output if this is true
 

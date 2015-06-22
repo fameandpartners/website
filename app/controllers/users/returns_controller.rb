@@ -4,7 +4,7 @@ class Users::ReturnsController < Users::BaseController
 
   def new
     user = try_spree_current_user
-    order = user.orders.where(number: params[:order_id]).first
+    order = user.orders.where(number: params[:order_number]).first
     @order_return = OrderReturnRequest.new(:order => order, :order_id => order.id)
     @order_return.build_items
 

@@ -55,9 +55,17 @@ module Orders
     end
 
     def promo_codes
-      order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
-        adj.originator.promotion.code
+      @promo_codes ||= order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
+        "[#{adj.originator.promotion.code}] #{adj.originator.promotion.name}"
       }
+    end
+
+    def fast_making_promo?
+      promo_codes.any?{ |code| code.downcase.include?('birthdaygirl') }
+    end
+
+    def promotion?
+      promo_codes.any?
     end
 
     def phone_number
@@ -77,7 +85,7 @@ module Orders
     def return_requested?
       return_request.present?
     end
-        
+
     def return_request
       @return_request ||= OrderReturnRequest.where(:order_id => order.id).first
     end

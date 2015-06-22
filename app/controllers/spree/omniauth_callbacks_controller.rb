@@ -89,6 +89,10 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     request.env["omniauth.auth"]
   end
 
+  def after_omniauth_failure_path_for(scope)
+    new_spree_user_session_path()
+  end
+
   private
 
   def try_apply_bridesmaid_party_callback(user)
@@ -102,4 +106,5 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session[:spree_user_return_to] = main_app.bridesmaid_party_info_path
     end
   end
+
 end

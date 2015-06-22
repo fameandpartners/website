@@ -29,14 +29,19 @@
 
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
+  attr_reader :page
+  helper_method :page
 
-  before_filter :set_collection_resource, :set_collection_seo_meta_data
+  before_filter :load_page, :set_collection_resource, :set_collection_seo_meta_data
 
   def show
+
     @filter = Products::CollectionFilter.read
 
+    @collection.use_auto_discount!(current_promotion.discount) if current_promotion
+
     respond_to do |format|
-      format.html { render :show, status: @status }
+      format.html { render_collection_template }
       format.json do
         render json: @collection.serialize
       end
@@ -44,17 +49,40 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private
+
+    def load_page
+      current_path = LocalizeUrlService.remove_version_from_url(request.path)
+      @page = Revolution::Page.find_for(current_path, '/dresses/*')
+      @page.locale = current_site_version.locale
+    end
+
     def set_collection_resource
-      @collection_options = parse_permalink(params[:permalink])
+      @collection_options = cache_parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
     end
 
     def set_collection_seo_meta_data
-      # set title / meta description / HTTP status / canonical for the page
-      @title = "#{@collection.details.meta_title} #{default_seo_title}"
-      @description  = @collection.details.seo_description
-      @status = @collection_options ? :ok : :not_found
-      @canonical = dresses_path if @status == :not_found
+      # set title / meta description for the page
+      if page && page.get(:lookbook)
+        @title = "#{page.title} #{default_seo_title}"
+        @description  = page.meta_description
+      else
+        @title = "#{@collection.details.meta_title} #{default_seo_title}"
+        @description  = @collection.details.seo_description
+      end
+    end
+
+    def render_collection_template
+      if @collection_options
+        render page.template_path
+      else
+        render 'public/404', layout: false, status: :not_found
+      end
+    end
+
+    def limit
+      default = page.get(:lookbook) ? 99 : 20
+      params[:limit] || default
     end
 
     def collection_resource(collection_options)
@@ -68,45 +96,48 @@ class Products::CollectionsController < Products::BaseController
         discount:       params[:sale] || params[:discount],
         fast_making:    params[:fast_making],
         order:          params[:order],
-        limit:          params[:limit] || 20, # page size
+        limit:          limit, # page size
         offset:         params[:offset] || 0
       }.merge(collection_options || {})
+      cache_read_resource(@resource_args)
+    end
 
-      Products::CollectionResource.new(@resource_args).read
+    def cache_read_resource(resource_args)
+      Rails.cache.fetch("/collections/#{resource_args.hash}", expires_in: configatron.cache.expire.long) do
+        Products::CollectionResource.new(resource_args).read
+      end
     end
 
     # we have route like /dresses/permalink
     # where permalink can be
-    #   taxon.permalink
-    #   bodyshape
-    #   color.name
-    #   etc
+    #   - taxon.permalink
+    #   - color_group.name
+    def cache_parse_permalink(permalink)
+      Rails.cache.fetch("/collections/permalink/#{permalink}", expires_in: configatron.cache.expire.long) do
+        parse_permalink(permalink)
+      end
+    end
+
     def parse_permalink(permalink)
       return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
-      # is should have lower priority... but we have collection='pastel' and we have colors group pastel
-      color_group = Repositories::ProductColors.get_group_by_name(permalink)
-      if color_group.present?
+      available_color_groups = Spree::OptionValuesGroup.for_colors.available_as_taxon
+      if color_group = available_color_groups.find_by_name(permalink.downcase)
         return { color_group: color_group.name }
       end
 
-      taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
-      if taxon.present?
+      if taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
         # style, edits, events, range, seocollection
-        case taxon.taxonomy.to_s.downcase
+        case taxonomy = taxon.taxonomy.downcase
         when 'style', 'edits', 'event'
-          return { taxon.taxonomy.to_s.downcase.to_sym => permalink }
+          return { taxonomy.to_sym => permalink }
         when 'range'
           return { collection: permalink }
         end
       end
 
-      color = Repositories::ProductColors.get_by_name(permalink)
-      if color.present?
-        return { color: color.name }
-      end
-
       # default
       return nil
+
     end
 end

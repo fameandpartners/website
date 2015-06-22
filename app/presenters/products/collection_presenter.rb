@@ -19,6 +19,13 @@ module Products
       instance
     end
 
+    def use_auto_discount!(auto_discount)
+      return if auto_discount.blank? || auto_discount.amount.to_i == 0
+      self.products.each do |product|
+        product.discount = [product.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
+      end
+    end
+
     def to_h
       members.each_with_object({}) do |m, h|
         h[m] = self[m]

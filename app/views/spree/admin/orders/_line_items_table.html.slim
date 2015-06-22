@@ -14,6 +14,7 @@ table.line_items
       th SKU
       th Style Name
       th Size
+      th Colour
       th Customisations
       th Factory
       th Customer
@@ -30,8 +31,10 @@ table.line_items
           td = maybe_date(order.completed_at)
           td = maybe_date(line_item.projected_delivery_date)
           td style="text-align: center"
-            - if line_item.fast_making? 
-              h3 style="color: red;" = '!'
+            - if line_item.fast_making? || order.fast_making_promo?
+              h3 style="color: red;" !
+            - if order.fast_making_promo?
+              h3 🎂
           td
             - ship_state = ShippingStatePresenter.new(line_item)
             abbr title=ship_state.delivery_state class="state-#{ship_state.delivery_state}"
@@ -41,7 +44,8 @@ table.line_items
           td = line_item.style_number
           td = line_item.style_name
           td = line_item.country_size
-          td = line_item.customisations.collect(&:first).join(', ')
+          td = line_item.colour_name
+          td = line_item.customisations.collect(&:first).join("<br>").html_safe
           td = line_item.factory
           - if position.zero?
             td rowspan=total_items

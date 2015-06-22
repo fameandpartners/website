@@ -8,7 +8,7 @@ class StyleSessionMailer < ActionMailer::Base
     mail(
       to: 'team@fameandpartners.com',
       from: @style_session.email,
-      subject: "[Style Session Booking]",
+      subject: "[#{ @style_session.name.capitalize } Style Session Booking]",
       layout: false
     )
   end

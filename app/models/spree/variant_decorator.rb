@@ -21,15 +21,15 @@ Spree::Variant.class_eval do
   end
 
   def save_default_price
-    # store price dependendent 
+    # store price dependendent
     #self.price = Services::VariantPriceCalculator.new(self).get
 
     if default_price && (default_price.changed? || default_price.new_record?)
-      default_price.save 
+      default_price.save
     end
 
     update_zone_prices
-  end 
+  end
 
   def discount
     self.product.try(:discount)
@@ -124,7 +124,7 @@ Spree::Variant.class_eval do
           price.try(:destroy)
         else
           price.assign_attributes(attrs)
-          price.save 
+          price.save
         end
       end
     end
@@ -147,7 +147,7 @@ Spree::Variant.class_eval do
     default_currency = Spree::Config.currency
     currency = zone.site_version.present? ? zone.site_version.currency : Spree::Config.currency
 
-    zone_prices = self.zone_prices.where(zone_id: zone.id)
+    zone_prices = self.zone_prices.select { |zp| zp.zone_id == zone.id }
     zone_price = zone_prices.select{|p| p.currency == currency }.first
     if zone_price.blank? && currency != default_currency
       zone_price = zone_prices.select{|p| p.currency == default_currency }.first

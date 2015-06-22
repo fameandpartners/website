@@ -13,6 +13,14 @@
     </h2>
   </div>
 </div>
+<% if @country_code == 'GB': %>
+  <div>
+    <div class='cart-promo-message'>
+      <span class='flag-uk'></span>
+      Free shipping and returns to the U.K.
+    </div>
+  </div>
+<% end %>
 <ul class="cart-items">
   <% for product in @cart.products: %>
     <li class="cart-item" data-id="<%= product.line_item_id %>">
@@ -30,7 +38,7 @@
         <div class="clearfix">
           <div class="pull-left small">
             Size: <span><%= product.size.presentation %>, </span>
-            Color: <span class="color"><%= product.color.name %></span> 
+            Color: <span class="color"><%= product.color.name %></span>
           </div>
           <div class="text-muted pull-right"><%= product.price.display_price %></div>
         </div>
@@ -65,6 +73,16 @@
 </form>
 <!--cd-cart-items-->
 <div class="cart-total">
+  <p>
+    Shipping<span><%= @cart.display_shipment_total %></span>
+  </p>
+  <p>
+    <% if @cart.promocode: %>
+      Promotion (<%= @cart.promocode %>)<span><%= @cart.display_promotion_total %></span>
+    <% else: %>
+      Promotion<span><%= @cart.display_promotion_total %></span>
+    <% end %>
+  </p>
   <p>
     Total<span><%= @cart.display_total %></span>
   </p>

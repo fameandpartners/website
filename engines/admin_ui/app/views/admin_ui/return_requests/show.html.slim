@@ -1,0 +1,22 @@
+- content_for :page_title do
+  = page_title
+
+= render return_request.order.user
+= render return_request.order
+
+h3 Order Return Items
+
+.ibox
+  .ibox-content
+    table.table
+      thead : tr
+        th Action
+        th SKU
+        th Style Name
+        th Size
+        th Colour
+        th Customisations
+        th Category
+        th Reason
+      tbody
+        = render partial: 'item', collection: return_request.sorted_return_request_items

@@ -59,4 +59,7 @@ module MarketingHelper
     end
   end
 
+  def encode(p)
+    Base64.encode64(p.to_s).chomp
+  end
 end

@@ -6,16 +6,18 @@ Spree::OrderMailer.class_eval do
 
   include Spree::BaseHelper
   include OrdersHelper
+  include ApplicationHelper
 
   helper 'spree/base'
   helper :orders
+  helper :application
 
   attr_reader   :order
   helper_method :order
 
   def confirm_email(order, resend = false)
     find_order(order)
-    subject = (resend ? "[#{t(:resend).upcase}] " : '') 
+    subject = (resend ? "[#{t(:resend).upcase}] " : '')
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
     mail(:to => @order.email, :from => from_address, :subject => subject)
   end
@@ -24,6 +26,8 @@ Spree::OrderMailer.class_eval do
     find_order(order)
 
     @additional_products_info = Bridesmaid::BoughtAdditionalProductsResource.new(order: @order).read
+
+    @order_presenter = Orders::OrderPresenter.new(@order)
 
     to = 'team@fameandpartners.com'
     from = "#{@order.full_name} <#{@order.email}>"
@@ -60,5 +64,13 @@ Spree::OrderMailer.class_eval do
     end
 
     mail(to: to, from: from, subject: subject)
+  end
+
+  def send_to_friend(products, email)
+    @products = products
+    subject = "Your daughter sent you her favourite Quinceanera dresses"
+    mail to:      email,
+         from:    configatron.noreply,
+         subject: subject
   end
 end

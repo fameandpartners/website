@@ -1,0 +1,23 @@
+
+li class=active_link_to_class(root_path, active: :exact)
+  = link_to root_path do
+    i.fa.fa-dashboard
+    span.nav-label Dashboard
+
+li class=active_link_to_class(return_requests_path)
+  = link_to return_requests_path do
+    i.fa.fa-thumbs-down
+    span.nav-label Returns Management
+
+li class=active_link_to_class(payments_report_path)
+  a href="#"
+    i.fa.fa-line-chart
+    span.nav-label Reports
+    span.fa.arrow
+  ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
+    li = active_link_to 'Payments', payments_report_path
+
+li
+  = link_to spree.admin_path do
+    i.fa.fa-usd
+    span.nav-label Spree Admin

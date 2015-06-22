@@ -19,13 +19,16 @@
     .row
       .col-md-12.recommended
         h2 Sizes
-        - if current_site_version.is_australia?
-          p style="text-align:center" All sizes are AU sizes
+        p style="text-align:center"
+          - if current_site_version.is_australia?
+            | All sizes are AU/UK sizes
+          - else
+            | All sizes are US sizes
         - if @product.default_sizes?
           - @product.default_sizes.each do |size|
             .col-md-3.col-xs-3.col-xxs-6
               a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation
-                span.option-box.size-box= size.presentation.gsub(/\D/, '')
+                span.option-box.size-box= size.presentation
 
   .sizes-container
     - if @product.custom_sizes?
@@ -36,4 +39,4 @@
           - @product.custom_sizes.each do |size|
             .col-md-3.col-xs-3.col-xxs-6
               a.size-option.product-option href="#" data-id=size.id  data-name=size.presentation data-price=@product.custom_size_price
-                span.option-box.size-box= size.presentation.gsub(/\D/, '')
+                span.option-box.size-box= size.presentation

@@ -1,12 +1,9 @@
 namespace :feed do
   namespace :export do
-    task :all => :environment do
-      if Rails.env.production?
-        Feeds::Base.export!('au')
-        Feeds::Base.export!('us')
-      else
-        puts 'feed:export:all disabled for non-production env'
-      end
+    desc 'Export Marketing Feeds'
+    task all: :environment do
+      Feeds::Base.export!('au')
+      Feeds::Base.export!('us')
     end
   end
 end

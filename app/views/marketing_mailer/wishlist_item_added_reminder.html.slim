@@ -9,9 +9,9 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
       td style="background-color: #000; color: #fff; text-align: center;font: 400 italic 16px/1.1 Georgia, 'Trebuchet MS', 'Times New Roman', sans-serif;"
         h1 style="margin: 20px 0; padding: 0; color: #fc00ff; font-weight: 400; font-size: 32px;" Hey, #{@user.first_name}!
         p style="margin: 0; padding: 10px 40px;"
-          ' We see that 
-          span style="text-transform: uppercase;" #{ @product.name } 
-          ' is still in your moodboard. 
+          ' We see that
+          span style="text-transform: uppercase;" #{ @product.name }
+          ' is still in your moodboard.
         p style="margin: 0; padding-bottom: 20px;"
           ' Because we really want you to have it, we thought we would offer you 20% OFF.
     tr
@@ -72,7 +72,7 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                   - if image.blank?
                     / empty space, group cant contains empty elements
                   - else
-                    - dress_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ collection_product_path(dress) }" 
+                    - dress_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ collection_product_path(dress) }"
                     = link_to dress_url do
                       = image_tag image.attachment.url(:product), style: 'display: block;', width: '100%'
                     p style="margin: 10px 0; padding: 0; font: 400 11px/1.1 Times New Roman, sans-serif;"
@@ -81,4 +81,4 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                       = dress.zone_price_for(@site_version).display_price
                     p style="margin: 20px 0 0; padding: 0;"
                       = link_to 'SHOP NOW', dress_url, style: "display: block; background: #000; border: solid 1px #000; color: #fff; text-decoration: none; margin: 5px 0; padding: 8px 0; text-transform: uppercase; font: 400 14px/1 Arial, sans-serif;"
-                      = link_to 'CUSTOMIZE NOW', dress_url, style: "display: block; background: #fff; border: solid 1px #000; color: #000; text-decoration: none; margin: 5px 0; padding: 8px 0; text-transform: uppercase; font: 400 14px/1 Arial, sans-serif;" 
+                      = link_to 'CUSTOMIZE NOW', dress_url, style: "display: block; background: #fff; border: solid 1px #000; color: #000; text-decoration: none; margin: 5px 0; padding: 8px 0; text-transform: uppercase; font: 400 14px/1 Arial, sans-serif;"

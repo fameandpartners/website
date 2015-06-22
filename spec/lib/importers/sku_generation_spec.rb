@@ -36,7 +36,7 @@ module Importers
       end
     end
 
-    RSpec.describe FabricCardColour do
+    RSpec.describe FabricCardColourTemplate do
       describe '#sku_compenent pads to 3 digits' do
         it 'single digits' do
           expect(described_class.new(4, '_').sku_component).to eq "004"
@@ -52,15 +52,15 @@ module Importers
       end
     end
 
-    RSpec.describe TemplateProduct do
+    RSpec.describe ProductTemplate do
       it 'can generate a single sku' do
-        fabric_card = FabricCard.new('FabricCardName', 'FabricCardAbbrev')
-        colour1 = FabricCardColour.new(99, 'ColourName')
+        fabric_card = FabricCardTemplate.new('FabricCardName', 'FabricCardAbbrev')
+        colour1 = FabricCardColourTemplate.new(99, 'ColourName')
         fabric_card.colours = [colour1]
         size_four = BaseSize.new(4)
         sizes = [size_four]
 
-        sku_template = TemplateProduct.new('StyleNumber', "StyleName")
+        sku_template = ProductTemplate.new('StyleNumber', "StyleName")
         sku_template.fabric_card = fabric_card
         sku_template.base_sizes = sizes
 
@@ -68,16 +68,16 @@ module Importers
       end
 
       it 'uses all the bits' do
-        fabric_card = FabricCard.new('CoolFabric', 'CFAB')
-        colour1 = FabricCardColour.new(7, '7Up')
-        colour2 = FabricCardColour.new(42, 'Meaning')
-        colour3 = FabricCardColour.new(350, 'TreeFiddy')
+        fabric_card = FabricCardTemplate.new('CoolFabric', 'CFAB')
+        colour1 = FabricCardColourTemplate.new(7, '7Up')
+        colour2 = FabricCardColourTemplate.new(42, 'Meaning')
+        colour3 = FabricCardColourTemplate.new(350, 'TreeFiddy')
         fabric_card.colours = [colour1, colour2, colour3]
         size_four = BaseSize.new(4)
         size_twentysix = BaseSize.new(26)
         sizes = [size_four, size_twentysix]
 
-        sku_template = TemplateProduct.new('SD888', "SlinkyDress")
+        sku_template = ProductTemplate.new('SD888', "SlinkyDress")
         sku_template.fabric_card = fabric_card
         sku_template.base_sizes = sizes
 

@@ -66,6 +66,15 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/here_comes_the_sun', :layout => 'redesign/application'
   end
 
+
+  def bohemian_summer
+    @title = "Bohemian Summer | Beautiful Dresses - Fame & Partners"
+    @description = "Discover beautiful summer dresses here at Fame & Partners"
+    render :template => 'landing_pages/bohemian_summer', :layout => 'redesign/application'
+  end
+
+
+
   def all_size
     @title = "All Size | Beautiful Dresses - Fame & Partners"
     @description = "Discover beautiful dresses for every body here at Fame & Partners"
@@ -240,16 +249,4 @@ class StaticsController < ApplicationController
     @title = "Hashtag #fame2015 to win" + default_seo_title
     @description = "Hashtag #fame2015 to win"
   end
-
-  private
-
-  def get_products_from_edit (edit, currency, user, count=9)
-    searcher = Products::ProductsFilter.new(:edits => edit)
-    searcher.current_user = user
-    searcher.current_currency = currency
-    searcher.products.first(count)
-  end
-
-  helper_method :get_products_from_edit
-
 end

@@ -6,6 +6,11 @@ module Feeds
       attr_accessor :properties
       attr_accessor :current_site_version
 
+      attr_reader :logger
+      def initialize(logger: )
+        @logger = logger || Logger.new($stdout)
+      end
+
       private
 
       def export_file_path
@@ -22,22 +27,24 @@ module Feeds
         current_site_version.currency
       end
 
-      def current_site_version
-        @current_site_version
-      end
-
       def helpers
         @helpers ||= Feeds::Helpers.new
       end
 
-      def collection_product_path(product)
+      def collection_product_path(product, options = {})
         path_parts = ['dresses']
         if product.respond_to?(:descriptive_url)
           path_parts << product.descriptive_url
         else
           path_parts << descriptive_url(product)
         end
+
+        if options[:color].nil? && product.respond_to?(:color) && product.color.try(:name)
+          options.merge!({ color: product.color.name })
+        end
+
         path =  '/' + path_parts.compact.join('/')
+        path = "#{path}?#{options.to_param}" if options.present?
 
         url_without_double_slashes(path)
       end

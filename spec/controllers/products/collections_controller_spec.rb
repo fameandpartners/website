@@ -3,10 +3,12 @@ require 'spec_helper'
 describe Products::CollectionsController, :type => :controller do
   describe 'GET show' do
     let(:collection_details) { double('Collection Details', meta_title: 'My Title', seo_description: 'My Description') }
-    let(:collection_double) { double('Collection', details: collection_details) }
+    let(:collection_double)  { double('Collection', details: collection_details) }
+    let(:page)               { double(Revolution::Page, :get => false, :template_path => '/products/collections/show.html.slim', :locale= => true)}
 
     before(:each) do
       # Repositories and Resources should be tested elsewhere
+      allow(Revolution::Page).to receive(:find_for).and_return(page)
       allow(Products::CollectionFilter).to receive(:read)
       allow(controller).to receive(:collection_resource).and_return(collection_double)
     end
@@ -18,7 +20,7 @@ describe Products::CollectionsController, :type => :controller do
 
       it 'when querying a inexistent permalink' do
         get :show, permalink: 'nothing'
-        expect(response).to render_template(:show)
+        expect(response).to render_template(file: 'public/404', layout: false)
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -37,39 +39,33 @@ describe Products::CollectionsController, :type => :controller do
   end
 
   describe 'private methods' do
-    let(:collection_details) { double('Collection Details', meta_title: 'My Title', seo_description: 'My Description') }
-    let(:collection_double) { double('Collection', details: collection_details) }
-
     describe '#set_collection_seo_meta_data' do
-      before(:each) do
-        controller.instance_variable_set(:@collection, collection_double)
-      end
+      describe 'sets @title and @description for a collection page' do
+        context 'page is a lookbook' do
+          let!(:lookbook_page)        { create(:revolution_page, variables: { lookbook: true }) }
+          let!(:lookbook_translation) { create(:revolution_translation, page: lookbook_page, title: 'Lookbook Title', meta_description: 'Lookbook Meta Description', locale: 'en-US') }
 
-      describe 'sets the @title, @description, @status and @canonical of a collection' do
-        it 'has the @title and @description' do
-          controller.send(:set_collection_seo_meta_data)
+          before(:each) { controller.instance_variable_set(:@page, lookbook_page) }
 
-          expect(controller.instance_variable_get(:@title)).to include('My Title')
-          expect(controller.instance_variable_get(:@description)).to eq('My Description')
-        end
-
-        context 'collection has options (a collection was found)' do
-          it 'has @status :ok and @canonical is nil' do
-            controller.instance_variable_set(:@collection_options, {})
+          it 'uses the page title and meta_description' do
             controller.send(:set_collection_seo_meta_data)
 
-            expect(controller.instance_variable_get(:@status)).to eq(:ok)
-            expect(controller.instance_variable_get(:@canonical)).to be_nil
+            expect(controller.instance_variable_get(:@title)).to include('Lookbook Title')
+            expect(controller.instance_variable_get(:@description)).to eq('Lookbook Meta Description')
           end
         end
 
-        context 'collection has no options (a invalid collection was queried)' do
-          it 'has @status :not_found and @canonical has the dresses_path' do
-            controller.instance_variable_set(:@collection_options, nil)
+        context 'page is a collection' do
+          let(:collection_details_double) { double('Collection Details', meta_title: 'Collection Title', seo_description: 'Collection Meta Description') }
+          let(:collection_double) { double('Collection Double', details: collection_details_double) }
+
+          before(:each) { controller.instance_variable_set(:@collection, collection_double) }
+
+          it 'uses the collection details and meta_description' do
             controller.send(:set_collection_seo_meta_data)
 
-            expect(controller.instance_variable_get(:@status)).to eq(:not_found)
-            expect(controller.instance_variable_get(:@canonical)).to eq(dresses_path)
+            expect(controller.instance_variable_get(:@title)).to include('Collection Title')
+            expect(controller.instance_variable_get(:@description)).to eq('Collection Meta Description')
           end
         end
       end

@@ -1,7 +1,7 @@
 # usage
 #   Repositories::CartProduct.new(line_item: line_item).read
 #
-# 
+#
 require File.join(Rails.root, 'app', 'presenters', 'user_cart', 'cart_product_presenter.rb')
 require File.join(Rails.root, 'app', 'models', 'customisation_value.rb')
 
@@ -21,6 +21,7 @@ class Repositories::CartProduct
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
         name: product.name,
+        sku: product.sku,
         permalink: product.permalink,
         description: line_item_description,
         variant_id: line_item.variant_id,
@@ -50,7 +51,7 @@ class Repositories::CartProduct
     def cache_key
       line_item.cache_key
     end
-    
+
     def product_type
       return 'service' if product.service?
       customized_product? ? 'customized' : 'default'
@@ -102,7 +103,7 @@ class Repositories::CartProduct
         description
       else
         I18n.t(:product_has_no_description)
-      end 
+      end
     end
 
     def line_item_price

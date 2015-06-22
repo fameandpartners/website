@@ -86,35 +86,33 @@ ruby:
                         span.fit-guarantee.menu-icon
                         | Fit Guarantee
               .mega-menu--secondary
-                = link_to fast_making_dresses_path, class: 'hidden mega-menu-banner' do
-                  = image_tag 'mega-menu/express-making.jpg', alt: 'Get it Quick - Dress made for you in 48 hours', class: 'img-responsive'
                 .container-fluid.max-width-100
                   .row
                     .col-md-3.col-lg-2.col-md-offset-4
                       h4.link-header Events
                       ul.mega-menu-list
                         li.mega-menu-list--item
+                          = link_to 'Formal', build_taxon_path('Formal'), title: 'Formal'
+                        li.mega-menu-list--item
+                          = link_to 'Wedding', build_taxon_path('Wedding'), title: 'Wedding'
+                        li.mega-menu-list--item
+                          = link_to 'Birthday', build_taxon_path('Birthday'), title: 'Birthday'
+                        li.mega-menu-list--item
+                          = link_to 'Special Event', build_taxon_path('Special Event'), title: 'Special Event'
+                        li.mega-menu-list--item
+                          = link_to 'Ball Gowns', build_taxon_path('Ball Gowns'), title: 'Ball Gowns'
+                        li.mega-menu-list--item
+                          = link_to 'Bridesmaid', bridesmaid_collection_path, title: 'Bridesmaid'
+                        li.mega-menu-list--item
                           = link_to 'Graduation', build_taxon_path('Graduation'), title: 'Graduation'
                         li.mega-menu-list--item
                           = link_to 'Prom', build_taxon_path('Prom'), title: 'Prom'
                         li.mega-menu-list--item
-                          = link_to 'Wedding', build_taxon_path('Wedding'), title: 'Wedding'
-                        li.mega-menu-list--item
-                          = link_to 'Bridesmaid', bridesmaid_lp_path, title: 'Bridesmaid'
-                        li.mega-menu-list--item
-                          = link_to 'Formal', build_taxon_path('Formal'), title: 'Formal'
-                        li.mega-menu-list--item
                           = link_to 'Homecoming', build_taxon_path('Homecoming'), title: 'Homecoming'
-                        li.mega-menu-list--item
-                          = link_to 'Ball Gowns', build_taxon_path('Ball Gowns'), title: 'Ball Gowns'
                         li.mega-menu-list--item
                           = link_to 'Sweet 16', build_taxon_path('Sweet 16'), title: 'Sweet 16'
                         li.mega-menu-list--item
-                          = link_to 'Birthday', build_taxon_path('Birthday'), title: 'Birthday'
-                        li.mega-menu-list--item
                           = link_to 'Debutante', build_taxon_path('Debutante'), title: 'Debutante'
-                        li.mega-menu-list--item
-                          = link_to 'Special Event', build_taxon_path('Special Event'), title: 'Special Event'
 
                     .col-md-3.col-lg-2
                       h4.link-header Style
@@ -169,34 +167,34 @@ ruby:
               .stories.container-fluid.center
 
                 .col-md-2
-                  = link_to here_comes_the_sun_collection_path do
+                  = link_to bohemian_summer_collection_path do
                     .image-container
-                       = image_tag src='edits/here-comes-the-sun/nav.jpg', :class => 'img-responsive', :alt => 'Here Comes the Sun'
-                    p.text-center.edit-title Here Comes The Sun
+                       = image_tag src="//#{configatron.asset_host}/lookbook/bohemian-summer/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
+                    p.text-center.edit-title Bohemian Summer
 
                 .col-md-2
                   = link_to bridesmaid_collection_path do
                     .image-container.bridesmaids
-                      = image_tag src='edits/bridesmaids/nav.jpg', :class => 'img-responsive', :alt => 'Our Beautiful Bridesmaids Collection'
+                      = image_tag src="//#{configatron.asset_host}/lookbook/bridesmaids/nav.jpg", :class => 'img-responsive', :alt => 'Our Beautiful Bridesmaids Collection'
                     p.text-center.edit-title Besties and Bridesmaids Collection
 
                 .col-md-2
                   = link_to all_size_collection_path do
                     .image-container
-                      = image_tag src='edits/all-size/nav.jpg', :class => 'img-responsive', :alt => 'All Sizes'
+                      = image_tag src="//#{configatron.asset_host}/lookbook/all-size/nav.jpg", :class => 'img-responsive', :alt => 'All Sizes'
                     p.text-center.edit-title I'll Have What She's Having
+
+                .col-md-2
+                  = link_to here_comes_the_sun_collection_path do
+                    .image-container
+                       = image_tag src="//#{configatron.asset_host}/lookbook/here-comes-the-sun/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
+                    p.text-center.edit-title Here Comes The Sun
 
                 .col-md-2
                   = link_to prom_collection_path do
                     .image-container.real-prom
-                      = image_tag src='edits/real_prom/1-edits-nav.jpg', :class => 'img-responsive', :alt => 'Our Official Prom Collection'
+                      = image_tag src="//#{configatron.asset_host}/lookbook/prom/nav.jpg", :class => 'img-responsive', :alt => 'Our Official Prom Collection'
                     p.text-center.edit-title Our Official Prom Collection
-
-                .col-md-2
-                  = link_to break_hearts_collection_path do
-                    .image-container
-                      = image_tag src='edits/BREAK-HEARTS/1_141119_F&P_NYE-edits-nav.jpg', :class => 'img-responsive', :alt => 'Break Hearts not Bank Accounts'
-                    p.text-center.edit-title Break Hearts not Bank Accounts
 
           li.menu-item
             = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
@@ -236,3 +234,5 @@ ruby:
               span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
               span.hidden-sm.hidden-xs.hidden-xxs cart:
               span#cart-item-count 0
+
+= render 'layouts/redesign/campaigns/auto_apply_promo_code'

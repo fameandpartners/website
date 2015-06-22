@@ -52,8 +52,6 @@ class CampaignMonitor
 
     subscriber.update(user.email, user.full_name, formatted_custom_fields, false)
   rescue => exception
-    user.synchronize_with_campaign_monitor!
-
-    CampaignMonitor.delay.set_purchase_date(user, purchase_date)
+    CreateSend::Subscriber.add(list_id, user.email, user.full_name, formatted_custom_fields, false)
   end
 end

@@ -12,6 +12,7 @@ class CartItem
     OpenStruct.new(
       id: line_item.id,
       name: product.name,
+      sku: product.sku,
       variant_id: variant.id,
       description: line_item_description,
       image: line_item_image,
@@ -32,7 +33,7 @@ class CartItem
   end
 
   private
-    
+
     def product_type
       return 'service' if product.service?
       customized_product? ? 'customized' : 'default'
@@ -79,7 +80,7 @@ class CartItem
         image ||= product_images.find{|image| image.color_id == line_item_color.id }
       end
       image ||= product_images.first
-    end 
+    end
 
     def line_item_description
       description = product.description
@@ -87,7 +88,7 @@ class CartItem
         description
       else
         I18n.t(:product_has_no_description)
-      end 
+      end
     end
 
     def product_customizations
