@@ -11,7 +11,7 @@
       <a href="#" class="btn btn-black" data-action='show-more-collection-products'>More Dresses<a>
     </div>
     <div class="status.loading" style="display: none;">
-      <img src="/assets/fame-spinner-e3f5a2f470dd9ff6b266192c8ace03e7.gif" alt="Fame-spinner">
+      <img src="/assets/fame-spinner.gif" alt="Fame-spinner">
     </div>
     <div class="status.inactive" style="display: none;">
     </div>
