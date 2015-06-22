@@ -1,6 +1,18 @@
 require 'spec_helper'
 
 describe Spree::Taxon, :type => :model do
+  describe 'scopes' do
+    describe '.published' do
+      let!(:unpublished_taxon) { create(:taxon, published_at: 2.days.from_now) }
+      let!(:published_taxon)   { create(:taxon, published_at: 1.day.ago) }
+
+      it 'returns published taxons' do
+        result = described_class.published
+        expect(result).to match([published_taxon])
+      end
+    end
+  end
+
   describe '#seo_title' do
     context 'meta_title is blank' do
       let(:taxon) { create(:taxon, name: 'My Taxon Name', meta_title: '') }

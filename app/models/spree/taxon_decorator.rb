@@ -4,6 +4,8 @@ Spree::Taxon.class_eval do
     class_name: 'Spree::TaxonBanner',
     foreign_key: :spree_taxon_id
 
+  scope :published, -> { where('published_at <= ?', Time.zone.now) }
+
   accepts_nested_attributes_for :banner
 
   def seo_title
