@@ -6,9 +6,11 @@
 .register-for-session
   .top-arrow
   h1
-    | Wedding styling
+    | REGISTER FOR A FREE SESSION
     br
-    span consultation form
+    | WITH A PROFESSIONAL STYLIST
+    br
+    span style="font-size:0.6666666em" (Plus $20 to spend on your dress)
   .bottom-arrow
 
 .page-content.contact.style-session
@@ -50,8 +52,8 @@
             = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
         .row
           .col-md-12.form-group
-            label Tell us a bit about the wedding
-            = f.text_area :info, class: 'form-control form-control-md', placeholder: "What is your relationship with the bride and groom? Is there a wedding theme or dress code? Have you got an idea of what you want your dress to look like? Where is the wedding happening? Etc."
+            label Your Wedding Vibe
+            = f.select :info, options_for_select(["Relaxed Bohemian", "Classic", "Formal", "Country", "City Chic", "Vintage", "Opulent"]), {}, :class => 'form-control form-control-md selectbox'
         .row
           .col-md-12.form-group
             label timezone
@@ -69,4 +71,3 @@ coffee:
 
     $('#wedding_consultation_info').on 'blur', ->
       $(this).attr('placeholder', placeholder)
-
