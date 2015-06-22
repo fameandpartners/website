@@ -77,7 +77,9 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         @registerBcfCampaign(@opts.email)
       else
         # show default system
-        if @opts.promocode && @opts.uuid != 'auto_apply_promo'
+        if @opts.promocode && @opts.uuid == 'auto_apply_promo'
+          message = "Thanks babe. Your discount will be applied to your cart. Have fun x."
+        else if @opts.promocode #&& @opts.uuid != 'auto_apply_promo'
           message = "Use this promocode for your next killer dress: #{@opts.promocode}."
         else
           message = "Thanks for joining!"
