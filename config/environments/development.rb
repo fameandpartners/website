@@ -53,7 +53,6 @@ FameAndPartners::Application.configure do
   end
 
   # enable sourcemaps for easier css debugging in chrome
-  config.assets.debug = true
   config.sass.debug_info = true
   config.sass.line_comments = false # source maps don't get output if this is true
 

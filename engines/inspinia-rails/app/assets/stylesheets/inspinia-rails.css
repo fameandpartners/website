@@ -12,6 +12,7 @@
  * require font-awesome
  * Replaced with inline
  * // = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
+ *= require bootstrap.css
  *= require animate/animate.css
  *= require style
  */
