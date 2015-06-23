@@ -10,6 +10,12 @@ Spree::Taxon.class_eval do
 
   accepts_nested_attributes_for :banner
 
+  class << self
+    def find_child_taxons_by_permalink(permalink)
+      where('permalink LIKE ?', "%/#{permalink}").first
+    end
+  end
+
   def seo_title
     return meta_title if !meta_title.blank?
     banner.nil? ? name : banner.title

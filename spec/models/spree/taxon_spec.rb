@@ -13,6 +13,23 @@ describe Spree::Taxon, :type => :model do
     end
   end
 
+  describe '.find_child_taxons_by_permalink' do
+    describe 'given a permalink string' do
+      let!(:parent) { create(:taxon, name: 'Parent') }
+      let!(:child)  { create(:taxon, parent_id: parent.id, name: 'Child') }
+
+      it 'finds taxons with parents' do
+        result = described_class.find_child_taxons_by_permalink('child')
+        expect(result).to eq(child)
+      end
+
+      it 'does not find root taxons' do
+        result = described_class.find_child_taxons_by_permalink('parent')
+        expect(result).to be_nil
+      end
+    end
+  end
+
   describe '#seo_title' do
     context 'meta_title is blank' do
       let(:taxon) { create(:taxon, name: 'My Taxon Name', meta_title: '') }
