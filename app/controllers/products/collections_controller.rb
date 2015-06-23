@@ -126,9 +126,8 @@ class Products::CollectionsController < Products::BaseController
         return { color_group: color_group.name }
       end
 
-      if taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
-        # style, edits, events, range, seocollection
-        case taxonomy = taxon.taxonomy.downcase
+      if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink)
+        case taxonomy = taxon.taxonomy.name.downcase
         when 'style', 'edits', 'event'
           return { taxonomy.to_sym => permalink }
         when 'range'
@@ -136,8 +135,7 @@ class Products::CollectionsController < Products::BaseController
         end
       end
 
-      # default
+      # Didn't find any collection associated with the permalink
       return nil
-
     end
 end
