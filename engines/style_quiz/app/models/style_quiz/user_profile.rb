@@ -16,9 +16,13 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
     self.token
   end
 
+  def answer_ids
+    @answer_ids ||= ( (self.answers || {})['ids'] || [] )
+  end
+
   def selected?(answer)
     return false if answer.blank?
-    self.answers['ids'].include?(answer.id.to_s)
+    answer_ids.include?(answer.id.to_s)
   end
 
   def update_answers(answers_ids:, answers_values:, events:)

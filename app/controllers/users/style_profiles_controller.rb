@@ -2,6 +2,10 @@ class Users::StyleProfilesController < Users::BaseController
   def show
     @style_profile = current_spree_user.style_profile
 
+    if @style_profile.blank?
+      redirect_to style_quiz_path  and return
+    end
+
     @products = load_products
 
     @title = 'My Style Profile'
