@@ -11,9 +11,12 @@
       h2 ABOUT US
       h3 Do you have any store locations?
       p
-        | We are an online fashion boutique which means you can shop with us 24/7 from all over the world. To check if we currently offer shipping to your country please email team@fameandpartners.com
+        ' We are an online fashion boutique which means you can shop with us 24/7 from all over the world. To check if we currently offer shipping to your country please
+        = link_to 'Contact Us', new_contact_path
         br
-        |We are currently looking at cities to do pop up stores in, if you would like to see us have one at a location near you, email team@fameandpartners.com with your suggestion.
+        ' We are currently looking at cities to do pop up stores in, if you would like to see us have one at a location near you,
+        => link_to 'Contact Us', new_contact_path
+        ' with your suggestion.
 
       h2 ORDERS
 
@@ -29,7 +32,10 @@
       p Login to your account and select the My Orders tab. Here you will be able to see if your dress has been shipped yet. The two statuses are not yet shipped or a tracking number. The tracking number will link through to our local courier service so you will be able to login to their portal and track where you order is.
 
       h3 Can I cancel my order?
-      p If you would like to cancel your order, please email team@fameandpartners.com immediately with your cancellation request and order number.
+      p
+        ' If you would like to cancel your order, please
+        => link_to 'Contact Us', new_contact_path
+        ' immediately with your cancellation request and order number.
       p If your dress is customised we cannot accept cancellations after 24 hours of purchasing. This is because your dress is already in production. If you wish to cancel your order outside of 24 hours, we can offer you a 50% refund and a 50% credit note with Fame & Partners. This is because the fabric has already been purchased and production started on your custom dress and in most cases we can not resell your dress at retail price.
 
       h2 Shipping & Deliveries
@@ -38,8 +44,10 @@
 
       p Shipping times vary depending on the complexity of any customisations you might order. All of our dresses are made on demand and making will commence the day your order is received. Our make time varies depending on customisations; between 4 - 8 business days which means you will receive your dress in up to 10 business days. We recommend allowing 2 weeks from the date of your purchase to ensure you have enough time for your dress to arrive for your special event.
 
-      p You can now select our express making option for an additional cost of $29. This option guarantees you that your dress will arrive with you within 2-5 business days. If you want to know the exact date for your dress to arrive, please contact our Customer Service via #{ mail_to('team@fameandpartners.com')}.
-            
+      p
+        ' You can now select our express making option for an additional cost of $29. This option guarantees you that your dress will arrive with you within 2-5 business days. If you want to know the exact date for your dress to arrive, please contact our Customer Service via our
+        = link_to 'Contact Form', new_contact_path
+
       p Please note: Orders are not shipped on the weekends or holidays.
 
       h3 How long will it take for my order to arrive?
@@ -59,7 +67,10 @@
 
         li We only accept returns or exchanges up to 30 days from the original date of shipment. Any item to be returned or exchanged must be in new, unused and resalable condition, with the DO NOT REMOVE tag still attached in the same place as originally sent. We photograph every product as part of our QA process so we know where the DO NOT REMOVE tag was attached. Any exchange or return should be sent back in the original, undamaged packaging, plus any accessories or extras that may have been included with the shipment. For full priced garments, we do not charge a restocking fee unless they are customised. For any discounted items, including but not limited to sale items and items purchased with a discount code we charge a $14.95 restocking fee, when returned for a refund. Items exchanged for another item or returned for a credit are not charged a restocking fee.
 
-        li If you purchase multiple sizes in one style/colour we will only accept an exchange for the returning sizes. We do not offer refunds if you are returning for this reason. If you are confused about your size, simply contact our friendly customer service team at team@fameandpartners.com to assist you in working out best fit for you.
+        li
+          ' If you purchase multiple sizes in one style/colour we will only accept an exchange for the returning sizes. We do not offer refunds if you are returning for this reason. If you are confused about your size, simply contact our friendly customer service team via our
+          => link_to 'Contact Form', new_contact_path
+          ' to assist you in working out best fit for you.
 
         li If your purchase includes more than 1 style in the same size, we can only offer a full refund for 1 style; if you would like to return more from this order, we can offer an exchange or credit if you meet all other returns criteria.
 
