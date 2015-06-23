@@ -30,7 +30,7 @@
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
   attr_reader :page
-  helper_method :page, :cache_key
+  helper_method :page
 
   before_filter :load_page, :set_collection_resource, :set_collection_seo_meta_data
 
@@ -46,11 +46,6 @@ class Products::CollectionsController < Products::BaseController
         render json: @collection.serialize
       end
     end
-  end
-
-
-  def cache_key
-    @resource_args.hash
   end
 
   private
@@ -108,7 +103,7 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def cache_read_resource(resource_args)
-      Rails.cache.fetch("/collections/#{cache_key}", expires_in: configatron.cache.expire.long) do
+      Rails.cache.fetch("/collections/#{resource_args.hash}", expires_in: configatron.cache.expire.long) do
         Products::CollectionResource.new(resource_args).read
       end
     end
@@ -145,5 +140,4 @@ class Products::CollectionsController < Products::BaseController
       return nil
 
     end
-
 end
