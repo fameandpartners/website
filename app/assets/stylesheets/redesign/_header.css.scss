@@ -30,7 +30,7 @@
   background-color: #fff;
   padding-top: 15px;
   padding-bottom: 15px;
-  border-bottom:3px solid $gray-light-bg; 
+  border-bottom:3px solid $gray-light-bg;
 }
 
 .link-header {
@@ -62,10 +62,13 @@
   position: absolute;
   left: 17px;
   top: 130px;
-  height: 270px;
-  width: (100% / 3);
+  width: (100% / 4);
   display: block;
   color: #fff;
+
+  img {
+    max-width: 377px;
+  }
 }
 
 .stories {
