@@ -34,7 +34,7 @@ Spree::User.class_eval do
   after_create :send_welcome_email, unless: Proc.new { |a| a.skip_welcome_email }
 
   after_create {|user| Marketing::Subscriber.new(user: user).create if user.newsletter? }
-  after_update {|user| Marketing::Subscriber.new(user: user).update }
+  after_update {|user| Marketing::Subscriber.new(user: user).update if user.newsletter? }
 
   def update_profile(args = {})
     if args[:password].blank?
