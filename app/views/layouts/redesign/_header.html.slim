@@ -86,8 +86,9 @@ ruby:
                     /     span.fit-guarantee.menu-icon
                     /     | Fit Guarantee
               .mega-menu--secondary
-                = link_to dresses_path, class: 'mega-menu-banner' do
-                  = image_tag 'mega-menu/sale.jpg', alt: '15% Off New Season Sale', class: 'img-responsive'
+                - if false
+                  = link_to dresses_path, class: 'mega-menu-banner' do
+                    = image_tag 'mega-menu/sale.jpg', alt: '15% Off New Season Sale', class: 'img-responsive'
 
                 .container-fluid.max-width-100
                   .row
