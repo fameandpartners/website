@@ -13,14 +13,6 @@
     </h2>
   </div>
 </div>
-<% if @country_code == 'GB': %>
-  <div>
-    <div class='cart-promo-message'>
-      <span class='flag-uk'></span>
-      Free shipping and returns to the U.K.
-    </div>
-  </div>
-<% end %>
 <ul class="cart-items">
   <% for product in @cart.products: %>
     <li class="cart-item" data-id="<%= product.line_item_id %>">

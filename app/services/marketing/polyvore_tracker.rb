@@ -35,7 +35,7 @@ class Marketing::PolyvoreTracker
   end
 
   def url
-    "http://www.polyvore.com/conversion/beacon.gif?adv=#{retailer_host_name}&amt=#{subtotal}&oid=#{order_id}&skus=#{skus}&cur=#{currency}"
+    "//www.polyvore.com/conversion/beacon.gif?adv=#{retailer_host_name}&amt=#{subtotal}&oid=#{order_id}&skus=#{skus}&cur=#{currency}"
   end
 
 end
