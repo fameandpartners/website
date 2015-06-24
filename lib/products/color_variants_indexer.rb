@@ -8,6 +8,7 @@ module Products
     extend ColorVariantImageDetector
 
     def self.index!
+      logger = Logger.new($stdout)
       helpers = Helpers.new
       au_site_version = SiteVersion.find_by_permalink('au')
       us_site_version = SiteVersion.find_by_permalink('us')
@@ -17,7 +18,8 @@ module Products
       index.delete
       index.create
 
-      Spree::Product.all.each do |product|
+      Spree::Product.find_each do |product|
+        logger.info("PRODUCT #{product.name}")
         color_ids = product.variants.active.map do |variant|
           variant.option_values.colors.map(&:id)
         end.flatten.uniq
@@ -30,6 +32,7 @@ module Products
 
           next unless color_ids.include?(color.id)
           next unless product_color_value.images.present?
+          logger.info("        INDEX Colour #{color.name}")
 
           index.store(
             id: color_variant_id,

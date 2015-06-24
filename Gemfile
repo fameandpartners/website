@@ -133,6 +133,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'thin'
+  gem 'sinatra', :require => nil
 end
 
 group :staging, :development do
