@@ -11,6 +11,20 @@ describe Spree::Taxon, :type => :model do
         expect(result).to match([published_taxon])
       end
     end
+
+    describe '.from_taxonomy' do
+      context 'given a taxonomy name' do
+        let!(:material_taxonomy) { create(:taxonomy, name: 'Clothes') }
+        let!(:material_taxon)    { material_taxonomy.root }
+        let!(:jeans_taxon)       { create(:taxon, taxonomy: material_taxonomy, name: 'Jeans') }
+        let!(:yoyo_taxon)        { create(:taxon, name: 'Yoyo') }
+
+        it 'it returns taxons from the taxonomy' do
+          result = described_class.from_taxonomy('Clothes')
+          expect(result).to match([jeans_taxon, material_taxon])
+        end
+      end
+    end
   end
 
   describe '.find_child_taxons_by_permalink' do
