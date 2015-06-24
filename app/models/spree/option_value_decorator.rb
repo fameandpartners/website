@@ -15,7 +15,9 @@ Spree::OptionValue.class_eval do
     mini: '48x48#', small: '100x100>', small_square: '100x100#', medium: '240x240>'
   }
 
-  scope :none, where(id: nil)
+  scope :none,    -> { where(id: nil) }
+  scope :colors,  -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.color.try(:id)) }
+  scope :sizes,   -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.size.try(:id)) }
 
   attr_accessible :image, :value, :use_in_customisation
   validates :value, format: /^#([0-9a-f]{3}|[0-9a-f]{6})$/i, allow_blank: true
@@ -34,23 +36,5 @@ Spree::OptionValue.class_eval do
   def discount
     return @discount if instance_variable_defined?('@discount')
     @discount = Repositories::Discount.read(self.class, self.id)
-  end
-
-  class << self
-    def colors
-      if (option_type = Spree::OptionType.color).present?
-        option_type.option_values
-      else
-        where(id: nil)
-      end
-    end
-
-    def sizes
-      if (option_type = Spree::OptionType.size).present?
-        option_type.option_values
-      else
-        where(id: nil)
-      end
-    end
   end
 end

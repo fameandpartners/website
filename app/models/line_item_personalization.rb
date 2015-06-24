@@ -17,8 +17,7 @@ class LineItemPersonalization < ActiveRecord::Base
                   :size_id,
                   :color_id
 
-  validates :size,  presence: true
-  validates :color, presence: true
+  validates :size, :color,  presence: true
 
   DEFAULT_CUSTOM_SIZE_PRICE   = BigDecimal.new('20.0')
   DEFAULT_CUSTOM_COLOR_PRICE  = BigDecimal.new('16.0')
@@ -103,11 +102,11 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def add_plus_size_cost?
-    if plus_size? == nil
-      if size && size.presentation.to_i >= locale_plus_sizes
-        return true
-      end
-    end
+    # dress without small sizes
+    return false if plus_size?
+
+    # extra size
+    size && size.presentation.to_i >= locale_plus_sizes
   end
 
   def locale_plus_sizes
@@ -117,7 +116,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def plus_size?
-    return true if !product.blank? && product.taxons.where(:name => "Plus Size").count > 0
+    product.present? && product.taxons.where(name: "Plus Size").exists?
   end
   # eo size pricing
 
