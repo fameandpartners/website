@@ -58,9 +58,9 @@ sitemap_options = {
 SitemapGenerator::Sitemap.create(sitemap_options) do
   # Records scopes
   active_products    = Spree::Product.active
-  events_taxons      = Repositories::Taxonomy.read_events
-  collections_taxons = Repositories::Taxonomy.read_collections
-  styles_taxons      = Repositories::Taxonomy.read_styles
+  events_taxons      = Spree::Taxon.published.from_event_taxonomy
+  collections_taxons = Spree::Taxon.published.from_range_taxonomy
+  styles_taxons      = Spree::Taxon.published.from_style_taxonomy
   colors_taxons      = Spree::OptionValuesGroup.for_colors.available_as_taxon
   statics_pages = [
     '/about', '/why-us', '/privacy',

@@ -41,7 +41,7 @@ class Products::CollectionsController < Products::BaseController
     @collection.use_auto_discount!(current_promotion.discount) if current_promotion
 
     respond_to do |format|
-      format.html { render_collection_template }
+      format.html { render collection_template }
       format.json do
         render json: @collection.serialize
       end
@@ -63,7 +63,7 @@ class Products::CollectionsController < Products::BaseController
 
     def set_collection_seo_meta_data
       # set title / meta description for the page
-      if page && page.get(:lookbook)
+      if page_is_lookbook?
         @title = "#{page.title} #{default_seo_title}"
         @description  = page.meta_description
       else
@@ -72,17 +72,21 @@ class Products::CollectionsController < Products::BaseController
       end
     end
 
-    def render_collection_template
-      if @collection_options
-        render page.template_path
+    def collection_template
+      if page_is_lookbook? || @collection_options
+        page.template_path
       else
-        render 'public/404', layout: false, status: :not_found
+        { file: 'public/404', layout: false, status: :not_found }
       end
     end
 
     def limit
       default = page.get(:lookbook) ? 99 : 20
       params[:limit] || default
+    end
+
+    def page_is_lookbook?
+      page && page.get(:lookbook)
     end
 
     def collection_resource(collection_options)
@@ -110,9 +114,8 @@ class Products::CollectionsController < Products::BaseController
         return { color_group: color_group.name }
       end
 
-      if taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
-        # style, edits, events, range, seocollection
-        case taxonomy = taxon.taxonomy.downcase
+      if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink)
+        case taxonomy = taxon.taxonomy.name.downcase
         when 'style', 'edits', 'event'
           return { taxonomy.to_sym => permalink }
         when 'range'
@@ -120,8 +123,7 @@ class Products::CollectionsController < Products::BaseController
         end
       end
 
-      # default
+      # Didn't find any collection associated with the permalink
       return nil
-
     end
 end
