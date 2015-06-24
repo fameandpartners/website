@@ -119,7 +119,7 @@ module Orders
         :order_number            => number,
         :line_item               => id,
         :total_items             => total_items,
-        :completed_at            => order.completed_at.to_date,
+        :completed_at            => order.completed_at.try(:to_date),
         :express_making          => fast_making? ? "TRUE" : '',
         :projected_delivery_date => projected_delivery_date,
         :tracking_number         => tracking_number,
