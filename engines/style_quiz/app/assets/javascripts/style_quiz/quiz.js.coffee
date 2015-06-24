@@ -68,10 +68,11 @@ window.StyleQuiz.Quiz = class Quiz
       dataType: 'json',
       data: { answers: @answers() }
     ).success((data, status, xhr) =>
-      if data.redirect_to
-        window.location = data.redirect_to
+      nextPage = data.redirect_to || '/style-quiz/products'
+      if window.parent
+        window.parent.location = nextPage
       else
-        window.location = '/style-quiz/products'
+        window.location = nextPage
       console.log('success', arguments)
     ).error(() =>
       console.log('error', arguments)

@@ -26,7 +26,7 @@ ruby:
         $('#style-quiz-trigger').on('click', function(e) {
           e.preventDefault();
           $iframe = $('<iframe />', {
-            src: urlWithSitePrefix('/style_quiz'),
+            src: urlWithSitePrefix('#{ style_quiz_path }'),
             frameBorder: '0',
             width: '1102px',
             height: '680px'
@@ -162,7 +162,7 @@ ruby:
 
           - if Features.active?(:style_quiz)
             li.menu-item
-              = link_to 'style quiz', '', class: 'menu-item--link', id: 'style-quiz-trigger'
+              = link_to 'style quiz', style_quiz_path, class: 'menu-item--link', id: 'style-quiz-trigger'
           li.shop.menu-item
             a.menu-item--link.active-hover href="#"
               | Lookbook
