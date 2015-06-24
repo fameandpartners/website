@@ -122,4 +122,25 @@ describe Marketing::Subscriber do
       subsriber.set_purchase_date(date)
     end
   end
+
+  context "#user_changed" do
+    it "true if changed valuable arguments" do
+      %w{email first_name last_name current_sign_in_ip last_sign_in_ip}.each do |attr_name|
+        user = Spree::User.new
+        user[attr_name] = 'andytextorvalue'
+        expect(
+          Marketing::Subscriber.new(user: user).send(:user_changed?)
+        ).to eq(true)
+      end
+    end
+
+    it "false for new record" do
+      expect(Marketing::Subscriber.new(user: Spree::User.new).send(:user_changed?)).to eq(false)
+    end
+
+    it "false for saved record" do
+      user = create(:spree_user)
+      expect(Marketing::Subscriber.new(user: create(:spree_user)).send(:user_changed?)).to eq(false)
+    end
+  end
 end
