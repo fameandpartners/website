@@ -57,7 +57,7 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def set_collection_resource
-      @collection_options = cache_parse_permalink(params[:permalink])
+      @collection_options = parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
     end
 
@@ -99,23 +99,7 @@ class Products::CollectionsController < Products::BaseController
         limit:          limit, # page size
         offset:         params[:offset] || 0
       }.merge(collection_options || {})
-      cache_read_resource(@resource_args)
-    end
-
-    def cache_read_resource(resource_args)
-      Rails.cache.fetch("/collections/#{resource_args.hash}", expires_in: configatron.cache.expire.long) do
-        Products::CollectionResource.new(resource_args).read
-      end
-    end
-
-    # we have route like /dresses/permalink
-    # where permalink can be
-    #   - taxon.permalink
-    #   - color_group.name
-    def cache_parse_permalink(permalink)
-      Rails.cache.fetch("/collections/permalink/#{permalink}", expires_in: configatron.cache.expire.long) do
-        parse_permalink(permalink)
-      end
+      Products::CollectionResource.new(@resource_args).read
     end
 
     def parse_permalink(permalink)
