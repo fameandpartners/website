@@ -73,6 +73,39 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
     user_styles.first
   end
 
+  def style_attributes
+    @style_attributes ||= begin
+      result = {}
+
+      question = StyleQuiz::Question.find_by_code('color-palette')
+      result[:hair_color] = {
+        question_id: question.id,
+        values:       question.answers.where(group: 'hair', id: answer_ids).map(&:value)
+      }
+      result[:eyes_color] = {
+        question_id: question.id,
+        values:      question.answers.where(group: 'eyes', id: answer_ids).map(&:value)
+      }
+
+      question = StyleQuiz::Question.find_by_code('color-dresses')
+      result[:dresses_color] = {
+        question_id: question.id,
+        values:      question.answers.where(id: answer_ids).map(&:name)
+      }
+
+      question = StyleQuiz::Question.find_by_code('body-size-shape')
+      result[:size] = {
+        question_id: question.id,
+        values:      question.answers.where(id: answer_ids, group: 'size').map(&:value)
+      }
+      result[:shape] = {
+        question_id: question.id,
+        values:      question.answers.where(id: answer_ids, group: 'shape').map(&:value)
+      }
+      result
+    end
+  end
+
   class << self
     def read(user:, token:)
       if token.present?

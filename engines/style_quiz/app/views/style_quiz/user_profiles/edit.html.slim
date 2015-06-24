@@ -2,11 +2,14 @@ css:
   .quiz-section { display: none; }
 
 ruby:
+  current = params[:current]
+  current ||= @questions.index{|q| q.id == params[:question_id].to_i} if params[:question_id]
+
   quiz_init_code = "
     var questions_data  = #{ raw @questions.to_json(root: false) };
     window.quiz = new StyleQuiz.Quiz({
       questions_data: questions_data,
-      current: #{ params[:current].to_i },
+      current: #{ current.to_i },
       action: '#{ style_quiz.user_profile_path }'
     })
   "
