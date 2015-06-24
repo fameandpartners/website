@@ -518,8 +518,8 @@ FameAndPartners::Application.routes.draw do
   if Rails.env.development?
     mount MailPreview => 'mail_view'
 
-    #require 'sidekiq/web'
-    #mount Sidekiq::Web => '/sidekiq'
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   if Features.active?(:content_revolution)
