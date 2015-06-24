@@ -1,17 +1,9 @@
 require 'spec_helper'
 
 describe Spree::Taxon, :type => :model do
+  it_behaves_like 'publishable class', :taxon
+
   describe 'scopes' do
-    describe '.published' do
-      let!(:unpublished_taxon) { create(:taxon, published_at: 2.days.from_now) }
-      let!(:published_taxon)   { create(:taxon, published_at: 1.day.ago) }
-
-      it 'returns published taxons' do
-        result = described_class.published
-        expect(result).to match([published_taxon])
-      end
-    end
-
     describe '.from_taxonomy' do
       context 'given a taxonomy name' do
         let!(:material_taxonomy) { create(:taxonomy, name: 'Clothes') }

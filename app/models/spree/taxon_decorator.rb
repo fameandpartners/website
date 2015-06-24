@@ -1,12 +1,10 @@
 Spree::Taxon.class_eval do
-  attr_accessible :published_at
+  include Concerns::Publishable
 
   has_one :banner,
     dependent: :destroy,
     class_name: 'Spree::TaxonBanner',
     foreign_key: :spree_taxon_id
-
-  scope :published, -> { where('published_at <= ?', Time.zone.now) }
 
   accepts_nested_attributes_for :banner
 
