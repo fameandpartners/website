@@ -21,6 +21,7 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
     @$container.hide()
 
   show: () ->
+    $('html, body').animate({ scrollTop: 0 }, 'fast')
     @$container.show()
 
   isValid: () ->

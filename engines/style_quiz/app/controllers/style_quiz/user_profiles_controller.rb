@@ -13,8 +13,11 @@ module StyleQuiz
         events:       (params[:answers][:events] || {}).values,
         answers_values: params[:answers].except(:ids, :events)
       )
+
       if current_spree_user.blank?
-        session[:user_style_profile_token] = user_style_profile.token
+        unless create_user_automagically(user_style_profile)
+          session[:user_style_profile_token] = user_style_profile.token
+        end
       end
 
       respond_to do |format|
@@ -34,10 +37,33 @@ module StyleQuiz
     private
 
       def user_style_profile 
-        StyleQuiz::UserProfile.read(
+        @user_style_profile ||= StyleQuiz::UserProfile.read(
           user: current_spree_user,
           token: session[:user_style_profile_token]
         )
+      end
+
+      def create_user_automagically(style_profile)
+        return false
+
+        user_attributes = style_profile.answers
+
+        first_name, last_name = user_attributes[:fullname].split(' ', 2)
+        user = Spree::User.new(
+          first_name: first_name,
+          last_name: last_name,
+          email: user_attributes[:email],
+          birthday: (Date.parse(user_attributes[:birthday]) rescue nil)
+        )
+
+        if user
+          #sign_in :spree_user, authentication.user
+          user_style_profile.assign_to_user(user)
+        end
+
+        true
+      #rescue
+      #  return false
       end
   end
 end

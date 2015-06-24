@@ -10,7 +10,7 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
   after_create :generate_token
 
   def generate_token
-    if self.token.blank?
+    if self.token.blank? && self.user.blank?
       update_column(:token, SecureRandom.hex(32))
     end
     self.token
@@ -55,8 +55,9 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
   end
 
   def assign_to_user(user)
-    if user.present? && profile.user_id != user.id
-      profile.update_column(:user_id, user.id)
+    if user.present? && self.user_id != user.id
+      self.update_column(:user_id, user.id)
+      self.update_column(:token, nil)
     end
   end
 

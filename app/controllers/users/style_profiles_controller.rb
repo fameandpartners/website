@@ -17,7 +17,7 @@ class Users::StyleProfilesController < Users::BaseController
   end
 
   private
-    
+
     def load_products
       StyleQuiz::ProductsRecommendations.new(
         style_profile: @style_profile

@@ -19,6 +19,7 @@ class StyleQuiz::ProductsRecommendations
   end
 
   def product_ids(limit: 8)
+    return Spree::Product.active.limit(limit).map(&:id)
     product_ids_query(limit: limit).results.results.map(&:id)
   rescue Tire::Search::SearchRequestFailed
     return []
