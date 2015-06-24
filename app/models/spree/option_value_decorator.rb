@@ -39,7 +39,15 @@ Spree::OptionValue.class_eval do
   class << self
     def colors
       if (option_type = Spree::OptionType.color).present?
-        where(option_type_id: option_type.id)
+        option_type.option_values
+      else
+        where(id: nil)
+      end
+    end
+
+    def sizes
+      if (option_type = Spree::OptionType.size).present?
+        option_type.option_values
       else
         where(id: nil)
       end
