@@ -73,19 +73,22 @@ ruby:
                   .row
                     .col-md-3.all-dresses
                       = button_to 'View all dresses', dresses_path, class: 'btn btn-black', method: :get
-                    .col-md-3
-                      p.button-grey-text.menu-main-promotions
-                        span.packing-box.menu-icon
-                        | Free Shipping
-                    .col-md-3
-                      p.button-grey-text.menu-main-promotions
-                        span.arrows.menu-icon
-                        | Free Returns
-                    .col-md-3
-                      p.button-grey-text.menu-main-promotions
-                        span.fit-guarantee.menu-icon
-                        | Fit Guarantee
+                    / .col-md-3
+                    /   p.button-grey-text.menu-main-promotions
+                    /     span.packing-box.menu-icon
+                    /     | Free Shipping
+                    / .col-md-3
+                    /   p.button-grey-text.menu-main-promotions
+                    /     span.arrows.menu-icon
+                    /     | Free Returns
+                    / .col-md-3
+                    /   p.button-grey-text.menu-main-promotions
+                    /     span.fit-guarantee.menu-icon
+                    /     | Fit Guarantee
               .mega-menu--secondary
+                = link_to dresses_path, class: 'mega-menu-banner' do
+                  = image_tag 'mega-menu/sale.jpg', alt: '15% Off New Season Sale', class: 'img-responsive'
+
                 .container-fluid.max-width-100
                   .row
                     .col-md-3.col-lg-2.col-md-offset-4
@@ -236,3 +239,5 @@ ruby:
               span#cart-item-count 0
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
+
+= render 'layouts/redesign/notices'
