@@ -130,7 +130,7 @@ Spree::Order.class_eval do
   end
 
   def promotions
-    self.adjustments.promotion.map do |credit|
+    self.adjustments.promotion.eligible.map do |credit|
       credit.originator.promotion
     end
   end
