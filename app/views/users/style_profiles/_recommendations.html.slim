@@ -16,9 +16,8 @@ ruby:
   p = @style_profile.primary_user_style.description
 
   - if @products.any?
-    .container.relative
-      - @products.each_slice(4).each do |products_row|
-        .row.relative
+    .style-recommendations-container
+      .row.row-inline.text-left
+        - @products.each_slice(4).each do |products_row|
           - products_row.each do |product|
             = render 'products/collections/product', product: product
-          .clearfix.visible-sm-block.visible-xs-block

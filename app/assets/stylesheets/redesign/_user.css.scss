@@ -231,6 +231,16 @@
 // @end Style attributes
 // -----------------
 
+// Style Recommendations Container
+.style-recommendations-container {
+  .col-md-3 {
+    @extend .col-inline;
+    @media (min-width: 992px) { width: (100% / 3);} // @extend .col-md-4
+  }
+} 
+// @end Style Recommendations Container
+// -----------------
+
 .ordered-item-image {
   width: 120px;
   margin: auto;
