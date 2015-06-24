@@ -37,10 +37,6 @@ class Spree::Sale < ActiveRecord::Base
 
   has_many :discounts
 
-  after_save do
-    ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).clear
-  end
-
   DISCOUNT_TYPES.each do |id, name|
     define_method "#{name.downcase}?" do
       self.discount_type.eql?(id)

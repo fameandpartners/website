@@ -1,10 +1,34 @@
 Spree::Taxon.class_eval do
+  include Concerns::Publishable
+
   has_one :banner,
     dependent: :destroy,
     class_name: 'Spree::TaxonBanner',
     foreign_key: :spree_taxon_id
 
   accepts_nested_attributes_for :banner
+
+  class << self
+    def find_child_taxons_by_permalink(permalink)
+      where('permalink LIKE ?', "%/#{permalink}").first
+    end
+
+    def from_taxonomy(taxonomy_name)
+      includes(:taxonomy).where(spree_taxonomies: { name: taxonomy_name })
+    end
+
+    def from_event_taxonomy
+      from_taxonomy('Event')
+    end
+
+    def from_range_taxonomy
+      from_taxonomy('Range')
+    end
+
+    def from_style_taxonomy
+      from_taxonomy('Style')
+    end
+  end
 
   def seo_title
     return meta_title if !meta_title.blank?

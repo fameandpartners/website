@@ -7,12 +7,16 @@ module Shipping
     end
 
     def create_shipments!
-      units_by_factory.collect do |_factory, units|
-        create_shipment! units
+      if order.inventory_units.empty?
+        [create_shipment!]
+      else
+        units_by_factory.collect do |_factory, units|
+          create_shipment! units
+        end
       end
     end
 
-    def create_shipment!(units)
+    def create_shipment!(units = [])
       ::Spree::Shipment.create!(
         {
           order:           order,

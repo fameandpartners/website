@@ -10,13 +10,8 @@ configatron.aws.enabled = false
 configatron.aws.bucket = ""
 configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
-# configatron.aws.host = "d1sd72h9dq237j.cloudfront.net"  # bucket: fameandpartners
 configatron.aws.host = "images.fameandpartners.com"       # bucket: fameandpartners
 configatron.asset_host = "assets.fameandpartners.com"
-# configatron.aws.host = "daoiay428tmxk.cloudfront.net"   # bucket: products-fameandpartners
-# configatron.aws.host = "images.fameandpartners.com"
-# configatron.aws.host = "product-images.fameandpartners.com"
-# configatron.aws.host = "demk2115tqgou.cloudfront.net" #bucket: fameandpartners-backup
 
 configatron.typekit_id = 'kur6crm'
 

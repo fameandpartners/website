@@ -8,7 +8,7 @@
 
   .btn{
     font-family: $font-family-secondary;
-    width: 100%;
+    width: 377px;
     padding-left: 0;
     padding-right: 0;
   }
@@ -30,6 +30,7 @@
   background-color: #fff;
   padding-top: 15px;
   padding-bottom: 15px;
+  border-bottom:3px solid $gray-light-bg;
 }
 
 .link-header {
@@ -61,10 +62,13 @@
   position: absolute;
   left: 17px;
   top: 130px;
-  height: 270px;
   width: (100% / 3);
   display: block;
   color: #fff;
+
+  img {
+    width: 377px;
+  }
 }
 
 .stories {

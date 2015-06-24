@@ -1,8 +1,7 @@
-- if sale_active?
-  .alert.alert-info.alert-fixed-top role="alert" 
-    .container-fluid
-      span.close.text-white data-dismiss="alert" type="button" 
-        = image_tag 'images/close-white.svg'
-        / strong UP TO 80% OFF
-        / | - Flash Sale. 4 days only -
-        / = link_to 'Shop now!','#', class: 'text-highlight'
+#sale-banner.alert-sale.alert-relative role="alert" style="text-transform:uppercase;font-size:1.333333em;text-align:center;background-color:#E02D91"
+  span.medium.banner-title
+    .center-block
+      span style="margin-right:15px;color:white;" 15% OFF SITE WIDE.
+      span style="margin-right:15px;color:white;" LIMITED TIME ONLY.
+    .center-block
+      span = link_to 'Shop now!', dresses_path, class: 'text-highlight',  style: 'color:white;text-decoration:underline'

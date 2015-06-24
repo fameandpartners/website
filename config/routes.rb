@@ -509,11 +509,12 @@ FameAndPartners::Application.routes.draw do
     resources :site_versions, only: [:show]
   end
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/admin/3c75a382d04ca5d1bea40f573fba062a-sidekiq'
+
   if Rails.env.development?
     mount MailPreview => 'mail_view'
 
-    #require 'sidekiq/web'
-    #mount Sidekiq::Web => '/sidekiq'
   end
 
   if Features.active?(:content_revolution)
