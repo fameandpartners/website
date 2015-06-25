@@ -8,6 +8,7 @@
       <% if @product.sale_price: %>
         <span class="price-original"><%= @product.price %></span>
         <span class="price-sale"><%= @product.sale_price %></span>
+        <span class="price-discount">Save <%= @product.discount.table.amount %>%</span>
       <% else: %>
         <%= @product.price %>
       <% end %>
