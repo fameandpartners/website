@@ -24,20 +24,17 @@ module Orders
     describe '#shipment' do
       it 'exposes properties of @shipment' do
         item       = double 'item'
-        shipped    = double 'am_shipped?'
-        shipped_at = double 'shipped_at'
-        tracking   = double 'tracking'
         shipment   = double 'shipment',
                             :line_items => [item],
-                            :shipped?   => shipped,
-                            :shipped_at => shipped_at,
-                            :tracking   => tracking
+                            :shipped?   => 'am_shipped?',
+                            :shipped_at => 'shipped_yesterday',
+                            :tracking   => 'tracking_44'
         order      = double 'order', :shipments => [shipment]
         presenter  = described_class.new(item, order)
 
-        expect(presenter.shipped_at).to      eq shipped_at
-        expect(presenter.shipped?).to        eq shipped
-        expect(presenter.tracking_number).to eq tracking
+        expect(presenter.shipped_at).to      eq 'shipped_yesterday'
+        expect(presenter.shipped?).to        eq 'am_shipped?'
+        expect(presenter.tracking_number).to eq 'tracking_44'
       end
 
       context 'when missing' do
