@@ -1,5 +1,13 @@
 = menu_item root_path,            'Dashboard',          icon: 'dashboard',  exact: true
-= menu_item return_requests_path, 'Returns Management', icon: 'thumbs-down'
+
+li class="#{active_link_to_class(return_requests_path)} #{active_link_to_class(item_returns_path)}"
+  a href="#"
+    i.fa.fa-thumbs-down
+    span.nav-label Returns Management
+    span.fa.arrow
+  ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
+    = menu_item item_returns_path,    'Approvals', icon: 'thumbs-down'
+    = menu_item return_requests_path, 'Requests', icon: 'question'
 
 li class="#{active_link_to_class(reports_payments_path)} #{active_link_to_class(reports_sale_items_path)}"
   a href="#"
@@ -22,4 +30,3 @@ li class=active_link_to_class(caches_path)
 
 = menu_item spree.admin_path,   'Spree Admin', icon: 'shopping-cart'
 = menu_item main_app.root_path, 'Website',     icon: 'globe', exact: true
-= menu_item item_returns_path,  'Item Returns', icon: 'thumbs-down'
