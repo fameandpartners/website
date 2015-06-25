@@ -7,12 +7,8 @@ module Shipping
     end
 
     def create_shipments!
-      if order.inventory_units.empty?
-        [create_shipment!]
-      else
-        units_by_factory.collect do |_factory, units|
-          create_shipment! units
-        end
+      units_by_factory.collect do |_factory, units|
+        create_shipment! units
       end
     end
 
@@ -29,6 +25,8 @@ module Shipping
     end
 
     def units_by_factory
+      return { :unknown => [] } if order.inventory_units.empty?
+
       order.inventory_units.group_by do |i|
         begin
           i.variant.product.factory

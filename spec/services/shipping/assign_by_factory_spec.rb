@@ -14,5 +14,13 @@ module Shipping
 
       expect(assigner.units_by_factory).to eq(f1: [unit1], f2: [unit2], unknown: [unit3])
     end
+
+    it 'falls back to an empty set for new carts' do
+        order = double('order', inventory_units: [])
+
+        assigner = described_class.new(order)
+
+        expect(assigner.units_by_factory).to eq(unknown: [])
+    end
   end
 end
