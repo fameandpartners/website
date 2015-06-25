@@ -500,6 +500,50 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
 
+  create_table "item_return_events", :force => true do |t|
+    t.string   "item_return_uuid"
+    t.string   "event_type"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "occurred_at"
+  end
+
+  add_index "item_return_events", ["item_return_uuid"], :name => "index_item_return_events_on_item_return_uuid"
+
+  create_table "item_returns", :force => true do |t|
+    t.string   "order_number"
+    t.integer  "item_id"
+    t.integer  "qty"
+    t.string   "requested_action"
+    t.datetime "requested_at"
+    t.string   "reason_category"
+    t.string   "reason_sub_category"
+    t.text     "request_notes"
+    t.string   "contact_email"
+    t.text     "comments"
+    t.string   "product_name"
+    t.string   "product_style_number"
+    t.string   "product_colour"
+    t.string   "product_size"
+    t.boolean  "product_customisations"
+    t.date     "received_on"
+    t.string   "received_location"
+    t.string   "order_payment_method"
+    t.integer  "order_paid_amount"
+    t.string   "order_paid_currency"
+    t.string   "order_payment_ref"
+    t.string   "refund_status"
+    t.string   "refund_ref"
+    t.string   "refund_method"
+    t.integer  "refund_amount"
+    t.datetime "refunded_at"
+    t.string   "uuid"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  add_index "item_returns", ["uuid"], :name => "index_item_returns_on_uuid", :unique => true
+
   create_table "line_item_making_options", :force => true do |t|
     t.integer  "product_id"
     t.integer  "variant_id"
