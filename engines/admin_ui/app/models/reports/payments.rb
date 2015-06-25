@@ -33,6 +33,9 @@ module Reports
 
       def self.from_payment(payment)
         Types.const_get(payment.payment_method.type.demodulize, false).new(payment)
+      rescue NoMethodError
+        payment.payment_method = Spree::PaymentMethod.unscoped.find(payment.payment_method_id)
+        from_payment(payment)
       end
 
       def payment_date

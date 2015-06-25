@@ -1,5 +1,7 @@
 AdminUi::Engine.routes.draw do
   resources :return_requests
+  resources :item_returns
+
   resources :preferences, only: :index do
     collection do
       put 'update'
