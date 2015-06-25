@@ -175,7 +175,9 @@ ruby:
 
       - if @product.fabric
         h4 What's it made of
-        p= raw @product.fabric.gsub("\n", '<br/>')
+        p
+          = raw @product.fabric.gsub("\n", '<br/>')
+          br Product may have variations in dying hues so product may look slightly different from image
 
       p.sku sku: #{@product.sku}
 
