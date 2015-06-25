@@ -93,6 +93,9 @@ FameAndPartners::Application.routes.draw do
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
 
+    get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
+
+
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
     # get '/bridesmaid-dresses' => redirect('/lookbook/bridesmaids')
     # get '/lookbook/bridesmaids' => 'products/collections#show', :permalink => 'Bridesmaid14', :as => :bridesmaid_collection
