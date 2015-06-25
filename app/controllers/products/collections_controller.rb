@@ -48,6 +48,21 @@ class Products::CollectionsController < Products::BaseController
     end
   end
 
+  def cache_key
+    @resource_args.hash
+  end
+
+  def get_more_bridemaids_dresses
+    @more_dresses = get_products_from_edit('Bridesmaid14', nil, nil, 12, params[:page])
+    if @more_dresses.present?
+      respond_to do |format|
+        format.html { render :partial => '/landing_pages/products_four', :locals => { :products => @more_dresses } }
+      end
+    else
+      render nothing: true
+    end
+  end
+
   private
 
     def load_page

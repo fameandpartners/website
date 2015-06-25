@@ -9,7 +9,7 @@
 
   .page-content.products-collections.category
     .container.relative.products-collection
-      - all_products = get_products_from_edit('Bridesmaid14', nil, nil, 24)
+      - all_products = get_products_from_edit('Bridesmaid14', nil, nil, 12, 1)
 
       =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(0, 4) }
 
@@ -22,7 +22,7 @@
           = image_tag 'edits/bridesmaids/editorial-1.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
         .clearfix.visible-sm-block.visible-xs-block
 
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(5, 4) }
+      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(4, 4) }
 
       .row.relative.content-box
         .col-md-6.col-xs-12.col-xxs-12
@@ -33,10 +33,26 @@
           p Find your perfect dress for the modern bridesmaid, encapsulating the essence of timeless elegance and effortless beauty in soft hues from pink and white.
         .clearfix.visible-sm-block.visible-xs-block
 
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(9, 4) }
+      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(8, 4) }
 
-      - all_products.drop(12).each_slice(4) do |products|
-        =render :partial => '/landing_pages/products_four', :locals => { :products => products }
+      .row.relative.content-box#moreProducts
 
-      .row.relative.more-products
-        = link_to 'More Dresses', dresses_path, class: 'btn btn-black'
+coffee:
+  current_page = 1
+  $(window).scroll ->
+    $el = $("#moreProducts")
+    $window = $(window)
+    top = $window.scrollTop()
+    bottom = top + $window.height()
+    elTop = $el.offset().top - 120 #load a bit early
+    elBottom = elTop + $el.height();
+    if ((elBottom <= bottom) && (elTop >= top))
+      current_page = current_page + 1
+      $.ajax(
+        method: 'GET'
+        url: '/get_more_bridemaids_dresses'
+        data:
+          page: current_page
+        async: false)
+      .success (msg) ->
+        $("#moreProducts").append(msg)
