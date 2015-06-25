@@ -273,8 +273,6 @@ FameAndPartners::Application.routes.draw do
     mount Spree::Core::Engine, at: '/'
   end
 
-  mount AdminUi::Engine, at: '/fame_admin'
-
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
     resources :fabric_cards, :only => [:index, :show] do
@@ -405,6 +403,8 @@ FameAndPartners::Application.routes.draw do
   if Rails.env.development?
     mount MailPreview => 'mail_view'
   end
+
+  mount AdminUi::Engine, at: '/fame_admin'
 
   if Features.active?(:content_revolution)
     mount Revolution::Engine => "/"
