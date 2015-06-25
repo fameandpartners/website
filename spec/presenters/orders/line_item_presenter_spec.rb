@@ -24,15 +24,32 @@ module Orders
     describe '#shipment' do
       it 'exposes properties of @shipment' do
         item       = double 'item'
-        shipped    = double 'shipped?'
+        shipped    = double 'am_shipped?'
         shipped_at = double 'shipped_at'
-        shipment   = double 'shipment', :line_items => [item], :shipped? => shipped, :shipped_at => shipped_at
+        tracking   = double 'tracking'
+        shipment   = double 'shipment',
+                            :line_items => [item],
+                            :shipped?   => shipped,
+                            :shipped_at => shipped_at,
+                            :tracking   => tracking
         order      = double 'order', :shipments => [shipment]
-
         presenter  = described_class.new(item, order)
 
-        expect(presenter.shipped_at).to eq shipped_at
-        expect(presenter.shipped?).to   eq shipped
+        expect(presenter.shipped_at).to      eq shipped_at
+        expect(presenter.shipped?).to        eq shipped
+        expect(presenter.tracking_number).to eq tracking
+      end
+
+      context 'when missing' do
+        it 'provides safe null values' do
+          item       = double 'item'
+          order      = double 'order', :shipments => []
+          presenter  = described_class.new(item, order)
+
+          expect(presenter.shipped_at).to      be_nil
+          expect(presenter.shipped?).to        be_falsey
+          expect(presenter.tracking_number).to eq 'NoShipment'
+        end
       end
     end
 
