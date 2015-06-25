@@ -36,23 +36,29 @@
       =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(8, 4) }
 
       .row.relative.content-box#moreProducts
+      .row.relative.more-products
+        .status.loading style="display: none;"
+          = image_tag('fame-spinner.gif')
 
 coffee:
   current_page = 1
-  $(window).scroll ->
-    $el = $("#moreProducts")
-    $window = $(window)
-    top = $window.scrollTop()
-    bottom = top + $window.height()
-    elTop = $el.offset().top - 120 #load a bit early
-    elBottom = elTop + $el.height();
-    if ((elBottom <= bottom) && (elTop >= top))
-      current_page = current_page + 1
-      $.ajax(
-        method: 'GET'
-        url: '/get_more_bridemaids_dresses'
-        data:
-          page: current_page
-        async: false)
-      .success (msg) ->
-        $("#moreProducts").append(msg)
+  $(document).ready ->
+    $(window).scroll ->
+      $el = $("#moreProducts")
+      $window = $(window)
+      top = $window.scrollTop()
+      bottom = top + $window.height()
+      elTop = $el.offset().top - 120 #load a bit early
+      elBottom = elTop + $el.height();
+      if ((elBottom <= bottom) && (elTop >= top))
+        current_page = current_page + 1
+        $(".more-products .loading").first().css("display","block")
+        $.ajax(
+          method: 'GET'
+          url: '/get_more_bridemaids_dresses'
+          data:
+            page: current_page
+          async: false)
+        .success (msg) ->
+          $("#moreProducts").append(msg)
+          $(".more-products .loading").first().css("display","none")
