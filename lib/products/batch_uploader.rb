@@ -10,8 +10,8 @@ module Products
     include ActionView::Helpers::TextHelper # for truncate
 
     def initialize(available_on)
-      @@titles_row_numbers = [8, 10, 11, 12]
-      @@first_content_row_number = 13
+      @@titles_row_numbers = [1]
+      @@first_content_row_number = 2
       @available_on = available_on
     end
 
@@ -66,6 +66,7 @@ module Products
         # Properties
         raw[:style_notes]         = book.cell(row_num, columns[:style_notes])
         raw[:fit]                 = book.cell(row_num, columns[:fit])
+        raw[:size]                = book.cell(row_num, columns[:size])
         raw[:fabric]              = book.cell(row_num, columns[:fabric])
         raw[:product_type]        = book.cell(row_num, columns[:product_type])
         raw[:product_category]    = book.cell(row_num, columns[:product_category])
@@ -193,6 +194,7 @@ module Products
           properties: {
             style_notes:          raw[:style_notes],
             fit:                  raw[:fit],
+            size:                 raw[:size],
             fabric:               raw[:fabric],
             product_type:         raw[:product_type],
             product_category:     raw[:product_category],
@@ -230,8 +232,8 @@ module Products
 
       conformities = {
         # Basic
-        sku: /style #/i,
-        name: /product name/i,
+        sku: /NUMBER/i,
+        name: /NAME/i,
         description: /description/i,
         # price_in_aud: /rrp/i,
         price_in_usd: /price usd/i,
@@ -254,8 +256,9 @@ module Products
         petite: /petite/i,
         # Properties
         style_notes: /styling notes/i,
-        fit: /size.+fit/i,
-        fabric: /fabric/i,
+        fit: /FIT/i,
+        size: /SIZE/i,
+        fabric: /FABRIC/i,
         product_type: /product type/i,
         product_category: /product category/i,
         factory_id: /factory id/i,
@@ -272,7 +275,7 @@ module Products
       conformities.each do |key, regex|
         indexes = []
 
-        book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        book.row(@@titles_row_numbers.first).each_with_index do |title, index|
           next unless title.present?
 
           if title.strip =~ regex
@@ -291,9 +294,9 @@ module Products
         end
       end
 
-      @codes[:price_in_aud] = 4
-      @codes[:price_in_usd] = 5
-      @codes[:description] = 6
+      @codes[:price_in_aud] = nil
+      @codes[:price_in_usd] = nil
+      @codes[:description] = nil
 
       @codes[:customizations] = []
       book.row(@@titles_row_numbers.second).each_with_index do |title, index|
@@ -406,6 +409,10 @@ module Products
 
       new_product = product.persisted? ? 'Updated' : 'New'
 
+      if args[:price_in_aud].nil? || args[:price_in_usd].nil?
+        add_product_prices(product, 0, 0)
+      end
+
       product.save!
       puts "Saving: #{new_product} - #{product.sku} - #{product.id} - #{product.name}"
 
@@ -419,6 +426,7 @@ module Products
     def add_product_properties(product, args)
       allowed = [:style_notes,
                  :fit,
+                 :size,
                  :fabric,
                  :product_type,
                  :product_category,
@@ -441,8 +449,10 @@ module Products
         product.set_property(name, value)
       end
 
-      if factory = Factory.find_by_name(args[:factory_name].capitalize)
-        product.factory = factory
+      if args[:factory_name].present?
+        if factory = Factory.find_by_name(args[:factory_name].capitalize)
+          product.factory = factory
+        end
       end
 
       product
