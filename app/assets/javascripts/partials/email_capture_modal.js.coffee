@@ -53,7 +53,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     if data
       @process(data)
     else
-      window.track.event('LandingPageModal', 'ClosedNoAction', @opts.content, @opts.promocode)
+      window.track.event('LandingPageModal', 'ClosedNoAction', @opts.promocode)
 
   process: (data) =>
     if !!data.email
@@ -86,7 +86,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
       @fbPushTracking()
-      window.track.event('LandingPageModal', 'Submitted',  @opts.content, @opts.promocode)
+      window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
 
   fbPushTracking: =>
     if @opts.fb
@@ -95,14 +95,14 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
   failure: () =>
     window.helpers.showAlert(message: 'Is your email address correct?')
-    window.track.event('LandingPageModal', 'Error', @opts.content, @opts.promocode)
+    window.track.event('LandingPageModal', 'Error', @opts.promocode)
 
   onOpen: (modal) =>
     $('.vex-dialog-buttons button').addClass('btn btn-black') # HACKETRY
     if @opts.submitText
       $('.vex-dialog-form button[type=submit]').val(@opts.submitText)
 
-    window.track.event('LandingPageModal', 'Opened', @opts.content, @opts.promocode)
+    window.track.event('LandingPageModal', 'Opened', @opts.promocode)
 
     if @opts.timer && @promoStartedAt
       $modal = $(modal)

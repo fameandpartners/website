@@ -92,6 +92,7 @@ gem 'rollout'
 
 gem 'term-ansicolor'
 gem 'ruby-progressbar'
+gem 'sinatra', :require => nil
 
 group :assets do
   gem 'bourbon'
@@ -133,6 +134,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'thin'
+
 end
 
 group :staging, :development do

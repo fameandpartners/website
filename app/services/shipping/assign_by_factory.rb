@@ -12,7 +12,7 @@ module Shipping
       end
     end
 
-    def create_shipment!(units)
+    def create_shipment!(units = [])
       ::Spree::Shipment.create!(
         {
           order:           order,
@@ -25,6 +25,8 @@ module Shipping
     end
 
     def units_by_factory
+      return { :unknown => [] } if order.inventory_units.empty?
+
       order.inventory_units.group_by do |i|
         begin
           i.variant.product.factory

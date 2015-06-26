@@ -6,7 +6,7 @@
   h6 = product.name
   /.price = product.price.display_price
   .price = product_price_with_discount(product.price, product.discount)
-  
+
   - if product.fast_delivery
     .fast-delivery-icon title="Next day delivery*"
       = I18n.t(:long, scope: [:delivery_time, :fast])

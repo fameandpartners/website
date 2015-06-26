@@ -34,11 +34,11 @@ SitemapGenerator::Interpreter.class_eval do
   def build_alternates(path)
     alternates = [{ href: absolute_url(path), lang: 'en-US', nofollow: false }]
 
-    alternates + site_versions.map do |site_version|
-      {
-        href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale, nofollow: false
-      }
-    end
+    alternates + site_versions.map { |site_version| alternate_href_hash(path, site_version) }
+  end
+
+  def alternate_href_hash(path, site_version)
+    { href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale }
   end
 end
 
@@ -58,9 +58,9 @@ sitemap_options = {
 SitemapGenerator::Sitemap.create(sitemap_options) do
   # Records scopes
   active_products    = Spree::Product.active
-  events_taxons      = Repositories::Taxonomy.read_events
-  collections_taxons = Repositories::Taxonomy.read_collections
-  styles_taxons      = Repositories::Taxonomy.read_styles
+  events_taxons      = Spree::Taxon.published.from_event_taxonomy
+  collections_taxons = Spree::Taxon.published.from_range_taxonomy
+  styles_taxons      = Spree::Taxon.published.from_style_taxonomy
   colors_taxons      = Spree::OptionValuesGroup.for_colors.available_as_taxon
   statics_pages = [
     '/about', '/why-us', '/privacy',
@@ -83,25 +83,15 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
 
     group(sitemap_group_options) do
       # Products pages
-      active_products.each do |product|
+      active_products.find_each do |product|
         product_images = Repositories::ProductImages.new(product: product).read_all
         product_images = product_images.map { |image| { loc: image.original, title: [product.name, image.color].join(' ') } }
 
         add collection_product_path(product), images: product_images, priority: 0.8
       end
 
-      # Events
-      events_taxons.each do |taxon|
-        add build_taxon_path(taxon.name), priority: 0.9
-      end
-
-      # Collections
-      collections_taxons.each do |taxon|
-        add build_taxon_path(taxon.name), priority: 0.9
-      end
-
-      # Styles
-      styles_taxons.each do |taxon|
+      # Events, Styles and Collections (Ranges)
+      (events_taxons + collections_taxons + styles_taxons).each do |taxon|
         add build_taxon_path(taxon.name), priority: 0.9
       end
 

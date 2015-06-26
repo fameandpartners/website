@@ -77,9 +77,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
-    get '/sale-dresses' => 'statics#sale', :as => :sale
     get '/fame2015',  to: redirect('/')
-
 
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
@@ -92,6 +90,11 @@ FameAndPartners::Application.routes.draw do
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
+
+    get '/sale-dresses' => redirect('/dresses/sale')
+    get '/dresses/sale' => 'products/collections#show', :permalink => 'SALE', :as => :sales_collection
+
+    get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
 
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
     # get '/bridesmaid-dresses' => redirect('/lookbook/bridesmaids')
@@ -515,11 +518,12 @@ FameAndPartners::Application.routes.draw do
     resources :site_versions, only: [:show]
   end
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/admin/3c75a382d04ca5d1bea40f573fba062a-sidekiq'
+
   if Rails.env.development?
     mount MailPreview => 'mail_view'
 
-    #require 'sidekiq/web'
-    #mount Sidekiq::Web => '/sidekiq'
   end
 
   if Features.active?(:content_revolution)

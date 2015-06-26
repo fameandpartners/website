@@ -4,11 +4,23 @@ require 'forwardable'
 
 module Orders
   class LineItemPresenter
+    class NoShipment
+      def shipped?
+        false
+      end
+      def shipped_at
+        nil
+      end
+
+      def tracking
+        'NoShipment'
+      end
+    end
     extend Forwardable
 
-    def_delegators :shipment, :shipped?, :shipped_at
+    def_delegators :shipment, :shipped?, :shipped_at, :tracking_number
+    def_delegator :shipment, :tracking, :tracking_number
     def_delegators :@wrapped_order,
-                   :tracking_number,
                    :number,
                    :total_items,
                    :shipping_address,
@@ -33,7 +45,7 @@ module Orders
     end
 
     def shipment
-      @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(@item) }
+      @shipment ||= wrapped_order.shipments.detect { |ship| ship.line_items.include?(@item) } || NoShipment.new
     end
 
     alias_method :order, :wrapped_order
@@ -119,7 +131,7 @@ module Orders
         :order_number            => number,
         :line_item               => id,
         :total_items             => total_items,
-        :completed_at            => order.completed_at.to_date,
+        :completed_at            => order.completed_at.try(:to_date),
         :express_making          => fast_making? ? "TRUE" : '',
         :projected_delivery_date => projected_delivery_date,
         :tracking_number         => tracking_number,

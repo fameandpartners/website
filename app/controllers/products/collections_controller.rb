@@ -30,7 +30,7 @@
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
   attr_reader :page
-  helper_method :page, :cache_key
+  helper_method :page
 
   before_filter :load_page, :set_collection_resource, :set_collection_seo_meta_data
 
@@ -41,16 +41,11 @@ class Products::CollectionsController < Products::BaseController
     @collection.use_auto_discount!(current_promotion.discount) if current_promotion
 
     respond_to do |format|
-      format.html { render_collection_template }
+      format.html { render collection_template }
       format.json do
         render json: @collection.serialize
       end
     end
-  end
-
-
-  def cache_key
-    @resource_args.hash
   end
 
   private
@@ -62,13 +57,13 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def set_collection_resource
-      @collection_options = cache_parse_permalink(params[:permalink])
+      @collection_options = parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
     end
 
     def set_collection_seo_meta_data
       # set title / meta description for the page
-      if page && page.get(:lookbook)
+      if page_is_lookbook?
         @title = "#{page.title} #{default_seo_title}"
         @description  = page.meta_description
       else
@@ -77,17 +72,21 @@ class Products::CollectionsController < Products::BaseController
       end
     end
 
-    def render_collection_template
-      if @collection_options
-        render page.template_path
+    def collection_template
+      if page_is_lookbook? || @collection_options
+        page.template_path
       else
-        render 'public/404', layout: false, status: :not_found
+        { file: 'public/404', layout: false, status: :not_found }
       end
     end
 
     def limit
       default = page.get(:lookbook) ? 99 : 20
       params[:limit] || default
+    end
+
+    def page_is_lookbook?
+      page && page.get(:lookbook)
     end
 
     def collection_resource(collection_options)
@@ -104,23 +103,7 @@ class Products::CollectionsController < Products::BaseController
         limit:          limit, # page size
         offset:         params[:offset] || 0
       }.merge(collection_options || {})
-      cache_read_resource(@resource_args)
-    end
-
-    def cache_read_resource(resource_args)
-      Rails.cache.fetch("/collections/#{cache_key}", expires_in: configatron.cache.expire.long) do
-        Products::CollectionResource.new(resource_args).read
-      end
-    end
-
-    # we have route like /dresses/permalink
-    # where permalink can be
-    #   - taxon.permalink
-    #   - color_group.name
-    def cache_parse_permalink(permalink)
-      Rails.cache.fetch("/collections/permalink/#{permalink}", expires_in: configatron.cache.expire.long) do
-        parse_permalink(permalink)
-      end
+      Products::CollectionResource.new(@resource_args).read
     end
 
     def parse_permalink(permalink)
@@ -131,9 +114,8 @@ class Products::CollectionsController < Products::BaseController
         return { color_group: color_group.name }
       end
 
-      if taxon = Repositories::Taxonomy.get_taxon_by_name(permalink)
-        # style, edits, events, range, seocollection
-        case taxonomy = taxon.taxonomy.downcase
+      if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink)
+        case taxonomy = taxon.taxonomy.name.downcase
         when 'style', 'edits', 'event'
           return { taxonomy.to_sym => permalink }
         when 'range'
@@ -141,9 +123,7 @@ class Products::CollectionsController < Products::BaseController
         end
       end
 
-      # default
+      # Didn't find any collection associated with the permalink
       return nil
-
     end
-
 end

@@ -5,7 +5,7 @@ require 'products/color_variants_indexer'
 
 class ClearCacheWorker
   include Sidekiq::Worker
-  sidekiq_options retry: 3
+  sidekiq_options retry: false
 
   def perform(*args)
     update_color_variants_elastic_index
