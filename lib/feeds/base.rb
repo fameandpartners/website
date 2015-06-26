@@ -32,7 +32,7 @@ module Feeds
     end
 
     def export
-      @logger.info "Starting Feeds Export SITE (#{version_permalink})"
+      @logger.info "Starting Feeds Export SITE (#{current_site_version.permalink})"
       @items      = get_items
       @properties = get_properties
 
