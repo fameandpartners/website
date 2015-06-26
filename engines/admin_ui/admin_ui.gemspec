@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   # Base
   s.add_dependency "rails", "~> 3.2.21"
   s.add_dependency "cancan"
+  s.add_dependency "money"
 
   # UI
   s.add_dependency "slim"
@@ -27,7 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency "datagrid"
 
   # Theme
-  s.add_dependency "inspinia-rails"
+  # s.add_dependency "inspinia-rails"
   s.add_dependency "font-awesome-rails"
 
 

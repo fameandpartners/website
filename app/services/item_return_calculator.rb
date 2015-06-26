@@ -5,14 +5,11 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
 
   end
 
-
   def advance_return_requested(event)
     @item_return
 
     # binding.pry
     # @item_return
-
-
 
     event.data.map do |k,v|
       @item_return.send("#{k}=", v)
@@ -20,8 +17,6 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
 
     # @item_return.order_number = event.order_number
   end
-
-
 
   def advance_receive_item(event)
 

@@ -17,8 +17,11 @@ class ItemReturnEvent < ActiveRecord::Base
                   :product_customisations,
                   :order_payment_method,
                   :order_paid_amount,
-                  :order_payment_ref
-
+                  :order_payment_ref,
+                  :order_paid_currency,
+                  :acceptance_status,
+                  :requested_at,
+                  :customer_name
 
   attr_accessible :user, :received_on, :location
 
@@ -50,7 +53,12 @@ class ItemReturnEvent < ActiveRecord::Base
           :product_customisations,
           :order_payment_method,
           :order_paid_amount,
-          :order_payment_ref
+          :order_payment_ref,
+          :order_paid_currency,
+          :acceptance_status,
+          :requested_at,
+          :customer_name
+
   end
 
   event_type :receive_item do
