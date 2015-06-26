@@ -166,10 +166,11 @@ ruby:
     .col-md-6.col-sm-12
       - if @product.fit?
         h4 About our #famebabe
-        p= raw @product.fit.gsub("\n", '<br/>')
+        = simple_format(@product.fit)
+
 
       - if @product.size?
-        p= raw @product.size.gsub("\n", '<br/>')
+        = simple_format(@product.size)
 
       - if @product.preorder?
         .pre-order
@@ -178,11 +179,11 @@ ruby:
 
       - if @product.style_notes?
         h4 Style it with
-        p= raw @product.style_notes
+        = simple_format(@product.style_notes)
 
       - if @product.fabric?
         h4 Fabric & Trims
-        p= raw @product.fabric.gsub("\n", '<br/>')
+        = simple_format(@product.fabric)
 
       h4 Care Instructions
       p
