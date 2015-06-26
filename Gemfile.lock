@@ -178,8 +178,8 @@ PATH
       cancan
       datagrid
       font-awesome-rails
-      inspinia-rails
       kaminari
+      money
       rails (~> 3.2.21)
       sidekiq
       slim

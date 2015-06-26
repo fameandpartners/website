@@ -519,7 +519,9 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
     t.string   "reason_category"
     t.string   "reason_sub_category"
     t.text     "request_notes"
+    t.string   "customer_name"
     t.string   "contact_email"
+    t.string   "acceptance_status"
     t.text     "comments"
     t.string   "product_name"
     t.string   "product_style_number"
@@ -542,6 +544,8 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
     t.datetime "updated_at",             :null => false
   end
 
+  add_index "item_returns", ["item_id"], :name => "index_item_returns_on_item_id", :unique => true
+  add_index "item_returns", ["order_number"], :name => "index_item_returns_on_order_number"
   add_index "item_returns", ["uuid"], :name => "index_item_returns_on_uuid", :unique => true
 
   create_table "line_item_making_options", :force => true do |t|
