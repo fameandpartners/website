@@ -184,7 +184,7 @@ ruby:
 
       - if @product.fabric.present?
         h4 Fabric & Trims
-        = simple_format(@product.fabric)
+        = simple_format(@product.fabric + "\n Product may have variations in dying hues so product may look slightly different from image")
 
       h4 Care Instructions
       p
