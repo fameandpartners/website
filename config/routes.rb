@@ -491,13 +491,6 @@ FameAndPartners::Application.routes.draw do
       get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
     end
 
-    # seo routes like *COLOR*-Dress
-    get "(:colour)-Dresses" => redirect { |params, req| "/dresses/#{params[:colour].downcase}" }
-
-    # seo route
-    get "new-collection" => "products/collections#show", as: :new_collection
-
-    get '/next-day-delivery' => redirect('/express-delivery')
     get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
 
     # Redirecting all bridesmaid party URLs
