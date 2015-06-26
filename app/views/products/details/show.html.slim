@@ -164,24 +164,24 @@ ruby:
           p Images courtesy of Google
 
     .col-md-6.col-sm-12
-      - if @product.fit?
+      - if @product.fit.present?
         h4 About our #famebabe
         = simple_format(@product.fit)
 
 
-      - if @product.size?
+      - if @product.size.present?
         = simple_format(@product.size)
 
-      - if @product.preorder?
+      - if @product.preorder.present?
         .pre-order
           strong Pre-order
           | This item will ship within 4 weeks
 
-      - if @product.style_notes?
+      - if @product.style_notes.present?
         h4 Style it with
         = simple_format(@product.style_notes)
 
-      - if @product.fabric?
+      - if @product.fabric.present?
         h4 Fabric & Trims
         = simple_format(@product.fabric)
 
