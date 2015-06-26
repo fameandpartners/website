@@ -6,35 +6,6 @@ namespace :import do
     desc 'Reindex all products'
     task :reindex => 'elasticsearch:reindex'
 
-    desc 'import sku , product name , fabric , size and fit'
-    task :import_sku_product_name_fabric_size_and_fit => :environment do
-      raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
-
-      file_path = ENV['FILE_PATH']
-
-      if file_path =~ /\.xls$/
-        book = Roo::Excel.new(file_path, false, :warning)
-      elsif file_path =~ /\.xlsx$/
-        book = Roo::Excelx.new(file_path, false, :warning)
-      else
-        raise 'Invalid file type'
-      end
-
-
-
-      if Spree::Property.where(:name => "size").blank?
-        p 'haha'
-        Spree::Property.create!(:name => "size",:presentation => "size")
-      end
-
-      book.default_sheet = book.sheets.first
-      (book.first_row..book.last_row).each do |index|
-        sku, product_name, fabric, fit, size = book.row(index)
-        next if sku == "STYLE NUMBER"
-        p "haha #{sku} #{product_name} #{fabric} #{fit} #{size}"
-      end
-    end
-
     desc 'prices'
     task :prices => :environment do
       raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
