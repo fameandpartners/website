@@ -154,21 +154,6 @@ module Products
       self.discount = [self.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
     end
 
-    def style_notes?
-      style_notes.present?
-    end
-
-    def fabric?
-      fabric.present?
-    end
-
-    def fit?
-      fit.present?
-    end
-
-    def size?
-      size.present?
-    end
     private
 
     def customisation_allowed?
