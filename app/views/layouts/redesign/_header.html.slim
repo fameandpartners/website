@@ -147,7 +147,7 @@ ruby:
                           li.mega-menu-list--item= link_to 'Dresses made in 48 hours', fast_making_dresses_path, title: 'Express Making'
 
                       - if Features.active?(:sales)
-                        h4.link-header Sales
+                        h4.link-header Sale - Up to 50% Off
                         ul.mega-menu-list
                           - if sale_active?
                             li.mega-menu-list--item= link_to 'Sale - Up to 50% Off', sales_collection_path, title: 'Dresses On Sale'
