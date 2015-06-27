@@ -86,7 +86,6 @@ FameAndPartners::Application.routes.draw do
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
     get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
 
-    # get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
@@ -97,8 +96,6 @@ FameAndPartners::Application.routes.draw do
     get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
 
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
-    # get '/bridesmaid-dresses' => redirect('/lookbook/bridesmaids')
-    # get '/lookbook/bridesmaids' => 'products/collections#show', :permalink => 'Bridesmaid14', :as => :bridesmaid_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'plus-size', :as => :all_size_collection
@@ -146,12 +143,6 @@ FameAndPartners::Application.routes.draw do
       get '/style/:taxon', to: redirect('/dresses/%{taxon}')
       get '/event',  to: redirect('/dresses')
       get '/event/:taxon', to: redirect('/dresses/%{taxon}')
-      get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
-      get '/colour',  to: redirect('/dresses')
-      get '/color',  to: redirect('/dresses')
-      get '/colour/:colour_name', to: redirect( path: '/dresses?colour=%{colour_name}')
-      get '/color/:colour_name',  to: redirect( path: '/dresses?color=%{colour_name}')
-      get '/:event/:style' => 'spree/products#index'
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
       get '/*permalink' => 'products/collections#show', as: 'taxon'
       get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
@@ -503,13 +494,6 @@ FameAndPartners::Application.routes.draw do
     match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
     match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
-    # seo routes like *COLOR*-Dress
-    get "(:colour)-Dresses" => redirect { |params, req| "/dresses/#{params[:colour].downcase}" }
-
-    # seo route
-    get "new-collection" => "products/collections#show", as: :new_collection
-
-    get '/next-day-delivery' => redirect('/express-delivery')
     get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
 
     # Redirecting all bridesmaid party URLs
