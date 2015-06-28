@@ -81,7 +81,7 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def limit
-      default = page.get(:lookbook) ? 99 : 20
+      default = page_is_lookbook? ? 99 : 20
       params[:limit] || default
     end
 
