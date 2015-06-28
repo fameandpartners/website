@@ -13,19 +13,19 @@
   ruby:
     enable_countdown_banner_sale = %Q<
       try {
-        currentTimeInUSWest = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })
-        currentDateInUSWest = new Date(currentTimeInUSWest).getDate()
-        currentTimeInUSWestInSeconds = new Date(currentTimeInUSWest).getTime()/1000
-        startTimeInUSWest = new Date("June 30, 2015 00:00:00").toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })
-        startTimeInUSWest = new Date(startTimeInUSWest)
-        startTimeInUSWestInSeconds = startTimeInUSWest.getTime()/1000
-        secondsFromStartTimeToCurrentTime = currentTimeInUSWestInSeconds - startTimeInUSWestInSeconds
+        function inUSWest(aDate) {
+          return new Date(aDate.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }))
+        }
+
+        currentUSWest     = inUSWest(new Date)
+        startTimeInUSWest = inUSWest(new Date("June 30, 2015 00:00:00"))
+
+        differenceFromStartTimeToCurrentTime = currentUSWest.getTime() - startTimeInUSWest.getTime()
 
         currentDate = new Date()
-        currentDateInSecond = currentDate.getTime()/1000
-        startTime = (currentDateInSecond - secondsFromStartTimeToCurrentTime)*1000
+        startTime = (currentDate.getTime() - differenceFromStartTimeToCurrentTime)
 
-        if (currentDateInUSWest == 30){
+        if ( currentUSWest.getDate() == 30 ){
           $("#countdown-banner").removeClass("hidden")
           window.page.showCountdownTimer(
             "",
@@ -44,7 +44,6 @@
       catch (err) {
 
       }
-
     >
 
 
