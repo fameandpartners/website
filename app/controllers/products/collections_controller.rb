@@ -123,6 +123,10 @@ class Products::CollectionsController < Products::BaseController
         end
       end
 
+      if permalink =~ /undefined\Z/
+        redirect_to '/undefined'
+      end
+
       # Didn't find any collection associated with the permalink
       return nil
     end
