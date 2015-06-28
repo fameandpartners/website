@@ -12,35 +12,38 @@
 - if Features.active?(:sales) && sale_active?
   ruby:
     enable_countdown_banner_sale = %Q<
+      try {
+        currentTimeInUSWest = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })
+        currentDateInUSWest = new Date(currentTimeInUSWest).getDate()
+        currentTimeInUSWestInSeconds = new Date(currentTimeInUSWest).getTime()/1000
+        startTimeInUSWest = new Date("June 30, 2015 00:00:00").toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })
+        startTimeInUSWest = new Date(startTimeInUSWest)
+        startTimeInUSWestInSeconds = startTimeInUSWest.getTime()/1000
+        secondsFromStartTimeToCurrentTime = currentTimeInUSWestInSeconds - startTimeInUSWestInSeconds
 
-      currentTimeInUSWest = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })
-      currentDateInUSWest = new Date(currentTimeInUSWest).getDate()
-      currentTimeInUSWestInSeconds = new Date(currentTimeInUSWest).getTime()/1000
-      startTimeInUSWest = new Date("June 30, 2015 00:00:00").toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })
-      startTimeInUSWest = new Date(startTimeInUSWest)
-      startTimeInUSWestInSeconds = startTimeInUSWest.getTime()/1000
-      secondsFromStartTimeToCurrentTime = currentTimeInUSWestInSeconds - startTimeInUSWestInSeconds
+        currentDate = new Date()
+        currentDateInSecond = currentDate.getTime()/1000
+        startTime = (currentDateInSecond - secondsFromStartTimeToCurrentTime)*1000
 
-      currentDate = new Date()
-      currentDateInSecond = currentDate.getTime()/1000
-      startTime = (currentDateInSecond - secondsFromStartTimeToCurrentTime)*1000
+        if (currentDateInUSWest == 30){
+          $("#countdown-banner").removeClass("hidden")
+          window.page.showCountdownTimer(
+            "",
+            "",
+            startTime,
+            24
+          )
 
-      if (currentDateInUSWest == 30){
-        $("#countdown-banner").removeClass("hidden")
-        window.page.showCountdownTimer(
-          "",
-          "",
-          startTime,
-          24
-        )
-
-        $(".timer-box").css("margin-left",0)
-        $("#countdown-banner").css("background","#E02D91")
-        $(".banner-title").first().hide()
-        $(".spacer").hide()
-        $(".banner-message").hide()
+          $(".timer-box").css("margin-left",0)
+          $("#countdown-banner").css("background","#E02D91")
+          $(".banner-title").first().hide()
+          $(".spacer").hide()
+          $(".banner-message").hide()
+        }
       }
+      catch (err) {
 
+      }
 
     >
 
