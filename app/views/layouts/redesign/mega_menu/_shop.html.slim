@@ -73,11 +73,11 @@ li.shop.menu-item
               h4.link-header Sale - Up to 50% Off
               ul.mega-menu-list
                 - if sale_active?
-                  li.mega-menu-list--item= link_to 'Sale - Up to 50% Off', sales_collection_path,  title: 'Dresses On Sale'
-                  li.mega-menu-list--item= link_to "15 Percent Off",       dresses_path(sale: 15), title: 'All Dresses 15% off'
-                  li.mega-menu-list--item= link_to "30 Percent Off",       dresses_path(sale: 30), title: 'All Dresses 30% off'
-                  li.mega-menu-list--item= link_to "40 Percent Off",       dresses_path(sale: 40), title: 'All Dresses 40% off'
-                  li.mega-menu-list--item= link_to "50 Percent Off",       dresses_path(sale: 50), title: 'All Dresses 50% off'
+                  li.mega-menu-list--item= link_to 'Dresses On Sale', sales_collection_path,  title: 'Dresses On Sale'
+                  li.mega-menu-list--item= link_to "15 Percent Off",  dresses_path(sale: 15), title: 'All Dresses 15% off'
+                  li.mega-menu-list--item= link_to "30 Percent Off",  dresses_path(sale: 30), title: 'All Dresses 30% off'
+                  li.mega-menu-list--item= link_to "40 Percent Off",  dresses_path(sale: 40), title: 'All Dresses 40% off'
+                  li.mega-menu-list--item= link_to "50 Percent Off",  dresses_path(sale: 50), title: 'All Dresses 50% off'
 
 - if Features.active?(:style_quiz)
   li.menu-item
