@@ -58,7 +58,20 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
     )
 
   showValidationError: () ->
-    console.log('[placeholder][showValidationError]: question data is invalid')
+    messageHtml = $("<div class='error-message'>#{ @validationError() }</div>").hide()
+    if @$container.find('.error-message').length > 0
+      @$container.find('.error-message').replaceWith(messageHtml)
+    else
+      @$container.prepend(messageHtml)
+    @$container.find('.error-message').fadeIn()
+    _.delay( () ->
+      $('.error-message').fadeOut()
+    , 5000)
+
+  hideValidationError: () ->
+
+  validationError: () ->
+    "Please, select at least one value"
 
   on: () -> @$container.on.apply(@$container, arguments)
   off: () -> @$container.off.apply(@$container, arguments)
@@ -68,20 +81,80 @@ window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.
   constructor: (opts = {}) ->
     super(opts)
     @$container.find('input').on('keyup', _.debounce(@onValueChanged, 100))
+    @$container.on('click', '*[data-action=import-from-fb]', @importFromFacebookHandler)
+
+    @$fullnameInput  = @$container.find("input[name=fullname]")
+    @$birthdayInput = @$container.find("input[name=birthday]")
+    @$emailInput     = @$container.find("input[name=email]")
+    @$birthdayInput.datepicker({
+      changeYear: true,
+      yearRange: "1900:2015",
+      maxDate: '-1Y',
+      dateFormat: opts.dateFormat || "dd/mm/yy"
+    })
 
   value: () ->
     {
-      fullname:   @$container.find("input[name=fullname]").val(),
-      birthdate:  @$container.find("input[name=birthdate]").val(),
-      email:      @$container.find("input[name=email]").val()
+      fullname:   @$fullnameInput.val(),
+      birthday:  @$birthdayInput.val(),
+      email:      @$emailInput.val()
     }
 
   isValid: () ->
-    currentValue = @value()
-    if currentValue.fullname && currentValue.birthdate && currentValue.email
-      return true
+    @fullnameValid() && @birthdayValid() && @emailValid()
+
+  fullnameValid: () ->
+    if _.isFunction(@$fullnameInput[0].checkValidity)
+      @$fullnameInput[0].checkValidity()
     else
-      return false
+      !_.empty(@$fullnameInput.val())
+
+  birthdayValid: () ->
+    if _.isFunction(@$birthdayInput[0].checkValidity)
+      @$birthdayInput[0].checkValidity()
+    else
+      !_.empty(@$birthdayInput.val())
+
+  emailValid: () ->
+    if _.isFunction(@$emailInput[0].checkValidity)
+      @$emailInput[0].checkValidity()
+    else
+      !_.empty(@$emailInput.val())
+
+  validationError: () ->
+    "Please provide Full name/Date of Birth/Email address"
+
+  importFromFacebookHandler: (e) =>
+    e.preventDefault()
+
+    importFromFacebook = (user_profile) =>
+      @$fullnameInput.val(user_profile.name)
+      @$emailInput.val(user_profile.email)
+
+      @$birthdayInput.datepicker('setDate', new Date(user_profile.birthday))
+
+      # set datepicker to fb format & restore previous settings
+      # datepicker convert automatically
+      #old_format = @$birthdayInput.datepicker('option', 'dateFormat')
+      #@$birthdayInput.datepicker('option', 'dateFormat', 'mm/dd/yy')
+      #@$birthdayInput.datepicker('setDate', user_profile.birthday)
+      #@$birthdayInput.datepicker('option', 'dateFormat', old_format)
+
+    requestFbProfile = () ->
+      FB.api("/me", importFromFacebook)
+
+    FB.getLoginStatus( (response) ->
+      if (response && response.status == 'not_authorized')
+        FB.login( (response) ->
+          if (response.authResponse)
+            requestFbProfile()
+        , scope: 'email,user_birthday,user_events',
+          return_scopes: true
+        )
+      else
+        requestFbProfile()
+    )
+
 
 window.StyleQuiz.ColorPaletteQuestion = class ColorPaletteQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->
@@ -209,27 +282,30 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
       @events.push($(item).data())
     )
 
-    @$container.on("click", '*[data-action=add-event]', @addEvent)
-    @$container.on("click", '*[data-action=delete-event]', @deleteEvent)
+    @$container.on("click", '*[data-action=add-event]', @addEventHandler)
+    @$container.on("click", '*[data-action=delete-event]', @deleteEventHandler)
+    @$container.on('click', '*[data-action=import-from-fb]', @importFromFacebookHandler)
 
     @$container.find('input[name=date]').datepicker({
       minDate: '+1D',
       showButtonPanel: true,
-      dateFormat: 'yy-mm-dd'
+      dateFormat: opts.dateFormat || "dd/mm/yy"
     })
 
-  addEvent: (e) =>
+  addEventHandler: (e) =>
     e.preventDefault()
     event = {
       name:       @$container.find('input[name=name]').val(),
       event_type: @$container.find('input[name=event_type]').val(),
       date:       @$container.find('input[name=date]').val()
     }
+
+  addEvent: (event) =>
     @events.push(event)
     @$container.find('.events-list').append($("<div class='col-4'><div class='event-tag'><span>#{ event.date } - #{ event.name }</span><div class='icon-cross' data-action='delete-event'></div></div></div>"))
     @onValueChanged()
 
-  deleteEvent: (e) =>
+  deleteEventHandler: (e) =>
     e.preventDefault()
     item = $(e.currentTarget).closest('.col-4')
     index = @$container.find('.events-list .col-4').index(item)
@@ -242,3 +318,33 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
 
   isValid: () ->
     return true
+
+  importFromFacebookHandler: (e) =>
+    e.preventDefault()
+
+    that = @
+    dateFormat = that.$container.find('input[name=date]').datepicker('option', 'dateFormat')
+    importFromFacebook = (events) ->
+      _.each(events.data, (event, index) =>
+        date = new Date(event.start_time || event.end_time)
+        that.addEvent({
+          name: event.name,
+          event_type: event.location,
+          date: $.datepicker.formatDate(dateFormat, date)
+        })
+      )
+
+    requestFbProfile = () ->
+      FB.api("/me/events", importFromFacebook)
+
+    FB.getLoginStatus( (response) ->
+      if (response && response.status == 'not_authorized')
+        FB.login( (response) ->
+          if (response.authResponse)
+            requestFbProfile()
+        , scope: 'email,user_birthday,user_events',
+          return_scopes: true
+        )
+      else
+        requestFbProfile()
+    )

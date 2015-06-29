@@ -17,9 +17,10 @@
             .checkmark
     h2.text-center Select your size.
     .size-picker
+      - offset = current_site_version.size_settings.size_start
       - question.answers.where(group: 'size').each do |answer|
         .size class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
-          = answer.name
+          = (answer.name.to_i + offset).to_s
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
       .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }

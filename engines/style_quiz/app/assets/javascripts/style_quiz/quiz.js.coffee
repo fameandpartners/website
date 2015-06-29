@@ -8,14 +8,15 @@ window.StyleQuiz.Quiz = class Quiz
     @questions_data = opts.questions_data || []
     @action = opts.action
 
+    settings = opts.settings
     @questions = []
     _.each(opts.questions_data, (data, index) ->
       # factory?
       klass_name = s.camelize("-#{ data.name}-question", false)
       if _.isFunction(StyleQuiz[klass_name])
-        question = new StyleQuiz[klass_name](data)
+        question = new StyleQuiz[klass_name](_.extend({}, settings, data))
       else
-        question = new StyleQuiz.BaseQuestion(data)
+        question = new StyleQuiz.BaseQuestion(_.extend({}, settings, data))
 
       question.on('question:completed', @showNext)
       question.on('question:back', @showPrevious)
@@ -36,13 +37,14 @@ window.StyleQuiz.Quiz = class Quiz
     , @)
 
   showNext: () =>
-    if @questions[@current] && @questions[@current].isValid()
+    if @questions[@current]
       if @current < ( @questions.length - 1 )
         @current = @current + 1
         @showCurrentQuestion()
       else
         @finish()
     else
+      # invalid case, some unknown positon
       false
 
   showPrevious: () =>

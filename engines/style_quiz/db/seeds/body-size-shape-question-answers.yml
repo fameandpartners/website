@@ -1,5 +1,11 @@
 ---
 - :group: size
+  :name: '0'
+  :value: 0
+- :group: size
+  :name: '2'
+  :value: 2
+- :group: size
   :name: '4'
   :value: 4
 - :group: size
@@ -29,9 +35,6 @@
 - :group: size
   :name: '22'
   :value: 22
-- :group: size
-  :name: '24'
-  :value: 24
 - :group: shape
   :name: apple
   :value: apple

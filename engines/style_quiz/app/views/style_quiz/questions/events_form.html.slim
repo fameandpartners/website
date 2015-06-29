@@ -21,11 +21,11 @@
         label &nbsp;
         = link_to 'Add', '#', class: 'btn btn-primary btn-block', data: { action: 'add-event' }
       .col-4
-        /.row
+        .row
           .col-2.text-center
             .btn.btn-text or
           .col-10
-            = link_to 'import from facebook', '#', class: 'btn btn-facebook btn-block'
+            = link_to 'import from facebook', '#', class: 'btn btn-facebook btn-block', data: { action: 'import-from-fb' }
     
     .row.events-list
       = @user_style_profile.events.each do |event|

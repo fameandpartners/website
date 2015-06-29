@@ -1,11 +1,33 @@
+## seeder class. extracted to easier use in console or tasks
+#
+#  with truncation
+#    StyleQuiz::Seed.populate(force: true)
+#
+#  without truncation
+#    StyleQuiz::Seed.populate(force: false)
+#
+#  just truncate 
+#    StyleQuiz::Seed.truncate
+#
 module StyleQuiz
   class Seed
     def populate(options = {})
+      truncate if options[:force]
       puts "StyleQuiz::Seed. populate"
+
       populate_tags
       populate_questions
       populate_answers
       populate_products
+    end
+
+    def truncate
+      StyleQuiz::Tag.delete_all
+      StyleQuiz::Question.delete_all
+      StyleQuiz::Answer.delete_all
+
+      empty_tags = ActiveRecord::Coders::YAMLColumn.new(Array).dump([])
+      Spree::Product.update_all(:tags, empty_tags)
     end
 
     def populate_tags

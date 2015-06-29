@@ -10,7 +10,10 @@ ruby:
     window.quiz = new StyleQuiz.Quiz({
       questions_data: questions_data,
       current: #{ current.to_i },
-      action: '#{ style_quiz.user_profile_path }'
+      action: '#{ style_quiz.user_profile_path }',
+      settings: {
+        dateFormat: '#{ raw I18n.t('date_format.frontend', default: "dd/mm/yy") }'
+      }
     })
   "
 
@@ -22,3 +25,5 @@ ruby:
 - total_questions = @questions.size
 - @questions.each_with_index do |question, index|
   = render template: question.template, locals: { question: question, question_position: index + 1, question_total: total_questions}
+
+= render 'style_quiz/shared/facebook'

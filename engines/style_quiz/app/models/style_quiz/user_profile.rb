@@ -40,6 +40,19 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
     self.completed_at.present?
   end
 
+  def birthday
+    return answers['birthday'] if answers['birthday'].present?
+    user.present? && user.birthday.present? ? user.birthday : nil
+  end
+
+  def fullname
+    answers['fullname'].present? ? answers['fullname'] : user.try(:fullname)
+  end
+
+  def email
+    answers['email'].present? ? answers['email'] : user.try(:email)
+  end
+
   # it should be the same as
   # StyleQuiz::ProductsRecommendations.new(style_profile: self).product_score(product.id)
   def calculate_relevance_with(product)

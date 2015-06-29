@@ -8,10 +8,15 @@ module StyleQuiz
     end
 
     def update
+      answers_values = {
+        fullname: params[:answers][:fullname],
+        email:    params[:answers][:email],
+        birthday: Date.strptime(params[:answers][:birthday], I18n.t('date_format.backend'))
+      }
       user_style_profile.update_answers(
-        answers_ids:  params[:answers][:ids],
-        events:       (params[:answers][:events] || {}).values,
-        answers_values: params[:answers].except(:ids, :events)
+        answers_ids:    params[:answers][:ids],
+        events:         (params[:answers][:events] || {}).values,
+        answers_values: answers_values
       )
 
       if current_spree_user.blank?

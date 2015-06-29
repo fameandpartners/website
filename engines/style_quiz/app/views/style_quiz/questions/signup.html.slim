@@ -1,5 +1,6 @@
-/ Question 1/11
-.quiz-section id="#{ question.name }-question"
+/ Signup question
+- date_format = I18n.t('date.formats.default')
+form.quiz-section id="#{ question.name }-question"
   .quiz-section-title
     h4.quiz-section-number Question #{ question_position }/#{ question_total }
     h2 Tell us a bit about yourself.
@@ -10,18 +11,18 @@
           .form-centered.text-left
             .form-group
               label Full NAME
-              input.form-control type="text" name="fullname" placeholder="john smith" value=(current_spree_user.try(:fullname))
+              input.form-control type="text" name="fullname" placeholder="john smith" value=(@user_style_profile.fullname) required="required"
             .form-group
               label date of birth
-              input.form-control type="text" name="birthdate" placeholder="1990-05-25" value=(current_spree_user.try(:birthday))
+              input.form-control type="text" name="birthday" placeholder=(20.years.ago.strftime(date_format)) value=(@user_style_profile.birthday.try(:strftime, date_format)) required="required"
             .form-group
               label email address
-              input.form-control type="text" name="email" placeholder="email@example.com" value=(current_spree_user.try(:email))
+              input.form-control type="email" name="email" placeholder="email@example.com" value=(@user_style_profile.email) required="required"
             input.btn.btn-block.btn-primary type="submit" value="Next" data-action="next"
         .col-6.col-middle.col-compact.text-center
           .form-centered.facebook-box
             h2 Import my details from Facebook.
-            = link_to main_app.fb_auth_path, class: 'btn' do
+            = link_to '#', class: 'btn', data: { action: 'import-from-fb' } do
               span.fa.fa-facebook
-/ @end Question 1/11
-/ ------------------
+            /= link_to main_app.fb_auth_path, class: 'btn' do
+              span.fa.fa-facebook
