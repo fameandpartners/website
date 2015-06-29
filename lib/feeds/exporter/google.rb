@@ -53,9 +53,7 @@ module Feeds
 
                 xml.tag! "g:brand", "Fame&Partners"
                 xml.tag! "g:product_type"
-                item[:images].to(9).each do |image|
-                  xml.tag! "g:additional_image_link", image
-                end
+                xml.tag! "g:additional_image_link", item[:images].join(',')
               end
             end
           end
