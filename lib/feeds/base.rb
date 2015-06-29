@@ -125,7 +125,6 @@ module Feeds
         price:                   original_price,
         sale_price:              nil,
         google_product_category: "Apparel & Accessories > Clothing > Dresses > Formal Gowns",
-        google_product_types:    google_product_types(product),
         id:                      "#{product.id.to_s}-#{variant.id.to_s}",
         group_id:                product.id.to_s,
         color:                   color,
@@ -134,7 +133,7 @@ module Feeds
       )
 
       # Event, Style and Lookbook
-      item.update get_taxonomies(product)
+      item.update get_taxons(product)
 
       # Images
       item.update get_images(product, variant)
@@ -182,23 +181,18 @@ module Feeds
       end
     end
 
-    def get_taxonomies(product)
-      product_events = Spree::Taxon.published.from_event_taxonomy.where(id: product.taxon_ids)
-      product_styles = Spree::Taxon.published.from_style_taxonomy.where(id: product.taxon_ids)
-      product_lookbooks  = Spree::Taxon.from_edits_taxonomy.where(id: product.taxon_ids)
+    def get_taxons(product)
+      product_taxons    = Spree::Taxon.order('spree_taxons.position')
+      product_events    = product_taxons.published.from_event_taxonomy.where(id: product.taxon_ids)
+      product_styles    = product_taxons.published.from_style_taxonomy.where(id: product.taxon_ids)
+      product_lookbooks = product_taxons.from_edits_taxonomy.where(id: product.taxon_ids)
 
       {
+        taxons:    product_taxons.map(&:name),
         events:    product_events.map(&:name),
         styles:    product_styles.map(&:name),
         lookbooks: product_lookbooks.map(&:name)
       }
-    end
-
-    def google_product_types(product)
-      taxons = product.taxons.includes(:taxonomy).sort_by{|t| [t.taxonomy.position, t.position]}
-      taxons.map do |taxon|
-        "Clothing & Accessories > Clothing > Dresses > #{ taxon.name }"
-      end
     end
   end
 end
