@@ -157,7 +157,7 @@ ruby:
                 .col-md-2
                   = link_to bohemian_summer_collection_path do
                     .image-container
-                       = image_tag src="//#{configatron.asset_host}/lookbook/bohemian-summer/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
+                      = image_tag src="//#{configatron.asset_host}/lookbook/bohemian-summer/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
                     p.text-center.edit-title Bohemian Summer
 
                 .col-md-2
@@ -175,7 +175,7 @@ ruby:
                 .col-md-2
                   = link_to here_comes_the_sun_collection_path do
                     .image-container
-                       = image_tag src="//#{configatron.asset_host}/lookbook/here-comes-the-sun/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
+                      = image_tag src="//#{configatron.asset_host}/lookbook/here-comes-the-sun/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
                     p.text-center.edit-title Here Comes The Sun
 
                 .col-md-2
@@ -189,12 +189,12 @@ ruby:
 
         ul.secondary.pull-right
           - if Features.active?(:moodboard)
-              li.menu-item.hidden-xs.hidden-sm
-                = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
-                  span.visible-sm
-                    = image_tag "Heart.svg"
-                  span.hidden-sm.hidden-xs#moodboard-counter
-                    | Moodboard &nbsp;
+            li.menu-item.hidden-xs.hidden-sm
+              = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
+                span.visible-sm
+                  = image_tag "Heart.svg"
+                span.hidden-sm.hidden-xs#moodboard-counter
+                  | Moodboard &nbsp;
 
           li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
             = render "layouts/redesign/header/my_account_dropdown"
