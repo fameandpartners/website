@@ -1,5 +1,11 @@
 - if local_assigns[:hidden].blank?
   ruby:
+    show_all_style = OpenStruct.new(:name => "SHOW ALL")
+    show_all_color = OpenStruct.new(:name => "SHOW ALL",:presentation => "SHOW ALL")
+    @filter.styles.push(show_all_style)
+    @filter.shapes.push("SHOW ALL")
+    @filter.colors.push(show_all_color)
+
     style_options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style.try(:permalink))
     shape_options = options_from_collection_for_select(@filter.shapes, :to_s, :humanize, @collection.bodyshape.try(:downcase))
     color_options = color_options_for_select_from_options_values(@filter.colors, @collection.color.try(:name))

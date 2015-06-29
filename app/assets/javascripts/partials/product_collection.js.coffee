@@ -132,9 +132,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   getSelectedValues: () ->
     {
-      bodyshape: @bodyShapeInput.val(),
-      colour: @colorInput.val(),
-      style: @styleInput.val(),
+      bodyshape: if @bodyShapeInput.val() != 'SHOW ALL' then @bodyShapeInput.val() else '',
+      colour: if @colorInput.val() != 'SHOW ALL' then @colorInput.val() else '',
+      style: if @styleInput.val() != 'SHOW ALL' then @styleInput.val() else '',
       order: @productOrderInput.val()
     }
 
