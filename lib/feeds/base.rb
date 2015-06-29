@@ -170,19 +170,11 @@ module Feeds
 
     def get_weight(product, variant)
       if variant.weight.present?
-        return variant.weight.present?
+        variant.weight.present?
       elsif product.weight.present?
-        return product.weight?
+        product.weight?
       elsif
         product.property("weight")
-      end
-    end
-
-    def absolute_image_url(path)
-      if Rails.env.production?
-        path
-      else
-        "http://#{@config[:domain]}#{path}"
       end
     end
 
