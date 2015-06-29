@@ -11,5 +11,6 @@ html
       = render 'layouts/admin_ui/navigation'
       #page-wrapper.gray-bg
         = render 'layouts/admin_ui/topnavbar'
+        = flash_messages
         = yield
         /= render 'layouts/admin_ui/footer'

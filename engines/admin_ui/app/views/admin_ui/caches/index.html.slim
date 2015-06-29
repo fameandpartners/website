@@ -1,0 +1,52 @@
+- content_for :page_title
+  ' Caches
+
+.panel.panel-danger
+  .panel-heading
+    ' Expire Cache
+  .panel-body
+    p If you don't know what this does, don't touch it.
+
+    p All actions are logged.
+
+    = form_tag( {controller: :caches, action: :expire}, {method: :delete, class: 'form-inline'}) do
+      .form-group
+        label
+        = text_field_tag :really_expire, nil, placeholder: 'Type EXPIRE', class: 'form-control', required: true
+      .form-group
+        button.btn.btn-danger EXPIRE ALL
+
+.ibox.collapsed
+  .ibox-title
+    a.collapse-link
+      h5 Stats
+      .ibox-tools
+        i.fa.fa-chevron-up
+  .ibox-content
+    table.table.table-condensed
+      tbody
+        - @stats.each do |k,v|
+          tr
+            th = k
+            td = v
+
+.ibox
+  .ibox-title
+    a.collapse-link
+      h5 Keys (#{@cache_keys.size})
+      .ibox-tools
+        i.fa.fa-chevron-up
+  .ibox-content
+    table.table.table-condensed
+      thead : tr
+        th Key
+        th Expire
+      tbody
+        - @cache_keys.each do |key|
+          - url_key = Base64.urlsafe_encode64(key)
+          tr
+            td = key
+            td
+              = form_tag( {controller: :caches, action: :destroy, id: url_key }, {method: :delete, data: {confirm: "Are you sure?"}}) do
+                = hidden_field_tag :id, url_key
+                button Expire
