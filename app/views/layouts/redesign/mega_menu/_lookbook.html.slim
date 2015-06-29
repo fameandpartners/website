@@ -1,0 +1,35 @@
+li.shop.menu-item
+  a.menu-item--link.active-hover href="#"
+    | Lookbook
+  .mega-menu.hidden-sm.story-list
+    .stories.container-fluid.center
+
+      .col-md-2
+        = link_to bohemian_summer_collection_path do
+          .image-container
+            = image_tag src="//#{configatron.asset_host}/lookbook/bohemian-summer/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
+          p.text-center.edit-title Bohemian Summer
+
+      .col-md-2
+        = link_to bridesmaid_collection_path do
+          .image-container.bridesmaids
+            = image_tag src="//#{configatron.asset_host}/lookbook/bridesmaids/nav.jpg", :class => 'img-responsive', :alt => 'Our Beautiful Bridesmaids Collection'
+          p.text-center.edit-title Besties and Bridesmaids Collection
+
+      .col-md-2
+        = link_to all_size_collection_path do
+          .image-container
+            = image_tag src="//#{configatron.asset_host}/lookbook/all-size/nav.jpg", :class => 'img-responsive', :alt => 'All Sizes'
+          p.text-center.edit-title I'll Have What She's Having
+
+      .col-md-2
+        = link_to here_comes_the_sun_collection_path do
+          .image-container
+            = image_tag src="//#{configatron.asset_host}/lookbook/here-comes-the-sun/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
+          p.text-center.edit-title Here Comes The Sun
+
+      .col-md-2
+        = link_to prom_collection_path do
+          .image-container.real-prom
+            = image_tag src="//#{configatron.asset_host}/lookbook/prom/nav.jpg", :class => 'img-responsive', :alt => 'Our Official Prom Collection'
+          p.text-center.edit-title Our Official Prom Collection
