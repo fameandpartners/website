@@ -199,38 +199,43 @@ FameAndPartners::Application.routes.draw do
     resources :product_reservations, only: [:create]
   end
 
+
+  #######
+  # TODO: 26/06/2015 To be completely removed when the new blog is ready. In the meanwhile, let it be 404
+  #######
+  #
   # Redirects from old blog urls
-  constraints host: /blog\./ do
-    get '/' => redirect(host: configatron.host, path: "/blog")
-    match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
-  end
+  # constraints host: /blog\./ do
+  #   get '/' => redirect(host: configatron.host, path: "/blog")
+  #   match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
+  # end
+  #
+  # # Blog routes
+  # scope "(/:site_version)/blog", constraints: { site_version: /(us|au)/ } do
+  #   get '/' => 'blog#index', as: :blog
+  #   get '/about'   => 'blog#about', as: :about
+  #   get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
 
-  # Blog routes
-  scope "(/:site_version)/blog", constraints: { site_version: /(us|au)/ } do
-    get '/' => 'blog#index', as: :blog
-    get '/about'   => 'blog#about', as: :about
-    get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
+  #   get '/stylists' => 'blog/authors#index', as: :blog_authors
+  #   get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
 
-    get '/stylists' => 'blog/authors#index', as: :blog_authors
-    get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
+  #   get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
+  #   get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
 
-    get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
-    get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
+  #   get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
+  #   get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
 
-    get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
-    get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+  #   get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
+  #   get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
 
-    get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
-    get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
-
-    get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
-  end
+  #   get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
+  # end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
+    # get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
     get '/bloggers/liz-black', to: redirect("/")
-    get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
     get '/dani-stahl', to: redirect("/")
 
     # Static pages
@@ -316,15 +321,6 @@ FameAndPartners::Application.routes.draw do
 
     match '/trendsetter-program' => redirect('/')
 
-    match '/bloggers/racheletnicole' => redirect('/bloggers/ren')
-    match '/rachelxnicole' => redirect('/renxfame')
-
-    match '/blog/celebrity/*all' => redirect('/blog')
-
-    match '/blog/au/site_versions/au' => redirect('/blog')
-    match '/blog/au/site_versions/us' => redirect('/blog')
-
-
     mount Spree::Core::Engine, at: '/'
   end
 
@@ -371,8 +367,6 @@ FameAndPartners::Application.routes.draw do
 
       match '/product_images/upload' => 'product_images#upload', as: 'upload_product_images'
 
-      match '/blog' => redirect('/admin/blog/posts')
-
       get '/wishlist_items/download' => 'wishlist_items#download', as: 'wishlist_export'
       get '/user_style_profiles/download' => 'user_style_profiles#download', as: 'user_style_profiles_export'
 
@@ -412,46 +406,52 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
-      namespace :blog do
-        resources :promo_banners
-        resources :categories
-        resources :events
+      #######
+      # TODO: 26/06/2015 To be completely removed when the new blog is ready. In the meanwhile, let it be 404
+      #######
 
-        resources :assets, only: [:create, :destroy, :index]
+      # match '/blog' => redirect('/admin/blog/posts')
 
-        resources :post_photos do
-          put :make_primary, on: :member
-        end
+      # namespace :blog do
+      #   resources :promo_banners
+      #   resources :categories
+      #   resources :events
 
-        resources :celebrity_photos do
-          member do
-            put :assign_celebrity
-            put :assign_post
-            put :make_primary
-          end
-        end
+      #   resources :assets, only: [:create, :destroy, :index]
 
-        resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
-          member do
-            put :toggle_publish
-            put :toggle_featured
-          end
-        end
+      #   resources :post_photos do
+      #     put :make_primary, on: :member
+      #   end
 
-        resources :red_carpet_events, only: [:new, :create, :edit, :update, :index, :destroy] do
-          member do
-            put :toggle_publish
-          end
-        end
+      #   resources :celebrity_photos do
+      #     member do
+      #       put :assign_celebrity
+      #       put :assign_post
+      #       put :make_primary
+      #     end
+      #   end
 
-        resources :celebrities do
-          member do
-            put :toggle_featured
-          end
-        end
+      #   resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
+      #     member do
+      #       put :toggle_publish
+      #       put :toggle_featured
+      #     end
+      #   end
 
-        resource :configuration, only: [:show, :update]
-      end
+      #   resources :red_carpet_events, only: [:new, :create, :edit, :update, :index, :destroy] do
+      #     member do
+      #       put :toggle_publish
+      #     end
+      #   end
+
+      #   resources :celebrities do
+      #     member do
+      #       put :toggle_featured
+      #     end
+      #   end
+
+      #   resource :configuration, only: [:show, :update]
+      # end
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do
@@ -490,9 +490,6 @@ FameAndPartners::Application.routes.draw do
       get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
       get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
     end
-
-    match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
-    match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
 
     get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
 
