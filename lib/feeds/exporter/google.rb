@@ -24,6 +24,11 @@ module Feeds
                 xml.link "#{@config[:domain]}#{collection_product_path(item[:product], color: item[:color].parameterize)}"
                 xml.description CGI.escapeHTML(item[:description])
 
+                # Event, Style and Lookbook
+                xml.tag! "events"   , item[:events].join(',')
+                xml.tag! "styles"   , item[:styles].join(',')
+                xml.tag! "lookbooks", item[:lookbooks].join(',')
+
                 xml.tag! "g:id", item[:id]
                 xml.tag! "g:condition", "new"
                 xml.tag! "g:price", helpers.number_to_currency(item[:price], format: '%n %u', unit: current_currency)

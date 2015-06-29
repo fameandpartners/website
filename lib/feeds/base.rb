@@ -133,7 +133,11 @@ module Feeds
         weight:                  get_weight(product, variant)
       )
 
-      item.update(get_images(product, variant))
+      # Event, Style and Lookbook
+      item.update get_taxonomies(product)
+
+      # Images
+      item.update get_images(product, variant)
     end
 
     # TH: on-demand means never having to say you're out-of-stock
@@ -176,6 +180,18 @@ module Feeds
       elsif
         product.property("weight")
       end
+    end
+
+    def get_taxonomies(product)
+      product_events = Spree::Taxon.published.from_event_taxonomy.where(id: product.taxon_ids)
+      product_styles = Spree::Taxon.published.from_style_taxonomy.where(id: product.taxon_ids)
+      product_lookbooks  = Spree::Taxon.from_edits_taxonomy.where(id: product.taxon_ids)
+
+      {
+        events:    product_events.map(&:name),
+        styles:    product_styles.map(&:name),
+        lookbooks: product_lookbooks.map(&:name)
+      }
     end
 
     def google_product_types(product)
