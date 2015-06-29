@@ -9,8 +9,47 @@
       )
     >
 
+- if Features.active?(:sales) && sale_active?
+  ruby:
+    enable_countdown_banner_sale = %Q<
+      try {
+        function inUSWest(aDate) {
+          return new Date(aDate.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }))
+        }
+
+        currentUSWest     = inUSWest(new Date)
+        startTimeInUSWest = inUSWest(new Date("June 30, 2015 00:00:00"))
+
+        differenceFromStartTimeToCurrentTime = currentUSWest.getTime() - startTimeInUSWest.getTime()
+
+        currentDate = new Date()
+        startTime = (currentDate.getTime() - differenceFromStartTimeToCurrentTime)
+
+        if ( currentUSWest.getDate() == 30 ){
+          $("#countdown-banner").removeClass("hidden")
+          window.page.showCountdownTimer(
+            "",
+            "",
+            startTime,
+            24
+          )
+
+          $(".timer-box").css("margin-left",0)
+          $("#countdown-banner").css("background","#E02D91")
+          $(".banner-title").first().hide()
+          $(".spacer").hide()
+          $(".banner-message").hide()
+        }
+      }
+      catch (err) {
+
+      }
+    >
+
+
   = content_for :inline_javascript do
     = raw enable_countdown_banner
+    = raw enable_countdown_banner_sale
 
 #countdown-banner.alert-sale.alert-relative.hidden role="alert"
   a.close href="#"

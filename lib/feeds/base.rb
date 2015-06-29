@@ -32,7 +32,7 @@ module Feeds
     end
 
     def export
-      @logger.info "Starting Feeds Export SITE (#{version_permalink})"
+      @logger.info "Starting Feeds Export SITE (#{current_site_version.permalink})"
       @items      = get_items
       @properties = get_properties
 
@@ -55,6 +55,10 @@ module Feeds
     end
 
     private
+
+    def helpers
+      @helpers ||= Feeds::Helpers.new
+    end
 
     def current_currency
       current_site_version.currency
@@ -107,16 +111,7 @@ module Feeds
       price = variant.zone_price_for(current_site_version)
 
       # are we ever on sale?
-      original_price = price.display_price #.display_price_without_discount
-      sale_price     = price.display_price #.display_price_with_discount
-
-      original_price = original_price.to_s.delete('$').to_f
-      sale_price     = sale_price.to_s.delete('$').to_f
-
-      if sale_price == original_price
-        sale_price = 0
-      end
-
+      original_price = price.display_price.to_html(symbol: false).to_f #.display_price_without_discount
 
       item = HashWithIndifferentAccess.new(
         variant:                 variant,
@@ -125,10 +120,10 @@ module Feeds
         product_name:            product.name,
         product_sku:             product.sku,
         availability:            availability,
-        title:                   "#{product.name} - Size #{size} - Colour #{color}",
-        description:             product.description,
+        title:                   "#{color} #{product.name} Dress",
+        description:             helpers.strip_tags(product.description),
         price:                   original_price,
-        sale_price:              sale_price,
+        sale_price:              nil,
         google_product_category: "Apparel & Accessories > Clothing > Dresses > Formal Gowns",
         google_product_types:    google_product_types(product),
         id:                      "#{product.id.to_s}-#{variant.id.to_s}",

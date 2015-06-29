@@ -37,16 +37,10 @@ describe 'Product Redirection', type: :request do
   end
 
   context 'old taxon urls' do
-    it_will :redirect, "dresses/color", "/dresses"
     it_will :redirect, "dresses/event", "/dresses"
     it_will :redirect, 'dresses/event/graduation', '/dresses/graduation'
     it_will :redirect, "dresses/style", "/dresses"
     it_will :redirect, 'dresses/style/long', '/dresses/long'
-  end
-
-  context 'colour pages' do
-    it_will :redirect, '/dresses/colour/footpath_grey', '/dresses?colour=footpath_grey'
-    it_will :redirect, '/dresses/color/sidewalk_gray',  '/dresses?color=sidewalk_gray'
   end
 
   context 'plus-size' do
