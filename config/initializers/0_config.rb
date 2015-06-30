@@ -63,7 +63,14 @@ configatron.campaign_monitor do |campaign_monitor|
   campaign_monitor.list_id = 'dafc8802250a7fb08c840d9c4ffadc9f'  # '#all_subscribers list
 end
 
-configatron.redis_options = { :namespace => 'fame_and_partners' }
+def yaml_config(config_file)
+  YAML::load(File.open( File.join( Rails.root, 'config', config_file))).with_indifferent_access
+end
+
+configatron.redis_host = yaml_config("redis.yml")[Rails.env][:hosts]
+configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
+
+configatron.es_url = yaml_config("elasticsearch.yml")[Rails.env][:hosts]
 
 configatron.elasticsearch.indices do |index|
   index.spree_products = :spree_products
@@ -129,11 +136,7 @@ when :preproduction
   end
   configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
 
-  redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
-  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
-
   # configatron.es_url = 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
-  configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
 
   configatron.asset_host = "assets.fameandpartners.com/preprod"
 
@@ -150,11 +153,7 @@ when :production
     s3.secret_access_key = 'S64K5wEO6Son9PXywn+IJ9N/dUpf3IyEM2+Byr2j'
   end
 
-  redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
-  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
-
   # configatron.es_url = 'https://b13gy7hlm3:brc6ozc6oi@production-4224690387.us-east-1.bonsai.io'
-  configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
 
   configatron.customerio.site_id = 'a416731201185e0c6f5f'
   configatron.typekit_id = 'day0prb'
