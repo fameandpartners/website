@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2.21"
   s.add_dependency "slim"
+  s.add_dependency "sidekiq"
   s.add_dependency "kaminari"
   s.add_dependency "inspinia-rails"
   s.add_dependency "font-awesome-rails"
