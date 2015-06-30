@@ -401,13 +401,15 @@ module ProductsHelper
   end
 
   def color_options_for_select_from_options_values(color_option_values, selected = nil)
-    options_for_select(color_option_values.map do |option_value|
+    options = color_option_values.sort_by{ |c| c.name.downcase }.map do |option_value|
       [
         option_value.presentation, 
         option_value.name,
         class: "color #{option_value.name}"
       ]
-    end, selected)
+     end
+
+    options_for_select(options, selected)
   end
 
   def is_directed_from?(path)

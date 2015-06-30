@@ -1,13 +1,5 @@
-
-li class=active_link_to_class(root_path, active: :exact)
-  = link_to root_path do
-    i.fa.fa-dashboard
-    span.nav-label Dashboard
-
-li class=active_link_to_class(return_requests_path)
-  = link_to return_requests_path do
-    i.fa.fa-thumbs-down
-    span.nav-label Returns Management
+= menu_item root_path,            'Dashboard',          icon: 'dashboard',  exact: true
+= menu_item return_requests_path, 'Returns Management', icon: 'thumbs-down'
 
 li class=active_link_to_class(payments_report_path)
   a href="#"
@@ -15,9 +7,17 @@ li class=active_link_to_class(payments_report_path)
     span.nav-label Reports
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    li = active_link_to 'Payments', payments_report_path
+    = menu_item payments_report_path,    'Payments',     icon:  'usd'
 
-li
-  = link_to spree.admin_path do
-    i.fa.fa-usd
-    span.nav-label Spree Admin
+li class=active_link_to_class(caches_path)
+  a href="#"
+    i.fa.fa-database
+    span.nav-label Backend
+    span.fa.arrow
+  ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
+    = menu_item caches_path,      'Caches',    icon: 'recycle'
+    = menu_item sidekiq_web_path, 'Sidekiq',   icon: 'tasks'
+
+= menu_item spree.admin_path,   'Spree Admin', icon: 'shopping-cart'
+= menu_item main_app.root_path, 'Website',     icon: 'globe', exact: true
+

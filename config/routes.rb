@@ -77,9 +77,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
-    get '/sale-dresses' => 'statics#sale', :as => :sale
     get '/fame2015',  to: redirect('/')
-
 
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
@@ -88,14 +86,16 @@ FameAndPartners::Application.routes.draw do
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
     get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
 
-    # get '/break-hearts-collection' => 'statics#break_hearts_not_banks', :as => :break_hearts_collection
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
 
+    get '/sale-dresses' => redirect('/dresses/sale')
+    get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
+
+    get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
+
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
-    # get '/bridesmaid-dresses' => redirect('/lookbook/bridesmaids')
-    # get '/lookbook/bridesmaids' => 'products/collections#show', :permalink => 'Bridesmaid14', :as => :bridesmaid_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'plus-size', :as => :all_size_collection
@@ -143,12 +143,6 @@ FameAndPartners::Application.routes.draw do
       get '/style/:taxon', to: redirect('/dresses/%{taxon}')
       get '/event',  to: redirect('/dresses')
       get '/event/:taxon', to: redirect('/dresses/%{taxon}')
-      get '/body-shape' => 'spree/products#root_taxon', defaults: {taxon_root: 'bodyshape'}
-      get '/colour',  to: redirect('/dresses')
-      get '/color',  to: redirect('/dresses')
-      get '/colour/:colour_name', to: redirect( path: '/dresses?colour=%{colour_name}')
-      get '/color/:colour_name',  to: redirect( path: '/dresses?color=%{colour_name}')
-      get '/:event/:style' => 'spree/products#index'
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
       get '/*permalink' => 'products/collections#show', as: 'taxon'
       get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
@@ -205,38 +199,43 @@ FameAndPartners::Application.routes.draw do
     resources :product_reservations, only: [:create]
   end
 
+
+  #######
+  # TODO: 26/06/2015 To be completely removed when the new blog is ready. In the meanwhile, let it be 404
+  #######
+  #
   # Redirects from old blog urls
-  constraints host: /blog\./ do
-    get '/' => redirect(host: configatron.host, path: "/blog")
-    match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
-  end
+  # constraints host: /blog\./ do
+  #   get '/' => redirect(host: configatron.host, path: "/blog")
+  #   match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
+  # end
+  #
+  # # Blog routes
+  # scope "(/:site_version)/blog", constraints: { site_version: /(us|au)/ } do
+  #   get '/' => 'blog#index', as: :blog
+  #   get '/about'   => 'blog#about', as: :about
+  #   get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
 
-  # Blog routes
-  scope "(/:site_version)/blog", constraints: { site_version: /(us|au)/ } do
-    get '/' => 'blog#index', as: :blog
-    get '/about'   => 'blog#about', as: :about
-    get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
+  #   get '/stylists' => 'blog/authors#index', as: :blog_authors
+  #   get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
 
-    get '/stylists' => 'blog/authors#index', as: :blog_authors
-    get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
+  #   get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
+  #   get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
 
-    get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
-    get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
+  #   get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
+  #   get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
 
-    get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
-    get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
+  #   get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
+  #   get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
 
-    get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
-    get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
-
-    get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
-  end
+  #   get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
+  # end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     # Blogger static page
+    # get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
     get '/bloggers/liz-black', to: redirect("/")
-    get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
     get '/dani-stahl', to: redirect("/")
 
     # Static pages
@@ -316,15 +315,6 @@ FameAndPartners::Application.routes.draw do
 
     match '/trendsetter-program' => redirect('/')
 
-    match '/bloggers/racheletnicole' => redirect('/bloggers/ren')
-    match '/rachelxnicole' => redirect('/renxfame')
-
-    match '/blog/celebrity/*all' => redirect('/blog')
-
-    match '/blog/au/site_versions/au' => redirect('/blog')
-    match '/blog/au/site_versions/us' => redirect('/blog')
-
-
     mount Spree::Core::Engine, at: '/'
   end
 
@@ -371,8 +361,6 @@ FameAndPartners::Application.routes.draw do
 
       match '/product_images/upload' => 'product_images#upload', as: 'upload_product_images'
 
-      match '/blog' => redirect('/admin/blog/posts')
-
       get '/wishlist_items/download' => 'wishlist_items#download', as: 'wishlist_export'
       #get '/user_style_profiles/download' => 'user_style_profiles#download', as: 'user_style_profiles_export'
 
@@ -412,46 +400,52 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
-      namespace :blog do
-        resources :promo_banners
-        resources :categories
-        resources :events
+      #######
+      # TODO: 26/06/2015 To be completely removed when the new blog is ready. In the meanwhile, let it be 404
+      #######
 
-        resources :assets, only: [:create, :destroy, :index]
+      # match '/blog' => redirect('/admin/blog/posts')
 
-        resources :post_photos do
-          put :make_primary, on: :member
-        end
+      # namespace :blog do
+      #   resources :promo_banners
+      #   resources :categories
+      #   resources :events
 
-        resources :celebrity_photos do
-          member do
-            put :assign_celebrity
-            put :assign_post
-            put :make_primary
-          end
-        end
+      #   resources :assets, only: [:create, :destroy, :index]
 
-        resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
-          member do
-            put :toggle_publish
-            put :toggle_featured
-          end
-        end
+      #   resources :post_photos do
+      #     put :make_primary, on: :member
+      #   end
 
-        resources :red_carpet_events, only: [:new, :create, :edit, :update, :index, :destroy] do
-          member do
-            put :toggle_publish
-          end
-        end
+      #   resources :celebrity_photos do
+      #     member do
+      #       put :assign_celebrity
+      #       put :assign_post
+      #       put :make_primary
+      #     end
+      #   end
 
-        resources :celebrities do
-          member do
-            put :toggle_featured
-          end
-        end
+      #   resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
+      #     member do
+      #       put :toggle_publish
+      #       put :toggle_featured
+      #     end
+      #   end
 
-        resource :configuration, only: [:show, :update]
-      end
+      #   resources :red_carpet_events, only: [:new, :create, :edit, :update, :index, :destroy] do
+      #     member do
+      #       put :toggle_publish
+      #     end
+      #   end
+
+      #   resources :celebrities do
+      #     member do
+      #       put :toggle_featured
+      #     end
+      #   end
+
+      #   resource :configuration, only: [:show, :update]
+      # end
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do
@@ -491,16 +485,6 @@ FameAndPartners::Application.routes.draw do
       get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
     end
 
-    match '/admin/blog/fashion_news' => 'posts#index', :via => :get, as: 'admin_blog_index_news'
-    match '/blog/fashion_news' => 'posts#index', :via => :get, as: 'blog_index_news'
-
-    # seo routes like *COLOR*-Dress
-    get "(:colour)-Dresses" => redirect { |params, req| "/dresses/#{params[:colour].downcase}" }
-
-    # seo route
-    get "new-collection" => "products/collections#show", as: :new_collection
-
-    get '/next-day-delivery' => redirect('/express-delivery')
     get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
 
     # Redirecting all bridesmaid party URLs
@@ -508,9 +492,6 @@ FameAndPartners::Application.routes.draw do
 
     resources :site_versions, only: [:show]
   end
-
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/admin/3c75a382d04ca5d1bea40f573fba062a-sidekiq'
 
   if Rails.env.development?
     mount MailPreview => 'mail_view'

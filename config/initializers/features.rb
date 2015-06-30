@@ -12,7 +12,7 @@ end
 
 Features.deactivate(:collection_content)
 Features.deactivate(:maintenance)
-Features.deactivate(:sales)
+Features.activate(:sales)
 Features.activate(:express_making)
 Features.activate(:moodboard)
 Features.activate(:order_returns)

@@ -1,4 +1,4 @@
-- if shipment
+- if shipment.present?
   - if shipment.order.can_ship?
     = form_for shipment, url: main_app.admin_shipment_path(shipment.id), remote: true, html: { class: 'shipment_tracking_number_form' } do |f|
       = f.hidden_field :id

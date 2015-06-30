@@ -180,6 +180,7 @@ PATH
       inspinia-rails
       kaminari
       rails (~> 3.2.21)
+      sidekiq
       slim
     fame_favicon (0.0.1)
       rails (~> 3.2.21)

@@ -51,7 +51,9 @@ Spree::Promotion.class_eval do
 
     # rude method. possible, it should be thrown away
     def can_apply_to_any_order?
-      %w(xtra10 swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25 frenzy5p crafted4u vosn2015 famer35p zouponsfame famexinstyle5 ibotta5 famexAU5 famexUS5 bonus5p birthday5p fashionitgirlsale5).include?(self.code.downcase)
+      applicable_to_any_order_promocodes = %w(xtra10 swm30 is20 who20 fam20 btb20p btb20d gf20 theparcel25 frenzy5p crafted4u vosn2015 famer35p zouponsfame famexinstyle5 ibotta5 famexAU5 famexUS5 bonus5p birthday5p famexsale5 famexhuffington5 fashionitgirlsale5)
+
+      applicable_to_any_order_promocodes.any?{|code| code.to_s.downcase == self.code.downcase }
     end
 
   private

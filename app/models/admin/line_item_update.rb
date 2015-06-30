@@ -81,7 +81,7 @@ module Admin
       if id_match = order.line_items.detect {|i| i.id.to_s == raw_line_item }
         lit.line_item = id_match
       else
-        style_matches = items_matching_style(order, lit.style_name)
+        style_matches = items_matching_style(order, lit.style_name.to_s)
 
         if style_matches.empty?
           match_errors << :no_style_in_order

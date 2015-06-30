@@ -108,13 +108,19 @@
     width: 40%;
 
     @media (max-width: 990px){
-      width: 100%
+      width: 100%;
+      margin-bottom: 10px;
     }
   }
 
   .submit {
     @media (max-width: 990px){
-    display: block;
+      display: block;
+      .btn{
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-bottom: 10px;
+      }
     }
   }
 }
@@ -144,6 +150,7 @@
 
     @media(max-width: 480px){
       font-size: 6rem;
+      margin-top: 10px;
     }
   }
 
@@ -230,7 +237,7 @@
     font-family: forum;
     font-size: 4.5rem;
     text-transform: uppercase;
-    line-height: 3rem;
+    line-height: 4rem;
 
     small{
       color: black;

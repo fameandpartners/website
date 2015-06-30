@@ -1,5 +1,6 @@
 - if local_assigns[:hidden].blank?
   ruby:
+
     style_options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style.try(:permalink))
     shape_options = options_from_collection_for_select(@filter.shapes, :to_s, :humanize, @collection.bodyshape.try(:downcase))
     color_options = color_options_for_select_from_options_values(@filter.colors, @collection.color.try(:name))
@@ -8,13 +9,13 @@
   .container.relative.category-controls
     .row.relative
       .col-md-3.hidden-sm.hidden-xs.hidden-xxs
-        = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Styles'
+        = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'All Styles'
         br
       .col-md-3.hidden-sm.hidden-xs.hidden-xxs
-        = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Shape'
+        = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'All Shapes'
         br
       .col-md-3.hidden-sm.hidden-xs.hidden-xxs
-        = select_tag :color, color_options, class: 'pink-select', prompt: t(:color)
+        = select_tag :color, color_options, class: 'pink-select', prompt: t(:all_colors)
         br
       .col-md-3.col-xs-12.col-xxs-12.product-order
         = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'

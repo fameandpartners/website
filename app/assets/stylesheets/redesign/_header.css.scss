@@ -4,7 +4,9 @@
 }
 
 .all-dresses {
-  padding-right: 0;
+  padding: 0;
+  margin-left: 15px;
+  &.col-md-4 { padding-top: 0;}
 
   .btn{
     font-family: $font-family-secondary;
@@ -62,12 +64,12 @@
   position: absolute;
   left: 17px;
   top: 130px;
-  width: (100% / 3);
+  width: 25%;
   display: block;
   color: #fff;
 
   img {
-    width: 377px;
+    width: 100%;
   }
 }
 
@@ -89,6 +91,7 @@
   background-color: white;
   padding-right: 0;
   padding-left: 0;
+  line-height: 35px;
 }
 
 .search-bar {
