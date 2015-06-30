@@ -74,9 +74,7 @@ class Products::DetailsResource
     end
 
     def get_product_id_from_slug(slug)
-      result = slug.to_s.match(/(\d)+$/)
-      return result[0] if result.present?
-      raise ArgumentError.new('invalid product slug')
+      slug.to_s.match(/(\d)+$/) { |result| result[0] }
     end
 
     # images
