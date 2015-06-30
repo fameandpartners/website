@@ -13,25 +13,14 @@
   ruby:
     enable_countdown_banner_sale = %Q<
       try {
-        function inUSWest(aDate) {
-          return new Date(aDate.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }))
-        }
+        absoluteStartTime = new Date("June 29, 2015 07:00:00 GMT");
 
-        currentUSWest     = inUSWest(new Date)
-        startTimeInUSWest = inUSWest(new Date("June 30, 2015 00:00:00"))
-
-        differenceFromStartTimeToCurrentTime = currentUSWest.getTime() - startTimeInUSWest.getTime()
-
-        currentDate = new Date()
-        startTime = (currentDate.getTime() - differenceFromStartTimeToCurrentTime)
-
-        if ( currentUSWest.getDate() == 30 ){
           $("#countdown-banner").removeClass("hidden")
           window.page.showCountdownTimer(
             "",
             "",
-            startTime,
-            24
+            absoluteStartTime.getTime(),
+            48
           )
 
           $(".timer-box").css("margin-left",0)
@@ -41,8 +30,7 @@
           $(".banner-message").hide()
           $(".banner-title:last span").first().text("UP TO 50% OFF SITE WIDE -")
           $(".banner-title:last span").first().css("margin-right","5px")
-          $(".banner-title:last span:nth-child(2)").text("ENDS TODAY")
-        }
+          $(".banner-title:last span:nth-child(2)").text("ENDS SOON")
       }
       catch (err) {
 
