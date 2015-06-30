@@ -13,13 +13,13 @@
   ruby:
     enable_countdown_banner_sale = %Q<
       try {
-        absoluteStartTime = new Date("June 29, 2015 07:00:00 GMT");
+        localStartTime = new Date("June 29, 2015 07:00:00 GMT");
 
           $("#countdown-banner").removeClass("hidden")
           window.page.showCountdownTimer(
             "",
             "",
-            absoluteStartTime.getTime(),
+            localStartTime.getTime(),
             48
           )
 
