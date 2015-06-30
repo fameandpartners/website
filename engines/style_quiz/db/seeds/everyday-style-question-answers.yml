@@ -3,120 +3,317 @@
   :value: 1
   :image: style_quiz/questions/everyday_style/1.jpg
   :tags:
+  - Multi
+  - Spots
+  - Animal
+  - Georgette
+  - Silk
 - :name: 2
   :value: 2
   :image: style_quiz/questions/everyday_style/2.jpg
+  :tags:
+  - Navy
+  - Fuschia
+  - Tie Dye
+  - Wool
+  - Georgette
 - :name: 3
   :value: 3
   :image: style_quiz/questions/everyday_style/3.jpg
+  :tags:
+  - Cream
+  - Moss
 - :name: 4
   :value: 4
   :image: style_quiz/questions/everyday_style/4.jpg
+  :tags:
+  - Ivory
+  - Sand
+  - Cotton
 - :name: 5
   :value: 5
   :image: style_quiz/questions/everyday_style/5.jpg
+  :tags:
+  - White
+  - Sky Blue
+  - Leather
+  - Denim
 - :name: 6
   :value: 6
   :image: style_quiz/questions/everyday_style/6.jpg
+  :tags:
+  - Black
+  - Blue
+  - Denim
+  - Cotton
 - :name: 7
   :value: 7
   :image: style_quiz/questions/everyday_style/7.jpg
+  :tags:
+  - Pink
+  - Black
 - :name: 8
   :value: 8
   :image: style_quiz/questions/everyday_style/8.jpg
+  :tags:
+  - Blue
+  - Indigo
+  - Denim
 - :name: 9
   :value: 9
   :image: style_quiz/questions/everyday_style/9.jpg
+  :tags:
+  - Black
+  - Mauve
+  - Leopard
+  - Animal
+  - Denim
+  - Cotton
 - :name: 10
   :value: 10
   :image: style_quiz/questions/everyday_style/10.jpg
+  :tags:
+  - Black
+  - Forrest
+  - Wool
+  - Cotton
 - :name: 11
   :value: 11
   :image: style_quiz/questions/everyday_style/11.jpg
+  :tags:
+  - Metallic
+  - Gold
+  - Floral
+  - Victorian
 - :name: 12
   :value: 12
   :image: style_quiz/questions/everyday_style/12.jpg
+  :tags:
+  - Olive
+  - Black
+  - Leopard
+  - Leather
 - :name: 13
   :value: 13
   :image: style_quiz/questions/everyday_style/13.jpg
+  :tags:
+  - Red
+  - Grey
+  - Polyester
+  - Cotton
 - :name: 14
   :value: 14
   :image: style_quiz/questions/everyday_style/14.jpg
+  :tags: 
 - :name: 15
   :value: 15
   :image: style_quiz/questions/everyday_style/15.jpg
+  :tags:
+  - Red
+  - Black
+  - Leather
+  - Silk
 - :name: 16
   :value: 16
   :image: style_quiz/questions/everyday_style/16.jpg
+  :tags:
+  - Grey
+  - Black
+  - Leather
+  - Cotton
 - :name: 17
   :value: 17
   :image: style_quiz/questions/everyday_style/17.jpg
+  :tags:
+  - Mustard
+  - White
+  - Cotton
 - :name: 18
   :value: 18
   :image: style_quiz/questions/everyday_style/18.jpg
+  :tags:
+  - Lavender
+  - Blue
+  - Wool
+  - Denim
 - :name: 19
   :value: 19
   :image: style_quiz/questions/everyday_style/19.jpg
+  :tags:
+  - Sand
+  - Black
+  - Wool
+  - Jersey
 - :name: 20
   :value: 20
   :image: style_quiz/questions/everyday_style/20.jpg
+  :tags:
+  - Grey
+  - Cotton
 - :name: 21
   :value: 21
   :image: style_quiz/questions/everyday_style/21.jpg
+  :tags:
+  - White
+  - Spots
+  - Organza
 - :name: 22
   :value: 22
   :image: style_quiz/questions/everyday_style/22.jpg
+  :tags:
+  - Forrest
+  - Blush
+  - Neoprene
+  - Wool
 - :name: 23
   :value: 23
   :image: style_quiz/questions/everyday_style/23.jpg
+  :tags:
+  - Blue
+  - Gingham
+  - Cotton
 - :name: 24
   :value: 24
   :image: style_quiz/questions/everyday_style/24.jpg
+  :tags: 
 - :name: 25
   :value: 25
   :image: style_quiz/questions/everyday_style/25.jpg
+  :tags:
+  - Blue
+  - Orange
+  - Plaid
+  - Cotton
 - :name: 26
   :value: 26
   :image: style_quiz/questions/everyday_style/26.jpg
+  :tags:
+  - Black
+  - White
 - :name: 27
   :value: 27
   :image: style_quiz/questions/everyday_style/27.jpg
+  :tags:
+  - Metallic
+  - Silver
 - :name: 28
   :value: 28
   :image: style_quiz/questions/everyday_style/28.jpg
+  :tags:
+  - Light Pink
+  - Grey
+  - Gingham
+  - Wool
 - :name: 29
   :value: 29
   :image: style_quiz/questions/everyday_style/29.jpg
+  :tags:
+  - Black
+  - Silver
+  - Conversational
+  - Lurex
+  - Denim
 - :name: 30
   :value: 30
   :image: style_quiz/questions/everyday_style/30.jpg
+  :tags:
+  - Orange
+  - Multi
+  - Animal
+  - Psychedelic
+  - Cotton
+  - Viscose
 - :name: 31
   :value: 31
   :image: style_quiz/questions/everyday_style/31.jpg
+  :tags:
+  - Black
+  - White
+  - Monochrome
+  - Tropical
+  - Cotton
 - :name: 32
   :value: 32
   :image: style_quiz/questions/everyday_style/32.jpg
+  :tags:
+  - Cobalt Blue
+  - Black
+  - Polyester
+  - Leather
 - :name: 33
   :value: 33
   :image: style_quiz/questions/everyday_style/33.jpg
+  :tags:
+  - Blue
+  - Orange
+  - Conversational
+  - Colour Block
+  - Polyester
+  - Denim
 - :name: 34
   :value: 34
   :image: style_quiz/questions/everyday_style/34.jpg
+  :tags:
+  - Black
+  - Leather
+  - Rayon
 - :name: 35
   :value: 35
   :image: style_quiz/questions/everyday_style/35.jpg
+  :tags:
+  - Grey
+  - Black
+  - Conversational
+  - Plaid
+  - Cotton
+  - Denim
 - :name: 36
   :value: 36
   :image: style_quiz/questions/everyday_style/36.jpg
+  :tags:
+  - Black
+  - Photographic
+  - Digital
+  - Cotton
+  - Denim
 - :name: 37
   :value: 37
   :image: style_quiz/questions/everyday_style/37.jpg
+  :tags:
+  - Navy
+  - Moss
+  - Conversational
+  - Photographic
+  - Cotton
+  - Leather
 - :name: 38
   :value: 38
   :image: style_quiz/questions/everyday_style/38.jpg
+  :tags:
+  - Black
+  - Marine Blue
+  - Wool
+  - Cotton
 - :name: 39
   :value: 39
   :image: style_quiz/questions/everyday_style/39.jpg
+  :tags:
+  - Black
+  - White
+  - Leather
+  - Cotton
 - :name: 40
   :value: 40
   :image: style_quiz/questions/everyday_style/40.jpg
+  :tags:
+  - Black
+  - Red
+  - Stretch
+- :name: 41
+  :value: 41
+  :image: style_quiz/questions/everyday_style/121.jpg
+  :tags: 
+- :name: 42
+  :value: 42
+  :image: style_quiz/questions/everyday_style/122.jpg
+  :tags: 

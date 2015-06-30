@@ -1,13 +1,14 @@
 ## seeder class. extracted to easier use in console or tasks
+#  require File.join(StyleQuiz::Engine.root, 'db', 'seeds.rb')
 #
 #  with truncation
-#    StyleQuiz::Seed.populate(force: true)
+#    StyleQuiz::Seed.new.populate(force: true)
 #
 #  without truncation
-#    StyleQuiz::Seed.populate(force: false)
+#    StyleQuiz::Seed.new.populate(force: false)
 #
 #  just truncate 
-#    StyleQuiz::Seed.truncate
+#    StyleQuiz::Seed.new.truncate
 #
 module StyleQuiz
   class Seed
@@ -26,8 +27,7 @@ module StyleQuiz
       StyleQuiz::Question.delete_all
       StyleQuiz::Answer.delete_all
 
-      empty_tags = ActiveRecord::Coders::YAMLColumn.new(Array).dump([])
-      Spree::Product.update_all(:tags, empty_tags)
+      Spree::Product.update_all(tags: [])
     end
 
     def populate_tags

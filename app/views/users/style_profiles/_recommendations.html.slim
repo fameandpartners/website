@@ -21,3 +21,4 @@ ruby:
         - @products.each_slice(4).each do |products_row|
           - products_row.each do |product|
             = render 'products/collections/product', product: product
+    = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get

@@ -77,6 +77,20 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
   off: () -> @$container.off.apply(@$container, arguments)
   trigger: () -> @$container.trigger.apply(@$container, arguments)
 
+  callForLoggedFacebookUser: (callback) ->
+    _callback = callback
+    FB.getLoginStatus( (response) ->
+      if (response && response.status == 'not_authorized')
+        FB.login( (response) ->
+          if (response.authResponse)
+            _callback()
+        , scope: 'email,user_birthday,user_events,user_friends',
+          return_scopes: true
+        )
+      else
+        _callback()
+    )
+
 window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->
     super(opts)
@@ -133,28 +147,9 @@ window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.
 
       @$birthdayInput.datepicker('setDate', new Date(user_profile.birthday))
 
-      # set datepicker to fb format & restore previous settings
-      # datepicker convert automatically
-      #old_format = @$birthdayInput.datepicker('option', 'dateFormat')
-      #@$birthdayInput.datepicker('option', 'dateFormat', 'mm/dd/yy')
-      #@$birthdayInput.datepicker('setDate', user_profile.birthday)
-      #@$birthdayInput.datepicker('option', 'dateFormat', old_format)
-
-    requestFbProfile = () ->
+    @callForLoggedFacebookUser( () ->
       FB.api("/me", importFromFacebook)
-
-    FB.getLoginStatus( (response) ->
-      if (response && response.status == 'not_authorized')
-        FB.login( (response) ->
-          if (response.authResponse)
-            requestFbProfile()
-        , scope: 'email,user_birthday,user_events',
-          return_scopes: true
-        )
-      else
-        requestFbProfile()
     )
-
 
 window.StyleQuiz.ColorPaletteQuestion = class ColorPaletteQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->
@@ -299,6 +294,11 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
       event_type: @$container.find('input[name=event_type]').val(),
       date:       @$container.find('input[name=date]').val()
     }
+    @addEvent(event)
+    # reset form
+    @$container.find('input[name=name]').val('')
+    @$container.find('input[name=event_type]').val('')
+    @$container.find('input[name=date]').datepicker('setDate', new Date())
 
   addEvent: (event) =>
     @events.push(event)
@@ -325,26 +325,17 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
     that = @
     dateFormat = that.$container.find('input[name=date]').datepicker('option', 'dateFormat')
     importFromFacebook = (events) ->
+      currentDate = new Date()
       _.each(events.data, (event, index) =>
         date = new Date(event.start_time || event.end_time)
-        that.addEvent({
-          name: event.name,
-          event_type: event.location,
-          date: $.datepicker.formatDate(dateFormat, date)
-        })
+        if date && date > currentDate
+          that.addEvent({
+            name: event.name,
+            event_type: event.location,
+            date: $.datepicker.formatDate(dateFormat, date)
+          })
       )
 
-    requestFbProfile = () ->
+    @callForLoggedFacebookUser( () ->
       FB.api("/me/events", importFromFacebook)
-
-    FB.getLoginStatus( (response) ->
-      if (response && response.status == 'not_authorized')
-        FB.login( (response) ->
-          if (response.authResponse)
-            requestFbProfile()
-        , scope: 'email,user_birthday,user_events',
-          return_scopes: true
-        )
-      else
-        requestFbProfile()
     )

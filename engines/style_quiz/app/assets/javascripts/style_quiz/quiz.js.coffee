@@ -8,6 +8,8 @@ window.StyleQuiz.Quiz = class Quiz
     @questions_data = opts.questions_data || []
     @action = opts.action
 
+    console.log(@questions)
+
     settings = opts.settings
     @questions = []
     _.each(opts.questions_data, (data, index) ->
@@ -37,20 +39,24 @@ window.StyleQuiz.Quiz = class Quiz
     , @)
 
   showNext: () =>
-    if @questions[@current]
-      if @current < ( @questions.length - 1 )
-        @current = @current + 1
-        @showCurrentQuestion()
-      else
-        @finish()
+    unfinished_questions = @getUnfinishedQuestions()
+    if unfinished_questions.length == 0
+      @finish()
     else
-      # invalid case, some unknown positon
-      false
+      @current = unfinished_questions[0]
+      @showCurrentQuestion()
 
   showPrevious: () =>
     if @current > 0
       @current = @current - 1
       @showCurrentQuestion()
+
+  getUnfinishedQuestions: () ->
+    result = []
+    _.each(@questions, (element, index, list) ->
+      result.push(index) unless element.isValid()
+    )
+    result
 
   answers: () =>
     ids = []
