@@ -124,8 +124,8 @@ describe Marketing::Subscriber do
   end
 
   context "#user_changed" do
-    it "true if changed valuable arguments" do
-      %w{email first_name last_name current_sign_in_ip last_sign_in_ip}.each do |attr_name|
+    %w{email first_name last_name current_sign_in_ip last_sign_in_ip}.each do |attr_name|
+      it "true when changed #{attr_name}" do
         user = Spree::User.new
         user[attr_name] = 'andytextorvalue'
         expect(
