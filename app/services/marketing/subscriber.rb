@@ -48,7 +48,7 @@ class Marketing::Subscriber
 
     def user_changed?
       return false if user.blank?
-      %w(email first_name last_name).any? do |attribute_name|
+      %w(email first_name last_name current_sign_in_ip last_sign_in_ip).any? do |attribute_name|
         user.changes.keys.include?(attribute_name)
       end
     end
@@ -81,11 +81,10 @@ class Marketing::Subscriber
     end
 
     def ipaddress
-      @ipaddress ||= user.present? ? user.last_sign_in_ip : nil
+      @ipaddress ||= user.present? ? [user.current_sign_in_ip, user.last_sign_in_ip].compact.first : nil
     end
 
     def country_name
       UserCountryFromIP.new(ipaddress).country_name
     end
-
 end

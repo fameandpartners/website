@@ -31,10 +31,17 @@ Spree::User.class_eval do
               if: :validate_presence_of_phone
             }
 
-  after_create :send_welcome_email, unless: Proc.new { |a| a.skip_welcome_email }
+  after_create :send_welcome_email,           unless: Proc.new { |a| a.skip_welcome_email }
+  after_create :create_marketing_subscriber,  if: :newsletter?
+  after_update :update_marketing_subsriber,   if: :newsletter?
 
-  after_create {|user| Marketing::Subscriber.new(user: user).create if user.newsletter? }
-  after_update {|user| Marketing::Subscriber.new(user: user).update }
+  def create_marketing_subscriber
+    Marketing::Subscriber.new(user: self).create
+  end
+
+  def update_marketing_subsriber
+    Marketing::Subscriber.new(user: self).update
+  end
 
   def update_profile(args = {})
     if args[:password].blank?

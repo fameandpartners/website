@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProductMakingOption do
+describe ProductMakingOption, type: :model do
   it "exists" do
     expect(ProductMakingOption.new).not_to be_blank
   end
