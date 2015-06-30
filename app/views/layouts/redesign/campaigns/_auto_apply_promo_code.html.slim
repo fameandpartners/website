@@ -15,22 +15,23 @@
       try {
         localStartTime = new Date("June 29, 2015 07:00:00 GMT");
 
-          $("#countdown-banner").removeClass("hidden")
+          $("#countdown-banner").removeClass("hidden");
           window.page.showCountdownTimer(
             "",
             "",
             localStartTime.getTime(),
             48
-          )
+          );
 
-          $(".timer-box").css("margin-left",0)
-          $("#countdown-banner").css("background","#E02D91")
-          $(".banner-title").first().hide()
-          $(".spacer").hide()
-          $(".banner-message").hide()
-          $(".banner-title:last span").first().text("UP TO 50% OFF SITE WIDE -")
-          $(".banner-title:last span").first().css("margin-right","5px")
-          $(".banner-title:last span:nth-child(2)").text("ENDS SOON")
+          $(".timer-box").css("margin-left",0);
+          $("#countdown-banner").css("background","#E02D91");
+          $("#countdown-banner a.close").hide();
+          $(".banner-title").first().hide();
+          $(".spacer").hide();
+          $(".banner-message").hide();
+          $(".banner-title:last span").first().text("UP TO 50% OFF SITE WIDE -");
+          $(".banner-title:last span").first().css("margin-right","5px");
+          $(".banner-title:last span:nth-child(2)").text("ENDS SOON");
       }
       catch (err) {
 
