@@ -1,7 +1,6 @@
 
 style table.line_items tbody:nth-child(odd) { background-color: #eff5fc; }
 
-
 table.line_items
   thead
     tr
@@ -61,7 +60,8 @@ table.line_items
               = Fabrication::STATES[line_item.fabrication.state]
             - else
               = render partial: 'update_fabrication_state_form', locals: { order_line_item: line_item }
-          - if shipment = line_item.shipment
+          - shipment = line_item.shipment
+          - if shipment.present?
             - if shipment.shipped?
               td
                 = render partial: 'admin/shipments/shipped_shipment_tracking', locals: { shipment: shipment }
@@ -70,7 +70,7 @@ table.line_items
                 = render partial: 'admin/shipments/tracking_number_update_form', locals: { shipment: shipment }
             - elsif total_items > 1 && position.zero?
               td rowspan=total_items
-                = link_to 'Multiple Items In Order', admin_order_shipments_path(shipment.order), target: '_blank'
+                = link_to 'Multiple Items In Order', admin_order_shipments_path(order), target: '_blank'
           - else
             td
               ' No Shipment defined

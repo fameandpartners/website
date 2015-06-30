@@ -15,6 +15,10 @@ module Orders
       def tracking
         'NoShipment'
       end
+
+      def present?
+        false
+      end
     end
     extend Forwardable
 
