@@ -178,13 +178,7 @@ module Feeds
     end
 
     def get_weight(product, variant)
-      if variant.weight.present?
-        variant.weight.present?
-      elsif product.weight.present?
-        product.weight?
-      elsif
-        product.property("weight")
-      end
+      variant.weight || product.weight || product.property('weight')
     end
 
     def get_taxons(product)
