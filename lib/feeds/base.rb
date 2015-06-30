@@ -111,7 +111,13 @@ module Feeds
       price = variant.zone_price_for(current_site_version)
 
       # are we ever on sale?
-      original_price = price.display_price.to_html(symbol: false).to_f #.display_price_without_discount
+      original_price = price.display_price.to_html(symbol: false) #.display_price_without_discount
+
+      sale_price = nil
+      if product.discount
+        sale_price = price.apply(product.discount)
+        sale_price = sale_price.display_price.to_html(symbol: false)
+      end
 
       item = HashWithIndifferentAccess.new(
         variant:                 variant,
@@ -123,7 +129,7 @@ module Feeds
         title:                   "#{color} #{product.name} Dress",
         description:             helpers.strip_tags(product.description),
         price:                   original_price,
-        sale_price:              nil,
+        sale_price:              sale_price,
         google_product_category: "Apparel & Accessories > Clothing > Dresses > Formal Gowns",
         id:                      "#{product.id.to_s}-#{variant.id.to_s}",
         group_id:                product.id.to_s,
