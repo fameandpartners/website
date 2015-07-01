@@ -24,6 +24,11 @@ module Feeds
                 xml.link "#{@config[:domain]}#{collection_product_path(item[:product], color: item[:color].parameterize)}"
                 xml.description CGI.escapeHTML(item[:description])
 
+                # Event, Style and Lookbook
+                xml.tag! "events"   , item[:events].join(',')
+                xml.tag! "styles"   , item[:styles].join(',')
+                xml.tag! "lookbooks", item[:lookbooks].join(',')
+
                 xml.tag! "g:id", item[:id]
                 xml.tag! "g:condition", "new"
                 xml.tag! "g:price", helpers.number_to_currency(item[:price], format: '%n %u', unit: current_currency)
@@ -33,9 +38,7 @@ module Feeds
                 xml.tag! "g:shipping_weight", item[:weight]
 
                 xml.tag! "g:google_product_category", CGI.escapeHTML(item[:google_product_category])
-                item[:google_product_types].each do |product_type|
-                  xml.tag! "g:product_type", CGI.escapeHTML(product_type)
-                end
+                xml.tag! "g:product_type", item[:taxons].first
                 xml.tag! "g:gender", "Female"
                 xml.tag! "g:age_group", "Adult"
                 xml.tag! "g:color", item[:color]
@@ -47,10 +50,7 @@ module Feeds
                 xml.tag! "g:mpn", item[:variant_sku]
 
                 xml.tag! "g:brand", "Fame&Partners"
-                xml.tag! "g:product_type"
-                item[:images].to(9).each do |image|
-                  xml.tag! "g:additional_image_link", image
-                end
+                xml.tag! "g:additional_image_link", item[:images].join(',')
               end
             end
           end
