@@ -3,22 +3,26 @@ window.style_profile.EventsForm = class EventsForm
   constructor: (opts = {}) ->
     @$container = $(opts.container)
 
-    @$container.on("click", '*[data-action=add-event]', @addEvent)
-    @$container.on("click", '*[data-action=delete-event]', @deleteEvent)
+    @$container.on("click", '*[data-action=add-event]', @addEventHandler)
+    @$container.on("click", '*[data-action=delete-event]', @deleteEventHandler)
+    @$container.on('click', '*[data-action=import-from-fb]', @importFromFacebookHandler)
 
     @$container.find('input[name=date]').datepicker({
       minDate: '+1D',
       showButtonPanel: true,
-      dateFormat: 'yy-mm-dd'
+      dateFormat: opts.dateFormat || "dd/mm/yy"
     })
 
-  addEvent: (e) =>
+  addEventHandler: (e) =>
     e.preventDefault()
     event = {
       name:       @$container.find('input[name=name]').val(),
       event_type: @$container.find('input[name=event_type]').val(),
       date:       @$container.find('input[name=date]').val()
     }
+    @addEvent(event)
+
+  addEvent: (event) ->
     $container = @$container
 
     $.ajax(
@@ -42,7 +46,7 @@ window.style_profile.EventsForm = class EventsForm
         $container.find('.events-list').append(event_html)
     )
 
-  deleteEvent: (e) =>
+  deleteEventHandler: (e) =>
     e.preventDefault()
     event_id = $(e.currentTarget).closest('.event').data('id')
     return unless event_id
@@ -55,4 +59,39 @@ window.style_profile.EventsForm = class EventsForm
       @$container.find(".events-list .event[data-id=#{ event_id }]").remove()
     ).error(() =>
       # do nothing
+    )
+
+  importFromFacebookHandler: (e) =>
+    e.preventDefault()
+
+    that = @
+    dateFormat = that.$container.find('input[name=date]').datepicker('option', 'dateFormat')
+    importFromFacebook = (events) ->
+      currentDate = new Date()
+      _.each(events.data, (event, index) =>
+        date = new Date(event.start_time || event.end_time)
+        if date && date > currentDate
+          that.addEvent({
+            name: event.name,
+            event_type: event.location,
+            date: $.datepicker.formatDate(dateFormat, date)
+          })
+      )
+
+    @callForLoggedFacebookUser( () ->
+      FB.api("/me/events", importFromFacebook)
+    )
+
+  callForLoggedFacebookUser: (callback) ->
+    _callback = callback
+    FB.getLoginStatus( (response) ->
+      if (response && response.status == 'not_authorized')
+        FB.login( (response) ->
+          if (response.authResponse)
+            _callback()
+        , scope: 'email,user_birthday,user_events,user_friends',
+          return_scopes: true
+        )
+      else
+        _callback()
     )

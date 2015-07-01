@@ -5,6 +5,8 @@ ruby:
 = content_for :inline_javascript do
   = raw style_profile_events_form_init
 
+= render partial: 'style_quiz/shared/facebook'
+
 #events.style-profile-tab-panel.tab-pane
   .style-profile-tabs-title
     span.tab-pane-close.visible-xs-inline-block: span.fa.fa-arrow-left
@@ -27,7 +29,7 @@ ruby:
     .col-sm-2.text-center
       .btn.btn-md.btn-text or
     .col-sm-7
-      = link_to 'import from facebook', '#', class: 'btn btn-md btn-facebook btn-block'
+      = link_to 'import from facebook', '#', class: 'btn btn-md btn-facebook btn-block', data: { action: 'import-from-fb' }
   .row.events-list
     - @style_profile.events.each do |event|
       .col-sm-4.event data-id=(event.id)

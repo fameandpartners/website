@@ -3,22 +3,24 @@
 - if fb_app.present?
   #fb-root
   javascript:
-    if (!_.isFunction(window.fbAsyncInit)) {
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '#{fb_app.api_key}',
-          version    : 'v2.0',
-          status     : true,
-          xfbml      : true
-        });
+    $(document).ready(function() {
+      if (!_.isFunction(window.fbAsyncInit)) {
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '#{fb_app.api_key}',
+            version    : 'v2.0',
+            status     : true,
+            xfbml      : true
+          });
+        };
       };
-    };
 
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#version=v2.0&xfbml=1&appId=#{ fb_app.api_key }";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#version=v2.0&xfbml=1&appId=#{ fb_app.api_key }";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    });
