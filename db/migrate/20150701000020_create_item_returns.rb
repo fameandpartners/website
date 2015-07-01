@@ -2,7 +2,7 @@ class CreateItemReturns < ActiveRecord::Migration
   def change
     create_table :item_returns do |t|
       t.string   :order_number
-      t.integer  :item_id
+      t.integer  :line_item_id
       t.integer  :qty
       t.string   :requested_action
       t.datetime :requested_at
@@ -33,7 +33,7 @@ class CreateItemReturns < ActiveRecord::Migration
       t.timestamps
     end
     add_index :item_returns, :uuid,    :unique => true
-    add_index :item_returns, :item_id, :unique => true
+    add_index :item_returns, :line_item_id, :unique => true
     add_index :item_returns, :order_number
   end
 end

@@ -7,6 +7,10 @@ class ItemReturnsGrid
     ItemReturn
   end
 
+  column :actions, :html => true do |item_return|
+     link_to "manage", item_return_path(item_return)
+   end
+
 
   column :acceptance_status,      header: 'Status'
   column :customer_name

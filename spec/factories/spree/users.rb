@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryGirl.modify do
   factory :spree_user, class: Spree::User do
     first_name { generate(:first_name) }
     last_name  { generate(:last_name) }

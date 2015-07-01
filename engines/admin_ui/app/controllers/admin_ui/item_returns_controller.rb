@@ -11,5 +11,10 @@ module AdminUi
     def show
       @item_return = ItemReturn.find(params[:id])
     end
+
+
+    def receive
+
+    end
   end
 end

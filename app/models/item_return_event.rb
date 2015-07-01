@@ -3,7 +3,7 @@ class ItemReturnEvent < ActiveRecord::Base
 
 
   attr_accessible :order_number,
-                  :item_id,
+                  :line_item_id,
                   :qty,
                   :requested_action,
                   :reason_category,
@@ -32,6 +32,7 @@ class ItemReturnEvent < ActiveRecord::Base
     foreign_key: 'item_return_uuid', primary_key: 'uuid'
 
   event_type :creation do
+    attributes :line_item_id
     # attributes :user_id
     #
     # validates :user_id, presence: true
@@ -39,7 +40,7 @@ class ItemReturnEvent < ActiveRecord::Base
 
   event_type :return_requested do
     attributes :order_number,
-          :item_id,
+          :line_item_id,
           :qty,
           :requested_action,
           :reason_category,
@@ -63,6 +64,10 @@ class ItemReturnEvent < ActiveRecord::Base
 
   event_type :receive_item do
     attributes :user, :received_on, :location
+
+    validates :user,        presence: true
+    validates :location,    presence: true
+    validates :received_on, presence: true
 
     validate :location, inclusion: { in:  ['AU', 'US'] }
   end

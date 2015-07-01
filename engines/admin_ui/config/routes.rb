@@ -1,6 +1,8 @@
 AdminUi::Engine.routes.draw do
   resources :return_requests
-  resources :item_returns
+  resources :item_returns do
+    resources :events, :controller => 'return_approvals/events'
+  end
 
   resources :preferences, only: :index do
     collection do

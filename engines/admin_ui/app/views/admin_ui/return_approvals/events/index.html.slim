@@ -1,0 +1,11 @@
+- content_for :page_title do
+  ' Events
+
+dl
+  - @events.each do |event|
+    dt
+      => event.event_type
+      ' -
+      = event.occurred_at
+    dd
+      pre = event.data.inspect

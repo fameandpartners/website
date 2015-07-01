@@ -1,1 +1,17 @@
+dl
+- @item_return.attributes.each do |k,v|
+  dt = k
+  dd = v
+
+h3 History
+
+dl
+  - @item_return.events.each do |event|
+    dt
+      => event.event_type
+      ' -
+      = event.occurred_at
+    dd
+      pre = event.data.inspect
+
 = @item_return.inspect
