@@ -237,8 +237,8 @@ FameAndPartners::Application.routes.draw do
 
     # Blogger static page
     # get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
-    get '/bloggers/liz-black', to: redirect("/")
-    get '/dani-stahl', to: redirect("/")
+    # get '/bloggers/liz-black', to: redirect("/")
+    # get '/dani-stahl', to: redirect("/")
 
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
@@ -503,7 +503,6 @@ FameAndPartners::Application.routes.draw do
 
   if Rails.env.development?
     mount MailPreview => 'mail_view'
-
   end
 
   if Features.active?(:content_revolution)
