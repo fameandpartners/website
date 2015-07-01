@@ -111,8 +111,10 @@
 
   var ParameterRow = React.createClass({
     getInitialState: function() {
-      return {value: this.props.defaultValue};
+      var urlValue = decodedDefaultParam(this.props.param);
+      return {value: urlValue || this.props.defaultValue};
     },
+
     handleChange: function (event) {
       this.props.onUserInput(event.target.name, event.target.value);
     },
@@ -120,6 +122,10 @@
     render: function() {
       var placeholder = this.props.required ? 'Required' : 'Optional';
 
+      placeholder = placeholder + " [" + this.props.type + "]"
+      if (this.props.placeholder) {
+        placeholder = placeholder + " " + this.props.placeholder
+      }
 
       var extraInput = null;
 
@@ -193,46 +199,8 @@
     }
   });
 
-  var PARAMS = [
-    {
-      label: "promocode",  param: "pc",  required: true,  encoded: true,  type: 'string',
-      defaultValue: decodedDefaultParam('pc')
-    }, {
-      label: "template name",param: "tn", required: false, encoded: true,  type: 'string',
-      defaultValue: decodedDefaultParam('tn')
-    }, {
-      label: "heading",    param: "h",   required: false, encoded: true,  type: 'string',
-      defaultValue: decodedDefaultParam('h')
-    }, {
-      label: "message",    param: "m",   required: false, encoded: true,  type: 'string',
-      defaultValue: decodedDefaultParam('m')
-    }, {
-      label: "timeout",    param: "t",   required: false, encoded: false, type: 'integer',
-      defaultValue: defaultParams['t']
-    }, {
-      label: "timer",      param: "ti",  required: false, encoded: true, type: 'integer',
-      defaultValue: decodedDefaultParam('ti')
-    }, {
-      label: "class_name", param: "s",   required: false, encoded: true,  type: 'string',
-      defaultValue: decodedDefaultParam('s')
-    }, {
-      label: "facebook pixel id", param: "fb", required: false, encoded: true,  type: 'string',
-      defaultValue: decodedDefaultParam('fb')
-    },
-    {
-      label: "pop",        param: "pop", required: true,  encoded: false, type: 'boolean',
-      defaultValue: 'true'
-    }, {
-      label: "raw",        param: "raw", required: false, encoded: false, type: 'boolean'
-    },
-    {
-      label: "campaign_uuid", param: "cu", required: false, encoded: true, type: 'string',
-      defaultValue: decodedDefaultParam('cu')
-    }
-  ];
-
+  var PARAMS = <%= raw(modal_params_json) %>;
   var knownPromoCodes = <%= promo_codes.to_json.html_safe %>;
-
   var baseUrl = '<%= root_url %>';
 
 React.render(<ModalGenerator parameters={PARAMS} baseUrl={baseUrl} knownPromoCodes={knownPromoCodes} />, document.getElementById('modal_generator'));

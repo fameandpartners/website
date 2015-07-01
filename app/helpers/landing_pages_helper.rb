@@ -2,7 +2,8 @@ module LandingPagesHelper
   require "base64"
 
   def pop?
-    params[:pop].present? && params[:pop] == 'true'
+    pop = params[:pop]
+    pop.present? && (pop == 'true' || pop == true)
   end
 
   def decode(p)

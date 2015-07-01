@@ -1,0 +1,35 @@
+- if pop?
+  ruby:
+    if spree_user_signed_in?
+      auto_apply    = session[:auto_apply]
+      session.delete(:auto_apply)
+    else
+      auto_apply    = false
+    end
+
+    email_capture_modal = "
+      var modal_popup = new window.page.EmailCaptureModal({
+        promocode: \"#{campign_attrs[:promocode]}\",
+        content:   \"#{campign_attrs[:content]}\",
+        heading:   \"#{campign_attrs[:heading]}\",
+        message:   \"#{campign_attrs[:message]}\",
+        className: \"#{campign_attrs[:class_name]}\",
+        fb:        \"#{campign_attrs[:fb_id]}\",
+        action:    \"#{campign_attrs[:campaigns_email_capture_path]}\",
+        container: \"#modal-popup-content-template\",
+        timeout:    #{auto_apply ? 100000 : campign_attrs[:timeout]},
+        timer:      #{campign_attrs[:timer].present? ? timer : 0},
+        force:      true,
+        uuid:      \"#{campign_attrs[:campaign_uuid]}\"
+      });
+    "
+    email_capture_modal += "modal_popup.enableAutoApplyPromoCampaign();" if auto_apply
+
+  - if render_content
+    = content_for :inline_javascript do
+      = raw email_capture_modal
+  - else
+    = raw email_capture_modal
+
+  - if render_content
+    = render partial: 'shared/email_capture_modal_content', locals: {template_name: campign_attrs[:template_name], content: campign_attrs[:content], promocode: campign_attrs[:promocode], campaign_uuid: campign_attrs[:campaign_uuid]}

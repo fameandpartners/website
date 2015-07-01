@@ -10,8 +10,8 @@
 # ClASS_NAME=vex-dialog-bottom vex-dialog-pink vex-text vex-dialog-pink-reverse
 
 class AutoApplyPromoCampaign < CampaignManager
+  expirable!
   UUID         = 'auto_apply_promo'
-  ENCODED_UUID = 'YXV0b19hcHBseV9wcm9tbw=='
 
   def can_activate?
     # check already active or activated campaigns

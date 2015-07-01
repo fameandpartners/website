@@ -5,8 +5,9 @@
 # ClASS_NAME=vex-dialog-bottom vex-dialog-pink vex-text vex-dialog-pink-reverse
 
 class TellMomCampaign < CampaignManager
+  expirable!
+
   UUID         = 'tell_mom'
-  ENCODED_UUID = 'dGVsbF9tb20='
   DURATION     = 10.days
 
   def can_activate?

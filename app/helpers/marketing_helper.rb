@@ -47,7 +47,7 @@ module MarketingHelper
   require "base64"
 
   def pop?
-    params[:pop].present? && params[:pop] == 'true'
+    params[:pop].present? && (params[:pop] == 'true' || params[:pop] == true)
   end
 
   def decode(p)
