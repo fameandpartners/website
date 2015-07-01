@@ -297,7 +297,9 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
       date:       @$container.find('input[name=date]').val()
     }
     @addEvent(event)
-    # reset form
+    @resetForm()
+
+  resetForm: () ->
     @$container.find('input[name=name]').val('')
     @$container.find('input[name=event_type]').val('')
     @$container.find('input[name=date]').datepicker('setDate', new Date())

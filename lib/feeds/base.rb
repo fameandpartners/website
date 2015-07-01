@@ -111,7 +111,13 @@ module Feeds
       price = variant.zone_price_for(current_site_version)
 
       # are we ever on sale?
-      original_price = price.display_price.to_html(symbol: false).to_f #.display_price_without_discount
+      original_price = price.display_price.to_html(symbol: false) #.display_price_without_discount
+
+      sale_price = nil
+      if product.discount
+        sale_price = price.apply(product.discount)
+        sale_price = sale_price.display_price.to_html(symbol: false)
+      end
 
       item = HashWithIndifferentAccess.new(
         variant:                 variant,
@@ -123,9 +129,8 @@ module Feeds
         title:                   "#{color} #{product.name} Dress",
         description:             helpers.strip_tags(product.description),
         price:                   original_price,
-        sale_price:              nil,
+        sale_price:              sale_price,
         google_product_category: "Apparel & Accessories > Clothing > Dresses > Formal Gowns",
-        google_product_types:    google_product_types(product),
         id:                      "#{product.id.to_s}-#{variant.id.to_s}",
         group_id:                product.id.to_s,
         color:                   color,
@@ -133,7 +138,11 @@ module Feeds
         weight:                  get_weight(product, variant)
       )
 
-      item.update(get_images(product, variant))
+      # Event, Style and Lookbook
+      item.update get_taxons(product)
+
+      # Images
+      item.update get_images(product, variant)
     end
 
     # TH: on-demand means never having to say you're out-of-stock
@@ -169,28 +178,21 @@ module Feeds
     end
 
     def get_weight(product, variant)
-      if variant.weight.present?
-        return variant.weight.present?
-      elsif product.weight.present?
-        return product.weight?
-      elsif
-        product.property("weight")
-      end
+      variant.weight || product.weight || product.property('weight')
     end
 
-    def absolute_image_url(path)
-      if Rails.env.production?
-        path
-      else
-        "http://#{@config[:domain]}#{path}"
-      end
-    end
+    def get_taxons(product)
+      product_taxons    = Spree::Taxon.order('spree_taxons.position')
+      product_events    = product_taxons.published.from_event_taxonomy.where(id: product.taxon_ids)
+      product_styles    = product_taxons.published.from_style_taxonomy.where(id: product.taxon_ids)
+      product_lookbooks = product_taxons.from_edits_taxonomy.where(id: product.taxon_ids)
 
-    def google_product_types(product)
-      taxons = product.taxons.includes(:taxonomy).sort_by{|t| [t.taxonomy.position, t.position]}
-      taxons.map do |taxon|
-        "Clothing & Accessories > Clothing > Dresses > #{ taxon.name }"
-      end
+      {
+        taxons:    product_taxons.map(&:name),
+        events:    product_events.map(&:name),
+        styles:    product_styles.map(&:name),
+        lookbooks: product_lookbooks.map(&:name)
+      }
     end
   end
 end

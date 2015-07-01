@@ -1,3 +1,5 @@
+require_relative 'taxonomy_decorator'
+
 Spree::Taxon.class_eval do
   include Concerns::Publishable
 
@@ -17,16 +19,10 @@ Spree::Taxon.class_eval do
       includes(:taxonomy).where(spree_taxonomies: { name: taxonomy_name })
     end
 
-    def from_event_taxonomy
-      from_taxonomy('Event')
-    end
-
-    def from_range_taxonomy
-      from_taxonomy('Range')
-    end
-
-    def from_style_taxonomy
-      from_taxonomy('Style')
+    Spree::Taxonomy::CURRENT.each do |taxonomy_name|
+      define_method("from_#{taxonomy_name.downcase}_taxonomy") do
+        from_taxonomy(taxonomy_name)
+      end
     end
   end
 

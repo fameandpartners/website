@@ -5,8 +5,6 @@ describe 'Old Pages Redirection', type: :request do
 
   it_will :redirect, '/how-it-works', '/why-us'
 
-  it_will 'redirect to root', '/dani-stahl'
-
   context 'fashionitgirl2015' do
     it_will 'redirect to root', '/fashionitgirl2015-terms-and-conditions'
     it_will 'redirect to root', '/fashionitgirl2015-competition'
@@ -19,7 +17,8 @@ describe 'Old Pages Redirection', type: :request do
   end
 
   context 'blog' do
-    it_will 'redirect to root', '/bloggers/liz-black'
+    it_will :redirect, '/blog', 'http://blog.fameandpartners.com'
+    it_will :redirect, '/blog/anything/else?really=true', 'http://blog.fameandpartners.com'
   end
 
   context 'celebrities redirects to /dresses' do
