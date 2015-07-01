@@ -13,7 +13,7 @@ module AdminUi
         deleted = cache_client.del(key)
 
         ::NewRelic::Agent.record_custom_event(
-          'cache.expire.item',
+          'cache_expire_item',
           user:           current_admin_user.email,
           item_key:       key,
           deletion_count: deleted
@@ -31,7 +31,7 @@ module AdminUi
         deleted = Rails.cache.clear
 
         ::NewRelic::Agent.record_custom_event(
-          'cache.expire.full',
+          'cache_expire_full',
           user:           current_admin_user.email,
           deletion_count: deleted
         )

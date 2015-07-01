@@ -6,7 +6,7 @@ class MysteriousRouteController < ActionController::Base
   def undefined
     data = request.env.select {|key,_| key.upcase == key }
 
-    NewRelic::Agent.notice_error("Captured hit on an 'undefined' URL", data)
+    NewRelic::Agent.record_custom_event("UndefinedURL", data)
     render :text => 'Not Found', :status => :not_found
   end
 end
