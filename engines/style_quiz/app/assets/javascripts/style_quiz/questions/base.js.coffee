@@ -60,7 +60,7 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
   showValidationError: () ->
     messageHtml = $("<div class='quiz-error'><div class='quiz-error-message'>#{ @validationError() }</div><div class='quiz-error-close icon-cross' /></div>").hide()
     if @$container.find('.quiz-error').length > 0
-      @$container.find('.quiz-error-message').replaceWith(messageHtml)
+      @$container.find('.quiz-error').replaceWith(messageHtml)
     else
       @$container.prepend(messageHtml)
     @$container.find('.quiz-error').fadeIn()
