@@ -199,6 +199,8 @@ FameAndPartners::Application.routes.draw do
     resources :product_reservations, only: [:create]
   end
 
+  # Blog URLs
+  get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
 
   #######
   # TODO: 26/06/2015 To be completely removed when the new blog is ready. In the meanwhile, let it be 404

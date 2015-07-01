@@ -20,6 +20,8 @@ describe 'Old Pages Redirection', type: :request do
 
   context 'blog' do
     it_will 'redirect to root', '/bloggers/liz-black'
+    it_will :redirect, '/blog', 'http://blog.fameandpartners.com'
+    it_will :redirect, '/blog/anything/else?really=true', 'http://blog.fameandpartners.com'
   end
 
   context 'celebrities redirects to /dresses' do
