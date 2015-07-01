@@ -1,10 +1,10 @@
 require_relative './exporter/base'
-require_relative './exporter/google'
-require_relative './exporter/google_flat_images'
+require_relative './exporter/cpc'
+require_relative './exporter/polyvore'
 
 module Feeds
   class Base
-    FEEDS =  %w(GoogleFlatImages Google)
+    FEEDS =  %w(CPC Polyvore)
 
     attr_reader :config, :current_site_version, :logger
 
