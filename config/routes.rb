@@ -199,45 +199,10 @@ FameAndPartners::Application.routes.draw do
     resources :product_reservations, only: [:create]
   end
 
-
-  #######
-  # TODO: 26/06/2015 To be completely removed when the new blog is ready. In the meanwhile, let it be 404
-  #######
-  #
-  # Redirects from old blog urls
-  # constraints host: /blog\./ do
-  #   get '/' => redirect(host: configatron.host, path: "/blog")
-  #   match '*path' => redirect(host: configatron.host, path: "/blog/%{path}")
-  # end
-  #
-  # # Blog routes
-  # scope "(/:site_version)/blog", constraints: { site_version: /(us|au)/ } do
-  #   get '/' => 'blog#index', as: :blog
-  #   get '/about'   => 'blog#about', as: :about
-  #   get '/rss' => 'blog/feeds#index', format: :rss, as: :blog_rss
-
-  #   get '/stylists' => 'blog/authors#index', as: :blog_authors
-  #   get '/stylists/:stylist' => 'blog/authors#show', as: :blog_authors_post
-
-  #   get '/red-carpet-events' => 'blog/posts#index', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_posts
-  #   get '/red-carpet-events/:post_slug' => 'blog/posts#show', defaults: {type: 'red_carpet'}, as: :blog_red_carpet_post
-
-  #   get '/search/tags/:tag' => 'blog/searches#by_tag', as: :blog_search_by_tag
-  #   get '/search' => 'blog/searches#by_query', as: :blog_search_by_query
-
-  #   get '/:category_slug' => 'blog/posts#index', as: :blog_posts_by_category
-  #   get '/:category_slug/:post_slug' => 'blog/posts#show', as: :blog_post_by_category
-
-  #   get '/posts/:post_slug' => 'blog/posts#show', as: :blog_post
-  # end
+  # Old Blog Redirection (30/06/2015)
+  get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-
-    # Blogger static page
-    # get '/bloggers/ren' => 'statics#blogger_ren', as: :racheletnicole
-    get '/bloggers/liz-black', to: redirect("/")
-    get '/dani-stahl', to: redirect("/")
-
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
@@ -406,52 +371,6 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
-      #######
-      # TODO: 26/06/2015 To be completely removed when the new blog is ready. In the meanwhile, let it be 404
-      #######
-
-      # match '/blog' => redirect('/admin/blog/posts')
-
-      # namespace :blog do
-      #   resources :promo_banners
-      #   resources :categories
-      #   resources :events
-
-      #   resources :assets, only: [:create, :destroy, :index]
-
-      #   resources :post_photos do
-      #     put :make_primary, on: :member
-      #   end
-
-      #   resources :celebrity_photos do
-      #     member do
-      #       put :assign_celebrity
-      #       put :assign_post
-      #       put :make_primary
-      #     end
-      #   end
-
-      #   resources :posts, only: [:new, :create, :edit, :update, :index, :destroy] do
-      #     member do
-      #       put :toggle_publish
-      #       put :toggle_featured
-      #     end
-      #   end
-
-      #   resources :red_carpet_events, only: [:new, :create, :edit, :update, :index, :destroy] do
-      #     member do
-      #       put :toggle_publish
-      #     end
-      #   end
-
-      #   resources :celebrities do
-      #     member do
-      #       put :toggle_featured
-      #     end
-      #   end
-
-      #   resource :configuration, only: [:show, :update]
-      # end
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do
@@ -501,7 +420,6 @@ FameAndPartners::Application.routes.draw do
 
   if Rails.env.development?
     mount MailPreview => 'mail_view'
-
   end
 
   if Features.active?(:content_revolution)
