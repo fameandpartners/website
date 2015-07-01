@@ -117,9 +117,11 @@ class Products::CollectionResource
       # ignore this case.
       # also, having ability to query group=black&color=white seems useless
       result[:color_ids] = []
+
       if color_group.present?
         result[:color_ids] += color_group.color_ids
       elsif color.present?
+        result[:color_ids] << color.id
         result[:color_ids] += Repositories::ProductColors.get_similar(color.id, Similarity::Range::DEFAULT)
       end
 
