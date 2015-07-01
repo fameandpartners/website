@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150626012245) do
+ActiveRecord::Schema.define(:version => 20150701000020) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -512,7 +512,7 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
 
   create_table "item_returns", :force => true do |t|
     t.string   "order_number"
-    t.integer  "item_id"
+    t.integer  "line_item_id"
     t.integer  "qty"
     t.string   "requested_action"
     t.datetime "requested_at"
@@ -544,7 +544,7 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
     t.datetime "updated_at",             :null => false
   end
 
-  add_index "item_returns", ["item_id"], :name => "index_item_returns_on_item_id", :unique => true
+  add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
   add_index "item_returns", ["order_number"], :name => "index_item_returns_on_order_number"
   add_index "item_returns", ["uuid"], :name => "index_item_returns_on_uuid", :unique => true
 

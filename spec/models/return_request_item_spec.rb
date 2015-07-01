@@ -50,4 +50,25 @@ describe ReturnRequestItem do
 
   end
 
+  describe '#push_return_event' do
+    describe 'is idempotent' do
+
+      it do
+        begin
+        rri = build :return_request_item
+        rescue StandardError => e
+
+          binding.pry
+        end
+
+      end
+
+
+
+    end
+
+
+
+  end
+
 end

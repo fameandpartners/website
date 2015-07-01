@@ -8,6 +8,8 @@ require 'shoulda/matchers'
 require 'database_cleaner'
 require 'ffaker'
 
+require 'spree/core/testing_support/factories'
+
 # Rails.application.railties.all { |r| r.eager_load! }
 
 # Requires supporting ruby files with custom matchers and macros, etc,
