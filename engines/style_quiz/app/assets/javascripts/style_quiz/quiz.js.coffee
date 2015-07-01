@@ -30,6 +30,16 @@ window.StyleQuiz.Quiz = class Quiz
 
     @showCurrentQuestion()
 
+    $chart = $('.rank-box')
+    chartWidth = 1200
+    screenWidth = if $('body').width() > chartWidth then chartWidth else $('body').width()
+    scale = Math.max(0.51, (screenWidth / chartWidth))
+    $chart.css
+      '-webkit-transform': 'scale('+scale+')'
+      '-ms-transform': 'scale('+scale+')'
+      '-o-transform': 'scale('+scale+')'
+      'transform': 'scale('+scale+')'
+
   showCurrentQuestion: () ->
     _.each(@questions, (question, index) ->
       if index == @current

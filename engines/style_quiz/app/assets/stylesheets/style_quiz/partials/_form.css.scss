@@ -91,3 +91,30 @@ textarea.form-control {
 }
 // @end Buttons
 // -----------------
+
+// Error message
+.quiz-error {
+  position: fixed;
+  z-index: 9;
+  text-align: center;
+  font-size: 18px;
+  margin-top: -20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  left: 0;
+  top: 50%;
+  right: 0;
+  padding: 10px;
+  color: #fff;
+  background-color: red;
+} 
+.quiz-error-close {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  cursor: pointer;
+  margin-top: -12px;
+  &:before, &:after { background-color: #fff;}
+}
+// @end Error message
+// -----------------

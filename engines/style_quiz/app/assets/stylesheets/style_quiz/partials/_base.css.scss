@@ -74,6 +74,7 @@ label {
 .quiz-section {
   margin-bottom: 80px;
   overflow-x: hidden;
+  position: relative;
 }
 .quiz-section-title {
   padding: 85px 0;
@@ -142,6 +143,11 @@ label {
   font-size: 0;
   direction: rtl;
   text-align: center;
+  min-width: 1200px;
+  -webkit-transform-origin: 0 0;
+     -moz-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
+          transform-origin: 0 0;
 } 
 .rank-cell {
   display: inline-block;

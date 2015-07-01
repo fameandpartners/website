@@ -26,6 +26,10 @@
     text-align: center;
     line-height: $quiz-form-control-height;
   }
+  
+  .form-control:focus {
+    background-color: $quiz-form-control-bg-focus;
+  }
 
   // - facebook
   .facebook-box {
@@ -51,13 +55,13 @@
   .size {
     display: inline-block;
     vertical-align: top;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 100%;
-    line-height: 70px;
+    line-height: 60px;
     text-align: center;
     font-family: $font-family-secondary;
-    font-size: 50px;
+    font-size: 45px;
     margin: 0 15px;
     cursor: pointer;
 
