@@ -1,8 +1,8 @@
 class StyleQuiz::UserProfile < ActiveRecord::Base
   belongs_to :user, class_name: 'Spree::User', foreign_key: 'user_id'
 
-  serialize :answers, Hash
-  serialize :tags,    Hash
+  serialize :answers, HashWithIndifferentAccess
+  serialize :tags,    HashWithIndifferentAccess
   serialize :recommendated_products, Array
 
   has_many :events, class_name: 'StyleQuiz::UserProfileEvent', foreign_key: 'user_profile_id', dependent: :destroy
@@ -27,9 +27,15 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
 
   def update_answers(answers_ids:, answers_values:, events:)
     ActiveRecord::Base.transaction do
-      self.answers = answers_values.merge( ids: answers_ids )
-      self.events = events.map{|event_data| ::StyleQuiz::UserProfileEvent.new(event_data)}
-      self.tags = StyleQuiz::Answer.get_weighted_tags(ids: answers_ids)
+      self.answers = HashWithIndifferentAccess.new(answers_values.merge( ids: answers_ids ))
+      self.events = events.map do |event_data|
+        ::StyleQuiz::UserProfileEvent.new(
+          name: event_data[:name],
+          event_type: event_data[:event_type],
+          date: Date.strptime(event_data[:date], I18n.t('date_format.backend'))
+        )
+      end
+      self.tags = HashWithIndifferentAccess.new(StyleQuiz::Answer.get_weighted_tags(ids: answers_ids))
       self.completed_at = Time.now
 
       save!

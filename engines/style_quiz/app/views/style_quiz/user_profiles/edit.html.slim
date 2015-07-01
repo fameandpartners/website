@@ -11,8 +11,10 @@ ruby:
       questions_data: questions_data,
       current: #{ current.to_i },
       action: '#{ style_quiz.user_profile_path }',
+      show_mode: '#{ current.present? ? "unfinished" : "all" }',
       settings: {
-        dateFormat: '#{ raw I18n.t('date_format.frontend', default: "dd/mm/yy") }'
+        dateFormat: '#{ raw I18n.t('date_format.frontend', default: "dd/mm/yy") }',
+        locale: '#{ raw I18n.locale }'
       }
     })
   "
