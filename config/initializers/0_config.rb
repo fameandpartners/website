@@ -1,17 +1,17 @@
 # application base
-configatron.host = 'fameandpartners.com'
-configatron.noreply = 'Fame & Partners<noreply@fameandpartners.com>'
-configatron.admin = 'team@fameandpartners.com'
-configatron.app_name = 'Fame And Partners'
+configatron.host        = 'fameandpartners.com'
+configatron.noreply     = 'Fame & Partners<noreply@fameandpartners.com>'
+configatron.admin       = 'team@fameandpartners.com'
+configatron.app_name    = 'Fame And Partners'
 configatron.sitemap_url = 'http://images.fameandpartners.com/sitemap/sitemap.xml.gz'
 
 # assets
-configatron.aws.enabled = false
-configatron.aws.bucket = ""
+configatron.aws.enabled    = false
+configatron.aws.bucket     = ""
 configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
-configatron.aws.host = "images.fameandpartners.com"       # bucket: fameandpartners
-configatron.asset_host = "assets.fameandpartners.com"
+configatron.aws.host       = "images.fameandpartners.com" # bucket: fameandpartners
+configatron.asset_host     = "assets.fameandpartners.com"
 
 configatron.typekit_id = 'kur6crm'
 
