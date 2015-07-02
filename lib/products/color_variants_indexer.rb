@@ -9,6 +9,12 @@ module Products
 
     def self.index!
       logger = Logger.new($stdout)
+
+      logger.formatter = proc do |severity, datetime, _progname, msg|
+        color = {'ERROR' => Term::ANSIColor.red, 'WARN' => Term::ANSIColor.magenta}.fetch(severity) { '' }
+        "%s[%s] [%-5s] %s%s\n" % [color, datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg, Term::ANSIColor.reset]
+      end
+
       helpers = Helpers.new
       au_site_version = SiteVersion.find_by_permalink('au')
       us_site_version = SiteVersion.find_by_permalink('us')
@@ -18,8 +24,14 @@ module Products
       index.delete
       index.create
 
-      Spree::Product.find_each do |product|
-        logger.info("PRODUCT #{product.name}")
+      products_scope = Spree::Product
+      product_count  = products_scope.count
+      product_index  = 1
+
+      logger.info("TOTAL PRODUCTS : #{product_count}")
+      products_scope.find_each do |product|
+        logger.info("PRODUCT #{product_index}/#{product_count} #{product.name}")
+
         color_ids = product.variants.active.map do |variant|
           variant.option_values.colors.map(&:id)
         end.flatten.uniq
@@ -30,9 +42,16 @@ module Products
         product.product_color_values.each do |product_color_value|
           color = product_color_value.option_value
 
-          next unless color_ids.include?(color.id)
-          next unless product_color_value.images.present?
-          logger.info("        INDEX Colour #{color.name}")
+          unless color_ids.include?(color.id)
+            logger.warn "#{color.name} Not in active Colours"
+            next
+          end
+          unless product_color_value.images.present?
+            logger.warn "#{color.name} NO IMAGES"
+            next
+          end
+
+          logger.info("PRODUCT #{product_index}/#{product_count} #{product.name} | #{color_variant_id} Colour #{color.name}")
 
           index.store(
             id: color_variant_id,
@@ -92,6 +111,7 @@ module Products
 
           color_variant_id += 1
         end
+        product_index += 1
       end
 
       index.refresh
