@@ -5,28 +5,45 @@ module Products
       include PathBuildersHelper
     end
 
-    extend ColorVariantImageDetector
+    include ColorVariantImageDetector
 
     def self.index!
-      logger = Logger.new($stdout)
+      new.call
+    end
 
-      logger.formatter = LogFormatter.terminal_formatter
+    attr_reader :logger, :variants
 
+    def initialize
+      @logger = Logger.new($stdout)
+      @logger.formatter = LogFormatter.terminal_formatter
+    end
+
+    def call
+      logger.info('Starting Colour Reindex')
+
+      collect_variants
+      push_to_index
+
+      logger.info('Finished Colour Reindex')
+    end
+
+    def product_scope
+      Spree::Product
+    end
+
+    def collect_variants
       helpers = Helpers.new
       au_site_version = SiteVersion.find_by_permalink('au')
       us_site_version = SiteVersion.find_by_permalink('us')
+
       color_variant_id = 1
+      product_index    = 1
 
-      index = Tire.index(configatron.elasticsearch.indices.color_variants)
-      index.delete
-      index.create
-
-      products_scope = Spree::Product
-      product_count  = products_scope.count
-      product_index  = 1
-
+      product_count  = product_scope.count
       logger.info("TOTAL PRODUCTS : #{product_count}")
-      products_scope.find_each do |product|
+
+      variants = []
+      product_scope.find_each do |product|
         logger.info("PRODUCT #{product_index}/#{product_count} #{product.name}")
 
         color_ids = product.variants.active.map do |variant|
@@ -50,7 +67,7 @@ module Products
 
           logger.info("PRODUCT #{product_index}/#{product_count} #{product.name} | #{color_variant_id} Colour #{color.name}")
 
-          index.store(
+          variants << {
             id: color_variant_id,
             product: {
               id:           product.id,
@@ -104,14 +121,42 @@ module Products
               aud: product.zone_price_for(au_site_version).amount,
               usd: product.zone_price_for(us_site_version).amount
             }
-          )
+         }
 
           color_variant_id += 1
         end
         product_index += 1
       end
 
+      logger.info("TOTAL PRODUCTS : #{product_count}")
+      @variants = variants
+    end
+
+    def push_to_index
+      logger.info('Pushing to ElasticSearch')
+      logger.info("INDEX #{index_name}")
+      index = get_index
+
+      logger.info('Delete')
+      index.delete
+
+      logger.info('Create')
+      index.create
+
+      logger.info('Bulk Upload')
+      index.bulk_store(variants)
+      logger.info('Refresh')
+
       index.refresh
     end
+
+    def get_index
+      Tire.index(index_name)
+    end
+
+    def index_name
+      configatron.elasticsearch.indices.color_variants
+    end
+
   end
 end
