@@ -15,8 +15,6 @@ configatron.asset_host = "assets.fameandpartners.com"
 
 configatron.typekit_id = 'kur6crm'
 
-configatron.es.url = 'http://localhost:9200'
-
 configatron.links do |links|
   links.twitter   = 'https://twitter.com/fameandpartners'
   links.facebook  = 'http://www.facebook.com/FameandPartners'
@@ -107,6 +105,8 @@ when :development
     index.color_variants = :color_variants_development
   end
 
+  configatron.es.url = 'http://localhost:9200'
+
 when :staging
   configatron.host      = 'stage.fameandpartners.com'
   configatron.blog_host = 'stage.fameandpartners.com'
@@ -132,7 +132,7 @@ when :preproduction
   redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
 
-  configatron.es_url 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
+  configatron.es.url 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
 
   configatron.asset_host = "assets.fameandpartners.com/preprod"
 
