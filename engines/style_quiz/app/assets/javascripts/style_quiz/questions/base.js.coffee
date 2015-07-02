@@ -270,11 +270,11 @@ window.StyleQuiz.FashionImportanceQuestion = class FashionImportanceQuestion ext
 
   setRankingHandler: (e) =>
     e.preventDefault()
-    $(e.currentTarget).addClass('active').siblings().removeClass('active')
+    $(e.currentTarget).addClass('selected').siblings().removeClass('selected')
     @onValueChanged()
 
   value: (e) ->
-    { ids: @getSelectedAnswers(@$container.find('.rank-cell.active')) }
+    { ids: @getSelectedAnswers(@$container.find('.rank-cell.selected')) }
 
   isValid: () ->
     current_value = @value()

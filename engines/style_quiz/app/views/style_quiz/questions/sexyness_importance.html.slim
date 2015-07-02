@@ -8,9 +8,9 @@
   .grid-container
     .rank-sexy.rank-box
       - question.answers.each do |answer|
-        .rank-cell data-value=(answer.id)
+        .rank-cell data-value=(answer.id) class=( @user_style_profile.selected?(answer) ? 'selected' : '' )
           .checkmark.checkmark-lg
-          .rank-item class="rank-sexy-item-#{ answer.value } #{ @user_style_profile.selected?(answer) ? 'active' : '' }"
+          .rank-item class="rank-sexy-item-#{ answer.value } #{ @user_style_profile.selected?(answer) ? 'selected' : '' }"
     .row
       .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
       .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
