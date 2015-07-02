@@ -10,10 +10,7 @@ module Products
     def self.index!
       logger = Logger.new($stdout)
 
-      logger.formatter = proc do |severity, datetime, _progname, msg|
-        color = {'ERROR' => Term::ANSIColor.red, 'WARN' => Term::ANSIColor.magenta}.fetch(severity) { '' }
-        "%s[%s] [%-5s] %s%s\n" % [color, datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg, Term::ANSIColor.reset]
-      end
+      logger.formatter = LogFormatter.terminal_formatter
 
       helpers = Helpers.new
       au_site_version = SiteVersion.find_by_permalink('au')

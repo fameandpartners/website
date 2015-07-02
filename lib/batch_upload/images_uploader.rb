@@ -25,10 +25,7 @@ module BatchUpload
       @ok = green("OK").freeze
       @logger = Logger.new(STDOUT)
       @logger.level = Logger::INFO unless ENV['debug']
-      @logger.formatter = proc do |severity, datetime, _progname, msg|
-        color = {'ERROR' => red, 'WARN' => magenta}.fetch(severity) { '' }
-        "%s[%s] [%-5s] %s%s\n" % [color, datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg, reset]
-      end
+      @logger.formatter = LogFormatter.terminal_formatter
     end
 
     private
