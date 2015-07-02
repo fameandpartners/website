@@ -46,17 +46,17 @@ module Products
       product_scope.find_each do |product|
         logger.info("PRODUCT #{product_index}/#{product_count} #{product.name}")
 
-        color_ids = product.variants.active.map do |variant|
+        active_color_ids = product.variants.active.map do |variant|
           variant.option_values.colors.map(&:id)
         end.flatten.uniq
 
-        color_customizable = %w(yes y).include?(product.property('color_customization').to_s.downcase.strip)
-        discount = product.discount.try(:amount).to_i
+        color_customizable = product.color_customization
+        discount           = product.discount.try(:amount).to_i
 
         product.product_color_values.each do |product_color_value|
           color = product_color_value.option_value
 
-          unless color_ids.include?(color.id)
+          unless active_color_ids.include?(color.id)
             logger.warn "#{color.name} Not in active Colours"
             next
           end
@@ -157,6 +157,5 @@ module Products
     def index_name
       configatron.elasticsearch.indices.color_variants
     end
-
   end
 end
