@@ -89,26 +89,26 @@ module Products
                 en_au: helpers.descriptive_url(product, :"en-AU"),
                 en_us: helpers.descriptive_url(product, :"en-US")
               },
-              can_be_customized: product.can_be_customized?,
-              fast_delivery: product.fast_delivery,
-              fast_making: product.fast_making,
-              is_surryhills: helpers.is_surryhills?(product),
-              taxon_ids: product.taxons.map(&:id),
-              price: product.price.to_f,
+              can_be_customized:  product.can_be_customized?,
+              fast_delivery:      product.fast_delivery,
+              fast_making:        product.fast_making,
+              is_surryhills:      helpers.is_surryhills?(product),
+              taxon_ids:          product.taxons.map(&:id),
+              price:              product.price.to_f,
 
               # bodyshape sorting
-              apple: product.style_profile.try(:apple),
-              pear: product.style_profile.try(:pear),
-              athletic: product.style_profile.try(:athletic),
-              strawberry: product.style_profile.try(:strawberry),
-              hour_glass: product.style_profile.try(:hour_glass),
-              column: product.style_profile.try(:column),
-              petite: product.style_profile.try(:petite),
+              apple:              product.style_profile.try(:apple),
+              pear:               product.style_profile.try(:pear),
+              athletic:           product.style_profile.try(:athletic),
+              strawberry:         product.style_profile.try(:strawberry),
+              hour_glass:         product.style_profile.try(:hour_glass),
+              column:             product.style_profile.try(:column),
+              petite:             product.style_profile.try(:petite),
               color_customizable: color_customizable
             },
             color: {
-              id: color.id,
-              name: color.name,
+              id:           color.id,
+              name:         color.name,
               presentation: color.presentation
             },
             images: product_color_value.images.map do |image|
