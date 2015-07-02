@@ -31,7 +31,6 @@ config/database.yml
 
 # Ignore EngineYard config file
 /config/ey.yml
-/config/redis.yml
 
 # Ignore Engine Yard recipes
 /cookbooks
