@@ -70,9 +70,9 @@ li.shop.menu-item
                 li.mega-menu-list--item= link_to 'Dresses made in 48 hours', fast_making_dresses_path, title: 'Express Making'
 
             - if Features.active?(:sales)
-              h4.link-header Sale - Up to 50% Off
-              ul.mega-menu-list
-                - if sale_active?
+              - if sale_active?
+                h4.link-header Sale - Up to 50% Off
+                ul.mega-menu-list
                   li.mega-menu-list--item= link_to 'All Sale Dresses', sales_collection_path,  title: 'All Sale Dresses'
                   li.mega-menu-list--item= link_to "15 Percent Off",   dresses_path(sale: 15), title: 'All Dresses 15% off'
                   li.mega-menu-list--item= link_to "30 Percent Off",   dresses_path(sale: 30), title: 'All Dresses 30% off'
