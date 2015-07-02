@@ -153,6 +153,15 @@ label {
   display: inline-block;
   vertical-align: bottom;
   width: 10%;
+  position: relative;
+  &.selected .checkmark-lg { visibility: visible; }
+  .checkmark-lg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -23px 0 0 -23px;
+    visibility: hidden;
+  }
 }
 .rank-item {
   width: 100%;
