@@ -15,7 +15,8 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
     @$container = $("##{ opts.name }-question")
     @$container.on('click', '*[data-action=next]', @submitQuestion)
     @$container.on('click', '*[data-action=previous]', @previousQuestion)
-    @name = opts.name
+    @name   = opts.name
+    @shown  = false
 
   hide: () ->
     @$container.hide()
@@ -23,6 +24,7 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
   show: () ->
     $('html, body').animate({ scrollTop: 0 }, 'fast')
     @$container.show()
+    @shown = true
 
   isValid: () ->
     true
@@ -256,6 +258,16 @@ window.StyleQuiz.FashionImportanceQuestion = class FashionImportanceQuestion ext
     super(opts)
     @$container.on('click', '.rank-cell', @setRankingHandler)
 
+    $chart = @$container.find('.rank-box')
+    chartWidth = 1200
+    screenWidth = if $('body').width() > chartWidth then chartWidth else $('body').width()
+    scale = Math.max(0.51, (screenWidth / chartWidth))
+    $chart.css
+      '-webkit-transform': 'scale('+scale+')'
+      '-ms-transform': 'scale('+scale+')'
+      '-o-transform': 'scale('+scale+')'
+      'transform': 'scale('+scale+')'
+
   setRankingHandler: (e) =>
     e.preventDefault()
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
@@ -321,7 +333,7 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
     { events: @events }
 
   isValid: () ->
-    return true
+    @shown || @events.length > 0
 
   importFromFacebookHandler: (e) =>
     e.preventDefault()

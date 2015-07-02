@@ -4,14 +4,15 @@
 window.StyleQuiz ||= {}
 window.StyleQuiz.Quiz = class Quiz
   constructor: (opts = {}) ->
-    @current = opts.current || 0
+    @current        = opts.current || 0
     @questions_data = opts.questions_data || []
-    @action = opts.action
-
-    console.log(@questions)
+    @action         = opts.action
+    @settings       = opts.settings
+    @show_mode      = opts.show_mode # ['all', 'unfinished']
+    @questions      = []
 
     settings = opts.settings
-    @questions = []
+
     _.each(opts.questions_data, (data, index) ->
       # factory?
       klass_name = s.camelize("-#{ data.name}-question", false)
@@ -29,16 +30,6 @@ window.StyleQuiz.Quiz = class Quiz
       @current = @questions.length - 1
 
     @showCurrentQuestion()
-
-    $chart = $('.rank-box')
-    chartWidth = 1200
-    screenWidth = if $('body').width() > chartWidth then chartWidth else $('body').width()
-    scale = Math.max(0.51, (screenWidth / chartWidth))
-    $chart.css
-      '-webkit-transform': 'scale('+scale+')'
-      '-ms-transform': 'scale('+scale+')'
-      '-o-transform': 'scale('+scale+')'
-      'transform': 'scale('+scale+')'
 
   showCurrentQuestion: () ->
     _.each(@questions, (question, index) ->
@@ -62,9 +53,17 @@ window.StyleQuiz.Quiz = class Quiz
       @showCurrentQuestion()
 
   getUnfinishedQuestions: () ->
+    switch @show_mode
+      when 'all'
+        finished = (element) -> element.isValid() && element.shown
+      when 'unfinished'
+        finished = (element) -> element.isValid()
+      else
+        finished = (element) -> element.isValid()
+
     result = []
     _.each(@questions, (element, index, list) ->
-      result.push(index) unless element.isValid()
+      result.push(index) unless finished(element)
     )
     result
 
@@ -84,14 +83,13 @@ window.StyleQuiz.Quiz = class Quiz
       url: @action,
       type: 'PUT',
       dataType: 'json',
-      data: { answers: @answers() }
+      data: { answers: @answers(), settings: @settings }
     ).success((data, status, xhr) =>
       nextPage = data.redirect_to || '/style-quiz/products'
       if window.parent
         window.parent.location = nextPage
       else
         window.location = nextPage
-      console.log('success', arguments)
     ).error(() =>
-      console.log('error', arguments)
+      # error
     )
