@@ -25,9 +25,7 @@ module Feeds
     def default_logger
       logger = Logger.new($stdout)
 
-      logger.formatter = proc do |severity, datetime, _progname, msg|
-        "[%s] [%-5s] %s\n" %  [datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg]
-      end
+      logger.formatter = LogFormatter.terminal_formatter
       logger
     end
 
