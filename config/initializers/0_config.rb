@@ -105,7 +105,7 @@ when :development
     index.color_variants = :color_variants_development
   end
 
-  configatron.es.url = 'http://localhost:9200'
+  configatron.es_url = 'http://localhost:9200'
 
 when :staging
   configatron.host      = 'stage.fameandpartners.com'
@@ -132,7 +132,7 @@ when :preproduction
   redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
 
-  configatron.es.url 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
+  configatron.es_url 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
 
   configatron.asset_host = "assets.fameandpartners.com/preprod"
 
@@ -153,7 +153,7 @@ when :production
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
 
   # configatron.es_url YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
-  configatron.es.url = 'https://b13gy7hlm3:brc6ozc6oi@production-4224690387.us-east-1.bonsai.io'
+  configatron.es_url = 'https://b13gy7hlm3:brc6ozc6oi@production-4224690387.us-east-1.bonsai.io'
 
   configatron.customerio.site_id = 'a416731201185e0c6f5f'
   configatron.typekit_id = 'day0prb'
