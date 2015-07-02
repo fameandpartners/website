@@ -132,7 +132,7 @@ when :preproduction
   redis_host = YAML::load(File.open("#{Rails.root}/config/redis.yml"))[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{redis_host}/0" }
 
-  configatron.es_url 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
+  configatron.es_url = 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
 
   configatron.asset_host = "assets.fameandpartners.com/preprod"
 
