@@ -1,7 +1,7 @@
 ---
 production:
   hosts:
-    localhost:6379
+    10.81.192.84:6379
 preproduction:
   hosts:
     localhost:6379
