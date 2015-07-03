@@ -29,7 +29,13 @@ module Spree
               while @order.next; end
 
               flash[:success] = t('customer_details_updated')
-              redirect_to edit_admin_order_shipment_path(@order, @order.shipment)
+
+              if @order.shipment
+                redirect_to edit_admin_order_shipment_path(@order, @order.shipment)
+              else
+                redirect_to new_admin_order_shipment_path(@order)
+              end
+
             else
               flash[:error] = t('errors.messages.no_shipping_methods_available')
               redirect_to admin_order_customer_path(@order)
