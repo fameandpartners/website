@@ -13,13 +13,17 @@ window.StyleQuiz.Quiz = class Quiz
 
     settings = opts.settings
 
+    user = new StyleQuiz.FbUser()
+    window.user = user
+
     _.each(opts.questions_data, (data, index) ->
       # factory?
       klass_name = s.camelize("-#{ data.name}-question", false)
+      question_params = _.extend({ user: user }, settings, data)
       if _.isFunction(StyleQuiz[klass_name])
-        question = new StyleQuiz[klass_name](_.extend({}, settings, data))
+        question = new StyleQuiz[klass_name](question_params)
       else
-        question = new StyleQuiz.BaseQuestion(_.extend({}, settings, data))
+        question = new StyleQuiz.BaseQuestion(question_params)
 
       question.on('question:completed', @showNext)
       question.on('question:back', @showPrevious)

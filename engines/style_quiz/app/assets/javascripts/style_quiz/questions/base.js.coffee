@@ -16,6 +16,7 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
     @$container.on('click', '*[data-action=next]', @submitQuestion)
     @$container.on('click', '*[data-action=previous]', @previousQuestion)
     @name   = opts.name
+    @user   = opts.user
     @shown  = false
 
   hide: () ->
@@ -30,7 +31,8 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
     true
 
   onValueChanged: (e) =>
-    @updateButtonsState()
+    #@updateButtonsState()
+    @hideValidationError()
     @trigger('question:changed', {})
 
   updateButtonsState: () =>
@@ -70,9 +72,11 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
       $(e.currentTarget).closest('.quiz-error').fadeOut()
     _.delay( () ->
       $('.quiz-error').fadeOut()
-    , 5000)
+    , 3000)
 
   hideValidationError: () ->
+    $('.quiz-error').fadeOut()
+
 
   validationError: () ->
     "Please, select at least one value"
@@ -80,20 +84,6 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
   on: () -> @$container.on.apply(@$container, arguments)
   off: () -> @$container.off.apply(@$container, arguments)
   trigger: () -> @$container.trigger.apply(@$container, arguments)
-
-  callForLoggedFacebookUser: (callback) ->
-    _callback = callback
-    FB.getLoginStatus( (response) ->
-      if (response && response.status == 'not_authorized')
-        FB.login( (response) ->
-          if (response.authResponse)
-            _callback()
-        , scope: 'email,user_birthday,user_events,user_friends',
-          return_scopes: true
-        )
-      else
-        _callback()
-    )
 
 window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.BaseQuestion
   constructor: (opts = {}) ->
@@ -128,10 +118,12 @@ window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.
       !_.empty(@$fullnameInput.val())
 
   birthdayValid: () ->
-    if _.isFunction(@$birthdayInput[0].checkValidity)
-      @$birthdayInput[0].checkValidity()
-    else
-      !_.empty(@$birthdayInput.val())
+    try
+      dateFormat = @$birthdayInput.datepicker('option', 'dateFormat')
+      $.datepicker.parseDate(dateFormat, @$birthdayInput.val())
+      return true
+    catch
+      return false
 
   emailValid: () ->
     if _.isFunction(@$emailInput[0].checkValidity)
@@ -145,14 +137,12 @@ window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.
   importFromFacebookHandler: (e) =>
     e.preventDefault()
 
-    importFromFacebook = (user_profile) =>
+    @user.getUserProfile( (user_profile) =>
       @$fullnameInput.val(user_profile.name)
       @$emailInput.val(user_profile.email)
-
       @$birthdayInput.datepicker('setDate', new Date(user_profile.birthday))
 
-    @callForLoggedFacebookUser( () ->
-      FB.api("/me", importFromFacebook)
+      @onValueChanged()
     )
 
 window.StyleQuiz.ColorPaletteQuestion = class ColorPaletteQuestion extends window.StyleQuiz.BaseQuestion
@@ -340,7 +330,7 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
 
     that = @
     dateFormat = that.$container.find('input[name=date]').datepicker('option', 'dateFormat')
-    importFromFacebook = (events) ->
+    @user.getEvents((events) =>
       currentDate = new Date()
       _.each(events.data, (event, index) =>
         date = new Date(event.start_time || event.end_time)
@@ -351,7 +341,5 @@ window.StyleQuiz.EventsFormQuestion = class EventsFormQuestion extends window.St
             date: $.datepicker.formatDate(dateFormat, date)
           })
       )
-
-    @callForLoggedFacebookUser( () ->
-      FB.api("/me/events", importFromFacebook)
+      that.onValueChanged()
     )
