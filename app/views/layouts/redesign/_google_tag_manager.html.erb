@@ -1,4 +1,9 @@
-<!-- Google Tag Manager -->
+<%# Google Tag Manager %>
+<%# - GTM JS must be inserted after the <body> tag %>
+<%# - dataLayer must be declared above tag manager JS import %>
+
+<script>window.dataLayer = window.dataLayer || [];</script>
+
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KV54GB"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -6,4 +11,36 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KV54GB');</script>
-<!-- End Google Tag Manager -->
+
+<% if flash[:commerce_tracking] || params[:force_tracking] && @spree_order.present? %>
+  <script>
+    dataLayer.push({"event": "completedOrder"});
+
+    dataLayerProducts = [];
+    <% @spree_order.line_items.each do |line_item| %>
+      <%
+        range_taxon   = range_taxon_for(line_item.variant.product)
+        category_name = range_taxon.present? ? range_taxon.name : ''
+        sku           = line_item.variant.sku
+        sku           = line_item.variant.product.sku if sku.blank?
+      %>
+      dataLayerProducts.push({
+        "sku"      : "<%= j sku %>",
+        "name"     : "<%= j line_item.variant.product.name %>",
+        "category" : "<%= j category_name %>",
+        "price"    : <%= line_item.price %>,
+        "quantity" : <%= line_item.quantity %>
+      });
+    <% end %>
+
+    dataLayer.push({
+      "transactionId"          : "<%= @spree_order.number %>",
+      "transactionCurrency"    : "<%= @spree_order.currency %>",
+      "transactionAffiliation" : "Fame & Partners",
+      "transactionTotal"       : <%= @spree_order.total %>,
+      "transactionTax"         : <%= @spree_order.adjustments.tax.sum(:amount) %>,
+      "transactionShipping"    : <%= @spree_order.adjustments.shipping.sum(:amount) %>,
+      "transactionProducts"    : dataLayerProducts
+    });
+  </script>
+<% end %>
