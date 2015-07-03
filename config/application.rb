@@ -89,7 +89,7 @@ module FameAndPartners
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
 
     redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-    binding.pry
+    
     if Rails.env.production? || Rails.env.preproduction?
       redis_yml = YAML::load(File.open("#{Rails.root}/config/redis.yml")).with_indifferent_access
       redis_host = redis_yml[Rails.env][:hosts]
