@@ -1,9 +1,8 @@
 require "net/http"
 
-# fully inherits logic from google flat images
 module Feeds
   module Exporter
-    class GoogleFlatImages < Google
+    class Polyvore < CPC
       CDN_HOST = "http://assets.fameandpartners.com/product-feed/flat/"
 
       # @override

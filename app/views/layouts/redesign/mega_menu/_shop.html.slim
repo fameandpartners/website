@@ -20,9 +20,9 @@ li.shop.menu-item
           /     span.fit-guarantee.menu-icon
           /     | Fit Guarantee
     .mega-menu--secondary
-      - if sale_active?
+      - if sale_active? && current_site_version.is_usa?
         = link_to dresses_path, class: 'mega-menu-banner' do
-          = image_tag 'mega-menu/sale.jpg', alt: '15% Off New Season Sale', class: 'img-responsive'
+          = image_tag 'mega-menu/sale.jpg', alt: '50% Off Sale', class: 'img-responsive'
 
       .container-fluid.max-width-100
         .row

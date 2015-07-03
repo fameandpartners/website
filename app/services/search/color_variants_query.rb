@@ -117,11 +117,10 @@ module Search
               :_script => {
                 script: %q{
                   for ( int i = 0; i < color_ids.size(); i++ ) {
-                    if ( doc['color.id'] == color_ids[i] ) {
+                    if ( doc['color.id'].first() == color_ids[i] ) {
                       return i;
                     }
                   }
-                  return 99;
                 }.gsub(/[\r\n]|([\s]{2,})/, ''),
                 params: { color_ids: colors },
                 type: 'number',
