@@ -289,7 +289,7 @@ FameAndPartners::Application.routes.draw do
     mount Spree::Core::Engine, at: '/'
   end
 
-  mount AdminUi::Engine, at: '/admin2'
+  mount AdminUi::Engine, at: '/fame_admin'
 
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
