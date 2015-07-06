@@ -26,8 +26,11 @@ h4 {
 label {
   text-transform: uppercase;
 }
-input:-webkit-autofill {
-  background-color: $quiz-form-control-bg-focus !important;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 50000s ease-in-out 0s;
 }
 // @end Setup
 // -----------------
