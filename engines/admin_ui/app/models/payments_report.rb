@@ -1,28 +1,10 @@
 require 'delegate'
-require 'csv'
+require 'enumerable_csv'
 
 class PaymentsReport
-  def report
-    to_csv_rows.each do |row|
-      puts row
-    end
-  end
+  include EnumerableCSV
 
-  def to_csv_rows
-    return to_enum(__callee__) unless block_given?
-
-    streaming.each_with_index do |payment, idx|
-      data = payment.to_h
-
-      if idx.zero?
-        yield CSV::Row.new(data.keys, data.keys, true)
-      end
-
-      yield CSV::Row.new(data.keys, data.values)
-    end
-  end
-
-  def streaming
+  def each
     return to_enum(__callee__) unless block_given?
 
     # Deleted Payment Methods are excluded by the default join scope,

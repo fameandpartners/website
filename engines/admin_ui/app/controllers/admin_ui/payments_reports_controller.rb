@@ -2,7 +2,7 @@ module AdminUi
   class PaymentsReportsController < AdminUi::ApplicationController
 
     def show
-      @rows = model_class.new.streaming.take(10).map &:to_h
+      @rows = model_class.new.take(10).map &:to_h
     end
 
     # Streaming CSV download.

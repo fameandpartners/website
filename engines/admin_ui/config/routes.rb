@@ -2,6 +2,10 @@ AdminUi::Engine.routes.draw do
   resources :return_requests
   resource  :payments_report,    :only => [:show, :create]
 
+  namespace :reports do
+    resource  :sale_items,    :only => [:show, :create]
+  end
+
   resources :caches, only: [:index, :destroy] do
     delete :expire, :on => :collection
   end
