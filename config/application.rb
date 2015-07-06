@@ -108,6 +108,9 @@ module FameAndPartners
       generator.test_framework :rspec
     end
 
+    config.rspec_paths = []
+    config.rspec_paths << self.root
+
     config.after_initialize do
       Rails.configuration.spree.payment_methods << Spree::Gateway::Pin
       Rails.configuration.spree.payment_methods << Spree::Gateway::NabTransactGateway
