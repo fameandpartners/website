@@ -4,11 +4,12 @@ module Reports
   class SaleItems
     include EnumerableCSV
 
-    def initialize(from: from_date, to: to_date)
+    def initialize(from:, to:)
+      raise ArgumentError unless from.respond_to?(:to_date)
+      raise ArgumentError unless to.respond_to?(:to_date)
+
       @from = from.to_datetime.beginning_of_day
       @to   = to.to_datetime.end_of_day
-    rescue NoMethodError => e
-      raise e
     end
 
     def from
