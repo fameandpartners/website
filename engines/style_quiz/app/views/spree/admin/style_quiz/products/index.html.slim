@@ -1,0 +1,30 @@
+= render partial: 'spree/admin/style_quiz/shared/sub_menu'
+
+- content_for :page_title do
+  = t(:listing_style_quiz_products)
+
+- if @products.blank?
+  .no-objects-found = t(:no_results) 
+- else
+
+  table.index.compact#style-quiz-products
+    colgroup
+      col style="width: 10%;"
+      col style="width: 20%;"
+      col style="width: 10%;"
+
+    thead
+      tr
+        th Name
+        th Tags
+        th Tools
+
+    tbody
+      - @products.each do |product|
+        tr
+          td = product.name
+          td 
+            - if product.tags.present?
+              = StyleQuiz::Tag.where(id: product.tags).pluck(:name).join(', ')
+          td
+            = link_to 'Edit', '#'

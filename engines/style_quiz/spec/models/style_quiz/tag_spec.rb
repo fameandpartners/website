@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StyleQuiz::Tag, :type => :model do
+describe StyleQuiz::Tag, type: :model do
 
   context '#weight' do
     it 'returns weight for color' do
