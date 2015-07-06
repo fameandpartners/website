@@ -16,7 +16,8 @@ module CampaignsHelper
         fb_id:         decode(params[:fb]),
         timeout:       params[:t] || 3,
         timer:         decode(params[:ti]),
-        campaign_uuid: decode(params[:cu])
+        campaign_uuid: decode(params[:cu]),
+        action:        campaigns_email_capture_path
       }
     end
   end

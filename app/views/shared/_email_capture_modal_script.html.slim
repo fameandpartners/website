@@ -15,7 +15,7 @@
         message:   \"#{campign_attrs[:message]}\",
         className: \"#{campign_attrs[:class_name]}\",
         fb:        \"#{campign_attrs[:fb_id]}\",
-        action:    \"#{campign_attrs[:campaigns_email_capture_path]}\",
+        action:    \"#{campign_attrs[:action]}\",
         container: \"#modal-popup-content-template\",
         timeout:    #{auto_apply ? 100000 : campign_attrs[:timeout]},
         timer:      #{campign_attrs[:timer].present? ? timer : 0},
