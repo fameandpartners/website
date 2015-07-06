@@ -1,13 +1,10 @@
 require_relative './exporter/base'
-require_relative './exporter/getprice'
-require_relative './exporter/google'
-require_relative './exporter/google_flat_images'
-require_relative './exporter/myshopping'
-require_relative './exporter/shopping'
+require_relative './exporter/cpc'
+require_relative './exporter/polyvore'
 
 module Feeds
   class Base
-    FEEDS =  %w(GoogleFlatImages Google Getprice Myshopping Shopping)
+    FEEDS =  %w(CPC Polyvore)
 
     attr_reader :config, :current_site_version, :logger
 
@@ -25,9 +22,7 @@ module Feeds
     def default_logger
       logger = Logger.new($stdout)
 
-      logger.formatter = proc do |severity, datetime, _progname, msg|
-        "[%s] [%-5s] %s\n" %  [datetime.strftime('%Y-%m-%d %H:%M:%S'), severity, msg]
-      end
+      logger.formatter = LogFormatter.terminal_formatter
       logger
     end
 

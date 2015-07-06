@@ -20,9 +20,9 @@ li.shop.menu-item
           /     span.fit-guarantee.menu-icon
           /     | Fit Guarantee
     .mega-menu--secondary
-      - if sale_active?
+      - if sale_active? && current_site_version.is_usa?
         = link_to dresses_path, class: 'mega-menu-banner' do
-          = image_tag 'mega-menu/sale.jpg', alt: '15% Off New Season Sale', class: 'img-responsive'
+          = image_tag 'mega-menu/sale.jpg', alt: '50% Off Sale', class: 'img-responsive'
 
       .container-fluid.max-width-100
         .row
@@ -70,9 +70,9 @@ li.shop.menu-item
                 li.mega-menu-list--item= link_to 'Dresses made in 48 hours', fast_making_dresses_path, title: 'Express Making'
 
             - if Features.active?(:sales)
-              h4.link-header Sale - Up to 50% Off
-              ul.mega-menu-list
-                - if sale_active?
+              - if sale_active?
+                h4.link-header Sale - Up to 50% Off
+                ul.mega-menu-list
                   li.mega-menu-list--item= link_to 'All Sale Dresses', sales_collection_path,  title: 'All Sale Dresses'
                   li.mega-menu-list--item= link_to "15 Percent Off",   dresses_path(sale: 15), title: 'All Dresses 15% off'
                   li.mega-menu-list--item= link_to "30 Percent Off",   dresses_path(sale: 30), title: 'All Dresses 30% off'
