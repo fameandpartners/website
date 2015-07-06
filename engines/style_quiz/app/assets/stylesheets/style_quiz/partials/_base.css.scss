@@ -28,6 +28,7 @@ label {
 }
 input:-webkit-autofill {
   background-color: $quiz-form-control-bg-focus !important;
+  -webkit-box-shadow: 0 0 0px 1000px $peach-bg inset;
 }
 // @end Setup
 // -----------------
