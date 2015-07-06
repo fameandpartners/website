@@ -1,7 +1,7 @@
 // Checkout page url: /checkout
 .page-content.checkout {
   // - Override form styles
-  label { 
+  label {
     color: #000;
   }
   .form-control {
@@ -19,7 +19,7 @@
     background-color: $gray-light-bg;
     border: 0;
 
-    h3 { 
+    h3 {
       text-transform: uppercase;
       margin: 25px 0;
     }
@@ -69,7 +69,7 @@
 
   .promo-code {
     margin: 20px 0;
-    .input-group-addon { 
+    .input-group-addon {
       border-bottom: 0 !important;
       padding: 0;
       vertical-align: bottom;
@@ -91,3 +91,158 @@
 // @end
 
 
+.modal-container{
+
+  @media(max-width: 480px) {
+    width: 90% !important;
+    top: 15% !important;
+    left: 5% !important;
+  }
+
+  position: absolute;
+  border: solid 5px #000;
+  padding: 40px;
+  margin: 0;
+  z-index: 1;
+  font-family: "brandon-grotesque", sans-serif;
+
+  .close-lightbox {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #000;
+    font-family: 'Icons';
+    speak: none;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    font-variant: normal;
+    text-transform: none;
+    text-align: center;
+    line-height: 19px;
+    text-indent: 4px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .close-lightbox:before{
+    content: "\e611";
+  }
+
+  .modal-title{
+    text-transform: uppercase;
+    font: 300 30px/1 "Lato", sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .modal-form {
+    .form {
+      margin: 0;
+      .description {
+        font-family: "Lato", sans-serif;
+        text-transform: none;
+        margin-bottom: 20px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #333333;
+        p {
+          font: 400 14px/1.1 "Arapey", serif;
+          text-transform: none;
+          color: black;
+        }
+      }
+
+      .member-fields {
+        .fields-group {
+          .item-details {
+            label {
+                font: 400 10px/17px "Novecento", sans-serif;
+                text-transform: uppercase;
+                display: inline-block;
+                max-width: 100%;
+                margin-bottom: 5px;
+                .required {
+                  text-transform: uppercase;
+                  font-weight: 500 !important;
+                  margin-bottom: 0;
+
+                }
+              }
+            input {
+              margin-bottom: 20px;
+              width: 100%;
+              height: 32px;
+              font: 400 10px/32px "Novecento", sans-serif;
+              letter-spacing: 0.125em;
+              text-transform: uppercase;
+              padding: 0 5px;
+              background-color: #fff;
+              border: solid 1px #000;
+              color: #000;
+              box-shadow: #000 0px 0px, #000 1px 1px, #000 2px 2px, #000 3px 3px, #000 4px 4px, #000 5px 5px;
+              box-sizing: border-box;
+            }
+          }
+        }
+      }
+    }
+
+    .submit {
+      margin-top: 20px;
+      font-family: "brandon-grotesque", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333333;
+      .btn.empty.border {
+        width: 100%;
+        border: solid 1px #000;
+        color: #000;
+        vertical-align: middle;
+        text-decoration: none;
+        outline: none;
+        text-transform: uppercase;
+        text-align: center;
+        height: 36px;
+        padding: 0 15px;
+        letter-spacing: 0.125em;
+        box-sizing: border-box;
+        max-width: 100%;
+        margin-bottom: 0;
+        touch-action: manipulation;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .btn.black {
+        width: 100%;
+        -webkit-appearance: button;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+        text-decoration: none;
+        border: 0;
+        outline: none;
+        text-transform: uppercase;
+        text-align: center;
+        color: #fff;
+        height: 36px;
+        padding: 0 15px;
+        letter-spacing: 0.125em;
+        background-color: #000;
+        box-sizing: border-box;
+        max-width: 100%;
+        margin-bottom: 0;
+        touch-action: manipulation;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      a {
+        color: grey;
+        text-decoration: none;
+        background-color: transparent;
+      }
+    }
+  }
+}

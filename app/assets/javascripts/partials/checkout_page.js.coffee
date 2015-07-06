@@ -1,3 +1,8 @@
+#= require 'templates/modal_popup'
+#= require 'templates/login_form'
+#= require 'popups/login'
+#= require 'popups/base'
+
 window.page ||= {}
 
 page.initCheckoutEditPage = () ->
@@ -10,7 +15,7 @@ page.initCheckoutEditPage = () ->
 
       $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
       $(document).on('click',   '.open-login-popup', page.openLoginPopup)
-      
+
       $(document).on('click',   '.cvv-popup-toggle', page.toggleCVVCodePopup)
 
       $(document).on('keyup',   'input', page.updateAddressFormVisibility)
@@ -207,7 +212,7 @@ page.initCheckoutEditPage = () ->
         $(states_field_id).trigger('chosen:updated')
 
     openLoginPopup: (e) ->
-      if window.popups && window.popups.LoginPopup()
+      if window.popups
         e.preventDefault()
         popup = new window.popups.LoginPopup()
         popup.show()
