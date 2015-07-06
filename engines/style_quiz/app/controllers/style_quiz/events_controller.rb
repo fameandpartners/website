@@ -3,13 +3,17 @@ module StyleQuiz
     respond_to :json
 
     def create
-      event = style_profile.events.new(params[:event])
+      event = style_profile.events.new(
+        name: params[:event][:name],
+        event_type: params[:event][:event_type],
+        date: Date.strptime(params[:event][:date], I18n.t('date_format.backend'))
+      )
 
       if event.save
         render json: { 
           id: event.id,
           name: event.name,
-          date: event.date.to_s(:db),
+          date: event.date.strftime(I18n.t('date_format.backend')),
           event_type: event.event_type
         }, status: :ok
       else

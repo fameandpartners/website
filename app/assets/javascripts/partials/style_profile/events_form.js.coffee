@@ -6,6 +6,7 @@ window.style_profile.EventsForm = class EventsForm
     @$container.on("click", '*[data-action=add-event]', @addEventHandler)
     @$container.on("click", '*[data-action=delete-event]', @deleteEventHandler)
     @$container.on('click', '*[data-action=import-from-fb]', @importFromFacebookHandler)
+    @fb_user = opts.fb_user
 
     @$container.find('input[name=date]').datepicker({
       minDate: '+1D',
@@ -24,6 +25,7 @@ window.style_profile.EventsForm = class EventsForm
 
   addEvent: (event) ->
     $container = @$container
+    dateFormat = @$container.find('input[name=date]').datepicker('option', 'dateFormat')
 
     $.ajax(
       url: '/style-quiz/user_profile/events',
@@ -66,7 +68,7 @@ window.style_profile.EventsForm = class EventsForm
 
     that = @
     dateFormat = that.$container.find('input[name=date]').datepicker('option', 'dateFormat')
-    importFromFacebook = (events) ->
+    @fb_user.getEvents((events) =>
       currentDate = new Date()
       _.each(events.data, (event, index) =>
         date = new Date(event.start_time || event.end_time)
@@ -77,21 +79,23 @@ window.style_profile.EventsForm = class EventsForm
             date: $.datepicker.formatDate(dateFormat, date)
           })
       )
-
-    @callForLoggedFacebookUser( () ->
-      FB.api("/me/events", importFromFacebook)
+      that.onValueChanged()
     )
 
-  callForLoggedFacebookUser: (callback) ->
-    _callback = callback
-    FB.getLoginStatus( (response) ->
-      if (response && response.status == 'not_authorized')
-        FB.login( (response) ->
-          if (response.authResponse)
-            _callback()
-        , scope: 'email,user_birthday,user_events,user_friends',
-          return_scopes: true
-        )
-      else
-        _callback()
+  importFromFacebookHandler: (e) =>
+    e.preventDefault()
+
+    that = @
+    dateFormat = that.$container.find('input[name=date]').datepicker('option', 'dateFormat')
+    @fb_user.getEvents((events) =>
+      currentDate = new Date()
+      _.each(events.data, (event, index) =>
+        date = new Date(event.start_time || event.end_time)
+        if date && date > currentDate
+          that.addEvent({
+            name: event.name,
+            event_type: event.location,
+            date: $.datepicker.formatDate(dateFormat, date)
+          })
+      )
     )

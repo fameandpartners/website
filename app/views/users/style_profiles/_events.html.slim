@@ -1,6 +1,13 @@
+- content_for :head do
+  = javascript_include_tag 'style_quiz/models/fb_user'
+
 ruby:
   style_profile_events_form_init = "
-    var form = new window.style_profile.EventsForm({ container: '#events.style-profile-tab-panel.tab-pane' });
+    var form = new window.style_profile.EventsForm({ 
+      container:  '#events.style-profile-tab-panel.tab-pane',
+      dateFormat: '#{ raw I18n.t('date_format.frontend', default: "dd/mm/yy") }',
+      fb_user:    (new StyleQuiz.FbUser())
+    });
   "
 = content_for :inline_javascript do
   = raw style_profile_events_form_init
@@ -34,5 +41,5 @@ ruby:
     - @style_profile.events.each do |event|
       .col-sm-4.event data-id=(event.id)
         .form-tag
-          span = "#{ event.date.to_s(:db) } - #{ event.name }"
+          span = "#{ event.date.strftime(I18n.t('date_format.backend')) } - #{ event.name }"
           .icon-cross data-action='delete-event'
