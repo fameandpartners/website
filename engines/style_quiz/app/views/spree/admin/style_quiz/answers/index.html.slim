@@ -1,0 +1,46 @@
+= render partial: 'spree/admin/style_quiz/shared/sub_menu'
+
+- content_for :page_title do
+  = "Answers for question #{ @question.code }"
+
+- if @answers.blank?
+  .no-objects-found = t(:no_results) 
+- else
+  table.index.sortable.compact#style-quiz-question-answers data-sortable-link=( order_admin_style_quiz_questions_url )
+    colgroup
+      col style="width: 5%;"
+      col style="width: 10%;"
+      col style="width: 10%;"
+      col style="width: 10%;"
+      col style="width: 10%;"
+      col style="width: 10%;"
+      col style="width: 10%;"
+
+    thead
+      tr
+        th 
+        th active
+        th name
+        th group
+        th value
+        th tags
+        th image
+        th 
+
+    tbody
+      - @answers.each do |answer|
+        tr data-id="#{answer.id}" id=( spree_dom_id answer )
+          td
+            span.handle
+          td = answer.active ? 'yes' : 'no'
+          td = answer.name
+          td = answer.group
+          td = answer.value
+          td 
+            - if answer.tags.present?
+              = StyleQuiz::Tag.where(id: answer.tags).pluck(:name).join(', ')
+          td 
+            - if answer.image.present?
+              = image_tag answer.image, height: 100, style: 'overflow-x: hidden;'
+          td
+            = link_to 'Edit', edit_admin_style_quiz_question_answer_path(@question, answer)

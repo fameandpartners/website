@@ -120,6 +120,7 @@ window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.
   birthdayValid: () ->
     try
       dateFormat = @$birthdayInput.datepicker('option', 'dateFormat')
+      return false if !@$birthdayInput.val()
       $.datepicker.parseDate(dateFormat, @$birthdayInput.val())
       return true
     catch
@@ -132,7 +133,11 @@ window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.
       !_.empty(@$emailInput.val())
 
   validationError: () ->
-    "Please provide Full name/Date of Birth/Email address"
+    invalid_fields = []
+    invalid_fields.push('Full name') unless @fullnameValid()
+    invalid_fields.push('Date of Birth') unless @birthdayValid()
+    invalid_fields.push('Email address') unless @emailValid()
+    "Please provide #{ invalid_fields.join("/") }"
 
   importFromFacebookHandler: (e) =>
     e.preventDefault()

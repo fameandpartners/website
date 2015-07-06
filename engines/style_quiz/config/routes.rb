@@ -9,8 +9,12 @@ StyleQuiz::Engine.routes.draw do
     namespace :admin do
       namespace :style_quiz do # todo make it configurable
         resources :tags
-        #resources :questions
-        #resources :products
+        resources :questions do
+          resources :answers, on: :member
+          post      :order, to: 'questions#order', on: :collection
+        end
+        resources :products
+        resources :user_profiles
 
         root to: 'tags#index'
       end

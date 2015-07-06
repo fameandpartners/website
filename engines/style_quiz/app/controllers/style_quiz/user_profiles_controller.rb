@@ -49,26 +49,28 @@ module StyleQuiz
       end
 
       def create_user_automagically(style_profile)
-        return false
-
         user_attributes = style_profile.answers
 
-        first_name, last_name = user_attributes[:fullname].split(' ', 2)
+        first_name, last_name = style_profile.fullname.split(' ', 2)
         user = Spree::User.new(
           first_name: first_name,
           last_name: last_name,
-          email: user_attributes[:email],
-          birthday: (Date.parse(user_attributes[:birthday]) rescue nil)
+          email: style_profile.email,
+          skip_welcome_email: true,
+          automagically_registered: true
         )
+        user.birthday = style_profile.birthday
 
-        if user
-          #sign_in :spree_user, authentication.user
+        if user.save
+          sign_in :spree_user, user
           user_style_profile.assign_to_user(user)
+          return true
+        else
+          return false
         end
 
-        true
-      #rescue
-      #  return false
+      rescue
+        return false
       end
   end
 end
