@@ -3,6 +3,19 @@
 - content_for :page_title do
   = t(:listing_style_quiz_products)
 
+
+- content_for :sidebar_title do
+  = t(:search)
+
+- content_for :sidebar do
+  .box.align-center 
+    = search_form_for [:admin, :style_quiz, @search] do |f|
+      .field
+        = f.label t(:name)
+        = f.text_field :name_cont, class: 'fullwidth'
+      div
+        = button t(:search), 'icon-search'
+
 - if @products.blank?
   .no-objects-found = t(:no_results) 
 - else
@@ -21,10 +34,11 @@
 
     tbody
       - @products.each do |product|
-        tr
+        tr data-id=(product.id)
           td = product.name
-          td 
+          td data-value="tags"
             - if product.tags.present?
               = StyleQuiz::Tag.where(id: product.tags).pluck(:name).join(', ')
           td
-            = link_to 'Edit', '#'
+            =< link_to 'Edit Tags', edit_admin_style_quiz_product_path(product)
+            =< link_to 'Remove Tags', admin_style_quiz_product_path(product), remote: true, method: :delete

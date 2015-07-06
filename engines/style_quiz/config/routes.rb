@@ -13,7 +13,7 @@ StyleQuiz::Engine.routes.draw do
           resources :answers, on: :member
           post      :order, to: 'questions#order', on: :collection
         end
-        resources :products
+        resources :products, only: [:index, :edit, :update, :destroy]
         resources :user_profiles
 
         root to: 'tags#index'
