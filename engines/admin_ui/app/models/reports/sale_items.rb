@@ -23,7 +23,6 @@ module Reports
       'ItemsSoldOnSale'
     end
 
-
     def each
       return to_enum(__callee__) unless block_given?
 
@@ -61,8 +60,5 @@ module Reports
           o.completed_at between '#{from}' and '#{to}'
       SQL
     end
-
-
-    # o.completed_at between '2015-02-01 00:00:00.000000' and '2015-05-31 23:59:59.999999'
   end
 end
