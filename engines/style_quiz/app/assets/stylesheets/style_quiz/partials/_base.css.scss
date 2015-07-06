@@ -26,6 +26,9 @@ h4 {
 label {
   text-transform: uppercase;
 }
+input:-webkit-autofill {
+  background-color: $quiz-form-control-bg-focus !important;
+}
 // @end Setup
 // -----------------
 
