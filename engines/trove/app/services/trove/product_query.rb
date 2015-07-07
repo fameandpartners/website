@@ -1,8 +1,9 @@
 class Trove::ProductQuery
-  attr_accessor :options
+  attr_accessor :options, :zone
 
   def initialize(options={})
     @options = options
+    @zone = options[:zone] || 'us'
   end
 
   def build
@@ -16,7 +17,7 @@ class Trove::ProductQuery
     {
       :bool => {
         :must   => [is_current, is_visible, is_in_stock, is_available, has_taxons, has_colors, has_discount].compact.flatten,
-        :should => has_bodyshapes,
+        # :should => has_bodyshapes,
        }
     }
   end
@@ -66,12 +67,16 @@ class Trove::ProductQuery
     end
   end
 
+  def discount_field
+    "product.zones.#{zone}.discount"
+  end
+
   def has_any_discount
     {
       :bool => {
         :should => {
           :range => {
-            'product.discount' => {
+            discount_field => {
               :gt => 0
             }
           }
@@ -85,7 +90,7 @@ class Trove::ProductQuery
       :bool => {
         :must => {
           :term => {
-            'product.discount' => options[:discount].to_i
+            discount_field => options[:discount].to_i
           }
         }
       }
@@ -104,7 +109,7 @@ class Trove::ProductQuery
        :bool => {
          :should => {
            :range => {
-             "product.#{bodyshape}" => {
+             "product.bodyshapes.#{bodyshape}" => {
                :gte => 4
              }
            }
@@ -124,12 +129,6 @@ class Trove::ProductQuery
 
   def is_in_stock
     is_true('product.in_stock')
-  end
-
-  def is_color_customizable
-    if options[:color_customizable]
-      is_true('product.color_customizable')
-    end
   end
 
   def is_available
@@ -158,10 +157,10 @@ class Trove::ProductQuery
       {
         options[:sort_by] => options[:sort_dir] || 'desc'
       }
-    else
-      {
-        'product.position' => 'asc'
-      }
+    # else
+    #   {
+    #     'product.position' => 'asc'
+    #   }
     end
   end
 

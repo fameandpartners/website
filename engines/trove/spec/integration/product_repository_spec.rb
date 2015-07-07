@@ -75,7 +75,15 @@ describe Trove::ProductRepository do
   end
 
   context 'with discount' do
-    let(:opts)      { { :product => { :discount => 42 }} }
+    let(:opts)      {{
+                        :product => {
+                          :zones => {
+                            :us => {
+                              :discount => 42
+                            }
+                          }
+                        }
+                    }}
     let(:search)    { { :discount => 42 } }
 
     it 'finds product by discount' do
@@ -84,7 +92,14 @@ describe Trove::ProductRepository do
   end
 
   context 'with bodyshapes' do
-    let(:opts)      { { :product => { :apple => 1, :column => 3, :athletic => 7 }} }
+    let(:opts)      {{
+                      :product => {
+                        :bodyshapes => {
+                          :apple => 1, :column => 3, :athletic => 7
+                        }
+                      }
+                    }}
+
     let(:search)    { { :bodyshapes => %w(athletic column) } }
     it 'finds product by discount' do
       expect(repo.products).to have(1).product
@@ -114,31 +129,29 @@ describe Trove::ProductRepository do
         :available_on       => (Time.zone.now - 1.days).utc,
         :is_deleted         => false,
         :is_hidden          => false,
-        :position           => 0,
-        :permalink          => '',
-        :master_id          => rand_id,
         :in_stock           => true,
-        :discount           => 0,
-        :can_be_customized  => true,
-        :fast_delivery      => true,
-        # :is_surryhills      => false,
-        :taxon_ids          => [],
-        :price              => price,
-
-        # bodyshape sorting
-        :apple              => false,
-        :pear               => false,
-        :athletic           => false,
-        :strawberry         => false,
-        :hour_glass         => false,
-        :column             => false,
-        :petite             => false,
-        :color_customizable => false,
-
-        :urls               => {
-          :en_au => "/au/#{name}/",
-          :en_us => "/us/#{name}/"
+        :tags               => [],
+        :bodyshapes         => {
+          :apple              => false,
+          :pear               => false,
+          :athletic           => false,
+          :strawberry         => false,
+          :hour_glass         => false,
+          :column             => false,
+          :petite             => false,
         },
+        :zones              => {
+          :au               => {
+            :url            => "/au/#{name}/",
+            :price          => rand_id,
+            :discount       => 0
+          },
+          :us               => {
+            :url            => "/us/#{name}/",
+            :price          => rand_id,
+            :discount       => 0
+          }
+        }
       },
       :color => {
         :id           => rand_id,
@@ -148,10 +161,6 @@ describe Trove::ProductRepository do
       :images   => [{
         :large => '/products/image.png'
       }],
-      :prices   => {
-        :aud => rand_id,
-        :usd => rand_id
-      }
     }
   end
 
@@ -162,7 +171,7 @@ describe Trove::ProductRepository do
   def index_products(products)
     products = Array.wrap(products)
     # repo.create_index! force: true, type: '_all'
-    # repo.delete_index!
+    repo.delete_index!
     products.each { |p| repo.save(p) }
     repo.refresh_index!
   end
