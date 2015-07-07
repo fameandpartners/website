@@ -63,14 +63,10 @@ configatron.campaign_monitor do |campaign_monitor|
   campaign_monitor.list_id = 'dafc8802250a7fb08c840d9c4ffadc9f'  # '#all_subscribers list
 end
 
-def yaml_config(config_file)
-  YAML::load(File.open( File.join( Rails.root, 'config', config_file))).with_indifferent_access
-end
-
-configatron.redis_host = yaml_config("redis.yml")[Rails.env][:hosts]
+configatron.redis_host = ::FameAndPartners.yaml_config("redis.local.yml")[Rails.env][:hosts]
 configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
-configatron.es_url = yaml_config("elasticsearch.yml")[Rails.env][:hosts]
+configatron.es_url = ::FameAndPartners.yaml_config("elasticsearch.local.yml")[Rails.env][:hosts]
 
 configatron.elasticsearch.indices do |index|
   index.spree_products = :spree_products
