@@ -11,7 +11,6 @@ module AdminUi
       # Streaming CSV download.
       # See: http://smsohan.com/blog/2013/05/09/genereating-and-streaming-potentially-large-csv-files-using-ruby-on-rails/
       def create
-        # file_name                      = "payments_up_to_#{DateTime.now.to_s(:filename)}.csv"
         headers["Content-Type"]        = "text/csv"
         headers["Content-disposition"] = "attachment; filename=\"#{filename}\""
         headers['X-Accel-Buffering']   = 'no'
