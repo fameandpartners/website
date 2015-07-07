@@ -59,6 +59,27 @@ module Orders
       end
     end
 
+    describe '#make_size' do
+      let(:size)      { double(:size, name: '8')}
+      let(:item)      { double 'item', personalization: nil, variant: double(:dress_size => size) }
+      let(:order)     { double 'order', site_version: site_version }
+      let(:presenter) { described_class.new(item, order) }
+
+      context 'us' do
+        let(:site_version) { 'us' }
+        it 'maps to correct au size' do
+          expect(presenter.make_size).to eq 'au-12'
+        end
+      end
+
+      context 'au' do
+        let(:site_version) { 'au' }
+        it 'maps to correct au size' do
+          expect(presenter.make_size).to eq 'au-8'
+        end
+      end
+    end
+
     describe 'returns' do
       let(:item)          { double(Spree::LineItem) }
       let(:order)         { double(Spree::Order, :return_requested? => true) }

@@ -13,6 +13,7 @@ table.line_items
       th SKU
       th Style Name
       th Size
+      th Make Size
       th Colour
       th Customisations
       th Factory
@@ -42,7 +43,10 @@ table.line_items
           td = line_item.id
           td = line_item.style_number
           td = line_item.style_name
-          td = line_item.country_size
+          td
+            = line_item.country_size
+          td
+            strong= line_item.make_size
           td = line_item.colour_name
           td = line_item.customisations.collect(&:first).join("<br>").html_safe
           td = line_item.factory
