@@ -9,6 +9,7 @@ li class="#{active_link_to_class(payments_report_path)} #{active_link_to_class(r
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
     li = active_link_to 'Payments', payments_report_path
     li = active_link_to 'Sale Items', reports_sale_items_path
+    li = active_link_to 'Coupon Orders', reports_coupon_adjusted_orders_path
 
 li class=active_link_to_class(caches_path)
   a href="#"

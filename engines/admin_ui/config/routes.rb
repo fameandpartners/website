@@ -4,6 +4,7 @@ AdminUi::Engine.routes.draw do
 
   namespace :reports do
     resource :sale_items, :only => [:show, :create]
+    resource :coupon_adjusted_orders, :only => [:show, :create]
   end
 
   resources :caches, only: [:index, :destroy] do
