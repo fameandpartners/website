@@ -1,0 +1,27 @@
+= content_for :page_title do
+  ' Coupon Adjusted Items
+
+.ibox
+  .ibox-title
+    ' Coupon Adjusted Items
+  .ibox-content
+    = form_tag admin_ui.reports_sale_items_path, method: 'post', class: 'form-horizontal'
+      = render partial: 'form_fields'
+      .form-group
+        .col-lg-12
+          button type='submit' Generate
+
+h2 10 Row Sample
+
+div.pre-scrollable style='max-height:100%;'
+  table.table.table-condensed
+    thead
+      tr
+        - head = @rows.first
+        - head.keys.each do |k|
+          th = k
+    tbody
+      - @rows.each do |row|
+        tr
+          - row.values.each do |v|
+            td = v
