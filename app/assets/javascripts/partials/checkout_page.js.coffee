@@ -4,13 +4,17 @@ page.initCheckoutEditPage = () ->
   page = {
     ajax_callbacks: {}
     init: () ->
+      $('.close').on('click', ->
+        $('.auth-alert').hide()
+      )
+
       $(document).on('change',  '#order_use_billing', page.updateShippingFormVisibility)
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
       $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
 
       $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
       $(document).on('click',   '.open-login-popup', page.openLoginPopup)
-      
+
       $(document).on('click',   '.cvv-popup-toggle', page.toggleCVVCodePopup)
 
       $(document).on('keyup',   'input', page.updateAddressFormVisibility)
@@ -35,6 +39,8 @@ page.initCheckoutEditPage = () ->
       if app.debug || app.env == 'development'
         if $('.place-order button').length == 0
           console.log('WARRRRRGHNING! - credit card handlers have invalid selectors. cc payment will not work, probably')
+
+
 
     # Disable the button and set a helpful message
     safeSubmitButton: (button) ->
@@ -207,13 +213,28 @@ page.initCheckoutEditPage = () ->
         $(states_field_id).trigger('chosen:updated')
 
     openLoginPopup: (e) ->
-      if window.popups && window.popups.LoginPopup()
-        e.preventDefault()
-        popup = new window.popups.LoginPopup()
-        popup.show()
-      else
-        # redirecting instead login popup
-        console.log('redirecting to login')
+      e.preventDefault()
+      page.loginUserRequest()
+        .done( (data, state) =>
+          if data && !data.error && state == 'success'
+            window.location.reload()
+          else
+            $(".auth-alert").show()
+        )
+
+    loginUserRequest: () ->
+      formData = {
+        spree_user: {
+          email: $('#email').val(),
+          password: $('#password').val()
+        }
+      }
+      $.ajax(
+        url: urlWithSitePrefix("/spree_user/sign_in")
+        type: 'POST'
+        dataType: 'json'
+        data: $.param(formData)
+      )
 
     toggleCVVCodePopup: (e) ->
       e.preventDefault()
