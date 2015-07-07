@@ -21,7 +21,7 @@ module AdminUi
       end
 
       def model_class
-        ::PaymentsReport
+        ::Reports::Payments
       end
 
     end
