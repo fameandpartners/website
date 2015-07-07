@@ -1,0 +1,3 @@
+= Trove
+
+A store of valuable or delightful things.
