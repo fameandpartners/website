@@ -161,7 +161,8 @@ describe Trove::ProductRepository do
 
   def index_products(products)
     products = Array.wrap(products)
-    repo.delete_index!
+    # repo.create_index! force: true, type: '_all'
+    # repo.delete_index!
     products.each { |p| repo.save(p) }
     repo.refresh_index!
   end

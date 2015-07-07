@@ -31,6 +31,7 @@ path 'engines' do
   gem 'admin_ui'
   gem 'fame_favicon'
   gem 'inspinia-rails'
+  gem 'trove'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -107,7 +108,7 @@ group :assets do
 end
 
 group :assets, :development, :test do
-  gem 'test-unit'  
+  gem 'test-unit'
 end
 
 group :development, :test do
