@@ -45,6 +45,7 @@ module Reports
           li.old_price              as original_price,
           (li.old_price - li.price) as discount,
           v.product_id              as product_id,
+          p.name                    as product_name,
           mv.sku                    as sku,
           o.number                  as order_number,
           o.completed_at::date      as order_date,
@@ -53,6 +54,7 @@ module Reports
           join spree_orders o    on o.id = li.order_id
           join spree_variants v  on v.id = li.variant_id
           join spree_variants mv on mv.product_id = v.product_id and mv.is_master = true
+          join spree_products p  on p.id          = v.product_id
         where
           old_price is not null
         and
