@@ -65,9 +65,19 @@ ruby:
     })();
   "
 
+  append_crop_images_to_meta_tags_in_header = "
+    $(document).ready(function(){
+      cropped_images = #{@product.cropped_images.collect!{|p| p.original}};
+      for (var i = 0; i < cropped_images.length; i++) {
+        $('head').append(\"<meta name='crop_image_\"+ i +\"' content='\"+ cropped_images[i] +\"'>\")
+      }
+    });
+    "
+
 = content_for :inline_javascript do
   = raw init_product_details_page
   = raw init_song_player
+  = raw append_crop_images_to_meta_tags_in_header
 
 #slides
   .slides-container
