@@ -1,10 +1,10 @@
 AdminUi::Engine.routes.draw do
   resources :return_requests
-  resource  :payments_report,    :only => [:show, :create]
 
   namespace :reports do
     root to: 'dashboard#index'
-    resource :sale_items, :only => [:show, :create]
+    resource :payments,               :only => [:show, :create]
+    resource :sale_items,             :only => [:show, :create]
     resource :coupon_adjusted_orders, :only => [:show, :create]
   end
 
