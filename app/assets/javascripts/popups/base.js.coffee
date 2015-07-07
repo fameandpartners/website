@@ -4,7 +4,7 @@ window.popups.getModalContainer = (title = null, button = null) ->
   options = { title: title, button: button }
   container = $(JST['templates/modal_popup'](options)).hide()
   if $('.modal.popup-placeholder').length == 0
-    $('body #wrap #content').append(container)
+    $('body').append(container)
   else
     $('.modal.popup-placeholder').replaceWith(container)
 
