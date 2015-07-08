@@ -13,22 +13,26 @@ module Feeds
 
       private
 
+      def helpers
+        @helpers ||= Feeds::Helpers.new
+      end
+
       def export_file_path
-        path_parts = []
-        path_parts << Rails.root
-        path_parts << '/public/'
-        path_parts << current_site_version.permalink
-        path_parts << '/feeds/products/'
-        path_parts << export_file_name
-        File.join(path_parts)
+        Rails.root.join(
+          'public',
+          current_site_version.permalink,
+          'feeds',
+          'products',
+          export_file_name
+        )
       end
 
       def current_currency
         current_site_version.currency
       end
 
-      def helpers
-        @helpers ||= Feeds::Helpers.new
+      def get_image_link(item)
+        raise NotImplementedError, "#{self.class} does not implement private method #get_image_link"
       end
 
       def collection_product_path(product, options = {})
@@ -50,17 +54,12 @@ module Feeds
       end
 
       def descriptive_url(product)
-        parts = []
-        parts << "dress"
-        parts << product.name.parameterize
-        parts << product.id
-
+        parts = ['dress', product.name.parameterize, product.id]
         parts.reject(&:blank?).join('-')
       end
 
       def url_without_double_slashes(url)
-        # search elements with not colons and replace inside them
-        url.gsub(/\w+(\/\/)/){|a| a.sub('//', '/')}
+        url.gsub(/\w+(\/\/)/){ |a| a.sub('//', '/') }
       end
     end
   end

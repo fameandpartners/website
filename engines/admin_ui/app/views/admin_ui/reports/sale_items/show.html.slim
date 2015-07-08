@@ -1,12 +1,17 @@
 = content_for :page_title do
-  ' Payments Report
+  ' Sale Items Report
 
-h2 Report
+.ibox
+  .ibox-title
+    ' Sale Items Report
+  .ibox-content
+    = form_tag admin_ui.reports_sale_items_path, method: 'post', class: 'form-horizontal'
+      = render partial: 'form_fields'
+      .form-group
+        .col-lg-12
+          button type='submit' Generate
 
-= form_tag admin_ui.payments_report_path, method: 'post' do
-  button type='submit' Generate
-
-h2 Sample
+h2 10 Row Sample
 
 div.pre-scrollable style='max-height:100%;'
   table.table.table-condensed

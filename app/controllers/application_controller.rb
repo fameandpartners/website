@@ -98,8 +98,8 @@ class ApplicationController < ActionController::Base
   end
 
   def add_debugging_infomation
-    ::NewRelic::Agent.add_custom_parameters({
-      user_id: current_spree_user.try(:id),
+    ::NewRelic::Agent.add_custom_attributes({
+      user_id:  current_spree_user.try(:id),
       order_id: current_order.try(:id),
       referrer: request.referrer
     })

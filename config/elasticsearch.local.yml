@@ -1,0 +1,16 @@
+---
+production:
+  hosts:
+    localhost:9200
+preproduction:
+  hosts:
+    localhost:9200
+staging:
+  hosts:
+    localhost:9200
+development:
+  hosts:
+    localhost:9200
+test:
+  hosts:
+    localhost:9200

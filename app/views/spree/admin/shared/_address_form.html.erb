@@ -56,10 +56,8 @@
   </div>
 </div>
 
-<% content_for :head do %>
-  <%= javascript_tag do -%>
-    $(document).ready(function(){
-      $('span#<%= name == t(:shipping_address) ? 's' : 'b' %>country .select2').on('change', function() { update_state('<%= name == t(:shipping_address) ? 's' : 'b' %>'); });
-    });
-  <% end -%>
-<% end %>
+<%= javascript_tag do -%>
+  $(document).ready(function(){
+    $('span#<%= name == t(:shipping_address) ? 's' : 'b' %>country .select2').on('change', function() { update_state('<%= name == t(:shipping_address) ? 's' : 'b' %>'); });
+  });
+<% end -%>

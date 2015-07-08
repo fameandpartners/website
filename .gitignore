@@ -15,6 +15,7 @@
 /tmp
 
 config/database.yml
+config/redis.yml
 .DS_Store
 
 # Ignore RubyMine config files
@@ -31,7 +32,6 @@ config/database.yml
 
 # Ignore EngineYard config file
 /config/ey.yml
-/config/redis.yml
 
 # Ignore Engine Yard recipes
 /cookbooks

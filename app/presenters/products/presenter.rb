@@ -112,6 +112,10 @@ module Products
       @featured_images ||= images.select{ |i| ! i.original.to_s.downcase.include?('crop') }
     end
 
+    def cropped_images
+      @cropped_images ||= images.select{ |i| i.original.to_s.downcase.include?('crop') }
+    end
+
     def song
       moodboard.song_item
     end

@@ -34,7 +34,7 @@
 
   .lower-row
     .col-md-3.col-sm-8
-      - locale_options = options_for_select({'AU' => site_version_path('au'), 'NZ' => site_version_path('au'), 'US' => site_version_path('us'), }, site_version_path(current_site_version.code))
+      - locale_options = options_for_select({'AU' => site_version_path('au'), 'US' => site_version_path('us')}, site_version_path(current_site_version.code))
       = select_tag :locale_select, locale_options, 'data-minimum-results-for-search' => 'Infinity'
 
       = content_for :inline_javascript do

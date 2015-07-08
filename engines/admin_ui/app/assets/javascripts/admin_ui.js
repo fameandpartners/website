@@ -11,4 +11,5 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require inspinia-rails
+//= require jquery-ui
 //= require_tree .

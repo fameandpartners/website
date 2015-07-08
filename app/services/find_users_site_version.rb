@@ -27,10 +27,10 @@ class FindUsersSiteVersion
   end
 
   def sv_chosen_by_location
-    version_permalink = fetch_user_country_code
-    site_version = SiteVersion.find_by_permalink(version_permalink)
-
-    site_version
+    if request_ip.present?
+      version_permalink = fetch_user_country_code
+      SiteVersion.find_by_permalink(version_permalink.downcase)
+    end
   end
 
   def sv_chosen_by_param

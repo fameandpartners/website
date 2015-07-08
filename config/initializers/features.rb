@@ -1,5 +1,6 @@
-# Turns on global features
-require 'redis'
+if Rails.env.production?
+end
+
 if Rails.env.development?
   Features.activate(:content_revolution)
 end
