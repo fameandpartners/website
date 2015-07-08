@@ -278,14 +278,6 @@ FameAndPartners::Application.routes.draw do
       get '/recomendations' => 'user_style_profiles#recomendations'
     end
 
-    # Redirects for old pages as part of SEO
-    match '/competition/' => redirect('/')
-    match '/competition/*all' => redirect('/')
-
-    match "/gregg-sulkin" => redirect('/')
-
-    match '/trendsetter-program' => redirect('/')
-
     mount Spree::Core::Engine, at: '/'
   end
 
