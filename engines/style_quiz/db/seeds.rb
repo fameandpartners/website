@@ -1,5 +1,5 @@
 ## seeder class. extracted to easier use in console or tasks
-#  require File.join(StyleQuiz::Engine.root, 'db', 'seeds.rb')
+#  load File.join(StyleQuiz::Engine.root, 'db', 'seeds.rb')
 #
 #  with truncation
 #    StyleQuiz::Seed.new.populate(force: true)
@@ -9,6 +9,9 @@
 #
 #  just truncate 
 #    StyleQuiz::Seed.new.truncate
+#
+#  populate product tags, based on basic product colors
+#    StyleQuiz::Seed.new.assign_products_tags_by_colors
 #
 module StyleQuiz
   class Seed
@@ -20,6 +23,8 @@ module StyleQuiz
       populate_questions
       populate_answers
       populate_products
+
+      #assign_products_tags_by_colors
     end
 
     def truncate
@@ -126,6 +131,40 @@ module StyleQuiz
           nil
         end
       end.compact
+    end
+
+    def colors_tag_map
+      @colors_tag_map ||= begin
+        result = {}
+        StyleQuiz::Tag.where(group: 'color').each do |tag|
+          name = tag.name
+          color = Spree::OptionValue.colors.where("name ilike '%#{ name }%' or presentation ilike '%#{ name }%'").first
+          result[color.id] = tag.id if color
+        end
+        result
+      end
+    end
+
+    def assign_products_tags_by_colors
+      Spree::Product.active.where("tags is not null").each do |product|
+        assign_product_tags_by_colors(product)
+      end
+    end
+
+    def assign_product_tags_by_colors(product)
+      product_tags = product.tags || []
+      base_product_colors = product.product_color_values.map{|value| value.option_value}
+      base_product_colors.map do |color|
+        if colors_tag_map.has_key?(color.id)
+          product_tags.push(colors_tag_map[color.id])
+        end
+      end
+      product_tags = product_tags.flatten.compact.uniq
+      if product_tags.size > product.tags.size
+        reloaded_product = Spree::Product.find(product.id)
+        reloaded_product.tags = product_tags
+        reloaded_product.save(validate: false)
+      end
     end
   end
 end
