@@ -33,7 +33,7 @@ class Marketing::Subscriber
   end
 
   def set_purchase_date(date = Date.today)
-    CampaignMonitor.schedule(:set_purchase_date, user, date) if user.present?
+    CampaignMonitor.schedule(:set_purchase_date, user, date, custom_fields) if user.present?
   end
 
   def details
