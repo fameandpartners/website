@@ -7,17 +7,26 @@ class Trove::ProductQuery
   end
 
   def build
-    compact_hash  :query  => has_keywords,
+    compact_hash  :query  => featured,
                   :filter => filters,
-                  :sort   => sorters,
-                  :size   => options[:size] || 99
+                  :sort   => sorters
+                  # :size   => options[:size] || 99
   end
+
+  def queries
+    {
+      :bool => {
+        :must   => [has_keywords, featured].compact.flatten
+       }
+    }
+  end
+
 
   def filters
     {
       :bool => {
         :must   => [is_current, is_visible, is_in_stock, is_available, has_taxons, has_colors, has_discount].compact.flatten,
-        # :should => has_bodyshapes,
+        :should => has_bodyshapes,
        }
     }
   end
@@ -45,6 +54,26 @@ class Trove::ProductQuery
       }
     end
   end
+
+  def featured
+    if options[:featured]
+      {
+        'function_score' => {
+          'functions' => [
+            {
+              'weight' => 10,
+              'filter' => {
+                'terms' => {
+                  'product.sku' => options[:featured]
+                }
+              }
+            }
+          ]
+        }
+      }
+    end
+  end
+
 
   def has_keywords
     if options[:keywords]

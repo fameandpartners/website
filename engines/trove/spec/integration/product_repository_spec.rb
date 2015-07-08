@@ -6,17 +6,44 @@ describe Trove::ProductRepository do
   let(:repo)      { Trove::ProductRepository.new(search) }
   let(:opts)      { {} }
   let(:product)   { make_product(opts) }
-  let(:products)  { 3.times.collect { |_| make_product } }
+  let(:products)  { [] }
   let(:colour)    { {:id => 99999999, :name => 'pink', :presentation => 'pink'} }
 
   before do
-    products << product
+    3.times { |_| make_product }
+    product #make it exist
     index_products(products)
   end
 
   it 'works' do
     expect(repo.products).to have(4).product
   end
+
+  context 'featured' do
+    let(:opts)    { { :product => {:name => 'vtha', :sku => 'SKU-VTHA'} } }
+    let(:search)  { { :featured => ['SKU-VTHA', 'SKU-BLAH'], :sort_by => 'product.name' } }
+
+    before do
+      make_product(:product => {:name => 'blah', :sku => 'SKU-BLAH' })
+      index_products(products)
+    end
+
+    it 'orders featured products' do
+      puts "-------------------"
+      puts repo.query
+      puts "-------------------"
+      expect(repo.products).to have(5).product
+      a = repo.products[0]
+      b = repo.products[1]
+      puts "-------------------"
+      puts a
+      puts b
+      puts "-------------------"
+      expect(a['product']['name']).to eq 'vtha'
+      expect(b['product']['name']).to eq 'blah'
+    end
+  end
+
 
   context 'by keywords' do
     let(:opts)    { { :product => {:name => 'vtha'} } }
@@ -123,6 +150,7 @@ describe Trove::ProductRepository do
       :id       => rand_id,
       :product  => {
         :id                 => rand_id,
+        :sku                => rand_id.to_s,
         :name               => name,
         :description        => 'Find an air of elegance with this alluring gown. Add to the ethereal style with shimmering accents, but go for dainty, not daunting, touches of sparkle. ',
         :created_at         => Time.zone.now.utc,
@@ -165,7 +193,7 @@ describe Trove::ProductRepository do
   end
 
   def make_product(opts = {})
-    default_opts.deep_merge(opts)
+    products << default_opts.deep_merge(opts)
   end
 
   def index_products(products)
