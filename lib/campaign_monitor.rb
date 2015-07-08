@@ -36,8 +36,13 @@ class CampaignMonitor
     subscriber = CreateSend::Subscriber.new(list_id, email)
 
     subscriber.update(attributes[:email], attributes[:full_name], formatted_custom_fields, false)
-  rescue => exception
+  rescue StandardError => _error
+    begin
+    # Yea, lets maybe 500 the app on login.
     CreateSend::Subscriber.add(list_id, attributes[:email], attributes[:full_name], formatted_custom_fields, false)
+    rescue CreateSendError => e
+      NewRelic::Agency.notice_error(e)
+    end
   end
 
   def self.set_purchase_date(user, purchase_date)
