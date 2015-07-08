@@ -70,6 +70,7 @@ table.index.compact#style-quiz-user-profile-tags
     - products.sort_by(&:last).reverse.each do |product, relevance|
       tr
         td = relevance
-        td = link_to product.name, '#'
+        td = link_to product.name, edit_admin_product_path(product)
+        td = image_tag Repositories::ProductImages.new(product: product).read.small
         td
           = StyleQuiz::Tag.where(id: product.tags).map{|tag| link_to tag.name, admin_style_quiz_tag_path(tag.id)}.join(', ').html_safe
