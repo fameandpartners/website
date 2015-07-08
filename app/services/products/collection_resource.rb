@@ -129,7 +129,7 @@ class Products::CollectionResource
       result[:fast_making] = fast_making if !fast_making.nil?
       result[:query_string] = query_string if query_string.present?
       result[:order] = order if order.present?
-      result[:limit] = limit if limit.present?
+      #result[:limit] = limit if limit.present?
       result[:offset] = offset if offset.present?
 
       result
@@ -158,11 +158,11 @@ class Products::CollectionResource
       end
 
       # apply custom order
-      if order.blank? && color.blank? && style.blank?
-        result = Products::ProductsSorter.new(products: result).sorted_products
+      if order.blank? && color.blank?
+        result = Products::ProductsSorter.new(products: result, style: style, offset: offset, color_group: color_group, body_shapes: bodyshape,order: order).sorted_products
       end
 
-      result
+      limit.present? ? result.first(limit.to_i) : result
     end
 
     # TODO - Consolidate with behaviour on app/helpers/landing_pages_helper.rb:24 #cropped_product_hoverable_images
