@@ -67,7 +67,7 @@ page.initProductDetailsPage = (options = {}) ->
   if options.fitguideButton
     $(options.fitguideButton).on('click', (e) ->
       e.preventDefault()
-      window.helpers.showModal(title: 'Size Guide', className: 'fit-guide', container: options.fitguideContainer)
+      window.helpers.showModal(title: 'Size Guide', className: 'fit-guide-dialog', container: options.fitguideContainer)
     )
 
   # init moodboard button

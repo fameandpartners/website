@@ -1,25 +1,93 @@
-h2.text-center Easy Size &amp; Measurement Guide
-.size-alert
-  .row
-    .col-md-12.col-xs-12.col-xxs-12
-      h6= explanation
-      p Please check the size chart below.
+.fit-guide-corner
+  .fit-guide-corner-text
+    h2
+      ' We have 
+      br
+      ' updated our sizing! 
+    p This dress follows our new size chart.
+.row
+  .col
+    .fit-guide-schema
 
-.container-fluid
-  .row
-    .col-md-12.col-xs-12.col-xxs-12
-      h6 How to Measure Yourself
-      p.no-padding Please use a cloth tape measure. Keep the tape measure parallel to the floor and don’t wrap it too tight. We recommend measuring yourself in your underwear, not over clothing and wearing the same bra (or no bra) that you intend to wear with the dress. We suggest getting a friend to help you if possible &amp; remember to stand with your feet together.
+      .line-bust-text
+        h2 BUST
+        p 
+          ' Measure around the fullest part of your bust.
+      
+      .line-waist-text
+        h2 WAIST
+        p 
+          ' Measure around your natural waistline.
 
-      p BUST Measure around the fullest part of your bust
+      .line-hips-text
+        h2 Hips
+        p 
+          ' Measure 20cm below your waistline at the fullest part of your hips.
 
-      p WAIST Measure around your natural waistline.
+      .line-dress-text
+        h2 DRESS LENGTH
+        p 
+          ' Stand with your heels together, keep the tape straight and perpendicular to the floor. Measure from your shoulders.
 
-      p HIPS Measure 20cm below your waistline at the fullest part of your hips.
+      .line-skirt-text
+        h2 SKIRT LENGTH
+        p 
+          ' Stand with your heels together, keep the tape straight and perpendicular to the floor. Measure from your natural waistline.
+      
+      / .line-bust
+      /   .line-bust-arrow
+      /     .line-text
+      /       h2 BUST
+      /       p 
+      /         ' Measure around the fullest part of your bust.
+      / .line-waist
+      /   .line-waist-arrow
+      /     .line-text
+      /       h2 WAIST
+      /       p 
+      /         ' Measure around your natural waistline.
+      / .line-hips
+      /   .line-hips-arrow
+      /     .line-text
+      /       h2 Hips
+      /       p 
+      /         ' Measure 20cm below your waistline at the fullest part of your hips.
+      / .line-dress
+      / .line-skirt
+  .col
+    .fit-guide-text
+      h2 How to Measure Yourself
+      p Please use a cloth tape measure. Keep the tape measure parallel to the floor and don’t wrap it too tight. We recommend measuring yourself in your underwear, not over clothing and wearing the same bra (or no bra) that you intend to wear with the dress. We suggest getting a friend to help you if possible & remember to stand with your feet together.
+      = render partial: 'size_chart_table', locals: { data: data }
 
-      p SKIRT LENGTH Stand with your heels together,<br>keep the tape straight and perpendicular to the floor. Measure from your natural waistline.
 
-      = image_tag 'where-to-measure.png'
 
-  .row
-    = render partial: 'size_chart_table', locals: { data: data }
+
+
+
+
+/ h2.text-center Easy Size &amp; Measurement Guide
+/ .size-alert
+/   .row
+/     .col-md-12.col-xs-12.col-xxs-12
+/       h6= explanation
+/       p Please check the size chart below.
+
+/ .container-fluid
+/   .row
+/     .col-md-12.col-xs-12.col-xxs-12
+/       h6 How to Measure Yourself
+/       p.no-padding Please use a cloth tape measure. Keep the tape measure parallel to the floor and don’t wrap it too tight. We recommend measuring yourself in your underwear, not over clothing and wearing the same bra (or no bra) that you intend to wear with the dress. We suggest getting a friend to help you if possible &amp; remember to stand with your feet together.
+
+/       p BUST Measure around the fullest part of your bust
+
+/       p WAIST Measure around your natural waistline.
+
+/       p HIPS Measure 20cm below your waistline at the fullest part of your hips.
+
+/       p SKIRT LENGTH Stand with your heels together,<br>keep the tape straight and perpendicular to the floor. Measure from your natural waistline.
+
+/       = image_tag 'where-to-measure.png'
+
+/   .row
+/     = render partial: 'size_chart_table', locals: { data: data }

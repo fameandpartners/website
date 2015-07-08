@@ -59,7 +59,7 @@ window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends BasePr
 
   showFitGuide: =>
     @selector.close()
-    window.helpers.showModal(title: 'Size Guide', className: 'fit-guide', container: '#fit-guide-content')
+    window.helpers.showModal(title: 'Size Guide', className: 'fit-guide-dialog', container: '#fit-guide-content')
 
   getValue: () ->
     @$container.find('.active').data('id')
