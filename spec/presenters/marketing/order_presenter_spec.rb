@@ -4,7 +4,7 @@ describe Marketing::OrderPresenter, type: :presenter do
   let(:presenter) { described_class.new(order) }
 
   describe 'delegates to Spree::Order' do
-    let(:order)         { build_stubbed(:spree_order, number: 'R123', currency: 'BRL') }
+    let(:order) { build_stubbed(:spree_order, number: 'R123', currency: 'BRL') }
 
     it('#number')   { expect(presenter.number).to eq('R123') }
     it('#currency') { expect(presenter.currency).to eq('BRL') }

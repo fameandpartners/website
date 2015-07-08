@@ -7,11 +7,11 @@ module Marketing
     def_delegators :@item,
                    :quantity
 
-    attr_reader :item, :wrapper_order
+    attr_reader :item, :wrapped_order
 
-    def initialize(item, wrapper_order)
+    def initialize(item, wrapped_order)
       @item          = item
-      @wrapper_order = wrapper_order
+      @wrapped_order = wrapped_order
     end
 
     def sku
@@ -39,7 +39,7 @@ module Marketing
     def product
       variant.product
     rescue StandardError => e
-      NewRelic::Agent.notice_error(e, custom_params: { order_number: wrapper_order.number })
+      NewRelic::Agent.notice_error(e, custom_params: { order_number: wrapped_order.number })
     end
   end
 end
