@@ -27,8 +27,11 @@ class DefineStyleQuizSchema < ActiveRecord::Migration
     create_table :style_quiz_user_profiles, force: true do |t|
       t.references  :user
       t.string      :token
+      t.string      :email
+      t.string      :fullname
+      t.date        :birthday
       t.string      :tags
-      t.text        :answers
+      t.text        :answer_ids
       t.text        :recommendated_products
       t.datetime    :completed_at
       t.timestamps

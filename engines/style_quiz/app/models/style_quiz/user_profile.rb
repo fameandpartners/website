@@ -1,13 +1,15 @@
 class StyleQuiz::UserProfile < ActiveRecord::Base
   belongs_to :user, class_name: 'Spree::User', foreign_key: 'user_id'
 
-  serialize :answers, HashWithIndifferentAccess
-  serialize :tags,    HashWithIndifferentAccess
-  serialize :recommendated_products, Array
+  serialize :answer_ids,              Array
+  serialize :tags,                    HashWithIndifferentAccess
+  serialize :recommendated_products,  Array
 
   has_many :events, class_name: 'StyleQuiz::UserProfileEvent', foreign_key: 'user_profile_id', dependent: :destroy
 
   after_create :generate_token
+
+  attr_accessible :email, :fullname, :birthday
 
   def generate_token
     if self.token.blank? && self.user.blank?
@@ -16,8 +18,8 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
     self.token
   end
 
-  def answer_ids
-    @answer_ids ||= ( (self.answers || {})['ids'] || [] )
+  def answers
+    ::StyleQuiz::Answer.where(id: answer_ids).includes(:question)
   end
 
   def selected?(answer)
@@ -25,9 +27,10 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
     answer_ids.include?(answer.id.to_s)
   end
 
-  def update_answers(answers_ids:, answers_values:, events:)
+  def update_answers(answer_ids:, answer_values:, events:)
     ActiveRecord::Base.transaction do
-      self.answers = HashWithIndifferentAccess.new(answers_values.merge( ids: answers_ids ))
+      self.assign_attributes(answer_values)
+      self.answer_ids = answer_ids
       self.events = events.map do |event_data|
         ::StyleQuiz::UserProfileEvent.new(
           name: event_data[:name],
@@ -35,7 +38,7 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
           date: Date.strptime(event_data[:date], I18n.t('date_format.backend'))
         )
       end
-      self.tags = HashWithIndifferentAccess.new(StyleQuiz::Answer.get_weighted_tags(ids: answers_ids))
+      self.tags = HashWithIndifferentAccess.new(StyleQuiz::Answer.get_weighted_tags(ids: answer_ids))
       self.completed_at = Time.now
 
       save!
@@ -44,19 +47,6 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
 
   def completed?
     self.completed_at.present?
-  end
-
-  def birthday
-    return answers['birthday'] if answers['birthday'].present?
-    user.present? && user.birthday.present? ? user.birthday : nil
-  end
-
-  def fullname
-    answers['fullname'].present? ? answers['fullname'] : user.try(:fullname)
-  end
-
-  def email
-    answers['email'].present? ? answers['email'] : user.try(:email)
   end
 
   # it should be the same as
@@ -75,8 +65,13 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
 
   def assign_to_user(user)
     if user.present? && self.user_id != user.id
-      self.update_column(:user_id, user.id)
-      self.update_column(:token, nil)
+      self.birthday ||= user.birthday
+      self.fullname ||= user.fullname
+      self.email    ||= user.email
+      self.user_id  =   user.id
+      self.token    =   nil
+
+      self.save(validate: false)
     end
   end
 

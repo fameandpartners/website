@@ -2,7 +2,7 @@ module Spree::Admin::StyleQuiz
   class ProductsController < Spree::Admin::StyleQuiz::BaseController
     def index
       @search = model_class.ransack(params[:q])
-      @products = @search.result(distinct: true)
+      @products = @search.result(distinct: true).limit(10)
     end
 
     def edit

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150626012245) do
+ActiveRecord::Schema.define(:version => 20150622191313) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1219,8 +1219,8 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
     t.boolean  "is_service",           :default => false
     t.integer  "factory_id"
     t.string   "size_chart",           :default => "2014", :null => false
-    t.integer  "fabric_card_id"
     t.string   "tags"
+    t.integer  "fabric_card_id"
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
@@ -1614,8 +1614,11 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
   create_table "style_quiz_user_profiles", :force => true do |t|
     t.integer  "user_id"
     t.string   "token"
+    t.string   "email"
+    t.string   "fullname"
+    t.date     "birthday"
     t.string   "tags"
-    t.text     "answers"
+    t.text     "answer_ids"
     t.text     "recommendated_products"
     t.datetime "completed_at"
     t.datetime "created_at",             :null => false

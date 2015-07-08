@@ -14,7 +14,7 @@ StyleQuiz::Engine.routes.draw do
           post      :order, to: 'questions#order', on: :collection
         end
         resources :products, only: [:index, :edit, :update, :destroy]
-        resources :user_profiles
+        resources :user_profiles, only: [:index, :show]
 
         root to: 'tags#index'
       end

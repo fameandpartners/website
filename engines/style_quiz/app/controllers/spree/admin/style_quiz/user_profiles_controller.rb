@@ -1,7 +1,12 @@
 module Spree::Admin::StyleQuiz
   class UserProfilesController < Spree::Admin::StyleQuiz::BaseController
     def index
-      @user_profiles = model_class.order('updated_at desc').first(50)
+      @search = model_class.ransack(params[:q])
+      @user_profiles = @search.result(distinct: true).limit(10)
+    end
+
+    def show
+      @user_profile = model_class.find(params[:id])
     end
 
     private
