@@ -15,21 +15,22 @@ class MarketingMailer < ActionMailer::Base
   default :from => configatron.noreply
 
   def abandoned_cart(order, user)
-    @user = user
-    @order = order
-    @site_version = order.get_site_version
-    @site_version_code = @site_version.default? ? '' : @site_version.code
+    product      = order.line_items.first.product
+    site_version = order.get_site_version
+    base_price   = product.zone_price_for(site_version)
+    image_urls   = Products::ColorVariantImageDetector.cropped_images_for(product)
 
-    # fill data required for template
-    @product = @order.line_items.first.product
-    @images = (@product.images * 5).first(5)
-    @product_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ collection_product_path(@product) }"
-    @personalisation_url = "#{ main_app.root_url(site_version: @site_version_code) }/#{ personalization_product_path(permalink: @product.permalink) }"
-    @recommended_dresses = Products::SimilarProducts.new(@product).fetch(6).to_a
+    # Template Scope
+    @resume_shop_url   = root_url(site_version: site_version.to_param)
+    @product_url       = collection_product_url(product, site_version: site_version.to_param)
+    @product_image_url = image_urls.sample
+    @product_name      = product.name
+    @original_price    = base_price.display_price
+    @discounted_price  = Spree::Money.new(base_price.amount - base_price.amount * 0.1)
 
     Slim::Engine.with_options(:pretty => true) do
       mail(
-        to: @user.email,
+        to: user.email,
         subject: t('emails.subjects.marketing.abandoned_cart')
       )
     end
