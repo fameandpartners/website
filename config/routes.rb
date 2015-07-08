@@ -152,12 +152,6 @@ FameAndPartners::Application.routes.draw do
       get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
-
-    # to correctly redirect, we should know product taxon or extract collection from param
-    get "/products"             => 'redirects#products_index'
-    get "/products/:product_id" => 'redirects#products_show'
-    get "/products/:collection/:product_id" => 'redirects#products_show'
-
     # Custom Dresses
     get '/custom-dresses(/*whatever)',  to: redirect('/dresses')
 
