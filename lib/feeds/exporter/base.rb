@@ -34,6 +34,9 @@ module Feeds
       def image_link(item)
         raise NotImplementedError, "#{self.class} does not implement private method #image_link"
       end
+
+      def product_description(item)
+        raise NotImplementedError, "#{self.class} does not implement private method #product_description"
       end
 
       def collection_product_path(product, options = {})

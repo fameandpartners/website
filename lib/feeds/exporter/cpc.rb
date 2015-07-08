@@ -22,7 +22,7 @@ module Feeds
               xml.item do
                 xml.title item[:title]
                 xml.link "#{@config[:domain]}#{collection_product_path(item[:product], color: item[:color].parameterize)}"
-                xml.description CGI.escapeHTML(item[:description])
+                xml.description product_description(item)
 
                 # Event, Style and Lookbook
                 xml.tag! "events"   , item[:events].join(',')
@@ -69,6 +69,11 @@ module Feeds
       # @override
       def image_link(item)
         item[:image]
+      end
+
+      # @override
+      def product_description(item)
+        CGI.escapeHTML(item[:description])
       end
     end
   end

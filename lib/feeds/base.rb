@@ -130,7 +130,8 @@ module Feeds
         group_id:                product.id.to_s,
         color:                   color,
         size:                    size,
-        weight:                  get_weight(product, variant)
+        weight:                  get_weight(product, variant),
+        fabric:                  product.property('fabric')
       )
 
       # Event, Style and Lookbook

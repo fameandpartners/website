@@ -23,6 +23,12 @@ module Feeds
         end
       end
 
+      # @override
+      def product_description(item)
+        whats_made_of = item[:fabric].to_s
+        whats_made_of.gsub(/<p>|\n/, ',')
+      end
+
       def image_filename(item)
         [
           [
