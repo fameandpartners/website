@@ -132,6 +132,9 @@ when :preproduction
   end
   configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
 
+  configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
+  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
+
   # configatron.es_url = 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
   # configatron.es_url = 'https://c019a72e2bcb614a3809da7bf7d583c0.us-east-1.aws.found.io:9243'
   configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
