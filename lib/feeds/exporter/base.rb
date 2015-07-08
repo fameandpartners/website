@@ -31,8 +31,9 @@ module Feeds
         current_site_version.currency
       end
 
-      def get_image_link(item)
-        raise NotImplementedError, "#{self.class} does not implement private method #get_image_link"
+      def image_link(item)
+        raise NotImplementedError, "#{self.class} does not implement private method #image_link"
+      end
       end
 
       def collection_product_path(product, options = {})

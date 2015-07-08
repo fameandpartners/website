@@ -13,7 +13,7 @@ module Feeds
       private
 
       # @override
-      def get_image_link(item)
+      def image_link(item)
         url = URI.encode(CDN_HOST + image_filename(item))
 
         if image_exists?(url)
