@@ -16,7 +16,18 @@ class UserCountryFromIP
   end
 
   def country
-    @country ||= geoip.country(ip) if valid_ip?
+    return nil unless valid_ip?
+
+    @country ||= begin
+      ip_address = IPAddress.parse(ip)
+      if ip_address.ipv4?
+        geoip.country(ip)
+      elsif ip_address.ipv6?
+        geoip6.country(ip)
+      else
+        nil
+      end
+    end
   end
 
   def valid_ip?
@@ -27,5 +38,9 @@ class UserCountryFromIP
 
   def geoip
     @geoip ||= GeoIP.new(File.join(Rails.root, 'db', 'GeoIP.dat'))
+  end
+
+  def geoip6
+    @geoip ||= GeoIP.new(File.join(Rails.root, 'db', 'GeoIPv6.dat'))
   end
 end
