@@ -79,6 +79,9 @@ FameAndPartners::Application.routes.draw do
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/fame2015',  to: redirect('/')
 
+    # Redirecting collections (08/06/2015)
+    get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
+
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
@@ -128,6 +131,7 @@ FameAndPartners::Application.routes.draw do
 
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
+      get '/', to: 'products/collections#show', as: :collection
 
       # TODO - Remove? - 2015.04.11 - Redirecting old accessory and customisation style URLS to main product page.
       product_style_custom_redirect = -> path_params, _rq { ["/#{path_params[:site_version]}/dresses/dress-#{path_params[:product_slug]}", path_params[:color_name].presence].join('/') }
@@ -148,12 +152,6 @@ FameAndPartners::Application.routes.draw do
       get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
-
-    # to correctly redirect, we should know product taxon or extract collection from param
-    get "/products"             => 'redirects#products_index'
-    get "/products/:product_id" => 'redirects#products_show'
-    get "/products/:collection/:product_id" => 'redirects#products_show'
-
     # Custom Dresses
     get '/custom-dresses(/*whatever)',  to: redirect('/dresses')
 
@@ -162,12 +160,6 @@ FameAndPartners::Application.routes.draw do
     get '/featured-bloggers/:id', to: redirect('/dresses')
 
     resource :product_variants, only: [:show]
-
-    scope '/collection' do
-      root to: 'redirects#products_index', as: 'collection'
-      get '/:collection/:product_id' => 'redirects#products_show'
-      get '/:collection' => 'redirects#products_index'
-    end
 
     get '/lp/collection(/:collection)', to: redirect('/dresses')
 
@@ -271,14 +263,6 @@ FameAndPartners::Application.routes.draw do
     #end
     #resource :style_quiz, only: [:show, :update], controller: 'style_quiz'
     #resource :style_profile, only: [:show], controller: 'style_profiles'
-
-    # Redirects for old pages as part of SEO
-    match '/competition/' => redirect('/')
-    match '/competition/*all' => redirect('/')
-
-    match "/gregg-sulkin" => redirect('/')
-
-    match '/trendsetter-program' => redirect('/')
 
     mount Spree::Core::Engine, at: '/'
   end

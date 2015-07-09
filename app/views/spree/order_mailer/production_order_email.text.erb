@@ -10,7 +10,7 @@ Promotion:    <%= order.promo_codes.join(', ') %>
 <% order.line_items.each do |item| %>
 Style No (款号)：      <%= item.style_number %>
 Size (码数):           <%= item.country_size %>
-Adjusted Size (码数):  <%= item.adjusted_size %>
+Adjusted Size (码数):  <%= item.make_size %>
 Color（颜色):          <%= item.colour_name %>
 Quantity:              <%= item.quantity%>
 Factory:               <%= item.factory %>
