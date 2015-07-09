@@ -1,0 +1,6 @@
+- content_for :sub_menu do
+  ul id="sub_nav" data-hook="admin_style_quiz_sub_menu" class="inline-menu"
+    = tab :tags, url: admin_style_quiz_tags_path
+    = tab :questions, url: admin_style_quiz_questions_path
+    = tab :products,  url: admin_style_quiz_products_path
+    = tab :user_profiles, url: admin_style_quiz_user_profiles_path

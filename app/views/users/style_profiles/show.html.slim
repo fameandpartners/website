@@ -1,0 +1,24 @@
+ruby:
+  style_profile_page_init = "
+    window.style_profile.init();
+  "
+
+content_for :inline_javascript do
+= content_for :inline_javascript do
+  = style_profile_page_init
+
+= render 'users/shared/style_profile'
+.page-content.user.style-quiz.show
+  = render 'users/shared/tabs', active_tab: 'styleprofile'
+  .container.relative
+    .row
+      .col-sm-4
+        ul.style-profile-tabs.hidden-xs
+          li.active: a href="#recommendations" data-toggle="tab" Style recommendations
+          li: a href="#events" data-toggle="tab" Manage events
+          li: a href="#attributes" data-toggle="tab" Style attributes
+      .col-sm-8
+        .style-profile-tabs-content.tab-content
+          = render 'recommendations', products: @recommendations
+          = render 'events'
+          = render 'style_attributes'

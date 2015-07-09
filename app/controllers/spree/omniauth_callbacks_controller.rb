@@ -3,11 +3,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Auth
 
-#  # this provides default providers details.
-#  SpreeSocial::OAUTH_PROVIDERS.each do |provider|
-#    provides_callback_for provider[1].to_sym
-#  end
-
   def facebook
     if request.env["omniauth.error"].present?
       flash[:error] = t("devise.omniauth_callbacks.failure", :kind => auth_hash['provider'], :reason => t(:user_was_not_valid))
@@ -21,22 +16,15 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = "Signed in successfully"
       sign_in :spree_user, authentication.user
 
-      FacebookDataFetchWorker.perform_async(authentication.user.id, auth_hash['uid'], auth_hash['credentials']['token'])
+      run_after_sign_in_callbacks(authentication.user, auth_hash)
 
-      if session[:sign_up_reason].eql?('bridesmaid_party')
-        try_apply_bridesmaid_party_callback(authentication.user)
-      end
       redirect_to after_sign_in_path_for(authentication.user), flash: { just_signed_up: true }
 
     elsif spree_current_user
       spree_current_user.apply_omniauth(auth_hash)
       spree_current_user.save
 
-      FacebookDataFetchWorker.perform_async(spree_current_user.id, auth_hash['uid'], auth_hash['credentials']['token'])
-
-      if session[:sign_up_reason].eql?('bridesmaid_party')
-        try_apply_bridesmaid_party_callback(spree_current_user)
-      end
+      run_after_sign_in_callbacks(current_spree_user, auth_hash)
 
       flash[:notice] = "Authentication successful."
       redirect_back_or_default(account_url)
@@ -52,14 +40,10 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if user.save
         flash[:notice] = "Signed in successfully."
 
-        FacebookDataFetchWorker.perform_async(user.id, auth_hash['uid'], auth_hash['credentials']['token'])
-
         sign_in :spree_user, user
+        sign_up_reason = session[:sign_up_reason]
 
-        sign_up_reason = session.delete(:sign_up_reason)
-        if sign_up_reason.eql?('bridesmaid_party')
-          try_apply_bridesmaid_party_callback(user)
-        end
+        run_after_sign_in_callbacks(user, auth_hash)
 
         redirect_to after_sign_in_path_for(user), flash: { just_signed_up: true }
       else
@@ -95,16 +79,37 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
-  def try_apply_bridesmaid_party_callback(user)
-    if session[:bridesmaid_party_membership_id]
-      membership = BridesmaidParty::Member.find(session[:bridesmaid_party_membership_id])
-      if membership
-        membership.update_column(:spree_user_id, user.id)
-        session[:spree_user_return_to] = main_app.bridesmaid_party_moodboard_path(user_slug: membership.event.spree_user.slug)
+    def run_after_sign_in_callbacks(user, auth_hash = {})
+      if auth_hash && auth_hash['uid'] && auth_hash['credentials']['token']
+        FacebookDataFetchWorker.perform_async(user.id, auth_hash['uid'], auth_hash['credentials']['token'])
       end
-    else
-      session[:spree_user_return_to] = main_app.bridesmaid_party_info_path
-    end
-  end
 
+      if session[:sign_up_reason].eql?('bridesmaid_party')
+        try_apply_bridesmaid_party_callback(user)
+      end
+
+      if session[:user_style_profile_token]
+        try_associate_style_profile(user)
+      end
+    end
+
+    def try_apply_bridesmaid_party_callback(user)
+      if session[:bridesmaid_party_membership_id]
+        membership = BridesmaidParty::Member.find(session[:bridesmaid_party_membership_id])
+        if membership
+          membership.update_column(:spree_user_id, user.id)
+          set_after_sign_in_location(main_app.bridesmaid_party_moodboard_path(user_slug: membership.event.spree_user.slug))
+        end
+      else
+        set_after_sign_in_location(main_app.bridesmaid_party_info_path)
+      end
+    end
+
+    def try_associate_style_profile(user)
+      profile = StyleQuiz::UserProfile.find_by_token(session[:user_style_profile_token])
+      if profile && profile.user.blank?
+        profile.assign_to_user(user)
+        set_after_sign_in_location(main_app.user_style_profile_path)
+      end
+    end
 end

@@ -191,6 +191,12 @@ PATH
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
+    style_quiz (0.0.1)
+      jquery-rails
+      pg (~> 0.18)
+      rails (~> 3.2.21)
+      slim (~> 3.0)
+      slim-rails (~> 3.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -719,7 +725,7 @@ GEM
       aws-sdk
       paperclip
       spree_core (>= 1.3.0)
-    spring (1.3.6)
+    spring (1.3.5)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -879,6 +885,7 @@ DEPENDENCIES
   spree_paypal_express!
   spree_social!
   spring
+  style_quiz!
   term-ansicolor
   test-unit
   therubyracer
@@ -890,6 +897,3 @@ DEPENDENCIES
   uglifier (= 1.3.0)
   unicorn
   whenever
-
-BUNDLED WITH
-   1.10.3

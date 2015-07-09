@@ -26,7 +26,7 @@ ruby:
         $('#style-quiz-trigger').on('click', function(e) {
           e.preventDefault();
           $iframe = $('<iframe />', {
-            src: urlWithSitePrefix('/style_quiz'),
+            src: urlWithSitePrefix('#{ style_quiz_path }'),
             frameBorder: '0',
             width: '1102px',
             height: '680px'
@@ -65,6 +65,9 @@ ruby:
 
         ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
           = render partial: 'layouts/redesign/mega_menu/shop'
+          - if Features.active?(:style_quiz)
+            li.menu-item
+              = link_to 'style quiz', style_quiz_path, class: 'menu-item--link', id: 'style-quiz-trigger'
           = render partial: 'layouts/redesign/mega_menu/lookbook'
           li.menu-item
             = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'

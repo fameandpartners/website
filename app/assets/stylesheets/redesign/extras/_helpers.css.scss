@@ -14,11 +14,10 @@
 .font-forum {
  font-family: $font-brand-serif;
 } 
+
 .text-light {
   font-weight: 300;
 }
-// @end Text helpers
-// -----------------
 
 // Rhombus
 .rhombus {
@@ -71,8 +70,6 @@
   }
 } 
 // @end Rhombus
-// -----------------
-
 
 // Timer
 .timer-box {
@@ -141,4 +138,6 @@
   }
 }
 // @end Bootstrap inline grid
-// -----------------
+
+
+#quiz_popup { overflow-x: hidden;}

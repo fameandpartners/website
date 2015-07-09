@@ -1,0 +1,26 @@
+/ Signup question
+- date_format = I18n.t('date_format.backend')
+form.quiz-section id="#{ question.name }-question"
+  .quiz-section-title
+    h4.quiz-section-number Question #{ question_position }/#{ question_total }
+    h2 Tell us a bit about yourself.
+  .quiz-user-info
+    .grid-container
+      .row.row-compact
+        .col-6.col-middle.col-compact.text-center
+          .form-centered.text-left
+            .form-group
+              label Full NAME
+              input.form-control type="text" name="fullname" placeholder="john smith" value=(@user_style_profile.fullname) required="required"
+            .form-group
+              label date of birth
+              input.form-control type="text" name="birthday" placeholder=(I18n.t('date_format.frontend')) value=(@user_style_profile.birthday.try(:strftime, date_format)) required="required"
+            .form-group
+              label email address
+              input.form-control type="email" name="email" placeholder="email@example.com" value=(@user_style_profile.email) required="required"
+            input.btn.btn-block.btn-primary type="submit" value="Next" data-action="next"
+        .col-6.col-middle.col-compact.text-center
+          .form-centered.facebook-box
+            h2 Import my details from Facebook.
+            = link_to '#', class: 'btn', data: { action: 'import-from-fb' } do
+              span.fa.fa-facebook

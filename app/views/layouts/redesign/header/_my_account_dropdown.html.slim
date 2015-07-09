@@ -10,6 +10,9 @@
           = link_to 'My Details', profile_path
         li
           = link_to 'My Orders', user_orders_path
+        - if Features.active?(:style_quiz) && current_spree_user.style_profile.present?
+          li
+            = link_to 'My Style', user_style_profile_path
         li
           a href="/logout" LOGOUT
 - else

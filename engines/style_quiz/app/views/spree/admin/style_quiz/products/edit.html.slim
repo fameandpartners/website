@@ -1,0 +1,38 @@
+- content_for :page_title do
+  = t(:edit_style_quiz_product_tags)
+
+= render 'spree/admin/shared/product_sub_menu'
+
+ruby:
+  grouped_tags    = StyleQuiz::Tag.all.group_by(&:group)
+  groups          = grouped_tags.keys
+  max_tags_length = grouped_tags.values.map(&:length).max
+
+  groups.each do |group|
+    grouped_tags[group] = grouped_tags[group] + [nil] * (max_tags_length - grouped_tags[group].length).abs
+  end
+
+= form_for [:admin, :style_quiz, @product], url: admin_style_quiz_product_path(@product), method: :put do |f|
+
+  table.index.compact#style-quiz-product-tags
+    colgroup
+      - groups.each do |group|
+        col style="width: 10%;"
+
+    thead
+      tr
+        - groups.each do |group|
+          th = group
+
+    tbody
+      - max_tags_length.times do |index|
+        tr
+          - groups.each do |group|
+            td 
+              - tag = grouped_tags[group][index]
+              - if tag.present?
+                = f.field_container :name do
+                  = check_box_tag 'product[tags][]', tag.id, @product.tags.include?(tag.id), id: "product_tag_#{ tag.id }" 
+                  =< f.label "tag_#{ tag.id }", tag.name
+
+  = f.submit 'update'

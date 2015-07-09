@@ -1,0 +1,73 @@
+.user-account-page-title
+  .container
+    h1.text-center.user-account-title.no-padding-bottom.text-white.hidden-xs Style profile.
+    .style-profile-header
+      - if (style_profile = current_spree_user.style_profile).present?
+        / HAS QUIZ
+        .row
+          .col-md-4
+            - primary_style = style_profile.primary_user_style
+            .style-box.style-box-primary
+              = image_tag primary_style.image, class: 'img-responsive'
+              .style-title 
+                .style-title-text 
+                  = primary_style.title
+                  .visible-xs = "#{ primary_style.rate}%"
+              .style-result.hidden-xs: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text 50%
+          .col-md-4.text-center.hidden-xs
+            .row
+              - style_profile.user_styles[1..2].each do |style|
+                .col-xs-6
+                  .style-box
+                    = image_tag style.image, class: 'img-responsive'
+                    .style-title: .style-title-text = style.title
+                    .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text = "#{ style.rate}%"
+            .style-profile-actions
+              = link_to 'Redo the style quiz', style_quiz_path, class: 'btn btn-md btn-block btn-black'
+              .or-share: .rhombus.rhombus-empty: .rhombus-text-holder: .rhombus-text OR 
+              p SHARE THE QUIZ
+              ul.footer-social
+                li.footer-social--item
+                  = link_to configatron.links.facebook, target: :blank, class: 'facebook' do
+                    = image_tag '_icons/facebook.png'
+                li.footer-social--item
+                  = link_to configatron.links.pinterest, target: :blank, class: 'pinterest' do
+                    = image_tag '_icons/pinterest.png'
+                li.footer-social--item
+                  = link_to configatron.links.instagram, target: :blank, class: 'instagram' do
+                    = image_tag '_icons/instagram.png'
+                li.footer-social--item
+                  = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
+                    = image_tag '_icons/twitter.png'
+
+          .col-md-4.hidden-xs
+            .row
+              - style_profile.user_styles[3..4].each do |style|
+                .col-xs-6
+                  .style-box
+                    = image_tag style.image, class: 'img-responsive'
+                    .style-title: .style-title-text = style.title
+                    .style-result: .rhombus-container: .rhombus: .rhombus-text-holder: .rhombus-text = "#{ style.rate}%"
+            = link_to style_consultation_path, class: 'book-free'
+              ' Book a free
+              br
+              ' styling
+              br
+              ' consultation.
+              br
+              span.icon.icon-hr-right
+      - else
+        / NO QUIZ
+        .row
+          .col-sm-8
+            = link_to style_quiz_path, class: 'no-quiz'
+              strong 
+                ' Call to action to take the quiz
+              ' (To be designed)
+          .col-sm-4
+            = link_to style_consultation_path, class: 'book-free book-free-sm'
+              ' Book a free styling
+              br
+              ' consultation.
+              br
+              span.icon.icon-hr-right

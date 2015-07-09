@@ -15,9 +15,9 @@ Spree::User.class_eval do
   has_many :email_notifications, foreign_key: :spree_user_id
 
   has_attached_file :avatar
-  has_one :style_profile,
-          :class_name => '::UserStyleProfile',
-          :foreign_key => :user_id
+  #has_one :style_profile,
+  #        :class_name => '::UserStyleProfile',
+  #        :foreign_key => :user_id
 
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone

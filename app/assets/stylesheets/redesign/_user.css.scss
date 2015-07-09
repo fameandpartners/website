@@ -1,7 +1,149 @@
+// Profile header 
+.style-profile-header {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  @media (max-width: 480px) {
+    padding-top: 0;
+    padding-bottom: 0;
+    .col-md-4 { padding-top: 0;}
+  }
+  .style-box {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20%;
+    font-family: Forum;
+    &.style-box-primary {
+      margin-bottom: 15%;
+      @media (max-width: 480px) { margin-bottom: 0;}
+      img {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .style-title-text { 
+        font-size: 4em;
+        line-height: 1;
+      }
+      .rhombus { font-size: 2em;}
+    }
+    .style-title {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      text-align: center;
+      &:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: 1px;
+        height: 100%;
+        margin-left: -2px;
+      }
+    }
+    .style-title-text {
+      color: #fff;
+      font-size: 2.5em;
+      text-transform: uppercase;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    .style-result {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .rhombus {
+      margin-bottom: -49%;
+      font-size: 1.2em;
+    }
+  }
+
+  .social-mobile {
+    text-align: center;
+    .footer-social--item {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
+  .or-share {
+    display: inline-block;
+    margin: 25px 0 20px;
+    width: 64px;
+  }
+
+  .rhombus-container {
+    display: inline-block;
+    width: 38%;
+    max-width: 106px;
+    line-height: 0;
+  }
+
+  .style-profile-actions {
+    margin-top: 15px;
+  }
+
+  .book-free {
+    background-color: #eeddf0;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 15px;
+    padding: 15px;
+    display: block;
+    font-weight: 600;
+    line-height: 1.1;
+    color: #000;
+    &.book-free-sm {
+      font-size: 35px;
+      margin-top: 0;
+    }
+    &:hover { color: #000;}
+    .icon {
+      position: relative;
+      font-size: 30px;
+      &:after {
+        content: '';
+        height: 2px;
+        width: 30px;
+        position: absolute;
+        top: 50%;
+        margin-top: -1px;
+        right: 50%;
+        background-color: #000;
+      }
+    }
+  }
+
+  .no-quiz {
+    background-color: #000;
+    padding: 32px;
+    color: #fff;
+    text-align: center;
+    font-size: 34px;
+    line-height: 1.2;
+    display: block;
+    &:hover { color: #fff;}
+    strong { display: block;}
+  }
+}
+// @end Profile header
+// -----------------
+
 // Page header
 .user-account-page-title {
   background-color: $peach-bg;
   margin-top: 70px; // $fp-menu-height
+  .container {
+    @media (max-width: 480px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 }
 
 .user-account-title {
@@ -20,17 +162,33 @@
 	}
 
 	.avatar {
-		width: 100px;
-		height: 100px;
+		width: 175px;
+		height: 175px;
 		border-radius: 100%;
-		margin-right: 20px;
-		margin-left: 110px;
 		overflow: hidden;
-		display:block;
+		display: inline-block;
 		&.empty {
 			background: url('_reg/avatar-empty.png') no-repeat center center #e1e1e1;
 		}
 	}
+
+  .devise-forms {
+    .col-md-8 {
+      label { margin-bottom: 0;}
+      .form-group { margin-bottom: 14px;}
+    }
+  }
+
+  .nav-tabs-lg {
+    font-size: 14px;
+    @media (max-width: 480px) {
+      font-size: 11px;
+    }
+    > li > a {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 }
 // @end Account
 // ---------------
@@ -46,6 +204,42 @@
 }
 // @end Moodboard
 // ---------------
+
+// Style attributes
+.style-profile-attributes {
+  .form-control {
+    background-color: $gray-light-bg;
+    border-bottom: 0;
+    font-size: 13px;
+    height: auto;
+    min-height: 45px;
+    overflow: hidden;
+    .pull-left { max-width: 70%;}
+    .pull-right {
+      text-transform: none;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 30%;
+      overflow: hidden;
+    }
+  }
+  .btn {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+// @end Style attributes
+// -----------------
+
+// Style Recommendations Container
+.style-recommendations-container {
+  .col-md-3 {
+    @extend .col-inline;
+    @media (min-width: 992px) { width: (100% / 3);} // @extend .col-md-4
+  }
+} 
+// @end Style Recommendations Container
+// -----------------
 
 .ordered-item-image {
   width: 120px;
@@ -78,7 +272,7 @@ h2.order-number {
 }
 
 .table.orders-table {
-  margin-top: 4rem;
+  // margin-top: 4rem;
 
   thead tr th {
     text-transform: uppercase;
@@ -178,13 +372,13 @@ h1.order {
   color: black;
 }
 
-@media only screen and (max-width: 800px) {
+// @media only screen and (max-width: 800px) {
 
-  .page-content.order {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
+//   .page-content.order {
+//     padding-left: 1rem;
+//     padding-right: 1rem;
+//   }
+// }
 
 a.btn.return {
   color: #FFFFFF;
@@ -197,3 +391,64 @@ a.btn.return {
     color: black !important;
   }
 }
+
+
+
+// Style Profile tabs 
+.style-profile-tabs {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  background-color: $gray-light-bg;
+
+  @media (max-width: 767px) {
+    padding: 0;
+    background-color: transparent;
+  }
+
+  a {
+    display: block;
+    text-transform: uppercase;
+    background-color: $gray-light-bg;
+    font-size: 14px;
+    padding: 10px 30px;
+    @media (max-width: 767px) {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+  }
+
+  .active a {
+    color: #000;
+    font-weight: 700;
+  }
+}
+
+.style-profile-tabs-content {
+  .tab-pane-close {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 25px;
+    background-color: #000;
+    color: #fff;
+    font-size: 0.85em;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+}
+.style-profile-tabs-title {
+  text-align: center;
+  font-size: 38px;
+  @media (max-width: 767px) {
+    font-size: 25px;
+  }
+  span { 
+    vertical-align: middle;
+    display: inline-block;
+    text-transform: none;
+  }
+}
+// @end Style Profile tabs
+// -----------------

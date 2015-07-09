@@ -1,0 +1,13 @@
+html = '<%=j  render(template: 'users/style_profiles/show.html') %>';
+
+$('body > .user-account-page-title').remove();
+$('body > .page-content').replaceWith(html);
+
+<% if @title.present? %>
+  document.title = '<%=  @title %>';
+<% end %>
+
+window.setCurrentPath('<%= user_style_profile_path %>')
+$(window).off('popstate').one('popstate', function() {
+  $.getScript(window.location)
+})
