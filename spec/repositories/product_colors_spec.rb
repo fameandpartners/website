@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Repositories::ProductColors do
+describe Repositories::ProductColors, memoization_support: true do
   let(:color_option_type) { create(:option_type, :color) }
 
   # Invalidating memoizations that concern Repositories::ProductColors
-  before(:each) { Spree::OptionType.instance_variable_set(:@color, nil) }
+  before(:each) { rememoize(Spree::OptionType, :@color) }
 
   describe '.get_group_by_name' do
     it 'finds color group by name' do
