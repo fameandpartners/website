@@ -3,39 +3,6 @@ $fg-screen-lg: 1230px;
 $fg-screen-md: 640px;
 $fg-screen-sm: 480px;
 
-// %schema-line-horizontal {
-//   position: absolute;
-//   height: 1px;
-//   display: block;
-//   background-color: #fff;
-//   z-index: 0;
-// }
-// %schema-line-vertical {
-//   position: absolute;
-//   width: 1px;
-//   display: block;
-//   background-color: #fff;
-//   z-index: 0;
-// }
-// %schema-line-vertical-arrow {
-//   @extend %schema-line-vertical;
-//   z-index: 1;
-//   bottom: 0;
-//   height: 35px;
-//   margin-top: -35px;
-//   &:before {
-//     content: '';
-//     position: absolute;
-//     bottom: 100%;
-//     left: -7px;
-//     width: 0;
-//     height: 0;
-//     border-style: solid;
-//     border-width: 0 7px 7px 7px;
-//     border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) #fff rgba(255, 255, 255, 0);
-//   }
-// }
-
 %schema-text {
   position: absolute;
   width: 150px;
@@ -60,6 +27,13 @@ $fg-screen-sm: 480px;
     @media (max-width: $fg-screen-lg) {
       background: url('_popups/fit-guide-bg-2.jpg') left 63px no-repeat #e7e6e5;
       background-size: contain;
+      width: auto;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    @media (max-width: $fg-screen-md) {
+      background: #e7e6e5;
+      overflow-x: hidden;
     }
   }
 
@@ -146,8 +120,11 @@ $fg-screen-sm: 480px;
 
   .fit-guide-text {
     padding: 20px 20px 20px 50px; 
-    @media (max-width: $fg-screen-sm) {
+    @media (max-width: $fg-screen-lg) {
       padding: 10px;
+    }
+    @media (max-width: $fg-screen-md) {
+      padding-top: 20px;
     }
   }
 
@@ -158,100 +135,86 @@ $fg-screen-sm: 480px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    transform-origin: 0 0;
     @media (max-width: $fg-screen-lg) {
-      padding-bottom: 81%;
+      padding-bottom: 78%;
+      margin-bottom: 90px;
+    }
+    @media (max-width: $fg-screen-md) {
+      background: url('_popups/fit-guide-bg-2.jpg') left top no-repeat #e7e6e5;
+      background-size: 620px 547px;
+      max-width: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+      width: 620px;
+      height: 547px;
     }
 
     .line-bust-text {
       @extend %schema-text;
       top: 14%;
       left: 13%;
+      @media (max-width: $fg-screen-lg) {
+        left: 0;
+      }
+      @media (max-width: $fg-screen-md) { 
+        top: 11%;
+        left: 10%;
+      }
     }
     .line-waist-text {
       @extend %schema-text;
       top: 22%;
       left: 83%;
+      @media (max-width: $fg-screen-lg) {
+        top: 23%;
+        left: 76%;
+      }
+      @media (max-width: $fg-screen-md) { 
+        top: 20%;
+        left: 72%;
+      }
     }
     .line-hips-text {
       @extend %schema-text;
-      top: 29%;
+      top: 30%;
       left: 6%;
+      @media (max-width: $fg-screen-lg) {
+        top: 41%;
+        left: -1%;
+      }
+      @media (max-width: $fg-screen-md) {
+        top: 36%;
+        left: 8%;
+      }
     }
     .line-dress-text {
       @extend %schema-text;
       width: 160px;
-      top: 67.3%;
+      top: 68.5%;
       left: 0;
+      @media (max-width: $fg-screen-lg) {
+        top: 74.5%;
+        left: 2%;
+      }
+      @media (max-width: $fg-screen-md) {
+        top: 65.5%;
+        left: 10%;
+      }
     }
     .line-skirt-text {
       @extend %schema-text;
-      top: 67.3%;
-      left: 86%;
+      top: 67.2%;
+      left: 89%;
+      @media (max-width: $fg-screen-lg) {
+        top: 74.5%;
+        left: 74%;
+      }
+      @media (max-width: $fg-screen-md) {
+        top: 65.5%;
+        left: 67%;
+      }
     }
-
-    // .line-bust  {
-    //   @extend %schema-line-horizontal;
-    //   right: 30%;
-    //   top: 27%;
-    //   left: 23%;
-    //   @media (max-width: $fg-screen-lg) {
-    //     right: (30% + $schema-line-scale-right);
-    //   }
-    // }
-    // .line-bust-arrow {
-    //   @extend %schema-line-vertical-arrow;
-    //   left: 0;
-    // }
-
-    // .line-waist {
-    //   @extend %schema-line-horizontal;
-    //   top: 35%;
-    //   left: 53.5%;
-    //   right: 14%;
-    //   @media (max-width: $fg-screen-lg) {
-    //     left: (53.5% - $schema-line-scale-left);
-    //   }
-    // }
-    // .line-waist-arrow {
-    //   @extend %schema-line-vertical-arrow;
-    //   right: 0;
-    // }
-
-    // .line-hips  {
-    //   @extend %schema-line-horizontal;
-    //   top: 45%;
-    //   left: 23%;
-    //   right: 29.5%;
-    //   @media (max-width: $fg-screen-lg) {
-    //     right: (29.5% + $schema-line-scale-right);
-    //   }
-    //   .line-text {
-    //     left: -50px;
-    //   }
-    // }
-    // .line-hips-arrow {
-    //   @extend %schema-line-vertical-arrow;
-    //   left: 0;
-    // }
-
-    // .line-dress {
-    //   @extend %schema-line-vertical;
-    //   bottom: 0;
-    //   top: 18%;
-    //   left: 45%;
-    //   @media (max-width: $fg-screen-lg) {
-    //     left: (45% - $schema-line-scale-left);
-    //   }
-    // }
-    // .line-skirt {
-    //   @extend %schema-line-vertical;
-    //   bottom: 0;
-    //   top: 35%;
-    //   right: 23%;
-    //   @media (max-width: $fg-screen-lg) {
-    //     right: 37%;
-    //   }
-    // }
   }
   
   h2 {
@@ -284,6 +247,9 @@ $fg-screen-sm: 480px;
     }
     td {
       padding: 2px;
+      @media (max-width: $fg-screen-md) { 
+        padding-left: 50%;
+      }
     }
   }
 
