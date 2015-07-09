@@ -28,8 +28,7 @@ class Products::ProductsSorter
       sort!
       if @color_group.blank? && @body_shapes.blank? && @order.blank?
         if @style.present? && @style_featured_products_list[@style.name].present?
-          sort_featured_products! if @offset == 0
-          remove_dup_featured_products! if @offset > 0
+          arrange_featured_products!(@offset)
         end
       end
       products
@@ -49,27 +48,14 @@ class Products::ProductsSorter
 
     end
 
-    def sort_featured_products!
+    def arrange_featured_products!(offset)
       list = @style_featured_products_list[@style.name]
       for p in list.reverse do
         products.count.times do |index|
           if products[index].name == p[:name] && products[index].color.presentation == p[:color_presentation]
             item = products[index]
             products.delete_at(index)
-            products.prepend(item)
-            break
-          end
-        end
-      end
-    end
-
-    def remove_dup_featured_products!
-      list = @style_featured_products_list[@style.name]
-      for p in list.reverse do
-        products.count.times do |index|
-          if products[index].name == p[:name] && products[index].color.presentation == p[:color_presentation]
-            item = products[index]
-            products.delete_at(index)
+            products.prepend(item) if offset == 0
             break
           end
         end
