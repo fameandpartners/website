@@ -90,7 +90,7 @@ class Bridesmaid::CheckIsDressBoughtByMember
     def prepare_item(line_item, moodboard_item)
       variant = line_item.variant
       if variant.is_master?
-        size = line_item.personalization.try(:size).to_s
+        size = line_item.personalization.size.try(:name).to_s
       else
         size = variant.dress_size.try(:presentation)
       end

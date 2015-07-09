@@ -92,7 +92,7 @@ class Bridesmaid::AddDressSelectedByBridesmaidToCart
       #personalization.product_id = product.id
       #personalization.color = color.name
       personalization.color_id = color.id
-      personalization.size = size.try(:name)
+      personalization.size_id  = size.try(:id)
       personalization.customization_value_ids = membership.customization_value_ids
       #personalization.price = product.price
 

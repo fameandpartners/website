@@ -7,14 +7,32 @@ describe LineItemPersonalization, type: :model do
     let(:discount)        { double('Discount price', amount: 50, size: 50) }
 
     context "#size_cost" do
+      let(:default_size_cost) { BigDecimal.new(100) }
+
       it "returns 0 for default sizes" do
         expect(personalization).to receive(:add_plus_size_cost?).and_return(false)
-        expect(personalization.size_cost).to eql(BigDecimal.new(0))
+        expect(
+          personalization.calculate_size_cost(default_size_cost)
+        ).to eql(BigDecimal.new(0))
       end
 
       it "adds price for custom size" do
+        expect(personalization).to receive(:size).and_return(build(:option_value))
         expect(personalization).to receive(:add_plus_size_cost?).and_return(true)
-        expect(personalization.size_cost).to eql(BigDecimal.new('20.0'))
+        expect(
+          personalization.calculate_size_cost(default_size_cost)
+        ).to eql(default_size_cost)
+      end
+
+      it "returns discounted size prices" do
+        expect(personalization).to receive(:add_plus_size_cost?).and_return(true)
+        size = build(:option_value)
+        expect(size).to receive(:discount).and_return(double(size: 50, amount: 50))
+        expect(personalization).to receive(:size).and_return(size)
+
+        expect(
+          personalization.calculate_size_cost(default_size_cost)
+        ).to eql(default_size_cost * 0.5)
       end
     end
 

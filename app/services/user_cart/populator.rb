@@ -109,10 +109,10 @@ class  UserCart::Populator
 
     def build_personalization
       LineItemPersonalization.new.tap do |item|
-        item.size     = product_size.name
         item.size_id  = product_size.id
-        item['color'] = product_color.name
+        item['size']  = product_size.value
         item.color_id = product_color.id
+        item['color'] = product_color.name
         item.customization_value_ids = product_customizations.map(&:id)
         item.product_id = product.id
       end

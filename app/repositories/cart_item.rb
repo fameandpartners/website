@@ -62,8 +62,7 @@ class CartItem
       return nil if !product_has_option_values?
       @line_item_size ||= begin
         if customized_product?
-          size_value = line_item.personalization.size
-          Spree::Variant.size_option_type.option_values.where(presentation: size_value.to_s).first
+          line_item.personalization.size
         else
           variant.dress_size
         end
