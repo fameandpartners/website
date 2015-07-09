@@ -13,7 +13,7 @@ module Feeds
       private
 
       # @override
-      def get_image_link(item)
+      def image_link(item)
         url = URI.encode(CDN_HOST + image_filename(item))
 
         if image_exists?(url)
@@ -21,6 +21,12 @@ module Feeds
         else
           item[:image]
         end
+      end
+
+      # @override
+      def product_description(item)
+        whats_made_of = item[:fabric].to_s
+        whats_made_of.gsub(/<p>|\n/, ',')
       end
 
       def image_filename(item)
