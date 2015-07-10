@@ -48,7 +48,8 @@ class Products::DetailsResource
         moodboard:          product_moodboard,
         fabric:             product_fabric,
         style_notes:        product_style_notes,
-        size_chart:         product.size_chart
+        size_chart:         product.size_chart,
+        fast_making:        product.fast_making
       })
     end
   end
