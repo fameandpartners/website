@@ -1,4 +1,4 @@
-FactoryGirl.modify do
+FactoryGirl.define do
 
   factory :dress, :class => Spree::Product do
   

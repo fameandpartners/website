@@ -1,4 +1,4 @@
-FactoryGirl.modify do
+FactoryGirl.define do
   sequence :variants do |n|
     "user#{n}@example.com"
   end
