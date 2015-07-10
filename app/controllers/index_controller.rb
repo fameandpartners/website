@@ -16,9 +16,11 @@ class IndexController < ApplicationController
   private
 
   def force_redirection_to_current_site_version
-    if param_site_version != cookies[:site_version]
-      cookie_site_version = SiteVersion.by_permalink_or_default(cookies[:site_version])
-      redirect_to LocalizeUrlService.localize_url(request.url, cookie_site_version)
+    user_site_version = cookies[:site_version] || current_site_version.code
+
+    if param_site_version != user_site_version
+      site_version = SiteVersion.by_permalink_or_default(user_site_version)
+      redirect_to LocalizeUrlService.localize_url(request.url, site_version)
     end
   end
 end

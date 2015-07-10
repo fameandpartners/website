@@ -21,7 +21,6 @@ module Concerns::SiteVersion
       )
 
       service.get.tap do |site_version|
-        cookies[:site_version]  ||= site_version.code
         if current_spree_user && current_spree_user.site_version_id != site_version.id
           current_spree_user.update_column(:site_version_id, site_version.id)
         end
@@ -31,5 +30,9 @@ module Concerns::SiteVersion
 
   def param_site_version
     params[:site_version] || SiteVersion.default.code
+  end
+
+  def set_site_version_cookie(site_version_code)
+    cookies.permanent[:site_version] = site_version_code
   end
 end
