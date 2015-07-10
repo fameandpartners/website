@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sidekiq"
   s.add_dependency "kaminari"
   s.add_dependency "datagrid"
+  s.add_dependency "reform"
 
   # Theme
   # s.add_dependency "inspinia-rails"
