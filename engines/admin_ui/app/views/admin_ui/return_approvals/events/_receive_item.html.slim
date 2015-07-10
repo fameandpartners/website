@@ -1,0 +1,10 @@
+= form_for @form, :url => { controller: 'return_approvals/events' }  do |f|
+  = f.hidden :event
+  .form-group
+    = f.label :location
+    = f.select :location, %w[AU US], include_blank: true
+  .form-group
+    = f.label :received_on
+    = f.text_field :received_on, class: 'datepicker'
+  .form-group
+    =f.button 'Submit'
