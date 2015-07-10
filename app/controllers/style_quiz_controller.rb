@@ -140,7 +140,6 @@ class StyleQuizController < ActionController::Base
         )
         service.get().tap do |site_version|
           cookies[:site_version]  ||= site_version.code
-          cookies[:ip_address]    ||= request.remote_ip
           if current_spree_user && current_spree_user.site_version_id != site_version.id
             current_spree_user.update_column(:site_version_id, site_version.id)
           end

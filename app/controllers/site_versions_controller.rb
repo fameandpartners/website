@@ -6,7 +6,6 @@ class SiteVersionsController < ApplicationController
 
     @current_site_version   = site_version
     cookies[:site_version]  = site_version.permalink
-    cookies[:ip_address]    = request.remote_ip
 
     if user = try_spree_current_user
       user.update_site_version(site_version)
