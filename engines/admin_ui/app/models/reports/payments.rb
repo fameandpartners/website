@@ -38,6 +38,10 @@ module Reports
         from_payment(payment)
       end
 
+      def amount_in_cents
+        (amount * 100).to_i
+      end
+
       def payment_date
         created_at.try(:to_date).to_s
       end

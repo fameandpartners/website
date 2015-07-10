@@ -1,4 +1,4 @@
-FactoryGirl.modify do
+FactoryGirl.define do
   factory :option_type, :class => Spree::OptionType do
     name 'foo-size'
     presentation 'Size'

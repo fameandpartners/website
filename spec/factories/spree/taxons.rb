@@ -1,4 +1,4 @@
-FactoryGirl.modify do
+FactoryGirl.define do
   factory :taxon, :class => Spree::Taxon do
     sequence(:name) { |n| "Taxon-#{n}" }
     sequence(:position)

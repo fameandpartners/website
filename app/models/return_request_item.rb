@@ -59,55 +59,61 @@ class ReturnRequestItem < ActiveRecord::Base
   private
 
   def push_return_event
-    ItemReturnEvent.where(event_type: :return_requested, line_item_id: line_item.id)
-
-    # existing_item_return =
-
-    item_return = ItemReturn.where(line_item_id: line_item.id).first || ItemReturnEvent.creation.create!(line_item_id: line_item.id).item_return
-
-
-
-
-
-    binding.pry unless item_return.is_a? ItemReturn
-    binding.pry unless item_return.persisted?
-
-    attrs = {
-      order_number:           order.number,
-      line_item_id:           line_item.id,
-      qty:                    quantity,
-      requested_action:       action,
-      requested_at:           created_at,
-      customer_name:          order.full_name,
-      reason_category:        reason_category,
-      reason_sub_category:    reason,
-      request_notes:          '',
-      contact_email:          order.email,
-      product_name:           line_item.product.name,
-      product_style_number:   line_item.product.sku,
-      product_colour:         line_item_presenter.colour_name,
-      product_size:           line_item_presenter.country_size,
-      product_customisations: line_item_presenter.personalizations?,
-      acceptance_status:      :requested,
-    }
-
-    # TODO PICK THE SUCCESSFUL ONE
-    if payment = order.payments.detect { |o| o.state = 'completed' }
-
-      presented_payment = ::PaymentsReport::PaymentReportPresenter.from_payment(payment)
-      attrs.merge!(
-        order_payment_method: presented_payment.payment_type,
-        order_paid_amount:    presented_payment.amount_in_cents,
-        order_paid_currency:  presented_payment.currency,
-        order_payment_ref:    presented_payment.token
-      )
-    end
-
-    item_return.events.return_requested.create!(attrs)
-
-
+    ReturnRequestItemMapping.new(return_request_item: self).call
+  rescue StandardError => e
+    NewRelic::Agent.notice_error e
   end
 
+  class ReturnRequestItemMapping
 
+    attr_reader :rri
 
+    def initialize(return_request_item:)
+      @rri = return_request_item
+    end
+
+    def call
+      return :no_action_required if rri.action == "keep"
+
+      item_return = ItemReturn.where(line_item_id: rri.line_item_id).first.presence || ItemReturnEvent.creation.create.item_return
+
+      existing_event = item_return.events.return_requested.first
+      if existing_event.present?
+        puts "SKIPPING return_requested - #{rri.line_item_id}"
+        return
+      end
+
+      attrs = {
+        order_number:           rri.order.number,
+        line_item_id:                rri.line_item.id,
+        qty:                    rri.quantity,
+        requested_action:       rri.action,
+        requested_at:           rri.created_at,
+        customer_name:          rri.order.full_name,
+        reason_category:        rri.reason_category,
+        reason_sub_category:    rri.reason,
+        request_notes:          '',
+        contact_email:          rri.order.email,
+        product_name:           rri.line_item.product.name,
+        product_style_number:   rri.line_item.product.sku,
+        product_colour:         rri.line_item_presenter.colour_name,
+        product_size:           rri.line_item_presenter.country_size,
+        product_customisations: rri.line_item_presenter.personalizations?,
+        acceptance_status:      :requested,
+      }
+
+      # TODO PICK THE SUCCESSFUL ONE
+      if rri.order.payments.last
+        payment = ::Reports::Payments::PaymentReportPresenter.from_payment(rri.order.payments.last)
+        attrs.merge!(
+          order_payment_method: payment.payment_type,
+          order_paid_amount:    payment.amount_in_cents,
+          order_paid_currency:  payment.currency,
+          order_payment_ref:    payment.token
+        )
+      end
+
+      item_return.events.return_requested.create(attrs)
+    end
+  end
 end
