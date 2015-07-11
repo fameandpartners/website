@@ -9,7 +9,8 @@ module Revolution
 
     belongs_to :page
 
-    def self.find_for_locale(locale)
+    def self.find_for_locale(locale = nil)
+      locale ||= Translation::DEFAULT_LOCALE
       find_by_locale(locale) || find_for_default_locale
     end
 

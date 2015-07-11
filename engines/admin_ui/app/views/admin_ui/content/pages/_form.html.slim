@@ -1,0 +1,104 @@
+.ibox.float-e-margins
+  .ibox-title
+    h5 Page Details
+
+  .ibox-content
+
+    .form-group
+      label.col-sm-2.control-label Path
+      .col-sm-10= f.text_field :path, :class => 'form-control'
+
+    .hr-line-dashed
+    .form-group
+      label.col-sm-2.control-label Template Path
+      .col-sm-10= f.text_field :template_path, :class => 'form-control'
+
+    .hr-line-dashed
+    .form-group
+      label.col-sm-2.control-label Canonical
+      .col-sm-10= f.text_field :canonical, :class => 'form-control'
+
+    .hr-line-dashed
+    .form-group
+      label.col-sm-2.control-label Redirect
+      .col-sm-10= f.text_field :redirect, :class => 'form-control'
+
+    .hr-line-dashed
+    .form-group
+      label.col-sm-2.control-label Variables
+      .col-sm-10= f.text_field :variables, :class => 'form-control'
+
+    .hr-line-dashed
+    .form-group
+      label.col-sm-2.control-label Publish From
+      .col-sm-10= f.text_field :publish_from, :class => 'form-control'
+
+      label.col-sm-2.control-label Publish To
+      .col-sm-10= f.text_field :publish_to, :class => 'form-control'
+
+
+.ibox.float-e-margins
+  .ibox-title
+    h5 Translations
+
+  .ibox-content
+    .tabs-container
+
+      ul.nav.nav-tabs
+        li.active
+          a href="#tab-en-us" data-toggle="tab" aria-expanded="true" en-us
+        li
+          a href="#tab-en-au" data-toggle="tab" aria-expanded="false" en-au
+        li
+          a href="#tab-new" data-toggle="tab" aria-expanded="false" +
+
+      .tab-content
+        #tab-en-us.tab-pane.active
+          .panel-body
+            | en-us content
+            = f.fields_for :translations do |t|
+
+              .form-group
+                label.col-sm-2.control-label Locale
+                .col-sm-10= t.text_field :locale, :disabled => true
+
+              .hr-line-dashed
+              .form-group
+                label.col-sm-2.control-label Title
+                .col-sm-10 = t.text_field :title, :class => 'form-control'
+
+              .hr-line-dashed
+              .form-group
+                label.col-sm-2.control-label Meta Description
+                .col-sm-10 = t.text_field :meta_description, :class => 'form-control'
+
+              .hr-line-dashed
+              .form-group
+                label.col-sm-2.control-label Heading
+                .col-sm-10 = t.text_field :heading, :class => 'form-control'
+
+              .hr-line-dashed
+              .form-group
+                label.col-sm-2.control-label Sub Heading
+                .col-sm-10 = t.text_field :sub_heading, :class => 'form-control'
+
+              .hr-line-dashed
+              .form-group
+                label.col-sm-2.control-label Description
+                .col-sm-10 = t.text_field :description, :class => 'form-control'
+
+        #tab-en-au.tab-pane
+          .panel-body
+            | en-au content
+
+        #tab-new.tab-pane
+          .panel-body
+            | new translation
+
+
+.ibox.float-e-margins
+  .ibox-content
+    .form-group
+      .col-sm-4.col-sm-offset-2
+        = f.submit 'Save', :class => 'btn btn-primary save'
+        = link_to 'Cancel', content_pages_path, :class => 'btn btn-white'

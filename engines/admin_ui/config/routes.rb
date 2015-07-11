@@ -20,6 +20,10 @@ AdminUi::Engine.routes.draw do
 
   resource :content_preview, only: :show
 
+  namespace :content do
+    resources :pages
+  end
+
   require 'sidekiq/web'
   mount Sidekiq::Web => 'd0ec826a2968a7079f0bdd8f1116811f'
 
