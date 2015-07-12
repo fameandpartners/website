@@ -1,0 +1,18 @@
+= render :partial => 'javascript'
+
+.page-title.default.category-header style="background-image: url('#{@collection.details.banner.image}')"
+  .container
+    .page-title--details
+      h1.no-padding-bottom = @collection.details.banner.title
+      p= raw @collection.details.banner.subtitle
+
+.page-content.products-collections.category
+  = render :partial => 'filters'
+
+  .container.relative.products-collection
+    - if Features.active?(:collection_content)
+      = render partial: 'products_with_content'
+    - else
+      = render partial: 'products_without_content'
+
+    = render partial: 'pagination'
