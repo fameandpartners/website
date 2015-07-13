@@ -1,10 +1,19 @@
 .fit-guide-corner
-  .fit-guide-corner-text
-    h2
-      ' We have 
-      br
-      ' updated our sizing! 
-    p This dress follows our new size chart.
+  - if size_chart == '2015'
+    .fit-guide-corner-text
+      h2
+        ' We have
+        br
+        ' updated our sizing!
+      p This dress follows our new size chart.
+  - elsif size_chart == '2014'
+    .fit-guide-corner-text
+      h2
+        ' This
+        br
+        ' dress follows
+        br
+        ' our old measurements.
 .row
   .col
     .fit-guide-schema
