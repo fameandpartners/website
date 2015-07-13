@@ -15,7 +15,7 @@ describe ApplicationController, :type => :controller do
     describe 'set_session_country' do
 
       before do
-        ActionDispatch::Request.any_instance.stub(:remote_ip).and_return(ip)
+        allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return(ip)
         get :index
       end
 
