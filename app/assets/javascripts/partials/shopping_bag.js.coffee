@@ -41,6 +41,7 @@ window.ShoppingBag = class ShoppingBag
     @$container.removeClass('speed-in').one(transition_end_events, () ->
       $('body').removeClass('overflow-hidden')
     )
+    $("#mobile-menu").show()
 
   open: () ->
     @render() if !@rendered
@@ -48,6 +49,7 @@ window.ShoppingBag = class ShoppingBag
       $('body').addClass('overflow-hidden')
     )
     @$overlay.addClass('is-visible')
+    $("#mobile-menu").attr("style","display:none !important")
 
   openHandler: (e) ->
     e.preventDefault() if e
