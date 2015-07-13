@@ -1,4 +1,9 @@
-<!-- Google Tag Manager -->
+<%# Google Tag Manager %>
+<%# - GTM JS must be inserted after the <body> tag %>
+<%# - dataLayer must be declared above tag manager JS import %>
+
+<script>window.dataLayer = window.dataLayer || [];</script>
+
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KV54GB"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -6,4 +11,32 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KV54GB');</script>
-<!-- End Google Tag Manager -->
+
+
+<%# GTM Completed Order Tracking %>
+<% if flash[:commerce_tracking] || params[:force_tracking] && @marketing_order.present? %>
+  <script>
+    dataLayer.push({"event": "completedOrder"});
+
+    dataLayerProducts = [];
+    <% @marketing_order.line_items.each do |line_item| %>
+      dataLayerProducts.push({
+        "sku"      : "<%= line_item.sku %>",
+        "name"     : "<%= line_item.product_name %>",
+        "category" : "<%= line_item.category_name %>",
+        "price"    : <%= line_item.total_amount %>,
+        "quantity" : <%= line_item.quantity %>
+      });
+    <% end %>
+
+    dataLayer.push({
+      "transactionId"          : "<%= @marketing_order.number %>",
+      "transactionCurrency"    : "<%= @marketing_order.currency %>",
+      "transactionAffiliation" : "Fame & Partners",
+      "transactionTotal"       : <%= @marketing_order.total_amount %>,
+      "transactionTax"         : <%= @marketing_order.taxes_amount %>,
+      "transactionShipping"    : <%= @marketing_order.shipping_amount %>,
+      "transactionProducts"    : dataLayerProducts
+    });
+  </script>
+<% end %>
