@@ -1,7 +1,0 @@
-li.stylist
-  .thumbnail= image_tag author.avatar.try(:url), alt: '', height: 160, width: 160
-  .stylist-info
-    .name
-      = link_to author.fullname, blog_authors_post_path(stylist: author.slug)
-    .desc
-      p = raw(author.description)

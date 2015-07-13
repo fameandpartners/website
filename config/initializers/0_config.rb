@@ -4,6 +4,7 @@ configatron.noreply     = 'Fame & Partners<noreply@fameandpartners.com>'
 configatron.admin       = 'team@fameandpartners.com'
 configatron.app_name    = 'Fame And Partners'
 configatron.sitemap_url = 'http://images.fameandpartners.com/sitemap/sitemap.xml.gz'
+configatron.blog_host   = 'fameandpartners.tumblr.com'
 
 # assets
 configatron.aws.enabled    = false
@@ -80,7 +81,6 @@ configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3r
 case Rails.env.to_sym
 when :development
   configatron.host = 'localhost.localdomain'
-  configatron.blog_host = 'blog.localdomain'
 
   configatron.cache.expire do |expire|
     expire.quickly  = 1.second
@@ -113,7 +113,6 @@ when :development
 
 when :staging
   configatron.host      = 'stage.fameandpartners.com'
-  configatron.blog_host = 'stage.fameandpartners.com'
 
   configatron.mailgun.mailbox do |mailbox|
     mailbox.domain   = '23st2ages.com'
@@ -123,7 +122,6 @@ when :staging
 
 when :preproduction
   configatron.host      = 'preprod.fameandpartners.com'
-  configatron.blog_host = 'blog.fameandpartners.com'
 
   configatron.aws.s3 do |s3|
     s3.bucket            = 'preprod-fameandpartners'
@@ -144,7 +142,6 @@ when :preproduction
 
 when :production
   configatron.host      = 'www.fameandpartners.com'
-  configatron.blog_host = 'blog.fameandpartners.com'
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com']
 

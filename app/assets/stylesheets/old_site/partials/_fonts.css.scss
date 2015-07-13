@@ -29,22 +29,6 @@ $fontFour: 'Arapey', serif;
 $fontFive: 'Lato', sans-serif;
 $fontSix: 'Austin', sans-serif;
 
-// BLOG FONTS
-@include font-face('Vampiro One', 'vampiroone-regular');
-@include font-face('Cinzel Bold', 'cinzel-bold');
-@include font-face('Cinzel Regular', 'cinzel-regular');
-@include font-face('Abrilfatface', 'abrilfatface-regular');
-@include font-face('source_sans_probold', 'sourcesanspro-bold');
-@include font-face('source_sans_prolight', 'sourcesanspro-light');
-
-
-$vampiro: 'Vampiro One', sans-serif;
-$cinzelNormal: 'Cinzel Regular', sans-serif;
-$cinzelBold: 'Cinzel Bold', sans-serif;
-$abrilfatface: 'Abrilfatface', sans-serif;
-$sourceBold: 'source_sans_probold', sans-serif;
-$sourceLight: 'source_sans_prolight', sans-serif;
-
 $baskerville: 'BaskervilleMTStdRegular', sans-serif;
 $shruti: 'ShrutiRegular', sans-serif;
 $bebas: 'bebas_neueregular', sans-serif;

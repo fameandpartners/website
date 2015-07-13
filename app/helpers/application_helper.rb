@@ -54,30 +54,6 @@ module ApplicationHelper
     end
   end
 
-  def show_breadcrumbs
-    @breadcrumbs.map do |breadcrumb|
-      link_to breadcrumb.last, breadcrumb.first
-    end.join(' » ')
-  end
-
-  def red_carpet_posts_page?
-    params[:controller] == 'blog/posts' && params[:type] == 'red_carpet' &&
-    (params[:action] == 'show' || params[:action] == 'index')
-  end
-
-  def simple_posts_page?
-    params[:controller] == 'blog/posts' && params[:type].blank? &&
-    (params[:action] == 'show' || params[:action] == 'index')
-  end
-
-  def celebrities_page?
-    params[:controller] == 'blog/celebrities' && (params[:action] == 'show' || params[:action] == 'index')
-  end
-
-  def authors_page?
-    params[:controller] == 'blog/authors'
-  end
-
   def request_path?(path)
     request.path =~ Regexp.new(Regexp.escape(path))
   end
