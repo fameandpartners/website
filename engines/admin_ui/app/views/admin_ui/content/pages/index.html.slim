@@ -1,5 +1,5 @@
 - content_for :page_title do
-  ' Pages
+  | Pages
 
 = paginate collection, theme: 'admin_ui'
 
@@ -17,5 +17,7 @@ table.table
           - if page.translation
             = link_to page.translation.title, edit_content_page_path(page)
         td
-          = link_to 'Edit', edit_content_page_path(page), class: action_icon_class(:edit)
-          = link_to 'Delete', edit_content_page_path(page), class: action_icon_class(:delete)
+          = button_to 'Edit', edit_content_page_path(page), :action => "edit", :method => "get", class: action_icon_class(:edit), :id => "edit_form"
+          = button_to 'Delete', content_page_path(page), :action => "destroy", :method => "delete", class: action_icon_class(:delete), :id => "delete_form"
+
+= link_to 'Create a Page', new_content_page_path, class: "btn btn-primary"

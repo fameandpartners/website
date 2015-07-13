@@ -46,9 +46,9 @@
 
       ul.nav.nav-tabs
         li.active
-          a href="#tab-en-us" data-toggle="tab" aria-expanded="true" en-us
+          a href="#tab-en-us" data-toggle="tab" aria-expanded="true" en-US
         li
-          a href="#tab-en-au" data-toggle="tab" aria-expanded="false" en-au
+          a href="#tab-en-au" data-toggle="tab" aria-expanded="false" en-AU
         li
           a href="#tab-new" data-toggle="tab" aria-expanded="false" +
 
@@ -56,37 +56,12 @@
         #tab-en-us.tab-pane.active
           .panel-body
             | en-us content
-            = f.fields_for :translations do |t|
-
-              .form-group
-                label.col-sm-2.control-label Locale
-                .col-sm-10= t.text_field :locale, :disabled => true
-
-              .hr-line-dashed
-              .form-group
-                label.col-sm-2.control-label Title
-                .col-sm-10 = t.text_field :title, :class => 'form-control'
-
-              .hr-line-dashed
-              .form-group
-                label.col-sm-2.control-label Meta Description
-                .col-sm-10 = t.text_field :meta_description, :class => 'form-control'
-
-              .hr-line-dashed
-              .form-group
-                label.col-sm-2.control-label Heading
-                .col-sm-10 = t.text_field :heading, :class => 'form-control'
-
-              .hr-line-dashed
-              .form-group
-                label.col-sm-2.control-label Sub Heading
-                .col-sm-10 = t.text_field :sub_heading, :class => 'form-control'
-
-              .hr-line-dashed
-              .form-group
-                label.col-sm-2.control-label Description
-                .col-sm-10 = t.text_field :description, :class => 'form-control'
-
+            - if page.id.present?
+              = f.fields_for :translations do |t|
+                = render :partial => 'translation_form', :locals => { :t => t }
+            - else
+              = f.fields_for :translations, Revolution::Translation.new  do |t|
+                = render :partial => 'translation_form', :locals => { :t => t }
         #tab-en-au.tab-pane
           .panel-body
             | en-au content

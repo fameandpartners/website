@@ -17,9 +17,28 @@ module AdminUi
       end
 
       def new
+        @page = Revolution::Page.new
+      end
+
+      def create
+        @page = Revolution::Page.new(params[:page])
+        if @page.save
+          redirect_to action: :index
+        else
+          render action: :new
+        end
       end
 
       def show
+      end
+
+      def destroy
+        @page = Revolution::Page.find(params[:id])
+        if @page.translation.present?
+          @page.translation.delete
+        end
+        @page.delete
+        redirect_to action: :index
       end
 
       private

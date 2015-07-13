@@ -5,7 +5,7 @@ module Revolution
 
     attr_accessible :locale, :title, :meta_description, :heading, :sub_heading, :description
 
-    validates :page, :locale, :title, :meta_description, :presence => true
+    validates :locale, :title, :meta_description, :presence => true
 
     belongs_to :page
 
