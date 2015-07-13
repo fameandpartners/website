@@ -8,6 +8,14 @@ module AdminUi
       def edit
       end
 
+      def update
+        if page.update_attributes(params[:page])
+          redirect_to action: :index
+        else
+          render action: :edit
+        end
+      end
+
       def new
       end
 

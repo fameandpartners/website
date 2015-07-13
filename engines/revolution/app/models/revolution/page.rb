@@ -7,7 +7,7 @@
 
 module Revolution
   class Page < ActiveRecord::Base
-    attr_accessible :path, :template_path, :canonical, :redirect, :parent, :parent_id, :publish_from, :publish_to, :variables
+    attr_accessible :translations_attributes, :path, :template_path, :canonical, :redirect, :parent, :parent_id, :publish_from, :publish_to, :variables
 
     validates :path, :presence => true
     validate :path_has_not_changed, :on => :update #read only attributes
