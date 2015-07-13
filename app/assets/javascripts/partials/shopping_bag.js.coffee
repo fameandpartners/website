@@ -42,7 +42,6 @@ window.ShoppingBag = class ShoppingBag
     @$container.removeClass('speed-in').one(transition_end_events, () ->
       $('body').removeClass('overflow-hidden')
     )
-    $("#mobile-menu").show()
     @$mobileMenu.show()
 
   open: () ->
