@@ -1,0 +1,41 @@
+= render partial: 'spree/admin/shared/configuration_menu'
+
+- content_for :page_title
+  = t(:locale_preferences)
+
+.row
+  .alpha.twelve.columns
+    fieldset.no-border-bottom.no-border-top
+      = form_for :locale_preferences, url: admin_locale_preferences_path, method: :put do |f|
+        - @site_versions.each do |site_version|
+          h1 = site_version.name
+          / Default SEO Title
+          fieldset.no-border-bottom
+            legend align='center' Default SEO Title
+            .field
+              label Default SEO Title
+              = preference_field_tag :fake_default_seo_title, 'default seo title', type: :string
+
+          / HomePage title
+          fieldset.no-border-bottom
+            legend align='center' Homepage Title
+            .field
+              label Homepage Title
+              = preference_field_tag :fake_homepage_title, 'home page title', type: :string
+
+          / Gray Top Banner
+          fieldset.no-border-bottom
+            legend align='center' Gray Top Banner
+            - banner = Preferences::TopBanner.new(site_version)
+            .field
+              label Center Text
+              = preference_field_tag banner.center_text_key, banner.center_text, type: :string
+
+            .field
+              label Right Text
+              = preference_field_tag banner.right_text_key, banner.right_text, type: :string
+
+        .form-buttons.filter-actions.actions
+          = button t(:update), 'icon-refresh'
+          span.or = t(:or)
+          = link_to_with_icon 'icon-remove', t(:cancel), edit_admin_general_settings_path, class: 'button'

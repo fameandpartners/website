@@ -111,10 +111,6 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  helper_method :default_seo_title, :default_meta_description
-
-  helper_method :analytics_label, :get_user_type
-
   def url_options
     version = current_site_version
 
@@ -142,14 +138,17 @@ class ApplicationController < ActionController::Base
   def default_seo_title
     Spree::Config[:default_seo_title]
   end
+  helper_method :default_seo_title
 
   def default_meta_description
     Spree::Config[:default_meta_description]
   end
+  helper_method :default_meta_description
 
   def get_user_type
     spree_user_signed_in? ? 'Member' : 'Guest'
   end
+  helper_method :get_user_type
 
   def analytics_label(label_type, *args)
     case label_type.to_sym
@@ -174,22 +173,22 @@ class ApplicationController < ActionController::Base
   rescue Exception => e
     return ''
   end
+  helper_method :analytics_label
 
   def step1_custom_dresses_path(options = {})
     main_app.step1_custom_dresses_path(options.merge(user_addition_params))
   end
+  helper_method :step1_custom_dresses_path
 
   def step2_custom_dress_path(object, options = {})
     main_app.step2_custom_dress_path(object, options.merge(user_addition_params))
   end
+  helper_method :step2_custom_dress_path
 
   def success_custom_dress_path(object, options = {})
     main_app.success_custom_dress_path(object, options.merge(user_addition_params))
   end
-
-  helper_method :step1_custom_dresses_path,
-                :step2_custom_dress_path,
-                :success_custom_dress_path
+  helper_method :success_custom_dress_path
 
   def user_addition_params
     addition_params = {}
@@ -224,7 +223,6 @@ class ApplicationController < ActionController::Base
       @current_wished_product_ids = user.present? ? user.wishlist_items.map(&:spree_product_id) : []
     end
   end
-
   helper_method :current_wished_product_ids
 
   def serialized_current_user
@@ -234,8 +232,7 @@ class ApplicationController < ActionController::Base
       {}
     end
   end
-
-  helper_method :serialized_current_user, :serialize_user
+  helper_method :serialized_current_user
 
   def serialize_user(user)
     {
@@ -245,6 +242,7 @@ class ApplicationController < ActionController::Base
       wish_list: serialize_wish_list(user)
     }
   end
+  helper_method :serialize_user
 
   def serialize_wish_list(user)
     user.wishlist_items.map do |item|
