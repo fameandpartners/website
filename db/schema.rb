@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150626012245) do
+ActiveRecord::Schema.define(:version => 20150713160857) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1219,6 +1219,7 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
     t.boolean  "is_service",           :default => false
     t.integer  "factory_id"
     t.string   "size_chart",           :default => "2014", :null => false
+    t.string   "tags"
     t.integer  "fabric_card_id"
   end
 
@@ -1357,8 +1358,9 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
     t.boolean  "match_all"
     t.boolean  "match_one"
     t.datetime "deleted_at"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "position",             :default => 0
   end
 
   create_table "spree_skrill_transactions", :force => true do |t|
@@ -1577,6 +1579,51 @@ ActiveRecord::Schema.define(:version => 20150626012245) do
     t.integer  "zone_members_count", :default => 0
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+  end
+
+  create_table "style_quiz_answers", :force => true do |t|
+    t.integer "question_id"
+    t.boolean "active",      :default => true
+    t.string  "group"
+    t.string  "name"
+    t.string  "value"
+    t.string  "image"
+    t.integer "position"
+    t.string  "tags"
+  end
+
+  create_table "style_quiz_questions", :force => true do |t|
+    t.boolean "active",   :default => true
+    t.string  "code"
+    t.string  "name"
+    t.string  "template"
+    t.integer "position"
+  end
+
+  create_table "style_quiz_tags", :force => true do |t|
+    t.string "group"
+    t.string "name"
+  end
+
+  create_table "style_quiz_user_profile_events", :force => true do |t|
+    t.integer "user_profile_id"
+    t.string  "name"
+    t.string  "event_type"
+    t.date    "date"
+  end
+
+  create_table "style_quiz_user_profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.string   "email"
+    t.string   "fullname"
+    t.date     "birthday"
+    t.string   "tags"
+    t.text     "answer_ids"
+    t.text     "recommendated_products"
+    t.datetime "completed_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "styles", :force => true do |t|

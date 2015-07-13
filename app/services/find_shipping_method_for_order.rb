@@ -11,9 +11,9 @@ class Services::FindShippingMethodForOrder
 
   def get
     result = nil
-    result = zone.shipping_methods.first if zone.present?
-    result ||= shipping_category.shipping_methods.first if shipping_category.present?
-    result ||= Spree::ShippingMethod.first
+    result = zone.shipping_methods.ordered.first if zone.present?
+    result ||= shipping_category.shipping_methods.ordered.first if shipping_category.present?
+    result ||= Spree::ShippingMethod.ordered.first
     result
   rescue Exception => e
     nil
