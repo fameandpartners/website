@@ -13,6 +13,7 @@ window.ShoppingBag = class ShoppingBag
 
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
+    @$mobileMenu= $('#mobile-menu')
 
     _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler')
 
@@ -42,6 +43,7 @@ window.ShoppingBag = class ShoppingBag
       $('body').removeClass('overflow-hidden')
     )
     $("#mobile-menu").show()
+    @$mobileMenu.show()
 
   open: () ->
     @render() if !@rendered
@@ -49,7 +51,7 @@ window.ShoppingBag = class ShoppingBag
       $('body').addClass('overflow-hidden')
     )
     @$overlay.addClass('is-visible')
-    $("#mobile-menu").attr("style","display:none !important")
+    @$mobileMenu.attr("style","display:none !important")
 
   openHandler: (e) ->
     e.preventDefault() if e
