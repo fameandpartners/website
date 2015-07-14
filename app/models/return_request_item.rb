@@ -56,8 +56,6 @@ class ReturnRequestItem < ActiveRecord::Base
     !keep?
   end
 
-  private
-
   def push_return_event
     ReturnRequestItemMapping.new(return_request_item: self).call
   rescue StandardError => e
@@ -75,7 +73,7 @@ class ReturnRequestItem < ActiveRecord::Base
     def call
       return :no_action_required if rri.action == "keep"
 
-      item_return = ItemReturn.where(line_item_id: rri.line_item_id).first.presence || ItemReturnEvent.creation.create.item_return
+      item_return = ItemReturn.where(line_item_id: rri.line_item_id).first.presence || ItemReturnEvent.creation.create(line_item_id: rri.line_item_id).item_return
 
       existing_event = item_return.events.return_requested.first
       if existing_event.present?
@@ -85,7 +83,7 @@ class ReturnRequestItem < ActiveRecord::Base
 
       attrs = {
         order_number:           rri.order.number,
-        line_item_id:                rri.line_item.id,
+        line_item_id:           rri.line_item.id,
         qty:                    rri.quantity,
         requested_action:       rri.action,
         requested_at:           rri.created_at,

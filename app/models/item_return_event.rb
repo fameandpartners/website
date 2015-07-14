@@ -33,9 +33,7 @@ class ItemReturnEvent < ActiveRecord::Base
 
   event_type :creation do
     attributes :line_item_id
-    # attributes :user_id
-    #
-    # validates :user_id, presence: true
+    validates  :line_item_id, presence: true
   end
 
   event_type :return_requested do

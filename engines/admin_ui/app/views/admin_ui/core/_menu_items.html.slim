@@ -6,8 +6,8 @@ li class="#{active_link_to_class(return_requests_path)} #{active_link_to_class(i
     span.nav-label Returns Management
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    = menu_item item_returns_path,    'Approvals'
-    = menu_item return_requests_path, 'Requests'
+    li = active_link_to 'Approvals', item_returns_path
+    li = active_link_to 'Requests', return_requests_path
 
 - backend_links = [['admin_ui/caches', 'admin_ui/sidekiqs', 'admin_ui/product_indexes'], []]
 li class=active_link_to_class(root_path, active: backend_links)

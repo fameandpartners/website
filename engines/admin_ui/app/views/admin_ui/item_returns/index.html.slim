@@ -1,12 +1,11 @@
 - content_for :page_title do
   'Item Returns
 
-
 = datagrid_form_for @collection, :method => :get, :url => '/'
 
 = paginate @collection.assets, theme: 'admin_ui'
 
-div style="overflow-x: auto; max-height:100%;"
+div
   = datagrid_table @collection, html: {class: 'table table.condensed'}
 
 = paginate @collection.assets, theme: 'admin_ui'

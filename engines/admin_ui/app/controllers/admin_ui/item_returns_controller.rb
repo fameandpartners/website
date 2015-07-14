@@ -1,8 +1,6 @@
 module AdminUi
   class ItemReturnsController < AdminUi::ApplicationController
     def index
-      @ir = ItemReturn.last
-
       @collection = ItemReturnsGrid.new(params[:item_returns_grid]) do |scope|
         scope.page(params[:page]).per(50)
       end
@@ -10,11 +8,13 @@ module AdminUi
 
     def show
       @item_return = ItemReturn.find(params[:id])
+      @page_title = "Return - #{@item_return.order_number} - #{@item_return.line_item_id} - #{@item_return.contact_email}"
     end
 
+    private
 
-    def receive
-
+    helper_method def possible_events
+      [:receive_item]
     end
   end
 end
