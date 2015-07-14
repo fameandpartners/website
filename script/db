@@ -1,0 +1,259 @@
+#!/bin/bash
+
+DIR=$(dirname $0)
+
+DEV_DB=$(ruby -ryaml -e 'puts YAML.load(File.open("config/database.yml"))["development"]["database"]')
+BASE_DUMPS_DIR='tmp/database_backups'
+DB_BASE_NAME='fame_and_partners'
+DUMP_EXTENSION='dump'
+PARALELLISM=8
+
+# Define a function to actually download each of these environments
+ENVIRONMENTS=("production" "development" "uat" "preproduction" "staging")
+
+## Dump ################################################################################################################
+
+function download_production_db
+{
+  _setup_dump 'production'
+  # TODO - Actually automate this
+}
+
+function download_preprod_db
+{
+  _setup_dump 'preproduction'
+}
+
+function download_staging_db
+{
+  _setup_dump 'staging'
+}
+
+function download_uat_db
+{
+  _setup_dump 'uat'
+}
+
+function download_development_db
+{
+  _setup_dump 'development'
+  pg_dump --format=custom --dbname=${DEV_DB} > $EXPORT_FILE &
+  _spinner $!
+}
+
+## Menu ################################################################################################################
+
+function easy_database_management_menu()
+{
+    echo "$(magenta)>> $(blue)FAME$(white) - $(blue)F$(white)ully $(blue)A$(white)wesome $(blue)M$(white)enu $(blue)E$(white)ngine$(normal)"
+    PS3="$(magenta)>> $(normal)Select a $(yellow)command$(normal) to run or $(blue)Control+C$(normal) to cancel: "
+
+    commands=(
+        "reload_with_production    Backup, download, and restore the newest $(green)production$(normal) database to $(blue)development$(normal)"
+        "load_production_db        Restore the most recent $(green)production$(normal) backup $(yellow)file$(normal) to $(blue)development$(normal)"
+        "load_development_db       Restore the most recent $(blue)development$(normal) backup $(yellow)file$(normal) to $(blue)development$(normal)"
+        "choose_restore_env        Select $(magenta)any environment's$(normal) most recent backup $(yellow)file$(normal) to restore to $(blue)development$(normal)"
+        "choose_restore_file       Select $(yellow)a backup file$(normal) to restore to $(blue)development$(normal)"
+        "download_production_db    Backup $(green)production$(normal) database to a $(yellow)file$(normal)"
+        "download_development_db   Backup $(blue)development$(normal) database to a $(yellow)file$(normal)"
+        "download_menu             Select $(magenta)any environment's$(normal) database to backup to a $(yellow)file$(normal)"
+     )
+
+    select opt in "${commands[@]}"; do
+        command=$(echo ${opt} | cut -d' ' -f1)
+
+        echo "You chose $(yellow)$command$(normal)... executing now."
+        echo
+
+        ${command}
+        break;
+    done
+}
+
+
+## Streamlined Processes ###############################################################################################
+function reload_with_production
+{
+  download_production_db
+  load_production_db
+}
+
+## Dump ###############################################################################################################
+
+function download_menu
+{
+    echo "$(magenta)>> $(white)Backup the $(magenta)environment$(white) database$(normal)"
+    PS3="$(magenta)>> $(normal)Select an $(magenta)environment$(normal) to backup, or $(blue)Control+C$(normal) to cancel: "
+    select opt in "${ENVIRONMENTS[@]}"; do
+      command="download_${opt}_db"
+      break;
+    done
+}
+
+
+function _setup_dump
+{
+    if [ "${1}" == "" ]; then
+        error "Argument Error, specify an environment. i.e. 'staging' or 'production' (${0})"
+        exit 1
+    fi
+    export DB_ENV=$1
+    _set_dump_directory ${DB_ENV}
+
+    export DATE_BIT=$(date +%Y-%m-%dT%H:%M:%S)
+    export EXPORT_FILE="${DUMPS_DIR}/${DB_ENV}/${DB_BASE_NAME}_${DB_ENV}.${DATE_BIT}.${DUMP_EXTENSION}"
+    echo "$(magenta)>> $(white)Dumping Database$(normal)"
+    echo "Dumping $(green)${DB_BASE_NAME}_${DB_ENV}$(normal) database into file $(yellow)${EXPORT_FILE}$(normal)"
+}
+
+
+## Default Restore #####################################################################################################
+
+function load_production_db
+{
+  _load_db 'production' ${DEV_DB}
+}
+
+function load_development_db
+{
+  _load_db 'development' ${DEV_DB}
+}
+
+function load_uat_db
+{
+  _load_db 'uat' ${DEV_DB}
+}
+
+function load_preproduction_db
+{
+  _load_db 'preproduction' ${DEV_DB}
+}
+
+function choose_restore_env
+{
+    echo "$(magenta)>> $(white)Restore the $(yellow)most recent file$(white) from which $(magenta)environment$(white)?$(normal)"
+    PS3="$(magenta)>> $(normal)Select an $(magenta)environment$(normal) to restore from, or $(blue)Control+C$(normal) to cancel: "
+    select opt in "${ENVIRONMENTS[@]}"; do
+      _load_db ${opt} ${DEV_DB}
+      break;
+    done
+}
+
+
+## User Selectable File Restore ########################################################################################
+
+function choose_restore_file()
+{
+    _set_dump_directory
+    echo "$(magenta)>> $(white)Restore Custom Backup$(normal)"
+    array_options=( $(find $DUMPS_DIR -name "*.${DUMP_EXTENSION}") )
+#    array_options=( $(_available_database_dumps) )
+
+    if [ -z $array_options ]; then
+        echo "No backups available in $(green)$DUMPS_DIR$(normal)"
+        exit 1
+    fi
+
+    PS3="$(magenta)>> $(normal) Select a $(yellow)backup file$(normal) to restore or $(blue)Control+C$(normal) to cancel: "
+    select opt in "${array_options[@]}"; do
+        if [ ! -f "$opt" ]; then
+            error "$REPLY is not a valid option."
+            exit 1
+        fi
+
+        from_database=$(basename ${opt} | cut -d. -f1)
+        to_database=$DEV_DB
+        source_file="${opt}"
+
+        echo "Database: $(green)${from_database}$(normal)"
+        echo "File:     $(yellow)${opt}$(normal)"
+
+        _load_db $from_database $to_database $source_file
+        break;
+    done
+}
+
+## Restore #############################################################################################################
+
+
+# load_db from_database to_database [source_file]
+# If a source file is not supplied, the most recent one will be selected.
+function _load_db
+{
+  SOURCE_ENV=$1
+  DB_TO=$2
+
+  _set_dump_directory $SOURCE_ENV
+
+  if [ "$3" != "" ]; then
+      SOURCE_FILE=$3
+  else
+      SOURCE_FILE=$(ls -1t ${DUMPS_DIR}/*.${DUMP_EXTENSION} |head -n1)
+  fi
+
+  if [ ! -e "$SOURCE_FILE" ]; then
+      error "Error loading database dump for $SOURCE_ENV from file $SOURCE_FILE"
+      exit 1
+  fi
+  echo "$(magenta)>> $(white)Loading Database$(normal)"
+  echo "Loading database $(green)${SOURCE_ENV}$(normal) -> $(blue)${DB_TO}$(normal)"
+  echo "From file: $(yellow)$SOURCE_FILE$(white) - ($(stat -f '%Sm' "$SOURCE_FILE")$(normal))"
+
+  echo "Terminate connections..."
+  psql -U postgres $DB_TO -t -c \
+    "SELECT pid, pg_terminate_backend(pid) AS terminated \
+     FROM pg_stat_activity \
+     WHERE pid <> pg_backend_pid() AND datname = '${DB_TO}';"
+
+  echo "Drop... $(red)${DB_TO}$(normal)"
+  dropdb -U postgres --if-exists $DB_TO
+
+  echo "Create... $(blue)${DB_TO}$(normal)"
+  createdb -U postgres $DB_TO
+
+  echo "Restoring... $(green)${SOURCE_ENV}$(normal) -> $(blue)${DB_TO}$(normal) "
+  pg_restore --jobs $PARALELLISM --exit-on-error --no-owner --no-privileges --dbname=$DB_TO -U postgres $SOURCE_FILE &
+
+  _spinner $!
+}
+
+## Common ##############################################################################################################
+
+function _set_dump_directory
+{
+  DB_ENV=$1
+  export DUMPS_DIR="${BASE_DUMPS_DIR}/${DB_ENV}"
+  mkdir -p $DUMPS_DIR
+}
+
+## Util ################################################################################################################
+
+function error { echo $(red)$*$(normal); }
+function normal  { tput sgr0;    }
+function black   { tput setaf 0; }
+function red     { tput setaf 1; }
+function green   { tput setaf 2; }
+function yellow  { tput setaf 3; }
+function blue    { tput setaf 4; }
+function magenta { tput setaf 5; }
+function cyan    { tput setaf 6; }
+function white   { tput setaf 7; }
+
+# Takes a process ID and displays a spinner while the process is still active.
+function _spinner
+{
+  pid=$1
+  spin='-\|/'
+
+  i=0
+  while kill -0 $pid 2>/dev/null
+  do
+    i=$(( (i+1) %4 ))
+    printf "\r${spin:$i:1} - pid:$pid"
+    sleep .1
+  done
+}
+
+## Main ################################################################################################################
+
+easy_database_management_menu
