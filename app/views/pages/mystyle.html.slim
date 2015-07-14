@@ -1,0 +1,49 @@
+= content_for :head do
+  meta name="robots" content="noindex, follow"
+  / colors = p.product_color_values.includes(:option_value).where('spree_option_values.name' => '')
+
+
+ruby:
+  pids = params[:pids]
+  ids = pids.collect{|pid| pid.split('-', 2)[0] }
+  colours = pids.collect{|pid| pid.split('-', 2)[1] }
+
+  spree_products = Spree::Product.where(:id => ids).all
+  spree_products.sort_by!{|p| ids.index(p.id.to_s) }
+
+  products = spree_products.each_with_index.collect do |p, i|
+    colour_name = colours[i]
+
+    images = p.images.find_all{|i| i.attachment_file_name.downcase.include?(colour_name.gsub('-', '_')) && i.attachment_file_name.downcase.include?('crop') }
+    images = images.sort_by{ |i| i.position }.collect{ |i| i.attachment.url(:large) }
+
+    price = Spree::Price.new(:amount => p.price, :currency => current_site_version.currency)
+    color = Spree::OptionValue.where(:name => colour_name).first
+
+    OpenStruct.new(
+      :id => p.id,
+      :name => p.name,
+      :price => price,
+      :discount => p.discount,
+      :images => images,
+      :color => color
+    )
+  end
+
+  @collection = OpenStruct.new(:products => products)
+
+  @image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:img] || 'default'}.jpg"
+
+/ = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
+
+.page-title.default.category-header style="background-image: url('#{@image}')"
+  .container
+    .page-title--details
+      h1.no-padding-bottom = params[:title]
+      p= params[:subtitle]
+
+.page-content.products-collections.category
+  = render :partial => '/products/collections/filters', :locals => { :hidden => true }
+
+  .container.relative.products-collection
+    = render partial: '/products/collections/products_without_content'
