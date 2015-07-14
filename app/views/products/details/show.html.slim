@@ -129,9 +129,6 @@ ruby:
           button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
             |+ Moodboard
 
-        .row.social-media-links
-          = render :partial => 'share_buttons', :locals => { product: @product }
-
 /! About The Dress
 .col-sm-12.screen-height
 .dress-about.container.page-content
@@ -181,9 +178,13 @@ ruby:
         h4 What's it made of
         p
           = raw @product.fabric.gsub("\n", '<br/>')
-          br Product may have variations in dying hues so product may look slightly different from image
 
-      p.sku sku: #{@product.sku}
+        p style="color:#666666;" Fabrics can have variations in dying hues so products may differ slightly from image
+
+        p.sku sku: #{@product.sku}
+
+        h4 Share
+        p= render :partial => 'share_buttons', :locals => { product: @product }
 
 hr
 
