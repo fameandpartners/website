@@ -1,40 +1,26 @@
 jQuery(document).ready(function($){
-	var searchBtn = $('.search');
-	var searchBox = $('.search-bar');
-	var close = $('.close-search');
-	var navMenu = $('.nav-menu');
-	var searchArrow = $('.search-arrow');
-	var shopBtn = $('.shop');
+	var searchInput = $('#input-search');
+	var searchBtn   = $('.search');
+	var searchBox   = $('.search-bar');
+	var close       = $('.close-search');
+	var shopBtn     = $('.shop');
 
 	function removeSearchBox () {
-		searchBox.removeClass( "vis" );
-	  	searchBox.addClass( "invis" );
-	  	searchArrow.removeClass( "full-opacity" );
+		searchBox.removeClass("vis").addClass("invis");
 	}
 
 	searchBtn.click(function() {
-	  	searchBox.toggleClass( "vis" );
-	  	// navMenu.toggleClass( "transparent-bg", false);
-	  	// navMenu.toggleClass( "artificial-white-bg" );
-			$('#input-search').focus();
-	  	searchArrow.toggleClass( "full-opacity" );
+	  	searchBox.toggleClass("vis");
+		searchInput.focus();
 	});
 
 	close.click(function() {
-		// navMenu.removeClass( "artificial-white-bg" );
-		// navMenu.addClass( "transparent-bg" );
 		removeSearchBox();
-
 	});
 
 	shopBtn.hover(function() {
-		// If nav has artificial-white-bg class, remove
-		// if (navMenu.hasClass( "artificial-white-bg" )) {
-		// 	navMenu.removeClass( "artificial-white-bg" );
-		// }
 	  	removeSearchBox();
 	});
-
 });
 
 

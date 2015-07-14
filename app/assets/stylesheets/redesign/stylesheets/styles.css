@@ -10095,11 +10095,6 @@ p {
   background: white !important;
 }
 
-/* line 105, ../sass/_helpers.scss */
-.full-opacity {
-  opacity: 1;
-}
-
 /* line 109, ../sass/_helpers.scss */
 .transparent-bg {
   background: transparent !important;
