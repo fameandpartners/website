@@ -9676,15 +9676,6 @@ p {
   cursor: pointer;
 }
 
-/* line 458, ../sass/styles.scss */
-.alert-fixed-top {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 800;
-  margin-bottom: 0;
-}
-
 /* line 467, ../sass/styles.scss */
 .add-to-moodboard {
   position: absolute;
@@ -10225,11 +10216,6 @@ p {
   /* line 43, ../sass/_media.scss */
   .btn {
     font-size: 1em !important;
-  }
-
-  /* line 47, ../sass/_media.scss */
-  .alert-fixed-top {
-    position: absolute;
   }
 
   /* line 51, ../sass/_media.scss */
