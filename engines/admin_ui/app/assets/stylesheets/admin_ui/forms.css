@@ -1,5 +1,13 @@
-  #edit_form , #delete_form
-  {
-    float:left;
-    margin-right: 5px;
-  }
+#edit_form , #delete_form
+{
+  float:left;
+  margin-right: 5px;
+}
+
+.validation-error{
+  text-align: center;
+  color: red;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+

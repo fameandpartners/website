@@ -55,17 +55,20 @@
       .tab-content
         #tab-en-us.tab-pane.active
           .panel-body
-            | en-us content
-            - if page.translations.present?
-              = f.fields_for :translations do |t|
+            - if page.translations.where(locale: "en-US").present?
+              = f.fields_for :translations, page.translations.where(locale: "en-US").first do |t|
                 = render :partial => 'translation_form', :locals => { :t => t }
             - else
               = f.fields_for :translations, Revolution::Translation.new  do |t|
                 = render :partial => 'translation_form', :locals => { :t => t }
         #tab-en-au.tab-pane
           .panel-body
-            | en-au content
-
+            - if page.translations.where(locale: "en-AU").present?
+              = f.fields_for :translations, page.translations.where(locale: "en-AU").first do |t|
+                = render :partial => 'translation_form', :locals => { :t => t }
+            - else
+              = f.fields_for :translations, Revolution::Translation.new  do |t|
+                = render :partial => 'translation_form', :locals => { :t => t }
         #tab-new.tab-pane
           .panel-body
             | new translation
