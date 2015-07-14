@@ -26,7 +26,15 @@ module Feeds
       # @override
       def product_description(item)
         whats_made_of = item[:fabric].to_s
-        whats_made_of.gsub(/<p>|\n/, ',')
+
+        # Separate words
+        whats_made_of.gsub! /([a-z]+)([A-Z][a-z]+)/, "\\1\n\\2"
+
+        # Replace paragraph tags with line breaks
+        whats_made_of.gsub! /<p>/, "\n"
+
+        # Return
+        whats_made_of.split("\n").map(&:strip).join(', ')
       end
 
       def image_filename(item)
