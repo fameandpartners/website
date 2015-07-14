@@ -1,4 +1,5 @@
   #edit_form , #delete_form
   {
     float:left;
+    margin-right: 5px;
   }

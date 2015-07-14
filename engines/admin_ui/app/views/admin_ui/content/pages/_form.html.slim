@@ -56,7 +56,7 @@
         #tab-en-us.tab-pane.active
           .panel-body
             | en-us content
-            - if page.id.present?
+            - if page.translations.present?
               = f.fields_for :translations do |t|
                 = render :partial => 'translation_form', :locals => { :t => t }
             - else
