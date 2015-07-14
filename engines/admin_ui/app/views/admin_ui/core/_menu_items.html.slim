@@ -6,8 +6,8 @@ li class="#{active_link_to_class(return_requests_path)} #{active_link_to_class(i
     span.nav-label Returns Management
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    = menu_item item_returns_path,    'Approvals', icon: 'thumbs-down'
-    = menu_item return_requests_path, 'Requests', icon: 'question'
+    li = active_link_to 'Approvals', item_returns_path
+    li = active_link_to 'Requests', return_requests_path
 
 li class="#{active_link_to_class(reports_payments_path)} #{active_link_to_class(reports_sale_items_path)}"
   a href="#"

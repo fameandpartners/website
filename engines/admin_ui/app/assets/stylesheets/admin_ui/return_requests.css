@@ -2,3 +2,13 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+/*
+ * Force The page wrapper to show horizonal scrollbars
+ * at bottom of viewport instead of page.
+*/
+#page-wrapper {
+    height: 100vh;
+    overflow-y:scroll;
+    overflow-x:auto;
+}

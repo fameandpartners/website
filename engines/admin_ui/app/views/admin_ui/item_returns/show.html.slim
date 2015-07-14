@@ -1,17 +1,46 @@
-dl
-- @item_return.attributes.each do |k,v|
-  dt = k
-  dd = v
+- content_for :page_title do
+  = page_title
 
-h3 History
+.ibox
+  .ibox-title
+    h3 Actions
+  .ibox-content
+    ul.list-unstyled
+      - possible_events.each do |event_type|
+        li
+          a.btn.btn-primary data-toggle="modal" href=item_return_build_event_path(item_return_id: @item_return.id, event_type: event_type) data-target="#ajax-modal" = event_type.to_s.titleize
 
-dl
-  - @item_return.events.each do |event|
-    dt
-      => event.event_type
-      ' -
-      = event.occurred_at
-    dd
-      pre = event.data.inspect
+.ibox
+  .ibox-title
+    h3 Return Request
+  .ibox-content
+    = render 'attributes_list', attributes: @item_return.attributes
 
-= @item_return.inspect
+.ibox
+  .ibox-title
+    h3 History
+  .ibox-content
+    .vertical-container.dark-timeline
+      - @item_return.events.order('created_at DESC').each do |event|
+        .vertical-timeline-block
+          .vertical-timeline-icon
+            i.fa.fa-calendar
+          .vertical-timeline-content
+            h2 = event.event_type.to_s.titleize
+
+            = render 'attributes_list', attributes: event.data
+
+            span class="vertical-date"
+              => time_ago_in_words(event.occurred_at)
+              | ago
+              small =<> event.occurred_at.to_s
+
+
+.ibox.collapsed
+  .ibox-title
+    a.collapse-link
+      h5 Debug
+      .ibox-tools
+        i.fa.fa-chevron-up
+  .ibox-content
+    pre = @item_return.inspect
