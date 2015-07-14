@@ -7,6 +7,17 @@ class ItemReturnsGrid
     ItemReturn
   end
 
+  def self.ilike(column_name, value)
+    where(scope.arel_table[column_name].matches("%?%", value))
+  end
+
+  filter(:acceptance_status, :enum, :select => ItemReturn::STATES)
+  filter(:order_number, :string) {|value| where("order_number ilike '%#{value}%'")}
+  filter(:contact_email, :string) {|value| where("contact_email ilike '%#{value}%'")}
+  filter(:product_style_number, :string, header: 'Style')
+  filter(:product_name, :string) {|value| where("product_name ilike '%#{value}%'")}
+  filter(:product_customisations, :xboolean)
+
   column :actions, :html => true do |item_return|
      link_to "manage", item_return_path(item_return)
    end

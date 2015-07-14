@@ -1,7 +1,7 @@
 - content_for :page_title do
   'Item Returns
 
-= datagrid_form_for @collection, :method => :get, :url => '/'
+= datagrid_form_for @collection, :method => :get, url: item_returns_path
 
 = paginate @collection.assets, theme: 'admin_ui'
 
