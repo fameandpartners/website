@@ -64,7 +64,7 @@
   </p>
   <p>
     <% if @cart.promocode: %>
-      Promotion (<%= @cart.promocode %>)<span><%= @cart.display_promotion_total %></span>    
+      Promotion (<%= @cart.promocode %>)<span><%= @cart.display_promotion_total %></span>
     <% end %>
   </p>
   <p>
@@ -79,7 +79,7 @@
   <div class="col-lg-6 no-padding-right no-padding-lg">
     <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
       <div>
-        <input type="submit" value="PAY SECURELY NOW" class="btn btn-black btn-block">
+        <input type="submit" value="PAY NOW" class="btn btn-black btn-block">
       </div>
     </form>
   </div>
