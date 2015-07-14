@@ -57,12 +57,6 @@
     </li>
   <% end %>
 </ul>
-<form class="promo-code" action="#">
-  <label for=""> Promo Code</label>
-  <div class="input-group">
-    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit btn-reset">Apply</button></span>
-  </div>
-</form>
 <!--cd-cart-items-->
 <div class="cart-total">
   <p>
@@ -70,9 +64,7 @@
   </p>
   <p>
     <% if @cart.promocode: %>
-      Promotion (<%= @cart.promocode %>)<span><%= @cart.display_promotion_total %></span>
-    <% else: %>
-      Promotion<span><%= @cart.display_promotion_total %></span>
+      Promotion (<%= @cart.promocode %>)<span><%= @cart.display_promotion_total %></span>    
     <% end %>
   </p>
   <p>
@@ -87,7 +79,7 @@
   <div class="col-lg-6 no-padding-right no-padding-lg">
     <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
       <div>
-        <input type="submit" value="Checkout" class="btn btn-black btn-block">
+        <input type="submit" value="PAY SECURELY NOW" class="btn btn-black btn-block">
       </div>
     </form>
   </div>
