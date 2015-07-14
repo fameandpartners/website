@@ -65,9 +65,20 @@ window.helpers.ShoppingCart = class ShoppingCart
         product.variant_id == product_data.variant_id
       )
       @trackAddToCart(added_product)
+      @triggerModal()
     ).error( () =>
       @trigger('error')
     )
+
+  triggerModal: ->
+    # show modal for add-to-cart events if exist
+    if $.cookie("trigger_by_event_data_add_to_cart") != null
+      $.ajax
+        url: '/user_campaigns/by_trigger_event'
+        type: 'GET'
+        dataType: 'SCRIPT'
+        data:
+          event_name: 'add-to-cart'
 
   updateProduct: (line_item_id, options = {}) ->
     console.log('updateProduct', options)

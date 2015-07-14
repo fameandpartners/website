@@ -12,10 +12,15 @@ window.helpers.showAlert = (opts) ->
   message = "<h3>#{title}</h3><p><span class=\"fa fa-icon #{icon}\"></span> #{opts.message}</p>"
 
   vex.dialog.buttons.YES.text = 'X'
-  vex.dialog.alert
+
+  dialog = vex.dialog.alert
     message: message
     className: "vex vex-theme-bottom-right-corner alert alert-#{type} #{opts.className || ''}"
     afterOpen: ->
       $('.vex-dialog-buttons button').addClass('btn btn-black') # HACKETRY
 
-  setTimeout(vex.close, opts.timeout || 5555)
+  dialogID = dialog.data().vex.id
+  closeAlert = =>
+    vex.closeByID(dialogID)
+
+  setTimeout(closeAlert, opts.timeout || 5555)

@@ -9,8 +9,8 @@
 # ClASS_NAME=vex-dialog-bottom vex-dialog-pink vex-text vex-dialog-pink-reverse
 
 class BridesmaidsConsultationFormCampaign < CampaignManager
+  expirable!
   UUID         = 'bridesmaids_consultation_form'
-  ENCODED_UUID = "YnJpZGVzbWFpZHNfY29uc3VsdGF0aW9uX2Zvcm0="
   DURATION     = 10.days
 
   def can_activate?

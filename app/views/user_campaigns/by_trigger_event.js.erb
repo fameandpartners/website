@@ -1,0 +1,2 @@
+$('#email-capture-modal-content').empty().html("<%= j(render(partial: 'shared/email_capture_modal_content', locals: {template_name: campign_attrs[:template_name], content: campign_attrs[:content], promocode: campign_attrs[:promocode], campaign_uuid: campign_attrs[:campaign_uuid]})) %>");
+<%= render partial: 'shared/email_capture_modal_script', locals: {render_content: false} %>;

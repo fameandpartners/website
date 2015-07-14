@@ -35,6 +35,7 @@ FameAndPartners::Application.routes.draw do
     collection do
       post :tell_mom
       get  :check_state
+      get  :by_trigger_event
     end
   end
 
