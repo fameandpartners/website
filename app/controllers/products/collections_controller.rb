@@ -114,7 +114,7 @@ class Products::CollectionsController < Products::BaseController
         return { color_group: color_group.name }
       end
 
-      if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink)
+      if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink.downcase)
         case taxonomy = taxon.taxonomy.name.downcase
         when 'style', 'edits', 'event'
           return { taxonomy.to_sym => permalink }
