@@ -234,10 +234,10 @@ Make sure your engine yard credentials are working
 
 ### Deploy to production
 
-Merge master to production and push
+Merge master to stable and push
 
-* `$ git checkout production`
-* `$ git merge master`
+* `$ git checkout stable`
+* `$ git merge master --ff-only`
 * `$ git git push`
 * `$ ey deploy -e production_new --no-migrate`
 
