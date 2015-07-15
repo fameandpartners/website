@@ -234,6 +234,9 @@ $fg-screen-sm: 480px;
   .size-guide {
     font-size: 14px;
     text-align: center;
+    @media (max-width: $fg-screen-sm) {
+      font-size: 12px;
+    }
     tr:nth-child(even) td {
       background-color: rgba(0, 0, 0, 0.05);
     }
@@ -244,12 +247,18 @@ $fg-screen-sm: 480px;
       text-transform: uppercase;
       background-color: rgba(0, 0, 0, 0.05);
       padding: 2px 2px 2px 15px;
+      @media (max-width: $fg-screen-sm) {
+        padding-left: 2px;
+      }
     }
     td {
       padding: 2px;
-      @media (max-width: $fg-screen-md) { 
-        padding-left: 50%;
-      }
+    }
+
+    // - hide 'Size DE'
+    td[data-title]:nth-child(3),
+    td.sub-heading:nth-child(3) {
+      display: none !important;
     }
   }
 

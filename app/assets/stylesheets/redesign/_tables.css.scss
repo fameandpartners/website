@@ -1,29 +1,29 @@
 // @media only screen and (max-width: 800px) {
 @media only screen and (max-width: 640px) {
 
-  .table table,
-  .table thead,
-  .table tbody,
-  .table th,
-  .table td,
-  .table tr {
+  .table:not(.table-desktop) table,
+  .table:not(.table-desktop) thead,
+  .table:not(.table-desktop) tbody,
+  .table:not(.table-desktop) th,
+  .table:not(.table-desktop) td,
+  .table:not(.table-desktop) tr {
     display: block;
   }
 
   // @media only screen and (min-width: 801px) {
   @media only screen and (min-width: 641px) {
-    .table > tbody > tr > td {
+    .table:not(.table-desktop) > tbody > tr > td {
       clear: left;
     }
   }
 
-  .table thead tr {
+  .table:not(.table-desktop) thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
   }
 
-  .table td {
+  .table:not(.table-desktop) td {
     border: none;
     position: relative;
     padding-left: 50%;
@@ -31,7 +31,7 @@
     text-align:left;
   }
 
-  .table td:before {
+  .table:not(.table-desktop) td:before {
     position: absolute;
     top: 6px;
     left: 6px;
@@ -42,11 +42,11 @@
     font-weight: bold;
   }
 
-  .table td:before {
+  .table:not(.table-desktop) td:before {
     content: attr(data-title);
   }
 
-  .table.size-guide {
+  .table:not(.table-desktop).size-guide {
     td {
       padding-left: 40%;
     }
@@ -56,13 +56,13 @@
     }
   }
 
-  .table {
+  .table:not(.table-desktop) {
     tr.subheading-row {
       display: none;
     }
   }
 
-  .table.shipping {
+  .table:not(.table-desktop).shipping {
     td {
       padding-left: 40%;
     }
@@ -72,13 +72,13 @@
     }
   }
 
-  .table.orders-table {
+  .table:not(.table-desktop).orders-table {
     td {
       padding-left: 40%;
     }
   }
 
-  .table.order-items {
+  .table:not(.table-desktop).order-items {
     tbody > tr > td {
       padding-left: 40%;
     }
