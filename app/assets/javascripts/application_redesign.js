@@ -27,6 +27,7 @@
 //= require functions_redesign.js
 
 //= require helpers
+//= require_tree ./partials/modals
 //= require partials/helpers/site_version
 //= require partials/helpers/alert
 //= require partials/helpers/product_side_selector_panel
