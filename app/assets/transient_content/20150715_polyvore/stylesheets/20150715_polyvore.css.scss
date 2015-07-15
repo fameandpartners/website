@@ -1,15 +1,19 @@
+
+
 .polyvore_201507_modal.email-capture-modal {
   .vex-content {
     background-color:      #ffffff;
     background-image:      url('modals/polyvore_black_on_white.png');
     background-position-y: 25px;
     background-position-x: center;
-    width:                 60%;
+    min-width:             75%;
     background-repeat:     no-repeat;
     border:                1px solid black;
     text-transform:        uppercase;
 
     .vex-dialog-form {
+      margin-top: 90px;
+
       .vex-dialog-buttons {
         .vex-dialog-button-secondary.vex-dialog-button.vex-last {
           border:            none;
@@ -25,8 +29,6 @@
           margin-right:      7px;
         }
       }
-
-      margin-top: 90px;
 
       .vex-dialog-message {
         text-align: center;
@@ -96,7 +98,7 @@
 
             &.btn {
               margin-left: 5px;
-              width:       6rem;
+              width:       7rem;
             }
           }
         }
@@ -132,6 +134,34 @@
       background-color: #ffffff;
       color:            #000000;
       margin:           0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .polyvore_201507_modal.email-capture-modal {
+    .vex-content { width: 95%;
+      .vex-dialog-form {
+        .vex-dialog-input {
+          .vex-footer {
+            td.modal-panel {
+              display: block !important;
+              width:   100%;
+              padding: 0 20px;
+              //      text-align: center;
+            }
+            td.separator-panel {
+              display: block !important;;
+              width:   100%;
+
+              .or-rhombus {
+                max-width: 75px;
+                max-height: 75px;
+                margin: 10px auto; }
+            }
+          }
+        }
+      }
     }
   }
 }
