@@ -45,11 +45,12 @@ class CampaignMonitor
 
     subscriber.update(attributes[:email], attributes[:full_name], formatted_custom_fields, false)
   rescue StandardError => _error
+    NewRelic::Agent.notice_error(_error)
     begin
     # Yea, lets maybe 500 the app on login.
     CreateSend::Subscriber.add(list_id, attributes[:email], attributes[:full_name], formatted_custom_fields, false)
-    rescue CreateSendError => e
-      NewRelic::Agency.notice_error(e)
+    rescue StandardError => e
+      NewRelic::Agent.notice_error(e)
     end
   end
 end
