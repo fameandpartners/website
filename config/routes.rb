@@ -40,6 +40,7 @@ FameAndPartners::Application.routes.draw do
 
   get '/undefined',    to: 'mysterious_route#undefined'
   get '/au/undefined', to: 'mysterious_route#undefined'
+  get '/1000668',      to: 'mysterious_route#undefined'
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
