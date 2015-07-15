@@ -362,6 +362,7 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
+      get "search/order_owners" => 'search#order_owners'
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do

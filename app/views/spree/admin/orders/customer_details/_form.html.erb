@@ -1,5 +1,62 @@
-<fieldset data-hook="admin_customer_detail_form_fields" class="no-border-top">
+<script type="text/javascript">
+  $( document ).ready(function() {
+    var user, row;
 
+    var renderUsers = function(users){
+      $tbody = $('#users-list').empty();
+      var user_id = parseInt($('#order_owner_id').val());
+
+      _.each((users || []), function(user_data, index, collection){
+        user = user_data.user;
+        row = $('<tr>', { class: (user.id == user_id ? 'even' : '')});
+        row.append($('<td>', { html: 
+          $('<a>', { text: user.email, href: '/admin/users/' + user.id })
+        }));
+        row.append($('<td>', { text: user.first_name }));
+        row.append($('<td>', { text: user.last_name }));
+        row.append($('<td>', { html: 
+          $('<a>', { href: '#', text: 'Choose', 'data-action': 'choose', 'data-id': user.id })
+        }));
+
+        $tbody.append(row);
+      });
+    };
+
+    $('#user-search-button').on('click', function(e){
+      e.preventDefault();
+
+      var user_data = {
+        first_name_cont: $('#first_name').val(),
+        last_name_cont:  $('#last_name').val(),
+        email_cont:      $('#email').val()
+      };
+
+      $.ajax({
+        url: "/admin/search/order_owners",
+        type: "GET",
+        dataType: "json",
+        data: { q: user_data }
+      }).success(function(data){
+        if (data && data.users) {
+          renderUsers(data.users);
+        };
+      });
+    });
+
+    $('fieldset.user-search-form legend').on('click', function(e){
+      $('fieldset.user-search-form > .row').toggle();
+    });
+
+    $('fieldset.user-search-form table').on('click', 'a[data-action=choose]', function(e) {
+      e.preventDefault();
+      var $link = $(e.currentTarget);
+      $link.closest('tr').addClass('even').siblings('.even').removeClass('even');
+      $('#order_owner_id').val($link.data('id'));
+    });
+  });
+</script>
+
+<fieldset data-hook="admin_customer_detail_form_fields" class="no-border-top">
   <fieldset class="index no-border-bottom" data-hook="customer_guest">
     <legend align="center"><%= t(:account) %></legend>
 
@@ -19,15 +76,6 @@
                 <%= @order.user.nil? ? t(:yes) : t(:no) %>
               </li>
 
-              <% if @order.user.blank? %>
-              <div class="field">
-                <%= f.label :user_id, 'User :' %>
-                <% opts = options_from_collection_for_select(Spree::User.where(:email => @order.email), :id, :to_s) %>
-                <%= f.select :user_id, opts, {:include_blank => true } %>
-
-              </div>
-              <% end %>
-
             <% else %>
               <% guest = @order.user.nil? || @order.user.anonymous? %>
               <li>
@@ -38,14 +86,65 @@
                 <%= radio_button_tag :guest_checkout, false, !guest, :disabled => @order.cart? %>
                 <%= t(:no) %>
               </li>
-              <%= hidden_field_tag :user_id, @order.user_id %>
-
             <% end %>
+
+            <%= f.hidden_field :user_id, value: @order.user_id, id: 'order_owner_id' %>
           </ul>
         </div>
       </div>
     </div>
   </fieldset>
+
+  <% if @order.completed? %>
+    <fieldset class="index no-border-bottom user-search-form">
+      <legend style="cursor: pointer;" align="center">Change User Owner</legend>
+
+      <div class="row" style="display: none;">
+        Type user credentials and choose required user from list. update user
+      </div>
+
+      <div class="row" style="display: none;">
+        <div class="alpha six columns">
+          <div class="field">
+            <%= f.label :first_name, t(:first_name) + ':' %>
+            <%= text_field_tag :first_name, @order.user_first_name, :class => 'fullwidth' %>
+          </div>
+        </div>
+        <div class="alpha six columns">
+          <div class="field">
+            <%= f.label :last_name, t(:last_name) + ':' %>
+            <%= text_field_tag :last_name, @order.user_last_name, :class => 'fullwidth' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="display: none;">
+        <div class="alpha eight columns">
+          <div class="field">
+            <%= f.label :email, t(:email) + ':' %>
+            <%= text_field_tag :email, @order.email, :class => 'fullwidth' %>
+          </div>
+        </div>
+        <div class="alpha four columns">
+          <div class="field">
+            <%= link_to t(:search), '#', class: 'icon-search button', id: 'user-search-button' %>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="display: none;">
+        <table class="index" id="users-list">
+          <colgroup>
+            <col style="width: 40%;"></col>
+            <col style="width: 20%;"></col>
+            <col style="width: 20%;"></col>
+            <col style="width: 20%;"></col>
+          </colgroup>
+          <tbody></tbody>
+        </table>
+      </div>
+    </fieldset>
+  <% end %>
+
 
   <div data-hook="bill_address_wrapper" class="alpha six columns">
     <fieldset class="no-border-bottom">
