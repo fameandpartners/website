@@ -1,7 +1,9 @@
 = content_for :head do
   meta name="robots" content="noindex, follow"
 
-- @collection.products = Revolution::ProductService.new(params[:pids], current_site_version).products + @collection.products
+- unless params[:style] || params[:bodyshape] || params[:colour]
+  - @collection.products = Revolution::ProductService.new(params[:pids], current_site_version).products + @collection.products
+
 - image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:img] || 'default'}.jpg"
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
@@ -13,7 +15,7 @@
       p= params[:s]
 
 .page-content.products-collections.category
-  = render :partial => '/products/collections/filters', :locals => { :hidden => true }
+  = render :partial => '/products/collections/filters'
 
   .container.relative.products-collection
     = render partial: '/products/collections/products_without_content'
