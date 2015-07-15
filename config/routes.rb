@@ -87,6 +87,8 @@ FameAndPartners::Application.routes.draw do
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
     #edits
+    get '/lookbook/garden-party' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_party_collection
+
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
     get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
 
