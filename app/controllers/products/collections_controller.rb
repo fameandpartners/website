@@ -35,7 +35,6 @@ class Products::CollectionsController < Products::BaseController
   before_filter :load_page, :set_collection_resource, :set_collection_seo_meta_data
 
   def show
-
     @filter = Products::CollectionFilter.read
 
     @collection.use_auto_discount!(current_promotion.discount) if current_promotion

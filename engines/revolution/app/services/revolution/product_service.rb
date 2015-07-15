@@ -11,7 +11,7 @@ module Revolution
     end
 
     def products
-      products = spree_products.each_with_index.collect do |p, i|
+      spree_products.each_with_index.collect do |p, i|
         colour_name = colours[i]
 
         images = p.images.find_all{|i| i.attachment_file_name.downcase.include?(colour_name.gsub('-', '_')) && i.attachment_file_name.downcase.include?('crop') }
@@ -29,7 +29,6 @@ module Revolution
           :color => color
         )
       end
-      OpenStruct.new(:products => products)
     end
 
     def spree_products

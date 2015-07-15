@@ -1,8 +1,10 @@
 = content_for :head do
   meta name="robots" content="noindex, follow"
 
-- @collection =  Revolution::ProductService.new(params[:pids], current_site_version).products
+- @collection.products = Revolution::ProductService.new(params[:pids], current_site_version).products + @collection.products
 - image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:img] || 'default'}.jpg"
+
+= render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
 .page-title.default.category-header style="background-image: url('#{image}')"
   .container
@@ -15,3 +17,6 @@
 
   .container.relative.products-collection
     = render partial: '/products/collections/products_without_content'
+
+  .row.relative.more-products
+    = link_to 'More Dresses', dresses_path, class: 'btn btn-black'

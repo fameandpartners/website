@@ -87,7 +87,7 @@ FameAndPartners::Application.routes.draw do
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
-    get '/mystyle' => 'revolution/pages#show'
+    get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
     #edits
     get '/lookbook/garden-party' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_party_collection
