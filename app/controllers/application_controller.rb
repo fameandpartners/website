@@ -45,8 +45,8 @@ class ApplicationController < ActionController::Base
     # Add to cart and submitting forms should not change site version
     return if (!request.get? || request.xhr? || request.path == '/checkout')
 
-    if param_site_version != cookies[:site_version]
-      @current_site_version = SiteVersion.by_permalink_or_default(param_site_version)
+    if site_version_param != current_site_version.code
+      @current_site_version = SiteVersion.by_permalink_or_default(site_version_param)
     end
   end
 

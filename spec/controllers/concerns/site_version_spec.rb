@@ -21,12 +21,12 @@ describe Concerns::SiteVersion, type: :controller do
     pending 'This method needs refactoring'
   end
 
-  describe '#param_site_version' do
+  describe '#site_version_param' do
     context 'params site version is set' do
       before(:each) { controller.params[:site_version] = 'pt' }
 
       it 'returns the params site version' do
-        expect(controller.param_site_version).to eq('pt')
+        expect(controller.site_version_param).to eq('pt')
       end
     end
 
@@ -36,7 +36,7 @@ describe Concerns::SiteVersion, type: :controller do
       before(:each) { expect(SiteVersion).to receive(:default).and_return(australian_site_verison) }
 
       it 'returns the default site version code' do
-        expect(controller.param_site_version).to eq('au')
+        expect(controller.site_version_param).to eq('au')
       end
     end
   end

@@ -28,7 +28,7 @@ module Concerns::SiteVersion
     end
   end
 
-  def param_site_version
+  def site_version_param
     params[:site_version] || SiteVersion.default.code
   end
 
