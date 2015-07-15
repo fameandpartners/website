@@ -1,6 +1,6 @@
 / Modal for Polyvore Campaign
 / 2015.07.15
-- if params[:mid] == 'polyvore'
+- if params[:mid] == 'polyvore001'
   - promocode = 'FAMExPOLYVORE'
 
   javascript:
@@ -16,7 +16,7 @@
           container: "#modal-popup-content-template.polyvore_201507_modal",
           timeout: 10,
           timer: false,
-          force: false
+          force: true
         });
 
         polyvore_popup.success = function (data) {
