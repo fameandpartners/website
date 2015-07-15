@@ -1,5 +1,5 @@
 module Revolution
-  class PagesController < ApplicationController
+  class PagesController < ::ApplicationController
     attr_reader :page
     helper_method :page
 
