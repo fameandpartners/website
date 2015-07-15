@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
   layout 'redesign/application'
 
-  skip_before_filter :check_site_version
+  before_filter :guarantee_site_version_cookie
   before_filter :force_redirection_to_current_site_version
 
   def show
@@ -13,13 +13,13 @@ class IndexController < ApplicationController
     end
   end
 
-  private
+  def guarantee_site_version_cookie
+    cookies[:site_version] ||= site_version_param
+  end
 
   def force_redirection_to_current_site_version
-    user_site_version = cookies[:site_version] || current_site_version.code
-
-    if param_site_version != user_site_version
-      site_version = SiteVersion.by_permalink_or_default(user_site_version)
+    if cookies[:site_version] != site_version_param
+      site_version = SiteVersion.by_permalink_or_default(cookies[:site_version])
       redirect_to LocalizeUrlService.localize_url(request.url, site_version)
     end
   end
