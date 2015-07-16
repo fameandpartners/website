@@ -1,18 +1,18 @@
 = content_for :head do
   meta name="robots" content="noindex, follow"
 
-- unless params[:style] || params[:bodyshape] || params[:colour]
+- if params[:pids]
   - @collection.products = Revolution::ProductService.new(params[:pids], current_site_version).products + @collection.products
 
-- image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:img] || 'default'}.jpg"
+- image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:lpi] || 'default'}.jpg"
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
 .page-title.default.category-header style="background-image: url('#{image}')"
   .container
     .page-title--details
-      h1.no-padding-bottom = params[:t]
-      p= params[:s]
+      h1.no-padding-bottom = params[:lpt]
+      p= params[:lps]
 
 .page-content.products-collections.category
   = render :partial => '/products/collections/filters'
