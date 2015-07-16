@@ -27,7 +27,7 @@ module Feeds
 
             @items.each do |item|
               xml.item do
-                xml.title item[:title]
+                xml.title title(item)
                 xml.link "#{@config[:domain]}#{helpers.collection_product_path(item[:product], color: item[:color].parameterize)}"
                 xml.description product_description(item)
 
@@ -74,6 +74,11 @@ module Feeds
       end
 
       private
+
+      # @override
+      def title(item)
+        item[:title]
+      end
 
       # @override
       def image_link(item)

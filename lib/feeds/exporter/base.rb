@@ -37,7 +37,7 @@ module Feeds
         current_site_version.currency
       end
 
-      %w(image_link product_description).each do |method_name|
+      %w(title image_link product_description).each do |method_name|
         define_method(method_name) do |argument|
           raise NotImplementedError, "#{self.class} does not implement private method ##{method_name}"
         end
