@@ -13,6 +13,14 @@ module Feeds
       private
 
       # @override
+      def title(item)
+        styles       = item[:styles].first(2).join(' ')
+        product_name = item[:title]
+
+        "#{styles} #{product_name}"
+      end
+
+      # @override
       def image_link(item)
         url = URI.encode(CDN_HOST + image_filename(item))
 
