@@ -7,8 +7,16 @@ module Feeds
       attr_accessor :current_site_version
 
       attr_reader :logger
-      def initialize(logger: )
+      def initialize(logger: nil)
         @logger = logger || Logger.new($stdout)
+      end
+
+      def export
+        raise NotImplementedError, "#{self.class} does not implement public method #export"
+      end
+
+      def export_file_name
+        raise NotImplementedError, "#{self.class} does not implement public method #export_file_name"
       end
 
       private
