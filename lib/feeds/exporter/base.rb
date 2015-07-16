@@ -38,33 +38,6 @@ module Feeds
       def product_description(item)
         raise NotImplementedError, "#{self.class} does not implement private method #product_description"
       end
-
-      def collection_product_path(product, options = {})
-        path_parts = ['dresses']
-        if product.respond_to?(:descriptive_url)
-          path_parts << product.descriptive_url
-        else
-          path_parts << descriptive_url(product)
-        end
-
-        if options[:color].nil? && product.respond_to?(:color) && product.color.try(:name)
-          options.merge!({ color: product.color.name })
-        end
-
-        path =  '/' + path_parts.compact.join('/')
-        path = "#{path}?#{options.to_param}" if options.present?
-
-        url_without_double_slashes(path)
-      end
-
-      def descriptive_url(product)
-        parts = ['dress', product.name.parameterize, product.id]
-        parts.reject(&:blank?).join('-')
-      end
-
-      def url_without_double_slashes(url)
-        url.gsub(/\w+(\/\/)/){ |a| a.sub('//', '/') }
-      end
     end
   end
 end

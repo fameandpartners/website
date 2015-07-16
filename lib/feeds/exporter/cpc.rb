@@ -21,7 +21,7 @@ module Feeds
             @items.each do |item|
               xml.item do
                 xml.title item[:title]
-                xml.link "#{@config[:domain]}#{collection_product_path(item[:product], color: item[:color].parameterize)}"
+                xml.link "#{@config[:domain]}#{helpers.collection_product_path(item[:product], color: item[:color].parameterize)}"
                 xml.description product_description(item)
 
                 # Event, Style and Lookbook
