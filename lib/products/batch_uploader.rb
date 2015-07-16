@@ -449,10 +449,8 @@ module Products
         product.set_property(name, value)
       end
 
-      if args[:factory_name].present?
-        if factory = Factory.find_by_name(args[:factory_name].capitalize)
-          product.factory = factory
-        end
+      if args[:factory_name] && factory = Factory.find_by_name(args[:factory_name].capitalize)
+        product.factory = factory
       end
 
       product
