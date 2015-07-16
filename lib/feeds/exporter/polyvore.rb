@@ -14,10 +14,10 @@ module Feeds
 
       # @override
       def title(item)
-        styles       = item[:styles].first(2).join(' ')
+        styles       = item[:styles].first(2).join(' ').titleize
         product_name = item[:title]
 
-        "#{styles} #{product_name}"
+        [styles, product_name].reject(&:blank?).join(' ')
       end
 
       # @override
