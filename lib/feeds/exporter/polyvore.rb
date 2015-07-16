@@ -33,11 +33,11 @@ module Feeds
 
       # @override
       def product_description(item)
-        events = item[:events].join(', ')
+        events = item[:events].map { |e| e.titleize.pluralize }.join(', ')
         styles = item[:styles].join(', ')
 
         product_description = fabric_description(item)
-        product_description += ". Events: #{events}" unless events.blank?
+        product_description += ". Perfect for these events: #{events}" unless events.blank?
         product_description += ". Styles: #{styles}" unless styles.blank?
       end
 
