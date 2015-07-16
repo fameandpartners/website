@@ -3,7 +3,6 @@ module Feeds
     class Base
       attr_accessor :items
       attr_accessor :config
-      attr_accessor :properties
       attr_accessor :current_site_version
 
       attr_reader :logger
