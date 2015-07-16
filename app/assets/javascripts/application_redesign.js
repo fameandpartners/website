@@ -21,7 +21,7 @@
 //= require "styleguide/js/functions.js"
 //  require js/jquery.skippr.min.js # copied non-min version, to debug&patch
 // require js/main.js
-
+//= require "styleguide/js/collapse.js"
 
 //  require js/superslides.js # copied to libs/superslides for easier monkey-patching
 //= require functions_redesign.js
@@ -68,6 +68,8 @@
 
 // campaigns
 //= require partials/fitgau_reminder
+
+//= require bootstrap
 
 jQuery(document).ready(function($){
   $('#forgot-password').on('click', function(e) {
