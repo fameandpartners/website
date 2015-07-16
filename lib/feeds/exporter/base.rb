@@ -11,12 +11,10 @@ module Feeds
         @logger = logger || Logger.new($stdout)
       end
 
-      def export
-        raise NotImplementedError, "#{self.class} does not implement public method #export"
-      end
-
-      def export_file_name
-        raise NotImplementedError, "#{self.class} does not implement public method #export_file_name"
+      %w(export export_file_name).each do |method_name|
+        define_method(method_name) do
+          raise NotImplementedError, "#{self.class} does not implement public method ##{method_name}"
+        end
       end
 
       private
@@ -39,12 +37,10 @@ module Feeds
         current_site_version.currency
       end
 
-      def image_link(item)
-        raise NotImplementedError, "#{self.class} does not implement private method #image_link"
-      end
-
-      def product_description(item)
-        raise NotImplementedError, "#{self.class} does not implement private method #product_description"
+      %w(image_link product_description).each do |method_name|
+        define_method(method_name) do |argument|
+          raise NotImplementedError, "#{self.class} does not implement private method ##{method_name}"
+        end
       end
     end
   end
