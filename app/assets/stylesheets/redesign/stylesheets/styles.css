@@ -9037,7 +9037,6 @@ xheader
 /* line 52, ../sass/_cart.scss */
 .arrow-bag {
   width: 20px !important;
-  transform: rotate(180deg) !important;
   height: 20px !important;
 }
 
