@@ -1,13 +1,20 @@
 module Feeds
   module Exporter
     class CPC < Base
+
+      # @override
       def export_file_name
         'google.xml'
       end
 
+      # @override
       def export
-        output = ''
-        xml = Builder::XmlMarkup.new(target: output)
+        xml = generate
+        save(xml)
+      end
+
+      def generate
+        xml = Builder::XmlMarkup.new
 
         xml.instruct! :xml, version: '1.0', encoding: 'UTF-8'
 
@@ -55,12 +62,14 @@ module Feeds
             end
           end
         end
+      end
 
+      def save(xml)
         require 'fileutils'
         FileUtils::mkdir_p(File.dirname(export_file_path))
 
         file = File.open(export_file_path, 'w')
-        file.write(output.to_s)
+        file.write(xml)
         file.close
       end
 
