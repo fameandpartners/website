@@ -526,6 +526,9 @@ li#cart-trigger {
       width:100%;
       li{
         margin-left: 20px;
+        @media(min-width: 760px){
+          margin-left: 0px;
+        }
         width:100%;
         clear:both;
         .dropdown-toggle{
