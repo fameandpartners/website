@@ -125,65 +125,66 @@ ruby:
       a.navbar-brand href="#"  SHOP
       a#close
         = image_tag('hamburger.png')
-    ul.nav.navbar-nav.main-menu
-      li.open
-        a.dropdown-toggle data-toggle="dropdown" href="#"
-          | EVENTS
-          span.arrow
-            = image_tag('icon-arrow-right.png')
-        ul.dropdown-menu
-          li = link_to 'Formal Dresses'        , build_taxon_path('Formal')
-          li = link_to 'Wedding Dresses'       , build_taxon_path('Wedding')
-          li = link_to 'Birthday Dresses'      , build_taxon_path('Birthday')
-          li = link_to 'Special Event Dresses' , build_taxon_path('Special Event')
-          li = link_to 'Ball Gowns Dresses'    , build_taxon_path('Ball Gowns')
-          li = link_to 'Bridesmaid Dresses'    , bridesmaid_collection_path
-          li = link_to 'Graduation Dresses'    , build_taxon_path('Graduation')
-          li = link_to 'Prom Dresses'          , build_taxon_path('Prom')
-          li = link_to 'Homecoming Dresses'    , build_taxon_path('Homecoming')
-          li = link_to 'Sweet 16 Dresses'      , build_taxon_path('Sweet 16')
-          li = link_to 'Debutante Dresses'     , build_taxon_path('Debutante')
-      li
-        a.dropdown-toggle data-toggle="dropdown" href="#"
-          | STYLES
-          span.arrow
-            = image_tag('icon-arrow-right.png')
-        ul.dropdown-menu
-          li = link_to 'Plus Size Dresses'    , build_taxon_path('Plus Size')
-          li = link_to 'Two-Piece Dresses'    , build_taxon_path('Two Piece')
-          li = link_to 'One Shoulder Dresses' , build_taxon_path('One-Shoulder')
-          li = link_to 'Strapless Dresses'    , build_taxon_path('Strapless')
-          li = link_to 'V-Neck Dresses'       , build_taxon_path('V-Neck')
-          li = link_to 'Split Dresses'        , build_taxon_path('Split')
-          li = link_to 'Backless Dresses'     , build_taxon_path('Backless')
-          li = link_to 'Lace Dresses'         , build_taxon_path('Lace')
-      li
-        a.dropdown-toggle data-toggle="dropdown" href="#"
-          | COLORS
-          span.arrow
-            = image_tag('icon-arrow-right.png')
-        ul.dropdown-menu
-          li = link_to 'Black Dresses'         , colour_path('Black')
-          li = link_to 'White / Ivory Dresses' , colour_path('White')
-          li = link_to 'Blue Dresses'          , colour_path('Blue')
-          li = link_to 'Pink Dresses'          , colour_path('Pink')
-          li = link_to 'Red Dresses'           , colour_path('Red')
-          li = link_to 'Pastel Dresses'        , colour_path('Pastel')
-      li
-        a.dropdown-toggle data-toggle="dropdown" href="#"
-          | EXPRESS MAKING
-          span.arrow
-            = image_tag('icon-arrow-right.png')
-        ul.dropdown-menu
-          li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
-    .all-dresses
-      = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
-    .clearfix
-    .account-login
-      = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
-        = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
-        span
-          | Account login
+    .main-menu
+      ul.nav.navbar-nav
+        li.open
+          a.dropdown-toggle data-toggle="dropdown" href="#"
+            | EVENTS
+            span.arrow
+              = image_tag('icon-arrow-right.png')
+          ul.dropdown-menu
+            li = link_to 'Formal Dresses'        , build_taxon_path('Formal')
+            li = link_to 'Wedding Dresses'       , build_taxon_path('Wedding')
+            li = link_to 'Birthday Dresses'      , build_taxon_path('Birthday')
+            li = link_to 'Special Event Dresses' , build_taxon_path('Special Event')
+            li = link_to 'Ball Gowns Dresses'    , build_taxon_path('Ball Gowns')
+            li = link_to 'Bridesmaid Dresses'    , bridesmaid_collection_path
+            li = link_to 'Graduation Dresses'    , build_taxon_path('Graduation')
+            li = link_to 'Prom Dresses'          , build_taxon_path('Prom')
+            li = link_to 'Homecoming Dresses'    , build_taxon_path('Homecoming')
+            li = link_to 'Sweet 16 Dresses'      , build_taxon_path('Sweet 16')
+            li = link_to 'Debutante Dresses'     , build_taxon_path('Debutante')
+        li
+          a.dropdown-toggle data-toggle="dropdown" href="#"
+            | STYLES
+            span.arrow
+              = image_tag('icon-arrow-right.png')
+          ul.dropdown-menu
+            li = link_to 'Plus Size Dresses'    , build_taxon_path('Plus Size')
+            li = link_to 'Two-Piece Dresses'    , build_taxon_path('Two Piece')
+            li = link_to 'One Shoulder Dresses' , build_taxon_path('One-Shoulder')
+            li = link_to 'Strapless Dresses'    , build_taxon_path('Strapless')
+            li = link_to 'V-Neck Dresses'       , build_taxon_path('V-Neck')
+            li = link_to 'Split Dresses'        , build_taxon_path('Split')
+            li = link_to 'Backless Dresses'     , build_taxon_path('Backless')
+            li = link_to 'Lace Dresses'         , build_taxon_path('Lace')
+        li
+          a.dropdown-toggle data-toggle="dropdown" href="#"
+            | COLORS
+            span.arrow
+              = image_tag('icon-arrow-right.png')
+          ul.dropdown-menu
+            li = link_to 'Black Dresses'         , colour_path('Black')
+            li = link_to 'White / Ivory Dresses' , colour_path('White')
+            li = link_to 'Blue Dresses'          , colour_path('Blue')
+            li = link_to 'Pink Dresses'          , colour_path('Pink')
+            li = link_to 'Red Dresses'           , colour_path('Red')
+            li = link_to 'Pastel Dresses'        , colour_path('Pastel')
+        li
+          a.dropdown-toggle data-toggle="dropdown" href="#"
+            | EXPRESS MAKING
+            span.arrow
+              = image_tag('icon-arrow-right.png')
+          ul.dropdown-menu
+            li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
+      .all-dresses
+        = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
+      .clearfix
+      .account-login
+        = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
+          = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
+          span
+            | Account login
 
 
 

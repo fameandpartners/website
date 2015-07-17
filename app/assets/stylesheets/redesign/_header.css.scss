@@ -505,7 +505,7 @@ li#cart-trigger {
   top: 0;
   width: 20em;
   z-index: 2000;
-
+  background-color: #f8f8f8;
   .open{
     -webkit-transition: all 5s;
   }
@@ -529,7 +529,7 @@ li#cart-trigger {
         width:100%;
         clear:both;
         .dropdown-toggle{
-          background-color: transparent;
+          background-color: #f8f8f8;
           padding-top: 20px;
           padding-bottom: 20px;
           ul {
@@ -561,6 +561,7 @@ li#cart-trigger {
   }
 
   .all-dresses{
+    background-color: #f8f8f8;
     input {
       width: 265px;
       padding-top: 1px;
@@ -569,10 +570,12 @@ li#cart-trigger {
       margin-top:20px;
     }
   }
+
   .account-login{
     padding-bottom: 20px;
     text-align: center;
     margin-top:20px;
+    background-color: #f8f8f8;
     span{
       margin-left: 10px;
     }
