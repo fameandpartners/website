@@ -53,6 +53,9 @@ script.disable_dynamic: false
 
 ### Database
 
+
+**For more information on EngineYard database management, see `doc/howto_backup_restore_engineyard_databases.md` **
+
 It is generally easiest to have working development application with loading database dump from production/preprod site, and restoring them locally.
 
 * download latest dump from production ( through web interface from engine yard )
