@@ -8907,32 +8907,6 @@ p {
   margin-top: 15px;
 }
 
-/* line 3, ../sass/_mobile-menu.scss */
-.mobile-menu {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 2000;
-  border-top: 2px solid white;
-}
-
-/* line 12, ../sass/_mobile-menu.scss */
-.mobile-menu-icon {
-  background: #000;
-  border-right: 2px solid white;
-  padding: 20px;
-  color: white;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 0.8em;
-  font-weight: bold;
-}
-
-/* line 23, ../sass/_mobile-menu.scss */
-.mobile-menu-icon a {
-  color: white;
-}
-
 /* line 27, ../sass/_mobile-menu.scss */
 .mobile-active {
   background: #333;

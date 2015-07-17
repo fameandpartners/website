@@ -40,7 +40,6 @@
 
 //= require partials/email_newsletter_subscriber
 //= require partials/email_capture_modal
-//= require partials/mobile_menu
 //= require partials/helpers/tracker.js.coffee
 //= require partials/helpers/error_messages.js.coffee
 
