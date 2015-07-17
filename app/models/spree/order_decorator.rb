@@ -130,8 +130,18 @@ Spree::Order.class_eval do
   end
 
   def promotions
+    applied_promotions | eligible_pending_promotions
+  end
+
+  def applied_promotions
     self.adjustments.promotion.eligible.map do |credit|
       credit.originator.promotion
+    end
+  end
+
+  def eligible_pending_promotions
+    self.adjustments.promotion.select(&:eligible_for_originator?).collect do |adj|
+      adj.originator.promotion
     end
   end
 
@@ -142,7 +152,7 @@ Spree::Order.class_eval do
   end
 
   def coupon_code_added_promotion
-    promotions.find {|promo| promo.event_name == "spree.checkout.coupon_code_added" }
+    promotions.detect {|promo| promo.event_name == "spree.checkout.coupon_code_added" }
   end
 
   def confirmation_required?
