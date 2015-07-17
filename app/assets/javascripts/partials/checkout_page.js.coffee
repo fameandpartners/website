@@ -8,7 +8,17 @@ page.initCheckoutEditPage = () ->
         $('.auth-alert').hide()
       )
 
-      $(document).on('change',  '#order_use_billing', page.updateShippingFormVisibility)
+      @ship_to_different_address = $("input[name='ship_to_address']:first").prop("checked") == false
+      $("input[name='ship_to_address']:first").click =>
+        @ship_to_different_address = false
+        page.updateShippingFormVisibility()
+
+
+      $("input[name='ship_to_address']:last").click =>
+        @ship_to_different_address = true
+        page.updateShippingFormVisibility()
+
+
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
       $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
 
@@ -127,7 +137,7 @@ page.initCheckoutEditPage = () ->
       #$('.selectbox').not('.chosen-container').chosen()
 
     updateShippingFormVisibility: () ->
-      if $('#order_use_billing').is(':checked')
+      if @ship_to_different_address == false
         $('[data-hook="shipping_inner"]').hide()
         $('[data-hook="shipping_inner"]').find(':input').prop('disabled', true)
       else

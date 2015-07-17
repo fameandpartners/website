@@ -4,7 +4,7 @@
 - if current_step.eql?('address')
 
   - if not signed_in?
-    h2.checkout-section-title Log In if you have an account
+    h2.checkout-section-title 1. Log In if you have an account
     .auth-alert.alert-dismissible.fade.in.alert-danger
       button type="button" class="close" data-dismiss="alert" aria-label="Close" x
       h3.alert-danger
@@ -33,7 +33,7 @@
 
     = hidden_field_tag :create_account, :value => true
 
-    h2.checkout-section-title  Billing Address
+    h2.checkout-section-title 2. Billing Address
     / br
     .form-wrapper data-hook='billing_inner'
       = form.fields_for :bill_address do |bill_form|
@@ -44,18 +44,16 @@
         = form.label :customer_notes
         = form.text_field :customer_notes, class: 'required form-control form-control-md'
 
-    h2.checkout-section-title  Shipping Address
     .row
       .col-md-6
         .form-group
-          .checkbox-gray-md
-            = label_tag :order_use_billing, :id => 'use_billing' do
-              = check_box_tag 'order[use_billing]', '1', ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
-              span.checkbox-label
-                =' t(:use_billing_address)
-                br
-                small
-                  ' (Use billing address)
+          = radio_button_tag 'ship_to_address', 'Ship to this address', ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
+          span.shipAddress
+            | Ship to this address
+          .clearfix
+          = radio_button_tag 'ship_to_address', 'Ship to different address', !((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
+          span.shipAddress
+            | Ship to different address
 
     .form-wrapper data-hook='shipping_inner'
       = form.fields_for :ship_address do |ship_form|
