@@ -1,3 +1,11 @@
+<style type="text/css">
+  .user-search-form.collapsed .row { display: none; }
+  .user-search-form.collapsed legend .icon-minus { display: none; }
+  .user-search-form legend .icon-plus { display: none; }
+  .user-search-form.collapsed legend .icon-plus { display: inline; }
+
+</style>
+
 <script type="text/javascript">
   $( document ).ready(function() {
     var user, row;
@@ -44,7 +52,7 @@
     });
 
     $('fieldset.user-search-form legend').on('click', function(e){
-      $('fieldset.user-search-form > .row').toggle();
+      $('fieldset.user-search-form').toggleClass("collapsed");
     });
 
     $('fieldset.user-search-form table').on('click', 'a[data-action=choose]', function(e) {
@@ -96,14 +104,20 @@
   </fieldset>
 
   <% if @order.completed? %>
-    <fieldset class="index no-border-bottom user-search-form">
-      <legend style="cursor: pointer;" align="center">Change User Owner</legend>
+    <fieldset class="index no-border-bottom user-search-form collapsed">
+      <legend style="cursor: pointer;" align="center">
+        <span class="icon-plus">&nbsp;</span>
+        <span class="icon-minus">&nbsp;</span>
+        &nbsp;
 
-      <div class="row" style="display: none;">
+        Change User Owner
+      </legend>
+
+      <div class="row">
         Type user credentials and choose required user from list. update user
       </div>
 
-      <div class="row" style="display: none;">
+      <div class="row">
         <div class="alpha six columns">
           <div class="field">
             <%= f.label :first_name, t(:first_name) + ':' %>
@@ -118,7 +132,7 @@
         </div>
       </div>
 
-      <div class="row" style="display: none;">
+      <div class="row">
         <div class="alpha eight columns">
           <div class="field">
             <%= f.label :email, t(:email) + ':' %>
@@ -131,7 +145,7 @@
           </div>
         </div>
       </div>
-      <div class="row" style="display: none;">
+      <div class="row">
         <table class="index" id="users-list">
           <colgroup>
             <col style="width: 40%;"></col>
