@@ -429,10 +429,176 @@ ul.secondary.pull-right {
 
 li#cart-trigger {
   span#cart-item-count {
+    @media (max-width: 480px) {
+      color: white;
+    }
     @media (max-width: 991px) {
       top: 0.7rem;
       left: -1.7rem;
       position: relative;
     }
   }
+  a {
+    @media (max-width: 320px) {
+      padding-left: 3px;
+      padding-right: 0px;
+    }
+    @media(min-width: 325px)and(max-width:400px){
+      padding-left: 15px;
+      padding-right: 5px;
+    }
+    @media(min-width: 400px)and(max-width:450px){
+      padding-left: 20px;
+      padding-right: 5px;
+    }
+  }
 }
+
+.hamburger {
+  margin-top: -10px;
+  border: none;
+  background-color: white;
+  button {
+    border: none;
+    background-color: white !important;
+    img{
+      width:30px;
+      opacity: 0.7;
+      margin-top: -15px;
+      margin-left: -5px;
+    }
+  }
+}
+
+.mobile-logo{
+  margin-top: -3px;
+
+  //iphone 4,5
+  @media(max-width: 320px){
+    margin-left: 60px;
+  }
+
+  //iphone 6
+  @media(min-width: 325px)and(max-width:380px){
+    margin-left: 90px;
+  }
+
+  //iphone 6plus
+  @media(min-width: 385px)and(max-width:420px){
+    margin-left: 110px;
+  }
+
+  //nexus 7
+  @media(min-width: 430px)and(max-width:610px){
+    margin-left: 125px;
+  }
+
+}
+
+#sideMenu {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  position: fixed;
+  left: -20em;
+  font-size: 15px;
+  top: 0;
+  width: 20em;
+  z-index: 2000;
+
+  .open{
+    -webkit-transition: all 5s;
+  }
+
+  .navbar-header {
+    background-color: #e7e7e7;
+    padding-top:7px;
+    padding-bottom:7px;
+    width:100%;
+    .nav-brand {
+      margin-left: 5px;
+
+    }
+  }
+  nav{
+    height:100%;
+    ul{
+      width:100%;
+      li{
+        margin-left: 20px;
+        width:100%;
+        clear:both;
+        .dropdown-toggle{
+          background-color: transparent;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          ul {
+            width: 100%;
+          }
+        }
+        .dropdown-menu{
+          position: static;
+          background-color: #f8f8f8;
+        }
+      }
+    }
+  }
+
+  #close {
+    font-size: 35px;
+    float: right;
+    margin-right: 10px;
+    margin-top:-8px;
+    img {
+      width:30px;
+      opacity: 0.7;
+    }
+  }
+
+  .caret {
+    float: right;
+    margin-right: 10px;
+  }
+
+  .all-dresses{
+    input {
+      width: 265px;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      height: 40px;
+      margin-top:20px;
+    }
+  }
+  .account-login{
+    padding-bottom: 20px;
+    text-align: center;
+    margin-top:20px;
+    span{
+      margin-left: 10px;
+    }
+    img{
+      margin-top: -4px;
+    }
+  }
+
+  a{
+    color:black;
+    font-weight: 500;
+  }
+
+  .arrow{
+    img{
+      width: 25px;
+      height: 25px;
+      transform: rotate(90deg);
+      float: right;
+      margin-right: 10px;
+    }
+    .clicked{
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+
+

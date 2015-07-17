@@ -46,125 +46,146 @@ ruby:
     "
   end
 
+  side_menu_init = "
+    window.app.side_menu = new SideMenu({
+      toggle_link:  '#side-menu-trigger',
+    });
+  "
 = content_for :inline_javascript do
   = raw init_items_counter_sync
   = raw init_moodboard_counter_sync
   = raw init_style_quiz
+  = raw side_menu_init
 
 - cache [:layout, :header, spree_user_signed_in?], expires_in: configatron.cache.expire.long do
   header
 
-    nav.navbar.navbar-default.visible-xs role="navigation"
-      .navbar-header
-        button.navbar-toggle data-target="#example-navbar-collapse" data-toggle="collapse" type="button"
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand href="#"  SHOP
-      #example-navbar-collapse.collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li
-            a.dropdown-toggle data-toggle="dropdown" href="#"
-              | EVENTS
-              b.caret
-            ul.dropdown-menu
-              li = link_to 'Formal Dresses'        , build_taxon_path('Formal')
-              li = link_to 'Wedding Dresses'       , build_taxon_path('Wedding')
-              li = link_to 'Birthday Dresses'      , build_taxon_path('Birthday')
-              li = link_to 'Special Event Dresses' , build_taxon_path('Special Event')
-              li = link_to 'Ball Gowns Dresses'    , build_taxon_path('Ball Gowns')
-              li = link_to 'Bridesmaid Dresses'    , bridesmaid_collection_path
-              li = link_to 'Graduation Dresses'    , build_taxon_path('Graduation')
-              li = link_to 'Prom Dresses'          , build_taxon_path('Prom')
-              li = link_to 'Homecoming Dresses'    , build_taxon_path('Homecoming')
-              li = link_to 'Sweet 16 Dresses'      , build_taxon_path('Sweet 16')
-              li = link_to 'Debutante Dresses'     , build_taxon_path('Debutante')
-          li
-            a.dropdown-toggle data-toggle="dropdown" href="#"
-              | STYLES
-              b.caret
-            ul.dropdown-menu
-              li = link_to 'Plus Size Dresses'    , build_taxon_path('Plus Size')
-              li = link_to 'Two-Piece Dresses'    , build_taxon_path('Two Piece')
-              li = link_to 'One Shoulder Dresses' , build_taxon_path('One-Shoulder')
-              li = link_to 'Strapless Dresses'    , build_taxon_path('Strapless')
-              li = link_to 'V-Neck Dresses'       , build_taxon_path('V-Neck')
-              li = link_to 'Split Dresses'        , build_taxon_path('Split')
-              li = link_to 'Backless Dresses'     , build_taxon_path('Backless')
-              li = link_to 'Lace Dresses'         , build_taxon_path('Lace')
-          li
-            a.dropdown-toggle data-toggle="dropdown" href="#"
-              | COLORS
-              b.caret
-            ul.dropdown-menu
-              li = link_to 'Black Dresses'         , colour_path('Black')
-              li = link_to 'White / Ivory Dresses' , colour_path('White')
-              li = link_to 'Blue Dresses'          , colour_path('Blue')
-              li = link_to 'Pink Dresses'          , colour_path('Pink')
-              li = link_to 'Red Dresses'           , colour_path('Red')
-              li = link_to 'Pastel Dresses'        , colour_path('Pastel')
-          li
-            a.dropdown-toggle data-toggle="dropdown" href="#"
-              | EXPRESS MAKING
-              b.caret
-            ul.dropdown-menu
-              li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
+    .nav-menu.nav-alert-top
+      .container-fluid.nav-menu-container
+        .masthead.pull-left.visible-xs.visible-sm
+          nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
+            .navbar-header
+              button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
+                = image_tag('hamburger.png')
+
+        .masthead.pull-left.hidden-xs
+          = link_to root_path
+            = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
 
+        .masthead.pull-left.visible-xs
+          = link_to root_path do
+            = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
+        ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
+          = render partial: 'layouts/redesign/mega_menu/shop'
+          = render partial: 'layouts/redesign/mega_menu/lookbook'
+          li.menu-item
+            = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
 
-    /.nav-menu.nav-alert-top
-      /.container-fluid.nav-menu-container
-        /.masthead.pull-left.hidden-xs
-          /= link_to root_path
-            /= image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
-/
-        /.masthead.pull-left.visible-xs
-          /= link_to root_path do
-            /= image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
-/
-        /ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
-          /= render partial: 'layouts/redesign/mega_menu/shop'
-          /= render partial: 'layouts/redesign/mega_menu/lookbook'
-          /li.menu-item
-            /= link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
-/
-        /ul.secondary.pull-right
-          /- if Features.active?(:moodboard)
-            /li.menu-item.hidden-xs.hidden-sm
-              /= link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
-                /span.visible-sm
-                  /= image_tag "Heart.svg"
-                /span.hidden-sm.hidden-xs#moodboard-counter
-                  /| Moodboard &nbsp;
-/
-          /li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
-            /= render "layouts/redesign/header/my_account_dropdown"
-/
+        ul.secondary.pull-right
+          - if Features.active?(:moodboard)
+            li.menu-item.hidden-xs.hidden-sm
+              = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
+                span.visible-sm
+                  = image_tag "Heart.svg"
+                span.hidden-sm.hidden-xs#moodboard-counter
+                  | Moodboard &nbsp;
+
+          li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
+            = render "layouts/redesign/header/my_account_dropdown"
+
           /li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs
             /= render "layouts/redesign/header/my_account_dropdown_mobile"
-/
-          /li.menu-item
-            /a.menu-item--link.search href="#"
-              /= image_tag "_icons/search.svg", class: "nav-mobile-logo"
-            /.search-bar.invis
-              /a.close-search href="#"
-                /= image_tag "close.svg", alt: 'Close'
-              /.container-fluid.search-form
-                /.col-md-6.col-md-offset-3
-                  /.col-md-10
-                    /.input-group.margin-bottom-sm
-                      /= form_tag search_path, method: :get do
-                        /input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
-                        /span
-                          /button.invis-fix Enter
-/
-          /li#cart-trigger.menu-item
-            /= link_to spree.checkout_path, class: 'menu-item--link' do
-              /span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
-              /span.hidden-sm.hidden-xs.hidden-xxs cart:
-              /span#cart-item-count 0
+
+          li.menu-item
+            a.menu-item--link.search href="#"
+              = image_tag "_icons/search.svg", class: "nav-mobile-logo"
+            .search-bar.invis
+              a.close-search href="#"
+                = image_tag "close.svg", alt: 'Close'
+              .container-fluid.search-form
+                .col-md-6.col-md-offset-3
+                  .col-md-10
+                    .input-group.margin-bottom-sm
+                      = form_tag search_path, method: :get do
+                        input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
+                        span
+                          button.invis-fix Enter
+
+          li#cart-trigger.menu-item
+            = link_to spree.checkout_path, class: 'menu-item--link' do
+              span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
+              span.hidden-sm.hidden-xs.hidden-xxs cart:
+              span#cart-item-count 0
+
+#sideMenu
+  nav.navbar.navbar-default.visible-xs.visible-sm
+    .navbar-header
+      a.navbar-brand href="#"  SHOP
+      a#close
+        = image_tag('hamburger.png')
+    ul.nav.navbar-nav.main-menu
+      li.open
+        a.dropdown-toggle data-toggle="dropdown" href="#"
+          | EVENTS
+          span.arrow
+            = image_tag('icon-arrow-right.png')
+        ul.dropdown-menu
+          li = link_to 'Formal Dresses'        , build_taxon_path('Formal')
+          li = link_to 'Wedding Dresses'       , build_taxon_path('Wedding')
+          li = link_to 'Birthday Dresses'      , build_taxon_path('Birthday')
+          li = link_to 'Special Event Dresses' , build_taxon_path('Special Event')
+          li = link_to 'Ball Gowns Dresses'    , build_taxon_path('Ball Gowns')
+          li = link_to 'Bridesmaid Dresses'    , bridesmaid_collection_path
+          li = link_to 'Graduation Dresses'    , build_taxon_path('Graduation')
+          li = link_to 'Prom Dresses'          , build_taxon_path('Prom')
+          li = link_to 'Homecoming Dresses'    , build_taxon_path('Homecoming')
+          li = link_to 'Sweet 16 Dresses'      , build_taxon_path('Sweet 16')
+          li = link_to 'Debutante Dresses'     , build_taxon_path('Debutante')
+      li
+        a.dropdown-toggle data-toggle="dropdown" href="#"
+          | STYLES
+          span.arrow
+            = image_tag('icon-arrow-right.png')
+        ul.dropdown-menu
+          li = link_to 'Plus Size Dresses'    , build_taxon_path('Plus Size')
+          li = link_to 'Two-Piece Dresses'    , build_taxon_path('Two Piece')
+          li = link_to 'One Shoulder Dresses' , build_taxon_path('One-Shoulder')
+          li = link_to 'Strapless Dresses'    , build_taxon_path('Strapless')
+          li = link_to 'V-Neck Dresses'       , build_taxon_path('V-Neck')
+          li = link_to 'Split Dresses'        , build_taxon_path('Split')
+          li = link_to 'Backless Dresses'     , build_taxon_path('Backless')
+          li = link_to 'Lace Dresses'         , build_taxon_path('Lace')
+      li
+        a.dropdown-toggle data-toggle="dropdown" href="#"
+          | COLORS
+          span.arrow
+            = image_tag('icon-arrow-right.png')
+        ul.dropdown-menu
+          li = link_to 'Black Dresses'         , colour_path('Black')
+          li = link_to 'White / Ivory Dresses' , colour_path('White')
+          li = link_to 'Blue Dresses'          , colour_path('Blue')
+          li = link_to 'Pink Dresses'          , colour_path('Pink')
+          li = link_to 'Red Dresses'           , colour_path('Red')
+          li = link_to 'Pastel Dresses'        , colour_path('Pastel')
+      li
+        a.dropdown-toggle data-toggle="dropdown" href="#"
+          | EXPRESS MAKING
+          span.arrow
+            = image_tag('icon-arrow-right.png')
+        ul.dropdown-menu
+          li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
+    .all-dresses
+      = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
+    .clearfix
+    .account-login
+      = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
+        = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
+        span
+          | Account login
+
+
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 

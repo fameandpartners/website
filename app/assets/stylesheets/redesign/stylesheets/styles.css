@@ -8771,7 +8771,7 @@ p {
   transition: opacity ease-in-out 0.2s;
   -webkit-transition: opacity ease-in-out 0.2s;
   height: 100%;
-  max-width: 220px;
+  max-width: 200px;
 }
 /* line 35, ../sass/_nav.scss */
 .nav-logo:hover {
