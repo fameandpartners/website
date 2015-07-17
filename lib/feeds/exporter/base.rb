@@ -3,12 +3,17 @@ module Feeds
     class Base
       attr_accessor :items
       attr_accessor :config
-      attr_accessor :properties
       attr_accessor :current_site_version
 
       attr_reader :logger
-      def initialize(logger: )
+      def initialize(logger: nil)
         @logger = logger || Logger.new($stdout)
+      end
+
+      %w(export export_file_name).each do |method_name|
+        define_method(method_name) do
+          raise NotImplementedError, "#{self.class} does not implement public method ##{method_name}"
+        end
       end
 
       private
@@ -31,39 +36,10 @@ module Feeds
         current_site_version.currency
       end
 
-      def image_link(item)
-        raise NotImplementedError, "#{self.class} does not implement private method #image_link"
-      end
-
-      def product_description(item)
-        raise NotImplementedError, "#{self.class} does not implement private method #product_description"
-      end
-
-      def collection_product_path(product, options = {})
-        path_parts = ['dresses']
-        if product.respond_to?(:descriptive_url)
-          path_parts << product.descriptive_url
-        else
-          path_parts << descriptive_url(product)
+      %w(title image_link product_description).each do |method_name|
+        define_method(method_name) do |argument|
+          raise NotImplementedError, "#{self.class} does not implement private method ##{method_name}"
         end
-
-        if options[:color].nil? && product.respond_to?(:color) && product.color.try(:name)
-          options.merge!({ color: product.color.name })
-        end
-
-        path =  '/' + path_parts.compact.join('/')
-        path = "#{path}?#{options.to_param}" if options.present?
-
-        url_without_double_slashes(path)
-      end
-
-      def descriptive_url(product)
-        parts = ['dress', product.name.parameterize, product.id]
-        parts.reject(&:blank?).join('-')
-      end
-
-      def url_without_double_slashes(url)
-        url.gsub(/\w+(\/\/)/){ |a| a.sub('//', '/') }
       end
     end
   end

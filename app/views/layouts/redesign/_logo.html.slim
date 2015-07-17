@@ -1,0 +1,10 @@
+- cache [:layout, :header_logo, spree_user_signed_in?], expires_in: configatron.cache.expire.long do
+  header
+    .nav-menu.nav-alert-top
+      .container-fluid.nav-menu-container
+        .masthead.text-center.hidden-xs
+          = link_to root_path
+            = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
+        .masthead.text-center.visible-xs
+          = link_to root_path
+            = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'

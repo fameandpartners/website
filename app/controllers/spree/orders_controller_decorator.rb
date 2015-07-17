@@ -16,6 +16,7 @@ Spree::OrdersController.class_eval do
     
     @spree_order = order
     @order = Orders::OrderPresenter.new(order)
+    @marketing_order = Marketing::OrderPresenter.new(order)
     respond_with(@order)
   end
 

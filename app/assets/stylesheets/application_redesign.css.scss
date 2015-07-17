@@ -122,11 +122,6 @@ h1.edit-title {
   margin-top: 25%;
 }
 
-.cd-top {
-  background: rgba(0, 0, 0, 0.8) url(top.png) no-repeat center 50%;
-  display: none;
-}
-
 .zopim {
   @media(max-width: 990px){
     display:none;
@@ -144,5 +139,18 @@ input.form-control {
 .select2, .select2-container, .select2-container--default, .selection, .select2-selection, .select2-selection--single ,.select2-selection__rendered, .select2-selection__arrow, .select2-selection__rendered, .select2-search__field, button, .btn{
   &:focus {
     outline:none;
+  }
+}
+
+.checkout .slash {
+  margin-top: 60px;
+  float: left;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.checkout .card_code {
+  @media(max-width: 480px){
+    clear: both;
   }
 }

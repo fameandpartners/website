@@ -1,10 +1,10 @@
 @import 'droidcss/mixins';
-@import 'partials/mixins';
+@import 'old_site/partials/mixins';
 
-@import 'partials/setup';
-@import 'partials/fonts';
-@import 'partials/icons';
-@import 'partials/global_elements';
+@import 'old_site/partials/setup';
+@import 'old_site/partials/fonts';
+@import 'old_site/partials/icons';
+@import 'old_site/partials/global_elements';
 
 @import 'libs/jquery.jscrollpane';
 
@@ -17,5 +17,5 @@
 
 @import 'transient_content';
 
-@import 'partials/quiz';
-@import 'partials/quiz_iframe';
+@import 'old_site/partials/quiz';
+@import 'old_site/partials/quiz_iframe';

@@ -150,6 +150,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       afterOpen: @onOpen
       afterClose: @onClose
       callback: @callback
+      overlayClosesOnClick: false
 
 window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
   constructor: (opts = {}) ->
