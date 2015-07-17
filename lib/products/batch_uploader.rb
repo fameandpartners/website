@@ -409,8 +409,9 @@ module Products
 
       new_product = product.persisted? ? 'Updated' : 'New'
 
+      #assuming xls has no new products
       if args[:price_in_aud].nil? || args[:price_in_usd].nil?
-        add_product_prices(product, 0, 0)
+        add_product_prices(product, product.price)
       end
 
       product.save!
