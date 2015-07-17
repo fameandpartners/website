@@ -76,6 +76,7 @@ javascript:
         });
 
         polyvore_popup.success = function (data) {
+          $.cookie('polyvore_thanked', 'false');
           if (data.status == 'ok') {
             polyvore_thanks();
           }
