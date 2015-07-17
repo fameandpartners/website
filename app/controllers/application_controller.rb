@@ -45,11 +45,8 @@ class ApplicationController < ActionController::Base
     # Add to cart and submitting forms should not change site version
     return if (!request.get? || request.xhr? || request.path == '/checkout')
 
-    param_site_version = params[:site_version] || SiteVersion.default.code
-
-    if param_site_version != cookies[:site_version]
-      @current_site_version = SiteVersion.by_permalink_or_default(param_site_version)
-      cookies[:site_version] = @current_site_version.code
+    if site_version_param != current_site_version.code
+      @current_site_version = SiteVersion.by_permalink_or_default(site_version_param)
     end
   end
 
@@ -290,14 +287,6 @@ class ApplicationController < ActionController::Base
     prefix = "#{product.short_description} #{info} #{product.name}"
     self.title = [prefix, default_seo_title].join(' - ')
     description([prefix, default_meta_description].join(' - '))
-
-#    range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
-
-#    if range_taxonomy.present? && range_taxon = @product.taxons.where(taxonomy_id: range_taxonomy.id).first
-#      prefix = "#{product.short_description} #{info} #{@product.name} in #{range_taxon.name}"
-#      self.title = [prefix, default_seo_title].join(' - ')
-#     description([prefix, default_meta_description].join(' - '))
-#    end
   end
 
   def current_currency
