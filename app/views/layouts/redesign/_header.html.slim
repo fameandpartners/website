@@ -127,8 +127,8 @@ ruby:
         = image_tag('hamburger.png')
     .main-menu
       ul.nav.navbar-nav
-        li.open
-          a.dropdown-toggle data-toggle="dropdown" href="#"
+        li
+          a
             | EVENTS
             span.arrow
               = image_tag('icon-arrow-right.png')
@@ -145,7 +145,7 @@ ruby:
             li = link_to 'Sweet 16 Dresses'      , build_taxon_path('Sweet 16')
             li = link_to 'Debutante Dresses'     , build_taxon_path('Debutante')
         li
-          a.dropdown-toggle data-toggle="dropdown" href="#"
+          a
             | STYLES
             span.arrow
               = image_tag('icon-arrow-right.png')
@@ -159,7 +159,7 @@ ruby:
             li = link_to 'Backless Dresses'     , build_taxon_path('Backless')
             li = link_to 'Lace Dresses'         , build_taxon_path('Lace')
         li
-          a.dropdown-toggle data-toggle="dropdown" href="#"
+          a
             | COLORS
             span.arrow
               = image_tag('icon-arrow-right.png')
@@ -171,7 +171,7 @@ ruby:
             li = link_to 'Red Dresses'           , colour_path('Red')
             li = link_to 'Pastel Dresses'        , colour_path('Pastel')
         li
-          a.dropdown-toggle data-toggle="dropdown" href="#"
+          a
             | EXPRESS MAKING
             span.arrow
               = image_tag('icon-arrow-right.png')

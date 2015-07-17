@@ -11,8 +11,10 @@ window.SideMenu = class SideMenu
     $('.arrow img').on 'click', ->
       clicked = $(this).hasClass("clicked")
       $('.arrow img').removeClass("clicked")
+      $('.dropdown-menu').slideUp()
       if !clicked
         $(this).toggleClass("clicked")
+        $('ul',this.closest('li')).slideDown(500)
 
   open: () ->
     $("#sideMenu").animate({"margin-left": '+=300'}, 400);
