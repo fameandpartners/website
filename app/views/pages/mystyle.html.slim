@@ -1,9 +1,6 @@
 = content_for :head do
   meta name="robots" content="noindex, follow"
-
-- if params[:pids]
-  - @collection.products = Revolution::ProductService.new(params[:pids], current_site_version).products + @collection.products
-
+  
 - image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:lpi] || 'default'}.jpg"
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
