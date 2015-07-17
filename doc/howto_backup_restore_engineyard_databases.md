@@ -15,7 +15,7 @@ Here you can either download most recent backup, or take a new backup, then down
 ##### (Optional) Take a new backup
 
 ```shell
-pg_restore -d fame_and_partners ./fame_and_partners.2015-07-16T23-51-03.dump  --clean -U postgres
+sudo -i eybackup -e postgresql --new-backup
 ```
 
 ##### Download most recent backup
