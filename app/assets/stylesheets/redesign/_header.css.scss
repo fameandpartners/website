@@ -467,7 +467,12 @@ li#cart-trigger {
       width:30px;
       opacity: 0.7;
       margin-top: -15px;
-      margin-left: -5px;
+      @media(max-width:450px) {
+        margin-left: -5px;
+      }
+      @media(min-width:550px)and(max-width:850px) {
+        margin-left: -20px;
+      }
     }
   }
 }
@@ -492,7 +497,7 @@ li#cart-trigger {
 
   //nexus 7
   @media(min-width: 430px)and(max-width:610px){
-    margin-left: 125px;
+    margin-left: 140px;
   }
 
 }
