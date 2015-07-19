@@ -4,6 +4,9 @@ ruby:
   options_hash_select = { class: 'form-control form-control-md selectbox' }
   options_hash[:autocomplete] = 'off' if Rails.env.production?
 
+= content_for :inline_javascript do
+  | $('.checkout-section-title:last').scrollView()
+
 .row
   .col-md-12.form-group
     label for="number"  Card number
