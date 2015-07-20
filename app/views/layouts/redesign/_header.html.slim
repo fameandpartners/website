@@ -134,28 +134,28 @@ ruby:
             | EVENTS
             span.arrow
               = image_tag('icon-arrow-right.png')
-          ul.dropdown-menu
+          ul.dropdown-menu.mobileAnimation
             = render :partial => '/layouts/redesign/event'
         li
           a
             | STYLES
             span.arrow
               = image_tag('icon-arrow-right.png')
-          ul.dropdown-menu
+          ul.dropdown-menu.mobileAnimation
             = render :partial => '/layouts/redesign/style'
         li
           a
             | COLORS
             span.arrow
               = image_tag('icon-arrow-right.png')
-          ul.dropdown-menu
+          ul.dropdown-menu.mobileAnimation
             = render :partial => '/layouts/redesign/color'
         li
           a
             | EXPRESS MAKING
             span.arrow
               = image_tag('icon-arrow-right.png')
-          ul.dropdown-menu
+          ul.dropdown-menu.mobileAnimation
             li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
       .all-dresses
         = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get

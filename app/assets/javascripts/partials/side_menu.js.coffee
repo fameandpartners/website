@@ -7,21 +7,29 @@ window.SideMenu = class SideMenu
     @$arrowImg        = $(options.arrowImg)
     @$dropdownMenu    = $(options.dropdownMenu)
 
-    # I think this may fix the issue of iphone slideDown not working , need to test this
-    $(document).bind 'mobileinit', ->
-      # jQuery Mobile's Ajax navigation does not work in all cases (e.g.,
-      # when navigating from a mobile to a non-mobile page), especially when going back, hence disabling it.
-      $.extend $.mobile, ajaxEnabled: false
-
     @$sideMenuTrigger.on('click', @open)
     @$close .on('click', @close)
     @$arrowImg.on 'click', (e) =>
-      clicked = $(e.target).hasClass("clicked")
+      t = $(e.target)
+      clicked = t.hasClass("clicked")
       @$arrowImg.removeClass("clicked")
-      @$dropdownMenu.slideUp()
+
+      height = $('ul',t.closest('li')).height()
+      @$dropdownMenu.css('height','0')
+      @$dropdownMenu.css('display','none')
+
       if !clicked
-        $(e.target).toggleClass("clicked")
-        $('ul',e.target.closest('li')).slideDown(500)
+        t.toggleClass("clicked")
+
+        clone = $('ul',t.closest('li')).clone()
+                      .css({'position':'absolute','visibility':'hidden','height':'auto'})
+                      .addClass('slideClone')
+                      .appendTo('body')
+
+        newHeight = $(".slideClone").height()
+        $(".slideClone").remove()
+        $('ul',t.closest('li')).css('height',newHeight + 'px')
+        $('ul',t.closest('li')).css('display','block')
 
   open: () =>
     @$container.css("margin-left","300px")
