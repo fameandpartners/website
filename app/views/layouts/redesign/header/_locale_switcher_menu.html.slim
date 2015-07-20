@@ -1,0 +1,43 @@
+/ site_version.name
+/ site_version.flag_url
+/ ruby:
+/   path_to_image("flags/au.png")
+/   path_to_image("flags/us.png")
+/ - locale_options = options_for_select({'AU' => site_version_path('au'), 'US' => site_version_path('us')}, site_version_path(current_site_version.code))
+/ var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+
+/ javascript:
+/   jQuery(document).ready(function(){
+/     $('#select-locale #locale-selector')
+/       .select2({
+/         minimumResultsForSearch: Infinity
+/       })
+/       .on('change', function (e) {
+/         window.location = $(this).val();
+/       });
+/   });
+
+
+- locale_options = options_for_select({'AU' => site_version_path('au'), 'US' => site_version_path('us')}, site_version_path(current_site_version.code))
+
+= content_for :inline_javascript do
+  | $('#locale_selector')
+  |   .select2({
+  |     theme: "fame"
+  |   })
+  |   .on('change', function (e) {
+  |     window.location = $(this).val();
+  |   });
+
+
+#locale-switcher-bar.row.visible-md-block.visible-lg-block
+  #select-locale.col-md-4.text-left
+    | You're shipping in:
+    = select_tag :locale_selector, locale_options, 'data-minimum-results-for-search' => 'Infinity'
+    / = select_tag 'locale-selector', locale_options
+
+  #ad-text.col-md-4.text-center
+    | Free Shipping in Australia and New Zealand
+
+  #customer-service.col-md-4.text-right
+    | 24/7 Customer Service 1300 924 860
