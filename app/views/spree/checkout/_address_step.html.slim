@@ -3,7 +3,12 @@
 
 - if current_step.eql?('address')
 
-  - if not signed_in?
+  - if signed_in?
+    h2.checkout-section-title 1. Log In
+    p
+      ' Currently logged in as
+      strong= current_user.email
+  - else
     h2.checkout-section-title 1. Log In if you have an account
     .auth-alert.alert-dismissible.fade.in.alert-danger
       button type="button" class="close" data-dismiss="alert" aria-label="Close" x
