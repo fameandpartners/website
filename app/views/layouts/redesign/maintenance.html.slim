@@ -9,6 +9,6 @@ doctype html
     = render 'layouts/redesign/head'
 
   body#top.maintenance-page
-    = yield
+    = render 'layouts/redesign/google_tag_manager'
 
-    = render 'shared/remarketing_tag'
+    = yield
