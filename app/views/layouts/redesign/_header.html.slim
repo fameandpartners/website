@@ -67,15 +67,7 @@ ruby:
 
     .nav-menu.nav-alert-top
       .container-fluid.nav-menu-container
-        #locale-switcher-bar.row.hidden-xs
-          #select-locale.col-md-4.text-left
-            | You're shopping in: FLAG Australia
-
-          #ad-text.col-md-4.text-center
-            | Free Shipping in Australia and New Zealand
-
-          #customer-service.col-md-4.text-right
-            | 24/7 Customer Service 1300 924 860
+        = render 'layouts/redesign/header/locale_switcher_banner'
 
         .masthead.pull-left.visible-xs.visible-sm
           nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
