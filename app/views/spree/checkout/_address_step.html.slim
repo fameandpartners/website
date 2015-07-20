@@ -7,7 +7,7 @@
     h2.checkout-section-title 1. Log In
     p
       ' Currently logged in as
-      strong= current_user.email
+      strong= current_spree_user.email
   - else
     h2.checkout-section-title 1. Log In if you have an account
     .auth-alert.alert-dismissible.fade.in.alert-danger
