@@ -12,7 +12,7 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
   end
 
   def advance_receive_item(event)
-    # @item_return.status            = :received
+    @item_return.acceptance_status = :received
     @item_return.received_location = event.location
     @item_return.received_on       = event.received_on
   end

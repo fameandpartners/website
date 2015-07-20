@@ -23,9 +23,6 @@ class ItemReturnEvent < ActiveRecord::Base
                   :requested_at,
                   :customer_name
 
-  attr_accessible :user, :received_on, :location
-
-
   serialize :data
 
   belongs_to :item_return,
@@ -59,6 +56,8 @@ class ItemReturnEvent < ActiveRecord::Base
           :customer_name
 
   end
+
+  attr_accessible :user, :received_on, :location
 
   event_type :receive_item do
     attributes :user, :received_on, :location
