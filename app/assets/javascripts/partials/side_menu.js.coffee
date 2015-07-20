@@ -11,7 +11,7 @@ window.SideMenu = class SideMenu
     @$sideMenuTrigger.on('click', @open)
     @$close .on('click', @close)
 
-    $("a", "li", "ul", ".main-menu").on 'click', (e) =>
+    $("a", "li", "ul", ".main-menu", @$container).on 'click', (e) =>
       @slide(e)
 
   slide: (e) =>
