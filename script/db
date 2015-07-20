@@ -13,28 +13,38 @@ ENVIRONMENTS=("production" "development" "uat" "preproduction" "staging")
 
 ## Dump ################################################################################################################
 
-function download_production_db
+function __todo_env
+{
+  error TODO - Actually automate this
+  error "In the meantime, see $(yellow)doc/howto_backup_restore_engineyard_databases.md$(normal)"
+}
+
+
+function dump_production_db
 {
   _setup_dump 'production'
-  # TODO - Actually automate this
+  __todo_env
 }
 
-function download_preprod_db
+function dump_preprod_db
 {
   _setup_dump 'preproduction'
+  __todo_env
 }
 
-function download_staging_db
+function dump_staging_db
 {
   _setup_dump 'staging'
+  __todo_env
 }
 
-function download_uat_db
+function dump_uat_db
 {
   _setup_dump 'uat'
+  __todo_env
 }
 
-function download_development_db
+function dump_development_db
 {
   _setup_dump 'development'
   pg_dump --format=custom --dbname=${DEV_DB} > $EXPORT_FILE &
@@ -49,14 +59,13 @@ function easy_database_management_menu()
     PS3="$(magenta)>> $(normal)Select a $(yellow)command$(normal) to run or $(blue)Control+C$(normal) to cancel: "
 
     commands=(
-        "reload_with_production    Backup, download, and restore the newest $(green)production$(normal) database to $(blue)development$(normal)"
-        "load_production_db        Restore the most recent $(green)production$(normal) backup $(yellow)file$(normal) to $(blue)development$(normal)"
-        "load_development_db       Restore the most recent $(blue)development$(normal) backup $(yellow)file$(normal) to $(blue)development$(normal)"
-        "choose_restore_env        Select $(magenta)any environment's$(normal) most recent backup $(yellow)file$(normal) to restore to $(blue)development$(normal)"
-        "choose_restore_file       Select $(yellow)a backup file$(normal) to restore to $(blue)development$(normal)"
-        "download_production_db    Backup $(green)production$(normal) database to a $(yellow)file$(normal)"
-        "download_development_db   Backup $(blue)development$(normal) database to a $(yellow)file$(normal)"
-        "download_menu             Select $(magenta)any environment's$(normal) database to backup to a $(yellow)file$(normal)"
+        "load_production_db        Restore the most recent $(green)production$(normal)        backup $(yellow)file$(normal) to $(blue)development$(normal)"
+        "load_development_db       Restore the most recent $(blue)development$(normal)       backup $(yellow)file$(normal) to $(blue)development$(normal)"
+        "restore_env_menu          Restore the most recent $(magenta)any environment's$(normal) backup $(yellow)file$(normal) to $(blue)development$(normal)"
+        "restore_file_menu         Restore any selected                      backup $(yellow)file$(normal) to $(blue)development$(normal)"
+        "dump_production_db        Backup $(green)production$(normal)        database to a $(yellow)file$(normal)"
+        "dump_development_db       Backup $(blue)development$(normal)       database to a $(yellow)file$(normal)"
+        "dump_menu                 Backup $(magenta)any environment's$(normal) database to a $(yellow)file$(normal)"
      )
 
     select opt in "${commands[@]}"; do
@@ -70,17 +79,9 @@ function easy_database_management_menu()
     done
 }
 
-
-## Streamlined Processes ###############################################################################################
-function reload_with_production
-{
-  download_production_db
-  load_production_db
-}
-
 ## Dump ###############################################################################################################
 
-function download_menu
+function dump_menu
 {
     echo "$(magenta)>> $(white)Backup the $(magenta)environment$(white) database$(normal)"
     PS3="$(magenta)>> $(normal)Select an $(magenta)environment$(normal) to backup, or $(blue)Control+C$(normal) to cancel: "
@@ -129,7 +130,7 @@ function load_preproduction_db
   _load_db 'preproduction' ${DEV_DB}
 }
 
-function choose_restore_env
+function restore_env_menu
 {
     echo "$(magenta)>> $(white)Restore the $(yellow)most recent file$(white) from which $(magenta)environment$(white)?$(normal)"
     PS3="$(magenta)>> $(normal)Select an $(magenta)environment$(normal) to restore from, or $(blue)Control+C$(normal) to cancel: "
@@ -142,7 +143,7 @@ function choose_restore_env
 
 ## User Selectable File Restore ########################################################################################
 
-function choose_restore_file()
+function restore_file_menu()
 {
     _set_dump_directory
     echo "$(magenta)>> $(white)Restore Custom Backup$(normal)"
