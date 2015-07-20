@@ -1,8 +1,9 @@
 class AddPositionsToShippingMethods < ActiveRecord::Migration
   def up
     add_column :spree_shipping_methods, :position, :integer, default: 0
-    set_positions
-    update_orders
+    say_with_time 'Update Shipping Methods' do
+      set_positions
+    end
   end
 
   def down
@@ -22,19 +23,5 @@ class AddPositionsToShippingMethods < ActiveRecord::Migration
       Spree::ShippingMethod.all.sort_by do |shipping_method|
         [priorities[shipping_method.name].to_i, shipping_method.zone_id]
       end.reverse
-    end
-
-    def update_orders
-      states = %w{cart address delivery payment}
-      Spree::Order.where(state: states).where('shipping_method_id is not null').find_each do |order|
-        next if order.payments.exists?
-        next if order.shipments.where("state != 'pending'").exists?
-
-        shipping_method_id = Services::FindShippingMethodForOrder.new(order).get.try(:id)
-        if shipping_method_id && order.shipping_method_id != shipping_method_id
-          order.update_column(:shipping_method_id, shipping_method_id)
-          order.shipments = Shipping::AssignByFactory.new(order).create_shipments!
-        end
-      end
     end
 end
