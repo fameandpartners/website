@@ -19,7 +19,7 @@ class AddPositionsToShippingMethods < ActiveRecord::Migration
     end
 
     def ordered_shipping_methods
-      priorities = { 'DHL' => 3, 'AUSPOST' => 2, 'TNT' => 1 } 
+      priorities = { 'DHL' => 3, 'AUSPOST' => 2, 'TNT' => 1 }
       Spree::ShippingMethod.all.sort_by do |shipping_method|
         [priorities[shipping_method.name].to_i, shipping_method.zone_id]
       end.reverse
