@@ -13,10 +13,7 @@ window.SideMenu = class SideMenu
       t = $(e.target)
       clicked = t.hasClass("clicked")
       @$arrowImg.removeClass("clicked")
-
-      height = $('ul',t.closest('li')).height()
       @$dropdownMenu.css('height','0')
-      @$dropdownMenu.css('display','none')
 
       if !clicked
         t.toggleClass("clicked")
@@ -25,11 +22,10 @@ window.SideMenu = class SideMenu
                       .css({'position':'absolute','visibility':'hidden','height':'auto'})
                       .addClass('slideClone')
                       .appendTo('body')
-
         newHeight = $(".slideClone").height()
         $(".slideClone").remove()
-        $('ul',t.closest('li')).css('height',newHeight + 'px')
-        $('ul',t.closest('li')).css('display','block')
+        dropdown_li = $(t.closest('li'))
+        $('ul',dropdown_li).css('height',newHeight + 'px')
 
   open: () =>
     @$container.css("margin-left","300px")
