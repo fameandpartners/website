@@ -6,6 +6,7 @@ window.SideMenu = class SideMenu
     @$close           = $(options.close)
     @$arrowImg        = $(options.arrowImg)
     @$dropdownMenu    = $(options.dropdownMenu)
+    @$overlay         = $(options.overlay || '#shadow-layer')
 
     @$sideMenuTrigger.on('click', @open)
     @$close .on('click', @close)
@@ -18,17 +19,20 @@ window.SideMenu = class SideMenu
       if !clicked
         t.toggleClass("clicked")
 
-        clone = $('ul',t.closest('li')).clone()
+        dropdown_li = $(t.closest('li'))
+        clone = $('ul',dropdown_li).clone()
                       .css({'position':'absolute','visibility':'hidden','height':'auto'})
                       .addClass('slideClone')
                       .appendTo('body')
         newHeight = $(".slideClone").height()
         $(".slideClone").remove()
-        dropdown_li = $(t.closest('li'))
+
         $('ul',dropdown_li).css('height',newHeight + 'px')
 
   open: () =>
-    @$container.css("margin-left","300px")
+    @$container.css("margin-left", @$container.width())
+    @$overlay.addClass('is-visible')
 
   close: () =>
-    @$container.css("margin-left","-300px")
+    @$container.css("margin-left", -@$container.width())
+    @$overlay.removeClass('is-visible')

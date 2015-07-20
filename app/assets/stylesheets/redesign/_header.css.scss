@@ -507,10 +507,39 @@ li#cart-trigger {
   height: 100%;
   overflow: auto;
   position: fixed;
-  left: -20em;
   font-size: 15px;
   top: 0;
-  width: 20em;
+
+  @media(max-width: 320px){
+    width: 300px;
+    left: -300px;
+  }
+
+  @media(min-width: 321px)and(max-width:400px){
+    width: 350px;
+    left: -350px;
+  }
+
+  @media(min-width: 400px)and(max-width:599px){
+    width: 390px;
+    left: -390px;
+  }
+
+  @media(min-width: 599px)and(max-width:759px){
+    width: 575px;
+    left: -575px;
+  }
+
+  @media(min-width: 760px)and(max-width:790px){
+    width: 745px;
+    left: -745px;
+  }
+
+  @media(min-width: 800px){
+    width: 775px;
+    left: -775px;
+  }
+
   z-index: 2000;
   background-color: #f8f8f8;
   -webkit-transition: margin-left 0.7s; /* Safari */

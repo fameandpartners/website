@@ -158,7 +158,8 @@ ruby:
           ul.dropdown-menu.mobileAnimation
             li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
       .all-dresses
-        = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
+        center
+          = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
       .clearfix
       .account-login
         = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
