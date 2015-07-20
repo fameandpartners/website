@@ -29,39 +29,17 @@ li.shop.menu-item
           .col-md-3.col-lg-2.col-md-offset-4
             h4.link-header Events
             ul.mega-menu-list
-              li.mega-menu-list--item = link_to 'Formal Dresses'        , build_taxon_path('Formal')
-              li.mega-menu-list--item = link_to 'Wedding Dresses'       , build_taxon_path('Wedding')
-              li.mega-menu-list--item = link_to 'Birthday Dresses'      , build_taxon_path('Birthday')
-              li.mega-menu-list--item = link_to 'Special Event Dresses' , build_taxon_path('Special Event')
-              li.mega-menu-list--item = link_to 'Ball Gowns Dresses'    , build_taxon_path('Ball Gowns')
-              li.mega-menu-list--item = link_to 'Bridesmaid Dresses'    , bridesmaid_collection_path
-              li.mega-menu-list--item = link_to 'Graduation Dresses'    , build_taxon_path('Graduation')
-              li.mega-menu-list--item = link_to 'Prom Dresses'          , build_taxon_path('Prom')
-              li.mega-menu-list--item = link_to 'Homecoming Dresses'    , build_taxon_path('Homecoming')
-              li.mega-menu-list--item = link_to 'Sweet 16 Dresses'      , build_taxon_path('Sweet 16')
-              li.mega-menu-list--item = link_to 'Debutante Dresses'     , build_taxon_path('Debutante')
+              = render :partial => '/layouts/redesign/event'
 
           .col-md-3.col-lg-2
             h4.link-header Style
             ul.mega-menu-list
-              li.mega-menu-list--item= link_to 'Plus Size Dresses'    , build_taxon_path('Plus Size')
-              li.mega-menu-list--item= link_to 'Two-Piece Dresses'    , build_taxon_path('Two Piece')
-              li.mega-menu-list--item= link_to 'One Shoulder Dresses' , build_taxon_path('One-Shoulder')
-              li.mega-menu-list--item= link_to 'Strapless Dresses'    , build_taxon_path('Strapless')
-              li.mega-menu-list--item= link_to 'V-Neck Dresses'       , build_taxon_path('V-Neck')
-              li.mega-menu-list--item= link_to 'Split Dresses'        , build_taxon_path('Split')
-              li.mega-menu-list--item= link_to 'Backless Dresses'     , build_taxon_path('Backless')
-              li.mega-menu-list--item= link_to 'Lace Dresses'         , build_taxon_path('Lace')
+              = render :partial => '/layouts/redesign/style'
 
           .col-md-3.col-lg-2
             h4.link-header= t('color')
             ul.mega-menu-list
-              li.mega-menu-list--item= link_to 'Black Dresses'         , colour_path('Black')
-              li.mega-menu-list--item= link_to 'White / Ivory Dresses' , colour_path('White')
-              li.mega-menu-list--item= link_to 'Blue Dresses'          , colour_path('Blue')
-              li.mega-menu-list--item= link_to 'Pink Dresses'          , colour_path('Pink')
-              li.mega-menu-list--item= link_to 'Red Dresses'           , colour_path('Red')
-              li.mega-menu-list--item= link_to 'Pastel Dresses'        , colour_path('Pastel')
+              = render :partial => '/layouts/redesign/color'
 
           .col-md-3.col-lg-2
             - if Features.active?(:express_making)

@@ -48,9 +48,14 @@ ruby:
 
   side_menu_init = "
     window.app.side_menu = new SideMenu({
-      toggle_link:  '#side-menu-trigger',
+      container:              '#sideMenu',
+      sideMenuTrigger:        '#side-menu-trigger',
+      close:                  '#sideMenu #close',
+      arrowImg:               '.arrow img',
+      dropdownMenu:           '.dropdown-menu'
     });
   "
+
 = content_for :inline_javascript do
   = raw init_items_counter_sync
   = raw init_moodboard_counter_sync
@@ -95,9 +100,6 @@ ruby:
           li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
             = render "layouts/redesign/header/my_account_dropdown"
 
-          /li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs
-            /= render "layouts/redesign/header/my_account_dropdown_mobile"
-
           li.menu-item
             a.menu-item--link.search href="#"
               = image_tag "_icons/search.svg", class: "nav-mobile-logo"
@@ -133,43 +135,21 @@ ruby:
             span.arrow
               = image_tag('icon-arrow-right.png')
           ul.dropdown-menu
-            li = link_to 'Formal Dresses'        , build_taxon_path('Formal')
-            li = link_to 'Wedding Dresses'       , build_taxon_path('Wedding')
-            li = link_to 'Birthday Dresses'      , build_taxon_path('Birthday')
-            li = link_to 'Special Event Dresses' , build_taxon_path('Special Event')
-            li = link_to 'Ball Gowns Dresses'    , build_taxon_path('Ball Gowns')
-            li = link_to 'Bridesmaid Dresses'    , bridesmaid_collection_path
-            li = link_to 'Graduation Dresses'    , build_taxon_path('Graduation')
-            li = link_to 'Prom Dresses'          , build_taxon_path('Prom')
-            li = link_to 'Homecoming Dresses'    , build_taxon_path('Homecoming')
-            li = link_to 'Sweet 16 Dresses'      , build_taxon_path('Sweet 16')
-            li = link_to 'Debutante Dresses'     , build_taxon_path('Debutante')
+            = render :partial => '/layouts/redesign/event'
         li
           a
             | STYLES
             span.arrow
               = image_tag('icon-arrow-right.png')
           ul.dropdown-menu
-            li = link_to 'Plus Size Dresses'    , build_taxon_path('Plus Size')
-            li = link_to 'Two-Piece Dresses'    , build_taxon_path('Two Piece')
-            li = link_to 'One Shoulder Dresses' , build_taxon_path('One-Shoulder')
-            li = link_to 'Strapless Dresses'    , build_taxon_path('Strapless')
-            li = link_to 'V-Neck Dresses'       , build_taxon_path('V-Neck')
-            li = link_to 'Split Dresses'        , build_taxon_path('Split')
-            li = link_to 'Backless Dresses'     , build_taxon_path('Backless')
-            li = link_to 'Lace Dresses'         , build_taxon_path('Lace')
+            = render :partial => '/layouts/redesign/style'
         li
           a
             | COLORS
             span.arrow
               = image_tag('icon-arrow-right.png')
           ul.dropdown-menu
-            li = link_to 'Black Dresses'         , colour_path('Black')
-            li = link_to 'White / Ivory Dresses' , colour_path('White')
-            li = link_to 'Blue Dresses'          , colour_path('Blue')
-            li = link_to 'Pink Dresses'          , colour_path('Pink')
-            li = link_to 'Red Dresses'           , colour_path('Red')
-            li = link_to 'Pastel Dresses'        , colour_path('Pastel')
+            = render :partial => '/layouts/redesign/color'
         li
           a
             | EXPRESS MAKING

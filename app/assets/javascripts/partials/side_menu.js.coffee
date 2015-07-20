@@ -1,24 +1,25 @@
 window.SideMenu = class SideMenu
 
   constructor: (options = {}) ->
-    @rendered   = false
-    @$container = $('#sideMenu')
-
-    _.bindAll(@, 'open', 'close')
-
-    $('#side-menu-trigger').on('click', @open)
-    $('#close').on('click', @close)
-    $('.arrow img').on 'click', ->
-      clicked = $(this).hasClass("clicked")
-      $('.arrow img').removeClass("clicked")
-      $('.dropdown-menu').slideUp()
+    @$container       = $(options.container)
+    @$sideMenuTrigger = $(options.sideMenuTrigger)
+    @$close           = $(options.close)
+    @$arrowImg        = $(options.arrowImg)
+    @$dropdownMenu    = $(options.dropdownMenu)
+    console.log @$close
+    @$sideMenuTrigger.on('click', @open)
+    @$close .on('click', @close)
+    @$arrowImg.on 'click', (e) =>
+      clicked = $(e.target).hasClass("clicked")
+      @$arrowImg.removeClass("clicked")
+      @$dropdownMenu.slideUp()
       if !clicked
-        $(this).toggleClass("clicked")
-        $('ul',this.closest('li')).slideDown(500)
+        $(e.target).toggleClass("clicked")
+        $('ul',e.target.closest('li')).slideDown(500)
 
-  open: () ->
-    $("#sideMenu").animate({"margin-left": '+=300'}, 400);
+  open: () =>
+    @$container.animate({"margin-left": '+=300'}, 400);
 
-  close: () ->
-    $("#sideMenu").animate({"margin-left": '-=300'}, 400);
-
+  close: () =>
+    console.log 'closeing'
+    @$container.animate({"margin-left": '-=300'}, 400);

@@ -70,8 +70,6 @@
 // campaigns
 //= require partials/fitgau_reminder
 
-//= require bootstrap
-
 jQuery(document).ready(function($){
   $('#forgot-password').on('click', function(e) {
     e.preventDefault();
