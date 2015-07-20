@@ -43,7 +43,7 @@ describe LineItemPersonalization, type: :model do
 
       it "returns 0 for basic color" do
         personalization.product = Spree::Product.new
-        personalization.color = Spree::OptionValue.new
+        personalization.color = Spree::OptionValue::ProductColor.new
         expect(personalization).to receive(:basic_color?).and_return(true)
 
         expect(personalization.color_cost).to eql(BigDecimal.new(0))
@@ -51,7 +51,7 @@ describe LineItemPersonalization, type: :model do
 
       it "adds price for custom color" do
         personalization.product = Spree::Product.new
-        personalization.color = Spree::OptionValue.new
+        personalization.color = Spree::OptionValue::ProductColor.new
         expect(personalization).to receive(:basic_color?).and_return(false)
 
         expect(personalization.color_cost).to eql(BigDecimal.new('16.0'))

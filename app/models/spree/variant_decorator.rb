@@ -47,24 +47,18 @@ Spree::Variant.class_eval do
   alias_method :fast_delivery?, :fast_delivery
 
   def options_hash
-    values = self.option_values.joins(:option_type).order("#{Spree::OptionType.table_name}.position asc")
-
-    Hash[*values.map{ |ov| [ov.option_type.presentation, ov.presentation] }]
+    values = {}
+    values['Color'] = dress_color.presentation if dress_color.present?
+    values['Size'] = dress_size.presentation if dress_size.present?
+    values
   end
 
   def dress_color
-    @dress_color ||= get_option_value(self.class.color_option_type)
+    @dress_color ||= self.option_values.colors.first
   end
 
   def dress_size
-    @dress_size ||= get_option_value(self.class.size_option_type)
-  end
-
-  def get_option_value(option_type)
-    return nil unless option_type
-    self.option_values.detect do |option|
-      option.option_type_id == option_type.id
-    end
+    @dress_size ||= self.option_values.sizes.first
   end
 
   # Master SKU + VarientValue1 + VarientValue2
@@ -101,7 +95,7 @@ Spree::Variant.class_eval do
     end
 
     sku_chunks.reject(&:blank?).join('-')
-  rescue Exception => exception
+  rescue Exception
     return nil
   end
 

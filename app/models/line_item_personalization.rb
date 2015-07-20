@@ -8,9 +8,9 @@ class LineItemPersonalization < ActiveRecord::Base
   belongs_to :line_item,
              class_name: 'Spree::LineItem'
   belongs_to :color,
-             class_name: 'Spree::OptionValue'
+             class_name: 'Spree::OptionValue::ProductColor'
   belongs_to :size,
-             class_name: 'Spree::OptionValue'
+             class_name: 'Spree::OptionValue::ProductSize'
 
   attr_accessible :customization_value_ids,
                   :height,
@@ -52,7 +52,7 @@ class LineItemPersonalization < ActiveRecord::Base
 
   def options_hash
     values = {}
-    values['Size'] = size.presentation.to_i if size.present?
+    values['Size'] = size.presentation if size.present?
     values['Color'] = color.presentation if color.present?
 
     customization_values.each do |value|
@@ -102,21 +102,8 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def add_plus_size_cost?
-    # dress without small sizes
-    return false if plus_size?
-
-    # extra size
-    size && size.presentation.to_i >= locale_plus_sizes
-  end
-
-  def locale_plus_sizes
-    order.get_site_version.size_settings.size_charge_start
-  rescue
-    14
-  end
-
-  def plus_size?
-    product.present? && product.taxons.where(name: "Plus Size").exists?
+    product_size = Repositories::ProductSize.new( product: product ).read(size_id)
+    product_size && product_size.extra_size? && !product.has_free_extra_sizes?
   end
   # eo size pricing
 

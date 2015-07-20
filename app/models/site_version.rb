@@ -163,7 +163,7 @@ class SiteVersion < ActiveRecord::Base
       rate_to_required_currency = currency_rates[to]
 
       return (1.0 / rate_to_default_currency) * rate_to_required_currency
-    rescue Exception => e
+    rescue Exception
       1.0
     end
 
@@ -175,6 +175,14 @@ class SiteVersion < ActiveRecord::Base
         end
         result
       end
+    end
+
+    def australia
+      @australia ||= SiteVersion.find_by_permalink('au')
+    end
+
+    def usa
+      @usa ||= SiteVersion.find_by_permalink('us')
     end
   end
 end
