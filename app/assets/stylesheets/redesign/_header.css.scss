@@ -500,6 +500,9 @@ li#cart-trigger {
     margin-left: 140px;
   }
 
+  @media(min-width: 480px)and(max-width:550px){
+    margin-left: 90px;
+  }
 }
 
 #sideMenu {
