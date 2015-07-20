@@ -32,7 +32,6 @@ window.SideMenu = class SideMenu
                     .appendTo('body')
       newHeight = $(".slideClone").height()
       $(".slideClone").remove()
-
       $('ul',dropdown_li).css('height',newHeight + 'px')
 
   open: () =>
