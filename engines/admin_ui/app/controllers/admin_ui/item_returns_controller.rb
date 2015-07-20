@@ -1,8 +1,17 @@
 module AdminUi
   class ItemReturnsController < AdminUi::ApplicationController
     def index
-      @collection = ItemReturnsGrid.new(params[:item_returns_grid]) do |scope|
-        scope.page(params[:page]).per(50)
+      @collection = ItemReturnsGrid.new(params[:item_returns_grid])
+      respond_to do |f|
+        f.html do
+          @collection.scope { |scope| scope.page(params[:page]).per(50) }
+        end
+        f.csv do
+          send_data @collection.to_csv,
+            type: "text/csv",
+            disposition: 'inline',
+            filename: "item_returns-#{DateTime.now.to_s(:file_timestamp)}.csv"
+        end
       end
     end
 
