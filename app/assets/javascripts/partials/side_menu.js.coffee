@@ -6,7 +6,13 @@ window.SideMenu = class SideMenu
     @$close           = $(options.close)
     @$arrowImg        = $(options.arrowImg)
     @$dropdownMenu    = $(options.dropdownMenu)
-    console.log @$close
+
+    # I think this may fix the issue of iphone slideDown not working , need to test this
+    $(document).bind 'mobileinit', ->
+      # jQuery Mobile's Ajax navigation does not work in all cases (e.g.,
+      # when navigating from a mobile to a non-mobile page), especially when going back, hence disabling it.
+      $.extend $.mobile, ajaxEnabled: false
+
     @$sideMenuTrigger.on('click', @open)
     @$close .on('click', @close)
     @$arrowImg.on 'click', (e) =>
@@ -18,8 +24,7 @@ window.SideMenu = class SideMenu
         $('ul',e.target.closest('li')).slideDown(500)
 
   open: () =>
-    @$container.animate({"margin-left": '+=300'}, 400);
+    @$container.css("margin-left","300px")
 
   close: () =>
-    console.log 'closeing'
-    @$container.animate({"margin-left": '-=300'}, 400);
+    @$container.css("margin-left","-300px")

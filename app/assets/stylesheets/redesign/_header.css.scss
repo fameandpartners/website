@@ -513,9 +513,8 @@ li#cart-trigger {
   width: 20em;
   z-index: 2000;
   background-color: #f8f8f8;
-  .open{
-    -webkit-transition: all 5s;
-  }
+  -webkit-transition: margin-left 0.7s; /* Safari */
+  transition: margin-left 0.7s;
 
   .navbar-header {
     background-color: #e7e7e7;
