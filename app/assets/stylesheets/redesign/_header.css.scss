@@ -92,13 +92,14 @@
 }
 
 .account {
-  position: absolute;
-  top: 0;
-  border: 1px solid #040505;
   background-color: white;
-  padding-right: 0;
-  padding-left: 0;
+  border: 1px solid #040505;
   line-height: 35px;
+  padding-left: 0;
+  padding-right: 0;
+  position: absolute;
+  right: 10px;
+  top: -35px;
 }
 
 .search-bar {
@@ -110,7 +111,7 @@
 
 .mega-menu--main:after, .mega-menu--main:before {
   bottom: 100%;
-  left: 338px;
+  left: 318px;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -121,7 +122,7 @@
 
 .stories:after, .stories:before {
   bottom: 100%;
-  left: 418px;
+  left: 412px;
   border: solid transparent;
   content: " ";
   height: 0;

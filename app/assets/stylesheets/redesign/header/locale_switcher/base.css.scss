@@ -1,12 +1,10 @@
 @import 'redesign/vars';
 
-/////////// locale switcher (grey top menu) //////////
-
 #locale-switcher-bar {
   background-color: $gray-light-bg;
   font-size: 15px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
   text-transform: none;
 
   .col-md-4 {
@@ -16,6 +14,10 @@
 
   #select-locale {
     padding-left: 35px;
+
+    .select2-container {
+      margin-left: 10px;
+    }
   }
 
   #ad-text {

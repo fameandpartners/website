@@ -129,8 +129,6 @@ group :development, :test do
   # gem 'minitest'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
-  # gem 'pry'
-  # gem 'pry-debugger'
   gem 'pry-byebug'
   gem 'quiet_assets'
   gem 'rspec-activemodel-mocks'

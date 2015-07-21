@@ -8748,8 +8748,15 @@ p {
   width: 100%;
   z-index: 100;
   background: white;
-  height: 70px;
+  height: 110px;
   border-bottom: 1px solid #eeeeee;
+}
+
+
+@media only screen and (max-width: 992px) {
+  .nav-menu {
+    height: 70px;
+  }
 }
 
 /* line 14, ../sass/_nav.scss */
@@ -8806,7 +8813,7 @@ p {
 /* line 71, ../sass/_nav.scss */
 .mega-menu-menu, .search-bar, .mega-menu {
   position: absolute;
-  top: 70px;
+  top: 105px;
   padding: 0px;
   background: #f4f4f4;
   width: 100%;
@@ -9522,8 +9529,14 @@ p {
 
 /* line 272, ../sass/styles.scss */
 .page-content {
-  padding-top: 70px;
+  padding-top: 110px;
   padding-bottom: 60px;
+}
+
+@media (max-width: 992px) {
+  .page-content {
+    padding-top: 70px;
+  }
 }
 
 /* line 278, ../sass/styles.scss */
@@ -9712,12 +9725,14 @@ p {
 
 /* line 525, ../sass/styles.scss */
 #slides {
-  margin-top: 70px;
+  margin-top: 110px;
+  position: relative;
 }
 
-/* line 529, ../sass/styles.scss */
-#slides {
-  position: relative;
+@media (max-width: 992px) {
+  #slides {
+    margin-top: 70px;
+  }
 }
 
 /* line 532, ../sass/styles.scss */
@@ -10175,8 +10190,8 @@ p {
   /* line 31, ../sass/_media.scss */
   .nav-menu {
     background: white !important;
+    position: absolute;
   }
-
   /* line 35, ../sass/_media.scss */
   .margin-top-100-mobile {
     margin-top: 100px;
@@ -10190,11 +10205,6 @@ p {
   /* line 43, ../sass/_media.scss */
   .btn {
     font-size: 1em !important;
-  }
-
-  /* line 51, ../sass/_media.scss */
-  .nav-menu {
-    position: absolute;
   }
 }
 @media screen and (max-width: 768px) {
@@ -10287,9 +10297,16 @@ p {
 /* line 44, ../sass/_category.scss */
 .page-title {
   background-size: cover;
-  margin-top: 70px;
+  margin-top: 110px;
   position: relative;
 }
+
+@media (max-width: 992px) {
+  .page-title {
+    margin-top: 70px;
+  }
+}
+
 /* line 50, ../sass/_category.scss */
 .page-title:after {
   content: "";

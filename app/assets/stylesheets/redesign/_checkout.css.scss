@@ -1,4 +1,19 @@
 // Checkout page url: /checkout
+$desktop-nav-menu-height: 70px;
+$mobile-nav-menu-height: 70px;
+
+.nav-menu.checkout {
+  height: $desktop-nav-menu-height;
+
+  .mobile-logo {
+    margin-left: 0;
+  }
+}
+
+.page-title.checkout-title {
+  margin-top: $desktop-nav-menu-height;
+}
+
 .page-content.checkout {
   // - Override form styles
 

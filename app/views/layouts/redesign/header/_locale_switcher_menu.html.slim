@@ -1,41 +1,28 @@
-/ ruby:
-/   image_path("flags/au.png")
-/   image_path("flags/us.png")
-/ - locale_options = options_for_select({'AU' => site_version_path('au'), 'US' => site_version_path('us')}, site_version_path(current_site_version.code))
-
-ruby:
-  options_for_locale_select = SiteVersion.all.map do |site_version|
-    [
-      site_version.name,
-      site_version_path(site_version.code),
-      { 'data-flag-url' => image_path("flags/#{site_version.code}.png") }
-    ]
-  end
-
 coffee:
   $ ->
-    template_function = (site_version) ->
+    selector_template = (site_version) ->
       return site_version.text if site_version.loading
 
-      $site_version = $(site_version.element)
-
       """
-      <img src="#{$site_version.data("flag-url")}" alt="#{site_version.text}"> #{site_version.text}
+      <div class="fame-template-result">
+        <img src="#{$(site_version.element).data("flag-url")}" alt="#{site_version.text}"/>
+        #{site_version.text}
+      </div>
       """
 
     $('#locale_selector').select2
       escapeMarkup: (markup) -> markup
       minimumResultsForSearch: Infinity
-      templateResult: template_function,
-      templateSelection: template_function
-      theme: "fame"
+      templateResult: selector_template,
+      templateSelection: selector_template
+      theme: 'fame'
     .on 'change', (e) ->
       window.location = $(this).val();
 
 #locale-switcher-bar.row.visible-md-block.visible-lg-block
   #select-locale.col-md-4.text-left
-    | You're shipping in:
-    = select_tag :locale_selector, options_for_select(options_for_locale_select, site_version_path(current_site_version.code))
+    | You're shopping in:
+    = select_tag :locale_selector, options_for_select(SiteVersions::Presenter.options_for_select, site_version_path(current_site_version.code))
 
   #ad-text.col-md-4.text-center
     | Free Shipping in Australia and New Zealand

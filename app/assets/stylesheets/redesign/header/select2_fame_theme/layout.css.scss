@@ -6,9 +6,27 @@ $disabled-color:  #999;
   @import "single";
   @import "multiple";
 
-  min-width: 110px;
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
   text-transform: none;
+  vertical-align: top;
 
+  // Custom template (Flag + Country name)
+  .fame-template-result {
+    text-align: center;
+
+    img {
+      margin-top: -5px;
+      margin-right: 5px;
+    }
+  }
+
+  .select2-results .fame-template-result {
+    text-align: left;
+  }
+
+  // Select2 theme container
   &.select2-container--open.select2-container--above {
     .select2-selection--single, .select2-selection--multiple {
       border-top-left-radius: 0;
@@ -45,6 +63,7 @@ $disabled-color:  #999;
 
   .select2-results > .select2-results__options {
     max-height: 200px;
+    min-width: 100px;
     overflow-y: auto;
   }
 
