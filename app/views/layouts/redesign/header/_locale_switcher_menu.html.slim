@@ -1,40 +1,41 @@
-/ site_version.name
-/ site_version.flag_url
 / ruby:
-/   path_to_image("flags/au.png")
-/   path_to_image("flags/us.png")
+/   image_path("flags/au.png")
+/   image_path("flags/us.png")
 / - locale_options = options_for_select({'AU' => site_version_path('au'), 'US' => site_version_path('us')}, site_version_path(current_site_version.code))
-/ var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
 
-/ javascript:
-/   jQuery(document).ready(function(){
-/     $('#select-locale #locale-selector')
-/       .select2({
-/         minimumResultsForSearch: Infinity
-/       })
-/       .on('change', function (e) {
-/         window.location = $(this).val();
-/       });
-/   });
+ruby:
+  options_for_locale_select = SiteVersion.all.map do |site_version|
+    [
+      site_version.name,
+      site_version_path(site_version.code),
+      { 'data-flag-url' => image_path("flags/#{site_version.code}.png") }
+    ]
+  end
 
+coffee:
+  $ ->
+    template_function = (site_version) ->
+      return site_version.text if site_version.loading
 
-- locale_options = options_for_select({'AU' => site_version_path('au'), 'US' => site_version_path('us')}, site_version_path(current_site_version.code))
+      $site_version = $(site_version.element)
 
-= content_for :inline_javascript do
-  | $('#locale_selector')
-  |   .select2({
-  |     theme: "fame"
-  |   })
-  |   .on('change', function (e) {
-  |     window.location = $(this).val();
-  |   });
+      """
+      <img src="#{$site_version.data("flag-url")}" alt="#{site_version.text}"> #{site_version.text}
+      """
 
+    $('#locale_selector').select2
+      escapeMarkup: (markup) -> markup
+      minimumResultsForSearch: Infinity
+      templateResult: template_function,
+      templateSelection: template_function
+      theme: "fame"
+    .on 'change', (e) ->
+      window.location = $(this).val();
 
 #locale-switcher-bar.row.visible-md-block.visible-lg-block
   #select-locale.col-md-4.text-left
     | You're shipping in:
-    = select_tag :locale_selector, locale_options, 'data-minimum-results-for-search' => 'Infinity'
-    / = select_tag 'locale-selector', locale_options
+    = select_tag :locale_selector, options_for_select(options_for_locale_select, site_version_path(current_site_version.code))
 
   #ad-text.col-md-4.text-center
     | Free Shipping in Australia and New Zealand

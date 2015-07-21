@@ -6,6 +6,7 @@ $disabled-color:  #999;
   @import "single";
   @import "multiple";
 
+  min-width: 110px;
   text-transform: none;
 
   &.select2-container--open.select2-container--above {
