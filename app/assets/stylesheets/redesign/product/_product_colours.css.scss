@@ -71,6 +71,8 @@ $product-color-hot-pink: #ff3399;
       .color-gold                    { background-color: #bf9541; }
       .color-green                   { background-color: #00ff00; }
       .color-grey                    { background-color: #bcbebb; }
+      .color-gypsy-queen             { @include image-color-selector('GypsyQueen.png'); }
+      .color-gypsy-scarf             { @include image-color-selector('GypsyScarf.png'); }
       .color-hot-pink                { background-color: #ff3399; }
       .color-ice-blue                { background-color: $product-color-ice-blue; }
       .color-indigo                  { background-color: #3366cc; }
