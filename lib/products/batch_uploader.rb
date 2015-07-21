@@ -244,10 +244,6 @@ module Products
         taxons: /taxons? \d+/i,
         colors: /(color|colour) \d+$/i,
 
-        care_instructions: /care instructions/i,
-        fit: /fit/i,
-        size: /size/i,
-
         # Style Profile
         glam: /glam$/i,
         girly: /girly$/i,
@@ -265,7 +261,9 @@ module Products
         petite: /petite/i,
         # Properties
         style_notes: /styling notes/i,
-        fit: /size.+fit/i,
+        care_instructions: /care instructions/i,
+        fit: /fit/i,
+        size: /size/i,
         fabric: /fabric/i,
         product_type: /product type/i,
         product_category: /product category/i,
@@ -454,8 +452,8 @@ module Products
         product.set_property(name, value)
       end
 
-      if factory = Factory.find_by_name(args[:factory_name])
-        product.factory = factory.capitalize
+      if factory = Factory.find_by_name(args[:factory_name].try(:capitalize))
+        product.factory = factory
       end
 
       product
