@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="43px" height="43px" viewBox="0 0 43 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.1 (12005) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Menu" sketch:type="MSLayerGroup" fill="#1A1918">
+            <path d="M1.457,2.67 L41.457,2.67 C42.007,2.67 42.457,2.22 42.457,1.67 C42.457,1.12 42.007,0.67 41.457,0.67 L1.457,0.67 C0.907,0.67 0.457,1.12 0.457,1.67 C0.457,2.22 0.907,2.67 1.457,2.67" id="Fill-320" sketch:type="MSShapeGroup"></path>
+            <path d="M41.457,40.67 L1.457,40.67 C0.907,40.67 0.457,41.12 0.457,41.67 C0.457,42.22 0.907,42.67 1.457,42.67 L41.457,42.67 C42.007,42.67 42.457,42.22 42.457,41.67 C42.457,41.12 42.007,40.67 41.457,40.67" id="Fill-321" sketch:type="MSShapeGroup"></path>
+            <path d="M41.457,20.67 L1.457,20.67 C0.907,20.67 0.457,21.12 0.457,21.67 C0.457,22.22 0.907,22.67 1.457,22.67 L41.457,22.67 C42.007,22.67 42.457,22.22 42.457,21.67 C42.457,21.12 42.007,20.67 41.457,20.67" id="Fill-322" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>
