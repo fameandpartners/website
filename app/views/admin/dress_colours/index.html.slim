@@ -64,12 +64,36 @@ style
 
     }
 
+javascript:
+  $(document).ready(function(){
+    var containerEl = $('#product-color-content .recommended');
+    var filterEl = $('#product-color-filter');
+
+    filterEl.on('keyup', function(ev){
+      var v = ev.currentTarget.value;
+      filterColours(v);
+    });
+
+    var filterColours = function(filterValue) {
+      if (filterValue == '' || filterValue == null || filterValue == ' ') {
+        containerEl.children('.color-option').show();
+      } else {
+        containerEl.children('.color-option').hide();
+        containerEl.children('.color-option').filter( '[data-name*="' + filterValue + '"]').show();
+      }
+    };
+  });
+
 
 h2 Colours Preview Tool
+
+form
+  input#product-color-filter type='text' placeholder='filter'
+
 #product-color-content style='text-align:center;color:#000;'
   .recommended.grey style='display:flex; flex-wrap: wrap;'
     - dress_colours.each do |color|
-        .color-option.product-option href="#" data-id=color.id  data-name=color.presentation
+        .color-option.product-option href="#" data-id=color.id  data-name=color.name
           .highlight-missing-colours style='margin: 10px;'
             .option-box style='width:220px;height:50px;' class="color-#{color.name}"
           .option-name
