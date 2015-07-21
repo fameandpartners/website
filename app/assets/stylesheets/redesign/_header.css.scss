@@ -1,32 +1,7 @@
-@import 'redesign/vars';
+/////////// locale switcher //////////
 
-/////////// locale switcher (grey top menu) //////////
-
-#locale-switcher-bar {
-  background-color: $gray-light-bg;
-  font-size: 15px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  text-transform: none;
-
-  .col-md-4 {
-    padding-bottom: 0;
-    padding-top: 0;
-  }
-
-  #select-locale {
-    padding-left: 35px;
-  }
-
-  #ad-text {
-    font-family: "forum", sans-serif;
-    text-transform: uppercase;
-  }
-
-  #customer-service {
-    padding-right: 35px;
-  }
-}
+@import 'redesign/header/locale_switcher/base';
+@import 'redesign/header/select2_fame_theme/layout';
 
 /////////// mega menu //////////
 
