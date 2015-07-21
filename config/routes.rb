@@ -415,7 +415,7 @@ FameAndPartners::Application.routes.draw do
     # Redirecting all bridesmaid party URLs
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
 
-    resources :site_versions, only: [:show]
+    resources :site_versions, only: [:show], as: :site_version
   end
 
   if Rails.env.development?
