@@ -14,10 +14,14 @@
   .row
     = image_tag('landing-page-mobile/tip3.png', class: "landing-page-tip3")
 
-  - @products = Revolution::ProductService.new(['495','575','582','573'], current_site_version).spree_products
+  - @products = Revolution::ProductService.new(['587','566','479'], current_site_version).spree_products
   .row
     center
       = image_tag('landing-page-mobile/threedresses2.jpg', class: "landing-page-threedresses")
+      div.linkarea
+        = link_to "", collection_product_path(@products[0]), class: "item"
+        = link_to "", collection_product_path(@products[1]), class: "item"
+        = link_to "", collection_product_path(@products[2]), class: "item"
   .row
     = image_tag('landing-page-mobile/tip4.png', class: "landing-page-tip4")
   .row
