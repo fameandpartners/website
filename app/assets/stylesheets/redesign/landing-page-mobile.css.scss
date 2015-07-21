@@ -113,6 +113,7 @@
 
 .landing-page-tip4 {
   width: 330px;
+  margin-top: 40px;
   padding-top:40px;
   padding-bottom:40px;
   padding-left:15px;
@@ -152,4 +153,41 @@
   float:left;
   margin-left: 3.3%;
   margin-right: 6.6%;
+}
+
+.threedresses-first{
+  width: 30%;
+  font-size: 0.5em;
+  margin-left: 15px;
+  margin-top: 258px;
+  position: absolute;
+  z-index: 2;
+  span{
+    font-weight: 900 !important;
+  }
+}
+.threedresses-second{
+  width: 30%;
+  font-size: 0.5em;
+  margin-left: 122px;
+  margin-top: 258px;
+  position: absolute;
+  z-index: 2;
+  span{
+    font-weight: 900 !important;
+  }
+}
+.threedresses-third{
+  width: 30%;
+  font-size: 0.5em;
+  margin-left: 237px;
+  margin-top: 258px;
+  position: absolute;
+  z-index: 2;
+  span{
+    font-weight: 900 !important;
+  }
+}
+.landing-page-bohemium{
+  width: 100%;
 }
