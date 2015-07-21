@@ -1,5 +1,5 @@
 .landing-page-header {
-  width: 300px;
+  width: 90%;
   margin-top: 90px;
   margin-bottom: 35px;
 }
@@ -70,17 +70,28 @@
     margin-top: 265px;
     margin-left: 240px;
   }
+  @media(min-width: 321px)and(max-width: 413px){
+    margin-top: 270px;
+  }
   @media(min-width: 414px)and(max-width: 599px){
     margin-left: 300px;
+    margin-top: 285px;
   }
   @media(min-width: 600px)and(max-width: 767px){
     margin-left: 433px;
+    margin-top: 375px;
     width: 100px;
   }
-  @media(min-width: 768px)
+  @media(min-width: 768px)and(max-width: 799px)
   {
     margin-left: 583px;
     width: 110px;
+    margin-top: 449px;
+  }
+  @media(min-width: 800px){
+    margin-top: 465px;
+    width: 115px;
+    margin-left: 610px;
   }
 }
 
