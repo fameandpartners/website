@@ -249,4 +249,7 @@ class StaticsController < ApplicationController
     @title = "Hashtag #fame2015 to win" + default_seo_title
     @description = "Hashtag #fame2015 to win"
   end
+
+  def landing_page_mobile
+  end
 end

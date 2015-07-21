@@ -1,0 +1,62 @@
+.container-fluid
+  .span
+    = image_tag('landing-page-mobile/holydress.png', class: 'holydress')
+  .row
+    center
+      = image_tag('landing-page-mobile/header.png', class: "landing-page-header")
+  .row.pinkRow
+    = image_tag('landing-page-mobile/tip1.png', class: "landing-page-tip1")
+  .row
+    = image_tag('landing-page-mobile/tip2.png', class: "landing-page-tip2")
+  .row
+    = image_tag('landing-page-mobile/shopthislook.png', class: "shopthislook")
+  .row
+    = image_tag('landing-page-mobile/tip3.png', class: "landing-page-tip3")
+  .row
+    center
+      = image_tag('landing-page-mobile/threedresses.jpg', class: "landing-page-threedresses")
+  .row
+    = image_tag('landing-page-mobile/tip4.png', class: "landing-page-tip4")
+  .row
+    = image_tag('landing-page-mobile/getthislook.jpg', class: "landing-page-getthislook")
+  .row
+    center
+      = image_tag('landing-page-mobile/myfavouritedresses.jpg', class: "landing-page-myfavouritedresses")
+
+  - @products = Revolution::ProductService.new(['495','575','582','573'], current_site_version).spree_products
+
+  .row
+    span.landing-page-image-left
+      = link_to collection_product_path(@products[0]) do
+        center
+          = cropped_product_hoverable_image_tag(@products[0])
+      .details.text-center
+        span.name = @products[0].name
+        span.price = price_for_product(@products[0])
+    span.landing-page-image-right
+      = link_to collection_product_path(@products[1]) do
+        center
+          = cropped_product_hoverable_image_tag(@products[1])
+      .details.text-center
+        span.name = @products[1].name
+        span.price = price_for_product(@products[1])
+  .row
+    span.landing-page-image-left
+      = link_to collection_product_path(@products[2]) do
+        center
+          = cropped_product_hoverable_image_tag(@products[2])
+      .details.text-center
+        span.name = @products[2].name
+        span.price = price_for_product(@products[2])
+    span.landing-page-image-right
+      = link_to collection_product_path(@products[3]) do
+        center
+          = cropped_product_hoverable_image_tag(@products[3])
+      .details.text-center
+        span.name = @products[3].name
+        span.price = price_for_product(@products[3])
+
+  .row.blackRow
+    center
+      span
+        = button_to 'VIEW ALL OUR DRESSES', dresses_path, method: :get

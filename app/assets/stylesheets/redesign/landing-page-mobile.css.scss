@@ -1,0 +1,155 @@
+.landing-page-header {
+  width: 300px;
+  margin-top: 90px;
+  margin-bottom: 35px;
+}
+
+.pinkRow{
+  background-color: #eeddf0;
+}
+
+.blackRow{
+  background-color: black;
+  color:white;
+  margin-top: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  input{
+    background-color: black;
+    border:none;
+  }
+}
+.landing-page-tip1 {
+
+  padding-top:40px;
+  padding-bottom:40px;
+  padding-left:15px;
+  @media(max-width: 320px){
+    width: 250px;
+  }
+  @media(min-width: 321px)and(max-width: 599px){
+    width: 285px;
+  }
+  @media(min-width: 600px)and(max-width: 767px)
+  {
+    width: 420px;
+  }
+  @media(min-width: 768px)
+  {
+    width: 575px;
+  }
+}
+
+.landing-page-tip2 {
+  padding-top:40px;
+  padding-bottom:40px;
+  padding-left:15px;
+  @media(max-width: 320px){
+    width: 250px;
+  }
+  @media(min-width: 321px)and(max-width: 599px){
+    width: 285px;
+  }
+  @media(min-width: 600px)and(max-width: 767px)
+  {
+    width: 420px;
+  }
+  @media(min-width: 768px)
+  {
+    width: 575px;
+  }
+}
+
+.holydress {
+  position: absolute;
+  width: 80px;
+  margin-top: 255px;
+  margin-left: 270px;
+  @media(max-width: 320px){
+    width: 60px;
+    margin-top: 265px;
+    margin-left: 240px;
+  }
+  @media(min-width: 414px)and(max-width: 599px){
+    margin-left: 300px;
+  }
+  @media(min-width: 600px)and(max-width: 767px){
+    margin-left: 433px;
+    width: 100px;
+  }
+  @media(min-width: 768px)
+  {
+    margin-left: 583px;
+    width: 110px;
+  }
+}
+
+.shopthislook{
+  width: 100%;
+}
+
+.landing-page-tip3 {
+  padding-top:40px;
+  padding-bottom:40px;
+  padding-left:15px;
+  @media(max-width: 320px){
+    width: 310px;
+  }
+  @media(min-width: 321px)and(max-width: 599px){
+    width: 355px;
+  }
+  @media(min-width: 600px)and(max-width: 767px){
+    width: 535px;
+  }
+  @media(min-width: 768px){
+    width: 675px;
+  }
+}
+
+.landing-page-threedresses{
+  width: 75%;
+  margin-bottom: 15px;
+}
+
+.landing-page-tip4 {
+  width: 330px;
+  padding-top:40px;
+  padding-bottom:40px;
+  padding-left:15px;
+  @media(max-width: 320px){
+    width: 305px;
+  }
+  @media(min-width: 321px)and(max-width: 599px){
+    width: 330px;
+  }
+  @media(min-width: 600px)and(max-width: 767px){
+    width: 535px;
+  }
+  @media(min-width: 768px){
+    width: 675px;
+  }
+}
+
+.landing-page-getthislook{
+  width: 100%;
+}
+
+.landing-page-myfavouritedresses{
+  margin-top: 30px;
+  width: 100%;
+  margin-bottom: 6.6%;
+}
+
+.landing-page-image-left{
+  width: 40%;
+  float:left;
+  margin-left: 6.6%;
+  margin-right: 3.3%;
+}
+
+.landing-page-image-right{
+  width: 40%;
+  float:left;
+  margin-left: 3.3%;
+  margin-right: 6.6%;
+}
