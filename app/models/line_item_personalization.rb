@@ -9,28 +9,19 @@ class LineItemPersonalization < ActiveRecord::Base
              class_name: 'Spree::LineItem'
   belongs_to :color,
              class_name: 'Spree::OptionValue'
+  belongs_to :size,
+             class_name: 'Spree::OptionValue'
 
   attr_accessible :customization_value_ids,
                   :height,
-                  :size,
-                  :color_id,
-                  :color_name
+                  :size_id,
+                  :color_id
 
-  validates :size,
-            presence: true,
-            inclusion: {
-              allow_blank: true,
-              in: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
-            }
-
-  validates :color,
-            presence: true
+  validates :size, :color,  presence: true
 
   DEFAULT_CUSTOM_SIZE_PRICE   = BigDecimal.new('20.0')
   DEFAULT_CUSTOM_COLOR_PRICE  = BigDecimal.new('16.0')
 
-  attr_accessor :color_name
-  before_validation :set_color_by_name
   before_save :recalculate_price
 
   after_save do
@@ -61,7 +52,7 @@ class LineItemPersonalization < ActiveRecord::Base
 
   def options_hash
     values = {}
-    values['Size'] = size
+    values['Size'] = size.presentation.to_i if size.present?
     values['Color'] = color.presentation if color.present?
 
     customization_values.each do |value|
@@ -69,14 +60,6 @@ class LineItemPersonalization < ActiveRecord::Base
     end
 
     values
-  end
-
-  def set_color_by_name
-    if @color_name.present? and color.blank? and product.present?
-      self.color = product.basic_colors.where(name: @color_name).first
-      self.color ||=  product.custom_colors.where(name: @color_name).first
-    end
-    return true
   end
 
   # calculate additional cost
@@ -107,15 +90,23 @@ class LineItemPersonalization < ActiveRecord::Base
 
   # Size Pricing
   def calculate_size_cost(default_extra_size_cost = LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE)
-    add_plus_size_cost? ? default_extra_size_cost : BigDecimal.new(0)
+    if add_plus_size_cost? 
+      if (discount = size.discount).present?
+        Spree::Price.new(amount: default_extra_size_cost).apply(discount).price
+      else
+        default_extra_size_cost
+      end
+    else
+      BigDecimal.new(0)
+    end
   end
 
   def add_plus_size_cost?
-    if plus_size? == nil
-      if size && size.to_i >= locale_plus_sizes
-        return true
-      end
-    end
+    # dress without small sizes
+    return false if plus_size?
+
+    # extra size
+    size && size.presentation.to_i >= locale_plus_sizes
   end
 
   def locale_plus_sizes
@@ -125,7 +116,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def plus_size?
-    return true if !product.blank? && product.taxons.where(:name => "Plus Size").count > 0
+    product.present? && product.taxons.where(name: "Plus Size").exists?
   end
   # eo size pricing
 

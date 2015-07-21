@@ -30,6 +30,11 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_back_or_default(account_url)
     else
       user = Spree::User.find_by_email(auth_hash['info']['email']) || Spree::User.new
+
+      unless user.respond_to? :apply_omniauth_with_additional_attributes
+        load 'lib/overrides/spree_social/user_decorator.rb'
+      end
+
       user.apply_omniauth_with_additional_attributes(auth_hash)
 
       if user.new_record?

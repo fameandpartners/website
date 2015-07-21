@@ -1,16 +1,35 @@
 window.page ||= {}
 
+$.fn.scrollView = ->
+  @each ->
+    $('html, body').animate { scrollTop: $(this).offset().top - 20 }, 1000
+    return
+
 page.initCheckoutEditPage = () ->
   page = {
     ajax_callbacks: {}
     init: () ->
-      $(document).on('change',  '#order_use_billing', page.updateShippingFormVisibility)
+      $('.close').on('click', ->
+        $('.auth-alert').hide()
+      )
+
+      @ship_to_different_address = $("input[name='ship_to_address']:first").prop("checked") == false
+      $("input[name='ship_to_address']:first").click =>
+        @ship_to_different_address = false
+        page.updateShippingFormVisibility()
+
+
+      $("input[name='ship_to_address']:last").click =>
+        @ship_to_different_address = true
+        page.updateShippingFormVisibility()
+
+
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
       $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
 
       $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
       $(document).on('click',   '.open-login-popup', page.openLoginPopup)
-      
+
       $(document).on('click',   '.cvv-popup-toggle', page.toggleCVVCodePopup)
 
       $(document).on('keyup',   'input', page.updateAddressFormVisibility)
@@ -35,6 +54,8 @@ page.initCheckoutEditPage = () ->
       if app.debug || app.env == 'development'
         if $('.place-order button').length == 0
           console.log('WARRRRRGHNING! - credit card handlers have invalid selectors. cc payment will not work, probably')
+
+
 
     # Disable the button and set a helpful message
     safeSubmitButton: (button) ->
@@ -121,12 +142,14 @@ page.initCheckoutEditPage = () ->
       #$('.selectbox').not('.chosen-container').chosen()
 
     updateShippingFormVisibility: () ->
-      if $('#order_use_billing').is(':checked')
+      if @ship_to_different_address == false
         $('[data-hook="shipping_inner"]').hide()
         $('[data-hook="shipping_inner"]').find(':input').prop('disabled', true)
+        $('#order_use_billing').val(1)
       else
         $('[data-hook="shipping_inner"]').show()
         $('[data-hook="shipping_inner"]').find(':input').prop('disabled', false)
+        $('#order_use_billing').val("")
 
     updatePasswordFieldsVisibility: () ->
       container = $('.checkout-content.line.form-global.passwords')
@@ -207,13 +230,28 @@ page.initCheckoutEditPage = () ->
         $(states_field_id).trigger('chosen:updated')
 
     openLoginPopup: (e) ->
-      if window.popups && window.popups.LoginPopup()
-        e.preventDefault()
-        popup = new window.popups.LoginPopup()
-        popup.show()
-      else
-        # redirecting instead login popup
-        console.log('redirecting to login')
+      e.preventDefault()
+      page.loginUserRequest()
+        .done( (data, state) =>
+          if data && !data.error && state == 'success'
+            window.location.reload()
+          else
+            $(".auth-alert").show()
+        )
+
+    loginUserRequest: () ->
+      formData = {
+        spree_user: {
+          email: $('#email').val(),
+          password: $('#password').val()
+        }
+      }
+      $.ajax(
+        url: urlWithSitePrefix("/spree_user/sign_in")
+        type: 'POST'
+        dataType: 'json'
+        data: $.param(formData)
+      )
 
     toggleCVVCodePopup: (e) ->
       e.preventDefault()

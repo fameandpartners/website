@@ -12,7 +12,7 @@ Spree::Taxon.class_eval do
 
   class << self
     def find_child_taxons_by_permalink(permalink)
-      where('permalink LIKE ?', "%/#{permalink}").first
+      where('permalink LIKE ?', "%/#{permalink.downcase}").first
     end
 
     def from_taxonomy(taxonomy_name)

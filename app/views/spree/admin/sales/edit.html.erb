@@ -68,6 +68,7 @@
           </div>
         </div>
       </fieldset>
+
       <% index = 0 %>
       <fieldset class="toggable">
         <legend><%= t(:products) %></legend>
@@ -157,6 +158,7 @@
           </table>
         </div>
       </fieldset>
+
       <fieldset class="toggable">
         <legend><%= t(:colors) %></legend>
         <div class="row">
@@ -200,6 +202,51 @@
           </table>
         </div>
       </fieldset>
+
+      <fieldset class="toggable">
+        <legend><%= t(:custom_size_extra_price_discount) %></legend>
+        <div class="row">
+          <table>
+            <thead>
+            <tr>
+              <td>Active</td>
+              <td>Name</td>
+              <td>Discount ( 0..100%)</td>
+            </tr>
+            </thead>
+
+            <% Spree::OptionValue.sizes.includes(:discounts).each do |size| %>
+              <% discount = size.discounts.find{ |discount| discount.sale_id == @object.id } %>
+              <tr>
+                <td>
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_type]" value="<%= size.class.name %>" />
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][discountable_id]" value="<%= size.id %>" />
+                  <input type="hidden" name="sale[discounts_attributes][<%= index %>][_destroy]" value="1" />
+                  <% if discount.present? %>
+                    <input type="hidden" name="sale[discounts_attributes][<%= index %>][id]" value="<%= discount.id %>" />
+                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" checked />
+                  <% else %>
+                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" />
+                  <% end %>
+                </td>
+                <td>
+                  Size: <%= size.presentation %>
+                </td>
+                <td>
+                  <% field_name = "sale[discounts_attributes][#{ index }][amount]" %>
+                  <% if discount.present? %>
+                    <input type="number" min="0" max="100" name="<%= field_name %>" value="<%= discount.amount %>" />
+                  <% else %>
+                    <input type="number" min="0" max="100" name="<%= field_name %>" />
+                  <% end %>
+                </td>
+              </tr>
+              <% index += 1 %>
+            <% end %>
+          </table>
+        </div>
+      </fieldset>
+
       <p class="form-buttons">
         <div class="form-buttons filter-actions actions" data-hook="buttons">
           <%= button t(:update), 'icon-refresh' %>

@@ -1,8 +1,6 @@
 .footer.container
   .footer-navigation
     .col-md-3.col-sm-6
-      .footer-logo
-
       = render 'layouts/redesign/address'
 
     .col-md-2.col-md-offset-5.col-sm-3
@@ -47,34 +45,3 @@
         | &copy;&nbsp;
         = Time.now.year
         | &nbsp;Fame &amp; Partners. All rights reserved.
-
-    .col-md-3.social-links.col-sm-12
-      ul.footer-social
-        li.footer-social--item
-          = link_to configatron.links.facebook, target: :blank, class: 'facebook' do
-            = image_tag '_icons/facebook.png'
-        li.footer-social--item
-          = link_to configatron.links.pinterest, target: :blank, class: 'pinterest' do
-            = image_tag '_icons/pinterest.png'
-        li.footer-social--item
-          = link_to configatron.links.instagram, target: :blank, class: 'instagram' do
-            = image_tag '_icons/instagram.png'
-        li.footer-social--item
-          = link_to configatron.links.twitter, target: :blank, class: 'twitter' do
-            = image_tag '_icons/twitter.png'
-
-/ .hide
-/   #vex-popup
-/     h1 Discover your style profile and get $20 to spend on a dress.
-/     p TAKE OUR STYLE QUIZ TO GET ACCESS TO YOUR OWN PERSONALISED STYLE BOUTIQUE.
-/     p = link_to 'SIGN UP WITH YOUR EMAIL ADDRESS', '#', class: 'btn btn-block btn-white btn-md'
-/     p or
-/     p = link_to 'Sign UP USING Facebook', '#', class: 'btn btn-block btn-facebook btn-md'
-/     p 
-/       ' ALREADY A MEMBER? 
-/       = link_to 'LOG IN HERE', '#'
-/ coffee:
-/   $ ->
-/     vex.open
-/       className: 'vex-dialog-default vex-dialog-pink vex-dialog-signup'
-/       content: $('#vex-popup')

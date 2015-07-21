@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe FindUsersSiteVersion, type: :service do
+describe FindUsersSiteVersion, type: :service, memoization_support: true do
   describe "#get" do
     before(:each) do
       SiteVersion.delete_all
-      SiteVersion.instance_variable_set(:@default, nil)
+      rememoize(SiteVersion, :@default)
     end
 
     it "returns site version chosen by user previously" do

@@ -46,21 +46,40 @@ ruby:
     "
   end
 
+  side_menu_init = "
+    window.app.side_menu = new SideMenu({
+      container:              '#sideMenu',
+      sideMenuTrigger:        '#side-menu-trigger',
+      close:                  '#sideMenu #close',
+      arrowImg:               '.arrow img',
+      dropdownMenu:           '.dropdown-menu'
+    });
+  "
+
 = content_for :inline_javascript do
   = raw init_items_counter_sync
   = raw init_moodboard_counter_sync
   = raw init_style_quiz
+  = raw side_menu_init
 
 - cache [:layout, :header, spree_user_signed_in?], expires_in: configatron.cache.expire.long do
   header
+
     .nav-menu.nav-alert-top
       .container-fluid.nav-menu-container
+        .masthead.pull-left.visible-xs.visible-sm
+          nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
+            .navbar-header
+              button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
+                = image_tag('Hamburger.svg', height: '25px')
+
         .masthead.pull-left.hidden-xs
           = link_to root_path
             = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
+
         .masthead.pull-left.visible-xs
-          = link_to '/' do
+          = link_to root_path do
             = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
         ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
@@ -80,9 +99,6 @@ ruby:
 
           li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
             = render "layouts/redesign/header/my_account_dropdown"
-
-          li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs
-            = render "layouts/redesign/header/my_account_dropdown_mobile"
 
           li.menu-item
             a.menu-item--link.search href="#"
@@ -104,6 +120,54 @@ ruby:
               span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
               span.hidden-sm.hidden-xs.hidden-xxs cart:
               span#cart-item-count 0
+
+#sideMenu
+  nav.navbar.navbar-default.visible-xs.visible-sm
+    .navbar-header
+      a.navbar-brand href="#"  SHOP
+      a#close
+        = image_tag('Hamburger.svg', height: '25px')
+    .main-menu
+      ul.nav.navbar-nav
+        li
+          a
+            | EVENTS
+            span.arrow
+              = image_tag('icon-arrow-right.png')
+          ul.dropdown-menu.mobileAnimation
+            = render :partial => '/layouts/redesign/event'
+        li
+          a
+            | STYLES
+            span.arrow
+              = image_tag('icon-arrow-right.png')
+          ul.dropdown-menu.mobileAnimation
+            = render :partial => '/layouts/redesign/style'
+        li
+          a
+            | COLORS
+            span.arrow
+              = image_tag('icon-arrow-right.png')
+          ul.dropdown-menu.mobileAnimation
+            = render :partial => '/layouts/redesign/color'
+        li
+          a
+            | EXPRESS MAKING
+            span.arrow
+              = image_tag('icon-arrow-right.png')
+          ul.dropdown-menu.mobileAnimation
+            li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
+      .all-dresses
+        center
+          = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
+      .clearfix
+      .account-login
+        = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
+          = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
+          span
+            | Account login
+
+
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 

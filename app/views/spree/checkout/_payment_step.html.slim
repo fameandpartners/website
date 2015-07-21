@@ -1,4 +1,4 @@
-h2.checkout-section-title Payment Details
+h2.checkout-section-title 3. Payment Details
 - if current_step.eql?('payment')
   - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
     - content_for :head do

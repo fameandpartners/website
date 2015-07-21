@@ -7,12 +7,10 @@ window.helpers.ProductSideSelectorPanel = class ProductSideSelectorPanel
     @$container.find('.close-btn').on('click', @close)
 
   open: =>
-    $('body').addClass('no-scroll')
     @$overlay.addClass('is-visible')
     @$container.addClass('speed-in')
 
   close: =>
     @$container.removeClass('speed-in')
     @$overlay.removeClass('is-visible')
-    $('body').removeClass('no-scroll')
 

@@ -16,14 +16,14 @@ describe Spree::Product, :type => :model do
     end
 
     it "false if no variants with fast delivery" do
-      allow(subject).to receive(:variants) { 
+      allow(subject).to receive(:variants) {
         [ double('item with slow delivery', :fast_delivery => false)]
       }
       expect(subject.fast_delivery).to be false
     end
 
     it "true if exists variant with fast delivery" do
-      allow(subject).to receive(:variants) { 
+      allow(subject).to receive(:variants) {
         [ double('item with fast delivery', :fast_delivery => true )]
       }
 
@@ -37,9 +37,9 @@ describe Spree::Product, :type => :model do
     end
 
     describe '#new_size_chart?' do
-      it 'not by default' do
+      it 'by default' do
         product = described_class.new
-        expect(product.new_size_chart?).to be_falsey
+        expect(product.new_size_chart?).to be_truthy
       end
 
       it 'when latest' do

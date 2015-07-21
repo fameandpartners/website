@@ -4,6 +4,9 @@ ruby:
   options_hash_select = { class: 'form-control form-control-md selectbox' }
   options_hash[:autocomplete] = 'off' if Rails.env.production?
 
+= content_for :inline_javascript do
+  | $('.checkout-section-title:last').scrollView()
+
 .row
   .col-md-12.form-group
     label for="number"  Card number
@@ -15,16 +18,18 @@ ruby:
 .row
   .col-md-6.form-group
     .row
-      .col-md-4.form-group
+      .col-xs-4.col-md-4.form-group
         label for=""  Expiry
-        = select_month(Date.today, { :prefix => param_prefix, :field_name => 'month', :use_month_numbers => true, :prompt => 'Month' }, options_hash_select)
-      .col-md-4.form-group
+        = text_field_tag "#{param_prefix}[month]", '', id: 'month', placeholder: 'MM', maxlength: 2, class: "month #{ options_hash[:class]}"
+      .slash
+        | /
+      .col-xs-4.col-md-4.form-group
         label &nbsp;
-        = select_year(Date.today, { :prefix => param_prefix, :field_name => 'year', :start_year => Date.today.year, :end_year => Date.today.year + 10, :prompt => 'Year' }, options_hash_select)
-      .col-md-4.form-group
+        = text_field_tag "#{param_prefix}[year]", '', id: 'year', placeholder: 'YYYY', maxlength: 4, class: "year #{ options_hash[:class]}"
+      .col-xs-4.col-md-4.form-group.card_code
         label CVC
-        = text_field_tag "#{param_prefix}[verification_value]", '', id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5
-  
+        = text_field_tag "#{param_prefix}[verification_value]", '', id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5, maxlength: 3
+
   .col-md-6.form-group.place-order
     label &nbsp;
     button.btn.btn-black.btn-block.btn-md data-loading="Placing..." Place My Order

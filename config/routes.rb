@@ -40,6 +40,7 @@ FameAndPartners::Application.routes.draw do
 
   get '/undefined',    to: 'mysterious_route#undefined'
   get '/au/undefined', to: 'mysterious_route#undefined'
+  get '/1000668',      to: 'mysterious_route#undefined'
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
@@ -67,6 +68,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
     get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
@@ -85,8 +87,15 @@ FameAndPartners::Application.routes.draw do
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
+    get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
+
     #edits
+    get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
+
+    get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
+    get '/lookbook/garden-wedding' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_wedding_collection
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
+
     get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
 
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
@@ -101,7 +110,7 @@ FameAndPartners::Application.routes.draw do
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
-    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'plus-size', :as => :all_size_collection
+    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
 
     get '/prom-collection' => redirect('/lookbook/prom')
     get '/lookbook/prom' => 'products/collections#show', :permalink => 'PROM2015', :as => :prom_collection

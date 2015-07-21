@@ -205,7 +205,7 @@ module Orders
 
     def size
       if personalization.present?
-        personalization.size
+        personalization.size.try(:name) || 'Unknown Size'
       else
         variant.dress_size.try(:name) || 'Unknown Size'
       end
