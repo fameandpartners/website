@@ -1,34 +1,36 @@
+- asset_path = "//#{configatron.asset_host}/pages/instagram/#{params[:variant] || 1}"
+
 .container-fluid
   a(href="#")
     .span
-      = image_tag('landing-page-mobile/holydress.png', class: 'holydress')
+      = image_tag("#{asset_path}/holydress.png", class: 'holydress')
   .row
     center
-      = image_tag('landing-page-mobile/header.png', class: "landing-page-header")
+      = image_tag("#{asset_path}/header.png", class: "landing-page-header")
   .row.pinkRow
-    = image_tag('landing-page-mobile/tip1.png', class: "landing-page-tip1")
+    = image_tag("#{asset_path}/tip1.png", class: "landing-page-tip1")
   .row
-    = image_tag('landing-page-mobile/tip2.png', class: "landing-page-tip2")
+    = image_tag("#{asset_path}/tip2.png", class: "landing-page-tip2")
   .row
-    = image_tag('landing-page-mobile/shopthislook.png', class: "shopthislook")
+    = image_tag("#{asset_path}/shopthislook.png", class: "shopthislook")
   .row
-    = image_tag('landing-page-mobile/tip3.png', class: "landing-page-tip3")
+    = image_tag("#{asset_path}/tip3.png", class: "landing-page-tip3")
 
   - @products = Revolution::ProductService.new(['587','566','479'], current_site_version).spree_products
   .row
     center
-      = image_tag('landing-page-mobile/threedresses2.jpg', class: "landing-page-threedresses")
+      = image_tag("#{asset_path}/threedresses2.jpg", class: "landing-page-threedresses")
       div.linkarea
         = link_to "", collection_product_path(@products[0]), class: "item"
         = link_to "", collection_product_path(@products[1]), class: "item"
         = link_to "", collection_product_path(@products[2]), class: "item"
   .row
-    = image_tag('landing-page-mobile/tip4.png', class: "landing-page-tip4")
+    = image_tag("#{asset_path}/tip4.png", class: "landing-page-tip4")
   .row
-    = image_tag('landing-page-mobile/getthislook.jpg', class: "landing-page-getthislook")
+    = image_tag("#{asset_path}/getthislook.jpg", class: "landing-page-getthislook")
   .row
     center
-      = image_tag('landing-page-mobile/myfavouritedresses.jpg', class: "landing-page-myfavouritedresses")
+      = image_tag("#{asset_path}/myfavouritedresses.jpg", class: "landing-page-myfavouritedresses")
 
   - @products = Revolution::ProductService.new(['495','575','582','573'], current_site_version).spree_products
 
@@ -63,4 +65,4 @@
         span.name = @products[3].name
         span.price = price_for_product(@products[3])
   .row
-    = image_tag('landing-page-mobile/bohemium.jpg', class: "landing-page-bohemium")
+    = image_tag("#{asset_path}/bohemium.jpg", class: "landing-page-bohemium")
