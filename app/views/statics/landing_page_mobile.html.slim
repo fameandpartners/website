@@ -19,7 +19,9 @@
   - @products = Revolution::ProductService.new(['587','566','479'], current_site_version).spree_products
   .row
     center
-      = image_tag("#{asset_path}/threedresses2.jpg", class: "landing-page-threedresses")
+      = link_to image_tag("#{asset_path}/firstdress.jpg"), collection_product_path(@products[0]), class: 'dress-3'
+      = link_to image_tag("#{asset_path}/seconddress.jpg"), collection_product_path(@products[1]), class: 'dress-3'
+      = link_to image_tag("#{asset_path}/thirddress.jpg"), collection_product_path(@products[2]), class: 'dress-3'
       div.linkarea
         = link_to "", collection_product_path(@products[0]), class: "item"
         = link_to "", collection_product_path(@products[1]), class: "item"
