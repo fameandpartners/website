@@ -25,7 +25,7 @@ coffee:
     = select_tag :locale_selector, options_for_select(SiteVersions::Presenter.options_for_select, site_version_path(current_site_version.code))
 
   #ad-text.col-md-4.text-center
-    | Free Shipping in Australia and New Zealand
+    = TopBanner.new(current_site_version).center_text
 
   #customer-service.col-md-4.text-right
-    | 24/7 Customer Service 1300 924 860
+    = TopBanner.new(current_site_version).right_text

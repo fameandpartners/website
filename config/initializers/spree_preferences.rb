@@ -1,4 +1,3 @@
-
 Spree::AppConfiguration.class_eval do
   # General preferences
   preference :free_customisations, :boolean, :default => false
