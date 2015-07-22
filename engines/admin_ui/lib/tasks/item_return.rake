@@ -1,6 +1,6 @@
 namespace :item_return do
   task :recalculate => :environment do
-    ItemReturn.all.each do |item_return| 
+    ItemReturn.all.each do |item_return|
       ItemReturnCalculator.new(item_return).run.save!
     end
   end
