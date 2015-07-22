@@ -1,7 +1,7 @@
 - asset_path = "//#{configatron.asset_host}/pages/instagram/#{params[:variant] || 1}"
 
 .container-fluid
-  a(href="#")
+  a(href="http://www.fameandpartners.com/dresses/dress-holly-493?color=black")
     .span
       = image_tag("#{asset_path}/holydress.png", class: 'holydress')
   .row
@@ -19,13 +19,16 @@
   - @products = Revolution::ProductService.new(['587','566','479'], current_site_version).spree_products
   .row
     center
-      = link_to image_tag("#{asset_path}/firstdress.jpg"), collection_product_path(@products[0]), class: 'dress-3'
-      = link_to image_tag("#{asset_path}/seconddress.jpg"), collection_product_path(@products[1]), class: 'dress-3'
-      = link_to image_tag("#{asset_path}/thirddress.jpg"), collection_product_path(@products[2]), class: 'dress-3'
+      - @dress1_link = "http://www.fameandpartners.com/dresses/dress-melanie-two-piece-587?color=white"
+      - @dress2_link = "http://www.fameandpartners.com/dresses/dress-chevron-two-piece-566?color=burgundy"
+      - @dress3_link = "http://www.fameandpartners.com/dresses/dress-azalea-floral-two-piece-479?color=pink-azalea-floral"
+      = link_to image_tag("#{asset_path}/firstdress.jpg"), @dress1_link, class: 'dress-3'
+      = link_to image_tag("#{asset_path}/seconddress.jpg"), @dress2_link, class: 'dress-3'
+      = link_to image_tag("#{asset_path}/thirddress.jpg"), @dress3_link, class: 'dress-3'
       div.linkarea
-        = link_to "", collection_product_path(@products[0]), class: "item"
-        = link_to "", collection_product_path(@products[1]), class: "item"
-        = link_to "", collection_product_path(@products[2]), class: "item"
+        = link_to "", @dress1_link, class: "item"
+        = link_to "", @dress2_link, class: "item"
+        = link_to "", @dress3_link, class: "item"
   .row
     = image_tag("#{asset_path}/tip4.png", class: "landing-page-tip4")
   .row
@@ -34,18 +37,28 @@
     center
       = image_tag("#{asset_path}/myfavouritedresses.jpg", class: "landing-page-myfavouritedresses")
 
-  - @products = Revolution::ProductService.new(['495','575','582','573'], current_site_version).spree_products
+  - @products = Revolution::ProductService.new(['495','575','582','573','599','508','580','602'], current_site_version).spree_products
+
+
+  - @dress1_link = "http://www.fameandpartners.com/dresses/dress-emma-kate-495?color=white"
+  - @dress2_link = "http://www.fameandpartners.com/dresses/dress-ophelia-575?color=surreal-floral-white"
+  - @dress3_link = "http://www.fameandpartners.com/dresses/dress-mirabella-582?color=merlot"
+  - @dress4_link = "http://www.fameandpartners.com/dresses/dress-juli-two-piece-573?color=black"
+  - @dress5_link = "http://www.fameandpartners.com/dresses/dress-monochrome-moon-599?color=monochrome"
+  - @dress6_link = "http://www.fameandpartners.com/dresses/dress-elegant-angel-508?color=white"
+  - @dress7_link = "http://www.fameandpartners.com/dresses/dress-summer-angel-580?color=ice-blue"
+  - @dress8_link = "http://www.fameandpartners.com/dresses/dress-boho-breeze-602?color=watercolour"
 
   .row
     span.landing-page-image-left
-      = link_to collection_product_path(@products[0]) do
+      = link_to @dress1_link do
         center
           = cropped_product_hoverable_image_tag(@products[0])
       .details.text-center
         span.name = @products[0].name
         span.price = price_for_product(@products[0])
     span.landing-page-image-right
-      = link_to collection_product_path(@products[1]) do
+      = link_to @dress2_link do
         center
           = cropped_product_hoverable_image_tag(@products[1])
       .details.text-center
@@ -53,18 +66,48 @@
         span.price = price_for_product(@products[1])
   .row
     span.landing-page-image-left
-      = link_to collection_product_path(@products[2]) do
+      = link_to @dress3_link do
         center
           = cropped_product_hoverable_image_tag(@products[2])
       .details.text-center
         span.name = @products[2].name
         span.price = price_for_product(@products[2])
     span.landing-page-image-right
-      = link_to collection_product_path(@products[3]) do
+      = link_to @dress4_link do
         center
           = cropped_product_hoverable_image_tag(@products[3])
       .details.text-center
         span.name = @products[3].name
         span.price = price_for_product(@products[3])
   .row
-    = image_tag("#{asset_path}/bohemium.jpg", class: "landing-page-bohemium")
+    span.landing-page-image-left
+      = link_to @dress5_link do
+        center
+          = cropped_product_hoverable_image_tag(@products[4])
+      .details.text-center
+        span.name = @products[4].name
+        span.price = price_for_product(@products[4])
+    span.landing-page-image-right
+      = link_to @dress6_link do
+        center
+          = cropped_product_hoverable_image_tag(@products[5])
+      .details.text-center
+        span.name = @products[5].name
+        span.price = price_for_product(@products[5])
+  .row
+    span.landing-page-image-left
+      = link_to @dress7_link do
+        center
+          = cropped_product_hoverable_image_tag(@products[6])
+      .details.text-center
+        span.name = @products[6].name
+        span.price = price_for_product(@products[6])
+    span.landing-page-image-right
+      = link_to @dress8_link do
+        center
+          = cropped_product_hoverable_image_tag(@products[7])
+      .details.text-center
+        span.name = @products[7].name
+        span.price = price_for_product(@products[7])
+  .row
+    = link_to image_tag("#{asset_path}/bohemium.jpg"), "http://www.fameandpartners.com/lookbook/bohemian-summer", class: "landing-page-bohemium"
