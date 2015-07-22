@@ -5,6 +5,12 @@ li.shop.menu-item
     .stories.container-fluid.center
 
       .col-md-2
+        = link_to luxe_collection_path do
+          .image-container
+            = image_tag src="//#{configatron.asset_host}/lookbook/the-luxe-collection/nav.jpg", :class => 'img-responsive', :alt => 'The Luxe Collection'
+          p.text-center.edit-title The Luxe Collection
+
+      .col-md-2
         = link_to bohemian_summer_collection_path do
           .image-container
             = image_tag src="//#{configatron.asset_host}/lookbook/bohemian-summer/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
@@ -27,9 +33,3 @@ li.shop.menu-item
           .image-container
             = image_tag src="//#{configatron.asset_host}/lookbook/here-comes-the-sun/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
           p.text-center.edit-title Here Comes The Sun
-
-      .col-md-2
-        = link_to prom_collection_path do
-          .image-container.real-prom
-            = image_tag src="//#{configatron.asset_host}/lookbook/prom/nav.jpg", :class => 'img-responsive', :alt => 'Our Official Prom Collection'
-          p.text-center.edit-title Our Official Prom Collection
