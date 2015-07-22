@@ -1,4 +1,4 @@
-= form_for @form, :as => :event_data, :url => { controller: 'return_approvals/events' } do |f|
+= form_for @form, :as => :event_data, :url => { controller: 'item_returns/events' } do |f|
   = hidden_field_tag :event_type, event_type
   .form-group
     = f.label :location, class: 'control-label'

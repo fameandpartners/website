@@ -1,5 +1,5 @@
 module AdminUi
-  module ReturnApprovals
+  module ItemReturns
     class EventsController < AdminUi::ApplicationController
 
       respond_to :html

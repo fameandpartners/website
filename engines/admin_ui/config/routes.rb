@@ -2,8 +2,8 @@ AdminUi::Engine.routes.draw do
   resources :return_requests
   resources :item_returns do
 
-    get ':event_type/new', :controller => 'return_approvals/events', action: :new, as: :build_event
-    resources :events, :controller => 'return_approvals/events', except: [:update, :delete]
+    get ':event_type/new', :controller => 'item_returns/events', action: :new, as: :build_event
+    resources :events, :controller => 'item_returns/events', except: [:update, :delete]
   end
 
   resources :preferences, only: :index do
