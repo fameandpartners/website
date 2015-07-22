@@ -69,7 +69,9 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
-    get '/landingpagemobile' => 'statics#landing_page_mobile'
+    get '/instagram/1' => 'statics#landing_page_mobile'
+    get '/instagram/2' => 'statics#landing_page_mobile', :variant => '2'
+
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
     get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
