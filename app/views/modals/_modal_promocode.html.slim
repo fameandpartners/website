@@ -1,0 +1,56 @@
+- promocode = 'FAMExPOLYVORE'
+- param_trigger = 'polyvore001'
+
+/ I'm sorry, I cant get this modal to stop appearing otherwise.
+ruby:
+  in_cart = false
+  will_auto_apply = false
+  begin
+    in_cart = current_order.promotions.collect(&:code).include?(promocode)
+    will_auto_apply = session["auto_apply_promo"] == promocode
+  rescue
+  end
+
+/ Assume first visit / promo not applied, show regular modal.
+- if !in_cart && !will_auto_apply
+  javascript:
+    try {
+      $(document).ready(function () {
+        polyvore_popup = new window.page.EmailCaptureModal({
+          promocode: "#{promocode}",
+          content: "Fame_Polyvore",
+          heading: "<div id='heySister'>HEY SISTER. HERE'S 15% OFF,</div>",
+          message: "<div id ='justForYou'>JUST FOR YOU.</div>",
+          className: "polyvore_201507_modal",
+          action: "#{campaigns_email_capture_path}",
+          container: "#modal-popup-content-template.polyvore_201507_modal",
+          timeout: 10,
+          timer: false,
+          force: false
+        });
+
+        polyvore_popup.success = function (data) {
+          $.cookie('polyvore_thanked', 'false');
+          if (data.status == 'ok') {
+          }
+        };
+
+      });
+
+
+    } catch (e) {
+      // NOOP
+    }
+
+  #modal-popup-content-template.hidden.polyvore_201507_modal
+    input type="hidden" name="content" value='content'
+    input type="hidden" name="promocode" value=promocode
+    .vex-footer#modalPromoFooter
+      div width='100%'
+        center
+          input#keepBrowsing type='button' value='KEEP BROWSING' onclick="$('.vex-dialog-button-secondary').click();"
+        center
+          span#discountMessage
+            | (Your discount will be automatically applied to your cart.)
+
+
