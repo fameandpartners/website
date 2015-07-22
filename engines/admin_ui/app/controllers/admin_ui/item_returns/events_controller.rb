@@ -16,9 +16,9 @@ module AdminUi
       end
 
       def new
-        if event_type && event_type == :receive_item
+        if event_type
           @event = event_for(item_return_id: params[:item_return_id])
-          @form  = ::Forms::ReceiveItemForm.new(@event)
+          @form  = form_class(event_type).new(@event)
 
           use_layout = request.xhr? ? 'modal_content' : _layout
 
@@ -35,8 +35,8 @@ module AdminUi
 
         if event_type
           @event = event_for(item_return_id: params[:item_return_id])
+          @form  = form_class(event_type).new(@event)
 
-          @form = ::Forms::ReceiveItemForm.new(@event)
           if @form.validate(form_data)
             @form.save
             redirect_to @event.item_return
@@ -44,6 +44,10 @@ module AdminUi
         else
           redirect_to item_return, alert: "No Event Type #{event_type}"
         end
+      end
+
+      def form_class(event_type)
+        ::Forms::ReceiveItemForm
       end
 
       private
