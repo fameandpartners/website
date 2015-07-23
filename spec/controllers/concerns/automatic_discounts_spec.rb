@@ -22,15 +22,42 @@ module Concerns
     end
 
     describe '#auto_apply_discount_key' do
-      it do
-        expect(controller.send(:auto_apply_discount_param_key)).to eq(:faadc)
-      end
+      it { expect(controller.send(:auto_apply_discount_param_key)).to eq(:faadc) }
     end
-    describe '#apply_automatic_discount_code' do
+
+    describe '#auto_apply_discount_retry_key' do
+      it { expect(controller.send(:auto_apply_discount_retry_key)).to eq(:auto_apply_promo) }
+    end
+
+    describe '#automatic_discount_code' do
+      subject { controller.automatic_discount_code }
+
       describe 'when a code is supplied' do
         it do
           get :index, :faadc => '12345'
-          expect(controller.automatic_discount_code).to eq '12345'
+
+          is_expected.to eq '12345'
+        end
+
+        it 'sets the code value on the session' do
+          get :index, :faadc => '12345'
+          expect(controller.session[:auto_apply_promo]).to eq '12345'
+        end
+
+        it 'uses an unapplied promo code in the session as well' do
+          controller.session[:auto_apply_promo] = "existing_promo_code"
+
+          get :index
+
+          is_expected.to eq "existing_promo_code"
+        end
+      end
+
+      describe 'when a code is supplied' do
+        it do
+          get :index, :faadc => '12345'
+
+          is_expected.to eq '12345'
         end
       end
     end

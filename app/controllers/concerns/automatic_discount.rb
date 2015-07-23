@@ -2,6 +2,10 @@
 # on any page load, this controller concern will attempt to add the coupon
 # specified in the param to the user's cart.
 #
+# It will also attempt to use the value stored in the session
+# key `auto_apply_promo` to retry the application of the promo code
+# throughout the session until it is successfully applied.
+#
 # e.g.
 # `/lookbook/all-size?faadc=instafame20`
 # would apply the promo code `instafame20` to the cart
