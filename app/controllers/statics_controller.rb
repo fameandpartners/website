@@ -251,5 +251,40 @@ class StaticsController < ApplicationController
   end
 
   def landing_page_mobile
+
+    @variant = params[:variant] || "1"
+    case @variant
+    when "1"
+      @blogger_link = "http://www.triciacentenera.com"
+      @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-melanie-two-piece-587?color=white"
+      @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-chevron-two-piece-566?color=burgundy"
+      @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-azalea-floral-two-piece-479?color=pink-azalea-floral"
+
+      @eight_products = Revolution::ProductService.new(['495','575','582','573','599','508','580','602'], current_site_version).spree_products
+      @eight_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-emma-kate-495?color=white"
+      @eight_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-ophelia-575?color=surreal-floral-white"
+      @eight_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-mirabella-582?color=merlot"
+      @eight_products_dress4_link = "http://www.fameandpartners.com/dresses/dress-juli-two-piece-573?color=black"
+      @eight_products_dress5_link = "http://www.fameandpartners.com/dresses/dress-monochrome-moon-599?color=monochrome"
+      @eight_products_dress6_link = "http://www.fameandpartners.com/dresses/dress-elegant-angel-508?color=white"
+      @eight_products_dress7_link = "http://www.fameandpartners.com/dresses/dress-summer-angel-580?color=ice-blue"
+      @eight_products_dress8_link = "http://www.fameandpartners.com/dresses/dress-boho-breeze-602?color=watercolour"
+    when "2"
+      @blogger_link = "#"
+      @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-517"
+      @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-569"
+      @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-474"
+
+      @eight_products = Revolution::ProductService.new(['474','569','587','573','468','262','579','517'], current_site_version).spree_products
+      @eight_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-474"
+      @eight_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-569"
+      @eight_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-587"
+      @eight_products_dress4_link = "http://www.fameandpartners.com/dresses/dress-573"
+      @eight_products_dress5_link = "http://www.fameandpartners.com/dresses/dress-468"
+      @eight_products_dress6_link = "http://www.fameandpartners.com/dresses/dress-262"
+      @eight_products_dress7_link = "http://www.fameandpartners.com/dresses/dress-579"
+      @eight_products_dress8_link = "http://www.fameandpartners.com/dresses/dress-517"
+    end
+
   end
 end
