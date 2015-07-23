@@ -272,7 +272,9 @@ Test CC is `5520000000000000`
 
 You can use any other details.
 
+## Testing
 
+To run every test, including engines', use the `bundle exec rake spec` command
 
 ## Useful Pages
 
