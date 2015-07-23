@@ -103,6 +103,22 @@ module Concerns
 
           get :index, :faadc => 'awesome_yo'
         end
+
+        xdescribe 'retrying failed promo code applications over subsequest requests' do
+          it do
+            expect_any_instance_of(UserCart::PromotionsService).to receive(:apply)
+
+            get :index, :faadc => 'awesome_yo'
+
+            expect(controller.session[:auto_apply_promo]).to eq 'awesome_yo'
+
+            expect_any_instance_of(UserCart::PromotionsService).to receive(:apply).and_return(true)
+
+            get :index
+
+            expect(controller.session[:auto_applied_promo_code]).to eq 'awesome_yo'
+          end
+        end
       end
     end
   end
