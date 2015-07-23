@@ -1,3 +1,15 @@
+# If you provide an url param `faadc` (Fame Auto Apply Discount Code)
+# on any page load, this controller concern will attempt to add the coupon
+# specified in the param to the user's cart.
+#
+# e.g.
+# `/lookbook/all-size?faadc=instafame20`
+# would apply the promo code `instafame20` to the cart
+#
+# Note that the promo code *must* be able to be added to an empty order, so
+# rules about minimum order size etc will usually just result in the promotion
+# being marked as *not eligible*, with very little explanation.
+
 module Concerns
   module AutomaticDiscount
     extend ActiveSupport::Concern
