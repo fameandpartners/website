@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   include PathBuildersHelper
   include Concerns::SiteVersion
   include Concerns::UserCampaignable
+  include Concerns::AutomaticDiscount
 
   if Rails.env.preproduction?
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
