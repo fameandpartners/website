@@ -1,0 +1,40 @@
+#keepBrowsing{
+  width:50%;
+  color:white;
+  background-color: black;
+  font-size: 12pt;
+  font-weight: 500;
+}
+
+#modalPromoFooter{
+  background-color: white;
+  margin-top: 0px;
+}
+
+#discountMessage{
+  color: black;
+  font-size: 0.5em;
+  text-transform: none;
+  font-weight: 100 !important;
+
+}
+
+#heySister{
+  font-family: -webkit-pictograph;
+  font-size: 0.7em;
+}
+
+#justForYou{
+  font-family: -webkit-pictograph;
+  font-weight: 400;
+  font-size: 1.5em;
+}
+
+.vex-content{
+  background-image: url('modals/modalpromocode.png') !important;
+  min-width: 60% !important;
+}
+
+.vex-dialog-form{
+  margin-top: 200px !important;
+}
