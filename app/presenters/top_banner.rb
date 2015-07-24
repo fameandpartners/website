@@ -1,8 +1,9 @@
 class TopBanner
   attr_reader :site_version
 
-  def initialize(site_version)
+  def initialize(site_version = nil)
     @site_version = site_version || SiteVersion.default
+    create_version_banner_preferences
   end
 
   # Not using meta programming until we have more positions
@@ -15,10 +16,17 @@ class TopBanner
   end
 
   def right_text
-    Spree::Config[right_text_key]
+    Spree::AppConfiguration.new[right_text_key]
   end
 
   def center_text
-    Spree::Config[center_text_key]
+    Spree::AppConfiguration.new[center_text_key]
+  end
+
+  private
+
+  def create_version_banner_preferences
+    Spree::AppConfiguration.preference right_text_key , :string, default: ''
+    Spree::AppConfiguration.preference center_text_key, :string, default: ''
   end
 end
