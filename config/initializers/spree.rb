@@ -69,3 +69,8 @@ if Spree::Config.use_s3
   # filesystem storage uses path pattern, but s3 storage requires smt like s3_alias_url here
   Spree::Image.attachment_definitions[:attachment][:url] = Paperclip::Attachment.default_options[:url]
 end
+
+Spree::AppConfiguration.class_eval do
+  preference :free_customisations, :boolean, :default => false
+  preference :homepage_title, :string, :default => ''
+end
