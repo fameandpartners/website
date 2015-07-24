@@ -10,24 +10,51 @@
   $( document ).ready(function() {
     var user, row;
 
+    var currentOwner = <%=raw @order.user.present? ? @order.user.to_json : { user: {}} %>;
+
+    var containsUser = function(users, user_id){
+      if (users.length == 0 || !user_id){
+        return false;
+      };
+      var result = false;
+      for (var i = 0; i < users.length; i++){
+        if (users[i].user.id == user_id){
+          result = true
+        };
+      };
+      return result;
+    };
+
     var renderUsers = function(users){
       $tbody = $('#users-list').empty();
       var user_id = parseInt($('#order_owner_id').val());
 
-      _.each((users || []), function(user_data, index, collection){
+      // append current value [ ability to return ]
+      users = (users || []);
+      if (!containsUser(users, currentOwner.user.id)){
+        users.unshift(currentOwner);
+      };
+
+      _.each(users, function(user_data, index, collection){
         user = user_data.user;
-        row = $('<tr>', { class: (user.id == user_id ? 'even' : '')});
+        row = $('<tr>', { 'data-action': 'choose', 'data-id': user.id });
+        row.append($('<td>', { html: 
+          $('<input>', { type: "radio", value: user.id, name: 'order[user_id]', id: "order_user_id_" + user.id })
+        }));
         row.append($('<td>', { html: 
           $('<a>', { text: user.email, href: '/admin/users/' + user.id })
         }));
         row.append($('<td>', { text: user.first_name }));
         row.append($('<td>', { text: user.last_name }));
-        row.append($('<td>', { html: 
-          $('<a>', { href: '#', text: 'Choose', 'data-action': 'choose', 'data-id': user.id })
-        }));
 
         $tbody.append(row);
       });
+
+      // show current state
+      var $row = $('tr[data-id=' + user_id + ']');
+      $row.addClass('even').siblings('.even').removeClass('even');
+      $row.find('input[type=radio]').prop('checked', true);
+      
     };
 
     $('#user-search-button').on('click', function(e){
@@ -51,15 +78,23 @@
       });
     });
 
+    $('#clear-user-search-form-button').on('click', function(e){
+      e.preventDefault();
+      $('#first_name').val('');
+      $('#last_name').val('');
+      $('#email').val('');
+    })
+
     $('fieldset.user-search-form legend').on('click', function(e){
       $('fieldset.user-search-form').toggleClass("collapsed");
     });
 
-    $('fieldset.user-search-form table').on('click', 'a[data-action=choose]', function(e) {
+    $('fieldset.user-search-form table').on('click', 'tr[data-action=choose]', function(e) {
       e.preventDefault();
-      var $link = $(e.currentTarget);
-      $link.closest('tr').addClass('even').siblings('.even').removeClass('even');
-      $('#order_owner_id').val($link.data('id'));
+      var $row = $(e.currentTarget);
+      $row.addClass('even').siblings('.even').removeClass('even');
+      $row.find('input[type=radio]').prop('checked', true);
+      $('#order_owner_id').val($row.data('id'));
     });
   });
 </script>
@@ -142,18 +177,30 @@
         <div class="alpha four columns">
           <div class="field">
             <%= link_to t(:search), '#', class: 'icon-search button', id: 'user-search-button' %>
+            <%= link_to t(:reset_form), '#', class: 'icon-trash button', id: 'clear-user-search-form-button' %>
           </div>
         </div>
       </div>
       <div class="row">
         <table class="index" id="users-list">
           <colgroup>
-            <col style="width: 40%;"></col>
-            <col style="width: 20%;"></col>
+            <col style="width: 10%;"></col>
+            <col style="width: 30%;"></col>
             <col style="width: 20%;"></col>
             <col style="width: 20%;"></col>
           </colgroup>
-          <tbody></tbody>
+          <tbody>
+            <% if @order.user.present? %>
+              <tr class="current">
+                <td>
+                  <input checked="true" type="radio" value="<%= @order.user_id %>" id="order_user_id_<%= @order.user_id %>" />
+                </td>
+                <td><%= link_to @order.user.email, admin_user_path(@order.user) %></td>
+                <td><%= @order.user.first_name %></td>
+                <td><%= @order.user.last_name %></td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
       </div>
     </fieldset>
