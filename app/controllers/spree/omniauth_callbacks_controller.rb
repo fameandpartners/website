@@ -74,8 +74,19 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     end
 
+    user ||= (spree_current_user || authentication.try(:user))
+
+    if automatic_discount_code && session[:email_reminder_promo].present?
+      tracker = Marketing::CustomerIOEventTracker.new
+      tracker.identify_user(user, current_site_version)
+      tracker.track(
+        user,
+        'email_reminder_promo',
+        promo: automatic_discount_code
+      )
+    end
+
     if current_order
-      user ||= (spree_current_user || authentication.try(:user))
       current_order.associate_user!(user) if user.present?
       session[:guest_token] = nil
     end

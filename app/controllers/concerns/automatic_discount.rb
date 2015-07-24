@@ -20,6 +20,7 @@ module Concerns
 
     included do
       before_filter :apply_automatic_discount_code
+      helper_method :automatic_discount_code
     end
 
     private def auto_apply_discount_param_key
