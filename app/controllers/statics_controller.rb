@@ -275,9 +275,9 @@ class StaticsController < ApplicationController
     when "2"
       @blogger_link = "#"
       @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-lace-petal-579?color=white"
-      @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-517"
-      @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-569"
-      @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-474"
+      @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-solace-517?color=white"
+      @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-shimmer-genie-569?color=pastel-peach"
+      @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-lace-debutante-474?color=white"
 
       skus_colours = %w(
         474-white
