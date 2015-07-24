@@ -21,6 +21,7 @@ window.SideMenu = class SideMenu
       if @xDown > @xUp
         @close()
 
+
   slide: (e) =>
     t = $(e.target)
     t = $('img',t) if $(t).is("a")
