@@ -19,9 +19,9 @@
 
   .row
     center
-      = link_to image_tag("#{asset_path}/firstdress.jpg"), @three_products_dress1_link, class: 'dress-3'
-      = link_to image_tag("#{asset_path}/seconddress.jpg"), @three_products_dress2_link, class: 'dress-3'
-      = link_to image_tag("#{asset_path}/thirddress.jpg"), @three_products_dress3_link, class: 'dress-3'
+      = link_to image_tag("#{asset_path}/dress1.jpg"), @three_products_dress1_link, class: 'dress-3'
+      = link_to image_tag("#{asset_path}/dress2.jpg"), @three_products_dress2_link, class: 'dress-3'
+      = link_to image_tag("#{asset_path}/dress3.jpg"), @three_products_dress3_link, class: 'dress-3'
       div.linkarea
         = link_to "", @three_products_dress1_link, class: "item"
         = link_to "", @three_products_dress2_link, class: "item"
@@ -43,7 +43,8 @@
         = render partial: 'product_simple', locals: {:product => right_p}
 
   .row
-    = link_to image_tag("#{asset_path}/shopalldresses.jpg"), "//www.fameandpartners.com/lookbook/dresses", class: "landing-page-bohemium"
+    p style="margin-top:20px; margin-bottom:20px;"
+      = link_to image_tag("#{asset_path}/shopalldresses.jpg"), "//www.fameandpartners.com/lookbook/dresses", class: "landing-page-bohemium"
 
   .row
     = link_to image_tag("#{asset_path}/collection.jpg"), "//www.fameandpartners.com/lookbook/bohemian-summer", class: "landing-page-bohemium"
