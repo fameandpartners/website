@@ -272,14 +272,6 @@ class StaticsController < ApplicationController
         602-watercolour
       )
 
-      raw_products = Revolution::ProductService.new(skus_colours, current_site_version).products
-
-      product_collection = Products::CollectionPresenter.from_hash(products: raw_products)
-
-      product_collection.use_auto_discount!(current_promotion.discount) if current_promotion
-
-      @eight_products = product_collection.products
-
     when "2"
       @blogger_link = "#"
       @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-lace-petal-579?color=white"
@@ -287,16 +279,26 @@ class StaticsController < ApplicationController
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-569"
       @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-474"
 
-      @eight_products = Revolution::ProductService.new(['474','569','587','573','468','262','579','517'], current_site_version).products
-      @eight_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-474"
-      @eight_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-569"
-      @eight_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-587"
-      @eight_products_dress4_link = "http://www.fameandpartners.com/dresses/dress-573"
-      @eight_products_dress5_link = "http://www.fameandpartners.com/dresses/dress-468"
-      @eight_products_dress6_link = "http://www.fameandpartners.com/dresses/dress-262"
-      @eight_products_dress7_link = "http://www.fameandpartners.com/dresses/dress-579"
-      @eight_products_dress8_link = "http://www.fameandpartners.com/dresses/dress-517"
+      skus_colours = %w(
+        474-white
+        569-pastel-peach
+        587-white
+        573-white
+        468-black
+        262-white
+        579-white
+        517-white
+      )
+
     end
+
+    raw_products = Revolution::ProductService.new(skus_colours, current_site_version).products
+
+    product_collection = Products::CollectionPresenter.from_hash(products: raw_products)
+
+    product_collection.use_auto_discount!(current_promotion.discount) if current_promotion
+
+    @eight_products = product_collection.products
 
   end
 end
