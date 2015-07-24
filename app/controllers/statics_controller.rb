@@ -255,7 +255,7 @@ class StaticsController < ApplicationController
     @page_variant = params[:variant].to_s || "1"
     case @page_variant
       when "1"
-      @blogger_link = "http://www.triciacentenera.com/"
+      @blogger_link = "Checkout Tricia\'s Blog at <a href='http://triciacentenera.com/'>triciacentenera.com</a>"
       @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-holly-493?color=black"
       @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-melanie-two-piece-587?color=white"
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-chevron-two-piece-566?color=burgundy"
@@ -273,7 +273,7 @@ class StaticsController < ApplicationController
       )
 
     when "2"
-      @blogger_link = "#"
+      @blogger_link = "Checkout Nada\'s Blog at <a href='http://nadaadelle.com'>nadaadelle.com</a>"
       @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-lace-petal-579?color=white"
       @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-solace-517?color=white"
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-shimmer-genie-569?color=pastel-peach"
