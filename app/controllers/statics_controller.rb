@@ -261,6 +261,10 @@ class StaticsController < ApplicationController
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-chevron-two-piece-566?color=burgundy"
       @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-azalea-floral-two-piece-479?color=pink-azalea-floral"
 
+      @campaign_link1 = "http://www.fameandpartners.com/mystyle?lpi=insta1&pids%5B%5D=493-dusty-pink&pids%5B%5D=587-white&pids%5B%5D=566-burgundy&pids%5B%5D=493-ice-blue&pids%5B%5D=479-pink-azalea-floral&pids%5B%5D=493-black&pids%5B%5D=495-white&pids%5B%5D=575-surreal-floral-white&pids%5B%5D=582-merlot&pids%5B%5D=573-black&pids%5B%5D=599-monochrome&pids%5B%5D=508-white&pids%5B%5D=580-ice-blue&pids%5B%5D=602-watercolour&pids%5B%5D=493-ice-blue&pids%5B%5D=493-black"
+      @campaign_link2 = "https://fameandpartners.com/mystyle?lpi=insta2a&pids[]=566-burgundy&pids[]=493-dusty-pink&pids[]=587-white&pids[]=566-blush&pids[]=479-pink-azalea-floral&pids[]=495-white&pids[]=575-surreal-floral-white&pids[]=582-merlot&pids[]=573-black&pids[]=599-monochrome&pids[]=508-white&pids[]=580-ice-blue&pids[]=602-watercolour&pids[]=566-blush"
+      @bottom_collection_link = "http://www.fameandpartners.com/lookbook/bohemian-summer"
+
       skus_colours = %w(
         495-white
         575-surreal-floral-white
@@ -279,6 +283,9 @@ class StaticsController < ApplicationController
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-shimmer-genie-569?color=pastel-peach"
       @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-lace-debutante-474?color=white"
 
+      @campaign_link1 = "http://www.fameandpartners.com/mystyle?lpi=insta3&pids[]=474-white&pids[]=569-pastel-peach&pids[]=579-white&pids[]=517-white&pids[]=587-white&pids[]=573-white&pids[]=468-black&pids[]=262-black"
+      @campaign_link2 = "https://fameandpartners.com/mystyle?lpi=insta4&pids[]=262-black&pids[]=474-white&pids[]=569-pastel-peach&pids[]=579-white&pids[]=517-white&pids[]=587-white&pids[]=573-white&pids[]=468-black"
+      @bottom_collection_link = "http://www.fameandpartners.com/lookbook/the-luxe-collection"
       skus_colours = %w(
         474-white
         569-pastel-peach
