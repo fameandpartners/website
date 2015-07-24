@@ -255,7 +255,7 @@ class StaticsController < ApplicationController
     @page_variant = params[:variant].to_s || "1"
     case @page_variant
       when "1"
-      @blogger_link = "http://www.triciacentenera.com"
+      @blogger_link = "http://www.triciacentenera.com/"
       @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-holly-493?color=black"
       @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-melanie-two-piece-587?color=white"
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-chevron-two-piece-566?color=burgundy"

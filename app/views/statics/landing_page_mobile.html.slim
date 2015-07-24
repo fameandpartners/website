@@ -6,13 +6,14 @@
       = image_tag("#{asset_path}/holydress.png", class: "holydress-variant-#{@page_variant}")
   .row
     center
-      = link_to image_tag("#{asset_path}/header.png"), @blogger_link, class: "landing-page-header"
+      = image_tag("#{asset_path}/header.png", class: "landing-page-header")
   .row.pinkRow
     = image_tag("#{asset_path}/tip1.png", class: "landing-page-tip1-variant-#{@page_variant}")
   .row
     = image_tag("#{asset_path}/tip2.png", class: "landing-page-tip2-variant-#{@page_variant}")
   .row
-    = image_tag("#{asset_path}/shopthislook.png", class: "shopthislook")
+    - link = '//www.fameandpartners.com/mystyle?lpi=insta1&pids%5B%5D=493-dusty-pink&pids%5B%5D=587-white&pids%5B%5D=566-burgundy&pids%5B%5D=493-ice-blue&pids%5B%5D=479-pink-azalea-floral&pids%5B%5D=493-black&pids%5B%5D=495-white&pids%5B%5D=575-surreal-floral-white&pids%5B%5D=582-merlot&pids%5B%5D=573-black&pids%5B%5D=599-monochrome&pids%5B%5D=508-white&pids%5B%5D=580-ice-blue&pids%5B%5D=602-watercolour&pids%5B%5D=493-ice-blue&pids%5B%5D=493-black'
+    = link_to image_tag("#{asset_path}/shopthislook.png",class: "shopthislook"), link
   .row
     = image_tag("#{asset_path}/tip3.png", class: "landing-page-tip3")
 
@@ -28,7 +29,8 @@
   .row
     = image_tag("#{asset_path}/tip4.png", class: "landing-page-tip4")
   .row
-    = image_tag("#{asset_path}/getthislook.jpg", class: "landing-page-getthislook")
+    - link = '//fameandpartners.com/mystyle?lpi=insta2a&pids[]=566-burgundy&pids[]=493-dusty-pink&pids[]=587-white&pids[]=566-blush&pids[]=479-pink-azalea-floral&pids[]=495-white&pids[]=575-surreal-floral-white&pids[]=582-merlot&pids[]=573-black&pids[]=599-monochrome&pids[]=508-white&pids[]=580-ice-blue&pids[]=602-watercolour&pids[]=566-blush'
+    = link_to image_tag("#{asset_path}/getthislook.jpg", class: "landing-page-getthislook"), link
   .row
     center
       = image_tag("#{asset_path}/myfavouritedresses.jpg", class: "landing-page-myfavouritedresses")
@@ -42,3 +44,8 @@
 
   .row
     = link_to image_tag("#{asset_path}/bohemium.jpg"), "http://www.fameandpartners.com/lookbook/bohemian-summer", class: "landing-page-bohemium"
+
+  .row
+    p.text-center style="padding:20px"
+      ' Checkout Tricia's Blog at
+      = link_to @blogger_link, @blogger_link
