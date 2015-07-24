@@ -1,59 +1,30 @@
-/ TODO - replace with custom
-
-- promocode = 'FAMExPOLYVORE'
-- param_trigger = 'polyvore001'
-
-/ I'm sorry, I cant get this modal to stop appearing otherwise.
-ruby:
-  in_cart = false
-  will_auto_apply = false
-  begin
-    in_cart = current_order.promotions.collect(&:code).include?(promocode)
-    will_auto_apply = session["auto_apply_promo"] == promocode
-  rescue
-  end
-
-/ Assume first visit / promo not applied, show regular modal.
-- if !in_cart && !will_auto_apply
-  javascript:
+javascript:
     try {
       $(document).ready(function () {
-        polyvore_popup = new window.page.EmailCaptureModal({
-          promocode: "#{promocode}",
-          content: "Fame_Polyvore",
-          heading: "<div id='heySister'>HEY SISTER. HERE'S 15% OFF,</div>",
-          message: "<div id ='justForYou'>JUST FOR YOU.</div>",
-          className: "instagram_notification_201507",
-          action: "#{campaigns_email_capture_path}",
-          container: "#modal-popup-content-template.instagram_notification_201507",
-          timeout: 7,
-          timer: false,
-          force: false,
-          instagram_campaign: true
-        });
 
-        polyvore_popup.success = function (data) {
-          $.cookie('polyvore_thanked', 'false');
-          if (data.status == 'ok') {
-          }
+        window.page.instagram_notify_modal = function(force) {
+          if ($.cookie('displayed_instagram_notify_modal') == 'true' && force != true) { return; }
+          vex.dialog.buttons.NO.text = 'X';
+          vex.dialog.open({
+            className: "vex vex-theme-flat-attack email-capture-modal instagram_notification_201507",
+            message: $('#instagram_notification_201507.hidden').html()
+          });
+          $.cookie('displayed_instagram_notify_modal', 'true');
         };
 
+        setTimeout( window.page.instagram_notify_modal, 7 * 1000 )
       });
-
-
     } catch (e) {
       // NOOP
     }
 
-  #modal-popup-content-template.hidden.instagram_notification_201507
-    input type="hidden" name="content" value='content'
-    input type="hidden" name="promocode" value=promocode
-    .vex-footer#modalPromoFooter
-      div width='100%'
-        center
-          input#keepBrowsing type='button' value='KEEP BROWSING' onclick="$('.vex-dialog-button-secondary').click();"
-        center
-          span#discountMessage
-            | (Your discount will be automatically applied to your cart.)
+#instagram_notification_201507.hidden
+  .text-center
 
-
+    h2#heySister HEY SISTER. HERE'S 15% OFF,
+    p#justForYou JUST FOR YOU.
+    div
+      input#keepBrowsing type='button' value='KEEP BROWSING' onclick="$('.vex-dialog-button-secondary').click();"
+    div
+      span#discountMessage
+        | (Your discount will be automatically applied to your cart.)
