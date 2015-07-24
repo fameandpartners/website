@@ -1,8 +1,19 @@
-- if sale_active?
-  #sale-banner.alert-sale.alert-relative role="alert" style="text-transform:uppercase;font-size:1.333333em;text-align:center;background-color:#FD0C39"
-    span.medium.banner-title
-      .center-block
-        span style="margin-right:15px;color:white;" UP TO 50% OFF SITE WIDE.
-        span style="margin-right:15px;color:white;" LIMITED TIME ONLY.
-      .center-block
-        span = link_to 'Shop now!', dresses_path, class: 'text-highlight',  style: 'color:white;text-decoration:underline'
+.sitewide
+  - if sale_active?
+    #sale-banner.alert-sale.alert-relative role="alert" style="text-transform:uppercase;font-size:1.333333em;text-align:center;background-color:#FD0C39"
+      span.medium.banner-title
+        .center-block
+          span style="margin-right:15px;color:white;" UP TO 50% OFF SITE WIDE.
+          span style="margin-right:15px;color:white;" LIMITED TIME ONLY.
+        .center-block
+          span = link_to 'Shop now!', dresses_path, class: 'text-highlight',  style: 'color:white;text-decoration:underline'
+
+  / TODO - Refactor how we apply email reminders
+  - if automatic_discount_code.present? && session[:email_reminder_promo] != 'scheduled_for_delivery'
+    .auto-discount-applied
+      .text-center
+        p WANT TO SHOP 15% OFF LATER?
+        = link_to 'Email your promo code', fb_auth_path(email_reminder_promo: automatic_discount_code), class: 'btn btn-facebook btn-md'
+  /  .banner-top#promoSent
+      center
+        | Your promo code has been sent to the email attached to your Facebook account. <b>ENJOY!</b>
