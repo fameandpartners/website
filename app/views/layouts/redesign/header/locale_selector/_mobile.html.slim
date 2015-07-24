@@ -1,0 +1,18 @@
+coffee:
+  $ ->
+    $('#locale-selector-mobile-container').on 'click', ->
+      $(this).children('ul').toggleClass('show')
+
+#locale-selector-mobile-container.visible-xs.visible-sm
+  #locale-selector-label
+    | You're shopping in:
+  #locale-selector-current
+    = image_tag("flags/#{current_site_version.code}.png")
+    = current_site_version.name
+    .arrow
+  ul
+    - SiteVersion.all.each do |site_version|
+      li class=('active' if site_version == current_site_version)
+        = link_to site_version_path(site_version.code) do
+          = image_tag("flags/#{site_version.code}.png")
+          = site_version.name

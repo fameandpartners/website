@@ -1,17 +1,5 @@
 #gray-top-banner.row.visible-md-block.visible-lg-block
-  #locale-selector-container.col-md-4.text-left
-    #locale-selector-label
-      | You're shopping in:
-    #locale-selector-current
-      = image_tag("flags/#{current_site_version.code}.png")
-      = current_site_version.name
-      .arrow
-      ul
-        - SiteVersion.all.each do |site_version|
-          li class="#{site_version == current_site_version ? 'active' : ''}"
-            = link_to site_version_path(site_version.code) do
-              = image_tag("flags/#{site_version.code}.png")
-              = site_version.name
+  = render 'layouts/redesign/header/locale_selector/desktop'
 
   #ad-text.col-md-4.text-center
     = TopBanner.new(current_site_version).center_text
