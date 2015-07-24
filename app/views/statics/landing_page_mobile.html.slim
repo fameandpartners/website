@@ -33,66 +33,12 @@
     center
       = image_tag("#{asset_path}/myfavouritedresses.jpg", class: "landing-page-myfavouritedresses")
 
+  - @eight_products.each_slice(2) do |left_p, right_p|
+    .row
+      .landing-page-image-left
+        = render partial: 'product_simple', locals: {:product => left_p}
+      .landing-page-image-right
+        = render partial: 'product_simple', locals: {:product => right_p}
 
-  .row
-    span.landing-page-image-left
-      = link_to @eight_products_dress1_link do
-        center
-          = cropped_product_hoverable_image_tag(@eight_products[0])
-      .details.text-center
-        span.name = @eight_products[0].name
-        span.price = price_for_product(@eight_products[0])
-    span.landing-page-image-right
-      = link_to @eight_products_dress2_link do
-        center
-          = cropped_product_hoverable_image_tag(@eight_products[1])
-      .details.text-center
-        span.name = @eight_products[1].name
-        span.price = price_for_product(@eight_products[1])
-  .row
-    span.landing-page-image-left
-      = link_to @eight_products_dress3_link do
-        center
-          = cropped_product_hoverable_image_tag(@eight_products[2])
-      .details.text-center
-        span.name = @eight_products[2].name
-        span.price = price_for_product(@eight_products[2])
-    span.landing-page-image-right
-      = link_to @eight_products_dress4_link do
-        center
-          = cropped_product_hoverable_image_tag(@eight_products[3])
-      .details.text-center
-        span.name = @eight_products[3].name
-        span.price = price_for_product(@eight_products[3])
-  .row
-    span.landing-page-image-left
-      = link_to @eight_products_dress5_link do
-        center
-          = cropped_product_hoverable_image_tag(@eight_products[4])
-      .details.text-center
-        span.name = @eight_products[4].name
-        span.price = price_for_product(@eight_products[4])
-    span.landing-page-image-right
-      = link_to @eight_products_dress6_link do
-        center
-          = cropped_product_hoverable_image_tag(@eight_products[5])
-      .details.text-center
-        span.name = @eight_products[5].name
-        span.price = price_for_product(@eight_products[5])
-  .row
-    span.landing-page-image-left
-      = link_to @eight_products_dress7_link do
-        center
-          = cropped_product_hoverable_image_tag(@eight_products[6])
-      .details.text-center
-        span.name = @eight_products[6].name
-        span.price = price_for_product(@eight_products[6])
-    span.landing-page-image-right
-      = link_to @eight_products_dress8_link do
-        center
-          = cropped_product_hoverable_image_tag(@eight_products[7])
-      .details.text-center
-        span.name = @eight_products[7].name
-        span.price = price_for_product(@eight_products[7])
   .row
     = link_to image_tag("#{asset_path}/bohemium.jpg"), "http://www.fameandpartners.com/lookbook/bohemian-summer", class: "landing-page-bohemium"
