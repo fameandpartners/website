@@ -252,8 +252,8 @@ class StaticsController < ApplicationController
 
   def landing_page_mobile
 
-    @variant = params[:variant] || "1"
-    case @variant
+    @page_variant = params[:variant].to_s || "1"
+    case @page_variant
       when "1"
       @blogger_link = "http://www.triciacentenera.com"
       @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-melanie-two-piece-587?color=white"

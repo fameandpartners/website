@@ -1,16 +1,16 @@
-- asset_path = "//#{configatron.asset_host}/pages/instagram/#{params[:variant] || 1}"
+- asset_path = "//#{configatron.asset_host}/pages/instagram/#{@page_variant}"
 
 .container-fluid#instagram-landing-201507
   a(href="http://www.fameandpartners.com/dresses/dress-holly-493?color=black")
     .span
-      = image_tag("#{asset_path}/holydress.png", class: "holydress-variant-#{params[:variant] || 1}")
+      = image_tag("#{asset_path}/holydress.png", class: "holydress-variant-#{@page_variant}")
   .row
     center
       = link_to image_tag("#{asset_path}/header.png"), @blogger_link, class: "landing-page-header"
   .row.pinkRow
-    = image_tag("#{asset_path}/tip1.png", class: "landing-page-tip1-variant-#{params[:variant] || 1}")
+    = image_tag("#{asset_path}/tip1.png", class: "landing-page-tip1-variant-#{@page_variant}")
   .row
-    = image_tag("#{asset_path}/tip2.png", class: "landing-page-tip2-variant-#{params[:variant] || 1}")
+    = image_tag("#{asset_path}/tip2.png", class: "landing-page-tip2-variant-#{@page_variant}")
   .row
     = image_tag("#{asset_path}/shopthislook.png", class: "shopthislook")
   .row
