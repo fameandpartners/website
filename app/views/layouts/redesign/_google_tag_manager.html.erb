@@ -16,7 +16,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <%# GTM Completed Order Tracking %>
 <% if flash[:commerce_tracking] || params[:force_tracking] && @marketing_order.present? %>
   <script>
-    dataLayer.push({"event": "completedOrder"});
+    dataLayer.push({
+      "event": "completedOrder",
+      "transactionCurrency": "<%= @marketing_order.currency %>",
+      "transactionTotal"   : <%= @marketing_order.total_amount %>
+    });
 
     dataLayerProducts = [];
     <% @marketing_order.line_items.each do |line_item| %>
