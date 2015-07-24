@@ -14,6 +14,14 @@ window.SideMenu = class SideMenu
     $("a", "li", "ul", ".main-menu", @$container).on 'click', (e) =>
       @slide(e)
 
+    $(@$container).on('mousedown touchstart', (e) =>
+      @xDown = e.originalEvent.changedTouches[0].screenX
+    ).on 'mouseup touchend', (e2) =>
+      @xUp = e2.originalEvent.changedTouches[0].screenX
+      if @xDown > @xUp
+        @close()
+
+
   slide: (e) =>
     t = $(e.target)
     t = $('img',t) if $(t).is("a")
