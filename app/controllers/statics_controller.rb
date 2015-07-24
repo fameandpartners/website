@@ -256,6 +256,7 @@ class StaticsController < ApplicationController
     case @page_variant
       when "1"
       @blogger_link = "http://www.triciacentenera.com"
+      @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-holly-493?color=black"
       @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-melanie-two-piece-587?color=white"
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-chevron-two-piece-566?color=burgundy"
       @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-azalea-floral-two-piece-479?color=pink-azalea-floral"
@@ -281,6 +282,7 @@ class StaticsController < ApplicationController
 
     when "2"
       @blogger_link = "#"
+      @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-lace-petal-579?color=white"
       @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-517"
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-569"
       @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-474"
