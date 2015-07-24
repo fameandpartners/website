@@ -1,7 +1,6 @@
 = render :partial => 'modals/modal_20150724_instagram_notify'
 
 - asset_path = "//#{configatron.asset_host}/pages/instagram/#{@page_variant}"
-
 .container-fluid#instagram-landing-201507
   a(href=@holy_dress_link)
     .span
@@ -23,10 +22,7 @@
       = link_to image_tag("#{asset_path}/dress1.jpg"), @three_products_dress1_link, class: 'dress-3'
       = link_to image_tag("#{asset_path}/dress2.jpg"), @three_products_dress2_link, class: 'dress-3'
       = link_to image_tag("#{asset_path}/dress3.jpg"), @three_products_dress3_link, class: 'dress-3'
-      div.linkarea
-        = link_to "", @three_products_dress1_link, class: "item"
-        = link_to "", @three_products_dress2_link, class: "item"
-        = link_to "", @three_products_dress3_link, class: "item"
+
   .row
     = image_tag("#{asset_path}/tip4.png", class: "landing-page-tip4")
   .row
