@@ -1,3 +1,5 @@
+/ TODO - replace with custom
+
 - promocode = 'FAMExPOLYVORE'
 - param_trigger = 'polyvore001'
 
@@ -21,10 +23,10 @@ ruby:
           content: "Fame_Polyvore",
           heading: "<div id='heySister'>HEY SISTER. HERE'S 15% OFF,</div>",
           message: "<div id ='justForYou'>JUST FOR YOU.</div>",
-          className: "polyvore_201507_modal",
+          className: "instagram_notification_201507",
           action: "#{campaigns_email_capture_path}",
-          container: "#modal-popup-content-template.polyvore_201507_modal",
-          timeout: 7,
+          container: "#modal-popup-content-template.instagram_notification_201507",
+          timeout: 1,
           timer: false,
           force: false,
           instagram_campaign: true
@@ -43,7 +45,7 @@ ruby:
       // NOOP
     }
 
-  #modal-popup-content-template.hidden.polyvore_201507_modal
+  #modal-popup-content-template.hidden.instagram_notification_201507
     input type="hidden" name="content" value='content'
     input type="hidden" name="promocode" value=promocode
     .vex-footer#modalPromoFooter

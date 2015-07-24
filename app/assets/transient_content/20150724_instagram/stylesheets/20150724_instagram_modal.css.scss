@@ -1,0 +1,62 @@
+.vex.instagram_notification_201507 {
+  .vex-content {
+
+
+    background-color:      #ffffff;
+    background-position-y: 25px;
+    background-position-x: center;
+    background-image: url('modals/instagram_rhombus.png');
+    background-repeat: no-repeat!important;;
+    min-width:        60% !important;
+
+
+    .vex-dialog-message {
+      text-align: center;
+      h2 { font-size: 24px; }
+      p {
+        font-size: 24px;
+        font-weight: 300;
+        strong {
+          font-size:   30px;
+          font-weight: 500;
+        }
+      }
+    }
+
+
+    #keepBrowsing {
+      width:            50%;
+      color:            white;
+      background-color: black;
+      font-size:        12pt;
+      font-weight:      500;
+    }
+
+    #modalPromoFooter {
+      background-color: white;
+      margin-top:       0px;
+    }
+
+    #discountMessage {
+      color:          black;
+      font-size:      0.5em;
+      text-transform: none;
+      font-weight:    100 !important;
+    }
+
+    #heySister {
+      font-family: -webkit-pictograph;
+      font-size:   0.7em;
+    }
+
+    #justForYou {
+      font-family: -webkit-pictograph;
+      font-weight: 400;
+      font-size:   1.5em;
+    }
+
+    .vex-dialog-form {
+      margin-top: 200px !important;
+    }
+  }
+}
