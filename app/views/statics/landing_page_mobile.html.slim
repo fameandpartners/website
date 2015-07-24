@@ -1,7 +1,7 @@
 = render :partial => 'modals/modal_20150724_instagram_notify'
 
 - asset_path = "//#{configatron.asset_host}/pages/instagram/#{@page_variant}"
-
+- asset_path = "landing-page-mobile/#{@page_variant}"
 .container-fluid#instagram-landing-201507
   a(href=@holy_dress_link)
     .span
@@ -14,7 +14,7 @@
   .row
     = image_tag("#{asset_path}/tip2.png", class: "landing-page-tip2-variant-#{@page_variant}")
   .row
-    = link_to image_tag("#{asset_path}/campaign1.png",class: "shopthislook"), @campaign_link1
+    = link_to image_tag("#{asset_path}/campaign1.jpg",class: "shopthislook"), @campaign_link1
   .row
     = image_tag("#{asset_path}/tip3.png", class: "landing-page-tip3")
 

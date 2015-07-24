@@ -297,6 +297,26 @@ class StaticsController < ApplicationController
         517-white
       )
 
+    when "3"
+      @blogger_link = "Checkout Tsang \'s Blog at <a href='http://tsangtastic.com/'>tsangtastic.com</a>"
+      @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-imogen-97?color=purple"
+      @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-high-places-592?color=red"
+      @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-sweet-dreamer-572?color=surreal-floral-white"
+      @three_products_dress3_link = "http://www.fameandpartners.com/dresses/dress-tribe-of-love-595?color=tribal-love"
+
+      @campaign_link1 = "https://fameandpartners.com/mystyle?lpi=insta5&pids[]=595-tribal-love&pids[]=592-red&pids[]=97-purple&pids[]=572-surreal-floral-white&pids[]=593-surreal-floral-black&pids[]=599-monochrome&pids[]=573-white&pids[]=284-black&pids[]=602-watercolour&pids[]=623-light-pink&pids[]=505-black&pids[]=617-gypsy-scarf&pids[]=585-aqua&pids[]=355-navy&pids[]=97-burgundy"
+      @campaign_link2 = "https://fameandpartners.com/mystyle?lpi=insta5&pids[]=595-tribal-love&pids[]=592-red&pids[]=97-purple&pids[]=572-surreal-floral-white&pids[]=593-surreal-floral-black&pids[]=599-monochrome&pids[]=573-white&pids[]=284-black&pids[]=602-watercolour&pids[]=623-light-pink&pids[]=505-black&pids[]=617-gypsy-scarf&pids[]=585-aqua&pids[]=355-navy&pids[]=97-burgundy"
+      @bottom_collection_link = "http://www.fameandpartners.com/lookbook/the-luxe-collection"
+      skus_colours = %w(
+        573-white
+        284-black
+        602-watercolour
+        623-light-pink
+        505-black
+        617-gypsy-scarf
+        585-aqua
+        355-navy
+      )
     end
 
     raw_products = Revolution::ProductService.new(skus_colours, current_site_version).products
