@@ -414,6 +414,8 @@ FameAndPartners::Application.routes.draw do
   end
 
   if Features.active?(:style_quiz)
-    mount StyleQuiz::Engine => "/style-quiz"
+    scope '(:site_version)' do
+      mount StyleQuiz::Engine => "/style-quiz"
+    end
   end
 end

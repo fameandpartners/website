@@ -19,32 +19,6 @@ ruby:
       updateMoodboardCounter();
     })();
   "
-  init_style_quiz = ""
-  if Features.active?(:style_quiz)
-    init_style_quiz = "
-      (function(){
-        $('#style-quiz-trigger').on('click', function(e) {
-          e.preventDefault();
-          $iframe = $('<iframe />', {
-            src: urlWithSitePrefix('#{ style_quiz_path }'),
-            frameBorder: '0',
-            width: '1102px',
-            height: '680px'
-          });
-
-          if ($('#quiz_popup').length > 0) {
-            $('#quiz_popup').find('iframe').replaceWith($iframe);
-          } else {
-            $content = $('<div />', { id: 'quiz_popup' }).html($iframe);
-            vex.open({
-              content: $content,
-              className: 'vex-dialog-default vex-dialog-quiz'
-            });
-          };
-        });
-      })();
-    "
-  end
 
   side_menu_init = "
     window.app.side_menu = new SideMenu({
@@ -59,7 +33,6 @@ ruby:
 = content_for :inline_javascript do
   = raw init_items_counter_sync
   = raw init_moodboard_counter_sync
-  = raw init_style_quiz
   = raw side_menu_init
 
 - cache [:layout, :header, spree_user_signed_in?], expires_in: configatron.cache.expire.long do

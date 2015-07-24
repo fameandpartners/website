@@ -5,6 +5,8 @@ module StyleQuiz
     def edit
       @user_style_profile = user_style_profile
       @questions = StyleQuiz::Question.active.ordered.includes(:answers).to_a
+
+      render layout: 'redesign/application'
     end
 
     def update
@@ -49,8 +51,6 @@ module StyleQuiz
       end
 
       def create_user_automagically(style_profile)
-        user_attributes = style_profile.answers
-
         first_name, last_name = style_profile.fullname.split(' ', 2)
         user = Spree::User.new(
           first_name: first_name,

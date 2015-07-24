@@ -10,7 +10,7 @@ ruby:
     window.quiz = new StyleQuiz.Quiz({
       questions_data: questions_data,
       current: #{ current.to_i },
-      action: '#{ style_quiz.user_profile_path }',
+      action: '#{ user_profile_path }',
       show_mode: '#{ current.present? ? "unfinished" : "all" }',
       settings: {
         dateFormat: '#{ raw I18n.t('date_format.frontend', default: "dd/mm/yy") }',
@@ -29,3 +29,8 @@ ruby:
   = render template: question.template, locals: { question: question, question_position: index + 1, question_total: total_questions}
 
 = render 'style_quiz/shared/facebook'
+
+- content_for :head do
+  = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Forum'
+  = stylesheet_link_tag 'style_quiz/application'
+  = javascript_include_tag 'style_quiz/application'
