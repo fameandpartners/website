@@ -18,14 +18,17 @@ gem 'business_time'
 gem 'acts-as-taggable-on'
 gem 'rmagick'
 gem 'ckeditor'
-gem 'newrelic_rpm'
 gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
 gem 'autoprefixer-rails'
 
-# engines
+# Monitoring & Events
+gem 'newrelic_rpm'
+gem 'customerio'
+
+# Engines
 path 'engines' do
   gem 'revolution'
   gem 'admin_ui'
@@ -85,14 +88,16 @@ gem 'spree_paypal_express',
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
 # utils
-# replacement for standart library.
+# replacement for standard library.
 gem 'addressable', require: false
 
 gem 'rollout'
 
-gem 'term-ansicolor'
-gem 'ruby-progressbar'
-gem 'sinatra', :require => nil
+# Command line tools
+gem 'term-ansicolor',   :require => false
+gem 'ruby-progressbar', :require => false
+
+gem 'sinatra',          :require => false
 
 group :assets do
   gem 'bourbon'

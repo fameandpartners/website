@@ -1,0 +1,51 @@
+- asset_path = "//#{configatron.asset_host}/pages/instagram/#{@page_variant}"
+
+.container-fluid#instagram-landing-201507
+  a(href=@holy_dress_link)
+    .span
+      = image_tag("#{asset_path}/featured-dress.png", class: "holydress-variant-#{@page_variant}")
+  .row
+    center
+      = image_tag("#{asset_path}/header.png", class: "landing-page-header")
+  .row.pinkRow
+    = image_tag("#{asset_path}/tip1.png", class: "landing-page-tip1-variant-#{@page_variant}")
+  .row
+    = image_tag("#{asset_path}/tip2.png", class: "landing-page-tip2-variant-#{@page_variant}")
+  .row
+    = link_to image_tag("#{asset_path}/campaign1.jpg",class: "shopthislook"), @campaign_link1
+  .row
+    = image_tag("#{asset_path}/tip3.png", class: "landing-page-tip3")
+
+  .row
+    center
+      = link_to image_tag("#{asset_path}/dress1.jpg"), @three_products_dress1_link, class: 'dress-3'
+      = link_to image_tag("#{asset_path}/dress2.jpg"), @three_products_dress2_link, class: 'dress-3'
+      = link_to image_tag("#{asset_path}/dress3.jpg"), @three_products_dress3_link, class: 'dress-3'
+
+  .row
+    = image_tag("#{asset_path}/tip4.png", class: "landing-page-tip4")
+  .row
+    = link_to image_tag("#{asset_path}/campaign2.jpg", class: "landing-page-getthislook"), @campaign_link2
+  .row
+    center
+      = image_tag("#{asset_path}/myfavouritedresses.jpg", class: "landing-page-myfavouritedresses")
+
+  - @eight_products.each_slice(2) do |left_p, right_p|
+    .row
+      .landing-page-image-left
+        = render partial: 'product_simple', locals: {:product => left_p}
+      .landing-page-image-right
+        = render partial: 'product_simple', locals: {:product => right_p}
+
+  .row
+    p style="margin-top:20px; margin-bottom:20px;"
+      = link_to image_tag("#{asset_path}/shopalldresses.jpg"), "http://www.fameandpartners.com/dresses", class: "landing-page-bohemium"
+
+  .row
+    = link_to image_tag("#{asset_path}/collection.jpg"), @bottom_collection_link, class: "landing-page-bohemium"
+
+  .row
+    p.text-center style="padding:20px"
+      = @blogger_link.html_safe
+
+= render :partial => 'modals/modal_20150724_instagram_notify'
