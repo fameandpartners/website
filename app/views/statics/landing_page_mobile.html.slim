@@ -8,13 +8,16 @@
     center
       = image_tag("#{asset_path}/header.png", class: "landing-page-header")
   .row.pinkRow
-    = image_tag("#{asset_path}/tip1.png", class: "landing-page-tip1-variant-#{@page_variant}")
+    = image_tag("#{asset_path}/tip1.png", class: "landing-page-tip1-variant-#{@page_variant} mobile-tip")
+    = image_tag("#{asset_path}/desktop-tip1.png", class: "landing-page-tip1-variant-#{@page_variant} desktop-tip")
   .row
-    = image_tag("#{asset_path}/tip2.png", class: "landing-page-tip2-variant-#{@page_variant}")
+    = image_tag("#{asset_path}/tip2.png", class: "landing-page-tip2-variant-#{@page_variant} mobile-tip")
+    = image_tag("#{asset_path}/desktop-tip2.png", class: "landing-page-tip1-variant-#{@page_variant} desktop-tip")
   .row
     = link_to image_tag("#{asset_path}/campaign1.jpg",class: "shopthislook"), @campaign_link1
   .row
-    = image_tag("#{asset_path}/tip3.png", class: "landing-page-tip3")
+    = image_tag("#{asset_path}/tip3.png", class: "landing-page-tip3 mobile-tip")
+    = image_tag("#{asset_path}/desktop-tip3.png", class: "landing-page-tip3 desktop-tip")
 
   .row
     center
@@ -23,7 +26,8 @@
       = link_to image_tag("#{asset_path}/dress3.jpg"), @three_products_dress3_link, class: 'dress-3'
 
   .row
-    = image_tag("#{asset_path}/tip4.png", class: "landing-page-tip4")
+    = image_tag("#{asset_path}/tip4.png", class: "landing-page-tip4 mobile-tip")
+    = image_tag("#{asset_path}/desktop-tip4.png", class: "landing-page-tip4 desktop-tip")
   .row
     = link_to image_tag("#{asset_path}/campaign2.jpg", class: "landing-page-getthislook"), @campaign_link2
   .row
@@ -31,10 +35,9 @@
       = image_tag("#{asset_path}/myfavouritedresses.jpg", class: "landing-page-myfavouritedresses")
 
   - @eight_products.each_slice(2) do |left_p, right_p|
-    .row
-      .landing-page-image-left
+      .col-xs-6.col-sm-6.col-md-3.col-lg-3
         = render partial: 'product_simple', locals: {:product => left_p}
-      .landing-page-image-right
+      .col-xs-6.col-sm-6.col-md-3.col-lg-3
         = render partial: 'product_simple', locals: {:product => right_p}
 
   .row
@@ -49,3 +52,23 @@
       = @blogger_link.html_safe
 
 = render :partial => 'modals/modal_20150724_instagram_notify'
+
+javascript:
+  $(window).load(function() {
+    //fix holydress for desktop
+
+    $("img[alt='Featured-dress']").css("margin-top",$("img[alt='Header'").height() + 95);
+    if ($(document).width() > 1000) {
+      $("img[alt='Featured-dress']").css("margin-left",$(document).width() * 0.85);
+    }
+    $("img[alt='Featured-dress']").show();
+
+
+
+    //fix tip for desktop
+
+    if ($(document).width() > 1000) {
+      $(".mobile-tip").hide();
+      $(".desktop-tip").show();
+    }
+  });
