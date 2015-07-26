@@ -3,6 +3,9 @@
     width:         90%;
     margin-top:    90px;
     margin-bottom: 35px;
+    @media(min-width: 1000px) {
+      width: 50%;
+    }
   }
 
   .pinkRow {
@@ -19,6 +22,10 @@
       background-color: black;
       border:           none;
     }
+  }
+  .desktop-tip{
+    display:none;
+    width:90% !important;
   }
   .landing-page-tip1-variant-1 {
     padding-top:    40px;
@@ -57,7 +64,7 @@
 
   .landing-page-tip1-variant-3 {
     padding-top:    20px;
-    padding-bottom: px;
+    padding-bottom: 20px;
     padding-left:   15px;
     @media(max-width: 320px) {
       width: 230px;
@@ -130,32 +137,26 @@
   .holydress-variant-1 {
     position:    absolute;
     width:       80px;
-    margin-top:  255px;
     margin-left: 270px;
+    display: none;
     @media(max-width: 320px) {
       width:       60px;
-      margin-top:  265px;
       margin-left: 240px;
     }
     @media(min-width: 321px) and(max-width: 413px) {
-      margin-top: 270px;
     }
     @media(min-width: 414px) and(max-width: 599px) {
       margin-left: 300px;
-      margin-top:  285px;
     }
     @media(min-width: 600px) and(max-width: 767px) {
       margin-left: 433px;
-      margin-top:  375px;
       width:       100px;
     }
     @media(min-width: 768px) and(max-width: 799px) {
       margin-left: 583px;
       width:       110px;
-      margin-top:  449px;
     }
     @media(min-width: 800px) {
-      margin-top:  465px;
       width:       115px;
       margin-left: 610px;
     }
@@ -164,36 +165,30 @@
   .holydress-variant-2 {
     position:    absolute;
     width:       70px;
-    margin-top:  255px;
     margin-left: 270px;
+    display: none;
     @media(max-width: 320px) {
       width:       70px;
-      margin-top:  240px;
       margin-left: 210px;
     }
     @media(min-width: 321px) and(max-width: 413px) {
-      margin-top:  260px;
       width:       75px;
       margin-left: 250px;
     }
     @media(min-width: 414px) and(max-width: 599px) {
-      margin-top:  270px;
       width:       80px;
       margin-left: 265px;
     }
     @media(min-width: 600px) and(max-width: 767px) {
       margin-left: 410px;
-      margin-top:  350px;
       width:       105px;
     }
     @media(min-width: 768px) and(max-width: 799px) {
       margin-left: 520px;
-      margin-top:  430px;
       width:       120px;
     }
     @media(min-width: 800px) {
       margin-left: 535px;
-      margin-top:  430px;
       width:       125px;
     }
   }
@@ -201,37 +196,31 @@
   .holydress-variant-3 {
     position:    absolute;
     width:       80px;
-    margin-top:  255px;
     margin-left: 270px;
+    display: none;
     @media(max-width: 320px) {
       width: 70px;
-      margin-top: 265px;
       margin-left: 220px;
     }
     @media(min-width: 321px) and(max-width: 413px) {
-      margin-top: 285px;
       width: 85px;
       margin-left: 260px;
     }
     @media(min-width: 414px) and(max-width: 599px) {
-      margin-top: 290px;
       width: 90px;
       margin-left: 275px;
     }
     @media(min-width: 600px) and(max-width: 767px) {
       margin-left: 430px;
-      margin-top: 392px;
       width: 115px;
     }
     @media(min-width: 768px) and(max-width: 799px) {
       margin-left: 570px;
-      margin-top: 470px;
-      width: 160px;
+      width: 120px;
     }
     @media(min-width: 800px) {
       margin-left: 570px;
-      margin-top: 480px;
-      width: 160px;
+      width: 125px;
     }
   }
 
@@ -292,18 +281,8 @@
     margin-bottom: 6.6%;
   }
 
-  .landing-page-image-left {
-    width:        40%;
-    float:        left;
-    margin-left:  6.6%;
-    margin-right: 3.3%;
-  }
-
-  .landing-page-image-right {
-    width:        40%;
-    float:        left;
-    margin-left:  3.3%;
-    margin-right: 6.6%;
+  .landing-page-image{
+    float: left;
   }
 
   .landing-page-bohemium {
