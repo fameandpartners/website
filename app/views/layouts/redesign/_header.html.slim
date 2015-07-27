@@ -171,4 +171,5 @@ ruby:
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 
-= render 'layouts/redesign/notices'
+- unless disable_notices?
+  = render 'layouts/redesign/notices'
