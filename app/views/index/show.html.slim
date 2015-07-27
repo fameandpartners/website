@@ -1,11 +1,5 @@
 .page-content.index
   ul.rslides
-    - # TEMPORARY HACK TO TEST AD TARGETING UNTIL WE HAVE A BETTER SOLUTION
-    - if params[:utm_campaign].present? && params[:utm_campaign].downcase == 'prom-scotland-uk-fashion-cpc'
-      - if banner = Spree::BannerBox.big_banner.where(:title => 'Our Official Prom Collection').first
-        li
-          = image_tag banner.attachment(:original), alt: banner.presentation, class: "img-responsive portrait-img #{banner.css_class}"
-
     - @banner.each do |banner|
       li
         = link_to LocalizeUrlService.localize_url(banner.url, current_site_version), title: banner.title do
