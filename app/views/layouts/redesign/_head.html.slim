@@ -26,6 +26,7 @@ script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1
 
 - if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
   = render '/shared/customerio'
+  = render '/shared/mixpanel'
   = render '/spree/shared/google_analytics'
   = render '/shared/zopim'
   = render '/shared/hotjar'
