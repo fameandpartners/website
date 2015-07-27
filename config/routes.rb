@@ -306,6 +306,8 @@ FameAndPartners::Application.routes.draw do
         resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
       end
 
+      post 'shipping_methods/update_positions' => "shipping_methods#update_positions"
+
       scope 'taxonomies/:taxonomy_id/taxons/:id' do
         resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
       end

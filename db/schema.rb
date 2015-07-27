@@ -1357,8 +1357,9 @@ ActiveRecord::Schema.define(:version => 20150721041443) do
     t.boolean  "match_all"
     t.boolean  "match_one"
     t.datetime "deleted_at"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "position",             :default => 0
   end
 
   create_table "spree_skrill_transactions", :force => true do |t|
