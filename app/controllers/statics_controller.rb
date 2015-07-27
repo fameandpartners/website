@@ -251,6 +251,7 @@ class StaticsController < ApplicationController
   end
 
   def landing_page_mobile
+    @title = 'A mid-summer night out'
     @disable_notices = true
     @page_variant = params[:variant].to_s || "1"
     case @page_variant
