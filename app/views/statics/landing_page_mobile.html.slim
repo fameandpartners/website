@@ -35,6 +35,7 @@
       = image_tag("#{asset_path}/myfavouritedresses.jpg", class: "landing-page-myfavouritedresses")
 
   - @eight_products.each_slice(2) do |left_p, right_p|
+    .row
       .col-xs-6.col-sm-6.col-md-3.col-lg-3
         = render partial: 'product_simple', locals: {:product => left_p}
       .col-xs-6.col-sm-6.col-md-3.col-lg-3
