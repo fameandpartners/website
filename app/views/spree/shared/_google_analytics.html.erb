@@ -4,6 +4,18 @@
     _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
     _gaq.push(['_trackPageview']);
 
+    <% if flash[:track_fb_reminder_promo] %>
+      _gaq.push(['_trackEvent', 'Facebook', 'Redeem'])
+    <% end %>
+
+    <% if flash[:track_fb_signin] %>
+      _gaq.push(['_trackEvent', 'Facebook', 'SignIn'])
+    <% end %>
+
+    <% if flash[:track_fb_signup] %>
+      _gaq.push(['_trackEvent', 'Facebook', 'SignUp'])
+    <% end %>
+
     <% if flash[:commerce_tracking] || params[:force_tracking] && @spree_order.present? %>
       <%# more info: https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEcommerce %>
       <%# _addTrans(transactionId, affiliation, total, tax, shipping, city, state, country) %>
