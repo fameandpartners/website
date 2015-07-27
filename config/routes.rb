@@ -69,6 +69,10 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
+    get '/instagram/1' => 'statics#landing_page_mobile', :variant => '1'
+    get '/instagram/2' => 'statics#landing_page_mobile', :variant => '2'
+    get '/instagram/3' => 'statics#landing_page_mobile', :variant => '3'
+
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
     get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
@@ -90,6 +94,8 @@ FameAndPartners::Application.routes.draw do
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
     #edits
+    get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
+
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
     get '/lookbook/garden-wedding' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_wedding_collection
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
@@ -364,6 +370,7 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
+      get "search/order_owners" => 'search#order_owners'
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do

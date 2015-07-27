@@ -1,6 +1,5 @@
-module Marketing; end
-
-class Marketing::CustomerIOTracker
+module Marketing
+class CustomerIOOrderPresenter
   attr_reader :order, :site_version
 
   def initialize(order, site_version)
@@ -27,7 +26,6 @@ class Marketing::CustomerIOTracker
   end
 
   def address
-    
     {
       city: order.bill_address.city,
       state: order.bill_address.state.to_s,
@@ -47,4 +45,5 @@ class Marketing::CustomerIOTracker
     }
   end
 
+end
 end

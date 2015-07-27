@@ -47,6 +47,7 @@ $product-color-hot-pink: #ff3399;
       .color-blush                   { background-color: #eec6c6; }
       .color-brick                   { background-color: #993333; }
       .color-bright-red              { background-color: #ff3333; }
+      .color-bright-lavender         { background-color: #ddb6f9; }
       .color-bronze                  { background-color: #cd7f32; }
       .color-burgundy                { background-color: #690f0f; }
       .color-burnt-orange            { background-color: #f07532; }
@@ -70,6 +71,8 @@ $product-color-hot-pink: #ff3399;
       .color-gold                    { background-color: #bf9541; }
       .color-green                   { background-color: #00ff00; }
       .color-grey                    { background-color: #bcbebb; }
+      .color-gypsy-queen             { @include image-color-selector('GypsyQueen.png'); }
+      .color-gypsy-scarf             { @include image-color-selector('GypsyScarf.png'); }
       .color-hot-pink                { background-color: #ff3399; }
       .color-ice-blue                { background-color: $product-color-ice-blue; }
       .color-indigo                  { background-color: #3366cc; }
@@ -121,6 +124,7 @@ $product-color-hot-pink: #ff3399;
       .color-pink-and-blush          { @include split-color-selector(#f9d9e1, #ffabbc); }
       .color-plum                    { background-color: #8d4585; }
       .color-purple                  { background-color: #622b6f; }
+      .color-purple-metal            { background-color: #776385; }
       .color-red                     { background-color: $product_color-red; }
       .color-red-and-white           { @include split-color-selector($product-color-red, #fffff0); }
       .color-rose-gold               { background-color: #d6aa85; }

@@ -33,7 +33,6 @@
 @import 'redesign/typography';
 @import 'redesign/modal';
 @import 'redesign/flash_slider';
-@import 'redesign/mobile_menu';
 @import 'redesign/faqs';
 @import 'redesign/terms';
 @import 'redesign/login';
@@ -47,10 +46,6 @@
 
 // Time specific content
 @import 'transient_content';
-
-.mobile-logo {
-  margin-top:-3px;
-}
 
 .standard-form {
   height: 60px;
@@ -153,4 +148,9 @@ input.form-control {
   @media(max-width: 480px){
     clear: both;
   }
+}
+
+.checkout .shipAddress{
+  text-transform: none;
+  margin-left: 10px;
 }

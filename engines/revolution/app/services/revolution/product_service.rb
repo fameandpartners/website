@@ -4,7 +4,7 @@ module Revolution
     attr_reader :ids, :colours, :site_version
 
     def initialize(product_ids, site_version)
-
+      product_ids = product_ids.values if product_ids.respond_to?(:values)
       @ids = product_ids.collect{|pid| pid.split('-', 2)[0] }
       @colours = product_ids.collect{|pid| pid.split('-', 2)[1] }
       @site_version = site_version
