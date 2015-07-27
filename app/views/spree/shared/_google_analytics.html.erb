@@ -5,15 +5,15 @@
     _gaq.push(['_trackPageview']);
 
     <% if flash[:track_fb_reminder_promo] %>
-      _gaq.push(['_trackEvent', 'Facebook', 'Redeem'])
+      _gaq.push(['_trackEvent', 'Facebook', 'Redeem']);
     <% end %>
 
     <% if flash[:track_fb_signin] %>
-      _gaq.push(['_trackEvent', 'Facebook', 'SignIn'])
+      _gaq.push(['_trackEvent', 'Facebook', 'SignIn']);
     <% end %>
 
     <% if flash[:track_fb_signup] %>
-      _gaq.push(['_trackEvent', 'Facebook', 'SignUp'])
+      _gaq.push(['_trackEvent', 'Facebook', 'SignUp']);
     <% end %>
 
     <% if flash[:commerce_tracking] || params[:force_tracking] && @spree_order.present? %>
@@ -78,7 +78,7 @@
     <%= render :partial => 'spree/shared/customerio' %>
   <% end %>
 
-  <script>(function() {
+  <script type="text/javascript">(function() {
    var _fbq = window._fbq || (window._fbq = []);
    if (!_fbq.loaded) {
      var fbds = document.createElement('script');
