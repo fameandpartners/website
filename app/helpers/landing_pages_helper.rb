@@ -1,6 +1,10 @@
 module LandingPagesHelper
   require "base64"
 
+  def disable_notices?
+    @disable_notices.present? && @disable_notices == true
+  end
+
   def pop?
     params[:pop].present? && params[:pop] == 'true'
   end
