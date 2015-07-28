@@ -31,7 +31,9 @@ configatron.cache.expire do |expire|
   expire.long     = 1.day
 end
 
-configatron.customerio.site_id = '14c8952c36a16f4c20c6'
+# Test Environment
+configatron.customerio.site_id    = '14c8952c36a16f4c20c6'
+configatron.customerio.secret_key = 'f1fd531b4d1ac65ca86c'
 
 configatron.order_production_emails = ['production@fameandpartners.dev']
 
@@ -152,6 +154,10 @@ when :production
     s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
     s3.secret_access_key = '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'
   end
+
+  # Production Environment
+  configatron.customerio.site_id    = 'a416731201185e0c6f5f'
+  configatron.customerio.secret_key = 'f179030b06baa363ea38'
 
   configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }

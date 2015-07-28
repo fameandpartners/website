@@ -10,8 +10,8 @@ module Products
     include ActionView::Helpers::TextHelper # for truncate
 
     def initialize(available_on)
-      @@titles_row_numbers = [1]
-      @@first_content_row_number = 2
+      @@titles_row_numbers = [8, 10, 11, 12]
+      @@first_content_row_number = 13
       @available_on = available_on
     end
 
@@ -48,6 +48,7 @@ module Products
         raw[:price_in_usd]        = book.cell(row_num, columns[:price_in_usd])
         raw[:taxons]              = Array.wrap(columns[:taxons]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
         raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
+
         # Style
         raw[:glam]                = book.cell(row_num, columns[:glam])
         raw[:girly]               = book.cell(row_num, columns[:girly])
@@ -65,8 +66,10 @@ module Products
         raw[:petite]              = book.cell(row_num, columns[:petite])
         # Properties
         raw[:style_notes]         = book.cell(row_num, columns[:style_notes])
+        raw[:care_instructions]   = book.cell(row_num, columns[:care_instructions])
         raw[:fit]                 = book.cell(row_num, columns[:fit])
         raw[:size]                = book.cell(row_num, columns[:size])
+
         raw[:fabric]              = book.cell(row_num, columns[:fabric])
         raw[:product_type]        = book.cell(row_num, columns[:product_type])
         raw[:product_category]    = book.cell(row_num, columns[:product_category])
@@ -193,8 +196,9 @@ module Products
           },
           properties: {
             style_notes:          raw[:style_notes],
-            fit:                  raw[:fit],
+            care_instructions:    raw[:care_instructions],
             size:                 raw[:size],
+            fit:                  raw[:fit],
             fabric:               raw[:fabric],
             product_type:         raw[:product_type],
             product_category:     raw[:product_category],
@@ -232,13 +236,14 @@ module Products
 
       conformities = {
         # Basic
-        sku: /NUMBER/i,
-        name: /NAME/i,
+        sku: /style #/i,
+        name: /product name/i,
         description: /description/i,
         # price_in_aud: /rrp/i,
         price_in_usd: /price usd/i,
         taxons: /taxons? \d+/i,
         colors: /(color|colour) \d+$/i,
+
         # Style Profile
         glam: /glam$/i,
         girly: /girly$/i,
@@ -256,9 +261,10 @@ module Products
         petite: /petite/i,
         # Properties
         style_notes: /styling notes/i,
-        fit: /FIT/i,
-        size: /SIZE/i,
-        fabric: /FABRIC/i,
+        care_instructions: /care instructions/i,
+        fit: /fit/i,
+        size: /size/i,
+        fabric: /fabric/i,
         product_type: /product type/i,
         product_category: /product category/i,
         factory_id: /factory id/i,
@@ -275,7 +281,7 @@ module Products
       conformities.each do |key, regex|
         indexes = []
 
-        book.row(@@titles_row_numbers.first).each_with_index do |title, index|
+        book.row(@@titles_row_numbers.second).each_with_index do |title, index|
           next unless title.present?
 
           if title.strip =~ regex
@@ -294,9 +300,9 @@ module Products
         end
       end
 
-      @codes[:price_in_aud] = nil
-      @codes[:price_in_usd] = nil
-      @codes[:description] = nil
+      @codes[:price_in_aud] = 4
+      @codes[:price_in_usd] = 5
+      @codes[:description] = 6
 
       @codes[:customizations] = []
       book.row(@@titles_row_numbers.second).each_with_index do |title, index|
@@ -351,14 +357,14 @@ module Products
           add_product_song(product, args[:song].symbolize_keys || {})
 
           product
-        rescue Exception => message
-          Rails.logger.warn(message)
-          puts "======== Exception ========"
-          puts args[:sku]
-          puts args[:style_name]
-          puts message
-          puts "==========================="
-          nil
+        # rescue Exception => message
+        #   Rails.logger.warn(message)
+        #   puts "======== Exception ========"
+        #   puts args[:sku]
+        #   puts args[:style_name]
+        #   puts message
+        #   puts "==========================="
+        #   nil
         end
       end.compact
     end
@@ -426,8 +432,9 @@ module Products
 
     def add_product_properties(product, args)
       allowed = [:style_notes,
-                 :fit,
+                 :care_instructions,
                  :size,
+                 :fit,
                  :fabric,
                  :product_type,
                  :product_category,
@@ -450,7 +457,7 @@ module Products
         product.set_property(name, value)
       end
 
-      if args[:factory_name] && factory = Factory.find_by_name(args[:factory_name].capitalize)
+      if factory = Factory.find_by_name(args[:factory_name].try(:capitalize))
         product.factory = factory
       end
 

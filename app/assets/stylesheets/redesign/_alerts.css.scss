@@ -62,3 +62,15 @@
     top: 15rem;
   }
 }
+
+.auto-discount-applied {
+  @extend .alert-sale;
+  width:100%;
+  background-color: #000000;
+  padding: 5px 0 15px;
+  z-index: 101;
+  p {
+    color: #ffffff;
+    margin-bottom: 5px;
+  }
+}
