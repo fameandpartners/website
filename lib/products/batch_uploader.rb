@@ -604,7 +604,7 @@ module Products
       master_variant = product.master
 
       usd = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'USD')
-      usd.amount = us_price
+      usd.amount = us_price if us_price.present?
       usd.save!
     end
   end
