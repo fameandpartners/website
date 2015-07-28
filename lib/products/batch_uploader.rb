@@ -236,8 +236,8 @@ module Products
 
       conformities = {
         # Basic
-        sku: /STYLE NUMBER/i,
-        name: /STYLE NAME/i,
+        sku: /style number/i,
+        name: /style name/i,
         description: /description/i,
         # price_in_aud: /rrp/i,
         price_in_usd: /price usd/i,
@@ -262,9 +262,9 @@ module Products
         # Properties
         style_notes: /styling notes/i,
         care_instructions: /CARE INSTRUCTIONS/i,
-        fit: /FIT/i,
-        size: /SIZE/i,
-        fabric: /FABRIC/i,
+        fit: /fit/i,
+        size: /size/i,
+        fabric: /fabric/i,
         product_type: /product type/i,
         product_category: /product category/i,
         factory_id: /factory id/i,
