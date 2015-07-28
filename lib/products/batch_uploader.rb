@@ -10,6 +10,8 @@ module Products
     include ActionView::Helpers::TextHelper # for truncate
 
     def initialize(available_on)
+      #@@titles_row_numbers = [8, 10, 11, 12]
+      # For Tania's xlsx with only one title row on the first row
       @@titles_row_numbers = [1]
       @@first_content_row_number = 2
       @available_on = available_on
