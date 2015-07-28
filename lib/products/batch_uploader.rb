@@ -302,6 +302,11 @@ module Products
         end
       end
 
+      #@codes[:price_in_aud] = 4
+      #@codes[:price_in_usd] = 5
+      #@codes[:description] = 6
+
+      # For Tania's xlsx without price and description columns
       @codes[:price_in_aud] = nil
       @codes[:price_in_usd] = nil
       @codes[:description] = nil
