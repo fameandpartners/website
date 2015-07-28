@@ -46,8 +46,10 @@
     }
 
     #locale-selector-current {
+      cursor: default;
       display: inline-block;
       margin-left: 10px;
+      padding-right: 20px;
       position: relative;
 
       &:hover ul {
@@ -58,7 +60,6 @@
         @include dropdown-triangle($color: #000, $width: 8px, $height: 5px);
 
         height: 0;
-        margin-right: -20px;
         position: absolute;
         right: 0;
         top: 40%;
@@ -76,11 +77,17 @@
 
       li {
         float: none;
-        padding-right: 10px;
-        padding-left: 5px;
+
+        a {
+          padding: 7px 0 7px 6px;
+        }
 
         &.active {
           background-color: darken($gray-light-bg, 10%);
+        }
+
+        &:hover {
+          background-color: darken($gray-light-bg, 5%);
         }
       }
     }
@@ -99,14 +106,15 @@
 // Mobile version
 #locale-selector-mobile-container {
   background-color: $gray-light-bg;
+  cursor: pointer;
+  font-size: 16px;
   font-weight: bold;
   padding: 0;
+  padding: 10px 0;
   position: absolute;
   text-align: center;
   text-transform: none;
   width: 100%;
-  font-size: 16px;
-  padding: 10px 0;
 
   a {
     color: inherit;
@@ -143,7 +151,8 @@
     background-color: $gray-light-bg;
     display: none;
     list-style: none;
-    padding: 0;
+    padding-left: 0;
+    padding-top: 10px;
     position: absolute;
     text-align: center;
     width: 100%;
@@ -153,10 +162,19 @@
     }
 
     li {
+      cursor: pointer;
       float: none;
+
+      a {
+        padding: 10px 0;
+      }
 
       &.active {
         background-color: darken($gray-light-bg, 10%);
+      }
+
+      &:hover {
+        background-color: darken($gray-light-bg, 5%);
       }
     }
   }
