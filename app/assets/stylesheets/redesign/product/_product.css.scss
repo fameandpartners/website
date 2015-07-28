@@ -42,15 +42,18 @@
   }
 }
 
-@media(max-width: 768px){
+@media(max-width: 767px){
 	.screen-height {
-		height:80vh;
+    @media(max-height: 959px){
+		  height:90vh;
+    }
+    @media(min-height: 959px){
+      height:94vh;
+    }
 	}
 }
 
 .product-details {
-  max-width: 420px;
-
 	h1 {
 		text-transform: uppercase;
 		font-size: 2rem !important; // TODO: Remove important
