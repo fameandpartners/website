@@ -4,7 +4,18 @@ module Concerns::SiteVersion
   included do
     attr_writer :current_site_version
 
+    before_filter :check_site_version
+
     helper_method :current_site_version, :site_versions_enabled?
+  end
+
+  def check_site_version
+    # Add to cart and submitting forms should not change site version
+    return if (!request.get? || request.xhr? || request.path == '/checkout')
+
+    if site_version_param != current_site_version.code
+      @current_site_version = SiteVersion.by_permalink_or_default(site_version_param)
+    end
   end
 
   def site_versions_enabled?
