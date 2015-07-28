@@ -13,6 +13,7 @@ RSpec.describe ItemReturnCalculator do
     end
 
     it { expect(created_item_return.line_item_id).to eq line_item_id }
+    it { expect(created_item_return.comments).to eq "" }
   end
 
   describe '#advance_receive_item' do
@@ -36,6 +37,25 @@ RSpec.describe ItemReturnCalculator do
 
     it('maps location to received_location') do
       expect(created_item_return.received_location).to eq 'AU'
+    end
+  end
+
+  describe '#advance_approve' do
+    let(:user)          { Faker::Internet.email }
+
+    before do
+      creation_event
+      created_item_return.events.approve.create!({user: user, comment: "Cool Stuff"})
+      created_item_return.events.approve.create!({user: user, comment: "Approved Again"})
+      described_class.new(created_item_return).run.save!
+      created_item_return.reload
+    end
+
+    it('updates the comment') do
+      expect(created_item_return.comments).to eq "Cool Stuff\nApproved Again\n"
+    end
+    it('sets the status to "approved"') do
+      expect(created_item_return.acceptance_status).to eq 'approved'
     end
   end
 end

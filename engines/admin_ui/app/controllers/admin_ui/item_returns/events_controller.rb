@@ -47,7 +47,10 @@ module AdminUi
       end
 
       def form_class(event_type)
-        ::Forms::ReceiveItemForm
+        case event_type
+          when :receive_item then ::Forms::ReceiveItemForm
+          when :approve then ::Forms::ApproveForm
+        end
       end
 
       private

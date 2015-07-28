@@ -23,7 +23,7 @@ module AdminUi
     private
 
     helper_method def possible_events
-      [:receive_item]
+      [:receive_item, :approve]
     end
   end
 end

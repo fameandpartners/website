@@ -69,6 +69,12 @@ class ItemReturnEvent < ActiveRecord::Base
     validate :location, inclusion: { in:  ['AU', 'US'] }
   end
 
+  attr_accessible :user, :comment
+
+  event_type :approve do
+    attributes :user, :comment
+  end
+
 end
 
 
