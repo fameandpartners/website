@@ -18,4 +18,10 @@ RSpec.describe ItemReturnEvent, :type => :model do
     it { is_expected.to validate_inclusion_of(:location).in_array(%w[AU US]) }
     it { is_expected.to validate_presence_of :received_on }
   end
+
+  describe 'approve' do
+    subject(:event) { ItemReturnEvent.approve.new }
+
+    it { is_expected.to validate_presence_of :user }
+  end
 end
