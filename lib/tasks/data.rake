@@ -9,7 +9,7 @@ namespace :import do
     available = ENV['AVAILABLE'] || 1.days.ago
     puts "#{DateTime.now} START XLS IMPORTER"
 
-  
+
     uploader = Products::BatchUploader.new(available)
     uploader.parse_file(file_path)
 

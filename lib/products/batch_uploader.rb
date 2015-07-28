@@ -10,8 +10,8 @@ module Products
     include ActionView::Helpers::TextHelper # for truncate
 
     def initialize(available_on)
-      @@titles_row_numbers = [8, 10, 11, 12]
-      @@first_content_row_number = 13
+      @@titles_row_numbers = [1]
+      @@first_content_row_number = 2
       @available_on = available_on
     end
 
@@ -236,8 +236,8 @@ module Products
 
       conformities = {
         # Basic
-        sku: /style #/i,
-        name: /product name/i,
+        sku: /STYLE NUMBER/i,
+        name: /STYLE NAME/i,
         description: /description/i,
         # price_in_aud: /rrp/i,
         price_in_usd: /price usd/i,
@@ -261,10 +261,10 @@ module Products
         petite: /petite/i,
         # Properties
         style_notes: /styling notes/i,
-        care_instructions: /care instructions/i,
-        fit: /fit/i,
-        size: /size/i,
-        fabric: /fabric/i,
+        care_instructions: /CARE INSTRUCTIONS/i,
+        fit: /FIT/i,
+        size: /SIZE/i,
+        fabric: /FABRIC/i,
         product_type: /product type/i,
         product_category: /product category/i,
         factory_id: /factory id/i,
@@ -281,7 +281,7 @@ module Products
       conformities.each do |key, regex|
         indexes = []
 
-        book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        book.row(@@titles_row_numbers.first).each_with_index do |title, index|
           next unless title.present?
 
           if title.strip =~ regex
@@ -300,9 +300,9 @@ module Products
         end
       end
 
-      @codes[:price_in_aud] = 4
-      @codes[:price_in_usd] = 5
-      @codes[:description] = 6
+      @codes[:price_in_aud] = nil
+      @codes[:price_in_usd] = nil
+      @codes[:description] = nil
 
       @codes[:customizations] = []
       book.row(@@titles_row_numbers.second).each_with_index do |title, index|
