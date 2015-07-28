@@ -274,8 +274,20 @@ li.shop {
   }
 }
 
-.masthead {
-  padding-top: 26px;
+
+#masthead-container {
+  ul {
+    margin-bottom: 0;
+  }
+
+  .masthead {
+    padding-top: 26px;
+
+    @media(max-width: 480px) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
 }
 
 .nav-menu .primary li.menu-item .menu-item--link, .nav-menu .secondary li.menu-item .menu-item--link {
@@ -355,13 +367,6 @@ li.shop {
 
   &:hover{
     color: #355e6d;
-  }
-}
-
-.masthead {
-  @media(max-width: 480px) {
-    padding-right: 0;
-    padding-left: 0;
   }
 }
 
