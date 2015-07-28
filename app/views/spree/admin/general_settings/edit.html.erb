@@ -20,8 +20,8 @@
 
       <div class="row">
         <div class="alpha twelve columns">
-          <fieldset>
-            <legend align="center"><%= t(:top_banner) %></legend>
+          <fieldset class="no-border-bottom">
+            <legend align="center">Gray Top Banner (above the menu)</legend>
 
             <% @site_versions.each do |site_version| %>
               <% top_banner = TopBanner.new(site_version) %>

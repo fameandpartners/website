@@ -143,13 +143,23 @@
 
 .search-bar:after, .search-bar:before {
   bottom: 100%;
-  right: 132px;
+  right: 168px;
   border: solid transparent;
   content: " ";
   height: 0;
   width: 0;
   position: absolute;
   pointer-events: none;
+}
+
+@media (max-width: 991px) {
+  .search-bar {
+    top: 65px;
+
+    &:before, &:after {
+      right: 153px;
+    }
+  }
 }
 
 .image-container {

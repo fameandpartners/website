@@ -1,8 +1,3 @@
-coffee:
-  $ ->
-    $('#locale-selector-mobile-container').on 'click', ->
-      $(this).toggleClass('show-options')
-
 #locale-selector-mobile-container.visible-xs.visible-sm
   #locale-selector-label
     | You're shopping in:
@@ -14,3 +9,7 @@ coffee:
       li class=('active' if site_version == current_site_version)
         = link_to site_version_path(site_version.code) do
           = render 'layouts/redesign/header/locale_selector/item', site_version: site_version
+
+coffee:
+  $('#locale-selector-mobile-container').on 'click', ->
+    $(this).toggleClass('show-options')
