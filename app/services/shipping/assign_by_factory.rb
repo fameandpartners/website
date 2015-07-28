@@ -13,15 +13,17 @@ module Shipping
     end
 
     def create_shipment!(units = [])
-      ::Spree::Shipment.create!(
+      shipment = ::Spree::Shipment.create!(
         {
           order:           order,
           shipping_method: order.shipping_method,
-          address:         order.ship_address,
           inventory_units: units
         },
         without_protection: true
       )
+      # avoiding address validation
+      shipment.update_column(:address_id, order.ship_address_id) if order.ship_address_id
+      shipment
     end
 
     def units_by_factory

@@ -18,7 +18,7 @@ class UserCart::PromotionsService
 
   def initialize(options = {})
     @order        = options[:order]
-    @code         = options[:code].downcase
+    @code         = options[:code].to_s.downcase
   end
 
   def apply

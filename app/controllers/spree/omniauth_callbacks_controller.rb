@@ -19,13 +19,11 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if authentication.present?
       flash[:notice] = "Signed in successfully"
+      flash[:track_fb_signin] = "true"
       sign_in :spree_user, authentication.user
 
       FacebookDataFetchWorker.perform_async(authentication.user.id, auth_hash['uid'], auth_hash['credentials']['token'])
 
-      if session[:sign_up_reason].eql?('bridesmaid_party')
-        try_apply_bridesmaid_party_callback(authentication.user)
-      end
       redirect_to after_sign_in_path_for(authentication.user), flash: { just_signed_up: true }
 
     elsif spree_current_user
@@ -34,11 +32,8 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       FacebookDataFetchWorker.perform_async(spree_current_user.id, auth_hash['uid'], auth_hash['credentials']['token'])
 
-      if session[:sign_up_reason].eql?('bridesmaid_party')
-        try_apply_bridesmaid_party_callback(spree_current_user)
-      end
-
       flash[:notice] = "Authentication successful."
+      flash[:track_fb_signup] = "true"
       redirect_back_or_default(account_url)
     else
       user = Spree::User.find_by_email(auth_hash['info']['email']) || Spree::User.new
@@ -74,8 +69,21 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     end
 
+    user ||= (spree_current_user || authentication.try(:user))
+
+    if session[:email_reminder_promo].present? && session[:email_reminder_promo] !=  'scheduled_for_delivery'
+      tracker = Marketing::CustomerIOEventTracker.new
+      tracker.identify_user(user, current_site_version)
+      tracker.track(
+        user,
+        'email_reminder_promo',
+        promo: session[:email_reminder_promo]
+      )
+      session[:email_reminder_promo] = 'scheduled_for_delivery'
+      flash[:track_fb_reminder_promo] = "true"
+    end
+
     if current_order
-      user ||= (spree_current_user || authentication.try(:user))
       current_order.associate_user!(user) if user.present?
       session[:guest_token] = nil
     end

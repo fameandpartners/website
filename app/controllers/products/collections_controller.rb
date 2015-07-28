@@ -58,6 +58,14 @@ class Products::CollectionsController < Products::BaseController
     def set_collection_resource
       @collection_options = parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
+      if params[:pids]
+        punch_products
+      end
+    end
+
+    def punch_products
+      products = Revolution::ProductService.new(params[:pids], current_site_version).products
+      @collection.products = products + @collection.products
     end
 
     def set_collection_seo_meta_data

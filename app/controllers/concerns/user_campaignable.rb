@@ -2,7 +2,6 @@ module Concerns::UserCampaignable
   extend ActiveSupport::Concern
 
   included do
-    before_filter :just_apply_the_damn_promo_code
     before_filter :manage_campaigns
   end
 
@@ -25,25 +24,6 @@ module Concerns::UserCampaignable
         active_promotion = current_order.coupon_code_added_promotion
       end
       active_promotion
-    end
-  end
-
-  def just_apply_the_damn_promo_code
-    # only for GET requests
-    return unless request.get?
-    begin
-      if session[:auto_apply_promo].present?
-        service = UserCart::PromotionsService.new(
-          order: current_order,
-          code: session[:auto_apply_promo]
-        )
-
-        if service.apply
-          session.delete :auto_apply_promo
-        end
-      end
-    rescue StandardError => e
-      NewRelic::Agent.notice_error(e)
     end
   end
 

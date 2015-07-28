@@ -1,25 +1,35 @@
 require 'spec_helper'
 describe IndexController, :type => :controller do
   describe 'before filters' do
-    describe '#force_redirection_to_current_site_version' do
-      let!(:australian_site_version) { create(:site_version, permalink: 'au') }
-      let!(:portuguese_site_version) { create(:site_version, permalink: 'pt') }
+    let!(:australian_site_version) { create(:site_version, permalink: 'au') }
+    let!(:portuguese_site_version) { create(:site_version, permalink: 'pt') }
 
-      context 'user current_site_version is different from requested' do
-        before(:each) { controller.instance_variable_set(:@current_site_version, portuguese_site_version) }
+    describe '#guarantee_site_version_cookie' do
+      before(:each) { cookies[:site_verison] = nil }
 
-        it 'redirects the user to its current version' do
+      context 'given a site version param' do
+        it 'sets the site_version cookie according to it' do
           get :show, { site_version: australian_site_version }
+          expect(cookies[:site_version]).to eq('au')
+        end
+      end
+    end
+
+    describe '#force_redirection_to_current_site_version' do
+      context 'site version cookie differs from param site version' do
+        it 'redirects the user to the cookie site version' do
+          cookies[:site_version] = 'pt'
+          get :show, { site_version: australian_site_version }
+
           expect(response).to redirect_to('/pt/')
         end
       end
 
-      context 'user current_site_version is the same from requested' do
-        before(:each) { controller.instance_variable_set(:@current_site_version, portuguese_site_version) }
-
-        it 'redirects the user to its current version' do
+      context 'site version cookie is equal to param site version' do
+        it 'does nothing' do
+          cookies[:site_version] = 'pt'
           get :show, { site_version: portuguese_site_version }
-          expect(response).to have_http_status(:success)
+
           expect(response).not_to redirect_to('/pt/')
         end
       end

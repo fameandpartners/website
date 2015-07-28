@@ -69,6 +69,10 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
+    get '/instagram/1' => 'statics#landing_page_mobile', :variant => '1'
+    get '/instagram/2' => 'statics#landing_page_mobile', :variant => '2'
+    get '/instagram/3' => 'statics#landing_page_mobile', :variant => '3'
+
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
     get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
@@ -90,6 +94,8 @@ FameAndPartners::Application.routes.draw do
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
     #edits
+    get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
+
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
     get '/lookbook/garden-wedding' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_wedding_collection
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
@@ -108,7 +114,7 @@ FameAndPartners::Application.routes.draw do
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
-    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'plus-size', :as => :all_size_collection
+    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
 
     get '/prom-collection' => redirect('/lookbook/prom')
     get '/lookbook/prom' => 'products/collections#show', :permalink => 'PROM2015', :as => :prom_collection
@@ -300,6 +306,8 @@ FameAndPartners::Application.routes.draw do
         resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
       end
 
+      post 'shipping_methods/update_positions' => "shipping_methods#update_positions"
+
       scope 'taxonomies/:taxonomy_id/taxons/:id' do
         resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
       end
@@ -362,6 +370,7 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
+      get "search/order_owners" => 'search#order_owners'
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do

@@ -1,6 +1,11 @@
 # EngineYard Environments
 
-We use engineyard for production and uat/preprod environments.
+The following environments are configured on Engine Yard (EY), and should be used as described:
+
+1. **Staging**: development & testing
+2. **UAT**: development & testing
+4. **Preproduction**: stable (for final testing)
+3. **Production**: stable
 
 ## SSH
 

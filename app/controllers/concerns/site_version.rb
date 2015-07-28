@@ -2,6 +2,8 @@ module Concerns::SiteVersion
   extend ActiveSupport::Concern
 
   included do
+    attr_writer :current_site_version
+
     helper_method :current_site_version, :site_versions_enabled?
   end
 
@@ -17,9 +19,8 @@ module Concerns::SiteVersion
         cookie_param: cookies[:site_version],
         request_ip: request.remote_ip
       )
-      service.get().tap do |site_version|
-        cookies[:site_version]  ||= site_version.code
-        cookies[:ip_address]    ||= request.remote_ip
+
+      service.get.tap do |site_version|
         if current_spree_user && current_spree_user.site_version_id != site_version.id
           current_spree_user.update_column(:site_version_id, site_version.id)
         end
@@ -27,7 +28,11 @@ module Concerns::SiteVersion
     end
   end
 
-  def current_site_version=(site_version)
-    @current_site_version = site_version
+  def site_version_param
+    params[:site_version] || SiteVersion.default.code
+  end
+
+  def set_site_version_cookie(site_version_code)
+    cookies.permanent[:site_version] = site_version_code
   end
 end

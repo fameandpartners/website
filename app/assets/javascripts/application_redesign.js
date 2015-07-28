@@ -22,7 +22,6 @@
 //  require js/jquery.skippr.min.js # copied non-min version, to debug&patch
 // require js/main.js
 
-
 //  require js/superslides.js # copied to libs/superslides for easier monkey-patching
 //= require functions_redesign.js
 
@@ -41,7 +40,6 @@
 
 //= require partials/email_newsletter_subscriber
 //= require partials/email_capture_modal
-//= require partials/mobile_menu
 //= require partials/helpers/tracker.js.coffee
 //= require partials/helpers/error_messages.js.coffee
 
@@ -58,6 +56,7 @@
 //= require partials/product_collection_moodboard_links
 //= require partials/shopping_bag
 //= require partials/shopping_cart_summary
+//= require partials/side_menu
 
 //= require partials/user_order_returner
 

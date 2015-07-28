@@ -429,10 +429,231 @@ ul.secondary.pull-right {
 
 li#cart-trigger {
   span#cart-item-count {
+    color: white;
     @media (max-width: 991px) {
       top: 0.7rem;
       left: -1.7rem;
       position: relative;
     }
   }
+  a {
+    @media (max-width: 320px) {
+      padding-left: 3px;
+      padding-right: 0px;
+    }
+    @media(min-width: 325px)and(max-width:400px){
+      padding-left: 15px;
+      padding-right: 5px;
+    }
+    @media(min-width: 400px)and(max-width:589px){
+      padding-left: 20px;
+      padding-right: 5px;
+    }
+    @media(min-width: 590px){
+      padding-left: 60px;
+      padding-right: 5px;
+    }
+  }
+}
+
+.hamburger {
+  margin-top: -10px;
+  border: none;
+  background-color: white;
+  button {
+    border: none;
+    background-color: white !important;
+    img{
+      width:30px;
+      opacity: 0.7;
+      margin-top: -15px;
+      @media(max-width:450px) {
+        margin-left: -5px;
+      }
+      @media(min-width:550px){
+        margin-left: -20px;
+      }
+    }
+  }
+}
+
+.mobile-logo{
+  margin-top: -3px;
+
+  //iphone 4,5
+  @media(max-width: 325px){
+    margin-left: 60px;
+  }
+
+  //iphone 6
+  @media(min-width: 325px)and(max-width:385px){
+    margin-left: 90px;
+  }
+
+  //iphone 6plus
+  @media(min-width: 385px)and(max-width:430px){
+    margin-left: 110px;
+  }
+
+  //nexus 7
+  @media(min-width: 430px)and(max-width:610px){
+    margin-left: 140px;
+  }
+
+  @media(min-width: 480px)and(max-width:550px){
+    margin-left: 90px;
+  }
+}
+
+#sideMenu {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  position: fixed;
+  font-size: 15px;
+  top: 0;
+
+  @media(max-width: 320px){
+    width: 300px;
+    left: -300px;
+  }
+
+  @media(min-width: 321px)and(max-width:400px){
+    width: 350px;
+    left: -350px;
+  }
+
+  @media(min-width: 400px)and(max-width:599px){
+    width: 390px;
+    left: -390px;
+  }
+
+  @media(min-width: 599px)and(max-width:759px){
+    width: 575px;
+    left: -575px;
+  }
+
+  @media(min-width: 760px)and(max-width:799px){
+    width: 745px;
+    left: -745px;
+  }
+
+  @media(min-width: 800px){
+    width: 775px;
+    left: -775px;
+  }
+
+  z-index: 2000;
+  background-color: #f8f8f8;
+  -webkit-transition: margin-left 0.7s; /* Safari */
+  transition: margin-left 0.7s;
+
+  .navbar-header {
+    background-color: #e7e7e7;
+    padding-top:10px;
+    padding-bottom:10px;
+    width:100%;
+    .nav-brand {
+      margin-left: 5px;
+
+    }
+  }
+  nav{
+    height:100%;
+    ul{
+      width:100%;
+      li{
+        margin-left: 20px;
+        @media(min-width: 760px){
+          margin-left: 0px;
+        }
+        width:100%;
+        clear:both;
+        .dropdown-toggle{
+          background-color: #f8f8f8;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          ul {
+            width: 100%;
+          }
+        }
+        .dropdown-menu{
+          position: static;
+          background-color: #f8f8f8;
+          border: 0px;
+          box-shadow: none;
+          display:block;
+          height:0px;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+
+  #close {
+    font-size: 35px;
+    float: right;
+    margin-right: 10px;
+    margin-top:-8px;
+    img {
+      width:30px;
+      opacity: 0.7;
+      margin-right: 10px;
+    }
+  }
+
+  .caret {
+    float: right;
+    margin-right: 10px;
+  }
+
+  .all-dresses{
+    background-color: #f8f8f8;
+    input {
+      width: 265px;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      height: 40px;
+      margin-top:20px;
+    }
+  }
+
+  .account-login{
+    padding-bottom: 20px;
+    text-align: center;
+    margin-top:20px;
+    background-color: #f8f8f8;
+    span{
+      margin-left: 10px;
+    }
+    img{
+      margin-top: -4px;
+    }
+  }
+
+  a{
+    color:black;
+    font-weight: 500;
+  }
+
+  .arrow{
+    img{
+      width: 25px;
+      height: 25px;
+      transform: rotate(90deg);
+      float: right;
+      margin-right: 10px;
+    }
+    .clicked{
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.mobileAnimation{
+  -webkit-transition: height 0.5s;
+  -moz-transition: height 0.5s;
+  -ms-transition: height 0.5s;
+  -o-transition: height 0.5s;
+  transition: height 0.5s;
 }
