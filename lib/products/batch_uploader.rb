@@ -264,7 +264,7 @@ module Products
         petite: /petite/i,
         # Properties
         style_notes: /styling notes/i,
-        care_instructions: /CARE INSTRUCTIONS/i,
+        care_instructions: /care instructions/i,
         fit: /fit/i,
         size: /size/i,
         fabric: /fabric/i,
@@ -283,7 +283,8 @@ module Products
 
       conformities.each do |key, regex|
         indexes = []
-
+        #book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        # For Tania's xlsx with title row start at row 1
         book.row(@@titles_row_numbers.first).each_with_index do |title, index|
           next unless title.present?
 
