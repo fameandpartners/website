@@ -256,7 +256,7 @@ class StaticsController < ApplicationController
     @page_variant = params[:variant].to_s || "1"
     case @page_variant
       when "1"
-      @blogger_link = "Checkout Tricia\'s Blog at <a href='http://triciacentenera.com/'>triciacentenera.com</a>"
+      @blogger_link = "Check out Tricia\'s Blog at <a href='http://triciacentenera.com/'>triciacentenera.com</a>"
       @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-holly-493?color=black"
       @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-melanie-two-piece-587?color=white"
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-chevron-two-piece-566?color=burgundy"
@@ -278,7 +278,7 @@ class StaticsController < ApplicationController
       )
 
     when "2"
-      @blogger_link = "Checkout Nada\'s Blog at <a href='http://www.nadaadelle.com/2015/07/lacey-dreams.html'>nadaadelle.com</a>"
+      @blogger_link = "Check out Nada\'s Blog at <a href='http://www.nadaadelle.com/2015/07/lacey-dreams.html'>nadaadelle.com</a>"
       @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-lace-petal-579?color=white"
       @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-solace-517?color=white"
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-shimmer-genie-569?color=pastel-peach"
@@ -299,7 +299,7 @@ class StaticsController < ApplicationController
       )
 
     when "3"
-      @blogger_link = "Checkout Tsang \'s Blog at <a href='http://tsangtastic.com/2015/04/grasp-the-moment.html'>tsangtastic.com</a>"
+      @blogger_link = "Check out Jenny\'s Blog at <a href='http://tsangtastic.com/2015/04/grasp-the-moment.html'>tsangtastic.com</a>"
       @holy_dress_link = "http://www.fameandpartners.com/dresses/dress-imogen-97?color=purple"
       @three_products_dress1_link = "http://www.fameandpartners.com/dresses/dress-high-places-592?color=red"
       @three_products_dress2_link = "http://www.fameandpartners.com/dresses/dress-sweet-dreamer-572?color=surreal-floral-white"
