@@ -236,8 +236,8 @@ module Products
 
       conformities = {
         # Basic
-        sku: /style number/i,
-        name: /style name/i,
+        sku: /style #/i,
+        name: /product name/i,
         description: /description/i,
         # price_in_aud: /rrp/i,
         price_in_usd: /price usd/i,
