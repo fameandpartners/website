@@ -1,12 +1,9 @@
 window.getSiteVersionPrefix = () ->
   defaultPrefix = ''
   try
-    if window.app.current_site_version
-      code = window.app.current_site_version.permalink
-      if code && !code.match('us')
-        return "/" + code.replace('/', '')
-      else
-        return defaultPrefix
+    if window.app.current_site_version && window.app.current_site_version.url_prefix
+      code = window.app.current_site_version.url_prefix
+      return "/" + code.replace('/', '')
     else
       return defaultPrefix
   catch exception
