@@ -45,8 +45,8 @@ class  UserCart::Populator
   rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable, StandardError => e
     begin
       err_attrs = {
-        :order              => @order,
-        :site_version       => @site_version,
+        :order              => @order.to_h,
+        :site_version       => @site_version.to_h,
         :product_attributes => @product_attributes
       }
 
