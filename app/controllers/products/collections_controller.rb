@@ -88,7 +88,7 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def limit
-      default = page.get(:lookbook) ? 99 : 20
+      default = page_is_lookbook? ? 99 : 20
       params[:limit] || default
     end
 
@@ -128,6 +128,10 @@ class Products::CollectionsController < Products::BaseController
         when 'range'
           return { collection: permalink }
         end
+      end
+
+      if permalink =~ /undefined\Z/
+        redirect_to '/undefined'
       end
 
       # Didn't find any collection associated with the permalink
