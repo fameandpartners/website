@@ -3,6 +3,8 @@ module StyleQuiz
     respond_to :html, :json
 
     def edit
+      @title = "Style Quiz " + default_seo_title
+
       @user_style_profile = user_style_profile
       @questions = StyleQuiz::Question.active.ordered.includes(:answers).to_a
 

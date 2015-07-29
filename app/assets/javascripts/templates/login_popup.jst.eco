@@ -1,9 +1,6 @@
 <div class="item">
-  <div class="form">
-    <div class="description">
-      <p>Log-in to check your order, save your dress to a Wishlist, to discover your Style Profile, share with friends and to manage your profile.</p>
-    </div>
-    <div class="member-fields guest">
+  <form action="#" id="login-popup-form">
+    <div class="member-fields">
       <div class="fields-group">
         <div class="item-details input">
           <label for="email_address">Email address<span class="required">*</span></label>
@@ -15,11 +12,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
 <div class="save submit">
   <div class="btn empty border striped error message" style="display: none;"></div>
   <input type="submit" value="Login" class="btn black">
-  <br />
-  <a href="/spree_user/password/new">Reset your password</a>
+  <a class="btn black" href='<%= @fb_auth_path %>'><span class="fa fa-facebook"></span></div>
 </div>

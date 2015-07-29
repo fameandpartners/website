@@ -95,6 +95,13 @@ window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.
     super(opts)
     @$container.find('input').on('keyup', _.debounce(@onValueChanged, 100))
     @$container.on('click', '*[data-action=import-from-fb]', @importFromFacebookHandler)
+ 
+    @$container.on("click", '*[data-action=login]', (e) ->
+      e.preventDefault()
+      popup = new popups.Login({})
+      popup.open()
+    )
+
 
     @$fullnameInput  = @$container.find("input[name=fullname]")
     @$birthdayInput = @$container.find("input[name=birthday]")
