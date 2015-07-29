@@ -5,6 +5,7 @@ body {
   font-family: $font-family-base;
   font-size: $font-size-base;
   line-height: 1.4;
+  color: $text-color;
 }
 
 img {
@@ -36,6 +37,11 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 50000s ease-in-out 0s;
 }
+
+select {
+  color: $text-color;
+  font-weight: 400;
+} 
 
 [data-action*="import-from-fb"] {
   cursor: pointer;
