@@ -44,15 +44,17 @@ class  UserCart::Populator
     })
   rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable, StandardError => e
     begin
-      NewRelic::Agent.notice_error(e, {
-                                    :order              => @order,
-                                    :site_version       => @site_version,
-                                    :product_attributes => @product_attributes
-                                  })
+      err_attrs = {
+        :order              => @order.to_h,
+        :site_version       => @site_version.to_h,
+        :product_attributes => @product_attributes
+      }
+
+      NewRelic::Agent.notice_error(e, err_attrs)
     rescue StandardError
       #turtles
     end
-    OpenStruct.new({ success: false, message: e.message })
+    OpenStruct.new({ success: false, message: e.message, attrs: err_attrs })
   end
 
   private
