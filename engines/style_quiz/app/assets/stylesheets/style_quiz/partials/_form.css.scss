@@ -66,6 +66,9 @@ textarea.form-control {
 .btn-primary {
   color: #fff;
   background-color: #000;
+  &:hover, &:active, &:focus {
+    background-color: $pink-bg;
+  }
 }
 .btn-facebook {
   background-color: #3b5998;

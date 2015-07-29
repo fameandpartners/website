@@ -3,6 +3,10 @@
   padding: $quiz-grid-gutter 0;
   position: relative;
   @include background-image(linear-gradient(90deg, $peach-bg 0, $peach-bg 50%, $blue-bg 50%, $blue-bg 100%));
+
+  @media (max-width: $quiz-screen-phone) {
+    @include background-image(linear-gradient($peach-bg 0, $peach-bg 420px, $blue-bg 421px, $blue-bg 100%));
+  }
   
   // - or
   &:before, &:after {
@@ -13,6 +17,7 @@
     width: $quiz-form-control-height;
     height: $quiz-form-control-height;
     margin: ($quiz-form-control-height / -2) 0 0 ($quiz-form-control-height / -2);
+    @media (max-width: $quiz-screen-phone) { top: 418px;}
   }
   &:before {
     content: '';
@@ -34,6 +39,11 @@
   // - facebook
   .facebook-box {
     color: #fff;
+    @media (max-width: $quiz-screen-phone) {
+      margin-top: 50px;
+      padding-top: 30px;
+    }
+    h2 { color: inherit;}
     .btn {
       padding: 0;
       width: $quiz-form-control-height;
@@ -75,7 +85,11 @@
 
 // Question 8 
 .rank-fasion {
-  margin: -40px 0 50px 0;
+  margin: -40px 0 50px -10px;
+  @media (max-width: $quiz-screen-tablet) { 
+    margin-top: 0;
+    padding-top: 40px;
+  }
   .rank-cell { 
     max-width: 112px;
   }
@@ -222,6 +236,17 @@
     right: ($quiz-grid-gutter / 2);
     top: 50%;
     margin-top: -12px;
+  }
+}
+.event-form {
+  .col-2 {
+    @media (max-width: $quiz-screen-tablet) { width: (100% / 3);}
+  }
+  .col-4, .col-10 {
+    @media (max-width: $quiz-screen-tablet) { width: 2 * (100% / 3);}
+  }
+  .col-2, .col-4, .col-10 {
+    @media (max-width: $quiz-screen-phone) { width: 100%;}
   }
 }
 // @end Question 10

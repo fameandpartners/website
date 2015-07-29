@@ -23,8 +23,13 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
     @$container.hide()
 
   show: () ->
-    $('html, body').animate({ scrollTop: 0 }, 'fast')
-    @$container.show()
+    $el = @$container
+    $elTop = -$el.position().top + 'px'
+    $('html, body').animate({ scrollTop: 0 }, 0)
+    $('.quiz-sections-cutter').height($el.outerHeight())
+    $('.quiz-sections-scroller').css
+      'transform': 'translate3d(0,'+$elTop+', 0)'
+      '-webkit-transform': 'translate3d(0,'+$elTop+', 0)'
     @shown = true
 
   isValid: () ->
@@ -255,9 +260,12 @@ window.StyleQuiz.FashionImportanceQuestion = class FashionImportanceQuestion ext
 
     $chart = @$container.find('.rank-box')
     chartWidth = 1200
+    chartHeight = 400
+    paddingSize = 30
     screenWidth = if $('body').width() > chartWidth then chartWidth else $('body').width()
-    scale = Math.max(0.51, (screenWidth / chartWidth))
+    scale = Math.max(0.46, ((screenWidth - paddingSize) / chartWidth))
     $chart.css
+      height: scale * chartHeight
       '-webkit-transform': 'scale('+scale+')'
       '-ms-transform': 'scale('+scale+')'
       '-o-transform': 'scale('+scale+')'

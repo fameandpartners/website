@@ -1219,8 +1219,8 @@ ActiveRecord::Schema.define(:version => 20150721041443) do
     t.boolean  "is_service",           :default => false
     t.integer  "factory_id"
     t.string   "size_chart",           :default => "2014", :null => false
-    t.string   "tags"
     t.integer  "fabric_card_id"
+    t.string   "tags"
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"

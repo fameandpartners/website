@@ -1,5 +1,5 @@
-css:
-  .quiz-section { display: none; }
+/ css:
+  / .quiz-section { display: none; }
 
 ruby:
   current = params[:current]
@@ -25,8 +25,10 @@ ruby:
 // don't forget to add some placeholder / loading indicator
 
 - total_questions = @questions.size
-- @questions.each_with_index do |question, index|
-  = render template: question.template, locals: { question: question, question_position: index + 1, question_total: total_questions}
+.quiz-sections-cutter.quiz-preloading
+  .quiz-sections-scroller
+    - @questions.each_with_index do |question, index|
+      = render template: question.template, locals: { question: question, question_position: index + 1, question_total: total_questions}
 
 = render 'style_quiz/shared/facebook'
 

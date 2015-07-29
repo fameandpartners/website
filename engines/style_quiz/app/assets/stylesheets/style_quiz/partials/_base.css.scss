@@ -16,9 +16,13 @@ h1, h2, h3, h4 {
 }
 h1, h2 {
   font-size: 50px;
+  @media (max-width: $quiz-screen-tablet) { font-size: 40px;}
+  @media (max-width: $quiz-screen-phone) { font-size: 27px;}
 }
 h3 {
   font-size: 38px;
+  @media (max-width: $quiz-screen-tablet) { font-size: 30px;}
+  @media (max-width: $quiz-screen-phone) { font-size: 27px;}
 }
 h4 {
   font-size: 20px;
@@ -32,6 +36,10 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 50000s ease-in-out 0s;
 }
+
+[data-action*="import-from-fb"] {
+  cursor: pointer;
+}
 // @end Setup
 // -----------------
 
@@ -41,6 +49,10 @@ input:-webkit-autofill:active {
   margin-right: auto;
   width: 100%;
   max-width: $quiz-container-width;
+  @media (max-width: $quiz-screen-tablet) {
+    padding-left: ($quiz-grid-gutter / 2);
+    padding-right: ($quiz-grid-gutter / 2);
+  }
 }
 // - normal
 .row {
@@ -48,6 +60,10 @@ input:-webkit-autofill:active {
   margin-right: (-$quiz-grid-gutter / 2);
   font-size: 0;
   @include clearfix;
+  @media (max-width: $quiz-screen-phone) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 @for $i from 1 through $quiz-grid-columns {
   .col-#{$i} {
@@ -56,6 +72,27 @@ input:-webkit-autofill:active {
     width: percentage(($i / $quiz-grid-columns));
     font-size: $font-size-base;
     padding:  ($quiz-grid-gutter / 2);
+    @media (max-width: $quiz-screen-phone) { 
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 0;
+    }
+  }
+}
+.dress-style-wrapper {
+  @media (max-width: $quiz-screen-tablet) {
+    margin-left: -7px;
+    margin-right: -7px;
+  }
+}
+.col-2.dress-style {
+  @media (max-width: $quiz-screen-tablet) {
+    width: 25%;
+    padding: 7px;
+  }
+  @media (max-width: $quiz-screen-phone) {
+    width: 50%;
   }
 }
 
@@ -75,6 +112,27 @@ input:-webkit-autofill:active {
 // @end Grid
 // -----------------
 
+.quiz-preloading {
+  .quiz-section {
+    display: none;
+    &:first-child { display: block;}
+  }
+}
+
+// Section Scroller
+.quiz-sections-cutter {
+  overflow: hidden;
+  transform: translatez(0);
+  margin: 70px 0;
+} 
+.quiz-sections-scroller {
+  transform: translate3d(0, 0, 0);
+  transition: 0.5s ease-in-out;
+  position: relative;
+}
+// @end Section Scroller
+// -----------------
+
 
 // Section
 .quiz-section {
@@ -83,9 +141,11 @@ input:-webkit-autofill:active {
   position: relative;
 }
 .quiz-section-title {
-  padding: 85px 0;
+  padding: 75px 0;
   text-align: center;
   margin-bottom: ($quiz-grid-gutter / 2);
+  @media (max-width: $quiz-screen-tablet) { padding: 40px 0;}
+  @media (max-width: $quiz-screen-phone) { padding: 20px 0;}
   h1, h2, h3, h4 { margin: 0;}
   .font-family-secondary { 
     font-weight: 400;
@@ -94,6 +154,7 @@ input:-webkit-autofill:active {
     font-weight: 400;
     font-family: $font-family-secondary;
     margin-bottom: 30px;
+    @media (max-width: $quiz-screen-tablet) { margin-bottom: 10px;}
   }
 }
 .quiz-section-title-grey { background-color: $grey-bg;}
@@ -102,6 +163,7 @@ input:-webkit-autofill:active {
 .quiz-section-title-blue  { 
   color: #fff;
   background-color: $blue-bg;
+  * { color: #fff;}
 }
 // @end Section 
 // -----------------
@@ -120,6 +182,7 @@ input:-webkit-autofill:active {
 }
 .quiz-catalog-picture {
   position: relative;
+  cursor: pointer;
   img { width: 100%;}
   .checkmark-lg {
     position: absolute;
@@ -145,6 +208,14 @@ input:-webkit-autofill:active {
 // -----------------
 
 // Rank boxes
+.rank-box-wrapper {
+  @media (max-width: $quiz-screen-tablet) {
+    width: 100%;
+    padding-top: 50px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
 .rank-box {
   font-size: 0;
   direction: rtl;
@@ -175,7 +246,7 @@ input:-webkit-autofill:active {
   height: 0;
 }
 .rank-box .rank-cell {
-  &:hover, &.active {
+  &:hover, &.selected {
     .rank-item, & ~ .rank-cell .rank-item {
       background-position: 0 100%;
     }

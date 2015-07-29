@@ -1,11 +1,12 @@
 / Question 4/11
 .quiz-section id="#{ question.name }-question"
   .quiz-section-title.quiz-section-title-pink
-    h4.quiz-section-number Question #{ question_position }/#{ question_total }
-    h2 
-      | Select your body shape
-      br
-      | and dress size.
+    .grid-container
+      h4.quiz-section-number Question #{ question_position }/#{ question_total }
+      h2 
+        | Select your body shape
+        br
+        | and dress size.
   .grid-container
     .quiz-catalog.text-center
       - question.answers.where(group: 'shape').each do |answer|

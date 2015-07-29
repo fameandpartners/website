@@ -1,13 +1,14 @@
 / Question 10/11
 .quiz-section id="#{ question.name }-question"
   .quiz-section-title.quiz-section-title-pink
-    h4.quiz-section-number Question #{ question_position }/#{ question_total }
-    h2 
-      | Tell us about your upcoming events
-      br
-      | where you’ll need a dress.
+    .grid-container
+      h4.quiz-section-number Question #{ question_position }/#{ question_total }
+      h2 
+        | Tell us about your upcoming events
+        br
+        | where you’ll need a dress.
   .grid-container
-    .row
+    .row.event-form
       .col-2
         label event name
         input.form-control type="text" name='name'

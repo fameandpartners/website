@@ -34,13 +34,17 @@ window.StyleQuiz.Quiz = class Quiz
       @current = @questions.length - 1
 
     @showCurrentQuestion()
+    @quizRemovePreload()
+
+  quizRemovePreload: ->
+    $('.quiz-preloading').removeClass('quiz-preloading')
 
   showCurrentQuestion: () ->
     _.each(@questions, (question, index) ->
       if index == @current
         question.show()
-      else
-        question.hide()
+      # else
+      #   question.hide()
     , @)
 
   showNext: () =>

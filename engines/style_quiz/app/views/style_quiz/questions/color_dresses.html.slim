@@ -1,11 +1,12 @@
 / Question 3/11
 .quiz-section id="#{ question.name }-question"
   .quiz-section-title.quiz-section-title-peach
-    h4.quiz-section-number Question #{ question_position }/#{ question_total }
-    h2 
-      | What colour dresses do you
-      br
-      | like to wear?
+    .grid-container
+      h4.quiz-section-number Question #{ question_position }/#{ question_total }
+      h2 
+        | What colour dresses do you
+        br
+        | like to wear?
   .grid-container
     .quiz-catalog.text-center
       - question.answers.each do |answer|
