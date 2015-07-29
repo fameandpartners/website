@@ -280,6 +280,7 @@ module Products
 
       conformities.each do |key, regex|
         indexes = []
+
         book.row(@@titles_row_numbers.second).each_with_index do |title, index|
           next unless title.present?
 
@@ -413,11 +414,6 @@ module Products
       end
 
       new_product = product.persisted? ? 'Updated' : 'New'
-
-      #assuming xls has no new products
-      if args[:price_in_aud].nil? || args[:price_in_usd].nil?
-        add_product_prices(product, product.price)
-      end
 
       product.save!
       puts "Saving: #{new_product} - #{product.sku} - #{product.id} - #{product.name}"
