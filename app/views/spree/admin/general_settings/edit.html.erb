@@ -41,6 +41,23 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="alpha twelve columns">
+          <fieldset class="no-border-bottom">
+            <legend align="center">Store Location Warn (Black banner above the menu)</legend>
+
+            <% @site_versions.each do |site_version| %>
+              <% warn = LocaleWarn.new(site_version) %>
+              <legend align="left"><%= site_version.name %></legend>
+              <div class="field">
+                <label>Warn text</label>
+                <%= preference_field_tag warn.long_text_key, warn.long_text, type: :string %>
+              </div>
+            <% end %>
+          </fieldset>
+        </div>
+      </div>
+
 
       <div class="row">
         <div class="alpha six columns">
