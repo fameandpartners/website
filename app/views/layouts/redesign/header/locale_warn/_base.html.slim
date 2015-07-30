@@ -1,14 +1,15 @@
+- warning = LocaleWarn.new(current_site_version)
+
 #locale-warn-bar.row.hidden-xs.hidden-sm
-  .col-md-11
-    | Looks like you're in the USA. Visit our local store for US sizes and $USD pricing.
+  .col-md-12
+    = warning.long_text
+
     a#go-to-store-button[href="#"]
-      = image_tag("flags/bigger/au.gif")
-      | Visit AU Store
-  .col-md-1
-    | Not now
+      = image_tag(warning.flag_url)
+      = warning.button_text
 
 #locale-warn-bar-mobile.row.visible-xs-block.visible-sm-block
   .col-xs-12
     a#go-to-store-button[href="#"]
-      = image_tag("flags/bigger/au.gif")
-      | Visit The AU Store
+      = image_tag(warning.flag_url)
+      = warning.button_text
