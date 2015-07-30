@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LocaleWarn, type: :presenter, spree_config_support: true do
+describe Preferences::LocaleWarn, type: :presenter, spree_config_support: true do
   let(:spree_config) { Spree::AppConfiguration.new }
   let(:site_version) { build_stubbed(:site_version, permalink: 'au') }
   let(:warn)         { described_class.new(site_version) }

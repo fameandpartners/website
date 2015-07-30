@@ -13,7 +13,7 @@ ruby:
   # au_ip = '54.252.112.140'
   # br_ip = '179.218.144.98'
 
-  warning = LocaleWarn.new(
+  warning = Preferences::LocaleWarnPresenter.new(
     ip: request.ip,
     current_site_version: current_site_version,
     session_site_version_code: session[:site_version]
