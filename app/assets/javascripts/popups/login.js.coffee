@@ -24,13 +24,16 @@ window.popups.Login = class Login
 
   formSubmit: (e) =>
     e.preventDefault()
+    @$content.find('input[type=submit]').prop('disabled', 'disabled')
     @loginUserRequest()
       .done( (data, state) =>
         if data && !data.error && state == 'success'
           window.location.reload()
           @hide()
         else
-          window.helpers.showErrors(@$content.find('.item'), 'invalid login or password')
+          window.helpers.showErrors(@$content.find('#login-popup-form .item'), 'invalid login or password')
+      ).complete( () =>
+        @$content.find('input[type=submit]').prop('disabled', false)
       )
 
   # helpers
