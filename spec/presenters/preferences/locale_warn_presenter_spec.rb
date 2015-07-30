@@ -18,6 +18,13 @@ describe Preferences::LocaleWarnPresenter, type: :presenter do
     end
   end
 
+  describe '#site_version_path' do
+    it 'returns the site version path (Rails routing)' do
+      presenter = described_class.new(geo_site_version: au_site_version)
+      expect(presenter.site_version_path).to eq('/site_versions/au')
+    end
+  end
+
   describe '#long_text'do
     let(:presenter)  { described_class.new }
     let(:preference) { double('Locale Preference', long_text: 'My Long Locale Warn Text') }
