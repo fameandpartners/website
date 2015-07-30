@@ -9,12 +9,13 @@ ruby:
   # -> User visits the AU version
   # -> User receives the US warning
 
-  # us_ip ='74.86.15.72'
+  # us_ip = '74.86.15.72'
   # au_ip = '54.252.112.140'
   # br_ip = '179.218.144.98'
 
+  geo_site_version = FindUsersSiteVersion.new(request_ip: request.ip).get
   warning = Preferences::LocaleWarnPresenter.new(
-    ip: request.ip,
+    geo_site_version: geo_site_version,
     current_site_version: current_site_version,
     session_site_version_code: session[:site_version]
   )

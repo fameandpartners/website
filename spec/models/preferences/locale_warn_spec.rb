@@ -13,18 +13,6 @@ describe Preferences::LocaleWarn, type: :presenter, spree_config_support: true d
     end
   end
 
-  describe '#flag_url' do
-    it 'returns the flag url' do
-      expect(warn.flag_url).to eq('flags/bigger/au.gif')
-    end
-  end
-
-  describe '#button_text' do
-    it 'returns the button text (with site version code upcased)' do
-      expect(warn.button_text).to eq('Visit our AU Store')
-    end
-  end
-
   describe '#long_text_key' do
     it 'returns the long text preference key' do
       expect(warn.long_text_key).to eq('au_locale_warn_text')
