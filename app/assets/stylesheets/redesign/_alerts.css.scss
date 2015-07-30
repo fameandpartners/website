@@ -73,4 +73,17 @@
     color: #ffffff;
     margin-bottom: 5px;
   }
+  .close-banner{
+    float:right;
+    position: absolute;
+    right: 10px;
+    a {
+      color: white;
+      cursor:pointer;
+    }
+  }
+}
+
+.displayForever{
+  display: none !important;
 }
