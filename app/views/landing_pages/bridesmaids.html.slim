@@ -1,5 +1,5 @@
 - all_products = get_products_from_edit('Bridesmaid14', nil, nil, 24)
-- cache [:landing, :bridesmaids, all_products.to_sql], expires_in: configatron.cache.expire.normally do
+- cache [:landing, :bridesmaids, price_sensitive_cache_key,  all_products.to_sql], expires_in: configatron.cache.expire.normally do
   = content_for :inline_javascript do
     = raw "$('.img-product').hoverable();"
 
