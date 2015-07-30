@@ -8,11 +8,11 @@ window.popups.Login = class Login
   open: () ->
     formSubmit = @formSubmit
     @$content = vex.dialog.open
-      message: 'Enter your username and password:'
+      message: ''
       input: JST['templates/login_popup'](
         fb_auth_path: urlWithSitePrefix("/fb_auth?return_to=#{ encodeURIComponent(@path) }")
       ),
-      className: 'vex vex-theme-flat-attack',
+      className: 'vex-dialog-default vex-dialog-center',
       buttons: []
       afterOpen: ($vexcontent) =>
         $vexcontent.find('form').on('submit', formSubmit)

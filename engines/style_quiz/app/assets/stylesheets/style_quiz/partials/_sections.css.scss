@@ -44,13 +44,28 @@
       padding-top: 30px;
     }
     h2 { color: inherit;}
-    .btn {
+    .btn + .btn { margin-left: 5px;}
+    .btn-facebook {
       padding: 0;
       width: $quiz-form-control-height;
-      background-color: #fff;
       color: $blue-bg;
+      background-color: #fff;
+      // height: 45px;
       font-size: 30px;
       letter-spacing: 0;
+      &:before {
+        background-color: #fff;
+      }
+    }
+    .btn-login {
+      color: $blue-bg;
+      background-color: #fff;
+    }
+    .or {
+      display: block;
+      text-align: center;
+      font-style: normal;
+      margin: 8px 0 12px;
     }
   }
 }

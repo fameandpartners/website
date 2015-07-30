@@ -23,8 +23,7 @@ form.quiz-section id="#{ question.name }-question"
         .col-6.col-middle.text-center
           .form-centered.facebook-box data-action="import-from-fb"
             h2 Import my details from Facebook.
-            span.btn
-              span.fa.fa-facebook
-            br
-            span.btn
-              = link_to 'Login', new_spree_user_session_path, data: { action: 'login' }
+            .btn.btn-facebook 
+              ' &nbsp;
+            .or or
+            = link_to 'Login', new_spree_user_session_path, data: { action: 'login' }, class: 'btn btn-primary btn-login'

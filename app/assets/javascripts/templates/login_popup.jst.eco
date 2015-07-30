@@ -1,21 +1,16 @@
-<div class="item">
-  <form action="#" id="login-popup-form">
-    <div class="member-fields">
-      <div class="fields-group">
-        <div class="item-details input">
-          <label for="email_address">Email address<span class="required">*</span></label>
-          <input type="text" size="30" name="email_address" id="email_address" required placeholder="email.address@example.com" tabindex='1' />
-        </div>
-        <div class="item-details input">
-          <label for="password">Password<span class="required">*</span></label>
-          <input type="password" size="30" name="password" id="password" required tabindex='2' />
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
-<div class="save submit">
-  <div class="btn empty border striped error message" style="display: none;"></div>
-  <input type="submit" value="Login" class="btn black">
-  <a class="btn black" href='<%= @fb_auth_path %>'><span class="fa fa-facebook"></span></div>
-</div>
+<form action="#" id="login-popup-form">
+  <h4 class="text-center">Sign In</h4>
+  <div class="form-group">
+    <label for="email_address">Email address<span class="required">*</span></label>
+    <input class="form-control" type="text" size="30" name="email_address" id="email_address" required placeholder="email.address@example.com" tabindex='1' />
+  </div>
+  <div class="form-group">
+    <label for="password">Password<span class="required">*</span></label>
+    <input class="form-control" type="password" size="30" name="password" id="password" required tabindex='2' />
+  </div>
+  <div class="form-group">
+    <div class="btn empty border striped error message" style="display: none;"></div>
+    <input type="submit" value="Login" class="btn btn-black">
+    <a class="btn btn-facebook" href='<%= @fb_auth_path %>'>Sign in with Facebook</a>
+  </div>
+</form>
