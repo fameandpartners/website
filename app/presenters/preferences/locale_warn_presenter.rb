@@ -16,6 +16,10 @@ module Preferences
       "Visit our #{geo_site_version.code} Store"
     end
 
+    def site_version_path
+      Rails.application.routes.url_helpers.site_version_path(id: geo_site_version.code)
+    end
+
     def long_text
       preference.long_text
     end
