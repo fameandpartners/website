@@ -125,6 +125,9 @@ ruby:
 
       = render 'layouts/redesign/header/locale_selector/mobile'
 
+    - unless disable_notices?
+      = render 'layouts/redesign/notices'
+
 #sideMenu
   nav.navbar.navbar-default.visible-xs.visible-sm
     .navbar-header
@@ -175,21 +178,7 @@ ruby:
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 
-- unless disable_notices?
-  = render 'layouts/redesign/notices'
-
 coffee:
-  $('.menu-item--link').mouseover ->
-    menu = $(this).text()
-    if menu == 'Shop' or menu == 'Lookbook' or menu == 'my account'
-      $('.auto-discount-applied').hide()
-  $('.menu-item--link').mouseout ->
-    if menu == 'Shop' or menu == 'Lookbook' or menu == 'my account'
-      $('.auto-discount-applied').show()
-  $('.mega-menu').mouseover ->
-    $('.auto-discount-applied').hide()
-  $('.mega-menu').mouseout ->
-    $('.auto-discount-applied').show()
   $('.close-banner a').on 'click', ->
     $('.auto-discount-applied').addClass 'displayNoneForever'
 
