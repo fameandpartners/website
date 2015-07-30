@@ -178,31 +178,23 @@ ruby:
 - unless disable_notices?
   = render 'layouts/redesign/notices'
 
-javascript:
-  $(".menu-item--link").mouseover(function() {
-    menu = $(this).text();
-    if ( (menu == "Shop") ||  (menu == "Lookbook") || (menu == "my account") ){
-      $(".auto-discount-applied").hide();
-    }
-  });
-
-  $(".menu-item--link").mouseout(function() {
-    if ( (menu == "Shop") ||  (menu == "Lookbook") || (menu == "my account") ){
-      $(".auto-discount-applied").show();
-    }
-  });
-
-  $(".mega-menu").mouseover(function() {
-    $(".auto-discount-applied").hide();
-  });
-
-  $(".mega-menu").mouseout(function() {
-    $(".auto-discount-applied").show();
-  });
-
-  $(".close-banner a").on("click",function(){
-    $(".auto-discount-applied").addClass("displayForever");
-  });
-
+coffee:
+  $('.menu-item--link').mouseover ->
+    menu = $(this).text()
+    if menu == 'Shop' or menu == 'Lookbook' or menu == 'my account'
+      $('.auto-discount-applied').hide()
+    return
+  $('.menu-item--link').mouseout ->
+    if menu == 'Shop' or menu == 'Lookbook' or menu == 'my account'
+      $('.auto-discount-applied').show()
+    return
+  $('.mega-menu').mouseover ->
+    $('.auto-discount-applied').hide()
+    return
+  $('.mega-menu').mouseout ->
+    $('.auto-discount-applied').show()
+    return
+  $('.close-banner a').on 'click', ->
+    $('.auto-discount-applied').addClass 'displayNoneForever'
 
 
