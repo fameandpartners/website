@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TopBanner, type: :presenter, spree_config_support: true do
+describe Preferences::TopBanner, type: :presenter, spree_config_support: true do
   let(:spree_config) { Spree::AppConfiguration.new }
   let(:site_version) { build_stubbed(:site_version, permalink: 'au') }
   let(:banner)       { described_class.new(site_version) }
