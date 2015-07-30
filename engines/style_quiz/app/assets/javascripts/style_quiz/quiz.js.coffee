@@ -7,6 +7,7 @@ window.StyleQuiz.Quiz = class Quiz
     @current        = opts.current || 0
     @questions_data = opts.questions_data || []
     @action         = opts.action
+    @quiz_path      = opts.quiz_path
     @settings       = opts.settings
     @show_mode      = opts.show_mode # ['all', 'unfinished']
     @questions      = []
@@ -26,15 +27,17 @@ window.StyleQuiz.Quiz = class Quiz
         question = new StyleQuiz.BaseQuestion(question_params)
 
       question.on('question:completed', @showNext)
-      question.on('question:back', @showPrevious)
+      question.on('question:back',      @showPrevious)
+      question.on('question:changed',   @storeIntermediateResults)
+
       @questions.push(question)
     , @)
 
     if @current > (@questions.length - 1)
       @current = @questions.length - 1
 
-    @showCurrentQuestion()
     @quizRemovePreload()
+    @showCurrentQuestion()
 
   quizRemovePreload: ->
     $('.quiz-preloading').removeClass('quiz-preloading')
@@ -43,9 +46,8 @@ window.StyleQuiz.Quiz = class Quiz
     _.each(@questions, (question, index) ->
       if index == @current
         question.show()
-      # else
-      #   question.hide()
     , @)
+    @storeQuizStep()
 
   showNext: () =>
     unfinished_questions = @getUnfinishedQuestions()
@@ -59,6 +61,13 @@ window.StyleQuiz.Quiz = class Quiz
     if @current > 0
       @current = @current - 1
       @showCurrentQuestion()
+
+  storeQuizStep: () ->
+    stepUrl = "#{ @quiz_path }?current=#{ @current }"
+    window.history.pushState({ path: stepUrl }, '', stepUrl)
+
+  storeIntermediateResults: () =>
+    $.cookie('style_quiz:answers', JSON.stringify(@answers()), { expires: 7, path: @quiz_path })
 
   getUnfinishedQuestions: () ->
     switch @show_mode

@@ -6,6 +6,8 @@ module StyleQuiz
       @title = "Style Quiz " + default_seo_title
 
       @user_style_profile = user_style_profile
+      @user_style_profile = apply_stored_results(@user_style_profile, cookies['style_quiz:answers'])
+
       @questions = StyleQuiz::Question.active.ordered.includes(:answers).to_a
 
       render layout: 'redesign/application'
@@ -28,6 +30,9 @@ module StyleQuiz
           session[:user_style_profile_token] = user_style_profile.token
         end
       end
+
+      # delete intermediate results
+      cookies.delete('style_quiz:answers')
 
       respond_to do |format|
         format.html { redirect_to main_app.user_style_profile_path }
@@ -73,6 +78,18 @@ module StyleQuiz
 
       rescue
         return false
+      end
+
+      def apply_stored_results(profile, raw_answers)
+        answers = HashWithIndifferentAccess.new(JSON.parse(raw_answers)) rescue {}
+        profile.fullname = answers[:fullname] if answers[:fullname].present?
+        profile.email    = answers[:email]    if answers[:email].present?
+        profile.answer_ids = answers[:ids] || []
+        if answers[:birthday].present?
+          profile.birthday = Date.strptime(answers[:birthday], I18n.t('date_format.backend'))
+        end
+        profile.events = (answers[:events] || []).map{|d| StyleQuiz::UserProfileEvent.new(d) }
+        profile
       end
   end
 end

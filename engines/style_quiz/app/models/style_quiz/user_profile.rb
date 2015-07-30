@@ -24,7 +24,7 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
 
   def selected?(answer)
     return false if answer.blank?
-    answer_ids.include?(answer.id.to_s)
+    answer_ids.include?(answer.id)
   end
 
   def update_answers(answer_ids:, answer_values:, events:)
