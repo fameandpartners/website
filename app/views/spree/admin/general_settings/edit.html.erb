@@ -24,7 +24,7 @@
             <legend align="center">Gray Top Banner (above the menu)</legend>
 
             <% @site_versions.each do |site_version| %>
-              <% top_banner = TopBanner.new(site_version) %>
+              <% top_banner = Preferences::TopBanner.new(site_version) %>
 
               <legend align="left"><%= site_version.name %></legend>
               <div class="field">

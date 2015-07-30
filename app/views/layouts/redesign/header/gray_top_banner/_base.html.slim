@@ -1,8 +1,11 @@
+ruby:
+  banner = Preferences::TopBannerPresenter.new(current_site_version)
+
 #gray-top-banner.row.visible-md-block.visible-lg-block
   = render 'layouts/redesign/header/locale_selector/desktop'
 
   #ad-text.col-md-4.text-center
-    = TopBanner.new(current_site_version).center_text
+    = banner.center_text
 
   #customer-service.col-md-4.text-right
-    = TopBanner.new(current_site_version).right_text
+    = banner.right_text
