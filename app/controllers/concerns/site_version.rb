@@ -14,12 +14,12 @@ module Concerns::SiteVersion
     return :no_change if (!request.get? || request.xhr? || request.path == '/checkout')
 
     if site_version_param != current_site_version.code
-      @current_site_version = SiteVersion.by_permalink_or_default(site_version_param)
+      @current_site_version = ::SiteVersion.by_permalink_or_default(site_version_param)
     end
   end
 
   def site_versions_enabled?
-    @site_versions_enabled ||= (SiteVersion.count > 1)
+    @site_versions_enabled ||= (::SiteVersion.count > 1)
   end
 
   def current_site_version
@@ -39,7 +39,7 @@ module Concerns::SiteVersion
   end
 
   def site_version_param
-    params[:site_version] || SiteVersion.default.code
+    params[:site_version] || ::SiteVersion.default.code
   end
 
   def set_site_version_cookie(site_version_code)

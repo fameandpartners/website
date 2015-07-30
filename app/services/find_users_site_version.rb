@@ -11,6 +11,12 @@ class FindUsersSiteVersion
     sv_chosen_by_user || sv_chosen_by_cookie || sv_chosen_by_param || default_site_version
   end
 
+  def sv_chosen_by_ip
+    if request_ip.present? && country = fetch_user_country_code
+      find_by_permalink(country.to_s.downcase)
+    end
+  end
+
   private
 
   def sv_chosen_by_user
@@ -29,6 +35,10 @@ class FindUsersSiteVersion
     if url_param.present?
       find_by_permalink(url_param)
     end
+  end
+
+  def fetch_user_country_code
+    UserCountryFromIP.new(request_ip).country_code
   end
 
   def default_site_version

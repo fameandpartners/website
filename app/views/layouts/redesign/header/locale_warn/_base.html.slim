@@ -1,15 +1,36 @@
-- warning = LocaleWarn.new(current_site_version)
+ruby:
+  # - Case 1
+  # -> User is from AU
+  # -> User visits the US version
+  # -> User receives the AU warning
 
-#locale-warn-bar.row.hidden-xs.hidden-sm
-  .col-md-12
-    = warning.long_text
+  # - Case 2
+  # -> User is from US (or any other country)
+  # -> User visits the AU version
+  # -> User receives the US warning
 
-    a#go-to-store-button[href="#"]
-      = image_tag(warning.flag_url)
-      = warning.button_text
+  # us_ip = '74.86.15.72'
+  # au_ip = '54.252.112.140'
+  # br_ip = '179.218.144.98'
 
-#locale-warn-bar-mobile.row.visible-xs-block.visible-sm-block
-  .col-xs-12
-    a#go-to-store-button[href="#"]
-      = image_tag(warning.flag_url)
-      = warning.button_text
+  geo_site_version = FindUsersSiteVersion.new(request_ip: request.ip).get
+  warning = Preferences::LocaleWarnPresenter.new(
+    geo_site_version: geo_site_version,
+    current_site_version: current_site_version,
+    session_site_version_code: session[:site_version]
+  )
+
+- if warning.show?
+  #locale-warn-bar.row.hidden-xs.hidden-sm
+    .col-md-12
+      = warning.long_text
+
+      a#go-to-store-button[href="#"]
+        = image_tag(warning.flag_url)
+        = warning.button_text
+
+  #locale-warn-bar-mobile.row.visible-xs-block.visible-sm-block
+    .col-xs-12
+      a#go-to-store-button[href="#"]
+        = image_tag(warning.flag_url)
+        = warning.button_text
