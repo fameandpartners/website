@@ -1,19 +1,9 @@
 require 'spec_helper'
 
-describe Preferences::TopBanner, type: :model do
+describe TopBanner, type: :presenter, spree_config_support: true do
   let(:spree_config) { Spree::AppConfiguration.new }
   let(:site_version) { build_stubbed(:site_version, permalink: 'au') }
   let(:banner)       { described_class.new(site_version) }
-
-  def define_spree_config_preference(key, value, type)
-    Spree::AppConfiguration.class_eval do
-      preference key, type
-    end
-
-    Spree.config do |config|
-      config.send("#{key}=", value)
-    end
-  end
 
   describe '#initialize' do
     it 'guarantees application preferences for the given site version' do
