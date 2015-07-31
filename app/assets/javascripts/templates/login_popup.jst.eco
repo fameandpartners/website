@@ -1,4 +1,4 @@
-<div id="login-popup-form">
+<div id="login-popup-form" style="width: 300px;">
   <h4 class="text-center">Sign In</h4>
   <div class="form-group">
     <label for="email_address">Email address<span class="required">*</span></label>
@@ -10,7 +10,7 @@
   </div>
   <p class="text-danger" style="display: none;">Invalid Login or Password</p>
   <div class="form-group">
-    <input type="submit" value="Login" class="btn btn-black">
-    <a class="btn btn-facebook" href='<%= @fb_auth_path %>'>Sign in with Facebook</a>
+    <p><input type="submit" value="Login" class="btn btn-block btn-black"></p>
+    <p><a class="btn btn-block btn-facebook" href='<%= @fb_auth_path %>'>Sign in with Facebook</a></p>
   </div>
 </div>

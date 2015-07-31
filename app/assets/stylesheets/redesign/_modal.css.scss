@@ -10,6 +10,10 @@
     position: relative;
     padding: 30px;
     border: solid 1px #000;
+    max-width: 100%;
+    @media (max-width: 480px) {
+      padding: 10px;
+    }
   }
   .vex-close {
     @extend .icon-cross;
