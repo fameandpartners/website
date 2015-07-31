@@ -16,8 +16,7 @@ module Concerns::SiteVersion
       service = FindUsersSiteVersion.new(
         user: current_spree_user,
         url_param: params[:site_version],
-        cookie_param: cookies[:site_version],
-        request_ip: request.remote_ip
+        cookie_param: cookies[:site_version]
       )
 
       service.get.tap do |site_version|
