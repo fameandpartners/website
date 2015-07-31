@@ -15,7 +15,7 @@ module Products
 
     class << self
       def get_rate(from, to)
-        return 1.0000 if from == to
+        return BigDecimal.new(1) if from == to
         rate = Products::CurrencyConverter.load_rate(from, to)
         if rate["err"].blank? && rate["from"] == from && rate["to"] == to
           rate["rate"]
