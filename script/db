@@ -102,7 +102,7 @@ function _setup_dump
     _set_dump_directory ${DB_ENV}
 
     export DATE_BIT=$(date +%Y-%m-%dT%H:%M:%S)
-    export EXPORT_FILE="${DUMPS_DIR}/${DB_ENV}/${DB_BASE_NAME}_${DB_ENV}.${DATE_BIT}.${DUMP_EXTENSION}"
+    export EXPORT_FILE="${DUMPS_DIR}/${DB_BASE_NAME}_${DB_ENV}.${DATE_BIT}.${DUMP_EXTENSION}"
     echo "$(magenta)>> $(white)Dumping Database$(normal)"
     echo "Dumping $(green)${DB_BASE_NAME}_${DB_ENV}$(normal) database into file $(yellow)${EXPORT_FILE}$(normal)"
 }
