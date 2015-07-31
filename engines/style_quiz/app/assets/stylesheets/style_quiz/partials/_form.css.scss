@@ -97,15 +97,16 @@ textarea.form-control {
 
 // Error message
 .quiz-error {
-  position: fixed;
+  position: absolute;
   z-index: 9;
   text-align: center;
   font-size: 18px;
-  margin-top: -20px;
+  // margin-top: -20px;
   padding-left: 30px;
   padding-right: 30px;
   left: 0;
-  top: 50%;
+  // top: 50%;
+  bottom: 0;
   right: 0;
   padding: 10px;
   color: #fff;

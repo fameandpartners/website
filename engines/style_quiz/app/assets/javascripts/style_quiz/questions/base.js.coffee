@@ -79,6 +79,7 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
       $('.quiz-error').fadeOut()
     , 3000)
 
+
   hideValidationError: () ->
     $('.quiz-error').fadeOut()
 

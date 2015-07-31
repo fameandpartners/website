@@ -129,7 +129,7 @@ select {
 .quiz-sections-cutter {
   overflow: hidden;
   transform: translatez(0);
-  margin: 70px 0;
+  margin: 70px 0 ;
 } 
 .quiz-sections-scroller {
   transform: translate3d(0, 0, 0);
@@ -142,7 +142,8 @@ select {
 
 // Section
 .quiz-section {
-  margin-bottom: 80px;
+  margin-bottom: 35px;
+  padding-bottom: 45px;
   overflow-x: hidden;
   position: relative;
 }
