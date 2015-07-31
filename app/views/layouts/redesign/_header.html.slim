@@ -67,61 +67,63 @@ ruby:
 
     .nav-menu.nav-alert-top
       .container-fluid.nav-menu-container
+        = render 'layouts/redesign/header/locale_warn/base'
         = render 'layouts/redesign/header/gray_top_banner/base'
 
-        .masthead.pull-left.visible-xs.visible-sm
-          nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
-            .navbar-header
-              button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
-                = image_tag('Hamburger.svg', height: '25px')
+        #masthead-container
+          .masthead.pull-left.visible-xs.visible-sm
+            nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
+              .navbar-header
+                button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
+                  = image_tag('Hamburger.svg', height: '25px')
 
-        .masthead.pull-left.hidden-xs
-          = link_to root_path
-            = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
+          .masthead.pull-left.hidden-xs
+            = link_to root_path
+              = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
 
-        .masthead.pull-left.visible-xs
-          = link_to root_path do
-            = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
+          .masthead.pull-left.visible-xs
+            = link_to root_path do
+              = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
-        ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
-          = render partial: 'layouts/redesign/mega_menu/shop'
-          = render partial: 'layouts/redesign/mega_menu/lookbook'
-          li.menu-item
-            = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
+          ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
+            = render partial: 'layouts/redesign/mega_menu/shop'
+            = render partial: 'layouts/redesign/mega_menu/lookbook'
+            li.menu-item
+              = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
 
-        ul.secondary.pull-right
-          - if Features.active?(:moodboard)
-            li.menu-item.hidden-xs.hidden-sm
-              = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
-                span.visible-sm
-                  = image_tag "Heart.svg"
-                span.hidden-sm.hidden-xs#moodboard-counter
-                  | Moodboard &nbsp;
+          ul.secondary.pull-right
+            - if Features.active?(:moodboard)
+              li.menu-item.hidden-xs.hidden-sm
+                = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
+                  span.visible-sm
+                    = image_tag "Heart.svg"
+                  span.hidden-sm.hidden-xs#moodboard-counter
+                    | Moodboard &nbsp;
 
-          li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
-            = render "layouts/redesign/header/my_account_dropdown"
+            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
+              = render "layouts/redesign/header/my_account_dropdown"
 
-          li.menu-item
-            a.menu-item--link.search href="#"
-              = image_tag "_icons/search.svg", class: "nav-mobile-logo"
-            .search-bar.invis
-              a.close-search href="#"
-                = image_tag "close.svg", alt: 'Close'
-              .container-fluid.search-form
-                .col-md-6.col-md-offset-3
-                  .col-md-10
-                    .input-group.margin-bottom-sm
-                      = form_tag search_path, method: :get do
-                        input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
-                        span
-                          button.invis-fix Enter
+            li.menu-item
+              a.menu-item--link.search href="#"
+                = image_tag "_icons/search.svg", class: "nav-mobile-logo"
+              .search-bar.invis
+                a.close-search href="#"
+                  = image_tag "close.svg", alt: 'Close'
+                .container-fluid.search-form
+                  .col-md-6.col-md-offset-3
+                    .col-md-10
+                      .input-group.margin-bottom-sm
+                        = form_tag search_path, method: :get do
+                          input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
+                          span
+                            button.invis-fix Enter
 
-          li#cart-trigger.menu-item
-            = link_to spree.checkout_path, class: 'menu-item--link' do
-              span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
-              span.hidden-sm.hidden-xs.hidden-xxs cart:
-              span#cart-item-count 0
+            li#cart-trigger.menu-item
+              = link_to spree.checkout_path, class: 'menu-item--link' do
+                span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
+                span.hidden-sm.hidden-xs.hidden-xxs cart:
+                span#cart-item-count 0
 
       = render 'layouts/redesign/header/locale_selector/mobile'
 
