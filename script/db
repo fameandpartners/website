@@ -66,6 +66,7 @@ function easy_database_management_menu()
         "dump_production_db        Backup $(green)production$(normal)        database to a $(yellow)file$(normal)"
         "dump_development_db       Backup $(blue)development$(normal)       database to a $(yellow)file$(normal)"
         "dump_menu                 Backup $(magenta)any environment's$(normal) database to a $(yellow)file$(normal)"
+        "sanitise_dev_db           Delete sensitive information from $(blue)development$(normal) db. Also shrinks size massively"
      )
 
     select opt in "${commands[@]}"; do
@@ -217,6 +218,42 @@ function _load_db
 
   _spinner $!
 }
+
+## Sanitise ############################################################################################################
+function sanitise_dev_db
+{
+  SCRIPT_SQL="delete from spree_users where email not like '%fameandpartners.com%';
+
+  truncate table activities;
+  truncate table blog_posts;
+  truncate table bridesmaid_party_events;
+  truncate table competition_entries;
+  truncate table competition_invitations;
+  truncate table email_notifications;
+  truncate table facebook_data;
+  truncate table line_item_personalizations;
+  truncate table marketing_user_visits;
+  truncate table product_accessories;
+  truncate table spree_addresses;
+  truncate table spree_adjustments;
+  truncate table spree_credit_cards;
+  truncate table spree_line_items;
+  truncate table spree_log_entries;
+  truncate table spree_orders;
+  truncate table spree_payments;
+  truncate table spree_paypal_express_checkouts;
+  truncate table spree_shipments;
+  truncate table spree_state_changes;
+  truncate table spree_tokenized_permissions;
+  truncate table spree_user_authentications;
+  truncate table user_style_profile_taxons;
+  truncate table user_style_profiles;
+  truncate table wishlist_items;"
+
+  psql --dbname ${DEV_DB} --echo-queries --command "${SCRIPT_SQL}"
+}
+
+
 
 ## Common ##############################################################################################################
 
