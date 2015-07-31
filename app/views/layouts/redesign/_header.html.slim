@@ -67,6 +67,8 @@ ruby:
 
     .nav-menu.nav-alert-top
       .container-fluid.nav-menu-container
+        = render 'layouts/redesign/header/gray_top_banner/base'
+
         .masthead.pull-left.visible-xs.visible-sm
           nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
             .navbar-header
@@ -120,6 +122,8 @@ ruby:
               span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
               span.hidden-sm.hidden-xs.hidden-xxs cart:
               span#cart-item-count 0
+
+      = render 'layouts/redesign/header/locale_selector/mobile'
 
 #sideMenu
   nav.navbar.navbar-default.visible-xs.visible-sm

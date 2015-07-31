@@ -1,3 +1,9 @@
+/////////// locale selector //////////
+
+@import 'redesign/header/locale_selector';
+
+/////////// mega menu //////////
+
 .nav-menu {
   text-transform: uppercase;
   font-size: 1.4rem;
@@ -85,13 +91,14 @@
 }
 
 .account {
-  position: absolute;
-  top: 0;
-  border: 1px solid #040505;
   background-color: white;
-  padding-right: 0;
-  padding-left: 0;
+  border: 1px solid #040505;
   line-height: 35px;
+  padding-left: 0;
+  padding-right: 0;
+  position: absolute;
+  right: 10px;
+  top: -35px;
 }
 
 .search-bar {
@@ -103,7 +110,7 @@
 
 .mega-menu--main:after, .mega-menu--main:before {
   bottom: 100%;
-  left: 338px;
+  left: 318px;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -114,7 +121,7 @@
 
 .stories:after, .stories:before {
   bottom: 100%;
-  left: 418px;
+  left: 412px;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -136,13 +143,23 @@
 
 .search-bar:after, .search-bar:before {
   bottom: 100%;
-  right: 132px;
+  right: 168px;
   border: solid transparent;
   content: " ";
   height: 0;
   width: 0;
   position: absolute;
   pointer-events: none;
+}
+
+@media (max-width: 991px) {
+  .search-bar {
+    top: 65px;
+
+    &:before, &:after {
+      right: 153px;
+    }
+  }
 }
 
 .image-container {
@@ -429,8 +446,8 @@ ul.secondary.pull-right {
 
 li#cart-trigger {
   span#cart-item-count {
-    color: white;
     @media (max-width: 991px) {
+      color: white;
       top: 0.7rem;
       left: -1.7rem;
       position: relative;
