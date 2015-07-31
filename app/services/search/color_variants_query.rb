@@ -69,7 +69,7 @@ module Search
 
         if query_string.present?
           query do
-            string query_string, :default_operator => 'OR' , :use_dis_max => true
+            string "product.name:(#{query_string})^2 product.sku:(#{query_string})"
           end
         end
 
