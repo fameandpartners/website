@@ -27,7 +27,7 @@ module Concerns::SiteVersion
       service = FindUsersSiteVersion.new(
         user: current_spree_user,
         url_param: params[:site_version],
-        cookie_param: cookies[:site_version]
+        cookie_param: session[:site_version]
       )
 
       service.get.tap do |site_version|
@@ -40,9 +40,5 @@ module Concerns::SiteVersion
 
   def site_version_param
     params[:site_version] || ::SiteVersion.default.code
-  end
-
-  def set_site_version_cookie(site_version_code)
-    cookies.permanent[:site_version] = site_version_code
   end
 end

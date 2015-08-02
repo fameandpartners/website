@@ -86,13 +86,4 @@ describe Concerns::SiteVersion, type: :controller do
       end
     end
   end
-
-  describe '#set_site_version_cookie' do
-    it 'sets a permanent site version cookie' do
-      expect(cookies[:site_version]).to be_nil
-
-      controller.set_site_version_cookie('au')
-      expect(cookies[:site_version]).to eq('au')
-    end
-  end
 end

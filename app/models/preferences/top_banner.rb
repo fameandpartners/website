@@ -4,7 +4,7 @@ module Preferences
 
     def initialize(site_version)
       @site_version = site_version
-      create_version_banner_preferences
+      create_preferences
     end
 
     # Not using meta programming until we have more positions
@@ -26,7 +26,7 @@ module Preferences
 
     private
 
-    def create_version_banner_preferences
+    def create_preferences
       Spree::AppConfiguration.preference right_text_key , :string, default: ''
       Spree::AppConfiguration.preference center_text_key, :string, default: ''
     end

@@ -4,7 +4,7 @@ class SiteVersionsController < ApplicationController
   def show
     @current_site_version = SiteVersion.by_permalink_or_default(params[:id])
 
-    set_site_version_cookie(@current_site_version.code)
+    session[:site_version] = @current_site_version.code
 
     if user = try_spree_current_user
       user.update_site_version(@current_site_version)
