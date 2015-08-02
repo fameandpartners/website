@@ -1,10 +1,11 @@
 class FindUsersSiteVersion
-  attr_reader :user, :url_param, :cookie_param
+  attr_reader :user, :url_param, :cookie_param, :request_ip
 
   def initialize(options = {})
     @user         = options[:user]
     @url_param    = options[:url_param]
     @cookie_param = options[:cookie_param]
+    @request_ip   = options[:request_ip]
   end
 
   def get

@@ -1,36 +1,19 @@
-ruby:
-  # - Case 1
-  # -> User is from AU
-  # -> User visits the US version
-  # -> User receives the AU warning
-
-  # - Case 2
-  # -> User is from US (or any other country)
-  # -> User visits the AU version
-  # -> User receives the US warning
-
-  # us_ip = '74.86.15.72'
-  # au_ip = '54.252.112.140'
-  # br_ip = '179.218.144.98'
-
-  geo_site_version = FindUsersSiteVersion.new(request_ip: request.ip).get
-  warning = Preferences::LocaleWarnPresenter.new(
-    geo_site_version: geo_site_version,
-    current_site_version: current_site_version,
-    session_site_version_code: session[:site_version]
-  )
-
-- if warning.show?
+- if @locale_warning.show?
   #locale-warn-bar.row.hidden-xs.hidden-sm
     .col-md-12
-      = warning.long_text
+      = @locale_warning.long_text
 
-      = link_to warning.site_version_path, id: 'go-to-store-button' do
-        = image_tag(warning.flag_url)
-        = warning.button_text
+      = link_to @locale_warning.site_version_path, id: 'go-to-store-button' do
+        = image_tag(@locale_warning.flag_url)
+        = @locale_warning.button_text
+    = link_to site_version_path(id: current_site_version.code), class: 'close-button' do
+      | &times;
+
 
   #locale-warn-bar-mobile.row.visible-xs-block.visible-sm-block
     .col-xs-12
-      = link_to warning.site_version_path, id: 'go-to-store-button' do
-        = image_tag(warning.flag_url)
-        = warning.button_text
+      = link_to @locale_warning.site_version_path, id: 'go-to-store-button' do
+        = image_tag(@locale_warning.flag_url)
+        = @locale_warning.button_text
+    = link_to site_version_path(id: current_site_version.code), class: 'close-button' do
+      | &times;

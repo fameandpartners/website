@@ -154,18 +154,3 @@ input.form-control {
   text-transform: none;
   margin-left: 10px;
 }
-
-/////////// content container //////////
-
-$mega-menu-desktop-height: 105px;
-$mega-menu-mobile-height: 115px;
-
-#content-container {
-  margin-top: $mega-menu-desktop-height;
-}
-
-@media (max-width: 992px) {
-  #content-container {
-    margin-top: $mega-menu-mobile-height;
-  }
-}

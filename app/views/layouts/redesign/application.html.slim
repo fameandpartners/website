@@ -16,7 +16,7 @@ doctype html
     = render 'layouts/redesign/google_tag_manager'
     = render 'layouts/redesign/header'
 
-    #content-container
+    #content-container class=('locale-warning-active' if @locale_warning.show?)
       = yield
 
     = render 'layouts/redesign/footer'

@@ -1,5 +1,10 @@
+@import 'redesign/vars';
+
 $color-black: #000;
 $color-white: #FFF;
+
+$locale-warn-desktop-height: 54px;
+$locale-warn-mobile-height: 74px;
 
 // Desktop
 #locale-warn-bar {
@@ -31,9 +36,17 @@ $color-white: #FFF;
       vertical-align: baseline;
     }
   }
+
+  .close-button {
+    color: $color-white;
+    font-size: 30px;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+  }
 }
 
-// // Mobile
+// Mobile
 #locale-warn-bar-mobile {
   background-color: $color-black;
   font-size: 18px;
@@ -59,5 +72,26 @@ $color-white: #FFF;
       margin-right: 10px;
       vertical-align: baseline;
     }
+  }
+
+  .close-button {
+    color: $color-white;
+    font-size: 30px;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+  }
+
+}
+
+// Content container behaviour is shown
+
+#content-container.locale-warning-active {
+  margin-top: $mega-menu-desktop-height + $locale-warn-desktop-height;
+}
+
+@media (max-width: 992px) {
+  #content-container.locale-warning-active {
+    margin-top: $mega-menu-mobile-height + $locale-warn-mobile-height;
   }
 }

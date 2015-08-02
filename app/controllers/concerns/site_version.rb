@@ -4,9 +4,19 @@ module Concerns::SiteVersion
   included do
     attr_writer :current_site_version
 
+    before_filter :show_locale_warning
     before_filter :check_site_version
 
     helper_method :current_site_version, :site_versions_enabled?
+  end
+
+  def show_locale_warning
+    geo_site_version = FindUsersSiteVersion.new(request_ip: request.ip).sv_chosen_by_ip || SiteVersion.default
+    @locale_warning = Preferences::LocaleWarnPresenter.new(
+      geo_site_version: geo_site_version,
+      current_site_version: current_site_version,
+      session_site_version_code: session[:site_version]
+    )
   end
 
   def check_site_version
@@ -14,12 +24,12 @@ module Concerns::SiteVersion
     return :no_change if (!request.get? || request.xhr? || request.path == '/checkout')
 
     if site_version_param != current_site_version.code
-      @current_site_version = ::SiteVersion.by_permalink_or_default(site_version_param)
+      @current_site_version = SiteVersion.by_permalink_or_default(site_version_param)
     end
   end
 
   def site_versions_enabled?
-    @site_versions_enabled ||= (::SiteVersion.count > 1)
+    @site_versions_enabled ||= (SiteVersion.count > 1)
   end
 
   def current_site_version
@@ -39,6 +49,6 @@ module Concerns::SiteVersion
   end
 
   def site_version_param
-    params[:site_version] || ::SiteVersion.default.code
+    params[:site_version] || SiteVersion.default.code
   end
 end
