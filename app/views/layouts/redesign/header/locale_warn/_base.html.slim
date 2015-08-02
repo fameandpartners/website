@@ -1,19 +1,20 @@
-- if @locale_warning.show?
-  #locale-warn-bar.row.hidden-xs.hidden-sm
-    .col-md-12
-      = @locale_warning.long_text
+- cache ['locale-warn', @locale_warning.cache_key], expires_in: configatron.cache.expire.long do
+  - if @locale_warning.show?
+    #locale-warn-bar.row.hidden-xs.hidden-sm
+      .col-md-12
+        = @locale_warning.long_text
 
-      = link_to @locale_warning.site_version_path, id: 'go-to-store-button' do
-        = image_tag(@locale_warning.flag_url)
-        = @locale_warning.button_text
-    = link_to site_version_path(id: current_site_version.code), class: 'close-button' do
-      | &times;
+        = link_to @locale_warning.site_version_path, id: 'go-to-store-button' do
+          = image_tag(@locale_warning.flag_url)
+          = @locale_warning.button_text
+      = link_to site_version_path(id: current_site_version.code), class: 'close-button' do
+        | &times;
 
 
-  #locale-warn-bar-mobile.row.visible-xs-block.visible-sm-block
-    .col-xs-12
-      = link_to @locale_warning.site_version_path, id: 'go-to-store-button' do
-        = image_tag(@locale_warning.flag_url)
-        = @locale_warning.button_text
-    = link_to site_version_path(id: current_site_version.code), class: 'close-button' do
-      | &times;
+    #locale-warn-bar-mobile.row.visible-xs-block.visible-sm-block
+      .col-xs-12
+        = link_to @locale_warning.site_version_path, id: 'go-to-store-button' do
+          = image_tag(@locale_warning.flag_url)
+          = @locale_warning.button_text
+      = link_to site_version_path(id: current_site_version.code), class: 'close-button' do
+        | &times;

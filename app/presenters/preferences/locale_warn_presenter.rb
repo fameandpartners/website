@@ -32,6 +32,10 @@ module Preferences
       session_site_version_code.nil? && current_site_version != geo_site_version
     end
 
+    def cache_key
+      [geo_site_version.code, current_site_version.code, show?].join('-')
+    end
+
     private
 
     def preference
