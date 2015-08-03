@@ -20,6 +20,7 @@ gem 'rmagick'
 gem 'ckeditor'
 gem 'default_value_for'
 gem 'tire'
+gem 'redis', '~> 3.1'
 gem 'redis-rails'
 gem 'titleize'
 gem 'autoprefixer-rails'
@@ -63,7 +64,11 @@ gem 'fog'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
-gem 'pry-rails'
+gem 'rollout'
+
+# engines
+
+gem 'landing_page', path: "engines/landing_page"
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'

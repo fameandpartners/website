@@ -1,0 +1,7 @@
+- content_for :title, product_page.title
+= product_page.inspect
+
+h1= product_page.title
+
+- product_page.products.each do |product|
+ h2= product.title

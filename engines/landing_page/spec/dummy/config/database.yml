@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+local: &local
+  host: localhost
+  username: tobyhede
+
+development: &development
+  <<: *default
+  <<: *local
+  database: fame_website_development
+  # database: fame_website_test
+
+test:
+  <<: *default
+  <<: *local
+  database: fame_website_test
+
+production:
+  <<: *development
