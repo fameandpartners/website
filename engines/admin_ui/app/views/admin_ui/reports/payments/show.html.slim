@@ -1,10 +1,14 @@
 = content_for :page_title do
   ' Payments Report
 
-h2 Report
-
-= form_tag admin_ui.reports_payments_path, method: 'post' do
-  button type='submit' Generate
+.ibox
+  .ibox-title
+    ' Payments Report
+  .ibox-content
+    = form_tag admin_ui.reports_payments_path, method: 'post', class: 'form-horizontal'
+      .form-group
+        .col-lg-12
+          button type='submit' Generate
 
 h2 Sample
 
