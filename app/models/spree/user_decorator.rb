@@ -155,7 +155,9 @@ Spree::User.class_eval do
     tracker.track(
       self,
       'account_created',
-      nil
+      first_name: self.first_name,
+      last_name: self.last_name,
+      email: self.email
     )
   end
 end
