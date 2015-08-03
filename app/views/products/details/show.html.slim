@@ -228,3 +228,10 @@ hr
 
   - if @product.making_options.present?
     = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }
+
+
+coffee:
+  fbModalHeight = $('.auto-discount-applied').height()
+  if fbModalHeight > 0
+    $('#slides').css("marginTop", 209)
+    $('.product-content').css("top", "23rem")
