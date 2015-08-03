@@ -5,16 +5,6 @@ describe Preferences::TopBanner, type: :presenter, spree_config_support: true do
   let(:site_version) { build_stubbed(:site_version, permalink: 'au') }
   let(:banner)       { described_class.new(site_version) }
 
-  describe '#initialize' do
-    it 'guarantees application preferences for the given site version' do
-      expect(spree_config.has_preference?(:au_top_banner_right_text)).to be_falsy
-      expect(spree_config.has_preference?(:au_top_banner_center_text)).to be_falsy
-      described_class.new(site_version)
-      expect(spree_config.has_preference?(:au_top_banner_right_text)).to be_truthy
-      expect(spree_config.has_preference?(:au_top_banner_center_text)).to be_truthy
-    end
-  end
-
   describe '#right_text_key' do
     it 'returns the right text preference key' do
       expect(banner.right_text_key).to eq('au_top_banner_right_text')

@@ -1,10 +1,9 @@
 module Preferences
-  class TopBanner
+  class TopBanner < Base
     attr_reader :site_version
 
     def initialize(site_version)
       @site_version = site_version
-      create_preferences
     end
 
     # Not using meta programming until we have more positions
@@ -17,18 +16,11 @@ module Preferences
     end
 
     def right_text
-      Spree::AppConfiguration.new[right_text_key]
+      preference_value(right_text_key)
     end
 
     def center_text
-      Spree::AppConfiguration.new[center_text_key]
-    end
-
-    private
-
-    def create_preferences
-      Spree::AppConfiguration.preference right_text_key , :string, default: ''
-      Spree::AppConfiguration.preference center_text_key, :string, default: ''
+      preference_value(center_text_key)
     end
   end
 end
