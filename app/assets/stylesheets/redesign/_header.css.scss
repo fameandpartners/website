@@ -111,6 +111,48 @@
   border-bottom: none;
   border-left: none;
   border-right: none;
+
+  &:after, &:before {
+    bottom: 100%;
+    right: 168px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-color: rgba(213, 209, 209, 0);
+    border-bottom-color: #f5f5f5;
+    border-width: 6px;
+    margin-right: -10px;
+  }
+
+  &:before {
+    border-color: rgba(4, 5, 5, 0);
+    border-bottom-color: #040505;
+    border-width: 7px;
+    margin-right: -11px;
+  }
+
+  button {
+    margin-top: 6px;
+    font-family: forum;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 991px) {
+  .search-bar {
+    top: 65px;
+
+    &:before, &:after {
+      right: 92px;
+    }
+  }
 }
 
 .mega-menu--main:after, .mega-menu--main:before {
@@ -146,27 +188,6 @@
   pointer-events: none;
 }
 
-.search-bar:after, .search-bar:before {
-  bottom: 100%;
-  right: 168px;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-@media (max-width: 991px) {
-  .search-bar {
-    top: 65px;
-
-    &:before, &:after {
-      right: 153px;
-    }
-  }
-}
-
 .image-container {
   margin-top: 4rem;
 }
@@ -192,13 +213,6 @@
   margin-left: -10px;
 }
 
-.search-bar:after {
-  border-color: rgba(213, 209, 209, 0);
-  border-bottom-color: #f5f5f5;
-  border-width: 6px;
-  margin-right: -10px;
-}
-
 .mega-menu--main:before {
   border-color: rgba(4, 5, 5, 0);
   border-bottom-color: #040505;
@@ -218,13 +232,6 @@
   border-bottom-color: #040505;
   border-width: 7px;
   margin-left: -11px;
-}
-
-.search-bar:before {
-  border-color: rgba(4, 5, 5, 0);
-  border-bottom-color: #040505;
-  border-width: 7px;
-  margin-right: -11px;
 }
 
 .menu-icon {
@@ -317,13 +324,6 @@ li.shop {
   .input-group{
     margin-top: 90px;
   }
-}
-
-.search-bar button {
-  margin-top: 6px;
-  font-family: forum;
-  font-size: 2rem;
-  font-weight: 600;
 }
 
 .search-form .form-control {

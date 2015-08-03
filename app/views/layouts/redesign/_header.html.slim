@@ -62,12 +62,12 @@ ruby:
   = raw init_style_quiz
   = raw side_menu_init
 
-- cache [:layout, :header, spree_user_signed_in?], expires_in: configatron.cache.expire.long do
+- cache [:layout, :header, spree_user_signed_in?, @locale_warning.cache_key], expires_in: configatron.cache.expire.long do
   header
 
     .nav-menu.nav-alert-top
       .container-fluid.nav-menu-container
-        = render 'layouts/redesign/header/locale_warn/base'
+        = render 'layouts/redesign/header/locale_warn/base', locals: { warning: @locale_warning }
         = render 'layouts/redesign/header/gray_top_banner/base'
 
         #masthead-container

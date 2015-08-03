@@ -12,11 +12,11 @@ doctype html
 
     = render 'layouts/redesign/head'
 
-  body#top
+  body#top class=('locale-warning-active' if @locale_warning.show?)
     = render 'layouts/redesign/google_tag_manager'
     = render 'layouts/redesign/header'
 
-    #content-container class=('locale-warning-active' if @locale_warning.show?)
+    #content-container
       = yield
 
     = render 'layouts/redesign/footer'
