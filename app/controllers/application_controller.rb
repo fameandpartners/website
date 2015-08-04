@@ -97,9 +97,11 @@ class ApplicationController < ActionController::Base
 
   def add_debugging_infomation
     ::NewRelic::Agent.add_custom_attributes({
-      user_id:  current_spree_user.try(:id),
-      order_id: current_order.try(:id),
-      referrer: request.referrer
+      user_id:      current_spree_user.try(:id),
+      user_email:   current_spree_user.try(:email),
+      order_id:     current_order.try(:id),
+      order_number: current_order.try(:number),
+      referrer:     request.referrer
     })
   rescue Exception => e
     true
