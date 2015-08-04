@@ -28,12 +28,28 @@ class MarketingMailer < ActionMailer::Base
     @original_price    = base_price.display_price
     @discounted_price  = Spree::Money.new(base_price.amount - base_price.amount * 0.1)
 
-    Slim::Engine.with_options(:pretty => true) do
-      mail(
-        to: user.email,
-        subject: t('emails.subjects.marketing.abandoned_cart')
-      )
-    end
+    #Slim::Engine.with_options(:pretty => true) do
+      #mail(
+        #to: user.email,
+        #subject: t('emails.subjects.marketing.abandoned_cart')
+      #)
+    #end
+
+    tracker = Marketing::CustomerIOEventTracker.new
+    subject = t('emails.subjects.marketing.abandoned_cart')
+    tracker.track(
+      user,
+      'abandoned_cart',
+      email: user.email,
+      subject: subject,
+      resume_shop_url: @resume_shop_url,
+      product_url: @product_url,
+      product_image_url: @product_image_url,
+      product_name: @product_name,
+      original_price: @original_price,
+      discounted_price: @discounted_price
+    )
+
   end
 
   def added_to_wishlist(user, site_version = nil)
