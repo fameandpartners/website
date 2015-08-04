@@ -135,22 +135,19 @@ class ApplicationController < ActionController::Base
     @description = args.flatten.join(' | ')
   end
 
-  def default_seo_title
+  helper_method def default_seo_title
     Preferences::Titles.new(current_site_version).default_seo_title
   end
-  helper_method :default_seo_title
 
-  def default_meta_description
+  helper_method def default_meta_description
     Spree::Config[:default_meta_description]
   end
-  helper_method :default_meta_description
 
-  def get_user_type
+  helper_method def get_user_type
     spree_user_signed_in? ? 'Member' : 'Guest'
   end
-  helper_method :get_user_type
 
-  def analytics_label(label_type, *args)
+  helper_method def analytics_label(label_type, *args)
     case label_type.to_sym
     when :product
       product = args.first
@@ -173,22 +170,6 @@ class ApplicationController < ActionController::Base
   rescue Exception => e
     return ''
   end
-  helper_method :analytics_label
-
-  def step1_custom_dresses_path(options = {})
-    main_app.step1_custom_dresses_path(options.merge(user_addition_params))
-  end
-  helper_method :step1_custom_dresses_path
-
-  def step2_custom_dress_path(object, options = {})
-    main_app.step2_custom_dress_path(object, options.merge(user_addition_params))
-  end
-  helper_method :step2_custom_dress_path
-
-  def success_custom_dress_path(object, options = {})
-    main_app.success_custom_dress_path(object, options.merge(user_addition_params))
-  end
-  helper_method :success_custom_dress_path
 
   def user_addition_params
     addition_params = {}
@@ -215,7 +196,7 @@ class ApplicationController < ActionController::Base
     super
   end
 
-  def current_wished_product_ids
+  helper_method def current_wished_product_ids
     if @current_wished_product_ids
       @current_wished_product_ids
     else
@@ -223,18 +204,16 @@ class ApplicationController < ActionController::Base
       @current_wished_product_ids = user.present? ? user.wishlist_items.map(&:spree_product_id) : []
     end
   end
-  helper_method :current_wished_product_ids
 
-  def serialized_current_user
+  helper_method def serialized_current_user
     if spree_user_signed_in?
       serialize_user(spree_current_user)
     else
       {}
     end
   end
-  helper_method :serialized_current_user
 
-  def serialize_user(user)
+  helper_method def serialize_user(user)
     {
       fullname: user.fullname,
       first_name: user.first_name,
@@ -242,7 +221,6 @@ class ApplicationController < ActionController::Base
       wish_list: serialize_wish_list(user)
     }
   end
-  helper_method :serialize_user
 
   def serialize_wish_list(user)
     user.wishlist_items.map do |item|
@@ -269,10 +247,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def custom_dresses_path
+  helper_method def custom_dresses_path
     main_app.personalization_path
   end
-  helper_method :custom_dresses_path
 
   def set_product_show_page_title(product, info = "")
     prefix = "#{product.short_description} #{info} #{product.name}"
@@ -292,10 +269,9 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
 
-  def current_user_moodboard
+  helper_method def current_user_moodboard
     @user_moodboard ||= UserMoodboard::BaseResource.new(user: current_spree_user).read
   end
-  helper_method :current_user_moodboard
 
   # todo: remove this method from global scope
   def get_recommended_products(product, options = {})
