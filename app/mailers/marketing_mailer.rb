@@ -35,19 +35,19 @@ class MarketingMailer < ActionMailer::Base
       #)
     #end
 
-    tracker = Marketing::CustomerIOEventTracker.new
     subject = t('emails.subjects.marketing.abandoned_cart')
-    tracker.track(
+
+    Marketing::CustomerIOEventTracker.new.track(
       user,
       'abandoned_cart',
-      email: user.email,
-      subject: subject,
-      resume_shop_url: @resume_shop_url,
-      product_url: @product_url,
+      email:             user.email,
+      subject:           subject,
+      resume_shop_url:   @resume_shop_url,
+      product_url:       @product_url,
       product_image_url: @product_image_url,
-      product_name: @product_name,
-      original_price: @original_price,
-      discounted_price: @discounted_price
+      product_name:      @product_name,
+      original_price:    @original_price,
+      discounted_price:  @discounted_price
     )
 
   end
