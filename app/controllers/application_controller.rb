@@ -136,7 +136,7 @@ class ApplicationController < ActionController::Base
   end
 
   def default_seo_title
-    Spree::Config[:default_seo_title]
+    Preferences::Titles.new(current_site_version).default_seo_title
   end
   helper_method :default_seo_title
 

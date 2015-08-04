@@ -9,19 +9,20 @@
       = form_for :locale_preferences, url: admin_locale_preferences_path, method: :put do |f|
         - @site_versions.each do |site_version|
           h1 = site_version.name
-          / Default SEO Title
+
+          / Titles
+          - titles = Preferences::Titles.new(site_version)
           fieldset.no-border-bottom
             legend align='center' Default SEO Title
             .field
               label Default SEO Title
-              = preference_field_tag :fake_default_seo_title, 'default seo title', type: :string
+              = preference_field_tag titles.default_seo_title_key, titles.default_seo_title, type: :string
 
-          / HomePage title
           fieldset.no-border-bottom
             legend align='center' Homepage Title
             .field
               label Homepage Title
-              = preference_field_tag :fake_homepage_title, 'home page title', type: :string
+              = preference_field_tag titles.homepage_title_key, titles.homepage_title, type: :string
 
           / Gray Top Banner
           fieldset.no-border-bottom
