@@ -114,6 +114,7 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def parse_permalink(permalink)
+
       return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
       available_color_groups = Spree::OptionValuesGroup.for_colors.available_as_taxon
@@ -136,5 +137,6 @@ class Products::CollectionsController < Products::BaseController
 
       # Didn't find any collection associated with the permalink
       return nil
+
     end
 end
