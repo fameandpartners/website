@@ -5,18 +5,17 @@ RSpec.describe 'shared/tracking/_google_analytics.html.erb', type: :view do
   it 'renders nothing without an active Spree Tracker' do
     render
     expect(rendered).to match /\A\n\n\z/
+    expect(rendered).to be_blank
   end
 
 
   it 'sets GA account ID from Spree::Tracker' do
     allow(Spree::Tracker)
       .to receive(:current)
-            .and_return(Spree::Tracker.new(analytics_id: 'onetwothreefourfive,sixseveneightnineten,eleventwelve' ))
-
-    tracker_id = Regexp.escape("_gaq.push(['_setAccount', 'onetwothreefourfive,sixseveneightnineten,eleventwelve']);")
+            .and_return(Spree::Tracker.new(analytics_id: 'verylargenumber' ))
 
     render
-    expect(rendered).to match tracker_id
+    expect(rendered).to include "_gaq.push(['_setAccount', 'verylargenumber']);"
   end
 
   context 'with valid tracker' do
@@ -35,13 +34,12 @@ RSpec.describe 'shared/tracking/_google_analytics.html.erb', type: :view do
         it "tracks :#{flash_key} event" do
           flash[flash_key] = 'truthy'
           render
-          expect(rendered).to match(Regexp.escape(expected_output))
+          expect(rendered).to include expected_output
         end
       end
     end
 
     describe 'commerce / order tracking' do
-      let(:google_add_transaction)  { Regexp.escape("_gaq.push(['_addTrans',") }
       let(:expected_order_number)   { 'O999888777' }
 
       let(:spree_order) { build :complete_order_with_items, number: expected_order_number }
@@ -55,34 +53,34 @@ RSpec.describe 'shared/tracking/_google_analytics.html.erb', type: :view do
         flash[:commerce_tracking] = 'truthy'
         render
 
-        expect(rendered).to match google_add_transaction
-        expect(rendered).to match expected_order_number
-        expect(rendered).to match Regexp.escape("_gaq.push(['_addItem',")
-        expect(rendered).to match Regexp.escape(spree_order.line_items.first.variant.sku)
-        expect(rendered).to match Regexp.escape(spree_order.bill_address.city)
-        expect(rendered).to match Regexp.escape("198.37")
-        expect(rendered).to match Regexp.escape("_gaq.push(['_trackTrans']);")
+        expect(rendered).to include "_gaq.push(['_addTrans',"
+        expect(rendered).to include expected_order_number
+        expect(rendered).to include "_gaq.push(['_addItem',"
+        expect(rendered).to include spree_order.line_items.first.variant.sku
+        expect(rendered).to include spree_order.bill_address.city
+        expect(rendered).to include "198.37"
+        expect(rendered).to include "_gaq.push(['_trackTrans']);"
       end
 
       describe 'requires triggering' do
         it 'without trigger' do
           render
-          expect(rendered).not_to match google_add_transaction
-          expect(rendered).not_to match expected_order_number
+          expect(rendered).not_to include "_gaq.push(['_addTrans',"
+          expect(rendered).not_to include expected_order_number
         end
 
         it ':force_tracking' do
           params[:force_tracking] = 'truthy'
           render
-          expect(rendered).to    match google_add_transaction
-          expect(rendered).to    match expected_order_number
+          expect(rendered).to include "_gaq.push(['_addTrans',"
+          expect(rendered).to include expected_order_number
         end
 
         it ':commerce_tracking' do
           flash[:commerce_tracking] = 'truthy'
           render
-          expect(rendered).to    match google_add_transaction
-          expect(rendered).to    match expected_order_number
+          expect(rendered).to include "_gaq.push(['_addTrans',"
+          expect(rendered).to include expected_order_number
         end
       end
     end

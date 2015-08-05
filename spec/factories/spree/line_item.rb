@@ -6,7 +6,7 @@ FactoryGirl.define do
     association(:order, factory: :spree_order)
 
     factory :dress_item do
-      price    { variant.price }
+      price { variant.price }
 
       association(:variant, factory: :dress_variant)
     end
