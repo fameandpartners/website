@@ -4,14 +4,15 @@ require 'roo'
 require 'ostruct'
 
 module Products
-  class BatchUploader
+  class BatchUploaderTaniaVersion
     attr_reader :parsed_data
 
     include ActionView::Helpers::TextHelper # for truncate
 
     def initialize(available_on)
-      @@titles_row_numbers = [8, 10, 11, 12]
-      @@first_content_row_number = 13
+      # For Tania's xlsx with only one title row on the first row
+      @@titles_row_numbers = [1]
+      @@first_content_row_number = 2
       @available_on = available_on
     end
 
@@ -236,8 +237,8 @@ module Products
 
       conformities = {
         # Basic
-        sku: /style #/i,
-        name: /product name/i,
+        sku: /style number/i,
+        name: /style name/i,
         description: /description/i,
         # price_in_aud: /rrp/i,
         price_in_usd: /price usd/i,
@@ -280,8 +281,8 @@ module Products
 
       conformities.each do |key, regex|
         indexes = []
-
-        book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        # For Tania's xlsx with title row start at row 1
+        book.row(@@titles_row_numbers.first).each_with_index do |title, index|
           next unless title.present?
 
           if title.strip =~ regex
@@ -300,9 +301,10 @@ module Products
         end
       end
 
-      @codes[:price_in_aud] = 4
-      @codes[:price_in_usd] = 5
-      @codes[:description] = 6
+      # For Tania's xlsx without price and description columns
+      @codes[:price_in_aud] = nil
+      @codes[:price_in_usd] = nil
+      @codes[:description] = nil
 
       @codes[:customizations] = []
       book.row(@@titles_row_numbers.second).each_with_index do |title, index|
@@ -414,6 +416,11 @@ module Products
       end
 
       new_product = product.persisted? ? 'Updated' : 'New'
+
+      #assuming xls has no new products
+      if args[:price_in_aud].nil? || args[:price_in_usd].nil?
+        add_product_prices(product, product.price)
+      end
 
       product.save!
       puts "Saving: #{new_product} - #{product.sku} - #{product.id} - #{product.name}"
