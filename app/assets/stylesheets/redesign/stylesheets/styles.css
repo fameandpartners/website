@@ -5113,7 +5113,7 @@ tbody.collapse.in {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 25px;
+  margin-bottom: 0;
   border: 1px solid transparent;
 }
 /* line 14, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_clearfix.scss */
@@ -8748,7 +8748,6 @@ p {
   width: 100%;
   z-index: 100;
   background: white;
-  height: 110px;
   border-bottom: 1px solid #eeeeee;
 }
 
@@ -8803,11 +8802,6 @@ p {
 /* line 57, ../sass/_nav.scss */
 .nav-menu .primary li.menu-item .menu-item--link:hover, .nav-menu .secondary li.menu-item .menu-item--link:hover {
   color: #f8dadf;
-}
-
-/* line 64, ../sass/_nav.scss */
-.nav-menu-container {
-  height: 70px;
 }
 
 /* line 71, ../sass/_nav.scss */
@@ -9529,14 +9523,7 @@ p {
 
 /* line 272, ../sass/styles.scss */
 .page-content {
-  padding-top: 110px;
   padding-bottom: 60px;
-}
-
-@media (max-width: 992px) {
-  .page-content {
-    padding-top: 115px;
-  }
 }
 
 /* line 278, ../sass/styles.scss */
@@ -9725,14 +9712,7 @@ p {
 
 /* line 525, ../sass/styles.scss */
 #slides {
-  margin-top: 110px;
   position: relative;
-}
-
-@media (max-width: 992px) {
-  #slides {
-    margin-top: 115px;
-  }
 }
 
 /* line 532, ../sass/styles.scss */
@@ -10297,14 +10277,7 @@ p {
 /* line 44, ../sass/_category.scss */
 .page-title {
   background-size: cover;
-  margin-top: 110px;
   position: relative;
-}
-
-@media (max-width: 992px) {
-  .page-title {
-    margin-top: 115px;
-  }
 }
 
 /* line 50, ../sass/_category.scss */

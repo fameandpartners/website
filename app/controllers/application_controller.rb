@@ -21,7 +21,6 @@ class ApplicationController < ActionController::Base
   append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
   append_before_filter :handle_marketing_campaigns
 
-  before_filter :check_site_version
   before_filter :set_session_country
   before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
@@ -40,15 +39,6 @@ class ApplicationController < ActionController::Base
 
     session[:cpts] << cpt
     participation.increment!(:views_count)
-  end
-
-  def check_site_version
-    # Add to cart and submitting forms should not change site version
-    return :no_change if (!request.get? || request.xhr? || request.path == '/checkout')
-
-    if site_version_param != current_site_version.code
-      @current_site_version = SiteVersion.by_permalink_or_default(site_version_param)
-    end
   end
 
   def handle_marketing_campaigns
