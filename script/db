@@ -287,9 +287,10 @@ function _spinner
   while kill -0 $pid 2>/dev/null
   do
     i=$(( (i+1) %4 ))
-    printf "\r${spin:$i:1} - pid:$pid"
-    sleep .1
+    printf "\rpid:%d %s " $pid ${spin:$i:1}
+    sleep .075
   done
+  printf "\r%${#pid}s   \r" ""
 }
 
 ## Main ################################################################################################################
