@@ -306,8 +306,8 @@ module ApplicationHelper
     content_tag(:iframe, '', iframe_options.merge(src: media_player_url))
   end
 
-  def get_products_from_edit(edit, currency, user, count=9)
-    searcher = Products::ProductsFilter.new(:edits => edit, per_page: count)
+  def get_products_from_edit(edit, currency, user, count=9, page=1)
+    searcher = Products::ProductsFilter.new(:edits => edit, per_page: count, page: page)
     searcher.current_user = user
     searcher.current_currency = currency
 
