@@ -36,6 +36,14 @@
               label Right Text
               = preference_field_tag banner.right_text_key, banner.right_text, type: :string
 
+          / Locale Warn
+          fieldset.no-border-bottom
+            legend align='center' Locale Warn
+            - warn = Preferences::LocaleWarn.new(site_version)
+            .field
+              label Long Text
+              = preference_field_tag warn.long_text_key, warn.long_text, type: :string
+
         .form-buttons.filter-actions.actions
           = button t(:update), 'icon-refresh'
           span.or = t(:or)
