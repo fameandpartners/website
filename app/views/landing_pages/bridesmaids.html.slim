@@ -1,65 +1,67 @@
-= content_for :inline_javascript do
-  = raw "$('.img-product').hoverable();"
+- all_products = get_products_from_edit('Bridesmaid14', nil, nil, 12, 1)
+- cache [:landing, :bridesmaids,  all_products.to_sql], expires_in: configatron.cache.expire.normally do
+  = content_for :inline_javascript do
+    = raw "$('.img-product').hoverable();"
 
-.page-content.bridesmaids
-  ul.rslides
-    - (1..7).each do |n|
-      li
-        = image_tag "http://assets.fameandpartners.com/lookbook/bridesmaids/#{n}.jpg", alt: "Bridesmaids #{n}", class: 'img-responsive portrait-img'
+  .page-content.bridesmaids
+    ul.rslides
+      - (1..7).each do |n|
+        li
+          = image_tag "http://assets.fameandpartners.com/lookbook/bridesmaids/#{n}.jpg", alt: "Bridesmaids #{n}", class: 'img-responsive portrait-img'
 
-  .page-content.products-collections.category
-    .container.relative.products-collection
-      - all_products = get_products_from_edit('Bridesmaid14', nil, nil, 12, 1)
+    .page-content.products-collections.category
+      .container.relative.products-collection
 
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(0, 4) }
 
-      .row.relative.content-box
-        .col-md-6.col-xs-12.col-xxs-12.content style="min-height: 355px;"
-          h2 Unique bridesmaid dress designs
-          p Fame & Partners is your only online dress boutique delivering high quality and uniquely designed bridesmaids dresses, just for you.
-          p Find your uniquely designed bridesmaid dress by choosing your favourite colours, from white to lavender, mint and soft pink with divine fabrics and silhouettes your best friends will thank your for!
-        .col-md-6.col-xs-12.col-xxs-12
-          = image_tag 'edits/bridesmaids/editorial-1.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
-        .clearfix.visible-sm-block.visible-xs-block
+        =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(0, 4) }
 
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(4, 4) }
+        .row.relative.content-box
+          .col-md-6.col-xs-12.col-xxs-12.content style="min-height: 355px;"
+            h2 Unique bridesmaid dress designs
+            p Fame & Partners is your only online dress boutique delivering high quality and uniquely designed bridesmaids dresses, just for you.
+            p Find your uniquely designed bridesmaid dress by choosing your favourite colours, from white to lavender, mint and soft pink with divine fabrics and silhouettes your best friends will thank your for!
+          .col-md-6.col-xs-12.col-xxs-12
+            = image_tag 'edits/bridesmaids/editorial-1.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
+          .clearfix.visible-sm-block.visible-xs-block
 
-      .row.relative.content-box
-        .col-md-6.col-xs-12.col-xxs-12
-          = image_tag 'edits/bridesmaids/editorial-2.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
-        .col-md-6.col-xs-12.col-xxs-12.content style="min-height: 355px;"
-          h2 Free customisation and delivery
-          p Fame & Partners offers free customisation, to save you on alteration costs and free delivery Australia wide.
-          p Find your perfect dress for the modern bridesmaid, encapsulating the essence of timeless elegance and effortless beauty in soft hues from pink and white.
-        .clearfix.visible-sm-block.visible-xs-block
+        =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(4, 4) }
 
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(8, 4) }
+        .row.relative.content-box
+          .col-md-6.col-xs-12.col-xxs-12
+            = image_tag 'edits/bridesmaids/editorial-2.jpg', class: 'img-responsive', alt: 'Bride and Bridesmaid'
+          .col-md-6.col-xs-12.col-xxs-12.content style="min-height: 355px;"
+            h2 Free customisation and delivery
+            p Fame & Partners offers free customisation, to save you on alteration costs and free delivery Australia wide.
+            p Find your perfect dress for the modern bridesmaid, encapsulating the essence of timeless elegance and effortless beauty in soft hues from pink and white.
+          .clearfix.visible-sm-block.visible-xs-block
 
-      .row.relative.content-box#moreProducts
+        =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(8, 4) }
 
-      .row.relative.more-products
-        .status.loading style="display: none;"
-          = image_tag('fame-spinner.gif')
+        .row.relative.content-box#moreProducts
 
-coffee:
-  current_page = 1
-  $(document).ready ->
-    $(window).scroll ->
-      $el = $("#moreProducts")
-      $window = $(window)
-      top = $window.scrollTop()
-      bottom = top + $window.height()
-      elTop = $el.offset().top - 120 #load a bit early
-      elBottom = elTop + $el.height();
-      if ((elBottom <= bottom) && (elTop >= top))
-        current_page = current_page + 1
-        $(".more-products .loading").first().css("display","block")
-        $.ajax(
-          method: 'GET'
-          url: '/get_more_bridemaids_dresses'
-          data:
-            page: current_page
-          async: false)
-        .success (msg) ->
-          $("#moreProducts").append(msg)
-          $(".more-products .loading").first().css("display","none")
+        .row.relative.more-products
+          .status.loading style="display: none;"
+            = image_tag('fame-spinner.gif')
+
+  coffee:
+    current_page = 1
+    $(document).ready ->
+      $(window).scroll ->
+        $el = $("#moreProducts")
+        $window = $(window)
+        top = $window.scrollTop()
+        bottom = top + $window.height()
+        elTop = $el.offset().top - 120 #load a bit early
+        elBottom = elTop + $el.height();
+        if ((elBottom <= bottom) && (elTop >= top))
+          current_page = current_page + 1
+          $(".more-products .loading").first().css("display","block")
+          $.ajax(
+            method: 'GET'
+            url: '/get_more_bridemaids_dresses'
+            data:
+              page: current_page
+            async: false)
+          .success (msg) ->
+            $("#moreProducts").append(msg)
+            $(".more-products .loading").first().css("display","none")
