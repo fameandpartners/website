@@ -9,20 +9,12 @@
     p The impetus for this report is for a quick way to get order totals/paid data into the Master Returns Spreadsheet.
 
     p
-      ' See;
+      ' See
       a href="https://docs.google.com/spreadsheets/d/1bhNF248Z3u2k4vcf1kf9un63jTBIC2MbZgHh-1DQU1g/edit#gid=0" Master Returns Spreadsheet
 
-    p To update the data in the spreadsheet, you can generate a new report, and import the CSV as a new sheet, or replace the existing <strong>OrderTotalsInSpree</strong> sheet.
-
-    p There is a column in the <strong>Returns</strong> sheet, called <strong>Spree Amount Paid</strong> which should have the formula.
-
-    pre
-      code
-       ' = IFERROR(VLOOKUP(D1, OrderTotalsInSpree,5,false), "")
-
-    p Where <strong>D</strong> is the <strong>Spree Order Number</strong> column, and <strong>OrderTotalsInSpree</strong> is a named range for the entire <strong>OrderTotalsInSpree</strong> sheet.
-
-    p This collects the data from the sheet, and shows it next to returns. This shows the actual final paid amount, including discounts & other adjustments.
+    p
+      ' Full documentation is here
+      a href="https://docs.google.com/a/fameandpartners.com/document/d/1uyrcYDdPxZ96KO1cywyn14p5wKNm2MNuDWYgHBz6IfM/edit?usp=sharing" Doc - Spree Order Totals in Master Returns Spreadsheet
 
   .ibox-content
 
