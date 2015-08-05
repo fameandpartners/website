@@ -1,0 +1,16 @@
+- page_title = 'Order Totals Report'
+= content_for :page_title do
+  = page_title
+
+.ibox
+  .ibox-title
+    = page_title
+  .ibox-content
+    = form_tag admin_ui.reports_order_totals_path, method: 'post', class: 'form-horizontal'
+      .form-group
+        .col-lg-12
+          button type='submit' Generate
+
+h2 Sample
+
+= render partial: 'admin_ui/reports/report_rows_preview', locals: { rows: @rows }
