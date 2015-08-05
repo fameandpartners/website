@@ -1,5 +1,10 @@
 AdminUi::Engine.routes.draw do
   resources :return_requests
+  resources :preferences, only: :index do
+    collection do
+      put 'update'
+    end
+  end
 
   namespace :reports do
     root to: 'dashboard#index'

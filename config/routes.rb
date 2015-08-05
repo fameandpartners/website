@@ -313,11 +313,6 @@ FameAndPartners::Application.routes.draw do
       end
 
       resources :site_versions, only: [:index, :edit, :update]
-      resources :locale_preferences, only: :index do
-        collection do
-          put 'update'
-        end
-      end
 
       scope 'products/:product_id', :as => 'product' do
         resource :inspiration, :only => [:edit, :update]
