@@ -9,14 +9,5 @@ FactoryGirl.define do
     featured      false
     available_on  { rand(100).days.ago.utc }
     permalink     { name.downcase.gsub(/\s/, '_') }
-
-    # sequence(:position)   
-    # after(:create) do |product, evaluator|
-    #   create_list(:product_color_value, 1, product: product)
-    # end
   end
-
-  # factory :product_color_value do
-  #   option_value
-  # end
 end
