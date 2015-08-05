@@ -28,13 +28,6 @@ class MarketingMailer < ActionMailer::Base
     @original_price    = base_price.display_price
     @discounted_price  = Spree::Money.new(base_price.amount - base_price.amount * 0.1)
 
-    #Slim::Engine.with_options(:pretty => true) do
-      #mail(
-        #to: user.email,
-        #subject: t('emails.subjects.marketing.abandoned_cart')
-      #)
-    #end
-
     subject = t('emails.subjects.marketing.abandoned_cart')
 
     Marketing::CustomerIOEventTracker.new.track(
