@@ -4,7 +4,6 @@ RSpec.describe 'shared/tracking/_google_analytics.html.erb', type: :view do
 
   it 'renders nothing without an active Spree Tracker' do
     render
-    expect(rendered).to match /\A\n\n\z/
     expect(rendered).to be_blank
   end
 
