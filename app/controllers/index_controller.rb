@@ -9,4 +9,10 @@ class IndexController < ApplicationController
       render :action => 'maintenance', :layout => 'redesign/maintenance'
     end
   end
+
+  private
+
+  def homepage_title
+    Preferences::Titles.new(current_site_version).homepage_title
+  end
 end

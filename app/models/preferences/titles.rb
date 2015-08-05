@@ -1,5 +1,5 @@
 module Preferences
-  class Titles
+  class Titles < Base
     attr_reader :site_version
 
     def initialize(site_version)
@@ -15,11 +15,11 @@ module Preferences
     end
 
     def homepage_title
-      Spree::Config[homepage_title_key]
+      preference_value(homepage_title_key)
     end
 
     def default_seo_title
-      Spree::Config[default_seo_title_key]
+      preference_value(default_seo_title_key)
     end
   end
 end
