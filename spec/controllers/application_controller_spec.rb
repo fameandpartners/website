@@ -15,7 +15,7 @@ describe ApplicationController, :type => :controller do
     describe 'set_session_country' do
 
       before do
-        ActionDispatch::Request.any_instance.stub(:remote_ip).and_return(ip)
+        allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return(ip)
         get :index
       end
 
@@ -62,16 +62,16 @@ describe ApplicationController, :type => :controller do
       context 'user request a different site version' do
         it 'updates the current site version with the requested' do
           get :index, { site_version: 'pt' }
-          expect(controller.instance_variable_get(:@current_site_version)).to eq(portuguese_site_version)
-          expect(cookies[:site_version]).to eq(portuguese_site_version.code)
+          controller_site_version = controller.instance_variable_get(:@current_site_version)
+          expect(controller_site_version).to eq(portuguese_site_version)
         end
       end
 
       context 'user requests the same site version' do
         it 'keep the current site version' do
           get :index, { site_version: 'au' }
-          expect(controller.instance_variable_get(:@current_site_version)).to eq(australian_site_version)
-          expect(cookies[:site_version]).to eq(australian_site_version.code)
+          controller_site_version = controller.instance_variable_get(:@current_site_version)
+          expect(controller_site_version).to eq(australian_site_version)
         end
       end
     end

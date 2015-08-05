@@ -44,15 +44,17 @@ class  UserCart::Populator
     })
   rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable, StandardError => e
     begin
-      NewRelic::Agent.notice_error(e, {
-                                    :order              => @order,
-                                    :site_version       => @site_version,
-                                    :product_attributes => @product_attributes
-                                  })
+      err_attrs = {
+        :order              => @order.to_h,
+        :site_version       => @site_version.to_h,
+        :product_attributes => @product_attributes
+      }
+
+      NewRelic::Agent.notice_error(e, err_attrs)
     rescue StandardError
       #turtles
     end
-    OpenStruct.new({ success: false, message: e.message })
+    OpenStruct.new({ success: false, message: e.message, attrs: err_attrs })
   end
 
   private
@@ -109,10 +111,10 @@ class  UserCart::Populator
 
     def build_personalization
       LineItemPersonalization.new.tap do |item|
-        item.size     = product_size.name
         item.size_id  = product_size.id
-        item['color'] = product_color.name
+        item['size']  = product_size.value
         item.color_id = product_color.id
+        item['color'] = product_color.name
         item.customization_value_ids = product_customizations.map(&:id)
         item.product_id = product.id
       end

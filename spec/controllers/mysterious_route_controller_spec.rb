@@ -13,10 +13,15 @@ RSpec.describe MysteriousRouteController, type: :routing do
 
   let(:controller) { { controller: 'mysterious_route', action: 'undefined'} }
 
-  it "/au/undefined" do
+  it "/undefined" do
     expect(get: "/undefined").to route_to(controller)
   end
+
   it "/au/undefined" do
     expect(get: "/au/undefined").to route_to(controller)
+  end
+
+  it "/1000668'" do
+    expect(get: '/1000668').to route_to(controller)
   end
 end

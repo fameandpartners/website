@@ -5,7 +5,7 @@ module Products
                   :permalink, :is_active, :images, :default_image, :price,
                   :discount, :recommended_products, :available_options, :preorder,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart, :making_option_id
+                  :size_chart, :making_option_id, :fast_making
 
     def initialize(opts)
       opts.each do |k, v|
@@ -110,6 +110,10 @@ module Products
     # featured images are not cropped
     def featured_images
       @featured_images ||= images.select{ |i| ! i.original.to_s.downcase.include?('crop') }
+    end
+
+    def cropped_images
+      @cropped_images ||= images.select{ |i| i.original.to_s.downcase.include?('crop') }
     end
 
     def song

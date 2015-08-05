@@ -8,24 +8,39 @@ class UserCountryFromIP
   end
 
   def country_code
-    country.try(:country_code2)
+    country && country.country_code2
   end
 
   def country_name
-    country.try(:country_name)
+    country && country.country_name
   end
 
   def country
-    @country ||= geoip.country(ip) if valid_ip?
+    return nil unless valid_ip?
+
+    @country ||= begin
+      ip_address = IPAddress.parse(ip)
+      if ip_address.ipv4?
+        geoip.country(ip)
+      elsif ip_address.ipv6?
+        geoip6.country(ip)
+      else
+        nil
+      end
+    end
   end
 
   def valid_ip?
-    ip.present? && ip != "127.0.0.1" && IPAddress.valid?(ip)
+    ip != '127.0.0.1' && IPAddress.valid?(ip)
   end
 
   private
 
   def geoip
-    @geoip ||= GeoIP.new(File.join(Rails.root, 'db', 'GeoIP.dat'))
+    @geoip ||= GeoIP.new Rails.root.join('db', 'GeoIP.dat')
+  end
+
+  def geoip6
+    @geoip ||= GeoIP.new Rails.root.join('db', 'GeoIPv6.dat')
   end
 end

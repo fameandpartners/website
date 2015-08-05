@@ -50,9 +50,14 @@ class UserCart::ProductsController < UserCart::BaseController
         }
       end
     else # not success
+      NewRelic::Agent.notify('AddToCartFailed',
+                             message: result.message,
+                             order_number: current_order.number,
+                             site_version: current_site_version.code,
+                             attrs: result.attrs)
       respond_with({}) do |format|
         format.json   {
-          render json: { error: true, message: result.message }, status: :error
+          render json: { error: true, message: result.message, attrs: result.attrs }, status: 404
         }
       end
     end

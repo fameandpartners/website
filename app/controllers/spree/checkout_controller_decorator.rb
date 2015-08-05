@@ -4,7 +4,7 @@ Spree::CheckoutController.class_eval do
   before_filter :find_payment_methods, only: [:edit, :update]
   skip_before_filter :check_registration
 
-  layout 'redesign/application'
+  layout 'redesign/application_simple'
 
   # update - address/payment
   def update
@@ -104,9 +104,31 @@ Spree::CheckoutController.class_eval do
 
   def load_order
     @order = current_order
-    redirect_to main_app.dresses_path and return unless @order and @order.checkout_allowed?
-    raise_insufficient_quantity and return if @order.insufficient_stock_lines.present?
-    redirect_to main_app.dresses_path and return if @order.completed?
+
+    guard = []
+    unless @order and @order.checkout_allowed?
+      guard << :no_checkout_allowed
+    end
+
+    if @order.insufficient_stock_lines.present?
+      flash[:error] = t(:spree_inventory_error_flash_for_insufficient_quantity)
+      guard << :insufficient_stock_lines
+    end
+
+    if @order.completed?
+      guard << :order_completed
+    end
+
+    unless guard.empty?
+      Rails.logger.warn "CheckoutRedirection #{guard.join(', ')}"
+      NewRelic::Agent.notify('CheckoutRedirection', order_number: @order.try(:number), guards: guard)
+
+      redirect_to main_app.dresses_path
+      return
+    end
+    # redirect_to main_app.dresses_path and return unless @order and @order.checkout_allowed?
+    # raise_insufficient_quantity and return if @order.insufficient_stock_lines.present?
+    # redirect_to main_app.dresses_path and return if @order.completed?
 
     if params[:state]
       redirect_to checkout_state_path(@order.state) if @order.can_go_to_state?(params[:state]) && !skip_state_validation?

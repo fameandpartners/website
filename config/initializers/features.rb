@@ -1,5 +1,3 @@
-# Turns on global features
-require 'redis'
 if Rails.env.production?
 end
 

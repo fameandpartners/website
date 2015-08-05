@@ -1,7 +1,35 @@
 // Checkout page url: /checkout
+$desktop-nav-menu-height: 70px;
+$mobile-nav-menu-height: 70px;
+
+.nav-menu.checkout {
+  height: $desktop-nav-menu-height;
+
+  .mobile-logo {
+    margin-left: 0;
+  }
+}
+
+.page-title.checkout-title {
+  margin-top: $desktop-nav-menu-height;
+}
+
 .page-content.checkout {
   // - Override form styles
-  label { 
+
+  .auth-alert {
+    padding: 15px 35px 15px 15px;
+    margin-bottom: 25px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: none;
+  }
+
+  .alert-danger {
+    margin-top: 12.5px;
+  }
+
+  label {
     color: #000;
   }
   .form-control {
@@ -19,7 +47,7 @@
     background-color: $gray-light-bg;
     border: 0;
 
-    h3 { 
+    h3 {
       text-transform: uppercase;
       margin: 25px 0;
     }
@@ -69,7 +97,7 @@
 
   .promo-code {
     margin: 20px 0;
-    .input-group-addon { 
+    .input-group-addon {
       border-bottom: 0 !important;
       padding: 0;
       vertical-align: bottom;

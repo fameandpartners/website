@@ -4,7 +4,7 @@
 class AbandonedCartEmailWorker < BaseEmailMarketingWorker
   def perform(order_id)
     send_email(Spree::Order.find(order_id))
-  rescue Exception => e
+  rescue StandardError => e
     log_mailer_error(e)
   end
 
@@ -16,6 +16,13 @@ class AbandonedCartEmailWorker < BaseEmailMarketingWorker
     return if order.user.last_cart_notification_sent_at.present?
 
     if order.user.update_column(:last_cart_notification_sent_at, Time.now)
+      begin
+        NewRelic::Agent.record_custom_event('AbandonedCartEmailDelivery',
+                                            order_number: order.number,
+                                            email: order.user.email )
+      rescue
+        # NOOP
+      end
       MarketingMailer.abandoned_cart(order, order.user).deliver
     end
   end

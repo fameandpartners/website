@@ -72,6 +72,7 @@ module Products
             product: {
               id:           product.id,
               name:         product.name,
+              sku:          product.sku,
               description:  product.description,
               created_at:   product.created_at,
               available_on: product.available_on,

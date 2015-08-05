@@ -20,7 +20,7 @@ table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="
                 tr
                   th Promotion:
                   td = order.promo_codes.join(', ')
-                            
+
             table border="0" cellpadding="5" cellspacing="0" width="100%" id="lineItems"
               - order.line_items.each do |item|
                 tbody
@@ -35,6 +35,11 @@ table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="
                     th Size (码数):
                     td
                       = item.country_size
+
+                  tr
+                    th Adjusted Size (码数):
+                    td
+                      = item.make_size
 
                   tr
                     th Color（颜色):

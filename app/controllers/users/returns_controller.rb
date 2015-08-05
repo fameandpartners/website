@@ -3,12 +3,21 @@ class Users::ReturnsController < Users::BaseController
   helper_method :order_return
 
   def new
-    user = try_spree_current_user
-    order = user.orders.where(number: params[:order_number]).first
-    @order_return = OrderReturnRequest.new(:order => order, :order_id => order.id)
-    @order_return.build_items
+    order_number = params[:order_number]
+    user         = try_spree_current_user
+    order        = user.orders.where(number: order_number).first
 
-    @title = "Order ##{ @order_return.number }"
+    if order.present?
+      @order_return = OrderReturnRequest.new(:order => order)
+      @order_return.build_items
+
+      @title = "Order ##{ @order_return.number }"
+    else
+      err = ActiveRecord::RecordNotFound.new("Missing expected Spree::Order for Return number='#{order_number}'")
+
+      NewRelic::Agent.notice_error(err)
+      redirect_to user_orders_path, { flash: { error: "Sorry Babe, we couldn't find the Order: '#{order_number}'"} }
+    end
   end
 
   def create

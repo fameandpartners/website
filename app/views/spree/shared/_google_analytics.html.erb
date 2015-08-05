@@ -4,6 +4,18 @@
     _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
     _gaq.push(['_trackPageview']);
 
+    <% if flash[:track_fb_reminder_promo] %>
+      _gaq.push(['_trackEvent', 'Facebook', 'Redeem']);
+    <% end %>
+
+    <% if flash[:track_fb_signin] %>
+      _gaq.push(['_trackEvent', 'Facebook', 'SignIn']);
+    <% end %>
+
+    <% if flash[:track_fb_signup] %>
+      _gaq.push(['_trackEvent', 'Facebook', 'SignUp']);
+    <% end %>
+
     <% if flash[:commerce_tracking] || params[:force_tracking] && @spree_order.present? %>
       <%# more info: https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEcommerce %>
       <%# _addTrans(transactionId, affiliation, total, tax, shipping, city, state, country) %>
@@ -45,26 +57,12 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   <% end %>
-  <% content_for :inline_javascript do %>
-    window.track.conversion('purchase');
-  <% end %>
 <% end %>
 
 <%# Google Shopping verification code %>
 <% content_for :head do %>
   <meta name="google-site-verification" content="ASqjutBTF0pN4o6WbzPc3jV09WW2hkokCPqmVHWp1uo" />
-<% end %>
-
-<%# twitter tracking pixel %>
-<% if flash[:commerce_tracking] || params[:force_tracking] %>
-  <script src="//platform.twitter.com/oct.js" type="text/javascript" />
-  <script type="text/javascript">
-    twttr.conversion.trackPid('l5cvl');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l5cvl&p_id=Twitter"/>
-    <img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l5cvl&p_id=Twitter"/>
-  </noscript>
+  <meta name="msvalidate.01" content="CBAB38EE3DA1B1ED6FBC59A3C8D78614" />
 <% end %>
 
 <%# fb tracking pixel %>
@@ -77,7 +75,7 @@
     <%= render :partial => 'spree/shared/customerio' %>
   <% end %>
 
-  <script>(function() {
+  <script type="text/javascript">(function() {
    var _fbq = window._fbq || (window._fbq = []);
    if (!_fbq.loaded) {
      var fbds = document.createElement('script');

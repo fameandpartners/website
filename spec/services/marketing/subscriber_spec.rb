@@ -118,7 +118,7 @@ describe Marketing::Subscriber do
       subsriber = Marketing::Subscriber.new(user: user)
       date = double('date')
 
-      expect(CampaignMonitor).to receive(:schedule).with(:set_purchase_date, user, date)
+      expect(CampaignMonitor).to receive(:schedule).with(:set_purchase_date, user, date, subject.send(:custom_fields))
       subsriber.set_purchase_date(date)
     end
   end

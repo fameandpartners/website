@@ -48,6 +48,7 @@ module Products
         raw[:price_in_usd]        = book.cell(row_num, columns[:price_in_usd])
         raw[:taxons]              = Array.wrap(columns[:taxons]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
         raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
+
         # Style
         raw[:glam]                = book.cell(row_num, columns[:glam])
         raw[:girly]               = book.cell(row_num, columns[:girly])
@@ -65,7 +66,10 @@ module Products
         raw[:petite]              = book.cell(row_num, columns[:petite])
         # Properties
         raw[:style_notes]         = book.cell(row_num, columns[:style_notes])
+        raw[:care_instructions]   = book.cell(row_num, columns[:care_instructions])
         raw[:fit]                 = book.cell(row_num, columns[:fit])
+        raw[:size]                = book.cell(row_num, columns[:size])
+
         raw[:fabric]              = book.cell(row_num, columns[:fabric])
         raw[:product_type]        = book.cell(row_num, columns[:product_type])
         raw[:product_category]    = book.cell(row_num, columns[:product_category])
@@ -192,6 +196,8 @@ module Products
           },
           properties: {
             style_notes:          raw[:style_notes],
+            care_instructions:    raw[:care_instructions],
+            size:                 raw[:size],
             fit:                  raw[:fit],
             fabric:               raw[:fabric],
             product_type:         raw[:product_type],
@@ -237,6 +243,7 @@ module Products
         price_in_usd: /price usd/i,
         taxons: /taxons? \d+/i,
         colors: /(color|colour) \d+$/i,
+
         # Style Profile
         glam: /glam$/i,
         girly: /girly$/i,
@@ -254,7 +261,9 @@ module Products
         petite: /petite/i,
         # Properties
         style_notes: /styling notes/i,
-        fit: /size.+fit/i,
+        care_instructions: /care instructions/i,
+        fit: /fit/i,
+        size: /size/i,
         fabric: /fabric/i,
         product_type: /product type/i,
         product_category: /product category/i,
@@ -348,14 +357,14 @@ module Products
           add_product_song(product, args[:song].symbolize_keys || {})
 
           product
-        rescue Exception => message
-          Rails.logger.warn(message)
-          puts "======== Exception ========"
-          puts args[:sku]
-          puts args[:style_name]
-          puts message
-          puts "==========================="
-          nil
+        # rescue Exception => message
+        #   Rails.logger.warn(message)
+        #   puts "======== Exception ========"
+        #   puts args[:sku]
+        #   puts args[:style_name]
+        #   puts message
+        #   puts "==========================="
+        #   nil
         end
       end.compact
     end
@@ -418,6 +427,8 @@ module Products
 
     def add_product_properties(product, args)
       allowed = [:style_notes,
+                 :care_instructions,
+                 :size,
                  :fit,
                  :fabric,
                  :product_type,
@@ -441,7 +452,7 @@ module Products
         product.set_property(name, value)
       end
 
-      if factory = Factory.find_by_name(args[:factory_name].capitalize)
+      if factory = Factory.find_by_name(args[:factory_name].try(:capitalize))
         product.factory = factory
       end
 
@@ -588,7 +599,7 @@ module Products
       master_variant = product.master
 
       usd = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'USD')
-      usd.amount = us_price
+      usd.amount = us_price if us_price.present?
       usd.save!
     end
   end

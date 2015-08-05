@@ -91,6 +91,11 @@ module Orders
       "#{order.site_version}-#{size}"
     end
 
+    def make_size
+      make_size = order.site_version == 'us' ? size.to_i + 4: size
+      "au-#{make_size}"
+    end
+
     def display_price
       Spree::Price.new(amount: price).display_price.to_s
     end
@@ -145,6 +150,7 @@ module Orders
         :factory                 => factory,
         :color                   => colour_name,
         :size                    => country_size,
+        :make_size               => make_size,
         :customisations          => customisations.collect(&:first).join('|'),
         :promo_codes             => promo_codes.join('|'),
         :customer_notes          => order.customer_notes,
@@ -187,6 +193,7 @@ module Orders
         factory:                 '(工厂)',
         color:                   '(颜色)',
         size:                    '(尺寸)',
+        make_size:               '(尺寸)',
         customisations:          '(特殊要求)',
         customer_name:           '(客人名字)',
         customer_phone_number:   '(客人电话)',
@@ -198,7 +205,7 @@ module Orders
 
     def size
       if personalization.present?
-        personalization.size
+        personalization.size.try(:name) || 'Unknown Size'
       else
         variant.dress_size.try(:name) || 'Unknown Size'
       end

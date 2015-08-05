@@ -1,0 +1,16 @@
+= content_for :page_title do
+  ' Sale Items Report
+
+.ibox
+  .ibox-title
+    ' Sale Items Report
+  .ibox-content
+    = form_tag admin_ui.reports_sale_items_path, method: 'post', class: 'form-horizontal'
+      = render partial: 'form_fields'
+      .form-group
+        .col-lg-12
+          button type='submit' Generate
+
+h2 10 Row Sample
+
+= render partial: 'admin_ui/reports/report_rows_preview', locals: { rows: @rows }

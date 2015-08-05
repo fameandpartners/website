@@ -14,6 +14,14 @@ class CampaignMonitor
     end
   end
 
+  def self.set_purchase_date(user, purchase_date, custom_fields = {})
+    synchronize(
+      user.email,
+      user,
+      custom_fields.merge('note' => "Purchase_date: #{ purchase_date.to_date.to_s }")
+    )
+  end
+
   def self.synchronize(email, user = nil, custom_fields = {})
     attributes = {}
 
@@ -28,7 +36,7 @@ class CampaignMonitor
     formatted_custom_fields = []
 
     custom_fields.each do |key, value|
-      formatted_custom_fields.push({'Key' => key.to_s, 'Value' => value})
+      formatted_custom_fields.push({'Key' => key.to_s, 'Value' => value}) if value.present?
     end
 
     list_id = configatron.campaign_monitor.list_id
@@ -36,22 +44,13 @@ class CampaignMonitor
     subscriber = CreateSend::Subscriber.new(list_id, email)
 
     subscriber.update(attributes[:email], attributes[:full_name], formatted_custom_fields, false)
-  rescue => exception
+  rescue StandardError => _error
+    NewRelic::Agent.notice_error(_error)
+    begin
+    # Yea, lets maybe 500 the app on login.
     CreateSend::Subscriber.add(list_id, attributes[:email], attributes[:full_name], formatted_custom_fields, false)
-  end
-
-  def self.set_purchase_date(user, purchase_date)
-    list_id = configatron.campaign_monitor.list_id
-
-    subscriber = CreateSend::Subscriber.new(list_id, user.email)
-
-    formatted_custom_fields = [{
-      'Key'   => 'note',
-      'Value' => "Purchase_date: #{ purchase_date.to_date.to_s }"
-    }]
-
-    subscriber.update(user.email, user.full_name, formatted_custom_fields, false)
-  rescue => exception
-    CreateSend::Subscriber.add(list_id, user.email, user.full_name, formatted_custom_fields, false)
+    rescue StandardError => e
+      NewRelic::Agent.notice_error(e)
+    end
   end
 end

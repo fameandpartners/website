@@ -109,6 +109,15 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       @countdownTimer = new window.page.CountdownTimer($modal, @promoStartedAt, @opts.timer)
       @countdownTimer.start()
 
+    if @opts.instagram_campaign?
+      $('.vex-dialog-button-secondary').on 'click', =>
+        @applyPromocode()
+      $('.vex-overlay').on 'click', =>
+        @applyPromocode()
+
+  applyPromocode: () =>
+    console.log 'we will apply promocode here by calling some controller and set session[:auto_apply_promo] = params[:auto_apply_promo].presence'
+
   message: =>
     h = if @opts.heading then "<h2>#{@opts.heading}</h2>" else ''
     str = "#{h}<p>#{@opts.message}</p>"
@@ -150,6 +159,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       afterOpen: @onOpen
       afterClose: @onClose
       callback: @callback
+      overlayClosesOnClick: @opts.instagram_campaign?
 
 window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
   constructor: (opts = {}) ->

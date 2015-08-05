@@ -13,6 +13,17 @@ module Spree
       def customisations_values_json
         CustomisationType.all.as_json(only: :id, include: {customisation_values: {only: [:id, :presentation]}})
       end
+
+      # updated code from spree::base_helper#available_countries
+      def available_countries
+        Spree::Zone.all.map do |checkout_zone|
+          if checkout_zone && checkout_zone.kind == 'country'
+            checkout_zone.country_list
+          else
+            []
+          end
+        end.flatten.sort_by{|country| country.name }
+      end
     end
   end
 end

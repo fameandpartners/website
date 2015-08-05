@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   include PathBuildersHelper
   include Concerns::SiteVersion
   include Concerns::UserCampaignable
+  include Concerns::AutomaticDiscount
 
   if Rails.env.preproduction?
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
@@ -20,7 +21,6 @@ class ApplicationController < ActionController::Base
   append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
   append_before_filter :handle_marketing_campaigns
 
-  before_filter :check_site_version
   before_filter :set_session_country
   before_filter :add_debugging_infomation
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
@@ -39,18 +39,6 @@ class ApplicationController < ActionController::Base
 
     session[:cpts] << cpt
     participation.increment!(:views_count)
-  end
-
-  def check_site_version
-    # Add to cart and submitting forms should not change site version
-    return if (!request.get? || request.xhr? || request.path == '/checkout')
-
-    param_site_version = params[:site_version] || SiteVersion.default.code
-
-    if param_site_version != cookies[:site_version]
-      @current_site_version = SiteVersion.by_permalink_or_default(param_site_version)
-      cookies[:site_version] = @current_site_version.code
-    end
   end
 
   def handle_marketing_campaigns
@@ -98,10 +86,12 @@ class ApplicationController < ActionController::Base
   end
 
   def add_debugging_infomation
-    ::NewRelic::Agent.add_custom_parameters({
-      user_id: current_spree_user.try(:id),
-      order_id: current_order.try(:id),
-      referrer: request.referrer
+    ::NewRelic::Agent.add_custom_attributes({
+      user_id:      current_spree_user.try(:id),
+      user_email:   current_spree_user.try(:email),
+      order_id:     current_order.try(:id),
+      order_number: current_order.try(:number),
+      referrer:     request.referrer
     })
   rescue Exception => e
     true
@@ -290,14 +280,6 @@ class ApplicationController < ActionController::Base
     prefix = "#{product.short_description} #{info} #{product.name}"
     self.title = [prefix, default_seo_title].join(' - ')
     description([prefix, default_meta_description].join(' - '))
-
-#    range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
-
-#    if range_taxonomy.present? && range_taxon = @product.taxons.where(taxonomy_id: range_taxonomy.id).first
-#      prefix = "#{product.short_description} #{info} #{@product.name} in #{range_taxon.name}"
-#      self.title = [prefix, default_seo_title].join(' - ')
-#     description([prefix, default_meta_description].join(' - '))
-#    end
   end
 
   def current_currency

@@ -10,9 +10,16 @@
   </li>
 <% end %>
 
-<table class="index" id='listing_shipping_methods'>
+<div class="twelve columns">
+  <div class="field">
+    Shipping methods ordered by priority
+  </div>
+</div>
+
+<table class="index sortable" data-sortable-link="<%= admin_shipping_methods_update_positions_path %>" id='listing_shipping_methods'>
   <colgroup>
-    <col style="width: 20%">
+    <col style="width: 5%">
+    <col style="width: 15%">
     <col style="width: 15%">
     <col style="width: 40%">
     <col style="width: 10%">
@@ -20,6 +27,7 @@
   </colgroup>
   <thead>
     <tr data-hook="admin_shipping_methods_index_headers">
+      <th></th>
       <th><%= t(:name) %></th>
       <th><%= t(:zone) %></th>
       <th><%= t(:calculator) %></th>
@@ -28,8 +36,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @shipping_methods.each do |shipping_method|%>
+    <% @shipping_methods.ordered.each do |shipping_method|%>
       <tr id="<%= spree_dom_id shipping_method %>" data-hook="admin_shipping_methods_index_rows" class="<%= cycle('odd', 'even')%>">
+        <td><span class="handle"></span></td>
         <td><%= shipping_method.name %></td>
         <td><%= shipping_method.zone.name if shipping_method.zone %></td>
         <td><%= shipping_method.calculator.description %></td>

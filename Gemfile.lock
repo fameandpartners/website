@@ -301,6 +301,8 @@ GEM
       hashie (~> 1.0)
       httparty (~> 0.10)
       json
+    customerio (0.5.1)
+      httparty (>= 0.5, < 1.0)
     daemons (1.2.2)
     database_cleaner (0.9.1)
     deface (0.9.1)
@@ -821,6 +823,7 @@ DEPENDENCIES
   compass
   configatron
   createsend (~> 2.5.0)
+  customerio
   data_migrate!
   database_cleaner (= 0.9.1)
   default_value_for

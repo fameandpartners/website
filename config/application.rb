@@ -10,6 +10,10 @@ if defined?(Bundler)
 end
 
 module FameAndPartners
+  def self.yaml_config(config_file)
+    YAML::load(File.open( File.join( Rails.root, 'config', config_file))).with_indifferent_access
+  end
+
   class Application < Rails::Application
 
     config.to_prepare do
@@ -88,16 +92,19 @@ module FameAndPartners
     # Component Style Modal Content
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
 
-    redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-    
-    if Rails.env.production? || Rails.env.preproduction?
-      redis_yml = YAML::load(File.open("#{Rails.root}/config/redis.yml")).with_indifferent_access
-      redis_host = redis_yml[Rails.env][:hosts]
-    else
-      redis_host = 'localhost:6379'
-    end
+    # Production and Preproduction use an Engineyard deployed `redis.yml` file
+    # Having this file in the repo conflicts with the EY managed deployment,
+    # so we have dev/test configs in `redis.local.yml`
+    redis_config_file = if Rails.env.production? || Rails.env.preproduction?
+                          "redis.yml"
+                        else
+                          "redis.local.yml"
+                        end
 
-    config.cache_store = :redis_store, "redis://#{redis_host}/0/#{redis_namespace}"
+    config.redis_host = ::FameAndPartners.yaml_config(redis_config_file)[Rails.env][:hosts]
+    config.redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
+
+    config.cache_store = :redis_store, "redis://#{config.redis_host}/0/#{config.redis_namespace}"
 
     # Use S3 for storing attachments
     config.use_s3 = false
@@ -107,6 +114,9 @@ module FameAndPartners
     config.generators do |generator|
       generator.test_framework :rspec
     end
+
+    config.rspec_paths = []
+    config.rspec_paths << self.root
 
     config.after_initialize do
       Rails.configuration.spree.payment_methods << Spree::Gateway::Pin

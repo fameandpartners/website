@@ -31,7 +31,9 @@ configatron.cache.expire do |expire|
   expire.long     = 1.day
 end
 
-configatron.customerio.site_id = '14c8952c36a16f4c20c6'
+# Test Environment
+configatron.customerio.site_id    = '14c8952c36a16f4c20c6'
+configatron.customerio.secret_key = 'f1fd531b4d1ac65ca86c'
 
 configatron.order_production_emails = ['production@fameandpartners.dev']
 
@@ -59,18 +61,13 @@ end
 
 configatron.campaign_monitor do |campaign_monitor|
   campaign_monitor.api_key = '3f7e4ac86b143e32a5c7b46b83641143'
-  #campaign_monitor.list_id = 'cc9be877f40c64cf389f6e3ea95daa0a' # 'members list'
-  campaign_monitor.list_id = 'dafc8802250a7fb08c840d9c4ffadc9f'  # '#all_subscribers list
+  campaign_monitor.list_id = 'dafc8802250a7fb08c840d9c4ffadc9f'
 end
 
-def yaml_config(config_file)
-  YAML::load(File.open( File.join( Rails.root, 'config', config_file))).with_indifferent_access
-end
-
-configatron.redis_host = yaml_config("redis.yml")[Rails.env][:hosts]
+configatron.redis_host = ::FameAndPartners.yaml_config("redis.local.yml")[Rails.env][:hosts]
 configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
-configatron.es_url = yaml_config("elasticsearch.yml")[Rails.env][:hosts]
+configatron.es_url = ::FameAndPartners.yaml_config("elasticsearch.local.yml")[Rails.env][:hosts]
 
 configatron.elasticsearch.indices do |index|
   index.spree_products = :spree_products
@@ -136,6 +133,9 @@ when :preproduction
   end
   configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
 
+  configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
+  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
+
   # configatron.es_url = 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
   # configatron.es_url = 'https://c019a72e2bcb614a3809da7bf7d583c0.us-east-1.aws.found.io:9243'
   configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
@@ -154,6 +154,13 @@ when :production
     s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
     s3.secret_access_key = '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'
   end
+
+  # Production Environment
+  configatron.customerio.site_id    = 'a416731201185e0c6f5f'
+  configatron.customerio.secret_key = 'f179030b06baa363ea38'
+
+  configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
+  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
   # configatron.es_url = 'https://b13gy7hlm3:brc6ozc6oi@production-4224690387.us-east-1.bonsai.io'
   # configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]

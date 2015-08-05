@@ -1,13 +1,20 @@
 module Feeds
   module Exporter
     class CPC < Base
+
+      # @override
       def export_file_name
         'google.xml'
       end
 
+      # @override
       def export
-        output = ''
-        xml = Builder::XmlMarkup.new(target: output)
+        xml = generate
+        save(xml)
+      end
+
+      def generate
+        xml = Builder::XmlMarkup.new
 
         xml.instruct! :xml, version: '1.0', encoding: 'UTF-8'
 
@@ -20,9 +27,9 @@ module Feeds
 
             @items.each do |item|
               xml.item do
-                xml.title item[:title]
-                xml.link "#{@config[:domain]}#{collection_product_path(item[:product], color: item[:color].parameterize)}"
-                xml.description CGI.escapeHTML(item[:description])
+                xml.title title(item)
+                xml.link "#{@config[:domain]}#{helpers.collection_product_path(item[:product], color: item[:color].parameterize)}"
+                xml.description product_description(item)
 
                 # Event, Style and Lookbook
                 xml.tag! "events"   , item[:events].join(',')
@@ -34,7 +41,7 @@ module Feeds
                 xml.tag! "g:price", helpers.number_to_currency(item[:price], format: '%n %u', unit: current_currency)
                 xml.tag! "g:sale_price", helpers.number_to_currency(item[:sale_price], format: '%n %u', unit: current_currency)
                 xml.tag! "g:availability", item[:availability]
-                xml.tag! "g:image_link", get_image_link(item)
+                xml.tag! "g:image_link", image_link(item)
                 xml.tag! "g:shipping_weight", item[:weight]
 
                 xml.tag! "g:google_product_category", CGI.escapeHTML(item[:google_product_category])
@@ -55,19 +62,32 @@ module Feeds
             end
           end
         end
+      end
 
+      def save(xml)
         require 'fileutils'
         FileUtils::mkdir_p(File.dirname(export_file_path))
 
         file = File.open(export_file_path, 'w')
-        file.write(output.to_s)
+        file.write(xml)
         file.close
       end
 
       private
 
-      def get_image_link(item)
+      # @override
+      def title(item)
+        item[:title]
+      end
+
+      # @override
+      def image_link(item)
         item[:image]
+      end
+
+      # @override
+      def product_description(item)
+        CGI.escapeHTML(item[:description])
       end
     end
   end

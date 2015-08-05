@@ -40,6 +40,7 @@ FameAndPartners::Application.routes.draw do
 
   get '/undefined',    to: 'mysterious_route#undefined'
   get '/au/undefined', to: 'mysterious_route#undefined'
+  get '/1000668',      to: 'mysterious_route#undefined'
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
@@ -67,6 +68,11 @@ FameAndPartners::Application.routes.draw do
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+
+    get '/instagram/1' => 'statics#landing_page_mobile', :variant => '1'
+    get '/instagram/2' => 'statics#landing_page_mobile', :variant => '2'
+    get '/instagram/3' => 'statics#landing_page_mobile', :variant => '3'
+
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
     get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
@@ -79,11 +85,21 @@ FameAndPartners::Application.routes.draw do
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/fame2015',  to: redirect('/')
 
+    # Redirecting collections (08/06/2015)
+    get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
+
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
+    get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
+
     #edits
+    get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
+
+    get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
+    get '/lookbook/garden-wedding' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_wedding_collection
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
+
     get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
 
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
@@ -99,7 +115,7 @@ FameAndPartners::Application.routes.draw do
     get '/get_more_bridemaids_dresses' => 'products/collections#get_more_bridemaids_dresses'
 
     get '/all-size' => redirect('/lookbook/all-size')
-    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'plus-size', :as => :all_size_collection
+    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
 
     get '/prom-collection' => redirect('/lookbook/prom')
     get '/lookbook/prom' => 'products/collections#show', :permalink => 'PROM2015', :as => :prom_collection
@@ -129,6 +145,7 @@ FameAndPartners::Application.routes.draw do
 
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
+      get '/', to: 'products/collections#show', as: :collection
 
       # TODO - Remove? - 2015.04.11 - Redirecting old accessory and customisation style URLS to main product page.
       product_style_custom_redirect = -> path_params, _rq { ["/#{path_params[:site_version]}/dresses/dress-#{path_params[:product_slug]}", path_params[:color_name].presence].join('/') }
@@ -149,12 +166,6 @@ FameAndPartners::Application.routes.draw do
       get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
-
-    # to correctly redirect, we should know product taxon or extract collection from param
-    get "/products"             => 'redirects#products_index'
-    get "/products/:product_id" => 'redirects#products_show'
-    get "/products/:collection/:product_id" => 'redirects#products_show'
-
     # Custom Dresses
     get '/custom-dresses(/*whatever)',  to: redirect('/dresses')
 
@@ -163,12 +174,6 @@ FameAndPartners::Application.routes.draw do
     get '/featured-bloggers/:id', to: redirect('/dresses')
 
     resource :product_variants, only: [:show]
-
-    scope '/collection' do
-      root to: 'redirects#products_index', as: 'collection'
-      get '/:collection/:product_id' => 'redirects#products_show'
-      get '/:collection' => 'redirects#products_index'
-    end
 
     get '/lp/collection(/:collection)', to: redirect('/dresses')
 
@@ -279,18 +284,10 @@ FameAndPartners::Application.routes.draw do
       get '/recomendations' => 'user_style_profiles#recomendations'
     end
 
-    # Redirects for old pages as part of SEO
-    match '/competition/' => redirect('/')
-    match '/competition/*all' => redirect('/')
-
-    match "/gregg-sulkin" => redirect('/')
-
-    match '/trendsetter-program' => redirect('/')
-
     mount Spree::Core::Engine, at: '/'
   end
 
-  mount AdminUi::Engine, at: '/admin2'
+  mount AdminUi::Engine, at: '/fame_admin'
 
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
@@ -309,6 +306,8 @@ FameAndPartners::Application.routes.draw do
       scope 'products/:product_id', :as => 'product' do
         resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
       end
+
+      post 'shipping_methods/update_positions' => "shipping_methods#update_positions"
 
       scope 'taxonomies/:taxonomy_id/taxons/:id' do
         resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
@@ -372,6 +371,7 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
+      get "search/order_owners" => 'search#order_owners'
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do
@@ -416,7 +416,7 @@ FameAndPartners::Application.routes.draw do
     # Redirecting all bridesmaid party URLs
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
 
-    resources :site_versions, only: [:show]
+    resources :site_versions, only: [:show], as: :site_version
   end
 
   if Rails.env.development?

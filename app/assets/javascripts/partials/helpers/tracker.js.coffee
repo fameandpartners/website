@@ -41,7 +41,6 @@ window.track = {
       quiz_step2: { id: 979620714, label: 'I_X_CL6k1gYQ6qaP0wM' }
       ask_friend: { id: 979620714, label: 'g1gICLal1gYQ6qaP0wM' }
       wishlist:   { id: 979620714, label: 'QbWZCK6m1gYQ6qaP0wM' }
-      purchase:   { id: 979620714, label: '95WYCKan1gYQ6qaP0wM' } 
       customisation_sign_up: { id: 979620714, label: 'QE93CL7pjwcQ6qaP0wM' }
     }
     return all[code]
@@ -63,7 +62,8 @@ window.track = {
     track.event('Wishlist', 'RemovedFromWishlist', label)
 
   addedToCart: (label) ->
-    track.event('Products', 'AddedToCart', label)
+    track.event('Products', 'AddedToCart', label)  
+    track.pageView('/cart/add');
 
   viewVideo: (label) ->
     track.event('Products', 'ViewVideo', label)
@@ -85,7 +85,7 @@ window.track = {
 
   search: (label) ->
     track.event('Searches', 'Searched', label)
-  
+
   openedSendToFriend: (label) ->
     track.event('SendToFriend', 'Opened', label)
 

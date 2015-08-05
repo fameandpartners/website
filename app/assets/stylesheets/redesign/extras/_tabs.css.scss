@@ -2,7 +2,7 @@
   > li {
     float: left;
     padding: 0;
-    
+
     // - active
     &.active {
       position: relative;
@@ -23,13 +23,13 @@
         margin-top: 0;
       }
 
-      a { 
+      a {
         background-color: $gray-light-bg;
         border-bottom: solid 1px #000;
         cursor: default;
       }
     }
-    
+
     // - link
     > a {
       text-transform: uppercase;
@@ -37,7 +37,8 @@
       color: #000;
       height: 90px;
       text-align: center;
-      
+      padding: 10px 13.5px;
+
       &:hover {
         background-color: $gray-light-bg;
       }

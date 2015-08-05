@@ -29,14 +29,12 @@ module Feeds
     def export
       @logger.info "Starting Feeds Export SITE (#{current_site_version.permalink})"
       @items      = get_items
-      @properties = get_properties
 
       FEEDS.each do |name|
         logger.info("START Feed #{name}")
         klass                         = Feeds::Exporter.const_get(name)
         exporter                      = klass.new(logger: @logger)
         exporter.items                = @items
-        exporter.properties           = @properties
         exporter.config               = @config
         exporter.current_site_version = @current_site_version
         exporter.export
@@ -57,27 +55,6 @@ module Feeds
 
     def current_currency
       current_site_version.currency
-    end
-
-    def get_properties
-      logger.info 'Fetching Properties'
-      properties = Hash[*
-        Spree::Property.where(name: ['fabric', 'short_description']).map do |property|
-          [property.id, property]
-        end.flatten
-      ]
-      product_properties = Spree::ProductProperty.where(property_id: properties.keys)
-      values = []
-
-      product_properties.each do |product_property|
-        product_id = product_property.product_id
-        property   = properties[product_property.property_id]
-
-        values[product_id] ||= HashWithIndifferentAccess.new
-        values[product_id][property.name] = product_property.value
-      end
-
-      values
     end
 
     def get_items
@@ -130,7 +107,8 @@ module Feeds
         group_id:                product.id.to_s,
         color:                   color,
         size:                    size,
-        weight:                  get_weight(product, variant)
+        weight:                  get_weight(product, variant),
+        fabric:                  product.property('fabric')
       )
 
       # Event, Style and Lookbook

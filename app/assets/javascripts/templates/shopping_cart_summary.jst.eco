@@ -18,7 +18,7 @@
       </div>
       <div class="clearfi">
         <div class="pull-left small">
-          Size: <span><%= product.size.presentation %>,</span> 
+          Size: <span><%= product.size.presentation %>,</span>
           Color: <span class="color"><%= product.color.presentation %></span>
         </div>
         <div class="pull-right text-muted"><%= product.price.display_price %></div>
@@ -39,13 +39,6 @@
     </li>
   <% end %>
 </ul>
-<!--cd-cart-items-->
-<form class="promo-code" action="#">
-  <label for=""> Promo Code</label>
-  <div class="input-group">
-    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit btn-reset">Apply</button></span>
-  </div>
-</form>
 <p>
   Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
 </p>
@@ -55,8 +48,6 @@
 <p>
   <% if @cart.promocode: %>
     Promotion (<%= @cart.promocode %>)<span class="pull-right"><%= @cart.display_promotion_total %></span>
-  <% else: %>
-    Promotion<span class="pull-right"><%= @cart.display_promotion_total %></span>
   <% end %>
 </p>
 <p>
