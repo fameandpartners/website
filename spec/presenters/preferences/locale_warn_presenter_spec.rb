@@ -37,20 +37,15 @@ describe Preferences::LocaleWarnPresenter, type: :presenter do
   end
 
   describe '#show?' do
-    context 'returns true if' do
-      it 'session site version is nil and current site version differs from geo' do
-        presenter = described_class.new(geo_site_version: br_site_version, current_site_version: au_site_version, session_site_version_code: nil)
+    context 'current site version is different from geo' do
+      it 'returns true' do
+        presenter = described_class.new(geo_site_version: br_site_version, current_site_version: au_site_version)
         expect(presenter.show?).to be_truthy
       end
     end
 
-    context 'returns false if' do
-      it 'session site version is set' do
-        presenter = described_class.new(session_site_version_code: 'anything')
-        expect(presenter.show?).to be_falsy
-      end
-
-      it 'current site version is the same as geo' do
+    context 'current site version is equal from geo' do
+      it 'returns false' do
         presenter = described_class.new(geo_site_version: br_site_version, current_site_version: br_site_version)
         expect(presenter.show?).to be_falsy
       end
@@ -59,7 +54,7 @@ describe Preferences::LocaleWarnPresenter, type: :presenter do
 
   describe '#cache_key' do
     it 'returns the cache key composed by geo and current site version codes, and show boolean' do
-      presenter = described_class.new(geo_site_version: br_site_version, current_site_version: au_site_version, session_site_version_code: nil)
+      presenter = described_class.new(geo_site_version: br_site_version, current_site_version: au_site_version)
       expect(presenter.cache_key).to eq('br-au-true')
     end
   end

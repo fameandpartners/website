@@ -1,11 +1,10 @@
 module Preferences
   class LocaleWarnPresenter
-    attr_reader :current_site_version, :geo_site_version, :session_site_version_code
+    attr_reader :current_site_version, :geo_site_version
 
     def initialize(opts = {})
       @geo_site_version          = opts[:geo_site_version]
       @current_site_version      = opts[:current_site_version]
-      @session_site_version_code = opts[:session_site_version_code]
     end
 
     def flag_url
@@ -24,12 +23,8 @@ module Preferences
       preference.long_text
     end
 
-    # - Warning will show when:
-    # -> User is from country that differs from current site version
-    # -> User did not choose any the site version
-    # -> User hasn't closed the alert
     def show?
-      session_site_version_code.nil? && current_site_version != geo_site_version
+      current_site_version != geo_site_version
     end
 
     def cache_key

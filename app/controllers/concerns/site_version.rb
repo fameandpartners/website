@@ -14,8 +14,7 @@ module Concerns::SiteVersion
     geo_site_version = FindUsersSiteVersion.new(request_ip: request.ip).sv_chosen_by_ip || ::SiteVersion.default
     @locale_warning = Preferences::LocaleWarnPresenter.new(
       geo_site_version: geo_site_version,
-      current_site_version: current_site_version,
-      session_site_version_code: session[:site_version]
+      current_site_version: current_site_version
     )
   end
 
