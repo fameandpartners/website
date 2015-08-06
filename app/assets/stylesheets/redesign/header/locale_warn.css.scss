@@ -101,7 +101,7 @@ $color-white: #FFF;
 
   @media (max-width: 992px) {
     .search-bar {
-      top: $mega-menu-mobile-height + 30px; // Locale selector doesn't have a fixed height
+      top: $mega-menu-mobile-height + 20px; // Locale selector doesn't have a fixed height
     }
   }
 
