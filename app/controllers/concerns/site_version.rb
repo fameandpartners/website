@@ -4,8 +4,8 @@ module Concerns::SiteVersion
   included do
     attr_writer :current_site_version
 
-    before_filter :show_locale_warning
     before_filter :check_site_version, unless: [:on_checkout_path, :request_not_get_or_ajax]
+    before_filter :show_locale_warning
 
     helper_method :current_site_version, :site_versions_enabled?
   end
