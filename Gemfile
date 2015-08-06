@@ -137,7 +137,14 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'thin'
+end
 
+group :test do
+  gem 'capybara-screenshot'
+  gem 'ffaker'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
+  gem 'turnip'
 end
 
 group :staging, :development do

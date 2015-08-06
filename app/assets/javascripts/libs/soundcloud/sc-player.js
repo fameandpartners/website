@@ -189,26 +189,26 @@
           };
 
 
-      // listen to audio engine events
-      // when the loaded track is ready to play
-      soundcloud.addEventListener('onPlayerReady', function(flashId, data) {
-        player = soundcloud.getPlayer(engineId);
-        callbacks.onReady();
-      });
-
-      // when the loaded track finished playing
-      soundcloud.addEventListener('onMediaEnd', callbacks.onEnd);
-
-      // when the loaded track is still buffering
-      soundcloud.addEventListener('onMediaBuffering', function(flashId, data) {
-        callbacks.onBuffer(data.percent);
-      });
-
-      // when the loaded track started to play
-      soundcloud.addEventListener('onMediaPlay', callbacks.onPlay);
-
-      // when the loaded track is was paused
-      soundcloud.addEventListener('onMediaPause', callbacks.onPause);
+      //// listen to audio engine events
+      //// when the loaded track is ready to play
+      //soundcloud.addEventListener('onPlayerReady', function(flashId, data) {
+      //  player = soundcloud.getPlayer(engineId);
+      //  callbacks.onReady();
+      //});
+      //
+      //// when the loaded track finished playing
+      //soundcloud.addEventListener('onMediaEnd', callbacks.onEnd);
+      //
+      //// when the loaded track is still buffering
+      //soundcloud.addEventListener('onMediaBuffering', function(flashId, data) {
+      //  callbacks.onBuffer(data.percent);
+      //});
+      //
+      //// when the loaded track started to play
+      //soundcloud.addEventListener('onMediaPlay', callbacks.onPlay);
+      //
+      //// when the loaded track is was paused
+      //soundcloud.addEventListener('onMediaPause', callbacks.onPause);
 
       return {
         load: function(track) {
