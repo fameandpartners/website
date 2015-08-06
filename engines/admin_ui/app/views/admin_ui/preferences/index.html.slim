@@ -1,61 +1,59 @@
 - content_for :page_title
   | Preferences
 
-.row
-  .col-lg-12
-    .ibox.float-e-margins
-      .ibox-title
-        h5
-          | Shop Preferences
-      .ibox-content
-        = form_for :preferences, url: admin_ui.preferences_path, method: :put do |f|
-          - @site_versions.each do |site_version|
+.wrapper.wrapper-content
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-content
+          = form_for :preferences, url: admin_ui.preferences_path, method: :put do |f|
+            - @site_versions.each do |site_version|
 
-            h1
-              = site_version.name
+              h1
+                = site_version.name
 
-            .hr-line-dashed
+              .hr-line-dashed
 
-            / Titles
-            - titles = Preferences::Titles.new(site_version)
+              / Titles
+              - titles = Preferences::Titles.new(site_version)
 
-            h3
-              | Titles
-            .form-group
-              label
-                | Homepage Title
-              = text_field_tag titles.homepage_title_key, titles.homepage_title, class: 'form-control'
-            .form-group
-              label
-                | Default SEO Title
-              = text_field_tag titles.default_seo_title_key, titles.default_seo_title, class: 'form-control'
-              .help-block.m-b-none
-                | Text that will be appended on every page title
+              h3
+                | Titles
+              .form-group
+                label
+                  | Homepage Title
+                = text_field_tag titles.homepage_title_key, titles.homepage_title, class: 'form-control'
+              .form-group
+                label
+                  | Default SEO Title
+                = text_field_tag titles.default_seo_title_key, titles.default_seo_title, class: 'form-control'
+                .help-block.m-b-none
+                  | Text that will be appended on every page title
 
-            / Gray Top Banner
-            - banner = Preferences::TopBanner.new(site_version)
+              / Gray Top Banner
+              - banner = Preferences::TopBanner.new(site_version)
 
-            h3
-              | Gray Top Banner
-            .form-group
-              label
-                | Center Text
-              = text_field_tag banner.center_text_key, banner.center_text, class: 'form-control'
-            .form-group
-              label
-                | Right Text
-              = text_field_tag banner.right_text_key, banner.right_text, class: 'form-control'
+              h3
+                | Gray Top Banner
+              .form-group
+                label
+                  | Center Text
+                = text_field_tag banner.center_text_key, banner.center_text, class: 'form-control'
+              .form-group
+                label
+                  | Right Text
+                = text_field_tag banner.right_text_key, banner.right_text, class: 'form-control'
 
-            / Locale Warn
-            - warn = Preferences::LocaleWarn.new(site_version)
+              / Locale Warn
+              - warn = Preferences::LocaleWarn.new(site_version)
 
-            h3
-              | Locale Warn
-            .form-group
-              label
-                | Long Text
-              = text_field_tag warn.long_text_key, warn.long_text, class: 'form-control'
-              .help-block.m-b-none
-                | Warn text that will be shown to users when they first visit the unrecommended site version
+              h3
+                | Locale Warn
+              .form-group
+                label
+                  | Long Text
+                = text_field_tag warn.long_text_key, warn.long_text, class: 'form-control'
+                .help-block.m-b-none
+                  | Warn text that will be shown to users when they first visit the unrecommended site version
 
-          button.btn.btn-primary type="submit" Save changes
+            button.btn.btn-primary type="submit" Save changes

@@ -1,5 +1,5 @@
 module AdminUi
-  class PreferencesController < AdminUi::ApplicationController
+  class PreferencesController < ApplicationController
     def index
       @site_versions = SiteVersion.all
     end
