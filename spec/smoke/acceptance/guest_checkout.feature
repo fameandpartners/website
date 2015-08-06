@@ -3,18 +3,21 @@ Feature: Guest Checkout
 
   Background:
 #    Given I am testing against production
-    Given I am testing against localhost
+#    Given I am testing against localhost
     And I am on the homepage
 
   Scenario: Buy a Dress
+    And screenshot
     When I click on 'Shop'
-#    And screenshot
+    And screenshot
     When I click on 'Prom Dresses'
-#    And screenshot
+    And screenshot
+    And pry
     When I view dress 'Coco'
-#    And screenshot
+
+    And screenshot
     When I choose size '8'
-#    And screenshot
+    And screenshot
     And I add the dress to my cart
     And I click on 'Checkout'
     Then I should see 'EXISTING CUSTOMERS LOG IN'

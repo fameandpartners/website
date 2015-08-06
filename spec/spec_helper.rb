@@ -51,7 +51,7 @@ RSpec.configure do |config|
 
     phantomjs_extensions = Dir[Rails.root.join("spec/support/phantomjs_extensions/*.js")]
     driver               = Capybara::Poltergeist::Driver.new(app,
-                                                             js_errors:  true,
+                                                             js_errors:  false,
                                                              debug:      true,
                                                              extensions: phantomjs_extensions
     )
@@ -61,6 +61,8 @@ RSpec.configure do |config|
   end
 
   Capybara.javascript_driver = :poltergeist
+  # Capybara.javascript_driver = :selenium
+
 
   Capybara.configure do |config|
     config.match = :prefer_exact

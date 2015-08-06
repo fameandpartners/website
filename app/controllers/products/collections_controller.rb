@@ -28,6 +28,12 @@
 #
 
 class Products::CollectionsController < Products::BaseController
+
+  DEFAULT_COLLECTIONS_PATH = '/dresses/*'
+  DEFAULT_TEMPLATE_PATH = '/products/collections/show.html.slim'
+
+
+
   layout 'redesign/application'
   attr_reader :page
   helper_method :page
@@ -48,6 +54,12 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private
+
+    def default_page
+
+        # Revolution::Page.create!().publish!
+      @default_page ||= Revolution::Page.new(:path => '/dresses/*', :template_path => '/products/collections/show.html.slim', publish_from: Date.yesterday)
+    end
 
     def load_page
       current_path = LocalizeUrlService.remove_version_from_url(request.path)

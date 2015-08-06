@@ -12,9 +12,15 @@ module DataSteps
 
   end
 
+  step 'there is a default page' do
+    Revolution::Page.create!(:path => '/dresses/*', :template_path => '/products/collections/show.html.slim').publish!
+  end
+
   step 'there is a :dress_name dress' do |dress_name|
     # binding.pry
-    create :dress, name: dress_name
+
+    FactoryGirl.create :dress, name: dress_name
+    # create :dress, name: dress_name
 
     dress = {
       sku: '1234',
@@ -102,13 +108,13 @@ module DataSteps
     }
 
 
-    bu = Products::BatchUploader.new
+    bu = Products::BatchUploader.new(Date.yesterday)
 
 
     # binding.pry
     bu.create_or_update_products([dress])
 
-    binding.pry
+    # binding.pry
 
     Utility::Reindexer.reindex
 

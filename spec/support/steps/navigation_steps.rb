@@ -3,6 +3,14 @@ module NavigationSteps
     visit '/'
   end
 
+  step 'I visit the first product' do
+    url_helper = Object.new
+    url_helper.extend(PathBuildersHelper)
+    # binding.pry
+    p = url_helper.collection_product_path Spree::Product.first, site_version: ''
+    visit p
+  end
+
   step 'I click on :element' do |element|
     click_on element
   end
