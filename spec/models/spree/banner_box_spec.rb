@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Spree::BannerBox, type: :model do
   describe 'scopes' do
-    let!(:au_site_version)  { build_stubbed(:site_version, permalink: 'au') }
+    let!(:au_site_version) { build_stubbed(:site_version, permalink: 'au') }
     let!(:us_big_banner)   { create(:banner_box, is_small: false, css_class: 'us') }
     let!(:au_small_banner) { create(:banner_box, is_small: true, css_class: 'au') }
 
