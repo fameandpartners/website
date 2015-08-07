@@ -9,9 +9,11 @@ window.SideMenu = class SideMenu
     @$overlay         = $(options.overlay || '#shadow-layer')
 
     @$sideMenuTrigger.on('click', @open)
-    @$close .on('click', @close)
+    @$close.on('click', @close)
+    @$overlay.on('click', @close)
 
-    $("a", "li", "ul", ".main-menu", @$container).on 'click', (e) =>
+    # $("a", "li", "ul", ".main-menu", @$container).on 'click', (e) =>
+    $("a", @$container).on 'click', (e) =>
       @slide(e)
 
     $(@$container).on('mousedown touchstart', (e) =>
@@ -23,29 +25,16 @@ window.SideMenu = class SideMenu
 
 
   slide: (e) =>
-    t = $(e.target)
-    t = $('img',t) if $(t).is("a")
-
-    clicked = t.hasClass("clicked")
-    @$arrowImg.removeClass("clicked")
-    @$dropdownMenu.css('height','0')
-
-    if !clicked
-      t.toggleClass("clicked")
-
-      dropdown_li = $(t.closest('li'))
-      clone = $('ul',dropdown_li).clone()
-                    .css({'position':'absolute','visibility':'hidden','height':'auto'})
-                    .addClass('slideClone')
-                    .appendTo('body')
-      newHeight = $(".slideClone").height()
-      $(".slideClone").remove()
-      $('ul',dropdown_li).css('height',newHeight + 'px')
+    $this = $(e.target)
+    $thisDropdown = $this.siblings('.responsive-nav-dropdown')
+    dropdownHeight = $thisDropdown.children('ul').outerHeight()
+    $this.toggleClass('clicked')
+    $thisDropdown.height( if $this.is('.clicked') then dropdownHeight else 0)
 
   open: () =>
-    @$container.css("margin-left", @$container.width())
+    @$container.addClass('is-open')
     @$overlay.addClass('is-visible')
 
   close: () =>
-    @$container.css("margin-left", -@$container.width())
+    @$container.removeClass('is-open')
     @$overlay.removeClass('is-visible')

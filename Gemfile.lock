@@ -834,6 +834,7 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.1)
   fame_favicon!
   fog
+  font-awesome-rails
   geoip
   google_drive (= 1.0.0)
   inspinia-rails!
@@ -893,6 +894,3 @@ DEPENDENCIES
   uglifier (= 1.3.0)
   unicorn
   whenever
-
-BUNDLED WITH
-   1.10.3

@@ -1,0 +1,15 @@
+body {
+  font-family: $font-family-secondary;
+}
+
+a:hover { color: $fp-highlight;}
+
+a:focus { text-decoration: none;}
+
+a:active, a:focus { outline: none !important; }
+
+// Page style
+.page-content {
+  padding-top: $fp-menu-size;
+  padding-bottom: 60px;
+}

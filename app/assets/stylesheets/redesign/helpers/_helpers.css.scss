@@ -1,0 +1,76 @@
+%disabled-blur {
+  pointer-events: none;
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='saturate' values='0'/></filter></svg>#grayscale");
+  -webkit-filter: grayscale(1) blur(1px);
+  filter: grayscale(1) blur(1px);
+  filter: gray;
+  opacity: 0.6;
+  .ie & {
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='1');
+  }
+}
+
+// Text helpers
+.font-forum {
+ font-family: $font-brand-serif;
+} 
+.text-light {
+  font-weight: 300;
+}
+// @end Text helpers
+// -----------------
+
+// Responsive Utility
+// - hidden
+@media (max-width: $screen-tablet) { .hidden-tablet-and-less { display: none !important;}}
+@media (max-width: $screen-phone)  { .hidden-phone           { display: none !important;}}
+// - visible
+@media (min-width: $screen-tablet + 1px) { .visible-tablet-and-less { display: none !important;}}
+@media (min-width: $screen-phone + 1px)  { .visible-phone           { display: none !important;}}
+// - reset float use with .pull-left/.pull-right
+// @end Responsive Utility
+// -----------------
+
+// Caret
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 6px solid;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  color: $fp-dropdown-border;
+} 
+// @end Caret
+// -----------------
+
+// Divider
+.divider {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100px;
+  height: 1px;
+  background: $gray-lighter;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+// @end Divider
+// -----------------
+
+// Overlay
+#shadow-layer {
+  position: fixed;
+  min-height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: $shadow-zindex;
+  display: none;
+  &.is-visible { display: block;}
+} 
+// @end Overlay
+// -----------------

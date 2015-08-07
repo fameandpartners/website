@@ -1,0 +1,136 @@
+// Checkout page url: /checkout
+$desktop-nav-menu-height: 70px;
+$mobile-nav-menu-height: 70px;
+
+.nav-menu.checkout {
+  height: $desktop-nav-menu-height;
+
+  .mobile-logo {
+    margin-left: 0;
+  }
+}
+
+.page-title.checkout-title {
+  margin-top: $desktop-nav-menu-height;
+}
+
+.page-content.checkout {
+  // - Override form styles
+
+  .auth-alert {
+    padding: 15px 35px 15px 15px;
+    margin-bottom: 25px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: none;
+  }
+
+  .alert-danger {
+    margin-top: 12.5px;
+  }
+
+  label {
+    color: #000;
+  }
+  .form-control {
+    font-weight: 300;
+    font-size: 15px;
+    font-family: $font-family-secondary;
+    text-align: left;
+    text-transform: none;
+    background: none;
+    border-color: #000;
+  }
+
+  // - Override Checkout items styles
+  .checkout-items {
+    background-color: $gray-light-bg;
+    border: 0;
+
+    h3 {
+      text-transform: uppercase;
+      margin: 25px 0;
+    }
+    .price-express-making {
+      margin-top: 5px;
+    }
+    .cart-items li {
+      background-color: #fff;
+      border-top-color: #000;
+      font-size: 14px;
+    }
+    .cart-item-image {
+      width: 80px;
+    }
+    .delete-item {
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      right: 15px;
+      top: 50%;
+      margin-top: -10px;
+      overflow: hidden;
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      &:before, &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 40px;
+        left: 50%;
+        top: 50%;
+        margin-left: -1px;
+        margin-top: -20px;
+        background-color: #000;
+      }
+      &:after {
+        height: 1px;
+        width: 40px;
+        margin-left: -20px;
+        margin-top: -1px;
+      }
+    }
+  }
+  .col-md-4 { padding-top: 0;}
+
+  .promo-code {
+    margin: 20px 0;
+    .input-group-addon {
+      border-bottom: 0 !important;
+      padding: 0;
+      vertical-align: bottom;
+    }
+  }
+}
+// @end
+
+
+// Title
+.checkout-section-title {
+  text-transform: uppercase;
+  background-color: #f6e2d5;
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+// @end
+
+
+// styleguide
+// Checkout
+.checkout-title {
+  margin-top: 70px;
+  padding: 30px;
+  background: $gray-lighter;
+}
+.checkout-h1 {
+  padding-bottom: 0;
+  margin-bottom: 10px;
+  margin-top: 0;
+} 
+
+// @end styleguide
+// -----------------

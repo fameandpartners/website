@@ -1,60 +1,94 @@
-//= require_tree ./libs/vex
-//= require_tree ./redesign/stylesheets
+// Include Gems 
+@import 'font-awesome';
+@import 'redesign/styleguide/bootstrap-variables';
+@import 'bootstrap';
+// @end Include Gems
+// -----------------
 
+// Setup 
 @import 'redesign/vars';
-@import 'redesign/mixins';
-@import 'redesign/extras/helpers';
+@import 'redesign/helpers/mixins';
+@import 'redesign/helpers/helpers';
+@import 'redesign/helpers/icons';
+// @end Setup
+// -----------------
 
+// Libs 
+@import 'libs/vex/*';
 @import 'redesign/libs/chosen';
-@import 'redesign/extras/chosen_override';
-@import 'redesign/extras/tabs';
+@import 'redesign/libs/chosen_override';
+// @end Libs
+// -----------------
 
-@import 'redesign/icons';
-
-@import 'redesign/layout';
-@import 'redesign/header';
-@import 'redesign/footer';
-
-@import 'redesign/product/*';
-
-@import 'redesign/forms';
-@import 'redesign/about';
-@import 'redesign/alerts';
-@import 'redesign/user';
-@import 'redesign/returns';
-@import 'redesign/why_us';
-@import 'redesign/fame_chain';
+// Components 
+@import 'redesign/components/tabs';
+@import 'redesign/components/modal';
+@import 'redesign/components/tables';
+@import 'redesign/components/alerts';
+@import 'redesign/components/slider';
+@import 'redesign/components/timer-box';
+@import 'redesign/components/rhombus';
+@import 'redesign/components/cart';
 @import 'redesign/facebook';
-@import 'redesign/registration';
-@import 'redesign/style_consult';
-@import 'redesign/contact';
-@import 'redesign/fashionista_winner';
-@import 'redesign/index';
-@import 'redesign/typography';
-@import 'redesign/modal';
-@import 'redesign/flash_slider';
-@import 'redesign/faqs';
-@import 'redesign/terms';
-@import 'redesign/login';
-@import 'redesign/sale_lp';
-@import 'redesign/fashion-it-girl-winner';
-@import 'redesign/style_session';
-@import 'redesign/tables';
+// @end Components
+// -----------------
 
-@import 'redesign/checkout';
-@import 'redesign/cart';
+// Layout
+@import 'redesign/layout/grid';
+@import 'redesign/styleguide/styles';
+@import 'redesign/layout/typography';
+@import 'redesign/layout/forms';
+@import 'redesign/layout/base';
+@import 'redesign/layout/header';
+@import 'redesign/layout/nav';
+@import 'redesign/layout/footer';
+// @end Layout
+// -----------------
+
+// Pages 
+@import 'redesign/pages/product/*';
+@import 'redesign/pages/about';
+@import 'redesign/pages/cart';
+@import 'redesign/pages/checkout';
+@import 'redesign/pages/contact';
+@import 'redesign/pages/fame_chain';
+@import 'redesign/pages/faqs';
+@import 'redesign/pages/fashionista_winner';
+@import 'redesign/pages/index';
+@import 'redesign/pages/login';
+@import 'redesign/pages/style_consult';
+@import 'redesign/pages/user';
+@import 'redesign/pages/why_us';
+@import 'redesign/pages/terms';
+@import 'redesign/pages/returns';
+@import 'redesign/pages/sale_lp';
+@import 'redesign/pages/fashion-it-girl-winner';
+@import 'redesign/pages/style_session';
+// @end Pages
+// -----------------
+
+
+// @import 'redesign/flash_slider';
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Time specific content
-@import 'transient_content';
+// @import 'transient_content';
 
-.standard-form {
-  height: 60px;
-  padding: 0 5px;
-}
-
-.alert-warning {
-  background-color:#F2DDD0;
-}
+// .standard-form {
+//   height: 60px;
+//   padding: 0 5px;
+// }
 
 .has-error {
   .help-inline {
@@ -69,7 +103,7 @@
 }
 
 .pink {
-    background-color: #f6e1d5;
+  background-color: #f6e1d5;
 }
 
 .text-pink { color: #DBB8C7;}
@@ -82,13 +116,9 @@
   background-color: #f8ece9;
 }
 
-.cream {
-  background-color: #fbf5f3
-}
-
-.vex-content {
-  z-index:9999 !important; // display on top of mobile menu
-}
+// .cream {
+//   background-color: #fbf5f3
+// }
 
 .landing-page {
   .row.content-box {

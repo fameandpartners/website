@@ -1,0 +1,22 @@
+h1 {
+  letter-spacing: -1px;
+  font-family: 'Forum', cursive;
+  text-transform:uppercase;
+  font-size: 48px;
+  padding-bottom: 40px;
+}
+
+h3 {
+  font-size: 1.111111em;
+}
+
+p {
+	font-weight: 500;
+	font-family: $font-family-secondary;
+}
+
+sup {
+	font-size: 100%;
+	top: -1px;
+	padding-right: 3px;
+}

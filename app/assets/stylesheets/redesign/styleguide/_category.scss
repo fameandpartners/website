@@ -1,0 +1,102 @@
+// Category
+
+.category--item {
+	padding-bottom: 15px;
+
+	a {
+		color: $gray-dark;
+	}
+
+	&:hover {
+		// img { opacity: 0.8; }
+		opacity: 0.8;
+
+	}
+}
+
+
+.details {
+	margin: 15px 0;
+	font-size: 0.9em;
+}
+
+.name {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+}
+
+.price {
+	display: block;
+	text-align: center;
+}
+
+.delivery {
+	display: block;
+	text-align: center;
+	font-size: 0.9em;
+	color: $gray-light;
+	margin-top: -3px;
+	color: $fp-highlight;
+}
+
+// header
+.page-title {
+	background-size: cover;
+	// height: 380px;
+	margin-top: $fp-menu-height;
+	position: relative;
+
+	&:after {
+		content: "";
+		background: #000;
+		opacity: 0.1;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 1;
+	}
+}
+
+.page-title--details {
+	padding: 60px 0 55px 0;
+	text-align: center;
+	// margin-top: 130px;
+	color: white;
+	position: relative;
+	z-index: 99;
+
+  h1 {
+  	margin-top: 0px; // so it's centered
+  }
+}
+
+
+
+// Test
+// .test {
+// 	position: absolute;
+// 	/* height: 600px; */
+// 	top: 0;
+// 	right: 0;
+// 	bottom: 105px;
+// 	right: 0;
+// }
+
+// .left {
+// 	left: 0;
+// }
+
+// @media screen and (max-width: $screen-md) {
+// 	.test {
+// 		position: relative;
+// 		margin-bottom: 30px;
+// 	}
+// }
+
+// Category controls
+// .category-controls {
+// 	margin-bottom: 50px;
+// }

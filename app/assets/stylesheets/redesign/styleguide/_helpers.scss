@@ -1,0 +1,168 @@
+.vertical-center {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.push-right-50 {
+	padding-left: 50px !important;
+}
+
+.push-left-50 {
+	padding-right: 50px !important;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.no-padding {
+	padding: 0px !important;
+}
+
+.no-margin-top {
+	margin-top: 0px;
+}
+
+.bg-grey {
+	// background-color: #EAEAEE;
+	background: url(../images/photography__2x.png) repeat;
+}
+
+.text-white {
+	color: white;
+}
+
+.text-grey {
+	color: #A0A0A0;
+}
+
+.text-highlight {
+	color: $fp-highlight;
+}
+
+.no-border-right {
+	border-right: 0px;
+}
+.padding-left-15 {
+	padding-left: 15px;
+}
+
+.margin-top-30 {
+	margin-top: 30px;
+}
+
+.btn-grey-text {
+	color: $fp-button-grey;
+}
+
+.half-opacity {
+	opacity: 0.5;
+}
+
+.max-width-100 {
+	max-width: 100%;
+}
+
+.height-100 {
+	height: 100%;
+}
+
+.margin-top-16 {
+	margin-top: 16px;
+}
+
+.fa-one-and-half {
+	font-size: 1.5em !important;
+}
+
+.invis {
+	left: -999em !important;
+}
+
+.vis {
+	left: 0px !important;
+}
+
+.artificial-white-bg {
+	background: white !important;
+}
+
+.full-opacity {
+	opacity: 1;
+}
+
+.transparent-bg {
+	background: transparent !important;
+}
+
+.no-padding-left {
+	padding-left: 0px;
+}
+
+.no-padding-right {
+	padding-right: 0px;
+}
+
+.no-padding-bottom {
+	padding-bottom: 0px;
+}
+
+.relative {
+	position: relative;
+}
+
+.display-none {
+	display: none;
+}
+
+.no-scroll {
+	position: fixed !important;
+}
+
+.mobile-hide {
+	top: 999em;
+}
+
+.mobile-show {
+	top: 0;
+}
+
+.overflow-hidden {
+	overflow: hidden;
+}
+.push-right-10 {
+	margin-right: 10px;
+}
+
+.padding-60 {
+	padding: 60px;
+}
+
+.margin-right-10 {
+	margin-right: 10px;
+}
+
+@media screen and (max-width: $screen-lg) {
+	.margin-bottom-30-tablet {
+		margin-bottom: 30px;
+	}
+}
+
+@media screen and (max-width: $screen-lg) {
+	.no-padding-lg {
+		padding: 0px;
+	}
+}
+
+.link-grey {
+	color: $gray-light;
+}

@@ -1,0 +1,28 @@
+#product-color-content {
+
+  h2 {
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    font-size: 16px;
+  }
+
+  .active .color-box {
+    background-image: url('tick-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .option-name {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+  }
+
+  .grey {
+    background-color: #f5f5f5;
+    min-height: 270px;
+  }
+}

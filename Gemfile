@@ -23,6 +23,7 @@ gem 'tire'
 gem 'redis-rails'
 gem 'titleize'
 gem 'autoprefixer-rails'
+gem 'font-awesome-rails'
 
 # Monitoring & Events
 gem 'newrelic_rpm'

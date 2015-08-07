@@ -1,0 +1,22 @@
+
+.cs-color-select {
+	.preview {
+		display:inline;
+		height:23px;
+		width:23px;
+		padding:10px;
+		margin-right:10px;	
+		background-color:#CCCCCC;	
+	}
+	.black {
+		.preview {
+			background-color:#000000;
+		}
+	}
+	.green {
+		.preview {
+			background-color:#00FF00;
+		}
+	}	
+	
+}
