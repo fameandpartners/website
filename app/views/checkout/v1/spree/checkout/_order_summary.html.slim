@@ -29,7 +29,7 @@ ruby:
         .cart-item-info
           .heading
             span.qty 
-              =' "#{product.quantity}"
+              => "#{product.quantity}"
             = link_to product.name, collection_product_path(product), class: 'cart-item-title'
           .clearfix
             .pull-left.small
