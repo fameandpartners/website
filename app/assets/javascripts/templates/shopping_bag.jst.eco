@@ -76,7 +76,7 @@
   <div class="row row-compact">
     <div class="col-lg-6 col-compact close-cart">
       <p>
-        <button class="btn btn-charcoal btn-block">Shop More</button>
+        <button class="btn btn-grey btn-block">Shop More</button>
       </p>
     </div>
     <div class="col-lg-6 col-compact">

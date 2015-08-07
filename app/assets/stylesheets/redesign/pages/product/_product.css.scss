@@ -16,22 +16,12 @@
 	}
 
 	.btn {
-		font-family: $font-family-secondary;
 		font-size: 1.5rem;
 	}
 
   .btn-customize {
     text-transform: uppercase;
     cursor: pointer;
-  }
-
-  .btn-secondary {
-    height: 45px;
-    padding: 0;
-
-    &:hover {
-      background-color: #355e6d;
-    }
   }
 
   .secondary-actions .col-md-6:last-child {
@@ -268,15 +258,15 @@
   margin-bottom: 0;
 }
 
-.buy-button {
-  height: 45px;
-  line-height: 45px;
-  line-height: 9px;
-}
+// .buy-button {
+//   height: 45px;
+//   line-height: 45px;
+//   line-height: 9px;
+// }
 
-.btn-black:hover {
-  background-color: #333333;
-}
+// .btn-black:hover {
+//   background-color: #333333;
+// }
 
 .btn-fit-guide:hover {
   background-color: #355e6d;

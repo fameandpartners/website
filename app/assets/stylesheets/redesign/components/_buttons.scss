@@ -1,0 +1,68 @@
+.btn {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 9px 40px;
+  color: #fff;
+  border: 0;
+  min-height: $form-control-height-md;
+  &:hover { color: #fff;}
+}
+
+.btn-block {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+// - text
+.btn-text {
+  cursor: default;
+  color: inherit;
+  &:active { box-shadow: none;}
+}
+
+// - COLORS
+.btn-transparent {
+	border: 0;
+	background: none;
+}
+.btn-black {
+	background-color: #000;
+	&:hover { background-color: lighten(#000, 20%);}
+}
+.btn-grey {
+	background-color: $fp-charcoal;
+	&:hover { background-color: lighten($fp-charcoal, 15%);}
+}
+.btn-blue {
+	background-color: #033649;
+	&:hover { background-color: #355e6d;}
+}
+
+// - facebook
+.btn-facebook {
+  background-color: #3b5998;
+	padding-left: (2 * $form-control-height-md);
+  position: relative;
+  color: #fff;
+  &:hover {
+  	background-color: lighten(#3b5998, 5%);
+  	&:before {
+  		background-color: lighten(#354f88, 5%);
+  	}
+  }
+  &:before {
+    content: '\f09a';
+    font: normal normal normal 24px 'FontAwesome';
+    background-color: #354f88;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    width: $form-control-height-md;
+    line-height: $form-control-height-md;
+  }
+  span {
+    font-size: 12px;
+  }  
+}

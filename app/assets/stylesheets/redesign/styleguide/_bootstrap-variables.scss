@@ -35,7 +35,6 @@ $fp-footer-bg:			#F7F7F9;
 $fp-dropdown-border:	#CCCCCC;
 $fp-button-grey:		#9b9b9b;
 $fp-pink:           rgb(248, 218, 223);
-
 $fp-charcoal:       rgb(85, 85, 89);
 
 // Cart 
@@ -54,14 +53,12 @@ $green: #7dcf85;
 $shadow-layer-bg: rgba(#435779, .6);
 
 // fonts
-
 $primary-font: 'PT Sans', sans-serif;
 
 // z-index
-
 $header-zindex: 1000;
-$shadow-zindex: $header-zindex + 10;
-$sidebar-zindex: $header-zindex + 20;
+$shadow-zindex: ($header-zindex + 10);
+$sidebar-zindex: ($header-zindex + 20);
 $main-zindex: 1;
 
 $section-padding: 70px;
@@ -94,7 +91,8 @@ $link-hover-decoration: underline;
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif:  "Open Sans", Helvetica, Arial, sans-serif;
+// $font-family-sans-serif:  "Open Sans", Helvetica, Arial, sans-serif;
+$font-family-sans-serif:  'brandon-grotesque', sans-serif;
 $font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -156,9 +154,13 @@ $padding-xs-horizontal:     5px;
 $line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
 $line-height-small:         1.5;
 
-$border-radius-base:        4px;
-$border-radius-large:       6px;
-$border-radius-small:       3px;
+// $border-radius-base:        4px;
+// $border-radius-large:       6px;
+// $border-radius-small:       3px;
+
+$border-radius-base:        0;
+$border-radius-large:       0;
+$border-radius-small:       0;
 
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff;
