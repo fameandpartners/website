@@ -11,7 +11,7 @@ module Concerns::SiteVersion
   end
 
   def show_locale_warning
-    geo_site_version = FindUsersSiteVersion.new(request_ip: request.ip).sv_chosen_by_ip || SiteVersion.default
+    geo_site_version = FindUsersSiteVersion.new(request_ip: request.ip).sv_chosen_by_ip || ::SiteVersion.default
     @locale_warning = Preferences::LocaleWarnPresenter.new(
       geo_site_version: geo_site_version,
       current_site_version: current_site_version,
@@ -24,7 +24,7 @@ module Concerns::SiteVersion
     return :no_change if (!request.get? || request.xhr? || request.path == '/checkout')
 
     if site_version_param != current_site_version.code
-      @current_site_version = SiteVersion.by_permalink_or_default(site_version_param)
+      @current_site_version = ::SiteVersion.by_permalink_or_default(site_version_param)
     end
   end
 
