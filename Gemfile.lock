@@ -603,6 +603,13 @@ GEM
     rdiscount (1.6.8)
     rdoc (3.12.2)
       json (~> 1.4)
+    react-rails (1.0.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      rails (>= 3.1)
+      react-source (~> 0.13)
+    react-source (0.13.3)
     redis (3.2.1)
     redis-actionpack (3.2.4)
       actionpack (~> 3.2.0)
@@ -848,6 +855,7 @@ DEPENDENCIES
   quiet_assets
   rack-cors
   rails (~> 3.2.22)
+  react-rails (~> 1.0)
   redis-rails
   revolution!
   rmagick
