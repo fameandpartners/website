@@ -121,9 +121,9 @@ ruby:
 
             li#cart-trigger.menu-item
               = link_to spree.checkout_path, class: 'menu-item--link' do
-                span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
-                span.hidden-sm.hidden-xs.hidden-xxs cart:
-                span#cart-item-count 0
+                span
+                  = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
+                  span#cart-item-count 0
 
       = render 'layouts/redesign/header/locale_selector/mobile'
 

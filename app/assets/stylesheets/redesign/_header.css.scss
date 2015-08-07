@@ -458,12 +458,10 @@ ul.secondary.pull-right {
 
 li#cart-trigger {
   span#cart-item-count {
-    @media (max-width: 991px) {
-      color: white;
-      top: 0.7rem;
-      left: -1.7rem;
-      position: relative;
-    }
+    color: white;
+    top: 0.7rem;
+    left: -1.6rem;
+    position: relative;
   }
   a {
     @media (max-width: 320px) {
