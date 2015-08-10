@@ -17,10 +17,11 @@
                ' Live Chat
             li.support-telephone
              = support_telephone
-        /.checkout-breadcrumbs
-        /  ol.breadcrumb
-        /    li Your information
-        /    li Payment Method
+
+        .checkout-breadcrumbs
+          ol.list-inline
+            li.active Your information
+            li Payment Method
 
         .checkout-step data-name="address"
           = render 'address_step', current_step: current_step
