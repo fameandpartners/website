@@ -17,6 +17,7 @@ function __todo_env
 {
   error TODO - Actually automate this
   error "In the meantime, see $(yellow)doc/howto_backup_restore_engineyard_databases.md$(normal)"
+  echo "Then, SCP the file to the '${DUMPS_DIR}' directory"
 }
 
 
