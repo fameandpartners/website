@@ -6,7 +6,7 @@
       = link_to warning.site_version_path, id: 'go-to-store-button' do
         = image_tag(warning.flag_url)
         = warning.button_text
-    = link_to site_version_path(id: current_site_version.code), class: 'close-button' do
+    = link_to close_country_warning_site_version_index_path, class: 'close-button' do
       | &times;
 
 
@@ -15,5 +15,5 @@
       = link_to warning.site_version_path, id: 'go-to-store-button' do
         = image_tag(warning.flag_url)
         = warning.button_text
-    = link_to site_version_path(id: current_site_version.code), class: 'close-button' do
+    = link_to close_country_warning_site_version_index_path, class: 'close-button' do
       | &times;

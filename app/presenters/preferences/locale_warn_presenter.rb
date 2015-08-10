@@ -1,10 +1,11 @@
 module Preferences
   class LocaleWarnPresenter
-    attr_reader :current_site_version, :geo_site_version
+    attr_reader :current_site_version, :geo_site_version, :close_warning
 
-    def initialize(opts = {})
-      @geo_site_version          = opts[:geo_site_version]
-      @current_site_version      = opts[:current_site_version]
+    def initialize(geo_site_version: nil, current_site_version: nil, close_warning: false)
+      @close_warning        = close_warning
+      @current_site_version = current_site_version
+      @geo_site_version     = geo_site_version
     end
 
     def flag_url
@@ -24,7 +25,7 @@ module Preferences
     end
 
     def show?
-      current_site_version != geo_site_version
+      !close_warning && current_site_version != geo_site_version
     end
 
     def cache_key

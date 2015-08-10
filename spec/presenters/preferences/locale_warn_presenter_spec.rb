@@ -37,16 +37,21 @@ describe Preferences::LocaleWarnPresenter, type: :presenter do
   end
 
   describe '#show?' do
-    context 'current site version is different from geo' do
-      it 'returns true' do
-        presenter = described_class.new(geo_site_version: br_site_version, current_site_version: au_site_version)
+    context 'locale warning will show when' do
+      it 'is not closed and current site version is different from geo' do
+        presenter = described_class.new(geo_site_version: au_site_version, current_site_version: br_site_version, close_warning: false)
         expect(presenter.show?).to be_truthy
       end
     end
 
-    context 'current site version is equal from geo' do
-      it 'returns false' do
-        presenter = described_class.new(geo_site_version: br_site_version, current_site_version: br_site_version)
+    context 'locale warning will not show when' do
+      it 'is closed by user' do
+        presenter = described_class.new(close_warning: true)
+        expect(presenter.show?).to be_falsy
+      end
+
+      it 'current site version is the same as geo' do
+        presenter = described_class.new(geo_site_version: au_site_version, current_site_version: au_site_version, close_warning: false)
         expect(presenter.show?).to be_falsy
       end
     end

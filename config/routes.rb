@@ -424,7 +424,11 @@ FameAndPartners::Application.routes.draw do
     # Redirecting all bridesmaid party URLs
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
 
-    resources :site_versions, only: [:show], as: :site_version
+    resources :site_versions, only: [:show], as: :site_version do
+      collection do
+        get 'close_country_warning'
+      end
+    end
   end
 
   if Rails.env.development?
