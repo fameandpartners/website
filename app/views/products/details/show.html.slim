@@ -122,7 +122,7 @@ ruby:
 
     .row.secondary-actions
       .col-md-6.col-xs-6.col-xxs-12
-        button#fit-guide.btn.btn-block.btn-secondary Fit Guide
+        button#fit-guide.btn.btn-block.btn-secondary Size Guide
 
       .col-md-6.col-xs-6.col-xxs-12
         - if Features.active?(:moodboard)
@@ -136,7 +136,10 @@ ruby:
   .divider
   .row
     .col-md-6.col-sm-12.hidden-xs
-      h3 Dress Inspiration
+      h4 The Story
+      div=raw @product.description
+
+      h4 Dress Inspiration
       .inspiration
         .row
           .box.col-sm-4.no-padding
@@ -162,29 +165,33 @@ ruby:
           p Images courtesy of Google
 
     .col-md-6.col-sm-12
-      h3 The Story
+      - if @product.fit.present?
+        h4 About our #famebabe
+        = simple_format(@product.fit)
 
-      - if @product.preorder?
+      - if @product.size.present?
+        = simple_format(@product.size)
+
+      - if @product.preorder.present?
         .pre-order
           strong Pre-order
           | This item will ship within 4 weeks
-      div=raw @product.description
 
-      - if @product.style_notes
+      - if @product.style_notes.present?
         h4 Style it with
-        p= raw @product.style_notes
+        = simple_format(@product.style_notes)
 
-      - if @product.fabric
-        h4 What's it made of
-        p
-          = raw @product.fabric.gsub("\n", '<br/>')
+      - if @product.fabric.present?
+        h4 Fabric & Trims
+        = simple_format(@product.fabric + "\n Product may have variations in dying hues so product may look slightly different from image")
 
-        p style="color:#666666;" Fabrics can have variations in dying hues so products may differ slightly from image
+      h4 Care Instructions
+      p
+        | Professional dry-clean only
+        br
+        | See garment care label for further details on how to care for your garment
 
-        p.sku sku: #{@product.sku}
-
-        h4 Share
-        p= render :partial => 'share_buttons', :locals => { product: @product }
+      p.sku SKU: #{@product.sku}
 
 hr
 
