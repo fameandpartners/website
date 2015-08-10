@@ -1,0 +1,52 @@
+.checkout.page-content {
+
+  .checkout-masthead {
+    margin-top: 40px;
+    vertical-align: middle;
+    // Resets
+
+    line-height: 60px;
+
+
+
+    h1 {
+      text-transform: none; // RESET
+      line-height: 60px;
+      margin: 0;
+      padding: 0;
+
+      display: inline-block;
+      font-size: 30px;
+      font-family:$font-family-secondary;
+
+      img.logo {
+        display: inline-block;
+        line-height: 60px;
+      }
+    }
+
+    .support-options {
+      margin:0;
+      float:right !important;
+
+      li {
+        line-height: 60px;
+      }
+
+      .live-chat {
+        @extend .icon;
+        @extend .icon-comment;
+      }
+
+      li + li {
+        border-left: 1px solid #000000;
+      }
+
+      .support-telephone {
+        @extend .icon;
+        @extend .icon-guarantee;
+      }
+    }
+  }
+
+}

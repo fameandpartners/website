@@ -8526,7 +8526,7 @@ h1 {
 /* line 48, ../sass/_typography.scss */
 h1 {
   padding-bottom: 40px;
-  font-size: 48px !important;
+  font-size: 48px;
 }
 
 /* line 53, ../sass/_typography.scss */
