@@ -27,8 +27,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       if !@promoStartedAt
         today = +new Date()
         @promoStartedAt = today
-      else
-        @promoStartedAt = +@promoStartedAt * 1000
+        $.cookie("auto_apply_promo_code_started_at",@promoStartedAt)
     else
       today = +new Date()
       @promoStartedAt = today
