@@ -22,11 +22,11 @@
               .form-group
                 label
                   | Homepage Title
-                = text_field_tag titles.homepage_title_key, titles.homepage_title, class: 'form-control'
+                = text_field :preferences, titles.homepage_title_key, value: titles.homepage_title, class: 'form-control'
               .form-group
                 label
                   | Default SEO Title
-                = text_field_tag titles.default_seo_title_key, titles.default_seo_title, class: 'form-control'
+                = text_field :preferences, titles.default_seo_title_key, value: titles.default_seo_title, class: 'form-control'
                 .help-block.m-b-none
                   | Text that will be appended on every page title
 
@@ -38,11 +38,11 @@
               .form-group
                 label
                   | Center Text
-                = text_field_tag banner.center_text_key, banner.center_text, class: 'form-control'
+                = text_field :preferences, banner.center_text_key, value: banner.center_text, class: 'form-control'
               .form-group
                 label
                   | Right Text
-                = text_field_tag banner.right_text_key, banner.right_text, class: 'form-control'
+                = text_field :preferences, banner.right_text_key, value: banner.right_text, class: 'form-control'
 
               / Locale Warn
               - warn = Preferences::LocaleWarn.new(site_version)
@@ -52,7 +52,7 @@
               .form-group
                 label
                   | Long Text
-                = text_field_tag warn.long_text_key, warn.long_text, class: 'form-control'
+                = text_field :preferences, warn.long_text_key, value: warn.long_text, class: 'form-control'
                 .help-block.m-b-none
                   | Warn text that will be shown to users when they first visit the unrecommended site version
 
