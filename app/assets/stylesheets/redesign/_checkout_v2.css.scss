@@ -1,16 +1,31 @@
+// Style Resets
+// TODO - Remove upstream broken CSS
 .checkout.page-content {
+  p {
+    font-weight: normal; // RESET
+  }
 
+  h1, h2 {
+    text-transform: none; // RESET
+  }
+
+  label {
+    text-transform: none; // RESET
+  }
+}
+
+// Vars
+$checkout-form-border-color-inactive: #acacac;
+$checkout-form-border-color-active:   #000000;
+
+
+.checkout.page-content {
   .checkout-masthead {
     margin-top: 40px;
     vertical-align: middle;
-    // Resets
-
     line-height: 60px;
 
-
-
     h1 {
-      text-transform: none; // RESET
       line-height: 60px;
       margin: 0;
       padding: 0;
@@ -49,4 +64,20 @@
     }
   }
 
+  .checkout-step {
+    .checkout-section-title {
+      font-size: 30px;
+      font-weight: normal;
+    }
+
+    .form-control {
+      border: 1px solid $checkout-form-border-color-inactive;
+
+      &:focus {
+        border-color: $checkout-form-border-color-active;
+      }
+    }
+
+
+  }
 }
