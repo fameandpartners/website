@@ -22,7 +22,7 @@ class MarketingMailer < ActionMailer::Base
 
     # Template Scope
     @resume_shop_url   = root_url(site_version: site_version.to_param)
-    @product_url       = collection_product_url(product, site_version: site_version.to_param)
+    @product_url       = collection_product_url(product, site_version: site_version.to_param, faadc: 'buyit10', skip_reminder:'true')
     @product_image_url = image_urls.sample
     @product_name      = product.name
     @original_price    = base_price.display_price
