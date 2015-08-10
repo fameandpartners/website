@@ -1,16 +1,8 @@
-ruby:
-  reports_active = [
-    reports_payments_path,
-    reports_sale_items_path,
-    reports_coupon_adjusted_orders_path,
-    reports_order_totals_path
-  ].any? { |path| is_active_link?(path) }
-
 = menu_item root_path, 'Dashboard', icon: 'dashboard', exact: true
 = menu_item return_requests_path, 'Returns Management', icon: 'thumbs-down'
 = menu_item preferences_path, 'Preferences', icon: 'cog', exact: true
 
-li class=('active' if reports_active)
+li class=active_link_to_class('', active: /reports/)
   a href="#"
     i.fa.fa-line-chart
     span.nav-label Reports
