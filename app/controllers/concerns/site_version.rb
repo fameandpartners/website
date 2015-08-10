@@ -26,7 +26,7 @@ module Concerns
     end
 
     def site_versions_enabled?
-      @site_versions_enabled ||= (SiteVersion.count > 1)
+      @site_versions_enabled ||= (::SiteVersion.count > 1)
     end
 
     def current_site_version
@@ -46,7 +46,7 @@ module Concerns
     end
 
     def site_version_param
-      params[:site_version] || SiteVersion.default.code
+      params[:site_version] || ::SiteVersion.default.code
     end
 
     private

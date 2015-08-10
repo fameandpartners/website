@@ -17,7 +17,7 @@ class SiteVersionsController < ApplicationController
   end
 
   def close_country_warning
-    session[:close_warning] = true
+    session[:close_country_warning] = true
     redirect_to previous_or_root_url(current_site_version)
   end
 
