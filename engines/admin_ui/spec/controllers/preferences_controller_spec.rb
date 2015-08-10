@@ -22,8 +22,14 @@ RSpec.describe AdminUi::PreferencesController, type: :controller do
     it 'updates existent spree configurations keys' do
       Spree::Config[:currency] = 'AUD'
 
-      put :update, { currency: 'USD', something: 'nothing' }
+      put :update, preferences: { currency: 'USD' }
       expect(Spree::Config[:currency]).to eq('USD')
+      expect(flash[:success]).to eq('Preferences have been successfully updated!')
+    end
+
+    it 'does not updates invalid spree configs' do
+      put :update, preferences: { something: 'invalid' }
+      expect(flash[:error]).to eq('Preferences were not updated.')
     end
 
     it 'redirects back to preferences' do

@@ -5,12 +5,14 @@ module AdminUi
     end
 
     def update
-      preferences_params.each do |name, value|
-        next unless Spree::Config.has_preference? name
-        Spree::Config[name] = value
+      begin
+        preferences_params.each { |name, value| Spree::Config[name] = value }
+        flash[:success] = 'Preferences have been successfully updated!'
+      rescue NoMethodError
+        flash[:error] = 'Preferences were not updated.'
       end
 
-      redirect_to admin_ui.preferences_path, flash: { success: 'Preferences have been successfully updated!' }
+      redirect_to admin_ui.preferences_path
     end
 
     private
