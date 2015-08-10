@@ -54,6 +54,8 @@ module Concerns
         code:  automatic_discount_code.to_s
       )
 
+      session[:email_reminder_promo] = 'scheduled_for_delivery' if skip_discount_code_reminder?
+
       # The promo code might not apply for a multitude of reasons, though
       # usually it's a rule (Spree::Promotion::Rules) on the promocode.
       #
@@ -64,9 +66,8 @@ module Concerns
         fire_event('spree.checkout.coupon_code_added')
         session.delete(auto_apply_discount_retry_key)
         session[:auto_applied_promo_code] = automatic_discount_code
-
-        session[:email_reminder_promo] = 'scheduled_for_delivery' if skip_discount_code_reminder?
       end
+
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
     end
