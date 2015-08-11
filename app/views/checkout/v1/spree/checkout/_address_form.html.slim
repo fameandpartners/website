@@ -34,11 +34,6 @@ ruby:
     = form.label :email, with_required_mark(t(:email))
     = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
 
-  - if Spree::Config[:company]
-    .col-md-12.form-group
-      = form.label :company, t(:company)
-      = form.text_field :company, class: 'form-control form-control-md'
-
 .row
   .col-md-12.form-group
     = form.label :address1, with_required_mark(t(:street_address))
