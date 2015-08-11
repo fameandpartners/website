@@ -14,11 +14,12 @@ p Where should we send your receipt and tracking details?
       label
         | Email address *
       = text_field_tag 'email', nil, class: 'form-control form-control-md'
-      label
-        | Password *
-      = text_field_tag 'password', nil, class: 'form-control form-control-md', type: 'password'
-      br
-      = link_to 'log in', login_path, class: 'btn btn-block btn-black btn-md open-login-popup'
+      label Password *
+      .input-group
+        = text_field_tag 'password', nil, class: 'form-control form-control-md', type: 'password'
+        span.input-group-btn
+          = link_to 'log in', login_path, class: 'btn btn-block btn-black btn-md open-login-popup'
+
     .col-md-6.form-group
       ' or
       label.invisible Facebook
