@@ -60,7 +60,7 @@ $checkout-form-border-color-active:   #000000;
 
       .support-telephone {
         @extend .icon;
-        @extend .icon-guarantee;
+        @extend .icon-square; // TODO - Replace with correct icon.
       }
     }
   }
