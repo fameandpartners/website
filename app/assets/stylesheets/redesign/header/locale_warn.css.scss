@@ -109,4 +109,9 @@ $color-white: #FFF;
   .mega-menu {
     top: $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
+
+  // Account drop-down
+  .account {
+    top: -83px;
+  }
 }
