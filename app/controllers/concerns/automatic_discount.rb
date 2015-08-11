@@ -31,6 +31,10 @@ module Concerns
       :auto_apply_promo
     end
 
+    private def skip_discount_code_reminder?
+      params[:skip_reminder] == 'true'
+    end
+
     def automatic_discount_code
       @automatic_discount_code ||= begin
         if params[auto_apply_discount_param_key].present?
@@ -50,6 +54,8 @@ module Concerns
         code:  automatic_discount_code.to_s
       )
 
+      session[:email_reminder_promo] = 'scheduled_for_delivery' if skip_discount_code_reminder?
+
       # The promo code might not apply for a multitude of reasons, though
       # usually it's a rule (Spree::Promotion::Rules) on the promocode.
       #
@@ -61,6 +67,7 @@ module Concerns
         session.delete(auto_apply_discount_retry_key)
         session[:auto_applied_promo_code] = automatic_discount_code
       end
+
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
     end
