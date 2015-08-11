@@ -60,7 +60,11 @@
 
     .row
       .col-md-6.form-group
-        = form.submit 'Next', data: { loading: 'Saving...' }, class: 'btn btn-block btn-md btn-black'
+        button.btn.btn-block.btn-md.btn-black data-loading='Saving...'
+          / TODO - Replace with correct Icon
+          i.icon.icon-square
+          ' Pay Securely
+
 
 - else
   h2.checkout-section-title  Billing and shipping Address
