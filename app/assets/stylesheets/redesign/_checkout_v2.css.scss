@@ -18,6 +18,9 @@
 $checkout-form-border-color-inactive: #acacac;
 $checkout-form-border-color-active:   #000000;
 
+$checkout-breadcrumbs-color-inactive: #000000;
+$checkout-info-peach: #ddb099;
+
 
 .checkout.page-content {
   .checkout-masthead {
@@ -63,6 +66,24 @@ $checkout-form-border-color-active:   #000000;
         @extend .icon-square; // TODO - Replace with correct icon.
       }
     }
+  }
+
+  .checkout-breadcrumbs {
+    .breadcrumb {
+      padding: 0;
+      background-color: transparent;
+      li + li:before {
+        content: '> '; // Override
+        color: $checkout-breadcrumbs-color-inactive;
+      }
+      li.active {
+        color: $checkout-info-peach;
+      }
+    }
+  }
+
+  .help-block {
+    color: $checkout-info-peach;
   }
 
   .checkout-step {
