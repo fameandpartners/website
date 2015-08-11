@@ -202,10 +202,10 @@ FameAndPartners::Application.routes.draw do
     # eo account settings
 
     resources :product_reservations, only: [:create]
-  end
 
-  # Old Blog Redirection (30/06/2015)
-  get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+    # Old Blog Redirection (30/06/2015)
+    get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+  end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     # Static pages
