@@ -26,6 +26,17 @@ class ApplicationController < ActionController::Base
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
 
+
+  helper_method :analytics_label,
+                :current_user_moodboard,
+                :current_wished_product_ids,
+                :custom_dresses_path,
+                :default_meta_description,
+                :default_seo_title,
+                :get_user_type,
+                :serialize_user,
+                :serialized_current_user
+
   def count_competition_participants
     cpt = params[:cpt]
     session[:cpts] ||= []
@@ -135,19 +146,19 @@ class ApplicationController < ActionController::Base
     @description = args.flatten.join(' | ')
   end
 
-  helper_method def default_seo_title
+  def default_seo_title
     Preferences::Titles.new(current_site_version).default_seo_title
   end
 
-  helper_method def default_meta_description
+  def default_meta_description
     Spree::Config[:default_meta_description]
   end
 
-  helper_method def get_user_type
+  def get_user_type
     spree_user_signed_in? ? 'Member' : 'Guest'
   end
 
-  helper_method def analytics_label(label_type, *args)
+  def analytics_label(label_type, *args)
     case label_type.to_sym
     when :product
       product = args.first
@@ -196,7 +207,7 @@ class ApplicationController < ActionController::Base
     super
   end
 
-  helper_method def current_wished_product_ids
+  def current_wished_product_ids
     if @current_wished_product_ids
       @current_wished_product_ids
     else
@@ -205,7 +216,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method def serialized_current_user
+  def serialized_current_user
     if spree_user_signed_in?
       serialize_user(spree_current_user)
     else
@@ -213,7 +224,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method def serialize_user(user)
+  def serialize_user(user)
     {
       fullname: user.fullname,
       first_name: user.first_name,
@@ -247,7 +258,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method def custom_dresses_path
+  def custom_dresses_path
     main_app.personalization_path
   end
 
@@ -269,7 +280,7 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
 
-  helper_method def current_user_moodboard
+  def current_user_moodboard
     @user_moodboard ||= UserMoodboard::BaseResource.new(user: current_spree_user).read
   end
 
