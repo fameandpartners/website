@@ -3,8 +3,7 @@ module Spree
     module GeneralSettingsControllerExtensions
       def edit
         super
-        @site_versions = SiteVersion.all
-        @preferences_general += [:homepage_title]
+        @preferences_general -= [:default_seo_title]
       end
     end
   end
