@@ -151,7 +151,7 @@ Spree::User.class_eval do
 
   def send_welcome_email
     tracker = Marketing::CustomerIOEventTracker.new
-    tracker.identify_user(self, SiteVersion.find(self.site_version_id))
+    tracker.identify_user(self, self.site_version_id.present? ? SiteVersion.find(self.site_version_id) : nil)
     tracker.track(
       self,
       'account_created',
