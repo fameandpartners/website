@@ -246,6 +246,7 @@ GEM
       tzinfo
     byebug (4.0.5)
       columnize (= 0.9.0)
+    callsite (0.0.11)
     cancan (1.6.8)
     capistrano (2.15.4)
       highline
@@ -445,6 +446,7 @@ GEM
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     geoip (1.5.0)
+    git-version-bump (0.15.1)
     google-api-client (0.7.1)
       addressable (>= 2.3.2)
       autoparse (>= 0.3.3)
@@ -509,6 +511,10 @@ GEM
       treetop (~> 1.4.8)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    meta_request (0.3.4)
+      callsite (~> 0.0, >= 0.0.11)
+      rack-contrib (~> 1.1)
+      railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
     mime-types (1.25.1)
     money (5.1.1)
@@ -593,6 +599,9 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-contrib (1.4.0)
+      git-version-bump (~> 0.15)
+      rack (~> 1.4)
     rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
@@ -846,6 +855,7 @@ DEPENDENCIES
   letter_opener (= 0.0.2)!
   libv8 (~> 3.16)
   mail_view!
+  meta_request
   net-ssh (~> 2.7.0)
   newrelic_rpm
   oink

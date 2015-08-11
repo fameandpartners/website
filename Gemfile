@@ -137,6 +137,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'thin'
+  gem 'meta_request'
 
 end
 
