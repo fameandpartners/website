@@ -1,9 +1,13 @@
 class Users::BaseController < ApplicationController
-  before_filter :authenticate_spree_user!
+  before_filter :authenticate_spree_user!, :except => :check_email_exist
 
   layout 'redesign/application'
 
   respond_to :js, :html
+
+  def check_email_exist
+    render json: { email: params[:spree_user][:email], success: Spree::User.where(email: params[:spree_user][:email]).present? }
+  end
 
   private
 

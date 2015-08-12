@@ -183,6 +183,8 @@ FameAndPartners::Application.routes.draw do
     get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
     get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
+    get 'base/check_email_exist' => 'users/base#check_email_exist'
+
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member

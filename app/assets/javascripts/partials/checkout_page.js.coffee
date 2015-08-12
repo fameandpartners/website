@@ -9,6 +9,7 @@ page.initCheckoutEditPage = () ->
   page = {
     ajax_callbacks: {}
     init: () ->
+
       $('.close').on('click', ->
         $('.auth-alert').hide()
       )
@@ -28,7 +29,9 @@ page.initCheckoutEditPage = () ->
       $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
 
       $(document).on('change',  '#terms_and_conditions', page.updatePayButtonAvailability)
-      $(document).on('click',   '.open-login-popup', page.openLoginPopup)
+
+      #setUpAjaxLogin will take care of this
+      #$(document).on('click',   '.open-login-popup', page.openLoginPopup)
 
       $(document).on('click',   '.cvv-popup-toggle', page.toggleCVVCodePopup)
 
@@ -54,8 +57,6 @@ page.initCheckoutEditPage = () ->
       if app.debug || app.env == 'development'
         if $('.place-order button').length == 0
           console.log('WARRRRRGHNING! - credit card handlers have invalid selectors. cc payment will not work, probably')
-
-
 
     # Disable the button and set a helpful message
     safeSubmitButton: (button) ->
@@ -343,3 +344,80 @@ page.initCheckoutEditPage = () ->
   page.init()
   window.checkout_page = page
   page
+
+
+
+setUpAjaxCheckEmailExist = =>
+  email = $('#email')
+  $(document).ready () ->
+    email.keyup()
+
+  email.on 'click change' , (e) ->
+    email.keyup()
+
+  globalTimeout = null
+  email.keyup (e) ->
+    if globalTimeout != null
+      clearTimeout globalTimeout
+    globalTimeout = setTimeout((->
+      globalTimeout = null
+      checkEmailAjax(e)
+    ), 500)
+
+setUpAjaxLogin = =>
+  email = $('#email')
+  setUpAjaxCheckEmailExist()
+  $("#login").click (e) ->
+    e.preventDefault()
+    formData = {
+      spree_user: {
+        email: email.val()
+        password: $("#password").val()
+      }
+    }
+    $.ajax(
+      url: urlWithSitePrefix("/spree_user/sign_in")
+      type: 'POST'
+      dataType: 'json'
+      data: $.param(formData)
+    ).done((data,state) =>
+      if data && !data.error && state == 'success'
+        $(".checkout-step:first p:first").append("<p><strong>Currently logged in as "+email.val()+"</strong></p>")
+        $(".checkout-step:first .row:first").hide()
+        $(".auth-alert").hide()
+      else
+        $(".auth-alert").show()
+    )
+
+checkEmailAjax = (e) =>
+  e.preventDefault()
+  email = $('#email')
+  sendRequestCheckEmailAjax()
+    .done( (data, state) =>
+      email = $("#email")
+      if data.success == true && data.email == email.val()
+        $('#password').parent().removeClass("hidden")
+        $('#passwordLabel').removeClass("hidden")
+
+      else if data.email != $("#email").val()
+        # this is earlier ajax request, do nothing
+
+      else if data.success == false && data.email == email.val()
+        $('#password').parent().addClass("hidden")
+        $('#passwordLabel').addClass("hidden")
+    )
+
+sendRequestCheckEmailAjax = () ->
+  formData = {
+    spree_user: {
+      email: $('#email').val()
+    }
+  }
+  $.ajax(
+    url: urlWithSitePrefix("/base/check_email_exist")
+    type: 'GET'
+    dataType: 'json'
+    data: $.param(formData)
+  )
+
+setUpAjaxLogin()
