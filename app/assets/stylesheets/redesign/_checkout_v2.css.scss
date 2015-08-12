@@ -52,18 +52,16 @@ $checkout-info-peach: #ddb099;
         line-height: 60px;
       }
 
-      .live-chat {
+      .live-chat, .support-telephone {
         @extend .icon;
-        @extend .icon-comment;
+        // TODO - Fix size
       }
+
+      .support-telephone { @extend .icon-phone-chat; }
+      .live-chat {  @extend .icon-chat-bubbles;  }
 
       li + li {
         border-left: 1px solid #000000;
-      }
-
-      .support-telephone {
-        @extend .icon;
-        @extend .icon-square; // TODO - Replace with correct icon.
       }
     }
   }
