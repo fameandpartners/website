@@ -32,7 +32,10 @@ class Products::CollectionsController < Products::BaseController
   attr_reader :page
   helper_method :page
 
-  before_filter :load_page, :set_collection_resource, :set_collection_seo_meta_data
+  before_filter :redirect_undefined,
+                :load_page,
+                :set_collection_resource,
+                :set_collection_seo_meta_data
 
   def show
     @filter = Products::CollectionFilter.read
@@ -48,6 +51,12 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private
+
+    def redirect_undefined
+      if params[:permalink] =~ /undefined\Z/
+        redirect_to '/undefined', status: :moved_permanently
+      end
+    end
 
     def load_page
       current_path = LocalizeUrlService.remove_version_from_url(request.path)
@@ -133,8 +142,6 @@ class Products::CollectionsController < Products::BaseController
         end
       end
 
-      if permalink =~ /undefined\Z/
-        redirect_to '/undefined'
       end
 
       # Didn't find any collection associated with the permalink
