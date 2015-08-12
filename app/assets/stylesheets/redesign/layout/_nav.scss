@@ -101,6 +101,8 @@
 .responsive-nav-btn {
   margin: 5px 0;
   min-width: 265px;
+  &:hover { color: inherit;}
+  &.btn-black:hover { color: #fff;}
 }
 
 // @end Responsive nav
