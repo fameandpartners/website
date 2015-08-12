@@ -27,10 +27,11 @@ div data-hook="signup"
 
     .form-group data-hook="signup_below_password_fields"
       = f.submit 'Create an account', class: 'btn btn-black'
-
-    .row
-      .col-sm-5
-        p.text-center Already have an account?
-        = link_to 'Sign in', spree.login_path, class: 'btn btn-block btn-black btn-md low-btn'
+    
+    .form-group
+      .row
+        .col-sm-5.text-center
+          p Already have an account?
+          = link_to 'Sign in', spree.login_path, class: 'text-uppercase-xs'
 
 div data-hook="login_extras"

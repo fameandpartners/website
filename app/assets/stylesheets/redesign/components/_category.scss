@@ -1,0 +1,25 @@
+// Category
+.category--item {
+  padding-bottom: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  &:hover {
+    opacity: 0.8;
+  }
+  a {
+    color: $gray-dark;
+  }
+  .details {
+    margin: 15px 0 30px;
+    font-size: 0.9em;
+    font-weight: 500;
+    span {
+      display: block;
+    }
+  }
+  .express-delivery {
+    position: absolute;
+    top: 0;
+    left: 15px;
+  }
+}

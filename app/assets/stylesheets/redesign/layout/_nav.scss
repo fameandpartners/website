@@ -1,0 +1,107 @@
+// Responsive nav 
+.responsive-nav-wrapper { // #sideMenu
+  overflow: auto;
+  height: 100%;
+  font-size: 15px;
+  background-color: #f8f8f8;
+  position: fixed;
+  top: 0;
+  left: -90%;
+  width: 90%;
+  z-index: $sidebar-zindex;
+  transition: left 0.5s;
+
+  &.is-open {
+    left: 0;
+  }
+
+  a {
+    color: black;
+    color: $text-color;
+    font-weight: 500;
+  }
+
+  #close {
+    font-size: 35px;
+    float: right;
+    margin-right: 10px;
+    margin-top:-8px;
+    img {
+      width: 30px;
+      opacity: 0.7;
+      margin-right: 10px;
+    }
+  }
+}
+
+.responsive-nav-header {
+  background-color: #e7e7e7;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.responsive-nav-title {
+  font-size: 19px;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 12px 0 0 15px;
+  float: left;
+}
+
+.responsive-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.responsive-nav-link {
+  position: relative;
+  display: block;
+  text-transform: uppercase;
+  padding: 15px;
+  &:after {
+    @extend .fa;
+    @extend .fa-angle-down:before;
+    position: absolute;
+    right: 25px;
+    font-size: 1.9em;
+    line-height: 20px;
+  }
+  &.clicked:after {
+    @extend .fa-angle-up:before;
+  }
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+}
+
+.responsive-nav-dropdown {
+  background-color: #f8f8f8;
+  padding: 0;
+  margin: 0;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    display: block;
+    padding: 5px 20px;
+    font-size: $font-size-base;
+    &:hover, &:focus {
+      background-color: #f5f5f5;
+      text-decoration: none;
+    }
+  }
+}
+
+.responsive-nav-btn {
+  margin: 5px 0;
+  min-width: 265px;
+}
+
+// @end Responsive nav
+// -----------------

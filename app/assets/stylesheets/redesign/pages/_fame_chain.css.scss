@@ -16,7 +16,7 @@
 		margin-left: 0;
 		margin-right: 0;
 
-		@media screen and (max-width: 768px) {
+		@media screen and (max-width: $screen-tablet) {
 			margin-left: 0;
 			margin-right: 0;
 		}
@@ -33,7 +33,7 @@
 			font-family: forum;
 			font-size: 8rem;
 
-			@media screen and (max-width: 768px) {
+			@media screen and (max-width: $screen-tablet) {
 				font-size: 5rem;
 				line-height: 5.5rem
  			}
@@ -44,7 +44,7 @@
 			color: white;
 			text-transform: uppercase;
 
-			@media screen and (max-width: 768px) {
+			@media screen and (max-width: $screen-tablet) {
 				padding-left: 1rem;
 				padding-right: 1rem;
 			}
@@ -58,7 +58,7 @@
 	form {
 		padding-top: 4rem;
 
-		@media screen and (max-width: 768px) {
+		@media screen and (max-width: $screen-tablet) {
 			input {
 
 			}
@@ -68,7 +68,7 @@
 	.form {
 		background-color: #f6e2d5;
 
-		@media screen and (max-width: 768px) {
+		@media screen and (max-width: $screen-tablet) {
 
 			.row {
 				margin-right: 0;
@@ -84,7 +84,7 @@
 				color: black;
 				padding-right: 1rem;
 
-				@media screen and (max-width: 768px) {
+				@media screen and (max-width: $screen-tablet) {
 					font-size: 1.4rem;
 				}
 			}
@@ -92,14 +92,14 @@
 			input {
 				width: 70%;
 
-				@media screen and (max-width: 768px) {
+				@media screen and (max-width: $screen-tablet) {
 					width: auto;
 				}
 			}
 		}
 
 		.submit-button{
-			@media screen and (max-width: 768px) {
+			@media screen and (max-width: $screen-tablet) {
 				padding-right:0;
 			}
 		}
@@ -114,7 +114,7 @@
 				color: black;
 				padding-right: 1rem;
 
-				@media screen and (max-width: 768px) {
+				@media screen and (max-width: $screen-tablet) {
 					width: 110px;
 					text-align: right;
 				}
@@ -123,7 +123,7 @@
 			input {
 				width: 200px;
 
-				@media screen and (max-width: 768px) {
+				@media screen and (max-width: $screen-tablet) {
 					width: auto;
 				}
 			}
@@ -135,37 +135,10 @@
 			padding: 0 15px;
 			margin-bottom: 5rem;
 
-			@media screen and (max-width: 768px) {
+			@media screen and (max-width: $screen-tablet) {
 				width: 100%;
 			}
 		}
-	}
-}
-
-.fame {
-	background-color: #f6e1d5;
-
-	&:after {
-		background-color: #f6e1d5;
-	}
-
-	.page-title--details {
-		padding-top: 20px;
-		padding-bottom: 20px;
-
-		@media screen and (max-width: 768px) {
-			img {
-				width: 70%;
-				height: auto;
-			}
- 		}
-	}
-
-	p {
-		padding-top: 15px;
-		color: black;
-		text-transform: uppercase;
-		font-weight: 600;
 	}
 }
 

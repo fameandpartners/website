@@ -4,14 +4,14 @@
 	padding-left: 35px;
 	padding-top: 0;
 
-	@media(max-width: 768px){
+	@media(max-width: $screen-tablet){
 		padding-top: 0;
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
 
 	.row {
-		@media(max-width: 768px){
+		@media(max-width: $screen-tablet){
 			max-width: 100%;
 			margin-left: 0;
 			margin-right: 0;
@@ -32,7 +32,7 @@
 			font-size: 1.2rem;
 		}
 	}
-	@media(max-width: 768px){
+	@media(max-width: $screen-tablet){
 		.footer-nav {
 			text-align: center;
 
@@ -57,7 +57,7 @@
 		float: right;
 		margin-bottom: 0;
 
-		@media(max-width: 768px){
+		@media(max-width: $screen-tablet){
 			float: none;
 		}
 	}
@@ -77,7 +77,7 @@
 		width: 46px;
 		margin-left: 0;
 
-		@media(max-width: 768px){
+		@media(max-width: $screen-tablet){
 			margin-left: auto;
 			margin-right: auto;
 		}
@@ -123,7 +123,7 @@
 		margin-bottom: 2rem;
 		clear: both;
 
-		@media(max-width: 768px){
+		@media(max-width: $screen-tablet){
 			max-width: 100%;
 			margin-left: 0;
 			margin-right: 0;
@@ -137,7 +137,7 @@
 }
 
 .copyright {
-	@media(min-width: 768px)and(max-width:990px){
+	@media(min-width: $screen-tablet)and(max-width:990px){
 		p {
 			float:right;
 		}

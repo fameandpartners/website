@@ -39,6 +39,7 @@
 	}
 }
 
+
 .fashionistacomp{
 	h1{
 		text-transform: uppercase;
@@ -982,9 +983,23 @@ body.competition_entries {
 	.last{
 		margin-right: 0;
 	}
+}
 
+.landing-page {
+  .row.content-box {
+    margin:20px 0 20px 0;
 
+    .content {
+      height:381px;
+      border:2px solid black;
+    }
 
+    img {
+       width:100%;
+       margin-right:20px;
+       border:2px solid white;
+    }
+  }
 }
 
 .landing-page.plus-size{

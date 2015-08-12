@@ -1,54 +1,22 @@
-.login-header, .sign-up-header, .password-new-header {
+// .login.new, .sign-up.new, .password-new {
 
-  h1 {
-    text-transform: uppercase;
-    font-family: forum;
-    font-size: 7rem;
-  }
-}
+//   .low-btn {
+//     font-size: 1rem;
+//     line-height: 1rem;
+//     padding: 0;
+//     background-color: white;
+//     color: black;
+//   }
 
-.login-header.page-title:after, .login-header, .sign-up-header.page-title:after, .sign-up-header, .password-new-header.page-title:after, .password-new-header {
-  background-color: #eeddf0;
-}
+//   .form-control {
+//     border-color: black;
+//   }
 
-.facebook-button {
-  margin-top: 3rem;
-}
+//   .extra-margin {
+//     margin-top: 6px;
+//   }
 
-.btn-facebook.btn-md {
-  @media(max-width: 768px) {
-    font-size: 12px !important;
-    padding-left: 50px;
-  }
-
-  &:hover {
-    background-color: #627AAD;
-  }
-}
-
-.login.new, .sign-up.new, .password-new {
-
-  .low-btn {
-    font-size: 1rem;
-    line-height: 1rem;
-    padding: 0;
-    background-color: white;
-    color: black;
-  }
-
-  label {
-    color: black;
-  }
-
-  .form-control {
-    border-color: black;
-  }
-
-  .extra-margin {
-    margin-top: 6px;
-  }
-
-  .col-md-12.form-group {
-    padding-right: 0;
-  }
-}
+//   .col-md-12.form-group {
+//     padding-right: 0;
+//   }
+// }

@@ -10,7 +10,7 @@
   padding-bottom: 0;
 }
 
-.col-md-4{
+.col-md-4 {
   height: 100%;
 }
 
@@ -148,7 +148,7 @@
     font-size: 8rem;
     margin-top: 45px;
 
-    @media(max-width: 480px){
+    @media(max-width: $screen-phone){
       font-size: 6rem;
       margin-top: 10px;
     }
@@ -431,7 +431,7 @@
   width: 100%;
   margin-bottom: 0px;
 
-  @media(max-width: 768px){
+  @media(max-width: $screen-tablet){
     font-size: 20px;
     top: -30px;
   }

@@ -66,39 +66,21 @@
 	}
 }
 
-.why-us-title{
-	text-transform: uppercase;
-	font-family: forum;
-	font-size: 7rem
-}
-
-.why-us-header.page-title:after {
-	background-color: white;
-	text-transform: uppercase;
-}
-
-.why-us-header{
-	.page-title--details {
-		height: 240px;
-		padding-top: 6rem;
-	}
-}
-
 .why-us-img {
 	height: 399px;
 	overflow: hidden;
 
 	img {
-        min-height: 100%;
-        min-width: 1024px;
-        width: 100%;
-        height: auto;
-        position: relative;
-        top: 0;
-        left: 0;
-      }
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    }
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: $screen-tablet) {
     img{
       left: -30%;
     }

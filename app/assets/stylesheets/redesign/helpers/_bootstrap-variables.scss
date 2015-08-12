@@ -1,3 +1,45 @@
+// Colors
+$gray-light-bg: #f5f5f5;
+$peach-bg: #f6e2d5;
+$pink-bg: #eeddf0;
+// @end Colors
+
+// Fonts
+$font-family-secondary: 'brandon-grotesque', sans-serif;
+$font-brand-serif: Forum, serif;
+// @end Fonts
+
+// Form
+$form-control-height-md: 45px;
+// @end Form
+
+// Page title
+$page-title-default-bg: $pink-bg;
+$page-title-peach-bg:   $peach-bg;
+// @end Page title
+// -----------------
+
+// Select2
+$select2-default-bg: $pink-bg;
+$select2-default-color: $text-color;
+$select2-default-arrow-color: #fff;
+$select2-default-option-bg: #f5f5f5;
+$select2-default-option-highlighted-bg: #fff;
+$select2-default-option-highlighted-color: #fff;
+
+$select2-blue-bg: #023648;
+$select2-blue-option-bg: #f5f5f5;
+$select2-blue-color: #fff;
+$select2-blue-arrow-color: #fff;
+$select2-blue-option-bg: #023648;
+$select2-blue-option-highlighted-bg: #fff;
+$select2-blue-option-highlighted-color: $text-color;
+
+// @end Select2
+// -----------------
+
+
+
 // Override Bootstrap variables here (defaults from bootstrap-sass v3.3.3):
 
 //
@@ -28,7 +70,7 @@ $fp-lightest-grey:		#f4f4f4;
 $fp-light-grey: 		#EEEEEE;
 $fp-grey-text:			#919191;
 $fp-title-grey:			#333333;
-$fp-form-underline:		#AAAAAA;
+$fp-form-underline:		#000;
 $fp-footer-light-grey: 	rgb(210, 210, 210);
 $p-text-color:			#444444;
 $fp-footer-bg:			#F7F7F9;
@@ -68,7 +110,7 @@ $large-section-padding: 120px;
 $fp-locates-height:    30px;
 $fp-menu-height:       70px;
 $fp-menu-padding-top:  20px;
-$fp-menu-size: ($fp-menu-height + $fp-locates-height);
+$fp-menu-height-full: ($fp-menu-height + $fp-locates-height);
 $fp-menu-zindex: 2000;
 $fp-menu-link-hover: #355e6d;
 //== Scaffolding
@@ -102,7 +144,8 @@ $font-size-base:          16px;
 $font-size-large:         ceil(($font-size-base * 1.25)); // ~18px
 $font-size-small:         ceil(($font-size-base * 0.85)); // ~12px
 
-$font-size-h1:            floor(($font-size-base * 2.6)); // ~36px
+// $font-size-h1:            floor(($font-size-base * 2.6)); // ~36px
+$font-size-h1:            48px;
 $font-size-h2:            floor(($font-size-base * 2.15)); // ~30px
 $font-size-h3:            ceil(($font-size-base * 1.7)); // ~24px
 $font-size-h4:            ceil(($font-size-base * 1.25)); // ~18px
@@ -118,7 +161,8 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)); // ~20px
 $headings-font-family:    "brandon-grotesque", sans-serif;
 $headings-font-weight:    500;
 $headings-line-height:    1.1;
-$headings-color:          black; //was inherit
+// $headings-color:          black; //was inherit
+$headings-color:          inherit; //was inherit
 
 //== Iconography
 //
@@ -229,7 +273,7 @@ $btn-link-disabled-color:        $gray-light;
 //##
 
 //** `<input>` background color
-$input-bg:                       #fff;
+$input-bg:                       transparent;
 //** `<input disabled>` background color
 $input-bg-disabled:              $gray-lighter;
 
@@ -254,19 +298,22 @@ $input-border-focus:             #66afe9;
 $input-color-placeholder:        $fp-title-grey;
 
 //** Default `.form-control` height
-$input-height-base:              ($line-height-computed + ($padding-base-vertical * 2) + 2);
+// $input-height-base:              ($line-height-computed + ($padding-base-vertical * 2) + 2);
+$input-height-base:              $form-control-height-md;
 //** Large `.form-control` height
 $input-height-large:             (ceil($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2);
 //** Small `.form-control` height
 $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2);
 
+$form-group-margin-bottom: 30px;
+
 $legend-color:                   $gray-dark;
 $legend-border-color:            #e5e5e5;
 
 //** Background color for textual input addons
-$input-group-addon-bg:           $gray-lighter;
+$input-group-addon-bg:           transparent;
 //** Border color for textual input addons
-$input-group-addon-border-color: $input-border;
+$input-group-addon-border-color: transparent;
 
 //** Disabled cursor for form controls and buttons.
 $cursor-disabled:                not-allowed;

@@ -1,20 +1,20 @@
 - signup_params = params.slice(:cl).merge(site_version: current_site_version.code)
 
-.page-title.default.sign-up-header
+.page-title
   .container
     .page-title--details
-      h1.no-padding-bottom Create an Account
+      h1 Create an Account
 
 .page-content.registration.new.sign-up
   .container.relative
     .row
       .col-md-8
-        h2.checkout-section-title Create an account to save your dress to a Moodboard to discover your Style Profile, share with friends and to manage your profile. Its easy just enter some basic details!
+        h2.form-tip-box Create an account to save your dress to a Moodboard to discover your Style Profile, share with friends and to manage your profile. Its easy just enter some basic details!
         = link_to fb_auth_path(signup_params), class: 'btn btn-facebook btn-block fb-login' do
 
           span Sign up with facebook
 
-        h2.decorated.text-center
+        h2.decorated
           span or
 
         = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|

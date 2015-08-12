@@ -1,103 +1,41 @@
 label {
   font-weight: normal;
+  color: #000;
   font-family: $headings-font-family;
   text-transform: uppercase;
   font-size: 0.9em;
-  color: $gray-light;
 }
-
-// styleguide 
-.form-control {
-  text-align: center;
-  border: 0;
-  box-shadow: 0;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  border-bottom: 1px solid $gray-lightish;
-  text-transform: uppercase;
-  font-size: 18px;
-  padding: 30px;
-}
-
-.form-control:focus {
-  border-color: #000;
-  outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.has-success .form-control {
-  border-color: #20C580;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-}
-
-.has-success .help-block, .has-success .control-label, .has-success .radio, .has-success .checkbox, .has-success .radio-inline, .has-success .checkbox-inline, .has-success.radio label, .has-success.checkbox label, .has-success.radio-inline label, .has-success.checkbox-inline label {
-  color: #20C580;
-}
-
-.has-success .form-control:focus {
-  border-color: darken(#20C580, 10%);
-  box-shadow: none;
-  -webkit-box-shadow: none;
-}
-
-.has-warning .form-control {
-  border-color: #FFBF4B;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.has-warning .form-control:focus {
-  border-color: darken(#FFBF4B, 10%);
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.has-error .form-control {
-  border-color: #FF6A67;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.has-error .form-control:focus {
-  border-color: darken(#FF6A67, 10%);
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-// @end styleguide
-// -----------------
 
 // Form controls
-// - dirty fix for that -> http://note.io/1EfCAKk
 .form-control {
-  height: 61px;
-  padding-top: 18px;
-  padding-bottom: 18px;
-}
-// - field with height 45px
-.form-control-md {
+  border-width: 0 0 1px 0;
+  box-shadow: none;
   padding: 10px;
-  height: $form-control-height-md;
+  
+  &:focus {
+    border-color: #000;
+    outline: 0;
+    box-shadow: none;
+  }
 }
-.form-control-transparent {
-  background: none;
-}
-// - chosen select
+
+// - Chosen control
 .chosen-container-single.form-control {
   border: 0;
   padding: 0;
   min-width: 100%;
   .chosen-single {
     @extend .form-control;
-    border-radius: 0;
+    border-width: 1px;
   }
-}
-.chosen-container-single.form-control-md .chosen-single {
-  @extend .form-control-md;
-}
+} 
 // @end Form controls
 // ------------------
+
+.input-group-addon {
+  padding: 0;
+  vertical-align: bottom;
+}
 
 // Checkbox right side
 .checkbox-gray-md {
@@ -174,15 +112,83 @@ label {
 // @end checkbox
 // ------------------
 
-// btn-group-radio extras
-.btn-group-radio input[type=radio]:checked + .btn label {
-  color: #fff;
-}
+// Form tip box
+.form-tip-box {
+  background-color: $peach-bg;
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: $form-group-margin-bottom;
+} 
+// @end Form tip box
+// -----------------
 
-.form-group {
-  margin-bottom: 30px;
-}
 
-.btn-group-radio > .btn > label.credit  {
-  padding: 0;
-}
+
+
+
+
+
+
+
+
+// styleguide 
+// .has-success .form-control {
+//   border-color: #20C580;
+//   box-shadow: none;
+// }
+
+// .has-success .help-block, 
+// .has-success .control-label, 
+// .has-success .radio, 
+// .has-success .checkbox, 
+// .has-success .radio-inline, 
+// .has-success .checkbox-inline, 
+// .has-success.radio label, 
+// .has-success.checkbox label, 
+// .has-success.radio-inline label, 
+// .has-success.checkbox-inline label {
+//   color: #20C580;
+// }
+
+// .has-success .form-control:focus {
+//   border-color: darken(#20C580, 10%);
+//   box-shadow: none;
+// }
+
+// .has-warning .form-control {
+//   border-color: #FFBF4B;
+//   box-shadow: none;
+// }
+
+// .has-warning .form-control:focus {
+//   border-color: darken(#FFBF4B, 10%);
+//   box-shadow: none;
+// }
+
+// .has-error .form-control {
+//   border-color: #FF6A67;
+//   box-shadow: none;
+// }
+
+// .has-error .form-control:focus {
+//   border-color: darken(#FF6A67, 10%);
+//   box-shadow: none;
+// }
+
+// .has-error {
+//   .help-inline {
+//     color: #f2dede;
+//   }
+// }
+
+// .has-warning {
+//   .help-inline {
+//     color: #F2DDD0;
+//   }
+// }
+
+
+
+// @end styleguide
+// -----------------

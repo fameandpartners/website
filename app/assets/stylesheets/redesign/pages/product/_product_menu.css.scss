@@ -11,7 +11,7 @@
   height: 100%;
   // margin-bottom:20px;
 
-  @media(max-width: 768px){
+  @media(max-width: $screen-tablet){
     right:-130%;
     max-width: 100%;
   }

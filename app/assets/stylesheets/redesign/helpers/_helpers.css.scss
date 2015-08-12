@@ -17,6 +17,14 @@
 .text-light {
   font-weight: 300;
 }
+.text-uppercase-xs {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+a.text-uppercase-xs {
+  color: $text-color;
+}
 // @end Text helpers
 // -----------------
 
@@ -79,24 +87,88 @@
 .decorated {
   overflow: hidden;
   text-align: center;
-}
-.decorated > span {
+  > span {
     position: relative;
     display: inline-block;
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      border-bottom: 2px solid;
+      width: 591px; /* half of limiter*/
+      margin: 0 20px;
+    }
+    &:before { right: 100%;}
+    &:after { left: 100%;}
+  }
 }
-.decorated > span:before, .decorated > span:after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  border-bottom: 2px solid;
-  width: 591px; /* half of limiter*/
-  margin: 0 20px;
-}
-.decorated > span:before{
-  right: 100%;
-}
-.decorated > span:after{
-  left: 100%;
-}
+
 // @end Title with line
+// -----------------
+
+// Colors
+.pink {
+  background-color: #f6e1d5;
+}
+.text-pink { 
+  color: #DBB8C7;
+}
+.brand-pink {
+  background-color:#eeddf0;
+}
+.pink-light {
+  background-color: #f8ece9;
+} 
+// @end Colors
+// -----------------
+
+// Styleguide
+.no-padding {
+  padding: 0px !important;
+}
+.text-white {
+  color: white;
+}
+.text-highlight {
+  color: $fp-highlight;
+}
+.max-width-100 {
+  max-width: 100%;
+}
+.height-100 {
+  height: 100%;
+}
+.invis {
+  left: -999em !important;
+}
+.vis {
+  left: 0px !important;
+}
+.no-padding-right {
+  padding-right: 0px;
+}
+.no-padding-bottom {
+  padding-bottom: 0px;
+}
+.relative {
+  position: relative;
+}
+.no-scroll {
+  position: fixed !important;
+}
+.mobile-show {
+  top: 0;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.link-grey {
+  color: $gray-light;
+} 
+.zopim {
+  @media(max-width: 990px){
+    display: none;
+  }
+}
+// @end Styleguide
 // -----------------

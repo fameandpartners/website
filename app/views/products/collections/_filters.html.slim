@@ -10,13 +10,10 @@
     .row.relative
       .col-md-3.hidden-sm.hidden-xs.hidden-xxs
         = select_tag :style, style_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'All Styles'
-        br
       .col-md-3.hidden-sm.hidden-xs.hidden-xxs
         = select_tag :bodyshape, shape_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'All Shapes'
-        br
       .col-md-3.hidden-sm.hidden-xs.hidden-xxs
         = select_tag :color, color_options, class: 'pink-select', prompt: t(:all_colors)
-        br
-      .col-md-3.col-xs-12.col-xxs-12.product-order
-        = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'
-        br
+      .col-md-3.col-xs-12
+        .select2-container--blue
+          = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By', data: {theme: 'blue'}

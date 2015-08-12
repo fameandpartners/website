@@ -6,7 +6,7 @@
       <% for j in [0..3] : %>
         <% option = @colors[i * 4 + j] %>
         <% if option: %>
-          <div class="col-md-6 col-xs-6 col-xxs-12">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <a href="#" class="color-option" data-id="<%= option.id %>">
               <span class="color-box color-<%= option.name %>"></span>
               <span class="color-name"><%= option.display %></span>              
@@ -28,7 +28,7 @@
         <% for j in [0..3] : %>
           <% option = @customColors[i * 4 + j] %>
           <% if option: %>
-            <div class="col-md-6 col-xs-6 col-xxs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <a href="#" class="color-option color-custom" data-custom="true" data-id="<%= option.id %>">
                 <span class="color-box color-<%= option.name %>"></span>
                 <span class="color-name">

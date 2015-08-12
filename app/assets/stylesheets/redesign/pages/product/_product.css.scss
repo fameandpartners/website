@@ -25,7 +25,7 @@
   }
 
   .secondary-actions .col-md-6:last-child {
-    @media(max-width: 480px){
+    @media(max-width: $screen-phone){
       padding-left: 0;
       margin-top: 15px;
     }
@@ -68,7 +68,7 @@
 			margin-top:1.333333em;
 		}
 
-  @media(max-width: 490px){
+  @media(max-width: $screen-phone){
 
     h2 {
       padding-top: 30px
@@ -77,7 +77,7 @@
 }
 
 .divider {
-  @media(max-width: 768px){
+  @media(max-width: $screen-tablet){
     margin-top: 15px;
     margin-bottom: 15px;
   }
@@ -129,13 +129,6 @@
 .price-sale {
 	font-weight:bold;
 	color:red;
-}
-
-.select2-container--default .select2-selection--single {
-	border-radius: 0 !important ;
-	width: 100%;
-	height: 4.45rem;
-	background-color: transparent;
 }
 
 .remove-selection {
@@ -230,7 +223,7 @@
 	width: 100%;
 	padding-right: 3.5rem;
 
-		@media(max-width: 768px){
+		@media(max-width: $screen-tablet){
 			padding-right: 3rem;
 			padding-left: 4rem;
 	 	}
@@ -238,7 +231,7 @@
 
 .secondary-actions .col-md-6:first-child {
 
-	@media(max-width: 768px){
+	@media(max-width: $screen-tablet){
 			padding-right: 0;
 	 	}
 }
@@ -252,7 +245,8 @@
     font-family: $font-family-secondary !important;
   }
 
-.vex.vex-theme-flat-attack .vex-content h6, span {
+// .vex.vex-theme-flat-attack .vex-content h6, span {
+.vex.vex-theme-flat-attack .vex-content h6 {
   text-transform: uppercase;
   font-weight: 500 !important;
   margin-bottom: 0;

@@ -1,4 +1,4 @@
-<div data-color-id="<%= (@product.color || {}).id %>" data-id="<%= @product.id %>" class="col-md-3 col-xs-6 col-xxs-12 category--item">
+<div data-color-id="<%= (@product.color || {}).id %>" data-id="<%= @product.id %>" class="col-md-3 col-sm-6 col-xs-12 category--item">
   <a href="<%= @product.collection_path %>">
     <img class="img-product img-responsive" src='<%= @product.images[0] %>' alt='<%= @product.name %>' data-hover='<%= @product.images[1] || '' %>'></>
   </a>

@@ -1,9 +1,13 @@
 h1 {
   letter-spacing: -1px;
   font-family: 'Forum', cursive;
-  text-transform:uppercase;
-  font-size: 48px;
+  text-transform: uppercase;
   padding-bottom: 40px;
+}
+
+h1.edit-title {
+  font-size: 60px;
+  margin-top: 25%;
 }
 
 h3 {
@@ -12,7 +16,6 @@ h3 {
 
 p {
 	font-weight: 500;
-	font-family: $font-family-secondary;
 }
 
 sup {

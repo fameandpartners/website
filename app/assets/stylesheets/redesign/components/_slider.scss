@@ -1,6 +1,6 @@
 // Slide
 #slides {
-  margin-top: $fp-menu-size;
+  margin-top: $fp-menu-height-full;
 }
 
 #slides {
@@ -75,7 +75,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: $screen-tablet) {
   #slides .product-image-slide {
     left: -35% !important;
   }

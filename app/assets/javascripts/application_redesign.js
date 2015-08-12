@@ -21,6 +21,7 @@
 //= require libs/superslides.js
 //= require libs/responsiveslides.min.js
 //= require libs/jquery.skippr.js
+//= require libs/select2.full.js
 
 //----------------
 // Styleguide code

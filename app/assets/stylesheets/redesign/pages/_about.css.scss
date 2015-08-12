@@ -67,30 +67,6 @@
 	}
 }
 
-.about-title {
-	text-transform: uppercase;
-	font-family: forum;
-	font-size: 6.7rem;
-
-		@media screen and (max-width: 768px) {
-		font-size: 3rem;
-		line-height: 3.5rem;
-	}
-
-}
-
-.about-header.page-title:after {
-	background-color: white;
-	text-transform: uppercase;
-}
-
-.about-header{
-	.page-title--details {
-		height: 240px;
-		padding-top: 6rem;
-	}
-}
-
 .about-img {
 	height: 399px;
 	background-repeat: no-repeat;
@@ -110,7 +86,7 @@
         left: 0;
       }
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: $screen-tablet) {
     img{
       left: -25%;
     }
