@@ -18,6 +18,8 @@ AdminUi::Engine.routes.draw do
     delete :expire, :on => :collection
   end
 
+  resource :content_preview, only: :show
+
   require 'sidekiq/web'
   mount Sidekiq::Web => 'd0ec826a2968a7079f0bdd8f1116811f'
 
