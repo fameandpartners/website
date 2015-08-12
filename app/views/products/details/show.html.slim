@@ -181,9 +181,11 @@ ruby:
         h4 Style it with
         = simple_format(@product.style_notes)
 
-      - if @product.fabric.present?
         h4 Fabric & Trims
-        = simple_format(@product.fabric + "\n Product may have variations in dying hues so product may look slightly different from image")
+        - if @product.fabric.present?
+          = simple_format(@product.fabric)
+          br
+        Product may have variations in dying hues so product may look slightly different from image
 
       h4 Care Instructions
       p
@@ -192,6 +194,9 @@ ruby:
         | See garment care label for further details on how to care for your garment
 
       p.sku SKU: #{@product.sku}
+
+      h4 Share
+      p= render :partial => 'share_buttons', :locals => { product: @product }
 
 hr
 
