@@ -16,17 +16,11 @@ module Revolution
 
     acts_as_nested_set :counter_cache => :children_count
 
-    serialize :variables
+    serialize :variables, Hash
 
     delegate :title, :meta_description, :heading, :sub_heading, :description, :to => :translation
 
-    after_initialize :set_defaults
-
     attr_accessor :locale
-
-    def set_defaults
-      self.variables ||= {}
-    end
 
     def translation
       @translation ||= translations.find_for_locale(locale)
