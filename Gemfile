@@ -135,10 +135,10 @@ group :development, :test do
   gem 'rspec-collection_matchers'
   gem 'rspec-rails', '~> 3.2'
   gem 'shoulda-matchers'
+  gem 'timecop'
   gem 'spring'
   gem 'thin'
   gem 'meta_request'
-
 end
 
 group :staging, :development do

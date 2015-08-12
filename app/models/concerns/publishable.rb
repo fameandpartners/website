@@ -7,5 +7,9 @@ module Concerns
 
       scope :published, -> { where('published_at <= ?', Time.zone.now) }
     end
+
+    def publish!
+      update_attribute :published_at, Time.zone.now
+    end
   end
 end
