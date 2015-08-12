@@ -259,14 +259,6 @@ module ApplicationHelper
     @current_sale ||= Spree::Sale.where(sitewide: true).first
   end
 
-  def is_surryhills?(product)
-    if product.property('factory_name').present? && (product.property('factory_name').downcase == "surryhills" || product.property('factory_name').downcase == "iconic")
-      return true
-    else
-      return false
-    end
-  end
-
   def bootstrap_class_for(flash_type)
     { success: "alert-success", error: "alert-danger", alert: "alert-warning", notice: "alert-info" }[flash_type] || flash_type.to_s
   end
