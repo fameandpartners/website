@@ -39,6 +39,14 @@
     </li>
   <% end %>
 </ul>
+
+<form class="promo-code" action="#">
+  <label for=""> Promo Code</label>
+  <div class="input-group">
+    <input class="form-control form-control-md" id="promotion-code" type="text"><span class="input-group-addon"><button class="btn-submit btn-reset">Apply</button></span>
+  </div>
+</form>
+
 <p>
   Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
 </p>
