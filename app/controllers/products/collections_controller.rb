@@ -58,13 +58,12 @@ class Products::CollectionsController < Products::BaseController
     def set_collection_resource
       @collection_options = parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
-      if params[:pids]
-        punch_products
-      end
+
+      punch_products if product_ids
     end
 
     def punch_products
-      products = Revolution::ProductService.new(params[:pids], current_site_version).products
+      products = Revolution::ProductService.new(product_ids, current_site_version).products
       @collection.products = products + @collection.products
     end
 
@@ -87,9 +86,12 @@ class Products::CollectionsController < Products::BaseController
       end
     end
 
+    def product_ids
+      params[:pids] || page.get(:pids)
+    end
+
     def limit
-      default = page_is_lookbook? ? 99 : 20
-      params[:limit] || default
+      params[:limit] || page.get(:limit) || 20
     end
 
     def page_is_lookbook?
@@ -112,6 +114,7 @@ class Products::CollectionsController < Products::BaseController
       }.merge(collection_options || {})
       Products::CollectionResource.new(@resource_args).read
     end
+
 
     def parse_permalink(permalink)
       return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
