@@ -414,7 +414,7 @@ sendRequestCheckEmailAjax = () ->
     }
   }
   $.ajax(
-    url: urlWithSitePrefix("base/check_email_exist")
+    url: urlWithSitePrefix("/base/check_email_exist")
     type: 'GET'
     dataType: 'json'
     data: $.param(formData)
