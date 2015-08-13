@@ -19,7 +19,15 @@ Spree::OrderMailer.class_eval do
     find_order(order)
     subject = (resend ? "[#{t(:resend).upcase}] " : '')
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
-    mail(:to => @order.email, :from => from_address, :subject => subject)
+
+    user = @order.user
+    Marketing::CustomerIOEventTracker.new.track(
+      user,
+      'order confirmation email',
+      email_to:             @order.email,
+       subject:             subject
+    )
+    #mail(:to => @order.email, :from => from_address, :subject => subject)
   end
 
   def team_confirm_email(order)
@@ -33,7 +41,14 @@ Spree::OrderMailer.class_eval do
     from = "#{@order.full_name} <#{@order.email}>"
     subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
-    mail(to: to, from: from, subject: subject)
+    user = @order.user
+    Marketing::CustomerIOEventTracker.new.track(
+      user,
+      'order team confirmation email',
+      email_to:             "team@fameandpartners.com",
+       subject:             subject
+    )
+    #mail(to: to, from: from, subject: subject)
   end
 
   def production_order_email(order, factory, items)
@@ -43,9 +58,16 @@ Spree::OrderMailer.class_eval do
     from = configatron.noreply
     subject = "Order Confirmation (订单号码）(#{factory}) ##{@order.number}"
 
+    user = @order.user
     @order = Orders::OrderPresenter.new(@order, items)
 
-    mail(to: to, from: from, subject: subject)
+    Marketing::CustomerIOEventTracker.new.track(
+      user,
+      'order production order email',
+      email_to:             configatron.order_production_emails,
+       subject:             subject
+    )
+    #mail(to: to, from: from, subject: subject)
   end
 
 
