@@ -4,7 +4,7 @@
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
 .page-content
-  ul.rslides
+  ul.rslides.hidden-xs
     - (1..page.get(:image_count)).each do |n|
       li
         = image_tag "//#{configatron.asset_host}#{page.path}/#{n}.jpg", alt: "#{page.title} #{n}", class: 'img-responsive portrait-img'
