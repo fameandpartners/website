@@ -1,7 +1,6 @@
 FactoryGirl.define do
-
-  factory :dress, :aliases => [:spree_product], :class => Spree::Product do
-  
+  # In the meanwhile, a jacket will be the same as dress
+  factory :dress, :aliases => [:spree_product, :jacket], :class => Spree::Product do
     sequence(:name) { |n| "#{%w{Two-Piece Split Strapless Lace V-Neck Lace}.sample} #{n}" }
     sequence(:sku)  { |n| "sku-#{n}"}
 
