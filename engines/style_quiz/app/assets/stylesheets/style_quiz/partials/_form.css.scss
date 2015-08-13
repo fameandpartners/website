@@ -51,7 +51,9 @@ textarea.form-control {
 }
 .btn-block {
   width: 100%;
-  max-width: $quiz-form-width;
+  @media (min-width: $quiz-form-width) {
+    max-width: $quiz-form-width;
+  }
 }
 .btn-text {
   padding-left: 0px;
@@ -62,12 +64,16 @@ textarea.form-control {
 .btn-default {
   color: #000;
   background-color: $grey-bg;
+  &:hover, &:active, &:focus {
+    background-color: darken($grey-bg, 5%);
+    color: inherit;
+  }
 }
 .btn-primary {
   color: #fff;
   background-color: #000;
   &:hover, &:active, &:focus {
-    background-color: $pink-bg;
+    background-color: #333;
   }
 }
 .btn-facebook {
@@ -98,6 +104,7 @@ textarea.form-control {
 // Error message
 .quiz-error {
   position: absolute;
+  // position: fixed;
   z-index: 9;
   text-align: center;
   font-size: 18px;
@@ -106,7 +113,7 @@ textarea.form-control {
   padding-right: 30px;
   left: 0;
   // top: 50%;
-  bottom: 0;
+  // bottom: 0;
   right: 0;
   padding: 10px;
   color: #fff;

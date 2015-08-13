@@ -6,10 +6,12 @@ body {
   font-size: $font-size-base;
   line-height: 1.4;
   color: $text-color;
-}
 
-img {
-  max-width: 100%;
+  // - lock page for scroll
+  overflow: hidden;
+  position:fixed;
+  width: 100%;
+  height: 100%;
 }
 h1, h2, h3, h4 { 
   line-height: 1.1;
@@ -86,6 +88,18 @@ select {
     }
   }
 }
+
+.col-next {
+  @media (min-width: $quiz-screen-phone + 1) {
+    float: right;
+  }
+}
+.col-prev {
+  @media (min-width: $quiz-screen-phone + 1) {
+    float: left;
+  }
+}
+
 .dress-style-wrapper {
   @media (max-width: $quiz-screen-tablet) {
     margin-left: -7px;
@@ -144,9 +158,17 @@ select {
 .quiz-section {
   margin-bottom: 35px;
   padding-bottom: 45px;
+  img {
+    max-width: 100%;
+  }
+}
+.quiz-section-window {
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   position: relative;
 }
+
 .quiz-section-title {
   padding: 75px 0;
   text-align: center;

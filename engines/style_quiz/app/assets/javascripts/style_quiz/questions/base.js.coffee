@@ -13,11 +13,14 @@ window.StyleQuiz ||= {}
 window.StyleQuiz.BaseQuestion = class BaseQuestion
   constructor: (opts = {}) ->
     @$container = $("##{ opts.name }-question")
+    @$container.find('.quiz-section-window').height($(window).height() - 70)
     @$container.on('click', '*[data-action=next]', @submitQuestion)
     @$container.on('click', '*[data-action=previous]', @previousQuestion)
     @name   = opts.name
     @user   = opts.user
     @shown  = false
+
+    # console.log 'section', @$container
 
   hide: () ->
     @$container.hide()
@@ -25,11 +28,12 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
   show: () ->
     $el = @$container
     $elTop = -$el.position().top + 'px'
-    $('html, body').animate({ scrollTop: 0 }, 0)
+    $el.find('.quiz-section-window').scrollTop(0)
     $('.quiz-sections-cutter').height($el.outerHeight())
     $('.quiz-sections-scroller').css
       'transform': 'translate3d(0,'+$elTop+', 0)'
       '-webkit-transform': 'translate3d(0,'+$elTop+', 0)'
+    # $el.addClass('active').siblings().removeClass('active')
     @shown = true
 
   isValid: () ->

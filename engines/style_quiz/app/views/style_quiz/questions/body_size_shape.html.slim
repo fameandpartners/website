@@ -1,29 +1,30 @@
 / Question 4/11
 .quiz-section id="#{ question.name }-question"
-  .quiz-section-title.quiz-section-title-pink
+  .quiz-section-window
+    .quiz-section-title.quiz-section-title-pink
+      .grid-container
+        h4.quiz-section-number Question #{ question_position }/#{ question_total }
+        h2 
+          | Select your body shape
+          br
+          | and dress size.
     .grid-container
-      h4.quiz-section-number Question #{ question_position }/#{ question_total }
-      h2 
-        | Select your body shape
-        br
-        | and dress size.
-  .grid-container
-    .quiz-catalog.text-center
-      - question.answers.where(group: 'shape').each do |answer|
-        .quiz-catalog-item data-value=(answer.id) class=( @user_style_profile.selected?(answer) ? 'selected' : '')
-          .quiz-catalog-picture
-            .body-box class=(answer.value.parameterize)
-          .quiz-catalog-title
-            => answer.name
-            .checkmark
-    h2.text-center Select your size.
-    .size-picker
-      - offset = current_site_version.size_settings.size_start
-      - question.answers.where(group: 'size').each do |answer|
-        .size class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
-          = (answer.name.to_i + offset).to_s
-    .row
-      .col-6.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
-      .col-6 = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+      .quiz-catalog.text-center
+        - question.answers.where(group: 'shape').each do |answer|
+          .quiz-catalog-item data-value=(answer.id) class=( @user_style_profile.selected?(answer) ? 'selected' : '')
+            .quiz-catalog-picture
+              .body-box class=(answer.value.parameterize)
+            .quiz-catalog-title
+              => answer.name
+              .checkmark
+      h2.text-center Select your size.
+      .size-picker
+        - offset = current_site_version.size_settings.size_start
+        - question.answers.where(group: 'size').each do |answer|
+          .size class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
+            = (answer.name.to_i + offset).to_s
+      .row
+        .col-6.col-next = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+        .col-6.col-prev.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
 / @end Question 4/11
 / ------------------
